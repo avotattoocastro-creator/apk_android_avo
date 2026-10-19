@@ -5,7 +5,9 @@ on:
   push:
     branches: [main]
     paths:
+      - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'app/**'
+      - 'core/**'
       - 'gradle/**'
       - 'gradlew'
       - 'gradle.properties'
@@ -13,53 +15,97 @@ on:
       - 'build.gradle.kts'
       - 'settings.gradle'
       - 'settings.gradle.kts'
-      - '.github/workflows/build-android.yml'
 
 permissions:
   contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+  android-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
     steps:
-      - name: Checkout sources
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify Android project
+      - name: Prepare Android project
         shell: bash
         run: |
-          test -d app || { echo "::error::Falta app/. Subir primero el proyecto Android."; exit 1; }
-          { test -f settings.gradle || test -f settings.gradle.kts; } || { echo "::error::Falta settings.gradle(.kts)."; exit 1; }
-          { test -f build.gradle || test -f build.gradle.kts; } || { echo "::error::Falta build.gradle(.kts)."; exit 1; }
+          set -euo pipefail
+          if [ -f app/build.gradle.kts ] || [ -f app/build.gradle ]; then
+            echo "AVO_SOURCE_DIR=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          elif [ -f AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip ]; then
+            mkdir -p "$RUNNER_TEMP/avo-android"
+            unzip -q AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip -d "$RUNNER_TEMP/avo-android"
+            echo "AVO_SOURCE_DIR=$RUNNER_TEMP/avo-android" >> "$GITHUB_ENV"
+          else
+            echo "::error::Faltan las fuentes Android. Sube AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip a la raiz del repositorio."
+            exit 1
+          fi
 
-      - name: Setup Java 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Android SDK
+      - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Setup Gradle
+      - name: Install Android SDK 35
+        shell: bash
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+
+      - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Compile debug APK
+      - name: Verify Gradle project
         shell: bash
         run: |
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-            ./gradlew --no-daemon :app:assembleDebug
-          else
-            echo "::error::Falta Gradle Wrapper (gradlew). Inclúyelo en el proyecto para builds reproducibles."
-            exit 1
-          fi
+          test -d "$AVO_SOURCE_DIR/app"
+          test -d "$AVO_SOURCE_DIR/core"
+          test -f "$AVO_SOURCE_DIR/gradlew"
+          test -f "$AVO_SOURCE_DIR/gradle/wrapper/gradle-wrapper.jar"
+          chmod +x "$AVO_SOURCE_DIR/gradlew"
+
+      - name: Run core unit tests
+        shell: bash
+        continue-on-error: true
+        run: |
+          cd "$AVO_SOURCE_DIR"
+          ./gradlew --no-daemon :core:test
+
+      - name: Build debug APK
+        shell: bash
+        run: |
+          cd "$AVO_SOURCE_DIR"
+          ./gradlew --no-daemon :app:assembleDebug
+
+      - name: Prepare downloadable APK and SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/out"
+          APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
+          test -n "$APK"
+          cp "$APK" "$GITHUB_WORKSPACE/out/AVO_Performance_Horse_V1_0_debug.apk"
+          cd "$GITHUB_WORKSPACE/out"
+          sha256sum AVO_Performance_Horse_V1_0_debug.apk > AVO_Performance_Horse_V1_0_debug.apk.sha256
+          cat AVO_Performance_Horse_V1_0_debug.apk.sha256
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-debug-APK
-          path: app/build/outputs/apk/debug/*.apk
+          name: AVO-Performance-Horse-V1-0-APK
+          path: out/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Upload unit test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-core-test-report
+          path: ${{ env.AVO_SOURCE_DIR }}/core/build/reports/tests/test/
+          if-no-files-found: ignore
+          retention-days: 14
