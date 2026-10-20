@@ -8,6 +8,7 @@ on:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V3_5_0_FUENTES_GITHUB.zip'
+      - 'AVO_ANDROID_V1_2_ANALISIS_COMPLETO_FUENTES.zip'
       - 'app/**'
       - 'core/**'
       - 'gradle/**'
@@ -37,6 +38,10 @@ jobs:
           set -euo pipefail
           if [ -f app/build.gradle.kts ] || [ -f app/build.gradle ]; then
             echo "AVO_SOURCE_DIR=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          elif [ -f AVO_ANDROID_V1_2_ANALISIS_COMPLETO_FUENTES.zip ]; then
+            mkdir -p "$RUNNER_TEMP/avo-android"
+            unzip -q AVO_ANDROID_V1_2_ANALISIS_COMPLETO_FUENTES.zip -d "$RUNNER_TEMP/avo-android"
+            echo "AVO_SOURCE_DIR=$RUNNER_TEMP/avo-android" >> "$GITHUB_ENV"
           elif [ -f AVO_ANDROID_V3_5_0_FUENTES_GITHUB.zip ]; then
             mkdir -p "$RUNNER_TEMP/avo-android"
             unzip -q AVO_ANDROID_V3_5_0_FUENTES_GITHUB.zip -d "$RUNNER_TEMP/avo-android"
@@ -102,15 +107,15 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          cp "$APK" "$GITHUB_WORKSPACE/out/AVO_Performance_Horse_V3_5_0_Android_V1_1_debug.apk"
+          cp "$APK" "$GITHUB_WORKSPACE/out/AVO_Performance_Horse_V1_2_Analisis_debug.apk"
           cd "$GITHUB_WORKSPACE/out"
-          sha256sum AVO_Performance_Horse_V3_5_0_Android_V1_1_debug.apk > AVO_Performance_Horse_V3_5_0_Android_V1_1_debug.apk.sha256
-          cat AVO_Performance_Horse_V3_5_0_Android_V1_1_debug.apk.sha256
+          sha256sum AVO_Performance_Horse_V1_2_Analisis_debug.apk > AVO_Performance_Horse_V1_2_Analisis_debug.apk.sha256
+          cat AVO_Performance_Horse_V1_2_Analisis_debug.apk.sha256
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-V3-5-0-Android-APK
+          name: AVO-Performance-Horse-V1-2-Analisis-APK
           path: out/
           if-no-files-found: error
           retention-days: 30
