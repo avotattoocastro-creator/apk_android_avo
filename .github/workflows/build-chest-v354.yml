@@ -1,0 +1,55 @@
+name: Build AVO Chest V3.5.4 SD FIX
+on:
+  push:
+    branches:
+      - firmware/chest-v3.5.4-sd-fix
+    paths:
+      - 'firmware/chest/V3_5_4/**'
+      - '.github/workflows/build-chest-v354.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 platform
+        shell: bash
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Extract and build chest
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/chest"
+          unzip -q firmware/chest/V3_5_4/AVO_CHEST_V3_5_4_SD_FIX_SOURCES.zip -d "$RUNNER_TEMP/chest"
+          cd "$RUNNER_TEMP/chest"
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Verify OTA binary and hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd firmware_out
+          APP=AVO_CHEST_V3_5_0.ino.bin
+          test -s "$APP"
+          SIZE=$(stat -c%s "$APP")
+          echo "APP_BYTES=$SIZE"
+          test "$SIZE" -lt 6291456
+          cp "$APP" AVO_CHEST_V3_5_4_SD_FIX.bin
+          sha256sum AVO_CHEST_V3_5_4_SD_FIX.bin | tee SHA256SUMS.txt
+          grep -Ei 'partition|3.5.4|Sketch uses' build.log | tail -50 > BUILD_SUMMARY.txt || true
+          printf '\nAPP_BYTES=%s\nOTA_SLOT_BYTES=6291456\n' "$SIZE" >> BUILD_SUMMARY.txt
+      - name: Upload chest OTA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-CHEST-V3-5-4-SD-FIX-OTA-BIN
+          path: |
+            firmware_out/AVO_CHEST_V3_5_4_SD_FIX.bin
+            firmware_out/SHA256SUMS.txt
+            firmware_out/BUILD_SUMMARY.txt
+            firmware_out/build.log
+          retention-days: 30
