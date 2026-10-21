@@ -1,0 +1,56 @@
+name: Build AVO Chest V3.5.5 OTA USB FIX
+on:
+  push:
+    branches:
+      - firmware/chest-v3.5.5-ota-usb-fix
+    paths:
+      - 'firmware/chest/V3_5_5/**'
+      - '.github/workflows/build-chest-v355.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 platform
+        shell: bash
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Extract original and apply V3.5.5 changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/chest"
+          unzip -q firmware/chest/V3_5_4/AVO_CHEST_V3_5_4_SD_FIX_SOURCES.zip -d "$RUNNER_TEMP/chest"
+          cp firmware/chest/V3_5_5/apply_v355.py "$RUNNER_TEMP/chest/apply_v355.py"
+          cd "$RUNNER_TEMP/chest"
+          python3 apply_v355.py
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Validate and package OTA image
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd firmware_out
+          APP=AVO_CHEST_V3_5_0.ino.bin
+          test -s "$APP"
+          SIZE=$(stat -c%s "$APP")
+          test "$SIZE" -lt 6291456
+          cp "$APP" AVO_CHEST_V3_5_5_OTA_USB_FIX.bin
+          sha256sum AVO_CHEST_V3_5_5_OTA_USB_FIX.bin > SHA256SUMS.txt
+          printf 'APP_BYTES=%s\nOTA_SLOT_BYTES=6291456\n' "$SIZE" > BUILD_SUMMARY.txt
+      - name: Upload V3.5.5 OTA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-CHEST-V3-5-5-OTA-USB-FIX-BIN
+          path: |
+            firmware_out/AVO_CHEST_V3_5_5_OTA_USB_FIX.bin
+            firmware_out/SHA256SUMS.txt
+            firmware_out/BUILD_SUMMARY.txt
+            firmware_out/build.log
+          retention-days: 30
