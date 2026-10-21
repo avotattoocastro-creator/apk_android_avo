@@ -42,6 +42,7 @@ fun NfcScreen(c: AppContainer) {
     val currentCode by rememberUpdatedState(code)
     val currentWrite by rememberUpdatedState(writeMode)
     val lastScan = remember { java.util.concurrent.atomic.AtomicLong(0L) }
+    var pendingSync by remember { mutableStateOf(false) }
     DisposableEffect(adapter, activity, horses, riders) {
         val callback = NfcAdapter.ReaderCallback { tag ->
             val now = SystemClock.elapsedRealtime()
@@ -86,6 +87,8 @@ fun NfcScreen(c: AppContainer) {
                     activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
                     require(!currentRecording) { "No se puede cambiar caballo o jinete durante una sesión activa" }
                     scope.launch {
+                        pendingSync = true
+                        try {
                         val horseId = h?.id ?: c.settings.selectedHorseId
                         val riderId = r?.id ?: c.settings.selectedRiderId
                         val horse = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
@@ -96,6 +99,7 @@ fun NfcScreen(c: AppContainer) {
                             val err = withContext(Dispatchers.IO) { c.config.setIdentity(horse.id, horse.code, rider.id, rider.code) }
                             if (err == null) "Identidad enviada al chaleco: ${horse.name} / ${rider.name}" else "Identidad guardada en móvil; no enviada: $err"
                         } else "Identidad seleccionada en móvil; falta seleccionar caballo o jinete."
+                        } finally { pendingSync = false }
                     }
                     "Etiqueta leída: $identity"
                 }
@@ -127,6 +131,7 @@ fun NfcScreen(c: AppContainer) {
                 Note("Seleccionado: ${code.ifBlank { "ninguno" }}. Acerca la tarjeta para grabar y verificar.")
             } else Note("Acerca una tarjeta AVO para seleccionar su ficha y enviarla al reloj si está conectado.")
             Text(message)
+            if (pendingSync) LinearProgressIndicator(Modifier.fillMaxWidth())
             Note("La lectura NFC se realiza con esta pantalla abierta. Android no garantiza lectura con el móvil bloqueado o la pantalla apagada. Se bloquea el cambio de identidad durante una sesión activa.")
         } }
     }
