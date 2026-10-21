@@ -93,6 +93,8 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     val a = analysis
     var selectedTrackIndex by remember(id) { mutableStateOf<Int?>(null) }
     var playing by remember(id) { mutableStateOf(false) }
+    var segmentStart by remember(id) { mutableIntStateOf(0) }
+    var segmentEnd by remember(id) { mutableIntStateOf(Int.MAX_VALUE) }
     LaunchedEffect(playing, a) {
         while (playing && a != null && a.track.isNotEmpty()) {
             delay(250)
@@ -156,6 +158,52 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         KV("Precisión horizontal", "%.2f m".format(point.hAccM))
                         KV("RTK", when(point.carrSoln) { 2 -> "FIX"; 1 -> "FLOAT"; else -> "No RTK" })
                     }
+                } }
+                item { AvoCard("V1.9 · Seleccionar tramo A–B") {
+                    val lastIndex = a.track.lastIndex
+                    val start = segmentStart.coerceIn(0, lastIndex - 1)
+                    val end = segmentEnd.coerceIn(start + 1, lastIndex)
+                    Note("Selecciona el inicio y el final del intervalo. Las estadísticas y gráficas de abajo corresponden solo a este tramo.")
+                    KV("Inicio A", "Punto ${start + 1}")
+                    Slider(value = start.toFloat(), onValueChange = { segmentStart = it.roundToInt().coerceIn(0, end - 1) }, valueRange = 0f..(lastIndex - 1).toFloat())
+                    KV("Final B", "Punto ${end + 1}")
+                    Slider(value = end.toFloat(), onValueChange = { segmentEnd = it.roundToInt().coerceIn(start + 1, lastIndex) }, valueRange = 1f..lastIndex.toFloat())
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        OutlinedButton(onClick = { selectedTrackIndex?.let { segmentStart = it.coerceIn(0, end - 1) } }) { Text("A = punto GPS") }
+                        OutlinedButton(onClick = { selectedTrackIndex?.let { segmentEnd = it.coerceIn(start + 1, lastIndex) } }) { Text("B = punto GPS") }
+                        OutlinedButton(onClick = { segmentStart = 0; segmentEnd = Int.MAX_VALUE }) { Text("Todo") }
+                    }
+                    val portion = a.track.subList(start, end + 1)
+                    val duration = (portion.last().itowMs - portion.first().itowMs) / 1000.0
+                    val distance = portion.zipWithNext().sumOf { (p, q) ->
+                        val lat1 = Math.toRadians(p.p.lat)
+                        val lat2 = Math.toRadians(q.p.lat)
+                        val dLat = lat2 - lat1
+                        val dLon = Math.toRadians(q.p.lon - p.p.lon)
+                        val h = kotlin.math.sin(dLat / 2).let { it * it } +
+                            kotlin.math.cos(lat1) * kotlin.math.cos(lat2) * kotlin.math.sin(dLon / 2).let { it * it }
+                        12742000.0 * kotlin.math.asin(kotlin.math.sqrt(h.coerceIn(0.0, 1.0)))
+                    }
+                    val speed = portion.map { it.speedMs }.filter { it.isFinite() && it >= 0.0 }
+                    val accelerations = portion.zipWithNext().mapNotNull { (p, q) ->
+                        val dt = (q.itowMs - p.itowMs) / 1000.0
+                        if (dt !in 0.08..10.0) null else ((q.speedMs - p.speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 }
+                    }
+                    KV("Duración", "%.1f s".format(duration))
+                    KV("Distancia GPS", "%.1f m".format(distance))
+                    KV("Velocidad media", speed.takeIf { it.isNotEmpty() }?.average()?.let { "%.2f km/h".format(it * 3.6) })
+                    KV("Velocidad máxima", speed.maxOrNull()?.let { "%.2f km/h".format(it * 3.6) })
+                    KV("Aceleración máxima", accelerations.maxOrNull()?.let { "%.2f m/s²".format(it) })
+                    KV("Desaceleración máxima", accelerations.minOrNull()?.let { "%.2f m/s²".format(it) })
+                    KV("RTK FIX", pct(portion.count { it.carrSoln == 2 }, portion.size))
+                    KV("RTK FLOAT", pct(portion.count { it.carrSoln == 1 }, portion.size))
+                    Text("Velocidad del tramo", color = AvoColors.Gold)
+                    SynchronizedChart(portion.map { it.speedMs * 3.6 }, null, AvoColors.Gold, "km/h") { selectedTrackIndex = start + it; playing = false }
+                    Text("Aceleración del tramo", color = AvoColors.Gold)
+                    SynchronizedChart(List(portion.size) { i -> if (i == 0) 0.0 else {
+                        val dt = (portion[i].itowMs - portion[i-1].itowMs) / 1000.0
+                        if (dt !in 0.08..10.0) 0.0 else ((portion[i].speedMs - portion[i-1].speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 } ?: 0.0
+                    } }, null, AvoColors.Warn, "m/s²") { selectedTrackIndex = start + it; playing = false }
                 } }
                 item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex) { selectedTrackIndex = it; playing = false } } }
                 item { AvoCard("Velocidad") { SynchronizedChart(a.track.map { it.speedMs * 3.6 }, selectedTrackIndex, AvoColors.Gold, "km/h") { selectedTrackIndex = it; playing = false } } }
