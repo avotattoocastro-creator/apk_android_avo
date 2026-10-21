@@ -157,6 +157,44 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         incomingAvo = extractAvoUri(intent)
+        handleSystemNfc(intent)
+    }
+
+    private fun handleSystemNfc(intent: Intent?) {
+        if (intent?.action != NfcAdapter.ACTION_NDEF_DISCOVERED) return
+        val uri = intent.data ?: return
+        if (uri.scheme != "avohorse" || uri.host != "identity") return
+        val type = uri.pathSegments.getOrNull(0)
+        val code = uri.pathSegments.getOrNull(1) ?: return
+        if (type !in listOf("horse", "rider")) return
+        lifecycleScope.launch {
+            try {
+                val c = (application as AvoApp).container
+                val status = c.watch.status.value
+                if (status?.session == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING ||
+                    status?.session == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED ||
+                    status?.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING) {
+                    android.widget.Toast.makeText(this@MainActivity, "NFC: sesión activa", android.widget.Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+                val horse = withContext(Dispatchers.IO) { c.db.horses().all().first().firstOrNull { it.code == code } }
+                val rider = withContext(Dispatchers.IO) { c.db.riders().all().first().firstOrNull { it.code == code } }
+                if ((type == "horse" && horse == null) || (type == "rider" && rider == null)) {
+                    android.widget.Toast.makeText(this@MainActivity, "NFC: ficha no encontrada", android.widget.Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+                val horseId = if (type == "horse") horse!!.id else c.settings.selectedHorseId
+                val riderId = if (type == "rider") rider!!.id else c.settings.selectedRiderId
+                if (type == "horse") c.settings.selectedHorseId = horseId
+                if (type == "rider") c.settings.selectedRiderId = riderId
+                val h = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
+                val j = withContext(Dispatchers.IO) { c.db.riders().byId(riderId) }
+                val error = if (h != null && j != null) withContext(Dispatchers.IO) { c.config.setIdentity(h.id, h.code, j.id, j.code) } else "falta caballo o jinete"
+                android.widget.Toast.makeText(this@MainActivity, if (error == null) "NFC: identidad enviada al reloj" else "NFC seleccionada; $error", android.widget.Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                android.widget.Toast.makeText(this@MainActivity, "NFC: ${e.message ?: "error"}", android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun extractAvoUri(intent: Intent?): Uri? = when (intent?.action) {
@@ -173,6 +211,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val c = (application as AvoApp).container
         incomingAvo = extractAvoUri(intent)
+        handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
         setContent {
             AvoTheme {
