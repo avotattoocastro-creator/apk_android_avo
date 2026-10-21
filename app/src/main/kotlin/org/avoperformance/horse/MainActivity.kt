@@ -120,10 +120,10 @@ class MainActivity : ComponentActivity() {
                     val horse = withContext(Dispatchers.IO) { c.db.horses().all().first().firstOrNull { it.code == code } }
                     val rider = withContext(Dispatchers.IO) { c.db.riders().all().first().firstOrNull { it.code == code } }
                     val horseId = if (type == "horse") horse?.id ?: withContext(Dispatchers.IO) {
-                        c.db.horses().insert(org.avoperformance.horse.data.HorseEntity(code = code, name = code))
+                        org.avoperformance.horse.core.nfc.AvoNfc.import(uri, c.db)
                     } else c.settings.selectedHorseId
                     val riderId = if (type == "rider") rider?.id ?: withContext(Dispatchers.IO) {
-                        c.db.riders().insert(org.avoperformance.horse.data.RiderEntity(code = code, name = code))
+                        org.avoperformance.horse.core.nfc.AvoNfc.import(uri, c.db)
                     } else c.settings.selectedRiderId
                     if (type == "horse") c.settings.selectedHorseId = horseId
                     if (type == "rider") c.settings.selectedRiderId = riderId
