@@ -20,6 +20,7 @@ on:
       - 'AVO_ANDROID_V1_8_SELECTOR_CABALLO_JINETE_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_GRAFICAS_SINCRONIZADAS_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_FAVORITOS_BASE_FUENTES.zip'
+      - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'app/**'
       - 'core/**'
       - 'gradle/**'
@@ -49,6 +50,10 @@ jobs:
           set -euo pipefail
           if [ -f app/build.gradle.kts ] || [ -f app/build.gradle ]; then
             echo "AVO_SOURCE_DIR=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          elif [ -f AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip ]; then
+            mkdir -p "$RUNNER_TEMP/avo-android"
+            unzip -q AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip -d "$RUNNER_TEMP/avo-android"
+            echo "AVO_SOURCE_DIR=$RUNNER_TEMP/avo-android" >> "$GITHUB_ENV"
           elif [ -f AVO_ANDROID_V1_8_FAVORITOS_BASE_FUENTES.zip ]; then
             mkdir -p "$RUNNER_TEMP/avo-android"
             unzip -q AVO_ANDROID_V1_8_FAVORITOS_BASE_FUENTES.zip -d "$RUNNER_TEMP/avo-android"
@@ -162,15 +167,15 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          cp "$APK" "$GITHUB_WORKSPACE/out/AVO_Performance_Horse_V1_8_Favoritos_Base_debug.apk"
+          cp "$APK" "$GITHUB_WORKSPACE/out/AVO_Performance_Horse_V1_8_BLE_Recovery_debug.apk"
           cd "$GITHUB_WORKSPACE/out"
-          sha256sum AVO_Performance_Horse_V1_8_Favoritos_Base_debug.apk > AVO_Performance_Horse_V1_8_Favoritos_Base_debug.apk.sha256
-          cat AVO_Performance_Horse_V1_8_Favoritos_Base_debug.apk.sha256
+          sha256sum AVO_Performance_Horse_V1_8_BLE_Recovery_debug.apk > AVO_Performance_Horse_V1_8_BLE_Recovery_debug.apk.sha256
+          cat AVO_Performance_Horse_V1_8_BLE_Recovery_debug.apk.sha256
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-V1-8-Favoritos-Base-APK
+          name: AVO-Performance-Horse-V1-8-BLE-Recovery-APK
           path: out/
           if-no-files-found: error
           retention-days: 30
