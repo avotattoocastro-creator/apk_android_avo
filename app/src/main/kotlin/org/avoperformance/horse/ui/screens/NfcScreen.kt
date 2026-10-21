@@ -55,24 +55,32 @@ fun NfcScreen(c: AppContainer) {
                     val record = NdefRecord.createUri(uri)
                     val data = NdefMessage(arrayOf(record))
                     val ndef = Ndef.get(tag)
+                    var verified = false
                     if (ndef != null) {
                         ndef.connect()
                         try {
                             require(ndef.isWritable) { "Etiqueta protegida contra escritura" }
                             require(ndef.maxSize >= data.toByteArray().size) { "Etiqueta sin capacidad suficiente" }
                             ndef.writeNdefMessage(data)
-                            require(ndef.ndefMessage.records.any { it.toUri() == uri }) { "No se pudo verificar la escritura" }
+                            verified = ndef.ndefMessage?.records?.any { it.toUri() == uri } == true
                         } finally { ndef.close() }
                     } else {
                         val format = NdefFormatable.get(tag) ?: error("Etiqueta no compatible con NDEF")
                         format.connect()
                         try { format.format(data) } finally { format.close() }
-                        val verify = Ndef.get(tag) ?: error("No se pudo verificar la etiqueta formateada")
-                        verify.connect()
-                        try { require(verify.ndefMessage?.records?.any { it.toUri() == uri } == true) { "Verificación NFC fallida" } }
-                        finally { verify.close() }
+                        // Android may retain the pre-format Tag technologies until it is removed
+                        // from the field. A newly formatted NDEF tag often requires a fresh scan.
+                        val verify = Ndef.get(tag)
+                        if (verify != null) {
+                            verified = runCatching {
+                                verify.connect()
+                                try { verify.ndefMessage?.records?.any { it.toUri() == uri } == true }
+                                finally { verify.close() }
+                            }.getOrDefault(false)
+                        }
                     }
-                    "Etiqueta grabada y verificada: ${currentKind} · $value"
+                    if (verified) "Etiqueta grabada y verificada: ${currentKind} · $value"
+                    else "Escritura NFC completada: retira la tarjeta, pulsa Leer y vuelve a acercarla para verificar."
                 } else {
                     val ndef = Ndef.get(tag) ?: error("Etiqueta sin contenido NDEF")
                     ndef.connect()
@@ -131,7 +139,7 @@ fun NfcScreen(c: AppContainer) {
                     OutlinedButton(onClick = { code = id }) { Text(if (code == id) "✓ $name" else name) }
                 }
                 Note("Seleccionado: ${code.ifBlank { "ninguno" }}. Acerca la tarjeta para grabar y verificar.")
-            } else Note("Acerca una tarjeta AVO para seleccionar su ficha y enviarla al reloj si está conectado.")
+            } else Note("Mantén esta pantalla abierta y acerca una tarjeta AVO. Se seleccionará su ficha y se enviará al reloj si está conectado.")
             Text(message)
             if (pendingSync) LinearProgressIndicator(Modifier.fillMaxWidth())
             Note("La lectura NFC se realiza con esta pantalla abierta. Android no garantiza lectura con el móvil bloqueado o la pantalla apagada. Se bloquea el cambio de identidad durante una sesión activa.")
