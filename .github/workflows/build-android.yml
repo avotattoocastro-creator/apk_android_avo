@@ -16,6 +16,7 @@ on:
       - 'AVO_ANDROID_V1_7_OTA_DIAGNOSTICO_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_BASE_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FUENTES.zip'
+      - 'AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FIX_COMPILACION.zip'
       - 'app/**'
       - 'core/**'
       - 'gradle/**'
@@ -45,6 +46,10 @@ jobs:
           set -euo pipefail
           if [ -f app/build.gradle.kts ] || [ -f app/build.gradle ]; then
             echo "AVO_SOURCE_DIR=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          elif [ -f AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FIX_COMPILACION.zip ]; then
+            mkdir -p "$RUNNER_TEMP/avo-android"
+            unzip -q AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FIX_COMPILACION.zip -d "$RUNNER_TEMP/avo-android"
+            echo "AVO_SOURCE_DIR=$RUNNER_TEMP/avo-android" >> "$GITHUB_ENV"
           elif [ -f AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FUENTES.zip ]; then
             mkdir -p "$RUNNER_TEMP/avo-android"
             unzip -q AVO_ANDROID_V1_8_RECIBIR_WHATSAPP_FUENTES.zip -d "$RUNNER_TEMP/avo-android"
