@@ -16,6 +16,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.viewinterop.AndroidView
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.avoperformance.horse.maps.AvoImagery
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint as OsmPoint
@@ -230,6 +231,7 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
     if (pts.size < 2) return
     var colorBySpeed by remember(a) { mutableStateOf(true) }
     var useMap by remember(a) { mutableStateOf(true) }
+    var imagery by remember(a) { mutableStateOf(false) }
     var recenterToken by remember(a) { mutableIntStateOf(0) }
 
     var scale by remember(a) { mutableStateOf(1f) }
@@ -252,8 +254,18 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
     }
     val selectedNow = selection
     if (useMap) {
-        Note("Cartografía OpenStreetMap. Zoom con dos dedos, desplaza el mapa y toca el recorrido para seleccionar un punto. Necesita Internet para nuevas zonas; las teselas descargadas quedan en caché.")
-        RealTrackMap(a, selection, colorBySpeed, recenterToken, onSelect)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = !imagery, onClick = { imagery = false }, label = { Text("Calles") })
+            FilterChip(selected = imagery, onClick = { imagery = true }, label = { Text("Satélite") })
+        }
+        Note("Zoom con dos dedos, desplazamiento libre y selección de puntos sincronizados con las gráficas.")
+        RealTrackMap(a, selection, colorBySpeed, imagery, recenterToken, onSelect)
+        Text(
+            text = if (imagery) AvoImagery.ATTRIBUTION else "© OpenStreetMap contributors",
+            color = AvoColors.TextDim,
+        )
+        if (imagery) Note("Imágenes Esri World Imagery (fecha y resolución variables). Requiere acceso autorizado a ese servicio. La disponibilidad y el uso sin conexión dependen de sus condiciones.")
+        else Note("Calles de OpenStreetMap. Las teselas ya visitadas pueden mantenerse temporalmente en la caché local.")
     } else {
         Note("Pellizca para ampliar, arrastra para moverte y toca un punto de la trayectoria.")
         Canvas(
@@ -320,6 +332,7 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
 private class TrackMapRender(
     val analysis: TrainingAnalysis,
     var bySpeed: Boolean,
+    var imagery: Boolean,
     var marker: Marker? = null,
     var recenterToken: Int,
 )
@@ -329,6 +342,7 @@ private fun RealTrackMap(
     analysis: TrainingAnalysis,
     selectedIndex: Int?,
     bySpeed: Boolean,
+    imagery: Boolean,
     recenterToken: Int,
     onSelect: (Int) -> Unit,
 ) {
@@ -356,9 +370,12 @@ private fun RealTrackMap(
         update = { map ->
             var render = map.tag as? TrackMapRender
             val resetBounds = render == null || render.analysis !== analysis
-            if (resetBounds || render?.bySpeed != bySpeed) {
+            if (resetBounds || render?.imagery != imagery) {
+                map.setTileSource(if (imagery) AvoImagery.tileSource else TileSourceFactory.MAPNIK)
+            }
+            if (resetBounds || render?.bySpeed != bySpeed || render.imagery != imagery) {
                 map.overlays.clear()
-                render = TrackMapRender(analysis, bySpeed, recenterToken = recenterToken)
+                render = TrackMapRender(analysis, bySpeed, imagery, recenterToken = recenterToken)
                 map.tag = render
 
                 map.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
@@ -385,7 +402,7 @@ private fun RealTrackMap(
                     override fun longPressHelper(tap: OsmPoint): Boolean = false
                 }))
                 addColoredRoute(map, analysis, bySpeed)
-                map.overlays.add(CopyrightOverlay(map.context))
+                // Attribution remains visible beneath the map (Compose), independent of osmdroid copyright hooks.
             }
 
             val display = render ?: return@AndroidView

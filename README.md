@@ -15,6 +15,7 @@ Aplicación Android para el reloj de pecho Waveshare ESP32-S3 y el chaleco AVO.
 - Inicio/parada de grabación, geocercas, sesiones de microSD y sincronización.
 - Análisis GNSS con resumen, reproducción, gráficos sincronizados, selección por punto, zoom y pan.
 - Recorrido sobre mapa real OpenStreetMap con colores por velocidad y RTK; plano local sin conexión como alternativa.
+- Nueva selección Calles/Satélite con teselas Esri World Imagery, atribución de fuentes visible y conservación del punto elegido y zoom al cambiar la base; disponibilidad sujeta a condiciones del proveedor.
 - Importación y exportación de entrenamientos `.avo` por el menú Compartir (WhatsApp compatible): ID de sesión, metadatos de caballo y jinete y resolución de duplicados.
 - Favoritos de destinatarios y copia portátil de configuración, excluyendo contraseñas NTRIP y claves de autorización BLE.
 - No molestar automático opcional: permiso especial Android, solo grabación confirmada por geocerca, sin afectar sesiones manuales, recuperación al finalizar o perder BLE; Android 15 usa una regla propia.

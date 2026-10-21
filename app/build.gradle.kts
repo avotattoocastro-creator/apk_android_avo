@@ -13,7 +13,7 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 9
+        versionCode = 10
         versionName = "1.8"
     }
 
