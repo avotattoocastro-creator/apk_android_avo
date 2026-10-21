@@ -230,6 +230,7 @@ private val tabs = listOf(
     Tab("inicio", "Inicio", Icons.Filled.Home),
     Tab("entrenamiento", "Entrenamiento", Icons.Filled.PlayArrow),
     Tab("historial", "Historial", Icons.AutoMirrored.Filled.List),
+    Tab("mareas", "Mareas", Icons.Filled.Favorite),
     Tab("caballos", "Caballos", Icons.Filled.Favorite),
     Tab("configuracion", "Configuración", Icons.Filled.Settings),
 )
