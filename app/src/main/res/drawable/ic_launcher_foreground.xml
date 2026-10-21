@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple original mark: a gold "A" chevron on dark background. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#C9A227" android:pathData="M54,28 L76,80 L66,80 L54,50 L42,80 L32,80 Z" />
+    <path android:fillColor="#C9A227" android:pathData="M44,66 L64,66 L61,72 L47,72 Z" />
+</vector>

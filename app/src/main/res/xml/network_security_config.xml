@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HTTPS for everything by default. NTRIP uses raw sockets (TLS optional per caster)
+     and is not affected by this file. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors><certificates src="system" /></trust-anchors>
+    </base-config>
+    <!-- OpenStreetMap tiles are served over HTTPS. -->
+</network-security-config>

@@ -1,0 +1,17 @@
+blocks=11
+records=331
+valid_end=42774
+file_size=42824
+clean_close=1
+tail_garbage=1
+gnss=300
+gnss_valid=295
+no_fix=5
+auto=99
+float=98
+fix=98
+imu_batches=30
+imu_samples=300
+markers=1
+distance_m=89.401
+max_speed_ms=3.000
