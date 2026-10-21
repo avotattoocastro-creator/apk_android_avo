@@ -174,7 +174,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         OutlinedButton(onClick = { segmentStart = 0; segmentEnd = Int.MAX_VALUE }) { Text("Todo") }
                     }
                     val portion = a.track.subList(start, end + 1)
-                    val duration = (portion.last().itowMs - portion.first().itowMs) / 1000.0
+                    val duration = ((portion.last().itowMs - portion.first().itowMs) / 1000.0).coerceAtLeast(0.0)
                     val distance = portion.zipWithNext().sumOf { (p, q) ->
                         val lat1 = Math.toRadians(p.p.lat)
                         val lat2 = Math.toRadians(q.p.lat)
@@ -192,11 +192,13 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                     KV("Duración", "%.1f s".format(duration))
                     KV("Distancia GPS", "%.1f m".format(distance))
                     KV("Velocidad media", speed.takeIf { it.isNotEmpty() }?.average()?.let { "%.2f km/h".format(it * 3.6) })
+                    KV("Velocidad media por distancia/tiempo", if (duration > 0.0) "%.2f km/h".format(distance / duration * 3.6) else null)
                     KV("Velocidad máxima", speed.maxOrNull()?.let { "%.2f km/h".format(it * 3.6) })
                     KV("Aceleración máxima", accelerations.maxOrNull()?.let { "%.2f m/s²".format(it) })
                     KV("Desaceleración máxima", accelerations.minOrNull()?.let { "%.2f m/s²".format(it) })
                     KV("RTK FIX", pct(portion.count { it.carrSoln == 2 }, portion.size))
                     KV("RTK FLOAT", pct(portion.count { it.carrSoln == 1 }, portion.size))
+                    KV("RTK sin FIX/FLOAT", pct(portion.count { it.carrSoln != 1 && it.carrSoln != 2 }, portion.size))
                     Text("Velocidad del tramo", color = AvoColors.Gold)
                     SynchronizedChart(portion.map { it.speedMs * 3.6 }, null, AvoColors.Gold, "km/h") { selectedTrackIndex = start + it; playing = false }
                     Text("Aceleración del tramo", color = AvoColors.Gold)
