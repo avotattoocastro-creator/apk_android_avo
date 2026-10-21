@@ -484,13 +484,13 @@ private fun RealTrackMap(
 }
 
 /**
- * Bound overlay count to approximately 650 polylines, even for 5000 GNSS samples,
+ * Bound overlay count to approximately 120 polylines, even for 5000 GNSS samples,
  * while retaining all GPS positions inside each polyline segment.
  */
 private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean) {
     val track = a.track
     if (track.size < 2) return
-    val stride = ((track.size - 2) / 650 + 1).coerceAtLeast(1)
+    val stride = ((track.size - 2) / 120 + 1).coerceAtLeast(1)
     val speedMax = track.maxOf { it.speedMs }.coerceAtLeast(0.1)
     var start = 1
     while (start < track.size) {
