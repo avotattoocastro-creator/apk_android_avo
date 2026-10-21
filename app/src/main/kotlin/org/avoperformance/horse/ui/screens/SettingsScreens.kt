@@ -105,6 +105,7 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
         "diagnosticos" to "Diagnósticos",
         "almacenamiento" to "Almacenamiento",
         "jinetes" to "Jinetes",
+        "nfc" to "NFC · Leer y grabar tarjetas",
     )
     LazyColumn(Modifier.fillMaxSize()) {
         items(entries) { (r, t) -> AvoCard(onClick = { go(r) }) { Text(t, color = AvoColors.Text, fontSize = 16.sp) } }
