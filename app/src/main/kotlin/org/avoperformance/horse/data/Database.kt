@@ -66,6 +66,30 @@ data class TrainingEntity(
     val gnssUsable: Int? = null,
 )
 
+/** Optional marine context saved for a training, independent of GNSS recording. */
+@Entity(tableName = "training_marine")
+data class TrainingMarineEntity(
+    @PrimaryKey val sessionId: String,
+    val location: String,
+    val sampleMs: Long,
+    val source: String,
+    val levelMsl: Double?,
+    val waveM: Double?,
+    val wavePeriodS: Double?,
+    val waterC: Double?,
+    val windKmh: Double?,
+    val gustKmh: Double?,
+    val tideTrend: String,
+    val savedMs: Long = System.currentTimeMillis(),
+)
+
+@Dao
+interface TrainingMarineDao {
+    @Query("SELECT * FROM training_marine WHERE sessionId = :id") suspend fun byId(id: String): TrainingMarineEntity?
+    @Query("SELECT * FROM training_marine WHERE sessionId = :id") fun observe(id: String): Flow<TrainingMarineEntity?>
+    @Upsert suspend fun upsert(value: TrainingMarineEntity)
+}
+
 /** Local copy of the watch geofence slots (edited on the map, then sent to the watch). */
 @Entity(tableName = "fences")
 data class FenceEntity(
@@ -133,15 +157,21 @@ interface LogDao {
     @Query("DELETE FROM log WHERE id < (SELECT MAX(id) FROM log) - 5000") suspend fun trim()
 }
 
-@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class], version = 1, exportSchema = true)
+@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 2, exportSchema = true)
 abstract class AvoDatabase : RoomDatabase() {
     abstract fun horses(): HorseDao
     abstract fun riders(): RiderDao
     abstract fun trainings(): TrainingDao
     abstract fun fences(): FenceDao
     abstract fun log(): LogDao
+    abstract fun marine(): TrainingMarineDao
 
     companion object {
-        fun create(ctx: Context): AvoDatabase = Room.databaseBuilder(ctx, AvoDatabase::class.java, "avo.db").build()
+        fun create(ctx: Context): AvoDatabase = Room.databaseBuilder(ctx, AvoDatabase::class.java, "avo.db")
+            .addMigrations(object : androidx.room.migration.Migration(1, 2) {
+                override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    db.execSQL("CREATE TABLE IF NOT EXISTS training_marine (sessionId TEXT NOT NULL PRIMARY KEY, location TEXT NOT NULL, sampleMs INTEGER NOT NULL, source TEXT NOT NULL, levelMsl REAL, waveM REAL, wavePeriodS REAL, waterC REAL, windKmh REAL, gustKmh REAL, tideTrend TEXT NOT NULL, savedMs INTEGER NOT NULL)")
+                }
+            }).build()
     }
 }
