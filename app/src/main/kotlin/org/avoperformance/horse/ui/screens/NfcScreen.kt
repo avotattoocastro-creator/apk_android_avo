@@ -96,8 +96,8 @@ fun NfcScreen(c: AppContainer) {
                     scope.launch {
                         pendingSync = true
                         try {
-                        val horseId = if (type == "horse") h?.id ?: withContext(Dispatchers.IO) { c.db.horses().insert(org.avoperformance.horse.data.HorseEntity(code = identity!!, name = identity)) } else c.settings.selectedHorseId
-                        val riderId = if (type == "rider") r?.id ?: withContext(Dispatchers.IO) { c.db.riders().insert(org.avoperformance.horse.data.RiderEntity(code = identity!!, name = identity)) } else c.settings.selectedRiderId
+                        val horseId = if (type == "horse") h?.id ?: withContext(Dispatchers.IO) { org.avoperformance.horse.core.nfc.AvoNfc.import(uri, c.db) } else c.settings.selectedHorseId
+                        val riderId = if (type == "rider") r?.id ?: withContext(Dispatchers.IO) { org.avoperformance.horse.core.nfc.AvoNfc.import(uri, c.db) } else c.settings.selectedRiderId
                         val horse = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
                         val rider = withContext(Dispatchers.IO) { c.db.riders().byId(riderId) }
                         if (type == "horse") c.settings.selectedHorseId = horseId
