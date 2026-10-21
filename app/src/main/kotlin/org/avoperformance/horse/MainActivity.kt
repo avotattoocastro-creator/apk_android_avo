@@ -23,6 +23,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Waves
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -230,7 +231,7 @@ private val tabs = listOf(
     Tab("inicio", "Inicio", Icons.Filled.Home),
     Tab("entrenamiento", "Entrenamiento", Icons.Filled.PlayArrow),
     Tab("historial", "Historial", Icons.AutoMirrored.Filled.List),
-    Tab("mareas", "Mareas", Icons.Filled.Favorite),
+    Tab("mareas", "Mareas", Icons.Filled.Waves),
     Tab("caballos", "Caballos", Icons.Filled.Favorite),
     Tab("configuracion", "Configuración", Icons.Filled.Settings),
 )
