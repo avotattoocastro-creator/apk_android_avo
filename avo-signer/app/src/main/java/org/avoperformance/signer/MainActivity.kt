@@ -54,7 +54,7 @@ class MainActivity : Activity() {
         addButton("Diagnóstico de seguridad de la clave") { diagnose() }
         setContentView(ScrollView(this).apply { addView(layout) })
     }
-    private fun createKey() = try {
+    private fun createKey() { try {
         if (ks.containsAlias(alias)) { status.text="Clave ya existente. No se ha sustituido."; return }
         val gen=KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC,"AndroidKeyStore")
         gen.initialize(KeyGenParameterSpec.Builder(alias,KeyProperties.PURPOSE_SIGN)
@@ -65,7 +65,7 @@ class MainActivity : Activity() {
             .build())
         gen.generateKeyPair()
         status.text="Clave creada. Exporta y conserva la clave pública. Revisa diagnóstico."
-    } catch(e:Exception) { status.text="Error: ${e.message}" }
+    } catch(e:Exception) { status.text="Error: ${e.message}" } }
     private fun diagnose() = try {
         val key=ks.getKey(alias,null) as? PrivateKey ?: error("Primero crea la clave")
         val factory=KeyFactory.getInstance(key.algorithm,"AndroidKeyStore")
