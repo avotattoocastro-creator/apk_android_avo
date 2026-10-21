@@ -17,6 +17,7 @@ import org.avoperformance.horse.data.Settings
 import org.avoperformance.horse.ntrip.NtripManager
 import org.avoperformance.horse.security.SecureStore
 import org.avoperformance.horse.sync.WatchSyncManager
+import org.avoperformance.horse.dnd.GeofenceDndController
 import org.osmdroid.config.Configuration
 
 /** Manual dependency container (no DI framework needed for this size). */
@@ -28,6 +29,7 @@ class AppContainer(val app: Application) {
     /** Server layer on hold: no endpoint is invented. */
     val server: ServerApi = NotConfiguredServer
     val log = AppLog(this)
+    val dnd = GeofenceDndController(app, settings, log)
     val watch = WatchConnection(app, settings, secure, log, scope)
     val config = WatchConfigOps(watch)
     val ntrip = NtripManager(settings, watch, log, scope)

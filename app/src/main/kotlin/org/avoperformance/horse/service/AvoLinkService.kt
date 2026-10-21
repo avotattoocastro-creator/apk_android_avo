@@ -31,6 +31,7 @@ class AvoLinkService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         if (intent?.action == ACTION_STOP) {
+            c.dnd.restoreOwned("desconexión voluntaria")
             c.ntrip.stop(); c.watch.stop()
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
             stopSelf()
@@ -38,6 +39,7 @@ class AvoLinkService : LifecycleService() {
         }
         val type = if (Build.VERSION.SDK_INT >= 29) ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE else 0
         ServiceCompat.startForeground(this, NOTIF_ID, build("Iniciando…"), type)
+        c.dnd.restoreExpired()
         c.watch.start()
         if (c.settings.ntrip.value.enabled) c.ntrip.start()
         c.sync.scheduleWorker()
@@ -58,11 +60,17 @@ class AvoLinkService : LifecycleService() {
                     lastText = text
                 }
                 val ready = c.watch.isReady
+                c.dnd.onWatchTelemetry(t?.t, t?.receivedMs ?: 0L, ready)
                 if (ready && !wasReady) c.sync.autoSync()      // download finished trainings after each (re)connection
                 wasReady = ready
             }
         }
         return START_STICKY
+    }
+
+    override fun onDestroy() {
+        c.dnd.restoreOwned("servicio detenido")
+        super.onDestroy()
     }
 
     private fun build(text: String): Notification {

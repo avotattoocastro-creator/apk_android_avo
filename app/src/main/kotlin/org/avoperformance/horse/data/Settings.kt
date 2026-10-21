@@ -74,6 +74,11 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         get() = p.getString("share.defaultFavorite", "") ?: ""
         set(value) { p.edit().putString("share.defaultFavorite", value.take(80)).apply() }
 
+    /** Explicit opt-in; no DND change occurs unless Android grants policy access. */
+    var autoDndGeofence: Boolean
+        get() = p.getBoolean("training.dnd.geofence", false)
+        set(v) { p.edit().putBoolean("training.dnd.geofence", v).apply() }
+
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)
         set(v) { p.edit().putBoolean("sync.autoDownload", v).apply() }

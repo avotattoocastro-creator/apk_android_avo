@@ -1,6 +1,7 @@
 package org.avoperformance.horse.ui.screens
 
 import android.os.Build
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import org.avoperformance.horse.data.SettingsBackup
@@ -63,6 +64,16 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
     var favoriteName by remember { mutableStateOf("") }
     var favorites by remember { mutableStateOf(c.settings.shareFavorites) }
     var defaultFavorite by remember { mutableStateOf(c.settings.shareDefaultFavorite) }
+    var dndEnabled by remember { mutableStateOf(c.settings.autoDndGeofence) }
+    var dndAccess by remember { mutableStateOf(c.dnd.hasPolicyAccess()) }
+    val dndAccessLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        dndAccess = c.dnd.hasPolicyAccess()
+        if (!dndAccess) {
+            dndEnabled = false
+            c.settings.autoDndGeofence = false
+            c.dnd.restoreOwned("permiso no disponible")
+        }
+    }
     val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
         if (uri != null) {
             backupStatus = runCatching {
@@ -97,6 +108,31 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
     )
     LazyColumn(Modifier.fillMaxSize()) {
         items(entries) { (r, t) -> AvoCard(onClick = { go(r) }) { Text(t, color = AvoColors.Text, fontSize = 16.sp) } }
+        item {
+            AvoCard("No molestar automático por geocerca") {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Silenciar durante grabación automática", color = AvoColors.Text, modifier = Modifier.weight(1f))
+                    Switch(checked = dndEnabled, onCheckedChange = { enabled ->
+                        dndAccess = c.dnd.hasPolicyAccess()
+                        if (enabled && !dndAccess) {
+                            dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                        } else {
+                            dndEnabled = enabled
+                            c.settings.autoDndGeofence = enabled
+                            if (!enabled) c.dnd.restoreOwned("desactivado por el usuario")
+                        }
+                    })
+                }
+                Note("Opcional. Solo se activa al confirmar el reloj una grabación automática de geocerca. Las grabaciones manuales no lo activan.")
+                KV("Permiso de Android", if (dndAccess) "Concedido" else "Pendiente")
+                if (!dndAccess) {
+                    OutlinedButton(onClick = {
+                        dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                    }) { Text("Autorizar No molestar") }
+                }
+                Note("Respeta las excepciones del modo Prioridad y desactiva únicamente el cambio hecho por AVO al acabar o desconectar. Android 15 administra una regla propia de la aplicación.")
+            }
+        }
         item {
             AvoCard("WhatsApp · destinatarios favoritos") {
                 Note("Guarda nombres de destinatarios habituales. AVO prepara el documento automáticamente, pero WhatsApp requiere seleccionar o confirmar el chat y pulsar Enviar.")
