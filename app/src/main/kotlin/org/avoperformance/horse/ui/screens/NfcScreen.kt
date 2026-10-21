@@ -84,8 +84,8 @@ fun NfcScreen(c: AppContainer) {
                     val h = if (type == "horse") horses.firstOrNull { it.code == identity } else null
                     val r = if (type == "rider") riders.firstOrNull { it.code == identity } else null
                     require(h != null || r != null) { "Ficha no encontrada en este móvil: $identity" }
-                    activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
                     require(!currentRecording) { "No se puede cambiar caballo o jinete durante una sesión activa" }
+                    activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
                     scope.launch {
                         pendingSync = true
                         try {
@@ -99,6 +99,8 @@ fun NfcScreen(c: AppContainer) {
                             val err = withContext(Dispatchers.IO) { c.config.setIdentity(horse.id, horse.code, rider.id, rider.code) }
                             if (err == null) "Identidad enviada al chaleco: ${horse.name} / ${rider.name}" else "Identidad guardada en móvil; no enviada: $err"
                         } else "Identidad seleccionada en móvil; falta seleccionar caballo o jinete."
+                        } catch (e: Exception) {
+                            message = "Identidad seleccionada en móvil; error de sincronización: ${e.message ?: "BLE no disponible"}"
                         } finally { pendingSync = false }
                     }
                     "Etiqueta leída: $identity"
