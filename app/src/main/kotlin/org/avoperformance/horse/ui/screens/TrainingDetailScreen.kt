@@ -205,7 +205,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         if (dt !in 0.08..10.0) 0.0 else ((portion[i].speedMs - portion[i-1].speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 } ?: 0.0
                     } }, null, AvoColors.Warn, "m/s²") { selectedTrackIndex = start + it; playing = false }
                 } }
-                item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex) { selectedTrackIndex = it; playing = false } } }
+                item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex, segmentStart.coerceIn(0, a.track.lastIndex - 1), segmentEnd.coerceIn(1, a.track.lastIndex)) { selectedTrackIndex = it; playing = false } } }
                 item { AvoCard("Velocidad") { SynchronizedChart(a.track.map { it.speedMs * 3.6 }, selectedTrackIndex, AvoColors.Gold, "km/h") { selectedTrackIndex = it; playing = false } } }
                 item { AvoCard("Aceleración longitudinal GNSS") {
                     Note("Derivada de la velocidad GNSS; no sustituye a la aceleración de las IMU. Se omiten saltos de tiempo y valores espurios.")
@@ -274,7 +274,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
 private fun pct(n: Int, d: Int) = if (d > 0) "${n * 100 / d} %" else "—"
 
 @Composable
-private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (Int) -> Unit) {
+private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, startIndex: Int, endIndex: Int, onSelect: (Int) -> Unit) {
     val pts = a.track
     if (pts.size < 2) return
     var colorBySpeed by remember(a) { mutableStateOf(true) }
@@ -307,7 +307,7 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
             FilterChip(selected = imagery, onClick = { imagery = true }, label = { Text("Satélite") })
         }
         Note("Zoom con dos dedos, desplazamiento libre y selección de puntos sincronizados con las gráficas.")
-        RealTrackMap(a, selection, colorBySpeed, imagery, recenterToken, onSelect)
+        RealTrackMap(a, selection, startIndex, endIndex, colorBySpeed, imagery, recenterToken, onSelect)
         Text(
             text = if (imagery) AvoImagery.ATTRIBUTION else "© OpenStreetMap contributors",
             color = AvoColors.TextDim,
@@ -359,7 +359,10 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
             } else when (pts[i].carrSoln) {
                 2 -> AvoColors.Ok; 1 -> AvoColors.Warn; else -> AvoColors.TextDim
             }
-            drawLine(color, at(i-1), at(i), strokeWidth=3.5f)
+            drawLine(if (i in (startIndex + 1)..endIndex) color else color.copy(alpha = 0.22f), at(i-1), at(i), strokeWidth=if (i in (startIndex + 1)..endIndex) 4.5f else 2f)
+        }
+        for (boundary in listOf(startIndex, endIndex)) if (boundary in pts.indices) {
+            drawCircle(if (boundary == startIndex) AvoColors.Ok else AvoColors.Warn, radius=8f, center=at(boundary))
         }
         selectedNow?.takeIf { it in pts.indices }?.let { index ->
             drawCircle(AvoColors.Gold, radius=10f, center=at(index))
@@ -381,6 +384,8 @@ private class TrackMapRender(
     val analysis: TrainingAnalysis,
     var bySpeed: Boolean,
     var imagery: Boolean,
+    var startIndex: Int,
+    var endIndex: Int,
     var marker: Marker? = null,
     var recenterToken: Int,
 )
@@ -389,6 +394,8 @@ private class TrackMapRender(
 private fun RealTrackMap(
     analysis: TrainingAnalysis,
     selectedIndex: Int?,
+    startIndex: Int,
+    endIndex: Int,
     bySpeed: Boolean,
     imagery: Boolean,
     recenterToken: Int,
@@ -421,9 +428,9 @@ private fun RealTrackMap(
             if (resetBounds || render?.imagery != imagery) {
                 map.setTileSource(if (imagery) AvoImagery.tileSource else TileSourceFactory.MAPNIK)
             }
-            if (resetBounds || render?.bySpeed != bySpeed || render.imagery != imagery) {
+            if (resetBounds || render?.bySpeed != bySpeed || render.imagery != imagery || render.startIndex != startIndex || render.endIndex != endIndex) {
                 map.overlays.clear()
-                render = TrackMapRender(analysis, bySpeed, imagery, recenterToken = recenterToken)
+                render = TrackMapRender(analysis, bySpeed, imagery, startIndex, endIndex, recenterToken = recenterToken)
                 map.tag = render
 
                 map.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
@@ -449,7 +456,7 @@ private fun RealTrackMap(
 
                     override fun longPressHelper(tap: OsmPoint): Boolean = false
                 }))
-                addColoredRoute(map, analysis, bySpeed)
+                addColoredRoute(map, analysis, bySpeed, startIndex, endIndex)
                 // Attribution remains visible beneath the map (Compose), independent of osmdroid copyright hooks.
             }
 
@@ -487,7 +494,7 @@ private fun RealTrackMap(
  * Bound overlay count to approximately 120 polylines, even for 5000 GNSS samples,
  * while retaining all GPS positions inside each polyline segment.
  */
-private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean) {
+private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean, startIndex: Int, endIndex: Int) {
     val track = a.track
     if (track.size < 2) return
     val stride = ((track.size - 2) / 120 + 1).coerceAtLeast(1)
@@ -507,8 +514,8 @@ private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean)
         val points = (start - 1..end).map { i -> OsmPoint(track[i].p.lat, track[i].p.lon) }
         map.overlays.add(Polyline(map).apply {
             setPoints(points)
-            outlinePaint.color = lineColor
-            outlinePaint.strokeWidth = 5f * map.resources.displayMetrics.density
+            outlinePaint.color = if (end >= startIndex && start <= endIndex) lineColor else android.graphics.Color.argb(65, 155, 155, 155)
+            outlinePaint.strokeWidth = (if (end >= startIndex && start <= endIndex) 5f else 2f) * map.resources.displayMetrics.density
         })
         start = end + 1
     }
