@@ -267,3 +267,24 @@ fun TidesScreen() {
         }
     }
 }
+
+/** Explicit opt-in snapshot: forecast model values, never labeled as measured tide. */
+suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org.avoperformance.horse.data.TrainingMarineEntity {
+    val forecast = fetchTides()
+    val at = java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDateTime()
+    val point = forecast.sea.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
+        ?: error("No hay previsión marina disponible")
+    val delta = kotlin.math.abs(java.time.Duration.between(point.date, at).toHours())
+    require(delta <= 2) { "El entrenamiento está fuera de los 7 días de previsión. No se inventarán datos históricos." }
+    val w = forecast.weather.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
+    val previous = forecast.sea.getOrNull(forecast.sea.indexOf(point) - 1)?.sea
+    val trend = if (point.sea == null || previous == null) "DESCONOCIDA"
+        else if (point.sea > previous) "SUBIENDO" else if (point.sea < previous) "BAJANDO" else "ESTABLE"
+    return org.avoperformance.horse.data.TrainingMarineEntity(
+        sessionId = sessionId, location = "El Regatón, Laredo",
+        sampleMs = point.date.atZone(zone).toInstant().toEpochMilli(),
+        source = "Open-Meteo Marine/Weather · modelo, no medición",
+        levelMsl = point.sea, waveM = point.wave, wavePeriodS = point.period,
+        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend
+    )
+}
