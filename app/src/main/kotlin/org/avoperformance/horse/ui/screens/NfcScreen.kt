@@ -2,7 +2,7 @@ package org.avoperformance.horse.ui.screens
 
 import android.app.Activity
 import android.nfc.NfcAdapter
-import android.nfc.Tag
+import android.os.SystemClock
 import android.nfc.NdefMessage
 import android.nfc.NdefRecord
 import android.nfc.tech.Ndef
@@ -39,9 +39,12 @@ fun NfcScreen(c: AppContainer) {
     val currentKind by rememberUpdatedState(kind)
     val currentCode by rememberUpdatedState(code)
     val currentWrite by rememberUpdatedState(writeMode)
+    val lastScan = remember { java.util.concurrent.atomic.AtomicLong(0L) }
     DisposableEffect(adapter, activity, horses, riders) {
         val callback = NfcAdapter.ReaderCallback { tag ->
-            try {
+            val now = SystemClock.elapsedRealtime()
+            val previous = lastScan.get()
+            if (now - previous >= 1500L && lastScan.compareAndSet(previous, now)) try {
                 val result = if (currentWrite) {
                     val value = currentCode
                     require(value.isNotBlank()) { "Selecciona una ficha antes de grabar" }
@@ -61,8 +64,12 @@ fun NfcScreen(c: AppContainer) {
                         val format = NdefFormatable.get(tag) ?: error("Etiqueta no compatible con NDEF")
                         format.connect()
                         try { format.format(data) } finally { format.close() }
+                        val verify = Ndef.get(tag) ?: error("No se pudo verificar la etiqueta formateada")
+                        verify.connect()
+                        try { require(verify.ndefMessage?.records?.any { it.toUri() == uri } == true) { "Verificación NFC fallida" } }
+                        finally { verify.close() }
                     }
-                    "Etiqueta grabada: ${currentKind} · $value"
+                    "Etiqueta grabada y verificada: ${currentKind} · $value"
                 } else {
                     val ndef = Ndef.get(tag) ?: error("Etiqueta sin contenido NDEF")
                     ndef.connect()
@@ -74,6 +81,7 @@ fun NfcScreen(c: AppContainer) {
                     val h = if (type == "horse") horses.firstOrNull { it.code == identity } else null
                     val r = if (type == "rider") riders.firstOrNull { it.code == identity } else null
                     require(h != null || r != null) { "Ficha no encontrada en este móvil: $identity" }
+                    activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
                     scope.launch {
                         val horseId = h?.id ?: c.settings.selectedHorseId
                         val riderId = r?.id ?: c.settings.selectedRiderId
