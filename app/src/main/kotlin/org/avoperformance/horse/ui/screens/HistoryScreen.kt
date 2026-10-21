@@ -70,6 +70,8 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
     val progress by c.sync.progress.collectAsStateWithLifecycle()
     var msg by remember { mutableStateOf<String?>(null) }
     var horseFilter by remember { mutableStateOf("") }
+    var dateFilter by remember { mutableStateOf("") }
+    var sessionFilter by remember { mutableStateOf("") }
     val savedHorses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
     val savedRiders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
     var shareCandidate by remember { mutableStateOf<TrainingEntity?>(null) }
@@ -194,8 +196,13 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                 if (all.isEmpty()) item { Note("Aún no hay entrenamientos. Conecta el chaleco y pulsa «Leer lista del reloj».") }
             }
         } else {
-            val mine = all.filter { it.localDir != null && it.downloadedBytes > 0 &&
-                (horseFilter.isBlank() || it.horseCode?.contains(horseFilter, ignoreCase = true) == true) }
+            val mine = all.filter { t ->
+                val horseMatches = horseFilter.isBlank() || t.horseCode?.contains(horseFilter, ignoreCase = true) == true ||
+                    savedHorses.any { it.code == t.horseCode && it.name.contains(horseFilter, ignoreCase = true) }
+                val dateMatches = dateFilter.isBlank() || (Fmt.date(t.startRtcMs) ?: "").contains(dateFilter, ignoreCase = true)
+                val sessionMatches = sessionFilter.isBlank() || t.sessionId.contains(sessionFilter, ignoreCase = true)
+                t.localDir != null && t.downloadedBytes > 0 && horseMatches && dateMatches && sessionMatches
+            }
             LazyColumn {
                 item {
                     AvoCard("Importar entrenamientos recibidos") {
@@ -203,7 +210,11 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         msg?.let { Note(it) }
                     }
                     AvoCard("Análisis y comparación") {
-                        TextField(value = horseFilter, onValueChange = { horseFilter = it }, label = { Text("Filtrar por caballo") }, singleLine = true)
+                        TextField(value = horseFilter, onValueChange = { horseFilter = it }, label = { Text("Filtrar por caballo (nombre o código)") }, singleLine = true)
+                        TextField(value = dateFilter, onValueChange = { dateFilter = it }, label = { Text("Filtrar por fecha") }, singleLine = true)
+                        TextField(value = sessionFilter, onValueChange = { sessionFilter = it }, label = { Text("Buscar identificador de sesión") }, singleLine = true)
+                        OutlinedButton(onClick = { horseFilter = ""; dateFilter = ""; sessionFilter = "" }) { Text("Limpiar filtros") }
+                        Note("Resultados: ${mine.size} de ${all.count { it.localDir != null && it.downloadedBytes > 0 }} entrenamientos descargados.")
                         Note("Abre un entrenamiento para ver velocidad, aceleración, ritmo, tramos y GPS. Para comparar, elige A y B entre las sesiones del mismo caballo.")
                         val eligible = mine.filter { it.horseCode != null }
                         eligible.forEach { t ->
