@@ -457,6 +457,16 @@ private fun RealTrackMap(
                     override fun longPressHelper(tap: OsmPoint): Boolean = false
                 }))
                 addColoredRoute(map, analysis, bySpeed, startIndex, endIndex)
+                // A/B boundaries remain visible over both map styles.
+                listOf(startIndex to "A · Inicio", endIndex to "B · Final").forEach { (index, title) ->
+                    analysis.track.getOrNull(index)?.let { sample ->
+                        map.overlays.add(Marker(map).apply {
+                            position = OsmPoint(sample.p.lat, sample.p.lon)
+                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                            this.title = title
+                        })
+                    }
+                }
                 // Attribution remains visible beneath the map (Compose), independent of osmdroid copyright hooks.
             }
 
