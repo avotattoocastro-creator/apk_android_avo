@@ -51,7 +51,7 @@ fun NfcScreen(c: AppContainer) {
                 val result = if (currentWrite) {
                     val value = currentCode
                     require(value.isNotBlank()) { "Selecciona una ficha antes de grabar" }
-                    val uri = Uri.parse("avohorse://identity/${currentKind}/${Uri.encode(value)}")
+                    val uri = if (currentKind == "horse") org.avoperformance.horse.core.nfc.AvoNfc.horse(horses.first { it.code == value }) else org.avoperformance.horse.core.nfc.AvoNfc.rider(riders.first { it.code == value })
                     val record = NdefRecord.createUri(uri)
                     val data = NdefMessage(arrayOf(record))
                     val ndef = Ndef.get(tag)
