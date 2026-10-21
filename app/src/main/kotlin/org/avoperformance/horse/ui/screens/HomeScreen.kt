@@ -62,6 +62,7 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
     val rtk = RtkDeriver.derive(tel?.t, age)
 
     LazyColumn(Modifier.fillMaxSize()) {
+        item { AvoCard("MAREAS · Regatón", onClick = { go("mareas") }) { Text("Ver nivel del mar previsto, pleamares y bajamares aproximadas, oleaje y temperatura del agua.") } }
         item {
             AvoCard("LIVE · Estado del sistema") {
                 val states = listOf(
