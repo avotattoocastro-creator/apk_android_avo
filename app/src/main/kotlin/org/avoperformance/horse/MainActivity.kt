@@ -119,12 +119,12 @@ class MainActivity : ComponentActivity() {
                     }
                     val horse = withContext(Dispatchers.IO) { c.db.horses().all().first().firstOrNull { it.code == code } }
                     val rider = withContext(Dispatchers.IO) { c.db.riders().all().first().firstOrNull { it.code == code } }
-                    if ((type == "horse" && horse == null) || (type == "rider" && rider == null)) {
-                        android.widget.Toast.makeText(this@MainActivity, "NFC: ficha no encontrada en el móvil", android.widget.Toast.LENGTH_LONG).show()
-                        return@launch
-                    }
-                    val horseId = if (type == "horse") horse!!.id else c.settings.selectedHorseId
-                    val riderId = if (type == "rider") rider!!.id else c.settings.selectedRiderId
+                    val horseId = if (type == "horse") horse?.id ?: withContext(Dispatchers.IO) {
+                        c.db.horses().insert(org.avoperformance.horse.data.HorseEntity(code = code, name = code))
+                    } else c.settings.selectedHorseId
+                    val riderId = if (type == "rider") rider?.id ?: withContext(Dispatchers.IO) {
+                        c.db.riders().insert(org.avoperformance.horse.data.RiderEntity(code = code, name = code))
+                    } else c.settings.selectedRiderId
                     if (type == "horse") c.settings.selectedHorseId = horseId
                     if (type == "rider") c.settings.selectedRiderId = riderId
                     val selectedHorse = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
@@ -180,12 +180,12 @@ class MainActivity : ComponentActivity() {
                 }
                 val horse = withContext(Dispatchers.IO) { c.db.horses().all().first().firstOrNull { it.code == code } }
                 val rider = withContext(Dispatchers.IO) { c.db.riders().all().first().firstOrNull { it.code == code } }
-                if ((type == "horse" && horse == null) || (type == "rider" && rider == null)) {
-                    android.widget.Toast.makeText(this@MainActivity, "NFC: ficha no encontrada", android.widget.Toast.LENGTH_LONG).show()
-                    return@launch
-                }
-                val horseId = if (type == "horse") horse!!.id else c.settings.selectedHorseId
-                val riderId = if (type == "rider") rider!!.id else c.settings.selectedRiderId
+                val horseId = if (type == "horse") horse?.id ?: withContext(Dispatchers.IO) {
+                    c.db.horses().insert(org.avoperformance.horse.data.HorseEntity(code = code, name = code))
+                } else c.settings.selectedHorseId
+                val riderId = if (type == "rider") rider?.id ?: withContext(Dispatchers.IO) {
+                    c.db.riders().insert(org.avoperformance.horse.data.RiderEntity(code = code, name = code))
+                } else c.settings.selectedRiderId
                 if (type == "horse") c.settings.selectedHorseId = horseId
                 if (type == "rider") c.settings.selectedRiderId = riderId
                 val h = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
