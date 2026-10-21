@@ -37,20 +37,22 @@ class GeofenceDndController(
 
     @Synchronized
     fun onWatchTelemetry(t: Telemetry?, receivedMs: Long, connected: Boolean) {
-        if (t == null || !connected || System.currentTimeMillis() - receivedMs !in 0..5000L) return
-
-        // On the V3.4.4+ telemetry we can positively exclude manual sessions.
-        // Earlier firmware is allowed only when its geofence state says RECORDING.
-        val automatic = when (t.geofence) {
-            GeofenceState.RECORDING, GeofenceState.EXIT_PENDING,
-            GeofenceState.POST_RECORDING, GeofenceState.PAUSED -> true
-            else -> false
-        } && t.v2?.manualSession != true
-
-        val recording = t.session == WatchSessionState.RECORDING ||
-            t.session == WatchSessionState.PAUSED
-        if (settings.autoDndGeofence && recording && automatic) activate()
-        else restoreOwned("sin grabación automática confirmada")
+        if (!settings.autoDndGeofence) {
+            restoreOwned("opción desactivada")
+            return
+        }
+        if (!connected) {
+            // Better to briefly unmute than to leave the phone silenced indefinitely
+            // when the watch disconnects during the final geofence transition.
+            restoreOwned("enlace BLE perdido")
+            return
+        }
+        if (t == null || !GeofenceDndGate.isFresh(receivedMs, System.currentTimeMillis())) return
+        if (GeofenceDndGate.shouldSilence(t.session, t.geofence, t.v2?.manualSession)) {
+            activate()
+        } else {
+            restoreOwned("sin grabación automática confirmada")
+        }
     }
 
     /** Optional last-resort recovery after a process died during a past training. */

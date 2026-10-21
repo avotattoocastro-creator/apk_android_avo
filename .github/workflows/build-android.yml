@@ -210,6 +210,12 @@ jobs:
           cd "$AVO_SOURCE_DIR"
           ./gradlew --no-daemon :core:test
 
+      - name: Verify geofence DND logic (Android JVM tests)
+        shell: bash
+        run: |
+          cd "$AVO_SOURCE_DIR"
+          ./gradlew --no-daemon :app:testDebugUnitTest --tests 'org.avoperformance.horse.dnd.GeofenceDndGateTest'
+
       - name: Build debug APK
         shell: bash
         run: |
