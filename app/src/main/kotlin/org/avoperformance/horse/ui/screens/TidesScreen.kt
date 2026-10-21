@@ -181,6 +181,7 @@ fun TidesScreen() {
                             Text("Próxima ${if (next.high) "pleamar" else "bajamar"} · ${next.date.format(fmtHour)}", fontWeight = FontWeight.Bold)
                             Text("Faltan ${remaining / 60} h ${remaining % 60} min", color = gold, style = MaterialTheme.typography.titleLarge)
                         }
+                        Text("Coeficiente: pendiente de fuente oficial IHM", color = gold, style = MaterialTheme.typography.titleMedium)
                         Text("Nivel previsto respecto al nivel medio: ${current?.sea.show("m", 2)}", style = MaterialTheme.typography.bodySmall)
                     }
                 }
@@ -222,11 +223,12 @@ fun TidesScreen() {
                             TextButton(onClick = { selected = selected.plusDays(1) }, enabled = selected < LocalDate.now(zone).plusDays(6)) { Text("Siguiente ›") }
                         }
                         Text("Fase lunar aproximada: ${moonPhase(selected)}")
+                        Text("Coeficiente: sin dato oficial disponible", color = gold)
                     }
                 }
                 item { AvoCard("CURVA DEL DÍA") { TideCurve(day, now, Modifier.fillMaxWidth()) } }
                 item {
-                    AvoCard("TABLA DEL DÍA") {
+                    AvoCard("TABLA DEL DÍA · COEF. PENDIENTE") {
                         val selectedEx = ex.filter { it.date.toLocalDate() == selected }
                         selectedEx.forEach { e ->
                             Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
