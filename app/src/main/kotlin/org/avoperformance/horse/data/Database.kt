@@ -80,6 +80,8 @@ data class TrainingMarineEntity(
     val windKmh: Double?,
     val gustKmh: Double?,
     val tideTrend: String,
+    val tideCoefficient: Int? = null,
+    val coefficientSource: String? = null,
     val savedMs: Long = System.currentTimeMillis(),
 )
 
@@ -157,7 +159,7 @@ interface LogDao {
     @Query("DELETE FROM log WHERE id < (SELECT MAX(id) FROM log) - 5000") suspend fun trim()
 }
 
-@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 2, exportSchema = true)
+@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 3, exportSchema = true)
 abstract class AvoDatabase : RoomDatabase() {
     abstract fun horses(): HorseDao
     abstract fun riders(): RiderDao
@@ -171,6 +173,11 @@ abstract class AvoDatabase : RoomDatabase() {
             .addMigrations(object : androidx.room.migration.Migration(1, 2) {
                 override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
                     db.execSQL("CREATE TABLE IF NOT EXISTS training_marine (sessionId TEXT NOT NULL PRIMARY KEY, location TEXT NOT NULL, sampleMs INTEGER NOT NULL, source TEXT NOT NULL, levelMsl REAL, waveM REAL, wavePeriodS REAL, waterC REAL, windKmh REAL, gustKmh REAL, tideTrend TEXT NOT NULL, savedMs INTEGER NOT NULL)")
+                }
+            }, object : androidx.room.migration.Migration(2, 3) {
+                override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    db.execSQL("ALTER TABLE training_marine ADD COLUMN tideCoefficient INTEGER")
+                    db.execSQL("ALTER TABLE training_marine ADD COLUMN coefficientSource TEXT")
                 }
             }).build()
     }
