@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.material3.Slider
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -79,6 +80,10 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     var loading by remember { mutableStateOf(false) }
     var msg by remember { mutableStateOf<String?>(null) }
     var confirmDelete by remember { mutableStateOf(false) }
+    val marine by c.db.marine().observe(id).collectAsStateWithLifecycle(null)
+    val marineScope = androidx.compose.runtime.rememberCoroutineScope()
+    var marineBusy by remember { mutableStateOf(false) }
+    var marineMessage by remember { mutableStateOf<String?>(null) }
     val tt = t
     LaunchedEffect(tt?.localDir, tt?.downloadedBytes, tt?.state) {
         if (tt?.localDir != null && (tt.state == SyncState.VERIFICADO_LOCAL.name || tt.state == SyncState.PENDIENTE_SERVIDOR.name ||
@@ -106,6 +111,35 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     }
 
     LazyColumn(Modifier.fillMaxSize()) {
+        item {
+            AvoCard("MAREAS Y CONDICIONES DEL ENTRENAMIENTO") {
+                if (marine == null) {
+                    Note("Sin datos marinos asociados. Se pueden consultar previsiones de hasta 7 días; no se generan datos históricos ficticios.")
+                    Button(onClick = {
+                        marineBusy = true
+                        marineScope.launch {
+                            try {
+                                val snap = marineSnapshotForTraining(tt.sessionId, tt.startRtcMs)
+                                c.db.marine().upsert(snap)
+                                marineMessage = "Condiciones guardadas"
+                            } catch (e: Exception) { marineMessage = e.message ?: "Error al consultar" }
+                            finally { marineBusy = false }
+                        }
+                    }, enabled = !marineBusy && tt.startRtcMs > 0L) { Text(if (marineBusy) "Consultando…" else "Guardar condiciones de la sesión") }
+                } else {
+                    KV("Zona", marine!!.location)
+                    KV("Tendencia", marine!!.tideTrend)
+                    KV("Nivel respecto al medio", marine!!.levelMsl?.let { "%.2f m".format(it) })
+                    KV("Oleaje", marine!!.waveM?.let { "%.2f m".format(it) })
+                    KV("Periodo", marine!!.wavePeriodS?.let { "%.1f s".format(it) })
+                    KV("Temperatura agua", marine!!.waterC?.let { "%.1f °C".format(it) })
+                    KV("Viento", marine!!.windKmh?.let { "%.1f km/h".format(it) })
+                    KV("Rachas", marine!!.gustKmh?.let { "%.1f km/h".format(it) })
+                    Note(marine!!.source)
+                }
+                marineMessage?.let { Note(it) }
+            }
+        }
         if (a != null) item {
             AvoCard("Resumen del entrenamiento") {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly) {
