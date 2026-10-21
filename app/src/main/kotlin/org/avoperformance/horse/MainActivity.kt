@@ -52,6 +52,7 @@ import org.avoperformance.horse.ui.screens.GeofencesScreen
 import org.avoperformance.horse.ui.screens.HistoryScreen
 import org.avoperformance.horse.ui.screens.HomeScreen
 import org.avoperformance.horse.ui.screens.HorsesScreen
+import org.avoperformance.horse.ui.screens.NfcScreen
 import org.avoperformance.horse.ui.screens.NtripScreen
 import org.avoperformance.horse.ui.screens.RidersScreen
 import org.avoperformance.horse.ui.screens.SettingsScreen
@@ -121,7 +122,7 @@ private val tabs = listOf(
 )
 
 private val titles = mapOf(
-    "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
+    "nfc" to "NFC · Caballos y jinetes", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
     "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos y OTA", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "detalle/{id}" to "Entrenamiento", "comparar/{a}/{b}" to "Comparativa",
 )
 
@@ -164,6 +165,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
             composable("configuracion") { SettingsScreen(c, go(nav)) }
             composable("bluetooth") { BluetoothScreen(c, requestPerms) }
             composable("ntrip") { NtripScreen(c) }
+            composable("nfc") { NfcScreen(c) }
             composable("geocercas") { GeofencesScreen(c) }
             composable("sincronizacion") { SyncScreen(c) }
             composable("diagnosticos") { DiagnosticsScreen(c) }
