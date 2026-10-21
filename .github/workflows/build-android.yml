@@ -34,7 +34,7 @@ on:
       - '.github/workflows/build-android.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   android-apk:
@@ -142,6 +142,38 @@ jobs:
                       if re.search(r'\b(class|object|fun|interface|enum class)\b.*(Geofence|geofence|Session|session|Train|train|Start|Stop|start|stop|MainActivity|Settings|settings|Screen|ViewModel|Location)',line):
                           print('  ',i,line.strip()[:200])
           PY
+
+      - name: Publish editable V1.8 sources to development branch
+        if: github.ref_name == 'feature/android-v1-4-ota-pecho'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$AVO_SOURCE_DIR" = "$GITHUB_WORKSPACE" ]; then
+            echo "Android project already tracked in repository."
+            exit 0
+          fi
+          cd "$GITHUB_WORKSPACE"
+          for dir in app core gradle; do
+            if [ -d "$AVO_SOURCE_DIR/$dir" ]; then
+              mkdir -p "$GITHUB_WORKSPACE/$dir"
+              rsync -a --exclude '.gradle' --exclude '.idea' --exclude 'build' --exclude '*.jks' --exclude '*.keystore' --exclude '*.pem' "$AVO_SOURCE_DIR/$dir/" "$GITHUB_WORKSPACE/$dir/"
+              git add -A -- "$dir"
+            fi
+          done
+          for name in gradlew settings.gradle settings.gradle.kts build.gradle build.gradle.kts gradle.properties .gitignore; do
+            if [ -f "$AVO_SOURCE_DIR/$name" ]; then
+              cp "$AVO_SOURCE_DIR/$name" "$GITHUB_WORKSPACE/$name"
+              git add -- "$name"
+            fi
+          done
+          if git diff --cached --quiet; then
+            echo "No source changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "build(android): restore editable V1.8 project sources"
+          git push origin "HEAD:$GITHUB_REF_NAME"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
