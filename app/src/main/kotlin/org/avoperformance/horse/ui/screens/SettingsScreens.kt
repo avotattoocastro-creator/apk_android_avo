@@ -176,9 +176,9 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
         }
         item {
             AvoCard("Acerca de") {
-                KV("Aplicación", "AVO Performance Horse 1.0")
+                KV("Aplicación", "AVO Performance Horse 1.8 (desarrollo)")
                 KV("Paquete", "org.avoperformance.horse")
-                KV("Protocolo BLE", "AVO BLE v1 (firmware V3.3 – V3.4.4)")
+                KV("Protocolo BLE", "AVO BLE v1 (firmware V3.4.4 – V3.5.4)")
             }
         }
     }

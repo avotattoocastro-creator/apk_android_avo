@@ -1,34 +1,41 @@
-# AVO Performance Horse — Android V1.0
+# AVO Performance Horse — Android V1.8 (desarrollo)
 
-Repositorio Android de AVO Performance Horse, conectado a GitHub Actions.
+Aplicación Android para el reloj de pecho Waveshare ESP32-S3 y el chaleco AVO.
 
-## Acceso
-La cuenta `avotattoocastro-creator` tiene permisos de administrador y escritura. Se verificaron con commits reales el 19/10/2026.
+## Rama activa de desarrollo
 
-## Subir la aplicación Android V1.0 (un solo archivo)
+- **Código Kotlin editable** en `app/` y `core/` de `feature/android-v1-4-ota-pecho`.
+- **Rama `main`**: versión anterior V1.3; no es la versión más reciente de Android.
+- Los ZIP V1.0–V1.8 permanecen únicamente como copias históricas; se compila el código editable de la raíz del proyecto.
+- El fichero de GitHub Actions es `.github/workflows/build-android.yml`.
 
-1. Descarga el archivo **AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip**, preparado a partir del proyecto Android aportado por el propietario.
-2. Abre **Add file > Upload files** en https://github.com/avotattoocastro-creator/apk_android_avo
-3. Arrastra el ZIP **sin descomprimir** hasta la raíz de la rama `main` y confirma **Commit changes**.
-4. En https://github.com/avotattoocastro-creator/apk_android_avo/actions abre **Build AVO Android APK**.
-5. El workflow se inicia automáticamente por la subida del ZIP; también permite **Run workflow**.
-6. Si la compilación termina correctamente, descarga el artefacto **AVO-Performance-Horse-V1-0-APK**. Contendrá la APK de pruebas y su SHA-256.
+## Funciones incorporadas
 
-El workflow extrae el proyecto del ZIP, instala Android SDK 35 y Java 17, ejecuta los tests de `:core`, compila con `./gradlew :app:assembleDebug` y publica el artefacto. Si los tests fallan se registrará el resultado y se intentará generar la APK igualmente para facilitar diagnóstico.
+- Enlace BLE permanente al reloj, reconexión tras apagar y encender Bluetooth, transferencia RTCM/NTRIP.
+- Inicio/parada de grabación, geocercas, sesiones de microSD y sincronización.
+- Análisis GNSS con resumen, reproducción, gráficos sincronizados, selección por punto, zoom y pan.
+- Recorrido sobre mapa real OpenStreetMap con colores por velocidad y RTK; plano local sin conexión como alternativa.
+- Importación y exportación de entrenamientos `.avo` por el menú Compartir (WhatsApp compatible): ID de sesión, metadatos de caballo y jinete y resolución de duplicados.
+- Favoritos de destinatarios y copia portátil de configuración, excluyendo contraseñas NTRIP y claves de autorización BLE.
+- No molestar automático opcional: permiso especial Android, solo grabación confirmada por geocerca, sin afectar sesiones manuales, recuperación al finalizar o perder BLE; Android 15 usa una regla propia.
 
-También es compatible con fuentes Android descomprimidas en la raíz (`app/`, `core/`, `gradlew`, `gradle/`), que tienen prioridad respecto al ZIP.
+## Compilar y probar
 
-## Estado de las pruebas
+GitHub Actions ejecuta:
+1. `./gradlew --no-daemon :core:test`
+2. `./gradlew --no-daemon :app:testDebugUnitTest --tests 'org.avoperformance.horse.dnd.GeofenceDndGateTest'`
+3. `./gradlew --no-daemon :app:assembleDebug`
 
-El ZIP de origen incluye pruebas previas del módulo `:core` y una comprobación de tipos de la interfaz, pero no se ha demostrado todavía una compilación de Android con SDK real ni una prueba con teléfono/reloj reales. La ejecución de GitHub Actions será la primera verificación de compilación Android de esta entrega.
+Tras éxito se entrega el artefacto **AVO-Performance-Horse-V1-8-Integrada-APK** (APK debug y SHA-256).
+
+[Compilaciones de GitHub Actions](https://github.com/avotattoocastro-creator/apk_android_avo/actions)
+
+## Lo que todavía no se debe dar por validado
+
+La compilación automatizada **no equivale** a prueba integral en un teléfono Android y hardware AVO reales. Faltan verificaciones BLE/NTRIP con el reloj, detección de sesión y geocerca, permiso DND por modelo de Android, importación WhatsApp y mapa sin/con conexión.
+
+La capa de servidor en `AppContainer` sigue siendo `NotConfiguredServer`: no se han inventado endpoints para la subida automática. Hace falta integrar el contrato HTTP real antes de dar por completada esa función.
 
 ## Seguridad
 
-**Este repositorio es público.** No subir claves NTRIP privadas, contraseñas, credenciales de API, tokens de servidor, datos reales de usuarios ni claves de firma. La APK será **debug**, no firmada para distribución en Play Store. Los parámetros sensibles deben suministrarse mediante ajustes seguros de la app o secretos de Actions para futuras builds de release.
-
-## Hardware previsto
-
-- Pecho: reloj Waveshare ESP32-S3 Touch AMOLED 2.06 con microSD.
-- Espalda: Heltec Wireless Stick Lite V3 con ZED-F9P; RTCM por UART desde el pecho.
-- Cincha: ESP32 con tres IMU; ESP-NOW directo con espalda.
-- Teléfono Android: BLE permanente con pecho, NTRIP, geocercas, sesiones y sincronización.
+Este repositorio es público. No incorporar credenciales NTRIP, secretos del servidor, tokens de acceso, claves de firma ni datos reales de usuarios. El artefacto generado es **debug**, no una publicación firmada de producción.
