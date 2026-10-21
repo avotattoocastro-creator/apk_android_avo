@@ -32,6 +32,8 @@ fun NfcScreen(c: AppContainer) {
     val horses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
     val riders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
     val scope = rememberCoroutineScope()
+    val watchStatus by c.watch.status.collectAsStateWithLifecycle(null)
+    val currentRecording by rememberUpdatedState(watchStatus?.session == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING || watchStatus?.session == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED || watchStatus?.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING)
     var kind by remember { mutableStateOf("horse") }
     var code by remember { mutableStateOf("") }
     var writeMode by remember { mutableStateOf(false) }
@@ -82,6 +84,7 @@ fun NfcScreen(c: AppContainer) {
                     val r = if (type == "rider") riders.firstOrNull { it.code == identity } else null
                     require(h != null || r != null) { "Ficha no encontrada en este móvil: $identity" }
                     activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
+                    require(!currentRecording) { "No se puede cambiar caballo o jinete durante una sesión activa" }
                     scope.launch {
                         val horseId = h?.id ?: c.settings.selectedHorseId
                         val riderId = r?.id ?: c.settings.selectedRiderId
@@ -124,7 +127,7 @@ fun NfcScreen(c: AppContainer) {
                 Note("Seleccionado: ${code.ifBlank { "ninguno" }}. Acerca la tarjeta para grabar y verificar.")
             } else Note("Acerca una tarjeta AVO para seleccionar su ficha y enviarla al reloj si está conectado.")
             Text(message)
-            Note("La lectura con la pantalla apagada no está garantizada. Durante una grabación activa, evita cambiar la identidad.")
+            Note("La lectura NFC se realiza con esta pantalla abierta. Android no garantiza lectura con el móvil bloqueado o la pantalla apagada. Se bloquea el cambio de identidad durante una sesión activa.")
         } }
     }
 }
