@@ -124,6 +124,25 @@ jobs:
             exit 1
           fi
 
+      - name: Inspect V1.8 integration points
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,re
+          from pathlib import Path
+          root=Path(os.environ['AVO_SOURCE_DIR'])
+          files=list(root.rglob('*.kt'))+list(root.rglob('AndroidManifest.xml'))
+          for f in sorted(files):
+              if any(x in f.parts for x in ('build','.gradle')):
+                  continue
+              print('FILE',f.relative_to(root))
+              if f.suffix=='.kt':
+                  data=f.read_text(encoding='utf-8',errors='replace')
+                  for i,line in enumerate(data.splitlines(),1):
+                      if re.search(r'\b(class|object|fun|interface|enum class)\b.*(Geofence|geofence|Session|session|Train|train|Start|Stop|start|stop|MainActivity|Settings|settings|Screen|ViewModel|Location)',line):
+                          print('  ',i,line.strip()[:200])
+          PY
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
