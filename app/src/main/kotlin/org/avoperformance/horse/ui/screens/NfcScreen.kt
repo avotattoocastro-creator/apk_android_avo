@@ -39,7 +39,7 @@ fun NfcScreen(c: AppContainer) {
     val currentKind by rememberUpdatedState(kind)
     val currentCode by rememberUpdatedState(code)
     val currentWrite by rememberUpdatedState(writeMode)
-    DisposableEffect(adapter, activity) {
+    DisposableEffect(adapter, activity, horses, riders) {
         val callback = NfcAdapter.ReaderCallback { tag ->
             try {
                 val result = if (currentWrite) {
@@ -94,7 +94,7 @@ fun NfcScreen(c: AppContainer) {
             }
         }
         if (activity != null && adapter?.isEnabled == true) {
-            adapter.enableReaderMode(activity, callback, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_NFC_B or NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK.inv().and(0), null)
+            adapter.enableReaderMode(activity, callback, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_NFC_B, null)
         }
         onDispose { if (activity != null) runCatching { adapter?.disableReaderMode(activity) } }
     }
