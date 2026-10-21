@@ -91,18 +91,17 @@ fun NfcScreen(c: AppContainer) {
                     require(type in listOf("horse", "rider") && !identity.isNullOrBlank()) { "Identidad NFC inválida" }
                     val h = if (type == "horse") horses.firstOrNull { it.code == identity } else null
                     val r = if (type == "rider") riders.firstOrNull { it.code == identity } else null
-                    require(h != null || r != null) { "Ficha no encontrada en este móvil: $identity" }
                     require(!currentRecording) { "No se puede cambiar caballo o jinete durante una sesión activa" }
                     activity?.runOnUiThread { message = "Etiqueta leída: $identity. Sincronizando…" }
                     scope.launch {
                         pendingSync = true
                         try {
-                        val horseId = h?.id ?: c.settings.selectedHorseId
-                        val riderId = r?.id ?: c.settings.selectedRiderId
+                        val horseId = if (type == "horse") h?.id ?: withContext(Dispatchers.IO) { c.db.horses().insert(org.avoperformance.horse.data.HorseEntity(code = identity!!, name = identity)) } else c.settings.selectedHorseId
+                        val riderId = if (type == "rider") r?.id ?: withContext(Dispatchers.IO) { c.db.riders().insert(org.avoperformance.horse.data.RiderEntity(code = identity!!, name = identity)) } else c.settings.selectedRiderId
                         val horse = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
                         val rider = withContext(Dispatchers.IO) { c.db.riders().byId(riderId) }
-                        if (h != null) c.settings.selectedHorseId = h.id
-                        if (r != null) c.settings.selectedRiderId = r.id
+                        if (type == "horse") c.settings.selectedHorseId = horseId
+                        if (type == "rider") c.settings.selectedRiderId = riderId
                         message = if (horse != null && rider != null) {
                             val err = withContext(Dispatchers.IO) { c.config.setIdentity(horse.id, horse.code, rider.id, rider.code) }
                             if (err == null) "Identidad enviada al chaleco: ${horse.name} / ${rider.name}" else "Identidad guardada en móvil; no enviada: $err"
