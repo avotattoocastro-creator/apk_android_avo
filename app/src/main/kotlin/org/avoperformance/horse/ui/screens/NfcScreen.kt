@@ -121,7 +121,10 @@ fun NfcScreen(c: AppContainer) {
         if (activity != null && adapter?.isEnabled == true) {
             adapter.enableReaderMode(activity, callback, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_NFC_B, null)
         }
-        onDispose { if (activity != null) runCatching { adapter?.disableReaderMode(activity) } }
+        onDispose {
+            if (activity != null) runCatching { adapter?.disableReaderMode(activity) }
+            (activity as? org.avoperformance.horse.MainActivity)?.enableGlobalNfc()
+        }
     }
     LazyColumn(Modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item { AvoCard("NFC · Caballos y jinetes") {
@@ -142,7 +145,7 @@ fun NfcScreen(c: AppContainer) {
             } else Note("Mantén esta pantalla abierta y acerca una tarjeta AVO. Se seleccionará su ficha y se enviará al reloj si está conectado.")
             Text(message)
             if (pendingSync) LinearProgressIndicator(Modifier.fillMaxWidth())
-            Note("La lectura NFC se realiza con esta pantalla abierta. Android no garantiza lectura con el móvil bloqueado o la pantalla apagada. Se bloquea el cambio de identidad durante una sesión activa.")
+            Note("La lectura de identidad funciona en cualquier pantalla de AVO mientras la app esté abierta. Esta pantalla se utiliza para grabar tarjetas y ver los detalles. Android no garantiza lectura con el móvil bloqueado. No se cambia identidad durante una sesión activa.")
         } }
     }
 }
