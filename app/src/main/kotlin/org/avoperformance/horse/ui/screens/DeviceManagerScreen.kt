@@ -107,7 +107,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                 KV("SHA-256", inspection?.sha256?.joinToString("") { "%02x".format(it.toInt() and 255) } ?: "—")
                 OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar firmware .bin") }
                 error?.let { Note("Error al leer archivo: $it") }
-                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "V3.5.4 verificada" else "No autorizada")
+                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "AVO CHEST compatible (sin firma)" else "No compatible")
                 KV("Estado OTA", ota.phase)
                 if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
                 ota.error?.let { Note("OTA: $it") }
@@ -117,7 +117,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Text("Diagnóstico OTA (confirmaciones y reinicio)")
                     ota.events.forEach { Note(it) }
                 }
-                Text("OTA experimental: el reloj verifica SHA-256 pero NO la firma digital. Solo se admite el BIN V3.5.4 autorizado. Riesgo de desconexión o fallo; no apagar el reloj.", color = AvoColors.Warn)
+                Text("OTA experimental: admite imágenes AVO CHEST compatibles de distintas versiones. La estructura y marca se comprueban, pero NO existe autenticación mediante firma digital. El SHA-256 solo verifica integridad, no procedencia. Riesgo de instalar una versión incorrecta, desconexión o fallo; no apagar el reloj.", color = AvoColors.Warn)
                 Row(horizontalArrangement = Arrangement.Start) {
                     Checkbox(checked = userAccepts, onCheckedChange = { userAccepts = it })
                     Text("Acepto el riesgo y confirmo que no hay entrenamientos activos")
