@@ -6,6 +6,13 @@ import android.os.Build
 import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
+import android.nfc.NfcAdapter
+import android.nfc.tech.Ndef
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -77,6 +84,72 @@ object Perms {
 }
 
 class MainActivity : ComponentActivity() {
+    private val nfcAdapter by lazy { NfcAdapter.getDefaultAdapter(this) }
+    private var nfcReadBusy = java.util.concurrent.atomic.AtomicBoolean(false)
+    private var lastNfcRead = 0L
+
+    /** NFC identity reader stays active on every AVO screen while the activity is resumed. */
+    fun enableGlobalNfc() {
+        if (nfcAdapter?.isEnabled != true || !lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)) return
+        nfcAdapter?.enableReaderMode(this, NfcAdapter.ReaderCallback { tag ->
+            val now = android.os.SystemClock.elapsedRealtime()
+            if (now - lastNfcRead < 1500L || !nfcReadBusy.compareAndSet(false, true)) return@ReaderCallback
+            lastNfcRead = now
+            lifecycleScope.launch {
+                try {
+                    val uri = withContext(Dispatchers.IO) {
+                        val ndef = Ndef.get(tag) ?: return@withContext null
+                        ndef.connect()
+                        try { ndef.ndefMessage?.records?.firstNotNullOfOrNull { it.toUri() } }
+                        finally { ndef.close() }
+                    }
+                    if (uri?.scheme != "avohorse" || uri.host != "identity") return@launch
+                    val type = uri.pathSegments.getOrNull(0)
+                    val code = uri.pathSegments.getOrNull(1) ?: return@launch
+                    if (type != "horse" && type != "rider") return@launch
+                    val c = (application as AvoApp).container
+                    val status = c.watch.status.value
+                    if (status?.session == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING ||
+                        status?.session == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED ||
+                        status?.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING) {
+                        android.widget.Toast.makeText(this@MainActivity, "NFC: entrenamiento activo; no se cambia identidad", android.widget.Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                    val horse = withContext(Dispatchers.IO) { c.db.horses().all().first().firstOrNull { it.code == code } }
+                    val rider = withContext(Dispatchers.IO) { c.db.riders().all().first().firstOrNull { it.code == code } }
+                    if ((type == "horse" && horse == null) || (type == "rider" && rider == null)) {
+                        android.widget.Toast.makeText(this@MainActivity, "NFC: ficha no encontrada en el móvil", android.widget.Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                    val horseId = if (type == "horse") horse!!.id else c.settings.selectedHorseId
+                    val riderId = if (type == "rider") rider!!.id else c.settings.selectedRiderId
+                    if (type == "horse") c.settings.selectedHorseId = horseId
+                    if (type == "rider") c.settings.selectedRiderId = riderId
+                    val selectedHorse = withContext(Dispatchers.IO) { c.db.horses().byId(horseId) }
+                    val selectedRider = withContext(Dispatchers.IO) { c.db.riders().byId(riderId) }
+                    val feedback = if (selectedHorse == null || selectedRider == null) "NFC guardado; falta seleccionar caballo o jinete"
+                        else {
+                            val error = withContext(Dispatchers.IO) { c.config.setIdentity(selectedHorse.id, selectedHorse.code, selectedRider.id, selectedRider.code) }
+                            if (error == null) "NFC: identidad enviada al reloj" else "NFC seleccionado; BLE: $error"
+                        }
+                    android.widget.Toast.makeText(this@MainActivity, feedback, android.widget.Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    android.widget.Toast.makeText(this@MainActivity, "NFC: ${e.message ?: "error de lectura"}", android.widget.Toast.LENGTH_LONG).show()
+                } finally { nfcReadBusy.set(false) }
+            }
+        }, NfcAdapter.FLAG_READER_NFC_A or NfcAdapter.FLAG_READER_NFC_B, null)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        enableGlobalNfc()
+    }
+
+    override fun onPause() {
+        nfcAdapter?.disableReaderMode(this)
+        super.onPause()
+    }
+
     private var incomingAvo by mutableStateOf<Uri?>(null)
 
     override fun onNewIntent(intent: Intent) {
