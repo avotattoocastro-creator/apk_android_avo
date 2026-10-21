@@ -129,6 +129,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 } else {
                     KV("Zona", marine!!.location)
                     KV("Tendencia", marine!!.tideTrend)
+                    KV("Coeficiente", marine!!.tideCoefficient?.toString() ?: "Pendiente de fuente oficial")
                     KV("Nivel respecto al medio", marine!!.levelMsl?.let { "%.2f m".format(it) })
                     KV("Oleaje", marine!!.waveM?.let { "%.2f m".format(it) })
                     KV("Periodo", marine!!.wavePeriodS?.let { "%.1f s".format(it) })
