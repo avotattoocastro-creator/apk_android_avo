@@ -1,6 +1,6 @@
 package org.avoperformance.horse.maps
 
-import org.osmdroid.tileprovider.MapTileIndex
+import org.osmdroid.util.MapTileIndex
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase
 
 /**
