@@ -520,8 +520,8 @@ private fun SynchronizedChart(
     onSelect: (Int) -> Unit
 ) {
     if (values.size < 2) return
-    var zoom by remember(values) { mutableStateOf(1f) }
-    var center by remember(values) { mutableStateOf(0.5f) }
+    var zoom by remember { mutableStateOf(1f) }
+    var center by remember { mutableStateOf(0.5f) }
     val low = minOf(values.minOrNull() ?: 0.0, 0.0)
     val high = maxOf(values.maxOrNull() ?: 1.0, 0.0)
     val span = (high-low).coerceAtLeast(0.001)
@@ -549,7 +549,8 @@ private fun SynchronizedChart(
         }
     ) {
         val path = Path()
-        for (i in first..end) {
+        val drawStride = ((end - first) / 1500).coerceAtLeast(1)
+        for (i in first..end step drawStride) {
             val x = size.width * (i-first) / (end-first).coerceAtLeast(1)
             val y = (size.height * (1-(values[i]-low)/span)).toFloat().coerceIn(0f,size.height)
             if (i==first) path.moveTo(x,y) else path.lineTo(x,y)
