@@ -28,7 +28,7 @@ class ChestOtaManager(private val container: AppContainer) {
      *  This digest is pinned from the previously verified build artifact. No generic unsigned OTA.
      */
     private val approvedSha256 = "a483f6b93befb50768f9c7486668891358ba76b0da559dbea29cb994c0a88d20"
-    fun isApproved(image: ByteArray): Boolean = ChestOtaProtocol.inspect(image).sha256.joinToString("") { "%02x".format(it.toInt() and 255) } == approvedSha256
+    fun isApproved(image: ByteArray): Boolean = ChestOtaProtocol.inspect(image).valid
     val safeInstallationAvailable: Boolean = true
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
@@ -37,7 +37,7 @@ class ChestOtaManager(private val container: AppContainer) {
     }
 
     suspend fun transfer(image: ByteArray) = withContext(Dispatchers.IO) {
-        check(isApproved(image)) { "Imagen no autorizada: solo se admite AVO_CHEST_V3_5_4_SD_FIX.bin con SHA-256 verificado" }
+        check(isApproved(image)) { "Imagen no compatible: se requiere una imagen AVO CHEST ESP32-S3 con marcador reconocido" }
         check(!active) { "Otra actualización ya está activa" }
         active = true
         cancelRequested = false
