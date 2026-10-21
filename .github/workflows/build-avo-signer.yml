@@ -1,5 +1,9 @@
 name: Build AVO Signer Android APK
 on:
+  pull_request:
+    paths:
+      - 'avo-signer/**'
+      - '.github/workflows/build-avo-signer.yml'
   workflow_dispatch:
   push:
     branches:
