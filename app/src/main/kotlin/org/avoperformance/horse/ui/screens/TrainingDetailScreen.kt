@@ -12,6 +12,18 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.ui.viewinterop.AndroidView
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.util.BoundingBox
+import org.osmdroid.util.GeoPoint as OsmPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.MapEventsOverlay
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polyline
+import org.osmdroid.views.overlay.CopyrightOverlay
 import androidx.compose.ui.unit.IntOffset
 import kotlin.math.hypot
 import kotlin.math.roundToInt
@@ -217,6 +229,8 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
     val pts = a.track
     if (pts.size < 2) return
     var colorBySpeed by remember(a) { mutableStateOf(true) }
+    var useMap by remember(a) { mutableStateOf(true) }
+    var recenterToken by remember(a) { mutableIntStateOf(0) }
 
     var scale by remember(a) { mutableStateOf(1f) }
     var pan by remember(a) { mutableStateOf(Offset.Zero) }
@@ -230,11 +244,19 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilterChip(selected = colorBySpeed, onClick = { colorBySpeed = true }, label = { Text("Velocidad") })
         FilterChip(selected = !colorBySpeed, onClick = { colorBySpeed = false }, label = { Text("RTK") })
-        OutlinedButton(onClick = { scale = 1f; pan = Offset.Zero }) { Text("Centrar") }
+        OutlinedButton(onClick = { scale = 1f; pan = Offset.Zero; recenterToken++ }) { Text("Centrar") }
     }
-    Note("Pellizca para ampliar, arrastra para moverte y toca un punto de la trayectoria.")
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FilterChip(selected = useMap, onClick = { useMap = true }, label = { Text("Mapa real") })
+        FilterChip(selected = !useMap, onClick = { useMap = false }, label = { Text("Plano offline") })
+    }
     val selectedNow = selection
-    Canvas(
+    if (useMap) {
+        Note("Cartografía OpenStreetMap. Zoom con dos dedos, desplaza el mapa y toca el recorrido para seleccionar un punto. Necesita Internet para nuevas zonas; las teselas descargadas quedan en caché.")
+        RealTrackMap(a, selection, colorBySpeed, recenterToken, onSelect)
+    } else {
+        Note("Pellizca para ampliar, arrastra para moverte y toca un punto de la trayectoria.")
+        Canvas(
         Modifier.fillMaxWidth().height(340.dp).background(AvoColors.Surface2)
             .pointerInput(a, scale, pan) {
                 detectTapGestures { touch ->
@@ -283,6 +305,7 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
             drawCircle(AvoColors.Gold, radius=10f, center=at(index))
             drawCircle(Color.White, radius=3.5f, center=at(index))
         }
+        }
     }
     selectedNow?.takeIf { it in pts.indices }?.let { i ->
         val item = pts[i]
@@ -290,6 +313,139 @@ private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, onSelect: (In
         KV("Tiempo desde inicio GNSS", "%.1f s".format((item.itowMs-pts.first().itowMs)/1000.0))
         KV("Velocidad", "%.2f km/h".format(item.speedMs*3.6))
         KV("Estado RTK", when(item.carrSoln) {2->"FIX";1->"FLOAT";else->"Sin solución RTK"})
+    }
+}
+
+/** MapView keeps its camera when the palette changes; overlays are rebuilt only when required. */
+private class TrackMapRender(
+    val analysis: TrainingAnalysis,
+    var bySpeed: Boolean,
+    var marker: Marker? = null,
+    var recenterToken: Int,
+)
+
+@Composable
+private fun RealTrackMap(
+    analysis: TrainingAnalysis,
+    selectedIndex: Int?,
+    bySpeed: Boolean,
+    recenterToken: Int,
+    onSelect: (Int) -> Unit,
+) {
+    val onSelectLatest by rememberUpdatedState(onSelect)
+    val mapRef = remember(analysis) { mutableStateOf<MapView?>(null) }
+
+    DisposableEffect(mapRef) {
+        onDispose {
+            mapRef.value?.onPause()
+            mapRef.value?.onDetach()
+        }
+    }
+
+    AndroidView(
+        modifier = Modifier.fillMaxWidth().height(360.dp),
+        factory = { context ->
+            MapView(context).apply {
+                setTileSource(TileSourceFactory.MAPNIK)
+                setMultiTouchControls(true)
+                controller.setZoom(16.0)
+                onResume()
+                mapRef.value = this
+            }
+        },
+        update = { map ->
+            var render = map.tag as? TrackMapRender
+            val resetBounds = render == null || render.analysis !== analysis
+            if (resetBounds || render?.bySpeed != bySpeed) {
+                map.overlays.clear()
+                render = TrackMapRender(analysis, bySpeed, recenterToken = recenterToken)
+                map.tag = render
+
+                map.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
+                    override fun singleTapConfirmedHelper(tap: OsmPoint): Boolean {
+                        val touch = map.projection.toPixels(tap, android.graphics.Point())
+                        var nearest = -1
+                        var minDistance = Double.MAX_VALUE
+                        analysis.track.forEachIndexed { i, point ->
+                            val xy = map.projection.toPixels(OsmPoint(point.p.lat, point.p.lon), android.graphics.Point())
+                            val distance = hypot((xy.x - touch.x).toDouble(), (xy.y - touch.y).toDouble())
+                            if (distance < minDistance) {
+                                nearest = i
+                                minDistance = distance
+                            }
+                        }
+                        val maxTapPx = 48.0 * map.resources.displayMetrics.density
+                        if (nearest >= 0 && minDistance <= maxTapPx) {
+                            onSelectLatest(nearest)
+                            return true
+                        }
+                        return false
+                    }
+
+                    override fun longPressHelper(tap: OsmPoint): Boolean = false
+                }))
+                addColoredRoute(map, analysis, bySpeed)
+                map.overlays.add(CopyrightOverlay(map.context))
+            }
+
+            val display = render ?: return@AndroidView
+            if (resetBounds || display.recenterToken != recenterToken) {
+                display.recenterToken = recenterToken
+                val track = analysis.track
+                val north = track.maxOf { it.p.lat } + 0.00012
+                val south = track.minOf { it.p.lat } - 0.00012
+                val east = track.maxOf { it.p.lon } + 0.00012
+                val west = track.minOf { it.p.lon } - 0.00012
+                map.post { map.zoomToBoundingBox(BoundingBox(north, east, south, west), false, 48) }
+            }
+
+            val selected = selectedIndex?.takeIf { it in analysis.track.indices }
+            if (selected == null) {
+                display.marker?.let { map.overlays.remove(it) }
+                display.marker = null
+            } else {
+                val point = analysis.track[selected]
+                val marker = display.marker ?: Marker(map).also {
+                    it.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    display.marker = it
+                    map.overlays.add(it)
+                }
+                marker.position = OsmPoint(point.p.lat, point.p.lon)
+                marker.title = "Punto " + (selected + 1) + " · " + "%.2f km/h".format(point.speedMs * 3.6)
+            }
+            map.invalidate()
+        },
+    )
+}
+
+/**
+ * Bound overlay count to approximately 650 polylines, even for 5000 GNSS samples,
+ * while retaining all GPS positions inside each polyline segment.
+ */
+private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean) {
+    val track = a.track
+    if (track.size < 2) return
+    val stride = ((track.size - 2) / 650 + 1).coerceAtLeast(1)
+    val speedMax = track.maxOf { it.speedMs }.coerceAtLeast(0.1)
+    var start = 1
+    while (start < track.size) {
+        val end = (start + stride - 1).coerceAtMost(track.lastIndex)
+        val midpoint = track[(start + end) / 2]
+        val lineColor = if (bySpeed) {
+            val fraction = (midpoint.speedMs / speedMax).toFloat().coerceIn(0f, 1f)
+            android.graphics.Color.HSVToColor(floatArrayOf(210f * (1f - fraction), 0.90f, 0.96f))
+        } else when (midpoint.carrSoln) {
+            2 -> android.graphics.Color.rgb(43, 190, 107)
+            1 -> android.graphics.Color.rgb(255, 182, 48)
+            else -> android.graphics.Color.rgb(165, 165, 175)
+        }
+        val points = (start - 1..end).map { i -> OsmPoint(track[i].p.lat, track[i].p.lon) }
+        map.overlays.add(Polyline(map).apply {
+            setPoints(points)
+            outlinePaint.color = lineColor
+            outlinePaint.strokeWidth = 5f * map.resources.displayMetrics.density
+        })
+        start = end + 1
     }
 }
 
