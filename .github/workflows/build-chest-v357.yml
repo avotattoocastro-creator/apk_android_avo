@@ -1,0 +1,68 @@
+name: Build AVO CHEST V3.5.7 Signed OTA
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/chest/V3_5_7/**'
+      - 'firmware/chest/V3_5_6/**'
+      - 'firmware/chest/V3_5_5/**'
+      - '.github/workflows/build-chest-v357.yml'
+permissions:
+  contents: read
+jobs:
+  chest-v357:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure reviewed V3.5.7 patch is present
+        run: |
+          test -s firmware/chest/V3_5_7/apply_v357.py || {
+            echo "::error::V3.5.7 receiver patch is not yet committed; refusing to build an incorrectly labelled firmware."
+            exit 1
+          }
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 toolchain
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Apply reviewed source changes in version order
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/chest"
+          unzip -q firmware/chest/V3_5_4/AVO_CHEST_V3_5_4_SD_FIX_SOURCES.zip -d "$RUNNER_TEMP/chest"
+          cd "$RUNNER_TEMP/chest"
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_5/apply_v355.py"
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_6/apply_v356.py"
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_7/apply_v357.py"
+          grep -q '3.5.7' lib/avo_core/src/avo_version.h
+          grep -q 'OTA_AUTH' lib/avo_core/src/avo_ble_proto.h
+          grep -q 'authenticate' AVO_CHEST_V3_5_0/src/ota.cpp
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Validate built image
+        shell: bash
+        run: |
+          set -euo pipefail
+          find firmware_out -maxdepth 2 -type f -print
+          image="$(find firmware_out -maxdepth 2 -type f -name '*.bin' ! -name '*bootloader*' ! -name '*partitions*' ! -name '*merged*' | head -n 1)"
+          test -n "$image" && test -s "$image"
+          python3 - "$image" <<'PY'
+          import sys,hashlib,pathlib
+          p=pathlib.Path(sys.argv[1]); b=p.read_bytes()
+          assert b[0]==0xE9, "not an ESP application image"
+          assert b"V3.5.7-SIGNED-OTA" in b, "missing V3.5.7 build fingerprint"
+          print("SHA256",hashlib.sha256(b).hexdigest(),"bytes",len(b))
+          PY
+          cp "$image" firmware_out/AVO_CHEST_V3_5_7_SIGNED_OTA.bin
+          sha256sum firmware_out/AVO_CHEST_V3_5_7_SIGNED_OTA.bin > firmware_out/AVO_CHEST_V3_5_7_SIGNED_OTA.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-CHEST-V3-5-7-BUILD
+          path: |
+            firmware_out/AVO_CHEST_V3_5_7_SIGNED_OTA.bin
+            firmware_out/AVO_CHEST_V3_5_7_SIGNED_OTA.sha256
+            firmware_out/build.log
+          if-no-files-found: warn
