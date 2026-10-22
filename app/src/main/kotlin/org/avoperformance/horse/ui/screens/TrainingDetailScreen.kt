@@ -166,8 +166,8 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         }
         if (selectedTab == "Resumen") item {
             AvoCard("ENTRENAMIENTO · AVO PERFORMANCE HORSE") {
-                KV("Caballo", tt.horseCode.ifBlank { "Sin asignar" })
-                KV("Jinete", tt.riderCode.ifBlank { "Sin asignar" })
+                KV("Caballo", tt.horseCode?.takeIf { it.isNotBlank() } ?: "Sin asignar")
+                KV("Jinete", tt.riderCode?.takeIf { it.isNotBlank() } ?: "Sin asignar")
                 KV("Fecha", Fmt.date(tt.startRtcMs))
                 KV("Duración registrada", Fmt.duration(tt.activeMs))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
