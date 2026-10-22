@@ -32,6 +32,8 @@ class ChestOtaManager(private val container: AppContainer) {
         return verified
     }
     fun isApproved(packageBytes: ByteArray): Boolean = runCatching { inspectSignedPackage(packageBytes); true }.getOrDefault(false)
+    @Volatile private var positiveAuthVersion: String? = null
+    val positiveAuthorizationConfirmed: Boolean get() = positiveAuthVersion != null
     val safeInstallationAvailable: Boolean = false // Watch-side signature enforcement and anti-rollback not yet proven
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
@@ -56,6 +58,28 @@ class ChestOtaManager(private val container: AppContainer) {
             else -> "Resultado no concluyente: ${response.statusEnum.texto}"
         }
         report("Diagnóstico OTA_AUTH", result)
+        result
+    }
+
+    /** Checks a genuine signature on the watch without sending OTA_BEGIN or firmware data. */
+    suspend fun probeValidAuthorization(packageBytes: ByteArray): String = withContext(Dispatchers.IO) {
+        check(!active) { "Hay una operación OTA activa" }
+        positiveAuthVersion = null
+        val verified = inspectSignedPackage(packageBytes)
+        val watch = container.watch
+        check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
+        check(watch.info.value?.firmware == "3.5.7") { "Prueba limitada a CHEST 3.5.7" }
+        val response = watch.client!!.request(
+            MsgType.OTA_AUTH, ChestOtaProtocol.authPayload(verified.manifest, verified.signature),
+            Idempotency.STATE_CHANGING, 12000, 0
+        )
+        val result = if (response.statusEnum == BleStatus.OK) {
+            positiveAuthVersion = verified.version
+            "CONFIRMADO: el reloj aceptó OTA_AUTH para ${verified.version}; no se ha enviado firmware"
+        } else {
+            "NO AUTORIZADO: respuesta del reloj ${response.statusEnum.texto}"
+        }
+        report("Diagnóstico OTA_AUTH válido", result)
         result
     }
 
