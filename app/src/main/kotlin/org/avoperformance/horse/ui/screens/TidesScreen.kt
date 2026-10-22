@@ -67,15 +67,19 @@ private suspend fun fetchTides(): TideData = withContext(Dispatchers.IO) {
     } catch (_: Exception) { emptyList() }
     TideData(sea, weather, System.currentTimeMillis())
 }
+/** Parabolic interpolation of hourly model samples: estimated minute, not official tide-table time. */
 private fun extrema(points: List<SeaPoint>): List<Extremum> = points.windowed(3).mapNotNull { triple ->
     val a = triple[0].sea ?: return@mapNotNull null
     val b = triple[1].sea ?: return@mapNotNull null
     val c = triple[2].sea ?: return@mapNotNull null
-    when {
-        b >= a && b > c -> Extremum(triple[1].date, b, true)
-        b <= a && b < c -> Extremum(triple[1].date, b, false)
-        else -> null
-    }
+    val high = b >= a && b > c
+    val low = b <= a && b < c
+    if (!high && !low) return@mapNotNull null
+    val denominator = a - 2 * b + c
+    val shift = if (kotlin.math.abs(denominator) < 1e-9) 0.0
+        else ((a - c) / (2 * denominator)).coerceIn(-0.5, 0.5)
+    val interpolated = b - denominator * shift * shift / 2.0
+    Extremum(triple[1].date.plusMinutes((shift * 60).roundToInt().toLong()), interpolated, high)
 }
 private fun moonPhase(date: LocalDate): String {
     val days = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.of(2000, 1, 6), date).toDouble()
@@ -126,6 +130,62 @@ private fun TideCurve(points: List<SeaPoint>, now: LocalDateTime, modifier: Modi
     }
 }
 @Composable
+private fun TideGauge(points: List<SeaPoint>, now: LocalDateTime, next: Extremum?) {
+    val current = points.lastOrNull { it.date <= now }?.sea
+    val values = points.mapNotNull { it.sea }
+    if (current == null || values.size < 3) {
+        Text("Nivel del mar no disponible")
+        return
+    }
+    val lo = values.minOrNull() ?: current
+    val hi = values.maxOrNull() ?: current
+    val fraction = ((current - lo) / (hi - lo).coerceAtLeast(.01)).toFloat().coerceIn(0f, 1f)
+    val index = points.indexOfLast { it.date <= now }
+    val before = points.getOrNull(index - 1)?.sea
+    val rising = before != null && current > before
+    Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.width(80.dp).height(200.dp).background(Color(0xFF142B37), RoundedCornerShape(12.dp))) {
+            Box(Modifier.fillMaxWidth().fillMaxHeight(fraction).align(Alignment.BottomCenter)
+                .background(if (rising) Color(0xFF197D64) else Color(0xFF237DAD), RoundedCornerShape(10.dp)))
+            Text(if (rising) "↑" else "↓", color = Color.White,
+                style = MaterialTheme.typography.headlineLarge, modifier = Modifier.align(Alignment.Center))
+        }
+        Spacer(Modifier.width(18.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(if (rising) "SUBIENDO ↑" else "BAJANDO ↓", color = aqua, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Text("Nivel estimado: ${current.show("m", 2)}", style = MaterialTheme.typography.titleLarge)
+            Text("Rango previsto: ${lo.show("m", 2)} / ${hi.show("m", 2)}")
+            if (next != null) {
+                val remaining = Duration.between(now, next.date).toMinutes().coerceAtLeast(0)
+                Text("Próxima ${if (next.high) "pleamar" else "bajamar"}: ${next.date.format(fmtHour)}", fontWeight = FontWeight.Bold)
+                Text("Faltan ${remaining / 60} h ${remaining % 60} min", color = gold)
+            }
+        }
+    }
+    Text("Escala relativa al rango del modelo, NO altura oficial sobre cero de carta.", style = MaterialTheme.typography.labelSmall)
+}
+@Composable
+private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate) {
+    val days = (0..6).map { firstDay.plusDays(it.toLong()) }
+    days.forEach { date ->
+        val rows = extremes.filter { it.date.toLocalDate() == date }
+        Text(date.format(DateTimeFormatter.ofPattern("EEE d MMM", es)).uppercase(es),
+            color = gold, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 12.dp, bottom = 4.dp))
+        if (rows.isEmpty()) Text("Sin predicción disponible", style = MaterialTheme.typography.bodySmall)
+        rows.forEach { e ->
+            Row(Modifier.fillMaxWidth().background(
+                if (e.high) Color(0xFF603536) else Color(0xFF28573E),
+                RoundedCornerShape(4.dp)).padding(horizontal = 10.dp, vertical = 9.dp),
+                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text(if (e.high) "▲ Pleamar" else "▼ Bajamar", modifier = Modifier.weight(1f))
+                Text(e.date.format(fmtHour), fontWeight = FontWeight.Bold, modifier = Modifier.width(65.dp))
+                Text(e.height.show("m", 2), modifier = Modifier.width(82.dp))
+            }
+            Spacer(Modifier.height(3.dp))
+        }
+    }
+}
+@Composable
 private fun Metric(title: String, value: String, modifier: Modifier = Modifier) {
     Column(modifier.padding(vertical = 5.dp)) {
         Text(title, style = MaterialTheme.typography.labelMedium, color = Color.LightGray)
@@ -171,7 +231,7 @@ fun TidesScreen() {
         LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (tab == 0) {
                 item {
-                    AvoCard("ESTADO DE LA MAREA · MODELO") {
+                    AvoCard("ESTADO DE LA MAREA · MODELO") {\n                        TideGauge(all, now, next)
                         val before = all.getOrNull((all.indexOf(current) - 1).coerceAtLeast(0))?.sea
                         val trend = if (current?.sea != null && before != null && current.sea > before) "SUBIENDO ↑" else if (current?.sea != null && before != null && current.sea < before) "BAJANDO ↓" else "SIN TENDENCIA"
                         Text(trend, color = aqua, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
@@ -238,6 +298,63 @@ fun TidesScreen() {
                             }
                         }
                         if (selectedEx.isEmpty()) Text("No hay extremos calculados para este día")
+                    }
+                }
+            } else {
+                item {
+                    AvoCard("OLEAJE") {
+                        Metric("Altura de ola", current?.wave.show("m"))
+                        Metric("Período", current?.period.show("s"))
+                        Metric("Dirección", current?.direction.show("°", 0))
+                        Metric("Temperatura del agua", current?.temp.show("°C"))
+                    }
+                }
+                item {
+                    AvoCard("VIENTO Y METEOROLOGÍA") {
+                        Metric("Viento", weather?.wind.show("km/h"))
+                        Metric("Rachas", weather?.gust.show("km/h"))
+                        Metric("Dirección", weather?.direction.show("°", 0))
+                        Metric("Temperatura ambiente", weather?.air.show("°C"))
+                        Metric("Precipitación horaria", weather?.rain.show("mm"))
+                    }
+                }
+            }
+            item {
+                AvoCard("DATOS Y PRECISIÓN") {
+                    Text("Fuentes: Open-Meteo Marine y Open-Meteo Weather. Datos previstos/modelados, NO mareógrafo en directo ni tabla oficial IHM.", style = MaterialTheme.typography.bodySmall)
+                    Text("Extremos aproximados calculados con muestras horarias. Modelo oceánico de resolución limitada en estuarios. No usar para navegación ni seguridad.", style = MaterialTheme.typography.bodySmall)
+                    data?.let { Text("Actualizado: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(it.fetched))}", style = MaterialTheme.typography.labelSmall) }
+                }
+            }
+        }
+    }
+}
+
+/** Explicit opt-in snapshot: forecast model values, never labeled as measured tide. */
+suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org.avoperformance.horse.data.TrainingMarineEntity {
+    val forecast = fetchTides()
+    val at = java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDateTime()
+    val point = forecast.sea.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
+        ?: error("No hay previsión marina disponible")
+    val delta = kotlin.math.abs(java.time.Duration.between(point.date, at).toHours())
+    require(delta <= 2) { "El entrenamiento está fuera de los 7 días de previsión. No se inventarán datos históricos." }
+    val w = forecast.weather.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
+    val previous = forecast.sea.getOrNull(forecast.sea.indexOf(point) - 1)?.sea
+    val trend = if (point.sea == null || previous == null) "DESCONOCIDA"
+        else if (point.sea > previous) "SUBIENDO" else if (point.sea < previous) "BAJANDO" else "ESTABLE"
+    return org.avoperformance.horse.data.TrainingMarineEntity(
+        sessionId = sessionId, location = "El Regatón, Laredo",
+        sampleMs = point.date.atZone(zone).toInstant().toEpochMilli(),
+        source = "Open-Meteo Marine/Weather · modelo, no medición",
+        levelMsl = point.sea, waveM = point.wave, wavePeriodS = point.period,
+        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend
+    )
+}                item {
+                    AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
+                        Text("Horas interpoladas del modelo · alturas respecto al nivel medio, no al cero de carta.",
+                            style = MaterialTheme.typography.bodySmall)
+                        Text("Coeficiente oficial: sin fuente conectada", color = gold)
+                        MultiDayTable(ex, LocalDate.now(zone))
                     }
                 }
             } else {
