@@ -177,7 +177,7 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          VERSION="V1_8_Integrada"
+          VERSION="V1_9_Integrada"
           if [ "$GITHUB_REF_NAME" = "feature/android-v1-9-nfc-segments" ]; then VERSION="V1_9_Pruebas"; fi
           OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
@@ -188,7 +188,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-${{ github.ref_name == 'feature/android-v1-9-nfc-segments' && 'V1-9-Pruebas' || 'V1-8-Integrada' }}-APK
+          name: AVO-Performance-Horse-${{ github.ref_name == 'feature/android-v1-9-nfc-segments' && 'V1-9-Pruebas' || 'V1-9-Integrada' }}-APK
           path: out/
           if-no-files-found: error
           retention-days: 30
