@@ -1,0 +1,29 @@
+name: Audit AVO CHEST V3.6.1 before release
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/chest/V3_6_1/**'
+      - '.github/workflows/audit-chest-v361.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct firmware source and apply patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/chest"
+          unzip -q firmware/chest/V3_5_4/AVO_CHEST_V3_5_4_SD_FIX_SOURCES.zip -d "$RUNNER_TEMP/chest"
+          cd "$RUNNER_TEMP/chest"
+          for version in 5 6 7 8 9; do
+            python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_${version}/apply_v35${version}.py"
+          done
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_6_0/apply_v360.py"
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_6_1/apply_v361.py"
+      - name: Status
+        run: echo 'All mandatory V3.6.1 UI checks passed; hardware tests and signing still required'
