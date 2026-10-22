@@ -325,29 +325,18 @@ fun TidesScreen() {
                 }
             } else if (tab == 1) {
                 item {
-                    AvoCard("SELECCIONA UN DÍA") {
-                        Text(selected.format(DateTimeFormatter.ofPattern("EEEE d 'de' MMMM", es)).replaceFirstChar { it.uppercase() }, style = MaterialTheme.typography.titleLarge)
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            TextButton(onClick = { selected = selected.minusDays(1) }, enabled = selected > LocalDate.now(zone)) { Text("‹ Anterior") }
-                            TextButton(onClick = { selected = LocalDate.now(zone) }) { Text("Hoy") }
-                            TextButton(onClick = { selected = selected.plusDays(1) }, enabled = selected < LocalDate.now(zone).plusDays(6)) { Text("Siguiente ›") }
-                        }
-                        Text("Fase lunar aproximada: ${moonPhase(selected)}")
-                        Text("Coeficiente: sin dato oficial disponible", color = gold)
-                    }
-                }
-                item { AvoCard("CURVA DEL DÍA") { TideCurve(day, now, Modifier.fillMaxWidth()) } }
-                item {
-                    AvoCard("TABLA DEL DÍA · COEF. PENDIENTE") {
-                        val selectedEx = ex.filter { it.date.toLocalDate() == selected }
-                        selectedEx.forEach { e ->
-                            Row(Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text(if (e.high) "Pleamar ▲" else "Bajamar ▼")
-                                Text(e.date.format(fmtHour), fontWeight = FontWeight.Bold)
-                                Text(e.height.show("m", 2))
+                    AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
+                        Text("Predicciones del modelo; altura respecto al nivel medio.", style = MaterialTheme.typography.bodySmall)
+                        if (officialWeek.isNotEmpty()) {
+                            Text("Coeficientes y alturas oficiales de Santander (referencia regional)", color = gold)
+                            officialWeek.forEach { entry ->
+                                Text(entry.date.toString() + " · Coef. 0h/12h: " + entry.coefficient0 + " / " + entry.coefficient12, color = gold)
+                                MultiDayTable(entry.events, entry.date, 1)
                             }
+                        } else {
+                            Text("Coeficiente oficial no disponible", color = gold)
+                            MultiDayTable(ex, LocalDate.now(zone))
                         }
-                        if (selectedEx.isEmpty()) Text("No hay extremos calculados para este día")
                     }
                 }
             } else {
@@ -401,62 +390,5 @@ suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org
         waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend,
         tideCoefficient = officialDay?.let { if (at.hour < 12) it.coefficient0 else it.coefficient12 },
         coefficientSource = if (officialDay != null) "Puerto de Santander · predicción astronómica, referencia Santander" else null
-    )
-}                item {
-                    AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
-                        Text("Horas interpoladas del modelo · alturas respecto al nivel medio, no al cero de carta.",
-                            style = MaterialTheme.typography.bodySmall)
-                        Text("Coeficiente oficial: sin fuente conectada", color = gold)
-                        MultiDayTable(ex, LocalDate.now(zone))
-                    }
-                }
-            } else {
-                item {
-                    AvoCard("OLEAJE") {
-                        Metric("Altura de ola", current?.wave.show("m"))
-                        Metric("Período", current?.period.show("s"))
-                        Metric("Dirección", current?.direction.show("°", 0))
-                        Metric("Temperatura del agua", current?.temp.show("°C"))
-                    }
-                }
-                item {
-                    AvoCard("VIENTO Y METEOROLOGÍA") {
-                        Metric("Viento", weather?.wind.show("km/h"))
-                        Metric("Rachas", weather?.gust.show("km/h"))
-                        Metric("Dirección", weather?.direction.show("°", 0))
-                        Metric("Temperatura ambiente", weather?.air.show("°C"))
-                        Metric("Precipitación horaria", weather?.rain.show("mm"))
-                    }
-                }
-            }
-            item {
-                AvoCard("DATOS Y PRECISIÓN") {
-                    Text("Fuentes: Open-Meteo Marine y Open-Meteo Weather. Datos previstos/modelados, NO mareógrafo en directo ni tabla oficial IHM.", style = MaterialTheme.typography.bodySmall)
-                    Text("Extremos aproximados calculados con muestras horarias. Modelo oceánico de resolución limitada en estuarios. No usar para navegación ni seguridad.", style = MaterialTheme.typography.bodySmall)
-                    data?.let { Text("Actualizado: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(it.fetched))}", style = MaterialTheme.typography.labelSmall) }
-                }
-            }
-        }
-    }
-}
-
-/** Explicit opt-in snapshot: forecast model values, never labeled as measured tide. */
-suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org.avoperformance.horse.data.TrainingMarineEntity {
-    val forecast = fetchTides()
-    val at = java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDateTime()
-    val point = forecast.sea.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
-        ?: error("No hay previsión marina disponible")
-    val delta = kotlin.math.abs(java.time.Duration.between(point.date, at).toHours())
-    require(delta <= 2) { "El entrenamiento está fuera de los 7 días de previsión. No se inventarán datos históricos." }
-    val w = forecast.weather.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
-    val previous = forecast.sea.getOrNull(forecast.sea.indexOf(point) - 1)?.sea
-    val trend = if (point.sea == null || previous == null) "DESCONOCIDA"
-        else if (point.sea > previous) "SUBIENDO" else if (point.sea < previous) "BAJANDO" else "ESTABLE"
-    return org.avoperformance.horse.data.TrainingMarineEntity(
-        sessionId = sessionId, location = "El Regatón, Laredo",
-        sampleMs = point.date.atZone(zone).toInstant().toEpochMilli(),
-        source = "Open-Meteo Marine/Weather · modelo, no medición",
-        levelMsl = point.sea, waveM = point.wave, wavePeriodS = point.period,
-        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend
     )
 }
