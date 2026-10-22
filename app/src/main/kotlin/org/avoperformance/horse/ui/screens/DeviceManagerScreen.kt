@@ -138,7 +138,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     ota.events.takeLast(8).forEach { Note(it) }
                 }
                 Text("OTA ES256: firma y autorización previas obligatorias. Tras diagnóstico PREPARADO, inicia en 30 s. Hash final y recuperación se comprueban durante la actualización y reinicio.", color = AvoColors.Warn)
-                OutlinedButton(enabled = androidVerified && c.watch.isReady && info?.firmware == "3.5.7", onClick = {
+                OutlinedButton(enabled = androidVerified && c.watch.isReady && info?.supportsOta == true, onClick = {
                     val pkg = selectedImage ?: return@OutlinedButton
                     scope.launch {
                         positiveDiagnostic = "Consultando autorización del reloj..."
@@ -157,7 +157,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                 Text(preflightDiagnostic, modifier = Modifier.fillMaxWidth())
                 Text("PRUEBA NEGATIVA · HISTORIAL SEPARADO", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
                 Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
-                OutlinedButton(enabled = c.watch.isReady && info?.firmware == "3.5.7", onClick = {
+                OutlinedButton(enabled = c.watch.isReady && info?.supportsOta == true, onClick = {
                     scope.launch {
                         authDiagnostic = "Comprobando rechazo..."
                         authDiagnostic = runCatching { c.chestOta.probeInvalidAuthorization() }
