@@ -103,7 +103,7 @@ private fun parseOfficialTable(html: String): List<OfficialDay> {
         val values = cells.drop(dateIndex)
         val date = runCatching { LocalDate.parse(values[0], dateFormat) }.getOrNull() ?: return@mapNotNull null
         // Date, moon phase, high1 time/height, high2 time/height, coefficient 0h/12h, low1 time/height, low2 time/height.
-        val offset = if (values.size >= 12) 2 else 1
+        val offset = 1 // Fecha seguida de fase lunar y 10 columnas numéricas/horarias; no desplazar por columnas extra
         if (values.size < offset + 10) return@mapNotNull null
         val c0 = values[offset + 4].toIntOrNull() ?: return@mapNotNull null
         val c12 = values[offset + 5].toIntOrNull() ?: return@mapNotNull null
@@ -113,7 +113,7 @@ private fun parseOfficialTable(html: String): List<OfficialDay> {
             event(date, values[offset + 6], values[offset + 7], false),
             event(date, values[offset + 8], values[offset + 9], false)
         ).sortedBy { it.date }
-        if (events.isEmpty()) null else OfficialDay(date, c0, c12, events)
+        if (events.isEmpty() || c0 !in 0..120 || c12 !in 0..120) null else OfficialDay(date, c0, c12, events)
     }.toList().distinctBy { it.date }
 }
 private suspend fun fetchOfficialDays(): List<OfficialDay> = withContext(Dispatchers.IO) {
@@ -123,7 +123,7 @@ private suspend fun fetchOfficialDays(): List<OfficialDay> = withContext(Dispatc
     try {
         if (conn.responseCode !in 200..299) return@withContext emptyList()
         val html = conn.inputStream.bufferedReader().use { it.readText() }
-        parseOfficialTable(html)
+        parseOfficialTable(html).filter { it.date >= LocalDate.now(zone).minusDays(1) && it.date <= LocalDate.now(zone).plusDays(7) }
     } finally { conn.disconnect() }
 }
 private fun moonPhase(date: LocalDate): String {
@@ -300,6 +300,7 @@ fun TidesScreen() {
         }
         if (error != null) Text("Sin actualización: $error", color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(12.dp))
         if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
+        if (!loading && official.isEmpty()) Text("Tabla oficial de Santander no disponible para estas fechas. Se muestran solo estimaciones del modelo.", color = gold, modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp))
         LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (tab == 0) {
                 item {
