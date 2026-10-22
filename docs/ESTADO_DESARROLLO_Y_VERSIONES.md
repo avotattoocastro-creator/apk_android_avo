@@ -30,3 +30,26 @@ El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. E
 4. No mezclar en una sola afirmación código incorporado, CI correcto y validación física: son estados distintos.
 5. Conservar las ramas históricas como respaldo hasta validar una versión conjunta.
 6. Actualizar README y este documento al introducir una nueva versión o cambiar el contrato OTA.
+
+## Evidencias verificables y niveles de validación (22/10/2026)
+
+**Definiciones obligatorias para README, versiones y entregas:**
+
+- **IMPLEMENTADO:** existen fuentes o cambios en el repositorio. No implica que compile ni que funcione en un dispositivo.
+- **COMPILADO / CI:** GitHub Actions ha terminado correctamente para un SHA concreto. Una ejecución de otra rama no valida la rama actual.
+- **PROBADO FÍSICAMENTE:** hay una prueba documentada con dispositivo real, versión, resultado y evidencia. Sin ella, consignar **NO VERIFICADO**.
+
+| Subsistema | Implementado en rama unificada | Compilado / CI | Probado físicamente |
+| --- | --- | --- | --- |
+| Android V1.9 | Sí | **Sí, solo SHA previo a fusión `3b05022b`** (run `39749862683`); **sin CI confirmada de rama unificada** | **No verificado** con APK integrada |
+| Pantalla mareas y Open-Meteo | Sí | Incluido en compilación Android previa | **No verificado** en móvil; tabla oficial y exactitud pendientes |
+| Instantáneas marítimas de entrenos | Sí | Incluido en compilación Android previa | **No verificado** con entrenamiento real |
+| Verificador de ZIP firmado ES256 Android | Sí | Incluido en compilación Android previa | **No verificado** en dispositivo ni integrado en OTA segura de extremo a extremo |
+| Firmware CHEST V3.5.4–V3.5.6 | Fuentes y parches integrados | **No consta CI de la rama unificada** | **No verificado** para esta integración; no confundir con pruebas de versiones históricas |
+| CHEST V3.5.7 y `OTA_AUTH` | **No** | **No** | **No** |
+| AVO Signer V0.1 | Sí | CI de rama Signer previa a fusión; no de rama unificada | **No verificado** en teléfono para flujo completo y restauración de clave |
+| ESPALDA y CINCHA | **No integrados** | **No** | **No** |
+
+**Fuente de evidencia CI Android previa:** [run 39749862683](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39749862683). **Integraciones:** [PR #4](https://github.com/avotattoocastro-creator/apk_android_avo/pull/4) y [PR #5](https://github.com/avotattoocastro-creator/apk_android_avo/pull/5). La rama actual incorpora además cambios de documentación; no atribuirle el CI de la rama original.
+
+**Política de publicación:** ningún README debe usar «definitiva», «probada» o «OTA segura» solo por existir código o por una compilación correcta. Una APK debug es un artefacto de pruebas, no una release firmada de producción. Registrar SHA exacto y evidencias antes de cambiar cualquiera de estas celdas.
