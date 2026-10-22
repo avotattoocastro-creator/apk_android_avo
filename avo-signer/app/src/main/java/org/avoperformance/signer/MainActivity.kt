@@ -72,19 +72,19 @@ class MainActivity : Activity() {
             orientation=LinearLayout.VERTICAL; setPadding(dp(14),dp(18),dp(14),dp(18))
             background=bg(navy,24)
         }
-        root.addView(label("AVO PERFORMANCE",12,Color.LTGRAY))
-        root.addView(label("AVO PERFOMANCE\nSINGER KEY",26,Color.WHITE,true).apply {
+        root.addView(label("AVO PERFORMANCE",12f,Color.LTGRAY))
+        root.addView(label("AVO PERFOMANCE\nSINGER KEY",26f,Color.WHITE,true).apply {
             setPadding(0,dp(5),0,dp(18))
         })
         val identity=LinearLayout(this).apply {
             orientation=LinearLayout.VERTICAL; setPadding(dp(16),dp(16),dp(16),dp(16))
             background=bg(tile,18)
         }
-        identity.addView(label("♢  Identidad de firma",20,Color.WHITE,true))
+        identity.addView(label("♢  Identidad de firma",20f,Color.WHITE,true))
         identity.addView(label(if(ks.containsAlias(alias)) "Clave local disponible" else "Sin clave oficial activada",18).apply {
             setPadding(0,dp(14),0,dp(6))
         })
-        status=label("Configura y respalda tu clave antes de publicar firmware",14,Color.LTGRAY)
+        status=label("Configura y respalda tu clave antes de publicar firmware",14f,Color.LTGRAY)
         identity.addView(status)
         root.addView(identity)
         val space=View(this).apply { layoutParams=LinearLayout.LayoutParams(1,dp(14)) }
@@ -119,8 +119,8 @@ class MainActivity : Activity() {
                         }
                     }
                 }
-                cell.addView(label(symbol,28,blue,true).apply { gravity=Gravity.CENTER })
-                cell.addView(label(name,15,Color.WHITE,true).apply {
+                cell.addView(label(symbol,28f,blue,true).apply { gravity=Gravity.CENTER })
+                cell.addView(label(name,15f,Color.WHITE,true).apply {
                     gravity=Gravity.CENTER; setPadding(0,dp(9),0,0)
                 })
                 row.addView(cell,LinearLayout.LayoutParams(0,dp(116),1f).apply {
@@ -136,7 +136,7 @@ class MainActivity : Activity() {
             setSingleLine(true)
         }
         root.addView(version)
-        root.addView(label("Las funciones aún no implementadas aparecen identificadas como pendientes.",12,Color.LTGRAY).apply {
+        root.addView(label("Las funciones aún no implementadas aparecen identificadas como pendientes.",12f,Color.LTGRAY).apply {
             gravity=Gravity.CENTER; setPadding(dp(6),dp(14),dp(6),0)
         })
         setContentView(ScrollView(this).apply {
