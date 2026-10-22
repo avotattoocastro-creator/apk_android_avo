@@ -39,6 +39,26 @@ class ChestOtaManager(private val container: AppContainer) {
         _state.value = old.copy(phase = phase, events = (old.events + note).takeLast(20))
     }
 
+    /** Non-flashing diagnostic: malformed authorization must be rejected by the watch. */
+    suspend fun probeInvalidAuthorization(): String = withContext(Dispatchers.IO) {
+        check(!active) { "Hay una operación OTA activa" }
+        val watch = container.watch
+        check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
+        check(watch.info.value?.firmware == "3.5.7") { "Diagnóstico limitado a CHEST 3.5.7" }
+        val payload = ChestOtaProtocol.authPayload(
+            "{\"schema\":\"avo-ota-manifest-v1\"}".toByteArray(Charsets.UTF_8),
+            ByteArray(70)
+        )
+        val response = watch.client!!.request(MsgType.OTA_AUTH, payload, Idempotency.STATE_CHANGING, 12000, 0)
+        val result = when (response.statusEnum) {
+            BleStatus.VERIFY_FAILED -> "CORRECTO: el reloj rechazó la firma inválida (VERIFY_FAILED)"
+            BleStatus.OK -> "FALLO DE SEGURIDAD: el reloj aceptó una firma inválida; OTA bloqueada"
+            else -> "Resultado no concluyente: ${response.statusEnum.texto}"
+        }
+        report("Diagnóstico OTA_AUTH", result)
+        result
+    }
+
     suspend fun transfer(packageBytes: ByteArray) = withContext(Dispatchers.IO) {
         check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }
         val verified = inspectSignedPackage(packageBytes)
