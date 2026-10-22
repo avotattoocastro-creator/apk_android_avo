@@ -53,3 +53,13 @@ El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. E
 **Fuente de evidencia CI Android previa:** [run 39749862683](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39749862683). **Integraciones:** [PR #4](https://github.com/avotattoocastro-creator/apk_android_avo/pull/4) y [PR #5](https://github.com/avotattoocastro-creator/apk_android_avo/pull/5). La rama actual incorpora además cambios de documentación; no atribuirle el CI de la rama original.
 
 **Política de publicación:** ningún README debe usar «definitiva», «probada» o «OTA segura» solo por existir código o por una compilación correcta. Una APK debug es un artefacto de pruebas, no una release firmada de producción. Registrar SHA exacto y evidencias antes de cambiar cualquiera de estas celdas.
+
+## Ensayo físico comunicado — CHEST V3.5.7 (22/10/2026)
+
+**Dispositivo observado:** AVO_1E8C (Waveshare CHEST). El usuario realizó apagado mediante pulsación POWER prolongada y encendido mediante POWER durante aproximadamente 3 segundos. La aplicación Android volvió a conectar/autorizó por BLE y mostró **firmware 3.5.7**, batería **80 %** y **microSD montada**. Se dispone de fotografía de la pantalla aportada en la conversación.
+
+**Resultado comprobado:** persistencia de la versión anunciada **3.5.7** tras **un ciclo de apagado y encendido**, y reconexión BLE con lectura de información. No se ha comprobado la partición de arranque internamente ni repetido múltiples ciclos.
+
+**No comprobado:** rechazo de OTA sin firma, `OTA_AUTH` positivo/negativo, firma manipulada, anti-rollback, recuperación ante interrupción, instalación firmada posterior, enlace espalda o cincha. La fotografía indica **espalda sin enlace** y **cincha sin datos**. No declarar el flujo OTA firmado validado.
+
+**Android OTA:** `OTA_AUTH (0x54)`, preservación de bytes firmados y envío de autorización antes de `OTA_BEGIN` implementados en commits `006a1935`, `8c4e467c`, `41445e7d` y `38f51fc7`; CI Android del último commit [39761875218](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39761875218) finalizó correctamente. **Sin ensayo físico de OTA_AUTH.** La instalación sigue bloqueada por `safeInstallationAvailable=false` hasta prueba de seguridad.
