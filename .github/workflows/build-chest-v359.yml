@@ -1,0 +1,56 @@
+name: Build AVO CHEST V3.5.9 OTA Diagnostics
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/chest/V3_5_9/**'
+      - '.github/workflows/build-chest-v359.yml'
+permissions:
+  contents: read
+jobs:
+  chest-v359:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 platform
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Build V3.5.9 from verified version chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/chest"
+          unzip -q firmware/chest/V3_5_4/AVO_CHEST_V3_5_4_SD_FIX_SOURCES.zip -d "$RUNNER_TEMP/chest"
+          cd "$RUNNER_TEMP/chest"
+          for version in 5 6 7 8 9; do
+            python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_${version}/apply_v35${version}.py"
+          done
+          grep -q '3.5.9' lib/avo_core/src/avo_version.h
+          grep -q 'V3.5.9-OTA-HARDENED' AVO_CHEST_V3_5_0/src/build_info.h
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Validate OTA binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          image="$(find firmware_out -maxdepth 2 -type f -name '*.bin' ! -name '*bootloader*' ! -name '*partitions*' ! -name '*merged*' | head -n 1)"
+          test -n "$image" && test -s "$image"
+          python3 - "$image" <<'PY'
+          import sys,hashlib,pathlib
+          b=pathlib.Path(sys.argv[1]).read_bytes()
+          assert b[0]==0xE9
+          assert b"V3.5.9-OTA-HARDENED" in b
+          print("SHA256",hashlib.sha256(b).hexdigest(),"size",len(b))
+          PY
+          cp "$image" firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.bin
+          sha256sum firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.bin > firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-CHEST-V3-5-9-BIN
+          path: |
+            firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.bin
+            firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.sha256
+          if-no-files-found: error
