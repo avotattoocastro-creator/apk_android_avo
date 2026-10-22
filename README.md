@@ -1,42 +1,54 @@
-# AVO Performance Horse — Android V1.8 (desarrollo)
+# AVO Performance Horse — desarrollo unificado (22/10/2026)
 
-Aplicación Android para el reloj de pecho Waveshare ESP32-S3 y el chaleco AVO.
+Repositorio conjunto para la aplicación Android, el firmware de pecho y la herramienta de firma OTA.
 
-## Rama activa de desarrollo
+## Rama activa
 
-- **Código Kotlin editable** en `app/` y `core/` de `feature/android-v1-4-ota-pecho`.
-- **Rama `main`**: versión anterior V1.3; no es la versión más reciente de Android.
-- Los ZIP V1.0–V1.8 permanecen únicamente como copias históricas; se compila el código editable de la raíz del proyecto.
-- El fichero de GitHub Actions es `.github/workflows/build-android.yml`.
+**`develop/avo-performance-horse`** es la rama de integración compartida entre los chats de Android y firmware. La rama `main` y las ramas históricas no representan el estado más reciente. No modificar una rama histórica esperando que sus cambios aparezcan automáticamente en la rama unificada.
 
-## Funciones incorporadas
+## Versiones de los componentes
 
-- Enlace BLE permanente al reloj, reconexión tras apagar y encender Bluetooth, transferencia RTCM/NTRIP.
-- Inicio/parada de grabación, geocercas, sesiones de microSD y sincronización.
-- Análisis GNSS con resumen, reproducción, gráficos sincronizados, selección por punto, zoom y pan.
-- Recorrido sobre mapa real OpenStreetMap con colores por velocidad y RTK; plano local sin conexión como alternativa.
-- Nueva selección Calles/Satélite con teselas Esri World Imagery, atribución de fuentes visible y conservación del punto elegido y zoom al cambiar la base; disponibilidad sujeta a condiciones del proveedor.
-- Importación y exportación de entrenamientos `.avo` por el menú Compartir (WhatsApp compatible): ID de sesión, metadatos de caballo y jinete y resolución de duplicados.
-- Favoritos de destinatarios y copia portátil de configuración, excluyendo contraseñas NTRIP y claves de autorización BLE.
-- No molestar automático opcional: permiso especial Android, solo grabación confirmada por geocerca, sin afectar sesiones manuales, recuperación al finalizar o perder BLE; Android 15 usa una regla propia.
+| Componente | Versión en código | Estado comprobado |
+| --- | --- | --- |
+| App Android AVO Performance Horse | **1.9** (`versionCode=11`) | Compilación y pruebas CI correctas para el commit Android `3b05022b`; falta prueba integral en móvil |
+| Módulo de mareas | Incluido en Android 1.9 | Interfaz, modelo Open-Meteo y lector de tabla de Santander en código; extracción de datos oficiales actuales no validada |
+| Metadatos marítimos de entrenamientos | Android 1.9 | Persistencia y enriquecimiento de sesiones recientes incorporados; falta ensayo con sesión real |
+| Firmware CHEST Waveshare ESP32-S3 | **V3.5.6** (última fuente/parche integrada) | Fuentes V3.5.4 y parches V3.5.5/V3.5.6 disponibles; no se afirma prueba de firma en hardware |
+| Firmware CHEST V3.5.7 | **No integrado ni validado** | Pendiente de firmware receptor con validación ES256, control de versión y recuperación |
+| AVO Signer Android | **V0.1 prototipo** | Código y vectores de prueba ES256 integrados; no es firma de producción |
+| Verificador de paquetes OTA Android | Formato `avo-ota-manifest-v1`, ES256 | Código integrado, clave pública fijada; no equivale a autorización del reloj |
+| Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
 
-## Compilar y probar
+## Estructura
 
-GitHub Actions ejecuta:
-1. `./gradlew --no-daemon :core:test`
-2. `./gradlew --no-daemon :app:testDebugUnitTest --tests 'org.avoperformance.horse.dnd.GeofenceDndGateTest'`
-3. `./gradlew --no-daemon :app:assembleDebug`
+- `app/`: aplicación Android Kotlin/Jetpack Compose, BLE, GNSS, entrenamientos y mareas.
+- `core/`: protocolo compartido y pruebas JVM.
+- `firmware/chest/V3_5_4/`: ZIP de fuentes del firmware base.
+- `firmware/chest/V3_5_5/` y `V3_5_6/`: scripts de parche sucesivos.
+- `avo-signer/`: aplicación independiente para firmar paquetes OTA y documentación de seguridad.
+- `docs/`: requisitos y estado de validación.
+- `.github/workflows/`: compilaciones Android, CHEST y Signer.
 
-Tras éxito se entrega el artefacto **AVO-Performance-Horse-V1-8-Integrada-APK** (APK debug y SHA-256).
+## Compilación
 
-[Compilaciones de GitHub Actions](https://github.com/avotattoocastro-creator/apk_android_avo/actions)
+La app Android usa `./gradlew --no-daemon :core:test :app:assembleDebug`. El flujo de CI Android incluye pruebas adicionales; los artefactos de GitHub Actions son APK de **depuración**, no publicaciones de producción. El último CI Android confirmado antes de fusionar las ramas es el del commit `3b05022b`; **la rama unificada necesita una ejecución de integración propia**.
 
-## Lo que todavía no se debe dar por validado
+[Acciones de GitHub](https://github.com/avotattoocastro-creator/apk_android_avo/actions)
 
-La compilación automatizada **no equivale** a prueba integral en un teléfono Android y hardware AVO reales. Faltan verificaciones BLE/NTRIP con el reloj, detección de sesión y geocerca, permiso DND por modelo de Android, importación WhatsApp y mapa sin/con conexión.
+## Seguridad OTA: límite actual
 
-La capa de servidor en `AppContainer` sigue siendo `NotConfiguredServer`: no se han inventado endpoints para la subida automática. Hace falta integrar el contrato HTTP real antes de dar por completada esa función.
+La verificación de firma en Android no sustituye la verificación en el dispositivo. **No desbloquear la instalación OTA firmada** hasta demostrar en el reloj la autenticación del manifiesto, integridad del BIN, coincidencia del hardware, anti-rollback, selección de partición y persistencia tras apagado/reinicio. El gestor Android mantiene `safeInstallationAvailable=false`. La herramienta Signer no debe incorporar claves privadas al repositorio.
 
-## Seguridad
+## Funciones Android existentes
 
-Este repositorio es público. No incorporar credenciales NTRIP, secretos del servidor, tokens de acceso, claves de firma ni datos reales de usuarios. El artefacto generado es **debug**, no una publicación firmada de producción.
+BLE/NTRIP, RTK/GNSS, sesiones SD, geocercas, visualización de entrenamientos, mapas, importación/exportación .avo, selección caballo/jinete, favoritos, DND y módulo de mareas. La presencia de código no implica que todas las funciones hayan pasado pruebas reales. La subida automática al servidor sigue requiriendo verificar el contrato HTTP configurado; no afirmar sincronización real si el servidor está `NotConfiguredServer`.
+
+## Próximos criterios de aceptación
+
+1. CI de integración de la rama unificada sin fallos.
+2. Validación de tabla oficial de mareas con datos actuales y origen visible; no confundir referencia Santander con medición en El Regatón.
+3. Prueba Android ↔ reloj físico: BLE, NTRIP, SD, entrenamiento, geocerca y reinicio.
+4. Firmware V3.5.7 con verificación de firmas en el receptor, pruebas de rechazo y recuperación.
+5. APK de distribución firmada con clave de publicación controlada, distinta de la APK debug.
+
+No almacenar credenciales NTRIP, secretos de servidor, tokens ni claves privadas en GitHub.
