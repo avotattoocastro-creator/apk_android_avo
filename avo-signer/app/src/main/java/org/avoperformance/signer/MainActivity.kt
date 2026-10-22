@@ -39,6 +39,7 @@ class MainActivity : Activity() {
     private lateinit var version: EditText
     private var firmware: ByteArray? = null
     private var output: ByteArray? = null
+    private var publicKeyExport: ByteArray? = null
     private val maxFirmwareBytes = 6 * 1024 * 1024
 
     private val navy = Color.rgb(12,25,41)
@@ -110,6 +111,7 @@ class MainActivity : Activity() {
             state.text=if(vault.exists()) "Clave recuperable disponible" else if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada"
         }
         item("Exportar clave pública","Compartir clave pública SPKI JSON") { exportPublicKey() }
+        item("Guardar clave pública JSON","Guardar archivo en Descargas o carpeta elegida") { savePublicKeyJson() }
         item("Diagnóstico de seguridad","Comprobar protección hardware") { diagnose() }
         item("Crear clave recuperable","Generar identidad nueva y copia cifrada") { createRecoverable() }
         item("Importar clave cifrada","Recuperar identidad desde .avo-key") { importKey() }
@@ -391,6 +393,16 @@ class MainActivity : Activity() {
             "Clave protegida por hardware Android Keystore"
         else "ATENCIÓN: Android no confirma protección hardware para esta clave"
     } catch(e:Exception) { status.text="Diagnóstico fallido: ${e.message}" }
+    private fun savePublicKeyJson() = try {
+        val pub=if(vault.exists()) vault.publicKey().encoded else ks.getCertificate(alias)?.publicKey?.encoded ?: error("No hay clave")
+        publicKeyExport=JSONObject().put("format","avo-public-key-v1").put("alg","ES256")
+            .put("kid",if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias)
+            .put("spki_der_base64",Base64.getEncoder().encodeToString(pub)).toString(2).toByteArray(Charsets.UTF_8)
+        startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            type="application/json"; addCategory(Intent.CATEGORY_OPENABLE)
+            putExtra(Intent.EXTRA_TITLE,"AVO_PUBLIC_KEY_ES256.json")
+        },106)
+    } catch(e:Exception) { status.text="Error: ${e.message}" }
     private fun exportPublicKey() = try {
         val pub=if(vault.exists()) vault.publicKey().encoded else ks.getCertificate(alias)?.publicKey?.encoded ?: error("No hay clave")
         val json=JSONObject().put("format","avo-public-key-v1").put("alg","ES256")
@@ -479,6 +491,7 @@ class MainActivity : Activity() {
                 103 -> { val uri=data?.data ?: error("Falta destino"); val backup=backupToExport ?: vault.encryptedBackup(); contentResolver.openOutputStream(uri)?.use { it.write(backup) } ?: error("No se pudo guardar la copia"); backupToExport=null; auditPrefs.edit().putBoolean("backup_exported",true).apply(); audit("Copia cifrada exportada"); status.text="Copia cifrada exportada" }
                 104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); auditPrefs.edit().putString("backup_verified",java.util.Base64.getEncoder().encodeToString(vault.publicKey().encoded)).putBoolean("backup_exported",true).apply(); audit("Clave importada y verificada"); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
                 105 -> { val uri=data?.data ?: error("Falta ZIP"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); verifyPackage(bytes) }
+                106 -> { val uri=data?.data ?: error("Destino inválido"); val bytes=publicKeyExport ?: error("Sin JSON"); contentResolver.openOutputStream(uri,"w")?.use { it.write(bytes) } ?: error("No se pudo guardar JSON"); publicKeyExport=null; status.text="Clave pública JSON guardada" }
                 102 -> {
                     val uri=data?.data ?: error("Destino inválido")
                     contentResolver.openOutputStream(uri,"w")?.use { it.write(output ?: error("No hay ZIP")) }
