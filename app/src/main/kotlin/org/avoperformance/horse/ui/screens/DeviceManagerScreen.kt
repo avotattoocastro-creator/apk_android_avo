@@ -126,7 +126,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Text("2. Autorización recibida del reloj", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
                     Text(if (watchAuthorized) positiveDiagnostic else "No confirmada · el rechazo VERIFY_FAILED no es una autorización positiva")
                     Text("3. Firmware listo para instalar", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
-                    Text(if (readyToInstall) "Listo" else "Bloqueado · falta validación de seguridad en el reloj")
+                    Text(if (readyToInstall) "Preflight correcto · disponible durante 30 s" else "Bloqueado · comprueba condiciones previas y diagnóstico")
                 }
                 KV("Estado OTA", ota.phase)
                 if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
@@ -137,7 +137,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Text("Diagnóstico OTA (confirmaciones y reinicio)")
                     ota.events.takeLast(8).forEach { Note(it) }
                 }
-                Text("OTA firmada ES256: el reloj debe autorizar el manifiesto antes de recibir firmware. La instalación sigue bloqueada hasta completar las pruebas de seguridad.", color = AvoColors.Warn)
+                Text("OTA ES256: firma y autorización previas obligatorias. Tras diagnóstico PREPARADO, inicia en 30 s. Hash final y recuperación se comprueban durante la actualización y reinicio.", color = AvoColors.Warn)
                 OutlinedButton(enabled = androidVerified && c.watch.isReady && info?.firmware == "3.5.7", onClick = {
                     val pkg = selectedImage ?: return@OutlinedButton
                     scope.launch {
@@ -171,7 +171,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                 Button(enabled = readyToInstall && userAccepts && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
                     val firmware = selectedImage ?: return@Button
                     scope.launch { runCatching { c.chestOta.transfer(firmware) }.onFailure { error = it.message } }
-                }) { Text("Instalar OTA firmada (pendiente validación)") }
+                }) { Text("Instalar OTA firmada V3.5.8") }
                 OutlinedButton(onClick = { c.chestOta.cancel() }) { Text("Solicitar cancelación") }
                 KV("OTA espalda", "No compatible todavía")
                 Note("No borra ni formatea la microSD. La versión posterior y la conservación de sesiones requieren comprobación física. Detén NTRIP antes de actualizar.")
