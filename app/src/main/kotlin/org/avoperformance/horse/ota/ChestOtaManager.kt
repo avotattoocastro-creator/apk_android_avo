@@ -62,7 +62,6 @@ class ChestOtaManager(private val container: AppContainer) {
         positiveAuthDigest = null
         val watch = container.watch
         check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
-        check(watch.info.value?.firmware == "3.5.7") { "Diagnóstico limitado a CHEST 3.5.7" }
         val payload = ChestOtaProtocol.authPayload(
             "{\"schema\":\"avo-ota-manifest-v1\"}".toByteArray(Charsets.UTF_8),
             ByteArray(70)
@@ -86,7 +85,6 @@ class ChestOtaManager(private val container: AppContainer) {
         val verified = inspectSignedPackage(packageBytes)
         val watch = container.watch
         check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
-        check(watch.info.value?.firmware == "3.5.7") { "Prueba limitada a CHEST 3.5.7" }
         val response = watch.client!!.request(
             MsgType.OTA_AUTH, ChestOtaProtocol.authPayload(verified.manifest, verified.signature),
             Idempotency.STATE_CHANGING, 12000, 0
@@ -112,7 +110,6 @@ class ChestOtaManager(private val container: AppContainer) {
         val watch = container.watch
         if (!watch.isReady || watch.client == null) failures += "Reloj BLE desconectado"
         if (watch.info.value?.supportsOta != true) failures += "Capacidad OTA no anunciada"
-        if (watch.info.value?.firmware != "3.5.7") failures += "Versión de origen no validada (requiere 3.5.7)"
         if (!positiveAuthorizationFor(packageBytes)) failures += "Falta OTA_AUTH positivo para este ZIP exacto"
         if (container.ntrip.running) failures += "NTRIP activo"
         if (container.sync.isBusy) failures += "Sincronización de entrenamientos en curso"
@@ -152,7 +149,6 @@ class ChestOtaManager(private val container: AppContainer) {
             require(precheck.valid) { precheck.reason }
             val watch = container.watch
             check(watch.isReady) { "Pecho sin conexión/autorización" }
-            check(watch.info.value?.firmware == "3.5.7") { "Versión de origen no validada" }
             check(positiveAuthorizationFor(packageBytes)) { "OTA_AUTH previo no confirmado para este ZIP" }
             check(watch.info.value?.supportsOta == true) { "Firmware sin capacidad OTA anunciada" }
             val status = watch.client!!.getStatus()
