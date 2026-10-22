@@ -109,7 +109,7 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
         }
         item {
             AvoCard("Gestor de dispositivos y firmware") {
-                Note("Actualización OTA BLE experimental solo para firmware V3.5.4 SHA-256 autorizado.")
+                Note("OTA firmada ES256 para CHEST V3.5.7 y posteriores. La instalación requiere autorización del reloj y validación de seguridad.")
                 OutlinedButton(onClick = { go("dispositivos") }) { Text("Ver dispositivos y OTA") }
             }
         }
