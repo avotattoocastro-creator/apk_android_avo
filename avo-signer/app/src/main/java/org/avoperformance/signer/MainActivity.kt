@@ -14,6 +14,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.text.InputType
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.security.*
@@ -26,6 +27,8 @@ import java.util.zip.ZipOutputStream
 class MainActivity : Activity() {
     private val alias = "AVO_OTA_SIGNING_P256_V1"
     private val ks = KeyStore.getInstance("AndroidKeyStore")
+    private val vault by lazy { SecureKeyVault(this) }
+    private var backupToExport:ByteArray?=null
     private lateinit var status: TextView
     private lateinit var identityState: TextView
     private var page = "home"
@@ -68,7 +71,7 @@ class MainActivity : Activity() {
     }
     private fun refreshIdentity() {
         if(::identityState.isInitialized) identityState.text =
-            if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo"
+            if(vault.exists()) "Clave recuperable cifrada disponible" else if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo"
             else "Sin clave oficial activada"
     }
     private fun showKeys() {
@@ -84,7 +87,7 @@ class MainActivity : Activity() {
             label(t,size,color).apply { setPadding(0,dp(8),0,dp(12)) }
         p.addView(textLine("‹  Volver",18f,blue).apply { setOnClickListener { showHome() } })
         p.addView(textLine("Mis claves",27f))
-        val state=textLine(if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada",17f,mint)
+        val state=textLine(if(vault.exists()) "Clave recuperable disponible" else if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada",17f,mint)
         p.addView(state)
         p.addView(textLine("Las claves Keystore no permiten exportar la parte privada. La recuperación cifrada requerirá una clave nueva.",14f,Color.LTGRAY))
         fun item(title:String, detail:String, callback:()->Unit) {
@@ -100,12 +103,13 @@ class MainActivity : Activity() {
         }
         item("Crear clave Keystore","Protección local no exportable") {
             createKey()
-            state.text=if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada"
+            state.text=if(vault.exists()) "Clave recuperable disponible" else if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada"
         }
         item("Exportar clave pública","Compartir clave pública SPKI JSON") { exportPublicKey() }
         item("Diagnóstico de seguridad","Comprobar protección hardware") { diagnose() }
-        item("Importar clave · Pendiente","Recuperación cifrada en desarrollo") { unavailable("Importar clave") }
-        item("Exportar copia privada · Pendiente","No disponible para claves Keystore") { unavailable("Exportar copia privada") }
+        item("Crear clave recuperable","Generar identidad nueva y copia cifrada") { createRecoverable() }
+        item("Importar clave cifrada","Recuperar identidad desde .avo-key") { importKey() }
+        item("Exportar copia cifrada","Guardar respaldo .avo-key") { exportBackup() }
         status= textLine("No compartas ninguna clave privada.",13f,Color.LTGRAY)
         p.addView(status)
         setContentView(ScrollView(this).apply { addView(p) })
@@ -140,7 +144,7 @@ class MainActivity : Activity() {
             background=bg(tile,18)
         }
         identity.addView(label("♢  Identidad de firma",20f,Color.WHITE,true))
-        identityState=label(if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo" else "Sin clave oficial activada",18f).apply {
+        identityState=label(if(vault.exists()) "Clave recuperable cifrada disponible" else if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo" else "Sin clave oficial activada",18f).apply {
             setPadding(0,dp(14),0,dp(6))
         }
         identity.addView(identityState)
@@ -203,6 +207,45 @@ class MainActivity : Activity() {
             setBackgroundColor(navy); addView(root)
         })
     }
+
+    private fun passwordDialog(title:String, callback:(CharArray)->Unit) {
+        val field=EditText(this).apply {
+            inputType=InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            hint="Contraseña (mínimo 14 caracteres)"
+        }
+        android.app.AlertDialog.Builder(this).setTitle(title).setView(field)
+            .setNegativeButton("Cancelar",null)
+            .setPositiveButton("Continuar") { _,_ ->
+                val pass=field.text.toString().toCharArray()
+                try { callback(pass) } finally { pass.fill(0.toChar()); field.text.clear() }
+            }.show()
+    }
+    private fun createRecoverable() {
+        if(vault.exists()) { status.text="Ya existe clave recuperable"; return }
+        passwordDialog("Crear clave recuperable") { pass ->
+            try {
+                backupToExport=vault.generate(pass)
+                refreshIdentity()
+                status.text="Clave creada. Guarda la copia cifrada."
+                exportBackup()
+            } catch(e:Exception) { status.text="Error: "+e.message }
+        }
+    }
+    private fun exportBackup() {
+        try {
+            backupToExport=backupToExport ?: vault.encryptedBackup()
+            startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                type="application/octet-stream"; addCategory(Intent.CATEGORY_OPENABLE)
+                putExtra(Intent.EXTRA_TITLE,"AVO_SIGNING_RECOVERY.avo-key")
+            },103)
+        } catch(e:Exception) { status.text="Error: "+e.message }
+    }
+    private fun importKey() {
+        if(vault.exists()) { status.text="Ya existe clave recuperable; no se sobrescribe"; return }
+        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type="*/*"; addCategory(Intent.CATEGORY_OPENABLE)
+        },104)
+    }
     private fun createKey() { try {
         if (ks.containsAlias(alias)) { status.text="Clave ya existente. No se ha sustituido."; return }
         val gen=KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC,"AndroidKeyStore")
@@ -225,41 +268,43 @@ class MainActivity : Activity() {
         else "ATENCIÓN: Android no confirma protección hardware para esta clave"
     } catch(e:Exception) { status.text="Diagnóstico fallido: ${e.message}" }
     private fun exportPublicKey() = try {
-        val pub=ks.getCertificate(alias)?.publicKey?.encoded ?: error("No hay clave")
+        val pub=if(vault.exists()) vault.publicKey().encoded else ks.getCertificate(alias)?.publicKey?.encoded ?: error("No hay clave")
         val json=JSONObject().put("format","avo-public-key-v1").put("alg","ES256")
-            .put("kid",alias).put("spki_der_base64",Base64.getEncoder().encodeToString(pub)).toString(2)
+            .put("kid",if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias).put("spki_der_base64",Base64.getEncoder().encodeToString(pub)).toString(2)
         startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
             type="text/plain"; putExtra(Intent.EXTRA_TEXT,json)
         },"Exportar clave pública"))
     } catch(e:Exception) { status.text="Error: ${e.message}" }
     private fun authorize() {
         if(firmware==null) { status.text="Selecciona firmware"; return }
-        if(!ks.containsAlias(alias)) { status.text="Crea la clave primero"; return }
+        if(!vault.exists() && !ks.containsAlias(alias)) { status.text="Crea la clave primero"; return }
         val v=version.text.toString().trim()
         if(!Regex("[0-9]+\\.[0-9]+\\.[0-9]+([.-][A-Za-z0-9]+)*").matches(v)) {
             status.text="Indica una versión válida (ejemplo 3.5.6)"; return
         }
+        if(vault.exists()) { passwordDialog("Desbloquear clave") { pass -> sign(pass) }; return }
         val km=getSystemService(KEYGUARD_SERVICE) as KeyguardManager
         if(!km.isDeviceSecure) { status.text="Activa PIN o biometría en Android"; return }
         val auth=km.createConfirmDeviceCredentialIntent("Firmar firmware AVO","Confirma la identidad para autorizar la firma")
         if(auth==null) { status.text="Autenticación no disponible"; return }
         startActivityForResult(auth,101)
     }
-    private fun sign() = try {
+    private fun sign(password:CharArray?=null) = try {
         val bin=firmware ?: error("Falta BIN")
         val hash=MessageDigest.getInstance("SHA-256").digest(bin).joinToString("") { "%02x".format(it) }
         val manifest=JSONObject().put("schema","avo-ota-manifest-v1")
             .put("target","AVO_CHEST_WAVESHARE_ESP32S3")
             .put("version",version.text.toString().trim())
             .put("firmware","firmware.bin").put("size",bin.size)
-            .put("sha256",hash).put("alg","ES256").put("kid",alias)
+            .put("sha256",hash).put("alg","ES256").put("kid",if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias)
             .toString().toByteArray(Charsets.UTF_8)
-        val key=ks.getKey(alias,null) as PrivateKey
+        val pair=if(vault.exists()) vault.unlock(password ?: error("Se requiere contraseña")) else null
+        val key=pair?.private ?: ks.getKey(alias,null) as PrivateKey
         val signer=Signature.getInstance("SHA256withECDSA")
         signer.initSign(key); signer.update(manifest)
         val sig=signer.sign() // ASN.1 DER; verifier must use same encoding
         val check=Signature.getInstance("SHA256withECDSA")
-        check.initVerify(ks.getCertificate(alias).publicKey); check.update(manifest)
+        check.initVerify(pair?.public ?: ks.getCertificate(alias).publicKey); check.update(manifest)
         check.verify(sig) || error("La verificación local de firma falló")
         output=ByteArrayOutputStream().use { bytes ->
             ZipOutputStream(bytes).use { zip ->
@@ -300,6 +345,8 @@ class MainActivity : Activity() {
                     status.text="BIN seleccionado: ${bytes.size} bytes"
                 }
                 101 -> sign()
+                103 -> { val uri=data?.data ?: error("Falta destino"); contentResolver.openOutputStream(uri)?.use { it.write(backupToExport ?: vault.encryptedBackup()) }; backupToExport=null; status.text="Copia cifrada exportada" }
+                104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
                 102 -> {
                     val uri=data?.data ?: error("Destino inválido")
                     contentResolver.openOutputStream(uri,"w")?.use { it.write(output ?: error("No hay ZIP")) }
