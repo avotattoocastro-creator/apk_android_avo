@@ -8,6 +8,11 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyInfo
 import android.security.keystore.KeyProperties
 import android.widget.*
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.view.Gravity
+import android.view.View
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.security.*
@@ -26,33 +31,117 @@ class MainActivity : Activity() {
     private var output: ByteArray? = null
     private val maxFirmwareBytes = 6 * 1024 * 1024
 
+    private val navy = Color.rgb(12,25,41)
+    private val tile = Color.rgb(24,48,71)
+    private val blue = Color.rgb(118,185,255)
+    private val mint = Color.rgb(70,220,161)
+    private fun dp(n:Int)=(n*resources.displayMetrics.density).toInt()
+    private fun bg(color:Int, radius:Int=16)=GradientDrawable().apply {
+        setColor(color); cornerRadius=dp(radius).toFloat()
+    }
+    private fun label(t:String, size:Float, color:Int=Color.WHITE, bold:Boolean=false)=TextView(this).apply {
+        text=t; textSize=size; setTextColor(color)
+        if(bold) setTypeface(null,Typeface.BOLD)
+    }
+    private fun action(title:String, options:Array<String>, callbacks:Array<()->Unit>) {
+        android.app.AlertDialog.Builder(this).setTitle(title).setItems(options) { _,which -> callbacks[which]() }.show()
+    }
+    private fun pickFirmware() {
+        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type="*/*"; addCategory(Intent.CATEGORY_OPENABLE)
+        },100)
+    }
+    private fun savePackage() {
+        if(output==null) { status.text="Primero firma el firmware"; return }
+        startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            type="application/zip"; addCategory(Intent.CATEGORY_OPENABLE)
+            putExtra(Intent.EXTRA_TITLE,"AVO_CHEST_SIGNED_OTA.zip")
+        },102)
+    }
+    private fun unavailable(feature:String) {
+        android.app.AlertDialog.Builder(this).setTitle(feature)
+            .setMessage("Esta función está pendiente de implementación y validación. No se ha activado una protección inexistente.")
+            .setPositiveButton("Entendido",null).show()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ks.load(null)
-        val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32,48,32,32) }
-        layout.addView(TextView(this).apply { text="AVO SIGNER"; textSize=25f })
-        status = TextView(this).apply { text="Sin clave ni firmware seleccionado"; textSize=16f }
-        layout.addView(status)
-        version = EditText(this).apply { hint="Versión, por ejemplo 3.5.6"; setSingleLine(true) }
-        layout.addView(version)
-        fun addButton(label:String, callback:()->Unit) { layout.addView(Button(this).apply { text=label; setOnClickListener { callback() } }) }
-        addButton("1 · Crear clave privada") { createKey() }
-        addButton("2 · Exportar clave pública") { exportPublicKey() }
-        addButton("3 · Seleccionar firmware BIN") {
-            startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                type="*/*"; addCategory(Intent.CATEGORY_OPENABLE)
-            }, 100)
+        window.statusBarColor=navy
+        window.navigationBarColor=navy
+        val root=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL; setPadding(dp(14),dp(18),dp(14),dp(18))
+            background=bg(navy,24)
         }
-        addButton("4 · Autorizar y firmar") { authorize() }
-        addButton("5 · Guardar paquete OTA firmado") {
-            if (output==null) { status.text="Primero firma el firmware"; return@addButton }
-            startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                type="application/zip"; addCategory(Intent.CATEGORY_OPENABLE)
-                putExtra(Intent.EXTRA_TITLE,"AVO_CHEST_SIGNED_OTA.zip")
-            },102)
+        root.addView(label("AVO PERFORMANCE",12,Color.LTGRAY))
+        root.addView(label("AVO PERFOMANCE\nSINGER KEY",26,Color.WHITE,true).apply {
+            setPadding(0,dp(5),0,dp(18))
+        })
+        val identity=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL; setPadding(dp(16),dp(16),dp(16),dp(16))
+            background=bg(tile,18)
         }
-        addButton("Diagnóstico de seguridad de la clave") { diagnose() }
-        setContentView(ScrollView(this).apply { addView(layout) })
+        identity.addView(label("♢  Identidad de firma",20,Color.WHITE,true))
+        identity.addView(label(if(ks.containsAlias(alias)) "Clave local disponible" else "Sin clave oficial activada",18).apply {
+            setPadding(0,dp(14),0,dp(6))
+        })
+        status=label("Configura y respalda tu clave antes de publicar firmware",14,Color.LTGRAY)
+        identity.addView(status)
+        root.addView(identity)
+        val space=View(this).apply { layoutParams=LinearLayout.LayoutParams(1,dp(14)) }
+        root.addView(space)
+        val items=listOf(
+            Triple("⚿","Mis claves",0),Triple("▤","Firmar BIN",1),
+            Triple("⬡","Verificar OTA",2),Triple("⬡","Paquetes",3),
+            Triple("◴","Historial",4),Triple("⚙","Configuración",5)
+        )
+        val grid=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL }
+        items.chunked(2).forEach { pair ->
+            val row=LinearLayout(this).apply { orientation=LinearLayout.HORIZONTAL }
+            pair.forEach { (symbol,name,id) ->
+                val cell=LinearLayout(this).apply {
+                    orientation=LinearLayout.VERTICAL; gravity=Gravity.CENTER
+                    setPadding(dp(8),dp(18),dp(8),dp(18))
+                    background=bg(tile,16)
+                    isClickable=true
+                    setOnClickListener {
+                        when(id) {
+                            0 -> action("Mis claves",arrayOf("Crear clave Keystore","Exportar clave pública","Diagnóstico de seguridad","Importar copia de clave (pendiente)","Exportar copia privada (pendiente)"),arrayOf(
+                                {createKey()},{exportPublicKey()},{diagnose()},
+                                {unavailable("Importar copia de clave")},{unavailable("Exportar copia privada")}
+                            ))
+                            1 -> action("Firmar BIN",arrayOf("Seleccionar firmware BIN","Autorizar y firmar","Guardar ZIP firmado"),arrayOf(
+                                {pickFirmware()},{authorize()},{savePackage()}
+                            ))
+                            2 -> unavailable("Verificar OTA")
+                            3 -> unavailable("Paquetes")
+                            4 -> unavailable("Historial")
+                            5 -> unavailable("Configuración")
+                        }
+                    }
+                }
+                cell.addView(label(symbol,28,blue,true).apply { gravity=Gravity.CENTER })
+                cell.addView(label(name,15,Color.WHITE,true).apply {
+                    gravity=Gravity.CENTER; setPadding(0,dp(9),0,0)
+                })
+                row.addView(cell,LinearLayout.LayoutParams(0,dp(116),1f).apply {
+                    setMargins(dp(4),dp(4),dp(4),dp(4))
+                })
+            }
+            grid.addView(row)
+        }
+        root.addView(grid)
+        version=EditText(this).apply {
+            hint="Versión de firmware (ej. 3.5.6)"
+            setHintTextColor(Color.LTGRAY); setTextColor(Color.WHITE)
+            setSingleLine(true)
+        }
+        root.addView(version)
+        root.addView(label("Las funciones aún no implementadas aparecen identificadas como pendientes.",12,Color.LTGRAY).apply {
+            gravity=Gravity.CENTER; setPadding(dp(6),dp(14),dp(6),0)
+        })
+        setContentView(ScrollView(this).apply {
+            setBackgroundColor(navy); addView(root)
+        })
     }
     private fun createKey() { try {
         if (ks.containsAlias(alias)) { status.text="Clave ya existente. No se ha sustituido."; return }
