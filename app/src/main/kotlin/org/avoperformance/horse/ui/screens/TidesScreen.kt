@@ -281,7 +281,7 @@ fun TidesScreen() {
             if (tab == 0) {
                 item {
                     AvoCard("ESTADO DE LA MAREA · MODELO") {
-                        TideGauge(all, now, next)
+                        TideGauge(day, now, next)
                         val before = all.getOrNull((all.indexOf(current) - 1).coerceAtLeast(0))?.sea
                         val trend = if (current?.sea != null && before != null && current.sea > before) "SUBIENDO ↑" else if (current?.sea != null && before != null && current.sea < before) "BAJANDO ↓" else "SIN TENDENCIA"
                         Text(trend, color = aqua, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
@@ -371,8 +371,8 @@ fun TidesScreen() {
             }
             item {
                 AvoCard("DATOS Y PRECISIÓN") {
-                    Text("Fuentes: Open-Meteo Marine y Open-Meteo Weather. Datos previstos/modelados, NO mareógrafo en directo ni tabla oficial IHM.", style = MaterialTheme.typography.bodySmall)
-                    Text("Extremos aproximados calculados con muestras horarias. Modelo oceánico de resolución limitada en estuarios. No usar para navegación ni seguridad.", style = MaterialTheme.typography.bodySmall)
+                    Text("Fuentes: Open-Meteo Marine/Weather (modelo) y, cuando esté disponible, tabla astronómica de la Autoridad Portuaria de Santander. Santander es una referencia regional, NO una medición en El Regatón.", style = MaterialTheme.typography.bodySmall)
+                    Text("Los extremos del modelo se interpolan a minutos, pero no equivalen a una tabla oficial. Las alturas de Santander se refieren al cero del puerto; las del modelo, al nivel medio. No mezclar referencias ni utilizar para navegación.", style = MaterialTheme.typography.bodySmall)
                     data?.let { Text("Actualizado: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(it.fetched))}", style = MaterialTheme.typography.labelSmall) }
                 }
             }
