@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - feature/avo-signer-android-v0.1
+      - develop/avo-performance-horse
     paths:
       - 'avo-signer/**'
       - '.github/workflows/build-avo-signer.yml'
