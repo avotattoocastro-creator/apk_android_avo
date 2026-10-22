@@ -31,6 +31,12 @@ object ChestOtaProtocol {
         return false
     }
 
+    fun authPayload(manifest: ByteArray, signature: ByteArray): ByteArray {
+        require(manifest.size in 30..2048)
+        require(signature.size in 64..80)
+        return ByteWriter(4 + manifest.size + signature.size)
+            .u16(manifest.size).u16(signature.size).bytes(manifest).bytes(signature).toByteArray()
+    }
     fun beginPayload(image: ByteArray): ByteArray {
         val check = inspect(image)
         require(check.valid) { check.reason }
