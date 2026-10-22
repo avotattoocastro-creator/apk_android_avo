@@ -47,6 +47,7 @@ fun DeviceManagerScreen(c: AppContainer) {
     var inspection by remember { mutableStateOf<ChestOtaProtocol.Inspection?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
     var authDiagnostic by remember { mutableStateOf("Pendiente") }
+    var positiveDiagnostic by remember { mutableStateOf("Pendiente de prueba") }
     fun displayName(uri: Uri): String? = runCatching {
         c.app.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
             val column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
@@ -82,7 +83,7 @@ fun DeviceManagerScreen(c: AppContainer) {
         }
     }
     val androidVerified = selectedImage?.let { c.chestOta.isApproved(it) } == true
-    val watchAuthorized = false // No positive OTA_AUTH handshake exposed by the current manager
+    val watchAuthorized = c.chestOta.positiveAuthorizationConfirmed && androidVerified
     val readyToInstall = androidVerified && watchAuthorized && c.chestOta.safeInstallationAvailable && c.watch.isReady
     val link by c.watch.state.collectAsStateWithLifecycle()
     val info by c.watch.info.collectAsStateWithLifecycle()
@@ -121,7 +122,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Text("1. Firma verificada en Android", fontWeight = FontWeight.Bold)
                     Text(if (androidVerified) "ES256 válida · comprobación local completada" else "Pendiente · selecciona un ZIP firmado")
                     Text("2. Autorización recibida del reloj", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
-                    Text("No confirmada · el rechazo VERIFY_FAILED no es una autorización positiva")
+                    Text(if (watchAuthorized) positiveDiagnostic else "No confirmada · el rechazo VERIFY_FAILED no es una autorización positiva")
                     Text("3. Firmware listo para instalar", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
                     Text(if (readyToInstall) "Listo" else "Bloqueado · falta validación de seguridad en el reloj")
                 }
@@ -135,6 +136,14 @@ fun DeviceManagerScreen(c: AppContainer) {
                     ota.events.takeLast(8).forEach { Note(it) }
                 }
                 Text("OTA firmada ES256: el reloj debe autorizar el manifiesto antes de recibir firmware. La instalación sigue bloqueada hasta completar las pruebas de seguridad.", color = AvoColors.Warn)
+                OutlinedButton(enabled = androidVerified && c.watch.isReady && info?.firmware == "3.5.7", onClick = {
+                    val pkg = selectedImage ?: return@OutlinedButton
+                    scope.launch {
+                        positiveDiagnostic = "Consultando autorización del reloj..."
+                        positiveDiagnostic = runCatching { c.chestOta.probeValidAuthorization(pkg) }
+                            .getOrElse { "Error: ${it.message}" }
+                    }
+                }) { Text("Comprobar firma válida en el reloj (sin instalar)") }
                 Text("PRUEBA NEGATIVA · HISTORIAL SEPARADO", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
                 Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
                 OutlinedButton(enabled = c.watch.isReady && info?.firmware == "3.5.7", onClick = {
