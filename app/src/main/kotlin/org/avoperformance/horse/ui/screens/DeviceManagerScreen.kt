@@ -48,6 +48,7 @@ fun DeviceManagerScreen(c: AppContainer) {
     var error by remember { mutableStateOf<String?>(null) }
     var authDiagnostic by remember { mutableStateOf("Pendiente") }
     var positiveDiagnostic by remember { mutableStateOf("Pendiente de prueba") }
+    var preflightDiagnostic by remember { mutableStateOf("Sin comprobar") }
     fun displayName(uri: Uri): String? = runCatching {
         c.app.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
             val column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
@@ -145,6 +146,15 @@ fun DeviceManagerScreen(c: AppContainer) {
                             .getOrElse { "Error: ${it.message}" }
                     }
                 }) { Text("Comprobar firma válida en el reloj (sin instalar)") }
+                OutlinedButton(enabled = androidVerified, onClick = {
+                    val pkg = selectedImage ?: return@OutlinedButton
+                    scope.launch {
+                        preflightDiagnostic = "Comprobando condiciones de instalación..."
+                        preflightDiagnostic = runCatching { c.chestOta.installationPreflight(pkg) }
+                            .getOrElse { "Error de diagnóstico: ${it.message}" }
+                    }
+                }) { Text("Diagnosticar bloqueo OTA (sin instalar)") }
+                Text(preflightDiagnostic, modifier = Modifier.fillMaxWidth())
                 Text("PRUEBA NEGATIVA · HISTORIAL SEPARADO", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
                 Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
                 OutlinedButton(enabled = c.watch.isReady && info?.firmware == "3.5.7", onClick = {
