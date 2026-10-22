@@ -28,7 +28,9 @@ public static class TrainingImporter
         if (zip.Entries.Count is < 2 or > 400) throw new InvalidDataException("Cantidad de entradas ZIP incorrecta");
         var manifestEntry = zip.GetEntry("manifest.json") ?? throw new InvalidDataException("Falta manifest.json");
         if (manifestEntry.Length is < 1 or > 16384) throw new InvalidDataException("Tamaño del manifiesto inválido");
-        using var json = JsonDocument.Parse(ReadBounded(manifestEntry, 16384));
+        var manifestBytes = ReadBounded(manifestEntry, 16384);
+        int bom = manifestBytes.AsSpan().StartsWith(new byte[] { 0xEF, 0xBB, 0xBF }) ? 3 : 0;
+        using var json = JsonDocument.Parse(manifestBytes.AsMemory(bom));
         var root = json.RootElement;
         if (String(root, "format") != "AVO-TRAINING-1") throw new InvalidDataException("Formato AVO no compatible");
         result.SessionId = String(root, "sessionId") ?? throw new InvalidDataException("Falta sessionId");
