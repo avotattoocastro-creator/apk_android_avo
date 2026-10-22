@@ -110,8 +110,20 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         }
     }
 
+    var selectedTab by remember(id) { mutableStateOf("Resumen") }
     LazyColumn(Modifier.fillMaxSize()) {
         item {
+            androidx.compose.foundation.lazy.LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)
+            ) {
+                items(5) { index ->
+                    val tab = listOf("Resumen", "Mapa", "Gráficas", "Tramos", "Datos")[index]
+                    FilterChip(selected = selectedTab == tab, onClick = { selectedTab = tab }, label = { Text(tab) })
+                }
+            }
+        }
+        if (selectedTab == "Datos") item {
             AvoCard("MAREAS Y CONDICIONES DEL ENTRENAMIENTO") {
                 if (marine == null) {
                     Note("Sin datos marinos asociados. Se pueden consultar previsiones de hasta 7 días; no se generan datos históricos ficticios.")
@@ -141,7 +153,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 marineMessage?.let { Note(it) }
             }
         }
-        if (a != null) item {
+        if (a != null && selectedTab == "Resumen") item {
             AvoCard("Resumen del entrenamiento") {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly) {
                     org.avoperformance.horse.ui.components.BigValue("${Fmt.m(a.distanceM,0)}", "m", "Distancia")
@@ -158,7 +170,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         }
         if (loading) item { Note("Analizando el fichero…") }
         if (a != null) {
-            item {
+            if (selectedTab == "Datos") item {
                 AvoCard("Análisis (datos del fichero)") {
                     KV("Distancia", "${Fmt.m(a.distanceM, 0)} m")
                     KV("Duración con GNSS", a.durationS?.let { Fmt.duration((it * 1000).toLong()) })
@@ -175,7 +187,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 }
             }
             if (a.track.size >= 2) {
-                item { AvoCard("Control del entrenamiento") {
+                if (selectedTab == "Mapa") item { AvoCard("Control del entrenamiento") {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         OutlinedButton(onClick = { playing = !playing }) { Text(if (playing) "Pausar" else "Reproducir") }
                         OutlinedButton(onClick = { playing = false; selectedTrackIndex = 0 }) { Text("Inicio") }
@@ -194,7 +206,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         KV("RTK", when(point.carrSoln) { 2 -> "FIX"; 1 -> "FLOAT"; else -> "No RTK" })
                     }
                 } }
-                item { AvoCard("V1.9 · Seleccionar tramo A–B") {
+                if (selectedTab == "Tramos") item { AvoCard("V1.9 · Seleccionar tramo A–B") {
                     val lastIndex = a.track.lastIndex
                     val start = segmentStart.coerceIn(0, lastIndex - 1)
                     val end = segmentEnd.coerceIn(start + 1, lastIndex)
@@ -242,9 +254,9 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         if (dt !in 0.08..10.0) 0.0 else ((portion[i].speedMs - portion[i-1].speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 } ?: 0.0
                     } }, null, AvoColors.Warn, "m/s²") { selectedTrackIndex = start + it; playing = false }
                 } }
-                item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex, segmentStart.coerceIn(0, a.track.lastIndex - 1), segmentEnd.coerceIn(1, a.track.lastIndex)) { selectedTrackIndex = it; playing = false } } }
-                item { AvoCard("Velocidad") { SynchronizedChart(a.track.map { it.speedMs * 3.6 }, selectedTrackIndex, AvoColors.Gold, "km/h") { selectedTrackIndex = it; playing = false } } }
-                item { AvoCard("Aceleración longitudinal GNSS") {
+                if (selectedTab == "Mapa" || selectedTab == "Resumen") item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex, segmentStart.coerceIn(0, a.track.lastIndex - 1), segmentEnd.coerceIn(1, a.track.lastIndex)) { selectedTrackIndex = it; playing = false } } }
+                if (selectedTab == "Gráficas") item { AvoCard("Velocidad") { SynchronizedChart(a.track.map { it.speedMs * 3.6 }, selectedTrackIndex, AvoColors.Gold, "km/h") { selectedTrackIndex = it; playing = false } } }
+                if (selectedTab == "Gráficas") item { AvoCard("Aceleración longitudinal GNSS") {
                     Note("Derivada de la velocidad GNSS; no sustituye a la aceleración de las IMU. Se omiten saltos de tiempo y valores espurios.")
                     val acc = accelerationSeries(a)
                     if (acc.size > 1) {
@@ -253,7 +265,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         SynchronizedAccelerationChart(a, selectedTrackIndex) { selectedTrackIndex = it; playing = false }
                     } else Note("No hay suficientes muestras GNSS válidas")
                 } }
-                item { AvoCard("Ritmo y regularidad") {
+                if (selectedTab == "Gráficas" || selectedTab == "Datos") item { AvoCard("Ritmo y regularidad") {
                     KV("Ritmo medio", a.avgSpeedMs?.takeIf { it > 0.5 }?.let { "%.1f s/100 m".format(100.0 / it) })
                     val speeds = a.track.map { it.speedMs }.filter { it > 0.5 && it.isFinite() }
                     val mean = speeds.average().takeIf { !it.isNaN() && it > 0 } ?: 0.0
@@ -261,7 +273,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                     KV("Variación de velocidad", variation?.let { "%.1f %%".format(it) })
                     Note("Menos variación indica velocidad más uniforme; depende del trazado y el tipo de ejercicio.")
                 } }
-                item { AvoCard("Análisis por tramos") {
+                if (selectedTab == "Tramos") item { AvoCard("Análisis por tramos") {
                     val points = a.track
                     val first = points.first().itowMs
                     val last = points.last().itowMs
@@ -278,7 +290,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 } }
             }
         }
-        item {
+        if (selectedTab == "Datos" || selectedTab == "Resumen") item {
             AvoCard("Detalles técnicos del fichero") {
                 Row { StatusPill(st?.texto ?: tt.state, syncColor(st)) }
                 KV("Inicio", Fmt.date(tt.startRtcMs))
@@ -293,7 +305,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 msg?.let { Note(it, AvoColors.Warn) }
             }
         }
-        item {
+        if (selectedTab == "Datos") item {
             AvoCard("Acciones") {
                 OutlinedButton(enabled = SyncRules.canOfferDelete(org.avoperformance.horse.core.sync.LocalTraining(tt.sessionId, tt.segments, tt.totalBytes,
                     tt.downloadedBytes, tt.localSha256, tt.watchSha256, tt.serverSha256, st ?: SyncState.EN_RELOJ,
