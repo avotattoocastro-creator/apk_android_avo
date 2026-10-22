@@ -24,11 +24,14 @@ class ChestOtaManager(private val container: AppContainer) {
     @Volatile private var active = false
     @Volatile private var cancelRequested = false
 
-    /** Experimental, narrowly-scoped trust gate: only the GitHub-built AVO V3.5.4 image.
-     *  This digest is pinned from the previously verified build artifact. No generic unsigned OTA.
-     */
-    private val approvedSha256 = "a483f6b93befb50768f9c7486668891358ba76b0da559dbea29cb994c0a88d20"
-    fun isApproved(image: ByteArray): Boolean = runCatching { SignedOtaVerifier.verify(image); true }.getOrDefault(false)
+    /** The ZIP is signed, but only the verified firmware.bin may enter the ESP32 transport. */
+    fun inspectSignedPackage(packageBytes: ByteArray): SignedOtaVerifier.Verified {
+        val verified = SignedOtaVerifier.verify(packageBytes)
+        val inspection = ChestOtaProtocol.inspect(verified.firmware)
+        require(inspection.valid) { inspection.reason }
+        return verified
+    }
+    fun isApproved(packageBytes: ByteArray): Boolean = runCatching { inspectSignedPackage(packageBytes); true }.getOrDefault(false)
     val safeInstallationAvailable: Boolean = false // Watch-side signature enforcement and anti-rollback not yet proven
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
@@ -36,9 +39,10 @@ class ChestOtaManager(private val container: AppContainer) {
         _state.value = old.copy(phase = phase, events = (old.events + note).takeLast(20))
     }
 
-    suspend fun transfer(image: ByteArray) = withContext(Dispatchers.IO) {
+    suspend fun transfer(packageBytes: ByteArray) = withContext(Dispatchers.IO) {
         check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }
-        check(isApproved(image)) { "Paquete OTA no firmado o firma inválida" }
+        val verified = inspectSignedPackage(packageBytes)
+        val image = verified.firmware
         check(!active) { "Otra actualización ya está activa" }
         active = true
         cancelRequested = false
