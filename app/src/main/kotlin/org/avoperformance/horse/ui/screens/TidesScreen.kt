@@ -210,7 +210,7 @@ private fun TideGauge(points: List<SeaPoint>, now: LocalDateTime, next: Extremum
     Text("Escala relativa al rango del modelo, NO altura oficial sobre cero de carta.", style = MaterialTheme.typography.labelSmall)
 }
 @Composable
-private fun TideEventRow(e: Extremum) {
+private fun TideEventRow(e: Extremum, coefficient0: Int? = null, coefficient12: Int? = null) {
     val high = e.high
     val shade = if (high) Color(0xFF713C43) else Color(0xFF27654F)
     Row(
@@ -225,6 +225,16 @@ private fun TideEventRow(e: Extremum) {
         Text(e.date.format(fmtHour), color = Color.White, fontWeight = FontWeight.Bold,
             modifier = Modifier.width(64.dp))
         Text(e.height.show("m", 2), color = Color.White, modifier = Modifier.width(68.dp))
+        val coefficient = if (e.date.hour < 12) coefficient0 else coefficient12
+        Column(Modifier.width(55.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            if (coefficient != null) {
+                Text("COEF.", color = Color.White, style = MaterialTheme.typography.labelSmall)
+                Text(coefficient.toString(), color = Color(0xFFFFE16B), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
+            } else {
+                Text("—", color = Color.LightGray, style = MaterialTheme.typography.labelMedium)
+            }
+        }
+        /* Wave graphic intentionally replaced by a readable per-event coefficient.
         Canvas(Modifier.width(45.dp).height(26.dp)) {
             val p = Path()
             for (i in 0..32) {
@@ -235,11 +245,11 @@ private fun TideEventRow(e: Extremum) {
                 if (i == 0) p.moveTo(x, y) else p.lineTo(x, y)
             }
             drawPath(p, Color(0xFF76D7F4), style = Stroke(width = 3f))
-        }
+        } */
     }
 }
 @Composable
-private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate, numberOfDays: Int = 7) {
+private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate, numberOfDays: Int = 7, coefficient0: Int? = null, coefficient12: Int? = null) {
     (0 until numberOfDays).forEach { offset ->
         val date = firstDay.plusDays(offset.toLong())
         val rows = extremes.filter { it.date.toLocalDate() == date }.sortedBy { it.date }
@@ -250,7 +260,7 @@ private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate, numberO
             Text(moonPhase(date), style = MaterialTheme.typography.labelSmall, color = aqua)
         }
         if (rows.isEmpty()) Text("Sin predicción disponible", style = MaterialTheme.typography.bodySmall)
-        rows.forEach { TideEventRow(it) }
+        rows.forEach { TideEventRow(it, coefficient0, coefficient12) }
     }
 }
 @Composable
@@ -339,13 +349,13 @@ fun TidesScreen() {
                     AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
                         Text(if (officialWeek.isNotEmpty()) "Santander: predicción astronómica oficial, alturas sobre el cero del puerto." else "Predicciones del modelo; altura respecto al nivel medio.", style = MaterialTheme.typography.bodySmall)
                         if (officialWeek.isNotEmpty()) {
-                            Text("Coeficientes y alturas oficiales de Santander (referencia regional)", color = gold)
+                            Text("Coeficiente en cada fila: referencia oficial de las 0 h o 12 h, no medición exacta del instante de marea.", color = gold)
                             (0 until 7).forEach { offset ->
                                 val date = LocalDate.now(zone).plusDays(offset.toLong())
                                 val entry = officialWeek.firstOrNull { it.date == date }
                                 if (entry != null) {
-                                    Text(date.toString() + " · Coef. 0h/12h: " + entry.coefficient0 + " / " + entry.coefficient12, color = gold)
-                                    MultiDayTable(entry.events, date, 1)
+                                    Text("Coef. oficial 0h/12h: " + entry.coefficient0 + " / " + entry.coefficient12, color = gold)
+                                    MultiDayTable(entry.events, date, 1, entry.coefficient0, entry.coefficient12)
                                 } else {
                                     Text("Santander sin datos oficiales para $date · modelo MSL", color = gold)
                                     MultiDayTable(ex, date, 1)
