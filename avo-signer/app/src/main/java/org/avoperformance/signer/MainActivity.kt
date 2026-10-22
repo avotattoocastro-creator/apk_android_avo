@@ -114,7 +114,7 @@ class MainActivity : Activity() {
         item("Crear clave recuperable","Generar identidad nueva y copia cifrada") { createRecoverable() }
         item("Importar clave cifrada","Recuperar identidad desde .avo-key") { importKey() }
         item("Exportar copia cifrada","Guardar respaldo .avo-key") { exportBackup() }
-        item("Comprobar recuperación","Verificar contraseña y copia guardada antes de firmar") { testRecovery() }
+        item("Comprobar recuperación","Validar contraseña y copia cifrada local") { testRecovery() }
         status= textLine("No compartas ninguna clave privada.",13f,Color.LTGRAY)
         p.addView(status)
         setContentView(ScrollView(this).apply { addView(p) })
@@ -267,7 +267,7 @@ class MainActivity : Activity() {
         passwordDialog("Crear clave recuperable") { pass ->
             try {
                 backupToExport=vault.generate(pass)
-                auditPrefs.edit().remove("backup_verified").apply()
+                auditPrefs.edit().remove("backup_verified").putBoolean("backup_exported",false).apply()
                 refreshIdentity()
                 status.text="Clave creada. Guarda la copia cifrada."
                 audit("Nueva clave recuperable creada")
@@ -291,6 +291,7 @@ class MainActivity : Activity() {
                 val restored=vault.unlock(pass)
                 val expected=vault.publicKey().encoded
                 require(restored.public.encoded.contentEquals(expected))
+                require(auditPrefs.getBoolean("backup_exported",false)) { "Primero exporta una copia cifrada" }
                 auditPrefs.edit().putString("backup_verified",java.util.Base64.getEncoder().encodeToString(expected)).apply()
                 audit("Recuperación comprobada localmente")
                 status.text="Clave cifrada y contraseña verificadas. Conserva una copia fuera del móvil."
@@ -318,6 +319,7 @@ class MainActivity : Activity() {
                     val entry=zip.nextEntry ?: break
                     require(entry.name in listOf("firmware.bin","manifest.json","manifest.sig")) { "Entrada inesperada" }
                     require(!entries.containsKey(entry.name)) { "Entrada duplicada" }
+                    require(!entry.isDirectory) { "No se admiten directorios" }
                     val out=ByteArrayOutputStream()
                     val buffer=ByteArray(8192)
                     while(true) {
@@ -336,6 +338,8 @@ class MainActivity : Activity() {
             require(manifest.getString("schema")=="avo-ota-manifest-v1")
             require(manifest.getString("firmware")=="firmware.bin")
             require(manifest.getString("alg")=="ES256")
+            require(manifest.getString("target") in targets) { "Destino de firmware desconocido" }
+            require(Regex("^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9._-]+)?$").matches(manifest.getString("version"))) { "Versión inválida" }
             require(manifest.getInt("size")==bin.size) { "Tamaño incorrecto" }
             val hash=MessageDigest.getInstance("SHA-256").digest(bin).joinToString("") { "%02x".format(it) }
             require(hash.equals(manifest.getString("sha256"),true)) { "SHA-256 incorrecto" }
@@ -472,8 +476,8 @@ class MainActivity : Activity() {
                     status.text="BIN seleccionado: ${bytes.size} bytes"
                 }
                 101 -> sign()
-                103 -> { val uri=data?.data ?: error("Falta destino"); contentResolver.openOutputStream(uri)?.use { it.write(backupToExport ?: vault.encryptedBackup()) }; backupToExport=null; audit("Copia cifrada exportada"); status.text="Copia cifrada exportada" }
-                104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); auditPrefs.edit().putString("backup_verified",java.util.Base64.getEncoder().encodeToString(vault.publicKey().encoded)).apply(); audit("Clave importada y verificada"); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
+                103 -> { val uri=data?.data ?: error("Falta destino"); val backup=backupToExport ?: vault.encryptedBackup(); contentResolver.openOutputStream(uri)?.use { it.write(backup) } ?: error("No se pudo guardar la copia"); backupToExport=null; auditPrefs.edit().putBoolean("backup_exported",true).apply(); audit("Copia cifrada exportada"); status.text="Copia cifrada exportada" }
+                104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); auditPrefs.edit().putString("backup_verified",java.util.Base64.getEncoder().encodeToString(vault.publicKey().encoded)).putBoolean("backup_exported",true).apply(); audit("Clave importada y verificada"); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
                 105 -> { val uri=data?.data ?: error("Falta ZIP"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); verifyPackage(bytes) }
                 102 -> {
                     val uri=data?.data ?: error("Destino inválido")
