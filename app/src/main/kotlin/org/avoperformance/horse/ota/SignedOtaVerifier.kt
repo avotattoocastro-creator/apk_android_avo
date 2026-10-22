@@ -20,7 +20,7 @@ object SignedOtaVerifier {
     private val trustedSpki = mapOf(
         "AVO_OTA_RECOVERABLE_P256_V1" to "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEKIADU/bALRoURAxF4ElSbDZkbDRxDxl8cP6YIm0xsmWG3fallhy29ynUhh/oZAOiasc7DAucXj7FrUr8LskriA=="
     )
-    data class Verified(val firmware: ByteArray, val version: String, val keyId: String)
+    data class Verified(val firmware: ByteArray, val version: String, val keyId: String, val manifest: ByteArray, val signature: ByteArray)
     fun verify(zip: ByteArray): Verified {
         require(zip.size in 1..MAX_ZIP_BYTES) { "Tamaño ZIP inválido" }
         val members = mutableMapOf<String, ByteArray>()
@@ -64,6 +64,6 @@ object SignedOtaVerifier {
         require(signature.verify(members.getValue("manifest.sig"))) { "Firma OTA inválida" }
         val version = manifest.getString("version")
         require(Regex("[0-9]+\\.[0-9]+\\.[0-9]+").matches(version)) { "Versión OTA inválida" }
-        return Verified(firmware, version, kid)
+        return Verified(firmware, version, kid, manifestBytes, members.getValue("manifest.sig"))
     }
 }
