@@ -496,7 +496,9 @@ class MainActivity : Activity() {
                     val uri=data?.data ?: error("Destino inválido")
                     contentResolver.openOutputStream(uri,"w")?.use { it.write(output ?: error("No hay ZIP")) }
                         ?: error("No se pudo guardar")
-                    status.text="Paquete OTA firmado guardado"
+                    val check=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("No se puede leer ZIP guardado")
+                    require(check.contentEquals(output)) { "ZIP guardado corrupto o incompleto" }
+                    status.text="ZIP guardado y comprobado: ${check.size} bytes"
                 }
             }
         } catch(e:Exception) { status.text="Error: ${e.message}" }
