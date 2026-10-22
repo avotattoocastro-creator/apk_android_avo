@@ -37,7 +37,8 @@ class ChestOtaManager(private val container: AppContainer) {
     }
 
     suspend fun transfer(image: ByteArray) = withContext(Dispatchers.IO) {
-        check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }\n        check(isApproved(image)) { "Paquete OTA no firmado o firma inválida" }
+        check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }
+        check(isApproved(image)) { "Paquete OTA no firmado o firma inválida" }
         check(!active) { "Otra actualización ya está activa" }
         active = true
         cancelRequested = false
