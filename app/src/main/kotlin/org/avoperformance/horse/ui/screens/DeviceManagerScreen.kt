@@ -76,6 +76,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                 val verified = c.chestOta.inspectSignedPackage(bytes)
                 val result = ChestOtaProtocol.inspect(verified.firmware)
                 selectedImage = bytes
+                positiveDiagnostic = "Pendiente de prueba para el ZIP seleccionado"
                 userAccepts = false
                 inspection = result
                 error = null
@@ -83,7 +84,7 @@ fun DeviceManagerScreen(c: AppContainer) {
         }
     }
     val androidVerified = selectedImage?.let { c.chestOta.isApproved(it) } == true
-    val watchAuthorized = c.chestOta.positiveAuthorizationConfirmed && androidVerified
+    val watchAuthorized = androidVerified && selectedImage?.let { c.chestOta.positiveAuthorizationFor(it) } == true
     val readyToInstall = androidVerified && watchAuthorized && c.chestOta.safeInstallationAvailable && c.watch.isReady
     val link by c.watch.state.collectAsStateWithLifecycle()
     val info by c.watch.info.collectAsStateWithLifecycle()
