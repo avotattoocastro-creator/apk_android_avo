@@ -15,6 +15,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.text.InputType
+import java.util.zip.ZipInputStream
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.security.*
@@ -173,10 +174,10 @@ class MainActivity : Activity() {
                             1 -> action("Firmar BIN",arrayOf("Seleccionar firmware BIN","Autorizar y firmar","Guardar ZIP firmado"),arrayOf(
                                 {pickFirmware()},{authorize()},{savePackage()}
                             ))
-                            2 -> unavailable("Verificar OTA")
-                            3 -> unavailable("Paquetes")
-                            4 -> unavailable("Historial")
-                            5 -> unavailable("Configuración")
+                            2 -> chooseVerify()
+                            3 -> infoPage("Paquetes","Los paquetes se exportan desde Firmar BIN. Puedes comprobarlos en Verificar OTA. Publicación al servidor pendiente.")
+                            4 -> infoPage("Historial",getSharedPreferences("audit",MODE_PRIVATE).getString("last","No hay firmas registradas.") ?: "")
+                            5 -> infoPage("Configuración","ES256 · SHA-256 · AES-256-GCM. Guarda una copia de la clave recuperable y verifica su restauración antes de utilizarla oficialmente.")
                         }
                     }
                 }
@@ -245,6 +246,67 @@ class MainActivity : Activity() {
         startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type="*/*"; addCategory(Intent.CATEGORY_OPENABLE)
         },104)
+    }
+
+    private fun chooseVerify() {
+        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type="application/zip"; addCategory(Intent.CATEGORY_OPENABLE)
+        },105)
+    }
+    private fun verifyPackage(bytes:ByteArray) {
+        try {
+            require(bytes.size<=8*1024*1024) { "ZIP demasiado grande" }
+            val entries=mutableMapOf<String,ByteArray>()
+            ZipInputStream(bytes.inputStream()).use { zip ->
+                while(true) {
+                    val entry=zip.nextEntry ?: break
+                    require(entry.name in listOf("firmware.bin","manifest.json","manifest.sig")) { "Entrada inesperada" }
+                    require(!entries.containsKey(entry.name)) { "Entrada duplicada" }
+                    val out=ByteArrayOutputStream()
+                    val buffer=ByteArray(8192)
+                    while(true) {
+                        val n=zip.read(buffer)
+                        if(n<0) break
+                        require(out.size()+n<=6*1024*1024) { "Entrada demasiado grande" }
+                        out.write(buffer,0,n)
+                    }
+                    entries[entry.name]=out.toByteArray()
+                }
+            }
+            require(entries.size==3) { "Faltan archivos" }
+            val manifestBytes=entries["manifest.json"]!!
+            val manifest=JSONObject(String(manifestBytes,Charsets.UTF_8))
+            val bin=entries["firmware.bin"]!!
+            require(manifest.getString("schema")=="avo-ota-manifest-v1")
+            require(manifest.getString("firmware")=="firmware.bin")
+            require(manifest.getString("alg")=="ES256")
+            require(manifest.getInt("size")==bin.size) { "Tamaño incorrecto" }
+            val hash=MessageDigest.getInstance("SHA-256").digest(bin).joinToString("") { "%02x".format(it) }
+            require(hash.equals(manifest.getString("sha256"),true)) { "SHA-256 incorrecto" }
+            val pub=if(vault.exists()) vault.publicKey() else ks.getCertificate(alias)?.publicKey ?: error("No hay clave pública de confianza")
+            val expectedKid=if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias
+            require(manifest.getString("kid")==expectedKid) { "Identidad de firma no reconocida" }
+            val verifier=Signature.getInstance("SHA256withECDSA")
+            verifier.initVerify(pub); verifier.update(manifestBytes)
+            require(verifier.verify(entries["manifest.sig"]!!)) { "Firma incorrecta" }
+            android.app.AlertDialog.Builder(this).setTitle("Firma OTA válida")
+                .setMessage("Versión "+manifest.getString("version")+" · "+manifest.getString("target"))
+                .setPositiveButton("Aceptar",null).show()
+        } catch(e:Exception) {
+            android.app.AlertDialog.Builder(this).setTitle("OTA RECHAZADO")
+                .setMessage(e.message).setPositiveButton("Cerrar",null).show()
+        }
+    }
+    private fun infoPage(title:String,detail:String) {
+        val root=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL; setPadding(dp(22),dp(30),dp(22),dp(30))
+            setBackgroundColor(navy)
+        }
+        root.addView(label("‹  Volver",18f,blue).apply { setOnClickListener { showHome() } })
+        root.addView(label(title,26f,Color.WHITE,true).apply { setPadding(0,dp(20),0,dp(20)) })
+        root.addView(label(detail,16f,Color.LTGRAY))
+        page="info"
+        setContentView(root)
     }
     private fun createKey() { try {
         if (ks.containsAlias(alias)) { status.text="Clave ya existente. No se ha sustituido."; return }
@@ -318,6 +380,7 @@ class MainActivity : Activity() {
             bytes.toByteArray()
         }
         status.text="Paquete firmado y verificado. SHA-256: $hash. Guarda el ZIP."
+        getSharedPreferences("audit",MODE_PRIVATE).edit().putString("last","Firmado: "+version.text.toString()+" · SHA-256 "+hash).apply()
     } catch(e:Exception) { output=null; status.text="Error al firmar: ${e.message}" }
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
@@ -347,6 +410,7 @@ class MainActivity : Activity() {
                 101 -> sign()
                 103 -> { val uri=data?.data ?: error("Falta destino"); contentResolver.openOutputStream(uri)?.use { it.write(backupToExport ?: vault.encryptedBackup()) }; backupToExport=null; status.text="Copia cifrada exportada" }
                 104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
+                105 -> { val uri=data?.data ?: error("Falta ZIP"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); verifyPackage(bytes) }
                 102 -> {
                     val uri=data?.data ?: error("Destino inválido")
                     contentResolver.openOutputStream(uri,"w")?.use { it.write(output ?: error("No hay ZIP")) }
