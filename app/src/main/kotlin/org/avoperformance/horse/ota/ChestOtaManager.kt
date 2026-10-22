@@ -57,9 +57,9 @@ class ChestOtaManager(private val container: AppContainer) {
     /** Non-flashing diagnostic: malformed authorization must be rejected by the watch. */
     suspend fun probeInvalidAuthorization(): String = withContext(Dispatchers.IO) {
         check(!active) { "Hay una operación OTA activa" }
+        // A negative-signature probe must not erase a previous valid authorization.
+        // Keep the positive digest bound to the exact signed ZIP.
         invalidatePreflight()
-        positiveAuthVersion = null
-        positiveAuthDigest = null
         val watch = container.watch
         check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
         val payload = ChestOtaProtocol.authPayload(
