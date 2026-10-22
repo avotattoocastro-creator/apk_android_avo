@@ -64,6 +64,10 @@ class WatchSyncManager(
     private fun TrainingEntity.toLocal() = LocalTraining(sessionId, segments, totalBytes, downloadedBytes, localSha256, watchSha256, serverSha256,
         runCatching { SyncState.valueOf(state) }.getOrDefault(SyncState.EN_RELOJ), runCatching { WatchFileState.valueOf(watchState) }.getOrDefault(WatchFileState.UNKNOWN), startRtcMs, activeMs)
 
+    private fun logEventMarine(sessionId: String, message: String?) {
+        android.util.Log.w("AVO_MARINE", "Sin contexto marino para $sessionId: ${message ?: "sin datos"}")
+    }
+
     private fun watchRecording() = watch.telemetry.value?.t?.session.let { it == WatchSessionState.RECORDING || it == WatchSessionState.PAUSED }
 
     /** Reads the session list from the watch and merges it (no duplicates: key = session id). */
@@ -81,6 +85,19 @@ class WatchSyncManager(
                     watchState = m.watchState.name, startRtcMs = m.startRtcMs, activeMs = m.activeMs))
                     .copy(segments = m.segments, totalBytes = m.totalBytes, state = m.state.name, watchState = m.watchState.name,
                         startRtcMs = m.startRtcMs, activeMs = m.activeMs, updatedMs = System.currentTimeMillis()))
+            }
+            // Automatically enrich newly discovered recent trainings; never fabricate historical forecasts.
+            val nowMs = System.currentTimeMillis()
+            val recent = merged.filter { m -> m.startRtcMs > 0 &&
+                kotlin.math.abs(nowMs - m.startRtcMs) < 2L * 60 * 60 * 1000 }
+            if (recent.isNotEmpty()) scope.launch {
+                for (m in recent) {
+                    if (db.marine().byId(m.sessionId) != null) continue
+                    runCatching {
+                        val snapshot = org.avoperformance.horse.ui.screens.marineSnapshotForTraining(m.sessionId, m.startRtcMs)
+                        db.marine().upsert(snapshot)
+                    }.onFailure { logEventMarine(m.sessionId, it.message) }
+                }
             }
             _progress.value = SyncProgress(message = "${list.size} entrenamientos en el reloj")
             null
