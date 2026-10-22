@@ -81,7 +81,7 @@ class MainActivity : Activity() {
             background=bg(tile,18)
         }
         identity.addView(label("♢  Identidad de firma",20f,Color.WHITE,true))
-        identity.addView(label(if(ks.containsAlias(alias)) "Clave local disponible" else "Sin clave oficial activada",18).apply {
+        identity.addView(label(if(ks.containsAlias(alias)) "Clave local disponible" else "Sin clave oficial activada",18f).apply {
             setPadding(0,dp(14),0,dp(6))
         })
         status=label("Configura y respalda tu clave antes de publicar firmware",14f,Color.LTGRAY)
