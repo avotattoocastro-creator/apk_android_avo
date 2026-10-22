@@ -100,6 +100,17 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     var playing by remember(id) { mutableStateOf(false) }
     var segmentStart by remember(id) { mutableIntStateOf(0) }
     var segmentEnd by remember(id) { mutableIntStateOf(Int.MAX_VALUE) }
+    val androidContext = androidx.compose.ui.platform.LocalContext.current
+    val segmentPrefs = remember(androidContext) { androidContext.getSharedPreferences("avo_training_segments", android.content.Context.MODE_PRIVATE) }
+    var savedSegments by remember(id) { mutableStateOf(segmentPrefs.getString("segments_" + id, "[]") ?: "[]") }
+    var segmentLabel by remember(id) { mutableStateOf("") }
+    val savedSegmentItems = remember(savedSegments) {
+        runCatching {
+            val array = org.json.JSONArray(savedSegments)
+            (0 until array.length()).map { index -> array.getJSONObject(index) }
+                .map { obj -> Triple(obj.optString("name", "Tramo"), obj.getInt("start"), obj.getInt("end")) }
+        }.getOrDefault(emptyList())
+    }
     LaunchedEffect(playing, a) {
         while (playing && a != null && a.track.isNotEmpty()) {
             delay(250)
@@ -151,6 +162,18 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                     Note(marine!!.source)
                 }
                 marineMessage?.let { Note(it) }
+            }
+        }
+        if (selectedTab == "Resumen") item {
+            AvoCard("ENTRENAMIENTO · AVO PERFORMANCE HORSE") {
+                KV("Caballo", tt.horseCode.ifBlank { "Sin asignar" })
+                KV("Jinete", tt.riderCode.ifBlank { "Sin asignar" })
+                KV("Fecha", Fmt.date(tt.startRtcMs))
+                KV("Duración registrada", Fmt.duration(tt.activeMs))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    StatusPill(st?.texto ?: tt.state, syncColor(st))
+                }
+                if (a == null) Note("Los mapas y gráficos estarán disponibles cuando se descargue y analice la sesión.")
             }
         }
         if (a != null && selectedTab == "Resumen") item {
@@ -220,7 +243,40 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         OutlinedButton(onClick = { selectedTrackIndex?.let { segmentEnd = it.coerceIn(start + 1, lastIndex) } }) { Text("B = punto GPS") }
                         OutlinedButton(onClick = { segmentStart = 0; segmentEnd = Int.MAX_VALUE }) { Text("Todo") }
                     }
-                    val portion = a.track.subList(start, end + 1)
+                    androidx.compose.material3.OutlinedTextField(
+                        value = segmentLabel,
+                        onValueChange = { segmentLabel = it.take(64) },
+                        label = { Text("Nombre del tramo") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Button(onClick = {
+                        val array = runCatching { org.json.JSONArray(savedSegments) }.getOrElse { org.json.JSONArray() }
+                        array.put(org.json.JSONObject().put("name", segmentLabel.ifBlank { "Tramo " + (array.length() + 1) })
+                            .put("start", start).put("end", end))
+                        savedSegments = array.toString()
+                        segmentPrefs.edit().putString("segments_" + id, savedSegments).apply()
+                        segmentLabel = ""
+                        msg = "Tramo guardado en este dispositivo"
+                    }) { Text("Guardar tramo A–B") }
+                    savedSegmentItems.forEachIndexed { savedIndex, saved ->
+                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                            OutlinedButton(onClick = {
+                                segmentStart = saved.second.coerceIn(0, lastIndex - 1)
+                                segmentEnd = saved.third.coerceIn(segmentStart + 1, lastIndex)
+                            }) { Text(saved.first + " · " + (saved.second + 1) + "–" + (saved.third + 1)) }
+                            OutlinedButton(onClick = {
+                                val array = org.json.JSONArray()
+                                savedSegmentItems.forEachIndexed { i, item ->
+                                    if (i != savedIndex) array.put(org.json.JSONObject().put("name", item.first)
+                                        .put("start", item.second).put("end", item.third))
+                                }
+                                savedSegments = array.toString()
+                                segmentPrefs.edit().putString("segments_" + id, savedSegments).apply()
+                            }) { Text("Quitar") }
+                        }
+                    }
+                                        val portion = a.track.subList(start, end + 1)
                     val duration = ((portion.last().itowMs - portion.first().itowMs) / 1000.0).coerceAtLeast(0.0)
                     val distance = portion.zipWithNext().sumOf { (p, q) ->
                         val lat1 = Math.toRadians(p.p.lat)
