@@ -13,6 +13,27 @@ def change(file,old,new):
 change(core/"avo_version.h",'"3.6.0"','"3.6.1"')
 change(core/"avo_version.h","0x030600","0x030601")
 change(p/"build_info.h",'"V3.6.0-UI-INTEGRATION"','"V3.6.1-SEVEN-BAND-PENDING"')
+# Make the charging display fit the real AMOLED bounds, not the mockup.
+# The old V3.5.9 layout put the label below a near-full-height circle.
+ui_file=p/"ui.cpp"
+ui_source=ui_file.read_text()
+old='const int cy = LCD_HEIGHT / 2 - 12;'
+new='const int cy = LCD_HEIGHT / 2 - 22;'
+assert ui_source.count(old)==1, "Charging UI base changed"
+ui_source=ui_source.replace(old,new)
+old='const int radius = ((LCD_WIDTH < LCD_HEIGHT ? LCD_WIDTH : LCD_HEIGHT) / 2) - 48;'
+new='const int radius = ((LCD_WIDTH < LCD_HEIGHT ? LCD_WIDTH : LCD_HEIGHT) / 2) - 58;'
+assert ui_source.count(old)==1, "Charging circle radius base changed"
+ui_source=ui_source.replace(old,new)
+old='gfx->setTextSize(2);\n  const char* label = pct == 100 ? "CARGA COMPLETA" : "CARGANDO...";'
+new='gfx->setTextSize(3);\n  const char* label = pct == 100 ? "COMPLETA" : "CARGANDO...";'
+assert ui_source.count(old)==1, "Charging label base changed"
+ui_source=ui_source.replace(old,new)
+old='gfx->setCursor(cx - (int)strlen(label)*6, cy + radius + 19);'
+new='gfx->setCursor(cx - (int)strlen(label)*9, cy + radius + 12);'
+assert ui_source.count(old)==1, "Charging label placement base changed"
+ui_source=ui_source.replace(old,new)
+ui_file.write_text(ui_source)
 ui=(p/"ui.cpp").read_text()
 checks={
   "circular charge UI": "static void render_charging(" in ui and "drawCircle(" in ui and "CARGANDO..." in ui,
