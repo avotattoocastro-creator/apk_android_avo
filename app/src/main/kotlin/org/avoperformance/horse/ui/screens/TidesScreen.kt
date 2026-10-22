@@ -84,10 +84,10 @@ private fun extrema(points: List<SeaPoint>): List<Extremum> = points.windowed(3)
 /** Official astronomical tide table for Santander, not a measurement at El Regatón. */
 private data class OfficialDay(val date: LocalDate, val coefficient0: Int, val coefficient12: Int, val events: List<Extremum>)
 private fun parseOfficialTable(html: String): List<OfficialDay> {
-    val rows = Regex("<tr\\b[^>]*>(.*?)</tr>", RegexOption.DOT_MATCHES_ALL).findAll(html)
+    val rows = Regex("<tr\\b[^>]*>(.*?)</tr>", setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)).findAll(html)
     val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yy")
     fun cellText(raw: String): String = android.text.Html.fromHtml(
-        raw.replace(Regex("<[^>]+>"), " "), android.text.Html.FROM_HTML_MODE_LEGACY
+        raw, android.text.Html.FROM_HTML_MODE_LEGACY
     ).toString().replace("\\s+".toRegex(), " ").trim()
     fun height(raw: String) = raw.replace(",", ".").toDoubleOrNull()
     fun event(date: LocalDate, time: String, value: String, high: Boolean): Extremum? {
@@ -96,14 +96,14 @@ private fun parseOfficialTable(html: String): List<OfficialDay> {
         return Extremum(date.atTime(hour), h, high)
     }
     return rows.mapNotNull { row ->
-        val cells = Regex("<td\\b[^>]*>(.*?)</td>", RegexOption.DOT_MATCHES_ALL)
+        val cells = Regex("<(?:td|th)\\b[^>]*>(.*?)</(?:td|th)>", setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE))
             .findAll(row.groupValues[1]).map { cellText(it.groupValues[1]) }.toList()
         val dateIndex = cells.indexOfFirst { Regex("\\d{2}/\\d{2}/\\d{2}").containsMatchIn(it) }
         if (dateIndex < 0 || cells.size - dateIndex < 11) return@mapNotNull null
         val values = cells.drop(dateIndex)
         val date = runCatching { LocalDate.parse(values[0], dateFormat) }.getOrNull() ?: return@mapNotNull null
         // Date, moon phase, high1 time/height, high2 time/height, coefficient 0h/12h, low1 time/height, low2 time/height.
-        val offset = 1 // Fecha seguida de fase lunar y 10 columnas numéricas/horarias; no desplazar por columnas extra
+        val offset = 2 // Fecha, fase lunar, pleamar mañana (hora/altura), pleamar tarde (hora/altura), coef. 0h/12h, bajamar mañana/tarde
         if (values.size < offset + 10) return@mapNotNull null
         val c0 = values[offset + 4].toIntOrNull() ?: return@mapNotNull null
         val c12 = values[offset + 5].toIntOrNull() ?: return@mapNotNull null
@@ -113,7 +113,7 @@ private fun parseOfficialTable(html: String): List<OfficialDay> {
             event(date, values[offset + 6], values[offset + 7], false),
             event(date, values[offset + 8], values[offset + 9], false)
         ).sortedBy { it.date }
-        if (events.isEmpty() || c0 !in 0..120 || c12 !in 0..120) null else OfficialDay(date, c0, c12, events)
+        if (events.size < 2 || c0 !in 0..120 || c12 !in 0..120) null else OfficialDay(date, c0, c12, events)
     }.toList().distinctBy { it.date }
 }
 private suspend fun fetchOfficialDays(): List<OfficialDay> = withContext(Dispatchers.IO) {
@@ -337,12 +337,19 @@ fun TidesScreen() {
             } else if (tab == 1) {
                 item {
                     AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
-                        Text("Predicciones del modelo; altura respecto al nivel medio.", style = MaterialTheme.typography.bodySmall)
+                        Text(if (officialWeek.isNotEmpty()) "Santander: predicción astronómica oficial, alturas sobre el cero del puerto." else "Predicciones del modelo; altura respecto al nivel medio.", style = MaterialTheme.typography.bodySmall)
                         if (officialWeek.isNotEmpty()) {
                             Text("Coeficientes y alturas oficiales de Santander (referencia regional)", color = gold)
-                            officialWeek.forEach { entry ->
-                                Text(entry.date.toString() + " · Coef. 0h/12h: " + entry.coefficient0 + " / " + entry.coefficient12, color = gold)
-                                MultiDayTable(entry.events, entry.date, 1)
+                            (0 until 7).forEach { offset ->
+                                val date = LocalDate.now(zone).plusDays(offset.toLong())
+                                val entry = officialWeek.firstOrNull { it.date == date }
+                                if (entry != null) {
+                                    Text(date.toString() + " · Coef. 0h/12h: " + entry.coefficient0 + " / " + entry.coefficient12, color = gold)
+                                    MultiDayTable(entry.events, date, 1)
+                                } else {
+                                    Text("Santander sin datos oficiales para $date · modelo MSL", color = gold)
+                                    MultiDayTable(ex, date, 1)
+                                }
                             }
                         } else {
                             Text("Coeficiente oficial no disponible", color = gold)
