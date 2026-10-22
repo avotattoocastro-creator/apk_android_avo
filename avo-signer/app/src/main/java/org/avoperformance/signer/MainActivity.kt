@@ -30,6 +30,9 @@ class MainActivity : Activity() {
     private val ks = KeyStore.getInstance("AndroidKeyStore")
     private val vault by lazy { SecureKeyVault(this) }
     private var backupToExport:ByteArray?=null
+    private var selectedTarget="AVO_CHEST_WAVESHARE_ESP32S3"
+    private val targets=arrayOf("AVO_CHEST_WAVESHARE_ESP32S3","AVO_BACK_HELTEC_ESP32S3_ZEDF9P","AVO_GIRTH_ESP32S3_3IMU")
+    private val auditPrefs by lazy { getSharedPreferences("audit",MODE_PRIVATE) }
     private lateinit var status: TextView
     private lateinit var identityState: TextView
     private var page = "home"
@@ -171,13 +174,11 @@ class MainActivity : Activity() {
                     setOnClickListener {
                         when(id) {
                             0 -> showKeys()
-                            1 -> action("Firmar BIN",arrayOf("Seleccionar firmware BIN","Autorizar y firmar","Guardar ZIP firmado"),arrayOf(
-                                {pickFirmware()},{authorize()},{savePackage()}
-                            ))
+                            1 -> showSign()
                             2 -> chooseVerify()
                             3 -> infoPage("Paquetes","Los paquetes se exportan desde Firmar BIN. Puedes comprobarlos en Verificar OTA. Publicación al servidor pendiente.")
-                            4 -> infoPage("Historial",getSharedPreferences("audit",MODE_PRIVATE).getString("last","No hay firmas registradas.") ?: "")
-                            5 -> infoPage("Configuración","ES256 · SHA-256 · AES-256-GCM. Guarda una copia de la clave recuperable y verifica su restauración antes de utilizarla oficialmente.")
+                            4 -> showHistory()
+                            5 -> showSettings()
                         }
                     }
                 }
@@ -192,23 +193,62 @@ class MainActivity : Activity() {
             grid.addView(row)
         }
         root.addView(grid)
-        version=EditText(this).apply {
-            hint="Versión de firmware (ej. 3.5.6)"
-            setHintTextColor(Color.LTGRAY); setTextColor(Color.WHITE)
-            setSingleLine(true)
-        }
-        // Version is edited only on the signing workflow; do not autofocus the dashboard.
-        version.isFocusableInTouchMode=false
-        root.addView(version)
-        root.addView(label("Las funciones aún no implementadas aparecen identificadas como pendientes.",12f,Color.LTGRAY).apply {
-            gravity=Gravity.CENTER; setPadding(dp(6),dp(14),dp(6),0)
-        })
         setContentView(ScrollView(this).apply {
             isFocusableInTouchMode=true; requestFocus()
             setBackgroundColor(navy); addView(root)
         })
     }
 
+    private fun showSign() {
+        page="sign"
+        val root=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL
+            setPadding(dp(18),dp(24),dp(18),dp(24)); setBackgroundColor(navy)
+        }
+        root.addView(label("‹  Volver",18f,blue).apply { setOnClickListener { showHome() } })
+        root.addView(label("Firmar firmware BIN",26f,Color.WHITE,true).apply { setPadding(0,dp(20),0,dp(12)) })
+        root.addView(label("Destino del firmware",16f,Color.LTGRAY))
+        val selector=Spinner(this)
+        selector.adapter=ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,targets)
+        selector.setSelection(targets.indexOf(selectedTarget).coerceAtLeast(0))
+        selector.onItemSelectedListener=object:android.widget.AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent:android.widget.AdapterView<*>?) {}
+            override fun onItemSelected(parent:android.widget.AdapterView<*>?,view:View?,position:Int,id:Long) {
+                selectedTarget=targets[position]
+            }
+        }
+        root.addView(selector)
+        version=EditText(this).apply {
+            hint="Versión (ej. 3.5.6)"; setHintTextColor(Color.LTGRAY)
+            setTextColor(Color.WHITE); setSingleLine(true)
+        }
+        root.addView(version)
+        fun button(name:String,act:()->Unit) {
+            val view=label(name,17f,Color.WHITE,true).apply {
+                setPadding(dp(18),dp(18),dp(18),dp(18))
+                background=bg(tile); setOnClickListener { act() }
+            }
+            root.addView(view,LinearLayout.LayoutParams(-1,-2).apply { bottomMargin=dp(12) })
+        }
+        button("1. Seleccionar BIN") { pickFirmware() }
+        button("2. Autorizar y firmar") { authorize() }
+        button("3. Guardar ZIP firmado") { savePackage() }
+        status=label("Selecciona un BIN, indica versión y destino.",14f,Color.LTGRAY)
+        root.addView(status)
+        setContentView(ScrollView(this).apply { isFocusableInTouchMode=true; requestFocus(); addView(root) })
+    }
+    private fun showHistory() {
+        val list=auditPrefs.getString("events","") ?: ""
+        infoPage("Historial",if(list.isBlank()) "No hay operaciones registradas." else list)
+    }
+    private fun showSettings() {
+        infoPage("Configuración","Identidad: "+(if(vault.exists()) "Recuperable cifrada" else if(ks.containsAlias(alias)) "Keystore local" else "Sin clave")+"\n\nAlgoritmo: ECDSA P-256 / SHA-256\nCopia: AES-256-GCM / PBKDF2\n\nLa publicación al servidor y la revocación remota todavía no están habilitadas.")
+    }
+    private fun audit(message:String) {
+        val old=auditPrefs.getString("events","") ?: ""
+        val record=java.text.SimpleDateFormat("yyyy-MM-dd HH:mm",java.util.Locale.ROOT).format(java.util.Date())+"  "+message
+        auditPrefs.edit().putString("events",(record+"\n"+old).take(12000)).apply()
+    }
     private fun passwordDialog(title:String, callback:(CharArray)->Unit) {
         val field=EditText(this).apply {
             inputType=InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
@@ -228,6 +268,7 @@ class MainActivity : Activity() {
                 backupToExport=vault.generate(pass)
                 refreshIdentity()
                 status.text="Clave creada. Guarda la copia cifrada."
+                audit("Nueva clave recuperable creada")
                 exportBackup()
             } catch(e:Exception) { status.text="Error: "+e.message }
         }
@@ -289,10 +330,12 @@ class MainActivity : Activity() {
             val verifier=Signature.getInstance("SHA256withECDSA")
             verifier.initVerify(pub); verifier.update(manifestBytes)
             require(verifier.verify(entries["manifest.sig"]!!)) { "Firma incorrecta" }
+            audit("OTA verificado "+manifest.getString("version"))
             android.app.AlertDialog.Builder(this).setTitle("Firma OTA válida")
                 .setMessage("Versión "+manifest.getString("version")+" · "+manifest.getString("target"))
                 .setPositiveButton("Aceptar",null).show()
         } catch(e:Exception) {
+            audit("OTA rechazado: "+e.javaClass.simpleName)
             android.app.AlertDialog.Builder(this).setTitle("OTA RECHAZADO")
                 .setMessage(e.message).setPositiveButton("Cerrar",null).show()
         }
@@ -355,7 +398,7 @@ class MainActivity : Activity() {
         val bin=firmware ?: error("Falta BIN")
         val hash=MessageDigest.getInstance("SHA-256").digest(bin).joinToString("") { "%02x".format(it) }
         val manifest=JSONObject().put("schema","avo-ota-manifest-v1")
-            .put("target","AVO_CHEST_WAVESHARE_ESP32S3")
+            .put("target",selectedTarget)
             .put("version",version.text.toString().trim())
             .put("firmware","firmware.bin").put("size",bin.size)
             .put("sha256",hash).put("alg","ES256").put("kid",if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias)
@@ -380,7 +423,7 @@ class MainActivity : Activity() {
             bytes.toByteArray()
         }
         status.text="Paquete firmado y verificado. SHA-256: $hash. Guarda el ZIP."
-        getSharedPreferences("audit",MODE_PRIVATE).edit().putString("last","Firmado: "+version.text.toString()+" · SHA-256 "+hash).apply()
+        audit("Firmado "+selectedTarget+" "+version.text.toString()+" SHA256 "+hash.take(16))
     } catch(e:Exception) { output=null; status.text="Error al firmar: ${e.message}" }
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode:Int,resultCode:Int,data:Intent?) {
@@ -408,7 +451,7 @@ class MainActivity : Activity() {
                     status.text="BIN seleccionado: ${bytes.size} bytes"
                 }
                 101 -> sign()
-                103 -> { val uri=data?.data ?: error("Falta destino"); contentResolver.openOutputStream(uri)?.use { it.write(backupToExport ?: vault.encryptedBackup()) }; backupToExport=null; status.text="Copia cifrada exportada" }
+                103 -> { val uri=data?.data ?: error("Falta destino"); contentResolver.openOutputStream(uri)?.use { it.write(backupToExport ?: vault.encryptedBackup()) }; backupToExport=null; audit("Copia cifrada exportada"); status.text="Copia cifrada exportada" }
                 104 -> { val uri=data?.data ?: error("Falta clave"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); passwordDialog("Contraseña de recuperación") { pass -> try { vault.importBackup(bytes,pass); refreshIdentity(); showKeys() } catch(e:Exception) { status.text="Error de recuperación: "+e.message } } }
                 105 -> { val uri=data?.data ?: error("Falta ZIP"); val bytes=contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: error("Lectura fallida"); verifyPackage(bytes) }
                 102 -> {
