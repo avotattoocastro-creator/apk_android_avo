@@ -38,7 +38,16 @@ class ChestOtaManager(private val container: AppContainer) {
         .digest(bytes).joinToString("") { "%02x".format(it.toInt() and 255) }
     fun positiveAuthorizationFor(packageBytes: ByteArray): Boolean =
         positiveAuthVersion != null && positiveAuthDigest == packageDigest(packageBytes)
-    val safeInstallationAvailable: Boolean = false // Watch-side signature enforcement and anti-rollback not yet proven
+    @Volatile private var preflightDigest: String? = null
+    @Volatile private var preflightAtMs: Long = 0L
+    val safeInstallationAvailable: Boolean
+        get() = preflightDigest != null &&
+            positiveAuthDigest == preflightDigest &&
+            container.watch.isReady &&
+            !container.ntrip.running &&
+            !container.sync.isBusy &&
+            System.currentTimeMillis() - preflightAtMs in 0L..30_000L
+    private fun invalidatePreflight() { preflightDigest = null; preflightAtMs = 0L }
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
         val old = _state.value
@@ -48,6 +57,7 @@ class ChestOtaManager(private val container: AppContainer) {
     /** Non-flashing diagnostic: malformed authorization must be rejected by the watch. */
     suspend fun probeInvalidAuthorization(): String = withContext(Dispatchers.IO) {
         check(!active) { "Hay una operación OTA activa" }
+        invalidatePreflight()
         positiveAuthVersion = null
         positiveAuthDigest = null
         val watch = container.watch
@@ -70,6 +80,7 @@ class ChestOtaManager(private val container: AppContainer) {
     /** Checks a genuine signature on the watch without sending OTA_BEGIN or firmware data. */
     suspend fun probeValidAuthorization(packageBytes: ByteArray): String = withContext(Dispatchers.IO) {
         check(!active) { "Hay una operación OTA activa" }
+        invalidatePreflight()
         positiveAuthVersion = null
         positiveAuthDigest = null
         val verified = inspectSignedPackage(packageBytes)
@@ -93,6 +104,7 @@ class ChestOtaManager(private val container: AppContainer) {
 
     /** Read-only installation preflight. Never starts flash writing. */
     suspend fun installationPreflight(packageBytes: ByteArray): String = withContext(Dispatchers.IO) {
+        invalidatePreflight()
         val failures = mutableListOf<String>()
         val verified = runCatching { inspectSignedPackage(packageBytes) }.getOrElse {
             return@withContext "BLOQUEADO: ZIP/firma/imagen inválidos: ${it.message}"
@@ -113,15 +125,22 @@ class ChestOtaManager(private val container: AppContainer) {
                 if (battery == null || battery < 60) failures += "Batería inferior al 60 % o desconocida"
             }
         }
-        if (!safeInstallationAvailable) failures += "Falta validación física de hash final, anti-rollback y recuperación OTA"
-        val result = if (failures.isEmpty()) "PREPARADO: ${verified.version}" else
+        // Hash final and rollback are checked by the watch at OTA_END / reboot.
+        if (failures.isEmpty()) {
+            preflightDigest = packageDigest(packageBytes)
+            preflightAtMs = System.currentTimeMillis()
+        }
+        val result = if (failures.isEmpty()) "PREPARADO: ${verified.version}; hash final y reinicio pendientes" else
             "BLOQUEADO para ${verified.version}: " + failures.joinToString("; ")
         report("Diagnóstico previo OTA", result)
         result
     }
 
     suspend fun transfer(packageBytes: ByteArray) = withContext(Dispatchers.IO) {
-        check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }
+        check(safeInstallationAvailable && preflightDigest == packageDigest(packageBytes)) {
+            "OTA bloqueada: repite diagnóstico previo con este ZIP (válido 30 s)"
+        }
+        invalidatePreflight()
         val verified = inspectSignedPackage(packageBytes)
         val image = verified.firmware
         check(!active) { "Otra actualización ya está activa" }
@@ -133,6 +152,8 @@ class ChestOtaManager(private val container: AppContainer) {
             require(precheck.valid) { precheck.reason }
             val watch = container.watch
             check(watch.isReady) { "Pecho sin conexión/autorización" }
+            check(watch.info.value?.firmware == "3.5.7") { "Versión de origen no validada" }
+            check(positiveAuthorizationFor(packageBytes)) { "OTA_AUTH previo no confirmado para este ZIP" }
             check(watch.info.value?.supportsOta == true) { "Firmware sin capacidad OTA anunciada" }
             val status = watch.client!!.getStatus()
             check(status.session != WatchSessionState.RECORDING && status.rec != org.avoperformance.horse.core.ble.RecStatus.RECORDING) { "Entrenamiento activo" }
