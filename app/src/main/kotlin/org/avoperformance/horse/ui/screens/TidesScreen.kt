@@ -377,7 +377,7 @@ fun TidesScreen() {
 
 /** Explicit opt-in snapshot: forecast model values, never labeled as measured tide. */
 suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org.avoperformance.horse.data.TrainingMarineEntity {
-    val forecast = fetchTides()
+    val forecast = fetchTides()\n    val officialDay = runCatching { fetchOfficialDays().firstOrNull { it.date == java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDate() } }.getOrNull()
     val at = java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDateTime()
     val point = forecast.sea.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
         ?: error("No hay previsión marina disponible")
@@ -392,7 +392,7 @@ suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org
         sampleMs = point.date.atZone(zone).toInstant().toEpochMilli(),
         source = "Open-Meteo Marine/Weather · modelo, no medición",
         levelMsl = point.sea, waveM = point.wave, wavePeriodS = point.period,
-        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend
+        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend,\n        tideCoefficient = officialDay?.let { if (at.hour < 12) it.coefficient0 else it.coefficient12 },\n        coefficientSource = if (officialDay != null) "Puerto de Santander · predicción astronómica, referencia Santander" else null
     )
 }                item {
                     AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
