@@ -210,24 +210,47 @@ private fun TideGauge(points: List<SeaPoint>, now: LocalDateTime, next: Extremum
     Text("Escala relativa al rango del modelo, NO altura oficial sobre cero de carta.", style = MaterialTheme.typography.labelSmall)
 }
 @Composable
-private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate) {
-    val days = (0..6).map { firstDay.plusDays(it.toLong()) }
-    days.forEach { date ->
-        val rows = extremes.filter { it.date.toLocalDate() == date }
-        Text(date.format(DateTimeFormatter.ofPattern("EEE d MMM", es)).uppercase(es),
-            color = gold, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 12.dp, bottom = 4.dp))
-        if (rows.isEmpty()) Text("Sin predicción disponible", style = MaterialTheme.typography.bodySmall)
-        rows.forEach { e ->
-            Row(Modifier.fillMaxWidth().background(
-                if (e.high) Color(0xFF603536) else Color(0xFF28573E),
-                RoundedCornerShape(4.dp)).padding(horizontal = 10.dp, vertical = 9.dp),
-                horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                Text(if (e.high) "▲ Pleamar" else "▼ Bajamar", modifier = Modifier.weight(1f))
-                Text(e.date.format(fmtHour), fontWeight = FontWeight.Bold, modifier = Modifier.width(65.dp))
-                Text(e.height.show("m", 2), modifier = Modifier.width(82.dp))
+private fun TideEventRow(e: Extremum) {
+    val high = e.high
+    val shade = if (high) Color(0xFF713C43) else Color(0xFF27654F)
+    Row(
+        Modifier.fillMaxWidth().padding(vertical = 2.dp)
+            .background(shade, RoundedCornerShape(6.dp))
+            .padding(horizontal = 10.dp, vertical = 9.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(if (high) "▲ PLEAMAR" else "▼ BAJAMAR",
+            modifier = Modifier.weight(1f), color = Color.White,
+            style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+        Text(e.date.format(fmtHour), color = Color.White, fontWeight = FontWeight.Bold,
+            modifier = Modifier.width(64.dp))
+        Text(e.height.show("m", 2), color = Color.White, modifier = Modifier.width(68.dp))
+        Canvas(Modifier.width(45.dp).height(26.dp)) {
+            val p = Path()
+            for (i in 0..32) {
+                val x = size.width * i / 32f
+                val t = i / 32f
+                val y = if (high) size.height * (0.74f - 0.55f * kotlin.math.sin(t * Math.PI).toFloat())
+                    else size.height * (0.25f + 0.55f * kotlin.math.sin(t * Math.PI).toFloat())
+                if (i == 0) p.moveTo(x, y) else p.lineTo(x, y)
             }
-            Spacer(Modifier.height(3.dp))
+            drawPath(p, Color(0xFF76D7F4), style = Stroke(width = 3f))
         }
+    }
+}
+@Composable
+private fun MultiDayTable(extremes: List<Extremum>, firstDay: LocalDate, numberOfDays: Int = 7) {
+    (0 until numberOfDays).forEach { offset ->
+        val date = firstDay.plusDays(offset.toLong())
+        val rows = extremes.filter { it.date.toLocalDate() == date }.sortedBy { it.date }
+        Row(Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 5.dp),
+            horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(date.format(DateTimeFormatter.ofPattern("EEEE d MMMM", es))
+                .replaceFirstChar { it.uppercase() }, color = gold, fontWeight = FontWeight.Bold)
+            Text(moonPhase(date), style = MaterialTheme.typography.labelSmall, color = aqua)
+        }
+        if (rows.isEmpty()) Text("Sin predicción disponible", style = MaterialTheme.typography.bodySmall)
+        rows.forEach { TideEventRow(it) }
     }
 }
 @Composable
@@ -282,15 +305,8 @@ fun TidesScreen() {
                 item {
                     AvoCard("ESTADO DE LA MAREA · MODELO") {
                         TideGauge(day, now, next)
-                        val before = all.getOrNull((all.indexOf(current) - 1).coerceAtLeast(0))?.sea
-                        val trend = if (current?.sea != null && before != null && current.sea > before) "SUBIENDO ↑" else if (current?.sea != null && before != null && current.sea < before) "BAJANDO ↓" else "SIN TENDENCIA"
-                        Text(trend, color = aqua, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-                        Text(now.format(DateTimeFormatter.ofPattern("EEEE d 'de' MMMM · HH:mm", es)).replaceFirstChar { it.uppercase() })
-                        if (next != null) {
-                            val remaining = Duration.between(now, next.date).toMinutes().coerceAtLeast(0)
-                            Text("Próxima ${if (next.high) "pleamar" else "bajamar"} · ${next.date.format(fmtHour)}", fontWeight = FontWeight.Bold)
-                            Text("Faltan ${remaining / 60} h ${remaining % 60} min", color = gold, style = MaterialTheme.typography.titleLarge)
-                        }
+                        Text(now.format(DateTimeFormatter.ofPattern("EEEE d 'de' MMMM · HH:mm", es))
+                            .replaceFirstChar { it.uppercase() })
                         Text(officialToday?.let { "Coef. Santander 0h/12h: ${it.coefficient0} / ${it.coefficient12}" } ?: "Coeficiente oficial: no disponible", color = gold, style = MaterialTheme.typography.titleMedium)
                         Text("Nivel previsto respecto al nivel medio: ${current?.sea.show("m", 2)}", style = MaterialTheme.typography.bodySmall)
                     }
@@ -303,15 +319,9 @@ fun TidesScreen() {
                 }
                 item {
                     AvoCard("PLEAMARES Y BAJAMARES") {
-                        val today = ex.filter { it.date.toLocalDate() == selected }
+                        val today = (officialToday?.events ?: ex).filter { it.date.toLocalDate() == selected }
                         if (today.isEmpty()) Text("Sin extremos disponibles")
-                        today.forEach { e ->
-                            Row(Modifier.fillMaxWidth().padding(vertical = 7.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text(if (e.high) "▲ Pleamar" else "▼ Bajamar", color = if (e.high) aqua else gold)
-                                Text(e.date.format(fmtHour), fontWeight = FontWeight.Bold)
-                                Text(e.height.show("m", 2))
-                            }
-                        }
+                        today.forEach { e -> TideEventRow(e) }
                     }
                 }
                 item {
