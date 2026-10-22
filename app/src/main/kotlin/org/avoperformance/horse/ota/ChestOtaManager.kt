@@ -109,7 +109,8 @@ class ChestOtaManager(private val container: AppContainer) {
             if (status == null) failures += "No se pudo consultar estado del reloj"
             else {
                 if (status.session == WatchSessionState.RECORDING || status.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING) failures += "Grabación activa"
-                if (status.batteryPct == null || status.batteryPct < 60) failures += "Batería inferior al 60 % o desconocida"
+                val battery = status.batteryPct
+                if (battery == null || battery < 60) failures += "Batería inferior al 60 % o desconocida"
             }
         }
         if (!safeInstallationAvailable) failures += "Falta validación física de hash final, anti-rollback y recuperación OTA"
