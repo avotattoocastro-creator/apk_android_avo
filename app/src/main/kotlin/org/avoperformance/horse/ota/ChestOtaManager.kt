@@ -28,8 +28,8 @@ class ChestOtaManager(private val container: AppContainer) {
      *  This digest is pinned from the previously verified build artifact. No generic unsigned OTA.
      */
     private val approvedSha256 = "a483f6b93befb50768f9c7486668891358ba76b0da559dbea29cb994c0a88d20"
-    fun isApproved(image: ByteArray): Boolean = ChestOtaProtocol.inspect(image).valid
-    val safeInstallationAvailable: Boolean = true
+    fun isApproved(image: ByteArray): Boolean = runCatching { SignedOtaVerifier.verify(image); true }.getOrDefault(false)
+    val safeInstallationAvailable: Boolean = false // Watch-side signature enforcement and anti-rollback not yet proven
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
         val old = _state.value
@@ -37,7 +37,7 @@ class ChestOtaManager(private val container: AppContainer) {
     }
 
     suspend fun transfer(image: ByteArray) = withContext(Dispatchers.IO) {
-        check(isApproved(image)) { "Imagen no compatible: se requiere una imagen AVO CHEST ESP32-S3 con marcador reconocido" }
+        check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }\n        check(isApproved(image)) { "Paquete OTA no firmado o firma inválida" }
         check(!active) { "Otra actualización ya está activa" }
         active = true
         cancelRequested = false
