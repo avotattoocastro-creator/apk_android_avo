@@ -33,7 +33,11 @@ class ChestOtaManager(private val container: AppContainer) {
     }
     fun isApproved(packageBytes: ByteArray): Boolean = runCatching { inspectSignedPackage(packageBytes); true }.getOrDefault(false)
     @Volatile private var positiveAuthVersion: String? = null
-    val positiveAuthorizationConfirmed: Boolean get() = positiveAuthVersion != null
+    @Volatile private var positiveAuthDigest: String? = null
+    private fun packageDigest(bytes: ByteArray): String = java.security.MessageDigest.getInstance("SHA-256")
+        .digest(bytes).joinToString("") { "%02x".format(it.toInt() and 255) }
+    fun positiveAuthorizationFor(packageBytes: ByteArray): Boolean =
+        positiveAuthVersion != null && positiveAuthDigest == packageDigest(packageBytes)
     val safeInstallationAvailable: Boolean = false // Watch-side signature enforcement and anti-rollback not yet proven
     fun cancel() { cancelRequested = true }
     private fun report(phase: String, note: String) {
@@ -44,6 +48,8 @@ class ChestOtaManager(private val container: AppContainer) {
     /** Non-flashing diagnostic: malformed authorization must be rejected by the watch. */
     suspend fun probeInvalidAuthorization(): String = withContext(Dispatchers.IO) {
         check(!active) { "Hay una operación OTA activa" }
+        positiveAuthVersion = null
+        positiveAuthDigest = null
         val watch = container.watch
         check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
         check(watch.info.value?.firmware == "3.5.7") { "Diagnóstico limitado a CHEST 3.5.7" }
@@ -65,6 +71,7 @@ class ChestOtaManager(private val container: AppContainer) {
     suspend fun probeValidAuthorization(packageBytes: ByteArray): String = withContext(Dispatchers.IO) {
         check(!active) { "Hay una operación OTA activa" }
         positiveAuthVersion = null
+        positiveAuthDigest = null
         val verified = inspectSignedPackage(packageBytes)
         val watch = container.watch
         check(watch.isReady && watch.client != null) { "Conecta y autoriza el reloj primero" }
@@ -74,6 +81,7 @@ class ChestOtaManager(private val container: AppContainer) {
             Idempotency.STATE_CHANGING, 12000, 0
         )
         val result = if (response.statusEnum == BleStatus.OK) {
+            positiveAuthDigest = packageDigest(packageBytes)
             positiveAuthVersion = verified.version
             "CONFIRMADO: el reloj aceptó OTA_AUTH para ${verified.version}; no se ha enviado firmware"
         } else {
