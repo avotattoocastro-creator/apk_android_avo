@@ -13,6 +13,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.security.*
@@ -26,6 +27,8 @@ class MainActivity : Activity() {
     private val alias = "AVO_OTA_SIGNING_P256_V1"
     private val ks = KeyStore.getInstance("AndroidKeyStore")
     private lateinit var status: TextView
+    private lateinit var identityState: TextView
+    private var page = "home"
     private lateinit var version: EditText
     private var firmware: ByteArray? = null
     private var output: ByteArray? = null
@@ -63,9 +66,66 @@ class MainActivity : Activity() {
             .setMessage("Esta función está pendiente de implementación y validación. No se ha activado una protección inexistente.")
             .setPositiveButton("Entendido",null).show()
     }
+    private fun refreshIdentity() {
+        if(::identityState.isInitialized) identityState.text =
+            if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo"
+            else "Sin clave oficial activada"
+    }
+    private fun showKeys() {
+        page="keys"
+        val p=LinearLayout(this).apply {
+            orientation=LinearLayout.VERTICAL
+            setPadding(dp(18),dp(24),dp(18),dp(24))
+            setBackgroundColor(navy)
+            isFocusableInTouchMode=true
+            requestFocus()
+        }
+        fun textLine(t:String,size:Float,color:Int=Color.WHITE): TextView =
+            label(t,size,color).apply { setPadding(0,dp(8),0,dp(12)) }
+        p.addView(textLine("‹  Volver",18f,blue).apply { setOnClickListener { showHome() } })
+        p.addView(textLine("Mis claves",27f))
+        val state=textLine(if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada",17f,mint)
+        p.addView(state)
+        p.addView(textLine("Las claves Keystore no permiten exportar la parte privada. La recuperación cifrada requerirá una clave nueva.",14f,Color.LTGRAY))
+        fun item(title:String, detail:String, callback:()->Unit) {
+            val card=LinearLayout(this).apply {
+                orientation=LinearLayout.VERTICAL
+                setPadding(dp(16),dp(15),dp(16),dp(15))
+                background=bg(tile,16)
+                setOnClickListener { callback() }
+            }
+            card.addView(textLine(title,17f))
+            card.addView(textLine(detail,13f,Color.LTGRAY))
+            p.addView(card,LinearLayout.LayoutParams(-1,-2).apply { bottomMargin=dp(12) })
+        }
+        item("Crear clave Keystore","Protección local no exportable") {
+            createKey()
+            state.text=if(ks.containsAlias(alias)) "Clave Keystore disponible" else "Sin clave creada"
+        }
+        item("Exportar clave pública","Compartir clave pública SPKI JSON") { exportPublicKey() }
+        item("Diagnóstico de seguridad","Comprobar protección hardware") { diagnose() }
+        item("Importar clave · Pendiente","Recuperación cifrada en desarrollo") { unavailable("Importar clave") }
+        item("Exportar copia privada · Pendiente","No disponible para claves Keystore") { unavailable("Exportar copia privada") }
+        status= textLine("No compartas ninguna clave privada.",13f,Color.LTGRAY)
+        p.addView(status)
+        setContentView(ScrollView(this).apply { addView(p) })
+    }
+    private fun showHome() {
+        page="home"
+        buildDashboard()
+    }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if(page!="home") showHome() else super.onBackPressed()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ks.load(null)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        buildDashboard()
+    }
+    private fun buildDashboard() {
+        super.onCreate(savedInstanceState)
         window.statusBarColor=navy
         window.navigationBarColor=navy
         val root=LinearLayout(this).apply {
@@ -81,9 +141,10 @@ class MainActivity : Activity() {
             background=bg(tile,18)
         }
         identity.addView(label("♢  Identidad de firma",20f,Color.WHITE,true))
-        identity.addView(label(if(ks.containsAlias(alias)) "Clave local disponible" else "Sin clave oficial activada",18f).apply {
+        identityState=label(if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo" else "Sin clave oficial activada",18f).apply {
             setPadding(0,dp(14),0,dp(6))
         })
+        identity.addView(identityState)
         status=label("Configura y respalda tu clave antes de publicar firmware",14f,Color.LTGRAY)
         identity.addView(status)
         root.addView(identity)
@@ -105,10 +166,7 @@ class MainActivity : Activity() {
                     isClickable=true
                     setOnClickListener {
                         when(id) {
-                            0 -> action("Mis claves",arrayOf("Crear clave Keystore","Exportar clave pública","Diagnóstico de seguridad","Importar copia de clave (pendiente)","Exportar copia privada (pendiente)"),arrayOf(
-                                {createKey()},{exportPublicKey()},{diagnose()},
-                                {unavailable("Importar copia de clave")},{unavailable("Exportar copia privada")}
-                            ))
+                            0 -> showKeys()
                             1 -> action("Firmar BIN",arrayOf("Seleccionar firmware BIN","Autorizar y firmar","Guardar ZIP firmado"),arrayOf(
                                 {pickFirmware()},{authorize()},{savePackage()}
                             ))
@@ -135,11 +193,14 @@ class MainActivity : Activity() {
             setHintTextColor(Color.LTGRAY); setTextColor(Color.WHITE)
             setSingleLine(true)
         }
+        // Version is edited only on the signing workflow; do not autofocus the dashboard.
+        version.isFocusableInTouchMode=false
         root.addView(version)
         root.addView(label("Las funciones aún no implementadas aparecen identificadas como pendientes.",12f,Color.LTGRAY).apply {
             gravity=Gravity.CENTER; setPadding(dp(6),dp(14),dp(6),0)
         })
         setContentView(ScrollView(this).apply {
+            isFocusableInTouchMode=true; requestFocus()
             setBackgroundColor(navy); addView(root)
         })
     }
@@ -154,6 +215,7 @@ class MainActivity : Activity() {
             .build())
         gen.generateKeyPair()
         status.text="Clave creada. Exporta y conserva la clave pública. Revisa diagnóstico."
+        refreshIdentity()
     } catch(e:Exception) { status.text="Error: ${e.message}" } }
     private fun diagnose() = try {
         val key=ks.getKey(alias,null) as? PrivateKey ?: error("Primero crea la clave")
