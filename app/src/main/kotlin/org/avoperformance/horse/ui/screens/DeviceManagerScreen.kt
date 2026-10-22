@@ -42,6 +42,7 @@ fun DeviceManagerScreen(c: AppContainer) {
     var inspectedName by remember { mutableStateOf("Ningún firmware seleccionado") }
     var inspection by remember { mutableStateOf<ChestOtaProtocol.Inspection?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
+    var authDiagnostic by remember { mutableStateOf("Pendiente") }
     fun displayName(uri: Uri): String? = runCatching {
         c.app.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
             val column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
@@ -65,9 +66,10 @@ fun DeviceManagerScreen(c: AppContainer) {
                 val resolvedName = displayName(uri) ?: "firmware seleccionado"
                 inspectedName = resolvedName
                 if (resolvedName != "firmware seleccionado") {
-                    require(resolvedName.endsWith(".bin", ignoreCase = true)) { "El archivo elegido no es .bin: $resolvedName" }
+                    require(resolvedName.endsWith(".zip", ignoreCase = true)) { "Selecciona el paquete OTA firmado .zip: $resolvedName" }
                 }
-                val result = ChestOtaProtocol.inspect(bytes)
+                val verified = c.chestOta.inspectSignedPackage(bytes)
+                val result = ChestOtaProtocol.inspect(verified.firmware)
                 selectedImage = bytes
                 userAccepts = false
                 inspection = result
@@ -105,9 +107,9 @@ fun DeviceManagerScreen(c: AppContainer) {
                 KV("Tamaño", inspection?.let { "${it.size} bytes" } ?: "—")
                 KV("Validación de estructura", inspection?.reason ?: "Pendiente de selección")
                 KV("SHA-256", inspection?.sha256?.joinToString("") { "%02x".format(it.toInt() and 255) } ?: "—")
-                OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar firmware .bin") }
+                OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar paquete OTA firmado .zip") }
                 error?.let { Note("Error al leer archivo: $it") }
-                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "AVO CHEST compatible (sin firma)" else "No compatible")
+                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "Firma ES256 válida (solo comprobación Android)" else "No compatible")
                 KV("Estado OTA", ota.phase)
                 if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
                 ota.error?.let { Note("OTA: $it") }
@@ -117,15 +119,23 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Text("Diagnóstico OTA (confirmaciones y reinicio)")
                     ota.events.forEach { Note(it) }
                 }
-                Text("OTA experimental: admite imágenes AVO CHEST compatibles de distintas versiones. La estructura y marca se comprueban, pero NO existe autenticación mediante firma digital. El SHA-256 solo verifica integridad, no procedencia. Riesgo de instalar una versión incorrecta, desconexión o fallo; no apagar el reloj.", color = AvoColors.Warn)
+                Text("OTA firmada ES256: el reloj debe autorizar el manifiesto antes de recibir firmware. La instalación sigue bloqueada hasta completar las pruebas de seguridad.", color = AvoColors.Warn)
+                KV("Diagnóstico de firma inválida", authDiagnostic)
+                OutlinedButton(enabled = c.watch.isReady && info?.firmware == "3.5.7", onClick = {
+                    scope.launch {
+                        authDiagnostic = "Comprobando rechazo..."
+                        authDiagnostic = runCatching { c.chestOta.probeInvalidAuthorization() }
+                            .getOrElse { "Error de diagnóstico: ${it.message}" }
+                    }
+                }) { Text("Probar rechazo OTA_AUTH (sin instalar)") }
                 Row(horizontalArrangement = Arrangement.Start) {
                     Checkbox(checked = userAccepts, onCheckedChange = { userAccepts = it })
                     Text("Acepto el riesgo y confirmo que no hay entrenamientos activos")
                 }
-                Button(enabled = selectedImage?.let { c.chestOta.isApproved(it) } == true && userAccepts && c.watch.isReady && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
+                Button(enabled = c.chestOta.safeInstallationAvailable && selectedImage?.let { c.chestOta.isApproved(it) } == true && userAccepts && c.watch.isReady && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
                     val firmware = selectedImage ?: return@Button
                     scope.launch { runCatching { c.chestOta.transfer(firmware) }.onFailure { error = it.message } }
-                }) { Text("Actualizar pecho por BLE · experimental") }
+                }) { Text("Instalar OTA firmada (pendiente validación)") }
                 OutlinedButton(onClick = { c.chestOta.cancel() }) { Text("Solicitar cancelación") }
                 KV("OTA espalda", "No compatible todavía")
                 Note("No borra ni formatea la microSD. La versión posterior y la conservación de sesiones requieren comprobación física. Detén NTRIP antes de actualizar.")
