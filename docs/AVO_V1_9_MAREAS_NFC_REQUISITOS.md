@@ -30,3 +30,12 @@ Estado: especificación de integración; no equivale a implementación funcional
 - Con otra app abierta, registrar ACTION_NDEF_DISCOVERED para URI avohorse://identity/horse|rider/{code} y procesar onCreate/onNewIntent.
 - Validar esquema/host/ruta/código y existencia local; no cambiar identidad durante grabación; sincronizar por BLE o dejar pendiente.
 - Mostrar confirmación o error. Sin prometer lectura con pantalla apagada.
+
+
+## Estado de implementación — 22/10/2026 (rama unificada)
+
+Este documento conserva los **requisitos**, no es un certificado de cumplimiento. La app Android está en versión **1.9**, `versionCode 11`. Los cambios de mareas incluyen `TidesScreen.kt` con indicador vertical, curvas, tablas por día, datos de modelo Open-Meteo Marine/Weather y un lector opcional de la tabla astronómica de Santander. La tabla oficial se usa solo si hay datos recientes que superen el análisis; **no está comprobado que el lector funcione con el HTML actual ni que la precisión sea equivalente a Tu Marea Pro**. Santander es referencia regional, no una medición local de El Regatón. Las alturas del modelo se refieren al nivel medio y las oficiales al cero del puerto: no mezclarlas.
+
+`TrainingMarineEntity` conserva instantáneas marítimas, y `WatchSyncManager` intenta asociar previsiones a sesiones recientes cuando se sincronizan. No hay prueba física completa de estas funciones ni de los requisitos de captura al final, histórico y servidor. Los requisitos pendientes de esta especificación (caché, ubicación configurable, amplitud, amanecer, presión, historial, comparativas, exportación completa y pruebas de NFC) **no deben marcarse como entregados sin evidencia**.
+
+El desarrollo del firmware de pecho y AVO Signer está centralizado en `develop/avo-performance-horse`. CHEST V3.5.6 es la última fuente integrada; V3.5.7 con recepción de firma OTA no está validado. Consultar el README raíz para versiones y criterios de aceptación.
