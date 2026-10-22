@@ -415,10 +415,12 @@ class MainActivity : Activity() {
     }
     private fun sign(password:CharArray?=null) = try {
         val bin=firmware ?: error("Falta BIN")
+        val firmwareVersion=version.text.toString().trim()
+        require(Regex("^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9._-]+)?$").matches(firmwareVersion)) { "Versión inválida. Usa 3.5.6 o 3.5.6-beta" }
         val hash=MessageDigest.getInstance("SHA-256").digest(bin).joinToString("") { "%02x".format(it) }
         val manifest=JSONObject().put("schema","avo-ota-manifest-v1")
             .put("target",selectedTarget)
-            .put("version",version.text.toString().trim())
+            .put("version",firmwareVersion)
             .put("firmware","firmware.bin").put("size",bin.size)
             .put("sha256",hash).put("alg","ES256").put("kid",if(vault.exists()) "AVO_OTA_RECOVERABLE_P256_V1" else alias)
             .toString().toByteArray(Charsets.UTF_8)
