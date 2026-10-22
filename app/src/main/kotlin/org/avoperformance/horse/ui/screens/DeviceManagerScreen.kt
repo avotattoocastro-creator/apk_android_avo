@@ -1,6 +1,10 @@
 package org.avoperformance.horse.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
@@ -77,6 +81,9 @@ fun DeviceManagerScreen(c: AppContainer) {
             }.onFailure { error = it.message; inspection = null; selectedImage = null }
         }
     }
+    val androidVerified = selectedImage?.let { c.chestOta.isApproved(it) } == true
+    val watchAuthorized = false // No positive OTA_AUTH handshake exposed by the current manager
+    val readyToInstall = androidVerified && watchAuthorized && c.chestOta.safeInstallationAvailable && c.watch.isReady
     val link by c.watch.state.collectAsStateWithLifecycle()
     val info by c.watch.info.collectAsStateWithLifecycle()
     val sample by c.watch.telemetry.collectAsStateWithLifecycle()
@@ -109,7 +116,15 @@ fun DeviceManagerScreen(c: AppContainer) {
                 KV("SHA-256", inspection?.sha256?.joinToString("") { "%02x".format(it.toInt() and 255) } ?: "—")
                 OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar paquete OTA firmado .zip") }
                 error?.let { Note("Error al leer archivo: $it") }
-                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "Firma ES256 válida (solo comprobación Android)" else "No compatible")
+                Text("SEGURIDAD OTA · ESTADOS INDEPENDIENTES", fontWeight = FontWeight.Bold, color = AvoColors.Warn)
+                Column(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
+                    Text("1. Firma verificada en Android", fontWeight = FontWeight.Bold)
+                    Text(if (androidVerified) "ES256 válida · comprobación local completada" else "Pendiente · selecciona un ZIP firmado")
+                    Text("2. Autorización recibida del reloj", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
+                    Text("No confirmada · el rechazo VERIFY_FAILED no es una autorización positiva")
+                    Text("3. Firmware listo para instalar", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
+                    Text(if (readyToInstall) "Listo" else "Bloqueado · falta validación de seguridad en el reloj")
+                }
                 KV("Estado OTA", ota.phase)
                 if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
                 ota.error?.let { Note("OTA: $it") }
@@ -117,10 +132,11 @@ fun DeviceManagerScreen(c: AppContainer) {
                 ota.versionAfter?.let { KV("Versión observada tras OTA", it) }
                 if (ota.events.isNotEmpty()) {
                     Text("Diagnóstico OTA (confirmaciones y reinicio)")
-                    ota.events.forEach { Note(it) }
+                    ota.events.takeLast(8).forEach { Note(it) }
                 }
                 Text("OTA firmada ES256: el reloj debe autorizar el manifiesto antes de recibir firmware. La instalación sigue bloqueada hasta completar las pruebas de seguridad.", color = AvoColors.Warn)
-                KV("Diagnóstico de firma inválida", authDiagnostic)
+                Text("PRUEBA NEGATIVA · HISTORIAL SEPARADO", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
+                Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
                 OutlinedButton(enabled = c.watch.isReady && info?.firmware == "3.5.7", onClick = {
                     scope.launch {
                         authDiagnostic = "Comprobando rechazo..."
@@ -132,7 +148,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                     Checkbox(checked = userAccepts, onCheckedChange = { userAccepts = it })
                     Text("Acepto el riesgo y confirmo que no hay entrenamientos activos")
                 }
-                Button(enabled = c.chestOta.safeInstallationAvailable && selectedImage?.let { c.chestOta.isApproved(it) } == true && userAccepts && c.watch.isReady && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
+                Button(enabled = readyToInstall && userAccepts && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
                     val firmware = selectedImage ?: return@Button
                     scope.launch { runCatching { c.chestOta.transfer(firmware) }.onFailure { error = it.message } }
                 }) { Text("Instalar OTA firmada (pendiente validación)") }
