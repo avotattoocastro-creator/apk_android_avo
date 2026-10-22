@@ -63,6 +63,15 @@ class ChestOtaManager(private val container: AppContainer) {
             _state.value = State("Preparando", 0, image.size, versionBefore = beforeVersion)
             report("Preparando", "Firmware anterior: ${beforeVersion ?: "no comunicado"}; bytes=${image.size}")
             val client = watch.client!!
+            val authorization = client.request(
+                MsgType.OTA_AUTH,
+                ChestOtaProtocol.authPayload(verified.manifest, verified.signature),
+                Idempotency.STATE_CHANGING, 12000, 0
+            )
+            check(authorization.statusEnum == BleStatus.OK) {
+                "OTA_AUTH rechazado por el reloj: ${authorization.statusEnum.texto}"
+            }
+            report("Autorizado", "OTA_AUTH confirmado por el reloj para ${verified.version}")
             val b = client.request(MsgType.OTA_BEGIN, ChestOtaProtocol.beginPayload(image), Idempotency.STATE_CHANGING, 12000, 0)
             check(b.statusEnum == BleStatus.OK) { "OTA_BEGIN rechazado: ${b.statusEnum.texto}" }
             began = true
