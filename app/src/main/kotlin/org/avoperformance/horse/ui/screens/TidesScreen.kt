@@ -240,7 +240,8 @@ private fun Metric(title: String, value: String, modifier: Modifier = Modifier) 
 @Composable
 fun TidesScreen() {
     var data by remember { mutableStateOf<TideData?>(null) }
-    var error by remember { mutableStateOf<String?>(null) }\n    var official by remember { mutableStateOf<List<OfficialDay>>(emptyList()) }
+    var error by remember { mutableStateOf<String?>(null) }
+    var official by remember { mutableStateOf<List<OfficialDay>>(emptyList()) }
     var refresh by remember { mutableIntStateOf(0) }
     var loading by remember { mutableStateOf(true) }
     var tab by remember { mutableIntStateOf(0) }
@@ -249,12 +250,15 @@ fun TidesScreen() {
     LaunchedEffect(Unit) { while (true) { now = LocalDateTime.now(zone); delay(60000) } }
     LaunchedEffect(refresh) {
         loading = true
-        try { data = fetchTides(); error = null } catch (e: Exception) { error = e.message ?: "No se pudo actualizar" }\n        official = runCatching { fetchOfficialDays() }.getOrDefault(emptyList())
+        try { data = fetchTides(); error = null } catch (e: Exception) { error = e.message ?: "No se pudo actualizar" }
+        official = runCatching { fetchOfficialDays() }.getOrDefault(emptyList())
         loading = false
     }
     val all = data?.sea.orEmpty()
     val day = all.filter { it.date.toLocalDate() == selected }
-    val officialToday = official.firstOrNull { it.date == now.toLocalDate() }\n    val officialWeek = official.filter { it.date >= now.toLocalDate() && it.date < now.toLocalDate().plusDays(7) }\n    val ex = extrema(all)
+    val officialToday = official.firstOrNull { it.date == now.toLocalDate() }
+    val officialWeek = official.filter { it.date >= now.toLocalDate() && it.date < now.toLocalDate().plusDays(7) }
+    val ex = extrema(all)
     val next = ex.firstOrNull { it.date > now }
     val current = all.lastOrNull { it.date <= now }
     val weather = data?.weather?.lastOrNull { it.date <= now }
@@ -276,7 +280,8 @@ fun TidesScreen() {
         LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (tab == 0) {
                 item {
-                    AvoCard("ESTADO DE LA MAREA · MODELO") {\n                        TideGauge(all, now, next)
+                    AvoCard("ESTADO DE LA MAREA · MODELO") {
+                        TideGauge(all, now, next)
                         val before = all.getOrNull((all.indexOf(current) - 1).coerceAtLeast(0))?.sea
                         val trend = if (current?.sea != null && before != null && current.sea > before) "SUBIENDO ↑" else if (current?.sea != null && before != null && current.sea < before) "BAJANDO ↓" else "SIN TENDENCIA"
                         Text(trend, color = aqua, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
@@ -377,7 +382,8 @@ fun TidesScreen() {
 
 /** Explicit opt-in snapshot: forecast model values, never labeled as measured tide. */
 suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org.avoperformance.horse.data.TrainingMarineEntity {
-    val forecast = fetchTides()\n    val officialDay = runCatching { fetchOfficialDays().firstOrNull { it.date == java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDate() } }.getOrNull()
+    val forecast = fetchTides()
+    val officialDay = runCatching { fetchOfficialDays().firstOrNull { it.date == java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDate() } }.getOrNull()
     val at = java.time.Instant.ofEpochMilli(timestampMs).atZone(zone).toLocalDateTime()
     val point = forecast.sea.minByOrNull { kotlin.math.abs(java.time.Duration.between(it.date, at).toMinutes()) }
         ?: error("No hay previsión marina disponible")
@@ -392,7 +398,9 @@ suspend fun marineSnapshotForTraining(sessionId: String, timestampMs: Long): org
         sampleMs = point.date.atZone(zone).toInstant().toEpochMilli(),
         source = "Open-Meteo Marine/Weather · modelo, no medición",
         levelMsl = point.sea, waveM = point.wave, wavePeriodS = point.period,
-        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend,\n        tideCoefficient = officialDay?.let { if (at.hour < 12) it.coefficient0 else it.coefficient12 },\n        coefficientSource = if (officialDay != null) "Puerto de Santander · predicción astronómica, referencia Santander" else null
+        waterC = point.temp, windKmh = w?.wind, gustKmh = w?.gust, tideTrend = trend,
+        tideCoefficient = officialDay?.let { if (at.hour < 12) it.coefficient0 else it.coefficient12 },
+        coefficientSource = if (officialDay != null) "Puerto de Santander · predicción astronómica, referencia Santander" else null
     )
 }                item {
                     AvoCard("CALENDARIO DE MAREAS · 7 DÍAS") {
