@@ -125,7 +125,6 @@ class MainActivity : Activity() {
         buildDashboard()
     }
     private fun buildDashboard() {
-        super.onCreate(savedInstanceState)
         window.statusBarColor=navy
         window.navigationBarColor=navy
         val root=LinearLayout(this).apply {
@@ -143,7 +142,7 @@ class MainActivity : Activity() {
         identity.addView(label("♢  Identidad de firma",20f,Color.WHITE,true))
         identityState=label(if(ks.containsAlias(alias)) "Clave local disponible · Sin respaldo" else "Sin clave oficial activada",18f).apply {
             setPadding(0,dp(14),0,dp(6))
-        })
+        }
         identity.addView(identityState)
         status=label("Configura y respalda tu clave antes de publicar firmware",14f,Color.LTGRAY)
         identity.addView(status)
