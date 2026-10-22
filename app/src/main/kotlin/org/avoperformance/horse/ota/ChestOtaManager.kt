@@ -91,6 +91,34 @@ class ChestOtaManager(private val container: AppContainer) {
         result
     }
 
+    /** Read-only installation preflight. Never starts flash writing. */
+    suspend fun installationPreflight(packageBytes: ByteArray): String = withContext(Dispatchers.IO) {
+        val failures = mutableListOf<String>()
+        val verified = runCatching { inspectSignedPackage(packageBytes) }.getOrElse {
+            return@withContext "BLOQUEADO: ZIP/firma/imagen inválidos: ${it.message}"
+        }
+        val watch = container.watch
+        if (!watch.isReady || watch.client == null) failures += "Reloj BLE desconectado"
+        if (watch.info.value?.supportsOta != true) failures += "Capacidad OTA no anunciada"
+        if (watch.info.value?.firmware != "3.5.7") failures += "Versión de origen no validada (requiere 3.5.7)"
+        if (!positiveAuthorizationFor(packageBytes)) failures += "Falta OTA_AUTH positivo para este ZIP exacto"
+        if (container.ntrip.running) failures += "NTRIP activo"
+        if (container.sync.isBusy) failures += "Sincronización de entrenamientos en curso"
+        if (watch.isReady && watch.client != null) {
+            val status = runCatching { watch.client!!.getStatus() }.getOrNull()
+            if (status == null) failures += "No se pudo consultar estado del reloj"
+            else {
+                if (status.session == WatchSessionState.RECORDING || status.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING) failures += "Grabación activa"
+                if (status.batteryPct == null || status.batteryPct < 60) failures += "Batería inferior al 60 % o desconocida"
+            }
+        }
+        if (!safeInstallationAvailable) failures += "Falta validación física de hash final, anti-rollback y recuperación OTA"
+        val result = if (failures.isEmpty()) "PREPARADO: ${verified.version}" else
+            "BLOQUEADO para ${verified.version}: " + failures.joinToString("; ")
+        report("Diagnóstico previo OTA", result)
+        result
+    }
+
     suspend fun transfer(packageBytes: ByteArray) = withContext(Dispatchers.IO) {
         check(safeInstallationAvailable) { "OTA bloqueada: falta demostrar verificación de firma y anti-rollback en el reloj físico" }
         val verified = inspectSignedPackage(packageBytes)
