@@ -30,7 +30,7 @@ jobs:
             python3 "$GITHUB_WORKSPACE/firmware/chest/V3_5_${version}/apply_v35${version}.py"
           done
           grep -q '3.5.9' lib/avo_core/src/avo_version.h
-          grep -q 'V3.5.9-OTA-HARDENED' AVO_CHEST_V3_5_0/src/build_info.h
+          grep -q 'V3.5.9-OTA-DIAGNOSTICS' AVO_CHEST_V3_5_0/src/build_info.h
           FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
       - name: Validate OTA binary
         shell: bash
@@ -42,7 +42,7 @@ jobs:
           import sys,hashlib,pathlib
           b=pathlib.Path(sys.argv[1]).read_bytes()
           assert b[0]==0xE9
-          assert b"V3.5.9-OTA-HARDENED" in b
+          assert b"V3.5.9-OTA-DIAGNOSTICS" in b
           print("SHA256",hashlib.sha256(b).hexdigest(),"size",len(b))
           PY
           cp "$image" firmware_out/AVO_CHEST_V3_5_9_OTA_HARDENED.bin
