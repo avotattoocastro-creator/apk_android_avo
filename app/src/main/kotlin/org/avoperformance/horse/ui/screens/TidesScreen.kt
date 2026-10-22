@@ -81,6 +81,51 @@ private fun extrema(points: List<SeaPoint>): List<Extremum> = points.windowed(3)
     val interpolated = b - denominator * shift * shift / 2.0
     Extremum(triple[1].date.plusMinutes((shift * 60).roundToInt().toLong()), interpolated, high)
 }
+/** Official astronomical tide table for Santander, not a measurement at El Regatón. */
+private data class OfficialDay(val date: LocalDate, val coefficient0: Int, val coefficient12: Int, val events: List<Extremum>)
+private fun parseOfficialTable(html: String): List<OfficialDay> {
+    val rows = Regex("<tr\\b[^>]*>(.*?)</tr>", RegexOption.DOT_MATCHES_ALL).findAll(html)
+    val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yy")
+    fun cellText(raw: String): String = android.text.Html.fromHtml(
+        raw.replace(Regex("<[^>]+>"), " "), android.text.Html.FROM_HTML_MODE_LEGACY
+    ).toString().replace("\\s+".toRegex(), " ").trim()
+    fun height(raw: String) = raw.replace(",", ".").toDoubleOrNull()
+    fun event(date: LocalDate, time: String, value: String, high: Boolean): Extremum? {
+        val hour = runCatching { LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm")) }.getOrNull() ?: return null
+        val h = height(value) ?: return null
+        return Extremum(date.atTime(hour), h, high)
+    }
+    return rows.mapNotNull { row ->
+        val cells = Regex("<td\\b[^>]*>(.*?)</td>", RegexOption.DOT_MATCHES_ALL)
+            .findAll(row.groupValues[1]).map { cellText(it.groupValues[1]) }.toList()
+        val dateIndex = cells.indexOfFirst { Regex("\\d{2}/\\d{2}/\\d{2}").containsMatchIn(it) }
+        if (dateIndex < 0 || cells.size - dateIndex < 11) return@mapNotNull null
+        val values = cells.drop(dateIndex)
+        val date = runCatching { LocalDate.parse(values[0], dateFormat) }.getOrNull() ?: return@mapNotNull null
+        // Date, moon phase, high1 time/height, high2 time/height, coefficient 0h/12h, low1 time/height, low2 time/height.
+        val offset = if (values.size >= 12) 2 else 1
+        if (values.size < offset + 10) return@mapNotNull null
+        val c0 = values[offset + 4].toIntOrNull() ?: return@mapNotNull null
+        val c12 = values[offset + 5].toIntOrNull() ?: return@mapNotNull null
+        val events = listOfNotNull(
+            event(date, values[offset], values[offset + 1], true),
+            event(date, values[offset + 2], values[offset + 3], true),
+            event(date, values[offset + 6], values[offset + 7], false),
+            event(date, values[offset + 8], values[offset + 9], false)
+        ).sortedBy { it.date }
+        if (events.isEmpty()) null else OfficialDay(date, c0, c12, events)
+    }.toList().distinctBy { it.date }
+}
+private suspend fun fetchOfficialDays(): List<OfficialDay> = withContext(Dispatchers.IO) {
+    val conn = (URL("https://www.puertosantander.es/es/tabla-de-mareas").openConnection() as HttpURLConnection).apply {
+        connectTimeout = 10000; readTimeout = 10000
+    }
+    try {
+        if (conn.responseCode !in 200..299) return@withContext emptyList()
+        val html = conn.inputStream.bufferedReader().use { it.readText() }
+        parseOfficialTable(html)
+    } finally { conn.disconnect() }
+}
 private fun moonPhase(date: LocalDate): String {
     val days = java.time.temporal.ChronoUnit.DAYS.between(LocalDate.of(2000, 1, 6), date).toDouble()
     val age = ((days % 29.530588853) + 29.530588853) % 29.530588853
@@ -195,7 +240,7 @@ private fun Metric(title: String, value: String, modifier: Modifier = Modifier) 
 @Composable
 fun TidesScreen() {
     var data by remember { mutableStateOf<TideData?>(null) }
-    var error by remember { mutableStateOf<String?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }\n    var official by remember { mutableStateOf<List<OfficialDay>>(emptyList()) }
     var refresh by remember { mutableIntStateOf(0) }
     var loading by remember { mutableStateOf(true) }
     var tab by remember { mutableIntStateOf(0) }
@@ -204,12 +249,12 @@ fun TidesScreen() {
     LaunchedEffect(Unit) { while (true) { now = LocalDateTime.now(zone); delay(60000) } }
     LaunchedEffect(refresh) {
         loading = true
-        try { data = fetchTides(); error = null } catch (e: Exception) { error = e.message ?: "No se pudo actualizar" }
+        try { data = fetchTides(); error = null } catch (e: Exception) { error = e.message ?: "No se pudo actualizar" }\n        official = runCatching { fetchOfficialDays() }.getOrDefault(emptyList())
         loading = false
     }
     val all = data?.sea.orEmpty()
     val day = all.filter { it.date.toLocalDate() == selected }
-    val ex = extrema(all)
+    val officialToday = official.firstOrNull { it.date == now.toLocalDate() }\n    val officialWeek = official.filter { it.date >= now.toLocalDate() && it.date < now.toLocalDate().plusDays(7) }\n    val ex = extrema(all)
     val next = ex.firstOrNull { it.date > now }
     val current = all.lastOrNull { it.date <= now }
     val weather = data?.weather?.lastOrNull { it.date <= now }
@@ -241,7 +286,7 @@ fun TidesScreen() {
                             Text("Próxima ${if (next.high) "pleamar" else "bajamar"} · ${next.date.format(fmtHour)}", fontWeight = FontWeight.Bold)
                             Text("Faltan ${remaining / 60} h ${remaining % 60} min", color = gold, style = MaterialTheme.typography.titleLarge)
                         }
-                        Text("Coeficiente: pendiente de fuente oficial IHM", color = gold, style = MaterialTheme.typography.titleMedium)
+                        Text(officialToday?.let { "Coef. Santander 0h/12h: ${it.coefficient0} / ${it.coefficient12}" } ?: "Coeficiente oficial: no disponible", color = gold, style = MaterialTheme.typography.titleMedium)
                         Text("Nivel previsto respecto al nivel medio: ${current?.sea.show("m", 2)}", style = MaterialTheme.typography.bodySmall)
                     }
                 }
