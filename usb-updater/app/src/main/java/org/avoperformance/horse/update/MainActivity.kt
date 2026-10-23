@@ -196,7 +196,7 @@ class MainActivity : Activity() {
                             } finally { connection.releaseInterface(intf) }
                         } finally { connection.close() }
                     } catch (e: Exception) { "Diagnóstico ROM: ${e.message}" }
-                    runOnUiThread { status.text = result.replace("\\n", "\\n") }
+                    runOnUiThread { status.text = result.replace("\\\\n", "\\n") }
                 }.start()
             }
         }
