@@ -2,7 +2,7 @@ name: Build AVO USB Updater
 on:
   workflow_dispatch:
   push:
-    branches: [feature/avo-usb-updater]
+    branches: [develop/avo-performance-horse, feature/avo-usb-updater]
     paths: ['usb-updater/**', '.github/workflows/build-usb-updater.yml']
 permissions:
   contents: read
@@ -19,17 +19,17 @@ jobs:
       - name: Install SDK
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
-      - name: Build test APK
+      - name: Build debug APK
         run: |
           chmod +x gradlew
           ./gradlew -p usb-updater --no-daemon :app:assembleDebug
-      - name: Collect test APK
+      - name: Collect APK and checksum
         run: |
           mkdir -p out
-          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk out/AVO_Performance_Horse_Update_V1_0_debug.apk
+          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk out/AVO_Performance_Horse_Update_V1_1_debug.apk
           cd out && sha256sum *.apk > SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-Update-V1-0-DEBUG
+          name: AVO-Performance-Horse-Update-V1-1-DEBUG
           path: out/
           retention-days: 30
