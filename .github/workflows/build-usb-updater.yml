@@ -6,6 +6,8 @@ on:
     paths: ['usb-updater/**', '.github/workflows/build-usb-updater.yml']
 permissions:
   contents: read
+env:
+  APK_NAME: AVO_Performance_Horse_Update_V1_8_0_beta1_debug.apk
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -19,21 +21,43 @@ jobs:
       - name: Install SDK
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
-      - name: Test ROM and partition validation
+      - name: Compile Kotlin
         run: |
           chmod +x gradlew
-          ./gradlew -p usb-updater --no-daemon :app:testDebugUnitTest
+          ./gradlew -p usb-updater --no-daemon :app:compileDebugKotlin
+      - name: Unit tests (protocol, OTA, simulated ESP32-S3 installs)
+        run: ./gradlew -p usb-updater --no-daemon :app:testDebugUnitTest
+      - name: Safety checks
+        run: |
+          set -e
+          SRC=usb-updater/app/src/main/java/org/avoperformance/horse/update
+          # Flash writes may only be issued by the installer, with addresses from the device's partition table.
+          if grep -n "flashBegin(" $SRC/*.kt | grep -v -e "Installer.kt" -e "EspRom.kt"; then
+            echo "flashBegin() used outside Installer"; exit 1; fi
+          if grep -nE "flashBegin\((0x[0-9A-Fa-f]+|[0-9]+)L?," $SRC/*.kt; then
+            echo "hard-coded flash write address"; exit 1; fi
+          # No stub loader, no encrypted writes, no eFuse writes.
+          # (comment lines starting with * or // are ignored)
+          if grep -nE "FLASH_ENCRYPT_DATA|0xD4|EFUSE_PGM|espefuse|MEM_BEGIN|MEM_DATA|MEM_END" $SRC/*.kt | grep -vE ":[0-9]+:\s*(\*|//|/\*)"; then
+            echo "forbidden capability referenced"; exit 1; fi
+          echo "Safety checks passed"
       - name: Build debug APK
-        run: |
-          chmod +x gradlew
-          ./gradlew -p usb-updater --no-daemon :app:assembleDebug
-      - name: Collect APK and checksum
+        run: ./gradlew -p usb-updater --no-daemon :app:assembleDebug
+      - name: Collect APK, test reports and checksum
+        if: success()
         run: |
           mkdir -p out
-          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk out/AVO_Performance_Horse_Update_V1_7_1_debug.apk
+          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk "out/$APK_NAME"
           cd out && sha256sum *.apk > SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
-          name: AVO-Performance-Horse-Update-V1-7-1-DEBUG
+          name: AVO-Performance-Horse-Update-V1-8-0-beta1-DEBUG
           path: out/
           retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unit-test-reports
+          path: usb-updater/app/build/reports/tests/
+          retention-days: 14
