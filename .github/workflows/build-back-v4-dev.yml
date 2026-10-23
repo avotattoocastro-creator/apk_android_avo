@@ -58,7 +58,7 @@ jobs:
           assert len(b) < 3264 * 1024, "does not fit app0/app1 (3264 KB)"
           missing = [s for s in (b"4.0.0-dev1\x00AVO-BACK", b"AJUSTE_PRECISION", b"PRECISION: perfil") if s not in b]
           if missing: print(f"::error title=Imagen::faltan {missing}"); raise SystemExit(1)
-          print(f"::notice title=AVO BACK 3.8.0::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0), esp_app_desc OK, version 3.8.0 presente")
+          print(f"::notice title=AVO BACK 4.0.0-dev1::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0), esp_app_desc OK, version 4.0.0-dev1 y marcador AVO-BACK presentes")
           PY
           echo "::notice title=Memoria::$(grep -E 'Sketch uses|Global variables' build.log | tr '\n' ' ')"
 
