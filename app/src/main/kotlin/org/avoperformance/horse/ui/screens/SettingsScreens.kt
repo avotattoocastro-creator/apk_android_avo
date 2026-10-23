@@ -106,9 +106,32 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
         "almacenamiento" to "Almacenamiento",
         "jinetes" to "Jinetes",
         "nfc" to "NFC · Leer y grabar tarjetas",
+        "dispositivos" to "Dispositivos",
     )
     LazyColumn(Modifier.fillMaxSize()) {
-        items(entries) { (r, t) -> AvoCard(onClick = { go(r) }) { Text(t, color = AvoColors.Text, fontSize = 16.sp) } }
+        items(entries) { (r, t) -> AvoCard(onClick = { go(r) }, trailing = { Text("›", color = AvoColors.TextDim, fontSize = 20.sp) }) { Text(t, color = AvoColors.Text, fontSize = 16.sp) } }
+        item {
+            var spotName by remember { mutableStateOf(c.settings.spotName) }
+            var spotLat by remember { mutableStateOf(c.settings.spotLat.toString()) }
+            var spotLon by remember { mutableStateOf(c.settings.spotLon.toString()) }
+            val tel by c.watch.telemetry.collectAsStateWithLifecycle()
+            AvoCard("Lugar de entrenamiento · mareas y tiempo") {
+                OutlinedTextField(spotName, { spotName = it.take(40) }, label = { Text("Nombre") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(spotLat, { spotLat = it.take(12) }, label = { Text("Latitud") }, singleLine = true, modifier = Modifier.weight(1f))
+                    OutlinedTextField(spotLon, { spotLon = it.take(12) }, label = { Text("Longitud") }, singleLine = true, modifier = Modifier.weight(1f))
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
+                    OutlinedButton(enabled = tel?.t?.let { it.latE7 != 0 || it.lonE7 != 0 } == true, onClick = {
+                        tel?.t?.let { spotLat = "%.5f".format(Locale.US, it.latE7 / 1e7); spotLon = "%.5f".format(Locale.US, it.lonE7 / 1e7) }
+                    }) { Text("Posición del chaleco") }
+                    Button(enabled = (spotLat.toDoubleOrNull() ?: 999.0) in -90.0..90.0 && (spotLon.toDoubleOrNull() ?: 999.0) in -180.0..180.0 && spotName.isNotBlank(), onClick = {
+                        c.settings.spotName = spotName.trim(); c.settings.spotLat = spotLat.toDouble(); c.settings.spotLon = spotLon.toDouble()
+                        c.settings.tidePortId = null
+                    }) { Text("Guardar") }
+                }
+            }
+        }
         item {
             AvoCard("No molestar automático por geocerca") {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -124,19 +147,16 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
                         }
                     })
                 }
-                Note("Opcional. Solo se activa al confirmar el reloj una grabación automática de geocerca. Las grabaciones manuales no lo activan.")
                 KV("Permiso de Android", if (dndAccess) "Concedido" else "Pendiente")
                 if (!dndAccess) {
                     OutlinedButton(onClick = {
                         dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
                     }) { Text("Autorizar No molestar") }
                 }
-                Note("Respeta las excepciones del modo Prioridad y desactiva únicamente el cambio hecho por AVO al acabar o desconectar. Android 15 administra una regla propia de la aplicación.")
             }
         }
         item {
             AvoCard("WhatsApp · destinatarios favoritos") {
-                Note("Guarda nombres de destinatarios habituales. AVO prepara el documento automáticamente, pero WhatsApp requiere seleccionar o confirmar el chat y pulsar Enviar.")
                 OutlinedTextField(value = favoriteName, onValueChange = { favoriteName = it.take(80) },
                     label = { Text("Nombre del favorito") }, singleLine = true)
                 OutlinedButton(enabled = favoriteName.isNotBlank() && favorites.size < 12,
@@ -167,9 +187,8 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
         }
         item {
             AvoCard("Copias de seguridad · sin servidor") {
-                Note("Guarda los parámetros NTRIP no secretos y las preferencias de sincronización. No incluye contraseñas, claves BLE ni identificadores locales de caballos/jinetes.")
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { exportLauncher.launch("AVO_CONFIG_V1_8.json") }) { Text("Guardar") }
+                    Button(onClick = { exportLauncher.launch("AVO_CONFIG_V2_0.json") }) { Text("Guardar") }
                     OutlinedButton(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain", "application/octet-stream")) }) { Text("Restaurar") }
                 }
                 backupStatus?.let { Note(it, AvoColors.Info) }
@@ -177,7 +196,7 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
         }
         item {
             AvoCard("Acerca de") {
-                KV("Aplicación", "AVO Performance Horse 1.8 (desarrollo)")
+                KV("Aplicación", "AVO Performance Horse ${org.avoperformance.horse.BuildConfig.VERSION_NAME}")
                 KV("Paquete", "org.avoperformance.horse")
                 KV("Protocolo BLE", "AVO BLE v1 (firmware V3.4.4 – V3.5.4)")
             }
@@ -231,7 +250,7 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                 }
                 if (link == LinkState.NECESITA_AUTORIZACION) {
                     Spacer(Modifier.height(8.dp))
-                    Note("Para autorizar este teléfono: pulsa «Vincular» y, cuando el reloj muestre PULSA BOOT, pulsa una vez el botón BOOT del reloj (60 s). No hay PIN.")
+                    Note("Pulsa «Vincular» y después BOOT en el reloj")
                     Button(onClick = { scope.launch { msg = c.watch.claim("${Build.MANUFACTURER} ${Build.MODEL}") } }) { Text("Vincular este teléfono") }
                 }
                 if (link == LinkState.ESPERANDO_BOOT) Note("Pulsa BOOT en el reloj ahora…", AvoColors.Gold)
@@ -253,7 +272,6 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                         }
                     }
                 }
-                Note("Solo se muestran dispositivos que anuncian el servicio AVO. Al elegir uno, la app solo se conectará a ese chaleco.")
             }
         }
     }
@@ -296,7 +314,6 @@ fun NtripScreen(c: AppContainer) {
                     singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
                 Toggle("Reconectar automáticamente", n.reconnect) { n = n.copy(reconnect = it) }
                 Toggle("Activar NTRIP al conectar el chaleco", n.enabled) { n = n.copy(enabled = it) }
-                Note("La contraseña se guarda cifrada con el almacén de claves de Android. La posición GGA es la del receptor del chaleco (sin altura).")
                 msg?.let { Note(it, AvoColors.Warn) }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = {
@@ -344,7 +361,6 @@ fun NtripScreen(c: AppContainer) {
                     Button(enabled = !c.ntrip.running, onClick = { c.ntrip.start() }) { Text("Iniciar") }
                     OutlinedButton(enabled = c.ntrip.running, onClick = { c.ntrip.stop() }) { Text("Detener") }
                 }
-                Note("El estado RTK (FLOAT/FIX) se lee del receptor, nunca se deduce de que lleguen correcciones.")
             }
         }
     }
@@ -369,13 +385,11 @@ fun SyncScreen(c: AppContainer) {
                 KV("Chaleco → WiFi → servidor", "pendiente (firmware sin WiFi)", AvoColors.Warn)
                 KV("Chaleco → Bluetooth → teléfono", "activa", AvoColors.Ok)
                 KV("Teléfono → servidor", if (c.sync.serverConfigured) "activa" else "servidor pendiente", if (c.sync.serverConfigured) AvoColors.Ok else AvoColors.Warn)
-                Note("Mientras el servidor esté en pausa, los entrenamientos quedan descargados y verificados en el teléfono. Nunca se marcan como «verificados por el servidor» sin confirmación real del servidor, y nunca se borra nada del reloj automáticamente.")
             }
         }
         item {
             AvoCard("Descarga automática") {
                 Toggle("Descargar al conectar el chaleco", auto) { auto = it; c.settings.autoDownload = it }
-                Note("No se descarga mientras el reloj está grabando, para no interferir con la tarjeta SD.")
                 OutlinedButton(onClick = { c.sync.autoSync() }) { Text("Sincronizar ahora") }
                 progress.message?.let { Note(it) }
             }
@@ -470,7 +484,6 @@ fun StorageScreen(c: AppContainer) {
             AvoCard("Teléfono") {
                 KV("Entrenamientos descargados", Fmt.bytes(used))
                 KV("Espacio libre del teléfono", Fmt.bytes(ctx.filesDir.usableSpace))
-                Note("Las copias del teléfono no se borran automáticamente.")
             }
         }
     }

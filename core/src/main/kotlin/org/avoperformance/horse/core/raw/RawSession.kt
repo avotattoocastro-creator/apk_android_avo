@@ -55,7 +55,7 @@ data class GnssSample(
     val itowMs: Long, val year: Int, val month: Int, val day: Int, val hour: Int, val min: Int, val sec: Int, val valid: Int,
     val fixType: Int, val flags: Int, val flags3: Int, val numSv: Int, val lonE7: Int, val latE7: Int, val heightMm: Int,
     val hAccMm: Long, val vAccMm: Long, val gSpeedMmS: Int, val headMotE5: Int, val backRxMs: Long, val navRateHz: Int,
-    val chestUs: Long,
+    val chestUs: Long, val hMslMm: Int = 0,
 ) {
     val gnssFixOk get() = flags and 1 != 0
     val carrSoln get() = (flags shr 6) and 3
@@ -68,10 +68,10 @@ data class GnssSample(
             val r = ByteReader(p, off, off + len)
             val itow = r.u32(); val y = r.u16(); val mo = r.u8(); val d = r.u8(); val h = r.u8(); val mi = r.u8(); val s = r.u8(); val v = r.u8()
             r.i32(); r.u32()
-            val ft = r.u8(); val fl = r.u8(); val f3 = r.u16(); val sv = r.u8(); val lon = r.i32(); val lat = r.i32(); val hgt = r.i32(); r.i32()
+            val ft = r.u8(); val fl = r.u8(); val f3 = r.u16(); val sv = r.u8(); val lon = r.i32(); val lat = r.i32(); val hgt = r.i32(); val msl = r.i32()
             val ha = r.u32(); val va = r.u32(); r.i32(); r.i32(); r.i32(); val gs = r.i32(); val hm = r.i32(); r.u32(); r.u32(); r.u16()
             val brx = r.u32(); r.u8(); val nr = r.u8()
-            return if (r.ok) GnssSample(itow, y, mo, d, h, mi, s, v, ft, fl, f3, sv, lon, lat, hgt, ha, va, gs, hm, brx, nr, chestUs) else null
+            return if (r.ok) GnssSample(itow, y, mo, d, h, mi, s, v, ft, fl, f3, sv, lon, lat, hgt, ha, va, gs, hm, brx, nr, chestUs, msl) else null
         }
     }
 }
@@ -168,13 +168,26 @@ data class TrainingAnalysis(
     val durationS: Double?, val navRateHz: Int,
     val imuBatches: Int, val imuSamples: Long, val markers: Int, val badUartFrames: Int,
     val track: List<TrackPoint>,
+    /** Chest time (µs) of each MARKER record, to place it on the track. */
+    val markerUs: List<Long> = emptyList(),
+    /** Stride/beat rate measured from the girth IMU (scale-free periodicity of |a|). */
+    val cadence: List<CadencePoint> = emptyList(),
+    /** IMU ids seen (0 central, 1 left, 2 right). */
+    val imuIds: Set<Int> = emptySet(),
 ) {
     val fixTimeS get() = if (navRateHz > 0) fixEpochs.toDouble() / navRateHz else null
     val floatTimeS get() = if (navRateHz > 0) floatEpochs.toDouble() / navRateHz else null
     val imuAvailable get() = imuSamples > 0
 }
 
-data class TrackPoint(val p: GeoPoint, val itowMs: Long, val speedMs: Double, val carrSoln: Int, val hAccM: Double)
+data class TrackPoint(
+    val p: GeoPoint, val itowMs: Long, val speedMs: Double, val carrSoln: Int, val hAccM: Double,
+    /** Height above mean sea level (m) from NAV-PVT hMSL. */
+    val altM: Double = Double.NaN,
+    val vAccM: Double = Double.NaN,
+    val numSv: Int = 0,
+    val chestUs: Long = 0,
+)
 
 class TrainingAnalyzer(private val maxTrackPoints: Int = 5000) : RawVisitor {
     private var gnss = 0; private var usable = 0; private var noFix = 0
@@ -184,21 +197,53 @@ class TrainingAnalyzer(private val maxTrackPoints: Int = 5000) : RawVisitor {
     private var firstItow = -1L; private var lastItow = -1L
     private var rate = 0
     private var imuB = 0; private var imuS = 0L; private var markers = 0; private var badUart = 0
+    private val markerUs = ArrayList<Long>()
+    private val cadence = CadenceEstimator()
+    private val imuIds = HashSet<Int>()
     private val track = ArrayList<TrackPoint>()
     private var trackStride = 1; private var trackCounter = 0
 
     override fun record(type: Int, flags: Int, chestUs: Long, data: ByteArray, off: Int, len: Int, blockSeq: Long, blockFlags: Int) {
         when (type) {
-            RecType.MARKER -> markers++
+            RecType.MARKER -> { markers++; markerUs += chestUs }
             RecType.UART_FRAME -> {
                 val f = UartCodec.parse(data, off, len) ?: run { badUart++; return }
                 when (f.type) {
                     UartType.GNSS_SAMPLE -> GnssSample.decode(data, f.payloadOff, f.payloadLen, chestUs)?.let { onGnss(it) } ?: badUart++
-                    UartType.IMU_SAMPLE -> if (f.payloadLen >= 24) { imuB++; imuS += data[f.payloadOff + 2].toInt() and 0xFF }
+                    UartType.IMU_SAMPLE -> if (f.payloadLen >= 24) {
+                        imuB++
+                        val count = data[f.payloadOff + 2].toInt() and 0xFF
+                        imuS += count
+                        onImu(data, f.payloadOff, f.payloadLen, count, chestUs)
+                    }
                 }
             }
         }
     }
+
+    /** IMU_SAMPLE batch: 24-byte header + count × 18 bytes (ax ay az gx gy gz mx my mz, int16 LE). */
+    private fun onImu(b: ByteArray, off: Int, len: Int, count: Int, chestUs: Long) {
+        val imuId = b[off + 1].toInt() and 0xFF
+        val fmt = b[off + 3].toInt() and 0xFF
+        imuIds += imuId
+        if (fmt != 0 || imuId != cadenceImu(imuId) || count == 0 || 24 + count * 18 > len) return
+        val periodUs = leU16(b, off + 12).toLong().takeIf { it in 1000..100_000 } ?: return
+        for (i in 0 until count) {
+            val p = off + 24 + i * 18
+            val ax = i16(b, p); val ay = i16(b, p + 2); val az = i16(b, p + 4)
+            val mag = kotlin.math.sqrt((ax * ax + ay * ay + az * az).toDouble())
+            cadence.add(chestUs - (count - 1 - i) * periodUs, mag)
+        }
+    }
+
+    /** Cadence uses the central IMU (id 0); if the girth only reports another id, the first one seen. */
+    private var cadenceId = -1
+    private fun cadenceImu(id: Int): Int {
+        if (cadenceId < 0 || (id == 0 && cadenceId != 0)) { if (cadenceId != id) cadence.reset(); cadenceId = id }
+        return cadenceId
+    }
+
+    private fun i16(b: ByteArray, p: Int): Int = ((b[p].toInt() and 0xFF) or (b[p + 1].toInt() shl 8)).toShort().toInt()
 
     private fun onGnss(s: GnssSample) {
         gnss++
@@ -214,7 +259,7 @@ class TrainingAnalyzer(private val maxTrackPoints: Int = 5000) : RawVisitor {
         if (firstItow < 0) firstItow = s.itowMs
         lastItow = s.itowMs
         if (trackCounter++ % trackStride == 0) {
-            track += TrackPoint(p, s.itowMs, v, s.carrSoln, s.hAccMm / 1000.0)
+            track += TrackPoint(p, s.itowMs, v, s.carrSoln, s.hAccMm / 1000.0, s.hMslMm / 1000.0, s.vAccMm / 1000.0, s.numSv, s.chestUs)
             if (track.size >= maxTrackPoints) { // decimate by 2, keep memory bounded
                 val keep = track.filterIndexed { i, _ -> i % 2 == 0 }
                 track.clear(); track.addAll(keep); trackStride *= 2
@@ -226,7 +271,8 @@ class TrainingAnalyzer(private val maxTrackPoints: Int = 5000) : RawVisitor {
         // itow wraps weekly; a session never lasts a week, so handle one wrap.
         val dur = if (firstItow >= 0) { var d = lastItow - firstItow; if (d < 0) d += 604_800_000L; d / 1000.0 } else null
         return TrainingAnalysis(scan, gnss, usable, noFix, auto, flt, fix, dist, maxSpeed,
-            if (dur != null && dur > 0) dist / dur else null, dur, rate, imuB, imuS, markers, badUart, track.toList())
+            if (dur != null && dur > 0) dist / dur else null, dur, rate, imuB, imuS, markers, badUart, track.toList(),
+            markerUs.toList(), cadence.result(), imuIds.toSet())
     }
 
     companion object {

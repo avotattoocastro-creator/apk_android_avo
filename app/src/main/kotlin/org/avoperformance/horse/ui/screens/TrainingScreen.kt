@@ -78,7 +78,7 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
         c.watch.resetCommand()
     }
 
-    LazyColumn(Modifier.fillMaxSize()) {
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 6.dp)) {
         item {
             AvoCard("Caballo y jinete") {
                 Picker("Caballo", horses.firstOrNull { it.id == selHorse }?.let { "${it.code} · ${it.name}" }, horses.map { it.id to "${it.code} · ${it.name}" }) {
@@ -95,11 +95,17 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
                     if (h == null) msg = "Selecciona un caballo"
                     else scope.launch { msg = c.config.setIdentity(h.id, h.code, r?.id ?: 0, r?.code ?: "") ?: "Caballo y jinete guardados en el reloj" }
                 }) { Text("Enviar al reloj") }
-                Note("Se graba en la cabecera de cada entrenamiento. No se puede cambiar durante una grabación.")
             }
         }
         item {
-            AvoCard("Grabación manual") {
+            AvoCard("Grabación", trailing = { if (session == WatchSessionState.RECORDING) org.avoperformance.horse.ui.components.StatusPill("REC", AvoColors.Red) }) {
+                val tt = if (fresh) tel!!.t else null
+                org.avoperformance.horse.ui.components.MetricGrid(listOf(
+                    { m -> org.avoperformance.horse.ui.components.MetricTile("Tiempo", tt?.let { Fmt.duration(it.activeMs) }, "", m) },
+                    { m -> org.avoperformance.horse.ui.components.MetricTile("Distancia", tt?.let { Fmt.m(it.distanceCm / 100.0, 0) }, "m", m) },
+                    { m -> org.avoperformance.horse.ui.components.MetricTile("Velocidad", tt?.let { Fmt.kmh(it.speedMmS / 1000.0) }, "km/h", m, AvoColors.Blue) },
+                ))
+                Spacer(Modifier.height(8.dp))
                 KV("Estado del reloj", session?.texto ?: if (ready) "esperando telemetría" else link.texto)
                 KV("Geocerca", if (fresh) tel!!.t.geofence.texto else null)
                 KV("Tiempo activo", if (fresh) Fmt.duration(tel!!.t.activeMs) else null)
@@ -113,17 +119,16 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     val canStart = ready && !busy && (session == WatchSessionState.IDLE || session == WatchSessionState.ARMED || session == WatchSessionState.COMPLETED || session == WatchSessionState.STOPPED_WAITING_UPLOAD)
                     Button(enabled = canStart, onClick = { confirmStart = true }, modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.buttonColors(containerColor = AvoColors.Ok)) { Text("Iniciar") }
+                        colors = ButtonDefaults.buttonColors(containerColor = AvoColors.Red)) { Text("▶  INICIAR", fontWeight = androidx.compose.ui.text.font.FontWeight.Black) }
                     val canStop = ready && !busy && (session == WatchSessionState.RECORDING || session == WatchSessionState.PAUSED)
                     Button(enabled = canStop, onClick = { confirmStop = true }, modifier = Modifier.weight(1f),
-                        colors = ButtonDefaults.buttonColors(containerColor = AvoColors.Bad)) { Text("Detener") }
+                        colors = ButtonDefaults.buttonColors(containerColor = AvoColors.Surface2, contentColor = AvoColors.Text)) { Text("■  DETENER", fontWeight = androidx.compose.ui.text.font.FontWeight.Black) }
                 }
                 Row(Modifier.fillMaxWidth().padding(top = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedButton(enabled = ready && !busy && session == WatchSessionState.RECORDING, onClick = { send(SessionCmd.PAUSE) }, modifier = Modifier.weight(1f)) { Text("Pausar") }
                     OutlinedButton(enabled = ready && !busy && session == WatchSessionState.PAUSED, onClick = { send(SessionCmd.RESUME) }, modifier = Modifier.weight(1f)) { Text("Reanudar") }
                     OutlinedButton(enabled = ready && !busy && session == WatchSessionState.RECORDING, onClick = { send(SessionCmd.MARKER) }, modifier = Modifier.weight(1f)) { Text("Marca") }
                 }
-                Note("Cada orden se envía una sola vez; si se pierde la respuesta se reintenta con el mismo identificador y el reloj no la ejecuta dos veces. Solo se da por hecha cuando la telemetría del reloj lo confirma.")
             }
         }
         item {
@@ -138,7 +143,6 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
                 val active = conf?.fences?.withIndex()?.filter { (i, f) -> f != null && (conf.activeMask shr i) and 1 == 1 && f.type.code != 0 }?.joinToString { it.value!!.name }
                 KV("Geocercas activas", active?.ifBlank { "ninguna" })
                 KV("Precisión mínima para decidir", conf?.let { "${it.hAccMaxCm / 100.0} m" })
-                Note("La grabación automática usa la precisión del receptor; no exige RTK FIX.")
                 OutlinedButton(onClick = { go("geocercas") }) { Text("Editar geocercas") }
             }
         }

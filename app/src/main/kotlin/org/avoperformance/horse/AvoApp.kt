@@ -33,8 +33,8 @@ class AppContainer(val app: Application) {
     val watch = WatchConnection(app, settings, secure, log, scope)
     val config = WatchConfigOps(watch)
     val ntrip = NtripManager(settings, watch, log, scope)
+    val tides = org.avoperformance.horse.tide.TideRepository(app)
     val sync = WatchSyncManager(app, db, settings, watch, server, log, scope)
-    val chestOta = org.avoperformance.horse.ota.ChestOtaManager(this)
 }
 
 class AppLog(private val c: AppContainer) {

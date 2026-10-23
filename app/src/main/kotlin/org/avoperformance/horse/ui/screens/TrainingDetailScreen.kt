@@ -1,87 +1,107 @@
 package org.avoperformance.horse.ui.screens
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.transformable
-import androidx.compose.foundation.gestures.rememberTransformableState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.avoperformance.horse.AppContainer
+import org.avoperformance.horse.core.raw.Gait
+import org.avoperformance.horse.core.raw.Insights
+import org.avoperformance.horse.core.raw.TrainingAnalysis
+import org.avoperformance.horse.core.raw.TrainingInsights
+import org.avoperformance.horse.core.sync.SyncRules
+import org.avoperformance.horse.core.sync.SyncState
 import org.avoperformance.horse.maps.AvoImagery
+import org.avoperformance.horse.tide.TideRepository
+import org.avoperformance.horse.ui.components.*
+import org.avoperformance.horse.ui.theme.AvoColors
 import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.tileprovider.MapTileProviderBasic
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.BoundingBox
-import org.osmdroid.util.GeoPoint as OsmPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
-import org.osmdroid.views.overlay.CopyrightOverlay
-import androidx.compose.ui.unit.IntOffset
+import org.osmdroid.views.overlay.TilesOverlay
+import java.util.Locale
+import kotlin.math.abs
 import kotlin.math.hypot
 import kotlin.math.roundToInt
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.ui.graphics.Color
-import kotlin.math.abs
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.material3.Slider
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import kotlinx.coroutines.delay
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.avoperformance.horse.AppContainer
-import org.avoperformance.horse.core.geo.LocalFrame
-import org.avoperformance.horse.core.raw.TrainingAnalysis
-import org.avoperformance.horse.core.sync.SyncRules
-import org.avoperformance.horse.core.sync.SyncState
-import org.avoperformance.horse.ui.components.AvoCard
-import org.avoperformance.horse.ui.components.ConfirmDialog
-import org.avoperformance.horse.ui.components.Fmt
-import org.avoperformance.horse.ui.components.KV
-import org.avoperformance.horse.ui.components.Note
-import org.avoperformance.horse.ui.components.StatusPill
-import org.avoperformance.horse.ui.theme.AvoColors
+import org.osmdroid.util.GeoPoint as OsmPoint
+
+private val esL = Locale.forLanguageTag("es-ES")
+private fun f1(v: Double?) = v?.takeIf { it.isFinite() }?.let { String.format(esL, "%.1f", it) }
+private fun f2(v: Double?) = v?.takeIf { it.isFinite() }?.let { String.format(esL, "%.2f", it) }
+private fun f0(v: Double?) = v?.takeIf { it.isFinite() }?.let { String.format(esL, "%.0f", it) }
+private fun pct(n: Int, d: Int) = if (d > 0) "${n * 100 / d} %" else "—"
+private fun mmss(s: Double?) = s?.takeIf { it.isFinite() }?.let { val t = it.roundToInt(); if (t >= 3600) "%d:%02d:%02d".format(t / 3600, t / 60 % 60, t % 60) else "%d:%02d".format(t / 60, t % 60) }
+
+enum class TrackColor(val texto: String) { SPEED("Velocidad"), GAIT("Aire"), RTK("RTK") }
+enum class MapStyle(val texto: String) { MAP("Mapa"), SATELLITE("Satélite"), HYBRID("Híbrido") }
+
+fun gaitColor(g: Gait) = when (g) {
+    Gait.STOPPED -> Color(0xFF6E6F76); Gait.WALK -> Color(0xFF3D9BFF); Gait.TROT -> Color(0xFFFFC42C); Gait.GALLOP -> Color(0xFFED122A)
+}
+private fun speedColor(fraction: Float): Color {
+    // blue → cyan → yellow → red, same scale on map and charts
+    val f = fraction.coerceIn(0f, 1f)
+    return when {
+        f < 0.33f -> lerpC(Color(0xFF2F6BFF), Color(0xFF35D0E8), f / 0.33f)
+        f < 0.66f -> lerpC(Color(0xFF35D0E8), Color(0xFFFFC42C), (f - 0.33f) / 0.33f)
+        else -> lerpC(Color(0xFFFFC42C), Color(0xFFED122A), (f - 0.66f) / 0.34f)
+    }
+}
+private fun lerpC(a: Color, b: Color, t: Float) = Color(a.red + (b.red - a.red) * t, a.green + (b.green - a.green) * t, a.blue + (b.blue - a.blue) * t, 1f)
+private fun Color.argb() = android.graphics.Color.argb((alpha * 255).toInt(), (red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt())
 
 @Composable
 fun TrainingDetailScreen(c: AppContainer, id: String) {
     val t by c.db.trainings().observe(id).collectAsStateWithLifecycle(null)
+    val horses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
+    val riders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
     var analysis by remember { mutableStateOf<TrainingAnalysis?>(null) }
+    var insights by remember { mutableStateOf<Insights?>(null) }
     var loading by remember { mutableStateOf(false) }
     var msg by remember { mutableStateOf<String?>(null) }
     var confirmDelete by remember { mutableStateOf(false) }
     val marine by c.db.marine().observe(id).collectAsStateWithLifecycle(null)
-    val marineScope = androidx.compose.runtime.rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     var marineBusy by remember { mutableStateOf(false) }
     var marineMessage by remember { mutableStateOf<String?>(null) }
     val tt = t
@@ -90,285 +110,325 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 tt.state == SyncState.VERIFICADO_SERVIDOR.name || tt.state == SyncState.MARCADO_EN_RELOJ.name || tt.state == SyncState.DESCARGADO.name)) {
             loading = true
             analysis = withContext(Dispatchers.IO) { runCatching { c.sync.analysisFor(tt) }.getOrNull() }
+            insights = analysis?.takeIf { it.track.size >= 2 }?.let { a -> withContext(Dispatchers.Default) { runCatching { TrainingInsights.compute(a) }.getOrNull() } }
             loading = false
         }
     }
     if (tt == null) { Note("Entrenamiento no encontrado"); return }
     val st = runCatching { SyncState.valueOf(tt.state) }.getOrNull()
     val a = analysis
-    var selectedTrackIndex by remember(id) { mutableStateOf<Int?>(null) }
+    val ins = insights
+    var sel by remember(id) { mutableStateOf<Int?>(null) }
     var playing by remember(id) { mutableStateOf(false) }
-    var segmentStart by remember(id) { mutableIntStateOf(0) }
-    var segmentEnd by remember(id) { mutableIntStateOf(Int.MAX_VALUE) }
-    val androidContext = androidx.compose.ui.platform.LocalContext.current
-    val segmentPrefs = remember(androidContext) { androidContext.getSharedPreferences("avo_training_segments", android.content.Context.MODE_PRIVATE) }
-    var savedSegments by remember(id) { mutableStateOf(segmentPrefs.getString("segments_" + id, "[]") ?: "[]") }
-    var segmentLabel by remember(id) { mutableStateOf("") }
-    val savedSegmentItems = remember(savedSegments) {
+    var segStart by remember(id) { mutableIntStateOf(0) }
+    var segEnd by remember(id) { mutableIntStateOf(Int.MAX_VALUE) }
+    var tab by remember(id) { mutableIntStateOf(0) }
+    var mapStyle by remember(id) { mutableStateOf(MapStyle.HYBRID) }
+    var trackColor by remember(id) { mutableStateOf(TrackColor.SPEED) }
+    var recenter by remember(id) { mutableIntStateOf(0) }
+    val ctx = androidx.compose.ui.platform.LocalContext.current
+    val segPrefs = remember(ctx) { ctx.getSharedPreferences("avo_training_segments", android.content.Context.MODE_PRIVATE) }
+    var savedSegments by remember(id) { mutableStateOf(segPrefs.getString("segments_$id", "[]") ?: "[]") }
+    var segLabel by remember(id) { mutableStateOf("") }
+    val savedItems = remember(savedSegments) {
         runCatching {
-            val array = org.json.JSONArray(savedSegments)
-            (0 until array.length()).map { index -> array.getJSONObject(index) }
-                .map { obj -> Triple(obj.optString("name", "Tramo"), obj.getInt("start"), obj.getInt("end")) }
+            val arr = org.json.JSONArray(savedSegments)
+            (0 until arr.length()).map { arr.getJSONObject(it) }.map { Triple(it.optString("name", "Tramo"), it.getInt("start"), it.getInt("end")) }
         }.getOrDefault(emptyList())
     }
     LaunchedEffect(playing, a) {
         while (playing && a != null && a.track.isNotEmpty()) {
-            delay(250)
-            val current = selectedTrackIndex ?: 0
-            val next = (current + 1).coerceAtMost(a.track.lastIndex)
-            selectedTrackIndex = next
+            delay(200)
+            val next = ((sel ?: 0) + 1).coerceAtMost(a.track.lastIndex)
+            sel = next
             if (next == a.track.lastIndex) playing = false
         }
     }
+    val horse = horses.firstOrNull { it.code == tt.horseCode }
+    val rider = riders.firstOrNull { it.code == tt.riderCode }
+    val last = (a?.track?.lastIndex ?: 1).coerceAtLeast(1)
+    val s0 = segStart.coerceIn(0, last - 1)
+    val s1 = segEnd.coerceIn(s0 + 1, last)
+    fun pick(i: Int) { sel = i; playing = false }
 
-    var selectedTab by remember(id) { mutableStateOf("Resumen") }
-    LazyColumn(Modifier.fillMaxSize()) {
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 16.dp)) {
+        // Header
         item {
-            androidx.compose.foundation.lazy.LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)
-            ) {
-                items(5) { index ->
-                    val tab = listOf("Resumen", "Mapa", "Gráficas", "Tramos", "Datos")[index]
-                    FilterChip(selected = selectedTab == tab, onClick = { selectedTab = tab }, label = { Text(tab) })
+            Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                HorsePhoto(horse?.photoPath, Modifier.size(58.dp))
+                Spacer(Modifier.width(12.dp))
+                Column(Modifier.weight(1f)) {
+                    Text((horse?.name ?: tt.horseCode ?: "Sin caballo").uppercase(), color = AvoColors.Text, fontSize = 20.sp, fontWeight = FontWeight.Black)
+                    Text(listOfNotNull(Fmt.date(tt.startRtcMs), rider?.name ?: tt.riderCode).joinToString(" · "), color = AvoColors.TextDim, fontSize = 13.sp)
+                }
+                StatusPill(st?.texto?.substringBefore(" (")?.take(18) ?: tt.state, syncColor(st))
+            }
+            Segmented(listOf("Resumen", "Mapa y gráficas", "Datos"), tab, { tab = it }, Modifier.padding(horizontal = 12.dp, vertical = 4.dp))
+            if (loading) androidx.compose.material3.LinearProgressIndicator(Modifier.fillMaxWidth().padding(top = 6.dp), color = AvoColors.Red, trackColor = AvoColors.Surface2)
+        }
+        if (a == null && !loading) item {
+            AvoCard { KV("Duración (reloj)", Fmt.duration(tt.activeMs)); KV("Análisis", "Disponible al descargar el entrenamiento") }
+        }
+
+        // ───────────── RESUMEN ─────────────
+        if (tab == 0 && a != null) {
+            item {
+                AvoCard("Resumen") {
+                    MetricGrid(listOf(
+                        { m -> MetricTile("Distancia", f2(a.distanceM / 1000), "km", m) },
+                        { m -> MetricTile("Tiempo", mmss(a.durationS) ?: Fmt.duration(tt.activeMs), "", m) },
+                        { m -> MetricTile("En movimiento", mmss(ins?.movingSeconds), "", m) },
+                        { m -> MetricTile("V. media", f1(a.avgSpeedMs?.times(3.6)), "km/h", m, AvoColors.Blue) },
+                        { m -> MetricTile("V. máxima", f1(a.maxSpeedMs * 3.6), "km/h", m, AvoColors.Red) },
+                        { m -> MetricTile("Ritmo", a.avgSpeedMs?.takeIf { it > 0.5 }?.let { mmss(1000 / it) }, "/km", m) },
+                        { m -> MetricTile("Acel. máx", f2(ins?.maxAccelG), "g", m, AvoColors.Warn) },
+                        { m -> MetricTile("Frenada máx", f2(ins?.maxDecelG?.let { abs(it) }), "g", m, AvoColors.Warn) },
+                        { m -> MetricTile("Cadencia máx", f0(ins?.cadenceMax), "/min", m, AvoColors.Cyan) },
+                        { m -> MetricTile("Desnivel +", f0(ins?.gainM), "m", m) },
+                        { m -> MetricTile("Desnivel −", f0(ins?.lossM), "m", m) },
+                        { m -> MetricTile("RTK FIX", pct(a.fixEpochs, a.gnssUsable), "", m, AvoColors.Ok) },
+                    ))
                 }
             }
-        }
-        if (selectedTab == "Datos") item {
-            AvoCard("MAREAS Y CONDICIONES DEL ENTRENAMIENTO") {
-                if (marine == null) {
-                    Note("Sin datos marinos asociados. Se pueden consultar previsiones de hasta 7 días; no se generan datos históricos ficticios.")
-                    Button(onClick = {
-                        marineBusy = true
-                        marineScope.launch {
-                            try {
-                                val snap = marineSnapshotForTraining(tt.sessionId, tt.startRtcMs)
-                                c.db.marine().upsert(snap)
-                                marineMessage = "Condiciones guardadas"
-                            } catch (e: Exception) { marineMessage = e.message ?: "Error al consultar" }
-                            finally { marineBusy = false }
+            if (a.track.size >= 2) item {
+                AvoCard("Recorrido") {
+                    MapControls(mapStyle, { mapStyle = it }, trackColor, { trackColor = it }) { recenter++ }
+                    Spacer(Modifier.height(8.dp))
+                    RealTrackMap(a, sel, 0, a.track.lastIndex, trackColor, mapStyle, recenter, 280, ::pick)
+                    MapLegend(a, trackColor, mapStyle)
+                }
+            }
+            ins?.let { i ->
+                item { GaitCard(i) }
+                if (i.efforts.isNotEmpty()) item {
+                    AvoCard("Tramos rápidos") {
+                        i.efforts.sortedByDescending { it.maxSpeedMs }.take(6).forEachIndexed { n, e ->
+                            ListRow(
+                                badge = "${n + 1}", badgeColor = AvoColors.Red,
+                                title = "${f0(e.distanceM)} m · ${mmss(e.durationS)}",
+                                subtitle = "desde ${mmss(i.timeS.getOrNull(e.startIdx))}",
+                                value = "${f1(e.maxSpeedMs * 3.6)} km/h", valueSub = "media ${f1(e.avgSpeedMs * 3.6)}",
+                            ) { segStart = e.startIdx; segEnd = e.endIdx; pick(e.startIdx); tab = 1 }
                         }
-                    }, enabled = !marineBusy && tt.startRtcMs > 0L) { Text(if (marineBusy) "Consultando…" else "Guardar condiciones de la sesión") }
-                } else {
-                    KV("Zona", marine!!.location)
-                    KV("Tendencia", marine!!.tideTrend)
-                    KV("Coeficiente", marine!!.tideCoefficient?.toString() ?: "Pendiente de fuente oficial")
-                    KV("Nivel respecto al medio", marine!!.levelMsl?.let { "%.2f m".format(it) })
-                    KV("Oleaje", marine!!.waveM?.let { "%.2f m".format(it) })
-                    KV("Periodo", marine!!.wavePeriodS?.let { "%.1f s".format(it) })
-                    KV("Temperatura agua", marine!!.waterC?.let { "%.1f °C".format(it) })
-                    KV("Viento", marine!!.windKmh?.let { "%.1f km/h".format(it) })
-                    KV("Rachas", marine!!.gustKmh?.let { "%.1f km/h".format(it) })
-                    Note(marine!!.source)
-                }
-                marineMessage?.let { Note(it) }
-            }
-        }
-        if (selectedTab == "Resumen") item {
-            AvoCard("ENTRENAMIENTO · AVO PERFORMANCE HORSE") {
-                KV("Caballo", tt.horseCode?.takeIf { it.isNotBlank() } ?: "Sin asignar")
-                KV("Jinete", tt.riderCode?.takeIf { it.isNotBlank() } ?: "Sin asignar")
-                KV("Fecha", Fmt.date(tt.startRtcMs))
-                KV("Duración registrada", Fmt.duration(tt.activeMs))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    StatusPill(st?.texto ?: tt.state, syncColor(st))
-                }
-                if (a == null) Note("Los mapas y gráficos estarán disponibles cuando se descargue y analice la sesión.")
-            }
-        }
-        if (a != null && selectedTab == "Resumen") item {
-            AvoCard("Resumen del entrenamiento") {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = androidx.compose.foundation.layout.Arrangement.SpaceEvenly) {
-                    org.avoperformance.horse.ui.components.BigValue("${Fmt.m(a.distanceM,0)}", "m", "Distancia")
-                    org.avoperformance.horse.ui.components.BigValue("${Fmt.kmh(a.maxSpeedMs)}", "km/h", "V. máxima")
-                    org.avoperformance.horse.ui.components.BigValue(a.avgSpeedMs?.let { Fmt.kmh(it) }, "km/h", "V. media")
-                }
-                val acceleration = accelerationSeries(a)
-                KV("Aceleración máxima", acceleration.maxOrNull()?.let { "%.2f m/s²".format(it) })
-                KV("Desaceleración máxima", acceleration.minOrNull()?.let { "%.2f m/s²".format(it) })
-                KV("Duración GNSS", a.durationS?.let { Fmt.duration((it*1000).toLong()) })
-                KV("RTK FIX", "${pct(a.fixEpochs, a.gnssUsable)}")
-                KV("GNSS válido", "${a.gnssUsable} / ${a.gnssSamples}")
-            }
-        }
-        if (loading) item { Note("Analizando el fichero…") }
-        if (a != null) {
-            if (selectedTab == "Datos") item {
-                AvoCard("Análisis (datos del fichero)") {
-                    KV("Distancia", "${Fmt.m(a.distanceM, 0)} m")
-                    KV("Duración con GNSS", a.durationS?.let { Fmt.duration((it * 1000).toLong()) })
-                    KV("Velocidad media", a.avgSpeedMs?.let { "${Fmt.kmh(it)} km/h" })
-                    KV("Velocidad máxima", "${Fmt.kmh(a.maxSpeedMs)} km/h")
-                    KV("Tiempo en RTK FIX", a.fixTimeS?.let { "${Fmt.m(it, 0)} s (${pct(a.fixEpochs, a.gnssUsable)})" })
-                    KV("Tiempo en RTK FLOAT", a.floatTimeS?.let { "${Fmt.m(it, 0)} s (${pct(a.floatEpochs, a.gnssUsable)})" })
-                    KV("Épocas sin solución", "${a.noFix}")
-                    KV("Muestras GNSS válidas", "${a.gnssUsable} de ${a.gnssSamples}")
-                    KV("IMU de la cincha", if (a.imuAvailable) "${a.imuSamples} muestras" else "no disponible en este entrenamiento")
-                    KV("Marcadores", "${a.markers}")
-                    KV("Cierre del fichero", if (a.scan.cleanClose) "limpio" else "recuperado / sin cierre limpio")
-                    if (a.scan.tailGarbage) Note("El último bloque estaba incompleto (corte de alimentación); se ignoró.", AvoColors.Warn)
-                }
-            }
-            if (a.track.size >= 2) {
-                if (selectedTab == "Mapa") item { AvoCard("Control del entrenamiento") {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        OutlinedButton(onClick = { playing = !playing }) { Text(if (playing) "Pausar" else "Reproducir") }
-                        OutlinedButton(onClick = { playing = false; selectedTrackIndex = 0 }) { Text("Inicio") }
-                        OutlinedButton(onClick = { playing = false; selectedTrackIndex = a.track.lastIndex }) { Text("Final") }
                     }
-                    Slider(
-                        value = (selectedTrackIndex ?: 0).toFloat(),
-                        onValueChange = { selectedTrackIndex = it.roundToInt().coerceIn(0, a.track.lastIndex); playing = false },
-                        valueRange = 0f..a.track.lastIndex.toFloat()
-                    )
-                    selectedTrackIndex?.let { idx ->
-                        val point = a.track[idx.coerceIn(0, a.track.lastIndex)]
-                        KV("Tiempo", "%.1f s".format((point.itowMs-a.track.first().itowMs)/1000.0))
-                        KV("Velocidad", "%.2f km/h".format(point.speedMs*3.6))
-                        KV("Precisión horizontal", "%.2f m".format(point.hAccM))
-                        KV("RTK", when(point.carrSoln) { 2 -> "FIX"; 1 -> "FLOAT"; else -> "No RTK" })
+                }
+                if (i.events.isNotEmpty()) item {
+                    AvoCard("Eventos") {
+                        i.events.forEach { ev ->
+                            ListRow(
+                                badge = when (ev.kind.name) { "START" -> "▶"; "FINISH" -> "■"; "MAX_SPEED" -> "⚡"; "FIRST_GALLOP" -> "🐎"; else -> "⚑" },
+                                badgeColor = if (ev.kind.name == "MAX_SPEED") AvoColors.Red else AvoColors.Surface2,
+                                title = ev.kind.texto, subtitle = mmss(ev.timeS) ?: "",
+                                value = ev.value?.let { "${f1(it * 3.6)} km/h" } ?: "", valueSub = null,
+                            ) { pick(ev.index); tab = 1 }
+                        }
                     }
-                } }
-                if (selectedTab == "Tramos") item { AvoCard("V1.9 · Seleccionar tramo A–B") {
-                    val lastIndex = a.track.lastIndex
-                    val start = segmentStart.coerceIn(0, lastIndex - 1)
-                    val end = segmentEnd.coerceIn(start + 1, lastIndex)
-                    Note("Selecciona el inicio y el final del intervalo. Las estadísticas y gráficas de abajo corresponden solo a este tramo.")
-                    KV("Inicio A", "Punto ${start + 1}")
-                    Slider(value = start.toFloat(), onValueChange = { segmentStart = it.roundToInt().coerceIn(0, end - 1) }, valueRange = 0f..(lastIndex - 1).toFloat())
-                    KV("Final B", "Punto ${end + 1}")
-                    Slider(value = end.toFloat(), onValueChange = { segmentEnd = it.roundToInt().coerceIn(start + 1, lastIndex) }, valueRange = 1f..lastIndex.toFloat())
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        OutlinedButton(onClick = { selectedTrackIndex?.let { segmentStart = it.coerceIn(0, end - 1) } }) { Text("A = punto GPS") }
-                        OutlinedButton(onClick = { selectedTrackIndex?.let { segmentEnd = it.coerceIn(start + 1, lastIndex) } }) { Text("B = punto GPS") }
-                        OutlinedButton(onClick = { segmentStart = 0; segmentEnd = Int.MAX_VALUE }) { Text("Todo") }
-                    }
-                    androidx.compose.material3.OutlinedTextField(
-                        value = segmentLabel,
-                        onValueChange = { segmentLabel = it.take(64) },
-                        label = { Text("Nombre del tramo") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Button(onClick = {
-                        val array = runCatching { org.json.JSONArray(savedSegments) }.getOrElse { org.json.JSONArray() }
-                        array.put(org.json.JSONObject().put("name", segmentLabel.ifBlank { "Tramo " + (array.length() + 1) })
-                            .put("start", start).put("end", end))
-                        savedSegments = array.toString()
-                        segmentPrefs.edit().putString("segments_" + id, savedSegments).apply()
-                        segmentLabel = ""
-                        msg = "Tramo guardado en este dispositivo"
-                    }) { Text("Guardar tramo A–B") }
-                    savedSegmentItems.forEachIndexed { savedIndex, saved ->
-                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            OutlinedButton(onClick = {
-                                segmentStart = saved.second.coerceIn(0, lastIndex - 1)
-                                segmentEnd = saved.third.coerceIn(segmentStart + 1, lastIndex)
-                            }) { Text(saved.first + " · " + (saved.second + 1) + "–" + (saved.third + 1)) }
-                            OutlinedButton(onClick = {
-                                val array = org.json.JSONArray()
-                                savedSegmentItems.forEachIndexed { i, item ->
-                                    if (i != savedIndex) array.put(org.json.JSONObject().put("name", item.first)
-                                        .put("start", item.second).put("end", item.third))
+                }
+                if (i.splits.isNotEmpty()) item {
+                    AvoCard("Parciales · ${f0(i.splitUnitM)} m") {
+                        val best = i.splits.maxOf { it.avgSpeedMs }
+                        i.splits.forEach { sp ->
+                            Row(Modifier.fillMaxWidth().padding(vertical = 3.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Text("${sp.number}", color = AvoColors.TextDim, fontWeight = FontWeight.Bold, modifier = Modifier.width(26.dp))
+                                Box(Modifier.weight(1f).height(18.dp).clip(RoundedCornerShape(6.dp)).background(AvoColors.Surface2)) {
+                                    Box(Modifier.fillMaxHeight().fillMaxWidth((sp.avgSpeedMs / best).toFloat().coerceIn(0.05f, 1f))
+                                        .background(if (sp.avgSpeedMs == best) AvoColors.Red else AvoColors.Blue.copy(alpha = 0.7f), RoundedCornerShape(6.dp)))
                                 }
-                                savedSegments = array.toString()
-                                segmentPrefs.edit().putString("segments_" + id, savedSegments).apply()
-                            }) { Text("Quitar") }
+                                Text(mmss(sp.durationS) ?: "—", color = AvoColors.Text, fontWeight = FontWeight.Bold, modifier = Modifier.width(56.dp).padding(start = 8.dp))
+                                Text("${f1(sp.avgSpeedMs * 3.6)}", color = AvoColors.TextDim, fontSize = 13.sp, modifier = Modifier.width(40.dp))
+                            }
                         }
                     }
-                                        val portion = a.track.subList(start, end + 1)
-                    val duration = ((portion.last().itowMs - portion.first().itowMs) / 1000.0).coerceAtLeast(0.0)
-                    val distance = portion.zipWithNext().sumOf { (p, q) ->
-                        val lat1 = Math.toRadians(p.p.lat)
-                        val lat2 = Math.toRadians(q.p.lat)
-                        val dLat = lat2 - lat1
-                        val dLon = Math.toRadians(q.p.lon - p.p.lon)
-                        val h = kotlin.math.sin(dLat / 2).let { it * it } +
-                            kotlin.math.cos(lat1) * kotlin.math.cos(lat2) * kotlin.math.sin(dLon / 2).let { it * it }
-                        12742000.0 * kotlin.math.asin(kotlin.math.sqrt(h.coerceIn(0.0, 1.0)))
-                    }
-                    val speed = portion.map { it.speedMs }.filter { it.isFinite() && it >= 0.0 }
-                    val accelerations = portion.zipWithNext().mapNotNull { (p, q) ->
-                        val dt = (q.itowMs - p.itowMs) / 1000.0
-                        if (dt !in 0.08..10.0) null else ((q.speedMs - p.speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 }
-                    }
-                    KV("Duración", "%.1f s".format(duration))
-                    KV("Distancia GPS", "%.1f m".format(distance))
-                    KV("Velocidad media", speed.takeIf { it.isNotEmpty() }?.average()?.let { "%.2f km/h".format(it * 3.6) })
-                    KV("Velocidad media por distancia/tiempo", if (duration > 0.0) "%.2f km/h".format(distance / duration * 3.6) else null)
-                    KV("Velocidad máxima", speed.maxOrNull()?.let { "%.2f km/h".format(it * 3.6) })
-                    KV("Aceleración máxima", accelerations.maxOrNull()?.let { "%.2f m/s²".format(it) })
-                    KV("Desaceleración máxima", accelerations.minOrNull()?.let { "%.2f m/s²".format(it) })
-                    KV("RTK FIX", pct(portion.count { it.carrSoln == 2 }, portion.size))
-                    KV("RTK FLOAT", pct(portion.count { it.carrSoln == 1 }, portion.size))
-                    KV("RTK sin FIX/FLOAT", pct(portion.count { it.carrSoln != 1 && it.carrSoln != 2 }, portion.size))
-                    Text("Velocidad del tramo", color = AvoColors.Gold)
-                    SynchronizedChart(portion.map { it.speedMs * 3.6 }, null, AvoColors.Gold, "km/h") { selectedTrackIndex = start + it; playing = false }
-                    Text("Aceleración del tramo", color = AvoColors.Gold)
-                    SynchronizedChart(List(portion.size) { i -> if (i == 0) 0.0 else {
-                        val dt = (portion[i].itowMs - portion[i-1].itowMs) / 1000.0
-                        if (dt !in 0.08..10.0) 0.0 else ((portion[i].speedMs - portion[i-1].speedMs) / dt).takeIf { it.isFinite() && kotlin.math.abs(it) <= 12.0 } ?: 0.0
-                    } }, null, AvoColors.Warn, "m/s²") { selectedTrackIndex = start + it; playing = false }
-                } }
-                if (selectedTab == "Mapa" || selectedTab == "Resumen") item { AvoCard("Recorrido GPS interactivo") { InteractiveTrack(a, selectedTrackIndex, segmentStart.coerceIn(0, a.track.lastIndex - 1), segmentEnd.coerceIn(1, a.track.lastIndex)) { selectedTrackIndex = it; playing = false } } }
-                if (selectedTab == "Gráficas") item { AvoCard("Velocidad") { SynchronizedChart(a.track.map { it.speedMs * 3.6 }, selectedTrackIndex, AvoColors.Gold, "km/h") { selectedTrackIndex = it; playing = false } } }
-                if (selectedTab == "Gráficas") item { AvoCard("Aceleración longitudinal GNSS") {
-                    Note("Derivada de la velocidad GNSS; no sustituye a la aceleración de las IMU. Se omiten saltos de tiempo y valores espurios.")
-                    val acc = accelerationSeries(a)
-                    if (acc.size > 1) {
-                        KV("Aceleración máxima", "%.2f m/s²".format(acc.maxOrNull() ?: 0.0))
-                        KV("Frenada máxima", "%.2f m/s²".format(acc.minOrNull() ?: 0.0))
-                        SynchronizedAccelerationChart(a, selectedTrackIndex) { selectedTrackIndex = it; playing = false }
-                    } else Note("No hay suficientes muestras GNSS válidas")
-                } }
-                if (selectedTab == "Gráficas" || selectedTab == "Datos") item { AvoCard("Ritmo y regularidad") {
-                    KV("Ritmo medio", a.avgSpeedMs?.takeIf { it > 0.5 }?.let { "%.1f s/100 m".format(100.0 / it) })
-                    val speeds = a.track.map { it.speedMs }.filter { it > 0.5 && it.isFinite() }
-                    val mean = speeds.average().takeIf { !it.isNaN() && it > 0 } ?: 0.0
-                    val variation = if (speeds.size >= 3 && mean > 0) kotlin.math.sqrt(speeds.map { (it-mean)*(it-mean) }.average()) / mean * 100 else null
-                    KV("Variación de velocidad", variation?.let { "%.1f %%".format(it) })
-                    Note("Menos variación indica velocidad más uniforme; depende del trazado y el tipo de ejercicio.")
-                } }
-                if (selectedTab == "Tramos") item { AvoCard("Análisis por tramos") {
-                    val points = a.track
-                    val first = points.first().itowMs
-                    val last = points.last().itowMs
-                    val step = 30_000L
-                    var start = first
-                    while (start < last && step > 0) {
-                        val window = points.filter { it.itowMs in start until (start + step) }
-                        if (window.isNotEmpty()) {
-                            val avg = window.map { it.speedMs }.average()
-                            KV("${(start-first)/1000}–${(start-first)/1000+30} s", "%.1f km/h media · %.1f km/h máx".format(avg * 3.6, (window.maxOfOrNull { it.speedMs } ?: 0.0) * 3.6))
-                        }
-                        start += step
-                    }
-                } }
-            }
-        }
-        if (selectedTab == "Datos" || selectedTab == "Resumen") item {
-            AvoCard("Detalles técnicos del fichero") {
-                Row { StatusPill(st?.texto ?: tt.state, syncColor(st)) }
-                KV("Inicio", Fmt.date(tt.startRtcMs))
-                KV("Sesión", tt.sessionId)
-                KV("Caballo", tt.horseCode)
-                KV("Jinete", tt.riderCode)
-                KV("Tiempo activo (reloj)", Fmt.duration(tt.activeMs))
-                KV("Tamaño", Fmt.bytes(tt.totalBytes))
-                KV("SHA-256 local", tt.localSha256?.take(16)?.plus("…"))
-                KV("SHA-256 del reloj", tt.watchSha256?.take(16)?.plus("…"))
-                KV("Servidor", if (tt.serverSha256 != null) "verificado" else if (c.sync.serverConfigured) "pendiente" else "no configurado")
-                msg?.let { Note(it, AvoColors.Warn) }
-            }
-        }
-        if (selectedTab == "Datos") item {
-            AvoCard("Acciones") {
-                OutlinedButton(enabled = SyncRules.canOfferDelete(org.avoperformance.horse.core.sync.LocalTraining(tt.sessionId, tt.segments, tt.totalBytes,
-                    tt.downloadedBytes, tt.localSha256, tt.watchSha256, tt.serverSha256, st ?: SyncState.EN_RELOJ,
-                    org.avoperformance.horse.core.ble.WatchFileState.UNKNOWN, tt.startRtcMs, tt.activeMs)), onClick = { confirmDelete = true }) {
-                    Text("Borrar del reloj")
                 }
-                Note("La app nunca borra nada del reloj por su cuenta. Solo se puede borrar un entrenamiento verificado por el servidor, y el propio reloj lo comprueba.")
+            }
+            item { ConditionsCard(marine, marineBusy, marineMessage, tt.startRtcMs > 0L) {
+                marineBusy = true
+                scope.launch {
+                    try {
+                        c.db.marine().upsert(marineSnapshotForTraining(c.tides, c.settings, tt.sessionId, tt.startRtcMs))
+                        marineMessage = null
+                    } catch (e: Exception) { marineMessage = e.message ?: "Error al consultar" } finally { marineBusy = false }
+                }
+            } }
+        }
+
+        // ───────────── MAPA Y GRÁFICAS ─────────────
+        if (tab == 1 && a != null && a.track.size >= 2) {
+            item {
+                AvoCard("Mapa") {
+                    MapControls(mapStyle, { mapStyle = it }, trackColor, { trackColor = it }) { recenter++ }
+                    Spacer(Modifier.height(8.dp))
+                    RealTrackMap(a, sel, s0, s1, trackColor, mapStyle, recenter, 340, ::pick)
+                    MapLegend(a, trackColor, mapStyle)
+                    Spacer(Modifier.height(8.dp))
+                    PlaybackBar(a, ins, sel, playing, { playing = it }, ::pick)
+                }
+            }
+            item {
+                AvoCard("Gráficas sincronizadas") {
+                    val x = ins?.timeS?.toList() ?: a.track.map { (it.itowMs - a.track.first().itowMs) / 1000.0 }
+                    var zoom by remember(id) { mutableStateOf(1f) }
+                    var center by remember(id) { mutableStateOf(0.5f) }
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        SmallBtn("＋") { zoom = (zoom * 1.6f).coerceAtMost(25f) }
+                        SmallBtn("－") { zoom = (zoom / 1.6f).coerceAtLeast(1f) }
+                        SmallBtn("Todo") { zoom = 1f; center = 0.5f }
+                        if (s0 > 0 || s1 < last) SmallBtn("Tramo A–B") { zoom = (a.track.size.toFloat() / (s1 - s0 + 1)).coerceIn(1f, 25f); center = ((s0 + s1) / 2f) / last }
+                    }
+                    val win = ChartWindow(a.track.size, zoom, center)
+                    val drag: (Float) -> Unit = { dx -> center = (center - dx / zoom).coerceIn(0f, 1f) }
+                    ChartBlock("Velocidad", "km/h", a.track.map { it.speedMs * 3.6 }, sel, win, AvoColors.Red, x, drag, ::pick, fill = true)
+                    ins?.let { i ->
+                        ChartBlock("Aceleración", "g", i.accelMs2.map { it / TrainingInsights.G }, sel, win, AvoColors.Warn, x, drag, ::pick, signed = true)
+                        if (i.cadence.any { it.isFinite() }) ChartBlock("Cadencia (IMU cincha)", "/min", i.cadence.toList(), sel, win, AvoColors.Cyan, x, drag, ::pick)
+                        if (i.altM.any { it.isFinite() }) ChartBlock("Altitud", "m", i.altM.toList(), sel, win, AvoColors.Silver, x, drag, ::pick, fill = true)
+                    }
+                    ChartBlock("Precisión horizontal", "m", a.track.map { it.hAccM }, sel, win, AvoColors.Ok, x, drag, ::pick)
+                }
+            }
+            item {
+                AvoCard("Tramo A–B") {
+                    KV("Inicio A", "${mmss(ins?.timeS?.getOrNull(s0))} · punto ${s0 + 1}")
+                    Slider(value = s0.toFloat(), onValueChange = { segStart = it.roundToInt().coerceIn(0, s1 - 1) }, valueRange = 0f..(last - 1).toFloat(), colors = sliderColors())
+                    KV("Final B", "${mmss(ins?.timeS?.getOrNull(s1))} · punto ${s1 + 1}")
+                    Slider(value = s1.toFloat(), onValueChange = { segEnd = it.roundToInt().coerceIn(s0 + 1, last) }, valueRange = 1f..last.toFloat(), colors = sliderColors())
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        SmallBtn("A = punto") { sel?.let { segStart = it.coerceIn(0, s1 - 1) } }
+                        SmallBtn("B = punto") { sel?.let { segEnd = it.coerceIn(s0 + 1, last) } }
+                        SmallBtn("Todo") { segStart = 0; segEnd = Int.MAX_VALUE }
+                    }
+                    val portion = a.track.subList(s0, s1 + 1)
+                    val dur = ((portion.last().itowMs - portion.first().itowMs) / 1000.0).coerceAtLeast(0.0)
+                    val dist = ins?.let { it.distM[s1] - it.distM[s0] }
+                    val spd = portion.map { it.speedMs }.filter { it.isFinite() && it >= 0.0 }
+                    val acc = ins?.accelMs2?.toList()?.subList(s0, s1 + 1)
+                    Spacer(Modifier.height(6.dp))
+                    MetricGrid(listOf(
+                        { m -> MetricTile("Duración", mmss(dur), "", m) },
+                        { m -> MetricTile("Distancia", f0(dist), "m", m) },
+                        { m -> MetricTile("V. media", if (dur > 0 && dist != null) f1(dist / dur * 3.6) else null, "km/h", m, AvoColors.Blue) },
+                        { m -> MetricTile("V. máx", f1(spd.maxOrNull()?.times(3.6)), "km/h", m, AvoColors.Red) },
+                        { m -> MetricTile("Acel. máx", f2(acc?.maxOrNull()?.div(TrainingInsights.G)), "g", m, AvoColors.Warn) },
+                        { m -> MetricTile("RTK FIX", pct(portion.count { it.carrSoln == 2 }, portion.size), "", m, AvoColors.Ok) },
+                    ))
+                    OutlinedTextField(segLabel, { segLabel = it.take(64) }, label = { Text("Nombre del tramo") }, singleLine = true, modifier = Modifier.fillMaxWidth().padding(top = 6.dp))
+                    Button(onClick = {
+                        val arr = runCatching { org.json.JSONArray(savedSegments) }.getOrElse { org.json.JSONArray() }
+                        arr.put(org.json.JSONObject().put("name", segLabel.ifBlank { "Tramo ${arr.length() + 1}" }).put("start", s0).put("end", s1))
+                        savedSegments = arr.toString(); segPrefs.edit().putString("segments_$id", savedSegments).apply(); segLabel = ""
+                    }, modifier = Modifier.fillMaxWidth()) { Text("GUARDAR TRAMO", fontWeight = FontWeight.Bold) }
+                    savedItems.forEachIndexed { idx, s ->
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                            Text("${s.first} · ${s.second + 1}–${s.third + 1}", color = AvoColors.Text, modifier = Modifier.weight(1f).clickable {
+                                segStart = s.second.coerceIn(0, last - 1); segEnd = s.third.coerceIn(segStart + 1, last)
+                            }.padding(vertical = 8.dp))
+                            androidx.compose.material3.TextButton(onClick = {
+                                val arr = org.json.JSONArray()
+                                savedItems.forEachIndexed { i2, it -> if (i2 != idx) arr.put(org.json.JSONObject().put("name", it.first).put("start", it.second).put("end", it.third)) }
+                                savedSegments = arr.toString(); segPrefs.edit().putString("segments_$id", savedSegments).apply()
+                            }) { Text("Quitar", color = AvoColors.Bad) }
+                        }
+                    }
+                }
+            }
+        }
+
+        // ───────────── DATOS ─────────────
+        if (tab == 2) {
+            if (a != null) {
+                item {
+                    AvoCard("GNSS / RTK") {
+                        val n = a.gnssUsable.coerceAtLeast(1)
+                        Row(Modifier.fillMaxWidth().height(14.dp).clip(RoundedCornerShape(7.dp))) {
+                            listOf(a.fixEpochs to AvoColors.Ok, a.floatEpochs to AvoColors.Warn, a.autonomousEpochs to AvoColors.Blue, a.noFix to AvoColors.Bad).forEach { (k, col) ->
+                                if (k > 0) Box(Modifier.weight(k.toFloat()).fillMaxHeight().background(col))
+                            }
+                        }
+                        Spacer(Modifier.height(8.dp))
+                        MetricGrid(listOf(
+                            { m -> MetricTile("FIX", pct(a.fixEpochs, n), "", m, AvoColors.Ok) },
+                            { m -> MetricTile("FLOAT", pct(a.floatEpochs, n), "", m, AvoColors.Warn) },
+                            { m -> MetricTile("Autónomo", pct(a.autonomousEpochs, n), "", m, AvoColors.Blue) },
+                            { m -> MetricTile("Satélites", f1(ins?.avgSatellites), "", m) },
+                            { m -> MetricTile("Precisión H", f2(ins?.avgHAccM), "m", m) },
+                            { m -> MetricTile("Precisión V", f2(ins?.avgVAccM), "m", m) },
+                        ))
+                        KV("Frecuencia", "${a.navRateHz} Hz")
+                        KV("Muestras válidas", "${a.gnssUsable} de ${a.gnssSamples}")
+                        KV("Épocas sin solución", "${a.noFix}")
+                        KV("Tiempo en FIX / FLOAT", "${mmss(a.fixTimeS) ?: "—"} / ${mmss(a.floatTimeS) ?: "—"}")
+                    }
+                }
+                item {
+                    AvoCard("IMU cincha") {
+                        MetricGrid(listOf(
+                            { m -> MetricTile("Muestras", if (a.imuAvailable) a.imuSamples.toString() else null, "", m) },
+                            { m -> MetricTile("Cadencia media", f0(ins?.cadenceMean), "/min", m, AvoColors.Cyan) },
+                            { m -> MetricTile("Cadencia máx", f0(ins?.cadenceMax), "/min", m, AvoColors.Cyan) },
+                        ))
+                        KV("Lotes", "${a.imuBatches}")
+                        KV("Sensores", a.imuIds.sorted().joinToString { when (it) { 0 -> "central"; 1 -> "izquierdo"; 2 -> "derecho"; else -> "#$it" } }.ifBlank { null })
+                        KV("Tramas UART erróneas", "${a.badUartFrames}", if (a.badUartFrames > 0) AvoColors.Warn else AvoColors.Text)
+                    }
+                }
+                item {
+                    AvoCard("Velocidad y tramos") {
+                        val speeds = a.track.map { it.speedMs }.filter { it > 0.5 && it.isFinite() }
+                        val mean = speeds.average().takeIf { !it.isNaN() && it > 0 } ?: 0.0
+                        val variation = if (speeds.size >= 3 && mean > 0) kotlin.math.sqrt(speeds.map { (it - mean) * (it - mean) }.average()) / mean * 100 else null
+                        KV("Velocidad media", a.avgSpeedMs?.let { "${f1(it * 3.6)} km/h" })
+                        KV("Velocidad máxima", "${f1(a.maxSpeedMs * 3.6)} km/h")
+                        KV("Ritmo medio", a.avgSpeedMs?.takeIf { it > 0.5 }?.let { "${f1(100.0 / it)} s/100 m" })
+                        KV("Variación de velocidad", variation?.let { "${f1(it)} %" })
+                        KV("Marcadores", "${a.markers}")
+                        Spacer(Modifier.height(6.dp))
+                        val first = a.track.first().itowMs; val lastT = a.track.last().itowMs
+                        var w = first
+                        while (w < lastT) {
+                            val win = a.track.filter { it.itowMs in w until w + 30_000 }
+                            if (win.isNotEmpty()) KV("${(w - first) / 1000}–${(w - first) / 1000 + 30} s", "${f1(win.map { it.speedMs }.average() * 3.6)} · máx ${f1((win.maxOfOrNull { it.speedMs } ?: 0.0) * 3.6)} km/h")
+                            w += 30_000
+                        }
+                    }
+                }
+                ins?.let { i ->
+                    item {
+                        AvoCard("Pendiente y altitud") {
+                            MetricGrid(listOf(
+                                { m -> MetricTile("Alt. máx", f0(i.altMaxM), "m", m) },
+                                { m -> MetricTile("Alt. mín", f0(i.altMinM), "m", m) },
+                                { m -> MetricTile("Desnivel +", f0(i.gainM), "m", m) },
+                                { m -> MetricTile("Desnivel −", f0(i.lossM), "m", m) },
+                                { m -> MetricTile("Pend. máx", f1(i.slopeMaxPct), "%", m, AvoColors.Red) },
+                                { m -> MetricTile("Pend. mín", f1(i.slopeMinPct), "%", m, AvoColors.Blue) },
+                            ))
+                            KV("Pendiente media (abs.)", i.slopeMeanAbsPct?.let { "${f1(it)} %" })
+                        }
+                    }
+                }
+            }
+            item {
+                AvoCard("Fichero") {
+                    KV("Sesión", tt.sessionId)
+                    KV("Inicio", Fmt.date(tt.startRtcMs))
+                    KV("Caballo / jinete", listOfNotNull(tt.horseCode, tt.riderCode).joinToString(" / ").ifBlank { null })
+                    KV("Tiempo activo (reloj)", Fmt.duration(tt.activeMs))
+                    KV("Tamaño", Fmt.bytes(tt.totalBytes))
+                    KV("SHA-256 local", tt.localSha256?.take(16)?.plus("…"))
+                    KV("SHA-256 del reloj", tt.watchSha256?.take(16)?.plus("…"))
+                    KV("Servidor", if (tt.serverSha256 != null) "verificado" else if (c.sync.serverConfigured) "pendiente" else "no configurado")
+                    a?.let {
+                        KV("Cierre", if (it.scan.cleanClose) "limpio" else "recuperado", if (it.scan.cleanClose) AvoColors.Ok else AvoColors.Warn)
+                        if (it.scan.tailGarbage) KV("Último bloque", "incompleto (ignorado)", AvoColors.Warn)
+                    }
+                    msg?.let { Note(it, AvoColors.Warn) }
+                    Spacer(Modifier.height(6.dp))
+                    OutlinedButton(enabled = SyncRules.canOfferDelete(org.avoperformance.horse.core.sync.LocalTraining(tt.sessionId, tt.segments, tt.totalBytes,
+                        tt.downloadedBytes, tt.localSha256, tt.watchSha256, tt.serverSha256, st ?: SyncState.EN_RELOJ,
+                        org.avoperformance.horse.core.ble.WatchFileState.UNKNOWN, tt.startRtcMs, tt.activeMs)), onClick = { confirmDelete = true }) {
+                        Text("Borrar del reloj")
+                    }
+                }
             }
         }
     }
@@ -376,152 +436,223 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         onConfirm = { c.scope.launch { msg = c.sync.deleteFromWatch(tt.sessionId) ?: "Borrado del reloj" } }, onDismiss = { confirmDelete = false })
 }
 
-private fun pct(n: Int, d: Int) = if (d > 0) "${n * 100 / d} %" else "—"
+@Composable
+private fun sliderColors() = SliderDefaults.colors(thumbColor = AvoColors.Red, activeTrackColor = AvoColors.Red, inactiveTrackColor = AvoColors.Surface2)
 
 @Composable
-private fun InteractiveTrack(a: TrainingAnalysis, selection: Int?, startIndex: Int, endIndex: Int, onSelect: (Int) -> Unit) {
-    val pts = a.track
-    if (pts.size < 2) return
-    var colorBySpeed by remember(a) { mutableStateOf(true) }
-    var useMap by remember(a) { mutableStateOf(true) }
-    var imagery by remember(a) { mutableStateOf(false) }
-    var recenterToken by remember(a) { mutableIntStateOf(0) }
-
-    var scale by remember(a) { mutableStateOf(1f) }
-    var pan by remember(a) { mutableStateOf(Offset.Zero) }
-    val frame = remember(a) { LocalFrame(pts.first().p) }
-    val xy = remember(a) { pts.map { frame.toXY(it.p) } }
-    val minX = remember(a) { xy.minOf { it.first } }
-    val maxX = remember(a) { xy.maxOf { it.first } }
-    val minY = remember(a) { xy.minOf { it.second } }
-    val maxY = remember(a) { xy.maxOf { it.second } }
-    val speedMax = remember(a) { pts.maxOf { it.speedMs }.coerceAtLeast(0.1) }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        FilterChip(selected = colorBySpeed, onClick = { colorBySpeed = true }, label = { Text("Velocidad") })
-        FilterChip(selected = !colorBySpeed, onClick = { colorBySpeed = false }, label = { Text("RTK") })
-        OutlinedButton(onClick = { scale = 1f; pan = Offset.Zero; recenterToken++ }) { Text("Centrar") }
-    }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        FilterChip(selected = useMap, onClick = { useMap = true }, label = { Text("Mapa real") })
-        FilterChip(selected = !useMap, onClick = { useMap = false }, label = { Text("Plano offline") })
-    }
-    val selectedNow = selection
-    if (useMap) {
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FilterChip(selected = !imagery, onClick = { imagery = false }, label = { Text("Calles") })
-            FilterChip(selected = imagery, onClick = { imagery = true }, label = { Text("Satélite") })
-        }
-        Note("Zoom con dos dedos, desplazamiento libre y selección de puntos sincronizados con las gráficas.")
-        RealTrackMap(a, selection, startIndex, endIndex, colorBySpeed, imagery, recenterToken, onSelect)
-        Text(
-            text = if (imagery) AvoImagery.ATTRIBUTION else "© OpenStreetMap contributors",
-            color = AvoColors.TextDim,
-        )
-        if (imagery) Note("Imágenes Esri World Imagery (fecha y resolución variables). Requiere acceso autorizado a ese servicio. La disponibilidad y el uso sin conexión dependen de sus condiciones.")
-        else Note("Calles de OpenStreetMap. Las teselas ya visitadas pueden mantenerse temporalmente en la caché local.")
-    } else {
-        Note("Pellizca para ampliar, arrastra para moverte y toca un punto de la trayectoria.")
-        Canvas(
-        Modifier.fillMaxWidth().height(340.dp).background(AvoColors.Surface2)
-            .pointerInput(a, scale, pan) {
-                detectTapGestures { touch ->
-                    val span = maxOf(maxX - minX, maxY - minY, 1.0)
-                    val base = minOf(size.width.toFloat(), size.height.toFloat()) * 0.88f / span.toFloat()
-                    val ox = (size.width - (maxX - minX).toFloat() * base) / 2f
-                    val oy = (size.height - (maxY - minY).toFloat() * base) / 2f
-                    var nearest = 0
-                    var dist = Float.MAX_VALUE
-                    xy.forEachIndexed { i, point ->
-                        val xx = (ox + (point.first-minX).toFloat()*base - size.width/2f)*scale + size.width/2f + pan.x
-                        val yy0 = size.height - (oy + (point.second-minY).toFloat()*base)
-                        val yy = (yy0 - size.height/2f)*scale + size.height/2f + pan.y
-                        val d = hypot(xx-touch.x, yy-touch.y)
-                        if (d < dist) { dist = d; nearest = i }
-                    }
-                    if (dist < 45f) onSelect(nearest)
-                }
-            }
-            .pointerInput(a) {
-                detectTransformGestures { _, gesturePan, zoom, _ ->
-                    scale = (scale * zoom).coerceIn(1f, 15f)
-                    pan = pan + gesturePan
-                }
-            }
-    ) {
-        val span = maxOf(maxX - minX, maxY - minY, 1.0)
-        val base = minOf(size.width, size.height) * 0.88f / span.toFloat()
-        val ox = (size.width - (maxX-minX).toFloat()*base)/2
-        val oy = (size.height - (maxY-minY).toFloat()*base)/2
-        fun at(i: Int): Offset {
-            val x = ox + (xy[i].first-minX).toFloat()*base
-            val y = size.height - (oy + (xy[i].second-minY).toFloat()*base)
-            return Offset((x-size.width/2)*scale+size.width/2+pan.x, (y-size.height/2)*scale+size.height/2+pan.y)
-        }
-        for (i in 1 until pts.size) {
-            val color = if (colorBySpeed) {
-                val ratio = (pts[i].speedMs / speedMax).toFloat().coerceIn(0f, 1f)
-                Color(red = ratio, green = 0.82f * (1f-ratio), blue = 1f-ratio, alpha = 1f)
-            } else when (pts[i].carrSoln) {
-                2 -> AvoColors.Ok; 1 -> AvoColors.Warn; else -> AvoColors.TextDim
-            }
-            drawLine(if (i in (startIndex + 1)..endIndex) color else color.copy(alpha = 0.22f), at(i-1), at(i), strokeWidth=if (i in (startIndex + 1)..endIndex) 4.5f else 2f)
-        }
-        for (boundary in listOf(startIndex, endIndex)) if (boundary in pts.indices) {
-            drawCircle(if (boundary == startIndex) AvoColors.Ok else AvoColors.Warn, radius=8f, center=at(boundary))
-        }
-        selectedNow?.takeIf { it in pts.indices }?.let { index ->
-            drawCircle(AvoColors.Gold, radius=10f, center=at(index))
-            drawCircle(Color.White, radius=3.5f, center=at(index))
-        }
-        }
-    }
-    selectedNow?.takeIf { it in pts.indices }?.let { i ->
-        val item = pts[i]
-        KV("Punto seleccionado", "${i+1} / ${pts.size}")
-        KV("Tiempo desde inicio GNSS", "%.1f s".format((item.itowMs-pts.first().itowMs)/1000.0))
-        KV("Velocidad", "%.2f km/h".format(item.speedMs*3.6))
-        KV("Estado RTK", when(item.carrSoln) {2->"FIX";1->"FLOAT";else->"Sin solución RTK"})
+private fun SmallBtn(text: String, onClick: () -> Unit) {
+    val shape = RoundedCornerShape(50)
+    Box(Modifier.clip(shape).background(AvoColors.Surface2).border(1.dp, AvoColors.Line, shape).clickable { onClick() }.padding(horizontal = 12.dp, vertical = 6.dp)) {
+        Text(text, color = AvoColors.Text, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
     }
 }
 
-/** MapView keeps its camera when the palette changes; overlays are rebuilt only when required. */
+@Composable
+private fun ListRow(badge: String, badgeColor: Color, title: String, subtitle: String?, value: String, valueSub: String?, onClick: () -> Unit) {
+    Row(Modifier.fillMaxWidth().padding(vertical = 3.dp).clip(RoundedCornerShape(12.dp)).background(AvoColors.Surface2).clickable { onClick() }.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.size(30.dp).background(badgeColor, CircleShape), contentAlignment = Alignment.Center) { Text(badge, color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold) }
+        Spacer(Modifier.width(10.dp))
+        Column(Modifier.weight(1f)) {
+            Text(title, color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            if (!subtitle.isNullOrBlank()) Text(subtitle, color = AvoColors.TextDim, fontSize = 12.sp)
+        }
+        Column(horizontalAlignment = Alignment.End) {
+            Text(value, color = AvoColors.Text, fontWeight = FontWeight.Black, fontSize = 15.sp)
+            if (valueSub != null) Text(valueSub, color = AvoColors.TextDim, fontSize = 12.sp)
+        }
+    }
+}
+
+@Composable
+private fun GaitCard(i: Insights) {
+    AvoCard("Aires (estimados por velocidad)") {
+        Row(Modifier.fillMaxWidth().height(16.dp).clip(RoundedCornerShape(8.dp))) {
+            Gait.entries.forEach { g -> val s = i.gaitShare(g).toFloat(); if (s > 0f) Box(Modifier.weight(s).fillMaxHeight().background(gaitColor(g))) }
+        }
+        Spacer(Modifier.height(8.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Gait.entries.forEach { g ->
+                Column(Modifier.weight(1f)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(Modifier.size(8.dp).background(gaitColor(g), CircleShape)); Spacer(Modifier.width(4.dp))
+                        Text(g.texto.uppercase(), color = AvoColors.TextDim, fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                    }
+                    Text(mmss(i.gaitSeconds[g] ?: 0.0) ?: "0:00", color = AvoColors.Text, fontWeight = FontWeight.Black, fontSize = 16.sp)
+                    Text("${(i.gaitShare(g) * 100).roundToInt()} %", color = AvoColors.TextDim, fontSize = 12.sp)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ConditionsCard(marine: org.avoperformance.horse.data.TrainingMarineEntity?, busy: Boolean, message: String?, canFetch: Boolean, onFetch: () -> Unit) {
+    AvoCard("Marea y condiciones") {
+        if (marine == null) {
+            Button(onClick = onFetch, enabled = !busy && canFetch, modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = AvoColors.Surface2, contentColor = AvoColors.Text)) {
+                Text(if (busy) "Consultando…" else "Obtener marea y tiempo de la sesión")
+            }
+        } else {
+            MetricGrid(listOf(
+                { m -> MetricTile("Marea", marine.levelMsl?.let { f2(it) }, "m", m, Color(0xFF3D9BFF)) },
+                { m -> MetricTile("Tendencia", when (marine.tideTrend) { "SUBIENDO" -> "▲ Sube"; "BAJANDO" -> "▼ Baja"; else -> null }, "", m) },
+                { m -> MetricTile("Coeficiente", marine.tideCoefficient?.toString(), "", m, AvoColors.Red) },
+                { m -> MetricTile("Viento", f0(marine.windKmh), "km/h", m) },
+                { m -> MetricTile("Rachas", f0(marine.gustKmh), "km/h", m) },
+                { m -> MetricTile("Ola", f1(marine.waveM), "m", m) },
+                { m -> MetricTile("Periodo", f0(marine.wavePeriodS), "s", m) },
+                { m -> MetricTile("Agua", f1(marine.waterC), "°C", m, AvoColors.Cyan) },
+            ))
+            Text("${marine.location} · ${marine.source}", color = AvoColors.TextDim, fontSize = 11.sp, modifier = Modifier.padding(top = 6.dp))
+        }
+        message?.let { Text(it, color = AvoColors.Warn, fontSize = 13.sp) }
+    }
+}
+
+@Composable
+private fun MapControls(style: MapStyle, onStyle: (MapStyle) -> Unit, color: TrackColor, onColor: (TrackColor) -> Unit, onCenter: () -> Unit) {
+    Segmented(MapStyle.entries.map { it.texto }, style.ordinal, { onStyle(MapStyle.entries[it]) })
+    Spacer(Modifier.height(6.dp))
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        TrackColor.entries.forEach { tc ->
+            FilterChip(selected = color == tc, onClick = { onColor(tc) }, label = { Text(tc.texto, fontSize = 12.sp) },
+                colors = FilterChipDefaults.filterChipColors(selectedContainerColor = AvoColors.RedDark, selectedLabelColor = Color.White, labelColor = AvoColors.TextDim))
+        }
+        Spacer(Modifier.weight(1f))
+        SmallBtn("⌖", onCenter)
+    }
+}
+
+@Composable
+private fun MapLegend(a: TrainingAnalysis, color: TrackColor, style: MapStyle) {
+    Row(Modifier.fillMaxWidth().padding(top = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+        when (color) {
+            TrackColor.SPEED -> {
+                Text("0", color = AvoColors.TextDim, fontSize = 11.sp)
+                Box(Modifier.padding(horizontal = 6.dp).weight(1f).height(6.dp).clip(RoundedCornerShape(3.dp))
+                    .background(Brush.horizontalGradient((0..10).map { speedColor(it / 10f) })))
+                Text("${f0(a.maxSpeedMs * 3.6)} km/h", color = AvoColors.TextDim, fontSize = 11.sp)
+            }
+            TrackColor.GAIT -> Gait.entries.forEach { g ->
+                Box(Modifier.size(8.dp).background(gaitColor(g), CircleShape)); Text(" ${g.texto}   ", color = AvoColors.TextDim, fontSize = 11.sp)
+            }
+            TrackColor.RTK -> listOf("FIX" to AvoColors.Ok, "FLOAT" to AvoColors.Warn, "Otro" to AvoColors.Unknown).forEach { (l, cc) ->
+                Box(Modifier.size(8.dp).background(cc, CircleShape)); Text(" $l   ", color = AvoColors.TextDim, fontSize = 11.sp)
+            }
+        }
+    }
+    Text(if (style == MapStyle.MAP) "© OpenStreetMap contributors" else AvoImagery.ATTRIBUTION, color = AvoColors.TextDim, fontSize = 10.sp)
+}
+
+@Composable
+private fun PlaybackBar(a: TrainingAnalysis, ins: Insights?, sel: Int?, playing: Boolean, setPlaying: (Boolean) -> Unit, pick: (Int) -> Unit) {
+    val i = (sel ?: 0).coerceIn(0, a.track.lastIndex)
+    val p = a.track[i]
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.size(42.dp).background(AvoColors.Red, CircleShape).clickable { setPlaying(!playing) }, contentAlignment = Alignment.Center) {
+            Text(if (playing) "❚❚" else "▶", color = Color.White, fontWeight = FontWeight.Bold)
+        }
+        Slider(value = i.toFloat(), onValueChange = { pick(it.roundToInt().coerceIn(0, a.track.lastIndex)) }, valueRange = 0f..a.track.lastIndex.toFloat(),
+            colors = sliderColors(), modifier = Modifier.weight(1f).padding(horizontal = 8.dp))
+    }
+    MetricGrid(listOf(
+        { m -> MetricTile("Tiempo", mmss(ins?.timeS?.getOrNull(i) ?: ((p.itowMs - a.track.first().itowMs) / 1000.0)), "", m) },
+        { m -> MetricTile("Velocidad", f1(p.speedMs * 3.6), "km/h", m, AvoColors.Red) },
+        { m -> MetricTile("Distancia", f0(ins?.distM?.getOrNull(i)), "m", m) },
+        { m -> MetricTile("Aire", TrainingInsights.gaitOf(p.speedMs).texto, "", m, gaitColor(TrainingInsights.gaitOf(p.speedMs))) },
+        { m -> MetricTile("Cadencia", f0(ins?.cadence?.getOrNull(i)), "/min", m, AvoColors.Cyan) },
+        { m -> MetricTile("RTK", when (p.carrSoln) { 2 -> "FIX"; 1 -> "FLOAT"; else -> "—" }, "", m, when (p.carrSoln) { 2 -> AvoColors.Ok; 1 -> AvoColors.Warn; else -> AvoColors.Unknown }) },
+    ))
+}
+
+/** Common visible window shared by every chart so they stay aligned. */
+private class ChartWindow(n: Int, zoom: Float, center: Float) {
+    val last = (n - 1).coerceAtLeast(1)
+    private val visible = (n / zoom).coerceAtLeast(2f).toInt()
+    val first = ((center * last) - visible / 2f).toInt().coerceIn(0, (n - visible).coerceAtLeast(0))
+    val end = (first + visible).coerceAtMost(last)
+    val zoom = zoom
+}
+
+@Composable
+private fun ChartBlock(
+    title: String, unit: String, values: List<Double>, sel: Int?, win: ChartWindow, color: Color, x: List<Double>,
+    onDrag: (Float) -> Unit, onSelect: (Int) -> Unit, signed: Boolean = false, fill: Boolean = false,
+) {
+    val finite = values.filter { it.isFinite() }
+    if (finite.size < 2) return
+    val lo = if (signed) minOf(finite.min(), 0.0) else if (fill && unit == "m" && title == "Altitud") finite.min() - 1 else minOf(finite.min(), 0.0)
+    val hi = maxOf(finite.max(), lo + 0.001)
+    val selVal = sel?.let { values.getOrNull(it) }?.takeIf { it.isFinite() }
+    Row(Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 4.dp), verticalAlignment = Alignment.Bottom) {
+        Box(Modifier.size(8.dp).background(color, CircleShape)); Spacer(Modifier.width(6.dp))
+        Text(title.uppercase(), color = AvoColors.Silver, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 0.8.sp, modifier = Modifier.weight(1f))
+        Text(if (selVal != null) "${f2(selVal)} $unit" else "máx ${f1(finite.max())} $unit", color = if (selVal != null) color else AvoColors.TextDim, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+    }
+    val first = win.first; val end = win.end
+    Canvas(
+        Modifier.fillMaxWidth().height(120.dp).clip(RoundedCornerShape(10.dp)).background(AvoColors.Surface2)
+            .pointerInput(values, first, end) { detectTapGestures { pos -> onSelect((first + (pos.x / size.width * (end - first)).roundToInt()).coerceIn(0, values.lastIndex)) } }
+            .pointerInput(values, win.zoom) {
+                detectDragGestures { ch, d ->
+                    ch.consume()
+                    if (win.zoom > 1.01f) onDrag(d.x / size.width)
+                    else onSelect((first + (ch.position.x / size.width * (end - first)).roundToInt()).coerceIn(0, values.lastIndex))
+                }
+            }
+    ) {
+        val span = (hi - lo)
+        fun px(i: Int) = size.width * (i - first) / (end - first).coerceAtLeast(1)
+        fun py(v: Double) = (size.height * (1 - (v - lo) / span)).toFloat().coerceIn(0f, size.height)
+        for (k in 1..3) drawLine(AvoColors.Line, Offset(0f, size.height * k / 4f), Offset(size.width, size.height * k / 4f), 1f)
+        if (lo < 0 && hi > 0) drawLine(AvoColors.TextDim, Offset(0f, py(0.0)), Offset(size.width, py(0.0)), 1.5f)
+        val stride = ((end - first) / 800).coerceAtLeast(1)
+        val path = Path(); var started = false; var lastX = 0f; var firstX = 0f
+        for (i in first..end step stride) {
+            val v = values[i]
+            if (!v.isFinite()) { started = false; continue }
+            val xx = px(i); val yy = py(v)
+            if (!started) { path.moveTo(xx, yy); started = true; if (i == first || firstX == 0f) firstX = xx } else path.lineTo(xx, yy)
+            lastX = xx
+        }
+        if (fill && !signed) {
+            val area = Path().apply { addPath(path); lineTo(lastX, size.height); lineTo(firstX, size.height); close() }
+            drawPath(area, Brush.verticalGradient(listOf(color.copy(alpha = 0.35f), color.copy(alpha = 0.02f))))
+        }
+        drawPath(path, color, style = Stroke(width = 3f, cap = StrokeCap.Round))
+        sel?.takeIf { it in first..end }?.let { i ->
+            val xx = px(i)
+            drawLine(Color.White.copy(alpha = 0.85f), Offset(xx, 0f), Offset(xx, size.height), 2f)
+            values[i].takeIf { it.isFinite() }?.let { drawCircle(Color.White, 6f, Offset(xx, py(it))); drawCircle(color, 4f, Offset(xx, py(it))) }
+        }
+    }
+    Row(Modifier.fillMaxWidth()) {
+        Text(mmss(x.getOrNull(first)) ?: "", color = AvoColors.TextDim, fontSize = 10.sp, modifier = Modifier.weight(1f))
+        Text(mmss(x.getOrNull(end)) ?: "", color = AvoColors.TextDim, fontSize = 10.sp)
+    }
+}
+
 private class TrackMapRender(
-    val analysis: TrainingAnalysis,
-    var bySpeed: Boolean,
-    var imagery: Boolean,
-    var startIndex: Int,
-    var endIndex: Int,
-    var marker: Marker? = null,
-    var recenterToken: Int,
+    val analysis: TrainingAnalysis, var color: TrackColor, var style: MapStyle,
+    var startIndex: Int, var endIndex: Int, var marker: Marker? = null, var recenterToken: Int,
 )
 
 @Composable
 private fun RealTrackMap(
-    analysis: TrainingAnalysis,
-    selectedIndex: Int?,
-    startIndex: Int,
-    endIndex: Int,
-    bySpeed: Boolean,
-    imagery: Boolean,
-    recenterToken: Int,
-    onSelect: (Int) -> Unit,
+    analysis: TrainingAnalysis, selectedIndex: Int?, startIndex: Int, endIndex: Int,
+    color: TrackColor, style: MapStyle, recenterToken: Int, heightDp: Int, onSelect: (Int) -> Unit,
 ) {
     val onSelectLatest by rememberUpdatedState(onSelect)
     val mapRef = remember(analysis) { mutableStateOf<MapView?>(null) }
-
-    DisposableEffect(mapRef) {
-        onDispose {
-            mapRef.value?.onPause()
-            mapRef.value?.onDetach()
-        }
-    }
-
+    DisposableEffect(mapRef) { onDispose { mapRef.value?.onPause(); mapRef.value?.onDetach() } }
     AndroidView(
-        modifier = Modifier.fillMaxWidth().height(360.dp),
+        modifier = Modifier.fillMaxWidth().height(heightDp.dp).clip(RoundedCornerShape(12.dp)),
         factory = { context ->
             MapView(context).apply {
                 setTileSource(TileSourceFactory.MAPNIK)
                 setMultiTouchControls(true)
+                zoomController.setVisibility(org.osmdroid.views.CustomZoomButtonsController.Visibility.NEVER)
                 controller.setZoom(16.0)
                 onResume()
                 mapRef.value = this
@@ -529,204 +660,90 @@ private fun RealTrackMap(
         },
         update = { map ->
             var render = map.tag as? TrackMapRender
-            val resetBounds = render == null || render.analysis !== analysis
-            if (resetBounds || render?.imagery != imagery) {
-                map.setTileSource(if (imagery) AvoImagery.tileSource else TileSourceFactory.MAPNIK)
-            }
-            if (resetBounds || render?.bySpeed != bySpeed || render.imagery != imagery || render.startIndex != startIndex || render.endIndex != endIndex) {
+            val reset = render == null || render.analysis !== analysis
+            if (reset || render?.color != color || render.style != style || render.startIndex != startIndex || render.endIndex != endIndex) {
                 map.overlays.clear()
-                render = TrackMapRender(analysis, bySpeed, imagery, startIndex, endIndex, recenterToken = recenterToken)
+                map.setTileSource(if (style == MapStyle.MAP) TileSourceFactory.MAPNIK else AvoImagery.tileSource)
+                if (style == MapStyle.HYBRID) {
+                    listOf(AvoImagery.roadsSource, AvoImagery.placesSource).forEach { src ->
+                        map.overlays.add(TilesOverlay(MapTileProviderBasic(map.context, src), map.context).apply { setLoadingBackgroundColor(android.graphics.Color.TRANSPARENT); setLoadingLineColor(android.graphics.Color.TRANSPARENT) })
+                    }
+                }
+                render = TrackMapRender(analysis, color, style, startIndex, endIndex, recenterToken = if (reset) -1 else render!!.recenterToken)
                 map.tag = render
-
                 map.overlays.add(MapEventsOverlay(object : MapEventsReceiver {
                     override fun singleTapConfirmedHelper(tap: OsmPoint): Boolean {
                         val touch = map.projection.toPixels(tap, android.graphics.Point())
-                        var nearest = -1
-                        var minDistance = Double.MAX_VALUE
-                        analysis.track.forEachIndexed { i, point ->
-                            val xy = map.projection.toPixels(OsmPoint(point.p.lat, point.p.lon), android.graphics.Point())
-                            val distance = hypot((xy.x - touch.x).toDouble(), (xy.y - touch.y).toDouble())
-                            if (distance < minDistance) {
-                                nearest = i
-                                minDistance = distance
-                            }
+                        var nearest = -1; var best = Double.MAX_VALUE
+                        analysis.track.forEachIndexed { i, pt ->
+                            val xy = map.projection.toPixels(OsmPoint(pt.p.lat, pt.p.lon), android.graphics.Point())
+                            val d = hypot((xy.x - touch.x).toDouble(), (xy.y - touch.y).toDouble())
+                            if (d < best) { nearest = i; best = d }
                         }
-                        val maxTapPx = 48.0 * map.resources.displayMetrics.density
-                        if (nearest >= 0 && minDistance <= maxTapPx) {
-                            onSelectLatest(nearest)
-                            return true
-                        }
+                        if (nearest >= 0 && best <= 48.0 * map.resources.displayMetrics.density) { onSelectLatest(nearest); return true }
                         return false
                     }
-
                     override fun longPressHelper(tap: OsmPoint): Boolean = false
                 }))
-                addColoredRoute(map, analysis, bySpeed, startIndex, endIndex)
-                // A/B boundaries remain visible over both map styles.
-                listOf(startIndex to "A · Inicio", endIndex to "B · Final").forEach { (index, title) ->
-                    analysis.track.getOrNull(index)?.let { sample ->
-                        map.overlays.add(Marker(map).apply {
-                            position = OsmPoint(sample.p.lat, sample.p.lon)
-                            setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                            this.title = title
-                        })
-                    }
+                addColoredRoute(map, analysis, color, startIndex, endIndex)
+                if (startIndex > 0 || endIndex < analysis.track.lastIndex) listOf(startIndex to "A", endIndex to "B").forEach { (idx, title) ->
+                    analysis.track.getOrNull(idx)?.let { s -> map.overlays.add(Marker(map).apply { position = OsmPoint(s.p.lat, s.p.lon); setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM); this.title = title }) }
                 }
-                // Attribution remains visible beneath the map (Compose), independent of osmdroid copyright hooks.
             }
-
             val display = render ?: return@AndroidView
-            if (resetBounds || display.recenterToken != recenterToken) {
+            if (display.recenterToken != recenterToken) {
                 display.recenterToken = recenterToken
-                val track = analysis.track
-                val north = track.maxOf { it.p.lat } + 0.00012
-                val south = track.minOf { it.p.lat } - 0.00012
-                val east = track.maxOf { it.p.lon } + 0.00012
-                val west = track.minOf { it.p.lon } - 0.00012
-                map.post { map.zoomToBoundingBox(BoundingBox(north, east, south, west), false, 48) }
+                val tr = analysis.track
+                map.post { map.zoomToBoundingBox(BoundingBox(tr.maxOf { it.p.lat } + 0.00012, tr.maxOf { it.p.lon } + 0.00012, tr.minOf { it.p.lat } - 0.00012, tr.minOf { it.p.lon } - 0.00012), false, 40) }
             }
-
-            val selected = selectedIndex?.takeIf { it in analysis.track.indices }
-            if (selected == null) {
-                display.marker?.let { map.overlays.remove(it) }
-                display.marker = null
-            } else {
-                val point = analysis.track[selected]
-                val marker = display.marker ?: Marker(map).also {
-                    it.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                    display.marker = it
-                    map.overlays.add(it)
-                }
-                marker.position = OsmPoint(point.p.lat, point.p.lon)
-                marker.title = "Punto " + (selected + 1) + " · " + "%.2f km/h".format(point.speedMs * 3.6)
+            val s = selectedIndex?.takeIf { it in analysis.track.indices }
+            if (s == null) { display.marker?.let { map.overlays.remove(it) }; display.marker = null }
+            else {
+                val pt = analysis.track[s]
+                val mk = display.marker ?: Marker(map).also { it.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM); display.marker = it; map.overlays.add(it) }
+                mk.position = OsmPoint(pt.p.lat, pt.p.lon)
+                mk.title = "%.1f km/h".format(pt.speedMs * 3.6)
             }
             map.invalidate()
         },
     )
 }
 
-/**
- * Bound overlay count to approximately 120 polylines, even for 5000 GNSS samples,
- * while retaining all GPS positions inside each polyline segment.
- */
-private fun addColoredRoute(map: MapView, a: TrainingAnalysis, bySpeed: Boolean, startIndex: Int, endIndex: Int) {
-    val track = a.track
-    if (track.size < 2) return
-    val stride = ((track.size - 2) / 120 + 1).coerceAtLeast(1)
-    val speedMax = track.maxOf { it.speedMs }.coerceAtLeast(0.1)
-    var start = 1
-    while (start < track.size) {
-        val end = (start + stride - 1).coerceAtMost(track.lastIndex)
-        val midpoint = track[(start + end) / 2]
-        val lineColor = if (bySpeed) {
-            val fraction = (midpoint.speedMs / speedMax).toFloat().coerceIn(0f, 1f)
-            android.graphics.Color.HSVToColor(floatArrayOf(210f * (1f - fraction), 0.90f, 0.96f))
-        } else when (midpoint.carrSoln) {
-            2 -> android.graphics.Color.rgb(43, 190, 107)
-            1 -> android.graphics.Color.rgb(255, 182, 48)
-            else -> android.graphics.Color.rgb(165, 165, 175)
+/** About 150 polylines whatever the track length; every GNSS position is kept inside its polyline. */
+private fun addColoredRoute(map: MapView, a: TrainingAnalysis, color: TrackColor, startIndex: Int, endIndex: Int) {
+    val tr = a.track
+    if (tr.size < 2) return
+    val stride = ((tr.size - 2) / 150 + 1).coerceAtLeast(1)
+    val vmax = tr.maxOf { it.speedMs }.coerceAtLeast(0.1)
+    val density = map.resources.displayMetrics.density
+    // dark casing under the coloured line so it reads on satellite imagery
+    map.overlays.add(Polyline(map).apply {
+        setPoints(tr.map { OsmPoint(it.p.lat, it.p.lon) })
+        outlinePaint.color = android.graphics.Color.argb(170, 0, 0, 0); outlinePaint.strokeWidth = 8f * density
+        outlinePaint.strokeCap = android.graphics.Paint.Cap.ROUND
+    })
+    var s = 1
+    while (s < tr.size) {
+        val e = (s + stride - 1).coerceAtMost(tr.lastIndex)
+        val mid = tr[(s + e) / 2]
+        val col = when (color) {
+            TrackColor.SPEED -> speedColor((mid.speedMs / vmax).toFloat()).argb()
+            TrackColor.GAIT -> gaitColor(TrainingInsights.gaitOf(mid.speedMs)).argb()
+            TrackColor.RTK -> when (mid.carrSoln) { 2 -> AvoColors.Ok.argb(); 1 -> AvoColors.Warn.argb(); else -> AvoColors.Unknown.argb() }
         }
-        val points = (start - 1..end).map { i -> OsmPoint(track[i].p.lat, track[i].p.lon) }
+        val inside = e >= startIndex && s <= endIndex
         map.overlays.add(Polyline(map).apply {
-            setPoints(points)
-            outlinePaint.color = if (end >= startIndex && start <= endIndex) lineColor else android.graphics.Color.argb(65, 155, 155, 155)
-            outlinePaint.strokeWidth = (if (end >= startIndex && start <= endIndex) 5f else 2f) * map.resources.displayMetrics.density
+            setPoints((s - 1..e).map { OsmPoint(tr[it].p.lat, tr[it].p.lon) })
+            outlinePaint.color = if (inside) col else android.graphics.Color.argb(90, 160, 160, 160)
+            outlinePaint.strokeWidth = (if (inside) 5f else 3f) * density
+            outlinePaint.strokeCap = android.graphics.Paint.Cap.ROUND
         })
-        start = end + 1
+        s = e + 1
     }
-}
-
-@Composable
-private fun SynchronizedChart(
-    values: List<Double>, selection: Int?, color: Color, unit: String,
-    onSelect: (Int) -> Unit
-) {
-    if (values.size < 2) return
-    var zoom by remember { mutableStateOf(1f) }
-    var center by remember { mutableStateOf(0.5f) }
-    val low = minOf(values.minOrNull() ?: 0.0, 0.0)
-    val high = maxOf(values.maxOrNull() ?: 1.0, 0.0)
-    val span = (high-low).coerceAtLeast(0.001)
-    val visible = (values.size / zoom).coerceAtLeast(2f)
-    val first = ((center * values.lastIndex) - visible / 2).toInt().coerceIn(0, (values.size-visible.toInt()).coerceAtLeast(0))
-    val end = (first + visible.toInt()).coerceAtMost(values.lastIndex)
-    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        OutlinedButton(onClick = { zoom = (zoom * 1.6f).coerceAtMost(20f) }) { Text("Ampliar +") }
-        OutlinedButton(onClick = { zoom = (zoom / 1.6f).coerceAtLeast(1f) }) { Text("Reducir −") }
-        OutlinedButton(onClick = { zoom = 1f; center = 0.5f }) { Text("Completa") }
-    }
-    Text("${"%.1f".format(high)} $unit máximo · arrastra horizontalmente para moverte; toca para seleccionar", color=AvoColors.TextDim)
-    Canvas(Modifier.fillMaxWidth().height(210.dp).background(AvoColors.Surface2)
-        .pointerInput(values, first, end) {
-            detectTapGestures { pos ->
-                val i = (first + (pos.x / size.width * (end-first)).roundToInt()).coerceIn(0, values.lastIndex)
-                onSelect(i)
-            }
-        }
-        .pointerInput(values, zoom) {
-            detectDragGestures { change, drag ->
-                change.consume()
-                center = (center - drag.x / size.width * (1f / zoom)).coerceIn(0f, 1f)
-            }
-        }
-    ) {
-        val path = Path()
-        val drawStride = ((end - first) / 1500).coerceAtLeast(1)
-        for (i in first..end step drawStride) {
-            val x = size.width * (i-first) / (end-first).coerceAtLeast(1)
-            val y = (size.height * (1-(values[i]-low)/span)).toFloat().coerceIn(0f,size.height)
-            if (i==first) path.moveTo(x,y) else path.lineTo(x,y)
-        }
-        if (low < 0 && high > 0) {
-            val y0 = (size.height * (high/span)).toFloat()
-            drawLine(AvoColors.TextDim, Offset(0f,y0),Offset(size.width,y0),strokeWidth=1f)
-        }
-        drawPath(path,color,style=Stroke(width=3f))
-        selection?.takeIf { it in first..end }?.let { i ->
-            val x = size.width * (i-first)/(end-first).coerceAtLeast(1)
-            drawLine(Color.White, Offset(x,0f),Offset(x,size.height),strokeWidth=2f)
-            val y = (size.height * (1-(values[i]-low)/span)).toFloat().coerceIn(0f,size.height)
-            drawCircle(AvoColors.Gold,radius=6f,center=Offset(x,y))
-        }
-    }
-}
-
-@Composable
-private fun SynchronizedAccelerationChart(a: TrainingAnalysis, selection: Int?, onSelect: (Int) -> Unit) {
-    val points = a.track
-    val values = List(points.size) { i ->
-        if (i == 0) 0.0 else {
-            val dt = (points[i].itowMs - points[i-1].itowMs) / 1000.0
-            if (dt !in 0.08..10.0) 0.0 else ((points[i].speedMs-points[i-1].speedMs)/dt).takeIf { it.isFinite() && abs(it)<=12.0 } ?: 0.0
-        }
-    }
-    SynchronizedChart(values,selection,AvoColors.Warn,"m/s²",onSelect)
-}
-
-/** Exclude invalid GPS time jumps, week rollover and noise spikes. */
-private fun accelerationSeries(a: TrainingAnalysis): List<Double> = a.track.zipWithNext().mapNotNull { (p, q) ->
-    val dt = (q.itowMs - p.itowMs) / 1000.0
-    if (dt !in 0.08..10.0 || !p.speedMs.isFinite() || !q.speedMs.isFinite()) null
-    else ((q.speedMs-p.speedMs)/dt).takeIf { it.isFinite() && abs(it) <= 12.0 }
-}
-
-@Composable
-private fun SeriesChart(values: List<Double>, col: Color, signed: Boolean = false) {
-    if (values.size < 2) return
-    val low = if (signed) minOf(values.minOrNull() ?: 0.0, 0.0) else 0.0
-    val high = maxOf(values.maxOrNull() ?: 1.0, 0.0)
-    val span = (high-low).coerceAtLeast(0.01)
-    Canvas(Modifier.fillMaxWidth().height(165.dp).background(AvoColors.Surface2)) {
-        val path = Path()
-        values.forEachIndexed { i, v ->
-            val x = size.width * i / (values.size-1)
-            val y = (size.height * (1 - (v-low)/span)).toFloat().coerceIn(0f,size.height)
-            if (i == 0) path.moveTo(x,y) else path.lineTo(x,y)
-        }
-        if (low < 0 && high > 0) {
-            val zeroY = (size.height * high/span).toFloat()
-            drawLine(AvoColors.TextDim, Offset(0f,zeroY), Offset(size.width,zeroY), strokeWidth=1f)
-        }
-        drawPath(path,col,style=Stroke(width=3f))
+    listOf(0 to android.graphics.Color.rgb(82, 221, 64), tr.lastIndex to android.graphics.Color.rgb(237, 18, 42)).forEach { (i, cc) ->
+        map.overlays.add(Polyline(map).apply {
+            setPoints(listOf(OsmPoint(tr[i].p.lat, tr[i].p.lon), OsmPoint(tr[i].p.lat + 1e-7, tr[i].p.lon)))
+            outlinePaint.color = cc; outlinePaint.strokeWidth = 14f * density; outlinePaint.strokeCap = android.graphics.Paint.Cap.ROUND
+        })
     }
 }

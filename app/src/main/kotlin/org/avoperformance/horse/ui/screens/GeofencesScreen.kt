@@ -190,7 +190,6 @@ fun GeofencesScreen(c: AppContainer) {
                     }) { Text("Enviar al reloj") }
                     OutlinedButton(enabled = c.watch.isReady && cfg?.fences?.getOrNull(slot)?.type?.let { it != FenceType.NONE } == true, onClick = { confirmDelete = true }) { Text("Eliminar") }
                 }
-                Note("Las geocercas se guardan en el reloj. Para que el reloj grabe solo, activa la geocerca y la grabación automática (pestaña Entrenamiento).")
             }
         }
     }

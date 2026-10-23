@@ -82,4 +82,20 @@ class Settings(ctx: Context, private val secure: SecureStore) {
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)
         set(v) { p.edit().putBoolean("sync.autoDownload", v).apply() }
+
+    /** Tide port chosen from the official IHM list (null = nearest to the training spot). */
+    var tidePortId: String?
+        get() = p.getString("tide.port.id", null)
+        set(v) { p.edit().putString("tide.port.id", v).apply() }
+
+    /** Training spot used for weather, sun/moon and the nearest tide port (default: El Regatón, Laredo). */
+    var spotName: String
+        get() = p.getString("tide.spot.name", "El Regatón") ?: "El Regatón"
+        set(v) { p.edit().putString("tide.spot.name", v).apply() }
+    var spotLat: Double
+        get() = p.getFloat("tide.spot.lat", 43.397f).toDouble()
+        set(v) { p.edit().putFloat("tide.spot.lat", v.toFloat()).apply() }
+    var spotLon: Double
+        get() = p.getFloat("tide.spot.lon", -3.426f).toDouble()
+        set(v) { p.edit().putFloat("tide.spot.lon", v.toFloat()).apply() }
 }

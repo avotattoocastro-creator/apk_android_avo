@@ -193,7 +193,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
                 } }) }
-                if (all.isEmpty()) item { Note("Aún no hay entrenamientos. Conecta el chaleco y pulsa «Leer lista del reloj».") }
+                if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
             val mine = all.filter { t ->
@@ -214,8 +214,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         TextField(value = dateFilter, onValueChange = { dateFilter = it }, label = { Text("Filtrar por fecha") }, singleLine = true)
                         TextField(value = sessionFilter, onValueChange = { sessionFilter = it }, label = { Text("Buscar identificador de sesión") }, singleLine = true)
                         OutlinedButton(onClick = { horseFilter = ""; dateFilter = ""; sessionFilter = "" }) { Text("Limpiar filtros") }
-                        Note("Resultados: ${mine.size} de ${all.count { it.localDir != null && it.downloadedBytes > 0 }} entrenamientos descargados.")
-                        Note("Abre un entrenamiento para ver velocidad, aceleración, ritmo, tramos y GPS. Para comparar, elige A y B entre las sesiones del mismo caballo.")
+                        KV("Resultados", "${mine.size} de ${all.count { it.localDir != null && it.downloadedBytes > 0 }}")
                         val eligible = mine.filter { it.horseCode != null }
                         eligible.forEach { t ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -233,11 +232,11 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                 }
                 item {
                     AvoCard("Servidor") {
-                        Note(if (c.sync.serverConfigured) "Conectado" else "Servidor pendiente de configurar: los entrenamientos se guardan en el teléfono y se subirán cuando exista el servidor.")
+                        KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
                     }
                 }
                 items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }) }
-                if (mine.isEmpty()) item { Note("No hay entrenamientos descargados en este teléfono.") }
+                if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
     }
@@ -249,15 +248,19 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text(Fmt.date(t.startRtcMs) ?: "Fecha desconocida", color = AvoColors.Text)
+                Text(Fmt.date(t.startRtcMs) ?: "Fecha desconocida", color = AvoColors.Text, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, fontSize = 16.sp)
                 Text(t.sessionId, color = AvoColors.TextDim, fontSize = 12.sp)
             }
             StatusPill(st?.texto?.substringBefore(" (")?.take(26) ?: t.state, syncColor(st))
         }
         KV("Caballo / jinete", listOfNotNull(t.horseCode, t.riderCode).joinToString(" / ").ifBlank { null })
-        KV("Duración activa", Fmt.duration(t.activeMs))
+        androidx.compose.foundation.layout.Spacer(Modifier.padding(top = 6.dp))
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            org.avoperformance.horse.ui.components.MetricTile("Tiempo", Fmt.duration(t.activeMs), "", Modifier.weight(1f))
+            org.avoperformance.horse.ui.components.MetricTile("Distancia", t.distanceM?.let { Fmt.m(it / 1000.0, 2) }, "km", Modifier.weight(1f))
+            org.avoperformance.horse.ui.components.MetricTile("V. máx", t.maxSpeedMs?.let { Fmt.kmh(it) }, "km/h", Modifier.weight(1f), AvoColors.Red)
+        }
         KV("Tamaño", if (t.downloadedBytes in 1 until t.totalBytes) "${Fmt.bytes(t.downloadedBytes)} de ${Fmt.bytes(t.totalBytes)}" else Fmt.bytes(t.totalBytes))
-        t.distanceM?.let { KV("Distancia", "${Fmt.m(it, 0)} m") }
         t.lastError?.let { Note(it, AvoColors.Warn) }
         if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
