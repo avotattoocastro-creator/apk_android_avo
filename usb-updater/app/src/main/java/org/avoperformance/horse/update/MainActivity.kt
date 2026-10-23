@@ -40,12 +40,13 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.2"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.3"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
         val authorize = Button(this).apply { text = "Autorizar acceso USB al ESP32-S3" }
         val inspect = Button(this).apply { text = "Diagnosticar interfaces USB" }
+        val probe = Button(this).apply { text = "Probar interfaz CDC (sin escritura)" }
         val firmware = Button(this).apply { text = "Seleccionar firmware .bin (solo análisis)" }
         val selfUpdate = Button(this).apply { text = "Actualizar esta aplicación desde APK" }
         scan.setOnClickListener { status.text = deviceReport() }
@@ -82,9 +83,37 @@ class MainActivity : Activity() {
                 }
             }
         }
+        probe.setOnClickListener {
+            val target = espDevice()
+            status.text = when {
+                target == null -> "No se detecta dispositivo Espressif."
+                !usb.hasPermission(target) -> "Primero autoriza el acceso USB."
+                else -> {
+                    val connection = usb.openDevice(target)
+                    if (connection == null) "No se pudo abrir USB."
+                    else try {
+                        val candidates = (0 until target.interfaceCount).map { target.getInterface(it) }
+                            .filter { it.interfaceClass == 10 && it.endpointCount >= 2 }
+                        if (candidates.isEmpty()) "No hay interfaz CDC de datos."
+                        else {
+                            val intf = candidates.first()
+                            if (!connection.claimInterface(intf, true)) "No se pudo reclamar interfaz CDC."
+                            else try {
+                                "Interfaz CDC reclamada correctamente. Endpoints: " +
+                                    (0 until intf.endpointCount).joinToString { i ->
+                                        val ep = intf.getEndpoint(i)
+                                        "0x%02X tipo=%d dir=%d".format(ep.address, ep.type, ep.direction)
+                                    } + "\\nNo se han enviado comandos. Bootloader aún sin verificar."
+                            } finally { connection.releaseInterface(intf) }
+                        }
+                    } catch (e: Exception) { "Diagnóstico CDC: ${e.message}" }
+                    finally { connection.close() }
+                }
+            }
+        }
         firmware.setOnClickListener { choose("application/octet-stream", selectFirmware) }
         selfUpdate.setOnClickListener { choose("application/vnd.android.package-archive", selectUpdate) }
-        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(status)
+        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(status)
         root.addView(firmware); root.addView(firmwareStatus); root.addView(selfUpdate)
         root.addView(TextView(this).apply {
             text = "\nSEGURIDAD: escritura USB deshabilitada hasta verificar el bootloader y las particiones del reloj. La instalación de APK exige la misma firma que la versión instalada."
