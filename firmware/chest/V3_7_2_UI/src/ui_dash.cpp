@@ -15,9 +15,18 @@ static const UiFont* const TITLE_FONTS[] = {&F_TITLE, &F_STATE};
 static const UiFont* const STATE_FONTS[] = {&F_STATE, &F_SMALL};
 static const UiFont* const RIGHT_FONTS[] = {&F_SMALL, &F_TINY};
 
+bool inside_visible(float x, float y, float m) {
+  const float r = PANEL_R - m;
+  if (x < m || y < m || x > UiFb::W - m || y > UiFb::H - m) return false;
+  const float cx = x < PANEL_R ? PANEL_R : x > UiFb::W - PANEL_R ? UiFb::W - PANEL_R : x;
+  const float cy = y < PANEL_R ? PANEL_R : y > UiFb::H - PANEL_R ? UiFb::H - PANEL_R : y;
+  const float dx = x - cx, dy = y - cy;
+  return dx * dx + dy * dy <= r * r;
+}
+
 static constexpr int X0 = MARGIN_X;
 static constexpr int CW = UiFb::W - 2 * MARGIN_X;   // 394
-static constexpr int ICON_CX = X0 + 31;
+static constexpr int ICON_CX_BASE = X0 + 31;
 static constexpr int DIV_X = X0 + 61;
 static constexpr int TEXT_X = X0 + 71;
 static constexpr int BADGE_CX = X0 + CW - 26;
@@ -52,7 +61,11 @@ uint32_t card_hash(int i, const Model& m) {
   return h;
 }
 
+static int inset_x(int i) { return (i == 0 || i == CARD_COUNT - 1) ? EDGE_INSET_X : 0; }
+static int shift_y(int i) { return i == 0 ? EDGE_SHIFT_Y : i == CARD_COUNT - 1 ? -EDGE_SHIFT_Y : 0; }
+
 static void left_icon(UiFb& fb, int i, int cy, const Model& m) {
+  const int ICON_CX = dash::ICON_CX_BASE + inset_x(i);
   switch (i) {
     case BLUETOOTH: fb.iconCentered(I_BLUETOOTH, ICON_CX, cy, C_INK); break;
     case CHALECO: fb.iconCentered(I_VEST, ICON_CX, cy, C_INK); break;
@@ -77,7 +90,8 @@ static void left_icon(UiFb& fb, int i, int cy, const Model& m) {
   }
 }
 
-static void right_icon(UiFb& fb, const CardModel& c, int cy) {
+static void right_icon(UiFb& fb, const CardModel& c, int cy, int in) {
+  const int RIGHT_ICON_CX = dash::RIGHT_ICON_CX - in;
   switch (c.right_icon) {
     case RI_PHONE: fb.iconCentered(I_PHONE, RIGHT_ICON_CX, cy, C_INK); break;
     case RI_NODES: fb.iconCentered(I_NODES, RIGHT_ICON_CX, cy, C_INK); break;
@@ -98,37 +112,47 @@ static void right_icon(UiFb& fb, const CardModel& c, int cy) {
 void draw_card(UiFb& fb, int i, const Model& m) {
   const CardModel& c = m.card[i];
   const int top = card_top(i);
-  const int cy = top + CARD_H / 2;
+  const int in = inset_x(i);
+  const int sy = shift_y(i);
+  const int cy = top + CARD_H / 2 + sy;
+  const int DIV_X = dash::DIV_X + in, TEXT_X = dash::TEXT_X + in;
+  const int RIGHT_TEXT_X = dash::RIGHT_TEXT_X - in, RIGHT_TEXT_END = dash::RIGHT_TEXT_END - in;
+  const int BADGE_CX = dash::BADGE_CX - in, RIGHT_ICON_CX = dash::RIGHT_ICON_CX - in;
   // Clear the slot first so anti-aliased corners never blend with an old colour.
   fb.fillRect(X0 - 2, top - 2, CW + 4, CARD_H + 4, C_INK);
   fb.fillRoundRect(X0, top, CW, CARD_H, RADIUS, c.color);
+  if (in) {  // top/bottom card: follow the curved corners of the visible area
+    fb.maskOutsideRoundRect(PANEL_MASK_INSET, PANEL_MASK_INSET, UiFb::W - 2 * PANEL_MASK_INSET,
+                            UiFb::H - 2 * PANEL_MASK_INSET, PANEL_R - PANEL_MASK_INSET,
+                            X0 - 2, top - 2, CW + 4, CARD_H + 4, C_INK);
+  }
   left_icon(fb, i, cy, m);
-  fb.fillRect(DIV_X, top + 12, 2, CARD_H - 24, C_INK);
+  fb.fillRect(DIV_X, top + 12 + sy, 2, CARD_H - 24, C_INK);
 
   const bool battery = i == BATERIA;
-  const bool has_right_icon = c.right_icon != RI_NONE || (battery && m.batt.charging);
+  const bool has_right_icon = (c.right_icon != RI_NONE && !in) || (battery && m.batt.charging);  // edge cards: no small icon
   const int title_max = (battery ? 300 : (has_right_icon ? RIGHT_ICON_CX - 20 : RIGHT_TEXT_X - 8)) - TEXT_X;
-  fb.text(UiFb::fit(TITLE_FONTS, 2, TITLES[i], title_max), TEXT_X, top + 29, TITLES[i], C_INK);
-  const int state_max = (battery ? 250 : RIGHT_TEXT_X - 6) - TEXT_X;
-  fb.text(UiFb::fit(STATE_FONTS, 2, c.state, state_max), TEXT_X, top + 55, c.state, C_INK);
+  fb.text(UiFb::fit(TITLE_FONTS, 2, TITLES[i], title_max), TEXT_X, top + 28 + sy, TITLES[i], C_INK);
+  const int state_max = (battery ? 250 - in : RIGHT_TEXT_X - 6) - TEXT_X;
+  fb.text(UiFb::fit(STATE_FONTS, 2, c.state, state_max), TEXT_X, top + 53 + sy, c.state, C_INK);
 
   if (battery) {
     char pct[8];
     if (m.batt.pct >= 0 && m.batt.pct <= 100) snprintf(pct, sizeof pct, "%d%%", m.batt.pct);
     else snprintf(pct, sizeof pct, "--%%");
-    const int right = X0 + CW - 16;
-    const int w = fb.textRight(F_BIG, right, top + 53, pct, C_INK);
+    const int right = X0 + CW - 16 - in;
+    const int w = fb.textRight(F_BIG, right, top + 51 + sy, pct, C_INK);
     if (m.batt.charging) fb.iconCentered(I_BOLT, right - w - 24, cy, C_INK);
     return;
   }
 
-  right_icon(fb, c, cy);
+  if (!in) right_icon(fb, c, cy, in);
   const int rw = RIGHT_TEXT_END - RIGHT_TEXT_X;
   if (c.r2[0]) {
-    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r1, rw), RIGHT_TEXT_X, top + 28, c.r1, C_INK);
-    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r2, rw), RIGHT_TEXT_X, top + 52, c.r2, C_INK);
+    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r1, rw), RIGHT_TEXT_X, top + 27 + sy, c.r1, C_INK);
+    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r2, rw), RIGHT_TEXT_X, top + 50 + sy, c.r2, C_INK);
   } else if (c.r1[0]) {
-    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r1, rw), RIGHT_TEXT_X, top + 40, c.r1, C_INK);
+    fb.text(UiFb::fit(RIGHT_FONTS, 2, c.r1, rw), RIGHT_TEXT_X, top + 39 + sy, c.r1, C_INK);
   }
   fb.fillCircle(BADGE_CX, cy, 16.5f, C_INK);
   fb.iconCentered(c.good ? I_CHECK : I_XMARK, BADGE_CX, cy, c.color);
@@ -138,7 +162,7 @@ bool rec_dot_active(const Model& m) { return m.card[SD].right_icon == RI_REC_DOT
 
 void draw_rec_dot(UiFb& fb, const Model& m, bool on) {
   if (!rec_dot_active(m)) return;
-  const int cy = card_top(SD) + CARD_H / 2;
+  const int cy = card_top(SD) + CARD_H / 2;  // SD is a middle card: no inset/shift
   // 28x28 square, even-aligned, entirely inside the card: only these pixels are re-sent.
   fb.fillRect(RIGHT_ICON_CX - 14, cy - 14, 28, 28, m.card[SD].color);
   if (on) { fb.fillCircle(RIGHT_ICON_CX, cy, 12.5f, C_INK); fb.fillCircle(RIGHT_ICON_CX, cy, 10.5f, C_RED); }
@@ -146,11 +170,14 @@ void draw_rec_dot(UiFb& fb, const Model& m, bool on) {
 
 bool card_text_fits(int i, const Model& m) {
   const CardModel& c = m.card[i];
+  const int in = inset_x(i);
+  const int TEXT_X = dash::TEXT_X + in, RIGHT_TEXT_X = dash::RIGHT_TEXT_X - in;
+  const int RIGHT_TEXT_END = dash::RIGHT_TEXT_END - in, RIGHT_ICON_CX = dash::RIGHT_ICON_CX - in;
   const bool battery = i == BATERIA;
-  const bool has_right_icon = c.right_icon != RI_NONE || (battery && m.batt.charging);
+  const bool has_right_icon = (c.right_icon != RI_NONE && !in) || (battery && m.batt.charging);  // edge cards: no small icon
   const int title_max = (battery ? 300 : (has_right_icon ? RIGHT_ICON_CX - 20 : RIGHT_TEXT_X - 8)) - TEXT_X;
   if (UiFb::textWidth(F_STATE, TITLES[i]) > title_max) return false;
-  if (UiFb::textWidth(F_SMALL, c.state) > (battery ? 250 : RIGHT_TEXT_X - 6) - TEXT_X) return false;
+  if (UiFb::textWidth(F_SMALL, c.state) > (battery ? 250 - in : RIGHT_TEXT_X - 6) - TEXT_X) return false;
   if (battery) return true;
   const int rw = RIGHT_TEXT_END - RIGHT_TEXT_X;
   return UiFb::textWidth(F_TINY, c.r1) <= rw && UiFb::textWidth(F_TINY, c.r2) <= rw;

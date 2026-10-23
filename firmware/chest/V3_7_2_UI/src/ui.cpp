@@ -51,6 +51,10 @@ struct GfxPanel : UiPanel {
 static GfxPanel panel;
 static dash::Model model;        // static: keeps the 4 KB UI task stack small
 static uint32_t card_cache[7] = {0,0,0,0,0,0,0};
+// What is really on the panel. Any switch to the cards (from charging, OTA, shutdown, ...)
+// repaints the whole dashboard, so no remains of the previous screen can stay visible.
+enum class Shown : uint8_t { NONE, CARDS, CHARGE, OTHER };
+static Shown shown = Shown::NONE;
 static bool cards_invalid = true;
 static void invalidate_cards() { cards_invalid = true; }
 
@@ -72,6 +76,7 @@ static void screen_power(bool on) {
     gfx->setBrightness(brightness);
     for (auto &p : old_state) p = UINT32_MAX;
     invalidate_cards();
+    shown = Shown::NONE;
   } else gfx->displayOff();
   appstate::update([on](AppSnapshot& a) { a.sys.display_on = on; });
 }
@@ -84,6 +89,7 @@ static uint32_t last_blink_ms = 0;
 static bool blink_on = true;
 
 static void render(const AppSnapshot& s, uint32_t now) {
+  if (shown != Shown::CARDS) { invalidate_cards(); shown = Shown::CARDS; }
   // Cards: rebuilt once per second from real-time state, no invented readings.
   if (cards_invalid || !last_dashboard_refresh || now - last_dashboard_refresh >= 1000 || old_state[0] == UINT32_MAX) {
     old_state[0] = 0;
@@ -124,16 +130,23 @@ static void render_charging(const AppSnapshot& s, uint32_t now) {
   const int current_pct = s.power.pmu.batt_pct;
   ui_model::build(s, now, &model);
   const uint8_t state = (uint8_t)(model.batt.charging | (model.batt.vbus << 1));
-  if (charge_screen && current_pct == last_charge_pct && state == last_charge_state &&
+  if (shown == Shown::CHARGE && charge_screen && current_pct == last_charge_pct && state == last_charge_state &&
       (uint32_t)(now - charge_last_draw) < 10000) return;
   last_charge_pct = current_pct;
   last_charge_state = state;
   charge_last_draw = now;
   charge_screen = true;
+  shown = Shown::CHARGE;
   dash::draw_charging(fb, model.batt);
   fb.flush(panel);
 }
 static bool pair_latched = false;
+// On USB: full brightness for 15 s after connecting, any touch or any button (BOOT/PWR call
+// ui::wake()), then dimmed to save the AMOLED and heat while charging.
+static constexpr uint8_t USB_BRIGHT = 255;
+static constexpr uint8_t USB_DIM = 25;
+static constexpr uint32_t USB_BRIGHT_MS = 15000;
+static uint32_t bright_until = 0;
 static void task(void*) {
   auto* snap = static_cast<AppSnapshot*>(heap_caps_malloc(sizeof(AppSnapshot), MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT));
   if (!snap) {
@@ -146,12 +159,13 @@ static void task(void*) {
   bool special_screen = false;
   for (;;) {
     const uint32_t now = sys::ms();
-    if (request_wake) { request_wake = false; screen_power(true); }
+    if (request_wake) { request_wake = false; screen_power(true); bright_until = now + USB_BRIGHT_MS; }
     if (now - last_touch_ms >= 60) {
       last_touch_ms = now;
       bool pressed = false;
       int16_t x=0,y=0;
       if (board::touch_read(&pressed,&x,&y) && pressed) {
+        bright_until = now + USB_BRIGHT_MS;
         if (!touch_start_ms) { touch_start_ms = now; pair_latched = false; }
         // V3.5.0: touch held 5 s anywhere = look for a back for 60 s (harmless if the own back is
         // alive: it simply answers again). Developer mode stays at 20 s.
@@ -181,7 +195,8 @@ static void task(void*) {
       uint8_t wanted = config_cache.brightness;
       if (config_cache.dim_on_low_batt && snap->power.level == PowerLevel::LOWBAT && wanted > 60) wanted = 60;
       const bool charging_usb = snap->power.pmu.online && snap->power.pmu.vbus;
-      if (charging_usb && wanted > 25) wanted = 25;
+      if (charging_usb && !usb_was_connected) bright_until = now + USB_BRIGHT_MS;  // just connected
+      if (charging_usb) wanted = (int32_t)(bright_until - now) > 0 ? USB_BRIGHT : USB_DIM;
       if (wanted != brightness) { brightness = wanted; if (display_on) gfx->setBrightness(brightness); }
       // USB insertion: remember whether the user was in normal or power-save
       // display mode. Wake for the charging screen without overwriting that
@@ -237,6 +252,7 @@ static void task(void*) {
             char ota_percent[8];
             snprintf(ota_percent,sizeof(ota_percent),"%lu%%",(unsigned long)pct);
             dash::draw_ota_progress(fb,pct,ota_percent);
+            shown = Shown::OTHER;
             fb.flush(panel);
           }
           charge_screen=false;
@@ -253,6 +269,7 @@ static void task(void*) {
             notice_last_draw=now;
             const bool ok = snap->ble.ota_display_status==2;
             dash::draw_ota_notice(fb, ok, ok?"OTA VERIFICADA":"ERROR OTA", ok?"ESPERA REINICIO":"REVISA APP");
+            shown = Shown::OTHER;
             fb.flush(panel);
           }
           for(auto &v:old_state)v=UINT32_MAX;
@@ -264,6 +281,7 @@ static void task(void*) {
             shutdown_drawn=true;
             drawn_phase = snap->power.shutdown_phase;
             dash::draw_shutdown(fb, drawn_phase);
+            shown = Shown::OTHER;
             fb.flush(panel);
           }
         } else if (shutdown_failed) {
@@ -271,6 +289,7 @@ static void task(void*) {
           if (failed_drawn_ms != snap->power.shutdown_fail_ms) {
             failed_drawn_ms = snap->power.shutdown_fail_ms;
             dash::draw_shutdown_failed(fb);
+            shown = Shown::OTHER;
             fb.flush(panel);
           }
           for(auto &v:old_state)v=UINT32_MAX;

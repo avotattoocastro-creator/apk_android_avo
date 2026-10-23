@@ -41,11 +41,21 @@ struct Model {
 
 // Layout (logical, portrait as seen by the rider).
 constexpr int MARGIN_X = 8;
-constexpr int TOP = 9;
-constexpr int CARD_H = 64;
-constexpr int CARD_GAP = 6;
+constexpr int CARD_H = 62;
+constexpr int CARD_GAP = 5;
+constexpr int TOP = (UiFb::H - (7 * CARD_H + 6 * CARD_GAP)) / 2;   // 19 px top and bottom
 constexpr int RADIUS = 20;
 inline int card_top(int i) { return TOP + i * (CARD_H + CARD_GAP); }
+
+// Visible area of the watch: panel + AVO case window have strongly rounded corners.
+// Estimated from photos of the real watch (23-10-2026): corner radius ~120 px.
+constexpr int PANEL_R = 120;
+constexpr int PANEL_MASK_INSET = 4;   // top/bottom cards follow the curve 4 px inside it
+// First/last card: content moved inwards (x) and towards the screen centre (y).
+constexpr int EDGE_INSET_X = 24;
+constexpr int EDGE_SHIFT_Y = 4;
+// True if (x, y) lies inside the visible area shrunk by `margin` pixels.
+bool inside_visible(float x, float y, float margin);
 
 const char* title(int i);
 // True if every text of card i fits its slot (smallest font included); used by host checks.

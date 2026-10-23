@@ -1,7 +1,7 @@
 # AVO CHEST V3.7.2-rc1 — pantalla de siete franjas legible (sin LVGL)
 
-**Estado: SIN VERIFICAR EN EL RELOJ.** Compila en GitHub Actions y pasa las comprobaciones en el
-ordenador (simulación del panel), pero falta verlo en el Waveshare ESP32-S3 Touch AMOLED 2.06".
+**Estado:** primera prueba física el 23-10-2026 (fotos del usuario): orientación correcta, texto legible, BLE,
+espalda, GPS DGNSS y SD funcionando con la nueva pantalla. Correcciones de esa prueba en curso (ver registro).
 
 ## Qué fallaba en 3.7.1-rc2 (foto del 23-10-2026)
 | Problema | Causa | Corrección |
@@ -23,7 +23,16 @@ ordenador (simulación del panel), pero falta verlo en el Waveshare ESP32-S3 Tou
 Aparece al conectar USB salvo que se esté grabando (entonces se ven las franjas). Un **toque corto** alterna
 30 s con las franjas. Anillo con extremos redondeados y halo, icono de batería con nivel real y rayo
 cuando el cargador carga, porcentaje grande y «CARGANDO USB» / «CARGA COMPLETA» / «USB CONECTADO»
-(cargador inactivo). Todo sale del PMIC AXP2101; nada se estima. El brillo con USB sigue limitado a 25 como en 3.7.1.
+(cargador inactivo). Todo sale del PMIC AXP2101; nada se estima.
+**Brillo con USB:** máximo (255) durante 15 s al conectar, al tocar la pantalla o al pulsar BOOT/POWER; después
+se atenúa a 25. Al desconectar el cargador se vuelve al brillo configurado y se repintan las siete franjas completas.
+
+## Esquinas curvas de la pantalla
+El área visible (panel + ventana de la caja AVO) tiene esquinas de ~120 px de radio (estimado con fotos del reloj,
+`PANEL_R` en `ui_dash.h`). Las franjas 1 y 7 siguen esa curva y su contenido se desplaza 24 px hacia dentro
+(sin el icono pequeño de la derecha). La vista previa comprueba que **ningún píxel de texto o icono** queda fuera
+del área visible y genera imágenes `*_contorno.png` con el contorno estimado en rojo. Si en el reloj aún se corta
+algo, basta ajustar `PANEL_R` y `EDGE_INSET_X`.
 
 ## Pantalla de apagado seguro
 Al mantener POWER: icono, «APAGANDO...», «Guardando entrenamiento» y una barra de **cuatro fases reales**

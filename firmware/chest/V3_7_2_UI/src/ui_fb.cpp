@@ -70,6 +70,23 @@ void UiFb::fillRoundRect(int x, int y, int w, int h, int r, uint16_t c) {
   markDirty(x, y, w, h);
 }
 
+void UiFb::maskOutsideRoundRect(int rx, int ry, int rw, int rh, int r, int x, int y, int w, int h, uint16_t outside) {
+  const int x0 = imax(0, x), y0 = imax(0, y), x1 = imin(W, x + w), y1 = imin(H, y + h);
+  for (int yy = y0; yy < y1; ++yy)
+    for (int xx = x0; xx < x1; ++xx) {
+      const float px = xx + 0.5f, py = yy + 0.5f;
+      if (px < rx || py < ry || px > rx + rw || py > ry + rh) { blend(xx, yy, outside, 255); continue; }
+      // Only the four corner squares are curved.
+      const float ccx = px < rx + r ? (float)(rx + r) : px > rx + rw - r ? (float)(rx + rw - r) : px;
+      const float ccy = py < ry + r ? (float)(ry + r) : py > ry + rh - r ? (float)(ry + rh - r) : py;
+      if (ccx == px || ccy == py) continue;
+      const float dx = px - ccx, dy = py - ccy;
+      const uint8_t inside = coverage(sqrtf(dx * dx + dy * dy), (float)r - 0.5f);
+      if (inside < 255) blend(xx, yy, outside, (uint8_t)(255 - inside));
+    }
+  markDirty(x0, y0, x1 - x0, y1 - y0);
+}
+
 void UiFb::fillCircle(float cx, float cy, float r, uint16_t c, uint8_t alpha) {
   const int x0 = (int)floorf(cx - r - 1), x1 = (int)ceilf(cx + r + 1);
   const int y0 = (int)floorf(cy - r - 1), y1 = (int)ceilf(cy + r + 1);

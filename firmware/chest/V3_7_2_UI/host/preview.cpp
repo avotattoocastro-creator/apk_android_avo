@@ -114,6 +114,15 @@ int main(int argc, char** argv) {
         if (panel.phys[(UiFb::H - 1 - y) * UiFb::W + (UiFb::W - 1 - x)] != fb.get(x, y)) ++mismatch;
     CHECK(mismatch == 0, "180-degree flush must map every pixel exactly");
     save_rider_view(panel, true, out + "/" + sc.name + ".ppm");
+    if (sc.kind == 0) {  // same image with the estimated visible-area outline (red), for review only
+      HostPanel ov = panel;
+      for (int y = 0; y < UiFb::H; ++y)
+        for (int x = 0; x < UiFb::W; ++x)
+          if (dash::inside_visible(x + 0.5f, y + 0.5f, 0) != dash::inside_visible(x + 1.5f, y + 0.5f, 0) ||
+              dash::inside_visible(x + 0.5f, y + 0.5f, 0) != dash::inside_visible(x + 0.5f, y + 1.5f, 0))
+            ov.phys[(UiFb::H - 1 - y) * UiFb::W + (UiFb::W - 1 - x)] = 0xF800;
+      save_rider_view(ov, true, out + "/" + sc.name + "_contorno.ppm");
+    }
 
     if (sc.kind == 0) {
       for (int i = 0; i < dash::CARD_COUNT; ++i) {
@@ -194,6 +203,36 @@ int main(int argc, char** argv) {
     CHECK(t.get(300, top + 10) == dash::C_YELLOW, "yellow card untouched by blink");
     dash::Model idle; AppSnapshot s = all_ok(); s.storage.rec = RecStatus::IDLE; ui_model::build(s, NOW, &idle);
     CHECK(!dash::rec_dot_active(idle), "no blinking dot when not recording");
+  }
+
+  // Curved visible area: every content pixel of every card (all scenes) must be inside it
+  // with a 3 px margin, and the top/bottom card backgrounds must follow the curve.
+  {
+    static uint16_t mem[UiFb::W * UiFb::H]; static uint16_t ln[UiFb::W * 4];
+    const AppSnapshot snaps[] = {all_ok(), nothing(), mixed()};
+    int outside = 0, bg_outside = 0;
+    for (const AppSnapshot& sn : snaps) {
+      dash::Model m; ui_model::build(sn, NOW, &m);
+      UiFb t; t.attach(mem, ln, UiFb::W * 4, true);
+      dash::draw_dashboard(t, m);
+      for (int i = 0; i < dash::CARD_COUNT; ++i) {
+        const int top = dash::card_top(i);
+        for (int y = top - 2; y < top + dash::CARD_H + 2; ++y)
+          for (int x = 0; x < UiFb::W; ++x) {
+            const uint16_t c = t.get(x, y);
+            if (c == m.card[i].color) { if (!dash::inside_visible(x + 0.5f, y + 0.5f, 0)) ++bg_outside; continue; }
+            if (c == dash::C_INK) continue;
+            // anti-aliased card edge pixels are mixtures of colour and black: skip those near the card border
+            const bool content = x > dash::MARGIN_X + 3 && x < UiFb::W - dash::MARGIN_X - 3 && y > top + 3 && y < top + dash::CARD_H - 3;
+            if (content && !dash::inside_visible(x + 0.5f, y + 0.5f, 3)) ++outside;
+          }
+      }
+    }
+    char msg[96];
+    snprintf(msg, sizeof msg, "content outside visible area: %d px", outside);
+    CHECK(outside == 0, msg);
+    snprintf(msg, sizeof msg, "card background outside visible area: %d px", bg_outside);
+    CHECK(bg_outside == 0, msg);
   }
 
   printf(failures ? "\n%d CHECKS FAILED\n" : "\nALL HOST CHECKS PASSED (simulation, not hardware)\n", failures);
