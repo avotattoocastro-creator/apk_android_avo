@@ -25,7 +25,7 @@ jobs:
           python3 equine-intelligence/ml/avo_ml.py evaluate --dataset demo.jsonl --report demo_eval.json
       - name: Fixtures RAW -> motor -> JSON (consumidos por Kotlin, Android y Windows)
         run: python3 equine-intelligence/tools/fixtures/check_fixtures.py eqr/avo_eq_cli
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: '17' }
       - name: Puente JNI en JVM anfitriona (mismo avo_eq_jni.cpp que Android)
         run: |
