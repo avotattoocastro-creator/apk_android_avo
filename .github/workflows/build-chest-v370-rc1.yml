@@ -1,0 +1,68 @@
+name: Build AVO CHEST V3.7.0 RC1
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - '.github/workflows/build-chest-v370-rc1.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 3.3.12
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Prepare exact RC1 identity from R8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/avo-rc1"
+          unzip -q firmware/chest/V3_6_1_R8/AVO_CHEST_V3_6_1_R8_STRICT_SD_SHUTDOWN_UNVERIFIED.zip -d "$RUNNER_TEMP/avo-rc1"
+          cd "$RUNNER_TEMP/avo-rc1"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("lib/avo_core/src/avo_version.h")
+          s=p.read_text()
+          assert '#define AVO_FW_VERSION "3.6.1"' in s
+          assert '#define AVO_FW_VERSION_NUM 0x030601' in s
+          s=s.replace('#define AVO_FW_VERSION "3.6.1"','#define AVO_FW_VERSION "3.7.0-rc1"')
+          s=s.replace('#define AVO_FW_VERSION_NUM 0x030601','#define AVO_FW_VERSION_NUM 0x030700')
+          p.write_text(s)
+          PY
+          printf '%s\n' 'AVO CHEST V3.7.0 RC1 - candidate build derived from V3.6.1 R8.' 'Only version identity updated; NO additional reliability fixes are claimed.' 'Build, OTA partition safety and on-device testing REQUIRED before release.' 'Do not label STABLE.' > RELEASE_RC1.md
+      - name: Test and compile RC1
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/avo-rc1"
+          python3 verify_source.py
+          python3 verify_ota_interlock.py
+          for t in tests/test_*.py; do python3 "$t"; done
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Verify and label RC1 image
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("firmware_out/AVO_CHEST_V3_5_0.ino.bin")
+          assert p.is_file() and p.stat().st_size>100000
+          assert p.read_bytes()[0]==0xe9
+          assert p.stat().st_size<6291456
+          out=Path("firmware_out/AVO_CHEST_V3_7_0_RC1_OTA_UNVERIFIED.bin")
+          out.write_bytes(p.read_bytes())
+          print("RC1 image bytes:",out.stat().st_size)
+          PY
+          sha256sum firmware_out/AVO_CHEST_V3_7_0_RC1_OTA_UNVERIFIED.bin > firmware_out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-CHEST-V3-7-0-RC1-UNVERIFIED
+          path: firmware_out/
+          if-no-files-found: warn
