@@ -71,8 +71,12 @@ jobs:
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/avo-372"
-          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
-          grep -E "Sketch uses|Global variables" "$GITHUB_WORKSPACE/firmware_out/build.log"
+          if ! FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"; then
+            # Surface compiler errors as annotations (readable without downloading logs).
+            grep -E "error:|Error " "$GITHUB_WORKSPACE/firmware_out/build.log" | head -20 | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+          grep -E "Sketch uses|Global variables" "$GITHUB_WORKSPACE/firmware_out/build.log" | while IFS= read -r l; do echo "::notice::$l"; done
       - name: Check image and label unverified
         run: |
           set -euo pipefail

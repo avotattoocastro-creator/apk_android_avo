@@ -139,28 +139,28 @@ int main(int argc, char** argv) {
     dash::Model m;
     AppSnapshot s = all_ok();
     ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::GPS].color == dash::GREEN, "RTK with NTRIP corrections must be green");
+    CHECK(m.card[dash::GPS].color == dash::C_GREEN, "RTK with NTRIP corrections must be green");
     CHECK(!strcmp(m.card[dash::GPS].state, "RTK FIX"), "RTK FIX state");
-    CHECK(m.card[dash::SD].color == dash::YELLOW, "recording must be yellow");
+    CHECK(m.card[dash::SD].color == dash::C_YELLOW, "recording must be yellow");
     CHECK(!strcmp(m.card[dash::SD].r1, "00:12:36"), "recording time");
     CHECK(!strcmp(m.card[dash::BATERIA].state, "Cargando..."), "charging only when charger charges");
     s.rtcm.flowing = false; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::GPS].color == dash::BLUE, "no NTRIP -> blue");
+    CHECK(m.card[dash::GPS].color == dash::C_BLUE, "no NTRIP -> blue");
     s.gnss.rx_ms = NOW - 5000; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::GPS].color == dash::RED && !m.card[dash::GPS].good, "stale GNSS never OK");
+    CHECK(m.card[dash::GPS].color == dash::C_RED && !m.card[dash::GPS].good, "stale GNSS never OK");
     s = all_ok(); s.link.last_rx_ms = NOW - 2500; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::ESPALDA].color == dash::RED, "stale back link -> red");
-    CHECK(m.card[dash::CINCHA].color == dash::GREEN, "girth evaluated on its own data");
+    CHECK(m.card[dash::ESPALDA].color == dash::C_RED, "stale back link -> red");
+    CHECK(m.card[dash::CINCHA].color == dash::C_GREEN, "girth evaluated on its own data");
     s = all_ok(); s.power.pmu.batt_pct = 42; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::BATERIA].color == dash::YELLOW, "21-50% yellow");
+    CHECK(m.card[dash::BATERIA].color == dash::C_YELLOW, "21-50% yellow");
     s.power.pmu.batt_pct = 20; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::BATERIA].color == dash::RED, "<=20% red");
+    CHECK(m.card[dash::BATERIA].color == dash::C_RED, "<=20% red");
     s.power.pmu.batt_pct = -1; ui_model::build(s, NOW, &m);
-    CHECK(m.batt.pct == -1 && m.card[dash::BATERIA].color == dash::YELLOW, "unknown -> --% warning");
+    CHECK(m.batt.pct == -1 && m.card[dash::BATERIA].color == dash::C_YELLOW, "unknown -> --% warning");
     s = all_ok(); s.power.pmu.charging = false; s.power.pmu.batt_pct = 100; ui_model::build(s, NOW, &m);
     CHECK(!strcmp(m.card[dash::BATERIA].state, "Carga completa"), "full charge text");
     s = all_ok(); s.girth.last_batch_ms[1] = 0; ui_model::build(s, NOW, &m);
-    CHECK(m.card[dash::CINCHA].color == dash::RED && !strcmp(m.card[dash::CINCHA].r1, "2 IMU"), "2/3 IMU is not OK");
+    CHECK(m.card[dash::CINCHA].color == dash::C_RED && !strcmp(m.card[dash::CINCHA].r1, "2 IMU"), "2/3 IMU is not OK");
   }
 
   // Worst-case strings must still fit.
@@ -191,7 +191,7 @@ int main(int argc, char** argv) {
       CHECK(p.odd == 0, "blink pushes even-aligned");
     }
     const int top = dash::card_top(dash::SD);
-    CHECK(t.get(300, top + 10) == dash::YELLOW, "yellow card untouched by blink");
+    CHECK(t.get(300, top + 10) == dash::C_YELLOW, "yellow card untouched by blink");
     dash::Model idle; AppSnapshot s = all_ok(); s.storage.rec = RecStatus::IDLE; ui_model::build(s, NOW, &idle);
     CHECK(!dash::rec_dot_active(idle), "no blinking dot when not recording");
   }

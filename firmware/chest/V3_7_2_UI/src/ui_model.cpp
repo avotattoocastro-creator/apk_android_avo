@@ -38,7 +38,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
     CardModel& c = m->card[BLUETOOTH];
     const bool ok = s.ble.connected && s.ble.authorized;
     c.good = ok;
-    c.color = ok ? GREEN : RED;
+    c.color = ok ? C_GREEN : C_RED;
     set(c.state, sizeof c.state, ok ? "Conectado" : s.ble.claim_pending ? "PULSA BOOT" :
         s.ble.connected ? "Sin autorizar" : "Sin enlace");
     if (s.ble.connected) { c.right_icon = RI_PHONE; set(c.r1, sizeof c.r1, "AVO APP"); }
@@ -51,7 +51,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
   {
     CardModel& c = m->card[CHALECO];
     c.good = back && sd_ok;
-    c.color = c.good ? GREEN : RED;
+    c.color = c.good ? C_GREEN : C_RED;
     set(c.state, sizeof c.state, c.good ? "Sistema OK" : !back ? "Sin espalda" : "Revisar SD");
     snprintf(c.r1, sizeof c.r1, "V%s", AVO_FW_VERSION);
     for (char* p = c.r1; *p; ++p) *p = (char)toupper((unsigned char)*p);
@@ -63,7 +63,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
   {
     CardModel& c = m->card[ESPALDA];
     c.good = back;
-    c.color = back ? GREEN : RED;
+    c.color = back ? C_GREEN : C_RED;
     set(c.state, sizeof c.state, back ? "Conectada" : s.link.now_pairing ? "Emparejando..." : "Sin enlace");
     if (back && s.link.transport == 1 && s.link.now_rssi < 0) {
       const int r = s.link.now_rssi;
@@ -85,7 +85,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
       for (int k = 0; k < 3; ++k) if (fresh(s.girth.last_batch_ms[k], 3000)) ++live;
     const bool ok = live == 3;
     c.good = ok;
-    c.color = ok ? GREEN : RED;
+    c.color = ok ? C_GREEN : C_RED;
     set(c.state, sizeof c.state, ok ? "Conectada" : live ? "Datos parciales" : s.girth.connected ? "Sin datos" : "Desconectada");
     c.right_icon = live ? RI_NODES : RI_NONE;
     if (live) {
@@ -101,7 +101,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
     const uint8_t carr = gps ? s.gnss.s.carr_soln() : 0;
     const bool corrected = gps && s.rtcm.flowing && (carr > 0 || s.gnss.s.diff_soln());
     c.good = gps;
-    c.color = !gps ? RED : corrected ? GREEN : BLUE;
+    c.color = !gps ? C_RED : corrected ? C_GREEN : C_BLUE;
     set(c.state, sizeof c.state, !gps ? "Sin GPS" : carr == 2 ? "RTK FIX" : carr == 1 ? "RTK FLOAT" :
         s.gnss.s.diff_soln() ? "DGNSS" : s.gnss.s.fix_type == 2 ? "GNSS 2D" : "GNSS 3D");
     if (gps) {
@@ -116,7 +116,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
     CardModel& c = m->card[SD];
     const bool rec = s.storage.rec == RecStatus::RECORDING || s.storage.rec == RecStatus::TEMP_BUFFER;
     c.good = sd_ok;
-    c.color = !sd_ok ? RED : rec ? YELLOW : GREEN;
+    c.color = !sd_ok ? C_RED : rec ? C_YELLOW : C_GREEN;
     if (!s.storage.mounted) { set(c.state, sizeof c.state, "Sin tarjeta"); set(c.r1, sizeof c.r1, "REVISAR"); }
     else if (!sd_ok) { set(c.state, sizeof c.state, "ERROR"); set(c.r1, sizeof c.r1, "REVISAR"); }
     else if (rec) {
@@ -139,7 +139,7 @@ void build(const AppSnapshot& s, uint32_t now, Model* m) {
     m->batt.pct = (pct >= 0 && pct <= 100) ? pct : -1;
     m->batt.charging = s.power.pmu.online && s.power.pmu.charging;
     m->batt.vbus = s.power.pmu.online && s.power.pmu.vbus;
-    c.color = m->batt.pct < 0 ? YELLOW : m->batt.pct > 50 ? GREEN : m->batt.pct > 20 ? YELLOW : RED;
+    c.color = m->batt.pct < 0 ? C_YELLOW : m->batt.pct > 50 ? C_GREEN : m->batt.pct > 20 ? C_YELLOW : C_RED;
     c.good = m->batt.pct > 20;
     set(c.state, sizeof c.state, m->batt.charging ? "Cargando..." :
         (m->batt.vbus && m->batt.pct == 100) ? "Carga completa" : m->batt.vbus ? "USB conectado" :

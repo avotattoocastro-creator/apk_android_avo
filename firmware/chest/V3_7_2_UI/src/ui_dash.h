@@ -7,19 +7,19 @@
 namespace dash {
 
 // Card colours (RGB565), chosen close to the approved reference.
-constexpr uint16_t GREEN  = rgb565(104, 232, 92);
-constexpr uint16_t BLUE   = rgb565(34, 190, 245);
-constexpr uint16_t YELLOW = rgb565(255, 236, 40);
-constexpr uint16_t RED    = rgb565(244, 64, 64);
-constexpr uint16_t GREY   = rgb565(120, 120, 120);
-constexpr uint16_t INK    = 0x0000;
-constexpr uint16_t WHITE  = 0xFFFF;
+constexpr uint16_t C_GREEN  = rgb565(104, 232, 92);
+constexpr uint16_t C_BLUE   = rgb565(34, 190, 245);
+constexpr uint16_t C_YELLOW = rgb565(255, 236, 40);
+constexpr uint16_t C_RED    = rgb565(244, 64, 64);
+constexpr uint16_t C_GREY   = rgb565(120, 120, 120);
+constexpr uint16_t C_INK    = 0x0000;
+constexpr uint16_t C_WHITE  = 0xFFFF;
 
 enum Card : uint8_t { BLUETOOTH = 0, CHALECO, ESPALDA, CINCHA, GPS, SD, BATERIA, CARD_COUNT };
 enum RightIcon : uint8_t { RI_NONE = 0, RI_PHONE, RI_SIGNAL, RI_NODES, RI_CROSSHAIRS, RI_REC_DOT };
 
 struct CardModel {
-  uint16_t color = RED;
+  uint16_t color = C_RED;
   bool good = false;
   char state[28] = {0};   // second line, left
   char r1[28] = {0};      // right column, line 1

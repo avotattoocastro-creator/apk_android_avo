@@ -89,7 +89,7 @@ static void render(const AppSnapshot& s, uint32_t now) {
     old_state[0] = 0;
     last_dashboard_refresh = now;
     ui_model::build(s, now, &model);
-    if (cards_invalid) fb.clear(dash::INK);
+    if (cards_invalid) fb.clear(dash::C_INK);
     for (int i = 0; i < dash::CARD_COUNT; ++i) {
       const uint32_t sig = dash::card_hash(i, model);
       if (!cards_invalid && card_cache[i] == sig) continue;
