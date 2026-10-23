@@ -40,13 +40,14 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.3"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.4"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
         val authorize = Button(this).apply { text = "Autorizar acceso USB al ESP32-S3" }
         val inspect = Button(this).apply { text = "Diagnosticar interfaces USB" }
         val probe = Button(this).apply { text = "Probar interfaz CDC (sin escritura)" }
+        val rom = Button(this).apply { text = "Diagnóstico ROM (solo lectura)" }
         val firmware = Button(this).apply { text = "Seleccionar firmware .bin (solo análisis)" }
         val selfUpdate = Button(this).apply { text = "Actualizar esta aplicación desde APK" }
         scan.setOnClickListener { status.text = deviceReport() }
@@ -103,7 +104,7 @@ class MainActivity : Activity() {
                                     (0 until intf.endpointCount).joinToString { i ->
                                         val ep = intf.getEndpoint(i)
                                         "0x%02X tipo=%d dir=%d".format(ep.address, ep.type, ep.direction)
-                                    } + "\\nNo se han enviado comandos. Bootloader aún sin verificar."
+                                    } + "\nNo se han enviado comandos. Bootloader aún sin verificar."
                             } finally { connection.releaseInterface(intf) }
                         }
                     } catch (e: Exception) { "Diagnóstico CDC: ${e.message}" }
@@ -111,9 +112,56 @@ class MainActivity : Activity() {
                 }
             }
         }
+        rom.setOnClickListener {
+            val target = espDevice()
+            status.text = when {
+                target == null -> "No se detecta ESP32-S3."
+                !usb.hasPermission(target) -> "Autoriza primero el USB."
+                else -> {
+                    val connection = usb.openDevice(target)
+                    if (connection == null) "No se pudo abrir USB."
+                    else try {
+                        val intf = (0 until target.interfaceCount).map { target.getInterface(it) }
+                            .firstOrNull { it.interfaceClass == 10 && it.endpointCount >= 2 }
+                        if (intf == null) "No hay interfaz CDC de datos."
+                        else if (!connection.claimInterface(intf, true)) "No se pudo reclamar CDC."
+                        else try {
+                            val output = (0 until intf.endpointCount).map { intf.getEndpoint(it) }
+                                .firstOrNull { it.direction == 0 && it.type == 2 }
+                            val input = (0 until intf.endpointCount).map { intf.getEndpoint(it) }
+                                .firstOrNull { it.direction == 128 && it.type == 2 }
+                            if (output == null || input == null) "Endpoints CDC incompletos."
+                            else {
+                                // ESP ROM SYNC command (SLIP-framed); no flash writes.
+                                val sync = byteArrayOf(0x07, 0x07, 0x12, 0x20) + ByteArray(32) { 0x55.toByte() }
+                                val packet = byteArrayOf(0x00, 0x08, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00) + sync
+                                val frame = ArrayList<Byte>()
+                                frame.add(0xC0.toByte())
+                                for (value in packet) {
+                                    when (value.toInt() and 0xff) {
+                                        0xC0 -> { frame.add(0xDB.toByte()); frame.add(0xDC.toByte()) }
+                                        0xDB -> { frame.add(0xDB.toByte()); frame.add(0xDD.toByte()) }
+                                        else -> frame.add(value)
+                                    }
+                                }
+                                frame.add(0xC0.toByte())
+                                val bytes = frame.toByteArray()
+                                val sent = connection.bulkTransfer(output, bytes, bytes.size, 1200)
+                                val received = ByteArray(512)
+                                val count = if (sent == bytes.size) connection.bulkTransfer(input, received, received.size, 1500) else -1
+                                val response = if (count > 0) received.take(count).joinToString(" ") { "%02X".format(it.toInt() and 255) } else "sin respuesta"
+                                "SYNC enviado: $sent/${bytes.size} bytes. Recibidos: $count. Datos: $response\\n" +
+                                    "No se ha escrito flash. Respuesta pendiente de validación ROM."
+                            }
+                        } finally { connection.releaseInterface(intf) }
+                    } catch (e: Exception) { "Diagnóstico ROM: ${e.message}" }
+                    finally { connection.close() }
+                }
+            }
+        }
         firmware.setOnClickListener { choose("application/octet-stream", selectFirmware) }
         selfUpdate.setOnClickListener { choose("application/vnd.android.package-archive", selectUpdate) }
-        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(status)
+        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(rom); root.addView(status)
         root.addView(firmware); root.addView(firmwareStatus); root.addView(selfUpdate)
         root.addView(TextView(this).apply {
             text = "\nSEGURIDAD: escritura USB deshabilitada hasta verificar el bootloader y las particiones del reloj. La instalación de APK exige la misma firma que la versión instalada."
