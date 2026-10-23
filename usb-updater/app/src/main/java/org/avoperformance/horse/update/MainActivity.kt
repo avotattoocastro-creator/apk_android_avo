@@ -40,7 +40,7 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.4"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.5"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
@@ -149,9 +149,9 @@ class MainActivity : Activity() {
                                 val sent = connection.bulkTransfer(output, bytes, bytes.size, 1200)
                                 val received = ByteArray(512)
                                 val count = if (sent == bytes.size) connection.bulkTransfer(input, received, received.size, 1500) else -1
-                                val response = if (count > 0) received.take(count).joinToString(" ") { "%02X".format(it.toInt() and 255) } else "sin respuesta"
+                                val response = if (count > 0) received.take(count).joinToString(" ") { "%02X".format(it.toInt() and 255) } else "sin respuesta"\n                                val validation = if (count > 0) RomProtocol.syncReport(received.copyOf(count)) else "Sin respuesta ROM. Escritura bloqueada."
                                 "SYNC enviado: $sent/${bytes.size} bytes. Recibidos: $count. Datos: $response\\n" +
-                                    "No se ha escrito flash. Respuesta pendiente de validación ROM."
+                                    "No se ha escrito flash.\\n$validation"
                             }
                         } finally { connection.releaseInterface(intf) }
                     } catch (e: Exception) { "Diagnóstico ROM: ${e.message}" }
