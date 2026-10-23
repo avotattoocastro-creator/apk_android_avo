@@ -39,7 +39,7 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.7"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.7.1"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
@@ -204,14 +204,19 @@ class MainActivity : Activity() {
                                     // ESP32-S3 UART ROM date register, read-only (esptool chip detection).
                                     val addr = 0x60000078
                                     val p = ByteArray(4) { i -> (addr ushr (8 * i)).toByte() }
-                                    val reply = exchange(0x0A, p)
-                                    if (reply == null) "SYNC válido. READ_REG sin respuesta. Escritura bloqueada."
+                                    var reply: RomProtocol.Reply? = null
+                                    for (attempt in 1..3) {
+                                        reply = exchange(0x0A, p)
+                                        if (reply != null) break
+                                        Thread.sleep(120)
+                                    }
+                                    if (reply == null) "SYNC válido. READ_REG sin respuesta tras 3 intentos. Escritura bloqueada."
                                     else "SYNC válido. Registro ROM 0x60000078 = 0x%08X.\\nIdentidad provisional; particiones y protecciones NO verificadas. Escritura bloqueada.".format(reply.value)
                                 }
                             } finally { connection.releaseInterface(intf) }
                         } finally { connection.close() }
                     } catch (e: Exception) { "Diagnóstico ROM: ${e.message}" }
-                    runOnUiThread { status.text = result.replace("\\\\n", "\\n") }
+                    runOnUiThread { status.text = result.replace("\\n", "\\n") }
                 }.start()
             }
         }
