@@ -289,10 +289,10 @@ class MainActivity : Activity() {
         backupButton = secondary(rd, "Copia completa de la flash") { fullBackup() }
         reportButton = secondary(rd, "Guardar informe (.txt)") { saveReport() }
 
-        val fw = card(col, "Firmware del pecho")
+        val fw = card(col, "Firmware (pecho o espalda)")
         selectButton = secondary(fw, "Seleccionar firmware BIN") { choose("*/*", selectFirmware) }
         firmwareState = row(fw, 14f).apply { setTextIsSelectable(true); text = "Ningún archivo seleccionado." }
-        readButton = secondary(fw, "Leer reloj") { readWatch() }
+        readButton = secondary(fw, "Comprobar módulo para instalar") { readWatch() }
 
         val inst = card(col, "Instalación")
         planState = row(inst, 13f, cSilver)
@@ -380,7 +380,7 @@ class MainActivity : Activity() {
             planError != null -> "✖ $planError"
             planText != null -> planText
             firmware?.validHeader != true -> "Selecciona un firmware válido."
-            s == null -> "Pulsa LEER RELOJ para comprobar particiones, slot activo y seguridad."
+            s == null -> "Pulsa COMPROBAR MÓDULO PARA INSTALAR (particiones, slot activo y seguridad)."
             else -> ""
         }
     }
@@ -388,9 +388,9 @@ class MainActivity : Activity() {
     private fun refreshButtons() {
         val idle = !busy.get()
         val any = UsbLinks.find(usb) != null
-        readButton.enable(idle && UsbCdcLink.findWatch(usb) != null)
+        readButton.enable(idle && any)
         selectButton.enable(idle)
-        installButton.enable(idle && planText != null && firmware?.validHeader == true && UsbCdcLink.findWatch(usb) != null)
+        installButton.enable(idle && planText != null && firmware?.validHeader == true && any)
         infoButton.enable(idle && any)
         readFwButton.enable(idle && any)
         readPartButton.enable(idle && any && lastInfo?.partitions?.isNotEmpty() == true)
@@ -419,7 +419,8 @@ class MainActivity : Activity() {
         override fun onLog(line: String) = ui { appendLog(line) }
     }
 
-    private fun port() = AndroidDevicePort(this, usb) { ui { appendLog("Acepta el permiso USB en la pantalla del teléfono.") } }
+    // Install / read work with the chest (USB-Serial/JTAG) and the back module (CP2102).
+    private fun port() = AnyDevicePort(this, usb) { ui { appendLog("Acepta el permiso USB en la pantalla del teléfono.") } }
     private fun anyPort() = AnyDevicePort(this, usb) { ui { appendLog("Acepta el permiso USB en la pantalla del teléfono.") } }
 
     private fun runExclusive(task: () -> Unit) {
@@ -510,7 +511,7 @@ class MainActivity : Activity() {
 
     private fun baseName(info: FlashReader.Info): String {
         val boot = info.apps.firstOrNull { it.partition == info.bootPartition }
-        val who = boot?.avo?.let { "CHEST_$it" } ?: boot?.project?.takeIf { it.isNotBlank() && it != "arduino-lib-builder" } ?: "ESP32S3"
+        val who = boot?.avo?.replace(" ", "_")?.removePrefix("AVO-") ?: boot?.project?.takeIf { it.isNotBlank() && it != "arduino-lib-builder" } ?: "ESP32S3"
         return "AVO_${who.replace(Regex("[^A-Za-z0-9._-]"), "_")}_${info.macCompact}"
     }
 

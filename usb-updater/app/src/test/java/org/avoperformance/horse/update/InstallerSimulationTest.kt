@@ -215,4 +215,16 @@ class InstallerSimulationTest {
         fake.chipReset(FakeEsp32S3.Mode.APP)
         assertEquals(0, fake.bootedSlot)
     }
+
+    @Test fun backFirmwareIsIdentifiedAndRefusedOnTheChest() {
+        val back = TestImages.build("3.8.0", approxSize = 300_000, seed = 21, arduinoStyle = true, backMarker = true)
+        val info = AppImage.parse(back)
+        assertEquals("3.8.0", info.avoBackVersion)
+        assertEquals("AVO-BACK 3.8.0", info.label)
+        val fake = TestImages.watch()
+        val before = fake.flash.copyOf()
+        val e = assertThrows(UpdateException::class.java) { installer(fake).install(back) }
+        assertEquals(Failure.INCOMPATIBLE, e.failure)
+        assertArrayEquals("nada escrito", before, fake.flash)
+    }
 }

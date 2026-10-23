@@ -51,7 +51,7 @@ jobs:
           assert b[0] == 0xE9 and struct.unpack("<H", b[12:14])[0] == 9, "not an ESP32-S3 app image"
           assert struct.unpack("<I", b[0x20:0x24])[0] == 0xABCD5432, "no esp_app_desc_t"
           assert len(b) < 3264 * 1024, "does not fit app0/app1 (3264 KB)"
-          for s in (b"3.8.0", b"AJUSTE_PRECISION", b"PRECISION: perfil"): assert s in b, s
+          for s in (b"3.8.0\x00AVO-BACK", b"AJUSTE_PRECISION", b"PRECISION: perfil"): assert s in b, s
           print(f"::notice title=AVO BACK 3.8.0::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0), esp_app_desc OK, version 3.8.0 presente")
           PY
           echo "::notice title=Memoria::$(grep -E 'Sketch uses|Global variables' build.log | tr '\n' ' ')"

@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 env:
-  APK_NAME: AVO_Performance_Horse_Update_V2_0_1_debug.apk
+  APK_NAME: AVO_Performance_Horse_Update_V2_1_0_debug.apk
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: AVO-Performance-Horse-Update-V2-0-1-DEBUG
+          name: AVO-Performance-Horse-Update-V2-1-0-DEBUG
           path: out/
           retention-days: 30
       - uses: actions/upload-artifact@v4

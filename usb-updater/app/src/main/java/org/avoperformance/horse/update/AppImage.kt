@@ -33,13 +33,16 @@ internal object AppImage {
         /** Version of the AVO firmware itself (Arduino builds put the lib-builder hash in esp_app_desc_t). */
         val avoVersion: String? = null,
         /** True when the image carries the AVO chest / Waveshare AMOLED 2.06 identity marker. */
-        val avoChestMarker: Boolean = false
+        val avoChestMarker: Boolean = false,
+        /** Version of an AVO back-module firmware ("AVO-BACK" marker, V3.8.0+). */
+        val avoBackVersion: String? = null,
     ) {
-        /** "AVO-CHEST 3.7.1-rc2" style label. */
-        val label: String get() = avoVersion?.let { "AVO-CHEST $it" }
+        val isAvoBack: Boolean get() = avoBackVersion != null
+        /** "AVO-CHEST 3.7.1-rc2" / "AVO-BACK 3.8.0" style label. */
+        val label: String get() = avoBackVersion?.let { "AVO-BACK $it" } ?: avoVersion?.let { "AVO-CHEST $it" }
             ?: listOf(projectName, version).filter { it.isNotBlank() }.joinToString(" ")
         /** Version string the firmware prints at boot (used to confirm the first boot). */
-        val runtimeVersion: String get() = avoVersion ?: version
+        val runtimeVersion: String get() = avoBackVersion ?: avoVersion ?: version
         val flashSizeText: String get() = flashSizeName(flashSizeCode)
     }
 
@@ -64,11 +67,11 @@ internal object AppImage {
         }
     }
 
-    /** AVO firmware stores AVO_FW_VERSION right before "AVO-CHEST" in its first data segment. */
-    fun findAvoVersion(image: ByteArray, limit: Int = 0x20000): String? {
+    /** AVO firmware stores AVO_FW_VERSION right before "AVO-CHEST" (or "AVO-BACK") in its first data segment. */
+    fun findAvoVersion(image: ByteArray, limit: Int = 0x20000, marker: String = "AVO-CHEST"): String? {
         val found = strings(image, 0, limit).toList()
         for ((i, pair) in found.withIndex()) {
-            if (pair.second != "AVO-CHEST") continue
+            if (pair.second != marker) continue
             val prev = found.getOrNull(i - 1) ?: continue
             if (pair.first - (prev.first + prev.second.length) <= 16 && semver.matches(prev.second)) return prev.second
         }
@@ -106,6 +109,7 @@ internal object AppImage {
     fun describeHead(head: ByteArray): String? {
         if (!headerLooksValid(head)) return null
         findAvoVersion(head, head.size)?.let { return "AVO-CHEST $it" }
+        findAvoVersion(head, head.size, "AVO-BACK")?.let { return "AVO-BACK $it" }
         if (head.size < 32 + 256 || u32le(head, 32) != APP_DESC_MAGIC) return null
         return listOf(cString(head, 32 + 48, 32), cString(head, 32 + 16, 32)).filter { it.isNotBlank() }.joinToString(" ")
     }
@@ -163,6 +167,7 @@ internal object AppImage {
             buildDate = if (hasDesc) (cString(image, desc + 96, 16) + " " + cString(image, desc + 80, 16)).trim() else "",
             secureVersion = if (hasDesc) u32le(image, desc + 4) else 0,
             avoVersion = findAvoVersion(image),
+            avoBackVersion = findAvoVersion(image, image.size, "AVO-BACK"),
             avoChestMarker = hasAvoChestMarker(image)
         )
     }

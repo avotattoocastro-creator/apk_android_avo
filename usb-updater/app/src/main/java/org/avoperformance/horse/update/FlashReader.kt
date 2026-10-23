@@ -149,7 +149,7 @@ internal class FlashReader(
         val hasDesc = ok && head.size >= d + 256 && u32le(head, d) == AppImage.APP_DESC_MAGIC
         fun cs(o: Int, n: Int) = if (!hasDesc) "" else String(head, d + o, n, Charsets.US_ASCII).substringBefore('\u0000').filter { it.code in 32..126 }
         return AppSlot(p, ok, cs(48, 32), cs(16, 32), (cs(96, 16) + " " + cs(80, 16)).trim(), cs(112, 32),
-            if (hasDesc) hex(head.copyOfRange(d + 144, d + 176)) else "", if (ok) AppImage.findAvoVersion(head, head.size) else null)
+            if (hasDesc) hex(head.copyOfRange(d + 144, d + 176)) else "", if (ok) AppImage.findAvoVersion(head, head.size)?.let { "AVO-CHEST $it" } ?: AppImage.findAvoVersion(head, head.size, "AVO-BACK")?.let { "AVO-BACK $it" } else null)
     }
 
     /** Loads the RAM flasher stub and, on a USB-UART bridge, raises the speed to [fastBaud]. */

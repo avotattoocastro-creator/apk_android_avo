@@ -5,7 +5,7 @@ App Android **independiente** de AVO Performance Horse para instalar `firmware.b
 ESP32-S3: pecho (USB nativo) y espalda Heltec Wireless Stick Lite V3 (puente CP2102).
 
 - applicationId permanente: `org.avoperformance.horse.update`
-- Versión actual: **2.0.1** (versionCode 21) — falta la prueba física (pecho y espalda).
+- Versión actual: **2.1.0** (versionCode 22) — instala también en la espalda (CP2102) — falta la prueba física (pecho y espalda).
 - Rama: `develop/avo-performance-horse` · CI: `.github/workflows/build-usb-updater.yml`
 
 ## Manual breve

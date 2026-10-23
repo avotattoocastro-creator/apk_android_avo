@@ -85,11 +85,17 @@ internal class Installer(
         } catch (e: UpdateException) {
             if (e.failure != Failure.NO_BOOTLOADER || !autoBootloader) { link.close(); throw e }
         }
-        log("Sin SYNC: reiniciando el reloj en modo bootloader por USB (DTR/RTS)…")
-        LineControl(link, clock).resetIntoBootloader()
-        link.close()
-        clock.sleep(600)
-        link = port.open(15_000)
+        if (link.kind.isUart) {
+            log("Sin SYNC: reiniciando el módulo en modo descarga (DTR/RTS del puente USB-UART)…")
+            LineControl(link, clock).classicResetIntoBootloader()
+            clock.sleep(200)
+        } else {
+            log("Sin SYNC: reiniciando el reloj en modo bootloader por USB (DTR/RTS)…")
+            LineControl(link, clock).resetIntoBootloader()
+            link.close()
+            clock.sleep(600)
+            link = port.open(15_000)
+        }
         rom = EspRom(link, clock, ::cancelled)
         try {
             rom.sync(12)
@@ -115,7 +121,7 @@ internal class Installer(
             val snap = DeviceProbe.run(s.rom, ::log)
             if (rebootAfter) {
                 s.rom.clearForceDownloadBoot()
-                LineControl(s.link, clock).hardReset()
+                if (s.link.kind.isUart) LineControl(s.link, clock).classicHardReset() else LineControl(s.link, clock).hardReset()
                 log("Lectura terminada; el reloj vuelve a su firmware.")
             }
             return snap
@@ -137,6 +143,12 @@ internal class Installer(
             step(Step.READING)
             val device = DeviceProbe.run(rom, ::log)
             device.report().forEach(::log)
+
+            // chest firmware never goes to the back module and vice versa
+            if (link.kind.isUart && info.avoChestMarker)
+                fail(Failure.INCOMPATIBLE, "es un firmware del PECHO y el módulo conectado es la ESPALDA (puente USB-UART)")
+            if (!link.kind.isUart && info.isAvoBack)
+                fail(Failure.INCOMPATIBLE, "es un firmware de la ESPALDA y el dispositivo conectado es el PECHO (USB nativo)")
 
             step(Step.PARTITIONS)
             val plan = InstallPlanner.plan(device, info)
@@ -190,6 +202,11 @@ internal class Installer(
             // ---- reboot into the application
             step(Step.REBOOTING)
             rom.clearForceDownloadBoot()
+            if (link.kind.isUart) {
+                LineControl(link, clock).classicHardReset()
+                log("Reinicio enviado (RTS del puente USB-UART).")
+                return confirm(plan, info, imageMd5, options, keep = link)   // the bridge stays on the bus
+            }
             LineControl(link, clock).hardReset()
             link.close()
             log("Reinicio enviado (RTS).")
@@ -250,7 +267,7 @@ internal class Installer(
         log("otadata verificado: el bootloader seleccionará ${plan.target.label} (seq ${plan.otaUpdate.seq}).")
     }
 
-    private fun confirm(plan: InstallPlanner.Plan, info: AppImage.Info, imageMd5: String, options: Options): Outcome {
+    private fun confirm(plan: InstallPlanner.Plan, info: AppImage.Info, imageMd5: String, options: Options, keep: RomLink? = null): Outcome {
         step(Step.CONFIRMING, null, "Esperando a que el reloj vuelva a aparecer por USB")
         val text = StringBuilder()
         var resets = 0
@@ -259,7 +276,7 @@ internal class Installer(
         val start = clock.nowMs()
         var link: RomLink? = null
         try {
-            link = runCatching { port.open(options.reappearMs) }.getOrNull()
+            link = keep ?: runCatching { port.open(options.reappearMs) }.getOrNull()
             if (link == null) {
                 return Outcome(plan, imageMd5, null, 0, 0, false, false,
                     "Firmware grabado, verificado y activado, pero el reloj no volvió a aparecer por USB. Comprueba la pantalla del reloj.", "")
@@ -274,7 +291,7 @@ internal class Installer(
                     bestStable = maxOf(bestStable, clock.nowMs() - stableSince)
                     log("El reloj se desconectó (posible reinicio #$resets).")
                     current.close()
-                    link = runCatching { port.open(options.reappearMs) }.getOrNull() ?: break
+                    link = keep ?: runCatching { port.open(options.reappearMs) }.getOrNull() ?: break
                     stableSince = clock.nowMs()
                     continue
                 }
@@ -326,10 +343,19 @@ internal class Installer(
 
     /** Re-enters ROM through USB-Serial-JTAG, reads otadata and boots the app again. */
     private fun romBootCheck(appLink: RomLink, plan: InstallPlanner.Plan): OtaData.BootCheck {
-        LineControl(appLink, clock).resetIntoBootloader()
-        appLink.close()
-        clock.sleep(600)
-        val link = port.open(15_000)
+        val uart = appLink.kind.isUart
+        val link: RomLink
+        if (uart) {
+            LineControl(appLink, clock).classicResetIntoBootloader()
+            clock.sleep(200)
+            link = appLink
+        } else {
+            LineControl(appLink, clock).resetIntoBootloader()
+            appLink.close()
+            clock.sleep(600)
+            link = port.open(15_000)
+        }
+        fun runApp() = if (uart) LineControl(link, clock).classicHardReset() else LineControl(link, clock).hardReset()
         try {
             val rom = EspRom(link, clock) { false }
             rom.sync(12)
@@ -338,10 +364,10 @@ internal class Installer(
             val entries = listOf(0, 1).map { OtaData.Entry(rom.readFlashVerified(base + it * OtaData.SECTOR, OtaData.ENTRY_SIZE)) }
             val result = OtaData.checkAfterBoot(entries, plan.target.index, 2, plan.otaUpdate.seq)
             rom.clearForceDownloadBoot()
-            LineControl(link, clock).hardReset()
+            runApp()
             return result
         } catch (e: UpdateException) {
-            runCatching { LineControl(link, clock).hardReset() }
+            runCatching { runApp() }
             throw e
         } finally {
             link.close()

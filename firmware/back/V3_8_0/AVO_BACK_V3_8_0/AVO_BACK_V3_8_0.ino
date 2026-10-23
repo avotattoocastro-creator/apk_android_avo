@@ -37,6 +37,10 @@
 
 using namespace avo;
 
+// Identity marker read by the AVO USB updater ("3.8.0" followed by "AVO-BACK"): the app shows
+// "AVO-BACK 3.8.0" and refuses to install a back firmware on the chest or a chest firmware on the back.
+extern "C" const char AVO_BACK_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_FW_VERSION "\0AVO-BACK";
+
 // ------------------------------------------------------------------ hardware
 static const int ZED_RX_PIN = 33;      // Heltec RX  <- ZED TX
 static const int ZED_TX_PIN = 35;      // Heltec TX  -> ZED RX

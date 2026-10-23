@@ -399,7 +399,7 @@ internal class FakeEsp32S3(val clock: FakeClock = FakeClock()) {
 internal object TestImages {
     /** Builds a valid ESP32-S3 application image with esp_app_desc_t and appended SHA-256. */
     fun build(version: String, project: String = "AVO-CHEST", approxSize: Int = 200_000, seed: Int = 1,
-              arduinoStyle: Boolean = false): ByteArray {
+              arduinoStyle: Boolean = false, backMarker: Boolean = false): ByteArray {
         val rnd = java.util.Random(seed.toLong())
         val desc = ByteArray(256)
         le32(AppImage.APP_DESC_MAGIC).copyInto(desc, 0)
@@ -413,6 +413,10 @@ internal object TestImages {
             // AVO_FW_VERSION + "AVO-CHEST" as in 3.7.1-rc2 (file offset 0x254), plus board marker
             val tag = ByteArray(1) + "$version\u0000\u0000AVO-CHEST\u0000AVOCHEST-IMG-V1:WS-AMOLED-2.06\u0000".toByteArray()
             tag.copyInto(seg1, 0x254 - 32 - 1)
+        }
+        if (backMarker) {   // AVO_BACK_IMAGE_ID of the back firmware V3.8.0+
+            val tag = ByteArray(1) + "$version\u0000AVO-BACK\u0000".toByteArray()
+            tag.copyInto(seg1, 0x300)
         }
         val rest = maxOf(4, (approxSize - 4096 - 64) / 4 * 4)
         val seg2 = ByteArray(rest).also { rnd.nextBytes(it) }
