@@ -42,6 +42,24 @@ internal object RomProtocol {
         return Reply(frame[1].toInt() and 255, frame.copyOfRange(8, frame.size), value)
     }
 
+    /** Espressif ROM request: 8-byte header + SLIP framing. No flash write opcodes. */
+    fun command(opcode: Int, payload: ByteArray): ByteArray {
+        require(opcode == 0x08 || opcode == 0x0A) { "Solo SYNC y READ_REG" }
+        val packet = byteArrayOf(0, opcode.toByte(), (payload.size and 255).toByte(),
+            (payload.size ushr 8).toByte(), 0, 0, 0, 0) + payload
+        val encoded = ArrayList<Byte>()
+        encoded.add(0xC0.toByte())
+        for (b in packet) {
+            when (b.toInt() and 255) {
+                0xC0 -> { encoded.add(0xDB.toByte()); encoded.add(0xDC.toByte()) }
+                0xDB -> { encoded.add(0xDB.toByte()); encoded.add(0xDD.toByte()) }
+                else -> encoded.add(b)
+            }
+        }
+        encoded.add(0xC0.toByte())
+        return encoded.toByteArray()
+    }
+
     fun syncReport(raw: ByteArray): String {
         val frames = decodeFrames(raw)
         val replies = frames.mapNotNull(::parseReply)
