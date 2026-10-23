@@ -1,9 +1,14 @@
 package org.avoperformance.horse.update
 
 import android.app.Activity
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.hardware.usb.UsbDevice
 import android.hardware.usb.UsbManager
-import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
@@ -11,58 +16,98 @@ import android.widget.ScrollView
 import android.widget.TextView
 import java.security.MessageDigest
 
-/** Diagnostic and package-selection application. ROM flashing is intentionally not enabled. */
+/** Safe USB diagnostic. No flash writes. */
 class MainActivity : Activity() {
     private val selectFirmware = 101
     private val selectUpdate = 102
+    private val usbAction = "org.avoperformance.horse.update.USB_PERMISSION"
+    private lateinit var usb: UsbManager
     private lateinit var status: TextView
     private lateinit var firmwareStatus: TextView
+    private val permissionReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action != usbAction) return
+            val granted = intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)
+            status.text = if (granted) "Permiso USB concedido.\n" + deviceReport() else "Permiso USB denegado.\n" + deviceReport()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val usb = getSystemService(USB_SERVICE) as UsbManager
-        val root = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(32, 48, 32, 24)
-        }
-        val title = TextView(this).apply {
-            text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.1"
-            textSize = 23f
-        }
+        usb = getSystemService(USB_SERVICE) as UsbManager
+        val filter = IntentFilter(usbAction)
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(permissionReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+        else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
+
+        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.2"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
+        val authorize = Button(this).apply { text = "Autorizar acceso USB al ESP32-S3" }
+        val inspect = Button(this).apply { text = "Diagnosticar interfaces USB" }
         val firmware = Button(this).apply { text = "Seleccionar firmware .bin (solo análisis)" }
         val selfUpdate = Button(this).apply { text = "Actualizar esta aplicación desde APK" }
-        val safety = TextView(this).apply {
-            text = "\nSEGURIDAD: la escritura de flash está desactivada hasta validar la interfaz USB, bootloader, tabla de particiones y firma del firmware.\n\nPara actualizar esta aplicación, selecciona una APK con el mismo ID y la misma firma. Android pedirá confirmación."
+        scan.setOnClickListener { status.text = deviceReport() }
+        authorize.setOnClickListener {
+            val target = espDevice()
+            if (target == null) status.text = "No se detecta el ESP32-S3 (VID 303A)."
+            else if (usb.hasPermission(target)) status.text = "USB ya autorizado.\n" + deviceReport()
+            else {
+                val pending = PendingIntent.getBroadcast(this, 0, Intent(usbAction).setPackage(packageName),
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+                usb.requestPermission(target, pending)
+                status.text = "Solicitud de autorización USB enviada a Android."
+            }
         }
-        scan.setOnClickListener {
-            val devices = usb.deviceList.values.toList()
-            status.text = if (devices.isEmpty()) "No se detectan dispositivos USB. Comprueba OTG y cable de datos."
-            else devices.joinToString("\n\n") { d ->
-                "VID: %04X  PID: %04X\nNombre: %s\nInterfaces: %d\nPermiso: %s".format(
-                    d.vendorId, d.productId, d.deviceName, d.interfaceCount, usb.hasPermission(d))
+        inspect.setOnClickListener {
+            val target = espDevice()
+            status.text = when {
+                target == null -> "No se detecta ESP32-S3."
+                !usb.hasPermission(target) -> "Autoriza el acceso USB primero."
+                else -> {
+                    val connection = usb.openDevice(target)
+                    if (connection == null) "Android no pudo abrir el dispositivo."
+                    else try {
+                        val interfaces = (0 until target.interfaceCount).joinToString("\n") { i ->
+                            val intf = target.getInterface(i)
+                            val endpoints = (0 until intf.endpointCount).joinToString { e ->
+                                val ep = intf.getEndpoint(e)
+                                "0x%02X(tipo=%d,dir=%d)".format(ep.address, ep.type, ep.direction)
+                            }
+                            "Interfaz $i: clase=${intf.interfaceClass}, subclase=${intf.interfaceSubclass}, protocolo=${intf.interfaceProtocol}; endpoints=$endpoints"
+                        }
+                        "USB abierto correctamente.\n$interfaces\n\nROM bootloader: aún sin comprobar. No se ha enviado ningún comando."
+                    } finally { connection.close() }
+                }
             }
         }
         firmware.setOnClickListener { choose("application/octet-stream", selectFirmware) }
         selfUpdate.setOnClickListener { choose("application/vnd.android.package-archive", selectUpdate) }
-        root.addView(title); root.addView(scan); root.addView(status)
-        root.addView(firmware); root.addView(firmwareStatus)
-        root.addView(selfUpdate); root.addView(safety)
+        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(status)
+        root.addView(firmware); root.addView(firmwareStatus); root.addView(selfUpdate)
+        root.addView(TextView(this).apply {
+            text = "\nSEGURIDAD: escritura USB deshabilitada hasta verificar el bootloader y las particiones del reloj. La instalación de APK exige la misma firma que la versión instalada."
+        })
         setContentView(ScrollView(this).apply { addView(root) })
         scan.performClick()
     }
 
+    private fun espDevice(): UsbDevice? = usb.deviceList.values.firstOrNull { it.vendorId == 0x303A }
+    private fun deviceReport(): String {
+        val devices = usb.deviceList.values.toList()
+        return if (devices.isEmpty()) "Sin dispositivos USB. Comprueba OTG y cable de datos."
+        else devices.joinToString("\n\n") { d ->
+            "VID: %04X  PID: %04X\nInterfaces: %d\nPermiso: %s".format(d.vendorId, d.productId, d.interfaceCount, usb.hasPermission(d))
+        }
+    }
     private fun choose(type: String, code: Int) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             this.type = type
-        }
-        startActivityForResult(intent, code)
+        }, code)
     }
-
-    @Deprecated("Legacy activity result used for Android 10 compatibility")
+    @Deprecated("Legacy activity result")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != RESULT_OK) return
@@ -80,21 +125,19 @@ class MainActivity : Activity() {
                         length += count
                     }
                 } ?: error("No se pudo abrir el archivo")
-                val sha = digest.digest().joinToString("") { "%02x".format(it) }
-                firmwareStatus.text = "Archivo: ${uri.lastPathSegment}\nTamaño: $length bytes\nSHA-256: $sha\nPendiente de validar compatibilidad y firma. NO se ha grabado."
-            } catch (e: Exception) {
-                firmwareStatus.text = "Error al leer firmware: ${e.message}"
-            }
+                firmwareStatus.text = "Archivo: ${uri.lastPathSegment}\nTamaño: $length bytes\nSHA-256: ${digest.digest().joinToString("") { "%02x".format(it) }}\nNO se ha grabado."
+            } catch (e: Exception) { firmwareStatus.text = "Error: ${e.message}" }
         } else if (requestCode == selectUpdate) {
             try {
-                val install = Intent(Intent.ACTION_INSTALL_PACKAGE).apply {
-                    data = uri
+                startActivity(Intent(Intent.ACTION_INSTALL_PACKAGE).apply {
+                    this.data = uri
                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                }
-                startActivity(install)
-            } catch (e: Exception) {
-                firmwareStatus.text = "No se pudo abrir el instalador: ${e.message}"
-            }
+                })
+            } catch (e: Exception) { firmwareStatus.text = "Instalador: ${e.message}" }
         }
+    }
+    override fun onDestroy() {
+        unregisterReceiver(permissionReceiver)
+        super.onDestroy()
     }
 }
