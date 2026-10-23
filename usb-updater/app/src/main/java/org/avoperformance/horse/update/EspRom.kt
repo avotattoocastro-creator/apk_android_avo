@@ -121,6 +121,28 @@ internal class EspRom(
         throw last ?: UpdateException(Failure.NO_BOOTLOADER, "sin respuesta")
     }
 
+    // ---------------------------------------------------------------- raw frames (flasher stub)
+
+    /** Sends a request without waiting for its reply (MEM_END, READ_FLASH data phase). */
+    fun sendOnly(opcode: Int, payload: ByteArray, checksum: Int = 0) = send(opcode, payload, checksum)
+
+    /** Next SLIP frame of any kind (stub greeting, flash data, digest), or null on timeout. */
+    fun rawFrame(timeoutMs: Long): ByteArray? = nextFrame(clock.nowMs() + timeoutMs)
+
+    /** Sends one SLIP frame with arbitrary content (READ_FLASH acknowledgements). */
+    fun writeFrame(packet: ByteArray) {
+        checkAlive()
+        val f = RomProtocol.slipEncode(packet)
+        if (link.write(f, 3000) != f.size) fail(Failure.DISCONNECTED, "envío USB incompleto")
+    }
+
+    /** Parses a frame as a reply to [opcode] (status bytes after [respDataLen]); null if it is something else. */
+    fun replyOf(frame: ByteArray, opcode: Int): Reply? {
+        if (frame.size < 8 || (frame[0].toInt() and 255) != 1 || (frame[1].toInt() and 255) != opcode) return null
+        if (u16le(frame, 2) != frame.size - 8) return null
+        return Reply(opcode, u32le(frame, 4), frame.copyOfRange(8, frame.size))
+    }
+
     // ---------------------------------------------------------------- basic commands
 
     /** SYNC; the ROM answers 8 times, the extra answers are drained. Returns true if a ROM (not a stub) replied. */

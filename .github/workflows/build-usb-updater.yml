@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 env:
-  APK_NAME: AVO_Performance_Horse_Update_V1_8_0_beta2_debug.apk
+  APK_NAME: AVO_Performance_Horse_Update_V2_0_0_debug.apk
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -36,10 +36,14 @@ jobs:
             echo "flashBegin() used outside Installer"; exit 1; fi
           if grep -nE "flashBegin\((0x[0-9A-Fa-f]+|[0-9]+)L?," $SRC/*.kt; then
             echo "hard-coded flash write address"; exit 1; fi
-          # No stub loader, no encrypted writes, no eFuse writes.
-          # (comment lines starting with * or // are ignored)
-          if grep -nE "FLASH_ENCRYPT_DATA|0xD4|EFUSE_PGM|espefuse|MEM_BEGIN|MEM_DATA|MEM_END" $SRC/*.kt | grep -vE ":[0-9]+:\s*(\*|//|/\*)"; then
+          # No encrypted writes, no eFuse writes. (comment lines starting with * or // are ignored)
+          if grep -nE "FLASH_ENCRYPT_DATA|0xD4|EFUSE_PGM|espefuse" $SRC/*.kt | grep -vE ":[0-9]+:\s*(\*|//|/\*)"; then
             echo "forbidden capability referenced"; exit 1; fi
+          # V2.0: RAM loading (MEM_*) only for the Espressif read stub, and the read path never writes or erases flash.
+          if grep -nE "MEM_BEGIN|MEM_DATA|MEM_END" $SRC/*.kt | grep -v "StubFlasher.kt" | grep -vE ":[0-9]+:\s*(\*|//|/\*)"; then
+            echo "RAM loading outside StubFlasher"; exit 1; fi
+          if grep -nE "flashBegin|flashData|FLASH_BEGIN|FLASH_DATA|FLASH_END|ERASE|0xD0|0xD1|writeOtadata" $SRC/StubFlasher.kt $SRC/FlashReader.kt | grep -vE ":[0-9]+:\s*(\*|//|/\*)"; then
+            echo "write/erase referenced in the read path"; exit 1; fi
           echo "Safety checks passed"
       - name: Build debug APK
         run: ./gradlew -p usb-updater --no-daemon :app:assembleDebug
@@ -52,7 +56,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: AVO-Performance-Horse-Update-V1-8-0-beta2-DEBUG
+          name: AVO-Performance-Horse-Update-V2-0-0-DEBUG
           path: out/
           retention-days: 30
       - uses: actions/upload-artifact@v4

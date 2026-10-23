@@ -19,6 +19,18 @@ internal interface RomLink {
 
     /** Releases the interface and closes the connection. Idempotent. */
     fun close()
+
+    /** What sits between Android and the chip; decides the reset sequence. */
+    val kind: LinkKind get() = LinkKind.USB_JTAG
+
+    /** Changes the host-side baud rate (no-op on USB-Serial/JTAG). */
+    fun setBaud(baud: Int): Boolean = true
+}
+
+internal enum class LinkKind(val text: String) {
+    USB_JTAG("USB-Serial/JTAG nativo del ESP32-S3"),
+    UART_BRIDGE("puente USB-UART");
+    val isUart get() = this == UART_BRIDGE
 }
 
 /** Opens the watch, waiting for it to (re)appear on the bus and be authorized. */
@@ -53,6 +65,23 @@ internal class LineControl(private val link: RomLink, private val clock: Clock) 
         setRts(true); setDtr(false); setRts(true)
         clock.sleep(100)
         setDtr(false); setRts(false)
+    }
+
+    /** esptool ClassicReset for boards with a USB-UART bridge and the DTR/RTS auto-download transistors. */
+    fun classicResetIntoBootloader() {
+        setDtr(false); setRts(true)   // IO0 high, EN low: chip in reset
+        clock.sleep(100)
+        setDtr(true); setRts(false)   // IO0 low, EN high: boots into download mode
+        clock.sleep(50)
+        setDtr(false)                 // release IO0
+    }
+
+    /** esptool HardReset(uses_usb=False): pulse EN with IO0 released, the app runs from flash. */
+    fun classicHardReset() {
+        setDtr(false); setRts(true)
+        clock.sleep(100)
+        setRts(false)
+        clock.sleep(100)
     }
 
     /** HardReset(uses_usb=True): run the application from flash. */

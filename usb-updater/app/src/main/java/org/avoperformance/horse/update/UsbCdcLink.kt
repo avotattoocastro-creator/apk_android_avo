@@ -27,7 +27,8 @@ internal class UsbCdcLink private constructor(
     private val control: UsbInterface?,
     private val data: UsbInterface,
     private val out: UsbEndpoint,
-    private val input: UsbEndpoint
+    private val input: UsbEndpoint,
+    override val kind: LinkKind = LinkKind.USB_JTAG,
 ) : RomLink {
     @Volatile private var closed = false
     private var lastPresenceCheck = 0L
@@ -68,6 +69,13 @@ internal class UsbCdcLink private constructor(
         return connection.controlTransfer(0x21, 0x22, value, index, null, 0, 1000) >= 0
     }
 
+    override fun setBaud(baud: Int): Boolean {
+        if (kind == LinkKind.USB_JTAG) return true
+        if (!isOpen) return false
+        val coding = le32(baud.toLong()) + byteArrayOf(0, 0, 8)
+        return connection.controlTransfer(0x21, 0x20, 0, control?.id ?: 0, coding, coding.size, 1000) >= 0
+    }
+
     override fun close() {
         if (closed) return
         closed = true
@@ -81,7 +89,7 @@ internal class UsbCdcLink private constructor(
             manager.deviceList.values.firstOrNull { it.vendorId == ESPRESSIF_VID && it.productId == USB_JTAG_SERIAL_PID }
                 ?: manager.deviceList.values.firstOrNull { it.vendorId == ESPRESSIF_VID }
 
-        fun open(manager: UsbManager, device: UsbDevice): UsbCdcLink {
+        fun open(manager: UsbManager, device: UsbDevice, kind: LinkKind = LinkKind.USB_JTAG): UsbCdcLink {
             val interfaces = (0 until device.interfaceCount).map { device.getInterface(it) }
             val data = interfaces.firstOrNull { it.interfaceClass == UsbConstants.USB_CLASS_CDC_DATA && it.endpointCount >= 2 }
                 ?: fail(Failure.NO_BOOTLOADER, "el dispositivo no tiene interfaz CDC de datos")
@@ -99,7 +107,7 @@ internal class UsbCdcLink private constructor(
             // 115200 8N1 (ignored by USB-Serial-JTAG, required by some CDC stacks before data flows)
             val coding = byteArrayOf(0x00, 0xC2.toByte(), 0x01, 0x00, 0, 0, 8)
             connection.controlTransfer(0x21, 0x20, 0, control?.id ?: 0, coding, coding.size, 1000)
-            return UsbCdcLink(manager, device, connection, control, data, out, input)
+            return UsbCdcLink(manager, device, connection, control, data, out, input, kind)
         }
     }
 }

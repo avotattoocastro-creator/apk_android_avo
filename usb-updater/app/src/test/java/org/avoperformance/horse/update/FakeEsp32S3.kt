@@ -275,7 +275,35 @@ internal class FakeEsp32S3(val clock: FakeClock = FakeClock()) {
     private fun md5(a: Long, s: Long): String =
         hex(MessageDigest.getInstance("MD5").digest(flash.copyOfRange(a.toInt(), (a + s).toInt())))
 
+    // ------------------------------------------------------------------ flasher stub (esptool protocol)
+    var stubRunning = false
+    var stubBaud = 115200
+    val ackErrors = mutableListOf<String>()
+    private var memChunks = 0
+    private var rd: LongArray? = null // offset, length, sent, acked
+    private var rdMd5: MessageDigest? = null
+
+    private fun pushReadFrame() {
+        val r = rd ?: return
+        if (r[2] >= r[1]) return
+        val n = minOf(0x1000L, r[1] - r[2]).toInt()
+        val chunk = flash.copyOfRange((r[0] + r[2]).toInt(), (r[0] + r[2]).toInt() + n)
+        rdMd5!!.update(chunk)
+        r[2] += n
+        link?.push(RomProtocol.slipEncode(chunk))
+    }
+
+    private fun handleAck(f: ByteArray) {
+        val r = rd!!
+        val v = u32le(f, 0)
+        if (v != r[3] + minOf(0x1000L, r[1] - r[3])) ackErrors += "ack $v tras ${r[3]}"
+        r[3] = v
+        if (r[3] >= r[1]) { link?.push(RomProtocol.slipEncode(rdMd5!!.digest())); rd = null; return }
+        pushReadFrame()
+    }
+
     private fun handle(f: ByteArray) {
+        if (rd != null && f.size == 4) return handleAck(f)
         if (f.size < 8 || f[0].toInt() != 0) return
         val op = f[1].toInt() and 255
         val size = u16le(f, 2)
@@ -293,7 +321,20 @@ internal class FakeEsp32S3(val clock: FakeClock = FakeClock()) {
                 val r = le32(securityFlags) + byteArrayOf(cryptCnt.toByte()) + ByteArray(7) + le32(chipId) + le32(0)
                 reply(op, 0, r)
             }
-            FlashCommands.SPI_ATTACH -> if (d.size == 8) { spiAttached = true; reply(op, 0, ByteArray(0)) } else error(op, 0x05)
+            0x05 -> { memChunks = 0; reply(op, 0, ByteArray(0)) }                       // MEM_BEGIN
+            0x07 -> {                                                                   // MEM_DATA
+                val data = d.copyOfRange(16, d.size)
+                if ((chk and 0xFF).toInt() != FlashCommands.checksum(data) || u32le(d, 4).toInt() != memChunks) return error(op, 0x07)
+                memChunks++; reply(op, 0, ByteArray(0))
+            }
+            0x06 -> { reply(op, 0, ByteArray(0)); stubRunning = true; link?.push(RomProtocol.slipEncode("OHAI".toByteArray())) } // MEM_END
+            0x0F -> if (stubRunning) { stubBaud = u32le(d, 0).toInt(); reply(op, 0, ByteArray(0)) } else error(op, 0x05)
+            0xD2 -> {                                                                   // READ_FLASH (stub)
+                if (!stubRunning) return error(op, 0x05)
+                rd = longArrayOf(u32le(d, 0), u32le(d, 4), 0, 0); rdMd5 = MessageDigest.getInstance("MD5")
+                reply(op, 0, ByteArray(0)); pushReadFrame(); pushReadFrame()
+            }
+            FlashCommands.SPI_ATTACH -> if (stubRunning && d.size == 4) { spiAttached = true; reply(op, 0, ByteArray(0)) } else if (d.size == 8) { spiAttached = true; reply(op, 0, ByteArray(0)) } else error(op, 0x05)
             FlashCommands.SPI_SET_PARAMS -> if (d.size == 24) { paramsSize = u32le(d, 4); reply(op, 0, ByteArray(0)) } else error(op, 0x05)
             FlashCommands.FLASH_BEGIN -> {
                 lastFlashBeginPayloadSize = d.size

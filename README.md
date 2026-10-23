@@ -19,7 +19,7 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | OTA desde la app Android | **Retirada en 2.0** | El firmware se instala con el programador USB |
 | Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
 | Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
-| Programador USB **1.8.0-beta2** (`usb-updater/`) | Instalación de `firmware.bin` por USB-C desde Android | CI correcto [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136); **no verificado con el reloj** |
+| Programador USB **2.0.0** (`usb-updater/`) | Instalación en el pecho + lectura, identificación y copia completa de cualquier ESP32-S3 (pecho y espalda Heltec/CP2102) | CI correcto [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136); **no verificado con el reloj** |
 
 ## Documentación compartida (Claude y ChatGPT)
 

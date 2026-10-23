@@ -1,10 +1,11 @@
 # AVO PERFORMANCE HORSE UPDATE
 
 App Android **independiente** de AVO Performance Horse para instalar `firmware.bin` en el reloj de pecho
-(Waveshare ESP32-S3 Touch AMOLED 2.06") por USB-C, sin ordenador.
+(Waveshare ESP32-S3 Touch AMOLED 2.06") por USB-C, sin ordenador, y para **leer y copiar** cualquier módulo AVO
+ESP32-S3: pecho (USB nativo) y espalda Heltec Wireless Stick Lite V3 (puente CP2102).
 
 - applicationId permanente: `org.avoperformance.horse.update`
-- Versión actual: **1.8.0-beta1** (versionCode 10) — beta: falta la prueba física con el reloj.
+- Versión actual: **2.0.0** (versionCode 20) — falta la prueba física (pecho y espalda).
 - Rama: `develop/avo-performance-horse` · CI: `.github/workflows/build-usb-updater.yml`
 
 ## Manual breve
@@ -26,11 +27,29 @@ App Android **independiente** de AVO Performance Horse para instalar `firmware.b
 5. **Resultado.** «Instalación completada» solo aparece si el arranque se confirma (otadata en estado VALID
    o el firmware anuncia su versión por USB). Si no, la app dice exactamente qué no se pudo confirmar.
 
+## Lectura y copia de seguridad (V2.0) — solo lectura
+
+| Botón | Qué hace |
+|---|---|
+| Información del dispositivo | Chip, revisión, **MAC**, flash (JEDEC y tamaño), seguridad, tabla de particiones, otadata y, por cada partición de aplicación, proyecto, versión, fecha de compilación, ESP-IDF y SHA-256 del ELF. |
+| Leer firmware (.bin) | Lee la aplicación que arranca, la recorta al tamaño real de la imagen, calcula su SHA-256 y extrae los **textos identificativos** (nombre del sketch `.ino`, versiones, fechas `__DATE__`, AVO, ZED/UBX/RTCM, ESP-NOW…). Se guarda como `.bin` que se puede volver a instalar. |
+| Leer partición… | Cualquier partición de la tabla (nvs, spiffs, coredump…). |
+| Copia completa de la flash | Los 8 MB (espalda) o 16 MB (pecho) desde 0x0, en un único `.bin`. |
+| Guardar informe (.txt) | Informe y registro para compararlos o pasarlos a los asistentes. |
+
+- Conexión: USB-Serial/JTAG del ESP32-S3, **Silicon Labs CP210x** (VID 10C4) y CDC (CH9102/CH343). Reinicio en modo
+  descarga por DTR/RTS (`ClassicReset` de esptool en puentes USB-UART). Manual en la Heltec: mantener **PRG**, pulsar y soltar **RST**, soltar PRG.
+- Velocidad: carga en RAM el **stub oficial de Espressif** (esp-flasher-stub v1.4.1, Apache-2.0 o MIT, `assets/stub/`,
+  idéntico al que incluye esptool) y sube a 921 600 baudios en puentes USB-UART (≈ 80–90 KB/s; 8 MB en unos 2 min).
+- Verificación: cada bloque de 256 KB se comprueba con el **MD5 que calcula el chip**; si no coincide no se guarda nada.
+- Nunca escribe ni borra: el CI comprueba que el código de lectura no usa comandos de escritura y que la carga en RAM solo existe en `StubFlasher.kt`.
+- Al terminar, el módulo se reinicia con su propio firmware.
+
 ## Qué hace (y qué no)
 
 | Fase | Mecanismo |
 |---|---|
-| Comunicación | Protocolo serie del ROM de Espressif (SLIP, estado de 4 bytes), sin stub en RAM. |
+| Comunicación | Protocolo serie del ROM de Espressif (SLIP, estado de 4 bytes). La instalación no usa stub; la lectura rápida sí (ver arriba). |
 | Lectura de flash | Registros SPI1 «user command» (método de esptool para `flash_id`), **cada lectura comprobada con el MD5 que calcula el propio chip**. |
 | Particiones | Tabla real en `0x8000`, con su registro MD5; nada de tablas históricas. |
 | Slot activo | `otadata` real, reglas de `bootloader_common_get_active_otadata` de ESP-IDF. |
