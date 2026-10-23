@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-23 — [rama feature/avo-measurement-engine-v4] Auditoría V4 fases 1–2 y espalda 4.0.0-dev1
+**Autor:** Claude · Rama aparte (no integrada en `develop`). Informe: `docs/V4/AUDITORIA_V4_FASE1_FASE2.md`.
+**Corregido en `firmware/back/V4_0_0_DEV` (la 3.8.0 estable no cambia):** historial de comandos que re-ejecutaba
+duplicados tras 8 comandos (demostrado con prueba), envío ESP-NOW asíncrono con colas por prioridad, guarda de progreso
+del decodificador UART, verificación UBX-CFG-VALGET. Fuzzer y ASan/UBSan en CI (`build-back-v4-dev.yml`).
+**Bloqueado:** cincha/IMU (no hay firmware ni modelos de sensor en el repositorio).
+**Validación:** 29 casos / 191 comprobaciones simuladas; **NO VERIFICADO** en hardware.
+
+---
+
 ## 2026-10-23 — Copias de código fuente y traspaso para asistentes
 **Autor:** Claude · Zips en la raíz: `AVO_ANDROID_V2_0_REDISENO_MAREAS_ANALISIS_FUENTES.zip` (actualizado),
 `AVO_UPDATER_V2_1_0_FUENTES.zip`, `AVO_BACK_V3_8_0_FUENTES.zip`. Documento `docs/TRASPASO_ASISTENTES_2026-10-23.md`

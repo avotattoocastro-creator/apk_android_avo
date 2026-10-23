@@ -60,12 +60,6 @@ void UartDecoder::feed(const uint8_t* d, size_t n) {
       head_ = 0;
     }
     size_t room = sizeof(buf_) - tail_;
-    if (room == 0) {
-      // Invariant: a full buffer (2 x max frame) always holds a decodable or rejectable frame,
-      // so process() advances head_. Guard anyway: never spin without consuming input.
-      head_++; st_.stalls++; st_.resync_bytes++;
-      continue;
-    }
     size_t k = n < room ? n : room;
     memcpy(buf_ + tail_, d, k);
     tail_ += k; d += k; n -= k;

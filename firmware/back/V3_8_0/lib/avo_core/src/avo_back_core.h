@@ -39,33 +39,8 @@ struct BackStats {
   uint32_t rxm_used = 0, rxm_failed = 0;
   uint32_t nav_pvt = 0, gnss_sent = 0, gnss_send_fail = 0;
   uint32_t pairings = 0;
-  uint32_t cmd_duplicates = 0;     // repeated commands answered from history (not executed)
   int8_t rssi = 0;
   uint32_t last_chest_rx_ms = 0;
-};
-
-// Commands already executed, with their result. The chest repeats a command (same cmd_id) when it
-// does not get the ACK: a repeat is answered with the stored result and never executed again.
-// V3.5.0-3.8.0 kept 8 ids but after the 8th always overwrote slot 0 (re-execution bug, test audit.*).
-class CmdHistory {
- public:
-  static const uint8_t N = 16;
-  // Returns true and *status when cmd_id was already executed.
-  bool find(uint16_t id, uint8_t* status) const {
-    for (uint8_t i = 0; i < n_; i++) if (id_[i] == id) { if (status) *status = st_[i]; return true; }
-    return false;
-  }
-  void add(uint16_t id, uint8_t status) {
-    id_[w_] = id; st_[w_] = status;
-    w_ = (uint8_t)((w_ + 1) % N);
-    if (n_ < N) n_++;
-  }
-  void clear() { n_ = 0; w_ = 0; }
-  uint8_t size() const { return n_; }
- private:
-  uint16_t id_[N] = {0};
-  uint8_t st_[N] = {0};
-  uint8_t n_ = 0, w_ = 0;
 };
 
 class BackCore : public ZedIo {
@@ -117,7 +92,8 @@ class BackCore : public ZedIo {
   uint16_t seq_ = 0;
   bool have_off_ = false;
   uint32_t exp_off_ = 0;
-  CmdHistory cmds_;
+  uint16_t done_cmd_[8] = {0};
+  uint8_t done_n_ = 0;
   uint32_t last_status_ = 0, last_hb_ = 0, last_caps_ = 0;
   uint32_t rate_t0_ = 0, rate_n_ = 0;
   uint16_t rate_x10_ = 0;

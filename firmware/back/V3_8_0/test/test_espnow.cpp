@@ -749,48 +749,4 @@ TEST(precision, rtcm_keeps_reaching_the_zed_during_rate_change_and_tuning) {
   CHECK(w.zed.rtcm_frames > frames + 10);
 }
 
-// ---------------------------------------------------------------- V4 audit: UART decoder
-static uint32_t g_dec_frames = 0;
-static void count_frame(const FrameView&, void*) { g_dec_frames++; }
-
-TEST(audit, decoder_always_progresses_and_resyncs) {
-  std::mt19937 rng(5);
-  UartDecoder dec(count_frame, nullptr);
-  uint8_t f[1100], pl[1024];
-  for (size_t i = 0; i < sizeof(pl); i++) pl[i] = (uint8_t)i;
-  size_t good = uart_encode(FrameType::RTCM_DATA, 0, 2, 1, 0, pl, 1024, f, sizeof(f));   // largest frame
-  g_dec_frames = 0;
-  // 1) worst case: a header that announces 1024 bytes and never completes, then garbage, then frames
-  std::vector<uint8_t> x(f, f + 15);
-  for (int i = 0; i < 5000; i++) x.push_back((uint8_t)rng());
-  for (uint16_t s = 2; s < 40; s++) { size_t n = uart_encode(FrameType::RTCM_DATA, 0, 2, s, 0, pl, 1024, f, sizeof(f)); x.insert(x.end(), f, f + n); }
-  for (size_t i = 0; i < x.size();) { size_t k = 1 + rng() % 700; if (i + k > x.size()) k = x.size() - i; dec.feed(x.data() + i, k); i += k; }
-  CHECK_EQ(g_dec_frames, 38u);              // every complete frame after the junk is recovered
-  CHECK_EQ(dec.stats().stalls, 0u);         // the invariant held
-  // 2) only sync bytes: must terminate and discard them
-  std::vector<uint8_t> y(100000, AVO_UART_SYNC0);
-  dec.feed(y.data(), y.size());
-  CHECK(dec.stats().resync_bytes > 90000);
-  (void)good;
-}
-
-// ---------------------------------------------------------------- V4 audit: command history
-TEST(audit, duplicate_command_after_eight_others_is_not_executed_twice) {
-  World w(2);
-  w.run_ms(15000);
-  uint32_t restarts0 = w.zed.signal_restarts;
-  chest_cmd(w, BackCmd::SET_GNSS_RATE, 12, 700);     // changes constellations once
-  w.run_ms(3000);
-  CHECK_EQ(w.zed.signal_restarts, restarts0 + 1);
-  for (uint16_t i = 0; i < 9; i++) { chest_cmd(w, BackCmd::REQ_STATUS, 0, (uint16_t)(701 + i)); w.run_ms(50); }
-  chest_cmd(w, BackCmd::SET_GNSS_RATE, 8, 711);
-  w.run_ms(3000);
-  uint32_t r = w.zed.signal_restarts;
-  // the chest repeats cmd 700 (its ACK was lost): must NOT be executed again
-  chest_cmd(w, BackCmd::SET_GNSS_RATE, 12, 700);
-  w.run_ms(3000);
-  CHECK_EQ(w.zed.signal_restarts, r);
-  CHECK_EQ(w.zed.meas_ms, 125);
-}
-
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

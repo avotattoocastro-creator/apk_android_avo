@@ -32,7 +32,7 @@ struct NullPlatform : public BackPlatform {
   uint32_t now_ms() override { return t; }
   void zed_set_baud(uint32_t) override {}
   void zed_write(const uint8_t*, size_t) override {}
-  bool radio_send(const uint8_t*, const uint8_t*, size_t n) override { if (n > NOW_MAX_PACKET) __builtin_trap(); return true; }
+  bool radio_start(const uint8_t*, const uint8_t*, size_t n) override { if (n > NOW_MAX_PACKET) __builtin_trap(); return true; }
   void radio_set_peer(const uint8_t*) override {}
   void save_peer(const NowPeerRecord&) override {}
   uint32_t random32() override { return 0x12345679; }
@@ -79,7 +79,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* d, size_t n) {
       core.on_radio(peer.mac, pkt, pl, -50);
       core.on_radio(peer.mac, d + off, k, -50);   // raw garbage as a packet too
       core.on_zed(d + off, k);
-      p.t += 7; core.tick();
+      p.t += 7; core.on_sent((k & 1) != 0); core.tick();
       off += k;
     }
   }
