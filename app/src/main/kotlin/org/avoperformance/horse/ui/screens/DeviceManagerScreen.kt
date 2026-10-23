@@ -143,6 +143,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                             .getOrElse { "Error: ${it.message}" }
                     }
                 }) { Text("Comprobar firma válida en el reloj (sin instalar)") }
+                if (positiveDiagnostic != "Pendiente de prueba") Text(positiveDiagnostic, modifier = Modifier.fillMaxWidth())
                 OutlinedButton(enabled = androidVerified, onClick = {
                     val pkg = selectedImage ?: return@OutlinedButton
                     scope.launch {
