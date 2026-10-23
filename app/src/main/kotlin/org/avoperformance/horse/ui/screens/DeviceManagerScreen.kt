@@ -45,6 +45,7 @@ fun DeviceManagerScreen(c: AppContainer) {
     var userAccepts by remember { mutableStateOf(false) }
     var inspectedName by remember { mutableStateOf("Ningún firmware seleccionado") }
     var inspection by remember { mutableStateOf<ChestOtaProtocol.Inspection?>(null) }
+    var targetVersion by remember { mutableStateOf<String?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
     var authDiagnostic by remember { mutableStateOf("Pendiente") }
     var positiveDiagnostic by remember { mutableStateOf("Pendiente de prueba") }
@@ -76,12 +77,13 @@ fun DeviceManagerScreen(c: AppContainer) {
                 }
                 val verified = c.chestOta.inspectSignedPackage(bytes)
                 val result = ChestOtaProtocol.inspect(verified.firmware)
+                targetVersion = verified.version
                 selectedImage = bytes
                 positiveDiagnostic = "Pendiente de prueba para el ZIP seleccionado"
                 userAccepts = false
                 inspection = result
                 error = null
-            }.onFailure { error = it.message; inspection = null; selectedImage = null }
+            }.onFailure { error = it.message; inspection = null; selectedImage = null; targetVersion = null }
         }
     }
     val androidVerified = selectedImage?.let { c.chestOta.isApproved(it) } == true
@@ -105,7 +107,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                 KV("Espalda ↔ cincha", t?.let { if (it.girth) "Conectada" else "Sin datos" } ?: "No verificado")
                 KV("Firmware espalda", "No comunicado")
                 KV("Firmware cincha", "No comunicado")
-                Note("El estado de espalda y cincha procede de la telemetría del pecho, no de conexiones directas al móvil.")
+
             }
         }
         item {
@@ -115,29 +117,24 @@ fun DeviceManagerScreen(c: AppContainer) {
                 KV("OTA anunciada", if (info?.supportsOta == true) "Sí" else "No verificada")
                 KV("Archivo", inspectedName)
                 KV("Tamaño", inspection?.let { "${it.size} bytes" } ?: "—")
-                KV("Validación de estructura", inspection?.reason ?: "Pendiente de selección")
-                KV("SHA-256", inspection?.sha256?.joinToString("") { "%02x".format(it.toInt() and 255) } ?: "—")
+                KV("Versión a instalar", targetVersion ?: "—")
                 OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar paquete OTA firmado .zip") }
                 error?.let { Note("Error al leer archivo: $it") }
-                Text("SEGURIDAD OTA · ESTADOS INDEPENDIENTES", fontWeight = FontWeight.Bold, color = AvoColors.Warn)
+                Text("SEGURIDAD OTA", fontWeight = FontWeight.Bold, color = AvoColors.Warn)
                 Column(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
-                    Text("1. Firma verificada en Android", fontWeight = FontWeight.Bold)
-                    Text(if (androidVerified) "ES256 válida · comprobación local completada" else "Pendiente · selecciona un ZIP firmado")
-                    Text("2. Autorización recibida del reloj", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
-                    Text(if (watchAuthorized) positiveDiagnostic else "No confirmada · el rechazo VERIFY_FAILED no es una autorización positiva")
-                    Text("3. Firmware listo para instalar", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
-                    Text(if (readyToInstall) "Preflight correcto · disponible durante 30 s" else "Bloqueado · comprueba condiciones previas y diagnóstico")
+                    Text("Firma Android", fontWeight = FontWeight.Bold)
+                    Text(if (androidVerified) "✓ ES256 válida" else "Pendiente")
+                    Text("Autorización del reloj", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+                    Text(if (watchAuthorized) "✓ Confirmada" else "Pendiente")
+                    Text("Instalación", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+                    Text(if (readyToInstall) "✓ Preparada" else "Bloqueada")
                 }
                 KV("Estado OTA", ota.phase)
                 if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
                 ota.error?.let { Note("OTA: $it") }
                 ota.versionBefore?.let { KV("Versión antes de OTA", it) }
                 ota.versionAfter?.let { KV("Versión observada tras OTA", it) }
-                if (ota.events.isNotEmpty()) {
-                    Text("Diagnóstico OTA (confirmaciones y reinicio)")
-                    ota.events.takeLast(8).forEach { Note(it) }
-                }
-                Text("OTA ES256: firma y autorización previas obligatorias. Tras diagnóstico PREPARADO, inicia en 30 s. Hash final y recuperación se comprueban durante la actualización y reinicio.", color = AvoColors.Warn)
+
                 OutlinedButton(enabled = androidVerified && c.watch.isReady && info?.supportsOta == true, onClick = {
                     val pkg = selectedImage ?: return@OutlinedButton
                     scope.launch {
@@ -154,9 +151,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                             .getOrElse { "Error de diagnóstico: ${it.message}" }
                     }
                 }) { Text("Diagnosticar bloqueo OTA (sin instalar)") }
-                Text(preflightDiagnostic, modifier = Modifier.fillMaxWidth())
-                Text("PRUEBA NEGATIVA · HISTORIAL SEPARADO", fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 10.dp))
-                Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
+                if (preflightDiagnostic != "Sin comprobar") Text(preflightDiagnostic, modifier = Modifier.fillMaxWidth())
                 OutlinedButton(enabled = c.watch.isReady && info?.supportsOta == true, onClick = {
                     scope.launch {
                         authDiagnostic = "Comprobando rechazo..."
@@ -164,6 +159,7 @@ fun DeviceManagerScreen(c: AppContainer) {
                             .getOrElse { "Error de diagnóstico: ${it.message}" }
                     }
                 }) { Text("Probar rechazo OTA_AUTH (sin instalar)") }
+                if (authDiagnostic != "Pendiente") Text(authDiagnostic, modifier = Modifier.fillMaxWidth())
                 Row(horizontalArrangement = Arrangement.Start) {
                     Checkbox(checked = userAccepts, onCheckedChange = { userAccepts = it })
                     Text("Acepto el riesgo y confirmo que no hay entrenamientos activos")
@@ -171,17 +167,17 @@ fun DeviceManagerScreen(c: AppContainer) {
                 Button(enabled = readyToInstall && userAccepts && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
                     val firmware = selectedImage ?: return@Button
                     scope.launch { runCatching { c.chestOta.transfer(firmware) }.onFailure { error = it.message } }
-                }) { Text("Instalar OTA firmada V3.5.8") }
+                }) { Text("Instalar OTA ${targetVersion ?: "—"}") }
                 OutlinedButton(onClick = { c.chestOta.cancel() }) { Text("Solicitar cancelación") }
                 KV("OTA espalda", "No compatible todavía")
-                Note("No borra ni formatea la microSD. La versión posterior y la conservación de sesiones requieren comprobación física. Detén NTRIP antes de actualizar.")
+
             }
         }
         item {
             AvoCard("Arquitectura") {
                 KV("Actual", "Android ↔ pecho BLE; pecho ↔ espalda ESP-NOW; espalda ↔ cincha ESP-NOW")
                 KV("Futura V4", "Módulo único con capacidades anunciadas por firmware")
-                Note("La futura arquitectura no debe habilitar funciones hasta que los dispositivos comuniquen sus capacidades reales.")
+
             }
         }
     }
