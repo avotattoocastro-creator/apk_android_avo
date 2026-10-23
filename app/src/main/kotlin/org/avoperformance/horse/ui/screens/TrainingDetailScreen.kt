@@ -105,6 +105,9 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     var marineBusy by remember { mutableStateOf(false) }
     var marineMessage by remember { mutableStateOf<String?>(null) }
     val tt = t
+    val engineStates by c.equine.all.collectAsStateWithLifecycle()
+    val engine = engineStates[id] ?: org.avoperformance.horse.engine.EngineState.Idle
+    val eng = (engine as? org.avoperformance.horse.engine.EngineState.Ready)?.result
     LaunchedEffect(tt?.localDir, tt?.downloadedBytes, tt?.state) {
         if (tt?.localDir != null && (tt.state == SyncState.VERIFICADO_LOCAL.name || tt.state == SyncState.PENDIENTE_SERVIDOR.name ||
                 tt.state == SyncState.VERIFICADO_SERVIDOR.name || tt.state == SyncState.MARCADO_EN_RELOJ.name || tt.state == SyncState.DESCARGADO.name)) {
@@ -112,6 +115,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
             analysis = withContext(Dispatchers.IO) { runCatching { c.sync.analysisFor(tt) }.getOrNull() }
             insights = analysis?.takeIf { it.track.size >= 2 }?.let { a -> withContext(Dispatchers.Default) { runCatching { TrainingInsights.compute(a) }.getOrNull() } }
             loading = false
+            if (analysis != null) c.equine.open(tt)   // engine analysis in the background (stored, reused, cancellable)
         }
     }
     if (tt == null) { Note("Entrenamiento no encontrado"); return }
@@ -150,6 +154,13 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     val s0 = segStart.coerceIn(0, last - 1)
     val s1 = segEnd.coerceIn(s0 + 1, last)
     fun pick(i: Int) { sel = i; playing = false }
+    val engineTimes = remember(a, eng) { if (a == null || eng == null) emptyList() else a.track.map { eng.timeOfItow(it.itowMs) } }
+    fun pickTime(t: Double) {
+        if (engineTimes.isEmpty()) return
+        var best = 0; var bd = Double.MAX_VALUE
+        engineTimes.forEachIndexed { i, x -> if (x != null && abs(x - t) < bd) { bd = abs(x - t); best = i } }
+        pick(best); tab = 1
+    }
 
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 16.dp)) {
         // Header
@@ -163,7 +174,7 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 }
                 StatusPill(st?.texto?.substringBefore(" (")?.take(18) ?: tt.state, syncColor(st))
             }
-            Segmented(listOf("Resumen", "Mapa y gráficas", "Datos"), tab, { tab = it }, Modifier.padding(horizontal = 12.dp, vertical = 4.dp))
+            Segmented(listOf("Resumen", "Mapa y gráficas", "Datos", "Motor"), tab, { tab = it }, Modifier.padding(horizontal = 12.dp, vertical = 4.dp))
             if (loading) androidx.compose.material3.LinearProgressIndicator(Modifier.fillMaxWidth().padding(top = 6.dp), color = AvoColors.Red, trackColor = AvoColors.Surface2)
         }
         if (a == null && !loading) item {
@@ -284,8 +295,24 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                         if (i.altM.any { it.isFinite() }) ChartBlock("Altitud", "m", i.altM.toList(), sel, win, AvoColors.Silver, x, drag, ::pick, fill = true)
                     }
                     ChartBlock("Precisión horizontal", "m", a.track.map { it.hAccM }, sel, win, AvoColors.Ok, x, drag, ::pick)
+                    // ---- engine series aligned to the same track points (same selection, zoom and window)
+                    eng?.let { r ->
+                        val times = engineTimes
+                        r.series?.let { es ->
+                            ChartBlock("Aceleración longitudinal (motor)", "m/s²", r.alignGnss(es.accel, times), sel, win, AvoColors.Warn, x, drag, ::pick, signed = true)
+                            ChartBlock("Aceleración lateral estimada (motor)", "m/s²", r.alignGnss(es.latAccel, times), sel, win, AvoColors.Silver, x, drag, ::pick, signed = true)
+                            EngineGaitStrip(times.map { tt2 -> tt2?.let { r.gaitAt(it)?.code?.let(::codeIndex) } ?: -1 }, sel, win.first, win.end, ::pick)
+                        }
+                        val g = r.girth
+                        if (!r.hasImu || g == null) Note("SIN DATOS DE CINCHA", AvoColors.Warn)
+                        else {
+                            ChartBlock("Cadencia (motor, cincha)", "/min", r.alignGirth(g.cadenceHz, times).map { it * 60 }, sel, win, AvoColors.Cyan, x, drag, ::pick)
+                            ChartBlock("Correlación entre ciclos (motor)", "", r.alignGirth(g.cycleCorr, times), sel, win, AvoColors.Blue, x, drag, ::pick)
+                        }
+                    }
                 }
             }
+            eng?.let { r -> item { EngineInstantCard(r, sel?.let { engineTimes.getOrNull(it) }) } }
             item {
                 AvoCard("Tramo A–B") {
                     KV("Inicio A", "${mmss(ins?.timeS?.getOrNull(s0))} · punto ${s0 + 1}")
@@ -431,6 +458,10 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                 }
             }
         }
+
+        // ───────────── MOTOR ─────────────
+        if (tab == 3) engineItems(engine, onAnalyse = { c.equine.open(tt) }, onReprocess = { c.equine.open(tt, reprocess = true) },
+            onCancel = { c.equine.cancel(tt.sessionId) }, select = ::pickTime)
     }
     if (confirmDelete) ConfirmDialog("Borrar del reloj", "Se borrará ${tt.sessionId} de la tarjeta del chaleco. La copia del teléfono se conserva.", "Borrar", danger = true,
         onConfirm = { c.scope.launch { msg = c.sync.deleteFromWatch(tt.sessionId) ?: "Borrado del reloj" } }, onDismiss = { confirmDelete = false })
@@ -567,7 +598,7 @@ private fun PlaybackBar(a: TrainingAnalysis, ins: Insights?, sel: Int?, playing:
 }
 
 /** Common visible window shared by every chart so they stay aligned. */
-private class ChartWindow(n: Int, zoom: Float, center: Float) {
+internal class ChartWindow(n: Int, zoom: Float, center: Float) {
     val last = (n - 1).coerceAtLeast(1)
     private val visible = (n / zoom).coerceAtLeast(2f).toInt()
     val first = ((center * last) - visible / 2f).toInt().coerceIn(0, (n - visible).coerceAtLeast(0))
@@ -576,7 +607,7 @@ private class ChartWindow(n: Int, zoom: Float, center: Float) {
 }
 
 @Composable
-private fun ChartBlock(
+internal fun ChartBlock(
     title: String, unit: String, values: List<Double>, sel: Int?, win: ChartWindow, color: Color, x: List<Double>,
     onDrag: (Float) -> Unit, onSelect: (Int) -> Unit, signed: Boolean = false, fill: Boolean = false,
 ) {

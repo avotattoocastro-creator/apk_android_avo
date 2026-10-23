@@ -1,0 +1,57 @@
+name: AVO Windows - build and self-tests
+on:
+  push:
+    branches:
+      - 'feature/windows-advanced-analysis'
+      - 'develop/avo-performance-horse'
+      - 'feature/avo-equine-intelligence-engine'
+    paths:
+      - 'windows/**'
+      - 'equine-intelligence/**'
+      - 'core/src/test/resources/equine/**'
+      - '.github/workflows/build-avo-windows.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-and-package:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build AVO Equine Intelligence Engine DLL (MSVC, static runtime)
+        shell: pwsh
+        run: |
+          cmake -S equine-intelligence -B eqw -DAVO_EQ_BUILD_TOOLS=OFF -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+          cmake --build eqw --config Release --target avo_eq_shared
+          New-Item -ItemType Directory -Force windows/native | Out-Null
+          Copy-Item eqw/Release/avo_equine.dll windows/native/avo_equine.dll
+      - name: Run real format interoperability tests (incl. engine through P/Invoke)
+        env:
+          AVO_EQ_REQUIRE_NATIVE: '1'
+        shell: pwsh
+        run: |
+          $out = dotnet run --project windows/AVO.Windows.SelfTest/AVO.Windows.SelfTest.csproj -c Release 2>&1; $code = $LASTEXITCODE
+          $out | Write-Output
+          if ($code -ne 0) { $out | Select-String -Pattern 'FAILED|error|Exception' | Select-Object -First 30 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
+          $out | Select-String -Pattern 'TODAS LAS PRUEBAS' | ForEach-Object { Write-Output "::notice::$_" }
+      - name: Compile WPF and publish standalone Windows x64
+        shell: pwsh
+        run: |
+          $out = dotnet publish windows/AVO.Windows/AVO.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o windows/publish 2>&1; $code = $LASTEXITCODE
+          $out | Write-Output
+          if ($code -ne 0) { $out | Select-String -Pattern 'error' | Select-Object -First 30 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
+      - name: Archive Windows application
+        shell: pwsh
+        run: |
+          Compress-Archive -Path windows/publish/* -DestinationPath windows/AVO_Windows_V1_x64.zip -Force
+      - name: Publish portable EXE bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-Windows-V1-x64
+          path: windows/AVO_Windows_V1_x64.zip
+          if-no-files-found: error
+          retention-days: 30

@@ -4,7 +4,7 @@ name: Build AVO Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse]
+    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine]
     paths:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'
@@ -24,6 +24,8 @@ on:
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'app/**'
+      - 'equine-intelligence/**'
+      - 'firmware/back/V3_8_0/lib/avo_core/**'
       - 'core/**'
       - 'gradle/**'
       - 'gradlew'
@@ -139,7 +141,7 @@ jobs:
       - name: Install Android SDK 35
         shell: bash
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools" "ndk;27.0.12077973" "cmake;3.22.1"
 
       - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v4
@@ -182,7 +184,9 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          VERSION="V2_0"
+          VERSION="V2_1_MOTOR_1_1_0_DEV1"
+          # the APK must contain the engine for every supported ABI
+          for abi in arm64-v8a armeabi-v7a x86_64; do unzip -l "$APK" | grep -q "lib/$abi/libavo_equine_jni.so" || { echo "::error::falta libavo_equine_jni.so para $abi"; exit 1; }; done
           OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
           cd "$GITHUB_WORKSPACE/out"
@@ -192,7 +196,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-V2-0-APK
+          name: AVO-Performance-Horse-V2-1-motor-APK
           path: out/
           if-no-files-found: error
           retention-days: 30
@@ -205,3 +209,40 @@ jobs:
           path: ${{ env.AVO_SOURCE_DIR }}/core/build/reports/tests/test/
           if-no-files-found: ignore
           retention-days: 14
+
+  # RAW -> JNI -> C++ engine -> Kotlin model on a real Android runtime (x86_64 emulator).
+  android-device-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v4
+        with: { packages: 'platform-tools' }
+      - name: SDK, NDK y CMake
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.0.12077973" "cmake;3.22.1"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Habilitar KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Pruebas instrumentadas en emulador
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          target: default
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            chmod +x gradlew
+            ./gradlew --no-daemon :app:connectedDebugAndroidTest
+      - name: Informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-device-test-report
+          path: app/build/reports/androidTests/connected/
+          if-no-files-found: ignore

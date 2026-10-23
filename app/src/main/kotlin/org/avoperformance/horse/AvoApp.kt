@@ -35,6 +35,8 @@ class AppContainer(val app: Application) {
     val ntrip = NtripManager(settings, watch, log, scope)
     val tides = org.avoperformance.horse.tide.TideRepository(app)
     val sync = WatchSyncManager(app, db, settings, watch, server, log, scope)
+    /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
+    val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
 }
 
 class AppLog(private val c: AppContainer) {

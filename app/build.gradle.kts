@@ -13,8 +13,20 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 12
-        versionName = "2.0"
+        versionCode = 13
+        versionName = "2.1-motor-1.1.0-dev1"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
+        ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
+        externalNativeBuild { cmake { arguments += listOf("-DANDROID_STL=c++_static") } }
+    }
+
+    ndkVersion = "27.0.12077973"
+    externalNativeBuild {
+        cmake {
+            path = file("../equine-intelligence/integrations/android/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 
     signingConfigs {
@@ -72,4 +84,6 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.osmdroid)
     testImplementation(libs.junit)
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
 }
