@@ -1,0 +1,62 @@
+name: Build AVO BACK V3.8.0 (Heltec + ZED-F9P, máxima precisión RTK)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/back/V3_8_0/**'
+      - '.github/workflows/build-back-v380.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  back:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: firmware/back/V3_8_0
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Host tests (ESP-NOW link, pairing, simulated ZED-F9P, precision profile)
+        run: |
+          g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o back_test
+          ./back_test
+
+      - name: Install arduino-cli and ESP32 core
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=$HOME/bin sh
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/bin:$PATH"
+          arduino-cli config init --overwrite
+          arduino-cli config add board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32@3.3.2 || arduino-cli core install esp32:esp32
+          arduino-cli core list
+
+      - name: Build firmware
+        run: ./build_back.sh "$GITHUB_WORKSPACE/out"
+
+      - name: Package
+        run: |
+          cd "$GITHUB_WORKSPACE/out"
+          ls -la
+          BIN=$(ls AVO_BACK_V3_8_0.ino.bin)
+          cp "$BIN" AVO_BACK_V3_8_0_firmware.bin
+          [ -f AVO_BACK_V3_8_0.ino.merged.bin ] && cp AVO_BACK_V3_8_0.ino.merged.bin AVO_BACK_V3_8_0_COMPLETO_0x0.bin || true
+          sha256sum AVO_BACK_V3_8_0_*.bin > SHA256SUMS.txt
+          grep -E "Sketch uses|Global variables" build.log || true
+          cat SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-BACK-V3-8-0-HELTEC
+          path: |
+            out/AVO_BACK_V3_8_0_*.bin
+            out/SHA256SUMS.txt
+            out/build.log
+          if-no-files-found: error
+          retention-days: 60
