@@ -5,7 +5,7 @@ App Android **independiente** de AVO Performance Horse para instalar `firmware.b
 ESP32-S3: pecho (USB nativo) y espalda Heltec Wireless Stick Lite V3 (puente CP2102).
 
 - applicationId permanente: `org.avoperformance.horse.update`
-- Versión actual: **2.0.0** (versionCode 20) — falta la prueba física (pecho y espalda).
+- Versión actual: **2.0.1** (versionCode 21) — falta la prueba física (pecho y espalda).
 - Rama: `develop/avo-performance-horse` · CI: `.github/workflows/build-usb-updater.yml`
 
 ## Manual breve
@@ -40,7 +40,7 @@ ESP32-S3: pecho (USB nativo) y espalda Heltec Wireless Stick Lite V3 (puente CP2
 - Conexión: USB-Serial/JTAG del ESP32-S3, **Silicon Labs CP210x** (VID 10C4) y CDC (CH9102/CH343). Reinicio en modo
   descarga por DTR/RTS (`ClassicReset` de esptool en puentes USB-UART). Manual en la Heltec: mantener **PRG**, pulsar y soltar **RST**, soltar PRG.
 - Velocidad: carga en RAM el **stub oficial de Espressif** (esp-flasher-stub v1.4.1, Apache-2.0 o MIT, `assets/stub/`,
-  idéntico al que incluye esptool) y sube a 921 600 baudios en puentes USB-UART (≈ 80–90 KB/s; 8 MB en unos 2 min).
+  idéntico al que incluye esptool) y sube a 460 800 baudios en puentes USB-UART, con 2 bloques en vuelo y reintento automático (8 MB en unos 4–5 min).
 - Verificación: cada bloque de 256 KB se comprueba con el **MD5 que calcula el chip**; si no coincide no se guarda nada.
 - Nunca escribe ni borra: el CI comprueba que el código de lectura no usa comandos de escritura y que la carga en RAM solo existe en `StubFlasher.kt`.
 - Al terminar, el módulo se reinicia con su propio firmware.

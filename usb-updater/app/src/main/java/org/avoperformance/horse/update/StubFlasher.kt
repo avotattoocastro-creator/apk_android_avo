@@ -96,8 +96,8 @@ internal class StubFlasher(private val rom: EspRom, private val clock: Clock = C
      * acknowledged with the running byte count; the stub ends with the MD5 of the
      * region, which is checked before anything is reported as read.
      */
-    fun readFlash(offset: Long, length: Int, sink: OutputStream, progress: (Int) -> Unit = {}): String {
-        rom.command(READ_FLASH, le32(offset) + le32(length.toLong()) + le32(SECTOR.toLong()) + le32(64), timeoutMs = 5000)
+    fun readFlash(offset: Long, length: Int, sink: OutputStream, inFlight: Int = 64, progress: (Int) -> Unit = {}): String {
+        rom.command(READ_FLASH, le32(offset) + le32(length.toLong()) + le32(SECTOR.toLong()) + le32(inFlight.toLong()), timeoutMs = 5000)
         val md5 = MessageDigest.getInstance("MD5")
         var got = 0
         while (got < length) {

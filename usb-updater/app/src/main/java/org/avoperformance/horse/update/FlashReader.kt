@@ -153,7 +153,7 @@ internal class FlashReader(
     }
 
     /** Loads the RAM flasher stub and, on a USB-UART bridge, raises the speed to [fastBaud]. */
-    fun ensureStub(s: Session, fastBaud: Int = 921_600): StubFlasher {
+    fun ensureStub(s: Session, fastBaud: Int = UART_FAST_BAUD): StubFlasher {
         s.stub?.let { return it }
         if (s.info.secureBoot) fail(Failure.UNSAFE, "con Secure Boot activo no se carga el programa de lectura rápida")
         listener.onProgress("Cargando el programa de lectura en la RAM del chip…", null)
@@ -178,21 +178,52 @@ internal class FlashReader(
             override fun write(b: Int) { sink.write(b); sha.update(b.toByte()) }
             override fun write(b: ByteArray, off: Int, len: Int) { sink.write(b, off, len); sha.update(b, off, len) }
         }
-        val piece = 256L * 1024
+        // USB-UART bridges (CP2102) have a tiny FIFO: few blocks in flight, smaller pieces, and a retry
+        // that restarts the chip and the stub if bytes are lost. Nothing reaches the file unless its MD5 matches.
+        val uart = s.link.kind.isUart
+        val piece = if (uart) 64L * 1024 else 256L * 1024
+        val inFlight = if (uart) 2 else 64
         var done = 0L
         val t0 = clock.nowMs()
+        var current = stub
         while (done < length) {
             if (cancel.get()) fail(Failure.CANCELLED, "lectura cancelada")
             val n = minOf(piece, length - done).toInt()
-            stub.readFlash(offset + done, n, tee) { got ->
-                val total = done + got
-                val secs = (clock.nowMs() - t0).coerceAtLeast(1) / 1000.0
-                listener.onProgress("$label · %,d de %,d KB · %.0f KB/s".format(total / 1024, length / 1024, total / 1024.0 / secs), (total * 100 / length).toInt())
+            var attempt = 0
+            while (true) {
+                val buf = java.io.ByteArrayOutputStream(n)
+                try {
+                    current.readFlash(offset + done, n, buf, inFlight) { got ->
+                        val total = done + got
+                        val secs = (clock.nowMs() - t0).coerceAtLeast(1) / 1000.0
+                        listener.onProgress("$label · %,d de %,d KB · %.0f KB/s".format(total / 1024, length / 1024, total / 1024.0 / secs), (total * 100 / length).toInt())
+                    }
+                    buf.writeTo(tee)
+                    break
+                } catch (e: UpdateException) {
+                    if (e.failure == Failure.CANCELLED || e.failure == Failure.DISCONNECTED || !uart || ++attempt > 4) throw e
+                    log("Bloque 0x%X repetido (%s)".format(offset + done, e.message))
+                    current = restartStub(s)
+                }
             }
             done += n
         }
         return hex(sha.digest())
     }
+
+    /** UART only: reset into the ROM again and reload the stub (the old one may be waiting for acknowledgements). */
+    private fun restartStub(s: Session): StubFlasher {
+        s.stub = null
+        s.link.setBaud(115200)
+        LineControl(s.link, clock).classicResetIntoBootloader()
+        clock.sleep(200)
+        s.rom.drain(200)
+        s.rom.sync(12)
+        DeviceProbe.prepare(s.rom)
+        return ensureStub(s)
+    }
+
+    companion object { const val UART_FAST_BAUD = 460_800 }
 
     /** Back to the module's own firmware. */
     fun finish(s: Session) {
