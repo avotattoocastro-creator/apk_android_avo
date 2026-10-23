@@ -37,6 +37,7 @@ class ProtocolAndPartitionTest {
         put32(bytes, p + 4, offset)
         put32(bytes, p + 8, size)
         name.toByteArray().copyInto(bytes, p + 12)
+        bytes[p + 12 + name.length] = 0
     }
 
     private fun historicalTable(): ByteArray {
