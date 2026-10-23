@@ -207,13 +207,13 @@ internal class FakeEsp32S3(val clock: FakeClock = FakeClock()) {
         val t = table() ?: return
         val apps = t.entries.filter { it.isOtaApp }.sortedBy { it.subtype }
         val info = slotImage(apps[slot].offset) ?: return
-        if (!appHealthy(info.version)) {
+        if (!appHealthy(info.runtimeVersion)) {
             if (clock.now - appBootTime > 1500) chipReset(Mode.APP)
             return
         }
         if (!appStarted && clock.now - appBootTime > 500) {
             appStarted = true
-            if (appPrintsVersion) link?.push("\r\n${info.projectName} ${info.version} arrancado\r\n".toByteArray())
+            if (appPrintsVersion) link?.push("\r\n${info.label} arrancado\r\n".toByteArray())
             if (rollbackEnabled && appConfirms) {
                 val e = otadataEntries(pendingConfirmBase)
                 val a = OtaData.activeIndex(e)
@@ -357,16 +357,22 @@ internal class FakeEsp32S3(val clock: FakeClock = FakeClock()) {
 
 internal object TestImages {
     /** Builds a valid ESP32-S3 application image with esp_app_desc_t and appended SHA-256. */
-    fun build(version: String, project: String = "AVO-CHEST", approxSize: Int = 200_000, seed: Int = 1): ByteArray {
+    fun build(version: String, project: String = "AVO-CHEST", approxSize: Int = 200_000, seed: Int = 1,
+              arduinoStyle: Boolean = false): ByteArray {
         val rnd = java.util.Random(seed.toLong())
         val desc = ByteArray(256)
         le32(AppImage.APP_DESC_MAGIC).copyInto(desc, 0)
-        version.toByteArray().copyInto(desc, 16)
-        project.toByteArray().copyInto(desc, 48)
+        (if (arduinoStyle) "6671d0b" else version).toByteArray().copyInto(desc, 16)
+        (if (arduinoStyle) "arduino-lib-builder" else project).toByteArray().copyInto(desc, 48)
         "12:00:00".toByteArray().copyInto(desc, 80)
         "Oct 23 2026".toByteArray().copyInto(desc, 96)
         "v5.5".toByteArray().copyInto(desc, 112)
         val seg1 = desc + ByteArray(4096 - 256).also { rnd.nextBytes(it) }
+        if (arduinoStyle) {
+            // AVO_FW_VERSION + "AVO-CHEST" as in 3.7.1-rc2 (file offset 0x254), plus board marker
+            val tag = ByteArray(1) + "$version\u0000\u0000AVO-CHEST\u0000AVOCHEST-IMG-V1:WS-AMOLED-2.06\u0000".toByteArray()
+            tag.copyInto(seg1, 0x254 - 32 - 1)
+        }
         val rest = maxOf(4, (approxSize - 4096 - 64) / 4 * 4)
         val seg2 = ByteArray(rest).also { rnd.nextBytes(it) }
         val out = java.io.ByteArrayOutputStream()

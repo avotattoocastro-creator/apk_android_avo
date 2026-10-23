@@ -2,7 +2,7 @@ plugins { id("com.android.application"); id("org.jetbrains.kotlin.android") }
 android {
     namespace = "org.avoperformance.horse.update"
     compileSdk = 35
-    defaultConfig { applicationId = "org.avoperformance.horse.update"; minSdk = 29; targetSdk = 35; versionCode = 10; versionName = "1.8.0-beta1" }
+    defaultConfig { applicationId = "org.avoperformance.horse.update"; minSdk = 29; targetSdk = 35; versionCode = 11; versionName = "1.8.0-beta2" }
     signingConfigs { create("production") {
         val path = System.getenv("AVO_UPDATER_KEYSTORE_FILE")
         if (!path.isNullOrBlank()) { storeFile = file(path); storePassword = System.getenv("AVO_UPDATER_KEYSTORE_PASSWORD"); keyAlias = System.getenv("AVO_UPDATER_KEY_ALIAS"); keyPassword = System.getenv("AVO_UPDATER_KEY_PASSWORD") }

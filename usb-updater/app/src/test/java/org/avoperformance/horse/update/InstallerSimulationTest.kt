@@ -9,7 +9,7 @@ import java.security.MessageDigest
  * These are simulation results; they do not replace the physical test with the watch.
  */
 class InstallerSimulationTest {
-    private val newImage = TestImages.build("3.7.1-rc2", "AVO-CHEST", 400_000, seed = 11)
+    private val newImage = TestImages.build("3.7.1-rc2", "AVO-CHEST", 400_000, seed = 11, arduinoStyle = true)
 
     private class Recorder : Installer.Listener {
         val steps = mutableListOf<Installer.Step>()

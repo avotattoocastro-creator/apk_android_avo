@@ -29,6 +29,18 @@ class AppImageTest {
     @Test fun badMagicRejected() = rejects(image.copyOf().also { it[0] = 0 })
     @Test fun badShaRejected() = rejects(image.copyOf().also { it[it.size - 1] = (it[it.size - 1] + 1).toByte() })
 
+    @Test fun arduinoBuildShowsAvoVersionNotLibBuilderHash() {
+        val img = TestImages.build("3.7.1-rc2", approxSize = 300_000, arduinoStyle = true)
+        val info = AppImage.parse(img)
+        assertEquals("arduino-lib-builder", info.projectName)
+        assertEquals("3.7.1-rc2", info.avoVersion)
+        assertEquals("AVO-CHEST 3.7.1-rc2", info.label)
+        assertEquals("3.7.1-rc2", info.runtimeVersion)
+        assertTrue(info.avoChestMarker)
+        assertEquals("AVO-CHEST 3.7.1-rc2", AppImage.describeHead(img.copyOf(DeviceProbe.SLOT_HEAD_BYTES)))
+        assertFalse(AppImage.parse(image).avoChestMarker)
+    }
+
     @Test fun legacyValidatorStillWorks() {
         assertTrue(ImageSegments.validate(image).contains("checksum correcto"))
         assertThrows(IllegalArgumentException::class.java) { ImageSegments.validate(image.copyOf(100)) }

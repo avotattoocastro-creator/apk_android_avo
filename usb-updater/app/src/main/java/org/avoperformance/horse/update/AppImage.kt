@@ -29,10 +29,17 @@ internal object AppImage {
         val projectName: String,
         val idfVersion: String,
         val buildDate: String,
-        val secureVersion: Long
+        val secureVersion: Long,
+        /** Version of the AVO firmware itself (Arduino builds put the lib-builder hash in esp_app_desc_t). */
+        val avoVersion: String? = null,
+        /** True when the image carries the AVO chest / Waveshare AMOLED 2.06 identity marker. */
+        val avoChestMarker: Boolean = false
     ) {
         /** "AVO-CHEST 3.7.1-rc2" style label. */
-        val label: String get() = listOf(projectName, version).filter { it.isNotBlank() }.joinToString(" ")
+        val label: String get() = avoVersion?.let { "AVO-CHEST $it" }
+            ?: listOf(projectName, version).filter { it.isNotBlank() }.joinToString(" ")
+        /** Version string the firmware prints at boot (used to confirm the first boot). */
+        val runtimeVersion: String get() = avoVersion ?: version
         val flashSizeText: String get() = flashSizeName(flashSizeCode)
     }
 
@@ -40,6 +47,46 @@ internal object AppImage {
         listOf("1 MB", "2 MB", "4 MB", "8 MB", "16 MB", "32 MB", "64 MB", "128 MB").getOrElse(code) { "?" }
 
     fun flashSizeBytes(code: Int): Long? = if (code in 0..7) (1L shl 20) shl code else null
+
+    private val semver = Regex("""\d+\.\d+\.\d+(-[A-Za-z0-9.]+)?""")
+
+    /** Null-terminated printable strings in [from, to). */
+    private fun strings(b: ByteArray, from: Int, to: Int): Sequence<Pair<Int, String>> = sequence {
+        var start = -1
+        for (i in from until minOf(to, b.size)) {
+            val c = b[i].toInt() and 255
+            if (c in 32..126) { if (start < 0) start = i }
+            else {
+                if (start >= 0 && c == 0 && i - start in 3..40 && (start == 0 || b[start - 1].toInt() == 0))
+                    yield(start to String(b, start, i - start, Charsets.US_ASCII))
+                start = -1
+            }
+        }
+    }
+
+    /** AVO firmware stores AVO_FW_VERSION right before "AVO-CHEST" in its first data segment. */
+    fun findAvoVersion(image: ByteArray, limit: Int = 0x20000): String? {
+        val found = strings(image, 0, limit).toList()
+        for ((i, pair) in found.withIndex()) {
+            if (pair.second != "AVO-CHEST") continue
+            val prev = found.getOrNull(i - 1) ?: continue
+            if (pair.first - (prev.first + prev.second.length) <= 16 && semver.matches(prev.second)) return prev.second
+        }
+        return null
+    }
+
+    fun hasAvoChestMarker(image: ByteArray): Boolean {
+        val needles = listOf("AVOCHEST-IMG-V1:WS-AMOLED-2.06", "AVO_CHEST_WAVESHARE_ESP32S3").map { it.toByteArray() }
+        return needles.any { n -> indexOf(image, n) >= 0 }
+    }
+
+    private fun indexOf(h: ByteArray, n: ByteArray): Int {
+        outer@ for (i in 0..h.size - n.size) {
+            for (j in n.indices) if (h[i + j] != n[j]) continue@outer
+            return i
+        }
+        return -1
+    }
 
     private fun bad(detail: String): Nothing = fail(Failure.INCOMPATIBLE, detail)
 
@@ -55,10 +102,11 @@ internal object AppImage {
         head.size >= 24 && (head[0].toInt() and 255) == MAGIC &&
             (head[1].toInt() and 255) in 1..16 && u16le(head, 12) == CHIP_ID_ESP32S3
 
-    /** Reads version/project from the first bytes of a slot (header + first segment + app desc). */
+    /** Reads the firmware label from the first bytes of a slot (header, app desc, AVO version string). */
     fun describeHead(head: ByteArray): String? {
-        if (!headerLooksValid(head) || head.size < 32 + 256) return null
-        if (u32le(head, 32) != APP_DESC_MAGIC) return null
+        if (!headerLooksValid(head)) return null
+        findAvoVersion(head, head.size)?.let { return "AVO-CHEST $it" }
+        if (head.size < 32 + 256 || u32le(head, 32) != APP_DESC_MAGIC) return null
         return listOf(cString(head, 32 + 48, 32), cString(head, 32 + 16, 32)).filter { it.isNotBlank() }.joinToString(" ")
     }
 
@@ -113,7 +161,9 @@ internal object AppImage {
             projectName = if (hasDesc) cString(image, desc + 48, 32) else "",
             idfVersion = if (hasDesc) cString(image, desc + 112, 32) else "",
             buildDate = if (hasDesc) (cString(image, desc + 96, 16) + " " + cString(image, desc + 80, 16)).trim() else "",
-            secureVersion = if (hasDesc) u32le(image, desc + 4) else 0
+            secureVersion = if (hasDesc) u32le(image, desc + 4) else 0,
+            avoVersion = findAvoVersion(image),
+            avoChestMarker = hasAvoChestMarker(image)
         )
     }
 }

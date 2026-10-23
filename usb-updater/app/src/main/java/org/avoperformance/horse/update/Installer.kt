@@ -288,8 +288,8 @@ internal class Installer(
             }
             if (stableSince >= 0 && link?.isOpen == true) bestStable = maxOf(bestStable, clock.nowMs() - stableSince)
             val usb = text.toString()
-            val announced = info.version.isNotBlank() && usb.contains(info.version)
-            if (announced) log("El firmware se anunció por USB con la versión ${info.version}.")
+            val announced = info.runtimeVersion.isNotBlank() && usb.contains(info.runtimeVersion)
+            if (announced) log("El firmware se anunció por USB con la versión ${info.runtimeVersion}.")
             if (resets >= 3) {
                 return Outcome(plan, imageMd5, null, bestStable, resets, announced, false,
                     "El reloj se reinicia repetidamente ($resets veces): el firmware no arranca de forma estable.", usb)

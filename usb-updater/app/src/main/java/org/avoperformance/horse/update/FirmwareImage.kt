@@ -41,7 +41,9 @@ internal object FirmwareImage {
             if (bytes.size >= 0x8000 && looksLikeMergedFlashImage(bytes))
                 Result(total, sha, false, chipId, "Parece una imagen completa de flash (bootloader en 0x0). Solo se admiten imágenes de aplicación.")
             else Result(total, sha, true, chipId, "Imagen de aplicación ESP32-S3 válida: ${info.segments.size} segmentos, checksum" +
-                (if (info.hashAppended) " y SHA-256 adjunto correctos" else " correcto (sin SHA-256 adjunto)"), info, bytes)
+                (if (info.hashAppended) " y SHA-256 adjunto correctos" else " correcto (sin SHA-256 adjunto)") +
+                (if (info.avoChestMarker) ". Firmware AVO CHEST para Waveshare AMOLED 2.06\"." else
+                    ". AVISO: no lleva la marca AVO CHEST/Waveshare; comprueba que es el firmware del reloj."), info, bytes)
         } catch (e: UpdateException) {
             Result(total, sha, false, chipId, e.message ?: "Imagen inválida")
         }

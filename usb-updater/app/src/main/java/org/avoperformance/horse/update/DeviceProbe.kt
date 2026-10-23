@@ -9,7 +9,7 @@ import java.security.MessageDigest
 internal object DeviceProbe {
     const val PARTITION_TABLE_OFFSET = 0x8000L
     const val PARTITION_TABLE_MAX = 0xC00
-    const val SLOT_HEAD_BYTES = 32 + 256
+    const val SLOT_HEAD_BYTES = 0x400 // header + app desc + AVO_FW_VERSION (0x254 in 3.7.1-rc2)
 
     data class Slot(
         val index: Int,
