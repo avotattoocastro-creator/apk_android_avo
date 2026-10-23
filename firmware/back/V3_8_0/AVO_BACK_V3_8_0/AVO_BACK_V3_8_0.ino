@@ -156,6 +156,7 @@ static void print_status() {
 // ------------------------------------------------------------------ setup / loop
 void setup() {
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
+  volatile char keep_id = AVO_BACK_IMAGE_ID[1]; (void)keep_id;   // keeps the AVO-BACK marker in the image
   Serial.begin(115200);
   delay(300);
   pinMode(VEXT_PIN, OUTPUT);
