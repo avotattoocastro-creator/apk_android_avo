@@ -160,11 +160,15 @@ GaitResult classify_gait_v2(const GnssResult& g, const CadenceResult* cad, const
   // hysteresis over the decided states (UNKNOWN and INSUFFICIENT_DATA are states too)
   std::vector<Pt> acc;
   if (!pts.empty()) {
-    Gait cur = pts[0].g, cand = cur; int cnt = 0;
+    // offline analysis: once a change is confirmed, it is dated back to its first supporting point
+    // (the confirmation delay would otherwise shift every transition by confirm_points · step)
+    Gait cur = pts[0].g, cand = cur; int cnt = 0; size_t cand_from = 0;
     for (auto p : pts) {
-      if (p.g == cur) cnt = 0;
-      else if (p.g == cand) { if (++cnt >= c.confirm_points) { cur = cand; cnt = 0; } }
-      else { cand = p.g; cnt = 1; if (c.confirm_points <= 1) { cur = cand; cnt = 0; } }
+      Gait raw = p.g;
+      if (raw == cur) cnt = 0;
+      else if (raw == cand && cnt > 0) {
+        if (++cnt >= c.confirm_points) { cur = cand; cnt = 0; for (size_t k = cand_from; k < acc.size(); k++) acc[k].g = cur; }
+      } else { cand = raw; cnt = 1; cand_from = acc.size(); if (c.confirm_points <= 1) { cur = cand; cnt = 0; } }
       p.g = cur; acc.push_back(p);
     }
   }

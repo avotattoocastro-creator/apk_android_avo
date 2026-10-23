@@ -36,6 +36,10 @@ struct CadenceConfig {
   double min_strength = 0.35;
   double max_rel_uncertainty = 0.08;     // σf/f above this: the cadence is not reported (status INCIERTA)
   double max_disagreement = 0.10;        // |f_autocorr - f_intervals| / f above this: AMBIGUA
+  // controlled interpolation (derived copy only, RAW untouched): gaps up to max_bridge_s are filled linearly
+  // and a window is analysed only when at most max_interp_fraction of its samples are interpolated
+  double max_bridge_s = 0.25;
+  double max_interp_fraction = 0.10;
 };
 
 enum class CadenceStatus : uint8_t { VALID = 0, WEAK_PERIODICITY = 1, AMBIGUOUS = 2, UNCERTAIN = 3, INSUFFICIENT_DATA = 4 };
@@ -49,6 +53,7 @@ struct CadenceWindow {
   double candidate_hz = 0;       // what the autocorrelation proposed, kept for traceability even when rejected
   double interval_freq_hz = 0;   // independent estimate: 1 / mean peak-to-peak interval
   bool subharmonic = false;
+  double subharmonic_snr = -1;   // power at f0/2 over the local noise floor: > 5 means the true cycle may be 2/f0
   // ---- regularity: independent metrics, deliberately NOT combined into a score
   double interval_cv = -1;       // temporal regularity: CV of cycle durations
   double amplitude_cv = -1;      // amplitude regularity: CV of cycle peak heights
@@ -65,6 +70,7 @@ struct CadenceWindow {
   double rms = 0;                // band-passed |a| RMS in LSB (uncalibrated)
   double p2p = 0;                // median peak-to-peak per cycle, LSB (uncalibrated)
   uint32_t saturated = 0;        // saturated samples inside the window
+  double interpolated_fraction = 0;  // samples filled by the controlled interpolation
 };
 
 struct CadenceResult {

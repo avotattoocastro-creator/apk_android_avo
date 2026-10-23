@@ -184,6 +184,9 @@ Fundamental fundamental(const std::vector<double>& x, double fs, double f_min, d
   if (lag_max <= lag_min + 1) return out;
   std::vector<double> y = detrend_mean(x);
   std::vector<double> r = autocorr(y, std::min(x.size() - 1, 3 * lag_max + 2));
+  // unbiased normalisation: the biased estimator shrinks long lags by (N-k)/N, which hides the true cycle
+  // when it is twice the dominant beat period (strong 2nd harmonic)
+  for (size_t k = 1; k < r.size(); k++) r[k] *= (double)x.size() / (double)(x.size() - k);
   // Broadband noise puts small ripples on the autocorrelation: look for maxima on a smoothed copy
   // (moving average over a quarter of the shortest allowed period), then refine on the raw curve.
   size_t hw = std::max<size_t>(1, lag_min / 8);
@@ -212,7 +215,9 @@ Fundamental fundamental(const std::vector<double>& x, double fs, double f_min, d
   if (L + 2 < r.size() && L < lag_max) {
     size_t lk = L; double lv = r[L];
     for (size_t k = L - 2; k <= L + 2; k++) if (r[k] > lv) { lv = r[k]; lk = k; }
-    if (lv - r[chosen] > 0.05) { chosen = lk; out.subharmonic_chosen = true; }
+    // relative test: the doubled lag must remove at least half of what the short lag leaves unexplained
+    // (scale-free: works for weak beat asymmetries and is robust to broadband noise)
+    if (lv - r[chosen] > std::max(0.01, 0.5 * (1.0 - r[chosen]))) { chosen = lk; out.subharmonic_chosen = true; }
   }
   double off = (chosen > 0 && chosen + 1 < r.size()) ? parabolic_offset(r[chosen - 1], r[chosen], r[chosen + 1]) : 0;
   double lag = (double)chosen + off;

@@ -142,6 +142,11 @@ static void spectral_features(const std::vector<double>& w, const std::vector<do
       cw->harmonic_ratio[k - 1] = p1 > 0 ? pk / p1 : -1;
     }
     cw->harmonic_energy = sum / total;
+    // power at half the candidate frequency vs the noise floor (median bin power of the band)
+    std::vector<double> band(p.begin() + k0, p.begin() + k1 + 1);
+    double floor_bin = dsp::median(band);
+    double nb = std::max(1.0, std::floor(2 * hw / df) + 1);
+    if (floor_bin > 0 && f0 / 2 >= c.band_lo) cw->subharmonic_snr = dsp::band_power(p, df, f0 / 2 - hw, f0 / 2 + hw) / (floor_bin * nb);
     double k = cw->dominant_hz / f0;
     int kr = (int)std::lround(k);
     cw->dominant_harmonic = (kr >= 1 && kr <= 6 && std::fabs(k - kr) < 0.12) ? kr : 0;
@@ -165,7 +170,33 @@ CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c) {
   if (s.fs <= 0) return r;
   size_t W = (size_t)std::lround(c.window_s * s.fs), H = (size_t)std::max<long>(1, std::lround(c.hop_s * s.fs));
   double hi = std::min(c.band_hi, s.fs * 0.45);
+  // ---- controlled interpolation: join pieces separated by short gaps into a derived working copy
+  struct Work : ImuSeries::Piece { std::vector<uint8_t> interp; };
+  std::vector<Work> work;
   for (const auto& p : s.pieces) {
+    bool join = false;
+    if (!work.empty()) {
+      Work& w = work.back();
+      double t_end = w.t0 + (double)(w.amag.size() - 1) / s.fs;
+      double gap = p.t0 - t_end;
+      long missing = std::lround(gap * s.fs) - 1;
+      if (gap > 0 && gap <= c.max_bridge_s + 0.5 / s.fs && missing >= 0) {
+        join = true;
+        std::vector<float>* dst[7] = {&w.ax, &w.ay, &w.az, &w.gx, &w.gy, &w.gz, &w.amag};
+        const std::vector<float>* sr[7] = {&p.ax, &p.ay, &p.az, &p.gx, &p.gy, &p.gz, &p.amag};
+        // linear ramp from the last real sample to the first real sample after the gap (derived copy only)
+        for (int a = 0; a < 7; a++) {
+          float v0 = dst[a]->back(), v1 = (*sr[a])[0];
+          for (long k = 1; k <= missing; k++) dst[a]->push_back((float)(v0 + (v1 - v0) * (double)k / (double)(missing + 1)));
+        }
+        w.interp.insert(w.interp.end(), (size_t)missing, 1);
+        for (int a = 0; a < 7; a++) dst[a]->insert(dst[a]->end(), sr[a]->begin(), sr[a]->end());
+        w.interp.insert(w.interp.end(), p.amag.size(), 0);
+      }
+    }
+    if (!join) { Work w; static_cast<ImuSeries::Piece&>(w) = p; w.interp.assign(p.amag.size(), 0); work.push_back(std::move(w)); }
+  }
+  for (const auto& p : work) {
     if (p.amag.size() < W) continue;
     std::vector<double> mag(p.amag.begin(), p.amag.end());
     std::vector<double> bp = dsp::bandpass_zero_phase(mag, c.band_lo, hi, s.fs);
@@ -180,6 +211,9 @@ CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c) {
       CadenceWindow cw;
       cw.t_mid = p.t0 + (st + W / 2.0) / s.fs;
       cw.rms = dsp::rms(w);
+      size_t ni = 0; for (size_t k = st; k < st + W; k++) ni += p.interp[k];
+      cw.interpolated_fraction = (double)ni / (double)W;
+      if (cw.interpolated_fraction > c.max_interp_fraction) { cw.status = CadenceStatus::INSUFFICIENT_DATA; r.windows.push_back(cw); continue; }
       for (size_t k = st; k < st + W; k++) {
         float m = std::max(std::fabs(p.ax[k]), std::max(std::fabs(p.ay[k]), std::fabs(p.az[k])));
         if (m >= 32760.f) cw.saturated++;
@@ -211,6 +245,7 @@ CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c) {
       cw.uncertainty_hz = sig;
       if (sig < 0) cw.status = CadenceStatus::INSUFFICIENT_DATA;
       else if (cw.interval_freq_hz > 0 && std::fabs(cw.interval_freq_hz - f.freq_hz) > std::max(3 * sig, c.max_disagreement * f.freq_hz)) cw.status = CadenceStatus::AMBIGUOUS;
+      else if (!f.subharmonic_chosen && cw.subharmonic_snr > 5) cw.status = CadenceStatus::AMBIGUOUS;   // cycle could be 2/f0
       else if (sig > c.max_rel_uncertainty * f.freq_hz) cw.status = CadenceStatus::UNCERTAIN;
       else cw.status = CadenceStatus::VALID;
       if (cw.status == CadenceStatus::VALID) { cw.freq_hz = f.freq_hz; cw.cpm = f.freq_hz * 60; }

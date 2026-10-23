@@ -121,4 +121,34 @@ inline std::vector<avoeq::GnssEpoch> track_fn(double secs, double rate_hz, doubl
   if (true_dist) *true_dist = dist;
   return out;
 }
+// IMU with configurable shape: |a| = 2048 + a2(t)·sin(2φ) + a1(t)·sin(φ+0.6) + noise, φ' = 2π f(t).
+// a2 dominant: two oscillations per stride (walk/trot); a1 dominant: one per stride (canter/gallop).
+inline std::vector<avoeq::ImuSample> imu_shape(double secs, double (*freq)(double), double (*a1)(double), double (*a2)(double),
+                                                const ImuSpec& sp, uint8_t id = 0, unsigned seed = 2, double noise = 30) {
+  std::mt19937 rng(seed); std::normal_distribution<double> nz(0, 1); std::exponential_distribution<double> lat(1.0 / sp.latency_mean_s);
+  std::uniform_real_distribution<double> u(0, 1);
+  std::vector<avoeq::ImuSample> out;
+  double phase = 0; uint32_t bseq = 0;
+  size_t n = (size_t)(secs * sp.fs);
+  for (size_t b0 = 0; b0 < n; b0 += sp.batch, bseq++) {
+    bool lost = u(rng) < sp.loss;
+    double t_last = (double)std::min(n - 1, b0 + sp.batch - 1) / sp.fs;
+    double rx = t_last + 1000.0 + 0.003 + lat(rng);
+    for (size_t i = b0; i < std::min(n, b0 + sp.batch); i++) {
+      double t = i / sp.fs;
+      phase += 2 * PI * freq(t) / sp.fs;
+      double mag = 2048 + a2(t) * std::sin(2 * phase) + a1(t) * std::sin(phase + 0.6) + noise * nz(rng);
+      double lateral = 0.3 * a1(t) * std::sin(phase + 1.1) + 0.5 * noise * nz(rng);
+      if (lost) continue;
+      avoeq::ImuSample s;
+      s.imu_id = id; s.batch_seq = bseq; s.index = (uint16_t)(i - b0);
+      s.girth_us = (int64_t)std::llround(((t + sp.offset_s) * (1 + sp.drift_ppm * 1e-6)) * 1e6);
+      s.chest_us = (uint64_t)std::llround(rx * 1e6);
+      s.az = (int16_t)std::lround(std::max(-32768.0, std::min(32767.0, mag)));
+      s.ax = (int16_t)std::lround(0.1 * mag); s.ay = (int16_t)std::lround(lateral);
+      out.push_back(s);
+    }
+  }
+  return out;
+}
 }  // namespace synth
