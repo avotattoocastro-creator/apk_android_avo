@@ -209,7 +209,7 @@ void spread_json(std::ostringstream& o, const Spread& s) {
 
 static void write_v2_blocks(std::ostringstream& o, const Analysis& a, const Session& s) {
   o << ",\"procedencia\":{\"sesion\":\"" << esc(s.session_id) << "\",\"huella_entrada\":\"" << esc(a.input_fingerprint) << "\",\"hash_parametros\":\"" << a.parameters_hash
-    << "\",\"modo\":\"" << mode_name(a.mode) << "\",\"algoritmos\":{";
+    << "\",\"modo\":\"" << mode_name(a.mode) << "\",\"itow_inicial_ms\":" << (s.gnss.empty() ? std::string("null") : std::to_string(s.gnss[0].itow_ms)) << ",\"algoritmos\":{";
   auto av = algorithm_versions();
   for (size_t i = 0; i < av.size(); i++) o << (i ? "," : "") << "\"" << esc(av[i].first) << "\":\"" << esc(av[i].second) << "\"";
   o << "},\"unidades\":{\"t\":\"s (tiempo GNSS desde la primera época)\",\"velocidad\":\"m/s\",\"aceleracion\":\"m/s2\",\"distancia\":\"m\",\"cadencia\":\"Hz (ciclos de tranco por segundo)\",\"imu\":\"LSB sin calibrar\",\"angulos\":\"grados\"},"

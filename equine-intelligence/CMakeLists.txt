@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
-project(avo_equine_intelligence VERSION 1.0.0 LANGUAGES CXX)
+project(avo_equine_intelligence VERSION 1.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+option(AVO_EQ_BUILD_TOOLS "Build CLI, fixtures and tests (OFF inside the Android app build)" ON)
 option(AVO_EQ_SANITIZE "Build with AddressSanitizer + UndefinedBehaviorSanitizer" OFF)
 if(AVO_EQ_SANITIZE AND NOT MSVC)
   add_compile_options(-fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
@@ -32,6 +33,7 @@ target_include_directories(avo_eq_shared PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/incl
 target_compile_definitions(avo_eq_shared PRIVATE AVO_EQ_BUILD_DLL)
 set_target_properties(avo_eq_shared PROPERTIES OUTPUT_NAME avo_equine)
 
+if(AVO_EQ_BUILD_TOOLS)
 add_executable(avo_eq_cli tools/session-inspector/avo_eq_cli.cpp)
 target_link_libraries(avo_eq_cli avo_eq)
 
@@ -41,3 +43,7 @@ add_executable(avo_eq_tests ${EQ_TEST_SRC})
 target_include_directories(avo_eq_tests PRIVATE ${AVO_CORE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 target_link_libraries(avo_eq_tests avo_eq)
 add_test(NAME avo_eq_tests COMMAND avo_eq_tests)
+add_executable(avo_eq_fixtures tools/fixtures/make_fixtures.cpp)
+target_include_directories(avo_eq_fixtures PRIVATE ${AVO_CORE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/tests)
+target_link_libraries(avo_eq_fixtures avo_eq)
+endif()
