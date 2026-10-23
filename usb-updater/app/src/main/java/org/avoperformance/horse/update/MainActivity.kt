@@ -149,7 +149,8 @@ class MainActivity : Activity() {
                                 val sent = connection.bulkTransfer(output, bytes, bytes.size, 1200)
                                 val received = ByteArray(512)
                                 val count = if (sent == bytes.size) connection.bulkTransfer(input, received, received.size, 1500) else -1
-                                val response = if (count > 0) received.take(count).joinToString(" ") { "%02X".format(it.toInt() and 255) } else "sin respuesta"\n                                val validation = if (count > 0) RomProtocol.syncReport(received.copyOf(count)) else "Sin respuesta ROM. Escritura bloqueada."
+                                val response = if (count > 0) received.take(count).joinToString(" ") { "%02X".format(it.toInt() and 255) } else "sin respuesta"
+                                val validation = if (count > 0) RomProtocol.syncReport(received.copyOf(count)) else "Sin respuesta ROM. Escritura bloqueada."
                                 "SYNC enviado: $sent/${bytes.size} bytes. Recibidos: $count. Datos: $response\\n" +
                                     "No se ha escrito flash.\\n$validation"
                             }
