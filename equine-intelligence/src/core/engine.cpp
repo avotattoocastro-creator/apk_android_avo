@@ -99,18 +99,77 @@ static void assess_quality(const Session& s, Analysis& a) {
   add("ALGORITMO", Quality::USABLE, {"umbrales iniciales sin validar con datos etiquetados; resultados exploratorios, no diagnósticos veterinarios"});
 }
 
+std::vector<std::pair<std::string, std::string>> algorithm_versions() {
+  return {{"motor", ENGINE_VERSION}, {"gnss", "1.1.0"}, {"aceleracion", KINEMATICS_VERSION}, {"curvas", CURVES_VERSION},
+          {"cadencia", CADENCE_VERSION}, {GAIT_V1_ID, "1.0.1"}, {GAIT_V2_ID, "2.0.0"}, {"fusion", FUSION_VERSION},
+          {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}};
+}
+
+std::string params_hash(const EngineConfig& c) {
+  // FNV-1a over the textual values of every parameter that changes results
+  char b[1024];
+  snprintf(b, sizeof(b), "%g|%g|%g|%d|%g|%g|%g|%g|%g|%g|%g|%g|%g|%g|%d|%g|%g|%g|%g|%g|%d|%g|%g|%g|%g|%d|%g|%g|%d|%s|%d",
+           c.validation.max_hacc_m, c.validation.max_sacc_ms, c.validation.max_speed_ms, c.validation.min_sats,
+           c.gnss.deriv_half_window_s, c.gnss.min_speed_heading_ms, c.cadence.window_s, c.cadence.hop_s, c.cadence.f_min, c.cadence.f_max,
+           c.cadence.min_strength, c.cadence.max_rel_uncertainty, c.cadence.max_bridge_s, c.cadence.max_interp_fraction,
+           c.gait.confirm_windows, c.gait.stop_max, c.gait.walk_max, c.gait.trot_max, c.gait.min_segment_s, c.gait_v2.min_score,
+           c.gait_v2.confirm_points, c.accel.sustained_min, c.accel.peak_min, c.curves.enter_radius, c.curves.exit_radius,
+           (int)c.fusion.mode, c.fusion.max_sync_sigma_s, c.symmetry.min_cycle_corr, (int)c.performance_uses_v2,
+           c.gait_model ? c.gait_model->id().c_str() : "-", c.symmetry.sensors_calibrated ? 1 : 0);
+  uint64_t h = 1469598103934665603ull;
+  for (const char* p = b; *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
+  char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);
+  return out;
+}
+
+static void fill_curve_cadence(Analysis& a) {
+  for (auto& cv : a.curves.curves) {
+    std::vector<double> fb, fd, fa, cb, cd;
+    for (auto& w : a.fusion.windows) {
+      if (w.status != "OK" || std::isnan(w.t_gnss)) continue;
+      if (w.t_gnss >= cv.t0 - 8 && w.t_gnss < cv.t0) { fb.push_back(w.cadence_hz); if (!std::isnan(w.cycle_corr)) cb.push_back(w.cycle_corr); }
+      else if (w.t_gnss >= cv.t0 && w.t_gnss <= cv.t1) { fd.push_back(w.cadence_hz); if (!std::isnan(w.cycle_corr)) cd.push_back(w.cycle_corr); }
+      else if (w.t_gnss > cv.t1 && w.t_gnss <= cv.t1 + 8) fa.push_back(w.cadence_hz);
+    }
+    if (!fb.empty()) cv.cadence_before_hz = dsp::mean(fb);
+    if (!fd.empty()) cv.cadence_during_hz = dsp::mean(fd);
+    if (!fa.empty()) cv.cadence_after_hz = dsp::mean(fa);
+    if (!cb.empty()) cv.cycle_corr_before = dsp::median(cb);
+    if (!cd.empty()) cv.cycle_corr_during = dsp::median(cd);
+    if (fd.empty() && !a.has_imu) cv.warnings.push_back("SIN DATOS DE CINCHA: sin cadencia en la curva");
+  }
+}
+
 Analysis analyse(const Session& s, const EngineConfig& c, const std::string& when) {
+  auto step = [&]() { if (c.cancel && *c.cancel) throw Cancelled(); };
   Analysis a;
   a.engine_version = ENGINE_VERSION; a.processed_at_utc = when; a.session_id = s.session_id;
-  a.validation = validate(s, c.validation);
-  a.gnss = analyse_gnss(s, a.validation, c.gnss);
-  build_session_maps(s, a.validation, c.sync, -1, &a.chest_to_gnss, a.girth_to_gnss);
-  a.imu = build_imu_series(s, a.validation);
-  for (auto& ser : a.imu) a.cadence.push_back(analyse_cadence(ser, c.cadence));
+  a.mode = c.fusion.mode; a.parameters_hash = params_hash(c);
+  a.has_imu = !s.imu.empty(); a.has_gnss = !s.gnss.empty();
+  if (!a.has_imu) a.warnings.push_back("SIN DATOS DE CINCHA");
+  if (!a.has_gnss) a.warnings.push_back("SIN DATOS GNSS: sin velocidad, distancia ni recorrido");
+  a.validation = validate(s, c.validation); step();
+  a.gnss = analyse_gnss(s, a.validation, c.gnss); step();
+  build_session_maps(s, a.validation, c.sync, -1, &a.chest_to_gnss, a.girth_to_gnss); step();
+  a.imu = build_imu_series(s, a.validation); step();
+  for (auto& ser : a.imu) { a.cadence.push_back(analyse_cadence(ser, c.cadence)); step(); }
   const CadenceResult* cad = nullptr; const ClockMap* map = nullptr;
   for (auto& cr : a.cadence) if (cr.imu_id == 0) { cad = &cr; map = &a.girth_to_gnss[0]; }
   if (!cad && !a.cadence.empty()) { cad = &a.cadence[0]; map = &a.girth_to_gnss[std::min<uint8_t>(a.cadence[0].imu_id, 2)]; }
-  a.gait = classify_gait(a.gnss, cad, map, c.gait);
+  a.gait = classify_gait(a.gnss, cad, map, c.gait); step();
+  a.gait_v2 = classify_gait_v2(a.gnss, cad, map, c.gait_v2, c.gait_model); step();
+  a.kinematics = analyse_kinematics(a.gnss, c.accel);
+  a.curves = analyse_curves(a.gnss, c.curves); step();
+  const GaitResult& chosen = c.performance_uses_v2 ? a.gait_v2 : a.gait;
+  if (c.fusion.mode == AnalysisMode::REALTIME_ANALYSIS) a.fusion = fuse_realtime(s, a.validation, a.imu, c.cadence, c.sync, c.fusion);
+  else a.fusion = fuse_offline(a.gnss, a.cadence, a.girth_to_gnss, &chosen, c.fusion);
+  step();
+  fill_curve_cadence(a);
+  a.performance = analyse_performance(chosen, a.gnss, &a.fusion, a.has_imu, c.perf); step();
+  a.symmetry = analyse_symmetry(a.imu, a.cadence, a.girth_to_gnss, &chosen, c.cadence, c.symmetry); step();
+  EventInputs in; in.gnss = &a.gnss; in.kin = &a.kinematics; in.curves = &a.curves; in.gait = &chosen; in.fusion = &a.fusion;
+  in.validation = &a.validation; in.imu = &a.imu; in.girth_to_gnss = a.girth_to_gnss;
+  a.events = detect_events(in, c.events);
   find_anomalies(a);
   assess_quality(s, a);
   return a;
@@ -137,9 +196,155 @@ void metric_json(std::ostringstream& o, const Metric& m) {
 }
 }  // namespace
 
+
+// ------------------------------------------------------------------ format v2 blocks
+namespace {
+template <class T, class F> void arr(std::ostringstream& o, const std::vector<T>& v, F f) { o << "["; for (size_t i = 0; i < v.size(); i++) { if (i) o << ","; f(v[i]); } o << "]"; }
+void strs(std::ostringstream& o, const std::vector<std::string>& v) { arr(o, v, [&](const std::string& x) { o << "\"" << esc(x) << "\""; }); }
+void spread_json(std::ostringstream& o, const Spread& s) {
+  o << "{\"mediana\":" << num(s.median) << ",\"iqr\":" << num(s.iqr) << ",\"n\":" << s.n << ",\"consistencia_signo\":" << num(s.sign_consistency)
+    << ",\"reproducible\":" << (s.reproducible ? "true" : "false") << "}";
+}
+}  // namespace
+
+static void write_v2_blocks(std::ostringstream& o, const Analysis& a, const Session& s) {
+  o << ",\"procedencia\":{\"sesion\":\"" << esc(s.session_id) << "\",\"huella_entrada\":\"" << esc(a.input_fingerprint) << "\",\"hash_parametros\":\"" << a.parameters_hash
+    << "\",\"modo\":\"" << mode_name(a.mode) << "\",\"algoritmos\":{";
+  auto av = algorithm_versions();
+  for (size_t i = 0; i < av.size(); i++) o << (i ? "," : "") << "\"" << esc(av[i].first) << "\":\"" << esc(av[i].second) << "\"";
+  o << "},\"unidades\":{\"t\":\"s (tiempo GNSS desde la primera época)\",\"velocidad\":\"m/s\",\"aceleracion\":\"m/s2\",\"distancia\":\"m\",\"cadencia\":\"Hz (ciclos de tranco por segundo)\",\"imu\":\"LSB sin calibrar\",\"angulos\":\"grados\"},"
+    << "\"tiene_cincha\":" << (a.has_imu ? "true" : "false") << ",\"tiene_gnss\":" << (a.has_gnss ? "true" : "false") << "}";
+  o << ",\"advertencias\":"; strs(o, a.warnings);
+  // kinematics
+  o << ",\"cinematica\":{\"fuente\":\"TRAYECTORIA_GNSS\",\"nota\":\"aceleración de la trayectoria de la antena del jinete; no es la aceleración de las IMU de la cincha\",\"descartadas_fisicas\":"
+    << a.kinematics.rejected_physical << ",\"eventos\":";
+  arr(o, a.kinematics.events, [&](const AccelEvent& e) {
+    o << "{\"tipo\":\"" << e.type << "\",\"t0\":" << num(e.t0) << ",\"t1\":" << num(e.t1) << ",\"t_pico\":" << num(e.t_peak) << ",\"pico_m_s2\":" << num(e.peak)
+      << ",\"sigma_pico_m_s2\":" << num(e.peak_sigma) << ",\"media_m_s2\":" << num(e.mean) << ",\"v0\":" << num(e.v0) << ",\"v1\":" << num(e.v1) << ",\"dv\":" << num(e.dv)
+      << ",\"calidad\":\"" << quality_name(e.quality) << "\",\"fuente\":\"" << e.source << "\"}"; });
+  o << ",\"metricas\":"; arr(o, a.kinematics.metrics, [&](const Metric& m) { metric_json(o, m); });
+  o << "}";
+  // curves
+  o << ",\"curvas\":{\"version\":\"" << CURVES_VERSION << "\",\"descartadas\":{\"cortas\":" << a.curves.rejected_short << ",\"giro_pequeno\":" << a.curves.rejected_small_turn
+    << ",\"calidad\":" << a.curves.rejected_quality << "},\"lista\":";
+  arr(o, a.curves.curves, [&](const Curve& c) {
+    o << "{\"id\":" << c.id << ",\"direccion\":\"" << c.direction << "\",\"t0\":" << num(c.t0) << ",\"t1\":" << num(c.t1) << ",\"epoca0\":" << c.i0 << ",\"epoca1\":" << c.i1
+      << ",\"giro_deg\":" << num(c.heading_change_deg) << ",\"radio_m\":" << num(c.radius_m) << ",\"radio_sigma_m\":" << num(c.radius_sigma_m)
+      << ",\"radio_geometrico_m\":" << (c.radius_geom_m < 0 ? std::string("null") : num(c.radius_geom_m))
+      << ",\"centro_lat\":" << num(c.center_lat) << ",\"centro_lon\":" << num(c.center_lon) << ",\"centro_ajustado\":" << (c.center_from_fit ? "true" : "false")
+      << ",\"v_entrada\":" << num(c.v_entry) << ",\"v_salida\":" << num(c.v_exit) << ",\"v_media\":" << num(c.v_mean) << ",\"v_min\":" << num(c.v_min)
+      << ",\"a_lateral_media\":" << num(c.lat_acc_mean) << ",\"a_lateral_max\":" << num(c.lat_acc_max) << ",\"a_lateral_sigma\":" << num(c.lat_acc_sigma)
+      << ",\"distancia_m\":" << num(c.distance_m)
+      << ",\"cadencia_antes_hz\":" << (c.cadence_before_hz < 0 ? std::string("null") : num(c.cadence_before_hz))
+      << ",\"cadencia_durante_hz\":" << (c.cadence_during_hz < 0 ? std::string("null") : num(c.cadence_during_hz))
+      << ",\"cadencia_despues_hz\":" << (c.cadence_after_hz < 0 ? std::string("null") : num(c.cadence_after_hz))
+      << ",\"correlacion_ciclos_antes\":" << (c.cycle_corr_before < 0 ? std::string("null") : num(c.cycle_corr_before))
+      << ",\"correlacion_ciclos_durante\":" << (c.cycle_corr_during < 0 ? std::string("null") : num(c.cycle_corr_during))
+      << ",\"calidad\":\"" << quality_name(c.quality) << "\",\"avisos\":"; strs(o, c.warnings); o << "}"; });
+  o << "}";
+  // gait V2
+  o << ",\"aires_v2\":{\"clasificador\":\"" << a.gait_v2.classifier << "\",\"algoritmo\":\"" << esc(a.gait_v2.algorithm) << "\",\"version\":\"" << a.gait_v2.version
+    << "\",\"nota\":\"evaluable con los mismos datos que GAIT_CLASSIFIER_V1; no se declara superior sin datos etiquetados\",\"segmentos\":";
+  arr(o, a.gait_v2.segments, [&](const GaitSegment& g) {
+    o << "{\"aire\":\"" << gait_name(g.gait) << "\",\"codigo\":\"" << gait_code(g.gait) << "\",\"t0\":" << num(g.t0) << ",\"t1\":" << num(g.t1) << ",\"calidad\":\""
+      << quality_name(g.quality) << "\",\"confianza\":" << num(g.confidence) << ",\"base\":\"" << esc(g.basis) << "\"}"; });
+  o << "}";
+  // performance per gait
+  auto aggj = [&](const GaitAggregate& g) {
+    o << "{\"aire\":\"" << gait_name(g.gait) << "\",\"codigo\":\"" << gait_code(g.gait) << "\",\"segmentos\":" << g.segments << ",\"duracion_s\":" << num(g.duration_s)
+      << ",\"distancia_m\":" << num(g.distance_m) << ",\"velocidad_media\":" << num(g.speed_mean) << ",\"velocidad_max\":" << num(g.speed_max)
+      << ",\"cadencia_media_hz\":" << num(g.cadence_mean_hz) << ",\"longitud_tranco_m\":" << num(g.stride_length_m) << ",\"fraccion_tiempo\":" << num(g.time_fraction) << "}"; };
+  o << ",\"rendimiento\":{\"clasificador\":\"" << a.performance.classifier << "\",\"version\":\"" << PERFORMANCE_VERSION << "\",\"segmentos\":";
+  arr(o, a.performance.segments, [&](const SegmentPerformance& p) {
+    o << "{\"id\":" << p.id << ",\"aire\":\"" << gait_name(p.gait) << "\",\"codigo\":\"" << gait_code(p.gait) << "\",\"t0\":" << num(p.t0) << ",\"t1\":" << num(p.t1)
+      << ",\"duracion_s\":" << num(p.duration_s) << ",\"distancia_m\":" << num(p.distance_m) << ",\"velocidad_media\":" << num(p.speed_mean) << ",\"velocidad_max\":" << num(p.speed_max)
+      << ",\"aceleracion_max\":" << num(p.accel_max) << ",\"desaceleracion_max\":" << num(p.decel_max) << ",\"cadencia_media_hz\":" << num(p.cadence_mean_hz)
+      << ",\"cadencia_cv\":" << num(p.cadence_cv) << ",\"cadencia_sigma_hz\":" << num(p.cadence_sigma_hz) << ",\"cv_intervalos\":" << num(p.interval_cv)
+      << ",\"cv_amplitud\":" << num(p.amplitude_cv) << ",\"correlacion_ciclos\":" << num(p.cycle_corr) << ",\"estabilidad_espectral\":" << num(p.spectral_stability)
+      << ",\"longitud_tranco_m\":" << num(p.stride_length_m) << ",\"fraccion_fix\":" << num(p.gnss_fix_fraction) << ",\"fraccion_gnss_util\":" << num(p.gnss_usable_fraction)
+      << ",\"fraccion_imu_valida\":" << num(p.imu_valid_fraction) << ",\"calidad_gnss\":\"" << quality_name(p.gnss_quality) << "\",\"calidad_imu\":\"" << quality_name(p.imu_quality)
+      << "\",\"calidad_clasificacion\":\"" << quality_name(p.class_quality) << "\",\"confianza\":" << num(p.class_confidence) << ",\"avisos\":"; strs(o, p.warnings); o << "}"; });
+  o << ",\"por_aire\":"; arr(o, a.performance.per_gait, aggj);
+  o << ",\"sesion\":"; aggj(a.performance.session);
+  o << "}";
+  // fusion
+  const FusionResult& f = a.fusion;
+  o << ",\"fusion\":{\"modo\":\"" << mode_name(f.mode) << "\",\"version\":\"" << FUSION_VERSION << "\",\"ventanas\":" << f.windows_total << ",\"ventanas_ok\":" << f.windows_ok
+    << ",\"sin_sincronia\":" << f.no_sync << ",\"hueco_gnss\":" << f.gnss_gap << ",\"sin_cadencia\":" << f.no_cadence
+    << ",\"incertidumbre_temporal_mediana_ms\":" << num(f.median_sigma_t_ms) << ",\"relaciones\":";
+  arr(o, f.relations, [&](const Relation& r) {
+    o << "{\"x\":\"" << r.x << "\",\"y\":\"" << r.y << "\",\"aire\":\"" << esc(r.gait) << "\",\"n\":" << r.n << ",\"pendiente\":" << num(r.slope) << ",\"ordenada\":" << num(r.intercept)
+      << ",\"sigma_pendiente\":" << num(r.slope_sigma) << ",\"r\":" << num(r.r) << ",\"spearman\":" << num(r.spearman) << ",\"nota\":\"" << esc(r.note) << "\"}"; });
+  o << ",\"avisos\":"; strs(o, f.warnings); o << "}";
+  // symmetry
+  const SymmetryResult& y = a.symmetry;
+  o << ",\"simetria\":{\"etiqueta\":\"" << y.label << "\",\"version\":\"" << y.version << "\",\"conclusiones_permitidas\":" << (y.conclusions_allowed ? "true" : "false")
+    << ",\"ventanas_usadas\":" << y.windows_used << ",\"excluidas\":{\"irregulares\":" << y.excluded_irregular << ",\"saturadas\":" << y.excluded_saturated << ",\"estado\":" << y.excluded_status << "},\"controles\":";
+  arr(o, y.controls, [&](const SymmetryControl& c) { o << "{\"control\":\"" << c.control << "\",\"estado\":\"" << c.state << "\",\"motivo\":\"" << esc(c.reason) << "\"}"; });
+  o << ",\"grupos\":";
+  arr(o, y.groups, [&](const SymmetryGroup& g) {
+    o << "{\"imu\":" << (int)g.imu_id << ",\"aire\":\"" << esc(g.gait) << "\",\"ventanas\":" << g.windows << ",\"trancos\":" << g.strides << ",\"log_cociente_amplitud\":";
+    spread_json(o, g.amp_log_ratio); o << ",\"asimetria_temporal\":"; spread_json(o, g.timing_asym); o << ",\"similitud_mitades\":"; spread_json(o, g.half_similarity);
+    o << ",\"energia_vertical_estimada\":"; spread_json(o, g.vertical_energy); o << ",\"cociente_horizontal\":"; spread_json(o, g.horizontal_ratio); o << "}"; });
+  o << ",\"entre_sensores\":";
+  arr(o, y.inter, [&](const InterSensor& i) {
+    o << "{\"a\":" << (int)i.a << ",\"b\":" << (int)i.b << ",\"aire\":\"" << esc(i.gait) << "\",\"estado\":\"" << i.state << "\",\"motivo\":\"" << esc(i.reason) << "\",\"retardo_s\":";
+    spread_json(o, i.lag_s); o << ",\"retardo_fraccion_ciclo\":"; spread_json(o, i.lag_cycle_fraction); o << ",\"cociente_rms\":"; spread_json(o, i.rms_ratio); o << "}"; });
+  o << ",\"notas\":"; strs(o, y.notes); o << "}";
+  // events
+  o << ",\"eventos\":";
+  arr(o, a.events, [&](const Event& e) {
+    o << "{\"id\":\"" << e.id << "\",\"tipo\":\"" << e.type << "\",\"t0\":" << num(e.t0) << ",\"t1\":" << num(e.t1) << ",\"datos\":"; strs(o, e.data);
+    o << ",\"calidad\":\"" << quality_name(e.quality) << "\",\"motivo\":\"" << esc(e.reason) << "\",\"algoritmo\":\"" << esc(e.algorithm) << "\",\"version\":\"" << e.version << "\",\"valores\":{";
+    for (size_t k = 0; k < e.values.size(); k++) o << (k ? "," : "") << "\"" << esc(e.values[k].first) << "\":" << num(e.values[k].second);
+    o << "}}"; });
+  // cadence window status counts
+  o << ",\"cadencia_estado_ventanas\":";
+  arr(o, a.cadence, [&](const CadenceResult& cr) {
+    int n[5] = {0, 0, 0, 0, 0}; for (auto& w : cr.windows) n[std::min<int>((int)w.status, 4)]++;
+    o << "{\"imu\":" << (int)cr.imu_id << ",\"fs_hz\":" << num(cr.fs);
+    for (int k = 0; k < 5; k++) o << ",\"" << cadence_status_name((CadenceStatus)k) << "\":" << n[k];
+    o << "}"; });
+}
+
+static void write_series(std::ostringstream& o, const Analysis& a, const EngineConfig& c) {
+  const GnssResult& g = a.gnss;
+  auto col = [&](const char* name, const std::vector<double>& v) { o << ",\"" << name << "\":["; for (size_t i = 0; i < v.size(); i++) o << (i ? "," : "") << num(v[i]); o << "]"; };
+  o << ",\"series\":{\"t\":["; for (size_t i = 0; i < g.t.size(); i++) o << (i ? "," : "") << num(g.t[i]); o << "]";
+  col("velocidad", g.speed); col("aceleracion", g.accel); col("sigma_velocidad", g.speed_sigma); col("sigma_aceleracion", g.accel_sigma);
+  col("aceleracion_lateral", g.lat_accel); col("curvatura", g.curvature); col("distancia", g.dist); col("lat", g.lat); col("lon", g.lon);
+  o << ",\"calidad\":["; for (size_t i = 0; i < g.quality.size(); i++) o << (i ? "," : "") << (int)g.quality[i]; o << "]";
+  const GaitResult& chosen = c.performance_uses_v2 ? a.gait_v2 : a.gait;
+  o << ",\"aire\":[";
+  size_t k = 0;
+  for (size_t i = 0; i < g.t.size(); i++) {
+    while (k < chosen.segments.size() && g.t[i] >= chosen.segments[k].t1) k++;
+    int code = (k < chosen.segments.size() && g.t[i] >= chosen.segments[k].t0) ? (int)chosen.segments[k].gait : (int)Gait::UNKNOWN;
+    o << (i ? "," : "") << code;
+  }
+  o << "]}";
+  o << ",\"unidades_series\":{\"t\":\"s\",\"velocidad\":\"m/s\",\"aceleracion\":\"m/s2\",\"aceleracion_lateral\":\"m/s2\",\"curvatura\":\"1/m\",\"distancia\":\"m\",\"lat\":\"grados\",\"lon\":\"grados\","
+    << "\"calidad\":\"0 BUENA 1 UTILIZABLE 2 BAJA 3 NO_UTILIZABLE 4 DESCONOCIDA\",\"aire\":\"0 PARADO 1 PASO 2 TROTE 3 GALOPE 4 TRANSICION 5 DESCONOCIDO 6 DATOS_INSUFICIENTES\"}";
+  // girth windows on the same time base
+  const auto& w = a.fusion.windows;
+  auto fcol = [&](const char* name, auto get) { o << ",\"" << name << "\":["; for (size_t i = 0; i < w.size(); i++) o << (i ? "," : "") << num(get(w[i])); o << "]"; };
+  o << ",\"series_cincha\":{\"imu\":["; for (size_t i = 0; i < w.size(); i++) o << (i ? "," : "") << (int)w[i].imu_id; o << "]";
+  fcol("t", [](const FusedWindow& x) { return x.t_gnss; });
+  fcol("sigma_t", [](const FusedWindow& x) { return x.sigma_t; });
+  fcol("cadencia_hz", [](const FusedWindow& x) { return x.cadence_hz; });
+  fcol("sigma_cadencia_hz", [](const FusedWindow& x) { return x.cadence_sigma; });
+  fcol("longitud_tranco_m", [](const FusedWindow& x) { return x.stride_length_m; });
+  fcol("cv_intervalos", [](const FusedWindow& x) { return x.interval_cv; });
+  fcol("cv_amplitud", [](const FusedWindow& x) { return x.amplitude_cv; });
+  fcol("correlacion_ciclos", [](const FusedWindow& x) { return x.cycle_corr; });
+  fcol("estabilidad_espectral", [](const FusedWindow& x) { return x.spectral_stability; });
+  fcol("velocidad", [](const FusedWindow& x) { return x.speed; });
+  o << ",\"estado\":["; for (size_t i = 0; i < w.size(); i++) o << (i ? "," : "") << "\"" << w[i].status << "\""; o << "]}";
+}
+
 std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, bool series) {
   std::ostringstream o;
-  o << "{\"formato\":\"avo-equine-analysis\",\"version_formato\":1,\"motor\":\"" << a.engine_version << "\",\"procesado_utc\":\"" << esc(a.processed_at_utc)
+  o << "{\"formato\":\"avo-equine-analysis\",\"version_formato\":2,\"motor\":\"" << a.engine_version << "\",\"procesado_utc\":\"" << esc(a.processed_at_utc)
     << "\",\"sesion\":{\"id\":\"" << esc(s.session_id) << "\",\"caballo\":\"" << esc(s.horse) << "\",\"jinete\":\"" << esc(s.rider)
     << "\",\"fw_pecho\":\"" << esc(s.chest_fw) << "\",\"fw_espalda\":\"" << esc(s.back_fw) << "\",\"segmentos\":" << s.segments
     << ",\"epocas_gnss\":" << s.gnss.size() << ",\"muestras_imu\":" << s.imu.size() << ",\"marcas\":" << s.markers.size() << "}";
@@ -158,10 +363,10 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
     << ",\"tiempo_hasta_fix_s\":" << num(a.gnss.rtk.time_to_first_fix_s) << ",\"perdidas_fix\":" << a.gnss.rtk.fix_losses
     << ",\"interrupcion_max_s\":" << num(a.gnss.rtk.longest_outage_s) << ",\"interrupcion_media_s\":" << num(a.gnss.rtk.mean_outage_s)
     << ",\"edad_correccion_max_s\":" << num(a.gnss.rtk.corr_age_max_s) << ",\"hacc_mediana_fix_m\":" << num(a.gnss.rtk.hacc_median_fixed_m) << "}";
-  o << ",\"aires\":{\"algoritmo\":\"" << esc(a.gait.algorithm) << "\",\"version\":\"" << a.gait.version << "\",\"segmentos\":[";
+  o << ",\"aires\":{\"clasificador\":\"" << a.gait.classifier << "\",\"algoritmo\":\"" << esc(a.gait.algorithm) << "\",\"version\":\"" << a.gait.version << "\",\"segmentos\":[";
   for (size_t i = 0; i < a.gait.segments.size(); i++) {
     auto& g = a.gait.segments[i];
-    o << (i ? "," : "") << "{\"aire\":\"" << gait_name(g.gait) << "\",\"t0\":" << num(g.t0) << ",\"t1\":" << num(g.t1) << ",\"calidad\":\"" << quality_name(g.quality) << "\",\"base\":\"" << esc(g.basis) << "\"}";
+    o << (i ? "," : "") << "{\"aire\":\"" << gait_name(g.gait) << "\",\"codigo\":\"" << gait_code(g.gait) << "\",\"t0\":" << num(g.t0) << ",\"t1\":" << num(g.t1) << ",\"calidad\":\"" << quality_name(g.quality) << "\",\"base\":\"" << esc(g.basis) << "\"}";
   }
   o << "]},\"anomalias\":[";
   for (size_t i = 0; i < a.anomalies.size(); i++) {
@@ -179,15 +384,8 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
     o << "]}";
   }
   o << "]";
-  if (series) {
-    o << ",\"series\":{\"t\":[";
-    for (size_t i = 0; i < a.gnss.t.size(); i++) o << (i ? "," : "") << num(a.gnss.t[i]);
-    o << "],\"velocidad\":[";
-    for (size_t i = 0; i < a.gnss.speed.size(); i++) o << (i ? "," : "") << num(a.gnss.speed[i]);
-    o << "],\"aceleracion\":[";
-    for (size_t i = 0; i < a.gnss.accel.size(); i++) o << (i ? "," : "") << num(a.gnss.accel[i]);
-    o << "]}";
-  }
+  write_v2_blocks(o, a, s);
+  if (series) write_series(o, a, c);
   o << "}";
   return o.str();
 }
