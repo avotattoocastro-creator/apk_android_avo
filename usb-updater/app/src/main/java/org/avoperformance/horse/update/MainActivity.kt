@@ -179,24 +179,9 @@ class MainActivity : Activity() {
                                     .firstOrNull { it.direction == 0 && it.type == 2 } ?: error("Sin OUT")
                                 val input = (0 until intf.endpointCount).map { intf.getEndpoint(it) }
                                     .firstOrNull { it.direction == 128 && it.type == 2 } ?: error("Sin IN")
-                                fun exchange(opcode: Int, payload: ByteArray): RomProtocol.Reply? {
-                                    val bytes = RomProtocol.command(opcode, payload)
-                                    check(connection.bulkTransfer(output, bytes, bytes.size, 1500) == bytes.size) { "Envío incompleto" }
-                                    val collected = ArrayList<Byte>()
-                                    repeat(5) {
-                                        val buf = ByteArray(256)
-                                        val n = connection.bulkTransfer(input, buf, buf.size, 350)
-                                        if (n > 0) {
-                                            collected.addAll(buf.take(n))
-                                            val reply = RomProtocol.decodeFrames(collected.toByteArray())
-                                                .mapNotNull(RomProtocol::parseReply).firstOrNull { it.opcode == opcode }
-                                            if (reply != null) return reply
-                                        }
-                                    }
-                                    return null
-                                }
+                                val transport = RomTransport(connection, output, input)
                                 val syncPayload = byteArrayOf(7, 7, 0x12, 0x20) + ByteArray(32) { 0x55.toByte() }
-                                val sync = exchange(0x08, syncPayload)
+                                val sync = runCatching { transport.request(0x08, syncPayload) }.getOrNull()
                                 if (sync == null || sync.payload.size < 2 ||
                                     sync.payload.takeLast(2).any { it.toInt() != 0 }) {
                                     "Sin SYNC ROM válido. Escritura bloqueada."
@@ -204,12 +189,7 @@ class MainActivity : Activity() {
                                     // ESP32-S3 UART ROM date register, read-only (esptool chip detection).
                                     val addr = 0x60000078
                                     val p = ByteArray(4) { i -> (addr ushr (8 * i)).toByte() }
-                                    var reply: RomProtocol.Reply? = null
-                                    for (attempt in 1..3) {
-                                        reply = exchange(0x0A, p)
-                                        if (reply != null) break
-                                        Thread.sleep(120)
-                                    }
+                                    val reply = runCatching { transport.request(0x0A, p) }.getOrNull()
                                     if (reply == null) "SYNC válido. READ_REG sin respuesta tras 3 intentos. Escritura bloqueada."
                                     else "SYNC válido. Registro ROM 0x60000078 = 0x%08X.\\nIdentidad provisional; particiones y protecciones NO verificadas. Escritura bloqueada.".format(reply.value)
                                 }
