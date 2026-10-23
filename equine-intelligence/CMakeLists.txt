@@ -15,6 +15,10 @@ endif()
 
 # The RAW session format is read with the same avo_core code that the chest uses to write it.
 set(AVO_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../firmware/back/V3_8_0/lib/avo_core/src CACHE PATH "avo_core sources")
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES _CRT_SECURE_NO_WARNINGS)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/compat/msvc)
+endif()
 file(GLOB AVO_CORE_SRC ${AVO_CORE_DIR}/*.cpp)
 
 file(GLOB_RECURSE EQ_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
