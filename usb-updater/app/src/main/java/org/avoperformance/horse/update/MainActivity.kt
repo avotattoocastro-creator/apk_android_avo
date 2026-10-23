@@ -40,7 +40,7 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.5"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.6"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
@@ -48,6 +48,7 @@ class MainActivity : Activity() {
         val inspect = Button(this).apply { text = "Diagnosticar interfaces USB" }
         val probe = Button(this).apply { text = "Probar interfaz CDC (sin escritura)" }
         val rom = Button(this).apply { text = "Diagnóstico ROM (solo lectura)" }
+        val identity = Button(this).apply { text = "Identificar chip ROM (solo lectura)" }
         val firmware = Button(this).apply { text = "Seleccionar firmware .bin (solo análisis)" }
         val selfUpdate = Button(this).apply { text = "Actualizar esta aplicación desde APK" }
         scan.setOnClickListener { status.text = deviceReport() }
@@ -160,9 +161,63 @@ class MainActivity : Activity() {
                 }
             }
         }
+        identity.setOnClickListener {
+            val target = espDevice()
+            if (target == null || !usb.hasPermission(target)) {
+                status.text = "Conecta y autoriza primero el ESP32-S3."
+            } else {
+                status.text = "Leyendo registro ROM del chip..."
+                Thread {
+                    val result = try {
+                        val connection = usb.openDevice(target) ?: error("No se pudo abrir USB")
+                        try {
+                            val intf = (0 until target.interfaceCount).map { target.getInterface(it) }
+                                .firstOrNull { it.interfaceClass == 10 && it.endpointCount >= 2 } ?: error("Sin CDC")
+                            check(connection.claimInterface(intf, true)) { "No se pudo reclamar CDC" }
+                            try {
+                                val output = (0 until intf.endpointCount).map { intf.getEndpoint(it) }
+                                    .firstOrNull { it.direction == 0 && it.type == 2 } ?: error("Sin OUT")
+                                val input = (0 until intf.endpointCount).map { intf.getEndpoint(it) }
+                                    .firstOrNull { it.direction == 128 && it.type == 2 } ?: error("Sin IN")
+                                fun exchange(opcode: Int, payload: ByteArray): RomProtocol.Reply? {
+                                    val bytes = RomProtocol.command(opcode, payload)
+                                    check(connection.bulkTransfer(output, bytes, bytes.size, 1500) == bytes.size) { "Envío incompleto" }
+                                    val collected = ArrayList<Byte>()
+                                    repeat(5) {
+                                        val buf = ByteArray(256)
+                                        val n = connection.bulkTransfer(input, buf, buf.size, 350)
+                                        if (n > 0) {
+                                            collected.addAll(buf.take(n))
+                                            val reply = RomProtocol.decodeFrames(collected.toByteArray())
+                                                .mapNotNull(RomProtocol::parseReply).firstOrNull { it.opcode == opcode }
+                                            if (reply != null) return reply
+                                        }
+                                    }
+                                    return null
+                                }
+                                val syncPayload = byteArrayOf(7, 7, 0x12, 0x20) + ByteArray(32) { 0x55.toByte() }
+                                val sync = exchange(0x08, syncPayload)
+                                if (sync == null || sync.payload.size < 2 ||
+                                    sync.payload.takeLast(2).any { it.toInt() != 0 }) {
+                                    "Sin SYNC ROM válido. Escritura bloqueada."
+                                } else {
+                                    // ESP32-S3 UART ROM date register, read-only (esptool chip detection).
+                                    val addr = 0x60000078
+                                    val p = ByteArray(4) { i -> (addr ushr (8 * i)).toByte() }
+                                    val reply = exchange(0x0A, p)
+                                    if (reply == null) "SYNC válido. READ_REG sin respuesta. Escritura bloqueada."
+                                    else "SYNC válido. Registro ROM 0x60000078 = 0x%08X.\\nIdentidad provisional; particiones y protecciones NO verificadas. Escritura bloqueada.".format(reply.value)
+                                }
+                            } finally { connection.releaseInterface(intf) }
+                        } finally { connection.close() }
+                    } catch (e: Exception) { "Diagnóstico ROM: ${e.message}" }
+                    runOnUiThread { status.text = result.replace("\\\\n", "\\n") }
+                }.start()
+            }
+        }
         firmware.setOnClickListener { choose("application/octet-stream", selectFirmware) }
         selfUpdate.setOnClickListener { choose("application/vnd.android.package-archive", selectUpdate) }
-        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(rom); root.addView(status)
+        root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(rom); root.addView(identity); root.addView(status)
         root.addView(firmware); root.addView(firmwareStatus); root.addView(selfUpdate)
         root.addView(TextView(this).apply {
             text = "\nSEGURIDAD: escritura USB deshabilitada hasta verificar el bootloader y las particiones del reloj. La instalación de APK exige la misma firma que la versión instalada."
