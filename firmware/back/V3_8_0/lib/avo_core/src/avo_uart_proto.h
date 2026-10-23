@@ -81,6 +81,7 @@ struct DecoderStats {
   uint32_t out_of_order = 0;
   uint32_t seq_lost = 0;      // frames missing according to seq gaps
   uint32_t unknown_version = 0;
+  uint32_t stalls = 0;         // V4: forced 1-byte discard when a full buffer made no progress (must stay 0)
 };
 
 // Per-sender sequence tracker (duplicate + gap detection with a 64-entry window).

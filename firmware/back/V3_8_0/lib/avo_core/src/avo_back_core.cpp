@@ -65,6 +65,7 @@ void BackCore::on_radio(const uint8_t mac[6], const uint8_t* d, size_t n, int8_t
     dec_ = UartDecoder(on_chest_frame, this);
     have_off_ = false;
     caps_sent_ = false;
+    cmds_.clear();                     // the rebooted chest numbers its commands again
   }
   dec_.feed(body, h.body_len);
 }
@@ -79,22 +80,23 @@ void BackCore::chest_frame(const FrameView& f) {
     case FrameType::COMMAND: {
       Command c;
       if (!decode_command(f.payload, f.len, &c)) break;
-      bool done = false;
-      for (uint8_t i = 0; i < done_n_; i++) if (done_cmd_[i] == c.cmd_id) done = true;
-      bool ok = true;
-      if (!done) {
-        switch ((BackCmd)c.cmd) {
-          case BackCmd::REQ_CAPS: caps_sent_ = false; break;
-          case BackCmd::REQ_STATUS: last_status_ = 0; break;
-          case BackCmd::SET_GNSS_RATE: if (c.arg_len >= 1 && c.args[0] >= 1 && c.args[0] <= 25) zed_.set_nav_rate(c.args[0], p_->now_ms()); else ok = false; break;
-          case BackCmd::REBOOT: break;
-          default: ok = false; break;   // girth commands: no girth on this back
-        }
-        done_cmd_[done_n_ % 8] = c.cmd_id;
-        if (done_n_ < 8) done_n_++;
+      uint8_t prev = 0;
+      if (cmds_.find(c.cmd_id, &prev)) {               // repeat: same answer, no second execution
+        st_.cmd_duplicates++;
+        send_ack(f.type, f, c.cmd_id, prev, prev != 0);
+        break;
       }
+      bool ok = true;
+      switch ((BackCmd)c.cmd) {
+        case BackCmd::REQ_CAPS: caps_sent_ = false; break;
+        case BackCmd::REQ_STATUS: last_status_ = 0; break;
+        case BackCmd::SET_GNSS_RATE: if (c.arg_len >= 1 && c.args[0] >= 1 && c.args[0] <= 25) zed_.set_nav_rate(c.args[0], p_->now_ms()); else ok = false; break;
+        case BackCmd::REBOOT: break;
+        default: ok = false; break;   // girth commands: no girth on this back
+      }
+      cmds_.add(c.cmd_id, ok ? 0 : 1);
       send_ack(f.type, f, c.cmd_id, ok ? 0 : 1, !ok);
-      if (!done && ok && (BackCmd)c.cmd == BackCmd::REBOOT) { flush(); p_->reboot(); }
+      if (ok && (BackCmd)c.cmd == BackCmd::REBOOT) { flush(); p_->reboot(); }
       break;
     }
     case FrameType::CAPS:
