@@ -45,10 +45,8 @@ internal object PartitionTable {
         }
         require(terminated && entries.isNotEmpty()) { "Tabla sin terminador" }
         require(entries.count { it.isOtaApp } >= 2) { "No hay dos slots OTA" }
-        require(entries.any { it.type == 1 && it.subtype == 0x00 }) { "Falta NVS" }
-        require(entries.any { it.type == 1 && it.subtype == 0x00 || it.type == 1 && it.subtype == 0x01 }) { "Faltan datos" }
-        require(entries.any { it.type == 1 && it.subtype == 0x00 } &&
-                entries.any { it.type == 1 && it.subtype == 0x00 || it.subtype == 0x00 }) { "Datos incompletos" }
+        require(entries.any { it.type == 1 && it.subtype == 0x02 }) { "Falta NVS" }
+        require(entries.any { it.type == 1 && it.subtype == 0x00 }) { "Falta otadata" }
         return Result(entries, md5)
     }
 }
