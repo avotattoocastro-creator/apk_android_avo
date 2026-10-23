@@ -1,60 +1,12 @@
 #include "avo_eq/engine.h"
 #include "avo_eq/dsp.h"
+#include "avo_eq/session_sync.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <sstream>
 
 namespace avoeq {
-
-// ------------------------------------------------------------------ synchronisation of the session
-static void sync_session(const Session& s, Analysis& a, const SyncConfig& c) {
-  // chest reception (s) vs GNSS acquisition time (s): NAV-PVT reaches the chest with variable latency
-  std::vector<double> gx, cy;
-  std::vector<double> tg = gnss_time_s(s.gnss);
-  for (size_t i = 0; i < s.gnss.size(); i++) {
-    if (a.validation.gnss_flags[i] & (GF_DUPLICATE | GF_TIME_BACKWARDS)) continue;
-    gx.push_back(tg[i]); cy.push_back(s.gnss[i].chest_us * 1e-6);
-  }
-  ClockMap g2c = fit_clock(gx, cy, c);           // gnss -> chest
-  // invert each piece: chest -> gnss
-  for (auto p : g2c.pieces) {
-    ClockPiece q;
-    q.slope = 1.0 / p.slope; q.offset = -p.offset / p.slope;
-    q.x0 = p.offset + p.slope * p.x0; q.x1 = p.offset + p.slope * p.x1;
-    q.envelope_sd_s = p.envelope_sd_s; q.latency_median_s = p.latency_median_s; q.latency_p95_s = p.latency_p95_s;
-    q.drift_ppm = (q.slope - 1) * 1e6; q.pairs = p.pairs; q.envelope_pairs = p.envelope_pairs;
-    a.chest_to_gnss.pieces.push_back(q);
-  }
-  // girth acquisition (s) -> chest reception (s): one pair per batch (its last sample is the newest)
-  for (int id = 0; id < 3; id++) {
-    std::vector<double> x, y;
-    uint32_t last_batch = UINT32_MAX;
-    for (size_t i = 0; i < s.imu.size(); i++) {
-      const ImuSample& m = s.imu[i];
-      if (m.imu_id != id || (a.validation.imu_flags[i] & IF_DUPLICATE)) continue;
-      bool last_of_batch = (i + 1 >= s.imu.size()) || s.imu[i + 1].batch_seq != m.batch_seq || s.imu[i + 1].imu_id != m.imu_id;
-      if (!last_of_batch || m.batch_seq == last_batch) continue;
-      last_batch = m.batch_seq;
-      x.push_back(m.girth_us * 1e-6); y.push_back(m.chest_us * 1e-6);
-    }
-    ClockMap g2ch = fit_clock(x, y, c);
-    // compose girth -> chest -> gnss (piecewise, using the chest->gnss piece at the start of each girth piece)
-    for (auto p : g2ch.pieces) {
-      double ch0 = p.offset + p.slope * p.x0, gn0;
-      double sd2 = 0;
-      if (!a.chest_to_gnss.map(ch0, &gn0, &sd2)) continue;
-      const ClockPiece* cg = nullptr;
-      for (auto& q : a.chest_to_gnss.pieces) if (ch0 >= q.x0 - 1 && ch0 <= q.x1 + 1) cg = &q;
-      if (!cg) continue;
-      ClockPiece r = p;
-      r.slope = cg->slope * p.slope; r.offset = cg->offset + cg->slope * p.offset;
-      r.drift_ppm = (r.slope - 1) * 1e6;
-      r.envelope_sd_s = std::sqrt(p.envelope_sd_s * p.envelope_sd_s + cg->envelope_sd_s * cg->envelope_sd_s);
-      a.girth_to_gnss[id].pieces.push_back(r);
-    }
-  }
-}
 
 // ------------------------------------------------------------------ anomalies (exploratory)
 static void find_anomalies(Analysis& a) {
@@ -152,7 +104,7 @@ Analysis analyse(const Session& s, const EngineConfig& c, const std::string& whe
   a.engine_version = ENGINE_VERSION; a.processed_at_utc = when; a.session_id = s.session_id;
   a.validation = validate(s, c.validation);
   a.gnss = analyse_gnss(s, a.validation, c.gnss);
-  sync_session(s, a, c.sync);
+  build_session_maps(s, a.validation, c.sync, -1, &a.chest_to_gnss, a.girth_to_gnss);
   a.imu = build_imu_series(s, a.validation);
   for (auto& ser : a.imu) a.cadence.push_back(analyse_cadence(ser, c.cadence));
   const CadenceResult* cad = nullptr; const ClockMap* map = nullptr;

@@ -165,6 +165,39 @@ static void spectral_features(const std::vector<double>& w, const std::vector<do
   if (et > 0) for (int i = 0; i < 3; i++) cw->axis_energy[i] = e[i] / et;
 }
 
+void analyse_cadence_window(const std::vector<double>& w, const std::vector<double>* axes[3], double fs, const CadenceConfig& c, CadenceWindow* cw) {
+  dsp::Fundamental f = dsp::fundamental(w, fs, c.f_min, c.f_max, c.min_strength);
+  if (f.freq_hz <= 0) {
+    cw->status = CadenceStatus::WEAK_PERIODICITY;
+    spectral_features(w, axes, fs, 0, c, cw);
+    return;
+  }
+  cw->candidate_hz = f.freq_hz; cw->period_s = f.period_s; cw->strength = f.strength; cw->subharmonic = f.subharmonic_chosen;
+  std::vector<double> iv;
+  window_regularity(w, fs, f.period_s, cw, &iv);
+  std::vector<double> ac = dsp::autocorr(dsp::detrend_mean(w), (size_t)(f.period_s * fs) + 2);
+  size_t full = (size_t)std::lround(f.period_s * fs), half = (size_t)std::lround(f.period_s * fs / 2);
+  if (full < ac.size() && ac[full] > 0.05 && half > 0) cw->half_cycle_ratio = std::max(-1.0, std::min(1.0, ac[half] / ac[full]));
+  spectral_features(w, axes, fs, f.freq_hz, c, cw);
+  // ---- uncertainty: dispersion of the cycle durations (σ of their mean) + lag resolution
+  double sig = -1;
+  if (iv.size() >= 2) {
+    double T = dsp::mean(iv);
+    cw->interval_freq_hz = T > 0 ? 1.0 / T : 0;
+    double sT = dsp::stddev(iv) / std::sqrt((double)iv.size());
+    double s_int = sT / (T * T);
+    double s_res = f.freq_hz * f.freq_hz * (0.25 / fs);   // ±¼ sample on the lag after parabolic refinement
+    sig = std::sqrt(s_int * s_int + s_res * s_res);
+  }
+  cw->uncertainty_hz = sig;
+  if (sig < 0) cw->status = CadenceStatus::INSUFFICIENT_DATA;
+  else if (cw->interval_freq_hz > 0 && std::fabs(cw->interval_freq_hz - f.freq_hz) > std::max(3 * sig, c.max_disagreement * f.freq_hz)) cw->status = CadenceStatus::AMBIGUOUS;
+  else if (!f.subharmonic_chosen && cw->subharmonic_snr > 5) cw->status = CadenceStatus::AMBIGUOUS;   // cycle could be 2/f0
+  else if (sig > c.max_rel_uncertainty * f.freq_hz) cw->status = CadenceStatus::UNCERTAIN;
+  else cw->status = CadenceStatus::VALID;
+  if (cw->status == CadenceStatus::VALID) { cw->freq_hz = f.freq_hz; cw->cpm = f.freq_hz * 60; }
+}
+
 CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c) {
   CadenceResult r; r.imu_id = s.imu_id; r.fs = s.fs;
   if (s.fs <= 0) return r;
@@ -218,37 +251,7 @@ CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c) {
         float m = std::max(std::fabs(p.ax[k]), std::max(std::fabs(p.ay[k]), std::fabs(p.az[k])));
         if (m >= 32760.f) cw.saturated++;
       }
-      dsp::Fundamental f = dsp::fundamental(w, s.fs, c.f_min, c.f_max, c.min_strength);
-      if (f.freq_hz <= 0) {
-        cw.status = CadenceStatus::WEAK_PERIODICITY;
-        spectral_features(w, axes, s.fs, 0, c, &cw);
-        r.windows.push_back(cw);
-        continue;
-      }
-      cw.candidate_hz = f.freq_hz; cw.period_s = f.period_s; cw.strength = f.strength; cw.subharmonic = f.subharmonic_chosen;
-      std::vector<double> iv;
-      window_regularity(w, s.fs, f.period_s, &cw, &iv);
-      std::vector<double> ac = dsp::autocorr(dsp::detrend_mean(w), (size_t)(f.period_s * s.fs) + 2);
-      size_t full = (size_t)std::lround(f.period_s * s.fs), half = (size_t)std::lround(f.period_s * s.fs / 2);
-      if (full < ac.size() && ac[full] > 0.05 && half > 0) cw.half_cycle_ratio = std::max(-1.0, std::min(1.0, ac[half] / ac[full]));
-      spectral_features(w, axes, s.fs, f.freq_hz, c, &cw);
-      // ---- uncertainty: dispersion of the cycle durations (σ of their mean) + lag resolution
-      double sig = -1;
-      if (iv.size() >= 2) {
-        double T = dsp::mean(iv);
-        cw.interval_freq_hz = T > 0 ? 1.0 / T : 0;
-        double sT = dsp::stddev(iv) / std::sqrt((double)iv.size());
-        double s_int = sT / (T * T);
-        double s_res = f.freq_hz * f.freq_hz * (0.25 / s.fs);   // ±¼ sample on the lag after parabolic refinement
-        sig = std::sqrt(s_int * s_int + s_res * s_res);
-      }
-      cw.uncertainty_hz = sig;
-      if (sig < 0) cw.status = CadenceStatus::INSUFFICIENT_DATA;
-      else if (cw.interval_freq_hz > 0 && std::fabs(cw.interval_freq_hz - f.freq_hz) > std::max(3 * sig, c.max_disagreement * f.freq_hz)) cw.status = CadenceStatus::AMBIGUOUS;
-      else if (!f.subharmonic_chosen && cw.subharmonic_snr > 5) cw.status = CadenceStatus::AMBIGUOUS;   // cycle could be 2/f0
-      else if (sig > c.max_rel_uncertainty * f.freq_hz) cw.status = CadenceStatus::UNCERTAIN;
-      else cw.status = CadenceStatus::VALID;
-      if (cw.status == CadenceStatus::VALID) { cw.freq_hz = f.freq_hz; cw.cpm = f.freq_hz * 60; }
+      analyse_cadence_window(w, axes, s.fs, c, &cw);
       r.windows.push_back(cw);
     }
   }

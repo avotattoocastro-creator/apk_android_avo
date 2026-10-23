@@ -80,6 +80,8 @@ struct CadenceResult {
   std::vector<Metric> metrics;
 };
 CadenceResult analyse_cadence(const ImuSeries& s, const CadenceConfig& c = CadenceConfig());
+// One window, already band-passed (|a| and the three axes). Used by the offline loop and the real-time analysis.
+void analyse_cadence_window(const std::vector<double>& w, const std::vector<double>* axes[3], double fs, const CadenceConfig& c, CadenceWindow* cw);
 
 // ---- gait
 enum class Gait : uint8_t { STOPPED = 0, WALK = 1, TROT = 2, CANTER_GALLOP = 3, TRANSITION = 4, UNKNOWN = 5, INSUFFICIENT_DATA = 6 };

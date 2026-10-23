@@ -30,6 +30,7 @@ struct RtkStats {
 struct GnssResult {
   std::vector<double> t;              // s from first epoch (GNSS time)
   std::vector<double> speed;          // m/s (receiver gSpeed), NaN where unusable
+  std::vector<double> speed_sigma;    // m/s receiver sAcc (1-sigma estimate)
   std::vector<double> accel;          // m/s² longitudinal (slope of speed), NaN where not computable
   std::vector<double> accel_sigma;    // m/s² 1-sigma propagated from sAcc
   std::vector<double> heading_rate;   // deg/s (from the velocity vector), NaN at low speed

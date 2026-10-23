@@ -57,7 +57,7 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   const auto& g = s.gnss;
   size_t n = g.size();
   r.t = gnss_time_s(g);
-  r.speed.assign(n, NaN); r.accel.assign(n, NaN); r.accel_sigma.assign(n, NaN);
+  r.speed.assign(n, NaN); r.speed_sigma.assign(n, NaN); r.accel.assign(n, NaN); r.accel_sigma.assign(n, NaN);
   r.heading_rate.assign(n, NaN); r.heading_rate_sigma.assign(n, NaN); r.radius.assign(n, NaN);
   r.curvature.assign(n, NaN); r.curvature_sigma.assign(n, NaN); r.lat_accel.assign(n, NaN); r.lat_accel_sigma.assign(n, NaN);
   r.x_e.assign(n, NaN); r.y_n.assign(n, NaN); r.lat.assign(n, NaN); r.lon.assign(n, NaN); r.usable.assign(n, 0); r.dist.assign(n, 0); r.quality.assign(n, (uint8_t)Quality::UNUSABLE);
@@ -77,7 +77,7 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     }
     r.quality[i] = (uint8_t)q;
     sp[i] = g[i].gspeed_ms; sps[i] = g[i].sacc_ms; vn[i] = g[i].veln_ms; ve[i] = g[i].vele_ms;
-    if (ok[i]) { r.speed[i] = sp[i]; r.usable[i] = 1; r.lat[i] = g[i].lat_deg; r.lon[i] = g[i].lon_deg; }
+    if (ok[i]) { r.speed[i] = sp[i]; r.speed_sigma[i] = sps[i]; r.usable[i] = 1; r.lat[i] = g[i].lat_deg; r.lon[i] = g[i].lon_deg; }
   }
   // local tangent plane (equirectangular around the first usable epoch: < 1 mm error over a few km)
   {
