@@ -34,7 +34,8 @@ internal object FirmwareImage {
         val magic = captured == header.size && (header[0].toInt() and 255) == 0xE9
         val segments = if (magic) header[1].toInt() and 255 else 0
         val chipId = if (magic) (header[12].toInt() and 255) or ((header[13].toInt() and 255) shl 8) else null
-        val structural = if (magic && segments in 1..16 && chipId == 9 && total > 24)\n            runCatching { ImageSegments.validate(complete.toByteArray()) } else null
+        val structural = if (magic && segments in 1..16 && chipId == 9 && total > 24)
+            runCatching { ImageSegments.validate(complete.toByteArray()) } else null
         val valid = structural?.isSuccess == true
         val reason = when {
             !magic -> "Cabecera ESP inválida"
