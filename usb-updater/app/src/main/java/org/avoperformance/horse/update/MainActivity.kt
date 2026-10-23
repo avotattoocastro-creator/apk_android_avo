@@ -14,7 +14,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import java.security.MessageDigest
 
 /** Safe USB diagnostic. No flash writes. */
 class MainActivity : Activity() {
@@ -40,7 +39,7 @@ class MainActivity : Activity() {
         else @Suppress("DEPRECATION") registerReceiver(permissionReceiver, filter)
 
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(32, 48, 32, 24) }
-        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.6"; textSize = 23f }
+        val title = TextView(this).apply { text = "AVO PERFORMANCE HORSE UPDATE\nUSB Recovery · V1.7"; textSize = 23f }
         status = TextView(this).apply { textSize = 15f }
         firmwareStatus = TextView(this).apply { text = "Firmware: ninguno seleccionado" }
         val scan = Button(this).apply { text = "Detectar dispositivos USB" }
@@ -50,6 +49,7 @@ class MainActivity : Activity() {
         val rom = Button(this).apply { text = "Diagnóstico ROM (solo lectura)" }
         val identity = Button(this).apply { text = "Identificar chip ROM (solo lectura)" }
         val firmware = Button(this).apply { text = "Seleccionar firmware .bin (solo análisis)" }
+        val install = Button(this).apply { text = "INSTALAR FIRMWARE POR USB (PENDIENTE DE VALIDACIÓN)"; isEnabled = false }
         val selfUpdate = Button(this).apply { text = "Actualizar esta aplicación desde APK" }
         scan.setOnClickListener { status.text = deviceReport() }
         authorize.setOnClickListener {
@@ -218,7 +218,7 @@ class MainActivity : Activity() {
         firmware.setOnClickListener { choose("application/octet-stream", selectFirmware) }
         selfUpdate.setOnClickListener { choose("application/vnd.android.package-archive", selectUpdate) }
         root.addView(title); root.addView(scan); root.addView(authorize); root.addView(inspect); root.addView(probe); root.addView(rom); root.addView(identity); root.addView(status)
-        root.addView(firmware); root.addView(firmwareStatus); root.addView(selfUpdate)
+        root.addView(firmware); root.addView(firmwareStatus); root.addView(install); root.addView(selfUpdate)
         root.addView(TextView(this).apply {
             text = "\nSEGURIDAD: escritura USB deshabilitada hasta verificar el bootloader y las particiones del reloj. La instalación de APK exige la misma firma que la versión instalada."
         })
@@ -247,18 +247,9 @@ class MainActivity : Activity() {
         val uri = data?.data ?: return
         if (requestCode == selectFirmware) {
             try {
-                val digest = MessageDigest.getInstance("SHA-256")
-                var length = 0L
-                contentResolver.openInputStream(uri)?.use { input ->
-                    val buf = ByteArray(8192)
-                    while (true) {
-                        val count = input.read(buf)
-                        if (count < 0) break
-                        digest.update(buf, 0, count)
-                        length += count
-                    }
-                } ?: error("No se pudo abrir el archivo")
-                firmwareStatus.text = "Archivo: ${uri.lastPathSegment}\nTamaño: $length bytes\nSHA-256: ${digest.digest().joinToString("") { "%02x".format(it) }}\nNO se ha grabado."
+                val report = contentResolver.openInputStream(uri)?.let(FirmwareImage::inspect)
+                    ?: error("No se pudo abrir el archivo")
+                firmwareStatus.text = "Archivo: ${uri.lastPathSegment}\\nTamaño: ${report.bytes} bytes\\nSHA-256: ${report.sha256}\\n${report.reason}\\nINSTALACIÓN USB BLOQUEADA: particiones y protecciones no verificadas."
             } catch (e: Exception) { firmwareStatus.text = "Error: ${e.message}" }
         } else if (requestCode == selectUpdate) {
             try {
