@@ -3,48 +3,51 @@ package org.avoperformance.horse.update
 import java.io.InputStream
 import java.security.MessageDigest
 
-/** Strict, read-only ESP image preflight. Not a flash writer. */
+/** Reads a selected .bin and validates it completely. Never writes anything. */
 internal object FirmwareImage {
-    data class Result(val bytes: Long, val sha256: String, val validHeader: Boolean, val chipId: Int?, val reason: String)
+    const val MAX_BYTES = FlashCommands.MAX_FLASH
+
+    data class Result(
+        val bytes: Long,
+        val sha256: String,
+        val validHeader: Boolean,
+        val chipId: Int?,
+        val reason: String,
+        val info: AppImage.Info? = null,
+        val image: ByteArray? = null
+    )
 
     fun inspect(input: InputStream): Result {
         val digest = MessageDigest.getInstance("SHA-256")
-        val header = ByteArray(24)
         val complete = java.io.ByteArrayOutputStream()
-        var total = 0L
-        var captured = 0
         val buffer = ByteArray(8192)
+        var total = 0L
         input.use { stream ->
             while (true) {
                 val n = stream.read(buffer)
                 if (n < 0) break
                 if (n == 0) continue
+                total += n
+                require(total <= MAX_BYTES) { "BIN mayor de 16 MB: no es una imagen de aplicación" }
                 digest.update(buffer, 0, n)
                 complete.write(buffer, 0, n)
-                if (captured < header.size) {
-                    val take = minOf(n, header.size - captured)
-                    System.arraycopy(buffer, 0, header, captured, take)
-                    captured += take
-                }
-                total += n
-                require(total <= 0x600000L) { "BIN mayor de 6 MB: no cabe en los slots históricos" }
             }
         }
-        val sha = digest.digest().joinToString("") { "%02x".format(it) }
-        val magic = captured == header.size && (header[0].toInt() and 255) == 0xE9
-        val segments = if (magic) header[1].toInt() and 255 else 0
-        val chipId = if (magic) (header[12].toInt() and 255) or ((header[13].toInt() and 255) shl 8) else null
-        val structural = if (magic && segments in 1..16 && chipId == 9 && total > 24)
-            runCatching { ImageSegments.validate(complete.toByteArray()) } else null
-        val valid = structural?.isSuccess == true
-        val reason = when {
-            !magic -> "Cabecera ESP inválida"
-            segments !in 1..16 -> "Número de segmentos inválido"
-            chipId != 9 -> "Imagen no identificada como ESP32-S3 (chipId=$chipId)"
-            total <= 24 -> "Imagen incompleta"
-            structural?.isFailure == true -> "Imagen corrupta: ${structural.exceptionOrNull()?.message}"
-            else -> "${structural?.getOrNull()}; faltan verificación de firma, flash y OTA"
+        val sha = hex(digest.digest())
+        val bytes = complete.toByteArray()
+        val chipId = if (bytes.size >= 14 && (bytes[0].toInt() and 255) == AppImage.MAGIC) u16le(bytes, 12) else null
+        return try {
+            val info = AppImage.parse(bytes)
+            if (bytes.size >= 0x8000 && looksLikeMergedFlashImage(bytes))
+                Result(total, sha, false, chipId, "Parece una imagen completa de flash (bootloader en 0x0). Solo se admiten imágenes de aplicación.")
+            else Result(total, sha, true, chipId, "Imagen de aplicación ESP32-S3 válida: ${info.segments.size} segmentos, checksum" +
+                (if (info.hashAppended) " y SHA-256 adjunto correctos" else " correcto (sin SHA-256 adjunto)"), info, bytes)
+        } catch (e: UpdateException) {
+            Result(total, sha, false, chipId, e.message ?: "Imagen inválida")
         }
-        return Result(total, sha, valid, chipId, reason)
     }
+
+    /** A bootloader image has an ESP header at 0x0 and a partition table (AA 50) at 0x8000. */
+    private fun looksLikeMergedFlashImage(b: ByteArray): Boolean =
+        (b[0x8000].toInt() and 255) == 0xAA && (b[0x8001].toInt() and 255) == 0x50
 }
