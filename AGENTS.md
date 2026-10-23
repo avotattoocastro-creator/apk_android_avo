@@ -30,3 +30,6 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente.
 | `usb-updater/` | App Android independiente para programar el reloj por USB | `build-usb-updater.yml` |
 | `avo-signer/` | Firma de paquetes OTA | `build-avo-signer.yml` |
 | `firmware/chest/V3_*` | Firmware del reloj de pecho por versiones (ZIP base + parches) | `build-chest-v*.yml` |
+
+## Estado actual
+Antes de trabajar, leer `docs/TRASPASO_ASISTENTES_2026-10-23.md` (versiones, carpetas de código fuente y zips de app 2.0, AVO Update 2.1.0 y espalda 3.8.0).
