@@ -26,16 +26,12 @@ jobs:
           g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o back_test
           ./back_test
 
-      - name: Install arduino-cli and ESP32 core
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Install ESP32 core 3.3.12 (same as the installed back firmware, ESP-IDF 5.5.5)
         run: |
-          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=$HOME/bin sh
-          echo "$HOME/bin" >> "$GITHUB_PATH"
-          export PATH="$HOME/bin:$PATH"
-          arduino-cli config init --overwrite
-          arduino-cli config add board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
-          arduino-cli core update-index
-          arduino-cli core install esp32:esp32@3.3.2 || arduino-cli core install esp32:esp32
-          arduino-cli core list
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
 
       - name: Build firmware
         run: ./build_back.sh "$GITHUB_WORKSPACE/out"
