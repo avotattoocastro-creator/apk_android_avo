@@ -33,8 +33,10 @@ class UiFb {
   void clear(uint16_t c) { fillRect(0, 0, W, H, c); }
   void fillRect(int x, int y, int w, int h, uint16_t c);
   void fillRoundRect(int x, int y, int w, int h, int r, uint16_t c);   // anti-aliased corners
-  void fillCircle(float cx, float cy, float r, uint16_t c);           // anti-aliased
-  void ring(float cx, float cy, float r_out, float r_in, float deg_from, float deg_to, uint16_t c);
+  void fillCircle(float cx, float cy, float r, uint16_t c, uint8_t alpha = 255);  // anti-aliased
+  void ring(float cx, float cy, float r_out, float r_in, float deg_from, float deg_to, uint16_t c, uint8_t alpha = 255);
+  // Arc with rounded ends (charging ring).
+  void arc(float cx, float cy, float r_out, float r_in, float deg_from, float deg_to, uint16_t c, uint8_t alpha = 255);
   void icon(const UiIcon& ic, int x, int y, uint16_t c);
   void iconCentered(const UiIcon& ic, int cx, int cy, uint16_t c) { icon(ic, cx - ic.w / 2, cy - ic.h / 2, c); }
 

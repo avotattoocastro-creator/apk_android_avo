@@ -59,7 +59,14 @@ void draw_rec_dot(UiFb& fb, const Model& m, bool on);
 
 void draw_ota_progress(UiFb& fb, uint32_t pct, const char* percent_text);
 void draw_ota_notice(UiFb& fb, bool ok, const char* line1, const char* line2);
-void draw_shutdown(UiFb& fb);
-void draw_charging(UiFb& fb, int pct);
+// Controlled shutdown with REAL phases (AppSnapshot::power.shutdown_phase):
+// 1 stopping session, 2 closing SD files, 3 saving black box, 4 power off.
+void draw_shutdown(UiFb& fb, uint8_t phase);
+// SD files could not be closed: firmware cancelled the power-off.
+void draw_shutdown_failed(UiFb& fb);
+// USB charging screen: ring + battery + percentage from the PMIC (no guessed values).
+void draw_charging(UiFb& fb, const BatteryModel& b);
+// "CARGANDO USB" / "CARGA COMPLETA" / "USB CONECTADO"; second part is drawn in green.
+void charge_label(const BatteryModel& b, const char** white, const char** green);
 
 }  // namespace dash

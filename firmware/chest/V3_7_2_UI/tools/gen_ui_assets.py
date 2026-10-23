@@ -21,12 +21,14 @@ DIGITS = " 0123456789%-.:/"
 
 FONTS = [
     # name, file, pixel size, charset
+    ("F_HEAD", "BarlowCondensed-Bold.ttf", 46, TEXT),
     ("F_TITLE", "BarlowCondensed-Bold.ttf", 31, TEXT),
     ("F_STATE", "BarlowCondensed-SemiBold.ttf", 25, TEXT),
     ("F_SMALL", "BarlowCondensed-SemiBold.ttf", 21, TEXT),
     ("F_TINY", "BarlowCondensed-SemiBold.ttf", 17, TEXT),
     ("F_BIG", "BarlowCondensed-Bold.ttf", 54, DIGITS),
     ("F_HUGE", "BarlowCondensed-Bold.ttf", 96, DIGITS),
+    ("F_GIANT", "BarlowCondensed-Bold.ttf", 120, DIGITS),
 ]
 
 SOLID = "Font Awesome 7 Free-Solid-900.otf"
@@ -45,6 +47,9 @@ ICONS = [
     ("I_BOLT", SOLID, 0xF0E7, 40),
     ("I_CHECK", SOLID, 0xF00C, 17),
     ("I_XMARK", SOLID, 0xF00D, 17),
+    ("I_POWER", SOLID, 0xF011, 52),
+    ("I_BOLT_S", SOLID, 0xF0E7, 34),
+    ("I_WARN", SOLID, 0xF071, 52),
 ]
 
 

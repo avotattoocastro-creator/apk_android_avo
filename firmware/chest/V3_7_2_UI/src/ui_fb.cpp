@@ -70,18 +70,30 @@ void UiFb::fillRoundRect(int x, int y, int w, int h, int r, uint16_t c) {
   markDirty(x, y, w, h);
 }
 
-void UiFb::fillCircle(float cx, float cy, float r, uint16_t c) {
+void UiFb::fillCircle(float cx, float cy, float r, uint16_t c, uint8_t alpha) {
   const int x0 = (int)floorf(cx - r - 1), x1 = (int)ceilf(cx + r + 1);
   const int y0 = (int)floorf(cy - r - 1), y1 = (int)ceilf(cy + r + 1);
   for (int y = y0; y <= y1; ++y)
     for (int x = x0; x <= x1; ++x) {
       const float dx = x + 0.5f - cx, dy = y + 0.5f - cy;
-      blend(x, y, c, coverage(sqrtf(dx * dx + dy * dy), r));
+      blend(x, y, c, (uint8_t)(coverage(sqrtf(dx * dx + dy * dy), r) * alpha / 255));
     }
   markDirty(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 }
 
-void UiFb::ring(float cx, float cy, float ro, float ri, float a0, float a1, uint16_t c) {
+void UiFb::arc(float cx, float cy, float ro, float ri, float a0, float a1, uint16_t c, uint8_t alpha) {
+  if (a1 <= a0) return;
+  ring(cx, cy, ro, ri, a0, a1, c, alpha);
+  if (a1 - a0 >= 360.0f) return;
+  const float rm = (ro + ri) / 2, rc = (ro - ri) / 2;
+  const float ends[2] = {a0, a1};
+  for (float a : ends) {
+    const float rad = a * 0.0174532925f;
+    fillCircle(cx + rm * sinf(rad), cy - rm * cosf(rad), rc, c, alpha);
+  }
+}
+
+void UiFb::ring(float cx, float cy, float ro, float ri, float a0, float a1, uint16_t c, uint8_t alpha) {
   // Angles in degrees, 0 = 12 o'clock, clockwise.
   if (a1 <= a0) return;
   const int x0 = (int)floorf(cx - ro - 1), x1 = (int)ceilf(cx + ro + 1);
@@ -99,7 +111,7 @@ void UiFb::ring(float cx, float cy, float ro, float ri, float a0, float a1, uint
       }
       const uint8_t outer = coverage(d, ro);
       const uint8_t inner = 255 - coverage(d, ri);
-      blend(x, y, c, outer < inner ? outer : inner);
+      blend(x, y, c, (uint8_t)((outer < inner ? outer : inner) * alpha / 255));
     }
   markDirty(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
 }

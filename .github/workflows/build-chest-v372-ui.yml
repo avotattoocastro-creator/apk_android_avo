@@ -20,6 +20,7 @@ jobs:
           D="$RUNNER_TEMP/avo-372"
           mkdir -p "$D"
           unzip -q firmware/chest/V3_7_0_RC2/AVO_CHEST_V3_7_0_RC2_UI_CORRECTED_UNVERIFIED.zip -d "$D"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_2_UI/tools/apply_v372.py")
           cp firmware/chest/V3_7_2_UI/src/* "$D/AVO_CHEST_V3_5_0/src/"
           cp firmware/chest/V3_7_2_UI/tests_test_ui_v372.py "$D/tests/test_ui_v372.py"
           cd "$D"

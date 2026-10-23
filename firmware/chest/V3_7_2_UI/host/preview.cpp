@@ -88,7 +88,8 @@ int main(int argc, char** argv) {
   std::vector<Scene> scenes = {
     {"1_todo_correcto", 0, all_ok()}, {"2_sin_conexiones", 0, nothing()}, {"3_mixto", 0, mixed()},
     {"4_ota_63", 1, AppSnapshot()}, {"5_ota_verificada", 2, AppSnapshot()},
-    {"6_apagando", 3, AppSnapshot()}, {"7_carga_64", 4, AppSnapshot()}};
+    {"6_apagando", 3, AppSnapshot()}, {"7_carga_85", 4, AppSnapshot()},
+    {"8_apagado_fallido", 5, AppSnapshot()}, {"9_carga_completa", 6, AppSnapshot()}};
 
   for (auto& sc : scenes) {
     HostPanel panel;
@@ -98,8 +99,10 @@ int main(int argc, char** argv) {
       case 0: ui_model::build(sc.snap, NOW, &m); dash::draw_dashboard(fb, m); break;
       case 1: dash::draw_ota_progress(fb, 63, "63%"); break;
       case 2: dash::draw_ota_notice(fb, true, "OTA VERIFICADA", "ESPERA REINICIO"); break;
-      case 3: dash::draw_shutdown(fb); break;
-      case 4: dash::draw_charging(fb, 64); break;
+      case 3: dash::draw_shutdown(fb, 2); break;
+      case 4: { dash::BatteryModel b; b.pct = 85; b.charging = true; b.vbus = true; dash::draw_charging(fb, b); break; }
+      case 5: dash::draw_shutdown_failed(fb); break;
+      case 6: { dash::BatteryModel b; b.pct = 100; b.charging = false; b.vbus = true; dash::draw_charging(fb, b); break; }
     }
     const uint32_t sent = fb.flush(panel);
     CHECK(panel.odd == 0, "pushes must be even-aligned for the CO5300");

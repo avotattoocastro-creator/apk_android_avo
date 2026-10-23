@@ -15,9 +15,26 @@ ordenador (simulación del panel), pero falta verlo en el Waveshare ESP32-S3 Tou
 - `ui_fb`: framebuffer RGB565 de 410×502 en **PSRAM** (402 KB de 8 MB), primitivas suavizadas, texto UTF-8, envío con giro de 180° y alineación par.
 - `ui_dash`: diseño de las siete franjas y de las pantallas OTA, apagado y carga.
 - `ui_model`: traduce el estado real (`AppSnapshot`) a cada franja según `V3_5_9/UI_7_FRANJAS_ESPECIFICACION.md`. Los datos caducados nunca se muestran como OK.
-- `ui_assets.h`: fuentes e iconos generados (`tools/gen_ui_assets.py`), **78 KB en flash, 0 B de RAM**.
+- `ui_assets.h`: fuentes e iconos generados (`tools/gen_ui_assets.py`), **148 KB en flash, 0 B de RAM**.
 - RAM interna nueva: solo un búfer de envío de 13 KB. **LVGL no se usa.**
 - Solo se envían al panel las franjas que cambian. Con la SD grabando, **solo parpadea el punto rojo** (500 ms), sin redibujar la franja amarilla.
+
+## Pantalla de carga (USB)
+Aparece al conectar USB salvo que se esté grabando (entonces se ven las franjas). Un **toque corto** alterna
+30 s con las franjas. Anillo con extremos redondeados y halo, icono de batería con nivel real y rayo
+cuando el cargador carga, porcentaje grande y «CARGANDO USB» / «CARGA COMPLETA» / «USB CONECTADO»
+(cargador inactivo). Todo sale del PMIC AXP2101; nada se estima. El brillo con USB sigue limitado a 25 como en 3.7.1.
+
+## Pantalla de apagado seguro
+Al mantener POWER: icono, «APAGANDO...», «Guardando entrenamiento» y una barra de **cuatro fases reales**
+publicadas por `controlled_shutdown()`: 1 detener sesión, 2 cerrar archivos SD, 3 guardar caja negra, 4 apagar.
+Si la SD no se puede cerrar, el firmware ya cancelaba el apagado; ahora además se muestra
+«NO SE PUDO GUARDAR — El reloj sigue encendido» durante 6 s.
+
+## Cambios fuera de la pantalla (mínimos)
+`tools/apply_v372.py`: dos campos en `PowerState` y seis líneas en `controlled_shutdown()` que publican la fase,
+más 300 ms antes de cortar la alimentación para que se vea la última fase. **No se modifica** BLE, ESP-NOW,
+UART, NTRIP/RTCM, GNSS, OTA ni el almacenamiento; el orden del apagado es el mismo.
 
 ## Colores (estados reales)
 BLUETOOTH, CHALECO, ESPALDA y CINCHA: verde OK / rojo fallo. GPS: rojo sin GNSS, azul GNSS autónomo,

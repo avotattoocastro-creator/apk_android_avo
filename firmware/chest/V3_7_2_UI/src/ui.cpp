@@ -115,15 +115,22 @@ static bool usb_was_connected = false;
 static bool display_before_usb = true;
 static bool display_preference_during_usb = true;
 static bool charging_forced_screen = false;
-// Full-screen charging ring (kept from 3.7.1-rc2, which shows the dashboard while on USB).
-[[maybe_unused]] static void render_charging(const AppSnapshot& s, uint32_t now) {
+// USB charging screen (spec V3.5.9: separate mode while USB is connected). Shown unless a
+// session is recording; a short tap shows the seven cards for 30 s.
+static uint32_t tap_dashboard_until = 0;
+static void render_charging(const AppSnapshot& s, uint32_t now) {
   static int last_charge_pct = -999;
+  static uint8_t last_charge_state = 0xFF;
   const int current_pct = s.power.pmu.batt_pct;
-  if (charge_screen && current_pct == last_charge_pct &&
+  ui_model::build(s, now, &model);
+  const uint8_t state = (uint8_t)(model.batt.charging | (model.batt.vbus << 1));
+  if (charge_screen && current_pct == last_charge_pct && state == last_charge_state &&
       (uint32_t)(now - charge_last_draw) < 10000) return;
   last_charge_pct = current_pct;
+  last_charge_state = state;
   charge_last_draw = now;
-  dash::draw_charging(fb, current_pct);
+  charge_screen = true;
+  dash::draw_charging(fb, model.batt);
   fb.flush(panel);
 }
 static bool pair_latched = false;
@@ -159,7 +166,13 @@ static void task(void*) {
           appstate::update([](AppSnapshot& a) { a.sys.dev_mode = developer_mode; });
           Serial.printf("[AVO LITE] developer flag=%d (configuration via Android)\n", developer_mode);
         }
-      } else { touch_start_ms = 0; dev_latched = false; }
+      } else {
+        // Short tap (< 0.8 s) on USB: toggle between charging screen and the seven cards.
+        if (touch_start_ms && now - touch_start_ms < 800 && !pair_latched && usb_was_connected) {
+          tap_dashboard_until = (tap_dashboard_until && (int32_t)(tap_dashboard_until - now) > 0) ? 0 : now + 30000;
+        }
+        touch_start_ms = 0; dev_latched = false;
+      }
     }
     if (now - last_update >= 250) {
       last_update = now;
@@ -200,7 +213,10 @@ static void task(void*) {
       }
       if (display_on) {
         const bool ota_notice = snap->ble.ota_display_status>=2 && snap->ble.ota_display_since_ms && (uint32_t)(now-snap->ble.ota_display_since_ms)<6000;
-        const bool special_now = snap->ble.ota_active || ota_notice || snap->power.shutdown_requested;
+        // Shutdown cancelled because the SD files could not be closed: say so for 6 s.
+        const bool shutdown_failed = !snap->power.shutdown_requested && snap->power.shutdown_phase == 5 &&
+          snap->power.shutdown_fail_ms && (uint32_t)(now - snap->power.shutdown_fail_ms) < 6000;
+        const bool special_now = snap->ble.ota_active || ota_notice || snap->power.shutdown_requested || shutdown_failed;
         if(special_screen && !special_now) {
           for(auto &v:old_state)v=UINT32_MAX;
           invalidate_cards();
@@ -242,16 +258,33 @@ static void task(void*) {
           for(auto &v:old_state)v=UINT32_MAX;
           invalidate_cards();
         } else if (snap->power.shutdown_requested) {
-          // AVO_UI_SAFE_SHUTDOWN_V361: one redraw per shutdown edge.
-          if (!shutdown_drawn) {
+          // AVO_UI_SAFE_SHUTDOWN_V361: one redraw per REAL shutdown phase (controller.cpp).
+          static uint8_t drawn_phase = 0;
+          if (!shutdown_drawn || drawn_phase != snap->power.shutdown_phase) {
             shutdown_drawn=true;
-            dash::draw_shutdown(fb);
+            drawn_phase = snap->power.shutdown_phase;
+            dash::draw_shutdown(fb, drawn_phase);
             fb.flush(panel);
           }
+        } else if (shutdown_failed) {
+          static uint32_t failed_drawn_ms = 0;
+          if (failed_drawn_ms != snap->power.shutdown_fail_ms) {
+            failed_drawn_ms = snap->power.shutdown_fail_ms;
+            dash::draw_shutdown_failed(fb);
+            fb.flush(panel);
+          }
+          for(auto &v:old_state)v=UINT32_MAX;
+          invalidate_cards();
         } else {
-          if (charge_screen) { for (auto &p : old_state) p = UINT32_MAX; invalidate_cards(); }
-          charge_screen = false;
-          render(*snap,now);
+          const bool recording = snap->storage.rec==RecStatus::RECORDING || snap->storage.rec==RecStatus::TEMP_BUFFER;
+          const bool tap_cards = tap_dashboard_until && (int32_t)(tap_dashboard_until - now) > 0;
+          if (charging_usb && !recording && !tap_cards) {
+            render_charging(*snap, now);
+          } else {
+            if (charge_screen) { for (auto &p : old_state) p = UINT32_MAX; invalidate_cards(); }
+            charge_screen = false;
+            render(*snap,now);
+          }
         }
       }
     }

@@ -179,23 +179,72 @@ void draw_ota_notice(UiFb& fb, bool ok, const char* line1, const char* line2) {
   fb.textCenter(F_STATE, UiFb::W / 2, 280, line2, WHITE);
 }
 
-void draw_shutdown(UiFb& fb) {
+static constexpr uint16_t TEAL = rgb565(32, 211, 154);
+static constexpr uint16_t SOFT = rgb565(175, 180, 190);
+static constexpr uint16_t TRACK = rgb565(40, 44, 52);
+
+void draw_shutdown(UiFb& fb, uint8_t phase) {
+  static const char* const STEPS[4] = {"Deteniendo sesión", "Cerrando archivos SD", "Guardando caja negra", "Apagando"};
+  if (phase < 1) phase = 1;
+  if (phase > 4) phase = 4;
   fb.clear(INK);
-  fb.textCenter(F_TITLE, UiFb::W / 2, 230, "APAGANDO...", WHITE);
-  fb.textCenter(F_STATE, UiFb::W / 2, 280, "Guardando datos", rgb565(170, 170, 170));
+  fb.iconCentered(I_POWER, UiFb::W / 2, 140, SOFT);
+  fb.textCenter(F_HEAD, UiFb::W / 2, 238, "APAGANDO...", WHITE);
+  fb.textCenter(F_STATE, UiFb::W / 2, 284, "Guardando entrenamiento", SOFT);
+  // Four segments = four real steps; a segment fills when its step is reached.
+  const int x = 34, y = 318, w = UiFb::W - 68, h = 14, gap = 8;
+  const int sw = (w - 3 * gap) / 4;
+  for (int i = 0; i < 4; ++i)
+    fb.fillRoundRect(x + i * (sw + gap), y, sw, h, 7, i < phase ? TEAL : TRACK);
+  char step[48];
+  snprintf(step, sizeof step, "%u/4  %s", (unsigned)phase, STEPS[phase - 1]);
+  fb.textCenter(F_SMALL, UiFb::W / 2, 370, step, SOFT);
 }
 
-void draw_charging(UiFb& fb, int pct) {
+void draw_shutdown_failed(UiFb& fb) {
   fb.clear(INK);
-  const float cx = UiFb::W / 2.0f, cy = 220.0f;
-  fb.ring(cx, cy, 150, 134, 0, 360, rgb565(60, 60, 60));
+  fb.iconCentered(I_WARN, UiFb::W / 2, 140, YELLOW);
+  fb.textCenter(F_HEAD, UiFb::W / 2, 238, "NO SE PUDO GUARDAR", YELLOW);
+  fb.textCenter(F_STATE, UiFb::W / 2, 284, "El reloj sigue encendido", WHITE);
+  fb.textCenter(F_SMALL, UiFb::W / 2, 330, "Revisa la tarjeta SD y vuelve a apagar", SOFT);
+}
+
+void charge_label(const BatteryModel& b, const char** white, const char** green) {
+  if (b.charging) { *white = "CARGANDO "; *green = "USB"; }
+  else if (b.vbus && b.pct == 100) { *white = "CARGA "; *green = "COMPLETA"; }
+  else { *white = "USB "; *green = "CONECTADO"; }
+}
+
+void draw_charging(UiFb& fb, const BatteryModel& b) {
+  fb.clear(INK);
+  const float cx = UiFb::W / 2.0f, cy = UiFb::H / 2.0f;
+  const float ro = 188, ri = 166;
+  fb.ring(cx, cy, ro, ri, 0, 360, TRACK);
+  const bool known = b.pct >= 0 && b.pct <= 100;
+  if (known && b.pct > 0) {
+    const float end = b.pct * 3.6f;
+    fb.arc(cx, cy, ro + 7, ri - 7, 0, end, GREEN, 40);   // soft glow
+    fb.arc(cx, cy, ro, ri, 0, end, GREEN);
+  }
+  // Battery icon: white outline, green fill proportional to the real level, bolt when charging.
+  const int bw = 118, bh = 58, bx = (int)cx - bw / 2 - 6, by = 118;
+  fb.fillRoundRect(bx, by, bw, bh, 12, WHITE);
+  fb.fillRoundRect(bx + 6, by + 6, bw - 12, bh - 12, 7, INK);
+  fb.fillRoundRect(bx + bw + 2, by + 17, 10, bh - 34, 4, WHITE);
+  if (known) {
+    const int fw = (bw - 20) * (b.pct < 8 ? 8 : b.pct) / 100;
+    fb.fillRoundRect(bx + 10, by + 10, fw, bh - 20, 5, b.pct <= 20 ? RED : GREEN);
+  }
+  if (b.charging) fb.iconCentered(I_BOLT_S, bx + bw / 2, by + bh / 2, WHITE);
   char value[8];
-  if (pct >= 0 && pct <= 100) {
-    fb.ring(cx, cy, 150, 134, 0, pct * 3.6f, GREEN);
-    snprintf(value, sizeof value, "%d%%", pct);
-  } else snprintf(value, sizeof value, "--%%");
-  fb.textCenter(F_HUGE, (int)cx, (int)cy + 34, value, WHITE);
-  fb.textCenter(F_TITLE, (int)cx, 430, pct == 100 ? "CARGA COMPLETA" : "CARGANDO...", WHITE);
+  if (known) snprintf(value, sizeof value, "%d%%", b.pct); else snprintf(value, sizeof value, "--%%");
+  fb.textCenter(F_GIANT, (int)cx, 310, value, WHITE);
+  const char *w, *g;
+  charge_label(b, &w, &g);
+  const int tw = UiFb::textWidth(F_TITLE, w) + UiFb::textWidth(F_TITLE, g);
+  const int x = (int)cx - tw / 2;
+  const int adv = fb.text(F_TITLE, x, 362, w, WHITE);
+  fb.text(F_TITLE, x + adv, 362, g, b.charging || b.pct == 100 ? GREEN : SOFT);
 }
 
 }  // namespace dash

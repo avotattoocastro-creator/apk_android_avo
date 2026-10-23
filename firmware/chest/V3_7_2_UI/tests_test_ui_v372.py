@@ -8,7 +8,7 @@ fb = (src / "ui_fb.cpp").read_text()
 assert "UI_ROTATE_180 = true" in ui, "180-degree software rotation must be on"
 assert "gfx->setRotation(0)" in ui, "controller orientation (and its 22 px column offset) unchanged"
 assert "MALLOC_CAP_SPIRAM" in ui and "UiFb::W * UiFb::H * 2" in ui, "framebuffer must live in PSRAM"
-assert "lvgl" not in (ui + dash + fb + model).lower(), "no LVGL"
+assert "lvgl.h" not in (ui + dash + fb + model).lower() and "lv_" not in (ui + dash + fb + model), "no LVGL"
 assert "const_cast<uint16_t*>" in ui, "fast (non-PROGMEM) bitmap path"
 assert "& ~1" in fb, "CO5300 even alignment in flush"
 for k in ("last_batch_ms[k], 3000", "fresh(s.link.last_rx_ms, 2000)", "fresh(s.gnss.rx_ms, 3000)", "s.rtcm.flowing"):
