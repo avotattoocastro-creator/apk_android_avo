@@ -7,8 +7,8 @@
 
 | Módulo | Versión fuente | Listo para probar | Validación pendiente |
 |---|---|---|---|
-| Android | V1.9 / versionCode 11 | APK debug de la rama Android original compilada | CI post-fusión, teléfono y reloj |
-| Mareas | V1.9 | UI y consulta de modelo | Parser oficial, datos actuales y comparación visual |
+| Android | **V2.0 / versionCode 12** | APK debug CI [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) | Prueba en teléfono y reloj |
+| Mareas | V2.0 | IHM oficial, coeficiente, sol/luna, Open-Meteo | Comparar con Tu Marea / tabla del puerto en el móvil |
 | Contexto marítimo de sesiones | V1.9 | Entidad y captura para sesiones recientes | Prueba real y sincronización servidor |
 | CHEST | V3.5.6 | Fuentes base y parches disponibles | Hardware, persistencia, firma |
 | CHEST OTA firmado | V3.5.7 propuesto | **No** | Receptor ES256, OTA_AUTH, anti-rollback, recuperación |

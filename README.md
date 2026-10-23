@@ -10,13 +10,13 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 
 | Componente | Versión en código | Estado comprobado |
 | --- | --- | --- |
-| App Android AVO Performance Horse | **1.9** (`versionCode=11`) | Compilación y pruebas CI correctas para el commit Android `3b05022b`; falta prueba integral en móvil |
-| Módulo de mareas | Incluido en Android 1.9 | Interfaz, modelo Open-Meteo y lector de tabla de Santander en código; extracción de datos oficiales actuales no validada |
-| Metadatos marítimos de entrenamientos | Android 1.9 | Persistencia y enriquecimiento de sesiones recientes incorporados; falta ensayo con sesión real |
+| App Android AVO Performance Horse | **2.0** (`versionCode=12`) | Rediseño, mareas IHM y análisis; CI correcto [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) (commit `049abc7`); **no verificado en móvil** |
+| Módulo de mareas | Android 2.0 | Predicción oficial del IHM, coeficiente, sol y luna, Open-Meteo; lectura real no verificada en móvil |
+| Metadatos marítimos de entrenamientos | Android 2.0 (IHM + Open-Meteo, cualquier fecha) | Persistencia y enriquecimiento de sesiones recientes incorporados; falta ensayo con sesión real |
 | Firmware CHEST Waveshare ESP32-S3 | **V3.5.6** (última fuente/parche integrada) | Fuentes V3.5.4 y parches V3.5.5/V3.5.6 disponibles; no se afirma prueba de firma en hardware |
 | Firmware CHEST V3.5.7 | **No integrado ni validado** | Pendiente de firmware receptor con validación ES256, control de versión y recuperación |
 | AVO Signer Android | **V0.1 prototipo** | Código y vectores de prueba ES256 integrados; no es firma de producción |
-| Verificador de paquetes OTA Android | Formato `avo-ota-manifest-v1`, ES256 | Código integrado, clave pública fijada; no equivale a autorización del reloj |
+| OTA desde la app Android | **Retirada en 2.0** | El firmware se instala con el programador USB |
 | Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
 | Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
 | Programador USB **1.8.0-beta2** (`usb-updater/`) | Instalación de `firmware.bin` por USB-C desde Android | CI correcto [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136); **no verificado con el reloj** |
