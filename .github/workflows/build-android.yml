@@ -1,4 +1,5 @@
 name: Build AVO Android APK
+# Rebuild requested for OTA_AUTH diagnostic UI fix e87697a (2026-10-23).
 
 on:
   workflow_dispatch:
