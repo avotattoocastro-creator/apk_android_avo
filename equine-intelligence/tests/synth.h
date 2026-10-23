@@ -151,4 +151,36 @@ inline std::vector<avoeq::ImuSample> imu_shape(double secs, double (*freq)(doubl
   }
   return out;
 }
+// Two beats per stride as Gaussian pulses on az (gravity axis): beat 1 amplitude A at phase 0, beat 2 amplitude B
+// at phase `frac` of the stride. Optional delay (s) of the whole signal and phase jitter (irregular movement).
+struct Beats { double f = 1.45, A = 900, B = 900, frac = 0.5, width = 0.06, delay_s = 0, jitter = 0, noise = 20; };
+inline std::vector<avoeq::ImuSample> imu_beats(double secs, const Beats& bt, const ImuSpec& sp, uint8_t id, unsigned seed = 9) {
+  std::mt19937 rng(seed); std::normal_distribution<double> nz(0, 1); std::exponential_distribution<double> lat(1.0 / sp.latency_mean_s);
+  std::vector<avoeq::ImuSample> out;
+  size_t n = (size_t)(secs * sp.fs);
+  std::vector<double> starts; double t = -1;
+  while (t < secs + 2) { starts.push_back(t); t += (1.0 / bt.f) * (1 + bt.jitter * nz(rng)); }
+  uint32_t bseq = 0;
+  for (size_t b0 = 0; b0 < n; b0 += sp.batch, bseq++) {
+    double t_last = (double)std::min(n - 1, b0 + sp.batch - 1) / sp.fs;
+    double rx = t_last + 1000.0 + 0.003 + lat(rng);
+    for (size_t i = b0; i < std::min(n, b0 + sp.batch); i++) {
+      double tt = i / sp.fs - bt.delay_s, v = 0;
+      for (size_t k = 0; k + 1 < starts.size(); k++) {
+        double T = starts[k + 1] - starts[k];
+        if (tt < starts[k] - 1 || tt > starts[k + 1] + 1) continue;
+        double d1 = tt - starts[k], d2 = tt - (starts[k] + bt.frac * T);
+        v += bt.A * std::exp(-0.5 * d1 * d1 / (bt.width * bt.width)) + bt.B * std::exp(-0.5 * d2 * d2 / (bt.width * bt.width));
+      }
+      avoeq::ImuSample s;
+      s.imu_id = id; s.batch_seq = bseq; s.index = (uint16_t)(i - b0);
+      s.girth_us = (int64_t)std::llround(((i / sp.fs + sp.offset_s) * (1 + sp.drift_ppm * 1e-6)) * 1e6);
+      s.chest_us = (uint64_t)std::llround(rx * 1e6);
+      s.az = (int16_t)std::lround(std::max(-32768.0, std::min(32767.0, 2048 + v + bt.noise * nz(rng))));
+      s.ax = (int16_t)std::lround(0.15 * v + bt.noise * nz(rng)); s.ay = (int16_t)std::lround(0.05 * v + bt.noise * nz(rng));
+      out.push_back(s);
+    }
+  }
+  return out;
+}
 }  // namespace synth
