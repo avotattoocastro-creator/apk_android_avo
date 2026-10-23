@@ -1,6 +1,7 @@
 #include "avo_eq/dsp.h"
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <numeric>
 
 namespace avoeq {
@@ -98,9 +99,9 @@ std::vector<double> autocorr(const std::vector<double>& x, size_t max_lag) {
   return r;
 }
 
-std::vector<double> power_spectrum(const std::vector<double>& x, double fs, double* df) {
+std::vector<double> power_spectrum(const std::vector<double>& x, double fs, double* df, size_t min_nfft) {
   size_t n = x.size();
-  size_t m = next_pow2(std::max<size_t>(n, 2));
+  size_t m = next_pow2(std::max<size_t>(std::max<size_t>(n, 2), min_nfft));
   std::vector<std::complex<double>> a(m);
   for (size_t i = 0; i < n; i++) {
     double w = 0.5 - 0.5 * std::cos(2 * PI * (double)i / (double)(n > 1 ? n - 1 : 1));
@@ -111,6 +112,44 @@ std::vector<double> power_spectrum(const std::vector<double>& x, double fs, doub
   for (size_t k = 0; k < p.size(); k++) p[k] = std::norm(a[k]);
   if (df) *df = fs / (double)m;
   return p;
+}
+
+double band_power(const std::vector<double>& p, double df, double f_lo, double f_hi) {
+  if (df <= 0 || p.empty()) return 0;
+  long k0 = (long)std::ceil(std::max(0.0, f_lo) / df), k1 = (long)std::floor(f_hi / df);
+  double s = 0;
+  for (long k = std::max(0L, k0); k <= k1 && k < (long)p.size(); k++) s += p[(size_t)k];
+  return s;
+}
+
+double dtw(const std::vector<double>& a, const std::vector<double>& b, double band_frac, std::vector<std::pair<size_t, size_t>>* path) {
+  size_t n = a.size(), m = b.size();
+  const double INF = std::numeric_limits<double>::infinity();
+  if (!n || !m) return INF;
+  size_t band = std::max<size_t>((size_t)std::ceil(band_frac * (double)std::max(n, m)), n > m ? n - m : m - n);
+  std::vector<double> D((n + 1) * (m + 1), INF);
+  auto at = [&](size_t i, size_t j) -> double& { return D[i * (m + 1) + j]; };
+  at(0, 0) = 0;
+  for (size_t i = 1; i <= n; i++) {
+    double ci = (double)i * (double)m / (double)n;
+    size_t jlo = (size_t)std::max(1.0, ci - (double)band), jhi = (size_t)std::min((double)m, ci + (double)band);
+    for (size_t j = jlo; j <= jhi; j++) {
+      double best = std::min(at(i - 1, j - 1), std::min(at(i - 1, j), at(i, j - 1)));
+      at(i, j) = std::fabs(a[i - 1] - b[j - 1]) + best;
+    }
+  }
+  double total = at(n, m);
+  if (path && std::isfinite(total)) {
+    path->clear();
+    size_t i = n, j = m;
+    while (i > 0 && j > 0) {
+      path->push_back({i - 1, j - 1});
+      double d = at(i - 1, j - 1), u = at(i - 1, j), l = at(i, j - 1);
+      if (d <= u && d <= l) { i--; j--; } else if (u <= l) i--; else j--;
+    }
+    std::reverse(path->begin(), path->end());
+  }
+  return total;
 }
 
 std::vector<size_t> find_peaks(const std::vector<double>& x, double min_height, size_t min_dist) {

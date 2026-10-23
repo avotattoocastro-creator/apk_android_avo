@@ -33,7 +33,15 @@ struct GnssResult {
   std::vector<double> accel;          // m/s² longitudinal (slope of speed), NaN where not computable
   std::vector<double> accel_sigma;    // m/s² 1-sigma propagated from sAcc
   std::vector<double> heading_rate;   // deg/s (from the velocity vector), NaN at low speed
+  std::vector<double> heading_rate_sigma;  // deg/s 1-sigma (propagated from the slopes of vN, vE)
   std::vector<double> radius;         // m, NaN at low speed / straight
+  std::vector<double> curvature;      // 1/m signed (+ right turn), NaN at low speed
+  std::vector<double> curvature_sigma;// 1/m 1-sigma (propagates speed and turn-rate uncertainty)
+  std::vector<double> lat_accel;      // m/s² ESTIMATED lateral acceleration of the trajectory = v·ω (+ right)
+  std::vector<double> lat_accel_sigma;// m/s² 1-sigma
+  std::vector<double> x_e, y_n;       // local east / north (m) from the first usable epoch (NaN when unusable)
+  std::vector<double> lat, lon;       // receiver position, deg (copied, NaN when unusable)
+  std::vector<uint8_t> usable;        // 1 = epoch passed the hard validation checks
   std::vector<double> dist;           // cumulative m (haversine between usable epochs)
   std::vector<uint8_t> quality;       // Quality per epoch
   std::vector<Metric> metrics;

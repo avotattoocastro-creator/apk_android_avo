@@ -8,7 +8,7 @@
 
 namespace avoeq {
 
-static const char* const ENGINE_VERSION = "1.0.0-dev1";
+static const char* const ENGINE_VERSION = "1.1.0-dev1";
 
 // ------------------------------------------------------------------ original data
 struct GnssEpoch {

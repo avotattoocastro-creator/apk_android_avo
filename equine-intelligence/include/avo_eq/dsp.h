@@ -31,7 +31,13 @@ size_t next_pow2(size_t n);
 std::vector<double> autocorr(const std::vector<double>& x, size_t max_lag);
 
 // One-sided power spectrum with a Hann window. Returns power per bin; df = fs / nfft.
-std::vector<double> power_spectrum(const std::vector<double>& x, double fs, double* df);
+std::vector<double> power_spectrum(const std::vector<double>& x, double fs, double* df, size_t min_nfft = 0);
+// Sum of spectrum power within [f - half_bw, f + half_bw].
+double band_power(const std::vector<double>& p, double df, double f_lo, double f_hi);
+
+// Dynamic time warping distance between two sequences with a Sakoe-Chiba band (fraction of the length).
+// path receives the aligned index pairs (optional). Cost = |a-b|. Returns +inf when the band is too narrow.
+double dtw(const std::vector<double>& a, const std::vector<double>& b, double band_frac, std::vector<std::pair<size_t, size_t>>* path = nullptr);
 
 // Local maxima above a threshold, separated by at least min_dist samples (highest kept).
 std::vector<size_t> find_peaks(const std::vector<double>& x, double min_height, size_t min_dist);

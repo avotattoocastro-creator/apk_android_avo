@@ -7,7 +7,7 @@
 namespace avoeq {
 
 static const double NaN = std::numeric_limits<double>::quiet_NaN();
-static const char* ALG_VER = "1.0.0";
+static const char* ALG_VER = "1.1.0";
 
 double corr_age_code_s(uint8_t code) {
   static const double up[] = {-1, 1, 2, 5, 10, 15, 20, 30, 45, 60, 90, 120, 1e9};
@@ -58,7 +58,9 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   size_t n = g.size();
   r.t = gnss_time_s(g);
   r.speed.assign(n, NaN); r.accel.assign(n, NaN); r.accel_sigma.assign(n, NaN);
-  r.heading_rate.assign(n, NaN); r.radius.assign(n, NaN); r.dist.assign(n, 0); r.quality.assign(n, (uint8_t)Quality::UNUSABLE);
+  r.heading_rate.assign(n, NaN); r.heading_rate_sigma.assign(n, NaN); r.radius.assign(n, NaN);
+  r.curvature.assign(n, NaN); r.curvature_sigma.assign(n, NaN); r.lat_accel.assign(n, NaN); r.lat_accel_sigma.assign(n, NaN);
+  r.x_e.assign(n, NaN); r.y_n.assign(n, NaN); r.lat.assign(n, NaN); r.lon.assign(n, NaN); r.usable.assign(n, 0); r.dist.assign(n, 0); r.quality.assign(n, (uint8_t)Quality::UNUSABLE);
   if (n == 0) return r;
   const uint32_t HARD = GF_NO_FIX | GF_IMPOSSIBLE | GF_DUPLICATE | GF_TIME_BACKWARDS | GF_INVALID_LLH | GF_POS_JUMP;
   std::vector<bool> ok(n);
@@ -75,7 +77,20 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     }
     r.quality[i] = (uint8_t)q;
     sp[i] = g[i].gspeed_ms; sps[i] = g[i].sacc_ms; vn[i] = g[i].veln_ms; ve[i] = g[i].vele_ms;
-    if (ok[i]) r.speed[i] = sp[i];
+    if (ok[i]) { r.speed[i] = sp[i]; r.usable[i] = 1; r.lat[i] = g[i].lat_deg; r.lon[i] = g[i].lon_deg; }
+  }
+  // local tangent plane (equirectangular around the first usable epoch: < 1 mm error over a few km)
+  {
+    size_t i0 = n;
+    for (size_t i = 0; i < n; i++) if (ok[i]) { i0 = i; break; }
+    if (i0 < n) {
+      const double R = 6371008.8, d2r = 3.14159265358979323846 / 180.0;
+      double c0 = std::cos(g[i0].lat_deg * d2r);
+      for (size_t i = 0; i < n; i++) if (ok[i]) {
+        r.x_e[i] = (g[i].lon_deg - g[i0].lon_deg) * d2r * R * c0;
+        r.y_n[i] = (g[i].lat_deg - g[i0].lat_deg) * d2r * R;
+      }
+    }
   }
   // ---- acceleration and heading rate: local weighted slopes (no plain differences)
   for (size_t i = 0; i < n; i++) {
@@ -85,10 +100,18 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     if (sp[i] >= c.min_speed_heading_ms) {
       double an, sn, ae, se;
       if (local_slope(r.t, vn, sps, ok, i, c.deriv_half_window_s, &an, &sn) && local_slope(r.t, ve, sps, ok, i, c.deriv_half_window_s, &ae, &se)) {
-        double v2 = vn[i] * vn[i] + ve[i] * ve[i];
+        double v2 = vn[i] * vn[i] + ve[i] * ve[i], vv = std::sqrt(v2);
         double w = (vn[i] * ae - ve[i] * an) / v2;                // rad/s, positive = turning right (N→E)
+        // first-order propagation: dω/d(ae) = vn/v², dω/d(an) = -ve/v²
+        double sw = std::sqrt(vn[i] * vn[i] * se * se + ve[i] * ve[i] * sn * sn) / v2;
+        double sv = std::max(sps[i], 0.02);
         r.heading_rate[i] = w * 180.0 / 3.14159265358979323846;
-        double rad = std::sqrt(v2) / std::max(std::fabs(w), 1e-9);
+        r.heading_rate_sigma[i] = sw * 180.0 / 3.14159265358979323846;
+        r.curvature[i] = w / vv;
+        r.curvature_sigma[i] = std::sqrt((sw / vv) * (sw / vv) + (w * sv / v2) * (w * sv / v2));
+        r.lat_accel[i] = vv * w;
+        r.lat_accel_sigma[i] = std::sqrt((w * sv) * (w * sv) + (vv * sw) * (vv * sw));
+        double rad = vv / std::max(std::fabs(w), 1e-9);
         r.radius[i] = rad > c.straight_radius_m ? NaN : rad;
       }
     }
@@ -101,6 +124,9 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
     else if (r.t[i] > r.t[i - 1]) excluded_gap_s += r.t[i] - r.t[i - 1];
     r.dist[i] = d;
   }
+  // same rule as the app's previous Kotlin analyser (bridges over invalid epochs): kept for comparison only
+  double d_bridged = 0;
+  { size_t prev = n; for (size_t i = 0; i < n; i++) if (ok[i]) { if (prev < n) d_bridged += hav(g[prev].lat_deg, g[prev].lon_deg, g[i].lat_deg, g[i].lon_deg); prev = i; } }
   // speed integration as an independent distance estimate
   double d_int = 0;
   for (size_t i = 1; i < n; i++) if (ok[i] && ok[i - 1] && r.t[i] > r.t[i - 1] && r.t[i] - r.t[i - 1] < 1.0)
@@ -147,6 +173,11 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   if (rel > 0.05) m.warnings.push_back("la distancia por posiciones y por integración de velocidad difieren más de un 5 %");
   m.uncertainty = std::fabs(d - d_int);
   r.metrics.push_back(m);
+  {
+    Metric mb = metric("distancia_puenteada", "m", d_bridged, Quality::POOR, "haversine entre épocas válidas puenteando huecos (regla del analizador anterior de la app)");
+    mb.warnings.push_back("solo para comparar con versiones anteriores: incluye tramos sin medida");
+    r.metrics.push_back(mb);
+  }
   r.metrics.push_back(metric("duracion", "s", duration, Quality::GOOD, "tiempo GNSS (iTOW) primera-última época"));
   if (vmax >= 0) {
     Metric mv = metric("velocidad_maxima", "m/s", vmax, (Quality)r.quality[imax], "máximo de gSpeed del receptor en épocas utilizables");
