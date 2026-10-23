@@ -156,7 +156,6 @@ static void print_status() {
 // ------------------------------------------------------------------ setup / loop
 void setup() {
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
-  volatile char keep_id = AVO_BACK_IMAGE_ID[1]; (void)keep_id;   // keeps the AVO-BACK marker in the image
   Serial.begin(115200);
   delay(300);
   pinMode(VEXT_PIN, OUTPUT);
@@ -193,7 +192,9 @@ void setup() {
   core->begin(stored);
   char pm[18] = "-";
   if (stored.valid) now_mac_str(stored.mac, pm);
-  Serial.printf("\nAVO BACK %s — Heltec %s, ESP-NOW canal %u, pecho emparejado: %s\n", AVO_FW_VERSION, s_dev_id,
+  // the version is printed from the AVO-BACK marker itself, so the linker can never drop it
+  const char* volatile id = AVO_BACK_IMAGE_ID;
+  Serial.printf("\nAVO BACK %s — Heltec %s, ESP-NOW canal %u, pecho emparejado: %s\n", id + 1, s_dev_id,
                 (unsigned)NOW_CHANNEL_DEFAULT, stored.valid ? pm : "ninguno (se emparejará con el primer pecho que lo pida)");
   Serial.printf("ZED: RX=GPIO%d TX=GPIO%d, buscando baudios...\n", ZED_RX_PIN, ZED_TX_PIN);
 }
