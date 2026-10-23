@@ -2,7 +2,7 @@ package org.avoperformance.horse.update
 
 /**
  * Decoder for Espressif ROM serial bootloader SLIP replies.
- * Read-only protocol diagnostics. Does not issue flash commands.
+ * [command] is restricted to read-only diagnostics; flash commands go through [EspRom].
  */
 internal object RomProtocol {
     data class Reply(val opcode: Int, val payload: ByteArray, val value: Long)
@@ -60,6 +60,65 @@ internal object RomProtocol {
         return encoded.toByteArray()
     }
 
+    /** General ROM request (any opcode). Used by [EspRom]; diagnostics keep using [command]. */
+    fun encodeRequest(opcode: Int, payload: ByteArray, checksum: Int = 0): ByteArray {
+        require(opcode in 0..255 && payload.size <= 0xFFFF)
+        val packet = byteArrayOf(0, opcode.toByte(), (payload.size and 255).toByte(),
+            (payload.size ushr 8).toByte()) + le32(checksum.toLong() and 0xFFFF_FFFFL) + payload
+        return slipEncode(packet)
+    }
+
+    fun slipEncode(packet: ByteArray): ByteArray {
+        val out = java.io.ByteArrayOutputStream(packet.size + 16)
+        out.write(0xC0)
+        for (b in packet) {
+            when (b.toInt() and 255) {
+                0xC0 -> { out.write(0xDB); out.write(0xDC) }
+                0xDB -> { out.write(0xDB); out.write(0xDD) }
+                else -> out.write(b.toInt() and 255)
+            }
+        }
+        out.write(0xC0)
+        return out.toByteArray()
+    }
+
+    /**
+     * Incremental SLIP decoder: keeps partial frames between USB packets and
+     * discards any text printed outside frames (ROM boot banner, app logs).
+     */
+    class SlipStream {
+        private val current = java.io.ByteArrayOutputStream()
+        private var inFrame = false
+        private var escaped = false
+
+        fun feed(data: ByteArray, length: Int = data.size): List<ByteArray> {
+            val frames = mutableListOf<ByteArray>()
+            for (i in 0 until length) {
+                val n = data[i].toInt() and 255
+                if (n == 0xC0) {
+                    if (inFrame && current.size() > 0 && !escaped) frames.add(current.toByteArray())
+                    current.reset()
+                    inFrame = true
+                    escaped = false
+                } else if (inFrame) {
+                    if (escaped) {
+                        escaped = false
+                        when (n) {
+                            0xDC -> current.write(0xC0)
+                            0xDD -> current.write(0xDB)
+                            else -> { current.reset(); inFrame = false } // corrupt escape: resync
+                        }
+                    } else if (n == 0xDB) escaped = true
+                    else current.write(n)
+                    if (current.size() > 0x10000) { current.reset(); inFrame = false }
+                }
+            }
+            return frames
+        }
+
+        fun reset() { current.reset(); inFrame = false; escaped = false }
+    }
+
     fun syncReport(raw: ByteArray): String {
         val frames = decodeFrames(raw)
         val replies = frames.mapNotNull(::parseReply)
@@ -67,7 +126,8 @@ internal object RomProtocol {
         return when {
             sync == null -> "SYNC ROM NO VALIDADO. Tramas completas: ${frames.size}. Respuestas válidas: ${replies.size}."
             sync.payload.size < 2 -> "SYNC ROM recibido, estado insuficiente. Escritura bloqueada."
-            sync.payload[sync.payload.size - 2].toInt() != 0 || sync.payload.last().toInt() != 0 ->
+            // esptool: the status byte is the first byte after the response data (none for SYNC).
+            sync.payload[0].toInt() != 0 ->
                 "SYNC ROM respondió con estado no satisfactorio. Escritura bloqueada."
             else -> "SYNC ROM VALIDADO (respuesta opcode 0x08, estado 00 00). Identidad y particiones aún sin verificar. Escritura bloqueada."
         }
