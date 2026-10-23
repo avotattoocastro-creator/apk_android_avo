@@ -15,6 +15,8 @@
 | AVO Signer | V0.1 | Código y vector de firma | Respaldo/recuperación de clave y pruebas Android reales |
 | ESPALDA | Sin versión integrada | **No** | Importar fuentes y validar GNSS/ESP-NOW |
 | CINCHA | Sin versión integrada | **No** | Importar fuentes y validar tres IMU |
+| CHEST pantalla (23/10/2026) | V3.7.2-rc1 | Binario de CI [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870) | Orientación, legibilidad, memoria y estabilidad BLE/espalda en el reloj |
+| Programador USB (23/10/2026) | 1.8.0-beta2 / versionCode 11 | APK debug de CI [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136) | «LEER RELOJ», instalación y recuperación con el reloj real |
 
 ## OTA: contrato que falta implementar en receptor
 
@@ -30,6 +32,7 @@ El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. E
 4. No mezclar en una sola afirmación código incorporado, CI correcto y validación física: son estados distintos.
 5. Conservar las ramas históricas como respaldo hasta validar una versión conjunta.
 6. Actualizar README y este documento al introducir una nueva versión o cambiar el contrato OTA.
+7. **Registrar cada cambio en `docs/REGISTRO_DE_CAMBIOS.md`** (añadido el 23/10/2026 a petición del usuario para centralizar el trabajo de Claude y ChatGPT en GitHub). Reglas para asistentes en `AGENTS.md`.
 
 ## Evidencias verificables y niveles de validación (22/10/2026)
 
@@ -49,6 +52,8 @@ El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. E
 | CHEST V3.5.7 y `OTA_AUTH` | **No** | **No** | **No** |
 | AVO Signer V0.1 | Sí | CI de rama Signer previa a fusión; no de rama unificada | **No verificado** en teléfono para flujo completo y restauración de clave |
 | ESPALDA y CINCHA | **No integrados** | **No** | **No** |
+| CHEST V3.7.2-rc1 (pantalla sin LVGL, carga, apagado por fases) | Sí (`firmware/chest/V3_7_2_UI`) | **Sí**, SHA `3e85c41`, run `39965639870` | **No verificado** |
+| Programador USB 1.8.0-beta2 | Sí (`usb-updater/`) | **Sí**, SHA `f60c125`, run `39963751136` (59 pruebas en simulación) | **No verificado** |
 
 **Fuente de evidencia CI Android previa:** [run 39749862683](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39749862683). **Integraciones:** [PR #4](https://github.com/avotattoocastro-creator/apk_android_avo/pull/4) y [PR #5](https://github.com/avotattoocastro-creator/apk_android_avo/pull/5). La rama actual incorpora además cambios de documentación; no atribuirle el CI de la rama original.
 

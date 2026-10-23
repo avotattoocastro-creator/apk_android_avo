@@ -18,6 +18,14 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | AVO Signer Android | **V0.1 prototipo** | Código y vectores de prueba ES256 integrados; no es firma de producción |
 | Verificador de paquetes OTA Android | Formato `avo-ota-manifest-v1`, ES256 | Código integrado, clave pública fijada; no equivale a autorización del reloj |
 | Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
+| Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
+| Programador USB **1.8.0-beta2** (`usb-updater/`) | Instalación de `firmware.bin` por USB-C desde Android | CI correcto [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136); **no verificado con el reloj** |
+
+## Documentación compartida (Claude y ChatGPT)
+
+- [`AGENTS.md`](AGENTS.md): reglas para cualquier asistente (rama, documentación, restricciones del reloj como **no usar LVGL**).
+- [`docs/REGISTRO_DE_CAMBIOS.md`](docs/REGISTRO_DE_CAMBIOS.md): **registro de todos los cambios**, con commits, CI y nivel de validación. Obligatorio en cada cambio.
+- [`docs/ESTADO_DESARROLLO_Y_VERSIONES.md`](docs/ESTADO_DESARROLLO_Y_VERSIONES.md): matriz de versiones y niveles de validación.
 
 ## Estructura
 
@@ -25,6 +33,8 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 - `core/`: protocolo compartido y pruebas JVM.
 - `firmware/chest/V3_5_4/`: ZIP de fuentes del firmware base.
 - `firmware/chest/V3_5_5/` y `V3_5_6/`: scripts de parche sucesivos.
+- `firmware/chest/V3_7_2_UI/`: nueva pantalla del reloj (renderizador propio, sin LVGL) y parche mínimo de fases de apagado.
+- `usb-updater/`: app Android independiente para programar el reloj por USB (ROM del ESP32-S3).
 - `avo-signer/`: aplicación independiente para firmar paquetes OTA y documentación de seguridad.
 - `docs/`: requisitos y estado de validación.
 - `.github/workflows/`: compilaciones Android, CHEST y Signer.
