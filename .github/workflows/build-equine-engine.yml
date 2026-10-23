@@ -1,0 +1,45 @@
+name: Equine Intelligence Engine
+on:
+  push:
+    branches: [feature/avo-equine-intelligence-engine]
+    paths: ['equine-intelligence/**', 'firmware/back/V3_8_0/lib/avo_core/**', '.github/workflows/build-equine-engine.yml']
+  workflow_dispatch:
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tests con ASan/UBSan
+        run: |
+          cmake -S equine-intelligence -B eqb -DAVO_EQ_SANITIZE=ON -DCMAKE_BUILD_TYPE=Debug
+          cmake --build eqb -j
+          ./eqb/avo_eq_tests
+      - name: Release + banco + ML demo
+        run: |
+          cmake -S equine-intelligence -B eqr -DCMAKE_BUILD_TYPE=Release
+          cmake --build eqr -j
+          python3 equine-intelligence/tools/scientific-bench/bench.py --lib eqr/libavo_equine.so --out bench_out
+          python3 equine-intelligence/ml/avo_ml.py demo --out demo.jsonl
+          python3 equine-intelligence/ml/avo_ml.py evaluate --dataset demo.jsonl --report demo_eval.json
+      - uses: actions/upload-artifact@v4
+        with: { name: equine-linux, path: "eqr/libavo_equine.so\nbench_out\ndemo_eval.json" }
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cmake -S equine-intelligence -B eqw
+          cmake --build eqw --config Release
+          .\eqw\Release\avo_eq_tests.exe
+      - uses: actions/upload-artifact@v4
+        with: { name: equine-windows-dll, path: eqw/Release/avo_equine.dll }
+  android:
+    runs-on: ubuntu-latest
+    strategy: { matrix: { abi: [arm64-v8a, armeabi-v7a, x86_64] } }
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cmake -S equine-intelligence/integrations/android -B eqa -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ matrix.abi }} -DANDROID_PLATFORM=24 -DCMAKE_BUILD_TYPE=Release
+          cmake --build eqa -j
+      - uses: actions/upload-artifact@v4
+        with: { name: "equine-android-${{ matrix.abi }}", path: eqa/libavo_equine_jni.so }
