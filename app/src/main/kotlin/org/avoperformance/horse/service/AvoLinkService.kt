@@ -65,6 +65,7 @@ class AvoLinkService : LifecycleService() {
         lifecycleScope.launch {
             var lastText = ""
             var wasReady = false
+            var wasRecording = false
             combine(c.watch.state, c.watch.telemetry, c.ntrip.state) { s, t, n -> Triple(s, t, n) }.collect { (s, t, n) ->
                 val rtk = RtkDeriver.derive(t?.t, t?.let { System.currentTimeMillis() - it.receivedMs } ?: Long.MAX_VALUE)
                 val text = buildString {
@@ -79,6 +80,11 @@ class AvoLinkService : LifecycleService() {
                 val ready = c.watch.isReady
                 c.dnd.onWatchTelemetry(t?.t, t?.receivedMs ?: 0L, ready)
                 if (ready && !wasReady) c.sync.autoSync()      // download finished trainings after each (re)connection
+                // A) training finished: the watch closes the session and the download starts on its own (Wi-Fi or BLE)
+                val sess = t?.t?.session
+                val rec = sess == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING || sess == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED
+                if (wasRecording && !rec && sess != null) lifecycleScope.launch { kotlinx.coroutines.delay(8_000); c.sync.autoSync() }
+                if (sess != null) wasRecording = rec
                 wasReady = ready
             }
         }

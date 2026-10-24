@@ -246,18 +246,48 @@ class WatchSyncManager(
     }
 
     /** Auto mode: download every closed session not yet on the phone. */
-    fun autoSync() {
-        if (!settings.autoDownload) return
+    /** Wi-Fi download (CHEST V3.7.4+); null = BLE only. */
+    @Volatile var wifi: org.avoperformance.horse.wifi.AvoWifiSyncManager? = null
+
+    /** Trainings that are on the watch and not on the phone (closed sessions only). */
+    suspend fun pendingOnWatch(): List<TrainingEntity> = db.trainings().snapshot().filter { t ->
+        val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
+        (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.DESCARGADO) && t.watchState != WatchFileState.OPEN.name
+    }.sortedBy { it.startRtcMs }
+
+    /**
+     * Automatic download of the pending ones: first over Wi-Fi (a single watch activation for all of them);
+     * what Wi-Fi cannot do because of firmware/Android goes over BLE. [force] = "Descargar todo" button
+     * (ignores the automatic-download setting).
+     */
+    fun autoSync(force: Boolean = false) {
+        if (!force && !settings.autoDownload) return
         scope.launch(Dispatchers.IO) {
             if (refresh() != null) return@launch
-            for (t in db.trainings().snapshot()) {
-                val st = runCatching { SyncState.valueOf(t.state) }.getOrNull() ?: continue
-                if ((st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO) && t.watchState != WatchFileState.OPEN.name) {
-                    if (download(t.sessionId) != null) break
-                }
+            val pending = pendingOnWatch()
+            var ble = pending.map { it.sessionId }
+            val w = wifi
+            if (w != null && pending.isNotEmpty() && !watchRecording()) {
+                val rep = w.sync(pending.map { it.sessionId to null })
+                if (rep.skipped) return@launch
+                ble = rep.fallbackBle
+                if (rep.verified.isNotEmpty()) log.i("SYNC", "Wi-Fi: ${rep.verified.size} entrenamientos verificados")
+                rep.failed.forEach { (id, why) -> log.w("SYNC", "Wi-Fi $id: $why") }
             }
+            for (id in ble) if (download(id) != null) break
             uploadPending()
         }
+    }
+
+    /** Training downloaded over Wi-Fi and verified against the SHA-256 computed by the watch: same as with BLE. */
+    suspend fun completeFromWifi(sessionId: String, dir: File, sha256: String, bytes: Long) = withContext(Dispatchers.IO) {
+        val t = db.trainings().byId(sessionId) ?: return@withContext
+        db.trainings().upsert(t.copy(localDir = dir.absolutePath, downloadedBytes = bytes, localSha256 = sha256, watchSha256 = sha256,
+            state = SyncState.VERIFICADO_LOCAL.name, lastError = null, updatedMs = System.currentTimeMillis()))
+        log.i("SYNC", "$sessionId descargado por Wi-Fi ($bytes B) sha OK")
+        analyze(sessionId)
+        onVerified?.invoke(sessionId)
+        _progress.value = SyncProgress(sessionId, bytes, t.totalBytes, "Entrenamiento guardado ✓")
     }
 
     /** Server step. While the server is on hold this only marks files as pending. */

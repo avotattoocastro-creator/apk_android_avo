@@ -384,3 +384,26 @@ Petición del usuario.
 - AVO Tarjetas: icono adaptativo nuevo (caballo, AVO, HORSE EDITION) con marco azul en el borde de la máscara.
 - AVO Update 2.1.1 (versionCode 23): pasa de icono cuadrado (`avo_launcher_brand`) a icono adaptativo con el mismo logo y marco verde. No cambia ninguna funcionalidad del updater.
 - El workflow del updater también se ejecuta en `feature/avo-firebase-sync`.
+
+## 2026-10-25 — Descarga de entrenamientos por Wi-Fi reloj ↔ móvil · rama `feature/avo-wifi-sync`
+- **Firmware CHEST 3.7.4-wifi-rc1** (`firmware/chest/V3_7_4_WIFI`, sobre 3.7.3-rc1):
+  - punto de acceso SoftAP `AVO_CHEST_XXXX` (WPA2) en el canal ESP-NOW, en modo AP_STA, para que la espalda siga conectada;
+  - contraseña única por reloj en NVS y token de sesión de 128 bits;
+  - servidor HTTP de solo lectura `/api/v1` con Range, If-Match/etag, SHA-256 y fin de sincronización;
+  - orden BLE `WIFI_SYNC` 0x64 (solo con app autorizada) y capacidad b11;
+  - no se enciende durante una grabación y se apaga si empieza una;
+  - apagado automático por inactividad, falta de cliente, tiempo máximo, batería o fin confirmado.
+  - BIN `AVO_CHEST_V3_7_4_WIFI_RC1_UNVERIFIED.bin`, compilado en CI y **no validado en hardware ni apto para OTA**. No cambia el formato RAW, la grabación, ESP-NOW, OTA ni las particiones.
+  - Documento: `PROTOCOLO_WIFI.md`.
+- **Android 2.3-wifi-dev1:**
+  - `AvoWifiSyncManager` + `core/wifi` (`WifiSyncCoordinator`, máquina de estados, `WifiDownloader` reanudable);
+  - `WifiNetworkSpecifier` con BSSID y HTTP atado a la red del reloj;
+  - los segmentos van a los mismos ficheros que BLE, así que cada transporte continúa la descarga del otro;
+  - verificación SHA-256 con el reloj;
+  - respaldo BLE cuando el firmware no tiene la capacidad o Android no conecta;
+  - NTRIP en pausa durante la descarga.
+  - Se activa al terminar un entrenamiento, al reconectar, con «Descargar todo» (que ahora funciona aunque la descarga automática esté desactivada) y al abrir Entrenamientos.
+  - Estados en pantalla: Conectando con el reloj…, Descargando · %, Verificando…, Entrenamiento guardado ✓ y Pendiente de conexión; botones Pausar/Reanudar y Cancelar.
+  - Permisos: `CHANGE_NETWORK_STATE`, `ACCESS_WIFI_STATE`.
+- **Corrección:** el pecho sí usa ESP-NOW por defecto (`AVO_LINK_UART`=0); el cable UART es solo una opción de compilación.
+- **Pruebas:** `WifiSyncTest` (24 casos, escenarios 1–20 de la directiva) y `test_wifi_v374.py` (19 comprobaciones). Las pruebas físicas están pendientes; la lista está en `PROTOCOLO_WIFI.md`.

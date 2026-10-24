@@ -67,7 +67,13 @@ fun syncColor(s: SyncState?) = when (s) {
 fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.net.Uri? = null, onImportHandled: () -> Unit = {}) {
     val context = LocalContext.current
     // Opening the trainings syncs with Firebase (sending, confirmations and receptions) without waiting for the periodic task
-    LaunchedEffect(Unit) { if (c.identity.card.value != null) c.share.runNow() }
+    LaunchedEffect(Unit) {
+        if (c.identity.card.value != null) c.share.runNow()
+        // D) opening Entrenamientos downloads what is pending (if the automatic download is enabled)
+        if (c.settings.autoDownload && c.watch.isReady && c.sync.pendingOnWatch().isNotEmpty()) c.sync.autoSync()
+    }
+    val wifi by c.wifiSync.progress.collectAsStateWithLifecycle()
+    var wifiPaused by remember { mutableStateOf(c.wifiSync.paused) }
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val all by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
     val progress by c.sync.progress.collectAsStateWithLifecycle()
@@ -222,7 +228,22 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
         if (tab == 0) {
             Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(enabled = !progress.busy, onClick = { c.scope.launch { msg = c.sync.refresh() } }) { Text("Leer lista del reloj") }
-                OutlinedButton(enabled = !progress.busy, onClick = { c.sync.autoSync() }) { Text("Descargar todo") }
+                OutlinedButton(enabled = !progress.busy && !c.wifiSync.coordinator.busy, onClick = { c.sync.autoSync(force = true) }) { Text("Descargar todo") }
+            }
+            // Wi-Fi download: simple states and real progress (bytes written to the phone)
+            val wifiActive = wifi.state !in setOf(org.avoperformance.horse.core.wifi.WifiSyncState.IDLE, org.avoperformance.horse.core.wifi.WifiSyncState.CLEANUP)
+            if (wifiActive || wifiPaused) {
+                Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text(if (wifiPaused) "En pausa" else wifi.label, color = if (wifi.state == org.avoperformance.horse.core.wifi.WifiSyncState.COMPLETED) AvoColors.Ok else AvoColors.Blue,
+                        modifier = Modifier.weight(1f))
+                    androidx.compose.material3.TextButton(onClick = { wifiPaused = !wifiPaused; c.wifiSync.paused = wifiPaused; if (!wifiPaused) c.sync.autoSync(force = true) }) {
+                        Text(if (wifiPaused) "Reanudar" else "Pausar")
+                    }
+                    if (c.wifiSync.coordinator.busy) androidx.compose.material3.TextButton(onClick = { c.wifiSync.cancel() }) { Text("Cancelar", color = AvoColors.Bad) }
+                }
+                if (wifi.state == org.avoperformance.horse.core.wifi.WifiSyncState.DOWNLOADING && wifi.total > 0)
+                    LinearProgressIndicator(progress = { (wifi.bytes.toFloat() / wifi.total).coerceIn(0f, 1f) }, color = AvoColors.Blue,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp))
             }
             progress.message?.let { Note(it) }
             msg?.let { Note(it, AvoColors.Warn) }
