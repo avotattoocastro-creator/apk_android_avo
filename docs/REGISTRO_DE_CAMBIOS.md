@@ -427,3 +427,12 @@ Petición del usuario.
 - `WatchSyncManager.download(id)` intenta Wi-Fi primero (con el mismo coordinador; si ya hay una pasada en marcha, no se lanza otra) y usa BLE solo como respaldo.
 - El registro indica siempre por qué no se usa Wi-Fi: firmware sin la capacidad, bloqueo por reinicio o falta de datos del reloj.
 - **Observación de campo, pendiente de explicar:** el registro alterna `fw 3.7.4-wifi-rc2` y `fw 3.7.3-rc1` tras cada «enlace perdido». Puede ser una vuelta atrás automática de OTA (rollback) por reinicio del rc2, o una reinstalación manual. Se pide confirmación al usuario y el log serie. versionCode 28.
+
+## 2026-10-25 — AVO Update 2.2.0: monitor serie
+- Para diagnosticar el reinicio de CHEST 3.7.4 sin ordenador. El registro de campo muestra que AVO Update instala el rc2 en app1 en estado NEW y el reloj vuelve solo a la 3.7.3 (app0): el rc2 se reinicia por sí solo.
+- Nueva tarjeta «Monitor serie»:
+  - lee lo que el reloj imprime por su USB (USB-Serial/JTAG o CP210x a 115200);
+  - se reconecta solo cuando el reloj se reinicia y el USB desaparece, así captura el arranque siguiente (motivo de reinicio y líneas `[AVO MEM]`);
+  - botón «Reiniciar reloj y capturar» (reinicio normal por RTS, como esptool);
+  - «Guardar monitor (.txt)».
+- No escribe nada en el reloj. versionCode 24.

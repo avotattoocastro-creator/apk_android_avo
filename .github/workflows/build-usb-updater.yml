@@ -2,7 +2,7 @@ name: Build AVO USB Updater
 on:
   workflow_dispatch:
   push:
-    branches: [develop/avo-performance-horse, feature/avo-usb-updater, feature/avo-firebase-sync]
+    branches: [develop/avo-performance-horse, feature/avo-usb-updater, feature/avo-firebase-sync, feature/avo-wifi-sync]
     paths: ['usb-updater/**', '.github/workflows/build-usb-updater.yml']
 permissions:
   contents: read

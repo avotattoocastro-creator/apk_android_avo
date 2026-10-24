@@ -103,6 +103,15 @@ class MainActivity : Activity() {
     private lateinit var backupButton: Button
     private lateinit var reportButton: Button
     private lateinit var autoBoot: CheckBox
+    // ---- Serial monitor (V2.2): what the watch prints over USB (boot, reboot reason, memory)
+    private lateinit var monitorView: TextView
+    private lateinit var monitorStartButton: Button
+    private lateinit var monitorResetButton: Button
+    private lateinit var monitorStopButton: Button
+    private lateinit var monitorSaveButton: Button
+    private val monitorRunning = AtomicBoolean(false)
+    private val monitorLog = StringBuilder()
+    @Volatile private var monitorDirty = false
     private lateinit var root: FrameLayout
     private var boot: View? = null
     private var bootRows: LinearLayout? = null
@@ -309,6 +318,13 @@ class MainActivity : Activity() {
             cancel.set(true); stepState.text = "Cancelando… (si se está activando, se termina primero de forma segura)"
         }.apply { visibility = View.GONE }
 
+        val mon = card(col, "Monitor serie")
+        monitorStartButton = secondary(mon, "Iniciar monitor") { startMonitor(reset = false) }
+        monitorResetButton = secondary(mon, "Reiniciar reloj y capturar") { startMonitor(reset = true) }
+        monitorStopButton = secondary(mon, "Parar monitor") { monitorRunning.set(false) }.apply { visibility = View.GONE }
+        monitorSaveButton = secondary(mon, "Guardar monitor (.txt)") { saveMonitor() }
+        monitorView = row(mon, 10f, cSilver).apply { typeface = Typeface.MONOSPACE; setTextIsSelectable(true); text = "—" }
+
         val lg = card(col, "Registro")
         logView = row(lg, 11f, cDim).apply { typeface = Typeface.MONOSPACE; setTextIsSelectable(true) }
 
@@ -389,6 +405,9 @@ class MainActivity : Activity() {
         val idle = !busy.get()
         val any = UsbLinks.find(usb) != null
         readButton.enable(idle && any)
+        monitorStartButton.enable(idle && any)
+        monitorResetButton.enable(idle && any)
+        monitorSaveButton.enable(idle)
         selectButton.enable(idle)
         installButton.enable(idle && planText != null && firmware?.validHeader == true && any)
         infoButton.enable(idle && any)
@@ -603,6 +622,77 @@ class MainActivity : Activity() {
             stepState.text = "✔ Copia completa verificada (MD5 del chip en cada bloque)"
             offerSave(tmp, "${baseName(s.info)}_FLASH_COMPLETA_${size shr 20}MB_$stamp.bin")
         }
+    }
+
+    // ------------------------------------------------------------------ serial monitor
+
+    private fun monitorAppend(text: String) {
+        synchronized(monitorLog) {
+            monitorLog.append(text)
+            if (monitorLog.length > 4_000_000) monitorLog.delete(0, monitorLog.length - 3_000_000)
+        }
+        monitorDirty = true
+    }
+
+    private fun monitorRefresh() {
+        if (!monitorDirty) return
+        monitorDirty = false
+        val tail = synchronized(monitorLog) { monitorLog.substring(maxOf(0, monitorLog.length - 12_000)) }
+        ui { monitorView.text = tail }
+    }
+
+    /**
+     * Reads what the watch prints on its USB port (Serial/ESP log) and keeps it. When the watch reboots the
+     * USB port disappears and reappears: the monitor reconnects on its own and keeps capturing, so the boot of
+     * the next start (reset reason, [AVO MEM]) is recorded. Writes nothing to the watch except, with
+     * [reset], a normal reboot (the same as the button) to capture from the start.
+     */
+    private fun startMonitor(reset: Boolean) = runExclusive {
+        monitorRunning.set(true)
+        synchronized(monitorLog) { monitorLog.setLength(0) }
+        monitorAppend("=== Monitor serie AVO · %s ===\n".format(java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())))
+        ui { monitorStopButton.visibility = View.VISIBLE; stepState.text = "Monitor serie activo" }
+        var link: RomLink? = null
+        var firstOpen = true
+        val buf = ByteArray(4096)
+        var lastUi = 0L
+        try {
+            while (monitorRunning.get() && !cancel.get()) {
+                if (link == null || !link.isOpen) {
+                    runCatching { link?.close() }
+                    link = runCatching { anyPort().open(2_000) }.getOrNull()
+                    if (link == null) { android.os.SystemClock.sleep(200); continue }
+                    link.setBaud(115_200)
+                    if (firstOpen && reset) {
+                        monitorAppend("[reiniciando el reloj]\n")
+                        link.setLines(dtr = false, rts = true); android.os.SystemClock.sleep(120); link.setLines(dtr = false, rts = false)
+                    } else link.setLines(dtr = false, rts = false)
+                    monitorAppend(if (firstOpen) "[conectado: ${link.kind.text}]\n" else "\n[reconectado ${java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())}]\n")
+                    firstOpen = false
+                }
+                val n = link.read(buf, 200)
+                if (n > 0) monitorAppend(String(buf, 0, n, Charsets.ISO_8859_1))
+                else if (n < 0 || !link.isOpen) {
+                    monitorAppend("\n[USB desconectado ${java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())} — reinicio del reloj? reconectando…]\n")
+                    runCatching { link.close() }; link = null
+                }
+                val now = android.os.SystemClock.elapsedRealtime()
+                if (now - lastUi > 300) { lastUi = now; monitorRefresh() }
+            }
+        } finally {
+            runCatching { link?.close() }
+            monitorRunning.set(false)
+            monitorAppend("\n=== monitor parado ===\n")
+            monitorRefresh()
+            ui { monitorStopButton.visibility = View.GONE; stepState.text = "Monitor serie parado" }
+        }
+    }
+
+    private fun saveMonitor() {
+        val text = synchronized(monitorLog) { monitorLog.toString() }
+        if (text.isBlank()) { appendLog("El monitor está vacío"); return }
+        val tmp = File(cacheDir, "monitor.txt").apply { writeText(text) }
+        offerSave(tmp, "AVO_monitor_serie_$stamp.txt", "text/plain")
     }
 
     private fun saveReport() {
