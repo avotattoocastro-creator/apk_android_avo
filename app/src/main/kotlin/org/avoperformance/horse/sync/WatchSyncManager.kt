@@ -46,6 +46,8 @@ data class SyncProgress(val sessionId: String? = null, val bytes: Long = 0, val 
  * Rules: never deletes anything on the watch automatically; "verificado" on the server
  * only with a real server confirmation; no download while the watch is recording.
  */
+private const val MAX_CHUNK_FAILURES = 8
+
 class WatchSyncManager(
     private val ctx: Context,
     private val db: AvoDatabase,
@@ -131,7 +133,7 @@ class WatchSyncManager(
             var lastSave = 0L
             while (pos != null) {
                 if (watchRecording()) throw IllegalStateException("El reloj empezó a grabar: descarga en pausa")
-                val chunk = c.readChunk(sessionId, pos.first, pos.second) ?: break   // no more segments
+                val chunk = readChunkResilient(sessionId, pos.first, pos.second, dl.downloadedBytes(), t.totalBytes) ?: break   // no more segments
                 pos = dl.append(pos.first, pos.second, chunk.data, chunk.fileSize)
                 val got = dl.downloadedBytes()
                 _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Descargando", true)
@@ -143,7 +145,7 @@ class WatchSyncManager(
             // Integrity: SHA-256 computed by the watch over the same segments
             _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Verificando huella SHA-256 con el reloj…", true)
             val local = dl.sha256().toHex()
-            val remote = c.fileSha256(sessionId).toHex()
+            val remote = (watch.client ?: c).fileSha256(sessionId).toHex()
             val ok = local == remote
             t = t.copy(localSha256 = local, watchSha256 = remote, state = (if (ok) SyncState.VERIFICADO_LOCAL else SyncState.ERROR_INTEGRIDAD).name,
                 lastError = if (ok) null else "La huella local no coincide con la del reloj")
@@ -174,6 +176,37 @@ class WatchSyncManager(
         db.trainings().upsert(t.copy(horseCode = header?.horseName?.ifBlank { null }, riderCode = header?.riderName?.ifBlank { null },
             distanceM = a.distanceM, maxSpeedMs = a.maxSpeedMs, durationS = a.durationS, fixTimeS = a.fixTimeS, floatTimeS = a.floatTimeS,
             imuSamples = a.imuSamples, gnssUsable = a.gnssUsable))
+    }
+
+    /**
+     * One chunk with recovery: a lost BLE notification makes the whole READ_FILE answer time out, so the same
+     * offset is retried with growing pauses (and over a new connection if the link was re-established) before
+     * giving up. Requests 2048 bytes, the maximum the watch answers per READ_FILE (larger requests gain nothing).
+     */
+    private suspend fun readChunkResilient(sessionId: String, segment: Int, offset: Long, got: Long, total: Long): org.avoperformance.horse.core.ble.FileChunk? {
+        var failures = 0
+        while (true) {
+            if (watchRecording()) throw IllegalStateException("El reloj empezó a grabar: descarga en pausa")
+            val c = watch.client
+            if (c == null) {
+                // link lost: wait for the automatic reconnection instead of aborting at once
+                if (++failures > MAX_CHUNK_FAILURES) throw IllegalStateException("Conexión con el reloj perdida en ${got / 1024} kB")
+                _progress.value = SyncProgress(sessionId, got, total, "Esperando reconexión con el reloj…", true)
+                kotlinx.coroutines.delay(3000); continue
+            }
+            try {
+                return c.readChunk(sessionId, segment, offset, 2048)
+            } catch (e: org.avoperformance.horse.core.ble.BleRequestException) {
+                if (e.status != BleStatus.TIMEOUT && e.status != BleStatus.BUSY && e.status != BleStatus.BAD_CRC) throw e
+                failures++
+                val st = c.stats
+                log.w("SYNC", "$sessionId seg $segment off $offset: ${e.message} (intento $failures, timeouts ${st.timeouts}, huecos ${st.gaps}, CRC ${st.crcErrors})")
+                if (failures > MAX_CHUNK_FAILURES)
+                    throw IllegalStateException("${e.message} en ${got / 1024} kB tras $failures intentos (timeouts ${st.timeouts}, fragmentos perdidos ${st.gaps}, CRC ${st.crcErrors})")
+                _progress.value = SyncProgress(sessionId, got, total, "Reintentando bloque (${failures}/$MAX_CHUNK_FAILURES)…", true)
+                kotlinx.coroutines.delay(minOf(8000L, 1000L shl (failures - 1)))
+            }
+        }
     }
 
     fun analysisFor(t: TrainingEntity) = t.localDir?.let { d ->
