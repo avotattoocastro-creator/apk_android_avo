@@ -42,6 +42,7 @@ class AppContainer(val app: Application) {
     /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
     val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
     val inbox = org.avoperformance.horse.cloud.CloudInbox(app, cloud, log)
+    val autoSend = org.avoperformance.horse.cloud.AutoSender(this).also { a -> sync.onVerified = { a.trigger("descarga verificada") } }
 }
 
 class AppLog(private val c: AppContainer) {

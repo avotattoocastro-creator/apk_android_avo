@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.Dispatchers
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.LinearProgressIndicator
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.avoperformance.horse.AppContainer
@@ -415,6 +418,7 @@ fun SyncScreen(c: AppContainer) {
                 progress.message?.let { Note(it) }
             }
         }
+        item { AutoSendCard(c) }
         item {
             AvoCard("Resumen") {
                 org.avoperformance.horse.core.sync.SyncState.values().forEach { s ->
@@ -512,3 +516,51 @@ fun StorageScreen(c: AppContainer) {
 
 private fun dirSize(f: File): Long = if (f.isFile) f.length() else (f.listFiles()?.sumOf { dirSize(it) } ?: 0L)
 
+
+
+/** Automatic sending of new trainings to another AVO user over the internet (Firebase). */
+@Composable
+private fun AutoSendCard(c: AppContainer) {
+    val me by c.identity.card.collectAsStateWithLifecycle()
+    val status by c.autoSend.status.collectAsStateWithLifecycle()
+    var to by remember { mutableStateOf(c.settings.autoSendTo) }
+    var toName by remember { mutableStateOf(c.settings.autoSendName) }
+    var contacts by remember { mutableStateOf<List<org.avoperformance.horse.cloud.AvoCloud.Contact>?>(null) }
+    var picking by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+    AvoCard("Envío automático por internet") {
+        val card = me
+        if (card == null) { Note("Acerca primero tu tarjeta AVO personal (NFC) para tener identidad."); return@AvoCard }
+        Toggle("Enviar cada entrenamiento nuevo", to != null) { on ->
+            if (on) {
+                picking = true; contacts = null; error = null
+                scope.launch { try { contacts = c.cloud.contacts(card) } catch (e: Exception) { error = e.message; picking = false } }
+            } else { c.settings.autoSendTo = null; to = null }
+        }
+        if (to != null) {
+            KV("Destinatario", "$toName · $to")
+            status?.let { Note(it) }
+            Note("Se envía al descargarse y verificarse con el reloj. Solo los grabados desde que se activó.")
+            OutlinedButton(onClick = { c.autoSend.trigger("manual") }) { Text("Enviar pendientes ahora") }
+        }
+        error?.let { Note(it, AvoColors.Bad) }
+    }
+    if (picking) AlertDialog(onDismissRequest = { picking = false },
+        title = { Text("Enviar automáticamente a…") },
+        text = { Column {
+            val list = contacts
+            when {
+                list == null -> { Text("Buscando usuarios AVO…"); LinearProgressIndicator(Modifier.fillMaxWidth()) }
+                list.isEmpty() -> Text("No hay otros usuarios. Cada persona debe acercar su tarjeta AVO en su móvil una vez.")
+                else -> list.forEach { u -> TextButton(onClick = {
+                    c.settings.autoSendName = u.name
+                    if (c.settings.autoSendTo == null || c.settings.autoSendTo != u.code) c.settings.autoSendSinceMs = System.currentTimeMillis()
+                    c.settings.autoSendTo = u.code
+                    to = u.code; toName = u.name; picking = false
+                    c.autoSend.trigger("activado")
+                }) { Text("${u.name} · ${u.code}") } }
+            }
+        } },
+        confirmButton = {}, dismissButton = { TextButton(onClick = { picking = false }) { Text("Cancelar") } })
+}

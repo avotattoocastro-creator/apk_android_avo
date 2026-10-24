@@ -296,17 +296,18 @@ pero no tenían entrada en este registro.
   - «Dar de baja» en AVO Tarjetas todavía no bloquea la cuenta en Firebase.
 - versionCode 15. Pendiente: pegar las reglas en la consola y hacer la validación física con dos móviles.
 
-## 2026-10-24 — Envío de entrenamientos entre apps por internet (Firebase, sin servidor propio) · commit 29fce4f
-- Proyecto Firebase `avo-performance-horse-7be14`, plan gratuito Spark. Usa Authentication (correo/contraseña) y Realtime Database (europe-west1). No usa Cloud Storage ni Cloud Functions.
-- La cuenta es la tarjeta NFC personal: el correo es `<código>@avo-cards.app` (no es una dirección real) y la contraseña es la clave de la tarjeta. Con la misma tarjeta en otro móvil se entra en la misma cuenta.
-- Envío (`cloud/AvoCloud`): el paquete `.avo` (`TrainingShare.buildPackage`) se sube en trozos base64 de 256 kB a `blobs/<destino>/<id>`; después se escribe el aviso en `inbox/<destino>/<id>` con el SHA-256. Máximo 30 MB.
-- Recepción (`cloud/CloudInbox`, dentro de `AvoLinkService`): escucha la bandeja, descarga, comprueba el SHA-256, guarda en `files/received`, borra la entrega de Firebase y muestra la notificación «Nuevo entrenamiento recibido». Al pulsarla se abre el diálogo de importación habitual.
-- Interfaz: botón «Internet» en cada entrenamiento y lista de recibidos con Importar/Descartar.
-- Reglas en `firebase/database.rules.json`: solo el titular de la tarjeta lee o borra su bandeja, y el remitente debe ser quien dice ser. La configuración pública de Firebase (`cloud/FirebaseConfig.kt`) no es un secreto.
-- Limitaciones: el aviso solo llega mientras el servicio de la app está activo; la baja de una tarjeta aún no bloquea la cuenta en Firebase. versionCode 15.
-
 ## 2026-10-24 — AVO Tarjetas con el estilo visual de la app principal
 - Regla: toda app AVO nueva usa el mismo estilo visual que la principal, como AVO Update.
 - `cards` compila directamente `app/.../ui/theme` (AvoTheme, AvoColors) y `ui/components` (AvoCard, StatusPill, KV, Note, ConfirmDialog). Hay una sola fuente, así que cualquier cambio de estilo se aplica a las dos apps.
 - Recursos copiados de la app: icono AVO adaptativo, imagen de cabecera `avo_brand_hero`, colores y tema de ventana `Theme.Avo` con fondos negros.
 - Pantalla con cabecera de marca, encabezado «AVO TARJETAS», tarjetas AVO e indicadores de estado (GRABANDO/LECTURA/BAJA).
+
+## 2026-10-24 — Envío automático de entrenamientos nuevos a otro usuario (Firebase)
+- Sincronización → «Envío automático por internet»: se activa y se elige el destinatario de la lista de usuarios AVO.
+- `cloud/AutoSender`:
+  - envía cada entrenamiento una sola vez en cuanto se descarga y verifica con el reloj (`WatchSyncManager.onVerified`);
+  - solo envía los grabados desde que se activó la opción; nunca envía en bloque los antiguos;
+  - lleva un registro de los ya enviados (`cloud.autoSendDone`);
+  - deja pendientes los que no tienen caballo o jinete;
+  - si falla la red, reintenta al iniciar el servicio, en cada descarga nueva o con «Enviar pendientes ahora».
+- Usa el mismo transporte y las mismas reglas que el envío manual. Al otro usuario le llega el aviso «Nuevo entrenamiento recibido».

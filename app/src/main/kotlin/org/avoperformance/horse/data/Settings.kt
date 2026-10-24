@@ -93,6 +93,22 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         get() = p.getBoolean("share.deleteAfterWhatsApp", true)
         set(v) { p.edit().putBoolean("share.deleteAfterWhatsApp", v).apply() }
 
+    /** Automatic sending of new trainings over the internet (Firebase) to this AVO user (card code). null = off. */
+    var autoSendTo: String?
+        get() = p.getString("cloud.autoSendTo", null)
+        set(v) { p.edit().putString("cloud.autoSendTo", v).apply() }
+    var autoSendName: String
+        get() = p.getString("cloud.autoSendName", "") ?: ""
+        set(v) { p.edit().putString("cloud.autoSendName", v).apply() }
+    /** Only trainings recorded from this moment on are sent (when the option is enabled). */
+    var autoSendSinceMs: Long
+        get() = p.getLong("cloud.autoSendSinceMs", Long.MAX_VALUE)
+        set(v) { p.edit().putLong("cloud.autoSendSinceMs", v).apply() }
+    /** Sessions already sent automatically (never resent). */
+    var autoSendDone: Set<String>
+        get() = p.getStringSet("cloud.autoSendDone", emptySet())?.toSet() ?: emptySet()
+        set(v) { p.edit().putStringSet("cloud.autoSendDone", v).apply() }
+
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)
         set(v) { p.edit().putBoolean("sync.autoDownload", v).apply() }

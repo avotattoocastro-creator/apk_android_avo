@@ -110,6 +110,9 @@ class WatchSyncManager(
     }
 
     /** Downloads (resumable) and verifies one session. */
+    /** Called after each download verified against the watch (used by the automatic internet sending). */
+    @Volatile var onVerified: ((String) -> Unit)? = null
+
     @Volatile var isBusy: Boolean = false
         private set
 
@@ -154,6 +157,7 @@ class WatchSyncManager(
             db.trainings().upsert(t)
             log.i("SYNC", "$sessionId descargado ($got B) sha ${if (ok) "OK" else "DIFERENTE"}")
             if (ok) analyze(sessionId)
+            if (ok) onVerified?.invoke(sessionId)
             _progress.value = SyncProgress(sessionId, got, t.totalBytes, if (ok) "Descargado y verificado" else "Error de integridad")
             if (ok) null else "Error de integridad"
         } catch (e: Exception) {
