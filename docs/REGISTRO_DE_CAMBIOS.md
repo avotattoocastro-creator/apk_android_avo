@@ -345,3 +345,6 @@ pero no tenían entrada en este registro.
 - Petición del usuario: que, al pasar a «Enviado», la sincronización con Firebase sea automática.
 - Con el servicio activo, cada 20 s se consultan los acuses (`receipts`) de los envíos en «Enviado». Si el destinatario ya confirmó (o el contenido ya no existe), se lanza una pasada y el envío pasa a OK.
 - Además, tras cada pasada con envíos en «Enviado» de menos de 2 h, se programa otra pasada a los 30 s con WorkManager, también con la app cerrada. Las invitaciones aceptadas se siguen comprobando cada minuto. versionCode 21.
+
+## 2026-10-24 — Sincronización al abrir los entrenamientos (2.2-share-dev6)
+- Al abrir Historial se lanza una pasada de Firebase (envío, acuses de recibo y recepción), sin esperar a la tarea periódica. Se suma a la sincronización tras «Enviado» de 2.2-share-dev5. versionCode 22.

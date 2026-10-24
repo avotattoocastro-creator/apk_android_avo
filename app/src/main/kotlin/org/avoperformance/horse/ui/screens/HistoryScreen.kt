@@ -66,6 +66,8 @@ fun syncColor(s: SyncState?) = when (s) {
 @Composable
 fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.net.Uri? = null, onImportHandled: () -> Unit = {}) {
     val context = LocalContext.current
+    // Opening the trainings syncs with Firebase (sending, confirmations and receptions) without waiting for the periodic task
+    LaunchedEffect(Unit) { if (c.identity.card.value != null) c.share.runNow() }
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val all by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
     val progress by c.sync.progress.collectAsStateWithLifecycle()
