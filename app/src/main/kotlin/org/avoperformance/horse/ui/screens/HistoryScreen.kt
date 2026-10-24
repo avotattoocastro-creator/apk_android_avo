@@ -17,6 +17,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
@@ -68,6 +69,9 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val all by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
     val progress by c.sync.progress.collectAsStateWithLifecycle()
+    // modo descarga: pantalla encendida mientras se descarga (evita que Android limite el Bluetooth en segundo plano)
+    val view = androidx.compose.ui.platform.LocalView.current
+    DisposableEffect(progress.busy) { view.keepScreenOn = progress.busy; onDispose { view.keepScreenOn = false } }
     var msg by remember { mutableStateOf<String?>(null) }
     var horseFilter by remember { mutableStateOf("") }
     var dateFilter by remember { mutableStateOf("") }

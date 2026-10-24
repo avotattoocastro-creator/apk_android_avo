@@ -92,6 +92,13 @@ class NtripManager(
             val bc = watch.client
             val ready = watch.isReady && bc != null
             if (!ready) { linkWasReady = false; delay(200); publish(); continue }
+            if (watch.downloadMode.value) {
+                // download mode: the link is reserved for the file transfer. Corrections are not forwarded (they would be
+                // stale anyway); the caster connection stays open and forwarding restarts cleanly afterwards.
+                linkWasReady = false
+                synchronized(pacer) { pacer.clear() }
+                delay(200); publish(); continue
+            }
             if (!linkWasReady) { synchronized(pacer) { pacer.onReconnect(); pacer.maxChunk = Requests.rtcmMaxChunk(watch.mtu.value?.minus(3) ?: 20) }; linkWasReady = true }
             val next = synchronized(pacer) { pacer.next(System.currentTimeMillis()) }
             if (next == null) { delay(20); publish(); continue }

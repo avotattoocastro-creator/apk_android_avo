@@ -128,6 +128,8 @@ class WatchSyncManager(
         val dl = SessionDownload(dir, sessionId, maxOf(1, t.segments))
         t = t.copy(state = SyncState.DESCARGANDO.name, localDir = dir.absolutePath, lastError = null)
         db.trainings().upsert(t)
+        watch.downloadMode.value = true          // modo descarga: NTRIP hacia el reloj en pausa
+        log.i("SYNC", "modo descarga activado (NTRIP en pausa)")
         try {
             var pos: Pair<Int, Long>? = dl.position()
             var lastSave = 0L
@@ -136,7 +138,7 @@ class WatchSyncManager(
                 val chunk = readChunkResilient(sessionId, pos.first, pos.second, dl.downloadedBytes(), t.totalBytes) ?: break   // no more segments
                 pos = dl.append(pos.first, pos.second, chunk.data, chunk.fileSize)
                 val got = dl.downloadedBytes()
-                _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Descargando", true)
+                _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Modo descarga · NTRIP en pausa", true)
                 if (System.currentTimeMillis() - lastSave > 2000) { db.trainings().upsert(t.copy(downloadedBytes = got)); lastSave = System.currentTimeMillis() }
             }
             val got = dl.downloadedBytes()
@@ -155,9 +157,13 @@ class WatchSyncManager(
             _progress.value = SyncProgress(sessionId, got, t.totalBytes, if (ok) "Descargado y verificado" else "Error de integridad")
             if (ok) null else "Error de integridad"
         } catch (e: Exception) {
+            if (e is kotlinx.coroutines.CancellationException) throw e
             db.trainings().upsert(t.copy(downloadedBytes = dl.downloadedBytes(), lastError = e.message))
             _progress.value = SyncProgress(sessionId, dl.downloadedBytes(), t.totalBytes, "Interrumpido: ${e.message} (se reanudará)")
             e.message ?: "error"
+        } finally {
+            watch.downloadMode.value = false
+            log.i("SYNC", "modo descarga desactivado")
         }
     }
 
