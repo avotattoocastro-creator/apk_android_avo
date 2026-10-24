@@ -31,6 +31,7 @@ class AvoLinkService : LifecycleService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         if (intent?.action == ACTION_STOP) {
+            c.settings.autoStartPaused = true
             c.dnd.restoreOwned("desconexión voluntaria")
             c.ntrip.stop(); c.watch.stop()
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
@@ -90,7 +91,33 @@ class AvoLinkService : LifecycleService() {
     companion object {
         const val NOTIF_ID = 42
         const val ACTION_STOP = "org.avoperformance.horse.STOP"
-        fun start(ctx: Context) = ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
-        fun stop(ctx: Context) = ctx.startService(Intent(ctx, AvoLinkService::class.java).setAction(ACTION_STOP))
+        fun start(ctx: Context) {
+            (ctx.applicationContext as AvoApp).container.settings.autoStartPaused = false
+            ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
+        }
+        fun stop(ctx: Context) {
+            (ctx.applicationContext as AvoApp).container.settings.autoStartPaused = true
+            ctx.startService(Intent(ctx, AvoLinkService::class.java).setAction(ACTION_STOP))
+        }
+
+        /**
+         * Background start without opening the app (boot, app update, Bluetooth link with the watch, app process start).
+         * Only when enabled, a watch is authorised, Bluetooth permission is granted and the user did not disconnect.
+         * Android allows it from boot/update broadcasts and, at any time, when battery optimisation is disabled for the app.
+         */
+        fun startIfAutomatic(ctx: Context, reason: String): Boolean {
+            val app = ctx.applicationContext as AvoApp
+            val s = app.container.settings
+            if (!s.autoStart || s.autoStartPaused || s.authorizedWatch == null) return false
+            if (Build.VERSION.SDK_INT >= 31 && ContextCompat.checkSelfPermission(ctx, android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED) return false
+            return try {
+                ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
+                app.container.log.i("LINK", "inicio automático en segundo plano ($reason)")
+                true
+            } catch (e: Exception) {   // ForegroundServiceStartNotAllowedException when Android forbids it
+                app.container.log.w("LINK", "inicio automático no permitido ($reason): ${e.message}")
+                false
+            }
+        }
     }
 }

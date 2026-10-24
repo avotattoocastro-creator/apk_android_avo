@@ -79,6 +79,15 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         get() = p.getBoolean("training.dnd.geofence", false)
         set(v) { p.edit().putBoolean("training.dnd.geofence", v).apply() }
 
+    /** Start the link service in the background (boot, app update, Bluetooth link with the watch) without opening the app. */
+    var autoStart: Boolean
+        get() = p.getBoolean("link.autoStart", true)
+        set(v) { p.edit().putBoolean("link.autoStart", v).apply() }
+    /** The user pressed "Desconectar": no automatic start until they connect again. */
+    var autoStartPaused: Boolean
+        get() = p.getBoolean("link.autoStartPaused", false)
+        set(v) { p.edit().putBoolean("link.autoStartPaused", v).apply() }
+
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)
         set(v) { p.edit().putBoolean("sync.autoDownload", v).apply() }

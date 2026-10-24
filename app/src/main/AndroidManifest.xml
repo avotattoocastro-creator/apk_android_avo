@@ -18,6 +18,8 @@
     <!-- Special user-granted permission; not an ordinary runtime permission. -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <uses-permission android:name="android.permission.NFC" />
     <uses-feature android:name="android.hardware.nfc" android:required="false" />
@@ -72,6 +74,16 @@
             android:name=".service.AvoLinkService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
+
+        <!-- Background start without opening the app (boot, update, Bluetooth on, link with the watch) -->
+        <receiver android:name=".service.AutoStartReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            </intent-filter>
+        </receiver>
 
         <!-- WorkManager initialised on demand by the app -->
     </application>

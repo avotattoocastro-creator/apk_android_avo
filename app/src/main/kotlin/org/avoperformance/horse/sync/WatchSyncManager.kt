@@ -286,6 +286,8 @@ class WatchSyncManager(
 class SyncWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {
         val c = (applicationContext as AvoApp).container
+        // periodic safety net: restores the link service if the system stopped it
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(applicationContext, "comprobación periódica")
         return runCatching { c.sync.uploadPending(); Result.success() }.getOrElse { Result.retry() }
     }
 }

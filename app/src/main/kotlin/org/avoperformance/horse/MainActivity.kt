@@ -224,6 +224,7 @@ class MainActivity : ComponentActivity() {
         incomingAvo = extractAvoUri(intent)
         handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
+        else org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "app abierta")
         setContent {
             AvoTheme {
                 var bootVisible by rememberSaveable { mutableStateOf(savedInstanceState == null) }
