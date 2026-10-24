@@ -35,7 +35,10 @@ class DownloadProtocolTest {
 
     /** Simulated watch: [segments] are the session files; [plan] decides the fault of the n-th READ_FILE. */
     class FakeWatch(val scope: CoroutineScope, val segments: List<ByteArray>, val att: Int = 244, val plan: (Int) -> Fault = { Fault.OK }) : AvoTransport {
-        lateinit var client: AvoClient
+        var clientOrNull: AvoClient? = null
+        var client: AvoClient
+            get() = clientOrNull ?: AvoClient(this, {}).also { clientOrNull = it }
+            set(v) { clientOrNull = v }
         var reads = 0; var rtcmWrites = 0; var connected = true
         private val reasm = org.avoperformance.horse.core.ble.BleReassembler()
         override val attPayload get() = att
@@ -75,7 +78,6 @@ class DownloadProtocolTest {
     private fun sha(parts: List<ByteArray>) = MessageDigest.getInstance("SHA-256").apply { parts.forEach { update(it) } }.digest()
 
     private suspend fun CoroutineScope.download(w: FakeWatch, dir: java.io.File = Files.createTempDirectory("avo_dl").toFile(), client: () -> AvoClient? = { w.client }): SessionDownload {
-        if (!w::client.isInitialized) w.client = AvoClient(w, {})
         val dl = SessionDownload(dir, "S1E8C_000009_001", w.segments.size)
         ResilientDownload(client, pause = { delay(it) }).run("S1E8C_000009_001", dl)
         return dl
