@@ -378,3 +378,9 @@ Petición del usuario.
 - Petición del usuario: el icono solo mostraba la cabeza del caballo recortada.
 - Nuevo primer plano del icono adaptativo (`avo_launcher_foreground.webp`), recortado de la imagen de marca `avo_brand_hero`: caballo, «AVO» y «HORSE EDITION», sin «PERFORMANCE» porque a ese tamaño no se lee.
 - Tamaño ajustado para que entre completo en la máscara circular y en la cuadrada redondeada. Fondo negro de marca (#030406). También en AVO Tarjetas. versionCode 25.
+
+## 2026-10-25 — Iconos diferenciados: AVO Tarjetas (marco azul) y AVO Update (marco verde)
+- Petición del usuario: distinguir las apps por el icono.
+- AVO Tarjetas: icono adaptativo nuevo (caballo, AVO, HORSE EDITION) con marco azul en el borde de la máscara.
+- AVO Update 2.1.1 (versionCode 23): pasa de icono cuadrado (`avo_launcher_brand`) a icono adaptativo con el mismo logo y marco verde. No cambia ninguna funcionalidad del updater.
+- El workflow del updater también se ejecuta en `feature/avo-firebase-sync`.
