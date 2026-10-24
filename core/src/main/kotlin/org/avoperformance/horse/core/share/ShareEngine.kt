@@ -180,7 +180,8 @@ class ShareEngine(
                     backend.putReceipt(n.transferId, me.code, if (result == Importer.Result.Imported) "imported" else "present")
                     backend.removeNotice(me.code, n.transferId)
                     record(n, if (result == Importer.Result.Imported) InState.IMPORTED else InState.ALREADY_PRESENT, null, null)
-                    file.delete(); received++
+                    file.delete()
+                    if (result == Importer.Result.Imported) received++ // "already present" does not count as new
                 }
                 is Importer.Result.NeedsConfirmation -> record(n, InState.NEEDS_CONFIRMATION, result.reason, file.absolutePath)
             }
