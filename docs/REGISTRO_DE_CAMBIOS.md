@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-24 — CHEST V3.7.3-rc1 + Android — corrección de READ_FILE (rama `fix/chest-v373-readfile`)
+**Autor:** Claude
+**Causa analizada:** el límite de 2048 B de V3.5.4 (SD FIX) sigue intacto en 3.7.x (sin regresión en `op_read`). El fallo real
+(«40 timeouts, 0 fragmentos perdidos») es una respuesta FILE_DATA que no llega a salir del reloj: descarte silencioso en la cola BLE
+(500 ms) o notificación fallida a mitad de mensaje, sin contadores en DIAG. Detalle: `firmware/chest/V3_7_3_READFILE/README.md`.
+**Qué cambia:** firmware 3.7.3-rc1 (solo `ble_service.cpp`: espera de 2 s para FILE_DATA, telemetría en pausa durante descargas,
+tope por MTU, contadores en DIAG); Android: `ResilientDownload` en `core` con reintentos, reconexión y reanudación, y 12 pruebas con reloj simulado.
+**No se ha tocado:** protocolo, NTRIP/RTCM, almacenamiento, OTA, firma, particiones, pantalla.
+**Validación:** CI. **NO VERIFICADO** en el reloj; BIN **no apto para OTA** sin verificación.
+
 ## 2026-10-23 — Copias de código fuente y traspaso para asistentes
 **Autor:** Claude · Zips en la raíz: `AVO_ANDROID_V2_0_REDISENO_MAREAS_ANALISIS_FUENTES.zip` (actualizado),
 `AVO_UPDATER_V2_1_0_FUENTES.zip`, `AVO_BACK_V3_8_0_FUENTES.zip`. Documento `docs/TRASPASO_ASISTENTES_2026-10-23.md`

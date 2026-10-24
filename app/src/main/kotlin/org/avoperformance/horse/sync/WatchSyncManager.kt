@@ -127,14 +127,11 @@ class WatchSyncManager(
         t = t.copy(state = SyncState.DESCARGANDO.name, localDir = dir.absolutePath, lastError = null)
         db.trainings().upsert(t)
         try {
-            var pos: Pair<Int, Long>? = dl.position()
+            // resumable, verified READ_FILE download with per-chunk retries and reconnection (core/sync/ResilientDownload)
             var lastSave = 0L
-            while (pos != null) {
-                if (watchRecording()) throw IllegalStateException("El reloj empezó a grabar: descarga en pausa")
-                val chunk = c.readChunk(sessionId, pos.first, pos.second) ?: break   // no more segments
-                pos = dl.append(pos.first, pos.second, chunk.data, chunk.fileSize)
-                val got = dl.downloadedBytes()
-                _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Descargando", true)
+            org.avoperformance.horse.core.sync.ResilientDownload({ watch.client }).run(sessionId, dl,
+                isBlocked = { if (watchRecording()) "El reloj empezó a grabar: descarga en pausa" else null }) { got, msg ->
+                _progress.value = SyncProgress(sessionId, got, t.totalBytes, msg, true)
                 if (System.currentTimeMillis() - lastSave > 2000) { db.trainings().upsert(t.copy(downloadedBytes = got)); lastSave = System.currentTimeMillis() }
             }
             val got = dl.downloadedBytes()
@@ -143,7 +140,7 @@ class WatchSyncManager(
             // Integrity: SHA-256 computed by the watch over the same segments
             _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Verificando huella SHA-256 con el reloj…", true)
             val local = dl.sha256().toHex()
-            val remote = c.fileSha256(sessionId).toHex()
+            val remote = (watch.client ?: c).fileSha256(sessionId).toHex()
             val ok = local == remote
             t = t.copy(localSha256 = local, watchSha256 = remote, state = (if (ok) SyncState.VERIFICADO_LOCAL else SyncState.ERROR_INTEGRIDAD).name,
                 lastError = if (ok) null else "La huella local no coincide con la del reloj")

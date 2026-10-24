@@ -10,6 +10,7 @@ kotlin { jvmToolchain(17) }
 dependencies {
     api(libs.coroutines.core)
     testImplementation(libs.junit)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
 
 tasks.test {
