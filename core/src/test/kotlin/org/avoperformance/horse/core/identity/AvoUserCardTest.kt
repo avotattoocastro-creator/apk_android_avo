@@ -20,8 +20,7 @@ class AvoUserCardTest {
     @Test fun fitsTags() {
         // NTAG215 (504 B NDEF): worst case, 40 accented characters, plus AAR record (~35 B).
         assertTrue(AvoUserCard.generate("Ñ".repeat(AvoUserCard.MAX_NAME)).toUri().length + 40 < 504)
-        // NTAG213 (137 B): fits with a normal name (≤ 15 ASCII characters).
-        assertTrue(AvoUserCard.generate("Ana Castro Ruiz").toUri().length + 40 < 137)
+        // NTAG213 (137 B) is NOT guaranteed: the AVO Tarjetas app checks the real capacity before writing.
     }
 
     @Test fun secretNotInToString() {

@@ -112,7 +112,7 @@ class CardsActivity : ComponentActivity() {
                         mode = Mode.Write(card, isNew = true)
                         status = "Acerca una tarjeta en blanco para grabar ${card.name} · ${card.code}"
                     }) { Text("Crear y grabar") }
-                    Text("Usa NTAG215 o NTAG216. NTAG213 solo sirve con nombres cortos.", style = MaterialTheme.typography.bodySmall)
+                    Text("Usa NTAG215 o NTAG216 (las NTAG213 se quedan cortas).", style = MaterialTheme.typography.bodySmall)
                 } }
             }
             item {
