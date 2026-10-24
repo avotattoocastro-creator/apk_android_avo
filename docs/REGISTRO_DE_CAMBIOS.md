@@ -28,7 +28,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
 **Qué cambia:** la descarga ya no se interrumpe al primer READ_FILE sin respuesta (un fragmento BLE perdido anula toda la respuesta):
 reintenta el mismo bloque hasta 8 veces con pausas crecientes (1–8 s), espera a la reconexión automática si se cae el enlace, pide 2048 B
-(el máximo que el reloj responde por READ_FILE) y, si al final falla, el mensaje indica kB, intentos, timeouts, fragmentos perdidos y errores CRC.
+(el máximo que el reloj responde por READ_FILE); también reintenta los errores de escritura GATT (p. ej. «Escritura BLE fallida (estado 133)»,
+visto en S1E8C_000008_001 a 22 kB) en la escritura y en el bloque; y, si al final falla, el mensaje indica kB, intentos, timeouts, fragmentos perdidos y errores CRC.
 **No se ha tocado:** firmware ni protocolo BLE/NTRIP (solo la política de reintentos de la app).
 **Validación:** CI. **NO VERIFICADO** con el reloj (caso del usuario: sesión S1E8C_000035_001 parada en 288 kB de 724,9 kB).
 

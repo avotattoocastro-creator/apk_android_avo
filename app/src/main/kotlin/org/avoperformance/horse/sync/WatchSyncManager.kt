@@ -196,8 +196,12 @@ class WatchSyncManager(
             }
             try {
                 return c.readChunk(sessionId, segment, offset, 2048)
-            } catch (e: org.avoperformance.horse.core.ble.BleRequestException) {
-                if (e.status != BleStatus.TIMEOUT && e.status != BleStatus.BUSY && e.status != BleStatus.BAD_CRC) throw e
+            } catch (e: Exception) {
+                if (e is kotlinx.coroutines.CancellationException) throw e
+                // transient link errors are retried: no answer, busy, bad CRC, and GATT write errors (e.g. status 133)
+                val transient = (e is org.avoperformance.horse.core.ble.BleRequestException && (e.status == BleStatus.TIMEOUT || e.status == BleStatus.BUSY || e.status == BleStatus.BAD_CRC)) ||
+                    e is java.io.IOException
+                if (!transient) throw e
                 failures++
                 val st = c.stats
                 log.w("SYNC", "$sessionId seg $segment off $offset: ${e.message} (intento $failures, timeouts ${st.timeouts}, huecos ${st.gaps}, CRC ${st.crcErrors})")
