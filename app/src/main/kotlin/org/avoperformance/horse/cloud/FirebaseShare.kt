@@ -91,7 +91,12 @@ class FirebaseShare(private val ctx: Context) {
 
     suspend fun signIn(card: AvoUserCard) {
         val email = emailOf(card.code)
-        if (auth.currentUser?.email == email) return
+        if (auth.currentUser?.email == email) {
+            // Session already open: the profile must also exist. If the first registration happened while the rules
+            // were still locked, the session stayed open without a profile and every invitation was denied.
+            if (profilePublished == card) return
+            publishProfile(card); return
+        }
         if (auth.currentUser != null) auth.signOut()
         try {
             call(online = false) { auth.signInWithEmailAndPassword(email, card.secret) }
@@ -103,11 +108,19 @@ class FirebaseShare(private val ctx: Context) {
                 throw IllegalStateException(if (collision) "Esta tarjeta ya está registrada con otra clave (¿tarjeta regrabada o copiada?)" else "No se pudo entrar: ${e.message}")
             }
         }
-        val uid = auth.currentUser?.uid ?: error("Inicio de sesión fallido")
-        call { r("users/${card.code}").setValue(mapOf("name" to card.name, "uid" to uid)) }
+        publishProfile(card)
     }
 
-    fun signOut() = runCatching { auth.signOut() }
+    @Volatile private var profilePublished: AvoUserCard? = null
+
+    /** Publishes (or repairs) my profile in the directory. Idempotent. */
+    private suspend fun publishProfile(card: AvoUserCard) {
+        val uid = auth.currentUser?.uid ?: error("Inicio de sesión fallido")
+        call { r("users/${card.code}").setValue(mapOf("name" to card.name, "uid" to uid)) }
+        profilePublished = card
+    }
+
+    fun signOut() = runCatching { profilePublished = null; auth.signOut() }
     val signedInCode: String? get() = auth.currentUser?.email?.substringBefore('@')?.uppercase()
 
     suspend fun directory(): List<Contact> = call { r("users").get() }.children.mapNotNull { s ->
@@ -117,6 +130,7 @@ class FirebaseShare(private val ctx: Context) {
 
     /** Invites [to] to receive my trainings (they must accept it). */
     suspend fun invite(me: Contact, to: String) {
+        if (!call { r("users/$to").get() }.exists()) error("$to todavía no se ha registrado: tiene que acercar su tarjeta AVO en su móvil")
         val cur = call { r("grants/$to/${me.code}").get() }
         when (cur.child("state").getValue(String::class.java)) {
             null -> {}
