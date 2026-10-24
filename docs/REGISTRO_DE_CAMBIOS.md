@@ -32,7 +32,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Qué cambia:** firmware 3.7.3-rc1 (solo `ble_service.cpp`: espera de 2 s para FILE_DATA, telemetría en pausa durante descargas,
 tope por MTU, contadores en DIAG); Android: `ResilientDownload` en `core` con reintentos, reconexión y reanudación, y 12 pruebas con reloj simulado.
 **No se ha tocado:** protocolo, NTRIP/RTCM, almacenamiento, OTA, firma, particiones, pantalla.
-**Validación:** CI. **NO VERIFICADO** en el reloj; BIN **no apto para OTA** sin verificación.
+**Validación:** CI (firmware 40084541310, Android 40085107042). **Prueba física parcial (24-10-2026 12:26):** el usuario indica que «parece que ya está solucionado» con 3.7.3-rc1; pendiente confirmar SHA-256 de S1E8C_000009_001 y contadores DIAG. BIN **no apto para OTA** sin verificación.
 
 ## 2026-10-23 — Copias de código fuente y traspaso para asistentes
 **Autor:** Claude · Zips en la raíz: `AVO_ANDROID_V2_0_REDISENO_MAREAS_ANALISIS_FUENTES.zip` (actualizado),
