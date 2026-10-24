@@ -79,7 +79,7 @@ class WifiSyncCoordinator(
         val ids = pending.map { it.first }
         try {
             if (paused) { set(WifiSyncState.PAUSED); return WifiSyncReport(emptyList(), emptyMap(), emptyList(), skipped = true) }
-            if (control.recording()) { set(WifiSyncState.WAITING, msg = "Pendiente: el reloj está grabando"); return WifiSyncReport(emptyList(), ids.associateWith { "grabando" }, emptyList()) }
+            if (control.recording()) { set(WifiSyncState.WAITING, msg = "Pendiente: el reloj está grabando"); ids.forEach { failed[it] = "grabando" }; return WifiSyncReport(emptyList(), failed.toMap(), emptyList()) }
             set(WifiSyncState.WIFI_STARTING, pending = ids.size)
             val creds = when (val s = try { control.start() } catch (e: Exception) { WatchWifiControl.Start.Refused(e.message ?: "BLE", true) }) {
                 is WatchWifiControl.Start.Ok -> s.creds
@@ -87,7 +87,8 @@ class WifiSyncCoordinator(
                 is WatchWifiControl.Start.Refused -> {
                     log("wifi: rechazado (${s.reason})")
                     set(WifiSyncState.WAITING, msg = "Pendiente de conexión")
-                    return if (s.retryLater) WifiSyncReport(emptyList(), ids.associateWith { s.reason }, emptyList())
+                    if (s.retryLater) ids.forEach { failed[it] = s.reason }
+                    return if (s.retryLater) WifiSyncReport(emptyList(), failed.toMap(), emptyList())
                            else WifiSyncReport(emptyList(), emptyMap(), ids)
                 }
             }
