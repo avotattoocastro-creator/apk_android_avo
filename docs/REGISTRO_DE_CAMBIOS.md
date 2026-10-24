@@ -373,3 +373,8 @@ Petición del usuario.
   - Las tarjetas sueltas pasan a páginas propias (`SpotScreen`, `DndScreen`, `WhatsAppFavoritesScreen`, `BackupScreen`, `AboutScreen`).
 - **Textos explicativos eliminados** (ayudas de funcionamiento, rutas de sincronización, tarjeta «Servidor»). Se mantienen los estados, los errores, las listas vacías y los avisos de validez del análisis (umbrales sin validar en caballos reales, aceleraciones GNSS frente a cincha), que evitan conclusiones no validadas.
 - No cambia ninguna funcionalidad. versionCode 24.
+
+## 2026-10-25 — Icono de la app con caballo, AVO y HORSE EDITION (2.2-ui-dev9)
+- Petición del usuario: el icono solo mostraba la cabeza del caballo recortada.
+- Nuevo primer plano del icono adaptativo (`avo_launcher_foreground.webp`), recortado de la imagen de marca `avo_brand_hero`: caballo, «AVO» y «HORSE EDITION», sin «PERFORMANCE» porque a ese tamaño no se lee.
+- Tamaño ajustado para que entre completo en la máscara circular y en la cuadrada redondeada. Fondo negro de marca (#030406). También en AVO Tarjetas. versionCode 25.
