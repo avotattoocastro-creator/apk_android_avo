@@ -47,14 +47,44 @@ class AvoWifiSyncManager(
 
     private fun recording() = watch.telemetry.value?.t?.session.let { it == WatchSessionState.RECORDING || it == WatchSessionState.PAUSED }
 
-    /** Firmware with Wi-Fi download (by capability, never by version number). */
-    val supported: Boolean get() = watch.info.value?.supportsWifiSync == true
+    /**
+     * Protection against reboot loops: before each WIFI_SYNC(start) the watch boot counter is saved. If on
+     * reconnecting the counter went up (the watch rebooted while turning Wi-Fi on), Wi-Fi is disabled for that
+     * firmware and the download goes over BLE. It is re-enabled on its own when the firmware version changes.
+     * Field case 3.7.4-wifi-rc1: reboot every ~5 s when starting the AP.
+     */
+    private val guard = ctx.getSharedPreferences("avo_wifi_guard", Context.MODE_PRIVATE)
+
+    private fun checkGuard(): Boolean {
+        val info = watch.info.value ?: return false
+        val fwBlocked = guard.getString("blocked_fw", null)
+        if (fwBlocked != null && fwBlocked == info.firmware) return false
+        if (fwBlocked != null && fwBlocked != info.firmware) guard.edit().remove("blocked_fw").apply()   // new firmware: try again
+        val attFw = guard.getString("attempt_fw", null)
+        val attBoot = guard.getLong("attempt_boot", -1)
+        if (attFw != null && attFw == info.firmware && attBoot >= 0 && info.bootCount > attBoot) {
+            guard.edit().putString("blocked_fw", info.firmware).remove("attempt_fw").remove("attempt_boot").apply()
+            log.w("WIFI", "el reloj se reinició al activar el Wi-Fi (arranque $attBoot → ${info.bootCount}): Wi-Fi desactivado para ${info.firmware}, se usa Bluetooth")
+            return false
+        }
+        return true
+    }
+    private fun markAttempt() { watch.info.value?.let { guard.edit().putString("attempt_fw", it.firmware).putLong("attempt_boot", it.bootCount).commit() } }
+    private fun clearAttempt() { guard.edit().remove("attempt_fw").remove("attempt_boot").apply() }
+
+    /** The watch firmware rebooted when turning on Wi-Fi: blocked until another firmware. */
+    val blockedFirmware: String? get() = guard.getString("blocked_fw", null)
+
+    /** Firmware with Wi-Fi download (by capability, never by version number) and without a reboot history. */
+    val supported: Boolean get() = watch.info.value?.supportsWifiSync == true && checkGuard()
 
     private val control = object : WatchWifiControl {
         override suspend fun start(): WatchWifiControl.Start {
             if (!supported) return WatchWifiControl.Start.Unsupported
             val c = watch.client ?: throw IOException("Sin conexión con el reloj")
+            markAttempt()
             val m = c.request(MsgType.WIFI_SYNC, byteArrayOf(1), Idempotency.STATE_CHANGING, timeoutMs = 10_000)
+            if (m.statusEnum != BleStatus.OK) clearAttempt()   // clean refusal: the watch is still on
             return when (m.statusEnum) {
                 BleStatus.OK -> WifiCredentials.decode(m.payload)?.let { WatchWifiControl.Start.Ok(it) }
                     ?: WatchWifiControl.Start.Refused("credenciales ilegibles", false)
@@ -110,13 +140,21 @@ class AvoWifiSyncManager(
         if (pending.isEmpty()) return@withContext WifiSyncReport(emptyList(), emptyMap(), emptyList())
         if (!supported) return@withContext WifiSyncReport(emptyList(), emptyMap(), pending.map { it.first })
         watch.downloadMode.value = true
-        try { coordinator.sync(pending) } finally { watch.downloadMode.value = false }
+        try {
+            val r = coordinator.sync(pending)
+            // still connected over BLE after the pass → the watch did not reboot because of Wi-Fi
+            if (watch.isReady) clearAttempt()
+            r
+        } finally { watch.downloadMode.value = false }
     }
 
     fun cancel() = coordinator.cancel()
+    /** Pause persists across app restarts. */
     var paused: Boolean
         get() = coordinator.paused
-        set(v) { coordinator.paused = v; if (v) coordinator.cancel() }
+        set(v) { coordinator.paused = v; guard.edit().putBoolean("paused", v).apply(); if (v) coordinator.cancel() }
+
+    init { coordinator.paused = guard.getBoolean("paused", false) }
 }
 
 /** HTTP over the watch network (does not change the default network of the phone). */

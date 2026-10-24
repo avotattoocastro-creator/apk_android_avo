@@ -48,6 +48,8 @@ static const char* ROOT = AVO_SD_MOUNT "/AVO";
 static const uint32_t NO_CLIENT_MS = 60000, IDLE_MS = 45000, MAX_ON_MS = 15 * 60000, CLIENT_LEFT_MS = 20000;
 static const int MIN_BATT_PCT = 15, STOP_BATT_PCT = 10, MAX_AUTH_FAIL = 5;
 static const size_t CHUNK = 16 * 1024;
+// rc2: minimum internal RAM to bring up AP + httpd next to BLE + ESP-NOW (internal estimate: ~45 KB)
+static const size_t MIN_INTERNAL_FREE = 72 * 1024, MIN_INTERNAL_BLOCK = 24 * 1024;
 
 static SemaphoreHandle_t s_mx = nullptr;
 static volatile State s_state = State::OFF;
@@ -389,7 +391,7 @@ static httpd_handle_t start_http() {
   httpd_config_t c = HTTPD_DEFAULT_CONFIG();
   c.server_port = s_cred.port;
   c.max_open_sockets = 3;
-  c.stack_size = 8192;
+  c.stack_size = 6144;
   c.task_priority = 3;                 // below storage/BLE/ESP-NOW
   c.core_id = 1;
   c.lru_purge_enable = true;
@@ -425,7 +427,7 @@ static void do_stop(StopReason why) {
   Serial.printf("[AVO WIFI] off (%s), %u B served\n", stop_reason_text(why), (unsigned)s_bytes);
 }
 
-StartResult start(Credentials* out) {
+static StartResult do_start(Credentials* out) {
   if (recording_now()) return StartResult::RECORDING;
   int pct; bool vbus, sd;
   battery(&pct, &vbus, &sd);
@@ -434,6 +436,19 @@ StartResult start(Credentials* out) {
   lock();
   if (s_state == State::READY || s_state == State::CLIENT) { touch(); if (out) *out = s_cred; unlock(); return StartResult::OK; }
   if (s_state != State::OFF) { unlock(); return StartResult::BUSY; }
+  // rc2: Wi-Fi disabled after a reboot while starting the AP (see init) → never retry on its own
+  uint32_t off = 0;
+  if (sys::nvs_get_u32("wifi_off", &off) && off) { unlock(); return StartResult::RADIO_ERROR; }
+  // rc2: enough internal memory for the AP + HTTP server (field 3.7.4-rc1: reboot when starting)
+  size_t freeb = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+  size_t largest = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+  Serial.printf("[AVO WIFI] start: internal=%u largest=%u\n", (unsigned)freeb, (unsigned)largest);
+  if (freeb < MIN_INTERNAL_FREE || largest < MIN_INTERNAL_BLOCK) {
+    bb::log(BbCode::SHUTDOWN, 1, 0x57, (uint32_t)freeb, "wifi: low internal RAM");
+    unlock();
+    return StartResult::RADIO_ERROR;
+  }
+  sys::nvs_set_u32("wifi_try", 1);       // breadcrumb: if we reboot before clearing it, the next boot disables Wi-Fi
   s_state = State::STARTING;
   const char* dev = sys::device_id_hex();
   snprintf(s_cred.ssid, sizeof(s_cred.ssid), "AVO_CHEST_%s", dev + strlen(dev) - 4);
@@ -456,11 +471,13 @@ StartResult start(Credentials* out) {
     ok = s_httpd != nullptr;
   }
   if (!ok) {
+    sys::nvs_set_u32("wifi_try", 0);
     s_state = State::READY;   // so do_stop cleans everything
     do_stop(StopReason::ERROR);
     unlock();
     return StartResult::RADIO_ERROR;
   }
+  sys::nvs_set_u32("wifi_try", 0);       // AP and server up without a reboot
   s_on_since = s_last_activity = sys::ms();
   s_client_left_at = 0;
   s_starts++;
@@ -470,6 +487,24 @@ StartResult start(Credentials* out) {
   bb::log(BbCode::SHUTDOWN, 0, 0x57, 0, "wifi on");
   Serial.printf("[AVO WIFI] AP %s ch%u on\n", s_cred.ssid, (unsigned)s_cred.channel);   // the password is never printed
   return StartResult::OK;
+}
+
+static SemaphoreHandle_t s_cmd = nullptr, s_done = nullptr, s_api = nullptr;
+static StartResult s_res = StartResult::BUSY;
+static Credentials s_res_cred = {};
+
+StartResult start(Credentials* out) {
+  if (!s_api || xSemaphoreTake(s_api, pdMS_TO_TICKS(100)) != pdTRUE) return StartResult::BUSY;
+  xSemaphoreTake(s_done, 0);
+  xSemaphoreGive(s_cmd);
+  StartResult r = StartResult::BUSY;
+  if (xSemaphoreTake(s_done, pdMS_TO_TICKS(9000)) == pdTRUE) {
+    r = s_res;
+    if (r == StartResult::OK && out) *out = s_res_cred;
+  }
+  memset(&s_res_cred, 0, sizeof(s_res_cred));
+  xSemaphoreGive(s_api);
+  return r;
 }
 
 void stop(StopReason why) { lock(); do_stop(why); unlock(); }
@@ -483,6 +518,9 @@ bool regenerate_password() {
 }
 
 State state() { return s_state; }
+
+bool set_enabled(bool on) { return sys::nvs_set_u32("wifi_off", on ? 0 : 1); }
+bool enabled() { uint32_t off = 0; return !(sys::nvs_get_u32("wifi_off", &off) && off); }
 
 void stats(Stats* o) {
   o->state = s_state; o->last_stop = s_last_stop; o->starts = s_starts; o->requests = s_requests;
@@ -502,7 +540,11 @@ const char* stop_reason_text(StopReason r) {
 // Supervision: shutdown on inactivity/time/battery/recording. 1 s per loop, low priority.
 static void supervise(void*) {
   for (;;) {
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    if (xSemaphoreTake(s_cmd, pdMS_TO_TICKS(1000)) == pdTRUE) {
+      s_res = do_start(&s_res_cred);
+      xSemaphoreGive(s_done);
+      continue;
+    }
     if (s_state != State::READY && s_state != State::CLIENT) continue;
     uint32_t now = sys::ms();
     StopReason why = StopReason::NONE;
@@ -526,10 +568,21 @@ static void supervise(void*) {
 }
 
 bool init() {
+  uint32_t tried = 0;
+  if (sys::nvs_get_u32("wifi_try", &tried) && tried) {
+    // the previous boot rebooted while starting the AP: disable Wi-Fi (the app uses BLE) and record it
+    sys::nvs_set_u32("wifi_off", 1);
+    sys::nvs_set_u32("wifi_try", 0);
+    bb::log(BbCode::SHUTDOWN, 2, 0x57, 0xDEAD, "wifi: reboot while starting AP, disabled");
+    Serial.println("[AVO WIFI] previous AP start rebooted the watch: Wi-Fi disabled (WIFI_SYNC 5 re-enables)");
+  }
+  s_cmd = xSemaphoreCreateBinary();
+  s_done = xSemaphoreCreateBinary();
+  s_api = xSemaphoreCreateMutex();
   s_mx = xSemaphoreCreateMutex();
   s_buf = (uint8_t*)heap_caps_malloc(CHUNK, MALLOC_CAP_SPIRAM);
-  if (!s_mx || !s_buf) return false;
-  return xTaskCreatePinnedToCore(supervise, "wifisync", 4096, nullptr, 1, nullptr, 1) == pdPASS;
+  if (!s_mx || !s_buf || !s_cmd || !s_done || !s_api) return false;
+  return xTaskCreatePinnedToCore(supervise, "wifisync", 8192, nullptr, 2, nullptr, 1) == pdPASS;
 }
 
 }  // namespace wifisync

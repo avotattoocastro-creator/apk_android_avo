@@ -407,3 +407,17 @@ Petición del usuario.
   - Permisos: `CHANGE_NETWORK_STATE`, `ACCESS_WIFI_STATE`.
 - **Corrección:** el pecho sí usa ESP-NOW por defecto (`AVO_LINK_UART`=0); el cable UART es solo una opción de compilación.
 - **Pruebas:** `WifiSyncTest` (24 casos, escenarios 1–20 de la directiva) y `test_wifi_v374.py` (19 comprobaciones). Las pruebas físicas están pendientes; la lista está en `PROTOCOLO_WIFI.md`.
+
+## 2026-10-25 — Bucle de reinicios con CHEST 3.7.4-wifi-rc1 (corrección: firmware rc2 + app 2.3-wifi-dev2)
+- **Prueba física:** con 3.7.4-wifi-rc1 el reloj se reinicia cada 5–6 s. En cada conexión, la app pedía `WIFI_SYNC(start)`, el reloj se reiniciaba al levantar el AP y, al reconectar, la app volvía a pedirlo. Era un bucle provocado por la app.
+- **Causa probable** (sin log serie, no confirmada): falta de RAM interna al levantar AP + httpd junto a BLE + ESP-NOW (ya había avisos de `ESP_ERR_NO_MEM`), o desbordamiento de pila al ejecutarse en la tarea `ble_rx` (6 KB).
+- **Firmware 3.7.4-wifi-rc2:**
+  - el AP se levanta en su propia tarea (8 KB de pila), fuera de `ble_rx`;
+  - comprueba la RAM interna antes de empezar (≥ 72 KB libres y bloque ≥ 24 KB) y, si no la hay, rechaza con `IO_ERROR`/4 sin reiniciarse;
+  - deja una marca en NVS (`wifi_try`): si el reloj se reinicia antes de terminar de levantar el AP, en el siguiente arranque desactiva el Wi-Fi (`wifi_off`), lo anota en la caja negra y la app pasa a BLE;
+  - `WIFI_SYNC` 5 lo vuelve a activar;
+  - pila de httpd de 6 KB.
+- **App 2.3-wifi-dev2:**
+  - protección contra bucles: antes de cada arranque del AP guarda el contador de arranques del reloj; si al reconectar ha subido, desactiva el Wi-Fi para ese firmware y descarga por Bluetooth. Se reactiva solo con otra versión de firmware;
+  - «Pausar» se mantiene tras reiniciar la app.
+- Las pruebas físicas siguen pendientes. El rc2 tampoco está probado en el reloj.

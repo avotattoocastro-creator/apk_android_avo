@@ -37,6 +37,8 @@ StartResult start(Credentials* out);           // idempotent: if already on, ret
 void stop(StopReason why);
 bool regenerate_password();                    // new per-device password (only with AP off)
 State state();
+bool set_enabled(bool on);                     // rc2: WIFI_SYNC 5 (re-enable after a block)
+bool enabled();
 void stats(Stats* out);
 const char* stop_reason_text(StopReason r);
 

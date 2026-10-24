@@ -25,7 +25,7 @@ SRC = "AVO_CHEST_V3_5_0/src"
 
 patch("lib/avo_core/src/avo_ble_proto.h",
       "  BACK_LINK = 0x63,",
-      "  WIFI_SYNC = 0x64,   // V3.7.4: u8 action (1 start AP -> credentials, 2 stop, 3 status, 4 regenerate password)\n  BACK_LINK = 0x63,")
+      "  WIFI_SYNC = 0x64,   // V3.7.4: u8 action (1 start AP -> credentials, 2 stop, 3 status, 4 regenerate password, 5 re-enable)\n  BACK_LINK = 0x63,")
 
 patch(f"{SRC}/ble_service.cpp", '#include "services.h"\n', '#include "services.h"\n#include "wifi_sync.h"\n')
 
@@ -35,7 +35,7 @@ patch(f"{SRC}/ble_service.cpp",
 
 patch(f"{SRC}/ble_service.cpp", "    case BleMsg::TIME_SET: {", r'''    case BleMsg::WIFI_SYNC: {
       uint8_t action = r.u8();
-      if (!r.ok() || action < 1 || action > 4) { respond(type, id, BleStatus::BAD_FORMAT); break; }
+      if (!r.ok() || action < 1 || action > 5) { respond(type, id, BleStatus::BAD_FORMAT); break; }
       if (action == 1) {
         wifisync::Credentials c;
         wifisync::StartResult sr = wifisync::start(&c);
@@ -66,8 +66,10 @@ patch(f"{SRC}/ble_service.cpp", "    case BleMsg::TIME_SET: {", r'''    case Ble
         w.u8((uint8_t)s.state); w.u8((uint8_t)s.last_stop); w.u32(s.starts); w.u32(s.requests);
         w.u32(s.bytes_sent); w.u32(s.on_ms_total); w.u32(s.completes); w.u32(s.auth_failures);
         respond(type, id, BleStatus::OK, b, w.size());
-      } else {
+      } else if (action == 4) {
         respond(type, id, wifisync::regenerate_password() ? BleStatus::OK : BleStatus::STATE_CONFLICT);
+      } else {
+        respond(type, id, wifisync::set_enabled(true) ? BleStatus::OK : BleStatus::IO_ERROR);   // rc2: re-enable after a block
       }
       break;
     }
