@@ -4,7 +4,7 @@ name: Build AVO Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity]
+    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity, feature/avo-firebase-sync]
     paths:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'

@@ -2,31 +2,96 @@
   "rules": {
     ".read": false,
     ".write": false,
+
     "users": {
-      ".read": "auth != null",
+      ".read": "auth != null && auth.token.email.endsWith('@avo-cards.app')",
       "$code": {
         ".write": "auth != null && auth.token.email === $code.toLowerCase() + '@avo-cards.app'",
-        ".validate": "newData.hasChildren(['name', 'uid']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length <= 40"
+        ".validate": "$code.matches(/^AVO-[A-Z2-9]{4}-[A-Z2-9]{4}$/) && newData.hasChildren(['name', 'uid']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length >= 1 && newData.child('name').val().length <= 40",
+        "name": { ".validate": true },
+        "uid": { ".validate": true },
+        "$other": { ".validate": false }
       }
     },
-    "inbox": {
-      "$to": {
-        ".read": "auth != null && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
-        "$msg": {
-          ".write": "auth != null && ((!data.exists() && newData.child('from').val() + '' !== '' && auth.token.email === (newData.child('from').val() + '').toLowerCase() + '@avo-cards.app' && root.child('users').child($to).exists()) || (!newData.exists() && auth.token.email === $to.toLowerCase() + '@avo-cards.app'))",
-          ".validate": "newData.hasChildren(['from', 'fromName', 'sessionId', 'size', 'sha256', 'chunks', 'createdMs']) && newData.child('size').val() <= 31457280 && newData.child('chunks').val() <= 120"
+
+    "grants": {
+      "$recipient": {
+        ".read": "auth != null && auth.token.email === $recipient.toLowerCase() + '@avo-cards.app'",
+        "$sender": {
+          ".read": "auth != null && auth.token.email === $sender.toLowerCase() + '@avo-cards.app'",
+          ".write": "auth != null && $recipient !== $sender && root.child('users').child($recipient).exists() && root.child('users').child($sender).exists() && ((auth.token.email === $sender.toLowerCase() + '@avo-cards.app' && ((!data.exists() && newData.child('state').val() === 'PENDING') || !newData.exists())) || (auth.token.email === $recipient.toLowerCase() + '@avo-cards.app' && data.exists() && (!newData.exists() || newData.child('state').val() === 'ACCEPTED' || newData.child('state').val() === 'REJECTED' || newData.child('state').val() === 'BLOCKED')))",
+          ".validate": "newData.hasChildren(['state', 'senderName', 'ms']) && (newData.child('senderName').val() === data.child('senderName').val() || !data.exists())",
+          "state": { ".validate": "newData.isString() && newData.val().matches(/^(PENDING|ACCEPTED|REJECTED|BLOCKED)$/)" },
+          "senderName": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "ms": { ".validate": "newData.isNumber()" },
+          "$other": { ".validate": false }
         }
       }
     },
+
     "blobs": {
-      "$to": {
-        ".read": "auth != null && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
-        "$msg": {
-          ".write": "auth != null && !newData.exists() && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
-          "$i": {
-            ".write": "auth != null && !data.exists() && root.child('users').child($to).exists()",
-            ".validate": "newData.isString() && newData.val().length <= 360000"
+      "$tid": {
+        ".write": "auth != null && $tid.matches(/^[0-9a-f]{32}$/) && ((!data.exists() && auth.token.email === (newData.child('meta/owner').val() + '').toLowerCase() + '@avo-cards.app') || (data.exists() && auth.token.email === (data.child('meta/owner').val() + '').toLowerCase() + '@avo-cards.app'))",
+        ".read": "auth != null && auth.token.email === (data.child('meta/owner').val() + '').toLowerCase() + '@avo-cards.app'",
+        "meta": {
+          ".read": "auth != null && data.parent().child('to').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).val() === true && root.child('grants').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).child(data.child('owner').val() + '').child('state').val() === 'ACCEPTED'",
+          ".validate": "newData.hasChildren(['owner', 'ownerName', 'sessionId', 'horseName', 'riderName', 'size', 'sha256', 'chunks', 'chunkSize', 'createdMs', 'expiresMs']) && (!data.exists() || data.child('sha256').val() === newData.child('sha256').val())",
+          "owner": { ".validate": "newData.isString() && auth.token.email === newData.val().toLowerCase() + '@avo-cards.app'" },
+          "ownerName": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "sessionId": { ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 128" },
+          "horseName": { ".validate": "newData.isString() && newData.val().length <= 120" },
+          "riderName": { ".validate": "newData.isString() && newData.val().length <= 120" },
+          "size": { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 31457280" },
+          "sha256": { ".validate": "newData.isString() && newData.val().matches(/^[0-9a-f]{64}$/)" },
+          "chunks": { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 120" },
+          "chunkSize": { ".validate": "newData.isNumber() && newData.val() >= 16384 && newData.val() <= 262144" },
+          "createdMs": { ".validate": "newData.isNumber() && newData.val() <= now + 600000" },
+          "expiresMs": { ".validate": "newData.isNumber() && newData.val() <= now + 2678400000" },
+          "$other": { ".validate": false }
+        },
+        "complete": {
+          ".read": "auth != null && data.parent().child('to').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).val() === true",
+          ".validate": "newData.val() === true && newData.parent().child('c').child((newData.parent().child('meta/chunks').val() - 1) + '').exists()"
+        },
+        "to": {
+          "$code": {
+            ".validate": "newData.val() === true && root.child('grants').child($code).child(newData.parent().parent().child('meta/owner').val() + '').child('state').val() === 'ACCEPTED'"
           }
+        },
+        "c": {
+          "$i": {
+            ".read": "auth != null && data.parent().parent().child('to').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).val() === true && root.child('grants').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).child(data.parent().parent().child('meta/owner').val() + '').child('state').val() === 'ACCEPTED'",
+            ".validate": "$i.matches(/^[0-9]{1,3}$/) && newData.isString() && newData.val().length <= 360000 && newData.parent().parent().child('meta').exists()"
+          }
+        },
+        "$other": { ".validate": false }
+      }
+    },
+
+    "inbox": {
+      "$recipient": {
+        ".read": "auth != null && auth.token.email === $recipient.toLowerCase() + '@avo-cards.app'",
+        "$tid": {
+          ".write": "auth != null && ((!newData.exists() && (auth.token.email === $recipient.toLowerCase() + '@avo-cards.app' || auth.token.email === (data.child('from').val() + '').toLowerCase() + '@avo-cards.app')) || (newData.exists() && auth.token.email === (newData.child('from').val() + '').toLowerCase() + '@avo-cards.app' && root.child('grants').child($recipient).child(newData.child('from').val() + '').child('state').val() === 'ACCEPTED' && root.child('blobs').child($tid).child('meta/owner').val() === newData.child('from').val() && root.child('blobs').child($tid).child('complete').val() === true && root.child('blobs').child($tid).child('to').child($recipient).val() === true))",
+          ".validate": "newData.hasChildren(['from', 'fromName', 'sessionId', 'horseName', 'size', 'createdMs'])",
+          "from": { ".validate": "newData.isString()" },
+          "fromName": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "sessionId": { ".validate": "newData.isString() && newData.val() === root.child('blobs').child($tid).child('meta/sessionId').val()" },
+          "horseName": { ".validate": "newData.isString() && newData.val().length <= 120" },
+          "size": { ".validate": "newData.isNumber() && newData.val() === root.child('blobs').child($tid).child('meta/size').val()" },
+          "createdMs": { ".validate": "newData.isNumber()" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+
+    "receipts": {
+      "$tid": {
+        ".read": "auth != null && auth.token.email === (root.child('blobs').child($tid).child('meta/owner').val() + '').toLowerCase() + '@avo-cards.app'",
+        ".write": "auth != null && !newData.exists() && auth.token.email === (root.child('blobs').child($tid).child('meta/owner').val() + '').toLowerCase() + '@avo-cards.app'",
+        "$recipient": {
+          ".write": "auth != null && auth.token.email === $recipient.toLowerCase() + '@avo-cards.app' && root.child('blobs').child($tid).child('to').child($recipient).val() === true",
+          ".validate": "newData.isString() && newData.val().length <= 140 && (newData.val() === 'imported' || newData.val() === 'present' || newData.val().beginsWith('error:'))"
         }
       }
     }
