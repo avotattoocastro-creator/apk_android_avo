@@ -159,6 +159,18 @@ jobs:
           cd "$AVO_SOURCE_DIR"
           ./gradlew --no-daemon :core:test
 
+      - name: Fallos de pruebas core como anotaciones
+        if: failure()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import glob, xml.etree.ElementTree as ET
+          for x in glob.glob("core/build/test-results/test/*.xml"):
+              for tc in ET.parse(x).getroot().iter("testcase"):
+                  for f in list(tc.findall("failure")) + list(tc.findall("error")):
+                      msg = (f.get("message") or f.text or "").replace("\n", " ")[:300]
+                      print(f"::error::{tc.get('classname')}.{tc.get('name')}: {msg}")
+          PY
       - name: Verify Android JVM tests
         shell: bash
         run: |
