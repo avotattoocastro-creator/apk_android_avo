@@ -202,7 +202,7 @@ fun ShareScreen(c: AppContainer) {
                     val horse = horses.firstOrNull { it.code == (o.horseCode ?: t?.horseCode) }?.name ?: o.horseCode ?: "—"
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
-                            Text("$horse · ${t?.let { Fmt.date(it.startRtcMs) } ?: o.sessionId}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold, maxLines = 1)
+                            Text(if (horse == "—") o.sessionId else "$horse · ${t?.let { Fmt.date(it.startRtcMs) } ?: o.sessionId}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold, maxLines = 1)
                             Text("→ ${o.recipientName} · ${when (o.origin) { "GLOBAL" -> "global"; "HORSE" -> "por caballo"; else -> "manual" }}", color = AvoColors.TextDim, fontSize = 12.sp)
                             o.receivedMs?.let { Text("Recibido ${(Fmt.date(it) ?: "—")}", color = AvoColors.Ok, fontSize = 12.sp) }
                             o.lastError?.let { Text(it, color = AvoColors.Bad, fontSize = 12.sp) }
@@ -344,6 +344,17 @@ fun ShareDialog(c: AppContainer, sessionId: String, onDismiss: () -> Unit) {
     var error by remember { mutableStateOf<String?>(null) }
     val jobs by c.db.share().outFor(sessionId).collectAsStateWithLifecycle(emptyList())
     val status by c.share.status.collectAsStateWithLifecycle()
+    val training by c.db.trainings().observe(sessionId).collectAsStateWithLifecycle(null)
+    val horses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
+    val riders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
+    val tr = training
+    var namesSkipped by remember { mutableStateOf(false) }
+    if (sentTo == null && tr != null && !namesSkipped &&
+        (horses.none { it.code == tr.horseCode } || riders.none { it.code == tr.riderCode })) {
+        // without horse and rider the training cannot be packaged: ask for them first
+        AssignHorseRiderDialog(c, tr, onDismiss = onDismiss, onDone = { namesSkipped = true })
+        return
+    }
     if (sentTo == null) {
         UserPicker(c, "Compartir entrenamiento", multi = true, onDismiss = onDismiss) { chosen ->
             val card = me ?: return@UserPicker

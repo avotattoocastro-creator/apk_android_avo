@@ -213,7 +213,22 @@ class ShareManager(private val c: AppContainer) {
     }
 
     /** Live listener (with the service running): as soon as a notice arrives, a pass is launched. */
-    suspend fun listen(card: AvoUserCard) {
+    suspend fun listen(card: AvoUserCard) = kotlinx.coroutines.coroutineScope {
+        // There is no push when someone accepts: while deliveries are waiting for acceptance,
+        // check every minute (tiny reads) and send as soon as it is accepted.
+        launch {
+            while (true) {
+                delay(60_000)
+                runCatching {
+                    val waiting = withContext(Dispatchers.IO) { dao.outAll() }.filter { it.state == OutState.WAITING_ACCEPT.name }.map { it.recipient }.distinct()
+                    if (waiting.isNotEmpty() && waiting.any { firebase.outgoingState(card.code, it) == GrantState.ACCEPTED }) runNow()
+                }
+            }
+        }
+        listenInbox(card)
+    }
+
+    private suspend fun listenInbox(card: AvoUserCard) {
         var backoff = 5_000L
         while (true) {
             try {

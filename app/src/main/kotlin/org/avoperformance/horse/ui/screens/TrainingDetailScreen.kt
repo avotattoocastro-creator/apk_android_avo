@@ -101,6 +101,8 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     var msg by remember { mutableStateOf<String?>(null) }
     var confirmDelete by remember { mutableStateOf(false) }
     var shareOpen by remember { mutableStateOf(false) }
+    var assignOpen by remember { mutableStateOf(false) }
+    t?.let { tr -> if (assignOpen) AssignHorseRiderDialog(c, tr, onDismiss = { assignOpen = false }, onDone = { assignOpen = false }) }
     if (shareOpen) ShareDialog(c, id, onDismiss = { shareOpen = false })
     val marine by c.db.marine().observe(id).collectAsStateWithLifecycle(null)
     val scope = rememberCoroutineScope()
@@ -185,6 +187,9 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
 
         // ───────────── RESUMEN ─────────────
         if (tab == 0 && tt.localDir != null) item {
+            AvoCard("Caballo y jinete", trailing = { OutlinedButton(onClick = { assignOpen = true }) { Text(if (horses.none { it.code == tt.horseCode } || riders.none { it.code == tt.riderCode }) "Asignar" else "Cambiar") } }) {
+                Text("${horses.firstOrNull { it.code == tt.horseCode }?.name ?: "Sin caballo"} · ${riders.firstOrNull { it.code == tt.riderCode }?.name ?: "Sin jinete"}", color = AvoColors.Text)
+            }
             AvoCard("Compartir", trailing = { Button(onClick = { shareOpen = true }) { Text("COMPARTIR", fontWeight = FontWeight.Bold) } }) {
                 ShareStatusLine(c, tt.sessionId)
             }

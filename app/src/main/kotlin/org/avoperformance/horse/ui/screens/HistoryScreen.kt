@@ -132,6 +132,8 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
     }
     // ---- COMPARTIR AVO (Firebase): multi-select dialog shared with the analysis screen
     var shareAvo by remember { mutableStateOf<TrainingEntity?>(null) }
+    var assignFor by remember { mutableStateOf<TrainingEntity?>(null) }
+    assignFor?.let { t -> AssignHorseRiderDialog(c, t, onDismiss = { assignFor = null }, onDone = { assignFor = null; msg = "Caballo y jinete guardados" }) }
     shareAvo?.let { t -> ShareDialog(c, t.sessionId, onDismiss = { shareAvo = null }) }
     shareCandidate?.let { pending ->
         AlertDialog(
@@ -233,7 +235,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -277,7 +279,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
                     }
                 }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -285,7 +287,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
 }
 
 @Composable
-private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null) {
+private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null) {
     val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -309,6 +311,7 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
             if (onWhatsApp != null) OutlinedButton(onClick = onWhatsApp) { Text("WhatsApp") }
             if (onInternet != null) OutlinedButton(onClick = onInternet) { Text("Compartir AVO") }
         }
+        if (onAssign != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onAssign) { Text("Caballo y jinete") }
         if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
             OutlinedButton(onClick = onDownload) { Text(if (t.downloadedBytes > 0) "Reanudar descarga" else "Descargar") }
