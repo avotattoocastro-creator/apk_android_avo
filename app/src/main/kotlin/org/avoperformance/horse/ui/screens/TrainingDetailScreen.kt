@@ -100,6 +100,8 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
     var loading by remember { mutableStateOf(false) }
     var msg by remember { mutableStateOf<String?>(null) }
     var confirmDelete by remember { mutableStateOf(false) }
+    var shareOpen by remember { mutableStateOf(false) }
+    if (shareOpen) ShareDialog(c, id, onDismiss = { shareOpen = false })
     val marine by c.db.marine().observe(id).collectAsStateWithLifecycle(null)
     val scope = rememberCoroutineScope()
     var marineBusy by remember { mutableStateOf(false) }
@@ -182,6 +184,11 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         }
 
         // ───────────── RESUMEN ─────────────
+        if (tab == 0 && tt.localDir != null) item {
+            AvoCard("Compartir", trailing = { Button(onClick = { shareOpen = true }) { Text("COMPARTIR", fontWeight = FontWeight.Bold) } }) {
+                ShareStatusLine(c, tt.sessionId)
+            }
+        }
         if (tab == 0 && a != null) {
             item {
                 AvoCard("Resumen") {

@@ -130,54 +130,9 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             confirmButton = { TextButton(onClick = { confirmDeleteLocal = null; c.scope.launch { msg = c.sync.deleteLocal(d.sessionId) ?: "Borrado del móvil" } }) { Text("Borrar", color = AvoColors.Bad) } },
             dismissButton = { TextButton(onClick = { confirmDeleteLocal = null }) { Text("Cancelar") } })
     }
-    // ---- Internet sending to another AVO user (Firebase, identity = NFC card)
-    val me by c.identity.card.collectAsStateWithLifecycle()
-    val received by c.inbox.received.collectAsStateWithLifecycle()
-    val cloudStatus by c.inbox.status.collectAsStateWithLifecycle()
-    var sendTarget by remember { mutableStateOf<TrainingEntity?>(null) }
-    var contacts by remember { mutableStateOf<List<org.avoperformance.horse.cloud.AvoCloud.Contact>?>(null) }
-    fun internet(t: TrainingEntity) {
-        val card = me ?: run { msg = "Primero acerca tu tarjeta AVO personal (NFC) para tener identidad"; return }
-        sendTarget = t; contacts = null
-        c.scope.launch {
-            try { contacts = c.cloud.contacts(card) }
-            catch (e: Exception) { sendTarget = null; msg = e.message ?: "Servicio de envío no disponible" }
-        }
-    }
-    fun sendTo(t: TrainingEntity, to: org.avoperformance.horse.cloud.AvoCloud.Contact) = c.scope.launch {
-        val card = me ?: return@launch
-        try {
-            var current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no encontrada")
-            if (current.localSha256 == null || current.localSha256 != current.watchSha256) {
-                msg = "Descargando para enviar…"
-                c.sync.download(t.sessionId)?.let { error(it) }
-                current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no disponible")
-            }
-            val horse = savedHorses.firstOrNull { it.code == current.horseCode }?.name.orEmpty()
-            val rider = savedRiders.firstOrNull { it.code == current.riderCode }?.name.orEmpty()
-            if (horse.isBlank() || rider.isBlank()) { shareSelected(current); msg = "Asigna caballo y jinete y vuelve a enviar"; return@launch }
-            val file = TrainingShare.buildPackage(context, current, horse, rider)
-            try {
-                c.cloud.send(card, to.code, current.sessionId, file) { i, n -> msg = "Enviando a ${to.name}: $i/$n" }
-            } finally { file.delete() }
-            msg = "Enviado a ${to.name}. Le llegará el aviso en cuanto su móvil tenga internet."
-        } catch (e: Exception) { msg = e.message ?: "No se pudo enviar" }
-    }
-    sendTarget?.let { t ->
-        AlertDialog(onDismissRequest = { sendTarget = null },
-            title = { Text("Enviar por internet") },
-            text = {
-                Column {
-                    val list = contacts
-                    when {
-                        list == null -> { Text("Buscando usuarios AVO…"); LinearProgressIndicator(Modifier.fillMaxWidth()) }
-                        list.isEmpty() -> Text("No hay otros usuarios. Cada persona debe acercar su tarjeta AVO en su móvil una vez.")
-                        else -> list.forEach { u -> TextButton(onClick = { sendTarget = null; sendTo(t, u) }) { Text("${u.name} · ${u.code}") } }
-                    }
-                }
-            },
-            confirmButton = {}, dismissButton = { TextButton(onClick = { sendTarget = null }) { Text("Cancelar") } })
-    }
+    // ---- COMPARTIR AVO (Firebase): multi-select dialog shared with the analysis screen
+    var shareAvo by remember { mutableStateOf<TrainingEntity?>(null) }
+    shareAvo?.let { t -> ShareDialog(c, t.sessionId, onDismiss = { shareAvo = null }) }
     shareCandidate?.let { pending ->
         AlertDialog(
             onDismissRequest = { shareCandidate = null },
@@ -228,7 +183,6 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             try {
                 pendingImport?.let(TrainingImport::discard)
                 pendingImport = TrainingImport.inspect(c, incomingAvo)
-                c.inbox.received.value.firstOrNull { it.file.path == incomingAvo.path }?.let(c.inbox::remove) // inspect keeps its own copy
                 tab = 1
             } catch (e: Exception) {
                 msg = e.message ?: "No se pudo abrir el entrenamiento recibido"
@@ -279,7 +233,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { internet(t) }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -294,18 +248,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                 item {
                     AvoCard("Importar entrenamientos recibidos") {
                         OutlinedButton(onClick = { openAvo.launch(arrayOf("application/zip", "application/octet-stream", "*/*")) }) { Text("Abrir archivo .avo recibido") }
-                        if (me == null) Note("Para recibir por internet, acerca tu tarjeta AVO personal (NFC).")
-                        else Note("Por internet como ${me!!.name} · ${me!!.code}. ${cloudStatus ?: ""}")
-                        received.forEach { r ->
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text("${r.sessionId} · de ${r.fromName}", modifier = Modifier.weight(1f), maxLines = 2)
-                                OutlinedButton(onClick = { c.scope.launch {
-                                    try { pendingImport?.let(TrainingImport::discard); pendingImport = TrainingImport.inspect(c, android.net.Uri.fromFile(r.file)); c.inbox.remove(r) }
-                                    catch (e: Exception) { msg = e.message ?: "No se pudo leer el entrenamiento recibido" }
-                                } }) { Text("Importar") }
-                                TextButton(onClick = { c.inbox.remove(r) }) { Text("Descartar") }
-                            }
-                        }
+                        Note("Los entrenamientos que te envían otros usuarios AVO se importan solos: mira «Compartir y sincronizar» en Ajustes.")
                         msg?.let { Note(it) }
                     }
                     AvoCard("Análisis y comparación") {
@@ -334,7 +277,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
                     }
                 }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { internet(t) }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -364,7 +307,7 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
             if (onWhatsApp != null) OutlinedButton(onClick = onWhatsApp) { Text("WhatsApp") }
-            if (onInternet != null) OutlinedButton(onClick = onInternet) { Text("Internet") }
+            if (onInternet != null) OutlinedButton(onClick = onInternet) { Text("Compartir AVO") }
         }
         if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))

@@ -93,21 +93,49 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         get() = p.getBoolean("share.deleteAfterWhatsApp", true)
         set(v) { p.edit().putBoolean("share.deleteAfterWhatsApp", v).apply() }
 
-    /** Automatic sending of new trainings over the internet (Firebase) to this AVO user (card code). null = off. */
-    var autoSendTo: String?
-        get() = p.getString("cloud.autoSendTo", null)
-        set(v) { p.edit().putString("cloud.autoSendTo", v).apply() }
-    var autoSendName: String
-        get() = p.getString("cloud.autoSendName", "") ?: ""
-        set(v) { p.edit().putString("cloud.autoSendName", v).apply() }
-    /** Only trainings recorded from this moment on are sent (when the option is enabled). */
-    var autoSendSinceMs: Long
-        get() = p.getLong("cloud.autoSendSinceMs", Long.MAX_VALUE)
-        set(v) { p.edit().putLong("cloud.autoSendSinceMs", v).apply() }
-    /** Sessions already sent automatically (never resent). */
-    var autoSendDone: Set<String>
-        get() = p.getStringSet("cloud.autoSendDone", emptySet())?.toSet() ?: emptySet()
-        set(v) { p.edit().putStringSet("cloud.autoSendDone", v).apply() }
+    // ---- Sharing between AVO users (Firebase)
+    /** Mode A: global recipients enabled. */
+    var shareGlobalEnabled: Boolean
+        get() = p.getBoolean("share.globalEnabled", true)
+        set(v) { p.edit().putBoolean("share.globalEnabled", v).apply() }
+    /** Mode B: horses whose automatic sending is disabled (enabled by default). */
+    var shareHorsesDisabled: Set<String>
+        get() = p.getStringSet("share.horsesDisabled", emptySet())?.toSet() ?: emptySet()
+        set(v) { p.edit().putStringSet("share.horsesDisabled", v).apply() }
+    var shareAllowWifi: Boolean
+        get() = p.getBoolean("share.allowWifi", true)
+        set(v) { p.edit().putBoolean("share.allowWifi", v).apply() }
+    var shareAllowMobile: Boolean
+        get() = p.getBoolean("share.allowMobile", true)
+        set(v) { p.edit().putBoolean("share.allowMobile", v).apply() }
+    /** Trainings bigger than this (MB) wait for Wi-Fi; 0 = no limit. */
+    var shareWifiOnlyLargeMb: Int
+        get() = p.getInt("share.wifiOnlyLargeMb", 5)
+        set(v) { p.edit().putInt("share.wifiOnlyLargeMb", v).apply() }
+    var shareAutoRetry: Boolean
+        get() = p.getBoolean("share.autoRetry", true)
+        set(v) { p.edit().putBoolean("share.autoRetry", v).apply() }
+    var sharePaused: Boolean
+        get() = p.getBoolean("share.paused", false)
+        set(v) { p.edit().putBoolean("share.paused", v).apply() }
+    /** Maximum size per training (MB, ≤ 30 because of the rules). */
+    var shareMaxMb: Int
+        get() = p.getInt("share.maxMb", 30)
+        set(v) { p.edit().putInt("share.maxMb", v.coerceIn(1, 30)).apply() }
+    /** Monthly warning of Firebase consumption (MB uploaded + downloaded by this phone). */
+    var shareMonthlyWarnMb: Int
+        get() = p.getInt("share.monthlyWarnMb", 2048)
+        set(v) { p.edit().putInt("share.monthlyWarnMb", v).apply() }
+
+    private fun monthKey() = java.text.SimpleDateFormat("yyyy-MM", java.util.Locale.ROOT).format(java.util.Date())
+    @Synchronized fun addShareUsage(up: Long, down: Long) {
+        val k = monthKey()
+        if (p.getString("share.usageMonth", null) != k) p.edit().putString("share.usageMonth", k).putLong("share.usageUp", 0).putLong("share.usageDown", 0).commit()
+        p.edit().putLong("share.usageUp", p.getLong("share.usageUp", 0) + up).putLong("share.usageDown", p.getLong("share.usageDown", 0) + down).apply()
+    }
+    /** (uploaded, downloaded) this month in bytes. */
+    val shareUsage: Pair<Long, Long> get() =
+        if (p.getString("share.usageMonth", null) != monthKey()) 0L to 0L else p.getLong("share.usageUp", 0) to p.getLong("share.usageDown", 0)
 
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)

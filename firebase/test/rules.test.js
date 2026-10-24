@@ -61,6 +61,8 @@ test('invitations: sender creates PENDING, only recipient accepts/rejects/blocks
   await assertSucceeds(update(ref(db(B), `grants/${B}/${A}`), { state: 'BLOCKED' }));
   // the sender cannot re-invite over a block
   await assertFails(set(ref(db(A), `grants/${B}/${A}`), { state: 'PENDING', senderName: 'A', ms: 2 }));
+  await assertFails(remove(ref(db(A), `grants/${B}/${A}`)));   // nor delete the block in order to re-invite
+  await assertSucceeds(remove(ref(db(B), `grants/${B}/${A}`))); // the recipient can lift it
   // the sender can remove a recipient from its list
   await grant(C, A, 'ACCEPTED');
   await assertSucceeds(remove(ref(db(A), `grants/${C}/${A}`)));
@@ -71,6 +73,8 @@ test('content: only the owner uploads, with a valid structure and size', async (
   await assertSucceeds(set(ref(db(A), `blobs/${TID}/meta`), meta()));
   await assertFails(set(ref(db(B), `blobs/${TID}/c/0`), 'QUJD'));
   await assertSucceeds(set(ref(db(A), `blobs/${TID}/c/0`), 'QUJD'));
+  await assertSucceeds(set(ref(db(A), `blobs/${TID}/n`), 1));
+  await assertFails(set(ref(db(B), `blobs/${TID}/n`), 0));
   await assertFails(set(ref(db(A), `blobs/${TID}/c/0`), 'x'.repeat(360001)));
   await assertFails(set(ref(db(A), `blobs/${'c'.repeat(32)}/meta`), { ...meta(), size: 31457281 }));
   await assertFails(set(ref(db(A), `blobs/${'c'.repeat(32)}/meta`), meta(B)));         // impersonating another owner

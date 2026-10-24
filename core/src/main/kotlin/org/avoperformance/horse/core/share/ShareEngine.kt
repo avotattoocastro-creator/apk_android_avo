@@ -24,6 +24,9 @@ class ShareEngine(
     private val limits: ShareLimits = ShareLimits(),
     private val clock: () -> Long = System::currentTimeMillis,
     private val workDir: File,
+    /** false = metered connection with "only Wi-Fi for large files": trainings bigger than [largeBytes] wait. */
+    private val allowLarge: () -> Boolean = { true },
+    private val largeBytes: Long = Long.MAX_VALUE,
 ) {
     data class Report(val sent: Int = 0, val received: Int = 0, val waiting: Int = 0, val errors: List<String> = emptyList())
 
@@ -76,6 +79,7 @@ class ShareEngine(
                 errors += "$sessionId: ${e.message}"; continue
             }
             try {
+                if (!allowLarge() && pkg.size > largeBytes) { waiting += ready.size; continue }
                 if (pkg.size > limits.maxTrainingBytes) {
                     ready.forEach { j -> update(j) { copy(state = OutState.FAILED, lastError = "Ocupa ${pkg.size / 1_048_576} MB; límite ${limits.maxTrainingBytes / 1_048_576} MB") } }
                     errors += "$sessionId: demasiado grande"; continue
@@ -155,6 +159,7 @@ class ShareEngine(
         for (n in backend.inbox(me.code)) {
             val known = store.incoming().firstOrNull { it.transferId == n.transferId }
             if (known?.state == InState.NEEDS_CONFIRMATION) continue // waiting for the user
+            if (!allowLarge() && n.size > largeBytes) continue             // waits for Wi-Fi
             val meta = backend.meta(n.transferId)
             if (meta == null) { backend.removeNotice(me.code, n.transferId); continue } // expired or withdrawn by the sender
             if (meta.owner != n.from) { backend.removeNotice(me.code, n.transferId); errors += "Aviso falsificado de ${n.from}"; continue }

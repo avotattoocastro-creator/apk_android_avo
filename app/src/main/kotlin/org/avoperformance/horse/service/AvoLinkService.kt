@@ -50,7 +50,7 @@ class AvoLinkService : LifecycleService() {
         // Inbox for trainings received over the internet while the phone has an AVO identity (NFC card)
         lifecycleScope.launch {
             c.identity.card.collectLatest { card ->
-                if (card != null) { c.autoSend.trigger("servicio iniciado"); c.inbox.watch(card) } else c.cloud.signOut()
+                if (card != null) { c.share.schedule(); c.share.runNow(); c.share.listen(card) } else c.share.firebase.signOut()
             }
         }
         lifecycleScope.launch {

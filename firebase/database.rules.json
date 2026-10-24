@@ -19,7 +19,7 @@
         ".read": "auth != null && auth.token.email === $recipient.toLowerCase() + '@avo-cards.app'",
         "$sender": {
           ".read": "auth != null && auth.token.email === $sender.toLowerCase() + '@avo-cards.app'",
-          ".write": "auth != null && $recipient !== $sender && root.child('users').child($recipient).exists() && root.child('users').child($sender).exists() && ((auth.token.email === $sender.toLowerCase() + '@avo-cards.app' && ((!data.exists() && newData.child('state').val() === 'PENDING') || !newData.exists())) || (auth.token.email === $recipient.toLowerCase() + '@avo-cards.app' && data.exists() && (!newData.exists() || newData.child('state').val() === 'ACCEPTED' || newData.child('state').val() === 'REJECTED' || newData.child('state').val() === 'BLOCKED')))",
+          ".write": "auth != null && $recipient !== $sender && root.child('users').child($recipient).exists() && root.child('users').child($sender).exists() && ((auth.token.email === $sender.toLowerCase() + '@avo-cards.app' && ((!data.exists() && newData.child('state').val() === 'PENDING') || (!newData.exists() && data.child('state').val() !== 'BLOCKED'))) || (auth.token.email === $recipient.toLowerCase() + '@avo-cards.app' && data.exists() && (!newData.exists() || newData.child('state').val() === 'ACCEPTED' || newData.child('state').val() === 'REJECTED' || newData.child('state').val() === 'BLOCKED')))",
           ".validate": "newData.hasChildren(['state', 'senderName', 'ms']) && (newData.child('senderName').val() === data.child('senderName').val() || !data.exists())",
           "state": { ".validate": "newData.isString() && newData.val().matches(/^(PENDING|ACCEPTED|REJECTED|BLOCKED)$/)" },
           "senderName": { ".validate": "newData.isString() && newData.val().length <= 40" },
@@ -53,6 +53,7 @@
           ".read": "auth != null && data.parent().child('to').child(auth.token.email.replace('@avo-cards.app', '').toUpperCase()).val() === true",
           ".validate": "newData.val() === true && newData.parent().child('c').child((newData.parent().child('meta/chunks').val() - 1) + '').exists()"
         },
+        "n": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 120" },
         "to": {
           "$code": {
             ".validate": "newData.val() === true && root.child('grants').child($code).child(newData.parent().parent().child('meta/owner').val() + '').child('state').val() === 'ACCEPTED'"

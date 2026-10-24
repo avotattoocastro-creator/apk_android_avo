@@ -161,7 +161,60 @@ interface LogDao {
     @Query("DELETE FROM log WHERE id < (SELECT MAX(id) FROM log) - 5000") suspend fun trim()
 }
 
-@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 4, exportSchema = true)
+// ---------------------------------------------------------------- Sharing between users (Firebase)
+
+/** Outgoing delivery (training → AVO recipient). Persistent queue: survives restarts. */
+@Entity(tableName = "share_out", primaryKeys = ["sessionId", "recipient"])
+data class ShareOutEntity(
+    val sessionId: String,
+    val recipient: String,
+    val recipientName: String,
+    val origin: String,
+    val state: String,
+    val transferId: String?,
+    val attempts: Int,
+    val lastError: String?,
+    val createdMs: Long,
+    val updatedMs: Long,
+    val receivedMs: Long?,
+    val horseCode: String?,
+)
+
+/** Incoming delivery (reception history and deliveries pending confirmation). */
+@Entity(tableName = "share_in")
+data class ShareInEntity(
+    @PrimaryKey val transferId: String,
+    val fromCode: String,
+    val fromName: String,
+    val sessionId: String,
+    val horseName: String,
+    val size: Long,
+    val state: String,
+    val receivedMs: Long,
+    val message: String?,
+    val localFile: String?,
+)
+
+/** Automatic recipients: scope "GLOBAL" or a horse code. */
+@Entity(tableName = "share_recipients", primaryKeys = ["scope", "code"])
+data class ShareRecipientEntity(val scope: String, val code: String, val name: String)
+
+@Dao
+interface ShareDao {
+    @Query("SELECT * FROM share_out ORDER BY updatedMs DESC") fun outFlow(): Flow<List<ShareOutEntity>>
+    @Query("SELECT * FROM share_out") fun outAll(): List<ShareOutEntity>
+    @Query("SELECT * FROM share_out WHERE sessionId = :id") fun outFor(id: String): Flow<List<ShareOutEntity>>
+    @Upsert fun upsertOut(e: ShareOutEntity)
+    @Query("SELECT * FROM share_in ORDER BY receivedMs DESC") fun inFlow(): Flow<List<ShareInEntity>>
+    @Query("SELECT * FROM share_in") fun inAll(): List<ShareInEntity>
+    @Upsert fun upsertIn(e: ShareInEntity)
+    @Query("SELECT * FROM share_recipients ORDER BY name") fun recipientsFlow(): Flow<List<ShareRecipientEntity>>
+    @Query("SELECT * FROM share_recipients") fun recipientsAll(): List<ShareRecipientEntity>
+    @Upsert fun upsertRecipient(e: ShareRecipientEntity)
+    @Query("DELETE FROM share_recipients WHERE scope = :scope AND code = :code") fun deleteRecipient(scope: String, code: String)
+}
+
+@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class, ShareOutEntity::class, ShareInEntity::class, ShareRecipientEntity::class], version = 5, exportSchema = true)
 abstract class AvoDatabase : RoomDatabase() {
     abstract fun horses(): HorseDao
     abstract fun riders(): RiderDao
@@ -169,6 +222,7 @@ abstract class AvoDatabase : RoomDatabase() {
     abstract fun fences(): FenceDao
     abstract fun log(): LogDao
     abstract fun marine(): TrainingMarineDao
+    abstract fun share(): ShareDao
 
     companion object {
         fun create(ctx: Context): AvoDatabase = Room.databaseBuilder(ctx, AvoDatabase::class.java, "avo.db")
@@ -184,6 +238,13 @@ abstract class AvoDatabase : RoomDatabase() {
             }, object : androidx.room.migration.Migration(3, 4) {
                 override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
                     db.execSQL("ALTER TABLE horses ADD COLUMN photoPath TEXT")
+                }
+            }, object : androidx.room.migration.Migration(4, 5) {
+                // Sharing between users (Firebase): only adds tables; existing data is not touched.
+                override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    db.execSQL("CREATE TABLE IF NOT EXISTS share_out (sessionId TEXT NOT NULL, recipient TEXT NOT NULL, recipientName TEXT NOT NULL, origin TEXT NOT NULL, state TEXT NOT NULL, transferId TEXT, attempts INTEGER NOT NULL, lastError TEXT, createdMs INTEGER NOT NULL, updatedMs INTEGER NOT NULL, receivedMs INTEGER, horseCode TEXT, PRIMARY KEY(sessionId, recipient))")
+                    db.execSQL("CREATE TABLE IF NOT EXISTS share_in (transferId TEXT NOT NULL PRIMARY KEY, fromCode TEXT NOT NULL, fromName TEXT NOT NULL, sessionId TEXT NOT NULL, horseName TEXT NOT NULL, size INTEGER NOT NULL, state TEXT NOT NULL, receivedMs INTEGER NOT NULL, message TEXT, localFile TEXT)")
+                    db.execSQL("CREATE TABLE IF NOT EXISTS share_recipients (scope TEXT NOT NULL, code TEXT NOT NULL, name TEXT NOT NULL, PRIMARY KEY(scope, code))")
                 }
             }).build()
     }

@@ -334,4 +334,19 @@ class ShareEngineTest {
         ea.sendPending(); engine(B, sb).receive()
         assertEquals(40_000L, sa.up); assertEquals(40_000L, sb.down)
     }
+
+    @Test fun largeFilesWaitForWifi() = runBlocking {
+        accept(B, A)
+        var wifi = false
+        val sa = MemStore()
+        val ea = ShareEngine(A, server.backendFor(A.code), sa, pkgr(tmp.root.resolve("o")), importer(A.code),
+            ShareLimits(maxTrainingBytes = 1_500_000, chunkBytes = 16 * 1024), { now }, tmp.root.resolve("i"), { wifi }, 50_000)
+        ea.enqueue("S1", listOf(RecipientResolver.Target(B, ShareOrigin.GLOBAL, null)), null) // 100 kB > 50 kB
+        ea.enqueue("S2", listOf(RecipientResolver.Target(B, ShareOrigin.GLOBAL, null)), null) // 40 kB
+        val r = ea.sendPending()
+        assertEquals(1, r.sent); assertEquals(1, r.waiting)
+        assertEquals(OutState.QUEUED, sa.jobs().first { it.sessionId == "S1" }.state)
+        wifi = true
+        assertEquals(1, ea.sendPending().sent)
+    }
 }

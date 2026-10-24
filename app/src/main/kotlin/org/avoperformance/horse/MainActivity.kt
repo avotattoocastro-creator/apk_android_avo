@@ -156,6 +156,8 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         enableGlobalNfc()
+        // recovery when the app opens: pending deliveries and received trainings
+        (application as AvoApp).container.let { c -> if (c.identity.card.value != null) { c.share.schedule(); c.share.runNow() } }
     }
 
     override fun onPause() {
@@ -164,11 +166,13 @@ class MainActivity : ComponentActivity() {
     }
 
     private var incomingAvo by mutableStateOf<Uri?>(null)
+    private var openShare by mutableStateOf(false)
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
         incomingAvo = extractAvoUri(intent)
+        if (intent.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
     }
 
@@ -218,7 +222,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun extractAvoUri(intent: Intent?): Uri? = when (intent?.action) {
-        org.avoperformance.horse.cloud.CloudInbox.ACTION_OPEN_RECEIVED -> intent.data?.takeIf { it.scheme == "file" && it.path?.startsWith(java.io.File(filesDir, "received").path) == true }
         Intent.ACTION_VIEW -> intent.data
         Intent.ACTION_SEND -> if (Build.VERSION.SDK_INT >= 33)
             intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
@@ -232,6 +235,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val c = (application as AvoApp).container
         incomingAvo = extractAvoUri(intent)
+        if (intent?.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
         else org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "app abierta")
@@ -240,7 +244,7 @@ class MainActivity : ComponentActivity() {
                 var bootVisible by rememberSaveable { mutableStateOf(savedInstanceState == null) }
                 LaunchedEffect(Unit) { delay(3000L); bootVisible = false }
                 if (bootVisible) AvoBootScreen(c, onContinue = { bootVisible = false })
-                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }) { permLauncher.launch(Perms.required) }
+                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }, openShare = openShare, onShareOpened = { openShare = false }) { permLauncher.launch(Perms.required) }
             }
         }
     }
@@ -258,14 +262,15 @@ private val tabs = listOf(
 
 private val titles = mapOf(
     "configuracion" to "Ajustes", "nfc" to "NFC", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
-    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
+    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "compartir" to "Compartir y sincronizar", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, requestPerms: () -> Unit) {
+fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, openShare: Boolean = false, onShareOpened: () -> Unit = {}, requestPerms: () -> Unit) {
     val nav = rememberNavController()
     LaunchedEffect(incomingAvo) { if (incomingAvo != null) nav.navigate("historial") { launchSingleTop = true } }
+    LaunchedEffect(openShare) { if (openShare) { nav.navigate("compartir") { launchSingleTop = true }; onShareOpened() } }
     val entry by nav.currentBackStackEntryAsState()
     val route = entry?.destination?.route
     val isTab = tabs.any { it.route == route }
@@ -320,6 +325,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
             composable("dispositivos") { DeviceManagerScreen(c) }
             composable("almacenamiento") { StorageScreen(c) }
             composable("jinetes") { RidersScreen(c) }
+            composable("compartir") { org.avoperformance.horse.ui.screens.ShareScreen(c) }
             composable("comparar/{a}/{b}") { back -> CompareScreen(c, back.arguments?.getString("a") ?: "", back.arguments?.getString("b") ?: "") }
             composable("detalle/{id}") { TrainingDetailScreen(c, it.arguments?.getString("id") ?: "") }
         }

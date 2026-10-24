@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 16
-        versionName = "2.1-motor-1.1.0-dev1"
+        versionCode = 17
+        versionName = "2.2-share-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
