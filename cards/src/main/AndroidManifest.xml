@@ -5,7 +5,9 @@
     <application
         android:allowBackup="false"
         android:label="AVO Tarjetas"
-        android:theme="@android:style/Theme.Material.NoActionBar">
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.Avo">
         <activity android:name=".CardsActivity" android:exported="true" android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

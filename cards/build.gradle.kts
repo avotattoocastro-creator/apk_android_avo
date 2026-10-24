@@ -42,6 +42,12 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
     buildFeatures { compose = true }
+    // Same visual style as the main app: the AVO theme and components are compiled from their single source
+    // (app/.../ui/theme and ui/components), so any style change applies to both apps.
+    sourceSets["main"].java.srcDirs(
+        "../app/src/main/kotlin/org/avoperformance/horse/ui/theme",
+        "../app/src/main/kotlin/org/avoperformance/horse/ui/components",
+    )
     lint { abortOnError = false; checkReleaseBuilds = false }
 }
 

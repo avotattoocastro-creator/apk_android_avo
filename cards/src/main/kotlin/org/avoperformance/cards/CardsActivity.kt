@@ -13,7 +13,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.sp
 import org.avoperformance.horse.core.identity.AvoUserCard
+import org.avoperformance.horse.ui.components.AvoCard
+import org.avoperformance.horse.ui.components.ConfirmDialog
+import org.avoperformance.horse.ui.components.KV
+import org.avoperformance.horse.ui.components.Note
+import org.avoperformance.horse.ui.components.StatusPill
+import org.avoperformance.horse.ui.theme.AvoColors
+import org.avoperformance.horse.ui.theme.AvoTheme
 import java.text.DateFormat
 import java.util.Date
 
@@ -37,7 +48,7 @@ class CardsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         store = IssuedCards(this)
         issued = store.all()
-        setContent { MaterialTheme(colorScheme = darkColorScheme()) { Surface(Modifier.fillMaxSize()) { Screen() } } }
+        setContent { AvoTheme { Surface(Modifier.fillMaxSize(), color = AvoColors.Bg) { Screen() } } }
     }
 
     override fun onResume() {
@@ -100,61 +111,82 @@ class CardsActivity : ComponentActivity() {
     private fun Screen() {
         var name by remember { mutableStateOf("") }
         var confirmRevoke by remember { mutableStateOf<Issued?>(null) }
-        LazyColumn(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            item { Text("AVO Tarjetas", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold) }
+        LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 24.dp)) {
             item {
-                Card { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Nueva tarjeta personal", fontWeight = FontWeight.SemiBold)
+                // Brand header, same as the main app and AVO Update
+                Box {
+                    Image(painterResource(R.drawable.avo_brand_hero), contentDescription = "AVO Performance Horse",
+                        contentScale = ContentScale.FillWidth, modifier = Modifier.fillMaxWidth().heightIn(max = 220.dp))
+                }
+                Row(Modifier.padding(start = 16.dp, top = 10.dp, bottom = 6.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Text("AVO", color = AvoColors.Red, fontSize = 24.sp, fontWeight = FontWeight.Black, letterSpacing = 3.sp)
+                    Text("  TARJETAS", color = AvoColors.Text, fontSize = 17.sp, fontWeight = FontWeight.Black, letterSpacing = 2.sp)
+                }
+            }
+            item {
+                AvoCard("Nueva tarjeta personal") {
                     OutlinedTextField(value = name, onValueChange = { name = it.take(AvoUserCard.MAX_NAME) },
                         label = { Text("Nombre") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                    Button(enabled = name.isNotBlank(), onClick = {
+                    Spacer(Modifier.height(8.dp))
+                    Button(enabled = name.isNotBlank(), modifier = Modifier.fillMaxWidth(), onClick = {
                         val card = AvoUserCard.generate(name)
                         mode = Mode.Write(card, isNew = true)
-                        status = "Acerca una tarjeta en blanco para grabar ${card.name} · ${card.code}"
-                    }) { Text("Crear y grabar") }
-                    Text("Usa NTAG215 o NTAG216 (las NTAG213 se quedan cortas).", style = MaterialTheme.typography.bodySmall)
-                } }
+                        status = "Acerca una tarjeta en blanco para grabar ${card.name}."
+                    }) { Text("CREAR Y GRABAR", fontWeight = FontWeight.Bold) }
+                    Spacer(Modifier.height(6.dp))
+                    Note("Usa NTAG215 o NTAG216 (las NTAG213 se quedan cortas).")
+                }
             }
             item {
-                Card { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    val m = mode
-                    Text(if (m is Mode.Write) "Grabando: ${m.card.name} · ${m.card.code}" else "Modo lectura", fontWeight = FontWeight.SemiBold)
-                    Text(status)
+                val m = mode
+                AvoCard("Lector NFC", trailing = {
+                    if (m is Mode.Write) StatusPill("GRABANDO", AvoColors.Red) else StatusPill("LECTURA", AvoColors.Blue)
+                }) {
+                    if (m is Mode.Write) KV("Tarjeta", "${m.card.name} · ${m.card.code}")
+                    Text(status, color = AvoColors.Text)
                     if (m is Mode.Write) {
-                        Row { Checkbox(overwrite, { overwrite = it }); Text("Sobrescribir si ya tiene datos AVO", Modifier.padding(top = 12.dp)) }
-                        Row { Checkbox(lock, { lock = it }); Text("Bloquear tarjeta (IRREVERSIBLE: no se podrá volver a grabar)", Modifier.padding(top = 12.dp)) }
+                        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Checkbox(overwrite, { overwrite = it }); Text("Sobrescribir si ya tiene datos AVO", color = AvoColors.Text)
+                        }
+                        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Checkbox(lock, { lock = it }); Text("Bloquear tarjeta (irreversible)", color = if (lock) AvoColors.Warn else AvoColors.Text)
+                        }
                         OutlinedButton(onClick = { mode = Mode.Read; status = "Cancelado." }) { Text("Cancelar") }
                     }
-                } }
-            }
-            item { Text("Tarjetas emitidas (${issued.size})", fontWeight = FontWeight.SemiBold) }
-            if (issued.isEmpty()) item { Text("Ninguna todavía.", style = MaterialTheme.typography.bodySmall) }
-            items(issued, key = { it.card.code }) { i ->
-                Card { Column(Modifier.padding(12.dp)) {
-                    Text("${i.card.name} · ${i.card.code}" + if (i.revoked) " · BAJA" else "", fontWeight = FontWeight.SemiBold)
-                    Text("Emitida ${DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(Date(i.createdMs))}", style = MaterialTheme.typography.bodySmall)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        if (!i.revoked) TextButton(onClick = {
-                            mode = Mode.Write(i.card, isNew = false)
-                            status = "Acerca una tarjeta para grabar una copia de ${i.card.name}"
-                        }) { Text("Grabar copia") }
-                        TextButton(onClick = { if (i.revoked) { store.save(i.copy(revoked = false)); issued = store.all() } else confirmRevoke = i }) {
-                            Text(if (i.revoked) "Reactivar" else "Dar de baja")
-                        }
-                    }
-                } }
+                }
             }
             item {
-                Text("La baja impedirá el envío y la recepción con esa tarjeta cuando el servicio de envío entre apps esté activo. Hoy solo queda registrada en este móvil.",
-                    style = MaterialTheme.typography.bodySmall)
+                AvoCard("Tarjetas emitidas (${issued.size})") {
+                    if (issued.isEmpty()) Note("Ninguna todavía.")
+                    issued.forEachIndexed { idx, i ->
+                        if (idx > 0) HorizontalDivider(color = AvoColors.Line, modifier = Modifier.padding(vertical = 6.dp))
+                        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f)) {
+                                Text(i.card.name, color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
+                                Text("${i.card.code} · ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(i.createdMs))}", color = AvoColors.TextDim, fontSize = 12.sp)
+                            }
+                            if (i.revoked) StatusPill("BAJA", AvoColors.Bad)
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            if (!i.revoked) TextButton(onClick = {
+                                mode = Mode.Write(i.card, isNew = false)
+                                status = "Acerca una tarjeta para grabar una copia de ${i.card.name}."
+                            }) { Text("Grabar copia") }
+                            TextButton(onClick = { if (i.revoked) { store.save(i.copy(revoked = false)); issued = store.all() } else confirmRevoke = i }) {
+                                Text(if (i.revoked) "Reactivar" else "Dar de baja", color = if (i.revoked) AvoColors.Ok else AvoColors.Bad)
+                            }
+                        }
+                    }
+                    Spacer(Modifier.height(6.dp))
+                    Note("La baja de momento queda registrada solo en este móvil.")
+                }
             }
         }
         confirmRevoke?.let { i ->
-            AlertDialog(onDismissRequest = { confirmRevoke = null },
-                title = { Text("Dar de baja") },
-                text = { Text("¿Dar de baja la tarjeta de ${i.card.name} (${i.card.code})? Úsalo si se ha perdido.") },
-                confirmButton = { TextButton(onClick = { store.save(i.copy(revoked = true)); issued = store.all(); confirmRevoke = null }) { Text("Dar de baja") } },
-                dismissButton = { TextButton(onClick = { confirmRevoke = null }) { Text("Cancelar") } })
+            ConfirmDialog(title = "Dar de baja", text = "¿Dar de baja la tarjeta de ${i.card.name} (${i.card.code})? Úsalo si se ha perdido.",
+                confirm = "Dar de baja", danger = true,
+                onConfirm = { store.save(i.copy(revoked = true)); issued = store.all(); confirmRevoke = null },
+                onDismiss = { confirmRevoke = null })
         }
     }
 }
