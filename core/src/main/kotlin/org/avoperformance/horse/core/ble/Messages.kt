@@ -43,6 +43,8 @@ data class WatchInfo(
     val supportsAuth get() = caps and 0x80L != 0L
     val supportsTelemetryV2 get() = caps and 0x100L != 0L
     val supportsReboot get() = caps and 0x200L != 0L
+    /** V3.7.4: Wi-Fi download (WIFI_SYNC + HTTP /api/v1). Transport chosen by capability, not by version. */
+    val supportsWifiSync get() = caps and 0x800L != 0L
 
     companion object {
         fun decode(p: ByteArray): WatchInfo? {
