@@ -186,6 +186,7 @@ class ShareManager(private val c: AppContainer) {
                 "Enviados ${sent.sent} · recibidos ${got.received}" + if (sent.waiting > 0) " · ${sent.waiting} esperando" else "",
                 errs.firstOrNull())
             c.log.i("SHARE", "pasada ($reason): enviados ${sent.sent}, recibidos ${got.received}, esperando ${sent.waiting}, errores ${errs.size}")
+            scheduleFollowUp()
             true
         } catch (e: OfflineException) {
             _status.value = Status(false, System.currentTimeMillis(), "Sin conexión: se reintentará", null); false
@@ -205,6 +206,19 @@ class ShareManager(private val c: AppContainer) {
         WorkManager.getInstance(c.app).enqueueUniqueWork("avo_share_now", ExistingWorkPolicy.REPLACE, req)
     }
 
+    /**
+     * While there are deliveries "Enviado · pendiente de recepción" sent less than 2 h ago, it repeats a short pass
+     * every ~30 s to collect the receipt without waiting for the 15-minute periodic task.
+     */
+    private fun scheduleFollowUp() {
+        val now = System.currentTimeMillis()
+        val pending = dao.outAll().any { it.state == OutState.NOTIFIED.name && now - it.updatedMs < 2 * 3600_000L }
+        if (!pending) return
+        val req = OneTimeWorkRequestBuilder<ShareWorker>().setConstraints(constraints())
+            .setInitialDelay(30, TimeUnit.SECONDS).build()
+        WorkManager.getInstance(c.app).enqueueUniqueWork("avo_share_followup", ExistingWorkPolicy.REPLACE, req)
+    }
+
     /** Recovery every 15 minutes (minimum allowed by Android), compatible with battery saving. */
     fun schedule() {
         val req = PeriodicWorkRequestBuilder<ShareWorker>(15, TimeUnit.MINUTES).setConstraints(constraints())
@@ -216,12 +230,22 @@ class ShareManager(private val c: AppContainer) {
     suspend fun listen(card: AvoUserCard) = kotlinx.coroutines.coroutineScope {
         // There is no push when someone accepts: while deliveries are waiting for acceptance,
         // check every minute (tiny reads) and send as soon as it is accepted.
+        // Likewise for "Enviado": check every 20 s whether the recipient has already confirmed reception
+        // (receipt) so it moves to OK straight away.
         launch {
+            var tick = 0
             while (true) {
-                delay(60_000)
+                delay(20_000); tick++
                 runCatching {
-                    val waiting = withContext(Dispatchers.IO) { dao.outAll() }.filter { it.state == OutState.WAITING_ACCEPT.name }.map { it.recipient }.distinct()
-                    if (waiting.isNotEmpty() && waiting.any { firebase.outgoingState(card.code, it) == GrantState.ACCEPTED }) runNow()
+                    val outs = withContext(Dispatchers.IO) { dao.outAll() }
+                    val notified = outs.filter { it.state == OutState.NOTIFIED.name && it.transferId != null }
+                    val backend = firebase.backend()
+                    if (notified.isNotEmpty() && notified.groupBy { it.transferId!! }.any { (tid, js) ->
+                            val r = backend.receipts(tid); js.any { r.containsKey(it.recipient) } || backend.meta(tid) == null }) runNow()
+                    if (tick % 3 == 0) {
+                        val waiting = outs.filter { it.state == OutState.WAITING_ACCEPT.name }.map { it.recipient }.distinct()
+                        if (waiting.isNotEmpty() && waiting.any { firebase.outgoingState(card.code, it) == GrantState.ACCEPTED }) runNow()
+                    }
                 }
             }
         }

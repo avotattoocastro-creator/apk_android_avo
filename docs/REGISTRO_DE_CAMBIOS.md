@@ -340,3 +340,8 @@ pero no tenían entrada en este registro.
   - «Compartir AVO»: si faltan, los pide antes de elegir destinatarios. Volver a compartir reabre un envío fallido.
 - Si hay envíos esperando aceptación, se comprueba cada minuto (mientras el servicio está activo) y salen en cuanto se acepta, sin esperar a la tarea de 15 min.
 - Historial de enviados: sin caballo, muestra el identificador de sesión en lugar de «— ·». versionCode 20.
+
+## 2026-10-24 — Confirmación de recepción sin esperar 15 min (2.2-share-dev5)
+- Petición del usuario: que, al pasar a «Enviado», la sincronización con Firebase sea automática.
+- Con el servicio activo, cada 20 s se consultan los acuses (`receipts`) de los envíos en «Enviado». Si el destinatario ya confirmó (o el contenido ya no existe), se lanza una pasada y el envío pasa a OK.
+- Además, tras cada pasada con envíos en «Enviado» de menos de 2 h, se programa otra pasada a los 30 s con WorkManager, también con la app cerrada. Las invitaciones aceptadas se siguen comprobando cada minuto. versionCode 21.
