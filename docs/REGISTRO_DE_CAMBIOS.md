@@ -322,3 +322,7 @@ pero no tenían entrada en este registro.
 - Pantalla «Compartir y sincronizar» con: estado, cuenta, invitaciones, destinatarios globales y por caballo, transferencias, conflictos, historial, red y consumo. Botones «Compartir AVO» (Historial) y «COMPARTIR» con indicador de estado (Análisis).
 - Reglas definitivas en `firebase/database.rules.json`, con pruebas en Firebase Emulator Suite (workflow «Firebase rules (emulator)»). Pendiente de publicar a mano en la consola de Firebase.
 - versionName 2.2-share-dev1, versionCode 17. Pendiente: validación física con dos móviles.
+
+## 2026-10-24 — Diagnóstico de «Permiso denegado» al compartir (2.2-share-dev2)
+- Prueba física: al pulsar «Compartir AVO», Firebase devuelve «Permission denied».
+- Los errores de permiso ahora indican la ruta exacta y el usuario con sesión iniciada, para localizar qué regla lo rechaza. No cambia ninguna regla ni ninguna funcionalidad. versionCode 18.

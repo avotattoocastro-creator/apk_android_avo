@@ -48,7 +48,9 @@ class FirebaseShare(private val ctx: Context) {
     }
     private val auth get() = FirebaseAuth.getInstance(app)
     private val db get() = FirebaseDatabase.getInstance(app, FirebaseConfig.DATABASE_URL)
-    private fun r(path: String): DatabaseReference = db.getReference(path)
+    /** Last path used (only for diagnosing permission errors). */
+    @Volatile private var lastPath = ""
+    private fun r(path: String): DatabaseReference { lastPath = path; return db.getReference(path) }
 
     /** Connection state with the Firebase server (true = connected). */
     fun connected(): Flow<Boolean> = callbackFlow {
@@ -76,14 +78,14 @@ class FirebaseShare(private val ctx: Context) {
     private fun translate(e: Throwable): Exception {
         val m = e.message.orEmpty()
         return when {
-            m.contains("ermission denied", true) || m.contains("PERMISSION_DENIED") -> PermissionException(m)
+            m.contains("ermission denied", true) || m.contains("PERMISSION_DENIED") -> PermissionException("$m en ${lastPath.ifBlank { "?" }} como ${signedInCode ?: "sin sesión"}")
             m.contains("offline", true) || m.contains("network", true) || m.contains("Unable to resolve", true) -> OfflineException(m, e)
             e is Exception -> e
             else -> Exception(m, e)
         }
     }
 
-    class PermissionException(m: String) : IllegalStateException("Permiso denegado por las reglas de Firebase ($m)")
+    class PermissionException(m: String) : IllegalStateException("Permiso denegado por Firebase: $m")
 
     // ------------------------------------------------------------- account (NFC card)
 
