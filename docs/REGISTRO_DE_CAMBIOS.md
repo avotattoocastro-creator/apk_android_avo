@@ -258,3 +258,20 @@ pero no tenían entrada en este registro.
 - Historial: botón «Borrar del móvil» (con confirmación) y botón «WhatsApp»: descarga si hace falta, abre WhatsApp / WhatsApp Business con el paquete AVO-TRAINING-1 y, al volver, borra la copia local (ajuste `share.deleteAfterWhatsApp`, activado por defecto).
 - Firma estable: el APK debug se firma con la clave AVO cuando existen los secretos `AVO_KEYSTORE_BASE64`, `AVO_KEYSTORE_PASSWORD`, `AVO_KEY_ALIAS` y `AVO_KEY_PASSWORD`. La clave no está en el repositorio. Hace falta una última desinstalación al pasar a la clave estable.
 - versionCode 14. Pendiente: validación física en el dispositivo.
+
+## 2026-10-24 — Identidad AVO por tarjeta NFC + app «AVO Tarjetas» (rama `feature/avo-nfc-identity`)
+- Primer paso del envío de entrenamientos entre apps. Cada persona tiene una tarjeta NFC personal con código único (`AVO-XXXX-XXXX`), nombre y una clave aleatoria de 128 bits. Si cambias de móvil, la identidad viaja con la tarjeta.
+- Formato: `core/identity/AvoUserCard` → URI NDEF `avohorse://identity/user/<código>?v=1&name=…&k=…`, el mismo esquema que las etiquetas de caballo y jinete. Las versiones anteriores de la app ignoran este tipo. Pruebas: `AvoUserCardTest`.
+- App principal:
+  - `identity/UserIdentity` guarda la tarjeta cifrada (SecureStore).
+  - Al acercar una tarjeta personal, se adopta solo si el móvil no tiene identidad. Una tarjeta distinta no reemplaza la identidad: hay que pulsar «Olvidar identidad» en NFC.
+  - La pantalla NFC muestra la identidad y no graba caballo o jinete encima de una tarjeta personal.
+  - La lectura de etiquetas de caballo y jinete no cambia.
+- Nuevo módulo `cards` (`org.avoperformance.cards`, «AVO Tarjetas»):
+  - crea y graba tarjetas (URI + AAR que abre la app principal) y las verifica;
+  - opción de bloqueo irreversible;
+  - no sobrescribe datos AVO sin confirmación;
+  - lista de tarjetas emitidas, «Grabar copia» y «Dar de baja». La baja tendrá efecto cuando exista el servicio de envío.
+- Tarjetas simples (NTAG213/215/216), uso doméstico: se pueden copiar si alguien las tiene en la mano.
+- CI compila los dos APK, que se firman con la misma clave estable cuando existen los secretos.
+- Pendiente: el servicio de envío (Firebase, cuando se aporte `google-services.json`) y la validación física con tarjetas reales.

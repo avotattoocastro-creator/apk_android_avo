@@ -34,6 +34,7 @@ fun NfcScreen(c: AppContainer) {
     val scope = rememberCoroutineScope()
     val watchStatus by c.watch.status.collectAsStateWithLifecycle(null)
     val currentRecording by rememberUpdatedState(watchStatus?.session == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING || watchStatus?.session == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED || watchStatus?.rec == org.avoperformance.horse.core.ble.RecStatus.RECORDING)
+    val identity by c.identity.card.collectAsStateWithLifecycle()
     var kind by remember { mutableStateOf("horse") }
     var code by remember { mutableStateOf("") }
     var writeMode by remember { mutableStateOf(false) }
@@ -60,6 +61,7 @@ fun NfcScreen(c: AppContainer) {
                         ndef.connect()
                         try {
                             require(ndef.isWritable) { "Etiqueta protegida contra escritura" }
+                            require(ndef.cachedNdefMessage?.records?.none { org.avoperformance.horse.core.identity.AvoUserCard.isUserUri(it.toUri()?.toString()) } != false) { "Es una tarjeta personal AVO: no se sobrescribe" }
                             require(ndef.maxSize >= data.toByteArray().size) { "Etiqueta sin capacidad suficiente" }
                             ndef.writeNdefMessage(data)
                             verified = ndef.ndefMessage?.records?.any { it.toUri() == uri } == true
@@ -86,6 +88,11 @@ fun NfcScreen(c: AppContainer) {
                     ndef.connect()
                     val uri = try { ndef.ndefMessage?.records?.firstNotNullOfOrNull { it.toUri() } } finally { ndef.close() }
                     require(uri?.scheme == "avohorse" && uri.host == "identity") { "No es una etiqueta AVO" }
+                    if (uri.pathSegments.getOrNull(0) == "user") {
+                        val text = c.identity.message(c.identity.onCardTapped(uri.toString()))
+                        activity?.runOnUiThread { message = text }
+                        return@ReaderCallback
+                    }
                     val type = uri.pathSegments.getOrNull(0)
                     val identity = uri.pathSegments.getOrNull(1)
                     require(type in listOf("horse", "rider") && !identity.isNullOrBlank()) { "Identidad NFC inválida" }
@@ -126,6 +133,20 @@ fun NfcScreen(c: AppContainer) {
         }
     }
     LazyColumn(Modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        item { AvoCard("Identidad AVO (tarjeta personal)") {
+            val me = identity
+            if (me == null) Note("Sin identidad. Acerca tu tarjeta AVO personal (creada con la app AVO Tarjetas) para que este móvil sea tuyo; se usará para enviar y recibir entrenamientos.")
+            else {
+                Text("${me.name} · ${me.code}")
+                Note("Si cambias de móvil, acerca la misma tarjeta en el nuevo.")
+                var confirm by remember { mutableStateOf(false) }
+                if (!confirm) TextButton(onClick = { confirm = true }) { Text("Olvidar identidad") }
+                else Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(onClick = { c.identity.forget(); confirm = false; message = "Identidad olvidada. Acerca la nueva tarjeta." }) { Text("Sí, olvidar") }
+                    OutlinedButton(onClick = { confirm = false }) { Text("Cancelar") }
+                }
+            }
+        } }
         item { AvoCard("NFC · Caballos y jinetes") {
             Note(if (adapter == null) "Este móvil no tiene NFC." else if (!adapter.isEnabled) "Activa NFC en los ajustes de Android." else "Lector NFC disponible.")
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

@@ -26,6 +26,8 @@ class AppContainer(val app: Application) {
     val db = AvoDatabase.create(app)
     val secure = SecureStore(app)
     val settings = Settings(app, secure)
+    /** AVO user identity (NFC card) for app-to-app sending. */
+    val identity = org.avoperformance.horse.identity.UserIdentity(secure)
     /** Server layer on hold: no endpoint is invented. */
     val server: ServerApi = NotConfiguredServer
     val log = AppLog(this)

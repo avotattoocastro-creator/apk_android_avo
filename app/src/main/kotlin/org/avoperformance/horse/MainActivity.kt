@@ -116,6 +116,7 @@ class MainActivity : ComponentActivity() {
                         finally { ndef.close() }
                     }
                     if (uri?.scheme != "avohorse" || uri.host != "identity") return@launch
+                    if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return@launch }
                     val type = uri.pathSegments.getOrNull(0)
                     val code = uri.pathSegments.getOrNull(1) ?: return@launch
                     if (type != "horse" && type != "rider") return@launch
@@ -171,10 +172,18 @@ class MainActivity : ComponentActivity() {
         handleSystemNfc(intent)
     }
 
+    /** AVO user card: adopted as the phone identity only if there is none (see UserIdentity). */
+    private fun onUserCard(uri: String) {
+        val c = (application as AvoApp).container
+        val text = try { c.identity.message(c.identity.onCardTapped(uri)) } catch (e: Exception) { "NFC: ${e.message ?: "tarjeta no válida"}" }
+        runOnUiThread { android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show() }
+    }
+
     private fun handleSystemNfc(intent: Intent?) {
         if (intent?.action != NfcAdapter.ACTION_NDEF_DISCOVERED) return
         val uri = intent.data ?: return
         if (uri.scheme != "avohorse" || uri.host != "identity") return
+        if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return }
         val type = uri.pathSegments.getOrNull(0)
         val code = uri.pathSegments.getOrNull(1) ?: return
         if (type !in listOf("horse", "rider")) return

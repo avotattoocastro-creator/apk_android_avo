@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AVO_Performance_Horse"
-include(":core", ":app")
+include(":core", ":app", ":cards")

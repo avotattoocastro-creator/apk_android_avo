@@ -4,7 +4,7 @@ name: Build AVO Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine]
+    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity]
     paths:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'
@@ -24,6 +24,7 @@ on:
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'app/**'
+      - 'cards/**'
       - 'equine-intelligence/**'
       - 'firmware/back/V3_8_0/lib/avo_core/**'
       - 'core/**'
@@ -201,7 +202,7 @@ jobs:
         run: |
           cd "$AVO_SOURCE_DIR"
           set -o pipefail
-          ./gradlew --no-daemon :app:assembleDebug 2>&1 | tee "$RUNNER_TEMP/build.log" || {
+          ./gradlew --no-daemon :app:assembleDebug :cards:assembleDebug 2>&1 | tee "$RUNNER_TEMP/build.log" || {
             grep -E '^e: ' "$RUNNER_TEMP/build.log" | head -40 | sed -E 's#^e: (file://)?([^:]+):([0-9]+):([0-9]+) (.*)#::error file=\2,line=\3,col=\4::\5#' || true
             exit 1
           }
@@ -218,6 +219,8 @@ jobs:
           for abi in arm64-v8a armeabi-v7a x86_64; do unzip -l "$APK" | grep -q "lib/$abi/libavo_equine_jni.so" || { echo "::error::falta libavo_equine_jni.so para $abi"; exit 1; }; done
           OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
+          CARDS=$(find "$AVO_SOURCE_DIR/cards/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit 2>/dev/null || true)
+          if [ -n "$CARDS" ]; then cp "$CARDS" "$GITHUB_WORKSPACE/out/AVO_Tarjetas_V1_0_DEV1_debug.apk"; (cd "$GITHUB_WORKSPACE/out" && sha256sum AVO_Tarjetas_V1_0_DEV1_debug.apk > AVO_Tarjetas_V1_0_DEV1_debug.apk.sha256); fi
           cd "$GITHUB_WORKSPACE/out"
           sha256sum "$OUTPUT" > "$OUTPUT.sha256"
           cat "$OUTPUT.sha256"
