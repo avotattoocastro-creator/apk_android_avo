@@ -41,9 +41,12 @@ check("Range" in w and "206 Partial Content" in w and "If-Match" in w, "resumabl
 # rc2: field reboot when starting the AP
 check("MIN_INTERNAL_FREE" in w and "heap_caps_get_free_size(MALLOC_CAP_INTERNAL" in w, "rc2: internal RAM check before the AP")
 check('nvs_set_u32("wifi_try", 1)' in w and '"wifi_off", 1' in w, "rc2: reboot breadcrumb → Wi-Fi disabled")
-check("s_res = do_start(" in w and '"wifisync", 8192' in w, "rc2: the AP starts in its own task, not in ble_rx")
+check("s_res = do_start(" in w and '"wifisync", WORKER_STACK' in w, "the AP starts in its own task, not in ble_rx")
+check("return s_mx && s_buf && s_cmd && s_done && s_api;" in w, "3.7.5: no Wi-Fi task at boot (on demand)")
+check("vTaskDelete(nullptr)" in w, "3.7.5: the Wi-Fi task returns its stack when turning off")
+check("WiFi.persistent(false)" in w, "3.7.5: Wi-Fi does not write its configuration to NVS")
 check("set_enabled(true)" in ble, "rc2: WIFI_SYNC 5 re-enables")
 
 if fails:
     print("FAIL:", *fails, sep="\n  "); sys.exit(1)
-print("test_wifi_v374: OK (%d checks)" % 23)
+print("test_wifi_v374: OK (%d checks)" % 26)

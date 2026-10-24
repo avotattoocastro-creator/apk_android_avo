@@ -49,7 +49,8 @@ static const uint32_t NO_CLIENT_MS = 60000, IDLE_MS = 45000, MAX_ON_MS = 15 * 60
 static const int MIN_BATT_PCT = 15, STOP_BATT_PCT = 10, MAX_AUTH_FAIL = 5;
 static const size_t CHUNK = 16 * 1024;
 // rc2: minimum internal RAM to bring up AP + httpd next to BLE + ESP-NOW (internal estimate: ~45 KB)
-static const size_t MIN_INTERNAL_FREE = 72 * 1024, MIN_INTERNAL_BLOCK = 24 * 1024;
+static const size_t MIN_INTERNAL_FREE = 40 * 1024, MIN_INTERNAL_BLOCK = 16 * 1024;
+static const uint32_t WORKER_STACK = 6144;   // internal (it writes NVS: it cannot go in PSRAM)
 
 static SemaphoreHandle_t s_mx = nullptr;
 static volatile State s_state = State::OFF;
@@ -460,6 +461,7 @@ static StartResult do_start(Credentials* out) {
   s_cred.port = 80;
   s_cred.idle_timeout_s = IDLE_MS / 1000;
   s_auth_fail = 0;
+  WiFi.persistent(false);
   bool ok = WiFi.mode(WIFI_AP_STA) &&
             WiFi.softAPConfig(IPAddress(192, 168, 4, 1), IPAddress(192, 168, 4, 1), IPAddress(255, 255, 255, 0)) &&
             WiFi.softAP(s_cred.ssid, s_cred.password, s_cred.channel, 0, 1);
@@ -478,6 +480,10 @@ static StartResult do_start(Credentials* out) {
     return StartResult::RADIO_ERROR;
   }
   sys::nvs_set_u32("wifi_try", 0);       // AP and server up without a reboot
+  Serial.printf("[AVO WIFI] AP up: internal=%u largest=%u (cost %d B)\n",
+                (unsigned)heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT),
+                (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT),
+                (int)freeb - (int)heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT));
   s_on_since = s_last_activity = sys::ms();
   s_client_left_at = 0;
   s_starts++;
@@ -490,12 +496,24 @@ static StartResult do_start(Credentials* out) {
 }
 
 static SemaphoreHandle_t s_cmd = nullptr, s_done = nullptr, s_api = nullptr;
+static TaskHandle_t s_worker = nullptr;
+static void supervise(void*);
 static StartResult s_res = StartResult::BUSY;
 static Credentials s_res_cred = {};
 
 StartResult start(Credentials* out) {
   if (!s_api || xSemaphoreTake(s_api, pdMS_TO_TICKS(100)) != pdTRUE) return StartResult::BUSY;
   xSemaphoreTake(s_done, 0);
+  if (!s_worker) {
+    // 3.7.5: the worker only exists while Wi-Fi is on (no RAM taken at boot)
+    size_t lb = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
+    if (lb < WORKER_STACK + 1024 || xTaskCreatePinnedToCore(supervise, "wifisync", WORKER_STACK, nullptr, 2, &s_worker, 1) != pdPASS) {
+      s_worker = nullptr;
+      Serial.printf("[AVO WIFI] worker not created (largest internal=%u)\n", (unsigned)lb);
+      xSemaphoreGive(s_api);
+      return StartResult::RADIO_ERROR;
+    }
+  }
   xSemaphoreGive(s_cmd);
   StartResult r = StartResult::BUSY;
   if (xSemaphoreTake(s_done, pdMS_TO_TICKS(9000)) == pdTRUE) {
@@ -545,6 +563,16 @@ static void supervise(void*) {
       xSemaphoreGive(s_done);
       continue;
     }
+    if (s_state == State::OFF) {
+      // AP off and no pending start → the task is deleted and returns its stack
+      if (xSemaphoreTake(s_api, 0) == pdTRUE) {
+        s_worker = nullptr;
+        xSemaphoreGive(s_api);
+        Serial.println("[AVO WIFI] worker finished");
+        vTaskDelete(nullptr);
+      }
+      continue;
+    }
     if (s_state != State::READY && s_state != State::CLIENT) continue;
     uint32_t now = sys::ms();
     StopReason why = StopReason::NONE;
@@ -581,8 +609,7 @@ bool init() {
   s_api = xSemaphoreCreateMutex();
   s_mx = xSemaphoreCreateMutex();
   s_buf = (uint8_t*)heap_caps_malloc(CHUNK, MALLOC_CAP_SPIRAM);
-  if (!s_mx || !s_buf || !s_cmd || !s_done || !s_api) return false;
-  return xTaskCreatePinnedToCore(supervise, "wifisync", 8192, nullptr, 2, nullptr, 1) == pdPASS;
+  return s_mx && s_buf && s_cmd && s_done && s_api;   // 3.7.5: no task at boot
 }
 
 }  // namespace wifisync

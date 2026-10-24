@@ -436,3 +436,15 @@ Petición del usuario.
   - botón «Reiniciar reloj y capturar» (reinicio normal por RTS, como esptool);
   - «Guardar monitor (.txt)».
 - No escribe nada en el reloj. versionCode 24.
+
+## 2026-10-25 — CHEST 3.7.5-rc1: liberar RAM interna (+ Wi-Fi bajo demanda) · AVO Update 2.2.1
+- **Medido en campo** con el monitor serie (3.7.3-rc1): al final del arranque solo quedan 11 772 B de RAM interna libre, con un bloque máximo de 7 156 B. Es la causa del reinicio de 3.7.4-rc1 y de la vuelta atrás automática del rc2. Detalle en `firmware/chest/V3_7_5_RAM/README.md`.
+- **3.7.5:**
+  - host NimBLE en PSRAM y solo con rol periférico;
+  - `heap_caps_malloc_extmem_enable(1024)`;
+  - pilas de `ble_tx` y `ui_lite` en PSRAM (comprobado que no escriben en la flash);
+  - Wi-Fi bajo demanda: la tarea solo existe mientras el AP está encendido, con `WiFi.persistent(false)`, umbral de 40/16 KB y medida del coste;
+  - línea `[AVO MEM] ready`.
+  - No cambia el formato RAW, la grabación, ESP-NOW, OTA ni las particiones. BIN marcado UNVERIFIED.
+  - Pruebas estáticas: `test_ram_v375.py`, y `test_wifi_v374.py` actualizado a 26 comprobaciones.
+- **AVO Update 2.2.1:** el monitor ya no muestra «USB desconectado» cuando solo no llegan datos.

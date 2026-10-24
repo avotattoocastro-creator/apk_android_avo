@@ -672,7 +672,7 @@ class MainActivity : Activity() {
                 }
                 val n = link.read(buf, 200)
                 if (n > 0) monitorAppend(String(buf, 0, n, Charsets.ISO_8859_1))
-                else if (n < 0 || !link.isOpen) {
+                else if (!link.isOpen) {   // n <= 0 with the port present = no data (timeout), not a disconnection
                     monitorAppend("\n[USB desconectado ${java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())} — reinicio del reloj? reconectando…]\n")
                     runCatching { link.close() }; link = null
                 }
