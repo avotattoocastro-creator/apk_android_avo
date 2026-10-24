@@ -28,6 +28,8 @@ class AppContainer(val app: Application) {
     val settings = Settings(app, secure)
     /** AVO user identity (NFC card) for app-to-app sending. */
     val identity = org.avoperformance.horse.identity.UserIdentity(secure)
+    /** Sending trainings between apps over the internet (Firebase, no own server). */
+    val cloud = org.avoperformance.horse.cloud.AvoCloud(app)
     /** Server layer on hold: no endpoint is invented. */
     val server: ServerApi = NotConfiguredServer
     val log = AppLog(this)
@@ -39,6 +41,7 @@ class AppContainer(val app: Application) {
     val sync = WatchSyncManager(app, db, settings, watch, server, log, scope)
     /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
     val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
+    val inbox = org.avoperformance.horse.cloud.CloudInbox(app, cloud, log)
 }
 
 class AppLog(private val c: AppContainer) {

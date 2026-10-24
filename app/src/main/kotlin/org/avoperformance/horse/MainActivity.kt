@@ -218,6 +218,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun extractAvoUri(intent: Intent?): Uri? = when (intent?.action) {
+        org.avoperformance.horse.cloud.CloudInbox.ACTION_OPEN_RECEIVED -> intent.data?.takeIf { it.scheme == "file" && it.path?.startsWith(java.io.File(filesDir, "received").path) == true }
         Intent.ACTION_VIEW -> intent.data
         Intent.ACTION_SEND -> if (Build.VERSION.SDK_INT >= 33)
             intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)

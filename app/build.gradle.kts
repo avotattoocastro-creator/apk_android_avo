@@ -13,7 +13,7 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 14
+        versionCode = 15
         versionName = "2.1-motor-1.1.0-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
@@ -88,6 +88,10 @@ dependencies {
     implementation(libs.work.runtime.ktx)
     implementation(libs.coroutines.android)
     implementation(libs.osmdroid)
+    // App-to-app sending over the internet (Firebase Spark: Authentication + Realtime Database)
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
     testImplementation(libs.junit)
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:runner:1.6.2")

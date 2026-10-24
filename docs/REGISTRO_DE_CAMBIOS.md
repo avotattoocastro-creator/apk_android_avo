@@ -275,3 +275,23 @@ pero no tenían entrada en este registro.
 - Tarjetas simples (NTAG213/215/216), uso doméstico: se pueden copiar si alguien las tiene en la mano.
 - CI compila los dos APK, que se firman con la misma clave estable cuando existen los secretos.
 - Pendiente: el servicio de envío (Firebase, cuando se aporte `google-services.json`) y la validación física con tarjetas reales.
+
+## 2026-10-24 — Envío de entrenamientos entre apps por internet (Firebase, sin servidor propio)
+- Proyecto Firebase `avo-performance-horse-7be14`, plan gratuito Spark. Usa Authentication (correo/contraseña) y Realtime Database (europe-west1). No usa Cloud Storage ni Cloud Functions.
+- La cuenta es la tarjeta NFC personal: el correo es `<código>@avo-cards.app` (no es una dirección real) y la contraseña es la clave de la tarjeta. Con la misma tarjeta en otro móvil se entra en la misma cuenta.
+- Envío (`cloud/AvoCloud`):
+  - el paquete `.avo` (AVO-TRAINING-1, `TrainingShare.buildPackage`) se sube en trozos base64 de 256 kB a `blobs/<destino>/<id>`;
+  - después se escribe el aviso en `inbox/<destino>/<id>`, con remitente, sesión, tamaño, SHA-256 y número de trozos;
+  - máximo 30 MB.
+- Recepción (`cloud/CloudInbox`, dentro de `AvoLinkService`):
+  - escucha la bandeja mientras el servicio está activo, descarga, comprueba el tamaño y el SHA-256, guarda en `files/received`, borra la entrega de Firebase y avisa con la notificación «Nuevo entrenamiento recibido»;
+  - al pulsar el aviso se abre el diálogo de importación de siempre;
+  - si se pierde la red, reintenta con espera creciente.
+- Interfaz: botón «Internet» en cada entrenamiento (lista de usuarios AVO) y lista de recibidos con Importar/Descartar en «Mis entrenamientos».
+- Seguridad:
+  - reglas en `firebase/database.rules.json`: solo el titular de la tarjeta lee o borra su bandeja, el remitente debe ser quien dice ser y hay límites de tamaño;
+  - la configuración pública de Firebase está en `cloud/FirebaseConfig.kt`. No es un secreto: Google la incluye en cada app, y la protección la dan las reglas.
+- Limitaciones:
+  - el aviso solo llega mientras el servicio de la app está activo (sin FCM ni Cloud Functions);
+  - «Dar de baja» en AVO Tarjetas todavía no bloquea la cuenta en Firebase.
+- versionCode 15. Pendiente: pegar las reglas en la consola y hacer la validación física con dos móviles.

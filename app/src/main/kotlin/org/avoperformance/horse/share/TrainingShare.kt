@@ -15,6 +15,18 @@ import java.util.zip.ZipOutputStream
 /** Export a portable archive using Android's sharesheet; WhatsApp transport never needs our server. */
 object TrainingShare {
     suspend fun prepare(context: Context, t: TrainingEntity, horseName: String, riderName: String): Intent = withContext(Dispatchers.IO) {
+        val target = buildPackage(context, t, horseName, riderName)
+        val uri = FileProvider.getUriForFile(context, "${context.packageName}.files", target)
+        Intent(Intent.ACTION_SEND).apply {
+            type = "application/octet-stream"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_TEXT, buildMessage(t, horseName, riderName))
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+    }
+
+    /** Builds the portable .avo package (AVO-TRAINING-1) in cacheDir/share. Used by WhatsApp and by internet sending. */
+    suspend fun buildPackage(context: Context, t: TrainingEntity, horseName: String, riderName: String): File = withContext(Dispatchers.IO) {
         val directory = t.localDir?.let(::File) ?: error("Entrenamiento no descargado")
         val files = directory.listFiles()?.filter { it.isFile }?.sortedBy { it.name } ?: emptyList()
         require(files.isNotEmpty()) { "No hay segmentos locales" }
@@ -45,13 +57,7 @@ object TrainingShare {
                 zip.closeEntry()
             }
         }
-        val uri = FileProvider.getUriForFile(context, "${context.packageName}.files", target)
-        Intent(Intent.ACTION_SEND).apply {
-            type = "application/octet-stream"
-            putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, buildMessage(t, horseName, riderName))
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
+        target
     }
 
     /** WhatsApp normally supports text plus a file, but the receiving app ultimately controls its display. */

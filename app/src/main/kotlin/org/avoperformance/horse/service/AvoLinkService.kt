@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 import org.avoperformance.horse.AvoApp
 import org.avoperformance.horse.MainActivity
 import org.avoperformance.horse.R
@@ -46,6 +47,10 @@ class AvoLinkService : LifecycleService() {
         c.sync.scheduleWorker()
         if (collecting) return START_STICKY
         collecting = true
+        // Inbox for trainings received over the internet while the phone has an AVO identity (NFC card)
+        lifecycleScope.launch {
+            c.identity.card.collectLatest { card -> if (card != null) c.inbox.watch(card) else c.cloud.signOut() }
+        }
         lifecycleScope.launch {
             var lastText = ""
             var wasReady = false

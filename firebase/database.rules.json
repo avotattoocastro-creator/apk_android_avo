@@ -1,0 +1,34 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      ".read": "auth != null",
+      "$code": {
+        ".write": "auth != null && auth.token.email === $code.toLowerCase() + '@avo-cards.app'",
+        ".validate": "newData.hasChildren(['name', 'uid']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length <= 40"
+      }
+    },
+    "inbox": {
+      "$to": {
+        ".read": "auth != null && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
+        "$msg": {
+          ".write": "auth != null && ((!data.exists() && newData.child('from').val() + '' !== '' && auth.token.email === (newData.child('from').val() + '').toLowerCase() + '@avo-cards.app' && root.child('users').child($to).exists()) || (!newData.exists() && auth.token.email === $to.toLowerCase() + '@avo-cards.app'))",
+          ".validate": "newData.hasChildren(['from', 'fromName', 'sessionId', 'size', 'sha256', 'chunks', 'createdMs']) && newData.child('size').val() <= 31457280 && newData.child('chunks').val() <= 120"
+        }
+      }
+    },
+    "blobs": {
+      "$to": {
+        ".read": "auth != null && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
+        "$msg": {
+          ".write": "auth != null && !newData.exists() && auth.token.email === $to.toLowerCase() + '@avo-cards.app'",
+          "$i": {
+            ".write": "auth != null && !data.exists() && root.child('users').child($to).exists()",
+            ".validate": "newData.isString() && newData.val().length <= 360000"
+          }
+        }
+      }
+    }
+  }
+}
