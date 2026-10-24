@@ -255,23 +255,10 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                 }
                 if (link == LinkState.ESPERANDO_BOOT) Note("Pulsa BOOT en el reloj ahora…", AvoColors.Gold)
                 if (c.settings.authorizedWatch != null) TextButton2("Olvidar este chaleco") { confirmForget = true }
-            }
-        }
-        item {
-            AvoCard("Funcionamiento en segundo plano") {
-                var auto by remember { mutableStateOf(c.settings.autoStart) }
-                Toggle("Iniciar automáticamente sin abrir la app", auto) { auto = it; c.settings.autoStart = it; if (it) AvoLinkService.startIfAutomatic(ctx, "activado por el usuario") }
-                Note("Conecta con el chaleco al encender el móvil, al activar Bluetooth y cuando el reloj se enlaza; mantiene NTRIP y la descarga automática. «Desconectar» lo pausa hasta que pulses «Conectar».")
-                val pm = ctx.getSystemService(android.os.PowerManager::class.java)
-                var exempt by remember { mutableStateOf(pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true) }
-                KV("Optimización de batería", if (exempt) "desactivada (recomendado)" else "activa: Android puede impedir el inicio en segundo plano", if (exempt) AvoColors.Ok else AvoColors.Warn)
-                if (!exempt) OutlinedButton(onClick = {
-                    runCatching {
-                        ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, android.net.Uri.parse("package:" + ctx.packageName)))
-                    }.onFailure { ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
-                }) { Text("Permitir funcionamiento en segundo plano") }
-                LaunchedEffect(Unit) { while (true) { kotlinx.coroutines.delay(1500); exempt = pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true } }
-                Note("En Xiaomi/Redmi activa también «Inicio automático» de AVO en Ajustes > Aplicaciones.")
+                else {
+                    Note("No hay ningún chaleco vinculado: búscalo aquí abajo, tócalo y pulsa BOOT en el reloj cuando lo pida.", AvoColors.Warn)
+                    Button(enabled = granted && !scanning, onClick = { c.watch.scanner.start() }) { Text(if (scanning) "Buscando…" else "Buscar y vincular reloj") }
+                }
             }
         }
         item {
@@ -289,6 +276,23 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                         }
                     }
                 }
+            }
+        }
+        item {
+            AvoCard("Funcionamiento en segundo plano") {
+                var auto by remember { mutableStateOf(c.settings.autoStart) }
+                Toggle("Iniciar automáticamente sin abrir la app", auto) { auto = it; c.settings.autoStart = it; if (it) AvoLinkService.startIfAutomatic(ctx, "activado por el usuario") }
+                Note("Conecta con el chaleco al encender el móvil, al activar Bluetooth y cuando el reloj se enlaza; mantiene NTRIP y la descarga automática. «Desconectar» lo pausa hasta que pulses «Conectar».")
+                val pm = ctx.getSystemService(android.os.PowerManager::class.java)
+                var exempt by remember { mutableStateOf(pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true) }
+                KV("Optimización de batería", if (exempt) "desactivada (recomendado)" else "activa: Android puede impedir el inicio en segundo plano", if (exempt) AvoColors.Ok else AvoColors.Warn)
+                if (!exempt) OutlinedButton(onClick = {
+                    runCatching {
+                        ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, android.net.Uri.parse("package:" + ctx.packageName)))
+                    }.onFailure { ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
+                }) { Text("Permitir funcionamiento en segundo plano") }
+                LaunchedEffect(Unit) { while (true) { kotlinx.coroutines.delay(1500); exempt = pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true } }
+                Note("En Xiaomi/Redmi activa también «Inicio automático» de AVO en Ajustes > Aplicaciones.")
             }
         }
     }
