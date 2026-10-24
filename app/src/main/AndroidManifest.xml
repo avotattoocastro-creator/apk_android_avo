@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <!-- Phones without a watch: background service only to receive trainings from other AVO users -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Special user-granted permission; not an ordinary runtime permission. -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
@@ -73,7 +75,7 @@
         <service
             android:name=".service.AvoLinkService"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice" />
+            android:foregroundServiceType="connectedDevice|remoteMessaging" />
 
         <!-- Background start without opening the app (boot, update, Bluetooth on, link with the watch) -->
         <receiver android:name=".service.AutoStartReceiver" android:exported="true">

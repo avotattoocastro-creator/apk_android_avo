@@ -301,6 +301,8 @@ class ShareManager(private val c: AppContainer) {
 class ShareWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {
         val c = (applicationContext as AvoApp).container
+        // safety net: if Android stopped the listening service, try to start it again
+        runCatching { org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(applicationContext, "comprobación de compartir") }
         val ok = c.share.runPass(if (tags.any { it.contains("Periodic") }) "periódica" else "inmediata")
         return when {
             ok -> Result.success()

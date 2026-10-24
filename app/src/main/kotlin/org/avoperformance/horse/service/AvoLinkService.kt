@@ -39,12 +39,21 @@ class AvoLinkService : LifecycleService() {
             stopSelf()
             return START_NOT_STICKY
         }
-        val type = if (Build.VERSION.SDK_INT >= 29) ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE else 0
-        ServiceCompat.startForeground(this, NOTIF_ID, build("Iniciando…"), type)
+        // With an authorized watch: connected-device service (as before). Without a watch but with an AVO card:
+        // only listens to Firebase to receive trainings from other users (remoteMessaging type).
+        val hasWatch = hasWatch(this)
+        val type = when {
+            hasWatch && Build.VERSION.SDK_INT >= 29 -> ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
+            !hasWatch && Build.VERSION.SDK_INT >= 34 -> ServiceInfo.FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING
+            else -> 0
+        }
+        ServiceCompat.startForeground(this, NOTIF_ID, build(if (hasWatch) "Iniciando…" else "Esperando entrenamientos de usuarios AVO"), type)
         c.dnd.restoreExpired()
-        c.watch.start()
-        if (c.settings.ntrip.value.enabled) c.ntrip.start()
-        c.sync.scheduleWorker()
+        if (hasWatch) {
+            c.watch.start()
+            if (c.settings.ntrip.value.enabled) c.ntrip.start()
+            c.sync.scheduleWorker()
+        }
         if (collecting) return START_STICKY
         collecting = true
         // Inbox for trainings received over the internet while the phone has an AVO identity (NFC card)
@@ -63,7 +72,7 @@ class AvoLinkService : LifecycleService() {
                     if (s == LinkState.LISTO || s == LinkState.LISTO_SIN_AUTH) append(" · ").append(rtk.state.texto)
                     if (c.ntrip.running) append(" · NTRIP: ").append(n.texto)
                 }
-                if (text != lastText && (androidx.core.app.ActivityCompat.checkSelfPermission(this@AvoLinkService, android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < 33)) {
+                if (hasWatch(this@AvoLinkService) && text != lastText && (androidx.core.app.ActivityCompat.checkSelfPermission(this@AvoLinkService, android.Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < 33)) {
                     NotificationManagerCompat.from(this@AvoLinkService).notify(NOTIF_ID, build(text))
                     lastText = text
                 }
@@ -112,11 +121,20 @@ class AvoLinkService : LifecycleService() {
          * Only when enabled, a watch is authorised, Bluetooth permission is granted and the user did not disconnect.
          * Android allows it from boot/update broadcasts and, at any time, when battery optimisation is disabled for the app.
          */
+        /** Authorized watch and Bluetooth permission: the service can handle the watch link. */
+        fun hasWatch(ctx: Context): Boolean {
+            val s = (ctx.applicationContext as AvoApp).container.settings
+            return s.authorizedWatch != null && (Build.VERSION.SDK_INT < 31 ||
+                ContextCompat.checkSelfPermission(ctx, android.Manifest.permission.BLUETOOTH_CONNECT) == android.content.pm.PackageManager.PERMISSION_GRANTED)
+        }
+
         fun startIfAutomatic(ctx: Context, reason: String): Boolean {
             val app = ctx.applicationContext as AvoApp
             val s = app.container.settings
-            if (!s.autoStart || s.autoStartPaused || s.authorizedWatch == null) return false
-            if (Build.VERSION.SDK_INT >= 31 && ContextCompat.checkSelfPermission(ctx, android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED) return false
+            if (!s.autoStart || s.autoStartPaused) return false
+            val watch = hasWatch(ctx)
+            // without a watch it is only started to receive trainings from other AVO users (needs a card)
+            if (!watch && app.container.identity.card.value == null) return false
             return try {
                 ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
                 app.container.log.i("LINK", "inicio automático en segundo plano ($reason)")

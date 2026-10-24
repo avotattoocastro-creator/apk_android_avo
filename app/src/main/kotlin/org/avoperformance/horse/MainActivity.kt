@@ -180,6 +180,7 @@ class MainActivity : ComponentActivity() {
     private fun onUserCard(uri: String) {
         val c = (application as AvoApp).container
         val text = try { c.identity.message(c.identity.onCardTapped(uri)) } catch (e: Exception) { "NFC: ${e.message ?: "tarjeta no válida"}" }
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "tarjeta AVO")
         runOnUiThread { android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show() }
     }
 
@@ -238,7 +239,8 @@ class MainActivity : ComponentActivity() {
         if (intent?.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
-        else org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "app abierta")
+        // with a watch (Bluetooth) or, without a watch, to receive trainings from other AVO users
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "app abierta")
         setContent {
             AvoTheme {
                 var bootVisible by rememberSaveable { mutableStateOf(savedInstanceState == null) }
