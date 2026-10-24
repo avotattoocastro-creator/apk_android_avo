@@ -421,3 +421,9 @@ Petición del usuario.
   - protección contra bucles: antes de cada arranque del AP guarda el contador de arranques del reloj; si al reconectar ha subido, desactiva el Wi-Fi para ese firmware y descarga por Bluetooth. Se reactiva solo con otra versión de firmware;
   - «Pausar» se mantiene tras reiniciar la app.
 - Las pruebas físicas siguen pendientes. El rc2 tampoco está probado en el reloj.
+
+## 2026-10-25 — Los botones de un entrenamiento también usan Wi-Fi (2.3-wifi-dev3)
+- Registro de campo: con 3.7.4-wifi-rc2 la app no pedía Wi-Fi (no aparece ninguna línea WIFI). «Reanudar descarga», Compartir y WhatsApp llamaban a la descarga BLE directamente; solo «Descargar todo» y la descarga automática pasaban por Wi-Fi.
+- `WatchSyncManager.download(id)` intenta Wi-Fi primero (con el mismo coordinador; si ya hay una pasada en marcha, no se lanza otra) y usa BLE solo como respaldo.
+- El registro indica siempre por qué no se usa Wi-Fi: firmware sin la capacidad, bloqueo por reinicio o falta de datos del reloj.
+- **Observación de campo, pendiente de explicar:** el registro alterna `fw 3.7.4-wifi-rc2` y `fw 3.7.3-rc1` tras cada «enlace perdido». Puede ser una vuelta atrás automática de OTA (rollback) por reinicio del rc2, o una reinstalación manual. Se pide confirmación al usuario y el log serie. versionCode 28.

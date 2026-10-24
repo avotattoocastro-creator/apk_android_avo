@@ -116,7 +116,22 @@ class WatchSyncManager(
     @Volatile var isBusy: Boolean = false
         private set
 
-    suspend fun download(sessionId: String): String? = lock.withLock {
+    /**
+     * Download of one training (training buttons, Compartir, WhatsApp): first Wi-Fi if the watch supports it,
+     * and BLE if Wi-Fi is not possible. Field 2.3-wifi-dev2: "Reanudar descarga" went straight to BLE.
+     */
+    suspend fun download(sessionId: String): String? {
+        val w = wifi
+        if (w != null && !watchRecording()) {
+            val rep = w.sync(listOf(sessionId to null))
+            if (sessionId in rep.verified) return null
+            if (rep.skipped) return "Descarga en curso"
+            if (sessionId !in rep.fallbackBle) return rep.failed[sessionId]?.let { "Pendiente: $it" } ?: "Pendiente de conexión"
+        }
+        return downloadBle(sessionId)
+    }
+
+    private suspend fun downloadBle(sessionId: String): String? = lock.withLock {
         if (isBusy) return@withLock "Descarga ocupada"
         isBusy = true
         try { downloadLocked(sessionId) } finally { isBusy = false }
@@ -274,7 +289,7 @@ class WatchSyncManager(
                 if (rep.verified.isNotEmpty()) log.i("SYNC", "Wi-Fi: ${rep.verified.size} entrenamientos verificados")
                 rep.failed.forEach { (id, why) -> log.w("SYNC", "Wi-Fi $id: $why") }
             }
-            for (id in ble) if (download(id) != null) break
+            for (id in ble) if (downloadBle(id) != null) break
             uploadPending()
         }
     }

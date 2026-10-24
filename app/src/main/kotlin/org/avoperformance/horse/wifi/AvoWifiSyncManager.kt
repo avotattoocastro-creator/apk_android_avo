@@ -138,7 +138,17 @@ class AvoWifiSyncManager(
     /** One pass (only one at a time). NTRIP to the watch in pause while it lasts. */
     suspend fun sync(pending: List<Pair<String, String?>>): WifiSyncReport = withContext(Dispatchers.IO) {
         if (pending.isEmpty()) return@withContext WifiSyncReport(emptyList(), emptyMap(), emptyList())
-        if (!supported) return@withContext WifiSyncReport(emptyList(), emptyMap(), pending.map { it.first })
+        if (!supported) {
+            val info = watch.info.value
+            log.i("WIFI", when {
+                info == null -> "sin datos del reloj todavía → Bluetooth"
+                !info.supportsWifiSync -> "firmware ${info.firmware} sin Wi-Fi (caps=0x${java.lang.Long.toHexString(info.caps)}) → Bluetooth"
+                blockedFirmware == info.firmware -> "Wi-Fi bloqueado para ${info.firmware} (reinicio al activarlo) → Bluetooth"
+                else -> "Wi-Fi no disponible → Bluetooth"
+            })
+            return@withContext WifiSyncReport(emptyList(), emptyMap(), pending.map { it.first })
+        }
+        log.i("WIFI", "pidiendo Wi-Fi al reloj ${watch.info.value?.firmware} para ${pending.size} entrenamiento(s)")
         watch.downloadMode.value = true
         try {
             val r = coordinator.sync(pending)
