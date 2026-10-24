@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
@@ -60,152 +62,173 @@ import org.avoperformance.horse.ui.theme.AvoColors
 import java.io.File
 import java.util.Locale
 
+private data class SettingsEntry(val route: String, val title: String)
+
+/** Ajustes: only buttons grouped by process; each one opens its own page. */
 @Composable
 fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
-    val ctx = LocalContext.current
-    var backupStatus by remember { mutableStateOf<String?>(null) }
-    var favoriteName by remember { mutableStateOf("") }
-    var favorites by remember { mutableStateOf(c.settings.shareFavorites) }
-    var defaultFavorite by remember { mutableStateOf(c.settings.shareDefaultFavorite) }
+    val groups = listOf(
+        "Conexión" to listOf(
+            SettingsEntry("bluetooth", "Reloj y Bluetooth"),
+            SettingsEntry("ntrip", "Correcciones RTK (NTRIP)"),
+            SettingsEntry("dispositivos", "Dispositivos"),
+        ),
+        "Entrenamiento" to listOf(
+            SettingsEntry("lugar", "Lugar de entrenamiento"),
+            SettingsEntry("geocercas", "Geocercas"),
+            SettingsEntry("nomolestar", "No molestar automático"),
+        ),
+        "Caballos y jinetes" to listOf(
+            SettingsEntry("jinetes", "Jinetes"),
+            SettingsEntry("nfc", "Tarjetas NFC"),
+        ),
+        "Datos y compartir" to listOf(
+            SettingsEntry("sincronizacion", "Descarga del reloj"),
+            SettingsEntry("compartir", "Compartir y sincronizar"),
+            SettingsEntry("favoritos", "WhatsApp · favoritos"),
+            SettingsEntry("almacenamiento", "Almacenamiento"),
+            SettingsEntry("copias", "Copias de seguridad"),
+        ),
+        "Sistema" to listOf(
+            SettingsEntry("diagnosticos", "Diagnósticos"),
+            SettingsEntry("acerca", "Acerca de"),
+        ),
+    )
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 16.dp)) {
+        groups.forEach { (group, entries) ->
+            item {
+                Text(group.uppercase(), color = AvoColors.Red, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp,
+                    modifier = Modifier.padding(start = 18.dp, top = 14.dp, bottom = 2.dp))
+            }
+            items(entries) { e ->
+                AvoCard(onClick = { go(e.route) }, trailing = { Text("›", color = AvoColors.TextDim, fontSize = 20.sp) }) {
+                    Text(e.title, color = AvoColors.Text, fontSize = 16.sp)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SpotScreen(c: AppContainer) {
+    var spotName by remember { mutableStateOf(c.settings.spotName) }
+    var spotLat by remember { mutableStateOf(c.settings.spotLat.toString()) }
+    var spotLon by remember { mutableStateOf(c.settings.spotLon.toString()) }
+    var saved by remember { mutableStateOf(false) }
+    val tel by c.watch.telemetry.collectAsStateWithLifecycle()
+    LazyColumn(Modifier.fillMaxSize()) { item {
+        AvoCard("Lugar de entrenamiento") {
+            OutlinedTextField(spotName, { spotName = it.take(40); saved = false }, label = { Text("Nombre") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(spotLat, { spotLat = it.take(12); saved = false }, label = { Text("Latitud") }, singleLine = true, modifier = Modifier.weight(1f))
+                OutlinedTextField(spotLon, { spotLon = it.take(12); saved = false }, label = { Text("Longitud") }, singleLine = true, modifier = Modifier.weight(1f))
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
+                OutlinedButton(enabled = tel?.t?.let { it.latE7 != 0 || it.lonE7 != 0 } == true, onClick = {
+                    tel?.t?.let { spotLat = "%.5f".format(Locale.US, it.latE7 / 1e7); spotLon = "%.5f".format(Locale.US, it.lonE7 / 1e7) }
+                }) { Text("Posición del chaleco") }
+                Button(enabled = (spotLat.toDoubleOrNull() ?: 999.0) in -90.0..90.0 && (spotLon.toDoubleOrNull() ?: 999.0) in -180.0..180.0 && spotName.isNotBlank(), onClick = {
+                    c.settings.spotName = spotName.trim(); c.settings.spotLat = spotLat.toDouble(); c.settings.spotLon = spotLon.toDouble()
+                    c.settings.tidePortId = null; saved = true
+                }) { Text(if (saved) "Guardado ✓" else "Guardar") }
+            }
+        }
+    } }
+}
+
+@Composable
+fun DndScreen(c: AppContainer) {
     var dndEnabled by remember { mutableStateOf(c.settings.autoDndGeofence) }
     var dndAccess by remember { mutableStateOf(c.dnd.hasPolicyAccess()) }
     val dndAccessLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         dndAccess = c.dnd.hasPolicyAccess()
-        if (!dndAccess) {
-            dndEnabled = false
-            c.settings.autoDndGeofence = false
-            c.dnd.restoreOwned("permiso no disponible")
-        }
+        if (!dndAccess) { dndEnabled = false; c.settings.autoDndGeofence = false; c.dnd.restoreOwned("permiso no disponible") }
     }
-    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
-        if (uri != null) {
-            backupStatus = runCatching {
-                ctx.contentResolver.openOutputStream(uri)?.use { out ->
-                    out.write(SettingsBackup.export(c.settings).toByteArray(Charsets.UTF_8))
-                } ?: error("No se pudo escribir la copia")
-                "Copia de configuración guardada. Contraseña NTRIP y claves BLE excluidas."
-            }.getOrElse { "Error al exportar: ${it.message}" }
+    LazyColumn(Modifier.fillMaxSize()) { item {
+        AvoCard("No molestar automático") {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text("Silenciar durante la grabación", color = AvoColors.Text, modifier = Modifier.weight(1f))
+                Switch(checked = dndEnabled, onCheckedChange = { enabled ->
+                    dndAccess = c.dnd.hasPolicyAccess()
+                    if (enabled && !dndAccess) dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                    else { dndEnabled = enabled; c.settings.autoDndGeofence = enabled; if (!enabled) c.dnd.restoreOwned("desactivado por el usuario") }
+                })
+            }
+            KV("Permiso de Android", if (dndAccess) "Concedido" else "Pendiente")
+            if (!dndAccess) OutlinedButton(onClick = { dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)) }) { Text("Autorizar") }
         }
+    } }
+}
+
+@Composable
+fun WhatsAppFavoritesScreen(c: AppContainer) {
+    var favoriteName by remember { mutableStateOf("") }
+    var favorites by remember { mutableStateOf(c.settings.shareFavorites) }
+    var defaultFavorite by remember { mutableStateOf(c.settings.shareDefaultFavorite) }
+    LazyColumn(Modifier.fillMaxSize()) { item {
+        AvoCard("WhatsApp · favoritos") {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(value = favoriteName, onValueChange = { favoriteName = it.take(80) }, label = { Text("Nombre") }, singleLine = true, modifier = Modifier.weight(1f))
+                Button(enabled = favoriteName.isNotBlank() && favorites.size < 12, onClick = {
+                    favorites = (favorites + favoriteName.trim()).distinctBy { it.lowercase(Locale.ROOT) }
+                    c.settings.shareFavorites = favorites; favoriteName = ""
+                }) { Text("Añadir") }
+            }
+            favorites.forEach { name ->
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(name, color = AvoColors.Text, modifier = Modifier.weight(1f))
+                    androidx.compose.material3.TextButton(onClick = { defaultFavorite = name; c.settings.shareDefaultFavorite = name }) {
+                        Text(if (defaultFavorite == name) "Predeterminado ✓" else "Predeterminar")
+                    }
+                    androidx.compose.material3.TextButton(onClick = {
+                        favorites = favorites.filterNot { it == name }; c.settings.shareFavorites = favorites
+                        if (defaultFavorite == name) { defaultFavorite = ""; c.settings.shareDefaultFavorite = "" }
+                    }) { Text("Quitar", color = AvoColors.Bad) }
+                }
+            }
+        }
+    } }
+}
+
+@Composable
+fun BackupScreen(c: AppContainer) {
+    val ctx = LocalContext.current
+    var backupStatus by remember { mutableStateOf<String?>(null) }
+    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        if (uri != null) backupStatus = runCatching {
+            ctx.contentResolver.openOutputStream(uri)?.use { out -> out.write(SettingsBackup.export(c.settings).toByteArray(Charsets.UTF_8)) } ?: error("No se pudo escribir la copia")
+            "Copia guardada (sin contraseña NTRIP ni claves BLE)"
+        }.getOrElse { "Error al exportar: ${it.message}" }
     }
     val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri != null) {
-            backupStatus = runCatching {
-                val bytes = ctx.contentResolver.openInputStream(uri)?.use { input ->
-                    val data = input.readNBytes(256_001)
-                    require(data.size <= 256_000) { "Archivo demasiado grande" }
-                    data
-                } ?: error("No se pudo leer el archivo")
-                SettingsBackup.restore(c.settings, bytes.toString(Charsets.UTF_8))
-                "Configuración restaurada. Introduce la contraseña NTRIP y vuelve a autorizar el reloj si es otro móvil."
-            }.getOrElse { "Error al restaurar: ${it.message}" }
-        }
+        if (uri != null) backupStatus = runCatching {
+            val bytes = ctx.contentResolver.openInputStream(uri)?.use { input ->
+                val data = input.readNBytes(256_001); require(data.size <= 256_000) { "Archivo demasiado grande" }; data
+            } ?: error("No se pudo leer el archivo")
+            SettingsBackup.restore(c.settings, bytes.toString(Charsets.UTF_8))
+            "Configuración restaurada. Falta la contraseña NTRIP y autorizar el reloj si es otro móvil."
+        }.getOrElse { "Error al restaurar: ${it.message}" }
     }
-    val entries = listOf(
-        "bluetooth" to "Bluetooth · chaleco y autorización",
-        "ntrip" to "NTRIP · correcciones RTK",
-        "geocercas" to "Geocercas",
-        "compartir" to "Compartir y sincronizar · usuarios AVO",
-        "sincronizacion" to "Sincronización",
-        "diagnosticos" to "Diagnósticos",
-        "almacenamiento" to "Almacenamiento",
-        "jinetes" to "Jinetes",
-        "nfc" to "NFC · Leer y grabar tarjetas",
-        "dispositivos" to "Dispositivos",
-    )
-    LazyColumn(Modifier.fillMaxSize()) {
-        items(entries) { (r, t) -> AvoCard(onClick = { go(r) }, trailing = { Text("›", color = AvoColors.TextDim, fontSize = 20.sp) }) { Text(t, color = AvoColors.Text, fontSize = 16.sp) } }
-        item {
-            var spotName by remember { mutableStateOf(c.settings.spotName) }
-            var spotLat by remember { mutableStateOf(c.settings.spotLat.toString()) }
-            var spotLon by remember { mutableStateOf(c.settings.spotLon.toString()) }
-            val tel by c.watch.telemetry.collectAsStateWithLifecycle()
-            AvoCard("Lugar de entrenamiento · mareas y tiempo") {
-                OutlinedTextField(spotName, { spotName = it.take(40) }, label = { Text("Nombre") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedTextField(spotLat, { spotLat = it.take(12) }, label = { Text("Latitud") }, singleLine = true, modifier = Modifier.weight(1f))
-                    OutlinedTextField(spotLon, { spotLon = it.take(12) }, label = { Text("Longitud") }, singleLine = true, modifier = Modifier.weight(1f))
-                }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(top = 6.dp)) {
-                    OutlinedButton(enabled = tel?.t?.let { it.latE7 != 0 || it.lonE7 != 0 } == true, onClick = {
-                        tel?.t?.let { spotLat = "%.5f".format(Locale.US, it.latE7 / 1e7); spotLon = "%.5f".format(Locale.US, it.lonE7 / 1e7) }
-                    }) { Text("Posición del chaleco") }
-                    Button(enabled = (spotLat.toDoubleOrNull() ?: 999.0) in -90.0..90.0 && (spotLon.toDoubleOrNull() ?: 999.0) in -180.0..180.0 && spotName.isNotBlank(), onClick = {
-                        c.settings.spotName = spotName.trim(); c.settings.spotLat = spotLat.toDouble(); c.settings.spotLon = spotLon.toDouble()
-                        c.settings.tidePortId = null
-                    }) { Text("Guardar") }
-                }
+    LazyColumn(Modifier.fillMaxSize()) { item {
+        AvoCard("Copias de seguridad") {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(onClick = { exportLauncher.launch("AVO_CONFIG_V2_0.json") }) { Text("Guardar") }
+                OutlinedButton(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain", "application/octet-stream")) }) { Text("Restaurar") }
             }
+            backupStatus?.let { Note(it, AvoColors.Info) }
         }
-        item {
-            AvoCard("No molestar automático por geocerca") {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text("Silenciar durante grabación automática", color = AvoColors.Text, modifier = Modifier.weight(1f))
-                    Switch(checked = dndEnabled, onCheckedChange = { enabled ->
-                        dndAccess = c.dnd.hasPolicyAccess()
-                        if (enabled && !dndAccess) {
-                            dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
-                        } else {
-                            dndEnabled = enabled
-                            c.settings.autoDndGeofence = enabled
-                            if (!enabled) c.dnd.restoreOwned("desactivado por el usuario")
-                        }
-                    })
-                }
-                KV("Permiso de Android", if (dndAccess) "Concedido" else "Pendiente")
-                if (!dndAccess) {
-                    OutlinedButton(onClick = {
-                        dndAccessLauncher.launch(Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
-                    }) { Text("Autorizar No molestar") }
-                }
-            }
+    } }
+}
+
+@Composable
+fun AboutScreen() {
+    LazyColumn(Modifier.fillMaxSize()) { item {
+        AvoCard("Acerca de") {
+            KV("Aplicación", "AVO Performance Horse ${org.avoperformance.horse.BuildConfig.VERSION_NAME}")
+            KV("Paquete", "org.avoperformance.horse")
+            KV("Protocolo BLE", "AVO BLE v1 (firmware V3.4.4 – V3.5.4)")
         }
-        item {
-            AvoCard("WhatsApp · destinatarios favoritos") {
-                OutlinedTextField(value = favoriteName, onValueChange = { favoriteName = it.take(80) },
-                    label = { Text("Nombre del favorito") }, singleLine = true)
-                OutlinedButton(enabled = favoriteName.isNotBlank() && favorites.size < 12,
-                    onClick = {
-                        favorites = (favorites + favoriteName.trim()).distinctBy { it.lowercase(Locale.ROOT) }
-                        c.settings.shareFavorites = favorites
-                        favoriteName = ""
-                    }) { Text("Añadir favorito") }
-                favorites.forEach { name ->
-                    Row(verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(name, modifier = Modifier.weight(1f))
-                        OutlinedButton(onClick = {
-                            defaultFavorite = name
-                            c.settings.shareDefaultFavorite = name
-                        }) { Text(if (defaultFavorite == name) "Predeterminado ✓" else "Predeterminar") }
-                        OutlinedButton(onClick = {
-                            favorites = favorites.filterNot { it == name }
-                            c.settings.shareFavorites = favorites
-                            if (defaultFavorite == name) {
-                                defaultFavorite = ""
-                                c.settings.shareDefaultFavorite = ""
-                            }
-                        }) { Text("Quitar") }
-                    }
-                }
-            }
-        }
-        item {
-            AvoCard("Copias de seguridad · sin servidor") {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { exportLauncher.launch("AVO_CONFIG_V2_0.json") }) { Text("Guardar") }
-                    OutlinedButton(onClick = { importLauncher.launch(arrayOf("application/json", "text/plain", "application/octet-stream")) }) { Text("Restaurar") }
-                }
-                backupStatus?.let { Note(it, AvoColors.Info) }
-            }
-        }
-        item {
-            AvoCard("Acerca de") {
-                KV("Aplicación", "AVO Performance Horse ${org.avoperformance.horse.BuildConfig.VERSION_NAME}")
-                KV("Paquete", "org.avoperformance.horse")
-                KV("Protocolo BLE", "AVO BLE v1 (firmware V3.4.4 – V3.5.4)")
-            }
-        }
-    }
+    } }
 }
 
 @Composable
@@ -260,7 +283,7 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                 if (link == LinkState.ESPERANDO_BOOT) Note("Pulsa BOOT en el reloj ahora…", AvoColors.Gold)
                 if (c.settings.authorizedWatch != null) TextButton2("Olvidar este chaleco") { confirmForget = true }
                 else {
-                    Note("No hay ningún chaleco vinculado: búscalo aquí abajo, tócalo y pulsa BOOT en el reloj cuando lo pida.", AvoColors.Warn)
+                    Note("Ningún chaleco vinculado", AvoColors.Warn)
                     Button(enabled = granted && !scanning, onClick = { c.watch.scanner.start() }) { Text(if (scanning) "Buscando…" else "Buscar y vincular reloj") }
                 }
             }
@@ -286,7 +309,6 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
             AvoCard("Funcionamiento en segundo plano") {
                 var auto by remember { mutableStateOf(c.settings.autoStart) }
                 Toggle("Iniciar automáticamente sin abrir la app", auto) { auto = it; c.settings.autoStart = it; if (it) AvoLinkService.startIfAutomatic(ctx, "activado por el usuario") }
-                Note("Conecta con el chaleco al encender el móvil, al activar Bluetooth y cuando el reloj se enlaza; mantiene NTRIP y la descarga automática. «Desconectar» lo pausa hasta que pulses «Conectar».")
                 val pm = ctx.getSystemService(android.os.PowerManager::class.java)
                 var exempt by remember { mutableStateOf(pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true) }
                 KV("Optimización de batería", if (exempt) "desactivada (recomendado)" else "activa: Android puede impedir el inicio en segundo plano", if (exempt) AvoColors.Ok else AvoColors.Warn)
@@ -296,7 +318,6 @@ fun BluetoothScreen(c: AppContainer, requestPerms: () -> Unit) {
                     }.onFailure { ctx.startActivity(android.content.Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
                 }) { Text("Permitir funcionamiento en segundo plano") }
                 LaunchedEffect(Unit) { while (true) { kotlinx.coroutines.delay(1500); exempt = pm?.isIgnoringBatteryOptimizations(ctx.packageName) == true } }
-                Note("En Xiaomi/Redmi activa también «Inicio automático» de AVO en Ajustes > Aplicaciones.")
             }
         }
     }
@@ -405,13 +426,6 @@ fun SyncScreen(c: AppContainer) {
     var auto by remember { mutableStateOf(c.settings.autoDownload) }
     val progress by c.sync.progress.collectAsStateWithLifecycle()
     LazyColumn(Modifier.fillMaxSize()) {
-        item {
-            AvoCard("Rutas de sincronización") {
-                KV("Chaleco → WiFi → servidor", "pendiente (firmware sin WiFi)", AvoColors.Warn)
-                KV("Chaleco → Bluetooth → teléfono", "activa", AvoColors.Ok)
-                KV("Teléfono → servidor", if (c.sync.serverConfigured) "activa" else "servidor pendiente", if (c.sync.serverConfigured) AvoColors.Ok else AvoColors.Warn)
-            }
-        }
         item {
             AvoCard("Descarga automática") {
                 Toggle("Descargar al conectar el chaleco", auto) { auto = it; c.settings.autoDownload = it }

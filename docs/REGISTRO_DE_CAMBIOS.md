@@ -354,3 +354,22 @@ pero no tenían entrada en este registro.
 - `AvoLinkService` arranca también sin reloj si el móvil tiene tarjeta AVO. En ese caso solo escucha Firebase: no arranca el enlace con el reloj, ni NTRIP, ni la sincronización con el reloj. Usa el tipo de servicio `remoteMessaging` (Android 14+; permiso `FOREGROUND_SERVICE_REMOTE_MESSAGING`) con la notificación fija «Esperando entrenamientos de usuarios AVO». Con reloj autorizado no cambia nada (`connectedDevice`).
 - El servicio se arranca: al abrir la app, al acercar la tarjeta AVO, al reiniciar el móvil o actualizar la app, y como red de seguridad en cada `ShareWorker`.
 - Sigue sin ser push: si el fabricante cierra la app en segundo plano, hay que quitarla del ahorro de batería. La opción B (FCM con Cloud Functions, plan Blaze) queda pendiente de decisión. versionCode 23.
+
+## 2026-10-24 — Reorganización de la interfaz (2.2-ui-dev8)
+Petición del usuario.
+- **Cuadra:**
+  - al tocar un caballo se abre su ficha: datos, totales y entrenamientos del más reciente al más antiguo, que se abren al análisis;
+  - lo mismo con los jinetes;
+  - «Seleccionar» pasa a ser un botón propio (`ProfileScreens.kt`).
+- **Historial → «Entrenamientos»:**
+  - título de la pantalla «ENTRENAMIENTOS»; la pestaña inferior se llama «Entrenos» por espacio;
+  - cada entrenamiento tiene un único botón **Compartir**, que abre una ventana con: Usuarios AVO, WhatsApp y borrar del móvil, y Otras aplicaciones.
+- **Ajustes:** la pantalla principal solo tiene botones agrupados por proceso:
+  - Conexión: reloj y Bluetooth, NTRIP, dispositivos;
+  - Entrenamiento: lugar, geocercas, no molestar;
+  - Caballos y jinetes: jinetes, tarjetas NFC;
+  - Datos y compartir: descarga del reloj, compartir y sincronizar, WhatsApp favoritos, almacenamiento, copias de seguridad;
+  - Sistema: diagnósticos, acerca de.
+  - Las tarjetas sueltas pasan a páginas propias (`SpotScreen`, `DndScreen`, `WhatsAppFavoritesScreen`, `BackupScreen`, `AboutScreen`).
+- **Textos explicativos eliminados** (ayudas de funcionamiento, rutas de sincronización, tarjeta «Servidor»). Se mantienen los estados, los errores, las listas vacías y los avisos de validez del análisis (umbrales sin validar en caballos reales, aceleraciones GNSS frente a cincha), que evitan conclusiones no validadas.
+- No cambia ninguna funcionalidad. versionCode 24.

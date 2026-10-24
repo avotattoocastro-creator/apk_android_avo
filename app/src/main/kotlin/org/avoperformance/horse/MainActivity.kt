@@ -257,14 +257,15 @@ private data class Tab(val route: String, val label: String, val icon: ImageVect
 private val tabs = listOf(
     Tab("inicio", "Inicio", Icons.Filled.Home),
     Tab("entrenamiento", "Entrenar", Icons.Filled.PlayArrow),
-    Tab("historial", "Historial", Icons.AutoMirrored.Filled.List),
+    Tab("historial", "Entrenos", Icons.AutoMirrored.Filled.List),
     Tab("mareas", "Mareas", Icons.Filled.Waves),
     Tab("caballos", "Cuadra", Icons.Filled.Favorite),
 )
 
 private val titles = mapOf(
-    "configuracion" to "Ajustes", "nfc" to "NFC", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
-    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "compartir" to "Compartir y sincronizar", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
+    "configuracion" to "Ajustes", "nfc" to "Tarjetas NFC", "bluetooth" to "Reloj y Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Descarga del reloj",
+    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "compartir" to "Compartir y sincronizar", "lugar" to "Lugar de entrenamiento", "nomolestar" to "No molestar", "favoritos" to "WhatsApp · favoritos",
+    "copias" to "Copias de seguridad", "acerca" to "Acerca de", "caballo/{code}" to "Caballo", "jinete/{code}" to "Jinete", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -284,7 +285,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
                     if (isTab) Row(verticalAlignment = Alignment.CenterVertically) {
                         Text("AVO", color = AvoColors.Red, fontWeight = FontWeight.Black, fontSize = 22.sp, letterSpacing = 2.sp)
                         Spacer(Modifier.width(10.dp))
-                        Text(tabs.first { it.route == route }.label.uppercase(), color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp, letterSpacing = 1.5.sp)
+                        Text((if (route == "historial") "Entrenamientos" else tabs.first { it.route == route }.label).uppercase(), color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp, letterSpacing = 1.5.sp)
                     } else Text((titles[route] ?: "AVO").uppercase(), fontWeight = FontWeight.Bold, fontSize = 17.sp, letterSpacing = 1.2.sp)
                 },
                 navigationIcon = { if (!isTab && route != null) IconButton(onClick = { nav.popBackStack() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Atrás") } },
@@ -326,8 +327,15 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
             composable("diagnosticos") { DiagnosticsScreen(c) }
             composable("dispositivos") { DeviceManagerScreen(c) }
             composable("almacenamiento") { StorageScreen(c) }
-            composable("jinetes") { RidersScreen(c) }
+            composable("jinetes") { RidersScreen(c, go(nav)) }
             composable("compartir") { org.avoperformance.horse.ui.screens.ShareScreen(c) }
+            composable("lugar") { org.avoperformance.horse.ui.screens.SpotScreen(c) }
+            composable("nomolestar") { org.avoperformance.horse.ui.screens.DndScreen(c) }
+            composable("favoritos") { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) }
+            composable("copias") { org.avoperformance.horse.ui.screens.BackupScreen(c) }
+            composable("acerca") { org.avoperformance.horse.ui.screens.AboutScreen() }
+            composable("caballo/{code}") { org.avoperformance.horse.ui.screens.HorseProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
+            composable("jinete/{code}") { org.avoperformance.horse.ui.screens.RiderProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
             composable("comparar/{a}/{b}") { back -> CompareScreen(c, back.arguments?.getString("a") ?: "", back.arguments?.getString("b") ?: "") }
             composable("detalle/{id}") { TrainingDetailScreen(c, it.arguments?.getString("id") ?: "") }
         }

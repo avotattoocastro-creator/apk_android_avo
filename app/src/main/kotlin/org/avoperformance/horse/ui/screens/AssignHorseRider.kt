@@ -34,7 +34,6 @@ fun AssignHorseRiderDialog(c: AppContainer, t: TrainingEntity, onDismiss: () -> 
     AlertDialog(onDismissRequest = onDismiss, title = { Text("Caballo y jinete") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Note("Elige uno guardado o escribe un nombre nuevo; se guardará para próximos entrenamientos.")
                 OutlinedTextField(horse, { horse = it.take(120) }, label = { Text("Caballo") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 if (horses.isNotEmpty()) {
                     OutlinedButton(onClick = { horseMenu = true }) { Text("Elegir caballo guardado") }

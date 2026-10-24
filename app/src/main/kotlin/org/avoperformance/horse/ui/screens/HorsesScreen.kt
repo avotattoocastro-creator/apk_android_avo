@@ -125,7 +125,7 @@ fun HorsesScreen(c: AppContainer, go: (String) -> Unit) {
         }
         items(horses, key = { it.id }) { h ->
             val mine = trainings.filter { it.horseCode == h.code }
-            AvoCard(onClick = { selected = h.id; c.settings.selectedHorseId = h.id }) {
+            AvoCard(onClick = { go("caballo/" + android.net.Uri.encode(h.code)) }) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     HorsePhoto(h.photoPath, Modifier.size(78.dp).clickable { photoFor = h; picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) })
                     Spacer(Modifier.width(12.dp))
@@ -143,6 +143,7 @@ fun HorsesScreen(c: AppContainer, go: (String) -> Unit) {
                 }
                 if (h.notes.isNotBlank()) Note(h.notes)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (selected != h.id) TextButton(onClick = { selected = h.id; c.settings.selectedHorseId = h.id }) { Text("Seleccionar") }
                     TextButton(onClick = { editing = h }) { Text("Editar") }
                     TextButton(onClick = { photoFor = h; picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }) { Text(if (h.photoPath == null) "Añadir foto" else "Cambiar foto") }
                     TextButton(onClick = { deleting = h }) { Text("Eliminar", color = AvoColors.Bad) }
@@ -194,7 +195,7 @@ private fun HorseDialog(h: HorseEntity, onDismiss: () -> Unit, onSave: (HorseEnt
 }
 
 @Composable
-fun RidersScreen(c: AppContainer) {
+fun RidersScreen(c: AppContainer, go: (String) -> Unit = {}) {
     val riders by c.db.riders().all().collectAsStateWithLifecycle(emptyList())
     val scope = rememberCoroutineScope()
     var editing by remember { mutableStateOf<RiderEntity?>(null) }
@@ -203,7 +204,7 @@ fun RidersScreen(c: AppContainer) {
     LazyColumn(Modifier.fillMaxSize()) {
         item { Button(onClick = { editing = RiderEntity(code = "", name = "") }, modifier = Modifier.padding(12.dp)) { Text("Nuevo jinete") } }
         items(riders, key = { it.id }) { r ->
-            AvoCard(onClick = { selected = r.id; c.settings.selectedRiderId = r.id }) {
+            AvoCard(onClick = { go("jinete/" + android.net.Uri.encode(r.code)) }) {
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Column(Modifier.weight(1f)) {
                         Text(r.name, color = AvoColors.Text, fontSize = 17.sp)
@@ -213,6 +214,7 @@ fun RidersScreen(c: AppContainer) {
                 }
                 if (r.notes.isNotBlank()) Note(r.notes)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (selected != r.id) TextButton(onClick = { selected = r.id; c.settings.selectedRiderId = r.id }) { Text("Seleccionar") }
                     TextButton(onClick = { editing = r }) { Text("Editar") }
                     TextButton(onClick = { deleting = r }) { Text("Eliminar", color = AvoColors.Bad) }
                 }

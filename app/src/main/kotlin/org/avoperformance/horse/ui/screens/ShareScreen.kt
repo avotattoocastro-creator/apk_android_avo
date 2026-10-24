@@ -100,23 +100,21 @@ fun ShareScreen(c: AppContainer) {
                     Button(enabled = card != null, onClick = { sm.runNow(); refreshTick++ }) { Text("Sincronizar ahora") }
                     OutlinedButton(onClick = { paused = !paused; c.settings.sharePaused = paused; if (!paused) sm.runNow() }) { Text(if (paused) "Reanudar" else "Pausar") }
                 }
-                Note("Sin servidor propio: los avisos llegan mientras la app o su servicio están activos, y como respaldo cada 15 minutos o al abrir la app.")
             }
         }
         item {
             AvoCard("Mi cuenta") {
-                if (card == null) Note("Registro e inicio de sesión: acerca tu tarjeta AVO personal (NFC) en la pantalla NFC. Si cambias de móvil, acerca la misma tarjeta.")
+                if (card == null) Note("Acerca tu tarjeta AVO en Ajustes → Tarjetas NFC")
                 else {
                     KV("Usuario", card.name); KV("Identificador", card.code)
                     KV("Cuenta", "Tarjeta NFC (sin correo)")
-                    Note("Recuperación: la propia tarjeta. Si se pierde, crea otra en AVO Tarjetas y vuelve a invitar a tus destinatarios.")
                 }
             }
         }
         if (card != null) {
             item {
                 AvoCard("Invitaciones recibidas") {
-                    if (invitations.isEmpty()) Note("Nadie te ha invitado. Cuando alguien quiera enviarte entrenamientos aparecerá aquí; hasta que aceptes no recibirás nada.")
+                    if (invitations.isEmpty()) Note("Sin invitaciones")
                     invitations.forEach { inv ->
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) {
@@ -141,7 +139,6 @@ fun ShareScreen(c: AppContainer) {
                 AvoCard("Sincronización global", trailing = {
                     Switch(globalOn, { globalOn = it; c.settings.shareGlobalEnabled = it })
                 }) {
-                    Note("Reciben automáticamente todos tus entrenamientos nuevos.")
                     RecipientList(recipients.filter { it.scope == ShareManager.GLOBAL }.map { Contact(it.code, it.name) }, grants,
                         onRemove = { sm.removeRecipient(ShareManager.GLOBAL, it.code) })
                     OutlinedButton(onClick = { picking = ShareManager.GLOBAL }) { Text("Añadir usuario") }
@@ -149,7 +146,6 @@ fun ShareScreen(c: AppContainer) {
             }
             item {
                 AvoCard("Sincronización por caballo") {
-                    Note("Se suman a los globales; un usuario repetido recibe una sola copia.")
                     if (horses.isEmpty()) Note("No hay caballos en la cuadra.")
                     horses.forEach { h ->
                         val on = h.code !in disabledHorses
@@ -291,7 +287,6 @@ private fun NetworkCard(c: AppContainer) {
         }
         KV("Este mes (este móvil)", "subido ${mb(up)} · descargado ${mb(down)}")
         if (up + down > s.shareMonthlyWarnMb * 1_048_576L) Note("Consumo alto este mes: el plan gratuito de Firebase permite 10 GB de descarga al mes para todo el proyecto.", AvoColors.Warn)
-        Note("Plan gratuito Spark: 1 GB guardado y 10 GB/mes de descarga para todos los usuarios juntos. El contenido temporal se borra al confirmarse la recepción o a los 14 días.")
     }
 }
 
@@ -319,7 +314,7 @@ fun UserPicker(c: AppContainer, title: String, multi: Boolean, onDismiss: () -> 
                 if (list == null && error == null) { Spacer(Modifier.height(8.dp)); LinearProgressIndicator(Modifier.fillMaxWidth()) }
                 val filtered = list.orEmpty().filter { q.isBlank() || it.name.contains(q, true) || it.code.contains(q.trim(), true) }
                     .sortedWith(compareByDescending<Contact> { it.code in favCodes }.thenBy { it.name.lowercase() })
-                if (list != null && filtered.isEmpty()) Note("Sin resultados. Cada persona aparece cuando acerca su tarjeta AVO en su móvil.")
+                if (list != null && filtered.isEmpty()) Note("Sin resultados")
                 filtered.forEach { u ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(u.code in chosen, { on -> chosen = if (on) (if (multi) chosen + u.code else setOf(u.code)) else chosen - u.code })
@@ -380,7 +375,6 @@ fun ShareDialog(c: AppContainer, sessionId: String, onDismiss: () -> Unit) {
                     }
                     j.lastError?.let { Note(it, AvoColors.Bad) }
                 }
-                Note("Puedes cerrar: el envío continúa en segundo plano y verás aquí y en «Compartir y sincronizar» cuando lo reciban.")
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("Cerrar") } })

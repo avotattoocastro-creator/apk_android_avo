@@ -78,7 +78,7 @@ private fun EngRow(title: String, subtitle: String?, value: String, valueSub: St
 fun EngineStatusCard(state: EngineState, onAnalyse: () -> Unit, onReprocess: () -> Unit, onCancel: () -> Unit) {
     AvoCard("Motor de análisis AVO") {
         when (state) {
-            is EngineState.Idle -> { Note("El análisis avanzado se calcula a partir del fichero descargado."); Button(onClick = onAnalyse, modifier = Modifier.fillMaxWidth()) { Text("ANALIZAR", fontWeight = FontWeight.Bold) } }
+            is EngineState.Idle -> { Button(onClick = onAnalyse, modifier = Modifier.fillMaxWidth()) { Text("ANALIZAR", fontWeight = FontWeight.Bold) } }
             is EngineState.Running -> {
                 Text(if (state.reprocess) "Reprocesando la sesión…" else "Analizando la sesión…", color = AvoColors.Text)
                 LinearProgressIndicator(Modifier.fillMaxWidth().padding(vertical = 8.dp), color = AvoColors.Red, trackColor = AvoColors.Surface2)

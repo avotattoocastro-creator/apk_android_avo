@@ -135,10 +135,9 @@ fun NfcScreen(c: AppContainer) {
     LazyColumn(Modifier.fillMaxSize().padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item { AvoCard("Identidad AVO (tarjeta personal)") {
             val me = identity
-            if (me == null) Note("Sin identidad. Acerca tu tarjeta AVO personal (creada con la app AVO Tarjetas) para que este móvil sea tuyo; se usará para enviar y recibir entrenamientos.")
+            if (me == null) Note("Sin tarjeta personal")
             else {
                 Text("${me.name} · ${me.code}")
-                Note("Si cambias de móvil, acerca la misma tarjeta en el nuevo.")
                 var confirm by remember { mutableStateOf(false) }
                 if (!confirm) TextButton(onClick = { confirm = true }) { Text("Olvidar identidad") }
                 else Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

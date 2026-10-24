@@ -252,7 +252,6 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                 item {
                     AvoCard("Importar entrenamientos recibidos") {
                         OutlinedButton(onClick = { openAvo.launch(arrayOf("application/zip", "application/octet-stream", "*/*")) }) { Text("Abrir archivo .avo recibido") }
-                        Note("Los entrenamientos que te envían otros usuarios AVO se importan solos: mira «Compartir y sincronizar» en Ajustes.")
                         msg?.let { Note(it) }
                     }
                     AvoCard("Análisis y comparación") {
@@ -274,11 +273,6 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         OutlinedButton(enabled = first != null && second != null && first.sessionId != second.sessionId && first.horseCode == second.horseCode,
                             onClick = { go("comparar/${first?.sessionId}/${second?.sessionId}") }) { Text("Comparar entrenamientos") }
                         if (first != null && second != null && first.horseCode != second.horseCode) Note("La comparación requiere el mismo caballo", AvoColors.Warn)
-                    }
-                }
-                item {
-                    AvoCard("Servidor") {
-                        KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
                     }
                 }
                 items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
@@ -308,11 +302,17 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
         }
         KV("Tamaño", if (t.downloadedBytes in 1 until t.totalBytes) "${Fmt.bytes(t.downloadedBytes)} de ${Fmt.bytes(t.totalBytes)}" else Fmt.bytes(t.totalBytes))
         t.lastError?.let { Note(it, AvoColors.Warn) }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
-            if (onWhatsApp != null) OutlinedButton(onClick = onWhatsApp) { Text("WhatsApp") }
-            if (onInternet != null) OutlinedButton(onClick = onInternet) { Text("Compartir AVO") }
-        }
+        var shareMenu by remember { mutableStateOf(false) }
+        if (onShare != null || onWhatsApp != null || onInternet != null) OutlinedButton(onClick = { shareMenu = true }) { Text("Compartir") }
+        if (shareMenu) AlertDialog(onDismissRequest = { shareMenu = false }, title = { Text("Compartir") },
+            text = {
+                Column {
+                    if (onInternet != null) ShareOption("Usuarios AVO") { shareMenu = false; onInternet() }
+                    if (onWhatsApp != null) ShareOption("WhatsApp y borrar del móvil") { shareMenu = false; onWhatsApp() }
+                    if (onShare != null) ShareOption("Otras aplicaciones") { shareMenu = false; onShare() }
+                }
+            },
+            confirmButton = {}, dismissButton = { androidx.compose.material3.TextButton(onClick = { shareMenu = false }) { Text("Cancelar") } })
         if (onAssign != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onAssign) { Text("Caballo y jinete") }
         if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
@@ -320,6 +320,10 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
     }
 }
 
+
+@Composable
+private fun ShareOption(label: String, onClick: () -> Unit) =
+    OutlinedButton(onClick = onClick, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) { Text(label) }
 
 private suspend fun prepareShareWithNames(c: AppContainer, context: android.content.Context, t: TrainingEntity): Intent {
     val horses = c.db.horses().all().first()
