@@ -13,7 +13,7 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 13
+        versionCode = 14
         versionName = "2.1-motor-1.1.0-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
@@ -43,6 +43,11 @@ android {
     }
 
     buildTypes {
+        // Stable signing: when CI has the AVO_KEYSTORE_* secrets, the debug APK is signed with the
+        // same key, so each new version installs over the previous one without losing data.
+        debug {
+            if (System.getenv("AVO_KEYSTORE_FILE") != null) signingConfig = signingConfigs.getByName("release")
+        }
         release {
             isMinifyEnabled = false
             if (System.getenv("AVO_KEYSTORE_FILE") != null) signingConfig = signingConfigs.getByName("release")

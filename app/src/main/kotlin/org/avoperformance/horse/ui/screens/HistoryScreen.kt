@@ -96,6 +96,40 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
         }
     }
+    // ---- WhatsApp: download if needed, send, then delete from the phone (the watch keeps its copy)
+    var whatsAppPending by remember { mutableStateOf<String?>(null) }
+    val whatsAppLauncher = rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()) {
+        val id = whatsAppPending ?: return@rememberLauncherForActivityResult
+        whatsAppPending = null
+        if (c.settings.deleteAfterWhatsApp) c.scope.launch { msg = c.sync.deleteLocal(id) ?: "Enviado por WhatsApp y borrado del móvil (sigue en el reloj)" }
+    }
+    fun whatsApp(t: TrainingEntity) = c.scope.launch {
+        try {
+            var current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no encontrada")
+            if (current.localSha256 == null || current.localSha256 != current.watchSha256) {
+                msg = "Descargando para enviar por WhatsApp…"
+                val err = c.sync.download(t.sessionId); if (err != null) error(err)
+                current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no disponible")
+            }
+            val horse = savedHorses.firstOrNull { it.code == current.horseCode }?.name.orEmpty()
+            val rider = savedRiders.firstOrNull { it.code == current.riderCode }?.name.orEmpty()
+            if (horse.isBlank() || rider.isBlank()) { shareSelected(current); msg = "Asigna caballo y jinete; después pulsa WhatsApp otra vez"; return@launch }
+            val intent = TrainingShare.prepare(context, current, horse, rider)
+            val pkg = listOf("com.whatsapp", "com.whatsapp.w4b").firstOrNull { p -> runCatching { context.packageManager.getPackageInfo(p, 0) }.isSuccess }
+                ?: error("WhatsApp no está instalado")
+            intent.setPackage(pkg)
+            whatsAppPending = current.sessionId
+            whatsAppLauncher.launch(intent)
+        } catch (e: Exception) { msg = e.message ?: "No se pudo enviar por WhatsApp" }
+    }
+    var confirmDeleteLocal by remember { mutableStateOf<TrainingEntity?>(null) }
+    confirmDeleteLocal?.let { d ->
+        AlertDialog(onDismissRequest = { confirmDeleteLocal = null },
+            title = { Text("Borrar del móvil") },
+            text = { Text("Se borra la copia del teléfono de ${d.sessionId}. La del reloj no se toca y se puede volver a descargar mientras siga en el reloj.") },
+            confirmButton = { TextButton(onClick = { confirmDeleteLocal = null; c.scope.launch { msg = c.sync.deleteLocal(d.sessionId) ?: "Borrado del móvil" } }) { Text("Borrar", color = AvoColors.Bad) } },
+            dismissButton = { TextButton(onClick = { confirmDeleteLocal = null }) { Text("Cancelar") } })
+    }
     shareCandidate?.let { pending ->
         AlertDialog(
             onDismissRequest = { shareCandidate = null },
@@ -196,7 +230,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -239,7 +273,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
                     }
                 }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -247,7 +281,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
 }
 
 @Composable
-private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?) {
+private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null) {
     val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -266,7 +300,11 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
         }
         KV("Tamaño", if (t.downloadedBytes in 1 until t.totalBytes) "${Fmt.bytes(t.downloadedBytes)} de ${Fmt.bytes(t.totalBytes)}" else Fmt.bytes(t.totalBytes))
         t.lastError?.let { Note(it, AvoColors.Warn) }
-        if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
+            if (onWhatsApp != null) OutlinedButton(onClick = onWhatsApp) { Text("WhatsApp") }
+        }
+        if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
             OutlinedButton(onClick = onDownload) { Text(if (t.downloadedBytes > 0) "Reanudar descarga" else "Descargar") }
     }

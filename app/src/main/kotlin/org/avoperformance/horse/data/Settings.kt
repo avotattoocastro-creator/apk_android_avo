@@ -88,6 +88,11 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         get() = p.getBoolean("link.autoStartPaused", false)
         set(v) { p.edit().putBoolean("link.autoStartPaused", v).apply() }
 
+    /** WhatsApp: delete the training from the phone after sending it (the watch copy is kept). */
+    var deleteAfterWhatsApp: Boolean
+        get() = p.getBoolean("share.deleteAfterWhatsApp", true)
+        set(v) { p.edit().putBoolean("share.deleteAfterWhatsApp", v).apply() }
+
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)
         set(v) { p.edit().putBoolean("sync.autoDownload", v).apply() }

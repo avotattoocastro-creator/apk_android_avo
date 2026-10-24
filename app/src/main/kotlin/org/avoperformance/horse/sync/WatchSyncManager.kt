@@ -219,6 +219,23 @@ class WatchSyncManager(
         }
     }
 
+    /**
+     * Deletes the training ONLY from the phone (RAW copy, engine results, shared package). The watch copy is not touched;
+     * the entry goes back to "Solo en el reloj" so it can be downloaded again while it remains on the watch.
+     */
+    suspend fun deleteLocal(sessionId: String): String? = withContext(Dispatchers.IO) {
+        if (isBusy && _progress.value.sessionId == sessionId) return@withContext "Se está descargando: espera a que termine"
+        val t = db.trainings().byId(sessionId) ?: return@withContext "Entrenamiento desconocido"
+        t.localDir?.let { File(it).deleteRecursively() }
+        File(trainingsDir, sessionId).deleteRecursively()
+        File(ctx.filesDir, "equine/$sessionId").deleteRecursively()
+        File(ctx.cacheDir, "share").listFiles()?.filter { it.name.contains(sessionId.replace(Regex("[^A-Za-z0-9_-]"), "_")) }?.forEach { it.delete() }
+        db.trainings().upsert(t.copy(state = SyncState.EN_RELOJ.name, localDir = null, downloadedBytes = 0, localSha256 = null, watchSha256 = null,
+            lastError = null, distanceM = null, maxSpeedMs = null, durationS = null, fixTimeS = null, floatTimeS = null, imuSamples = null, gnssUsable = null))
+        log.i("SYNC", "$sessionId borrado del teléfono (se conserva en el reloj)")
+        null
+    }
+
     fun analysisFor(t: TrainingEntity) = t.localDir?.let { d ->
         val segs = SessionDownload(File(d), t.sessionId, t.segments).segments()
         if (segs.isEmpty()) null else TrainingAnalyzer.analyze(segs.map { f -> { f.inputStream().buffered(256 * 1024) } })

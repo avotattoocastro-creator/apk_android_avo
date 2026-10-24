@@ -180,7 +180,23 @@ jobs:
           cd "$AVO_SOURCE_DIR"
           ./gradlew --no-daemon :app:testDebugUnitTest
 
+      - name: Stable signing key (secrets)
+        env:
+          AVO_KEYSTORE_BASE64: ${{ secrets.AVO_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$AVO_KEYSTORE_BASE64" ]; then
+            echo "$AVO_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/avo.jks"
+            echo "AVO_KEYSTORE_FILE=$RUNNER_TEMP/avo.jks" >> "$GITHUB_ENV"
+            echo "::notice::APK firmado con la clave estable AVO"
+          else
+            echo "::warning::Sin secreto AVO_KEYSTORE_BASE64: APK con clave debug temporal (requerirá desinstalar)"
+          fi
+
       - name: Build debug APK
+        env:
+          AVO_KEYSTORE_PASSWORD: ${{ secrets.AVO_KEYSTORE_PASSWORD }}
+          AVO_KEY_ALIAS: ${{ secrets.AVO_KEY_ALIAS }}
+          AVO_KEY_PASSWORD: ${{ secrets.AVO_KEY_PASSWORD }}
         shell: bash
         run: |
           cd "$AVO_SOURCE_DIR"
