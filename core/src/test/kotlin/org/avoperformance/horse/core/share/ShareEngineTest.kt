@@ -179,6 +179,7 @@ class ShareEngineTest {
         val tid = server.metas.keys.single()
         val intruder = server.backendFor(C.code)
         assertThrows(IllegalStateException::class.java) { runBlocking { intruder.getChunk(tid, 0) } }
+        Unit
     }
 
     @Test fun disconnectionDuringUploadResumesWithoutReuploading() = runBlocking {
