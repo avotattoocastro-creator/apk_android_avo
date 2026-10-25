@@ -506,3 +506,12 @@ Petición del usuario.
   - Prueba 2, 10 minutos con NTRIP en RTK FIX: **PENDIENTE**. No se puede conseguir FIX hasta que llegue la antena L1/L2; la actual es L1/L5.
   - Prueba 3, grabación en campo y descarga por Wi-Fi: **PENDIENTE**, se hará en la prueba de campo.
   - La rc5 queda como versión de trabajo. El BIN sigue marcado como UNVERIFIED y no se declara apto para OTA.
+
+## 2026-10-25 — App 2.3-wifi-dev5: Inicio con las baterías de las tres unidades
+- **Fila 1:**
+  - **Pecho:** batería del reloj, en % (o V si no hay %).
+  - **Espalda:** tensión de batería de la espalda (`backBatteryMv`) si su estado es válido.
+  - **Cincha:** conectada o apagada.
+- **Fila 2:** NTRIP · SD · GNSS.
+- **Colores:** rojo = apagado o sin enlace; naranja = batería baja (pecho ≤ 20 %, espalda < 3,60 V); verde = bien.
+- La cincha **no envía su batería** (no está en la telemetría del pecho), así que no se muestra ninguna cifra: no se inventan datos. Para mostrarla habrá que añadirla al firmware de la cincha y del pecho.

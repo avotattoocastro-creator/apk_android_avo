@@ -71,6 +71,10 @@ private fun StatusChip(label: String, value: String, color: androidx.compose.ui.
     }
 }
 
+/** Back unit Li-ion: below 3.60 V ≈ under 20 % → low battery (orange). */
+private const val BACK_LOW_MV = 3600
+private fun volts(mv: Int) = "%.2f V".format(java.util.Locale("es"), mv / 1000.0)
+
 @Composable
 fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
     val link by c.watch.state.collectAsStateWithLifecycle()
@@ -95,18 +99,23 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
             AvoCard(c.settings.authorizedWatchName ?: "Sin chaleco vinculado", onClick = { go("bluetooth") }, trailing = { StatusPill(link.texto, linkColor) }) {
                 detail?.let { Text(it, color = AvoColors.Warn, fontSize = 13.sp) ; Spacer(Modifier.height(6.dp)) }
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    // Row 1: the three units with their battery. Red = off / no link, orange = low battery, green = OK.
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        StatusChip("Espalda", t?.let { if (it.backLink) "Conectada" else "Sin enlace" } ?: "—", if (t == null) AvoColors.Unknown else if (t.backLink) AvoColors.Ok else AvoColors.Bad, Modifier.weight(1f))
-                        StatusChip("Cincha", t?.let { if (it.girth) "Conectada" else "Sin datos" } ?: "—", if (t == null) AvoColors.Unknown else if (t.girth) AvoColors.Ok else AvoColors.Warn, Modifier.weight(1f))
-                        StatusChip("GNSS", rtk.state.texto, AvoColors.rtk(rtk.state), Modifier.weight(1f))
+                        val pct = t?.batteryPct
+                        StatusChip("Pecho", pct?.let { "$it %" } ?: t?.v2?.batteryMv?.takeIf { it > 0 }?.let { volts(it) } ?: "Apagado",
+                            when { t == null -> AvoColors.Bad; pct == null -> AvoColors.Unknown; pct > 20 -> AvoColors.Ok; else -> AvoColors.Low }, Modifier.weight(1f))
+                        val backMv = t?.v2?.takeIf { it.backStatusValid }?.backBatteryMv?.takeIf { it > 0 }
+                        StatusChip("Espalda", when { t == null || !t.backLink -> "Apagada"; backMv != null -> volts(backMv); else -> "Conectada" },
+                            when { t == null || !t.backLink -> AvoColors.Bad; backMv == null -> AvoColors.Ok; backMv >= BACK_LOW_MV -> AvoColors.Ok; else -> AvoColors.Low }, Modifier.weight(1f))
+                        // The girth does not report its battery yet (not in the telemetry): only its link is shown.
+                        StatusChip("Cincha", if (t != null && t.girth) "Conectada" else "Apagada",
+                            if (t != null && t.girth) AvoColors.Ok else AvoColors.Bad, Modifier.weight(1f))
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         StatusChip("NTRIP", if (ntripState is NtripState.Streaming) "Recibiendo" else ntripState.texto, ntripColor, Modifier.weight(1f)) { go("ntrip") }
                         StatusChip("SD", t?.v2?.let { if (recording) "Grabando" else if (it.sdMounted) "Lista" else "No montada" } ?: "—",
                             when { t?.v2 == null -> AvoColors.Unknown; recording -> AvoColors.Warn; t!!.v2!!.sdMounted -> AvoColors.Ok; else -> AvoColors.Bad }, Modifier.weight(1f))
-                        val pct = t?.batteryPct
-                        StatusChip("Batería", pct?.let { "$it %" } ?: t?.v2?.batteryMv?.takeIf { it > 0 }?.let { "$it mV" } ?: "—",
-                            when { pct == null -> AvoColors.Unknown; pct > 50 -> AvoColors.Ok; pct > 20 -> AvoColors.Warn; else -> AvoColors.Bad }, Modifier.weight(1f))
+                        StatusChip("GNSS", rtk.state.texto, AvoColors.rtk(rtk.state), Modifier.weight(1f))
                     }
                 }
                 KV("Firmware", info?.firmware)
