@@ -197,8 +197,10 @@ def mount():
     hook = (cq.Workplane("YZ").polyline([(LATCH["y0"] + 0.4, 0), (LATCH["y1"] + 3.0, 0), (LATCH["y1"] - 0.3, 1.2), (LATCH["y0"] + 0.4, 1.2)])
             .close().extrude(2 * LATCH["x"] - 0.8).translate((-(LATCH["x"] - 0.4), 0, 0)))
     p = p.union(hook)
-    # pulsador de la pestaña, fuera de la cápsula
-    p = p.union(box(0, ye - 3.0, 0, bw - 1.0, 5.0, 1.6).edges("|Z").fillet(1.0))
+    # REV1.2: zona de pulsar enrasada (antes un botón de 1,6 mm que bloqueaba la entrada de la cápsula).
+    # El extremo libre de la viga queda fuera de la cápsula (y 23…30): se pulsa con el pulgar. 3 estrías de agarre.
+    for i in range(3):
+        p = p.cut(box(0, ye - 1.5 - i * 1.8, -0.4, bw - 2.0, 0.8, 0.5))
     # imanes bajo el reed (Ø6,15 a presión, 2 × 2 mm, piel de 0,3 abajo)
     rx, ry = REED["center"]
     p = p.cut(cyl(rx, ry, -MT + 0.3, MAG["d"] + 0.15, MT))
