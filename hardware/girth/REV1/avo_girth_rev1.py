@@ -34,17 +34,17 @@ BAT = dict(l=50.8, w=30.5, t=4.3)
 BAT_C = (0.0, 0.0)
 TRAY_Z0, TRAY_T = 7.2, 1.0
 TRAY_TOP = TRAY_Z0 + TRAY_T
-C6 = dict(l=21.0, w=18.0, pcb=1.0, center=(17.7, 9.25))
-QI = dict(l=15.0, w=18.0, center=(-2.9, 9.25))
+C6 = dict(l=21.0, w=18.0, pcb=1.0, center=(16.9, 8.6))
+QI = dict(l=15.0, w=18.0, center=(-4.0, 8.6))
 BNO = dict(l=25.8, w=15.5, t=1.6, center=(-2.0, -10.5), stand=1.5, hole_in=2.5)   # taladros a 2,5 de los bordes (P)
 REED = dict(l=14.0, d=3.2, center=(0.0, -18.75), z0=1.0)
 MAG = dict(d=6.0, t=2.0, n=2)
 SCREW_X, SCREW_Y = 28.3, -6.0       # 2 × M2 × 10, de abajo arriba, en los extremos X
-USB = dict(y=9.25, z=TRAY_TOP + C6["pcb"] + 1.6, w=9.6, h=3.9)
-LED = (26.0, 15.5)                 # guía de luz sobre el LED del C6 (P)
+USB = dict(y=8.6, z=TRAY_TOP + C6["pcb"] + 1.6, w=9.6, h=3.9)
+LED = (25.5, 14.5)                 # guía de luz sobre el LED del C6 (P)
 
 DOVE = dict(x=22.0, w_face=5.6, w_deep=6.8, depth=1.8, y_open=W / 2 + 1, y_stop=-W / 2 + 4)
-LATCH = dict(x=4.0, y0=15.0, y1=19.0, depth=1.5)
+LATCH = dict(x=4.0, y0=15.0, y1=19.0, depth=1.5)   # rebaje abierto hasta el borde +Y (aloja la rampa)
 
 # soporte
 ML, MW, MT = 84.0, 60.0, 4.4
@@ -105,7 +105,7 @@ def pod_base():
     for sx in (-1, 1):
         b = b.cut(dovetail(sx * DOVE["x"], DOVE["y_open"], DOVE["y_stop"], DOVE["w_deep"], DOVE["w_face"], -0.01, DOVE["depth"]))
     # rebaje del gancho de seguridad
-    b = b.cut(box(0, (LATCH["y0"] + LATCH["y1"]) / 2, -0.01, 2 * LATCH["x"], LATCH["y1"] - LATCH["y0"], LATCH["depth"]))
+    b = b.cut(box(0, (LATCH["y0"] + W / 2 + 1) / 2, -0.01, 2 * LATCH["x"], W / 2 + 1 - LATCH["y0"], LATCH["depth"]))
     # salida USB-C (parte inferior de la ventana, si cae en la base)
     b = b.cut(box(L / 2, USB["y"], USB["z"] - USB["h"] / 2, 6, USB["w"], USB["h"]))
     return b
@@ -120,6 +120,8 @@ def pod_lid():
         rrect(IL - 2.7, IW - 2.7, IR - 1.35, HB, z0=TRAY_TOP - 1))
     for sx in (-1, 1):
         lip = lip.cut(cyl(sx * SCREW_X, SCREW_Y, 0, 5.0, HB + 1))
+    cx, cy = C6["center"]
+    lip = lip.cut(box(cx, cy, TRAY_TOP - 1, C6["l"] + 1.0, C6["w"] + 1.0, 3))   # el C6 llega a la esquina
     lid = lid.union(lip)
     # columnas para los M2 (agujero piloto Ø1,7, 4 mm)
     for sx in (-1, 1):
@@ -163,7 +165,7 @@ def tray():
     for (hx, hy) in ((-BNO["l"] / 2 + BNO["hole_in"], -BNO["w"] / 2 + BNO["hole_in"]), (BNO["l"] / 2 - BNO["hole_in"], BNO["w"] / 2 - BNO["hole_in"])):
         t = t.union(cyl(bx + hx, by + hy, TRAY_TOP, 4.2, BNO["stand"]))
         t = t.cut(cyl(bx + hx, by + hy, TRAY_TOP - 1.1, 1.7, BNO["stand"] + 1.2))
-    return t
+    return t.intersect(rrect(IL - 2.7 - 0.4, IW - 2.7 - 0.4, IR - 1.55, 10, z0=TRAY_Z0 - 1))
 
 
 def usb_plug():   # TPU 95A
@@ -245,7 +247,7 @@ def main():
                 v = c.intersect(p).val().Volume()
             except Exception:
                 v = 0.0
-            if v > 0.01:
+            if v > 0.01 and not (cn.startswith("bateria") and pn.endswith("base") and v < 4):   # costillas: 0,1 mm de apriete a propósito
                 report["interferencias"][f"{cn} × {pn}"] = round(v, 3)
     # piezas entre sí (base/tapa/bandeja/soporte)
     names = list(parts)
