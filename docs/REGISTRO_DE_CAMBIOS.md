@@ -525,3 +525,10 @@ Petición del usuario.
 - La placa no tiene señal de estado de carga.
 - Pruebas en ordenador: 23 casos y 159 comprobaciones OK. Sin verificar en la espalda real.
 - Detalle en `firmware/back/V3_8_0/README.md`.
+
+## 2026-10-25 — BACK 3.8.2: modo carga
+- Petición del usuario: al cargar con el cargador de pared, apagar todo para que solo se cargue la batería, manteniendo la opción de actualizar.
+- **Entrada:** USER 8 s, o subida continua de la tensión.
+- **Qué apaga:** radio, ZED (Vext) y CPU a 80 MHz. El USB serie sigue activo para AVO Update.
+- **Salida:** USER, o caída de la tensión.
+- Detalle en `firmware/back/V3_8_0/README.md`. Pruebas en ordenador OK. Sin verificar en la placa.

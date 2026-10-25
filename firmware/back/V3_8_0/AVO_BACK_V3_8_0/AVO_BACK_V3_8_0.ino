@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.8.1 (ESP-NOW) · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.8.2 (ESP-NOW) · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -175,6 +175,38 @@ static uint16_t read_battery_mv() {
   return (mv < 2500 || mv > 4600) ? 0 : (uint16_t)mv;
 }
 
+// V3.8.2: CHARGE MODE. With a wall charger the board cannot charge and run (ZED + radio) at the same time, and it
+// has no pin that says "USB powered". Entered with the USER button held 8 s, or automatically when the battery
+// voltage keeps rising while running (charger plugged). Everything is switched off except the USB serial port, so
+// AVO Update can still install firmware (it resets the board into the ROM bootloader as always).
+// Leaves with a short press of USER (restart), or when the voltage drops (charger unplugged).
+[[noreturn]] static void charge_mode(const char* why) {
+  Serial.printf("\n[AVO ESPALDA] MODO CARGA (%s): GPS, radio y enlace apagados. Pulsa USER para volver a funcionar.\n", why);
+  esp_now_deinit();
+  WiFi.mode(WIFI_OFF);
+  ZED.end();
+  digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P without power
+  setCpuFrequencyMhz(80);
+  uint16_t peak = 0;
+  uint32_t last = 0, since = millis();
+  while (digitalRead(PRG_PIN) == LOW) delay(10);   // wait for the button that brought us here
+  for (;;) {
+    if (digitalRead(PRG_PIN) == LOW) { delay(30); if (digitalRead(PRG_PIN) == LOW) { Serial.println("[AVO ESPALDA] fin del modo carga (USER)"); delay(50); ESP.restart(); } }
+    if (millis() - last >= 10000) {
+      last = millis();
+      uint16_t mv = read_battery_mv();
+      if (mv > peak) peak = mv;
+      Serial.printf("[AVO ESPALDA] MODO CARGA bateria %u mV (max %u)\n", (unsigned)mv, (unsigned)peak);
+      // charger unplugged: without load the voltage stays put while charging; a clear drop means no charger
+      if (mv && peak && millis() - since > 120000 && mv + 120 < peak) {
+        Serial.println("[AVO ESPALDA] la tension baja: cargador desconectado, vuelvo a funcionar");
+        delay(50); ESP.restart();
+      }
+    }
+    delay(20);
+  }
+}
+
 // ------------------------------------------------------------------ setup / loop
 void setup() {
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
@@ -248,15 +280,20 @@ void loop() {
 
   // PRG held 3 s -> accept a new chest for 120 s
   static uint32_t prg_t = 0;
+  static bool prg_paired = false;
   if (digitalRead(PRG_PIN) == LOW) {
-    if (!prg_t) prg_t = millis();
-    else if (millis() - prg_t > 3000 && prg_t != 1) {
+    if (!prg_t) prg_t = millis() | 1;
+    uint32_t held = millis() - prg_t;
+    if (held > 3000 && !prg_paired) {
       core->open_pairing();
       Serial.println("[AVO ESPALDA] emparejamiento abierto 120 s: pide 'Emparejar espalda' desde la app o reinicia el pecho sin pareja");
-      prg_t = 1;
+      Serial.println("[AVO ESPALDA] (sigue pulsando hasta 8 s para el MODO CARGA)");
+      prg_paired = true;
     }
+    if (held > 8000) charge_mode("boton USER 8 s");   // V3.8.2
   } else {
     prg_t = 0;
+    prg_paired = false;
   }
 
   static uint32_t last_batt = 0;   // V3.8.1: battery every 5 s, smoothed
@@ -265,6 +302,18 @@ void loop() {
     uint16_t mv = read_battery_mv();
     s_vbat_mv = (mv == 0 || s_vbat_mv == 0) ? mv : (uint16_t)((s_vbat_mv * 3u + mv) / 4u);
     core->set_battery_mv(s_vbat_mv);
+    // V3.8.2: charger plugged while running → the voltage keeps rising under load. Window of 3 min: rise >= 60 mV
+    // with every step non-decreasing (a load drop gives one jump, not a steady climb) → charge mode.
+    static uint16_t hist[36];
+    static uint8_t nh = 0;
+    if (s_vbat_mv) {
+      if (nh < 36) hist[nh++] = s_vbat_mv; else { memmove(hist, hist + 1, sizeof(hist) - sizeof(hist[0])); hist[35] = s_vbat_mv; }
+      if (nh == 36 && hist[35] >= hist[0] + 60 && millis() > 300000) {
+        int ups = 0, downs = 0;
+        for (int i = 1; i < 36; i++) { if (hist[i] > hist[i - 1]) ups++; else if (hist[i] + 5 < hist[i - 1]) downs++; }
+        if (ups >= 18 && downs == 0) charge_mode("tension subiendo: cargador conectado");
+      }
+    } else nh = 0;
   }
   static uint32_t last_print = 0;
   if (millis() - last_print >= 2000) { last_print = millis(); print_status(); }

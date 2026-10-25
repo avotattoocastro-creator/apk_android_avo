@@ -48,3 +48,20 @@ Si aparece `perfil=RECHAZADO (receptor antiguo)`, actualizar el firmware del ZED
 - **Lecturas inválidas:** fuera de 2,5–4,6 V se envía 0 (desconocido), por ejemplo sin batería o con la polaridad equivocada.
 - **Sin estado de carga:** la placa no tiene ninguna patilla que indique si está cargando.
 - Divisor ×4,9 según el diseño de referencia de Heltec. **Sin verificar** en la espalda real: hay que comparar la tensión del monitor con la de un multímetro.
+
+## V3.8.2 — modo carga (2026-10-25)
+Con un cargador de pared, la placa no puede cargar la batería y a la vez alimentar el ZED-F9P y la radio. Tampoco tiene ninguna patilla que avise de que hay alimentación por USB, porque el USB va por un chip puente.
+
+- **Entrar en el modo carga:**
+  - mantener pulsado **USER 8 s** (a los 3 s se sigue abriendo el emparejamiento, como antes);
+  - o **automáticamente**, si la tensión sube de forma continua (≥ 60 mV en 3 min, sin bajadas) después de 5 min encendida.
+- **Durante el modo carga:**
+  - se apagan ESP-NOW y el Wi-Fi, se cierra el UART del ZED y se corta Vext, de modo que el ZED se queda sin alimentación;
+  - la CPU baja a 80 MHz;
+  - el USB serie sigue activo, así que **AVO Update puede instalar firmware igual que siempre**;
+  - el monitor muestra `MODO CARGA bateria N mV` cada 10 s.
+- **Salir del modo carga** (el equipo se reinicia y vuelve a funcionar):
+  - pulsar USER;
+  - o automáticamente, si la tensión cae más de 120 mV desde el máximo, porque eso indica que se ha desconectado el cargador.
+- Si con la carga conectada la tensión no llega a subir, la detección automática no se activará: en ese caso hay que usar el botón.
+- **Sin verificar** en la espalda real.
