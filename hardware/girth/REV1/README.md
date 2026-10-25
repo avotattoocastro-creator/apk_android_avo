@@ -20,7 +20,7 @@
   - 2 colas de milano: la cápsula no puede levantarse ni moverse de lado;
   - las ranuras están cerradas al fondo y hacen de tope;
   - un gancho elástico impide que salga.
-  - Para soltar hay que **pulsar la pestaña y deslizar**.
+  - La cápsula entra por el lado contrario a la pestaña y queda enganchada; para soltarla hay que **pulsar la pestaña y deslizarla hacia atrás**.
 - **Provisional (pendiente de calibre y probetas):**
   - posición de los taladros del BNO085;
   - LED del C6;

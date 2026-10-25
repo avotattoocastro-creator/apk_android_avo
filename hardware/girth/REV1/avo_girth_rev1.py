@@ -10,9 +10,10 @@ Medidas de componentes: anuncios (P = provisional, pendiente de calibre):
 
 Seguridad del anclaje (galope):
   * 2 colas de milano (soporte) en 2 ranuras del fondo de la cápsula: no puede levantarse ni moverse en X.
-  * Las ranuras están cerradas en −Y: tope.
-  * Gancho elástico del soporte en un rebaje del fondo: no puede salir hacia +Y.
-  Para soltar: pulsar la pestaña (fuera de la cápsula) Y deslizar hacia +Y. Dos acciones: no se suelta sola.
+  * La cápsula entra desde −Y (lado contrario a la pestaña) y avanza hacia +Y; el final cerrado de las ranuras
+    choca con el extremo de las colas de milano: tope.
+  * Gancho elástico del soporte en un rebaje cerrado del fondo: no puede volver hacia −Y.
+  Para soltar: pulsar la pestaña (asoma por delante de la cápsula) Y deslizar hacia −Y. Dos acciones.
 """
 import json
 import cadquery as cq
@@ -44,7 +45,7 @@ USB = dict(y=8.6, z=TRAY_TOP + C6["pcb"] + 1.6, w=9.6, h=3.9)
 LED = (25.5, 14.5)                 # guía de luz sobre el LED del C6 (P)
 
 DOVE = dict(x=22.0, w_face=5.6, w_deep=6.8, depth=1.8, y_open=W / 2 + 1, y_stop=-W / 2 + 4)
-LATCH = dict(x=4.0, y0=15.0, y1=19.0, depth=1.5)   # rebaje abierto hasta el borde +Y (aloja la rampa)
+LATCH = dict(x=4.0, y0=12.0, y1=19.0, depth=1.5)   # REV1.3: rebaje cerrado; la cápsula entra desde −Y (lado contrario a la pestaña)
 
 # soporte
 ML, MW, MT = 84.0, 60.0, 4.4
@@ -105,7 +106,7 @@ def pod_base():
     for sx in (-1, 1):
         b = b.cut(dovetail(sx * DOVE["x"], DOVE["y_open"], DOVE["y_stop"], DOVE["w_deep"], DOVE["w_face"], -0.01, DOVE["depth"]))
     # rebaje del gancho de seguridad
-    b = b.cut(box(0, (LATCH["y0"] + W / 2 + 1) / 2, -0.01, 2 * LATCH["x"], W / 2 + 1 - LATCH["y0"], LATCH["depth"]))
+    b = b.cut(box(0, (LATCH["y0"] + LATCH["y1"]) / 2, -0.01, 2 * LATCH["x"], LATCH["y1"] - LATCH["y0"], LATCH["depth"]))
     # salida USB-C (parte inferior de la ventana, si cae en la base)
     b = b.cut(box(L / 2, USB["y"], USB["z"] - USB["h"] / 2, 6, USB["w"], USB["h"]))
     return b
@@ -194,7 +195,9 @@ def mount():
     p = p.union(beam)
     p = p.union(box(0, ya - 0.5, -MT, bw + 2 * BEAM["slot"] + 0.01, 1.2, MT))   # raíz de la viga, unida a la placa
     # diente: cara vertical hacia −Y (bloquea), rampa hacia +Y (deja entrar)
-    hook = (cq.Workplane("YZ").polyline([(LATCH["y0"] + 0.4, 0), (LATCH["y1"] + 3.0, 0), (LATCH["y1"] - 0.3, 1.2), (LATCH["y0"] + 0.4, 1.2)])
+    # REV1.3 (sentido del usuario): la cápsula entra desde −Y empujando hacia la pestaña. Rampa hacia −Y,
+    # cara recta hacia +Y: al tirar de vuelta (−Y), la pared +Y del rebaje choca con ella. Tope hacia +Y: fin de las ranuras.
+    hook = (cq.Workplane("YZ").polyline([(LATCH["y0"] + 0.4, 0), (LATCH["y1"] - 0.4, 0), (LATCH["y1"] - 0.4, 1.2), (LATCH["y0"] + 3.6, 1.2)])
             .close().extrude(2 * LATCH["x"] - 0.8).translate((-(LATCH["x"] - 0.4), 0, 0)))
     p = p.union(hook)
     # REV1.2: zona de pulsar enrasada (antes un botón de 1,6 mm que bloqueaba la entrada de la cápsula).

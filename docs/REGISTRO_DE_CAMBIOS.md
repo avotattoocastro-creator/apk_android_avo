@@ -612,3 +612,4 @@ Petición del usuario.
 - Interferencias comprobadas en CAD: ninguna.
 - Pendiente de imprimir y probar (antes, la placa de probetas).
 - **REV 1.1:** la tapa tenía el labio interior suelto (2 sólidos). Ahora un puente lo une a la pared. El CI exige un único sólido por pieza y las 5 piezas lo cumplen.
+- **REV 1.3:** se invierte el sentido del gancho, como pidió el usuario. La cápsula entra por el lado contrario a la pestaña y hace tope al final de las colas de milano. El gancho, con la rampa hacia la entrada y la cara recta hacia la pestaña, impide que vuelva atrás. El rebaje del fondo queda cerrado (y 12…19).
