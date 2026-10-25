@@ -604,3 +604,10 @@ Petición del usuario.
 - En `hardware/girth/REV0/`: imágenes del concepto (escena three.js `scene.html`) y `AVO_GIRTH_PROBETAS_REV0.stl`, generada con `probetas.py` en PETG para la Centauri Carbon.
 - **Probetas:** cuna de la batería, BNO085 con 2 postes M2, ESP32-C6 con holguras de 0,10, 0,20 y 0,30, bobina y placa Qi, canal del reed e imanes Ø6 (a presión y deslizante).
 - Medidas tomadas de los anuncios; la posición de los taladros del BNO085 es provisional.
+
+## 2026-10-26 — Cincha REV 1 (CAD real, STEP + STL)
+- `hardware/girth/REV1`: modelo CadQuery generado por CI (`build-girth-cad.yml`, que sube `out/`).
+- **Cápsula** de 64 × 46 × 15,5 mm: base, tapa con logo, bandeja y tapón USB de TPU.
+- **Soporte** de 84 × 60 mm para cinta de 50 mm, con 2 colas de milano, gancho elástico de seguridad y 2 imanes Ø6.
+- Interferencias comprobadas en CAD: ninguna.
+- Pendiente de imprimir y probar (antes, la placa de probetas).

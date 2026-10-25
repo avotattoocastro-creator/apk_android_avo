@@ -1,0 +1,29 @@
+# AVO GIRTH REV 1: caja de la cincha y soporte (CAD)
+
+- **Fuente:** `avo_girth_rev1.py` (CadQuery). El CI («Build AVO GIRTH CAD») genera `out/` y comprueba las interferencias. Resultado actual: **ninguna**; las costillas de la batería aprietan 0,1 mm a propósito.
+- **Piezas, en PETG** (Centauri Carbon), salvo el tapón:
+  - **base:** se imprime con el fondo en la cama;
+  - **tapa:** se imprime boca abajo;
+  - **bandeja:** se imprime plana;
+  - **soporte:** se imprime plano;
+  - **tapón USB:** en TPU 95A.
+- **STEP:** uno por pieza y el conjunto `AVO_GIRTH_R1_CONJUNTO.step`, que incluye los componentes de referencia.
+- **Montaje:**
+  - bobina Qi pegada en su rebaje;
+  - batería en su cuna;
+  - reed en su canal;
+  - bandeja con el C6, la placa Qi y el BNO085 (2 × M2 de rosca chapa);
+  - antena FPC pegada en la tapa;
+  - tapa cerrada con 2 × M2 × 10 desde abajo;
+  - 2 imanes Ø6 × 2 a presión en el soporte.
+- **Seguridad:**
+  - 2 colas de milano: la cápsula no puede levantarse ni moverse de lado;
+  - las ranuras están cerradas al fondo y hacen de tope;
+  - un gancho elástico impide que salga.
+  - Para soltar hay que **pulsar la pestaña y deslizar**.
+- **Provisional (pendiente de calibre y probetas):**
+  - posición de los taladros del BNO085;
+  - LED del C6;
+  - holgura de 0,20 mm;
+  - fuerza del gancho;
+  - distancia de cierre del reed con 2 imanes.
