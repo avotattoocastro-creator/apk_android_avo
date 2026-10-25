@@ -118,6 +118,8 @@ def pod_lid():
     # labio interior que baja hasta la bandeja y la sujeta
     lip = rrect(IL - 0.3, IW - 0.3, IR - 0.15, HB - TRAY_TOP, z0=TRAY_TOP + 0.05).cut(
         rrect(IL - 2.7, IW - 2.7, IR - 1.35, HB, z0=TRAY_TOP - 1))
+    # puente que une el labio con la pared de la tapa (REV1.1: el labio quedaba suelto)
+    lip = lip.union(rrect(IL + 1.0, IW + 1.0, IR + 0.5, 1.0, z0=HB).cut(rrect(IL - 2.7, IW - 2.7, IR - 1.35, 3, z0=HB - 1)))
     for sx in (-1, 1):
         lip = lip.cut(cyl(sx * SCREW_X, SCREW_Y, 0, 5.0, HB + 1))
     cx, cy = C6["center"]
@@ -236,7 +238,10 @@ def main():
         cq.exporters.export(s, f"{OUT}/{n}.step")
         cq.exporters.export(s, f"{OUT}/{n}.stl", tolerance=0.02, angularTolerance=0.1)
         bb = s.val().BoundingBox()
-        report["piezas"][n] = {"volumen_mm3": round(s.val().Volume(), 1), "valido": s.val().isValid(),
+        nsol = len(s.solids().vals())
+        if nsol != 1:
+            raise SystemExit(f"{n}: {nsol} sólidos (debe ser 1 pieza unida)")
+        report["piezas"][n] = {"volumen_mm3": round(s.val().Volume(), 1), "valido": s.val().isValid(), "solidos": nsol,
                                "caja": [round(bb.xlen, 2), round(bb.ylen, 2), round(bb.zlen, 2)]}
     for n, s in comps.items():
         cq.exporters.export(s, f"{OUT}/ref_{n}.stl", tolerance=0.05)
