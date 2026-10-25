@@ -124,8 +124,8 @@ patch(f"{SRC}/ble_service.cpp",
       bool wifi_on = wifisync::state() != wifisync::State::OFF;
       if (!s_connected) slow = false;
       else if (wifi_on != slow && s_srv && s_conn != 0xFFFF) {
-        bool ok = wifi_on ? s_srv->updateConnParams(s_conn, 80, 120, 4, 600) : s_srv->updateConnParams(s_conn, 12, 24, 0, 400);
-        Serial.printf("[AVO BLE] conn params %s (%s)\\n", wifi_on ? "slow for Wi-Fi" : "normal", ok ? "OK" : "FAIL");
+        if (wifi_on) s_srv->updateConnParams(s_conn, 80, 120, 4, 600); else s_srv->updateConnParams(s_conn, 12, 24, 0, 400);
+        Serial.printf("[AVO BLE] conn params requested: %s\\n", wifi_on ? "slow for Wi-Fi" : "normal");
         slow = wifi_on;
       }
     }
