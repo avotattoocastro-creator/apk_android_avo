@@ -23,6 +23,21 @@ internal class GirthInstaller(
         val m = MessageDigest.getInstance("MD5"); m.update(b, from, len); return hex(m.digest())
     }
 
+    /** Read-only check of the girth module: chip and security, then back to its firmware. */
+    fun probe(autoBootloader: Boolean): List<String> {
+        step(Installer.Step.PREPARING)
+        val s = Installer(port, listener, cancel, clock).connect(autoBootloader)
+        try {
+            step(Installer.Step.READING)
+            val sec = s.rom.securityInfo()
+            val out = mutableListOf<String>()
+            out += if (sec.chipId == AppImage.CHIP_ID_ESP32C6.toLong()) "Chip: ESP32-C6 (id 13) — módulo de la cincha" else "Chip id ${sec.chipId}: NO es un ESP32-C6"
+            out += "Secure Boot: ${if (sec.secureBoot) "ACTIVO" else "no"} · Flash Encryption: ${if (sec.flashEncryption) "ACTIVO" else "no"}"
+            if (s.link.kind.isUart) LineControl(s.link, clock).classicHardReset() else LineControl(s.link, clock).hardReset()
+            return out
+        } finally { s.close() }
+    }
+
     fun install(g: GirthImage.Info, autoBootloader: Boolean): Outcome {
         step(Installer.Step.PREPARING)
         val session = Installer(port, listener, cancel, clock).connect(autoBootloader)

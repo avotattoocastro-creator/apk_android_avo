@@ -459,6 +459,15 @@ class MainActivity : Activity() {
 
     private fun readWatch() = runExclusive {
         val auto = autoBoot.isChecked
+        if (firmware?.girth != null) {   // girth unit (ESP32-C6): no OTA partition check, only chip/security
+            try {
+                val lines = GirthInstaller(port(), listener(), cancel).probe(auto)
+                ui { lines.forEach(::appendLog); stepState.text = lines.first() + "\nPulsa INSTALAR FIRMWARE POR USB."; progress.visibility = View.GONE }
+            } catch (e: Exception) {
+                ui { stepState.text = "✖ " + message(e); progress.visibility = View.GONE; appendLog("Error: ${message(e)}") }
+            }
+            return@runExclusive
+        }
         try {
             val snap = Installer(port(), listener(), cancel).probe(auto)
             ui {
