@@ -34,7 +34,11 @@ jobs:
           arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
 
       - name: Build firmware
-        run: ./build_back.sh "$GITHUB_WORKSPACE/out"
+        run: |
+          if ! ./build_back.sh "$GITHUB_WORKSPACE/out"; then
+            grep -E "error:|Error " "$GITHUB_WORKSPACE/out/build.log" | head -20 | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
 
       - name: Package
         run: |
