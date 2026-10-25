@@ -26,8 +26,8 @@ for bad in ["nvs_set", "nvs_commit", "esp_partition_write", "esp_partition_erase
 uitask = task_body(ui, "task")
 for bad in ["nvs_set", "esp_partition_write", "ota::", "cfgstore::set"]:
     check(bad not in uitask, f"ui_lite writes flash ({bad}) — it cannot have its stack in PSRAM")
-check('xTaskCreatePinnedToCoreWithCaps(tx_task, "ble_tx"' in ble and "MALLOC_CAP_SPIRAM" in ble, "ble_tx stack in PSRAM")
-check('xTaskCreatePinnedToCoreWithCaps(task,"ui_lite"' in ui, "ui_lite stack in PSRAM")
+check("WithCaps" not in ble, "rc2: ble_tx stack internal")
+check("WithCaps" not in ui, "rc2: ui_lite stack internal")
 check('xTaskCreatePinnedToCore(rx_task, "ble_rx", 6144' in ble, "ble_rx keeps an internal stack (it writes NVS/OTA)")
 check("[AVO MEM] ready internal=" in main, "memory at the end of boot in the monitor")
 if fails:

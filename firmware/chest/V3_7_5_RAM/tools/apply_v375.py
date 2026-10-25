@@ -10,7 +10,7 @@ Changes (no changes to RAW, recording, ESP-NOW, OTA or partitions):
      roles (the watch is peripheral only: no scanning or client).
   2. heap_caps_malloc_extmem_enable(1024): malloc/new >= 1 KB go to PSRAM (AppSnapshot every 500 ms,
      control objects…). Allocations with explicit INTERNAL/DMA caps do not change.
-  3. ble_tx and ui_lite stacks in PSRAM (xTaskCreatePinnedToCoreWithCaps). Checked: these tasks do not write to
+  3. (rc1, removed in rc2) ble_tx and ui_lite stacks in PSRAM (xTaskCreatePinnedToCoreWithCaps). Checked: these tasks do not write to
      flash (NVS/OTA/partitions); ble_rx, storage, link and bb keep their stacks in internal RAM.
   4. Line "ready" with the free internal RAM at the end of boot (target >= 60 KB, block >= 32 KB).
 """
@@ -41,17 +41,9 @@ patch(f"{SRC}/app_main.cpp",
       "  heap_caps_malloc_extmem_enable(1024);   // V3.7.5: malloc/new >= 1 KB in PSRAM (internal RAM for DMA/stacks/radio)\n"
       "  appstate::init();")
 
-# 3. task stacks without flash access in PSRAM
-patch(f"{SRC}/ble_service.cpp",
-      'BaseType_t tx_created = xTaskCreatePinnedToCore(tx_task, "ble_tx", 6144, nullptr, 6, &g_task_handles[TID_BLE_TX], 0);',
-      '// V3.7.5: ble_tx only builds and notifies (no NVS/OTA/flash) → stack in PSRAM\n'
-      '  BaseType_t tx_created = xTaskCreatePinnedToCoreWithCaps(tx_task, "ble_tx", 6144, nullptr, 6, &g_task_handles[TID_BLE_TX], 0, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);')
-patch(f"{SRC}/ble_service.cpp", '#include "services.h"\n', '#include "services.h"\n#include "freertos/idf_additions.h"\n')
-patch(f"{SRC}/ui.cpp",
-      'BaseType_t ok = xTaskCreatePinnedToCore(task,"ui_lite",4096,nullptr,2,&g_task_handles[TID_UI],0);',
-      '// V3.7.5: the UI draws from PSRAM and only notifies other tasks (no flash) → stack in PSRAM\n'
-      '  BaseType_t ok = xTaskCreatePinnedToCoreWithCaps(task,"ui_lite",4096,nullptr,2,&g_task_handles[TID_UI],0,MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);')
-patch(f"{SRC}/ui.cpp", '#include <esp_heap_caps.h>\n', '#include <esp_heap_caps.h>\n#include "freertos/idf_additions.h"\n')
+# 3. (rc1 only) ble_tx/ui_lite stacks in PSRAM — REMOVED in rc2: rc1 panicked right after "ready"
+#    (RTC_SW_CPU_RST, reset PANIC) and kept rebooting. Most likely cause: buffers on the UI/BLE stack used for
+#    SPI DMA or during flash-cache-disabled windows. All task stacks stay in internal RAM.
 
 # 4. memory at the end of boot (monitor)
 patch(f"{SRC}/app_main.cpp",
