@@ -532,3 +532,8 @@ Petición del usuario.
 - **Qué apaga:** radio, ZED (Vext) y CPU a 80 MHz. El USB serie sigue activo para AVO Update.
 - **Salida:** USER, o caída de la tensión.
 - Detalle en `firmware/back/V3_8_0/README.md`. Pruebas en ordenador OK. Sin verificar en la placa.
+- **Prueba física de BACK 3.8.2 (2026-10-25):**
+  - Lectura de batería: **OK**. Marca 3689–3695 mV con todo encendido y el USB conectado, y 3714 mV en modo carga. Está pendiente compararla con un multímetro.
+  - Modo carga con USER 8 s: **OK**. Se ha comprobado el mensaje y que se apagan la radio y el enlace.
+  - **El ZED sigue encendido:** su 3V3 está cableado al 3V3 de la Heltec, que no se puede cortar. Hay que pasarlo al pin Ve (Vext, GPIO36).
+  - Con el cargador puesto y todo funcionando, la tensión se mantiene estable, lo que confirma que no carga mientras funciona.
