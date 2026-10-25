@@ -180,7 +180,7 @@ static uint16_t read_battery_mv() {
 // voltage keeps rising while running (charger plugged). Everything is switched off except the USB serial port, so
 // AVO Update can still install firmware (it resets the board into the ROM bootloader as always).
 // Leaves with a short press of USER (restart), or when the voltage drops (charger unplugged).
-[[noreturn]] static void charge_mode(const char* why) {
+static void charge_mode(const char* why) {
   Serial.printf("\n[AVO ESPALDA] MODO CARGA (%s): GPS, radio y enlace apagados. Pulsa USER para volver a funcionar.\n", why);
   esp_now_deinit();
   WiFi.mode(WIFI_OFF);
