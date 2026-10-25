@@ -500,3 +500,4 @@ Petición del usuario.
 - **rc5:** mientras el AP está encendido, el BLE deja de enviar telemetría y pide un intervalo de conexión largo (100–150 ms, latencia 4) para dejarle la radio al Wi-Fi. Al apagarse el Wi-Fi, por cualquier motivo, vuelve al intervalo normal. El BLE sigue conectado para el control y como respaldo.
 - ESP-NOW (la espalda) no se ha tocado: para que deje de transmitir habría que cambiar el firmware de la espalda.
 - Sin verificar físicamente.
+- **Medido en campo con rc5 + app dev4:** 1,6 MB en unos 6 s (unos 270 KB/s), unas 2,5 veces más rápido que la rc4. Sigue sin verificarse: 10 minutos con NTRIP en RTK FIX, una grabación corta y el regreso de la telemetría tras el Wi-Fi.
