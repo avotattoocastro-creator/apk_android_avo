@@ -448,3 +448,6 @@ Petición del usuario.
   - No cambia el formato RAW, la grabación, ESP-NOW, OTA ni las particiones. BIN marcado UNVERIFIED.
   - Pruebas estáticas: `test_ram_v375.py`, y `test_wifi_v374.py` actualizado a 26 comprobaciones.
 - **AVO Update 2.2.1:** el monitor ya no muestra «USB desconectado» cuando solo no llegan datos.
+
+## 2026-10-25 — AVO Update 2.2.2: monitor automático tras instalar
+- Al terminar la instalación por USB, el monitor serie se pone en marcha solo, sin reiniciar el reloj, e incluye la salida USB que se captó durante la verificación. Así queda registrado el primer arranque del firmware nuevo y una posible vuelta atrás, que con la 3.7.5-rc1 no se pudo ver.

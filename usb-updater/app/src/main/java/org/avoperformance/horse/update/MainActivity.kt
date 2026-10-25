@@ -496,6 +496,10 @@ class MainActivity : Activity() {
                     if (out.usbText.isNotBlank()) appendLog("Salida USB del firmware:\n" + out.usbText.takeLast(1500))
                     snapshot = null; updatePlan()
                 }
+                // 2.2.2: keep capturing right away so the first boot of the new firmware (and a possible
+                // rollback) ends up in the monitor; stop it with "Parar" and save with "Guardar monitor".
+                monitorLoop(false, "[tras instalar: ${out.message}]\n" +
+                    (if (out.usbText.isNotBlank()) "--- salida USB durante la verificación ---\n${out.usbText}\n--- monitor en vivo ---\n" else ""))
             } catch (e: Exception) {
                 ui {
                     resultState.setTextColor(cBad)
@@ -647,10 +651,14 @@ class MainActivity : Activity() {
      * the next start (reset reason, [AVO MEM]) is recorded. Writes nothing to the watch except, with
      * [reset], a normal reboot (the same as the button) to capture from the start.
      */
-    private fun startMonitor(reset: Boolean) = runExclusive {
+    private fun startMonitor(reset: Boolean) = runExclusive { monitorLoop(reset, null) }
+
+    /** Monitor body; also run right after an install so the first boot of the new firmware is captured. */
+    private fun monitorLoop(reset: Boolean, header: String?) {
         monitorRunning.set(true)
         synchronized(monitorLog) { monitorLog.setLength(0) }
         monitorAppend("=== Monitor serie AVO · %s ===\n".format(java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())))
+        if (header != null) monitorAppend(header)
         ui { monitorStopButton.visibility = View.VISIBLE; stepState.text = "Monitor serie activo" }
         var link: RomLink? = null
         var firstOpen = true
