@@ -71,9 +71,20 @@ private fun StatusChip(label: String, value: String, color: androidx.compose.ui.
     }
 }
 
-/** Back unit Li-ion: below 3.60 V ≈ under 20 % → low battery (orange). */
-private const val BACK_LOW_MV = 3600
-private fun volts(mv: Int) = "%.2f V".format(java.util.Locale("es"), mv / 1000.0)
+/**
+ * Back unit: it only reports its battery voltage, so the % is estimated with the usual 1-cell Li-ion
+ * discharge curve at low load (interpolated). Approximate: ±10 % depending on load and temperature.
+ */
+private val LIION = intArrayOf(3300, 3500, 3600, 3700, 3750, 3800, 3850, 3900, 4000, 4100, 4200)
+private val LIION_PCT = intArrayOf(0, 5, 10, 20, 30, 40, 50, 60, 75, 90, 100)
+private fun liionPct(mv: Int): Int {
+    if (mv <= LIION[0]) return 0
+    if (mv >= LIION.last()) return 100
+    val i = LIION.indexOfFirst { it >= mv }
+    val f = (mv - LIION[i - 1]).toFloat() / (LIION[i] - LIION[i - 1])
+    return (LIION_PCT[i - 1] + f * (LIION_PCT[i] - LIION_PCT[i - 1])).toInt()
+}
+private fun battColor(pct: Int) = if (pct > 20) AvoColors.Ok else AvoColors.Low
 
 @Composable
 fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
@@ -101,15 +112,15 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     // Row 1: the three units with their battery. Red = off / no link, orange = low battery, green = OK.
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        val pct = t?.batteryPct
-                        StatusChip("Pecho", pct?.let { "$it %" } ?: t?.v2?.batteryMv?.takeIf { it > 0 }?.let { volts(it) } ?: "Apagado",
-                            when { t == null -> AvoColors.Bad; pct == null -> AvoColors.Unknown; pct > 20 -> AvoColors.Ok; else -> AvoColors.Low }, Modifier.weight(1f))
-                        val backMv = t?.v2?.takeIf { it.backStatusValid }?.backBatteryMv?.takeIf { it > 0 }
-                        StatusChip("Espalda", when { t == null || !t.backLink -> "Apagada"; backMv != null -> volts(backMv); else -> "Conectada" },
-                            when { t == null || !t.backLink -> AvoColors.Bad; backMv == null -> AvoColors.Ok; backMv >= BACK_LOW_MV -> AvoColors.Ok; else -> AvoColors.Low }, Modifier.weight(1f))
+                        val pct = t?.batteryPct ?: t?.v2?.batteryMv?.takeIf { it > 0 }?.let { liionPct(it) }
+                        StatusChip("Pecho", pct?.let { "$it %" } ?: if (t == null) "Apagado" else "— %",
+                            when { t == null -> AvoColors.Bad; pct == null -> AvoColors.Unknown; else -> battColor(pct) }, Modifier.weight(1f))
+                        val backPct = t?.v2?.takeIf { it.backStatusValid }?.backBatteryMv?.takeIf { it > 0 }?.let { liionPct(it) }
+                        StatusChip("Espalda", when { t == null || !t.backLink -> "Apagada"; backPct != null -> "$backPct %"; else -> "— %" },
+                            when { t == null || !t.backLink -> AvoColors.Bad; backPct == null -> AvoColors.Unknown; else -> battColor(backPct) }, Modifier.weight(1f))
                         // The girth does not report its battery yet (not in the telemetry): only its link is shown.
-                        StatusChip("Cincha", if (t != null && t.girth) "Conectada" else "Apagada",
-                            if (t != null && t.girth) AvoColors.Ok else AvoColors.Bad, Modifier.weight(1f))
+                        StatusChip("Cincha", if (t != null && t.girth) "— %" else "Apagada",
+                            if (t != null && t.girth) AvoColors.Unknown else AvoColors.Bad, Modifier.weight(1f))
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         StatusChip("NTRIP", if (ntripState is NtripState.Streaming) "Recibiendo" else ntripState.texto, ntripColor, Modifier.weight(1f)) { go("ntrip") }

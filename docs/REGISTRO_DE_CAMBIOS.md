@@ -515,3 +515,6 @@ Petición del usuario.
 - **Fila 2:** NTRIP · SD · GNSS.
 - **Colores:** rojo = apagado o sin enlace; naranja = batería baja (pecho ≤ 20 %, espalda < 3,60 V); verde = bien.
 - La cincha **no envía su batería** (no está en la telemetría del pecho), así que no se muestra ninguna cifra: no se inventan datos. Para mostrarla habrá que añadirla al firmware de la cincha y del pecho.
+- **dev6:** todas las unidades se muestran en %.
+  - **Espalda:** solo envía la tensión, así que el % se **estima** con la curva de descarga típica de una celda Li-ion (interpolada, ±10 %). Naranja si es ≤ 20 %.
+  - **Cincha:** muestra «— %» mientras esté conectada, porque su batería no llega al pecho. Para enviarla hace falta un cambio de firmware en la cincha y en la espalda (la cincha → la espalda → el pecho, por ESP-NOW), en el pecho y en la app. El firmware de la cincha no está en el repositorio.
