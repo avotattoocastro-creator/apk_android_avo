@@ -567,3 +567,23 @@ Petición del usuario.
   - registro de las pérdidas de FIX y de la antena sin L2;
   - prueba con un vector generado por el codificador del firmware.
 - Nada de esto mejora la precisión por sí mismo: sirve para diagnosticar y para tener una fuente de reserva. La precisión real depende de la antena L1/L2 y del cielo despejado. Sin verificar físicamente.
+
+## 2026-10-25 — Cincha: GIRTH 0.1.0 (ESP32-C6) · BACK 3.10.0 · AVO Update 2.3.0
+- **GIRTH 0.1.0** (`firmware/girth/V0_1_0`, placa ESP32-C6 de formato XIAO). Primera prueba, **solo el enlace, sin IMU conectado**: envía «IMUs: 0» y ninguna muestra. No se simula nada.
+  - Usa ESP-NOW por el canal 1 con la espalda, con el protocolo `avo_girth_link` (biblioteca compartida con la espalda y magic propio 0xA5 0x47).
+  - Se empareja con HELLO por difusión hasta recibir WELCOME, y guarda la MAC de la espalda en la NVS.
+  - Envía STATUS cada segundo; la espalda responde con PING.
+  - LED: parpadeo rápido mientras busca, destello cada 2 s cuando está enlazada. BOOT 5 s olvida la espalda.
+  - Monitor serie: `[AVO CINCHA]`.
+- **BACK 3.10.0:**
+  - `GirthHub` acepta la primera cincha que saluda (MAC guardada en la NVS). Para cambiarla hay que abrir la ventana de emparejamiento (USER 3 s);
+  - cuenta paquetes, pérdidas (huecos de secuencia) y RSSI;
+  - reenvía los lotes de IMU al pecho como `IMU_SAMPLE`, con un máximo de 10 muestras por paquete;
+  - rellena `girth_connected`, `girth_rssi`, `girth_pkts` y `girth_lost` en el STATUS que ya existía, así que pecho y app ven «Cincha: Conectada» sin cambiar nada;
+  - pruebas en ordenador: 30 casos y 227 comprobaciones.
+- **AVO Update 2.3.0:** nueva ruta de instalación **solo para ESP32-C6 con la marca AVO-GIRTH**, a partir de la imagen completa (`*_COMPLETO.bin`):
+  - escribe bootloader, tabla, otadata y app, y verifica cada zona con el MD5 del chip;
+  - **no escribe la NVS**;
+  - el pecho y la espalda (ESP32-S3) siguen por la ruta de solo slot OTA, sin cambios.
+  - Constantes del C6 (LP_WDT) tomadas de esptool (`targets/esp32c6.py`).
+- Nada de esto está verificado en hardware.

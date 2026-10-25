@@ -30,7 +30,8 @@ jobs:
           set -e
           SRC=usb-updater/app/src/main/java/org/avoperformance/horse/update
           # Flash writes may only be issued by the installer, with addresses from the device's partition table.
-          if grep -n "flashBegin(" $SRC/*.kt | grep -v -e "Installer.kt" -e "EspRom.kt"; then
+          # (GirthInstaller.kt: full image of the girth unit, ESP32-C6 only, regions from GirthImage)
+          if grep -n "flashBegin(" $SRC/*.kt | grep -v -e "Installer.kt" -e "EspRom.kt" -e "GirthInstaller.kt"; then
             echo "flashBegin() used outside Installer"; exit 1; fi
           if grep -nE "flashBegin\((0x[0-9A-Fa-f]+|[0-9]+)L?," $SRC/*.kt; then
             echo "hard-coded flash write address"; exit 1; fi

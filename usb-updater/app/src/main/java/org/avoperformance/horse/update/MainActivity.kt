@@ -388,7 +388,7 @@ class MainActivity : Activity() {
         val s = snapshot
         val info = firmware?.info
         planText = null; planError = null
-        if (s != null && info != null) {
+        if (s != null && info != null && firmware?.girth == null) {
             try { planText = InstallPlanner.plan(s, info).summary().joinToString("\n") }
             catch (e: UpdateException) { planError = e.userMessage }
         }
@@ -396,6 +396,7 @@ class MainActivity : Activity() {
             planError != null -> "✖ $planError"
             planText != null -> planText
             firmware?.validHeader != true -> "Selecciona un firmware válido."
+            firmware?.girth != null -> "Cincha (ESP32-C6): conecta el módulo por USB y pulsa INSTALAR. No hace falta comprobar particiones."
             s == null -> "Pulsa COMPROBAR MÓDULO PARA INSTALAR (particiones, slot activo y seguridad)."
             else -> ""
         }
@@ -409,7 +410,8 @@ class MainActivity : Activity() {
         monitorResetButton.enable(idle && any)
         monitorSaveButton.enable(idle)
         selectButton.enable(idle)
-        installButton.enable(idle && planText != null && firmware?.validHeader == true && any)
+        val girth = firmware?.girth != null
+        installButton.enable(idle && firmware?.validHeader == true && any && (girth || planText != null))
         infoButton.enable(idle && any)
         readFwButton.enable(idle && any)
         readPartButton.enable(idle && any && lastInfo?.partitions?.isNotEmpty() == true)
@@ -472,14 +474,50 @@ class MainActivity : Activity() {
     }
 
     private fun confirmInstall() {
-        val plan = planText ?: return
         val f = firmware ?: return
+        f.girth?.let { g ->
+            AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+                .setTitle("¿Instalar ${g.label} en la cincha?")
+                .setMessage("Módulo ESP32-C6 de la cincha.\n\nSe escriben: " + g.regions.joinToString(", ") { "${it.name} (${it.length / 1024} KB)" } +
+                    ".\nNo se toca la NVS: si ya estaba emparejada con la espalda, lo sigue estando.\n\nNo desconectes el módulo hasta que termine.")
+                .setPositiveButton("INSTALAR") { _, _ -> installGirth(g) }
+                .setNegativeButton("Cancelar", null)
+                .show()
+            return
+        }
+        val plan = planText ?: return
         AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
             .setTitle("¿Instalar ${f.info?.label ?: firmwareName}?")
             .setMessage("$plan\n\nNo desconectes el reloj ni cierres la aplicación hasta que termine. El reloj se reiniciará varias veces.")
             .setPositiveButton("INSTALAR") { _, _ -> install() }
             .setNegativeButton("Cancelar", null)
             .show()
+    }
+
+    /** Girth unit (ESP32-C6): full image, own installer; then the serial monitor keeps capturing. */
+    private fun installGirth(g: GirthImage.Info) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val auto = autoBoot.isChecked
+        runExclusive {
+            try {
+                val out = GirthInstaller(port(), listener(), cancel).install(g, auto)
+                ui {
+                    resultState.setTextColor(if (out.confirmed) cOk else cWarn)
+                    resultState.text = (if (out.confirmed) "✔ " else "⚠ ") + out.message
+                    if (out.usbText.isNotBlank()) appendLog("Salida USB de la cincha:\n" + out.usbText.takeLast(1500))
+                }
+                monitorLoop(false, "[tras instalar: ${out.message}]\n")
+            } catch (e: Exception) {
+                ui {
+                    resultState.setTextColor(cBad)
+                    resultState.text = "✖ " + message(e)
+                    stepState.text = "Instalación no completada"
+                    appendLog("Error: ${message(e)}")
+                }
+            } finally {
+                ui { window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
+            }
+        }
     }
 
     private fun install() {

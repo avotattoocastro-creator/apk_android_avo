@@ -29,8 +29,8 @@ using namespace avo;
 // Identity marker read by AVO Update ("0.1.0" followed by "AVO-GIRTH"): never installed on chest or back.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
-static const int LED_PIN = 15;     // XIAO ESP32-C6 user LED (active low)
-static const int BOOT_PIN = 9;     // BOOT button (active low)
+static const int AVO_LED_PIN = 15;     // XIAO ESP32-C6 user LED (active low)
+static const int AVO_BOOT_PIN = 9;     // BOOT button (active low)
 static const uint8_t kBroadcast[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 Preferences prefs;
@@ -163,9 +163,9 @@ static void forget_back() {
 void setup() {
   Serial.begin(115200);
   delay(300);
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
-  pinMode(BOOT_PIN, INPUT_PULLUP);
+  pinMode(AVO_LED_PIN, OUTPUT);
+  digitalWrite(AVO_LED_PIN, HIGH);
+  pinMode(AVO_BOOT_PIN, INPUT_PULLUP);
   s_rxq = xQueueCreate(16, sizeof(RxPkt));
   s_sent = xSemaphoreCreateBinary();
   WiFi.mode(WIFI_STA);
@@ -207,14 +207,14 @@ void loop() {
 
   // BOOT held 5 s -> forget the back
   static uint32_t boot_t = 0;
-  if (digitalRead(BOOT_PIN) == LOW) {
+  if (digitalRead(AVO_BOOT_PIN) == LOW) {
     if (!boot_t) boot_t = now | 1;
     else if (boot_t != 2 && now - boot_t > 5000) { forget_back(); boot_t = 2; }
   } else boot_t = 0;
 
   // LED: fast blink while searching, short flash every 2 s when linked
   bool on = linked() ? (now % 2000) < 60 : (now % 300) < 150;
-  digitalWrite(LED_PIN, on ? LOW : HIGH);
+  digitalWrite(AVO_LED_PIN, on ? LOW : HIGH);
 
   static uint32_t last_print = 0;
   if (now - last_print >= 2000) {

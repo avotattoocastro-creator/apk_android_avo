@@ -11,6 +11,7 @@ import java.security.MessageDigest
 internal object AppImage {
     const val MAGIC = 0xE9
     const val CHIP_ID_ESP32S3 = 9
+    const val CHIP_ID_ESP32C6 = 13
     const val APP_DESC_MAGIC = 0xABCD5432L
 
     data class Segment(val loadAddress: Long, val fileOffset: Int, val length: Int)
@@ -114,13 +115,14 @@ internal object AppImage {
         return listOf(cString(head, 32 + 48, 32), cString(head, 32 + 16, 32)).filter { it.isNotBlank() }.joinToString(" ")
     }
 
-    fun parse(image: ByteArray): Info {
+    /** [expectedChip]: ESP32-S3 for chest/back; ESP32-C6 only for the girth full-image path (GirthImage). */
+    fun parse(image: ByteArray, expectedChip: Int = CHIP_ID_ESP32S3): Info {
         if (image.size < 24 + 8 + 16) bad("archivo demasiado pequeño")
         if ((image[0].toInt() and 255) != MAGIC) bad("cabecera ESP inválida (no empieza por 0xE9)")
         val count = image[1].toInt() and 255
         if (count !in 1..16) bad("número de segmentos inválido ($count)")
         val chip = u16le(image, 12)
-        if (chip != CHIP_ID_ESP32S3) bad("la imagen no es para ESP32-S3 (chip id $chip)")
+        if (chip != expectedChip) bad(if (expectedChip == CHIP_ID_ESP32S3) "la imagen no es para ESP32-S3 (chip id $chip)" else "la imagen no es para ESP32-C6 (chip id $chip)")
         val hashAppended = image[23].toInt() == 1
         val segments = ArrayList<Segment>(count)
         var pos = 24

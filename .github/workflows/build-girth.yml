@@ -59,6 +59,7 @@ jobs:
           assert app0 and app0[0][2] == 0x10000, "ota_0 must start at 0x10000"
           assert any(e[0] == 0 and e[1] == 0x11 for e in ents), "second OTA slot missing"
           assert m[0x10000:0x10000 + len(a)] == a, "merged image does not contain the app at 0x10000"
+          assert len(m) == 0x10000 + len(a), "merged image must end with the app (AVO Update parses it to the end)"
           assert a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.1.0\x00AVO-GIRTH" in a, "app marker"
           print(f"::notice title=AVO GIRTH 0.1.0::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
           PY
