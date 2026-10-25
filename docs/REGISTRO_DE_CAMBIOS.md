@@ -537,3 +537,10 @@ Petición del usuario.
   - Modo carga con USER 8 s: **OK**. Se ha comprobado el mensaje y que se apagan la radio y el enlace.
   - **El ZED sigue encendido:** su 3V3 está cableado al 3V3 de la Heltec, que no se puede cortar. Hay que pasarlo al pin Ve (Vext, GPIO36).
   - Con el cargador puesto y todo funcionando, la tensión se mantiene estable, lo que confirma que no carga mientras funciona.
+
+## 2026-10-25 — App 2.3-wifi-dev7: diagnóstico de bloqueos
+- **Problema:** «AVO Performance Horse no responde» al abrir el análisis de un entrenamiento desde el listado. Era un entrenamiento de 5:25, casi sin movimiento.
+- **Revisión del código, sin encontrar todavía la causa:**
+  - la carga del análisis, los insights y el motor ya van fuera del hilo principal;
+  - el mapa ya agrupa el recorrido en unos 150 tramos.
+- **Diagnóstico añadido:** un vigilante del hilo principal. Si la interfaz se queda bloqueada más de 2 s, escribe en «Registro de la app» (etiqueta BLOQUEO) las funciones donde estaba parado. No cambia ninguna otra funcionalidad.

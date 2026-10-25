@@ -63,6 +63,7 @@ class AvoApp : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppContainer(this)
+        MainThreadWatchdog(container.log).start()   // diagnostic: records where the UI freezes
         Configuration.getInstance().userAgentValue = packageName
         Configuration.getInstance().osmdroidBasePath = filesDir.resolve("osmdroid")
         Configuration.getInstance().osmdroidTileCache = cacheDir.resolve("osmdroid_tiles")
