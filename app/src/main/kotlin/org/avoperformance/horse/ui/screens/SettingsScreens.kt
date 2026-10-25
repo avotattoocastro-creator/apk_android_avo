@@ -348,6 +348,7 @@ fun NtripScreen(c: AppContainer) {
                 OutlinedTextField(n.port.toString(), { n = n.copy(port = it.filter(Char::isDigit).take(5).toIntOrNull() ?: 0) }, label = { Text("Puerto") }, singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(n.mountpoint, { n = n.copy(mountpoint = it.trim()) }, label = { Text("Mountpoint") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(n.backupMounts, { n = n.copy(backupMounts = it) }, label = { Text("Mountpoints de reserva (separados por comas)") }, placeholder = { Text("p. ej. VRS3M, LARE3") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(n.user, { n = n.copy(user = it) }, label = { Text("Usuario") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(pass, { pass = it }, label = { Text(if (hasPass) "Contraseña (guardada; escribe para cambiarla)" else "Contraseña") }, singleLine = true,
                     visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password), modifier = Modifier.fillMaxWidth())

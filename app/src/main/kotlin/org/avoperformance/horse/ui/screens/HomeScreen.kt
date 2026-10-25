@@ -159,9 +159,13 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
                 if (t?.inhibited == true) KV("Grabación", "Inhibida por el reloj (batería o SD)", AvoColors.Bad)
             }
         }
+        item { GnssQualityCard(t?.v3?.takeIf { fresh }, rtk.state, t?.v2?.rtcmUsedByReceiver) }
         item {
             AvoCard("Correcciones NTRIP", onClick = { go("ntrip") }, trailing = { StatusPill(if (ntripState is NtripState.Streaming) "Recibiendo" else ntripState.texto.take(22), ntripColor) }) {
-                KV("Punto de montaje", c.settings.ntrip.value.mountpoint.ifBlank { null })
+                val activeMount by c.ntrip.activeMount.collectAsStateWithLifecycle()
+                KV("Punto de montaje", (activeMount ?: c.settings.ntrip.value.mountpoint).ifBlank { null },
+                    if (activeMount != null && activeMount != c.settings.ntrip.value.mountpoint) AvoColors.Warn else AvoColors.Text)
+                if (activeMount != null && activeMount != c.settings.ntrip.value.mountpoint) KV("Fuente", "de reserva (la principal falló)", AvoColors.Warn)
                 KV("Recibido del caster", Fmt.bytes(ntripStats.bytesReceived.takeIf { it > 0 }))
                 KV("Caudal", ntripStats.bytesPerSecond.takeIf { it > 0 }?.let { String.format(Locale.US, "%.0f B/s", it) })
                 KV("Enviado al reloj", Fmt.bytes(path.sentBytes.takeIf { it > 0 }))
@@ -184,3 +188,45 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
 
 fun fmtAcc(m: Double): String = if (m < 1) String.format(Locale.forLanguageTag("es-ES"), "%.1f cm", m * 100) else String.format(Locale.forLanguageTag("es-ES"), "%.2f m", m)
 
+
+/**
+ * GNSS quality from the receiver (BACK 3.9.0: UBX-NAV-SAT/NAV-SIG summary, RTK FIX tracking; CHEST 3.7.6 telemetry v3).
+ * Diagnosis only: these values tell whether RTK can work and why not, they do not change the position.
+ */
+@Composable
+private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, state: org.avoperformance.horse.core.telemetry.RtkState, rtcmUsed: Long?) {
+    val es = Locale.forLanguageTag("es-ES")
+    AvoCard("Calidad GNSS") {
+        if (q == null || !q.backHasQuality) {
+            Text("Necesita espalda 3.9.0 y pecho 3.7.6 o posteriores.", color = AvoColors.TextDim, fontSize = 13.sp)
+            return@AvoCard
+        }
+        val diag = when {
+            !q.signalsFresh -> "Esperando el resumen de señales del receptor" to AvoColors.Unknown
+            q.l1Only -> "Antena solo L1: sin segunda frecuencia no hay RTK FIX" to AvoColors.Bad
+            (rtcmUsed ?: 0L) == 0L -> "El receptor no está usando correcciones RTCM" to AvoColors.Warn
+            state == org.avoperformance.horse.core.telemetry.RtkState.FIX -> "RTK FIX: precisión centimétrica" to AvoColors.Ok
+            q.cnoMean in 1..34 -> "Señal débil (cielo tapado o antena mal colocada)" to AvoColors.Warn
+            q.sigCarrierUsed < 10 -> "Pocas señales con fase de portadora: RTK aún convergiendo" to AvoColors.Warn
+            else -> "Correcciones aplicadas, convergiendo hacia FIX" to AvoColors.Blue
+        }
+        Text(diag.first, color = diag.second, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+        Spacer(Modifier.height(6.dp))
+        if (q.signalsFresh) {
+            KV("Satélites usados / seguidos", "${q.svUsed} / ${q.svTracked}")
+            KV("Señales usadas / seguidas", "${q.sigUsed} / ${q.sigTracked}")
+            KV("Segunda frecuencia (L2/E5b/B2)", "${q.sigL2Used} usadas / ${q.sigL2}", if (q.sigL2 == 0) AvoColors.Bad else AvoColors.Text)
+            KV("Con fase de portadora (RTK)", q.sigCarrierUsed.toString(), if (q.sigCarrierUsed == 0) AvoColors.Warn else AvoColors.Text)
+            KV("Con correcciones", q.sigCorrected.toString())
+            KV("C/N₀ media (mín–máx)", if (q.cnoMean > 0) "${q.cnoMean} dBHz (${q.cnoMin}–${q.cnoMax})" else null,
+                if (q.cnoMean in 1..34) AvoColors.Warn else AvoColors.Text)
+            KV("Señales débiles (< 30 dBHz)", q.sigWeak.toString(), if (q.sigWeak > q.sigTracked / 3) AvoColors.Warn else AvoColors.Text)
+        } else if (q.qualityMon == 2) KV("Mensajes de calidad", "rechazados por el receptor", AvoColors.Warn)
+        else if (q.qualityMon == 3) KV("Mensajes de calidad", "UART del receptor demasiado lenta", AvoColors.Warn)
+        KV("Precisión de la velocidad", if (q.sAccMmS > 0) String.format(es, "%.2f km/h", q.sAccMmS * 0.0036) else null)
+        KV("PDOP", if (q.pdopE2 > 0) String.format(es, "%.2f", q.pdopE2 / 100.0) else null)
+        KV("Primer RTK FIX", q.firstFixS?.let { "a los ${it / 60} min ${it % 60} s del arranque" } ?: "todavía no")
+        KV("Tiempo en FIX / FLOAT", "${Fmt.duration(q.fixedMs)} / ${Fmt.duration(q.floatMs)}")
+        KV("Pérdidas de FIX", q.fixLost.toString(), if (q.fixLost > 0) AvoColors.Warn else AvoColors.Text)
+    }
+}

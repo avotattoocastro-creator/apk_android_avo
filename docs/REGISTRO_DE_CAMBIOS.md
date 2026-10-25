@@ -544,3 +544,26 @@ Petición del usuario.
   - la carga del análisis, los insights y el motor ya van fuera del hilo principal;
   - el mapa ya agrupa el recorrido en unos 150 tramos.
 - **Diagnóstico añadido:** un vigilante del hilo principal. Si la interfaz se queda bloqueada más de 2 s, escribe en «Registro de la app» (etiqueta BLOQUEO) las funciones donde estaba parado. No cambia ninguna otra funcionalidad.
+
+## 2026-10-25 — AVO GNSS PRO: BACK 3.9.0 · CHEST 3.7.6-rc1 · App 2.3-wifi-dev8
+- Petición del usuario: dejar preparada la máxima precisión con el hardware actual antes de que llegue la antena L1/L2.
+- **BACK 3.9.0 (espalda):**
+  - activa UBX-NAV-SAT y UBX-NAV-SIG a 1 Hz con su propio VALSET; si el receptor lo rechaza, el resto sigue igual;
+  - resume la calidad: satélites usados y seguidos; señales usadas, con fase de portadora y corregidas; señales de 2.ª banda (L2/E5b/B2); C/N₀ media, mínima y máxima; señales débiles;
+  - registra el RTK FIX: tiempo en FIX y en FLOAT, pérdidas de FIX y tiempo hasta el primer FIX;
+  - todo va al pecho en `BackStatus` v3, añadido al final (un pecho anterior lo sigue leyendo como v2);
+  - búfer UBX ampliado a 2,1 KB;
+  - monitor: líneas `CALIDAD` y `RTK`, y aviso «ANTENA SOLO L1»;
+  - pruebas en ordenador: 27 casos y 199 comprobaciones (ZED simulado con y sin L2, y con pérdidas de FIX).
+- **CHEST 3.7.6-rc1 (pecho):**
+  - sobre la 3.7.5-rc5 (RAM y Wi-Fi);
+  - decodifica `BackStatus` v3 (el mismo `avo_payloads` que la espalda);
+  - **telemetría BLE v3** (116 B, añadida al final): calidad, FIX, sAcc y PDOP;
+  - no cambian el RAW, la grabación, la trama ESP-NOW ni la OTA. NAV-PVT completo, con sAcc, ya se grababa.
+- **App 2.3-wifi-dev8:**
+  - **tarjeta «Calidad GNSS»** en Inicio, con el diagnóstico de por qué no hay FIX: antena solo L1, sin correcciones usadas, señal débil o convergiendo;
+  - **mountpoints de reserva** en Ajustes → NTRIP, con cambio automático tras 3 fallos seguidos o 30 s sin datos. Nunca se mezclan dos fuentes;
+  - Inicio muestra el mountpoint activo;
+  - registro de las pérdidas de FIX y de la antena sin L2;
+  - prueba con un vector generado por el codificador del firmware.
+- Nada de esto mejora la precisión por sí mismo: sirve para diagnosticar y para tener una fuente de reserva. La precisión real depende de la antena L1/L2 y del cielo despejado. Sin verificar físicamente.

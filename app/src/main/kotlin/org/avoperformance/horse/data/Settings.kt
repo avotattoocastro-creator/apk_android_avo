@@ -15,7 +15,11 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         val enabled: Boolean = false, val host: String = "", val port: Int = 2101, val mountpoint: String = "",
         val user: String = "", val tls: Boolean = false, val v2: Boolean = true, val sendGga: Boolean = true,
         val ggaIntervalS: Int = 10, val timeoutS: Int = 15, val reconnect: Boolean = true,
-    )
+        /** Backup mountpoints on the same caster, comma separated: used in order if the main one fails. */
+        val backupMounts: String = "",
+    ) {
+        fun backups(): List<String> = backupMounts.split(',', ';', ' ').map { it.trim() }.filter { it.isNotEmpty() && it != mountpoint.trim() }.distinct()
+    }
 
     private val _ntrip = MutableStateFlow(loadNtrip())
     val ntrip: StateFlow<Ntrip> = _ntrip
@@ -24,14 +28,14 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         p.getBoolean("ntrip.enabled", false), p.getString("ntrip.host", "")!!, p.getInt("ntrip.port", 2101),
         p.getString("ntrip.mount", "")!!, p.getString("ntrip.user", "")!!, p.getBoolean("ntrip.tls", false),
         p.getBoolean("ntrip.v2", true), p.getBoolean("ntrip.gga", true), p.getInt("ntrip.ggaS", 10),
-        p.getInt("ntrip.timeoutS", 15), p.getBoolean("ntrip.reconnect", true),
+        p.getInt("ntrip.timeoutS", 15), p.getBoolean("ntrip.reconnect", true), p.getString("ntrip.backups", "")!!,
     )
 
     fun saveNtrip(n: Ntrip, password: String?) {
         p.edit().putBoolean("ntrip.enabled", n.enabled).putString("ntrip.host", n.host.trim()).putInt("ntrip.port", n.port)
             .putString("ntrip.mount", n.mountpoint.trim()).putString("ntrip.user", n.user).putBoolean("ntrip.tls", n.tls)
             .putBoolean("ntrip.v2", n.v2).putBoolean("ntrip.gga", n.sendGga).putInt("ntrip.ggaS", n.ggaIntervalS)
-            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).apply()
+            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).putString("ntrip.backups", n.backupMounts.trim()).apply()
         if (password != null) secure.ntripPassword = password
         _ntrip.value = n
     }

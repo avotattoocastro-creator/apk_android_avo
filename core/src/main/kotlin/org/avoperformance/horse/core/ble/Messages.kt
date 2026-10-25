@@ -88,10 +88,12 @@ data class Telemetry(
     val batteryPct: Int?, val backLink: Boolean, val girth: Boolean, val rtcmFlowing: Boolean,
     val ringPermille: Int, val droppedRecords: Long, val pendingMs: Long, val inhibited: Boolean,
     val v2: TelemetryV2?,
+    val v3: TelemetryV3? = null,
 ) {
     companion object {
         const val V1_LEN = 45
         const val V2_LEN = 83
+        const val V3_LEN = 116
         fun decode(p: ByteArray): Telemetry? {
             if (p.size < V1_LEN) return null
             val r = ByteReader(p)
@@ -108,7 +110,14 @@ data class Telemetry(
                 r.u32().let { if (it == 0xFFFFFFFFL) null else it }, r.u32(), r.u32().let { if (it == 0xFFFFFFFFL) null else it },
                 r.u8() != 0, r.u8() != 0, r.u32(),
             )
-            return if (r.ok) t.copy(v2 = v2) else t
+            if (!r.ok) return t
+            val withV2 = t.copy(v2 = v2)
+            if (p.size < V3_LEN) return withV2
+            val v3 = TelemetryV3(
+                r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(), r.u8(),
+                r.u8(), r.u8(), r.u16(), r.u16(), r.u32(), r.u32(), r.u32(), r.u16(),
+            )
+            return if (r.ok) withV2.copy(v3 = v3) else withV2
         }
     }
 }
@@ -124,6 +133,22 @@ data class TelemetryV2(
     val invalidLlh get() = gnssFlags and 4 != 0
     val haveGnss get() = gnssFlags and 8 != 0
     val qualityOk get() = gnssFlags and 16 != 0
+}
+
+/** TELEMETRY v3 (CHEST 3.7.6 + BACK 3.9.0): GNSS quality (UBX-NAV-SAT/NAV-SIG summary) and RTK FIX tracking. */
+data class TelemetryV3(
+    val qFlags: Int, val svTracked: Int, val svUsed: Int, val sigTracked: Int, val sigUsed: Int, val sigCarrierUsed: Int,
+    val sigCorrected: Int, val sigL2: Int, val sigL2Used: Int, val sigWeak: Int, val cnoMean: Int, val cnoMin: Int, val cnoMax: Int,
+    val qualityAgeS: Int, val qualityMon: Int, val fixLost: Int, val ttffFixS: Int, val fixedMs: Long, val floatMs: Long,
+    val sAccMmS: Long, val pdopE2: Int,
+) {
+    /** Back status v3 received (BACK 3.9.0 or later). */
+    val backHasQuality get() = qFlags and 1 != 0
+    /** NAV-SIG summary present and fresh (≤ 5 s). */
+    val signalsFresh get() = qFlags and 2 != 0 && qualityAgeS <= 5
+    /** Signals tracked but none on the second band: the antenna (or its cable) gives L1 only → no RTK FIX. */
+    val l1Only get() = signalsFresh && sigTracked >= 8 && sigL2 == 0
+    val firstFixS: Int? get() = if (ttffFixS == 0xFFFF) null else ttffFixS
 }
 
 data class RtcmAck(val freeBytes: Long, val expectedSeq: Long, val droppedBytes: Long) {

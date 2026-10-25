@@ -55,9 +55,55 @@ class NtripManager(
 
     val running get() = client != null
 
+    /** Mountpoint in use (main or backup). Null while stopped. */
+    private val _activeMount = MutableStateFlow<String?>(null)
+    val activeMount: StateFlow<String?> = _activeMount
+    private var mountIndex = 0          // 0 = main, 1.. = backups
+    private var failsInRow = 0
+    private var lastDataMs = 0L
+    private var watchdog: Job? = null
+
+    /** Mountpoints in order of preference: main first, then the backups from the settings. */
+    private fun mounts(): List<String> = listOf(settings.ntrip.value.mountpoint.trim()) + settings.ntrip.value.backups()
+
     fun start() {
         if (client != null) return
-        val cfg = settings.ntripConfig()
+        mountIndex = 0
+        startOn(0)
+        watchdog?.cancel()
+        watchdog = scope.launch { failoverLoop() }
+    }
+
+    /**
+     * Automatic failover: a mountpoint that fails 3 connections in a row, or streams nothing for 30 s, is replaced
+     * by the next one in the list (main → backups → main). Only one source at a time: corrections from different
+     * bases are never mixed in the receiver.
+     */
+    private suspend fun failoverLoop() {
+        while (true) {
+            delay(1000)
+            val list = mounts()
+            if (client == null || list.size < 2) continue
+            val st = _state.value
+            val silent = st is NtripState.Streaming && lastDataMs > 0 && System.currentTimeMillis() - lastDataMs > 30_000
+            if (failsInRow >= 3 || silent) {
+                val from = list.getOrNull(mountIndex)
+                val next = (mountIndex + 1) % list.size
+                log.w("NTRIP", "fuente ${from ?: "?"} sin correcciones (${if (silent) "30 s sin datos" else "$failsInRow fallos seguidos"}): cambio a ${list[next]}")
+                client?.stop(); client = null
+                synchronized(pacer) { pacer.clear() }
+                startOn(next)
+            }
+        }
+    }
+
+    private fun startOn(index: Int) {
+        val list = mounts()
+        mountIndex = index.coerceIn(0, list.lastIndex)
+        failsInRow = 0
+        lastDataMs = 0L
+        val cfg = settings.ntripConfig().copy(mountpoint = list[mountIndex])
+        _activeMount.value = cfg.mountpoint
         val problems = cfg.problems()
         if (problems.isNotEmpty()) { _state.value = NtripState.Failed(problems.joinToString("; ")); return }
         watch.rtcmAckListener = { a ->
@@ -66,18 +112,24 @@ class NtripManager(
         }
         val c = NtripClient(cfg, ::ggaPosition,
             onData = { b, o, n ->
+                lastDataMs = System.currentTimeMillis()
                 val frames = synchronized(framer) { framer.feed(b, o, n) }
                 val now = System.currentTimeMillis()
                 synchronized(pacer) { frames.forEach { pacer.offer(it, now) } }
             },
-            onState = { _state.value = it; log.i("NTRIP", it.texto) },
+            onState = {
+                _state.value = it; log.i("NTRIP", "${cfg.mountpoint}: ${it.texto}")
+                when (it) { is NtripState.Streaming -> failsInRow = 0; is NtripState.WaitingRetry -> failsInRow++; else -> {} }
+            },
             onStats = { _stats.value = it })
         client = c
         thread(name = "avo-ntrip", isDaemon = true) { c.run(); if (client === c) client = null }
-        sender = scope.launch(Dispatchers.IO) { sendLoop() }
+        if (sender == null) sender = scope.launch(Dispatchers.IO) { sendLoop() }
     }
 
     fun stop() {
+        watchdog?.cancel(); watchdog = null
+        _activeMount.value = null
         client?.stop()
         client = null
         sender?.cancel()

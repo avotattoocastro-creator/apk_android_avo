@@ -13,7 +13,7 @@ object SettingsBackup {
                 .put("mountpoint", n.mountpoint).put("user", n.user)
                 .put("tls", n.tls).put("v2", n.v2).put("sendGga", n.sendGga)
                 .put("ggaIntervalS", n.ggaIntervalS).put("timeoutS", n.timeoutS)
-                .put("reconnect", n.reconnect))
+                .put("reconnect", n.reconnect).put("backupMounts", n.backupMounts))
             .put("sync", JSONObject().put("autoDownload", settings.autoDownload))
             .put("sharing", JSONObject()
                 .put("favorites", org.json.JSONArray(settings.shareFavorites))
@@ -36,7 +36,7 @@ object SettingsBackup {
             port = range("port", 1, 65535), mountpoint = string("mountpoint", 255),
             user = string("user", 255), tls = o.getBoolean("tls"), v2 = o.getBoolean("v2"),
             sendGga = o.getBoolean("sendGga"), ggaIntervalS = range("ggaIntervalS", 1, 3600),
-            timeoutS = range("timeoutS", 1, 180), reconnect = o.getBoolean("reconnect")
+            timeoutS = range("timeoutS", 1, 180), reconnect = o.getBoolean("reconnect"), backupMounts = o.optString("backupMounts", "")
         )
         val auto = root.getJSONObject("sync").getBoolean("autoDownload")
         val sharing = root.optJSONObject("sharing")

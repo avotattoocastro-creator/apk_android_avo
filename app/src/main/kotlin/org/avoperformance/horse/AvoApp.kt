@@ -44,6 +44,19 @@ class AppContainer(val app: Application) {
     val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
     /** Sharing between AVO users over Firebase (global, per horse and manual). */
     val share = org.avoperformance.horse.cloud.ShareManager(this).also { s -> sync.onVerified = { id -> s.onTrainingVerified(id) } }
+    /** V3.9 GNSS: records RTK FIX losses and an L1-only antenna in the app log (Ajustes → Diagnóstico). */
+    init {
+        scope.launch {
+            var lastLost = -1; var l1Warned = false
+            watch.telemetry.collect { s ->
+                val q = s?.t?.v3 ?: return@collect
+                if (lastLost >= 0 && q.fixLost > lastLost) log.w("RTK", "FIX perdido (${q.fixLost} desde el arranque de la espalda)")
+                lastLost = q.fixLost
+                if (q.l1Only && !l1Warned) { l1Warned = true; log.w("RTK", "antena sin segunda frecuencia (L2/E5b/B2): no habrá RTK FIX") }
+                if (!q.l1Only && q.signalsFresh) l1Warned = false
+            }
+        }
+    }
 }
 
 class AppLog(private val c: AppContainer) {

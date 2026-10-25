@@ -147,6 +147,26 @@ class FirmwareVectorsTest {
         assertEquals(RtkState.DESCONOCIDO, RtkDeriver.derive(t, 5000).state)
     }
 
+    /** Bytes produced by the CHEST 3.7.6 encoder (avo_ble_proto.cpp encode_telemetry) for a known v3 telemetry. */
+    @Test fun telemetryV3DecodesFirmwareEncoding() {
+        val hex = "00000000011b8c000000bb43db19281e15fe000000000000000000000000ff0000000000000000000000000000000000ff00000000000000000000000003000000ffffffff00000000ffffffff000000000000031f1b3a322c301a1605291c31010103005f00c0270900c8af00003e0000007600"
+        val b = ByteArray(hex.length / 2) { hex.substring(it * 2, it * 2 + 2).toInt(16).toByte() }
+        assertEquals(Telemetry.V3_LEN, b.size)
+        val t = Telemetry.decode(b)!!
+        assertEquals(1, t.carrSoln); assertEquals(27, t.numSv); assertEquals(433800123, t.latE7)
+        val q = t.v3!!
+        assertTrue(q.backHasQuality); assertTrue(q.signalsFresh); assertFalse(q.l1Only)
+        assertEquals(31, q.svTracked); assertEquals(27, q.svUsed); assertEquals(58, q.sigTracked); assertEquals(50, q.sigUsed)
+        assertEquals(44, q.sigCarrierUsed); assertEquals(48, q.sigCorrected); assertEquals(26, q.sigL2); assertEquals(22, q.sigL2Used)
+        assertEquals(5, q.sigWeak); assertEquals(41, q.cnoMean); assertEquals(28, q.cnoMin); assertEquals(49, q.cnoMax)
+        assertEquals(1, q.qualityAgeS); assertEquals(1, q.qualityMon); assertEquals(3, q.fixLost); assertEquals(95, q.firstFixS)
+        assertEquals(600000L, q.fixedMs); assertEquals(45000L, q.floatMs); assertEquals(62L, q.sAccMmS); assertEquals(118, q.pdopE2)
+        // L1-only antenna: signals tracked, none on the second band
+        assertTrue(q.copy(sigL2 = 0, sigL2Used = 0).l1Only)
+        // older watch (v2 length): no v3 block
+        assertEquals(null, Telemetry.decode(b.copyOf(Telemetry.V2_LEN))!!.v3)
+    }
+
     @Test fun rtkStatesFromReceiverFlags() {
         val t = Telemetry.decode(TestRes.hex(v, "telemetry_v2"))!!
         assertEquals(RtkState.FLOAT, RtkDeriver.derive(t.copy(carrSoln = 1), 0).state)
