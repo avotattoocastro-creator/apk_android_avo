@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.9.0 (ESP-NOW) · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.0 (ESP-NOW) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -126,6 +126,7 @@ class HeltecPlatform : public BackPlatform {
     size_t n = now_peer_serialize(r, b, sizeof(b));
     if (n) prefs.putBytes("peer", b, n);
   }
+  void save_girth(const uint8_t mac[6]) override { prefs.putBytes("girth", mac, 6); }   // V3.10.0
   uint32_t random32() override { return esp_random(); }
   void reboot() override { delay(50); ESP.restart(); }
 };
@@ -159,6 +160,17 @@ static void print_status() {
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
+  {  // V3.10.0 girth unit
+    const GirthHub& g = core->girth();
+    if (!g.paired()) Serial.println("  CINCHA: sin emparejar (se acepta la primera que salude)");
+    else {
+      char m[18]; now_mac_str(g.mac(), m);
+      Serial.printf("  CINCHA: %s %s fw=%s rssi=%d dBm | paquetes=%lu perdidos=%lu IMU reenviados=%lu | uptime %lu s, IMUs=%u, envios ok=%lu fallo=%lu\n",
+                    m, g.connected(millis()) ? "CONECTADA" : "sin senal", g.hello().fw, g.rssi(), (unsigned long)g.rx_packets(),
+                    (unsigned long)g.lost(), (unsigned long)g.imu_forwarded(), (unsigned long)(g.status().uptime_ms / 1000),
+                    g.status().imu_count, (unsigned long)g.status().tx_ok, (unsigned long)g.status().tx_fail);
+    }
+  }
   {  // V3.9.0: GNSS quality (NAV-SAT/NAV-SIG) and RTK FIX tracking
     const GnssQuality& q = core->quality();
     BackStatus bs = core->status();
@@ -261,7 +273,9 @@ void setup() {
   if (!now_peer_deserialize(b, n, &stored)) stored = NowPeerRecord();
 
   core = new BackCore(&platform, s_dev_id, NAV_RATE_HZ);
-  core->begin(stored);
+  uint8_t girth_mac[6];   // V3.10.0: girth unit paired before (none: the first one that says HELLO is accepted)
+  bool have_girth = prefs.getBytes("girth", girth_mac, 6) == 6;
+  core->begin(stored, have_girth ? girth_mac : nullptr);
   s_vbat_mv = read_battery_mv();
   core->set_battery_mv(s_vbat_mv);
   Serial.printf("[AVO ESPALDA] bateria %u mV (ADC_Ctrl activo %s → placa %s)\n", (unsigned)s_vbat_mv,

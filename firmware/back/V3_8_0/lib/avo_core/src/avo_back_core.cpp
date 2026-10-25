@@ -9,14 +9,17 @@ namespace avo {
 static const uint8_t BACK_NAV_RATE_DEFAULT = 8;
 
 BackCore::BackCore(BackPlatform* p, const char* dev_id, uint8_t nav_rate_hz)
-    : p_(p), pair_(NowRole::BACK), dec_(on_chest_frame, this), zed_(this, nav_rate_hz ? nav_rate_hz : BACK_NAV_RATE_DEFAULT) {
+    : p_(p), pair_(NowRole::BACK), dec_(on_chest_frame, this), zed_(this, nav_rate_hz ? nav_rate_hz : BACK_NAV_RATE_DEFAULT),
+      girth_(this, dev_id ? dev_id : "", AVO_FW_VERSION, 0) {
   memset(dev_, 0, sizeof(dev_));
   strncpy(dev_, dev_id ? dev_id : "", sizeof(dev_) - 1);
   boot_id_ = 0;
 }
 
-void BackCore::begin(const NowPeerRecord& stored) {
+void BackCore::begin(const NowPeerRecord& stored, const uint8_t* girth_mac) {
   boot_id_ = p_->random32() | 1u;
+  girth_.set_boot_id(boot_id_);
+  girth_.begin(girth_mac);
   pair_.load(stored);
   if (stored.valid) p_->radio_set_peer(stored.mac);
   zed_.set_ubx_cb(on_ubx, this);
@@ -28,7 +31,13 @@ bool BackCore::chest_online() const {
 }
 
 // ------------------------------------------------------------------ radio in
+void BackCore::forward_imu(const uint8_t* payload, size_t n) {
+  if (pair_.paired() && chest_online()) queue_frame(FrameType::IMU_SAMPLE, 0, payload, n, true);
+}
+
 void BackCore::on_radio(const uint8_t mac[6], const uint8_t* d, size_t n, int8_t rssi) {
+  // V3.10.0: girth unit packets (own magic) first
+  if (girth_.on_radio(mac, d, n, rssi, p_->now_ms(), pairing_open())) return;
   NowHeader h;
   const uint8_t* body;
   if (!now_parse(d, n, &h, &body)) { st_.rx_bad++; return; }
@@ -217,7 +226,10 @@ BackStatus BackCore::status() const {
   s.uptime_ms = p_->now_ms();
   s.zed_state = zed_.status_code();
   s.pps_state = 0;          // PPS not wired on this back
-  s.girth_connected = 0;    // no girth IMU on this back
+  s.girth_connected = girth_.connected(p_->now_ms()) ? 1 : 0;   // V3.10.0 girth unit over ESP-NOW
+  s.girth_rssi = girth_.rssi();
+  s.girth_pkts = girth_.rx_packets();
+  s.girth_lost = girth_.lost();
   s.rtcm_rx_bytes = st_.rtcm_rx_bytes;
   s.rtcm_to_zed_bytes = st_.rtcm_to_zed;
   s.rtcm_frames_ok = obs_.stats().frames_ok;
@@ -280,6 +292,7 @@ void BackCore::tick() {
     rate_n_ = 0;
     rate_t0_ = now;
   }
+  girth_.tick(now, chest_online());   // V3.10.0
   if (!pair_.paired()) return;
   if (now - last_hb_ >= 1000) {
     last_hb_ = now;

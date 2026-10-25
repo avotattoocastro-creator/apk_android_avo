@@ -831,4 +831,93 @@ TEST(quality, signal_band_classification) {
   CHECK(!ubx_quality_nav_sat(bad, 8, &q));
 }
 
+// ---------------------------------------------------------------- V3.10.0 girth unit (GirthHub)
+struct FakeGirthIo : GirthHub::Io {
+  std::vector<std::vector<uint8_t>> sent, imu;
+  std::vector<std::array<uint8_t, 6>> peers, stored;
+  bool deliver = true;
+  bool send(const uint8_t*, const uint8_t* d, size_t n) override { sent.emplace_back(d, d + n); return deliver; }
+  void add_peer(const uint8_t m[6]) override { std::array<uint8_t, 6> a; memcpy(a.data(), m, 6); peers.push_back(a); }
+  void store_girth(const uint8_t m[6]) override { std::array<uint8_t, 6> a; memcpy(a.data(), m, 6); stored.push_back(a); }
+  void forward_imu(const uint8_t* d, size_t n) override { imu.emplace_back(d, d + n); }
+};
+
+static std::vector<uint8_t> girth_pkt(GirthKind k, uint32_t boot, uint32_t seq, const uint8_t* body, size_t bl) {
+  GirthHeader h; h.kind = k; h.boot_id = boot; h.seq = seq;
+  std::vector<uint8_t> p(GIRTH_MAX_PACKET);
+  p.resize(girth_build(h, body, bl, p.data(), p.size()));
+  return p;
+}
+static std::vector<uint8_t> girth_hello(uint32_t boot, uint32_t seq) {
+  GirthHello m; strcpy(m.dev_id, "C6TEST"); strcpy(m.fw, "0.1.0"); m.hw = 1;
+  uint8_t b[GIRTH_HELLO_LEN]; size_t n = girth_hello_encode(m, b, sizeof(b));
+  return girth_pkt(GirthKind::HELLO, boot, seq, b, n);
+}
+
+TEST(girth, first_girth_pairs_automatically_and_is_stored) {
+  FakeGirthIo io; GirthHub hub(&io, "BACK", "3.10.0", 77); hub.begin(nullptr);
+  const uint8_t g1[6] = {1, 2, 3, 4, 5, 6};
+  auto p = girth_hello(9, 1);
+  CHECK(hub.on_radio(g1, p.data(), p.size(), -40, 1000, false));
+  CHECK(hub.paired()); CHECK(hub.connected(1500));
+  CHECK_EQ(io.stored.size(), 1u); CHECK(!io.sent.empty());
+  GirthHeader h; const uint8_t* body;
+  CHECK(girth_parse(io.sent.back().data(), io.sent.back().size(), &h, &body));
+  CHECK(h.kind == GirthKind::WELCOME);
+  CHECK(!hub.connected(5000));                                   // 3 s without packets -> not connected
+  // chest-link packets are not consumed by the hub
+  uint8_t other[20] = {0xA5, 0x4E};
+  CHECK(!hub.on_radio(g1, other, sizeof(other), -40, 1000, false));
+}
+
+TEST(girth, second_girth_only_inside_pairing_window) {
+  FakeGirthIo io; GirthHub hub(&io, "BACK", "3.10.0", 77);
+  const uint8_t g1[6] = {1, 2, 3, 4, 5, 6}, g2[6] = {9, 9, 9, 9, 9, 9};
+  hub.begin(g1);
+  auto p = girth_hello(5, 1);
+  hub.on_radio(g2, p.data(), p.size(), -40, 1000, false);
+  CHECK(memcmp(hub.mac(), g1, 6) == 0); CHECK_EQ(hub.rejected(), 1u);
+  hub.on_radio(g2, p.data(), p.size(), -40, 1100, true);
+  CHECK(memcmp(hub.mac(), g2, 6) == 0);
+}
+
+TEST(girth, status_losses_imu_forwarding_and_ping) {
+  FakeGirthIo io; GirthHub hub(&io, "BACK", "3.10.0", 77); hub.begin(nullptr);
+  const uint8_t g[6] = {1, 2, 3, 4, 5, 6};
+  auto hello = girth_hello(3, 1); hub.on_radio(g, hello.data(), hello.size(), -40, 0, false);
+  GirthStatus st; st.uptime_ms = 1234; st.tx_ok = 10;
+  uint8_t b[GIRTH_STATUS_LEN]; size_t bl = girth_status_encode(st, b, sizeof(b));
+  CHECK_EQ(bl, GIRTH_STATUS_LEN);
+  auto s2 = girth_pkt(GirthKind::STATUS, 3, 2, b, bl); hub.on_radio(g, s2.data(), s2.size(), -50, 100, false);
+  auto s5 = girth_pkt(GirthKind::STATUS, 3, 5, b, bl); hub.on_radio(g, s5.data(), s5.size(), -50, 200, false);
+  hub.on_radio(g, s5.data(), s5.size(), -50, 210, false);          // MAC-level duplicate: not a loss
+  CHECK_EQ(hub.lost(), 2u); CHECK_EQ(hub.status().uptime_ms, 1234u); CHECK_EQ(hub.rssi(), -50);
+  // IMU batch: forwarded with the back reception time
+  ImuBatchHeader ih; ih.count = 2; ih.girth_seq = 44;
+  std::vector<uint8_t> ib(IMU_HDR_LEN + 2 * IMU_SAMPLE_LEN_9AXIS, 7);
+  encode_imu_header(ih, ib.data(), ib.size());
+  auto im = girth_pkt(GirthKind::IMU, 3, 6, ib.data(), ib.size());
+  hub.on_radio(g, im.data(), im.size(), -50, 300, false);
+  CHECK_EQ(io.imu.size(), 1u);
+  ImuBatchHeader out; CHECK(decode_imu_header(io.imu[0].data(), io.imu[0].size(), &out));
+  CHECK_EQ(out.back_rx_ms, 300u); CHECK_EQ(out.girth_seq, 44u); CHECK_EQ(io.imu[0].size(), ib.size());
+  // too many samples for one chest packet: rejected, not forwarded
+  std::vector<uint8_t> big(IMU_HDR_LEN + 11 * IMU_SAMPLE_LEN_9AXIS, 0);
+  auto bp = girth_pkt(GirthKind::IMU, 3, 7, big.data(), big.size());
+  hub.on_radio(g, bp.data(), bp.size(), -50, 310, false);
+  CHECK_EQ(io.imu.size(), 1u);
+  // ping once per second while connected
+  size_t before = io.sent.size();
+  hub.tick(1500, true);
+  CHECK_EQ(io.sent.size(), before + 1);
+  GirthHeader h; const uint8_t* body; GirthPing gp;
+  CHECK(girth_parse(io.sent.back().data(), io.sent.back().size(), &h, &body));
+  CHECK(h.kind == GirthKind::PING && girth_ping_decode(body, h.body_len, &gp));
+  CHECK_EQ(gp.flags, 1); CHECK_EQ(gp.lost, 2u);
+  // corrupted packet
+  auto bad = s5; bad[20] ^= 1;
+  hub.on_radio(g, bad.data(), bad.size(), -50, 400, false);
+  CHECK(hub.rejected() >= 2u);
+}
+
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }
