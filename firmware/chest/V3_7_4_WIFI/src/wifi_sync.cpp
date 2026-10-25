@@ -49,7 +49,9 @@ static const uint32_t NO_CLIENT_MS = 60000, IDLE_MS = 45000, MAX_ON_MS = 15 * 60
 static const int MIN_BATT_PCT = 15, STOP_BATT_PCT = 10, MAX_AUTH_FAIL = 5;
 static const size_t CHUNK = 16 * 1024;
 // rc2: minimum internal RAM to bring up AP + httpd next to BLE + ESP-NOW (internal estimate: ~45 KB)
-static const size_t MIN_INTERNAL_FREE = 40 * 1024, MIN_INTERNAL_BLOCK = 16 * 1024;
+// 3.7.5-rc3: Wi-Fi is already initialised for ESP-NOW (STA), so AP+HTTP costs less than a cold start. Thresholds
+// lowered to fit the measured margin; a reboot while starting is still caught (NVS breadcrumb + app guard).
+static const size_t MIN_INTERNAL_FREE = 20 * 1024, MIN_INTERNAL_BLOCK = 8 * 1024;
 static const uint32_t WORKER_STACK = 6144;   // internal (it writes NVS: it cannot go in PSRAM)
 
 static SemaphoreHandle_t s_mx = nullptr;

@@ -459,3 +459,13 @@ Petición del usuario.
   - RAM interna libre al final del arranque: 26 084 B, con un bloque máximo de 17 396 B (la 3.7.3 dejaba 11 772 B y 7 156 B);
   - justo después de `ready` da un PANIC y entra en reinicios constantes.
 - **rc2:** se quitan las pilas de `ble_tx` y `ui_lite` en PSRAM, que eran el cambio con más riesgo. Se mantienen NimBLE en PSRAM y `extmem(1024)`. Sigue sin verificar.
+
+## 2026-10-25 — CHEST 3.7.5-rc3
+- **Medido en la rc2:**
+  - estable, descarga por BLE sin reinicios;
+  - al final del arranque quedan 15 352 B libres, con un bloque máximo de 7 412 B;
+  - la UI consume unos 24 KB internos, de los que 13 KB son el búfer DMA de 16 filas.
+- **rc3:**
+  - búfer DMA de la UI reducido a 4 filas (unos 9,8 KB más libres);
+  - umbral del AP Wi-Fi bajado de 40/16 KB a 20/8 KB, porque el Wi-Fi ya está inicializado para ESP-NOW. Se mantienen las protecciones: si el reloj se reinicia al encender el AP, el Wi-Fi queda desactivado y la app pasa a Bluetooth.
+- Sin verificar físicamente.

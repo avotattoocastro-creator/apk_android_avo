@@ -45,6 +45,10 @@ patch(f"{SRC}/app_main.cpp",
 #    (RTC_SW_CPU_RST, reset PANIC) and kept rebooting. Most likely cause: buffers on the UI/BLE stack used for
 #    SPI DMA or during flash-cache-disabled windows. All task stacks stay in internal RAM.
 
+# 3b. rc3: UI DMA transfer buffer 16 → 4 rows (13 120 → 3 280 B internal). Same pixels, more (shorter) transfers.
+patch(f"{SRC}/ui.cpp", "size_t line_px = (size_t)UiFb::W * 16;",
+      "size_t line_px = (size_t)UiFb::W * 4;   // V3.7.5-rc3: 4 rows (frees ~9.8 KB of internal RAM for Wi-Fi)")
+
 # 4. memory at the end of boot (monitor)
 patch(f"{SRC}/app_main.cpp",
       '  Serial.printf("[AVO] build fingerprint %s\\n", AVO_BUILD_FINGERPRINT);',
