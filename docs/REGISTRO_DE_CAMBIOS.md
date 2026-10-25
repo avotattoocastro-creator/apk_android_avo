@@ -490,3 +490,7 @@ Petición del usuario.
 - **No se ha parado el enlace con la espalda:** sus tareas solo devuelven RAM si se borran, y borrarlas en marcha es arriesgado. Lo que se ha hecho es reducir sus pilas, que es lo de la entrada anterior.
 - Se ha eliminado el workflow de la 3.7.4-rc2: `wifi_sync.cpp` ahora necesita las funciones de la UI de la 3.7.5, y la 3.7.5 sustituye a la 3.7.4.
 - Sin verificar físicamente.
+
+## 2026-10-25 — App 2.3-wifi-dev4: HTTP permitido solo hacia el AP del reloj
+- **Prueba de campo con la 3.7.5-rc4:** el reloj encendió el AP y Android se conectó, pero la descarga falló con «Cleartext HTTP traffic to 192.168.4.1 not permitted».
+- **Cambio:** `network_security_config` permite HTTP sin cifrar únicamente a `192.168.4.1`, que es el AP local del reloj. El acceso va con un token de sesión recibido por BLE autenticado y con verificación SHA-256. El resto del tráfico sigue siendo solo HTTPS.

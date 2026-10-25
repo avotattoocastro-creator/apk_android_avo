@@ -5,5 +5,11 @@
     <base-config cleartextTrafficPermitted="false">
         <trust-anchors><certificates src="system" /></trust-anchors>
     </base-config>
+    <!-- Watch Wi-Fi download (CHEST 3.7.4+): local SoftAP without Internet, plain HTTP only to the watch AP
+         address. Access is authenticated with the per-session token received over authenticated BLE and every
+         file is checked with SHA-256. Everything else stays HTTPS-only. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">192.168.4.1</domain>
+    </domain-config>
     <!-- OpenStreetMap tiles are served over HTTPS. -->
 </network-security-config>
