@@ -206,7 +206,8 @@ struct SimZed {
   bool gnss[4] = {true, true, true, true};       // GPS, GLO, GAL, BDS
   uint32_t signal_restarts = 0;
   uint32_t sat_every[3] = {0, 0, 0}, sig_every[3] = {0, 0, 0};   // V3.9.0 NAV-SAT/SIG output rate
-  bool l2_antenna = true;                                     // false = L1-only antenna (no second band)
+  bool l2_antenna = true;
+  bool no_sig_key = false;   // older receiver firmware: NAV-SIG key unknown
   uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
   bool alive = true;
   std::deque<std::pair<uint32_t, uint8_t>> out;   // (baud it was sent at, byte)
@@ -225,6 +226,7 @@ struct SimZed {
   void send_text(const char* s) { for (; *s; s++) out.push_back({baud[port], (uint8_t)*s}); }
 
   bool known(uint32_t k) {
+    if (no_sig_key && (k == zedkey::MSGOUT_NAV_SIG_UART1 || k == zedkey::MSGOUT_NAV_SIG_UART2)) return false;
     static const uint32_t ks[] = {zedkey::RATE_MEAS, zedkey::UART1_BAUDRATE, zedkey::UART2_BAUDRATE,
       zedkey::UART1INPROT_UBX, zedkey::UART1INPROT_NMEA, zedkey::UART1INPROT_RTCM3X, zedkey::UART1OUTPROT_UBX, zedkey::UART1OUTPROT_NMEA,
       zedkey::UART1OUTPROT_RTCM3X, zedkey::UART2INPROT_UBX, zedkey::UART2INPROT_NMEA, zedkey::UART2INPROT_RTCM3X, zedkey::UART2OUTPROT_UBX,
@@ -918,6 +920,15 @@ TEST(girth, status_losses_imu_forwarding_and_ping) {
   auto bad = s5; bad[20] ^= 1;
   hub.on_radio(g, bad.data(), bad.size(), -50, 400, false);
   CHECK(hub.rejected() >= 2u);
+}
+
+TEST(quality, receiver_without_nav_sig_keeps_nav_sat) {
+  World w(2);
+  w.zed.no_sig_key = true;
+  w.run_ms(20000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 4);
+  CHECK(w.back->quality().have_sat);
+  CHECK(!w.back->quality().have_sig);
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

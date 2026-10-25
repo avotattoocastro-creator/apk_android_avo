@@ -589,3 +589,13 @@ Petición del usuario.
 - Nada de esto está verificado en hardware.
 - Imagen completa de la cincha: el core la rellena hasta los 4 MB; el CI la recorta al final de la app (comprobando que el resto es 0xFF), que es lo que espera AVO Update. Resultado: 1 033 344 B, con la app de 967 808 B (73 % de ota_0).
 - AVO Update 2.3.1: «Comprobar módulo» con un firmware de la cincha seleccionado solo identifica el chip ESP32-C6 y su seguridad. Antes aplicaba la comprobación del ESP32-S3 y daba el error «no es un ESP32-S3 (chip id 13)».
+
+## 2026-10-25 — BACK 3.10.1 · App 2.3-wifi-dev9
+- **Medido en campo con BACK 3.9/3.10:** «Mensajes de calidad: rechazados por el receptor». El ZED respondió NAK al VALSET conjunto de NAV-SAT y NAV-SIG.
+- **3.10.1:**
+  - tras un NAK, prueba NAV-SAT solo y después NAV-SIG solo; si los dos se rechazan, repite el ciclo a los 30 s, hasta 2 veces;
+  - estados nuevos: 4 = solo NAV-SAT, 5 = solo NAV-SIG, 6 = reintento;
+  - el monitor muestra la línea `RECEPTOR: firmware …`, sacada del FWVER de MON-VER, para saber si el ZED tiene un firmware HPG antiguo;
+  - prueba en ordenador con un receptor sin NAV-SIG: 31 casos y 230 comprobaciones.
+- **App dev9:** muestra esos estados y los satélites usados/seguidos aunque falte NAV-SIG.
+- **Observado en la misma captura:** la cincha aparece conectada a través de la espalda (casilla «— %» en gris).

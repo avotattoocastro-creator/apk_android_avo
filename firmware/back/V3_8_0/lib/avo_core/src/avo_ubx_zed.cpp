@@ -165,6 +165,12 @@ void ZedManager::handle(const uint8_t* f, size_t n) {
   if (now_ - t0_ >= 25 || st_ == RUNNING) got_ubx_ = true;
   last_ubx_ms_ = now_;
   if (cls == UBX_CLS_ACK && plen >= 2 && pl[0] == UBX_CLS_CFG && pl[1] == UBX_ID_CFG_VALSET) ack_ = (id == UBX_ID_ACK_ACK) ? 1 : 2;
+  if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen >= 40) {   // V3.10.1: receiver firmware (FWVER=HPG x.yy)
+    for (size_t off = 40; off + 30 <= plen; off += 30) {
+      const char* e = (const char*)pl + off;
+      if (strncmp(e, "FWVER=", 6) == 0) { size_t k = 0; while (k < sizeof(fwver_) - 1 && k < 24 && e[6 + k] >= 32 && e[6 + k] < 127) { fwver_[k] = e[6 + k]; k++; } fwver_[k] = 0; }
+    }
+  }
   if (ucb_) ucb_(cls, id, pl, plen, uctx_);
 }
 
@@ -255,13 +261,14 @@ void ZedManager::send_tune(bool full) {
 }
 
 // V3.9.0: UBX-NAV-SAT + NAV-SIG once per second, own VALSET (a rejection never touches the rest).
-void ZedManager::send_monitor() {
+void ZedManager::send_monitor(uint8_t which) {
   uint32_t every = rate_ ? rate_ : 1;
   ZedKV kv[2];
-  kv[0] = {port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1, every};
-  kv[1] = {port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1, every};
+  size_t n = 0;
+  if (which & 1) kv[n++] = {port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1, every};
+  if (which & 2) kv[n++] = {port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1, every};
   uint8_t b[48];
-  size_t len = ubx_valset_ram(kv, 2, b, sizeof(b));
+  size_t len = ubx_valset_ram(kv, n, b, sizeof(b));
   ack_ = 0;
   io_->zed_write(b, len);
 }
@@ -286,7 +293,7 @@ void ZedManager::set_nav_rate(uint8_t hz, uint32_t now_ms) {
   uint8_t eff = hz;
   zed_gnss_for_rate(hz, &eff);
   rate_ = eff;
-  mon_ = 0; mon_t0_ = 0;   // V3.9.0: quality output follows the new rate (stays at 1 Hz)
+  mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0;   // V3.9.0: quality output follows the new rate
   if (st_ == RUNNING) { cfg_with_rate_ = true; go(CONFIGURE, now_ms); }
 }
 
@@ -399,15 +406,25 @@ void ZedManager::tick(uint32_t now_ms) {
     }
     case RUNNING: {
       // V3.9.0: quality messages, once, after the precision profile. Needs the fast UART (~2 KB/s more).
+      // Field (ZED with older firmware): the joint VALSET was NAKed -> each message alone, then a later retry.
       if (mon_ == 0 && port_ != 0) {
         if (baud_ < 115200) mon_ = 3;
-        else if (!mon_t0_) { send_monitor(); mon_t0_ = now_ms | 1; }
-        else if (ack_ == 1) mon_ = 1;
-        else if (ack_ == 2 || now_ms - mon_t0_ >= 800) mon_ = 2;
+        else if (!mon_t0_) { send_monitor(mon_try_); mon_t0_ = now_ms | 1; }
+        else if (ack_ == 1 || ack_ == 2 || now_ms - mon_t0_ >= 1000) {
+          bool ok = ack_ == 1;
+          if (ok) mon_ok_ |= mon_try_;
+          if (mon_try_ == 3 && !ok) { mon_try_ = 1; mon_t0_ = 0; }          // try NAV-SAT alone
+          else if (mon_try_ == 1) { mon_try_ = 2; mon_t0_ = 0; }            // then NAV-SIG alone
+          else {
+            mon_ = mon_ok_ == 3 ? 1 : mon_ok_ == 1 ? 4 : mon_ok_ == 2 ? 5 : 2;
+            if (mon_ == 2 && mon_rounds_ < 2) { mon_rounds_++; mon_try_ = 3; mon_t0_ = now_ms | 1; mon_ = 6; }   // retry in 30 s
+          }
+        }
       }
+      if (mon_ == 6 && now_ms - mon_t0_ >= 30000) { mon_ = 0; mon_t0_ = 0; mon_ok_ = 0; }
       uint32_t quiet = now_ms - last_ubx_ms_;
       if (quiet >= 1500 && dt >= 1000) { poll_ver(); t0_ = now_ms; }
-      if (quiet >= 5000) { cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }

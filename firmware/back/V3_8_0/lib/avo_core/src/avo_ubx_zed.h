@@ -115,8 +115,10 @@ class ZedManager {
   bool rate_applied() const { return rate_ok_; }
   // Precision profile: 0 not sent, 1 full (model + RTK fixed + constellations + masks), 2 reduced (model + RTK fixed), 3 rejected
   uint8_t tune_state() const { return tune_; }
-  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 enabled, 2 rejected, 3 skipped (UART too slow)
+  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 both enabled, 2 rejected, 3 skipped (UART too slow),
+  // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
   uint8_t monitor_state() const { return mon_; }
+  const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
   const ZedGnssSet& gnss_set() const { return set_; }
   void set_dyn_model(ZedDynModel m) { dyn_ = m; }
   ZedDynModel dyn_model() const { return dyn_; }
@@ -135,9 +137,10 @@ class ZedManager {
   void send_baud(uint8_t port, uint32_t baud);
   void send_config(bool with_rate);
   void send_tune(bool full);
-  void send_monitor();
-  uint8_t mon_ = 0;
+  void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
+  uint8_t mon_ = 0, mon_try_ = 3, mon_ok_ = 0, mon_rounds_ = 0;
   uint32_t mon_t0_ = 0;
+  char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;
   UbxCb ucb_ = nullptr;

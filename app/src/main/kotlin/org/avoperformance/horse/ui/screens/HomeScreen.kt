@@ -221,8 +221,15 @@ private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, s
             KV("C/N₀ media (mín–máx)", if (q.cnoMean > 0) "${q.cnoMean} dBHz (${q.cnoMin}–${q.cnoMax})" else null,
                 if (q.cnoMean in 1..34) AvoColors.Warn else AvoColors.Text)
             KV("Señales débiles (< 30 dBHz)", q.sigWeak.toString(), if (q.sigWeak > q.sigTracked / 3) AvoColors.Warn else AvoColors.Text)
-        } else if (q.qualityMon == 2) KV("Mensajes de calidad", "rechazados por el receptor", AvoColors.Warn)
-        else if (q.qualityMon == 3) KV("Mensajes de calidad", "UART del receptor demasiado lenta", AvoColors.Warn)
+        } else {
+            when (q.qualityMon) {
+                2 -> KV("Mensajes de calidad", "rechazados por el receptor", AvoColors.Warn)
+                3 -> KV("Mensajes de calidad", "UART del receptor demasiado lenta", AvoColors.Warn)
+                4 -> KV("Mensajes de calidad", "solo NAV-SAT (el firmware del receptor no admite NAV-SIG)", AvoColors.Warn)
+                6 -> KV("Mensajes de calidad", "rechazados; reintentando", AvoColors.Warn)
+            }
+            if (q.svTracked > 0) KV("Satélites usados / seguidos", "${q.svUsed} / ${q.svTracked}")
+        }
         KV("Precisión de la velocidad", if (q.sAccMmS > 0) String.format(es, "%.2f km/h", q.sAccMmS * 0.0036) else null)
         KV("PDOP", if (q.pdopE2 > 0) String.format(es, "%.2f", q.pdopE2 / 100.0) else null)
         KV("Primer RTK FIX", q.firstFixS?.let { "a los ${it / 60} min ${it % 60} s del arranque" } ?: "todavía no")

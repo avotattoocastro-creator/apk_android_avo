@@ -174,11 +174,12 @@ static void print_status() {
   {  // V3.9.0: GNSS quality (NAV-SAT/NAV-SIG) and RTK FIX tracking
     const GnssQuality& q = core->quality();
     BackStatus bs = core->status();
-    static const char* mon[] = {"pendiente", "OK", "RECHAZADO", "UART lenta"};
+    static const char* mon[] = {"pendiente", "OK", "RECHAZADO", "UART lenta", "solo NAV-SAT", "solo NAV-SIG", "reintento", "?"};
     Serial.printf("  CALIDAD: sat %u/%u usados | senales %u (usadas %u, fase %u, corregidas %u) | 2a banda L2/E5b/B2 %u%s | C/N0 media %u min %u max %u | debiles %u | NAV-SIG %s hace %u s\n",
                   q.sv_used, q.sv_tracked, q.sig_tracked, q.sig_used, q.sig_cr_used, q.sig_corr, q.sig_l2,
                   (q.have_sig && q.sig_l2 == 0) ? " (ANTENA SOLO L1: sin RTK FIX)" : "", q.cno_mean, q.cno_min, q.cno_max,
-                  q.sig_weak, mon[bs.quality_mon & 3], (unsigned)bs.quality_age_s);
+                  q.sig_weak, mon[bs.quality_mon & 7], (unsigned)bs.quality_age_s);
+    Serial.printf("  RECEPTOR: firmware %s\n", core->zed().receiver_fw()[0] ? core->zed().receiver_fw() : "(sin leer)");
     Serial.printf("  RTK: FIX %lu s, FLOAT %lu s, perdidas de FIX %u, primer FIX %s%u s\n", (unsigned long)(bs.fixed_ms / 1000),
                   (unsigned long)(bs.float_ms / 1000), bs.fix_lost, bs.ttff_fix_s == 0xFFFF ? "aun no " : "a los ",
                   bs.ttff_fix_s == 0xFFFF ? 0u : (unsigned)bs.ttff_fix_s);
