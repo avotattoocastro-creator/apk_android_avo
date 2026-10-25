@@ -428,6 +428,7 @@ static void do_stop(StopReason why) {
   s_stop_req = false;
   bb::log(BbCode::SHUTDOWN, 0, 0x57, (uint32_t)why, "wifi off");
   Serial.printf("[AVO WIFI] off (%s), %u B served\n", stop_reason_text(why), (unsigned)s_bytes);
+  ui::resume_after_wifi();
 }
 
 static StartResult do_start(Credentials* out) {
@@ -443,6 +444,7 @@ static StartResult do_start(Credentials* out) {
   uint32_t off = 0;
   if (sys::nvs_get_u32("wifi_off", &off) && off) { unlock(); return StartResult::RADIO_ERROR; }
   // rc2: enough internal memory for the AP + HTTP server (field 3.7.4-rc1: reboot when starting)
+  ui::pause_for_wifi();   // 3.7.5-rc4: screen paused while the AP is on (resumed in do_stop / on refusal)
   size_t freeb = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   size_t largest = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   Serial.printf("[AVO WIFI] start: internal=%u largest=%u\n", (unsigned)freeb, (unsigned)largest);
@@ -452,6 +454,7 @@ static StartResult do_start(Credentials* out) {
   }
   if (freeb < MIN_INTERNAL_FREE || largest < MIN_INTERNAL_BLOCK) {
     bb::log(BbCode::SHUTDOWN, 1, 0x57, (uint32_t)freeb, "wifi: low internal RAM");
+    ui::resume_after_wifi();
     unlock();
     return StartResult::RADIO_ERROR;
   }

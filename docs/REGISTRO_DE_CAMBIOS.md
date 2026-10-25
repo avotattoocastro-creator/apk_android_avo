@@ -480,3 +480,13 @@ Petición del usuario.
   - mínimo del AP bajado a 16/8 KB;
   - el monitor muestra `[AVO STACK]` con la pila libre de cada tarea al pedir el Wi-Fi.
 - Sin verificar físicamente.
+
+## 2026-10-25 — CHEST 3.7.5-rc4: pantalla en pausa durante el Wi-Fi
+- Autorizado por el usuario: durante la descarga por Wi-Fi (nunca durante una grabación) se pueden parar la pantalla, la telemetría y el enlace con la espalda.
+- **Implementado en la rc4:**
+  - Al encender el AP, la pantalla muestra «DESCARGA WI-FI» fija. La tarea de la UI termina y se libera su búfer DMA (unos 7 KB).
+  - Al apagar el Wi-Fi, o si el reloj lo rechaza, se recrean el búfer y la tarea y se repinta todo.
+  - Monitor: `[AVO UI] paused/resumed`.
+- **No se ha parado el enlace con la espalda:** sus tareas solo devuelven RAM si se borran, y borrarlas en marcha es arriesgado. Lo que se ha hecho es reducir sus pilas, que es lo de la entrada anterior.
+- Se ha eliminado el workflow de la 3.7.4-rc2: `wifi_sync.cpp` ahora necesita las funciones de la UI de la 3.7.5, y la 3.7.5 sustituye a la 3.7.4.
+- Sin verificar físicamente.

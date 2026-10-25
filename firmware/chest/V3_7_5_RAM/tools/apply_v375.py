@@ -59,6 +59,59 @@ patch(f"{SRC}/controller.cpp",
       'xTaskCreatePinnedToCore(task, "ctl", 8192, nullptr, 8, &g_task_handles[TID_CTRL], 1);',
       'xTaskCreatePinnedToCore(task, "ctl", 6144, nullptr, 8, &g_task_handles[TID_CTRL], 1);   // V3.7.5-rc4: 8192 → 6144')
 
+# 3d. rc4: screen paused while the Wi-Fi AP is on (the watch is never recording then). The UI task draws a fixed
+#     "DESCARGA WI-FI" notice, deletes itself and its DMA transfer buffer is freed (~4 KB stack + ~3 KB buffer);
+#     when Wi-Fi turns off, the buffer is allocated again and the task recreated with a full repaint.
+patch(f"{SRC}/services.h", "void home_screen();\n}  // namespace ui",
+      "void home_screen();\nvoid pause_for_wifi();      // V3.7.5-rc4: free UI RAM while the Wi-Fi AP is on\nvoid resume_after_wifi();\n}  // namespace ui")
+patch(f"{SRC}/ui.cpp", "  fb.attach(pixels, line, line_px, UI_ROTATE_180);\n",
+      "  fb.attach(pixels, line, line_px, UI_ROTATE_180);\n  s_pixels = pixels; s_line = line;   // V3.7.5-rc4: kept for pause/resume around Wi-Fi\n")
+patch(f"{SRC}/ui.cpp", "static UiFb fb;\n",
+      "static UiFb fb;\nstatic volatile bool s_pause_req = false, s_paused = false;   // V3.7.5-rc4\nstatic uint16_t* s_pixels = nullptr;\nstatic uint16_t* s_line = nullptr;\n")
+patch(f"{SRC}/ui.cpp", "  bool special_screen = false;\n  for (;;) {\n",
+      """  bool special_screen = false;
+  for (;;) {
+    if (s_pause_req) {   // V3.7.5-rc4: Wi-Fi download → fixed notice, then the task ends (RAM back to Wi-Fi)
+      if (display_on) {
+        gfx->fillScreen(0x0000);
+        gfx->setRotation(UI_ROTATE_180 ? 2 : 0);
+        gfx->setTextColor(0xFFFF, 0x0000); gfx->setTextSize(3);
+        gfx->setCursor(80, LCD_HEIGHT / 2 - 12); gfx->print("DESCARGA WI-FI");
+        gfx->setRotation(0);
+      }
+      snap->~AppSnapshot(); heap_caps_free(snap);
+      g_task_handles[TID_UI] = nullptr;
+      s_paused = true;
+      vTaskDelete(nullptr);
+      return;
+    }
+""")
+patch(f"{SRC}/ui.cpp", "} // namespace ui", r"""void pause_for_wifi() {
+  if (s_paused || !g_task_handles[TID_UI]) return;
+  s_pause_req = true;
+  for (int i = 0; i < 40 && !s_paused; i++) vTaskDelay(pdMS_TO_TICKS(25));
+  if (!s_paused) { s_pause_req = false; return; }
+  if (s_line) { heap_caps_free(s_line); s_line = nullptr; }
+  Serial.printf("[AVO UI] paused for Wi-Fi: internal=%u largest=%u\n",
+    (unsigned)heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT),
+    (unsigned)heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT));
+}
+void resume_after_wifi() {
+  if (!s_paused) return;
+  size_t px = (size_t)UiFb::W * 4;
+  auto* l = static_cast<uint16_t*>(heap_caps_malloc(px * 2, MALLOC_CAP_INTERNAL | MALLOC_CAP_DMA | MALLOC_CAP_8BIT));
+  if (!l) { px = (size_t)UiFb::W * 2; l = static_cast<uint16_t*>(heap_caps_malloc(px * 2, MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT)); }
+  if (!l) { Serial.println("[AVO UI] resume: no RAM for the transfer buffer"); return; }
+  s_line = l;
+  fb.attach(s_pixels, l, px, UI_ROTATE_180);
+  for (auto& v : old_state) v = UINT32_MAX;
+  shown = Shown::NONE; charge_screen = false; invalidate_cards();
+  s_pause_req = false; s_paused = false;
+  BaseType_t ok = xTaskCreatePinnedToCore(task, "ui_lite", 4096, nullptr, 2, &g_task_handles[TID_UI], 0);
+  Serial.printf("[AVO UI] resumed after Wi-Fi: task=%s\n", ok == pdPASS ? "OK" : "FAIL");
+}
+} // namespace ui""")
+
 # 4. memory at the end of boot (monitor)
 patch(f"{SRC}/app_main.cpp",
       '  Serial.printf("[AVO] build fingerprint %s\\n", AVO_BUILD_FINGERPRINT);',
