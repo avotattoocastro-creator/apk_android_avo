@@ -599,3 +599,8 @@ Petición del usuario.
   - prueba en ordenador con un receptor sin NAV-SIG: 31 casos y 230 comprobaciones.
 - **App dev9:** muestra esos estados y los satélites usados/seguidos aunque falte NAV-SIG.
 - **Observado en la misma captura:** la cincha aparece conectada a través de la espalda (casilla «— %» en gris).
+
+## 2026-10-26 — Cincha: concepto de caja REV 0 y placa de probetas
+- En `hardware/girth/REV0/`: imágenes del concepto (escena three.js `scene.html`) y `AVO_GIRTH_PROBETAS_REV0.stl`, generada con `probetas.py` en PETG para la Centauri Carbon.
+- **Probetas:** cuna de la batería, BNO085 con 2 postes M2, ESP32-C6 con holguras de 0,10, 0,20 y 0,30, bobina y placa Qi, canal del reed e imanes Ø6 (a presión y deslizante).
+- Medidas tomadas de los anuncios; la posición de los taladros del BNO085 es provisional.

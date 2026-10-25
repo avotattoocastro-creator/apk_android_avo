@@ -1,0 +1,336 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;background:#0d0e12;overflow:hidden;font-family:Helvetica,Arial,sans-serif}
+  #title{position:absolute;left:28px;top:20px;color:#f2f2f4;font-size:26px;font-weight:700;letter-spacing:1px}
+  #title span{color:#ed122a}
+  #sub{position:absolute;left:28px;top:56px;color:#9c9da4;font-size:15px}
+  .lbl{position:absolute;color:#f2f2f4;font-size:14px;background:rgba(16,16,20,.85);border-left:3px solid #ed122a;padding:3px 8px;white-space:nowrap}
+  svg{position:absolute;left:0;top:0}
+</style>
+<script type="importmap">{"imports":{"three":"./three/build/three.module.js","three/addons/":"./three/examples/jsm/"}}</script>
+</head><body>
+<div id="title"></div><div id="sub"></div>
+<svg id="lines" width="1600" height="1000"></svg>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+const W = 1600, H = 1000;
+const view = new URLSearchParams(location.search).get('v') || 'hero';
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H); renderer.setPixelRatio(1);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.localClippingEnabled = true;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0e12);
+const camera = new THREE.PerspectiveCamera(30, W / H, 1, 2000);
+
+scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x202024, 0.9));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(80, -120, 160); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -120, right: 120, top: 120, bottom: -120, near: 1, far: 600 });
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xffd0d4, 0.35); rim.position.set(-120, 120, 60); scene.add(rim);
+const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(-60, -40, 40); scene.add(fill);
+
+// ---------------- materials
+const M = (c, r = 0.5, m = 0, extra = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: r, metalness: m, ...extra });
+const shellMat = M(0x16171c, 0.42, 0.05);             // matte black PETG / PA
+const accent = M(0xed122a, 0.35, 0.1);                // AVO red
+const mountMat = M(0x2a2c33, 0.6);
+const pcbBlack = M(0x111111, 0.5), pcbPurple = M(0x5a2a8a, 0.5), pcbGreen = M(0x1d7a3a, 0.5);
+const metal = M(0xc9cbd1, 0.25, 0.9), gold = M(0xd9a441, 0.3, 0.9), copper = M(0xc8743e, 0.35, 0.8);
+const ferrite = M(0x0a0a0a, 0.8), battery = M(0xbfc3c9, 0.35, 0.6), batteryTape = M(0xd98a1c, 0.5);
+const magnetMat = M(0xd9dde3, 0.2, 0.95), tpu = M(0x2b2d33, 0.85), chip = M(0x1a1a1a, 0.4);
+const glass = M(0x111111, 0.3, 0, { transparent: true, opacity: 0.18, depthWrite: false });
+
+// ---------------- helpers
+function rrShape(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s;
+}
+function slab(w, h, t, r, bevel, mat) {           // rounded plate, Z 0..t
+  const b = Math.min(bevel, t / 2 - 0.01);
+  const g = new THREE.ExtrudeGeometry(rrShape(w - 2 * b, h - 2 * b, Math.max(r - b, 0.5)), { depth: t - 2 * b, bevelEnabled: b > 0, bevelThickness: b, bevelSize: b, bevelSegments: 6, curveSegments: 24 });
+  g.translate(0, 0, b);
+  const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; return m;
+}
+function box(w, h, t, mat, r = 0.3) {
+  const m = new THREE.Mesh(new RoundedBoxGeometry(w, h, t, 2, Math.min(r, t / 2 - 0.01, w / 2 - 0.01, h / 2 - 0.01)), mat);
+  m.castShadow = m.receiveShadow = true; return m;
+}
+function at(o, x, y, z) { o.position.set(x, y, z); return o; }
+function ring(wo, ho, wi, hi, t, ro, ri, mat) {     // rounded frame
+  const s = rrShape(wo, ho, ro); s.holes.push(rrShape(wi, hi, ri));
+  const g = new THREE.ExtrudeGeometry(s, { depth: t, bevelEnabled: false, curveSegments: 20 });
+  const m = new THREE.Mesh(g, mat); m.castShadow = m.receiveShadow = true; return m;
+}
+
+// ---------------- dimensions (mm). P = provisional, from listings / to measure
+const D = {
+  pod: { L: 62, Wd: 46, base: 9.6, lid: 5.6, r: 11, wall: 2.0, floor: 1.0 },
+  coil: { L: 40, W: 29, t: 1.2 },          // P: 5 W Qi receiver coil with ferrite
+  qi: { L: 22, W: 17, t: 3.0 },            // P: receiver PCBA
+  bat: { L: 48, W: 30, t: 4.0 },           // LP403048 (4.0 x 30 x 48)
+  xiao: { L: 21, W: 17.8, t: 1.0 },        // XIAO-format ESP32-C6 PCB
+  bno: { L: 27, W: 20, t: 1.6 },           // P: GY-BNO085 PCB
+  reed: { L: 14, d: 2.6 },                 // P: plastic-body reed switch
+  mag: { d: 10, t: 3 },                    // P: disc magnet
+};
+const P = D.pod, H0 = P.base + P.lid;
+const zBat = P.floor + D.coil.t + 0.4, zTray = zBat + D.bat.t + 0.4, zBoard = zTray + 0.8;
+
+// ---------------- pod shell
+function podBase(hollow = false) {
+  const g = new THREE.Group();
+  if (!hollow) g.add(slab(P.L, P.Wd, P.base + 2.5, P.r, 2.6, shellMat));   // closed views
+  else {
+    g.add(slab(P.L, P.Wd, P.floor + 2.6, P.r, 2.6, shellMat));              // floor with the outer fillet
+    g.add(at(ring(P.L - 0.05, P.Wd - 0.05, P.L - 2 * P.wall, P.Wd - 2 * P.wall, P.base - 2.6, P.r, P.r - P.wall, shellMat), 0, 0, 2.6));
+  }
+  // red seam ring (accent band between base and lid)
+  const band = ring(P.L + 0.25, P.Wd + 0.25, P.L - 1.2, P.Wd - 1.2, 0.9, P.r, P.r - 0.6, accent); at(band, 0, 0, P.base); g.add(band);
+  // USB-C port with TPU plug on the +X short side
+  const plug = box(3.4, 10.5, 4.6, tpu, 1.6); at(plug, P.L / 2 + 0.2, 10, zBoard + 1.9); g.add(plug);
+  return g;
+}
+function podLid(withLogo = true, hollow = false) {
+  const g = new THREE.Group();
+  if (!hollow) { const lid = slab(P.L, P.Wd, P.lid + 2.6, P.r, 3.0, shellMat); at(lid, 0, 0, P.base + 0.9 - 2.6); g.add(lid); }
+  else {
+    const top = slab(P.L, P.Wd, 5.6, P.r, 3.0, shellMat); at(top, 0, 0, H0 + 0.9 - 5.6); g.add(top);
+    g.add(at(ring(P.L - 0.05, P.Wd - 0.05, P.L - 2 * P.wall, P.Wd - 2 * P.wall, P.lid - 2.6 + 0.9, P.r, P.r - P.wall, shellMat), 0, 0, P.base));
+  }
+  if (withLogo && window.FONT) {
+    const tg = new TextGeometry('AVO', { font: window.FONT, size: 8, height: 0.5, curveSegments: 6 });
+    tg.computeBoundingBox(); const bb = tg.boundingBox;
+    tg.translate(-(bb.max.x + bb.min.x) / 2, -(bb.max.y + bb.min.y) / 2, 0);
+    const t = new THREE.Mesh(tg, accent); at(t, -4, 3, H0 + 0.9 - 0.05); g.add(t);
+    const t2g = new TextGeometry('GIRTH', { font: window.FONT, size: 3.0, height: 0.4, curveSegments: 4 });
+    t2g.computeBoundingBox(); const b2 = t2g.boundingBox; t2g.translate(-(b2.max.x + b2.min.x) / 2, 0, 0);
+    const t2 = new THREE.Mesh(t2g, M(0x9c9da4, 0.4)); at(t2, -4, -8, H0 + 0.9 - 0.05); g.add(t2);
+    // status light pipe
+    const led = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 0.6, 24), M(0x52dd40, 0.3, 0, { emissive: 0x2a8a20, emissiveIntensity: 1.2 }));
+    led.rotation.x = Math.PI / 2; at(led, 22, -12, H0 + 0.9 - 0.1); g.add(led);
+  }
+  return g;
+}
+
+// ---------------- components
+function coil() {
+  const g = new THREE.Group();
+  g.add(at(box(D.coil.L, D.coil.W, 0.5, ferrite, 1.5), 0, 0, 0.25));
+  const r = ring(D.coil.L - 1, D.coil.W - 1, D.coil.L - 13, D.coil.W - 13, 0.7, 6, 2, copper); at(r, 0, 0, 0.5); g.add(r);
+  return g;
+}
+function batteryPack() {
+  const g = new THREE.Group();
+  g.add(at(box(D.bat.L, D.bat.W, D.bat.t, battery, 1.2), 0, 0, D.bat.t / 2));
+  g.add(at(box(5, D.bat.W + 0.1, D.bat.t + 0.1, batteryTape, 0.8), D.bat.L / 2 - 2.5, 0, D.bat.t / 2));
+  return g;
+}
+function xiao() {
+  const g = new THREE.Group();
+  g.add(at(box(D.xiao.L, D.xiao.W, 1.0, pcbBlack, 1.5), 0, 0, 0.5));
+  g.add(at(box(12.5, 13.5, 2.2, metal, 0.4), -1.5, 0, 2.1));                 // RF shield (ESP32-C6 module)
+  g.add(at(box(7.4, 9.0, 3.2, metal, 1.4), D.xiao.L / 2 - 2.2, 0, 2.6));     // USB-C (to the +X wall)
+  for (let i = 0; i < 7; i++) for (const s of [-1, 1]) g.add(at(box(1.6, 1.0, 0.1, gold, 0.05), -D.xiao.L / 2 + 2 + i * 2.54, s * (D.xiao.W / 2 - 0.6), 1.05));
+  g.add(at(box(2.5, 2.5, 1.2, gold, 0.3), -D.xiao.L / 2 + 1.6, -5, 1.6));    // U.FL
+  return g;
+}
+function bno() {
+  const g = new THREE.Group();
+  g.add(at(box(D.bno.L, D.bno.W, D.bno.t, pcbPurple, 1.0), 0, 0, D.bno.t / 2));
+  g.add(at(box(5.2, 3.8, 1.1, chip, 0.2), 1, 1, D.bno.t + 0.55));           // BNO085
+  for (const x of [-D.bno.L / 2 + 3, D.bno.L / 2 - 3]) {
+    const h = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.6, D.bno.t + 0.05, 24), gold); h.rotation.x = Math.PI / 2; at(h, x, D.bno.W / 2 - 3, D.bno.t / 2); g.add(h);
+  }
+  return g;
+}
+function qiBoard() {
+  const g = new THREE.Group();
+  g.add(at(box(D.qi.L, D.qi.W, 1.0, pcbGreen, 0.8), 0, 0, 0.5));
+  g.add(at(box(4, 4, 1.0, chip, 0.2), 2, 0, 1.5));
+  for (let i = 0; i < 6; i++) g.add(at(box(1.6, 0.8, 0.9, M(0x8a6a3a, 0.4)), -6 + (i % 3) * 2.4, -4 + Math.floor(i / 3) * 8, 1.45));
+  return g;
+}
+function reed() {
+  const g = new THREE.Group();
+  const b = box(D.reed.L, D.reed.d, D.reed.d, M(0x151515, 0.6), 0.5); g.add(b);
+  for (const s of [-1, 1]) { const w = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 4, 8), gold); w.rotation.z = Math.PI / 2; at(w, s * (D.reed.L / 2 + 2), 0, 0); g.add(w); }
+  return g;
+}
+function fpcAntenna() { return box(30, 6, 0.3, M(0xd28a2a, 0.5), 0.1); }
+
+// interior retention (printed as part of base / tray)
+function interiorParts() {
+  const g = new THREE.Group();
+  // coil pocket + battery cradle walls (part of the base)
+  g.add(at(ring(D.coil.L + 2.4, D.coil.W + 2.4, D.coil.L + 0.3, D.coil.W + 0.3, D.coil.t, 2, 1.5, shellMat), -3, 0, P.floor));
+  g.add(at(ring(D.bat.L + 2.6, D.bat.W + 2.6, D.bat.L + 0.4, D.bat.W + 0.4, D.bat.t, 2.2, 1.4, shellMat), -3, 0, zBat));
+  // reed channel (side of the battery, close to the floor = close to the magnet)
+  g.add(at(box(D.reed.L + 2, 4.2, 4.2, shellMat, 0.6), -3, -D.bat.W / 2 - 4.2, P.floor + 2.1));
+  // tray (snap-in plate) with pockets for XIAO, Qi board and BNO085
+  const tray = ring(P.L - 2 * P.wall - 0.4, P.Wd - 2 * P.wall - 0.4, 6, 6, 0.8, P.r - P.wall, 1, M(0x24262c, 0.5));
+  at(tray, 0, 0, zTray); g.add(tray);
+  const trayPlate = slab(P.L - 2 * P.wall - 0.6, P.Wd - 2 * P.wall - 0.6, 0.8, P.r - P.wall, 0, M(0x24262c, 0.5)); at(trayPlate, 0, 0, zTray); g.add(trayPlate);
+  const pocketMat = M(0x2e3037, 0.5);
+  g.add(at(ring(D.xiao.L + 2.4, D.xiao.W + 2.4, D.xiao.L + 0.2, D.xiao.W + 0.2, 1.2, 1.6, 1.4, pocketMat), 16.5, 10.5, zBoard));
+  g.add(at(ring(D.qi.L + 2.4, D.qi.W + 2.4, D.qi.L + 0.2, D.qi.W + 0.2, 1.2, 1.6, 1.0, pocketMat), -11.5, 10.5, zBoard));
+  g.add(at(ring(D.bno.L + 2.4, D.bno.W + 2.4, D.bno.L + 0.2, D.bno.W + 0.2, 1.2, 1.6, 1.2, pocketMat), -3, -10.5, zBoard));
+  // M2 screw bosses for the IMU (rigid: no foam under the sensor)
+  for (const x of [-3 - D.bno.L / 2 + 3, -3 + D.bno.L / 2 - 3]) {
+    const s = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 1.4, 16), metal); s.rotation.x = Math.PI / 2; at(s, x, -10.5 + D.bno.W / 2 - 3, zBoard + D.bno.t + 0.7); g.add(s);
+  }
+  return g;
+}
+function components() {
+  const g = new THREE.Group();
+  g.add(at(coil(), -3, 0, P.floor));
+  g.add(at(batteryPack(), -3, 0, zBat));
+  g.add(at(xiao(), 16.5, 10.5, zBoard));
+  g.add(at(qiBoard(), -11.5, 10.5, zBoard));
+  g.add(at(bno(), -3, -10.5, zBoard));
+  g.add(at(reed(), -3, -D.bat.W / 2 - 4.2, P.floor + 2.1));
+  g.add(at(fpcAntenna(), 8, 10, H0 - 1.4));
+  return g;
+}
+
+// ---------------- mount (girth cradle)
+function mount() {
+  const g = new THREE.Group();
+  const Lm = P.L + 14, Wm = P.Wd + 8;
+  const plate = slab(Lm, Wm, 3.2, P.r + 4, 1.2, mountMat); at(plate, 0, 0, -3.2); g.add(plate);
+  // side rails (cradle walls)
+  g.add(at(ring(P.L + 6, P.Wd + 6, P.L + 0.6, P.Wd + 0.6, 5.0, P.r + 3, P.r + 0.3, mountMat), 0, 0, -0.2));
+  // strap slots (38 mm webbing) at both short ends
+  for (const s of [-1, 1]) {
+    const bar = box(4.5, Wm - 6, 4.0, mountMat, 1.5); at(bar, s * (Lm / 2 + 3.5), 0, -1.6); g.add(bar);
+    const side1 = box(8, 3, 4.0, mountMat, 1.0); at(side1, s * (Lm / 2 + 0.5), (Wm - 6) / 2 - 1.5, -1.6); g.add(side1);
+    const side2 = box(8, 3, 4.0, mountMat, 1.0); at(side2, s * (Lm / 2 + 0.5), -(Wm - 6) / 2 + 1.5, -1.6); g.add(side2);
+  }
+  // release latch (red) on +X end
+  g.add(at(box(3, 14, 6.5, accent, 1.0), P.L / 2 + 3.6, -6, 2.0));
+  // magnet under the reed switch
+  const mg = new THREE.Mesh(new THREE.CylinderGeometry(D.mag.d / 2, D.mag.d / 2, D.mag.t, 32), magnetMat); mg.rotation.x = Math.PI / 2;
+  at(mg, -3, -D.bat.W / 2 - 4.2, -1.8); g.add(mg);
+  return g;
+}
+function strap() {
+  const g = new THREE.Group();
+  const s = box(160, 38, 1.6, M(0x3a3326, 0.95), 0.5); at(s, 0, 0, -6); g.add(s);
+  return g;
+}
+
+// ---------------- labels (projected)
+const labels = [];
+function label(text, p3, dx, dy) { labels.push({ text, p3: new THREE.Vector3(...p3), dx, dy }); }
+function drawLabels() {
+  const svg = document.getElementById('lines');
+  for (const l of labels) {
+    const v = l.p3.clone().project(camera);
+    const x = (v.x + 1) / 2 * W, y = (1 - v.y) / 2 * H;
+    const tx = x + l.dx, ty = y + l.dy;
+    const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    ln.setAttribute('x1', x); ln.setAttribute('y1', y); ln.setAttribute('x2', tx); ln.setAttribute('y2', ty);
+    ln.setAttribute('stroke', '#ed122a'); ln.setAttribute('stroke-width', '1.5'); svg.appendChild(ln);
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.setAttribute('r', 3); dot.setAttribute('fill', '#ed122a'); svg.appendChild(dot);
+    const d = document.createElement('div'); d.className = 'lbl'; d.textContent = l.text;
+    d.style.left = (l.dx < 0 ? tx - 8 : tx + 8) + 'px'; d.style.top = (ty - 12) + 'px';
+    if (l.dx < 0) d.style.transform = 'translateX(-100%)';
+    document.body.appendChild(d);
+  }
+}
+function setTitle(t, s) { document.getElementById('title').innerHTML = t; document.getElementById('sub').textContent = s; }
+function look(pos, target) { camera.position.set(...pos); camera.up.set(0, 0, 1); camera.lookAt(new THREE.Vector3(...target)); camera.updateMatrixWorld(); }
+function ground(z = -8) {
+  const g = new THREE.Mesh(new THREE.PlaneGeometry(1200, 1200), new THREE.ShadowMaterial({ opacity: 0.45 }));
+  g.position.z = z; g.receiveShadow = true; scene.add(g);
+}
+
+// ---------------- views
+new FontLoader().load('./three/examples/fonts/helvetiker_bold.typeface.json', (font) => {
+  window.FONT = font;
+  if (view === 'hero') {
+    setTitle('AVO <span>GIRTH</span> · módulo de cincha', 'Concepto REV 0 · cápsula 62 × 46 × 15,2 mm sobre su soporte de cincha');
+    scene.add(strap()); scene.add(mount());
+    const pod = new THREE.Group(); pod.add(podBase(), podLid()); scene.add(pod);
+    ground(-7);
+    look([95, -120, 95], [0, 0, 2]);
+  } else if (view === 'pod') {
+    setTitle('AVO <span>GIRTH</span> · cápsula', 'Se saca del soporte para cargar en una base Qi · USB-C con tapón TPU solo para actualizar');
+    const pod = new THREE.Group(); pod.add(podBase(), podLid()); scene.add(pod);
+    ground(-0.5);
+    look([-80, -95, 70], [0, 0, 6]);
+    label('Logo AVO en relieve', [-4, 3, H0 + 1], -260, -120);
+    label('Luz de estado (LED por guía de luz)', [22, -12, H0 + 1], 160, -160);
+    label('Línea roja de cierre (junta)', [-P.L / 2 + 4, -P.Wd / 2 + 6, P.base + 0.5], -200, 90);
+    label('USB-C con tapón TPU (actualización)', [P.L / 2, 10, zBoard + 2], 140, -60);
+  } else if (view === 'exploded') {
+    setTitle('AVO <span>GIRTH</span> · vista explosionada', 'De abajo arriba: bobina Qi → batería → bandeja → placas → antena → tapa');
+    const g = new THREE.Group();
+    const base = podBase(true); g.add(base);
+    const ip = interiorParts(); g.add(ip);
+    const c = components();
+    const off = [0, 12, 24, 40, 40, 40, 6, 58];
+    c.children.forEach((o, i) => { o.position.z += [4, 11, 24, 24, 24, 1, 36][i]; });
+    ip.children.forEach((o, i) => { if (i >= 3) o.position.z += 20; });
+    g.add(c);
+    const lid = podLid(true, true); lid.position.z += 46; lid.rotation.x = 0; g.add(lid);
+    scene.add(g);
+    ground(-3);
+    look([150, -190, 150], [0, 0, 24]);
+    label('Tapa (PA12 / PETG negro mate)', [-20, -10, H0 + 47], -240, -40);
+    label('Antena FPC 2,4 GHz (lejos de la batería)', [8, 10, H0 + 35], 170, -70);
+    label('ESP32-C6 (XIAO)', [16.5, 10.5, zBoard + 26], 190, 10);
+    label('Receptor Qi 5 W', [-11.5, 10.5, zBoard + 26], -230, -40);
+    label('IMU BNO085 · 2 × M2 a la bandeja', [-3, -10.5, zBoard + 26], -260, 40);
+    label('Batería LiPo 403048 500 mAh', [-3, -10, zBat + 13], 230, 40);
+    label('Bobina Qi con ferrita (cara inferior)', [-3, -10, P.floor + 4.5], 220, 70);
+    label('Interruptor reed (cerca del imán)', [-3, -D.bat.W / 2 - 4.2, P.floor + 4], -250, 60);
+  } else if (view === 'section') {
+    setTitle('AVO <span>GIRTH</span> · sección', 'Corte por Y = −6 mm: cada pieza en su alojamiento, sin holguras');
+    const clip = [new THREE.Plane(new THREE.Vector3(0, 1, 0), 6)];
+    const g = new THREE.Group(); g.add(podBase(true), podLid(false, true), interiorParts(), components());
+    g.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = clip; o.material.clipShadows = true; o.material.side = THREE.DoubleSide; } });
+    scene.add(g); scene.add(mount());
+    ground(-7);
+    renderer.toneMappingExposure = 1.9; look([10, -125, 22], [0, 0, 5]);
+    label('Tapa 2,6 mm', [-20, -6, H0 - 0.5], -120, -110);
+    label('IMU atornillada a la bandeja', [-8, -6, zBoard + 1], -150, -150);
+    label('Bandeja encajada (0,8 mm)', [12, -6, zTray + 0.4], 160, -110);
+    label('Batería en cuna con 0,2 mm por lado', [5, -6, zBat + 2], 200, -40);
+    label('Bobina Qi en el fondo: carga a < 3 mm', [-15, -6, P.floor + 0.6], -200, 70);
+    label('Imán del soporte bajo el reed', [-3, -6, -1.8], 120, 110);
+  } else if (view === 'layout') {
+    setTitle('AVO <span>GIRTH</span> · distribución interior', 'Vista superior sin tapa · capa de placas sobre la batería');
+    const g = new THREE.Group(); g.add(podBase(true), interiorParts(), components()); scene.add(g);
+    g.children[2].children[6].visible = false; // antenna hidden (on the lid)
+    ground(-0.5);
+    look([0, -30, 190], [0, 0, 0]);
+    label('ESP32-C6 · USB-C a la pared', [16.5, 10.5, zBoard + 2], 120, -140);
+    label('Receptor Qi', [-11.5, 10.5, zBoard + 2], -140, -140);
+    label('BNO085 centrado (ejes alineados con la cápsula)', [-3, -10.5, zBoard + 2], 40, 190);
+    label('Reed (bajo la bandeja, junto al fondo)', [-3, -19, P.floor + 2], -220, 120);
+  } else if (view === 'mount') {
+    setTitle('AVO <span>GIRTH</span> · soporte de cincha', 'Pasos para cinta de 38 mm · imán Ø10 bajo el reed · pestaña roja para soltar la cápsula');
+    scene.add(mount()); scene.add(strap());
+    ground(-7);
+    look([-90, -110, 110], [0, 0, -2]);
+    label('Imán: con la cápsula puesta → encendida', [-3, -D.bat.W / 2 - 4.2, -1], -220, -150);
+    label('Pestaña de liberación', [P.L / 2 + 3.6, -6, 5], 120, -120);
+    label('Paso para la cinta (38 mm)', [-(P.L + 14) / 2 - 3.5, 0, 0], -180, 110);
+  }
+  renderer.render(scene, camera);
+  drawLabels();
+  window.READY = true;
+});
+</script></body></html>
