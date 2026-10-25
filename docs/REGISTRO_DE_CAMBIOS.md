@@ -494,3 +494,9 @@ Petición del usuario.
 ## 2026-10-25 — App 2.3-wifi-dev4: HTTP permitido solo hacia el AP del reloj
 - **Prueba de campo con la 3.7.5-rc4:** el reloj encendió el AP y Android se conectó, pero la descarga falló con «Cleartext HTTP traffic to 192.168.4.1 not permitted».
 - **Cambio:** `network_security_config` permite HTTP sin cifrar únicamente a `192.168.4.1`, que es el AP local del reloj. El acceso va con un token de sesión recibido por BLE autenticado y con verificación SHA-256. El resto del tráfico sigue siendo solo HTTPS.
+
+## 2026-10-25 — CHEST 3.7.5-rc5: velocidad de la descarga por Wi-Fi
+- **Medido con rc4 + app dev4:** la descarga por Wi-Fi funciona de extremo a extremo. Un entrenamiento de 1,6 MB tarda unos 15 s (unos 110 KB/s).
+- **rc5:** mientras el AP está encendido, el BLE deja de enviar telemetría y pide un intervalo de conexión largo (100–150 ms, latencia 4) para dejarle la radio al Wi-Fi. Al apagarse el Wi-Fi, por cualquier motivo, vuelve al intervalo normal. El BLE sigue conectado para el control y como respaldo.
+- ESP-NOW (la espalda) no se ha tocado: para que deje de transmitir habría que cambiar el firmware de la espalda.
+- Sin verificar físicamente.

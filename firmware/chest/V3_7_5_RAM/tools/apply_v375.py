@@ -112,6 +112,28 @@ void resume_after_wifi() {
 }
 } // namespace ui""")
 
+# 3e. rc5: Wi-Fi download speed. The watch has one radio for Wi-Fi, BLE and ESP-NOW. While the AP is on:
+#     BLE telemetry stops and the BLE link asks for a long connection interval (100–150 ms, latency 4) so the
+#     radio is free for Wi-Fi most of the time; the normal interval is requested again when Wi-Fi turns off
+#     (whatever the reason: app, idle, error). BLE stays connected for control and as fallback.
+patch(f"{SRC}/ble_service.cpp",
+      "    uint32_t now = sys::ms();\n    // V3.7.3: telemetry paused",
+      """    uint32_t now = sys::ms();
+    {  // V3.7.5-rc5: radio for Wi-Fi while the AP is on
+      static bool slow = false;
+      bool wifi_on = wifisync::state() != wifisync::State::OFF;
+      if (!s_connected) slow = false;
+      else if (wifi_on != slow && s_srv && s_conn != 0xFFFF) {
+        bool ok = wifi_on ? s_srv->updateConnParams(s_conn, 80, 120, 4, 600) : s_srv->updateConnParams(s_conn, 12, 24, 0, 400);
+        Serial.printf("[AVO BLE] conn params %s (%s)\\n", wifi_on ? "slow for Wi-Fi" : "normal", ok ? "OK" : "FAIL");
+        slow = wifi_on;
+      }
+    }
+    // V3.7.3: telemetry paused""")
+patch(f"{SRC}/ble_service.cpp",
+      "if (s_connected && is_authorized() && now - last_tel >= 500 && (uint32_t)(now - s_last_file_ms) > 1500) {",
+      "if (s_connected && is_authorized() && now - last_tel >= 500 && (uint32_t)(now - s_last_file_ms) > 1500 &&\n        wifisync::state() == wifisync::State::OFF) {   // V3.7.5-rc5: no telemetry during Wi-Fi download")
+
 # 4. memory at the end of boot (monitor)
 patch(f"{SRC}/app_main.cpp",
       '  Serial.printf("[AVO] build fingerprint %s\\n", AVO_BUILD_FINGERPRINT);',
