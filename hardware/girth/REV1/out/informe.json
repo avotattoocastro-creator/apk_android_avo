@@ -1,7 +1,7 @@
 {
  "piezas": {
   "AVO_GIRTH_R1_base": {
-   "volumen_mm3": 8562.3,
+   "volumen_mm3": 8516.3,
    "valido": true,
    "caja": [
     64.01,
@@ -10,7 +10,7 @@
    ]
   },
   "AVO_GIRTH_R1_tapa": {
-   "volumen_mm3": 8094.0,
+   "volumen_mm3": 8092.9,
    "valido": true,
    "caja": [
     64.01,
@@ -19,10 +19,10 @@
    ]
   },
   "AVO_GIRTH_R1_bandeja": {
-   "volumen_mm3": 2471.6,
+   "volumen_mm3": 2465.0,
    "valido": true,
    "caja": [
-    57.85,
+    56.9,
     38.9,
     3.5
    ]
@@ -46,12 +46,5 @@
    ]
   }
  },
- "interferencias": {
-  "bateria_LP403048 × AVO_GIRTH_R1_base": 3.06,
-  "ESP32_C6 × AVO_GIRTH_R1_base": 0.012,
-  "ESP32_C6 × AVO_GIRTH_R1_tapa": 1.896,
-  "AVO_GIRTH_R1_base × AVO_GIRTH_R1_bandeja": 2.421,
-  "AVO_GIRTH_R1_base × AVO_GIRTH_R1_soporte": 11.782,
-  "AVO_GIRTH_R1_tapa × AVO_GIRTH_R1_bandeja": 4.181
- }
+ "interferencias": {}
 }
