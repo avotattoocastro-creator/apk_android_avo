@@ -51,7 +51,7 @@ static const size_t CHUNK = 16 * 1024;
 // rc2: minimum internal RAM to bring up AP + httpd next to BLE + ESP-NOW (internal estimate: ~45 KB)
 // 3.7.5-rc3: Wi-Fi is already initialised for ESP-NOW (STA), so AP+HTTP costs less than a cold start. Thresholds
 // lowered to fit the measured margin; a reboot while starting is still caught (NVS breadcrumb + app guard).
-static const size_t MIN_INTERNAL_FREE = 20 * 1024, MIN_INTERNAL_BLOCK = 8 * 1024;
+static const size_t MIN_INTERNAL_FREE = 16 * 1024, MIN_INTERNAL_BLOCK = 8 * 1024;
 static const uint32_t WORKER_STACK = 6144;   // internal (it writes NVS: it cannot go in PSRAM)
 
 static SemaphoreHandle_t s_mx = nullptr;
@@ -446,6 +446,10 @@ static StartResult do_start(Credentials* out) {
   size_t freeb = heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   size_t largest = heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT);
   Serial.printf("[AVO WIFI] start: internal=%u largest=%u\n", (unsigned)freeb, (unsigned)largest);
+  {  // rc4: free stack (bytes never used) of the tasks whose stacks were reduced
+    const char* names[] = {"link_rx", "link_tx", "ctl", "ble_rx", "ble_tx", "ui_lite", "storage"};
+    for (const char* n : names) { TaskHandle_t h = xTaskGetHandle(n); if (h) Serial.printf("[AVO STACK] %s free=%u\n", n, (unsigned)uxTaskGetStackHighWaterMark(h)); }
+  }
   if (freeb < MIN_INTERNAL_FREE || largest < MIN_INTERNAL_BLOCK) {
     bb::log(BbCode::SHUTDOWN, 1, 0x57, (uint32_t)freeb, "wifi: low internal RAM");
     unlock();

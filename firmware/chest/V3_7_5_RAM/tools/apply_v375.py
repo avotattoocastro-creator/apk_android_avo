@@ -49,6 +49,16 @@ patch(f"{SRC}/app_main.cpp",
 patch(f"{SRC}/ui.cpp", "size_t line_px = (size_t)UiFb::W * 16;",
       "size_t line_px = (size_t)UiFb::W * 4;   // V3.7.5-rc3: 4 rows (frees ~9.8 KB of internal RAM for Wi-Fi)")
 
+# 3c. rc4: stacks sized to their real use. link_rx/link_tx keep their big buffers static (not on the stack) and
+#     ctl builds snapshots in PSRAM. High-water marks are printed when Wi-Fi starts ([AVO STACK]) to verify.
+patch(f"{SRC}/uart_link.cpp",
+      'xTaskCreatePinnedToCore(rx_task, "link_rx", 8192, nullptr, 18, nullptr, 1);\n  xTaskCreatePinnedToCore(tx_task, "link_tx", 8192, nullptr, 17, &s_tx_task, 1);',
+      'xTaskCreatePinnedToCore(rx_task, "link_rx", 5120, nullptr, 18, nullptr, 1);   // V3.7.5-rc4: 8192 → 5120\n'
+      '  xTaskCreatePinnedToCore(tx_task, "link_tx", 5120, nullptr, 17, &s_tx_task, 1);  // V3.7.5-rc4: 8192 → 5120')
+patch(f"{SRC}/controller.cpp",
+      'xTaskCreatePinnedToCore(task, "ctl", 8192, nullptr, 8, &g_task_handles[TID_CTRL], 1);',
+      'xTaskCreatePinnedToCore(task, "ctl", 6144, nullptr, 8, &g_task_handles[TID_CTRL], 1);   // V3.7.5-rc4: 8192 → 6144')
+
 # 4. memory at the end of boot (monitor)
 patch(f"{SRC}/app_main.cpp",
       '  Serial.printf("[AVO] build fingerprint %s\\n", AVO_BUILD_FINGERPRINT);',

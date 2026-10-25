@@ -469,3 +469,14 @@ Petición del usuario.
   - búfer DMA de la UI reducido a 4 filas (unos 9,8 KB más libres);
   - umbral del AP Wi-Fi bajado de 40/16 KB a 20/8 KB, porque el Wi-Fi ya está inicializado para ESP-NOW. Se mantienen las protecciones: si el reloj se reinicia al encender el AP, el Wi-Fi queda desactivado y la app pasa a Bluetooth.
 - Sin verificar físicamente.
+
+## 2026-10-25 — CHEST 3.7.5-rc3 (medido) y rc4
+- **rc3 medida:**
+  - estable;
+  - 25 572 B libres al terminar el arranque, con un bloque de 17 396 B;
+  - con el móvil conectado, al pedir el Wi-Fi quedaban 18 196 B (bloque de 10 228 B): el reloj lo rechazó porque el mínimo era 20 KB, y la descarga se hizo por BLE.
+- **rc4:**
+  - pilas de `link_rx` y `link_tx` reducidas de 8192 a 5120 B, y la de `ctl` de 8192 a 6144 B: unos 8 KB más libres;
+  - mínimo del AP bajado a 16/8 KB;
+  - el monitor muestra `[AVO STACK]` con la pila libre de cada tarea al pedir el Wi-Fi.
+- Sin verificar físicamente.
