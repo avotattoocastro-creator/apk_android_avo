@@ -7,7 +7,6 @@ on:
 permissions:
   contents: read
 env:
-  APK_NAME: AVO_Performance_Horse_Update_V2_1_0_debug.apk
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -51,12 +50,13 @@ jobs:
         if: success()
         run: |
           mkdir -p out
-          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk "out/$APK_NAME"
+          V=$(grep -o 'versionName = "[^"]*"' usb-updater/app/build.gradle.kts | cut -d'"' -f2 | tr . _)
+          cp usb-updater/app/build/outputs/apk/debug/app-debug.apk "out/AVO_Update_V${V}.apk"
           cd out && sha256sum *.apk > SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: AVO-Performance-Horse-Update-V2-1-0-DEBUG
+          name: AVO-Update-APK
           path: out/
           retention-days: 30
       - uses: actions/upload-artifact@v4

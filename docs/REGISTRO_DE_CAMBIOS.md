@@ -451,3 +451,4 @@ Petición del usuario.
 
 ## 2026-10-25 — AVO Update 2.2.2: monitor automático tras instalar
 - Al terminar la instalación por USB, el monitor serie se pone en marcha solo, sin reiniciar el reloj, e incluye la salida USB que se captó durante la verificación. Así queda registrado el primer arranque del firmware nuevo y una posible vuelta atrás, que con la 3.7.5-rc1 no se pudo ver.
+- El workflow del updater ponía un nombre fijo (V2_1_0) al APK y al artefacto. Ahora el APK se llama `AVO_Update_V<versión>.apk`, con la versión sacada de build.gradle, y el artefacto `AVO-Update-APK`.
