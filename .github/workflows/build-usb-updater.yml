@@ -6,7 +6,6 @@ on:
     paths: ['usb-updater/**', '.github/workflows/build-usb-updater.yml']
 permissions:
   contents: read
-env:
 jobs:
   build:
     runs-on: ubuntu-24.04
