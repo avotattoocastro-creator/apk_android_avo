@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.8.2 (ESP-NOW) · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.9.0 (ESP-NOW) · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -159,6 +159,18 @@ static void print_status() {
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
+  {  // V3.9.0: GNSS quality (NAV-SAT/NAV-SIG) and RTK FIX tracking
+    const GnssQuality& q = core->quality();
+    BackStatus bs = core->status();
+    static const char* mon[] = {"pendiente", "OK", "RECHAZADO", "UART lenta"};
+    Serial.printf("  CALIDAD: sat %u/%u usados | senales %u (usadas %u, fase %u, corregidas %u) | 2a banda L2/E5b/B2 %u%s | C/N0 media %u min %u max %u | debiles %u | NAV-SIG %s hace %u s\n",
+                  q.sv_used, q.sv_tracked, q.sig_tracked, q.sig_used, q.sig_cr_used, q.sig_corr, q.sig_l2,
+                  (q.have_sig && q.sig_l2 == 0) ? " (ANTENA SOLO L1: sin RTK FIX)" : "", q.cno_mean, q.cno_min, q.cno_max,
+                  q.sig_weak, mon[bs.quality_mon & 3], (unsigned)bs.quality_age_s);
+    Serial.printf("  RTK: FIX %lu s, FLOAT %lu s, perdidas de FIX %u, primer FIX %s%u s\n", (unsigned long)(bs.fixed_ms / 1000),
+                  (unsigned long)(bs.float_ms / 1000), bs.fix_lost, bs.ttff_fix_s == 0xFFFF ? "aun no " : "a los ",
+                  bs.ttff_fix_s == 0xFFFF ? 0u : (unsigned)bs.ttff_fix_s);
+  }
   if (z.state() == ZedManager::NO_RESPONSE)
     Serial.println("  AVISO: el ZED no contesta a UBX. Revisa el cableado TX/RX y que el puerto del ZED tenga UBX activado (u-center).");
 }

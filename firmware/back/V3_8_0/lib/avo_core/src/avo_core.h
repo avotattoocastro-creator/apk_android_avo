@@ -19,4 +19,5 @@
 #include "avo_ble_auth.h"
 #include "avo_espnow_link.h"
 #include "avo_ubx_zed.h"
+#include "avo_gnss_quality.h"
 #include "avo_back_core.h"

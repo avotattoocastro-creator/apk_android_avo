@@ -14,6 +14,7 @@
 #include "avo_payloads.h"
 #include "avo_uart_proto.h"
 #include "avo_ubx_zed.h"
+#include "avo_gnss_quality.h"
 
 namespace avo {
 
@@ -62,6 +63,8 @@ class BackCore : public ZedIo {
   const ZedManager& zed() const { return zed_; }
   const RtcmStats& rtcm_stats() const { return obs_.stats(); }
   BackStatus status() const;
+  const GnssQuality& quality() const { return q_; }
+  uint16_t fix_lost() const { return fix_lost_; }
   // V3.8.1: battery voltage measured by the board (0 = unknown); sent to the chest in STATUS.
   void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }
 
@@ -92,6 +95,13 @@ class BackCore : public ZedIo {
   BackStats st_;
   uint32_t boot_id_;
   uint16_t batt_mv_ = 0;
+  // V3.9.0 GNSS quality and RTK FIX tracking
+  GnssQuality q_;
+  uint32_t q_ms_ = 0;                 // when the last NAV-SIG arrived (0 = never)
+  uint8_t last_carr_ = 0;
+  uint32_t last_pvt_ms_ = 0;
+  uint16_t fix_lost_ = 0, ttff_fix_s_ = 0xFFFF;
+  uint32_t fixed_ms_ = 0, float_ms_ = 0;
   uint16_t seq_ = 0;
   bool have_off_ = false;
   uint32_t exp_off_ = 0;

@@ -205,6 +205,9 @@ struct SimZed {
   uint8_t dyn = 0, dgnss = 3; int8_t min_elev = 10;
   bool gnss[4] = {true, true, true, true};       // GPS, GLO, GAL, BDS
   uint32_t signal_restarts = 0;
+  uint32_t sat_every[3] = {0, 0, 0}, sig_every[3] = {0, 0, 0};   // V3.9.0 NAV-SAT/SIG output rate
+  bool l2_antenna = true;                                     // false = L1-only antenna (no second band)
+  uint8_t carr = 2;                                           // carrSoln reported in NAV-PVT
   bool alive = true;
   std::deque<std::pair<uint32_t, uint8_t>> out;   // (baud it was sent at, byte)
   std::vector<uint8_t> rtcm_bytes;                // RTCM frames accepted (valid CRC)
@@ -215,7 +218,7 @@ struct SimZed {
 
   void send_ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t n) {
     if (!out_ubx[port]) return;
-    uint8_t b[300];
+    uint8_t b[2100];
     size_t len = ubx_build(cls, id, pl, n, b, sizeof(b));
     for (size_t i = 0; i < len; i++) out.push_back({baud[port], b[i]});
   }
@@ -226,7 +229,8 @@ struct SimZed {
       zedkey::UART1INPROT_UBX, zedkey::UART1INPROT_NMEA, zedkey::UART1INPROT_RTCM3X, zedkey::UART1OUTPROT_UBX, zedkey::UART1OUTPROT_NMEA,
       zedkey::UART1OUTPROT_RTCM3X, zedkey::UART2INPROT_UBX, zedkey::UART2INPROT_NMEA, zedkey::UART2INPROT_RTCM3X, zedkey::UART2OUTPROT_UBX,
       zedkey::UART2OUTPROT_NMEA, zedkey::UART2OUTPROT_RTCM3X, zedkey::MSGOUT_NAV_PVT_UART1, zedkey::MSGOUT_NAV_PVT_UART2,
-      zedkey::MSGOUT_RXM_RTCM_UART1, zedkey::MSGOUT_RXM_RTCM_UART2};
+      zedkey::MSGOUT_RXM_RTCM_UART1, zedkey::MSGOUT_RXM_RTCM_UART2,
+      zedkey::MSGOUT_NAV_SAT_UART1, zedkey::MSGOUT_NAV_SAT_UART2, zedkey::MSGOUT_NAV_SIG_UART1, zedkey::MSGOUT_NAV_SIG_UART2};
     for (uint32_t x : ks) if (x == k) return true;
     static const uint32_t tune[] = {zedkey::NAVSPG_DYNMODEL, zedkey::NAVHPG_DGNSSMODE, zedkey::NAVSPG_INFIL_MINELEV,
       zedkey::NAVSPG_INFIL_MINCNO, zedkey::SIGNAL_GPS_ENA, zedkey::SIGNAL_GLO_ENA, zedkey::SIGNAL_GAL_ENA, zedkey::SIGNAL_BDS_ENA};
@@ -266,6 +270,8 @@ struct SimZed {
       else if (k == zedkey::UART1OUTPROT_NMEA) out_nmea[1] = v; else if (k == zedkey::UART2OUTPROT_NMEA) out_nmea[2] = v;
       else if (k == zedkey::MSGOUT_NAV_PVT_UART1) pvt[1] = v; else if (k == zedkey::MSGOUT_NAV_PVT_UART2) pvt[2] = v;
       else if (k == zedkey::MSGOUT_RXM_RTCM_UART1) rxm[1] = v; else if (k == zedkey::MSGOUT_RXM_RTCM_UART2) rxm[2] = v;
+      else if (k == zedkey::MSGOUT_NAV_SAT_UART1) sat_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SAT_UART2) sat_every[2] = v;
+      else if (k == zedkey::MSGOUT_NAV_SIG_UART1) sig_every[1] = v; else if (k == zedkey::MSGOUT_NAV_SIG_UART2) sig_every[2] = v;
     }
     if (sig) signal_restarts++;
   }
@@ -316,10 +322,28 @@ struct SimZed {
     next_epoch = now + meas_ms;
     epochs++;
     if (pvt[port]) {
-      GnssSample g; g.itow_ms = now; g.fix_type = 3; g.flags = 0x01 | 0x02 | (2 << 6); g.num_sv = 28;
+      GnssSample g; g.itow_ms = now; g.fix_type = 3; g.flags = (uint8_t)(0x01 | 0x02 | (carr << 6)); g.num_sv = 28;
       g.lat_e7 = 433800000; g.lon_e7 = -32170000; g.hacc_mm = 14; g.year = 2026;
       uint8_t pl[92]; ubx_encode_nav_pvt(g, pl, sizeof(pl));
       send_ubx(UBX_CLS_NAV, UBX_ID_NAV_PVT, pl, 92);
+    }
+    if (sat_every[port] && epochs % sat_every[port] == 0) {   // 20 satellites, 18 used
+      std::vector<uint8_t> b(8 + 20 * 12, 0); b[5] = 20;
+      for (int i = 0; i < 20; i++) { uint8_t* q = &b[8 + i * 12]; q[0] = (uint8_t)(i % 4 == 3 ? 6 : i % 4); q[1] = (uint8_t)(i + 1); q[2] = 40; if (i < 18) q[8] = 1 << 3; }
+      send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SAT, b.data(), (uint16_t)b.size());
+    }
+    if (sig_every[port] && epochs % sig_every[port] == 0) {   // 20 L1 + 20 second-band signals (if the antenna has L2)
+      int nsig = l2_antenna ? 40 : 20;
+      std::vector<uint8_t> b(8 + nsig * 16, 0); b[5] = (uint8_t)nsig;
+      for (int i = 0; i < nsig; i++) {
+        uint8_t* q = &b[8 + i * 16];
+        q[0] = 0; q[1] = (uint8_t)(i % 20 + 1); q[2] = i < 20 ? 0 : 3;   // GPS L1C/A, then L2CL
+        q[6] = (uint8_t)(i % 10 == 9 ? 25 : 44);                          // two weak signals per band
+        uint16_t f = (1u << 3) | (carr ? (1u << 4) : 0) | (1u << 6);
+        if (q[6] < 30) f = 0;
+        q[10] = (uint8_t)f; q[11] = (uint8_t)(f >> 8);
+      }
+      send_ubx(UBX_CLS_NAV, UBX_ID_NAV_SIG, b.data(), (uint16_t)b.size());
     }
     if (out_nmea[port]) send_text("$GNGSA,A,3,,,,,,,,,,,,,1.0,0.5,0.8,1*00\r\n$GPTXT,01,01,02,u-blox*00\r\n");   // bad checksums: noise only
   }
@@ -747,6 +771,64 @@ TEST(precision, rtcm_keeps_reaching_the_zed_during_rate_change_and_tuning) {
   w.run_ms(5000, 4);
   CHECK_EQ(w.back->stats().rtcm_not_written, nw);   // nothing held back while reconfiguring
   CHECK(w.zed.rtcm_frames > frames + 10);
+}
+
+// ---------------------------------------------------------------- V3.9.0 GNSS quality
+TEST(quality, nav_sat_sig_enabled_at_1hz_and_summarised) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());   // once per second at any rate
+  const GnssQuality& q = w.back->quality();
+  CHECK(q.have_sat && q.have_sig);
+  CHECK_EQ(q.sv_tracked, 20); CHECK_EQ(q.sv_used, 18);
+  CHECK_EQ(q.sig_tracked, 40); CHECK_EQ(q.sig_l2, 20);
+  CHECK_EQ(q.sig_used, 36); CHECK_EQ(q.sig_cr_used, 36); CHECK_EQ(q.sig_weak, 4);
+  CHECK_EQ(q.cno_mean, 44); CHECK_EQ(q.cno_min, 44); CHECK_EQ(q.cno_max, 44);
+  BackStatus st = w.back->status();
+  uint8_t b[BACK_STATUS_V3_LEN + 8];
+  size_t n = encode_status(st, b, sizeof(b));
+  CHECK_EQ(n, BACK_STATUS_V3_LEN);
+  BackStatus d;
+  CHECK(decode_status(b, n, &d));
+  CHECK(d.v2 && d.v3);
+  CHECK_EQ(d.sig_l2, 20); CHECK_EQ(d.quality_mon, 1); CHECK(d.quality_age_s <= 2);
+  CHECK(d.fixed_ms > 5000); CHECK_EQ(d.fix_lost, 0); CHECK(d.ttff_fix_s < 15);
+  // a v2 decoder (old chest) still reads it, a v2 frame still decodes here
+  BackStatus v2 = st; v2.v3 = false;
+  n = encode_status(v2, b, sizeof(b));
+  CHECK_EQ(n, BACK_STATUS_V2_LEN);
+  CHECK(decode_status(b, n, &d)); CHECK(d.v2 && !d.v3);
+}
+
+TEST(quality, l1_only_antenna_shows_no_second_band) {
+  World w(2);
+  w.zed.l2_antenna = false;
+  w.run_ms(15000);
+  CHECK_EQ(w.back->quality().sig_l2, 0);
+  CHECK_EQ(w.back->quality().sig_tracked, 20);
+}
+
+TEST(quality, fix_losses_and_float_time_are_counted) {
+  World w(2);
+  w.run_ms(10000);
+  w.zed.carr = 1; w.run_ms(3000);
+  w.zed.carr = 2; w.run_ms(3000);
+  w.zed.carr = 0; w.run_ms(2000);
+  CHECK_EQ(w.back->fix_lost(), 2);
+  BackStatus st = w.back->status();
+  CHECK(st.float_ms >= 2500 && st.float_ms <= 3500);
+}
+
+TEST(quality, signal_band_classification) {
+  CHECK(gnss_sig_is_l1(0, 0)); CHECK(!gnss_sig_is_l1(0, 3)); CHECK(!gnss_sig_is_l1(0, 4));
+  CHECK(gnss_sig_is_l1(2, 1)); CHECK(!gnss_sig_is_l1(2, 5));
+  CHECK(gnss_sig_is_l1(3, 0)); CHECK(!gnss_sig_is_l1(3, 2));
+  CHECK(gnss_sig_is_l1(6, 0)); CHECK(!gnss_sig_is_l1(6, 2));
+  uint8_t bad[8] = {0, 0, 0, 0, 0, 5, 0, 0};   // claims 5 signals, carries none
+  GnssQuality q;
+  CHECK(!ubx_quality_nav_sig(bad, 8, &q));
+  CHECK(!ubx_quality_nav_sat(bad, 8, &q));
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

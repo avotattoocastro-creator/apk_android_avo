@@ -254,6 +254,18 @@ void ZedManager::send_tune(bool full) {
   io_->zed_write(b, len);
 }
 
+// V3.9.0: UBX-NAV-SAT + NAV-SIG once per second, own VALSET (a rejection never touches the rest).
+void ZedManager::send_monitor() {
+  uint32_t every = rate_ ? rate_ : 1;
+  ZedKV kv[2];
+  kv[0] = {port_ == 2 ? zedkey::MSGOUT_NAV_SAT_UART2 : zedkey::MSGOUT_NAV_SAT_UART1, every};
+  kv[1] = {port_ == 2 ? zedkey::MSGOUT_NAV_SIG_UART2 : zedkey::MSGOUT_NAV_SIG_UART1, every};
+  uint8_t b[48];
+  size_t len = ubx_valset_ram(kv, 2, b, sizeof(b));
+  ack_ = 0;
+  io_->zed_write(b, len);
+}
+
 void ZedManager::go(State s, uint32_t now_ms) {
   st_ = s;
   step_ = 0;
@@ -274,6 +286,7 @@ void ZedManager::set_nav_rate(uint8_t hz, uint32_t now_ms) {
   uint8_t eff = hz;
   zed_gnss_for_rate(hz, &eff);
   rate_ = eff;
+  mon_ = 0; mon_t0_ = 0;   // V3.9.0: quality output follows the new rate (stays at 1 Hz)
   if (st_ == RUNNING) { cfg_with_rate_ = true; go(CONFIGURE, now_ms); }
 }
 
@@ -385,9 +398,16 @@ void ZedManager::tick(uint32_t now_ms) {
       break;
     }
     case RUNNING: {
+      // V3.9.0: quality messages, once, after the precision profile. Needs the fast UART (~2 KB/s more).
+      if (mon_ == 0 && port_ != 0) {
+        if (baud_ < 115200) mon_ = 3;
+        else if (!mon_t0_) { send_monitor(); mon_t0_ = now_ms | 1; }
+        else if (ack_ == 1) mon_ = 1;
+        else if (ack_ == 2 || now_ms - mon_t0_ >= 800) mon_ = 2;
+      }
       uint32_t quiet = now_ms - last_ubx_ms_;
       if (quiet >= 1500 && dt >= 1000) { poll_ver(); t0_ = now_ms; }
-      if (quiet >= 5000) { cand_ = 0; set_applied_ = false; tune_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }
