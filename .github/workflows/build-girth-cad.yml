@@ -1,0 +1,45 @@
+name: Build AVO GIRTH CAD (STEP/STL)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-wifi-sync]
+    paths:
+      - 'hardware/girth/REV1/avo_girth_rev1.py'
+      - '.github/workflows/build-girth-cad.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cad:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CadQuery
+        run: pip install cadquery==2.4.0 "numpy<2"
+      - name: Build
+        working-directory: hardware/girth/REV1
+        run: |
+          set -o pipefail
+          if ! python avo_girth_rev1.py 2>&1 | tee build.log; then
+            tail -25 build.log | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          r = json.load(open("out/informe.json"))
+          for k, v in r["piezas"].items(): print(f"::notice title={k}::{v}")
+          for k, v in r["interferencias"].items(): print(f"::warning title=Interferencia::{k} = {v} mm3")
+          if not r["interferencias"]: print("::notice title=Interferencias::ninguna")
+          PY
+      - name: Commit outputs
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          git add hardware/girth/REV1/out
+          git commit -m "CAD cincha REV1: STEP/STL generados [skip ci]" || echo "sin cambios"
+          git push
