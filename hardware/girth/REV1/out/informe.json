@@ -3,6 +3,7 @@
   "AVO_GIRTH_R1_base": {
    "volumen_mm3": 8516.3,
    "valido": true,
+   "solidos": 1,
    "caja": [
     64.01,
     46.01,
@@ -10,8 +11,9 @@
    ]
   },
   "AVO_GIRTH_R1_tapa": {
-   "volumen_mm3": 8092.9,
+   "volumen_mm3": 8310.8,
    "valido": true,
+   "solidos": 1,
    "caja": [
     64.01,
     46.01,
@@ -21,6 +23,7 @@
   "AVO_GIRTH_R1_bandeja": {
    "volumen_mm3": 2465.0,
    "valido": true,
+   "solidos": 1,
    "caja": [
     56.9,
     38.9,
@@ -30,6 +33,7 @@
   "AVO_GIRTH_R1_tapon_USB_TPU": {
    "volumen_mm3": 163.0,
    "valido": true,
+   "solidos": 1,
    "caja": [
     4.0,
     12.0,
@@ -39,6 +43,7 @@
   "AVO_GIRTH_R1_soporte": {
    "volumen_mm3": 20317.9,
    "valido": true,
+   "solidos": 1,
    "caja": [
     84.02,
     60.02,
