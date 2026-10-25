@@ -1,4 +1,5 @@
-/* AVO PERFORMANCE HORSE — BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
+/* AVO PERFORMANCE HORSE — BACK V3.8.1 (ESP-NOW) · V3.8.1: battery voltage sent to the chest
+ * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
  *   - ZED-F9P a 8 Hz con GPS+GLONASS+Galileo+BeiDou (límite RTK del data sheet; V3.5.0 pedía 10 Hz con 4
@@ -46,6 +47,14 @@ static const int ZED_RX_PIN = 33;      // Heltec RX  <- ZED TX
 static const int ZED_TX_PIN = 35;      // Heltec TX  -> ZED RX
 static const int PRG_PIN = 0;          // PRG / USER button (active LOW)
 static const int VEXT_PIN = 36;        // Heltec Vext switch (LOW = 3.3 V on Vext)
+// V3.8.1: battery voltage. VBAT through a divider on GPIO1, divider enabled by GPIO37 (ADC_Ctrl).
+// V3/V3.1 boards: pull-up on GPIO37, active LOW. V3.2 (this back, HTIT-WSL_V3 rev 3.2): transistor, active HIGH.
+// The polarity is detected at boot by reading GPIO37 as input (pull-up present → reads HIGH → active LOW).
+static const int VBAT_PIN = 1;
+static const int VBAT_CTRL_PIN = 37;
+static const float VBAT_DIVIDER = 4.9f;  // 390k + 100k (Heltec reference design)
+static uint8_t s_vbat_active = HIGH;
+static uint16_t s_vbat_mv = 0;
 static const uint8_t NAV_RATE_HZ = 8;  // RTK limit of the ZED-F9P with 4 constellations
 
 HardwareSerial ZED(1);
@@ -149,8 +158,21 @@ static void print_status() {
                 (unsigned long)st.rtcm_rx_bytes, (unsigned long)st.rtcm_to_zed, (unsigned long)rs.frames_ok,
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
+  Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
   if (z.state() == ZedManager::NO_RESPONSE)
     Serial.println("  AVISO: el ZED no contesta a UBX. Revisa el cableado TX/RX y que el puerto del ZED tenga UBX activado (u-center).");
+}
+
+// V3.8.1: average of 16 readings with the divider enabled only while measuring (no constant drain).
+static uint16_t read_battery_mv() {
+  digitalWrite(VBAT_CTRL_PIN, s_vbat_active);
+  delayMicroseconds(200);
+  uint32_t acc = 0;
+  for (int i = 0; i < 16; i++) acc += analogReadMilliVolts(VBAT_PIN);
+  digitalWrite(VBAT_CTRL_PIN, !s_vbat_active);
+  uint32_t mv = (uint32_t)((acc / 16) * VBAT_DIVIDER);
+  // Outside 2.5–4.6 V it is not a 1-cell Li-ion reading (no battery, wrong polarity): report unknown.
+  return (mv < 2500 || mv > 4600) ? 0 : (uint16_t)mv;
 }
 
 // ------------------------------------------------------------------ setup / loop
@@ -161,6 +183,12 @@ void setup() {
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, LOW);           // Vext on (harmless if the ZED has its own supply)
   pinMode(PRG_PIN, INPUT_PULLUP);
+  pinMode(VBAT_CTRL_PIN, INPUT);
+  delay(2);
+  s_vbat_active = digitalRead(VBAT_CTRL_PIN) == HIGH ? LOW : HIGH;   // V3.8.1: board revision detection
+  pinMode(VBAT_CTRL_PIN, OUTPUT);
+  digitalWrite(VBAT_CTRL_PIN, !s_vbat_active);
+  analogSetPinAttenuation(VBAT_PIN, ADC_11db);
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
@@ -190,6 +218,10 @@ void setup() {
 
   core = new BackCore(&platform, s_dev_id, NAV_RATE_HZ);
   core->begin(stored);
+  s_vbat_mv = read_battery_mv();
+  core->set_battery_mv(s_vbat_mv);
+  Serial.printf("[AVO ESPALDA] bateria %u mV (ADC_Ctrl activo %s → placa %s)\n", (unsigned)s_vbat_mv,
+                s_vbat_active == HIGH ? "HIGH" : "LOW", s_vbat_active == HIGH ? "V3.2" : "V3/V3.1");
   char pm[18] = "-";
   if (stored.valid) now_mac_str(stored.mac, pm);
   // the version is printed from the AVO-BACK marker itself, so the linker can never drop it
@@ -227,6 +259,13 @@ void loop() {
     prg_t = 0;
   }
 
+  static uint32_t last_batt = 0;   // V3.8.1: battery every 5 s, smoothed
+  if (millis() - last_batt >= 5000) {
+    last_batt = millis();
+    uint16_t mv = read_battery_mv();
+    s_vbat_mv = (mv == 0 || s_vbat_mv == 0) ? mv : (uint16_t)((s_vbat_mv * 3u + mv) / 4u);
+    core->set_battery_mv(s_vbat_mv);
+  }
   static uint32_t last_print = 0;
   if (millis() - last_print >= 2000) { last_print = millis(); print_status(); }
   if (!worked) delay(1);                 // only sleep when there was nothing to do

@@ -40,3 +40,11 @@ AVO BACK 3.8.0 — Heltec ...
   RTCM: ... ZED aplicadas=… rechazadas=0
 ```
 Si aparece `perfil=RECHAZADO (receptor antiguo)`, actualizar el firmware del ZED-F9P a HPG 1.32 o posterior.
+
+## V3.8.1 — batería de la espalda (2026-10-25)
+- **Lectura de la batería:** se lee la tensión en GPIO1. El divisor se activa con GPIO37 (ADC_Ctrl) solo mientras se mide. Media de 16 lecturas cada 5 s, con suavizado.
+- **Revisión de la placa:** se detecta al arrancar. En la V3/V3.1, ADC_Ctrl lleva pull-up y se activa con LOW; en la V3.2 (la de esta espalda, HTIT-WSL_V3 rev. 3.2) lleva transistor y se activa con HIGH. El monitor muestra `[AVO ESPALDA] bateria N mV (… placa …)` y una línea `BATERIA` cada 2 s.
+- **Envío:** la tensión va al pecho en el campo que ya existía (`BackStatus.back_batt_mv`). La app calcula el %. No cambian el protocolo, la RTK, el ESP-NOW ni el emparejamiento.
+- **Lecturas inválidas:** fuera de 2,5–4,6 V se envía 0 (desconocido), por ejemplo sin batería o con la polaridad equivocada.
+- **Sin estado de carga:** la placa no tiene ninguna patilla que indique si está cargando.
+- Divisor ×4,9 según el diseño de referencia de Heltec. **Sin verificar** en la espalda real: hay que comparar la tensión del monitor con la de un multímetro.

@@ -210,7 +210,7 @@ BackStatus BackCore::status() const {
   s.rxm_rtcm_used = st_.rxm_used;
   s.rxm_rtcm_failed = st_.rxm_failed;
   s.uart_crc_err = dec_.stats().crc_err + dec_.stats().hdr_crc_err;
-  s.back_batt_mv = 0;
+  s.back_batt_mv = batt_mv_;   // V3.8.1: measured by the platform (0 = unknown)
   s.gnss_rate_hz_x10 = rate_x10_;
   s.v2 = true;
   s.zed_baud = zed_.baud();

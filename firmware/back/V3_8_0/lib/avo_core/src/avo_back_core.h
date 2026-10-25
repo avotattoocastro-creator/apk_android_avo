@@ -62,6 +62,8 @@ class BackCore : public ZedIo {
   const ZedManager& zed() const { return zed_; }
   const RtcmStats& rtcm_stats() const { return obs_.stats(); }
   BackStatus status() const;
+  // V3.8.1: battery voltage measured by the board (0 = unknown); sent to the chest in STATUS.
+  void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }
 
   // ZedIo
   void zed_set_baud(uint32_t b) override { p_->zed_set_baud(b); }
@@ -89,6 +91,7 @@ class BackCore : public ZedIo {
   RtcmObserver obs_;
   BackStats st_;
   uint32_t boot_id_;
+  uint16_t batt_mv_ = 0;
   uint16_t seq_ = 0;
   bool have_off_ = false;
   uint32_t exp_off_ = 0;

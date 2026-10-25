@@ -518,3 +518,10 @@ Petición del usuario.
 - **dev6:** todas las unidades se muestran en %.
   - **Espalda:** solo envía la tensión, así que el % se **estima** con la curva de descarga típica de una celda Li-ion (interpolada, ±10 %). Naranja si es ≤ 20 %.
   - **Cincha:** muestra «— %» mientras esté conectada, porque su batería no llega al pecho. Para enviarla hace falta un cambio de firmware en la cincha y en la espalda (la cincha → la espalda → el pecho, por ESP-NOW), en el pecho y en la app. El firmware de la cincha no está en el repositorio.
+
+## 2026-10-25 — BACK 3.8.1: la espalda envía la tensión de su batería
+- Placa confirmada por foto: Heltec HTIT-WSL_V3, rev. 3.2.
+- La 3.8.0 enviaba `back_batt_mv = 0` (desconocido). La 3.8.1 mide la tensión (GPIO1, con ADC_Ctrl en GPIO37 y polaridad detectada) y la envía. El pecho y la app no cambian, y la app muestra el % estimado.
+- La placa no tiene señal de estado de carga.
+- Pruebas en ordenador: 23 casos y 159 comprobaciones OK. Sin verificar en la espalda real.
+- Detalle en `firmware/back/V3_8_0/README.md`.
