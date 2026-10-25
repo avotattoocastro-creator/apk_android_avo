@@ -48,6 +48,11 @@ jobs:
           import struct, sys
           m = open("AVO_GIRTH_V0_1_0_COMPLETO.bin", "rb").read()
           a = open("AVO_GIRTH_V0_1_0_app.bin", "rb").read()
+          # the core pads the merged image to the whole flash: keep it up to the end of the app (rest must be 0xFF)
+          tail = m[0x10000 + len(a):]
+          if tail and tail.count(0xFF) != len(tail): print("::error title=Imagen::datos tras la app en la imagen completa"); sys.exit(1)
+          m = m[:0x10000 + len(a)]
+          open("AVO_GIRTH_V0_1_0_COMPLETO.bin", "wb").write(m)
           ents = []
           for i in range(0x8000, 0x9000, 32):
               e = m[i:i+32]
