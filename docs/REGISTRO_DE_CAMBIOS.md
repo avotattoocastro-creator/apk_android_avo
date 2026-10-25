@@ -611,3 +611,4 @@ Petición del usuario.
 - **Soporte** de 84 × 60 mm para cinta de 50 mm, con 2 colas de milano, gancho elástico de seguridad y 2 imanes Ø6.
 - Interferencias comprobadas en CAD: ninguna.
 - Pendiente de imprimir y probar (antes, la placa de probetas).
+- **REV 1.1:** la tapa tenía el labio interior suelto (2 sólidos). Ahora un puente lo une a la pared. El CI exige un único sólido por pieza y las 5 piezas lo cumplen.
