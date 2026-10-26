@@ -1,7 +1,7 @@
 {
  "piezas": {
   "AVO_GIRTH_R3_base": {
-   "volumen_mm3": 9544.3,
+   "volumen_mm3": 9536.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -82,7 +82,6 @@
   }
  },
  "interferencias": {
-  "ESP32_C6 × AVO_GIRTH_R3_tapa": 0.051,
   "AVO_GIRTH_R3_base × AVO_GIRTH_R3_bandeja": 0.035
  },
  "medidas": {
