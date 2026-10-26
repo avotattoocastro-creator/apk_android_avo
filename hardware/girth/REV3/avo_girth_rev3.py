@@ -110,7 +110,7 @@ def pod_base():
     b = b.cut(box(-21.95, -10.0, COIL_Z0 + 0.4, 14.9, 2.0, FLOOR))
     # cuna de la batería: marco completo de 1,0 con un hueco en +X/−Y para los cables del PCM
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
-    cr = frame(0, 0, FLOOR, bl, bw, 1.0, BAT["t"] + 0.3)
+    cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
     cr = cr.cut(box(bl / 2 + 0.5, -bw / 2 + 4.0, FLOOR - 1, 2, 7.0, 10))
     b = b.union(cr)
     for x in (-15, 0, 15):
@@ -283,7 +283,8 @@ def tab():
 def components():
     cx, cy = C6_C; qx, qy = QI["center"]; bx, by = BNO["center"]; rx, ry = REED["center"]
     pz = TRAY_TOP + C6["pcb"]
-    usb = box(USB_FRONT - C6["usb_l"] / 2, cy, pz, C6["usb_l"], C6["usb_w"], C6["usb_h"])
+    usb = (cq.Workplane("YZ").workplane(offset=USB_FRONT - C6["usb_l"]).center(cy, pz + C6["usb_h"] / 2)
+           .rect(C6["usb_w"], C6["usb_h"]).extrude(C6["usb_l"]).edges("|X").fillet(1.3))      # USB-C: carcasa ovalada
     c6 = (box(cx, cy, TRAY_TOP + 0.02, C6["l"], C6["w"], C6["pcb"] - 0.02).union(usb)
           .union(box(C6_X0 + 3.4 + 5.2, cy + 0.1, pz, 10.4, 13.2, C6["shield"]))
           .union(box(UFL[0], UFL[1], pz, 2.6, 2.6, 1.25)).union(box(ANT[0], ANT[1], pz, 2.2, 6.6, 1.2))
