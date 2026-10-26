@@ -664,3 +664,18 @@ Petición del usuario.
 - **Pendiente:**
   - imprimir y hacer la prueba de inmersión; IP67 no está probado;
   - actualizar el firmware de la cincha por radio, porque el USB ya no es accesible sin abrir.
+
+## 2026-10-26 — Cincha REV 5 (8 tornillos M3 y 4 + 4 imanes Ø5 × 1)
+- **Petición del usuario:**
+  - 4 imanes de neodimio finos y redondos para que la cápsula no se mueva del soporte; luego confirmó Ø5 × 1;
+  - tornillos de cierre M3 «de 9 mm», en lugar de los M2 × 4 de su dibujo.
+- **`hardware/girth/REV5/avo_girth_rev5.py`:**
+  - la cápsula pasa a 70 × 48 × 15,5 mm;
+  - 8 columnas M3 con avellanado para una junta tórica 3 × 1 bajo la cabeza, por dentro de la junta TPU;
+  - 4 alojamientos para imanes Ø5 × 1 en la cápsula (piel de 0,3 mm) y 4 en el soporte;
+  - interior redistribuido: BNO y C6 girados, Qi en el centro, reed en el centro del lado −Y;
+  - soporte de 94,4 × 58,4 mm.
+- **CI:** construye REV 5. Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
+- **Pendiente:**
+  - comprobar que los imanes de la cápsula no activan el reed;
+  - imprimir y hacer la prueba de inmersión; IP67 no está probado.
