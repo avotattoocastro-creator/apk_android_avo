@@ -113,6 +113,7 @@ def pod_base():
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
     cr = cr.cut(box(bl / 2 + 0.5, -bw / 2 + 4.0, FLOOR - 1, 2, 7.0, 10))
+    cr = cr.cut(box(-(bl / 2 + 0.5), -3.5, FLOOR - 1, 2, 6.0, 10))   # paso de los hilos de la bobina en la pared −X (prueba impresa)
     b = b.union(cr)
     for x in (-15, 0, 15):
         for s in (-1, 1):
