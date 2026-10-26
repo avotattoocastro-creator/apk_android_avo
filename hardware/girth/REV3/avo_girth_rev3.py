@@ -155,7 +155,7 @@ def pod_lid():
         lid = lid.union(cyl(x, qy + QI["w"] / 2 - 0.9, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
     lid = lid.cut(usb_window())
     lid = lid.cut(cyl(LED[0], LED[1], CEIL - 1, 2.6, 5))             # ventana del LED (Ø2,6: posición estimada)
-    lid = lid.cut(box(-6, -2, CEIL - 0.4, 31, 7, 0.45))               # antena FPC opcional
+    lid = lid.cut(box(-7, 0.5, CEIL - 0.4, 29, 7, 0.45))               # antena FPC opcional
     m = PANEL["margin"]
     return lid.cut(rrect(L - 2 * m, W - 2 * m, R - m, 3, z0=H - PANEL["pocket"]))
 
@@ -301,7 +301,7 @@ def components():
             box(qx + 1.5, qy - 1.0, TRAY_TOP + QI["pcb"], 9.0, 9.0, QI["parts"])),
         "BNO085": bno,
         "reed": box(rx, ry, REED["z0"] + 0.1, REED["l"], REED["d"], REED["d"]),
-        "antena_FPC": box(-6, -2, CEIL - 0.35, 30, 6, 0.3),
+        "antena_FPC": box(-7, 0.5, CEIL - 0.35, 28, 6, 0.3),
         "imanes": cyl(rx, ry, -MT + STRAP["chan"] + 0.25, MAG["d"], MAG["t"] * MAG["n"] - 0.1),
     }
 
