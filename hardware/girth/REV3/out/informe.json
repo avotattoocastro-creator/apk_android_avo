@@ -82,7 +82,17 @@
   }
  },
  "interferencias": {
-  "AVO_GIRTH_R3_base × AVO_GIRTH_R3_bandeja": 0.035
+  "AVO_GIRTH_R3_base × AVO_GIRTH_R3_bandeja": [
+   0.035,
+   [
+    -26.2,
+    -26.1,
+    -6.0,
+    -5.34,
+    8.2,
+    9.0
+   ]
+  ]
  },
  "medidas": {
   "soporte_mm": [
