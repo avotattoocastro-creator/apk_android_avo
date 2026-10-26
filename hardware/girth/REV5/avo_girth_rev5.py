@@ -3,9 +3,9 @@
 Peticiones del usuario sobre REV 4:
   * 8 tornillos M3 (9–10 mm) repartidos junto a las esquinas, cada uno con junta tórica 3 × 1 bajo la cabeza;
   * 4 imanes de neodimio Ø5 × 1 en las esquinas del fondo de la cápsula y otros 4 enfrentados en el soporte.
-Para que caben los M3 por dentro de la junta sin tocar la batería, la cápsula crece de 64 × 46 a 70 × 48.
+Para que quepan los M3 por dentro de la junta sin tocar la batería, la cápsula crece de 64 × 46 a 70 × 48.
 Sin aberturas al exterior: USB-C dentro, sin ventana de LED, junta TPU continua en el cierre (29 % de compresión fija).
-Los imanes de la cápsula quedan a > 21 mm del reed (Ø5 × 1: campo muy débil a esa distancia). Comprobar con el
+BNO085 centrado (a ~35 mm de los imanes Ø5 × 1). Los imanes de la cápsula quedan a > 21 mm del reed (Ø5 × 1: campo muy débil a esa distancia). Comprobar con el
 reed en la mano antes de cerrar. IP67 es el objetivo de diseño; no está probado (prueba: 1 m, 30 min).
 
 Componentes (medidas de los anuncios del usuario; (E) = estimado sobre la foto):
@@ -58,8 +58,8 @@ UFL = (C6_C[0] - 4.95, C6_Y0 + 1.5)                # (E)
 ANT = (C6_C[0] + 3.4, C6_Y0 + 1.2)                 # (E) 6,6 × 2,2
 USB_FRONT = C6_Y1 + C6["usb_over"]
 
-QI = dict(lx=15.0, wy=18.0, pcb=1.0, parts=1.2, center=(-1.3, 10.0))      # hilos de la bobina en el lado y = 1
-BNO = dict(lx=15.5, wy=25.8, t=1.6, stand=1.5, hole_in=2.6, center=(-18.25, 0.0))   # pines en el lado +X
+QI = dict(lx=15.0, wy=18.0, pcb=1.0, parts=1.2, center=(-17.0, 0.0))      # extremo −X
+BNO = dict(lx=15.5, wy=25.8, t=1.6, stand=1.5, hole_in=2.6, center=(0.0, 0.0))   # CENTRADO: lo más lejos posible de los imanes; pines hacia +X
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
@@ -144,15 +144,12 @@ def pod_lid():
     lid = lid.cut(rrect(L - 2 * (LIP_OUT + LIP_T), W - 2 * (LIP_OUT + LIP_T), R - LIP_OUT - LIP_T, 3, z0=HB - 1))
     lid = lid.union(rshell(LIP_OUT, LIP_OUT + LIP_T, HB - TRAY_TOP - 0.05 + 0.2, TRAY_TOP + 0.05))
     qx, qy = QI["center"]
-    seal_y = W / 2 - SEAL_IN - 0.05
-    x0, x1, y0, y1 = qx - QI["lx"] / 2 - 1.7, qx + QI["lx"] / 2 + 1.7, qy - 2, seal_y
-    lid = lid.cut(box((x0 + x1) / 2, (y0 + y1) / 2, TRAY_TOP - 1, x1 - x0, y1 - y0, HB + 1.7 - TRAY_TOP + 1))
     for (x, y) in SCREWS:
         lid = lid.cut(cyl(x, y, TRAY_TOP - 1, M3["boss"] + 1.0, HB - TRAY_TOP + 1))
     for (x, y) in SCREWS:
         lid = lid.union(cyl(x, y, HB, M3["boss"], CEIL - HB + 0.5))
         lid = lid.cut(cyl(x, y, HB - 0.5, M3["pilot"], M3["pilot_top"] - HB + 0.5))
-    for (x, y) in ((-3.0, -15.0), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
+    for (x, y) in ((-3.0, -16.5), (-3.0, 16.5), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
         lid = lid.union(cyl(x, y, TRAY_TOP + 0.05, 2.4, CEIL - TRAY_TOP))
     for (x, y) in ((C6_X0 + 0.8, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
