@@ -155,6 +155,9 @@ def pod_lid():
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     for x in (qx - QI["lx"] / 2 + 0.8, qx + QI["lx"] / 2 - 0.8):
         lid = lid.union(cyl(x, qy - QI["wy"] / 2 + 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
+    # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
+    usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
+    lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
     lid = lid.cut(box(-7, -4.5, CEIL - 0.4, 29, 7, 0.45))               # antena FPC opcional (interior)
     m = PANEL["margin"]
     return lid.cut(rrect(L - 2 * m, W - 2 * m, R - m, 3, z0=H - PANEL["pocket"]))
@@ -194,10 +197,9 @@ def tray():
     rx, ry = REED["center"]
     for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):
         t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 3))
-    # C6: escuadras en el extremo de la antena (−Y); los lados con pads quedan libres
-    yb = C6_Y0 - G - 0.5
-    t = t.union(box(C6_X0 + 1.8, yb, TRAY_TOP, 4.0, 1.0, 1.2)).union(box(C6_X1 - 1.8, yb, TRAY_TOP, 4.0, 1.0, 1.2))
-    t = t.union(box(C6_X0 - G - 0.5, C6_Y0 + 1.5, TRAY_TOP, 1.0, 4.0, 1.2))
+    # C6: marco en los 4 costados (0,15 de holgura, 1,2 de pared), a ras de la cara superior del PCB:
+    # no se mueve en X ni en Y y los cables de los pads laterales salen por encima del marco
+    t = t.union(frame(cx, cy, TRAY_TOP, C6["lx"] + 0.3, C6["wy"] + 0.3, 1.2, C6["pcb"]))
     # placa Qi
     qx, qy = QI["center"]
     fq = frame(qx, qy, TRAY_TOP, QI["lx"] + 2 * G, QI["wy"] + 2 * G, 1.0, 1.0)
