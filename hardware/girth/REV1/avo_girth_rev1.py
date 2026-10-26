@@ -178,16 +178,24 @@ def usb_plug():   # TPU 95A
 
 
 # ------------------------------------------------------------------ soporte (mount)
-def mount():
+def mount(ribs=True):
     p = rrect(ML, MW, 8.0, MT, z0=-MT).faces("<Z or >Z").edges().chamfer(0.6)
     # pasos para la cinta de 50 mm
     for sx in (-1, 1):
         p = p.cut(box(sx * (STRAP["x0"] + STRAP["slot"] / 2), 0, -MT - 1, STRAP["slot"], STRAP["w"], MT + 2))
     # colas de milano (macho), del borde +Y hasta 0,3 antes del tope de la ranura
-    cl = 0.25
+    # REV1.4: ajuste sin juego. Holgura 0,10 por lado, tope a 0,10, y costillas de 0,20 en los flancos que se
+    # aplastan al montar (eliminan el juego de impresión). Colas recortadas con la silueta de la cápsula.
+    cl, h = 0.10, DOVE["depth"] - 0.10
+    pod_shape = rrect(L - 0.6, W - 0.6, R - 0.3, 10, z0=-1)
     for sx in (-1, 1):
-        p = p.union(dovetail(sx * DOVE["x"], MW / 2 - 0.5, DOVE["y_stop"] + 0.3,
-                             DOVE["w_deep"] - 2 * cl, DOVE["w_face"] - 2 * cl, 0, DOVE["depth"] - 0.25))
+        t = dovetail(sx * DOVE["x"], W / 2, DOVE["y_stop"] + 0.10, DOVE["w_deep"] - 2 * cl, DOVE["w_face"] - 2 * cl, 0, h)
+        p = p.union(t.intersect(pod_shape))
+        if ribs:
+            for y in (-12.0, 0.0, 12.0):
+                for side in (-1, 1):
+                    xr = sx * DOVE["x"] + side * ((DOVE["w_deep"] - 2 * cl) / 2 - 0.1 + 0.1)
+                    p = p.union(box(xr, y, h - 0.75, 0.4, 1.2, 0.6))
     # gancho elástico: viga recortada en U, anclada en −Y, libre en el borde +Y
     bw, ya, ye = BEAM["w"], BEAM["y_anchor"], BEAM["y_end"]
     p = p.cut(box(0, (ya + ye) / 2 + 0.5, -MT - 1, bw + 2 * BEAM["slot"], ye - ya + 1, MT + 2))
@@ -197,7 +205,7 @@ def mount():
     # diente: cara vertical hacia −Y (bloquea), rampa hacia +Y (deja entrar)
     # REV1.3 (sentido del usuario): la cápsula entra desde −Y empujando hacia la pestaña. Rampa hacia −Y,
     # cara recta hacia +Y: al tirar de vuelta (−Y), la pared +Y del rebaje choca con ella. Tope hacia +Y: fin de las ranuras.
-    hook = (cq.Workplane("YZ").polyline([(LATCH["y0"] + 0.4, 0), (LATCH["y1"] - 0.4, 0), (LATCH["y1"] - 0.4, 1.2), (LATCH["y0"] + 3.6, 1.2)])
+    hook = (cq.Workplane("YZ").polyline([(LATCH["y0"] + 0.4, 0), (LATCH["y1"] - 0.10, 0), (LATCH["y1"] - 0.10, 1.2), (LATCH["y0"] + 3.6, 1.2)])
             .close().extrude(2 * LATCH["x"] - 0.8).translate((-(LATCH["x"] - 0.4), 0, 0)))
     p = p.union(hook)
     # REV1.2: zona de pulsar enrasada (antes un botón de 1,6 mm que bloqueaba la entrada de la cápsula).
@@ -237,6 +245,7 @@ def main():
         "AVO_GIRTH_R1_tapon_USB_TPU": usb_plug(),
         "AVO_GIRTH_R1_soporte": mount(),
     }
+    check = dict(parts); check["AVO_GIRTH_R1_soporte"] = mount(ribs=False)   # las costillas aplastables interfieren a propósito
     comps = components()
     report = {"piezas": {}, "interferencias": {}}
     for n, s in parts.items():
@@ -253,6 +262,7 @@ def main():
     # interferencias componente ↔ pieza (deben ser 0)
     for cn, c in comps.items():
         for pn, p in parts.items():
+            p = check[pn]
             try:
                 v = c.intersect(p).val().Volume()
             except Exception:
@@ -264,7 +274,7 @@ def main():
     for i in range(len(names)):
         for j in range(i + 1, len(names)):
             try:
-                v = parts[names[i]].intersect(parts[names[j]]).val().Volume()
+                v = check[names[i]].intersect(check[names[j]]).val().Volume()
             except Exception:
                 v = 0.0
             if v > 0.01:

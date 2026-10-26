@@ -613,3 +613,9 @@ Petición del usuario.
 - Pendiente de imprimir y probar (antes, la placa de probetas).
 - **REV 1.1:** la tapa tenía el labio interior suelto (2 sólidos). Ahora un puente lo une a la pared. El CI exige un único sólido por pieza y las 5 piezas lo cumplen.
 - **REV 1.3:** se invierte el sentido del gancho, como pidió el usuario. La cápsula entra por el lado contrario a la pestaña y hace tope al final de las colas de milano. El gancho, con la rampa hacia la entrada y la cara recta hacia la pestaña, impide que vuelva atrás. El rebaje del fondo queda cerrado (y 12…19).
+- **REV 1.4:**
+  - las colas de milano se recortan con la silueta de la cápsula; ya no sobresalen;
+  - holgura de 0,10 por lado y tope a 0,10;
+  - costillas aplastables de 0,2 en los flancos (3 por lado) para eliminar el juego de impresión;
+  - la cara del gancho queda a 0,10 de la pared del rebaje;
+  - el control de interferencias del CI excluye esas costillas, que interfieren a propósito.
