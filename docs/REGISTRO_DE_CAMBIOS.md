@@ -688,3 +688,18 @@ Petición del usuario.
   - el usuario preguntó cómo se sujetaba el C6 sin paredes en los 4 costados;
   - ahora lleva un marco en los 4 lados a ras del PCB (holgura 0,15) y un tope de la tapa que aprieta el USB-C desde arriba;
   - CI sin interferencias.
+
+## 2026-10-26 — Cincha REV 5.1 (ajustes tras imprimir base y bandeja)
+- **Prueba física del usuario** con los componentes reales sobre la base y la bandeja impresas.
+- **Placa Qi:**
+  - la placa real mide 18 en X y 15 en Y (el modelo la tenía girada);
+  - el marco queda solo en los lados Y, con topes en las esquinas;
+  - los lados X quedan abiertos: hilos de la bobina en −X y salidas WOUT/BAT en +X;
+  - pasa a x = −18 y el paso de los hilos de la bobina va a (−29, −3).
+- **BNO085:**
+  - largo 25,2 mm y taladros a 3,0 mm de los bordes, medidos sobre la foto (pendiente de calibre);
+  - topes de los extremos a 0,15 mm y pared nueva en el lado −X.
+- **ESP32-C6:** 17,8 × 21; el marco queda a 0,1 mm por lado.
+- **Reed:** el canal es 1 mm más largo por cada extremo.
+- **Tapa:** los postes de la placa Qi se reubican (fuera del hueco de la antena y separados de la pared del BNO).
+- **CI:** sin interferencias, 1 sólido por pieza.
