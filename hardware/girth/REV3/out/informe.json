@@ -1,0 +1,119 @@
+{
+ "piezas": {
+  "AVO_GIRTH_R3_base": {
+   "volumen_mm3": 9544.3,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    9.01
+   ]
+  },
+  "AVO_GIRTH_R3_aro_rojo": {
+   "volumen_mm3": 207.4,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R3_tapa": {
+   "volumen_mm3": 5623.5,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    7.26
+   ]
+  },
+  "AVO_GIRTH_R3_panel_rojo": {
+   "volumen_mm3": 2004.6,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    56.8,
+    38.8,
+    1.51
+   ]
+  },
+  "AVO_GIRTH_R3_bandeja": {
+   "volumen_mm3": 1945.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    56.91,
+    38.91,
+    3.5
+   ]
+  },
+  "AVO_GIRTH_R3_tapon_USB_TPU": {
+   "volumen_mm3": 117.6,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    2.0,
+    15.55,
+    6.4
+   ]
+  },
+  "AVO_GIRTH_R3_soporte": {
+   "volumen_mm3": 22325.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    88.46,
+    58.42,
+    9.07
+   ]
+  },
+  "AVO_GIRTH_R3_tirador_rojo": {
+   "volumen_mm3": 85.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    3.3,
+    10.0,
+    4.65
+   ]
+  }
+ },
+ "interferencias": {
+  "ESP32_C6 × AVO_GIRTH_R3_tapa": 0.051,
+  "AVO_GIRTH_R3_base × AVO_GIRTH_R3_bandeja": 0.035
+ },
+ "medidas": {
+  "soporte_mm": [
+   88.44,
+   58.4,
+   9.049999999999999
+  ],
+  "capsula_mm": [
+   64.0,
+   46.0,
+   15.5
+  ],
+  "usb_frente_a_cara_exterior_mm": 1.1,
+  "bno_taladros": [
+   [
+    -21.9,
+    15.9
+   ],
+   [
+    -1.2999999999999994,
+    15.9
+   ]
+  ],
+  "c6_centro": [
+   19.1,
+   6.1
+  ],
+  "led": [
+   10.600000000000001,
+   7.75
+  ]
+ }
+}
