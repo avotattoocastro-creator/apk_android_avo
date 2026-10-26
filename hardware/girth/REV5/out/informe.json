@@ -1,0 +1,119 @@
+{
+ "piezas": {
+  "AVO_GIRTH_R5_base": {
+   "volumen_mm3": 10954.9,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    70.01,
+    48.01,
+    9.01
+   ]
+  },
+  "AVO_GIRTH_R5_aro_rojo": {
+   "volumen_mm3": 215.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    70.01,
+    48.01,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R5_tapa": {
+   "volumen_mm3": 7363.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    70.01,
+    48.01,
+    7.26
+   ]
+  },
+  "AVO_GIRTH_R5_panel_rojo": {
+   "volumen_mm3": 2343.6,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    62.8,
+    40.8,
+    1.51
+   ]
+  },
+  "AVO_GIRTH_R5_bandeja": {
+   "volumen_mm3": 2112.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    62.51,
+    40.5,
+    3.5
+   ]
+  },
+  "AVO_GIRTH_R5_junta_TPU": {
+   "volumen_mm3": 247.5,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    67.21,
+    45.21,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R5_soporte": {
+   "volumen_mm3": 23898.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    94.46,
+    58.42,
+    9.06
+   ]
+  },
+  "AVO_GIRTH_R5_tirador_rojo": {
+   "volumen_mm3": 85.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    3.3,
+    10.0,
+    4.65
+   ]
+  }
+ },
+ "interferencias": {},
+ "medidas": {
+  "soporte_mm": [
+   94.44,
+   58.4,
+   9.049999999999999
+  ],
+  "capsula_mm": [
+   70.0,
+   48.0,
+   15.5
+  ],
+  "aberturas_al_exterior": 0,
+  "tornillos_M3": 8,
+  "imanes_5x1": 8,
+  "junta_compresion_pct": 29,
+  "bno_taladros": [
+   [
+    -23.4,
+    -10.3
+   ],
+   [
+    -23.4,
+    10.3
+   ]
+  ],
+  "c6_centro": [
+   18.0,
+   0.0
+  ],
+  "led": [
+   16.35,
+   -8.5
+  ]
+ }
+}
