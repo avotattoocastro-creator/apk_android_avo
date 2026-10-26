@@ -648,3 +648,19 @@ Petición del usuario.
   - el informe del CI indica dónde está cada interferencia.
 - **CI:** construye ahora REV 3. Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
 - Medidas estimadas sobre foto marcadas (E) en el código. Pendiente de imprimir y probar.
+
+## 2026-10-26 — Cincha REV 4 (cápsula estanca, objetivo IP67)
+- **Petición del usuario:** caja «estanca completamente», con el USB dentro, sin agujero para el LED, IP67.
+- **`hardware/girth/REV4/avo_girth_rev4.py`:**
+  - sin ninguna abertura: fuera la ventana USB, la ventana del LED y el tapón;
+  - C6 desplazado hacia dentro (tope en x = 26,8);
+  - reborde en la base con ranura continua para una junta de TPU 85A (1,2 × 1,4 mm, 29 % de compresión fijada por el apoyo de la tapa);
+  - faldón de la tapa sobre el reborde y aro rojo por fuera de la junta;
+  - tornillos M2 desde abajo con junta tórica 2 × 1 bajo la cabeza;
+  - columnas unidas a la pared;
+  - la junta se exporta con su altura libre.
+- **CI:** construye REV 4. Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
+- **Comprobación:** sección real de los STL por el eje del tornillo y por el lado +Y.
+- **Pendiente:**
+  - imprimir y hacer la prueba de inmersión; IP67 no está probado;
+  - actualizar el firmware de la cincha por radio, porque el USB ya no es accesible sin abrir.
