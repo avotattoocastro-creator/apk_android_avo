@@ -166,6 +166,8 @@ def pod_lid():
                              (qx - QI["l"] / 2 - 1.5, qx + QI["l"] / 2 + 1.5, -seal_y, qy + 2),
                              (BX0 - 0.5, BX1 + 0.5, BY1 - 2.0, seal_y)):
         lid = lid.cut(box((x0 + x1) / 2, (y0 + y1) / 2, TRAY_TOP - 1, x1 - x0, y1 - y0, HB + 1.7 - TRAY_TOP + 1))
+    for sx in (-1, 1):                                               # el labio rodea las columnas de la base
+        lid = lid.cut(cyl(sx * SCREW_X, SCREW_Y, TRAY_TOP - 1, 5.0, HB - TRAY_TOP + 1))
     for sx in (-1, 1):
         lid = lid.union(cyl(sx * SCREW_X, SCREW_Y, HB, 4.4, CEIL - HB + 0.5))
         lid = lid.cut(cyl(sx * SCREW_X, SCREW_Y, HB - 0.5, 1.7, 4.5))
