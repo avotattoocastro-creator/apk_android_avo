@@ -49,7 +49,7 @@ MAGS = [(sx * 28.5, sy * 17.5) for sx in (-1, 1) for sy in (-1, 1)]
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
-C6 = dict(lx=18.0, wy=21.0, pcb=1.0, usb_over=1.3, usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
+C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.3, usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
 C6_C = (18.0, 0.0)
 C6_X0, C6_X1 = C6_C[0] - C6["lx"] / 2, C6_C[0] + C6["lx"] / 2
 C6_Y0, C6_Y1 = C6_C[1] - C6["wy"] / 2, C6_C[1] + C6["wy"] / 2      # Y0: extremo de la antena
@@ -58,8 +58,8 @@ UFL = (C6_C[0] - 4.95, C6_Y0 + 1.5)                # (E)
 ANT = (C6_C[0] + 3.4, C6_Y0 + 1.2)                 # (E) 6,6 × 2,2
 USB_FRONT = C6_Y1 + C6["usb_over"]
 
-QI = dict(lx=15.0, wy=18.0, pcb=1.0, parts=1.2, center=(-17.0, 0.0))      # extremo −X
-BNO = dict(lx=15.5, wy=25.8, t=1.6, stand=1.5, hole_in=2.6, center=(0.0, 0.0))   # CENTRADO: lo más lejos posible de los imanes; pines hacia +X
+QI = dict(lx=18.0, wy=15.0, pcb=1.0, parts=1.2, center=(-18.0, 0.0))      # extremo −X; real: 18 en X, 15 en Y; bobina en −X, salidas WOUT/BAT en +X
+BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0, center=(0.0, 0.0))   # 25,2 y taladros a 3,0: medido en la foto de la placa real (confirmar con calibre)   # CENTRADO: lo más lejos posible de los imanes; pines hacia +X
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
@@ -193,17 +193,23 @@ def tray():
     cx, cy = C6_C
     t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6
     t = t.cut(box(26.0, -13.0, TRAY_Z0 - 1, 3, 4, 3))                # cables de la batería
-    t = t.cut(box(-29.0, -5.0, TRAY_Z0 - 1, 2.6, 3, 3))              # hilos de la bobina
+    t = t.cut(box(-29.0, -3.0, TRAY_Z0 - 1, 2.6, 3, 3))              # hilos de la bobina (junto a sus pads, lado −X de la placa Qi)
     rx, ry = REED["center"]
     for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):
         t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 3))
     # C6: marco en los 4 costados (0,15 de holgura, 1,2 de pared), a ras de la cara superior del PCB:
     # no se mueve en X ni en Y y los cables de los pads laterales salen por encima del marco
-    t = t.union(frame(cx, cy, TRAY_TOP, C6["lx"] + 0.3, C6["wy"] + 0.3, 1.2, C6["pcb"]))
+    t = t.union(frame(cx, cy, TRAY_TOP, C6["lx"] + 0.2, C6["wy"] + 0.2, 1.2, C6["pcb"]))     # 0,1 por lado
     # placa Qi
     qx, qy = QI["center"]
-    fq = frame(qx, qy, TRAY_TOP, QI["lx"] + 2 * G, QI["wy"] + 2 * G, 1.0, 1.0)
-    fq = fq.cut(box(qx, qy - QI["wy"] / 2, TRAY_TOP - 1, QI["lx"] - 5, 4, 3)).cut(box(qx, qy + QI["wy"] / 2, TRAY_TOP - 1, QI["lx"] - 5, 4, 3))
+    # marco solo en los lados largos (Y); los lados X quedan abiertos: hilos de la bobina (−X) y salidas WOUT/BAT (+X)
+    fq = frame(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, 1.0, 1.0)
+    for sx in (-1, 1):
+        fq = fq.cut(box(qx + sx * (QI["lx"] / 2 + 0.6), qy, TRAY_TOP - 1, 2.0, QI["wy"] + 4, 3))
+    # topes cortos en las esquinas para que no se deslice en X
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            fq = fq.union(box(qx + sx * (QI["lx"] / 2 + 0.15 + 0.5), qy + sy * (QI["wy"] / 2 - 1.0), TRAY_TOP, 1.0, 2.0, 1.0))
     t = t.union(fq)
     # BNO085 (girado: lado largo en Y), 2 postes M2 en el lado −X, apoyos junto a los pines (+X)
     for (hx, hy) in BNO_HOLES:
@@ -211,8 +217,9 @@ def tray():
         t = t.cut(cyl(hx, hy, TRAY_Z0 - 0.1, 1.7, TRAY_T + BNO["stand"] + 0.2))
     for hy in (BY0 + 5.0, BY1 - 5.0):
         t = t.union(cyl(BX1 - 4.2, hy, TRAY_TOP, 3.0, BNO["stand"]))
-    for yy in (BY0 - G - 0.5, BY1 + G + 0.5):
+    for yy in (BY0 - 0.15 - 0.5, BY1 + 0.15 + 0.5):                  # topes en los extremos (0,15 de holgura)
         t = t.union(box(BNO["center"][0], yy, TRAY_TOP, 6.0, 1.0, BNO["stand"] + 1.0))
+    t = t.union(box(BX0 - 0.15 - 0.5, BNO["center"][1], TRAY_TOP, 1.0, BNO["wy"] - 2.0, BNO["stand"] + 1.0))   # pared lado −X
     for (x, y) in SCREWS:
         t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss"] + 0.8, 6))
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
