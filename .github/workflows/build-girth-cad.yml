@@ -5,7 +5,7 @@ on:
   push:
     branches: [feature/avo-wifi-sync]
     paths:
-      - 'hardware/girth/REV4/avo_girth_rev4.py'
+      - 'hardware/girth/REV5/avo_girth_rev5.py'
       - '.github/workflows/build-girth-cad.yml'
 
 permissions:
@@ -23,10 +23,10 @@ jobs:
       - name: Install CadQuery
         run: pip install cadquery==2.4.0 "numpy<2"
       - name: Build
-        working-directory: hardware/girth/REV4
+        working-directory: hardware/girth/REV5
         run: |
           set -o pipefail
-          if ! python avo_girth_rev4.py 2>&1 | tee build.log; then
+          if ! python avo_girth_rev5.py 2>&1 | tee build.log; then
             tail -25 build.log | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
             exit 1
           fi
@@ -40,6 +40,6 @@ jobs:
       - name: Commit outputs
         run: |
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
-          git add hardware/girth/REV4/out
-          git commit -m "CAD cincha REV4: STEP/STL generados [skip ci]" || echo "sin cambios"
+          git add hardware/girth/REV5/out
+          git commit -m "CAD cincha REV5: STEP/STL generados [skip ci]" || echo "sin cambios"
           git push
