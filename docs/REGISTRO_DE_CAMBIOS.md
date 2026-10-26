@@ -679,3 +679,8 @@ Petición del usuario.
 - **Pendiente:**
   - comprobar que los imanes de la cápsula no activan el reed;
   - imprimir y hacer la prueba de inmersión; IP67 no está probado.
+- **REV 5, ajuste:**
+  - BNO085 centrado, a petición del usuario, para alejar su magnetómetro de los imanes; la placa Qi pasa al extremo −X;
+  - el imán del reed en el soporte pasa a 1 × Ø5 × 1: en el BNO da ~180 µT, frente a ~1000 µT con los 2 × Ø6 × 2 (estimación de dipolo);
+  - se recomienda alternar la polaridad de los imanes de las esquinas en diagonal: ~40 µT en el BNO en lugar de ~250 µT;
+  - CI sin interferencias.
