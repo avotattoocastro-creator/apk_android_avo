@@ -214,6 +214,8 @@ def tray():
     for s in (-1, 1):
         xe = (BX0 - G - 0.5) if s < 0 else (BX1 + G + 0.5)
         t = t.union(box(xe, BNO["center"][1], TRAY_TOP, 1.0, 6.0, BNO["stand"] + 1.0))
+    for sx in (-1, 1):                                               # holgura alrededor de las columnas de los tornillos
+        t = t.cut(cyl(sx * SCREW_X, SCREW_Y, TRAY_Z0 - 1, 5.6, 6))
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
 
 
