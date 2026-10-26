@@ -64,7 +64,7 @@ BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
 REED = dict(l=14.0, d=3.2, center=(0.0, -19.0), z0=1.0)
-MAG = dict(d=6.0, t=2.0, n=2)                     # imanes del reed (en el soporte)
+MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
 
 RING_T = 1.0
 PANEL = dict(margin=3.5, t=0.9, pocket=1.2)
@@ -255,7 +255,7 @@ def mount():
     p = p.union(hook)
     p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, 1.6, 1.0, TAB["len"] - 4.0, RH - 2.0))
     rx, ry = REED["center"]
-    p = p.cut(cyl(rx, ry, -MT + STRAP["chan"] + 0.2, MAG["d"] + 0.15, MT))
+    p = p.cut(cyl(rx, ry, -MAG["t"] * MAG["n"] - 0.05, MAG["d"] + 0.15, 2))
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["t"] - 0.05, HMAG["d"] + 0.15, 2))
     return p
@@ -303,7 +303,7 @@ def components():
         "BNO085": bno,
         "reed": box(rx, ry, REED["z0"] + 0.1, REED["l"], REED["d"], REED["d"]),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
-        "imanes": cyl(rx, ry, -MT + STRAP["chan"] + 0.25, MAG["d"], MAG["t"] * MAG["n"] - 0.1),
+        "imanes": cyl(rx, ry, -MAG["t"] * MAG["n"] - 0.02, MAG["d"], MAG["t"] * MAG["n"]),
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
