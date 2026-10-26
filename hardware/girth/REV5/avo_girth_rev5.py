@@ -118,7 +118,7 @@ def pod_base():
         for s in (-1, 1):
             b = b.union(box(x, s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
     rx, ry = REED["center"]
-    b = b.cut(box(rx, ry, REED["z0"], REED["l"] + 2 * G, REED["d"] + 2 * G, FLOOR))
+    b = b.cut(box(rx, ry, REED["z0"], REED["l"] + 2 * G + 2.0, REED["d"] + 2 * G, FLOOR))      # +1 mm por extremo (prueba impresa)
     b = b.union(rshell(0.5, SEAL_IN, HB - SEAL_Z0, SEAL_Z0))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
