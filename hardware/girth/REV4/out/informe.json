@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R4_tapa": {
-   "volumen_mm3": 6116.4,
+   "volumen_mm3": 6109.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -81,19 +81,7 @@
    ]
   }
  },
- "interferencias": {
-  "AVO_GIRTH_R4_base × AVO_GIRTH_R4_tapa": [
-   3.88,
-   [
-    -28.25,
-    28.25,
-    -8.2,
-    -3.8,
-    8.25,
-    9.0
-   ]
-  ]
- },
+ "interferencias": {},
  "medidas": {
   "soporte_mm": [
    88.44,
