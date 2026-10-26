@@ -137,7 +137,7 @@ def pod_base():
     for sx in (-1, 1):
         col = cyl(sx * SCREW_X, SCREW_Y, 0, 4.4, HB)
         col = col.cut(box(sx * (BAT["l"] / 2 + G + 0.15 - 2.0), SCREW_Y, -1, 4.0, 6, HB + 2))
-        b = b.union(col)
+        b = b.union(col).union(box(sx * 29.4, SCREW_Y, 0, 1.6, 3.0, HB))   # columna unida a la pared (sin rendija)
         b = b.cut(cyl(sx * SCREW_X, SCREW_Y, -1, 2.3, HB + 2))
         b = b.cut(cyl(sx * SCREW_X, SCREW_Y, -1, 4.4, 2.4 + 1))      # cabeza M2 (Ø3,8) + junta tórica 2 × 1
     gc, gw = GASKET["c"], GASKET["w_groove"]                         # ranura continua (también corta las columnas)
