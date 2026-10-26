@@ -153,7 +153,7 @@ def pod_lid():
         lid = lid.union(cyl(x, y, TRAY_TOP + 0.05, 2.4, CEIL - TRAY_TOP))
     for (x, y) in ((C6_X0 + 0.8, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
-    for x in (qx - QI["lx"] / 2 + 0.8, qx + QI["lx"] / 2 - 0.8):
+    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
         lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
