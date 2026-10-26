@@ -619,3 +619,16 @@ Petición del usuario.
   - costillas aplastables de 0,2 en los flancos (3 por lado) para eliminar el juego de impresión;
   - la cara del gancho queda a 0,10 de la pared del rebaje;
   - el control de interferencias del CI excluye esas costillas, que interfieren a propósito.
+
+## 2026-10-26 — Cincha REV 2 (CAD fiel al concepto REV 0)
+- **Petición del usuario:** que el CAD sea «como la imagen de referencia, lo más exacto posible y que encaje todo perfecto». Preguntó también para qué servían los salientes de las colas de milano: eran costillas aplastables (REV 1.4) para quitar el juego de impresión. En REV 2 se eliminan.
+- **`hardware/girth/REV2/avo_girth_rev2.py`:**
+  - base con fondo liso y una ranura de anclaje en cada extremo X;
+  - aro rojo entre base y tapa;
+  - tapa negra con alojamiento para un panel rojo con AVO / GIRTH en relieve y ventana del LED;
+  - soporte con cerco a 0,12 mm, labio en −X y pestaña elástica con diente en +X;
+  - tirador rojo pegado a la pestaña;
+  - pasadores para cinta de 50 mm e imanes Ø6.
+- **CI:** `build-girth-cad.yml` construye ahora REV 2 (REV 1 se conserva). Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
+- **Comprobación:** sección real de los STL por Y = 5 mm (labio y diente dentro de sus ranuras).
+- Pendiente de imprimir y probar.
