@@ -632,3 +632,19 @@ Petición del usuario.
 - **CI:** `build-girth-cad.yml` construye ahora REV 2 (REV 1 se conserva). Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
 - **Comprobación:** sección real de los STL por Y = 5 mm (labio y diente dentro de sus ranuras).
 - Pendiente de imprimir y probar.
+
+## 2026-10-26 — Cincha REV 3 (componentes reales y soporte de una pieza)
+- **Petición del usuario:** ajustar todo a los componentes reales y hacer el soporte «compacto, fuerte, comercial y muy visual». Señaló que un poste del BNO estaba mal y que el soporte estaba mal resuelto.
+- **Medidas:** se revisaron las fotos de los anuncios que mandó el usuario (BNO085 HanOaki, C6 diymore, Qi, LP403048, reed e imán).
+- **Errores de REV 2 corregidos:**
+  - los taladros del BNO estaban en diagonal; los reales están en el lado opuesto a los pines;
+  - el USB-C quedaba hundido 3,3 mm y el cable no podía entrar.
+- **`hardware/girth/REV3/avo_girth_rev3.py`:**
+  - nueva distribución de la bandeja: C6 con tope en la pared y ventana inferior para los cables, BNO, placa Qi y pasos de cables;
+  - cuna de batería cerrada;
+  - canal para los hilos de la bobina;
+  - reed desplazado;
+  - soporte de una pieza de 88,4 × 58,4 mm con pasos de cinta cerrados;
+  - el informe del CI indica dónde está cada interferencia.
+- **CI:** construye ahora REV 3. Resultado: 8 piezas, 1 sólido cada una, sin interferencias.
+- Medidas estimadas sobre foto marcadas (E) en el código. Pendiente de imprimir y probar.
