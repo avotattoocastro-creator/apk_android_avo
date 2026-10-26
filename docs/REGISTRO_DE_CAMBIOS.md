@@ -703,3 +703,4 @@ Petición del usuario.
 - **Reed:** el canal es 1 mm más largo por cada extremo.
 - **Tapa:** los postes de la placa Qi se reubican (fuera del hueco de la antena y separados de la pared del BNO).
 - **CI:** sin interferencias, 1 sólido por pieza.
+- **REV 5.1, paso de los hilos de la bobina:** hueco de 6 mm a toda altura en la pared −X de la cuna de la batería (y −6,5…−0,5), donde el usuario lo marcó. Queda sobre el canal del fondo y bajo el paso de la bandeja. CI sin interferencias.
