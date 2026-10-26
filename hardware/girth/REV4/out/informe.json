@@ -1,0 +1,129 @@
+{
+ "piezas": {
+  "AVO_GIRTH_R4_base": {
+   "volumen_mm3": 9715.2,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    9.01
+   ]
+  },
+  "AVO_GIRTH_R4_aro_rojo": {
+   "volumen_mm3": 199.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R4_tapa": {
+   "volumen_mm3": 6116.4,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    64.01,
+    46.01,
+    7.26
+   ]
+  },
+  "AVO_GIRTH_R4_panel_rojo": {
+   "volumen_mm3": 2009.4,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    56.8,
+    38.8,
+    1.51
+   ]
+  },
+  "AVO_GIRTH_R4_bandeja": {
+   "volumen_mm3": 1898.3,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    56.5,
+    38.5,
+    3.5
+   ]
+  },
+  "AVO_GIRTH_R4_junta_TPU": {
+   "volumen_mm3": 228.3,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    61.21,
+    43.21,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R4_soporte": {
+   "volumen_mm3": 22325.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    88.46,
+    58.42,
+    9.07
+   ]
+  },
+  "AVO_GIRTH_R4_tirador_rojo": {
+   "volumen_mm3": 85.8,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    3.3,
+    10.0,
+    4.65
+   ]
+  }
+ },
+ "interferencias": {
+  "AVO_GIRTH_R4_base × AVO_GIRTH_R4_tapa": [
+   3.88,
+   [
+    -28.25,
+    28.25,
+    -8.2,
+    -3.8,
+    8.25,
+    9.0
+   ]
+  ]
+ },
+ "medidas": {
+  "soporte_mm": [
+   88.44,
+   58.4,
+   9.049999999999999
+  ],
+  "capsula_mm": [
+   64.0,
+   46.0,
+   15.5
+  ],
+  "aberturas_al_exterior": 0,
+  "junta_compresion_pct": 29,
+  "bno_taladros": [
+   [
+    -21.9,
+    15.9
+   ],
+   [
+    -1.2999999999999994,
+    15.9
+   ]
+  ],
+  "c6_centro": [
+   16.3,
+   6.1
+  ],
+  "led": [
+   7.800000000000001,
+   7.75
+  ]
+ }
+}
