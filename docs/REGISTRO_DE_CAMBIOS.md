@@ -684,3 +684,7 @@ Petición del usuario.
   - el imán del reed en el soporte pasa a 1 × Ø5 × 1: en el BNO da ~180 µT, frente a ~1000 µT con los 2 × Ø6 × 2 (estimación de dipolo);
   - se recomienda alternar la polaridad de los imanes de las esquinas en diagonal: ~40 µT en el BNO en lugar de ~250 µT;
   - CI sin interferencias.
+- **REV 5, sujeción del C6:**
+  - el usuario preguntó cómo se sujetaba el C6 sin paredes en los 4 costados;
+  - ahora lleva un marco en los 4 lados a ras del PCB (holgura 0,15) y un tope de la tapa que aprieta el USB-C desde arriba;
+  - CI sin interferencias.

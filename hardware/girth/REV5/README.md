@@ -14,6 +14,10 @@
   - **BNO085 en el centro**, para que su magnetómetro quede lo más lejos posible de los imanes (~35 mm de las esquinas);
   - placa Qi en el extremo −X;
   - ESP32-C6 girado en el extremo +X, con el USB-C hacia +Y, dentro.
+- **Sujeción del ESP32-C6:**
+  - **en X y en Y:** un marco en los 4 costados, con 0,15 mm de holgura y 1,2 mm de pared. Su altura es la del PCB (1,0 mm), así que queda a ras de la cara superior y los cables soldados a los pads laterales salen por encima;
+  - **hacia abajo:** apoya en rebordes de 1 mm; debajo queda una ventana para los cables soldados por la cara inferior;
+  - **hacia arriba:** 2 postes de la tapa aprietan el extremo de la antena y un tope de la tapa aprieta el conector USB-C. Las esquinas del lado USB tienen los botones R/B, por eso no se aprieta ahí.
 - **Imán del reed (soporte):** 1 × Ø5 × 1, en lugar de 2 × Ø6 × 2. Queda a ~1 mm del reed, así que lo activa con mucho margen, y en el BNO da ~180 µT en lugar de ~1000 µT.
 
 ## Polaridad de los imanes de las esquinas (importante para el magnetómetro)
