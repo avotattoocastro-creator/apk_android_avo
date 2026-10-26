@@ -355,11 +355,14 @@ def main():
     for i in range(len(names)):
         for j in range(i + 1, len(names)):
             try:
-                v = parts[names[i]].intersect(parts[names[j]]).val().Volume()
+                x = parts[names[i]].intersect(parts[names[j]]).val()
+                v = x.Volume()
+                bb = x.BoundingBox()
+                where = [round(bb.xmin, 2), round(bb.xmax, 2), round(bb.ymin, 2), round(bb.ymax, 2), round(bb.zmin, 2), round(bb.zmax, 2)]
             except Exception:
-                v = 0.0
+                v, where = 0.0, None
             if v > 0.01:
-                report["interferencias"][f"{names[i]} × {names[j]}"] = round(v, 3)
+                report["interferencias"][f"{names[i]} × {names[j]}"] = [round(v, 3), where]
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
                          "usb_frente_a_cara_exterior_mm": round(L / 2 - USB_FRONT, 2),
