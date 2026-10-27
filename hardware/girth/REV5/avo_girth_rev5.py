@@ -43,14 +43,15 @@ TRAY_L, TRAY_W, TRAY_R = L - 2 * LIP_OUT, W - 2 * LIP_OUT, R - LIP_OUT     # 62,
 # tornillos de cierre M3 desde abajo (dentro de la junta, sellados con junta tórica 3 × 1 bajo la cabeza)
 SCREWS = [(sx * 21.0, sy * 19.0) for sx in (-1, 1) for sy in (-1, 1)] + \
          [(sx * 30.0, sy * 10.0) for sx in (-1, 1) for sy in (-1, 1)]
-M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0)
+M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
+          insert_d=4.0, insert_depth=6.0, boss_lid=7.0)   # tapa: inserto roscado M3 (tipo Ruthex M3 × 5,7, taladro Ø4,0)
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
 MAGS = [(sx * 27.5, sy * 16.5) for sx in (-1, 1) for sy in (-1, 1)]   # dentro de la pared maciza
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
 C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.3, usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
-C6_C = (18.0, 0.0)
+C6_C = (17.6, 0.0)
 C6_X0, C6_X1 = C6_C[0] - C6["lx"] / 2, C6_C[0] + C6["lx"] / 2
 C6_Y0, C6_Y1 = C6_C[1] - C6["wy"] / 2, C6_C[1] + C6["wy"] / 2      # Y0: extremo de la antena
 LED = (C6_C[0] - 1.65, C6_Y0 + 2.0)                # (E)
@@ -156,8 +157,9 @@ def pod_lid():
     for (x, y) in SCREWS:
         lid = lid.cut(cyl(x, y, TRAY_TOP - 1, M3["boss"] + 1.0, HB - TRAY_TOP + 1))
     for (x, y) in SCREWS:
-        lid = lid.union(cyl(x, y, HB, M3["boss"], CEIL - HB + 0.5))
-        lid = lid.cut(cyl(x, y, HB - 0.5, M3["pilot"], M3["pilot_top"] - HB + 0.5))
+        lid = lid.union(cyl(x, y, HB, M3["boss_lid"], CEIL - HB + 0.5))
+    for (x, y) in SCREWS:                                            # alojamiento del inserto M3 (se mete con el soldador)
+        lid = lid.cut(cyl(x, y, HB - 0.5, M3["insert_d"], M3["insert_depth"] + 0.5))
     for (x, y) in ((-3.0, -16.5), (-3.0, 16.5), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
         lid = lid.union(cyl(x, y, TRAY_TOP + 0.05, 2.4, CEIL - TRAY_TOP))
     for (x, y) in ((C6_X0 + 0.8, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):
