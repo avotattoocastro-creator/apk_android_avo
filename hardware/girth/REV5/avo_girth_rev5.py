@@ -11,7 +11,7 @@ reed en la mano antes de cerrar. IP67 es el objetivo de diseño; no está probad
 Componentes (medidas de los anuncios del usuario; (E) = estimado sobre la foto):
   ESP32-C6 diymore (formato XIAO) 18 × 21, PCB 1,0; USB-C en un extremo de 18; U.FL, LED (E) y antena (E) en el otro.
   BNO085 GY (HanOaki) 25,8 × 15,5 × 1,6: 10 pines en un lado largo, 2 taladros en el lado largo opuesto (E: 2,6 mm).
-  Receptor Qi 5 W: placa 15 × 18; bobina 23 × 30. Batería LP403048 50,8 × 30,5 × 4,3. Reed 14 × 3,2. Imanes Ø5 × 1.
+  Receptor Qi 5 W: placa 15 × 18; bobina redonda Ø25. Batería LP403048 50,8 × 30,5 × 4,3. Reed 14 × 3,2. Imanes Ø5 × 1.
 """
 import json
 import cadquery as cq
@@ -28,7 +28,7 @@ IL, IW, IR = L - 2 * WALL, W - 2 * WALL, R - WALL   # interior 66 × 44
 CEIL = H - 2.3
 
 FLOOR = 2.6
-COIL = dict(lx=30.0, wy=23.0, t=1.0)
+COIL = dict(d=25.0, t=1.0)                         # bobina Qi redonda Ø25 (nuevo receptor); espesor (E)
 COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
 TRAY_Z0, TRAY_T = 7.2, 1.0
@@ -107,8 +107,8 @@ def rshell(off_out, off_in, h, z0):
 def pod_base():
     outer = rrect(L, W, R, HB).faces("<Z").edges().fillet(1.0)
     b = outer.cut(rrect(IL, IW, IR, HB, z0=FLOOR))
-    b = b.cut(box(0, 0, COIL_Z0, COIL["lx"] + 2 * G, COIL["wy"] + 2 * G, FLOOR))
-    b = b.cut(box(-(COIL["lx"] / 2 + 32.6) / 2, -5.0, COIL_Z0 + 0.4, 32.6 - COIL["lx"] / 2, 2.0, FLOOR))   # hilos de la bobina
+    b = b.cut(cyl(0, 0, COIL_Z0, COIL["d"] + 2 * G, FLOOR))                       # alojamiento de la bobina Ø25,4
+    b = b.cut(box(-(11.0 + 32.6) / 2, -5.0, COIL_Z0 + 0.4, 32.6 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
     cr = cr.cut(box(bl / 2 + 0.5, -bw / 2 + 4.0, FLOOR - 1, 2, 7.0, 10))
@@ -289,7 +289,7 @@ def components():
     for (x, y) in MAGS[1:]:
         mmags = mmags.union(cyl(x, y, -HMAG["t"] - 0.02, HMAG["d"], HMAG["t"]))
     return {
-        "bobina_Qi": box(0, 0, COIL_Z0 + 0.1, COIL["lx"], COIL["wy"], COIL["t"]),
+        "bobina_Qi": cyl(0, 0, COIL_Z0 + 0.1, COIL["d"], COIL["t"]),
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
         "placa_Qi": box(qx, qy, TRAY_TOP + 0.02, QI["lx"], QI["wy"], QI["pcb"] - 0.02).union(
