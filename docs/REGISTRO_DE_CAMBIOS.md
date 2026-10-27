@@ -715,3 +715,22 @@ Petición del usuario.
 - En la base, el alojamiento de la bobina pasa a ser circular, de Ø25,4 y 1,4 mm de profundidad, con 1,2 mm de fondo bajo la bobina. El canal de los hilos sale de su borde hacia −X.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
+
+## 2026-10-27 — Cincha REV 5.4 y 5.5 (paredes macizas, insertos M3, sin soportes)
+- **Petición del usuario:**
+  - colocar bien los STL para que desaparezcan los soportes;
+  - que todo el perímetro sea macizo, sin voladizos;
+  - insertos M3 en la tapa;
+  - permiso para ampliar la cápsula si los imanes chocaban.
+- **Pieza a pieza:**
+  - **Base:** pared maciza de 3,6 mm en toda la altura (antes, reborde volado), chaflán inferior de 45°, capa de sacrificio de 0,3 mm sobre los avellanados y techo de las ranuras de anclaje a 45°.
+  - **Tapa:** pared maciza de 4,95 mm hasta el techo, chaflán superior de 45°, 8 columnas Ø7 con alojamiento de inserto M3 (Ø4,0 × 5 mm, 1 mm de techo por encima).
+  - **Soporte:** la pestaña baja hasta la cama por una ranura de la placa, se quita el canal inferior de la cinta y la placa se ensancha para que el redondeo del borde no quede bajo el cerco.
+  - **Bandeja:** holgura de Ø7,4 alrededor de las columnas de la tapa; paso de los cables de la batería fuera del marco del C6.
+  - **C6:** se desplaza 0,4 mm hacia −X.
+- **Tamaño:** la cápsula pasa a 73 × 51 mm. Los tornillos, imanes y reed se definen ahora respecto al tamaño exterior. Los imanes de esquina quedan entre la cuna y la pared, sin voladizo.
+- **Exportación:** cada STEP y STL sale orientado para imprimir (tapa y tirador boca abajo); `out/montaje/` guarda las piezas en posición de montaje.
+- **Comprobaciones:**
+  - CI: 1 sólido por pieza y ninguna interferencia;
+  - análisis de voladizos sobre los STL: solo quedan los puentes de las capas de sacrificio y las caras de bloqueo del labio y del diente (0,7–0,9 mm).
+- **Campo estimado en el BNO** (dipolo, polaridad alterna en diagonal): unos 35 µT de los 8 imanes de esquina; el imán de esquina más cercano al reed queda a 21,9 mm.
