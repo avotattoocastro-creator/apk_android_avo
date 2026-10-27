@@ -174,7 +174,7 @@ def pod_lid():
         lid = lid.cut(cyl(x, y, HB - 0.5, M3["insert_d"], M3["insert_depth"] + 0.5))
     for (x, y) in ((-3.0, -16.5), (-3.0, 16.5), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
         lid = lid.union(cyl(x, y, TRAY_TOP + 0.05, 2.4, CEIL - TRAY_TOP))
-    for (x, y) in ((C6_X0 + 0.8, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):
+    for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
         lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
