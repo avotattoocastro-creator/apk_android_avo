@@ -78,6 +78,7 @@ BNO_PINS = ["PS0", "PS1", "RST", "INT", "CS", "AD0", "SDA", "SCL", "GND", "VCC"]
 BNO_PINS_Y = [BNO["center"][1] - BNO_PIN_OFF + (4.5 - k) * 2.54 for k in range(10)]
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
+BNO_Z0 = TRAY_TOP + 1.0 - BNO["t"]   # REV 5.7: cara superior del BNO a ras de la del C6 (puentes por arriba, al mismo nivel)
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
 REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
@@ -179,6 +180,8 @@ def pod_lid():
         lid = lid.union(cyl(x, y, BED_TOP + 0.05, 2.4, CEIL - BED_TOP))       # apoyan en la cama (REV 5.7)
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
+    for (hx, hy) in BNO_HOLES:                                      # REV 5.7: aprietan el BNO sobre el anillo de sus taladros
+        lid = lid.union(cyl(hx, hy, BED_TOP + 0.05, 4.2, CEIL - BED_TOP).cut(cyl(hx, hy, BED_TOP, 2.6, 2.0)))
     for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
         lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
@@ -234,15 +237,15 @@ def tray():
     # topes de la Qi en +X (dentro del canal, dejan 2,3 de paso a los cables)
     for sy in (-1, 1):
         t = t.union(box(qx1 + 0.4, qy + sy * 5.0, z, 0.8, 2.0, BED_TOP - z))
-    # BNO085: separadores de 0,5 sobre la cama (BNO a TRAY_TOP + 1,5), topes en los extremos Y
-    st = TRAY_TOP + BNO["stand"] - BED_TOP
-    for (hx, hy) in BNO_HOLES:
-        t = t.union(cyl(hx, hy, BED_TOP - 0.1, 4.2, st + 0.1))
-        t = t.cut(cyl(hx, hy, TRAY_Z0 - 0.1, 1.7, 5))
-    for hy in (BY0 + 5.0, BY1 - 5.0):
-        t = t.union(cyl(BX1 - 4.2, hy, BED_TOP - 0.1, 3.0, st + 0.1))
-    for yy in (BY0 - 0.15 - 0.5, BY1 + 0.15 + 0.5):
-        t = t.union(box(BNO["center"][0], yy, BED_TOP - 0.1, 6.0, 1.0, st + 1.0 + 0.1))
+    # BNO085 hundido: su cara superior queda a ras de la del C6 (los pines de los dos, al mismo nivel por arriba).
+    # Alojamiento a 0,15 por lado, unido al del C6; apoya en un reborde de 1 mm y debajo queda ventana (soldaduras).
+    bx, by = BNO["center"]
+    t = t.cut(box(bx, by, BNO_Z0, BNO["lx"] + 0.3, BNO["wy"] + 0.3, BED_TOP - BNO_Z0 + 1))
+    t = t.cut(box(bx, by, TRAY_Z0 - 1, BNO["lx"] - 2.0, BNO["wy"] - 2.0, 3))
+    # C6: pestaña superior en el lado opuesto al BNO (+X): 0,6 sobre el PCB, a 0,05 de su cara superior
+    ly0, ly1 = C6_Y0 + 2.1, C6_Y1 - 1.5
+    t = t.union(box(C6_X1 + 0.1 + 0.5, (ly0 + ly1) / 2, BED_TOP - 0.1, 1.0, ly1 - ly0, 1.3))
+    t = t.union(box(C6_X1 + 0.1 - 0.3, (ly0 + ly1) / 2, BED_TOP + 0.05, 0.6, ly1 - ly0, 1.15))
     for (x, y) in SCREWS:
         t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss_lid"] + 0.4, 6))      # holgura para las columnas Ø7 de la tapa
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
@@ -318,7 +321,7 @@ def components():
           .union(box(cx + 0.1, C6_Y0 + 3.4 + 5.2, pz, 13.2, 10.4, C6["shield"]))
           .union(box(UFL[0], UFL[1], pz, 2.6, 2.6, 1.25)).union(box(ANT[0], ANT[1], pz, 6.6, 2.2, 1.2))
           .union(box(LED[0], LED[1], pz, 0.6, 1.0, 0.4)))
-    bz = TRAY_TOP + BNO["stand"] + 0.02
+    bz = BNO_Z0 + 0.02
     bno = box(bx, by, bz, BNO["lx"], BNO["wy"], BNO["t"])
     for (hx, hy) in BNO_HOLES:
         bno = bno.cut(cyl(hx, hy, bz - 1, 3.0, 4))
