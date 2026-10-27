@@ -1,5 +1,7 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
+**REV 5.3:** bobina Qi redonda Ø25 (nuevo receptor), alojada en un rebaje circular de Ø25,4 en el fondo.
+
 **REV 5.2:** la tapa es una sola pieza con la cara superior lisa: sin panel rojo ni letras. Se imprime boca abajo sin soportes (todas las columnas y postes interiores son verticales). Las piezas rojas quedan en el aro y el tirador.
 
 - **Fuente:** `avo_girth_rev5.py` (CadQuery). El CI («Build AVO GIRTH CAD») genera `out/`. Resultado actual: **8 piezas, 1 sólido cada una, interferencias: ninguna**.

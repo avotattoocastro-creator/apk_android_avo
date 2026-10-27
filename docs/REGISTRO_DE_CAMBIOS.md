@@ -709,3 +709,9 @@ Petición del usuario.
 - **Petición del usuario:** tapa de una sola pieza, imprimible boca abajo sin soportes, sin la lámina ni las letras.
 - Se elimina el panel rojo y su alojamiento; la tapa queda con la cara superior lisa. Quedan 7 piezas (aro y tirador en rojo).
 - CI: un sólido por pieza, sin interferencias. Se borran los STEP/STL antiguos del panel.
+
+## 2026-10-27 — Cincha REV 5.3 (nuevo receptor Qi)
+- El usuario cambia el receptor Qi: misma placa de 15 × 18 mm, pero con bobina **redonda Ø25 mm**. La anterior era rectangular de 23 × 30.
+- En la base, el alojamiento de la bobina pasa a ser circular, de Ø25,4 y 1,4 mm de profundidad, con 1,2 mm de fondo bajo la bobina. El canal de los hilos sale de su borde hacia −X.
+- El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
+- CI sin interferencias.
