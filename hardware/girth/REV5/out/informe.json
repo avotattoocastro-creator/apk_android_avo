@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 11820.5,
+   "volumen_mm3": 11648.2,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -31,7 +31,7 @@
    ]
   },
   "AVO_GIRTH_R5_bandeja": {
-   "volumen_mm3": 2237.8,
+   "volumen_mm3": 2240.7,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -71,7 +71,19 @@
    ]
   }
  },
- "interferencias": {},
+ "interferencias": {
+  "AVO_GIRTH_R5_tapa × AVO_GIRTH_R5_bandeja": [
+   0.587,
+   [
+    -28.15,
+    27.8,
+    -11.8,
+    11.8,
+    9.0,
+    9.2
+   ]
+  ]
+ },
  "medidas": {
   "soporte_mm": [
    94.44,
@@ -98,11 +110,11 @@
    ]
   ],
   "c6_centro": [
-   18.0,
+   17.6,
    0.0
   ],
   "led": [
-   16.35,
+   15.950000000000001,
    -8.5
   ]
  }
