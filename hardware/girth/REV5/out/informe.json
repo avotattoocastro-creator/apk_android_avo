@@ -1,62 +1,62 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 12489.7,
+   "volumen_mm3": 13715.5,
    "valido": true,
    "solidos": 1,
    "caja": [
-    70.02,
-    48.02,
+    73.02,
+    51.02,
     9.01
    ]
   },
   "AVO_GIRTH_R5_aro_rojo": {
-   "volumen_mm3": 215.7,
+   "volumen_mm3": 227.7,
    "valido": true,
    "solidos": 1,
    "caja": [
-    70.01,
-    48.01,
+    73.01,
+    51.01,
     1.01
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 11748.8,
+   "volumen_mm3": 12817.8,
    "valido": true,
    "solidos": 1,
    "caja": [
-    70.05,
-    48.05,
+    73.05,
+    51.05,
     7.28
    ]
   },
   "AVO_GIRTH_R5_bandeja": {
-   "volumen_mm3": 2182.4,
+   "volumen_mm3": 2511.0,
    "valido": true,
    "solidos": 1,
    "caja": [
-    62.5,
-    40.5,
+    65.5,
+    43.5,
     3.5
    ]
   },
   "AVO_GIRTH_R5_junta_TPU": {
-   "volumen_mm3": 247.5,
+   "volumen_mm3": 261.9,
    "valido": true,
    "solidos": 1,
    "caja": [
-    67.21,
-    45.21,
+    70.21,
+    48.21,
     1.01
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 25475.2,
+   "volumen_mm3": 26876.2,
    "valido": true,
    "solidos": 1,
    "caja": [
-    94.46,
-    58.42,
+    97.46,
+    59.46,
     9.06
    ]
   },
@@ -74,13 +74,13 @@
  "interferencias": {},
  "medidas": {
   "soporte_mm": [
-   94.44,
-   58.4,
+   97.44,
+   59.44,
    9.049999999999999
   ],
   "capsula_mm": [
-   70.0,
-   48.0,
+   73.0,
+   51.0,
    15.5
   ],
   "aberturas_al_exterior": 0,
