@@ -1,6 +1,15 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7 (actual): cama de la electrónica.**
+**REV 5.7.1 (actual): corrección con la prueba impresa de la REV 5.7.**
+- La foto del BNO montado mostraba sus pines desplazados ~1,1 mm hacia el USB respecto a los pads D0–D6.
+  - **Causa:** la fila de pines está centrada en la placa (~1,2 mm a cada extremo); se había estimado desplazada 1,0 hacia VCC.
+  - **Corrección:** BNO_PIN_OFF = 0,0; el BNO y su hueco bajan 1,0 mm hacia la antena. Los pines vuelven a quedar a la misma Y que D0–D6.
+- **Taladros reales del BNO:** a 1,95 del borde −X y a 2,45 de los extremos.
+  - Se quitan los dos tubos de la tapa, que caían sobre la pestaña −X.
+  - El BNO queda sujeto por la pestaña −X, las paredes de los extremos y los puentes soldados al C6.
+- **CI:** 1 sólido por pieza, interferencias: ninguna.
+
+**REV 5.7: cama de la electrónica.**
 - **Cama maciza:** la bandeja se rellena hasta la cara superior de los PCB (z 9,2) y queda dentro del labio de la tapa. El C6 y la Qi van en alojamientos a ras de la cama.
 - **BNO085 hundido:**
   - su cara superior queda al mismo nivel que la del C6, y los 7 puentes se sueldan planos por arriba;

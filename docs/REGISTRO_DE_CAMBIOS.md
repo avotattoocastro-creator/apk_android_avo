@@ -716,6 +716,16 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-27 — Cincha REV 5.7.1 (corrección con la prueba impresa)
+- **Origen:** en la foto del usuario, con el BNO y el C6 montados en la bandeja REV 5.7, los pines del BNO quedaban ~1,1 mm desplazados hacia el USB respecto a los pads D0–D6.
+  - En la foto la fila de pines está centrada en la placa, con ~1,2 mm a cada extremo.
+- **Bandeja y BNO:**
+  - BNO_PIN_OFF pasa de 1,0 (estimado) a 0,0; el BNO y su hueco bajan 1,0 mm hacia la antena;
+  - taladros reales: a 1,95 del borde −X y a 2,45 de los extremos.
+- **Tapa:** se quitan los 2 tubos que apretaban el BNO, porque con los taladros reales chocarían con la pestaña −X.
+- **CI:** sin interferencias.
+- **Pendiente:** comprobar la alineación en una nueva impresión.
+
 ## 2026-10-27 — Cincha REV 5.7 (cama de la electrónica)
 - **Petición del usuario:**
   - ajustar la cama a la unión BNO–C6;
