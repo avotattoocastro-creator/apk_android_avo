@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 12790.6,
+   "volumen_mm3": 12879.3,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -31,13 +31,13 @@
    ]
   },
   "AVO_GIRTH_R5_bandeja": {
-   "volumen_mm3": 3680.8,
+   "volumen_mm3": 2937.4,
    "valido": true,
    "solidos": 1,
    "caja": [
     65.51,
     43.51,
-    3.5
+    3.2
    ]
   },
   "AVO_GIRTH_R5_junta_TPU": {
