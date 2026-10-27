@@ -44,7 +44,7 @@ TRAY_L, TRAY_W, TRAY_R = L - 2 * LIP_OUT, W - 2 * LIP_OUT, R - LIP_OUT     # 62,
 SCREWS = [(sx * 21.0, sy * 19.0) for sx in (-1, 1) for sy in (-1, 1)] + \
          [(sx * 30.0, sy * 10.0) for sx in (-1, 1) for sy in (-1, 1)]
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
-          insert_d=4.0, insert_depth=6.0, boss_lid=7.0)   # tapa: inserto roscado M3 (tipo Ruthex M3 × 5,7, taladro Ø4,0)
+          insert_d=4.0, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,0); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
 MAGS = [(sx * 27.5, sy * 16.5) for sx in (-1, 1) for sy in (-1, 1)]   # dentro de la pared maciza
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
@@ -129,7 +129,7 @@ def pod_base():
         b = b.cut(cyl(x, y, M3["cb_h"] + 0.3, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
     # imanes de sujeción: alojamiento desde dentro, 0,3 mm de piel abajo
     for (x, y) in MAGS:
-        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, FLOOR))
+        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, FLOOR - HMAG["skin"]))   # no entra en la cuna (sin voladizo)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
     gz, gh, gd = GROOVE["z0"], GROOVE["z1"] - GROOVE["z0"], GROOVE["depth"]
@@ -188,7 +188,7 @@ def tray():
     t = rrect(TRAY_L, TRAY_W, TRAY_R, TRAY_T, z0=TRAY_Z0)
     cx, cy = C6_C
     t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6
-    t = t.cut(box(26.0, -13.0, TRAY_Z0 - 1, 3, 4, 3))                # cables de la batería
+    t = t.cut(box(26.0, -13.9, TRAY_Z0 - 1, 3, 4, 3))                # cables de la batería (fuera del marco del C6)
     t = t.cut(box(-29.0, -3.0, TRAY_Z0 - 1, 2.6, 3, 3))              # hilos de la bobina (junto a sus pads, lado −X de la placa Qi)
     rx, ry = REED["center"]
     for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):
