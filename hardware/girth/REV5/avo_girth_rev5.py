@@ -67,7 +67,6 @@ REED = dict(l=14.0, d=3.2, center=(0.0, -19.0), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
 
 RING_T = 1.0
-PANEL = dict(margin=3.5, t=0.9, pocket=1.2)
 GROOVE = dict(z0=3.0, z1=4.6, depth=1.0)
 LIP_Y = 10.0
 HOOK_Y = (0.0, 10.0)
@@ -160,28 +159,13 @@ def pod_lid():
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
     lid = lid.cut(box(-7, -4.5, CEIL - 0.4, 29, 7, 0.45))               # antena FPC opcional (interior)
-    m = PANEL["margin"]
-    return lid.cut(rrect(L - 2 * m, W - 2 * m, R - m, 3, z0=H - PANEL["pocket"]))
+    # cara superior lisa, sin panel ni letras: una sola pieza, se imprime boca abajo sin soportes
+    return lid
 
 
 def gasket(free=True):
     c, w = GASKET["c"], GASKET["w"]
     return rshell(c - w / 2, c + w / 2, GASKET["h_free"] if free else GASKET["depth"], HB - GASKET["depth"])
-
-
-def panel():
-    m = PANEL["margin"] + 0.1
-    z0 = H - PANEL["pocket"]
-    pn = rrect(L - 2 * m, W - 2 * m, R - m, PANEL["t"], z0=z0)
-    top = z0 + PANEL["t"]
-    try:
-        pn = pn.union(cq.Workplane("XY").workplane(offset=top - 0.05)
-                      .text("AVO", 11.0, 0.65, kind="bold", halign="center", valign="center").translate((-8, 3.5, 0)))
-        pn = pn.union(cq.Workplane("XY").workplane(offset=top - 0.05)
-                      .text("GIRTH", 3.6, 0.45, kind="bold", halign="center", valign="center").translate((-8, -7.0, 0)))
-    except Exception as e:
-        print("logo omitido:", e)
-    return pn
 
 
 def ring():
@@ -327,7 +311,6 @@ def main():
         P + "base": pod_base(),
         P + "aro_rojo": ring(),
         P + "tapa": pod_lid(),
-        P + "panel_rojo": panel(),
         P + "bandeja": tray(),
         P + "junta_TPU": gasket(free=False),
         P + "soporte": mount(),
