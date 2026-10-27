@@ -16,9 +16,13 @@ android {
         versionCode = 36
         versionName = "2.5-roles-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI, separated by commas. From the CI
-        // variable AVO_LICENSE_PUBLIC_KEYS (public data, not a secret). Empty = licences not enforced (development).
-        val licenseKeys = (System.getenv("AVO_LICENSE_PUBLIC_KEYS") ?: "").trim().split(Regex("[\\s,;]+")).filter { it.isNotEmpty() }
+        // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI. From the CI variable
+        // AVO_LICENSE_PUBLIC_KEYS or, without it, from config/license_public_keys.txt (public data, not a secret).
+        // Empty = licences not enforced (development).
+        val licenseFile = rootProject.file("config/license_public_keys.txt")
+        val licenseText = System.getenv("AVO_LICENSE_PUBLIC_KEYS")?.takeIf { it.isNotBlank() }
+            ?: if (licenseFile.exists()) licenseFile.readLines().filterNot { it.trimStart().startsWith("#") }.joinToString("\n") else ""
+        val licenseKeys = licenseText.trim().split(Regex("[\\s,;]+")).filter { it.isNotEmpty() }
         require(licenseKeys.all { Regex("[A-Za-z0-9+/=]{80,200}").matches(it) }) { "AVO_LICENSE_PUBLIC_KEYS: clave pública con formato no válido" }
         buildConfigField("String", "AVO_LICENSE_PUBLIC_KEYS", "\"${licenseKeys.joinToString(",")}\"")
         // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs

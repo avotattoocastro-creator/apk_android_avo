@@ -31,6 +31,7 @@ on:
       - 'gradle/**'
       - 'gradlew'
       - 'gradle.properties'
+      - 'config/license_public_keys.txt'
       - 'build.gradle'
       - 'build.gradle.kts'
       - 'settings.gradle'
@@ -203,9 +204,13 @@ jobs:
           AVO_LICENSE_PUBLIC_KEYS: ${{ vars.AVO_LICENSE_PUBLIC_KEYS }}
         shell: bash
         run: |
+          if [ -z "$AVO_LICENSE_PUBLIC_KEYS" ] && [ -f config/license_public_keys.txt ]; then
+            AVO_LICENSE_PUBLIC_KEYS=$(grep -v '^[[:space:]]*#' config/license_public_keys.txt | tr -s ' \t\r\n,;' '\n' | grep . || true)
+          fi
           if [ -n "$AVO_LICENSE_PUBLIC_KEYS" ]; then
             n=$(echo "$AVO_LICENSE_PUBLIC_KEYS" | tr ',; ' '\n\n\n' | grep -c . || true)
-            echo "::notice::Licencias ACTIVADAS: $n clave(s) pública(s) de AVO Tarjetas compiladas en la app"
+            ids=$(echo "$AVO_LICENSE_PUBLIC_KEYS" | tr ',; ' '\n\n\n' | grep . | while read k; do echo "$k" | base64 -d | sha256sum | cut -c1-8 | tr a-f A-F; done | paste -sd' ')
+            echo "::notice::Licencias ACTIVADAS: $n clave(s) pública(s) de AVO Tarjetas compiladas en la app (id: $ids)"
           else
             echo "::warning::Sin variable AVO_LICENSE_PUBLIC_KEYS: APK SIN control de licencias (versión de desarrollo)"
           fi

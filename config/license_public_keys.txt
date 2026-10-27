@@ -1,0 +1,5 @@
+# Claves PÚBLICAS de licencias AVO (AVO Tarjetas → Clave de licencias → Copiar).
+# Una por línea, en base64 (SubjectPublicKeyInfo ECDSA P-256). Las líneas con # se ignoran.
+# Es información pública: nunca pongas aquí la copia cifrada ni la clave privada.
+# Si la variable de Actions AVO_LICENSE_PUBLIC_KEYS existe, tiene prioridad sobre este archivo.
+# Sin ninguna clave, la app se compila SIN control de licencias (versión de desarrollo).
