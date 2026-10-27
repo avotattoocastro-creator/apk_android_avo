@@ -45,7 +45,7 @@ SCREWS = [(sx * 21.0, sy * 19.0) for sx in (-1, 1) for sy in (-1, 1)] + \
          [(sx * 30.0, sy * 10.0) for sx in (-1, 1) for sy in (-1, 1)]
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0)
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
-MAGS = [(sx * 28.5, sy * 17.5) for sx in (-1, 1) for sy in (-1, 1)]
+MAGS = [(sx * 27.5, sy * 16.5) for sx in (-1, 1) for sy in (-1, 1)]   # dentro de la pared maciza
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
@@ -63,7 +63,7 @@ BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0, center=(0.0, 0.0))  
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
-REED = dict(l=14.0, d=3.2, center=(0.0, -19.0), z0=1.0)
+REED = dict(l=14.0, d=3.2, center=(0.0, -18.6), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
 
 RING_T = 1.0
@@ -105,10 +105,11 @@ def rshell(off_out, off_in, h, z0):
 
 # ------------------------------------------------------------------ base
 def pod_base():
-    outer = rrect(L, W, R, HB).faces("<Z").edges().fillet(1.0)
-    b = outer.cut(rrect(IL, IW, IR, HB, z0=FLOOR))
+    outer = rrect(L, W, R, HB).faces("<Z").edges().chamfer(0.8)                  # chaflán 45°: sin voladizo en la cama
+    # pared perimetral MACIZA de 3,6 mm en toda la altura (sin reborde volado): imprime sin soportes
+    b = outer.cut(rrect(L - 2 * SEAL_IN, W - 2 * SEAL_IN, R - SEAL_IN, HB, z0=FLOOR))
     b = b.cut(cyl(0, 0, COIL_Z0, COIL["d"] + 2 * G, FLOOR))                       # alojamiento de la bobina Ø25,4
-    b = b.cut(box(-(11.0 + 32.6) / 2, -5.0, COIL_Z0 + 0.4, 32.6 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
+    b = b.cut(box(-(11.0 + 31.0) / 2, -5.0, COIL_Z0 + 0.4, 31.0 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
     cr = cr.cut(box(bl / 2 + 0.5, -bw / 2 + 4.0, FLOOR - 1, 2, 7.0, 10))
@@ -119,29 +120,37 @@ def pod_base():
             b = b.union(box(x, s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
     rx, ry = REED["center"]
     b = b.cut(box(rx, ry, REED["z0"], REED["l"] + 2 * G + 2.0, REED["d"] + 2 * G, FLOOR))      # +1 mm por extremo (prueba impresa)
-    b = b.union(rshell(0.5, SEAL_IN, HB - SEAL_Z0, SEAL_Z0))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
     for (x, y) in SCREWS:
-        b = b.cut(cyl(x, y, -1, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
+        # capa de sacrificio de 0,3 mm sobre el avellanado: se imprime como puente (sin soportes); se perfora con el tornillo
+        b = b.cut(cyl(x, y, M3["cb_h"] + 0.3, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
     # imanes de sujeción: alojamiento desde dentro, 0,3 mm de piel abajo
     for (x, y) in MAGS:
         b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, FLOOR))
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
     gz, gh, gd = GROOVE["z0"], GROOVE["z1"] - GROOVE["z0"], GROOVE["depth"]
-    b = b.cut(box(-L / 2 + gd / 2 - 0.5, 0, gz, gd + 1.0, 2 * LIP_Y + 1.0, gh))
-    b = b.cut(box(L / 2 - gd / 2 + 0.5, sum(HOOK_Y) / 2, gz, gd + 1.0, HOOK_Y[1] - HOOK_Y[0] + 2.0, gh))
+    z1 = GROOVE["z1"]
+    for sx, (ya, yb) in ((-1, (-LIP_Y - 0.5, LIP_Y + 0.5)), (1, (HOOK_Y[0] - 1.0, HOOK_Y[1] + 1.0))):
+        xf = sx * L / 2
+        b = b.cut(box(xf - sx * (gd / 2 - 0.5), (ya + yb) / 2, gz, gd + 1.0, yb - ya, gh))
+        # techo de la ranura a 45° (la cara inferior, la que bloquea, sigue horizontal): sin soportes
+        wedge = (cq.Workplane("XZ", origin=(0, yb, 0))
+                 .polyline([(xf + sx * 0.5, z1 - 0.01), (xf - sx * gd, z1 - 0.01), (xf + sx * 0.5, z1 + gd + 0.5)])
+                 .close().extrude(yb - ya))
+        b = b.cut(wedge)
     return b
 
 
 # ------------------------------------------------------------------ tapa
 def pod_lid():
-    outer = rrect(L, W, R, H - HB - RING_T, z0=HB + RING_T).faces(">Z").edges().fillet(2.5)
+    outer = rrect(L, W, R, H - HB - RING_T, z0=HB + RING_T).faces(">Z").edges().chamfer(1.5)   # 45°: boca abajo sin voladizo
     outer = outer.union(rshell(1.1, LIP_OUT + LIP_T, RING_T + 0.6, HB))
-    lid = outer.cut(rrect(IL, IW, IR, CEIL - HB - RING_T - 0.6, z0=HB + RING_T + 0.6))
-    lid = lid.cut(rrect(L - 2 * (LIP_OUT + LIP_T), W - 2 * (LIP_OUT + LIP_T), R - LIP_OUT - LIP_T, 3, z0=HB - 1))
+    # pared perimetral MACIZA de 4,95 mm desde el cierre hasta el techo (sin faldón volado)
+    w = LIP_OUT + LIP_T
+    lid = outer.cut(rrect(L - 2 * w, W - 2 * w, R - w, CEIL - HB + 1, z0=HB - 1))
     lid = lid.union(rshell(LIP_OUT, LIP_OUT + LIP_T, HB - TRAY_TOP - 0.05 + 0.2, TRAY_TOP + 0.05))
     qx, qy = QI["center"]
     for (x, y) in SCREWS:
@@ -228,7 +237,6 @@ def mount():
     # pasos de cinta cerrados (52 × 3,6, extremos redondeados) y canal inferior de 0,4 para la cinta
     for sx in (-1, 1):
         p = p.cut(rrect(STRAP["slot"], STRAP["w"] + 2.0, 1.6, MT + 2, z0=-MT - 1).translate((sx * (xs0 + xs1) / 2, 0, 0)))
-    p = p.cut(box(0, 0, -MT - 1, 2 * xs1 + 0.01, STRAP["w"] + 1.0, 1 + STRAP["chan"]))
     # cerco
     rim = rrect(ol, ow, orr, RH).cut(rrect(il, iw, ir, RH + 2, z0=-1))
     rim = rim.faces(">Z").edges().fillet(0.8)
@@ -239,15 +247,19 @@ def mount():
     gz = GROOVE["z0"]
     lip_in = -il / 2 + 0.71
     p = p.union(box((-il / 2 - 0.3 + lip_in) / 2, 0, gz + ZC, lip_in + il / 2 + 0.3, 2 * LIP_Y - 0.4, RH - gz - ZC))
-    beam = box(bx0 + BEAM["t"] / 2, (BEAM["y_root"] - 1.5 + BEAM["y_free"]) / 2, BEAM["z0"],
-               BEAM["t"], BEAM["y_free"] - BEAM["y_root"] + 1.5, RH - BEAM["z0"])
+    # la pestaña baja hasta la cama por una ranura de la placa (holgura 0,6): se imprime desde la cama, sin voladizo
+    t, yr, yf = BEAM["t"], BEAM["y_root"], BEAM["y_free"]
+    p = p.cut(box(bx0 + t / 2, (yr + yf + 0.6) / 2, -MT - 1, t + 1.2, yf + 0.6 - yr, MT + 1.0))
+    sy0, sy1 = BEAM["y_free"] - TAB["len"] + 2.0 - 0.6, BEAM["y_free"] - 2.0 + 0.6
+    p = p.cut(box(bx0 + t + 0.5, (sy0 + sy1) / 2, -MT - 1, 1.0 + 1.2, sy1 - sy0, MT + 1.0))
+    beam = box(bx0 + t / 2, (yr - 1.5 + yf) / 2, -MT, t, yf - yr + 1.5, RH + MT)
     p = p.union(beam)
     tip = bx0 - 0.88
     hook = (cq.Workplane("XZ", origin=(0, HOOK_Y[1], 0))
             .polyline([(bx0 + 0.3, gz + ZC), (tip, gz + ZC), (tip, gz + 0.5), (bx0, RH), (bx0 + 0.3, RH)])
             .close().extrude(HOOK_Y[1] - HOOK_Y[0]))
     p = p.union(hook)
-    p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, 1.6, 1.0, TAB["len"] - 4.0, RH - 2.0))
+    p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, -MT, 1.0, TAB["len"] - 4.0, RH - 2.0 + 1.6 + MT))
     rx, ry = REED["center"]
     p = p.cut(cyl(rx, ry, -MAG["t"] * MAG["n"] - 0.05, MAG["d"] + 0.15, 2))
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
@@ -319,8 +331,13 @@ def main():
     comps = components()
     report = {"piezas": {}, "interferencias": {}, "medidas": {}}
     for n, s in parts.items():
-        cq.exporters.export(s, f"{OUT}/{n}.step")
-        cq.exporters.export(s, f"{OUT}/{n}.stl", tolerance=0.02, angularTolerance=0.1)
+        # STEP/STL de cada pieza YA ORIENTADOS PARA IMPRIMIR (tapa y tirador boca abajo), apoyados en Z = 0
+        sp = s.rotate((0, 0, 0), (1, 0, 0), 180) if (n.endswith("tapa") or n.endswith("tirador_rojo")) else s
+        sp = sp.translate((0, 0, -sp.val().BoundingBox().zmin))
+        cq.exporters.export(sp, f"{OUT}/{n}.step")
+        cq.exporters.export(sp, f"{OUT}/{n}.stl", tolerance=0.02, angularTolerance=0.1)
+        os.makedirs(f"{OUT}/montaje", exist_ok=True)                 # misma pieza en posición de montaje (para vistas)
+        cq.exporters.export(s, f"{OUT}/montaje/{n}.stl", tolerance=0.05)
         bb = s.val().BoundingBox()
         nsol = len(s.solids().vals())
         if nsol != 1:
