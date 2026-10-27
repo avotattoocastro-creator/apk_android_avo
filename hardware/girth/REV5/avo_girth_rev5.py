@@ -215,7 +215,8 @@ def tray():
     t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6 (pads de la cara inferior)
     t = t.cut(box(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, hb))
     qx0, qx1 = qx - QI["lx"] / 2 - 0.15, qx + QI["lx"] / 2 + 0.15
-    t = t.cut(box((qx0 - 3.15 + qx0) / 2 - 0.0, -3.0, TRAY_Z0 - 1, 3.15, 3.0, 4))  # hilos de la bobina (lado −X de la Qi)
+    # hilos de la bobina: ranura ABIERTA hasta el borde −X de la bandeja (los hilos entran de lado, sin desoldar la bobina)
+    t = t.cut(box((qx0 - L / 2 - 1.0) / 2 + 0.0, -3.0, TRAY_Z0 - 1, qx0 + L / 2 + 1.0, 3.0, 4))
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
