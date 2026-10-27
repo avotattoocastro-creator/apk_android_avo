@@ -61,10 +61,10 @@ import kotlin.concurrent.thread
 private sealed interface Mode {
     data object Read : Mode
     data class Write(val card: AvoUserCard, val isNew: Boolean, val licenseUntil: LocalDate?, val roles: Set<LicenseRole> = emptySet()) : Mode
+}
 
 /** Licence editor (renew, add, send by file): roles + last day. */
 private data class LicenseAsk(val issued: Issued, val byFile: Boolean)
-}
 
 /** Password dialog purpose. */
 private sealed interface PwdAsk {
