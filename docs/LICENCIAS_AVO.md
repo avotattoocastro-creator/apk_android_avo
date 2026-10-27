@@ -1,7 +1,7 @@
 # Licencias de AVO Performance Horse (tarjeta NFC y archivo)
 
-App Android **2.5-roles-dev1** · AVO Tarjetas **1.2-roles-dev1** · rama `feature/avo-license-nfc` · 27/10/2026.
-Estado: implementado, núcleo probado en JVM (28 pruebas), **NO VERIFICADO** en teléfono ni con tarjetas reales.
+App Android **2.5-roles-dev1** · AVO Tarjetas **1.3-registro-dev1** · rama `feature/avo-license-nfc` · 27/10/2026.
+Estado: implementado, núcleo probado en JVM (34 pruebas), **NO VERIFICADO** en teléfono ni con tarjetas reales.
 
 ## Qué hace
 
@@ -40,6 +40,21 @@ Con cualquier licencia activa se pueden ver siempre los entrenamientos, el anál
 - La app que recibe comprueba la firma con sus claves y muestra «Nombre · Propietario, Veterinario» en invitaciones, destinatarios, buscador, enviados y recibidos.
 - Una licencia caducada o no verificable no muestra roles.
 - **Hay que publicar a mano las reglas nuevas de `firebase/database.rules.json` en la consola de Firebase.** Sin ellas, el perfil con `lic` se rechaza y el envío falla con «Permiso denegado».
+
+## Registro de usuarios y copia completa (AVO Tarjetas 1.3)
+
+- **Registro:** cada usuario tiene su tarjeta (código, nombre y clave secreta), la última licencia (roles y fecha), el chip, el teléfono, el email, notas y el **historial**: alta, licencia en tarjeta, por archivo, copia, baja, reactivación y ediciones.
+  - Se guarda cifrado con el Keystore del móvil. La lista anterior, que tenía las claves en claro, se migra sola y se borra.
+  - Búsqueda por nombre, código, teléfono, email, notas o rol.
+- **Activar sin la tarjeta:** al tocar un usuario, **ACTIVAR POR ARCHIVO (SIN TARJETA)** permite elegir los roles y la fecha y enviarlo por **WhatsApp** (directo a su número si está guardado), por **email** (con su dirección ya puesta) o por otra app.
+  - El archivo solo se abre en un móvil donde se haya acercado su tarjeta alguna vez.
+  - Desde el mismo usuario: renovar en la tarjeta, grabar copia, dar de baja o reactivar, y editar sus datos.
+- **Tarjetas de antes:** al leer una tarjeta que no está en el registro aparece **AÑADIR AL REGISTRO**, que guarda también su licencia si está firmada con tu clave.
+- **Copia completa:** **EXPORTAR COPIA COMPLETA** guarda en un solo archivo, con contraseña, la clave de firma **y todo el registro**.
+  - **Restaurar una copia** acepta este archivo y también la copia de solo la clave de la versión anterior. Lo que ya hay en el móvil se combina con la copia.
+  - El aviso «COPIA PENDIENTE» aparece cuando hay cambios posteriores a la última copia.
+- **Actualizar sin desinstalar:** AVO Tarjetas se firma con la misma clave estable que la app. El CI lo comprueba con `apksigner` en cada compilación y falla si las firmas no coinciden.
+  - Si alguna vez hubiera que desinstalarla, se borran la clave y el registro del móvil. Se recuperan con la copia completa.
 
 ## Seguridad
 

@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **CI:** ver la ejecución posterior a esta entrada
+**Qué cambia:**
+- Núcleo: `IssuerRegistry` (usuarios, licencias, contactos e historial; formato de texto con campos base64; fusión de copias), `IssuerBackup` (clave + registro en un archivo con contraseña), `PasswordBox`. 6 pruebas nuevas (34 en total de licencias).
+- AVO Tarjetas:
+  - registro cifrado con el Keystore (migra y borra la lista anterior, que guardaba las claves de las tarjetas en claro);
+  - búsqueda;
+  - ficha de usuario con historial, edición de datos, «Activar por archivo (sin tarjeta)» por WhatsApp (a su número), email (a su dirección) u otra app, renovar en tarjeta, copia, baja y reactivación;
+  - «Añadir al registro» para tarjetas leídas que no estaban;
+  - copia completa (clave + registro) y restauración, compatible con la copia de solo la clave;
+  - aviso de copia pendiente.
+- CI: `apksigner` comprueba que la app y AVO Tarjetas llevan el mismo certificado estable (falla si no), para que se actualicen sin desinstalar.
+**Por qué:** peticiones del usuario: actualizar AVO Tarjetas sin borrarla y tener una base de datos para activar licencias y crear archivos sin leer la tarjeta.
+**Validación:** IMPLEMENTADO · 34/34 pruebas JVM del núcleo de licencias en local · **NO VERIFICADO** en el teléfono.
+
 ## 2026-10-27 — Claves públicas de licencias desde `config/license_public_keys.txt`
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc`
 **Qué cambia:** si no existe la variable de Actions `AVO_LICENSE_PUBLIC_KEYS`, la compilación lee las claves públicas de `config/license_public_keys.txt`, una por línea y con `#` para comentarios. El aviso de CI muestra el identificador de cada clave (los 4 primeros bytes del SHA-256 del SPKI, el mismo que muestra AVO Tarjetas). Se añade la clave pública **F5EEE5D2** (P-256, generada por el usuario en AVO Tarjetas el 27/10/2026; comprobada con openssl: SPKI de 91 B, curva prime256v1, identificador igual al de su copia cifrada). **Desde esta compilación la app exige licencia.**

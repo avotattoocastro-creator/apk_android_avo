@@ -230,6 +230,23 @@ jobs:
             exit 1
           }
 
+      - name: Verify stable signature (app and AVO Tarjetas)
+        shell: bash
+        run: |
+          set -euo pipefail
+          SIGNER=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | sort -V | tail -1)
+          APP=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -name '*.apk' -print -quit)
+          CARDS=$(find "$AVO_SOURCE_DIR/cards/build/outputs/apk/debug" -maxdepth 1 -name '*.apk' -print -quit)
+          fp() { "$SIGNER" verify --print-certs "$1" | grep -m1 'certificate SHA-256 digest' | awk '{print $NF}'; }
+          A=$(fp "$APP"); C=$(fp "$CARDS")
+          echo "app:   $A"; echo "cards: $C"
+          if [ -n "${AVO_KEYSTORE_FILE:-}" ]; then
+            [ "$A" = "$C" ] || { echo "::error::AVO Tarjetas no está firmada con la misma clave estable que la app"; exit 1; }
+            echo "::notice::App y AVO Tarjetas firmadas con la clave estable AVO (SHA-256 ${A:0:16}…): se actualizan sin desinstalar"
+          else
+            echo "::warning::Sin clave estable: app y AVO Tarjetas firmadas con una clave debug temporal (requerirá desinstalar)"
+          fi
+
       - name: Prepare downloadable APK and SHA256
         shell: bash
         run: |
