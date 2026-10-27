@@ -217,7 +217,7 @@ def tray():
         t = t.union(box(BNO["center"][0], yy, TRAY_TOP, 6.0, 1.0, BNO["stand"] + 1.0))
     t = t.union(box(BX0 - 0.15 - 0.5, BNO["center"][1], TRAY_TOP, 1.0, BNO["wy"] - 2.0, BNO["stand"] + 1.0))   # pared lado −X
     for (x, y) in SCREWS:
-        t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss"] + 0.8, 6))
+        t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss_lid"] + 0.4, 6))      # holgura para las columnas Ø7 de la tapa
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
 
 
