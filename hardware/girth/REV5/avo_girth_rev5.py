@@ -220,7 +220,7 @@ def tray():
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
-    xa, xb = qx1, BX0 + 0.15                        # canal vertical entre la Qi y el BNO
+    xa, xb = qx1, BX0 - 0.15 - 0.8                  # canal vertical entre la Qi y el BNO (deja 0,8 de pared al BNO)
     yb0, yb1 = BY0 - 0.15 - 1.0 - 0.1 - w, BY0 - 0.15 - 1.0 - 0.1   # canal inferior, bajo el tope −Y del BNO
     yt0, yt1 = 11.1, 11.1 + w                       # canal superior (cables de la batería hasta la Qi)
     bat_hole = (-26.0, 13.2)
@@ -237,12 +237,16 @@ def tray():
     t = t.cut(box(BX1 - 1.3, (yb1 + BNO_PINS_Y[8] + 0.9) / 2, z, 2.2, BNO_PINS_Y[8] + 0.9 - yb1, hc))  # GND/VCC del BNO
     # topes de la Qi en +X (dentro del canal, dejan 2,3 de paso a los cables)
     for sy in (-1, 1):
-        t = t.union(box(qx1 + 0.4, qy + sy * 5.0, z, 0.8, 2.0, BED_TOP - z))
+        t = t.union(box(qx1 + 0.3, qy + sy * 5.0, z, 0.6, 2.0, BED_TOP - z))
     # BNO085 hundido: su cara superior queda a ras de la del C6 (los pines de los dos, al mismo nivel por arriba).
     # Alojamiento a 0,15 por lado, unido al del C6; apoya en un reborde de 1 mm y debajo queda ventana (soldaduras).
     bx, by = BNO["center"]
     t = t.cut(box(bx, by, BNO_Z0, BNO["lx"] + 0.3, BNO["wy"] + 0.3, BED_TOP - BNO_Z0 + 1))
     t = t.cut(box(bx, by, TRAY_Z0 - 1, BNO["lx"] - 2.0, BNO["wy"] - 2.0, 3))
+    # BNO: pestaña superior en su lado −X (pared de 0,8 junto al canal + 0,45 sobre el PCB, a 0,05 de su cara superior)
+    wy0, wy1 = BY0 + 1.0, BY1 - 1.0
+    t = t.union(box(BX0 - 0.15 - 0.4, (wy0 + wy1) / 2, CH["floor"], 0.8, wy1 - wy0, BED_TOP + 1.2 - CH["floor"]))
+    t = t.union(box(BX0 - 0.15 + 0.3, (wy0 + wy1) / 2, BED_TOP + 0.05, 0.6, wy1 - wy0, 1.15))
     # C6: pestaña superior en el lado opuesto al BNO (+X): 0,6 sobre el PCB, a 0,05 de su cara superior
     ly0, ly1 = C6_Y0 + 2.1, C6_Y1 - 1.5
     t = t.union(box(C6_X1 + 0.1 + 0.5, (ly0 + ly1) / 2, BED_TOP - 0.1, 1.0, ly1 - ly0, 1.3))
