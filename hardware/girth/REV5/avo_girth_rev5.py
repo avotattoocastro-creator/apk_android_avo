@@ -229,7 +229,7 @@ def _mount_geom():
     xs0 = ol / 2 + STRAP["ledge"]                      # borde interior de los pasos de cinta
     xs1 = xs0 + STRAP["slot"]
     pl = 2 * (xs1 + STRAP["bar"])
-    pw = max(STRAP["w"] + 2.0 + 2 * 3.2, ow + 3.0)
+    pw = max(STRAP["w"] + 2.0 + 2 * 3.2, ow + 5.0)      # el redondeo de 1,8 del borde no llega bajo el cerco
     return il, iw, ir, ol, ow, orr, xs0, xs1, pl, pw
 
 
