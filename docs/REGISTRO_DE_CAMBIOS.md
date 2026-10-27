@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-27 — Android 2.5-roles-dev1 + AVO Tarjetas 1.2-roles-dev1 — roles en la licencia
-**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **CI:** ver la ejecución de `build-android.yml` posterior a esta entrada
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commits:** `d506983`, `42d4f0f` · **CI:** Android [40468818227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468818227) (**éxito**: core 126 pruebas, emulador 2, artefacto `AVO-Performance-Horse-V2_5_ROLES_DEV1-APK`; la 40468164700 falló por `LicenseAsk` dentro de `Mode` en Tarjetas, corregido en `42d4f0f`) · reglas Firebase [40468164673](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468164673) (**éxito**, 11 pruebas)
 **Qué cambia:**
 - Licencia v2 (108 B): byte de roles firmado (jinete, entrenador, desarrollador, propietario, veterinario). La v1 se sigue leyendo como todos los roles. Tabla única rol → funciones en `core/.../license/LicenseRoles.kt`.
 - App: las pantallas y los servicios se habilitan por función (chaleco y grabación, elegir jinete, mareas, enviar y recibir, ajustes, diagnósticos). Inicio en modo consulta para roles sin chaleco (propietario, veterinario). Pantalla Licencia con roles y funciones.
@@ -33,7 +33,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - Envío entre apps: la licencia se publica en el perfil (`users/<código>/lic`) y la app receptora verifica la firma y muestra «Nombre · roles» en invitaciones, destinatarios, buscador, enviados y recibidos. Reglas de Firebase ampliadas (campo `lic`, base64 ≤ 200) y pruebas del emulador.
 - AVO Tarjetas: casillas de roles al crear, renovar y enviar por archivo, con las funciones que activa cada combinación; los roles se muestran en la lectura y en las tarjetas emitidas.
 **Supuesto:** «desaroyador» se ha interpretado como **Desarrollador** (todas las funciones y diagnósticos). Pendiente de confirmar.
-**Validación:** IMPLEMENTADO · núcleo 28/28 pruebas JVM · **NO VERIFICADO** en teléfono. **Hay que publicar las reglas nuevas de Firebase.**
+**Validación:** IMPLEMENTADO · COMPILADO / CI 40468818227 · núcleo 28/28 pruebas JVM · **NO VERIFICADO** en teléfono. **Hay que publicar las reglas nuevas de Firebase.**
 
 ## 2026-10-27 — Android 2.4-license-dev1 + AVO Tarjetas 1.1-license-dev1 — licencia de la app por tarjeta NFC o archivo
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc` (desde `feature/avo-wifi-sync` 2ab1ff4) · **Commit:** `1fbf2e3` · **CI:** [40433800797](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40433800797) (**éxito**: core 123 pruebas, emulador 2, artefacto `AVO-Performance-Horse-V2_4_LICENSE_DEV1-APK`; compilada **sin** `AVO_LICENSE_PUBLIC_KEYS` → sin control de licencias)
