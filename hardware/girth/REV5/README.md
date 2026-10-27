@@ -1,5 +1,24 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
+**REV 5.5 (actual):**
+- **Cápsula de 73 × 51 × 15,5 mm** y soporte de 97,4 × 61,4 mm.
+- **Paredes perimetrales macizas**, sin voladizos: 3,6 mm en la base y 4,95 mm en la tapa.
+- **Tapa:**
+  - lisa, de una sola pieza, con un chaflán de 45° en el borde superior;
+  - 8 insertos roscados M3 (taladro Ø4,0 × 5 mm, columna Ø7);
+  - inserto de hasta 5 mm de largo, metido con el soldador.
+- **Base:**
+  - chaflán de 45° en el borde inferior;
+  - en cada avellanado de tornillo, una capa de sacrificio de 0,3 mm que se perfora con el propio tornillo;
+  - el techo de las ranuras de anclaje sube a 45°;
+  - los 4 imanes Ø5 × 1 de las esquinas quedan entre la cuna y la pared maciza.
+- **Soporte:** la pestaña elástica baja hasta la cama por una ranura de la placa, y se quita el canal inferior de la cinta.
+- **STL y STEP de cada pieza ya orientados para imprimir:** tapa y tirador boca abajo, el resto tal cual. La carpeta `out/montaje/` tiene las piezas en posición de montaje.
+- **Comprobación de voladizos** sobre los STL:
+  - solo quedan los puentes de las capas de sacrificio (se imprimen como puente);
+  - y las caras inferiores del labio y del diente del soporte, de 0,7 a 0,9 mm.
+  - **Imprimir con los soportes desactivados.**
+
 **REV 5.3:** bobina Qi redonda Ø25 (nuevo receptor), alojada en un rebaje circular de Ø25,4 en el fondo.
 
 **REV 5.2:** la tapa es una sola pieza con la cara superior lisa: sin panel rojo ni letras. Se imprime boca abajo sin soportes (todas las columnas y postes interiores son verticales). Las piezas rojas quedan en el aro y el tirador.
