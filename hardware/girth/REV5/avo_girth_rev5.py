@@ -33,6 +33,9 @@ COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
 TRAY_Z0, TRAY_T = 7.2, 1.0
 TRAY_TOP = TRAY_Z0 + TRAY_T
+BED_TOP = TRAY_TOP + 1.0          # REV 5.7: cama maciza a ras de la cara superior de los PCB (C6 y Qi)
+BED_OFF = 3.75 + 1.2 + 0.15       # la cama queda dentro del labio de la tapa
+CH = dict(w=2.4, floor=TRAY_TOP - 0.2)   # canales de cables: 2,4 de ancho, 1,2 de hondo, 0,8 de suelo sobre la batería
 
 SEAL_IN = 3.6
 SEAL_Z0 = HB - 1.6
@@ -61,7 +64,7 @@ UFL = (C6_C[0] - 4.95, C6_Y0 + 1.5)                # (E)
 ANT = (C6_C[0] + 3.4, C6_Y0 + 1.2)                 # (E) 6,6 × 2,2
 USB_FRONT = C6_Y1 + C6["usb_over"]
 
-QI = dict(lx=18.0, wy=15.0, pcb=1.0, parts=1.2, center=(-18.0, 0.0))      # extremo −X; real: 18 en X, 15 en Y; bobina en −X, salidas WOUT/BAT en +X
+QI = dict(lx=18.0, wy=15.0, pcb=1.0, parts=1.2, center=(-19.0, 0.0))   # REV 5.7: 1 mm a −X (canal Qi–BNO)      # extremo −X; real: 18 en X, 15 en Y; bobina en −X, salidas WOUT/BAT en +X
 # BNO085 pegado al C6: su fila de 10 pines (paso 2,54) queda frente a la columna D0–D6 del XIAO (paso 2,54, centrada
 # en la placa según la huella oficial de Seeed), a la misma altura Y, para unir cada pin con su pad con un puente corto:
 #   PS1(+PS0)–D0 · RST–D1 · INT–D2 · CS–D3 · AD0–D4 · SDA–D5 · SCL–D6 ; VCC y GND con cable a 3V3 y GND del XIAO.
@@ -125,7 +128,7 @@ def pod_base():
     b = b.cut(box(-(11.0 + 31.0) / 2, -5.0, COIL_Z0 + 0.4, 31.0 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
-    cr = cr.cut(box(bl / 2 + 0.5, -bw / 2 + 4.0, FLOOR - 1, 2, 7.0, 10))
+    cr = cr.cut(box(-(bl / 2 + 0.5), bw / 2 - 4.0, FLOOR - 1, 2, 7.0, 10))   # REV 5.7: cables de la batería por −X/+Y
     cr = cr.cut(box(-(bl / 2 + 0.5), -3.5, FLOOR - 1, 2, 6.0, 10))   # paso de los hilos de la bobina en la pared −X (prueba impresa)
     b = b.union(cr)
     for x in (-15, 0, 15):
@@ -172,8 +175,8 @@ def pod_lid():
         lid = lid.union(cyl(x, y, HB, M3["boss_lid"], CEIL - HB + 0.5))
     for (x, y) in SCREWS:                                            # alojamiento del inserto M3 (se mete con el soldador)
         lid = lid.cut(cyl(x, y, HB - 0.5, M3["insert_d"], M3["insert_depth"] + 0.5))
-    for (x, y) in ((-3.0, -16.5), (-3.0, 16.5), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
-        lid = lid.union(cyl(x, y, TRAY_TOP + 0.05, 2.4, CEIL - TRAY_TOP))
+    for (x, y) in ((-3.0, -18.9), (-3.0, 16.5), (17.0, -15.0), (-17.0, 16.0), (-17.0, -16.0), (14.0, 15.5)):
+        lid = lid.union(cyl(x, y, BED_TOP + 0.05, 2.4, CEIL - BED_TOP))       # apoyan en la cama (REV 5.7)
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
@@ -197,37 +200,49 @@ def ring():
 
 # ------------------------------------------------------------------ bandeja
 def tray():
+    """REV 5.7: cama maciza a ras de los PCB, con alojamientos y canales para los cables."""
     t = rrect(TRAY_L, TRAY_W, TRAY_R, TRAY_T, z0=TRAY_Z0)
+    t = t.union(rrect(L - 2 * BED_OFF, W - 2 * BED_OFF, R - BED_OFF, BED_TOP - TRAY_TOP, z0=TRAY_TOP))
     cx, cy = C6_C
-    t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6
-    t = t.cut(box(26.0, -13.9, TRAY_Z0 - 1, 3, 4, 3))                # cables de la batería (fuera del marco del C6)
-    t = t.cut(box(-29.0, -3.0, TRAY_Z0 - 1, 2.6, 3, 3))              # hilos de la bobina (junto a sus pads, lado −X de la placa Qi)
-    rx, ry = REED["center"]
-    for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):
-        t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 3))
-    # C6: marco en los 4 costados (0,15 de holgura, 1,2 de pared), a ras de la cara superior del PCB:
-    # no se mueve en X ni en Y y los cables de los pads laterales salen por encima del marco
-    t = t.union(frame(cx, cy, TRAY_TOP, C6["lx"] + 0.2, C6["wy"] + 0.2, 1.2, C6["pcb"]))     # 0,1 por lado
-    # placa Qi
     qx, qy = QI["center"]
-    # marco solo en los lados largos (Y); los lados X quedan abiertos: hilos de la bobina (−X) y salidas WOUT/BAT (+X)
-    fq = frame(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, 1.0, 1.0)
-    for sx in (-1, 1):
-        fq = fq.cut(box(qx + sx * (QI["lx"] / 2 + 0.6), qy, TRAY_TOP - 1, 2.0, QI["wy"] + 4, 3))
-    # topes cortos en las esquinas para que no se deslice en X
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            fq = fq.union(box(qx + sx * (QI["lx"] / 2 + 0.15 + 0.5), qy + sy * (QI["wy"] / 2 - 1.0), TRAY_TOP, 1.0, 2.0, 1.0))
-    t = t.union(fq)
-    # BNO085 (girado: lado largo en Y), 2 postes M2 en el lado −X, apoyos junto a los pines (+X)
+    hb = BED_TOP - TRAY_TOP + 1
+    # alojamientos: C6 (0,1 por lado) y Qi (0,15 por lado), con el PCB apoyado en la placa y a ras de la cama
+    t = t.cut(box(cx, cy, TRAY_TOP, C6["lx"] + 0.2, C6["wy"] + 0.2, hb))
+    t = t.cut(box(cx, C6_Y1 + C6["usb_over"] / 2 + 0.1, BED_TOP - 0.3, C6["usb_w"] + 0.6, C6["usb_over"] + 0.2, 1))  # bajo el USB-C
+    t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6 (pads de la cara inferior)
+    t = t.cut(box(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, hb))
+    qx0, qx1 = qx - QI["lx"] / 2 - 0.15, qx + QI["lx"] / 2 + 0.15
+    t = t.cut(box((qx0 - 3.15 + qx0) / 2 - 0.0, -3.0, TRAY_Z0 - 1, 3.15, 3.0, 4))  # hilos de la bobina (lado −X de la Qi)
+    # --- canales (suelo a 0,8 sobre la batería)
+    z, w = CH["floor"], CH["w"]
+    hc = BED_TOP - z + 1
+    xa, xb = qx1, BX0 + 0.15                        # canal vertical entre la Qi y el BNO
+    yb0, yb1 = BY0 - 0.15 - 1.0 - 0.1 - w, BY0 - 0.15 - 1.0 - 0.1   # canal inferior, bajo el tope −Y del BNO
+    yt0, yt1 = 11.1, 11.1 + w                       # canal superior (cables de la batería hasta la Qi)
+    bat_hole = (-26.0, 13.2)
+    t = t.cut(box((xa + xb) / 2, (yb0 + yt1) / 2, z, xb - xa, yt1 - yb0, hc))
+    t = t.cut(box((bat_hole[0] - 1.5 + xa) / 2, (yt0 + yt1) / 2, z, xa - bat_hole[0] + 1.5, w, hc))
+    xw = 12.0                                       # bajada a la ventana del C6
+    t = t.cut(box((xa + xw + w / 2) / 2, (yb0 + yb1) / 2, z, xw + w / 2 - xa, w, hc))
+    t = t.cut(box(xw, (yb0 + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, w, C6_Y0 + 1.0 - yb0, 4))   # pasa bajo el PCB hasta la ventana
+    t = t.cut(box(*bat_hole, TRAY_Z0 - 1, 3, 4, 4))                                    # paso de los cables de la batería (−X/+Y)
+    rx, ry = REED["center"]
+    for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):                     # patas del reed → canal inferior
+        t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 4))
+        t = t.cut(box(x, (ry + 1.7 + yb0 + 0.5) / 2, z, 2.2, yb0 + 0.5 - ry - 1.7, hc))
+    t = t.cut(box(BX1 - 1.3, (yb1 + BNO_PINS_Y[8] + 0.9) / 2, z, 2.2, BNO_PINS_Y[8] + 0.9 - yb1, hc))  # GND/VCC del BNO
+    # topes de la Qi en +X (dentro del canal, dejan 2,3 de paso a los cables)
+    for sy in (-1, 1):
+        t = t.union(box(qx1 + 0.4, qy + sy * 5.0, z, 0.8, 2.0, BED_TOP - z))
+    # BNO085: separadores de 0,5 sobre la cama (BNO a TRAY_TOP + 1,5), topes en los extremos Y
+    st = TRAY_TOP + BNO["stand"] - BED_TOP
     for (hx, hy) in BNO_HOLES:
-        t = t.union(cyl(hx, hy, TRAY_TOP, 4.2, BNO["stand"]))
-        t = t.cut(cyl(hx, hy, TRAY_Z0 - 0.1, 1.7, TRAY_T + BNO["stand"] + 0.2))
+        t = t.union(cyl(hx, hy, BED_TOP - 0.1, 4.2, st + 0.1))
+        t = t.cut(cyl(hx, hy, TRAY_Z0 - 0.1, 1.7, 5))
     for hy in (BY0 + 5.0, BY1 - 5.0):
-        t = t.union(cyl(BX1 - 4.2, hy, TRAY_TOP, 3.0, BNO["stand"]))
-    for yy in (BY0 - 0.15 - 0.5, BY1 + 0.15 + 0.5):                  # topes en los extremos (0,15 de holgura)
-        t = t.union(box(BNO["center"][0], yy, TRAY_TOP, 6.0, 1.0, BNO["stand"] + 1.0))
-    t = t.union(box(BX0 - 0.15 - 0.5, BNO["center"][1], TRAY_TOP, 1.0, BNO["wy"] - 2.0, BNO["stand"] + 1.0))   # pared lado −X
+        t = t.union(cyl(BX1 - 4.2, hy, BED_TOP - 0.1, 3.0, st + 0.1))
+    for yy in (BY0 - 0.15 - 0.5, BY1 + 0.15 + 0.5):
+        t = t.union(box(BNO["center"][0], yy, BED_TOP - 0.1, 6.0, 1.0, st + 1.0 + 0.1))
     for (x, y) in SCREWS:
         t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss_lid"] + 0.4, 6))      # holgura para las columnas Ø7 de la tapa
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
