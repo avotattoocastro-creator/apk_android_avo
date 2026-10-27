@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
-**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **CI:** ver la ejecución posterior a esta entrada
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commit:** `438a887` · **CI:** [40471096243](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40471096243) (**éxito** a la primera: core 132 pruebas, emulador 2; licencias activadas con F5EEE5D2; app y Tarjetas con el mismo certificado estable SHA-256 8807ef9cec7f4eb2…)
 **Qué cambia:**
 - Núcleo: `IssuerRegistry` (usuarios, licencias, contactos e historial; formato de texto con campos base64; fusión de copias), `IssuerBackup` (clave + registro en un archivo con contraseña), `PasswordBox`. 6 pruebas nuevas (34 en total de licencias).
 - AVO Tarjetas:
@@ -37,13 +37,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - aviso de copia pendiente.
 - CI: `apksigner` comprueba que la app y AVO Tarjetas llevan el mismo certificado estable (falla si no), para que se actualicen sin desinstalar.
 **Por qué:** peticiones del usuario: actualizar AVO Tarjetas sin borrarla y tener una base de datos para activar licencias y crear archivos sin leer la tarjeta.
-**Validación:** IMPLEMENTADO · 34/34 pruebas JVM del núcleo de licencias en local · **NO VERIFICADO** en el teléfono.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 40471096243 · 34/34 pruebas JVM del núcleo de licencias · **NO VERIFICADO** en el teléfono.
 
 ## 2026-10-27 — Claves públicas de licencias desde `config/license_public_keys.txt`
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc`
 **Qué cambia:** si no existe la variable de Actions `AVO_LICENSE_PUBLIC_KEYS`, la compilación lee las claves públicas de `config/license_public_keys.txt`, una por línea y con `#` para comentarios. El aviso de CI muestra el identificador de cada clave (los 4 primeros bytes del SHA-256 del SPKI, el mismo que muestra AVO Tarjetas). Se añade la clave pública **F5EEE5D2** (P-256, generada por el usuario en AVO Tarjetas el 27/10/2026; comprobada con openssl: SPKI de 91 B, curva prime256v1, identificador igual al de su copia cifrada). **Desde esta compilación la app exige licencia.**
 **Por qué:** desde esta sesión no se pueden crear variables de Actions, y el usuario pide que la clave la meta el asistente.
-**Validación:** pendiente de la compilación con la clave.
+**Validación:** CI [40469807184](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40469807184): «Licencias ACTIVADAS: 1 clave (id: F5EEE5D2)».
 
 ## 2026-10-27 — Android 2.5-roles-dev1 + AVO Tarjetas 1.2-roles-dev1 — roles en la licencia
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commits:** `d506983`, `42d4f0f` · **CI:** Android [40468818227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468818227) (**éxito**: core 126 pruebas, emulador 2, artefacto `AVO-Performance-Horse-V2_5_ROLES_DEV1-APK`; la 40468164700 falló por `LicenseAsk` dentro de `Mode` en Tarjetas, corregido en `42d4f0f`) · reglas Firebase [40468164673](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468164673) (**éxito**, 11 pruebas)
