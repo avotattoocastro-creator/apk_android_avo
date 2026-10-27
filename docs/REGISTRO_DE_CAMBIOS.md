@@ -26,7 +26,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ## 2026-10-27 — Claves públicas de licencias desde `config/license_public_keys.txt`
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc`
-**Qué cambia:** si no existe la variable de Actions `AVO_LICENSE_PUBLIC_KEYS`, la compilación lee las claves públicas de `config/license_public_keys.txt`, una por línea y con `#` para comentarios. El aviso de CI muestra el identificador de cada clave (los 4 primeros bytes del SHA-256 del SPKI, el mismo que muestra AVO Tarjetas). El archivo se sube vacío: la clave pública F5EEE5D2 se añadirá cuando el usuario la copie desde AVO Tarjetas.
+**Qué cambia:** si no existe la variable de Actions `AVO_LICENSE_PUBLIC_KEYS`, la compilación lee las claves públicas de `config/license_public_keys.txt`, una por línea y con `#` para comentarios. El aviso de CI muestra el identificador de cada clave (los 4 primeros bytes del SHA-256 del SPKI, el mismo que muestra AVO Tarjetas). Se añade la clave pública **F5EEE5D2** (P-256, generada por el usuario en AVO Tarjetas el 27/10/2026; comprobada con openssl: SPKI de 91 B, curva prime256v1, identificador igual al de su copia cifrada). **Desde esta compilación la app exige licencia.**
 **Por qué:** desde esta sesión no se pueden crear variables de Actions, y el usuario pide que la clave la meta el asistente.
 **Validación:** pendiente de la compilación con la clave.
 
