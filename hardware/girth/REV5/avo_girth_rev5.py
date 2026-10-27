@@ -20,7 +20,7 @@ OUT = "out"
 G = 0.20
 
 # ------------------------------------------------------------------ cápsula
-L, W, R = 70.0, 48.0, 10.0
+L, W, R = 73.0, 51.0, 10.0          # REV 5.5: +3/+3 para pared maciza e imanes de esquina sin voladizo
 H = 15.5
 HB = 9.0
 WALL = 2.0
@@ -41,12 +41,13 @@ LIP_OUT, LIP_T = 3.75, 1.2
 TRAY_L, TRAY_W, TRAY_R = L - 2 * LIP_OUT, W - 2 * LIP_OUT, R - LIP_OUT     # 62,5 × 40,5
 
 # tornillos de cierre M3 desde abajo (dentro de la junta, sellados con junta tórica 3 × 1 bajo la cabeza)
-SCREWS = [(sx * 21.0, sy * 19.0) for sx in (-1, 1) for sy in (-1, 1)] + \
-         [(sx * 30.0, sy * 10.0) for sx in (-1, 1) for sy in (-1, 1)]
+# tornillos a 5 mm de la cara exterior (misma relación con la junta en todos los tamaños)
+SCREWS = [(sx * 21.0, sy * (W / 2 - 5.0)) for sx in (-1, 1) for sy in (-1, 1)] + \
+         [(sx * (L / 2 - 5.0), sy * 10.0) for sx in (-1, 1) for sy in (-1, 1)]
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
           insert_d=4.0, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,0); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
-MAGS = [(sx * 27.5, sy * 16.5) for sx in (-1, 1) for sy in (-1, 1)]   # dentro de la pared maciza
+MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # entre la cuna y la pared maciza
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
@@ -64,7 +65,7 @@ BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0, center=(0.0, 0.0))  
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
-REED = dict(l=14.0, d=3.2, center=(0.0, -18.6), z0=1.0)
+REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
 
 RING_T = 1.0
@@ -228,7 +229,7 @@ def _mount_geom():
     xs0 = ol / 2 + STRAP["ledge"]                      # borde interior de los pasos de cinta
     xs1 = xs0 + STRAP["slot"]
     pl = 2 * (xs1 + STRAP["bar"])
-    pw = STRAP["w"] + 2.0 + 2 * 3.2
+    pw = max(STRAP["w"] + 2.0 + 2 * 3.2, ow + 3.0)
     return il, iw, ir, ol, ow, orr, xs0, xs1, pl, pw
 
 
