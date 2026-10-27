@@ -716,6 +716,17 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-27 — Cincha REV 5.6 (BNO085 pegado al ESP32-C6)
+- **Petición del usuario:** colocar el ESP32 y el IMU con los puntos de soldadura pegados y las conexiones coincidentes.
+- **Bandeja:** la posición del BNO085 se calcula a partir del C6 según la huella oficial de Seeed (paso 2,54, D0 en el extremo del USB, USB-C sobresale 1,5). Los 7 pines PS1…SCL quedan a la misma Y que D0…D6, con un hueco de 0,15 mm.
+- **Tapa:** el poste de presión del C6 en el lado −X se separa 0,2 mm del BNO (interferencia de 0,033 mm³ en el CI).
+- **Conexiones:**
+  - PS0+PS1→D0, RST→D1, INT→D2, CS→D3, AD0→D4, SDA→D5, SCL→D6;
+  - GND y VCC, con cable a GND y 3V3.
+- **Firmware:** I²C por la matriz de GPIO, `Wire.begin(23, 16)`, dirección 0x4A. Todavía no implementado y no probado en hardware.
+- **Medidas estimadas (pendientes de calibre):** desplazamiento de la fila de pines del BNO (1,0) y distancia de los pines al borde (1,3).
+- **CI:** sin interferencias.
+
 ## 2026-10-27 — Cincha REV 5.4 y 5.5 (paredes macizas, insertos M3, sin soportes)
 - **Petición del usuario:**
   - colocar bien los STL para que desaparezcan los soportes;

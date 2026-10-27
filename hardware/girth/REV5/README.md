@@ -1,6 +1,37 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.5 (actual):**
+**REV 5.6 (actual): BNO085 pegado al ESP32-C6, pin con pad.**
+- Posiciones tomadas de la huella oficial de Seeed (repositorio OSHW-XIAO-Series):
+  - pads de la XIAO ESP32-C6 con paso de 2,54 mm, centrados;
+  - D0 en el extremo del USB;
+  - el USB-C sobresale 1,5 mm (antes estaba puesto 1,3).
+- El BNO085 queda a 0,15 mm del borde −X del C6. Su fila de 10 pines está a la misma Y que la columna D0–D6.
+- **Conexiones** con puentes cortos de hilo desnudo Ø0,5 (el BNO va 0,5 mm más alto, sobre sus separadores):
+
+  | BNO085 | XIAO | GPIO | Uso |
+  |---|---|---|---|
+  | PS0 + PS1 (puenteados en el BNO) | D0 | 0 | LOW = modo I²C |
+  | RST | D1 | 1 | reset |
+  | INT | D2 | 2 | interrupción (pin LP, puede despertar) |
+  | CS | D3 | 21 | HIGH fijo |
+  | AD0 | D4 | 22 | LOW = dirección 0x4A |
+  | SDA | D5 | 23 | `Wire.begin(23, 16)` |
+  | SCL | D6 | 16 | (U0TXD: el log de arranque solo mueve SCL; no afecta) |
+  | GND / VCC | GND / 3V3 | — | cable AWG30 |
+- **Arranque del firmware:**
+  1. mantener RST (D1) en LOW;
+  2. fijar D0 en LOW, D4 en LOW y D3 en HIGH;
+  3. soltar RST;
+  4. arrancar I²C en GPIO23/16.
+- Para que la fila de pines quede frente a la columna D0–D6, el poste de presión del C6 en el extremo de la antena se aparta 0,2 mm del BNO.
+- Esquema: `renders/cableado_bno_c6.png`. Vista 3D: `renders/bno_c6_pegados.png`.
+- **(E) Pendiente de calibre:**
+  - BNO_PIN_OFF = 1,0: desplazamiento del centro de la fila de pines hacia VCC;
+  - BNO_PIN_IN = 1,3: distancia de los pines al borde;
+  - comprobar que, con los componentes hacia arriba y los pines hacia el C6, PS0 queda en el extremo del USB.
+- CI: 7 piezas + junta, 1 sólido cada una, **interferencias: ninguna**.
+
+**REV 5.5:**
 - **Cápsula de 73 × 51 × 15,5 mm** y soporte de 97,4 × 61,4 mm.
 - **Paredes perimetrales macizas**, sin voladizos: 3,6 mm en la base y 4,95 mm en la tapa.
 - **Tapa:**
