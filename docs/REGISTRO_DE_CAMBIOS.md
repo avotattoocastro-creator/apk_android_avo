@@ -725,6 +725,11 @@ Petición del usuario.
   - GND y VCC, con cable a GND y 3V3.
 - **Firmware:** I²C por la matriz de GPIO, `Wire.begin(23, 16)`, dirección 0x4A. Todavía no implementado y no probado en hardware.
 - **Medidas estimadas (pendientes de calibre):** desplazamiento de la fila de pines del BNO (1,0) y distancia de los pines al borde (1,3).
+- **Esquema ampliado (ronda posterior):**
+  - columnas I²C/SPI con los mismos 7 puentes;
+  - vista lateral del puente;
+  - reed a MTCK (GPIO6), divisor de la batería a MTDI (GPIO5) y antena externa.
+- **Comprobaciones:** girar el XIAO 180° es peor (la otra columna solo tiene D7–D10 y la alimentación queda en orden inverso), así que se descarta.
 - **CI:** sin interferencias.
 
 ## 2026-10-27 — Cincha REV 5.4 y 5.5 (paredes macizas, insertos M3, sin soportes)

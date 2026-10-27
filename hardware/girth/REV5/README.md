@@ -6,23 +6,38 @@
   - D0 en el extremo del USB;
   - el USB-C sobresale 1,5 mm (antes estaba puesto 1,3).
 - El BNO085 queda a 0,15 mm del borde −X del C6. Su fila de 10 pines está a la misma Y que la columna D0–D6.
-- **Conexiones** con puentes cortos de hilo desnudo Ø0,5 (el BNO va 0,5 mm más alto, sobre sus separadores):
+- **Conexiones:** 7 puentes cortos de hilo de cobre estañado de Ø0,5 (el BNO va 0,5 mm más alto, sobre sus separadores). Sirven igual para I²C que para SPI; el modo lo elige el firmware con el nivel de GPIO0 en el reset.
 
-  | BNO085 | XIAO | GPIO | Uso |
-  |---|---|---|---|
-  | PS0 + PS1 (puenteados en el BNO) | D0 | 0 | LOW = modo I²C |
-  | RST | D1 | 1 | reset |
-  | INT | D2 | 2 | interrupción (pin LP, puede despertar) |
-  | CS | D3 | 21 | HIGH fijo |
-  | AD0 | D4 | 22 | LOW = dirección 0x4A |
-  | SDA | D5 | 23 | `Wire.begin(23, 16)` |
-  | SCL | D6 | 16 | (U0TXD: el log de arranque solo mueve SCL; no afecta) |
-  | GND / VCC | GND / 3V3 | — | cable AWG30 |
-- **Arranque del firmware:**
+  | BNO085 | XIAO | GPIO | I²C | SPI |
+  |---|---|---|---|---|
+  | PS0 + PS1 (puenteados en el BNO) | D0 | 0 | LOW | HIGH (PS0 = WAKE) |
+  | RST | D1 | 1 | reset | reset |
+  | INT | D2 | 2 | interrupción (LP) | interrupción (LP) |
+  | CS | D3 | 21 | HIGH | CS |
+  | AD0 | D4 | 22 | LOW = 0x4A | MOSI |
+  | SDA | D5 | 23 | SDA | MISO |
+  | SCL | D6 | 16 | SCL | SCK |
+  | GND / VCC | GND / 3V3 | — | cable AWG30 | cable AWG30 |
+- **Por qué los 7 y no solo SDA/SCL:**
+  - según SparkFun, el BNO08x no funciona de forma fiable sin INT y RST;
+  - según Adafruit, su I²C da problemas con ESP32/ESP32-S3, y con los 7 puentes se puede pasar a SPI sin volver a soldar.
+- **Cómo soldarlo:**
+  1. Mete el hilo por el agujero desde arriba y suéldalo en la cara de arriba del BNO.
+  2. Dóblalo 90° por debajo, por el hueco de 0,5 mm.
+  3. Suéldalo sobre el pad del XIAO.
+  4. Comprueba con el polímetro que no hay continuidad entre puentes vecinos ni entre VCC y GND.
+- **Cara inferior del XIAO:**
+  - reed a MTCK (GPIO6) y a GND, para que despierte al C6;
+  - divisor de la batería: BAT+ → 220 kΩ → MTDI (GPIO5) → 220 kΩ → GND;
+  - antena FPC en el U.FL (GPIO3 LOW y GPIO14 HIGH).
+- **Arranque del firmware en I²C:**
   1. mantener RST (D1) en LOW;
-  2. fijar D0 en LOW, D4 en LOW y D3 en HIGH;
+  2. poner D0 y D4 en LOW y D3 en HIGH;
   3. soltar RST;
-  4. arrancar I²C en GPIO23/16.
+  4. arrancar el bus con `Wire.begin(23, 16)`.
+- **Arranque del firmware en SPI:**
+  1. poner D0 en HIGH antes de soltar RST;
+  2. arrancar con `SPI.begin(16, 23, 22, 21)`, en modo 3 y a ≤ 3 MHz.
 - Para que la fila de pines quede frente a la columna D0–D6, el poste de presión del C6 en el extremo de la antena se aparta 0,2 mm del BNO.
 - Esquema: `renders/cableado_bno_c6.png`. Vista 3D: `renders/bno_c6_pegados.png`.
 - **(E) Pendiente de calibre:**
