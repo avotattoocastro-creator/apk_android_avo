@@ -51,7 +51,8 @@ MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1
 HMAG = dict(d=5.0, t=1.0, skin=0.3)
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
-C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.3, usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
+C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.5,   # huella oficial Seeed: USB-C sobresale 1,5
+          usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
 C6_C = (17.6, 0.0)
 C6_X0, C6_X1 = C6_C[0] - C6["lx"] / 2, C6_C[0] + C6["lx"] / 2
 C6_Y0, C6_Y1 = C6_C[1] - C6["wy"] / 2, C6_C[1] + C6["wy"] / 2      # Y0: extremo de la antena
@@ -61,7 +62,17 @@ ANT = (C6_C[0] + 3.4, C6_Y0 + 1.2)                 # (E) 6,6 × 2,2
 USB_FRONT = C6_Y1 + C6["usb_over"]
 
 QI = dict(lx=18.0, wy=15.0, pcb=1.0, parts=1.2, center=(-18.0, 0.0))      # extremo −X; real: 18 en X, 15 en Y; bobina en −X, salidas WOUT/BAT en +X
-BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0, center=(0.0, 0.0))   # 25,2 y taladros a 3,0: medido en la foto de la placa real (confirmar con calibre)   # CENTRADO: lo más lejos posible de los imanes; pines hacia +X
+# BNO085 pegado al C6: su fila de 10 pines (paso 2,54) queda frente a la columna D0–D6 del XIAO (paso 2,54, centrada
+# en la placa según la huella oficial de Seeed), a la misma altura Y, para unir cada pin con su pad con un puente corto:
+#   PS1(+PS0)–D0 · RST–D1 · INT–D2 · CS–D3 · AD0–D4 · SDA–D5 · SCL–D6 ; VCC y GND con cable a 3V3 y GND del XIAO.
+BNO_PIN_OFF = 1.0     # (E) centro de la fila de pines desplazado hacia el extremo VCC respecto al centro de la placa
+BNO_PIN_IN = 1.3      # (E) centro de los pines respecto al borde de la placa
+BNO_GAP = 0.15        # borde del BNO a 0,15 del borde del C6 (encima de su marco, que queda a ras del PCB)
+BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0,
+           center=(C6_C[0] - C6["lx"] / 2 - BNO_GAP - 15.5 / 2, C6_C[1] - 1.27 + BNO_PIN_OFF))
+C6_PADS_Y = [C6_C[1] + (3 - k) * 2.54 for k in range(7)]                      # D0 (lado USB) … D6
+BNO_PINS = ["PS0", "PS1", "RST", "INT", "CS", "AD0", "SDA", "SCL", "GND", "VCC"]
+BNO_PINS_Y = [BNO["center"][1] - BNO_PIN_OFF + (4.5 - k) * 2.54 for k in range(10)]
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
@@ -384,7 +395,8 @@ def main():
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
                          "aberturas_al_exterior": 0, "tornillos_M3": len(SCREWS), "imanes_5x1": 2 * len(MAGS), "junta_compresion_pct": round(100 * (GASKET["h_free"] - GASKET["depth"]) / GASKET["h_free"]),
-                         "bno_taladros": BNO_HOLES, "c6_centro": C6_C, "led": LED}
+                         "bno_taladros": BNO_HOLES, "bno_pines_y": dict(zip(BNO_PINS, [round(v, 2) for v in BNO_PINS_Y])),
+                         "c6_pads_D0_D6_y": [round(v, 2) for v in C6_PADS_Y], "c6_centro": C6_C, "led": LED}
     asm = cq.Assembly(name="AVO_GIRTH_R5")
     colors = {"aro": (0.93, 0.07, 0.16), "panel": (0.85, 0.06, 0.14), "tirador": (0.93, 0.07, 0.16),
               "base": (0.09, 0.09, 0.11), "tapa": (0.09, 0.09, 0.11), "bandeja": (0.18, 0.19, 0.22),
