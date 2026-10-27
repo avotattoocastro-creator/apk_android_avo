@@ -1,6 +1,35 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.6 (actual): BNO085 pegado al ESP32-C6, pin con pad.**
+**REV 5.7 (actual): cama de la electrónica.**
+- **Cama maciza:** la bandeja se rellena hasta la cara superior de los PCB (z 9,2) y queda dentro del labio de la tapa. El C6 y la Qi van en alojamientos a ras de la cama.
+- **BNO085 hundido:**
+  - su cara superior queda al mismo nivel que la del C6, y los 7 puentes se sueldan planos por arriba;
+  - apoya en un reborde de 1 mm, con ventana debajo para las soldaduras;
+  - ya no lleva tornillos M2.
+- **Sujeción:**
+  - **C6:** pestaña superior continua en el lado +X (0,6 sobre el PCB). Su columna derecha de pads queda debajo, sin usar.
+  - **BNO:** pestaña en el lado −X (pared de 0,8 + 0,45 sobre el PCB), paredes en los extremos y dos tubos de la tapa (Ø4,2/2,6) que lo aprietan sobre el anillo de sus taladros.
+  - **Orden de montaje:**
+    1. el C6;
+    2. el BNO;
+    3. los puentes.
+- **Canales de cables** (2,4 × 1,2 mm, con 0,8 de suelo sobre la batería):
+  - superior: batería → Qi;
+  - entre la Qi y el BNO: 2,2 mm, con topes de la Qi de 0,6;
+  - inferior: batería, reed y VCC/GND del BNO.
+  - Todo baja bajo el C6 por la ventana, hasta los pads de abajo: BAT+/−, MTCK, MTDI, 3V3 y GND.
+- **Batería:** girada 180° en su cuna. Sus cables salen por −X/+Y y suben por el paso nuevo, en (−26; 13,2). Se quita el paso antiguo de (26; −13,9).
+- **Hilos de la bobina:** la ranura queda abierta hasta el borde de la bandeja, para meterlos de lado sin desoldar la bobina.
+- **Otros cambios:**
+  - la Qi se desplaza 1 mm hacia −X;
+  - el poste de la tapa de (−3; −16,5) pasa a (−3; −18,9);
+  - los postes de la tapa apoyan en la cama.
+- **Voladizos:** solo las caras inferiores de las dos pestañas (0,45–0,6 mm de vuelo); se imprimen sin soportes.
+- **CI:** 1 sólido por pieza, interferencias: ninguna.
+- Renders: `renders/cama.png`, `renders/cama_cables.png`, `renders/corte_pines.png` y `renders/cableado_bno_c6.png`.
+- **(E) Pendiente de calibre:** el largo del BNO (25,2) y la posición de su fila de pines. Va encajado entre dos pestañas.
+
+**REV 5.6: BNO085 pegado al ESP32-C6, pin con pad.**
 - Posiciones tomadas de la huella oficial de Seeed (repositorio OSHW-XIAO-Series):
   - pads de la XIAO ESP32-C6 con paso de 2,54 mm, centrados;
   - D0 en el extremo del USB;
@@ -21,10 +50,9 @@
 - **Por qué los 7 y no solo SDA/SCL:**
   - según SparkFun, el BNO08x no funciona de forma fiable sin INT y RST;
   - según Adafruit, su I²C da problemas con ESP32/ESP32-S3, y con los 7 puentes se puede pasar a SPI sin volver a soldar.
-- **Cómo soldarlo:**
-  1. Mete el hilo por el agujero desde arriba y suéldalo en la cara de arriba del BNO.
-  2. Dóblalo 90° por debajo, por el hueco de 0,5 mm.
-  3. Suéldalo sobre el pad del XIAO.
+- **Cómo soldarlo (REV 5.7):**
+  1. Pon un hilo plano por arriba, del pin del BNO al pad del XIAO (las dos caras están al mismo nivel).
+  2. Suéldalo en los dos extremos.
   4. Comprueba con el polímetro que no hay continuidad entre puentes vecinos ni entre VCC y GND.
 - **Cara inferior del XIAO:**
   - reed a MTCK (GPIO6) y a GND, para que despierte al C6;

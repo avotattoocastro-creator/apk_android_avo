@@ -716,6 +716,36 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-27 — Cincha REV 5.7 (cama de la electrónica)
+- **Petición del usuario:**
+  - ajustar la cama a la unión BNO–C6;
+  - pasar el paso de los cables de la batería al lado opuesto;
+  - engrosar la cama y crear canales para los cables;
+  - pines del C6 y del BNO al mismo nivel por arriba;
+  - pestaña superior en el C6 y sujeción del BNO;
+  - ranura abierta para los hilos de la bobina.
+- **Cómo se hizo:** la propuesta se desarrolló en la rama `feature/girth-rev5-7-cama`, con imágenes previas. El usuario la aprobó («Perfecto») y se fusionó a mano en `feature/avo-wifi-sync`.
+- **Bandeja:**
+  - cama maciza a ras de los PCB;
+  - BNO hundido (BNO_Z0 = 7,6) a ras del C6, con una ventana debajo;
+  - pestañas superiores en el C6 (+X) y en el BNO (−X);
+  - canales de 2,4 × 1,2;
+  - paso de la batería en −X/+Y;
+  - ranura de la bobina abierta hasta el borde;
+  - Qi desplazada 1 mm hacia −X.
+- **Base:** el hueco de la cuna para los cables de la batería pasa a −X/+Y (la batería se gira 180°).
+- **Tapa:**
+  - 2 tubos que aprietan el BNO;
+  - postes apoyados en la cama;
+  - un poste movido a (−3; −18,9).
+- **Esquema de conexiones actualizado:**
+  - puentes planos por arriba;
+  - VCC/GND del BNO a los pads 3V3/GND de la cara inferior del XIAO (la columna derecha queda bajo la pestaña).
+- **Comprobaciones:**
+  - CI: 1 sólido por pieza y ninguna interferencia;
+  - voladizos: solo las caras inferiores de las pestañas (0,45–0,6 mm).
+- **Pendiente:** confirmar con calibre el largo del BNO y la posición de su fila de pines. No se ha probado en físico.
+
 ## 2026-10-27 — Cincha REV 5.6 (BNO085 pegado al ESP32-C6)
 - **Petición del usuario:** colocar el ESP32 y el IMU con los puntos de soldadura pegados y las conexiones coincidentes.
 - **Bandeja:** la posición del BNO085 se calcula a partir del C6 según la huella oficial de Seeed (paso 2,54, D0 en el extremo del USB, USB-C sobresale 1,5). Los 7 pines PS1…SCL quedan a la misma Y que D0…D6, con un hueco de 0,15 mm.
