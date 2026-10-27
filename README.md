@@ -10,6 +10,7 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 
 | Componente | Versión en código | Estado comprobado |
 | --- | --- | --- |
+| App Android **2.4-license-dev1** + AVO Tarjetas **1.1-license-dev1** (rama `feature/avo-license-nfc`, 27/10/2026) | Licencia de la app en la tarjeta NFC de usuario (firma ECDSA P-256 ligada al UID) o por archivo cifrado; modo consulta al caducar | Ver [`docs/LICENCIAS_AVO.md`](docs/LICENCIAS_AVO.md); **no verificado en móvil** |
 | App Android AVO Performance Horse | **2.0** (`versionCode=12`) | Rediseño, mareas IHM y análisis; CI correcto [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) (commit `049abc7`); **no verificado en móvil** |
 | Motor de análisis AVO (Equine Intelligence Engine) | **1.1.0-dev1** en rama `feature/avo-equine-intelligence-engine` | Integrado en Android 2.1-motor y Windows; CI en verde (motor 40041495035, Android 40041494960, Windows 40041494972); **no verificado físicamente** |
 | Módulo de mareas | Android 2.0 | Predicción oficial del IHM, coeficiente, sol y luna, Open-Meteo; lectura real no verificada en móvil |

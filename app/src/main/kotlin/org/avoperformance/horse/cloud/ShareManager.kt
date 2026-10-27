@@ -125,6 +125,7 @@ class ShareManager(private val c: AppContainer) {
 
     /** Called after each download verified against the watch: modes A + B. Imported trainings are never forwarded. */
     fun onTrainingVerified(sessionId: String) = c.scope.launch(Dispatchers.IO) {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return@launch
         val card = c.identity.card.value ?: return@launch
         val t = c.db.trainings().byId(sessionId) ?: return@launch
         if (t.watchState == "IMPORTADO") return@launch
@@ -140,6 +141,7 @@ class ShareManager(private val c: AppContainer) {
 
     /** Mode C: manual sharing (also old ones and re-sending). */
     suspend fun shareManually(sessionId: String, contacts: List<Contact>): Int = withContext(Dispatchers.IO) {
+        check(org.avoperformance.horse.license.LicenseGate.fullAccess) { org.avoperformance.horse.license.LicenseGate.BLOCKED }
         val card = c.identity.card.value ?: error("Primero acerca tu tarjeta AVO personal (NFC)")
         val horse = c.db.trainings().byId(sessionId)?.horseCode
         val targets = RecipientResolver.resolve(card.code, emptyList(), false, emptyList(), false, contacts, emptyMap())
@@ -170,6 +172,7 @@ class ShareManager(private val c: AppContainer) {
     suspend fun runPass(reason: String): Boolean = withContext(Dispatchers.IO) { lock.withLock { pass(reason) } }
 
     private suspend fun pass(reason: String): Boolean {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) { _status.value = _status.value.copy(running = false, message = org.avoperformance.horse.license.LicenseGate.BLOCKED); return true }
         val card = c.identity.card.value ?: return true
         if (c.settings.sharePaused) { _status.value = _status.value.copy(message = "Transferencias en pausa"); return true }
         if (onWifi() && !c.settings.shareAllowWifi) return false
@@ -201,6 +204,7 @@ class ShareManager(private val c: AppContainer) {
 
     /** Runs a pass as soon as possible (with network). */
     fun runNow() {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return
         val req = OneTimeWorkRequestBuilder<ShareWorker>().setConstraints(constraints())
             .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, TimeUnit.SECONDS).build()
         WorkManager.getInstance(c.app).enqueueUniqueWork("avo_share_now", ExistingWorkPolicy.REPLACE, req)
@@ -221,6 +225,7 @@ class ShareManager(private val c: AppContainer) {
 
     /** Recovery every 15 minutes (minimum allowed by Android), compatible with battery saving. */
     fun schedule() {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return
         val req = PeriodicWorkRequestBuilder<ShareWorker>(15, TimeUnit.MINUTES).setConstraints(constraints())
             .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 60, TimeUnit.SECONDS).build()
         WorkManager.getInstance(c.app).enqueueUniquePeriodicWork("avo_share_periodic", ExistingPeriodicWorkPolicy.UPDATE, req)

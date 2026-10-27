@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.cards"
         minSdk = 29
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0-dev1"
+        versionCode = 2
+        versionName = "1.1-license-dev1"
     }
 
     signingConfigs {
@@ -47,6 +47,8 @@ android {
     sourceSets["main"].java.srcDirs(
         "../app/src/main/kotlin/org/avoperformance/horse/ui/theme",
         "../app/src/main/kotlin/org/avoperformance/horse/ui/components",
+        // SecureStore (Android Keystore AES-GCM): protects the licence signing key at rest
+        "../app/src/main/kotlin/org/avoperformance/horse/security",
     )
     lint { abortOnError = false; checkReleaseBuilds = false }
 }

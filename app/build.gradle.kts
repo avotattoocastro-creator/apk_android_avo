@@ -13,9 +13,14 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 34
-        versionName = "2.3-wifi-dev9"
+        versionCode = 35
+        versionName = "2.4-license-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI, separated by commas. From the CI
+        // variable AVO_LICENSE_PUBLIC_KEYS (public data, not a secret). Empty = licences not enforced (development).
+        val licenseKeys = (System.getenv("AVO_LICENSE_PUBLIC_KEYS") ?: "").trim().split(Regex("[\\s,;]+")).filter { it.isNotEmpty() }
+        require(licenseKeys.all { Regex("[A-Za-z0-9+/=]{80,200}").matches(it) }) { "AVO_LICENSE_PUBLIC_KEYS: clave pública con formato no válido" }
+        buildConfigField("String", "AVO_LICENSE_PUBLIC_KEYS", "\"${licenseKeys.joinToString(",")}\"")
         // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
         externalNativeBuild { cmake { arguments += listOf("-DANDROID_STL=c++_static") } }

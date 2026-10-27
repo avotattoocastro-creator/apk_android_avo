@@ -48,6 +48,14 @@ class AvoLinkService : LifecycleService() {
             else -> 0
         }
         ServiceCompat.startForeground(this, NOTIF_ID, build(if (hasWatch) "Iniciando…" else "Esperando entrenamientos de usuarios AVO"), type)
+        // Licence expired or missing (consultation mode): nothing runs in the background.
+        // (startForeground above is mandatory after startForegroundService, even to stop at once.)
+        if (!c.license.fullAccess) {
+            c.ntrip.stop(); c.watch.stop()
+            ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
+            stopSelf()
+            return START_NOT_STICKY
+        }
         c.dnd.restoreExpired()
         if (hasWatch) {
             c.watch.start()
@@ -56,6 +64,16 @@ class AvoLinkService : LifecycleService() {
         }
         if (collecting) return START_STICKY
         collecting = true
+        // the licence can expire while the service runs: stop then (the container stops watch and NTRIP)
+        lifecycleScope.launch {
+            c.license.status.collect { st ->
+                if (!st.fullAccess) {
+                    c.dnd.restoreOwned("licencia caducada")
+                    ServiceCompat.stopForeground(this@AvoLinkService, ServiceCompat.STOP_FOREGROUND_REMOVE)
+                    stopSelf()
+                }
+            }
+        }
         // Inbox for trainings received over the internet while the phone has an AVO identity (NFC card)
         lifecycleScope.launch {
             c.identity.card.collectLatest { card ->
@@ -114,6 +132,7 @@ class AvoLinkService : LifecycleService() {
         const val NOTIF_ID = 42
         const val ACTION_STOP = "org.avoperformance.horse.STOP"
         fun start(ctx: Context) {
+            if (!(ctx.applicationContext as AvoApp).container.license.fullAccess) return
             (ctx.applicationContext as AvoApp).container.settings.autoStartPaused = false
             ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
         }
@@ -138,6 +157,7 @@ class AvoLinkService : LifecycleService() {
             val app = ctx.applicationContext as AvoApp
             val s = app.container.settings
             if (!s.autoStart || s.autoStartPaused) return false
+            if (!app.container.license.fullAccess) return false
             val watch = hasWatch(ctx)
             // without a watch it is only started to receive trainings from other AVO users (needs a card)
             if (!watch && app.container.identity.card.value == null) return false

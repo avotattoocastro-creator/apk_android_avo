@@ -8,22 +8,37 @@ import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.nfc.tech.NdefFormatable
 import org.avoperformance.horse.core.identity.AvoUserCard
+import org.avoperformance.horse.core.license.LicenseToken
 
-/** Reads/writes the NDEF message of a user card: URI record + AAR (opens AVO Performance Horse on tap). */
+/**
+ * Reads/writes the NDEF message of a user card:
+ *   1. URI record (identity), 2. optional licence record (external type `avoperformance.org:lic`),
+ *   3. AAR (opens AVO Performance Horse on tap).
+ */
 object CardWriter {
     const val MAIN_APP = "org.avoperformance.horse"
 
-    fun message(card: AvoUserCard) = NdefMessage(arrayOf(
-        NdefRecord.createUri(Uri.parse(card.toUri())),
-        NdefRecord.createApplicationRecord(MAIN_APP),
-    ))
+    fun message(card: AvoUserCard, license: ByteArray? = null) = NdefMessage(buildList {
+        add(NdefRecord.createUri(Uri.parse(card.toUri())))
+        if (license != null) add(NdefRecord.createExternal(LicenseToken.NDEF_DOMAIN, LicenseToken.NDEF_TYPE, license))
+        add(NdefRecord.createApplicationRecord(MAIN_APP))
+    }.toTypedArray())
 
-    /** Text of the first URI record on the card, or null if it is empty / not NDEF. */
-    fun readUri(tag: Tag): String? {
-        val ndef = Ndef.get(tag) ?: return null
+    /** Licence bytes inside an NDEF message, or null. */
+    fun licenseOf(msg: NdefMessage?): ByteArray? = msg?.records?.firstOrNull {
+        it.tnf == NdefRecord.TNF_EXTERNAL_TYPE && String(it.type, Charsets.US_ASCII).lowercase() == LicenseToken.NDEF_EXTERNAL_TYPE
+    }?.payload
+
+    data class Read(val uri: String?, val license: ByteArray?)
+
+    /** Identity URI and licence of the card (null fields if empty / not NDEF). */
+    fun read(tag: Tag): Read {
+        val ndef = Ndef.get(tag) ?: return Read(null, null)
         ndef.connect()
-        return try { ndef.ndefMessage?.records?.firstNotNullOfOrNull { it.toUri()?.toString() } }
-        catch (_: FormatException) { null } finally { ndef.close() }
+        return try {
+            val msg = ndef.ndefMessage
+            Read(msg?.records?.firstNotNullOfOrNull { it.toUri()?.toString() }, licenseOf(msg))
+        } catch (_: FormatException) { Read(null, null) } finally { ndef.close() }
     }
 
     sealed interface Outcome {
@@ -32,12 +47,14 @@ object CardWriter {
     }
 
     /**
-     * Writes [card]. It refuses: cards protected against writing, cards that are too small, and a card
-     * that already has ANOTHER user's identity or a horse/rider tag, unless [overwrite] is true.
-     * [lock] makes the card read-only: IRREVERSIBLE.
+     * Writes [card] and, when [licenseFor] is given, the licence signed for THIS card's UID (the UID is
+     * only known once the card is in the field). Refuses: cards protected against writing, cards that are
+     * too small, and a card that already has ANOTHER user's identity or a horse/rider tag, unless
+     * [overwrite] is true. [lock] makes the card read-only: IRREVERSIBLE (and a licence could never be renewed).
      */
-    fun write(tag: Tag, card: AvoUserCard, overwrite: Boolean, lock: Boolean): Outcome {
-        val msg = message(card)
+    fun write(tag: Tag, card: AvoUserCard, overwrite: Boolean, lock: Boolean, licenseFor: ((ByteArray) -> ByteArray)? = null): Outcome {
+        val license = licenseFor?.invoke(tag.id ?: return Outcome.Refused("La tarjeta no tiene UID legible"))
+        val msg = message(card, license)
         val ndef = Ndef.get(tag)
         if (ndef == null) {
             val f = NdefFormatable.get(tag) ?: return Outcome.Refused("La tarjeta no admite NDEF (usa NTAG213/215/216)")
@@ -55,7 +72,9 @@ object CardWriter {
                 if (!same) return Outcome.Refused("La tarjeta ya tiene datos AVO (${describe(existing)}). Marca «Sobrescribir» si quieres reutilizarla.")
             }
             ndef.writeNdefMessage(msg)
-            val verified = ndef.ndefMessage?.records?.firstNotNullOfOrNull { it.toUri()?.toString() } == card.toUri()
+            val back = ndef.ndefMessage
+            val verified = back?.records?.firstNotNullOfOrNull { it.toUri()?.toString() } == card.toUri() &&
+                (license == null || licenseOf(back)?.contentEquals(license) == true)
             val locked = lock && verified && ndef.canMakeReadOnly() && ndef.makeReadOnly()
             return Outcome.Written(verified, locked)
         } finally { ndef.close() }

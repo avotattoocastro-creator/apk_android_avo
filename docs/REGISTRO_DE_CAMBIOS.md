@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-27 — Android 2.4-license-dev1 + AVO Tarjetas 1.1-license-dev1 — licencia de la app por tarjeta NFC o archivo
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` (desde `feature/avo-wifi-sync` 2ab1ff4) · **CI:** ver la ejecución de `build-android.yml` de esta rama
+**Qué cambia:**
+- **Núcleo** (`core/.../license/`): licencia binaria firmada ECDSA P-256 ligada al UID del chip, registro NDEF externo `avoperformance.org:lic`, reloj anti-retroceso (hora de red, última hora conocida, contador desde el arranque), estados y reglas de activación/renovación sin rebaja, archivo de licencia `.avolic` cifrado con el secreto de la tarjeta del usuario, copia de la clave con contraseña (PBKDF2 + AES-GCM).
+- **AVO Tarjetas 1.1** (vc 2): generar / exportar / importar la clave de firma (guardada con SecureStore del Keystore), opción «Licencia de la app» con fecha al crear, «Renovar», «Por archivo» (compartir por WhatsApp/email), lectura que comprueba firma, UID y caducidad. Las tarjetas con licencia no se bloquean.
+- **App 2.4-license-dev1** (vc 35): activación al acercar la tarjeta de usuario o al abrir el archivo; pantalla Licencia (también en Ajustes → Sistema); aviso en Inicio 7 días antes; **modo consulta** al caducar o sin licencia (entrenamientos, análisis, comparativas y cuadra visibles; chaleco, grabación, descargas, NTRIP, mareas, compartir, ajustes y NFC de caballo/jinete bloqueados; servicio en segundo plano detenido).
+- Claves públicas desde la variable de Actions `AVO_LICENSE_PUBLIC_KEYS` (BuildConfig). **Sin la variable la APK no controla licencias** (aviso en CI y en la app).
+- CI: nombre del APK y del artefacto con la versión real (antes fijo «V2-1-motor»).
+**Por qué:** petición del usuario: activación de la app hasta una fecha por la tarjeta NFC, sin que se pueda copiar ni cambiar la fecha, y activación remota por archivo.
+**Corrección a lo dicho en el chat:** la hora del reloj de pecho la fija el móvil (`TIME_SET`), así que no sirve como referencia independiente; se usa hora de red de Android y contador monotónico.
+**No se ha tocado:** firmware, protocolo BLE/ESP-NOW/Wi-Fi, formato RAW, base de datos.
+**Validación:** IMPLEMENTADO · núcleo 25/25 pruebas JVM en local · **NO VERIFICADO** en teléfono ni con tarjetas. Limitaciones: tarjetas «mágicas» con UID modificable pueden clonar una NTAG21x; el repositorio público permite recompilar sin licencias.
+**Pendiente:** lista de `docs/LICENCIAS_AVO.md` (apartado «Pendiente de verificar en teléfono»).
+
 ## 2026-10-24 — Android 2.1-motor — inicio automático en segundo plano
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
 **Qué cambia:** el servicio de enlace (BLE con el chaleco, NTRIP, descarga automática) arranca sin abrir la app: al encender el móvil,

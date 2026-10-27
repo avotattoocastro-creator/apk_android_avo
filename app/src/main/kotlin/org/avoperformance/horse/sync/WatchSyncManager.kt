@@ -121,6 +121,7 @@ class WatchSyncManager(
      * and BLE if Wi-Fi is not possible. Field 2.3-wifi-dev2: "Reanudar descarga" went straight to BLE.
      */
     suspend fun download(sessionId: String): String? {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return org.avoperformance.horse.license.LicenseGate.BLOCKED
         val w = wifi
         if (w != null && !watchRecording()) {
             val rep = w.sync(listOf(sessionId to null))
@@ -276,6 +277,7 @@ class WatchSyncManager(
      * (ignores the automatic-download setting).
      */
     fun autoSync(force: Boolean = false) {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return
         if (!force && !settings.autoDownload) return
         scope.launch(Dispatchers.IO) {
             if (refresh() != null) return@launch
@@ -342,6 +344,7 @@ class WatchSyncManager(
     }
 
     fun scheduleWorker() {
+        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return
         val req = PeriodicWorkRequestBuilder<SyncWorker>(1, TimeUnit.HOURS)
             .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()).build()
         WorkManager.getInstance(ctx).enqueueUniquePeriodicWork("avo_sync", ExistingPeriodicWorkPolicy.KEEP, req)
@@ -352,6 +355,7 @@ class WatchSyncManager(
 class SyncWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {
         val c = (applicationContext as AvoApp).container
+        if (!c.license.fullAccess) return Result.success()
         // periodic safety net: restores the link service if the system stopped it
         org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(applicationContext, "comprobación periódica")
         return runCatching { c.sync.uploadPending(); Result.success() }.getOrElse { Result.retry() }

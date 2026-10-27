@@ -4,7 +4,7 @@ name: Build AVO Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity, feature/avo-firebase-sync, feature/avo-wifi-sync]
+    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity, feature/avo-firebase-sync, feature/avo-wifi-sync, feature/avo-license-nfc]
     paths:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'
@@ -198,8 +198,21 @@ jobs:
             echo "::warning::Sin secreto AVO_KEYSTORE_BASE64: APK con clave debug temporal (requerirá desinstalar)"
           fi
 
+      - name: App licence keys (variable AVO_LICENSE_PUBLIC_KEYS)
+        env:
+          AVO_LICENSE_PUBLIC_KEYS: ${{ vars.AVO_LICENSE_PUBLIC_KEYS }}
+        shell: bash
+        run: |
+          if [ -n "$AVO_LICENSE_PUBLIC_KEYS" ]; then
+            n=$(echo "$AVO_LICENSE_PUBLIC_KEYS" | tr ',; ' '\n\n\n' | grep -c . || true)
+            echo "::notice::Licencias ACTIVADAS: $n clave(s) pública(s) de AVO Tarjetas compiladas en la app"
+          else
+            echo "::warning::Sin variable AVO_LICENSE_PUBLIC_KEYS: APK SIN control de licencias (versión de desarrollo)"
+          fi
+
       - name: Build debug APK
         env:
+          AVO_LICENSE_PUBLIC_KEYS: ${{ vars.AVO_LICENSE_PUBLIC_KEYS }}
           AVO_KEYSTORE_PASSWORD: ${{ secrets.AVO_KEYSTORE_PASSWORD }}
           AVO_KEY_ALIAS: ${{ secrets.AVO_KEY_ALIAS }}
           AVO_KEY_PASSWORD: ${{ secrets.AVO_KEY_PASSWORD }}
@@ -219,13 +232,15 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          VERSION="V2_1_MOTOR_1_1_0_DEV1"
+          VERSION=$(grep -m1 'versionName' "$AVO_SOURCE_DIR/app/build.gradle.kts" | sed -E 's/.*"([^"]+)".*/\1/' | tr '.-' '__' | tr 'a-z' 'A-Z')
+          CARDS_VERSION=$(grep -m1 'versionName' "$AVO_SOURCE_DIR/cards/build.gradle.kts" | sed -E 's/.*"([^"]+)".*/\1/' | tr '.-' '__' | tr 'a-z' 'A-Z')
+          echo "APP_VERSION=$VERSION" >> "$GITHUB_ENV"
           # the APK must contain the engine for every supported ABI
           for abi in arm64-v8a armeabi-v7a x86_64; do unzip -l "$APK" | grep -q "lib/$abi/libavo_equine_jni.so" || { echo "::error::falta libavo_equine_jni.so para $abi"; exit 1; }; done
-          OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
+          OUTPUT="AVO_Performance_Horse_V${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
           CARDS=$(find "$AVO_SOURCE_DIR/cards/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit 2>/dev/null || true)
-          if [ -n "$CARDS" ]; then cp "$CARDS" "$GITHUB_WORKSPACE/out/AVO_Tarjetas_V1_0_DEV1_debug.apk"; (cd "$GITHUB_WORKSPACE/out" && sha256sum AVO_Tarjetas_V1_0_DEV1_debug.apk > AVO_Tarjetas_V1_0_DEV1_debug.apk.sha256); fi
+          if [ -n "$CARDS" ]; then C="AVO_Tarjetas_V${CARDS_VERSION}_debug.apk"; cp "$CARDS" "$GITHUB_WORKSPACE/out/$C"; (cd "$GITHUB_WORKSPACE/out" && sha256sum "$C" > "$C.sha256"); fi
           cd "$GITHUB_WORKSPACE/out"
           sha256sum "$OUTPUT" > "$OUTPUT.sha256"
           cat "$OUTPUT.sha256"
@@ -233,7 +248,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-V2-1-motor-APK
+          name: AVO-Performance-Horse-V${{ env.APP_VERSION }}-APK
           path: out/
           if-no-files-found: error
           retention-days: 30

@@ -31,6 +31,8 @@ class AppContainer(val app: Application) {
     /** Server layer on hold: no endpoint is invented. */
     val server: ServerApi = NotConfiguredServer
     val log = AppLog(this)
+    /** App licence (NFC card or file). Created before every hardware/network object: it sets LicenseGate. */
+    val license = org.avoperformance.horse.license.LicenseManager(app, secure, log, scope)
     val dnd = GeofenceDndController(app, settings, log)
     val watch = WatchConnection(app, settings, secure, log, scope)
     val config = WatchConfigOps(watch)
@@ -46,6 +48,24 @@ class AppContainer(val app: Application) {
     val share = org.avoperformance.horse.cloud.ShareManager(this).also { s -> sync.onVerified = { id -> s.onTrainingVerified(id) } }
     /** V3.9 GNSS: records RTK FIX losses and an L1-only antenna in the app log (Ajustes → Diagnóstico). */
     init {
+        // Licence expired or missing: consultation mode. Stop the watch link, NTRIP, Wi-Fi download and the
+        // background tasks; the link service stops itself. On (re)activation everything starts again.
+        scope.launch {
+            var wasFull: Boolean? = null
+            license.status.collect { st ->
+                val full = st.fullAccess
+                if (full == wasFull) return@collect
+                if (!full) {
+                    runCatching { ntrip.stop() }; runCatching { watch.stop() }; runCatching { wifiSync.cancel() }
+                    val wm = androidx.work.WorkManager.getInstance(app)
+                    listOf("avo_sync", "avo_share_periodic", "avo_share_now", "avo_share_followup").forEach { wm.cancelUniqueWork(it) }
+                } else if (wasFull == false) {
+                    org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(app, "licencia activada")
+                    if (identity.card.value != null) { share.schedule(); share.runNow() }
+                }
+                wasFull = full
+            }
+        }
         scope.launch {
             var lastLost = -1; var l1Warned = false
             watch.telemetry.collect { s ->
