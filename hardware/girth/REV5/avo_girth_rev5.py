@@ -68,10 +68,10 @@ QI = dict(lx=18.0, wy=15.0, pcb=1.0, parts=1.2, center=(-19.0, 0.0))   # REV 5.7
 # BNO085 pegado al C6: su fila de 10 pines (paso 2,54) queda frente a la columna D0–D6 del XIAO (paso 2,54, centrada
 # en la placa según la huella oficial de Seeed), a la misma altura Y, para unir cada pin con su pad con un puente corto:
 #   PS1(+PS0)–D0 · RST–D1 · INT–D2 · CS–D3 · AD0–D4 · SDA–D5 · SCL–D6 ; VCC y GND con cable a 3V3 y GND del XIAO.
-BNO_PIN_OFF = 1.0     # (E) centro de la fila de pines desplazado hacia el extremo VCC respecto al centro de la placa
+BNO_PIN_OFF = 0.0     # REV 5.7.1 (foto de la prueba impresa): fila de pines centrada en la placa (~1,2 mm a cada extremo); antes 1,0 (E) → desfase de ~1,1 mm
 BNO_PIN_IN = 1.3      # (E) centro de los pines respecto al borde de la placa
 BNO_GAP = 0.15        # borde del BNO a 0,15 del borde del C6 (encima de su marco, que queda a ras del PCB)
-BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_in=3.0,
+BNO = dict(lx=15.5, wy=25.2, t=1.6, stand=1.5, hole_x=1.95, hole_y=2.45,   # taladros (foto): a 1,95 del borde −X y 2,45 de los extremos
            center=(C6_C[0] - C6["lx"] / 2 - BNO_GAP - 15.5 / 2, C6_C[1] - 1.27 + BNO_PIN_OFF))
 C6_PADS_Y = [C6_C[1] + (3 - k) * 2.54 for k in range(7)]                      # D0 (lado USB) … D6
 BNO_PINS = ["PS0", "PS1", "RST", "INT", "CS", "AD0", "SDA", "SCL", "GND", "VCC"]
@@ -79,7 +79,7 @@ BNO_PINS_Y = [BNO["center"][1] - BNO_PIN_OFF + (4.5 - k) * 2.54 for k in range(1
 BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_Z0 = TRAY_TOP + 1.0 - BNO["t"]   # REV 5.7: cara superior del BNO a ras de la del C6 (puentes por arriba, al mismo nivel)
-BNO_HOLES = [(BX0 + BNO["hole_in"], BY0 + BNO["hole_in"]), (BX0 + BNO["hole_in"], BY1 - BNO["hole_in"])]
+BNO_HOLES = [(BX0 + BNO["hole_x"], BY0 + BNO["hole_y"]), (BX0 + BNO["hole_x"], BY1 - BNO["hole_y"])]
 REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
 
@@ -180,8 +180,7 @@ def pod_lid():
         lid = lid.union(cyl(x, y, BED_TOP + 0.05, 2.4, CEIL - BED_TOP))       # apoyan en la cama (REV 5.7)
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
-    for (hx, hy) in BNO_HOLES:                                      # REV 5.7: aprietan el BNO sobre el anillo de sus taladros
-        lid = lid.union(cyl(hx, hy, BED_TOP + 0.05, 4.2, CEIL - BED_TOP).cut(cyl(hx, hy, BED_TOP, 2.6, 2.0)))
+    # REV 5.7.1: sin tubos sobre el BNO (sus taladros están a 1,95 del borde, bajo la pestaña −X que ya lo sujeta)
     for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
         lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
