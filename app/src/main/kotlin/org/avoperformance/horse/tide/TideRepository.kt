@@ -36,7 +36,7 @@ class TideRepository(private val ctx: Context) {
     private val api = "https://ideihm.covam.es/api-ihm/getmarea"
 
     private fun http(url: String): String {
-        check(org.avoperformance.horse.license.LicenseGate.fullAccess) { "Mareas y meteorología disponibles con licencia activa" }
+        check(org.avoperformance.horse.license.LicenseGate.allows(org.avoperformance.horse.core.license.LicenseFeature.MAREAS)) { "Mareas y meteorología no incluidas en tu licencia o licencia caducada" }
         val c = (URL(url).openConnection() as HttpURLConnection).apply {
             connectTimeout = 15_000; readTimeout = 20_000
             setRequestProperty("User-Agent", "AVO-Performance-Horse/2.0 (Android)")

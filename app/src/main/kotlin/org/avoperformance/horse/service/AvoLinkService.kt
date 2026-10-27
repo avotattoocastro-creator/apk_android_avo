@@ -48,9 +48,9 @@ class AvoLinkService : LifecycleService() {
             else -> 0
         }
         ServiceCompat.startForeground(this, NOTIF_ID, build(if (hasWatch) "Iniciando…" else "Esperando entrenamientos de usuarios AVO"), type)
-        // Licence expired or missing (consultation mode): nothing runs in the background.
-        // (startForeground above is mandatory after startForegroundService, even to stop at once.)
-        if (!c.license.fullAccess) {
+        // Licence expired or missing (consultation mode), or roles without vest nor sharing: nothing runs in the
+        // background. (startForeground above is mandatory after startForegroundService, even to stop at once.)
+        if (!runAllowed()) {
             c.ntrip.stop(); c.watch.stop()
             ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
             stopSelf()
@@ -66,8 +66,8 @@ class AvoLinkService : LifecycleService() {
         collecting = true
         // the licence can expire while the service runs: stop then (the container stops watch and NTRIP)
         lifecycleScope.launch {
-            c.license.status.collect { st ->
-                if (!st.fullAccess) {
+            c.license.features.collect {
+                if (!runAllowed()) {
                     c.dnd.restoreOwned("licencia caducada")
                     ServiceCompat.stopForeground(this@AvoLinkService, ServiceCompat.STOP_FOREGROUND_REMOVE)
                     stopSelf()
@@ -132,7 +132,7 @@ class AvoLinkService : LifecycleService() {
         const val NOTIF_ID = 42
         const val ACTION_STOP = "org.avoperformance.horse.STOP"
         fun start(ctx: Context) {
-            if (!(ctx.applicationContext as AvoApp).container.license.fullAccess) return
+            if (!runAllowed()) return
             (ctx.applicationContext as AvoApp).container.settings.autoStartPaused = false
             ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
         }
@@ -146,10 +146,14 @@ class AvoLinkService : LifecycleService() {
          * Only when enabled, a watch is authorised, Bluetooth permission is granted and the user did not disconnect.
          * Android allows it from boot/update broadcasts and, at any time, when battery optimisation is disabled for the app.
          */
-        /** Authorized watch and Bluetooth permission: the service can handle the watch link. */
+        /** The licence lets the service do something: vest link (GRABAR) or receiving trainings (COMPARTIR). */
+        fun runAllowed(): Boolean = org.avoperformance.horse.license.LicenseGate.canRecord ||
+            org.avoperformance.horse.license.LicenseGate.allows(org.avoperformance.horse.core.license.LicenseFeature.COMPARTIR)
+
+        /** Authorized watch, Bluetooth permission and a licence that records: the service can handle the watch link. */
         fun hasWatch(ctx: Context): Boolean {
             val s = (ctx.applicationContext as AvoApp).container.settings
-            return s.authorizedWatch != null && (Build.VERSION.SDK_INT < 31 ||
+            return org.avoperformance.horse.license.LicenseGate.canRecord && s.authorizedWatch != null && (Build.VERSION.SDK_INT < 31 ||
                 ContextCompat.checkSelfPermission(ctx, android.Manifest.permission.BLUETOOTH_CONNECT) == android.content.pm.PackageManager.PERMISSION_GRANTED)
         }
 
@@ -157,10 +161,11 @@ class AvoLinkService : LifecycleService() {
             val app = ctx.applicationContext as AvoApp
             val s = app.container.settings
             if (!s.autoStart || s.autoStartPaused) return false
-            if (!app.container.license.fullAccess) return false
+            if (!runAllowed()) return false
             val watch = hasWatch(ctx)
             // without a watch it is only started to receive trainings from other AVO users (needs a card)
-            if (!watch && app.container.identity.card.value == null) return false
+            if (!watch && (app.container.identity.card.value == null ||
+                    !org.avoperformance.horse.license.LicenseGate.allows(org.avoperformance.horse.core.license.LicenseFeature.COMPARTIR))) return false
             return try {
                 ContextCompat.startForegroundService(ctx, Intent(ctx, AvoLinkService::class.java))
                 app.container.log.i("LINK", "inicio automático en segundo plano ($reason)")

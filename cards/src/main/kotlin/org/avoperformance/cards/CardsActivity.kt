@@ -15,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -32,6 +34,8 @@ import androidx.compose.ui.unit.sp
 import org.avoperformance.horse.core.identity.AvoUserCard
 import org.avoperformance.horse.core.license.LicenseCrypto
 import org.avoperformance.horse.core.license.LicenseFile
+import org.avoperformance.horse.core.license.LicenseFeatures
+import org.avoperformance.horse.core.license.LicenseRole
 import org.avoperformance.horse.core.license.LicenseIssuer
 import org.avoperformance.horse.core.license.LicenseKeyBackup
 import org.avoperformance.horse.core.license.LicenseToken
@@ -50,10 +54,16 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 import kotlin.concurrent.thread
 
-/** What the next tapped card is used for. [licenseUntil]: last day of the app licence to write (null = no licence). */
+/**
+ * What the next tapped card is used for. [licenseUntil]: last day of the app licence to write (null = no licence);
+ * [roles]: roles of that licence (they decide the functions of the app).
+ */
 private sealed interface Mode {
     data object Read : Mode
-    data class Write(val card: AvoUserCard, val isNew: Boolean, val licenseUntil: LocalDate?) : Mode
+    data class Write(val card: AvoUserCard, val isNew: Boolean, val licenseUntil: LocalDate?, val roles: Set<LicenseRole> = emptySet()) : Mode
+
+/** Licence editor (renew, add, send by file): roles + last day. */
+private data class LicenseAsk(val issued: Issued, val byFile: Boolean)
 }
 
 /** Password dialog purpose. */
@@ -130,7 +140,7 @@ class CardsActivity : ComponentActivity() {
             else -> "firma válida"
         }
         val expired = System.currentTimeMillis() >= t.expiresAtMs
-        return "licencia hasta $until${if (expired) " (CADUCADA)" else ""} · $sig"
+        return "licencia hasta $until${if (expired) " (CADUCADA)" else ""} · ${LicenseRole.label(t.roleSet)} · $sig"
     }
 
     private fun onTag(tag: android.nfc.Tag) {
@@ -158,9 +168,10 @@ class CardsActivity : ComponentActivity() {
                     val until = m.licenseUntil
                     val k = key
                     if (until != null && k == null) "No hay clave de licencias en este móvil."
+                    else if (until != null && m.roles.isEmpty()) "Marca al menos un rol para la licencia."
                     else {
                         val signer: ((ByteArray) -> ByteArray)? = if (until == null || k == null) null else { uid ->
-                            LicenseIssuer.issue(k, uid, m.card.code, System.currentTimeMillis(), until, zone).encode()
+                            LicenseIssuer.issue(k, uid, m.card.code, System.currentTimeMillis(), until, zone, m.roles).encode()
                         }
                         when (val r = CardWriter.write(tag, m.card, overwrite, lock && until == null, signer)) {
                             is CardWriter.Outcome.Refused -> r.reason
@@ -169,11 +180,12 @@ class CardsActivity : ComponentActivity() {
                                 val prev = store.byCode(m.card.code)
                                 val base = prev ?: Issued(m.card, System.currentTimeMillis(), revoked = false)
                                 val uidHex = if (until != null) tag.id.joinToString("") { "%02X".format(it) } else base.uidHex
-                                if (m.isNew || prev != null) store.save(base.copy(licenseExpiresS = expiresS ?: base.licenseExpiresS, uidHex = uidHex))
+                                if (m.isNew || prev != null) store.save(base.copy(licenseExpiresS = expiresS ?: base.licenseExpiresS, uidHex = uidHex,
+                                    rolesBits = if (until != null) LicenseRole.toBits(m.roles) else base.rolesBits))
                                 runOnUiThread { issued = store.all(); mode = Mode.Read; overwrite = false; lock = false }
                                 buildString {
                                     append("Tarjeta grabada: ${m.card.name} · ${m.card.code}")
-                                    if (until != null) append("\nLicencia de la app hasta ${until.format(DAY)}")
+                                    if (until != null) append("\nLicencia de la app hasta ${until.format(DAY)} · ${LicenseRole.label(m.roles)}")
                                     append(if (r.verified) " · verificada" else " · retírala y léela para verificar")
                                     if (r.locked) append(" · bloqueada")
                                 }
@@ -250,18 +262,18 @@ class CardsActivity : ComponentActivity() {
     }
 
     /** Licence for a user who cannot bring the card: encrypted file for email/WhatsApp (see LicenseFile). */
-    private fun sendLicenseFile(i: Issued, lastDay: LocalDate) {
+    private fun sendLicenseFile(i: Issued, lastDay: LocalDate, roles: Set<LicenseRole>) {
         val k = key ?: return
         try {
             val uid = i.uidHex.takeIf { it.length in 2..20 && it.length % 2 == 0 }
                 ?.chunked(2)?.map { it.toInt(16).toByte() }?.toByteArray() ?: byteArrayOf(0)
-            val token = LicenseIssuer.issue(k, uid, i.card.code, System.currentTimeMillis(), lastDay, zone, remote = true)
+            val token = LicenseIssuer.issue(k, uid, i.card.code, System.currentTimeMillis(), lastDay, zone, roles, remote = true)
             val dir = java.io.File(cacheDir, "licencias").apply { mkdirs(); listFiles()?.forEach { it.delete() } }
             val file = java.io.File(dir, "AVO_licencia_${i.card.code}_hasta_$lastDay.${LicenseFile.EXTENSION}")
             file.writeText(LicenseFile.encode(token, i.card), Charsets.US_ASCII)
-            store.save(i.copy(licenseExpiresS = token.expiresAtS)); issued = store.all()
+            store.save(i.copy(licenseExpiresS = token.expiresAtS, rolesBits = LicenseRole.toBits(roles))); issued = store.all()
             val uri = androidx.core.content.FileProvider.getUriForFile(this, "org.avoperformance.cards.files", file)
-            val text = "Licencia de AVO Performance Horse para ${i.card.name} hasta el ${lastDay.format(DAY)}. " +
+            val text = "Licencia de AVO Performance Horse para ${i.card.name} (${LicenseRole.label(roles)}) hasta el ${lastDay.format(DAY)}. " +
                 "Abre este archivo con la app AVO Performance Horse (o en la app: Inicio → Licencia → Abrir archivo)."
             val send = Intent(Intent.ACTION_SEND).setType("application/octet-stream")
                 .putExtra(Intent.EXTRA_STREAM, uri).putExtra(Intent.EXTRA_TEXT, text)
@@ -286,6 +298,8 @@ class CardsActivity : ComponentActivity() {
         var name by remember { mutableStateOf("") }
         var withLicense by remember { mutableStateOf(true) }
         var until by remember { mutableStateOf<LocalDate?>(null) }
+        var newRoles by remember { mutableStateOf(setOf(LicenseRole.JINETE)) }
+        var licenseAsk by remember { mutableStateOf<LicenseAsk?>(null) }
         var confirmRevoke by remember { mutableStateOf<Issued?>(null) }
         var confirmGenerate by remember { mutableStateOf(false) }
         val k = key
@@ -347,16 +361,17 @@ class CardsActivity : ComponentActivity() {
                         Text("Licencia de la app", color = if (k != null) AvoColors.Text else AvoColors.TextDim)
                     }
                     if (withLicense && k != null) {
+                        RolePicker(newRoles) { newRoles = it }
                         OutlinedButton(onClick = { pickDate(until) { until = it } }, modifier = Modifier.fillMaxWidth()) {
                             Text(until?.let { "Activa hasta el ${it.format(DAY)}" } ?: "Elegir fecha de activación")
                         }
                     }
                     Spacer(Modifier.height(8.dp))
-                    val needsDate = withLicense && k != null && until == null
+                    val needsDate = withLicense && k != null && (until == null || newRoles.isEmpty())
                     Button(enabled = name.isNotBlank() && !needsDate, modifier = Modifier.fillMaxWidth(), onClick = {
                         val card = AvoUserCard.generate(name)
                         val lic = if (withLicense && k != null) until else null
-                        mode = Mode.Write(card, isNew = true, licenseUntil = lic)
+                        mode = Mode.Write(card, isNew = true, licenseUntil = lic, roles = newRoles)
                         status = "Acerca una tarjeta en blanco para grabar ${card.name}" + (lic?.let { " con licencia hasta el ${it.format(DAY)}." } ?: ".")
                     }) { Text("CREAR Y GRABAR", fontWeight = FontWeight.Bold) }
                     Spacer(Modifier.height(6.dp))
@@ -370,7 +385,7 @@ class CardsActivity : ComponentActivity() {
                 }) {
                     if (m is Mode.Write) {
                         KV("Tarjeta", "${m.card.name} · ${m.card.code}")
-                        KV("Licencia", m.licenseUntil?.let { "hasta el ${it.format(DAY)}" } ?: "sin licencia")
+                        KV("Licencia", m.licenseUntil?.let { "hasta el ${it.format(DAY)} · ${LicenseRole.label(m.roles)}" } ?: "sin licencia")
                     }
                     Text(status, color = AvoColors.Text)
                     if (m is Mode.Write) {
@@ -395,23 +410,23 @@ class CardsActivity : ComponentActivity() {
                                 Text("${i.card.code} · ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(i.createdMs))}", color = AvoColors.TextDim, fontSize = 12.sp)
                                 if (i.licenseExpiresS > 0) {
                                     val expired = System.currentTimeMillis() / 1000 >= i.licenseExpiresS
-                                    Text("Licencia hasta el ${LicenseIssuer.lastDayOf(i.licenseExpiresS, zone).format(DAY)}" + if (expired) " · CADUCADA" else "",
+                                    val rl = LicenseRole.fromBits(i.rolesBits).takeIf { it.isNotEmpty() }?.let { " · " + LicenseRole.label(it) } ?: ""
+                                    Text("Licencia hasta el ${LicenseIssuer.lastDayOf(i.licenseExpiresS, zone).format(DAY)}$rl" + if (expired) " · CADUCADA" else "",
                                         color = if (expired) AvoColors.Bad else AvoColors.Ok, fontSize = 12.sp)
                                 } else Text("Sin licencia de la app", color = AvoColors.TextDim, fontSize = 12.sp)
                             }
                             if (i.revoked) StatusPill("BAJA", AvoColors.Bad)
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            if (!i.revoked && k != null) TextButton(onClick = {
-                                pickDate(null) { d ->
-                                    mode = Mode.Write(i.card, isNew = false, licenseUntil = d)
-                                    status = "Acerca la tarjeta de ${i.card.name} para grabar la licencia hasta el ${d.format(DAY)}."
-                                }
-                            }) { Text(if (i.licenseExpiresS > 0) "Renovar" else "Licencia") }
-                            if (!i.revoked && k != null) TextButton(onClick = { pickDate(null) { d -> sendLicenseFile(i, d) } }) { Text("Por archivo") }
+                            if (!i.revoked && k != null) TextButton(onClick = { licenseAsk = LicenseAsk(i, byFile = false) }) {
+                                Text(if (i.licenseExpiresS > 0) "Renovar" else "Licencia")
+                            }
+                            if (!i.revoked && k != null) TextButton(onClick = { licenseAsk = LicenseAsk(i, byFile = true) }) { Text("Por archivo") }
                             if (!i.revoked) TextButton(onClick = {
-                                val keep = i.licenseExpiresS.takeIf { it > System.currentTimeMillis() / 1000 && k != null }?.let { LicenseIssuer.lastDayOf(it, zone) }
-                                mode = Mode.Write(i.card, isNew = false, licenseUntil = keep)
+                                val keepRoles = LicenseRole.fromBits(i.rolesBits)
+                                val keep = i.licenseExpiresS.takeIf { it > System.currentTimeMillis() / 1000 && k != null && keepRoles.isNotEmpty() }
+                                    ?.let { LicenseIssuer.lastDayOf(it, zone) }
+                                mode = Mode.Write(i.card, isNew = false, licenseUntil = keep, roles = keepRoles)
                                 status = "Acerca una tarjeta para grabar una copia de ${i.card.name}" + (keep?.let { " (licencia hasta el ${it.format(DAY)})." } ?: ".")
                             }) { Text("Copia") }
                             TextButton(onClick = { if (i.revoked) { store.save(i.copy(revoked = false)); issued = store.all() } else confirmRevoke = i }) {
@@ -421,6 +436,16 @@ class CardsActivity : ComponentActivity() {
                     }
                     Spacer(Modifier.height(6.dp))
                     Note("La baja de momento queda registrada solo en este móvil. «Por archivo» envía la licencia por WhatsApp o email a quien no puede traer la tarjeta: va cifrada con la clave de su tarjeta, así que solo sirve en su móvil.")
+                }
+            }
+        }
+        licenseAsk?.let { ask ->
+            LicenseDialog(ask, onDismiss = { licenseAsk = null }) { day, roles ->
+                licenseAsk = null
+                if (ask.byFile) sendLicenseFile(ask.issued, day, roles)
+                else {
+                    mode = Mode.Write(ask.issued.card, isNew = false, licenseUntil = day, roles = roles)
+                    status = "Acerca la tarjeta de ${ask.issued.card.name} para grabar la licencia (${LicenseRole.label(roles)}) hasta el ${day.format(DAY)}."
                 }
             }
         }
@@ -445,6 +470,49 @@ class CardsActivity : ComponentActivity() {
                 is PwdAsk.Import -> doImport(ask.text, pwd)
             }
         }) }
+    }
+
+    /** Role checkboxes with the functions each role enables (table LicenseFeatures, shared with the app). */
+    @Composable
+    private fun RolePicker(selected: Set<LicenseRole>, onChange: (Set<LicenseRole>) -> Unit) {
+        Text("Roles de la licencia", color = AvoColors.TextDim, fontSize = 12.sp)
+        LicenseRole.entries.forEach { r ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(r in selected, { on -> onChange(if (on) selected + r else selected - r) })
+                Column {
+                    Text(r.label, color = AvoColors.Text)
+                    Text(r.summary, color = AvoColors.TextDim, fontSize = 11.sp)
+                }
+            }
+        }
+        if (selected.isEmpty()) Note("Marca al menos un rol.", AvoColors.Warn)
+        else Note("Funciones: " + LicenseFeatures.of(selected).joinToString(", ") { it.label.lowercase() } +
+            if (LicenseFeatures.fixedRider(selected)) ". El titular queda como jinete fijo de sus entrenamientos." else
+                if (LicenseFeatures.defaultRider(selected)) ". El titular queda como jinete por defecto." else ".")
+    }
+
+    /** Renew / add a licence, or prepare it as a file: roles + last day. */
+    @Composable
+    private fun LicenseDialog(ask: LicenseAsk, onDismiss: () -> Unit, onOk: (LocalDate, Set<LicenseRole>) -> Unit) {
+        var roles by remember { mutableStateOf(LicenseRole.fromBits(ask.issued.rolesBits).ifEmpty { setOf(LicenseRole.JINETE) }) }
+        var day by remember { mutableStateOf<LocalDate?>(null) }
+        AlertDialog(onDismissRequest = onDismiss, containerColor = AvoColors.Surface,
+            title = { Text((if (ask.byFile) "Licencia por archivo · " else "Licencia · ") + ask.issued.card.name) },
+            text = {
+                Column(Modifier.heightIn(max = 520.dp).verticalScroll(rememberScrollState())) {
+                    RolePicker(roles) { roles = it }
+                    Spacer(Modifier.height(6.dp))
+                    OutlinedButton(onClick = { pickDate(day) { day = it } }, modifier = Modifier.fillMaxWidth()) {
+                        Text(day?.let { "Activa hasta el ${it.format(DAY)}" } ?: "Elegir fecha de activación")
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(enabled = day != null && roles.isNotEmpty(), onClick = { day?.let { onOk(it, roles) } }) {
+                    Text(if (ask.byFile) "Crear y enviar" else "Grabar en la tarjeta")
+                }
+            },
+            dismissButton = { TextButton(onClick = onDismiss) { Text("Cancelar") } })
     }
 
     @Composable

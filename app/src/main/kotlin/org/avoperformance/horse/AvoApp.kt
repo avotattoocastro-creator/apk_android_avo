@@ -7,6 +7,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import org.avoperformance.horse.ble.WatchConfigOps
 import org.avoperformance.horse.ble.WatchConnection
 import org.avoperformance.horse.core.server.NotConfiguredServer
@@ -45,26 +48,40 @@ class AppContainer(val app: Application) {
     /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
     val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
     /** Sharing between AVO users over Firebase (global, per horse and manual). */
-    val share = org.avoperformance.horse.cloud.ShareManager(this).also { s -> sync.onVerified = { id -> s.onTrainingVerified(id) } }
+    val share = org.avoperformance.horse.cloud.ShareManager(this).also { s ->
+        sync.onVerified = { id -> s.onTrainingVerified(id) }
+        // roles of the licence in the sharing profile: mine published, the others' verified with the app keys
+        s.firebase.licenseToken = { license.publicTokenB64 }
+        s.firebase.verifyRoles = { code, token -> license.verifiedRoles(code, token) }
+    }
+    // declared before init: the coroutines launched in init use them
+    private val riderLock = kotlinx.coroutines.sync.Mutex()
+    private val licPrefs = app.getSharedPreferences("license_rider", android.content.Context.MODE_PRIVATE)
     /** V3.9 GNSS: records RTK FIX losses and an L1-only antenna in the app log (Ajustes → Diagnóstico). */
     init {
-        // Licence expired or missing: consultation mode. Stop the watch link, NTRIP, Wi-Fi download and the
-        // background tasks; the link service stops itself. On (re)activation everything starts again.
+        // Licence: functions by role. Without GRABAR the watch link, NTRIP, Wi-Fi download and the download task
+        // stop; without COMPARTIR the sharing tasks stop. When a function comes back, everything starts again.
         scope.launch {
-            var wasFull: Boolean? = null
-            license.status.collect { st ->
-                val full = st.fullAccess
-                if (full == wasFull) return@collect
-                if (!full) {
-                    runCatching { ntrip.stop() }; runCatching { watch.stop() }; runCatching { wifiSync.cancel() }
-                    val wm = androidx.work.WorkManager.getInstance(app)
-                    listOf("avo_sync", "avo_share_periodic", "avo_share_now", "avo_share_followup").forEach { wm.cancelUniqueWork(it) }
-                } else if (wasFull == false) {
+            var prev: Set<org.avoperformance.horse.core.license.LicenseFeature>? = null
+            license.features.collect { f ->
+                val p = prev; prev = f
+                if (p == f) return@collect
+                val rec = org.avoperformance.horse.core.license.LicenseFeature.GRABAR in f
+                val shr = org.avoperformance.horse.core.license.LicenseFeature.COMPARTIR in f
+                val wm = androidx.work.WorkManager.getInstance(app)
+                if (!rec) { runCatching { ntrip.stop() }; runCatching { watch.stop() }; runCatching { wifiSync.cancel() }; wm.cancelUniqueWork("avo_sync") }
+                if (!shr) listOf("avo_share_periodic", "avo_share_now", "avo_share_followup").forEach { wm.cancelUniqueWork(it) }
+                val gained = p != null && ((rec && org.avoperformance.horse.core.license.LicenseFeature.GRABAR !in p) ||
+                    (shr && org.avoperformance.horse.core.license.LicenseFeature.COMPARTIR !in p))
+                if (gained) {
                     org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(app, "licencia activada")
-                    if (identity.card.value != null) { share.schedule(); share.runNow() }
+                    if (shr && identity.card.value != null) { share.schedule(); share.runNow() }
                 }
-                wasFull = full
             }
+        }
+        // Licence with the Jinete role: the holder is the rider of the trainings recorded with this app
+        scope.launch {
+            kotlinx.coroutines.flow.combine(license.status, watch.state) { _, _ -> Unit }.collect { applyLicenseRider() }
         }
         scope.launch {
             var lastLost = -1; var l1Warned = false
@@ -77,6 +94,38 @@ class AppContainer(val app: Application) {
             }
         }
     }
+
+    /**
+     * Jinete licence: makes sure the holder exists as a rider, selects them (once per licence; always when the
+     * licence fixes the rider) and writes them in the watch configuration when it is connected and not recording,
+     * so every training recorded with this app carries this rider.
+     */
+    suspend fun applyLicenseRider(): Unit = riderLock.withLock {
+        val (code, name) = license.licenseRider ?: return@withLock
+        val serial = (license.status.value as? org.avoperformance.horse.core.license.LicenseStatus.Active)?.token?.serial
+            ?.joinToString("") { "%02X".format(it) } ?: return@withLock
+        val rider = withContext(Dispatchers.IO) {
+            db.riders().all().first().firstOrNull { it.code == code }
+                ?: org.avoperformance.horse.data.RiderEntity(code = code, name = name).let { r -> r.copy(id = db.riders().insert(r)) }
+        }
+        val locked = license.riderLocked
+        val firstTime = licPrefs.getString("applied", null) != serial
+        if (settings.selectedRiderId != rider.id && (locked || firstTime)) {
+            settings.selectedRiderId = rider.id
+            log.i("LICENCIA", "jinete de la licencia seleccionado: ${rider.name} ($code)")
+        }
+        licPrefs.edit().putString("applied", serial).apply()
+        val sess = watch.telemetry.value?.t?.session
+        val recording = sess == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING || sess == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED
+        if (watch.isReady && !recording && (locked || firstTime || settings.selectedRiderId == rider.id)) {
+            val cfg = config.read().getOrNull() ?: return@withLock
+            if (cfg.riderName != code && (locked || settings.selectedRiderId == rider.id)) {
+                val err = config.setRider(rider.id, code)
+                log.i("LICENCIA", if (err == null) "jinete $code enviado al chaleco" else "jinete no enviado al chaleco: $err")
+            }
+        }
+    }
+
 }
 
 class AppLog(private val c: AppContainer) {

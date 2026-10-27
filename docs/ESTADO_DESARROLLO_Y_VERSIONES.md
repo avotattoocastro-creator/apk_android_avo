@@ -7,7 +7,7 @@
 
 | Módulo | Versión fuente | Listo para probar | Validación pendiente |
 |---|---|---|---|
-| Licencias de la app (27/10/2026) | Android 2.4-license-dev1 (vc 35) + AVO Tarjetas 1.1-license-dev1 (vc 2), rama `feature/avo-license-nfc` | APK de CI (`build-android.yml`); núcleo con 25 pruebas JVM | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
+| Licencias y roles de la app (27/10/2026) | Android 2.5-roles-dev1 (vc 36) + AVO Tarjetas 1.2-roles-dev1 (vc 3), rama `feature/avo-license-nfc` | APK de CI (`build-android.yml`); núcleo con 28 pruebas JVM; reglas Firebase con campo `lic` | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
 | Android | **V2.0 / versionCode 12** | APK debug CI [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) | Prueba en teléfono y reloj |
 | Motor de análisis AVO + app Android 2.1-motor + Windows | 1.1.0-dev1 (rama `feature/avo-equine-intelligence-engine`) | APK y paquete Windows de CI (40041494960 / 40041494972) | Teléfono, PC y cincha reales |
 | Mareas | V2.0 | IHM oficial, coeficiente, sol/luna, Open-Meteo | Comparar con Tu Marea / tabla del puerto en el móvil |

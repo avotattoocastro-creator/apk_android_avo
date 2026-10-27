@@ -94,7 +94,7 @@ class FirebaseShare(private val ctx: Context) {
         if (auth.currentUser?.email == email) {
             // Session already open: the profile must also exist. If the first registration happened while the rules
             // were still locked, the session stayed open without a profile and every invitation was denied.
-            if (profilePublished == card) return
+            if (profilePublished == card && publishedLicense == licenseToken()) return
             publishProfile(card); return
         }
         if (auth.currentUser != null) auth.signOut()
@@ -112,21 +112,51 @@ class FirebaseShare(private val ctx: Context) {
     }
 
     @Volatile private var profilePublished: AvoUserCard? = null
+    @Volatile private var publishedLicense: String? = null
 
-    /** Publishes (or repairs) my profile in the directory. Idempotent. */
+    /** Active licence of this phone (base64, signed): published so that other users see my roles. Set by the container. */
+    @Volatile var licenseToken: () -> String? = { null }
+    /** Checks a published licence against the app keys and returns its roles (null = not verifiable). Set by the container. */
+    @Volatile var verifyRoles: (code: String, token: String?) -> Set<org.avoperformance.horse.core.license.LicenseRole>? = { _, _ -> null }
+
+    private val _roles = kotlinx.coroutines.flow.MutableStateFlow<Map<String, Set<org.avoperformance.horse.core.license.LicenseRole>>>(emptyMap())
+    /** Verified roles of the AVO users seen in the directory (code → roles), for "Ana · Propietario". */
+    val roles: kotlinx.coroutines.flow.StateFlow<Map<String, Set<org.avoperformance.horse.core.license.LicenseRole>>> = _roles
+    @Volatile private var rolesReadMs = 0L
+
+    /** "Propietario, Veterinario" for [code], or null if unknown / not verifiable. */
+    fun roleLabel(code: String): String? = _roles.value[code]?.takeIf { it.isNotEmpty() }
+        ?.let { org.avoperformance.horse.core.license.LicenseRole.label(it) }
+
+    /** Publishes (or repairs) my profile in the directory, with my licence when I have one. Idempotent. */
     private suspend fun publishProfile(card: AvoUserCard) {
         val uid = auth.currentUser?.uid ?: error("Inicio de sesión fallido")
-        call { r("users/${card.code}").setValue(mapOf("name" to card.name, "uid" to uid)) }
+        val lic = licenseToken()
+        call { r("users/${card.code}").setValue(buildMap { put("name", card.name); put("uid", uid); if (lic != null) put("lic", lic) }) }
         profilePublished = card
+        publishedLicense = lic
+    }
+
+    /** Reloads the verified roles of every AVO user (one small read), at most every [maxAgeMs]. */
+    suspend fun refreshRoles(maxAgeMs: Long = 10 * 60_000L) {
+        if (System.currentTimeMillis() - rolesReadMs < maxAgeMs) return
+        runCatching { directory() }
     }
 
     fun signOut() = runCatching { profilePublished = null; auth.signOut() }
     val signedInCode: String? get() = auth.currentUser?.email?.substringBefore('@')?.uppercase()
 
-    suspend fun directory(): List<Contact> = call { r("users").get() }.children.mapNotNull { s ->
-        val code = s.key ?: return@mapNotNull null
-        Contact(code, s.child("name").getValue(String::class.java) ?: code)
-    }.sortedBy { it.name.lowercase() }
+    suspend fun directory(): List<Contact> {
+        val found = mutableMapOf<String, Set<org.avoperformance.horse.core.license.LicenseRole>>()
+        val list = call { r("users").get() }.children.mapNotNull { s ->
+            val code = s.key ?: return@mapNotNull null
+            verifyRoles(code, s.child("lic").getValue(String::class.java))?.let { found[code] = it }
+            Contact(code, s.child("name").getValue(String::class.java) ?: code)
+        }.sortedBy { it.name.lowercase() }
+        _roles.value = found
+        rolesReadMs = System.currentTimeMillis()
+        return list
+    }
 
     /** Invites [to] to receive my trainings (they must accept it). */
     suspend fun invite(me: Contact, to: String) {

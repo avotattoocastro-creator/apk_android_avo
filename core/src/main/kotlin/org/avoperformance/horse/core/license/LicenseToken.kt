@@ -6,10 +6,14 @@ import java.nio.ByteBuffer
 /**
  * AVO app licence carried by the user's NFC card (NDEF external record `avoperformance.org:lic`).
  *
- * Binary layout v1 (big-endian), 107 bytes with a 7-byte UID:
+ * Binary layout v2 (big-endian), 108 bytes with a 7-byte UID:
  *
- *   "AVOL" | ver=1 | keyId(4) | uidLen(1) | uid(1..10) | userCode(13 ASCII) |
- *   issuedAt(u32 s) | expiresAt(u32 s) | serial(4) | flags(1) | signature(64, ECDSA P-256 r||s)
+ *   "AVOL" | ver=2 | keyId(4) | uidLen(1) | uid(1..10) | userCode(13 ASCII) |
+ *   issuedAt(u32 s) | expiresAt(u32 s) | serial(4) | flags(1) | roles(1) | signature(64, ECDSA P-256 r||s)
+ *
+ * [roles]: bits of [LicenseRole] (jinete, entrenador, desarrollador, propietario, veterinario); they decide
+ * the functions of the app ([LicenseFeatures]). Version 1 (no roles byte, 107 bytes) is still read and means
+ * every role.
  *
  * The signature covers [DOMAIN] + every byte before it, so changing the date, the user or the UID
  * invalidates it. The UID ties the licence to one physical card: copying the record to another
@@ -28,6 +32,8 @@ class LicenseToken(
     val serial: ByteArray,
     val flags: Int,
     val signature: ByteArray,
+    val roles: Int = LicenseRole.ALL_BITS,
+    val version: Int = VERSION,
 ) {
     init {
         require(keyId.size == 4) { "keyId" }
@@ -38,7 +44,12 @@ class LicenseToken(
         require(serial.size == 4) { "serial" }
         require(flags in 0..255) { "flags" }
         require(signature.size == 64) { "firma" }
+        require(version == 1 || version == VERSION) { "versión" }
+        require(roles in 1..LicenseRole.ALL_BITS) { "La licencia debe tener al menos un rol" }
+        require(version == VERSION || roles == LicenseRole.ALL_BITS) { "Una licencia v1 no lleva roles" }
     }
+
+    val roleSet: Set<LicenseRole> get() = LicenseRole.fromBits(roles)
 
     val expiresAtMs: Long get() = expiresAtS * 1000
     /** Licence delivered as a file (email/WhatsApp) instead of written on the card. */
@@ -50,22 +61,23 @@ class LicenseToken(
 
     fun encode(): ByteArray = body() + signature
 
-    private fun body(): ByteArray = ByteBuffer.allocate(HEADER + uid.size + 13 + 4 + 4 + 4 + 1).apply {
-        put(MAGIC); put(VERSION.toByte()); put(keyId); put(uid.size.toByte()); put(uid)
+    private fun body(): ByteArray = ByteBuffer.allocate(HEADER + uid.size + 13 + 4 + 4 + 4 + 1 + if (version >= 2) 1 else 0).apply {
+        put(MAGIC); put(version.toByte()); put(keyId); put(uid.size.toByte()); put(uid)
         put(userCode.toByteArray(Charsets.US_ASCII))
         putInt(issuedAtS.toInt()); putInt(expiresAtS.toInt()); put(serial); put(flags.toByte())
+        if (version >= 2) put(roles.toByte())
     }.array()
 
-    fun withSignature(sig: ByteArray) = LicenseToken(keyId, uid, userCode, issuedAtS, expiresAtS, serial, flags, sig)
+    fun withSignature(sig: ByteArray) = LicenseToken(keyId, uid, userCode, issuedAtS, expiresAtS, serial, flags, sig, roles, version)
 
     override fun equals(other: Any?) = other is LicenseToken && encode().contentEquals(other.encode())
     override fun hashCode() = encode().contentHashCode()
-    override fun toString() = "LicenseToken($userCode, uid=${uid.hex()}, expires=$expiresAtS, key=${keyId.hex()})"
+    override fun toString() = "LicenseToken($userCode, uid=${uid.hex()}, expires=$expiresAtS, roles=$roles, key=${keyId.hex()})"
 
     companion object {
         val DOMAIN = "AVO-LICENSE/1\u0000".toByteArray(Charsets.US_ASCII)
         val MAGIC = byteArrayOf('A'.code.toByte(), 'V'.code.toByte(), 'O'.code.toByte(), 'L'.code.toByte())
-        const val VERSION = 1
+        const val VERSION = 2
         const val FLAG_REMOTE = 0x01
         const val MAX_UID = 10
         const val NDEF_DOMAIN = "avoperformance.org"
@@ -81,24 +93,26 @@ class LicenseToken(
             val magic = ByteArray(4).also(b::get)
             require(magic.contentEquals(MAGIC)) { "No es una licencia AVO" }
             val ver = b.get().toInt() and 0xFF
-            require(ver == VERSION) { "Versión de licencia no compatible ($ver)" }
+            require(ver == 1 || ver == VERSION) { "Versión de licencia no compatible ($ver)" }
             val keyId = ByteArray(4).also(b::get)
             val uidLen = b.get().toInt() and 0xFF
             require(uidLen in 1..MAX_UID) { "UID de tarjeta no válido" }
-            require(bytes.size == HEADER + uidLen + 13 + 13 + 64) { "Longitud de licencia incorrecta" }
+            require(bytes.size == HEADER + uidLen + 13 + 13 + (if (ver >= 2) 1 else 0) + 64) { "Longitud de licencia incorrecta" }
             val uid = ByteArray(uidLen).also(b::get)
             val code = String(ByteArray(13).also(b::get), Charsets.US_ASCII)
             val issued = b.int.toLong() and U32_MAX
             val expires = b.int.toLong() and U32_MAX
             val serial = ByteArray(4).also(b::get)
             val flags = b.get().toInt() and 0xFF
+            val roles = if (ver >= 2) b.get().toInt() and 0xFF else LicenseRole.ALL_BITS
             val sig = ByteArray(64).also(b::get)
-            return LicenseToken(keyId, uid, code, issued, expires, serial, flags, sig)
+            return LicenseToken(keyId, uid, code, issued, expires, serial, flags, sig, roles, ver)
         }
 
         /** Unsigned token, ready to be signed by [LicenseCrypto.sign]. */
-        fun unsigned(keyId: ByteArray, uid: ByteArray, userCode: String, issuedAtS: Long, expiresAtS: Long, serial: ByteArray, flags: Int = 0) =
-            LicenseToken(keyId, uid, userCode, issuedAtS, expiresAtS, serial, flags, ByteArray(64))
+        fun unsigned(keyId: ByteArray, uid: ByteArray, userCode: String, issuedAtS: Long, expiresAtS: Long, serial: ByteArray,
+                     flags: Int = 0, roles: Int = LicenseRole.ALL_BITS) =
+            LicenseToken(keyId, uid, userCode, issuedAtS, expiresAtS, serial, flags, ByteArray(64), roles, VERSION)
     }
 }
 

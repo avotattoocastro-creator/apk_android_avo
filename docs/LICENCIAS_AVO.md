@@ -1,7 +1,7 @@
 # Licencias de AVO Performance Horse (tarjeta NFC y archivo)
 
-App Android **2.4-license-dev1** · AVO Tarjetas **1.1-license-dev1** · rama `feature/avo-license-nfc` · 27/10/2026.
-Estado: implementado, núcleo probado en JVM (25 pruebas), **NO VERIFICADO** en teléfono ni con tarjetas reales.
+App Android **2.5-roles-dev1** · AVO Tarjetas **1.2-roles-dev1** · rama `feature/avo-license-nfc` · 27/10/2026.
+Estado: implementado, núcleo probado en JVM (28 pruebas), **NO VERIFICADO** en teléfono ni con tarjetas reales.
 
 ## Qué hace
 
@@ -13,6 +13,33 @@ Estado: implementado, núcleo probado en JVM (25 pruebas), **NO VERIFICADO** en 
   - **Bloqueado:** conexión con el chaleco (y con ella espalda y cincha), grabación, descargas BLE/Wi-Fi, NTRIP, mareas y meteorología, compartir por Firebase, Ajustes y tarjetas de caballo y jinete. El servicio en segundo plano se detiene.
   - En Inicio aparece el aviso «SISTEMA SIN LICENCIA ACTIVA» con el botón «Reactivar licencia».
 - Aviso en Inicio **7 días antes** de caducar. Los datos no se borran nunca.
+
+## Roles de la licencia (2.5)
+
+Al grabar o enviar una licencia se marcan uno o varios roles. Van **dentro de la licencia firmada**: no se pueden añadir sin la clave de AVO Tarjetas. La app activa la **suma** de las funciones de los roles marcados. La tabla está en un solo sitio, `core/.../license/LicenseRoles.kt` (`LicenseFeatures.BY_ROLE`), y para cambiarla basta con editar esa tabla.
+
+| Rol | Chaleco y grabación | Elegir jinete | Mareas | Enviar y recibir | Ajustes | Diagnósticos |
+|---|---|---|---|---|---|---|
+| Jinete | ✓ | — (él es el jinete) | ✓ | ✓ | ✓ | — |
+| Entrenador | ✓ | ✓ | ✓ | ✓ | ✓ | — |
+| Desarrollador | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Propietario | — | — | ✓ | ✓ | ✓ | — |
+| Veterinario | — | — | — | ✓ | ✓ | — |
+
+Con cualquier licencia activa se pueden ver siempre los entrenamientos, el análisis, las comparativas y la cuadra. Las tarjetas antiguas (licencia v1, sin roles) valen como todos los roles.
+
+**Jinete:**
+- La app crea al titular como jinete, con el código de su tarjeta.
+- Lo selecciona y lo escribe en la configuración del chaleco al conectar, nunca durante una grabación.
+- Así todos los entrenamientos grabados con esa app llevan ese jinete, y los que se descarguen sin jinete se le asignan.
+- Si la tarjeta solo tiene Jinete (o Jinete con Propietario o Veterinario), el jinete queda **fijo**: no se puede cambiar en Entrenar y se ignoran las etiquetas NFC de otros jinetes.
+- Con Jinete + Entrenador (o Desarrollador), el titular es el jinete por defecto, pero se puede elegir otro.
+
+**Envío entre apps:**
+- Cada usuario publica en su perfil de Firebase su licencia firmada (campo `lic`).
+- La app que recibe comprueba la firma con sus claves y muestra «Nombre · Propietario, Veterinario» en invitaciones, destinatarios, buscador, enviados y recibidos.
+- Una licencia caducada o no verificable no muestra roles.
+- **Hay que publicar a mano las reglas nuevas de `firebase/database.rules.json` en la consola de Firebase.** Sin ellas, el perfil con `lic` se rechaza y el envío falla con «Permiso denegado».
 
 ## Seguridad
 
@@ -56,8 +83,9 @@ Estado: implementado, núcleo probado en JVM (25 pruebas), **NO VERIFICADO** en 
 ## Formato
 
 - **Registro NDEF:** tipo externo `avoperformance.org:lic`, entre el registro URI de identidad y el AAR.
-  - Ocupa 107 B con un UID de 7 B.
-  - Disposición: `AVOL` · ver · keyId(4) · uidLen · UID · código de usuario(13) · emitida(u32 s) · caduca(u32 s, exclusiva) · serie(4) · flags · firma r‖s(64).
+  - Ocupa 108 B con un UID de 7 B (v2).
+  - Disposición: `AVOL` · ver=2 · keyId(4) · uidLen · UID · código de usuario(13) · emitida(u32 s) · caduca(u32 s, exclusiva) · serie(4) · flags · roles · firma r‖s(64).
+  - Roles en bits: jinete 0x01, entrenador 0x02, desarrollador 0x04, propietario 0x08, veterinario 0x10. La v1 (107 B, sin roles) se sigue leyendo.
   - Firma sobre `"AVO-LICENSE/1\0"` + cuerpo. `flags` bit 0 = licencia por archivo.
 - **Archivo `.avolic`:**
   - Formato: `AVO-LICENSE-FILE-1` · código de usuario · base64(iv ‖ AES-256-GCM(token)).

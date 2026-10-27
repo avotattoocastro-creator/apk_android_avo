@@ -19,15 +19,15 @@ class LicenseTest {
     private val pair: KeyPair = LicenseCrypto.generateKeyPair(rnd)
     private val trusted = listOf(pair.public)
 
-    private fun issue(lastDay: LocalDate = LocalDate.of(2026, 12, 31), p: KeyPair = pair, u: ByteArray = uid) =
-        LicenseIssuer.issue(p, u, code, now, lastDay, madrid, rnd)
+    private fun issue(lastDay: LocalDate = LocalDate.of(2026, 12, 31), p: KeyPair = pair, u: ByteArray = uid, roles: Set<LicenseRole> = setOf(LicenseRole.JINETE)) =
+        LicenseIssuer.issue(p, u, code, now, lastDay, madrid, roles, rnd)
 
     private fun clockAt(ms: Long) = LicenseClock.read(ms, 1_000, 7, null, null)
 
     @Test fun tokenRoundTripAndSize() {
         val t = issue()
         val bytes = t.encode()
-        assertEquals(107, bytes.size)
+        assertEquals(108, bytes.size)
         assertEquals(t, LicenseToken.decode(bytes))
         assertTrue(LicenseCrypto.verify(LicenseToken.decode(bytes), pair.public))
     }
@@ -181,7 +181,7 @@ class LicenseTest {
         assertTrue(text.startsWith(LicenseKeyBackup.HEADER))
         val back = LicenseKeyBackup.import(text, pwd)
         assertArrayEquals(pair.public.encoded, back.public.encoded)
-        val t = LicenseIssuer.issue(back, uid, code, now, LocalDate.of(2027, 1, 31), madrid, rnd)
+        val t = LicenseIssuer.issue(back, uid, code, now, LocalDate.of(2027, 1, 31), madrid, setOf(LicenseRole.JINETE), rnd)
         assertTrue(LicenseCrypto.verify(t, pair.public))
     }
 
@@ -202,7 +202,7 @@ class LicenseTest {
     private val card = AvoUserCard(code, "Ana", "0123456789abcdef0123456789abcdef")
 
     private fun remote(lastDay: LocalDate = LocalDate.of(2027, 3, 31)) =
-        LicenseIssuer.issue(pair, byteArrayOf(0), code, now, lastDay, madrid, rnd, remote = true)
+        LicenseIssuer.issue(pair, byteArrayOf(0), code, now, lastDay, madrid, setOf(LicenseRole.PROPIETARIO), rnd, remote = true)
 
     @Test fun fileRoundTripActivatesTheRightUser() {
         val text = LicenseFile.encode(remote(), card, rnd)
@@ -241,9 +241,47 @@ class LicenseTest {
         val stored = (LicensePolicy.activate(t.encode(), uid, code, "Ana", trusted, null, clockAt(now)) as ActivationResult.Activated).stored
         val later = clockAt(t.expiresAtMs + 86_400_000)
         assertTrue(LicensePolicy.status(stored, trusted, later.effectiveMs) is LicenseStatus.Expired)
-        val renewed = LicenseIssuer.issue(pair, byteArrayOf(0), code, t.expiresAtMs, LocalDate.of(2027, 6, 30), madrid, rnd, remote = true)
+        val renewed = LicenseIssuer.issue(pair, byteArrayOf(0), code, t.expiresAtMs, LocalDate.of(2027, 6, 30), madrid, setOf(LicenseRole.JINETE), rnd, remote = true)
         val r = LicensePolicy.activateFromFile(LicenseFile.decode(LicenseFile.encode(renewed, card, rnd), card), code, "Ana", trusted, stored, later)
         val s2 = (r as ActivationResult.Activated).stored
         assertTrue(LicensePolicy.status(s2, trusted, later.effectiveMs) is LicenseStatus.Active)
+    }
+
+    // ---- roles
+
+    @Test fun rolesTravelSignedAndDecideFeatures() {
+        val t = issue(roles = setOf(LicenseRole.PROPIETARIO, LicenseRole.VETERINARIO))
+        val back = LicenseToken.decode(t.encode())
+        assertEquals(setOf(LicenseRole.PROPIETARIO, LicenseRole.VETERINARIO), back.roleSet)
+        assertTrue(LicenseCrypto.verify(back, pair.public))
+        val f = LicenseFeatures.of(back.roleSet)
+        assertFalse(LicenseFeature.GRABAR in f)
+        assertTrue(LicenseFeature.MAREAS in f && LicenseFeature.COMPARTIR in f)
+        // adding Jinete by editing the roles byte breaks the signature
+        val bytes = t.encode(); val rolesIndex = bytes.size - 65
+        bytes[rolesIndex] = (bytes[rolesIndex].toInt() or LicenseRole.JINETE.bit).toByte()
+        assertFalse(LicensePolicy.verifySignature(LicenseToken.decode(bytes), trusted))
+    }
+
+    @Test fun riderRules() {
+        assertTrue(LicenseFeatures.fixedRider(setOf(LicenseRole.JINETE)))
+        assertTrue(LicenseFeatures.fixedRider(setOf(LicenseRole.JINETE, LicenseRole.PROPIETARIO)))
+        assertFalse(LicenseFeatures.fixedRider(setOf(LicenseRole.JINETE, LicenseRole.ENTRENADOR)))
+        assertTrue(LicenseFeatures.defaultRider(setOf(LicenseRole.JINETE, LicenseRole.ENTRENADOR)))
+        assertFalse(LicenseFeatures.defaultRider(setOf(LicenseRole.ENTRENADOR)))
+        assertEquals(LicenseFeature.entries.toSet(), LicenseFeatures.of(setOf(LicenseRole.DESARROLLADOR)))
+        assertEquals("Jinete, Veterinario", LicenseRole.label(setOf(LicenseRole.VETERINARIO, LicenseRole.JINETE)))
+    }
+
+    @Test fun noRolesIsRejectedAndVersion1MeansAllRoles() {
+        assertThrows(IllegalArgumentException::class.java) { issue(roles = emptySet()) }
+        val v1 = LicenseToken(LicenseCrypto.keyId(pair.public), uid, code, now / 1000, now / 1000 + 86400, byteArrayOf(1, 2, 3, 4), 0,
+            ByteArray(64), LicenseRole.ALL_BITS, 1)
+        val signed = LicenseCrypto.sign(v1, pair.private, pair.public)
+        assertEquals(107, signed.encode().size)
+        val back = LicenseToken.decode(signed.encode())
+        assertEquals(1, back.version)
+        assertEquals(LicenseRole.entries.toSet(), back.roleSet)
+        assertTrue(LicensePolicy.verifySignature(back, trusted))
     }
 }

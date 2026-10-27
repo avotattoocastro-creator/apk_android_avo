@@ -17,14 +17,16 @@ object LicenseIssuer {
     /**
      * [tagUid]: UID of the card. For a licence sent as a file ([remote]) it is the card's UID when known
      * (informative); the file is bound to the user by the card secret instead (see [LicenseFile]).
+     * [roles]: at least one; they decide the functions of the app ([LicenseFeatures]).
      */
     fun issue(pair: KeyPair, tagUid: ByteArray, userCode: String, nowMs: Long, lastDay: LocalDate, zone: ZoneId,
-              random: SecureRandom = SecureRandom(), remote: Boolean = false): LicenseToken {
+              roles: Set<LicenseRole>, random: SecureRandom = SecureRandom(), remote: Boolean = false): LicenseToken {
+        require(roles.isNotEmpty()) { "Marca al menos un rol" }
         val expires = expiryForLastDay(lastDay, zone)
         val issued = nowMs / 1000
         require(expires > issued) { "La fecha de activación ya ha pasado" }
         val unsigned = LicenseToken.unsigned(LicenseCrypto.keyId(pair.public), tagUid, userCode, issued, expires,
-            ByteArray(4).also(random::nextBytes), if (remote) LicenseToken.FLAG_REMOTE else 0)
+            ByteArray(4).also(random::nextBytes), if (remote) LicenseToken.FLAG_REMOTE else 0, LicenseRole.toBits(roles))
         return LicenseCrypto.sign(unsigned, pair.private, pair.public)
     }
 }

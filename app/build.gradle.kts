@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 35
-        versionName = "2.4-license-dev1"
+        versionCode = 36
+        versionName = "2.5-roles-dev1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // Public keys that sign the app licences (AVO Tarjetas). Base64 SPKI, separated by commas. From the CI
         // variable AVO_LICENSE_PUBLIC_KEYS (public data, not a secret). Empty = licences not enforced (development).

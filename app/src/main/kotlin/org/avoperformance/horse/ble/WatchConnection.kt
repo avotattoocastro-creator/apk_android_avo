@@ -120,7 +120,7 @@ class WatchConnection(
 
     /** Keeps the link up (auto-reconnect with backoff) until [stop]. */
     fun start() {
-        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) { log.w("BLE", "sin licencia activa: no se conecta con el chaleco"); return }
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) { log.w("BLE", "sin licencia activa: no se conecta con el chaleco"); return }
         if (settings.authorizedWatch == null) { _state.value = LinkState.SIN_RELOJ; return }
         wanted = true
         if (loop?.isActive == true) return

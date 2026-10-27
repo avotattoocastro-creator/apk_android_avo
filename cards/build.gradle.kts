@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.cards"
         minSdk = 29
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.1-license-dev1"
+        versionCode = 3
+        versionName = "1.2-roles-dev1"
     }
 
     signingConfigs {

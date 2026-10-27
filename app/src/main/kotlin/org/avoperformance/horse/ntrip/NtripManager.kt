@@ -67,7 +67,7 @@ class NtripManager(
     private fun mounts(): List<String> = listOf(settings.ntrip.value.mountpoint.trim()) + settings.ntrip.value.backups()
 
     fun start() {
-        if (!org.avoperformance.horse.license.LicenseGate.fullAccess) return
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return
         if (client != null) return
         mountIndex = 0
         startOn(0)

@@ -5,7 +5,7 @@ name: Firebase rules (emulator)
 on:
   workflow_dispatch:
   push:
-    branches: [feature/avo-firebase-sync, develop/avo-performance-horse]
+    branches: [feature/avo-firebase-sync, develop/avo-performance-horse, feature/avo-license-nfc]
     paths:
       - 'firebase/**'
       - '.github/workflows/firebase-rules.yml'

@@ -84,7 +84,11 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
                 Picker("Caballo", horses.firstOrNull { it.id == selHorse }?.let { "${it.code} · ${it.name}" }, horses.map { it.id to "${it.code} · ${it.name}" }) {
                     selHorse = it; c.settings.selectedHorseId = it
                 }
-                Picker("Jinete", riders.firstOrNull { it.id == selRider }?.let { "${it.code} · ${it.name}" }, riders.map { it.id to "${it.code} · ${it.name}" }) {
+                // Jinete licence: the holder is the fixed rider of every training recorded with this app
+                if (c.license.riderLocked) {
+                    LaunchedEffect(Unit) { c.applyLicenseRider(); selRider = c.settings.selectedRiderId }
+                    KV("Jinete", (riders.firstOrNull { it.id == selRider }?.name ?: c.license.licenseRider?.second ?: "—") + " · fijado por la licencia")
+                } else Picker("Jinete", riders.firstOrNull { it.id == selRider }?.let { "${it.code} · ${it.name}" }, riders.map { it.id to "${it.code} · ${it.name}" }) {
                     selRider = it; c.settings.selectedRiderId = it
                 }
                 KV("En el reloj", cfg?.let { "${it.horseName.ifBlank { "—" }} / ${it.riderName.ifBlank { "—" }}" })

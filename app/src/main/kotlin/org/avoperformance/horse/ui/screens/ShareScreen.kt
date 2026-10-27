@@ -59,6 +59,9 @@ fun ShareScreen(c: AppContainer) {
     val status by sm.status.collectAsStateWithLifecycle()
     val recipients by sm.recipients().collectAsStateWithLifecycle(emptyList())
     val outs by c.db.share().outFlow().collectAsStateWithLifecycle(emptyList())
+    // verified roles of the other AVO users (licence published in their profile)
+    val roles by c.share.firebase.roles.collectAsStateWithLifecycle()
+    LaunchedEffect(me) { me?.let { mine -> runCatching { c.share.firebase.signIn(mine); c.share.firebase.refreshRoles(0) } } }
     val ins by c.db.share().inFlow().collectAsStateWithLifecycle(emptyList())
     val horses by c.db.horses().all().collectAsStateWithLifecycle(emptyList())
     val trainings by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
@@ -107,6 +110,7 @@ fun ShareScreen(c: AppContainer) {
                 if (card == null) Note("Acerca tu tarjeta AVO en Ajustes → Tarjetas NFC")
                 else {
                     KV("Usuario", card.name); KV("Identificador", card.code)
+                    KV("Roles", c.license.roles.takeIf { it.isNotEmpty() }?.let { org.avoperformance.horse.core.license.LicenseRole.label(it) } ?: "—")
                     KV("Cuenta", "Tarjeta NFC (sin correo)")
                 }
             }
@@ -118,7 +122,7 @@ fun ShareScreen(c: AppContainer) {
                     invitations.forEach { inv ->
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Column(Modifier.weight(1f)) {
-                                Text(inv.senderName.ifBlank { inv.sender }, color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
+                                Text(withRoles(inv.senderName.ifBlank { inv.sender }, inv.sender, roles), color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
                                 Text(inv.sender, color = AvoColors.TextDim, fontSize = 12.sp)
                             }
                             StatusPill(when (inv.state) { GrantState.ACCEPTED -> "ACEPTADO"; GrantState.PENDING -> "PENDIENTE"; GrantState.REJECTED -> "RECHAZADO"; GrantState.BLOCKED -> "BLOQUEADO" },
@@ -139,7 +143,7 @@ fun ShareScreen(c: AppContainer) {
                 AvoCard("Sincronización global", trailing = {
                     Switch(globalOn, { globalOn = it; c.settings.shareGlobalEnabled = it })
                 }) {
-                    RecipientList(recipients.filter { it.scope == ShareManager.GLOBAL }.map { Contact(it.code, it.name) }, grants,
+                    RecipientList(recipients.filter { it.scope == ShareManager.GLOBAL }.map { Contact(it.code, it.name) }, grants, roles,
                         onRemove = { sm.removeRecipient(ShareManager.GLOBAL, it.code) })
                     OutlinedButton(onClick = { picking = ShareManager.GLOBAL }) { Text("Añadir usuario") }
                 }
@@ -153,7 +157,7 @@ fun ShareScreen(c: AppContainer) {
                             Text(h.name, color = AvoColors.Text, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
                             Switch(on, { v -> disabledHorses = if (v) disabledHorses - h.code else disabledHorses + h.code; c.settings.shareHorsesDisabled = disabledHorses })
                         }
-                        RecipientList(recipients.filter { it.scope == h.code }.map { Contact(it.code, it.name) }, grants,
+                        RecipientList(recipients.filter { it.scope == h.code }.map { Contact(it.code, it.name) }, grants, roles,
                             onRemove = { sm.removeRecipient(h.code, it.code) })
                         TextButton(onClick = { picking = h.code }) { Text("Añadir destinatario a ${h.name}") }
                         HorizontalDivider(color = AvoColors.Line)
@@ -181,7 +185,7 @@ fun ShareScreen(c: AppContainer) {
         if (confirm.isNotEmpty()) item {
             AvoCard("Requieren tu decisión") {
                 confirm.forEach { r ->
-                    Text("${r.sessionId} · de ${r.fromName}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
+                    Text("${r.sessionId} · de ${withRoles(r.fromName, r.fromCode, roles)}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
                     Note(r.message ?: "Ya tienes una versión distinta")
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         OutlinedButton(onClick = { scope.launch { try { sm.resolveConfirmation(r.transferId, true); msg = "Sustituido" } catch (e: Exception) { msg = e.message } } }) { Text("Sustituir la mía") }
@@ -199,7 +203,7 @@ fun ShareScreen(c: AppContainer) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
                             Text(if (horse == "—") o.sessionId else "$horse · ${t?.let { Fmt.date(it.startRtcMs) } ?: o.sessionId}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold, maxLines = 1)
-                            Text("→ ${o.recipientName} · ${when (o.origin) { "GLOBAL" -> "global"; "HORSE" -> "por caballo"; else -> "manual" }}", color = AvoColors.TextDim, fontSize = 12.sp)
+                            Text("→ ${withRoles(o.recipientName, o.recipient, roles)} · ${when (o.origin) { "GLOBAL" -> "global"; "HORSE" -> "por caballo"; else -> "manual" }}", color = AvoColors.TextDim, fontSize = 12.sp)
                             o.receivedMs?.let { Text("Recibido ${(Fmt.date(it) ?: "—")}", color = AvoColors.Ok, fontSize = 12.sp) }
                             o.lastError?.let { Text(it, color = AvoColors.Bad, fontSize = 12.sp) }
                         }
@@ -216,7 +220,7 @@ fun ShareScreen(c: AppContainer) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
                             Text("${r.horseName} · ${r.sessionId}", color = AvoColors.Text, fontWeight = FontWeight.SemiBold, maxLines = 1)
-                            Text("de ${r.fromName} · ${(Fmt.date(r.receivedMs) ?: "—")} · ${mb(r.size)}", color = AvoColors.TextDim, fontSize = 12.sp)
+                            Text("de ${withRoles(r.fromName, r.fromCode, roles)} · ${(Fmt.date(r.receivedMs) ?: "—")} · ${mb(r.size)}", color = AvoColors.TextDim, fontSize = 12.sp)
                             r.message?.let { Text(it, color = AvoColors.TextDim, fontSize = 12.sp) }
                         }
                         val (txt, col) = when (r.state) {
@@ -251,12 +255,12 @@ fun ShareScreen(c: AppContainer) {
 }
 
 @Composable
-private fun RecipientList(list: List<Contact>, grants: Map<String, GrantState?>, onRemove: (Contact) -> Unit) {
+private fun RecipientList(list: List<Contact>, grants: Map<String, GrantState?>, roles: Map<String, Set<org.avoperformance.horse.core.license.LicenseRole>> = emptyMap(), onRemove: (Contact) -> Unit) {
     if (list.isEmpty()) Note("Sin destinatarios.")
     list.forEach { u ->
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text(u.name, color = AvoColors.Text)
+                Text(withRoles(u.name, u.code, roles), color = AvoColors.Text)
                 Text("${u.code} · ${grantLabel(grants[u.code])}", color = grantColor(grants[u.code]), fontSize = 12.sp)
             }
             TextButton(onClick = { onRemove(u) }) { Text("Quitar", color = AvoColors.Bad) }
@@ -299,6 +303,7 @@ fun UserPicker(c: AppContainer, title: String, multi: Boolean, onDismiss: () -> 
     var error by remember { mutableStateOf<String?>(null) }
     var q by remember { mutableStateOf("") }
     var chosen by remember { mutableStateOf<Set<String>>(emptySet()) }
+    val roles by c.share.firebase.roles.collectAsStateWithLifecycle()
     LaunchedEffect(me) {
         val card = me ?: run { error = "Primero acerca tu tarjeta AVO personal (NFC)"; return@LaunchedEffect }
         try { c.share.firebase.signIn(card); all = c.share.firebase.directory().filter { it.code != card.code } }
@@ -319,7 +324,7 @@ fun UserPicker(c: AppContainer, title: String, multi: Boolean, onDismiss: () -> 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(u.code in chosen, { on -> chosen = if (on) (if (multi) chosen + u.code else setOf(u.code)) else chosen - u.code })
                         Column(Modifier.weight(1f)) {
-                            Text((if (u.code in favCodes) "★ " else "") + u.name, color = AvoColors.Text)
+                            Text((if (u.code in favCodes) "★ " else "") + withRoles(u.name, u.code, roles), color = AvoColors.Text)
                             Text(u.code, color = AvoColors.TextDim, fontSize = 12.sp)
                         }
                     }
@@ -370,7 +375,7 @@ fun ShareDialog(c: AppContainer, sessionId: String, onDismiss: () -> Unit) {
                 if (status.running) LinearProgressIndicator(Modifier.fillMaxWidth())
                 jobs.filter { it.recipient in sentTo.orEmpty() }.forEach { j: ShareOutEntity ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(j.recipientName, color = AvoColors.Text, modifier = Modifier.weight(1f))
+                        Text(withRoles(j.recipientName, j.recipient, c.share.firebase.roles.value), color = AvoColors.Text, modifier = Modifier.weight(1f))
                         StatusPill(outLabel(j.state).substringBefore(" ·"), outColor(j.state))
                     }
                     j.lastError?.let { Note(it, AvoColors.Bad) }
@@ -394,3 +399,7 @@ fun ShareStatusLine(c: AppContainer, sessionId: String) {
         if (failed > 0) StatusPill("Sin entregar $failed", AvoColors.Bad)
     }
 }
+
+/** "Ana · Propietario, Veterinario" when the licence published by [code] has been verified with the app keys. */
+private fun withRoles(name: String, code: String, roles: Map<String, Set<org.avoperformance.horse.core.license.LicenseRole>>): String =
+    roles[code]?.takeIf { it.isNotEmpty() }?.let { "$name · ${org.avoperformance.horse.core.license.LicenseRole.label(it)}" } ?: name

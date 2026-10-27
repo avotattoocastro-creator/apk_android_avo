@@ -34,6 +34,13 @@ class WatchConfigOps(private val watch: WatchConnection) {
         return if (fixed in 1..0xFE) "Guardado; el reloj ajustó $fixed valor(es) a su rango válido" else null
     }
 
+    /** Changes only the rider of the watch configuration (keeps the horse). No write if it is already set. */
+    suspend fun setRider(riderId: Long, riderCode: String): String? {
+        val cur = read().getOrElse { return it.message }
+        if (cur.riderName == riderCode && cur.riderId == riderId) return null
+        return write(cur.copy(riderId = riderId, riderName = riderCode))
+    }
+
     suspend fun setIdentity(horseId: Long, horseCode: String, riderId: Long, riderCode: String): String? {
         val cur = read().getOrElse { return it.message }
         return write(cur.copy(horseId = horseId, horseName = horseCode, riderId = riderId, riderName = riderCode))

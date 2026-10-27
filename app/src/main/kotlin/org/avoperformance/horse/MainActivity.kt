@@ -84,6 +84,7 @@ import org.avoperformance.horse.ui.screens.LicenseNotice
 import org.avoperformance.horse.ui.screens.LicenseScreen
 import org.avoperformance.horse.ui.screens.LockedFeature
 import org.avoperformance.horse.ui.screens.RestrictedHome
+import org.avoperformance.horse.core.license.LicenseFeature
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -128,8 +129,12 @@ class MainActivity : ComponentActivity() {
                     val code = uri.pathSegments.getOrNull(1) ?: return@launch
                     if (type != "horse" && type != "rider") return@launch
                     val c = (application as AvoApp).container
-                    if (!c.license.fullAccess) {
+                    if (!org.avoperformance.horse.license.LicenseGate.canRecord) {
                         android.widget.Toast.makeText(this@MainActivity, "NFC: ${org.avoperformance.horse.license.LicenseGate.BLOCKED}", android.widget.Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                    if (type == "rider" && c.license.riderLocked) {
+                        android.widget.Toast.makeText(this@MainActivity, "NFC: el jinete lo fija tu licencia (${c.license.licenseRider?.second})", android.widget.Toast.LENGTH_LONG).show()
                         return@launch
                     }
                     val status = c.watch.status.value
@@ -244,8 +249,12 @@ class MainActivity : ComponentActivity() {
             onUserCard(uri.toString(), licenseOf(msgs?.firstOrNull() as? android.nfc.NdefMessage), tag?.id)
             return
         }
-        if (!(application as AvoApp).container.license.fullAccess) {
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) {
             android.widget.Toast.makeText(this, "NFC: ${org.avoperformance.horse.license.LicenseGate.BLOCKED}", android.widget.Toast.LENGTH_LONG).show()
+            return
+        }
+        if (uri.pathSegments.getOrNull(0) == "rider" && (application as AvoApp).container.license.riderLocked) {
+            android.widget.Toast.makeText(this, "NFC: el jinete lo fija tu licencia", android.widget.Toast.LENGTH_LONG).show()
             return
         }
         val type = uri.pathSegments.getOrNull(0)
@@ -335,6 +344,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
     val nav = rememberNavController()
     val licenseStatus by c.license.status.collectAsStateWithLifecycle()
     val full = licenseStatus.fullAccess
+    val features by c.license.features.collectAsStateWithLifecycle()
     LaunchedEffect(openLicense) { if (openLicense) { nav.navigate("licencia") { launchSingleTop = true }; onLicenseOpened() } }
     LaunchedEffect(incomingAvo) { if (incomingAvo != null) nav.navigate("historial") { launchSingleTop = true } }
     LaunchedEffect(openShare) { if (openShare) { nav.navigate("compartir") { launchSingleTop = true }; onShareOpened() } }
@@ -378,29 +388,29 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
     ) { pad ->
         NavHost(nav, startDestination = "inicio", modifier = Modifier.padding(pad)) {
             composable("inicio") {
-                if (!full) RestrictedHome(c, go(nav))
+                if (!full || LicenseFeature.GRABAR !in features) RestrictedHome(c, go(nav))
                 else Column(Modifier.fillMaxSize()) { LicenseNotice(c, go(nav)); Box(Modifier.weight(1f)) { HomeScreen(c, go(nav)) } }
             }
             composable("licencia") { LicenseScreen(c) }
-            composable("entrenamiento") { if (full) { TrainingScreen(c, go(nav)) } else LockedFeature(go(nav)) }
+            composable("entrenamiento") { if (LicenseFeature.GRABAR in features) { TrainingScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
             composable("historial") { HistoryScreen(c, go(nav), incomingAvo, onImportHandled) }
             composable("caballos") { HorsesScreen(c, go(nav)) }
-            composable("configuracion") { if (full) { SettingsScreen(c, go(nav)) } else LockedFeature(go(nav)) }
-            composable("bluetooth") { if (full) { BluetoothScreen(c, requestPerms) } else LockedFeature(go(nav)) }
-            composable("ntrip") { if (full) { NtripScreen(c) } else LockedFeature(go(nav)) }
-            composable("nfc") { if (full) { NfcScreen(c) } else LockedFeature(go(nav)) }
-            composable("mareas") { if (full) { TidesScreen(c) } else LockedFeature(go(nav)) }
-            composable("geocercas") { if (full) { GeofencesScreen(c) } else LockedFeature(go(nav)) }
-            composable("sincronizacion") { if (full) { SyncScreen(c) } else LockedFeature(go(nav)) }
-            composable("diagnosticos") { if (full) { DiagnosticsScreen(c) } else LockedFeature(go(nav)) }
-            composable("dispositivos") { if (full) { DeviceManagerScreen(c) } else LockedFeature(go(nav)) }
-            composable("almacenamiento") { if (full) { StorageScreen(c) } else LockedFeature(go(nav)) }
-            composable("jinetes") { if (full) { RidersScreen(c, go(nav)) } else LockedFeature(go(nav)) }
-            composable("compartir") { if (full) { org.avoperformance.horse.ui.screens.ShareScreen(c) } else LockedFeature(go(nav)) }
-            composable("lugar") { if (full) { org.avoperformance.horse.ui.screens.SpotScreen(c) } else LockedFeature(go(nav)) }
-            composable("nomolestar") { if (full) { org.avoperformance.horse.ui.screens.DndScreen(c) } else LockedFeature(go(nav)) }
-            composable("favoritos") { if (full) { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) } else LockedFeature(go(nav)) }
-            composable("copias") { if (full) { org.avoperformance.horse.ui.screens.BackupScreen(c) } else LockedFeature(go(nav)) }
+            composable("configuracion") { if (LicenseFeature.AJUSTES in features) { SettingsScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
+            composable("bluetooth") { if (LicenseFeature.GRABAR in features) { BluetoothScreen(c, requestPerms) } else LockedFeature(c, go(nav)) }
+            composable("ntrip") { if (LicenseFeature.GRABAR in features) { NtripScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("nfc") { if (LicenseFeature.AJUSTES in features) { NfcScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("mareas") { if (LicenseFeature.MAREAS in features) { TidesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("geocercas") { if (LicenseFeature.GRABAR in features) { GeofencesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("sincronizacion") { if (LicenseFeature.GRABAR in features) { SyncScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("diagnosticos") { if (LicenseFeature.DIAGNOSTICO in features) { DiagnosticsScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("dispositivos") { if (LicenseFeature.GRABAR in features) { DeviceManagerScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("almacenamiento") { if (LicenseFeature.AJUSTES in features) { StorageScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("jinetes") { if (LicenseFeature.AJUSTES in features) { RidersScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
+            composable("compartir") { if (LicenseFeature.COMPARTIR in features) { org.avoperformance.horse.ui.screens.ShareScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("lugar") { if (LicenseFeature.GRABAR in features) { org.avoperformance.horse.ui.screens.SpotScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("nomolestar") { if (LicenseFeature.GRABAR in features) { org.avoperformance.horse.ui.screens.DndScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("favoritos") { if (LicenseFeature.COMPARTIR in features) { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("copias") { if (LicenseFeature.AJUSTES in features) { org.avoperformance.horse.ui.screens.BackupScreen(c) } else LockedFeature(c, go(nav)) }
             composable("acerca") { org.avoperformance.horse.ui.screens.AboutScreen() }
             composable("caballo/{code}") { org.avoperformance.horse.ui.screens.HorseProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
             composable("jinete/{code}") { org.avoperformance.horse.ui.screens.RiderProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,6 +30,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.avoperformance.horse.AppContainer
+import org.avoperformance.horse.core.license.LicenseFeature
+import org.avoperformance.horse.core.license.LicenseFeatures
+import org.avoperformance.horse.core.license.LicenseRole
 import org.avoperformance.horse.core.license.LicenseStatus
 import org.avoperformance.horse.license.LicenseManager
 import org.avoperformance.horse.ui.components.AvoCard
@@ -90,38 +94,54 @@ fun LicenseNotice(c: AppContainer, go: (String) -> Unit) {
         AvoColors.Warn, null) {}
 }
 
-/** Inicio without an active licence: only the notice and the way to the saved data. */
+/** Inicio without an active licence, or with roles that do not record (owner, vet): notice + saved data. */
 @Composable
 fun RestrictedHome(c: AppContainer, go: (String) -> Unit) {
+    val st by c.license.status.collectAsStateWithLifecycle()
+    val features by c.license.features.collectAsStateWithLifecycle()
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 6.dp)) {
         item { LicenseNotice(c, go) }
         item {
-            AvoCard("Modo consulta") {
-                Note("Disponible: entrenamientos guardados, análisis, comparativas y la cuadra. " +
-                    "Bloqueado hasta reactivar: conexión con el chaleco, espalda y cincha, grabación, descargas, NTRIP, mareas, " +
-                    "compartir y ajustes.")
+            val active = st as? LicenseStatus.Active
+            AvoCard(if (active != null) "Tu licencia · ${LicenseRole.label(active.token.roleSet)}" else "Modo consulta") {
+                if (active != null) {
+                    Note("Incluye: entrenamientos guardados, análisis, comparativas y cuadra" +
+                        LicenseFeature.entries.filter { it in features }.joinToString("") { ", " + it.label.lowercase() } + ".")
+                } else {
+                    Note("Disponible: entrenamientos guardados, análisis, comparativas y la cuadra. " +
+                        "Bloqueado hasta reactivar: conexión con el chaleco, espalda y cincha, grabación, descargas, NTRIP, mareas, " +
+                        "compartir y ajustes.")
+                }
                 Spacer(Modifier.height(10.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { go("historial") }) { Text("VER ENTRENAMIENTOS", fontWeight = FontWeight.Bold) }
                     OutlinedButton(onClick = { go("caballos") }) { Text("Cuadra") }
+                }
+                if (active != null && LicenseFeature.COMPARTIR in features) {
+                    TextButton(onClick = { go("compartir") }) { Text("Enviar y recibir entrenamientos") }
                 }
             }
         }
     }
 }
 
-/** Replaces a blocked screen in consultation mode. */
+/** Replaces a screen that the licence does not include (expired, or not in its roles). */
 @Composable
-fun LockedFeature(go: (String) -> Unit) {
+fun LockedFeature(c: AppContainer, go: (String) -> Unit) {
+    val st by c.license.status.collectAsStateWithLifecycle()
+    val active = st as? LicenseStatus.Active
     Column(Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Text("🔒", fontSize = 44.sp)
         Spacer(Modifier.height(12.dp))
-        Text("FUNCIÓN BLOQUEADA", color = AvoColors.Red, fontWeight = FontWeight.Black, fontSize = 18.sp, letterSpacing = 1.5.sp)
+        Text(if (active != null) "NO INCLUIDO EN TU LICENCIA" else "FUNCIÓN BLOQUEADA", color = AvoColors.Red,
+            fontWeight = FontWeight.Black, fontSize = 18.sp, letterSpacing = 1.5.sp, textAlign = TextAlign.Center)
         Spacer(Modifier.height(8.dp))
-        Text("Esta función está disponible con una licencia AVO Performance Horse activa. Tus entrenamientos guardados " +
-            "siguen disponibles para consulta.", color = AvoColors.Text, textAlign = TextAlign.Center)
+        Text(if (active != null) "Tu licencia (${LicenseRole.label(active.token.roleSet)}) no incluye esta función. Pide a AVO que añada el rol " +
+                "que la incluye en tu tarjeta."
+            else "Esta función está disponible con una licencia AVO Performance Horse activa. Tus entrenamientos guardados " +
+                "siguen disponibles para consulta.", color = AvoColors.Text, textAlign = TextAlign.Center)
         Spacer(Modifier.height(16.dp))
-        Button(onClick = { go("licencia") }) { Text("REACTIVAR LICENCIA", fontWeight = FontWeight.Bold) }
+        Button(onClick = { go("licencia") }) { Text(if (active != null) "VER MI LICENCIA" else "REACTIVAR LICENCIA", fontWeight = FontWeight.Bold) }
         OutlinedButton(onClick = { go("historial") }, modifier = Modifier.padding(top = 8.dp)) { Text("Ver entrenamientos") }
     }
 }
@@ -157,7 +177,22 @@ fun LicenseScreen(c: AppContainer) {
             AvoCard("Licencia AVO Performance Horse", trailing = { StatusPill(label, color) }) {
                 KV("Estado", c.license.describe(st))
                 when (val s = st) {
-                    is LicenseStatus.Active -> { KV("Usuario", "${s.userName.ifBlank { "—" }} · ${s.token.userCode}"); KV("Días restantes", s.daysLeft.toString()) }
+                    is LicenseStatus.Active -> {
+                        KV("Usuario", "${s.userName.ifBlank { "—" }} · ${s.token.userCode}")
+                        KV("Roles", LicenseRole.label(s.token.roleSet))
+                        KV("Días restantes", s.daysLeft.toString())
+                        val f = LicenseFeatures.of(s.token.roleSet)
+                        Spacer(Modifier.height(6.dp))
+                        Text("Funciones", color = AvoColors.TextDim, fontSize = 12.sp)
+                        LicenseFeature.entries.forEach { feat ->
+                            Text((if (feat in f) "✓ " else "✗ ") + feat.label, color = if (feat in f) AvoColors.Ok else AvoColors.TextDim, fontSize = 13.sp)
+                        }
+                        c.license.licenseRider?.let { (_, name) ->
+                            Spacer(Modifier.height(6.dp))
+                            Note(if (c.license.riderLocked) "Jinete fijo en todos los entrenamientos de esta app: $name"
+                                else "Jinete por defecto: $name (se puede cambiar en Entrenar)", AvoColors.Blue)
+                        }
+                    }
                     is LicenseStatus.Expired -> KV("Usuario", "${s.userName.ifBlank { "—" }} · ${s.token.userCode}")
                     else -> Unit
                 }

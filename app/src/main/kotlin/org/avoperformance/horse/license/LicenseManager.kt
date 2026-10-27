@@ -16,6 +16,10 @@ import org.avoperformance.horse.core.license.ActivationResult
 import org.avoperformance.horse.core.license.ClockReading
 import org.avoperformance.horse.core.license.LicenseClock
 import org.avoperformance.horse.core.license.LicenseCrypto
+import org.avoperformance.horse.core.license.LicenseFeature
+import org.avoperformance.horse.core.license.LicenseFeatures
+import org.avoperformance.horse.core.license.LicenseRole
+import org.avoperformance.horse.core.license.LicenseToken
 import org.avoperformance.horse.core.license.LicenseFile
 import org.avoperformance.horse.core.license.LicenseIssuer
 import org.avoperformance.horse.core.license.LicensePolicy
@@ -31,9 +35,16 @@ import java.time.format.DateTimeFormatter
  * tides). It is set by [LicenseManager] before any of those objects is created.
  */
 object LicenseGate {
-    @Volatile var fullAccess: Boolean = true
+    /** Functions enabled by the active licence (all of them in builds without licence keys). */
+    @Volatile var features: Set<LicenseFeature> = LicenseFeature.entries.toSet()
         internal set
-    const val BLOCKED = "Función disponible con licencia activa"
+    /** User code of a licence with the Jinete role: rider given to trainings that arrive without one. */
+    @Volatile var defaultRiderCode: String? = null
+        internal set
+    fun allows(f: LicenseFeature): Boolean = f in features
+    /** Watch, recording, downloads and NTRIP. */
+    val canRecord: Boolean get() = allows(LicenseFeature.GRABAR)
+    const val BLOCKED = "Función no incluida en tu licencia o licencia caducada"
 }
 
 /**
@@ -66,12 +77,42 @@ class LicenseManager(private val app: Application, private val secure: SecureSto
     /** Result of the last activation attempt, shown on the licence screen. */
     val message: StateFlow<String?> = _message
 
+    private val _features = MutableStateFlow<Set<LicenseFeature>>(LicenseFeature.entries.toSet())
+    /** Functions enabled now (roles of the active licence; none when expired; all when not enforced). */
+    val features: StateFlow<Set<LicenseFeature>> = _features
+
     init {
         refresh()
         scope.launch { while (true) { delay(60_000); refresh() } }
     }
 
     val fullAccess: Boolean get() = _status.value.fullAccess
+    fun allows(f: LicenseFeature): Boolean = f in _features.value
+
+    /** Roles of the active licence (empty when expired, missing or not enforced). */
+    val roles: Set<LicenseRole> get() = (_status.value as? LicenseStatus.Active)?.token?.roleSet.orEmpty()
+
+    /** Holder of an active licence with the Jinete role: (user code, name) to use as rider, else null. */
+    val licenseRider: Pair<String, String>? get() = (_status.value as? LicenseStatus.Active)
+        ?.takeIf { LicenseFeatures.defaultRider(it.token.roleSet) }?.let { it.token.userCode to it.userName.ifBlank { it.token.userCode } }
+
+    /** Jinete licence without a role that may choose the rider: the rider cannot be changed in this app. */
+    val riderLocked: Boolean get() = (_status.value as? LicenseStatus.Active)?.let { LicenseFeatures.fixedRider(it.token.roleSet) } == true
+
+    /** Active licence token (base64) published in the sharing profile, so that others can check the roles. */
+    val publicTokenB64: String? get() = (_status.value as? LicenseStatus.Active)?.token?.let { java.util.Base64.getEncoder().encodeToString(it.encode()) }
+
+    /**
+     * Roles of another AVO user from the licence published in their profile: only if the signature is valid with a
+     * key of this app and the licence belongs to [code]. Null when it cannot be verified.
+     */
+    fun verifiedRoles(code: String, tokenB64: String?): Set<LicenseRole>? {
+        if (tokenB64.isNullOrBlank() || trusted.isEmpty()) return null
+        val t = runCatching { LicenseToken.decode(java.util.Base64.getDecoder().decode(tokenB64)) }.getOrNull() ?: return null
+        if (t.userCode != code || !LicensePolicy.verifySignature(t, trusted)) return null
+        if (System.currentTimeMillis() >= t.expiresAtMs) return null   // expired licence: no roles shown
+        return t.roleSet
+    }
 
     private fun load(): StoredLicense? = secure.getString(KEY)?.let { runCatching { StoredLicense.decode(it) }.getOrNull() }
 
@@ -100,7 +141,14 @@ class LicenseManager(private val app: Application, private val secure: SecureSto
         val st = configError?.let { LicenseStatus.Invalid(it) } ?: LicensePolicy.status(stored, trusted, clock.effectiveMs)
         val before = _status.value
         _status.value = st
-        LicenseGate.fullAccess = st.fullAccess
+        val f = when (st) {
+            LicenseStatus.NotEnforced -> LicenseFeature.entries.toSet()
+            is LicenseStatus.Active -> LicenseFeatures.of(st.token.roleSet)
+            else -> emptySet()
+        }
+        LicenseGate.features = f
+        LicenseGate.defaultRiderCode = licenseRider?.first
+        _features.value = f
         if (before.fullAccess != st.fullAccess || before::class != st::class) log.i("LICENCIA", describe(st))
     }
 
@@ -146,7 +194,7 @@ class LicenseManager(private val app: Application, private val secure: SecureSto
     fun describe(st: LicenseStatus = _status.value): String = when (st) {
         LicenseStatus.NotEnforced -> "Licencias no activadas en esta versión"
         LicenseStatus.None -> "Sin licencia"
-        is LicenseStatus.Active -> "Activa hasta el ${day(st.token.expiresAtS)}"
+        is LicenseStatus.Active -> "Activa hasta el ${day(st.token.expiresAtS)} · ${LicenseRole.label(st.token.roleSet)}"
         is LicenseStatus.Expired -> "Caducada el ${day(st.token.expiresAtS)}"
         is LicenseStatus.Invalid -> st.reason
     }
