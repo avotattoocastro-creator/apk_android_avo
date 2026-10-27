@@ -704,3 +704,8 @@ Petición del usuario.
 - **Tapa:** los postes de la placa Qi se reubican (fuera del hueco de la antena y separados de la pared del BNO).
 - **CI:** sin interferencias, 1 sólido por pieza.
 - **REV 5.1, paso de los hilos de la bobina:** hueco de 6 mm a toda altura en la pared −X de la cuna de la batería (y −6,5…−0,5), donde el usuario lo marcó. Queda sobre el canal del fondo y bajo el paso de la bandeja. CI sin interferencias.
+
+## 2026-10-27 — Cincha REV 5.2 (tapa de una pieza)
+- **Petición del usuario:** tapa de una sola pieza, imprimible boca abajo sin soportes, sin la lámina ni las letras.
+- Se elimina el panel rojo y su alojamiento; la tapa queda con la cara superior lisa. Quedan 7 piezas (aro y tirador en rojo).
+- CI: un sólido por pieza, sin interferencias. Se borran los STEP/STL antiguos del panel.
