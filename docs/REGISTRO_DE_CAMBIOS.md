@@ -716,6 +716,9 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.7.4 (pestaña del C6)
+- Petición del usuario tras la prueba impresa (el C6 no entraba): la pestaña superior del C6 sube 0,1 mm, con la cara inferior a 0,15 sobre el PCB (antes 0,05). El borde superior de la pestaña no cambia. Solo cambia la bandeja.
+
 ## 2026-10-28 — Cincha REV 5.7.3 (insertos de la tapa)
 - Petición del usuario: el alojamiento de los insertos M3 de la tapa, 0,1 mm más grande. Pasa de Ø4,0 a Ø4,1 (5 mm de fondo, sin cambios). Solo cambia la tapa. CI sin interferencias.
 

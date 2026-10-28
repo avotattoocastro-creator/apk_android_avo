@@ -1,6 +1,8 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.3 (actual):** alojamiento de los insertos M3 de la tapa a Ø4,1 (antes 4,0), según la prueba impresa. Solo cambia la tapa.
+**REV 5.7.4 (actual):** la pestaña superior que sujeta el C6 sube 0,1 mm: su cara inferior queda a 0,15 sobre el PCB (antes 0,05), porque en la prueba impresa el C6 no entraba. Solo cambia la bandeja.
+
+**REV 5.7.3:** alojamiento de los insertos M3 de la tapa a Ø4,1 (antes 4,0), según la prueba impresa. Solo cambia la tapa.
 
 **REV 5.7.2: soporte.**
 - **Tirador integrado:** el tirador ya no es una pieza aparte; forma un solo sólido con el soporte, unido a la pestaña elástica (viga + nervio).

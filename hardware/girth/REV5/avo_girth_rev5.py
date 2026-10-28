@@ -252,7 +252,8 @@ def tray():
     # C6: pestaña superior en el lado opuesto al BNO (+X): 0,6 sobre el PCB, a 0,05 de su cara superior
     ly0, ly1 = C6_Y0 + 2.1, C6_Y1 - 1.5
     t = t.union(box(C6_X1 + 0.1 + 0.5, (ly0 + ly1) / 2, BED_TOP - 0.1, 1.0, ly1 - ly0, 1.3))
-    t = t.union(box(C6_X1 + 0.1 - 0.3, (ly0 + ly1) / 2, BED_TOP + 0.05, 0.6, ly1 - ly0, 1.15))
+    # REV 5.7.4 (prueba impresa: el C6 no entraba): cara inferior de la pestaña a 0,15 sobre el PCB (antes 0,05)
+    t = t.union(box(C6_X1 + 0.1 - 0.3, (ly0 + ly1) / 2, BED_TOP + 0.15, 0.6, ly1 - ly0, 1.05))
     for (x, y) in SCREWS:
         t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss_lid"] + 0.4, 6))      # holgura para las columnas Ø7 de la tapa
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
