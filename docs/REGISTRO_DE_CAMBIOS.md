@@ -915,9 +915,9 @@ ZED encontrado a los ~16 s (230400, UART2, HPG 1.51, perfil COMPLETO, 8 Hz). Pec
 apagado o lejos). Batería 3,60 V. Pendiente: dormir/despertar con el reed, 0 V en el ZED dormida, consumo dormida.
 
 ## 2026-10-28 — BACK 3.10.5 — prueba: ZED encendido 10 s después del arranque
-**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `998f5b8` · **CI:** [40780929468](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40780929468) (éxito)
 **Qué cambia:** Vext (ZED) se enciende 10 s después de arrancar o despertar, con el arranque suave de la 3.10.4; el UART del
 ZED se abre en ese momento y hasta entonces sus pines quedan como entradas.
 **Por qué:** petición del usuario. Con el ZED en Ve conectado desde el arranque la espalda no arrancaba; conectando Ve a mano
 con la placa en marcha funcionaba (monitor 23:29 con la 3.10.4).
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO**. Es una prueba: el retardo se ajustará según el resultado.
+**Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO**. Es una prueba: el retardo se ajustará según el resultado.
