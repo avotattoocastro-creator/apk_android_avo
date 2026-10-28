@@ -485,6 +485,20 @@ def main():
                 v, where = 0.0, None
             if v > 0.01:
                 report["interferencias"][f"{names[i]} × {names[j]}"] = [round(v, 3), where]
+    # REV 5.8: barrido de apertura del cierre (+X): no debe tocar la base ni el soporte en ningún ángulo
+    ax = _latch_ax()
+    fixed = parts[P + "base"].union(parts[P + "soporte"])
+    sweep = {}
+    for ang in (3, 6, 10, 15, 20, 30, 45, 60, 75, 90, 105):
+        lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
+        try:
+            v = lt.intersect(fixed).val().Volume()
+        except Exception:
+            v = 0.0
+        sweep[ang] = round(v, 3)
+        if v > 0.01:
+            report["interferencias"][f"cierre abierto {ang}° × base/soporte"] = round(v, 3)
+    report["barrido_cierre_grados_mm3"] = sweep
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
                          "aberturas_al_exterior": 0, "tornillos_M3": len(SCREWS), "imanes_5x1": 2 * len(MAGS), "junta_compresion_pct": round(100 * (GASKET["h_free"] - GASKET["depth"]) / GASKET["h_free"]),
