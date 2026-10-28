@@ -937,3 +937,13 @@ ZED (pin INT de la URTK1.2) en GPIO6, HIGH fijado al dormir; pulso LOW de 20 ms 
 **Por qué:** el ZED en Vext provoca reinicios en el cargador de arranque (hardware) y el usuario no quiere añadir piezas.
 Con el ZED en 3V3 la Heltec dormía pero el ZED seguía encendido (~70–85 mA, LEDs encendidos).
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO** (consumo del ZED en reposo sin dato en el data sheet).
+
+## 2026-10-29 — BACK 3.10.8 — el ZED despierta también por su RX (sin cable INT)
+**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Qué cambia:** `UBX-RXM-PMREQ` con `wakeupSources` = uartrx + extint0 (0x28). Tras el último byte, GPIO35 pasa a LOW por
+la matriz GPIO al instante y queda fijado (sin `ZED.end()`, que soltaría la línea); GPIO6 se fija en HIGH antes de la orden.
+Al encender el ZED se mandan 8 bytes 0xFF y se esperan 100 ms. Si el UART no estaba abierto (cápsula fuera al arrancar),
+se abre a 38400 para mandar la orden.
+**Por qué:** prueba del usuario 29/10/2026 00:34 con la 3.10.7: Heltec despierta y enlazada, app «Sin GNSS», último dato
+GNSS hace 198827 ms, espalda al 11 %; LED blanco y LEDs del ZED encendidos. El ZED entró en reposo y no volvió a salir.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

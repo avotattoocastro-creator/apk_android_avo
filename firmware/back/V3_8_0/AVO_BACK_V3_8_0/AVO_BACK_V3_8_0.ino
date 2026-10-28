@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.7 (ESP-NOW) · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.8 (ESP-NOW) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -39,6 +39,8 @@
 #include <driver/gpio.h>
 #include <driver/rtc_io.h>
 #include <soc/soc_caps.h>
+#include <soc/gpio_sig_map.h>
+#include <esp_rom_gpio.h>
 #include "avo_core.h"
 
 using namespace avo;
@@ -273,20 +275,35 @@ static void zed_wake_pulse() {
   digitalWrite(ZED_INT_PIN, HIGH);
 }
 
-// V3.10.7: UBX-RXM-PMREQ v0 (16 bytes): duration 0 = until woken, flags backup|force, wake-up source EXTINT0.
+// V3.10.7: UBX-RXM-PMREQ v0 (16 bytes): duration 0 = until woken, flags backup|force.
+// V3.10.8: wake-up sources EXTINT0 AND UART RX (0x28): the ZED also wakes on any edge of its RX line, so the INT
+// wire is no longer needed (3.10.7 left the ZED in backup for good when INT was not wired or did not wake it).
+// Right after the last byte the line is driven LOW at once (before the ZED has even parsed the message) and held
+// LOW all night: no edge after the ZED enters backup, white LED (GPIO35) off. The edge that wakes it is the line
+// going HIGH again when the UART starts after the next wake-up.
+// If the UART was not running yet (capsule out of the support at power-up) it is started at 38400, the ZED's
+// default after a power-up or a backup (its configuration lives only in RAM).
 static void zed_backup() {
-  if (!s_zed_on) return;
+  if (!s_zed_on) {
+    ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
+    delay(5);
+  }
   uint8_t f[6 + 16 + 2] = {0xB5, 0x62, 0x02, 0x41, 16, 0,
                            0x00, 0, 0, 0,          // version 0, reserved
                            0, 0, 0, 0,             // duration (ms): 0 = infinite
                            0x06, 0, 0, 0,          // flags: backup (0x02) + force (0x04)
-                           0x20, 0, 0, 0};         // wakeupSources: extint0 (0x20)
+                           0x28, 0, 0, 0};         // wakeupSources: uartrx (0x08) + extint0 (0x20)
   uint8_t a = 0, b = 0;
   for (int i = 2; i < 6 + 16; i++) { a += f[i]; b += a; }
   f[22] = a; f[23] = b;
   ZED.write(f, sizeof(f));
-  ZED.flush();
-  delay(200);                            // let the ZED enter backup before its RX line changes
+  ZED.flush();                           // last stop bit sent
+  // straight to LOW through the GPIO matrix (microseconds; ZED.end()/pinMode could let the line float HIGH first)
+  gpio_set_level((gpio_num_t)ZED_TX_PIN, 0);
+  gpio_set_direction((gpio_num_t)ZED_TX_PIN, GPIO_MODE_OUTPUT);
+  esp_rom_gpio_connect_out_signal(ZED_TX_PIN, SIG_GPIO_OUT_IDX, false, false);
+  gpio_hold_en((gpio_num_t)ZED_TX_PIN);
+  s_zed_on = false;                      // the UART is not stopped: ZED.end() would release the line
 }
 
 // V3.10.5: ZED on: Vext with soft start, then the UART.
@@ -297,27 +314,25 @@ static void zed_power_on() {
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
   ZED.setRxTimeout(1);                   // hand each NAV-PVT over as soon as the line goes idle
+  const uint8_t wake[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+  ZED.write(wake, sizeof(wake));         // V3.10.8: edges on the ZED RX line = out of backup (ignored when awake)
+  ZED.flush();
+  delay(100);                            // the ZED needs a moment after the wake-up edge
   s_zed_on = true;
   Serial.println("[AVO ESPALDA] Vext encendido: el ZED tiene corriente");
 }
 
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 static void go_to_sleep(const char* why) {
-  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS en reposo (orden UBX, despierta por INT = GPIO6) o sin corriente si va en Vext, radio apagada.\n"
+  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS en reposo (orden UBX; despierta por su RX o por INT = GPIO6), radio apagada.\n"
                 "[AVO ESPALDA] Se despierta al poner la capsula en el soporte (reed cerrado).\n", why);
   Serial.flush();
   if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
-  zed_backup();                          // V3.10.7: ZED on 3V3 → software backup (woken by EXTINT on GPIO6)
-  pinMode(ZED_INT_PIN, OUTPUT);
+  pinMode(ZED_INT_PIN, OUTPUT);          // V3.10.7: EXTINT idle HIGH and frozen BEFORE the backup order (no edge later)
   digitalWrite(ZED_INT_PIN, HIGH);
   gpio_hold_en((gpio_num_t)ZED_INT_PIN);
-  if (s_zed_on) { ZED.end(); s_zed_on = false; }
-  // V3.10.6: GPIO35 is the ZED RX line AND the white LED of the Heltec (lit when HIGH). Left as an input, a ZED that
-  // is still powered (VCC on 3V3) pulls the line up through its RX and the LED stays on all night. Held LOW instead:
-  // LED off, and a LOW level never feeds an unpowered ZED.
-  pinMode(ZED_TX_PIN, OUTPUT);
-  digitalWrite(ZED_TX_PIN, LOW);
-  gpio_hold_en((gpio_num_t)ZED_TX_PIN);
+  // V3.10.8: ZED on 3V3 → software backup; GPIO35 (ZED RX + white LED) ends held LOW inside zed_backup()
+  zed_backup();
   pinMode(ZED_RX_PIN, INPUT);
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V

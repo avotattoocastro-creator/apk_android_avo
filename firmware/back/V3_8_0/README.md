@@ -155,3 +155,13 @@ Con el ZED en Vext la placa entra en bucle `POWERON` al arrancar (hardware, en e
 - Consumo del ZED en este reposo: el data sheet no lo da → medir. El LED PWR de la placa URTK1.2 sigue encendido
   (va directo al 3V3): para el mínimo consumo, quitar ese LED o su resistencia.
 - **Sin INT conectado el ZED no se despierta** hasta quitar y volver a poner la batería.
+
+## V3.10.8 — el ZED también despierta por su RX (2026-10-29)
+Con la 3.10.7 el ZED se quedó en reposo al despertar la Heltec (app: «Sin GNSS», último dato GNSS hace 199 s): la orden
+de reposo funcionó pero el pulso por INT no lo sacó (INT sin conectar o sin efecto).
+- `UBX-RXM-PMREQ` con despertar por **UART RX + EXTINT0** (`wakeupSources` 0x28): **el cable INT ya no hace falta**.
+- Justo después del último byte de la orden, GPIO35 (RX del ZED y LED blanco) pasa a LOW por la matriz GPIO, antes de que
+  el ZED la procese, y queda fijado en LOW: ningún flanco mientras duerme y LED apagado.
+- Al despertar, el UART vuelve a poner la línea en HIGH y manda 8 bytes 0xFF: esos flancos sacan al ZED del reposo.
+- Si la cápsula estaba fuera del soporte al arrancar (UART aún sin abrir), se abre a 38400 para mandar la orden.
+- Para sacar un ZED que se quedó dormido con la 3.10.7: quitar la batería 5 s una vez.
