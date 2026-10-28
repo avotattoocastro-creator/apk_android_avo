@@ -300,7 +300,10 @@ def _rib_profile(grow=0.0):
     zw, zf, zt, ld = RIB["z_wall"] - grow, RIB["z_front"] - grow, H + grow, RIB["lead"]
     w = RIB["w"] + 2 * grow
     pts = [(x0, zw), (xf - ld, zf + ld * (zw - zf) / (xf - x0)), (xf, zf + ld), (xf, zt), (x0, zt)]
-    return cq.Workplane("XZ", origin=(0, w / 2, 0)).polyline(pts).close().extrude(w)
+    r = cq.Workplane("XZ", origin=(0, w / 2, 0)).polyline(pts).close().extrude(w)
+    if grow == 0.0:   # REV 5.8.1: extremos redondeados en planta (estética); la muesca del cierre sigue recta (más holgura)
+        r = r.edges("|Z and >X").fillet(1.0)
+    return r
 
 
 def latch(sx=1):
@@ -317,10 +320,15 @@ def latch(sx=1):
     c = c.union(box((lip_x + xo) / 2, 0, z_low, xo - lip_x, w, top - z_low))
     # tirador para soltar: saliente de 3 mm hacia fuera en la parte de arriba, con los cantos redondeados
     c = c.union(box(xo + LATCH["grip"] / 2 - 0.01, 0, top - LATCH["grip_h"], LATCH["grip"] + 0.02, w, LATCH["grip_h"])
-                .edges("|Y and >X").fillet(1.0))
+                .edges("|Y and >X").fillet(1.35))
     c = c.cut(_rib_profile(grow=cl))                                   # muesca que abraza el nervio
+    # REV 5.8.1: curvas (estética y resistencia): esquina de arriba sobre la tapa, rincones del gancho y del tirador, labio
+    xi = ax - t / 2
+    NP = cq.selectors.NearestToPointSelector
+    for (pt, r) in (((lip_x, 0, top), 1.0), ((xi, 0, z_low), 1.0), ((xo, 0, top - LATCH["grip_h"]), 0.8),
+                    ((lip_x, 0, z_low), 0.4)):
+        c = c.edges(NP(pt)).fillet(r)
     c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
-    c = c.edges("|Y and >Z").fillet(0.6)
     return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
 
 
@@ -355,8 +363,13 @@ def mount():
             yc = sy * (LATCH["w"] / 2 + LATCH["gap"] + LATCH["lug_w"] / 2)
             lug = box(ax - 0.25, yc, -0.1, 2 * r_l + 0.5, LATCH["lug_w"], az + 0.1)   # la mitad baja del ojo queda apoyada
             lug = lug.union(cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2, 0)).center(ax, az).circle(r_l).extrude(LATCH["lug_w"]))
-            lug = lug.cut(cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2 + 1, 0)).center(ax, az)
-                          .circle(LATCH["lug_hole"] / 2).extrude(LATCH["lug_w"] + 2))
+            # REV 5.8.1: agujero en «D», con la misma forma que el pasador (plano abajo): el pasador no gira en la oreja
+            dh = PIN["d"] + 0.15
+            zflat = az - PIN["d"] / 2 + PIN["flat"] - 0.075
+            hole = (cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2 + 1, 0)).center(ax, az)
+                    .circle(dh / 2).extrude(LATCH["lug_w"] + 2)
+                    .intersect(box(ax, yc, zflat, dh + 1, LATCH["lug_w"] + 4, dh + 1)))
+            lug = lug.cut(hole)
             p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
     rx, ry = REED["center"]
     for (dx, depth) in REED_MAGS:
