@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.0 (ESP-NOW) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.2 (ESP-NOW) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -34,6 +34,7 @@
 #include <esp_idf_version.h>
 #include <esp_random.h>
 #include <Preferences.h>
+#include <SPI.h>
 #include "avo_core.h"
 
 using namespace avo;
@@ -56,6 +57,13 @@ static const float VBAT_DIVIDER = 4.9f;  // 390k + 100k (Heltec reference design
 static uint8_t s_vbat_active = HIGH;
 static uint16_t s_vbat_mv = 0;
 static const uint8_t NAV_RATE_HZ = 8;  // RTK limit of the ZED-F9P with 4 constellations
+// V3.10.2: battery saving. The SX1262 LoRa radio of the Heltec is not used; after power-up it sits in standby
+// (~0.6 mA) until told to sleep. Heltec Wireless Stick Lite V3 pins.
+static const int LORA_NSS = 8, LORA_SCK = 9, LORA_MOSI = 10, LORA_MISO = 11, LORA_RST = 12, LORA_BUSY = 13;
+static const uint32_t CPU_MHZ = 160;   // was 240: UART, ESP-NOW and the GNSS/RTCM loop have ample headroom at 160
+static TxPowerPolicy s_txp;            // adaptive ESP-NOW transmit power (lib/avo_core/src/avo_tx_power.*)
+static int8_t s_rssi_worst = 0;        // worst RSSI from the chest/girth in the current second (0 = none)
+static bool s_lora_asleep = false;
 
 HardwareSerial ZED(1);
 Preferences prefs;
@@ -160,6 +168,8 @@ static void print_status() {
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
+  Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
+                s_lora_asleep ? "dormida" : "NO dormida", (int)s_txp.dbm(), s_txp.level() == TxPowerPolicy::kLevels - 1 ? " (maxima)" : "");
   {  // V3.10.0 girth unit
     const GirthHub& g = core->girth();
     if (!g.paired()) Serial.println("  CINCHA: sin emparejar (se acepta la primera que salude)");
@@ -186,6 +196,33 @@ static void print_status() {
   }
   if (z.state() == ZedManager::NO_RESPONSE)
     Serial.println("  AVISO: el ZED no contesta a UBX. Revisa el cableado TX/RX y que el puerto del ZED tenga UBX activado (u-center).");
+}
+
+// V3.10.2: put the unused SX1262 into cold-start sleep (SetSleep 0x84, ~0.2 uA). NSS stays HIGH afterwards
+// (a falling NSS edge would wake it up). Returns false if the chip stayed busy (not fitted / other board).
+static bool lora_sleep() {
+  pinMode(LORA_NSS, OUTPUT);
+  digitalWrite(LORA_NSS, HIGH);
+  pinMode(LORA_RST, OUTPUT);
+  digitalWrite(LORA_RST, LOW);
+  delay(2);
+  digitalWrite(LORA_RST, HIGH);
+  pinMode(LORA_BUSY, INPUT);
+  delay(5);                              // BUSY rises right after reset; wait for the chip to finish booting
+  uint32_t t0 = millis();
+  while (digitalRead(LORA_BUSY) == HIGH) { if (millis() - t0 > 50) return false; delay(1); }
+  SPI.begin(LORA_SCK, LORA_MISO, LORA_MOSI, LORA_NSS);
+  SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+  digitalWrite(LORA_NSS, LOW);
+  SPI.transfer(0x84);                    // SetSleep
+  SPI.transfer(0x00);                    // cold start, RTC off
+  digitalWrite(LORA_NSS, HIGH);
+  SPI.endTransaction();
+  SPI.end();
+  pinMode(LORA_NSS, OUTPUT);
+  digitalWrite(LORA_NSS, HIGH);
+  delay(1);
+  return digitalRead(LORA_BUSY) == HIGH;   // in sleep BUSY stays high
 }
 
 // V3.8.1: average of 16 readings with the divider enabled only while measuring (no constant drain).
@@ -237,6 +274,8 @@ void setup() {
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
   Serial.begin(115200);
   delay(300);
+  setCpuFrequencyMhz(CPU_MHZ);           // V3.10.2 (before Wi-Fi starts)
+  s_lora_asleep = lora_sleep();          // V3.10.2
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, LOW);           // Vext on (harmless if the ZED has its own supply)
   pinMode(PRG_PIN, INPUT_PULLUP);
@@ -288,12 +327,21 @@ void setup() {
   Serial.printf("\nAVO BACK %s — Heltec %s, ESP-NOW canal %u, pecho emparejado: %s\n", id + 1, s_dev_id,
                 (unsigned)NOW_CHANNEL_DEFAULT, stored.valid ? pm : "ninguno (se emparejará con el primer pecho que lo pida)");
   Serial.printf("ZED: RX=GPIO%d TX=GPIO%d, buscando baudios...\n", ZED_RX_PIN, ZED_TX_PIN);
+  Serial.printf("AHORRO: CPU %lu MHz, LoRa %s, potencia de radio adaptativa (empieza al maximo)\n",
+                (unsigned long)getCpuFrequencyMhz(), s_lora_asleep ? "dormida" : "NO dormida (no responde)");
 }
 
 void loop() {
   bool worked = false;
   RxPkt p;
-  while (xQueueReceive(s_rxq, &p, 0) == pdTRUE) { core->on_radio(p.mac, p.d, p.len, p.rssi); worked = true; }
+  while (xQueueReceive(s_rxq, &p, 0) == pdTRUE) {
+    core->on_radio(p.mac, p.d, p.len, p.rssi);
+    worked = true;
+    // V3.10.2: worst RSSI of our own peers (chest, girth) for the adaptive transmit power
+    const bool from_chest = core->paired() && memcmp(p.mac, core->peer().mac, 6) == 0;
+    const bool from_girth = core->girth().paired() && memcmp(p.mac, core->girth().mac(), 6) == 0;
+    if ((from_chest || from_girth) && p.rssi < 0 && (s_rssi_worst == 0 || p.rssi < s_rssi_worst)) s_rssi_worst = p.rssi;
+  }
 
   uint8_t buf[512];
   int avail;
@@ -341,6 +389,18 @@ void loop() {
         if (ups >= 18 && downs == 0) charge_mode("tension subiendo: cargador conectado");
       }
     } else nh = 0;
+  }
+  static uint32_t last_txp = 0;    // V3.10.2: adaptive ESP-NOW transmit power, decided once per second
+  if (millis() - last_txp >= 1000) {
+    last_txp = millis();
+    static uint32_t last_fail = 0;
+    const uint32_t fail = core->stats().tx_fail;
+    if (s_txp.update(millis(), core->chest_online(), s_rssi_worst, fail - last_fail)) {
+      esp_wifi_set_max_tx_power(s_txp.qdbm());
+      Serial.printf("[AVO ESPALDA] potencia de radio %d dBm (peor RSSI %d dBm)\n", (int)s_txp.dbm(), (int)s_rssi_worst);
+    }
+    last_fail = fail;
+    s_rssi_worst = 0;
   }
   static uint32_t last_print = 0;
   if (millis() - last_print >= 2000) { last_print = millis(); print_status(); }

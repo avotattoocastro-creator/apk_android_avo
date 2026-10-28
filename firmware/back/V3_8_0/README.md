@@ -65,3 +65,29 @@ Con un cargador de pared, la placa no puede cargar la batería y a la vez alimen
   - o automáticamente, si la tensión cae más de 120 mV desde el máximo, porque eso indica que se ha desconectado el cargador.
 - Si con la carga conectada la tensión no llega a subir, la detección automática no se activará: en ese caso hay que usar el botón.
 - **Sin verificar** en la espalda real.
+
+## V3.10.2 — ahorro de batería (2026-10-28)
+Consumo estimado de la espalda funcionando: ~190–230 mA (ESP32-S3 con la radio siempre escuchando, ZED-F9P y antena
+activa). Con la 654060 de 2000 mAh, unas 8 h. Esta versión quita lo que se puede quitar sin tocar el RTK ni el enlace:
+
+| Cambio | Ahorro estimado | Riesgo |
+|---|---|---|
+| CPU a **160 MHz** (antes 240) | ~10 mA | Ninguno: UART, ESP-NOW y el bucle GNSS/RTCM van sobrados. |
+| **Radio LoRa SX1262 dormida** (SetSleep en frío por SPI: NSS 8, SCK 9, MOSI 10, MISO 11, RST 12, BUSY 13) | ~0,6 mA | Ninguno: no se usa. Tras encender, se quedaba en espera. |
+| **Potencia de envío ESP-NOW adaptativa** (`lib/avo_core/src/avo_tx_power.*`) | 2–5 mA (los envíos son ~3 % del tiempo) | Bajo: vuelve al máximo al instante. |
+
+Potencia adaptativa:
+- Niveles 11 dBm, 15 dBm y el máximo de antes (petición 84 = 21 dBm, el S3 la limita a su máximo).
+- Cada segundo toma el **peor RSSI** recibido del pecho y de la cincha emparejada. Suponiendo que el otro emite a ~20 dBm,
+  elige el nivel más bajo que deja **−62 dBm** en el otro extremo (25–30 dB por encima de la sensibilidad a 1 Mbit/s).
+  Con el pecho a −50 dBm usa 11 dBm; a −55, 15 dBm; por debajo de −58, el máximo.
+- **Subir es inmediato.** Un envío fallido, un segundo sin paquetes del pecho o el enlace caído → máximo durante 15 s.
+- **Bajar** es de nivel en nivel y solo tras 10 s seguidos en los que todos los segundos permitían el nivel más bajo.
+- Arranca al máximo los primeros 15 s, igual que antes (emparejamiento y primer contacto).
+- Pruebas en ordenador: `power.*` (4 casos).
+
+Monitor serie: línea nueva `AHORRO: CPU 160 MHz | LoRa dormida | potencia radio N dBm` y un aviso
+`potencia de radio N dBm (peor RSSI …)` cada vez que cambia.
+
+**No cambia:** protocolo, emparejamiento, RTK, ritmo GNSS, modo carga ni la lectura de la batería.
+**Sin verificar** en la espalda real. Ganancia total estimada: ~13–16 mA, un 6–8 % más de duración (≈ +30–40 min con 2000 mAh).

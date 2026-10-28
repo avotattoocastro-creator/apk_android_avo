@@ -931,4 +931,57 @@ TEST(quality, receiver_without_nav_sig_keeps_nav_sat) {
   CHECK(!w.back->quality().have_sig);
 }
 
+// ---------------------------------------------------------------- V3.10.2 adaptive transmit power
+TEST(power, needed_level_from_worst_rssi) {
+  CHECK_EQ(TxPowerPolicy::needed_level(-45), 0);   // chest very close: 11 dBm
+  CHECK_EQ(TxPowerPolicy::needed_level(-53), 0);
+  CHECK_EQ(TxPowerPolicy::needed_level(-55), 1);   // 15 dBm
+  CHECK_EQ(TxPowerPolicy::needed_level(-57), 1);
+  CHECK_EQ(TxPowerPolicy::needed_level(-58), 2);   // maximum
+  CHECK_EQ(TxPowerPolicy::needed_level(-80), 2);
+}
+
+TEST(power, starts_at_max_and_steps_down_slowly) {
+  TxPowerPolicy p;
+  CHECK_EQ(p.level(), 2);
+  CHECK_EQ((int)p.qdbm(), 84);                     // same request as firmware 3.10.1
+  uint32_t t = 0;
+  int changes = 0;
+  for (int s = 0; s < 14; s++) { t += 1000; changes += p.update(t, true, -50, 0); }
+  CHECK_EQ(p.level(), 2);                          // held at max for the first 15 s after boot
+  for (int s = 0; s < 12; s++) { t += 1000; changes += p.update(t, true, -50, 0); }
+  CHECK_EQ(p.level(), 1);                          // one step after a calm 10 s window
+  for (int s = 0; s < 11; s++) { t += 1000; p.update(t, true, -50, 0); }
+  CHECK_EQ(p.level(), 0);
+  CHECK_EQ((int)p.qdbm(), 44);
+  CHECK_EQ(changes, 1);
+}
+
+TEST(power, weak_second_or_failure_goes_to_max_at_once) {
+  TxPowerPolicy p;
+  uint32_t t = 0;
+  for (int s = 0; s < 40; s++) { t += 1000; p.update(t, true, -48, 0); }
+  CHECK_EQ(p.level(), 0);
+  t += 1000; CHECK(p.update(t, true, -56, 0));     // rider turns: RSSI drops → up immediately
+  CHECK_EQ(p.level(), 1);
+  t += 1000; CHECK(p.update(t, true, -48, 1));     // one lost packet → maximum
+  CHECK_EQ(p.level(), 2);
+  for (int s = 0; s < 14; s++) { t += 1000; p.update(t, true, -48, 0); }
+  CHECK_EQ(p.level(), 2);                          // held 15 s
+  t += 1000; p.update(t, true, -48, 0);
+  t += 1000; CHECK(p.update(t, false, 0, 0) == false || p.level() == 2);   // link lost → maximum
+  CHECK_EQ(p.level(), 2);
+  t += 1000; p.update(t, true, 0, 0);              // linked but nothing heard this second → maximum
+  CHECK_EQ(p.level(), 2);
+}
+
+TEST(power, a_single_weak_second_blocks_the_step_down) {
+  TxPowerPolicy p;
+  uint32_t t = 0;
+  for (int s = 0; s < 30; s++) { t += 1000; p.update(t, true, -50, 0); }
+  CHECK_EQ(p.level(), 1);
+  for (int s = 0; s < 12; s++) { t += 1000; p.update(t, true, s == 5 ? -55 : -50, 0); }   // -55 needs level 1
+  CHECK_EQ(p.level(), 1);                          // the window that contained it does not step down
+}
+
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

@@ -868,3 +868,22 @@ Petición del usuario.
   - CI: 1 sólido por pieza y ninguna interferencia;
   - análisis de voladizos sobre los STL: solo quedan los puentes de las capas de sacrificio y las caras de bloqueo del labio y del diente (0,7–0,9 mm).
 - **Campo estimado en el BNO** (dipolo, polaridad alterna en diagonal): unos 35 µT de los 8 imanes de esquina; el imán de esquina más cercano al reed queda a 21,9 mm.
+
+## 2026-10-28 — BACK 3.10.2 — ahorro de batería
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** `build-back-v380.yml` (ver ejecución del commit)
+**Qué cambia:**
+- CPU de 240 a 160 MHz.
+- La radio LoRa SX1262 (sin uso) se pone en sueño profundo al arrancar; antes se quedaba en espera (~0,6 mA).
+- Potencia de envío ESP-NOW adaptativa (11 / 15 dBm / máximo) según el peor RSSI del pecho y la cincha: sube al instante,
+  máximo 15 s tras cualquier fallo de envío o segundo sin paquetes, baja de nivel en nivel tras 10 s estables. Lógica en
+  `lib/avo_core/src/avo_tx_power.*` con 4 pruebas nuevas (35 casos en total).
+- Monitor serie: línea `AHORRO`.
+**Por qué:** el usuario ve que la batería de la espalda (654060, 2000 mAh) baja rápido. Consumo estimado ~190–230 mA (≈ 8 h);
+esta versión recorta ~13–16 mA (≈ +6–8 %). Más ahorro exigiría apagar el GPS o la escucha de radio, que necesita el RTK.
+**Archivos:** `firmware/back/V3_8_0/AVO_BACK_V3_8_0/AVO_BACK_V3_8_0.ino`, `lib/avo_core/src/avo_tx_power.{h,cpp}`,
+`lib/avo_core/src/avo_core.h`, `lib/avo_core/src/avo_version.h`, `test/test_espnow.cpp`, `README.md`,
+`.github/workflows/build-back-v380.yml`.
+**No se ha tocado:** protocolo con el pecho y la cincha, emparejamiento, RTK/ritmo GNSS, modo carga, lectura de batería.
+**Validación:** IMPLEMENTADO · pruebas de ordenador correctas (35 casos) · CI pendiente · **NO VERIFICADO** en la espalda.
+**Pendiente:** medir la duración real (carga completa → apagado) y la corriente con polímetro; comparar la lectura de la
+batería (`BATERIA` del monitor, 3,83 V el 28/10) con un polímetro para validar el divisor ×4,9.
