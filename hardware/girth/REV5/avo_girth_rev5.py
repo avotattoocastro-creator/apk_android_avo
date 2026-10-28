@@ -107,6 +107,10 @@ LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.8, hook_z0=10.2, lip=0.2,
 # REV 5.8: «clic» como en la caja de referencia: un nervio semicilíndrico en cada extremo de la TAPA (z 12, r 1,0) y
 # una muesca en el gancho del cierre que lo abraza. El labio del gancho pasa 0,5 por debajo del nervio: para cerrar o
 # abrir el cierre flexa (≈1,8 % de deformación con PETG) y hace clic; cerrado no se suelta solo.
+# REV 5.8: llaves de posición (petición del usuario): un taco en cada extremo de la base, de distinto ancho, que entra en
+# una muesca del cerco del soporte: la cápsula solo entra en una orientación.
+KEYS = {1: 10.0, -1: 5.0}          # ancho (Y) del taco en +X y en −X
+KEY = dict(out=2.4, z1=4.0, clear=0.2)
 RIB = dict(z0=11.0, out=1.0, front=1.0, w=16.0)     # nervio: cara inferior plana (el labio del cierre engancha debajo), frente vertical, techo a 45°
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
 
@@ -166,7 +170,9 @@ def pod_base():
         b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
-    # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa)
+    # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa); tacos de posición de distinto ancho
+    for sx, kw in KEYS.items():
+        b = b.union(box(sx * (L / 2 - 0.1 + (KEY["out"] + 0.1) / 2), 0, 0, KEY["out"] + 0.1, kw, KEY["z1"]))
     return b
 
 
@@ -329,6 +335,8 @@ def mount():
     # cerco
     rim = rrect(ol, ow, orr, RH).cut(rrect(il, iw, ir, RH + 2, z0=-1))
     rim = rim.faces(">Z").edges().fillet(0.8)
+    for sx, kw in KEYS.items():                                       # REV 5.8: muescas de las llaves de posición
+        rim = rim.cut(box(sx * (L / 2 + 2.0), 0, -1, 6.0, kw + 2 * KEY["clear"], RH + 2))
     p = p.union(rim)
     # REV 5.8: bisagras de los cierres en ±X (dos orejas por cierre, taladro Ø2,3 para el pasador impreso)
     ax, az = _latch_ax(), LATCH["az"]
