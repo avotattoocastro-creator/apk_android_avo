@@ -716,6 +716,13 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.8.1 (curvas y agujero en D)
+- **Petición del usuario** (bocetos sobre su CAD): curvas en el cierre y en la zona de anclaje, por estética; orejas del soporte con la misma forma interior que el pasador.
+- **Cambios:**
+  - redondeos en el cierre (esquina superior, tirador, rincones y labio) y en los extremos del nervio de la tapa;
+  - agujero en D en las orejas (Ø2,25 con plano a juego con el del pasador).
+- **CI:** 1 sólido por pieza, sin interferencias; clic y barrido iguales que en la 5.8.
+
 ## 2026-10-28 — Cincha REV 5.8 (cierres de palanca con clic)
 - **Petición del usuario** (con fotos de una caja de referencia de Printables):
   - un cierre en cada extremo, con bisagra y pasador impreso;

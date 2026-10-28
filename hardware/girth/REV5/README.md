@@ -1,6 +1,14 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.8 (actual): cierres de palanca con clic.**
+**REV 5.8.1 (actual):**
+- **Curvas:**
+  - en el cierre: esquina superior R1,0, tirador R1,35, rincones R1,0 / R0,8 y labio R0,4;
+  - en el nervio de la tapa: extremos redondeados R1,0 en planta.
+- **Orejas del soporte:** agujero en «D» con la misma forma que el pasador (plano abajo, holgura 0,075), así el pasador no gira en las orejas. El cierre sigue girando sobre el pasador (agujero redondo Ø2,15).
+- **Al montar:** el pasador entra con el plano hacia abajo.
+- **CI:** sin interferencias; el clic y el barrido no cambian.
+
+**REV 5.8: cierres de palanca con clic.**
 - **Sujeción nueva:** el labio −X y la pestaña elástica +X del soporte se sustituyen por un **cierre de palanca en cada extremo**. Los imanes 2 + 2 siguen centrando la cápsula.
 - **Bisagra:** dos orejas en el soporte (Ø2,3) y un **pasador impreso** de Ø2,1 con cabeza, que se imprime tumbado sobre su plano.
   - El cierre gira con roce sobre el pasador (agujero Ø2,15).
