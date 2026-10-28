@@ -716,6 +716,13 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.7.5 (imanes de la base)
+- **Petición del usuario:** poder meter 2 o 3 imanes apilados en las esquinas de la base para tener más sujeción.
+- **Cambio:**
+  - alojamientos de 3,1 mm de fondo (antes 2,3, que ya admitían 2 imanes), con 0,3 mm de piel abajo;
+  - recrecido de Ø7,6 en la zona marcada, desde el suelo interior (2,6) hasta z 3,4.
+- **Alcance:** solo cambia la base. El soporte sigue con alojamientos de 1 imán (1,05 mm): en él los imanes entran por arriba, y un alojamiento más hondo los alejaría de la cápsula.
+
 ## 2026-10-28 — Cincha REV 5.7.4 (pestaña del C6)
 - Petición del usuario tras la prueba impresa (el C6 no entraba): la pestaña superior del C6 sube 0,1 mm, con la cara inferior a 0,15 sobre el PCB (antes 0,05). El borde superior de la pestaña no cambia. Solo cambia la bandeja.
 

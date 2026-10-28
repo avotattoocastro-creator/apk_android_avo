@@ -51,7 +51,7 @@ M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, b
           insert_d=4.1, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,1, REV 5.7.3); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
 MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # entre la cuna y la pared maciza
-HMAG = dict(d=5.0, t=1.0, skin=0.3)
+HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
 C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.5,   # huella oficial Seeed: USB-C sobresale 1,5
@@ -148,7 +148,10 @@ def pod_base():
         b = b.cut(cyl(x, y, M3["cb_h"] + 0.3, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
     # imanes de sujeción: alojamiento desde dentro, 0,3 mm de piel abajo
     for (x, y) in MAGS:
-        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, FLOOR - HMAG["skin"]))   # no entra en la cuna (sin voladizo)
+        # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
+        top = HMAG["skin"] + HMAG["n_base"] * HMAG["t"] + 0.1
+        b = b.union(cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1))
+        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
     gz, gh, gd = GROOVE["z0"], GROOVE["z1"] - GROOVE["z0"], GROOVE["depth"]

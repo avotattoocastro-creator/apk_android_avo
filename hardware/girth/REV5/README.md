@@ -1,6 +1,11 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.4 (actual):** la pestaña superior que sujeta el C6 sube 0,1 mm: su cara inferior queda a 0,15 sobre el PCB (antes 0,05), porque en la prueba impresa el C6 no entraba. Solo cambia la bandeja.
+**REV 5.7.5 (actual):**
+- Los 4 alojamientos de imanes de la base admiten hasta **3 imanes Ø5 × 1 apilados** (3,1 mm de fondo, con 0,3 mm de piel abajo).
+- Un recrecido de Ø7,6 los rodea, desde el suelo interior hasta la boca (z 3,4).
+- Solo cambia la base.
+
+**REV 5.7.4:** la pestaña superior que sujeta el C6 sube 0,1 mm: su cara inferior queda a 0,15 sobre el PCB (antes 0,05), porque en la prueba impresa el C6 no entraba. Solo cambia la bandeja.
 
 **REV 5.7.3:** alojamiento de los insertos M3 de la tapa a Ø4,1 (antes 4,0), según la prueba impresa. Solo cambia la tapa.
 
