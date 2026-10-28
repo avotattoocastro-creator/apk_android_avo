@@ -209,6 +209,8 @@ static void runDiag() {
 }
 
 void setup() {
+  const char* volatile id = AVO_GIRTH_IMAGE_ID;   // mantiene la marca en la imagen
+  (void)id;
   Serial.begin(115200);
   uint32_t t0 = millis();
   while (!Serial && millis() - t0 < 3000) delay(10);
