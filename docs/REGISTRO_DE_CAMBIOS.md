@@ -716,6 +716,24 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha: firmware de diagnóstico 0.2.1-diag (BNO085 «NO RESPONDE»)
+- **Contexto:** con el firmware 0.2.0 (solo hay binario, sin fuente en el repositorio) el BNO085 no responde en 0x4A.
+- **Revisión del binario 0.2.0 (desensamblado):** los pines coinciden con el esquema:
+  - RST en GPIO1, PS0/PS1 en GPIO0 a LOW, INT en GPIO2, CS en GPIO21 a HIGH, ADD en GPIO22 a LOW;
+  - `Wire.begin(23, 16)` a 400 kHz.
+- **Otros hallazgos en el binario:**
+  - pone GPIO14 en HIGH, es decir, selecciona la antena externa; sin antena en el U.FL da −96 dBm;
+  - lee la batería en GPIO5 ×2; sin divisor marca 0 mV.
+- **Nuevo firmware de diagnóstico:** `firmware/girth/DIAG_0_2_1` (workflow `build-girth-diag.yml`). Sin radio y sin tocar la NVS. Comprueba:
+  - niveles de cada línea con pull-up/pull-down;
+  - cortos entre líneas (INT no se fuerza);
+  - que INT baje tras el reset;
+  - búsqueda I²C a 100/400 kHz y con SDA/SCL intercambiados;
+  - SPI si el I²C falla;
+  - tensión en GPIO5.
+  - Termina con un resumen de la causa probable.
+- No se ha probado en hardware; lo instala el usuario con AVO Update y después vuelve a instalar su firmware normal.
+
 ## 2026-10-27 — Cincha REV 5.7.1 (corrección con la prueba impresa)
 - **Origen:** en la foto del usuario, con el BNO y el C6 montados en la bandeja REV 5.7, los pines del BNO quedaban ~1,1 mm desplazados hacia el USB respecto a los pads D0–D6.
   - En la foto la fila de pines está centrada en la placa, con ~1,2 mm a cada extremo.
