@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 12912.7,
+   "volumen_mm3": 12910.2,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 30197.1,
+   "volumen_mm3": 30201.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -61,7 +61,7 @@
    ]
   },
   "AVO_GIRTH_R5_cierre_x2": {
-   "volumen_mm3": 1001.2,
+   "volumen_mm3": 998.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -138,11 +138,11 @@
   ]
  },
  "clic_interferencia_grados_mm3": {
-  "1": 0.34,
-  "2": 1.2,
-  "3": 1.59,
-  "4": 1.4,
-  "5": 0.66,
+  "1": 0.33,
+  "2": 1.17,
+  "3": 1.53,
+  "4": 1.32,
+  "5": 0.61,
   "6": 0.0,
   "7": 0.0,
   "8": 0.0,
