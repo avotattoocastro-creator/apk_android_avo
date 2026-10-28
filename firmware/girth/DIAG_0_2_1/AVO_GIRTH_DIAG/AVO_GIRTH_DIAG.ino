@@ -22,7 +22,7 @@
 #include <Wire.h>
 #include <SPI.h>
 
-#define DIAG_VERSION "0.2.3-diag"
+#define DIAG_VERSION "0.2.4-diag"
 // Marca de identidad que lee AVO Update (versión seguida de "AVO-GIRTH"): solo se instala en la cincha ESP32-C6.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" DIAG_VERSION "\0AVO-GIRTH";
 
@@ -71,7 +71,7 @@ static void testLevels() {
 }
 
 static void testShorts() {
-  Serial.println("[DIAG] 2) Cortocircuitos entre líneas (con el BNO en reset; INT y RST no se fuerzan):");
+  Serial.println("[DIAG] 2) Cortocircuitos entre líneas (con el BNO en reset; INT y RST no se fuerzan ni se evalúan):");
   shorts = 0;
   pinMode(L[RST].gpio, OUTPUT); digitalWrite(L[RST].gpio, LOW);   // BNO en reset: sus pines no reaccionan al bus
   delay(5);
@@ -84,7 +84,7 @@ static void testShorts() {
       digitalWrite(L[i].gpio, lvl);
       delayMicroseconds(800);
       for (int j = 0; j < N; j++) {
-        if (j == i || j == RST) continue;
+        if (j == i || j == RST || j == INT_) continue;   // en reset el BNO mantiene INT a 0: no sirve para detectar cortos
         int r = digitalRead(L[j].gpio);
         int base = lvl == 0 ? puLevel[j] : pdLevel[j];
         if (r == lvl && base != lvl) {

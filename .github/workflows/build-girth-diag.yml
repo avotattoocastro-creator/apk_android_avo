@@ -1,4 +1,4 @@
-name: Build AVO GIRTH 0.2.3-diag (diagnóstico BNO085, cincha ESP32-C6)
+name: Build AVO GIRTH 0.2.4-diag (diagnóstico BNO085, cincha ESP32-C6)
 
 on:
   workflow_dispatch:
@@ -62,10 +62,10 @@ jobs:
           if not any(e[0] == 0 and e[1] == 0x11 for e in ents): errs.append("second OTA slot missing")
           if m[0x10000:0x10000 + len(a)] != a: errs.append("merged image does not contain the app at 0x10000")
           if len(m) != 0x10000 + len(a): errs.append(f"merged size {hex(len(m))} != 0x10000 + app {hex(len(a))}")
-          if not (a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.2.3-diag\x00AVO-GIRTH" in a): errs.append("app marker / chip")
+          if not (a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.2.4-diag\x00AVO-GIRTH" in a): errs.append("app marker / chip")
           for e in errs: print(f"::error title=Imagen::{e}")
           if errs: sys.exit(1)
-          print(f"::notice title=AVO GIRTH 0.2.3-diag::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
+          print(f"::notice title=AVO GIRTH 0.2.4-diag::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
           PY
           sha256sum AVO_GIRTH_DIAG_0_2_1_*.bin > SHA256SUMS.txt
           echo "::notice title=Memoria::$(grep -E 'Sketch uses|Global variables' build.log | tr '\n' ' ')"

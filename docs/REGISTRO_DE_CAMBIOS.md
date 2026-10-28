@@ -716,6 +716,13 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha: diagnóstico 0.2.2 → 0.2.4-diag y resultado con el BNO085 real
+- **0.2.2:** cortos medidos con el BNO en reset; sonda I²C por software tolerante al estiramiento de reloj; SPI sin depender de INT.
+- **0.2.3:** etiqueta correcta del resultado de la sonda (−1/0/1).
+- **0.2.4:** INT excluido de la detección de cortos (en reset el BNO lo mantiene a 0 y aparecía unido a todo).
+- **Resultado en el módulo del usuario (puentes resoldados uno a uno):** con VCC, GND, RST e INT conectados, las resistencias de la placa a VCC se ven en RST e INT, pero INT no baja nunca tras soltar RST: el BNO no arranca. Diagnóstico: placa BNO defectuosa o dañada; se sustituye. Pendiente de confirmar con un módulo nuevo.
+- Los falsos «cortos» de 0.2.1 (SDA↔SCL) se explican por el nodo VCC del BNO sin chip operativo y por la reacción del bus; no había puentes de estaño.
+
 ## 2026-10-28 — Cincha: firmware de diagnóstico 0.2.1-diag (BNO085 «NO RESPONDE»)
 - **Contexto:** con el firmware 0.2.0 (solo hay binario, sin fuente en el repositorio) el BNO085 no responde en 0x4A.
 - **Revisión del binario 0.2.0 (desensamblado):** los pines coinciden con el esquema:
