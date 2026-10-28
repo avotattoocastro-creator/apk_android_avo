@@ -97,7 +97,15 @@ CL = 0.12
 RW = 2.6
 RH = GROOVE["z1"] - 0.15
 MT = 4.6
-STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=1.5, chan=0.4)
+STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 5,6 (antes 1,5) para las bisagras de los cierres
+# REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
+#  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
+#    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
+#    dentro (autobloqueo); para abrir se tira de la parte de arriba hacia fuera.
+LATCH = dict(w=16.0, t=2.0, az=2.6, barrel=4.4, top=8.6, hook_z0=5.35, hook_z1=6.45, hook_tip=0.2,
+             hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2, clear=0.28)
+PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
+KEEP = dict(z0=5.2, z1=7.8, depth=1.0, w=16.6)          # ranura del gancho en los extremos de la base
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
 TAB = dict(len=10.0, out=1.8, up=1.6)
 
@@ -154,16 +162,16 @@ def pod_base():
         b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
-    gz, gh, gd = GROOVE["z0"], GROOVE["z1"] - GROOVE["z0"], GROOVE["depth"]
-    z1 = GROOVE["z1"]
-    for sx, (ya, yb) in ((-1, (-LIP_Y - 0.5, LIP_Y + 0.5)), (1, (HOOK_Y[0] - 1.0, HOOK_Y[1] + 1.0))):
+    # REV 5.8: ranuras de los cierres en los dos extremos, por encima del cerco del soporte. La cara inferior (la que
+    # bloquea) es horizontal; el techo sube a 45° (sin voladizo) y deja sitio al gancho cuando gira para abrir.
+    kd = KEEP["depth"]
+    for sx in (-1, 1):
         xf = sx * L / 2
-        b = b.cut(box(xf - sx * (gd / 2 - 0.5), (ya + yb) / 2, gz, gd + 1.0, yb - ya, gh))
-        # techo de la ranura a 45° (la cara inferior, la que bloquea, sigue horizontal): sin soportes
-        wedge = (cq.Workplane("XZ", origin=(0, yb, 0))
-                 .polyline([(xf + sx * 0.5, z1 - 0.01), (xf - sx * gd, z1 - 0.01), (xf + sx * 0.5, z1 + gd + 0.5)])
-                 .close().extrude(yb - ya))
-        b = b.cut(wedge)
+        prof = (cq.Workplane("XZ", origin=(0, KEEP["w"] / 2, 0))
+                .polyline([(xf + sx * 0.5, KEEP["z0"]), (xf - sx * kd, KEEP["z0"]), (xf - sx * kd, KEEP["z1"]),
+                           (xf + sx * 0.5, KEEP["z1"] + kd + 0.5)])
+                .close().extrude(KEEP["w"]))
+        b = b.cut(prof)
     return b
 
 
@@ -273,6 +281,38 @@ def _mount_geom():
     return il, iw, ir, ol, ow, orr, xs0, xs1, pl, pw
 
 
+def _latch_ax():
+    ol = L + 2 * CL + 2 * RW
+    return ol / 2 + LATCH["barrel"] / 2 + 0.3               # eje de la bisagra (en +X): el barril libra el cerco 0,3
+
+
+def latch(sx=1):
+    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), en posición cerrada."""
+    ax, az, w, t = _latch_ax(), LATCH["az"], LATCH["w"], LATCH["t"]
+    xi, xo = ax - t / 2, ax + t / 2
+    c = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(ax, az).circle(LATCH["barrel"] / 2).extrude(w))
+    c = c.union(box(ax, 0, az, t, w, LATCH["top"] - az))
+    tip = L / 2 - KEEP["depth"] + LATCH["hook_tip"]
+    c = c.union(box((tip + xo) / 2, 0, LATCH["hook_z0"], xo - tip, w, LATCH["hook_z1"] - LATCH["hook_z0"]))
+    # chaflán de entrada en la punta del gancho (abajo, hacia dentro) y canto superior redondeado para el dedo
+    c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0))
+              .polyline([(tip - 0.01, LATCH["hook_z0"] - 0.01), (tip + 0.5, LATCH["hook_z0"] - 0.01), (tip - 0.01, LATCH["hook_z0"] + 0.5)])
+              .close().extrude(w + 2))
+    c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
+    c = c.edges("|Y and >Z").fillet(0.6)
+    return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
+
+
+def pin(sx=1):
+    """Pasador impreso (REV 5.8): Ø2,1 con un plano de 0,2 abajo (se imprime tumbado) y cabeza Ø3,8."""
+    ax, az = _latch_ax(), LATCH["az"]
+    span = LATCH["w"] + 2 * (LATCH["gap"] + LATCH["lug_w"])
+    p = cq.Workplane("XZ", origin=(0, span / 2, 0)).center(ax, az).circle(PIN["d"] / 2).extrude(span)
+    p = p.union(cq.Workplane("XZ", origin=(0, span / 2 + PIN["head_t"], 0)).center(ax, az).circle(PIN["head_d"] / 2).extrude(PIN["head_t"]))
+    p = p.cut(box(ax, 0, az - PIN["head_d"] / 2 - 1, 5, span + 4, 1 + PIN["head_d"] / 2 - PIN["d"] / 2 + PIN["flat"]))
+    return p if sx > 0 else p.rotate((0, 0, 0), (0, 0, 1), 180)
+
+
 def mount():
     il, iw, ir, ol, ow, orr, xs0, xs1, pl, pw = _mount_geom()
     p = rrect(pl, pw, 7.0, MT, z0=-MT)
@@ -283,26 +323,18 @@ def mount():
     # cerco
     rim = rrect(ol, ow, orr, RH).cut(rrect(il, iw, ir, RH + 2, z0=-1))
     rim = rim.faces(">Z").edges().fillet(0.8)
-    bx0 = il / 2
-    rim = rim.cut(box(bx0 + RW / 2, (BEAM["y_root"] + BEAM["y_free"] + 1.2) / 2, -1,
-                      RW + 2, BEAM["y_free"] + 1.2 - BEAM["y_root"], RH + 3))
     p = p.union(rim)
-    gz = GROOVE["z0"]
-    lip_in = -il / 2 + 0.71
-    p = p.union(box((-il / 2 - 0.3 + lip_in) / 2, 0, gz + ZC, lip_in + il / 2 + 0.3, 2 * LIP_Y - 0.4, RH - gz - ZC))
-    # la pestaña baja hasta la cama por una ranura de la placa (holgura 0,6): se imprime desde la cama, sin voladizo
-    t, yr, yf = BEAM["t"], BEAM["y_root"], BEAM["y_free"]
-    p = p.cut(box(bx0 + t / 2, (yr + yf + 0.6) / 2, -MT - 1, t + 1.2, yf + 0.6 - yr, MT + 1.0))
-    sy0, sy1 = BEAM["y_free"] - TAB["len"] - 0.6, BEAM["y_free"] + 0.6       # REV 5.7.2: nervio a todo el largo del tirador
-    p = p.cut(box(bx0 + t + 0.5, (sy0 + sy1) / 2, -MT - 1, 1.0 + 1.2, sy1 - sy0, MT + 1.0))
-    beam = box(bx0 + t / 2, (yr - 1.5 + yf) / 2, -MT, t, yf - yr + 1.5, RH + MT)
-    p = p.union(beam)
-    tip = bx0 - 0.88
-    hook = (cq.Workplane("XZ", origin=(0, HOOK_Y[1], 0))
-            .polyline([(bx0 + 0.3, gz + ZC), (tip, gz + ZC), (tip, gz + 0.5), (bx0, RH), (bx0 + 0.3, RH)])
-            .close().extrude(HOOK_Y[1] - HOOK_Y[0]))
-    p = p.union(hook)
-    p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, -MT, 1.0, TAB["len"], RH - 2.0 + 1.6 + MT))
+    # REV 5.8: bisagras de los cierres en ±X (dos orejas por cierre, taladro Ø2,3 para el pasador impreso)
+    ax, az = _latch_ax(), LATCH["az"]
+    r_l = LATCH["barrel"] / 2 + 0.2
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            yc = sy * (LATCH["w"] / 2 + LATCH["gap"] + LATCH["lug_w"] / 2)
+            lug = box(ax - 0.25, yc, -0.1, 2 * r_l + 0.5, LATCH["lug_w"], az + 0.1)   # la mitad baja del ojo queda apoyada
+            lug = lug.union(cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2, 0)).center(ax, az).circle(r_l).extrude(LATCH["lug_w"]))
+            lug = lug.cut(cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2 + 1, 0)).center(ax, az)
+                          .circle(LATCH["lug_hole"] / 2).extrude(LATCH["lug_w"] + 2))
+            p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
     rx, ry = REED["center"]
     for (dx, depth) in REED_MAGS:
         p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
@@ -389,13 +421,25 @@ def main():
         P + "tapa": pod_lid(),
         P + "bandeja": tray(),
         P + "junta_TPU": gasket(free=False),
-        P + "soporte": mount_with_tab(),          # REV 5.7.2: con el tirador integrado (una sola pieza)
+        P + "soporte": mount(),                   # REV 5.8: sin labio ni pestaña; con las bisagras de los cierres
+        P + "cierre_x2": latch(1),                # REV 5.8: imprimir 2 (el de −X es el mismo girado 180°)
+        P + "cierre_-X": latch(-1),
+        P + "pasador_x2": pin(1),                 # REV 5.8: imprimir 2
+        P + "pasador_-X": pin(-1),
     }
     comps = components()
     report = {"piezas": {}, "interferencias": {}, "medidas": {}}
     for n, s in parts.items():
         # STEP/STL de cada pieza YA ORIENTADOS PARA IMPRIMIR (tapa y tirador boca abajo), apoyados en Z = 0
-        sp = s.rotate((0, 0, 0), (1, 0, 0), 180) if (n.endswith("tapa") or n.endswith("tirador_rojo")) else s
+        if n.endswith("-X"):
+            # copias de montaje (para las comprobaciones y las vistas): no se exportan para imprimir
+            os.makedirs(f"{OUT}/montaje", exist_ok=True)
+            cq.exporters.export(s, f"{OUT}/montaje/{n}.stl", tolerance=0.05)
+            continue
+        if n.endswith("cierre_x2"):
+            sp = s.rotate((0, 0, 0), (1, 0, 0), 90)       # de canto: el perfil en la cama, el agujero vertical
+        else:
+            sp = s.rotate((0, 0, 0), (1, 0, 0), 180) if (n.endswith("tapa") or n.endswith("tirador_rojo")) else s
         sp = sp.translate((0, 0, -sp.val().BoundingBox().zmin))
         cq.exporters.export(sp, f"{OUT}/{n}.step")
         cq.exporters.export(sp, f"{OUT}/{n}.stl", tolerance=0.02, angularTolerance=0.1)
