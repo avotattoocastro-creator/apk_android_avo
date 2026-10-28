@@ -939,7 +939,7 @@ Con el ZED en 3V3 la Heltec dormía pero el ZED seguía encendido (~70–85 mA, 
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO** (consumo del ZED en reposo sin dato en el data sheet).
 
 ## 2026-10-29 — BACK 3.10.8 — el ZED despierta también por su RX (sin cable INT)
-**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `36dd147` · **CI:** [40788606165](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40788606165) (éxito)
 **Qué cambia:** `UBX-RXM-PMREQ` con `wakeupSources` = uartrx + extint0 (0x28). Tras el último byte, GPIO35 pasa a LOW por
 la matriz GPIO al instante y queda fijado (sin `ZED.end()`, que soltaría la línea); GPIO6 se fija en HIGH antes de la orden.
 Al encender el ZED se mandan 8 bytes 0xFF y se esperan 100 ms. Si el UART no estaba abierto (cápsula fuera al arrancar),
@@ -949,7 +949,7 @@ GNSS hace 198827 ms, espalda al 11 %; LED blanco y LEDs del ZED encendidos. El Z
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-29 — BACK 3.10.9 — reed desactivado, como la 3.10.2
-**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `b91fa05` · **CI:** [40790873680](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40790873680) (éxito)
 **Qué cambia:** `AVO_REED_SLEEP 0`: el reed se ignora y la espalda no se duerme (modo taller fijo). Sin más cambios
 respecto a la 3.10.8 (ZED despertado al arrancar por INT y por RX).
 **Por qué:** el usuario pide la 3.9.0 o la última antes del reed, pero que despierte al ZED. Con la 3.9.0 no había GPS: el
