@@ -289,7 +289,7 @@ def mount():
     # la pestaña baja hasta la cama por una ranura de la placa (holgura 0,6): se imprime desde la cama, sin voladizo
     t, yr, yf = BEAM["t"], BEAM["y_root"], BEAM["y_free"]
     p = p.cut(box(bx0 + t / 2, (yr + yf + 0.6) / 2, -MT - 1, t + 1.2, yf + 0.6 - yr, MT + 1.0))
-    sy0, sy1 = BEAM["y_free"] - TAB["len"] + 2.0 - 0.6, BEAM["y_free"] - 2.0 + 0.6
+    sy0, sy1 = BEAM["y_free"] - TAB["len"] - 0.6, BEAM["y_free"] + 0.6       # REV 5.7.2: nervio a todo el largo del tirador
     p = p.cut(box(bx0 + t + 0.5, (sy0 + sy1) / 2, -MT - 1, 1.0 + 1.2, sy1 - sy0, MT + 1.0))
     beam = box(bx0 + t / 2, (yr - 1.5 + yf) / 2, -MT, t, yf - yr + 1.5, RH + MT)
     p = p.union(beam)
@@ -298,7 +298,7 @@ def mount():
             .polyline([(bx0 + 0.3, gz + ZC), (tip, gz + ZC), (tip, gz + 0.5), (bx0, RH), (bx0 + 0.3, RH)])
             .close().extrude(HOOK_Y[1] - HOOK_Y[0]))
     p = p.union(hook)
-    p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, -MT, 1.0, TAB["len"] - 4.0, RH - 2.0 + 1.6 + MT))
+    p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, -MT, 1.0, TAB["len"], RH - 2.0 + 1.6 + MT))
     rx, ry = REED["center"]
     for (dx, depth) in REED_MAGS:
         p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
@@ -308,13 +308,17 @@ def mount():
 
 
 def tab_body():
-    """REV 5.7.2: tirador macizo, unido a la pestaña elástica (viga + nervio) del soporte: una sola pieza."""
+    """REV 5.7.2: tirador macizo, unido a la pestaña elástica (viga + nervio) del soporte: una sola pieza.
+    Perfil en XZ: apoya en la viga y el nervio (que bajan hasta la cama); el vuelo exterior de 0,8 lleva chaflán de 45°."""
     il = _mount_geom()[0]
     bx0 = il / 2
     y0, y1 = BEAM["y_free"] - TAB["len"], BEAM["y_free"]
-    t = box(bx0 + 0.1 + (BEAM["t"] + TAB["out"] - 0.1) / 2, (y0 + y1) / 2, 1.4,
-            BEAM["t"] + TAB["out"] - 0.1, y1 - y0, RH + TAB["up"] - 1.4)
-    return t.edges("|Y").fillet(0.7)
+    x_in, x_rib, x_out = bx0 + 0.1, bx0 + BEAM["t"] + 1.0, bx0 + BEAM["t"] + TAB["out"]
+    z0, z1 = 1.4, RH + TAB["up"]
+    t = (cq.Workplane("XZ", origin=(0, y1, 0))
+         .polyline([(x_in, z0), (x_rib, z0), (x_out, z0 + (x_out - x_rib)), (x_out, z1), (x_in, z1)])
+         .close().extrude(y1 - y0))
+    return t.faces(">Z").edges("|Y").fillet(0.7)
 
 
 def mount_with_tab():
