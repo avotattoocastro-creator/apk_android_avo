@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.5 (ESP-NOW) · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.6 (ESP-NOW) · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -75,7 +75,7 @@ static ReedGate s_reed;
 static bool s_radio_on = false, s_zed_on = false;
 // V3.10.5 (test requested on 28/10): Vext (ZED-F9P) switched on VEXT_DELAY_MS after start-up / wake-up, once the board,
 // the radio and the link are running, as when the user connects the Ve wire by hand (that works).
-static const uint32_t VEXT_DELAY_MS = 10000;
+static const uint32_t VEXT_DELAY_MS = 1000;   // V3.10.6: 1 s (the 10 s test of 3.10.5 did not change the boot loop: that one is hardware)
 static uint32_t s_vext_at = 0;
 static bool s_vext_pending = false;
 
@@ -279,7 +279,12 @@ static void go_to_sleep(const char* why) {
   Serial.flush();
   if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
   if (s_zed_on) { ZED.end(); s_zed_on = false; }
-  pinMode(ZED_TX_PIN, INPUT);            // never drive the RX of an unpowered ZED (it would feed it through its input)
+  // V3.10.6: GPIO35 is the ZED RX line AND the white LED of the Heltec (lit when HIGH). Left as an input, a ZED that
+  // is still powered (VCC on 3V3) pulls the line up through its RX and the LED stays on all night. Held LOW instead:
+  // LED off, and a LOW level never feeds an unpowered ZED.
+  pinMode(ZED_TX_PIN, OUTPUT);
+  digitalWrite(ZED_TX_PIN, LOW);
+  gpio_hold_en((gpio_num_t)ZED_TX_PIN);
   pinMode(ZED_RX_PIN, INPUT);
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V
@@ -360,6 +365,7 @@ void setup() {
   gpio_hold_dis((gpio_num_t)VBAT_CTRL_PIN);
   gpio_hold_dis((gpio_num_t)LORA_NSS);
   gpio_hold_dis((gpio_num_t)LORA_RST);
+  gpio_hold_dis((gpio_num_t)ZED_TX_PIN);   // V3.10.6
   const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
   if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)REED_PIN);
   pinMode(REED_PIN, INPUT_PULLUP);

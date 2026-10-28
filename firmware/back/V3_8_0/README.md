@@ -137,3 +137,10 @@ el cable de Ve a mano con la placa ya en marcha, sí funcionaba. Para probarlo s
 - después se enciende Vext con el arranque suave de la 3.10.4 y se abre el UART del ZED;
 - monitor: `el ZED se enciende dentro de 10 s`, la línea `GPS: sin corriente, se enciende en N s` y `Vext encendido: el ZED tiene corriente`.
 **Prueba**, no versión definitiva: si funciona, se ajusta el retardo (probablemente bastan 1–2 s).
+
+## V3.10.6 — LED apagado al dormir y ZED a 1 s (2026-10-28)
+- El LED blanco de la Heltec es el mismo pin que va al RX del ZED (GPIO35). Al dormir con el ZED en 3V3, el RX del ZED
+  levantaba la línea y el LED quedaba encendido toda la noche. Ahora GPIO35 queda en LOW fijado durante el sueño.
+- Retardo de encendido del ZED: 1 s (la prueba de 10 s de la 3.10.5 no cambió el bucle de arranque con el ZED en Vext,
+  que se produce en el cargador de arranque, antes del firmware: es de hardware; arreglo propuesto, 470–1000 µF entre 3V3 y GND).
+- Con el ZED en 3V3 la espalda duerme pero el ZED sigue encendido (~70 mA): la batería no dura dormida.

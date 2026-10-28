@@ -921,3 +921,11 @@ ZED se abre en ese momento y hasta entonces sus pines quedan como entradas.
 **Por qué:** petición del usuario. Con el ZED en Ve conectado desde el arranque la espalda no arrancaba; conectando Ve a mano
 con la placa en marcha funcionaba (monitor 23:29 con la 3.10.4).
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO**. Es una prueba: el retardo se ajustará según el resultado.
+
+## 2026-10-28 — BACK 3.10.6 — LED apagado al dormir, ZED a 1 s
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia:** GPIO35 (RX del ZED y LED blanco) en LOW fijado durante el sueño; retardo de encendido del ZED 10 s → 1 s.
+**Por qué:** con el ZED en 3V3 la espalda se dormía pero el LED quedaba encendido (el RX del ZED alimentado levanta la
+línea). La 3.10.5 (ZED a los 10 s) no cambió el bucle `POWERON` con el ZED en Ve: el reinicio ocurre en el cargador de
+arranque (`entry 0x403c9880`), antes del firmware → causa de hardware; propuesto condensador de 470–1000 µF entre 3V3 y GND.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO**.
