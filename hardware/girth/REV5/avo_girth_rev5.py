@@ -102,7 +102,7 @@ STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
 #    dentro (autobloqueo); para abrir se tira de la parte de arriba hacia fuera.
-LATCH = dict(w=16.0, t=2.2, az=2.6, barrel=4.4, engage=1.0, lip_t=0.8, cap=1.4, clear=0.12,
+LATCH = dict(w=16.0, t=2.2, az=2.6, barrel=4.4, engage=1.0, lip_t=0.8, cap=1.4, clear=0.12, grip=3.0, grip_h=2.8,
              hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2)
 # REV 5.8: «clic» como en la caja de referencia: un nervio semicilíndrico en cada extremo de la TAPA (z 12, r 1,0) y
 # una muesca en el gancho del cierre que lo abraza. El labio del gancho pasa 0,5 por debajo del nervio: para cerrar o
@@ -315,6 +315,9 @@ def latch(sx=1):
     c = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(ax, az).circle(LATCH["barrel"] / 2).extrude(w))
     c = c.union(box(ax, 0, az, t, w, top - az))
     c = c.union(box((lip_x + xo) / 2, 0, z_low, xo - lip_x, w, top - z_low))
+    # tirador para soltar: saliente de 3 mm hacia fuera en la parte de arriba, con los cantos redondeados
+    c = c.union(box(xo + LATCH["grip"] / 2 - 0.01, 0, top - LATCH["grip_h"], LATCH["grip"] + 0.02, w, LATCH["grip_h"])
+                .edges("|Y and >X").fillet(1.0))
     c = c.cut(_rib_profile(grow=cl))                                   # muesca que abraza el nervio
     c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
     c = c.edges("|Y and >Z").fillet(0.6)
@@ -509,7 +512,7 @@ def main():
     ax = _latch_ax()
     fixed = parts[P + "base"].union(parts[P + "soporte"]).union(parts[P + "tapa"]).union(parts[P + "aro_rojo"])
     sweep = {}
-    for ang in (0, 12, 15, 20, 30, 45, 60, 75, 90):   # 1–11°: zona del clic (flexa a propósito); a ~100° apoya en la placa (tope)
+    for ang in (0, 12, 15, 20, 30, 45, 60):   # 1–11°: zona del clic (flexa a propósito); a ~75° el tirador apoya en la placa (tope)
         lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
         try:
             v = lt.intersect(fixed).val().Volume()
