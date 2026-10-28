@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.4 (ESP-NOW) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.5 (ESP-NOW) · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -73,6 +73,11 @@ static bool s_lora_asleep = false;
 static const int REED_PIN = 7;
 static ReedGate s_reed;
 static bool s_radio_on = false, s_zed_on = false;
+// V3.10.5 (test requested on 28/10): Vext (ZED-F9P) switched on VEXT_DELAY_MS after start-up / wake-up, once the board,
+// the radio and the link are running, as when the user connects the Ve wire by hand (that works).
+static const uint32_t VEXT_DELAY_MS = 10000;
+static uint32_t s_vext_at = 0;
+static bool s_vext_pending = false;
 
 HardwareSerial ZED(1);
 Preferences prefs;
@@ -125,11 +130,12 @@ class HeltecPlatform : public BackPlatform {
  public:
   uint32_t now_ms() override { return millis(); }
   void zed_set_baud(uint32_t b) override {
+    if (!s_zed_on) return;               // V3.10.5: UART not started while the ZED has no power
     ZED.flush();
     ZED.updateBaudRate(b);
     while (ZED.available()) ZED.read();   // drop bytes received at the old speed
   }
-  void zed_write(const uint8_t* d, size_t n) override { ZED.write(d, n); }
+  void zed_write(const uint8_t* d, size_t n) override { if (s_zed_on) ZED.write(d, n); }
   bool radio_send(const uint8_t* mac, const uint8_t* d, size_t n) override {
     const uint8_t* to = mac ? mac : kBroadcast;
     xSemaphoreTake(s_sent, 0);
@@ -177,6 +183,7 @@ static void print_status() {
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
+  if (s_vext_pending) Serial.printf("  GPS: sin corriente, se enciende en %ld s\n", (long)((int32_t)(s_vext_at - millis()) / 1000) + 1);   // V3.10.5
   Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
                 s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
@@ -254,6 +261,17 @@ static void vext_on_soft() {
   digitalWrite(VEXT_PIN, LOW);           // fully on
 }
 
+// V3.10.5: ZED on: Vext with soft start, then the UART.
+static void zed_power_on() {
+  vext_on_soft();
+  ZED.setRxBufferSize(8192);
+  ZED.setTxBufferSize(4096);
+  ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
+  ZED.setRxTimeout(1);                   // hand each NAV-PVT over as soon as the line goes idle
+  s_zed_on = true;
+  Serial.println("[AVO ESPALDA] Vext encendido: el ZED tiene corriente");
+}
+
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 static void go_to_sleep(const char* why) {
   Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS sin corriente (Vext cortado), radio apagada.\n"
@@ -303,7 +321,8 @@ static void charge_mode(const char* why) {
   Serial.printf("\n[AVO ESPALDA] MODO CARGA (%s): GPS, radio y enlace apagados. Pulsa USER para volver a funcionar.\n", why);
   esp_now_deinit();
   WiFi.mode(WIFI_OFF);
-  ZED.end();
+  if (s_zed_on) { ZED.end(); s_zed_on = false; }
+  s_vext_pending = false;
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P without power
   setCpuFrequencyMhz(80);
   uint16_t peak = 0;
@@ -373,12 +392,13 @@ void setup() {
       go_to_sleep("capsula fuera del soporte al arrancar");
     }
   }
-  vext_on_soft();                        // V3.10.4: Vext on with soft start (ZED-F9P hangs from Vext since 3.10.3)
-  ZED.setRxBufferSize(8192);
-  ZED.setTxBufferSize(4096);
-  ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
-  ZED.setRxTimeout(1);                   // hand each NAV-PVT over as soon as the line goes idle
-  s_zed_on = true;
+  // V3.10.5: the ZED gets power (and its UART starts) VEXT_DELAY_MS later, from loop(); until then its pins stay
+  // as inputs so the unpowered ZED is not fed through its RX line.
+  pinMode(ZED_TX_PIN, INPUT);
+  pinMode(ZED_RX_PIN, INPUT);
+  s_vext_at = millis() + VEXT_DELAY_MS;
+  s_vext_pending = true;
+  Serial.printf("[AVO ESPALDA] el ZED se enciende dentro de %lu s (Vext apagado hasta entonces)\n", (unsigned long)(VEXT_DELAY_MS / 1000));
 
   s_rxq = xQueueCreate(48, sizeof(RxPkt));   // ~1 s of RTCM burst
   s_sent = xSemaphoreCreateBinary();
@@ -436,7 +456,8 @@ void loop() {
 
   uint8_t buf[512];
   int avail;
-  while ((avail = ZED.available()) > 0) {
+  if (s_vext_pending && (int32_t)(millis() - s_vext_at) >= 0) { s_vext_pending = false; zed_power_on(); }   // V3.10.5
+  while (s_zed_on && (avail = ZED.available()) > 0) {
     int n = ZED.readBytes(buf, avail > (int)sizeof(buf) ? (int)sizeof(buf) : avail);
     if (n <= 0) break;
     core->on_zed(buf, (size_t)n);

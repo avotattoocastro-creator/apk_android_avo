@@ -129,3 +129,11 @@ a imprimir nada). Causa: la 3.10.3 apaga Vext al arrancar y lo vuelve a encender
 - Vext se enciende ahora con PWM a 40 kHz cuyo tiempo encendido sube de 0,4 % a 100 % en ~200 ms; después queda en LOW fijo.
 - Se usa al arrancar y al despertar. El apagado (dormir, modo carga) no cambia.
 - **Sin verificar** en la espalda. Si aun así se reinicia al encender el ZED, volver el ZED al 3V3 y avisar.
+
+## V3.10.5 — prueba: el ZED se enciende 10 s después de arrancar (2026-10-28)
+Con la 3.10.3/3.10.4 y el VCC del ZED en Ve, la espalda no arrancaba si el ZED estaba conectado desde el principio; conectando
+el cable de Ve a mano con la placa ya en marcha, sí funcionaba. Para probarlo sin tocar cables:
+- al arrancar o despertar, Vext queda apagado y los pines del ZED como entradas durante **10 s** (`VEXT_DELAY_MS`);
+- después se enciende Vext con el arranque suave de la 3.10.4 y se abre el UART del ZED;
+- monitor: `el ZED se enciende dentro de 10 s`, la línea `GPS: sin corriente, se enciende en N s` y `Vext encendido: el ZED tiene corriente`.
+**Prueba**, no versión definitiva: si funciona, se ajusta el retardo (probablemente bastan 1–2 s).
