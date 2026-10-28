@@ -909,3 +909,7 @@ el ZED cargaba sus condensadores desde el 3V3 en marcha y el ESP32-S3 se quedaba
 Vext al arrancar y lo volvía a encender de golpe).
 **Archivos:** `AVO_BACK_V3_8_0.ino`, `avo_version.h`, `README.md`, `build-back-v380.yml`.
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO** en la espalda.
+**Prueba física parcial (28/10/2026 23:29, monitor del usuario):** BACK 3.10.4 en la Heltec ACA70406C0B4 con el ZED en Vext:
+arranca una sola vez (`rst:0x1 POWERON`, sin bucle), `INTERRUPTOR: reed CERRADO`, `AHORRO: CPU 160 MHz | LoRa dormida`,
+ZED encontrado a los ~16 s (230400, UART2, HPG 1.51, perfil COMPLETO, 8 Hz). Pecho sin respuesta en esa prueba (reloj
+apagado o lejos). Batería 3,60 V. Pendiente: dormir/despertar con el reed, 0 V en el ZED dormida, consumo dormida.
