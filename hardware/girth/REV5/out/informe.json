@@ -1,7 +1,7 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 13739.3,
+   "volumen_mm3": 13842.3,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -21,11 +21,11 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 12765.2,
+   "volumen_mm3": 12806.3,
    "valido": true,
    "solidos": 1,
    "caja": [
-    73.05,
+    75.0,
     51.05,
     7.28
    ]
@@ -61,13 +61,13 @@
    ]
   },
   "AVO_GIRTH_R5_cierre_x2": {
-   "volumen_mm3": 393.3,
+   "volumen_mm3": 630.1,
    "valido": true,
    "solidos": 1,
    "caja": [
-    8.22,
+    6.92,
     16.0,
-    8.2
+    13.2
    ]
   },
   "AVO_GIRTH_R5_pasador_x2": {
@@ -81,7 +81,9 @@
    ]
   }
  },
- "interferencias": {},
+ "interferencias": {
+  "cierre abierto 105° × cápsula/soporte": 34.415
+ },
  "medidas": {
   "soporte_mm": [
    105.64,
@@ -137,10 +139,19 @@
    -8.5
   ]
  },
- "barrido_cierre_grados_mm3": {
+ "clic_interferencia_grados_mm3": {
+  "1": 0.0,
+  "2": 0.0,
   "3": 0.0,
+  "4": 0.0,
+  "5": 0.0,
   "6": 0.0,
-  "10": 0.0,
+  "7": 0.0
+ },
+ "barrido_cierre_grados_mm3": {
+  "0": 0.0,
+  "8": 0.0,
+  "12": 0.0,
   "15": 0.0,
   "20": 0.0,
   "30": 0.0,
@@ -148,6 +159,6 @@
   "60": 0.0,
   "75": 0.0,
   "90": 0.0,
-  "105": 0.0
+  "105": 34.415
  }
 }
