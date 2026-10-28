@@ -889,7 +889,7 @@ esta versión recorta ~13–16 mA (≈ +6–8 %). Más ahorro exigiría apagar e
 batería (`BATERIA` del monitor, 3,83 V el 28/10) con un polímetro para validar el divisor ×4,9.
 
 ## 2026-10-28 — BACK 3.10.3 — encendido/apagado con el reed del soporte (sueño profundo)
-**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `0daa8ab` · **CI:** [40766920246](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40766920246) (éxito; artefacto `AVO-BACK-V3-10-3-HELTEC`)
 **Qué cambia:** el reed pasa de cortar la batería a ser una señal en GPIO7 (pull-up, a GND). Abierto 3 s → Vext cortado
 (el ZED-F9P se alimenta de Vext), pines del ZED en alta impedancia, radio apagada, pines fijados y sueño profundo; se
 despierta al cerrar el reed (ext0). Al arrancar con el reed abierto: 3 s para pulsar USER (modo taller) o se duerme.
@@ -898,5 +898,5 @@ Lógica en `lib/avo_core/src/avo_reed_gate.h` con 2 pruebas (37 casos en total).
 señal pasan microamperios. El usuario no quiere MOSFET y el botón KAN-9A no cabe sin rehacer la tapa.
 **Cableado nuevo:** ver `firmware/back/V3_8_0/README.md` (V3.10.3). El ZED debe pasar del 3V3 fijo a Vext.
 **No se ha tocado:** protocolo, emparejamiento, RTK, ahorro de la 3.10.2, modo carga, lectura de batería.
-**Validación:** IMPLEMENTADO · pruebas de ordenador correctas · CI pendiente · **NO VERIFICADO** en la espalda.
+**Validación:** IMPLEMENTADO · CI correcto (37 casos, compilación ESP32-S3, imagen con 3.10.3 e INTERRUPTOR) · **NO VERIFICADO** en la espalda.
 **Pendiente:** medir el consumo dormida (µA) y comprobar 0 V en el ZED con la cápsula fuera del soporte.
