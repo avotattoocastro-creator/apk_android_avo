@@ -81,9 +81,7 @@
    ]
   }
  },
- "interferencias": {
-  "cierre abierto 105° × cápsula/soporte": 36.232
- },
+ "interferencias": {},
  "medidas": {
   "soporte_mm": [
    105.64,
@@ -158,7 +156,6 @@
   "45": 0.0,
   "60": 0.0,
   "75": 0.0,
-  "90": 0.0,
-  "105": 36.232
+  "90": 0.0
  }
 }
