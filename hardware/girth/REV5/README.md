@@ -1,6 +1,8 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.2 (actual): soporte.**
+**REV 5.7.3 (actual):** alojamiento de los insertos M3 de la tapa a Ø4,1 (antes 4,0), según la prueba impresa. Solo cambia la tapa.
+
+**REV 5.7.2: soporte.**
 - **Tirador integrado:** el tirador ya no es una pieza aparte; forma un solo sólido con el soporte, unido a la pestaña elástica (viga + nervio).
   - El nervio llega a todo el largo del tirador y el vuelo exterior lleva chaflán de 45°: sin voladizo.
   - Ya no se genera `AVO_GIRTH_R5_tirador_rojo`.

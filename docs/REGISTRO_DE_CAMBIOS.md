@@ -716,6 +716,9 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.7.3 (insertos de la tapa)
+- Petición del usuario: el alojamiento de los insertos M3 de la tapa, 0,1 mm más grande. Pasa de Ø4,0 a Ø4,1 (5 mm de fondo, sin cambios). Solo cambia la tapa. CI sin interferencias.
+
 ## 2026-10-28 — Cincha REV 5.7.2 (soporte)
 - **Origen:** el usuario modificó el soporte en su CAD (Shapr3D) y pasó los STL solo como referencia. Por comparación de secciones, la única diferencia eran 2 alojamientos más para imanes del reed. En la base solo había un bloque suelto (12 × 5,5 × 3) fuera de la pieza, que no se incorpora.
 - **Soporte:**
