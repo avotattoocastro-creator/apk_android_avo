@@ -495,7 +495,7 @@ def main():
     ax = _latch_ax()
     fixed = parts[P + "base"].union(parts[P + "soporte"]).union(parts[P + "tapa"]).union(parts[P + "aro_rojo"])
     sweep = {}
-    for ang in (0, 8, 12, 15, 20, 30, 45, 60, 75, 90, 105):   # 1–7°: zona del clic (el gancho flexa a propósito)
+    for ang in (0, 8, 12, 15, 20, 30, 45, 60, 75, 90):   # 1–7°: zona del clic (flexa a propósito); a ~100° apoya en la placa (tope)
         lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
         try:
             v = lt.intersect(fixed).val().Volume()
