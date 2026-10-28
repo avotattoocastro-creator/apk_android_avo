@@ -870,7 +870,7 @@ Petición del usuario.
 - **Campo estimado en el BNO** (dipolo, polaridad alterna en diagonal): unos 35 µT de los 8 imanes de esquina; el imán de esquina más cercano al reed queda a 21,9 mm.
 
 ## 2026-10-28 — BACK 3.10.2 — ahorro de batería
-**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** `build-back-v380.yml` (ver ejecución del commit)
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `2970e16` · **CI:** [40721458125](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40721458125) (éxito; artefacto `AVO-BACK-V3-10-2-HELTEC`)
 **Qué cambia:**
 - CPU de 240 a 160 MHz.
 - La radio LoRa SX1262 (sin uso) se pone en sueño profundo al arrancar; antes se quedaba en espera (~0,6 mA).
@@ -884,6 +884,6 @@ esta versión recorta ~13–16 mA (≈ +6–8 %). Más ahorro exigiría apagar e
 `lib/avo_core/src/avo_core.h`, `lib/avo_core/src/avo_version.h`, `test/test_espnow.cpp`, `README.md`,
 `.github/workflows/build-back-v380.yml`.
 **No se ha tocado:** protocolo con el pecho y la cincha, emparejamiento, RTK/ritmo GNSS, modo carga, lectura de batería.
-**Validación:** IMPLEMENTADO · pruebas de ordenador correctas (35 casos) · CI pendiente · **NO VERIFICADO** en la espalda.
+**Validación:** IMPLEMENTADO · CI correcto (35 casos, compilación ESP32-S3, imagen con versión 3.10.2 y línea AHORRO) · **NO VERIFICADO** en la espalda.
 **Pendiente:** medir la duración real (carga completa → apagado) y la corriente con polímetro; comparar la lectura de la
 batería (`BATERIA` del monitor, 3,83 V el 28/10) con un polímetro para validar el divisor ×4,9.
