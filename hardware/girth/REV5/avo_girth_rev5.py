@@ -81,7 +81,10 @@ BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_Z0 = TRAY_TOP + 1.0 - BNO["t"]   # REV 5.7: cara superior del BNO a ras de la del C6 (puentes por arriba, al mismo nivel)
 BNO_HOLES = [(BX0 + BNO["hole_x"], BY0 + BNO["hole_y"]), (BX0 + BNO["hole_x"], BY1 - BNO["hole_y"])]
 REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
-MAG = dict(d=5.0, t=1.0, n=1)                     # imán del reed (en el soporte): 1 × Ø5 × 1, mínimo campo en el BNO
+MAG = dict(d=5.0, t=1.0, n=1)                     # imanes del reed (en el soporte): Ø5 × 1
+# REV 5.7.2 (modificación del usuario en su CAD): 3 imanes del reed en fila bajo el reed, a −5,1 / 0 / +5,1 en X;
+# los laterales en alojamientos de 1,2 mm de fondo, el central de 1,05.
+REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]
 
 RING_T = 1.0
 GROOVE = dict(z0=3.0, z1=4.6, depth=1.0)
@@ -297,7 +300,8 @@ def mount():
     p = p.union(hook)
     p = p.union(box(bx0 + BEAM["t"] + 0.5, BEAM["y_free"] - TAB["len"] / 2, -MT, 1.0, TAB["len"] - 4.0, RH - 2.0 + 1.6 + MT))
     rx, ry = REED["center"]
-    p = p.cut(cyl(rx, ry, -MAG["t"] * MAG["n"] - 0.05, MAG["d"] + 0.15, 2))
+    for (dx, depth) in REED_MAGS:
+        p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["t"] - 0.05, HMAG["d"] + 0.15, 2))
     return p
@@ -345,7 +349,9 @@ def components():
         "BNO085": bno,
         "reed": box(rx, ry, REED["z0"] + 0.1, REED["l"], REED["d"], REED["d"]),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
-        "imanes": cyl(rx, ry, -MAG["t"] * MAG["n"] - 0.02, MAG["d"], MAG["t"] * MAG["n"]),
+        "imanes": cyl(rx + REED_MAGS[0][0], ry, -REED_MAGS[0][1] + 0.03, MAG["d"], MAG["t"]).union(
+            cyl(rx + REED_MAGS[1][0], ry, -REED_MAGS[1][1] + 0.03, MAG["d"], MAG["t"])).union(
+            cyl(rx + REED_MAGS[2][0], ry, -REED_MAGS[2][1] + 0.03, MAG["d"], MAG["t"])),
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
