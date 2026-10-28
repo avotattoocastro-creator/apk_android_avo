@@ -1,6 +1,27 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.6 (actual):**
+**REV 5.8 (actual): cierres de palanca con clic.**
+- **Sujeción nueva:** el labio −X y la pestaña elástica +X del soporte se sustituyen por un **cierre de palanca en cada extremo**. Los imanes 2 + 2 siguen centrando la cápsula.
+- **Bisagra:** dos orejas en el soporte (Ø2,3) y un **pasador impreso** de Ø2,1 con cabeza, que se imprime tumbado sobre su plano.
+  - El cierre gira con roce sobre el pasador (agujero Ø2,15).
+  - Se imprime de canto, con el agujero vertical.
+- **Clic:** un nervio en cada extremo de la **tapa**, a ras de su cara superior (se imprime apoyado en la cama, sin soportes).
+  - El cierre lo abraza: por arriba sujeta la cápsula; por abajo, un labio de 1 mm queda bajo una cara inclinada 20° (arpón).
+  - Para abrir o cerrar, el cierre (de 2,2 mm) flexa unos 0,8 mm (estimado).
+  - Comprobado girándolo en el CAD: choca a propósito entre 1° y 5° (el clic) y gira libre de 6° a 60°. Hacia 75° el tirador apoya en la placa, que hace de tope.
+  - Arriba lleva un tirador de 3 mm para soltarlo.
+- **Posición única:** la base lleva un taco abajo en cada extremo, de 10 mm (+X) y de 5 mm (−X), que encaja en una muesca del mismo ancho del cerco.
+- **Medidas:** el soporte pasa a 105,7 mm de largo, porque los pasos de cinta se separan para las bisagras.
+- **Piezas:**
+  - nuevas: `cierre_x2` y `pasador_x2` (imprimir 2 de cada);
+  - cambian la base, la tapa y el soporte;
+  - la bandeja no cambia.
+- **CI:** 1 sólido por pieza, sin interferencias en posición cerrada.
+- **Voladizos:** solo los techos de los agujeros de las orejas.
+- Renders: `renders/cierres.png`, `renders/cierre_abierto.png` y `renders/cierre_corte.png`.
+- **Pendiente:** ajustar la fuerza del clic en la prueba impresa.
+
+**REV 5.7.6:**
 - Los 4 alojamientos de imanes del soporte pasan a **2 imanes Ø5 × 1 apilados** (2,05 mm de fondo). Solo cambia el soporte.
 - Combinación recomendada: 2 + 2. Según un modelo magnético simple, sujeta unas 2 veces más que 1 + 1 y más que 3 + 1 (≈1,6).
 - Los imanes del soporte entran por arriba: hay que llenar siempre el alojamiento.

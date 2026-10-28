@@ -716,6 +716,25 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.8 (cierres de palanca con clic)
+- **Petición del usuario** (con fotos de una caja de referencia de Printables):
+  - un cierre en cada extremo, con bisagra y pasador impreso;
+  - clic fuerte que no se suelte;
+  - anclaje a ras de la cara superior de la tapa, sin soportes;
+  - tirador para soltar;
+  - llaves de distinto ancho para que la cápsula entre siempre en la misma posición;
+  - quitar el labio y la pestaña, manteniendo los imanes.
+- **Desarrollo:** en la rama `feature/girth-rev5-8-cierres`, con 4 rondas de imágenes. El usuario la aprobó y se fusionó a mano.
+- **Piezas:**
+  - **soporte:** orejas de bisagra en ±X, cerco completo con muescas de 10/5 mm, pasos de cinta separados (ledge 5,6), 105,7 mm de largo;
+  - **base:** tacos de posición; sin las ranuras antiguas;
+  - **tapa:** nervios del clic a ras de la cara superior;
+  - **nuevas:** `cierre_x2` y `pasador_x2`.
+- **Comprobaciones en el CI:**
+  - 1 sólido por pieza y sin interferencias en posición cerrada;
+  - barrido de apertura del cierre: libre de 6° a 60°; clic entre 1° y 5° (choque intencionado, informativo en `informe.json`).
+- **Pendiente:** fuerza real del clic y del roce del pasador, en la prueba impresa.
+
 ## 2026-10-28 — Cincha REV 5.7.6 (imanes del soporte)
 - A petición del usuario, los alojamientos de los imanes de sujeción del soporte pasan a 2 imanes apilados (2,05 mm de fondo; antes 1,05).
 - Motivo: con 4 imanes por esquina en total, el reparto 2 + 2 sujeta más que 1 + 3 (estimación con un modelo de discos cargados a 0,35 mm de separación: 2 + 2 ≈ 2,0×, 1 + 3 ≈ 1,6×, respecto a 1 + 1). No se ha medido en físico.
