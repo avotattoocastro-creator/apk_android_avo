@@ -307,6 +307,20 @@ def mount():
     return p
 
 
+def tab_body():
+    """REV 5.7.2: tirador macizo, unido a la pestaña elástica (viga + nervio) del soporte: una sola pieza."""
+    il = _mount_geom()[0]
+    bx0 = il / 2
+    y0, y1 = BEAM["y_free"] - TAB["len"], BEAM["y_free"]
+    t = box(bx0 + 0.1 + (BEAM["t"] + TAB["out"] - 0.1) / 2, (y0 + y1) / 2, 1.4,
+            BEAM["t"] + TAB["out"] - 0.1, y1 - y0, RH + TAB["up"] - 1.4)
+    return t.edges("|Y").fillet(0.7)
+
+
+def mount_with_tab():
+    return mount().union(tab_body())
+
+
 def tab():
     il = _mount_geom()[0]
     bx0 = il / 2
@@ -367,8 +381,7 @@ def main():
         P + "tapa": pod_lid(),
         P + "bandeja": tray(),
         P + "junta_TPU": gasket(free=False),
-        P + "soporte": mount(),
-        P + "tirador_rojo": tab(),
+        P + "soporte": mount_with_tab(),          # REV 5.7.2: con el tirador integrado (una sola pieza)
     }
     comps = components()
     report = {"piezas": {}, "interferencias": {}, "medidas": {}}
