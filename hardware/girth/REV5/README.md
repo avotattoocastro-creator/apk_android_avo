@@ -1,6 +1,13 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.1 (actual): corrección con la prueba impresa de la REV 5.7.**
+**REV 5.7.2 (actual): soporte.**
+- **Tirador integrado:** el tirador ya no es una pieza aparte; forma un solo sólido con el soporte, unido a la pestaña elástica (viga + nervio).
+  - El nervio llega a todo el largo del tirador y el vuelo exterior lleva chaflán de 45°: sin voladizo.
+  - Ya no se genera `AVO_GIRTH_R5_tirador_rojo`.
+- **3 imanes del reed:** en fila bajo el reed, a −5,1 / 0 / +5,1 mm en X (modificación del usuario en su CAD, pasada aquí). Los laterales van en alojamientos de 1,2 mm de fondo; el central, de 1,05.
+- **CI:** 1 sólido por pieza, interferencias: ninguna.
+
+**REV 5.7.1: corrección con la prueba impresa de la REV 5.7.**
 - La foto del BNO montado mostraba sus pines desplazados ~1,1 mm hacia el USB respecto a los pads D0–D6.
   - **Causa:** la fila de pines está centrada en la placa (~1,2 mm a cada extremo); se había estimado desplazada 1,0 hacia VCC.
   - **Corrección:** BNO_PIN_OFF = 0,0; el BNO y su hueco bajan 1,0 mm hacia la antena. Los pines vuelven a quedar a la misma Y que D0–D6.

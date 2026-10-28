@@ -716,6 +716,15 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.7.2 (soporte)
+- **Origen:** el usuario modificó el soporte en su CAD (Shapr3D) y pasó los STL solo como referencia. Por comparación de secciones, la única diferencia eran 2 alojamientos más para imanes del reed. En la base solo había un bloque suelto (12 × 5,5 × 3) fuera de la pieza, que no se incorpora.
+- **Soporte:**
+  - 3 imanes del reed en fila a −5,1 / 0 / +5,1 mm (los laterales con 1,2 mm de fondo);
+  - **tirador integrado** en un solo sólido con el soporte, a petición del usuario. Nervio de la pestaña a todo el largo del tirador y chaflán de 45° en el vuelo exterior, sin voladizo.
+  - Se deja de exportar `tirador_rojo`.
+- **CI:** 1 sólido por pieza, sin interferencias. Voladizos del soporte: solo las caras de bloqueo del labio/diente, como antes.
+- **Pendiente:** comprobar en físico que los 3 imanes activan el reed y el campo que dejan en el BNO (fijo; calibrar con la cápsula montada).
+
 ## 2026-10-28 — Cincha: diagnóstico 0.2.2 → 0.2.4-diag y resultado con el BNO085 real
 - **0.2.2:** cortos medidos con el BNO en reset; sonda I²C por software tolerante al estiramiento de reloj; SPI sin depender de INT.
 - **0.2.3:** etiqueta correcta del resultado de la sonda (−1/0/1).
