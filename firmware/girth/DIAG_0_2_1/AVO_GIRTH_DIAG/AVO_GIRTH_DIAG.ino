@@ -22,7 +22,7 @@
 #include <Wire.h>
 #include <SPI.h>
 
-#define DIAG_VERSION "0.2.1-diag"
+#define DIAG_VERSION "0.2.2-diag"
 // Marca de identidad que lee AVO Update (versión seguida de "AVO-GIRTH"): solo se instala en la cincha ESP32-C6.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" DIAG_VERSION "\0AVO-GIRTH";
 
@@ -71,18 +71,20 @@ static void testLevels() {
 }
 
 static void testShorts() {
-  Serial.println("[DIAG] 2) Cortocircuitos entre líneas (INT nunca se fuerza):");
+  Serial.println("[DIAG] 2) Cortocircuitos entre líneas (con el BNO en reset; INT y RST no se fuerzan):");
   shorts = 0;
+  pinMode(L[RST].gpio, OUTPUT); digitalWrite(L[RST].gpio, LOW);   // BNO en reset: sus pines no reaccionan al bus
+  delay(5);
   for (int i = 0; i < N; i++) {
-    if (!L[i].driveable) continue;
+    if (!L[i].driveable || i == RST) continue;
     for (int lvl = 0; lvl <= 1; lvl++) {
       for (int j = 0; j < N; j++)
-        if (j != i) pinMode(L[j].gpio, lvl == 0 ? INPUT_PULLUP : INPUT_PULLDOWN);
+        if (j != i && j != RST) pinMode(L[j].gpio, lvl == 0 ? INPUT_PULLUP : INPUT_PULLDOWN);
       pinMode(L[i].gpio, OUTPUT);
       digitalWrite(L[i].gpio, lvl);
       delayMicroseconds(800);
       for (int j = 0; j < N; j++) {
-        if (j == i) continue;
+        if (j == i || j == RST) continue;
         int r = digitalRead(L[j].gpio);
         int base = lvl == 0 ? puLevel[j] : pdLevel[j];
         if (r == lvl && base != lvl) {
@@ -145,8 +147,46 @@ static int scan(int sda, int scl, uint32_t hz, bool quiet = false) {
   return found ? first : -1;
 }
 
+// I2C por software (bit-bang, drenador abierto) que respeta el estiramiento de reloj hasta 500 ms:
+// independiente del controlador I2C del C6. Devuelve 1 si la dirección responde ACK, 0 si NACK, -1 si SCL se queda baja.
+static int sdaP, sclP;
+static inline void sdaHi() { pinMode(sdaP, INPUT_PULLUP); }
+static inline void sdaLo() { pinMode(sdaP, OUTPUT); digitalWrite(sdaP, LOW); }
+static inline void sclLo() { pinMode(sclP, OUTPUT); digitalWrite(sclP, LOW); }
+static bool sclHi() {   // suelta SCL y espera a que suba (el esclavo puede retenerla)
+  pinMode(sclP, INPUT_PULLUP);
+  uint32_t t0 = millis();
+  while (digitalRead(sclP) == LOW) { if (millis() - t0 > 500) return false; delayMicroseconds(5); }
+  delayMicroseconds(5);
+  return true;
+}
+static int swProbe(int sda, int scl, uint8_t addr) {
+  sdaP = sda; sclP = scl;
+  sdaHi(); if (!sclHi()) return -1;
+  delayMicroseconds(5);
+  sdaLo(); delayMicroseconds(5); sclLo(); delayMicroseconds(5);           // START
+  uint8_t b = (addr << 1) | 1;                                            // lectura
+  for (int i = 7; i >= 0; i--) {
+    if (b & (1 << i)) sdaHi(); else sdaLo();
+    delayMicroseconds(5);
+    if (!sclHi()) return -1;
+    sclLo(); delayMicroseconds(5);
+  }
+  sdaHi(); delayMicroseconds(5);
+  if (!sclHi()) return -1;
+  int ack = digitalRead(sdaP) == LOW;
+  sclLo(); delayMicroseconds(5);
+  if (ack) {   // lee 1 byte con NACK para cerrar limpio
+    for (int i = 0; i < 8; i++) { if (!sclHi()) return -1; sclLo(); delayMicroseconds(5); }
+    sdaHi(); delayMicroseconds(5); if (!sclHi()) return -1; sclLo(); delayMicroseconds(5);
+  }
+  sdaLo(); delayMicroseconds(5); sclHi(); delayMicroseconds(5); sdaHi();  // STOP
+  return ack;
+}
+
 static bool trySpi() {
   int ms = bootBno(HIGH);
+  delay(300);
   SPI.begin(L[SCL_].gpio /*SCK*/, L[SDA_].gpio /*MISO*/, L[ADD].gpio /*MOSI*/, L[CS].gpio /*CS*/);
   pinMode(L[CS].gpio, OUTPUT);
   digitalWrite(L[CS].gpio, HIGH);
@@ -180,6 +220,12 @@ static void runDiag() {
   int a100 = scan(L[SDA_].gpio, L[SCL_].gpio, 100000);
   int a400 = scan(L[SDA_].gpio, L[SCL_].gpio, 400000);
   int aSwap = scan(L[SCL_].gpio, L[SDA_].gpio, 100000);   // SDA y SCL intercambiados
+  Wire.end();
+  int sw4a = swProbe(L[SDA_].gpio, L[SCL_].gpio, 0x4A);
+  int sw4b = swProbe(L[SDA_].gpio, L[SCL_].gpio, 0x4B);
+  releaseAll();
+  const char* txt[] = {"NACK", "ACK ✔", "SCL retenida >0,5 s"};
+  Serial.printf("    I2C por software (tolera estiramiento de reloj): 0x4A → %s · 0x4B → %s\n", txt[sw4a + 1], txt[sw4b + 1]);
   bool spiOk = false;
   if (a100 < 0 && a400 < 0) {
     Serial.println("[DIAG] 5) Prueba por SPI (el I2C no responde):");
@@ -196,6 +242,11 @@ static void runDiag() {
   Serial.println("[DIAG] 7) RESUMEN:");
   int addr = a100 >= 0 ? a100 : a400;
   if (addr == 0x4A) Serial.println("    BNO085 OK por I2C en 0x4A: el montaje está bien; el fallo estaría en el firmware.");
+  else if (sw4a == 1 || sw4b == 1)
+    Serial.printf("    El BNO responde ACK en 0x%02X por I2C software pero NO con el I2C del C6: el montaje está bien; es el controlador I2C "
+                  "del ESP32 (estiramiento de reloj). Solución en firmware: SPI o I2C por software.\n", sw4a == 1 ? 0x4A : 0x4B);
+  else if (sw4a == -1 || sw4b == -1)
+    Serial.println("    El BNO retiene SCL más de 0,5 s: está vivo pero bloqueado (revisa INT–D2 y PS0 puenteado a PS1).");
   else if (addr == 0x4B) Serial.println("    El BNO responde en 0x4B, no en 0x4A: el puente ADD–D4 no conecta (ADD queda en HIGH).");
   else if (addr >= 0) Serial.printf("    Responde algo en 0x%02X pero no el BNO: revisa los puentes SDA/SCL.\n", addr);
   else if (aSwap >= 0) Serial.println("    Responde con SDA y SCL intercambiados: los puentes de SDA y SCL están cruzados.");
