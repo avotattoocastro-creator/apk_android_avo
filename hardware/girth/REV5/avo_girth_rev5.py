@@ -102,12 +102,12 @@ STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
 #    dentro (autobloqueo); para abrir se tira de la parte de arriba hacia fuera.
-LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.6, hook_z0=10.3, lip=0.5,
+LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.8, hook_z0=10.2, lip=0.2,
              hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2)
 # REV 5.8: «clic» como en la caja de referencia: un nervio semicilíndrico en cada extremo de la TAPA (z 12, r 1,0) y
 # una muesca en el gancho del cierre que lo abraza. El labio del gancho pasa 0,5 por debajo del nervio: para cerrar o
 # abrir el cierre flexa (≈1,8 % de deformación con PETG) y hace clic; cerrado no se suelta solo.
-RIB = dict(z=12.0, r=1.0, w=16.0)
+RIB = dict(z0=11.0, out=1.0, front=1.0, w=16.0)     # nervio: cara inferior plana (el labio del cierre engancha debajo), frente vertical, techo a 45°
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
 
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
@@ -285,14 +285,14 @@ def _latch_ax():
 
 
 def _rib_profile(grow=0.0):
-    """Nervio del clic en el extremo +X de la tapa: mitad inferior redonda (r) y techo a 45° (sin voladizo con la tapa boca abajo)."""
-    r, zc, w = RIB["r"] + grow, RIB["z"], RIB["w"] + 2 * grow
-    x0 = L / 2 - 0.1
-    half = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(L / 2, zc).circle(r).extrude(w)
-            .intersect(box(L / 2 + r / 2, 0, zc - r - 1, r + 2, w + 2, r + 1)))
-    tri = (cq.Workplane("XZ", origin=(0, w / 2, 0))
-           .polyline([(x0, zc), (L / 2 + r, zc), (x0, zc + (L / 2 + r - x0))]).close().extrude(w))
-    return half.union(tri).intersect(box(L / 2 - 0.1 + 5, 0, zc - r - 2, 10.0, w + 2, 2 * r + 4))   # solapa 0,1 con la pared
+    """Nervio del clic en el extremo +X de la tapa (REV 5.8). Perfil XZ: cara inferior plana a z0 (el labio del cierre
+    queda debajo y hay que flexar el cierre para sacarlo: clic), frente vertical con chaflán abajo, techo a 45°
+    (sin voladizo con la tapa boca abajo). grow = holgura para recortar la muesca del cierre."""
+    z0, out, fr, w = RIB["z0"] - grow, RIB["out"] + grow, RIB["front"] + 2 * grow, RIB["w"] + 2 * grow
+    x0, xf = L / 2 - 0.1, L / 2 + out
+    ch = 0.3
+    pts = [(x0, z0), (xf - ch, z0), (xf, z0 + ch), (xf, z0 + fr), (x0, z0 + fr + (xf - x0))]
+    return cq.Workplane("XZ", origin=(0, w / 2, 0)).polyline(pts).close().extrude(w)
 
 
 def latch(sx=1):
