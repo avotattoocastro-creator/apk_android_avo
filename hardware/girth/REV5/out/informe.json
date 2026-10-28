@@ -51,23 +51,13 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 27719.4,
+   "volumen_mm3": 27808.1,
    "valido": true,
    "solidos": 1,
    "caja": [
     97.46,
     61.46,
-    9.06
-   ]
-  },
-  "AVO_GIRTH_R5_tirador_rojo": {
-   "volumen_mm3": 85.8,
-   "valido": true,
-   "solidos": 1,
-   "caja": [
-    3.3,
-    10.0,
-    4.65
+    10.66
    ]
   }
  },
