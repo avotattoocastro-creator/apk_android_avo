@@ -929,3 +929,11 @@ con la placa en marcha funcionaba (monitor 23:29 con la 3.10.4).
 línea). La 3.10.5 (ZED a los 10 s) no cambió el bucle `POWERON` con el ZED en Ve: el reinicio ocurre en el cargador de
 arranque (`entry 0x403c9880`), antes del firmware → causa de hardware; propuesto condensador de 470–1000 µF entre 3V3 y GND.
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO**.
+
+## 2026-10-29 — BACK 3.10.7 — ZED en reposo por software (UBX-RXM-PMREQ + EXTINT)
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia:** antes del sueño profundo, `UBX-RXM-PMREQ` (backup indefinido, force, despertar por EXTINT0); EXTINT del
+ZED (pin INT de la URTK1.2) en GPIO6, HIGH fijado al dormir; pulso LOW de 20 ms al encender el ZED.
+**Por qué:** el ZED en Vext provoca reinicios en el cargador de arranque (hardware) y el usuario no quiere añadir piezas.
+Con el ZED en 3V3 la Heltec dormía pero el ZED seguía encendido (~70–85 mA, LEDs encendidos).
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** (consumo del ZED en reposo sin dato en el data sheet).

@@ -144,3 +144,14 @@ el cable de Ve a mano con la placa ya en marcha, sí funcionaba. Para probarlo s
 - Retardo de encendido del ZED: 1 s (la prueba de 10 s de la 3.10.5 no cambió el bucle de arranque con el ZED en Vext,
   que se produce en el cargador de arranque, antes del firmware: es de hardware; arreglo propuesto, 470–1000 µF entre 3V3 y GND).
 - Con el ZED en 3V3 la espalda duerme pero el ZED sigue encendido (~70 mA): la batería no dura dormida.
+
+## V3.10.7 — ZED en reposo por software (2026-10-29)
+Con el ZED en Vext la placa entra en bucle `POWERON` al arrancar (hardware, en el cargador de arranque). Sin piezas nuevas:
+- **Cableado:** VCC del ZED otra vez en **3V3**; **INT** de la placa URTK1.2 (EXTINT del ZED) → **GPIO6** de la Heltec.
+- Antes de dormir la Heltec manda `UBX-RXM-PMREQ` (duración 0 = hasta despertar, flags backup + force, despertar por
+  EXTINT0). GPIO6 queda en HIGH fijado durante el sueño. Al arrancar o despertar, pulso LOW de 20 ms en GPIO6 → el ZED
+  sale del reposo (conserva efemérides: arranque en caliente).
+- Si el VCC del ZED va en Ve, se sigue cortando Vext como en la 3.10.4–3.10.6.
+- Consumo del ZED en este reposo: el data sheet no lo da → medir. El LED PWR de la placa URTK1.2 sigue encendido
+  (va directo al 3V3): para el mínimo consumo, quitar ese LED o su resistencia.
+- **Sin INT conectado el ZED no se despierta** hasta quitar y volver a poner la batería.
