@@ -1,11 +1,11 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 13842.3,
+   "volumen_mm3": 13987.4,
    "valido": true,
    "solidos": 1,
    "caja": [
-    73.02,
+    77.8,
     51.02,
     9.01
    ]
@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 30375.6,
+   "volumen_mm3": 30197.1,
    "valido": true,
    "solidos": 1,
    "caja": [
