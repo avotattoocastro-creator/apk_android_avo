@@ -22,7 +22,7 @@
 #include <Wire.h>
 #include <SPI.h>
 
-#define DIAG_VERSION "0.2.2-diag"
+#define DIAG_VERSION "0.2.3-diag"
 // Marca de identidad que lee AVO Update (versión seguida de "AVO-GIRTH"): solo se instala en la cincha ESP32-C6.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" DIAG_VERSION "\0AVO-GIRTH";
 
@@ -224,7 +224,7 @@ static void runDiag() {
   int sw4a = swProbe(L[SDA_].gpio, L[SCL_].gpio, 0x4A);
   int sw4b = swProbe(L[SDA_].gpio, L[SCL_].gpio, 0x4B);
   releaseAll();
-  const char* txt[] = {"NACK", "ACK ✔", "SCL retenida >0,5 s"};
+  const char* txt[] = {"SCL retenida >0,5 s", "NACK", "ACK ✔"};   // índice = resultado + 1 (−1, 0, 1)
   Serial.printf("    I2C por software (tolera estiramiento de reloj): 0x4A → %s · 0x4B → %s\n", txt[sw4a + 1], txt[sw4b + 1]);
   bool spiOk = false;
   if (a100 < 0 && a400 < 0) {
