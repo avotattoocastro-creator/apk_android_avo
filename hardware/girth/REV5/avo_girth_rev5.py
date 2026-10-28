@@ -102,7 +102,7 @@ STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
 #    dentro (autobloqueo); para abrir se tira de la parte de arriba hacia fuera.
-LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.8, hook_z0=10.2, lip=0.2,
+LATCH = dict(w=16.0, t=2.2, az=2.6, barrel=4.4, engage=1.0, lip_t=0.8, cap=1.4, clear=0.12,
              hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2)
 # REV 5.8: «clic» como en la caja de referencia: un nervio semicilíndrico en cada extremo de la TAPA (z 12, r 1,0) y
 # una muesca en el gancho del cierre que lo abraza. El labio del gancho pasa 0,5 por debajo del nervio: para cerrar o
@@ -111,7 +111,10 @@ LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.8, hook_z0=10.2, lip=0.2,
 # una muesca del cerco del soporte: la cápsula solo entra en una orientación.
 KEYS = {1: 10.0, -1: 5.0}          # ancho (Y) del taco en +X y en −X
 KEY = dict(out=2.4, z1=4.0, clear=0.2)
-RIB = dict(z0=11.0, out=1.0, front=1.0, w=16.0)     # nervio: cara inferior plana (el labio del cierre engancha debajo), frente vertical, techo a 45°
+# REV 5.8 (2.ª ronda): nervio a ras de la cara superior de la tapa (se imprime apoyado en la cama, sin soportes).
+# Cara inferior inclinada 20° hacia fuera (gancho de arpón): al abrir, el labio del cierre sube y sale a la vez y tiene
+# que flexar ≈0,8 mm → clic fuerte. Arriba, el cierre abraza el nervio por encima: sujeta la cápsula hacia abajo.
+RIB = dict(out=1.6, z_wall=13.0, z_front=12.4, w=16.0, lead=0.3)
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
 
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
@@ -291,25 +294,28 @@ def _latch_ax():
 
 
 def _rib_profile(grow=0.0):
-    """Nervio del clic en el extremo +X de la tapa (REV 5.8). Perfil XZ: cara inferior plana a z0 (el labio del cierre
-    queda debajo y hay que flexar el cierre para sacarlo: clic), frente vertical con chaflán abajo, techo a 45°
-    (sin voladizo con la tapa boca abajo). grow = holgura para recortar la muesca del cierre."""
-    z0, out, fr, w = RIB["z0"] - grow, RIB["out"] + grow, RIB["front"] + 2 * grow, RIB["w"] + 2 * grow
-    x0, xf = L / 2 - 0.1, L / 2 + out
-    ch = 0.3
-    pts = [(x0, z0), (xf - ch, z0), (xf, z0 + ch), (xf, z0 + fr), (x0, z0 + fr + (xf - x0))]
+    """Nervio del clic en el extremo +X de la tapa (REV 5.8): de la cara superior (z = H) hacia abajo, cara inferior
+    inclinada (más baja por fuera), frente vertical con un pequeño chaflán de entrada abajo. grow = holgura de la muesca."""
+    x0, xf = L / 2 - 0.1, L / 2 + RIB["out"] + grow
+    zw, zf, zt, ld = RIB["z_wall"] - grow, RIB["z_front"] - grow, H + grow, RIB["lead"]
+    w = RIB["w"] + 2 * grow
+    pts = [(x0, zw), (xf - ld, zf + ld * (zw - zf) / (xf - x0)), (xf, zf + ld), (xf, zt), (x0, zt)]
     return cq.Workplane("XZ", origin=(0, w / 2, 0)).polyline(pts).close().extrude(w)
 
 
 def latch(sx=1):
-    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), en posición cerrada (gancho abrazando el nervio de la tapa)."""
+    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), cerrado: muesca que abraza el nervio de la tapa, con el
+    labio debajo (clic) y la tapa del gancho por encima (sujeta la cápsula)."""
     ax, az, w, t = _latch_ax(), LATCH["az"], LATCH["w"], LATCH["t"]
-    xi, xo = ax - t / 2, ax + t / 2
+    xo = ax + t / 2
+    cl = LATCH["clear"]
+    lip_x = L / 2 + RIB["out"] - LATCH["engage"]
+    z_low = RIB["z_front"] - cl - LATCH["lip_t"]
+    top = H + cl + LATCH["cap"]
     c = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(ax, az).circle(LATCH["barrel"] / 2).extrude(w))
-    c = c.union(box(ax, 0, az, t, w, LATCH["top"] - az))
-    lip_x = L / 2 + LATCH["lip"]
-    c = c.union(box((lip_x + xo) / 2, 0, LATCH["hook_z0"], xo - lip_x, w, LATCH["top"] - LATCH["hook_z0"]))
-    c = c.cut(_rib_profile(grow=0.1))                                  # muesca que abraza el nervio
+    c = c.union(box(ax, 0, az, t, w, top - az))
+    c = c.union(box((lip_x + xo) / 2, 0, z_low, xo - lip_x, w, top - z_low))
+    c = c.cut(_rib_profile(grow=cl))                                   # muesca que abraza el nervio
     c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
     c = c.edges("|Y and >Z").fillet(0.6)
     return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
@@ -503,7 +509,7 @@ def main():
     ax = _latch_ax()
     fixed = parts[P + "base"].union(parts[P + "soporte"]).union(parts[P + "tapa"]).union(parts[P + "aro_rojo"])
     sweep = {}
-    for ang in (0, 8, 12, 15, 20, 30, 45, 60, 75, 90):   # 1–7°: zona del clic (flexa a propósito); a ~100° apoya en la placa (tope)
+    for ang in (0, 12, 15, 20, 30, 45, 60, 75, 90):   # 1–11°: zona del clic (flexa a propósito); a ~100° apoya en la placa (tope)
         lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
         try:
             v = lt.intersect(fixed).val().Volume()
@@ -514,7 +520,7 @@ def main():
             report["interferencias"][f"cierre abierto {ang}° × cápsula/soporte"] = round(v, 3)
     # interferencia máxima en la zona del clic (informativa): cuánto tiene que flexar el gancho
     clic = {}
-    for ang in (1, 2, 3, 4, 5, 6, 7):
+    for ang in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11):
         lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
         try:
             clic[ang] = round(lt.intersect(fixed).val().Volume(), 2)
