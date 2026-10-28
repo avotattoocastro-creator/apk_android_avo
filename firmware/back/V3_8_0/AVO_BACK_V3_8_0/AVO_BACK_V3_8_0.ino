@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.3 (ESP-NOW) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.4 (ESP-NOW) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -236,6 +236,24 @@ static bool lora_sleep() {
   return digitalRead(LORA_BUSY) == HIGH;   // in sleep BUSY stays high
 }
 
+// V3.10.4: SOFT START of Vext. Switching the ZED-F9P (input capacitors + active antenna) onto the live 3V3 rail in one
+// go pulls the rail down and the ESP32-S3 restarts (rst:0x1 POWERON, loop seen on 28/10 with the ZED moved to Vext).
+// The Vext P-MOSFET (GPIO36, LOW = on) is driven with a 40 kHz PWM whose on-time grows from 0.4 % to 100 % in ~250 ms,
+// so the capacitors charge in small steps; then the pin is left LOW as before.
+static void vext_on_soft() {
+  pinMode(VEXT_PIN, OUTPUT);
+  digitalWrite(VEXT_PIN, HIGH);
+  if (ledcAttach(VEXT_PIN, 40000, 8)) {
+    for (int on = 1; on <= 255; on++) {  // duty = time HIGH (off); on-time grows step by step
+      ledcWrite(VEXT_PIN, 256 - on);
+      delayMicroseconds(on < 32 ? 2000 : 600);
+    }
+    ledcDetach(VEXT_PIN);
+  }
+  pinMode(VEXT_PIN, OUTPUT);
+  digitalWrite(VEXT_PIN, LOW);           // fully on
+}
+
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 static void go_to_sleep(const char* why) {
   Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS sin corriente (Vext cortado), radio apagada.\n"
@@ -355,7 +373,7 @@ void setup() {
       go_to_sleep("capsula fuera del soporte al arrancar");
     }
   }
-  digitalWrite(VEXT_PIN, LOW);           // Vext on: ZED-F9P powered (it must hang from Vext since 3.10.3)
+  vext_on_soft();                        // V3.10.4: Vext on with soft start (ZED-F9P hangs from Vext since 3.10.3)
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);

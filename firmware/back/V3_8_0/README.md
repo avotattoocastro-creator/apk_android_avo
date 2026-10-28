@@ -121,3 +121,11 @@ Consumo dormida estimado (sin medir): 25–60 µA (ESP32-S3 en sueño profundo, 
 la batería). Con 2000 mAh pesa más la autodescarga de la LiPo (2–3 %/mes): unos 3–5 % al mes en total.
 Monitor serie: línea `INTERRUPTOR: reed CERRADO/ABIERTO`, y `A DORMIR (…)` al apagarse.
 **Sin verificar** en la espalda real. Pruebas de ordenador: `reed.*` (2 casos).
+
+## V3.10.4 — arranque suave de Vext (2026-10-28)
+Con la 3.10.3 y el ZED pasado de 3V3 a Vext, la espalda se reiniciaba sin parar (`rst:0x1 (POWERON)` en bucle, sin llegar
+a imprimir nada). Causa: la 3.10.3 apaga Vext al arrancar y lo vuelve a encender de golpe; el ZED (condensadores de entrada
++ antena activa) se conecta de una vez al 3V3 en marcha, el 3V3 cae y el ESP32-S3 se reinicia por falta de tensión.
+- Vext se enciende ahora con PWM a 40 kHz cuyo tiempo encendido sube de 0,4 % a 100 % en ~200 ms; después queda en LOW fijo.
+- Se usa al arrancar y al despertar. El apagado (dormir, modo carga) no cambia.
+- **Sin verificar** en la espalda. Si aun así se reinicia al encender el ZED, volver el ZED al 3V3 y avisar.

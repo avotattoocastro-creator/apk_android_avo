@@ -900,3 +900,12 @@ señal pasan microamperios. El usuario no quiere MOSFET y el botón KAN-9A no ca
 **No se ha tocado:** protocolo, emparejamiento, RTK, ahorro de la 3.10.2, modo carga, lectura de batería.
 **Validación:** IMPLEMENTADO · CI correcto (37 casos, compilación ESP32-S3, imagen con 3.10.3 e INTERRUPTOR) · **NO VERIFICADO** en la espalda.
 **Pendiente:** medir el consumo dormida (µA) y comprobar 0 V en el ZED con la cápsula fuera del soporte.
+
+## 2026-10-28 — BACK 3.10.4 — arranque suave de Vext
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia:** Vext (alimentación del ZED desde la 3.10.3) se enciende con PWM creciente (~200 ms) en vez de golpe.
+**Por qué:** el usuario pasó el VCC del ZED a Vext y la espalda quedó en bucle `rst:0x1 (POWERON)`: al encender Vext de golpe
+el ZED cargaba sus condensadores desde el 3V3 en marcha y el ESP32-S3 se quedaba sin tensión. Error de la 3.10.3 (apagaba
+Vext al arrancar y lo volvía a encender de golpe).
+**Archivos:** `AVO_BACK_V3_8_0.ino`, `avo_version.h`, `README.md`, `build-back-v380.yml`.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en la espalda.
