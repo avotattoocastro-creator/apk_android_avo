@@ -716,6 +716,11 @@ Petición del usuario.
 - El espesor de la bobina es estimado (1,0 mm): pendiente de calibre.
 - CI sin interferencias.
 
+## 2026-10-28 — Cincha REV 5.7.6 (imanes del soporte)
+- A petición del usuario, los alojamientos de los imanes de sujeción del soporte pasan a 2 imanes apilados (2,05 mm de fondo; antes 1,05).
+- Motivo: con 4 imanes por esquina en total, el reparto 2 + 2 sujeta más que 1 + 3 (estimación con un modelo de discos cargados a 0,35 mm de separación: 2 + 2 ≈ 2,0×, 1 + 3 ≈ 1,6×, respecto a 1 + 1). No se ha medido en físico.
+- Solo cambia el soporte. CI sin interferencias.
+
 ## 2026-10-28 — Cincha REV 5.7.5 (imanes de la base)
 - **Petición del usuario:** poder meter 2 o 3 imanes apilados en las esquinas de la base para tener más sujeción.
 - **Cambio:**

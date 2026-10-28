@@ -1,6 +1,11 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
 
-**REV 5.7.5 (actual):**
+**REV 5.7.6 (actual):**
+- Los 4 alojamientos de imanes del soporte pasan a **2 imanes Ø5 × 1 apilados** (2,05 mm de fondo). Solo cambia el soporte.
+- Combinación recomendada: 2 + 2. Según un modelo magnético simple, sujeta unas 2 veces más que 1 + 1 y más que 3 + 1 (≈1,6).
+- Los imanes del soporte entran por arriba: hay que llenar siempre el alojamiento.
+
+**REV 5.7.5:**
 - Los 4 alojamientos de imanes de la base admiten hasta **3 imanes Ø5 × 1 apilados** (3,1 mm de fondo, con 0,3 mm de piel abajo).
 - Un recrecido de Ø7,6 los rodea, desde el suelo interior hasta la boca (z 3,4).
 - Solo cambia la base.

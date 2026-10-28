@@ -51,7 +51,7 @@ M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, b
           insert_d=4.1, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,1, REV 5.7.3); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
 MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # entre la cuna y la pared maciza
-HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
+HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3, n_mount=2)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
 C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.5,   # huella oficial Seeed: USB-C sobresale 1,5
@@ -307,7 +307,7 @@ def mount():
     for (dx, depth) in REED_MAGS:
         p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
-        p = p.cut(cyl(x, y, -HMAG["t"] - 0.05, HMAG["d"] + 0.15, 2))
+        p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
     return p
 
 
@@ -359,9 +359,9 @@ def components():
     mags = cyl(*MAGS[0], HMAG["skin"] + 0.02, HMAG["d"], HMAG["t"])
     for (x, y) in MAGS[1:]:
         mags = mags.union(cyl(x, y, HMAG["skin"] + 0.02, HMAG["d"], HMAG["t"]))
-    mmags = cyl(*MAGS[0], -HMAG["t"] - 0.02, HMAG["d"], HMAG["t"])
+    mmags = cyl(*MAGS[0], -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"])
     for (x, y) in MAGS[1:]:
-        mmags = mmags.union(cyl(x, y, -HMAG["t"] - 0.02, HMAG["d"], HMAG["t"]))
+        mmags = mmags.union(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"]))
     return {
         "bobina_Qi": cyl(0, 0, COIL_Z0 + 0.1, COIL["d"], COIL["t"]),
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
