@@ -931,9 +931,9 @@ arranque (`entry 0x403c9880`), antes del firmware → causa de hardware; propues
 **Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO**.
 
 ## 2026-10-29 — BACK 3.10.7 — ZED en reposo por software (UBX-RXM-PMREQ + EXTINT)
-**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `248aeeb` · **CI:** [40787062302](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40787062302) (éxito)
 **Qué cambia:** antes del sueño profundo, `UBX-RXM-PMREQ` (backup indefinido, force, despertar por EXTINT0); EXTINT del
 ZED (pin INT de la URTK1.2) en GPIO6, HIGH fijado al dormir; pulso LOW de 20 ms al encender el ZED.
 **Por qué:** el ZED en Vext provoca reinicios en el cargador de arranque (hardware) y el usuario no quiere añadir piezas.
 Con el ZED en 3V3 la Heltec dormía pero el ZED seguía encendido (~70–85 mA, LEDs encendidos).
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** (consumo del ZED en reposo sin dato en el data sheet).
+**Validación:** IMPLEMENTADO · CI correcto · **NO VERIFICADO** (consumo del ZED en reposo sin dato en el data sheet).
