@@ -102,10 +102,14 @@ STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
 #    dentro (autobloqueo); para abrir se tira de la parte de arriba hacia fuera.
-LATCH = dict(w=16.0, t=2.0, az=2.6, barrel=4.4, top=8.6, hook_z0=5.35, hook_z1=6.45, hook_tip=0.2,
-             hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2, clear=0.28)
+LATCH = dict(w=16.0, t=1.8, az=2.6, barrel=4.4, top=13.6, hook_z0=10.3, lip=0.5,
+             hole=2.15, lug_hole=2.3, lug_w=3.0, gap=0.2)
+# REV 5.8: «clic» como en la caja de referencia: un nervio semicilíndrico en cada extremo de la TAPA (z 12, r 1,0) y
+# una muesca en el gancho del cierre que lo abraza. El labio del gancho pasa 0,5 por debajo del nervio: para cerrar o
+# abrir el cierre flexa (≈1,8 % de deformación con PETG) y hace clic; cerrado no se suelta solo.
+RIB = dict(z=12.0, r=1.0, w=16.0)
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
-KEEP = dict(z0=5.2, z1=7.8, depth=1.0, w=16.6)          # ranura del gancho en los extremos de la base
+
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
 TAB = dict(len=10.0, out=1.8, up=1.6)
 
@@ -162,16 +166,7 @@ def pod_base():
         b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
-    # REV 5.8: ranuras de los cierres en los dos extremos, por encima del cerco del soporte. La cara inferior (la que
-    # bloquea) es horizontal; el techo sube a 45° (sin voladizo) y deja sitio al gancho cuando gira para abrir.
-    kd = KEEP["depth"]
-    for sx in (-1, 1):
-        xf = sx * L / 2
-        prof = (cq.Workplane("XZ", origin=(0, KEEP["w"] / 2, 0))
-                .polyline([(xf + sx * 0.5, KEEP["z0"]), (xf - sx * kd, KEEP["z0"]), (xf - sx * kd, KEEP["z1"]),
-                           (xf + sx * 0.5, KEEP["z1"] + kd + 0.5)])
-                .close().extrude(KEEP["w"]))
-        b = b.cut(prof)
+    # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa)
     return b
 
 
@@ -201,6 +196,9 @@ def pod_lid():
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
     lid = lid.cut(box(-7, -4.5, CEIL - 0.4, 29, 7, 0.45))               # antena FPC opcional (interior)
+    # REV 5.8: nervios del clic de los cierres en los dos extremos
+    rib = _rib_profile()
+    lid = lid.union(rib).union(rib.rotate((0, 0, 0), (0, 0, 1), 180))
     # cara superior lisa, sin panel ni letras: una sola pieza, se imprime boca abajo sin soportes
     return lid
 
@@ -286,18 +284,26 @@ def _latch_ax():
     return ol / 2 + LATCH["barrel"] / 2 + 0.3               # eje de la bisagra (en +X): el barril libra el cerco 0,3
 
 
+def _rib_profile(grow=0.0):
+    """Nervio del clic en el extremo +X de la tapa: mitad inferior redonda (r) y techo a 45° (sin voladizo con la tapa boca abajo)."""
+    r, zc, w = RIB["r"] + grow, RIB["z"], RIB["w"] + 2 * grow
+    x0 = L / 2 - 0.1
+    half = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(L / 2, zc).circle(r).extrude(w)
+            .intersect(box(L / 2 + r / 2, 0, zc - r - 1, r + 2, w + 2, r + 1)))
+    tri = (cq.Workplane("XZ", origin=(0, w / 2, 0))
+           .polyline([(x0, zc), (L / 2 + r, zc), (x0, zc + (L / 2 + r - x0))]).close().extrude(w))
+    return half.union(tri).intersect(box(L / 2 - 0.1 + 5, 0, zc - r - 2, 10.0, w + 2, 2 * r + 4))   # solapa 0,1 con la pared
+
+
 def latch(sx=1):
-    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), en posición cerrada."""
+    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), en posición cerrada (gancho abrazando el nervio de la tapa)."""
     ax, az, w, t = _latch_ax(), LATCH["az"], LATCH["w"], LATCH["t"]
     xi, xo = ax - t / 2, ax + t / 2
     c = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(ax, az).circle(LATCH["barrel"] / 2).extrude(w))
     c = c.union(box(ax, 0, az, t, w, LATCH["top"] - az))
-    tip = L / 2 - KEEP["depth"] + LATCH["hook_tip"]
-    c = c.union(box((tip + xo) / 2, 0, LATCH["hook_z0"], xo - tip, w, LATCH["hook_z1"] - LATCH["hook_z0"]))
-    # chaflán de entrada en la punta del gancho (abajo, hacia dentro) y canto superior redondeado para el dedo
-    c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0))
-              .polyline([(tip - 0.01, LATCH["hook_z0"] - 0.01), (tip + 0.5, LATCH["hook_z0"] - 0.01), (tip - 0.01, LATCH["hook_z0"] + 0.5)])
-              .close().extrude(w + 2))
+    lip_x = L / 2 + LATCH["lip"]
+    c = c.union(box((lip_x + xo) / 2, 0, LATCH["hook_z0"], xo - lip_x, w, LATCH["top"] - LATCH["hook_z0"]))
+    c = c.cut(_rib_profile(grow=0.1))                                  # muesca que abraza el nervio
     c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
     c = c.edges("|Y and >Z").fillet(0.6)
     return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
@@ -487,9 +493,9 @@ def main():
                 report["interferencias"][f"{names[i]} × {names[j]}"] = [round(v, 3), where]
     # REV 5.8: barrido de apertura del cierre (+X): no debe tocar la base ni el soporte en ningún ángulo
     ax = _latch_ax()
-    fixed = parts[P + "base"].union(parts[P + "soporte"])
+    fixed = parts[P + "base"].union(parts[P + "soporte"]).union(parts[P + "tapa"]).union(parts[P + "aro_rojo"])
     sweep = {}
-    for ang in (3, 6, 10, 15, 20, 30, 45, 60, 75, 90, 105):
+    for ang in (0, 8, 12, 15, 20, 30, 45, 60, 75, 90, 105):   # 1–7°: zona del clic (el gancho flexa a propósito)
         lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
         try:
             v = lt.intersect(fixed).val().Volume()
@@ -497,7 +503,16 @@ def main():
             v = 0.0
         sweep[ang] = round(v, 3)
         if v > 0.01:
-            report["interferencias"][f"cierre abierto {ang}° × base/soporte"] = round(v, 3)
+            report["interferencias"][f"cierre abierto {ang}° × cápsula/soporte"] = round(v, 3)
+    # interferencia máxima en la zona del clic (informativa): cuánto tiene que flexar el gancho
+    clic = {}
+    for ang in (1, 2, 3, 4, 5, 6, 7):
+        lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
+        try:
+            clic[ang] = round(lt.intersect(fixed).val().Volume(), 2)
+        except Exception:
+            clic[ang] = 0.0
+    report["clic_interferencia_grados_mm3"] = clic
     report["barrido_cierre_grados_mm3"] = sweep
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
