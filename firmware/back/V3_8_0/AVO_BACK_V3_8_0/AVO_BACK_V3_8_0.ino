@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.8 (ESP-NOW) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.9 (ESP-NOW) · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -73,6 +73,8 @@ static bool s_lora_asleep = false;
 // V3.10.3: on/off. Reed of the support between GPIO7 and GND (internal pull-up): closed = running, open 3 s = deep
 // sleep with Vext cut (the ZED-F9P must be powered from Vext, not from the fixed 3V3). Wakes when the reed closes.
 static const int REED_PIN = 7;
+// V3.10.9: reed switch OFF (user request: behaves like 3.10.2, never sleeps). 1 = sleep when the reed opens (3.10.3–3.10.8).
+#define AVO_REED_SLEEP 0
 static ReedGate s_reed;
 static bool s_radio_on = false, s_zed_on = false;
 // V3.10.5 (test requested on 28/10): Vext (ZED-F9P) switched on VEXT_DELAY_MS after start-up / wake-up, once the board,
@@ -432,6 +434,10 @@ void setup() {
   // V3.10.3: capsule out of its support at power-up → sleep, unless USER is pressed within 3 s (workshop mode)
   delay(20);
   if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: capsula en el soporte");
+#if !AVO_REED_SLEEP
+  s_reed.set_workshop(true);             // V3.10.9: reed ignored, the back never sleeps
+  Serial.println("[AVO ESPALDA] reed DESACTIVADO en esta version: no se duerme");
+#else
   if (digitalRead(REED_PIN) == HIGH) {
     Serial.println("[AVO ESPALDA] reed ABIERTO (capsula fuera del soporte). Pulsa USER en 3 s para el MODO TALLER (no se duerme).");
     uint32_t t0 = millis();
@@ -449,6 +455,7 @@ void setup() {
       go_to_sleep("capsula fuera del soporte al arrancar");
     }
   }
+#endif
   // V3.10.5: the ZED gets power (and its UART starts) VEXT_DELAY_MS later, from loop(); until then its pins stay
   // as inputs so the unpowered ZED is not fed through its RX line.
   pinMode(ZED_TX_PIN, INPUT);

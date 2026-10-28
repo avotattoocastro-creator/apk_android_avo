@@ -947,3 +947,11 @@ se abre a 38400 para mandar la orden.
 **Por qué:** prueba del usuario 29/10/2026 00:34 con la 3.10.7: Heltec despierta y enlazada, app «Sin GNSS», último dato
 GNSS hace 198827 ms, espalda al 11 %; LED blanco y LEDs del ZED encendidos. El ZED entró en reposo y no volvió a salir.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-29 — BACK 3.10.9 — reed desactivado, como la 3.10.2
+**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Qué cambia:** `AVO_REED_SLEEP 0`: el reed se ignora y la espalda no se duerme (modo taller fijo). Sin más cambios
+respecto a la 3.10.8 (ZED despertado al arrancar por INT y por RX).
+**Por qué:** el usuario pide la 3.9.0 o la última antes del reed, pero que despierte al ZED. Con la 3.9.0 no había GPS: el
+ZED seguía en el reposo de la 3.10.7, que solo despierta por EXTINT o quitando toda la corriente.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

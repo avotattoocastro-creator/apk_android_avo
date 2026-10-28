@@ -165,3 +165,10 @@ de reposo funcionó pero el pulso por INT no lo sacó (INT sin conectar o sin ef
 - Al despertar, el UART vuelve a poner la línea en HIGH y manda 8 bytes 0xFF: esos flancos sacan al ZED del reposo.
 - Si la cápsula estaba fuera del soporte al arrancar (UART aún sin abrir), se abre a 38400 para mandar la orden.
 - Para sacar un ZED que se quedó dormido con la 3.10.7: quitar la batería 5 s una vez.
+
+## V3.10.9 — reed desactivado (2026-10-29)
+A petición del usuario, la espalda vuelve a funcionar como la 3.10.2: **no se duerme nunca** (el reed se ignora,
+`AVO_REED_SLEEP 0` en el `.ino`; con 1 vuelve el comportamiento de la 3.10.3–3.10.8). Se mantienen el ahorro de la
+3.10.2 y el despertar del ZED al arrancar (pulso en INT/GPIO6 + bytes 0xFF por su RX).
+Un ZED que la 3.10.7 dejó en reposo solo acepta despertar por INT: sin ese cable hay que dejarlo sin corriente
+(USB y batería fuera, 10 s).
