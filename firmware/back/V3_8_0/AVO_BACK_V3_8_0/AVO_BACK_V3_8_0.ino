@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.2 (ESP-NOW) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.10.3 (ESP-NOW) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -35,6 +35,10 @@
 #include <esp_random.h>
 #include <Preferences.h>
 #include <SPI.h>
+#include <esp_sleep.h>
+#include <driver/gpio.h>
+#include <driver/rtc_io.h>
+#include <soc/soc_caps.h>
 #include "avo_core.h"
 
 using namespace avo;
@@ -64,6 +68,11 @@ static const uint32_t CPU_MHZ = 160;   // was 240: UART, ESP-NOW and the GNSS/RT
 static TxPowerPolicy s_txp;            // adaptive ESP-NOW transmit power (lib/avo_core/src/avo_tx_power.*)
 static int8_t s_rssi_worst = 0;        // worst RSSI from the chest/girth in the current second (0 = none)
 static bool s_lora_asleep = false;
+// V3.10.3: on/off. Reed of the support between GPIO7 and GND (internal pull-up): closed = running, open 3 s = deep
+// sleep with Vext cut (the ZED-F9P must be powered from Vext, not from the fixed 3V3). Wakes when the reed closes.
+static const int REED_PIN = 7;
+static ReedGate s_reed;
+static bool s_radio_on = false, s_zed_on = false;
 
 HardwareSerial ZED(1);
 Preferences prefs;
@@ -168,6 +177,8 @@ static void print_status() {
                 (unsigned long)rs.frames_bad_crc, (unsigned long)st.rtcm_gaps, (unsigned long)st.rtcm_not_written,
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
+  Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
+                s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
                 s_lora_asleep ? "dormida" : "NO dormida", (int)s_txp.dbm(), s_txp.level() == TxPowerPolicy::kLevels - 1 ? " (maxima)" : "");
   {  // V3.10.0 girth unit
@@ -225,6 +236,34 @@ static bool lora_sleep() {
   return digitalRead(LORA_BUSY) == HIGH;   // in sleep BUSY stays high
 }
 
+// V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
+static void go_to_sleep(const char* why) {
+  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS sin corriente (Vext cortado), radio apagada.\n"
+                "[AVO ESPALDA] Se despierta al poner la capsula en el soporte (reed cerrado).\n", why);
+  Serial.flush();
+  if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
+  if (s_zed_on) { ZED.end(); s_zed_on = false; }
+  pinMode(ZED_TX_PIN, INPUT);            // never drive the RX of an unpowered ZED (it would feed it through its input)
+  pinMode(ZED_RX_PIN, INPUT);
+  pinMode(VEXT_PIN, OUTPUT);
+  digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V
+  gpio_hold_en((gpio_num_t)VEXT_PIN);    // keep it off during deep sleep
+  pinMode(VBAT_CTRL_PIN, OUTPUT);
+  digitalWrite(VBAT_CTRL_PIN, !s_vbat_active);   // battery divider off
+  gpio_hold_en((gpio_num_t)VBAT_CTRL_PIN);
+  if (s_lora_asleep) {                   // NSS and RST high, or the SX1262 would wake up / reset into standby
+    digitalWrite(LORA_NSS, HIGH); gpio_hold_en((gpio_num_t)LORA_NSS);
+    digitalWrite(LORA_RST, HIGH); gpio_hold_en((gpio_num_t)LORA_RST);
+  }
+#if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
+  gpio_deep_sleep_hold_en();
+#endif
+  esp_sleep_enable_ext0_wakeup((gpio_num_t)REED_PIN, 0);   // wake when the reed closes (LOW)
+  rtc_gpio_pullup_en((gpio_num_t)REED_PIN);
+  rtc_gpio_pulldown_dis((gpio_num_t)REED_PIN);
+  esp_deep_sleep_start();
+}
+
 // V3.8.1: average of 16 readings with the divider enabled only while measuring (no constant drain).
 static uint16_t read_battery_mv() {
   digitalWrite(VBAT_CTRL_PIN, s_vbat_active);
@@ -274,21 +313,54 @@ void setup() {
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
   Serial.begin(115200);
   delay(300);
+  // V3.10.3: coming back from deep sleep: keep the ZED off until the reed is confirmed, then release the holds
+  pinMode(VEXT_PIN, OUTPUT);
+  digitalWrite(VEXT_PIN, HIGH);
+#if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
+  gpio_deep_sleep_hold_dis();
+#endif
+  gpio_hold_dis((gpio_num_t)VEXT_PIN);
+  gpio_hold_dis((gpio_num_t)VBAT_CTRL_PIN);
+  gpio_hold_dis((gpio_num_t)LORA_NSS);
+  gpio_hold_dis((gpio_num_t)LORA_RST);
+  const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
+  if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)REED_PIN);
+  pinMode(REED_PIN, INPUT_PULLUP);
+  pinMode(PRG_PIN, INPUT_PULLUP);
   setCpuFrequencyMhz(CPU_MHZ);           // V3.10.2 (before Wi-Fi starts)
   s_lora_asleep = lora_sleep();          // V3.10.2
-  pinMode(VEXT_PIN, OUTPUT);
-  digitalWrite(VEXT_PIN, LOW);           // Vext on (harmless if the ZED has its own supply)
-  pinMode(PRG_PIN, INPUT_PULLUP);
   pinMode(VBAT_CTRL_PIN, INPUT);
   delay(2);
   s_vbat_active = digitalRead(VBAT_CTRL_PIN) == HIGH ? LOW : HIGH;   // V3.8.1: board revision detection
   pinMode(VBAT_CTRL_PIN, OUTPUT);
   digitalWrite(VBAT_CTRL_PIN, !s_vbat_active);
   analogSetPinAttenuation(VBAT_PIN, ADC_11db);
+  // V3.10.3: capsule out of its support at power-up → sleep, unless USER is pressed within 3 s (workshop mode)
+  delay(20);
+  if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: capsula en el soporte");
+  if (digitalRead(REED_PIN) == HIGH) {
+    Serial.println("[AVO ESPALDA] reed ABIERTO (capsula fuera del soporte). Pulsa USER en 3 s para el MODO TALLER (no se duerme).");
+    uint32_t t0 = millis();
+    bool workshop = false;
+    while (millis() - t0 < ReedGate::kBootWindowMs) {
+      if (digitalRead(PRG_PIN) == LOW) { workshop = true; break; }
+      if (digitalRead(REED_PIN) == LOW) break;
+      delay(10);
+    }
+    if (workshop) {
+      s_reed.set_workshop(true);
+      Serial.println("[AVO ESPALDA] MODO TALLER: el reed se ignora hasta reiniciar");
+      while (digitalRead(PRG_PIN) == LOW) delay(10);   // do not count this press as the 3 s / 8 s USER hold
+    } else if (digitalRead(REED_PIN) == HIGH) {
+      go_to_sleep("capsula fuera del soporte al arrancar");
+    }
+  }
+  digitalWrite(VEXT_PIN, LOW);           // Vext on: ZED-F9P powered (it must hang from Vext since 3.10.3)
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
   ZED.setRxTimeout(1);                   // hand each NAV-PVT over as soon as the line goes idle
+  s_zed_on = true;
 
   s_rxq = xQueueCreate(48, sizeof(RxPkt));   // ~1 s of RTCM burst
   s_sent = xSemaphoreCreateBinary();
@@ -299,6 +371,7 @@ void setup() {
   esp_wifi_set_channel(NOW_CHANNEL_DEFAULT, WIFI_SECOND_CHAN_NONE);
   esp_wifi_set_max_tx_power(84);         // 21 dBm request (the S3 caps it at its maximum)
   if (esp_now_init() != ESP_OK) Serial.println("[AVO ESPALDA] ERROR esp_now_init");
+  s_radio_on = true;
   esp_now_register_recv_cb(on_recv);
   esp_now_register_send_cb(on_sent);
   ensure_peer(kBroadcast);
@@ -389,6 +462,11 @@ void loop() {
         if (ups >= 18 && downs == 0) charge_mode("tension subiendo: cargador conectado");
       }
     } else nh = 0;
+  }
+  static uint32_t last_reed = 0;   // V3.10.3: capsule out of its support for 3 s → deep sleep
+  if (millis() - last_reed >= 100) {
+    last_reed = millis();
+    if (s_reed.update(millis(), digitalRead(REED_PIN) == LOW)) go_to_sleep("capsula fuera del soporte");
   }
   static uint32_t last_txp = 0;    // V3.10.2: adaptive ESP-NOW transmit power, decided once per second
   if (millis() - last_txp >= 1000) {

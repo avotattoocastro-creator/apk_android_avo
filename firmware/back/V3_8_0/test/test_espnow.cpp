@@ -984,4 +984,24 @@ TEST(power, a_single_weak_second_blocks_the_step_down) {
   CHECK_EQ(p.level(), 1);                          // the window that contained it does not step down
 }
 
+// ---------------------------------------------------------------- V3.10.3 reed on/off (signal only)
+TEST(reed, short_open_never_sleeps_long_open_sleeps) {
+  ReedGate g;
+  uint32_t t = 1000;
+  CHECK(!g.update(t, true));
+  for (int i = 0; i < 25; i++) { t += 100; CHECK(!g.update(t, false)); }   // 2.5 s open (bump)
+  t += 100; CHECK(!g.update(t, true));                                     // closed again: timer restarts
+  for (int i = 0; i < 30; i++) { t += 100; CHECK(!g.update(t, false)); }   // timer starts at the first open sample
+  CHECK_EQ((int)g.ms_to_sleep(t), 100);
+  t += 100; CHECK(g.update(t, false));                                     // 3 s open → sleep
+}
+
+TEST(reed, workshop_mode_ignores_the_reed) {
+  ReedGate g;
+  g.set_workshop(true);
+  uint32_t t = 0;
+  for (int i = 0; i < 100; i++) { t += 100; CHECK(!g.update(t, false)); }
+  CHECK_EQ((int)g.ms_to_sleep(t), 0);
+}
+
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

@@ -91,3 +91,33 @@ Monitor serie: línea nueva `AHORRO: CPU 160 MHz | LoRa dormida | potencia radio
 
 **No cambia:** protocolo, emparejamiento, RTK, ritmo GNSS, modo carga ni la lectura de la batería.
 **Sin verificar** en la espalda real. Ganancia total estimada: ~13–16 mA, un 6–8 % más de duración (≈ +30–40 min con 2000 mAh).
+
+## V3.10.3 — encendido y apagado con el reed del soporte (2026-10-28)
+El reed ya **no corta la batería** (el de 14 mm se soldó con el pico de corriente al conectar). Ahora solo avisa a la Heltec:
+
+| Conexión | De | A |
+|---|---|---|
+| Batería | BAT+ / BAT− de la batería | conector de batería de la Heltec (SH1.25), **directo**, sin interruptor |
+| Carga Qi | salida **BAT** de la placa Qi (o TP4056 si la placa solo da 5 V) | BAT+ / BAT− de la batería |
+| Reed | una pata | **GPIO7** de la Heltec |
+| Reed | otra pata | **GND** |
+| ZED-F9P | alimentación (VCC 3,3 V del módulo) | **Vext** de la Heltec (**no** el 3V3 fijo) |
+| ZED-F9P | GND, TX → GPIO33, RX ← GPIO35 | sin cambios |
+| Pin 5 V de la Heltec | — | sin conectar (la Qi no alimenta la Heltec) |
+
+Funcionamiento:
+- **Cápsula en el soporte** (imanes cerca, reed cerrado, GPIO7 a GND): funciona normal.
+- **Fuera del soporte 3 s** (reed abierto): corta Vext (ZED y antena a 0 V), pone en alta impedancia los pines del ZED, apaga
+  la radio, mantiene Vext, ADC_Ctrl y la LoRa fijados durante el sueño (`gpio_hold_en`) y entra en **sueño profundo**.
+  Se despierta al cerrar el reed (`ext0`, GPIO7 en LOW) y vuelve a enlazar con el pecho.
+- **Al encender con la cápsula fuera del soporte:** espera 3 s y se duerme. Si se pulsa **USER** en esos 3 s entra en
+  **MODO TALLER** (ignora el reed hasta reiniciar), para trabajar en la mesa sin el soporte.
+- **Sin reed conectado** el GPIO7 queda en alto (pull-up) y la espalda se dormiría: o se conecta el reed, o se puentea
+  GPIO7 a GND, o se usa el modo taller.
+- La carga Qi no la despierta: carga la batería directamente mientras duerme.
+- AVO Update instala el firmware igual aunque esté dormida (reinicia la placa en el cargador de la ROM).
+
+Consumo dormida estimado (sin medir): 25–60 µA (ESP32-S3 en sueño profundo, regulador y cargador de la Heltec, protección de
+la batería). Con 2000 mAh pesa más la autodescarga de la LiPo (2–3 %/mes): unos 3–5 % al mes en total.
+Monitor serie: línea `INTERRUPTOR: reed CERRADO/ABIERTO`, y `A DORMIR (…)` al apagarse.
+**Sin verificar** en la espalda real. Pruebas de ordenador: `reed.*` (2 casos).
