@@ -179,9 +179,9 @@ Build BVH for holes and vias
 Load Raytracing: board
 Load Raytracing: layers
 Loading 3D models...
-Reload time 0.223 s
+Reload time 0.219 s
 Rendering: 7 %
-Rendering: 12 %
+Rendering: 13 %
 Rendering: 20 %
 Rendering: 25 %
 Rendering: 30 %
@@ -190,12 +190,12 @@ Rendering: 41 %
 Rendering: 48 %
 Rendering: 54 %
 Rendering: 60 %
-Rendering: 69 %
+Rendering: 68 %
 Rendering: 77 %
-Rendering: 83 %
+Rendering: 82 %
 Rendering: 88 %
 Rendering: 94 %
 Rendering: 100 %
-Rendering time 6.272 s
+Rendering time 6.300 s
 Successfully created 3D render image
 + chmod -R a+rw hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci

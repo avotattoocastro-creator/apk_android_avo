@@ -1,3 +1,4 @@
-PC al final: 00000000 40381f78 
+PC al final: 00000000 40381f78 4038523c 
 ?? ??:0
 esp_cpu_wait_for_intr at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/cpu.c:64
+rv_utils_set_intlevel_regval at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/riscv/include/esp_private/interrupt_intc.h:87
