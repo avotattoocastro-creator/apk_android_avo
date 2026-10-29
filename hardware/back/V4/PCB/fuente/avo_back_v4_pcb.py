@@ -547,7 +547,14 @@ def mecanica():
     """pivotes, pisadores, anillos y sensor Hall → CAD (pcb_mecanica.json)"""
     g = lambda pref: [list(p["pos"]) for p in PARTS if p["ref"].startswith(pref) and p["fp"] in ("PIVOT", "PAD_LID", "RING")]
     hall = next(p for p in PARTS if p["ref"] == "U8")["pos"]
-    return dict(pivotes=g("H"), pisadores=g("MP"), anillos=g("MR"), hall=list(hall),
+    env = []
+    for p in PARTS:
+        h = fp_of(p).height
+        if h > 0:
+            x0, y0, x1, y1 = courtyard_casing(p)
+            env.append([p["ref"], round(x0, 3), round(y0, 3), round(x1, 3), round(y1, 3), h])
+    return dict(pivotes=g("H"), pisadores=g("MP"), anillos=g("MR"), hall=list(hall), envolventes=env,
+                nota_envolventes="patio × altura de la huella (conservador); la comprobación fina usa el STEP de KiCad",
                 origen="generado por PCB/fuente/avo_back_v4_pcb.py (colocacion_v4.json)")
 
 
