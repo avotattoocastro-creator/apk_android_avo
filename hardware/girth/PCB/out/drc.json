@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-29T15:35:13+0000",
+    "date": "2026-10-29T15:38:43+0000",
     "included_severities": [
         "error",
         "warning",
@@ -10,76 +10,6 @@
     "kicad_version": "9.0.9",
     "schematic_parity": [],
     "source": "AVO_GIRTH_PCB.kicad_pcb",
-    "unconnected_items": [
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [QI_AC1] of C1 on F.Cu",
-                    "pos": {
-                        "x": 76.275,
-                        "y": 108.4
-                    },
-                    "uuid": "1fa21dc0-a522-53c2-bb8b-6a1d481c10a6"
-                },
-                {
-                    "description": "Track [QI_AC1] on F.Cu, length 1.2374 mm",
-                    "pos": {
-                        "x": 76.6,
-                        "y": 103.775
-                    },
-                    "uuid": "ad9dd9bd-453b-4c26-9f88-96defcdf3b06"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 8 [QI_ADEN] of U1 on F.Cu",
-                    "pos": {
-                        "x": 81.75,
-                        "y": 104.65
-                    },
-                    "uuid": "b470d287-dec2-5a96-b54e-48413ecc361d"
-                },
-                {
-                    "description": "Pad 1 [QI_ADEN] of Q1 on F.Cu",
-                    "pos": {
-                        "x": 83.4,
-                        "y": 110.05
-                    },
-                    "uuid": "e449d610-2d03-5a4b-955e-a2d64b19c01d"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 12 [QI_ILIM] of U1 on F.Cu",
-                    "pos": {
-                        "x": 82.25,
-                        "y": 101.35
-                    },
-                    "uuid": "041df12f-73c7-560a-b066-6600f364ecfc"
-                },
-                {
-                    "description": "Pad 1 [QI_ILIM] of R1 on F.Cu",
-                    "pos": {
-                        "x": 83.7,
-                        "y": 98.91
-                    },
-                    "uuid": "a61c06ed-c269-510f-8083-df5ffb26edc0"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        }
-    ],
+    "unconnected_items": [],
     "violations": []
 }
