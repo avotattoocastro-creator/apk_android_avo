@@ -54,7 +54,11 @@ const char* boot_reason() {
 static void prepare_sleep() {
   gimu::sleep();
   digitalWrite(gb::PIN_LED, HIGH);                                 // LED apagado (activo bajo)
-  esp_deep_sleep_enable_gpio_wakeup(1ULL << gb::PIN_REED, ESP_GPIO_WAKEUP_GPIO_LOW);
+  // El despertar del C3 es por nivel: con el reed ya cerrado despertaría al instante (y volvería a encender).
+  // Solo se arma si el reed está abierto; con el reed cerrado no hace falta: volver a cerrarlo da un impulso nuevo
+  // del hardware (C40) que enciende la placa desde cero.
+  if (digitalRead(gb::PIN_REED) == HIGH)
+    esp_deep_sleep_enable_gpio_wakeup(1ULL << gb::PIN_REED, ESP_GPIO_WAKEUP_GPIO_LOW);
 }
 
 void shutdown(const char* why) {

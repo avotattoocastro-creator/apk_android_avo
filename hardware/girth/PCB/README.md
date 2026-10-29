@@ -22,18 +22,18 @@ fabricado ni medido ninguna placa.
 | 3,3 V | RT9080-33 (U3) | 600 mA, 2 µA de consumo propio |
 | Batería | J2 JST SH 1,0 (pin 1 = +) | el cable pasa por la ranura fresada junto al borde −X |
 | Reed | pads SW1/SW2 (SW2 al + de la batería) | enciende por flanco y se lee en GPIO1 (Q16) |
-| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10/D11 (BAV70)** | **< 1 µA apagada**; ver abajo |
+| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10–D13 (BAV70)** | **< 1 µA apagada**; ver abajo |
 
 ## Corte de batería (enclavamiento con MOSFET)
-- **Se enciende solo**, sin firmware: al **cerrarse** el reed (C40 da un impulso de ~2,5 s) o con 5 V de la base Qi o
-  del USB (D10, mientras estén).
+- **Se enciende solo**, sin firmware: al **cerrarse** el reed (C40 da un impulso de ≈ 2,5 s, con la corriente por el
+  reed limitada a 19 mA y rearmado en ~2–3 s tras abrirse) o con 5 V de la base Qi o del USB (D10, mientras estén).
 - **El firmware lo mantiene** con PWR_HOLD (GPIO5) = 1, que pone lo primero al arrancar. Si el ESP32 se reinicia, C41
-  sostiene el corte ~1,5 s.
-- **Se apaga desde el ESP32**: PWR_HOLD = 0 → el corte se abre en ~3 s. Funciona también con el reed cerrado (el reed
+  sostiene el corte ~1,2 s.
+- **Se apaga desde el ESP32**: PWR_HOLD = 0 → el corte se abre en ~2,7 s. Funciona también con el reed cerrado (el reed
   actúa por flanco), así que el **apagado remoto** sigue siendo posible en el soporte.
 - **Nunca queda bloqueado al cargar**: con 5 V presentes el corte está cerrado pase lo que pase en el firmware.
 - **Batería agotada**: con la base puesta, el diodo interno de Q10 deja precargar la celda y luego Q10 conduce.
-- Cálculos en `DOCS/ANALISIS_ELECTRICO.md` §3. Respecto al relé de la REV A: no necesita rebaje en la tapa ni
+- Cálculos en `DOCS/ANALISIS_ELECTRICO.md` §3 (red del reed revisada tras una revisión independiente). Respecto al relé de la REV A: no necesita rebaje en la tapa ni
   condensadores de 220 µF, no tiene polaridad que adivinar (R40/R41 desaparecen) y no lleva imán junto a la IMU.
 
 ## Pines del ESP32-C3 (firmware V0.3.0: `firmware/girth/V0_3_0_C3`)

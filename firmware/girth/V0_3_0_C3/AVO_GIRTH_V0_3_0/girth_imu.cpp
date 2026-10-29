@@ -111,9 +111,11 @@ bool begin() {
   Wire.begin(gb::PIN_SDA, gb::PIN_SCL, 400000);
   Wire.setTimeOut(20);
   bool a = lsm6_begin();
-  bool m = mmc_begin();
-  return a && m;
+  mmc_begin();                                         // opcional
+  return a;
 }
+
+uint32_t period_us() { return s_info.accel == Accel::LSM6DSV16X ? 8333 : 9615; }
 
 static void mmc_read() {
   if (!s_info.mag) return;

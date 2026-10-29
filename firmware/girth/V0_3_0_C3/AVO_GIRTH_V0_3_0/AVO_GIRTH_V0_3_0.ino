@@ -3,7 +3,8 @@
  * Firmware de la placa propia de la cincha (hardware/girth/PCB, REV B). Sustituye a la V0.1.0 (XIAO ESP32-C6).
  *  - Radio: el mismo enlace ESP-NOW con la espalda (lib/avo_core/src/avo_girth_link.h): HELLO / WELCOME,
  *    STATUS cada segundo (ahora con la batería medida y la IMU), PING de la espalda, IMU en lotes de 10 muestras.
- *  - IMU: LSM6DS3TR-C (o LSM6DSV16X) + MMC5983MA por I²C, 100 muestras/s de 9 ejes brutos (IMU_FMT_9AXIS_I16).
+ *  - IMU: LSM6DS3TR-C (o LSM6DSV16X) + MMC5983MA por I²C, 104 (o 120) muestras/s de 9 ejes brutos, al ritmo del
+ *    dato listo del LSM6 (INT1 → GPIO0); formato IMU_FMT_9AXIS_I16.
  *  - Alimentación (girth_power.h): mantiene el corte de batería con PWR_HOLD; apaga al salir del soporte (3 s),
  *    con batería baja, por orden remota de la espalda (PING bit 1) o por la orden «APAGAR» del monitor USB.
  *  - BOOT 5 s olvida la espalda. LED (activo bajo): rápido = buscando, destello cada 2 s = conectada,
@@ -33,7 +34,6 @@ using namespace avo;
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
 static const uint8_t kBroadcast[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-static const uint32_t IMU_PERIOD_US = 10000;        // 100 muestras/s
 
 Preferences prefs;
 struct RxPkt { uint8_t mac[6]; int8_t rssi; uint8_t len; uint8_t d[GIRTH_MAX_PACKET]; };
@@ -131,7 +131,7 @@ static void send_imu(const ImuBatch& bt) {
   uint8_t body[IMU_HDR_LEN + GIRTH_IMU_MAX_SAMPLES * IMU_SAMPLE_LEN_9AXIS];
   ImuBatchHeader ih;
   ih.girth_id = 0; ih.imu_id = 0; ih.count = bt.count; ih.fmt = IMU_FMT_9AXIS_I16;
-  ih.girth_seq = ++s_imu_seq; ih.girth_t0_us = bt.t0_us; ih.period_us = (uint16_t)IMU_PERIOD_US;
+  ih.girth_seq = ++s_imu_seq; ih.girth_t0_us = bt.t0_us; ih.period_us = (uint16_t)gimu::period_us();
   ih.sync_state = 0;
   size_t n = encode_imu_header(ih, body, sizeof(body));
   if (n != IMU_HDR_LEN) return;
@@ -143,12 +143,19 @@ static void send_imu(const ImuBatch& bt) {
   if (send_kind(GirthKind::IMU, s_back, body, n, 2)) s_st.imu_batches++;
 }
 
-// 100 Hz en su propia tarea: lote de 10 muestras → cola → loop() lo envía si hay enlace.
+// Al ritmo del LSM6 (104 o 120 Hz): su INT1 (dato listo, GPIO0) despierta la tarea; cada muestra se lee una vez.
+// Lote de 10 muestras → cola → loop() lo envía si hay enlace. Si un flanco se pierde, el tiempo de espera de 50 ms
+// lee igualmente (la lectura borra INT1 y vuelven los flancos).
+static SemaphoreHandle_t s_drdy = nullptr;
+static void IRAM_ATTR on_drdy() {
+  BaseType_t woke = pdFALSE;
+  xSemaphoreGiveFromISR(s_drdy, &woke);
+  if (woke) portYIELD_FROM_ISR();
+}
 static void imu_task(void*) {
   ImuBatch bt; bt.count = 0;
-  TickType_t last = xTaskGetTickCount();
   while (true) {
-    vTaskDelayUntil(&last, pdMS_TO_TICKS(IMU_PERIOD_US / 1000));
+    xSemaphoreTake(s_drdy, pdMS_TO_TICKS(50));
     gimu::Sample s;
     if (!gimu::read(&s)) continue;
     if (bt.count == 0) bt.t0_us = (uint32_t)esp_timer_get_time();
@@ -246,7 +253,11 @@ void setup() {
   s_boot_id = esp_random() | 1u;
   prefs.begin("avogirth", false);
   if (prefs.getBytes("back", s_back, 6) == 6 && memcmp(s_back, kBroadcast, 6) != 0) { s_paired = true; ensure_peer(s_back); }
-  if (s_imu_ok) xTaskCreate(imu_task, "imu", 4096, nullptr, 5, nullptr);
+  if (s_imu_ok) {
+    s_drdy = xSemaphoreCreateBinary();
+    attachInterrupt(gb::PIN_IMU_INT, on_drdy, RISING);
+    xTaskCreate(imu_task, "imu", 4096, nullptr, 5, nullptr);
+  }
   const char* volatile id = AVO_GIRTH_IMAGE_ID;
   char bm[18] = "-";
   if (s_paired) now_mac_str(s_back, bm);

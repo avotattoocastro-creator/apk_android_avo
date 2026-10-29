@@ -178,9 +178,9 @@ LC = {
     # (existencias y tipo consultados en el CI: out_stock/stock_jlc.json)
     "0R": "C17168", "22R": "C25092", "100R": "C25076", "330R": "C25104", "200R": "C25087", "1k": "C11702",
     "3k3": "C25890", "4k7": "C25900", "5k1": "C25905", "10k": "C25744", "20k": "C25765", "100k": "C25741",
-    "1M": "C26083",
+    "1M": "C26083", "10M": "C26082", "220R": "C25091",
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "22n": "C1532", "4u7": "C19666", "2u2": "C23630",
-    "10u": "C96446", "10u6V3": "C19702", "22u": "C45783", "470n": "C1623",
+    "10u": "C96446", "10u6V3": "C19702", "22u": "C45783", "470n": "C1623", "220n": "C16772",
     "100n C0G": "C97946", "47n C0G": "C21812", "2n2 C0G": "C51795", "1n C0G": "C1636",
     "NTC10k": "C77131", "AO3400A": "C20917", "2N7002": "C8545", "BAV70": "C68978",
     "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
@@ -380,11 +380,13 @@ C("C34", "100n", "BAT_ADC", GND, (5.0, -12.8), 90, "Batería")
 # ---------------------------------------------------------------------------------------- corte de batería (Q10)
 # Enclavamiento con MOSFET (sustituye al relé de la REV A). Q10 (PMOS) une la celda (BAT_RAW) con VBAT del cargador;
 # su puerta tiene 1 MΩ a la fuente (apagado: Vgs = 0, solo la fuga del MOSFET). Q11 (NMOS de umbral bajo) la lleva a
-# masa cuando su puerta PWR_G supera ~1,45 V. PWR_G (C41 2,2 µF + R42 1 MΩ) se carga por tres caminos con diodos:
-#  · REED: al cerrarse el reed, C40 (10 µF) da un impulso (D11) que mantiene PWR_G ≥ 1,45 V unos 2,5 s: el ESP32
-#    arranca y pone PWR_HOLD. Es por flanco: con el reed cerrado el sistema se puede apagar igual (apagado remoto).
+# masa cuando su puerta PWR_G supera ~1,45 V. PWR_G (C41 220 nF + R42 10 MΩ, τ 2,2 s) se carga por tres caminos:
+#  · REED (por flanco): REED_HI → D12 (aísla: REED_HI vuelve a 0 enseguida al abrirse el reed, para la lectura de
+#    Q16) → R44 220 Ω (limita la corriente por el reed) → C40 2,2 µF → REED_PULSE → D11 → PWR_G. Al cerrarse el reed
+#    PWR_G sube a ~2 V y sigue > 1,45 V unos 4 s: el ESP32 arranca y pone PWR_HOLD. Con el reed fijo cerrado el
+#    sistema se puede apagar igual. Al abrirse, R45 (1 MΩ) y D13 (pinza a masa) descargan C40 en ~2 s: rearmado.
 #  · PWR_HOLD (GPIO5, D10 A2): el firmware lo mantiene a 1. Si el ESP32 se reinicia, C41 sostiene PWR_G > 1,45 V
-#    unos 1,3 s, más de lo que tarda en volver a poner PWR_HOLD. Para apagar: PWR_HOLD = 0 → corte en ~3 s.
+#    ~1,5 s, más de lo que tarda en volver a poner PWR_HOLD. Para apagar: PWR_HOLD = 0 → corte abierto en ~3 s.
 #  · VIN5 (Qi o USB, D10 A1): con la base puesta el corte está siempre cerrado: nunca queda bloqueado al cargar.
 # Batería agotada (protección de la celda abierta): con la base, el diodo interno de Q10 deja pasar la precarga del
 # BQ24072 hacia la celda; cuando sube la tensión, Q10 conduce del todo.
@@ -393,15 +395,21 @@ part("Q10", "SOT23", "AO3401A", (-19.0, 11.0), 0, {1: "PWR_PG", 2: "BAT_RAW", 3:
 R("R40", "1M", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte", note="Q10 apagado por defecto")
 part("Q11", "SOT23", "AO3400A", (-15.6, 11.0), 0, {1: "PWR_G", 2: GND, 3: "PWR_PG"}, LC["AO3400A"], block="Corte",
      sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="Vth 0,65–1,45 V")
-C("C41", "2u2", "PWR_G", GND, (-15.6, 14.0), 0, "Corte", "C0603", note="sostiene el corte durante un reinicio")
-R("R42", "1M", "PWR_G", GND, (-13.6, 14.0), 0, "Corte")
+C("C41", "220n", "PWR_G", GND, (-15.6, 14.0), 0, "Corte", note="sostiene el corte durante un reinicio (τ 2,2 s)")
+R("R42", "10M", "PWR_G", GND, (-13.6, 14.0), 0, "Corte")
 part("D10", "SOT23", "BAV70", (-12.0, 11.0), 0, {1: VIN5, 2: "PWR_HOLD", 3: "PWR_G"}, LC["BAV70"], block="Corte",
      sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="5 V de carga o PWR_HOLD → PWR_G")
 part("D11", "SOT23", "BAV70", (-12.0, 14.6), 0, {1: "REED_PULSE", 2: "REED_PULSE", 3: "PWR_G"}, LC["BAV70"],
      block="Corte", sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="impulso del reed → PWR_G")
-C("C40", "10u 6V3", "REED_HI", "REED_PULSE", (-9.0, 14.6), 0, "Corte", "C0603", lcsc=LC["10u6V3"],
+part("D12", "SOT23", "BAV70", (-15.0, 7.0), 0, {1: "REED_HI", 2: "REED_HI", 3: "REED_C"}, LC["BAV70"],
+     block="Corte", sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="aísla C40 de la lectura del reed")
+R("R44", "220R", "REED_C", "REED_CR", (-17.6, 7.6), 90, "Corte", note="limita la corriente por el reed (≤ 19 mA)")
+R("R45", "1M", "REED_C", GND, (-12.6, 7.6), 90, "Corte", note="descarga C40 al abrirse el reed (rearmado ~2 s)")
+C("C40", "2u2", "REED_CR", "REED_PULSE", (-9.0, 14.6), 0, "Corte", "C0603",
   note="impulso de encendido al cerrarse el reed")
-R("R41", "1M", "REED_PULSE", GND, (-9.0, 12.8), 0, "Corte")
+R("R41", "10M", "REED_PULSE", GND, (-9.0, 12.8), 0, "Corte")
+part("D13", "SOT23", "BAV70", (-10.0, 7.0), 0, {1: GND, 2: GND, 3: "REED_PULSE"}, LC["BAV70"], block="Corte",
+     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="pinza: REED_PULSE no baja de −0,3 V al abrirse el reed")
 R("R43", "100k", "PWR_HOLD", GND, (-10.0, 16.6), 0, "Corte", note="PWR_HOLD a 0 mientras arranca el ESP32")
 part("Q16", "SOT23", "2N7002", (-3.8, -10.4), 0, {1: "REED_G", 2: GND, 3: "REED"}, LC["2N7002"], block="Reed",
      sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="reed (a + batería) → GPIO1 a 3,3 V")
@@ -440,6 +448,7 @@ POS = {
     "Q10": (-19.0, 11.0, 0), "Q11": (-15.6, 11.0, 0), "D10": (-12.2, 11.0, 0), "R40": (-19.0, 13.8, 0),
     "C41": (-15.6, 14.2, 0), "R42": (-13.2, 14.2, 90), "D11": (-10.6, 14.6, 0), "C40": (-7.6, 14.6, 90),
     "R41": (-7.6, 17.2, 0), "R43": (-12.6, 17.6, 0),
+    "D12": (-15.0, 7.0, 0), "R44": (-17.6, 7.6, 90), "R45": (-12.6, 7.6, 90), "D13": (-10.0, 7.0, 0),
     # reed, batería, pruebas
     "R31": (-1.6, -13.2, 90), "C33": (-0.4, -13.2, 90),
     "R32": (2.6, -13.2, 90), "R33": (3.8, -13.2, 90), "C34": (5.0, -13.2, 90),
