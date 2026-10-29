@@ -275,6 +275,15 @@ def main():
         sys.exit(1 if pending else 0)
     # --clear x0 y0 x1 y1: remove the tracks of non-plane nets that touch the box (KiCad coordinates) and re-route them,
     # the nets in --first (prefix) first; used when a dense block (Qi) is boxed in by tracks routed earlier
+    if "--rip" in sys.argv:
+        # --rip NET1,NET2: remove these nets' tracks and vias and route them again (e.g. a track too close to the edge)
+        rip = set(sys.argv[sys.argv.index("--rip") + 1].split(","))
+        segs[:] = [s_ for s_ in segs if s_["net"] not in rip]
+        vias[:] = [v for v in vias if v["net"] not in rip]
+        prune(pads, segs, vias)
+        r = make_router(pads, segs, vias)
+        pending = sorted(set(pending) | rip)
+        print("Se rehacen: %s" % ", ".join(sorted(rip)))
     if "--clear" in sys.argv:
         i = sys.argv.index("--clear")
         x0, y0, x1, y1 = map(float, sys.argv[i + 1:i + 5])
