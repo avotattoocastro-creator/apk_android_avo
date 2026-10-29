@@ -172,3 +172,19 @@ A petición del usuario, la espalda vuelve a funcionar como la 3.10.2: **no se d
 3.10.2 y el despertar del ZED al arrancar (pulso en INT/GPIO6 + bytes 0xFF por su RX).
 Un ZED que la 3.10.7 dejó en reposo solo acepta despertar por INT: sin ese cable hay que dejarlo sin corriente
 (USB y batería fuera, 10 s).
+
+## V3.11.0 — ZED con su propio regulador (Pololu S7V8F3) (2026-10-29)
+El ZED deja de colgar del 3V3 de la Heltec: lo alimenta un **Pololu S7V8F3** (3,3 V, entrada 2,7–11,8 V, 11 × 17 × 3 mm)
+desde la batería y la Heltec lo enciende y apaga por **SHDN**. Su arranque ya no hunde el 3V3 de la Heltec (sin bucle
+`POWERON`) y dormida el ZED queda a 0 V con todos sus LEDs apagados (también PWR). Vuelve el sueño con el reed.
+| S7V8F3 | Conexión |
+|---|---|
+| VIN | + de la batería |
+| GND | GND |
+| VOUT | 3V3 de la placa URTK1.2 (se quita el cable al 3V3 de la Heltec) |
+| SHDN | GPIO6 de la Heltec (el pin INT del ZED queda **sin conectar**) |
+- GPIO6 en LOW desde el arranque hasta confirmar el reed; HIGH al encender el ZED (50 ms de arranque suave del regulador);
+  LOW fijado durante el sueño y en el modo carga.
+- Se mantiene la orden de reposo `UBX-RXM-PMREQ` antes de cortar: si el ZED sigue en 3V3 (sin el módulo), funciona como
+  la 3.10.8.
+- Consumo del S7V8F3 apagado: ~10 µA por voltio de entrada por su resistencia de 100 kΩ en SHDN (~40 µA a 4 V).

@@ -955,3 +955,13 @@ respecto a la 3.10.8 (ZED despertado al arrancar por INT y por RX).
 **Por qué:** el usuario pide la 3.9.0 o la última antes del reed, pero que despierte al ZED. Con la 3.9.0 no había GPS: el
 ZED seguía en el reposo de la 3.10.7, que solo despierta por EXTINT o quitando toda la corriente.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-29 — BACK 3.11.0 — ZED alimentado por un Pololu S7V8F3 con SHDN en GPIO6
+**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Qué cambia:** GPIO6 pasa de EXTINT del ZED a SHDN del regulador S7V8F3 (batería → 3,3 V del ZED): LOW al arrancar y al
+dormir (fijado) y en modo carga, HIGH al encender el ZED. Sin pulso EXTINT. `AVO_REED_SLEEP 1` (vuelve el sueño con el reed).
+La orden PMREQ se mantiene antes del corte (compatibilidad con el ZED en 3V3).
+**Por qué:** el usuario pide un módulo que corte la corriente por GPIO. Con el ZED en Ve la Heltec entra en bucle de
+arranque (pico de corriente en su 3V3) y con el ZED en 3V3 no se puede apagar. El S7V8F3 (Bricogeek PRO-0170) tiene su
+propio regulador desde la batería y apagado por pin.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** (módulo aún sin montar).

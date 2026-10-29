@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.10.9 (ESP-NOW) · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.11.0 (ESP-NOW) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -74,7 +74,7 @@ static bool s_lora_asleep = false;
 // sleep with Vext cut (the ZED-F9P must be powered from Vext, not from the fixed 3V3). Wakes when the reed closes.
 static const int REED_PIN = 7;
 // V3.10.9: reed switch OFF (user request: behaves like 3.10.2, never sleeps). 1 = sleep when the reed opens (3.10.3–3.10.8).
-#define AVO_REED_SLEEP 0
+#define AVO_REED_SLEEP 1   // V3.11.0: sleeping again (the ZED is now cut by its own regulator)
 static ReedGate s_reed;
 static bool s_radio_on = false, s_zed_on = false;
 // V3.10.5 (test requested on 28/10): Vext (ZED-F9P) switched on VEXT_DELAY_MS after start-up / wake-up, once the board,
@@ -83,6 +83,8 @@ static const uint32_t VEXT_DELAY_MS = 1000;
 // V3.10.7: with the ZED on the fixed 3V3 (Vext gives a reset loop at power-up on this board) the ZED is put into
 // software backup with UBX-RXM-PMREQ before the Heltec sleeps, and woken with a pulse on its EXTINT pin ("INT" on the
 // URTK1.2 board) wired to GPIO6. The line idles HIGH and is held HIGH during deep sleep (no edge → no false wake).
+// V3.11.0: GPIO6 = SHDN of the Pololu S7V8F3 that powers the ZED from the battery (HIGH = ZED on, LOW = 0 V).
+// It replaces the INT wire of 3.10.7 (the ZED INT pin must NOT be wired to GPIO6 any more).
 static const int ZED_INT_PIN = 6;   // V3.10.6: 1 s (the 10 s test of 3.10.5 did not change the boot loop: that one is hardware)
 static uint32_t s_vext_at = 0;
 static bool s_vext_pending = false;
@@ -269,12 +271,13 @@ static void vext_on_soft() {
   digitalWrite(VEXT_PIN, LOW);           // fully on
 }
 
-// V3.10.7: wake the ZED from software backup (both edges of a 20 ms LOW pulse on EXTINT). Harmless when it is awake.
+// V3.11.0: ZED regulator (Pololu S7V8F3, SHDN on GPIO6) on. Its own soft start; fed from the battery, so the ZED
+// start-up current never touches the 3V3 of the Heltec (no boot loop as with Ve).
 static void zed_wake_pulse() {
+  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
   pinMode(ZED_INT_PIN, OUTPUT);
-  digitalWrite(ZED_INT_PIN, LOW);
-  delay(20);
   digitalWrite(ZED_INT_PIN, HIGH);
+  delay(50);
 }
 
 // V3.10.7: UBX-RXM-PMREQ v0 (16 bytes): duration 0 = until woken, flags backup|force.
@@ -326,15 +329,16 @@ static void zed_power_on() {
 
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 static void go_to_sleep(const char* why) {
-  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS en reposo (orden UBX; despierta por su RX o por INT = GPIO6), radio apagada.\n"
+  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS en reposo (orden UBX; sin corriente por GPIO6 = SHDN del S7V8F3), radio apagada.\n"
                 "[AVO ESPALDA] Se despierta al poner la capsula en el soporte (reed cerrado).\n", why);
   Serial.flush();
   if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
-  pinMode(ZED_INT_PIN, OUTPUT);          // V3.10.7: EXTINT idle HIGH and frozen BEFORE the backup order (no edge later)
-  digitalWrite(ZED_INT_PIN, HIGH);
-  gpio_hold_en((gpio_num_t)ZED_INT_PIN);
-  // V3.10.8: ZED on 3V3 → software backup; GPIO35 (ZED RX + white LED) ends held LOW inside zed_backup()
+  // V3.10.8: software backup first (it is what saves if the ZED is still on 3V3); GPIO35 (ZED RX + white LED) ends
+  // held LOW inside zed_backup()
   zed_backup();
+  pinMode(ZED_INT_PIN, OUTPUT);          // V3.11.0: S7V8F3 SHDN LOW → ZED at 0 V, all its LEDs off
+  digitalWrite(ZED_INT_PIN, LOW);
+  gpio_hold_en((gpio_num_t)ZED_INT_PIN);
   pinMode(ZED_RX_PIN, INPUT);
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V
@@ -379,6 +383,8 @@ static void charge_mode(const char* why) {
   if (s_zed_on) { ZED.end(); s_zed_on = false; }
   s_vext_pending = false;
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P without power
+  pinMode(ZED_INT_PIN, OUTPUT);          // V3.11.0: ZED regulator off
+  digitalWrite(ZED_INT_PIN, LOW);
   setCpuFrequencyMhz(80);
   uint16_t peak = 0;
   uint32_t last = 0, since = millis();
@@ -416,8 +422,8 @@ void setup() {
   gpio_hold_dis((gpio_num_t)LORA_NSS);
   gpio_hold_dis((gpio_num_t)LORA_RST);
   gpio_hold_dis((gpio_num_t)ZED_TX_PIN);   // V3.10.6
-  pinMode(ZED_INT_PIN, OUTPUT);              // V3.10.7: EXTINT idles HIGH
-  digitalWrite(ZED_INT_PIN, HIGH);
+  pinMode(ZED_INT_PIN, OUTPUT);              // V3.11.0: ZED regulator off until the reed is confirmed
+  digitalWrite(ZED_INT_PIN, LOW);
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
   const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
   if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)REED_PIN);
