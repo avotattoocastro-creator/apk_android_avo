@@ -1,0 +1,16 @@
++ timeout 1500 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/girth/PCB/out/ruteado/placa.dsn -do hardware/girth/PCB/out/ruteado/placa.ses -mp 60
+2026-10-29 15:15:20.127 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-10-29 15:15:21.798 [main] INFO  Opening 'hardware/girth/PCB/out/ruteado/placa.dsn'...
+2026-10-29 15:15:22.939 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+
+(java:2322): dbind-WARNING **: 15:15:23.541: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-10-29 15:15:44.998 [Thread-28] INFO  Starting auto-routing...
+2026-10-29 15:15:46.006 [Thread-28] WARN  FloatLine: Parameter is null
+2026-10-29 15:15:46.011 [Thread-28] WARN  FloatLine: Parameter is null
+2026-10-29 15:15:46.015 [Thread-28] WARN  FloatLine: Parameter is null
+2026-10-29 15:17:01.405 [Thread-28] WARN  There were only 16.75 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-10-29 15:18:02.993 [Thread-28] WARN  There were only 8.05 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-10-29 15:18:55.675 [Thread-28] INFO  Auto-routing was completed in 3 minute(s) 10.68 seconds.
+2026-10-29 15:18:55.776 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-10-29 15:19:10.090 [Thread-28] INFO  Route optimization was completed in 14.31 seconds.
+2026-10-29 15:19:10.111 [Thread-28] INFO  Saving 'hardware/girth/PCB/out/ruteado/placa.ses'...

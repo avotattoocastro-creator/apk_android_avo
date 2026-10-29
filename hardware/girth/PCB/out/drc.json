@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-29T14:54:36+0000",
+    "date": "2026-10-29T15:19:18+0000",
     "included_severities": [
         "error",
         "warning",
@@ -10,6 +10,514 @@
     "kicad_version": "9.0.9",
     "schematic_parity": [],
     "source": "AVO_GIRTH_PCB.kicad_pcb",
-    "unconnected_items": [],
-    "violations": []
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [+3V3] on F.Cu, length 1.1000 mm",
+                    "pos": {
+                        "x": 91.6,
+                        "y": 106.39
+                    },
+                    "uuid": "770019e3-2b2d-44cd-90eb-5d4c9ce99d4b"
+                },
+                {
+                    "description": "Track [+3V3] on In2.Cu, length 1.3945 mm",
+                    "pos": {
+                        "x": 90.4308,
+                        "y": 104.9233
+                    },
+                    "uuid": "dd6e960e-f219-4ede-b7f3-0e722c5448c5"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [QI_AC1] on F.Cu, length 0.6657 mm",
+                    "pos": {
+                        "x": 76.7457,
+                        "y": 108.8707
+                    },
+                    "uuid": "ad68fd84-9ef9-433a-a600-3c8f23aaad7a"
+                },
+                {
+                    "description": "Track [QI_AC1] on F.Cu, length 1.2750 mm",
+                    "pos": {
+                        "x": 77.475,
+                        "y": 104.65
+                    },
+                    "uuid": "2a15a42a-91a9-4d27-865d-62e1b7cb485b"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 8 [QI_ADEN] of U1 on F.Cu",
+                    "pos": {
+                        "x": 81.75,
+                        "y": 104.65
+                    },
+                    "uuid": "b470d287-dec2-5a96-b54e-48413ecc361d"
+                },
+                {
+                    "description": "Track [QI_ADEN] on F.Cu, length 0.7017 mm",
+                    "pos": {
+                        "x": 83.4,
+                        "y": 110.05
+                    },
+                    "uuid": "815d894a-0ba0-4662-abb2-e7db7bac9dac"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 12 [QI_ILIM] of U1 on F.Cu",
+                    "pos": {
+                        "x": 82.25,
+                        "y": 101.35
+                    },
+                    "uuid": "041df12f-73c7-560a-b066-6600f364ecfc"
+                },
+                {
+                    "description": "Pad 1 [QI_ILIM] of R1 on F.Cu",
+                    "pos": {
+                        "x": 83.7,
+                        "y": 98.91
+                    },
+                    "uuid": "a61c06ed-c269-510f-8083-df5ffb26edc0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1299 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3135 mm",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.25
+                    },
+                    "uuid": "0101a837-9b89-4736-8815-ca41c5cc6ca6"
+                },
+                {
+                    "description": "Pad 4 [IMU_INT] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.75
+                    },
+                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1329 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.2500 mm",
+                    "pos": {
+                        "x": 98.525,
+                        "y": 97.275
+                    },
+                    "uuid": "8d69a395-474a-48eb-b0ef-3c3c35fa668b"
+                },
+                {
+                    "description": "Pad 4 [IMU_INT] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.75
+                    },
+                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0750 mm)",
+            "items": [
+                {
+                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 97.9125
+                    },
+                    "uuid": "47667fbc-d534-5306-aba3-15574748d493"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 100.025,
+                        "y": 97.925
+                    },
+                    "uuid": "633cc906-dcc8-41a3-bfd3-54e2b61ed43e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 3 [GND] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.25
+                    },
+                    "uuid": "85427434-2f93-53f2-8792-213cf8da7950"
+                },
+                {
+                    "description": "Pad 4 [IMU_INT] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.75
+                    },
+                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 97.9125
+                    },
+                    "uuid": "47667fbc-d534-5306-aba3-15574748d493"
+                },
+                {
+                    "description": "Pad 6 [GND] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 97.9125
+                    },
+                    "uuid": "e4941afe-4210-545e-a894-64b84c9572c8"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1750 mm)",
+            "items": [
+                {
+                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 97.9125
+                    },
+                    "uuid": "47667fbc-d534-5306-aba3-15574748d493"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 100.025,
+                        "y": 97.925
+                    },
+                    "uuid": "633cc906-dcc8-41a3-bfd3-54e2b61ed43e"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 8 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.75
+                    },
+                    "uuid": "5d80cce1-e549-5634-a084-f6187125a62e"
+                },
+                {
+                    "description": "Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.25
+                    },
+                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.25
+                    },
+                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
+                },
+                {
+                    "description": "Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.75
+                    },
+                    "uuid": "7f4c4908-56cc-5719-906e-7033b45e44c7"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.75
+                    },
+                    "uuid": "7f4c4908-56cc-5719-906e-7033b45e44c7"
+                },
+                {
+                    "description": "Pad 11 [unconnected-(U5-SDO_Aux-Pad11)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.25
+                    },
+                    "uuid": "e4c4e54a-0601-5c5a-b446-a30b69e7e816"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 12 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.5,
+                        "y": 96.0875
+                    },
+                    "uuid": "13f44a7b-4da5-58c7-9dc9-e643505387cc"
+                },
+                {
+                    "description": "Pad 13 [I2C_SCL] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 96.0875
+                    },
+                    "uuid": "f2b1200b-5758-599f-9143-5129a4552d50"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 13 [I2C_SCL] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 96.0875
+                    },
+                    "uuid": "f2b1200b-5758-599f-9143-5129a4552d50"
+                },
+                {
+                    "description": "Pad 14 [I2C_SDA] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 96.0875
+                    },
+                    "uuid": "7648c4c3-2251-568b-bd29-3a19134651ed"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 3 [GND] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.25
+                    },
+                    "uuid": "85427434-2f93-53f2-8792-213cf8da7950"
+                },
+                {
+                    "description": "Pad 4 [IMU_INT] of U5 on F.Cu",
+                    "pos": {
+                        "x": 98.8375,
+                        "y": 97.75
+                    },
+                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 97.9125
+                    },
+                    "uuid": "47667fbc-d534-5306-aba3-15574748d493"
+                },
+                {
+                    "description": "Pad 6 [GND] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 97.9125
+                    },
+                    "uuid": "e4941afe-4210-545e-a894-64b84c9572c8"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 8 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.75
+                    },
+                    "uuid": "5d80cce1-e549-5634-a084-f6187125a62e"
+                },
+                {
+                    "description": "Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.25
+                    },
+                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 97.25
+                    },
+                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
+                },
+                {
+                    "description": "Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.75
+                    },
+                    "uuid": "7f4c4908-56cc-5719-906e-7033b45e44c7"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.75
+                    },
+                    "uuid": "7f4c4908-56cc-5719-906e-7033b45e44c7"
+                },
+                {
+                    "description": "Pad 11 [unconnected-(U5-SDO_Aux-Pad11)] of U5 on F.Cu",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 96.25
+                    },
+                    "uuid": "e4c4e54a-0601-5c5a-b446-a30b69e7e816"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 12 [+3V3] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.5,
+                        "y": 96.0875
+                    },
+                    "uuid": "13f44a7b-4da5-58c7-9dc9-e643505387cc"
+                },
+                {
+                    "description": "Pad 13 [I2C_SCL] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 96.0875
+                    },
+                    "uuid": "f2b1200b-5758-599f-9143-5129a4552d50"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 13 [I2C_SCL] of U5 on F.Cu",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 96.0875
+                    },
+                    "uuid": "f2b1200b-5758-599f-9143-5129a4552d50"
+                },
+                {
+                    "description": "Pad 14 [I2C_SDA] of U5 on F.Cu",
+                    "pos": {
+                        "x": 99.5,
+                        "y": 96.0875
+                    },
+                    "uuid": "7648c4c3-2251-568b-bd29-3a19134651ed"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        }
+    ]
 }

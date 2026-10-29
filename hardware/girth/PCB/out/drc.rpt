@@ -1,10 +1,98 @@
 ** Drc report for AVO_GIRTH_PCB.kicad_pcb **
-** Created on 2026-10-29T14:54:38+0000 **
+** Created on 2026-10-29T15:19:19+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 0 DRC violations **
+** Found 18 DRC violations **
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1299 mm)
+    Local override; error
+    @(98.8375 mm, 97.2500 mm): Track [GND] on F.Cu, length 0.3135 mm
+    @(98.8375 mm, 97.7500 mm): Pad 4 [IMU_INT] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1329 mm)
+    Local override; error
+    @(98.5250 mm, 97.2750 mm): Track [GND] on F.Cu, length 0.2500 mm
+    @(98.8375 mm, 97.7500 mm): Pad 4 [IMU_INT] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0750 mm)
+    Local override; error
+    @(99.5000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(100.0250 mm, 97.9250 mm): Via [GND] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(98.8375 mm, 97.2500 mm): Pad 3 [GND] of U5 on F.Cu
+    @(98.8375 mm, 97.7500 mm): Pad 4 [IMU_INT] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(99.5000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(100.0000 mm, 97.9125 mm): Pad 6 [GND] of U5 on F.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1750 mm)
+    Rule: board setup constraints hole; error
+    @(99.5000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(100.0250 mm, 97.9250 mm): Via [GND] on F.Cu - B.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(101.1625 mm, 97.7500 mm): Pad 8 [+3V3] of U5 on F.Cu
+    @(101.1625 mm, 97.2500 mm): Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(101.1625 mm, 97.2500 mm): Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu
+    @(101.1625 mm, 96.7500 mm): Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(101.1625 mm, 96.7500 mm): Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu
+    @(101.1625 mm, 96.2500 mm): Pad 11 [unconnected-(U5-SDO_Aux-Pad11)] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(100.5000 mm, 96.0875 mm): Pad 12 [+3V3] of U5 on F.Cu
+    @(100.0000 mm, 96.0875 mm): Pad 13 [I2C_SCL] of U5 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)
+    Local override; error
+    @(100.0000 mm, 96.0875 mm): Pad 13 [I2C_SCL] of U5 on F.Cu
+    @(99.5000 mm, 96.0875 mm): Pad 14 [I2C_SDA] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(98.8375 mm, 97.2500 mm): Pad 3 [GND] of U5 on F.Cu
+    @(98.8375 mm, 97.7500 mm): Pad 4 [IMU_INT] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(99.5000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(100.0000 mm, 97.9125 mm): Pad 6 [GND] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.1625 mm, 97.7500 mm): Pad 8 [+3V3] of U5 on F.Cu
+    @(101.1625 mm, 97.2500 mm): Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.1625 mm, 97.2500 mm): Pad 9 [unconnected-(U5-INT2-Pad9)] of U5 on F.Cu
+    @(101.1625 mm, 96.7500 mm): Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.1625 mm, 96.7500 mm): Pad 10 [unconnected-(U5-OCS_Aux-Pad10)] of U5 on F.Cu
+    @(101.1625 mm, 96.2500 mm): Pad 11 [unconnected-(U5-SDO_Aux-Pad11)] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(100.5000 mm, 96.0875 mm): Pad 12 [+3V3] of U5 on F.Cu
+    @(100.0000 mm, 96.0875 mm): Pad 13 [I2C_SCL] of U5 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(100.0000 mm, 96.0875 mm): Pad 13 [I2C_SCL] of U5 on F.Cu
+    @(99.5000 mm, 96.0875 mm): Pad 14 [I2C_SDA] of U5 on F.Cu
 
-** Found 0 unconnected pads **
+** Found 4 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(91.6000 mm, 106.3900 mm): Track [+3V3] on F.Cu, length 1.1000 mm
+    @(90.4308 mm, 104.9233 mm): Track [+3V3] on In2.Cu, length 1.3945 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(76.7457 mm, 108.8707 mm): Track [QI_AC1] on F.Cu, length 0.6657 mm
+    @(77.4750 mm, 104.6500 mm): Track [QI_AC1] on F.Cu, length 1.2750 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(81.7500 mm, 104.6500 mm): Pad 8 [QI_ADEN] of U1 on F.Cu
+    @(83.4000 mm, 110.0500 mm): Track [QI_ADEN] on F.Cu, length 0.7017 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(82.2500 mm, 101.3500 mm): Pad 12 [QI_ILIM] of U1 on F.Cu
+    @(83.7000 mm, 98.9100 mm): Pad 1 [QI_ILIM] of R1 on F.Cu
 
 ** Found 0 Footprint errors **
 
