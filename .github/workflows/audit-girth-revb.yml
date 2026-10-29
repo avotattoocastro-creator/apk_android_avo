@@ -81,6 +81,16 @@ jobs:
           rm -f $R/firmware/senales/*.csv
           (cd firmware/back/V3_8_0 && g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o /tmp/back_test && /tmp/back_test) 2>&1 | tail -5 | tee $R/firmware/pruebas_espalda.txt
 
+      - name: Fases 5, 8, 9 · existencias JLCPCB de hoy, fabricación (BOM/CPL/Gerber/giros/presupuesto), GPIO y autonomía
+        continue-on-error: true
+        run: |
+          mkdir -p $R/fabricacion $R/esp32 $R/autonomia
+          python3 -c "import json;p=json.load(open('hardware/girth/PCB/kicad/piezas.json'));print('\n'.join(sorted({x['lcsc'] for x in p if x['lcsc']})))" > /tmp/lista.txt
+          python3 hardware/girth/PCB/fuente/stock_jlc.py $R/fabricacion/existencias --list /tmp/lista.txt | tee $R/fabricacion/existencias.txt
+          python3 $A/fabricacion/fab_check.py $R/fabricacion/existencias $R/fabricacion | tee $R/fabricacion/fab_check_salida.txt
+          python3 $A/esp32/gpio_tabla.py | tee $R/esp32/gpio_tabla_salida.txt; cp $A/esp32/gpio_tabla.* $R/esp32/
+          python3 $A/autonomia/autonomia.py | tee $R/autonomia/autonomia_salida.txt; cp $A/autonomia/autonomia.* $R/autonomia/
+
       - uses: arduino/setup-arduino-cli@v2
       - name: Fase 11 · compilar el firmware (producción y variante para QEMU)
         continue-on-error: true

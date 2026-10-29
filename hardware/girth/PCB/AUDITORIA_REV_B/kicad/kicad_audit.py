@@ -34,6 +34,10 @@ texts = [d.GetText() for d in b.GetDrawings() if isinstance(d, pcbnew.PCB_TEXT)]
 R["textos"] = texts
 R["es_rev_b"] = any("REV B" in t for t in texts) and any("ESP32-C3" in t for t in texts)
 fps = {f.GetReference(): f for f in b.GetFootprints()}
+R["cajetin_revision"] = b.GetTitleBlock().GetRevision()
+if R["cajetin_revision"] != "B":
+    R["problemas"].append("el cajetín de la placa dice revisión «%s» (los Gerber llevan esa revisión en TF.ProjectId)"
+                          % R["cajetin_revision"])
 R["huellas"] = len(fps)
 R["U4"] = fps["U4"].GetValue() if "U4" in fps else None
 if not R["es_rev_b"] or R["U4"] != "ESP32-C3-MINI-1U-N4":
