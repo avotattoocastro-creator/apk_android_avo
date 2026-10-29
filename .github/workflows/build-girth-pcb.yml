@@ -1,0 +1,80 @@
+name: Build AVO GIRTH PCB (KiCad 9)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-girth-pcb]
+    paths:
+      - 'hardware/girth/PCB/kicad/**'
+      - 'hardware/girth/PCB/fuente/**'
+      - '.github/workflows/build-girth-pcb.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: girth-pcb-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pcb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: KiCad 9 (imagen oficial)
+        run: docker pull kicad/kicad:9.0
+      - name: Rellenar zonas, DRC, ERC y exportar
+        run: |
+          set -x
+          P=hardware/girth/PCB
+          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render
+          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+            set -x
+            kicad-cli version
+            python3 fuente/ci_kicad.py kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_pcb > out/kicad_info.txt 2>&1
+            mv kicad/AVO_GIRTH_PCB.kicad_pcb.info.json out/kicad_info.json || true
+            kicad-cli pcb drc --format json --severity-all --units mm -o out/drc.json kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --format report --severity-all --units mm -o out/drc.rpt kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli sch erc --format json --severity-all --units mm -o out/erc.json kicad/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli sch erc --format report --severity-all --units mm -o out/erc.rpt kicad/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli sch export pdf -o out/AVO_GIRTH_PCB_esquema.pdf kicad/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli sch export netlist --format kicadsexpr -o out/netlist_esquema.net kicad/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export pos --format csv --units mm --side both -o out/posiciones_kicad.csv kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export pdf -l F.Cu,F.Silkscreen,F.Fab,Edge.Cuts --include-border-title -o out/AVO_GIRTH_PCB_cara_superior.pdf kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            for L in F.Cu In1.Cu In2.Cu B.Cu; do
+              kicad-cli pcb export svg -l $L,Edge.Cuts --exclude-drawing-sheet --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_GIRTH_PCB.kicad_pcb || \
+              kicad-cli pcb export svg -l $L,Edge.Cuts --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            done
+            kicad-cli pcb render --side top --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/arriba.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            kicad-cli pcb render --side bottom --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/abajo.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            kicad-cli pcb render --side top --rotate "-50,0,25" --quality high -w 1800 -h 1200 --zoom 1.4 -o out/render/iso.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            kicad-cli pcb export step --subst-models --force -o out/AVO_GIRTH_PCB.step kicad/AVO_GIRTH_PCB.kicad_pcb || true
+            chmod -R a+rw out kicad
+          '
+      - name: BOM / CPL para JLCPCB y resumen
+        working-directory: hardware/girth/PCB
+        run: |
+          python3 fuente/jlc.py
+          cd out/gerber && zip -q ../AVO_GIRTH_PCB_GERBER_JLCPCB.zip * && cd ../..
+          python3 - <<'PY'
+          import json
+          d = json.load(open("out/drc.json"))
+          v = d.get("violations", []); u = d.get("unconnected_items", []); p = d.get("schematic_parity", [])
+          print(f"::notice title=DRC::{len(v)} violaciones, {len(u)} sin conectar, {len(p)} paridad")
+          e = json.load(open("out/erc.json"))
+          n = sum(len(s.get("violations", [])) for s in e.get("sheets", []))
+          print(f"::notice title=ERC::{n} avisos/errores")
+          PY
+      - name: Guardar resultados en la rama
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          git add hardware/girth/PCB/out hardware/girth/PCB/kicad
+          git commit -m "PCB cincha: DRC/ERC, Gerber y renders de KiCad 9 [skip ci]" || echo "sin cambios"
+          git pull --rebase && git push
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-GIRTH-PCB-JLCPCB
+          path: hardware/girth/PCB/out
