@@ -1,39 +1,25 @@
-# AVO BACK V4 · placa de la espalda · REV A (ESP32-S3) — informe de diagnóstico
+# AVO BACK V4 · placa de la espalda · REV A (ESP32-S3) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `207f2bda621f1cb5f77ce63796d21f369b4d064d` · ejecución de CI: 40967330205
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `3f81b456d6ef8cca633b81e37c4c8a242a519e32` · ejecución de CI: 40971520610
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno de la cola de la carcasa V4 (CAD/pcb_contorno_v4.json), ≈ 1785 mm²
 - Componentes: 99 en total, 85 para montar, 1 sin montar (DNP: C5), 13 a mano (pads de hilo y de prueba)
-- Pistas: 910 · vías: 160 · ruteado INCOMPLETO (10 conexiones)
+- Pistas: 982 · vías: 193 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 2 |
-| DRC: conexiones incompletas | **FALLA** | 10 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 2
-
-### Conexiones incompletas
-- Pad 2 [+3V3] of Q4 on F.Cu ↔ Track [+3V3] on In2.Cu, length 0.5310 mm
-- Pad 2 [+3V3] of R4 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.1846 mm
-- Pad A9 [VBUS] of J1 on F.Cu ↔ Pad A4 [VBUS] of J1 on F.Cu
-- Pad 5 [VBUS] of U6 on F.Cu ↔ Pad A9 [VBUS] of J1 on F.Cu
-- Pad 3 [VIN5] of Q2 on F.Cu ↔ Pad 13 [VIN5] of U2 on F.Cu
-- Pad 1 [VIN5] of C18 on F.Cu ↔ Pad 13 [VIN5] of U2 on F.Cu
-- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Pad 1 [VSYS] of C35 on F.Cu
-- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 0.3892 mm
-- Pad 23 [USB_DM] of U4 on F.Cu ↔ Pad 2 [USB_DM] of R19 on F.Cu
-- Pad 8 [ZED_PPS] of U4 on F.Cu ↔ Pad 2 [ZED_PPS] of R55 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_edge_clearance: 2
-- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -111,8 +97,8 @@ Errores de DRC por tipo: copper_edge_clearance 2
 - Piezas sin existencias para 5 placas: ninguna
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -122,4 +108,4 @@ Errores de DRC por tipo: copper_edge_clearance 2
 - Batería 654060 con clavija PH2.0: cambiarla a JST SH 1,0 (J2) y comprobar la polaridad.
 - Existencias consultadas en el CI (out_stock/stock_jlc.json): volver a comprobarlas el día del pedido.
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA
