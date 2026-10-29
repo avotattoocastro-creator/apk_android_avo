@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/w/hardware/back/V4/PCB/fuente/ci_kicad.py", line 11, in <module>
+    zones = board.Zones()
+            ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'Zones'

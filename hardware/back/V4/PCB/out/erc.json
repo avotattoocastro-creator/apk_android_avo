@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-29T17:04:12+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/f8ab83dd-32cd-5d25-8d43-304737e649fe",
+            "violations": []
+        }
+    ],
+    "source": "AVO_BACK_V4_PCB.kicad_sch"
+}
