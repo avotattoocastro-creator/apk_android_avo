@@ -1,10 +1,30 @@
 ** Drc report for AVO_GIRTH_PCB.kicad_pcb **
-** Created on 2026-10-29T15:43:10+0000 **
+** Created on 2026-10-29T15:56:18+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 0 DRC violations **
 
-** Found 0 unconnected pads **
+** Found 5 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(91.6000 mm, 106.3900 mm): Track [+3V3] on F.Cu, length 1.1000 mm
+    @(87.9265 mm, 106.7443 mm): Via [+3V3] on F.Cu - B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(97.9987 mm, 96.8268 mm): Track [+3V3] on F.Cu, length 0.8467 mm
+    @(99.5000 mm, 97.9125 mm): Track [+3V3] on F.Cu, length 0.2478 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(98.8375 mm, 97.7500 mm): Pad 4 [IMU_INT] of U5 on F.Cu
+    @(119.2000 mm, 111.8000 mm): Pad 12 [IMU_INT] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(81.7500 mm, 104.6500 mm): Pad 8 [QI_ADEN] of U1 on F.Cu
+    @(83.4000 mm, 109.2302 mm): Track [QI_ADEN] on F.Cu, length 0.0580 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(82.2500 mm, 101.3500 mm): Pad 12 [QI_ILIM] of U1 on F.Cu
+    @(83.7000 mm, 98.9100 mm): Pad 1 [QI_ILIM] of R1 on F.Cu
 
 ** Found 0 Footprint errors **
 

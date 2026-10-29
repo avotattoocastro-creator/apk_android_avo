@@ -1,22 +1,29 @@
-# AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de fabricación
+# AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `60589c550067bf237ee5b4193ba4677d7fc4ee77` · ejecución de CI: 40904279353
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `ffe91b8a9e67fcd58ec3550300434f215cf9e1ec` · ejecución de CI: 40905560178
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
-- Componentes: 94 en total, 81 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
-- Pistas: 883 · vías: 148 · ruteado completo (0 conexiones incompletas)
+- Componentes: 98 en total, 85 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
+- Pistas: 859 · vías: 148 · ruteado INCOMPLETO (5 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 5 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+
+### Conexiones incompletas
+- Track [+3V3] on F.Cu, length 1.1000 mm ↔ Via [+3V3] on F.Cu - B.Cu
+- Track [+3V3] on F.Cu, length 0.8467 mm ↔ Track [+3V3] on F.Cu, length 0.2478 mm
+- Pad 4 [IMU_INT] of U5 on F.Cu ↔ Pad 12 [IMU_INT] of U4 on F.Cu
+- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Track [QI_ADEN] on B.Cu, length 4.4798 mm
+- Pad 12 [QI_ILIM] of U1 on F.Cu ↔ Pad 1 [QI_ILIM] of R1 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - ninguna
@@ -92,10 +99,10 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 | C20917 | AO3400A | 1 | 1147315 | Basic | 0.0890 US$ |
 | C51795 | 0805CG222J500NT | 1 | 3262 | Extended | 0.0425 US$ |
 | C96446 | CL10A106MA8NRNC | 7 | 8289919 | Basic | 0.0387 US$ |
-| C19702 | CL10A106KP8NNNC | 2 | 12137255 | Basic | 0.0212 US$ |
+| C19702 | CL10A106KP8NNNC | 1 | 12137255 | Basic | 0.0212 US$ |
 | C77131 | NCP15XH103F03RC | 2 | 295086 | Extended | 0.0187 US$ |
 | C8545 | 2N7002 | 1 | 3093827 | Basic | 0.0161 US$ |
-| C68978 | BAV70 | 2 | 637912 | Basic | 0.0152 US$ |
+| C68978 | BAV70 | 4 | 637912 | Basic | 0.0152 US$ |
 | C1623 | CL10B474KA8NNNC | 2 | 691127 | Basic | 0.0130 US$ |
 | C23630 | CL10A225KO8NNNC | 1 | 2898561 | Basic | 0.0122 US$ |
 | C2286 | KT-0603R | 1 | 7358378 | Basic | 0.0077 US$ |
@@ -108,14 +115,17 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 | C25744 | 0402WGF1002TCE | 3 | 17223387 | Basic | 0.0024 US$ |
 | C25905 | 0402WGF5101TCE | 2 | 3841658 | Basic | 0.0023 US$ |
 | C25900 | 0402WGF4701TCE | 2 | 15195941 | Basic | 0.0020 US$ |
-| C26083 | 0402WGF1004TCE | 6 | 3011508 | Basic | 0.0015 US$ |
+| C26083 | 0402WGF1004TCE | 5 | 3011508 | Basic | 0.0015 US$ |
 | C25092 | 0402WGF220JTCE | 2 | 2995327 | Basic | 0.0014 US$ |
 | C11702 | 0402WGF1001TCE | 1 | 21984432 | Basic | 0.0013 US$ |
 | C25741 | 0402WGF1003TCE | 7 | 8556838 | Basic | 0.0012 US$ |
 | C25104 | 0402WGF3300TCE | 1 | 2205913 | Basic | 0.0011 US$ |
 | C25765 | 0402WGF2002TCE | 1 | 2906534 | Basic | 0.0011 US$ |
+| C16772 | ? | 1 | sin respuesta | Extended | ? |
+| C26082 | ? | 2 | sin respuesta | Extended | ? |
+| C25091 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: ninguna
+- Piezas sin existencias para 5 placas: C16772, C26082, C25091
 
 ## Coste por placa frente a la REV A (componentes + cargo de piezas Extended; detalle en out_stock/COSTE.md)
 | Pedido | REV A componentes | REV A Extended | REV A total | REV B componentes | REV B Extended | REV B total | Reducción |
@@ -125,8 +135,8 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 | 30 placas | 25.32 US$ | 17 · 1.70 US$ | **27.02 US$** | 11.15 US$ | 13 · 1.30 US$ | **12.45 US$** | **54 %** |
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
