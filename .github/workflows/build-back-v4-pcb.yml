@@ -1,0 +1,169 @@
+name: Build AVO BACK V4 PCB ESP32-S3 (KiCad 9)
+
+# Ruteado (Freerouting o placa reparada) → zonas → DRC con paridad y ERC → PUERTA → (solo si pasa) ficheros de fabricación.
+# Si la puerta falla, el job termina en ROJO; los informes de diagnóstico se guardan igualmente.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-back-v4]
+    paths:
+      - 'hardware/back/V4/PCB/kicad/**'
+      - 'hardware/back/V4/PCB/fuente/**'
+      - '!hardware/back/V4/PCB/fuente/stock_*'
+      - '!hardware/back/V4/PCB/fuente/coste.py'
+      - '.github/workflows/build-back-v4-pcb.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: back-v4-pcb-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pcb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: KiCad 9 (imagen oficial)
+        run: docker pull kicad/kicad:9.0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Ruteado
+        run: |
+          set -x
+          P=hardware/back/V4/PCB
+          R=$P/out/ruteado
+          rm -rf $P/out && mkdir -p $P/out/render $R
+          if [ -f $P/kicad/AVO_BACK_V4_PCB_ruteado.kicad_pcb ]; then
+            # placa ya completa en la fuente (Freerouting + reparación con fuente/repair.py)
+            cp $P/kicad/AVO_BACK_V4_PCB_ruteado.kicad_pcb $P/kicad/AVO_BACK_V4_PCB.kicad_pcb
+            echo "placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)" > $R/ORIGEN.txt
+          else
+            curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar
+            sha256sum /tmp/freerouting.jar > $R/freerouting.sha256
+            docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+              python3 fuente/ci_route.py export kicad/AVO_BACK_V4_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
+            if [ -s $R/placa.dsn ]; then
+              sudo apt-get install -y -qq xvfb >/dev/null 2>&1
+              (timeout 1500 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 60) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
+              tail -150 $R/fr.log > $R/freerouting.log; rm -f $R/fr.log
+            fi
+            if [ -s $R/placa.ses ]; then
+              docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+                python3 fuente/ci_route.py import kicad/AVO_BACK_V4_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_BACK_V4_PCB.kicad_pcb > $R/import.log 2>&1 || echo "import falló" >> $R/import.log
+              echo "Freerouting 1.9.0 sobre la placa de colocación (sin reparar)" > $R/ORIGEN.txt
+            else
+              cp $P/kicad/AVO_BACK_V4_PCB_colocacion.kicad_pcb $P/kicad/AVO_BACK_V4_PCB.kicad_pcb
+              echo "SIN RUTEAR (Freerouting no entregó resultado)" > $R/ORIGEN.txt
+            fi
+          fi
+          sudo chmod -R a+rw $P || true
+
+      - name: Modelos 3D de la librería de KiCad (para renders y STEP)
+        run: |
+          P=hardware/back/V4/PCB
+          M=$P/out/modelos3d; mkdir -p $M
+          : > $P/out/modelos3d.txt
+          for f in $(grep -o '${KICAD9_3DMODEL_DIR}/[^"]*' $P/kicad/AVO_BACK_V4_PCB.kicad_pcb | sed 's|${KICAD9_3DMODEL_DIR}/||' | sort -u); do
+            mkdir -p "$M/$(dirname $f)"
+            if curl -fsSL --retry 3 -o "$M/$f" "https://gitlab.com/kicad/libraries/kicad-packages3D/-/raw/9.0.0/$f"; then
+              echo "OK $f" >> $P/out/modelos3d.txt
+            else
+              echo "FALTA $f" >> $P/out/modelos3d.txt
+            fi
+          done
+          cat $P/out/modelos3d.txt
+
+      - name: Zonas, DRC (con paridad), ERC
+        run: |
+          P=hardware/back/V4/PCB
+          docker run --rm -u 0 -e HOME=/tmp -e KICAD9_3DMODEL_DIR=/w/$P/out/modelos3d -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+            set -x
+            kicad-cli version > out/kicad_version.txt
+            python3 fuente/ci_kicad.py kicad/AVO_BACK_V4_PCB.kicad_pcb kicad/AVO_BACK_V4_PCB.kicad_pcb > out/kicad_info.txt 2>&1
+            mv kicad/AVO_BACK_V4_PCB.kicad_pcb.info.json out/kicad_info.json || true
+            kicad-cli pcb drc --schematic-parity --format json --severity-all --units mm -o out/drc.json kicad/AVO_BACK_V4_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --format report --severity-all --units mm -o out/drc.rpt kicad/AVO_BACK_V4_PCB.kicad_pcb
+            kicad-cli sch erc --format json --severity-all --units mm -o out/erc.json kicad/AVO_BACK_V4_PCB.kicad_sch
+            kicad-cli sch erc --format report --severity-all --units mm -o out/erc.rpt kicad/AVO_BACK_V4_PCB.kicad_sch
+            kicad-cli sch export pdf -o out/AVO_BACK_V4_PCB_esquema.pdf kicad/AVO_BACK_V4_PCB.kicad_sch
+            for L in F.Cu In1.Cu In2.Cu B.Cu; do
+              kicad-cli pcb export svg -l $L,Edge.Cuts --exclude-drawing-sheet --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_BACK_V4_PCB.kicad_pcb || true
+            done
+            kicad-cli pcb render --side top --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/arriba.png kicad/AVO_BACK_V4_PCB.kicad_pcb || true
+            kicad-cli pcb render --side bottom --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/abajo.png kicad/AVO_BACK_V4_PCB.kicad_pcb || true
+            chmod -R a+rw out kicad
+          '
+
+      - name: Puerta de fabricación (bloqueante)
+        id: gate
+        working-directory: hardware/back/V4/PCB
+        run: |
+          set +e
+          python3 fuente/gate.py > out/gate.log 2>&1
+          rc=$?
+          cat out/gate.log
+          if [ $rc -eq 0 ]; then echo "ok=true" >> $GITHUB_OUTPUT; else echo "ok=false" >> $GITHUB_OUTPUT; fi
+          exit 0
+
+      - name: Ficheros de fabricación (solo si la puerta pasa)
+        if: steps.gate.outputs.ok == 'true'
+        run: |
+          set -ex
+          P=hardware/back/V4/PCB
+          mkdir -p $P/out/FINAL $P/out/gerber
+          docker run --rm -u 0 -e HOME=/tmp -e KICAD9_3DMODEL_DIR=/w/$P/out/modelos3d -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+            set -ex
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_BACK_V4_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_BACK_V4_PCB.kicad_pcb
+            kicad-cli pcb export pos --format csv --units mm --side both -o out/posiciones_kicad.csv kicad/AVO_BACK_V4_PCB.kicad_pcb
+            kicad-cli pcb export step --subst-models --force --user-origin 0x100mm -o out/FINAL/AVO_BACK_V4_PCB_FINAL_STEP.step kicad/AVO_BACK_V4_PCB.kicad_pcb
+            chmod -R a+rw out
+          '
+          cd $P
+          python3 fuente/jlc.py
+          cp out/JLCPCB_BOM.csv out/FINAL/AVO_BACK_V4_PCB_FINAL_BOM_JLCPCB.csv
+          cp out/JLCPCB_CPL.csv out/FINAL/AVO_BACK_V4_PCB_FINAL_CPL_JLCPCB.csv
+          cp out/drc.rpt out/FINAL/AVO_BACK_V4_PCB_FINAL_DRC.txt
+          cp out/erc.rpt out/FINAL/AVO_BACK_V4_PCB_FINAL_ERC.txt
+          cp out/AVO_BACK_V4_PCB_REPORTE.md out/FINAL/AVO_BACK_V4_PCB_FINAL_REPORTE.md
+          (cd out/gerber && zip -q ../FINAL/AVO_BACK_V4_PCB_FINAL_GERBER_JLCPCB.zip *)
+          mkdir -p out/FINAL/KiCad && cp kicad/AVO_BACK_V4_PCB.kicad_pcb kicad/AVO_BACK_V4_PCB.kicad_sch kicad/AVO_BACK_V4_PCB.kicad_pro out/FINAL/KiCad/
+          F=../../../../firmware/back/V4_0_0/out/AVO_BACK_V4_FIRMWARE.zip
+          if [ -f $F ]; then cp $F out/FINAL/; else echo "::warning title=Firmware::no hay AVO_BACK_V4_FIRMWARE.zip (compilar build-back-v4-fw)"; fi
+          (cd out/FINAL && sha256sum *.* KiCad/* > SHA256SUMS.txt)
+
+      - name: Guardar resultados en la rama
+        if: always()
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          P=hardware/back/V4/PCB
+          T=$(mktemp -d)
+          rm -rf $P/out/modelos3d
+          cp -r $P/out $T/out
+          cp $P/kicad/AVO_BACK_V4_PCB.kicad_pcb $T/
+          git fetch origin ${{ github.ref_name }}
+          git reset -q --hard origin/${{ github.ref_name }}
+          rm -rf $P/out && cp -r $T/out $P/out && cp $T/AVO_BACK_V4_PCB.kicad_pcb $P/kicad/
+          git add -A $P/out $P/kicad/AVO_BACK_V4_PCB.kicad_pcb
+          git commit -m "PCB espalda V4: resultados de KiCad 9 de ${GITHUB_SHA::7} (puerta: ${{ steps.gate.outputs.ok }}) [skip ci]" || echo "sin cambios"
+          git push origin HEAD:${{ github.ref_name }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-BACK-V4-PCB-${{ steps.gate.outputs.ok == 'true' && 'FABRICACION' || 'DIAGNOSTICO' }}
+          path: hardware/back/V4/PCB/out
+
+      - name: Resultado
+        run: |
+          if [ "${{ steps.gate.outputs.ok }}" != "true" ]; then
+            echo "::error title=Puerta de fabricación::DRC/ERC con errores o conexiones incompletas: no hay ficheros de fabricación"
+            exit 1
+          fi
