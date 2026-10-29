@@ -1,0 +1,22 @@
+Placa de partida: out/C3/KiCad/AVO_GIRTH_PCB.kicad_pcb  SHA-256 b0064f316f0d3d31996e2c187bec1701bb89f43442df6fff5cae6779b14f91b0 (= entregada en 2a70369)
+Placa: cajetín rev «A» → «B»
+Placa: TP2: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP3: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP6: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: SW2: (attr through_hole) → (attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+Placa: L2: (attr through_hole) → (attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP5: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP7: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: L1: (attr through_hole) → (attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP1: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP4: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: TP8: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
+Placa: SW1: (attr through_hole) → (attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+Esquema: dnp yes + in_bom no en TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, L1, L2, SW1, SW2
+Proyecto: .kicad_pro sin cambios; .kicad_dru = reglas de AISLER 4 capas 35 µm ENIG (solo para el DRC)
+Comprobado: quitando (attr) de las huellas y el cajetín, la placa copiada es idéntica a la original (1307 elementos de primer nivel: huellas, pistas, vías, zonas con relleno, contorno, textos)
+Huellas: 98 · para montar: 85 · DNP: 13 (C5, L1, L2, SW1, SW2, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8)
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_pcb b466b39bef574f741df0ddcf8a7b9008a38c4a0d424a6aa7cd6e59ec3f229d46
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_sch 9f2b23684e2486063387540dc946b65bba9f9bb06749527def1c2d535f12342b
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_pro 3eaaa73c950e77a721aa7b40f0c7274b45cc6522bb5c1f5ae66b88257e8f8eb1
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_dru f0b0ae1b1552ced65afec02ea4616e6e86c1b7b0cf919917a6b967685decc4ac

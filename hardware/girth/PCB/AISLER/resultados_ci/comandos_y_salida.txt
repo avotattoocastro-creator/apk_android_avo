@@ -1,0 +1,38 @@
++ kicad-cli version
+9.0.9
++ kicad-cli sch erc --format report --severity-all --units mm -o hardware/girth/PCB/AISLER/resultados_ci/erc.rpt /k/AVO_GIRTH_PCB.kicad_sch
+You have run CvPcb for the first time using the new footprint library table method for finding footprints.
+CvPcb has either copied the default table or created an empty table in your home folder.
+You must first configure the library table to include all footprint libraries not included with KiCad.
+See the “Footprint Library Table” section of the CvPcb documentation for more information. Found 0 violations
+Saved ERC Report to hardware/girth/PCB/AISLER/resultados_ci/erc.rpt
++ kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_diseno.rpt /std/AVO_GIRTH_PCB.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_diseno.rpt
++ kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.rpt /k/AVO_GIRTH_PCB.kicad_pcb
+Found 32 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.rpt
++ kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.json /k/AVO_GIRTH_PCB.kicad_pcb
+Found 32 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.json
++ kicad-cli pcb export odb --units mm --precision 4 --compression zip -o hardware/girth/PCB/AISLER/resultados_ci/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip /k/AVO_GIRTH_PCB.kicad_pcb
++ mkdir -p /tmp/g
++ kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu --subtract-soldermask -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+Plotted to '/tmp/g/AVO_GIRTH_PCB-F_Cu.gtl'.
+Plotted to '/tmp/g/AVO_GIRTH_PCB-In1_Cu.g1'.
+Plotted to '/tmp/g/AVO_GIRTH_PCB-In2_Cu.g2'.
+Plotted to '/tmp/g/AVO_GIRTH_PCB-B_Cu.gbl'.
++ kicad-cli pcb export drill --format excellon --excellon-separate-th --excellon-units mm -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+Created file '/tmp/g/AVO_GIRTH_PCB-PTH.drl'
+Created file '/tmp/g/AVO_GIRTH_PCB-NPTH.drl'
+Done.
++ kicad-cli pcb export pos --format csv --units mm --side both --exclude-dnp -o hardware/girth/PCB/AISLER/resultados_ci/posiciones_kicad_sin_dnp.csv /k/AVO_GIRTH_PCB.kicad_pcb
+Wrote position data to 'hardware/girth/PCB/AISLER/resultados_ci/posiciones_kicad_sin_dnp.csv'.
++ cp -r /tmp/g hardware/girth/PCB/AISLER/resultados_ci/gerber_contraste
++ chmod -R a+rw hardware/girth/PCB/AISLER/resultados_ci

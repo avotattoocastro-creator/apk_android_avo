@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AISLER/validar_odb.py", line 209, in <module>
+    ox, oy = sorted(dx)[len(dx) // 2], sorted(dy)[len(dy) // 2]
+             ~~~~~~~~~~^^^^^^^^^^^^^^
+IndexError: list index out of range
