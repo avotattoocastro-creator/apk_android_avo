@@ -33,7 +33,9 @@ def sym_for(p):
         for num in pads_with_net:
             if num not in have:
                 R.append((num, num, "passive"))
-        name = p["value"].split()[0].replace(",", "_").replace(" ", "_") + "_" + p["ref"].rstrip("0123456789")
+        import hashlib
+        sig = hashlib.md5(repr((L, R)).encode()).hexdigest()[:6]      # one library symbol per pin layout
+        name = p["value"].split()[0].replace(",", "_").replace(" ", "_") + "_" + p["ref"].rstrip("0123456789") + "_" + sig
         node, pos = SCH.lib_symbol(name, L, R, ref=p["ref"].rstrip("0123456789"))
         return name, node, pos
     if s in ("R", "C", "LED", "XTAL"):

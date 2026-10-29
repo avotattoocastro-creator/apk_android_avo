@@ -248,7 +248,8 @@ def try_route(r, pads, net, nid, g):
 
 
 def main():
-    src = os.path.join(D.OUT, "AVO_GIRTH_PCB.kicad_pcb")
+    src = os.path.join(D.OUT, "AVO_GIRTH_PCB_colocacion.kicad_pcb" if "--from-placement" in sys.argv
+                       else "AVO_GIRTH_PCB.kicad_pcb")
     segs, vias, fps = read_board(src)
     bad = check_positions(fps)
     if bad:
@@ -277,7 +278,7 @@ def main():
     failed = []
     fixed = set()
     it = 0
-    while queue and it < 120:
+    while queue and it < 400:
         it += 1
         net = queue.pop(0)
         g, _ = clusters(net, pads, segs, vias)
@@ -296,7 +297,7 @@ def main():
             queue.insert(0, net)                  # more groups may remain
             continue
         # 2) rip-up: route ignoring other nets' tracks, then remove the tracks in the way and re-queue their nets
-        if ripped.get(net, 0) >= 4:
+        if ripped.get(net, 0) >= 6:
             failed.append(net)
             continue
         ripped[net] = ripped.get(net, 0) + 1

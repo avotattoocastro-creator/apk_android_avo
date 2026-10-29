@@ -355,7 +355,7 @@ def write_board(r, path, outer_pours=True):
     tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(0, -4.6), "B.SilkS", 0.8, mirror=True, bold=False))
     tree.append(B.gr_text("ANTENA FPC (sin cobre)", *D.K(11.0, 16.0), "F.SilkS", 0.8, bold=False))
-    tree.append(B.gr_text("+ BAT −", *D.K(-26.7, 6.3), "F.SilkS", 0.7, angle=90, bold=False))
+    tree.append(B.gr_text("+ BAT −", *D.K(-20.5, 6.3), "F.SilkS", 0.7, angle=90, bold=False))
     for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4))):
         tree.append(B.gr_text(txt, *D.K(x, y), "F.SilkS", 0.7, bold=False))
     B.write(path, tree)

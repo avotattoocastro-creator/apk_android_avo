@@ -12,18 +12,23 @@
 	)
 	(lib_symbols
 		(symbol
-			"AVO:BAT54C_D"
+			"AVO:BAT54C_D_1aa644"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "D" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "BAT54C_D" (at 7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"BAT54C_D_1aa644"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"BAT54C_D_0_1"
+				"BAT54C_D_1aa644_0_1"
 				(rectangle
 					(start -7.62 3.81)
 					(end 7.62 -3.81)
@@ -32,7 +37,7 @@
 				)
 			)
 			(symbol
-				"BAT54C_D_1_1"
+				"BAT54C_D_1aa644_1_1"
 				(pin
 					passive
 					line
@@ -60,18 +65,23 @@
 			)
 		)
 		(symbol
-			"AVO:G6KU-2F-Y_K"
+			"AVO:G6KU-2F-Y_K_ae8a75"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "K" (at -12.7 10.16 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "G6KU-2F-Y_K" (at 12.7 10.16 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"G6KU-2F-Y_K_ae8a75"
+				(at 12.7 10.16 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"G6KU-2F-Y_K_0_1"
+				"G6KU-2F-Y_K_ae8a75_0_1"
 				(rectangle
 					(start -12.7 8.89)
 					(end 12.7 -8.89)
@@ -80,7 +90,7 @@
 				)
 			)
 			(symbol
-				"G6KU-2F-Y_K_1_1"
+				"G6KU-2F-Y_K_ae8a75_1_1"
 				(pin
 					passive
 					line
@@ -148,18 +158,23 @@
 			)
 		)
 		(symbol
-			"AVO:AO3401A_Q"
+			"AVO:AO3401A_Q_bcf332"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Q" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "AO3401A_Q" (at 7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"AO3401A_Q_bcf332"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"AO3401A_Q_0_1"
+				"AO3401A_Q_bcf332_0_1"
 				(rectangle
 					(start -7.62 3.81)
 					(end 7.62 -3.81)
@@ -168,7 +183,7 @@
 				)
 			)
 			(symbol
-				"AO3401A_Q_1_1"
+				"AO3401A_Q_bcf332_1_1"
 				(pin
 					passive
 					line
@@ -196,18 +211,23 @@
 			)
 		)
 		(symbol
-			"AVO:AO3400A_Q"
+			"AVO:AO3400A_Q_71681c"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Q" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "AO3400A_Q" (at 7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"AO3400A_Q_71681c"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"AO3400A_Q_0_1"
+				"AO3400A_Q_71681c_0_1"
 				(rectangle
 					(start -7.62 3.81)
 					(end 7.62 -3.81)
@@ -216,7 +236,7 @@
 				)
 			)
 			(symbol
-				"AO3400A_Q_1_1"
+				"AO3400A_Q_71681c_1_1"
 				(pin
 					passive
 					line
@@ -244,18 +264,23 @@
 			)
 		)
 		(symbol
-			"AVO:2N7002_Q"
+			"AVO:2N7002_Q_71681c"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "Q" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "2N7002_Q" (at 7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"2N7002_Q_71681c"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"2N7002_Q_0_1"
+				"2N7002_Q_71681c_0_1"
 				(rectangle
 					(start -7.62 3.81)
 					(end 7.62 -3.81)
@@ -264,7 +289,7 @@
 				)
 			)
 			(symbol
-				"2N7002_Q_1_1"
+				"2N7002_Q_71681c_1_1"
 				(pin
 					passive
 					line
@@ -367,18 +392,23 @@
 			)
 		)
 		(symbol
-			"AVO:USB-C_J"
+			"AVO:USB-C_J_cb921f"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J" (at -10.16 17.78 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "USB-C_J" (at 10.16 17.78 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"USB-C_J_cb921f"
+				(at 10.16 17.78 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"USB-C_J_0_1"
+				"USB-C_J_cb921f_0_1"
 				(rectangle
 					(start -10.16 16.51)
 					(end 10.16 -16.51)
@@ -387,7 +417,7 @@
 				)
 			)
 			(symbol
-				"USB-C_J_1_1"
+				"USB-C_J_cb921f_1_1"
 				(pin
 					passive
 					line
@@ -527,18 +557,76 @@
 			)
 		)
 		(symbol
-			"AVO:USBLC6-2SC6_U"
+			"AVO:AO3401A_Q_71681c"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Q" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+			(property
+				"Value"
+				"AO3401A_Q_71681c"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
+			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(symbol
+				"AO3401A_Q_71681c_0_1"
+				(rectangle
+					(start -7.62 3.81)
+					(end 7.62 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol
+				"AO3401A_Q_71681c_1_1"
+				(pin
+					passive
+					line
+					(at -10.16 1.27 0)
+					(length 2.54)
+					(name "G" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin
+					passive
+					line
+					(at 10.16 1.27 180)
+					(length 2.54)
+					(name "D" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+				(pin
+					passive
+					line
+					(at 10.16 -1.27 180)
+					(length 2.54)
+					(name "S" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+		)
+		(symbol
+			"AVO:USBLC6-2SC6_U_7dacad"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U" (at -7.62 7.62 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "USBLC6-2SC6_U" (at 7.62 7.62 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"USBLC6-2SC6_U_7dacad"
+				(at 7.62 7.62 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"USBLC6-2SC6_U_0_1"
+				"USBLC6-2SC6_U_7dacad_0_1"
 				(rectangle
 					(start -7.62 6.35)
 					(end 7.62 -6.35)
@@ -547,7 +635,7 @@
 				)
 			)
 			(symbol
-				"USBLC6-2SC6_U_1_1"
+				"USBLC6-2SC6_U_7dacad_1_1"
 				(pin
 					passive
 					line
@@ -599,18 +687,23 @@
 			)
 		)
 		(symbol
-			"AVO:BATERÍA_J"
+			"AVO:BATERÍA_J_ac1e8e"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "BATERÍA_J" (at 7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"BATERÍA_J_ac1e8e"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"BATERÍA_J_0_1"
+				"BATERÍA_J_ac1e8e_0_1"
 				(rectangle
 					(start -7.62 3.81)
 					(end 7.62 -3.81)
@@ -619,7 +712,7 @@
 				)
 			)
 			(symbol
-				"BATERÍA_J_1_1"
+				"BATERÍA_J_ac1e8e_1_1"
 				(pin
 					passive
 					line
@@ -647,18 +740,23 @@
 			)
 		)
 		(symbol
-			"AVO:RT9080-33GJ5_U"
+			"AVO:RT9080-33GJ5_U_7ca22f"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U" (at -7.62 6.35 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "RT9080-33GJ5_U" (at 7.62 6.35 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"RT9080-33GJ5_U_7ca22f"
+				(at 7.62 6.35 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"RT9080-33GJ5_U_0_1"
+				"RT9080-33GJ5_U_7ca22f_0_1"
 				(rectangle
 					(start -7.62 5.08)
 					(end 7.62 -5.08)
@@ -667,7 +765,7 @@
 				)
 			)
 			(symbol
-				"RT9080-33GJ5_U_1_1"
+				"RT9080-33GJ5_U_7ca22f_1_1"
 				(pin
 					passive
 					line
@@ -743,18 +841,23 @@
 			)
 		)
 		(symbol
-			"AVO:BNO085_U"
+			"AVO:BNO085_U_cee500"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U" (at -12.7 22.86 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "BNO085_U" (at 12.7 22.86 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"BNO085_U_cee500"
+				(at 12.7 22.86 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"BNO085_U_0_1"
+				"BNO085_U_cee500_0_1"
 				(rectangle
 					(start -12.7 21.59)
 					(end 12.7 -21.59)
@@ -763,7 +866,7 @@
 				)
 			)
 			(symbol
-				"BNO085_U_1_1"
+				"BNO085_U_cee500_1_1"
 				(pin
 					passive
 					line
@@ -1031,7 +1134,7 @@
 			)
 		)
 		(symbol
-			"AVO:BQ51013BRHLR_U"
+			"AVO:BQ51013BRHLR_U_606a23"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1039,7 +1142,7 @@
 			(property "Reference" "U" (at -11.43 17.78 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"BQ51013BRHLR_U"
+				"BQ51013BRHLR_U_606a23"
 				(at 11.43 17.78 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -1047,7 +1150,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"BQ51013BRHLR_U_0_1"
+				"BQ51013BRHLR_U_606a23_0_1"
 				(rectangle
 					(start -11.43 16.51)
 					(end 11.43 -16.51)
@@ -1056,7 +1159,7 @@
 				)
 			)
 			(symbol
-				"BQ51013BRHLR_U_1_1"
+				"BQ51013BRHLR_U_606a23_1_1"
 				(pin
 					passive
 					line
@@ -1228,18 +1331,23 @@
 			)
 		)
 		(symbol
-			"AVO:BQ24072RGTR_U"
+			"AVO:BQ24072RGTR_U_4b171e"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U" (at -8.89 13.97 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-			(property "Value" "BQ24072RGTR_U" (at 8.89 13.97 0) (effects (font (size 1.27 1.27)) (justify right bottom)))
+			(property
+				"Value"
+				"BQ24072RGTR_U_4b171e"
+				(at 8.89 13.97 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"BQ24072RGTR_U_0_1"
+				"BQ24072RGTR_U_4b171e_0_1"
 				(rectangle
 					(start -8.89 12.7)
 					(end 8.89 -12.7)
@@ -1248,7 +1356,7 @@
 				)
 			)
 			(symbol
-				"BQ24072RGTR_U_1_1"
+				"BQ24072RGTR_U_4b171e_1_1"
 				(pin
 					passive
 					line
@@ -1388,7 +1496,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-C6-MINI-1U-N4_U"
+			"AVO:ESP32-C6-MINI-1U-N4_U_91bf48"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1396,7 +1504,7 @@
 			(property "Reference" "U" (at -19.05 43.18 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-C6-MINI-1U-N4_U"
+				"ESP32-C6-MINI-1U-N4_U_91bf48"
 				(at 19.05 43.18 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -1404,7 +1512,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-C6-MINI-1U-N4_U_0_1"
+				"ESP32-C6-MINI-1U-N4_U_91bf48_0_1"
 				(rectangle
 					(start -19.05 41.91)
 					(end 19.05 -41.91)
@@ -1413,7 +1521,7 @@
 				)
 			)
 			(symbol
-				"ESP32-C6-MINI-1U-N4_U_1_1"
+				"ESP32-C6-MINI-1U-N4_U_91bf48_1_1"
 				(pin
 					passive
 					line
@@ -1899,7 +2007,7 @@
 		(uuid "87b9423d-c820-510e-9a19-da6343e0a1c0")
 	)
 	(symbol
-		(lib_id "AVO:BAT54C_D")
+		(lib_id "AVO:BAT54C_D_1aa644")
 		(at 43.18 275.59 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1949,7 +2057,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 53.34 274.32 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:BAT54C_D")
+		(lib_id "AVO:BAT54C_D_1aa644")
 		(at 91.44 275.59 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1991,7 +2099,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 274.32 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:G6KU-2F-Y_K")
+		(lib_id "AVO:G6KU-2F-Y_K_ae8a75")
 		(at 142.24 280.67 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2097,7 +2205,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 157.48 287.02 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_bcf332")
 		(at 194.31 275.59 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2147,7 +2255,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 204.47 276.86 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3400A_Q")
+		(lib_id "AVO:AO3400A_Q_71681c")
 		(at 241.3 275.59 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2197,7 +2305,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 251.46 276.86 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:2N7002_Q")
+		(lib_id "AVO:2N7002_Q_71681c")
 		(at 43.18 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2247,7 +2355,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 53.34 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3400A_Q")
+		(lib_id "AVO:AO3400A_Q_71681c")
 		(at 91.44 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2297,7 +2405,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 101.6 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_bcf332")
 		(at 137.16 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2347,7 +2455,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 147.32 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:2N7002_Q")
+		(lib_id "AVO:2N7002_Q_71681c")
 		(at 184.15 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2397,7 +2505,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 194.31 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_bcf332")
 		(at 231.14 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2447,7 +2555,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 241.3 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:2N7002_Q")
+		(lib_id "AVO:2N7002_Q_71681c")
 		(at 43.18 313.69 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3201,7 +3309,7 @@
 		(uuid "759b7429-0997-569d-baa1-1834f686bd37")
 	)
 	(symbol
-		(lib_id "AVO:USB-C_J")
+		(lib_id "AVO:USB-C_J_cb921f")
 		(at 307.34 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3381,7 +3489,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 320.04 45.72 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_71681c")
 		(at 355.6 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3431,7 +3539,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 365.76 38.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_71681c")
 		(at 403.86 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3481,7 +3589,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 414.02 38.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:USBLC6-2SC6_U")
+		(lib_id "AVO:USBLC6-2SC6_U_7dacad")
 		(at 453.39 39.37 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3805,7 +3913,7 @@
 		(uuid "8852f97b-0db8-5e09-8d55-60b539174c31")
 	)
 	(symbol
-		(lib_id "AVO:BATERÍA_J")
+		(lib_id "AVO:BATERÍA_J_ac1e8e")
 		(at 43.18 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3861,7 +3969,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 53.34 176.53 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:2N7002_Q")
+		(lib_id "AVO:2N7002_Q_71681c")
 		(at 88.9 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3911,7 +4019,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 99.06 179.07 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:RT9080-33GJ5_U")
+		(lib_id "AVO:RT9080-33GJ5_U_7ca22f")
 		(at 132.08 179.07 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4473,7 +4581,7 @@
 		(uuid "6d4fc65f-dbc7-597b-893c-86fce9ecbd3c")
 	)
 	(symbol
-		(lib_id "AVO:AO3401A_Q")
+		(lib_id "AVO:AO3401A_Q_bcf332")
 		(at 304.8 139.7 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4523,7 +4631,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 314.96 140.97 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:BNO085_U")
+		(lib_id "AVO:BNO085_U_cee500")
 		(at 360.68 157.48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5599,7 +5707,7 @@
 		(uuid "16b9aba8-baef-5131-99d2-112061bdc3e5")
 	)
 	(symbol
-		(lib_id "AVO:BQ51013BRHLR_U")
+		(lib_id "AVO:BQ51013BRHLR_U_606a23")
 		(at 49.53 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6933,7 +7041,7 @@
 		(uuid "c38ad082-ae24-5cbe-8df6-6d4619a90ce5")
 	)
 	(symbol
-		(lib_id "AVO:BQ24072RGTR_U")
+		(lib_id "AVO:BQ24072RGTR_U_4b171e")
 		(at 565.15 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7549,7 +7657,7 @@
 		(uuid "a7bc4b96-9083-5a37-9d5c-0bb9278c024b")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-C6-MINI-1U-N4_U")
+		(lib_id "AVO:ESP32-C6-MINI-1U-N4_U_91bf48")
 		(at 576.58 172.72 0)
 		(unit 1)
 		(exclude_from_sim no)

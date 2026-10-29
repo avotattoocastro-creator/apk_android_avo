@@ -55,7 +55,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -24.8,
+  "x": -25.2,
   "y": -8.4,
   "rot": 0
  },
@@ -70,7 +70,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -24.8,
+  "x": -25.2,
   "y": -10.8,
   "rot": 0
  },
@@ -85,7 +85,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -24.8,
+  "x": -25.2,
   "y": -13.2,
   "rot": 0
  },
@@ -130,7 +130,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -21.9,
+  "x": -22.4,
   "y": -9.4,
   "rot": 270
  },
@@ -160,7 +160,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -19.3,
+  "x": -19.4,
   "y": -9.4,
   "rot": 270
  },
@@ -176,7 +176,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -20.2,
-  "y": 1.4,
+  "y": 3.0,
   "rot": 90
  },
  {
@@ -191,7 +191,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -18.9,
-  "y": 1.7,
+  "y": 3.3,
   "rot": 90
  },
  {
@@ -206,7 +206,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -17.6,
-  "y": 1.4,
+  "y": 3.0,
   "rot": 90
  },
  {
@@ -265,9 +265,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.2,
-  "y": -7.6,
-  "rot": 270
+  "x": -21.3,
+  "y": -11.9,
+  "rot": 0
  },
  {
   "ref": "C16",
@@ -280,9 +280,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -14.0,
-  "y": -7.3,
-  "rot": 270
+  "x": -18.9,
+  "y": -11.9,
+  "rot": 0
  },
  {
   "ref": "R1",
@@ -565,7 +565,7 @@
   "no_assembly": false,
   "note": "pin 1 = + · comprobar la polaridad del cable antes de enchufar",
   "jlc_rot": 0,
-  "x": -22.6,
+  "x": -24.2,
   "y": 6.3,
   "rot": 270
  },
