@@ -1,0 +1,85 @@
+name: Build AVO BACK V4.0.0 (placa V4 ESP32-S3 + ZED-F9P)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-back-v4]
+    paths:
+      - 'firmware/back/V4_0_0/**'
+      - '!firmware/back/V4_0_0/out/**'
+      - '.github/workflows/build-back-v4-fw.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: back-v4-fw-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  back:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: firmware/back/V4_0_0
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pruebas en el ordenador (enlace ESP-NOW, emparejamiento, ZED simulado, placa V4)
+        run: |
+          g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp test/test_v4.cpp lib/avo_core/src/*.cpp -o back_test
+          ./back_test | tee host_tests.log
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Núcleo ESP32 3.3.12 (el mismo que la espalda 3.11.0, ESP-IDF 5.5.5)
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+      - name: Compilar
+        run: |
+          if ! ./build_back_v4.sh "$GITHUB_WORKSPACE/fwout"; then
+            grep -E "error:|Error " "$GITHUB_WORKSPACE/fwout/build.log" | head -20 | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+
+      - name: Empaquetar y comprobar la imagen
+        run: |
+          cd "$GITHUB_WORKSPACE/fwout"
+          cp AVO_BACK_V4_0_0.ino.bin AVO_BACK_V4_0_0_DEV1_firmware.bin
+          [ -f AVO_BACK_V4_0_0.ino.merged.bin ] && cp AVO_BACK_V4_0_0.ino.merged.bin AVO_BACK_V4_0_0_DEV1_COMPLETO_0x0.bin || true
+          python3 - <<'PY'
+          import struct
+          b = open("AVO_BACK_V4_0_0_DEV1_firmware.bin", "rb").read()
+          assert b[0] == 0xE9 and struct.unpack("<H", b[12:14])[0] == 9, "no es una imagen de ESP32-S3"
+          assert struct.unpack("<I", b[0x20:0x24])[0] == 0xABCD5432, "sin esp_app_desc_t"
+          assert len(b) < 3264 * 1024, "no cabe en app0/app1"
+          missing = [s for s in (b"4.0.0-dev1\x00AVO-BACK", b"MICROSD:", b"PPS:", b"SOPORTE (Hall)") if s not in b]
+          if missing: print(f"::error title=Imagen::faltan {missing}"); raise SystemExit(1)
+          print(f"::notice title=AVO BACK 4.0.0-dev1::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0)")
+          PY
+          grep -E 'Sketch uses|Global variables' build.log | tee mem.txt
+          cp "$GITHUB_WORKSPACE/firmware/back/V4_0_0/host_tests.log" .
+          sha256sum AVO_BACK_V4_0_0_DEV1_*.bin > SHA256SUMS.txt
+          mkdir -p "$GITHUB_WORKSPACE/firmware/back/V4_0_0/out"
+          zip -q "$GITHUB_WORKSPACE/firmware/back/V4_0_0/out/AVO_BACK_V4_FIRMWARE.zip" AVO_BACK_V4_0_0_DEV1_*.bin SHA256SUMS.txt build.log host_tests.log mem.txt
+          cp mem.txt SHA256SUMS.txt host_tests.log "$GITHUB_WORKSPACE/firmware/back/V4_0_0/out/"
+
+      - name: Guardar en la rama
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          T=$(mktemp -d); cp -r firmware/back/V4_0_0/out $T/
+          git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+          rm -rf firmware/back/V4_0_0/out; cp -r $T/out firmware/back/V4_0_0/
+          git add -A firmware/back/V4_0_0/out
+          git commit -m "Espalda V4: firmware 4.0.0-dev1 compilado en el CI (${GITHUB_SHA::7}) [skip ci]" || echo "sin cambios"
+          git push origin HEAD:${{ github.ref_name }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-BACK-V4-0-0-DEV1
+          path: fwout/AVO_BACK_V4_0_0_DEV1_*.bin
+          retention-days: 60
