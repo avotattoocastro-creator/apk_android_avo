@@ -1,10 +1,7 @@
 Traceback (most recent call last):
-  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AUDITORIA_REV_B/spice/sim_revb.py", line 20, in <module>
-    import avo_girth_pcb as D  # noqa: E402
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AUDITORIA_REV_B/spice/../../fuente/avo_girth_pcb.py", line 26, in <module>
-    from router import Router              # noqa: E402
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/fuente/router.py", line 11, in <module>
-    from scipy import ndimage
-ModuleNotFoundError: No module named 'scipy'
+  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AUDITORIA_REV_B/spice/sim_revb.py", line 349, in <module>
+    main()
+  File "/home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AUDITORIA_REV_B/spice/sim_revb.py", line 205, in main
+    t = res["time"]; v3 = res["v(vdd3)"]
+                          ~~~^^^^^^^^^^^
+KeyError: 'v(vdd3)'

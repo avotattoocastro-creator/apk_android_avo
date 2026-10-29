@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-29 19:18 UTC",
+ "date_utc": "2026-10-29 19:41 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21918351,
+   "stock": 21918141,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 948787,
+   "stock": 948530,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6252878,
+   "stock": 6252729,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 32005227,
+   "stock": 32004543,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "0402B223K500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 610107,
+   "stock": 610047,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "CL10B474KA8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 689081,
+   "stock": 689069,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "TYPE-C-31-M-12",
    "maker": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 289001,
+   "stock": 288996,
    "library": "expand",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "CL05B224KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 1337456,
+   "stock": 1337486,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12133027,
+   "stock": 12133204,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "AO3400A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1146918,
+   "stock": 1146863,
    "library": "base",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7354353,
+   "stock": 7354124,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "CL10A225KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 2901245,
+   "stock": 2901205,
    "library": "base",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "0402WGF2000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1923660,
+   "stock": 1923635,
    "library": "base",
    "prices": [
     [
@@ -602,7 +602,7 @@
    "mpn": "0402WGF2200TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2042522,
+   "stock": 2042482,
    "library": "base",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2992703,
+   "stock": 2992644,
    "library": "base",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2205854,
+   "stock": 2205840,
    "library": "base",
    "prices": [
     [
@@ -707,7 +707,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8553343,
+   "stock": 8553167,
    "library": "base",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 17202266,
+   "stock": 17201544,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "0402WGF2002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2906470,
+   "stock": 2906340,
    "library": "base",
    "prices": [
     [
@@ -812,7 +812,7 @@
    "mpn": "0402WGF3301TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1624042,
+   "stock": 1624022,
    "library": "base",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "0402WGF4701TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15212346,
+   "stock": 15212004,
    "library": "base",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "0402WGF5101TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3837087,
+   "stock": 3837033,
    "library": "base",
    "prices": [
     [
@@ -952,7 +952,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3011916,
+   "stock": 3011836,
    "library": "base",
    "prices": [
     [
@@ -1057,7 +1057,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3826516,
+   "stock": 3826398,
    "library": "base",
    "prices": [
     [
@@ -1127,7 +1127,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10460970,
+   "stock": 10460516,
    "library": "base",
    "prices": [
     [
@@ -1162,7 +1162,7 @@
    "mpn": "BQ51013BRHLR",
    "maker": "Texas Instruments",
    "package": "VQFN-20(4.5x3.5)",
-   "stock": 476,
+   "stock": 471,
    "library": "expand",
    "prices": [
     [
@@ -1232,7 +1232,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 38271,
+   "stock": 38232,
    "library": "expand",
    "prices": [
     [
@@ -1267,7 +1267,7 @@
    "mpn": "NCP15XH103F03RC",
    "maker": "Murata Electronics",
    "package": "0402",
-   "stock": 303975,
+   "stock": 303913,
    "library": "expand",
    "prices": [
     [
@@ -1302,7 +1302,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 36686,
+   "stock": 36609,
    "library": "expand",
    "prices": [
     [
@@ -1337,7 +1337,7 @@
    "mpn": "2N7002",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOT-23",
-   "stock": 3088667,
+   "stock": 3088637,
    "library": "base",
    "prices": [
     [
@@ -1372,7 +1372,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 8288043,
+   "stock": 8288001,
    "library": "base",
    "prices": [
     [
