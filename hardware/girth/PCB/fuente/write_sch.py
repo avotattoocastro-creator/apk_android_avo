@@ -6,13 +6,14 @@ import avo_girth_pcb as D
 import project
 import schematic as SCH
 
-BLOCKS = {   # name: (x0, y0, x1, y1, title)
-    "Qi": (15, 22, 150, 140, "RECEPTOR Qi (BQ51013B) · bobina Ø25 · USB por AD/AD-EN"),
-    "USB": (155, 22, 270, 140, "USB-C (programación) · ESD · entrada AD"),
-    "Cargador": (275, 22, 405, 140, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S 500 mAh"),
-    "ESP32-C6": (15, 148, 165, 285, "ESP32-C6-MINI-1U · arranque · LED · pruebas"),
-    "IMU": (170, 148, 300, 285, "IMU BNO085 (SPI) · alimentación conmutada"),
-    "3V3": (305, 148, 405, 285, "3,3 V (RT9080) · REED · BATERÍA (ADC)"),
+BLOCKS = {   # name: (x0, y0, x1, y1, title) — hoja A2
+    "Qi": (15, 22, 200, 205, "RECEPTOR Qi (BQ51013B) · bobina Ø25 · USB por AD/AD-EN"),
+    "USB": (205, 22, 370, 205, "USB-C (programación) · ESD · entrada AD"),
+    "Cargador": (375, 22, 580, 205, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S 500 mAh"),
+    "ESP32-C6": (15, 210, 200, 405, "ESP32-C6-MINI-1U · arranque · LED · pruebas"),
+    "IMU": (205, 210, 370, 405, "IMU BNO085 (SPI) · alimentación conmutada"),
+    "3V3": (375, 210, 470, 405, "3,3 V (RT9080) · REED · BATERÍA (ADC)"),
+    "Corte": (475, 210, 580, 405, "CORTE DE BATERÍA: relé biestable G6KU"),
 }
 BLOCK_OF = {"Batería": "3V3", "Reed": "3V3", "Pruebas": "ESP32-C6"}
 
@@ -51,7 +52,7 @@ def sym_for(p):
 
 
 def write(path_sch, path_pro, path_parts):
-    sh = SCH.Sheet("AVO GIRTH · placa de la cincha · REV " + D.REV)
+    sh = SCH.Sheet("AVO GIRTH · placa de la cincha · REV " + D.REV, "A2")
     for k, (x0, y0, x1, y1, title) in BLOCKS.items():
         sh.box(x0, y0, x1, y1)
         sh.text(title, x0 + 2, y0 + 5, 2.0)
@@ -89,7 +90,7 @@ def write(path_sch, path_pro, path_parts):
             cursor[blk][1] = y0 + 14
             cursor[blk][0] += 22
     sh.note("Generado por fuente/avo_girth_pcb.py (mismo origen de datos que la placa). Todas las conexiones "
-            "son etiquetas de red: dos pines con la misma etiqueta están unidos.", 15, 288, 1.5)
+            "son etiquetas de red: dos pines con la misma etiqueta están unidos.", 15, 410, 1.5)
     sh.write(path_sch, D.DATE, D.REV)
 
     project.write(path_pro,

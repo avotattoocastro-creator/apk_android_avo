@@ -203,6 +203,28 @@ def pad_poly(p, fx, fy, fangle, inflate=0.0, side="F"):
     a = (p.rot + fangle) % 360
     w, h = p.w / 2 + inflate, p.h / 2 + inflate
     pts = []
+    if p.shape == "custom":
+        xs, ys = [-p.w / 2, p.w / 2], [-p.h / 2, p.h / 2]
+        for e in p.extra:
+            if e and e[0] == "primitives":
+                for g in e[1:]:
+                    pp = find(g, "pts")
+                    if pp:
+                        for xy in pp[1:]:
+                            xs.append(xy[1]); ys.append(xy[2])
+                    for k in ("start", "end", "center"):
+                        q = find(g, k)
+                        if q:
+                            xs.append(q[1]); ys.append(q[2])
+        w, h = (max(xs) - min(xs)) / 2 + inflate, (max(ys) - min(ys)) / 2 + inflate
+        ox, oy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+        pts = [(ox - w, oy - h), (ox + w, oy - h), (ox + w, oy + h), (ox - w, oy + h)]
+        out = []
+        for (u, v) in pts:
+            rx, ry = rot(u, v, a)
+            px, py = rot(p.x, p.y, fangle)
+            out.append((fx + px + rx, fy + py + ry))
+        return out
     if p.shape in ("circle", "oval") or (p.shape == "roundrect" and p.rratio and p.rratio >= 0.5):
         r = min(p.w, p.h) / 2 + inflate
         dx, dy = max(0.0, w - r), max(0.0, h - r)

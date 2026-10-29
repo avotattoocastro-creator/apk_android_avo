@@ -291,9 +291,9 @@ def write_board(r, path):
     tree.append(B.keepout(["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"], kpoly([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]),
                           "ANTENA_SIN_COBRE"))
     # texts
-    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV, *D.K(-6.0, 15.0), "F.SilkS", 1.0))
-    tree.append(B.gr_text(D.DATE + " · 4 capas 1,0 mm", *D.K(-6.0, 13.6), "F.SilkS", 0.7, bold=False))
-    tree.append(B.gr_text("ZONA ANTENA FPC (sin cobre)", *D.K(-2.0, 19.2), "F.SilkS", 0.7, bold=False))
+    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV, *D.K(-24.5, 17.0), "F.SilkS", 1.0))
+    tree.append(B.gr_text(D.DATE + " · 4 capas 1,0 mm", *D.K(-24.5, 15.6), "F.SilkS", 0.7, bold=False))
+    tree.append(B.gr_text("ZONA ANTENA FPC (sin cobre)", *D.K(10.5, 18.6), "F.SilkS", 0.7, bold=False))
     for txt, (x, y) in (("BOBINA", (-28.6, -7.0)), ("REED", (0.0, -19.6)), ("+ BAT −", (-22.6, 9.6)),
                         ("CABLE BAT", (-29.0, 7.6))):
         tree.append(B.gr_text(txt, *D.K(x, y), "F.SilkS", 0.7, bold=False))
@@ -310,6 +310,24 @@ def main():
         if "--force" not in sys.argv:
             sys.exit(1)
     pads = collect_pads()
+    out = D.OUT
+    if "--local" not in sys.argv:
+        # placement + plane fan-outs only; Freerouting (CI) routes the signals
+        log = []
+        r = build_router(pads)
+        add_epad_vias(r)
+        fails_v = via_drops(r, pads, log)
+        write_board(r, os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pcb"))
+        print("\n".join(log))
+        import plot
+        plot.draw(os.path.join(out, "..", "out_local_colocacion.png"), r.tracks, r.vias, "colocación + vías a planos")
+        import write_sch
+        import shutil
+        write_sch.write(os.path.join(out, "AVO_GIRTH_PCB.kicad_sch"), os.path.join(out, "AVO_GIRTH_PCB.kicad_pro"),
+                        os.path.join(out, "piezas.json"))
+        shutil.copy(os.path.join(out, "AVO_GIRTH_PCB.kicad_pro"), os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pro"))
+        print("tiempo %.0f s" % (time.time() - t0))
+        return
     prio = []
     for attempt in range(4):
         r, failed, fails_v, log = attempt_route(pads, prio)
@@ -329,10 +347,8 @@ def main():
                     os.path.join(out, "piezas.json"))
 
 
-def attempt_route(pads, prio):
-    log = []
-    r = build_router(pads)
-    # vías en las rendijas del EPAD del módulo (GND)
+def add_epad_vias(r):
+    """Vías en las rendijas del EPAD del módulo (GND)."""
     u4 = next(p for p in D.PARTS if p["ref"] == "U4")
     from fplib import rot
     cx, cy = D.kpos(u4)
@@ -340,6 +356,12 @@ def attempt_route(pads, prio):
         for vy in (1.7125, 3.6875):
             dx, dy = rot(vx, vy, u4["rot"])
             r.add_via(D.CODE[D.GND], (cx + dx, cy + dy))
+
+
+def attempt_route(pads, prio):
+    log = []
+    r = build_router(pads)
+    add_epad_vias(r)
     fails_v = via_drops(r, pads, log)
     failed = route_nets(r, pads, log, prio)
     return r, failed, fails_v, log

@@ -45,7 +45,8 @@ Z_PCB_BOTTOM = 7.8                   # cuna de la batería +0,6 mm (z 7,75): hue
 Z_CEIL = 15.5 - 2.3                  # techo interior de la tapa
 H_MAX = Z_CEIL - (Z_PCB_BOTTOM + THICK) - 0.3        # altura libre sobre la placa con 0,3 de holgura
 SLOT = dict(c=(-29.0, 4.6), w=1.6, h=3.4)           # paso del cable de la batería (fresado)
-ANT_KEEPOUT = (-17.0, 12.6, 13.0, PW / 2 + 1)        # banda sin cobre bajo la antena FPC (pegada al techo)
+LID_POCKET = {"K1": 1.3}                             # rebaje en el techo de la tapa sobre el relé (mm)
+ANT_KEEPOUT = (-3.3, 12.6, 25.5, PW / 2 + 1)        # banda sin cobre bajo la antena FPC (pegada al techo)
 
 
 def arc_center(a, m, b):
@@ -125,9 +126,12 @@ def outline_pts(step_deg=5):
 # =============================================================================== huellas
 M3 = "${KICAD9_3DMODEL_DIR}/"
 FP = {
+    "R0805": load("R_0805_2012Metric.kicad_mod", M3 + "Resistor_SMD.3dshapes/R_0805_2012Metric.step", 0.6),
     "R0402": load("R_0402_1005Metric.kicad_mod", M3 + "Resistor_SMD.3dshapes/R_0402_1005Metric.step", 0.4),
     "C0402": load("C_0402_1005Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0402_1005Metric.step", 0.6),
     "C0603": load("C_0603_1608Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0603_1608Metric.step", 0.9),
+    "TANT_B": load("CP_EIA-3528-21_Kemet-B.kicad_mod",
+                   M3 + "Capacitor_Tantalum_SMD.3dshapes/CP_EIA-3528-21_Kemet-B.step", 2.1),
     "C1206": load("C_1206_3216Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_1206_3216Metric.step", 1.8),
     "C0805": load("C_0805_2012Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0805_2012Metric.step", 1.35),
     "LED0603": load("LED_0603_1608Metric.kicad_mod", M3 + "LED_SMD.3dshapes/LED_0603_1608Metric.step", 0.8),
@@ -144,6 +148,8 @@ FP = {
                  M3 + "Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step", 3.3),
     "JST_SH2": load("JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.kicad_mod",
                     M3 + "Connector_JST.3dshapes/JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.step", 2.95),
+    "RELAY": load("Relay_DPDT_Omron_G6K-2F-Y.kicad_mod",
+                   M3 + "Relay_SMD.3dshapes/Relay_DPDT_Omron_G6K-2F-Y.step", 5.2),
     "MINI1U": load("ESP32-C6-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-C6-MINI-1U.STEP", 2.6),
     "BNO": bno085(),
     "WIRE": wire_pad("bobina / reed"),
@@ -175,14 +181,16 @@ LC = {
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "22n": "C1532", "22p": "C1555", "4u7": "C19666",
     "10u": "C96446", "22u": "C45783", "470n": "C1623",
     "100n C0G": "C97946", "47n C0G": "C21812", "2n2 C0G": "C51795", "1n C0G": "C1636",
-    "NTC10k": "C77131", "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
+    "NTC10k": "C77131", "G6KU": "C6259328", "AO3400A": "C20917", "2N7002": "C8545", "BAT54C": "C2135",
+    "0R0805": "C17477", "220u": "C79111", "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
     "RT9080": "C841192", "BQ51013B": "C55663", "BQ24072": "C140288", "MINI1U": "C7558096",
     "BNO085": "C5189642", "XTAL": "C32346", "USBC": "C165948", "JST_SH2": "C160402",
 }
 
 
 def R(ref, val, n1, n2, pos, rot=0, block="", dnp=False, fp="R0402", note=""):
-    part(ref, fp, val, pos, rot, {1: n1, 2: n2}, LC.get(val.replace("Ω", ""), ""), block=block, sym="R", dnp=dnp,
+    lc = LC["0R0805"] if (fp == "R0805" and val == "0R") else LC.get(val.replace("Ω", ""), "")
+    part(ref, fp, val, pos, rot, {1: n1, 2: n2}, lc, block=block, sym="R", dnp=dnp,
          note=note)
 
 
@@ -260,7 +268,7 @@ part("RT2", "R0402", "NTC 10k B3380", (-13.8, -5.6), 0, {1: "CHG_TS", 2: GND}, L
 R("R8", "100k", "CHG_EN2", VSYS, (-8.6, -2.8), 90, "Cargador", note="EN2 = 1, EN1 = 0: límite por ILIM")
 R("R9", "100k", "CHG_PG", V3, (-8.4, -6.6), 90, "Cargador")
 R("R10", "100k", "CHG_STAT", V3, (-7.3, -6.6), 90, "Cargador")
-part("J2", "JST_SH2", "BATERÍA 1S", (-21.6, 5.4), 270, {1: VBAT, 2: GND, "MP": GND}, LC["JST_SH2"],
+part("J2", "JST_SH2", "BATERÍA 1S", (-21.6, 5.4), 270, {1: "BAT_RAW", 2: GND, "MP": GND}, LC["JST_SH2"],
      "SM02B-SRSS-TB (JST SH 1,0)", "Batería", sym=dict(L=[(1, "+"), (2, "−")], R=[("MP", "MP")]),
      note="pin 1 = + · comprobar la polaridad del cable antes de enchufar")
 
@@ -279,14 +287,14 @@ part("U4", "MINI1U", "ESP32-C6-MINI-1U-N4", MCU, 90,
            (8, "EN"), (12, "IMU_INT"), (13, "IMU_RST"), (5, "BAT_ADC"), (6, "CHG_PG"), (9, "CHG_STAT"),
            (10, "IMU_PWR_N"), (15, "REED"), (16, "IMU_WAKE"), (17, "USB_DM"), (18, "USB_DP"),
            (19, None), (20, "LED"), (22, "GPIO8"), (23, "BOOT"), (24, "IMU_CS"), (25, "IMU_SCK"),
-           (26, "IMU_MOSI"), (27, "IMU_MISO"), (28, "QI_CHG"), (29, None), (30, "U0RX"), (31, "U0TX")]),
+           (26, "IMU_MOSI"), (27, "IMU_MISO"), (28, "QI_CHG"), (29, "RLY_OFF"), (30, "U0RX"), (31, "U0TX")]),
      LC["MINI1U"], "ESP32-C6-MINI-1U-N4 (alt. -H4 C20627095)", "ESP32-C6",
      sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 IMU_RST"), (5, "IO2 BAT_ADC"),
                  (6, "IO3 CHG_PG"), (9, "IO4 CHG_STAT"), (10, "IO5 IMU_PWR"), (15, "IO6 REED"),
                  (16, "IO7 IMU_WAKE"), (22, "IO8"), (23, "IO9 BOOT"), (19, "IO14"), (20, "IO15 LED"),
                  (4, "NC"), (7, "NC"), (21, "NC"), (32, "NC"), (33, "NC"), (34, "NC"), (35, "NC")],
               R=[(17, "IO12 D-"), (18, "IO13 D+"), (24, "IO18 CS"), (25, "IO19 SCK"), (26, "IO20 MOSI"),
-                 (27, "IO21 MISO"), (28, "IO22 QI_CHG"), (29, "IO23"), (30, "IO17 RXD0"), (31, "IO16 TXD0")] +
+                 (27, "IO21 MISO"), (28, "IO22 QI_CHG"), (29, "IO23 RELÉ OFF"), (30, "IO17 RXD0"), (31, "IO16 TXD0")] +
                 [(n, "GND") for n in (1, 2, 11, 14) + tuple(range(36, 54))]))
 C("C23", "22u 10V", V3, GND, (11.2, -15.4), 0, "ESP32-C6", "C0805")
 C("C24", "100n", V3, GND, (13.4, -15.2), 0, "ESP32-C6")
@@ -304,8 +312,8 @@ part("TP3", "TP", "GND", (8.0, -17.2), 0, {1: GND}, block="Pruebas", sym="TP", n
 part("TP4", "TP", "TXD0", (4.0, -15.2), 0, {1: "U0TX"}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP5", "TP", "RXD0", (6.0, -15.2), 0, {1: "U0RX"}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP6", "TP", "3V3", (8.0, -15.2), 0, {1: V3}, block="Pruebas", sym="TP", no_assembly=True)
-part("TP7", "TP", "VBAT", (-4.0, -15.2), 0, {1: VBAT}, block="Pruebas", sym="TP", no_assembly=True)
-part("TP8", "TP", "VSYS", (-2.0, -15.2), 0, {1: VSYS}, block="Pruebas", sym="TP", no_assembly=True)
+part("TP7", "TP", "VBAT", (10.0, -17.6), 0, {1: VBAT}, block="Pruebas", sym="TP", no_assembly=True)
+part("TP8", "TP", "VSYS", (12.0, -17.6), 0, {1: VSYS}, block="Pruebas", sym="TP", no_assembly=True)
 
 # ---------------------------------------------------------------------------------------- USB-C (J1)
 USB = (26.15, 0.0)
@@ -362,14 +370,61 @@ part("Q3", "SOT23", "AO3401A", (3.6, 9.4), 0, {1: "IMU_PWR_N", 2: V3, 3: "IMU_VD
 R("R30", "100k", "IMU_PWR_N", V3, (6.0, 9.4), 90, "IMU")
 
 # ---------------------------------------------------------------------------------------- reed y batería
-part("SW1", "WIRE", "REED (1)", (-1.27, -17.8), 0, {1: "REED"}, block="Reed", sym="TP", no_assembly=True,
+part("SW1", "WIRE", "REED (1)", (-1.27, -17.8), 0, {1: "REED_HI"}, block="Reed", sym="TP", no_assembly=True,
      note="reed 14 × 3,2 del suelo de la cápsula")
-part("SW2", "WIRE", "REED (2)", (1.27, -17.8), 0, {1: GND}, block="Reed", sym="TP", no_assembly=True)
-R("R31", "1M", "REED", V3, (-1.6, -13.2), 90, "Reed")
+part("SW2", "WIRE", "REED (2)", (1.27, -17.8), 0, {1: "BAT_RAW"}, block="Reed", sym="TP", no_assembly=True)
+R("R31", "100k", "REED", V3, (-1.6, -13.2), 90, "Reed", note="GPIO6: LOW = reed cerrado (cápsula en el soporte)")
 C("C33", "10n 50V", "REED", GND, (-0.4, -13.2), 90, "Reed")
 R("R32", "1M", VBAT, "BAT_ADC", (2.6, -12.8), 90, "Batería", note="divisor 1:2 → GPIO2 (ADC1_CH2)")
 R("R33", "1M", "BAT_ADC", GND, (3.8, -12.8), 90, "Batería")
 C("C34", "100n", "BAT_ADC", GND, (5.0, -12.8), 90, "Batería")
+
+# ---------------------------------------------------------------------------------------- corte de batería (K1)
+# Relé biestable de una bobina (Omron G6KU-2F-Y DC3, 5,2 mm). Sus dos polos en paralelo cortan el + de la batería.
+#  · ENCENDER sin alimentación: al cerrarse el reed (cápsula en el soporte) o al llegar 5 V (Qi o USB), el pulso de
+#    C40–C41 (≈ 40 ms) pasa por la bobina de K_A a K_B; Q11 cierra K_B a masa durante el pulso.
+#  · APAGAR: el ESP32 pone GPIO23 a HIGH ~20 ms: Q13 lleva K_A a masa y Q14 lleva K_B a VBAT (bobina al revés);
+#    Q12 anula Q11 para que no haya cortocircuito. Al abrirse el relé todo queda a 0 µA.
+#  · Arranque suave: el relé cierra sobre Q10 (PMOS) apagado; C43/R51 lo encienden en ~0,1 s, así los contactos no
+#    ven el pico de carga de los condensadores (el reed de la espalda se soldó por eso).
+#  · Polaridad: se supone que el pulso K_A(+)→K_B(−) cierra los contactos NA (4 y 5). Si al probar es al revés, se
+#    quita R40 y se monta R41 (contactos NC): no hace falta cambiar nada más.
+part("K1", "RELAY", "G6KU-2F-Y DC3", (-11.5, 15.6), 90,
+     {1: "K_A", 8: "K_B", 3: "BAT_RAW", 6: "BAT_RAW", 4: "RLY_NO", 5: "RLY_NO", 2: "RLY_NC", 7: "RLY_NC"},
+     LC["G6KU"], "G6KU-2F-Y-TR DC3", "Corte",
+     sym=dict(L=[(1, "BOBINA A"), (8, "BOBINA B")], R=[(3, "COM1"), (6, "COM2"), (4, "NA1"), (5, "NA2"),
+                                                     (2, "NC1"), (7, "NC2")]))
+R("R40", "0R", "RLY_NO", "BAT_SW", (-4.6, 16.0), 90, "Corte", fp="R0805", note="contactos NA (por defecto)")
+R("R41", "0R", "RLY_NC", "BAT_SW", (-17.8, 14.6), 90, "Corte", fp="R0805", dnp=True,
+  note="montar en lugar de R40 si la polaridad del relé es la contraria")
+part("Q10", "SOT23", "AO3401A", (-19.0, 11.0), 0, {1: "SS_G", 2: "BAT_SW", 3: VBAT}, LC["AO3401A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="arranque suave tras el relé")
+C("C43", "100n", "BAT_SW", "SS_G", (-16.0, 10.0), 0, "Corte")
+R("R51", "1M", "SS_G", GND, (-16.0, 8.9), 0, "Corte")
+part("D10", "SOT23", "BAT54C", (-18.8, -14.0), 0, {1: "REED_HI", 2: VIN5, 3: "RLY_P"}, LC["BAT54C"],
+     block="Corte", sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="reed o 5 V → pulso de encendido")
+# pulso: el relé pide ≥ 10 ms con ≥ 2,25 V en la bobina (91 Ω) → 2 × 220 µF de polímero (τ ≈ 40 ms)
+C("C40", "220u 6V3 polímero", "RLY_P", "K_A", (-23.2, 13.6), 90, "Corte", "TANT_B", lcsc=LC["220u"])
+C("C41", "220u 6V3 polímero", "RLY_P", "K_A", (-26.6, 15.2), 90, "Corte", "TANT_B", lcsc=LC["220u"])
+R("R44", "10k", "RLY_P", GND, (-18.2, -16.3), 0, "Corte", note="descarga del pulso")
+R("R45", "10k", "RLY_P", "RLY_GB", (-16.3, -16.3), 0, "Corte")
+R("R46", "100k", "RLY_GB", GND, (-14.4, -16.3), 0, "Corte")
+part("Q11", "SOT23", "AO3400A", (-15.2, -14.0), 0, {1: "RLY_GB", 2: GND, 3: "K_B"}, LC["AO3400A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="K_B a masa durante el pulso de encendido")
+part("Q12", "SOT23", "2N7002", (-11.6, -14.0), 0, {1: "RLY_OFF", 2: GND, 3: "RLY_GB"}, LC["2N7002"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
+part("Q13", "SOT23", "AO3400A", (-8.0, -14.0), 0, {1: "RLY_OFF", 2: GND, 3: "K_A"}, LC["AO3400A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
+part("Q14", "SOT23", "AO3401A", (-4.4, -14.0), 0, {1: "RLY_PG", 2: VBAT, 3: "K_B"}, LC["AO3401A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]))
+part("Q15", "SOT23", "2N7002", (-7.4, -10.4), 0, {1: "RLY_OFF", 2: GND, 3: "RLY_PG"}, LC["2N7002"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
+R("R47", "100k", "RLY_PG", VBAT, (-12.5, -16.3), 0, "Corte")
+R("R48", "100k", "RLY_OFF", GND, (-10.6, -16.3), 0, "Corte", note="relé quieto durante el arranque del ESP32")
+part("Q16", "SOT23", "2N7002", (-3.8, -10.4), 0, {1: "REED_G", 2: GND, 3: "REED"}, LC["2N7002"], block="Reed",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="reed (a + batería) → GPIO6 a 3,3 V")
+R("R49", "100k", "REED_HI", "REED_G", (-8.7, -16.3), 0, "Reed")
+R("R50", "1M", "REED_G", GND, (-6.8, -16.3), 0, "Reed")
 
 # --------------------------------------------------------------------------------- colocación (X, Y, giro)
 POS = {
@@ -382,12 +437,12 @@ POS = {
     "C12": (-23.0, 0.9, 90), "C13": (-24.5, 0.9, 90), "C14": (-21.6, 1.2, 90),
     "C15": (-15.2, -6.8, 90), "C16": (-14.0, -6.5, 90), "C17": (-16.6, -6.5, 90),
     "R1": (-16.3, 1.2, 90), "R2": (-15.2, 1.2, 90), "R3": (-14.1, 1.2, 90), "RT1": (-16.0, -1.6, 90),
-    "R4": (-12.8, -6.5, 90), "Q1": (-15.6, -10.6, 0), "Q2": (-11.0, -10.6, 0),
+    "R4": (-12.8, -6.5, 90), "Q1": (-15.6, -10.2, 0), "Q2": (-11.0, -10.2, 0),
     # cargador y batería
     "U2": (-10.5, -3.0, 0), "C18": (-8.9, 0.4, 90), "C19": (-7.4, -4.3, 90), "C20": (-13.9, -3.3, 90),
     "R6": (-11.4, 0.4, 90), "R7": (-7.4, -1.8, 90), "RT2": (-13.8, -0.9, 0),
     "R8": (-11.2, -6.2, 90), "R9": (-10.1, -6.2, 90), "R10": (-9.0, -6.2, 90),
-    "J2": (-22.6, 6.0, 270),
+    "J2": (-22.6, 5.6, 270),
     # 3,3 V
     "U3": (3.0, -10.0, 0), "C21": (0.2, -10.0, 90), "C22": (6.0, -10.0, 90),
     # ESP32-C6
@@ -472,18 +527,30 @@ def check_placement():
     poly = [K(x, y) for x, y in outline_pts(5)]
     inner = [K(x, y) for x, y in outline_pts(5)]
     for ref, bb in boxes:
-        for (x, y) in ((bb[0], bb[1]), (bb[2], bb[1]), (bb[2], bb[3]), (bb[0], bb[3])):
+        samples = []
+        for k in range(9):
+            t = k / 8
+            samples += [(bb[0] + t * (bb[2] - bb[0]), bb[1]), (bb[0] + t * (bb[2] - bb[0]), bb[3]),
+                        (bb[0], bb[1] + t * (bb[3] - bb[1])), (bb[2], bb[1] + t * (bb[3] - bb[1]))]
+        bad = set()
+        for (x, y) in samples:
+            if ref in bad:
+                break
             if not point_in_poly(x, y, poly):
-                errs.append("%s se sale de la placa en (%.2f, %.2f)" % (ref, x - 100, 100 - y))
+                errs.append("%s se sale de la placa en (%.2f, %.2f)" % (ref, x - 100, 100 - y)); bad.add(ref)
             else:
                 tall = fp_of(next(p for p in PARTS if p["ref"] == ref)).height > 0.3
                 d_lip = dist_to_poly(x, y, RRECT_K)
                 d_any = dist_to_poly(x, y, poly)
                 if tall and d_lip < LIP_BAND and ref != "J1":
-                    errs.append("%s bajo el labio de la tapa (%.2f del borde)" % (ref, d_lip))
-                if d_any < 0.3:
-                    errs.append("%s a %.2f del borde" % (ref, d_any))
+                    errs.append("%s bajo el labio de la tapa (%.2f del borde)" % (ref, d_lip)); bad.add(ref)
+                elif d_any < 0.3:
+                    errs.append("%s a %.2f del borde" % (ref, d_any)); bad.add(ref)
     for p in PARTS:
+        if p["ref"] in LID_POCKET:
+            if fp_of(p).height > H_MAX + LID_POCKET[p["ref"]]:
+                errs.append("%s no cabe ni con el rebaje de la tapa" % p["ref"])
+            continue
         if fp_of(p).height > H_MAX:
             errs.append("%s demasiado alto: %.2f > %.2f" % (p["ref"], fp_of(p).height, H_MAX))
     return errs

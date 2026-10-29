@@ -24,11 +24,28 @@ jobs:
       - uses: actions/checkout@v4
       - name: KiCad 9 (imagen oficial)
         run: docker pull kicad/kicad:9.0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Ruteado con Freerouting (DSN de KiCad → SES → KiCad)
+        run: |
+          set -x
+          P=hardware/girth/PCB
+          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render $P/out/ruteado
+          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v2.1.0/freerouting-2.1.0.jar
+          sha256sum /tmp/freerouting.jar | tee $P/out/ruteado/freerouting.sha256
+          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+            python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn
+          timeout 1500 java -jar /tmp/freerouting.jar -de $P/out/ruteado/placa.dsn -do $P/out/ruteado/placa.ses \
+            -mp 40 -mt 1 --gui.enabled=false 2>&1 | tail -60 | tee $P/out/ruteado/freerouting.log || true
+          ls -la $P/out/ruteado
+          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+            python3 fuente/ci_route.py import kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_GIRTH_PCB.kicad_pcb
       - name: Rellenar zonas, DRC, ERC y exportar
         run: |
           set -x
           P=hardware/girth/PCB
-          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render
           docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
             set -x
             kicad-cli version

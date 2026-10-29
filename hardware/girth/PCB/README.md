@@ -17,7 +17,27 @@ Lleva **conector para la batería** (JST SH 1,0) y **pads para soldar la bobina 
 | USB-C | J1 + ESD (U6) | solo con la tapa abierta; el USB entra en el BQ51013B por AD/AD-EN (Q1/Q2) y **también carga la batería** |
 | 3,3 V | RT9080-33 (U3) | 600 mA, 2 µA de consumo propio |
 | Batería | J2 JST SH 1,0 (pin 1 = +) | el cable pasa por la ranura fresada junto al borde −X |
-| Reed | pads SW1/SW2 → GPIO6 | mismo pin que en el XIAO |
+| Reed | pads SW1/SW2 (uno va al + de la batería) | enciende el relé y se lee en GPIO6 a través de Q16 |
+| **Corte de batería** | **relé biestable K1 (Omron G6KU-2F-Y DC3)** | **0 µA con la cápsula fuera del soporte**; ver abajo |
+
+## Corte de batería con relé biestable (K1)
+- El relé corta el + de la batería con sus dos polos en paralelo (1 A, ≤ 100 mΩ). Abierto, **la placa no consume nada**.
+- **Se enciende solo**, sin firmware: al cerrarse el reed (cápsula en el soporte) **o** al llegar 5 V (base Qi o USB),
+  C40 + C41 (2 × 220 µF) dan un pulso de ~40 ms a la bobina (pin 1 +). Q11 cierra la bobina a masa durante el pulso.
+- **Se apaga desde el ESP32**: GPIO23 a HIGH durante **20 ms** invierte la bobina (Q13 + Q14) y el relé se abre. Q12
+  impide el cortocircuito si el pulso de encendido sigue presente.
+- **Arranque suave**: el relé cierra sobre Q10 (PMOS) apagado, que se enciende en ~0,1 s (C43/R51). Los contactos no
+  ven el pico de carga de los condensadores, que es lo que soldó el reed de la espalda.
+- **Polaridad**: según el símbolo de KiCad del G6KU-2, pin 1 (+) = SET → contactos NA (R40 montada). Si al probar el
+  pulso lo abre en lugar de cerrarlo, se quita R40 y se monta R41 (contactos NC). Omron entrega el relé en RESET.
+- **Reglas para el firmware**: no abrir el relé mientras haya alimentación de carga (CHG_PG = LOW): no habría pulso
+  para volver a encenderlo hasta quitar y poner la base. Al salir del soporte (GPIO6 pasa a HIGH): guardar, esperar
+  3 s y abrir el relé.
+- **Altura**: el relé mide 5,2 mm; la tapa necesita un **rebaje de 1,3 mm** en el techo encima de K1.
+- **Disponibilidad**: un distribuidor marca el G6KU-2F-Y como fin de fabricación. Alternativa de la misma huella y
+  pines: Panasonic AGQ210S03 (GQ, 5,4 mm). Comprobar existencias antes de pedir.
+- El relé lleva un imán permanente: a ~17 mm del BNO085 deja un desvío fijo en el magnetómetro, que se calibra igual
+  que el de los imanes de la cápsula (el *Game Rotation Vector* no lo usa).
 
 ## Por qué no el BQ51050B (Qi + cargador en un chip)
 Su corriente mínima de carga es **500 mA** (1 C para la LP403048 de 500 mAh), **no puede cargar por USB** y no
@@ -34,7 +54,7 @@ también carga.
 | 3 | CHG_PG (PGOOD del cargador, LOW = hay alimentación Qi o USB) | LP: despierta al poner la cápsula en la base |
 | 4 | CHG_STAT (LOW = cargando) | strapping (MTMS), sin efecto práctico |
 | 5 | IMU_PWR_N (LOW = BNO encendido) | strapping (MTDI); R30 lo mantiene apagado en el arranque |
-| 6 | REED (LOW = cápsula en el soporte) | LP: despierta (ext1, nivel bajo) |
+| 6 | REED (LOW = reed cerrado, cápsula en el soporte) | a través de Q16; LP: puede despertar |
 | 7 | IMU_WAKE (PS0/WAKE) | debe estar a HIGH antes de soltar NRST (modo SPI) |
 | 8 | libre (pull-up 10 k, strapping) | |
 | 9 | BOOT (pad TP2) | strapping |
@@ -43,11 +63,12 @@ también carga.
 | 16 / 17 | TXD0 / RXD0 (pads TP4 / TP5) | |
 | 18 / 19 / 20 / 21 | IMU CS / SCK / MOSI / MISO | SPI modo 3, ≤ 3 MHz |
 | 22 | QI_CHG (LOW = el receptor Qi entrega potencia) | |
-| 14, 23 | libres | |
+| 23 | RELÉ OFF (pulso HIGH de 20 ms = apagar) | R48 lo mantiene a LOW en el arranque |
+| 14 | libre | |
 
 ## Consumo estimado
-- **Dormida** (fuera del soporte, sin base): RT9080 2 µA + ESP32-C6 en sueño profundo ~7 µA + BQ24072 4,3 µA +
-  divisor 2 µA + BNO apagado ≈ **15 µA** → la autodescarga de la celda manda.
+- **Apagada** (relé abierto): **0 µA**; solo queda la autodescarga de la celda y el circuito de protección de la batería.
+- **En sueño profundo con el relé cerrado** (por ejemplo, cargando): ~15 µA.
 - **Funcionando**: ESP32-C6 con ESP-NOW + BNO085 ≈ 30–60 mA (estimado) → 8–15 h con 500 mAh.
 
 ## Cambios mecánicos que pide la placa (siguiente revisión del CAD de la cápsula)
@@ -57,9 +78,10 @@ también carga.
 2. **Labio de la tapa** apoyado sobre la placa (como sobre la bandeja), 0,6 mm más alto.
 3. **Cable de la batería** por la ranura de la placa en (−29; 4,6). Hilos de la bobina a L1/L2 en X −28,6 e hilos
    del reed a SW1/SW2 en Y −17,8: suben por el hueco entre la cuna y la pared.
-4. **Antena FPC** pegada al techo de la tapa sobre la banda sin cobre (X −17…13, Y 12,6 al borde).
+4. **Antena FPC** pegada al techo de la tapa sobre la banda sin cobre (X −3,3…25,5; Y 12,6 al borde).
 5. **Postes de la tapa**: rehacerlos para que apoyen en zonas libres de la placa.
 6. La bandeja impresa desaparece: la placa es la bandeja.
+7. **Rebaje de 1,3 mm** en el techo de la tapa sobre el relé K1 (X −16,8…−6,2; Y 11,0…20,2).
 
 ## Fabricación (JLCPCB)
 - 4 capas, **1,0 mm**, ENIG, máscara cualquiera, vías 0,3/0,5 mm, pista/separación mínimas 0,15 mm.
