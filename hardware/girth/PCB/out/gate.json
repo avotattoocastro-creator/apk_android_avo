@@ -3,13 +3,13 @@
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": false,
-   "n": 2
+   "ok": true,
+   "n": 0
   },
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 7
+   "n": 5
   },
   {
    "name": "DRC: cortocircuitos",
@@ -19,7 +19,7 @@
   {
    "name": "DRC: paridad esquema \u2194 placa",
    "ok": false,
-   "n": 199
+   "n": 29
   },
   {
    "name": "ERC: errores",
@@ -32,11 +32,9 @@
    "n": 0
   }
  ],
- "drc_errors": {
-  "clearance": 2
- },
+ "drc_errors": {},
  "drc_warnings": {
   "track_dangling": 1,
-  "silk_over_copper": 4
+  "silk_over_copper": 3
  }
 }
