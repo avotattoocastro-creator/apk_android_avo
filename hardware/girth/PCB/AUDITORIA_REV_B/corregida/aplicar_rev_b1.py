@@ -10,7 +10,13 @@ Cambios (y solo estos):
      se une directamente a esa vía (EN1 es una entrada lógica, máx. abs. 7 V; VSYS ≤ 4,4 V). El pin 5 pasa a GND
      con un tramo corto al EPAD (como ya tenían los pines 4, 6 y 8). R8 queda sin función → DNP (sus pads quedan
      entre GND y VSYS; si alguien la monta, solo consume 42 µA). No se mueve ninguna pieza.
-  2. Revisión "B.1" en el cajetín (la REV B entregada lleva "A" en el cajetín → Gerber TF.ProjectId y gbrjob) y
+  2. Enclavamiento (solo valores, sin tocar el cobre), por la simulación de la auditoría (spice/, variantes):
+     C41 220 nF → 470 nF: el corte aguanta reinicios del ESP32 de 1,5 s en el peor caso (con 220 nF caía con 0,6 s;
+     Monte Carlo 3/200 → 0/200); a cambio el apagado tarda ≈ 4 s en vez de ≈ 1,9 s y la ventana sin PWR_HOLD baja de
+     2,9 a 2,6 s en el peor caso (sigue > 5 × el arranque supuesto). R40 1 M → 100 k: la fuga de Q11 en caliente
+     (IDSS hasta 5 µA a 55 °C según AOS) ya no puede abrir Q10 con la placa apagada (≤ 0,5 V en vez de ≤ 5 V); cuesta
+     42 µA solo con la placa encendida. La simulación no cambia con R40 (ver INFORME, sección 13).
+  3. Revisión "B.1" en el cajetín (la REV B entregada lleva "A" en el cajetín → Gerber TF.ProjectId y gbrjob) y
      en la serigrafía.
 
 Procedimiento reproducible:
@@ -41,6 +47,13 @@ REEMPLAZOS = [
      'R("R8", "100k", GND, VSYS, (-8.6, -2.8), 90, "Cargador", dnp=True,\n'
      '  note="REV B.1: sin función (EN2 = GND, EN1 = VSYS: USB500 con VIN-DPM)")', 1),
     ("avo_girth_pcb.py", 'REV, DATE = "B", "2026-10-29"', 'REV, DATE = "B.1", "2026-10-29"', 1),
+    ("avo_girth_pcb.py", 'C("C41", "220n", "PWR_G", GND, (-15.6, 14.0), 0, "Corte", note="sostiene el corte durante un reinicio (τ 2,2 s)")',
+     'C("C41", "470n", "PWR_G", GND, (-15.6, 14.0), 0, "Corte", lcsc=C41_LCSC,\n'
+     '  note="REV B.1: sostiene el corte durante un reinicio (τ 4,7 s)")', 1),
+    ("avo_girth_pcb.py", 'R("R40", "1M", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte", note="Q10 apagado por defecto")',
+     'R("R40", "100k", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte",\n'
+     '  note="REV B.1: 100 k — la fuga de Q11 en caliente no abre Q10")', 1),
+    ("avo_girth_pcb.py", 'LC = {', 'C41_LCSC = "C1543"   # REV B.1: 470 nF 0402 (comprobar en el CI: existencias y encapsulado)\nLC = {', 1),
     ("build.py", '"CHG_TS", "CHG_EN2", D.VSYS', '"CHG_TS", D.VSYS', 1),
     ("build.py", '("U2", "6")', '("U2", "5")', 1),
     ("build.py", ', ("CHG_EN2", ["U2.5", "R8.1"])]', ']', 1),
@@ -132,25 +145,34 @@ def main():
     png = os.path.join(work, "out_local_reparado.png")
     if os.path.exists(png):
         shutil.copy(png, os.path.join(H, "vista_ruteado_rev_b1.png"))
-    # BOM/CPL de JLCPCB: los entregados sin R8 (DNP); el resto de filas idéntico
+    # BOM/CPL de JLCPCB con el mismo algoritmo que fuente/jlc.py, desde el piezas.json de la B.1; las posiciones
+    # (sin cambios) salen del CPL entregado
     import csv
+    import json
+    from collections import OrderedDict
     c3 = os.path.join(PCB, "out", "C3")
-    rows = list(csv.reader(open(os.path.join(c3, "AVO_GIRTH_PCB_C3_BOM_JLCPCB.csv"), encoding="utf-8")))
-    n = 0
-    for r_ in rows[1:]:
-        refs = r_[1].split(",")
-        if "R8" in refs:
-            refs.remove("R8"); r_[1] = ",".join(refs); n += 1
-    rows = [r_ for r_ in rows if r_[1]]
+    parts = json.load(open(os.path.join(k, "piezas.json"), encoding="utf-8"))
+    bom = OrderedDict()
+    for p_ in parts:
+        if p_.get("dnp") or not p_.get("lcsc") or p_.get("no_assembly"):
+            continue
+        bom.setdefault((p_["value"], p_["footprint"], p_["lcsc"]), []).append(p_["ref"])
+    key = lambda r: (r.rstrip("0123456789"), int("0" + r.lstrip("ABCDEFGHIJKLMNOPQRSTUVWXYZ")))
+    rows = [["Comment", "Designator", "Footprint", "LCSC Part #"]] + \
+           [[v, ",".join(sorted(refs, key=key)), fp, lc] for (v, fp, lc), refs in bom.items()]
     csv.writer(open(os.path.join(H, "AVO_GIRTH_PCB_C3_REV_B1_BOM_JLCPCB.csv"), "w", newline="", encoding="utf-8"),
                lineterminator="\r\n").writerows(rows)
+    mont = {r_ for refs in bom.values() for r_ in refs}
     cpl = list(csv.reader(open(os.path.join(c3, "AVO_GIRTH_PCB_C3_CPL_JLCPCB.csv"), encoding="utf-8")))
-    cpl2 = [r_ for r_ in cpl if r_[0] != "R8"]
+    cpl2 = [cpl[0]] + [r_ for r_ in cpl[1:] if r_[0] in mont]
     csv.writer(open(os.path.join(H, "AVO_GIRTH_PCB_C3_REV_B1_CPL_JLCPCB.csv"), "w", newline="", encoding="utf-8"),
                lineterminator="\r\n").writerows(cpl2)
-    if n != 1 or len(cpl) - len(cpl2) != 1:
-        sys.exit("R8 no estaba exactamente una vez en la BOM/CPL entregadas")
-    log.append("BOM/CPL REV B.1: las entregadas sin R8 (BOM %d filas, CPL %d filas)" % (len(rows) - 1, len(cpl2) - 1))
+    if len(cpl2) - 1 != len(mont):
+        sys.exit("CPL incompleto: %d filas para %d piezas" % (len(cpl2) - 1, len(mont)))
+    old = list(csv.reader(open(os.path.join(c3, "AVO_GIRTH_PCB_C3_BOM_JLCPCB.csv"), encoding="utf-8")))
+    log.append("BOM REV B.1 (%d líneas, %d piezas) frente a la entregada:" % (len(rows) - 1, len(mont)))
+    log += ["  - " + ",".join(r_) for r_ in old if r_ not in rows] + ["  + " + ",".join(r_) for r_ in rows if r_ not in old]
+    log.append("CPL REV B.1: %d filas (entregada %d)" % (len(cpl2) - 1, len(cpl) - 1))
     log.append("REV en la fuente: %s · R8 DNP: %s" % (D.REV, next(p["dnp"] for p in D.PARTS if p["ref"] == "R8")))
     open(os.path.join(H, "aplicar_salida.txt"), "w").write("\n".join(log) + "\n")
     print("\n".join(log))

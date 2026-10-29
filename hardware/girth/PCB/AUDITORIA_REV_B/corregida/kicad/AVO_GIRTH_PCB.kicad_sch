@@ -2269,7 +2269,7 @@
 		(dnp no)
 		(uuid "ae9bee3d-6412-5b69-973c-4fcea417864e")
 		(property "Reference" "C41" (at 356.87 257.81 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "220n" (at 356.87 260.35 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "470n" (at 356.87 260.35 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
@@ -2279,7 +2279,7 @@
 		)
 		(property "Datasheet" "" (at 354.33 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 354.33 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C16772" (at 354.33 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1543" (at 354.33 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 354.33 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "6083f0f1-410a-58c8-a317-4fda5fc7eec8"))
 		(pin "2" (uuid "6c63cee1-6c61-5230-9187-0e6adf805733"))
@@ -2315,7 +2315,7 @@
 		(dnp no)
 		(uuid "ba7fe4d4-bb00-5357-81bf-466497afccf7")
 		(property "Reference" "R40" (at 381 260.35 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "1M" (at 381 262.89 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "100k" (at 381 262.89 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -2325,7 +2325,7 @@
 		)
 		(property "Datasheet" "" (at 378.46 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 378.46 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C26083" (at 378.46 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25741" (at 378.46 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 378.46 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "ea6a8f15-5478-5716-b463-a75e2a95d8fd"))
 		(pin "2" (uuid "9ce393a1-af07-5fb7-b520-653eb9f4d750"))

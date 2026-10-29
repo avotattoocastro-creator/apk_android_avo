@@ -14,7 +14,7 @@ void hold() {
   pinMode(gb::PIN_PWR_HOLD, OUTPUT);
   digitalWrite(gb::PIN_PWR_HOLD, HIGH);
   gpio_hold_dis((gpio_num_t)gb::PIN_PWR_HOLD);
-  // Auditoría REV B (SPICE, caso peor de tolerancias): sin PWR_HOLD el corte solo aguanta ~0,6 s. Con el bloqueo
+  // Auditoría REV B (SPICE, caso peor de tolerancias): sin PWR_HOLD el corte aguanta 0,8–1,1 s. Con el bloqueo
   // del pad el 1 se mantiene durante un reinicio por vigilante o fallo (ESP-IDF, gpio_hold_en: "retain the state
   // of GPIOs when ... chip or system is reset (e.g. watchdog time-out ...)"). PENDIENTE DE VALIDACIÓN FÍSICA.
   gpio_hold_en((gpio_num_t)gb::PIN_PWR_HOLD);

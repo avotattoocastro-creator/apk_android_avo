@@ -237,7 +237,10 @@ def main():
         tab.append(dict(vbat=vb, rint=rint, rdo=rdo, rpath=rpath, v3_min_tx=round(float(v3[win].min()), 3),
                         vbat_min=round(float(res["v(vbat)"][win].min()), 3),
                         sigue_encendida=bool(v3[-1] > 3.0), bajo_3v0=bool(v3[win].min() < ESP_VMIN),
-                        brownout=bool(v3[win].min() < ESP_BOD)))
+                        brownout=bool(v3[win].min() < ESP_BOD),
+                        # pico al cerrar Q10 (t = 0,1 s): carga de los condensadores de entrada (sin ESR ni inductancia)
+                        i_pico_encendido_A=round(float(-res["i(vcell)"].min()), 2),
+                        us_por_encima_de_1A=round(float(np.sum(np.diff(t)[(-res["i(vcell)"])[:-1] > 1.0]) * 1e6), 1)))
         if (vb, rint) in ((3.7, 0.2), (3.3, 0.3)):
             plot(name, res, "Arranque y TX · celda %.1f V, Rint %.1f Ω, Rdo %.2f Ω" % (vb, rint, rdo), (0.1,))
     R["escenarios"]["arranque_tx"] = tab

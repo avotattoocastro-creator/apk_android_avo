@@ -22,7 +22,7 @@ fabricado ni medido ninguna placa.
 | 3,3 V | RT9080-33 (U3) | 600 mA, 2 µA de consumo propio |
 | Batería | J2 JST SH 1,0 (pin 1 = +) | el cable pasa por la ranura fresada junto al borde −X |
 | Reed | pads SW1/SW2 (SW2 al + de la batería) | enciende por flanco y se lee en GPIO1 (Q16) |
-| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10–D13 (BAV70)** | **< 1 µA apagada** fuera del soporte (≈ 7–8 µA dentro); ver abajo |
+| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10–D13 (BAV70)** | **≤ 2 µA apagada** fuera del soporte (máx. de hoja a 25 °C; ≈ 7–8 µA dentro); ver abajo |
 
 ## Corte de batería (enclavamiento con MOSFET)
 - **Se enciende solo**, sin firmware: al **cerrarse** el reed (C40 da un impulso de ≈ 2,5 s, con la corriente por el
@@ -63,7 +63,7 @@ firmware no arranca: mantener BOOT (TP2) a masa al encender para entrar en modo 
 usarlo con esta placa.
 
 ## Consumo estimado
-- **Apagada** (fuera del soporte): < 1 µA (fuga de Q10) + autodescarga de la celda. **Dentro del soporte** (reed
+- **Apagada** (fuera del soporte): ≤ 2 µA (fugas de Q10 y de Q11 por R40, máx. de hoja a 25 °C; más con calor) + autodescarga de la celda. **Dentro del soporte** (reed
   cerrado): ≈ 7–8 µA por R45 y R49/R50 (simulado en la auditoría REV B, `AUDITORIA_REV_B/spice`).
 - **Funcionando**: *corregido en la auditoría REV B* — con el firmware V0.3.0 (radio sin ahorro, `WIFI_PS_NONE`)
   ≈ 94 mA → **≈ 5 h** con 500 mAh (4 h con la celda envejecida); con ahorro de radio ≈ 45 mA → ≈ 10 h. Cálculo en
@@ -97,7 +97,7 @@ usarlo con esta placa.
 1. Inductancia de la bobina y ajuste de C1–C5 (`DOCS/AJUSTE_QI.md`).
 2. Polaridad del cable de la batería contra J2 (pin 1 = +).
 3. Corte de batería: tiempo de encendido con el reed, tiempo que sostiene un reinicio, tiempo de apagado y
-   consumo apagado (< 1 µA esperado).
+   consumo apagado (≤ 2 µA esperado fuera del soporte, ≈ 7–8 µA con el reed cerrado).
 4. Primer encendido con fuente limitada a 100 mA; medir 3,3 V, consumo dormido y carga por USB y por Qi.
 5. IMU: direcciones I²C (`DIAG`), signos de los ejes y calibración del magnetómetro dentro de la cápsula.
 

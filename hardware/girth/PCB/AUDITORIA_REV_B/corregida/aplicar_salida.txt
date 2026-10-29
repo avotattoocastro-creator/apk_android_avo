@@ -22,7 +22,14 @@ Conexiones pendientes en la placa del CI: 0 redes
 Tramos colgantes eliminados: 0
 Reparadas: ninguna
 Sin reparar: ninguna
-Escrito /tmp/revb1_ag_gq97e/fuente/../kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb
+Escrito /tmp/revb1_x0j0117l/fuente/../kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb
 
-BOM/CPL REV B.1: las entregadas sin R8 (BOM 41 filas, CPL 84 filas)
+BOM REV B.1 (41 líneas, 84 piezas) frente a la entregada:
+  - 100k,R4,R8,R9,R10,R31,R43,R49,R_0402_1005Metric,C25741
+  - 1M,R32,R33,R40,R45,R50,R_0402_1005Metric,C26083
+  - 220n,C41,C_0402_1005Metric,C16772
+  + 100k,R4,R9,R10,R31,R40,R43,R49,R_0402_1005Metric,C25741
+  + 1M,R32,R33,R45,R50,R_0402_1005Metric,C26083
+  + 470n,C41,C_0402_1005Metric,C1543
+CPL REV B.1: 84 filas (entregada 85)
 REV en la fuente: B.1 · R8 DNP: True

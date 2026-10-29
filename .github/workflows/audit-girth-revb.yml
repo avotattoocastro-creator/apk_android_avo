@@ -96,6 +96,9 @@ jobs:
           pip install -q numpy matplotlib scipy
           ngspice -v | head -2 | tee $R/spice/version.txt
           MC_N=200 python3 $A/spice/sim_revb.py $R/spice 2>&1 | tee $R/spice/salida.txt
+          # REV B.1 propuesta: mismos escenarios con C41 = 470 nF y R40 = 100 k
+          mkdir -p $R/spice_rev_b1
+          AVO_SPICE_VALORES="C41=470n,R40=100k" MC_N=200 python3 $A/spice/sim_revb.py $R/spice_rev_b1 2>&1 | tee $R/spice_rev_b1/salida.txt
 
       - name: Fases 6-7, 11 · pruebas del firmware en el PC (simulador de marcha, enlace, alimentación)
         continue-on-error: true
@@ -117,6 +120,11 @@ jobs:
           python3 -c "import json;p=json.load(open('hardware/girth/PCB/kicad/piezas.json'));print('\n'.join(sorted({x['lcsc'] for x in p if x['lcsc']})))" > /tmp/lista.txt
           python3 hardware/girth/PCB/fuente/stock_jlc.py $R/fabricacion/existencias --list /tmp/lista.txt | tee $R/fabricacion/existencias.txt
           python3 $A/fabricacion/fab_check.py $R/fabricacion/existencias $R/fabricacion | tee $R/fabricacion/fab_check_salida.txt
+          # REV B.1: existencias, tipo y encapsulado de su BOM (incluida la pieza nueva de C41)
+          mkdir -p $R/rev_b1
+          python3 -c "import csv;print('\n'.join(sorted({r[3] for r in list(csv.reader(open('$A/corregida/AVO_GIRTH_PCB_C3_REV_B1_BOM_JLCPCB.csv',encoding='utf-8')))[1:]})))" > /tmp/lista_b1.txt
+          python3 hardware/girth/PCB/fuente/stock_jlc.py $R/rev_b1/existencias --list /tmp/lista_b1.txt | tee $R/rev_b1/existencias.txt
+          python3 -c "import json;d=json.load(open('$R/rev_b1/existencias/stock_jlc.json'));print(json.dumps(d['parts'].get('C1543'),ensure_ascii=False,indent=1))" | tee $R/rev_b1/pieza_C41_C1543.txt
           python3 $A/esp32/gpio_tabla.py | tee $R/esp32/gpio_tabla_salida.txt; cp $A/esp32/gpio_tabla.* $R/esp32/
           python3 $A/autonomia/autonomia.py | tee $R/autonomia/autonomia_salida.txt; cp $A/autonomia/autonomia.* $R/autonomia/
 

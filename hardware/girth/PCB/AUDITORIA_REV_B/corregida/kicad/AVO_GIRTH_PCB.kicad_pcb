@@ -15652,7 +15652,7 @@
 		)
 		(property
 			"Value"
-			"1M"
+			"100k"
 			(at 0 1.07 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -15688,7 +15688,7 @@
 		)
 		(property
 			"LCSC"
-			"C26083"
+			"C25741"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -15697,7 +15697,7 @@
 		)
 		(property
 			"MPN"
-			"1M"
+			"100k"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -16025,7 +16025,7 @@
 		)
 		(property
 			"Value"
-			"220n"
+			"470n"
 			(at 0 1.06 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -16061,7 +16061,7 @@
 		)
 		(property
 			"LCSC"
-			"C16772"
+			"C1543"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -16070,7 +16070,7 @@
 		)
 		(property
 			"MPN"
-			"220n"
+			"470n"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
