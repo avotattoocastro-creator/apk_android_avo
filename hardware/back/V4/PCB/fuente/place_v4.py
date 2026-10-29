@@ -31,6 +31,16 @@ ANCLAS = {
     "Q1": (83.0, 3.5), "Q2": (83.0, -3.5), "Q3": (67.8, -4.6), "F1": (70.6, -4.6), "Q4": (82.0, -4.0),
     "D1": (97.0, 16.0),
 }
+# Núcleo del receptor Qi copiado de la cincha (REV A/B, ruteada al 100 % con el mismo BQ51013B RHL):
+# desplazamientos (dX, dY, giro) respecto a U1, que va girado 90°. Rev. 2 de la colocación V4.
+U1_POS = (79.3, -0.9, 90)
+QI_CORE = {
+    "C4": (-5.7, 0.0, 90), "C5": (-3.9, 0.0, 90),
+    "C6": (-2.9, -6.4, 270), "C7": (-1.1, -6.6, 270), "C8": (0.1, -6.4, 270),
+    "C9": (-0.7, 6.0, 90), "C10": (0.6, 6.3, 90), "C11": (1.9, 6.0, 90),
+    "C12": (-3.5, 3.9, 90), "C13": (-5.0, 3.9, 90), "C14": (-2.1, 4.2, 90),
+    "R1": (3.2, 4.6, 90), "R2": (4.3, 4.6, 90), "R3": (5.4, 4.6, 90), "RT1": (3.5, 1.4, 90),
+}
 ORDEN_IC = ["U1", "U2", "U3", "U7", "U6", "Q1", "Q2", "Q3", "F1", "Q4", "D1"]
 # condensadores de desacoplo → integrado al que sirven (se colocan junto a su pin, no en el centro de la red)
 DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("U7", "5"), "C62": ("J4", "1"),
@@ -132,7 +142,21 @@ def main():
         placed[ref] = (bbox(p, p["pos"], r), p); mark(p)
     for nm, x0, y0, x1, y1 in D.KEEPOUT_RECTS:
         occ[(XX >= x0) & (XX <= x1) & (YY >= y0) & (YY <= y1)] = True
-    for ref in ORDEN_IC:
+    # U1 y el núcleo Qi en posición fija (si alguna pieza no cabe, se busca el hueco más cercano)
+    u = byref["U1"]; u["pos"], u["rot"] = (U1_POS[0], U1_POS[1]), U1_POS[2]
+    placed["U1"] = (bbox(u, u["pos"], u["rot"]), u); mark(u)
+    for ref, (dx, dy, rr) in QI_CORE.items():
+        q = byref[ref]; pos = (round(U1_POS[0] + dx, 2), round(U1_POS[1] + dy, 2))
+        if ok(q, pos, rr):
+            q["pos"], q["rot"] = pos, rr
+            placed[ref] = (bbox(q, pos, rr), q); mark(q)
+        else:
+            print("núcleo Qi: %s no cabe en %s, se busca hueco" % (ref, pos))
+            place(q, pos, (rr, (rr + 180) % 360, (rr + 90) % 360, (rr + 270) % 360))
+    # condensadores de resonancia junto a los hilos de la bobina (L1/L2), antes que el resto
+    for ref in ("C1", "C2", "C3"):
+        place(byref[ref], (FIJAS["L1"][0] - 2.0, FIJAS["L1"][1]))
+    for ref in ORDEN_IC[1:]:
         place(byref[ref], ANCLAS[ref], (0, 90))
 
     BIG = {D.GND, D.V3, D.VSYS, D.VBAT, D.VBUS, D.VIN5, D.VZED, D.VSD}
