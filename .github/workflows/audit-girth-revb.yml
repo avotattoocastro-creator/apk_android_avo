@@ -121,21 +121,28 @@ jobs:
           timeout 30 $Q -nographic -icount 3 -machine esp32c3 -drive file=$M,if=mtd,format=raw \
             -drive file=/tmp/efuse.bin,if=none,format=raw,id=efuse -global driver=nvram.esp32c3.efuse,property=drive,value=efuse \
             -serial file:$R/qemu/uart0.log -monitor none > $R/qemu/qemu_stdout.txt 2>&1 || echo "fin (timeout esperado) $?" >> $R/qemu/qemu_stdout.txt
-          tail -40 $R/qemu/uart0.log || true
+          ls -la $R/qemu/; wc -l $R/qemu/uart0.log || true
+          head -c 2000000 $R/qemu/uart0.log > /tmp/u.log && mv /tmp/u.log $R/qemu/uart0.log || true
+          head -60 $R/qemu/uart0.log || true
 
       - name: Guardar evidencias en la rama
         if: always()
         run: |
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           T=$(mktemp -d); cp -r $R $T/r
+          du -ah $R | sort -h | tail -15
+          # GitHub rechaza ficheros > 100 MB: se dejan solo en el artefacto del run
+          find $T/r -type f -size +40M -print -delete
+          ok=0
           for i in 1 2 3 4 5; do
             git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
             rm -rf $R; mkdir -p $(dirname $R); cp -r $T/r $R
             git add -A $R
-            git commit -m "Auditoría REV B: evidencias del CI de ${GITHUB_SHA::7} [skip ci]" || { echo "sin cambios"; break; }
-            git push origin HEAD:${{ github.ref_name }} && break
+            git commit -q -m "Auditoría REV B: evidencias del CI de ${GITHUB_SHA::7} [skip ci]" || { echo "sin cambios"; ok=1; break; }
+            git push origin HEAD:${{ github.ref_name }} && { ok=1; break; }
             sleep $((i * 10))
           done
+          test $ok = 1 || { echo "::error::no se pudieron publicar las evidencias"; exit 1; }
       - uses: actions/upload-artifact@v4
         if: always()
         with:
