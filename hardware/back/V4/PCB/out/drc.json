@@ -1,0 +1,454 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-29T17:20:33+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_BACK_V4_PCB.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 9 [VBUS] of U1 on F.Cu",
+                    "pos": {
+                        "x": 75.85,
+                        "y": 101.75
+                    },
+                    "uuid": "11017b3b-eb17-5dea-a0a6-574a339fe681"
+                },
+                {
+                    "description": "Track [VBUS] on F.Cu, length 0.3759 mm",
+                    "pos": {
+                        "x": 84.0,
+                        "y": 96.5
+                    },
+                    "uuid": "cc9d93dd-a81f-46a7-909b-91dd6cb81eba"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad A9 [VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 102.955,
+                        "y": 97.55
+                    },
+                    "uuid": "dae032aa-7580-51f1-83ae-a417893a2226"
+                },
+                {
+                    "description": "Track [VBUS] on F.Cu, length 1.7850 mm",
+                    "pos": {
+                        "x": 102.955,
+                        "y": 102.45
+                    },
+                    "uuid": "c2750bce-3f90-4746-957e-e906b9df2da8"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad A9 [VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 102.955,
+                        "y": 97.55
+                    },
+                    "uuid": "dae032aa-7580-51f1-83ae-a417893a2226"
+                },
+                {
+                    "description": "Pad 5 [VBUS] of U6 on F.Cu",
+                    "pos": {
+                        "x": 103.6375,
+                        "y": 91.4
+                    },
+                    "uuid": "3b174f64-0c3d-5cfe-b3fb-ab5edee5e268"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 11 [VSYS] of U2 on F.Cu",
+                    "pos": {
+                        "x": 90.9625,
+                        "y": 100.25
+                    },
+                    "uuid": "9d5515f2-9ba1-5688-96da-0cd188135e1e"
+                },
+                {
+                    "description": "Pad 10 [VSYS] of U2 on F.Cu",
+                    "pos": {
+                        "x": 90.9625,
+                        "y": 100.75
+                    },
+                    "uuid": "88e0b31d-b440-577f-92f6-6b92be96c6c3"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 10 [VSYS] of U2 on F.Cu",
+                    "pos": {
+                        "x": 90.9625,
+                        "y": 100.75
+                    },
+                    "uuid": "88e0b31d-b440-577f-92f6-6b92be96c6c3"
+                },
+                {
+                    "description": "Track [VSYS] on F.Cu, length 1.1910 mm",
+                    "pos": {
+                        "x": 92.56,
+                        "y": 102.716
+                    },
+                    "uuid": "1c08fedb-f0fd-471c-bd72-2068353f9244"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [EN] of TP1 on F.Cu",
+                    "pos": {
+                        "x": 97.87,
+                        "y": 90.23
+                    },
+                    "uuid": "e256ced5-ac62-5ce5-96c0-012fe17a0881"
+                },
+                {
+                    "description": "Pad 45 [EN] of U4 on F.Cu",
+                    "pos": {
+                        "x": 94.9,
+                        "y": 80.05
+                    },
+                    "uuid": "0980d2aa-fdac-5186-8cc0-e0cedbb1deed"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [QI_AC2] on In2.Cu, length 6.6324 mm",
+                    "pos": {
+                        "x": 72.053,
+                        "y": 98.8
+                    },
+                    "uuid": "1ceb7077-3074-4b4d-91d4-53e71e2eb6f6"
+                },
+                {
+                    "description": "Pad 19 [QI_AC2] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 98.25
+                    },
+                    "uuid": "1d049ffe-fd6b-5f29-b7dd-d162fa38a5c7"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [QI_ADEN] on In2.Cu, length 1.9601 mm",
+                    "pos": {
+                        "x": 82.5267,
+                        "y": 101.0373
+                    },
+                    "uuid": "8436cf11-5323-4942-aebe-02ef95ee93b5"
+                },
+                {
+                    "description": "Pad 8 [QI_ADEN] of U1 on F.Cu",
+                    "pos": {
+                        "x": 75.85,
+                        "y": 101.25
+                    },
+                    "uuid": "b470d287-dec2-5a96-b54e-48413ecc361d"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [QI_COMM1] of C8 on F.Cu",
+                    "pos": {
+                        "x": 66.79,
+                        "y": 100.75
+                    },
+                    "uuid": "44dba657-ecdb-5307-85e6-8e1b1d34b3a2"
+                },
+                {
+                    "description": "Pad 6 [QI_COMM1] of U1 on F.Cu",
+                    "pos": {
+                        "x": 75.85,
+                        "y": 100.25
+                    },
+                    "uuid": "cbf39416-584e-5b8c-a93b-8c95e7ec4e90"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [QI_COMM2] of C11 on F.Cu",
+                    "pos": {
+                        "x": 72.61,
+                        "y": 93.97
+                    },
+                    "uuid": "e7015964-36bf-5214-9114-23949fceb113"
+                },
+                {
+                    "description": "Pad 15 [QI_COMM2] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 100.25
+                    },
+                    "uuid": "11f9ba52-8939-5991-805a-3cd5efd21d92"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 12 [QI_ILIM] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 101.75
+                    },
+                    "uuid": "041df12f-73c7-560a-b066-6600f364ecfc"
+                },
+                {
+                    "description": "Pad 1 [QI_ILIM] of R1 on F.Cu",
+                    "pos": {
+                        "x": 80.37,
+                        "y": 103.34
+                    },
+                    "uuid": "a61c06ed-c269-510f-8083-df5ffb26edc0"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [QI_RECT] of C13 on F.Cu",
+                    "pos": {
+                        "x": 78.725,
+                        "y": 96.38
+                    },
+                    "uuid": "e3eb9ae2-f971-5ff0-8c5b-cf5458db2470"
+                },
+                {
+                    "description": "Pad 18 [QI_RECT] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 98.75
+                    },
+                    "uuid": "0060e766-b9e9-5031-b121-843e7a34fbec"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 18 [QI_RECT] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 98.75
+                    },
+                    "uuid": "0060e766-b9e9-5031-b121-843e7a34fbec"
+                },
+                {
+                    "description": "Pad 1 [QI_RECT] of C12 on F.Cu",
+                    "pos": {
+                        "x": 80.67,
+                        "y": 100.825
+                    },
+                    "uuid": "16e22deb-bc87-5ae5-8705-976854ba5085"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [QI_RECT] of C14 on F.Cu",
+                    "pos": {
+                        "x": 82.04,
+                        "y": 100.02
+                    },
+                    "uuid": "7ce0bc4e-f688-5d28-9ed4-ef4cef02929d"
+                },
+                {
+                    "description": "Pad 1 [QI_RECT] of C12 on F.Cu",
+                    "pos": {
+                        "x": 80.67,
+                        "y": 100.825
+                    },
+                    "uuid": "16e22deb-bc87-5ae5-8705-976854ba5085"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 1 [QI_RECT] of R3 on F.Cu",
+                    "pos": {
+                        "x": 83.22,
+                        "y": 100.35
+                    },
+                    "uuid": "9af45434-ec86-5107-95e0-f6ba8132ad9a"
+                },
+                {
+                    "description": "Pad 1 [QI_RECT] of C14 on F.Cu",
+                    "pos": {
+                        "x": 82.04,
+                        "y": 100.02
+                    },
+                    "uuid": "7ce0bc4e-f688-5d28-9ed4-ef4cef02929d"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 13 [QI_TS] of U1 on F.Cu",
+                    "pos": {
+                        "x": 79.15,
+                        "y": 101.25
+                    },
+                    "uuid": "d3be971c-fff3-5b17-96d1-98484f151f15"
+                },
+                {
+                    "description": "Pad 1 [QI_TS] of RT1 on F.Cu",
+                    "pos": {
+                        "x": 87.97,
+                        "y": 96.61
+                    },
+                    "uuid": "187f1af9-a0b3-53e9-8543-2d605c34d7a9"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 68.983,
+                        "y": 123.7
+                    },
+                    "uuid": "24b7ad52-43ba-5f78-8626-55242e27999b"
+                },
+                {
+                    "description": "Circle of MR1 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 120.406
+                    },
+                    "uuid": "4be55da0-8c3f-5fc4-ae89-10410ead0ed7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Arc on Edge.Cuts",
+                    "pos": {
+                        "x": 103.967,
+                        "y": 83.0
+                    },
+                    "uuid": "02ac5ea9-984e-5c9a-b69c-33efd89454e0"
+                },
+                {
+                    "description": "Circle of MP2 on F.Silkscreen",
+                    "pos": {
+                        "x": 98.4,
+                        "y": 86.8
+                    },
+                    "uuid": "053c58ef-7011-52a3-bde7-710557bc974b"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 65.7,
+                        "y": 76.3
+                    },
+                    "uuid": "3cbc5cf2-4584-5b9c-a32d-7e6318dd59b8"
+                },
+                {
+                    "description": "Circle of MR2 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 81.925
+                    },
+                    "uuid": "bb3b1144-d689-5842-92ae-6ddc04b69cd2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}
