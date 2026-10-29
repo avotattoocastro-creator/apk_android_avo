@@ -64,7 +64,7 @@ jobs:
         continue-on-error: true
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ngspice > /dev/null
-          pip install -q numpy matplotlib
+          pip install -q numpy matplotlib scipy
           ngspice -v | head -2 | tee $R/spice/version.txt
           MC_N=200 python3 $A/spice/sim_revb.py $R/spice 2>&1 | tee $R/spice/salida.txt
 
@@ -99,8 +99,8 @@ jobs:
           arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json > /dev/null
           F=firmware/girth/V0_3_0_C3
           $F/build_girth_c3.sh /tmp/fw_prod 2>&1 | tail -3 | tee $R/firmware/compilacion_produccion.txt
-          # QEMU solo emula el UART0: misma compilación pero con Serial en UART0 (CDCOnBoot=default)
-          FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
+          # QEMU solo emula el UART0 y su flash no admite QIO: misma compilación con Serial en UART0 y flash en DIO
+          FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default,FlashMode=dio" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
           ls -la /tmp/fw_prod /tmp/fw_qemu | tee -a $R/firmware/compilacion_produccion.txt
           sha256sum /tmp/fw_prod/*.bin | tee $R/firmware/sha256_produccion.txt
 
