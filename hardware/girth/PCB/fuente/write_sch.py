@@ -95,9 +95,10 @@ def write(path_sch, path_pro, path_parts):
 
     project.write(path_pro,
                   [dict(name="Default", clearance=0.15, track_width=0.2, via_diameter=0.5, via_drill=0.3),
-                   dict(name="Potencia", clearance=0.2, track_width=0.4, via_diameter=0.6, via_drill=0.3,
+                   # 0,3 mm: entra en los pines de 0,24 mm de las QFN (paso 0,5) sin estrechamientos; ≈ 1 A en cobre exterior
+                   dict(name="Potencia", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
                         priority=1),
-                   dict(name="Qi_AC", clearance=0.2, track_width=0.5, via_diameter=0.6, via_drill=0.3,
+                   dict(name="Qi_AC", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
                         priority=0)],
                   [("QI_AC*", "Qi_AC"), ("QI_COIL*", "Qi_AC"), ("VBUS", "Potencia"), ("VIN5", "Potencia"),
                    ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("QI_RECT", "Potencia")])
