@@ -40,6 +40,8 @@ posiciones (comprobado por el script). **Ningún pedido ni subida.**
 **Pendiente:** AISLER no ofrece 4 capas de 1,0 mm en su catálogo estándar (0,8/1,6 mm) y fabrica PCB de 3 en 3;
 confirmar las ranuras de J1; revisar en su visor los giros y el pin 1.
 
+---
+
 ## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
 **CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
