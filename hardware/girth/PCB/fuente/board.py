@@ -83,7 +83,7 @@ def gr_arc(a, m, b, layer, w=0.1):
 
 
 def gr_text(txt, x, y, layer, size=0.8, angle=0, mirror=False, bold=True, key=""):
-    eff = [S("effects"), [S("font"), [S("size"), size, size], [S("thickness"), size * 0.15]]
+    eff = [S("effects"), [S("font"), [S("size"), size, size], [S("thickness"), max(0.12, round(size * 0.15, 3))]]
            + ([[S("bold"), S("yes")]] if bold else [])]
     if mirror:
         eff.append([S("justify"), S("mirror")])
@@ -113,7 +113,7 @@ def zone(net, netname, layer, poly, priority=0, clearance=0.2, min_w=0.2, therma
     cp.append([S("clearance"), clearance])
     z += [cp, [S("min_thickness"), min_w], [S("filled_areas_thickness"), S("no")],
           [S("fill"), [S("thermal_gap"), thermal[0]], [S("thermal_bridge_width"), thermal[1]],
-           [S("island_removal_mode"), 1], [S("island_area_min"), 2]],
+           [S("island_removal_mode"), 0]],
           [S("polygon"), [S("pts")] + [[S("xy"), round(x, 4), round(y, 4)] for x, y in poly]]]
     return z
 

@@ -93,7 +93,7 @@ def write(path, netclasses, assignments):
                                 "conflicting_netclasses": "error", "different_unit_footprint": "error",
                                 "different_unit_net": "error", "duplicate_reference": "error",
                                 "duplicate_sheet_names": "error", "endpoint_off_grid": "ignore",
-                                "extra_units": "error", "global_label_dangling": "warning",
+                                "extra_units": "error", "footprint_link_issues": "ignore", "footprint_filter": "ignore", "global_label_dangling": "warning",
                                 "hier_label_mismatch": "error", "label_dangling": "error",
                                 "lib_symbol_issues": "ignore", "lib_symbol_mismatch": "ignore",
                                 "missing_bidi_pin": "warning", "missing_input_pin": "warning",

@@ -130,7 +130,7 @@ def via_drops(r, pads, log):
         fp = D.fp_of(rec["part"])
         if any(q.kind == "thru_hole" and q.num == rec["pad"].num for q in fp.pads):
             continue                                   # exposed pad with its own thermal vias
-        if rec["part"]["ref"] == "U4" and rec["pad"].num not in ("1", "11", "14", "36", "42", "48", "50", "51", "52", "53"):
+        if rec["part"]["ref"] == "U4" and rec["pad"].num not in ("1", "3", "11", "14", "36", "42", "48", "50", "51", "52", "53"):
             continue                                   # module: the rest join through the F.Cu pour and the EPAD vias
         nid = netid(net)
         layer = rec["layers"][0]
@@ -138,7 +138,7 @@ def via_drops(r, pads, log):
             continue
         w = 0.3
         free = r.free_mask(nid, w)
-        vm = r.via_mask(nid)
+        vm = r.via_mask(nid) & ~drill_block(r, pads)
         # goal: any cell where a via fits, within 2.5 mm of the pad centre
         ci, cj = r.ij(*rec["c"])
         R = int(2.5 / GRID)
@@ -166,6 +166,16 @@ def via_drops(r, pads, log):
         done += 1
     log.append("vías a planos: %d, sin vía: %s" % (done, ", ".join(fails) or "ninguna"))
     return fails
+
+
+def drill_block(r, pads):
+    """Cells too close to a drilled hole for another via (hole-to-hole ≥ 0.25 mm with 0.3 mm drills)."""
+    m = np.zeros((r.H, r.W), bool)
+    holes = [rec["c"] for rec in pads if rec["pad"].kind in ("thru_hole", "np_thru_hole")]
+    holes += [p for _, p in r.vias]
+    for c in holes:
+        m |= seg_mask((r.H, r.W), r.x0, r.y0, c, c, 0.62)
+    return m
 
 
 def path_inside_pad(path, r, rec):
@@ -249,6 +259,29 @@ def point_in(p, poly):
 
 
 # ======================================================================================= writers
+def edge_bands(w=0.45):
+    """Thin keepout polygons (tracks/vias only) inside each arc of the outline, so the router keeps
+    0.3 mm from the real arcs although the DSN boundary approximates them with straight segments."""
+    bands = []
+    for pr in D.outline_prims() + D.slot_prims():
+        if pr[0] != "arc":
+            continue
+        pts = D.sample_arc(pr[1], pr[2], pr[3], 6)
+        c = D.arc_center(pr[1], pr[2], pr[3])
+        rr = math.hypot(pts[0][0] - c[0], pts[0][1] - c[1])
+        # the board lies on the side of the arc that contains the arc's chord midpoint... use the probe
+        mid = pr[2]
+        probe_in = (mid[0] + (c[0] - mid[0]) * 0.05, mid[1] + (c[1] - mid[1]) * 0.05)
+        poly_outline = D.outline_pts(3)
+        inside_towards_centre = D.point_in_poly(probe_in[0], probe_in[1], poly_outline) if pr in D.outline_prims() \
+            else not D.point_in_poly(probe_in[0], probe_in[1], D.prims_pts(D.slot_prims(), 10))
+        sgn = -1 if inside_towards_centre else 1
+        inner = [(c[0] + (rr + sgn * w) * (x - c[0]) / rr, c[1] + (rr + sgn * w) * (y - c[1]) / rr) for x, y in pts]
+        outer = [(c[0] + (rr - sgn * 0.05) * (x - c[0]) / rr, c[1] + (rr - sgn * 0.05) * (y - c[1]) / rr) for x, y in pts]
+        bands.append(outer + inner[::-1])
+    return bands
+
+
 def write_board(r, path, outer_pours=True):
     tree = B.header(D.THICK)
     tree += B.nets_block(D.NETS)
@@ -291,14 +324,14 @@ def write_board(r, path, outer_pours=True):
     x0, y0, x1, y1 = D.ANT_KEEPOUT
     tree.append(B.keepout(["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"], kpoly([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]),
                           "ANTENA_SIN_COBRE"))
+    for k, band in enumerate(edge_bands()):
+        tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # texts
-    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV, *D.K(-24.5, 17.0), "F.SilkS", 1.0))
-    tree.append(B.gr_text(D.DATE + " · 4 capas 1,0 mm", *D.K(-24.5, 15.6), "F.SilkS", 0.7, bold=False))
-    tree.append(B.gr_text("ZONA ANTENA FPC (sin cobre)", *D.K(10.5, 18.6), "F.SilkS", 0.7, bold=False))
-    for txt, (x, y) in (("BOBINA", (-28.6, -7.0)), ("REED", (0.0, -19.6)), ("+ BAT −", (-22.6, 9.6)),
-                        ("CABLE BAT", (-29.0, 7.6))):
+    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
+    tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(0, -4.6), "B.SilkS", 0.8, mirror=True, bold=False))
+    tree.append(B.gr_text("ANTENA FPC (sin cobre)", *D.K(11.0, 16.0), "F.SilkS", 0.8, bold=False))
+    for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4)), ("+ BAT −", (-22.6, 10.0))):
         tree.append(B.gr_text(txt, *D.K(x, y), "F.SilkS", 0.7, bold=False))
-    tree.append(B.gr_text("AVO GIRTH REV " + D.REV, *D.K(0, 0), "B.SilkS", 1.2, mirror=True))
     B.write(path, tree)
 
 

@@ -153,7 +153,7 @@ def emit(fp, ref, value, x, y, angle, netmap, props=None, side="F", hide_value=T
         if hide:
             p.append([Sym("hide"), Sym("yes")])
         p += [[Sym("uuid"), uid("prop", ref, name)],
-              [Sym("effects"), [Sym("font"), [Sym("size"), size, size], [Sym("thickness"), size * 0.15]]]]
+              [Sym("effects"), [Sym("font"), [Sym("size"), size, size], [Sym("thickness"), max(0.1, round(size * 0.15, 3))]]]]
         return p
 
     cx0, cy0, cx1, cy1 = fp.courtyard()
