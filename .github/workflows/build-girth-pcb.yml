@@ -32,16 +32,26 @@ jobs:
         run: |
           set -x
           P=hardware/girth/PCB
-          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render $P/out/ruteado
-          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v2.1.0/freerouting-2.1.0.jar
-          sha256sum /tmp/freerouting.jar | tee $P/out/ruteado/freerouting.sha256
+          R=$P/out/ruteado
+          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render $R
+          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v2.1.0/freerouting-2.1.0.jar || true
+          sha256sum /tmp/freerouting.jar > $R/freerouting.sha256 2>&1 || true
+          java -version > $R/java.log 2>&1 || true
           docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
-            python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn
-          timeout 1500 java -jar /tmp/freerouting.jar -de $P/out/ruteado/placa.dsn -do $P/out/ruteado/placa.ses \
-            -mp 40 -mt 1 --gui.enabled=false 2>&1 | tail -60 | tee $P/out/ruteado/freerouting.log || true
-          ls -la $P/out/ruteado
-          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
-            python3 fuente/ci_route.py import kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_GIRTH_PCB.kicad_pcb
+            python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
+          ls -la $R >> $R/export.log
+          if [ -s $R/placa.dsn ]; then
+            (timeout 1500 java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 40 -mt 1 --gui.enabled=false) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
+            tail -150 $R/freerouting_full.log > $R/freerouting.log; rm -f $R/freerouting_full.log
+          fi
+          if [ -s $R/placa.ses ]; then
+            docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+              python3 fuente/ci_route.py import kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_GIRTH_PCB.kicad_pcb > $R/import.log 2>&1 || echo "import falló" >> $R/import.log
+          else
+            echo "SIN RUTEAR: se usa la placa de colocación" | tee $R/AVISO.txt
+            cp $P/kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb $P/kicad/AVO_GIRTH_PCB.kicad_pcb
+          fi
+          sudo chmod -R a+rw $P || true
       - name: Rellenar zonas, DRC, ERC y exportar
         run: |
           set -x
