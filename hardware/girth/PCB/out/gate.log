@@ -1,11 +1,11 @@
 # AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `227d41434af1c655379d71e11848e03c7ce8c1d9` · ejecución de CI: 40907500718
+- Commit: `15f8cfdb3b7ade10e26e88499e02bb3e91f0fcc1` · ejecución de CI: 40907946325
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 98 en total, 85 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
-- Pistas: 900 · vías: 164 · ruteado completo (0 conexiones incompletas)
+- Pistas: 899 · vías: 164 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -51,7 +51,8 @@ El C3 tiene 13 GPIO libres + USB: con el BNO085 por SPI habrían hecho falta 16.
 - Corte de batería: relé biestable G6KU (+ 2 × 220 µF, 9 transistores) → **enclavamiento con 2 MOSFET y 2 diodos**.
   Mismas funciones: encendido magnético, apagado remoto, consumo apagado < 1 µA, no se bloquea al cargar.
 - R6/R7 a 3,3 kΩ (pieza *Basic*): carga 270 mA, entrada 462 mA.
-- 81 piezas montadas (REV A: 104); 13 referencias *Extended* (REV A: 17).
+- 85 piezas montadas (REV A: 104); 14 referencias *Extended* (REV A: 17; la 14.ª es la resistencia de 10 MΩ del corte,
+  que JLCPCB solo tiene como *Extended*).
 - Contorno, capas, grosor, acabado, conectores (USB-C, batería, bobina, reed) y posiciones de los conectores: **sin
   cambios**. La tapa ya no necesita el rebaje del relé.
 
@@ -65,9 +66,11 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 
 ## Riesgos eléctricos y mecánicos
 - **Qi:** inductancia de la bobina sin medir; C1–C5 supuestos. Ajustar con la primera placa (`DOCS/AJUSTE_QI.md`).
-- **Corte de batería:** calculado, no medido. Si Q11 tuviera un umbral alto y la celda estuviera baja, el impulso del
-  reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603).
-- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,5 s; medir el tiempo real hasta PWR_HOLD.
+- **Corte de batería:** calculado, no medido; la red del reed se corrigió tras una revisión independiente (rearmado,
+  aislamiento de la lectura, corriente por el reed). Si Q11 tuviera un umbral alto y la celda estuviera baja, el
+  impulso del reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603). Las redes de 10 MΩ son
+  sensibles a la suciedad: medir los tiempos en la placa montada.
+- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,2 s; medir el tiempo real hasta PWR_HOLD.
 - **IMU:** ejes y signos sin comprobar; el magnetómetro necesita calibración dentro de la cápsula (imanes).
 - **BQ51013B:** 476 uds. en JLCPCB: es la pieza con menos existencias; reservarla si se va a tardar en pedir.
 - **Mecánica:** cuna +0,6 mm, ranura del cable y postes de la tapa pendientes en el CAD de la cápsula.

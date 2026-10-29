@@ -28274,14 +28274,6 @@
 		(uuid "0ff8ea78-1c22-5484-9af8-d55a992bd7d3")
 	)
 	(segment
-		(start 118.4454 108.4971)
-		(end 118.5483 108.6)
-		(width 0.2)
-		(layer "F.Cu")
-		(net 34)
-		(uuid "136e8d7f-bd8e-544a-80d7-8731927d9531")
-	)
-	(segment
 		(start 81.325 104.925)
 		(end 81.325 105.075)
 		(width 0.2)
