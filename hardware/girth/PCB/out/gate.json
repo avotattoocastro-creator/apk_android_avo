@@ -1,5 +1,5 @@
 {
- "ok": false,
+ "ok": true,
  "checks": [
   {
    "name": "DRC: errores",
@@ -8,8 +8,8 @@
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": false,
-   "n": 3
+   "ok": true,
+   "n": 0
   },
   {
    "name": "DRC: cortocircuitos",
@@ -33,7 +33,5 @@
   }
  ],
  "drc_errors": {},
- "drc_warnings": {
-  "track_dangling": 1
- }
+ "drc_warnings": {}
 }
