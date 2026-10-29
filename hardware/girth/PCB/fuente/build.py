@@ -249,7 +249,7 @@ def point_in(p, poly):
 
 
 # ======================================================================================= writers
-def write_board(r, path):
+def write_board(r, path, outer_pours=True):
     tree = B.header(D.THICK)
     tree += B.nets_block(D.NETS)
     for p in D.PARTS:
@@ -285,8 +285,9 @@ def write_board(r, path):
     poly = kpoly(D.outline_pts(3))
     tree.append(B.zone(D.CODE[D.GND], D.GND, "In1.Cu", poly, key="in1", connect="solid"))
     tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
-    tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
-    tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
+    if outer_pours:      # Freerouting would take these as planes: the CI adds them after routing
+        tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
+        tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
     x0, y0, x1, y1 = D.ANT_KEEPOUT
     tree.append(B.keepout(["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"], kpoly([(x0, y0), (x1, y0), (x1, y1), (x0, y1)]),
                           "ANTENA_SIN_COBRE"))
@@ -317,7 +318,7 @@ def main():
         r = build_router(pads)
         add_epad_vias(r)
         fails_v = via_drops(r, pads, log)
-        write_board(r, os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pcb"))
+        write_board(r, os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pcb"), outer_pours=False)
         print("\n".join(log))
         import plot
         plot.draw(os.path.join(out, "..", "out_local_colocacion.png"), r.tracks, r.vias, "colocación + vías a planos")

@@ -15,6 +15,25 @@ if mode == "export":
 elif mode == "import":
     ok = pcbnew.ImportSpecctraSES(board, sys.argv[3])
     print("SES importado:", ok)
+    # GND pours on the outer layers (left out of the DSN so Freerouting does not treat them as planes)
+    base = [z for z in board.Zones() if z.GetNetname() == "GND" and z.GetLayer() == pcbnew.In1_Cu][0]
+    for lay in (pcbnew.F_Cu, pcbnew.B_Cu):
+        z = base.Duplicate()
+        try:
+            z = z.Cast()
+        except Exception as e:
+            print("Cast:", e)
+        z.SetLayer(lay)
+        for fn, arg in (("SetPadConnection", pcbnew.ZONE_CONNECTION_THERMAL),
+                        ("SetThermalReliefGap", pcbnew.FromMM(0.3)),
+                        ("SetThermalReliefSpokeWidth", pcbnew.FromMM(0.3)),
+                        ("SetLocalClearance", pcbnew.FromMM(0.2))):
+            try:
+                getattr(z, fn)(arg)
+            except Exception as e:
+                print(fn, e)
+        board.Add(z)
+    print("zonas GND exteriores añadidas")
     # keep the fanouts we placed (locked) and everything Freerouting added
     pcbnew.SaveBoard(sys.argv[4], board)
     sys.exit(0 if ok else 1)

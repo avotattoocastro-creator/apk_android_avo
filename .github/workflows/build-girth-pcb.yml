@@ -41,7 +41,7 @@ jobs:
             python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
           ls -la $R >> $R/export.log
           if [ -s $R/placa.dsn ]; then
-            (timeout 1500 java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 40 -mt 1 --gui.enabled=false) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
+            (timeout 1200 java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 30 -mt 1 --router.max_passes=30 --gui.enabled=false) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
             tail -150 $R/freerouting_full.log > $R/freerouting.log; rm -f $R/freerouting_full.log
           fi
           if [ -s $R/placa.ses ]; then
