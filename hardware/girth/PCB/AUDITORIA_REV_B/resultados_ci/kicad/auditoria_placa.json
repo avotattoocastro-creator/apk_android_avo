@@ -1,6 +1,8 @@
 {
  "fichero": "AVO_GIRTH_PCB.kicad_pcb",
- "problemas": [],
+ "problemas": [
+  "el cajetín de la placa dice revisión «A» (los Gerber llevan esa revisión en TF.ProjectId)"
+ ],
  "contorno_mm": {
   "ancho": 65.6,
   "alto": 43.6
@@ -16,6 +18,7 @@
   "AVO GIRTH · REV B · ESP32-C3 · 2026-10-29"
  ],
  "es_rev_b": true,
+ "cajetin_revision": "A",
  "huellas": 98,
  "U4": "ESP32-C3-MINI-1U-N4",
  "reglas": {

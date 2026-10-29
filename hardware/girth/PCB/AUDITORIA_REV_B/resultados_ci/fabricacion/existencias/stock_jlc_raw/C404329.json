@@ -1,0 +1,219 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 391848,
+     "componentLibraryType": "expand",
+     "stockCount": 7650,
+     "componentTypeEn": "3D Magnetic Sensors",
+     "erpComponentName": "\u4e09\u8f74\u78c1\u4f20\u611f\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/3d-magnetic-sensors_memsic-mmc5983ma_C404329.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.9914
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.7507
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.582
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.4264
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.3331
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.3036
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.9183
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.6864
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.524
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.3741
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.2842
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.2558
+      }
+     ],
+     "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
+     "secondSortAccessId": "e63448351b364243b24b0e6120b76476",
+     "canPresaleNumber": 6711,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "MEMSIC-MMC5983MA/C404329",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 6.47,
+     "preMinPurchaseNum": 5,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.9914,
+     "componentCode": "C404329",
+     "componentBrandEn": "MEMSIC",
+     "componentModelEn": "MMC5983MA",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8594133217305899008",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121619_MEMSIC-MMC5983MA_C404329.pdf",
+     "dataManualFileAccessId": "8588884711880478720",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MEMSIC MMC5983MA",
+     "minImage": "",
+     "minImageAccessId": "8594133218602209280",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-16(3x3)",
+     "describe": "-40\u2103~+105\u2103 18bit 2.8V~3.6V 450uA I2C\u3001SPI \u00b18Gs \u00b18Gs LGA-16(3x3) 3D Magnetic Sensors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Magnetic Sensing Range(Z)",
+       "attribute_value_name": "\u00b18Gs"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Output bit",
+       "attribute_value_name": "18bit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.8V~3.6V"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "450uA"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "I2C\u3001SPI"
+      },
+      {
+       "attribute_name_en": "Magnetic Sensing Range(X,Y)",
+       "attribute_value_name": "\u00b18Gs"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "3D Magnetic Sensors",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C404329</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C404329"
+ },
+ "message": null
+}

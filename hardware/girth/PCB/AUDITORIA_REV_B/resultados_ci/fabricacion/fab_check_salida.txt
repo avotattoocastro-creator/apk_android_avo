@@ -1,0 +1,400 @@
+{
+ "problemas": [],
+ "avisos": [
+  "ENIG no va en los Gerber: se elige en el pedido de JLCPCB (Surface Finish: ENIG)",
+  "Giros: las correcciones salen de la base comunitaria cpl_rotations_db.csv (JLCKicadTools, la usa el complemento kicad-jlcpcb-tools); no son de JLCPCB. Hay que confirmarlas en la vista previa del pedido."
+ ],
+ "gerber": {
+  "ficheros": [
+   "AVO_GIRTH_PCB-B_Cu.gbl",
+   "AVO_GIRTH_PCB-B_Mask.gbs",
+   "AVO_GIRTH_PCB-B_Paste.gbp",
+   "AVO_GIRTH_PCB-B_Silkscreen.gbo",
+   "AVO_GIRTH_PCB-Edge_Cuts.gm1",
+   "AVO_GIRTH_PCB-F_Cu.gtl",
+   "AVO_GIRTH_PCB-F_Mask.gts",
+   "AVO_GIRTH_PCB-F_Paste.gtp",
+   "AVO_GIRTH_PCB-F_Silkscreen.gto",
+   "AVO_GIRTH_PCB-In1_Cu.g1",
+   "AVO_GIRTH_PCB-In2_Cu.g2",
+   "AVO_GIRTH_PCB-NPTH-drl_map.gbr",
+   "AVO_GIRTH_PCB-NPTH.drl",
+   "AVO_GIRTH_PCB-PTH-drl_map.gbr",
+   "AVO_GIRTH_PCB-PTH.drl",
+   "AVO_GIRTH_PCB-job.gbrjob"
+  ],
+  "capas_cobre": 4,
+  "grosor_mm": 1.0,
+  "tamano": {
+   "X": 65.6,
+   "Y": 43.6
+  },
+  "acabado": "ENIG",
+  "capas_en_job": [
+   "Copper,L1,Top",
+   "Copper,L2,Inr",
+   "Copper,L3,Inr",
+   "Copper,L4,Bot",
+   "SolderPaste,Top",
+   "SolderPaste,Bot",
+   "Legend,Top",
+   "Legend,Bot",
+   "SolderMask,Top",
+   "SolderMask,Bot",
+   "Profile"
+  ],
+  "contorno_mm": {
+   "ancho": 65.5,
+   "alto": 43.5
+  }
+ },
+ "referencias": {
+  "montadas": 85,
+  "en_bom": 85,
+  "en_cpl": 85,
+  "en_placa": 98,
+  "bom_sin_cpl": [],
+  "cpl_sin_bom": [],
+  "montadas_sin_bom": [],
+  "bom_no_montadas": [],
+  "dnp": [
+   "C5"
+  ],
+  "dnp_en_bom": [],
+  "a_mano": [
+   "L1",
+   "L2",
+   "TP1",
+   "TP2",
+   "TP3",
+   "TP4",
+   "TP5",
+   "TP6",
+   "TP7",
+   "TP8",
+   "SW1",
+   "SW2"
+  ],
+  "a_mano_en_bom": [],
+  "lcsc_distinto": [],
+  "sin_huella_en_placa": []
+ },
+ "cara_inferior": [],
+ "existencias_fecha": "2026-10-29 19:18 UTC",
+ "presupuesto": {
+  "placas_pcb": 5,
+  "placas_montadas": 2,
+  "soldaduras_por_placa": 356,
+  "referencias_bom": 41,
+  "piezas_sin_patas_rayos_x": [
+   "U1",
+   "U2",
+   "U4",
+   "U5",
+   "U7"
+  ],
+  "componentes_usd": 33.13,
+  "montaje_usd": 132.66,
+  "pcb_desnuda_usd": "NO VERIFICADO (precio de 4 capas 65,5×43,5 mm ENIG 1,0 mm: solo en el presupuesto de JLCPCB)",
+  "total_sin_pcb_ni_envio_usd": 165.79,
+  "lineas": [
+   [
+    "C11702",
+    "0402WGF1001TCE",
+    12,
+    0.0013,
+    0.02
+   ],
+   [
+    "C140288",
+    "BQ24072RGTR",
+    2,
+    0.9957,
+    1.99
+   ],
+   [
+    "C15127",
+    "AO3401A",
+    10,
+    0.096,
+    0.96
+   ],
+   [
+    "C15195",
+    "CL05B103KB5NNNC",
+    16,
+    0.0039,
+    0.06
+   ],
+   [
+    "C1525",
+    "CL05B104KO5NNNC",
+    24,
+    0.0031,
+    0.07
+   ],
+   [
+    "C1532",
+    "0402B223K500NT",
+    14,
+    0.0049,
+    0.07
+   ],
+   [
+    "C160402",
+    "SM02B-SRSS-TB(LF)(SN)",
+    6,
+    0.1324,
+    0.79
+   ],
+   [
+    "C1623",
+    "CL10B474KA8NNNC",
+    14,
+    0.013,
+    0.18
+   ],
+   [
+    "C165948",
+    "TYPE-C-31-M-12",
+    2,
+    0.1871,
+    0.37
+   ],
+   [
+    "C16772",
+    "CL05B224KO5NNNC",
+    20,
+    0.0047,
+    0.09
+   ],
+   [
+    "C19702",
+    "CL10A106KP8NNNC",
+    12,
+    0.0212,
+    0.25
+   ],
+   [
+    "C20917",
+    "AO3400A",
+    6,
+    0.089,
+    0.53
+   ],
+   [
+    "C21812",
+    "GRM31M5C1H473JA01L",
+    4,
+    0.1689,
+    0.68
+   ],
+   [
+    "C2286",
+    "KT-0603R",
+    12,
+    0.0077,
+    0.09
+   ],
+   [
+    "C23630",
+    "CL10A225KO8NNNC",
+    12,
+    0.0122,
+    0.15
+   ],
+   [
+    "C25087",
+    "0402WGF2000TCE",
+    12,
+    0.0029,
+    0.03
+   ],
+   [
+    "C25091",
+    "0402WGF2200TCE",
+    12,
+    0.0018,
+    0.02
+   ],
+   [
+    "C25092",
+    "0402WGF220JTCE",
+    14,
+    0.0014,
+    0.02
+   ],
+   [
+    "C25104",
+    "0402WGF3300TCE",
+    12,
+    0.0011,
+    0.01
+   ],
+   [
+    "C25741",
+    "0402WGF1003TCE",
+    24,
+    0.0012,
+    0.03
+   ],
+   [
+    "C25744",
+    "0402WGF1002TCE",
+    16,
+    0.0024,
+    0.04
+   ],
+   [
+    "C25765",
+    "0402WGF2002TCE",
+    12,
+    0.0011,
+    0.01
+   ],
+   [
+    "C25890",
+    "0402WGF3301TCE",
+    14,
+    0.0036,
+    0.05
+   ],
+   [
+    "C25900",
+    "0402WGF4701TCE",
+    14,
+    0.002,
+    0.03
+   ],
+   [
+    "C25905",
+    "0402WGF5101TCE",
+    14,
+    0.0023,
+    0.03
+   ],
+   [
+    "C26082",
+    "0402WGF1005TCE",
+    14,
+    0.0012,
+    0.02
+   ],
+   [
+    "C26083",
+    "0402WGF1004TCE",
+    20,
+    0.0015,
+    0.03
+   ],
+   [
+    "C2911374",
+    "ESP32-C3-MINI-1U-N4",
+    2,
+    3.1542,
+    6.31
+   ],
+   [
+    "C404329",
+    "MMC5983MA",
+    2,
+    1.9914,
+    3.98
+   ],
+   [
+    "C45783",
+    "CL21A226MAQNNNE",
+    6,
+    0.1918,
+    1.15
+   ],
+   [
+    "C51795",
+    "0805CG222J500NT",
+    10,
+    0.0425,
+    0.43
+   ],
+   [
+    "C52923",
+    "CL05A105KA5NQNC",
+    20,
+    0.0064,
+    0.13
+   ],
+   [
+    "C55663",
+    "BQ51013BRHLR",
+    2,
+    3.6045,
+    7.21
+   ],
+   [
+    "C68978",
+    "BAV70",
+    16,
+    0.0152,
+    0.24
+   ],
+   [
+    "C7519",
+    "USBLC6-2SC6",
+    4,
+    0.1798,
+    0.72
+   ],
+   [
+    "C77131",
+    "NCP15XH103F03RC",
+    16,
+    0.0187,
+    0.3
+   ],
+   [
+    "C841192",
+    "RT9080-33GJ5",
+    4,
+    0.1198,
+    0.48
+   ],
+   [
+    "C8545",
+    "2N7002",
+    7,
+    0.0161,
+    0.11
+   ],
+   [
+    "C96446",
+    "CL10A106MA8NRNC",
+    22,
+    0.0387,
+    0.85
+   ],
+   [
+    "C967633",
+    "LSM6DS3TR-C",
+    2,
+    1.4559,
+    2.91
+   ],
+   [
+    "C97946",
+    "GRM31C5C1H104JA01L",
+    6,
+    0.2773,
+    1.66
+   ]
+  ],
+  "tarifas": {
+   "setup": 25.56,
+   "stencil": 8.21,
+   "loading": 1.53,
+   "joint": 0.0016,
+   "prereflow": 0.016,
+   "handling": 14.93,
+   "packing": 0.5,
+   "xray": 0.82
+  }
+ }
+}

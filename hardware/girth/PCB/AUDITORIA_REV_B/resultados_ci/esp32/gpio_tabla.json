@@ -1,0 +1,126 @@
+{
+ "filas": [
+  {
+   "firmware": "PIN_IMU_INT",
+   "gpio": 0,
+   "pin_modulo": "12",
+   "red_placa": "IMU_INT",
+   "esperada": "IMU_INT",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_REED",
+   "gpio": 1,
+   "pin_modulo": "13",
+   "red_placa": "REED",
+   "esperada": "REED",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_SCL",
+   "gpio": 2,
+   "pin_modulo": "5",
+   "red_placa": "I2C_SCL",
+   "esperada": "I2C_SCL",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_BAT_ADC",
+   "gpio": 3,
+   "pin_modulo": "6",
+   "red_placa": "BAT_ADC",
+   "esperada": "BAT_ADC",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_CHG_PG",
+   "gpio": 4,
+   "pin_modulo": "18",
+   "red_placa": "CHG_PG",
+   "esperada": "CHG_PG",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_PWR_HOLD",
+   "gpio": 5,
+   "pin_modulo": "19",
+   "red_placa": "PWR_HOLD",
+   "esperada": "PWR_HOLD",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_SDA",
+   "gpio": 6,
+   "pin_modulo": "20",
+   "red_placa": "I2C_SDA",
+   "esperada": "I2C_SDA",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_CHG_STAT",
+   "gpio": 7,
+   "pin_modulo": "21",
+   "red_placa": "CHG_STAT",
+   "esperada": "CHG_STAT",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_LED",
+   "gpio": 8,
+   "pin_modulo": "22",
+   "red_placa": "LED",
+   "esperada": "LED",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_BOOT",
+   "gpio": 9,
+   "pin_modulo": "23",
+   "red_placa": "BOOT",
+   "esperada": "BOOT",
+   "ok": true
+  },
+  {
+   "firmware": "PIN_QI_CHG",
+   "gpio": 10,
+   "pin_modulo": "16",
+   "red_placa": "QI_CHG",
+   "esperada": "QI_CHG",
+   "ok": true
+  },
+  {
+   "firmware": "(n\u00facleo: USB / UART0)",
+   "gpio": 18,
+   "pin_modulo": "26",
+   "red_placa": "USB_DM",
+   "esperada": "USB_DM",
+   "ok": true
+  },
+  {
+   "firmware": "(n\u00facleo: USB / UART0)",
+   "gpio": 19,
+   "pin_modulo": "27",
+   "red_placa": "USB_DP",
+   "esperada": "USB_DP",
+   "ok": true
+  },
+  {
+   "firmware": "(n\u00facleo: USB / UART0)",
+   "gpio": 20,
+   "pin_modulo": "30",
+   "red_placa": "U0RX",
+   "esperada": "U0RX",
+   "ok": true
+  },
+  {
+   "firmware": "(n\u00facleo: USB / UART0)",
+   "gpio": 21,
+   "pin_modulo": "31",
+   "red_placa": "U0TX",
+   "esperada": "U0TX",
+   "ok": true
+  }
+ ],
+ "libres": [],
+ "discrepancias": 0
+}

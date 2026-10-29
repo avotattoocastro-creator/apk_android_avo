@@ -51,7 +51,9 @@ sin --refill-zones
 + python3 hardware/girth/PCB/AUDITORIA_REV_B/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/netlist_esquema.net hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad
 {
  "fichero": "AVO_GIRTH_PCB.kicad_pcb",
- "problemas": [],
+ "problemas": [
+  "el cajetín de la placa dice revisión «A» (los Gerber llevan esa revisión en TF.ProjectId)"
+ ],
  "contorno_mm": {
   "ancho": 65.6,
   "alto": 43.6
@@ -59,6 +61,7 @@ sin --refill-zones
  "grosor_mm": 1.0,
  "capas_cobre": 4,
  "es_rev_b": true,
+ "cajetin_revision": "A",
  "huellas": 98,
  "U4": "ESP32-C3-MINI-1U-N4",
  "reglas": {
@@ -195,24 +198,24 @@ Build BVH for holes and vias
 Load Raytracing: board
 Load Raytracing: layers
 Loading 3D models...
-Reload time 0.213 s
+Reload time 0.235 s
 Rendering: 7 %
 Rendering: 12 %
-Rendering: 18 %
+Rendering: 19 %
 Rendering: 24 %
-Rendering: 28 %
-Rendering: 33 %
-Rendering: 37 %
-Rendering: 45 %
-Rendering: 50 %
-Rendering: 55 %
-Rendering: 62 %
-Rendering: 70 %
-Rendering: 78 %
-Rendering: 83 %
-Rendering: 89 %
-Rendering: 94 %
+Rendering: 29 %
+Rendering: 34 %
+Rendering: 38 %
+Rendering: 46 %
+Rendering: 51 %
+Rendering: 56 %
+Rendering: 64 %
+Rendering: 73 %
+Rendering: 79 %
+Rendering: 85 %
+Rendering: 90 %
+Rendering: 97 %
 Rendering: 100 %
-Rendering time 6.716 s
+Rendering time 6.565 s
 Successfully created 3D render image
 + chmod -R a+rw hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci
