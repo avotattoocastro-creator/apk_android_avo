@@ -1,37 +1,27 @@
 # AVO GIRTH · placa de la cincha · REV A — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `b3097bee736dd045848c92757e357b897a962bbe` · ejecución de CI: 40876930709
+- Commit: `7f80a1878dbb4b767139b7c7d3d5c47936f2166a` · ejecución de CI: 40880129461
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 122 en total, 104 para montar, 6 sin montar (DNP: C5, R22, R23, R28, R29, R41), 12 a mano (pads de hilo y de prueba)
-- Pistas: 1112 · vías: 184
+- Pistas: 1149 · vías: 192
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 7 |
+| DRC: conexiones incompletas | **FALLA** | 3 |
 | DRC: cortocircuitos | correcto | 0 |
-| DRC: paridad esquema ↔ placa | **FALLA** | 4 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 1.1000 mm ↔ Pad 2 [+3V3] of R4 on F.Cu
-- Pad 4 [VIN5] of U1 on F.Cu ↔ Track [VIN5] on F.Cu, length 0.0071 mm
-- Track [VIN5] on In2.Cu, length 1.4375 mm ↔ Pad 1 [VIN5] of C16 on F.Cu
-- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Track [QI_ADEN] on F.Cu, length 0.7815 mm
+- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Track [QI_ADEN] on B.Cu, length 4.4773 mm
 - Pad 12 [QI_ILIM] of U1 on F.Cu ↔ Pad 1 [QI_ILIM] of R1 on F.Cu
-- Pad 13 [QI_TS] of U1 on F.Cu ↔ Pad 1 [QI_TS] of RT1 on F.Cu
-- Track [REED_G] on F.Cu, length 0.8800 mm ↔ Pad 1 [REED_G] of Q16 on F.Cu
-
-### Paridad esquema ↔ placa
-- net_conflict: Pad net (AD_SRC) doesn't match net given by schematic (VBUS).
-- net_conflict: Pad net (VBUS) doesn't match net given by schematic (AD_SRC).
-- net_conflict: Pad net (AD_SRC) doesn't match net given by schematic (VIN5).
-- net_conflict: Pad net (VIN5) doesn't match net given by schematic (AD_SRC).
+- Pad 1 [SS_G] of Q10 on F.Cu ↔ Track [SS_G] on F.Cu, length 1.4001 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - track_dangling: 1

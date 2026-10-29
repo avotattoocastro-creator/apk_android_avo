@@ -1,5 +1,5 @@
 ** Drc report for AVO_GIRTH_PCB.kicad_pcb **
-** Created on 2026-10-29T13:01:49+0000 **
+** Created on 2026-10-29T13:20:49+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 1 DRC violations **
@@ -7,48 +7,20 @@
     Local override; warning
     @(122.1050 mm, 102.4500 mm): Track [VBUS] on In2.Cu, length 0.5301 mm
 
-** Found 7 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(91.6000 mm, 106.3900 mm): Track [+3V3] on F.Cu, length 1.1000 mm
-    @(87.2000 mm, 106.7900 mm): Pad 2 [+3V3] of R4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(79.7500 mm, 104.6500 mm): Pad 4 [VIN5] of U1 on F.Cu
-    @(84.8000 mm, 106.8250 mm): Pad 1 [VIN5] of C15 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.2600 mm, 107.0475 mm): Track [VIN5] on In2.Cu, length 1.4375 mm
-    @(86.0000 mm, 106.8200 mm): Pad 1 [VIN5] of C16 on F.Cu
+** Found 3 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(81.7500 mm, 104.6500 mm): Pad 8 [QI_ADEN] of U1 on F.Cu
-    @(83.4000 mm, 110.0500 mm): Track [QI_ADEN] on F.Cu, length 0.7815 mm
+    @(87.9500 mm, 109.1125 mm): Track [QI_ADEN] on B.Cu, length 4.4773 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(82.2500 mm, 101.3500 mm): Pad 12 [QI_ILIM] of U1 on F.Cu
     @(83.7000 mm, 98.9100 mm): Pad 1 [QI_ILIM] of R1 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(81.7500 mm, 101.3500 mm): Pad 13 [QI_TS] of U1 on F.Cu
-    @(84.0000 mm, 102.1100 mm): Pad 1 [QI_TS] of RT1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(93.2900 mm, 116.9000 mm): Pad 1 [REED_G] of R50 on F.Cu
-    @(95.2000 mm, 109.4500 mm): Pad 1 [REED_G] of Q16 on F.Cu
+    @(80.0000 mm, 88.0500 mm): Pad 1 [SS_G] of Q10 on F.Cu
+    @(83.4900 mm, 91.0037 mm): Track [SS_G] on F.Cu, length 0.0137 mm
 
-** Found 4 Footprint errors **
-[net_conflict]: Pad net (AD_SRC) doesn't match net given by schematic (VBUS).
-    Local override; warning
-    @(83.4000 mm, 111.9500 mm): Pad 2 [AD_SRC] of Q1 on F.Cu
-[net_conflict]: Pad net (VBUS) doesn't match net given by schematic (AD_SRC).
-    Local override; warning
-    @(85.4000 mm, 111.0000 mm): Pad 3 [VBUS] of Q1 on F.Cu
-[net_conflict]: Pad net (AD_SRC) doesn't match net given by schematic (VIN5).
-    Local override; warning
-    @(88.0000 mm, 111.9500 mm): Pad 2 [AD_SRC] of Q2 on F.Cu
-[net_conflict]: Pad net (VIN5) doesn't match net given by schematic (AD_SRC).
-    Local override; warning
-    @(90.0000 mm, 111.0000 mm): Pad 3 [VIN5] of Q2 on F.Cu
+** Found 0 Footprint errors **
 
 ** End of Report **
