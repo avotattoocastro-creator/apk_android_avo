@@ -1,0 +1,150 @@
+2026-10-29 09:30:30.630 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:30:30.630 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:30:34.062 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 975.66 (15 unrouted).
+2026-10-29 09:30:34.062 INFO   [900CF3\918FD0] Auto-router pass #72 on board 'aee5c3b63a5e0c35245f558a99dfad90' was completed in 14.22 seconds with the score of 970.94 (19 unrouted), using 631577.94 CPU seconds and 718090 MB memory.
+2026-10-29 09:30:49.515 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:30:49.516 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:30:49.516 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:30:50.361 INFO   [900CF3\918FD0] Auto-router pass #73 on board 'aee5c3b63a5e0c35245f558a99dfad90' was completed in 16.16 seconds with the score of 973.15 (17 unrouted), using 649466.44 CPU seconds and 728452 MB memory.
+2026-10-29 09:31:06.143 INFO   [900CF3\918FD0] Auto-router pass #74 on board '70a9255152c3a680bb249b6469f8a803' was completed in 15.43 seconds with the score of 973.22 (17 unrouted), using 667602.81 CPU seconds and 738780 MB memory.
+2026-10-29 09:31:16.796 INFO   [900CF3\918FD0] Auto-router pass #75 on board '79e4f5fb697011c3bad8d30f2a3d06e3' was completed in 10.33 seconds with the score of 973.19 (17 unrouted), using 680215.81 CPU seconds and 746445 MB memory.
+2026-10-29 09:31:46.229 INFO   [900CF3\918FD0] Auto-router pass #76 on board '8f20413ecf3f5a03a7256d8f23fc07f7' was completed in 29.11 seconds with the score of 975.70 (15 unrouted), using 714024.69 CPU seconds and 767051 MB memory.
+2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.646 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.646 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
+2026-10-29 09:31:53.603 INFO   [900CF3\918FD0] Auto-router pass #77 on board '7c0de159e9935b88cbe89321abea4b6f' was completed in 7.06 seconds with the score of 972.11 (18 unrouted), using 722307.69 CPU seconds and 772493 MB memory.
+2026-10-29 09:32:01.595 INFO   [900CF3\918FD0] Auto-router pass #78 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.67 seconds with the score of 972.11 (18 unrouted), using 731832.94 CPU seconds and 778647 MB memory.
+2026-10-29 09:32:09.188 INFO   [900CF3\918FD0] Auto-router pass #79 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.46 seconds with the score of 972.11 (18 unrouted), using 741421.44 CPU seconds and 784879 MB memory.
+2026-10-29 09:32:17.146 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 975.70 (15 unrouted).
+2026-10-29 09:32:17.146 INFO   [900CF3\918FD0] Auto-router pass #80 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.82 seconds with the score of 973.30 (17 unrouted), using 751073.62 CPU seconds and 791115 MB memory.
+2026-10-29 09:32:27.787 INFO   [900CF3\918FD0] Auto-router pass #81 on board '7c0de159e9935b88cbe89321abea4b6f' was completed in 10.49 seconds with the score of 977.07 (14 unrouted), using 764447.50 CPU seconds and 798598 MB memory.
+2026-10-29 09:32:41.303 INFO   [900CF3\918FD0] Auto-router pass #82 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 13.19 seconds with the score of 975.53 (15 unrouted), using 780404.19 CPU seconds and 806783 MB memory.
+2026-10-29 09:32:56.181 INFO   [900CF3\918FD0] Auto-router pass #83 on board '21585b6bda90a2beef40663791359f9e' was completed in 14.56 seconds with the score of 972.09 (18 unrouted), using 799020.44 CPU seconds and 816566 MB memory.
+2026-10-29 09:32:57.136 WARN   ItemAutorouteInfo.get_expansion_room: p_index out of range
+2026-10-29 09:33:15.293 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.07 (14 unrouted).
+2026-10-29 09:33:15.293 INFO   [900CF3\918FD0] Auto-router pass #84 on board 'f400a3e2940a779fd591d0b99d55a4a4' was completed in 18.79 seconds with the score of 972.06 (18 unrouted), using 822911.00 CPU seconds and 829507 MB memory.
+2026-10-29 09:33:30.296 INFO   [900CF3\918FD0] Auto-router pass #85 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 14.87 seconds with the score of 973.16 (17 unrouted), using 842017.06 CPU seconds and 839252 MB memory.
+2026-10-29 09:33:44.449 INFO   [900CF3\918FD0] Auto-router pass #86 on board 'cb167e4b84f99672fdd3008b923854d5' was completed in 13.83 seconds with the score of 975.54 (15 unrouted), using 860046.94 CPU seconds and 848386 MB memory.
+2026-10-29 09:33:53.706 INFO   [900CF3\918FD0] Auto-router pass #87 on board '7b8d3d6fe4dc066f0878867fb5877e4f' was completed in 8.94 seconds with the score of 970.75 (19 unrouted), using 873042.31 CPU seconds and 855535 MB memory.
+2026-10-29 09:34:19.403 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.07 (14 unrouted).
+2026-10-29 09:34:19.403 INFO   [900CF3\918FD0] Auto-router pass #88 on board 'e36f79ca4d76faaf5b7337b67b0f7537' was completed in 25.38 seconds with the score of 976.57 (14 unrouted), using 905949.94 CPU seconds and 872397 MB memory.
+2026-10-29 09:34:29.283 INFO   [900CF3\918FD0] Auto-router pass #89 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 9.75 seconds with the score of 976.71 (14 unrouted), using 919281.44 CPU seconds and 879288 MB memory.
+2026-10-29 09:34:34.251 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:34:34.251 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:34:34.251 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:34:39.297 INFO   [900CF3\918FD0] Auto-router pass #90 on board '2ce8eb083465b20c0078ff439bd3834e' was completed in 9.69 seconds with the score of 975.67 (15 unrouted), using 932710.44 CPU seconds and 886186 MB memory.
+2026-10-29 09:34:51.322 INFO   [900CF3\918FD0] Auto-router pass #91 on board '1768f78b63fd4d0e63ecb4ef203d002b' was completed in 11.70 seconds with the score of 977.96 (13 unrouted), using 948954.50 CPU seconds and 894116 MB memory.
+2026-10-29 09:35:12.069 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.96 (13 unrouted).
+2026-10-29 09:35:12.069 INFO   [900CF3\918FD0] Auto-router pass #92 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 20.42 seconds with the score of 974.60 (16 unrouted), using 977714.31 CPU seconds and 908814 MB memory.
+2026-10-29 09:35:21.494 INFO   [900CF3\918FD0] Auto-router pass #93 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 9.29 seconds with the score of 974.40 (16 unrouted), using 990170.31 CPU seconds and 914957 MB memory.
+2026-10-29 09:35:28.417 INFO   [900CF3\918FD0] Auto-router pass #94 on board 'f5e1818e8d76484be840f102644b5312' was completed in 6.60 seconds with the score of 973.26 (17 unrouted), using 999912.56 CPU seconds and 920344 MB memory.
+2026-10-29 09:35:36.300 INFO   [900CF3\918FD0] Auto-router pass #95 on board '8fddccb2d6f01972972ad9ea52c81bc9' was completed in 7.55 seconds with the score of 973.26 (17 unrouted), using 1011105.44 CPU seconds and 925923 MB memory.
+2026-10-29 09:36:10.137 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.96 (13 unrouted).
+2026-10-29 09:36:10.137 INFO   [900CF3\918FD0] Auto-router pass #96 on board 'fd43f4763b344d578b346c0a97ee334c' was completed in 33.52 seconds with the score of 975.40 (15 unrouted), using 1059361.00 CPU seconds and 948213 MB memory.
+2026-10-29 09:36:24.298 INFO   [900CF3\918FD0] Auto-router pass #97 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 14.02 seconds with the score of 974.47 (16 unrouted), using 1079555.75 CPU seconds and 957086 MB memory.
+2026-10-29 09:36:34.485 INFO   [900CF3\918FD0] Auto-router pass #98 on board '29c58f24cc814a88b472d105542d2ebf' was completed in 9.86 seconds with the score of 974.33 (16 unrouted), using 1094096.62 CPU seconds and 963893 MB memory.
+2026-10-29 09:36:35.192 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:36:35.192 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:36:35.193 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:36:35.193 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
+	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
+	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
+	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
+	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+freerouting código 124
