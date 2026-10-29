@@ -353,14 +353,17 @@ def main():
         fails_v = via_drops(r, pads, log)
         # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, relay
         pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
-               "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2", "RLY_NO"]
+               "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2", "RLY_NO",
+               D.VBAT, D.VSYS, "CHG_ILIM", "CHG_ISET", "CHG_TS", "CHG_EN2", "CHG_PG", "CHG_STAT", "QI_CHG",
+               D.VBUS]
         by_net = {}
         for rec in pads:
             if rec["net"] in pre and not rec["npth"]:
                 by_net.setdefault(rec["net"], []).append(rec)
         for net in pre:
             if net in by_net and len(by_net[net]) > 1:
-                w = 0.3 if (net.startswith("QI_AC") or net in ("QI_COIL1", "QI_RECT", "RLY_NO", D.VIN5, D.VBUS, "AD_SRC")) else 0.2
+                w = 0.3 if (net.startswith("QI_AC") or net in ("QI_COIL1", "QI_RECT", "RLY_NO", D.VIN5, D.VBUS, "AD_SRC",
+                                                               D.VBAT, D.VSYS)) else 0.2
                 if not route_tree(r, net, netid(net), by_net[net], w) and not route_tree(r, net, netid(net), by_net[net], 0.2):
                     log.append("pre-ruteo fallido: " + net)
         write_board(r, os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pcb"), outer_pours=False)
