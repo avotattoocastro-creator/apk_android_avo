@@ -1,0 +1,781 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 3859121,
+     "componentLibraryType": "expand",
+     "stockCount": 8709,
+     "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "erpComponentName": "3.3V 800mA 20V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/voltage-regulators-linear-low-drop-out-ldo-regulators_sgmicro-sgm2212-3-3xkc3g-tr_C3294699.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.5732
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.4913
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.4095
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.3603
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3276
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3276
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.3471
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.3944
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3156
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3156
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.5522
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.4733
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
+     "canPresaleNumber": 8481,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "SGMICRO-SGM2212_3_3XKC3GTR/C3294699",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 1.60147,
+     "preMinPurchaseNum": 19,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.5732,
+     "componentCode": "C3294699",
+     "componentBrandEn": "SGMICRO",
+     "componentModelEn": "SGM2212-3.3XKC3G/TR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583701549343756288",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8589836358505435136",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SGMICRO SGM2212-3.3XKC3G/TR",
+     "minImage": "",
+     "minImageAccessId": "8583701550258114560",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-223-3",
+     "describe": "-40\u2103~+125\u2103 0.002%Vout 20V 3.3V 450mV@(800mA) 800mA 80dB@(120Hz) 80uA Fixed Short Circuit Protection\u3001Thermal Shutdown SOT-223-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Supply Rejection Ratio (PSRR)",
+       "attribute_value_name": "80dB@(120Hz)"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "standby current",
+       "attribute_value_name": "80uA"
+      },
+      {
+       "attribute_name_en": "Noise",
+       "attribute_value_name": "0.002%Vout"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Fixed"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "20V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "800mA"
+      },
+      {
+       "attribute_name_en": "Output Configuration",
+       "attribute_value_name": "Positive"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown"
+      },
+      {
+       "attribute_name_en": "Voltage Dropout",
+       "attribute_value_name": "450mV@(800mA)"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "3.3V"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SGM2212-3.3</span>XKC3G/TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5779591,
+     "componentLibraryType": "expand",
+     "stockCount": 2376,
+     "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "erpComponentName": "3.3V 800mA 20V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/voltage-regulators-linear-low-drop-out-ldo-regulators_sgmicro-sgm2212-3-3xob2g-tr_C5152863.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7927
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.6093
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.5175
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.4258
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.4258
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.4258
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.4102
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.4986
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.4102
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7636
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.4102
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.5869
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
+     "canPresaleNumber": 2348,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "SGMICRO-SGM2212_3_3XOB2GTR/C5152863",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 2.3938,
+     "preMinPurchaseNum": 15,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.7927,
+     "componentCode": "C5152863",
+     "componentBrandEn": "SGMICRO",
+     "componentModelEn": "SGM2212-3.3XOB2G/TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2209281630_SGMICRO-SGM2212-3-3XOB2G-TR_C5152863.pdf",
+     "dataManualFileAccessId": "8552189958913089536",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SGMICRO SGM2212-3.3XOB2G/TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "TO-252-2",
+     "describe": "-40\u2103~+125\u2103 0.002%Vout 1 116uA 20V 3.3V 450mV@(800mA) 800mA 80dB@(120Hz) Fixed Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown Positive TO-252-2 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Supply Rejection Ratio (PSRR)",
+       "attribute_value_name": "80dB@(120Hz)"
+      },
+      {
+       "attribute_name_en": "standby current",
+       "attribute_value_name": "116uA"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Noise",
+       "attribute_value_name": "0.002%Vout"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Fixed"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "20V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "800mA"
+      },
+      {
+       "attribute_name_en": "Output Configuration",
+       "attribute_value_name": "Positive"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown"
+      },
+      {
+       "attribute_name_en": "Voltage Dropout",
+       "attribute_value_name": "450mV@(800mA)"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "3.3V"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "1"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SGM2212-3.3</span>XOB2G/TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3539666,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "SGM2212-3.3XKC3G/TR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3539666-SGM2212_3_3XKC3GTR/C9900018517",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900018517",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "SGM2212-3.3XKC3G/TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT SGM2212-3.3XKC3G/TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT223-4",
+     "describe": "SOT-223-4 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SGM2212-3.3</span>XKC3G/TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5779596,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "erpComponentName": "3.3V 800mA 20V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/voltage-regulators-linear-low-drop-out-ldo-regulators_sgmicro-sgm2212-3-3xoa3g-tr_C5152868.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.1382
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.9073
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7812
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.6387
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 799,
+       "productPrice": 0.6387
+      },
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 0.6387
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 0.6153
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7525
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.0964
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.6153
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 799,
+       "productPrice": 0.6153
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.874
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SGMICRO-SGM2212_3_3XOA3GTR/C5152868",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 800,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 8,
+     "minPurchaseNum": 8,
+     "initialPrice": 1.1382,
+     "componentCode": "C5152868",
+     "componentBrandEn": "SGMICRO",
+     "componentModelEn": "SGM2212-3.3XOA3G/TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2209281630_SGMICRO-SGM2212-3-3XOA3G-TR_C5152868.pdf",
+     "dataManualFileAccessId": "8552189971290210304",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SGMICRO SGM2212-3.3XOA3G/TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "TO-263-3",
+     "describe": "-40\u2103~+125\u2103@(Tj) 0.002%Vout 1 116uA 20V 3.3V 610mV@(800mA) 800mA 80dB@(120Hz) Fixed Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown Positive TO-263-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Supply Rejection Ratio (PSRR)",
+       "attribute_value_name": "80dB@(120Hz)"
+      },
+      {
+       "attribute_name_en": "standby current",
+       "attribute_value_name": "116uA"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103@(Tj)"
+      },
+      {
+       "attribute_name_en": "Noise",
+       "attribute_value_name": "0.002%Vout"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Fixed"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "20V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "800mA"
+      },
+      {
+       "attribute_name_en": "Output Configuration",
+       "attribute_value_name": "Positive"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown"
+      },
+      {
+       "attribute_name_en": "Voltage Dropout",
+       "attribute_value_name": "610mV@(800mA)"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "3.3V"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "1"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SGM2212-3.3</span>XOA3G/TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44398791,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "LDO/SGM2212-3.3XKC3G/SOT223",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "C9900160545",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900160545",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "LDO/SGM2212-3.3XKC3G/SOT223",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT LDO/SGM2212-3.3XKC3G/SOT223",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-223-3",
+     "describe": "SOT-223-3 New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LDO/<span class='lucene_highlight_class'>SGM2212-3.3</span>XKC3G/SOT223",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "SGM2212-3.3"
+ },
+ "message": null
+}
