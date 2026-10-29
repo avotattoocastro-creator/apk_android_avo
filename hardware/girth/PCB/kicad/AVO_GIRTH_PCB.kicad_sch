@@ -6758,7 +6758,7 @@
 		(property "Value" "LSM6DS3TR-C" (at 304.8 148.59 0) (effects (font (size 1 1))))
 		(property
 			"Footprint"
-			"AVO:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+			"AVO:ST_LGA-14L_2.5x3mm_P0.5mm"
 			(at 304.8 147.32 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))

@@ -71,3 +71,25 @@ def mmc5983ma():
     return Footprint("MEMSIC_MMC5983MA_LGA-16_3x3mm_P0.5mm", pads, g, "smd", None,
                      "MMC5983MA LGA-16 3x3 mm (MEMSIC datasheet Rev A, land pattern p. 20)",
                      height=1.0, body=(-1.5, -1.5, 1.5, 1.5))
+
+
+def lga14_st():
+    """ST LGA-14L 2.5 × 3.0 × 0.83 mm, pitch 0.5 mm (LSM6DS3TR-C / LSM6DSV16X / LSM6DSO). Pad centres as in
+    Adafruit's LSM6DS3TR-C / LSM6DSOX boards (Eagle Y-up converted to KiCad Y-down): sides at x = ±1.1625,
+    top/bottom rows at y = ±0.9125. Pads 0.475 × 0.25 mm: 0.25 mm between pads (the generic KiCad land with
+    0.4 mm pads leaves 0.1 mm, below the 0.15 mm JLCPCB clearance). Pin 1 top-left, counter-clockwise."""
+    pads = []
+    side = {1: (-1.1625, -0.75), 2: (-1.1625, -0.25), 3: (-1.1625, 0.25), 4: (-1.1625, 0.75),
+            8: (1.1625, 0.75), 9: (1.1625, 0.25), 10: (1.1625, -0.25), 11: (1.1625, -0.75)}
+    rows = {5: (-0.5, 0.9125), 6: (0.0, 0.9125), 7: (0.5, 0.9125),
+            12: (0.5, -0.9125), 13: (0.0, -0.9125), 14: (-0.5, -0.9125)}
+    for n, (x, y) in side.items():
+        pads.append(Pad(n, "smd", "roundrect", x, y, 0.475, 0.25, rratio=0.2))
+    for n, (x, y) in rows.items():
+        pads.append(Pad(n, "smd", "roundrect", x, y, 0.25, 0.475, rratio=0.2))
+    g = rect_lines(-1.5, -1.25, 1.5, 1.25, "F.Fab", 0.1)   # body 3.0 (X, across the 4-pin sides) × 2.5 (Y)
+    g += rect_lines(-1.75, -1.5, 1.75, 1.5, "F.CrtYd", 0.05)
+    g += [circle(-1.85, -1.4, 0.12, "F.SilkS", 0.1, True)]
+    return Footprint("ST_LGA-14L_2.5x3mm_P0.5mm", pads, g, "smd", None,
+                     "ST LGA-14L 2.5x3x0.83 mm, pads 0.475x0.25 (Adafruit LSM6DS3TR-C / LSM6DSOX land)",
+                     height=0.86, body=(-1.5, -1.25, 1.5, 1.25))

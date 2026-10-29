@@ -83,6 +83,7 @@ jobs:
           cp out/bin/AVO_GIRTH_V0_3_0_C3_app.bin out/bin/AVO_GIRTH_V0_3_0_C3_COMPLETO.bin out/bin/SHA256SUMS.txt out/bin/memoria.txt out/zip/
           cp out/bin/build.log out/zip/compilacion.log
           cp -r AVO_GIRTH_V0_3_0 build_girth_c3.sh out/zip/fuentes/
+          rm -rf out/zip/fuentes/AVO_GIRTH_V0_3_0/build
           cp *.md out/zip/ 2>/dev/null || true
           cp ../../back/V3_8_0/lib/avo_core/src/avo_girth_link.h ../../back/V3_8_0/lib/avo_core/src/avo_payloads.h out/zip/fuentes/
           (cd out/zip && zip -qr ../AVO_GIRTH_PCB_C3_FIRMWARE.zip .)

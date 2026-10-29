@@ -21,7 +21,7 @@ sys.path.insert(0, HERE)
 import board as B                      # noqa: E402
 import project                         # noqa: E402
 import schematic as SCH                # noqa: E402
-from custom_fp import mmc5983ma, test_pad, wire_pad   # noqa: E402
+from custom_fp import lga14_st, mmc5983ma, test_pad, wire_pad   # noqa: E402
 from fplib import load, emit, pad_poly, pad_center, pad_copper_layers, uid   # noqa: E402
 from router import Router              # noqa: E402
 from sexpr import Sym                  # noqa: E402
@@ -150,8 +150,7 @@ FP = {
     "JST_SH2": load("JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.kicad_mod",
                     M3 + "Connector_JST.3dshapes/JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.step", 2.95),
     "MINI1U": load("ESP32-C3-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-C3-MINI-1U.STEP", 2.6),
-    "LGA14": load("LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y.kicad_mod",
-                  M3 + "Package_LGA.3dshapes/LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y.step", 0.86),
+    "LGA14": lga14_st(),
     "MMC": mmc5983ma(),
     "WIRE": wire_pad("bobina / reed"),
     "TP": test_pad(1.0),

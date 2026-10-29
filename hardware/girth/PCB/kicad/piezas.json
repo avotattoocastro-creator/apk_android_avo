@@ -977,7 +977,7 @@
  {
   "ref": "U5",
   "value": "LSM6DS3TR-C",
-  "footprint": "LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y",
+  "footprint": "ST_LGA-14L_2.5x3mm_P0.5mm",
   "lcsc": "C967633",
   "mpn": "LSM6DS3TR-C (alt. LSM6DSV16XTR C5267406)",
   "block": "IMU",
