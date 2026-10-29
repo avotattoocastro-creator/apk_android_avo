@@ -24,6 +24,34 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-29 — Cincha · auditoría de validación virtual de la PCB REV B y propuesta REV B.1
+**Autor:** Claude · Rama `audit/avo-girth-pcb-revb` (derivada de `feature/avo-girth-pcb` en `2a70369`) · **Commits:**
+`82b9609`…`b582bed` y el de esta entrada · **CI:** `audit-girth-revb.yml`, runs 40938084601 … 40955158865 (éxito; las
+evidencias se guardan en `hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/`)
+**Qué cambia:** informe `hardware/girth/PCB/AUDITORIA_REV_B/INFORME_VALIDACION_REV_B.md` con veredicto **APTO PARA
+PROTOTIPOS CON RIESGOS IDENTIFICADOS**. Fases ejecutadas: KiCad 9 (ERC, DRC con paridad, DRC tras rellenar zonas,
+auditoría de redes, Gerber regenerados = entregados), ngspice (alimentación, enclavamiento Q10/Q11, Monte Carlo de 200),
+Qi (`qi/`), mecánica frente al STL (`mecanica/`), GPIO, sensores con simulador de marcha, pruebas de ESP-NOW con la
+`avo_core` real, autonomía, fabricación JLCPCB (existencias, BOM/CPL, giros, presupuesto 5 PCB / 2 montadas) y QEMU.
+**REV B.1 propuesta** (`AUDITORIA_REV_B/corregida/`, generada desde la placa entregada sin tocarla): BQ24072 en USB500
+(EN1 = VSYS, EN2 = GND, R8 DNP), C41 220 n → 470 n (C47339), R40 1 M → 100 k, cajetín «B.1». Firmware (rama de
+auditoría): corregido `out_since = now | 1` (apagado instantáneo ≈ 50 %), `girth_pack.h`/`girth_policy.h`,
+`gpio_hold_en` en PWR_HOLD, línea de arranque temprana. Documentación: fórmula de C2 en `DOCS/AJUSTE_QI.md`, autonomía
+(≈ 5 h, no 11–20 h) y consumo apagado en el README, «W.FL / MHF III» en `fuente/gate.py`.
+**Por qué:** misión de validación virtual exhaustiva antes de fabricar 5 PCB y montar 2.
+**Archivos:** `hardware/girth/PCB/AUDITORIA_REV_B/**`, `.github/workflows/audit-girth-revb.yml`,
+`firmware/girth/V0_3_0_C3/**`, `hardware/girth/PCB/README.md`, `DOCS/AJUSTE_QI.md`, `fuente/gate.py` (solo texto).
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, `feature/avo-girth-pcb`, los ficheros entregados de
+`hardware/girth/PCB/out/C3/`, el firmware de la espalda. **No se ha hecho ningún pedido.**
+**Validación:** CI (KiCad: REV B y REV B.1 con ERC 0 / DRC 0 / paridad 0; firmware compila, 19 + 37 pruebas en el PC sin
+fallos; SPICE con modelos de nivel 1 y de comportamiento). QEMU: el boceto de control arranca; la cincha se queda en la
+calibración del ADC2 de ESP-IDF (QEMU no emula el ADC del C3). **NO VERIFICADO** físicamente.
+**Pendiente:** pruebas físicas de la sección 14 del informe; bobina Qi (TDK WR202010-18M8-ID); NTC en la celda; CAD de
+la cápsula REV 5.9; duplicados/desorden en `GirthHub`; ±16 g; pasar los cambios de cobre de la B.1 a `fuente/` si se
+adopta.
+
+---
+
 ## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
 **CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
