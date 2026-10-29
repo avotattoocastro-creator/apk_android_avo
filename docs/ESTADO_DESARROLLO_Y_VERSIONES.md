@@ -54,6 +54,8 @@ El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. E
 | AVO Signer V0.1 | Sí | CI de rama Signer previa a fusión; no de rama unificada | **No verificado** en teléfono para flujo completo y restauración de clave |
 | ESPALDA y CINCHA | **No integrados** | **No** | **No** |
 | CHEST V3.7.2-rc1 (pantalla sin LVGL, carga, apagado por fases) | Sí (`firmware/chest/V3_7_2_UI`) | **Sí**, SHA `3e85c41`, run `39965639870` | **Parcial (23/10/2026, fotos):** orientación, legibilidad, BLE, espalda, GPS y SD correctos con `3e85c41`; correcciones de brillo, transición y esquinas pendientes de ver en el reloj |
+| AVO BACK V4: PCB REV A ESP32-S3 + URTK1.2 y carcasa de 118,2 mm (rama `feature/avo-back-v4`) | Sí (`hardware/back/V4`) | **Sí**, PCB SHA `3f81b45`, run `40971520610` (DRC/ERC 0, 0 conexiones incompletas, puerta superada) | **No verificado** (sin fabricar ni imprimir) |
+| BACK 4.0.0-dev1 (placa V4) | Sí (`firmware/back/V4_0_0`) | **Sí**, SHA `4059f5f`, run `40920249110` (44 pruebas en el ordenador) | **No verificado** |
 | Programador USB 1.8.0-beta2 | Sí (`usb-updater/`) | **Sí**, SHA `f60c125`, run `39963751136` (59 pruebas en simulación) | **No verificado** |
 
 **Fuente de evidencia CI Android previa:** [run 39749862683](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39749862683). **Integraciones:** [PR #4](https://github.com/avotattoocastro-creator/apk_android_avo/pull/4) y [PR #5](https://github.com/avotattoocastro-creator/apk_android_avo/pull/5). La rama actual incorpora además cambios de documentación; no atribuirle el CI de la rama original.

@@ -24,6 +24,36 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Espalda · AVO BACK V4 (PCB propia ESP32-S3 + URTK1.2, carcasa 48 mm más corta) + firmware 4.0.0-dev1
+**Autor:** Claude · Rama `feature/avo-back-v4` (desde `feature/avo-girth-pcb`) · **Commits:** `9573ef3`…`3f81b45` ·
+**CI:** PCB `build-back-v4-pcb.yml` run 40971520610 (`3f81b45`): **puerta superada**; firmware `build-back-v4-fw.yml`
+run 40920249110 (`4059f5f`): compilación correcta; existencias `jlc-stock-back-v4.yml`
+**Qué cambia:** rediseño conjunto de electrónica y carcasa de la espalda (`hardware/back/V4/`).
+- **Carcasa** (FreeCAD 1.0.2, paramétrica, desde la Rev E.4.1/E.5): longitud **166,2 → 118,2 mm (−48,0 mm, −28,9 %)**,
+  mismo grosor (17,1 mm) y misma anchura (59 mm); volumen exterior 157,8 → 110,1 cm³; impresas ≈ 208 → 131 g. La URTK1.2
+  va sobre la batería a la misma cota que la Heltec (Z 9,6) y la PCB nueva en la cola (Z 2,5) con la bobina Qi debajo;
+  8 tornillos M3; Hall soldado en la PCB en lugar del reed. STL sin soportes, STEP por pieza, conjunto montado y
+  explosionado, plano de cotas, comparativa con la Rev E.5, estudio de distribuciones A–D.
+- **PCB REV A** (KiCad 9, 4 capas, ≈ 1785 mm², 85 piezas montadas, 35 referencias LCSC): ESP32-S3-MINI-1U-N8 (un solo
+  ESP32; comparación con S3 + C3/C6 documentada), BQ51013B (Qi) + BQ24072, TLV75733P, **RT9080 propio del ZED con EN**,
+  microSD SDMMC 4 bits con alimentación conmutada, Hall DRV5032FA, USB-C, 8 pads para el mazo de la URTK1.2 (UART1,
+  UART2, PPS, RESET). Ruteado: Freerouting 1.9.0 + `fuente/repair.py`. KiCad 9 en el CI: DRC 0 errores, 0 conexiones
+  incompletas, 0 cortocircuitos, paridad 0; ERC 0/0. Ficheros `PCB/out/FINAL/` (Gerber, BOM y CPL de JLCPCB, STEP).
+- **Firmware 4.0.0-dev1** (`firmware/back/V4_0_0`): port de BACK 3.11.0 a la placa V4 (ZED por UART2 en GPIO7/8, EN del
+  ZED en GPIO10, Hall en GPIO1 con despertar ext0, emparejamiento con 3 apoyos en el soporte, registro UBX en microSD,
+  PPS por interrupción, PGOOD del cargador); 44 pruebas en el ordenador.
+**Por qué:** petición del usuario (brief «AVO BACK V4 — rediseño electrónico y mecánico integrado»): acortar la carcasa
+sin aumentar el grosor, una sola placa propia con el ZED integrado físicamente y corte físico del ZED.
+**Archivos:** `hardware/back/V4/**`, `firmware/back/V4_0_0/**`, `.github/workflows/build-back-v4-pcb.yml`,
+`build-back-v4-fw.yml`, `jlc-stock-back-v4.yml`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, Rev E de la espalda, firmware 3.x, pecho, cincha, Android.
+**Validación:** CAD comprobado por software (piezas B-Rep válidas, 0 interferencias con las envolventes de la electrónica;
+comprobación con el STEP de KiCad en curso; STL/STEP releídos; 0 voladizos fuera de límite) · PCB: CI con puerta superada · firmware: CI compila.
+**NO VERIFICADO** físicamente (nada impreso, fabricado ni montado).
+**Pendiente:** comprobar con polímetro el pinout de la URTK1.2 (las fotos muestran serigrafías distintas) antes del mazo;
+imprimir las probetas P1/P2; medir la bobina Qi y ajustar C1–C4; BLE directo con Android, Wi-Fi y OTA firmada en el
+firmware V4; revisar giros en la vista previa de JLCPCB; pruebas de consumo, GNSS (C/N0), alcance y estanqueidad.
+
 ## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
 **CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
