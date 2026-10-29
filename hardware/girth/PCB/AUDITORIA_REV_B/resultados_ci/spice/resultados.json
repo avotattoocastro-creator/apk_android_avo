@@ -84,7 +84,9 @@
     "vbat_min": 4.119,
     "sigue_encendida": true,
     "bajo_3v0": false,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 9.75,
+    "us_por_encima_de_1A": 33.0
    },
    {
     "vbat": 3.7,
@@ -95,7 +97,9 @@
     "vbat_min": 3.617,
     "sigue_encendida": true,
     "bajo_3v0": false,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 7.92,
+    "us_por_encima_de_1A": 36.7
    },
    {
     "vbat": 3.5,
@@ -106,7 +110,9 @@
     "vbat_min": 3.381,
     "sigue_encendida": true,
     "bajo_3v0": false,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 5.34,
+    "us_por_encima_de_1A": 42.9
    },
    {
     "vbat": 3.4,
@@ -117,7 +123,9 @@
     "vbat_min": 3.281,
     "sigue_encendida": true,
     "bajo_3v0": true,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 5.09,
+    "us_por_encima_de_1A": 38.1
    },
    {
     "vbat": 3.3,
@@ -128,7 +136,9 @@
     "vbat_min": 3.18,
     "sigue_encendida": true,
     "bajo_3v0": true,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 4.83,
+    "us_por_encima_de_1A": 38.8
    },
    {
     "vbat": 3.3,
@@ -139,7 +149,9 @@
     "vbat_min": 3.215,
     "sigue_encendida": true,
     "bajo_3v0": false,
-    "brownout": false
+    "brownout": false,
+    "i_pico_encendido_A": 6.49,
+    "us_por_encima_de_1A": 33.2
    }
   ],
   "reinicio": [

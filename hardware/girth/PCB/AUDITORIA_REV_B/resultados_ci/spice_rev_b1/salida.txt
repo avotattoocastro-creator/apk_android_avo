@@ -1,0 +1,276 @@
+{
+ "ngspice": "******",
+ "variante": "C41=470n,R40=100k",
+ "escenarios": {
+  "ventana_sin_hold": [
+   {
+    "vbat": 3.0,
+    "caso": "típico",
+    "t_3v3_ok": null,
+    "ventana_s": 0.0,
+    "pwr_g_max": 1.97608975
+   },
+   {
+    "vbat": 3.0,
+    "caso": "peor",
+    "t_3v3_ok": null,
+    "ventana_s": 0.0,
+    "pwr_g_max": 1.9362402
+   },
+   {
+    "vbat": 3.3,
+    "caso": "típico",
+    "t_3v3_ok": 0.100729556,
+    "ventana_s": 7.0,
+    "pwr_g_max": 2.20628313
+   },
+   {
+    "vbat": 3.3,
+    "caso": "peor",
+    "t_3v3_ok": 0.10076376,
+    "ventana_s": 2.564,
+    "pwr_g_max": 2.16184806
+   },
+   {
+    "vbat": 3.5,
+    "caso": "típico",
+    "t_3v3_ok": 0.100705524,
+    "ventana_s": 7.612,
+    "pwr_g_max": 2.3601593
+   },
+   {
+    "vbat": 3.5,
+    "caso": "peor",
+    "t_3v3_ok": 0.100730571,
+    "ventana_s": 2.965,
+    "pwr_g_max": 2.31265368
+   },
+   {
+    "vbat": 3.7,
+    "caso": "típico",
+    "t_3v3_ok": 0.100693162,
+    "ventana_s": 7.899,
+    "pwr_g_max": 2.51432255
+   },
+   {
+    "vbat": 3.7,
+    "caso": "peor",
+    "t_3v3_ok": 0.100706718,
+    "ventana_s": 3.343,
+    "pwr_g_max": 2.46374184
+   },
+   {
+    "vbat": 4.2,
+    "caso": "típico",
+    "t_3v3_ok": 0.100670293,
+    "ventana_s": 7.899,
+    "pwr_g_max": 2.90078804
+   },
+   {
+    "vbat": 4.2,
+    "caso": "peor",
+    "t_3v3_ok": 0.100678162,
+    "ventana_s": 4.2,
+    "pwr_g_max": 2.84249902
+   }
+  ],
+  "arranque_tx": [
+   {
+    "vbat": 4.2,
+    "rint": 0.2,
+    "rdo": 0.5166666666666667,
+    "rpath": 0.05,
+    "v3_min_tx": 3.3,
+    "vbat_min": 4.119,
+    "sigue_encendida": true,
+    "bajo_3v0": false,
+    "brownout": false,
+    "i_pico_encendido_A": 9.75,
+    "us_por_encima_de_1A": 32.1
+   },
+   {
+    "vbat": 3.7,
+    "rint": 0.2,
+    "rdo": 0.5166666666666667,
+    "rpath": 0.05,
+    "v3_min_tx": 3.3,
+    "vbat_min": 3.617,
+    "sigue_encendida": true,
+    "bajo_3v0": false,
+    "brownout": false,
+    "i_pico_encendido_A": 7.92,
+    "us_por_encima_de_1A": 36.7
+   },
+   {
+    "vbat": 3.5,
+    "rint": 0.3,
+    "rdo": 0.8833333333333334,
+    "rpath": 0.1,
+    "v3_min_tx": 3.037,
+    "vbat_min": 3.381,
+    "sigue_encendida": true,
+    "bajo_3v0": false,
+    "brownout": false,
+    "i_pico_encendido_A": 5.34,
+    "us_por_encima_de_1A": 41.9
+   },
+   {
+    "vbat": 3.4,
+    "rint": 0.3,
+    "rdo": 0.8833333333333334,
+    "rpath": 0.1,
+    "v3_min_tx": 2.936,
+    "vbat_min": 3.281,
+    "sigue_encendida": true,
+    "bajo_3v0": true,
+    "brownout": false,
+    "i_pico_encendido_A": 5.08,
+    "us_por_encima_de_1A": 38.4
+   },
+   {
+    "vbat": 3.3,
+    "rint": 0.3,
+    "rdo": 0.8833333333333334,
+    "rpath": 0.1,
+    "v3_min_tx": 2.836,
+    "vbat_min": 3.18,
+    "sigue_encendida": true,
+    "bajo_3v0": true,
+    "brownout": false,
+    "i_pico_encendido_A": 4.83,
+    "us_por_encima_de_1A": 41.2
+   },
+   {
+    "vbat": 3.3,
+    "rint": 0.2,
+    "rdo": 0.5166666666666667,
+    "rpath": 0.05,
+    "v3_min_tx": 3.017,
+    "vbat_min": 3.215,
+    "sigue_encendida": true,
+    "bajo_3v0": false,
+    "brownout": false,
+    "i_pico_encendido_A": 6.49,
+    "us_por_encima_de_1A": 35.8
+   }
+  ],
+  "reinicio": [
+   {
+    "reinicio_s": 0.3,
+    "caso": "típico",
+    "v3_min": 3.216,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 0.3,
+    "caso": "peor",
+    "v3_min": 3.216,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 0.6,
+    "caso": "típico",
+    "v3_min": 3.216,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 0.6,
+    "caso": "peor",
+    "v3_min": 3.216,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 1.0,
+    "caso": "típico",
+    "v3_min": 3.216,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 1.0,
+    "caso": "peor",
+    "v3_min": 3.217,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 1.5,
+    "caso": "típico",
+    "v3_min": 3.218,
+    "sobrevive": true
+   },
+   {
+    "reinicio_s": 1.5,
+    "caso": "peor",
+    "v3_min": 3.217,
+    "sobrevive": true
+   }
+  ],
+  "apagado": [
+   {
+    "caso": "reed abierto",
+    "t_q10_abierto_s": 3.99,
+    "reengancha_solo": false,
+    "i_celda_final_uA": 0.0,
+    "reed_pulse_al_apagar_V": -0.15
+   },
+   {
+    "caso": "reed cerrado 2,9 s antes",
+    "t_q10_abierto_s": 7.52,
+    "reengancha_solo": false,
+    "i_celda_final_uA": 6.763,
+    "reed_pulse_al_apagar_V": 2.366
+   },
+   {
+    "caso": "reed cerrado 60 s antes",
+    "t_q10_abierto_s": 3.992,
+    "reengancha_solo": false,
+    "i_celda_final_uA": 6.763,
+    "reed_pulse_al_apagar_V": 0.085
+   }
+  ],
+  "reencendido": [
+   {
+    "reed_reabierto_tras_s": 0.5,
+    "reengancha": true
+   },
+   {
+    "reed_reabierto_tras_s": 1.0,
+    "reengancha": true
+   },
+   {
+    "reed_reabierto_tras_s": 2.0,
+    "reengancha": true
+   },
+   {
+    "reed_reabierto_tras_s": 3.0,
+    "reengancha": true
+   },
+   {
+    "reed_reabierto_tras_s": 5.0,
+    "reengancha": true
+   }
+  ],
+  "carga_5V": {
+   "encendida_con_5V_y_hold0": true,
+   "q10_abierto_tras_quitar_5V": true,
+   "t_apagado_tras_quitar_s": 5.666
+  },
+  "consumo_apagada_reed_abierto_uA": 0.0,
+  "consumo_apagada_reed_cerrado_uA": 7.7114
+ },
+ "montecarlo": {
+  "n": 200,
+  "ventana_min_s": 3.026,
+  "ventana_p1_s": 3.156,
+  "ventana_mediana_s": 5.899,
+  "peor_caso": {
+   "vth_n": 1.3282074037634346,
+   "vth_p": 0.5626821383065935,
+   "d40": 0.4883825298788828,
+   "d41": 0.9201488490036713,
+   "vbat": 3.2780636636874636,
+   "ventana": 3.02598851
+  },
+  "reinicio_0_6s_v3_min": 2.912,
+  "reinicio_fallos": 0
+ }
+}

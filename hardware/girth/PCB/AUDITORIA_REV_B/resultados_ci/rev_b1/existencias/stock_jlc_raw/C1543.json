@@ -1,0 +1,5104 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 168,
+   "list": [
+    {
+     "componentId": 1895,
+     "componentLibraryType": "expand",
+     "stockCount": 4787,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "820pF \u00b110% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_fh-guangdong-fenghua-advanced-tech-0402b821k500nt_C1543.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0021
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0018
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0015
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0013
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0026
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0014
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0017
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.002
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0012
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 4689,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "1895-0402B821K500NT/C1543",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00549,
+     "preMinPurchaseNum": 5013,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0027,
+     "componentCode": "C1543",
+     "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+     "componentModelEn": "0402B821K500NT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583290751853998080",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_FH--Guangdong-Fenghua-Advanced-Tech-0402B821K500NT_C1543.pdf",
+     "dataManualFileAccessId": "8770987737552044032",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "FH 0402B821K500NT",
+     "minImage": "",
+     "minImageAccessId": "8583290752726548480",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "50V 820pF X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "820pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "X7R"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C1543</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3739914,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Supervisor and Reset ICs",
+     "erpComponentName": "\u7535\u6e90\u76d1\u63a7\u7535\u8def\uff0c\u5177\u5907\u8fc7\u538b\u3001\u6b20\u538b\u548c\u7535\u6d41\u611f\u5e94\u529f\u80fd",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/power-management-specialized_texas-instruments-uc1543l_C3177976.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.8053
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.8053
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.8053
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.0858
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0481
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0285
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.9907
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.046
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.7024
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.7024
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0097
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.7024
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "c50e17ec270b4930bd991019bd146013",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-UC1543L/C3177976",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.8053,
+     "componentCode": "C3177976",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "UC1543L",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302282230_Texas-Instruments-UC1543L_C3177976.pdf",
+     "dataManualFileAccessId": "8600713584708374528",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/uc1543",
+     "componentName": "TI UC1543L",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LCC-20(8.9x8.9)",
+     "describe": "LCC-20(8.9x8.9) Supervisor and Reset ICs ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Supervisor and Reset ICs",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "U<span class='lucene_highlight_class'>C1543</span>L",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1633382,
+     "componentLibraryType": "expand",
+     "stockCount": 10,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "10\u4f4d\u5e26\u4e32\u884c\u63a7\u5236\u548c11\u4e2a\u6a21\u62df\u8f93\u5165\u7684\u6a21\u6570\u8f6c\u6362\u5668\u3010\u63d2\u4ef6\u3011",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543in_C1542579.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 23.1269
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 23.1269
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 23.1269
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 33,
+       "productPrice": 22.2147
+      },
+      {
+       "startNumber": 34,
+       "endNumber": 35,
+       "productPrice": 22.2147
+      },
+      {
+       "startNumber": 36,
+       "endNumber": -1,
+       "productPrice": 22.2147
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 34,
+       "endNumber": 35,
+       "productPrice": 21.3995
+      },
+      {
+       "startNumber": 36,
+       "endNumber": -1,
+       "productPrice": 21.3995
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 22.2782
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 22.2782
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 33,
+       "productPrice": 21.3995
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 22.2782
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 10,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543IN/C1542579",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20,
+     "shopCostPrice": 111.277,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.1269,
+     "componentCode": "C1542579",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IN",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8767026550082953216",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543IN_C1542579.pdf",
+     "dataManualFileAccessId": "8588928289696464896",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543IN",
+     "minImage": "",
+     "minImageAccessId": "8767026551139917824",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PDIP-20",
+     "describe": "-40\u2103~+125\u2103 10 11 1LSB 2.1MHz 2.5mA 4.5V~5.5V Built-in No SAR Serial port PDIP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "38kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IN",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 91193,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CN \u3010\u63d2\u4ef6\u3011",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543cn_C90009.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.9807
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 39,
+       "productPrice": 5.7433
+      },
+      {
+       "startNumber": 40,
+       "endNumber": 99,
+       "productPrice": 4.4905
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.3316
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.3316
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.3316
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.7613
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 39,
+       "productPrice": 5.5325
+      },
+      {
+       "startNumber": 40,
+       "endNumber": 99,
+       "productPrice": 4.3257
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.1727
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.1727
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.1727
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CN/C90009",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20,
+     "shopCostPrice": 22.99343,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.9807,
+     "componentCode": "C90009",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CN",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583332420703956992",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1806071014_Texas-Instruments-TLC1543CN_C90009.pdf",
+     "dataManualFileAccessId": "8588896541679489024",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CN",
+     "minImage": "",
+     "minImageAccessId": "8583332421538623488",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PDIP-20",
+     "describe": "0\u2103~+70\u2103 10 11 1LSB 4.5V~5.5V SPI PDIP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CN",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 502672,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u6a21\u6570\u8f6c\u6362\u82af\u7247 \u505c\u4ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_hgsemi-tlc1543wm_C492112.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.8317
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 35,
+       "productPrice": 4.9981
+      },
+      {
+       "startNumber": 36,
+       "endNumber": 107,
+       "productPrice": 4.4168
+      },
+      {
+       "startNumber": 108,
+       "endNumber": 503,
+       "productPrice": 3.9157
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 3.6848
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 3.5816
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.6177
+      },
+      {
+       "startNumber": 36,
+       "endNumber": 107,
+       "productPrice": 4.2547
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 35,
+       "productPrice": 4.8147
+      },
+      {
+       "startNumber": 108,
+       "endNumber": 503,
+       "productPrice": 3.772
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 3.4501
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 3.5495
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HGSEMI-TLC1543WM/C492112",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 36,
+     "shopCostPrice": 19.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.8317,
+     "componentCode": "C492112",
+     "componentBrandEn": "HGSEMI",
+     "componentModelEn": "TLC1543WM",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583409481409970176",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2102031007_HGSEMI-TLC1543WM_C492112.pdf",
+     "dataManualFileAccessId": "8757211542024929280",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HGSEMI TLC1543WM",
+     "minImage": "",
+     "minImageAccessId": "8583409482298216448",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "0MHz~2.1MHz 0\u2103~+70\u2103 10 11 1LSB 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial Port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0MHz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>WM",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 527942,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CN \u505c\u4ea7 \u3010\u63d2\u4ef6\u3011",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_hgsemi-tlc1543cn_C512766.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.4969
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 35,
+       "productPrice": 1.4608
+      },
+      {
+       "startNumber": 36,
+       "endNumber": 107,
+       "productPrice": 1.4379
+      },
+      {
+       "startNumber": 108,
+       "endNumber": 109,
+       "productPrice": 1.4133
+      },
+      {
+       "startNumber": 110,
+       "endNumber": 111,
+       "productPrice": 1.4133
+      },
+      {
+       "startNumber": 112,
+       "endNumber": -1,
+       "productPrice": 1.4133
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.4419
+      },
+      {
+       "startNumber": 112,
+       "endNumber": -1,
+       "productPrice": 1.3615
+      },
+      {
+       "startNumber": 36,
+       "endNumber": 107,
+       "productPrice": 1.3851
+      },
+      {
+       "startNumber": 110,
+       "endNumber": 111,
+       "productPrice": 1.3615
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 35,
+       "productPrice": 1.4072
+      },
+      {
+       "startNumber": 108,
+       "endNumber": 109,
+       "productPrice": 1.3615
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HGSEMI-TLC1543CN/C512766",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 18,
+     "shopCostPrice": 7.5,
+     "preMinPurchaseNum": 7,
+     "minPurchaseNum": 7,
+     "initialPrice": 1.4969,
+     "componentCode": "C512766",
+     "componentBrandEn": "HGSEMI",
+     "componentModelEn": "TLC1543CN",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583331632509538304",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2207271800_HGSEMI-TLC1543CN_C512766.pdf",
+     "dataManualFileAccessId": "8757211483153948672",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HGSEMI TLC1543CN",
+     "minImage": "",
+     "minImageAccessId": "8583331633415507968",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DIP-20",
+     "describe": "0Hz~2.1MHz 0\u2103~+70\u2103 10 11 1LSB 4.5V~5.5V Built-in External Multiplexers No Not supported SAR SPI DIP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0Hz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CN",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1633397,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CDB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543cdb_C1542594.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 27.0327
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 26.168
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 26.168
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 26.168
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 26.168
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 26.168
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 26.0406
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 25.2077
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 25.2077
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 25.2077
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 25.2077
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 25.2077
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CDB/C1542594",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 70,
+     "shopCostPrice": 137.50667,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 27.0327,
+     "componentCode": "C1542594",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CDB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543CDB_C1542594.pdf",
+     "dataManualFileAccessId": "8588928619422339072",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CDB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 4.5V~5.5V Serial port SSOP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CDB",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1633398,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543IDW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543idw_C1542595.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.7765
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.2328
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.9085
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.581
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.4303
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.3615
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.2749
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.4863
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.8018
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.6379
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.3411
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.1141
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543IDW/C1542595",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 10.31058,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 3.7765,
+     "componentCode": "C1542595",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IDW",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2201181100_Texas-Instruments-TLC1543IDW_C1542595.pdf",
+     "dataManualFileAccessId": "8588928814365335552",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543IDW",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 4.5V~5.5V Serial port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IDW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1633623,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543QDW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543qdw_C1542820.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.6185
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 10.6185
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 10.6185
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.1105
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.9648
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.8944
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.7515
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 3.9597
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 10.2289
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.2289
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.8193
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 10.2289
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543QDW/C1542820",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 13.02689,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 10.6185,
+     "componentCode": "C1542820",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543QDW",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543QDW_C1542820.pdf",
+     "dataManualFileAccessId": "8588928520475324416",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543QDW",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "-40\u2103~+125\u2103 10 11 1LSB 4.5V~5.5V Serial port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0MHz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>QDW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1634028,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CFN",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543cfn_C1543225.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.0287
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.0287
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 4.0287
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.5591
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.505
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.4772
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.423
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.5019
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 3.8808
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.8808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.4498
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.8808
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CFN/C1543225",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 46,
+     "shopCostPrice": 17.18424,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 4.0287,
+     "componentCode": "C1543225",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CFN",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543CFN_C1543225.pdf",
+     "dataManualFileAccessId": "8588929032755032064",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CFN",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PLCC-20(9x9)",
+     "describe": "0\u2103~+70\u2103 10 11 1LSB 4.5V~5.5V Serial port PLCC-20(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CFN",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1634194,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543IDB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543idb_C1543390.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.6596
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.2551
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.0029
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.7425
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.6262
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.5755
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.6786
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.5177
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.9294
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.562
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.5666
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.1723
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543IDB/C1543390",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 70,
+     "shopCostPrice": 14.25031,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.6596,
+     "componentCode": "C1543390",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IDB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2201181100_Texas-Instruments-TLC1543IDB_C1543390.pdf",
+     "dataManualFileAccessId": "8588929032716472320",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543IDB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 4.5V~5.5V Serial port SSOP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IDB",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3066976,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CDW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543cdw_C2862299.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.7114
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 12.7114
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 12.7114
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.9195
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.7459
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.6608
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.4898
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.739
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 12.245
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.245
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.5718
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 12.245
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TexasInstruments-TLC1543CDW/C2862299",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.7114,
+     "componentCode": "C2862299",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CDW",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303010830_Texas-Instruments-TLC1543CDW_C2862299.pdf",
+     "dataManualFileAccessId": "8590183383872937984",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543CDW",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "0\u2103~+70\u2103 10 11 2.1MHz 4.5V~5.5V Serial port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Full-Scale Range(FSR)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "2.1MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Drift",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Temperature Sensors",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CDW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3069838,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543IFN",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543ifn_C2865161.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.4485
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.4485
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 5.4485
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.1093
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.0356
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.998
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.9247
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.0319
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 5.2486
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.2486
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.9609
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.2486
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TexasInstruments-TLC1543IFN/C2865161",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 46,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.4485,
+     "componentCode": "C2865161",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IFN",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303010630_Texas-Instruments-TLC1543IFN_C2865161.pdf",
+     "dataManualFileAccessId": "8590184901401620480",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543IFN",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PLCC-20(9x9)",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 4.5V~5.5V Serial port PLCC-20(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Full-Scale Range(FSR)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Drift",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Temperature Sensors",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IFN",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3069839,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "10\u4f4d\u6a21\u62df\u5230\u6570\u5b57\u8f6c\u6362\u5668\uff0c\u5e26\u6709\u4e32\u884c\u63a7\u5236\u548c11\u4e2a\u6a21\u62df\u8f93\u5165",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543qdb_C2865162.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.9532
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 10.2828
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 9.2642
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 8.4126
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 8.4126
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 8.4126
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 8.1039
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 8.1039
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 8.9242
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.5146
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 8.1039
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 9.9055
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TexasInstruments-TLC1543QDB/C2865162",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 70,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.9532,
+     "componentCode": "C2865162",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543QDB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303010630_Texas-Instruments-TLC1543QDB_C2865162.pdf",
+     "dataManualFileAccessId": "8590183474985263104",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543QDB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20",
+     "describe": "-40\u2103~+125\u2103 10 11 1LSB 2.5mA 4.5V~5.5V Built-in External No Not supported SAR Serial port SSOP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0Hz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "47.6kHz"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Full-Scale Range(FSR)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Drift",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Temperature Sensors",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>QDB",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2761833,
+     "componentLibraryType": "expand",
+     "stockCount": 6,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u5e26\u4e32\u884c\u63a7\u5236\u548c11\u4e2a\u6a21\u62df\u8f93\u5165\u768410\u4f4d\u6a21\u6570\u8f6c\u6362\u5668\uff08ADC\uff09",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543qdwr_C2669919.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 8.3913
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 8.1932
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 8.0622
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 7.9312
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 7.9312
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 7.9312
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.8925
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 7.6401
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 7.6401
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 8.0834
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 7.6401
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 7.7663
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 6,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543QDWR/C2669919",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 41.8,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 8.3913,
+     "componentCode": "C2669919",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543QDWR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583505379511058432",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2304140030_Texas-Instruments-TLC1543QDWR_C2669919.pdf",
+     "dataManualFileAccessId": "8588925813392101376",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543QDWR",
+     "minImage": "",
+     "minImageAccessId": "8583505380442193920",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "-40\u2103~+125\u2103 10 11 1LSB 2.1MHz 2.5mA 4.5V~5.5V Built-in SAR Serial port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Full-Scale Range(FSR)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "38kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Drift",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Temperature Sensors",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>QDWR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2762151,
+     "componentLibraryType": "expand",
+     "stockCount": 3,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543QDBR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543qdbr_C2670237.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 19.0328
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 18.4236
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 18.4236
+      },
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 18.4236
+      },
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 18.4236
+      },
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 18.4236
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 17.7475
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 18.3343
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 17.7475
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 17.7475
+      },
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 17.7475
+      },
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 17.7475
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 3,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543QDBR/C2670237",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 96.814,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 19.0328,
+     "componentCode": "C2670237",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543QDBR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8769246636528537600",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2304140030_Texas-Instruments-TLC1543QDBR_C2670237.pdf",
+     "dataManualFileAccessId": "8588898906130288640",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543QDBR",
+     "minImage": "",
+     "minImageAccessId": "8769246637544099840",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20-5.2mm",
+     "describe": "-40\u2103~+125\u2103 10 11 4.5V~5.5V Serial port SSOP-20-5.2mm Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0Hz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>QDBR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3076463,
+     "componentLibraryType": "expand",
+     "stockCount": 99,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "10\u4f4d\u6a21\u62df\u5230\u6570\u5b57\u8f6c\u6362\u5668\uff0c\u5e26\u6709\u4e32\u884c\u63a7\u5236\u548c11\u4e2a\u6a21\u62df\u8f93\u5165",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543idwr_C2871786.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.9888
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.7955
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.6825
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.5662
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.5122
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.4893
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.6929
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.4721
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.3979
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.8791
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.42
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.5841
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 99,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543IDWR/C2871786",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 13.81019,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 1,
+     "initialPrice": 2.9888,
+     "componentCode": "C2871786",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IDWR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583643305154383872",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303010230_Texas-Instruments-TLC1543IDWR_C2871786.pdf",
+     "dataManualFileAccessId": "8588954971144933376",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543IDWR",
+     "minImage": "",
+     "minImageAccessId": "8583643306131927040",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 2.5mA 38kHz 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial Port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "38kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IDWR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 218715,
+     "componentLibraryType": "expand",
+     "stockCount": 10,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u8584\u819c\u7535\u963b 154k\u03a9 \u00b11% 100mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_viking-tech-arg03ftc1543_C217746.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.01
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 4999,
+       "productPrice": 0.0068
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 24999,
+       "productPrice": 0.0061
+      },
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0055
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0051
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0053
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 24999,
+       "productPrice": 0.0059
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 4999,
+       "productPrice": 0.0065
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0096
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0076
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "a49341812cad4b0bafa2ddd547a82bd4",
+     "canPresaleNumber": 10,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "VikingTech-ARG03FTC1543/C217746",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.0235,
+     "preMinPurchaseNum": 1143,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.01,
+     "componentCode": "C217746",
+     "componentBrandEn": "Viking Tech",
+     "componentModelEn": "ARG03FTC1543",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583439516229652480",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Viking-Tech-ARG03FTC1543_C217746.pdf",
+     "dataManualFileAccessId": "8588909817965006848",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Viking ARG03FTC1543",
+     "minImage": "",
+     "minImageAccessId": "8583439517067972608",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0603",
+     "describe": "-55\u2103~+155\u2103 100mW 154k\u03a9 75V Thin Film Resistor \u00b11% \u00b125ppm/\u2103 0603 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "154k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "100mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thin Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "75V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b11%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b125ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "ARG03FT<span class='lucene_highlight_class'>C1543</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1600260,
+     "componentLibraryType": "expand",
+     "stockCount": 8501,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u8584\u819c\u7535\u963b 154k\u03a9 \u00b10.1% 62.5mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_viking-tech-arg02btc1543_C1509607.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0215
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0128
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0115
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0108
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0142
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0207
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0111
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0166
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "a49341812cad4b0bafa2ddd547a82bd4",
+     "canPresaleNumber": 8471,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "VikingTech-ARG02BTC1543/C1509607",
+     "leastPatchNumber": 20,
+     "lossNumber": 8,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.04972,
+     "preMinPurchaseNum": 420,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0215,
+     "componentCode": "C1509607",
+     "componentBrandEn": "Viking Tech",
+     "componentModelEn": "ARG02BTC1543",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583831044298575872",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Viking-Tech-ARG02BTC1543_C1509607.pdf",
+     "dataManualFileAccessId": "8590165648853659648",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Viking ARG02BTC1543",
+     "minImage": "",
+     "minImageAccessId": "8583831045128507392",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+155\u2103 154k\u03a9 50V 62.5mW Thin Film Resistor \u00b10.1% \u00b125ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "154k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "62.5mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thin Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b10.1%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b125ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "ARG02BT<span class='lucene_highlight_class'>C1543</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 59289,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "10\u4f4d\u5e26\u4e32\u884c\u63a7\u5236\u548c11\u4e2a\u6a21\u62df\u8f93\u5165\u7684\u6a21\u6570\u8f6c\u6362\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543cdwr_C58251.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 8.8433
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.6053
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 6.8503
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 6.2182
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 6.2182
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 6.2182
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 8.5188
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.3262
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 6.5989
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.99
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.99
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.99
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": -5,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CDWR/C58251",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 32.77,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 8.8433,
+     "componentCode": "C58251",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CDWR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582989728904335360",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/1806081322_Texas-Instruments-TLC1543CDWR_C58251.pdf",
+     "dataManualFileAccessId": "8586194893207179264",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CDWR",
+     "minImage": "",
+     "minImageAccessId": "8582989729901498368",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOIC-20-300mil",
+     "describe": "0Hz~2.1MHz 0\u2103~+70\u2103 10 11 2.5mA 38kHz 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial port SOIC-20-300mil Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0Hz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "2.5mA"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "38kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CDWR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1634152,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543ING4 \u3010\u63d2\u4ef6\u3011",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543ing4_C1543348.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.2264
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.2264
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 6.2264
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.4107
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.3255
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.2829
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.1992
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.3222
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 5.9979
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.9979
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.2402
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.9979
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543ING4/C1543348",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20,
+     "shopCostPrice": 13.67795,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 6.2264,
+     "componentCode": "C1543348",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543ING4",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312130616_Texas-Instruments-TLC1543ING4_C1543348.pdf",
+     "dataManualFileAccessId": "8588928265621295104",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543ING4",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PDIP-20",
+     "describe": "-40\u2103~+125\u2103 0MHz~2.1MHz 10 11 1LSB 2.1MHz 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial Port PDIP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0MHz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "2.1MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>ING4",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2762142,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CFNR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543cfnr_C2670228.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.0538
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.0538
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 5.0538
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.9554
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.8866
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.8539
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.7858
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.8836
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 4.8684
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.8684
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.8174
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 4.8684
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CFNR/C2670228",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 11.70668,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.0538,
+     "componentCode": "C2670228",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CFNR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543CFNR_C2670228.pdf",
+     "dataManualFileAccessId": "8588927675742498816",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CFNR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PLCC-20(9x9)",
+     "describe": "0\u2103~+70\u2103 10 11 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial Port PLCC-20(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CFNR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2762154,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "CMOS 10 \u4f4d\u9010\u6b21\u903c\u8fd1\u578b\u6a21\u62df\u6570\u5b57\u8f6c\u6362\u5668\uff0c\u5e26\u4e32\u884c\u63a7\u5236\u548c 11 \u4e2a\u6a21\u62df\u8f93\u5165\uff0c\u5185\u7f6e\u81ea\u6d4b\u8bd5\u6a21\u5f0f\u548c\u91c7\u6837\u4fdd\u6301\u529f\u80fd",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543idbr_C2670240.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.6254
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.836
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.1826
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 3.7077
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.4899
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.39
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.2656
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.0291
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 3.5716
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.4189
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.3618
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.6585
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543IDBR/C2670240",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 18.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.6254,
+     "componentCode": "C2670240",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543IDBR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583505462730108928",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Texas-Instruments-TLC1543IDBR_C2670240.pdf",
+     "dataManualFileAccessId": "8588925877694029824",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543IDBR",
+     "minImage": "",
+     "minImageAccessId": "8583505463614836736",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20-5.2mm",
+     "describe": "-40\u2103~+85\u2103 0MHz~2.1MHz 10 11 1LSB 4.5V~5.5V Built-in External Multiplexers No Not supported SAR Serial Port SSOP-20-5.2mm Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0MHz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial Port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>IDBR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2762158,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543CDBR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_texas instruments_tlc1543cdbr_C2670244.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.5619
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 21.8397
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 21.8397
+      },
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 21.8397
+      },
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 21.8397
+      },
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 21.8397
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 14,
+       "endNumber": 15,
+       "productPrice": 21.0382
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 21.7339
+      },
+      {
+       "startNumber": 16,
+       "endNumber": 17,
+       "productPrice": 21.0382
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 13,
+       "productPrice": 21.0382
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 21.0382
+      },
+      {
+       "startNumber": 18,
+       "endNumber": -1,
+       "productPrice": 21.0382
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543CDBR/C2670244",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 114.76667,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 22.5619,
+     "componentCode": "C2670244",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543CDBR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8796479419894784000",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2304140030_Texas-Instruments-TLC1543CDBR_C2670244.pdf",
+     "dataManualFileAccessId": "8588926869302992896",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1543",
+     "componentName": "TI TLC1543CDBR",
+     "minImage": "",
+     "minImageAccessId": "8796479420922118144",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-20-5.2mm",
+     "describe": "-40\u2103~+85\u2103 10 11 4.5V~5.5V Serial port SSOP-20-5.2mm Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "0MHz~2.1MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>CDBR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8090906,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "TLC1543INE4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_texas-instruments-tlc1543ine4_C7124120.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.861
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.861
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.861
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.1415
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.1038
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0858
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.046
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.0996
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.756
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.756
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0633
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.756
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLC1543INE4/C7124120",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.861,
+     "componentCode": "C7124120",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLC1543INE4",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312130616_Texas-Instruments-TLC1543INE4_C7124120.pdf",
+     "dataManualFileAccessId": "8600391949531045888",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlc1542",
+     "componentName": "TI TLC1543INE4",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "PDIP-20",
+     "describe": "-40\u2103~+85\u2103 10 11 1LSB 4.5V~5.5V Serial port PDIP-20 Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "No"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "SAR"
+      },
+      {
+       "attribute_name_en": "Full-Scale Range(FSR)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Drift",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "11"
+      },
+      {
+       "attribute_name_en": "Temperature Sensors",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Serial port"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TL<span class='lucene_highlight_class'>C1543</span>INE4",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 7,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C1543"
+ },
+ "message": null
+}

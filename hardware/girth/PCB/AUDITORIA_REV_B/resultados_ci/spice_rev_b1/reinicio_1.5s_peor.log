@@ -1,0 +1,55 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * avo girth rev b · reinicio_1.5s_peor
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vbat                               1.59869e-05
+pwr_pg                                     3.5
+bat_raw                                    3.5
+pwr_g                             -7.48301e-16
+vin5                               6.07949e-24
+pwr_hold                           1.26904e-18
+reed_pulse                         1.95692e-16
+reed_hi                            3.40672e-06
+reed_c                             4.02975e-07
+reed_cr                            4.02975e-07
+reed                               1.59869e-05
+reed_g                             3.09702e-06
+vdd3                               1.59869e-05
+bat_adc                            7.99347e-06
+vsys                               1.59869e-05
+cell                                       3.5
+reedctl                                      0
+vin5s                                        0
+xu3.x                              1.59869e-05
+tim                                          0
+rst                                          0
+hcmd                                         0
+txg                                          0
+slp                                          0
+b.xu3.bdrop#branch                 5.13495e-16
+vslp#branch                                  0
+vtx#branch                                   0
+vhcmd#branch                                 0
+vrst#branch                                  0
+vvin#branch                         1.2159e-23
+vreed#branch                                 0
+vcell#branch                      -1.95186e-11
+
+ Reference value :  1.37000e+00
+ Reference value :  2.41320e+00
+ Reference value :  4.31070e+00
+ Reference value :  5.79650e+00
+ Reference value :  6.87000e+00
+No. of Data Rows : 32165
+ngspice-42 done
+Using SPARSE 1.3 as Direct Linear Solver
