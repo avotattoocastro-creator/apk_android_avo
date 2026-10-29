@@ -1,0 +1,43 @@
+# Validación del ODB++ para AISLER — VÁLIDO
+
+- Fichero: `AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip` (244529 B, 107 entradas), raíz `(raíz del ZIP)`, step `pcb`
+- Capas de cobre: F.CU, IN1.CU, IN2.CU, B.CU
+- Tipos de capa: {'COMPONENT': 1, 'SILK_SCREEN': 2, 'SOLDER_PASTE': 2, 'SOLDER_MASK': 2, 'SIGNAL': 4, 'DIELECTRIC': 3, 'DRILL': 2}
+- Contorno: {'ancho': 65.5, 'alto': 43.5, 'xmin': 67.25, 'ymin': -121.75}
+- Taladros por capa de taladro: {'DRILL_NON-PLATED_F.CU-B.CU': 2, 'DRILL_PLATED_F.CU-B.CU': 184} (total 186)
+- Componentes: 98 en total · **85 para montar** · NO_POP: C5, L1, L2, SW1, SW2, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8
+- Tipo de montaje (para montar): {'smt': 85} · capas: {'COMP_+_TOP': 85}
+- Transformación KiCad → ODB++: {'x_odb': 'x_kicad +0.0000', 'y_odb': '−y_kicad +0.0000', 'giro_odb': '−giro_kicad'} · error de posición máx. 0.000000 mm · giros iguales 98/98
+- Frente al CPL de JLCPCB entregado: {'filas': 85, 'en_odb_para_montar': 85, 'error_max_mm': 0.0, 'giros_iguales': 85, 'en_cpl_no_montados_en_odb': []}
+- Propiedades de los componentes montados: {'Datasheet': 85, 'Description': 85, 'LCSC': 85, 'MPN': 85, 'Manufacturer': 85, 'Value': 85}
+- eda/data: 24 paquetes, 85 redes · netlist: netlists/cadnet/netlist
+
+## Problemas
+
+- ninguno
+
+## Avisos
+
+- 16 piezas montadas llevan en MPN el valor (p. ej. «100n»), no un número de fabricante: AISLER las tendrá que emparejar por valor/huella en su herramienta de BOM
+- El ODB++ no lleva espesor ni acabado: 1,0 mm y ENIG se eligen en el pedido de AISLER
+
+## Features por capa
+
+| Capa | Tipo | Unidades | Recuento |
+|---|---|---|---|
+| COMP_+_TOP | COMPONENT | MM | {} |
+| F.SILKSCREEN | SILK_SCREEN | MM | {'n_L': 485, 'n_P': 2} |
+| F.PASTE | SOLDER_PASTE | MM | {'n_P': 336, 'n_S': 1, 'n_SE': 1} |
+| F.MASK | SOLDER_MASK | MM | {'n_P': 343, 'n_S': 2, 'n_SE': 2} |
+| F.CU | SIGNAL | MM | {'n_L': 744, 'n_P': 517, 'n_S': 23, 'n_SE': 23} |
+| DIELECTRIC_1 | DIELECTRIC | MM | {} |
+| IN1.CU | SIGNAL | MM | {'n_P': 184, 'n_S': 1, 'n_SE': 1} |
+| DIELECTRIC_2 | DIELECTRIC | MM | {} |
+| IN2.CU | SIGNAL | MM | {'n_L': 109, 'n_P': 184, 'n_S': 2, 'n_SE': 2} |
+| DIELECTRIC_3 | DIELECTRIC | MM | {} |
+| B.CU | SIGNAL | MM | {'n_L': 45, 'n_P': 185, 'n_S': 1, 'n_SE': 1} |
+| B.MASK | SOLDER_MASK | MM | {'n_P': 10} |
+| B.PASTE | SOLDER_PASTE | MM | {} |
+| B.SILKSCREEN | SILK_SCREEN | MM | {'n_L': 460} |
+| DRILL_NON-PLATED_F.CU-B.CU | DRILL | MM | {'n_P': 2, 'taladros_por_simbolo': {'650.0': 2}} |
+| DRILL_PLATED_F.CU-B.CU | DRILL | MM | {'n_P': 184, 'taladros_por_simbolo': {'300.0': 176, '800.0': 4, 'oval600.0x1200.0': 2, 'oval600.0x1700.0': 2}} |

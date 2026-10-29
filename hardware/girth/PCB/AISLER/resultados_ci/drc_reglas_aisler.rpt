@@ -1,80 +1,32 @@
 ** Drc report for AVO_GIRTH_PCB.kicad_pcb **
-** Created on 2026-10-29T21:38:53+0000 **
+** Created on 2026-10-29T21:42:35+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 32 DRC violations **
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1000 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(89.5100 mm, 102.4100 mm): PTH pad 17 [GND] of U2
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1000 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(89.5100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1000 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(90.6900 mm, 102.4100 mm): PTH pad 17 [GND] of U2
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1000 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(90.6900 mm, 103.5900 mm): PTH pad 17 [GND] of U2
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
+** Found 16 DRC violations **
+[annular_width]: Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
+    Rule: AISLER ranura PTH: anillo mín. 300 µm; error
     @(123.0200 mm, 104.3200 mm): PTH pad S1 [GND] of J1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
+[annular_width]: Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
+    Rule: AISLER ranura PTH: anillo mín. 300 µm; error
     @(127.2000 mm, 104.3200 mm): PTH pad S1 [GND] of J1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
+[annular_width]: Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
+    Rule: AISLER ranura PTH: anillo mín. 300 µm; error
     @(123.0200 mm, 95.6800 mm): PTH pad S1 [GND] of J1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
+[annular_width]: Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)
+    Rule: AISLER ranura PTH: anillo mín. 300 µm; error
     @(127.2000 mm, 95.6800 mm): PTH pad S1 [GND] of J1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1050 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(79.9750 mm, 103.7750 mm): PTH pad 21 [GND] of U1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1050 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(81.0250 mm, 103.7750 mm): PTH pad 21 [GND] of U1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1050 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(79.9750 mm, 102.2250 mm): PTH pad 21 [GND] of U1
-[annular_width]: Annular width (rule 'AISLER PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1050 mm)
-    Rule: AISLER PTH: anillo mín. 300 µm; error
-    @(81.0250 mm, 102.2250 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(89.5100 mm, 102.4100 mm): PTH pad 17 [GND] of U2
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(89.5100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(90.6900 mm, 102.4100 mm): PTH pad 17 [GND] of U2
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(90.6900 mm, 103.5900 mm): PTH pad 17 [GND] of U2
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(79.9750 mm, 103.7750 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(81.0250 mm, 103.7750 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(79.2250 mm, 103.0000 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(79.9750 mm, 103.0000 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(81.0250 mm, 103.0000 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(81.7750 mm, 103.0000 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(79.9750 mm, 102.2250 mm): PTH pad 21 [GND] of U1
-[drill_out_of_range]: Hole size out of range (rule 'AISLER PTH: taladro mín. 0,5 mm' min hole 0.5000 mm; actual 0.3000 mm)
-    Rule: AISLER PTH: taladro mín. 0,5 mm; error
-    @(81.0250 mm, 102.2250 mm): PTH pad 21 [GND] of U1
+[drill_out_of_range]: Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)
+    Rule: AISLER ranura PTH: ancho 0,7–2,6 mm; error
+    @(123.0200 mm, 104.3200 mm): PTH pad S1 [GND] of J1
+[drill_out_of_range]: Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)
+    Rule: AISLER ranura PTH: ancho 0,7–2,6 mm; error
+    @(127.2000 mm, 104.3200 mm): PTH pad S1 [GND] of J1
+[drill_out_of_range]: Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)
+    Rule: AISLER ranura PTH: ancho 0,7–2,6 mm; error
+    @(123.0200 mm, 95.6800 mm): PTH pad S1 [GND] of J1
+[drill_out_of_range]: Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)
+    Rule: AISLER ranura PTH: ancho 0,7–2,6 mm; error
+    @(127.2000 mm, 95.6800 mm): PTH pad S1 [GND] of J1
 [text_thickness]: Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)
     Rule: AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo; warning
     @(71.4000 mm, 99.8000 mm): PCB text 'BOBINA' on F.Silkscreen

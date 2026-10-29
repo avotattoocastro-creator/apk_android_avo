@@ -12,11 +12,12 @@ Placa: TP1: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp
 Placa: TP4: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
 Placa: TP8: (attr smd) → (attr smd exclude_from_pos_files exclude_from_bom dnp)
 Placa: SW1: (attr through_hole) → (attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+Placa: MPN de fabricante y campo Manufacturer en 85 piezas montadas (mpn_aplicados.csv)
 Esquema: dnp yes + in_bom no en TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, L1, L2, SW1, SW2
 Proyecto: .kicad_pro sin cambios; .kicad_dru = reglas de AISLER 4 capas 35 µm ENIG (solo para el DRC)
-Comprobado: quitando (attr) de las huellas y el cajetín, la placa copiada es idéntica a la original (1307 elementos de primer nivel: huellas, pistas, vías, zonas con relleno, contorno, textos)
+Comprobado: quitando (attr), los campos MPN/Manufacturer de las huellas y el cajetín, la placa copiada es idéntica a la original (1307 elementos de primer nivel: huellas, pistas, vías, zonas con relleno, contorno, textos)
 Huellas: 98 · para montar: 85 · DNP: 13 (C5, L1, L2, SW1, SW2, TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8)
-SHA-256 kicad/AVO_GIRTH_PCB.kicad_pcb b466b39bef574f741df0ddcf8a7b9008a38c4a0d424a6aa7cd6e59ec3f229d46
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_pcb 3ac580de9c7da58ea4ded55352f8efccd16856da83f2db5a6c075fef06b624ec
 SHA-256 kicad/AVO_GIRTH_PCB.kicad_sch 9f2b23684e2486063387540dc946b65bba9f9bb06749527def1c2d535f12342b
 SHA-256 kicad/AVO_GIRTH_PCB.kicad_pro 3eaaa73c950e77a721aa7b40f0c7274b45cc6522bb5c1f5ae66b88257e8f8eb1
-SHA-256 kicad/AVO_GIRTH_PCB.kicad_dru f0b0ae1b1552ced65afec02ea4616e6e86c1b7b0cf919917a6b967685decc4ac
+SHA-256 kicad/AVO_GIRTH_PCB.kicad_dru 93c1dc5a5ecbaf07f31f82f73d34a5a010a54939db775972a0c7504c4641711b

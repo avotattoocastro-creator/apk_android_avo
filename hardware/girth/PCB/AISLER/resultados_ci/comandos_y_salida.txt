@@ -12,12 +12,12 @@ Found 0 unconnected items
 Found 0 schematic parity issues
 Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_diseno.rpt
 + kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.rpt /k/AVO_GIRTH_PCB.kicad_pcb
-Found 32 violations
+Found 16 violations
 Found 0 unconnected items
 Found 0 schematic parity issues
 Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.rpt
 + kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.json /k/AVO_GIRTH_PCB.kicad_pcb
-Found 32 violations
+Found 16 violations
 Found 0 unconnected items
 Found 0 schematic parity issues
 Saved DRC Report to hardware/girth/PCB/AISLER/resultados_ci/drc_reglas_aisler.json
