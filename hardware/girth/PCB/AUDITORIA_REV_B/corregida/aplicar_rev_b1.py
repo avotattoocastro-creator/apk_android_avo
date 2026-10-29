@@ -53,7 +53,7 @@ REEMPLAZOS = [
     ("avo_girth_pcb.py", 'R("R40", "1M", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte", note="Q10 apagado por defecto")',
      'R("R40", "100k", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte",\n'
      '  note="REV B.1: 100 k — la fuga de Q11 en caliente no abre Q10")', 1),
-    ("avo_girth_pcb.py", 'LC = {', 'C41_LCSC = "C1543"   # REV B.1: 470 nF 0402 (comprobar en el CI: existencias y encapsulado)\nLC = {', 1),
+    ("avo_girth_pcb.py", 'LC = {', 'C41_LCSC = "C47339"  # REV B.1: 470 nF 0402 CL05A474KP5NNNC (comprobado en el CI: existencias, encapsulado)\nLC = {', 1),
     ("build.py", '"CHG_TS", "CHG_EN2", D.VSYS', '"CHG_TS", D.VSYS', 1),
     ("build.py", '("U2", "6")', '("U2", "5")', 1),
     ("build.py", ', ("CHG_EN2", ["U2.5", "R8.1"])]', ']', 1),

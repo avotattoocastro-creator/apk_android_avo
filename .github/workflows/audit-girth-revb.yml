@@ -124,7 +124,9 @@ jobs:
           mkdir -p $R/rev_b1
           python3 -c "import csv;print('\n'.join(sorted({r[3] for r in list(csv.reader(open('$A/corregida/AVO_GIRTH_PCB_C3_REV_B1_BOM_JLCPCB.csv',encoding='utf-8')))[1:]})))" > /tmp/lista_b1.txt
           python3 hardware/girth/PCB/fuente/stock_jlc.py $R/rev_b1/existencias --list /tmp/lista_b1.txt | tee $R/rev_b1/existencias.txt
-          python3 -c "import json;d=json.load(open('$R/rev_b1/existencias/stock_jlc.json'));print(json.dumps(d['parts'].get('C1543'),ensure_ascii=False,indent=1))" | tee $R/rev_b1/pieza_C41_C1543.txt
+          echo C92361 >> /tmp/lista_b1.txt   # alternativa de 25 V para C41, para comparar
+          python3 hardware/girth/PCB/fuente/stock_jlc.py $R/rev_b1/existencias --list /tmp/lista_b1.txt > /dev/null
+          python3 -c "import json;d=json.load(open('$R/rev_b1/existencias/stock_jlc.json'));[print(c, json.dumps({k:d['parts'].get(c,{}).get(k) for k in ('mpn','package','library','stock','describe')},ensure_ascii=False)) for c in ('C47339','C92361')]" | tee $R/rev_b1/pieza_C41.txt
           python3 $A/esp32/gpio_tabla.py | tee $R/esp32/gpio_tabla_salida.txt; cp $A/esp32/gpio_tabla.* $R/esp32/
           python3 $A/autonomia/autonomia.py | tee $R/autonomia/autonomia_salida.txt; cp $A/autonomia/autonomia.* $R/autonomia/
 

@@ -13,7 +13,7 @@
  
  
  # --- piezas básicas (LCSC verificados en la lista de materiales; ver DOCS) -----------------------------
-+C41_LCSC = "C1543"   # REV B.1: 470 nF 0402 (comprobar en el CI: existencias y encapsulado)
++C41_LCSC = "C47339"  # REV B.1: 470 nF 0402 CL05A474KP5NNNC (comprobado en el CI: existencias, encapsulado)
  LC = {
      # resistencias y condensadores: todos «Basic» en JLCPCB salvo los C0G de resonancia del Qi y el NTC
      # (existencias y tipo consultados en el CI: out_stock/stock_jlc.json)
