@@ -1,40 +1,35 @@
 # AVO BACK V4 · placa de la espalda · REV A (ESP32-S3) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `a08bbd6a061e9803b5e059efa72fac9a6a41cc9f` · ejecución de CI: 40946295258
+- Commit: `7ee8318d82db8122947e4a0963250b302d256035` · ejecución de CI: 40957092657
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno de la cola de la carcasa V4 (CAD/pcb_contorno_v4.json), ≈ 1785 mm²
 - Componentes: 99 en total, 85 para montar, 1 sin montar (DNP: C5), 13 a mano (pads de hilo y de prueba)
-- Pistas: 1038 · vías: 179 · ruteado INCOMPLETO (13 conexiones)
+- Pistas: 1043 · vías: 177 · ruteado INCOMPLETO (7 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 4 |
-| DRC: conexiones incompletas | **FALLA** | 13 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 7 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 4
+Errores de DRC por tipo: copper_edge_clearance 3
 
 ### Conexiones incompletas
-- Pad A4 [VBUS] of J1 on F.Cu ↔ Pad A9 [VBUS] of J1 on F.Cu
-- Track [VBUS] on In2.Cu, length 1.9803 mm ↔ Pad A9 [VBUS] of J1 on F.Cu
-- Pad 3 [VIN5] of Q2 on F.Cu ↔ Pad 13 [VIN5] of U2 on F.Cu
-- Pad 13 [VIN5] of U2 on F.Cu ↔ Pad 1 [VIN5] of C18 on F.Cu
+- Track [VBUS] on F.Cu, length 2.4505 mm ↔ Pad A9 [VBUS] of J1 on F.Cu
+- Pad 1 [VIN5] of C18 on F.Cu ↔ Track [VIN5] on In2.Cu, length 7.6330 mm
 - Pad 10 [VSYS] of U2 on F.Cu ↔ Pad 11 [VSYS] of U2 on F.Cu
-- Track [VSYS] on F.Cu, length 1.7014 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
-- Pad 1 [QI_CLAMP1] of C7 on F.Cu ↔ Pad 5 [QI_CLAMP1] of U1 on F.Cu
-- Pad 1 [QI_CLAMP2] of C10 on F.Cu ↔ Pad 16 [QI_CLAMP2] of U1 on F.Cu
+- Track [VSYS] on In2.Cu, length 2.9856 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
+- Pad 12 [CHG_ILIM] of U2 on F.Cu ↔ Pad 1 [CHG_ILIM] of R7 on F.Cu
+- Pad 7 [QI_CHG] of U1 on F.Cu ↔ Track [QI_CHG] on In2.Cu, length 0.0543 mm
 - Pad 1 [QI_COMM1] of C8 on F.Cu ↔ Pad 6 [QI_COMM1] of U1 on F.Cu
-- Pad 1 [QI_COMM2] of C11 on F.Cu ↔ Pad 15 [QI_COMM2] of U1 on F.Cu
-- Pad 1 [QI_RECT] of C13 on F.Cu ↔ Pad 18 [QI_RECT] of U1 on F.Cu
-- Pad 18 [QI_RECT] of U1 on F.Cu ↔ Track [QI_RECT] on F.Cu, length 1.1384 mm
-- Pad 13 [QI_TS] of U1 on F.Cu ↔ Pad 1 [QI_TS] of RT1 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
+- connection_width: 2
 - silk_edge_clearance: 2
 
 ## Lista de materiales y posiciones

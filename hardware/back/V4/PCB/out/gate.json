@@ -4,12 +4,12 @@
   {
    "name": "DRC: errores",
    "ok": false,
-   "n": 4
+   "n": 3
   },
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 13
+   "n": 7
   },
   {
    "name": "DRC: cortocircuitos",
@@ -33,9 +33,10 @@
   }
  ],
  "drc_errors": {
-  "copper_edge_clearance": 4
+  "copper_edge_clearance": 3
  },
  "drc_warnings": {
+  "connection_width": 2,
   "silk_edge_clearance": 2
  }
 }
