@@ -1,0 +1,75 @@
+{
+ "fichero": "AVO_GIRTH_PCB.kicad_pcb",
+ "problemas": [],
+ "contorno_mm": {
+  "ancho": 65.6,
+  "alto": 43.6
+ },
+ "grosor_mm": 1.0,
+ "capas_cobre": 4,
+ "textos": [
+  "BOBINA",
+  "REED",
+  "+ BAT −",
+  "ANTENA FPC (sin cobre)",
+  "4 capas 1,0 mm · ENIG",
+  "AVO GIRTH · REV B · ESP32-C3 · 2026-10-29"
+ ],
+ "es_rev_b": true,
+ "huellas": 98,
+ "U4": "ESP32-C3-MINI-1U-N4",
+ "reglas": {
+  "pista_min": 0.1,
+  "separacion_min": 0.1,
+  "via_min": 0.45,
+  "taladro_min": 0.3,
+  "borde": 0.3,
+  "anillo_min": 0.1
+ },
+ "zonas": [
+  {
+   "red": "GND",
+   "capa": "F.Cu",
+   "area_mm2": 1519.8,
+   "espesor_min": 0.2,
+   "separacion": 0.2
+  },
+  {
+   "red": "GND",
+   "capa": "B.Cu",
+   "area_mm2": 2118.9,
+   "espesor_min": 0.2,
+   "separacion": 0.2
+  },
+  {
+   "red": "GND",
+   "capa": "In1.Cu",
+   "area_mm2": 2199.1,
+   "espesor_min": 0.2,
+   "separacion": 0.2
+  },
+  {
+   "red": "+3V3",
+   "capa": "In2.Cu",
+   "area_mm2": 1943.4,
+   "espesor_min": 0.2,
+   "separacion": 0.2
+  }
+ ],
+ "redes": 84,
+ "redes_sin_conectar_nc": 29,
+ "vias": {
+  "total": 164,
+  "tipos": [
+   [
+    0.5,
+    0.3
+   ]
+  ],
+  "anillo_min": 0.1
+ },
+ "esquema_pads": 327,
+ "placa_pads": 330,
+ "diferencias_esquema_placa": [],
+ "n_diferencias_esquema_placa": 0
+}
