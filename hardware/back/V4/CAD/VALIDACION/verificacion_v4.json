@@ -1,0 +1,256 @@
+{
+ "pcb_fuente": "placa + envolventes (patio × altura) del generador",
+ "piezas_entre_si": {
+  "tapa / base": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.0,
+   "nota": ""
+  },
+  "tapa / bandeja": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.3,
+   "nota": ""
+  },
+  "tapa / junta": {
+   "volumen_comun_mm3": 199.483,
+   "distancia_min_mm": 0.0,
+   "nota": "compresión de la junta por el labio (previsto)"
+  },
+  "tapa / soporte": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 2.102,
+   "nota": ""
+  },
+  "tapa / contraplaca": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 9.6,
+   "nota": ""
+  },
+  "tapa / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.899,
+   "nota": ""
+  },
+  "base / bandeja": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.0,
+   "nota": ""
+  },
+  "base / junta": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.0,
+   "nota": "junta en su ranura (previsto)"
+  },
+  "base / soporte": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.0,
+   "nota": ""
+  },
+  "base / contraplaca": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 6.0,
+   "nota": ""
+  },
+  "base / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.0,
+   "nota": ""
+  },
+  "bandeja / junta": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 1.769,
+   "nota": ""
+  },
+  "bandeja / soporte": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 6.146,
+   "nota": ""
+  },
+  "bandeja / contraplaca": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 13.6,
+   "nota": ""
+  },
+  "bandeja / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 0.5,
+   "nota": ""
+  },
+  "junta / soporte": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 2.191,
+   "nota": ""
+  },
+  "junta / contraplaca": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 10.8,
+   "nota": ""
+  },
+  "junta / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 2.9,
+   "nota": ""
+  },
+  "soporte / contraplaca": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 1.5,
+   "nota": ""
+  },
+  "soporte / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 3.5,
+   "nota": ""
+  },
+  "contraplaca / anillos": {
+   "volumen_comun_mm3": 0.0,
+   "distancia_min_mm": 9.5,
+   "nota": ""
+  }
+ },
+ "electronica_vs_piezas": {},
+ "electronica_entre_si": {},
+ "holguras_minimas": {
+  "L_cuerpo": {
+   "tapa": 0.0,
+   "base": 5.9,
+   "bandeja": 20.217,
+   "anillos": 18.158
+  },
+  "L_rosca_hembra": {
+   "tapa": 0.3,
+   "base": 12.2,
+   "bandeja": 21.396,
+   "anillos": 20.675
+  },
+  "L_tuerca_y_cuerpo_hex": {
+   "tapa": 0.0,
+   "base": 5.898,
+   "bandeja": 10.917,
+   "anillos": 11.564
+  },
+  "antena_FPC_2G4": {
+   "tapa": 0.05,
+   "base": 6.175,
+   "bandeja": 5.25,
+   "anillos": 49.827
+  },
+  "antena_GNSS_Q39": {
+   "tapa": 0.02,
+   "base": 7.944,
+   "bandeja": 8.918,
+   "anillos": 7.642
+  },
+  "bateria_654060": {
+   "tapa": 0.6,
+   "base": 0.0,
+   "bandeja": 0.3,
+   "anillos": 1.35
+  },
+  "imanes_capsula": {
+   "tapa": 4.7,
+   "base": 0.02,
+   "bandeja": 6.3,
+   "anillos": 11.267
+  },
+  "imanes_soporte": {
+   "tapa": 3.771,
+   "base": 0.02,
+   "bandeja": 7.62,
+   "anillos": 11.597
+  },
+  "pcb_componentes": {
+   "tapa": 0.53,
+   "base": 0.589,
+   "bandeja": 2.909,
+   "anillos": 0.317
+  },
+  "pcb_placa": {
+   "tapa": 0.1,
+   "base": 0.0,
+   "bandeja": 4.151,
+   "anillos": 0.0
+  },
+  "qi_bobina": {
+   "tapa": 1.3,
+   "base": 0.02,
+   "bandeja": 6.306,
+   "anillos": 2.514
+  },
+  "urtk_J1_USBC_estimado": {
+   "tapa": 0.206,
+   "base": 3.412,
+   "bandeja": 0.6,
+   "anillos": 30.559
+  },
+  "urtk_J2_SMA": {
+   "tapa": 1.5,
+   "base": 5.189,
+   "bandeja": 5.417,
+   "anillos": 10.712
+  },
+  "urtk_J3_GH6_estimado": {
+   "tapa": 0.35,
+   "base": 10.4,
+   "bandeja": 2.8,
+   "anillos": 32.294
+  },
+  "urtk_modulo_ZED": {
+   "tapa": 1.5,
+   "base": 8.005,
+   "bandeja": 2.8,
+   "anillos": 9.47
+  },
+  "urtk_pcb": {
+   "tapa": 0.15,
+   "base": 0.0,
+   "bandeja": 0.0,
+   "anillos": 0.0
+  }
+ },
+ "imanes_en_alojamiento": {
+  "capsula": 0.0,
+  "soporte": 0.0
+ },
+ "tornillos_dentro_de_la_junta": {
+  "S1": 1.801,
+  "S2": 1.801,
+  "S3": 1.801,
+  "S4": 1.801,
+  "S5": 1.801,
+  "S6": 1.801,
+  "S7": 2.33,
+  "S8": 2.33
+ },
+ "imanes_soporte_vs_insertos_min_mm": 0.38,
+ "cotas": {
+  "capsula_largo": 118.167,
+  "capsula_ancho": 59.0,
+  "capsula_alto": 17.1,
+  "conjunto_Zmin": -10.896,
+  "conjunto_Zmax_sin_antena": 17.1,
+  "grosor_conjunto_sin_antena": 27.996,
+  "antena_Zmax": 57.9,
+  "rosca_SMA_sobre_tapa": 4.4,
+  "antena_X": [
+   66.917,
+   111.217
+  ],
+  "techo_plano_X": [
+   3.492,
+   114.675
+  ],
+  "antena_dentro_del_techo_plano": true
+ },
+ "volumenes_mm3": {
+  "tapa": 21319.0,
+  "base": 17436.1,
+  "bandeja": 3207.4,
+  "junta": 797.9,
+  "soporte": 35425.6,
+  "contraplaca": 24942.9,
+  "anillos": 200.8
+ },
+ "volumen_exterior_capsula_mm3": 110048.9,
+ "volumen_interior_mm3": 88664.6,
+ "interferencias_no_previstas": []
+}

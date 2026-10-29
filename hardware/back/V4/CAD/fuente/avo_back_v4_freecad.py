@@ -49,16 +49,17 @@ RE = dict(
     # ----- bandeja de la URTK1.2 sobre la batería
     TRAY_T=0.8, TRAY_HALF_W=21.0, TRAY_RIB=1.2, TRAY_EDGE=0.7,
     STOP_WALL_T=1.2, STOP_WALL_CLR=0.15,
-    CLIPS=((20.0, -1, 6.0), (60.0, -1, 6.0), (20.0, 1, 6.0), (60.0, 1, 6.0)), CLIP_ROOT_Z=2.6, CLIP_T=1.2, CLIP_SLOT=0.4, CLIP_ENG=0.40, CLIP_LIP_H=0.6, CLIP_GAP=0.10,
+    CLIPS=((14.0, -1, 5.0), (60.0, -1, 6.0), (14.0, 1, 5.0), (60.0, 1, 6.0)), CLIP_ROOT_Z=2.6, CLIP_T=1.2, CLIP_SLOT=0.4, CLIP_ENG=0.40, CLIP_LIP_H=0.6, CLIP_GAP=0.10,
     ZED_POST_R=2.4, ZED_PIN=(1.35, 1.0),   # pivotes de la bandeja bajo los agujeros −X de la URTK1.2: Ø4,8 + pasador Ø2,7 × 1,0 en el agujero Ø3,2
     # ----- URTK1.2 (ZED-F9P): misma altura que la Rev E (PCB a Z 9,6; J2 a Z 10,4)
     ZB=9.6, ZED_Y0=-23.2,
     SEP_R=3.2, SEP_GAP=0.2,           # separadores M3 del lado +X (Ø6,4: pared 1,2 alrededor del inserto Ø4,0), a 0,2 de la batería
-    ZED_PAD_R=2.6, ZED_PAD_GAP=0.15,  # pisadores de la tapa sobre los agujeros −X de la URTK1.2
+    ZED_PAD_R=2.0, ZED_PAD_GAP=0.15, ZED_PAD_DY=-1.0,  # pisadores de la tapa sobre los agujeros −X de la URTK1.2
     # ----- topes de la L en la TAPA (bajan del techo alrededor del cuerpo de la L)
     LSTOP_CLR=0.10, LSTOP_T=2.5, LSTOP_ZLOW=1.0,   # holgura al cuerpo, espesor de pared; la pared baja hasta L_BOT + 1,0
     # ----- PCB en la cola
     PCB_Z=2.5, PCB_T=1.0, POCKET_INSET=5.5, POCKET_WALL_X=1.0, PCB_CLR=0.3,
+    RING_R=4.4,                       # anillo exterior (zona libre de la PCB R4,6)
     PCB_KEEP_SCREW=4.05,              # alrededor de cada tornillo que cae en el bolsillo: alojamiento Ø5,9 + 1,1 de pared
     PCB_PINS=((0.0, 0.0),),           # (se recalculan abajo) pivotes de centrado de la PCB desde el fondo del bolsillo
     PCB_PIN=(1.0, 0.8),               # pivote Ø2,0 × 0,8 en agujero NPTH Ø2,2 de la PCB
@@ -69,7 +70,7 @@ RE = dict(
     # ----- antena FPC de 2,4 GHz (ESP32-S3-MINI-1U) en el techo del cuello, lejos de la antena GNSS
     FPC=(36.0, 10.0, 0.2),
     # ----- tornillos de cierre: 8 × M3 en 4 parejas. S3/S4 bajo el canto de la URTK1.2: columna CORTA (M3 × 6 + inserto M3 × 3)
-    SCREWS_SHORT=(2, 3), SHORT_TOP=9.3, INSERT_SHORT=(4.0, 3.3),
+    SCREWS_SHORT=(), SHORT_TOP=9.3, INSERT_SHORT=(4.0, 3.3),   # V4: sin columnas cortas (no se imprimen sin soportes y quedaban bajo los pads de la URTK1.2)
     INS_SUP_Z=None,
 )
 RE["CROWN_R"] = g("HALF_W") ** 2 / (2 * RE["CROWN_DROP"])
@@ -80,6 +81,7 @@ BL, BW, BT = RE["BAT"]; BC = RE["BAT_CLR"]; FT = RE["FRAME_T"]
 BX0 = RE["BAT_X0"]; BX1 = BX0 + BL + 2 * BC; BY = BW / 2 + BC
 BZ0 = RE["BAT_SKIN"]; BZ1 = BZ0 + BT
 TRAY_Z0 = BZ1 + RE["BAT_HEAD"]; TRAY_Z1 = TRAY_Z0 + RE["TRAY_T"]
+NX0 = max(BX0 - FT, g("RIM_W") + 0.15)          # V4: marco y bandeja empiezan detrás del labio de la tapa (cuello)
 # --- URTK1.2: el agujero +X queda a SEP_R + SEP_GAP detrás de la batería
 ZHX, ZHY = P["ZED_HOLES"][1]                 # (40,767; 2,794) desde la esquina −X −Y
 ZED_X1 = BX1 + RE["SEP_GAP"] + RE["SEP_R"] + (g("ZED_SIZE") - ZHX)
@@ -98,9 +100,10 @@ P["XA"] = XA; P["L_TOTAL"] = L
 _PM = os.path.join(HERE, "pcb_mecanica.json")
 PCB_MEC = json.load(open(_PM)) if os.path.exists(_PM) else None
 # --- tornillos (Rev E.4: 8 en 4 parejas; reubicados para la planta corta)
-S_NECK = 7.5; S_TAIL_RECT = ZED_X1 + 5.0; S_MID = (S_NECK + S_TAIL_RECT) / 2
+S_NECK = 7.5; S_TAIL_RECT = ZED_X1 + 5.0; S_MID = ZED_X0 - 5.0   # V4: S3/S4 delante de la URTK1.2 (columnas completas)
 SCREWS = [(S_NECK, -24.3), (S_NECK, 24.3), (S_MID, -24.3), (S_MID, 24.3),
           (S_TAIL_RECT, -24.3), (S_TAIL_RECT, 24.3), (XA + 15.3, -17.0), (XA + 15.3, 17.0)]
+SCREWS = [(round(x * 2) / 2, y) for x, y in SCREWS]       # V4: X a 0,5 mm (puentes en escalón medidos igual que en la Rev E)
 RE["SCREWS"] = [tuple(round(c, 3) for c in s) for s in SCREWS]
 # --- imanes de sujeción (6 × Ø5 × 1) y reed (en la cola, bajo la PCB, a lo largo de Y) con sus 3 imanes en el soporte
 RE["MAGS"] = ((30.0, -23.8), (30.0, 23.8), (52.0, -23.8), (52.0, 23.8), (XA + 8.0, -23.0), (XA + 8.0, 23.0))
@@ -278,13 +281,6 @@ def build_tapa(OUTER, CAV):
     st = fuse_all([box((OX - LB, sg * (LB + c_), zl), (OX + LB + c_ + t_, sg * (LB + c_ + t_), 40)) for sg in (-1, 1)] +
                   [box((OX + LB + c_, -(LB + c_ + t_), zl), (OX + LB + c_ + t_, LB + c_ + t_, 40))]).common(CAV)
     ant = tw.fuse(st).removeSplitter(); kreg("tapa", "ANTENA_TORRE_Y_TOPES_L", ant, "union"); sh = sh.fuse(ant).removeSplitter()
-    # --- pisadores sobre los agujeros −X de la URTK1.2 y sobre la PCB
-    for k_, (px, py) in enumerate(ZED_PTS_MX):
-        pd = vcyl(px, py, RE["ZED_PAD_R"], ZB + ZED_T + RE["ZED_PAD_GAP"], 40).common(MID)
-        kreg("tapa", "PISADOR_URTK_%d" % (k_ + 1), pd, "union"); sh = sh.fuse(pd).removeSplitter()
-    for k_, (px, py) in enumerate(pcb_pads()):
-        pd = vcyl(px, py, RE["PCB_PAD_R"], RE["PCB_Z"] + RE["PCB_T"] + RE["PCB_PAD_GAP"], 40).common(MID)
-        kreg("tapa", "PISADOR_PCB_%d" % (k_ + 1), pd, "union"); sh = sh.fuse(pd).removeSplitter()
     # --- insertos: M3 ≤ 5 mm (Ø4,0 × 5,5) + paso de la punta; columnas cortas: inserto M3 × 3 (Ø4,0 × 3,3), sin paso
     idd, idp, ipd = RE["INSERT"]
     for i_, (sx, sy) in enumerate(SCREWS):
@@ -305,6 +301,14 @@ def build_tapa(OUTER, CAV):
         cv = CAV.copy(); cv.translate(V(0, 0, RE["ZED_CEIL_RELIEF"]))
         t_ = cv.common(box((ZED_X0 - 0.5, ZED_Y0 + 2.0, CEIL - 3.0), (ZED_X0 + 9.5, ZED_Y1 - 1.0, CEIL + 2.0)))
         kreg("tapa", "CORTE_REBAJE_TECHO_CONECTORES_ZED", t_, "corte"); sh = sh.cut(t_)
+    # --- (V4: después del rebaje del techo, para que no queden sueltos) pisadores sobre los agujeros −X de la URTK1.2 y sobre la PCB
+    for k_, (px, py) in enumerate(ZED_PTS_MX):
+        py = py + (RE["ZED_PAD_DY"] if py < 0 else 0.0)        # V4: el del lado −Y se aparta del J1 (USB-C, posición estimada)
+        pd = vcyl(px, py, RE["ZED_PAD_R"], ZB + ZED_T + RE["ZED_PAD_GAP"], 40).common(OUTER_REF[0])   # hasta el techo rebajado
+        kreg("tapa", "PISADOR_URTK_%d" % (k_ + 1), pd, "union"); sh = sh.fuse(pd).removeSplitter()
+    for k_, (px, py) in enumerate(pcb_pads()):
+        pd = vcyl(px, py, RE["PCB_PAD_R"], RE["PCB_Z"] + RE["PCB_T"] + RE["PCB_PAD_GAP"], 40).common(MID)
+        kreg("tapa", "PISADOR_PCB_%d" % (k_ + 1), pd, "union"); sh = sh.fuse(pd).removeSplitter()
     sh = sh.removeSplitter()
     if not sh.isValid(): raise SystemExit("TAPA NO VÁLIDA")
     return sh
@@ -320,7 +324,8 @@ def build_base(OUTER, CAV, CLIP_CAV):
     tong = ring(-(g("RIM_W") + tg), -(g("RIM_W") + tg + tw), ZF, ZF + th)
     md_, _ = RE["MAG"]
     tong = tong.cut(Part.makeCompound([vcyl(sx, sy, col_r(i) + 0.6, -5, 60) for i, (sx, sy) in enumerate(SCREWS)] +
-                                      [vcyl(mx, my, (md_ + RE["MAG_CLR"]) / 2 + 0.2, -5, 60) for mx, my in RE["MAGS"]])).removeSplitter()   # un solo corte (V4: dos cortes seguidos dejaban la base no orientable)
+                                      [vcyl(mx, my, (md_ + RE["MAG_CLR"]) / 2 + 0.2, -5, 60) for mx, my in RE["MAGS"]] +
+                                      [box((-5, -BY - FT - 0.8, -5), (BX0 + 2.0, BY + FT + 0.8, 60))])).removeSplitter()   # V4: sin lengüeta en el cuello sobre la batería   # un solo corte (V4: dos cortes seguidos dejaban la base no orientable)
     fl = fl.fuse(tong).removeSplitter()
     kreg("base", "BASE_placa_ranura_lengueta", fl.removeSplitter(), "cuerpo")
     feats, FN = [], []
@@ -328,7 +333,7 @@ def build_base(OUTER, CAV, CLIP_CAV):
     # ---- separadores +X de la URTK1.2 (suben del suelo, detrás de la batería; inserto M3 ≤ 5 mm)
     for i_, (hx, hy) in enumerate(ZED_PTS_PX): F("URTK_SEPARADOR_%d" % (i_ + 1), vcyl(hx, hy, RE["SEP_R"], ZF - 0.1, ZB))
     # ---- marco de la batería hasta la bandeja; paso del cable en el extremo +X
-    fr = box((BX0 - FT, -BY - FT, ZF - 0.1), (BX1 + FT, BY + FT, TRAY_Z0)).cut(box((BX0, -BY, 0), (BX1, BY, 20)))
+    fr = box((NX0, -BY - FT, ZF - 0.1), (BX1 + FT, BY + FT, TRAY_Z0)).cut(box((BX0, -BY, 0), (BX1, BY, 20)))
     wy0, wy1 = RE["BAT_WIRE_Y"]
     fr = fr.cut(box((BX1 - 1, wy0, BZ0 + 1.0), (BX1 + FT + 1, wy1, 20)))
     fr = fr.cut(column_keep(1.0))
@@ -336,8 +341,8 @@ def build_base(OUTER, CAV, CLIP_CAV):
     # ---- paredes de tope de la bandeja + 4 clics (como la Rev E)
     yo = BY + FT; wt = RE["STOP_WALL_T"]; wc = RE["STOP_WALL_CLR"]; ct, sl, e, lh = RE["CLIP_T"], RE["CLIP_SLOT"], RE["CLIP_ENG"], RE["CLIP_LIP_H"]
     for sg in (-1, 1):
-        wall = box((BX0 - FT, sg * yo, ZF - 0.1), (BX1 + FT, sg * (yo + wt), TRAY_Z0))
-        wall = wall.fuse(box((BX0 - FT, sg * (RE["TRAY_HALF_W"] + wc), TRAY_Z0 - 0.05), (BX1 + FT, sg * (yo + wt), TRAY_Z1))).removeSplitter()
+        wall = box((NX0, sg * yo, ZF - 0.1), (BX1 + FT, sg * (yo + wt), TRAY_Z0))
+        wall = wall.fuse(box((NX0, sg * (RE["TRAY_HALF_W"] + wc), TRAY_Z0 - 0.05), (BX1 + FT, sg * (yo + wt), TRAY_Z1))).removeSplitter()
         for (cx, cs, cw) in RE["CLIPS"]:
             if cs == sg: wall = wall.cut(box((cx - cw / 2 - sl, sg * (yo - 0.01), RE["CLIP_ROOT_Z"] - 1), (cx + cw / 2 + sl, sg * (yo + wt + 5), 30)))
         for (px, py) in ZED_PTS_MX:                                             # muesca para las orejas de la bandeja bajo los pivotes
@@ -405,19 +410,34 @@ def build_base(OUTER, CAV, CLIP_CAV):
 # ============================================================ BANDEJA DE LA URTK1.2 (sobre la batería)
 def build_bandeja(CLIP_CAV):
     hw = RE["TRAY_HALF_W"]
-    t = box((BX0 - FT + 0.15, -hw, TRAY_Z0), (BX1 + FT - 0.15, hw, TRAY_Z1))
+    t = box((NX0 + 0.15, -hw, TRAY_Z0), (BX1 + FT - 0.15, hw, TRAY_Z1))
     pr_ = RE["ZED_POST_R"]; pinr, pinh = RE["ZED_PIN"]
     feats = [t]
     for (px, py) in ZED_PTS_MX:
         feats.append(vcyl(px, py, pr_, TRAY_Z0, ZB))                           # pivote hasta la cara inferior de la URTK1.2 (con su oreja)
         feats.append(vcyl(px, py, pinr, ZB - 0.1, ZB + pinh))                  # pasador dentro del agujero Ø3,2
     # refuerzo +1,2 fuera de la URTK1.2 (cuello) y a lo largo de los bordes
-    rb = box((BX0 - FT + 0.15, -hw + RE["TRAY_EDGE"], TRAY_Z1 - 0.05), (ZED_X0 - 0.6, hw - RE["TRAY_EDGE"], TRAY_Z1 + RE["TRAY_RIB"]))
+    rb = box((NX0 + 0.15, -hw + RE["TRAY_EDGE"], TRAY_Z1 - 0.05), (ZED_X0 - 0.6, hw - RE["TRAY_EDGE"], TRAY_Z1 + RE["TRAY_RIB"]))
     feats.append(rb)
     b = fuse_all(feats)
     b = b.cut(column_keep(0.3)).common(CLIP_CAV)
     for (hx, hy) in ZED_PTS_PX: b = b.cut(vcyl(hx, hy, RE["SEP_R"] + 0.3, -5, 40))
     return b.removeSplitter()
+
+
+# ============================================================ ANILLOS DE LOS SEPARADORES (PCB ↔ URTK1.2)
+def build_anillos():
+    """2 anillos impresos alrededor de los separadores +X de la URTK1.2: apoyan en la cara superior de la PCB y los aprieta la
+    URTK1.2 al atornillarla → la PCB queda sujeta en el lado de la batería sin tornillos propios."""
+    ri, ro = RE["SEP_R"] + 0.15, RE["RING_R"]
+    z0, z1 = RE["PCB_Z"] + RE["PCB_T"], ZB
+    out = []
+    for (x, y) in ZED_PTS_PX:
+        a = vcyl(x, y, ro, z0, z1).cut(vcyl(x, y, ri, z0 - 1, z1 + 1))
+        a = a.common(pocket_face(z0 - 1).extrude(V(0, 0, z1 - z0 + 2)))       # dentro de la planta del bolsillo de la PCB
+        a = a.common(box((BX1 + RE["POCKET_WALL_X"] + 0.15, -40, z0 - 1), (L, 40, z1 + 1)))
+        out.append(a)
+    return Part.makeCompound(out)
 # ============================================================ JUNTA TPU
 def build_junta():
     j0 = g("RIM_W") / 2 - g("GASKET_W") / 2
@@ -545,7 +565,11 @@ def referencias(pcb_comp=None):
     md, mth = RE["MAG"]
     E["imanes_capsula"] = Part.makeCompound([vcyl(mx, my, md / 2, RE["MAG_SKIN"] + 0.02, RE["MAG_SKIN"] + mth) for mx, my in RE["MAGS"]])
     E["imanes_soporte"] = Part.makeCompound([vcyl(mx, my, md / 2, -mth, -0.02) for mx, my in list(RE["MAGS"]) + [tuple(c) for c in RE["REED_MAGS"]]])
-    E["pcb_placa"] = pcb_face().extrude(V(0, 0, RE["PCB_T"]))
+    E["pcb_placa"] = pcb_face().extrude(V(0, 0, RE["PCB_T"])).cut(Part.makeCompound([vcyl(x, y, 1.1, 0, 10) for x, y in pcb_pins()]))
+    if PCB_MEC and PCB_MEC.get("envolventes"):
+        E.pop("sensor_hall_DRV5032", None)                  # ya está en las envolventes (U8)
+        zt = RE["PCB_Z"] + RE["PCB_T"]
+        E["pcb_componentes"] = Part.makeCompound([box((a, b, zt + 0.01), (c, d, zt + h)) for _, a, b, c, d, h in PCB_MEC["envolventes"]])
     if pcb_comp is not None: E["pcb_componentes"] = pcb_comp
     return E
 
@@ -587,7 +611,7 @@ def edges_json(face):
     return out
 
 NOMBRES = dict(tapa="AVO_BACK_V4_TAPA", base="AVO_BACK_V4_BASE", bandeja_urtk="AVO_BACK_V4_BANDEJA_URTK", junta_TPU="AVO_BACK_V4_JUNTA_TPU",
-               soporte="AVO_BACK_V4_SOPORTE", contraplaca="AVO_BACK_V4_CONTRAPLACA")
+               soporte="AVO_BACK_V4_SOPORTE", contraplaca="AVO_BACK_V4_CONTRAPLACA", anillos="AVO_BACK_V4_ANILLOS_SEPARADOR")
 if __name__ == "__main__" or "AVO_RUN" in os.environ:
     import time, shutil
     T0 = time.time(); RES = {}
@@ -600,6 +624,7 @@ if __name__ == "__main__" or "AVO_RUN" in os.environ:
     parts["junta_TPU"] = build_junta()
     parts["soporte"] = build_soporte(); log("soporte", round(time.time() - T0, 1), "s")
     parts["contraplaca"] = build_contraplaca(); log("contraplaca", round(time.time() - T0, 1), "s")
+    parts["anillos"] = build_anillos()
     for d in ("STEP", "BREP", "PROBETAS", "REFERENCIAS"): os.makedirs(os.path.join(OUT, d), exist_ok=True)
     for k, s in parts.items():
         RES[k] = report(s); log(k, RES[k])
@@ -609,6 +634,7 @@ if __name__ == "__main__" or "AVO_RUN" in os.environ:
     for k, s in PR.items():
         RES["probeta_" + k] = report(s); s.exportBrep(os.path.join(OUT, "PROBETAS", "AVO_BACK_V4_" + k + ".brep"))
     E = referencias()
+    shutil.rmtree(os.path.join(OUT, "REFERENCIAS"), ignore_errors=True); os.makedirs(os.path.join(OUT, "REFERENCIAS"))
     for k, s in E.items(): s.exportBrep(os.path.join(OUT, "REFERENCIAS", "_%s.brep" % k))
     pf = pcb_face()
     json.dump(dict(origen="coordenadas de la carcasa (X cuello→cola, Y lateral, mm); KiCad: x = X, y = −Y",

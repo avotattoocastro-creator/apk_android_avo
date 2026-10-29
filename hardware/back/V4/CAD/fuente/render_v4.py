@@ -6,7 +6,7 @@ exec(open(os.path.join(H, "render_revD.py"), encoding="utf-8").read().split('if 
 T = os.path.join(H, "salida", "_tess"); O = os.path.join(H, "salida", "IMAGENES"); os.makedirs(O, exist_ok=True)
 COL.clear()
 COL.update({"AVO_BACK_V4_TAPA": (0.86, 0.87, 0.90), "AVO_BACK_V4_BASE": (0.20, 0.55, 0.85), "AVO_BACK_V4_BANDEJA_URTK": (0.98, 0.78, 0.15),
-            "AVO_BACK_V4_JUNTA_TPU": (0.1, 0.1, 0.1), "AVO_BACK_V4_SOPORTE": (0.93, 0.07, 0.16), "AVO_BACK_V4_CONTRAPLACA": (0.35, 0.37, 0.42),
+            "AVO_BACK_V4_JUNTA_TPU": (0.1, 0.1, 0.1), "AVO_BACK_V4_ANILLOS_SEPARADOR": (0.98, 0.55, 0.15), "AVO_BACK_V4_SOPORTE": (0.93, 0.07, 0.16), "AVO_BACK_V4_CONTRAPLACA": (0.35, 0.37, 0.42),
             "_bateria_654060": (0.92, 0.77, 0.23), "_qi_bobina": (0.72, 0.45, 0.20), "_reed": (0.62, 0.83, 0.90),
             "_urtk_pcb": (0.05, 0.10, 0.35), "_urtk_modulo_ZED": (0.82, 0.82, 0.84), "_urtk_J3_GH6_estimado": (0.95, 0.95, 0.95), "_urtk_J1_USBC_estimado": (0.8, 0.8, 0.82),
             "_urtk_J2_SMA": (0.88, 0.72, 0.30), "_L_tuerca_y_cuerpo_hex": (0.88, 0.72, 0.30), "_L_cuerpo": (0.88, 0.72, 0.30), "_L_rosca_hembra": (0.92, 0.78, 0.35),
@@ -33,7 +33,7 @@ jobs = {
  "07_cola_L": (["AVO_BACK_V4_BASE", "_pcb_placa", "_urtk_pcb", "_urtk_J2_SMA", "_L_tuerca_y_cuerpo_hex", "_L_cuerpo", "_L_rosca_hembra"], -140, 40, (88, 0, 8), 22,
                ((60, -40, -5), (125, 40, 40)), "Cola: J2 + L sobre la PCB", "banda bajo J2/L sin componentes · separadores +X de la URTK1.2 atraviesan la PCB"),
  "08_tapa_interior": (["AVO_BACK_V4_TAPA"], -120, -60, (CX, 0, 10), 50, None, "Tapa — interior",
-                      "8 columnas (S3/S4 cortas bajo la URTK1.2) · topes de la L + torre · pisadores sobre la URTK1.2 y la PCB"),
+                      "8 columnas de cierre (todas completas) · topes de la L + torre · pisadores sobre la URTK1.2 y la PCB"),
  "09_soporte": (["AVO_BACK_V4_SOPORTE", "_imanes_soporte"], -125, 50, (CX, 0, 0), 50, None, "Soporte", "6 imanes de sujeción + 3 del reed · gancho del extremo · 6 insertos M3"),
  "10_cuello": (["AVO_BACK_V4_BASE", "AVO_BACK_V4_BANDEJA_URTK", "_bateria_654060", "_urtk_pcb", "_urtk_modulo_ZED", "_urtk_J3_GH6_estimado", "_urtk_J1_USBC_estimado", "_antena_FPC_2G4"], -150, 38, (22, 0, 8), 20,
                 ((-5, -40, -5), (45, 40, 40)), "Cuello: extremo −X de la URTK1.2 sobre la bandeja", "2 pivotes en los agujeros −X · J1/J3 (estimados) · antena FPC en el techo"),

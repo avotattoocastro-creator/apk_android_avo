@@ -23,7 +23,7 @@ from router import GRID, poly_mask, seg_mask                 # noqa: E402
 from sexpr import find, find_all, parse                      # noqa: E402
 
 SIGNAL_W = {"Potencia": 0.3, "Qi_AC": 0.3, "Default": 0.2}
-POWER = {"QI_RECT", D.VBAT, D.VBUS, D.VIN5, D.VSYS}
+POWER = {"QI_RECT", D.VBAT, D.VBUS, D.VIN5, D.VSYS, "BAT_IN", "BAT_F", D.VZED}
 QIAC = {"QI_AC1", "QI_AC2", "QI_COIL1"}
 
 
