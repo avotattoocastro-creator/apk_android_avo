@@ -40,6 +40,8 @@ def parse(js):
 def main():
     od = sys.argv[1]
     args = sys.argv[2:]
+    if args and args[0] == "--list":   # one code / search term per line ("#" comments, "--search" separator)
+        args = [l.strip() for l in open(args[1], encoding="utf-8") if l.strip() and not l.startswith("#")]
     codes, searches = [], []
     tgt = codes
     for a in args:
@@ -58,6 +60,7 @@ def main():
                 hit = [i for i in items if i["lcsc"] == k]
                 res["parts"][k] = hit[0] if hit else dict(lcsc=k, error="sin respuesta para este código")
             else:
+                items.sort(key=lambda i: (i.get("library") != "base", -(i.get("stock") or 0)))
                 res["search"][k] = items[:10]
         except Exception as e:  # network / format: keep the error as evidence
             (res["parts"] if k in codes else res["search"])[k] = dict(lcsc=k, error=repr(e)[:300])
@@ -66,7 +69,8 @@ def main():
     for k, v in res["parts"].items():
         print(k, v.get("mpn"), "stock", v.get("stock"), v.get("library"), (v.get("prices") or [None])[0], v.get("error", ""))
     for k, v in res["search"].items():
-        print("search", k, [(i.get("lcsc"), i.get("mpn"), i.get("stock"), i.get("library")) for i in v] if isinstance(v, list) else v)
+        print("search", k, [(i.get("lcsc"), i.get("mpn"), i.get("package"), i.get("stock"), i.get("library"),
+                             (i.get("prices") or [None])[0]) for i in v] if isinstance(v, list) else v)
 
 
 if __name__ == "__main__":

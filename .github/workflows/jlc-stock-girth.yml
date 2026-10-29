@@ -27,7 +27,7 @@ jobs:
         working-directory: hardware/girth/PCB
         run: |
           mkdir -p out_stock
-          python3 fuente/stock_jlc.py out_stock $(grep -v '^#' fuente/stock_lista.txt | tr '\n' ' ') | tee out_stock/stock.log
+          python3 fuente/stock_jlc.py out_stock --list fuente/stock_lista.txt | tee out_stock/stock.log
       - name: Guardar en la rama
         run: |
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
