@@ -43,3 +43,31 @@ def test_pad(d=1.0):
     pads = [Pad("1", "smd", "circle", 0, 0, d, d, layers=["F.Cu", "F.Mask"])]
     g = [circle(0, 0, d / 2 + 0.2, "F.CrtYd", 0.05)]
     return Footprint("TestPoint_Pad_D%.1fmm" % d, pads, g, "smd", None, "Test pad (no paste)", height=0.0)
+
+
+def mmc5983ma():
+    """MEMSIC MMC5983MA LGA-16, 3.0 × 3.0 × 1.0 mm, pitch 0.5 mm (datasheet Rev A, 2019-04-03, p. 20).
+    Package pads 0.325 × 0.250 mm, rows/columns centred at ±1.2625 mm, pins at ±0.25 / ±0.75 mm.
+    Top view (KiCad, Y down): pins 4-3-2-1 along the top (pin 1 top right), 5–8 down the left side,
+    9–12 along the bottom (left → right), 16–13 down the right side (16 at the top).
+    Land pads 0.25 × 0.45 mm centred 0.05 mm inside the package pad centre (toe 0.06 mm outside the body)."""
+    pads = []
+    c, w, L = 1.2125, 0.25, 0.45
+    top = {4: -0.75, 3: -0.25, 2: 0.25, 1: 0.75}
+    bot = {9: -0.75, 10: -0.25, 11: 0.25, 12: 0.75}
+    left = {5: -0.75, 6: -0.25, 7: 0.25, 8: 0.75}
+    right = {16: -0.75, 15: -0.25, 14: 0.25, 13: 0.75}
+    for n, x in top.items():
+        pads.append(Pad(n, "smd", "roundrect", x, -c, w, L, rratio=0.2))
+    for n, x in bot.items():
+        pads.append(Pad(n, "smd", "roundrect", x, c, w, L, rratio=0.2))
+    for n, y in left.items():
+        pads.append(Pad(n, "smd", "roundrect", -c, y, L, w, rratio=0.2))
+    for n, y in right.items():
+        pads.append(Pad(n, "smd", "roundrect", c, y, L, w, rratio=0.2))
+    g = rect_lines(-1.5, -1.5, 1.5, 1.5, "F.Fab", 0.1)
+    g += rect_lines(-1.8, -1.8, 1.8, 1.8, "F.CrtYd", 0.05)
+    g += [circle(1.9, -1.95, 0.12, "F.SilkS", 0.1, True)]
+    return Footprint("MEMSIC_MMC5983MA_LGA-16_3x3mm_P0.5mm", pads, g, "smd", None,
+                     "MMC5983MA LGA-16 3x3 mm (MEMSIC datasheet Rev A, land pattern p. 20)",
+                     height=1.0, body=(-1.5, -1.5, 1.5, 1.5))

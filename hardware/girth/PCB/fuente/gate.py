@@ -50,11 +50,11 @@ json.dump(dict(ok=ok, checks=[dict(name=n, ok=o, n=c) for n, o, c in checks],
 assembled = [p for p in parts if not p["dnp"] and not p["no_assembly"]]
 dnp = [p["ref"] for p in parts if p["dnp"]]
 no_lcsc = [p["ref"] for p in assembled if not p["lcsc"]]
-name = "AVO_GIRTH_PCB_FINAL_REPORTE.md" if ok else "AVO_GIRTH_PCB_DIAGNOSTICO_REPORTE.md"
+name = "AVO_GIRTH_PCB_C3_REPORTE.md" if ok else "AVO_GIRTH_PCB_C3_DIAGNOSTICO_REPORTE.md"
 state = ("**DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**"
          if ok else "**DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar")
 L = []
-L.append("# AVO GIRTH · placa de la cincha · REV A — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
+L.append("# AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
 L.append("")
 L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
@@ -105,15 +105,15 @@ if os.path.exists(mp):
     falta = [x[6:] for x in ml if x.startswith("FALTA ")]
     L.append("- Modelos de la librería de KiCad 9.0.0 descargados: %d; sin descargar: %s"
              % (len([x for x in ml if x.startswith("OK ")]), ", ".join(falta) or "ninguno"))
-L.append("- ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). BNO085 y pads de hilo/prueba: sin modelo 3D.")
+L.append("- ESP32-C3-MINI-1U: modelo de Espressif (`fuente/3d`). MMC5983MA y pads de hilo/prueba: sin modelo 3D.")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
 for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (DOCS/AJUSTE_QI.md).",
-          "BNO085 sin existencias en LCSC: pedir por Global Sourcing o reservar.",
-          "Relé G6KU-2F-Y posiblemente en fin de fabricación; altura 5,2 mm → rebaje de 1,3 mm en la tapa.",
-          "Polaridad del relé tomada del símbolo de KiCad; si sale al revés, R40 ↔ R41.",
-          "Antena con conector MHF III / W.FL.",
-          "Cambios en la carcasa (cuna +0,6 mm, ranura del cable, rebaje del relé, postes de la tapa).",
+          "Existencias consultadas en el CI (out_stock/stock_jlc.json): volver a comprobarlas el día del pedido.",
+          "Enclavamiento de la batería (Q10/Q11) calculado, no medido: comprobar tiempos de encendido y de apagado.",
+          "Tensión de umbral de Q11 (AO3400A, 0,65–1,45 V) y tiempos de C40/C41: medir en el prototipo.",
+          "Antena externa con conector del módulo (U.FL / MHF I del ESP32-C3-MINI-1U).",
+          "Cambios en la carcasa (cuna +0,6 mm, ranura del cable, postes de la tapa); ya no hace falta el rebaje del relé.",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)
 open(os.path.join(OUT, name), "w", encoding="utf-8").write("\n".join(L) + "\n")

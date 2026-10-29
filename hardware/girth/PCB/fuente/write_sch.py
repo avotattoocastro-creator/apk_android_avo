@@ -10,12 +10,12 @@ BLOCKS = {   # name: (x0, y0, x1, y1, title) — hoja A2
     "Qi": (15, 22, 200, 205, "RECEPTOR Qi (BQ51013B) · bobina Ø25 · USB por AD/AD-EN"),
     "USB": (205, 22, 370, 205, "USB-C (programación) · ESD · entrada AD"),
     "Cargador": (375, 22, 580, 205, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S 500 mAh"),
-    "ESP32-C6": (15, 210, 200, 405, "ESP32-C6-MINI-1U · arranque · LED · pruebas"),
-    "IMU": (205, 210, 370, 405, "IMU BNO085 (SPI) · alimentación conmutada"),
+    "ESP32-C3": (15, 210, 200, 405, "ESP32-C3-MINI-1U-N4 · arranque · LED · pruebas"),
+    "IMU": (205, 210, 370, 405, "IMU LSM6DS3TR-C + MMC5983MA (I²C)"),
     "3V3": (375, 210, 470, 405, "3,3 V (RT9080) · REED · BATERÍA (ADC)"),
-    "Corte": (475, 210, 580, 405, "CORTE DE BATERÍA: relé biestable G6KU"),
+    "Corte": (475, 210, 580, 405, "CORTE DE BATERÍA: enclavamiento con MOSFET (reed · 5 V · PWR_HOLD)"),
 }
-BLOCK_OF = {"Batería": "3V3", "Reed": "3V3", "Pruebas": "ESP32-C6"}
+BLOCK_OF = {"Batería": "3V3", "Reed": "3V3", "Pruebas": "ESP32-C3"}
 
 
 def sym_for(p):
@@ -130,7 +130,7 @@ def write(path_sch, path_pro, path_parts):
                    dict(name="Qi_AC", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
                         priority=0)],
                   [("QI_AC*", "Qi_AC"), ("QI_COIL*", "Qi_AC"), ("VBUS", "Potencia"), ("VIN5", "Potencia"),
-                   ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("QI_RECT", "Potencia")])
+                   ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_RAW", "Potencia"), ("QI_RECT", "Potencia")])
 
     rows = []
     for p in D.PARTS:

@@ -1,4 +1,7 @@
-"""AVO GIRTH · placa de la cincha REV A — generador del proyecto KiCad 9.
+"""AVO GIRTH · placa de la cincha REV B (ESP32-C3) — generador del proyecto KiCad 9.
+
+REV B: ESP32-C3-MINI-1U-N4 (el C6-MINI-1U no está en JLCPCB), IMU LSM6DS3TR-C + MMC5983MA por I²C y corte de
+batería con enclavamiento de MOSFET (sin relé). La REV A (ESP32-C6) está congelada en ../../PCB_REV_A_C6.
 
 Un solo origen de datos (piezas, redes, posiciones) genera el esquema, la placa, las reglas, la lista de
 piezas para JLCPCB y las comprobaciones. Coordenadas de diseño = las de la cápsula (avo_girth_rev5.py):
@@ -18,14 +21,14 @@ sys.path.insert(0, HERE)
 import board as B                      # noqa: E402
 import project                         # noqa: E402
 import schematic as SCH                # noqa: E402
-from custom_fp import bno085, test_pad, wire_pad   # noqa: E402
+from custom_fp import mmc5983ma, test_pad, wire_pad   # noqa: E402
 from fplib import load, emit, pad_poly, pad_center, pad_copper_layers, uid   # noqa: E402
 from router import Router              # noqa: E402
 from sexpr import Sym                  # noqa: E402
 
 OUT = os.path.join(HERE, "..", "kicad")
 os.makedirs(OUT, exist_ok=True)
-REV, DATE = "A", "2026-10-29"
+REV, DATE = "B", "2026-10-29"
 THICK = 1.0
 
 
@@ -45,7 +48,7 @@ Z_PCB_BOTTOM = 7.8                   # cuna de la batería +0,6 mm (z 7,75): hue
 Z_CEIL = 15.5 - 2.3                  # techo interior de la tapa
 H_MAX = Z_CEIL - (Z_PCB_BOTTOM + THICK) - 0.3        # altura libre sobre la placa con 0,3 de holgura
 SLOT = dict(c=(-29.0, 4.6), w=1.6, h=3.4)           # paso del cable de la batería (fresado)
-LID_POCKET = {"K1": 1.3}                             # rebaje en el techo de la tapa sobre el relé (mm)
+LID_POCKET = {}                                      # REV B: sin relé, no hace falta rebaje en la tapa
 ANT_KEEPOUT = (-3.3, 12.6, 25.5, PW / 2 + 1)        # banda sin cobre bajo la antena FPC (pegada al techo)
 
 
@@ -142,16 +145,14 @@ FP = {
                   M3 + "Package_DFN_QFN.3dshapes/Texas_VQFN-RHL-20.step", 1.0),
     "RGT16": load("VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias.kicad_mod",
                   M3 + "Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step", 1.0),
-    "XTAL3215": load("Crystal_SMD_3215-2Pin_3.2x1.5mm.kicad_mod",
-                     M3 + "Crystal.3dshapes/Crystal_SMD_3215-2Pin_3.2x1.5mm.step", 0.9),
     "USBC": load("USB_C_Receptacle_HRO_TYPE-C-31-M-12.kicad_mod",
                  M3 + "Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step", 3.3),
     "JST_SH2": load("JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.kicad_mod",
                     M3 + "Connector_JST.3dshapes/JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.step", 2.95),
-    "RELAY": load("Relay_DPDT_Omron_G6K-2F-Y.kicad_mod",
-                   M3 + "Relay_SMD.3dshapes/Relay_DPDT_Omron_G6K-2F-Y.step", 5.2),
-    "MINI1U": load("ESP32-C6-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-C6-MINI-1U.STEP", 2.6),
-    "BNO": bno085(),
+    "MINI1U": load("ESP32-C3-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-C3-MINI-1U.STEP", 2.6),
+    "LGA14": load("LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y.kicad_mod",
+                  M3 + "Package_LGA.3dshapes/LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y.step", 0.86),
+    "MMC": mmc5983ma(),
     "WIRE": wire_pad("bobina / reed"),
     "TP": test_pad(1.0),
 }
@@ -160,10 +161,6 @@ for k in ("RHL20", "RGT16"):
     for p in FP[k].pads:
         if p.kind == "thru_hole":
             p.drill, p.w, p.h = 0.3, 0.5, 0.5
-FP["BNO"].model = None
-# the crystal's library silkscreen runs over its own pads' mask openings: drop it (outline stays on Fab)
-from sexpr import find as _find
-FP["XTAL3215"].graphics = [g for g in FP["XTAL3215"].graphics if _find(g, "layer")[1] != "F.SilkS"]
 
 # =============================================================================== piezas y redes
 PARTS = []
@@ -178,16 +175,18 @@ def part(ref, fp, value, pos, rot, nets, lcsc="", mpn="", block="", sym=None, dn
 
 # --- piezas básicas (LCSC verificados en la lista de materiales; ver DOCS) -----------------------------
 LC = {
+    # resistencias y condensadores: todos «Basic» en JLCPCB salvo los C0G de resonancia del Qi y el NTC
+    # (existencias y tipo consultados en el CI: out_stock/stock_jlc.json)
     "0R": "C17168", "22R": "C25092", "100R": "C25076", "330R": "C25104", "200R": "C25087", "1k": "C11702",
-    "3k4": "C4940", "3k6": "C25891", "5k1": "C25905", "10k": "C25744", "20k": "C25765", "100k": "C25741",
+    "3k3": "C25890", "4k7": "C25900", "5k1": "C25905", "10k": "C25744", "20k": "C25765", "100k": "C25741",
     "1M": "C26083",
-    "100n": "C1525", "1u": "C52923", "10n": "C15195", "22n": "C1532", "22p": "C1555", "4u7": "C19666",
-    "10u": "C96446", "22u": "C45783", "470n": "C1623",
+    "100n": "C1525", "1u": "C52923", "10n": "C15195", "22n": "C1532", "4u7": "C19666", "2u2": "C23630",
+    "10u": "C96446", "10u6V3": "C19702", "22u": "C45783", "470n": "C1623",
     "100n C0G": "C97946", "47n C0G": "C21812", "2n2 C0G": "C51795", "1n C0G": "C1636",
-    "NTC10k": "C77131", "G6KU": "C6259328", "AO3400A": "C20917", "2N7002": "C8545", "BAT54C": "C2135",
-    "0R0805": "C17477", "220u": "C79111", "10R0805": "C17415", "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
-    "RT9080": "C841192", "BQ51013B": "C55663", "BQ24072": "C140288", "MINI1U": "C7558096",
-    "BNO085": "C5189642", "XTAL": "C32346", "USBC": "C165948", "JST_SH2": "C160402",
+    "NTC10k": "C77131", "AO3400A": "C20917", "2N7002": "C8545", "BAV70": "C68978",
+    "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
+    "RT9080": "C841192", "BQ51013B": "C55663", "BQ24072": "C140288", "MINI1U": "C2911374",
+    "LSM6DS3TRC": "C967633", "MMC5983MA": "C404329", "USBC": "C165948", "JST_SH2": "C160402",
 }
 
 
@@ -264,8 +263,8 @@ part("U2", "RGT16", "BQ24072RGTR", CH, 0,
 C("C18", "1u", VIN5, GND, (-15.6, -2.6), 90, "Cargador")
 C("C19", "10u 25V", VSYS, GND, (-9.6, -1.6), 90, "Cargador", "C0603")
 C("C20", "10u 25V", VBAT, GND, (-14.6, 0.6), 0, "Cargador", "C0603")
-R("R6", "3k6", "CHG_ISET", GND, (-11.6, -5.6), 0, "Cargador", note="I_carga = 890/3,6k ≈ 247 mA")
-R("R7", "3k4", "CHG_ILIM", GND, (-9.6, -4.6), 90, "Cargador", note="I_entrada = 1525/3,4k = 450 mA")
+R("R6", "3k3", "CHG_ISET", GND, (-11.6, -5.6), 0, "Cargador", note="I_carga = 890/3,3k ≈ 270 mA (0,54 C)")
+R("R7", "3k3", "CHG_ILIM", GND, (-9.6, -4.6), 90, "Cargador", note="I_entrada = 1525/3,3k ≈ 462 mA (< 494 mA del Qi)")
 part("RT2", "R0402", "NTC 10k B3380", (-13.8, -5.6), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"],
      "NCP15XH103F03RC", "Cargador", sym="R")
 R("R8", "100k", "CHG_EN2", VSYS, (-8.6, -2.8), 90, "Cargador", note="EN2 = 1, EN1 = 0: límite por ILIM")
@@ -282,37 +281,39 @@ part("U3", "SOT23-5", "RT9080-33GJ5", LDO, 0, {1: VSYS, 2: GND, 3: VSYS, 4: None
 C("C21", "10u 25V", VSYS, GND, (25.6, -15.6), 90, "3V3", "C0603")
 C("C22", "10u 25V", V3, GND, (19.8, -16.4), 0, "3V3", "C0603")
 
-# ---------------------------------------------------------------------------------------- ESP32-C6 (U4)
-MCU = (11.6, -7.0)
-part("U4", "MINI1U", "ESP32-C6-MINI-1U-N4", MCU, 90,
+# ---------------------------------------------------------------------------------------- ESP32-C3 (U4)
+# ESP32-C3-MINI-1U-N4 (C2911374; alt. -H4 C3013922, 105 °C, misma memoria). Pines del módulo según el símbolo y la
+# huella de Espressif (kicad-libraries). Huella idéntica en pads a la del C6-MINI-1U (origen desplazado 2 mm).
+# Arranque (guía de diseño de Espressif, ESP32-C3): GPIO9 = 1 → arranque normal, 0 → descarga (con GPIO8 = 1);
+# GPIO2 no decide el modo pero se recomienda pull-up. GPIO0–5 pueden despertar del sueño profundo; ADC1 = GPIO0–4.
+MCU = (13.6, -7.0)
+part("U4", "MINI1U", "ESP32-C3-MINI-1U-N4", MCU, 90,
      dict([(n, GND) for n in (1, 2, 11, 14) + tuple(range(36, 54))] +
-          [(3, V3), (4, None), (7, None), (21, None), (32, None), (33, None), (34, None), (35, None),
-           (8, "EN"), (12, "IMU_INT"), (13, "IMU_RST"), (5, "BAT_ADC"), (6, "CHG_PG"), (9, "CHG_STAT"),
-           (10, "IMU_PWR_N"), (15, "REED"), (16, "IMU_WAKE"), (17, "USB_DM"), (18, "USB_DP"),
-           (19, "RLY_ON"), (20, "LED"), (22, "GPIO8"), (23, "BOOT"), (24, "IMU_CS"), (25, "IMU_SCK"),
-           (26, "IMU_MOSI"), (27, "IMU_MISO"), (28, "QI_CHG"), (29, "RLY_OFF"), (30, "U0RX"), (31, "U0TX")]),
-     LC["MINI1U"], "ESP32-C6-MINI-1U-N4 (alt. -H4 C20627095)", "ESP32-C6",
-     sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 IMU_RST"), (5, "IO2 BAT_ADC"),
-                 (6, "IO3 CHG_PG"), (9, "IO4 CHG_STAT"), (10, "IO5 IMU_PWR"), (15, "IO6 REED"),
-                 (16, "IO7 IMU_WAKE"), (22, "IO8"), (23, "IO9 BOOT"), (19, "IO14 RELÉ ON"), (20, "IO15 LED"),
-                 (4, "NC"), (7, "NC"), (21, "NC"), (32, "NC"), (33, "NC"), (34, "NC"), (35, "NC")],
-              R=[(17, "IO12 D-"), (18, "IO13 D+"), (24, "IO18 CS"), (25, "IO19 SCK"), (26, "IO20 MOSI"),
-                 (27, "IO21 MISO"), (28, "IO22 QI_CHG"), (29, "IO23 RELÉ OFF"), (30, "IO17 RXD0"), (31, "IO16 TXD0")] +
+          [(3, V3), (8, "EN"), (12, "IMU_INT"), (13, "REED"), (5, "CHG_STAT"), (6, "BAT_ADC"), (18, "CHG_PG"),
+           (19, "PWR_HOLD"), (20, "I2C_SDA"), (21, "I2C_SCL"), (22, "LED"), (23, "BOOT"), (16, "QI_CHG"),
+           (26, "USB_DM"), (27, "USB_DP"), (30, "U0RX"), (31, "U0TX")] +
+          [(n, None) for n in (4, 7, 9, 10, 15, 17, 24, 25, 28, 29, 32, 33, 34, 35)]),
+     LC["MINI1U"], "ESP32-C3-MINI-1U-N4 (alt. ESP32-C3-MINI-1U-H4 C3013922)", "ESP32-C3",
+     sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 REED"), (5, "IO2 CHG_STAT"),
+                 (6, "IO3 BAT_ADC"), (18, "IO4 CHG_PG"), (19, "IO5 PWR_HOLD"), (20, "IO6 SDA"), (21, "IO7 SCL"),
+                 (22, "IO8 LED"), (23, "IO9 BOOT"), (16, "IO10 QI_CHG")] +
+                [(n, "NC") for n in (4, 7, 9, 10, 15, 17, 24, 25, 28, 29, 32, 33, 34, 35)],
+              R=[(26, "IO18 D-"), (27, "IO19 D+"), (30, "IO20 RXD0"), (31, "IO21 TXD0")] +
                 [(n, "GND") for n in (1, 2, 11, 14) + tuple(range(36, 54))]))
-C("C23", "22u 10V", V3, GND, (11.2, -15.4), 0, "ESP32-C6", "C0805")
-C("C24", "100n", V3, GND, (13.4, -15.2), 0, "ESP32-C6")
-R("R11", "10k", "EN", V3, (16.2, -15.2), 90, "ESP32-C6")
-C("C25", "1u", "EN", GND, (17.4, -15.2), 90, "ESP32-C6")
-R("R12", "10k", "BOOT", V3, (21.0, -2.0), 0, "ESP32-C6")
-R("R13", "10k", "GPIO8", V3, (21.0, -3.2), 0, "ESP32-C6")
-R("R14", "10k", "LED", GND, (21.0, -10.2), 0, "ESP32-C6", note="GPIO15 (strapping) a nivel definido")
-R("R15", "1k", "LED", "LED_A", (21.0, -11.4), 0, "ESP32-C6")
-part("D1", "LED0603", "LED verde", (21.4, -12.8), 180, {1: GND, 2: "LED_A"}, LC["LED"], block="ESP32-C6",
-     sym="LED")
+C("C23", "22u 10V", V3, GND, (11.2, -15.4), 0, "ESP32-C3", "C0805")
+C("C24", "100n", V3, GND, (13.4, -15.2), 0, "ESP32-C3")
+R("R11", "10k", "EN", V3, (16.2, -15.2), 90, "ESP32-C3")
+C("C25", "1u", "EN", GND, (17.4, -15.2), 90, "ESP32-C3")
+R("R12", "10k", "BOOT", V3, (21.0, -2.0), 0, "ESP32-C3", note="GPIO9 strapping: 1 = arranque normal")
+R("R13", "10k", "LED", V3, (21.0, -3.2), 0, "ESP32-C3", note="GPIO8 strapping: 1 en el arranque (LED apagado)")
+R("R15", "1k", "LED", "LED_K", (21.0, -11.4), 0, "ESP32-C3")
+part("D1", "LED0603", "LED rojo", (21.4, -12.8), 180, {1: "LED_K", 2: V3}, LC["LED"], "KT-0603R", "ESP32-C3",
+     sym="LED", note="activo a nivel bajo (GPIO8 = 0 enciende)")
 part("TP1", "TP", "EN", (4.0, -17.2), 0, {1: "EN"}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP2", "TP", "BOOT", (6.0, -17.2), 0, {1: "BOOT"}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP3", "TP", "GND", (8.0, -17.2), 0, {1: GND}, block="Pruebas", sym="TP", no_assembly=True)
-part("TP4", "TP", "TXD0", (4.0, -15.2), 0, {1: "U0TX"}, block="Pruebas", sym="TP", no_assembly=True)
+part("TP4", "TP", "TXD0", (4.0, -15.2), 0, {1: "U0TX"}, block="Pruebas", sym="TP", no_assembly=True,
+     note="UART0 de la ROM: registro y recuperación por puerto serie")
 part("TP5", "TP", "RXD0", (6.0, -15.2), 0, {1: "U0RX"}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP6", "TP", "3V3", (8.0, -15.2), 0, {1: V3}, block="Pruebas", sym="TP", no_assembly=True)
 part("TP7", "TP", "VBAT", (10.0, -17.6), 0, {1: VBAT}, block="Pruebas", sym="TP", no_assembly=True)
@@ -337,112 +338,75 @@ R("R18", "22R", "USB_DP_C", "USB_DP", (21.0, -5.6), 0, "USB")
 R("R19", "22R", "USB_DM_C", "USB_DM", (21.0, -6.8), 0, "USB")
 C("C26", "1u", VBUS, GND, (27.2, -8.6), 90, "USB")
 
-# ---------------------------------------------------------------------------------------- IMU (U5)
+# ---------------------------------------------------------------------------------------- IMU (U5, U7)
+# LSM6DS3TR-C (acelerómetro + giroscopio, LGA-14L 2,5 × 3) y MMC5983MA (magnetómetro, LGA-16 3 × 3) en el mismo I²C
+# (GPIO6 SDA, GPIO7 SCL, 4,7 k a 3,3 V). Mismas 9 magnitudes brutas que envía el protocolo de la cincha (IMU_FMT_9AXIS).
+# La huella del LSM6 admite también el LSM6DSV16X (C5267406, misma distribución de pines; el firmware detecta cuál).
+#  LSM6: SA0 a GND → 0x6A; CS a 3,3 V → I²C; SDx/SCx a GND (sin concentrador auxiliar); OCS_Aux/SDO_Aux sin conectar.
+#  MMC5983MA: 0x30; SPI_CS a VDDIO → I²C; CAP con 10 µF; INT sin conectar (lectura por sondeo).
 IMU = (0.0, 3.0)
-part("U5", "BNO", "BNO085", IMU, 0,
-     {1: None, 2: GND, 3: "IMU_VDD", 4: "IMU_BOOTN", 5: "IMU_PS1", 6: "IMU_WAKE", 7: None, 8: None,
-      9: "IMU_CAP", 10: GND, 11: "IMU_RST", 12: None, 13: None, 14: "IMU_INT", 15: "IMU_ENV_SCL",
-      16: "IMU_ENV_SDA", 17: "IMU_MOSI", 18: "IMU_CS", 19: "IMU_SCK", 20: "IMU_MISO", 21: None, 22: None,
-      23: None, 24: None, 25: GND, 26: "IMU_XOUT", 27: "IMU_XIN", 28: "IMU_VDD"},
-     LC["BNO085"], "BNO085 (alt. BNO086)", "IMU",
-     sym=dict(L=[(3, "VDD"), (28, "VDDIO"), (9, "CAP"), (4, "BOOTN"), (11, "NRST"), (5, "PS1"),
-                 (6, "PS0/WAKE"), (10, "CLKSEL0"), (27, "XIN32"), (26, "XOUT32"), (2, "GND"), (25, "GND")],
-              R=[(18, "H_CSN"), (19, "SCK/SCL"), (17, "MOSI/SA0"), (20, "MISO/SDA"), (14, "H_INTN"),
-                 (15, "ENV_SCL"), (16, "ENV_SDA"), (1, "NC"), (7, "NC"), (8, "NC"), (12, "NC"), (13, "NC"),
-                 (21, "NC"), (22, "NC"), (23, "NC"), (24, "NC")]))
-part("Y1", "XTAL3215", "32,768 kHz 12,5 pF", (-3.0, 6.9), 0, {1: "IMU_XIN", 2: "IMU_XOUT"}, LC["XTAL"],
-     "Q13FC13500004", "IMU", sym="XTAL")
-C("C27", "22p", "IMU_XIN", GND, (-5.2, 8.6), 0, "IMU")
-C("C28", "22p", "IMU_XOUT", GND, (-0.8, 8.6), 0, "IMU")
-C("C29", "100n", "IMU_VDD", GND, (-5.6, 3.6), 90, "IMU")
-C("C30", "100n", "IMU_VDD", GND, (-5.6, 5.8), 90, "IMU")
-C("C31", "4u7", "IMU_VDD", GND, (-7.0, 4.6), 90, "IMU", "C0603")
-C("C32", "100n", "IMU_CAP", GND, (-2.6, -0.6), 0, "IMU")
-R("R20", "10k", "IMU_BOOTN", "IMU_VDD", (-5.6, 1.4), 0, "IMU")
-R("R21", "10k", "IMU_PS1", "IMU_VDD", (-5.6, 0.2), 0, "IMU", note="PS1 = 1, PS0 = 1 → SPI")
-R("R22", "10k", "IMU_PS1", GND, (-5.6, -1.0), 0, "IMU", dnp=True, note="I²C: montar R22/R23, quitar R21")
-R("R23", "10k", "IMU_WAKE", GND, (-4.4, -2.2), 0, "IMU", dnp=True)
-R("R24", "10k", "IMU_RST", "IMU_VDD", (-0.6, -2.0), 90, "IMU")
-R("R25", "10k", "IMU_CS", "IMU_VDD", (2.4, 5.2), 90, "IMU")
-R("R26", "10k", "IMU_ENV_SCL", "IMU_VDD", (1.4, -1.0), 90, "IMU")
-R("R27", "10k", "IMU_ENV_SDA", "IMU_VDD", (2.6, -1.0), 90, "IMU")
-R("R28", "4k7", "IMU_SCK", "IMU_VDD", (3.6, 5.2), 90, "IMU", dnp=True, note="pull-up I²C (sin montar)")
-R("R29", "4k7", "IMU_MISO", "IMU_VDD", (4.8, 5.2), 90, "IMU", dnp=True)
-part("Q3", "SOT23", "AO3401A", (3.6, 9.4), 0, {1: "IMU_PWR_N", 2: V3, 3: "IMU_VDD"}, LC["AO3401A"],
-     block="IMU", sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="alimentación del BNO (LOW = encendido)")
-R("R30", "100k", "IMU_PWR_N", V3, (6.0, 9.4), 90, "IMU")
+part("U5", "LGA14", "LSM6DS3TR-C", IMU, 0,
+     {1: GND, 2: GND, 3: GND, 4: "IMU_INT", 5: V3, 6: GND, 7: GND, 8: V3, 9: None, 10: None, 11: None, 12: V3,
+      13: "I2C_SCL", 14: "I2C_SDA"},
+     LC["LSM6DS3TRC"], "LSM6DS3TR-C (alt. LSM6DSV16XTR C5267406)", "IMU",
+     sym=dict(L=[(8, "VDD"), (5, "VDDIO"), (12, "CS"), (1, "SDO/SA0"), (2, "SDx"), (3, "SCx"), (6, "GND"), (7, "GND")],
+              R=[(13, "SCL"), (14, "SDA"), (4, "INT1"), (9, "INT2"), (10, "OCS_Aux"), (11, "SDO_Aux")]))
+C("C27", "100n", V3, GND, (-2.6, 3.0), 90, "IMU", note="VDD del LSM6")
+C("C28", "100n", V3, GND, (2.6, 3.0), 90, "IMU", note="VDDIO del LSM6")
+R("R20", "4k7", "I2C_SDA", V3, (4.0, 1.0), 90, "IMU", note="pull-up I²C")
+R("R21", "4k7", "I2C_SCL", V3, (5.1, 1.0), 90, "IMU", note="pull-up I²C")
+part("U7", "MMC", "MMC5983MA", (-8.0, 10.0), 0,
+     {1: "I2C_SCL", 2: V3, 3: None, 4: V3, 5: None, 6: None, 7: None, 8: None, 9: GND, 10: "MAG_CAP", 11: GND,
+      12: None, 13: V3, 14: None, 15: None, 16: "I2C_SDA"},
+     LC["MMC5983MA"], "MMC5983MA", "IMU",
+     sym=dict(L=[(2, "VDD"), (13, "VDDIO"), (4, "SPI_CS"), (10, "CAP"), (9, "GND"), (11, "GND")],
+              R=[(1, "SCL"), (16, "SDA"), (15, "INT"), (5, "SPI_SDO"), (3, "NC"), (6, "NC"), (7, "NC"), (8, "NC"),
+                 (12, "NC"), (14, "NC")]))
+C("C29", "1u", V3, GND, (-10.6, 10.0), 90, "IMU", note="VDD del MMC5983MA")
+C("C30", "10u 6V3", "MAG_CAP", GND, (-8.0, 7.4), 0, "IMU", "C0603", lcsc=LC["10u6V3"],
+  note="CAP (SET/RESET): >= 10 µF de baja ESR, junto al pin 10")
+C("C31", "100n", V3, GND, (-5.4, 10.0), 90, "IMU", note="VDDIO del MMC5983MA")
 
 # ---------------------------------------------------------------------------------------- reed y batería
 part("SW1", "WIRE", "REED (1)", (-1.27, -17.8), 0, {1: "REED_HI"}, block="Reed", sym="TP", no_assembly=True,
      note="reed 14 × 3,2 del suelo de la cápsula")
 part("SW2", "WIRE", "REED (2)", (1.27, -17.8), 0, {1: "BAT_RAW"}, block="Reed", sym="TP", no_assembly=True)
-R("R31", "100k", "REED", V3, (-1.6, -13.2), 90, "Reed", note="GPIO6: LOW = reed cerrado (cápsula en el soporte)")
+R("R31", "100k", "REED", V3, (-1.6, -13.2), 90, "Reed", note="GPIO1: LOW = reed cerrado (cápsula en el soporte)")
 C("C33", "10n 50V", "REED", GND, (-0.4, -13.2), 90, "Reed")
-R("R32", "1M", VBAT, "BAT_ADC", (2.6, -12.8), 90, "Batería", note="divisor 1:2 → GPIO2 (ADC1_CH2)")
+R("R32", "1M", VBAT, "BAT_ADC", (2.6, -12.8), 90, "Batería", note="divisor 1:2 → GPIO3 (ADC1_CH3)")
 R("R33", "1M", "BAT_ADC", GND, (3.8, -12.8), 90, "Batería")
 C("C34", "100n", "BAT_ADC", GND, (5.0, -12.8), 90, "Batería")
 
-# ---------------------------------------------------------------------------------------- corte de batería (K1)
-# Relé biestable de una bobina (Omron G6KU-2F-Y DC3, 5,2 mm). Sus dos polos en paralelo cortan el + de la batería.
-#  · ENCENDER sin alimentación: al cerrarse el reed (cápsula en el soporte) o al llegar 5 V (Qi o USB), el pulso de
-#    C40–C41 (≈ 40 ms) pasa por la bobina de K_A a K_B; Q11 cierra K_B a masa durante el pulso.
-#  · APAGAR: el ESP32 pone GPIO23 a HIGH ~20 ms: Q13 lleva K_A a masa y Q14 lleva K_B a VBAT (bobina al revés);
-#    Q12 anula Q11 para que no haya cortocircuito. Al abrirse el relé todo queda a 0 µA.
-#  · Arranque suave: el relé cierra sobre Q10 (PMOS) apagado; C43/R51 lo encienden en ~0,1 s, así los contactos no
-#    ven el pico de carga de los condensadores (el reed de la espalda se soldó por eso).
-#  · Polaridad: se supone que el pulso K_A(+)→K_B(−) cierra los contactos NA (4 y 5). Si al probar es al revés, se
-#    quita R40 y se monta R41 (contactos NC): no hace falta cambiar nada más.
-part("K1", "RELAY", "G6KU-2F-Y DC3", (-11.5, 15.6), 90,
-     {1: "K_A", 8: "K_B", 3: "BAT_RAW", 6: "BAT_RAW", 4: "RLY_NO", 5: "RLY_NO", 2: "RLY_NC", 7: "RLY_NC"},
-     LC["G6KU"], "G6KU-2F-Y-TR DC3", "Corte",
-     sym=dict(L=[(1, "BOBINA A"), (8, "BOBINA B")], R=[(3, "COM1"), (6, "COM2"), (4, "NA1"), (5, "NA2"),
-                                                     (2, "NC1"), (7, "NC2")]))
-R("R40", "0R", "RLY_NO", "BAT_SW", (-4.6, 16.0), 90, "Corte", fp="R0805", note="contactos NA (por defecto)")
-R("R41", "0R", "RLY_NC", "BAT_SW", (-17.8, 14.6), 90, "Corte", fp="R0805", dnp=True,
-  note="montar en lugar de R40 si la polaridad del relé es la contraria")
-part("Q10", "SOT23", "AO3401A", (-19.0, 11.0), 0, {1: "SS_G", 2: "BAT_SW", 3: VBAT}, LC["AO3401A"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="arranque suave tras el relé")
-C("C43", "100n", "BAT_SW", "SS_G", (-16.0, 10.0), 0, "Corte")
-R("R51", "1M", "SS_G", GND, (-16.0, 8.9), 0, "Corte")
-part("D10", "SOT23", "BAT54C", (-18.8, -14.6), 0, {1: "REED_HI", 2: VIN5, 3: "RLY_P"}, LC["BAT54C"],
-     block="Corte", sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="reed o 5 V → pulso de encendido")
-# pulso: el relé pide ≥ 10 ms con ≥ 2,25 V en la bobina (91 Ω) → 2 × 220 µF de polímero (τ ≈ 40 ms)
-C("C40", "220u 6V3 polímero", "RLY_P", "K_A", (-23.2, 13.6), 90, "Corte", "TANT_B", lcsc=LC["220u"])
-C("C41", "220u 6V3 polímero", "RLY_P", "K_A", (-26.6, 15.2), 90, "Corte", "TANT_B", lcsc=LC["220u"])
-R("R44", "10k", "RLY_P", GND, (-17.6, -16.9), 0, "Corte", note="descarga del pulso")
-R("R45", "10k", "RLY_P", "RLY_GB", (-15.7, -16.9), 0, "Corte")
-R("R46", "100k", "RLY_GB", GND, (-13.8, -16.9), 0, "Corte")
-part("Q11", "SOT23", "AO3400A", (-15.2, -14.6), 0, {1: "RLY_GB", 2: GND, 3: "K_B"}, LC["AO3400A"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="K_B a masa durante el pulso de encendido")
-part("Q12", "SOT23", "2N7002", (-11.6, -14.6), 0, {1: "RLY_OFF", 2: GND, 3: "RLY_GB"}, LC["2N7002"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-part("Q13", "SOT23", "AO3400A", (-8.0, -14.6), 0, {1: "RLY_OFF", 2: GND, 3: "K_A"}, LC["AO3400A"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-part("Q14", "SOT23", "AO3401A", (-4.4, -14.6), 0, {1: "RLY_PG", 2: VBAT, 3: "K_B"}, LC["AO3401A"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]))
-part("Q15", "SOT23", "2N7002", (-7.4, -10.4), 0, {1: "RLY_OFF", 2: GND, 3: "RLY_PG"}, LC["2N7002"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-R("R47", "100k", "RLY_PG", VBAT, (-11.9, -16.9), 0, "Corte")
-R("R48", "100k", "RLY_OFF", GND, (-10.0, -16.9), 0, "Corte", note="relé quieto durante el arranque del ESP32")
+# ---------------------------------------------------------------------------------------- corte de batería (Q10)
+# Enclavamiento con MOSFET (sustituye al relé de la REV A). Q10 (PMOS) une la celda (BAT_RAW) con VBAT del cargador;
+# su puerta tiene 1 MΩ a la fuente (apagado: Vgs = 0, solo la fuga del MOSFET). Q11 (NMOS de umbral bajo) la lleva a
+# masa cuando su puerta PWR_G supera ~1,45 V. PWR_G (C41 2,2 µF + R42 1 MΩ) se carga por tres caminos con diodos:
+#  · REED: al cerrarse el reed, C40 (10 µF) da un impulso (D11) que mantiene PWR_G ≥ 1,45 V unos 2,5 s: el ESP32
+#    arranca y pone PWR_HOLD. Es por flanco: con el reed cerrado el sistema se puede apagar igual (apagado remoto).
+#  · PWR_HOLD (GPIO5, D10 A2): el firmware lo mantiene a 1. Si el ESP32 se reinicia, C41 sostiene PWR_G > 1,45 V
+#    unos 1,3 s, más de lo que tarda en volver a poner PWR_HOLD. Para apagar: PWR_HOLD = 0 → corte en ~3 s.
+#  · VIN5 (Qi o USB, D10 A1): con la base puesta el corte está siempre cerrado: nunca queda bloqueado al cargar.
+# Batería agotada (protección de la celda abierta): con la base, el diodo interno de Q10 deja pasar la precarga del
+# BQ24072 hacia la celda; cuando sube la tensión, Q10 conduce del todo.
+part("Q10", "SOT23", "AO3401A", (-19.0, 11.0), 0, {1: "PWR_PG", 2: "BAT_RAW", 3: VBAT}, LC["AO3401A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="interruptor de la batería (PMOS)")
+R("R40", "1M", "BAT_RAW", "PWR_PG", (-19.0, 13.6), 0, "Corte", note="Q10 apagado por defecto")
+part("Q11", "SOT23", "AO3400A", (-15.6, 11.0), 0, {1: "PWR_G", 2: GND, 3: "PWR_PG"}, LC["AO3400A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="Vth 0,65–1,45 V")
+C("C41", "2u2", "PWR_G", GND, (-15.6, 14.0), 0, "Corte", "C0603", note="sostiene el corte durante un reinicio")
+R("R42", "1M", "PWR_G", GND, (-13.6, 14.0), 0, "Corte")
+part("D10", "SOT23", "BAV70", (-12.0, 11.0), 0, {1: VIN5, 2: "PWR_HOLD", 3: "PWR_G"}, LC["BAV70"], block="Corte",
+     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="5 V de carga o PWR_HOLD → PWR_G")
+part("D11", "SOT23", "BAV70", (-12.0, 14.6), 0, {1: "REED_PULSE", 2: "REED_PULSE", 3: "PWR_G"}, LC["BAV70"],
+     block="Corte", sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="impulso del reed → PWR_G")
+C("C40", "10u 6V3", "REED_HI", "REED_PULSE", (-9.0, 14.6), 0, "Corte", "C0603", lcsc=LC["10u6V3"],
+  note="impulso de encendido al cerrarse el reed")
+R("R41", "1M", "REED_PULSE", GND, (-9.0, 12.8), 0, "Corte")
+R("R43", "100k", "PWR_HOLD", GND, (-10.0, 16.6), 0, "Corte", note="PWR_HOLD a 0 mientras arranca el ESP32")
 part("Q16", "SOT23", "2N7002", (-3.8, -10.4), 0, {1: "REED_G", 2: GND, 3: "REED"}, LC["2N7002"], block="Reed",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="reed (a + batería) → GPIO6 a 3,3 V")
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="reed (a + batería) → GPIO1 a 3,3 V")
 R("R49", "100k", "REED_HI", "REED_G", (-8.1, -16.9), 0, "Reed")
 R("R50", "1M", "REED_G", GND, (-6.2, -16.9), 0, "Reed")
-
-# Encendido del relé desde el firmware (GPIO14): si el ESP32 está alimentado por el cargador (camino de potencia del
-# BQ24072) con el relé abierto, lo vuelve a cerrar. Así el sistema nunca queda bloqueado apagado con la base puesta.
-#  SET por firmware: GPIO14 HIGH 20 ms → Q18 baja la puerta de Q17 (VSYS → R52 → K_A) y D11 enciende Q11 (K_B a masa).
-#  Q12 (GPIO23) anula Q11; si por error se activan GPIO14 y GPIO23 a la vez, R52 limita el cruce a ~0,4 A.
-part("Q17", "SOT23", "AO3401A", (-12.9, 8.8), 0, {1: "RLY_SG", 2: VSYS, 3: "K_A_SET"}, LC["AO3401A"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]))
-R("R52", "10R", "K_A_SET", "K_A", (-14.6, 6.0), 0, "Corte", fp="R0805", note="limita el cruce del puente H")
-R("R53", "100k", "RLY_SG", VSYS, (-11.8, 6.2), 0, "Corte")
-part("Q18", "SOT23", "2N7002", (-9.4, 8.8), 0, {1: "RLY_ON", 2: GND, 3: "RLY_SG"}, LC["2N7002"], block="Corte",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-R("R54", "100k", "RLY_ON", GND, (-9.8, 6.2), 0, "Corte", note="relé quieto en el arranque del ESP32")
-R("R55", "1k", "RLY_ON", "RLY_ON_D", (-8.3, 5.6), 90, "Corte")
-part("D11", "SOT23", "BAT54C", (-5.9, 8.8), 0, {1: "RLY_ON_D", 2: None, 3: "RLY_GB"}, LC["BAT54C"], block="Corte",
-     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="GPIO14 → puerta de Q11 (bloquea la vuelta)")
 
 # --------------------------------------------------------------------------------- colocación (X, Y, giro)
 POS = {
@@ -463,20 +427,19 @@ POS = {
     "J2": (-24.2, 6.3, 270),
     # 3,3 V
     "U3": (3.0, -10.0, 0), "C21": (0.2, -10.0, 90), "C22": (6.0, -10.0, 90),
-    # ESP32-C6
+    # ESP32-C3
     "C23": (11.0, -15.6, 0), "C24": (13.8, -15.4, 0), "R11": (15.6, -15.4, 90), "C25": (16.8, -15.4, 90),
     "R12": (17.0, 1.2, 90), "R13": (18.2, 1.2, 90),
-    "R14": (21.7, -9.4, 0), "R15": (21.7, -10.6, 0), "D1": (21.9, -12.0, 0),
+    "R15": (21.7, -10.6, 0), "D1": (21.9, -12.0, 0),
     # USB
     "R16": (22.0, 6.4, 90), "R17": (23.2, 6.4, 90), "U6": (24.9, -8.0, 0),
     "R18": (21.7, -6.6, 0), "R19": (21.7, -7.8, 0), "C26": (24.8, -11.4, 0),
     # IMU
-    "Y1": (-1.0, 7.4, 180), "C27": (-3.6, 7.4, 90), "C28": (1.9, 7.4, 90),
-    "C29": (-4.6, 3.1, 0), "C30": (-4.4, 5.8, 0), "C31": (-6.4, 4.8, 90),
-    "C32": (-0.6, -0.4, 0), "R20": (-4.6, 2.0, 0), "R21": (-4.6, 0.8, 0), "R22": (-4.6, -0.4, 0),
-    "R23": (-2.6, -0.6, 0), "R24": (1.4, -0.6, 0), "R25": (4.0, 5.4, 90), "R26": (3.8, 0.6, 90),
-    "R27": (4.9, 0.6, 90), "R28": (5.1, 5.4, 90), "R29": (6.2, 5.4, 90),
-    "Q3": (6.2, 8.8, 0), "R30": (8.6, 8.8, 90),
+    "U7": (-5.0, 9.6, 0), "C29": (-7.4, 9.6, 90), "C31": (-5.0, 12.0, 0), "C30": (-5.0, 7.0, 0),
+    # corte de batería
+    "Q10": (-19.0, 11.0, 0), "Q11": (-15.6, 11.0, 0), "D10": (-12.2, 11.0, 0), "R40": (-19.0, 13.8, 0),
+    "C41": (-15.6, 14.2, 0), "R42": (-13.2, 14.2, 90), "D11": (-10.6, 14.6, 0), "C40": (-7.6, 14.6, 90),
+    "R41": (-7.6, 17.2, 0), "R43": (-12.6, 17.6, 0),
     # reed, batería, pruebas
     "R31": (-1.6, -13.2, 90), "C33": (-0.4, -13.2, 90),
     "R32": (2.6, -13.2, 90), "R33": (3.8, -13.2, 90), "C34": (5.0, -13.2, 90),

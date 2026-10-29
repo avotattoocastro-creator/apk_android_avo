@@ -489,6 +489,10 @@
       },
       {
         "netclass": "Potencia",
+        "pattern": "BAT_RAW"
+      },
+      {
+        "netclass": "Potencia",
         "pattern": "QI_RECT"
       }
     ]

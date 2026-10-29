@@ -1,6 +1,6 @@
-name: Build AVO GIRTH PCB (KiCad 9)
+name: Build AVO GIRTH PCB REV B ESP32-C3 (KiCad 9)
 
-# Ruteado (Freerouting o placa reparada) → zonas → DRC con paridad y ERC → PUERTA → (solo si pasa) ficheros FINAL.
+# Ruteado (Freerouting o placa reparada) → zonas → DRC con paridad y ERC → PUERTA → (solo si pasa) ficheros de fabricación C3.
 # Si la puerta falla, el job termina en ROJO; los informes de diagnóstico se guardan igualmente.
 
 on:
@@ -110,30 +110,30 @@ jobs:
           if [ $rc -eq 0 ]; then echo "ok=true" >> $GITHUB_OUTPUT; else echo "ok=false" >> $GITHUB_OUTPUT; fi
           exit 0
 
-      - name: Ficheros de fabricación FINAL (solo si la puerta pasa)
+      - name: Ficheros de fabricación C3 (solo si la puerta pasa)
         if: steps.gate.outputs.ok == 'true'
         run: |
           set -ex
           P=hardware/girth/PCB
-          mkdir -p $P/out/FINAL $P/out/gerber
+          mkdir -p $P/out/C3 $P/out/gerber
           docker run --rm -u 0 -e HOME=/tmp -e KICAD9_3DMODEL_DIR=/w/$P/out/modelos3d -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
             set -ex
             kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
             kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
             kicad-cli pcb export pos --format csv --units mm --side both -o out/posiciones_kicad.csv kicad/AVO_GIRTH_PCB.kicad_pcb
-            kicad-cli pcb export step --subst-models --force -o out/FINAL/AVO_GIRTH_PCB_FINAL_STEP.step kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export step --subst-models --force -o out/C3/AVO_GIRTH_PCB_C3_STEP.step kicad/AVO_GIRTH_PCB.kicad_pcb
             chmod -R a+rw out
           '
           cd $P
           python3 fuente/jlc.py
-          cp out/JLCPCB_BOM.csv out/FINAL/AVO_GIRTH_PCB_FINAL_BOM.csv
-          cp out/JLCPCB_CPL.csv out/FINAL/AVO_GIRTH_PCB_FINAL_CPL.csv
-          cp out/drc.rpt out/FINAL/AVO_GIRTH_PCB_FINAL_DRC.txt
-          cp out/erc.rpt out/FINAL/AVO_GIRTH_PCB_FINAL_ERC.txt
-          cp out/AVO_GIRTH_PCB_FINAL_REPORTE.md out/FINAL/
-          (cd out/gerber && zip -q ../FINAL/AVO_GIRTH_PCB_FINAL_GERBER_JLCPCB.zip *)
-          mkdir -p out/FINAL/KiCad && cp kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_sch kicad/AVO_GIRTH_PCB.kicad_pro out/FINAL/KiCad/
-          (cd out/FINAL && sha256sum *.* KiCad/* > SHA256SUMS.txt)
+          cp out/JLCPCB_BOM.csv out/C3/AVO_GIRTH_PCB_C3_BOM_JLCPCB.csv
+          cp out/JLCPCB_CPL.csv out/C3/AVO_GIRTH_PCB_C3_CPL_JLCPCB.csv
+          cp out/drc.rpt out/C3/AVO_GIRTH_PCB_C3_DRC.txt
+          cp out/erc.rpt out/C3/AVO_GIRTH_PCB_C3_ERC.txt
+          cp out/AVO_GIRTH_PCB_C3_REPORTE.md out/C3/
+          (cd out/gerber && zip -q ../C3/AVO_GIRTH_PCB_C3_GERBER_JLCPCB.zip *)
+          mkdir -p out/C3/KiCad && cp kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_sch kicad/AVO_GIRTH_PCB.kicad_pro out/C3/KiCad/
+          (cd out/C3 && sha256sum *.* KiCad/* > SHA256SUMS.txt)
 
       - name: Guardar resultados en la rama
         if: always()
@@ -154,12 +154,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: AVO-GIRTH-PCB-${{ steps.gate.outputs.ok == 'true' && 'FINAL' || 'DIAGNOSTICO' }}
+          name: AVO-GIRTH-PCB-C3-${{ steps.gate.outputs.ok == 'true' && 'FABRICACION' || 'DIAGNOSTICO' }}
           path: hardware/girth/PCB/out
 
       - name: Resultado
         run: |
           if [ "${{ steps.gate.outputs.ok }}" != "true" ]; then
-            echo "::error title=Puerta de fabricación::DRC/ERC con errores o conexiones incompletas: no hay ficheros FINAL"
+            echo "::error title=Puerta de fabricación::DRC/ERC con errores o conexiones incompletas: no hay ficheros de fabricación"
             exit 1
           fi

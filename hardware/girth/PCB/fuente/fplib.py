@@ -111,7 +111,8 @@ def load(fname, model=None, height=0.0):
     fp = Footprint(str(name), pads, gfx, attr, model, descr[1] if descr else "", height)
     m = find(tree, "model")
     if m:  # keep the library's 3D placement (e.g. Espressif: offset −6.75/−1.2/−8.45, rotate −90° about X)
-        o, r = find(find(m, "offset"), "xyz"), find(find(m, "rotate"), "xyz")
+        fo, fr = find(m, "offset"), find(m, "rotate")
+        o, r = (find(fo, "xyz") if fo else None), (find(fr, "xyz") if fr else None)
         fp.model_xf = (list(o[1:4]) if o else [0, 0, 0], list(r[1:4]) if r else [0, 0, 0])
     return fp
 

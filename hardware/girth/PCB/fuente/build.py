@@ -26,14 +26,14 @@ VIA = (0.5, 0.3)
 
 # widths per net (mm)
 WIDTH = {"QI_AC1": 0.5, "QI_AC2": 0.5, "QI_COIL1": 0.5, "QI_RECT": 0.4, D.VIN5: 0.4, D.VBUS: 0.4,
-         D.VSYS: 0.4, D.VBAT: 0.4, "AD_SRC": 0.4}
+         D.VSYS: 0.4, D.VBAT: 0.4, "AD_SRC": 0.4, "BAT_RAW": 0.4}
 ORDER = ["QI_COIL1", "QI_AC1", "QI_AC2", "QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1",
          "QI_COMM2", "QI_RECT", "QI_ILIM", "QI_FOD", "QI_TS", D.VIN5, "AD_SRC", "QI_ADEN", D.VBUS, D.VBAT,
+         "BAT_RAW", "PWR_PG", "PWR_G", "PWR_HOLD", "REED_PULSE", "REED_HI", "REED_G",
          "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS,
          "USB_DP_C", "USB_DM_C", "USB_DP", "USB_DM", "CC1", "CC2",
-         "IMU_XIN", "IMU_XOUT", "IMU_CAP", "IMU_VDD", "IMU_BOOTN", "IMU_PS1", "IMU_WAKE", "IMU_RST", "IMU_INT",
-         "IMU_ENV_SCL", "IMU_ENV_SDA", "IMU_CS", "IMU_SCK", "IMU_MOSI", "IMU_MISO", "IMU_PWR_N",
-         "EN", "BOOT", "GPIO8", "LED", "LED_A", "U0TX", "U0RX", "REED", "BAT_ADC", "CHG_PG", "CHG_STAT", "QI_CHG"]
+         "I2C_SDA", "I2C_SCL", "IMU_INT", "MAG_CAP",
+         "EN", "BOOT", "LED", "LED_K", "U0TX", "U0RX", "REED", "BAT_ADC", "CHG_PG", "CHG_STAT", "QI_CHG"]
 
 
 class Ctx:
@@ -352,7 +352,7 @@ def write_board(r, path, outer_pours=True):
     for k, band in enumerate(edge_bands()):
         tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # texts
-    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
+    tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · ESP32-C3 · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(0, -4.6), "B.SilkS", 0.8, mirror=True, bold=False))
     tree.append(B.gr_text("ANTENA FPC (sin cobre)", *D.K(11.0, 16.0), "F.SilkS", 0.8, bold=False))
     tree.append(B.gr_text("+ BAT −", *D.K(-20.5, 6.3), "F.SilkS", 0.7, angle=90, bold=False))
@@ -378,9 +378,9 @@ def main():
         add_epad_vias(r)
         ep_stubs(r, pads)
         fails_v = via_drops(r, pads, log)
-        # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, relay
+        # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, battery
         pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
-               "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2", "RLY_NO",
+               "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2",
                D.VBAT, D.VSYS, "CHG_ILIM", "CHG_ISET", "CHG_TS", D.VBUS]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
         pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("QI_CHG", ["U1.7", "R4.1"]),
@@ -395,7 +395,7 @@ def main():
                 by_net.setdefault(rec["net"], []).append(rec)
         for net in pre:
             if net in by_net and len(by_net[net]) > 1:
-                w = 0.3 if (net.startswith("QI_AC") or net in ("QI_COIL1", "QI_RECT", "RLY_NO", D.VIN5, D.VBUS, "AD_SRC",
+                w = 0.3 if (net.startswith("QI_AC") or net in ("QI_COIL1", "QI_RECT", "BAT_RAW", D.VIN5, D.VBUS, "AD_SRC",
                                                                D.VBAT, D.VSYS)) else 0.2
                 if not route_tree(r, net, netid(net), by_net[net], w) and not route_tree(r, net, netid(net), by_net[net], 0.2):
                     log.append("pre-ruteo fallido: " + net)
@@ -437,8 +437,10 @@ def add_epad_vias(r):
     u4 = next(p for p in D.PARTS if p["ref"] == "U4")
     from fplib import rot
     cx, cy = D.kpos(u4)
-    for vx in (-0.9875, 0.9875):
-        for vy in (1.7125, 3.6875):
+    ep = [pd for pd in D.fp_of(u4).pads if pd.num == "49" and pd.shape == "rect"]
+    xs = sorted({round(pd.x, 4) for pd in ep}); ys = sorted({round(pd.y, 4) for pd in ep})
+    for vx in [(a + b) / 2 for a, b in zip(xs, xs[1:])]:          # gaps between the 3 × 3 EPAD squares
+        for vy in [(a + b) / 2 for a, b in zip(ys, ys[1:])]:
             dx, dy = rot(vx, vy, u4["rot"])
             r.add_via(D.CODE[D.GND], (cx + dx, cy + dy))
 
