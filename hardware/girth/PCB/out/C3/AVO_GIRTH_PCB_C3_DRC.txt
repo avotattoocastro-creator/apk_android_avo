@@ -1,0 +1,14 @@
+** Drc report for AVO_GIRTH_PCB.kicad_pcb **
+** Created on 2026-10-29T16:02:36+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 1 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(118.4454 mm, 108.4971 mm): Track [QI_CHG] on F.Cu, length 0.1455 mm
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-29T15:56:18+0000",
+    "date": "2026-10-29T16:02:35+0000",
     "included_severities": [
         "error",
         "warning",
@@ -10,122 +10,22 @@
     "kicad_version": "9.0.9",
     "schematic_parity": [],
     "source": "AVO_GIRTH_PCB.kicad_pcb",
-    "unconnected_items": [
+    "unconnected_items": [],
+    "violations": [
         {
-            "description": "Missing connection between items",
+            "description": "Track has unconnected end",
             "items": [
                 {
-                    "description": "Track [+3V3] on F.Cu, length 1.1000 mm",
+                    "description": "Track [QI_CHG] on F.Cu, length 0.1455 mm",
                     "pos": {
-                        "x": 91.6,
-                        "y": 106.39
+                        "x": 118.4454,
+                        "y": 108.4971
                     },
-                    "uuid": "227ddd25-ad7d-40fa-981d-cbfcf443de3c"
-                },
-                {
-                    "description": "Via [+3V3] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 87.9265,
-                        "y": 106.7443
-                    },
-                    "uuid": "8c87b78f-1932-4ad9-8c61-bf055341b337"
+                    "uuid": "136e8d7f-bd8e-544a-80d7-8731927d9531"
                 }
             ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.8467 mm",
-                    "pos": {
-                        "x": 97.9987,
-                        "y": 96.8268
-                    },
-                    "uuid": "0b7e86bc-1669-48bd-b52f-987abec3e87f"
-                },
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.2478 mm",
-                    "pos": {
-                        "x": 99.5,
-                        "y": 97.9125
-                    },
-                    "uuid": "df2c7f34-3263-46f0-b33d-fcf351cb5b85"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 4 [IMU_INT] of U5 on F.Cu",
-                    "pos": {
-                        "x": 98.8375,
-                        "y": 97.75
-                    },
-                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
-                },
-                {
-                    "description": "Pad 12 [IMU_INT] of U4 on F.Cu",
-                    "pos": {
-                        "x": 119.2,
-                        "y": 111.8
-                    },
-                    "uuid": "a5759f27-3984-546c-80c4-1ac4cebb2b73"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 8 [QI_ADEN] of U1 on F.Cu",
-                    "pos": {
-                        "x": 81.75,
-                        "y": 104.65
-                    },
-                    "uuid": "b470d287-dec2-5a96-b54e-48413ecc361d"
-                },
-                {
-                    "description": "Track [QI_ADEN] on B.Cu, length 4.4798 mm",
-                    "pos": {
-                        "x": 87.9208,
-                        "y": 109.1892
-                    },
-                    "uuid": "ca112a2f-fff9-4a2d-a87d-84b8d75816c3"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 12 [QI_ILIM] of U1 on F.Cu",
-                    "pos": {
-                        "x": 82.25,
-                        "y": 101.35
-                    },
-                    "uuid": "041df12f-73c7-560a-b066-6600f364ecfc"
-                },
-                {
-                    "description": "Pad 1 [QI_ILIM] of R1 on F.Cu",
-                    "pos": {
-                        "x": 83.7,
-                        "y": 98.91
-                    },
-                    "uuid": "a61c06ed-c269-510f-8083-df5ffb26edc0"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
+            "severity": "warning",
+            "type": "track_dangling"
         }
-    ],
-    "violations": []
+    ]
 }
