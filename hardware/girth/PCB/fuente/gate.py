@@ -106,6 +106,41 @@ if os.path.exists(mp):
     L.append("- Modelos de la librería de KiCad 9.0.0 descargados: %d; sin descargar: %s"
              % (len([x for x in ml if x.startswith("OK ")]), ", ".join(falta) or "ninguno"))
 L.append("- ESP32-C3-MINI-1U: modelo de Espressif (`fuente/3d`). MMC5983MA y pads de hilo/prueba: sin modelo 3D.")
+# REV B: elección del microcontrolador, diferencias, firmware y riesgos (texto fijo del diseño)
+inf = os.path.join("DOCS", "INFORME_REV_B.md")
+if os.path.exists(inf):
+    L.append("")
+    L += open(inf, encoding="utf-8").read().rstrip("\n").split("\n")
+# existencias y coste: los de la última consulta del CI (con su fecha), no los de este momento
+stk = os.path.join("out_stock", "stock_jlc.json")
+if os.path.exists(stk):
+    st = json.load(open(stk, encoding="utf-8"))
+    L.append("")
+    L.append("## Existencias en JLCPCB (consulta del CI: %s)" % st.get("date_utc"))
+    L.append("| LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |")
+    L.append("|---|---|---|---|---|---|")
+    count = Counter(p["lcsc"] for p in assembled)
+    for code, n in sorted(count.items(), key=lambda kv: -((st["parts"].get(kv[0], {}).get("prices") or [[0, 0]])[0][1] or 0)):
+        v = st["parts"].get(code, {})
+        pr = (v.get("prices") or [[None, None]])[0][1]
+        L.append("| %s | %s | %d | %s | %s | %s |" % (code, v.get("mpn", "?"), n, v.get("stock", "sin respuesta"),
+                 "Basic" if v.get("library") == "base" else "Extended", ("%.4f US$" % pr) if pr is not None else "?"))
+    short = [code for code, n in count.items() if (st["parts"].get(code, {}).get("stock") or 0) < n * 5]
+    L.append("")
+    L.append("- Piezas sin existencias para 5 placas: %s" % (", ".join(short) or "ninguna"))
+cst = os.path.join("out_stock", "COSTE.md")
+if os.path.exists(cst):
+    rows = [l for l in open(cst, encoding="utf-8").read().split("\n") if l.startswith("| ") and "placas" in l]
+    L.append("")
+    L.append("## Coste por placa frente a la REV A (componentes + cargo de piezas Extended; detalle en out_stock/COSTE.md)")
+    L.append("| Pedido | REV A componentes | REV A Extended | REV A total | REV B componentes | REV B Extended | REV B total | Reducción |")
+    L.append("|---|---|---|---|---|---|---|---|")
+    L += rows
+L.append("")
+L.append("## Estado de fabricación")
+L.append("- Diseño verificado por software (KiCad 9 en el CI): %s" % ("**sí**" if ok else "**no**"))
+L.append("- Apto para solicitar prototipos: %s" % ("**sí, pendiente de validación física**" if ok else "**no**"))
+L.append("- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
 for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (DOCS/AJUSTE_QI.md).",

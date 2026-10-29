@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
+**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
+**CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
+firmware `build-girth-c3.yml` (compilación correcta en `01f8093`)
+**Qué cambia:** JLCPCB no tiene el ESP32-C6-MINI-1U-N4 (0 uds.). REV B con **ESP32-C3-MINI-1U-N4** (C2911374,
+1191 uds. y 3,15 US$ el 2026-10-29 según la consulta del CI); IMU **LSM6DS3TR-C + MMC5983MA** por I²C en lugar del
+BNO085 (19,50 US$, 80 uds.); corte de batería con **enclavamiento de MOSFET** en lugar del relé biestable; R6/R7
+Basic. Mismas funciones (ESP-NOW, IMU de 9 ejes, encendido magnético, apagado remoto, < 1 µA apagada, carga USB y
+Qi, medida de batería, programación por USB y UART0, antena externa). 81 piezas montadas (antes 104), 13 Extended
+(antes 17). Coste de componentes + cargo de Extended: 21,5 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,2 a 10 uds.
+(REV A ≥ 32,9): −46 % a −54 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
+C3 con IMU, batería, enclavamiento, apagado remoto (bit 1 de `GirthPing.flags`, la espalda aún no lo envía) y
+diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
+**Por qué:** placa montable entera por JLCPCB y coste a la mitad sin perder funciones (petición del usuario).
+**Archivos:** `hardware/girth/PCB/**`, `hardware/girth/PCB_REV_A_C6/**`, `firmware/girth/V0_3_0_C3/**`,
+`firmware/back/V3_8_0/lib/avo_core/src/avo_girth_link.h` (solo constantes y comentarios),
+`.github/workflows/build-girth-pcb.yml`, `build-girth-c3.yml`, `jlc-stock-girth.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, app Android, AVO Update, firmware de pecho y espalda.
+**Validación:** CI (KiCad 9: DRC 0, ERC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0; firmware compila
+para ESP32-C3). **NO VERIFICADO** físicamente.
+**Pendiente:** ajustar el Qi con la bobina real; medir los tiempos del enclavamiento; comprobar ejes de la IMU;
+adaptar AVO Update al ESP32-C3 (id 5) y la espalda para enviar el apagado remoto; revisar giros en JLCPCB.
+
 ## 2026-10-29 — Cincha · PCB REV A — ruteado completo y puerta de fabricación superada
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `7f80a18`, `05556bb`, `e9e5166` · **CI:** runs 40881786227 (`05556bb`) y 40882718676 (`e9e5166`): éxito, puerta superada
 **Qué cambia:** placa de la cincha (ESP32-C6-MINI-1U + BNO085 + BQ51013B + BQ24072 + relé biestable de corte) ruteada al
