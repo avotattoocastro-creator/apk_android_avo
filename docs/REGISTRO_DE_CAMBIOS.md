@@ -25,14 +25,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-29 — Cincha · PCB REV A — ruteado completo y puerta de fabricación superada
-**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `7f80a18`, `05556bb`, (este) · **CI:** run 40881786227 (éxito, puerta superada en `05556bb`)
+**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `7f80a18`, `05556bb`, `e9e5166` · **CI:** runs 40881786227 (`05556bb`) y 40882718676 (`e9e5166`): éxito, puerta superada
 **Qué cambia:** placa de la cincha (ESP32-C6-MINI-1U + BNO085 + BQ51013B + BQ24072 + relé biestable de corte) ruteada al
 100 %: Freerouting 1.9.0 + reparación de QI_ADEN, QI_ILIM y SS_G con `fuente/repair.py` → `kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`.
 KiCad 9 en el CI: DRC 0 errores, 0 advertencias, 0 conexiones incompletas, 0 cortocircuitos, 0 diferencias esquema ↔ placa;
 ERC 0 errores y 0 advertencias. Se generan los ficheros FINAL (Gerber JLCPCB, BOM, CPL, STEP, DRC, ERC, informe y fuentes
 KiCad con SHA256). BOM y CPL comprobados contra `piezas.json` y las posiciones de KiCad (104 piezas, LCSC coincidentes).
 Además: modelo 3D del ESP32 con la colocación de Espressif (salía girado en el render/STEP) y descarga en el CI de los
-modelos 3D de la librería de KiCad para el STEP; README con GPIO14 = RELÉ ON, capas y ficheros FINAL.
+modelos 3D de la librería de KiCad para el STEP (4 sin descargar: JST SH, USB-C, RHL-20, VQFN-16; solo afecta al STEP); README con GPIO14 = RELÉ ON, capas y ficheros FINAL.
 **Archivos:** `hardware/girth/PCB/kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`, `…_colocacion.kicad_pcb`, `fuente/fplib.py`,
 `fuente/gate.py`, `README.md`, `.github/workflows/build-girth-pcb.yml`.
 **No se ha tocado:** `main`, `develop/avo-performance-horse`, firmware ni app.
