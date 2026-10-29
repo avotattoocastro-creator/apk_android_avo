@@ -273,6 +273,25 @@ def main():
         print("  " + line)
     if "--check" in sys.argv:
         sys.exit(1 if pending else 0)
+    # --clear x0 y0 x1 y1: remove the tracks of non-plane nets that touch the box (KiCad coordinates) and re-route them,
+    # the nets in --first (prefix) first; used when a dense block (Qi) is boxed in by tracks routed earlier
+    if "--clear" in sys.argv:
+        i = sys.argv.index("--clear")
+        x0, y0, x1, y1 = map(float, sys.argv[i + 1:i + 5])
+        inb = lambda p: x0 <= p[0] <= x1 and y0 <= p[1] <= y1
+        hit = set(s_["net"] for s_ in segs if s_["net"] and s_["net"] not in build.PLANES and (inb(s_["a"]) or inb(s_["b"])))
+        hit |= set(v["net"] for v in vias if v["net"] and v["net"] not in build.PLANES and inb(v["p"]))
+        segs[:] = [s_ for s_ in segs if s_["net"] not in hit]
+        vias[:] = [v for v in vias if v["net"] not in hit]
+        prune(pads, segs, vias)
+        r = make_router(pads, segs, vias)
+        first = sys.argv[sys.argv.index("--first") + 1] if "--first" in sys.argv else "QI_"
+        def span(n):
+            g, _ = clusters(n, pads, segs, vias)
+            ps = [d["c"] for grp in g for k, d in grp if k == "pad"]
+            return (0 if n.startswith(first) else 1, max(p[0] for p in ps) - min(p[0] for p in ps) + max(p[1] for p in ps) - min(p[1] for p in ps) if ps else 0)
+        pending = sorted(set(pending) | hit, key=span)
+        print("Caja despejada: %d redes se rehacen: %s" % (len(hit), ", ".join(pending)))
     queue = list(pending)
     ripped = {}
     failed = []
