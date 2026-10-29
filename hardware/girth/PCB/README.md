@@ -22,7 +22,7 @@ fabricado ni medido ninguna placa.
 | 3,3 V | RT9080-33 (U3) | 600 mA, 2 µA de consumo propio |
 | Batería | J2 JST SH 1,0 (pin 1 = +) | el cable pasa por la ranura fresada junto al borde −X |
 | Reed | pads SW1/SW2 (SW2 al + de la batería) | enciende por flanco y se lee en GPIO1 (Q16) |
-| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10–D13 (BAV70)** | **< 1 µA apagada**; ver abajo |
+| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10–D13 (BAV70)** | **< 1 µA apagada** fuera del soporte (≈ 7–8 µA dentro); ver abajo |
 
 ## Corte de batería (enclavamiento con MOSFET)
 - **Se enciende solo**, sin firmware: al **cerrarse** el reed (C40 da un impulso de ≈ 2,5 s, con la corriente por el
@@ -63,8 +63,11 @@ firmware no arranca: mantener BOOT (TP2) a masa al encender para entrar en modo 
 usarlo con esta placa.
 
 ## Consumo estimado
-- **Apagada** (fuera del soporte): < 1 µA (fuga de Q10) + autodescarga de la celda.
-- **Funcionando**: ESP32-C3 con ESP-NOW + IMU ≈ 25–45 mA (estimado) → 11–20 h con 500 mAh.
+- **Apagada** (fuera del soporte): < 1 µA (fuga de Q10) + autodescarga de la celda. **Dentro del soporte** (reed
+  cerrado): ≈ 7–8 µA por R45 y R49/R50 (simulado en la auditoría REV B, `AUDITORIA_REV_B/spice`).
+- **Funcionando**: *corregido en la auditoría REV B* — con el firmware V0.3.0 (radio sin ahorro, `WIFI_PS_NONE`)
+  ≈ 94 mA → **≈ 5 h** con 500 mAh (4 h con la celda envejecida); con ahorro de radio ≈ 45 mA → ≈ 10 h. Cálculo en
+  `AUDITORIA_REV_B/autonomia/` (sin medir). La cifra anterior (25–45 mA, 11–20 h) no contaba el receptor encendido.
 - **En la base Qi**: sueño profundo, lo alimenta la base.
 
 ## Cambios mecánicos que pide la placa (siguiente revisión del CAD de la cápsula)

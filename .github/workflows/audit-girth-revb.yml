@@ -143,7 +143,8 @@ jobs:
           Q=$(find /tmp/q -name qemu-system-riscv32 | head -1)
           sudo apt-get install -y -qq libsdl2-2.0-0 libslirp0 > /dev/null || true
           $Q --version | tee -a $R/qemu/version.txt
-          dd if=/dev/zero of=/tmp/efuse.bin bs=1 count=1024 2>/dev/null
+          # eFuse de ESP-IDF para QEMU (chip v0.3); con eFuse a cero (v0.0) el cargador de IDF 5.5 no arranca
+          cp $A/qemu/efuse_esp32c3_rev0_3.bin /tmp/efuse.bin
           M=$(ls /tmp/fw_qemu/*.merged.bin)
           ls -la $M
           # sin -icount (con -icount 3 no pasaba del cargador en 30 s); 90 s de reloj real

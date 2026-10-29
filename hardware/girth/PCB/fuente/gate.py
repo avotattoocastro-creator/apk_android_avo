@@ -162,7 +162,7 @@ for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos 
           "Existencias consultadas en el CI (out_stock/stock_jlc.json): volver a comprobarlas el día del pedido.",
           "Enclavamiento de la batería (Q10/Q11) calculado, no medido: comprobar tiempos de encendido y de apagado.",
           "Tensión de umbral de Q11 (AO3400A, 0,65–1,45 V) y tiempos de C40/C41: medir en el prototipo.",
-          "Antena externa con conector del módulo (U.FL / MHF I del ESP32-C3-MINI-1U).",
+          "Antena externa con conector del módulo (W.FL / MHF III, 3.ª generación, del ESP32-C3-MINI-1U).",
           "Cambios en la carcasa (cuna +0,6 mm, ranura del cable, postes de la tapa); ya no hace falta el rebaje del relé.",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)
