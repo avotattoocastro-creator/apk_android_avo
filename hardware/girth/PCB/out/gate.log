@@ -1,7 +1,7 @@
 # AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `f6a47d86429b188217e2ee39119f364f95df3890` · ejecución de CI: 40908557253
+- Commit: `2a703697abf613d9128fc1a258e179d274a839ee` · ejecución de CI: 40909031839
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 98 en total, 85 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
@@ -129,6 +129,12 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 | 5 placas | 29.74 US$ | 17 · 10.20 US$ | **39.94 US$** | 13.74 US$ | 14 · 8.40 US$ | **22.14 US$** | **45 %** |
 | 10 placas | 27.80 US$ | 17 · 5.10 US$ | **32.90 US$** | 12.32 US$ | 14 · 4.20 US$ | **16.52 US$** | **50 %** |
 | 30 placas | 25.32 US$ | 17 · 1.70 US$ | **27.02 US$** | 11.17 US$ | 14 · 1.40 US$ | **12.57 US$** | **53 %** |
+
+## Firmware incluido
+- `AVO_GIRTH_PCB_C3_FIRMWARE.zip` (compilado por `build-girth-c3.yml`), SHA256 `edfc3e2aa61b50d829b5663dde9533968086931c723b8c88d834a55e2b751b22`
+- Sketch uses 1010445 bytes (77%) of program storage space. Maximum is 1310720 bytes.
+- Global variables use 37832 bytes (11%) of dynamic memory, leaving 289848 bytes for local variables. Maximum is 327680 bytes.
+- Compila; **no probado en placa**.
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**
