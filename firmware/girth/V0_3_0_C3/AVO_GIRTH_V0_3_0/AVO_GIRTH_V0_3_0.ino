@@ -24,6 +24,8 @@
 #include "avo_espnow_link.h"
 #include "avo_payloads.h"
 #include "girth_board.h"
+#include "girth_pack.h"
+#include "girth_policy.h"
 #include "girth_imu.h"
 #include "girth_power.h"
 
@@ -129,17 +131,8 @@ static bool linked() { return s_paired && s_last_ping_ms && millis() - s_last_pi
 
 static void send_imu(const ImuBatch& bt) {
   uint8_t body[IMU_HDR_LEN + GIRTH_IMU_MAX_SAMPLES * IMU_SAMPLE_LEN_9AXIS];
-  ImuBatchHeader ih;
-  ih.girth_id = 0; ih.imu_id = 0; ih.count = bt.count; ih.fmt = IMU_FMT_9AXIS_I16;
-  ih.girth_seq = ++s_imu_seq; ih.girth_t0_us = bt.t0_us; ih.period_us = (uint16_t)gimu::period_us();
-  ih.sync_state = 0;
-  size_t n = encode_imu_header(ih, body, sizeof(body));
-  if (n != IMU_HDR_LEN) return;
-  for (uint8_t k = 0; k < bt.count; k++)
-    for (int a = 0; a < 9; a++) {
-      uint16_t v = (uint16_t)bt.s[k].v[a];
-      body[n++] = (uint8_t)(v & 0xFF); body[n++] = (uint8_t)(v >> 8);   // little-endian, como avo_bytes.h
-    }
+  size_t n = girth_pack_imu_body(bt.s, bt.count, bt.t0_us, ++s_imu_seq, (uint16_t)gimu::period_us(), body, sizeof(body));
+  if (!n) return;
   if (send_kind(GirthKind::IMU, s_back, body, n, 2)) s_st.imu_batches++;
 }
 
@@ -274,19 +267,20 @@ void loop() {
   uint32_t now = millis();
 
   // --- alimentación
-  static uint32_t last_pw = 0, out_since = 0, low_since = 0;
-  if (now - last_pw >= 200) {
+  static uint32_t last_pw = 0;
+  static gpol::Policy pol;
+  if (now - last_pw >= 200 || s_remote_off) {
     last_pw = now;
     s_pw = gpow::read();
-    bool on_base = s_pw.power_in;
-    if (!s_pw.reed_closed && !on_base) { if (!out_since) out_since = now | 1; } else out_since = 0;
-    if (out_since && now - out_since > 3000) gpow::shutdown("fuera del soporte");
-    if (!on_base && s_pw.batt_mv > 1000 && s_pw.batt_mv < 3300) { if (!low_since) low_since = now | 1; } else low_since = 0;
-    if (low_since && now - low_since > 10000) gpow::shutdown("bateria baja");
-    // en la base Qi y fuera del soporte: no hace falta radio; con USB se queda despierta (consola, programación)
-    if (on_base && s_pw.qi && !s_pw.reed_closed && now > 10000) gpow::sleep_on_charger();
+    gpol::Inputs in{s_pw.reed_closed, s_pw.power_in, s_pw.qi, s_pw.batt_mv, s_remote_off};
+    switch (pol.step(in, now)) {
+      case gpol::Action::SHUTDOWN_OUT_OF_HOLDER: gpow::shutdown("fuera del soporte");
+      case gpol::Action::SHUTDOWN_LOW_BATTERY: gpow::shutdown("bateria baja");
+      case gpol::Action::SLEEP_ON_CHARGER: gpow::sleep_on_charger();
+      case gpol::Action::SHUTDOWN_REMOTE: gpow::shutdown("orden remota");
+      case gpol::Action::NONE: break;
+    }
   }
-  if (s_remote_off) gpow::shutdown("orden remota de la espalda");
 
   // --- radio
   if (!linked() && now - s_last_hello_ms >= 1000) {
@@ -303,7 +297,7 @@ void loop() {
   // --- BOOT 5 s → olvidar la espalda
   static uint32_t boot_t = 0;
   if (digitalRead(gb::PIN_BOOT) == LOW) {
-    if (!boot_t) boot_t = now | 1;
+    if (!boot_t) boot_t = now ? now : 1;
     else if (boot_t != 2 && now - boot_t > 5000) { forget_back(); boot_t = 2; }
   } else boot_t = 0;
 

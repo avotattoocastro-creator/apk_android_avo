@@ -1,0 +1,133 @@
+name: Auditoría AVO GIRTH REV B (KiCad, ngspice, firmware, QEMU)
+
+# Validación virtual de la REV B en la rama de auditoría. No toca los ficheros de diseño: copia la placa y el
+# esquema entregados (hardware/girth/PCB/out/C3/KiCad) a una carpeta temporal y guarda todas las evidencias en
+# hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/ (informes originales, comandos, datos y gráficas).
+on:
+  workflow_dispatch:
+  push:
+    branches: ['audit/**']
+    paths:
+      - 'hardware/girth/PCB/AUDITORIA_REV_B/**'
+      - 'firmware/girth/V0_3_0_C3/**'
+      - '.github/workflows/audit-girth-revb.yml'
+      - '!hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: audit-girth-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  auditoria:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      A: hardware/girth/PCB/AUDITORIA_REV_B
+      R: hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar
+        run: |
+          rm -rf $R && mkdir -p $R/kicad $R/spice $R/firmware $R/qemu
+          echo "commit $GITHUB_SHA · run $GITHUB_RUN_ID · $(date -u '+%Y-%m-%d %H:%M UTC')" > $R/ORIGEN.txt
+
+      - name: Fase 1 · KiCad 9 (ERC, DRC con paridad, netlist, auditoría de redes, Gerber)
+        continue-on-error: true
+        run: |
+          docker pull -q kicad/kicad:9.0
+          mkdir -p /tmp/k && cp hardware/girth/PCB/out/C3/KiCad/* /tmp/k/
+          sha256sum /tmp/k/* > $R/kicad/sha256_entrada.txt
+          docker run --rm -u 0 -e HOME=/tmp -e R -e A -v "$PWD":/w -v /tmp/k:/k -w /w kicad/kicad:9.0 bash -c '
+            set -x
+            exec > >(tee $R/kicad/comandos_y_salida.txt) 2>&1
+            kicad-cli version
+            kicad-cli sch erc --format json --severity-all --units mm -o $R/kicad/erc.json /k/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli sch erc --format report --severity-all --units mm -o $R/kicad/erc.rpt /k/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o $R/kicad/drc.json /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/kicad/drc.rpt /k/AVO_GIRTH_PCB.kicad_pcb
+            cp /k/AVO_GIRTH_PCB.kicad_pcb /tmp/refill.kicad_pcb; cp /k/AVO_GIRTH_PCB.kicad_pro /tmp/refill.kicad_pro; cp /k/AVO_GIRTH_PCB.kicad_sch /tmp/refill.kicad_sch
+            kicad-cli pcb drc --refill-zones --schematic-parity --severity-all --format report --units mm -o $R/kicad/drc_zonas_rellenadas_de_nuevo.rpt /tmp/refill.kicad_pcb || echo "sin --refill-zones"
+            kicad-cli sch export netlist --format kicadsexpr -o $R/kicad/netlist_esquema.net /k/AVO_GIRTH_PCB.kicad_sch
+            python3 $A/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb $R/kicad/netlist_esquema.net $R/kicad
+            mkdir -p /tmp/g
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+            python3 $A/kicad/comparar_gerber.py hardware/girth/PCB/out/C3/AVO_GIRTH_PCB_C3_GERBER_JLCPCB.zip /tmp/g $R/kicad/comparacion_gerber.txt
+            kicad-cli pcb render --side top --quality basic -w 1600 -h 1100 --zoom 1.5 -o $R/kicad/arriba.png /k/AVO_GIRTH_PCB.kicad_pcb || true
+            chmod -R a+rw $R
+          '
+
+      - name: Fases 2-3 · ngspice (alimentación y encendido magnético)
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ngspice > /dev/null
+          pip install -q numpy matplotlib
+          ngspice -v | head -2 | tee $R/spice/version.txt
+          MC_N=200 python3 $A/spice/sim_revb.py $R/spice 2>&1 | tee $R/spice/salida.txt
+
+      - name: Fases 6-7, 11 · pruebas del firmware en el PC (simulador de marcha, enlace, alimentación)
+        continue-on-error: true
+        run: |
+          F=firmware/girth/V0_3_0_C3
+          python3 $F/pruebas/marcha.py $R/firmware/senales
+          g++ -std=c++17 -O1 -Wall -Wextra -I$F/AVO_GIRTH_V0_3_0 -Ifirmware/back/V3_8_0/lib/avo_core/src \
+              -Ifirmware/back/V3_8_0/test $F/pruebas/test_cincha.cpp firmware/back/V3_8_0/lib/avo_core/src/*.cpp \
+              -o /tmp/test_cincha 2>&1 | tee $R/firmware/compilacion_pruebas.txt
+          /tmp/test_cincha $R/firmware/senales 2>&1 | tee $R/firmware/pruebas_salida.txt
+          cp $R/firmware/senales/resultados_pruebas.json $R/firmware/
+          rm -f $R/firmware/senales/*.csv
+          (cd firmware/back/V3_8_0 && g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o /tmp/back_test && /tmp/back_test) 2>&1 | tail -5 | tee $R/firmware/pruebas_espalda.txt
+
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Fase 11 · compilar el firmware (producción y variante para QEMU)
+        continue-on-error: true
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json > /dev/null
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json > /dev/null
+          F=firmware/girth/V0_3_0_C3
+          $F/build_girth_c3.sh /tmp/fw_prod 2>&1 | tail -3 | tee $R/firmware/compilacion_produccion.txt
+          # QEMU solo emula el UART0: misma compilación pero con Serial en UART0 (CDCOnBoot=default)
+          FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
+          ls -la /tmp/fw_prod /tmp/fw_qemu | tee -a $R/firmware/compilacion_produccion.txt
+          sha256sum /tmp/fw_prod/*.bin | tee $R/firmware/sha256_produccion.txt
+
+      - name: Fase 11 · arranque en QEMU (Espressif, esp32c3)
+        continue-on-error: true
+        run: |
+          set -x
+          URL=$(curl -s https://api.github.com/repos/espressif/qemu/releases/latest | python3 -c "import json,sys;d=json.load(sys.stdin);print(d['tag_name']);[print(a['browser_download_url']) for a in d['assets'] if 'riscv32' in a['name'] and 'x86_64-linux-gnu' in a['name']]")
+          echo "$URL" > $R/qemu/version.txt
+          curl -sSL -o /tmp/q.tar.xz $(echo "$URL" | sed -n 2p)
+          mkdir -p /tmp/q && tar -xf /tmp/q.tar.xz -C /tmp/q
+          Q=$(find /tmp/q -name qemu-system-riscv32 | head -1)
+          sudo apt-get install -y -qq libsdl2-2.0-0 libslirp0 > /dev/null || true
+          $Q --version | tee -a $R/qemu/version.txt
+          dd if=/dev/zero of=/tmp/efuse.bin bs=1 count=1024 2>/dev/null
+          M=$(ls /tmp/fw_qemu/*.merged.bin)
+          ls -la $M
+          timeout 30 $Q -nographic -icount 3 -machine esp32c3 -drive file=$M,if=mtd,format=raw \
+            -drive file=/tmp/efuse.bin,if=none,format=raw,id=efuse -global driver=nvram.esp32c3.efuse,property=drive,value=efuse \
+            -serial file:$R/qemu/uart0.log -monitor none > $R/qemu/qemu_stdout.txt 2>&1 || echo "fin (timeout esperado) $?" >> $R/qemu/qemu_stdout.txt
+          tail -40 $R/qemu/uart0.log || true
+
+      - name: Guardar evidencias en la rama
+        if: always()
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          T=$(mktemp -d); cp -r $R $T/r
+          for i in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+            rm -rf $R; mkdir -p $(dirname $R); cp -r $T/r $R
+            git add -A $R
+            git commit -m "Auditoría REV B: evidencias del CI de ${GITHUB_SHA::7} [skip ci]" || { echo "sin cambios"; break; }
+            git push origin HEAD:${{ github.ref_name }} && break
+            sleep $((i * 10))
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AUDITORIA-GIRTH-REVB
+          path: hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci

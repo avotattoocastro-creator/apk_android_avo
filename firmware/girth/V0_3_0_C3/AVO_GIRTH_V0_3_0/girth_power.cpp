@@ -1,6 +1,7 @@
 #include "girth_power.h"
 #include "girth_board.h"
 #include "girth_imu.h"
+#include "girth_policy.h"
 #include <Arduino.h>
 #include <esp_sleep.h>
 #include <driver/gpio.h>
@@ -57,7 +58,7 @@ static void prepare_sleep() {
   // El despertar del C3 es por nivel: con el reed ya cerrado despertaría al instante (y volvería a encender).
   // Solo se arma si el reed está abierto; con el reed cerrado no hace falta: volver a cerrarlo da un impulso nuevo
   // del hardware (C40) que enciende la placa desde cero.
-  if (digitalRead(gb::PIN_REED) == HIGH)
+  if (gpol::arm_reed_wake(digitalRead(gb::PIN_REED) == LOW))
     esp_deep_sleep_enable_gpio_wakeup(1ULL << gb::PIN_REED, ESP_GPIO_WAKEUP_GPIO_LOW);
 }
 

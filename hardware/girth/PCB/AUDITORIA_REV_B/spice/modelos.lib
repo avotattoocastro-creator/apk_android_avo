@@ -1,0 +1,43 @@
+* AVO GIRTH REV B — modelos SPICE para ngspice (auditoría)
+* -------------------------------------------------------------------------------------------------------
+* BAV70: modelo OFICIAL de Nexperia (https://assets.nexperia.com/documents/spice-model/BAV70.txt), un diodo
+*   del array; se instancia dos veces por encapsulado (pin 1/2 ánodos, pin 3 cátodo común).
+.SUBCKT BAV70 1 2
+R1 1 2 5E+009
+D1 1 2 BAV70D
+.MODEL BAV70D D(IS=3.2E-009 N=1.85 BV=125.9 IBV=2.906E-007 RS=1.1 CJO=4.957E-013 VJ=0.54 M=0.03 FC=0.5
++ TT=0 EG=1.1 XTI=3)
+.ENDS
+*
+* MOSFET: NO hay modelo oficial disponible sin registro (AOS). Modelos de nivel 1 AJUSTADOS por el script
+*   sim_revb.py a dos puntos de la hoja de datos de AOS: VGS(th) a 250 µA (mín/típ/máx) y RDS(on) a 2,5 V.
+*   Limitación: el nivel 1 no tiene conducción por debajo del umbral (subumbral) → los tiempos de
+*   mantenimiento calculados son CONSERVADORES; tampoco modela la fuga IDSS (se trata aparte).
+*   Los parámetros VTO/KP se escriben en cada netlist (subcircuitos NMOS_LVL1 / PMOS_LVL1).
+.SUBCKT NMOS_LVL1 D G S PARAMS: VTO=1 KP=10
+M1 D G S S NM L=1u W=1u
+.MODEL NM NMOS(LEVEL=1 VTO={VTO} KP={KP} LAMBDA=0.01)
+CGS G S 630p
+CGD G D 50p
+DB S D DBODY
+.MODEL DBODY D(IS=1E-12 N=1.3 RS=0.02)
+.ENDS
+.SUBCKT PMOS_LVL1 D G S PARAMS: VTO=-1 KP=10
+M1 D G S S PM L=1u W=1u
+.MODEL PM PMOS(LEVEL=1 VTO={VTO} KP={KP} LAMBDA=0.01)
+CGS G S 645p
+CGD G D 60p
+DB D S DBODYP
+.MODEL DBODYP D(IS=1E-12 N=1.3 RS=0.02)
+.ENDS
+*
+* RT9080-33 (Richtek DS9080-09): modelo de COMPORTAMIENTO, no el oficial. Salida = min(3,3 V, Vin − Rdo·I);
+*   Rdo = caída a 600 mA / 600 mA (0,31 V típ → 0,52 Ω; 0,53 V máx → 0,88 Ω). Sin dinámica del lazo: no
+*   reproduce el sobreimpulso/hundimiento del lazo ante escalones (lo amortiguan los condensadores de salida).
+.SUBCKT RT9080 IN OUT GND PARAMS: RDO=0.52 VREG=3.3
+RPASS IN X {RDO}
+BDROP X OUT V = max(0, V(X,GND) - {VREG})
+.ENDS
+*
+* BQ24072 sin entrada (camino BAT→OUT): resistencia del FET de batería, VDO(BAT-OUT) = 50 mV típ / 100 mV máx
+*   a 1 A (TI SLUS937C) → 0,05 / 0,10 Ω. No modela el cargador ni el DPPM (no intervienen sin 5 V).
