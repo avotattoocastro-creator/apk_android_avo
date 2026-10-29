@@ -1049,6 +1049,9 @@
       (place R48 90000.000000 -116900.000000 front 0.000000 (PN 100k))
       (place R49 91900.000000 -116900.000000 front 0.000000 (PN 100k))
       (place R50 93800.000000 -116900.000000 front 0.000000 (PN 1M))
+      (place R53 88200.000000 -93800.000000 front 0.000000 (PN 100k))
+      (place R54 90200.000000 -93800.000000 front 0.000000 (PN 100k))
+      (place R55 91700.000000 -94400.000000 front 90.000000 (PN 1k))
     )
     (component "AVO:SOT-23"
       (place Q1 84400.000000 -111000.000000 front 0.000000 (PN AO3401A))
@@ -1062,6 +1065,9 @@
       (place Q14 95600.000000 -114600.000000 front 0.000000 (PN AO3401A))
       (place Q15 92600.000000 -110400.000000 front 0.000000 (PN 2N7002))
       (place Q16 96200.000000 -110400.000000 front 0.000000 (PN 2N7002))
+      (place Q17 87100.000000 -91200.000000 front 0.000000 (PN AO3401A))
+      (place Q18 90600.000000 -91200.000000 front 0.000000 (PN 2N7002))
+      (place D11 94100.000000 -91200.000000 front 0.000000 (PN BAT54C))
     )
     (component "AVO:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias"
       (place U2 90100.000000 -103000.000000 front 0.000000 (PN BQ24072RGTR))
@@ -1106,6 +1112,7 @@
     (component AVO:R_0805_2012Metric
       (place R40 95400.000000 -84000.000000 front 90.000000 (PN 0R))
       (place R41 82200.000000 -85400.000000 front 90.000000 (PN 0R))
+      (place R52 85400.000000 -94000.000000 front 0.000000 (PN 10R))
     )
     (component "AVO:CP_EIA-3528-21_Kemet-B"
       (place C40 76800.000000 -86400.000000 front 90.000000 (PN "220u 6V3 polímero"))
@@ -1909,7 +1916,7 @@
         R14-2 D1-1 TP3-1 J1-S1 J1-S1@1 J1-S1@2 J1-S1@3 J1-A12 J1-A1 J1-B12 J1-B1 R16-2
         R17-2 U6-2 C26-2 U5-25 U5-10 U5-2 C27-2 C28-2 C29-2 C30-2 C31-2 C32-2 R22-2
         R23-2 C33-2 R33-2 C34-2 R51-2 R44-2 R46-2 Q11-2 Q12-2 Q13-2 Q15-2 R48-2 Q16-2
-        R50-2)
+        R50-2 Q18-2 R54-2)
     )
     (net VBAT
       (pins U2-2 U2-3 C20-1 TP7-1 R32-1 Q10-3 Q14-2 R47-2)
@@ -1921,7 +1928,7 @@
       (pins U1-4 C15-1 C16-1 Q2-3 U2-13 C18-1 D10-2)
     )
     (net VSYS
-      (pins U2-10 U2-11 C19-1 R8-2 U3-1 U3-3 C21-1 TP8-1)
+      (pins U2-10 U2-11 C19-1 R8-2 U3-1 U3-3 C21-1 TP8-1 Q17-2 R53-2)
     )
     (net AD_SRC
       (pins Q1-2 Q2-2)
@@ -2018,7 +2025,10 @@
       (pins U5-26 Y1-2 C28-1)
     )
     (net K_A
-      (pins K1-1 C40-2 C41-2 Q13-3)
+      (pins K1-1 C40-2 C41-2 Q13-3 R52-2)
+    )
+    (net K_A_SET
+      (pins Q17-3 R52-1)
     )
     (net K_B
       (pins K1-8 Q11-3 Q14-3)
@@ -2084,7 +2094,7 @@
       (pins SW1-1 D10-1 R49-1)
     )
     (net RLY_GB
-      (pins R45-2 R46-1 Q11-1 Q12-3)
+      (pins R45-2 R46-1 Q11-1 Q12-3 D11-3)
     )
     (net RLY_NC
       (pins K1-7 K1-2 R41-1)
@@ -2095,11 +2105,20 @@
     (net RLY_OFF
       (pins U4-29 Q12-1 Q13-1 Q15-1 R48-1)
     )
+    (net RLY_ON
+      (pins U4-19 Q18-1 R54-1 R55-1)
+    )
+    (net RLY_ON_D
+      (pins R55-2 D11-1)
+    )
     (net RLY_P
       (pins D10-3 C40-1 C41-1 R44-1 R45-1)
     )
     (net RLY_PG
       (pins Q14-1 Q15-3 R47-1)
+    )
+    (net RLY_SG
+      (pins Q17-1 R53-1 Q18-3)
     )
     (net SS_G
       (pins Q10-1 C43-2 R51-1)
@@ -2125,10 +2144,11 @@
     (class kicad_default +3V3 AD_SRC BAT_ADC BAT_RAW BAT_SW BOOT CC1 CC2 CHG_EN2
       CHG_ILIM CHG_ISET CHG_PG CHG_STAT CHG_TS EN GND GPIO8 IMU_BOOTN IMU_CAP
       IMU_CS IMU_ENV_SCL IMU_ENV_SDA IMU_INT IMU_MISO IMU_MOSI IMU_PS1 IMU_PWR_N
-      IMU_RST IMU_SCK IMU_VDD IMU_WAKE IMU_XIN IMU_XOUT K_A K_B LED LED_A
-      QI_ADEN QI_BOOT1 QI_BOOT2 QI_CHG QI_CLAMP1 QI_CLAMP2 QI_COMM1 QI_COMM2
-      QI_FOD QI_ILIM QI_TS REED REED_G REED_HI RLY_GB RLY_NC RLY_NO RLY_OFF
-      RLY_P RLY_PG SS_G U0RX U0TX USB_DM USB_DM_C USB_DP USB_DP_C
+      IMU_RST IMU_SCK IMU_VDD IMU_WAKE IMU_XIN IMU_XOUT K_A K_A_SET K_B LED
+      LED_A QI_ADEN QI_BOOT1 QI_BOOT2 QI_CHG QI_CLAMP1 QI_CLAMP2 QI_COMM1
+      QI_COMM2 QI_FOD QI_ILIM QI_TS REED REED_G REED_HI RLY_GB RLY_NC RLY_NO
+      RLY_OFF RLY_ON RLY_ON_D RLY_P RLY_PG RLY_SG SS_G U0RX U0TX USB_DM USB_DM_C
+      USB_DP USB_DP_C
       (circuit
         (use_via "Via[0-3]_500:300_um")
       )
@@ -2157,10 +2177,14 @@
     )
   )
   (wiring
-    (wire (path F.Cu 300  78350 -102250  78325 -102275)(net GND)(type route))
-    (wire (path F.Cu 300  82650 -102250  82675 -102275)(net GND)(type route))
-    (wire (path F.Cu 300  82650 -103750  82675 -103775)(net GND)(type route))
-    (wire (path F.Cu 300  78350 -103750  78325 -103775)(net GND)(type route))
+    (wire (path F.Cu 200  78350 -102250  79058.2 -102497)(net GND)(type route))
+    (wire (path F.Cu 200  82650 -102250  81941.8 -102497)(net GND)(type route))
+    (wire (path F.Cu 200  82650 -103750  81941.8 -103503)(net GND)(type route))
+    (wire (path F.Cu 200  78350 -103750  79058.2 -103503)(net GND)(type route))
+    (wire (path F.Cu 200  88637.5 -103750  89304.9 -103408)(net GND)(type route))
+    (wire (path F.Cu 200  89850 -104462  89976.4 -103723)(net GND)(type route))
+    (wire (path F.Cu 200  90850 -104462  90507.8 -103795)(net GND)(type route))
+    (wire (path F.Cu 200  89850 -101538  89976.4 -102277)(net GND)(type route))
     (wire (path F.Cu 300  77000 -98325  77025 -98325)(net GND)(type route))
     (wire (path F.Cu 300  75500 -98325  75525 -98325)(net GND)(type route))
     (wire (path F.Cu 300  78400 -98320  78425 -98325)(net GND)(type route))
@@ -2170,10 +2194,6 @@
     (wire (path F.Cu 300  84000 -101090  84025 -101075)(net GND)(type route))
     (wire (path F.Cu 300  87200 -106790  87225 -106775)(net +3V3)(type route))
     (wire (path F.Cu 300  83400 -107780  83425 -107775)(net GND)(type route))
-    (wire (path F.Cu 300  88637.5 -103750  88625 -103775)(net GND)(type route))
-    (wire (path F.Cu 300  89850 -104462  89825 -104825  89825 -105025)(net GND)(type route))
-    (wire (path F.Cu 300  90850 -104462  90875 -104475)(net GND)(type route))
-    (wire (path F.Cu 300  89850 -101538  89825 -101125  89825 -100925)(net GND)(type route))
     (wire (path F.Cu 300  91700 -99120  91725 -99125)(net GND)(type route))
     (wire (path F.Cu 300  93200 -103525  93225 -103525)(net GND)(type route))
     (wire (path F.Cu 300  86700 -102525  86725 -102525)(net GND)(type route))
@@ -2248,6 +2268,8 @@
     (wire (path F.Cu 300  90510 -116900  90525 -116925)(net GND)(type route))
     (wire (path F.Cu 300  95200 -111350  95225 -111375)(net GND)(type route))
     (wire (path F.Cu 300  94310 -116900  94325 -116925)(net GND)(type route))
+    (wire (path F.Cu 300  89600 -92150  89575 -92175)(net GND)(type route))
+    (wire (path F.Cu 300  90710 -93800  90725 -93775)(net GND)(type route))
     (wire (path F.Cu 200  79250 -104650  79275 -104925  79275 -106575  79300 -106820)(net QI_BOOT1)(type route))
     (wire (path F.Cu 200  79750 -101350  79775 -101075  79775 -99325  79800 -99080)(net QI_BOOT2)(type route))
     (wire (path F.Cu 200  80250 -104650  80325 -104925  80325 -106375  80600 -106825)(net QI_CLAMP1)(type route))
@@ -2271,9 +2293,9 @@
     (wire (path F.Cu 300  81375 -105375  82225 -106225  83875 -106225  84325 -106675
             84800 -106825  85725 -106825  86000 -106820  86275 -106575  86675 -106175
             87675 -106175  88775 -107275  88775 -109375  90025 -110625  90000 -111000)(net VIN5)(type route))
-    (wire (path F.Cu 300  88075 -106575  89025 -105625  90675 -105625  92275 -104025
-            92275 -101925  91975 -101625  90925 -101625  90850 -101538  90925 -101125
-            91725 -100325  91700 -100080)(net VIN5)(type route))
+    (wire (path F.Cu 300  87675 -106175  87675 -102125  89025 -100775  90625 -100775
+            90775 -100925  90775 -101125  90850 -101538)(net VIN5)(type route))
+    (wire (path F.Cu 300  90775 -100925  91425 -100275  91700 -100080)(net VIN5)(type route))
     (wire (path F.Cu 300  82525 -106225  82525 -112875  80225 -115175  80200 -115550)(net VIN5)(type route))
     (wire (path F.Cu 200  119200 -107000  119575 -107175  121625 -107175  121975 -106825
             122210 -106600)(net USB_DP)(type route))
@@ -2303,43 +2325,56 @@
     (wire (path F.Cu 300  92300 -80900  92675 -81775  94375 -83475  94375 -83825  94975 -84425
             95400 -84912.5  94725 -85375  92675 -87425  92300 -87900)(net RLY_NO)(type route))
     (wire (path F.Cu 300  88637.5 -102750  88625 -102825  88625 -103125  88637.5 -103250
-            88225 -103275  87525 -103275  87125 -103675  86700 -104075  87125 -104475
-            87875 -105225  87875 -105625)(net VBAT)(type route))
-    (wire (path B.Cu 300  87875 -105625  87875 -107225)(net VBAT)(type route))
+            88225 -103175)(net VBAT)(type route))
+    (wire (path B.Cu 300  88225 -103175  87625 -103175  87075 -103725)(net VBAT)(type route))
+    (wire (path F.Cu 300  87075 -103725  86700 -104075  87075 -104475  87075 -105575)(net VBAT)(type route))
+    (wire (path B.Cu 300  87075 -105575  87075 -105775  87875 -106575  87875 -107225)(net VBAT)(type route))
     (wire (path F.Cu 300  87875 -107225  87875 -108825  87225 -109475  87225 -112525
-            87625 -112925  88025 -112925  88425 -113325  88425 -116625  88610 -116900
+            87625 -112925  88025 -112925  88475 -113375  88475 -116625  88610 -116900
             88875 -116625  88875 -116425  89025 -116275  93425 -116275  94175 -115525
             94600 -115550  95025 -115325  100725 -115325  102325 -113725
             102600 -113710  102875 -113975  103275 -114375  106375 -114375
             107175 -115175  107175 -115575  107975 -116375  108375 -116375
             109525 -117525  110000 -117600)(net VBAT)(type route))
-    (wire (path F.Cu 300  88637.5 -102750  88225 -102675  88025 -102675  87875 -102525
-            87875 -101425  87925 -101375  87925 -96625  82225 -90925  82225 -89375
-            82000 -89000)(net VBAT)(type route))
+    (wire (path F.Cu 300  86700 -104075  86275 -103625  85675 -103025  85675 -100225
+            87025 -98875  87025 -96425  85325 -94725  85325 -93125  83925 -91725
+            83025 -91725  82225 -90925  82225 -89375  82000 -89000)(net VBAT)(type route))
     (wire (path F.Cu 300  91562.5 -103250  91575 -103125  91575 -102825  91562.5 -102750)(net VSYS)(type route))
-    (wire (path F.Cu 300  91562.5 -103250  91725 -103175)(net VSYS)(type route))
-    (wire (path B.Cu 300  91725 -103175  91725 -103325  92775 -104375)(net VSYS)(type route))
-    (wire (path F.Cu 300  92775 -104375  93025 -104625  93200 -105075)(net VSYS)(type route))
-    (wire (path B.Cu 300  92325 -103925  90475 -105775  90175 -105775  89775 -106175)(net VSYS)(type route))
-    (wire (path F.Cu 300  89775 -106175  89675 -106275  89400 -106390)(net VSYS)(type route))
+    (wire (path F.Cu 300  91562.5 -103250  91925 -103275  92125 -103275  92425 -103575
+            92425 -104275  92775 -104625  93200 -105075  92775 -105475  90325 -105475
+            89675 -106125  89400 -106390)(net VSYS)(type route))
     (wire (path F.Cu 300  93200 -105075  93625 -105475  98825 -110675  99775 -110675
             100200 -110775  100625 -110975  101225 -110975  101862 -110950
             102475 -110675  102625 -110675  102825 -110475  102825 -109525
             102475 -109175  101862 -109050)(net VSYS)(type route))
+    (wire (path F.Cu 300  91562.5 -102750  91925 -102675  92125 -102675  92325 -102475
+            92325 -97675  88725 -94075  88710 -93800  88475 -93525  87475 -92525
+            86525 -92525  86100 -92150)(net VSYS)(type route))
     (wire (path F.Cu 300  101862 -110950  102475 -111225  103325 -112075  106075 -112075
             109225 -115225  109225 -116475  109525 -116775  110725 -116775
             111525 -117575  112000 -117600)(net VSYS)(type route))
-    (wire (path F.Cu 200  91562.5 -102250  91675 -102175)(net CHG_ILIM)(type route))
-    (wire (path B.Cu 200  91675 -102175  92875 -102175)(net CHG_ILIM)(type route))
-    (wire (path F.Cu 200  92875 -102175  92925 -102175  93200 -102310)(net CHG_ILIM)(type route))
-    (wire (path F.Cu 200  89350 -101538  89225 -101125  89225 -100375  89200 -100110)(net CHG_ISET)(type route))
-    (wire (path F.Cu 200  88637.5 -102250  88425 -102125)(net CHG_TS)(type route))
-    (wire (path B.Cu 200  88425 -102125  87775 -102125  87325 -101675)(net CHG_TS)(type route))
-    (wire (path F.Cu 200  87325 -101675  87125 -101475  86875 -101475  86525 -101125
+    (wire (path F.Cu 200  91562.5 -102250  91775 -102125  91775 -102075)(net CHG_ILIM)(type route))
+    (wire (path B.Cu 200  91775 -102075  92925 -102075)(net CHG_ILIM)(type route))
+    (wire (path F.Cu 200  92925 -102075  93200 -102310)(net CHG_ILIM)(type route))
+    (wire (path F.Cu 200  89350 -101538  89275 -101375)(net CHG_ISET)(type route))
+    (wire (path B.Cu 200  89275 -101375  89275 -100225)(net CHG_ISET)(type route))
+    (wire (path F.Cu 200  89275 -100225  89200 -100110)(net CHG_ISET)(type route))
+    (wire (path F.Cu 200  88637.5 -102250  88475 -102175)(net CHG_TS)(type route))
+    (wire (path B.Cu 200  88475 -102175  87875 -102175  87325 -101625)(net CHG_TS)(type route))
+    (wire (path F.Cu 200  87325 -101625  87175 -101475  86875 -101475  86525 -101125
             86290 -100900)(net CHG_TS)(type route))
-    (wire (path F.Cu 200  89350 -104462  89225 -104825  89225 -104975  89125 -105075)(net CHG_EN2)(type route))
-    (wire (path B.Cu 200  89125 -105075  89125 -106875  89325 -107075)(net CHG_EN2)(type route))
+    (wire (path F.Cu 200  89350 -104462  89325 -104825  89325 -105625)(net CHG_EN2)(type route))
+    (wire (path B.Cu 200  89325 -105625  89325 -107075)(net CHG_EN2)(type route))
     (wire (path F.Cu 200  89325 -107075  89325 -107175  89400 -107410)(net CHG_EN2)(type route))
+    (wire (path F.Cu 200  91562.5 -103750  91925 -103825  91925 -104625  92175 -104875)(net CHG_STAT)(type route))
+    (wire (path B.Cu 200  92175 -104875  92175 -105875  92325 -106025)(net CHG_STAT)(type route))
+    (wire (path F.Cu 200  92325 -106025  92175 -106175  92175 -106825  91825 -107175
+            91600 -107410)(net CHG_STAT)(type route))
+    (wire (path B.Cu 200  92325 -106025  95025 -106025)(net CHG_STAT)(type route))
+    (wire (path F.Cu 200  95025 -106025  97475 -108475  104975 -108475  105225 -108725
+            105225 -109825  105425 -110025  106625 -110025  108725 -112125
+            108725 -113475  108825 -113575  116275 -113575  116575 -113275
+            116700 -112900)(net CHG_STAT)(type route))
     (wire (path F.Cu 300  82250 -104650  82325 -104925  83025 -105625)(net VBUS)(type route))
     (wire (path B.Cu 300  83025 -105625  83025 -106425  83375 -106775)(net VBUS)(type route))
     (wire (path F.Cu 300  83375 -106775  83400 -106820)(net VBUS)(type route))
@@ -2347,11 +2382,9 @@
             83875 -108425)(net VBUS)(type route))
     (wire (path F.Cu 300  83875 -108425  83975 -108525  83975 -109175  85425 -110625
             85400 -111000)(net VBUS)(type route))
-    (wire (path F.Cu 300  82250 -104650  82325 -104375  82975 -104375  85675 -101675
-            85675 -100425  87325 -98775)(net VBUS)(type route))
-    (wire (path B.Cu 300  87325 -98775  88375 -98775  88475 -98675)(net VBUS)(type route))
-    (wire (path F.Cu 300  88475 -98675  88675 -98475  92125 -98475  94275 -100625
-            94275 -100875  94625 -101225  107975 -101225  108825 -100375
+    (wire (path F.Cu 300  83025 -105625  83725 -104925  86525 -104925)(net VBUS)(type route))
+    (wire (path B.Cu 300  86525 -104925  91225 -104925  91875 -104275  93925 -104275)(net VBUS)(type route))
+    (wire (path F.Cu 300  93925 -104275  96975 -101225  107975 -101225  108825 -100375
             119775 -100375  120425 -101025  120425 -101275)(net VBUS)(type route))
     (wire (path B.Cu 300  120425 -101275  121475 -102325)(net VBUS)(type route))
     (wire (path F.Cu 300  121475 -102325  122105 -102450)(net VBUS)(type route))
@@ -2367,10 +2400,6 @@
     (via "Via[0-3]_500:300_um"  115288 -107988 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  113312 -106012 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  115288 -106012 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  78325 -102275 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  82675 -102275 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  82675 -103775 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  78325 -103775 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  77025 -98325 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  75525 -98325 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  78425 -98325 (net GND)(type route))
@@ -2380,10 +2409,6 @@
     (via "Via[0-3]_500:300_um"  84025 -101075 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  87225 -106775 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  83425 -107775 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  88625 -103775 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  89825 -105025 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  90875 -104475 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  89825 -100925 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  91725 -99125 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  93225 -103525 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  86725 -102525 (net GND)(type route))
@@ -2458,6 +2483,8 @@
     (via "Via[0-3]_500:300_um"  90525 -116925 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  95225 -111375 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  94325 -116925 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  89575 -92175 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  90725 -93775 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  79825 -105225 (net VIN5)(type route))
     (via "Via[0-3]_500:300_um"  81375 -105375 (net VIN5)(type route))
     (via "Via[0-3]_500:300_um"  123225 -105825 (net USB_DM_C)(type route))
@@ -2465,22 +2492,26 @@
     (via "Via[0-3]_500:300_um"  122225 -108525 (net USB_DM_C)(type route))
     (via "Via[0-3]_500:300_um"  123275 -101675 (net CC1)(type route))
     (via "Via[0-3]_500:300_um"  124025 -100925 (net CC1)(type route))
-    (via "Via[0-3]_500:300_um"  87875 -105625 (net VBAT)(type route))
+    (via "Via[0-3]_500:300_um"  88225 -103175 (net VBAT)(type route))
+    (via "Via[0-3]_500:300_um"  87075 -103725 (net VBAT)(type route))
+    (via "Via[0-3]_500:300_um"  87075 -105575 (net VBAT)(type route))
     (via "Via[0-3]_500:300_um"  87875 -107225 (net VBAT)(type route))
-    (via "Via[0-3]_500:300_um"  91725 -103175 (net VSYS)(type route))
-    (via "Via[0-3]_500:300_um"  92775 -104375 (net VSYS)(type route))
-    (via "Via[0-3]_500:300_um"  89775 -106175 (net VSYS)(type route))
-    (via "Via[0-3]_500:300_um"  91675 -102175 (net CHG_ILIM)(type route))
-    (via "Via[0-3]_500:300_um"  92875 -102175 (net CHG_ILIM)(type route))
-    (via "Via[0-3]_500:300_um"  88425 -102125 (net CHG_TS)(type route))
-    (via "Via[0-3]_500:300_um"  87325 -101675 (net CHG_TS)(type route))
-    (via "Via[0-3]_500:300_um"  89125 -105075 (net CHG_EN2)(type route))
+    (via "Via[0-3]_500:300_um"  91775 -102075 (net CHG_ILIM)(type route))
+    (via "Via[0-3]_500:300_um"  92925 -102075 (net CHG_ILIM)(type route))
+    (via "Via[0-3]_500:300_um"  89275 -101375 (net CHG_ISET)(type route))
+    (via "Via[0-3]_500:300_um"  89275 -100225 (net CHG_ISET)(type route))
+    (via "Via[0-3]_500:300_um"  88475 -102175 (net CHG_TS)(type route))
+    (via "Via[0-3]_500:300_um"  87325 -101625 (net CHG_TS)(type route))
+    (via "Via[0-3]_500:300_um"  89325 -105625 (net CHG_EN2)(type route))
     (via "Via[0-3]_500:300_um"  89325 -107075 (net CHG_EN2)(type route))
+    (via "Via[0-3]_500:300_um"  92175 -104875 (net CHG_STAT)(type route))
+    (via "Via[0-3]_500:300_um"  92325 -106025 (net CHG_STAT)(type route))
+    (via "Via[0-3]_500:300_um"  95025 -106025 (net CHG_STAT)(type route))
     (via "Via[0-3]_500:300_um"  83025 -105625 (net VBUS)(type route))
     (via "Via[0-3]_500:300_um"  83375 -106775 (net VBUS)(type route))
     (via "Via[0-3]_500:300_um"  83875 -108425 (net VBUS)(type route))
-    (via "Via[0-3]_500:300_um"  87325 -98775 (net VBUS)(type route))
-    (via "Via[0-3]_500:300_um"  88475 -98675 (net VBUS)(type route))
+    (via "Via[0-3]_500:300_um"  86525 -104925 (net VBUS)(type route))
+    (via "Via[0-3]_500:300_um"  93925 -104275 (net VBUS)(type route))
     (via "Via[0-3]_500:300_um"  120425 -101275 (net VBUS)(type route))
     (via "Via[0-3]_500:300_um"  121475 -102325 (net VBUS)(type route))
     (via "Via[0-3]_500:300_um"  120975 -98625 (net VBUS)(type route))

@@ -1,0 +1,90 @@
+# AVO GIRTH · placa de la cincha · REV A — informe de diagnóstico
+
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `bc3cb276ac18fcf504ecd4b2b4bd9c1551003269` · ejecución de CI: 40870680254
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
+- Componentes: 122 en total, 104 para montar, 6 sin montar (DNP: C5, R22, R23, R28, R29, R41), 12 a mano (pads de hilo y de prueba)
+- Pistas: 1149 · vías: 195
+
+## Comprobaciones bloqueantes
+| Comprobación | Resultado | Cantidad |
+|---|---|---|
+| DRC: errores | **FALLA** | 2 |
+| DRC: conexiones incompletas | **FALLA** | 7 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | **FALLA** | 199 |
+| ERC: errores | correcto | 0 |
+| ERC: advertencias | correcto | 0 |
+
+Errores de DRC por tipo: clearance 2
+
+### Conexiones incompletas
+- Pad 2 [AD_SRC] of Q1 on F.Cu ↔ Pad 2 [AD_SRC] of Q2 on F.Cu
+- Pad 7 [CHG_PG] of U2 on F.Cu ↔ Track [CHG_PG] on F.Cu, length 1.7091 mm
+- Track [QI_AC2] on F.Cu, length 1.2750 mm ↔ Pad 2 [QI_AC2] of C9 on F.Cu
+- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Pad 1 [QI_ADEN] of Q1 on F.Cu
+- Pad 7 [QI_CHG] of U1 on F.Cu ↔ Pad 1 [QI_CHG] of R4 on F.Cu
+- Pad 1 [QI_CHG] of R4 on F.Cu ↔ Pad 28 [QI_CHG] of U4 on F.Cu
+- Pad 29 [RLY_OFF] of U4 on F.Cu ↔ Pad 1 [RLY_OFF] of Q15 on F.Cu
+
+### Paridad esquema ↔ placa
+- net_conflict: Pad net (QI_COIL1) doesn't match net given by schematic (/QI_COIL1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_COIL1) doesn't match net given by schematic (/QI_COIL1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_COIL1) doesn't match net given by schematic (/QI_COIL1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_AC2) doesn't match net given by schematic (/QI_AC2).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_AC2) doesn't match net given by schematic (/QI_AC2).
+- net_conflict: Pad net (QI_BOOT1) doesn't match net given by schematic (/QI_BOOT1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_CLAMP1) doesn't match net given by schematic (/QI_CLAMP1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_COMM1) doesn't match net given by schematic (/QI_COMM1).
+- net_conflict: Pad net (QI_AC1) doesn't match net given by schematic (/QI_AC1).
+- net_conflict: Pad net (QI_BOOT2) doesn't match net given by schematic (/QI_BOOT2).
+- net_conflict: Pad net (QI_AC2) doesn't match net given by schematic (/QI_AC2).
+- net_conflict: Pad net (QI_CLAMP2) doesn't match net given by schematic (/QI_CLAMP2).
+- net_conflict: Pad net (QI_AC2) doesn't match net given by schematic (/QI_AC2).
+- net_conflict: Pad net (QI_COMM2) doesn't match net given by schematic (/QI_COMM2).
+- net_conflict: Pad net (QI_AC2) doesn't match net given by schematic (/QI_AC2).
+- net_conflict: Pad net (QI_RECT) doesn't match net given by schematic (/QI_RECT).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (QI_RECT) doesn't match net given by schematic (/QI_RECT).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (QI_RECT) doesn't match net given by schematic (/QI_RECT).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VIN5) doesn't match net given by schematic (/VIN5).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VIN5) doesn't match net given by schematic (/VIN5).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VBUS) doesn't match net given by schematic (/VBUS).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VIN5) doesn't match net given by schematic (/VIN5).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VSYS) doesn't match net given by schematic (/VSYS).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+- net_conflict: Pad net (VBAT) doesn't match net given by schematic (/VBAT).
+- net_conflict: Pad net (GND) doesn't match net given by schematic (/GND).
+
+## Advertencias de DRC (no bloqueantes)
+- silk_over_copper: 4
+- track_dangling: 1
+
+## Lista de materiales y posiciones
+- Piezas montadas sin número LCSC: ninguna
+- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Limitaciones pendientes (ver README)
+- Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (DOCS/AJUSTE_QI.md).
+- BNO085 sin existencias en LCSC: pedir por Global Sourcing o reservar.
+- Relé G6KU-2F-Y posiblemente en fin de fabricación; altura 5,2 mm → rebaje de 1,3 mm en la tapa.
+- Polaridad del relé tomada del símbolo de KiCad; si sale al revés, R40 ↔ R41.
+- Antena con conector MHF III / W.FL.
+- Cambios en la carcasa (cuna +0,6 mm, ranura del cable, rebaje del relé, postes de la tapa).
+- Nada de esto se ha fabricado ni medido: no es un prototipo validado.
+::notice title=Puerta de fabricación::NO SUPERADA
