@@ -1105,7 +1105,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-C3-MINI-1U-N4_U_f334d7"
+			"AVO:ESP32-C3-MINI-1U-N4_U_668a8a"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1113,7 +1113,7 @@
 			(property "Reference" "U" (at -17.78 36.83 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-C3-MINI-1U-N4_U_f334d7"
+				"ESP32-C3-MINI-1U-N4_U_668a8a"
 				(at 17.78 36.83 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -1121,7 +1121,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-C3-MINI-1U-N4_U_f334d7_0_1"
+				"ESP32-C3-MINI-1U-N4_U_668a8a_0_1"
 				(rectangle
 					(start -17.78 35.56)
 					(end 17.78 -35.56)
@@ -1130,7 +1130,7 @@
 				)
 			)
 			(symbol
-				"ESP32-C3-MINI-1U-N4_U_f334d7_1_1"
+				"ESP32-C3-MINI-1U-N4_U_668a8a_1_1"
 				(pin
 					passive
 					line
@@ -1168,7 +1168,7 @@
 					line
 					(at -20.32 22.86 0)
 					(length 2.54)
-					(name "IO2 CHG_STAT" (effects (font (size 1.27 1.27))))
+					(name "IO2 SCL" (effects (font (size 1.27 1.27))))
 					(number "5" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -1208,7 +1208,7 @@
 					line
 					(at -20.32 10.16 0)
 					(length 2.54)
-					(name "IO7 SCL" (effects (font (size 1.27 1.27))))
+					(name "IO7 CHG_STAT" (effects (font (size 1.27 1.27))))
 					(number "21" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -5626,7 +5626,7 @@
 		(uuid "d2b8b7d8-244e-58cd-ad65-83c4ef0366ca")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-C3-MINI-1U-N4_U_f334d7")
+		(lib_id "AVO:ESP32-C3-MINI-1U-N4_U_668a8a")
 		(at 574.04 166.37 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5747,7 +5747,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 140.97 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"CHG_STAT"
+		"I2C_SCL"
 		(shape passive)
 		(at 553.72 143.51 180)
 		(fields_autoplaced yes)
@@ -5792,7 +5792,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 153.67 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"I2C_SCL"
+		"CHG_STAT"
 		(shape passive)
 		(at 553.72 156.21 180)
 		(fields_autoplaced yes)

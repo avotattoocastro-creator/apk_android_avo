@@ -22,7 +22,7 @@ struct Info {
   uint32_t samples = 0;
 };
 
-bool begin();                 // Wire en GPIO6/7 a 400 kHz, detecta y configura (104/120 Hz, 100 Hz el magnetómetro)
+bool begin();                 // Wire en GPIO6 (SDA) / GPIO2 (SCL) a 400 kHz, detecta y configura (104/120 Hz, 100 Hz el magnetómetro)
 bool read(Sample* s);         // una muestra (acel+giro del LSM6, último valor del magnetómetro)
 void sleep();                 // LSM6 y MMC en reposo (antes de apagar o dormir)
 const Info& info();

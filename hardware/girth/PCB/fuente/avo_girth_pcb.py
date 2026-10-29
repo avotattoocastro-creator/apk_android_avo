@@ -284,17 +284,18 @@ C("C22", "10u 25V", V3, GND, (19.8, -16.4), 0, "3V3", "C0603")
 # ESP32-C3-MINI-1U-N4 (C2911374; alt. -H4 C3013922, 105 °C, misma memoria). Pines del módulo según el símbolo y la
 # huella de Espressif (kicad-libraries). Huella idéntica en pads a la del C6-MINI-1U (origen desplazado 2 mm).
 # Arranque (guía de diseño de Espressif, ESP32-C3): GPIO9 = 1 → arranque normal, 0 → descarga (con GPIO8 = 1);
-# GPIO2 no decide el modo pero se recomienda pull-up. GPIO0–5 pueden despertar del sueño profundo; ADC1 = GPIO0–4.
+# GPIO2: la hoja del módulo pide 1 en el arranque (la guía de diseño dice que no decide el modo pero recomienda
+# pull-up): lleva SCL con 4,7 k a 3,3 V, siempre a 1 al arrancar. GPIO0–5 despiertan del sueño profundo; ADC1 = GPIO0–4.
 MCU = (13.6, -7.0)
 part("U4", "MINI1U", "ESP32-C3-MINI-1U-N4", MCU, 90,
      dict([(n, GND) for n in (1, 2, 11, 14) + tuple(range(36, 54))] +
-          [(3, V3), (8, "EN"), (12, "IMU_INT"), (13, "REED"), (5, "CHG_STAT"), (6, "BAT_ADC"), (18, "CHG_PG"),
-           (19, "PWR_HOLD"), (20, "I2C_SDA"), (21, "I2C_SCL"), (22, "LED"), (23, "BOOT"), (16, "QI_CHG"),
+          [(3, V3), (8, "EN"), (12, "IMU_INT"), (13, "REED"), (5, "I2C_SCL"), (6, "BAT_ADC"), (18, "CHG_PG"),
+           (19, "PWR_HOLD"), (20, "I2C_SDA"), (21, "CHG_STAT"), (22, "LED"), (23, "BOOT"), (16, "QI_CHG"),
            (26, "USB_DM"), (27, "USB_DP"), (30, "U0RX"), (31, "U0TX")] +
           [(n, None) for n in (4, 7, 9, 10, 15, 17, 24, 25, 28, 29, 32, 33, 34, 35)]),
      LC["MINI1U"], "ESP32-C3-MINI-1U-N4 (alt. ESP32-C3-MINI-1U-H4 C3013922)", "ESP32-C3",
-     sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 REED"), (5, "IO2 CHG_STAT"),
-                 (6, "IO3 BAT_ADC"), (18, "IO4 CHG_PG"), (19, "IO5 PWR_HOLD"), (20, "IO6 SDA"), (21, "IO7 SCL"),
+     sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 REED"), (5, "IO2 SCL"),
+                 (6, "IO3 BAT_ADC"), (18, "IO4 CHG_PG"), (19, "IO5 PWR_HOLD"), (20, "IO6 SDA"), (21, "IO7 CHG_STAT"),
                  (22, "IO8 LED"), (23, "IO9 BOOT"), (16, "IO10 QI_CHG")] +
                 [(n, "NC") for n in (4, 7, 9, 10, 15, 17, 24, 25, 28, 29, 32, 33, 34, 35)],
               R=[(26, "IO18 D-"), (27, "IO19 D+"), (30, "IO20 RXD0"), (31, "IO21 TXD0")] +
@@ -339,7 +340,7 @@ C("C26", "1u", VBUS, GND, (27.2, -8.6), 90, "USB")
 
 # ---------------------------------------------------------------------------------------- IMU (U5, U7)
 # LSM6DS3TR-C (acelerómetro + giroscopio, LGA-14L 2,5 × 3) y MMC5983MA (magnetómetro, LGA-16 3 × 3) en el mismo I²C
-# (GPIO6 SDA, GPIO7 SCL, 4,7 k a 3,3 V). Mismas 9 magnitudes brutas que envía el protocolo de la cincha (IMU_FMT_9AXIS).
+# (GPIO6 SDA, GPIO2 SCL, 4,7 k a 3,3 V). Mismas 9 magnitudes brutas que envía el protocolo de la cincha (IMU_FMT_9AXIS).
 # La huella del LSM6 admite también el LSM6DSV16X (C5267406, misma distribución de pines; el firmware detecta cuál).
 #  LSM6: SA0 a GND → 0x6A; CS a 3,3 V → I²C; SDx/SCx a GND (sin concentrador auxiliar); OCS_Aux/SDO_Aux sin conectar.
 #  MMC5983MA: 0x30; SPI_CS a VDDIO → I²C; CAP con 10 µF; INT sin conectar (lectura por sondeo).
@@ -352,8 +353,8 @@ part("U5", "LGA14", "LSM6DS3TR-C", IMU, 0,
               R=[(13, "SCL"), (14, "SDA"), (4, "INT1"), (9, "INT2"), (10, "OCS_Aux"), (11, "SDO_Aux")]))
 C("C27", "100n", V3, GND, (-2.6, 3.0), 90, "IMU", note="VDD del LSM6")
 C("C28", "100n", V3, GND, (2.6, 3.0), 90, "IMU", note="VDDIO del LSM6")
-R("R20", "4k7", "I2C_SDA", V3, (4.0, 1.0), 90, "IMU", note="pull-up I²C")
-R("R21", "4k7", "I2C_SCL", V3, (5.1, 1.0), 90, "IMU", note="pull-up I²C")
+R("R20", "4k7", "I2C_SDA", V3, (4.0, 1.0), 90, "IMU", note="pull-up I²C (GPIO6)")
+R("R21", "4k7", "I2C_SCL", V3, (5.1, 1.0), 90, "IMU", note="pull-up I²C; también fija GPIO2 = 1 en el arranque")
 part("U7", "MMC", "MMC5983MA", (-8.0, 10.0), 0,
      {1: "I2C_SCL", 2: V3, 3: None, 4: V3, 5: None, 6: None, 7: None, 8: None, 9: GND, 10: "MAG_CAP", 11: GND,
       12: None, 13: V3, 14: None, 15: None, 16: "I2C_SDA"},

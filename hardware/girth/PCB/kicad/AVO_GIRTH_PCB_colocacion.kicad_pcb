@@ -8348,7 +8348,7 @@
 			(at -5.9 -0.1 180)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 17 "CHG_STAT")
+			(net 20 "I2C_SCL")
 			(uuid "e293a104-3e68-592a-8aee-1b53a605e778")
 		)
 		(pad
@@ -8508,7 +8508,7 @@
 			(at 2.4 5.6 90)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 20 "I2C_SCL")
+			(net 17 "CHG_STAT")
 			(uuid "9f3dc5bd-b66f-531f-b0bc-fd99f925583e")
 		)
 		(pad

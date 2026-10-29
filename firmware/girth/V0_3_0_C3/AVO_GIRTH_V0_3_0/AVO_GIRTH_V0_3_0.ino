@@ -202,7 +202,7 @@ static void forget_back() {
 static void diag() {
   uint8_t f[16];
   int n = gimu::scan(f, 16);
-  Serial.printf("[AVO DIAG] I2C (GPIO6/7): %d dispositivos:", n);
+  Serial.printf("[AVO DIAG] I2C (SDA GPIO6, SCL GPIO2): %d dispositivos:", n);
   for (int i = 0; i < n; i++) Serial.printf(" 0x%02X", f[i]);
   Serial.println();
   const gimu::Info& in = gimu::info();

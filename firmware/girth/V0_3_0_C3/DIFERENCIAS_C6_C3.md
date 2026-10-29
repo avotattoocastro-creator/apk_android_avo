@@ -7,7 +7,7 @@
 | Chip en la imagen | id 13 (ESP32-C6) | id 5 (ESP32-C3); el CI lo comprueba |
 | Radio | ESP-NOW, canal fijo `NOW_CHANNEL_DEFAULT`, Wi-Fi 6 / BLE 5 | ESP-NOW igual (Wi-Fi 4 / BLE 5): **mismo protocolo** `avo_girth_link.h` v1 |
 | `GirthHello.hw` | 1 | **2** (placa REV B C3) — la espalda solo lo muestra |
-| IMU | ninguna conectada (`imu_count = 0`) | **LSM6DS3TR-C (o LSM6DSV16X) + MMC5983MA** por I²C (GPIO6 SDA, GPIO7 SCL), 100 muestras/s, lotes de 10 en paquetes `IMU` |
+| IMU | ninguna conectada (`imu_count = 0`) | **LSM6DS3TR-C (o LSM6DSV16X) + MMC5983MA** por I²C (GPIO6 SDA, GPIO2 SCL), 100 muestras/s, lotes de 10 en paquetes `IMU` |
 | Formato IMU | — | `IMU_FMT_9AXIS_I16`: ax ay az (±8 g, 0,244 mg/LSB), gx gy gz (±2000 dps, 70 mdps/LSB), mx my mz (±8 G, 0,244 mG/LSB) |
 | Batería en `STATUS` | 0 (sin medir) | **medida**: GPIO3 (ADC1_CH3), divisor 1:2 |
 | LED | GPIO15, activo bajo (XIAO) | **GPIO8**, activo bajo (pin de arranque: el LED está apagado al arrancar) |
@@ -24,11 +24,12 @@
 |---|---|---|
 | 0 | IMU_INT (INT1 del LSM6) | puede despertar |
 | 1 | REED (LOW = cerrado) | puede despertar |
-| 2 | CHG_STAT (LOW = cargando) | pin de arranque sin efecto en el modo; pull-up 100 k |
+| 2 | I²C SCL | pin de arranque: la hoja del módulo pide 1 al arrancar; el pull-up I²C de 4,7 k lo garantiza |
 | 3 | BAT_ADC | ADC1_CH3 |
 | 4 | CHG_PG (LOW = hay 5 V) | puede despertar |
 | 5 | PWR_HOLD | 1 = mantener el corte de batería cerrado; pull-down 100 k |
-| 6 / 7 | I²C SDA / SCL | 4,7 k a 3,3 V |
+| 6 | I²C SDA | 4,7 k a 3,3 V |
+| 7 | CHG_STAT (LOW = cargando) | pull-up 100 k |
 | 8 | LED (activo bajo) | pin de arranque: 1 al arrancar (pull-up 10 k) |
 | 9 | BOOT | pin de arranque: pull-up 10 k; a masa = modo descarga |
 | 10 | QI_CHG (LOW = Qi entrega potencia) | |
