@@ -49,7 +49,9 @@ jobs:
             kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o $R/kicad/drc.json /k/AVO_GIRTH_PCB.kicad_pcb
             kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/kicad/drc.rpt /k/AVO_GIRTH_PCB.kicad_pcb
             cp /k/AVO_GIRTH_PCB.kicad_pcb /tmp/refill.kicad_pcb; cp /k/AVO_GIRTH_PCB.kicad_pro /tmp/refill.kicad_pro; cp /k/AVO_GIRTH_PCB.kicad_sch /tmp/refill.kicad_sch
-            kicad-cli pcb drc --refill-zones --schematic-parity --severity-all --format report --units mm -o $R/kicad/drc_zonas_rellenadas_de_nuevo.rpt /tmp/refill.kicad_pcb || echo "sin --refill-zones"
+            # kicad-cli 9 no tiene --refill-zones: se rellenan las zonas con el rellenador de pcbnew y se repite el DRC
+            python3 hardware/girth/PCB/fuente/ci_kicad.py /tmp/refill.kicad_pcb /tmp/refill.kicad_pcb > $R/kicad/relleno_zonas.txt 2>&1
+            kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/kicad/drc_zonas_rellenadas_de_nuevo.rpt /tmp/refill.kicad_pcb
             kicad-cli sch export netlist --format kicadsexpr -o $R/kicad/netlist_esquema.net /k/AVO_GIRTH_PCB.kicad_sch
             python3 $A/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb $R/kicad/netlist_esquema.net $R/kicad
             mkdir -p /tmp/g
@@ -129,7 +131,10 @@ jobs:
           # QEMU solo emula el UART0 y su flash no admite QIO: misma compilación con Serial en UART0, flash en DIO y
           # registro de ESP-IDF en nivel info (para ver el cargador, la tabla de particiones y el arranque)
           FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default,FlashMode=dio,DebugLevel=info" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
-          ls -la /tmp/fw_prod /tmp/fw_qemu | tee -a $R/firmware/compilacion_produccion.txt
+          # boceto mínimo de control para QEMU (mismas opciones, sin periféricos)
+          arduino-cli compile -b "esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default,FlashMode=dio,DebugLevel=info" \
+            --output-dir /tmp/fw_min $A/qemu/minimo 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu_minimo.txt
+          ls -la /tmp/fw_prod /tmp/fw_qemu /tmp/fw_min | tee -a $R/firmware/compilacion_produccion.txt
           sha256sum /tmp/fw_prod/*.bin | tee $R/firmware/sha256_produccion.txt
 
       - name: Fase 11 · arranque en QEMU (Espressif, esp32c3)
@@ -145,15 +150,9 @@ jobs:
           $Q --version | tee -a $R/qemu/version.txt
           # eFuse de ESP-IDF para QEMU (chip v0.3); con eFuse a cero (v0.0) el cargador de IDF 5.5 no arranca
           cp $A/qemu/efuse_esp32c3_rev0_3.bin /tmp/efuse.bin
-          M=$(ls /tmp/fw_qemu/*.merged.bin)
-          ls -la $M
-          # sin -icount (con -icount 3 no pasaba del cargador en 30 s); 90 s de reloj real
-          timeout 90 $Q -nographic -machine esp32c3 -drive file=$M,if=mtd,format=raw \
-            -drive file=/tmp/efuse.bin,if=none,format=raw,id=efuse -global driver=nvram.esp32c3.efuse,property=drive,value=efuse \
-            -serial file:$R/qemu/uart0.log -monitor none > $R/qemu/qemu_stdout.txt 2>&1 || echo "fin (timeout esperado) $?" >> $R/qemu/qemu_stdout.txt
-          ls -la $R/qemu/; wc -l $R/qemu/uart0.log || true
-          head -c 2000000 $R/qemu/uart0.log > /tmp/u.log && mv /tmp/u.log $R/qemu/uart0.log || true
-          head -60 $R/qemu/uart0.log || true
+          # 60 s cada imagen; al final, registros de la CPU (monitor) y línea de código del PC (addr2line)
+          $A/qemu/ejecutar_qemu.sh $Q $(ls /tmp/fw_min/*.merged.bin) $(ls /tmp/fw_min/*.elf) /tmp/efuse.bin $R/qemu/minimo 60
+          $A/qemu/ejecutar_qemu.sh $Q $(ls /tmp/fw_qemu/*.merged.bin) $(ls /tmp/fw_qemu/*.elf) /tmp/efuse.bin $R/qemu/cincha 60
 
       - name: Guardar evidencias en la rama
         if: always()
