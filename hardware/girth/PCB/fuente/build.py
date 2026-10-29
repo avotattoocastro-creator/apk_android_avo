@@ -130,6 +130,8 @@ def via_drops(r, pads, log):
         fp = D.fp_of(rec["part"])
         if any(q.kind == "thru_hole" and q.num == rec["pad"].num for q in fp.pads):
             continue                                   # exposed pad with its own thermal vias
+        if (rec["part"]["ref"], rec["pad"].num) in EP_STUB_PINS:
+            continue                                   # joined to the exposed pad by a short stub (ep_stubs)
         if rec["part"]["ref"] == "U4" and rec["pad"].num not in ("1", "3", "11", "14", "36", "42", "48", "50", "51", "52", "53"):
             continue                                   # module: the rest join through the F.Cu pour and the EPAD vias
         nid = netid(net)
@@ -166,6 +168,25 @@ def via_drops(r, pads, log):
         done += 1
     log.append("vías a planos: %d, sin vía: %s" % (done, ", ".join(fails) or "ninguna"))
     return fails
+
+
+# GND pins of the QFNs that sit next to their exposed pad: a short inward stub joins them to it (the EP has its
+# own thermal vias to the planes), so no fan-out via blocks the escape of the neighbouring signal pins.
+EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15"), ("U1", "1"), ("U1", "20"), ("U1", "10"), ("U1", "11")}
+
+
+def ep_stubs(r, pads):
+    for rec in pads:
+        key = (rec["part"]["ref"], rec["pad"].num)
+        if key not in EP_STUB_PINS:
+            continue
+        cx, cy = D.kpos(rec["part"])
+        px, py = rec["c"]
+        dx, dy = cx - px, cy - py
+        L = math.hypot(dx, dy)
+        # from the pad centre towards the package centre, 0.75 mm (crosses the 0.2 mm gap into the EP)
+        end = (px + dx / L * 0.75, py + dy / L * 0.75)
+        r.add_track(D.CODE[D.GND], "F.Cu", (px, py), end, 0.2)
 
 
 def drill_block(r, pads):
@@ -350,6 +371,7 @@ def main():
         log = []
         r = build_router(pads)
         add_epad_vias(r)
+        ep_stubs(r, pads)
         fails_v = via_drops(r, pads, log)
         # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, relay
         pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
@@ -367,6 +389,9 @@ def main():
                 if not route_tree(r, net, netid(net), by_net[net], w) and not route_tree(r, net, netid(net), by_net[net], 0.2):
                     log.append("pre-ruteo fallido: " + net)
         write_board(r, os.path.join(out, "AVO_GIRTH_PCB_colocacion.kicad_pcb"), outer_pours=False)
+        stale = os.path.join(out, "AVO_GIRTH_PCB_ruteado.kicad_pcb")
+        if os.path.exists(stale):
+            os.remove(stale)            # the routed board belongs to the previous placement
         print("\n".join(log))
         import plot
         plot.draw(os.path.join(out, "..", "out_local_colocacion.png"), r.tracks, r.vias, "colocación + vías a planos")

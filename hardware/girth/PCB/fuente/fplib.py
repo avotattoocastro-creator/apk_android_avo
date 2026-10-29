@@ -158,13 +158,18 @@ def emit(fp, ref, value, x, y, angle, netmap, props=None, side="F", hide_value=T
 
     cx0, cy0, cx1, cy1 = fp.courtyard()
     rp = refpos if refpos is not None else (0, cy0 - 0.45)
-    n.append(prop("Reference", ref, rp, "F.SilkS" if side == "F" else "B.SilkS", size=ref_size))
+    # references on the assembly (Fab) layer: the board is too dense for readable silkscreen designators
+    n.append(prop("Reference", ref, (0, 0), "F.Fab" if side == "F" else "B.Fab", size=0.5))
     n.append(prop("Value", value, (0, cy1 + 0.6), "F.Fab", hide=hide_value))
     n.append(prop("Footprint", "AVO:" + fp.name, (0, 0), "F.Fab", hide=True))
     n.append(prop("Datasheet", "", (0, 0), "F.Fab", hide=True))
     n.append(prop("Description", "", (0, 0), "F.Fab", hide=True))
     for k, v in props.items():
         n.append(prop(k, v, (0, 0), "F.Fab", hide=True))
+    # link to the schematic symbol (same UUID the schematic writer uses) → DRC schematic parity
+    n.append([Sym("path"), "/" + uid("sym", ref)])
+    n.append([Sym("sheetname"), "/"])
+    n.append([Sym("sheetfile"), "AVO_GIRTH_PCB.kicad_sch"])
     attr = [Sym("attr"), Sym(fp.attr)]
     if props.get("DNP") == "1":
         attr.append(Sym("dnp"))

@@ -1,5 +1,8 @@
 name: Build AVO GIRTH PCB (KiCad 9)
 
+# Ruteado (Freerouting o placa reparada) → zonas → DRC con paridad y ERC → PUERTA → (solo si pasa) ficheros FINAL.
+# Si la puerta falla, el job termina en ROJO; los informes de diagnóstico se guardan igualmente.
+
 on:
   workflow_dispatch:
   push:
@@ -19,7 +22,7 @@ concurrency:
 jobs:
   pcb:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - name: KiCad 9 (imagen oficial)
@@ -28,80 +31,112 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Ruteado con Freerouting (DSN de KiCad → SES → KiCad)
+
+      - name: Ruteado
         run: |
           set -x
           P=hardware/girth/PCB
           R=$P/out/ruteado
-          rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render $R
-          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar || true
-          sha256sum /tmp/freerouting.jar > $R/freerouting.sha256 2>&1 || true
-          java -version > $R/java.log 2>&1 || true
-          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
-            python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
-          ls -la $R >> $R/export.log
-          if [ -s $R/placa.dsn ]; then
-            (sudo apt-get install -y -qq xvfb >/dev/null 2>&1; timeout 1200 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 60) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
-            tail -150 $R/freerouting_full.log > $R/freerouting.log; rm -f $R/freerouting_full.log
-          fi
-          if [ -s $R/placa.ses ]; then
-            docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
-              python3 fuente/ci_route.py import kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_GIRTH_PCB.kicad_pcb > $R/import.log 2>&1 || echo "import falló" >> $R/import.log
+          rm -rf $P/out && mkdir -p $P/out/render $R
+          if [ -f $P/kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb ]; then
+            # placa ya completa en la fuente (Freerouting + reparación con fuente/repair.py)
+            cp $P/kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb $P/kicad/AVO_GIRTH_PCB.kicad_pcb
+            echo "placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)" > $R/ORIGEN.txt
           else
-            echo "SIN RUTEAR: se usa la placa de colocación" | tee $R/AVISO.txt
-            cp $P/kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb $P/kicad/AVO_GIRTH_PCB.kicad_pcb
+            curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar
+            sha256sum /tmp/freerouting.jar > $R/freerouting.sha256
+            docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+              python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
+            if [ -s $R/placa.dsn ]; then
+              sudo apt-get install -y -qq xvfb >/dev/null 2>&1
+              (timeout 1500 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 60) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
+              tail -150 $R/fr.log > $R/freerouting.log; rm -f $R/fr.log
+            fi
+            if [ -s $R/placa.ses ]; then
+              docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
+                python3 fuente/ci_route.py import kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.ses kicad/AVO_GIRTH_PCB.kicad_pcb > $R/import.log 2>&1 || echo "import falló" >> $R/import.log
+              echo "Freerouting 1.9.0 sobre la placa de colocación (sin reparar)" > $R/ORIGEN.txt
+            else
+              cp $P/kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb $P/kicad/AVO_GIRTH_PCB.kicad_pcb
+              echo "SIN RUTEAR (Freerouting no entregó resultado)" > $R/ORIGEN.txt
+            fi
           fi
           sudo chmod -R a+rw $P || true
-      - name: Rellenar zonas, DRC, ERC y exportar
+
+      - name: Zonas, DRC (con paridad), ERC
         run: |
-          set -x
           P=hardware/girth/PCB
           docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
             set -x
-            kicad-cli version
+            kicad-cli version > out/kicad_version.txt
             python3 fuente/ci_kicad.py kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_pcb > out/kicad_info.txt 2>&1
             mv kicad/AVO_GIRTH_PCB.kicad_pcb.info.json out/kicad_info.json || true
-            kicad-cli pcb drc --format json --severity-all --units mm -o out/drc.json kicad/AVO_GIRTH_PCB.kicad_pcb
-            kicad-cli pcb drc --format report --severity-all --units mm -o out/drc.rpt kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --format json --severity-all --units mm -o out/drc.json kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --format report --severity-all --units mm -o out/drc.rpt kicad/AVO_GIRTH_PCB.kicad_pcb
             kicad-cli sch erc --format json --severity-all --units mm -o out/erc.json kicad/AVO_GIRTH_PCB.kicad_sch
             kicad-cli sch erc --format report --severity-all --units mm -o out/erc.rpt kicad/AVO_GIRTH_PCB.kicad_sch
             kicad-cli sch export pdf -o out/AVO_GIRTH_PCB_esquema.pdf kicad/AVO_GIRTH_PCB.kicad_sch
-            kicad-cli sch export netlist --format kicadsexpr -o out/netlist_esquema.net kicad/AVO_GIRTH_PCB.kicad_sch
-            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
-            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
-            kicad-cli pcb export pos --format csv --units mm --side both -o out/posiciones_kicad.csv kicad/AVO_GIRTH_PCB.kicad_pcb
-            kicad-cli pcb export pdf -l F.Cu,F.Silkscreen,F.Fab,Edge.Cuts --include-border-title -o out/AVO_GIRTH_PCB_cara_superior.pdf kicad/AVO_GIRTH_PCB.kicad_pcb || true
             for L in F.Cu In1.Cu In2.Cu B.Cu; do
-              kicad-cli pcb export svg -l $L,Edge.Cuts --exclude-drawing-sheet --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_GIRTH_PCB.kicad_pcb || \
-              kicad-cli pcb export svg -l $L,Edge.Cuts --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_GIRTH_PCB.kicad_pcb || true
+              kicad-cli pcb export svg -l $L,Edge.Cuts --exclude-drawing-sheet --page-size-mode 2 -o out/render/capa_$L.svg kicad/AVO_GIRTH_PCB.kicad_pcb || true
             done
             kicad-cli pcb render --side top --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/arriba.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
             kicad-cli pcb render --side bottom --quality high -w 1800 -h 1200 --zoom 1.6 -o out/render/abajo.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
-            kicad-cli pcb render --side top --rotate "-50,0,25" --quality high -w 1800 -h 1200 --zoom 1.4 -o out/render/iso.png kicad/AVO_GIRTH_PCB.kicad_pcb || true
-            kicad-cli pcb export step --subst-models --force -o out/AVO_GIRTH_PCB.step kicad/AVO_GIRTH_PCB.kicad_pcb || true
             chmod -R a+rw out kicad
           '
-      - name: BOM / CPL para JLCPCB y resumen
+
+      - name: Puerta de fabricación (bloqueante)
+        id: gate
         working-directory: hardware/girth/PCB
         run: |
+          set +e
+          python3 fuente/gate.py > out/gate.log 2>&1
+          rc=$?
+          cat out/gate.log
+          if [ $rc -eq 0 ]; then echo "ok=true" >> $GITHUB_OUTPUT; else echo "ok=false" >> $GITHUB_OUTPUT; fi
+          exit 0
+
+      - name: Ficheros de fabricación FINAL (solo si la puerta pasa)
+        if: steps.gate.outputs.ok == 'true'
+        run: |
+          set -ex
+          P=hardware/girth/PCB
+          mkdir -p $P/out/FINAL $P/out/gerber
+          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+            set -ex
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export pos --format csv --units mm --side both -o out/posiciones_kicad.csv kicad/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export step --subst-models --force -o out/FINAL/AVO_GIRTH_PCB_FINAL_STEP.step kicad/AVO_GIRTH_PCB.kicad_pcb
+            chmod -R a+rw out
+          '
+          cd $P
           python3 fuente/jlc.py
-          cd out/gerber && zip -q ../AVO_GIRTH_PCB_GERBER_JLCPCB.zip * && cd ../..
-          python3 - <<'PY'
-          import json
-          d = json.load(open("out/drc.json"))
-          v = d.get("violations", []); u = d.get("unconnected_items", []); p = d.get("schematic_parity", [])
-          print(f"::notice title=DRC::{len(v)} violaciones, {len(u)} sin conectar, {len(p)} paridad")
-          e = json.load(open("out/erc.json"))
-          n = sum(len(s.get("violations", [])) for s in e.get("sheets", []))
-          print(f"::notice title=ERC::{n} avisos/errores")
-          PY
+          cp out/JLCPCB_BOM.csv out/FINAL/AVO_GIRTH_PCB_FINAL_BOM.csv
+          cp out/JLCPCB_CPL.csv out/FINAL/AVO_GIRTH_PCB_FINAL_CPL.csv
+          cp out/drc.rpt out/FINAL/AVO_GIRTH_PCB_FINAL_DRC.txt
+          cp out/erc.rpt out/FINAL/AVO_GIRTH_PCB_FINAL_ERC.txt
+          cp out/AVO_GIRTH_PCB_FINAL_REPORTE.md out/FINAL/
+          (cd out/gerber && zip -q ../FINAL/AVO_GIRTH_PCB_FINAL_GERBER_JLCPCB.zip *)
+          mkdir -p out/FINAL/KiCad && cp kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_sch kicad/AVO_GIRTH_PCB.kicad_pro out/FINAL/KiCad/
+          (cd out/FINAL && sha256sum *.* KiCad/* > SHA256SUMS.txt)
+
       - name: Guardar resultados en la rama
+        if: always()
         run: |
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           git add hardware/girth/PCB/out hardware/girth/PCB/kicad
-          git commit -m "PCB cincha: DRC/ERC, Gerber y renders de KiCad 9 [skip ci]" || echo "sin cambios"
+          git commit -m "PCB cincha: resultados de KiCad 9 (puerta: ${{ steps.gate.outputs.ok }}) [skip ci]" || echo "sin cambios"
           git pull --rebase -X theirs origin ${{ github.ref_name }} && git push
+
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: AVO-GIRTH-PCB-JLCPCB
+          name: AVO-GIRTH-PCB-${{ steps.gate.outputs.ok == 'true' && 'FINAL' || 'DIAGNOSTICO' }}
           path: hardware/girth/PCB/out
+
+      - name: Resultado
+        run: |
+          if [ "${{ steps.gate.outputs.ok }}" != "true" ]; then
+            echo "::error title=Puerta de fabricación::DRC/ERC con errores o conexiones incompletas: no hay ficheros FINAL"
+            exit 1
+          fi

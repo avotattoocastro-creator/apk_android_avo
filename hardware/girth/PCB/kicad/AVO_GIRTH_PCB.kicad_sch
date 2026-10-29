@@ -1048,7 +1048,7 @@
 					line
 					(at -21.59 8.89 0)
 					(length 2.54)
-					(name "IO14" (effects (font (size 1.27 1.27))))
+					(name "IO14 RELÉ ON" (effects (font (size 1.27 1.27))))
 					(number "19" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -2024,6 +2024,42 @@
 		(uuid "2e6c35e8-cfd9-577f-8d6a-70ea1fed1a95")
 	)
 	(symbol
+		(lib_id "AVO:BAT54C_D")
+		(at 505.46 248.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bf5bd3f2-b63a-5689-a380-40f773ebebc2")
+		(property "Reference" "D11" (at 505.46 247.65 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "BAT54C" (at 505.46 250.19 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 248.92 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 248.92 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 248.92 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C2135" (at 505.46 248.92 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 248.92 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "d65fab72-e7fa-5cb5-ab53-38b14d308247"))
+		(pin "2" (uuid "ed82626e-021d-5ba5-a94b-6683c3d24d2a"))
+		(pin "3" (uuid "522f5215-ec61-56b5-a934-98cb2015cb5b"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "D11") (unit 1)))
+		)
+	)
+	(label
+		"RLY_ON_D"
+		(at 495.3 247.65 180)
+		(effects (font (size 1 1)) (justify right bottom))
+		(uuid "b33a1c69-e77d-5c9a-b9f2-102f11204c90")
+	)
+	(no_connect (at 495.3 250.19) (uuid "b1b928ea-2b2c-51ae-9cbd-ef9a2580bf2d"))
+	(label
+		"RLY_GB"
+		(at 515.62 247.65 0)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "11ca03f2-1f43-554d-be5f-157ff4f6e629")
+	)
+	(symbol
 		(lib_id "AVO:USB-C_J")
 		(at 234.95 57.15 0)
 		(unit 1)
@@ -2213,26 +2249,26 @@
 	)
 	(symbol
 		(lib_id "AVO:G6KU-2F-Y_K")
-		(at 505.46 254 0)
+		(at 505.46 270.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "241adebd-68b5-5b45-8f9d-1c3e480a7a18")
-		(property "Reference" "K1" (at 505.46 252.73 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "G6KU-2F-Y DC3" (at 505.46 255.27 0) (effects (font (size 1 1))))
+		(property "Reference" "K1" (at 505.46 269.24 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "G6KU-2F-Y DC3" (at 505.46 271.78 0) (effects (font (size 1 1))))
 		(property
 			"Footprint"
 			"AVO:Relay_DPDT_Omron_G6K-2F-Y"
-			(at 505.46 254 0)
+			(at 505.46 270.51 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 505.46 254 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 254 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C6259328" (at 505.46 254 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "G6KU-2F-Y-TR DC3" (at 505.46 254 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 270.51 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 270.51 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C6259328" (at 505.46 270.51 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "G6KU-2F-Y-TR DC3" (at 505.46 270.51 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "d4d72158-9f18-59b4-877a-af536d718acc"))
 		(pin "8" (uuid "f1a4a077-8b5e-5244-8f2d-13b92f947ee6"))
 		(pin "3" (uuid "c1321e79-dd57-543a-bcfe-52bdf85b7411"))
@@ -2247,49 +2283,49 @@
 	)
 	(label
 		"K_A"
-		(at 490.22 247.65 180)
+		(at 490.22 264.16 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "f12bb649-6863-536b-bdc5-cdf4df3a371f")
 	)
 	(label
 		"K_B"
-		(at 490.22 250.19 180)
+		(at 490.22 266.7 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "cca2b723-1ad8-586a-b19f-ddb28d88f6ec")
 	)
 	(label
 		"BAT_RAW"
-		(at 520.7 247.65 0)
+		(at 520.7 264.16 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "93b2b19d-bf27-505b-8403-868b5d55309b")
 	)
 	(label
 		"BAT_RAW"
-		(at 520.7 250.19 0)
+		(at 520.7 266.7 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "3988861b-11d8-52ec-9ef8-3be0730632f1")
 	)
 	(label
 		"RLY_NO"
-		(at 520.7 252.73 0)
+		(at 520.7 269.24 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "4a8ad529-5e81-507d-9cf2-7de61f32c8e7")
 	)
 	(label
 		"RLY_NO"
-		(at 520.7 255.27 0)
+		(at 520.7 271.78 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "550b29cb-dc18-5cf5-81d1-53651757422d")
 	)
 	(label
 		"RLY_NC"
-		(at 520.7 257.81 0)
+		(at 520.7 274.32 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "2e4e8315-ce81-530e-913c-ae28b9fed8e7")
 	)
 	(label
 		"RLY_NC"
-		(at 520.7 260.35 0)
+		(at 520.7 276.86 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "b2104dfa-8504-558c-895a-e6b0bd2aaaa0")
 	)
@@ -2336,20 +2372,20 @@
 	)
 	(symbol
 		(lib_id "AVO:AO3401A_Q")
-		(at 505.46 275.59 0)
+		(at 505.46 292.1 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "709439d9-3f6a-5775-abab-c9b160c19c0b")
-		(property "Reference" "Q10" (at 505.46 274.32 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "AO3401A" (at 505.46 276.86 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 275.59 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 275.59 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 275.59 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C15127" (at 505.46 275.59 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 275.59 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q10" (at 505.46 290.83 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3401A" (at 505.46 293.37 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C15127" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "b29ba421-e85b-505d-bb16-89aed3c25db2"))
 		(pin "2" (uuid "f1bba107-281a-56f8-bd2a-72f303539bb4"))
 		(pin "3" (uuid "be217038-2d9f-5929-b5c9-b138ec8036f9"))
@@ -2359,38 +2395,38 @@
 	)
 	(label
 		"SS_G"
-		(at 495.3 274.32 180)
+		(at 495.3 290.83 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "696a9c81-3a01-51df-9759-6372c6e60071")
 	)
 	(label
 		"BAT_SW"
-		(at 515.62 274.32 0)
+		(at 515.62 290.83 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "5cd0dd18-3e0a-5525-9659-c80365a973b5")
 	)
 	(label
 		"VBAT"
-		(at 515.62 276.86 0)
+		(at 515.62 293.37 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "418f311c-40c4-5c88-bd06-f05d5b8b132d")
 	)
 	(symbol
 		(lib_id "AVO:AO3400A_Q")
-		(at 505.46 292.1 0)
+		(at 505.46 308.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ddfc082a-a1ae-5929-a36a-21a7300ccde6")
-		(property "Reference" "Q11" (at 505.46 290.83 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "AO3400A" (at 505.46 293.37 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C20917" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q11" (at 505.46 307.34 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3400A" (at 505.46 309.88 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C20917" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "cdf32bec-1692-59b6-894d-89d1ec2cfec2"))
 		(pin "3" (uuid "56dd9331-4a95-5aff-b409-b0187d4c11a7"))
 		(pin "2" (uuid "c21ab510-a9d6-5bc6-8074-bf141bd84d84"))
@@ -2400,38 +2436,38 @@
 	)
 	(label
 		"RLY_GB"
-		(at 495.3 290.83 180)
+		(at 495.3 307.34 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "336892ec-3874-5c08-bd5a-f5008811b69a")
 	)
 	(label
 		"K_B"
-		(at 515.62 290.83 0)
+		(at 515.62 307.34 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "f74c396a-4b79-5696-abaa-632c5331d66c")
 	)
 	(label
 		"GND"
-		(at 515.62 293.37 0)
+		(at 515.62 309.88 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "578cd51b-287b-54da-bb07-95cb170f5ba5")
 	)
 	(symbol
 		(lib_id "AVO:2N7002_Q")
-		(at 505.46 308.61 0)
+		(at 505.46 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "24a4e920-505f-5f80-a08d-b7f61be5c68a")
-		(property "Reference" "Q12" (at 505.46 307.34 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "2N7002" (at 505.46 309.88 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C8545" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 308.61 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q12" (at 505.46 323.85 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2N7002" (at 505.46 326.39 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C8545" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7c4da113-7e0b-5a69-872b-7d02ce5d9676"))
 		(pin "3" (uuid "db9a7d34-b38e-5532-9762-76c62d9c41c5"))
 		(pin "2" (uuid "9b3fab06-0cca-5340-8f71-1efdbfebd378"))
@@ -2441,38 +2477,38 @@
 	)
 	(label
 		"RLY_OFF"
-		(at 495.3 307.34 180)
+		(at 495.3 323.85 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "c6f3b009-488a-5eb2-b3b8-bb910dc8a354")
 	)
 	(label
 		"RLY_GB"
-		(at 515.62 307.34 0)
+		(at 515.62 323.85 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "8e2c6e4b-28ab-55f3-81e9-ee020b33a8ee")
 	)
 	(label
 		"GND"
-		(at 515.62 309.88 0)
+		(at 515.62 326.39 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "94556a83-a952-5fd5-aa38-ced7fde47883")
 	)
 	(symbol
 		(lib_id "AVO:AO3400A_Q")
-		(at 505.46 325.12 0)
+		(at 505.46 341.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "d4fc1b39-c8bc-5902-91e3-2637f100efb2")
-		(property "Reference" "Q13" (at 505.46 323.85 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "AO3400A" (at 505.46 326.39 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C20917" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 325.12 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q13" (at 505.46 340.36 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3400A" (at 505.46 342.9 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C20917" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "b75c2e93-329f-5580-9266-ee38592e0b89"))
 		(pin "3" (uuid "ac366dde-20c3-5e27-8cd8-bc14781b7204"))
 		(pin "2" (uuid "e9673a7b-ffd9-532c-91ff-ee45ac3f3df9"))
@@ -2482,38 +2518,38 @@
 	)
 	(label
 		"RLY_OFF"
-		(at 495.3 323.85 180)
+		(at 495.3 340.36 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "a9f80ef6-7b3e-5419-94ff-0960550f19db")
 	)
 	(label
 		"K_A"
-		(at 515.62 323.85 0)
+		(at 515.62 340.36 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "a20cf424-9552-5eba-8e60-2a04e7e9a725")
 	)
 	(label
 		"GND"
-		(at 515.62 326.39 0)
+		(at 515.62 342.9 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "2b6db2bf-4923-58cb-996c-64df842f6e76")
 	)
 	(symbol
 		(lib_id "AVO:AO3401A_Q")
-		(at 505.46 341.63 0)
+		(at 505.46 358.14 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "17292b34-bb77-538a-ae10-76c07ccee040")
-		(property "Reference" "Q14" (at 505.46 340.36 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "AO3401A" (at 505.46 342.9 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C15127" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q14" (at 505.46 356.87 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3401A" (at 505.46 359.41 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C15127" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "a41bef2f-a0e4-55e5-a93d-5854794bcc85"))
 		(pin "2" (uuid "735773d0-0271-5436-abb8-2c07b4ca6855"))
 		(pin "3" (uuid "85a55b55-d896-506a-b1b1-d9926934fd13"))
@@ -2523,38 +2559,38 @@
 	)
 	(label
 		"RLY_PG"
-		(at 495.3 340.36 180)
+		(at 495.3 356.87 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "d27cf9e2-4dfe-51f7-94d3-6fff5a7753bd")
 	)
 	(label
 		"VBAT"
-		(at 515.62 340.36 0)
+		(at 515.62 356.87 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "45430452-01c1-5b44-9d6f-efb5695f2176")
 	)
 	(label
 		"K_B"
-		(at 515.62 342.9 0)
+		(at 515.62 359.41 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "70bdbd28-ea33-57b5-a818-465f04c24cd4")
 	)
 	(symbol
 		(lib_id "AVO:2N7002_Q")
-		(at 505.46 358.14 0)
+		(at 505.46 374.65 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ac2e5d24-18cf-5643-918f-7bc79a08a001")
-		(property "Reference" "Q15" (at 505.46 356.87 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "2N7002" (at 505.46 359.41 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C8545" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 505.46 358.14 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q15" (at 505.46 373.38 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2N7002" (at 505.46 375.92 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 374.65 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 374.65 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 374.65 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C8545" (at 505.46 374.65 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 374.65 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "e811afb0-2442-5d28-b750-5ee14115a801"))
 		(pin "3" (uuid "e5ad7bd5-536e-5d9d-adc6-3400782762e6"))
 		(pin "2" (uuid "0a3d0922-3f5d-5663-8fde-b52461dfc932"))
@@ -2564,19 +2600,19 @@
 	)
 	(label
 		"RLY_OFF"
-		(at 495.3 356.87 180)
+		(at 495.3 373.38 180)
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "bc3b21a1-3f3b-5860-913f-5ba7c56d0b9a")
 	)
 	(label
 		"RLY_PG"
-		(at 515.62 356.87 0)
+		(at 515.62 373.38 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "9233f7fd-18ad-50c8-ab59-d6dacfd92c05")
 	)
 	(label
 		"GND"
-		(at 515.62 359.41 0)
+		(at 515.62 375.92 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "5377d930-ffe3-5f31-98a0-0f68dc893787")
 	)
@@ -2620,6 +2656,88 @@
 		(at 415.29 250.19 0)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "4f8cdafa-d663-52d5-a43e-32b01e334725")
+	)
+	(symbol
+		(lib_id "AVO:AO3401A_Q")
+		(at 505.46 391.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c74d5863-3e9e-5bed-8711-cada7780f112")
+		(property "Reference" "Q17" (at 505.46 389.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3401A" (at 505.46 392.43 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 391.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 391.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 391.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C15127" (at 505.46 391.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 391.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "0d347723-0954-5e8f-ae98-a4dceab4ab0a"))
+		(pin "2" (uuid "4f6915be-d349-5fa8-a836-10bfc7ad3d66"))
+		(pin "3" (uuid "e24c224f-d239-5c81-af4d-6b3a01b16bac"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "Q17") (unit 1)))
+		)
+	)
+	(label
+		"RLY_SG"
+		(at 495.3 389.89 180)
+		(effects (font (size 1 1)) (justify right bottom))
+		(uuid "19443d0b-57ae-5873-b721-49b02bfb59ad")
+	)
+	(label
+		"VSYS"
+		(at 515.62 389.89 0)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "80a01b60-f517-58e6-9b0c-21fbbe96ce8c")
+	)
+	(label
+		"K_A_SET"
+		(at 515.62 392.43 0)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "45c9c64c-c620-579d-8c76-e664a7ad6cf5")
+	)
+	(symbol
+		(lib_id "AVO:2N7002_Q")
+		(at 505.46 407.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dd998bca-678e-5f93-adab-290bc7cec1c5")
+		(property "Reference" "Q18" (at 505.46 406.4 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "2N7002" (at 505.46 408.94 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 505.46 407.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 505.46 407.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 505.46 407.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C8545" (at 505.46 407.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 505.46 407.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "471ff849-7d39-5c85-bae6-50efe553643b"))
+		(pin "3" (uuid "cd1eeeca-9f86-5072-96b5-e109e6ee0c3c"))
+		(pin "2" (uuid "04bbdf20-ac12-5341-87fd-83a416beb615"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "Q18") (unit 1)))
+		)
+	)
+	(label
+		"RLY_ON"
+		(at 495.3 406.4 180)
+		(effects (font (size 1 1)) (justify right bottom))
+		(uuid "47901b29-25d5-542c-a53e-656f8e3d1b50")
+	)
+	(label
+		"RLY_SG"
+		(at 515.62 406.4 0)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "ad67d175-e503-5f95-a030-ebbe36449dbe")
+	)
+	(label
+		"GND"
+		(at 515.62 408.94 0)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "47ef166f-927b-5c1d-bc18-1330bc468f3f")
 	)
 	(symbol
 		(lib_id "AVO:AO3401A_Q")
@@ -3229,7 +3347,12 @@
 		(effects (font (size 1 1)) (justify right bottom))
 		(uuid "98c7c981-a68c-567d-ae8b-6e5ae2c916e7")
 	)
-	(no_connect (at 38.1 261.62) (uuid "3c5682f6-e7f6-5e19-8884-c73ff1d83b91"))
+	(label
+		"RLY_ON"
+		(at 38.1 261.62 180)
+		(effects (font (size 1 1)) (justify right bottom))
+		(uuid "a84561c2-1b8e-5141-be78-f12a48c43e61")
+	)
 	(label
 		"LED"
 		(at 38.1 264.16 180)
@@ -6761,6 +6884,166 @@
 		(at 563.88 233.68 270)
 		(effects (font (size 1 1)) (justify left bottom))
 		(uuid "5cf8fc03-708c-5080-ad7a-0bfd5cbc2bfb")
+	)
+	(symbol
+		(lib_id "AVO:R_avo")
+		(at 563.88 246.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deea34f5-f168-58ce-927f-d2e7646763c9")
+		(property "Reference" "R52" (at 563.88 245.11 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "10R" (at 563.88 247.65 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:R_0805_2012Metric"
+			(at 563.88 246.38 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 563.88 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 563.88 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C17415" (at 563.88 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 563.88 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "7c172cbf-a6db-5466-b546-c86689c12557"))
+		(pin "2" (uuid "560bf0a2-de48-5b49-b7ff-a054fc8b32d4"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R52") (unit 1)))
+		)
+	)
+	(label
+		"K_A_SET"
+		(at 563.88 242.57 90)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "f89b8f42-dcc8-590e-8e4e-60f914bc1c82")
+	)
+	(label
+		"K_A"
+		(at 563.88 250.19 270)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "4d50a631-94cb-58e4-b678-70fa4f37d2fb")
+	)
+	(symbol
+		(lib_id "AVO:R_avo")
+		(at 563.88 264.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a25da9b2-c298-560b-9411-8ea9cdfae13e")
+		(property "Reference" "R53" (at 563.88 262.89 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "100k" (at 563.88 265.43 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:R_0402_1005Metric"
+			(at 563.88 264.16 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 563.88 264.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 563.88 264.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25741" (at 563.88 264.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 563.88 264.16 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "d658164a-7cf8-5bad-ae7c-e4f509f64f48"))
+		(pin "2" (uuid "088723a4-9fa7-56d9-a25a-a64a59bfaa1d"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R53") (unit 1)))
+		)
+	)
+	(label
+		"RLY_SG"
+		(at 563.88 260.35 90)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "fcebe7d4-2312-5cca-95dc-1e3b1aff3310")
+	)
+	(label
+		"VSYS"
+		(at 563.88 267.97 270)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "7950e941-a009-53c2-a7eb-8e214b7018c2")
+	)
+	(symbol
+		(lib_id "AVO:R_avo")
+		(at 563.88 280.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "afb64914-4dab-5a37-b036-504b632fda46")
+		(property "Reference" "R54" (at 563.88 279.4 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "100k" (at 563.88 281.94 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:R_0402_1005Metric"
+			(at 563.88 280.67 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 563.88 280.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 563.88 280.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25741" (at 563.88 280.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 563.88 280.67 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "83fb56cc-a8a7-5194-8959-78ff927961ee"))
+		(pin "2" (uuid "8909dba3-9a5b-5bd7-a855-b6c7d28d8f67"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R54") (unit 1)))
+		)
+	)
+	(label
+		"RLY_ON"
+		(at 563.88 276.86 90)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "eb2e092a-0082-5e9c-a263-7a299d020822")
+	)
+	(label
+		"GND"
+		(at 563.88 284.48 270)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "c551f58c-1df5-53fe-891c-001359e06951")
+	)
+	(symbol
+		(lib_id "AVO:R_avo")
+		(at 563.88 298.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5b550785-98dc-578f-8f6d-45d5f62ec808")
+		(property "Reference" "R55" (at 563.88 297.18 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "1k" (at 563.88 299.72 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:R_0402_1005Metric"
+			(at 563.88 298.45 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 563.88 298.45 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 563.88 298.45 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C11702" (at 563.88 298.45 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 563.88 298.45 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "f5cf4a67-7216-5e9d-9ed1-2b11ed3ff809"))
+		(pin "2" (uuid "c7dc145b-c58e-57df-ba82-da6c483f34b0"))
+		(instances
+			(project "AVO_GIRTH_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R55") (unit 1)))
+		)
+	)
+	(label
+		"RLY_ON"
+		(at 563.88 294.64 90)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "ef76bf15-3218-5aa4-b2e3-ecbe9343b3d4")
+	)
+	(label
+		"RLY_ON_D"
+		(at 563.88 302.26 270)
+		(effects (font (size 1 1)) (justify left bottom))
+		(uuid "56e4da69-c142-5d74-82a8-f659eb0d805e")
 	)
 	(symbol
 		(lib_id "AVO:R_avo")

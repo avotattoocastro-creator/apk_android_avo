@@ -182,14 +182,14 @@ LC = {
     "10u": "C96446", "22u": "C45783", "470n": "C1623",
     "100n C0G": "C97946", "47n C0G": "C21812", "2n2 C0G": "C51795", "1n C0G": "C1636",
     "NTC10k": "C77131", "G6KU": "C6259328", "AO3400A": "C20917", "2N7002": "C8545", "BAT54C": "C2135",
-    "0R0805": "C17477", "220u": "C79111", "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
+    "0R0805": "C17477", "220u": "C79111", "10R0805": "C17415", "AO3401A": "C15127", "USBLC6": "C7519", "LED": "C2286",
     "RT9080": "C841192", "BQ51013B": "C55663", "BQ24072": "C140288", "MINI1U": "C7558096",
     "BNO085": "C5189642", "XTAL": "C32346", "USBC": "C165948", "JST_SH2": "C160402",
 }
 
 
 def R(ref, val, n1, n2, pos, rot=0, block="", dnp=False, fp="R0402", note=""):
-    lc = LC["0R0805"] if (fp == "R0805" and val == "0R") else LC.get(val.replace("Ω", ""), "")
+    lc = LC.get(val + "0805", "") if fp == "R0805" else LC.get(val.replace("Ω", ""), "")
     part(ref, fp, val, pos, rot, {1: n1, 2: n2}, lc, block=block, sym="R", dnp=dnp,
          note=note)
 
@@ -286,12 +286,12 @@ part("U4", "MINI1U", "ESP32-C6-MINI-1U-N4", MCU, 90,
           [(3, V3), (4, None), (7, None), (21, None), (32, None), (33, None), (34, None), (35, None),
            (8, "EN"), (12, "IMU_INT"), (13, "IMU_RST"), (5, "BAT_ADC"), (6, "CHG_PG"), (9, "CHG_STAT"),
            (10, "IMU_PWR_N"), (15, "REED"), (16, "IMU_WAKE"), (17, "USB_DM"), (18, "USB_DP"),
-           (19, None), (20, "LED"), (22, "GPIO8"), (23, "BOOT"), (24, "IMU_CS"), (25, "IMU_SCK"),
+           (19, "RLY_ON"), (20, "LED"), (22, "GPIO8"), (23, "BOOT"), (24, "IMU_CS"), (25, "IMU_SCK"),
            (26, "IMU_MOSI"), (27, "IMU_MISO"), (28, "QI_CHG"), (29, "RLY_OFF"), (30, "U0RX"), (31, "U0TX")]),
      LC["MINI1U"], "ESP32-C6-MINI-1U-N4 (alt. -H4 C20627095)", "ESP32-C6",
      sym=dict(L=[(3, "3V3"), (8, "EN"), (12, "IO0 IMU_INT"), (13, "IO1 IMU_RST"), (5, "IO2 BAT_ADC"),
                  (6, "IO3 CHG_PG"), (9, "IO4 CHG_STAT"), (10, "IO5 IMU_PWR"), (15, "IO6 REED"),
-                 (16, "IO7 IMU_WAKE"), (22, "IO8"), (23, "IO9 BOOT"), (19, "IO14"), (20, "IO15 LED"),
+                 (16, "IO7 IMU_WAKE"), (22, "IO8"), (23, "IO9 BOOT"), (19, "IO14 RELÉ ON"), (20, "IO15 LED"),
                  (4, "NC"), (7, "NC"), (21, "NC"), (32, "NC"), (33, "NC"), (34, "NC"), (35, "NC")],
               R=[(17, "IO12 D-"), (18, "IO13 D+"), (24, "IO18 CS"), (25, "IO19 SCK"), (26, "IO20 MOSI"),
                  (27, "IO21 MISO"), (28, "IO22 QI_CHG"), (29, "IO23 RELÉ OFF"), (30, "IO17 RXD0"), (31, "IO16 TXD0")] +
@@ -425,6 +425,21 @@ part("Q16", "SOT23", "2N7002", (-3.8, -10.4), 0, {1: "REED_G", 2: GND, 3: "REED"
      sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="reed (a + batería) → GPIO6 a 3,3 V")
 R("R49", "100k", "REED_HI", "REED_G", (-8.1, -16.9), 0, "Reed")
 R("R50", "1M", "REED_G", GND, (-6.2, -16.9), 0, "Reed")
+
+# Encendido del relé desde el firmware (GPIO14): si el ESP32 está alimentado por el cargador (camino de potencia del
+# BQ24072) con el relé abierto, lo vuelve a cerrar. Así el sistema nunca queda bloqueado apagado con la base puesta.
+#  SET por firmware: GPIO14 HIGH 20 ms → Q18 baja la puerta de Q17 (VSYS → R52 → K_A) y D11 enciende Q11 (K_B a masa).
+#  Q12 (GPIO23) anula Q11; si por error se activan GPIO14 y GPIO23 a la vez, R52 limita el cruce a ~0,4 A.
+part("Q17", "SOT23", "AO3401A", (-12.9, 8.8), 0, {1: "RLY_SG", 2: VSYS, 3: "K_A_SET"}, LC["AO3401A"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]))
+R("R52", "10R", "K_A_SET", "K_A", (-14.6, 6.0), 0, "Corte", fp="R0805", note="limita el cruce del puente H")
+R("R53", "100k", "RLY_SG", VSYS, (-11.8, 6.2), 0, "Corte")
+part("Q18", "SOT23", "2N7002", (-9.4, 8.8), 0, {1: "RLY_ON", 2: GND, 3: "RLY_SG"}, LC["2N7002"], block="Corte",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
+R("R54", "100k", "RLY_ON", GND, (-9.8, 6.2), 0, "Corte", note="relé quieto en el arranque del ESP32")
+R("R55", "1k", "RLY_ON", "RLY_ON_D", (-8.3, 5.6), 90, "Corte")
+part("D11", "SOT23", "BAT54C", (-5.9, 8.8), 0, {1: "RLY_ON_D", 2: None, 3: "RLY_GB"}, LC["BAT54C"], block="Corte",
+     sym=dict(L=[(1, "A1"), (2, "A2")], R=[(3, "K")]), note="GPIO14 → puerta de Q11 (bloquea la vuelta)")
 
 # --------------------------------------------------------------------------------- colocación (X, Y, giro)
 POS = {
@@ -579,6 +594,7 @@ def dist_to_poly(x, y, poly):
 
 
 if __name__ == "__main__" and "--place" in sys.argv:
-    for e in check_placement():
+    errs = check_placement()
+    for e in errs:
         print(e)
-    sys.exit(0)
+    sys.exit(1 if errs else 0)
