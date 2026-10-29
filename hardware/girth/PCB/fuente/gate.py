@@ -136,6 +136,21 @@ if os.path.exists(cst):
     L.append("| Pedido | REV A componentes | REV A Extended | REV A total | REV B componentes | REV B Extended | REV B total | Reducción |")
     L.append("|---|---|---|---|---|---|---|---|")
     L += rows
+fw = os.path.join("..", "..", "..", "firmware", "girth", "V0_3_0_C3", "out")
+fz = os.path.join(fw, "AVO_GIRTH_PCB_C3_FIRMWARE.zip")
+L.append("")
+L.append("## Firmware incluido")
+if os.path.exists(fz):
+    import hashlib
+    L.append("- `AVO_GIRTH_PCB_C3_FIRMWARE.zip` (compilado por `build-girth-c3.yml`), SHA256 `%s`"
+             % hashlib.sha256(open(fz, "rb").read()).hexdigest())
+    mem = os.path.join(fw, "bin", "memoria.txt")
+    if os.path.exists(mem):
+        for l in open(mem, encoding="utf-8"):
+            L.append("- " + l.strip())
+    L.append("- Compila; **no probado en placa**.")
+else:
+    L.append("- **Falta**: no hay firmware compilado en la rama.")
 L.append("")
 L.append("## Estado de fabricación")
 L.append("- Diseño verificado por software (KiCad 9 en el CI): %s" % ("**sí**" if ok else "**no**"))
