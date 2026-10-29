@@ -18,7 +18,6 @@
 
 ## Avisos
 
-- 16 piezas montadas llevan en MPN el valor (p. ej. «100n»), no un número de fabricante: AISLER las tendrá que emparejar por valor/huella en su herramienta de BOM
 - El ODB++ no lleva espesor ni acabado: 1,0 mm y ENIG se eligen en el pedido de AISLER
 
 ## Features por capa
