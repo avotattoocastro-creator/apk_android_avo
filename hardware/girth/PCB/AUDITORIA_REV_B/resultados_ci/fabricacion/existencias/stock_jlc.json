@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-29 20:29 UTC",
+ "date_utc": "2026-10-29 20:40 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21916419,
+   "stock": 21914459,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 948421,
+   "stock": 948363,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 32001877,
+   "stock": 32001491,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "SM02B-SRSS-TB(LF)(SN)",
    "maker": "JST",
    "package": "SMD,P=1mm,Surface Mount，Right Angle",
-   "stock": 75713,
+   "stock": 75706,
    "library": "expand",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "CL10B474KA8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 689011,
+   "stock": 688781,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "TYPE-C-31-M-12",
    "maker": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 288935,
+   "stock": 288920,
    "library": "expand",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12131984,
+   "stock": 12132642,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "AO3400A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1146679,
+   "stock": 1146645,
    "library": "base",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7353773,
+   "stock": 7353708,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "CL10A225KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 2900555,
+   "stock": 2900535,
    "library": "base",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "0402WGF5101TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3834513,
+   "stock": 3831323,
    "library": "base",
    "prices": [
     [
@@ -1057,7 +1057,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3826304,
+   "stock": 3826256,
    "library": "base",
    "prices": [
     [
@@ -1232,7 +1232,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 37118,
+   "stock": 37106,
    "library": "expand",
    "prices": [
     [
@@ -1337,7 +1337,7 @@
    "mpn": "2N7002",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOT-23",
-   "stock": 3088597,
+   "stock": 3088362,
    "library": "base",
    "prices": [
     [
@@ -1442,7 +1442,7 @@
    "mpn": "GRM31C5C1H104JA01L",
    "maker": "Murata Electronics",
    "package": "1206",
-   "stock": 67307,
+   "stock": 67035,
    "library": "expand",
    "prices": [
     [

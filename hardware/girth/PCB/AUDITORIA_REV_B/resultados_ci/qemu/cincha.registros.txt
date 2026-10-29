@@ -2,7 +2,7 @@ i[K[Din[K[D[Dinf[K[D[D[Dinfo[K[D[D[D[Dinfo [K[D[D[D[D[Dinfo 
 
 CPU#0
  V      =   0
- pc       42060da6
+ pc       42060dae
  mhartid  00000000
  mstatus  00000008
  mstatush 00000000
@@ -30,8 +30,8 @@ CPU#0
  mscratch 00000000
  sscratch 00000000
  satp     00000000
- x0/zero  00000000 x1/ra    42060d98 x2/sp    3fcde250 x3/gp    3fc91000
- x4/tp    00000000 x5/t0    42060ffe x6/t1    40038e56 x7/t2    ffffffff
+ x0/zero  00000000 x1/ra    42060da0 x2/sp    3fcde250 x3/gp    3fc91000
+ x4/tp    00000000 x5/t0    42061006 x6/t1    40038e56 x7/t2    ffffffff
  x8/s0    60040000 x9/s1    60040000 x10/a0   00000320 x11/a1   00000000
  x12/a2   05000000 x13/a3   05000369 x14/a4   00000000 x15/a5   60040000
  x16/a6   fffff3ff x17/a7   00000000 x18/s2   00000001 x19/s3   40000000
@@ -52,7 +52,7 @@ i[K[Din[K[D[Dinf[K[D[D[Dinfo[K[D[D[D[Dinfo [K[D[D[D[D[Dinfo 
 
 CPU#0
  V      =   0
- pc       42060da6
+ pc       42060dae
  mhartid  00000000
  mstatus  00000008
  mstatush 00000000
@@ -80,8 +80,8 @@ CPU#0
  mscratch 00000000
  sscratch 00000000
  satp     00000000
- x0/zero  00000000 x1/ra    42060d98 x2/sp    3fcde250 x3/gp    3fc91000
- x4/tp    00000000 x5/t0    42060ffe x6/t1    40038e56 x7/t2    ffffffff
+ x0/zero  00000000 x1/ra    42060da0 x2/sp    3fcde250 x3/gp    3fc91000
+ x4/tp    00000000 x5/t0    42061006 x6/t1    40038e56 x7/t2    ffffffff
  x8/s0    60040000 x9/s1    60040000 x10/a0   00000320 x11/a1   00000000
  x12/a2   05000000 x13/a3   05000369 x14/a4   00000000 x15/a5   60040000
  x16/a6   fffff3ff x17/a7   00000000 x18/s2   00000001 x19/s3   40000000

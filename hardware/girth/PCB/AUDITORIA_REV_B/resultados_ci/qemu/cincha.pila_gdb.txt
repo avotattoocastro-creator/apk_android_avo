@@ -1,0 +1,14 @@
+0x42060db0 in adc_oneshot_ll_get_event (event_mask=<optimized out>) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/hal/esp32c3/include/hal/adc_ll.h:896
+warning: 896	/home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/hal/esp32c3/include/hal/adc_ll.h: No such file or directory
+#0  0x42060db0 in adc_oneshot_ll_get_event (event_mask=<optimized out>) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/hal/esp32c3/include/hal/adc_ll.h:896
+#1  read_cal_channel (adc_n=adc_n@entry=ADC_UNIT_2) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/hal/adc_hal_common.c:128
+#2  0x42061044 in adc_hal_self_calibration (adc_n=adc_n@entry=ADC_UNIT_2, atten=atten@entry=ADC_ATTEN_DB_12, internal_gnd=internal_gnd@entry=true) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/hal/adc_hal_common.c:165
+#3  0x42061c04 in adc_calc_hw_calibration_code (adc_n=adc_n@entry=ADC_UNIT_2, atten=atten@entry=ADC_ATTEN_DB_12) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/adc_share_hw_ctrl.c:85
+#4  0x42061df6 in adc2_init_code_calibration () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/port/esp32c3/adc2_init_cal.c:25
+#5  0x420169c8 in do_global_ctors () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_system/startup.c:104
+#6  start_cpu0_default () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_system/startup.c:207
+#7  0x403cf95e in ?? ()
+pc             0x42060db0	0x42060db0 <read_cal_channel+78>
+ra             0x42060da0	0x42060da0 <read_cal_channel+62>
+sp             0x3fcde250	0x3fcde250
+[Inferior 1 (process 1) detached]
