@@ -51,7 +51,7 @@ jobs:
               python3 fuente/ci_route.py export kicad/AVO_BACK_V4_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
             if [ -s $R/placa.dsn ]; then
               sudo apt-get install -y -qq xvfb >/dev/null 2>&1
-              (timeout 1500 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 60) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
+              (timeout 1500 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 150) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
               tail -150 $R/fr.log > $R/freerouting.log; rm -f $R/fr.log
             fi
             if [ -s $R/placa.ses ]; then
