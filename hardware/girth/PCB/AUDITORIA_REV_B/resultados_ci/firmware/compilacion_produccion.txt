@@ -1,25 +1,36 @@
 Sketch uses 1010533 bytes (77%) of program storage space. Maximum is 1310720 bytes.
 Global variables use 37832 bytes (11%) of dynamic memory, leaving 289848 bytes for local variables. Maximum is 327680 bytes.
+/tmp/fw_min:
+total 16208
+drwxr-xr-x  2 runner runner    4096 Oct 29 20:32 .
+drwxrwxrwt 18 root   root      4096 Oct 29 20:32 ..
+-rw-r--r--  1 runner runner  293872 Oct 29 20:32 minimo.ino.bin
+-rw-r--r--  1 runner runner   18688 Oct 29 20:32 minimo.ino.bootloader.bin
+-rwxr-xr-x  1 runner runner 6241080 Oct 29 20:32 minimo.ino.elf
+-rw-r--r--  1 runner runner 5830937 Oct 29 20:32 minimo.ino.map
+-rw-r--r--  1 runner runner 4194304 Oct 29 20:32 minimo.ino.merged.bin
+-rw-r--r--  1 runner runner    3072 Oct 29 20:32 minimo.ino.partitions.bin
+
 /tmp/fw_prod:
 total 30720
-drwxr-xr-x  2 runner runner     4096 Oct 29 20:20 .
-drwxrwxrwt 17 root   root       4096 Oct 29 20:21 ..
--rw-r--r--  1 runner runner  1010704 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.bin
--rw-r--r--  1 runner runner    19536 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.bootloader.bin
--rwxr-xr-x  1 runner runner 14260696 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.elf
--rw-r--r--  1 runner runner 11950329 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.map
--rw-r--r--  1 runner runner  4194304 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.merged.bin
--rw-r--r--  1 runner runner     3072 Oct 29 20:20 AVO_GIRTH_V0_3_0.ino.partitions.bin
--rw-r--r--  1 runner runner      209 Oct 29 20:20 build.log
+drwxr-xr-x  2 runner runner     4096 Oct 29 20:31 .
+drwxrwxrwt 18 root   root       4096 Oct 29 20:32 ..
+-rw-r--r--  1 runner runner  1010704 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.bin
+-rw-r--r--  1 runner runner    19536 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.bootloader.bin
+-rwxr-xr-x  1 runner runner 14260696 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.elf
+-rw-r--r--  1 runner runner 11950329 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.map
+-rw-r--r--  1 runner runner  4194304 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.merged.bin
+-rw-r--r--  1 runner runner     3072 Oct 29 20:31 AVO_GIRTH_V0_3_0.ino.partitions.bin
+-rw-r--r--  1 runner runner      209 Oct 29 20:31 build.log
 
 /tmp/fw_qemu:
 total 30988
-drwxr-xr-x  2 runner runner     4096 Oct 29 20:21 .
-drwxrwxrwt 17 root   root       4096 Oct 29 20:21 ..
--rw-r--r--  1 runner runner  1061808 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.bin
--rw-r--r--  1 runner runner    18688 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.bootloader.bin
--rwxr-xr-x  1 runner runner 14431948 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.elf
--rw-r--r--  1 runner runner 11998175 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.map
--rw-r--r--  1 runner runner  4194304 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.merged.bin
--rw-r--r--  1 runner runner     3072 Oct 29 20:21 AVO_GIRTH_V0_3_0.ino.partitions.bin
--rw-r--r--  1 runner runner      209 Oct 29 20:21 build.log
+drwxr-xr-x  2 runner runner     4096 Oct 29 20:32 .
+drwxrwxrwt 18 root   root       4096 Oct 29 20:32 ..
+-rw-r--r--  1 runner runner  1061808 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.bin
+-rw-r--r--  1 runner runner    18688 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.bootloader.bin
+-rwxr-xr-x  1 runner runner 14431948 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.elf
+-rw-r--r--  1 runner runner 11998175 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.map
+-rw-r--r--  1 runner runner  4194304 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.merged.bin
+-rw-r--r--  1 runner runner     3072 Oct 29 20:32 AVO_GIRTH_V0_3_0.ino.partitions.bin
+-rw-r--r--  1 runner runner      209 Oct 29 20:32 build.log

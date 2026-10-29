@@ -22,31 +22,12 @@ Saved DRC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/drc.r
 + cp /k/AVO_GIRTH_PCB.kicad_pcb /tmp/refill.kicad_pcb
 + cp /k/AVO_GIRTH_PCB.kicad_pro /tmp/refill.kicad_pro
 + cp /k/AVO_GIRTH_PCB.kicad_sch /tmp/refill.kicad_sch
-+ kicad-cli pcb drc --refill-zones --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/drc_zonas_rellenadas_de_nuevo.rpt /tmp/refill.kicad_pcb
-Unknown argument: --refill-zones
-Usage: drc [--help] [--output OUTPUT_FILE] [--define-var KEY=VALUE] [--format FORMAT] [--all-track-errors] [--schematic-parity] [--units UNITS] [--severity-all] [--severity-error] [--severity-warning] [--severity-exclusions] [--exit-code-violations] INPUT_FILE
-
-Runs the Design Rules Check (DRC) on the PCB and creates a report
-
-Positional arguments:
-  INPUT_FILE              Input file 
-
-Optional arguments:
-  -h, --help              Shows help message and exits 
-  -o, --output            Output file [nargs=0..1] [default: ""]
-  -D, --define-var        Overrides or adds project variables, can be used multiple times to declare multiple variables.
-                          Use in the format of '--define-var key=value' or '-D key=value' [nargs=0..1] [default: {}]
-  --format                Output file format, options: json, report [nargs=0..1] [default: "report"]
-  --all-track-errors      Report all errors for each track 
-  --schematic-parity      Test for parity between PCB and schematic 
-  --units                 Report units; valid options: in, mm, mils [nargs=0..1] [default: "mm"]
-  --severity-all          Report all DRC violations, this is equivalent to including all the other severity arguments 
-  --severity-error        Report all DRC error level violations, this can be combined with the other severity arguments 
-  --severity-warning      Report all DRC warning level violations, this can be combined with the other severity arguments 
-  --severity-exclusions   Report all excluded DRC violations, this can be combined with the other severity arguments 
-  --exit-code-violations  Return a nonzero exit code if DRC violations exist 
-+ echo 'sin --refill-zones'
-sin --refill-zones
++ python3 hardware/girth/PCB/fuente/ci_kicad.py /tmp/refill.kicad_pcb /tmp/refill.kicad_pcb
++ kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/drc_zonas_rellenadas_de_nuevo.rpt /tmp/refill.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/drc_zonas_rellenadas_de_nuevo.rpt
 + kicad-cli sch export netlist --format kicadsexpr -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/netlist_esquema.net /k/AVO_GIRTH_PCB.kicad_sch
 + python3 hardware/girth/PCB/AUDITORIA_REV_B/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad/netlist_esquema.net hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/kicad
 {
@@ -198,20 +179,24 @@ Build BVH for holes and vias
 Load Raytracing: board
 Load Raytracing: layers
 Loading 3D models...
-Reload time 0.184 s
-Rendering: 9 %
-Rendering: 17 %
-Rendering: 24 %
-Rendering: 29 %
-Rendering: 36 %
+Reload time 0.219 s
+Rendering: 6 %
+Rendering: 11 %
+Rendering: 18 %
+Rendering: 23 %
+Rendering: 28 %
+Rendering: 33 %
+Rendering: 37 %
 Rendering: 45 %
-Rendering: 52 %
-Rendering: 58 %
-Rendering: 69 %
-Rendering: 79 %
-Rendering: 86 %
-Rendering: 93 %
+Rendering: 50 %
+Rendering: 55 %
+Rendering: 62 %
+Rendering: 70 %
+Rendering: 78 %
+Rendering: 83 %
+Rendering: 89 %
+Rendering: 94 %
 Rendering: 100 %
-Rendering time 5.087 s
+Rendering time 6.717 s
 Successfully created 3D render image
 + chmod -R a+rw hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci

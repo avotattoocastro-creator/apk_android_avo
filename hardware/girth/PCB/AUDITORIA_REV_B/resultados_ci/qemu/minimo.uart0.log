@@ -1,0 +1,78 @@
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1010
+load:0x403cbf10,len:0x9f4
+load:0x403ce710,len:0x2ea4
+entry 0x403cbf10
+[QEMU] minimo: setup
+[QEMU] minimo: loop 0
+[QEMU] minimo: loop 1
+[QEMU] minimo: loop 2
+[QEMU] minimo: loop 3
+[QEMU] minimo: loop 4
+[QEMU] minimo: loop 5
+[QEMU] minimo: loop 6
+[QEMU] minimo: loop 7
+[QEMU] minimo: loop 8
+[QEMU] minimo: loop 9
+[QEMU] minimo: loop 10
+[QEMU] minimo: loop 11
+[QEMU] minimo: loop 12
+[QEMU] minimo: loop 13
+[QEMU] minimo: loop 14
+[QEMU] minimo: loop 15
+[QEMU] minimo: loop 16
+[QEMU] minimo: loop 17
+[QEMU] minimo: loop 18
+[QEMU] minimo: loop 19
+[QEMU] minimo: loop 20
+[QEMU] minimo: loop 21
+[QEMU] minimo: loop 22
+[QEMU] minimo: loop 23
+[QEMU] minimo: loop 24
+[QEMU] minimo: loop 25
+[QEMU] minimo: loop 26
+[QEMU] minimo: loop 27
+[QEMU] minimo: loop 28
+[QEMU] minimo: loop 29
+[QEMU] minimo: loop 30
+[QEMU] minimo: loop 31
+[QEMU] minimo: loop 32
+[QEMU] minimo: loop 33
+[QEMU] minimo: loop 34
+[QEMU] minimo: loop 35
+[QEMU] minimo: loop 36
+[QEMU] minimo: loop 37
+[QEMU] minimo: loop 38
+[QEMU] minimo: loop 39
+[QEMU] minimo: loop 40
+[QEMU] minimo: loop 41
+[QEMU] minimo: loop 42
+[QEMU] minimo: loop 43
+[QEMU] minimo: loop 44
+[QEMU] minimo: loop 45
+[QEMU] minimo: loop 46
+[QEMU] minimo: loop 47
+[QEMU] minimo: loop 48
+[QEMU] minimo: loop 49
+[QEMU] minimo: loop 50
+[QEMU] minimo: loop 51
+[QEMU] minimo: loop 52
+[QEMU] minimo: loop 53
+[QEMU] minimo: loop 54
+[QEMU] minimo: loop 55
+[QEMU] minimo: loop 56
+[QEMU] minimo: loop 57
+[QEMU] minimo: loop 58
+[QEMU] minimo: loop 59
+[QEMU] minimo: loop 60
+[QEMU] minimo: loop 61
+[QEMU] minimo: loop 62
+[QEMU] minimo: loop 63
+[QEMU] minimo: loop 64
+[QEMU] minimo: loop 65
+[QEMU] minimo: loop 66
+[QEMU] minimo: loop 67
