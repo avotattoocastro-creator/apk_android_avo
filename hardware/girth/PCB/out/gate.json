@@ -3,8 +3,8 @@
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": false,
-   "n": 18
+   "ok": true,
+   "n": 0
   },
   {
    "name": "DRC: conexiones incompletas",
@@ -32,10 +32,6 @@
    "n": 0
   }
  ],
- "drc_errors": {
-  "clearance": 10,
-  "hole_clearance": 1,
-  "solder_mask_bridge": 7
- },
+ "drc_errors": {},
  "drc_warnings": {}
 }
