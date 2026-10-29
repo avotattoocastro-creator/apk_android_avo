@@ -183,9 +183,11 @@ def ep_stubs(r, pads):
         cx, cy = D.kpos(rec["part"])
         px, py = rec["c"]
         dx, dy = cx - px, cy - py
-        L = math.hypot(dx, dy)
-        # from the pad centre towards the package centre, 0.75 mm (crosses the 0.2 mm gap into the EP)
-        end = (px + dx / L * 0.75, py + dy / L * 0.75)
+        # straight inward along the pad's own axis (never diagonally towards a neighbour), 0.75 mm
+        if abs(dx) >= abs(dy):
+            end = (px + math.copysign(0.75, dx), py)
+        else:
+            end = (px, py + math.copysign(0.75, dy))
         r.add_track(D.CODE[D.GND], "F.Cu", (px, py), end, 0.2)
 
 
@@ -351,7 +353,7 @@ def write_board(r, path, outer_pours=True):
     tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(0, -4.6), "B.SilkS", 0.8, mirror=True, bold=False))
     tree.append(B.gr_text("ANTENA FPC (sin cobre)", *D.K(11.0, 16.0), "F.SilkS", 0.8, bold=False))
-    for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4)), ("+ BAT −", (-22.6, 10.0))):
+    for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4)), ("+ BAT −", (-22.6, 10.4))):
         tree.append(B.gr_text(txt, *D.K(x, y), "F.SilkS", 0.7, bold=False))
     B.write(path, tree)
 

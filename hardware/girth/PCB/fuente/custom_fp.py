@@ -24,8 +24,8 @@ def bno085():
         pads.append(Pad(n, "smd", "roundrect", 2.3625, y, 0.675, w, rratio=0.2))
     g = rect_lines(-2.6, -1.9, 2.6, 1.9, "F.Fab", 0.1)
     g += rect_lines(-3.0, -2.25, 3.0, 2.25, "F.CrtYd", 0.05)
-    g += [line(-2.75, -2.05, -2.0, -2.05, "F.SilkS"), line(-2.75, -2.05, -2.75, -1.3, "F.SilkS"),
-          circle(-3.05, -2.3, 0.12, "F.SilkS", 0.1, True)]
+    g += [line(-2.95, -2.15, -2.3, -2.15, "F.SilkS"), line(-2.95, -2.15, -2.95, -1.5, "F.SilkS"),
+          circle(-3.2, -2.45, 0.12, "F.SilkS", 0.1, True)]
     return Footprint("CEVA_BNO08x_LGA-28_5.2x3.8mm_P0.5mm", pads, g, "smd", None,
                      "BNO085/BNO086 LGA-28 (CEVA 1000-3927); land pattern after Adafruit 4754 / SparkFun BNO086",
                      height=1.1, body=(-2.6, -1.9, 2.6, 1.9))

@@ -180,6 +180,44 @@ def group_cells(r, g, free, w):
     return cells
 
 
+def prune(pads, segs, vias):
+    """Removes track stubs with a free end (and signal vias that join nothing) — repeat until stable."""
+    removed = 0
+    changed = True
+    while changed:
+        changed = False
+        for s in list(segs):
+            if s["net"] in build.PLANES or not s["net"]:
+                continue
+            for end in (s["a"], s["b"]):
+                hit = False
+                for rec in pads:
+                    if rec["net"] == s["net"] and not rec["npth"] and s["layer"] in rec["layers"] and \
+                            seg_poly(end, end, rec["poly"]) <= s["w"] / 2 + 1e-3:
+                        hit = True; break
+                if not hit:
+                    for v in vias:
+                        if v["net"] == s["net"] and math.hypot(v["p"][0] - end[0], v["p"][1] - end[1]) <= v["d"] / 2 + 1e-3:
+                            hit = True; break
+                if not hit:
+                    for t in segs:
+                        if t is not s and t["net"] == s["net"] and t["layer"] == s["layer"] and \
+                                seg_seg(end, end, t["a"], t["b"]) <= (s["w"] + t["w"]) / 2 + 1e-3:
+                            hit = True; break
+                if not hit:
+                    segs.remove(s); removed += 1; changed = True
+                    break
+        for v in list(vias):
+            if v["net"] in build.PLANES or not v["net"]:
+                continue
+            n = sum(1 for t in segs if t["net"] == v["net"] and
+                    seg_seg(v["p"], v["p"], t["a"], t["b"]) <= v["d"] / 2 + t["w"] / 2 + 1e-3)
+            n += sum(1 for rec in pads if rec["net"] == v["net"] and seg_poly(v["p"], v["p"], rec["poly"]) <= v["d"] / 2)
+            if n < 2:
+                vias.remove(v); removed += 1; changed = True
+    return removed
+
+
 def main():
     src = os.path.join(D.OUT, "AVO_GIRTH_PCB.kicad_pcb")
     segs, vias, fps = read_board(src)
@@ -244,6 +282,8 @@ def main():
                 ok_all = False
                 break
         (fixed if ok_all else failed).append(net)
+    removed = prune(pads, segs, vias)
+    print("Tramos colgantes eliminados: %d" % removed)
     print("Reparadas: %s" % (", ".join(fixed) or "ninguna"))
     print("Sin reparar: %s" % (", ".join(failed) or "ninguna"))
     # rebuild router track list for the writer (imported + new)

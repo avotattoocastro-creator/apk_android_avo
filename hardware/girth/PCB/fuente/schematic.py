@@ -180,9 +180,13 @@ class Sheet:
             just = S("right") if lang == 180 else S("left")
             if lang in (90, 270):
                 just = S("left")
-            self.items.append([S("label"), net, [S("at"), ax, ay, lang],
-                               [S("effects"), [S("font"), [S("size"), 1.0, 1.0]], [S("justify"), just, S("bottom")]],
-                               [S("uuid"), uid("lbl", ref, num)]])
+            # global labels: the net keeps its bare name (same as on the board) → schematic parity holds
+            self.items.append([S("global_label"), net, [S("shape"), S("passive")], [S("at"), ax, ay, lang],
+                               [S("fields_autoplaced"), S("yes")],
+                               [S("effects"), [S("font"), [S("size"), 1.0, 1.0]], [S("justify"), just]],
+                               [S("uuid"), uid("lbl", ref, num)],
+                               [S("property"), "Intersheetrefs", "${INTERSHEET_REFS}", [S("at"), ax, ay, 0],
+                                [S("hide"), S("yes")], [S("effects"), [S("font"), [S("size"), 1.0, 1.0]]]]])
 
     def flag(self, net, x, y):
         if "power:PWR_FLAG" not in self.libs:
