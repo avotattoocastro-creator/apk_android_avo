@@ -1,11 +1,11 @@
 # AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `15f8cfdb3b7ade10e26e88499e02bb3e91f0fcc1` · ejecución de CI: 40907946325
+- Commit: `f6a47d86429b188217e2ee39119f364f95df3890` · ejecución de CI: 40908557253
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 98 en total, 85 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
-- Pistas: 899 · vías: 164 · ruteado completo (0 conexiones incompletas)
+- Pistas: 898 · vías: 164 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -19,7 +19,7 @@
 
 
 ## Advertencias de DRC (no bloqueantes)
-- track_dangling: 1
+- ninguna
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
