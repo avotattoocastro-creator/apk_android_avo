@@ -96,11 +96,15 @@ jobs:
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           F=firmware/girth/V0_3_0_C3
           T=$(mktemp -d); cp -r $F/out $T/out 2>/dev/null || mkdir -p $T/out
-          git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
-          rm -rf $F/out; cp -r $T/out $F/out
-          git add -A $F/out
-          git commit -m "Cincha V0.3.0 ESP32-C3: compilación del CI de ${GITHUB_SHA::7} [skip ci]" || echo "sin cambios"
-          git push origin HEAD:${{ github.ref_name }}
+          # otros flujos guardan en la misma rama: reintentar si el push choca
+          for i in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+            rm -rf $F/out; cp -r $T/out $F/out
+            git add -A $F/out
+            git commit -m "Cincha V0.3.0 ESP32-C3: compilación del CI de ${GITHUB_SHA::7} [skip ci]" || { echo "sin cambios"; break; }
+            git push origin HEAD:${{ github.ref_name }} && break
+            sleep $((i * 10))
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
