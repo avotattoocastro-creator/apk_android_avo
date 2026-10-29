@@ -60,6 +60,33 @@ jobs:
             chmod -R a+rw $R
           '
 
+      - name: Corrección propuesta REV B.1 · KiCad 9 (zonas, ERC, DRC con paridad, redes, Gerber)
+        continue-on-error: true
+        run: |
+          mkdir -p $R/rev_b1
+          C=hardware/girth/PCB/AUDITORIA_REV_B/corregida
+          mkdir -p /tmp/b1 && cp $C/kicad/AVO_GIRTH_PCB.kicad_* /tmp/b1/
+          sha256sum /tmp/b1/* > $R/rev_b1/sha256_entrada.txt
+          docker run --rm -u 0 -e HOME=/tmp -e R -e A -v "$PWD":/w -v /tmp/b1:/k -w /w kicad/kicad:9.0 bash -c '
+            set -x
+            exec > >(tee $R/rev_b1/comandos_y_salida.txt) 2>&1
+            python3 hardware/girth/PCB/fuente/ci_kicad.py /k/AVO_GIRTH_PCB.kicad_pcb /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli sch erc --format report --severity-all --units mm -o $R/rev_b1/erc.rpt /k/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli sch erc --format json --severity-all --units mm -o $R/rev_b1/erc.json /k/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/rev_b1/drc.rpt /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o $R/rev_b1/drc.json /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli sch export netlist --format kicadsexpr -o $R/rev_b1/netlist_esquema.net /k/AVO_GIRTH_PCB.kicad_sch
+            python3 $A/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb $R/rev_b1/netlist_esquema.net $R/rev_b1
+            mkdir -p /tmp/g1
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o /tmp/g1/ /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o /tmp/g1/ /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb render --side top --quality basic -w 1600 -h 1100 --zoom 1.5 -o $R/rev_b1/arriba.png /k/AVO_GIRTH_PCB.kicad_pcb || true
+            cp /k/AVO_GIRTH_PCB.kicad_pcb $R/rev_b1/AVO_GIRTH_PCB_REV_B1_zonas_rellenas.kicad_pcb
+            (cd /tmp/g1 && python3 -c "import zipfile,os;z=zipfile.ZipFile(\"/w/$R/rev_b1/AVO_GIRTH_PCB_C3_REV_B1_GERBER_JLCPCB.zip\",\"w\",zipfile.ZIP_DEFLATED);[z.write(f) for f in sorted(os.listdir(\".\"))]")
+            grep -h "TF.ProjectId\|Revision" /tmp/g1/*-F_Cu.gtl /tmp/g1/*.gbrjob | head -4
+            chmod -R a+rw $R
+          '
+
       - name: Fases 2-3 · ngspice (alimentación y encendido magnético)
         continue-on-error: true
         run: |
@@ -99,8 +126,9 @@ jobs:
           arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json > /dev/null
           F=firmware/girth/V0_3_0_C3
           $F/build_girth_c3.sh /tmp/fw_prod 2>&1 | tail -3 | tee $R/firmware/compilacion_produccion.txt
-          # QEMU solo emula el UART0 y su flash no admite QIO: misma compilación con Serial en UART0 y flash en DIO
-          FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default,FlashMode=dio" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
+          # QEMU solo emula el UART0 y su flash no admite QIO: misma compilación con Serial en UART0, flash en DIO y
+          # registro de ESP-IDF en nivel info (para ver el cargador, la tabla de particiones y el arranque)
+          FQBN="esp32:esp32:esp32c3:CDCOnBoot=default,FlashSize=4M,PartitionScheme=default,FlashMode=dio,DebugLevel=info" $F/build_girth_c3.sh /tmp/fw_qemu 2>&1 | tail -3 | tee $R/firmware/compilacion_qemu.txt
           ls -la /tmp/fw_prod /tmp/fw_qemu | tee -a $R/firmware/compilacion_produccion.txt
           sha256sum /tmp/fw_prod/*.bin | tee $R/firmware/sha256_produccion.txt
 
@@ -118,7 +146,8 @@ jobs:
           dd if=/dev/zero of=/tmp/efuse.bin bs=1 count=1024 2>/dev/null
           M=$(ls /tmp/fw_qemu/*.merged.bin)
           ls -la $M
-          timeout 30 $Q -nographic -icount 3 -machine esp32c3 -drive file=$M,if=mtd,format=raw \
+          # sin -icount (con -icount 3 no pasaba del cargador en 30 s); 90 s de reloj real
+          timeout 90 $Q -nographic -machine esp32c3 -drive file=$M,if=mtd,format=raw \
             -drive file=/tmp/efuse.bin,if=none,format=raw,id=efuse -global driver=nvram.esp32c3.efuse,property=drive,value=efuse \
             -serial file:$R/qemu/uart0.log -monitor none > $R/qemu/qemu_stdout.txt 2>&1 || echo "fin (timeout esperado) $?" >> $R/qemu/qemu_stdout.txt
           ls -la $R/qemu/; wc -l $R/qemu/uart0.log || true

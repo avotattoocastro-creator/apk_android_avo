@@ -9,9 +9,21 @@
 namespace gpow {
 
 void hold() {
-  gpio_hold_dis((gpio_num_t)gb::PIN_PWR_HOLD);
+  // Salida a 1 ANTES de soltar el bloqueo (ESP-IDF, gpio_hold_dis: si no, el pad vuelve a su estado por defecto).
+  digitalWrite(gb::PIN_PWR_HOLD, HIGH);
   pinMode(gb::PIN_PWR_HOLD, OUTPUT);
   digitalWrite(gb::PIN_PWR_HOLD, HIGH);
+  gpio_hold_dis((gpio_num_t)gb::PIN_PWR_HOLD);
+  // Auditoría REV B (SPICE, caso peor de tolerancias): sin PWR_HOLD el corte solo aguanta ~0,6 s. Con el bloqueo
+  // del pad el 1 se mantiene durante un reinicio por vigilante o fallo (ESP-IDF, gpio_hold_en: "retain the state
+  // of GPIOs when ... chip or system is reset (e.g. watchdog time-out ...)"). PENDIENTE DE VALIDACIÓN FÍSICA.
+  gpio_hold_en((gpio_num_t)gb::PIN_PWR_HOLD);
+}
+
+static void release_hold_low() {
+  gpio_hold_dis((gpio_num_t)gb::PIN_PWR_HOLD);                     // con el bloqueo puesto la escritura no llega
+  digitalWrite(gb::PIN_PWR_HOLD, LOW);
+  gpio_hold_en((gpio_num_t)gb::PIN_PWR_HOLD);                      // sigue a 0 durante el sueño (GPIO5 es RTC)
 }
 
 void begin() {
@@ -66,8 +78,7 @@ void shutdown(const char* why) {
   Serial.printf("[AVO CINCHA] APAGADO: %s. PWR_HOLD = 0; sin carga el corte se abre en ~3 s.\n", why);
   Serial.flush();
   delay(20);
-  digitalWrite(gb::PIN_PWR_HOLD, LOW);
-  gpio_hold_en((gpio_num_t)gb::PIN_PWR_HOLD);                      // sigue a 0 durante el sueño
+  release_hold_low();
   prepare_sleep();
   // con la base Qi puesta el corte no se abre: despertar también al quitarla para apagar del todo
   if (digitalRead(gb::PIN_CHG_PG) == LOW)
@@ -80,8 +91,7 @@ void sleep_on_charger() {
   Serial.println("[AVO CINCHA] en la base Qi y fuera del soporte: sueño profundo hasta cerrar el reed o quitar la base");
   Serial.flush();
   delay(20);
-  digitalWrite(gb::PIN_PWR_HOLD, LOW);       // al quitar la base, el corte se abre solo
-  gpio_hold_en((gpio_num_t)gb::PIN_PWR_HOLD);
+  release_hold_low();                        // al quitar la base, el corte se abre solo
   prepare_sleep();
   esp_deep_sleep_enable_gpio_wakeup(1ULL << gb::PIN_CHG_PG, ESP_GPIO_WAKEUP_GPIO_HIGH);
   esp_deep_sleep_start();

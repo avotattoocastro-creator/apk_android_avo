@@ -96,28 +96,29 @@ def circuit(P):
     # reed SW1–SW2 (entre REED_HI y BAT_RAW), mandado por REEDCTL (1 = cerrado)
     L.append("SREED BAT_RAW REED_HI REEDCTL 0 SWREED")
     L.append(".model SWREED SW(VT=0.5 VH=0.1 RON=0.1 ROFF=1e12)")
-    L.append("VREED REEDCTL 0 PWL(%s)" % P["reed_pwl"])
+    L.append("VREED REEDCTL 0 DC %s PWL(%s)" % (P["reed_pwl"].split()[1], P["reed_pwl"]))
     # 5 V de carga (Qi/USB) en VIN5 (con C18 y una resistencia de fuente)
-    L.append("VVIN VIN5S 0 PWL(%s)" % P["vin_pwl"])
+    L.append("VVIN VIN5S 0 DC %s PWL(%s)" % (P["vin_pwl"].split()[1], P["vin_pwl"]))
     L.append("RVIN VIN5S VIN5 0.5")
     L.append("CC18 VIN5 0 1u")
     # BQ24072 sin entrada: FET BAT→OUT; con 5 V, OUT lo da el cargador (se modela como 4,2 V vía 0,1 Ω y diodo)
     L.append("RPATH VBAT VSYS %g" % P["rpath"])
-    L.append("BCHG 0 VSYS I = u(V(VIN5)-4.3) * max(0, (4.4 - V(VSYS)) / 0.1)")
+    L.append("BCHG 0 VSYS I = sw(V(VIN5)-4.3) * 0.01*ln(1 + exp((4.4 - V(VSYS))/0.01)) / 0.1")
     # RT9080
     L.append("XU3 VSYS VDD3 0 RT9080 PARAMS: RDO=%g VREG=3.3" % P["rdo"])
     # ESP32-C3: temporizador de arranque (V(TIM) = segundos con 3V3 > 2,8 V), PWR_HOLD y consumo
     L.append("CTIM TIM 0 1u")
-    L.append("BTIM 0 TIM I = u(V(VDD3)-2.8)*(1-V(RST))*1e-6 - (u(2.8-V(VDD3)) + V(RST))*1e-3*V(TIM)")
-    L.append("VRST RST 0 PWL(%s)" % P["rst_pwl"])
-    L.append("VHCMD HCMD 0 PWL(%s)" % P["hold_pwl"])       # 1 = el firmware quiere PWR_HOLD alto
-    L.append("BHOLD 0 PWR_HOLD I = u(V(VDD3)-2.0) * (1-V(RST)) * u(V(TIM)-%g) * "
+    L.append("RTIM TIM 0 1e9")
+    L.append("BTIM 0 TIM I = sw(V(VDD3)-2.8)*(1-V(RST))*1e-6 - (sw(2.8-V(VDD3)) + V(RST))*1e-3*V(TIM)")
+    L.append("VRST RST 0 DC %s PWL(%s)" % (P["rst_pwl"].split()[1], P["rst_pwl"]))
+    L.append("VHCMD HCMD 0 DC %s PWL(%s)" % (P["hold_pwl"].split()[1], P["hold_pwl"]))       # 1 = el firmware quiere PWR_HOLD alto
+    L.append("BHOLD 0 PWR_HOLD I = sw(V(VDD3)-2.0) * (1-V(RST)) * sw(V(TIM)-%g) * "
              "( V(HCMD)*(V(VDD3)-V(PWR_HOLD)) + (1-V(HCMD))*(0-V(PWR_HOLD)) ) / 40" % P["tboot"])
     L.append("VTX TXG 0 PULSE(0 1 0 10u 10u %g %g)" % (P["tx_on"], P["tx_per"]))
-    L.append("BLOAD VDD3 0 I = u(V(VDD3)-%g) * (1-V(RST)*0.7) * ( u(%g-V(TIM))*0.060 + "
-             "u(V(TIM)-%g)*(V(SLP)*20e-6 + (1-V(SLP))*(%g + u(V(TIM)-%g-0.2)*V(TXG)*%g)) )"
+    L.append("BLOAD VDD3 0 I = sw(V(VDD3)-%g) * (1-V(RST)*0.7) * ( sw(%g-V(TIM))*0.060 + "
+             "sw(V(TIM)-%g)*(V(SLP)*20e-6 + (1-V(SLP))*(%g + sw(V(TIM)-%g-0.2)*V(TXG)*%g)) )"
              % (ESP_BOD, P["tboot"], P["tboot"], ESP_RX_A, P["tboot"], ESP_TX_A - ESP_RX_A))
-    L.append("VSLP SLP 0 PWL(%s)" % P["sleep_pwl"])     # 1 = sueño profundo (tras APAGAR)
+    L.append("VSLP SLP 0 DC %s PWL(%s)" % (P["sleep_pwl"].split()[1], P["sleep_pwl"]))     # 1 = sueño profundo (tras APAGAR)
     return L
 
 
@@ -133,10 +134,13 @@ def base_params(**kw):
     return P
 
 
-def run(name, P, probes=("V(VDD3)", "V(PWR_G)", "V(VBAT)", "V(PWR_HOLD)", "V(REED)", "I(VCELL)"), op=False):
+def run(name, P, probes=("V(VDD3)", "V(PWR_G)", "V(VBAT)", "V(PWR_HOLD)", "V(REED)", "I(VCELL)", "V(BAT_RAW)",
+                         "V(PWR_PG)", "V(REED_PULSE)"), op=False):
     cir = os.path.join(OUT, name + ".cir")
     dat = os.path.join(OUT, name + ".dat")
-    L = ["* AVO GIRTH REV B · " + name, ".include %s" % os.path.join(HERE, "modelos.lib")] + circuit(P)
+    L = ["* AVO GIRTH REV B · " + name, ".include %s" % os.path.join(HERE, "modelos.lib"),
+         # escalón suave (10 mV / 10 ms de ancho según la variable): u() abrupto detenía ngspice por paso mínimo
+         ".func sw(x) {0.5*(1+tanh(x/0.005))}"] + circuit(P)
     if op:
         L += [".control", "op", "print all > %s" % dat, "quit", ".endc", ".end"]
     else:
@@ -151,8 +155,13 @@ def run(name, P, probes=("V(VDD3)", "V(PWR_G)", "V(VBAT)", "V(PWR_HOLD)", "V(REE
         return open(dat).read()
     import numpy as np
     d = np.loadtxt(dat, skiprows=1)
-    cols = open(dat).readline().split()
+    cols = open(dat).readline().lower().split()
     return {c: d[:, i] for i, c in enumerate(cols)}
+
+
+def q10_vsg(res):
+    """Tensión puerta-fuente de Q10 (PMOS del corte): > |VGS(th)| conduce, ≈ 0 abierto."""
+    return res["v(bat_raw)"] - res["v(pwr_pg)"]
 
 
 def first_after(t, cond, t0):
@@ -247,18 +256,28 @@ def main():
                 plot(name, res, "Reinicio de %.1f s (reed ya abierto) · caso peor" % dur, (3.0, 3.0 + dur))
     R["escenarios"]["reinicio"] = tab
 
-    # ---------- 4. Apagado (PWR_HOLD = 0 a t = 3 s) con el reed cerrado y con el reed abierto
+    # ---------- 4. Apagado (PWR_HOLD = 0 y sueño profundo): con el reed abierto (fuera del soporte, caso normal) y
+    #            con el reed cerrado (batería baja o apagado remoto en el soporte). Con el reed cerrado se prueba el
+    #            peor caso (reed cerrado 2,9 s antes del apagado: la cola del pulso C40·R41 aún mantiene PWR_G) y un
+    #            caso normal (reed cerrado 60 s antes). Criterio de apagado: Q10 abierto (VSG < 0,3 V) — la 3V3 no
+    #            baja a 0 porque, sin consumo por debajo del brownout, los condensadores se quedan cargados.
     tab = []
-    for reed_cerrado in (True, False):
-        reed = "0 0 0.1 0 0.101 1" if reed_cerrado else "0 0 0.1 0 0.101 1 1 1 1.001 0"
-        P = base_params(vbat=3.7, tstop=9.0, hold_pwl="0 1 3 1 3.001 0", sleep_pwl="0 0 3 0 3.001 1", reed_pwl=reed)
-        name = "apagado_reed_%s" % ("cerrado" if reed_cerrado else "abierto")
+    for caso, reed, t_off, tstop in (("reed abierto", "0 0 0.1 0 0.101 1 1 1 1.001 0", 3.0, 12.0),
+                                     ("reed cerrado 2,9 s antes", "0 0 0.1 0 0.101 1", 3.0, 120.0),
+                                     ("reed cerrado 60 s antes", "0 0 0.1 0 0.101 1", 60.1, 120.0)):
+        P = base_params(vbat=3.7, tstop=tstop, tstep=5e-3, reed_pwl=reed,
+                        hold_pwl="0 1 %g 1 %g 0" % (t_off, t_off + 0.001),
+                        sleep_pwl="0 0 %g 0 %g 1" % (t_off, t_off + 0.001))
+        name = "apagado_" + re.sub(r"[^a-z0-9]+", "_", caso)
         res = run(name, P)
-        t = res["time"]; v3 = res["v(vdd3)"]
-        toff = first_after(t, v3 < 1.0, 3.0)
-        tab.append(dict(reed_cerrado=reed_cerrado, t_apagado_s=round(toff - 3.0, 3) if toff else None,
-                        vuelve_a_encender=bool(v3[-1] > 1.0), i_celda_final_uA=round(float(-res["i(vcell)"][-1]) * 1e6, 3)))
-        plot(name, res, "Apagado con PWR_HOLD = 0 · reed %s" % ("cerrado" if reed_cerrado else "abierto"), (3.0,))
+        t = res["time"]; vsg = q10_vsg(res)
+        toff = first_after(t, vsg < 0.3, t_off)
+        again = first_after(t, vsg > 0.8, toff + 0.01) if toff else None
+        tab.append(dict(caso=caso, t_q10_abierto_s=round(toff - t_off, 3) if toff else None,
+                        reengancha_solo=again is not None,
+                        i_celda_final_uA=round(float(-res["i(vcell)"][-1]) * 1e6, 3),
+                        reed_pulse_al_apagar_V=round(float(res["v(reed_pulse)"][np.searchsorted(t, t_off)]), 3)))
+        plot(name, res, "Apagado con PWR_HOLD = 0 · %s" % caso, (t_off,))
     R["escenarios"]["apagado"] = tab
 
     # ---------- 5. Reencendido: reed abierto 1 s, apagado, y vuelto a cerrar Δ s después de quitar la energía
@@ -283,9 +302,10 @@ def main():
                     hold_pwl="0 1 2 1 2.001 0", sleep_pwl="0 0 2 0 2.001 1")
     res = run("carga_5V", P)
     t = res["time"]; v3 = res["v(vdd3)"]
+    vsg = q10_vsg(res); toff = first_after(t, vsg < 0.3, 6.0)
     R["escenarios"]["carga_5V"] = dict(encendida_con_5V_y_hold0=bool(v3[(t > 3) & (t < 5.9)].min() > 3.0),
-                                       apagada_tras_quitar_5V=bool(v3[-1] < 1.0),
-                                       t_apagado_tras_quitar_s=round((first_after(t, v3 < 1.0, 6.0) or 99) - 6.0, 3))
+                                       q10_abierto_tras_quitar_5V=toff is not None,
+                                       t_apagado_tras_quitar_s=round(toff - 6.0, 3) if toff else None)
     plot("carga_5V", res, "Base Qi/USB (5 V de 0,1 a 6 s), PWR_HOLD = 0 desde 2 s, reed abierto", (0.1, 2.0, 6.0))
 
     # ---------- 7. Consumo apagado (punto de trabajo)

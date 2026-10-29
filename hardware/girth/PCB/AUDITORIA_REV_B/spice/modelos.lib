@@ -31,12 +31,15 @@ DB D S DBODYP
 .MODEL DBODYP D(IS=1E-12 N=1.3 RS=0.02)
 .ENDS
 *
-* RT9080-33 (Richtek DS9080-09): modelo de COMPORTAMIENTO, no el oficial. Salida = min(3,3 V, Vin − Rdo·I);
+* RT9080-33 (Richtek DS9080-09): modelo de COMPORTAMIENTO, no el oficial. Salida ≈ min(3,3 V, Vin − Rdo·I);
 *   Rdo = caída a 600 mA / 600 mA (0,31 V típ → 0,52 Ω; 0,53 V máx → 0,88 Ω). Sin dinámica del lazo: no
 *   reproduce el sobreimpulso/hundimiento del lazo ante escalones (lo amortiguan los condensadores de salida).
+*   El paso regulación ↔ caída usa una rampa suave (softplus de 10 mV) en vez de max(): con max() ngspice se
+*   detenía por "timestep too small" justo en la transición (CI de 05eab4e, ventana_tip_3.0V.log).
 .SUBCKT RT9080 IN OUT GND PARAMS: RDO=0.52 VREG=3.3
 RPASS IN X {RDO}
-BDROP X OUT V = max(0, V(X,GND) - {VREG})
+BDROP X OUT V = 0.01*ln(1 + exp((V(X,GND) - {VREG})/0.01))
+RLEAK X GND 1e9
 .ENDS
 *
 * BQ24072 sin entrada (camino BAT→OUT): resistencia del FET de batería, VDO(BAT-OUT) = 50 mV típ / 100 mV máx
