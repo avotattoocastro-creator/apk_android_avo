@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-29 15:12 UTC",
+ "date_utc": "2026-10-29 15:27 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21983691,
+   "stock": 21984432,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "CC0603KRX7R9BB104",
    "maker": "YAGEO",
    "package": "0603",
-   "stock": 38705810,
+   "stock": 38706490,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 949267,
+   "stock": 949077,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6256641,
+   "stock": 6256201,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "0402B103K500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 3258478,
+   "stock": 3258356,
    "library": "expand",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 32024049,
+   "stock": 32023248,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "0402B223K500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 610207,
+   "stock": 610107,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402CG220J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 1453347,
+   "stock": 1453167,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "CL10A105KB8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12714735,
+   "stock": 12714362,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "CL10B474KA8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 691180,
+   "stock": 691127,
    "library": "base",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "0603CG102J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0603",
-   "stock": 99445,
+   "stock": 99500,
    "library": "expand",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "TYPE-C-31-M-12",
    "maker": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 290170,
+   "stock": 290139,
    "library": "expand",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "0805W8F100JT5E",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0805",
-   "stock": 5764819,
+   "stock": 5764855,
    "library": "base",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "0805W8F0000T5E",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0805",
-   "stock": 5210582,
+   "stock": 5210162,
    "library": "base",
    "prices": [
     [
@@ -602,7 +602,7 @@
    "mpn": "CL10A475KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 3020220,
+   "stock": 3019925,
    "library": "base",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12137437,
+   "stock": 12137255,
    "library": "base",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "AO3400A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1147681,
+   "stock": 1147315,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7359078,
+   "stock": 7358378,
    "library": "base",
    "prices": [
     [
@@ -812,7 +812,7 @@
    "mpn": "CL10A225KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 2899386,
+   "stock": 2898561,
    "library": "base",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "0402WGF2000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1923554,
+   "stock": 1923580,
    "library": "base",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2994297,
+   "stock": 2995327,
    "library": "base",
    "prices": [
     [
@@ -917,7 +917,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2206079,
+   "stock": 2205913,
    "library": "base",
    "prices": [
     [
@@ -952,7 +952,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8557123,
+   "stock": 8556838,
    "library": "base",
    "prices": [
     [
@@ -987,7 +987,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 17223341,
+   "stock": 17223387,
    "library": "base",
    "prices": [
     [
@@ -1022,7 +1022,7 @@
    "mpn": "0402WGF2002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2906447,
+   "stock": 2906534,
    "library": "base",
    "prices": [
     [
@@ -1092,7 +1092,7 @@
    "mpn": "0402WGF5101TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3841522,
+   "stock": 3841658,
    "library": "base",
    "prices": [
     [
@@ -1127,7 +1127,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3011633,
+   "stock": 3011508,
    "library": "base",
    "prices": [
     [
@@ -1302,7 +1302,7 @@
    "mpn": "Q13FC13500004",
    "maker": "Seiko Epson",
    "package": "SMD3215-2P",
-   "stock": 455287,
+   "stock": 455270,
    "library": "base",
    "prices": [
     [
@@ -1337,7 +1337,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3820536,
+   "stock": 3820092,
    "library": "base",
    "prices": [
     [
@@ -1372,7 +1372,7 @@
    "mpn": "0402WGF3401TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 266013,
+   "stock": 265913,
    "library": "expand",
    "prices": [
     [
@@ -1512,7 +1512,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10458470,
+   "stock": 10458281,
    "library": "base",
    "prices": [
     [
@@ -1652,7 +1652,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 38884,
+   "stock": 38837,
    "library": "expand",
    "prices": [
     [
@@ -1811,7 +1811,7 @@
    "mpn": "2N7002",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOT-23",
-   "stock": 3093880,
+   "stock": 3093827,
    "library": "base",
    "prices": [
     [
@@ -1846,7 +1846,7 @@
    "mpn": "B5819W SL",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOD-123",
-   "stock": 574382,
+   "stock": 574302,
    "library": "base",
    "prices": [
     [
@@ -1916,7 +1916,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 8289854,
+   "stock": 8289919,
    "library": "base",
    "prices": [
     [
@@ -1951,7 +1951,7 @@
    "mpn": "LSM6DS3TR-C",
    "maker": "STMicroelectronics",
    "package": "LGA-14(2.5x3)",
-   "stock": 23409,
+   "stock": 23404,
    "library": "expand",
    "prices": [
     [
@@ -2021,7 +2021,7 @@
    "mpn": "0402WGF3301TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1623676,
+   "stock": 1623716,
    "library": "base",
    "prices": [
     [
@@ -2056,7 +2056,7 @@
    "mpn": "0402WGF4701TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15195331,
+   "stock": 15195941,
    "library": "base",
    "prices": [
     [
@@ -3187,7 +3187,7 @@
     "mpn": "AO3401A",
     "maker": "Alpha & Omega Semicon",
     "package": "SOT-23",
-    "stock": 949267,
+    "stock": 949077,
     "library": "base",
     "prices": [
      [
@@ -3539,7 +3539,7 @@
     "mpn": "2N7002",
     "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
     "package": "SOT-23",
-    "stock": 3093880,
+    "stock": 3093827,
     "library": "base",
     "prices": [
      [
@@ -3574,7 +3574,7 @@
     "mpn": "L2N7002LT1G",
     "maker": "LRC",
     "package": "SOT-23",
-    "stock": 1072160,
+    "stock": 1072050,
     "library": "expand",
     "prices": [
      [
@@ -3854,7 +3854,7 @@
     "mpn": "2N7002LT1G",
     "maker": "onsemi",
     "package": "SOT-23",
-    "stock": 166407,
+    "stock": 166362,
     "library": "expand",
     "prices": [
      [
@@ -3891,7 +3891,7 @@
     "mpn": "LBAT54CLT1G",
     "maker": "LRC",
     "package": "SOT-23",
-    "stock": 291521,
+    "stock": 291536,
     "library": "expand",
     "prices": [
      [
@@ -3996,7 +3996,7 @@
     "mpn": "BAT54C,215",
     "maker": "Nexperia",
     "package": "SOT-23",
-    "stock": 168749,
+    "stock": 168759,
     "library": "expand",
     "prices": [
      [
@@ -4757,7 +4757,7 @@
     "mpn": "1N4148W",
     "maker": "ST(Semtech)",
     "package": "SOD-123",
-    "stock": 3849827,
+    "stock": 3849856,
     "library": "base",
     "prices": [
      [
@@ -4827,7 +4827,7 @@
     "mpn": "1N4148W",
     "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
     "package": "SOD-123",
-    "stock": 1036390,
+    "stock": 1036411,
     "library": "expand",
     "prices": [
      [
@@ -5496,7 +5496,7 @@
     "mpn": "ME6211C33M5G-N",
     "maker": "MICRONE(Nanjing Micro One Elec)",
     "package": "SOT-23-5",
-    "stock": 8088,
+    "stock": 8081,
     "library": "expand",
     "prices": [
      [
@@ -6237,7 +6237,7 @@
     "mpn": "0402WGF3301TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 1623676,
+    "stock": 1623716,
     "library": "base",
     "prices": [
      [
@@ -6941,7 +6941,7 @@
     "mpn": "0402WGF4701TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 15195321,
+    "stock": 15195941,
     "library": "base",
     "prices": [
      [
@@ -6976,7 +6976,7 @@
     "mpn": "RC0402FR-074K7L",
     "maker": "YAGEO",
     "package": "0402",
-    "stock": 9092610,
+    "stock": 9092540,
     "library": "expand",
     "prices": [
      [
@@ -7116,7 +7116,7 @@
     "mpn": "AC0402FR-074K7L",
     "maker": "YAGEO",
     "package": "0402",
-    "stock": 349212,
+    "stock": 349172,
     "library": "expand",
     "prices": [
      [
@@ -7645,7 +7645,7 @@
     "mpn": "CL05B224KO5NNNC",
     "maker": "Samsung Electro-Mechanics",
     "package": "0402",
-    "stock": 1338132,
+    "stock": 1338081,
     "library": "base",
     "prices": [
      [
@@ -7990,6 +7990,156 @@
     ],
     "describe": "-20%~+80% 10V 220nF Y5V 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
    }
-  ]
+  ],
+  "0402CG102J500NT": [
+   {
+    "lcsc": "C53547",
+    "mpn": "0402CG102J500NT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0402",
+    "stock": 209072,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0052
+     ],
+     [
+      1000,
+      0.0041
+     ],
+     [
+      3000,
+      0.0036
+     ],
+     [
+      10000,
+      0.0028
+     ],
+     [
+      50000,
+      0.0026
+     ],
+     [
+      100000,
+      0.0025
+     ]
+    ],
+    "describe": "1nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "0603CG222J500NT": [
+   {
+    "lcsc": "C2991172",
+    "mpn": "0603CG222J500NT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0603",
+    "stock": 73984,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0142
+     ],
+     [
+      500,
+      0.0113
+     ],
+     [
+      1500,
+      0.0097
+     ],
+     [
+      4000,
+      0.0087
+     ],
+     [
+      24000,
+      0.0079
+     ],
+     [
+      48000,
+      0.0075
+     ]
+    ],
+    "describe": "2.2nF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "CL10C222JB8NNNC": [
+   {
+    "lcsc": "C33353",
+    "mpn": "CL10C222JB8NNNC",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "0603",
+    "stock": 3993,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0364
+     ],
+     [
+      200,
+      0.03
+     ],
+     [
+      600,
+      0.0264
+     ],
+     [
+      4000,
+      0.0243
+     ],
+     [
+      8000,
+      0.0225
+     ],
+     [
+      20000,
+      0.0215
+     ]
+    ],
+    "describe": "2.2nF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "0805CG222J500NT": [
+   {
+    "lcsc": "C51795",
+    "mpn": "0805CG222J500NT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0805",
+    "stock": 3262,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0425
+     ],
+     [
+      200,
+      0.0341
+     ],
+     [
+      600,
+      0.0295
+     ],
+     [
+      4000,
+      0.0256
+     ],
+     [
+      8000,
+      0.0231
+     ],
+     [
+      20000,
+      0.0218
+     ]
+    ],
+    "describe": "2.2nF 50V C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "CL21C104JBFNNNE": [],
+  "CL31C104JBCNNNC": []
  }
 }
