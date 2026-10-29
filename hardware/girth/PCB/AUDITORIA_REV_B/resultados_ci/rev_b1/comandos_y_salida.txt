@@ -1,0 +1,280 @@
++ python3 hardware/girth/PCB/fuente/ci_kicad.py /k/AVO_GIRTH_PCB.kicad_pcb /k/AVO_GIRTH_PCB.kicad_pcb
+{
+ "zones": [
+  {
+   "net": "GND",
+   "layer": "In1.Cu",
+   "filled_area_mm2": 2199.1
+  },
+  {
+   "net": "+3V3",
+   "layer": "In2.Cu",
+   "filled_area_mm2": 1943.4
+  },
+  {
+   "net": "GND",
+   "layer": "F.Cu",
+   "filled_area_mm2": 1536.4
+  },
+  {
+   "net": "GND",
+   "layer": "B.Cu",
+   "filled_area_mm2": 2118.9
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  }
+ ],
+ "footprints": 98,
+ "tracks": 898,
+ "vias": 164,
+ "unconnected": 0
+}
++ kicad-cli sch erc --format report --severity-all --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/erc.rpt /k/AVO_GIRTH_PCB.kicad_sch
+You have run CvPcb for the first time using the new footprint library table method for finding footprints.
+CvPcb has either copied the default table or created an empty table in your home folder.
+You must first configure the library table to include all footprint libraries not included with KiCad.
+See the “Footprint Library Table” section of the CvPcb documentation for more information. Found 0 violations
+Saved ERC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/erc.rpt
++ kicad-cli sch erc --format json --severity-all --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/erc.json /k/AVO_GIRTH_PCB.kicad_sch
+Found 0 violations
+Saved ERC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/erc.json
++ kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/drc.rpt /k/AVO_GIRTH_PCB.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/drc.rpt
++ kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/drc.json /k/AVO_GIRTH_PCB.kicad_pcb
+Found 0 violations
+Found 0 unconnected items
+Found 0 schematic parity issues
+Saved DRC Report to hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/drc.json
++ kicad-cli sch export netlist --format kicadsexpr -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/netlist_esquema.net /k/AVO_GIRTH_PCB.kicad_sch
++ python3 hardware/girth/PCB/AUDITORIA_REV_B/kicad/kicad_audit.py /k/AVO_GIRTH_PCB.kicad_pcb hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/netlist_esquema.net hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1
+{
+ "fichero": "AVO_GIRTH_PCB.kicad_pcb",
+ "problemas": [
+  "el cajetín de la placa dice revisión «B.1» (los Gerber llevan esa revisión en TF.ProjectId)",
+  "VSYS: pista de potencia de 0.20 mm < 0.30"
+ ],
+ "contorno_mm": {
+  "ancho": 65.6,
+  "alto": 43.6
+ },
+ "grosor_mm": 1.0,
+ "capas_cobre": 4,
+ "es_rev_b": true,
+ "cajetin_revision": "B.1",
+ "huellas": 98,
+ "U4": "ESP32-C3-MINI-1U-N4",
+ "reglas": {
+  "pista_min": 0.1,
+  "separacion_min": 0.1,
+  "via_min": 0.45,
+  "taladro_min": 0.3,
+  "borde": 0.3,
+  "anillo_min": 0.1
+ },
+ "redes": 83,
+ "redes_sin_conectar_nc": 29,
+ "vias": {
+  "total": 164,
+  "tipos": [
+   [
+    0.5,
+    0.3
+   ]
+  ],
+  "anillo_min": 0.1
+ },
+ "esquema_pads": 327,
+ "placa_pads": 330,
+ "n_diferencias_esquema_placa": 0
+}
++ mkdir -p /tmp/g1
++ kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o /tmp/g1/ /k/AVO_GIRTH_PCB.kicad_pcb
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-F_Cu.gtl'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-In1_Cu.g1'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-In2_Cu.g2'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-B_Cu.gbl'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-F_Paste.gtp'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-B_Paste.gbp'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-F_Silkscreen.gto'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-B_Silkscreen.gbo'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-F_Mask.gts'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-B_Mask.gbs'.
+Plotted to '/tmp/g1/AVO_GIRTH_PCB-Edge_Cuts.gm1'.
++ kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o /tmp/g1/ /k/AVO_GIRTH_PCB.kicad_pcb
+Created file '/tmp/g1/AVO_GIRTH_PCB-PTH.drl'
+Created file '/tmp/g1/AVO_GIRTH_PCB-NPTH.drl'
+Created file '/tmp/g1/AVO_GIRTH_PCB-PTH-drl_map.gbr'.
+Created file '/tmp/g1/AVO_GIRTH_PCB-NPTH-drl_map.gbr'.
+Done.
++ kicad-cli pcb render --side top --quality basic -w 1600 -h 1100 --zoom 1.5 -o hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/arriba.png /k/AVO_GIRTH_PCB.kicad_pcb
+Loading…
+Build board outline
+
+Create layers
+Create tracks and vias
+Create zones
+Build Tech layers
+Build Tech layer 11
+Build Tech layer 9
+Build Tech layer 15
+Build Tech layer 13
+Build Tech layer 7
+Build Tech layer 5
+Build Tech layer 3
+Build Tech layer 1
+Build Tech layer 17
+Build Tech layer 19
+Build Tech layer 21
+Build Tech layer 23
+Build Tech layer 39
+Build Tech layer 41
+Build Tech layer 43
+Build Tech layer 45
+Build Tech layer 47
+Build Tech layer 49
+Build Tech layer 51
+Build Tech layer 53
+Build Tech layer 55
+Build Tech layer 57
+Build Tech layer 59
+Build Tech layer 61
+Build Tech layer 63
+Build Tech layer 65
+Build Tech layer 67
+Build Tech layer 69
+Build Tech layer 71
+Build Tech layer 73
+Build Tech layer 75
+Build Tech layer 77
+Build Tech layer 79
+Build Tech layer 81
+Build Tech layer 83
+Build Tech layer 85
+Build Tech layer 87
+Build Tech layer 89
+Build Tech layer 91
+Build Tech layer 93
+Build Tech layer 95
+Build Tech layer 97
+Build Tech layer 99
+Build Tech layer 101
+Build Tech layer 103
+Build Tech layer 105
+Build Tech layer 107
+Build Tech layer 109
+Build Tech layer 111
+Build Tech layer 113
+Build Tech layer 115
+Build Tech layer 117
+Build Tech layer 119
+Build Tech layer 121
+Build Tech layer 123
+Build Tech layer 125
+Build Tech layer 127
+Simplifying copper layer polygons
+Calculating plated copper
+Simplify holes contours
+Build BVH for holes and vias
+Load Raytracing: board
+Load Raytracing: layers
+Loading 3D models...
+Reload time 0.194 s
+Rendering: 9 %
+Rendering: 16 %
+Rendering: 24 %
+Rendering: 29 %
+Rendering: 36 %
+Rendering: 44 %
+Rendering: 51 %
+Rendering: 58 %
+Rendering: 68 %
+Rendering: 78 %
+Rendering: 85 %
+Rendering: 92 %
+Rendering: 100 %
+Rendering time 5.143 s
+Successfully created 3D render image
++ cp /k/AVO_GIRTH_PCB.kicad_pcb hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/AVO_GIRTH_PCB_REV_B1_zonas_rellenas.kicad_pcb
++ cd /tmp/g1
++ python3 -c 'import zipfile,os;z=zipfile.ZipFile("/w/hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/rev_b1/AVO_GIRTH_PCB_C3_REV_B1_GERBER_JLCPCB.zip","w",zipfile.ZIP_DEFLATED);[z.write(f) for f in sorted(os.listdir("."))]'
++ grep -h 'TF.ProjectId\|Revision' /tmp/g1/AVO_GIRTH_PCB-F_Cu.gtl /tmp/g1/AVO_GIRTH_PCB-job.gbrjob
++ head -4
+%TF.ProjectId,AVO_GIRTH_PCB,41564f5f-4749-4525-9448-5f5043422e6b,B.1*%
+      "Revision": "B.1"
++ chmod -R a+rw hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci

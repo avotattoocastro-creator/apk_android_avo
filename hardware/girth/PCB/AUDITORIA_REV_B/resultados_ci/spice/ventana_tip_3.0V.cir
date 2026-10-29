@@ -1,5 +1,6 @@
 * AVO GIRTH REV B · ventana_tip_3.0V
 .include /home/runner/work/apk_android_avo/apk_android_avo/hardware/girth/PCB/AUDITORIA_REV_B/spice/modelos.lib
+.func sw(x) {0.5*(1+tanh(x/0.005))}
 XQ10 VBAT PWR_PG BAT_RAW PMOS_LVL1 PARAMS: VTO=-0.893057 KP=10.3717
 XQ11 PWR_PG PWR_G 0 NMOS_LVL1 PARAMS: VTO=1.04582 KP=28.6531
 XD10a VIN5 PWR_G BAV70
@@ -36,27 +37,28 @@ VCELL CELL 0 DC 3
 RCELL CELL BAT_RAW 0.2
 SREED BAT_RAW REED_HI REEDCTL 0 SWREED
 .model SWREED SW(VT=0.5 VH=0.1 RON=0.1 ROFF=1e12)
-VREED REEDCTL 0 PWL(0 0 0.1 0 0.101 1)
-VVIN VIN5S 0 PWL(0 0)
+VREED REEDCTL 0 DC 0 PWL(0 0 0.1 0 0.101 1)
+VVIN VIN5S 0 DC 0 PWL(0 0)
 RVIN VIN5S VIN5 0.5
 CC18 VIN5 0 1u
 RPATH VBAT VSYS 0.05
-BCHG 0 VSYS I = u(V(VIN5)-4.3) * max(0, (4.4 - V(VSYS)) / 0.1)
+BCHG 0 VSYS I = sw(V(VIN5)-4.3) * 0.01*ln(1 + exp((4.4 - V(VSYS))/0.01)) / 0.1
 XU3 VSYS VDD3 0 RT9080 PARAMS: RDO=0.516667 VREG=3.3
 CTIM TIM 0 1u
-BTIM 0 TIM I = u(V(VDD3)-2.8)*(1-V(RST))*1e-6 - (u(2.8-V(VDD3)) + V(RST))*1e-3*V(TIM)
-VRST RST 0 PWL(0 0)
-VHCMD HCMD 0 PWL(0 0)
-BHOLD 0 PWR_HOLD I = u(V(VDD3)-2.0) * (1-V(RST)) * u(V(TIM)-99) * ( V(HCMD)*(V(VDD3)-V(PWR_HOLD)) + (1-V(HCMD))*(0-V(PWR_HOLD)) ) / 40
+RTIM TIM 0 1e9
+BTIM 0 TIM I = sw(V(VDD3)-2.8)*(1-V(RST))*1e-6 - (sw(2.8-V(VDD3)) + V(RST))*1e-3*V(TIM)
+VRST RST 0 DC 0 PWL(0 0)
+VHCMD HCMD 0 DC 0 PWL(0 0)
+BHOLD 0 PWR_HOLD I = sw(V(VDD3)-2.0) * (1-V(RST)) * sw(V(TIM)-99) * ( V(HCMD)*(V(VDD3)-V(PWR_HOLD)) + (1-V(HCMD))*(0-V(PWR_HOLD)) ) / 40
 VTX TXG 0 PULSE(0 1 0 10u 10u 0.002 0.01)
-BLOAD VDD3 0 I = u(V(VDD3)-2.51) * (1-V(RST)*0.7) * ( u(99-V(TIM))*0.060 + u(V(TIM)-99)*(V(SLP)*20e-6 + (1-V(SLP))*(0.082 + u(V(TIM)-99-0.2)*V(TXG)*0.268)) )
-VSLP SLP 0 PWL(0 0)
+BLOAD VDD3 0 I = sw(V(VDD3)-2.51) * (1-V(RST)*0.7) * ( sw(99-V(TIM))*0.060 + sw(V(TIM)-99)*(V(SLP)*20e-6 + (1-V(SLP))*(0.082 + sw(V(TIM)-99-0.2)*V(TXG)*0.268)) )
+VSLP SLP 0 DC 0 PWL(0 0)
 .options method=gear reltol=1e-4 abstol=1e-12
 .control
 set wr_singlescale
 set wr_vecnames
 tran 0.001 8 0 0.001
-wrdata hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/spice/ventana_tip_3.0V.dat V(VDD3) V(PWR_G) V(VBAT) V(PWR_HOLD) V(REED) I(VCELL)
+wrdata hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/spice/ventana_tip_3.0V.dat V(VDD3) V(PWR_G) V(VBAT) V(PWR_HOLD) V(REED) I(VCELL) V(BAT_RAW) V(PWR_PG) V(REED_PULSE)
 quit
 .endc
 .end
