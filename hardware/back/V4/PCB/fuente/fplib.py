@@ -107,6 +107,8 @@ def load(fname, model=None, height=0.0):
                             at[3] if len(at) > 3 else 0.0, drill, layers, rr[1] if rr else None, extra))
         elif k in ("fp_line", "fp_circle", "fp_arc", "fp_poly", "fp_rect"):
             it = [x for x in it if not (isinstance(x, list) and x[0] in ("tstamp", "uuid"))]
+            if k == "fp_arc" and find(it, "angle"):
+                it = _arc_v5_to_v9(it)          # KiCad 5: (start = centro) (end = inicio) (angle) → KiCad 9: start/mid/end
             gfx.append(_stroke(it))
     fp = Footprint(str(name), pads, gfx, attr, model, descr[1] if descr else "", height)
     m = find(tree, "model")
@@ -115,6 +117,18 @@ def load(fname, model=None, height=0.0):
         o, r = (find(fo, "xyz") if fo else None), (find(fr, "xyz") if fr else None)
         fp.model_xf = (list(o[1:4]) if o else [0, 0, 0], list(r[1:4]) if r else [0, 0, 0])
     return fp
+
+
+def _arc_v5_to_v9(it):
+    c, s, a = find(it, "start"), find(it, "end"), find(it, "angle")
+    cx, cy, sx, sy, ang = c[1], c[2], s[1], s[2], math.radians(a[1])
+    r = math.hypot(sx - cx, sy - cy); t0 = math.atan2(sy - cy, sx - cx)
+    pm = (cx + r * math.cos(t0 + ang / 2), cy + r * math.sin(t0 + ang / 2))
+    pe = (cx + r * math.cos(t0 + ang), cy + r * math.sin(t0 + ang))
+    out = [Sym("fp_arc"), [Sym("start"), round(sx, 4), round(sy, 4)], [Sym("mid"), round(pm[0], 4), round(pm[1], 4)],
+           [Sym("end"), round(pe[0], 4), round(pe[1], 4)]]
+    out += [x for x in it[1:] if isinstance(x, list) and x[0] not in ("start", "end", "angle")]
+    return out
 
 
 def _fix_prims(node):
