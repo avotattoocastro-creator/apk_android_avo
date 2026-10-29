@@ -1,0 +1,83 @@
+name: AVO GIRTH REV B → ODB++ para AISLER (KiCad 9)
+
+# Exporta el ODB++ de la copia preparada (hardware/girth/PCB/AISLER/kicad, ver preparar_aisler.py), lo valida leyendo el
+# ZIP y lo contrasta con los Gerber/Excellon de la misma placa. Evidencias en hardware/girth/PCB/AISLER/resultados_ci/.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['export/**']
+    paths:
+      - 'hardware/girth/PCB/AISLER/**'
+      - '.github/workflows/export-girth-aisler.yml'
+      - '!hardware/girth/PCB/AISLER/resultados_ci/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aisler-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  odb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      A: hardware/girth/PCB/AISLER
+      R: hardware/girth/PCB/AISLER/resultados_ci
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copia preparada = la que genera el script (reproducible)
+        run: |
+          rm -rf $R && mkdir -p $R
+          echo "commit $GITHUB_SHA · run $GITHUB_RUN_ID · $(date -u '+%Y-%m-%d %H:%M UTC')" > $R/ORIGEN.txt
+          python3 $A/preparar_aisler.py > $R/preparar_salida_ci.txt
+          git status --porcelain $A/kicad $A/posiciones_kicad_copia.csv | tee $R/diferencias_copia.txt
+          test ! -s $R/diferencias_copia.txt
+      - name: KiCad 9 · ERC, DRC (reglas del diseño y de AISLER), ODB++, Gerber/taladros, posiciones
+        run: |
+          docker pull -q kicad/kicad:9.0
+          mkdir -p /tmp/k /tmp/std && cp $A/kicad/* /tmp/k/ && cp $A/kicad/AVO_GIRTH_PCB.kicad_{pcb,sch,pro} /tmp/std/
+          sha256sum /tmp/k/* > $R/sha256_entrada.txt
+          docker run --rm -u 0 -e HOME=/tmp -e R -e A -v "$PWD":/w -v /tmp/k:/k -v /tmp/std:/std -w /w kicad/kicad:9.0 bash -c '
+            set -x
+            exec > >(tee $R/comandos_y_salida.txt) 2>&1
+            kicad-cli version
+            kicad-cli sch erc --format report --severity-all --units mm -o $R/erc.rpt /k/AVO_GIRTH_PCB.kicad_sch
+            kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/drc_reglas_diseno.rpt /std/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --severity-all --format report --units mm -o $R/drc_reglas_aisler.rpt /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb drc --schematic-parity --severity-all --format json --units mm -o $R/drc_reglas_aisler.json /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export odb --units mm --precision 4 --compression zip -o $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip /k/AVO_GIRTH_PCB.kicad_pcb
+            mkdir -p /tmp/g
+            kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu --subtract-soldermask -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export drill --format excellon --excellon-separate-th --excellon-units mm -o /tmp/g/ /k/AVO_GIRTH_PCB.kicad_pcb
+            kicad-cli pcb export pos --format csv --units mm --side both --exclude-dnp -o $R/posiciones_kicad_sin_dnp.csv /k/AVO_GIRTH_PCB.kicad_pcb
+            cp -r /tmp/g $R/gerber_contraste
+            chmod -R a+rw $R
+          '
+          ls -la $R
+      - name: Validar el ODB++ y contrastarlo con Gerber/Excellon
+        run: |
+          set -o pipefail
+          python3 $A/validar_odb.py $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip $A/posiciones_kicad_copia.csv \
+            hardware/girth/PCB/out/C3/AVO_GIRTH_PCB_C3_CPL_JLCPCB.csv $R 2>&1 | tee $R/validar_salida.txt
+          python3 $A/comparar_gerber_odb.py $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip $R/gerber_contraste $R/validacion_odb.json \
+            $R/contraste_gerber_odb.md 2>&1 | tee $R/contraste_salida.txt
+          unzip -l $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip > $R/contenido_zip.txt
+          sha256sum $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip > $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip.sha256
+          echo "posiciones de KiCad sin DNP: $(($(wc -l < $R/posiciones_kicad_sin_dnp.csv) - 1)) filas" | tee -a $R/validar_salida.txt
+      - name: Guardar evidencias en la rama
+        if: always()
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          T=$(mktemp -d); cp -r $R $T/r
+          ok=0
+          for i in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+            rm -rf $R; mkdir -p $(dirname $R); cp -r $T/r $R
+            git add -A $R
+            git commit -q -m "AISLER: ODB++ y validación del CI de ${GITHUB_SHA::7} [skip ci]" || { ok=1; break; }
+            git push origin HEAD:${{ github.ref_name }} && { ok=1; break; }
+            sleep $((i * 10))
+          done
+          test $ok = 1
