@@ -62,7 +62,11 @@ def nn(n):
 
 LATCH = ["Q10", "Q11", "D10", "D11", "D12", "D13", "R40", "R41", "R42", "R43", "R44", "R45", "C40", "C41",
          "Q16", "R49", "R50", "R31", "C33", "R32", "R33", "C34", "C20", "C19", "C21", "C22", "C23", "C24"]
-PARTS = {p["ref"]: p for p in D.PARTS}
+PARTS = {p["ref"]: dict(p) for p in D.PARTS}
+# Variantes para comparar (p. ej. AVO_SPICE_VALORES="C41=470n,R40=100k"): solo cambia el valor en la simulación
+for _kv in filter(None, os.environ.get("AVO_SPICE_VALORES", "").split(",")):
+    _r, _v = _kv.split("=")
+    PARTS[_r.strip()]["value"] = _v.strip()
 
 
 def circuit(P):
@@ -199,7 +203,7 @@ def main():
     if not NGSPICE:
         print("ngspice no está instalado: no se puede simular"); sys.exit(2)
     ver = subprocess.run([NGSPICE, "-v"], capture_output=True, text=True).stdout.strip().split("\n")[0]
-    R = dict(ngspice=ver, escenarios={}, montecarlo={})
+    R = dict(ngspice=ver, variante=os.environ.get("AVO_SPICE_VALORES", "") or "REV B tal cual", escenarios={}, montecarlo={})
 
     # ---------- 1. Ventana sin PWR_HOLD (el ESP32 nunca lo pone): ¿cuánto tiempo hay 3V3 > 3,0 V?
     tab = []

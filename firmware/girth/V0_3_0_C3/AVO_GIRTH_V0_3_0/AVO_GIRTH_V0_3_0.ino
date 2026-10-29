@@ -224,6 +224,7 @@ void setup() {
   pinMode(gb::PIN_BOOT, INPUT_PULLUP);
   Serial.begin(115200);
   Serial.printf("\n[AVO CINCHA] arranque: %s\n", gpow::boot_reason());   // antes de la radio (diagnóstico/QEMU)
+  Serial.flush();
   gpow::begin();
   delay(200);
   s_pw = gpow::read();
