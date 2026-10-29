@@ -9,7 +9,7 @@
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 5
+   "n": 7
   },
   {
    "name": "DRC: cortocircuitos",
@@ -19,7 +19,7 @@
   {
    "name": "DRC: paridad esquema \u2194 placa",
    "ok": false,
-   "n": 29
+   "n": 4
   },
   {
    "name": "ERC: errores",
@@ -34,7 +34,6 @@
  ],
  "drc_errors": {},
  "drc_warnings": {
-  "track_dangling": 1,
-  "silk_over_copper": 3
+  "track_dangling": 1
  }
 }
