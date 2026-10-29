@@ -1,11 +1,11 @@
 # AVO GIRTH · placa de la cincha · REV A — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `05556bbf496557728a4f6ee4ace4a73e9c446482` · ejecución de CI: 40881786227
+- Commit: `e9e51667b6c60058228a354bdb05fdcbe210ad9c` · ejecución de CI: 40882718676
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 122 en total, 104 para montar, 6 sin montar (DNP: C5, R22, R23, R28, R29, R41), 12 a mano (pads de hilo y de prueba)
-- Pistas: 1160 · vías: 198
+- Pistas: 1160 · vías: 198 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -25,6 +25,10 @@
 - Piezas montadas sin número LCSC: ninguna
 - Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
 - Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Modelo 3D (STEP y renders, no afecta a la fabricación)
+- Modelos de la librería de KiCad 9.0.0 descargados: 13; sin descargar: Connector_JST.3dshapes/JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.step, Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Package_DFN_QFN.3dshapes/Texas_VQFN-RHL-20.step, Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
+- ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). BNO085 y pads de hilo/prueba: sin modelo 3D.
 
 ## Limitaciones pendientes (ver README)
 - Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (DOCS/AJUSTE_QI.md).
