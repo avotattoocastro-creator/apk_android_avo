@@ -1,12 +1,8 @@
 ** Drc report for AVO_GIRTH_PCB.kicad_pcb **
-** Created on 2026-10-29T10:14:52+0000 **
+** Created on 2026-10-29T10:30:59+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 355 DRC violations **
-[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
-    Rule: netclass 'Potencia'; error
-    @(88.0250 mm, 103.7750 mm): Via [GND] on F.Cu - B.Cu
-    @(88.0375 mm, 103.2500 mm): Pad 3 [VBAT] of U2 on F.Cu
+** Found 358 DRC violations **
 [courtyards_overlap]: Courtyards overlap
     Rule: board setup constraints courtyard; error
     @(99.0000 mm, 92.6000 mm): Footprint Y1
@@ -15,26 +11,22 @@
     Rule: board setup constraints courtyard; error
     @(111.0000 mm, 115.6000 mm): Footprint C23
     @(113.6000 mm, 115.4000 mm): Footprint C24
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2924 mm)
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1790 mm)
     Rule: board setup constraints edge; error
     @(121.0000 mm, 120.5000 mm): Arc on Edge.Cuts
-    @(123.7749 mm, 112.8760 mm): Track [VBUS] on F.Cu, length 5.1190 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2924 mm)
-    Rule: board setup constraints edge; error
-    @(121.0000 mm, 120.5000 mm): Arc on Edge.Cuts
-    @(120.1552 mm, 116.4957 mm): Track [VBUS] on F.Cu, length 2.7822 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2343 mm)
+    @(115.0909 mm, 120.8527 mm): Track [VBUS] on F.Cu, length 13.0519 mm
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2377 mm)
     Rule: board setup constraints edge; error
     @(79.0000 mm, 120.5000 mm): Arc on Edge.Cuts
-    @(80.7610 mm, 116.6970 mm): Track [REED_HI] on F.Cu, length 5.4929 mm
+    @(79.8921 mm, 115.8234 mm): Track [REED_HI] on F.Cu, length 5.6228 mm
 [hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.1248 mm)
     Rule: board setup constraints; error
-    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
     @(89.2250 mm, 103.8750 mm): Via [GND] on F.Cu - B.Cu
+    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
 [hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.1248 mm)
     Rule: board setup constraints; error
-    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
     @(89.2250 mm, 103.8750 mm): Via [GND] on F.Cu - B.Cu
+    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
 [isolated_copper]: Isolated copper fill
     Local override; warning
     @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
@@ -257,36 +249,51 @@
 [isolated_copper]: Isolated copper fill
     Local override; warning
     @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
 [isolated_copper]: Isolated copper fill
     Local override; warning
     @(132.7500 mm, 115.5000 mm): Zone [+3V3] on In2.Cu, priority 0
 [isolated_copper]: Isolated copper fill
     Local override; warning
     @(132.7500 mm, 115.5000 mm): Zone [+3V3] on In2.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
-[isolated_copper]: Isolated copper fill
-    Local override; warning
-    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(68.5000 mm, 90.0000 mm): Arc on Edge.Cuts
@@ -1155,58 +1162,26 @@
     @(110.7387 mm, 116.3350 mm): Segment of C23 on F.Silkscreen
     @(110.0000 mm, 116.4500 mm): Reference field of TP7
 
-** Found 13 unconnected pads **
+** Found 5 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(113.1200 mm, 115.4000 mm): Track [+3V3] on F.Cu, length 0.0255 mm
+    @(113.1200 mm, 115.4000 mm): Pad 1 [+3V3] of C24 on F.Cu
     @(111.9000 mm, 112.9000 mm): Pad 3 [+3V3] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(77.7250 mm, 99.3992 mm): Track [VIN5] on B.Cu, length 0.0957 mm
     @(79.7500 mm, 104.6500 mm): Pad 4 [VIN5] of U1 on F.Cu
+    @(84.8000 mm, 107.5750 mm): Pad 1 [VIN5] of C15 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(88.8000 mm, 105.6900 mm): Pad 2 [VSYS] of R8 on F.Cu
-    @(90.9625 mm, 103.2500 mm): Pad 10 [VSYS] of U2 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(90.9625 mm, 103.2500 mm): Pad 10 [VSYS] of U2 on F.Cu
-    @(98.2694 mm, 105.0750 mm): Track [VSYS] on F.Cu, length 5.6694 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.5547 mm, 86.8700 mm): Track [BAT_SW] on F.Cu, length 2.1024 mm
     @(95.4000 mm, 83.0875 mm): Pad 2 [BAT_SW] of R40 on F.Cu
+    @(88.5517 mm, 88.9357 mm): Track [BAT_SW] on F.Cu, length 2.0737 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(89.7500 mm, 104.4625 mm): Pad 7 [CHG_PG] of U2 on F.Cu
-    @(89.9093 mm, 106.7100 mm): Track [CHG_PG] on F.Cu, length 0.0093 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(116.7000 mm, 112.9000 mm): Pad 9 [CHG_STAT] of U4 on F.Cu
-    @(91.6214 mm, 106.0886 mm): Track [CHG_STAT] on F.Cu, length 1.6797 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(96.8900 mm, 100.6000 mm): Track [IMU_WAKE] on F.Cu, length 1.2162 mm
-    @(119.2000 mm, 108.6000 mm): Pad 16 [IMU_WAKE] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(78.5752 mm, 104.4752 mm): Track [QI_AC1] on F.Cu, length 0.2472 mm
-    @(79.3050 mm, 106.0250 mm): Track [QI_AC1] on F.Cu, length 0.0071 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(87.2000 mm, 107.0100 mm): Track [QI_CHG] on F.Cu, length 1.1454 mm
     @(81.2500 mm, 104.6500 mm): Pad 7 [QI_CHG] of U1 on F.Cu
+    @(86.6048 mm, 106.4148 mm): Track [QI_CHG] on F.Cu, length 1.1274 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(80.2500 mm, 104.6500 mm): Pad 5 [QI_CLAMP1] of U1 on F.Cu
-    @(80.6000 mm, 107.5750 mm): Pad 1 [QI_CLAMP1] of C7 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(80.7500 mm, 104.6500 mm): Pad 6 [QI_COMM1] of U1 on F.Cu
-    @(81.9000 mm, 106.9800 mm): Pad 1 [QI_COMM1] of C8 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(83.7000 mm, 98.2900 mm): Pad 2 [QI_FOD] of R1 on F.Cu
+    @(84.6427 mm, 99.2327 mm): Track [QI_FOD] on F.Cu, length 1.3332 mm
     @(81.2500 mm, 101.3500 mm): Pad 14 [QI_FOD] of U1 on F.Cu
 
 ** Found 0 Footprint errors **
