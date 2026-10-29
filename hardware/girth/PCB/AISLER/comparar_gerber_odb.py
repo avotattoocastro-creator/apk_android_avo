@@ -1,7 +1,8 @@
 """Contraste independiente del ODB++ con los Gerber/Excellon que KiCad genera de la MISMA placa:
 - cada taladro del ODB++ (vías, PTH, NPTH) tiene un taladro en el Excellon en la misma posición y con el mismo diámetro;
 - número de pads «flash» (D03) de cada capa de cobre del Gerber frente a los pads (P) de la capa ODB++.
-Uso: comparar_gerber_odb.py <odb.zip> <dir_gerber> <validacion_odb.json> <salida.md>"""
+- los pads de forma libre («custom») salen en ODB++ como superficies (S), no como pads (P): se cuentan en la placa.
+Uso: comparar_gerber_odb.py <odb.zip> <dir_gerber> <validacion_odb.json> <salida.md> <placa.kicad_pcb>"""
 import json
 import math
 import os
@@ -10,7 +11,16 @@ import sys
 import zipfile
 from collections import Counter
 
-ZIP, GD, VJ, OUT = sys.argv[1:5]
+ZIP, GD, VJ, OUT, BRD = sys.argv[1:6]
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "fuente"))
+from sexpr import parse, find  # noqa: E402
+custom = Counter()
+for it in parse(open(BRD, encoding="utf-8").read()):
+    if isinstance(it, list) and it and str(it[0]) == "footprint":
+        for p in it:
+            if isinstance(p, list) and p and str(p[0]) == "pad" and str(p[3]) == "custom":
+                for ly in find(p, "layers")[1:]:
+                    custom[str(ly).upper()] += 1
 V = json.load(open(VJ, encoding="utf-8"))
 T = V["transformacion_num"]
 z = zipfile.ZipFile(ZIP)
@@ -20,7 +30,7 @@ L, ok = [], True
 
 
 def odb_pads(layer):
-    t = z.read(SP + "layers/%s/features" % layer).decode()
+    t = z.read(SP + "layers/%s/features" % layer.lower()).decode()
     syms = {int(m.group(1)): m.group(2) for m in re.finditer(r"^\$(\d+)\s+(\S+)", t, re.M)}
     out = []
     for line in t.splitlines():
@@ -44,6 +54,10 @@ for fn in sorted(os.listdir(GD)):
         m = re.match(r"^T(\d+)$", line)
         if m:
             cur = int(m.group(1)); continue
+        m = re.match(r"^X(-?[\d.]+)Y(-?[\d.]+)G85X(-?[\d.]+)Y(-?[\d.]+)", line)     # ranura: centro del tramo
+        if m and cur is not None:
+            x0, y0, x1, y1 = map(float, m.groups())
+            exc.append(((x0 + x1) / 2, (y0 + y1) / 2, tools[cur], fn)); continue
         m = re.match(r"^X(-?[\d.]+)Y(-?[\d.]+)", line)
         if m and cur is not None:
             exc.append((float(m.group(1)), float(m.group(2)), tools[cur], fn))
@@ -51,8 +65,8 @@ odb = []
 for d in V["capas"]:
     if d["tipo"] == "DRILL" and d["contexto"] == "BOARD":
         for x, y, s in odb_pads(d["nombre"]):
-            m = re.match(r"r([\d.]+)", s)
-            dia = float(m.group(1)) / (1000.0 if float(m.group(1)) > 20 else 1.0) if m else None   # r300 = 300 µm
+            m = re.match(r"r([\d.]+)$", s) or re.match(r"oval([\d.]+)x", s)   # r300 = 300 µm; oval600x1200: ancho 600 µm
+            dia = float(m.group(1)) / 1000.0 if m else None
             odb.append((x, y, dia, d["nombre"]))
 # ODB = KiCad + desplazamiento; Excellon de KiCad = (x, −y) en coordenadas absolutas → KiCad = (x, −y)
 def to_odb(x, y):
@@ -83,8 +97,12 @@ for d in V["capas"]:
         if gf:
             t = open(os.path.join(GD, gf[0])).read()
             n_g = len(re.findall(r"D03\*", t))
-        L.append("Capa %s: pads ODB++ %d · flashes (D03) en %s: %s" % (d["nombre"], n_odb, gf[0] if gf else "?", n_g))
+        cu = custom.get(d["nombre"], 0)
+        iguales = n_g is not None and n_odb + cu == n_g
+        ok &= iguales
+        L.append("Capa %s: pads ODB++ %d + pads «custom» de la placa (superficies en ODB++) %d = %d · flashes (D03) en %s: %s → %s"
+                 % (d["nombre"], n_odb, cu, n_odb + cu, gf[0] if gf else "?", n_g, "IGUAL" if iguales else "DISTINTO"))
 open(OUT, "w", encoding="utf-8").write("# Contraste ODB++ ↔ Gerber/Excellon de la misma placa\n\n" +
-                                       "\n".join("- " + l for l in L) + "\n\nRESULTADO taladros: %s\n" % ("IGUALES" if ok else "DIFERENCIAS"))
-print("\n".join(L)); print("taladros", "IGUALES" if ok else "DIFERENCIAS")
+                                       "\n".join("- " + l for l in L) + "\n\nRESULTADO: %s\n" % ("COINCIDEN" if ok else "DIFERENCIAS"))
+print("\n".join(L)); print("RESULTADO", "COINCIDEN" if ok else "DIFERENCIAS")
 sys.exit(0 if ok else 1)

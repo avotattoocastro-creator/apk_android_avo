@@ -62,7 +62,7 @@ jobs:
           python3 $A/validar_odb.py $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip $A/posiciones_kicad_copia.csv \
             hardware/girth/PCB/out/C3/AVO_GIRTH_PCB_C3_CPL_JLCPCB.csv $R 2>&1 | tee $R/validar_salida.txt
           python3 $A/comparar_gerber_odb.py $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip $R/gerber_contraste $R/validacion_odb.json \
-            $R/contraste_gerber_odb.md 2>&1 | tee $R/contraste_salida.txt
+            $R/contraste_gerber_odb.md $A/kicad/AVO_GIRTH_PCB.kicad_pcb 2>&1 | tee $R/contraste_salida.txt
           unzip -l $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip > $R/contenido_zip.txt
           sha256sum $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip > $R/AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip.sha256
           echo "posiciones de KiCad sin DNP: $(($(wc -l < $R/posiciones_kicad_sin_dnp.csv) - 1)) filas" | tee -a $R/validar_salida.txt

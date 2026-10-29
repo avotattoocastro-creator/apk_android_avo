@@ -10,11 +10,17 @@ Cambios en la copia (y solo estos; el script comprueba que no cambia nada más):
      de componentes y solo marca NO_POP las que tienen DNP (pcbnew/pcb_io/odbpp/odb_component.cpp); AISLER toma
      de ahí qué montar. Sin esto, AISLER vería 97 piezas para montar en vez de 85.
   2. Revisión del cajetín de la placa: «A» → «B» (la placa es la REV B; el cajetín arrastraba «A»).
+  3. Campos de texto de las 85 piezas montadas (solo en la placa, que es lo que lee el ODB++): «MPN» pasa a ser la
+     referencia del fabricante de la pieza LCSC de la BOM de JLCPCB (77 de 85 llevaban el valor, p. ej. «100k») y se
+     añade «Manufacturer». Datos: lcsc_piezas_2026-10-29.json (consulta a JLCPCB del CI de la auditoría). Sirve para
+     que la herramienta de BOM de AISLER encuentre las piezas. «Value» y «LCSC» no cambian.
 Sin cambios: redes, pads, posiciones, giros, pistas, vías, zonas (con su relleno), contorno, capas, reglas.
 
 Uso: python3 preparar_aisler.py   → AISLER/kicad/AVO_GIRTH_PCB.kicad_{pcb,sch,pro} + preparar_salida.txt
 """
 import hashlib
+import json
+import uuid
 import os
 import re
 import shutil
@@ -89,6 +95,41 @@ def main():
         last = j
     partes.append(t[last:])
     t2 = "".join(partes)
+    # 3. MPN/Manufacturer de las piezas montadas
+    lcsc = json.load(open(os.path.join(H, "lcsc_piezas_2026-10-29.json"), encoding="utf-8"))["parts"]
+    partes, last, mpn_log = [], 0, []
+    for i, j in bloques(t2, "footprint"):
+        b = t2[i:j]
+        r = ref_de(b)
+        at = re.search(r"\(attr ([a-z_ ]+)\)", b).group(1).split()
+        lc = re.search(r'\(property "LCSC" "([^"]*)"', b)
+        if "dnp" not in at and lc and lc.group(1):
+            info = lcsc[lc.group(1)]
+            m = re.search(r'\n\t\t\(property "MPN" "([^"]*)"', b)
+            k0 = m.start() + 1
+            nivel, k = 0, k0
+            while True:                                   # fin del bloque de la propiedad MPN
+                if b[k] == "(":
+                    nivel += 1
+                elif b[k] == ")":
+                    nivel -= 1
+                    if nivel == 0:
+                        break
+                k += 1
+            prop = b[k0:k + 1]
+            nuevo_mpn = prop.replace('"MPN" "%s"' % m.group(1), '"MPN" "%s"' % info["mpn"].replace('"', "'"), 1)
+            fab = prop.replace('"MPN" "%s"' % m.group(1), '"Manufacturer" "%s"' % info["maker"].replace('"', "'"), 1)
+            fab = re.sub(r'\(uuid "[^"]+"\)', '(uuid "%s")' % uuid.uuid5(uuid.NAMESPACE_URL, "avo-aisler-fab-" + r), fab)
+            b = b[:k0] + nuevo_mpn + "\n" + fab + b[k + 1:]
+            mpn_log.append("%s,%s,%s,%s,%s" % (r, lc.group(1), m.group(1).replace(",", ";"), info["mpn"], info["maker"].replace(",", ";")))
+        partes += [t2[last:i], b]
+        last = j
+    partes.append(t2[last:])
+    t2 = "".join(partes)
+    if len(mpn_log) != 85:
+        sys.exit("MPN: se esperaban 85 piezas montadas con LCSC y hay %d" % len(mpn_log))
+    open(os.path.join(H, "mpn_aplicados.csv"), "w", encoding="utf-8").write(
+        "ref,lcsc,mpn_antes,mpn_ahora,fabricante\n" + "\n".join(sorted(mpn_log)) + "\n")
     if len(hechos) != len(NO_MONTAR):
         sys.exit("no se encontraron todas las huellas: %s" % hechos)
     n = t2.count('\t\t(rev "A")')
@@ -98,6 +139,7 @@ def main():
     open(os.path.join(DST, "AVO_GIRTH_PCB.kicad_pcb"), "w", encoding="utf-8").write(t2)
     log.append("Placa: cajetín rev «A» → «B»")
     log += ["Placa: " + h for h in hechos]
+    log.append("Placa: MPN de fabricante y campo Manufacturer en %d piezas montadas (mpn_aplicados.csv)" % len(mpn_log))
 
     # ---------------------------------------------------------------- esquema
     s = open(os.path.join(SRC, "AVO_GIRTH_PCB.kicad_sch"), encoding="utf-8").read()
@@ -129,14 +171,15 @@ def main():
             if isinstance(it, list) and it and str(it[0]) == "title_block":
                 continue
             if quitar_attr and isinstance(it, list) and it and str(it[0]) == "footprint":
-                it = [p for p in it if not (isinstance(p, list) and p and str(p[0]) == "attr")]
+                it = [p for p in it if not (isinstance(p, list) and p and (str(p[0]) == "attr" or (
+                    str(p[0]) == "property" and p[1] in ("MPN", "Manufacturer"))))]
             out.append(repr(it))
         return out
     a, b = canon(src_pcb, True), canon(os.path.join(DST, "AVO_GIRTH_PCB.kicad_pcb"), True)
     if a != b:
         dif = sum(1 for x, y in zip(a, b) if x != y) + abs(len(a) - len(b))
         sys.exit("la copia difiere del original en %d elementos además de attr/cajetín" % dif)
-    log.append("Comprobado: quitando (attr) de las huellas y el cajetín, la placa copiada es idéntica a la original "
+    log.append("Comprobado: quitando (attr), los campos MPN/Manufacturer de las huellas y el cajetín, la placa copiada es idéntica a la original "
                "(%d elementos de primer nivel: huellas, pistas, vías, zonas con relleno, contorno, textos)" % len(a))
 
     # posiciones/giros/caras de las 98 huellas (lectura de la copia)

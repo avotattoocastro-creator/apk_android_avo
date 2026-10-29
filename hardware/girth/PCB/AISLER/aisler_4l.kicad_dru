@@ -23,12 +23,30 @@
 	(condition "A.Type == 'Via'")
 	(constraint annular_width (min 0.1mm)))
 
-(rule "AISLER PTH: taladro mín. 0,5 mm"
-	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'")
+(rule "AISLER PTH de componente: taladro mín. 0,5 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X > 0.45mm && A.Hole_Size_X == A.Hole_Size_Y")
 	(constraint hole_size (min 0.5mm)))
 
-(rule "AISLER PTH: anillo mín. 300 µm"
-	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'")
+(rule "AISLER PTH de componente: anillo mín. 300 µm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X > 0.45mm && A.Hole_Size_X == A.Hole_Size_Y")
+	(constraint annular_width (min 0.3mm)))
+
+# Taladros de 0,25–0,45 mm dentro de un pad (vías térmicas de los EPAD): se fabrican como vías
+(rule "AISLER vía en pad: taladro 0,25–0,45 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X <= 0.45mm && A.Hole_Size_X == A.Hole_Size_Y")
+	(constraint hole_size (min 0.25mm) (max 0.45mm)))
+
+(rule "AISLER vía en pad: anillo mín. 100 µm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X <= 0.45mm && A.Hole_Size_X == A.Hole_Size_Y")
+	(constraint annular_width (min 0.1mm)))
+
+# Ranuras metalizadas: ancho 0,7–2,6 mm y anillo mín. 300 µm
+(rule "AISLER ranura PTH: ancho 0,7–2,6 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X != A.Hole_Size_Y")
+	(constraint hole_size (min 0.7mm) (max 2.6mm)))
+
+(rule "AISLER ranura PTH: anillo mín. 300 µm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.Hole_Size_X != A.Hole_Size_Y")
 	(constraint annular_width (min 0.3mm)))
 
 (rule "AISLER NPTH: taladro mín. 0,5 mm"

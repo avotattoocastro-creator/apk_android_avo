@@ -70,7 +70,7 @@ NUM = r"-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?"
 
 
 def features(layer):
-    p = SP + "layers/%s/features" % layer
+    p = SP + "layers/%s/features" % layer.lower()      # en matrix van en mayúsculas; las carpetas, en minúsculas
     if p not in names:
         return None
     t = rd(p)
@@ -143,7 +143,7 @@ comp_layers = [d["NAME"] for d in layers if d.get("TYPE") == "COMPONENT"]
 R["capas_componentes"] = comp_layers
 comps = []
 for cl in comp_layers:
-    p = SP + "layers/%s/components" % cl
+    p = SP + "layers/%s/components" % cl.lower()
     if p not in names:
         continue
     t = rd(p)
@@ -159,7 +159,10 @@ for cl in comp_layers:
             for a in filter(None, at.strip().split(",")):
                 k, _, v = a.partition("=")
                 nm = attr_names.get(int(k), "@" + k)
-                cur["attrs"][nm] = attr_texts.get(int(v), v) if v.isdigit() and nm != ".no_pop" else (v or True)
+                if nm == ".comp_mount_type" and v.isdigit():      # opciones en el orden de KiCad (odb_attribute.h)
+                    cur["attrs"][nm] = ["other", "smt", "thmt", "pressfit"][int(v)]
+                else:
+                    cur["attrs"][nm] = attr_texts.get(int(v), v) if v.isdigit() else (v or True)
             comps.append(cur)
         elif line.startswith("PRP ") and cur is not None:
             m = re.match(r"PRP\s+(\S+)\s+'(.*)'", line)
@@ -244,6 +247,14 @@ if cpl_err and max(cpl_err) > 0.001:
 # propiedades útiles para la lista de materiales de AISLER
 R["propiedades"] = dict(Counter(k for c in pop for k in c["props"]))
 sin_mpn = [c["ref"] for c in pop if not c["props"].get("MPN")]
+# MPN y fabricante frente a la pieza LCSC de la BOM (datos de JLCPCB): deben coincidir en las 85 piezas montadas
+_lc = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lcsc_piezas_2026-10-29.json"),
+                     encoding="utf-8"))["parts"]
+mpn_mal = [c["ref"] for c in pop if _lc.get(c["props"].get("LCSC", ""), {}).get("mpn", "").replace('"', "'") != c["props"].get("MPN")]
+sin_fab = [c["ref"] for c in pop if not c["props"].get("Manufacturer")]
+R["mpn_frente_a_lcsc"] = dict(distintos=mpn_mal, sin_fabricante=sin_fab)
+if mpn_mal or sin_fab:
+    fail("MPN/fabricante no coinciden con la pieza LCSC de la BOM en %s / sin fabricante en %s" % (mpn_mal, sin_fab))
 mpn_es_valor = sorted(c["ref"] for c in pop if c["props"].get("MPN") and c["props"].get("MPN") == c["props"].get("Value"))
 R["mpn"] = dict(sin_mpn=sin_mpn, mpn_igual_al_valor=len(mpn_es_valor), ejemplos=mpn_es_valor[:12])
 if mpn_es_valor:
@@ -268,11 +279,11 @@ R["texto_espesor"] = [n for n in names if "thick" in rd(n).lower()][:5] if len(n
 # ------------------------------------------------------------------ salida
 with open(os.path.join(OUT, "componentes_odb.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
-    w.writerow(["ref", "capa", "x_mm", "y_mm", "giro", "no_pop", "montaje", "Value", "MPN", "LCSC", "Footprint"])
+    w.writerow(["ref", "capa", "x_mm", "y_mm", "giro", "no_pop", "montaje", "Value", "MPN", "Manufacturer", "LCSC", "paquete"])
     for c in sorted(comps, key=lambda c: (re.sub(r"\d", "", c["ref"]), int(re.sub(r"\D", "", c["ref"]) or 0))):
         w.writerow([c["ref"], c["capa"], c["x"], c["y"], c["giro"], no_pop(c), c["attrs"].get(".comp_mount_type", ""),
-                    c["props"].get("Value", ""), c["props"].get("MPN", ""), c["props"].get("LCSC", ""),
-                    c["props"].get("Footprint", "")])
+                    c["props"].get("Value", ""), c["props"].get("MPN", ""), c["props"].get("Manufacturer", ""),
+                    c["props"].get("LCSC", ""), c["parte"]])
 R["resultado"] = "VÁLIDO" if not R["problemas"] else "CON PROBLEMAS"
 json.dump(R, open(os.path.join(OUT, "validacion_odb.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 L = ["# Validación del ODB++ para AISLER — %s" % R["resultado"], "",

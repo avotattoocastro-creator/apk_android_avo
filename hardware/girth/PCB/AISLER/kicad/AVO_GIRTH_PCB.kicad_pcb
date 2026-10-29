@@ -304,6 +304,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Hubei KENTO Elec"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a32c6b76-148b-5774-8a9b-0c55152e3467")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/7969aade-7a13-594c-a287-5a9a63644a18")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -621,11 +633,23 @@
 				)
 			)
 		)
-		(property "MPN" "LSM6DS3TR-C (alt. LSM6DSV16XTR C5267406)"
+		(property "MPN" "LSM6DS3TR-C"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "86f7e865-0039-58a0-85dd-6c227799c22b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "STMicroelectronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2913609b-24d9-5a17-b982-78a8ea883fd5")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -918,6 +942,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Alpha & Omega Semicon"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "50abd86b-6c65-52ac-b42a-ccf825e7f298")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/709439d9-3f6a-5775-abab-c9b160c19c0b")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -1150,11 +1186,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0bf60e7c-2607-5660-80a2-0e0b35aeecb6")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fb62d165-0c72-5979-807d-49e090b03841")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -1359,11 +1407,23 @@
 				)
 			)
 		)
-		(property "MPN" "1u"
+		(property "MPN" "CL05A105KA5NQNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8cb901e2-b5ec-50db-8302-3d2d4e1093d9")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ca479e18-53ff-5b11-81e2-9e5f91c9aa16")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -1568,11 +1628,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "fc8c827c-99cc-513b-8598-a7c3c541d231")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "75712bc6-6afc-56d3-b5bb-071d5c9782eb")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -1777,11 +1849,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "bd336cb4-1318-55c5-be6d-242ec799273b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6fac16a0-c76f-5eeb-9980-27d1e92c6e38")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -1986,11 +2070,23 @@
 				)
 			)
 		)
-		(property "MPN" "5k1"
+		(property "MPN" "0402WGF5101TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "539aa22f-74bd-56af-921b-c4f3ef37ff5d")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a3719f0e-19ed-56f0-b41a-71ebb97d899b")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -2207,6 +2303,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata Electronics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b9e1c7d4-7aea-59b6-a10e-085738f8667a")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/120be9fe-c8c4-5a46-81bb-5c9def694838")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -2404,11 +2512,23 @@
 				)
 			)
 		)
-		(property "MPN" "1u"
+		(property "MPN" "CL05A105KA5NQNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b828340d-2977-5c1d-b884-ef4efb075382")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cc197b1d-1537-5186-837e-72da3a70ad0c")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -2618,6 +2738,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "327addfe-7e21-5db2-a9c4-4c3a5345e469")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "MEMSIC"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b2b80530-16fe-5b24-934f-9f37605c7667")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -2919,6 +3051,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "33a705b8-3b43-5f37-8a20-3e48db189bcd")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5dde3c7a-a13d-5a51-89f3-85903ec93de4")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -3373,11 +3517,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "28814f40-a5dc-5ed2-b6f7-7cd7abe9f1c7")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "01bbffe6-b815-5414-97f6-dd7a60ee3342")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -3582,11 +3738,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "eac0f350-df92-50a3-99d7-6dfb6658839d")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "95bf67e0-f670-5f72-9968-5954af6f3a61")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -3791,11 +3959,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d7d40c87-0c82-5593-8f60-12c4707fe21f")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2f7c2323-7b92-5b0c-afe1-75bcf473e469")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -4000,11 +4180,23 @@
 				)
 			)
 		)
-		(property "MPN" "4k7"
+		(property "MPN" "0402WGF4701TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "33a7b0d6-c6f7-5017-a8b3-3d8da2b5a259")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cfa1a56b-3b53-5c8c-b123-f362784ef804")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -4209,11 +4401,23 @@
 				)
 			)
 		)
-		(property "MPN" "10M"
+		(property "MPN" "0402WGF1005TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7d894170-f0b2-5b38-a478-41c21b5e9f9c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a3b9d056-9ec9-5d7c-9bc9-c12ec3f2a54a")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -4418,11 +4622,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d0c6a379-5c04-5c67-aa30-1167e8737f79")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c20a1ced-4811-5db3-b354-a4caf36efb9b")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -4627,11 +4843,23 @@
 				)
 			)
 		)
-		(property "MPN" "470n 25V"
+		(property "MPN" "CL10B474KA8NNNC"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1fc823be-6003-5c87-8a35-ef3eeafa8ec2")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e040894e-341f-5fbb-8d46-a9e5980b2095")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -4836,11 +5064,23 @@
 				)
 			)
 		)
-		(property "MPN" "1k"
+		(property "MPN" "0402WGF1001TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "595cb4fc-75d2-503f-afd3-d4950352422b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6320d218-b561-5136-b85c-00fe9866db52")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -5045,11 +5285,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 6V3"
+		(property "MPN" "CL10A106KP8NNNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "89565346-665b-57ec-ad08-0659b0b99448")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a6636274-b79a-5d91-9289-772f0d2a6d82")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -5259,6 +5511,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ab53ed23-f718-500d-980d-ed0143c962eb")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Alpha & Omega Semicon"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "189501ac-c8b2-5645-92b3-8672a8819cb3")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -5598,11 +5862,23 @@
 				)
 			)
 		)
-		(property "MPN" "220R"
+		(property "MPN" "0402WGF2200TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5af2efac-960c-5877-ade4-b0baa122acd1")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e6e80258-23c5-5b33-b95c-ae33218add4c")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -5807,11 +6083,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8a41aa82-4985-51b6-8311-92a3bf9ee209")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3f5d1b4c-14ed-50e6-b6e1-e32329cbbd98")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -6016,11 +6304,23 @@
 				)
 			)
 		)
-		(property "MPN" "10k"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "754badb2-8e11-599d-93bd-b5852768e5ac")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "afe92d26-cc6b-5721-b440-20220e7d0fdd")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -6325,11 +6625,23 @@
 				)
 			)
 		)
-		(property "MPN" "10k"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5b4b9fe1-57d3-5bc7-a86d-a3dac20d7bc7")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "df8c2df0-22fe-5210-866a-ce2e98d239fd")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -6534,11 +6846,23 @@
 				)
 			)
 		)
-		(property "MPN" "22n 50V"
+		(property "MPN" "0402B223K500NT"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5ebbc395-12c0-5864-90e3-4094b8c2aded")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "FH (Guangdong Fenghua Advanced Tech)"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7ac5e73e-ff8a-554d-b7a4-6f9c7c7fa857")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -6743,11 +7067,23 @@
 				)
 			)
 		)
-		(property "MPN" "SM02B-SRSS-TB (JST SH 1,0)"
+		(property "MPN" "SM02B-SRSS-TB(LF)(SN)"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "149724c9-6f8b-5ebb-aed1-0160edaaf609")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "JST"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "08ba54ab-7cd9-5c34-8f11-5fd4443caa01")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -7028,11 +7364,23 @@
 				)
 			)
 		)
-		(property "MPN" "2n2 C0G 50V"
+		(property "MPN" "0805CG222J500NT"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7f2dc36c-639b-5818-9364-e92a1f21775f")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "FH (Guangdong Fenghua Advanced Tech)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d7e14983-d00a-5a7b-b9a2-4a8b47d13540")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -7237,11 +7585,23 @@
 				)
 			)
 		)
-		(property "MPN" "22u 10V"
+		(property "MPN" "CL21A226MAQNNNE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8a011a98-e14f-5ca3-a5ec-becb32e1b65c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6436169d-deba-5e3b-9261-f9a7647d0e50")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -7451,6 +7811,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "64a583da-45f3-5fe5-92f1-b5b414fb4d2b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Korean Hroparts Elec"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dbe6e7c0-76a9-57e3-ada1-eb186bcf9e58")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -7831,11 +8203,23 @@
 				)
 			)
 		)
-		(property "MPN" "10k"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "886e05d3-45e9-577c-b7e3-419067b1d9f4")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16e48576-0611-5007-a7a5-b49f2e804ad5")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -8045,6 +8429,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1d83ff64-fdb6-5bde-9399-144901c596de")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Jiangsu Changjing Electronics Technology Co., Ltd."
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f1c6b05e-1ffd-5bf2-8836-832a687abc1b")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -8284,11 +8680,23 @@
 				)
 			)
 		)
-		(property "MPN" "220n"
+		(property "MPN" "CL05B224KO5NNNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9e578038-1000-56f5-b484-d6e950882245")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6910e662-7326-5809-a9cb-f954d4330d1e")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -8493,11 +8901,23 @@
 				)
 			)
 		)
-		(property "MPN" "330R"
+		(property "MPN" "0402WGF3300TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c167aaa4-bac9-5b44-9f3c-39de864e7819")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b93aadf3-d02b-585f-b9f4-39d1daa063de")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -8702,11 +9122,23 @@
 				)
 			)
 		)
-		(property "MPN" "22R"
+		(property "MPN" "0402WGF220JTCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "93c4c1c6-1ce9-50ba-8769-9627822766a0")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a3a17bc4-8674-5be1-bfe1-b73e28b1c549")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -8911,11 +9343,23 @@
 				)
 			)
 		)
-		(property "MPN" "2u2"
+		(property "MPN" "CL10A225KO8NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "feea6ec4-a652-5517-b678-1729abbeb51c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bd70ee27-9315-56ab-843e-dbf2d5985704")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -9120,11 +9564,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "aaaab1ca-6811-57c4-845c-9a35742ac820")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0f49ed5c-08e5-56d8-9ee1-72645e74ad7b")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -9329,11 +9785,23 @@
 				)
 			)
 		)
-		(property "MPN" "10n 50V"
+		(property "MPN" "CL05B103KB5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "230abac9-3fa9-5eb1-b8ab-a6f291520984")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8a079c5c-cafe-54aa-9627-087f76b69556")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -9543,6 +10011,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "28dfb313-3965-52aa-b5d3-a7bb99b606de")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Alpha & Omega Semicon"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "96b689eb-a136-57c6-bec7-e0d632a590e9")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -9782,11 +10262,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n C0G 50V"
+		(property "MPN" "GRM31C5C1H104JA01L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "4391f8f0-308c-5921-a2f9-f813eb4c5b7c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Murata Electronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1d10752e-0de8-5162-b93c-539c689bd043")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -10093,11 +10585,23 @@
 				)
 			)
 		)
-		(property "MPN" "1M"
+		(property "MPN" "0402WGF1004TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3058a78d-1ef1-5741-83e8-680ccdce0032")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7252df17-362e-5f73-9002-8176babfbf3f")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -10302,11 +10806,23 @@
 				)
 			)
 		)
-		(property "MPN" "1M"
+		(property "MPN" "0402WGF1004TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7183744d-e4e1-5b30-8305-1191b547a89e")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2d64ae79-6bef-599c-8763-89ae508e6edd")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -10511,11 +11027,23 @@
 				)
 			)
 		)
-		(property "MPN" "1u"
+		(property "MPN" "CL05A105KA5NQNC"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "572770b1-1c3f-5956-aa7f-c9680b4aaa24")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "68e70549-980f-5027-aee8-c0c23051f45e")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -10725,6 +11253,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "09ce9fab-d32f-5183-a183-4fdb87705429")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Alpha & Omega Semicon"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9647dfac-3130-59e8-9e13-1c764d7bb5ba")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -10964,11 +11504,23 @@
 				)
 			)
 		)
-		(property "MPN" "BQ51013BRHLR (alt. BQ51013CRHLR C43043533)"
+		(property "MPN" "BQ51013BRHLR"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c3b146aa-85aa-5f49-82cc-743369bf9d7f")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "73a908a9-7c7f-59dc-a006-2b5354cc75f2")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -11571,6 +12123,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Jiangsu Changjing Electronics Technology Co., Ltd."
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7de0f78a-b7fe-55ae-876a-cf76cd57e8ce")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/54fc8047-6554-5e92-b66d-78c73c349a7e")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -11803,11 +12367,23 @@
 				)
 			)
 		)
-		(property "MPN" "47n C0G 50V"
+		(property "MPN" "GRM31M5C1H473JA01L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "67256e7b-bcf4-560e-9455-a406324decb0")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Murata Electronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "00013588-e080-5018-91db-e35a67a84c4b")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -12017,6 +12593,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e65edd48-7437-5def-b30c-ba36661f3535")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Jiangsu Changjing Electronics Technology Co., Ltd."
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d4535420-0e00-569b-b97c-b52d0831f1f6")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -12256,11 +12844,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "ddb9c633-5d28-525c-87bd-7f51552891e3")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "82852d3d-9279-5843-b32e-67bb68d14934")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -12465,11 +13065,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d265a594-2e68-5c2a-8409-882bf7ce9a1d")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ee6a61f2-d8b1-5ca2-a839-e682e91f0d97")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -12876,11 +13488,23 @@
 				)
 			)
 		)
-		(property "MPN" "22R"
+		(property "MPN" "0402WGF220JTCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "106afc32-c964-59f8-bb74-42eed0afa259")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fc23d6e6-fdfa-552d-ada4-b693609d14ec")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -13287,11 +13911,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "5d238016-165b-5f82-b670-451358790a6b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8eb030c1-10bc-5274-b9c8-a382a477071f")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -13496,11 +14132,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d9a232b2-1fc5-5afe-86eb-68fc90411287")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ed443cf5-60a7-556c-af2c-fe89f39540c5")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -13705,11 +14353,23 @@
 				)
 			)
 		)
-		(property "MPN" "1u"
+		(property "MPN" "CL05A105KA5NQNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0e65da88-0ddc-5414-a9d1-65168b5755ef")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "74e827a1-5e7d-57f8-8b07-d86c703fd652")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -13914,11 +14574,23 @@
 				)
 			)
 		)
-		(property "MPN" "1M"
+		(property "MPN" "0402WGF1004TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "49006544-0c1f-51ed-b6fc-1b83ea8e710c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6298fc8b-2c0e-5830-919b-ee9cf0612353")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -14235,6 +14907,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Murata Electronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "452c494c-e49e-5fe9-a0e4-1c08321c7229")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/c7527515-f115-54d8-9faf-9bd2e00f59bb")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -14432,11 +15116,23 @@
 				)
 			)
 		)
-		(property "MPN" "22n 50V"
+		(property "MPN" "0402B223K500NT"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "918b0b5f-cb10-5a9c-9fc6-69052fbc31ef")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "FH (Guangdong Fenghua Advanced Tech)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "137ad531-524e-5d5f-89fc-5291f6a5fb0d")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -14641,11 +15337,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "88b49bfe-59c7-57c9-90af-0c961e60163c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "38265c1d-d5fe-54f6-8660-5c58b7ee96b2")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -14850,11 +15558,23 @@
 				)
 			)
 		)
-		(property "MPN" "1u"
+		(property "MPN" "CL05A105KA5NQNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a2e436a6-5006-567e-9e2a-fdc6e779dd3b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ce482695-cd75-5ff0-a948-a021590de344")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -15159,11 +15879,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a7b0ad01-dc74-5622-a75c-4e7af1f77f68")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "38490eaf-fa20-517a-bd11-dcb4ba2a3b91")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -15468,11 +16200,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n"
+		(property "MPN" "CL05B104KO5NNNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "13e3f72d-4aa7-5c0a-9e6d-99aa5fac1252")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b137755a-0e5f-5ea4-b1ae-30e30b351e36")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -15677,11 +16421,23 @@
 				)
 			)
 		)
-		(property "MPN" "10M"
+		(property "MPN" "0402WGF1005TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "48350bca-c551-5ef7-b32a-8d60e3729714")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "882170ed-6cff-5518-b274-7cd1ae48c048")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -15886,11 +16642,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6b31efa4-d543-5eb2-8b07-d29413a01c4b")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ee554646-731b-515e-bd8c-448440b6114d")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -16095,11 +16863,23 @@
 				)
 			)
 		)
-		(property "MPN" "20k"
+		(property "MPN" "0402WGF2002TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8875cb15-440b-5c66-a1c4-31fa43f88e5c")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c347a97c-f357-50a5-9b28-2a8a2d71bdc6")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -16304,11 +17084,23 @@
 				)
 			)
 		)
-		(property "MPN" "3k3"
+		(property "MPN" "0402WGF3301TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "09346150-6fb6-504d-814e-780001adfee8")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9444be88-503a-5221-abdb-7e25e3695a1a")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -16513,11 +17305,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "26b93ca3-0d32-5020-b7ad-bd9797da300a")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6be86e81-3546-5295-a897-de1ba5005ed7")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -16722,11 +17526,23 @@
 				)
 			)
 		)
-		(property "MPN" "100n C0G 50V"
+		(property "MPN" "GRM31C5C1H104JA01L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "612f860b-00b9-5ced-a643-a6f5daf7bf80")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Murata Electronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a1ae4343-61ce-5275-89e8-fe521b94df7d")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -16931,11 +17747,23 @@
 				)
 			)
 		)
-		(property "MPN" "10n 50V"
+		(property "MPN" "CL05B103KB5NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "401cc5d9-d9d7-5982-8053-6225a2a42752")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "577ffe28-c0cb-55d7-872a-1668d71990e0")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -17140,11 +17968,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9b78c493-b2a0-5360-accb-f4040dd51d75")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a45318f6-4ccc-58c0-8273-994ba7af4a22")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -17354,6 +18194,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "73c97c67-f5cb-59ed-b794-9034ac91aaad")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Jiangsu Changjing Electronics Technology Co., Ltd."
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b8070418-7d36-5807-a081-a8b2738b4d66")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -17593,11 +18445,23 @@
 				)
 			)
 		)
-		(property "MPN" "4k7"
+		(property "MPN" "0402WGF4701TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "773fddbf-7ddd-5407-80a8-b36365391ae4")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "39698536-9153-5786-8086-1679d58e882a")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -17904,11 +18768,23 @@
 				)
 			)
 		)
-		(property "MPN" "1M"
+		(property "MPN" "0402WGF1004TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3cc8359e-e170-5c44-9b64-1fc7308d94a0")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "70c187d9-09ce-57ba-878f-e62a7a672c64")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -18334,11 +19210,23 @@
 				)
 			)
 		)
-		(property "MPN" "3k3"
+		(property "MPN" "0402WGF3301TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f8b5d5c7-b5c9-5fb4-8cbb-df4895966680")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac5f9879-4d40-5d39-8c5e-e7e8cac646f6")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -18543,11 +19431,23 @@
 				)
 			)
 		)
-		(property "MPN" "10u 25V"
+		(property "MPN" "CL10A106MA8NRNC"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b83458eb-bff8-58cb-972b-42905f395db7")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f725a9ca-b658-5372-ac45-e2caf7bcbeab")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -18752,11 +19652,23 @@
 				)
 			)
 		)
-		(property "MPN" "1M"
+		(property "MPN" "0402WGF1004TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "6766b3ce-a954-54f1-aa91-f591a3b868e0")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "222d9b39-8bbb-5886-9343-80013f492a09")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -18961,11 +19873,23 @@
 				)
 			)
 		)
-		(property "MPN" "200R"
+		(property "MPN" "0402WGF2000TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b1ddc18c-39d5-5471-8fd2-a4ed429b45ce")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9e57834c-a0e3-5707-8da1-9d815949e4f1")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -19170,11 +20094,23 @@
 				)
 			)
 		)
-		(property "MPN" "100k"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3d48355e-1a3a-5a42-89ac-a25b9dfd0931")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a8ff8871-c86a-57f1-b655-423a8a901c26")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -19379,11 +20315,23 @@
 				)
 			)
 		)
-		(property "MPN" "470n 25V"
+		(property "MPN" "CL10B474KA8NNNC"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1864be31-2298-5cd0-a1a9-11d814da3bd4")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5eccfc74-cb84-5d73-9e68-d16ed702a92e")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -19588,11 +20536,23 @@
 				)
 			)
 		)
-		(property "MPN" "10n 50V"
+		(property "MPN" "CL05B103KB5NNNC"
 			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "850cbf0f-027c-5dd2-bdd0-7ca57281bd2e")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Samsung Electro-Mechanics"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ee449fc5-ff3f-5018-82ac-81456629c0e8")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -19802,6 +20762,18 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "83ba5be6-7385-5faa-b1af-b403bd7363fc")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "STMicroelectronics"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a373c8af-ca12-5078-b17c-2072e0ef42b7")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -20080,6 +21052,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Richtek Tech"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e5320f8b-edbe-5982-ae45-8b96f80709a8")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/6bcb063f-00ac-53cf-86e9-e3a4766e436d")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -20331,11 +21315,23 @@
 				)
 			)
 		)
-		(property "MPN" "ESP32-C3-MINI-1U-N4 (alt. ESP32-C3-MINI-1U-H4 C3013922)"
+		(property "MPN" "ESP32-C3-MINI-1U-N4"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3390eb74-5eaa-54a0-8ea9-ff2f679081b6")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "Espressif Systems"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1efdfa6d-350a-5f80-8c3b-9e3f81b321bf")
 			(effects
 				(font
 					(size 0.6 0.6)
@@ -21085,6 +22081,18 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Jiangsu Changjing Electronics Technology Co., Ltd."
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a14ca64c-f917-50f3-80fb-ab4540e3d500")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
 		(path "/d22e09ce-6fa8-5f89-a45f-f91a6da25ad8")
 		(sheetname "/")
 		(sheetfile "AVO_GIRTH_PCB.kicad_sch")
@@ -21317,11 +22325,23 @@
 				)
 			)
 		)
-		(property "MPN" "5k1"
+		(property "MPN" "0402WGF5101TCE"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3c4c55c6-7aa6-5b53-a37c-9345416dcec2")
+			(effects
+				(font
+					(size 0.6 0.6)
+					(thickness 0.1)
+				)
+			)
+		)
+		(property "Manufacturer" "UNI-ROYAL(Uniroyal Elec)"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "84b67244-b814-5eb7-9a45-3f1741ea13c6")
 			(effects
 				(font
 					(size 0.6 0.6)
