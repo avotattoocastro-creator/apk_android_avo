@@ -32,9 +32,9 @@ firmware `build-girth-c3.yml` (compilación correcta en `01f8093`)
 1191 uds. y 3,15 US$ el 2026-10-29 según la consulta del CI); IMU **LSM6DS3TR-C + MMC5983MA** por I²C en lugar del
 BNO085 (19,50 US$, 80 uds.); corte de batería con **enclavamiento de MOSFET** en lugar del relé biestable; R6/R7
 Basic. Mismas funciones (ESP-NOW, IMU de 9 ejes, encendido magnético, apagado remoto, < 1 µA apagada, carga USB y
-Qi, medida de batería, programación por USB y UART0, antena externa). 81 piezas montadas (antes 104), 13 Extended
-(antes 17). Coste de componentes + cargo de Extended: 21,5 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,2 a 10 uds.
-(REV A ≥ 32,9): −46 % a −54 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
+Qi, medida de batería, programación por USB y UART0, antena externa). 85 piezas montadas (antes 104), 14 Extended
+(antes 17). Coste de componentes + cargo de Extended: 22,1 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,5 a 10 uds.
+(REV A ≥ 32,9): −45 % a −53 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
 C3 con IMU, batería, enclavamiento, apagado remoto (bit 1 de `GirthPing.flags`, la espalda aún no lo envía) y
 diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
 **Por qué:** placa montable entera por JLCPCB y coste a la mitad sin perder funciones (petición del usuario).
@@ -44,6 +44,9 @@ diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
 **No se ha tocado:** `main`, `develop/avo-performance-horse`, app Android, AVO Update, firmware de pecho y espalda.
 **Validación:** CI (KiCad 9: DRC 0, ERC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0; firmware compila
 para ESP32-C3). **NO VERIFICADO** físicamente.
+**Revisión independiente** (agente sin acceso al razonamiento del diseño): sin errores de pines; corregidos el
+despertar por reed ya cerrado (no se podía apagar), el rearmado lento del reed, la lectura retrasada del reed, la
+corriente sin límite por el reed y el ritmo de lectura de la IMU.
 **Pendiente:** ajustar el Qi con la bobina real; medir los tiempos del enclavamiento; comprobar ejes de la IMU;
 adaptar AVO Update al ESP32-C3 (id 5) y la espalda para enviar el apagado remoto; revisar giros en JLCPCB.
 

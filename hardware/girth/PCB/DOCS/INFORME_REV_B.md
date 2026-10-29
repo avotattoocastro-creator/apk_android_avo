@@ -19,7 +19,8 @@ El C3 tiene 13 GPIO libres + USB: con el BNO085 por SPI habrían hecho falta 16.
 - Corte de batería: relé biestable G6KU (+ 2 × 220 µF, 9 transistores) → **enclavamiento con 2 MOSFET y 2 diodos**.
   Mismas funciones: encendido magnético, apagado remoto, consumo apagado < 1 µA, no se bloquea al cargar.
 - R6/R7 a 3,3 kΩ (pieza *Basic*): carga 270 mA, entrada 462 mA.
-- 81 piezas montadas (REV A: 104); 13 referencias *Extended* (REV A: 17).
+- 85 piezas montadas (REV A: 104); 14 referencias *Extended* (REV A: 17; la 14.ª es la resistencia de 10 MΩ del corte,
+  que JLCPCB solo tiene como *Extended*).
 - Contorno, capas, grosor, acabado, conectores (USB-C, batería, bobina, reed) y posiciones de los conectores: **sin
   cambios**. La tapa ya no necesita el rebaje del relé.
 
@@ -33,9 +34,11 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 
 ## Riesgos eléctricos y mecánicos
 - **Qi:** inductancia de la bobina sin medir; C1–C5 supuestos. Ajustar con la primera placa (`DOCS/AJUSTE_QI.md`).
-- **Corte de batería:** calculado, no medido. Si Q11 tuviera un umbral alto y la celda estuviera baja, el impulso del
-  reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603).
-- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,5 s; medir el tiempo real hasta PWR_HOLD.
+- **Corte de batería:** calculado, no medido; la red del reed se corrigió tras una revisión independiente (rearmado,
+  aislamiento de la lectura, corriente por el reed). Si Q11 tuviera un umbral alto y la celda estuviera baja, el
+  impulso del reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603). Las redes de 10 MΩ son
+  sensibles a la suciedad: medir los tiempos en la placa montada.
+- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,2 s; medir el tiempo real hasta PWR_HOLD.
 - **IMU:** ejes y signos sin comprobar; el magnetómetro necesita calibración dentro de la cápsula (imanes).
 - **BQ51013B:** 476 uds. en JLCPCB: es la pieza con menos existencias; reservarla si se va a tardar en pedir.
 - **Mecánica:** cuna +0,6 mm, ranura del cable y postes de la tapa pendientes en el CAD de la cápsula.
