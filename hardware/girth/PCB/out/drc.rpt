@@ -1,0 +1,1470 @@
+** Drc report for AVO_GIRTH_PCB.kicad_pcb **
+** Created on 2026-10-29T08:11:22+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 402 DRC violations **
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1300 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.7500 mm, 104.6500 mm): Track [QI_AC1] on F.Cu, length 0.2761 mm
+    @(79.2500 mm, 104.6500 mm): Pad 3 [QI_BOOT1] of U1 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1557 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.7250 mm, 104.9250 mm): Track [QI_AC1] on F.Cu, length 0.5500 mm
+    @(79.2500 mm, 104.6500 mm): Pad 3 [QI_BOOT1] of U1 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+    @(115.7250 mm, 99.7250 mm): Via [IMU_CS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1946 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2750 mm, 104.1250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+    @(78.7500 mm, 104.6500 mm): Track [QI_AC1] on F.Cu, length 0.1904 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1847 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.3000 mm, 106.0200 mm): Track [QI_AC1] on F.Cu, length 0.3750 mm
+    @(79.3000 mm, 106.9800 mm): Pad 1 [QI_BOOT1] of C6 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1748 mm)
+    Rule: netclass 'Potencia'; error
+    @(83.4000 mm, 106.0200 mm): Pad 2 [GND] of C17 on F.Cu
+    @(83.6750 mm, 105.3250 mm): Via [VBUS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0250 mm, 103.1250 mm): Track [VBAT] on F.Cu, length 0.1256 mm
+    @(88.0375 mm, 103.7500 mm): Track [GND] on F.Cu, length 0.0280 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1946 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2750 mm, 104.1250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+    @(78.6750 mm, 104.4750 mm): Track [QI_AC1] on F.Cu, length 1.4000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.2500 mm, 101.5375 mm): Track [VIN5] on F.Cu, length 0.4193 mm
+    @(89.7500 mm, 101.5375 mm): Pad 14 [<no net>] of U2 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1847 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.3000 mm, 106.9800 mm): Pad 1 [QI_BOOT1] of C6 on F.Cu
+    @(79.0250 mm, 106.2750 mm): Track [QI_AC1] on F.Cu, length 0.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.7250 mm, 107.2250 mm): Track [VIN5] on F.Cu, length 5.3500 mm
+    @(90.9625 mm, 102.2500 mm): Pad 12 [CHG_ILIM] of U2 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.7250 mm, 100.1750 mm): Track [QI_AC2] on F.Cu, length 0.4950 mm
+    @(79.8000 mm, 99.8800 mm): Pad 1 [QI_BOOT2] of C9 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(89.3750 mm, 109.5750 mm): Track [VIN5] on F.Cu, length 3.3234 mm
+    @(89.4250 mm, 108.6250 mm): Via [VBAT] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.1250 mm, 99.3250 mm): Track [QI_AC2] on F.Cu, length 0.5657 mm
+    @(78.4000 mm, 99.2800 mm): Pad 1 [QI_RECT] of C14 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.3250 mm, 101.5750 mm): Track [VIN5] on F.Cu, length 0.0839 mm
+    @(89.7500 mm, 101.5375 mm): Pad 14 [<no net>] of U2 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(114.1250 mm, 99.7250 mm): Via [IMU_MOSI] on F.Cu - B.Cu
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.9250 mm, 107.6750 mm): Track [VIN5] on F.Cu, length 1.4000 mm
+    @(83.4750 mm, 108.2750 mm): Via [QI_ADEN] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.4000 mm, 99.2800 mm): Pad 1 [QI_RECT] of C14 on F.Cu
+    @(79.1250 mm, 99.4250 mm): Track [QI_AC2] on F.Cu, length 0.1000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(86.5750 mm, 107.5750 mm): Track [VIN5] on F.Cu, length 1.8385 mm
+    @(88.0000 mm, 109.6500 mm): Pad 1 [QI_ADEN] of Q2 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1000 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.7500 mm, 101.3500 mm): Track [QI_AC2] on F.Cu, length 0.2761 mm
+    @(79.2500 mm, 101.3500 mm): Track [QI_RECT] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1930 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.6750 mm, 101.5750 mm): Track [QI_AC2] on F.Cu, length 1.4500 mm
+    @(79.2500 mm, 101.3500 mm): Track [QI_RECT] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1558 mm)
+    Rule: netclass 'Potencia'; error
+    @(80.2500 mm, 104.6500 mm): Pad 5 [QI_CLAMP1] of U1 on F.Cu
+    @(79.7750 mm, 104.9250 mm): Track [VIN5] on F.Cu, length 0.2500 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1927 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.7250 mm, 101.0750 mm): Track [QI_AC2] on F.Cu, length 0.9000 mm
+    @(79.2500 mm, 101.3500 mm): Track [QI_RECT] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.8750 mm, 108.8750 mm): Track [VIN5] on F.Cu, length 0.8000 mm
+    @(88.0000 mm, 109.6500 mm): Pad 1 [QI_ADEN] of Q2 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.8000 mm, 99.8800 mm): Pad 1 [QI_BOOT2] of C9 on F.Cu
+    @(79.0750 mm, 99.8250 mm): Track [QI_AC2] on F.Cu, length 0.1000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.0751 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0250 mm, 103.1250 mm): Track [VBAT] on F.Cu, length 0.1256 mm
+    @(88.0250 mm, 103.7750 mm): Via [GND] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1800 mm)
+    Rule: netclass 'Potencia'; error
+    @(79.2500 mm, 104.6500 mm): Pad 3 [QI_BOOT1] of U1 on F.Cu
+    @(79.7500 mm, 104.6500 mm): Track [VIN5] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1000 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2500 mm, 101.3500 mm): Track [QI_RECT] on F.Cu, length 0.2761 mm
+    @(78.7500 mm, 101.3500 mm): Track [QI_AC2] on F.Cu, length 0.2372 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.0750 mm, 102.1750 mm): Via [CHG_ILIM] on F.Cu - B.Cu
+    @(91.4250 mm, 101.5750 mm): Track [VIN5] on F.Cu, length 1.1000 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1652 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.8000 mm, 99.8800 mm): Pad 1 [QI_BOOT2] of C9 on F.Cu
+    @(79.0750 mm, 99.7250 mm): Via [QI_AC2] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(104.6250 mm, 104.1750 mm): Via [IMU_RST] on F.Cu - B.Cu
+    @(96.5250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 15.6271 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1720 mm)
+    Rule: netclass 'Potencia'; error
+    @(80.3250 mm, 105.0750 mm): Track [QI_CLAMP1] on F.Cu, length 0.2828 mm
+    @(79.8250 mm, 105.2250 mm): Via [VIN5] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(78.4000 mm, 99.2800 mm): Pad 1 [QI_RECT] of C14 on F.Cu
+    @(79.1250 mm, 99.4250 mm): Via [QI_AC2] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1648 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.4750 mm, 107.4250 mm): Track [QI_CLAMP1] on F.Cu, length 0.1414 mm
+    @(82.9250 mm, 107.6750 mm): Via [VIN5] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(99.9750 mm, 116.0750 mm): Track [VBAT] on F.Cu, length 3.3234 mm
+    @(96.1750 mm, 116.5250 mm): Track [CHG_PG] on F.Cu, length 7.3500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1979 mm)
+    Rule: netclass 'Potencia'; error
+    @(81.7500 mm, 104.6500 mm): Track [QI_ADEN] on F.Cu, length 0.2761 mm
+    @(82.2500 mm, 104.6500 mm): Track [VBUS] on F.Cu, length 0.1904 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(96.4750 mm, 115.3250 mm): Track [VBAT] on F.Cu, length 1.0607 mm
+    @(96.1750 mm, 116.5250 mm): Track [CHG_PG] on F.Cu, length 7.3500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1550 mm)
+    Rule: netclass 'Potencia'; error
+    @(97.7250 mm, 112.1750 mm): Track [VSYS] on F.Cu, length 2.6500 mm
+    @(98.4000 mm, 112.6900 mm): Pad 2 [+3V3] of R31 on F.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.1500 mm; actual 0.0500 mm)
+    Rule: netclass 'Default'; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.7750 mm, 104.3750 mm): Track [QI_ADEN] on F.Cu, length 0.2000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1991 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0375 mm, 102.7500 mm): Track [VBAT] on F.Cu, length 0.4133 mm
+    @(88.0375 mm, 102.2500 mm): Track [CHG_TS] on F.Cu, length 0.2465 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.9625 mm, 102.2500 mm): Pad 12 [CHG_ILIM] of U2 on F.Cu
+    @(90.9750 mm, 102.8250 mm): Track [VSYS] on F.Cu, length 0.0760 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1634 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.2500 mm, 104.6500 mm): Pad 9 [VBUS] of U1 on F.Cu
+    @(81.7750 mm, 104.1750 mm): Via [QI_ADEN] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0250 mm, 103.1250 mm): Track [VBAT] on F.Cu, length 0.1256 mm
+    @(88.0375 mm, 103.7500 mm): Pad 4 [GND] of U2 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1844 mm)
+    Rule: netclass 'Potencia'; error
+    @(101.8625 mm, 110.9500 mm): Track [VSYS] on F.Cu, length 0.6714 mm
+    @(101.8625 mm, 110.0000 mm): Pad 2 [GND] of U3 on F.Cu
+[shorting_items]: Items shorting two nets (nets GND and QI_BOOT1)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(79.2750 mm, 104.3750 mm): Track [QI_BOOT1] on F.Cu, length 0.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+    @(118.1250 mm, 100.9250 mm): Via [IMU_SCK] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0375 mm, 103.2500 mm): Track [VBAT] on F.Cu, length 0.4133 mm
+    @(88.0375 mm, 103.7500 mm): Track [GND] on F.Cu, length 0.0280 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1979 mm)
+    Rule: netclass 'Potencia'; error
+    @(79.2500 mm, 104.6500 mm): Track [QI_BOOT1] on F.Cu, length 0.2761 mm
+    @(79.7500 mm, 104.6500 mm): Track [VIN5] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.9625 mm, 103.7500 mm): Pad 9 [CHG_STAT] of U2 on F.Cu
+    @(90.9625 mm, 103.2500 mm): Track [VSYS] on F.Cu, length 0.1352 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1550 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.7250 mm, 105.3250 mm): Track [VBAT] on F.Cu, length 0.5657 mm
+    @(88.8000 mm, 105.6900 mm): Pad 2 [VSYS] of R8 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1897 mm)
+    Rule: netclass 'Potencia'; error
+    @(79.2750 mm, 104.1250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+    @(79.7500 mm, 104.6500 mm): Pad 4 [VIN5] of U1 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.9625 mm, 103.7500 mm): Pad 9 [CHG_STAT] of U2 on F.Cu
+    @(90.9625 mm, 103.2500 mm): Track [VSYS] on F.Cu, length 0.1256 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1950 mm)
+    Rule: netclass 'Potencia'; error
+    @(86.5250 mm, 104.4750 mm): Track [VBAT] on F.Cu, length 1.2021 mm
+    @(87.2000 mm, 105.9900 mm): Pad 2 [+3V3] of R4 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1964 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2750 mm, 106.9250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+    @(79.3000 mm, 106.0200 mm): Track [QI_AC1] on F.Cu, length 0.3750 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1950 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.3750 mm, 101.4250 mm): Track [VBAT] on F.Cu, length 2.8500 mm
+    @(86.7100 mm, 100.9000 mm): Pad 2 [GND] of RT2 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1844 mm)
+    Rule: netclass 'Potencia'; error
+    @(101.8625 mm, 110.0000 mm): Pad 2 [GND] of U3 on F.Cu
+    @(102.4750 mm, 110.6750 mm): Track [VSYS] on F.Cu, length 0.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1825 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.6250 mm, 102.7250 mm): Track [VBAT] on F.Cu, length 0.2500 mm
+    @(87.8250 mm, 102.1250 mm): Via [CHG_TS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(101.8625 mm, 110.0000 mm): Pad 2 [GND] of U3 on F.Cu
+    @(102.8750 mm, 110.5250 mm): Track [VSYS] on F.Cu, length 1.0500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1743 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.1750 mm, 105.2750 mm): Track [QI_CLAMP1] on F.Cu, length 0.4243 mm
+    @(82.3250 mm, 104.8250 mm): Track [VBUS] on F.Cu, length 0.8500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1727 mm)
+    Rule: netclass 'Potencia'; error
+    @(89.1750 mm, 105.8750 mm): Via [VSYS] on F.Cu - B.Cu
+    @(88.7250 mm, 106.3750 mm): Via [CHG_EN2] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1950 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.2000 mm, 105.9900 mm): Pad 2 [+3V3] of R4 on F.Cu
+    @(87.3750 mm, 105.3250 mm): Track [VBAT] on F.Cu, length 0.3500 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(82.4750 mm, 105.5750 mm): Track [QI_CLAMP1] on F.Cu, length 1.8500 mm
+    @(81.9000 mm, 106.0200 mm): Pad 2 [QI_AC1] of C8 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(89.1750 mm, 105.8750 mm): Via [VSYS] on F.Cu - B.Cu
+    @(88.6750 mm, 104.9750 mm): Track [CHG_EN2] on B.Cu, length 1.3500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(87.8250 mm, 102.1250 mm): Via [CHG_TS] on F.Cu - B.Cu
+    @(87.2250 mm, 102.5750 mm): Track [VBAT] on F.Cu, length 1.0000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(97.2750 mm, 109.7250 mm): Via [VSYS] on F.Cu - B.Cu
+    @(96.5250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 15.6271 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1720 mm)
+    Rule: netclass 'Potencia'; error
+    @(80.3250 mm, 104.9250 mm): Track [QI_CLAMP1] on F.Cu, length 0.1500 mm
+    @(79.8250 mm, 105.2250 mm): Via [VIN5] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(105.8250 mm, 101.1750 mm): Via [IMU_WAKE] on F.Cu - B.Cu
+    @(96.5250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 15.6271 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(98.0000 mm, 115.2000 mm): Pad 1 [VSYS] of TP8 on F.Cu
+    @(97.2250 mm, 116.0750 mm): Track [VBAT] on F.Cu, length 2.7500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1979 mm)
+    Rule: netclass 'Potencia'; error
+    @(80.2500 mm, 104.6500 mm): Track [QI_CLAMP1] on F.Cu, length 0.2850 mm
+    @(79.7500 mm, 104.6500 mm): Track [VIN5] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.7250 mm, 106.3750 mm): Via [CHG_EN2] on F.Cu - B.Cu
+    @(88.1250 mm, 105.7250 mm): Track [VBAT] on F.Cu, length 1.6000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.7250 mm, 107.2250 mm): Track [VIN5] on F.Cu, length 5.3500 mm
+    @(92.3250 mm, 105.4750 mm): Via [VSYS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1743 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.3250 mm, 104.8250 mm): Track [VBUS] on F.Cu, length 0.8500 mm
+    @(80.5250 mm, 105.2750 mm): Track [QI_CLAMP1] on F.Cu, length 1.6500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.7250 mm, 107.2250 mm): Track [VIN5] on F.Cu, length 5.3500 mm
+    @(92.3250 mm, 104.4250 mm): Via [VSYS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0375 mm, 102.2500 mm): Pad 1 [CHG_TS] of U2 on F.Cu
+    @(88.0375 mm, 102.7500 mm): Track [VBAT] on F.Cu, length 0.0760 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(89.3250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 7.2000 mm
+    @(92.7750 mm, 111.9750 mm): Via [VBAT] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1803 mm)
+    Rule: netclass 'Potencia'; error
+    @(81.7250 mm, 100.5750 mm): Track [QI_COMM2] on F.Cu, length 0.6364 mm
+    @(82.4250 mm, 100.6250 mm): Via [QI_RECT] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(98.1750 mm, 110.6250 mm): Via [VSYS] on F.Cu - B.Cu
+    @(96.5250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 15.6271 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1521 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.3750 mm, 106.3250 mm): Track [VSYS] on B.Cu, length 1.8000 mm
+    @(89.5250 mm, 106.9250 mm): Via [CHG_PG] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Default' clearance 0.1500 mm; actual 0.1000 mm)
+    Rule: netclass 'Default'; error
+    @(81.3250 mm, 101.7250 mm): Track [QI_FOD] on F.Cu, length 0.0707 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.4750 mm, 101.9250 mm): Track [QI_FOD] on F.Cu, length 0.3000 mm
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.4250 mm, 101.8750 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1521 mm)
+    Rule: netclass 'Potencia'; error
+    @(89.5250 mm, 106.9250 mm): Via [CHG_PG] on F.Cu - B.Cu
+    @(89.5750 mm, 106.3250 mm): Track [VSYS] on B.Cu, length 0.4243 mm
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1900 mm)
+    Rule: board setup constraints hole; error
+    @(123.2250 mm, 102.1750 mm): Track [VBUS] on F.Cu, length 0.7000 mm
+    @(123.5500 mm, 102.8900 mm): NPTH pad of J1
+[clearance]: Clearance violation (netclass 'Default' clearance 0.1500 mm; actual 0.0500 mm)
+    Rule: netclass 'Default'; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.3750 mm, 101.7750 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.7750 mm, 101.9250 mm): Track [QI_FOD] on F.Cu, length 0.2121 mm
+[clearance]: Clearance violation (netclass 'Default' clearance 0.1500 mm; actual 0.0500 mm)
+    Rule: netclass 'Default'; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.3750 mm, 101.8250 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.4250 mm, 101.8250 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.4750 mm, 101.8750 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1864 mm)
+    Rule: netclass 'Potencia'; error
+    @(119.8250 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 1.6971 mm
+    @(120.9750 mm, 100.5750 mm): Via [USB_DP_C] on F.Cu - B.Cu
+[shorting_items]: Items shorting two nets (nets GND and QI_FOD)
+    Local override; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.9250 mm, 102.0750 mm): Via [QI_FOD] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1764 mm)
+    Rule: netclass 'Potencia'; error
+    @(121.0250 mm, 101.5250 mm): Track [VBUS] on F.Cu, length 0.6000 mm
+    @(122.1050 mm, 101.2500 mm): Pad A5 [CC1] of J1 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.8250 mm, 101.1750 mm): Via [QI_ILIM] on F.Cu - B.Cu
+    @(82.4250 mm, 100.6250 mm): Track [QI_RECT] on F.Cu, length 0.9500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1801 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.8250 mm, 101.1750 mm): Via [QI_ILIM] on F.Cu - B.Cu
+    @(82.4250 mm, 100.6250 mm): Via [QI_RECT] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(117.4750 mm, 99.7250 mm): Via [BOOT] on F.Cu - B.Cu
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(125.0250 mm, 103.2750 mm): Track [VBUS] on F.Cu, length 4.3000 mm
+    @(126.0375 mm, 107.0500 mm): Pad 6 [USB_DP_C] of U6 on F.Cu
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1927 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2750 mm, 101.6250 mm): Track [QI_RECT] on F.Cu, length 0.3000 mm
+    @(78.7500 mm, 101.3500 mm): Track [QI_AC2] on F.Cu, length 0.2761 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1844 mm)
+    Rule: netclass 'Potencia'; error
+    @(126.0375 mm, 108.0000 mm): Track [VBUS] on F.Cu, length 0.6714 mm
+    @(126.0375 mm, 108.9500 mm): Pad 4 [USB_DM_C] of U6 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1950 mm)
+    Rule: netclass 'Potencia'; error
+    @(84.8000 mm, 99.3100 mm): Pad 1 [QI_FOD] of R2 on F.Cu
+    @(84.0750 mm, 99.9250 mm): Track [QI_RECT] on F.Cu, length 1.2000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1825 mm)
+    Rule: netclass 'Potencia'; error
+    @(120.9750 mm, 102.8750 mm): Via [USB_DP_C] on F.Cu - B.Cu
+    @(121.0250 mm, 102.1250 mm): Track [VBUS] on F.Cu, length 0.2121 mm
+[clearance]: Clearance violation (netclass 'Qi_AC' clearance 0.2000 mm; actual 0.1946 mm)
+    Rule: netclass 'Qi_AC'; error
+    @(79.2750 mm, 101.9250 mm): Via [QI_RECT] on F.Cu - B.Cu
+    @(78.6750 mm, 101.5750 mm): Track [QI_AC2] on F.Cu, length 1.4500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1844 mm)
+    Rule: netclass 'Potencia'; error
+    @(125.4250 mm, 108.2750 mm): Track [VBUS] on F.Cu, length 0.2500 mm
+    @(126.0375 mm, 108.9500 mm): Pad 4 [USB_DM_C] of U6 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1865 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.2500 mm, 101.3500 mm): Pad 12 [QI_ILIM] of U1 on F.Cu
+    @(82.4250 mm, 100.6250 mm): Via [QI_RECT] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 98.2500 mm): Track [CC2] on F.Cu, length 0.7308 mm
+    @(122.1050 mm, 97.5500 mm): Pad B4 [VBUS] of J1 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+    @(118.3000 mm, 101.1000 mm): Pad 25 [IMU_SCK] of U4 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 97.5500 mm): Pad B4 [VBUS] of J1 on F.Cu
+    @(122.8250 mm, 98.1250 mm): Track [CC2] on F.Cu, length 0.7000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1743 mm)
+    Rule: netclass 'Potencia'; error
+    @(82.2500 mm, 104.6500 mm): Track [VBUS] on F.Cu, length 0.1904 mm
+    @(80.5250 mm, 105.2750 mm): Track [QI_CLAMP1] on F.Cu, length 1.6500 mm
+[clearance]: Clearance violation (netclass 'Default' clearance 0.1500 mm; actual 0.0250 mm)
+    Rule: netclass 'Default'; error
+    @(112.7250 mm, 109.9750 mm): Via [REED] on F.Cu - B.Cu
+    @(112.3250 mm, 108.9750 mm): Pad 49 [GND] of U4 on F.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1911 mm)
+    Rule: board setup constraints hole; error
+    @(123.8250 mm, 97.8250 mm): Via [CC2] on F.Cu - B.Cu
+    @(123.5500 mm, 97.1100 mm): NPTH pad of J1
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1550 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 98.2500 mm): Pad B5 [CC2] of J1 on F.Cu
+    @(121.0250 mm, 99.1250 mm): Track [VBUS] on F.Cu, length 1.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(98.9250 mm, 115.4750 mm): Via [REED] on F.Cu - B.Cu
+    @(97.2250 mm, 116.0750 mm): Track [VBAT] on F.Cu, length 2.7500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(124.7750 mm, 108.6750 mm): Track [VBUS] on F.Cu, length 2.0500 mm
+    @(123.7625 mm, 108.9500 mm): Pad 3 [USB_DM_C] of U6 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1650 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.7250 mm, 106.3750 mm): Via [CHG_EN2] on F.Cu - B.Cu
+    @(88.8000 mm, 105.6900 mm): Pad 2 [VSYS] of R8 on F.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2457 mm)
+    Rule: board setup constraints hole; error
+    @(123.9250 mm, 102.1750 mm): Track [VBUS] on F.Cu, length 1.5556 mm
+    @(123.5500 mm, 102.8900 mm): NPTH pad of J1
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1654 mm)
+    Rule: netclass 'Potencia'; error
+    @(125.1750 mm, 108.2750 mm): Track [VBUS] on F.Cu, length 0.5657 mm
+    @(123.7625 mm, 108.9500 mm): Pad 3 [USB_DM_C] of U6 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1950 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.8000 mm, 105.6900 mm): Pad 2 [VSYS] of R8 on F.Cu
+    @(88.6750 mm, 104.9750 mm): Via [CHG_EN2] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1825 mm)
+    Rule: netclass 'Potencia'; error
+    @(120.9750 mm, 102.8750 mm): Via [USB_DP_C] on F.Cu - B.Cu
+    @(121.1750 mm, 102.2750 mm): Track [VBUS] on F.Cu, length 0.2500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1359 mm)
+    Rule: netclass 'Potencia'; error
+    @(90.9750 mm, 102.8250 mm): Track [VSYS] on F.Cu, length 0.0760 mm
+    @(91.0750 mm, 102.1750 mm): Via [CHG_ILIM] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0000 mm, 111.5500 mm): Pad 2 [AD_SRC] of Q2 on F.Cu
+    @(85.8250 mm, 110.7750 mm): Track [VBUS] on F.Cu, length 2.9000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.6250 mm, 111.9750 mm): Via [CHG_PG] on F.Cu - B.Cu
+    @(89.3250 mm, 111.3750 mm): Track [VBUS] on F.Cu, length 7.2000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(91.7250 mm, 107.2250 mm): Track [VIN5] on F.Cu, length 5.3500 mm
+    @(92.3250 mm, 102.1750 mm): Via [CHG_ILIM] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(124.4250 mm, 107.0250 mm): Via [USB_DP_C] on F.Cu - B.Cu
+    @(125.0250 mm, 103.2750 mm): Track [VBUS] on F.Cu, length 4.3000 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 101.7500 mm): Pad B8 [<no net>] of J1 on F.Cu
+    @(121.4250 mm, 102.2750 mm): Track [VBUS] on F.Cu, length 0.7022 mm
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2226 mm)
+    Rule: board setup constraints hole; error
+    @(123.1250 mm, 102.2750 mm): Track [VBUS] on F.Cu, length 0.1414 mm
+    @(123.5500 mm, 102.8900 mm): NPTH pad of J1
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1739 mm)
+    Rule: netclass 'Potencia'; error
+    @(120.9750 mm, 102.8750 mm): Via [USB_DP_C] on F.Cu - B.Cu
+    @(122.1050 mm, 102.4500 mm): Pad A4 [VBUS] of J1 on F.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(96.1750 mm, 116.5250 mm): Track [CHG_PG] on F.Cu, length 7.3500 mm
+    @(97.2250 mm, 116.0750 mm): Track [VBAT] on F.Cu, length 2.7500 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1750 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 101.7500 mm): Pad B8 [<no net>] of J1 on F.Cu
+    @(122.1050 mm, 102.4500 mm): Track [VBUS] on F.Cu, length 0.7410 mm
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2226 mm)
+    Rule: board setup constraints hole; error
+    @(122.8250 mm, 102.2750 mm): Track [VBUS] on F.Cu, length 0.3000 mm
+    @(123.5500 mm, 102.8900 mm): NPTH pad of J1
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1550 mm)
+    Rule: netclass 'Potencia'; error
+    @(122.1050 mm, 99.2500 mm): Pad B6 [USB_DP_C] of J1 on F.Cu
+    @(119.8250 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 1.6971 mm
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1610 mm)
+    Rule: netclass 'Potencia'; error
+    @(88.0375 mm, 102.7500 mm): Track [VBAT] on F.Cu, length 0.4133 mm
+    @(87.8250 mm, 102.1250 mm): Via [CHG_TS] on F.Cu - B.Cu
+[clearance]: Clearance violation (netclass 'Potencia' clearance 0.2000 mm; actual 0.1500 mm)
+    Rule: netclass 'Potencia'; error
+    @(118.8250 mm, 99.7250 mm): Via [GPIO8] on F.Cu - B.Cu
+    @(107.5750 mm, 100.3250 mm): Track [VBUS] on F.Cu, length 12.2500 mm
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)
+    Rule: board setup constraints hole; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(79.2750 mm, 104.1250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)
+    Rule: board setup constraints hole; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.7750 mm, 104.1750 mm): Via [QI_ADEN] on F.Cu - B.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)
+    Rule: board setup constraints hole; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(81.9250 mm, 102.0750 mm): Via [QI_FOD] on F.Cu - B.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)
+    Rule: board setup constraints hole; error
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+    @(79.2750 mm, 101.9250 mm): Via [QI_RECT] on F.Cu - B.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.1250 mm)
+    Rule: board setup constraints hole; error
+    @(112.3250 mm, 108.9750 mm): Pad 49 [GND] of U4 on F.Cu
+    @(112.7250 mm, 109.9750 mm): Via [REED] on F.Cu - B.Cu
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(99.0000 mm, 92.6000 mm): Footprint Y1
+    @(96.6000 mm, 94.2000 mm): Footprint C30
+[courtyards_overlap]: Courtyards overlap
+    Rule: board setup constraints courtyard; error
+    @(111.0000 mm, 115.6000 mm): Footprint C23
+    @(113.6000 mm, 115.4000 mm): Footprint C24
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.1248 mm)
+    Rule: board setup constraints; error
+    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
+    @(89.2250 mm, 103.8750 mm): Via [GND] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.0041 mm)
+    Rule: board setup constraints; error
+    @(79.0750 mm, 99.7250 mm): Via [QI_AC2] on F.Cu - B.Cu
+    @(79.1250 mm, 99.4250 mm): Via [QI_AC2] on F.Cu - B.Cu
+[hole_to_hole]: Drilled hole too close to other hole (board setup constraints min 0.2495 mm; actual 0.1248 mm)
+    Rule: board setup constraints; error
+    @(88.9100 mm, 103.5900 mm): PTH pad 17 [GND] of U2
+    @(89.2250 mm, 103.8750 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.7750 mm, 104.1750 mm): Via [QI_ADEN] on F.Cu - B.Cu
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(79.2750 mm, 104.3750 mm): Track [QI_BOOT1] on F.Cu, length 0.2500 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(79.2750 mm, 104.1250 mm): Via [QI_BOOT1] on F.Cu - B.Cu
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.4750 mm, 101.9250 mm): Track [QI_FOD] on F.Cu, length 0.3000 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.4250 mm, 101.8750 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.7750 mm, 101.9250 mm): Track [QI_FOD] on F.Cu, length 0.2121 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.4250 mm, 101.8250 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.4750 mm, 101.8750 mm): Track [QI_FOD] on F.Cu, length 0.0500 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(81.9250 mm, 102.0750 mm): Via [QI_FOD] on F.Cu - B.Cu
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(79.2750 mm, 101.6250 mm): Track [QI_RECT] on F.Cu, length 0.3000 mm
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(79.2750 mm, 101.9250 mm): Via [QI_RECT] on F.Cu - B.Cu
+    @(80.5000 mm, 103.0000 mm): Pad 21 [GND] of U1 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(112.7250 mm, 109.9750 mm): Via [REED] on F.Cu - B.Cu
+    @(112.3250 mm, 108.9750 mm): Pad 49 [GND] of U4 on F.Cu
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on F.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [GND] on B.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [+3V3] on In2.Cu, priority 0
+[isolated_copper]: Isolated copper fill
+    Local override; warning
+    @(132.7500 mm, 115.5000 mm): Zone [+3V3] on In2.Cu, priority 0
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(68.5000 mm, 90.0000 mm): Arc on Edge.Cuts
+    @(71.0000 mm, 92.4000 mm): PCB text 'CABLE BAT' on F.Silkscreen
+[silk_edge_clearance]: Silkscreen clipped by board edge
+    Rule: board setup constraints silk; warning
+    @(68.5000 mm, 110.0000 mm): Arc on Edge.Cuts
+    @(71.4000 mm, 107.0000 mm): PCB text 'BOBINA' on F.Silkscreen
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.9000 mm, 110.8200 mm): Reference field of D1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(106.0000 mm, 116.0500 mm): Reference field of TP2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(100.0000 mm, 94.3000 mm): Reference field of U5
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(104.0900 mm, 113.2000 mm): Reference field of C34
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(95.4000 mm, 95.9900 mm): Reference field of C29
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(75.8200 mm, 99.1000 mm): Reference field of C12
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(90.0800 mm, 106.2000 mm): Reference field of R10
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(122.2800 mm, 93.6000 mm): Reference field of R17
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(83.0800 mm, 101.6000 mm): Reference field of RT1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(124.8000 mm, 110.4900 mm): Reference field of C26
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(89.5000 mm, 100.4300 mm): Reference field of U2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(100.6900 mm, 92.6000 mm): Reference field of C28
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(95.4900 mm, 92.6000 mm): Reference field of C27
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(99.0000 mm, 94.2000 mm): Reference field of Y1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(103.9800 mm, 99.4000 mm): Reference field of R27
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(77.4900 mm, 98.8000 mm): Reference field of C14
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(95.4000 mm, 97.0800 mm): Reference field of R20
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(74.3200 mm, 99.1000 mm): Reference field of C13
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(79.4200 mm, 106.8000 mm): Reference field of C7
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(95.4000 mm, 99.4800 mm): Reference field of R22
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(97.4000 mm, 99.6800 mm): Reference field of R23
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.7000 mm, 109.6800 mm): Reference field of R15
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(96.6000 mm, 93.2900 mm): Reference field of C30
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(84.4000 mm, 108.4000 mm): Reference field of Q1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(108.0000 mm, 116.0500 mm): Reference field of TP3
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(97.4800 mm, 113.2000 mm): Reference field of R31
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(106.2000 mm, 89.0000 mm): Reference field of Q3
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(116.0800 mm, 98.8000 mm): Reference field of R12
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(108.0000 mm, 114.0500 mm): Reference field of TP6
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(114.6800 mm, 115.4000 mm): Reference field of R11
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(80.9900 mm, 106.5000 mm): Reference field of C8
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(101.4000 mm, 99.6800 mm): Reference field of R24
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(81.1300 mm, 94.0000 mm): Reference field of J2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(73.3700 mm, 103.0000 mm): Reference field of C4
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(111.0000 mm, 114.1700 mm): Reference field of C23
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(120.4300 mm, 100.0000 mm): Reference field of J1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(117.2800 mm, 98.8000 mm): Reference field of R13
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(82.7800 mm, 98.8000 mm): Reference field of R1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(99.4000 mm, 99.4900 mm): Reference field of C32
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.7000 mm, 105.6800 mm): Reference field of R18
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(91.4200 mm, 104.3000 mm): Reference field of C19
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(98.6900 mm, 113.2000 mm): Reference field of C33
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(75.2000 mm, 109.2000 mm): Reference field of C2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(101.2700 mm, 116.3500 mm): Reference field of SW2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(103.0800 mm, 94.6000 mm): Reference field of R25
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(102.8800 mm, 113.2000 mm): Reference field of R33
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(82.4900 mm, 106.5000 mm): Reference field of C17
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(89.0000 mm, 108.4000 mm): Reference field of Q2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(77.3500 mm, 103.0000 mm): Reference field of U1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(75.2000 mm, 111.6000 mm): Reference field of C3
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(102.8800 mm, 99.4000 mm): Reference field of R26
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(99.0200 mm, 110.0000 mm): Reference field of C21
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(85.0900 mm, 106.5000 mm): Reference field of C16
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(105.2800 mm, 94.6000 mm): Reference field of R29
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(71.4000 mm, 100.5500 mm): Reference field of L2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(106.0000 mm, 114.0500 mm): Reference field of TP5
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.7000 mm, 106.8800 mm): Reference field of R19
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(96.0000 mm, 114.0500 mm): Reference field of TP7
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(71.4000 mm, 103.7500 mm): Reference field of L1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(86.2800 mm, 106.5000 mm): Reference field of R4
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(115.8900 mm, 115.4000 mm): Reference field of C25
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(104.0000 mm, 116.0500 mm): Reference field of TP1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(86.2000 mm, 99.9800 mm): Reference field of RT2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(81.4900 mm, 99.4000 mm): Reference field of C11
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(84.9200 mm, 103.3000 mm): Reference field of C20
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(90.1900 mm, 99.6000 mm): Reference field of C18
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(104.0000 mm, 114.0500 mm): Reference field of TP4
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(113.6000 mm, 114.4900 mm): Reference field of C24
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(98.0000 mm, 114.0500 mm): Reference field of TP8
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(92.4200 mm, 95.2000 mm): Reference field of C31
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(104.8200 mm, 110.0000 mm): Reference field of C22
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(84.9800 mm, 98.8000 mm): Reference field of R3
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(91.6800 mm, 101.8000 mm): Reference field of R7
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(75.2000 mm, 106.8000 mm): Reference field of C1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(78.8900 mm, 99.4000 mm): Reference field of C9
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(87.8800 mm, 106.2000 mm): Reference field of R8
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(95.4000 mm, 98.2800 mm): Reference field of R21
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(104.1800 mm, 94.6000 mm): Reference field of R28
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(98.7300 mm, 116.3500 mm): Reference field of SW1
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(101.6800 mm, 113.2000 mm): Reference field of R32
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(107.6800 mm, 91.2000 mm): Reference field of R30
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(75.4200 mm, 103.0000 mm): Reference field of C5
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(87.6800 mm, 99.6000 mm): Reference field of R6
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(83.6200 mm, 106.8000 mm): Reference field of C15
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(83.8800 mm, 98.8000 mm): Reference field of R2
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(88.9800 mm, 106.2000 mm): Reference field of R9
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(79.9200 mm, 99.1000 mm): Reference field of C10
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(78.3900 mm, 106.5000 mm): Reference field of C6
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(124.9000 mm, 105.8500 mm): Reference field of U6
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(103.0000 mm, 107.8500 mm): Reference field of U3
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(106.7500 mm, 107.0000 mm): Reference field of U4
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.7000 mm, 108.4800 mm): Reference field of R14
+[text_thickness]: Text thickness out of range (board setup constraints silk text thickness min thickness 0.1000 mm; actual 0.0900 mm)
+    Rule: board setup constraints silk text thickness; warning
+    @(121.0800 mm, 93.6000 mm): Reference field of R16
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.9000 mm, 110.8200 mm): Reference field of D1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(106.0000 mm, 116.0500 mm): Reference field of TP2
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(97.2500 mm, 94.9500 mm): Segment of U5 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(96.9500 mm, 94.7000 mm): Circle of U5 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.0900 mm, 113.2000 mm): Reference field of C34
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(75.8200 mm, 99.1000 mm): Reference field of C12
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(90.0800 mm, 106.2000 mm): Reference field of R10
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(122.2800 mm, 93.6000 mm): Reference field of R17
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.0800 mm, 101.6000 mm): Reference field of RT1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(100.6900 mm, 92.6000 mm): Reference field of C28
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(99.6750 mm, 91.7250 mm): Segment of Y1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(99.6750 mm, 93.4750 mm): Segment of Y1 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(103.9800 mm, 99.4000 mm): Reference field of R27
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(77.4900 mm, 98.8000 mm): Reference field of C14
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.4000 mm, 97.0800 mm): Reference field of R20
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(79.4200 mm, 106.8000 mm): Reference field of C7
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.4000 mm, 99.4800 mm): Reference field of R22
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.7000 mm, 109.6800 mm): Reference field of R15
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(96.6000 mm, 93.2900 mm): Reference field of C30
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(84.4000 mm, 108.4000 mm): Reference field of Q1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(108.0000 mm, 116.0500 mm): Reference field of TP3
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(114.6800 mm, 115.4000 mm): Reference field of R11
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(80.9900 mm, 106.5000 mm): Reference field of C8
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(117.2800 mm, 98.8000 mm): Reference field of R13
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.7800 mm, 98.8000 mm): Reference field of R1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.4200 mm, 104.3000 mm): Reference field of C19
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(98.6900 mm, 113.2000 mm): Reference field of C33
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.8800 mm, 113.2000 mm): Reference field of R33
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(82.4900 mm, 106.5000 mm): Reference field of C17
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(77.3500 mm, 103.0000 mm): Reference field of U1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(85.0900 mm, 106.5000 mm): Reference field of C16
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(105.2800 mm, 94.6000 mm): Reference field of R29
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(106.0000 mm, 114.0500 mm): Reference field of TP5
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.7000 mm, 106.8800 mm): Reference field of R19
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(86.2800 mm, 106.5000 mm): Reference field of R4
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(115.8900 mm, 115.4000 mm): Reference field of C25
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.0000 mm, 116.0500 mm): Reference field of TP1
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(86.2000 mm, 99.9800 mm): Reference field of RT2
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(81.4900 mm, 99.4000 mm): Reference field of C11
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.0000 mm, 114.0500 mm): Reference field of TP4
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(98.0000 mm, 114.0500 mm): Reference field of TP8
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.8200 mm, 110.0000 mm): Reference field of C22
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(84.9800 mm, 98.8000 mm): Reference field of R3
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(91.6800 mm, 101.8000 mm): Reference field of R7
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(78.8900 mm, 99.4000 mm): Reference field of C9
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(87.8800 mm, 106.2000 mm): Reference field of R8
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(95.4000 mm, 98.2800 mm): Reference field of R21
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.1800 mm, 94.6000 mm): Reference field of R28
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(107.6800 mm, 91.2000 mm): Reference field of R30
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(75.4200 mm, 103.0000 mm): Reference field of C5
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.6200 mm, 106.8000 mm): Reference field of C15
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.8800 mm, 98.8000 mm): Reference field of R2
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(88.9800 mm, 106.2000 mm): Reference field of R9
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(79.9200 mm, 99.1000 mm): Reference field of C10
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.7000 mm, 108.4800 mm): Reference field of R14
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(89.5000 mm, 100.4300 mm): Reference field of U2
+    @(90.1900 mm, 99.6000 mm): Reference field of C18
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(95.2464 mm, 99.5800 mm): Segment of R21 on F.Silkscreen
+    @(95.4000 mm, 99.4800 mm): Reference field of R22
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(95.2922 mm, 97.2600 mm): Segment of C29 on F.Silkscreen
+    @(95.4000 mm, 97.0800 mm): Reference field of R20
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(95.2464 mm, 98.3800 mm): Segment of R20 on F.Silkscreen
+    @(95.4000 mm, 98.2800 mm): Reference field of R21
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(78.8900 mm, 99.4000 mm): Reference field of C9
+    @(78.7600 mm, 98.9078 mm): Segment of C14 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(84.9800 mm, 98.8000 mm): Reference field of R3
+    @(85.1800 mm, 98.9536 mm): Segment of R2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(83.8800 mm, 98.8000 mm): Reference field of R2
+    @(84.0800 mm, 98.9536 mm): Segment of R1 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(79.9200 mm, 99.1000 mm): Reference field of C10
+    @(80.1600 mm, 99.5078 mm): Segment of C9 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(105.2800 mm, 94.6000 mm): Reference field of R29
+    @(105.4800 mm, 94.7536 mm): Segment of R28 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(104.1800 mm, 94.6000 mm): Reference field of R28
+    @(104.3800 mm, 94.7536 mm): Segment of R25 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(76.0100 mm, 99.2406 mm): Segment of C13 on F.Silkscreen
+    @(75.8200 mm, 99.1000 mm): Reference field of C12
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(75.5350 mm, 103.2613 mm): Segment of C4 on F.Silkscreen
+    @(75.4200 mm, 103.0000 mm): Reference field of C5
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(77.3500 mm, 103.0000 mm): Reference field of U1
+    @(77.1100 mm, 103.1406 mm): Segment of C5 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(75.2000 mm, 109.2000 mm): Reference field of C2
+    @(74.4887 mm, 109.3100 mm): Segment of C1 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(75.2000 mm, 111.6000 mm): Reference field of C3
+    @(74.4887 mm, 111.7100 mm): Segment of C2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(80.9900 mm, 106.5000 mm): Reference field of C8
+    @(81.1100 mm, 106.9406 mm): Segment of C7 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(82.4900 mm, 106.5000 mm): Reference field of C17
+    @(82.2600 mm, 106.6078 mm): Segment of C8 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(83.7600 mm, 106.6078 mm): Segment of C17 on F.Silkscreen
+    @(83.6200 mm, 106.8000 mm): Reference field of C15
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(85.3100 mm, 106.9406 mm): Segment of C15 on F.Silkscreen
+    @(85.0900 mm, 106.5000 mm): Reference field of C16
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(86.2800 mm, 106.5000 mm): Reference field of R4
+    @(86.3600 mm, 106.6078 mm): Segment of C16 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(82.8000 mm, 102.0000 mm): Segment of U1 on F.Silkscreen
+    @(83.0800 mm, 101.6000 mm): Reference field of RT1
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(83.0800 mm, 101.6000 mm): Reference field of RT1
+    @(82.5000 mm, 101.2000 mm): Segment of U1 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(82.7600 mm, 99.5078 mm): Segment of C11 on F.Silkscreen
+    @(82.7800 mm, 98.8000 mm): Reference field of R1
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(79.6600 mm, 106.6078 mm): Segment of C6 on F.Silkscreen
+    @(79.4200 mm, 106.8000 mm): Reference field of C7
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(98.6900 mm, 113.2000 mm): Reference field of C33
+    @(98.0000 mm, 114.0500 mm): Reference field of TP8
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(98.0000 mm, 114.0500 mm): Reference field of TP8
+    @(97.4800 mm, 113.2000 mm): Reference field of R31
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(90.2800 mm, 106.3536 mm): Segment of R9 on F.Silkscreen
+    @(90.0800 mm, 106.2000 mm): Reference field of R10
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(91.4200 mm, 104.3000 mm): Reference field of C19
+    @(90.6350 mm, 104.6100 mm): Segment of U2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(91.4200 mm, 104.3000 mm): Reference field of C19
+    @(91.1100 mm, 104.6100 mm): Segment of U2 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(87.5800 mm, 106.6536 mm): Segment of R4 on F.Silkscreen
+    @(87.8800 mm, 106.2000 mm): Reference field of R8
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(88.9800 mm, 106.2000 mm): Reference field of R9
+    @(89.1800 mm, 106.3536 mm): Segment of R8 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(108.0000 mm, 114.0500 mm): Reference field of TP6
+    @(107.2000 mm, 112.9250 mm): Segment of U4 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(102.8800 mm, 113.2000 mm): Reference field of R33
+    @(102.9800 mm, 113.3536 mm): Segment of R32 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(104.0900 mm, 113.2000 mm): Reference field of C34
+    @(104.1800 mm, 113.3536 mm): Segment of R33 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(104.0900 mm, 113.2000 mm): Reference field of C34
+    @(104.0000 mm, 114.0500 mm): Reference field of TP4
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(122.3800 mm, 93.7536 mm): Segment of R16 on F.Silkscreen
+    @(122.2800 mm, 93.6000 mm): Reference field of R17
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(121.9000 mm, 110.8200 mm): Reference field of D1
+    @(121.5464 mm, 110.9800 mm): Segment of R15 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(115.9800 mm, 115.5536 mm): Segment of R11 on F.Silkscreen
+    @(115.8900 mm, 115.4000 mm): Reference field of C25
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(113.6000 mm, 114.4900 mm): Reference field of C24
+    @(114.6800 mm, 115.4000 mm): Reference field of R11
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(104.1800 mm, 99.5536 mm): Segment of R26 on F.Silkscreen
+    @(103.9800 mm, 99.4000 mm): Reference field of R27
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(120.4300 mm, 100.0000 mm): Reference field of J1
+    @(119.3000 mm, 100.2000 mm): Segment of U4 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(120.4300 mm, 100.0000 mm): Reference field of J1
+    @(120.1000 mm, 100.2000 mm): Segment of U4 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(117.3800 mm, 98.9536 mm): Segment of R12 on F.Silkscreen
+    @(117.2800 mm, 98.8000 mm): Reference field of R13
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(98.6900 mm, 113.2000 mm): Reference field of C33
+    @(98.7800 mm, 113.3536 mm): Segment of R31 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(121.7000 mm, 109.6800 mm): Reference field of R15
+    @(121.5464 mm, 109.7800 mm): Segment of R14 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(121.5464 mm, 106.9800 mm): Segment of R18 on F.Silkscreen
+    @(121.7000 mm, 106.8800 mm): Reference field of R19
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(121.5464 mm, 108.1800 mm): Segment of R19 on F.Silkscreen
+    @(121.7000 mm, 108.4800 mm): Reference field of R14
+
+** Found 13 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.9000 mm, 112.9000 mm): Pad 3 [+3V3] of U4 on F.Cu
+    @(113.1200 mm, 115.4000 mm): Track [+3V3] on F.Cu, length 0.0255 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(90.9625 mm, 103.7500 mm): Pad 9 [CHG_STAT] of U2 on F.Cu
+    @(91.0000 mm, 106.7100 mm): Pad 1 [CHG_STAT] of R10 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(91.0000 mm, 106.7100 mm): Pad 1 [CHG_STAT] of R10 on F.Cu
+    @(116.7000 mm, 112.9000 mm): Pad 9 [CHG_STAT] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(106.2000 mm, 95.1100 mm): Pad 1 [IMU_MISO] of R29 on F.Cu
+    @(102.2500 mm, 95.3875 mm): Pad 20 [IMU_MISO] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(116.7000 mm, 101.1000 mm): Pad 27 [IMU_MISO] of U4 on F.Cu
+    @(106.2000 mm, 95.1100 mm): Pad 1 [IMU_MISO] of R29 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(81.2500 mm, 104.6500 mm): Pad 7 [QI_CHG] of U1 on F.Cu
+    @(87.2000 mm, 107.0100 mm): Pad 1 [QI_CHG] of R4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(87.2000 mm, 107.0100 mm): Pad 1 [QI_CHG] of R4 on F.Cu
+    @(115.9000 mm, 101.1000 mm): Pad 28 [QI_CHG] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(80.7500 mm, 104.6500 mm): Pad 6 [QI_COMM1] of U1 on F.Cu
+    @(81.9000 mm, 106.9800 mm): Pad 1 [QI_COMM1] of C8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(81.7500 mm, 101.3500 mm): Pad 13 [QI_TS] of U1 on F.Cu
+    @(84.0000 mm, 102.1100 mm): Pad 1 [QI_TS] of RT1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.1900 mm, 107.8000 mm): Pad 1 [USB_DM_C] of R19 on F.Cu
+    @(123.7625 mm, 108.9500 mm): Pad 3 [USB_DM_C] of U6 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.1050 mm, 99.7500 mm): Pad A7 [USB_DM_C] of J1 on F.Cu
+    @(122.1050 mm, 100.7500 mm): Pad B7 [USB_DM_C] of J1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.1050 mm, 100.7500 mm): Pad B7 [USB_DM_C] of J1 on F.Cu
+    @(121.1900 mm, 107.8000 mm): Pad 1 [USB_DM_C] of R19 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.7625 mm, 108.9500 mm): Pad 3 [USB_DM_C] of U6 on F.Cu
+    @(126.0375 mm, 108.9500 mm): Pad 4 [USB_DM_C] of U6 on F.Cu
+
+** Found 0 Footprint errors **
+
+** End of Report **
