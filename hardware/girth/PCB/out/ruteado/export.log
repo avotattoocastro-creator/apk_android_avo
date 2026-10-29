@@ -1,8 +1,8 @@
 DSN exportado: True
 total 132
-drwxr-xr-x 2 runner runner   4096 Oct 29 09:41 .
-drwxr-xr-x 5 runner runner   4096 Oct 29 09:41 ..
--rw-r--r-- 1 runner runner     20 Oct 29 09:41 export.log
--rw-r--r-- 1 runner runner     87 Oct 29 09:41 freerouting.sha256
--rw-r--r-- 1 runner runner    195 Oct 29 09:41 java.log
--rw-r--r-- 1 root   root   112170 Oct 29 09:41 placa.dsn
+drwxr-xr-x 2 runner runner   4096 Oct 29 10:05 .
+drwxr-xr-x 5 runner runner   4096 Oct 29 10:05 ..
+-rw-r--r-- 1 runner runner     20 Oct 29 10:05 export.log
+-rw-r--r-- 1 runner runner     87 Oct 29 10:05 freerouting.sha256
+-rw-r--r-- 1 runner runner    195 Oct 29 10:05 java.log
+-rw-r--r-- 1 root   root   112170 Oct 29 10:05 placa.dsn
