@@ -372,11 +372,17 @@ def main():
         ep_stubs(r, pads)
         fails_v = via_drops(r, pads, log)
         # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, battery
+        # rev. 2 (V4): sin pre-ruteo del bloque Qi; los pre-ruteos bloqueados encajonaban U1 y Freerouting no
+        # podía terminar sus redes. Se dejan solo USB, CC y los pines del cargador.
+        PRE_QI = "--pre-qi" in sys.argv
         pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
                "QI_RECT", D.VIN5, "USB_DP_C", "USB_DM_C", "CC1", "CC2", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
         pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("QI_CHG", ["U1.7", "R4.1"]),
                  ("QI_ADEN", ["U1.8", "Q1.1", "Q2.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
+        if not PRE_QI:
+            pre = [n for n in pre if not n.startswith("QI_") and n != D.VIN5]
+            pairs = [pr for pr in pairs if not pr[0].startswith("QI_")]
         for net, refs in pairs:
             recs = [rec for rec in pads if rec["net"] == net and "%s.%s" % (rec["part"]["ref"], rec["pad"].num) in refs]
             if len(recs) > 1 and not route_tree(r, net, netid(net), recs, 0.2):

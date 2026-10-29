@@ -38,14 +38,7 @@ DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("U7
          "C20": ("U2", "2"), "C35": ("U2", "11"), "C12": ("U1", "18"), "C13": ("U1", "18"), "C14": ("U1", "18"),
          "C15": ("U1", "4"), "C16": ("U1", "4"), "C17": ("Q1", "3"), "C28": ("J1", "A4"), "C40": ("Q4", "3"),
          "C41": ("J3", "4"), "C33": ("U8", "1"), "TP9": ("J4", "1"), "TP6": ("U3", "5"), "TP8": ("U3", "1"),
-         "TP7": ("Q3", "2"), "R60": ("U7", "3"), "R40": ("Q4", "1"),
-         # receptor Qi: cada pieza junto al pin de U1 al que sirve (rev. 2: ruteado del bloque Qi)
-         "C6": ("U1", "3"), "C9": ("U1", "17"), "C7": ("U1", "5"), "C10": ("U1", "16"), "C8": ("U1", "6"),
-         "C11": ("U1", "15"), "C4": ("U1", "2"), "C5": ("U1", "19"), "R1": ("U1", "12"), "R2": ("U1", "14"),
-         "R3": ("U1", "14"), "RT1": ("U1", "13"), "R4": ("U1", "7"), "C1": ("L1", "1"), "C2": ("L1", "1"),
-         "C3": ("L1", "1")}
-# separación extra alrededor de las piezas del bloque Qi (canales de ruteado alrededor de U1)
-GAP_QI = 0.25
+         "TP7": ("Q3", "2"), "R60": ("U7", "3"), "R40": ("Q4", "1")}
 GAP = 0.12            # separación mínima entre patios
 STEP = 0.2
 
@@ -92,7 +85,7 @@ def main():
             r = 2.5 if p["fp"] == "PAD_LID" else 4.6
             occ[(XX - p["pos"][0]) ** 2 + (YY - p["pos"][1]) ** 2 < r * r] = True
         else:
-            i0, i1, j0, j1 = cells(b, GAP / 2 + (GAP_QI if p.get("block") == "Qi" else 0.0))
+            i0, i1, j0, j1 = cells(b, GAP / 2)
             occ[i0:i1, j0:j1] = True
 
     def ok(p, pos, r):
