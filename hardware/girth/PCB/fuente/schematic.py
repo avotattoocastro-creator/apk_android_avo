@@ -147,7 +147,8 @@ class Sheet:
         self.instances = []
         self.root = uid("sheet-root")
 
-    def place(self, libname, libnode, pinpos, ref, value, x, y, netmap, footprint="", props=None, dnp=False):
+    def place(self, libname, libnode, pinpos, ref, value, x, y, netmap, footprint="", props=None, dnp=False,
+              side_text=False):
         """x, y: sheet coordinates (Y down). netmap: pin -> net name (None = no connect)."""
         if libname not in self.libs:
             self.libs[libname] = libnode
@@ -156,8 +157,10 @@ class Sheet:
         node = [S("symbol"), [S("lib_id"), "AVO:" + libname], [S("at"), x, y, 0], [S("unit"), 1],
                 [S("exclude_from_sim"), S("no")], [S("in_bom"), S("yes")], [S("on_board"), S("yes")],
                 [S("dnp"), S("yes" if dnp else "no")], [S("uuid"), u],
-                [S("property"), "Reference", ref, [S("at"), x, y - 1.27, 0], _font()],
-                [S("property"), "Value", value, [S("at"), x, y + 1.27, 0], _font(1.0)],
+                [S("property"), "Reference", ref, [S("at"), x + (2.54 if side_text else 0), y - 1.27, 0],
+                 [S("effects"), [S("font"), [S("size"), 1.27, 1.27]]] + ([[S("justify"), S("left")]] if side_text else [])],
+                [S("property"), "Value", value, [S("at"), x + (2.54 if side_text else 0), y + 1.27, 0],
+                 [S("effects"), [S("font"), [S("size"), 1.0, 1.0]]] + ([[S("justify"), S("left")]] if side_text else [])],
                 [S("property"), "Footprint", footprint, [S("at"), x, y, 0], [S("hide"), S("yes")], _font()],
                 [S("property"), "Datasheet", "", [S("at"), x, y, 0], [S("hide"), S("yes")], _font()],
                 [S("property"), "Description", "", [S("at"), x, y, 0], [S("hide"), S("yes")], _font()]]
@@ -234,8 +237,10 @@ class Sheet:
                 v2[1] = "AVO:" + k
                 # sub-symbol names keep the bare name
                 lib.append(v2)
+        paper = [S("paper"), "User", self.paper[0], self.paper[1]] if isinstance(self.paper, tuple) else \
+            [S("paper"), self.paper]
         tree = [S("kicad_sch"), [S("version"), 20250114], [S("generator"), "eeschema"],
-                [S("generator_version"), "9.0"], [S("uuid"), self.root], [S("paper"), self.paper],
+                [S("generator_version"), "9.0"], [S("uuid"), self.root], paper,
                 [S("title_block"), [S("title"), self.title], [S("date"), date], [S("rev"), rev],
                  [S("company"), "AVO Performance Horse"]],
                 lib] + self.items + [[S("sheet_instances"), [S("path"), "/", [S("page"), "1"]]],

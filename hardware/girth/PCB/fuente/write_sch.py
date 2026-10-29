@@ -51,46 +51,73 @@ def sym_for(p):
     return "Pad_avo", node, pos
 
 
+def lbl_len(t):
+    return len(t) * 0.85 + 3.5 if t else 2.0
+
+
+def cell(pos, nets):
+    """Cell size (w, h) and the symbol origin inside it, labels included (sheet units, Y down)."""
+    xs = [v[0] for v in pos.values()]; ys = [v[1] for v in pos.values()]
+    L = max([lbl_len(nets.get(n)) for n, v in pos.items() if v[2] == 0] or [0])
+    Rr = max([lbl_len(nets.get(n)) for n, v in pos.items() if v[2] == 180] or [0])
+    T = max([lbl_len(nets.get(n)) for n, v in pos.items() if v[2] == 270] or [0])
+    B = max([lbl_len(nets.get(n)) for n, v in pos.items() if v[2] == 90] or [0])
+    body_w = max(xs) - min(xs); body_h = max(ys) - min(ys)
+    extra_w = 14 if body_w < 3 else 0          # Reference/Value beside 2-pin parts
+    w = L + body_w + Rr + 6 + extra_w
+    h = T + body_h + B + 8
+    ox = L + 3 - min(xs)
+    oy = T + 4 + max(ys)
+    return w, h, ox, oy
+
+
 def write(path_sch, path_pro, path_parts):
-    sh = SCH.Sheet("AVO GIRTH · placa de la cincha · REV " + D.REV, "A2")
-    for k, (x0, y0, x1, y1, title) in BLOCKS.items():
-        sh.box(x0, y0, x1, y1)
-        sh.text(title, x0 + 2, y0 + 5, 2.0)
-    cursor = {k: [BLOCKS[k][0] + 8, BLOCKS[k][1] + 14, 0] for k in BLOCKS}
-    # ICs first
-    order = sorted(D.PARTS, key=lambda p: (not isinstance(p["sym"], dict), p["ref"]))
-    ic_y = {}
+    BW = 250.0
+    blocks = {}
+    order = sorted(D.PARTS, key=lambda p: (not isinstance(p["sym"], dict), p["ref"].rstrip("0123456789"),
+                                           int("0" + p["ref"][len(p["ref"].rstrip("0123456789")):])))
     for p in order:
         blk = BLOCK_OF.get(p["block"], p["block"])
-        x0, y0, x1, y1, _ = BLOCKS[blk]
         name, node, pos = sym_for(p)
-        nets = {num: p["nets"].get(num) for num in pos}
-        if isinstance(p["sym"], dict):
-            h = max(abs(v[1]) for v in pos.values()) * 2 + 6
-            w = max(abs(v[0]) for v in pos.values()) * 2
-            cx = x0 + 30 + (ic_y.get(blk, 0) and 0)
-            cy = y0 + 18 + ic_y.get(blk, 0) + h / 2
-            if blk == "ESP32-C6" or blk == "IMU":
-                cx = x0 + 45
-            sh.place(name, node, pos, p["ref"], p["value"], cx, cy, nets, "AVO:" + D.fp_of(p).name,
-                     {"LCSC": p["lcsc"], "MPN": p["mpn"]}, p["dnp"])
-            ic_y[blk] = ic_y.get(blk, 0) + h + 8
-            cursor[blk][0] = max(cursor[blk][0], cx + w / 2 + 22)
+        nets = {num: (None if num in p.get("nc", ()) else p["nets"].get(num)) for num in pos}
+        w, h, ox, oy = cell(pos, nets)
+        blocks.setdefault(blk, []).append((p, name, node, pos, nets, w, h, ox, oy))
+    # shelf packing inside each block
+    placed, sizes = {}, {}
+    for blk, items in blocks.items():
+        x, y, row_h = 6.0, 12.0, 0.0
+        out = []
+        for it in items:
+            w, h = it[5], it[6]
+            if x + w > BW - 4 and x > 6.0:
+                x, y, row_h = 6.0, y + row_h + 4, 0.0
+            out.append((it, x, y))
+            x += w + 4
+            row_h = max(row_h, h)
+        placed[blk] = out
+        sizes[blk] = y + row_h + 6
+    # blocks in three columns, shortest column first
+    cols = [20.0, 20.0, 20.0]
+    origin = {}
+    for blk in BLOCKS:
+        if blk not in sizes:
             continue
-        cx, cy, n = cursor[blk]
-        if cx > x1 - 12:
-            cx = cursor[blk][0] = x0 + 8
-            cursor[blk][1] += 0
-        # 2-pin parts on a grid of 13 × 17 mm to the right of the IC
-        col_x0 = cursor[blk][0]
-        sh.place(name, node, pos, p["ref"], p["value"], col_x0, cursor[blk][1] + 6, nets,
-                 "AVO:" + D.fp_of(p).name, {"LCSC": p["lcsc"], "MPN": p["mpn"]}, p["dnp"])
-        cursor[blk][1] += 17
-        if cursor[blk][1] > y1 - 18:
-            cursor[blk][1] = y0 + 14
-            cursor[blk][0] += 22
-    sh.note("Generado por fuente/avo_girth_pcb.py (mismo origen de datos que la placa). Todas las conexiones "
-            "son etiquetas de red: dos pines con la misma etiqueta están unidos.", 15, 410, 1.5)
+        c = cols.index(min(cols))
+        origin[blk] = (15 + c * (BW + 10), cols[c])
+        cols[c] += sizes[blk] + 10
+    Wp = int(15 + 3 * (BW + 10) + 10)
+    Hp = int(max(cols) + 45)
+    sh = SCH.Sheet("AVO GIRTH · placa de la cincha · REV " + D.REV, (Wp, Hp))
+    for blk, out in placed.items():
+        bx, by = origin[blk]
+        sh.box(bx, by, bx + BW, by + sizes[blk])
+        sh.text(BLOCKS[blk][4], bx + 2, by + 6, 2.0)
+        for (p, name, node, pos, nets, w, h, ox, oy), x, y in out:
+            sh.place(name, node, pos, p["ref"], p["value"], bx + x + ox, by + y + oy, nets,
+                     "AVO:" + D.fp_of(p).name, {"LCSC": p["lcsc"], "MPN": p["mpn"]}, p["dnp"],
+                     side_text=(max(v[0] for v in pos.values()) - min(v[0] for v in pos.values())) < 3)
+    sh.note("Generado por fuente/avo_girth_pcb.py (mismo origen de datos que la placa). Las conexiones son "
+            "etiquetas globales: dos pines con la misma etiqueta están unidos.", 15, Hp - 38, 1.5)
     sh.write(path_sch, D.DATE, D.REV)
 
     project.write(path_pro,

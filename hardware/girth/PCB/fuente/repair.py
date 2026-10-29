@@ -218,14 +218,7 @@ def prune(pads, segs, vias):
     return removed
 
 
-def main():
-    src = os.path.join(D.OUT, "AVO_GIRTH_PCB.kicad_pcb")
-    segs, vias, fps = read_board(src)
-    bad = check_positions(fps)
-    if bad:
-        print("La placa ruteada no corresponde a la colocación actual: %s" % ", ".join(bad[:12]))
-        sys.exit(2)
-    pads = build.collect_pads()
+def make_router(pads, segs, vias):
     r = build.build_router(pads)
     for s in segs:
         r.add_track(D.CODE.get(s["net"], -1) if s["net"] else -2, s["layer"], s["a"], s["b"], s["w"])
@@ -234,6 +227,35 @@ def main():
         m = seg_mask((r.H, r.W), r.x0, r.y0, v["p"], v["p"], v["d"] / 2)
         for l in range(r.L):
             r._mark(l, m, D.CODE.get(v["net"], -1))
+    return r
+
+
+def try_route(r, pads, net, nid, g):
+    for w in (net_width(net), 0.2):
+        free = r.free_mask(nid, w)
+        vm = r.via_mask(nid) & ~build.drill_block(r, pads)
+        a = group_cells(r, g[0], free, w)
+        best = None
+        for k in range(1, len(g)):
+            b = group_cells(r, g[k], free, w)
+            tgt = next(d for kk, d in g[k] if kk == "pad")["c"]
+            path = r.astar(nid, a, b, w, free, vm, tgt, via_cost=30, layer_cost=[1.0, 1.3, 1.6])
+            if path and (best is None or len(path) < len(best)):
+                best = path
+        if best:
+            return best, w
+    return None, None
+
+
+def main():
+    src = os.path.join(D.OUT, "AVO_GIRTH_PCB.kicad_pcb")
+    segs, vias, fps = read_board(src)
+    bad = check_positions(fps)
+    if bad:
+        print("La placa ruteada no corresponde a la colocación actual: %s" % ", ".join(bad[:12]))
+        sys.exit(2)
+    pads = build.collect_pads()
+    r = make_router(pads, segs, vias)
     report = []
     pending = []
     for net in D.NETS:
@@ -241,7 +263,7 @@ def main():
             continue
         g, stray = clusters(net, pads, segs, vias)
         if len(g) > 1:
-            pending.append((net, g))
+            pending.append(net)
             report.append("%s: %d grupos sin unir (%s)" % (
                 net, len(g), " | ".join(",".join("%s.%s" % (d["part"]["ref"], d["pad"].num)
                                                   for k, d in grp if k == "pad") for grp in g)))
@@ -250,38 +272,75 @@ def main():
         print("  " + line)
     if "--check" in sys.argv:
         sys.exit(1 if pending else 0)
-    fixed, failed = [], []
-    for net, g in pending:
+    queue = list(pending)
+    ripped = {}
+    failed = []
+    fixed = set()
+    it = 0
+    while queue and it < 120:
+        it += 1
+        net = queue.pop(0)
+        g, _ = clusters(net, pads, segs, vias)
+        if len(g) <= 1:
+            continue
         nid = D.CODE[net]
-        ok_all = True
-        while len(g) > 1:
-            done = False
-            for w in (net_width(net), 0.2):
-                free = r.free_mask(nid, w)
-                vm = r.via_mask(nid) & ~build.drill_block(r, pads)
-                a = group_cells(r, g[0], free, w)
-                best = None
-                for k in range(1, len(g)):
-                    b = group_cells(r, g[k], free, w)
-                    tgt = next(d for kk, d in g[k] if kk == "pad")["c"]
-                    path = r.astar(nid, a, b, w, free, vm, tgt, via_cost=30, layer_cost=[1.0, 1.4])
-                    if path and (best is None or len(path) < len(best[0])):
-                        best = (path, k)
-                if best:
-                    path, k = best
-                    nv = len(r.vias)
-                    new = r.commit(nid, path, w)
-                    for (layer, p0, p1) in new:
-                        segs.append(dict(net=net, layer=layer, a=p0, b=p1, w=w))
-                    for (vn, vp) in r.vias[nv:]:
-                        vias.append(dict(net=net, p=vp, d=build.VIA[0], drill=build.VIA[1]))
-                    g, _ = clusters(net, pads, segs, vias)
-                    done = True
-                    break
-            if not done:
-                ok_all = False
-                break
-        (fixed if ok_all else failed).append(net)
+        # 1) normal route between the first group and the nearest other group
+        path, w = try_route(r, pads, net, nid, g)
+        if path:
+            nv = len(r.vias)
+            for (layer, p0, p1) in r.commit(nid, path, w):
+                segs.append(dict(net=net, layer=layer, a=p0, b=p1, w=w))
+            for (vn, vp) in r.vias[nv:]:
+                vias.append(dict(net=net, p=vp, d=build.VIA[0], drill=build.VIA[1]))
+            fixed.add(net)
+            queue.insert(0, net)                  # more groups may remain
+            continue
+        # 2) rip-up: route ignoring other nets' tracks, then remove the tracks in the way and re-queue their nets
+        if ripped.get(net, 0) >= 4:
+            failed.append(net)
+            continue
+        ripped[net] = ripped.get(net, 0) + 1
+        r2 = make_router(pads, [s_ for s_ in segs if s_["net"] == net], vias)
+        path, w = try_route(r2, pads, net, nid, g)
+        if not path:
+            failed.append(net)
+            continue
+        nv = len(r2.vias)
+        new = r2.commit(nid, path, w)
+        newvias = [vp for (vn, vp) in r2.vias[nv:]]
+        victims = set()
+        for s_ in list(segs):
+            if s_["net"] == net or not s_["net"]:
+                continue
+            for (layer, p0, p1) in new:
+                if layer == s_["layer"] and seg_seg(p0, p1, s_["a"], s_["b"]) < (w + s_["w"]) / 2 + build.CLEAR + 0.02:
+                    segs.remove(s_); victims.add(s_["net"]); break
+            else:
+                for vp in newvias:
+                    if seg_seg(vp, vp, s_["a"], s_["b"]) < build.VIA[0] / 2 + s_["w"] / 2 + build.CLEAR + 0.02:
+                        segs.remove(s_); victims.add(s_["net"]); break
+        for (layer, p0, p1) in new:
+            segs.append(dict(net=net, layer=layer, a=p0, b=p1, w=w))
+        for vp in newvias:
+            vias.append(dict(net=net, p=vp, d=build.VIA[0], drill=build.VIA[1]))
+        prune(pads, segs, vias)
+        r = make_router(pads, segs, vias)
+        fixed.add(net)
+        print("  rip-up para %s: se rehacen %s" % (net, ", ".join(sorted(victims)) or "—"))
+        queue.insert(0, net)
+        for v in sorted(victims):
+            if v not in queue and v not in build.PLANES:
+                queue.append(v)
+    # final status
+    left = []
+    for net in D.NETS:
+        if net in build.PLANES:
+            continue
+        g, _ = clusters(net, pads, segs, vias)
+        if len(g) > 1:
+            left.append(net)
+    failed = sorted(set(left))
+    fixed = sorted(n for n in fixed if n not in failed)
     removed = prune(pads, segs, vias)
     print("Tramos colgantes eliminados: %d" % removed)
     print("Reparadas: %s" % (", ".join(fixed) or "ninguna"))

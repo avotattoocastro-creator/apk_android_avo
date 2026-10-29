@@ -18,8 +18,9 @@ from router import Router, GRID, seg_mask, poly_mask         # noqa: E402
 from sexpr import Sym                                       # noqa: E402
 
 S = Sym
-PLANES = {D.GND: "In1.Cu", D.V3: "In2.Cu"}
-ROUTE_LAYERS = ["F.Cu", "B.Cu"]
+PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
+# In2 es capa de señal (+3V3 se rutea y se rellena con una zona +3V3 después del ruteado)
+ROUTE_LAYERS = ["F.Cu", "In2.Cu", "B.Cu"]
 CLEAR = 0.15
 VIA = (0.5, 0.3)
 
@@ -244,7 +245,7 @@ def route_tree(r, net, nid, recs, w):
         if l in r.layers:
             tree_cells |= set(pad_cells(r, first, l, free))
     remaining = recs[1:]
-    lc = [1.0, 1.6]
+    lc = [1.0, 1.3, 1.6]
     while remaining:
         # nearest remaining pad to the connected set
         def dist(rec):
@@ -340,7 +341,8 @@ def write_board(r, path, outer_pours=True):
     # zones
     poly = kpoly(D.outline_pts(3))
     tree.append(B.zone(D.CODE[D.GND], D.GND, "In1.Cu", poly, key="in1", connect="solid"))
-    tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
+    if outer_pours:
+        tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
     if outer_pours:      # Freerouting would take these as planes: the CI adds them after routing
         tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
         tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
@@ -353,7 +355,8 @@ def write_board(r, path, outer_pours=True):
     tree.append(B.gr_text("AVO GIRTH · REV " + D.REV + " · " + D.DATE, *D.K(0, -3.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(0, -4.6), "B.SilkS", 0.8, mirror=True, bold=False))
     tree.append(B.gr_text("ANTENA FPC (sin cobre)", *D.K(11.0, 16.0), "F.SilkS", 0.8, bold=False))
-    for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4)), ("+ BAT −", (-22.6, 10.4))):
+    tree.append(B.gr_text("+ BAT −", *D.K(-26.7, 6.3), "F.SilkS", 0.7, angle=90, bold=False))
+    for txt, (x, y) in (("BOBINA", (-28.6, 0.2)), ("REED", (0.0, -19.4))):
         tree.append(B.gr_text(txt, *D.K(x, y), "F.SilkS", 0.7, bold=False))
     B.write(path, tree)
 
@@ -378,8 +381,14 @@ def main():
         # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, relay
         pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
                "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2", "RLY_NO",
-               D.VBAT, D.VSYS, "CHG_ILIM", "CHG_ISET", "CHG_TS", "CHG_EN2", "CHG_PG", "CHG_STAT", "QI_CHG",
-               D.VBUS]
+               D.VBAT, D.VSYS, "CHG_ILIM", "CHG_ISET", "CHG_TS", D.VBUS]
+        # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
+        pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("QI_CHG", ["U1.7", "R4.1"]),
+                 ("QI_ADEN", ["U1.8", "Q1.1", "Q2.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
+        for net, refs in pairs:
+            recs = [rec for rec in pads if rec["net"] == net and "%s.%s" % (rec["part"]["ref"], rec["pad"].num) in refs]
+            if len(recs) > 1 and not route_tree(r, net, netid(net), recs, 0.2):
+                log.append("pre-ruteo local fallido: " + net)
         by_net = {}
         for rec in pads:
             if rec["net"] in pre and not rec["npth"]:

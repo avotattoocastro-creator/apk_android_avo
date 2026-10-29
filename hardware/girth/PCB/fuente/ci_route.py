@@ -34,6 +34,16 @@ elif mode == "import":
                 print(fn, e)
         board.Add(z)
     print("zonas GND exteriores añadidas")
+    # +3V3 pour on In2 (In2 was a routing layer for Freerouting); it fills around the In2 tracks
+    z = base.Duplicate()
+    try:
+        z = z.Cast()
+    except Exception as e:
+        print("Cast:", e)
+    z.SetLayer(pcbnew.In2_Cu)
+    z.SetNet(board.FindNet("+3V3"))
+    board.Add(z)
+    print("zona +3V3 en In2 añadida")
     # keep the fanouts we placed (locked) and everything Freerouting added
     pcbnew.SaveBoard(sys.argv[4], board)
     sys.exit(0 if ok else 1)

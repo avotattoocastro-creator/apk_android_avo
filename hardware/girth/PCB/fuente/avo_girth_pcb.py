@@ -161,6 +161,9 @@ for k in ("RHL20", "RGT16"):
         if p.kind == "thru_hole":
             p.drill, p.w, p.h = 0.3, 0.5, 0.5
 FP["BNO"].model = None
+# the crystal's library silkscreen runs over its own pads' mask openings: drop it (outline stays on Fab)
+from sexpr import find as _find
+FP["XTAL3215"].graphics = [g for g in FP["XTAL3215"].graphics if _find(g, "layer")[1] != "F.SilkS"]
 
 # =============================================================================== piezas y redes
 PARTS = []
@@ -447,7 +450,7 @@ POS = {
     "U1": (-19.5, -3.0, 90), "L1": (-28.6, -5.2, 0), "L2": (-28.6, -2.0, 0),
     "C1": (-24.8, -8.4, 0), "C2": (-24.8, -10.8, 0), "C3": (-24.8, -13.2, 0),
     "C4": (-25.2, -3.0, 90), "C5": (-23.4, -3.0, 90),
-    "C6": (-20.7, -7.3, 270), "C7": (-19.4, -7.6, 270), "C8": (-18.1, -7.3, 270),
+    "C6": (-21.9, -9.4, 270), "C7": (-20.6, -9.6, 270), "C8": (-19.3, -9.4, 270),
     "C9": (-20.2, 1.4, 90), "C10": (-18.9, 1.7, 90), "C11": (-17.6, 1.4, 90),
     "C12": (-23.0, 0.9, 90), "C13": (-24.5, 0.9, 90), "C14": (-21.6, 1.2, 90),
     "C15": (-15.2, -7.6, 270), "C16": (-14.0, -7.3, 270), "C17": (-16.6, -7.3, 270),
@@ -494,6 +497,32 @@ for p in PARTS:
         if n and n not in NETS:
             NETS.append(n)
 NETS.sort(key=lambda n: (n not in (GND, V3, VSYS, VBAT, VBUS, VIN5), n))
+
+
+def pin_name(p, num):
+    s = p["sym"]
+    if isinstance(s, dict):
+        for k, nm in list(s.get("L", [])) + list(s.get("R", [])):
+            if str(k) == str(num):
+                return nm
+        return str(num)
+    if s == "LED":
+        return {"1": "K", "2": "A"}.get(str(num), str(num))
+    return str(num)
+
+
+# pins left open get the net name KiCad gives them in the schematic ("unconnected-(REF-PIN-PadN)") → parity holds
+for p in PARTS:
+    nums = []
+    for pd in FP[p["fp"]].pads:
+        if pd.num and pd.num not in nums and pd.kind != "np_thru_hole":
+            nums.append(pd.num)
+    for num in nums:
+        if p["nets"].get(num) is None:
+            nc = "unconnected-(%s-%s-Pad%s)" % (p["ref"], pin_name(p, num), num)
+            p["nets"][num] = nc
+            p.setdefault("nc", set()).add(num)
+            NETS.append(nc)
 CODE = {n: i + 1 for i, n in enumerate(NETS)}
 
 
