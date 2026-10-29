@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-29 14:50 UTC",
+ "date_utc": "2026-10-29 14:54 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21983644,
+   "stock": 21983604,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "CC0603KRX7R9BB104",
    "maker": "YAGEO",
    "package": "0603",
-   "stock": 38721361,
+   "stock": 38720437,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 949258,
+   "stock": 949254,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6256557,
+   "stock": 6256517,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 32024531,
+   "stock": 32024301,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402CG220J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 1453122,
+   "stock": 1453102,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "CL10A105KB8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12715461,
+   "stock": 12715441,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "CL10B474KA8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 691234,
+   "stock": 691224,
    "library": "base",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "0805W8F0000T5E",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0805",
-   "stock": 5210661,
+   "stock": 5210641,
    "library": "base",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12137692,
+   "stock": 12137670,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7359446,
+   "stock": 7359426,
    "library": "base",
    "prices": [
     [
@@ -952,7 +952,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8556281,
+   "stock": 8556231,
    "library": "base",
    "prices": [
     [
@@ -987,7 +987,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 17223619,
+   "stock": 17223583,
    "library": "base",
    "prices": [
     [
@@ -1022,7 +1022,7 @@
    "mpn": "0402WGF2002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2906447,
+   "stock": 2906427,
    "library": "base",
    "prices": [
     [
@@ -1337,7 +1337,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3820214,
+   "stock": 3820196,
    "library": "base",
    "prices": [
     [
@@ -1512,7 +1512,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10457536,
+   "stock": 10457506,
    "library": "base",
    "prices": [
     [
@@ -1916,7 +1916,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 8289255,
+   "stock": 8289300,
    "library": "base",
    "prices": [
     [
@@ -2076,25 +2076,6 @@
   ],
   "LSM6DSO": [
    {
-    "lcsc": "C9900150436",
-    "mpn": "LSM6DSOQ",
-    "maker": "JLCPCB Assembly",
-    "package": "LGA-14_2.5x3mm",
-    "stock": 0,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0398
-     ],
-     [
-      100,
-      0.0205
-     ]
-    ],
-    "describe": "LGA-14_2.5x3mm New Arrivals ROHS"
-   },
-   {
     "lcsc": "C2655100",
     "mpn": "LSM6DSOTR",
     "maker": "STMicroelectronics",
@@ -2128,6 +2109,41 @@
      ]
     ],
     "describe": "-40℃~+85℃ 1.71V~3.6V 9KB Accelerometer Gyroscope SPI、I2C X,Y,Z X,Y,Z ±16g ±2000dps LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C5122483",
+    "mpn": "LSM6DSOETR3",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14(2.5x3)",
+    "stock": 19853,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.772
+     ],
+     [
+      10,
+      1.4641
+     ],
+     [
+      30,
+      1.2709
+     ],
+     [
+      100,
+      1.0121
+     ],
+     [
+      500,
+      0.9237
+     ],
+     [
+      1000,
+      0.8844
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) Accelerometers ROHS"
    },
    {
     "lcsc": "C481766",
@@ -2200,39 +2216,39 @@
     "describe": "-40℃~+85℃ 1.71V~5.6V 16bit 3uA 9KB IMU (accelerometer + gyroscope) SPI、I2C、I3C X,Y,Z X,Y,Z ±16g ±2000dps 运动事件检测、同步与时间戳 LGA-14(2.5x3) Accelerometers ROHS"
    },
    {
-    "lcsc": "C6805512",
-    "mpn": "LSM6DSOQTR",
+    "lcsc": "C3663738",
+    "mpn": "LSM6DSO32XTR",
     "maker": "STMicroelectronics",
-    "package": "LGA-14L(2.5x3)",
-    "stock": 0,
+    "package": "LGA-14(2.5x3)",
+    "stock": 262,
     "library": "expand",
     "prices": [
      [
       1,
-      2.6874
+      5.5975
      ],
      [
       10,
-      2.6236
+      4.8409
      ],
      [
       30,
-      2.581
+      4.3807
      ],
      [
       100,
-      2.5384
+      3.9943
      ],
      [
       102,
-      2.5384
+      3.9943
      ],
      [
       104,
-      2.5384
+      3.9943
      ]
     ],
-    "describe": "-40℃~+85℃ 1.71V~3.6V 3uA 9KB IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z ±16g ±2000dps 运动事件检测 LGA-14L(2.5x3) Accelerometers ROHS"
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 3uA 9KB IMU SPI、I2C X,Y,Z X,Y,Z ±2000dps ±32g LGA-14(2.5x3) Accelerometers ROHS"
    },
    {
     "lcsc": "C1864162",
@@ -2270,39 +2286,93 @@
     "describe": "-40℃~+85℃ 1.71V~3.6V 9KB Accelerometer Gyroscope SPI、I2C、MIPI I3C X,Y,Z X,Y,Z ±2000dps ±32g LGA-14(2.5x3) Accelerometers ROHS"
    },
    {
-    "lcsc": "C5122483",
-    "mpn": "LSM6DSOETR3",
+    "lcsc": "C5267402",
+    "mpn": "LSM6DSO16ISTR",
     "maker": "STMicroelectronics",
     "package": "LGA-14(2.5x3)",
-    "stock": 19853,
+    "stock": 4,
     "library": "expand",
     "prices": [
      [
       1,
-      1.772
+      9.8685
      ],
      [
       10,
-      1.4641
+      8.4798
      ],
      [
       30,
-      1.2709
+      7.6331
      ],
      [
       100,
-      1.0121
+      6.924
      ],
      [
-      500,
-      0.9237
+      102,
+      6.924
      ],
      [
-      1000,
-      0.8844
+      104,
+      6.924
      ]
     ],
-    "describe": "LGA-14(2.5x3) Accelerometers ROHS"
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 6uA IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z ±16g ±2000dps LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C9900150436",
+    "mpn": "LSM6DSOQ",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-14_2.5x3mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14_2.5x3mm New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C6805512",
+    "mpn": "LSM6DSOQTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14L(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.6874
+     ],
+     [
+      10,
+      2.6236
+     ],
+     [
+      30,
+      2.581
+     ],
+     [
+      100,
+      2.5384
+     ],
+     [
+      102,
+      2.5384
+     ],
+     [
+      104,
+      2.5384
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 3uA 9KB IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z ±16g ±2000dps 运动事件检测 LGA-14L(2.5x3) Accelerometers ROHS"
    },
    {
     "lcsc": "C9900114767",
@@ -2322,100 +2392,43 @@
      ]
     ],
     "describe": "LGA-14_L3.0-W2.5-P0.50-TL New Arrivals ROHS"
-   },
-   {
-    "lcsc": "C9900292038",
-    "mpn": "LSM6DSOWTR1",
-    "maker": "JLCPCB Assembly",
-    "package": "LGA-14L_L3.0-W2.5-P0.50-TL",
-    "stock": 0,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0398
-     ],
-     [
-      100,
-      0.0205
-     ]
-    ],
-    "describe": "LGA-14L_L3.0-W2.5-P0.50-TL SMT ROHS"
-   },
-   {
-    "lcsc": "C3663738",
-    "mpn": "LSM6DSO32XTR",
-    "maker": "STMicroelectronics",
-    "package": "LGA-14(2.5x3)",
-    "stock": 262,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      5.5975
-     ],
-     [
-      10,
-      4.8409
-     ],
-     [
-      30,
-      4.3807
-     ],
-     [
-      100,
-      3.9943
-     ],
-     [
-      102,
-      3.9943
-     ],
-     [
-      104,
-      3.9943
-     ]
-    ],
-    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 3uA 9KB IMU SPI、I2C X,Y,Z X,Y,Z ±2000dps ±32g LGA-14(2.5x3) Accelerometers ROHS"
    }
   ],
   "ESP32-C3-MINI-1U": [
    {
-    "lcsc": "C9900000796",
-    "mpn": "ESP32-C3-MINI-1U",
-    "maker": "JLCPCB Assembly",
-    "package": "SMD_12.5X13.2",
-    "stock": 0,
+    "lcsc": "C3013922",
+    "mpn": "ESP32-C3-MINI-1U-H4",
+    "maker": "Espressif Systems",
+    "package": "SMD,13.2x12.5mm",
+    "stock": 2214,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0007
+      3.4489
      ],
      [
-      1000,
-      0.0002
-     ]
-    ],
-    "describe": "SMD_12.5X13.2 SMT ROHS"
-   },
-   {
-    "lcsc": "C9900162485",
-    "mpn": "ESP32-C3-MINI-1U",
-    "maker": "JLCPCB Assembly",
-    "package": "SMD,12.5x13.2mm",
-    "stock": 0,
-    "library": "expand",
-    "prices": [
+      10,
+      3.0854
+     ],
      [
-      1,
-      0.0398
+      30,
+      2.8692
      ],
      [
       100,
-      0.0205
+      2.6891
+     ],
+     [
+      650,
+      2.5679
+     ],
+     [
+      1300,
+      2.5138
      ]
     ],
-    "describe": "SMD,12.5x13.2mm New Arrivals ROHS"
+    "describe": "-104dBm -40℃~+105℃ 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FH4 UART、SPI、I2C、I2S、JTAG、USB SMD,13.2x12.5mm WiFi Modules ROHS"
    },
    {
     "lcsc": "C2911374",
@@ -2453,39 +2466,42 @@
     "describe": "-104dBm -40℃~+85℃ 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FN4 UART、SPI、I2C、I2S、USB SMD,13.2x12.5mm WiFi Modules ROHS"
    },
    {
-    "lcsc": "C3013922",
-    "mpn": "ESP32-C3-MINI-1U-H4",
-    "maker": "Espressif Systems",
-    "package": "SMD,13.2x12.5mm",
-    "stock": 2214,
+    "lcsc": "C9900000796",
+    "mpn": "ESP32-C3-MINI-1U",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD_12.5X13.2",
+    "stock": 0,
     "library": "expand",
     "prices": [
      [
       1,
-      3.4489
+      0.0007
      ],
      [
-      10,
-      3.0854
-     ],
+      1000,
+      0.0002
+     ]
+    ],
+    "describe": "SMD_12.5X13.2 SMT ROHS"
+   },
+   {
+    "lcsc": "C9900162485",
+    "mpn": "ESP32-C3-MINI-1U",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,12.5x13.2mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
      [
-      30,
-      2.8692
+      1,
+      0.0398
      ],
      [
       100,
-      2.6891
-     ],
-     [
-      650,
-      2.5679
-     ],
-     [
-      1300,
-      2.5138
+      0.0205
      ]
     ],
-    "describe": "-104dBm -40℃~+105℃ 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FH4 UART、SPI、I2C、I2S、JTAG、USB SMD,13.2x12.5mm WiFi Modules ROHS"
+    "describe": "SMD,12.5x13.2mm New Arrivals ROHS"
    },
    {
     "lcsc": "C9900122610",
@@ -2743,41 +2759,6 @@
     "describe": "-40℃~+125℃ 1 1.5A 1.5mA 4.2V 4.35V~6.6V Charging IC Lithium Battery Support QFN-16-EP(3x3) Battery Management ROHS"
    },
    {
-    "lcsc": "C131944",
-    "mpn": "BQ24072RGTT",
-    "maker": "Texas Instruments",
-    "package": "VQFN-16-EP(3.6x3.6)",
-    "stock": 0,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      1.2168
-     ],
-     [
-      10,
-      1.0219
-     ],
-     [
-      30,
-      0.9155
-     ],
-     [
-      250,
-      0.7943
-     ],
-     [
-      500,
-      0.7403
-     ],
-     [
-      1000,
-      0.7173
-     ]
-    ],
-    "describe": "0℃~+125℃ 1.5A 4.2V 4.35V~6.6V 6.5uA Charging IC Lithium Battery Support VQFN-16-EP(3.6x3.6) Battery Management ROHS"
-   },
-   {
     "lcsc": "C129319",
     "mpn": "BQ24072TRGTR",
     "maker": "Texas Instruments",
@@ -2846,6 +2827,41 @@
      ]
     ],
     "describe": "-40℃~+85℃ 1 1.5A 4.2V 4.35V~6.4V QFN-16-EP(3x3) Battery Management ROHS"
+   },
+   {
+    "lcsc": "C131944",
+    "mpn": "BQ24072RGTT",
+    "maker": "Texas Instruments",
+    "package": "VQFN-16-EP(3.6x3.6)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.2168
+     ],
+     [
+      10,
+      1.0219
+     ],
+     [
+      30,
+      0.9155
+     ],
+     [
+      250,
+      0.7943
+     ],
+     [
+      500,
+      0.7403
+     ],
+     [
+      1000,
+      0.7173
+     ]
+    ],
+    "describe": "0℃~+125℃ 1.5A 4.2V 4.35V~6.6V 6.5uA Charging IC Lithium Battery Support VQFN-16-EP(3.6x3.6) Battery Management ROHS"
    }
   ],
   "BQ51013B": [
@@ -2920,6 +2936,41 @@
     "describe": "VQFN-20-EP(3.5x4.5) Power Management - Specialized ROHS"
    },
    {
+    "lcsc": "C3188677",
+    "mpn": "BQ51013BQWRHLRQ1",
+    "maker": "Texas Instruments",
+    "package": "VQFN-20(3.5x4.5)",
+    "stock": 2,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.5707
+     ],
+     [
+      10,
+      3.9042
+     ],
+     [
+      30,
+      3.5079
+     ],
+     [
+      100,
+      3.1067
+     ],
+     [
+      500,
+      2.9216
+     ],
+     [
+      1000,
+      2.8381
+     ]
+    ],
+    "describe": "-40℃~+125℃ 1.5A 4V~7V 5V Qi v1.2 Receiver VQFN-20(3.5x4.5) Wireless Charge-Discharge ICs ROHS"
+   },
+   {
     "lcsc": "C2155959",
     "mpn": "BQ51013BYFPT",
     "maker": "Texas Instruments",
@@ -2988,41 +3039,6 @@
      ]
     ],
     "describe": "0℃~+125℃ 1.5A 4V~10V 5V 5W Qi v1.2 Receiver DSBGA-28 Wireless Charge-Discharge ICs ROHS"
-   },
-   {
-    "lcsc": "C3188677",
-    "mpn": "BQ51013BQWRHLRQ1",
-    "maker": "Texas Instruments",
-    "package": "VQFN-20(3.5x4.5)",
-    "stock": 2,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      4.5707
-     ],
-     [
-      10,
-      3.9042
-     ],
-     [
-      30,
-      3.5079
-     ],
-     [
-      100,
-      3.1067
-     ],
-     [
-      500,
-      2.9216
-     ],
-     [
-      1000,
-      2.8381
-     ]
-    ],
-    "describe": "-40℃~+125℃ 1.5A 4V~7V 5V Qi v1.2 Receiver VQFN-20(3.5x4.5) Wireless Charge-Discharge ICs ROHS"
    }
   ],
   "AO3401A": [
@@ -3062,41 +3078,6 @@
     "describe": "1 P-Channel 14nC@10V 30V 47mΩ@10V、60mΩ@4.5V、85mΩ@2.5V 4A 55pF 645pF 80pF 900mV SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C306862",
-    "mpn": "AO3401A",
-    "maker": "BORN",
-    "package": "SOT-23",
-    "stock": 163130,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0646
-     ],
-     [
-      200,
-      0.0538
-     ],
-     [
-      600,
-      0.0485
-     ],
-     [
-      3000,
-      0.0338
-     ],
-     [
-      9000,
-      0.0307
-     ],
-     [
-      21000,
-      0.029
-     ]
-    ],
-    "describe": "1 P-Channel 1.4W 115pF 2V 30V 4.2A 85mΩ@2.5V 954pF P-Channel SOT-23 MOSFETs ROHS"
-   },
-   {
     "lcsc": "C347476",
     "mpn": "AO3401A",
     "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
@@ -3130,76 +3111,6 @@
      ]
     ],
     "describe": "-55℃~+150℃ 1 P-Channel 1.3V 1.4W 115pF 30V 4.2A 50mΩ@10V 77pF 9.4nC@4.5V 954pF P-Channel SOT-23 MOSFETs ROHS"
-   },
-   {
-    "lcsc": "C693260",
-    "mpn": "AO3401A-VB",
-    "maker": "VBsemi Elec",
-    "package": "SOT-23(TO-236)",
-    "stock": 2117,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.1112
-     ],
-     [
-      50,
-      0.0904
-     ],
-     [
-      150,
-      0.08
-     ],
-     [
-      500,
-      0.0723
-     ],
-     [
-      3000,
-      0.0492
-     ],
-     [
-      6000,
-      0.0461
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 P-Channel 1.295nF 130pF 150pF 2.5W 24nC@10V 2V 30V 46mΩ@10V 5.6A P-Channel SOT-23(TO-236) MOSFETs ROHS"
-   },
-   {
-    "lcsc": "C700954",
-    "mpn": "AO3401A",
-    "maker": "HUASHUO",
-    "package": "SOT-23",
-    "stock": 67269,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0439
-     ],
-     [
-      200,
-      0.0354
-     ],
-     [
-      600,
-      0.0312
-     ],
-     [
-      3000,
-      0.0249
-     ],
-     [
-      9000,
-      0.0223
-     ],
-     [
-      21000,
-      0.0212
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 P-Channel 10.9nC@4.5V 1W 30V 4.2A 500mV 54mΩ@4.5V 58pF 670pF SOT-23 MOSFETs ROHS"
    },
    {
     "lcsc": "C727156",
@@ -3237,76 +3148,6 @@
     "describe": "-55℃~+150℃ 1 P-Channel 1.3V 115pF 30V 350mW 4.2A 65mΩ@10V 77pF 954pF P-Channel SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C2926127",
-    "mpn": "FS3401",
-    "maker": "FOSAN",
-    "package": "SOT-23-3L",
-    "stock": 2310,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0369
-     ],
-     [
-      200,
-      0.0292
-     ],
-     [
-      600,
-      0.0249
-     ],
-     [
-      3000,
-      0.0215
-     ],
-     [
-      9000,
-      0.0192
-     ],
-     [
-      21000,
-      0.0181
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 P-Channel 1.5W 2V 30V 4.5A 85mΩ@2.5V 954pF P-Channel SOT-23-3L MOSFETs ROHS"
-   },
-   {
-    "lcsc": "C2936839",
-    "mpn": "FS3401M",
-    "maker": "FOSAN",
-    "package": "SOT-23",
-    "stock": 45852,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0325
-     ],
-     [
-      200,
-      0.0254
-     ],
-     [
-      600,
-      0.0215
-     ],
-     [
-      3000,
-      0.0192
-     ],
-     [
-      9000,
-      0.0171
-     ],
-     [
-      21000,
-      0.016
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 P-Channel 1.4W 2V 30V 4.1A 50mΩ@10V 954pF P-Channel SOT-23 MOSFETs ROHS"
-   },
-   {
     "lcsc": "C2938368",
     "mpn": "AO3401A",
     "maker": "GOODWORK",
@@ -3340,6 +3181,181 @@
      ]
     ],
     "describe": "-55℃~+150℃ 1 P-Channel 1.05nF 1.2W 1.3V 30V 4.2A 85mΩ@2.5V 85pF P-Channel SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C306862",
+    "mpn": "AO3401A",
+    "maker": "BORN",
+    "package": "SOT-23",
+    "stock": 163130,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0646
+     ],
+     [
+      200,
+      0.0538
+     ],
+     [
+      600,
+      0.0485
+     ],
+     [
+      3000,
+      0.0338
+     ],
+     [
+      9000,
+      0.0307
+     ],
+     [
+      21000,
+      0.029
+     ]
+    ],
+    "describe": "1 P-Channel 1.4W 115pF 2V 30V 4.2A 85mΩ@2.5V 954pF P-Channel SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C5224202",
+    "mpn": "AO3401A",
+    "maker": "ElecSuper",
+    "package": "SOT-23-3L",
+    "stock": 103686,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0362
+     ],
+     [
+      200,
+      0.0284
+     ],
+     [
+      600,
+      0.0241
+     ],
+     [
+      3000,
+      0.0215
+     ],
+     [
+      9000,
+      0.0192
+     ],
+     [
+      21000,
+      0.0181
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 P-Channel 1.4W 30V 4.2A 44mΩ@10V 54pF 77pF 800mV 9.4nC@4.5V 954pF P-Channel SOT-23-3L MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C5296722",
+    "mpn": "AO3401",
+    "maker": "JSMSEMI",
+    "package": "SOT-23",
+    "stock": 83300,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0371
+     ],
+     [
+      200,
+      0.0292
+     ],
+     [
+      600,
+      0.0248
+     ],
+     [
+      3000,
+      0.021
+     ],
+     [
+      9000,
+      0.0187
+     ],
+     [
+      21000,
+      0.0174
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 P-Channel 1.3V 10nC@4.5V 30V 350mW 4.2A 75mΩ@4.5V 77pF 954pF SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C700954",
+    "mpn": "AO3401A",
+    "maker": "HUASHUO",
+    "package": "SOT-23",
+    "stock": 67269,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0439
+     ],
+     [
+      200,
+      0.0354
+     ],
+     [
+      600,
+      0.0312
+     ],
+     [
+      3000,
+      0.0249
+     ],
+     [
+      9000,
+      0.0223
+     ],
+     [
+      21000,
+      0.0212
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 P-Channel 10.9nC@4.5V 1W 30V 4.2A 500mV 54mΩ@4.5V 58pF 670pF SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C49396278",
+    "mpn": "AO3401A",
+    "maker": "YONGYUTAI",
+    "package": "SOT-23",
+    "stock": 59910,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0287
+     ],
+     [
+      200,
+      0.0225
+     ],
+     [
+      600,
+      0.019
+     ],
+     [
+      3000,
+      0.0171
+     ],
+     [
+      9000,
+      0.0153
+     ],
+     [
+      21000,
+      0.0143
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 P-Channel 30V 35pF 45mΩ@10V 4A 553pF 57pF 6.5nC 900mV P-Channel ±12V SOT-23 MOSFETs ROHS"
    },
    {
     "lcsc": "C5122001",
@@ -3414,41 +3430,6 @@
     "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5Ω@10V 60V N-Channel ±20V SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C12778",
-    "mpn": "L2N7002WT1G",
-    "maker": "LRC",
-    "package": "SOT-323",
-    "stock": 420,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0207
-     ],
-     [
-      500,
-      0.0168
-     ],
-     [
-      3000,
-      0.0123
-     ],
-     [
-      6000,
-      0.011
-     ],
-     [
-      24000,
-      0.0099
-     ],
-     [
-      51000,
-      0.0093
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 60V 7.5Ω@10V N-Channel SOT-323 MOSFETs ROHS"
-   },
-   {
     "lcsc": "C12779",
     "mpn": "L2N7002LT1G",
     "maker": "LRC",
@@ -3484,109 +3465,39 @@
     "describe": "1 N-channel 1.4Ω@10V 10pF 115mA 17pF 2.5pF 225mW 2V 60V N-Channel SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C16338",
-    "mpn": "2N7002LT1G",
-    "maker": "onsemi",
+    "lcsc": "C85047",
+    "mpn": "2N7002K-7",
+    "maker": "Diodes Incorporated",
     "package": "SOT-23",
-    "stock": 166407,
+    "stock": 863349,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0313
+      0.0791
      ],
      [
-      200,
-      0.0238
+      50,
+      0.0638
      ],
      [
-      600,
-      0.0205
+      150,
+      0.0559
      ],
      [
-      3000,
-      0.0168
-     ],
-     [
-      9000,
-      0.0158
-     ],
-     [
-      21000,
-      0.0151
-     ]
-    ],
-    "describe": "-55℃~+150℃ 1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 60V 7.5Ω@10V N-Channel SOT-23 MOSFETs ROHS"
-   },
-   {
-    "lcsc": "C40106",
-    "mpn": "2N7002T",
-    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
-    "package": "SOT-523",
-    "stock": 56387,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0351
-     ],
-     [
-      200,
-      0.0284
-     ],
-     [
-      600,
-      0.0248
+      500,
+      0.0493
      ],
      [
       3000,
-      0.02
-     ],
-     [
-      9000,
-      0.0182
-     ],
-     [
-      21000,
-      0.0171
-     ]
-    ],
-    "describe": "1 N-channel 115mA 150mW 2.5V 25pF 50pF 5pF 5Ω@10V 60V N-Channel SOT-523 MOSFETs ROHS"
-   },
-   {
-    "lcsc": "C61840",
-    "mpn": "2N7002DW K72",
-    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
-    "package": "SC-70-6(SOT-363)",
-    "stock": 12001,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0418
-     ],
-     [
-      100,
-      0.0328
-     ],
-     [
-      300,
-      0.0282
-     ],
-     [
-      3000,
-      0.0249
+      0.0421
      ],
      [
       6000,
-      0.0222
-     ],
-     [
-      9000,
-      0.0208
+      0.0405
      ]
     ],
-    "describe": "-55℃~+150℃ 115mA 150mW 2 N-Channel 2.5V 50pF 5Ω@10V 60V SC-70-6(SOT-363) MOSFETs ROHS"
+    "describe": "-55℃~+150℃ 1 N-channel 1.2Ω@10V、1.4Ω@5V 1.6V 2.9pF 300pC@4.5V 30pF 380mA 4.2pF 540mW 60V SOT-23 MOSFETs ROHS"
    },
    {
     "lcsc": "C65189",
@@ -3624,112 +3535,252 @@
     "describe": "-65℃~+150℃ 1 N-channel 2.5V 300mA 50pF 5Ω@10V 60V 830mW SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C68181",
-    "mpn": "2N7002BKS,115",
-    "maker": "Nexperia",
-    "package": "SOT-363(SC-88)",
-    "stock": 58142,
+    "lcsc": "C85049",
+    "mpn": "2N7002-7-F",
+    "maker": "Diodes Incorporated",
+    "package": "SOT-23",
+    "stock": 262956,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0739
+      0.0423
      ],
      [
-      50,
-      0.0579
+      100,
+      0.0344
      ],
      [
-      150,
-      0.0498
-     ],
-     [
-      500,
-      0.0439
+      300,
+      0.0305
      ],
      [
       3000,
-      0.039
+      0.0245
      ],
      [
       6000,
-      0.0367
+      0.022
+     ],
+     [
+      9000,
+      0.0208
      ]
     ],
-    "describe": "1.6Ω@10V 2 N-Channel 2.1V 295mW 300mA 50pF 600pC@4.5V 60V SOT-363(SC-88) MOSFETs ROHS"
+    "describe": "-55℃~+150℃ 1 N-channel 2.5V 210mA 223pC@4.5V 370mW 50pF 5pF 60V 7.5Ω@5V SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C71533",
-    "mpn": "2N7002ET1G",
-    "maker": "onsemi",
+    "lcsc": "C81445",
+    "mpn": "2N7002K-T1-GE3",
+    "maker": "Vishay Intertech",
     "package": "SOT-23",
-    "stock": 69359,
+    "stock": 215588,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0446
+      0.0474
      ],
      [
-      200,
-      0.0336
+      100,
+      0.0397
      ],
      [
-      600,
-      0.0276
+      300,
+      0.0358
      ],
      [
       3000,
-      0.0222
+      0.0266
+     ],
+     [
+      6000,
+      0.0254
      ],
      [
       9000,
-      0.0189
+      0.0248
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 N-channel 2.5V 2.5pF 2Ω@10V 300mA 350mW 600pC@10V 60V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C81488",
+    "mpn": "2N7002P,215",
+    "maker": "Nexperia",
+    "package": "SOT-23",
+    "stock": 196064,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0241
+     ],
+     [
+      200,
+      0.0187
+     ],
+     [
+      600,
+      0.0157
+     ],
+     [
+      3000,
+      0.0135
+     ],
+     [
+      9000,
+      0.0119
+     ],
+     [
+      21000,
+      0.0111
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 N-channel 1.6Ω@10V 2.4V 350mW 360mA 50pF 60V 800pC@4.5V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C116584",
+    "mpn": "2N7002KT1G",
+    "maker": "onsemi",
+    "package": "SOT-23",
+    "stock": 194305,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0338
+     ],
+     [
+      200,
+      0.0256
+     ],
+     [
+      600,
+      0.0218
+     ],
+     [
+      3000,
+      0.0192
+     ],
+     [
+      9000,
+      0.0181
      ],
      [
       21000,
       0.0172
      ]
     ],
-    "describe": "-55℃~+150℃ 1 N-channel 2.5V 2.9pF 300mW 310mA 3Ω@4.5V 40pF 60V 810pC@10V SOT-23 MOSFETs ROHS"
+    "describe": "-55℃~+150℃ 1 N-channel 2.3V 2.5Ω@4.5V 380mA 420mW 45pF 60V 700pC@4.5V N-Channel SOT-23 MOSFETs ROHS"
    },
    {
-    "lcsc": "C73302",
-    "mpn": "2N7002G-AE2-R",
-    "maker": "UTC(Unisonic Tech)",
-    "package": "SOT-23-3",
-    "stock": 95975,
+    "lcsc": "C78564",
+    "mpn": "L2N7002KLT1G",
+    "maker": "LRC",
+    "package": "SOT-23",
+    "stock": 168122,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0225
+      0.0212
      ],
      [
-      200,
+      500,
       0.0176
      ],
      [
+      3000,
+      0.0152
+     ],
+     [
+      6000,
+      0.014
+     ],
+     [
+      24000,
+      0.013
+     ],
+     [
+      51000,
+      0.0124
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 N-channel 1V 2.2pF 2.3Ω@10V 300mW 34pF 380mA 60V 710pC@10V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C16338",
+    "mpn": "2N7002LT1G",
+    "maker": "onsemi",
+    "package": "SOT-23",
+    "stock": 166407,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0313
+     ],
+     [
+      200,
+      0.0238
+     ],
+     [
       600,
-      0.0149
+      0.0205
      ],
      [
       3000,
-      0.012
+      0.0168
      ],
      [
       9000,
-      0.0106
+      0.0158
      ],
      [
       21000,
-      0.0098
+      0.0151
      ]
     ],
-    "describe": "-40℃~+150℃ 1 N-channel 11pF 2.1V 200mW 300mA 50pF 5pF 60V 7.5Ω N-Channel SOT-23-3 MOSFETs ROHS"
+    "describe": "-55℃~+150℃ 1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 60V 7.5Ω@10V N-Channel SOT-23 MOSFETs ROHS"
    }
   ],
   "BAT54C": [
+   {
+    "lcsc": "C49991",
+    "mpn": "LBAT54CLT1G",
+    "maker": "LRC",
+    "package": "SOT-23",
+    "stock": 291536,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0194
+     ],
+     [
+      500,
+      0.0155
+     ],
+     [
+      3000,
+      0.0127
+     ],
+     [
+      6000,
+      0.0114
+     ],
+     [
+      24000,
+      0.0104
+     ],
+     [
+      51000,
+      0.0098
+     ]
+    ],
+    "describe": "1 Pair Series Connection 200mA 2uA 30V 400mV 600mA SOT-23 Schottky Diodes ROHS"
+   },
    {
     "lcsc": "C2135",
     "mpn": "BAT54C",
@@ -3836,109 +3887,74 @@
     "describe": "1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS"
    },
    {
-    "lcsc": "C49991",
-    "mpn": "LBAT54CLT1G",
-    "maker": "LRC",
+    "lcsc": "C181200",
+    "mpn": "BAT54C",
+    "maker": "Guangdong Hottech",
     "package": "SOT-23",
-    "stock": 291536,
+    "stock": 133867,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0194
+      0.0147
      ],
      [
       500,
-      0.0155
+      0.0117
      ],
      [
       3000,
-      0.0127
+      0.0097
      ],
      [
       6000,
-      0.0114
+      0.0087
      ],
      [
       24000,
-      0.0104
+      0.0078
      ],
      [
       51000,
-      0.0098
+      0.0074
      ]
     ],
-    "describe": "1 Pair Series Connection 200mA 2uA 30V 400mV 600mA SOT-23 Schottky Diodes ROHS"
+    "describe": "1 Pair Common Cathode 200mA 200mA 30V 800mV@100mA SOT-23 Schottky Diodes ROHS"
    },
    {
-    "lcsc": "C57891",
-    "mpn": "LBAT54CWT1G",
-    "maker": "LRC",
-    "package": "SC-70-3",
-    "stock": 1961,
+    "lcsc": "C83573",
+    "mpn": "BAT54CW-7-F",
+    "maker": "Diodes Incorporated",
+    "package": "SOT-323-3",
+    "stock": 43246,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0161
+      0.1239
+     ],
+     [
+      50,
+      0.1009
+     ],
+     [
+      150,
+      0.0895
      ],
      [
       500,
-      0.0127
+      0.0808
      ],
      [
       3000,
-      0.0102
+      0.0739
      ],
      [
       6000,
-      0.009
-     ],
-     [
-      24000,
-      0.008
-     ],
-     [
-      51000,
-      0.0075
+      0.0705
      ]
     ],
-    "describe": "1 Pair Series Connection 200mA 2uA 30V 400mV 600mA SC-70-3 Schottky Diodes ROHS"
-   },
-   {
-    "lcsc": "C77319",
-    "mpn": "BAT54CDW",
-    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
-    "package": "SOT-363-6",
-    "stock": 9,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0937
-     ],
-     [
-      100,
-      0.0788
-     ],
-     [
-      300,
-      0.0715
-     ],
-     [
-      3000,
-      0.0657
-     ],
-     [
-      6000,
-      0.0613
-     ],
-     [
-      9000,
-      0.059
-     ]
-    ],
-    "describe": "1V@100mA 2 Pair Common Cathode 200mA 2uA@25V 30V 600mA SOT-363-6 Schottky Diodes ROHS"
+    "describe": "-65℃~+125℃ 1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-323-3 Schottky Diodes ROHS"
    },
    {
     "lcsc": "C77320",
@@ -4011,96 +4027,77 @@
     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-323 Schottky Diodes ROHS"
    },
    {
-    "lcsc": "C78737",
-    "mpn": "BAT54C-TP",
-    "maker": "MCC(Micro Commercial Components)",
-    "package": "SOT-23",
-    "stock": 4197,
+    "lcsc": "C134407",
+    "mpn": "BAT54CT-7-F",
+    "maker": "Diodes Incorporated",
+    "package": "SOT-523-3",
+    "stock": 8421,
     "library": "expand",
     "prices": [
      [
       1,
-      0.02
-     ],
-     [
-      500,
-      0.0158
-     ],
-     [
-      3000,
-      0.013
-     ],
-     [
-      6000,
-      0.0116
-     ],
-     [
-      24000,
-      0.0104
-     ],
-     [
-      51000,
-      0.0098
-     ]
-    ],
-    "describe": "-55℃~+125℃ 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS"
-   },
-   {
-    "lcsc": "C82467",
-    "mpn": "BAT54CWT1G",
-    "maker": "onsemi",
-    "package": "SOT-323(SC-70)",
-    "stock": 221,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0909
+      0.1225
      ],
      [
       50,
-      0.0726
+      0.0955
      ],
      [
       150,
-      0.0634
+      0.0821
      ],
      [
       500,
-      0.0565
+      0.0719
      ],
      [
       3000,
-      0.0433
+      0.0638
      ],
      [
       6000,
-      0.0405
+      0.0598
      ]
     ],
-    "describe": "-55℃~+125℃ 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-323(SC-70) Schottky Diodes ROHS"
-   }
-  ],
-  "LIS2MDL": [
+    "describe": "-65℃~+150℃ 1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-523-3 Schottky Diodes ROHS"
+   },
    {
-    "lcsc": "C9900275408",
-    "mpn": "LIS2MDL",
-    "maker": "JLCPCB Assembly",
-    "package": "LGA-12(2x2)",
-    "stock": 0,
+    "lcsc": "C232532",
+    "mpn": "BAT54CLT3G",
+    "maker": "onsemi",
+    "package": "SOT-23",
+    "stock": 7466,
     "library": "expand",
     "prices": [
      [
       1,
-      0.0398
+      0.049
      ],
      [
-      100,
-      0.0205
+      200,
+      0.0407
+     ],
+     [
+      600,
+      0.0359
+     ],
+     [
+      2000,
+      0.0331
+     ],
+     [
+      10000,
+      0.0308
+     ],
+     [
+      20000,
+      0.0295
      ]
     ],
-    "describe": "LGA-12(2x2) SMT ROHS"
-   },
+    "describe": "-55℃~+125℃ 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS"
+   }
+  ],
+  "LIS2MDL": [
    {
     "lcsc": "C919695",
     "mpn": "LIS2MDLTR",
@@ -4135,6 +4132,3723 @@
      ]
     ],
     "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 200uA I2C、SPI ±5mT ±5mT LGA-12(2x2) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900275408",
+    "mpn": "LIS2MDL",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-12(2x2)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-12(2x2) SMT ROHS"
+   }
+  ],
+  "QMC5883P": [
+   {
+    "lcsc": "C2847467",
+    "mpn": "QMC5883P",
+    "maker": "QST",
+    "package": "LGA-16(3x3)",
+    "stock": 5565,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.5493
+     ],
+     [
+      10,
+      1.3871
+     ],
+     [
+      30,
+      1.2348
+     ],
+     [
+      100,
+      1.1202
+     ],
+     [
+      500,
+      0.8631
+     ],
+     [
+      1000,
+      0.8402
+     ]
+    ],
+    "describe": "-40℃~+85℃ 16bit 2.5V~3.6V 35uA I2C ±3mT ±3mT LGA-16(3x3) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C46468678",
+    "mpn": "QMC5883P",
+    "maker": "QST Products, LLC",
+    "package": "LGA-16(3x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.6268
+     ],
+     [
+      10,
+      2.6268
+     ],
+     [
+      30,
+      2.6268
+     ],
+     [
+      200,
+      1.0481
+     ],
+     [
+      500,
+      1.0138
+     ],
+     [
+      1000,
+      0.9957
+     ]
+    ],
+    "describe": "LGA-16(3x3) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900046405",
+    "mpn": "QMC5883P-03",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-16",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16 New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C54443364",
+    "mpn": "QMC5883P-TR",
+    "maker": "QST",
+    "package": "LGA-16",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16 SMT ROHS"
+   },
+   {
+    "lcsc": "C9900046404",
+    "mpn": "QMC5883P-01Five",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-16",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16 New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900046402",
+    "mpn": "QMC5883P-AR2310106P.01Four",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-16",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16 New Arrivals ROHS"
+   }
+  ],
+  "MMC5603NJ": [
+   {
+    "lcsc": "C404328",
+    "mpn": "MMC5603NJ",
+    "maker": "MEMSIC",
+    "package": "WLP-4(0.8x0.8)",
+    "stock": 21894,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2886
+     ],
+     [
+      50,
+      0.2296
+     ],
+     [
+      150,
+      0.2044
+     ],
+     [
+      500,
+      0.1684
+     ],
+     [
+      2500,
+      0.1543
+     ],
+     [
+      5000,
+      0.146
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.62V~3.6V 20bit 750uA、1.3mA、2.4mA、3.4mA I2C ±3mT ±3mT WLP-4(0.8x0.8) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900157564",
+    "mpn": "MMC5603NJ",
+    "maker": "JLCPCB Assembly",
+    "package": "WLP-4",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "WLP-4 New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C17213384",
+    "mpn": "MMC5603NJ-B",
+    "maker": "MEMSIC",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      25.3803
+     ],
+     [
+      10,
+      25.3803
+     ],
+     [
+      12,
+      25.3803
+     ],
+     [
+      200,
+      10.1272
+     ],
+     [
+      500,
+      9.7883
+     ],
+     [
+      1000,
+      9.6212
+     ]
+    ],
+    "describe": "- Specialized Sensors ROHS"
+   }
+  ],
+  "LIS3MDLTR": [
+   {
+    "lcsc": "C478483",
+    "mpn": "LIS3MDLTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-12(2x2)",
+    "stock": 1409,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      3.7683
+     ],
+     [
+      10,
+      3.5799
+     ],
+     [
+      30,
+      3.4669
+     ],
+     [
+      100,
+      3.3523
+     ],
+     [
+      500,
+      3.2999
+     ],
+     [
+      1000,
+      3.277
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.9V~3.6V 16bit 1uA、40uA、270uA I2C、SPI ±1.6mT、±1.2mT、±8Gs、±4Gs ±1.6mT、±1.2mT、±8Gs、±4Gs LGA-12(2x2) 3D Magnetic Sensors ROHS"
+   }
+  ],
+  "BMM150": [
+   {
+    "lcsc": "C171681",
+    "mpn": "BMM150",
+    "maker": "Bosch Sensortec",
+    "package": "WLCSP-12(1.6x1.6)",
+    "stock": 19676,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.2987
+     ],
+     [
+      10,
+      1.0924
+     ],
+     [
+      30,
+      0.9794
+     ],
+     [
+      100,
+      0.85
+     ],
+     [
+      500,
+      0.7141
+     ],
+     [
+      1000,
+      0.6879
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.62V~3.6V I2C、SPI ±1.3mT ±2.5mT WLCSP-12(1.6x1.6) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900070127",
+    "mpn": "BST-BMM150",
+    "maker": "JLCPCB Assembly",
+    "package": "BGA12",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "BGA12 New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C17617724",
+    "mpn": "SHUTTLE BOARD 3.0 BMM150",
+    "maker": "Bosch Sensortec",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      32.3321
+     ],
+     [
+      10,
+      32.3321
+     ],
+     [
+      30,
+      32.3321
+     ],
+     [
+      200,
+      12.9014
+     ],
+     [
+      500,
+      12.4707
+     ],
+     [
+      1000,
+      12.2562
+     ]
+    ],
+    "describe": "Interrupt output SPI、I2C - Specialized Sensors ROHS"
+   }
+  ],
+  "MMC5983MA": [
+   {
+    "lcsc": "C404329",
+    "mpn": "MMC5983MA",
+    "maker": "MEMSIC",
+    "package": "LGA-16(3x3)",
+    "stock": 7710,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.9914
+     ],
+     [
+      10,
+      1.7507
+     ],
+     [
+      30,
+      1.582
+     ],
+     [
+      100,
+      1.4264
+     ],
+     [
+      500,
+      1.3331
+     ],
+     [
+      1000,
+      1.3036
+     ]
+    ],
+    "describe": "-40℃~+105℃ 18bit 2.8V~3.6V 450uA I2C、SPI ±8Gs ±8Gs LGA-16(3x3) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C17241892",
+    "mpn": "MMC5983MA-B",
+    "maker": "MEMSIC",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      25.3803
+     ],
+     [
+      10,
+      25.3803
+     ],
+     [
+      12,
+      25.3803
+     ],
+     [
+      200,
+      10.1272
+     ],
+     [
+      500,
+      9.7883
+     ],
+     [
+      1000,
+      9.6212
+     ]
+    ],
+    "describe": "- Specialized Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900294696",
+    "mpn": "MMC5983MA-E",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-16(3x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16(3x3) SMT ROHS"
+   }
+  ],
+  "1N4148W": [
+   {
+    "lcsc": "C81598",
+    "mpn": "1N4148W",
+    "maker": "ST(Semtech)",
+    "package": "SOD-123",
+    "stock": 3850297,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0124
+     ],
+     [
+      500,
+      0.0098
+     ],
+     [
+      3000,
+      0.0075
+     ],
+     [
+      6000,
+      0.0066
+     ],
+     [
+      24000,
+      0.0063
+     ],
+     [
+      51000,
+      0.006
+     ]
+    ],
+    "describe": "150mA 1A 1V@50mA 1uA@75V 400mW 4ns 75V Independent SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C84367",
+    "mpn": "1N4148W",
+    "maker": "MDD(Microdiode Semiconductor)",
+    "package": "SOD-123",
+    "stock": 1568154,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0103
+     ],
+     [
+      500,
+      0.0088
+     ],
+     [
+      3000,
+      0.0053
+     ],
+     [
+      6000,
+      0.0048
+     ],
+     [
+      24000,
+      0.0044
+     ],
+     [
+      51000,
+      0.0042
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1.25V@150mA 100V 150mA 25nA@20V 400mW 4ns Independent SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C2099",
+    "mpn": "1N4148W",
+    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "package": "SOD-123",
+    "stock": 1036390,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0108
+     ],
+     [
+      500,
+      0.0084
+     ],
+     [
+      3000,
+      0.0074
+     ],
+     [
+      6000,
+      0.0066
+     ],
+     [
+      24000,
+      0.0062
+     ],
+     [
+      51000,
+      0.006
+     ]
+    ],
+    "describe": "1.25V@150mA 100V 150mA 1uA@75V 2A 4ns 500mW Standalone SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C117823",
+    "mpn": "1N4148W-HE3-08",
+    "maker": "Vishay Intertech",
+    "package": "SOD-123",
+    "stock": 344721,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0364
+     ],
+     [
+      200,
+      0.0281
+     ],
+     [
+      600,
+      0.0235
+     ],
+     [
+      3000,
+      0.0207
+     ],
+     [
+      9000,
+      0.0182
+     ],
+     [
+      21000,
+      0.0171
+     ]
+    ],
+    "describe": "1 Independent 1.2V@100mA 100uA@100V 150mA 2A 350mW 4ns 75V SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C181134",
+    "mpn": "1N4148W-T4",
+    "maker": "Guangdong Hottech",
+    "package": "SOD-123",
+    "stock": 334108,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0067
+     ],
+     [
+      50,
+      0.0059
+     ],
+     [
+      150,
+      0.0055
+     ],
+     [
+      500,
+      0.0053
+     ],
+     [
+      3000,
+      0.0046
+     ],
+     [
+      6000,
+      0.0045
+     ]
+    ],
+    "describe": "1.25V@150mA 150mA 1uA@75V 2A 4ns 500mW 75V Standalone SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C109203",
+    "mpn": "1N4148W",
+    "maker": "Shikues",
+    "package": "SOD-123",
+    "stock": 326284,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0117
+     ],
+     [
+      500,
+      0.0095
+     ],
+     [
+      3000,
+      0.0072
+     ],
+     [
+      6000,
+      0.0065
+     ],
+     [
+      24000,
+      0.0059
+     ],
+     [
+      51000,
+      0.0055
+     ]
+    ],
+    "describe": "1.25V@150mA 150mA 1uA@75V 2A 4ns 500mW 75V Independent SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C77978",
+    "mpn": "1N4148W-TP",
+    "maker": "MCC(Micro Commercial Components)",
+    "package": "SOD-123",
+    "stock": 149497,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0127
+     ],
+     [
+      500,
+      0.0105
+     ],
+     [
+      3000,
+      0.0072
+     ],
+     [
+      6000,
+      0.0065
+     ],
+     [
+      24000,
+      0.0058
+     ],
+     [
+      51000,
+      0.0055
+     ]
+    ],
+    "describe": "-65℃~+150℃@(Tj) 1.25V@150mA 100V 150mA 1uA@75V 2A 400mW 4ns SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C78740",
+    "mpn": "1N4148WX-TP",
+    "maker": "MCC(Micro Commercial Components)",
+    "package": "SOD-323",
+    "stock": 145407,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0106
+     ],
+     [
+      500,
+      0.0084
+     ],
+     [
+      3000,
+      0.0068
+     ],
+     [
+      6000,
+      0.006
+     ],
+     [
+      24000,
+      0.0053
+     ],
+     [
+      51000,
+      0.005
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 Independent 150mA 1V@50mA 1uA@75V 200mW 2A 4ns 75V SOD-323 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C388533",
+    "mpn": "1N4148W",
+    "maker": "Yangzhou Yangjie Elec Tech",
+    "package": "SOD-123",
+    "stock": 127123,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0179
+     ],
+     [
+      500,
+      0.0142
+     ],
+     [
+      3000,
+      0.0116
+     ],
+     [
+      6000,
+      0.0103
+     ],
+     [
+      24000,
+      0.0093
+     ],
+     [
+      51000,
+      0.0087
+     ]
+    ],
+    "describe": "-65℃~+150℃@(Tj) 1.25V@100mA 150mA 1uA@75V 2A 400mW 4ns 75V Independent SOD-123 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C391324",
+    "mpn": "1N4148W_R1_00001",
+    "maker": "PANJIT International",
+    "package": "SOD-123",
+    "stock": 109240,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0146
+     ],
+     [
+      500,
+      0.0115
+     ],
+     [
+      3000,
+      0.0098
+     ],
+     [
+      6000,
+      0.0087
+     ],
+     [
+      24000,
+      0.0078
+     ],
+     [
+      51000,
+      0.0073
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 Independent 1.25V@150mA 2.5uA@75V 200mA 410mW 4A 4ns 75V SOD-123 Switching Diodes ROHS"
+   }
+  ],
+  "BAV70": [
+   {
+    "lcsc": "C68978",
+    "mpn": "BAV70",
+    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "package": "SOT-23",
+    "stock": 637914,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0152
+     ],
+     [
+      500,
+      0.0117
+     ],
+     [
+      3000,
+      0.0101
+     ],
+     [
+      6000,
+      0.0089
+     ],
+     [
+      24000,
+      0.0085
+     ],
+     [
+      51000,
+      0.0081
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 Pair Common Cathode 1.25V@150mA 2.5uA@70V 200mA 225mW 2A 6ns 70V SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C2501",
+    "mpn": "BAV70,215",
+    "maker": "Nexperia",
+    "package": "SOT-23",
+    "stock": 1437757,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0114
+     ],
+     [
+      500,
+      0.0085
+     ],
+     [
+      3000,
+      0.0072
+     ],
+     [
+      6000,
+      0.0063
+     ],
+     [
+      24000,
+      0.0059
+     ],
+     [
+      51000,
+      0.0056
+     ]
+    ],
+    "describe": "1 Pair Common Cathode 1.25V@150mA 100V 215mA 250mW 4A 4ns 500nA@80V SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C82479",
+    "mpn": "BAV70LT1G",
+    "maker": "onsemi",
+    "package": "SOT-23",
+    "stock": 827338,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0132
+     ],
+     [
+      200,
+      0.0113
+     ],
+     [
+      600,
+      0.0103
+     ],
+     [
+      3000,
+      0.0097
+     ],
+     [
+      9000,
+      0.0092
+     ],
+     [
+      21000,
+      0.0089
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 Pair Common Cathode 1.25V@150mA 100V 1uA@100V 200mA 225mW 6ns SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C78729",
+    "mpn": "LBAV70LT1G",
+    "maker": "LRC",
+    "package": "SOT-23",
+    "stock": 209351,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0197
+     ],
+     [
+      500,
+      0.0152
+     ],
+     [
+      3000,
+      0.0122
+     ],
+     [
+      6000,
+      0.0108
+     ],
+     [
+      24000,
+      0.0095
+     ],
+     [
+      51000,
+      0.0088
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 Pair Common Cathode 1.25V 100V 2.5uA 200mA 225mW 6ns SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C232586",
+    "mpn": "BAV70TT1G",
+    "maker": "onsemi",
+    "package": "SC-75",
+    "stock": 131702,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0747
+     ],
+     [
+      100,
+      0.0616
+     ],
+     [
+      300,
+      0.0551
+     ],
+     [
+      3000,
+      0.0353
+     ],
+     [
+      6000,
+      0.0313
+     ],
+     [
+      9000,
+      0.0294
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 Pair Common Cathode 1.25V@150mA 100V 1uA@100V 200mA 500mA 6ns SC-75 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C28064",
+    "mpn": "BAV70W,115",
+    "maker": "Nexperia",
+    "package": "SOT-323-3",
+    "stock": 40749,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0264
+     ],
+     [
+      200,
+      0.0204
+     ],
+     [
+      600,
+      0.0169
+     ],
+     [
+      3000,
+      0.015
+     ],
+     [
+      9000,
+      0.0132
+     ],
+     [
+      21000,
+      0.0123
+     ]
+    ],
+    "describe": "1 Pair Common Cathode 1.25V@150mA 100V 175mA 200mW 4A 4ns 500nA@80V SOT-323-3 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C181110",
+    "mpn": "BAV70",
+    "maker": "Guangdong Hottech",
+    "package": "SOT-23",
+    "stock": 36342,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0109
+     ],
+     [
+      500,
+      0.0084
+     ],
+     [
+      3000,
+      0.0078
+     ],
+     [
+      6000,
+      0.007
+     ],
+     [
+      24000,
+      0.0063
+     ],
+     [
+      51000,
+      0.0059
+     ]
+    ],
+    "describe": "1 Pair Common Cathode 1.25V@150mA 2.5uA@70V 200mA 225mW 500mA 6ns 70V SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C266591",
+    "mpn": "BAV70",
+    "maker": "BORN",
+    "package": "SOT-23",
+    "stock": 12954,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0176
+     ],
+     [
+      500,
+      0.0136
+     ],
+     [
+      3000,
+      0.0114
+     ],
+     [
+      6000,
+      0.0101
+     ],
+     [
+      24000,
+      0.0089
+     ],
+     [
+      51000,
+      0.0083
+     ]
+    ],
+    "describe": "1 Pair Common Cathode 1.25V@150mA 2.5uA@70V 200mA 225mW 500mA 6ns 70V SOT-23 Switching Diodes ROHS"
+   },
+   {
+    "lcsc": "C154830",
+    "mpn": "SBAV70LT1G",
+    "maker": "onsemi",
+    "package": "SOT-23",
+    "stock": 8418,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0408
+     ],
+     [
+      200,
+      0.0321
+     ],
+     [
+      600,
+      0.0276
+     ],
+     [
+      3000,
+      0.0246
+     ],
+     [
+      9000,
+      0.0222
+     ],
+     [
+      21000,
+      0.0208
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 Pair Common Cathode 1.25V@150mA 100V 1uA@100V 200mA SOT-23 Diodes - General Purpose ROHS"
+   },
+   {
+    "lcsc": "C93031",
+    "mpn": "BAV70WT1G",
+    "maker": "onsemi",
+    "package": "SOT-323-3",
+    "stock": 6690,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0351
+     ],
+     [
+      200,
+      0.0269
+     ],
+     [
+      600,
+      0.0225
+     ],
+     [
+      3000,
+      0.0199
+     ],
+     [
+      9000,
+      0.0176
+     ],
+     [
+      21000,
+      0.0163
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 Pair Common Cathode 1.25V@150mA 100V 1uA@100V 200mA 200mW 500mA 6ns SOT-323-3 Switching Diodes ROHS"
+   }
+  ],
+  "ME6211C33M5G-N": [
+   {
+    "lcsc": "C3021094",
+    "mpn": "TP6211C33M5G",
+    "maker": "TECH PUBLIC",
+    "package": "SOT-23-5",
+    "stock": 14381,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1342
+     ],
+     [
+      50,
+      0.1081
+     ],
+     [
+      150,
+      0.0952
+     ],
+     [
+      500,
+      0.0855
+     ],
+     [
+      3000,
+      0.0703
+     ],
+     [
+      6000,
+      0.0664
+     ]
+    ],
+    "describe": "-40℃~+125℃@(Tj) 1 180mV@(300mA) 2uA 3.3V 300mA 5.5V 80dB@(100Hz) Fixed Over Temperature Protection、Enable Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C82942",
+    "mpn": "ME6211C33M5G-N",
+    "maker": "MICRONE(Nanjing Micro One Elec)",
+    "package": "SOT-23-5",
+    "stock": 8098,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0629
+     ],
+     [
+      100,
+      0.0511
+     ],
+     [
+      300,
+      0.0449
+     ],
+     [
+      3000,
+      0.04
+     ],
+     [
+      6000,
+      0.0382
+     ],
+     [
+      9000,
+      0.0371
+     ]
+    ],
+    "describe": "-40℃~+150℃ 1 120mV@(100mA) 3.3V 500mA 50uVrms 60uA 6V 70dB@(1kHz) Fixed Over Current Protection、Enable、Short Circuit Protection Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   }
+  ],
+  "2.2nF C0G 0402": [
+   {
+    "lcsc": "C19290386",
+    "mpn": "C0402C0G1C040B",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0171
+     ],
+     [
+      500,
+      0.0171
+     ],
+     [
+      600,
+      0.0171
+     ],
+     [
+      10000,
+      0.0068
+     ],
+     [
+      25000,
+      0.0066
+     ],
+     [
+      50000,
+      0.0065
+     ]
+    ],
+    "describe": "16V 4pF C0G、NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19392877",
+    "mpn": "C1005C0G1H360J",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2861
+     ],
+     [
+      10,
+      0.2861
+     ],
+     [
+      12,
+      0.2861
+     ],
+     [
+      200,
+      0.1142
+     ],
+     [
+      500,
+      0.1104
+     ],
+     [
+      1000,
+      0.1085
+     ]
+    ],
+    "describe": "36pF 50V C0G、NP0 ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19478007",
+    "mpn": "C1005C0G1H2R2C",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0091
+     ],
+     [
+      10,
+      0.0091
+     ],
+     [
+      12,
+      0.0091
+     ],
+     [
+      200,
+      0.0037
+     ],
+     [
+      500,
+      0.0035
+     ],
+     [
+      1000,
+      0.0035
+     ]
+    ],
+    "describe": "2.2pF 50V C0G、NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19610005",
+    "mpn": "C1005C0G1H5R6C",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2861
+     ],
+     [
+      10,
+      0.2861
+     ],
+     [
+      12,
+      0.2861
+     ],
+     [
+      200,
+      0.1142
+     ],
+     [
+      500,
+      0.1104
+     ],
+     [
+      1000,
+      0.1085
+     ]
+    ],
+    "describe": "5.6pF 50V NP0、C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C20439907",
+    "mpn": "C1005C0G1H200J",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.287
+     ],
+     [
+      10,
+      0.287
+     ],
+     [
+      12,
+      0.287
+     ],
+     [
+      200,
+      0.1145
+     ],
+     [
+      500,
+      0.1108
+     ],
+     [
+      1000,
+      0.1088
+     ]
+    ],
+    "describe": "20pF 50V C0G、NP0 ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C20475058",
+    "mpn": "C0402C0G1C200G",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1026
+     ],
+     [
+      50,
+      0.1026
+     ],
+     [
+      60,
+      0.1026
+     ],
+     [
+      1000,
+      0.041
+     ],
+     [
+      2500,
+      0.0397
+     ],
+     [
+      5000,
+      0.039
+     ]
+    ],
+    "describe": "16V 20pF C0G、NP0 ±2% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19289500",
+    "mpn": "C1005C0G1H680J/50",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0038
+     ],
+     [
+      1000,
+      0.0038
+     ],
+     [
+      1200,
+      0.0038
+     ],
+     [
+      20000,
+      0.0016
+     ],
+     [
+      50000,
+      0.0015
+     ],
+     [
+      100000,
+      0.0015
+     ]
+    ],
+    "describe": "50V 68pF C0G、NP0 ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19426035",
+    "mpn": "C1005C0G1H101J/50",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0089
+     ],
+     [
+      10,
+      0.0089
+     ],
+     [
+      12,
+      0.0089
+     ],
+     [
+      200,
+      0.0036
+     ],
+     [
+      500,
+      0.0035
+     ],
+     [
+      1000,
+      0.0034
+     ]
+    ],
+    "describe": "100pF 50V NP0、C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19432651",
+    "mpn": "C1005C0G1H470J/50",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0089
+     ],
+     [
+      10,
+      0.0089
+     ],
+     [
+      12,
+      0.0089
+     ],
+     [
+      200,
+      0.0036
+     ],
+     [
+      500,
+      0.0035
+     ],
+     [
+      1000,
+      0.0034
+     ]
+    ],
+    "describe": "47pF 50V C0G、NP0 ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19456178",
+    "mpn": "C1005C0G1H221J/50",
+    "maker": "TDK",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0295
+     ],
+     [
+      200,
+      0.0295
+     ],
+     [
+      240,
+      0.0295
+     ],
+     [
+      4000,
+      0.0118
+     ],
+     [
+      10000,
+      0.0114
+     ],
+     [
+      20000,
+      0.0112
+     ]
+    ],
+    "describe": "220pF 50V C0G、NP0 ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "2.2nF C0G 0603": [
+   {
+    "lcsc": "C18255878",
+    "mpn": "CS1608C0G102J500NRB",
+    "maker": "Samwha Capacitor",
+    "package": "0603",
+    "stock": 9,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0039
+     ],
+     [
+      1000,
+      0.0029
+     ],
+     [
+      4000,
+      0.0024
+     ],
+     [
+      8000,
+      0.0021
+     ],
+     [
+      48000,
+      0.0019
+     ],
+     [
+      48200,
+      0.0019
+     ]
+    ],
+    "describe": "1nF 50V NP0 ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19540955",
+    "mpn": "C1608C0G1H131J",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3146
+     ],
+     [
+      10,
+      0.3146
+     ],
+     [
+      12,
+      0.3146
+     ],
+     [
+      200,
+      0.1257
+     ],
+     [
+      500,
+      0.1214
+     ],
+     [
+      1000,
+      0.1193
+     ]
+    ],
+    "describe": "130pF 50V NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19580465",
+    "mpn": "C1608C0G1H201J",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3146
+     ],
+     [
+      10,
+      0.3146
+     ],
+     [
+      12,
+      0.3146
+     ],
+     [
+      200,
+      0.1257
+     ],
+     [
+      500,
+      0.1214
+     ],
+     [
+      1000,
+      0.1193
+     ]
+    ],
+    "describe": "200pF 50V C0G、NP0 ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C20471277",
+    "mpn": "C1608C0G1H111J",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3156
+     ],
+     [
+      10,
+      0.3156
+     ],
+     [
+      12,
+      0.3156
+     ],
+     [
+      200,
+      0.126
+     ],
+     [
+      500,
+      0.1217
+     ],
+     [
+      1000,
+      0.1196
+     ]
+    ],
+    "describe": "110pF 50V NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C20472726",
+    "mpn": "C1608C0G1H6R8D",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.287
+     ],
+     [
+      10,
+      0.287
+     ],
+     [
+      12,
+      0.287
+     ],
+     [
+      200,
+      0.1145
+     ],
+     [
+      500,
+      0.1108
+     ],
+     [
+      1000,
+      0.1088
+     ]
+    ],
+    "describe": "50V 6.8pF NP0、C0G 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19277346",
+    "mpn": "C1608C0G1H180J/10",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0284
+     ],
+     [
+      10,
+      0.0284
+     ],
+     [
+      12,
+      0.0284
+     ],
+     [
+      200,
+      0.0114
+     ],
+     [
+      500,
+      0.011
+     ],
+     [
+      1000,
+      0.0108
+     ]
+    ],
+    "describe": "18pF 50V NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19309888",
+    "mpn": "C1608C0G1H561J/10",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0479
+     ],
+     [
+      10,
+      0.0479
+     ],
+     [
+      12,
+      0.0479
+     ],
+     [
+      200,
+      0.019
+     ],
+     [
+      500,
+      0.0186
+     ],
+     [
+      1000,
+      0.0182
+     ]
+    ],
+    "describe": "50V 560pF NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19327991",
+    "mpn": "C1608C0G1H101J/10",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0114
+     ],
+     [
+      500,
+      0.0114
+     ],
+     [
+      600,
+      0.0114
+     ],
+     [
+      10000,
+      0.0046
+     ],
+     [
+      25000,
+      0.0045
+     ],
+     [
+      50000,
+      0.0044
+     ]
+    ],
+    "describe": "100pF 50V NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19328019",
+    "mpn": "C1608C0G1H121J/10",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0281
+     ],
+     [
+      10,
+      0.0281
+     ],
+     [
+      12,
+      0.0281
+     ],
+     [
+      200,
+      0.0112
+     ],
+     [
+      500,
+      0.0109
+     ],
+     [
+      1000,
+      0.0107
+     ]
+    ],
+    "describe": "120pF 50V C0G、NP0 ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C19332296",
+    "mpn": "C1608C0G1H122J/10",
+    "maker": "TDK",
+    "package": "0603",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0754
+     ],
+     [
+      100,
+      0.0754
+     ],
+     [
+      120,
+      0.0754
+     ],
+     [
+      2000,
+      0.0302
+     ],
+     [
+      5000,
+      0.029
+     ],
+     [
+      10000,
+      0.0285
+     ]
+    ],
+    "describe": "1.2nF 50V NP0、C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "3.3kΩ 0402": [
+   {
+    "lcsc": "C25890",
+    "mpn": "0402WGF3301TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 1623358,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0036
+     ],
+     [
+      1000,
+      0.0027
+     ],
+     [
+      3000,
+      0.0022
+     ],
+     [
+      10000,
+      0.002
+     ],
+     [
+      50000,
+      0.0018
+     ],
+     [
+      50200,
+      0.0018
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C137992",
+    "mpn": "RC0402FR-073K3L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 1253430,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0034
+     ],
+     [
+      1000,
+      0.0026
+     ],
+     [
+      3000,
+      0.0022
+     ],
+     [
+      10000,
+      0.0021
+     ],
+     [
+      50000,
+      0.0017
+     ],
+     [
+      50200,
+      0.0017
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C140170",
+    "mpn": "RC-02K3301FT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0402",
+    "stock": 283719,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0023
+     ],
+     [
+      1000,
+      0.0017
+     ],
+     [
+      3000,
+      0.0015
+     ],
+     [
+      10000,
+      0.0013
+     ],
+     [
+      50000,
+      0.0012
+     ],
+     [
+      50200,
+      0.0012
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C137874",
+    "mpn": "RC0402JR-073K3L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 117923,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0026
+     ],
+     [
+      1000,
+      0.0021
+     ],
+     [
+      3000,
+      0.0018
+     ],
+     [
+      10000,
+      0.0017
+     ],
+     [
+      50000,
+      0.0015
+     ],
+     [
+      50200,
+      0.0015
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C25936",
+    "mpn": "0402WGJ0332TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 87477,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0009
+     ],
+     [
+      1000,
+      0.0007
+     ],
+     [
+      3000,
+      0.0006
+     ],
+     [
+      10000,
+      0.0006
+     ],
+     [
+      50000,
+      0.0005
+     ],
+     [
+      50200,
+      0.0005
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C334686",
+    "mpn": "WR04X3301FTL",
+    "maker": "Walsin Tech Corp",
+    "package": "0402",
+    "stock": 50155,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0016
+     ],
+     [
+      1000,
+      0.0012
+     ],
+     [
+      3000,
+      0.001
+     ],
+     [
+      10000,
+      0.001
+     ],
+     [
+      50000,
+      0.0007
+     ],
+     [
+      50200,
+      0.0007
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C227037",
+    "mpn": "AC0402FR-073K3L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 40605,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0022
+     ],
+     [
+      1000,
+      0.0018
+     ],
+     [
+      3000,
+      0.0016
+     ],
+     [
+      10000,
+      0.0015
+     ],
+     [
+      50000,
+      0.0013
+     ],
+     [
+      50200,
+      0.0013
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C276167",
+    "mpn": "RK73H1ETTP3301F",
+    "maker": "KOA Speer Elec",
+    "package": "0402",
+    "stock": 19853,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0047
+     ],
+     [
+      1000,
+      0.0038
+     ],
+     [
+      3000,
+      0.0034
+     ],
+     [
+      10000,
+      0.0026
+     ],
+     [
+      50000,
+      0.0023
+     ],
+     [
+      100000,
+      0.0021
+     ]
+    ],
+    "describe": "-55℃~+155℃ 100mW 3.3kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C407734",
+    "mpn": "0402WGD3301TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 10015,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0021
+     ],
+     [
+      1000,
+      0.0016
+     ],
+     [
+      3000,
+      0.0013
+     ],
+     [
+      10000,
+      0.0012
+     ],
+     [
+      50000,
+      0.001
+     ],
+     [
+      50200,
+      0.001
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±0.5% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C226713",
+    "mpn": "AC0402DR-073K3L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 9802,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0063
+     ],
+     [
+      1000,
+      0.005
+     ],
+     [
+      3000,
+      0.0043
+     ],
+     [
+      10000,
+      0.0036
+     ],
+     [
+      50000,
+      0.0033
+     ],
+     [
+      100000,
+      0.003
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±0.5% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "3.9kΩ 0402": [
+   {
+    "lcsc": "C131467",
+    "mpn": "RC0402FR-073K9L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 1780925,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0028
+     ],
+     [
+      1000,
+      0.0022
+     ],
+     [
+      3000,
+      0.0019
+     ],
+     [
+      10000,
+      0.0017
+     ],
+     [
+      50000,
+      0.0015
+     ],
+     [
+      50200,
+      0.0015
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C51721",
+    "mpn": "0402WGF3901TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 510405,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0012
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0007
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C163441",
+    "mpn": "RC0402JR-073K9L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 20020,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0022
+     ],
+     [
+      1000,
+      0.0019
+     ],
+     [
+      3000,
+      0.0018
+     ],
+     [
+      10000,
+      0.0017
+     ],
+     [
+      50000,
+      0.0016
+     ],
+     [
+      50200,
+      0.0016
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C11925",
+    "mpn": "0402WGJ0392TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 14213,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0008
+     ],
+     [
+      1000,
+      0.0008
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0008
+     ],
+     [
+      10200,
+      0.0008
+     ],
+     [
+      10400,
+      0.0008
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C413091",
+    "mpn": "ERJ2RKF3901X",
+    "maker": "PANASONIC",
+    "package": "0402",
+    "stock": 11404,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0061
+     ],
+     [
+      1000,
+      0.0053
+     ],
+     [
+      3000,
+      0.0048
+     ],
+     [
+      10000,
+      0.0041
+     ],
+     [
+      50000,
+      0.0038
+     ],
+     [
+      100000,
+      0.0037
+     ]
+    ],
+    "describe": "-55℃~+155℃ 100mW 3.9kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C186151",
+    "mpn": "RN73H1ETTP3901B25",
+    "maker": "KOA Speer Elec",
+    "package": "0402",
+    "stock": 10693,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2436
+     ],
+     [
+      50,
+      0.1933
+     ],
+     [
+      150,
+      0.1718
+     ],
+     [
+      500,
+      0.145
+     ],
+     [
+      2500,
+      0.133
+     ],
+     [
+      5000,
+      0.1258
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Metal Film Resistor ±0.1% ±25ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C144762",
+    "mpn": "AC0402FR-073K9L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 10013,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0027
+     ],
+     [
+      1000,
+      0.0021
+     ],
+     [
+      3000,
+      0.0018
+     ],
+     [
+      10000,
+      0.0017
+     ],
+     [
+      50000,
+      0.0015
+     ],
+     [
+      50200,
+      0.0015
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C278582",
+    "mpn": "ERJ2GEJ392X",
+    "maker": "PANASONIC",
+    "package": "0402",
+    "stock": 9684,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.005
+     ],
+     [
+      1000,
+      0.0041
+     ],
+     [
+      3000,
+      0.0036
+     ],
+     [
+      10000,
+      0.0029
+     ],
+     [
+      50000,
+      0.0027
+     ],
+     [
+      100000,
+      0.0025
+     ]
+    ],
+    "describe": "-55℃~+155℃ 100mW 3.9kΩ Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C324795",
+    "mpn": "RC-02K3901FT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0402",
+    "stock": 9620,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0013
+     ],
+     [
+      1000,
+      0.001
+     ],
+     [
+      3000,
+      0.0009
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C284546",
+    "mpn": "ARG02FTC3901",
+    "maker": "Viking Tech",
+    "package": "0402",
+    "stock": 9363,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0068
+     ],
+     [
+      1000,
+      0.0054
+     ],
+     [
+      3000,
+      0.0047
+     ],
+     [
+      10000,
+      0.0042
+     ],
+     [
+      50000,
+      0.0038
+     ],
+     [
+      100000,
+      0.0035
+     ]
+    ],
+    "describe": "-55℃~+155℃ 3.9kΩ 50V 62.5mW Thin Film Resistor ±1% ±25ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "4.7kΩ 0402": [
+   {
+    "lcsc": "C25900",
+    "mpn": "0402WGF4701TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 15194049,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.002
+     ],
+     [
+      1000,
+      0.0015
+     ],
+     [
+      3000,
+      0.0013
+     ],
+     [
+      10000,
+      0.0012
+     ],
+     [
+      50000,
+      0.001
+     ],
+     [
+      50200,
+      0.001
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C105871",
+    "mpn": "RC0402FR-074K7L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 9091299,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0024
+     ],
+     [
+      1000,
+      0.0019
+     ],
+     [
+      3000,
+      0.0016
+     ],
+     [
+      10000,
+      0.0015
+     ],
+     [
+      50000,
+      0.0013
+     ],
+     [
+      50200,
+      0.0013
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C140158",
+    "mpn": "RC-02K4701FT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0402",
+    "stock": 4630226,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0012
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C25940",
+    "mpn": "0402WGJ0472TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 3307720,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0011
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C105870",
+    "mpn": "RC0402JR-074K7L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 782434,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0011
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0008
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C174364",
+    "mpn": "AC0402FR-074K7L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 349232,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0016
+     ],
+     [
+      1000,
+      0.0013
+     ],
+     [
+      3000,
+      0.0012
+     ],
+     [
+      10000,
+      0.0011
+     ],
+     [
+      50000,
+      0.001
+     ],
+     [
+      50200,
+      0.001
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C159984",
+    "mpn": "RK73H1ETTP4701F",
+    "maker": "KOA Speer Elec",
+    "package": "0402",
+    "stock": 159416,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0041
+     ],
+     [
+      1000,
+      0.0032
+     ],
+     [
+      3000,
+      0.0028
+     ],
+     [
+      10000,
+      0.0021
+     ],
+     [
+      50000,
+      0.0018
+     ],
+     [
+      50200,
+      0.0018
+     ]
+    ],
+    "describe": "-55℃~+155℃ 100mW 4.7kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C144709",
+    "mpn": "AC0402JR-074K7L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 129076,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0023
+     ],
+     [
+      1000,
+      0.0019
+     ],
+     [
+      3000,
+      0.0018
+     ],
+     [
+      10000,
+      0.0017
+     ],
+     [
+      50000,
+      0.0015
+     ],
+     [
+      50200,
+      0.0015
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C174177",
+    "mpn": "RCT024K7JLF",
+    "maker": "HKR(Hong Kong Resistors)",
+    "package": "0402",
+    "stock": 104004,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0007
+     ],
+     [
+      1000,
+      0.0006
+     ],
+     [
+      3000,
+      0.0005
+     ],
+     [
+      10000,
+      0.0004
+     ],
+     [
+      50000,
+      0.0004
+     ],
+     [
+      50200,
+      0.0004
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C103055",
+    "mpn": "RTT024701FTH",
+    "maker": "RALEC",
+    "package": "0402",
+    "stock": 79433,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0023
+     ],
+     [
+      1000,
+      0.0019
+     ],
+     [
+      3000,
+      0.0016
+     ],
+     [
+      10000,
+      0.0015
+     ],
+     [
+      50000,
+      0.0012
+     ],
+     [
+      50200,
+      0.0012
+     ]
+    ],
+    "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "2.2MΩ 0402": [
+   {
+    "lcsc": "C274901",
+    "mpn": "RC0402JR-072M2L",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 68567,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0015
+     ],
+     [
+      1000,
+      0.0012
+     ],
+     [
+      3000,
+      0.001
+     ],
+     [
+      10000,
+      0.001
+     ],
+     [
+      50000,
+      0.0009
+     ],
+     [
+      50200,
+      0.0009
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C172168",
+    "mpn": "WR04X225JTL",
+    "maker": "Walsin Tech Corp",
+    "package": "0402",
+    "stock": 19984,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0025
+     ],
+     [
+      1000,
+      0.002
+     ],
+     [
+      3000,
+      0.0017
+     ],
+     [
+      10000,
+      0.0014
+     ],
+     [
+      50000,
+      0.0012
+     ],
+     [
+      50200,
+      0.0012
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C11490",
+    "mpn": "0402WGF2204TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 18437,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.001
+     ],
+     [
+      1000,
+      0.0008
+     ],
+     [
+      3000,
+      0.0007
+     ],
+     [
+      10000,
+      0.0006
+     ],
+     [
+      50000,
+      0.0005
+     ],
+     [
+      50200,
+      0.0005
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C100617",
+    "mpn": "CR0402JF0225G",
+    "maker": "LIZ Elec",
+    "package": "0402",
+    "stock": 10274,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0037
+     ],
+     [
+      1000,
+      0.0029
+     ],
+     [
+      3000,
+      0.0024
+     ],
+     [
+      10000,
+      0.0022
+     ],
+     [
+      50000,
+      0.0017
+     ],
+     [
+      50200,
+      0.0017
+     ]
+    ],
+    "describe": "-55℃~+125℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C102902",
+    "mpn": "RTT02225JTH",
+    "maker": "RALEC",
+    "package": "0402",
+    "stock": 10020,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.001
+     ],
+     [
+      1000,
+      0.0008
+     ],
+     [
+      3000,
+      0.0007
+     ],
+     [
+      10000,
+      0.0006
+     ],
+     [
+      50000,
+      0.0005
+     ],
+     [
+      50200,
+      0.0005
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C482136",
+    "mpn": "CRCW04022M20FKED",
+    "maker": "Vishay Intertech",
+    "package": "0402",
+    "stock": 9547,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0129
+     ],
+     [
+      500,
+      0.0105
+     ],
+     [
+      1500,
+      0.0091
+     ],
+     [
+      10000,
+      0.0083
+     ],
+     [
+      20000,
+      0.0076
+     ],
+     [
+      50000,
+      0.0072
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C2906413",
+    "mpn": "0402 ±1% 2M2",
+    "maker": "VO",
+    "package": "0402",
+    "stock": 8880,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0014
+     ],
+     [
+      1000,
+      0.0011
+     ],
+     [
+      3000,
+      0.0009
+     ],
+     [
+      10000,
+      0.0008
+     ],
+     [
+      50000,
+      0.0007
+     ],
+     [
+      50200,
+      0.0007
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C170262",
+    "mpn": "WR04W2204FTL",
+    "maker": "Walsin Tech Corp",
+    "package": "0402",
+    "stock": 8678,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.002
+     ],
+     [
+      1000,
+      0.0016
+     ],
+     [
+      3000,
+      0.0013
+     ],
+     [
+      10000,
+      0.0012
+     ],
+     [
+      50000,
+      0.001
+     ],
+     [
+      50200,
+      0.001
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C321148",
+    "mpn": "RC-02U2204FT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0402",
+    "stock": 7322,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0012
+     ],
+     [
+      1000,
+      0.001
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2.2MΩ 50V 62.5mW Thick Film Resistor ±1% ±400ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C2773838",
+    "mpn": "HP02WAF2204TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 7271,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0028
+     ],
+     [
+      1000,
+      0.0021
+     ],
+     [
+      3000,
+      0.0018
+     ],
+     [
+      10000,
+      0.0016
+     ],
+     [
+      50000,
+      0.0014
+     ],
+     [
+      50200,
+      0.0014
+     ]
+    ],
+    "describe": "-55℃~+155℃ 100mW 2.2MΩ 50V Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "220nF 0402": [
+   {
+    "lcsc": "C16772",
+    "mpn": "CL05B224KO5NNNC",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "0402",
+    "stock": 1337716,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0047
+     ],
+     [
+      500,
+      0.0036
+     ],
+     [
+      1500,
+      0.0031
+     ],
+     [
+      10000,
+      0.0027
+     ],
+     [
+      20000,
+      0.0025
+     ],
+     [
+      50000,
+      0.0024
+     ]
+    ],
+    "describe": "16V 220nF X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C126524",
+    "mpn": "GCM155R71C224KE02D",
+    "maker": "Murata Electronics",
+    "package": "0402",
+    "stock": 175945,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0195
+     ],
+     [
+      500,
+      0.0158
+     ],
+     [
+      1500,
+      0.0137
+     ],
+     [
+      10000,
+      0.0124
+     ],
+     [
+      20000,
+      0.0113
+     ],
+     [
+      50000,
+      0.0107
+     ]
+    ],
+    "describe": "16V 220nF X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C106257",
+    "mpn": "CC0402KRX5R6BB224",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 130772,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0086
+     ],
+     [
+      500,
+      0.0068
+     ],
+     [
+      1500,
+      0.0058
+     ],
+     [
+      10000,
+      0.0052
+     ],
+     [
+      20000,
+      0.0047
+     ],
+     [
+      50000,
+      0.0044
+     ]
+    ],
+    "describe": "10V 220nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C106258",
+    "mpn": "CC0402KRX5R7BB224",
+    "maker": "YAGEO",
+    "package": "0402",
+    "stock": 120188,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0063
+     ],
+     [
+      1000,
+      0.005
+     ],
+     [
+      3000,
+      0.0043
+     ],
+     [
+      10000,
+      0.0038
+     ],
+     [
+      50000,
+      0.0035
+     ],
+     [
+      100000,
+      0.0032
+     ]
+    ],
+    "describe": "16V 220nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C160829",
+    "mpn": "CL05A224KP5NNNC",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "0402",
+    "stock": 45388,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0144
+     ],
+     [
+      500,
+      0.012
+     ],
+     [
+      1500,
+      0.0106
+     ],
+     [
+      10000,
+      0.0095
+     ],
+     [
+      20000,
+      0.0088
+     ],
+     [
+      50000,
+      0.0085
+     ]
+    ],
+    "describe": "10V 220nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C77001",
+    "mpn": "GRM155R61A224KE19D",
+    "maker": "Murata Electronics",
+    "package": "0402",
+    "stock": 29763,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.015
+     ],
+     [
+      500,
+      0.0124
+     ],
+     [
+      1500,
+      0.0109
+     ],
+     [
+      10000,
+      0.0091
+     ],
+     [
+      20000,
+      0.0083
+     ],
+     [
+      50000,
+      0.0079
+     ]
+    ],
+    "describe": "10V 220nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C152777",
+    "mpn": "0402X224K160CT",
+    "maker": "Walsin Tech Corp",
+    "package": "0402",
+    "stock": 16718,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0057
+     ],
+     [
+      500,
+      0.0045
+     ],
+     [
+      1500,
+      0.0039
+     ],
+     [
+      10000,
+      0.0036
+     ],
+     [
+      20000,
+      0.0032
+     ],
+     [
+      50000,
+      0.003
+     ]
+    ],
+    "describe": "16V 220nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C77011",
+    "mpn": "GRM155R71C224KA12D",
+    "maker": "Murata Electronics",
+    "package": "0402",
+    "stock": 16646,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0195
+     ],
+     [
+      500,
+      0.0162
+     ],
+     [
+      1500,
+      0.0143
+     ],
+     [
+      10000,
+      0.0129
+     ],
+     [
+      20000,
+      0.0119
+     ],
+     [
+      50000,
+      0.0113
+     ]
+    ],
+    "describe": "16V 220nF X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C162163",
+    "mpn": "GRM155C81E224KE01D",
+    "maker": "Murata Electronics",
+    "package": "0402",
+    "stock": 9954,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0225
+     ],
+     [
+      200,
+      0.0177
+     ],
+     [
+      600,
+      0.0151
+     ],
+     [
+      2000,
+      0.0135
+     ],
+     [
+      10000,
+      0.0117
+     ],
+     [
+      20000,
+      0.011
+     ]
+    ],
+    "describe": "220nF 25V X6S ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C123456",
+    "mpn": "0402F224Z100CT",
+    "maker": "Walsin Tech Corp",
+    "package": "0402",
+    "stock": 5922,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0073
+     ],
+     [
+      1000,
+      0.0056
+     ],
+     [
+      3000,
+      0.0047
+     ],
+     [
+      10000,
+      0.0042
+     ],
+     [
+      50000,
+      0.0037
+     ],
+     [
+      100000,
+      0.0034
+     ]
+    ],
+    "describe": "-20%~+80% 10V 220nF Y5V 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
    }
   ]
  }
