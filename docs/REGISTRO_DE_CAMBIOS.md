@@ -957,7 +957,7 @@ ZED seguía en el reposo de la 3.10.7, que solo despierta por EXTINT o quitando 
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-29 — BACK 3.11.0 — ZED alimentado por un Pololu S7V8F3 con SHDN en GPIO6
-**Autor:** Claude · Rama `feature/avo-wifi-sync`
+**Autor:** Claude · Rama `feature/avo-wifi-sync` · **Commits:** `01f3fcf` · **CI:** [40794217810](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40794217810) (éxito)
 **Qué cambia:** GPIO6 pasa de EXTINT del ZED a SHDN del regulador S7V8F3 (batería → 3,3 V del ZED): LOW al arrancar y al
 dormir (fijado) y en modo carga, HIGH al encender el ZED. Sin pulso EXTINT. `AVO_REED_SLEEP 1` (vuelve el sueño con el reed).
 La orden PMREQ se mantiene antes del corte (compatibilidad con el ZED en 3V3).
