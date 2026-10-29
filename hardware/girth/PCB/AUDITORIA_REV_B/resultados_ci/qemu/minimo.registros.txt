@@ -58,7 +58,7 @@ CPU#0
  mstatush 00000000
  hstatus  00000000
  vsstatus 00000000
- mip      00000000
+ mip      00000800
  mie      00000eee
  mideleg  00001444
  hideleg  00000000

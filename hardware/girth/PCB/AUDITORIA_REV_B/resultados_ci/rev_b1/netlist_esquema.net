@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/k/AVO_GIRTH_PCB.kicad_sch")
-    (date "2026-10-29T20:48:52+0000")
+    (date "2026-10-29T21:09:18+0000")
     (tool "Eeschema 9.0.9")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -569,13 +569,13 @@
       (value "470n")
       (footprint "AVO:C_0402_1005Metric")
       (fields
-        (field (name "LCSC") "C1543")
+        (field (name "LCSC") "C47339")
         (field (name "MPN"))
         (field (name "Footprint") "AVO:C_0402_1005Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "AVO") (part "C_avo") (description ""))
-      (property (name "LCSC") (value "C1543"))
+      (property (name "LCSC") (value "C47339"))
       (property (name "MPN") (value ""))
       (property (name "Sheetname") (value ""))
       (property (name "Sheetfile") (value "AVO_GIRTH_PCB.kicad_sch"))

@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-29 21:01 UTC",
+ "date_utc": "2026-10-29 21:22 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21913835,
+   "stock": 21913648,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 948141,
+   "stock": 948112,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6251429,
+   "stock": 6251379,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 32001184,
+   "stock": 32000614,
    "library": "base",
    "prices": [
     [
@@ -211,41 +211,6 @@
     ]
    ],
    "describe": "22nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
-  },
-  "C1543": {
-   "lcsc": "C1543",
-   "mpn": "0402B821K500NT",
-   "maker": "FH (Guangdong Fenghua Advanced Tech)",
-   "package": "0402",
-   "stock": 4787,
-   "library": "expand",
-   "prices": [
-    [
-     1,
-     0.0027
-    ],
-    [
-     1000,
-     0.0021
-    ],
-    [
-     3000,
-     0.0018
-    ],
-    [
-     10000,
-     0.0015
-    ],
-    [
-     50000,
-     0.0013
-    ],
-    [
-     50200,
-     0.0013
-    ]
-   ],
-   "describe": "50V 820pF X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
   "C160402": {
    "lcsc": "C160402",
@@ -322,7 +287,7 @@
    "mpn": "TYPE-C-31-M-12",
    "maker": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 288668,
+   "stock": 288639,
    "library": "expand",
    "prices": [
     [
@@ -357,7 +322,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 12133173,
+   "stock": 12133068,
    "library": "base",
    "prices": [
     [
@@ -392,7 +357,7 @@
    "mpn": "AO3400A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1146669,
+   "stock": 1146646,
    "library": "base",
    "prices": [
     [
@@ -427,7 +392,7 @@
    "mpn": "GRM31M5C1H473JA01L",
    "maker": "Murata Electronics",
    "package": "1206",
-   "stock": 66831,
+   "stock": 66820,
    "library": "expand",
    "prices": [
     [
@@ -462,7 +427,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7353771,
+   "stock": 7353506,
    "library": "base",
    "prices": [
     [
@@ -567,7 +532,7 @@
    "mpn": "0402WGF2200TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2042322,
+   "stock": 2042297,
    "library": "base",
    "prices": [
     [
@@ -602,7 +567,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2992728,
+   "stock": 2992541,
    "library": "base",
    "prices": [
     [
@@ -637,7 +602,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2205796,
+   "stock": 2205741,
    "library": "base",
    "prices": [
     [
@@ -672,7 +637,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8551383,
+   "stock": 8551229,
    "library": "base",
    "prices": [
     [
@@ -707,7 +672,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 17198368,
+   "stock": 17197979,
    "library": "base",
    "prices": [
     [
@@ -742,7 +707,7 @@
    "mpn": "0402WGF2002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2906285,
+   "stock": 2906265,
    "library": "base",
    "prices": [
     [
@@ -777,7 +742,7 @@
    "mpn": "0402WGF3301TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1624022,
+   "stock": 1624002,
    "library": "base",
    "prices": [
     [
@@ -812,7 +777,7 @@
    "mpn": "0402WGF4701TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15211636,
+   "stock": 15211396,
    "library": "base",
    "prices": [
     [
@@ -847,7 +812,7 @@
    "mpn": "0402WGF5101TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3830763,
+   "stock": 3830693,
    "library": "base",
    "prices": [
     [
@@ -917,7 +882,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3011778,
+   "stock": 3011728,
    "library": "base",
    "prices": [
     [
@@ -1022,7 +987,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3826239,
+   "stock": 3826102,
    "library": "base",
    "prices": [
     [
@@ -1051,6 +1016,41 @@
     ]
    ],
    "describe": "22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C47339": {
+   "lcsc": "C47339",
+   "mpn": "CL05A474KP5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 700175,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0127
+    ],
+    [
+     500,
+     0.0097
+    ],
+    [
+     1500,
+     0.008
+    ],
+    [
+     10000,
+     0.0067
+    ],
+    [
+     20000,
+     0.0058
+    ],
+    [
+     50000,
+     0.0054
+    ]
+   ],
+   "describe": "10V 470nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
   "C51795": {
    "lcsc": "C51795",
@@ -1092,7 +1092,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10458963,
+   "stock": 10458888,
    "library": "base",
    "prices": [
     [
@@ -1197,7 +1197,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 37110,
+   "stock": 37104,
    "library": "expand",
    "prices": [
     [
@@ -1302,7 +1302,7 @@
    "mpn": "2N7002",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOT-23",
-   "stock": 3088357,
+   "stock": 3088242,
    "library": "base",
    "prices": [
     [
@@ -1436,6 +1436,41 @@
     ]
    ],
    "describe": "100nF 50V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C92361": {
+   "lcsc": "C92361",
+   "mpn": "CL05A474KA5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 176020,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0194
+    ],
+    [
+     100,
+     0.0158
+    ],
+    [
+     300,
+     0.0137
+    ],
+    [
+     1000,
+     0.0125
+    ],
+    [
+     5000,
+     0.0115
+    ],
+    [
+     10000,
+     0.0103
+    ]
+   ],
+   "describe": "25V 470nF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   }
  },
  "search": {}
