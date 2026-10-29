@@ -100,7 +100,7 @@ jobs:
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           git add hardware/girth/PCB/out hardware/girth/PCB/kicad
           git commit -m "PCB cincha: DRC/ERC, Gerber y renders de KiCad 9 [skip ci]" || echo "sin cambios"
-          git pull --rebase && git push
+          git pull --rebase -X theirs origin ${{ github.ref_name }} && git push
       - uses: actions/upload-artifact@v4
         with:
           name: AVO-GIRTH-PCB-JLCPCB
