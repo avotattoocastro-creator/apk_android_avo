@@ -1,17 +1,17 @@
 # AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `968fe800d0714f351433ae243bdafe6cb4588774` · ejecución de CI: 40901107590
+- Commit: `01f8093615fe34df7d3c73181d172dfeabb763fb` · ejecución de CI: 40901729893
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
 - Componentes: 94 en total, 81 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
-- Pistas: 848 · vías: 143 · ruteado INCOMPLETO (4 conexiones)
+- Pistas: 875 · vías: 144 · ruteado INCOMPLETO (3 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 4 |
+| DRC: conexiones incompletas | **FALLA** | 3 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,9 +19,8 @@
 
 
 ### Conexiones incompletas
-- Track [+3V3] on In2.Cu, length 10.2474 mm ↔ Track [+3V3] on F.Cu, length 1.1000 mm
 - Pad 2 [QI_AC1] of C1 on F.Cu ↔ Track [QI_AC1] on F.Cu, length 1.2374 mm
-- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Track [QI_ADEN] on F.Cu, length 0.7017 mm
+- Pad 8 [QI_ADEN] of U1 on F.Cu ↔ Pad 1 [QI_ADEN] of Q1 on F.Cu
 - Pad 12 [QI_ILIM] of U1 on F.Cu ↔ Pad 1 [QI_ILIM] of R1 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)

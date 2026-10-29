@@ -1673,7 +1673,7 @@
       (pins U2-7 R9-1 U4-18)
     )
     (net CHG_STAT
-      (pins U2-9 R10-1 U4-5)
+      (pins U2-9 R10-1 U4-21)
     )
     (net CHG_TS
       (pins U2-1 RT2-1)
@@ -1682,7 +1682,7 @@
       (pins U4-8 R11-1 C25-1 TP1-1)
     )
     (net I2C_SCL
-      (pins U4-21 U5-13 R21-1 U7-1)
+      (pins U4-5 U5-13 R21-1 U7-1)
     )
     (net I2C_SDA
       (pins U4-20 U5-14 R20-1 U7-16)
