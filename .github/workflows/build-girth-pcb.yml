@@ -34,14 +34,14 @@ jobs:
           P=hardware/girth/PCB
           R=$P/out/ruteado
           rm -rf $P/out && mkdir -p $P/out/gerber $P/out/render $R
-          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v2.1.0/freerouting-2.1.0.jar || true
+          curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar || true
           sha256sum /tmp/freerouting.jar > $R/freerouting.sha256 2>&1 || true
           java -version > $R/java.log 2>&1 || true
           docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
             python3 fuente/ci_route.py export kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
           ls -la $R >> $R/export.log
           if [ -s $R/placa.dsn ]; then
-            (timeout 1200 java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 30 -mt 1 --router.max_passes=30 --gui.enabled=false) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
+            (sudo apt-get install -y -qq xvfb >/dev/null 2>&1; timeout 1200 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 60) > $R/freerouting_full.log 2>&1 || echo "freerouting código $?" >> $R/freerouting_full.log
             tail -150 $R/freerouting_full.log > $R/freerouting.log; rm -f $R/freerouting_full.log
           fi
           if [ -s $R/placa.ses ]; then
