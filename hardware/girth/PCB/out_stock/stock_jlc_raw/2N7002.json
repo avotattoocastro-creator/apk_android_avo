@@ -1,0 +1,5385 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 761,
+   "list": [
+    {
+     "componentId": 9040,
+     "componentLibraryType": "base",
+     "stockCount": 3093731,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_jiangsu-changjing-electronics-technology-co-ltd-2n7002_C8545.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0161
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0125
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.009
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0105
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0121
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0155
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0094
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 2930007,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "9040-2N7002/C8545",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04024,
+     "preMinPurchaseNum": 722,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0161,
+     "componentCode": "C8545",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "2N7002",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8550724402842398720",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--2N7002_C8545.pdf",
+     "dataManualFileAccessId": "8550724090244980736",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ 2N7002",
+     "minImage": "",
+     "minImageAccessId": "8550724403441778688",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5\u03a9@10V 60V N-Channel \u00b120V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "225mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 13419,
+     "componentLibraryType": "expand",
+     "stockCount": 420,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "L2N7002WT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_lrc-l2n7002wt1g_C12778.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0207
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0168
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.011
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0099
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0093
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0161
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0095
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0199
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 289,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-L2N7002WT1G/C12778",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.044,
+     "preMinPurchaseNum": 436,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0207,
+     "componentCode": "C12778",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "L2N7002WT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000307236278272",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810251916_LRC-L2N7002WT1G_C12778.pdf",
+     "dataManualFileAccessId": "8588881292146851840",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LRC L2N7002WT1G",
+     "minImage": "",
+     "minImageAccessId": "8583000308070944768",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-323",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 60V 7.5\u03a9@10V N-Channel SOT-323 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "225mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "L<span class='lucene_highlight_class'>2N7002</span>WT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 13420,
+     "componentLibraryType": "expand",
+     "stockCount": 1072160,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "L2N7002LT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_lrc-l2n7002lt1g_C12779.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0143
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0111
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0082
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0079
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0076
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0138
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0083
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 1069131,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-L2N7002LT1G/C12779",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.03561,
+     "preMinPurchaseNum": 813,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0143,
+     "componentCode": "C12779",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "L2N7002LT1G",
+     "componentImageUrl": "https://assets.lcsc.com/images/lcsc/900x900/20221228_LRC-L2N7002LT1G_C12779_front.jpg",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809271814_LRC-L2N7002LT1G_C12779.pdf",
+     "dataManualFileAccessId": "8586172828182065152",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LRC L2N7002LT1G",
+     "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20221228_LRC-L2N7002LT1G_C12779_front.jpg",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221228_LRC-L2N7002LT1G_C12779_front.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221228_LRC-L2N7002LT1G_C12779_front.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221228_LRC-L2N7002LT1G_C12779_back.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221228_LRC-L2N7002LT1G_C12779_back.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221228_LRC-L2N7002LT1G_C12779_package.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221228_LRC-L2N7002LT1G_C12779_package.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 N-channel 1.4\u03a9@10V 10pF 115mA 17pF 2.5pF 225mW 2V 60V N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2.5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "10pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "1.4\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "17pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "225mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "L<span class='lucene_highlight_class'>2N7002</span>LT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 17020,
+     "componentLibraryType": "expand",
+     "stockCount": 166407,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002LT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_onsemi-2n7002lt1g_C16338.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0313
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0238
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0205
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0168
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0158
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0151
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0198
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0229
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0146
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0152
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0302
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0161
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 164659,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-2N7002LT1G/C16338",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.08281,
+     "preMinPurchaseNum": 380,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0313,
+     "componentCode": "C16338",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "2N7002LT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8578675688743682048",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410122030_onsemi-2N7002LT1G_C16338.pdf",
+     "dataManualFileAccessId": "8558248867360489472",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi 2N7002LT1G",
+     "minImage": "",
+     "minImageAccessId": "8578675689754509312",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 60V 7.5\u03a9@10V N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "225mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>LT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 41088,
+     "componentLibraryType": "expand",
+     "stockCount": 56387,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002T",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_jiangsu-changjing-electronics-technology-co-ltd-2n7002t_C40106.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0351
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0248
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.02
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0171
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0193
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0239
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0273
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0176
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0338
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 55782,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "41088-2N7002T/C40106",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.073,
+     "preMinPurchaseNum": 318,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0351,
+     "componentCode": "C40106",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "2N7002T",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583001125130293248",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809211023_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--2N7002T_C40106.pdf",
+     "dataManualFileAccessId": "8586202499338407936",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ 2N7002T",
+     "minImage": "",
+     "minImageAccessId": "8583001126098907136",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-523",
+     "describe": "1 N-channel 115mA 150mW 2.5V 25pF 50pF 5pF 5\u03a9@10V 60V N-Channel SOT-523 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "150mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 62895,
+     "componentLibraryType": "expand",
+     "stockCount": 12001,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002DW K72",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_jiangsu-changjing-electronics-technology-co-ltd-2n7002dw-k72_C61840.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0418
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0328
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0282
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0249
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0222
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0208
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.024
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0213
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0201
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0403
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0316
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 11587,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "62895-2N7002DWK72/C61840",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.115,
+     "preMinPurchaseNum": 276,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0418,
+     "componentCode": "C61840",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "2N7002DW K72",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8617205634547146752",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811052003_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--2N7002DW-K72_C61840.pdf",
+     "dataManualFileAccessId": "8586175060466151424",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ 2N7002DW K72",
+     "minImage": "",
+     "minImageAccessId": "8617205635507507200",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SC-70-6(SOT-363)",
+     "describe": "-55\u2103~+150\u2103 115mA 150mW 2 N-Channel 2.5V 50pF 5\u03a9@10V 60V SC-70-6(SOT-363) MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "2 N-Channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "150mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>DW K72",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 66260,
+     "componentLibraryType": "expand",
+     "stockCount": 641161,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002,215",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_nexperia-2n7002-215_C65189.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0129
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.011
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0096
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0087
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0084
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0124
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 638309,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-2N7002215/C65189",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04783,
+     "preMinPurchaseNum": 700,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0171,
+     "componentCode": "C65189",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "2N7002,215",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553690935729795072",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407241045_Nexperia-2N7002-215_C65189.pdf",
+     "dataManualFileAccessId": "8586175792984567809",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia 2N7002,215",
+     "minImage": "",
+     "minImageAccessId": "8553690936325251072",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-65\u2103~+150\u2103 1 N-channel 2.5V 300mA 50pF 5\u03a9@10V 60V 830mW SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-65\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b130V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "3.5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "300mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "6.8pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "830mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>,215",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 69283,
+     "componentLibraryType": "expand",
+     "stockCount": 58142,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002BKS,115",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_nexperia-2n7002bks-115_C68181.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0739
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0579
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0498
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0439
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.039
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0367
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0376
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0557
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.048
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0712
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0423
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0354
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 57403,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-2N7002BKS115/C68181",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.20336,
+     "preMinPurchaseNum": 182,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0739,
+     "componentCode": "C68181",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "2N7002BKS,115",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000789677707264",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407241045_Nexperia-2N7002BKS-115_C68181.pdf",
+     "dataManualFileAccessId": "8586202759191912448",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia 2N7002BKS,115",
+     "minImage": "",
+     "minImageAccessId": "8583000790578941952",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-363(SC-88)",
+     "describe": "1.6\u03a9@10V 2 N-Channel 2.1V 295mW 300mA 50pF 600pC@4.5V 60V SOT-363(SC-88) MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.1V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "2 N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "600pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "4pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "300mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "7pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "295mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "1.6\u03a9@10V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>BKS,115",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 72641,
+     "componentLibraryType": "expand",
+     "stockCount": 69359,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002ET1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_onsemi-2n7002et1g_C71533.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0446
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0336
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0276
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0222
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0189
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0266
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0324
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.043
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0213
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 68898,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-2N7002ET1G/C71533",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.09305,
+     "preMinPurchaseNum": 269,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0446,
+     "componentCode": "C71533",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "2N7002ET1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582988621951066112",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111436_onsemi-2N7002ET1G_C71533.pdf",
+     "dataManualFileAccessId": "8586187104661745664",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi 2N7002ET1G",
+     "minImage": "",
+     "minImageAccessId": "8582988622996393984",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 2.5V 2.9pF 300mW 310mA 3\u03a9@4.5V 40pF 60V 810pC@10V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "810pC@10V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2.9pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "310mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "4.6pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "3\u03a9@4.5V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "40pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "300mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>ET1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 74415,
+     "componentLibraryType": "expand",
+     "stockCount": 95975,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002G-AE2-R",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_utc-unisonic-tech-2n7002g-ae2-r_C73302.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0225
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0176
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0149
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.012
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0098
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0095
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0144
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0116
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0217
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0169
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 95714,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "UTC_Unisonic_Tech-2N7002G_AE2R/C73302",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.05502,
+     "preMinPurchaseNum": 513,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0225,
+     "componentCode": "C73302",
+     "componentBrandEn": "UTC(Unisonic Tech)",
+     "componentModelEn": "2N7002G-AE2-R",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553698297719111680",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811101412_UTC-Unisonic-Tech-2N7002G-AE2-R_C73302.pdf",
+     "dataManualFileAccessId": "8586175848847826944",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "UTC 2N7002G-AE2-R",
+     "minImage": "",
+     "minImageAccessId": "8553698298280878080",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23-3",
+     "describe": "-40\u2103~+150\u2103 1 N-channel 11pF 2.1V 200mW 300mA 50pF 5pF 60V 7.5\u03a9 N-Channel SOT-23-3 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "300mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "11pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.1V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "200mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>G-AE2-R",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 79109,
+     "componentLibraryType": "expand",
+     "stockCount": 9085,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002K-TP",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_mcc-micro-commercial-components-2n7002k-tp_C77975.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0253
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0205
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0177
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0129
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0115
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0108
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0124
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0198
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0111
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0243
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 9033,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "79109-2N7002KTP/C77975",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.05376,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0253,
+     "componentCode": "C77975",
+     "componentBrandEn": "MCC(Micro Commercial Components)",
+     "componentModelEn": "2N7002K-TP",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583020236895629312",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_MCC-Micro-Commercial-Components-2N7002K-TP_C77975.pdf",
+     "dataManualFileAccessId": "8588884553439563776",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MCC 2N7002K-TP",
+     "minImage": "",
+     "minImageAccessId": "8583020237793480704",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 1.3V 340mA 350mW 40pF 5\u03a9@10V 60V N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "10pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "340mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "40pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "1.3V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "350mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>K-TP",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 79700,
+     "componentLibraryType": "expand",
+     "stockCount": 168122,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "L2N7002KLT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_lrc-l2n7002klt1g_C78564.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0212
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0176
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0152
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.014
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.013
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0124
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0169
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0135
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0125
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0204
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 167946,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-L2N7002KLT1G/C78564",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04113,
+     "preMinPurchaseNum": 426,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0212,
+     "componentCode": "C78564",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "L2N7002KLT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8759978215479611392",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810010214_LRC-L2N7002KLT1G_C78564.pdf",
+     "dataManualFileAccessId": "8586176083612356608",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LRC L2N7002KLT1G",
+     "minImage": "",
+     "minImageAccessId": "8759978216503697408",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 1V 2.2pF 2.3\u03a9@10V 300mW 34pF 380mA 60V 710pC@10V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "710pC@10V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2.2pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "380mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "3pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "2.3\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "34pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "1V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "300mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "L<span class='lucene_highlight_class'>2N7002</span>KLT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 79849,
+     "componentLibraryType": "expand",
+     "stockCount": 5819,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002-TP",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_mcc-micro-commercial-components-2n7002-tp_C78712.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0148
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0126
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0096
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.018
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0092
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0143
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0122
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 5800,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "79849-2N7002TP/C78712",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04504,
+     "preMinPurchaseNum": 483,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0187,
+     "componentCode": "C78712",
+     "componentBrandEn": "MCC(Micro Commercial Components)",
+     "componentModelEn": "2N7002-TP",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583489807309262848",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2008181932_MCC-Micro-Commercial-Components-2N7002-TP_C78712.pdf",
+     "dataManualFileAccessId": "8588918274247155712",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MCC 2N7002-TP",
+     "minImage": "",
+     "minImageAccessId": "8583489808115515392",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 1.2\u03a9@10V 115mA 2.5V 200mW 50pF 5pF 60V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "1.2\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "200mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>-TP",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 82596,
+     "componentLibraryType": "expand",
+     "stockCount": 215588,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002K-T1-GE3",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_vishay-intertech-2n7002k-t1-ge3_C81445.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0474
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0397
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0358
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0266
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0254
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0248
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0456
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0245
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0239
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0382
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 212981,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "VishayIntertech-2N7002K_T1GE3/C81445",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.11187,
+     "preMinPurchaseNum": 228,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0474,
+     "componentCode": "C81445",
+     "componentBrandEn": "Vishay Intertech",
+     "componentModelEn": "2N7002K-T1-GE3",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553715658325319680",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810171818_Vishay-Intertech-2N7002K-T1-GE3_C81445.pdf",
+     "dataManualFileAccessId": "8586176217846321152",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "VISHAY 2N7002K-T1-GE3",
+     "minImage": "",
+     "minImageAccessId": "8553715658966913024",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 2.5V 2.5pF 2\u03a9@10V 300mA 350mW 600pC@10V 60V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "600pC@10V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2.5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "300mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "6pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "2\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "350mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>K-T1-GE3",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 82640,
+     "componentLibraryType": "expand",
+     "stockCount": 196064,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002P,215",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_nexperia-2n7002p-215_C81488.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0241
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0157
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0135
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0111
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0115
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0232
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.018
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.013
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0151
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 195109,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-2N7002P215/C81488",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.06123,
+     "preMinPurchaseNum": 483,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0241,
+     "componentCode": "C81488",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "2N7002P,215",
+     "componentImageUrl": "https://assets.lcsc.com/images/lcsc/900x900/20221231_Nexperia-2N7002P-215_C81488_front.jpg",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121747_Nexperia-2N7002P-215_C81488.pdf",
+     "dataManualFileAccessId": "8586176229070684160",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia 2N7002P,215",
+     "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20221231_Nexperia-2N7002P-215_C81488_front.jpg",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221231_Nexperia-2N7002P-215_C81488_front.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221231_Nexperia-2N7002P-215_C81488_front.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221231_Nexperia-2N7002P-215_C81488_back.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221231_Nexperia-2N7002P-215_C81488_back.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221231_Nexperia-2N7002P-215_C81488_blank.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221231_Nexperia-2N7002P-215_C81488_blank.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20221231_Nexperia-2N7002P-215_C81488_package.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20221231_Nexperia-2N7002P-215_C81488_package.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 1.6\u03a9@10V 2.4V 350mW 360mA 50pF 60V 800pC@4.5V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "800pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "4pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "360mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "7pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "1.6\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.4V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "350mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>P,215",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 84667,
+     "componentLibraryType": "expand",
+     "stockCount": 2531,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002KDW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_jiangsu-changjing-electronics-technology-co-ltd-2n7002kdw_C83502.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0487
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0394
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0348
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0294
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0266
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0251
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0283
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0242
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0469
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0335
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0379
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 2530,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "84667-2N7002KDW/C83502",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.11799,
+     "preMinPurchaseNum": 229,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0487,
+     "componentCode": "C83502",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "2N7002KDW",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8578685008527351808",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809212142_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--2N7002KDW_C83502.pdf",
+     "dataManualFileAccessId": "8586175448682676224",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ 2N7002KDW",
+     "minImage": "",
+     "minImageAccessId": "8578685013623296000",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-363",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 10pF 150mW 2.5V 340mA 40pF 5.3\u03a9@4.5V 60V SOT-363 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "10pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "340mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "5.3\u03a9@4.5V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "40pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "150mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>KDW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 84736,
+     "componentLibraryType": "expand",
+     "stockCount": 23524,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002DW-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_diodes-incorporated-2n7002dw-7-f_C83571.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0911
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0739
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0654
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.059
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0539
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0513
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.052
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0568
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0878
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0712
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.063
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0494
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 20925,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-2N7002DW_7F/C83571",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.21762,
+     "preMinPurchaseNum": 123,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0911,
+     "componentCode": "C83571",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "2N7002DW-7-F",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8557886217850687488",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810111020_Diodes-Incorporated-2N7002DW-7-F_C83571.pdf",
+     "dataManualFileAccessId": "8560106706576838656",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES 2N7002DW-7-F",
+     "minImage": "",
+     "minImageAccessId": "8557886218730950656",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-363",
+     "describe": "-55\u2103~+150\u2103 11pF 2 N-Channel 22pF 230mA 2V 2pF 400mW 60V 7.5\u03a9@5V N-Channel SOT-363 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "22pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "2 N-Channel"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "230mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "11pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "400mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9@5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>DW-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 86219,
+     "componentLibraryType": "expand",
+     "stockCount": 863349,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002K-7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_diodes-incorporated-2n7002k-7_C85047.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0791
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0638
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0559
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0493
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0421
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0405
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0538
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0614
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0475
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0762
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0406
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.039
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 859729,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-2N7002K7/C85047",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.22335,
+     "preMinPurchaseNum": 142,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0791,
+     "componentCode": "C85047",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "2N7002K-7",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582977069751390208",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810201611_Diodes-Incorporated-2N7002K-7_C85047.pdf",
+     "dataManualFileAccessId": "8586181546256027648",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES 2N7002K-7",
+     "minImage": "",
+     "minImageAccessId": "8582977070629081088",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 1.2\u03a9@10V\u30011.4\u03a9@5V 1.6V 2.9pF 300pC@4.5V 30pF 380mA 4.2pF 540mW 60V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "1.6V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "300pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "2.9pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "380mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "4.2pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "540mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "1.2\u03a9@10V\u30011.4\u03a9@5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>K-7",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 86221,
+     "componentLibraryType": "expand",
+     "stockCount": 262956,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_diodes-incorporated-2n7002-7-f_C85049.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0423
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0305
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0245
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.022
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0208
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0201
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0332
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0408
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0212
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0236
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0294
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 262024,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-2N7002_7F/C85049",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.10027,
+     "preMinPurchaseNum": 263,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0423,
+     "componentCode": "C85049",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "2N7002-7-F",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8759577898754166784",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810010310_Diodes-Incorporated-2N7002-7-F_C85049.pdf",
+     "dataManualFileAccessId": "8757233029595316224",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES 2N7002-7-F",
+     "minImage": "",
+     "minImageAccessId": "8759577899878375424",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 2.5V 210mA 223pC@4.5V 370mW 50pF 5pF 60V 7.5\u03a9@5V SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "223pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "210mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "370mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9@5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 88113,
+     "componentLibraryType": "expand",
+     "stockCount": 3193,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "WST2N7002",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_winsok-semicon-wst2n7002_C86936.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0412
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0289
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0179
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0157
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0144
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0139
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0321
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0278
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0151
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0396
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 2889,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "WinsokSemicon-WST2N7002/C86936",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.075,
+     "preMinPurchaseNum": 271,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0412,
+     "componentCode": "C86936",
+     "componentBrandEn": "Winsok Semicon",
+     "componentModelEn": "WST2N7002",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8578696012833488896",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Winsok-Semicon-WST2N7002_C86936.pdf",
+     "dataManualFileAccessId": "8586177316904964096",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Winsok Semicon WST2N7002",
+     "minImage": "",
+     "minImageAccessId": "8578696013751902208",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 130pF 250mW 25pF 3V 60V 700mA 70pF N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "700mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "70pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "140m\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "130pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "3V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "250mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "WST<span class='lucene_highlight_class'>2N7002</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 108208,
+     "componentLibraryType": "expand",
+     "stockCount": 8036,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002KDW_R1_00001",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_panjit-international-2n7002kdw-r1-00001_C106992.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.038
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0299
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0254
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0226
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0204
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.019
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0196
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0288
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0366
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0245
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0183
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0218
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 7980,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "108208-2N7002KDW_R1_00001/C106992",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.09202,
+     "preMinPurchaseNum": 302,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.038,
+     "componentCode": "C106992",
+     "componentBrandEn": "PANJIT International",
+     "componentModelEn": "2N7002KDW_R1_00001",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000968670171136",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1808151859_PANJIT-International-2N7002KDW-R1-00001_C106992.pdf",
+     "dataManualFileAccessId": "8586203138215063552",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "PANJIT 2N7002KDW_R1_00001",
+     "minImage": "",
+     "minImageAccessId": "8583000969650692096",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-363",
+     "describe": "-55\u2103~+150\u2103 10pF 115mA 2 N-Channel 2.5V 200mW 35pF 40pF 4\u03a9@4.5V 60V 800pC@4.5V N-Channel SOT-363 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "40pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "2 N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "800pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "10pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "35pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "200mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "4\u03a9@4.5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>KDW_R1_00001",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 112808,
+     "componentLibraryType": "expand",
+     "stockCount": 18029,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002\uff08\u4e1d\u537012W\uff09",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_shikues-2n7002-12w_C111581.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0177
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0142
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0118
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0095
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0089
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0136
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0092
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0171
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 18026,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Shikues-2N7002_Silkscreen12W/C111581",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.0413,
+     "preMinPurchaseNum": 636,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0177,
+     "componentCode": "C111581",
+     "componentBrandEn": "Shikues",
+     "componentModelEn": "2N7002\uff08Silkscreen12W\uff09",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582977275616354304",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811021114_Shikues-2N7002-12W-_C111581.pdf",
+     "dataManualFileAccessId": "8586180631722676224",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Shikues 2N7002\uff08\u4e1d\u537012W\uff09",
+     "minImage": "",
+     "minImageAccessId": "8582977276561018880",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 N-channel 2.5V 305pC@4.5V 30pF 3pF 4.2pF 430mA 4\u03a9@4.5V 60V 830mW N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "305pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "3pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "430mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "4.2pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "4\u03a9@4.5V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "830mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>\uff08Silkscreen12W\uff09",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 113202,
+     "componentLibraryType": "expand",
+     "stockCount": 5441,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002KQ-7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://lcsc.com/product-detail/MOSFET_Diodes-Incorporated-2N7002KQ-7_C111971.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2103
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1719
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1555
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1348
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1258
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1203
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1656
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1212
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2026
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1158
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1299
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1498
+      }
+     ],
+     "firstSortAccessId": "6cb8980d2f8d498ba2169b6aedbeaafc",
+     "secondSortAccessId": "6a6f62ee5f9a4d81b7a3b2798dd6111a",
+     "canPresaleNumber": 5361,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-2N7002KQ7/C111971",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.44198,
+     "preMinPurchaseNum": 43,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2103,
+     "componentCode": "C111971",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "2N7002KQ-7",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582997957280452608",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/1811141633_Diodes-Incorporated-2N7002KQ-7_C111971.pdf",
+     "dataManualFileAccessId": "8560078714118963200",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES 2N7002KQ-7",
+     "minImage": "",
+     "minImageAccessId": "8582997958216323072",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 2.5V 25pF 300pC@10V 380mA 3\u03a9@5V 50pF 540mW 5pF 60V N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "50pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "300pC@10V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "380mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "540mW"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "3\u03a9@5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>KQ-7",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 117838,
+     "componentLibraryType": "expand",
+     "stockCount": 194305,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002KT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_onsemi-2n7002kt1g_C116584.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0338
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0218
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0192
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0181
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.021
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0247
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0174
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0325
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0185
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 192307,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-2N7002KT1G/C116584",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.09328,
+     "preMinPurchaseNum": 353,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0338,
+     "componentCode": "C116584",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "2N7002KT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582987826816290816",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811041153_onsemi-2N7002KT1G_C116584.pdf",
+     "dataManualFileAccessId": "8588880663197978624",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi 2N7002KT1G",
+     "minImage": "",
+     "minImageAccessId": "8582987827663540224",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 2.3V 2.5\u03a9@4.5V 380mA 420mW 45pF 60V 700pC@4.5V N-Channel SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "700pC@4.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "380mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "8pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "2.5\u03a9@4.5V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "45pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.3V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "420mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>KT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 125750,
+     "componentLibraryType": "expand",
+     "stockCount": 6978,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "2N7002",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_onsemi-2n7002_C124475.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0379
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0292
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0243
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0213
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0189
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0176
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0234
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0169
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0206
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0365
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0281
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0182
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 6485,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-2N7002/C124475",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.09858,
+     "preMinPurchaseNum": 309,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0379,
+     "componentCode": "C124475",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "2N7002",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583582859919155200",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2006081031_onsemi-2N7002_C124475.pdf",
+     "dataManualFileAccessId": "8588943512301940736",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi 2N7002",
+     "minImage": "",
+     "minImageAccessId": "8583582860829184000",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23-3L",
+     "describe": "-55\u2103~+150\u2103 1 N-channel 115mA 2.5V 200mW 25pF 25pF 5pF 60V 7.5\u03a9@10V N-Channel SOT-23-3L MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Vgs",
+       "attribute_value_name": "\u00b120V"
+      },
+      {
+       "attribute_name_en": "Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "5pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "115mA"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "60V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "7.5\u03a9@10V"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "25pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "N-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "2.5V"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 N-channel"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "200mW"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>2N7002</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 31,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "2N7002"
+ },
+ "message": null
+}

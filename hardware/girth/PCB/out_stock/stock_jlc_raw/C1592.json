@@ -1,0 +1,2549 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 16,
+   "list": [
+    {
+     "componentId": 1944,
+     "componentLibraryType": "expand",
+     "stockCount": 2139955,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "1uF \u00b110% 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_samsung-electro-mechanics-cl10a105ko8nnnc_C1592.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.008
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 3999,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 23999,
+       "productPrice": 0.0056
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 47999,
+       "productPrice": 0.0052
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": -1,
+       "productPrice": 0.005
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0077
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 3999,
+       "productPrice": 0.0064
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": -1,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 23999,
+       "productPrice": 0.0054
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 47999,
+       "productPrice": 0.0051
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0105
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 1942205,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "1944-CL10A105KO8NNNC/C1592",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.03377,
+     "preMinPurchaseNum": 1128,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0109,
+     "componentCode": "C1592",
+     "componentBrandEn": "Samsung Electro-Mechanics",
+     "componentModelEn": "CL10A105KO8NNNC",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582976089978888192",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2209191700_Samsung-Electro-Mechanics-CL10A105KO8NNNC_C1592.pdf",
+     "dataManualFileAccessId": "8586178147360378880",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Samsung Electro-Mechanics CL10A105KO8NNNC",
+     "minImage": "",
+     "minImageAccessId": "8582976091031658496",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0603",
+     "describe": "16V 1uF X5R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "1uF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "X5R"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C1592</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 25965342,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Lack of specifications",
+     "erpComponentName": "SC1592ISTR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.1811
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.1811
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.1811
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.8659
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.7709
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.7235
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.6235
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.7608
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 6.9176
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.9176
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.6693
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.9176
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SEMTECH-SC1592ISTR/C24235499",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 7.1811,
+     "componentCode": "C24235499",
+     "componentBrandEn": "SEMTECH",
+     "componentModelEn": "SC1592ISTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SEMTECH SC1592ISTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Lack of specifications ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Lack of specifications",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>C1592</span>ISTR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23899046,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "SC1592ISTRT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SEMTECH-SC1592ISTRT/C22378338",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C22378338",
+     "componentBrandEn": "SEMTECH",
+     "componentModelEn": "SC1592ISTRT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SEMTECH SC1592ISTRT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "ESOP-8",
+     "describe": "ESOP-8 New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>C1592</span>ISTRT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1492206,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Through Hole Resistors",
+     "erpComponentName": "\u91d1\u5c5e\u819c\u7535\u963b 15.9k\u03a9 \u00b10.1% 125mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/through-hole-resistors_vishay-intertech-rn55c1592bb14_C1401914.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4473
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.4473
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 0.4473
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1731
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1671
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1641
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.158
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1668
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 0.4309
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4309
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1609
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.4309
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "9ef82dc9906941e99c40ada887595824",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "VishayIntertech-RN55C1592BB14/C1401914",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 100,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 21,
+     "minPurchaseNum": 21,
+     "initialPrice": 0.4473,
+     "componentCode": "C1401914",
+     "componentBrandEn": "Vishay Intertech",
+     "componentModelEn": "RN55C1592BB14",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Vishay-Intertech-RN55C1592BB14_C1401914.pdf",
+     "dataManualFileAccessId": "8589007542806040576",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "VISHAY RN55C1592BB14",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "Plugin,D2.3xL6.1mm",
+     "describe": "-65\u2103~+175\u2103 125mW 15.9k\u03a9 Metal Film Resistor \u00b10.1% \u00b150ppm/\u2103 \u63d2\u4ef6,D2.3xL6.1mm Through Hole Resistors",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "15.9k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-65\u2103~+175\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "125mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Metal Film Resistor"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b10.1%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b150ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Through Hole Resistors",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RN55<span class='lucene_highlight_class'>C1592</span>BB14",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4038793,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Through Hole Resistors",
+     "erpComponentName": "\u91d1\u5c5e\u819c\u7535\u963b 15.9k\u03a9 \u00b10.1% 125mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/through-hole-resistors_vishay-intertech-rn55c1592bre6_C3472267.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3227
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3227
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3227
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1248
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1206
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1183
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1139
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1203
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3108
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3108
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3108
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1162
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "9ef82dc9906941e99c40ada887595824",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "VishayIntertech-RN55C1592BRE6/C3472267",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 28,
+     "minPurchaseNum": 28,
+     "initialPrice": 0.3227,
+     "componentCode": "C3472267",
+     "componentBrandEn": "Vishay Intertech",
+     "componentModelEn": "RN55C1592BRE6",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312111541_Vishay-Intertech-RN55C1592BRE6_C3472267.pdf",
+     "dataManualFileAccessId": "8590343310490296321",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "VISHAY RN55C1592BRE6",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "Plugin,D2.3xL6.1mm",
+     "describe": "-65\u2103~+175\u2103 125mW 15.9k\u03a9 Metal Film Resistor \u00b10.1% \u00b150ppm/\u2103 \u63d2\u4ef6,D2.3xL6.1mm Through Hole Resistors",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "15.9k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-65\u2103~+175\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "125mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Metal Film Resistor"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b10.1%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b150ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Through Hole Resistors",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RN55<span class='lucene_highlight_class'>C1592</span>BRE6",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 608185,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592aig#pbf_C580408.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 85.2051
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 85.2051
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 85.2051
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 80.9816
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 80.9816
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 80.9816
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 82.0783
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 82.0783
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 78.0098
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 78.0098
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 78.0098
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 82.0783
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC1592AIGPBF/C580408",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 77,
+     "shopCostPrice": 430.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 85.2051,
+     "componentCode": "C580408",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592AIG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2205190916_Analog-Devices-LTC1592AIG-PBF_C580408.pdf",
+     "dataManualFileAccessId": "8590144414208733184",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592AIG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Current-Non-buffered"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>AIG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706917,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592acg#pbf_C676011.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 19.4471
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 19.4471
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 19.4471
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 19.7005
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 19.7005
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 19.7005
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592ACGPBF/C676011",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 77,
+     "shopCostPrice": 200.28778,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 20.451,
+     "componentCode": "C676011",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592ACG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171807_Analog-Devices-LTC1592ACG-PBF_C676011.pdf",
+     "dataManualFileAccessId": "8588907988732563456",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592ACG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 10uA 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>ACG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706920,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592bcg#pbf_C676014.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.9751
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 12.3675
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 76,
+       "productPrice": 11.3145
+      },
+      {
+       "startNumber": 77,
+       "endNumber": 78,
+       "productPrice": 10.3942
+      },
+      {
+       "startNumber": 79,
+       "endNumber": 80,
+       "productPrice": 10.3942
+      },
+      {
+       "startNumber": 81,
+       "endNumber": -1,
+       "productPrice": 10.3942
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.499
+      },
+      {
+       "startNumber": 81,
+       "endNumber": -1,
+       "productPrice": 10.0127
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 76,
+       "productPrice": 10.8993
+      },
+      {
+       "startNumber": 77,
+       "endNumber": 78,
+       "productPrice": 10.0127
+      },
+      {
+       "startNumber": 79,
+       "endNumber": 80,
+       "productPrice": 10.0127
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 11.9137
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592BCGPBF/C676014",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 77,
+     "shopCostPrice": 106.83627,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.9751,
+     "componentCode": "C676014",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592BCG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171807_Analog-Devices-LTC1592BCG-PBF_C676014.pdf",
+     "dataManualFileAccessId": "8588908025122209792",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592BCG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V Current-Non-buffered SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Current-Non-buffered"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>BCG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706922,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592big#pbf_C676016.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.7493
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 15.0123
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 76,
+       "productPrice": 13.7333
+      },
+      {
+       "startNumber": 77,
+       "endNumber": 78,
+       "productPrice": 12.6165
+      },
+      {
+       "startNumber": 79,
+       "endNumber": 80,
+       "productPrice": 12.6165
+      },
+      {
+       "startNumber": 81,
+       "endNumber": -1,
+       "productPrice": 12.6165
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 79,
+       "endNumber": 80,
+       "productPrice": 12.1535
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.1713
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 14.4614
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 76,
+       "productPrice": 13.2294
+      },
+      {
+       "startNumber": 77,
+       "endNumber": 78,
+       "productPrice": 12.1535
+      },
+      {
+       "startNumber": 81,
+       "endNumber": -1,
+       "productPrice": 12.1535
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592BIGPBF/C676016",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 77,
+     "shopCostPrice": 129.81615,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.7493,
+     "componentCode": "C676016",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592BIG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171808_Analog-Devices-LTC1592BIG-PBF_C676016.pdf",
+     "dataManualFileAccessId": "8588908506875772928",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592BIG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>BIG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706918,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592acg#trpbf_C676012.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 20.451
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 19.4471
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 19.4471
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 19.4471
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 19.7005
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 19.7005
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 18.7334
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 19.7005
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592ACGTRPBF/C676012",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 200.77156,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 20.451,
+     "componentCode": "C676012",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592ACG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171807_Analog-Devices-LTC1592ACG-TRPBF_C676012.pdf",
+     "dataManualFileAccessId": "8588908163743551488",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592ACG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>ACG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706919,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592aig#trpbf_C676013.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 24.0407
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 24.0407
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 24.0407
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 22.8616
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 22.8616
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 22.8616
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 22.0226
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 22.0226
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 22.0226
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 23.1585
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 23.1585
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 23.1585
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592AIGTRPBF/C676013",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 236.00738,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 24.0407,
+     "componentCode": "C676013",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592AIG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171807_Analog-Devices-LTC1592AIG-TRPBF_C676013.pdf",
+     "dataManualFileAccessId": "8588908310133690368",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592AIG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V Current-Non-buffered SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Current-Non-buffered"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>AIG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706921,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592bcg#trpbf_C676015.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.9751
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 12.3675
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 11.3145
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 10.3942
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 10.3942
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 10.3942
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.499
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 10.8993
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 10.0127
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 10.0127
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 11.9137
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 10.0127
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592BCGTRPBF/C676015",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 107.32006,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.9751,
+     "componentCode": "C676015",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592BCG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171807_Analog-Devices-LTC1592BCG-TRPBF_C676015.pdf",
+     "dataManualFileAccessId": "8588908096374099968",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592BCG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 10uA 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "10uA"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>BCG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706923,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Digital to Analog Converters (DAC)",
+     "erpComponentName": "\u5177\u53ef\u7f16\u7a0b\u8f93\u51fa\u8303\u56f4\u768416\u4f4dSoftSpan DAC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/digital to analog converters (dacs)_analog devices_ltc1592big#trpbf_C676017.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.7493
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 15.0123
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 13.7333
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 12.6165
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 12.6165
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 12.6165
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.1713
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 12.1535
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 12.1535
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 13.2294
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 12.1535
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 14.4614
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "f9454f58865e43108f03318067c63126",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "AnalogDevices-LTC1592BIGTRPBF/C676017",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 130.29994,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.7493,
+     "componentCode": "C676017",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1592BIG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2009171808_Analog-Devices-LTC1592BIG-TRPBF_C676017.pdf",
+     "dataManualFileAccessId": "8588907962367033345",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1592BIG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-16",
+     "describe": "-40\u2103~+85\u2103 1 16 1LSB 2us 4.5V~5.5V SPI SSOP-16 Digital to Analog Converters (DAC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Function",
+       "attribute_value_name": "Power-on reset\u3001Bipolar output\u3001Programmable gain"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "1LSB"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Update Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Settling Time",
+       "attribute_value_name": "2us"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "16"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Digital to Analog Converters (DAC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1592</span>BIG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21309342,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Optoelectronics Accessories",
+     "erpComponentName": "C15925_HB-2X2-ON",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/optoelectronics-accessories_ledil-c15925-hb-2x2-on_C19980028.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.5068
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 4.5068
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 159,
+       "productPrice": 4.5068
+      },
+      {
+       "startNumber": 160,
+       "endNumber": 479,
+       "productPrice": 1.7982
+      },
+      {
+       "startNumber": 480,
+       "endNumber": 959,
+       "productPrice": 1.7392
+      },
+      {
+       "startNumber": 960,
+       "endNumber": -1,
+       "productPrice": 1.7098
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 960,
+       "endNumber": -1,
+       "productPrice": 1.647
+      },
+      {
+       "startNumber": 160,
+       "endNumber": 479,
+       "productPrice": 1.7322
+      },
+      {
+       "startNumber": 480,
+       "endNumber": 959,
+       "productPrice": 1.6754
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 4.3415
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.3415
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 159,
+       "productPrice": 4.3415
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "364b2ffeb54c4ca29fc726c363bb4ed2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Ledil-C15925_HB_2X2ON/C19980028",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 160,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 4.5068,
+     "componentCode": "C19980028",
+     "componentBrandEn": "Ledil",
+     "componentModelEn": "C15925_HB-2X2-ON",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401251046_Ledil-C15925-HB-2X2-ON_C19980028.pdf",
+     "dataManualFileAccessId": "8603689967516872704",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Ledil C15925_HB-2X2-ON",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Optoelectronics Accessories ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Optoelectronics Accessories",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>C1592</span>5_HB-2X2-ON",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21309343,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Optoelectronics Accessories",
+     "erpComponentName": "C15927_GABRIELLA-45-S",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/optoelectronics-accessories_ledil-c15927-gabriella-45-s_C19980029.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.9784
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.9784
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 179,
+       "productPrice": 12.9784
+      },
+      {
+       "startNumber": 180,
+       "endNumber": 494,
+       "productPrice": 5.1783
+      },
+      {
+       "startNumber": 495,
+       "endNumber": 989,
+       "productPrice": 5.0063
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 4.9195
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 495,
+       "endNumber": 989,
+       "productPrice": 4.8226
+      },
+      {
+       "startNumber": 180,
+       "endNumber": 494,
+       "productPrice": 4.9883
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.5021
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.5021
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 179,
+       "productPrice": 12.5021
+      },
+      {
+       "startNumber": 990,
+       "endNumber": -1,
+       "productPrice": 4.739
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "364b2ffeb54c4ca29fc726c363bb4ed2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Ledil-C15927_GABRIELLA_45S/C19980029",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 45,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.9784,
+     "componentCode": "C19980029",
+     "componentBrandEn": "Ledil",
+     "componentModelEn": "C15927_GABRIELLA-45-S",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8603671174270500864",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Ledil C15927_GABRIELLA-45-S",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Optoelectronics Accessories ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Optoelectronics Accessories",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>C1592</span>7_GABRIELLA-45-S",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21309341,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Optoelectronics Accessories",
+     "erpComponentName": "C15920_STRADELLA-8-HV-CY",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/optoelectronics-accessories_ledil-c15920-stradella-8-hv-cy_C19980027.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.4184
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 4.4184
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 159,
+       "productPrice": 4.4184
+      },
+      {
+       "startNumber": 160,
+       "endNumber": 479,
+       "productPrice": 1.7638
+      },
+      {
+       "startNumber": 480,
+       "endNumber": 959,
+       "productPrice": 1.7048
+      },
+      {
+       "startNumber": 960,
+       "endNumber": -1,
+       "productPrice": 1.6754
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 960,
+       "endNumber": -1,
+       "productPrice": 1.6139
+      },
+      {
+       "startNumber": 160,
+       "endNumber": 479,
+       "productPrice": 1.6991
+      },
+      {
+       "startNumber": 480,
+       "endNumber": 959,
+       "productPrice": 1.6423
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 4.2563
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.2563
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 159,
+       "productPrice": 4.2563
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "364b2ffeb54c4ca29fc726c363bb4ed2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Ledil-C15920_STRADELLA_8_HVCY/C19980027",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 160,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 4.4184,
+     "componentCode": "C19980027",
+     "componentBrandEn": "Ledil",
+     "componentModelEn": "C15920_STRADELLA-8-HV-CY",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401251045_Ledil-C15920-STRADELLA-8-HV-CY_C19980027.pdf",
+     "dataManualFileAccessId": "8603679557833158656",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Ledil C15920_STRADELLA-8-HV-CY",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Optoelectronics Accessories ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Optoelectronics Accessories",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>C1592</span>0_STRADELLA-8-HV-CY",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C1592"
+ },
+ "message": null
+}

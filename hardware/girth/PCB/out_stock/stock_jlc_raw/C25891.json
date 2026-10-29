@@ -1,0 +1,798 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 4,
+   "list": [
+    {
+     "componentId": 26634,
+     "componentLibraryType": "expand",
+     "stockCount": 119153,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u7535\u963b 3.6k\u03a9 \u00b11% 62.5mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/chip-resistor-surface-mount_uni-royal-uniroyal-elec-0402wgf3601tce_C25891.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0008
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0006
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0006
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0011
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0006
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0006
+      }
+     ],
+     "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
+     "secondSortAccessId": "a49341812cad4b0bafa2ddd547a82bd4",
+     "canPresaleNumber": 112004,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "26634-0402WGF3601TCE/C25891",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00241,
+     "preMinPurchaseNum": 10000,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0012,
+     "componentCode": "C25891",
+     "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+     "componentModelEn": "0402WGF3601TCE",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582975675335000064",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0402WGF3601TCE_C25891.pdf",
+     "dataManualFileAccessId": "8586178124228251648",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "UNI-ROYAL 0402WGF3601TCE",
+     "minImage": "",
+     "minImageAccessId": "8582975676215398400",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+155\u2103 3.6k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "3.6k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "62.5mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thick Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b11%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b1100ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C25891</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 43133726,
+     "componentLibraryType": "expand",
+     "stockCount": 414,
+     "componentTypeEn": "Hall Switches",
+     "erpComponentName": "\u53cc\u6781\u970d\u5c14\u6548\u5e94\u5f00\u5173",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/hall-switches_semiment-sc25891se-a_C41371503.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4684
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.3652
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.3227
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.267
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2424
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2277
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2193
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.3108
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4512
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2335
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.2572
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.3518
+      }
+     ],
+     "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
+     "secondSortAccessId": "02988f6fa58f408199b837124314e176",
+     "canPresaleNumber": 414,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Semiment-SC25891SEA/C41371503",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 1.24,
+     "preMinPurchaseNum": 25,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.4684,
+     "componentCode": "C41371503",
+     "componentBrandEn": "Semiment",
+     "componentModelEn": "SC25891SE-A",
+     "componentImageUrl": "https://assets.lcsc.com/images/lcsc/900x900/20241202_Semiment-SC25891SE-A_C41371503_front.jpg",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2412050943_Semiment-SC25891SE-A_C41371503.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Semiment SC25891SE-A",
+     "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20241202_Semiment-SC25891SE-A_C41371503_front.jpg",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20241202_Semiment-SC25891SE-A_C41371503_front.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20241202_Semiment-SC25891SE-A_C41371503_front.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20241202_Semiment-SC25891SE-A_C41371503_back.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20241202_Semiment-SC25891SE-A_C41371503_back.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20241202_Semiment-SC25891SE-A_C41371503_blank.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20241202_Semiment-SC25891SE-A_C41371503_blank.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-40\u2103~+150\u2103 1.5mT 10kHz 3.3V~25V 7.5mT 9mT Open-drain Reverse voltage protection\u3001Short-Circuit  Protection\u3001Built-in Schmitt trigger Unipolar SOT-23 Hall Switches ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Unipolar"
+      },
+      {
+       "attribute_name_en": "Release Points",
+       "attribute_value_name": "7.5mT"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Open-drain"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.3V~25V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sample Frequency",
+       "attribute_value_name": "10kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Reverse voltage protection\u3001Short-Circuit  Protection\u3001Built-in Schmitt trigger"
+      },
+      {
+       "attribute_name_en": "Operation Points",
+       "attribute_value_name": "9mT"
+      },
+      {
+       "attribute_name_en": "Operating Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "BHYS",
+       "attribute_value_name": "1.5mT"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Hall Switches",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>C25891</span>SE-A",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51868402,
+     "componentLibraryType": "expand",
+     "stockCount": 2248,
+     "componentTypeEn": "Hall Switches",
+     "erpComponentName": "\u970d\u5c14\u5f00\u5173",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3489
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.3063
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.2883
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.2653
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2555
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.249
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2398
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.2777
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3361
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.2556
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2461
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.2951
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 2248,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Semiment-SC25891SE_TRQ/C49363164",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 1.24,
+     "preMinPurchaseNum": 32,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.3489,
+     "componentCode": "C49363164",
+     "componentBrandEn": "Semiment",
+     "componentModelEn": "SC25891SE-TR-Q",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756347439059996672",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Semiment SC25891SE-TR-Q",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT23",
+     "describe": "-40\u2103~+125\u2103 1.4mT 10kHz 3.3V~24V 7.5mT 9mT Open-drain Reverse voltage protection\u3001Short-Circuit  Protection\u3001Built-in Schmitt trigger Unipolar SOT23 Hall Switches ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Unipolar"
+      },
+      {
+       "attribute_name_en": "Release Points",
+       "attribute_value_name": "7.5mT"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Open-drain"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.3V~24V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sample Frequency",
+       "attribute_value_name": "10kHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Reverse voltage protection\u3001Short-Circuit  Protection\u3001Built-in Schmitt trigger"
+      },
+      {
+       "attribute_name_en": "Operation Points",
+       "attribute_value_name": "9mT"
+      },
+      {
+       "attribute_name_en": "Operating Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "BHYS",
+       "attribute_value_name": "1.4mT"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Hall Switches",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>C25891</span>SE-TR-Q",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 57419433,
+     "componentLibraryType": "expand",
+     "stockCount": 1000,
+     "componentTypeEn": "Hall Switches",
+     "erpComponentName": "\u5355\u6781\u970d\u5c14\u5f00\u5173\u82af\u7247",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4537
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.3587
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.3194
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.2686
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2457
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2326
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2241
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.3077
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.437
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.2588
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2367
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.3455
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 1000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Semiment-SC25891CUA_BKQ/C54176511",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 1.14,
+     "preMinPurchaseNum": 26,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.4537,
+     "componentCode": "C54176511",
+     "componentBrandEn": "Semiment",
+     "componentModelEn": "SC25891CUA-BK-Q",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8776578725267542016",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Semiment SC25891CUA-BK-Q",
+     "minImage": "",
+     "minImageAccessId": "8776578726383362048",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "TO-92S",
+     "describe": "-40\u2103~+150\u2103 3.3V~24V 7.3mT 8.7mT Open-drain Unipolar TO-92S Hall Switches ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Unipolar"
+      },
+      {
+       "attribute_name_en": "Release Points",
+       "attribute_value_name": "7.3mT"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Open-drain"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.3V~24V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sample Frequency",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operation Points",
+       "attribute_value_name": "8.7mT"
+      },
+      {
+       "attribute_name_en": "Operating Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "BHYS",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Hall Switches",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>C25891</span>CUA-BK-Q",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C25891"
+ },
+ "message": null
+}

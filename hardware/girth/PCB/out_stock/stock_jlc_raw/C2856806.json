@@ -1,0 +1,246 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 3056904,
+     "componentLibraryType": "expand",
+     "stockCount": 2876,
+     "componentTypeEn": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "erpComponentName": "\u7ffb\u76d6\u5f0f \u4e0b\u63a5 P\u6570:26P \u95f4\u8ddd:0.5mm",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/ffc-fpc-flat-flexible-connector-assemblies_xunpu-fpc-05f-26ph20_C2856806.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1376
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1109
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0977
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1999,
+       "productPrice": 0.0877
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 3999,
+       "productPrice": 0.0751
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.0711
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1326
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1068
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 3999,
+       "productPrice": 0.0723
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0941
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.0685
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1999,
+       "productPrice": 0.0844
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "ca03cf83ab604d358ea828e4a78f97b6",
+     "canPresaleNumber": 2861,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "XUNPU-FPC_05F26PH20/C2856806",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.339,
+     "preMinPurchaseNum": 82,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1376,
+     "componentCode": "C2856806",
+     "componentBrandEn": "XUNPU",
+     "componentModelEn": "FPC-05F-26PH20",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583599986651648000",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2109221030_XUNPU-FPC-05F-26PH20_C2856806.pdf",
+     "dataManualFileAccessId": "8588945660238843905",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "XUNPU FPC-05F-26PH20",
+     "minImage": "",
+     "minImageAccessId": "8583599987628920832",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=0.5mm,Surface Mount\uff0cRight Angle",
+     "describe": "-25\u2103~+85\u2103 0.3mm 0.5mm 26P 2mm 500mA 50V Bottom Contact Hinged Lid Phosphor bronze Surface Mount, Right Angle Tin SMD,P=0.5mm,\u5367\u8d34 FFC, FPC (Flat Flexible) Connector Assemblies ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Locking Feature",
+       "attribute_value_name": "Flip-Top"
+      },
+      {
+       "attribute_name_en": "Rated Voltage (Max)",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Current Rating (Max)",
+       "attribute_value_name": "500mA"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "0.5mm"
+      },
+      {
+       "attribute_name_en": "Number of Contacts",
+       "attribute_value_name": "26P"
+      },
+      {
+       "attribute_name_en": "Contact Type",
+       "attribute_value_name": "Bottom Contact"
+      },
+      {
+       "attribute_name_en": "Height Above Board",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "FFC, FCB Thickness",
+       "attribute_value_name": "0.3mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "FFC, FPC (Flat Flexible) Connector Assemblies",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C2856806</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C2856806"
+ },
+ "message": null
+}

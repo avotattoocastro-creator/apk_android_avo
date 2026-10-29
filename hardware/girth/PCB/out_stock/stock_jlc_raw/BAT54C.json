@@ -1,0 +1,4710 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 224,
+   "list": [
+    {
+     "componentId": 2492,
+     "componentLibraryType": "expand",
+     "stockCount": 215713,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_jiangsu-changjing-electronics-technology-co-ltd-bat54c_C2135.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0246
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0197
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.015
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0137
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0129
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0145
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.019
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0124
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0132
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0237
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 212481,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "2492-BAT54C/C2135",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.05407,
+     "preMinPurchaseNum": 458,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0246,
+     "componentCode": "C2135",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "BAT54C",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582976762280357888",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--BAT54C_C2135.pdf",
+     "dataManualFileAccessId": "8586178026412888064",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ BAT54C",
+     "minImage": "",
+     "minImageAccessId": "8582976763110965248",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 14968,
+     "componentLibraryType": "expand",
+     "stockCount": 200457,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CLT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-bat54clt1g_C14308.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0231
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0194
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0137
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.016
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0132
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0223
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0142
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0286
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 200101,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-BAT54CLT1G/C14308",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.07432,
+     "preMinPurchaseNum": 391,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0297,
+     "componentCode": "C14308",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "BAT54CLT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553343377409130496",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811141711_onsemi-BAT54CLT1G_C14308.pdf",
+     "dataManualFileAccessId": "8586173396400529408",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi BAT54CLT1G",
+     "minImage": "",
+     "minImageAccessId": "8553343378038005760",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>LT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 38684,
+     "componentLibraryType": "expand",
+     "stockCount": 168734,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C,215",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_nexperia-bat54c-215_C37704.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0154
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0117
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.01
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0088
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0083
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.008
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0149
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0077
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0085
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.008
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 146033,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-BAT54C215/C37704",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": true,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04207,
+     "preMinPurchaseNum": 772,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0154,
+     "componentCode": "C37704",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "BAT54C,215",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553668779939942400",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407241028_Nexperia-BAT54C-215_C37704.pdf",
+     "dataManualFileAccessId": "8586177223473053696",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia BAT54C,215",
+     "minImage": "",
+     "minImageAccessId": "8553668780543516672",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>,215",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51000,
+     "componentLibraryType": "expand",
+     "stockCount": 291536,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "LBAT54CLT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_lrc-lbat54clt1g_C49991.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0194
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0155
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0127
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0114
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0098
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0122
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.015
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.01
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.011
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 288696,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-LBAT54CLT1G/C49991",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.03913,
+     "preMinPurchaseNum": 466,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0194,
+     "componentCode": "C49991",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "LBAT54CLT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8762689470297071616",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809301615_LRC-LBAT54CLT1G_C49991.pdf",
+     "dataManualFileAccessId": "8586178948866166784",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LRC LBAT54CLT1G",
+     "minImage": "",
+     "minImageAccessId": "8762689471395303424",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Series Connection 200mA 2uA 30V 400mV 600mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "400mV"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Series Connection"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "L<span class='lucene_highlight_class'>BAT54C</span>LT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 58928,
+     "componentLibraryType": "expand",
+     "stockCount": 1961,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "LBAT54CWT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_lrc-lbat54cwt1g_C57891.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0161
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0127
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.009
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.008
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0075
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0072
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0122
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0077
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0156
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 1876,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-LBAT54CWT1G/C57891",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.03941,
+     "preMinPurchaseNum": 711,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0161,
+     "componentCode": "C57891",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "LBAT54CWT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553686492687196160",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809221611_LRC-LBAT54CWT1G_C57891.pdf",
+     "dataManualFileAccessId": "8586177565510291456",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LRC LBAT54CWT1G",
+     "minImage": "",
+     "minImageAccessId": "8553686493316206592",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SC-70-3",
+     "describe": "1 Pair Series Connection 200mA 2uA 30V 400mV 600mA SC-70-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "400mV"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Series Connection"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "L<span class='lucene_highlight_class'>BAT54C</span>WT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 78447,
+     "componentLibraryType": "expand",
+     "stockCount": 9,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CDW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_jiangsu-changjing-electronics-technology-co-ltd-bat54cdw_C77319.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0937
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0788
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0715
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0657
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0613
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.059
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0591
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0688
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0903
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0633
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0568
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0759
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 9,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "78447-BAT54CDW/C77319",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.19,
+     "preMinPurchaseNum": 97,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0937,
+     "componentCode": "C77319",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "BAT54CDW",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000867527778304",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--BAT54CDW_C77319.pdf",
+     "dataManualFileAccessId": "8586202851479183360",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ BAT54CDW",
+     "minImage": "",
+     "minImageAccessId": "8583000868500856832",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-363-6",
+     "describe": "1V@100mA 2 Pair Common Cathode 200mA 2uA@25V 30V 600mA SOT-363-6 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "2 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>DW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 78448,
+     "componentLibraryType": "expand",
+     "stockCount": 22123,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_jiangsu-changjing-electronics-technology-co-ltd-bat54ct_C77320.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0341
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0269
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.023
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0194
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0161
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0155
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0259
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0221
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0329
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 21801,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "78448-BAT54CT/C77320",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.08047,
+     "preMinPurchaseNum": 336,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0341,
+     "componentCode": "C77320",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "BAT54CT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583001103911309312",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--BAT54CT_C77320.pdf",
+     "dataManualFileAccessId": "8586202769850585088",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ BAT54CT",
+     "minImage": "",
+     "minImageAccessId": "8583001104895889408",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-523-3",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-523-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 78449,
+     "componentLibraryType": "expand",
+     "stockCount": 16295,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_jiangsu-changjing-electronics-technology-co-ltd-bat54cw_C77321.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0323
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0217
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0186
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0155
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.015
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0179
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0247
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0209
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.016
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0311
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 16093,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "78449-BAT54CW/C77321",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.07687,
+     "preMinPurchaseNum": 353,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0323,
+     "componentCode": "C77321",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "BAT54CW",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000346595221504",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--BAT54CW_C77321.pdf",
+     "dataManualFileAccessId": "8588881294114115584",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ BAT54CW",
+     "minImage": "",
+     "minImageAccessId": "8583000347489284096",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-323",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-323 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>W",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 79874,
+     "componentLibraryType": "expand",
+     "stockCount": 4197,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C-TP",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://lcsc.com/product-detail/Schottky-Barrier-Diodes-SBD_MCC-Micro-Commercial-Components-BAT54C-TP_C78737.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.02
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0158
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.013
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0116
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0098
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0112
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0152
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0193
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0125
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.01
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0094
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "a1f3269121f04e30b9d773949a829b12",
+     "canPresaleNumber": 4181,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "79874-BAT54CTP/C78737",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.04747,
+     "preMinPurchaseNum": 452,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.02,
+     "componentCode": "C78737",
+     "componentBrandEn": "MCC(Micro Commercial Components)",
+     "componentModelEn": "BAT54C-TP",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583020452259745792",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/szlcsc/1912111437_MCC-Micro-Commercial-Components-BAT54C-TP_C78737.pdf",
+     "dataManualFileAccessId": "8588884553196294144",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MCC BAT54C-TP",
+     "minImage": "",
+     "minImageAccessId": "8583020453270573056",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>-TP",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 83624,
+     "componentLibraryType": "expand",
+     "stockCount": 221,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CWT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-bat54cwt1g_C82467.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0909
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0726
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0634
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0565
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0433
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0405
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0876
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0545
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0417
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0611
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0699
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.039
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 172,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-BAT54CWT1G/C82467",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.23304,
+     "preMinPurchaseNum": 125,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0909,
+     "componentCode": "C82467",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "BAT54CWT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583000345911955456",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809111715_onsemi-BAT54CWT1G_C82467.pdf",
+     "dataManualFileAccessId": "8588881295258890240",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi BAT54CWT1G",
+     "minImage": "",
+     "minImageAccessId": "8583000346843361280",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-323(SC-70)",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-323(SC-70) Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>WT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 84738,
+     "componentLibraryType": "expand",
+     "stockCount": 43246,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CW-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_diodes-incorporated-bat54cw-7-f_C83573.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1239
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1009
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0895
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0808
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0739
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0705
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0972
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0862
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0778
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1193
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0712
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0679
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 43202,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-BAT54CW_7F/C83573",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.29045,
+     "preMinPurchaseNum": 90,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1239,
+     "componentCode": "C83573",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "BAT54CW-7-F",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8578685220977377280",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Diodes-Incorporated-BAT54CW-7-F_C83573.pdf",
+     "dataManualFileAccessId": "8560106705632444416",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES BAT54CW-7-F",
+     "minImage": "",
+     "minImageAccessId": "8578685221945851904",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-323-3",
+     "describe": "-65\u2103~+125\u2103 1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-323-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "200mW"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-65\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>W-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 100884,
+     "componentLibraryType": "expand",
+     "stockCount": 1688,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CTT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-bat54ctt1g_C99670.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1031
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0857
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.077
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0705
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0613
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0587
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0993
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0826
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0742
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0565
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0591
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0679
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 1648,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-BAT54CTT1G/C99670",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.22091,
+     "preMinPurchaseNum": 106,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1031,
+     "componentCode": "C99670",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "BAT54CTT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583001154682818560",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809111721_onsemi-BAT54CTT1G_C99670.pdf",
+     "dataManualFileAccessId": "8586203005889236992",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi BAT54CTT1G",
+     "minImage": "",
+     "minImageAccessId": "8583001155597717504",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SC-75(SOT-523)",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SC-75(SOT-523) Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>TT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 125415,
+     "componentLibraryType": "expand",
+     "stockCount": 1927,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "SBAT54CLT1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-sbat54clt1g_C124141.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1789
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1411
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1248
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1045
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0859
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0805
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0827
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1203
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0775
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1007
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1723
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1359
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 1899,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-SBAT54CLT1G/C124141",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.45864,
+     "preMinPurchaseNum": 64,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1789,
+     "componentCode": "C124141",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "SBAT54CLT1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582997957386256384",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_onsemi-SBAT54CLT1G_C124141.pdf",
+     "dataManualFileAccessId": "8586199531439968256",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi SBAT54CLT1G",
+     "minImage": "",
+     "minImageAccessId": "8582997958308868096",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "S<span class='lucene_highlight_class'>BAT54C</span>LT1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 145715,
+     "componentLibraryType": "expand",
+     "stockCount": 113,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_diodes-incorporated-bat54c-7-f_C134405.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2125
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1723
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1551
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1337
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1094
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1037
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1494
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.166
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2047
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1288
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0999
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1054
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": -1,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-BAT54C_7F/C134405",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.38695,
+     "preMinPurchaseNum": 43,
+     "minPurchaseNum": 43,
+     "initialPrice": 0.2125,
+     "componentCode": "C134405",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "BAT54C-7-F",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8755921440921403392",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809200026_Diodes-Incorporated-BAT54C-7-F_C134405.pdf",
+     "dataManualFileAccessId": "8560078953781493760",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES BAT54C-7-F",
+     "minImage": "",
+     "minImageAccessId": "8755921442196606976",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-65\u2103~+150\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "200mW"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-65\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 145716,
+     "componentLibraryType": "expand",
+     "stockCount": 3,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CDW-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_diodes-incorporated-bat54cdw-7-f_C134406.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.3906
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.3101
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2757
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.2326
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.2134
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.202
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.2056
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2656
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1946
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.2241
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.3763
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2987
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-BAT54CDW_7F/C134406",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.97544,
+     "preMinPurchaseNum": 24,
+     "minPurchaseNum": 24,
+     "initialPrice": 0.3906,
+     "componentCode": "C134406",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "BAT54CDW-7-F",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583001019399196672",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Diodes-Incorporated-BAT54CDW-7-F_C134406.pdf",
+     "dataManualFileAccessId": "8560078958742814720",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES BAT54CDW-7-F",
+     "minImage": "",
+     "minImageAccessId": "8583001020418547712",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SC-70-6(SOT-363)",
+     "describe": "1V@100mA 2 Pair Common Cathode 200mA 2uA@25V 30V 600mA SC-70-6(SOT-363) Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "200mW"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-65\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "2 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>DW-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 145717,
+     "componentLibraryType": "expand",
+     "stockCount": 8421,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CT-7-F",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_diodes-incorporated-bat54ct-7-f_C134407.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1225
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0955
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0821
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0719
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0638
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0598
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0614
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0693
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.092
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1181
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0576
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0791
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 8330,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DiodesIncorporated-BAT54CT_7F/C134407",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.22738,
+     "preMinPurchaseNum": 95,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1225,
+     "componentCode": "C134407",
+     "componentBrandEn": "Diodes Incorporated",
+     "componentModelEn": "BAT54CT-7-F",
+     "componentImageUrl": "https://assets.lcsc.com/images/lcsc/900x900/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_front.jpg",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2412251001_Diodes-Incorporated-BAT54CT-7-F_C134407.pdf",
+     "dataManualFileAccessId": "8560078957438521344",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DIODES BAT54CT-7-F",
+     "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_front.jpg",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_front.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_front.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_back.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_back.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_blank.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_blank.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_package.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20180914_Diodes-Incorporated-BAT54CT-7-F_C134407_package.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-523-3",
+     "describe": "-65\u2103~+150\u2103 1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-523-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-65\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>T-7-F",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 163646,
+     "componentLibraryType": "expand",
+     "stockCount": 143,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CXV3T1G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-bat54cxv3t1g_C152306.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0816
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0636
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0546
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0479
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0425
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0397
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0786
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0613
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0526
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0382
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0461
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0409
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 102,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-BAT54CXV3T1G/C152306",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.22864,
+     "preMinPurchaseNum": 142,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0816,
+     "componentCode": "C152306",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "BAT54CXV3T1G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582994131689328640",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809111513_onsemi-BAT54CXV3T1G_C152306.pdf",
+     "dataManualFileAccessId": "8586195693418008576",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi BAT54CXV3T1G",
+     "minImage": "",
+     "minImageAccessId": "8582994132528730112",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SC-89-3",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SC-89-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>XV3T1G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 176292,
+     "componentLibraryType": "expand",
+     "stockCount": 965,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C-G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_jiangsu-changjing-electronics-technology-co-ltd-bat54c-g_C164910.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.021
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0164
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0138
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0102
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0118
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0158
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0133
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0105
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0202
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 965,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "176292-BAT54CG/C164910",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.05213,
+     "preMinPurchaseNum": 551,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.021,
+     "componentCode": "C164910",
+     "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+     "componentModelEn": "BAT54C-G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8761720754528227328",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809211019_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--BAT54C-G_C164910.pdf",
+     "dataManualFileAccessId": "8586189739397959680",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSCJ BAT54C-G",
+     "minImage": "",
+     "minImageAccessId": "8761720755753504768",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>-G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 182815,
+     "componentLibraryType": "expand",
+     "stockCount": 2531,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_shikues-bat54c_C171429.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0169
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0136
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0108
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0096
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0081
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0131
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0078
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0083
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0163
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 2478,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Shikues-BAT54C/C171429",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.038,
+     "preMinPurchaseNum": 664,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0169,
+     "componentCode": "C171429",
+     "componentBrandEn": "Shikues",
+     "componentModelEn": "BAT54C",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8759485896385142784",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810011021_Shikues-BAT54C_C171429.pdf",
+     "dataManualFileAccessId": "8757068855938568192",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Shikues BAT54C",
+     "minImage": "",
+     "minImageAccessId": "8759485897370669056",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-65\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-65\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 183171,
+     "componentLibraryType": "expand",
+     "stockCount": 2189,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_smc-sangdest-microelectronicstronic-nanjing-bat54c_C171785.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0271
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0228
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0204
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0171
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0196
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0261
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.022
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0332
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0176
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 2148,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "183171-BAT54C/C171785",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.0842,
+     "preMinPurchaseNum": 333,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0344,
+     "componentCode": "C171785",
+     "componentBrandEn": "SMC(Sangdest Microelectronicstronic (Nanjing))",
+     "componentModelEn": "BAT54C",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582988322499543040",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_SMC-Sangdest-Microelectronicstronic--Nanjing-BAT54C_C171785.pdf",
+     "dataManualFileAccessId": "8586187687685967872",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SMC BAT54C",
+     "minImage": "",
+     "minImageAccessId": "8582988323396177920",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V 600mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 191123,
+     "componentLibraryType": "expand",
+     "stockCount": 1828,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky barrier diodes (sbd)_ht(shenzhen jinyu semicon)_bat54c_C179728.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0164
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.013
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0081
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": 98999,
+       "productPrice": 0.0076
+      },
+      {
+       "startNumber": 99000,
+       "endNumber": 200999,
+       "productPrice": 0.0075
+      },
+      {
+       "startNumber": 201000,
+       "endNumber": -1,
+       "productPrice": 0.0074
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0158
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0125
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": 98999,
+       "productPrice": 0.0073
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0078
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 99000,
+       "endNumber": 200999,
+       "productPrice": 0.0072
+      },
+      {
+       "startNumber": 201000,
+       "endNumber": -1,
+       "productPrice": 0.0071
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "a1f3269121f04e30b9d773949a829b12",
+     "canPresaleNumber": 1822,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HT_Shenzhen_Jinyu_Semicon-BAT54C/C179728",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.038,
+     "preMinPurchaseNum": 695,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0164,
+     "componentCode": "C179728",
+     "componentBrandEn": "HT(Shenzhen Jinyu Semicon)",
+     "componentModelEn": "BAT54C",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8582989190878908416",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/1912111437_HT-Shenzhen-Jinyu-Semicon-BAT54C_C179728.pdf",
+     "dataManualFileAccessId": "8586189618382954496",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HT(Shenzhen Jinyu Semicon) BAT54C",
+     "minImage": "",
+     "minImageAccessId": "8582989191785013248",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 1V@100mA 200mA 2uA@25V 30V SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "1V@100mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 192597,
+     "componentLibraryType": "expand",
+     "stockCount": 133867,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_guangdong-hottech-bat54c_C181200.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0117
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0078
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0074
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0076
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0071
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0084
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0142
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 133254,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-BAT54C/C181200",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.03404,
+     "preMinPurchaseNum": 772,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0147,
+     "componentCode": "C181200",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "BAT54C",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8762090515762831360",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809211354_Guangdong-Hottech-BAT54C_C181200.pdf",
+     "dataManualFileAccessId": "8586190558821814272",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech BAT54C",
+     "minImage": "",
+     "minImageAccessId": "8762090516835897344",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 Pair Common Cathode 200mA 200mA 30V 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 199934,
+     "componentLibraryType": "expand",
+     "stockCount": 7,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54C_R1_00001",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_panjit-international-bat54c-r1-00001_C188527.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0235
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0161
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0135
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0121
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0114
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.011
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.013
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0155
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.018
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0117
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0226
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 7,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "PANJITInternational-BAT54C_R1_00001/C188527",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.05433,
+     "preMinPurchaseNum": 483,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0235,
+     "componentCode": "C188527",
+     "componentBrandEn": "PANJIT International",
+     "componentModelEn": "BAT54C_R1_00001",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8798683898018578432",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_PANJIT-International-BAT54C-R1-00001_C188527.pdf",
+     "dataManualFileAccessId": "8586188879187206144",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "PANJIT BAT54C_R1_00001",
+     "minImage": "",
+     "minImageAccessId": "8798683898719027200",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "600mV@100mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>_R1_00001",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 220414,
+     "componentLibraryType": "expand",
+     "stockCount": 5,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CW,115",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_nexperia-bat54cw-115_C192144.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0361
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0279
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0235
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0204
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0181
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0168
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 2999,
+       "productPrice": 0.0226
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0161
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0269
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 8999,
+       "productPrice": 0.0196
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": 20999,
+       "productPrice": 0.0174
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0348
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": -50,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-BAT54CW115/C192144",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.09121,
+     "preMinPurchaseNum": 324,
+     "minPurchaseNum": 324,
+     "initialPrice": 0.0279,
+     "componentCode": "C192144",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "BAT54CW,115",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583427204260356096",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Nexperia-BAT54CW-115_C192144.pdf",
+     "dataManualFileAccessId": "8588907518353006592",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia BAT54CW,115",
+     "minImage": "",
+     "minImageAccessId": "8583427205254406144",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-323-3",
+     "describe": "1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-323-3 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>W,115",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 232405,
+     "componentLibraryType": "expand",
+     "stockCount": 7466,
+     "componentTypeEn": "Schottky Diodes",
+     "erpComponentName": "BAT54CLT3G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/schottky-diodes_onsemi-bat54clt3g_C232532.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.049
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0407
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0359
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0331
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0308
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0295
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0472
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0319
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0392
+      }
+     ],
+     "firstSortAccessId": "2dc9a747be3d4be78948b03a3063559a",
+     "secondSortAccessId": "8c33c764fe0c4284aa9a8a0e84b8be11",
+     "canPresaleNumber": 7382,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "onsemi-BAT54CLT3G/C232532",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.09462,
+     "preMinPurchaseNum": 185,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.049,
+     "componentCode": "C232532",
+     "componentBrandEn": "onsemi",
+     "componentModelEn": "BAT54CLT3G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583012385057202176",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810301519_onsemi-BAT54CLT3G_C232532.pdf",
+     "dataManualFileAccessId": "8588883633495289856",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "onsemi BAT54CLT3G",
+     "minImage": "",
+     "minImageAccessId": "8583012385968312320",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "-55\u2103~+125\u2103 1 Pair Common Cathode 200mA 2uA@25V 30V 600mA 800mV@100mA SOT-23 Schottky Diodes ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Forward(Vf@If)",
+       "attribute_value_name": "800mV@100mA"
+      },
+      {
+       "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+       "attribute_value_name": "600mA"
+      },
+      {
+       "attribute_name_en": "Voltage - DC Reverse(Vr)",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "1 Pair Common Cathode"
+      },
+      {
+       "attribute_name_en": "Current - Rectified",
+       "attribute_value_name": "200mA"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "2uA@25V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Schottky Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BAT54C</span>LT3G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 9,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "BAT54C"
+ },
+ "message": null
+}

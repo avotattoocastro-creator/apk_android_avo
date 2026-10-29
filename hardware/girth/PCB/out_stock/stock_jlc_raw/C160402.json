@@ -1,0 +1,278 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 171782,
+     "componentLibraryType": "expand",
+     "stockCount": 75764,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "1x2P \u95f4\u8ddd:1mm \u5367\u8d34 \u7cfb\u5217:SH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_jst-sm02b-srss-tb-lf-sn_C160402.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1324
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.109
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.097
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.087
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0836
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0813
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0805
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0934
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0783
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0838
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1275
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.105
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 73042,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JST-SM02B_SRSS_TB_LF_SN/C160402",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.3404,
+     "preMinPurchaseNum": 83,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1324,
+     "componentCode": "C160402",
+     "componentBrandEn": "JST",
+     "componentModelEn": "SM02B-SRSS-TB(LF)(SN)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583413528853663744",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_JST-SM02B-SRSS-TB-LF-SN_C160402.pdf",
+     "dataManualFileAccessId": "8588905384618962944",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JST SM02B-SRSS-TB(LF)(SN)",
+     "minImage": "",
+     "minImageAccessId": "8583413529714036736",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
+     "describe": "-25\u2103~+85\u2103 1 1A 1mm 1x2P 2 2.9mm 2P 4.32mm 4mm 50V Auxiliary Solder Pin Copper alloy PA SH Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1mm,\u5367\u8d34 Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "White"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "1A"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "1x2P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "4.32mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "4mm"
+      },
+      {
+       "attribute_name_en": "Reference Series",
+       "attribute_value_name": "SH"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "2P"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Copper Alloy"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "Auxiliary Solder Pin"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "2.9mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "PA"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "2"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C160402</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C160402"
+ },
+ "message": null
+}

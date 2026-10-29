@@ -1,0 +1,330 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 2,
+   "list": [
+    {
+     "componentId": 5993815,
+     "componentLibraryType": "expand",
+     "stockCount": 4387,
+     "componentTypeEn": "Accelerometers",
+     "erpComponentName": "\u9002\u7528\u4e8e\u9ad8\u7aef\u5e94\u7528\u7684\u516d\u8f74\u60ef\u6027\u6d4b\u91cf\u5355\u5143\uff08IMU\uff09\u548c\u5177\u5907\u5d4c\u5165\u5f0f\u4f20\u611f\u5668\u878d\u5408\u529f\u80fd\u7684Al\u4f20\u611f\u5668\u3001Qvar",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/accelerometers_stmicroelectronics-lsm6dsv16xtr_C5267406.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.3572
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.9265
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.7071
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.4123
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.3059
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.2616
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.3238
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.6077
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.234
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.2212
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.1786
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.8191
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "7127ae9b6b6c4ae0ae8f8f53ff827b21",
+     "canPresaleNumber": 3882,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "STMicroelectronics-LSM6DSV16XTR/C5267406",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 12.01593,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.3572,
+     "componentCode": "C5267406",
+     "componentBrandEn": "STMicroelectronics",
+     "componentModelEn": "LSM6DSV16XTR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585213862462939136",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309061516_STMicroelectronics-LSM6DSV16XTR_C5267406.pdf",
+     "dataManualFileAccessId": "8590905926662766592",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ST LSM6DSV16XTR",
+     "minImage": "",
+     "minImageAccessId": "8585213863449006080",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-14",
+     "describe": "-40\u2103~+85\u2103 1.71V~3.6V 2.6uA 4.5KB IMU (accelerometer + gyroscope) SPI\u3001I2C X,Y,Z X,Y,Z \u00b116g \u00b14000dps \u8fd0\u52a8\u4e8b\u4ef6\u68c0\u6d4b\u3001\u540c\u6b65\u4e0e\u65f6\u95f4\u6233 LGA-14(2.5x3) Accelerometers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Gyroscope Measurement Range (MAX)",
+       "attribute_value_name": "\u00b14000dps"
+      },
+      {
+       "attribute_name_en": "Output Bits",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Standby Current",
+       "attribute_value_name": "2.6uA"
+      },
+      {
+       "attribute_name_en": "Sensor Type",
+       "attribute_value_name": "IMU (accelerometer + gyroscope)"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.71V~3.6V"
+      },
+      {
+       "attribute_name_en": "Acceleration Measurement Range (MAX)",
+       "attribute_value_name": "\u00b116g"
+      },
+      {
+       "attribute_name_en": "Cache Size",
+       "attribute_value_name": "4.5KB"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Motion event detection\u3001Synchronization and timestamp"
+      },
+      {
+       "attribute_name_en": "Gyroscope Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Accelerometer Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI\u3001I2C"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Accelerometers",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LSM6DSV16XTR</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6087246,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "LSM6DSV16XTR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 7.3711
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 4.6772
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 7.1006
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 4.5055
+      }
+     ],
+     "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
+     "secondSortAccessId": "cfa9bf2378174788abc09e74d45d5b30",
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "JLCPCBAssembly-LSM6DSV16XTR/C9900037528",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3711,
+     "componentCode": "C9900037528",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "LSM6DSV16XTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT LSM6DSV16XTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-14L",
+     "describe": "LGA-14L New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LSM6DSV16XTR</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "LSM6DSV16XTR"
+ },
+ "message": null
+}
