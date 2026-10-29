@@ -2,82 +2,67 @@
  "zones": [
   {
    "net": "GND",
-   "layer": "F.Cu",
-   "filled_area_mm2": 864.9
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "",
-   "layer": "F.Cu",
-   "filled_area_mm2": 0.0
-  },
-  {
-   "net": "GND",
-   "layer": "B.Cu",
-   "filled_area_mm2": 1459.9
-  },
-  {
-   "net": "GND",
    "layer": "In1.Cu",
-   "filled_area_mm2": 1613.8
+   "filled_area_mm2": 1670.8
   },
   {
-   "net": "+3V3",
-   "layer": "In2.Cu",
-   "filled_area_mm2": 1258.4
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
   }
  ],
  "footprints": 105,
- "tracks": 967,
- "vias": 168,
- "unconnected": 16
+ "tracks": 258,
+ "vias": 86,
+ "unconnected": 147
 }
