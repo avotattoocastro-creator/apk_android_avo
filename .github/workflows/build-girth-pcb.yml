@@ -63,10 +63,25 @@ jobs:
           fi
           sudo chmod -R a+rw $P || true
 
+      - name: Modelos 3D de la librería de KiCad (para renders y STEP)
+        run: |
+          P=hardware/girth/PCB
+          M=$P/out/modelos3d; mkdir -p $M
+          : > $P/out/modelos3d.txt
+          for f in $(grep -o '${KICAD9_3DMODEL_DIR}/[^"]*' $P/kicad/AVO_GIRTH_PCB.kicad_pcb | sed 's|${KICAD9_3DMODEL_DIR}/||' | sort -u); do
+            mkdir -p "$M/$(dirname $f)"
+            if curl -fsSL --retry 3 -o "$M/$f" "https://gitlab.com/kicad/libraries/kicad-packages3D/-/raw/9.0.0/$f"; then
+              echo "OK $f" >> $P/out/modelos3d.txt
+            else
+              echo "FALTA $f" >> $P/out/modelos3d.txt
+            fi
+          done
+          cat $P/out/modelos3d.txt
+
       - name: Zonas, DRC (con paridad), ERC
         run: |
           P=hardware/girth/PCB
-          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+          docker run --rm -u 0 -e HOME=/tmp -e KICAD9_3DMODEL_DIR=/w/$P/out/modelos3d -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
             set -x
             kicad-cli version > out/kicad_version.txt
             python3 fuente/ci_kicad.py kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_pcb > out/kicad_info.txt 2>&1
@@ -101,7 +116,7 @@ jobs:
           set -ex
           P=hardware/girth/PCB
           mkdir -p $P/out/FINAL $P/out/gerber
-          docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
+          docker run --rm -u 0 -e HOME=/tmp -e KICAD9_3DMODEL_DIR=/w/$P/out/modelos3d -v "$PWD":/w -w /w/$P kicad/kicad:9.0 bash -c '
             set -ex
             kicad-cli pcb export gerbers -l F.Cu,In1.Cu,In2.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts --subtract-soldermask -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
             kicad-cli pcb export drill --format excellon --excellon-separate-th --generate-map --map-format gerberx2 -o out/gerber/ kicad/AVO_GIRTH_PCB.kicad_pcb
@@ -126,6 +141,7 @@ jobs:
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           P=hardware/girth/PCB
           T=$(mktemp -d)
+          rm -rf $P/out/modelos3d
           cp -r $P/out $T/out
           cp $P/kicad/AVO_GIRTH_PCB.kicad_pcb $T/
           git fetch origin ${{ github.ref_name }}

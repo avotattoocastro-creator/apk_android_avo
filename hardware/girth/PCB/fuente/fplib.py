@@ -108,7 +108,12 @@ def load(fname, model=None, height=0.0):
         elif k in ("fp_line", "fp_circle", "fp_arc", "fp_poly", "fp_rect"):
             it = [x for x in it if not (isinstance(x, list) and x[0] in ("tstamp", "uuid"))]
             gfx.append(_stroke(it))
-    return Footprint(str(name), pads, gfx, attr, model, descr[1] if descr else "", height)
+    fp = Footprint(str(name), pads, gfx, attr, model, descr[1] if descr else "", height)
+    m = find(tree, "model")
+    if m:  # keep the library's 3D placement (e.g. Espressif: offset −6.75/−1.2/−8.45, rotate −90° about X)
+        o, r = find(find(m, "offset"), "xyz"), find(find(m, "rotate"), "xyz")
+        fp.model_xf = (list(o[1:4]) if o else [0, 0, 0], list(r[1:4]) if r else [0, 0, 0])
+    return fp
 
 
 def _fix_prims(node):
@@ -197,8 +202,9 @@ def emit(fp, ref, value, x, y, angle, netmap, props=None, side="F", hide_value=T
         pad.append([Sym("uuid"), uid("pad", ref, i)])
         n.append(pad)
     if fp.model:
-        n.append([Sym("model"), fp.model, [Sym("offset"), [Sym("xyz"), 0, 0, 0]],
-                  [Sym("scale"), [Sym("xyz"), 1, 1, 1]], [Sym("rotate"), [Sym("xyz"), 0, 0, 0]]])
+        off, rot = getattr(fp, "model_xf", ([0, 0, 0], [0, 0, 0]))
+        n.append([Sym("model"), fp.model, [Sym("offset"), [Sym("xyz")] + off],
+                  [Sym("scale"), [Sym("xyz"), 1, 1, 1]], [Sym("rotate"), [Sym("xyz")] + rot]])
     return n
 
 

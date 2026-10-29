@@ -30,9 +30,10 @@ Lleva **conector para la batería** (JST SH 1,0) y **pads para soldar la bobina 
   ven el pico de carga de los condensadores, que es lo que soldó el reed de la espalda.
 - **Polaridad**: según el símbolo de KiCad del G6KU-2, pin 1 (+) = SET → contactos NA (R40 montada). Si al probar el
   pulso lo abre en lugar de cerrarlo, se quita R40 y se monta R41 (contactos NC). Omron entrega el relé en RESET.
-- **Reglas para el firmware**: no abrir el relé mientras haya alimentación de carga (CHG_PG = LOW): no habría pulso
-  para volver a encenderlo hasta quitar y poner la base. Al salir del soporte (GPIO6 pasa a HIGH): guardar, esperar
-  3 s y abrir el relé.
+- **También se enciende desde el ESP32**: GPIO14 a HIGH durante 20 ms (a través de D11 y Q11) da el pulso de SET.
+- **Reglas para el firmware**: (1) al arrancar con CHG_PG = LOW, pulso SET de 20 ms en GPIO14 (inocuo si ya está
+  cerrado); (2) nunca abrir el relé (GPIO23) con CHG_PG = LOW; (3) GPIO14 y GPIO23 nunca a la vez. Al salir del
+  soporte (GPIO6 pasa a HIGH): guardar, esperar 3 s y abrir el relé. Detalle en `DOCS/ANALISIS_ELECTRICO.md`.
 - **Altura**: el relé mide 5,2 mm; la tapa necesita un **rebaje de 1,3 mm** en el techo encima de K1.
 - **Disponibilidad**: un distribuidor marca el G6KU-2F-Y como fin de fabricación. Alternativa de la misma huella y
   pines: Panasonic AGQ210S03 (GQ, 5,4 mm). Comprobar existencias antes de pedir.
@@ -64,7 +65,7 @@ también carga.
 | 18 / 19 / 20 / 21 | IMU CS / SCK / MOSI / MISO | SPI modo 3, ≤ 3 MHz |
 | 22 | QI_CHG (LOW = el receptor Qi entrega potencia) | |
 | 23 | RELÉ OFF (pulso HIGH de 20 ms = apagar) | R48 lo mantiene a LOW en el arranque |
-| 14 | libre | |
+| 14 | RELÉ ON (pulso HIGH de 20 ms = encender) | a través de D11; R54 lo mantiene a LOW en el arranque |
 
 ## Consumo estimado
 - **Apagada** (relé abierto): **0 µA**; solo queda la autodescarga de la celda y el circuito de protección de la batería.
@@ -85,7 +86,10 @@ también carga.
 
 ## Fabricación (JLCPCB)
 - 4 capas, **1,0 mm**, ENIG, máscara cualquiera, vías 0,3/0,5 mm, pista/separación mínimas 0,15 mm.
-- Ficheros: `out/AVO_GIRTH_PCB_GERBER_JLCPCB.zip`, `out/JLCPCB_BOM.csv`, `out/JLCPCB_CPL.csv`.
+- Capas: F.Cu señal · In1.Cu plano GND · In2.Cu señal + relleno +3V3 · B.Cu señal + relleno GND.
+- Ficheros: solo si la puerta del CI pasa, en `out/FINAL/` (`AVO_GIRTH_PCB_FINAL_GERBER_JLCPCB.zip`, `_BOM.csv`,
+  `_CPL.csv`, `_STEP.step`, `_DRC.txt`, `_ERC.txt`, `_REPORTE.md`, fuentes de KiCad y `SHA256SUMS.txt`).
+  Si falla, solo hay `out/AVO_GIRTH_PCB_DIAGNOSTICO_REPORTE.md` y el job termina en rojo.
 - **BNO085 sin existencias en LCSC** (C5189642): pedirlo por *Global Sourcing* de JLCPCB o reservarlo antes.
   JLCPCB lo monta con inspección por rayos X.
 - **Revisar el giro de cada pieza en la vista previa de JLCPCB** antes de pagar (sobre todo U1, U2, U4, U5,
@@ -101,5 +105,8 @@ también carga.
 
 ## Fuentes del diseño
 `fuente/avo_girth_pcb.py` (piezas, redes, colocación) → `fuente/build.py` (ruteado y placa) +
-`fuente/write_sch.py` (esquema, reglas, lista de piezas). El CI (`.github/workflows/build-girth-pcb.yml`) rellena
-las zonas con KiCad 9, pasa DRC y ERC y exporta Gerber, taladros, posiciones, renders y STEP a `out/`.
+`fuente/write_sch.py` (esquema, reglas, lista de piezas). Ruteado: Freerouting 1.9.0 en el CI sobre
+`kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb` y reparación de lo que deja sin unir con `fuente/repair.py`
+(→ `kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`, que el CI usa tal cual si existe). El CI
+(`.github/workflows/build-girth-pcb.yml`) rellena las zonas con KiCad 9, pasa DRC con paridad de esquema y ERC,
+aplica la puerta bloqueante (`fuente/gate.py`) y solo entonces exporta los ficheros FINAL.

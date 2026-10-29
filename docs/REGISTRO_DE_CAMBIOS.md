@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-29 — Cincha · PCB REV A — ruteado completo y puerta de fabricación superada
+**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `7f80a18`, `05556bb`, (este) · **CI:** run 40881786227 (éxito, puerta superada en `05556bb`)
+**Qué cambia:** placa de la cincha (ESP32-C6-MINI-1U + BNO085 + BQ51013B + BQ24072 + relé biestable de corte) ruteada al
+100 %: Freerouting 1.9.0 + reparación de QI_ADEN, QI_ILIM y SS_G con `fuente/repair.py` → `kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`.
+KiCad 9 en el CI: DRC 0 errores, 0 advertencias, 0 conexiones incompletas, 0 cortocircuitos, 0 diferencias esquema ↔ placa;
+ERC 0 errores y 0 advertencias. Se generan los ficheros FINAL (Gerber JLCPCB, BOM, CPL, STEP, DRC, ERC, informe y fuentes
+KiCad con SHA256). BOM y CPL comprobados contra `piezas.json` y las posiciones de KiCad (104 piezas, LCSC coincidentes).
+Además: modelo 3D del ESP32 con la colocación de Espressif (salía girado en el render/STEP) y descarga en el CI de los
+modelos 3D de la librería de KiCad para el STEP; README con GPIO14 = RELÉ ON, capas y ficheros FINAL.
+**Archivos:** `hardware/girth/PCB/kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`, `…_colocacion.kicad_pcb`, `fuente/fplib.py`,
+`fuente/gate.py`, `README.md`, `.github/workflows/build-girth-pcb.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, firmware ni app.
+**Validación:** CI (KiCad 9: DRC/ERC/paridad). **NO VERIFICADO** físicamente: nada fabricado ni medido.
+**Pendiente:** medir la bobina Qi y ajustar C1–C5; BNO085 por Global Sourcing; confirmar existencias del relé G6KU-2F-Y
+(alternativa AGQ210S03); polaridad real del relé (R40/R41); cambios de la carcasa; adaptar el firmware a los nuevos GPIO.
+
 ## 2026-10-24 — Android 2.1-motor — inicio automático en segundo plano
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
 **Qué cambia:** el servicio de enlace (BLE con el chaleco, NTRIP, descarga automática) arranca sin abrir la app: al encender el móvil,

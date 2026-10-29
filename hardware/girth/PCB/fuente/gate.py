@@ -64,7 +64,8 @@ L.append("- Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu se�
 L.append("- Componentes: %d en total, %d para montar, %d sin montar (DNP: %s), %d a mano (pads de hilo y de prueba)"
          % (len(parts), len(assembled), len(dnp), ", ".join(dnp) or "—",
             len([p for p in parts if p["no_assembly"]])))
-L.append("- Pistas: %s · vías: %s" % (info.get("tracks", "?"), info.get("vias", "?")))
+L.append("- Pistas: %s · vías: %s · ruteado %s" % (info.get("tracks", "?"), info.get("vias", "?"),
+         "completo (0 conexiones incompletas)" if not unconn else "INCOMPLETO (%d conexiones)" % len(unconn)))
 L.append("")
 L.append("## Comprobaciones bloqueantes")
 L.append("| Comprobación | Resultado | Cantidad |")
@@ -96,6 +97,15 @@ L.append("## Lista de materiales y posiciones")
 L.append("- Piezas montadas sin número LCSC: %s" % (", ".join(no_lcsc) or "ninguna"))
 L.append("- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).")
 L.append("- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.")
+L.append("")
+L.append("## Modelo 3D (STEP y renders, no afecta a la fabricación)")
+mp = os.path.join(OUT, "modelos3d.txt")
+if os.path.exists(mp):
+    ml = open(mp).read().split("\n")
+    falta = [x[6:] for x in ml if x.startswith("FALTA ")]
+    L.append("- Modelos de la librería de KiCad 9.0.0 descargados: %d; sin descargar: %s"
+             % (len([x for x in ml if x.startswith("OK ")]), ", ".join(falta) or "ninguno"))
+L.append("- ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). BNO085 y pads de hilo/prueba: sin modelo 3D.")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
 for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (DOCS/AJUSTE_QI.md).",

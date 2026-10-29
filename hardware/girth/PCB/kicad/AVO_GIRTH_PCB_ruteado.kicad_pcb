@@ -8945,9 +8945,9 @@
 		)
 		(model
 			"${KIPRJMOD}/../fuente/3d/ESP32-C6-MINI-1U.STEP"
-			(offset (xyz 0 0 0))
+			(offset (xyz -6.75 -1.2 -8.45))
 			(scale (xyz 1 1 1))
-			(rotate (xyz 0 0 0))
+			(rotate (xyz -90 0 0))
 		)
 	)
 	(footprint
