@@ -265,9 +265,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 77.87,
-  "y": -4.0,
-  "rot": 0
+  "x": 74.78,
+  "y": -4.4,
+  "rot": 90
  },
  {
   "ref": "C16",
@@ -280,9 +280,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 80.55,
-  "y": -3.88,
-  "rot": 0
+  "x": 73.31,
+  "y": -3.84,
+  "rot": 90
  },
  {
   "ref": "R1",
@@ -355,9 +355,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 83.53,
-  "y": 5.44,
-  "rot": 0
+  "x": 93.08,
+  "y": 4.49,
+  "rot": 90
  },
  {
   "ref": "C17",
@@ -370,9 +370,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 86.37,
-  "y": -2.3,
-  "rot": 90
+  "x": 87.61,
+  "y": -3.28,
+  "rot": 0
  },
  {
   "ref": "Q1",
@@ -400,7 +400,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 84.0,
+  "x": 84.8,
   "y": -3.5,
   "rot": 0
  },
@@ -460,8 +460,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 88.54,
-  "y": -3.61,
+  "x": 90.18,
+  "y": -3.63,
   "rot": 0
  },
  {
@@ -490,8 +490,8 @@
   "no_assembly": false,
   "note": "I_carga = 890/2k ≈ 445 mA (0,22 C de 2000 mAh)",
   "jlc_rot": 0,
-  "x": 81.52,
-  "y": 2.75,
+  "x": 94.28,
+  "y": 4.55,
   "rot": 90
  },
  {
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "I_entrada = 1525/2k ≈ 760 mA (el receptor Qi limita a ≈ 0,5 A)",
   "jlc_rot": 0,
-  "x": 92.95,
-  "y": 4.74,
+  "x": 95.46,
+  "y": 4.49,
   "rot": 90
  },
  {
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 94.1,
-  "y": 4.7,
+  "x": 96.61,
+  "y": 8.21,
   "rot": 90
  },
  {
@@ -535,9 +535,9 @@
   "no_assembly": false,
   "note": "EN2 = 1, EN1 = 0: límite por ILIM",
   "jlc_rot": 0,
-  "x": 86.37,
-  "y": -4.44,
-  "rot": 90
+  "x": 88.7,
+  "y": -5.04,
+  "rot": 0
  },
  {
   "ref": "R9",
@@ -550,9 +550,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 95.62,
-  "y": 2.52,
-  "rot": 90
+  "x": 94.46,
+  "y": -0.83,
+  "rot": 0
  },
  {
   "ref": "R10",
@@ -565,8 +565,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 95.39,
-  "y": 4.63,
+  "x": 95.54,
+  "y": 2.06,
   "rot": 90
  },
  {
@@ -625,8 +625,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 96.56,
-  "y": 7.89,
+  "x": 96.55,
+  "y": 5.69,
   "rot": 90
  },
  {
@@ -640,9 +640,9 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 96.57,
-  "y": 10.03,
-  "rot": 90
+  "x": 85.17,
+  "y": 22.53,
+  "rot": 0
  },
  {
   "ref": "R33",
@@ -655,9 +655,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 96.55,
-  "y": 5.33,
-  "rot": 90
+  "x": 97.07,
+  "y": 9.84,
+  "rot": 0
  },
  {
   "ref": "C34",
@@ -670,8 +670,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 97.67,
-  "y": 8.87,
+  "x": 97.73,
+  "y": 7.25,
   "rot": 90
  },
  {
@@ -865,8 +865,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 97.7,
-  "y": 6.87,
+  "x": 98.66,
+  "y": 9.4,
   "rot": 90
  },
  {
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": 96.79,
-  "y": 3.32,
+  "x": 96.71,
+  "y": 3.63,
   "rot": 90
  },
  {
@@ -940,9 +940,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 94.46,
-  "y": -0.9,
-  "rot": 0
+  "x": 96.7,
+  "y": 1.34,
+  "rot": 90
  },
  {
   "ref": "R17",
@@ -955,8 +955,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 98.74,
-  "y": 9.09,
+  "x": 98.91,
+  "y": 7.09,
   "rot": 90
  },
  {
@@ -1105,9 +1105,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 75.62,
-  "y": -3.14,
-  "rot": 90
+  "x": 78.36,
+  "y": -9.68,
+  "rot": 0
  },
  {
   "ref": "R42",
@@ -1120,8 +1120,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 88.05,
-  "y": -5.34,
+  "x": 78.34,
+  "y": -10.9,
   "rot": 0
  },
  {
@@ -1135,8 +1135,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 78.52,
-  "y": -9.65,
+  "x": 78.25,
+  "y": -12.07,
   "rot": 0
  },
  {
@@ -1150,8 +1150,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 90.17,
-  "y": -5.33,
+  "x": 90.81,
+  "y": -5.36,
   "rot": 0
  },
  {
@@ -1165,8 +1165,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 90.83,
-  "y": -3.78,
+  "x": 92.46,
+  "y": -4.77,
   "rot": 90
  },
  {
@@ -1180,9 +1180,9 @@
   "no_assembly": false,
   "note": "serie del reloj (amortigua el flanco)",
   "jlc_rot": 0,
-  "x": 77.76,
-  "y": -5.33,
-  "rot": 0
+  "x": 87.17,
+  "y": -4.84,
+  "rot": 90
  },
  {
   "ref": "R47",
@@ -1195,7 +1195,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 92.04,
+  "x": 93.64,
   "y": -4.85,
   "rot": 90
  },
@@ -1300,9 +1300,9 @@
   "no_assembly": false,
   "note": "PPS → GPIO4 (captura MCPWM para la marca de tiempo)",
   "jlc_rot": 0,
-  "x": 78.46,
-  "y": 3.06,
-  "rot": 90
+  "x": 83.23,
+  "y": 5.41,
+  "rot": 0
  },
  {
   "ref": "U8",
@@ -1345,8 +1345,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 99.13,
-  "y": 7.01,
+  "x": 101.52,
+  "y": 11.26,
   "rot": 0
  },
  {
@@ -1375,8 +1375,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 95.83,
-  "y": 0.48,
+  "x": 94.28,
+  "y": -2.17,
   "rot": 0
  },
  {
@@ -1480,8 +1480,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 101.41,
-  "y": 11.17,
+  "x": 98.78,
+  "y": 19.21,
   "rot": 0
  }
 ]

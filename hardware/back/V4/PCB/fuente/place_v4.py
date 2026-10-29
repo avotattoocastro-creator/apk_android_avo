@@ -153,6 +153,10 @@ def main():
         else:
             print("núcleo Qi: %s no cabe en %s, se busca hueco" % (ref, pos))
             place(q, pos, (rr, (rr + 180) % 360, (rr + 90) % 360, (rr + 270) % 360))
+    # canales de salida de los pines de U1 (como en la cincha): ninguna otra pieza entre U1 y las filas C6–C8 / C12–C14
+    ux, uy = U1_POS[0], U1_POS[1]
+    occ[(XX >= ux - 3.6) & (XX <= ux + 3.6) & (YY >= uy - 5.9) & (YY <= uy - 2.3)] = True
+    occ[(XX >= ux - 3.6) & (XX <= ux + 3.6) & (YY >= uy + 2.3) & (YY <= uy + 3.3)] = True
     # condensadores de resonancia junto a los hilos de la bobina (L1/L2), antes que el resto
     for ref in ("C1", "C2", "C3"):
         place(byref[ref], (FIJAS["L1"][0] - 2.0, FIJAS["L1"][1]))
