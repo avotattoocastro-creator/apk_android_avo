@@ -415,7 +415,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -10.5,
+  "x": -9.9,
   "y": -3.0,
   "rot": 0
  },
@@ -430,7 +430,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -8.9,
+  "x": -8.3,
   "y": 0.4,
   "rot": 90
  },
@@ -445,7 +445,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -7.4,
+  "x": -6.8,
   "y": -4.3,
   "rot": 90
  },
@@ -460,7 +460,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.9,
+  "x": -13.3,
   "y": -3.3,
   "rot": 90
  },
@@ -475,7 +475,7 @@
   "no_assembly": false,
   "note": "I_carga = 890/3,6k ≈ 247 mA",
   "jlc_rot": 0,
-  "x": -11.4,
+  "x": -10.8,
   "y": 0.4,
   "rot": 90
  },
@@ -490,7 +490,7 @@
   "no_assembly": false,
   "note": "I_entrada = 1525/3,4k = 450 mA",
   "jlc_rot": 0,
-  "x": -7.4,
+  "x": -6.8,
   "y": -1.8,
   "rot": 90
  },
@@ -505,7 +505,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.8,
+  "x": -13.2,
   "y": -0.9,
   "rot": 0
  },
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "EN2 = 1, EN1 = 0: límite por ILIM",
   "jlc_rot": 0,
-  "x": -11.2,
-  "y": -6.2,
+  "x": -10.6,
+  "y": -6.9,
   "rot": 90
  },
  {
@@ -535,8 +535,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -10.1,
-  "y": -6.2,
+  "x": -9.5,
+  "y": -6.9,
   "rot": 90
  },
  {
@@ -550,8 +550,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -9.0,
-  "y": -6.2,
+  "x": -8.4,
+  "y": -6.9,
   "rot": 90
  },
  {

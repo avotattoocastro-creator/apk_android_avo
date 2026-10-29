@@ -352,10 +352,8 @@ def main():
         add_epad_vias(r)
         fails_v = via_drops(r, pads, log)
         # short critical connections pre-routed here (Freerouting keeps them): Qi pump capacitors, USB, relay
-        pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_ILIM",
-               "QI_TS", "QI_CHG", "QI_ADEN", "QI_COIL1", "QI_AC1", "QI_AC2", "QI_RECT", D.VIN5, "AD_SRC",
-               "CHG_EN2", "CHG_ISET", "CHG_ILIM", "CHG_TS", "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C",
-               "CC1", "CC2", D.VBUS, "RLY_NO"]
+        pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
+               "QI_RECT", D.VIN5, "USB_DP", "USB_DM", "USB_DP_C", "USB_DM_C", "CC1", "CC2", "RLY_NO"]
         by_net = {}
         for rec in pads:
             if rec["net"] in pre and not rec["npth"]:
