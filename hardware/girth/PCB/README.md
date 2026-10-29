@@ -1,112 +1,107 @@
-# AVO GIRTH · placa de la cincha · REV A
+# AVO GIRTH · placa de la cincha · REV B (ESP32-C3)
 
-Placa propia para la cápsula de la cincha (REV 5.8.1): sustituye al XIAO ESP32-C6, a la placa GY-BNO08X y al
-receptor Qi de 18 × 15 por **una sola PCB de 4 capas** del tamaño de la bandeja, montada por JLCPCB.
-Lleva **conector para la batería** (JST SH 1,0) y **pads para soldar la bobina Qi** y el reed.
+Placa propia para la cápsula de la cincha (REV 5.8.1), montada por JLCPCB: **una sola PCB de 4 capas** del tamaño de la
+bandeja, con **conector para la batería** (JST SH 1,0) y **pads para soldar la bobina Qi** y el reed.
 
-**Estado:** diseño generado y comprobado en CI con KiCad 9 (ver `out/drc.rpt` y `out/erc.rpt`).
-**NO VERIFICADO** en hardware: no se ha fabricado ni medido ninguna placa.
+**Por qué REV B:** JLCPCB no tiene el ESP32-C6-MINI-1U-N4 de la REV A (0 uds. el 2026-10-29). La REV B usa el
+**ESP32-C3-MINI-1U-N4** (C2911374, 1191 uds.), cambia el BNO085 (19,50 US$, 80 uds.) por **LSM6DS3TR-C + MMC5983MA**
+y el relé biestable por un **enclavamiento con MOSFET**: mismas funciones, ~50 % menos de coste por placa
+(`out_stock/COSTE.md`). La REV A queda congelada en `../PCB_REV_A_C6`.
+
+**Estado:** diseño generado y comprobado en CI con KiCad 9 (`out/`). **NO VERIFICADO** en hardware: no se ha
+fabricado ni medido ninguna placa.
 
 ## Qué lleva
 | Bloque | Pieza | Notas |
 |---|---|---|
-| MCU | ESP32-C6-MINI-1U-N4 (U4) | antena externa por conector **MHF III / W.FL** (no es U.FL): la antena FPC tiene que llevar ese conector |
-| IMU | BNO085 (U5) por **SPI** | cristal 32,768 kHz (Y1); alimentación conmutada con Q3 (GPIO5 a LOW = encendido); opción I²C con R22/R23/R28/R29 |
+| MCU | ESP32-C3-MINI-1U-N4 (U4) | antena externa por el conector de 3.ª generación del módulo (**W.FL / MHF III**, no U.FL). Alternativa: -H4 (C3013922, 105 °C, misma memoria) |
+| IMU | LSM6DS3TR-C (U5) + MMC5983MA (U7) por **I²C** | 9 ejes brutos como pide el protocolo de la cincha; la huella de U5 admite el LSM6DSV16X |
 | Qi | BQ51013B (U1), salida 5 V | bobina Ø25 a los pads L1/L2; condensadores de resonancia **a ajustar** (`DOCS/AJUSTE_QI.md`) |
-| Carga | BQ24072 (U2) con camino de potencia | 247 mA de carga (0,5 C), entrada limitada a 450 mA, NTC en placa (RT2) |
-| USB-C | J1 + ESD (U6) | solo con la tapa abierta; el USB entra en el BQ51013B por AD/AD-EN (Q1/Q2) y **también carga la batería** |
+| Carga | BQ24072 (U2) con camino de potencia | 270 mA de carga (0,54 C), entrada limitada a 462 mA (< 494 mA del Qi), NTC en placa (RT2) |
+| USB-C | J1 + ESD (U6) | programación y consola; entra en el BQ51013B por AD/AD-EN (Q1/Q2) y **también carga** |
 | 3,3 V | RT9080-33 (U3) | 600 mA, 2 µA de consumo propio |
 | Batería | J2 JST SH 1,0 (pin 1 = +) | el cable pasa por la ranura fresada junto al borde −X |
-| Reed | pads SW1/SW2 (uno va al + de la batería) | enciende el relé y se lee en GPIO6 a través de Q16 |
-| **Corte de batería** | **relé biestable K1 (Omron G6KU-2F-Y DC3)** | **0 µA con la cápsula fuera del soporte**; ver abajo |
+| Reed | pads SW1/SW2 (SW2 al + de la batería) | enciende por flanco y se lee en GPIO1 (Q16) |
+| **Corte de batería** | **Q10 (PMOS) + Q11 (NMOS) + D10/D11 (BAV70)** | **< 1 µA apagada**; ver abajo |
 
-## Corte de batería con relé biestable (K1)
-- El relé corta el + de la batería con sus dos polos en paralelo (1 A, ≤ 100 mΩ). Abierto, **la placa no consume nada**.
-- **Se enciende solo**, sin firmware: al cerrarse el reed (cápsula en el soporte) **o** al llegar 5 V (base Qi o USB),
-  C40 + C41 (2 × 220 µF) dan un pulso de ~40 ms a la bobina (pin 1 +). Q11 cierra la bobina a masa durante el pulso.
-- **Se apaga desde el ESP32**: GPIO23 a HIGH durante **20 ms** invierte la bobina (Q13 + Q14) y el relé se abre. Q12
-  impide el cortocircuito si el pulso de encendido sigue presente.
-- **Arranque suave**: el relé cierra sobre Q10 (PMOS) apagado, que se enciende en ~0,1 s (C43/R51). Los contactos no
-  ven el pico de carga de los condensadores, que es lo que soldó el reed de la espalda.
-- **Polaridad**: según el símbolo de KiCad del G6KU-2, pin 1 (+) = SET → contactos NA (R40 montada). Si al probar el
-  pulso lo abre en lugar de cerrarlo, se quita R40 y se monta R41 (contactos NC). Omron entrega el relé en RESET.
-- **También se enciende desde el ESP32**: GPIO14 a HIGH durante 20 ms (a través de D11 y Q11) da el pulso de SET.
-- **Reglas para el firmware**: (1) al arrancar con CHG_PG = LOW, pulso SET de 20 ms en GPIO14 (inocuo si ya está
-  cerrado); (2) nunca abrir el relé (GPIO23) con CHG_PG = LOW; (3) GPIO14 y GPIO23 nunca a la vez. Al salir del
-  soporte (GPIO6 pasa a HIGH): guardar, esperar 3 s y abrir el relé. Detalle en `DOCS/ANALISIS_ELECTRICO.md`.
-- **Altura**: el relé mide 5,2 mm; la tapa necesita un **rebaje de 1,3 mm** en el techo encima de K1.
-- **Disponibilidad**: un distribuidor marca el G6KU-2F-Y como fin de fabricación. Alternativa de la misma huella y
-  pines: Panasonic AGQ210S03 (GQ, 5,4 mm). Comprobar existencias antes de pedir.
-- El relé lleva un imán permanente: a ~17 mm del BNO085 deja un desvío fijo en el magnetómetro, que se calibra igual
-  que el de los imanes de la cápsula (el *Game Rotation Vector* no lo usa).
+## Corte de batería (enclavamiento con MOSFET)
+- **Se enciende solo**, sin firmware: al **cerrarse** el reed (C40 da un impulso de ~2,5 s) o con 5 V de la base Qi o
+  del USB (D10, mientras estén).
+- **El firmware lo mantiene** con PWR_HOLD (GPIO5) = 1, que pone lo primero al arrancar. Si el ESP32 se reinicia, C41
+  sostiene el corte ~1,5 s.
+- **Se apaga desde el ESP32**: PWR_HOLD = 0 → el corte se abre en ~3 s. Funciona también con el reed cerrado (el reed
+  actúa por flanco), así que el **apagado remoto** sigue siendo posible en el soporte.
+- **Nunca queda bloqueado al cargar**: con 5 V presentes el corte está cerrado pase lo que pase en el firmware.
+- **Batería agotada**: con la base puesta, el diodo interno de Q10 deja precargar la celda y luego Q10 conduce.
+- Cálculos en `DOCS/ANALISIS_ELECTRICO.md` §3. Respecto al relé de la REV A: no necesita rebaje en la tapa ni
+  condensadores de 220 µF, no tiene polaridad que adivinar (R40/R41 desaparecen) y no lleva imán junto a la IMU.
 
-## Por qué no el BQ51050B (Qi + cargador en un chip)
-Su corriente mínima de carga es **500 mA** (1 C para la LP403048 de 500 mAh), **no puede cargar por USB** y no
-tiene camino de potencia: con el ESP32 encendido la carga no termina nunca y la celda se queda a 4,2 V hasta el
-temporizador de 10 h. Con BQ51013B + BQ24072 la carga es de 0,5 C, termina bien con el ESP32 encendido y el USB
-también carga.
-
-## Pines del ESP32-C6 (cambian respecto al XIAO: hay que adaptar el firmware de la cincha)
+## Pines del ESP32-C3 (firmware V0.3.0: `firmware/girth/V0_3_0_C3`)
 | GPIO | Función | Nota |
 |---|---|---|
-| 0 | IMU_INT (H_INTN) | LP: puede despertar |
-| 1 | IMU_RST (NRST) | |
-| 2 | BAT_ADC (ADC1_CH2) | divisor 1 MΩ / 1 MΩ → V_bat / 2 |
-| 3 | CHG_PG (PGOOD del cargador, LOW = hay alimentación Qi o USB) | LP: despierta al poner la cápsula en la base |
-| 4 | CHG_STAT (LOW = cargando) | strapping (MTMS), sin efecto práctico |
-| 5 | IMU_PWR_N (LOW = BNO encendido) | strapping (MTDI); R30 lo mantiene apagado en el arranque |
-| 6 | REED (LOW = reed cerrado, cápsula en el soporte) | a través de Q16; LP: puede despertar |
-| 7 | IMU_WAKE (PS0/WAKE) | debe estar a HIGH antes de soltar NRST (modo SPI) |
-| 8 | libre (pull-up 10 k, strapping) | |
-| 9 | BOOT (pad TP2) | strapping |
-| 12 / 13 | USB D− / D+ | USB-Serial-JTAG |
-| 15 | LED (activo alto, D1) | strapping JTAG, pull-down 10 k |
-| 16 / 17 | TXD0 / RXD0 (pads TP4 / TP5) | |
-| 18 / 19 / 20 / 21 | IMU CS / SCK / MOSI / MISO | SPI modo 3, ≤ 3 MHz |
-| 22 | QI_CHG (LOW = el receptor Qi entrega potencia) | |
-| 23 | RELÉ OFF (pulso HIGH de 20 ms = apagar) | R48 lo mantiene a LOW en el arranque |
-| 14 | RELÉ ON (pulso HIGH de 20 ms = encender) | a través de D11; R54 lo mantiene a LOW en el arranque |
+| 0 | IMU_INT (INT1 del LSM6) | despierta |
+| 1 | REED (LOW = cápsula en el soporte) | despierta |
+| 2 | I²C SCL | strapping: 1 al arrancar gracias al pull-up de 4,7 k |
+| 3 | BAT_ADC (ADC1_CH3) | divisor 1 MΩ / 1 MΩ → V_bat / 2 |
+| 4 | CHG_PG (LOW = hay 5 V) | despierta |
+| 5 | PWR_HOLD | 1 = mantener la alimentación |
+| 6 | I²C SDA | |
+| 7 | CHG_STAT (LOW = cargando) | |
+| 8 | LED rojo (activo bajo) | strapping: 1 al arrancar |
+| 9 | BOOT (pad TP2) | strapping; 5 s pulsado = olvidar la espalda |
+| 10 | QI_CHG (LOW = el Qi entrega potencia) | |
+| 18 / 19 | USB D− / D+ | USB-Serial-JTAG |
+| 20 / 21 | RXD0 / TXD0 (pads TP5 / TP4) | UART0 de la ROM: registro y recuperación |
+
+**Reglas para el firmware:** PWR_HOLD = 1 lo primero; fuera del soporte 3 s sin carga → apagar; batería < 3,30 V →
+apagar; en la base Qi fuera del soporte → sueño profundo. Detalle en `firmware/girth/V0_3_0_C3/DIFERENCIAS_C6_C3.md`.
+
+## Programación y recuperación
+Por el USB-C interno (USB-Serial-JTAG) con esptool o Arduino: `AVO_GIRTH_V0_3_0_C3_COMPLETO.bin` en 0x0. Si el
+firmware no arranca: mantener BOOT (TP2) a masa al encender para entrar en modo descarga, o usar el UART0 (TP4/TP5).
+**AVO Update todavía solo instala en el ESP32-C6**: hay que adaptarlo (id de chip 5 y vigilantes del C3) antes de
+usarlo con esta placa.
 
 ## Consumo estimado
-- **Apagada** (relé abierto): **0 µA**; solo queda la autodescarga de la celda y el circuito de protección de la batería.
-- **En sueño profundo con el relé cerrado** (por ejemplo, cargando): ~15 µA.
-- **Funcionando**: ESP32-C6 con ESP-NOW + BNO085 ≈ 30–60 mA (estimado) → 8–15 h con 500 mAh.
+- **Apagada** (fuera del soporte): < 1 µA (fuga de Q10) + autodescarga de la celda.
+- **Funcionando**: ESP32-C3 con ESP-NOW + IMU ≈ 25–45 mA (estimado) → 11–20 h con 500 mAh.
+- **En la base Qi**: sueño profundo, lo alimenta la base.
 
 ## Cambios mecánicos que pide la placa (siguiente revisión del CAD de la cápsula)
-1. **Cuna de la batería +0,6 mm** (apoyo de la placa a z 7,75; antes 7,15): deja hueco bajo la placa para las
-   patas pasantes del blindaje del USB-C, que caen encima de la batería. El techo sigue en z 13,2: quedan
-   4,1 mm sobre la placa (lo más alto es el USB-C, 3,3 mm).
-2. **Labio de la tapa** apoyado sobre la placa (como sobre la bandeja), 0,6 mm más alto.
+1. **Cuna de la batería +0,6 mm** (apoyo de la placa a z 7,75): hueco bajo la placa para las patas del blindaje del
+   USB-C. El techo sigue en z 13,2: quedan 4,1 mm sobre la placa (lo más alto es el USB-C, 3,3 mm).
+2. **Labio de la tapa** apoyado sobre la placa, 0,6 mm más alto.
 3. **Cable de la batería** por la ranura de la placa en (−29; 4,6). Hilos de la bobina a L1/L2 en X −28,6 e hilos
-   del reed a SW1/SW2 en Y −17,8: suben por el hueco entre la cuna y la pared.
+   del reed a SW1/SW2 en Y −17,8.
 4. **Antena FPC** pegada al techo de la tapa sobre la banda sin cobre (X −3,3…25,5; Y 12,6 al borde).
 5. **Postes de la tapa**: rehacerlos para que apoyen en zonas libres de la placa.
 6. La bandeja impresa desaparece: la placa es la bandeja.
-7. **Rebaje de 1,3 mm** en el techo de la tapa sobre el relé K1 (X −16,8…−6,2; Y 11,0…20,2).
+7. Ya **no** hace falta el rebaje de 1,3 mm de la REV A (no hay relé).
 
 ## Fabricación (JLCPCB)
-- 4 capas, **1,0 mm**, ENIG, máscara cualquiera, vías 0,3/0,5 mm, pista/separación mínimas 0,15 mm.
-- Capas: F.Cu señal · In1.Cu plano GND · In2.Cu señal + relleno +3V3 · B.Cu señal + relleno GND.
-- Ficheros: solo si la puerta del CI pasa, en `out/FINAL/` (`AVO_GIRTH_PCB_FINAL_GERBER_JLCPCB.zip`, `_BOM.csv`,
-  `_CPL.csv`, `_STEP.step`, `_DRC.txt`, `_ERC.txt`, `_REPORTE.md`, fuentes de KiCad y `SHA256SUMS.txt`).
-  Si falla, solo hay `out/AVO_GIRTH_PCB_DIAGNOSTICO_REPORTE.md` y el job termina en rojo.
-- **BNO085 sin existencias en LCSC** (C5189642): pedirlo por *Global Sourcing* de JLCPCB o reservarlo antes.
-  JLCPCB lo monta con inspección por rayos X.
-- **Revisar el giro de cada pieza en la vista previa de JLCPCB** antes de pagar (sobre todo U1, U2, U4, U5,
-  U6, Q1–Q3, J1, J2, D1, Y1): el CPL sale de KiCad sin correcciones de giro.
-- Las piezas «sin montar» (DNP: C5, R22, R23, R28, R29) no entran en la BOM.
+- 4 capas, **1,0 mm**, ENIG, vías 0,3/0,5 mm, pista/separación mínimas 0,15 mm. Capas: F.Cu señal · In1.Cu plano
+  GND · In2.Cu señal + relleno +3V3 · B.Cu señal + relleno GND.
+- Ficheros, solo si la puerta del CI pasa, en `out/C3/`: `AVO_GIRTH_PCB_C3_GERBER_JLCPCB.zip`, `_BOM_JLCPCB.csv`,
+  `_CPL_JLCPCB.csv`, `_STEP.step`, `_DRC.txt`, `_ERC.txt`, `_FIRMWARE.zip`, `_REPORTE.md`, fuentes de KiCad y
+  `SHA256SUMS.txt`. Si falla, solo hay `out/AVO_GIRTH_PCB_C3_DIAGNOSTICO_REPORTE.md` y el job termina en rojo.
+- Existencias, precios y tipo (Basic/Extended) consultados en el CI: `out_stock/stock_jlc.json` (con fecha);
+  coste comparado con la REV A: `out_stock/COSTE.md`. **Volver a comprobar las existencias el día del pedido.**
+- **Revisar el giro de cada pieza en la vista previa de JLCPCB** antes de pagar (sobre todo U1, U2, U4, U5, U7, U6,
+  Q1–Q3, Q10, Q11, D10, D11, J1, J2, D1): el CPL sale de KiCad sin correcciones de giro.
+- Piezas sin montar (DNP): C5.
 
 ## Medidas y comprobaciones pendientes
 1. Inductancia de la bobina y ajuste de C1–C5 (`DOCS/AJUSTE_QI.md`).
 2. Polaridad del cable de la batería contra J2 (pin 1 = +).
-3. Antena FPC con conector MHF III.
+3. Corte de batería: tiempo de encendido con el reed, tiempo que sostiene un reinicio, tiempo de apagado y
+   consumo apagado (< 1 µA esperado).
 4. Primer encendido con fuente limitada a 100 mA; medir 3,3 V, consumo dormido y carga por USB y por Qi.
-5. Comprobar que el reed y PGOOD despiertan al ESP32-C6.
+5. IMU: direcciones I²C (`DIAG`), signos de los ejes y calibración del magnetómetro dentro de la cápsula.
 
 ## Fuentes del diseño
-`fuente/avo_girth_pcb.py` (piezas, redes, colocación) → `fuente/build.py` (ruteado y placa) +
+`fuente/avo_girth_pcb.py` (piezas, redes, colocación) → `fuente/build.py` (placa de colocación) +
 `fuente/write_sch.py` (esquema, reglas, lista de piezas). Ruteado: Freerouting 1.9.0 en el CI sobre
 `kicad/AVO_GIRTH_PCB_colocacion.kicad_pcb` y reparación de lo que deja sin unir con `fuente/repair.py`
 (→ `kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`, que el CI usa tal cual si existe). El CI
 (`.github/workflows/build-girth-pcb.yml`) rellena las zonas con KiCad 9, pasa DRC con paridad de esquema y ERC,
-aplica la puerta bloqueante (`fuente/gate.py`) y solo entonces exporta los ficheros FINAL.
+aplica la puerta bloqueante (`fuente/gate.py`) y solo entonces exporta los ficheros de fabricación.

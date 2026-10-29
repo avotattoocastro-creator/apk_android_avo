@@ -1,86 +1,82 @@
-# Análisis eléctrico — AVO GIRTH REV A
+# Análisis eléctrico — AVO GIRTH REV B (ESP32-C3)
 
 Cálculos y razonamiento de diseño. **Nada de esto está medido**: es la base para la prueba del prototipo.
+La REV A (ESP32-C6, BNO085, relé) tiene su análisis en `../../PCB_REV_A_C6/DOCS/ANALISIS_ELECTRICO.md`.
 
 ## 1. Corrientes y anchos de pista
-Cobre exterior 1 oz (35 µm), interior 0,5 oz (planos). Fórmula IPC-2221, capa externa:
-I = 0,048 · ΔT^0,44 · A^0,725 (A en mil², ΔT en °C).
+Cobre exterior 1 oz (35 µm). Fórmula IPC-2221, capa externa: I = 0,048 · ΔT^0,44 · A^0,725 (A en mil², ΔT en °C).
 
-| Red | Corriente prevista (pico) | Ancho mínimo para ΔT = 10 °C | Ancho usado | Capacidad con el ancho usado (ΔT 10 °C) | Caída (30 mm) |
-|---|---|---|---|---|---|
-| VBAT (batería ↔ cargador ↔ relé) | 0,63 A (0,38 A del ESP32 en TX + 0,25 A de carga) | 0,15 mm | 0,3 mm | ≈ 1,0 A | 31 mV a 0,63 A |
-| VSYS (cargador → RT9080) | 0,45 A (ESP32 + BNO + LDO) | 0,11 mm | 0,3 mm | ≈ 1,0 A | 22 mV |
-| VIN5 / VBUS (5 V Qi o USB → cargador) | 0,45 A (límite ILIM del BQ24072) | 0,11 mm | 0,3 mm | ≈ 1,0 A | 22 mV |
-| QI_AC1 / QI_AC2 / bobina | ~0,6 A eficaces a 110–205 kHz | 0,14 mm (efecto pelicular despreciable a 35 µm) | 0,3 mm | ≈ 1,0 A | — |
-| QI_RECT | 0,1 A eficaces (TI) | — | 0,3 mm | — | — |
-| Bobina del relé | 46 mA durante 20–40 ms | — | 0,2 mm | — | — |
+| Red | Corriente prevista (pico) | Ancho mínimo (ΔT 10 °C) | Ancho usado | Capacidad (ΔT 10 °C) |
+|---|---|---|---|---|
+| BAT_RAW / VBAT (celda ↔ Q10 ↔ cargador) | 0,65 A (0,35 A del ESP32-C3 en TX + 0,27 A de carga) | 0,16 mm | 0,3 mm | ≈ 1,0 A |
+| VSYS (cargador → RT9080) | 0,45 A | 0,11 mm | 0,3 mm | ≈ 1,0 A |
+| VIN5 / VBUS | 0,46 A (límite ILIM) | 0,11 mm | 0,3 mm | ≈ 1,0 A |
+| QI_AC1 / QI_AC2 / bobina | ~0,6 A eficaces a 110–205 kHz | 0,14 mm | 0,3 mm | ≈ 1,0 A |
 
-Resistencia de la pista de 0,3 mm en 1 oz: 1,64 mΩ/mm. **Conclusión:** 0,3 mm da un margen de ≥ 1,6× en todas
-las redes de potencia, y es el ancho que entra limpio en los pines de 0,24 mm de las QFN de paso 0,5 mm
-(holgura al pin vecino 0,225 mm ≥ 0,15 mm). Los planos In1 (GND) e In2 (+3V3) cubren toda la placa.
+0,3 mm da ≥ 1,5× de margen y entra limpio en los pines de 0,24 mm de las QFN de paso 0,5 mm.
+Caída en Q10 (AO3401A, ≈ 85 mΩ con Vgs = −2,5 V): 55 mV a 0,65 A.
 
 ## 2. Caminos de alimentación y realimentaciones
-- **USB → Qi:** VBUS va al pin AD del BQ51013B. Q1/Q2 (dos PMOS espalda con espalda, fuentes comunes) unen VBUS
-  con VIN5 solo cuando AD-EN los enciende. Apagados, sus diodos internos se oponen: **no hay paso en ningún
-  sentido**. Con USB presente, el BQ51013B apaga la recepción inalámbrica y avisa al emisor.
-- **VIN5 → batería:** solo a través del BQ24072 (no conduce de BAT/OUT hacia IN).
-- **Batería → sistema:** BAT → OUT por el transistor interno del BQ24072 (camino de potencia). La carga termina
-  aunque el ESP32 consuma, porque el cargador mide la corriente de la batería por separado.
-- **Pulso del relé:** D10 (BAT54C) une REED_HI y VIN5 hacia RLY_P sin que ninguno alimente al otro.
-- **Lectura del reed:** Q16 traslada el nivel (REED_HI puede ser 4,2 V) a GPIO6 a 3,3 V; nada de la batería entra en
-  un pin del ESP32.
-- **GPIO14 → puerta de Q11:** a través de D11 (BAT54C): con el ESP32 apagado, el pulso no puede entrar en el pin.
+- **USB → Qi:** VBUS va al pin AD del BQ51013B; Q1/Q2 (PMOS espalda con espalda) solo unen VBUS y VIN5 con AD-EN.
+  Apagados, sus diodos se oponen: no hay paso en ningún sentido.
+- **VIN5 → batería:** solo a través del BQ24072.
+- **Celda → sistema:** BAT_RAW → Q10 → VBAT → BQ24072 (camino de potencia) → VSYS → RT9080 → 3,3 V.
+- **Q10 apagado:** su diodo interno va de VBAT a la celda (sentido de carga). Sin 5 V nada lo polariza; la celda
+  no alimenta nada.
+- **D10 (BAV70):** VIN5 y PWR_HOLD llegan a PWR_G cada uno por su diodo: los 5 V nunca entran en GPIO5.
+- **D11 (BAV70, los dos diodos en paralelo):** solo deja pasar el impulso del reed hacia PWR_G.
+- **Lectura del reed:** Q16 traslada REED_HI (hasta 4,2 V) a GPIO1 a 3,3 V.
 
-## 3. Relé biestable: secuencias
-Relé Omron G6KU-2F-Y DC3: una bobina, 91 Ω, SET/RESET con ≥ 2,25 V durante ≥ 10 ms, máximo 4,5 V. SET = pin 1 (+).
+## 3. Corte de batería (Q10/Q11) — sustituye al relé
+Q11 (AO3400A, Vth 0,65–1,45 V a 250 µA) solo tiene que bajar la puerta de Q10 contra R40 (1 MΩ): 4,2 µA. Con
+tan poca corriente conduce por debajo de su Vth nominal, así que 1,45 V es un límite conservador.
 
-| Situación | Qué pasa | Resultado |
+| Situación | Cálculo | Resultado |
 |---|---|---|
-| Cápsula entra en el soporte (relé abierto) | Reed cierra → REED_HI = batería → D10 → C40+C41 (440 µF) → bobina 1→8, Q11 a masa. τ = 440 µF × 91 Ω ≈ 40 ms; con 3,3 V de batería quedan ≥ 2,25 V durante ≈ 11 ms | Relé cerrado, el sistema arranca |
-| Se pone en la base Qi o en USB (relé abierto) | VIN5 → D10 → mismo pulso; además el cargador alimenta VSYS por su camino de potencia y el ESP32 arranca | Relé cerrado por el pulso y, si hiciera falta, por el firmware (GPIO14) |
-| Salida del soporte | GPIO6 pasa a HIGH. El firmware guarda, espera 3 s y pone GPIO23 en HIGH 20 ms (Q13 + Q14 invierten la bobina) | Relé abierto: 0 µA |
-| **Apagado pedido con el cargador puesto** | El relé se abre, pero el ESP32 sigue vivo por VSYS (cargador). El firmware **no debe** apagar con CHG_PG = LOW; si lo hiciera, en el siguiente arranque cierra el relé con GPIO14 | **No se bloquea**: con la base puesta siempre hay alimentación y el firmware recupera el relé |
-| Batería agotada (protección de la celda abierta) | En la base: VIN5 da el pulso y alimenta VSYS; el BQ24072 precarga la celda | Se recupera sin intervención |
-| Batería agotada y sin base | No hay energía para nada | Normal: poner en la base |
-| GPIO14 y GPIO23 a la vez (error de firmware) | Q12 apaga Q11; en K_A, Q17 (por R52 de 10 Ω) contra Q13: ≈ 0,4 A durante el pulso | Sin daño (R52 0805, pulso de 20 ms) |
-| Reset/arranque del ESP32 | R48 y R54 mantienen GPIO23 y GPIO14 a LOW; R30 mantiene el BNO apagado | El relé no se mueve |
+| **Se cierra el reed** (cápsula al soporte) | C40 (10 µF) sube X a V_bat; reparto con C41 (2,2 µF): PWR_G ≈ (V_bat − 0,7)·10/12,2 = 2,2 V (3,4 V) … 2,9 V (4,2 V). Descarga por R41‖R42 = 0,5 MΩ con 12,2 µF: τ ≈ 6,1 s | PWR_G > 1,45 V durante **≥ 2,6 s** (celda a 3,4 V). El ESP32-C3 pone PWR_HOLD en < 0,5 s (estimado) |
+| **Funcionando** | PWR_HOLD = 3,3 V → PWR_G ≈ 2,9 V | Q10 cerrado; consumo propio del corte 4,2 µA (R40) |
+| **Reinicio del ESP32** (vigilante, fallo) | PWR_HOLD queda en alta impedancia (R43 a 0); C41 se descarga por R42: τ = 2,2 s | PWR_G > 1,45 V durante **≈ 1,5 s**: el firmware vuelve a poner PWR_HOLD antes |
+| **Apagar** (firmware: fuera del soporte 3 s, batería baja, orden remota o «APAGAR») | PWR_HOLD = 0; PWR_G de 2,9 V a 0,65 V: 2,2·ln(2,9/0,65) | Corte abierto en **≈ 3,3 s**; el ESP32 duerme mientras tanto |
+| **Apagado remoto con la cápsula en el soporte** | el reed es por flanco (C40): con el reed fijo cerrado PWR_G no recibe nada de él | **Se puede apagar** igual que con el relé |
+| **Base Qi o USB** | VIN5 por D10: PWR_G ≈ 4,3 V | Corte cerrado siempre que haya 5 V: **nunca queda bloqueado al cargar** |
+| **Batería agotada** (protección de la celda abierta) | Con la base, el diodo de Q10 deja pasar la precarga del BQ24072 hacia la celda; al subir la tensión, Q10 conduce | Se recupera sin intervención |
+| **Batería agotada y sin base** | sin energía | Normal: poner en la base |
+| **Apagada** | Q10 con Vgs = 0 (fuga ≤ 1 µA máx. a 30 V; nA a 4 V); con el reed cerrado, R49 + R50 = 1,1 MΩ → 3,8 µA | **< 1 µA** fuera del soporte; 3,8 µA si se apaga en el soporte |
 
-Transitorios de la bobina: al cortar el pulso de RESET, los diodos internos de Q11 y Q13 recortan las dos patas de
-la bobina a −0,7 V y C40/C41 absorben la energía (L·I² ínfimo). En SET por pulso, la corriente se extingue
-suavemente al cargarse los condensadores.
+Al soltar el reed, X baja a −V_bat durante un momento: D11 queda en inversa (30 V) y Q11 no ve tensión negativa.
 
-Reglas para el firmware (también en el README):
-1. Al arrancar con CHG_PG = LOW (cargador presente): pulso SET de 20 ms en GPIO14 (inocuo si ya está cerrado).
-2. Nunca GPIO23 (RESET) con CHG_PG = LOW.
-3. GPIO14 y GPIO23 nunca a la vez; pulsos de 20 ms.
-
-## 4. ESP32-C6-MINI-1U: pines (datasheet del módulo v1.5 y guía de diseño de Espressif)
+## 4. ESP32-C3-MINI-1U-N4: pines (hoja del módulo y guía de diseño de Espressif)
 | Pin del módulo | GPIO | Uso | Restricción comprobada |
 |---|---|---|---|
-| 12 | 0 | IMU_INT | LP GPIO (despertar ext1); pin del cristal de 32 kHz, que no se usa |
-| 13 | 1 | IMU_RST | LP GPIO |
-| 5 | 2 | BAT_ADC | ADC1_CH2 |
-| 6 | 3 | CHG_PG | LP GPIO |
-| 9 | 4 | CHG_STAT | strapping MTMS (solo flanco SDIO): sin efecto en el arranque por flash |
-| 10 | 5 | IMU_PWR_N | strapping MTDI (solo flanco SDIO); R30 lo lleva a HIGH (BNO apagado) |
-| 15 | 6 | REED (vía Q16) | LP GPIO |
-| 16 | 7 | IMU_WAKE (PS0) | LP GPIO |
-| 22 | 8 | libre con pull-up 10 k | strapping: debe estar en HIGH para descargar por USB |
-| 23 | 9 | BOOT (TP2) | strapping: pull-up 10 k; a masa = modo descarga |
-| 17 / 18 | 12 / 13 | USB D− / D+ | USB-Serial-JTAG |
-| 19 | 14 | RELÉ ON | GPIO normal, pull-down 100 k |
-| 20 | 15 | LED | strapping de JTAG: pull-down 10 k (nivel definido) |
-| 24–27 | 18–21 | SPI del BNO085 (CS, SCK, MOSI, MISO) | sin restricciones |
-| 28 | 22 | QI_CHG | — |
-| 29 | 23 | RELÉ OFF | pull-down 100 k |
-| 30 / 31 | 17 / 16 | RXD0 / TXD0 (TP5 / TP4) | registro de arranque de la ROM |
-| 8 | EN | 10 k + 1 µF, TP1 | — |
+| 12 | 0 | IMU_INT (INT1 del LSM6) | RTC: despierta del sueño profundo |
+| 13 | 1 | REED (vía Q16) | RTC: despierta |
+| 5 | 2 | I²C SCL | **strapping**: la hoja del módulo pide 1 en el arranque (la guía dice que no decide el modo y recomienda pull-up): R21 4,7 k a 3,3 V |
+| 6 | 3 | BAT_ADC | ADC1_CH3 (el ADC2 no se usa: choca con la radio) |
+| 18 | 4 | CHG_PG | RTC: despierta al quitar la base (sueño en carga) |
+| 19 | 5 | PWR_HOLD | R43 100 k a masa: 0 mientras arranca |
+| 20 | 6 | I²C SDA | R20 4,7 k |
+| 21 | 7 | CHG_STAT | pulso bajo de ~5 ns al encender (guía de Espressif): es una entrada, sin efecto |
+| 22 | 8 | LED (activo bajo) | **strapping**: 1 para el modo descarga → R13 10 k a 3,3 V y el LED va a 3,3 V |
+| 23 | 9 | BOOT (TP2) | **strapping**: R12 10 k a 3,3 V; a masa = descarga. Sin condensador (la guía lo prohíbe) |
+| 16 | 10 | QI_CHG | pulso bajo de ~5 ns al encender: entrada, sin efecto |
+| 26 / 27 | 18 / 19 | USB D− / D+ | USB-Serial-JTAG: programación y consola |
+| 30 / 31 | 20 / 21 | RXD0 / TXD0 (TP5 / TP4) | UART0 de la ROM: registro y recuperación (la guía pide conservarlo) |
+| 8 | EN | 10 k + 1 µF (valores de la guía), TP1 | |
+| 3 | 3V3 | 22 µF + 100 nF junto al pin; RT9080 de 600 mA (la guía pide ≥ 500 mA) | |
 
-Alimentación: RT9080-33 (600 mA; pico del ESP32 382 mA), 22 µF + 100 nF junto al pin 3 y 10 µF a la salida del LDO.
-Espressif pide ≥ 500 mA de capacidad y 10 µF en la entrada: se cumple.
+Los 13 GPIO libres del C3 están todos usados. Con el BNO085 por SPI habrían hecho falta 16: por eso el C3 obliga a
+una IMU por I²C (y el BNO08x tiene problemas conocidos de I²C con los ESP32).
 
-## 5. BNO085
-SPI modo 3 a ≤ 3 MHz (PS0 = PS1 = 1). Cristal de 32,768 kHz (FC-135, 12,5 pF) con 22 pF; CLKSEL0 a masa; CAP 100 nF;
-BOOTN, NRST, H_CSN, ENV_SCL y ENV_SDA con 10 k a IMU_VDD. Alimentación conmutada por Q3: todas las resistencias de
-pull-up van a IMU_VDD, así un BNO apagado no recibe corriente por ellas. Opción I²C: montar R22/R23 (PS1/PS0 a masa)
-y R28/R29 (pull-ups de 4,7 k), quitar R21; dirección 0x4A.
+## 5. IMU por I²C
+- LSM6DS3TR-C (dirección 0x6A, SA0 a masa; CS a 3,3 V = I²C; SDx/SCx a masa; OCS_Aux y SDO_Aux sin conectar, como
+  permite la hoja del LSM6DSV16X, que comparte huella). 100 nF en VDD y en VDDIO.
+- MMC5983MA (0x30): SPI_CS a VDDIO = I²C; CAP con 10 µF (la hoja pide ≥ 10 µF de baja ESR junto al pin); 1 µF en VDD
+  y 100 nF en VDDIO. Lejos de las pistas de batería (Q10 a 14 mm) y de la bobina.
+- Bus a 400 kHz con 4,7 k: tiempo de subida ≈ 0,85·4,7 k·(≈ 30 pF) ≈ 0,12 µs < 0,3 µs (modo rápido).
+
+## 6. Consumo estimado
+| Estado | Consumo |
+|---|---|
+| Apagada (fuera del soporte) | < 1 µA (fuga de Q10) + autodescarga de la celda |
+| Funcionando: ESP32-C3 con ESP-NOW + LSM6 (104 Hz) + MMC5983MA (100 Hz) | ≈ 25–45 mA (estimado) → 11–20 h con 500 mAh |
+| En la base Qi, fuera del soporte (sueño profundo) | ≈ 5 µA ESP32-C3 + 2 µA RT9080 + reposo de LSM6/MMC (≈ 3 + 1 µA); lo da la base |

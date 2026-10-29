@@ -10,6 +10,8 @@ on:
     paths:
       - 'hardware/girth/PCB/kicad/**'
       - 'hardware/girth/PCB/fuente/**'
+      - '!hardware/girth/PCB/fuente/stock_*'
+      - '!hardware/girth/PCB/fuente/coste.py'
       - '.github/workflows/build-girth-pcb.yml'
 
 permissions:
@@ -133,6 +135,8 @@ jobs:
           cp out/AVO_GIRTH_PCB_C3_REPORTE.md out/C3/
           (cd out/gerber && zip -q ../C3/AVO_GIRTH_PCB_C3_GERBER_JLCPCB.zip *)
           mkdir -p out/C3/KiCad && cp kicad/AVO_GIRTH_PCB.kicad_pcb kicad/AVO_GIRTH_PCB.kicad_sch kicad/AVO_GIRTH_PCB.kicad_pro out/C3/KiCad/
+          F=../../../firmware/girth/V0_3_0_C3/out/AVO_GIRTH_PCB_C3_FIRMWARE.zip
+          if [ -f $F ]; then cp $F out/C3/; else echo "::warning title=Firmware::no hay AVO_GIRTH_PCB_C3_FIRMWARE.zip (compilar build-girth-c3)"; fi
           (cd out/C3 && sha256sum *.* KiCad/* > SHA256SUMS.txt)
 
       - name: Guardar resultados en la rama
