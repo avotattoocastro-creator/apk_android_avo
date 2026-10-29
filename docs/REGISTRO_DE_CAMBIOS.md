@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-29 — Cincha · PCB REV B → paquete ODB++ para AISLER (5 PCB / 2 montadas)
+**Autor:** Claude · Rama `export/avo-girth-aisler` (derivada de `feature/avo-girth-pcb` en `2a70369`) · **Commits:**
+`981f17f`…`779eefa` y el de esta entrada · **CI:** `export-girth-aisler.yml`, run 40960122600 (éxito)
+**Qué cambia:** `hardware/girth/PCB/AISLER/`: copia del proyecto KiCad REV B con TP1–TP8, L1/L2 y SW1/SW2 marcados
+DNP, cajetín «B» y MPN/fabricante reales en las 85 piezas montadas (solo campos de texto). ODB++ exportado con KiCad
+9.0.9 (`AVO_GIRTH_PCB_REV_B_AISLER_ODB.zip`, SHA-256 `d3c662b2…ed03`), validado leyendo el ZIP (98 componentes, 85 para
+montar, 13 `.no_pop` incluido C5, posiciones y giros idénticos a la placa y al CPL) y contrastado con Gerber/Excellon
+de la misma placa. Informe: `AISLER/INFORME_AISLER.md`.
+**Por qué:** presupuestar en AISLER 5 PCB de 4 capas, 1,0 mm, ENIG, con montaje de 2.
+**No se ha tocado:** `feature/avo-girth-pcb`, los ficheros entregados (`out/C3/`), el diseño eléctrico ni las
+posiciones (comprobado por el script). **Ningún pedido ni subida.**
+**Validación:** CI (ERC 0, DRC 0 con las reglas del diseño; con las reglas de AISLER: 16 violaciones, 8 de las ranuras de
+0,6 mm del USB-C J1 y 8 de textos de serigrafía). **NO VERIFICADO** en la web de AISLER.
+**Pendiente:** AISLER no ofrece 4 capas de 1,0 mm en su catálogo estándar (0,8/1,6 mm) y fabrica PCB de 3 en 3;
+confirmar las ranuras de J1; revisar en su visor los giros y el pin 1.
+
 ## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
 **CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
