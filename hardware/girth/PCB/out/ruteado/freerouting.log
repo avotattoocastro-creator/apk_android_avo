@@ -1,128 +1,10 @@
-2026-10-29 09:30:30.630 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
 	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
 	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
 	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
 	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
 	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
-2026-10-29 09:30:30.630 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
-	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
-	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
-2026-10-29 09:30:34.062 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 975.66 (15 unrouted).
-2026-10-29 09:30:34.062 INFO   [900CF3\918FD0] Auto-router pass #72 on board 'aee5c3b63a5e0c35245f558a99dfad90' was completed in 14.22 seconds with the score of 970.94 (19 unrouted), using 631577.94 CPU seconds and 718090 MB memory.
-2026-10-29 09:30:49.515 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
-2026-10-29 09:30:49.516 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
-	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
-	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
-2026-10-29 09:30:49.516 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: Cannot invoke "app.freerouting.geometry.planar.TileShape.nearest_point_approx(app.freerouting.geometry.planar.FloatPoint)" because "target_shape" is null
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_target_doors(MazeSearchAlgo.java:534) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:398) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.occupy_next_element(MazeSearchAlgo.java:286) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.MazeSearchAlgo.find_connection(MazeSearchAlgo.java:206) ~[freerouting.jar:unspecified]
-	at app.freerouting.autoroute.AutorouteEngine.autoroute_connection(AutorouteEngine.java:155) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_item(BatchAutorouter.java:610) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.autoroute_pass(BatchAutorouter.java:332) [freerouting.jar:unspecified]
-	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
-	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
-	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
-2026-10-29 09:30:50.361 INFO   [900CF3\918FD0] Auto-router pass #73 on board 'aee5c3b63a5e0c35245f558a99dfad90' was completed in 16.16 seconds with the score of 973.15 (17 unrouted), using 649466.44 CPU seconds and 728452 MB memory.
-2026-10-29 09:31:06.143 INFO   [900CF3\918FD0] Auto-router pass #74 on board '70a9255152c3a680bb249b6469f8a803' was completed in 15.43 seconds with the score of 973.22 (17 unrouted), using 667602.81 CPU seconds and 738780 MB memory.
-2026-10-29 09:31:16.796 INFO   [900CF3\918FD0] Auto-router pass #75 on board '79e4f5fb697011c3bad8d30f2a3d06e3' was completed in 10.33 seconds with the score of 973.19 (17 unrouted), using 680215.81 CPU seconds and 746445 MB memory.
-2026-10-29 09:31:46.229 INFO   [900CF3\918FD0] Auto-router pass #76 on board '8f20413ecf3f5a03a7256d8f23fc07f7' was completed in 29.11 seconds with the score of 975.70 (15 unrouted), using 714024.69 CPU seconds and 767051 MB memory.
-2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.046 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.047 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.636 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.637 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.646 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.646 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.908 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:47.909 WARN   ShapeSearchTree45Degree.complete_shape: cannot convert room shape Simplex to IntOctagon
-2026-10-29 09:31:53.603 INFO   [900CF3\918FD0] Auto-router pass #77 on board '7c0de159e9935b88cbe89321abea4b6f' was completed in 7.06 seconds with the score of 972.11 (18 unrouted), using 722307.69 CPU seconds and 772493 MB memory.
-2026-10-29 09:32:01.595 INFO   [900CF3\918FD0] Auto-router pass #78 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.67 seconds with the score of 972.11 (18 unrouted), using 731832.94 CPU seconds and 778647 MB memory.
-2026-10-29 09:32:09.188 INFO   [900CF3\918FD0] Auto-router pass #79 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.46 seconds with the score of 972.11 (18 unrouted), using 741421.44 CPU seconds and 784879 MB memory.
-2026-10-29 09:32:17.146 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 975.70 (15 unrouted).
-2026-10-29 09:32:17.146 INFO   [900CF3\918FD0] Auto-router pass #80 on board '19b3b39233c362eb3721a3a36875dd38' was completed in 7.82 seconds with the score of 973.30 (17 unrouted), using 751073.62 CPU seconds and 791115 MB memory.
-2026-10-29 09:32:27.787 INFO   [900CF3\918FD0] Auto-router pass #81 on board '7c0de159e9935b88cbe89321abea4b6f' was completed in 10.49 seconds with the score of 977.07 (14 unrouted), using 764447.50 CPU seconds and 798598 MB memory.
-2026-10-29 09:32:41.303 INFO   [900CF3\918FD0] Auto-router pass #82 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 13.19 seconds with the score of 975.53 (15 unrouted), using 780404.19 CPU seconds and 806783 MB memory.
-2026-10-29 09:32:56.181 INFO   [900CF3\918FD0] Auto-router pass #83 on board '21585b6bda90a2beef40663791359f9e' was completed in 14.56 seconds with the score of 972.09 (18 unrouted), using 799020.44 CPU seconds and 816566 MB memory.
-2026-10-29 09:32:57.136 WARN   ItemAutorouteInfo.get_expansion_room: p_index out of range
-2026-10-29 09:33:15.293 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.07 (14 unrouted).
-2026-10-29 09:33:15.293 INFO   [900CF3\918FD0] Auto-router pass #84 on board 'f400a3e2940a779fd591d0b99d55a4a4' was completed in 18.79 seconds with the score of 972.06 (18 unrouted), using 822911.00 CPU seconds and 829507 MB memory.
-2026-10-29 09:33:30.296 INFO   [900CF3\918FD0] Auto-router pass #85 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 14.87 seconds with the score of 973.16 (17 unrouted), using 842017.06 CPU seconds and 839252 MB memory.
-2026-10-29 09:33:44.449 INFO   [900CF3\918FD0] Auto-router pass #86 on board 'cb167e4b84f99672fdd3008b923854d5' was completed in 13.83 seconds with the score of 975.54 (15 unrouted), using 860046.94 CPU seconds and 848386 MB memory.
-2026-10-29 09:33:53.706 INFO   [900CF3\918FD0] Auto-router pass #87 on board '7b8d3d6fe4dc066f0878867fb5877e4f' was completed in 8.94 seconds with the score of 970.75 (19 unrouted), using 873042.31 CPU seconds and 855535 MB memory.
-2026-10-29 09:34:19.403 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.07 (14 unrouted).
-2026-10-29 09:34:19.403 INFO   [900CF3\918FD0] Auto-router pass #88 on board 'e36f79ca4d76faaf5b7337b67b0f7537' was completed in 25.38 seconds with the score of 976.57 (14 unrouted), using 905949.94 CPU seconds and 872397 MB memory.
-2026-10-29 09:34:29.283 INFO   [900CF3\918FD0] Auto-router pass #89 on board '68b4f4107c06c5de8ef79b2d02f8bd6b' was completed in 9.75 seconds with the score of 976.71 (14 unrouted), using 919281.44 CPU seconds and 879288 MB memory.
-2026-10-29 09:34:34.251 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
-2026-10-29 09:34:34.251 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: null
-2026-10-29 09:34:34.251 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.NullPointerException: null
-2026-10-29 09:34:39.297 INFO   [900CF3\918FD0] Auto-router pass #90 on board '2ce8eb083465b20c0078ff439bd3834e' was completed in 9.69 seconds with the score of 975.67 (15 unrouted), using 932710.44 CPU seconds and 886186 MB memory.
-2026-10-29 09:34:51.322 INFO   [900CF3\918FD0] Auto-router pass #91 on board '1768f78b63fd4d0e63ecb4ef203d002b' was completed in 11.70 seconds with the score of 977.96 (13 unrouted), using 948954.50 CPU seconds and 894116 MB memory.
-2026-10-29 09:35:12.069 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.96 (13 unrouted).
-2026-10-29 09:35:12.069 INFO   [900CF3\918FD0] Auto-router pass #92 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 20.42 seconds with the score of 974.60 (16 unrouted), using 977714.31 CPU seconds and 908814 MB memory.
-2026-10-29 09:35:21.494 INFO   [900CF3\918FD0] Auto-router pass #93 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 9.29 seconds with the score of 974.40 (16 unrouted), using 990170.31 CPU seconds and 914957 MB memory.
-2026-10-29 09:35:28.417 INFO   [900CF3\918FD0] Auto-router pass #94 on board 'f5e1818e8d76484be840f102644b5312' was completed in 6.60 seconds with the score of 973.26 (17 unrouted), using 999912.56 CPU seconds and 920344 MB memory.
-2026-10-29 09:35:36.300 INFO   [900CF3\918FD0] Auto-router pass #95 on board '8fddccb2d6f01972972ad9ea52c81bc9' was completed in 7.55 seconds with the score of 973.26 (17 unrouted), using 1011105.44 CPU seconds and 925923 MB memory.
-2026-10-29 09:36:10.137 INFO   [900CF3\918FD0] Restoring an earlier board that has the score of 977.96 (13 unrouted).
-2026-10-29 09:36:10.137 INFO   [900CF3\918FD0] Auto-router pass #96 on board 'fd43f4763b344d578b346c0a97ee334c' was completed in 33.52 seconds with the score of 975.40 (15 unrouted), using 1059361.00 CPU seconds and 948213 MB memory.
-2026-10-29 09:36:24.298 INFO   [900CF3\918FD0] Auto-router pass #97 on board '41d76dfd7209d56a1833881e6b3d705f' was completed in 14.02 seconds with the score of 974.47 (16 unrouted), using 1079555.75 CPU seconds and 957086 MB memory.
-2026-10-29 09:36:34.485 INFO   [900CF3\918FD0] Auto-router pass #98 on board '29c58f24cc814a88b472d105542d2ebf' was completed in 9.86 seconds with the score of 974.33 (16 unrouted), using 1094096.62 CPU seconds and 963893 MB memory.
-2026-10-29 09:36:35.192 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
-2026-10-29 09:36:35.192 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
-2026-10-29 09:36:35.193 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+2026-10-29 09:51:57.671 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
 	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
 	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
 	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
@@ -134,8 +16,8 @@ java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
 	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
 	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
 	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
-2026-10-29 09:36:35.193 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
-java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
+2026-10-29 09:51:57.671 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: Index 6 out of bounds for length 6
 	at app.freerouting.autoroute.MazeShoveTraceAlgo.check_shove_trace_line(MazeShoveTraceAlgo.java:123) ~[freerouting.jar:unspecified]
 	at app.freerouting.autoroute.MazeSearchAlgo.shove_trace_room(MazeSearchAlgo.java:1214) ~[freerouting.jar:unspecified]
 	at app.freerouting.autoroute.MazeSearchAlgo.expand_to_room_doors(MazeSearchAlgo.java:443) ~[freerouting.jar:unspecified]
@@ -147,4 +29,122 @@ java.lang.ArrayIndexOutOfBoundsException: Index 14 out of bounds for length 14
 	at app.freerouting.autoroute.BatchAutorouter.runBatchLoop(BatchAutorouter.java:447) [freerouting.jar:unspecified]
 	at app.freerouting.management.RoutingJobSchedulerActionThread.thread_action(RoutingJobSchedulerActionThread.java:131) [freerouting.jar:unspecified]
 	at app.freerouting.core.StoppableThread.run(StoppableThread.java:26) [freerouting.jar:unspecified]
+2026-10-29 09:51:59.055 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 965.97 (28 unrouted).
+2026-10-29 09:51:59.056 INFO   [0A0AF8\62498C] Auto-router pass #36 on board '7819875f95175cfc9da80b9ae41d6456' was completed in 19.61 seconds with the score of 956.89 (36 unrouted), using 180421.30 CPU seconds and 459840 MB memory.
+2026-10-29 09:52:12.788 INFO   [0A0AF8\62498C] Auto-router pass #37 on board 'c5f585d1e3b3071e398dac03bc67acb9' was completed in 13.63 seconds with the score of 963.84 (29 unrouted), using 188814.80 CPU seconds and 470865 MB memory.
+2026-10-29 09:52:24.867 INFO   [0A0AF8\62498C] Auto-router pass #38 on board '40c342b71f6f25e4eba7531c0632cdb6' was completed in 11.88 seconds with the score of 954.91 (37 unrouted), using 196160.50 CPU seconds and 481058 MB memory.
+2026-10-29 09:52:34.136 INFO   [0A0AF8\62498C] Auto-router pass #39 on board '75be313377bb8b692cd4a6975b95b484' was completed in 9.08 seconds with the score of 947.40 (43 unrouted), using 201762.23 CPU seconds and 489656 MB memory.
+2026-10-29 09:53:15.030 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 965.97 (28 unrouted).
+2026-10-29 09:53:15.030 INFO   [0A0AF8\62498C] Auto-router pass #40 on board 'ecbd0175fb627510bc1381670d103be3' was completed in 40.70 seconds with the score of 950.43 (40 unrouted), using 228271.30 CPU seconds and 521396 MB memory.
+2026-10-29 09:53:28.503 INFO   [0A0AF8\62498C] Auto-router pass #41 on board 'c5f585d1e3b3071e398dac03bc67acb9' was completed in 13.39 seconds with the score of 958.12 (34 unrouted), using 237016.14 CPU seconds and 531336 MB memory.
+2026-10-29 09:53:33.639 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:53:33.639 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:33.639 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:37.920 INFO   [0A0AF8\62498C] Auto-router pass #42 on board 'ecd794527c0863954b2ede28a2fe5b37' was completed in 9.21 seconds with the score of 954.61 (37 unrouted), using 243854.91 CPU seconds and 540614 MB memory.
+2026-10-29 09:53:43.220 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:53:43.221 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:43.221 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:43.874 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:53:43.874 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:43.874 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:53:48.019 INFO   [0A0AF8\62498C] Auto-router pass #43 on board '9b81710d5b6381a8981e84e05262dbd5' was completed in 9.90 seconds with the score of 952.31 (39 unrouted), using 250791.55 CPU seconds and 549657 MB memory.
+2026-10-29 09:54:22.188 INFO   [0A0AF8\62498C] Auto-router pass #44 on board '39ca910c05f65d7c573ce343d8448231' was completed in 33.98 seconds with the score of 968.68 (25 unrouted), using 275098.78 CPU seconds and 575392 MB memory.
+2026-10-29 09:54:29.992 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: null
+2026-10-29 09:54:29.992 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.ArrayIndexOutOfBoundsException: null
+2026-10-29 09:54:31.621 INFO   [0A0AF8\62498C] Auto-router pass #45 on board 'a209b56baaf38cb759af392373223b31' was completed in 9.22 seconds with the score of 962.96 (30 unrouted), using 281720.88 CPU seconds and 582488 MB memory.
+2026-10-29 09:54:39.357 INFO   [0A0AF8\62498C] Auto-router pass #46 on board '7f5944ce089c93318446baafcaf35823' was completed in 7.53 seconds with the score of 958.39 (34 unrouted), using 287672.94 CPU seconds and 589587 MB memory.
+2026-10-29 09:54:48.066 INFO   [0A0AF8\62498C] Auto-router pass #47 on board '69c58eabf1d1ea564d5d49a6ace0cfeb' was completed in 8.51 seconds with the score of 956.80 (36 unrouted), using 294443.59 CPU seconds and 597674 MB memory.
+2026-10-29 09:54:57.755 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:54:57.756 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:54:57.756 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:55:09.921 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 968.68 (25 unrouted).
+2026-10-29 09:55:09.922 INFO   [0A0AF8\62498C] Auto-router pass #48 on board '8f9366b745a7c2713430556a6b714309' was completed in 21.66 seconds with the score of 962.02 (31 unrouted), using 311324.91 CPU seconds and 614626 MB memory.
+2026-10-29 09:55:21.207 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.207 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.208 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.208 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.208 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.209 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.209 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.209 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.209 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.209 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.214 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.214 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.214 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.214 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.257 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.257 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.263 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:21.263 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.370 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.370 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.406 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.406 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.442 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:23.442 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:55:27.821 INFO   [0A0AF8\62498C] Auto-router pass #49 on board 'a209b56baaf38cb759af392373223b31' was completed in 17.82 seconds with the score of 961.09 (33 unrouted), using 325485.72 CPU seconds and 627448 MB memory.
+2026-10-29 09:55:36.925 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 09:55:36.925 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:55:36.925 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 09:55:39.104 INFO   [0A0AF8\62498C] Auto-router pass #50 on board 'e4eb38129675818099401f3596f9001f' was completed in 11.08 seconds with the score of 958.86 (35 unrouted), using 334294.31 CPU seconds and 637021 MB memory.
+2026-10-29 09:55:47.427 INFO   [0A0AF8\62498C] Auto-router pass #51 on board '8a949abd09249a26cfd995489d6459ad' was completed in 8.12 seconds with the score of 958.86 (35 unrouted), using 340775.25 CPU seconds and 644749 MB memory.
+2026-10-29 09:56:16.709 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 968.68 (25 unrouted).
+2026-10-29 09:56:16.709 INFO   [0A0AF8\62498C] Auto-router pass #52 on board '8a949abd09249a26cfd995489d6459ad' was completed in 29.20 seconds with the score of 950.72 (41 unrouted), using 365631.62 CPU seconds and 668973 MB memory.
+2026-10-29 09:56:28.378 INFO   [0A0AF8\62498C] Auto-router pass #53 on board 'a209b56baaf38cb759af392373223b31' was completed in 11.59 seconds with the score of 967.20 (26 unrouted), using 374964.62 CPU seconds and 677456 MB memory.
+2026-10-29 09:56:33.448 WARN   ItemAutorouteInfo.get_expansion_room: p_index out of range
+2026-10-29 09:56:33.449 WARN   ItemAutorouteInfo.get_expansion_room: p_index out of range
+2026-10-29 09:56:33.449 WARN   ItemAutorouteInfo.get_expansion_room: p_index out of range
+2026-10-29 09:56:35.565 INFO   [0A0AF8\62498C] Auto-router pass #54 on board 'ce966c4c69dff9574c0d7a1d3cd6ac53' was completed in 6.88 seconds with the score of 967.20 (26 unrouted), using 380965.06 CPU seconds and 683964 MB memory.
+2026-10-29 09:56:41.711 INFO   [0A0AF8\62498C] Auto-router pass #55 on board 'ce966c4c69dff9574c0d7a1d3cd6ac53' was completed in 6.05 seconds with the score of 967.20 (26 unrouted), using 387013.88 CPU seconds and 690872 MB memory.
+2026-10-29 09:57:07.358 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 968.68 (25 unrouted).
+2026-10-29 09:57:07.358 INFO   [0A0AF8\62498C] Auto-router pass #56 on board 'ce966c4c69dff9574c0d7a1d3cd6ac53' was completed in 25.57 seconds with the score of 965.88 (27 unrouted), using 409004.16 CPU seconds and 711304 MB memory.
+2026-10-29 09:57:21.111 INFO   [0A0AF8\62498C] Auto-router pass #57 on board 'a209b56baaf38cb759af392373223b31' was completed in 13.67 seconds with the score of 964.01 (29 unrouted), using 421583.53 CPU seconds and 721767 MB memory.
+2026-10-29 09:57:37.938 INFO   [0A0AF8\62498C] Auto-router pass #58 on board '225ff63e2b0c31f509e40c0a46f49835' was completed in 16.63 seconds with the score of 967.06 (26 unrouted), using 437114.59 CPU seconds and 734661 MB memory.
+2026-10-29 09:57:44.312 INFO   [0A0AF8\62498C] Auto-router pass #59 on board '2822793b1b9373371f0c134f3ed8de80' was completed in 6.18 seconds with the score of 965.43 (27 unrouted), using 442663.28 CPU seconds and 740370 MB memory.
+2026-10-29 09:58:10.670 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 968.68 (25 unrouted).
+2026-10-29 09:58:10.671 INFO   [0A0AF8\62498C] Auto-router pass #60 on board '8d2919cf632c3fc81394aaf200d91a82' was completed in 26.16 seconds with the score of 967.43 (26 unrouted), using 467106.56 CPU seconds and 760100 MB memory.
+2026-10-29 09:58:22.016 INFO   [0A0AF8\62498C] Auto-router pass #61 on board 'a209b56baaf38cb759af392373223b31' was completed in 11.26 seconds with the score of 959.27 (34 unrouted), using 478607.91 CPU seconds and 769676 MB memory.
+2026-10-29 09:58:33.573 INFO   [0A0AF8\62498C] Auto-router pass #62 on board '364f9180ff66da4498c6b651af370262' was completed in 11.37 seconds with the score of 956.42 (36 unrouted), using 489273.44 CPU seconds and 778901 MB memory.
+2026-10-29 09:58:33.951 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:33.951 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:33.951 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:33.952 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:33.983 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:33.983 WARN   MazeShoveTraceAlgo.check_shove_trace_line: trace_corner_no to big
+2026-10-29 09:58:41.665 INFO   [0A0AF8\62498C] Auto-router pass #63 on board '8c66731a3b4921b08a142873a67388cb' was completed in 7.87 seconds with the score of 955.97 (36 unrouted), using 497104.41 CPU seconds and 786642 MB memory.
+2026-10-29 09:59:01.671 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 967.20 (26 unrouted).
+2026-10-29 09:59:01.671 INFO   [0A0AF8\62498C] Auto-router pass #64 on board '8ef58db418a2c558c443fb4124548fc8' was completed in 19.81 seconds with the score of 959.44 (32 unrouted), using 516953.38 CPU seconds and 802620 MB memory.
+2026-10-29 09:59:13.995 INFO   [0A0AF8\62498C] Auto-router pass #65 on board 'ce966c4c69dff9574c0d7a1d3cd6ac53' was completed in 12.24 seconds with the score of 965.90 (27 unrouted), using 530063.19 CPU seconds and 813228 MB memory.
+2026-10-29 09:59:26.962 INFO   [0A0AF8\62498C] Auto-router pass #66 on board '14a027784420510848b479dfcad21fc3' was completed in 12.76 seconds with the score of 966.31 (26 unrouted), using 543336.94 CPU seconds and 823173 MB memory.
+2026-10-29 09:59:34.188 INFO   [0A0AF8\62498C] Auto-router pass #67 on board '947936e31282751700c501b53534da00' was completed in 7.03 seconds with the score of 965.13 (27 unrouted), using 550552.69 CPU seconds and 829790 MB memory.
+2026-10-29 10:00:01.477 INFO   [0A0AF8\62498C] Auto-router pass #68 on board 'b50aeaa152d45e6f00e66dc3b71d6a77' was completed in 27.10 seconds with the score of 974.62 (19 unrouted), using 578827.44 CPU seconds and 850481 MB memory.
+2026-10-29 10:00:08.896 INFO   [0A0AF8\62498C] Auto-router pass #69 on board 'f421aa039ff30db22e0bd5d8b7349ca2' was completed in 7.21 seconds with the score of 973.21 (20 unrouted), using 587340.44 CPU seconds and 857019 MB memory.
+2026-10-29 10:00:14.143 INFO   [0A0AF8\62498C] Auto-router pass #70 on board '7011b4f7736692d9d7249770ba0a9920' was completed in 5.04 seconds with the score of 971.97 (21 unrouted), using 592692.56 CPU seconds and 861681 MB memory.
+2026-10-29 10:00:19.653 INFO   [0A0AF8\62498C] Auto-router pass #71 on board '62de32b235cde5804deca444a3cb965f' was completed in 5.32 seconds with the score of 971.00 (22 unrouted), using 598069.19 CPU seconds and 866315 MB memory.
+2026-10-29 10:00:28.956 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 974.62 (19 unrouted).
+2026-10-29 10:00:28.957 INFO   [0A0AF8\62498C] Auto-router pass #72 on board '56ce83afab0d750bc248e06b8bc31e87' was completed in 9.12 seconds with the score of 971.03 (22 unrouted), using 608895.06 CPU seconds and 874808 MB memory.
+2026-10-29 10:00:41.547 INFO   [0A0AF8\62498C] Auto-router pass #73 on board 'f421aa039ff30db22e0bd5d8b7349ca2' was completed in 12.50 seconds with the score of 971.30 (22 unrouted), using 622013.56 CPU seconds and 883542 MB memory.
+2026-10-29 10:00:47.397 INFO   [0A0AF8\62498C] Auto-router pass #74 on board '32d11bd9360ad45635d0b97e48bbf63a' was completed in 5.65 seconds with the score of 971.30 (22 unrouted), using 628625.31 CPU seconds and 888926 MB memory.
+2026-10-29 10:00:52.610 INFO   [0A0AF8\62498C] Auto-router pass #75 on board '32d11bd9360ad45635d0b97e48bbf63a' was completed in 5.13 seconds with the score of 971.30 (22 unrouted), using 634162.25 CPU seconds and 893785 MB memory.
+2026-10-29 10:01:31.561 INFO   [0A0AF8\62498C] Restoring an earlier board that has the score of 974.62 (19 unrouted).
+2026-10-29 10:01:31.562 INFO   [0A0AF8\62498C] Auto-router pass #76 on board '32d11bd9360ad45635d0b97e48bbf63a' was completed in 38.87 seconds with the score of 968.42 (25 unrouted), using 678179.38 CPU seconds and 923105 MB memory.
+2026-10-29 10:01:43.123 INFO   [0A0AF8\62498C] Auto-router pass #77 on board 'f421aa039ff30db22e0bd5d8b7349ca2' was completed in 11.48 seconds with the score of 970.54 (23 unrouted), using 692018.62 CPU seconds and 931569 MB memory.
+2026-10-29 10:01:44.248 WARN   PolylineTrace.get_trace_connection_shape p_index out of range
+2026-10-29 10:01:44.248 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
+2026-10-29 10:01:44.248 ERROR  AutorouteEngine.autoroute_connection: Exception in maze_search_algo.find_connection
+java.lang.NullPointerException: null
 freerouting código 124

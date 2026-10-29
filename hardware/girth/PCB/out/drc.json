@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-29T09:36:38+0000",
+    "date": "2026-10-29T10:01:47+0000",
     "included_severities": [
         "error",
         "warning",
@@ -29,6 +29,466 @@
                         "y": 115.4
                     },
                     "uuid": "964eb644-7b22-5b6e-abef-c8a65b470eff"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 109.375,
+                        "y": 111.775
+                    },
+                    "uuid": "9767f68a-bf72-5a90-a41e-f9c11bdd216e"
+                },
+                {
+                    "description": "Pad 47 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 111.0
+                    },
+                    "uuid": "f0ef4464-3854-59d2-bdcc-736eb1f7aef6"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 37 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 103.0
+                    },
+                    "uuid": "966329e2-0f78-5ac3-97af-c9c5a50269b1"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 109.375,
+                        "y": 102.225
+                    },
+                    "uuid": "b7df19c8-0a87-5e62-b77d-42ed85ab1035"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 38 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 103.8
+                    },
+                    "uuid": "ee3d3660-8d15-5e56-b4f5-bab94ae70a9e"
+                },
+                {
+                    "description": "Pad 37 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 103.0
+                    },
+                    "uuid": "966329e2-0f78-5ac3-97af-c9c5a50269b1"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 39 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 104.6
+                    },
+                    "uuid": "2e69a255-ac45-51db-ad8a-b65de4412123"
+                },
+                {
+                    "description": "Pad 40 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 105.4
+                    },
+                    "uuid": "44079b26-c1f2-5115-94c5-e7364deeaa83"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 40 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 105.4
+                    },
+                    "uuid": "44079b26-c1f2-5115-94c5-e7364deeaa83"
+                },
+                {
+                    "description": "Pad 41 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 106.2
+                    },
+                    "uuid": "25c4254a-3ae3-5fd9-b95f-92b17e633ca5"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.0354 mm",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 107.0
+                    },
+                    "uuid": "04bef793-1f79-5ebe-9d20-1f8deab659f7"
+                },
+                {
+                    "description": "Pad 41 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 106.2
+                    },
+                    "uuid": "25c4254a-3ae3-5fd9-b95f-92b17e633ca5"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 43 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 107.8
+                    },
+                    "uuid": "1186501d-b98d-5f6b-895c-c0288cc0cbf4"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 109.375,
+                        "y": 107.025
+                    },
+                    "uuid": "ee17ff23-2341-5d0e-8a6d-bac4e6486316"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 44 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 108.6
+                    },
+                    "uuid": "38b39c7d-41e6-53a8-9b0d-0aba8d39b93b"
+                },
+                {
+                    "description": "Pad 43 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 107.8
+                    },
+                    "uuid": "1186501d-b98d-5f6b-895c-c0288cc0cbf4"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 45 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 109.4
+                    },
+                    "uuid": "0980d2aa-fdac-5186-8cc0-e0cedbb1deed"
+                },
+                {
+                    "description": "Pad 44 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 108.6
+                    },
+                    "uuid": "38b39c7d-41e6-53a8-9b0d-0aba8d39b93b"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 46 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 110.2
+                    },
+                    "uuid": "adcac1fe-6cb4-58de-aab1-c4686259462e"
+                },
+                {
+                    "description": "Pad 45 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 109.4,
+                        "y": 109.4
+                    },
+                    "uuid": "0980d2aa-fdac-5186-8cc0-e0cedbb1deed"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 111.1,
+                        "y": 112.9
+                    },
+                    "uuid": "fdfd15d0-48b8-5bcb-a266-b75dd7de29a6"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.0354 mm",
+                    "pos": {
+                        "x": 110.3,
+                        "y": 112.9
+                    },
+                    "uuid": "25d3637b-9420-554b-acec-fb88296e0d18"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 112.325,
+                        "y": 105.025
+                    },
+                    "uuid": "34681065-c8ee-5a41-9d1e-5b87483bd3a2"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 113.3125,
+                        "y": 106.0125
+                    },
+                    "uuid": "e5b00885-e224-5996-a32f-bfe800723264"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 112.325,
+                        "y": 107.0
+                    },
+                    "uuid": "baadc0f1-f9fe-53a0-a172-e759eb801726"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 113.3125,
+                        "y": 106.0125
+                    },
+                    "uuid": "e5b00885-e224-5996-a32f-bfe800723264"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 113.3125,
+                        "y": 107.9875
+                    },
+                    "uuid": "3fdb66da-3005-52a7-b8d1-2ef7c81767d0"
+                },
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 112.325,
+                        "y": 108.975
+                    },
+                    "uuid": "8f52f4e5-6d1f-5c74-942d-8ba7d0cae992"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 105.025
+                    },
+                    "uuid": "907e0823-fabd-52d5-8fb3-79cf9bd859ca"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 106.0125
+                    },
+                    "uuid": "5a870b58-efa0-54fc-b14a-6a25b2ee0bfa"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 107.0
+                    },
+                    "uuid": "c5dea9fb-d114-5628-87c4-61cafe349baa"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 107.9875
+                    },
+                    "uuid": "a9baee39-564a-5ceb-a930-3f936e17418a"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 106.0125
+                    },
+                    "uuid": "5a870b58-efa0-54fc-b14a-6a25b2ee0bfa"
+                },
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 116.275,
+                        "y": 105.025
+                    },
+                    "uuid": "82b7a773-944e-5964-b5b4-257914cb7e21"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 107.9875
+                    },
+                    "uuid": "a9baee39-564a-5ceb-a930-3f936e17418a"
+                },
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 116.275,
+                        "y": 107.0
+                    },
+                    "uuid": "10b20675-17da-572f-a6c5-01fe31080dbe"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 107.9875
+                    },
+                    "uuid": "a9baee39-564a-5ceb-a930-3f936e17418a"
+                },
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 114.3,
+                        "y": 108.975
+                    },
+                    "uuid": "744d3474-8e08-5c39-b288-3338bffc9754"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 49 [GND] of U4 on F.Cu",
+                    "pos": {
+                        "x": 116.275,
+                        "y": 108.975
+                    },
+                    "uuid": "28af4567-ae41-551d-a99b-d163c59649b1"
+                },
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 115.2875,
+                        "y": 107.9875
+                    },
+                    "uuid": "a9baee39-564a-5ceb-a930-3f936e17418a"
                 }
             ],
             "severity": "error",
@@ -268,12 +728,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad A9 [VBUS] of J1 on F.Cu",
+                    "description": "Pad B4 [VBUS] of J1 on F.Cu",
                     "pos": {
                         "x": 122.105,
                         "y": 97.55
                     },
-                    "uuid": "dae032aa-7580-51f1-83ae-a417893a2226"
+                    "uuid": "6567204b-1f21-5511-bb9b-3eefc2abff2e"
                 },
                 {
                     "description": "Pad A4 [VBUS] of J1 on F.Cu",
@@ -4085,334 +4545,64 @@
             "type": "hole_to_hole"
         },
         {
-            "description": "Isolated copper fill",
+            "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Via [GND] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 132.75,
-                        "y": 115.5
+                        "x": 113.3125,
+                        "y": 107.9875
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "3fdb66da-3005-52a7-b8d1-2ef7c81767d0"
                 }
             ],
             "severity": "warning",
-            "type": "isolated_copper"
+            "type": "via_dangling"
         },
         {
-            "description": "Isolated copper fill",
+            "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Via [GND] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 132.75,
-                        "y": 115.5
+                        "x": 115.2875,
+                        "y": 106.0125
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "5a870b58-efa0-54fc-b14a-6a25b2ee0bfa"
                 }
             ],
             "severity": "warning",
-            "type": "isolated_copper"
+            "type": "via_dangling"
         },
         {
-            "description": "Isolated copper fill",
+            "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Via [GND] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 132.75,
-                        "y": 115.5
+                        "x": 115.2875,
+                        "y": 107.9875
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "a9baee39-564a-5ceb-a930-3f936e17418a"
                 }
             ],
             "severity": "warning",
-            "type": "isolated_copper"
+            "type": "via_dangling"
         },
         {
-            "description": "Isolated copper fill",
+            "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Via [GND] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 132.75,
-                        "y": 115.5
+                        "x": 113.3125,
+                        "y": 106.0125
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "e5b00885-e224-5996-a32f-bfe800723264"
                 }
             ],
             "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
-        },
-        {
-            "description": "Isolated copper fill",
-            "items": [
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 132.75,
-                        "y": 115.5
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "warning",
-            "type": "isolated_copper"
+            "type": "via_dangling"
         },
         {
             "description": "Isolated copper fill",
