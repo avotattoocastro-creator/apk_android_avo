@@ -247,6 +247,12 @@ if cpl_err and max(cpl_err) > 0.001:
 # propiedades útiles para la lista de materiales de AISLER
 R["propiedades"] = dict(Counter(k for c in pop for k in c["props"]))
 sin_mpn = [c["ref"] for c in pop if not c["props"].get("MPN")]
+_lcj = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lcsc_piezas_2026-10-29.json"),
+                      encoding="utf-8"))["parts"]
+
+
+def _lc_mpn(c):
+    return _lcj.get(c["props"].get("LCSC", ""), {}).get("mpn", "").replace('"', "'")
 # MPN y fabricante frente a la pieza LCSC de la BOM (datos de JLCPCB): deben coincidir en las 85 piezas montadas
 _lc = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lcsc_piezas_2026-10-29.json"),
                      encoding="utf-8"))["parts"]
@@ -255,7 +261,9 @@ sin_fab = [c["ref"] for c in pop if not c["props"].get("Manufacturer")]
 R["mpn_frente_a_lcsc"] = dict(distintos=mpn_mal, sin_fabricante=sin_fab)
 if mpn_mal or sin_fab:
     fail("MPN/fabricante no coinciden con la pieza LCSC de la BOM en %s / sin fabricante en %s" % (mpn_mal, sin_fab))
-mpn_es_valor = sorted(c["ref"] for c in pop if c["props"].get("MPN") and c["props"].get("MPN") == c["props"].get("Value"))
+# MPN igual al valor y que NO es la referencia de fabricante de la pieza LCSC (p. ej. «100n»)
+mpn_es_valor = sorted(c["ref"] for c in pop if c["props"].get("MPN") and c["props"].get("MPN") == c["props"].get("Value")
+                      and c["props"].get("MPN") != _lc_mpn(c))
 R["mpn"] = dict(sin_mpn=sin_mpn, mpn_igual_al_valor=len(mpn_es_valor), ejemplos=mpn_es_valor[:12])
 if mpn_es_valor:
     R["avisos"].append("%d piezas montadas llevan en MPN el valor (p. ej. «100n»), no un número de fabricante: AISLER "
