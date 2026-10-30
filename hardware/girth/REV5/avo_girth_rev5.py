@@ -50,7 +50,7 @@ SCREWS = [(sx * 21.0, sy * (W / 2 - 5.0)) for sx in (-1, 1) for sy in (-1, 1)] +
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
           insert_d=4.1, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,1, REV 5.7.3); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
-MAGS = [(sx * 28.9, sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # REV 5.9: X fija (28,9) para no pisar la cuna
+MAGS = [(sx * 27.3, sy * 17.9) for sx in (-1, 1) for sy in (-1, 1)]   # REV 5.9 (L 70): corridos hacia la esquina de la batería
 HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3, n_mount=2)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
@@ -194,8 +194,9 @@ def pod_base():
     for (x, y) in MAGS:
         # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
         top = HMAG["skin"] + HMAG["n_base"] * HMAG["t"] + 0.1
-        b = b.union(cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1))
-        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
+        rec = cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1)
+        b = b.union(rec.cut(box(0, 0, FLOOR - 1, BAT["l"] + 2 * G, BAT["w"] + 2 * G, 10)))   # REV 5.9: el recrecido no pisa la batería
+        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, TRAY_Z0 - HMAG["skin"]))   # boca libre hasta arriba (corta la esquina de la cuna)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
     # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa); tacos de posición de distinto ancho
