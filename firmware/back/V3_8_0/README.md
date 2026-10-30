@@ -188,3 +188,14 @@ desde la batería y la Heltec lo enciende y apaga por **SHDN**. Su arranque ya n
 - Se mantiene la orden de reposo `UBX-RXM-PMREQ` antes de cortar: si el ZED sigue en 3V3 (sin el módulo), funciona como
   la 3.10.8.
 - Consumo del S7V8F3 apagado: ~10 µA por voltio de entrada por su resistencia de 100 kΩ en SHDN (~40 µA a 4 V).
+
+## V3.12.0 — contactos pogo, sin Qi ni reed (prototipo Rev E + Heltec) (2026-10-30)
+Firmware para probar en el prototipo actual el sistema de alimentación de la espalda V4 REV B (guía de cableado y piezas:
+`hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`).
+- La cápsula lleva 3 contactos en el fondo: **SYS** (entrada de la Heltec y del S7V8F3), **BAT** (+ de la celda, tras
+  un fusible rearmable) y **GND**. El soporte del chaleco puentea SYS–BAT: la placa solo tiene corriente en el chaleco.
+  La base de carga carga la celda entre BAT y GND con la Heltec apagada.
+- `AVO_REED_SLEEP 0`: sin reed (GPIO7 queda libre). No hay sueño por soporte: quitar la cápsula = 0 V.
+- **Emparejamiento sin abrir la cápsula:** poner y quitar la cápsula del soporte 3 veces seguidas, cada vez menos de
+  4 s → emparejamiento abierto 120 s (contador `boots` en la NVS, se borra a los 4 s de funcionamiento). El PRG 3 s sigue.
+- Monitor: `INTERRUPTOR: reed no usado (V3.12: contactos pogo …)`.

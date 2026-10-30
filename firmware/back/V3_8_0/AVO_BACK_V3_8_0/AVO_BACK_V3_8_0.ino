@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.11.0 (ESP-NOW) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.12.0 (ESP-NOW) · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -74,7 +74,11 @@ static bool s_lora_asleep = false;
 // sleep with Vext cut (the ZED-F9P must be powered from Vext, not from the fixed 3V3). Wakes when the reed closes.
 static const int REED_PIN = 7;
 // V3.10.9: reed switch OFF (user request: behaves like 3.10.2, never sleeps). 1 = sleep when the reed opens (3.10.3–3.10.8).
-#define AVO_REED_SLEEP 1   // V3.11.0: sleeping again (the ZED is now cut by its own regulator)
+#define AVO_REED_SLEEP 0   // V3.12.0: no reed any more (pogo contacts: off the vest support the board has no power)
+// V3.12.0: pairing without opening the capsule: three power-ups in a row, each shorter than QUICK_BOOT_MS (put the
+// capsule on the vest support and take it off three times). Counter in NVS ("boots"), cleared after QUICK_BOOT_MS.
+static const uint32_t QUICK_BOOT_MS = 4000;
+static bool s_boots_cleared = false;
 static ReedGate s_reed;
 static bool s_radio_on = false, s_zed_on = false;
 // V3.10.5 (test requested on 28/10): Vext (ZED-F9P) switched on VEXT_DELAY_MS after start-up / wake-up, once the board,
@@ -194,8 +198,12 @@ static void print_status() {
                 (unsigned long)st.rxm_used, (unsigned long)st.rxm_failed);
   Serial.printf("  BATERIA: %u mV\n", (unsigned)s_vbat_mv);   // V3.8.1
   if (s_vext_pending) Serial.printf("  GPS: sin corriente, se enciende en %ld s\n", (long)((int32_t)(s_vext_at - millis()) / 1000) + 1);   // V3.10.5
+#if AVO_REED_SLEEP
   Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
                 s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
+#else
+  Serial.println("  INTERRUPTOR: reed no usado (V3.12: contactos pogo, con corriente = en el soporte del chaleco)");
+#endif
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
                 s_lora_asleep ? "dormida" : "NO dormida", (int)s_txp.dbm(), s_txp.level() == TxPowerPolicy::kLevels - 1 ? " (maxima)" : "");
   {  // V3.10.0 girth unit
@@ -442,7 +450,7 @@ void setup() {
   if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: capsula en el soporte");
 #if !AVO_REED_SLEEP
   s_reed.set_workshop(true);             // V3.10.9: reed ignored, the back never sleeps
-  Serial.println("[AVO ESPALDA] reed DESACTIVADO en esta version: no se duerme");
+  Serial.println("[AVO ESPALDA] V3.12: sin reed (contactos pogo): la placa solo tiene corriente en el soporte del chaleco");
 #else
   if (digitalRead(REED_PIN) == HIGH) {
     Serial.println("[AVO ESPALDA] reed ABIERTO (capsula fuera del soporte). Pulsa USER en 3 s para el MODO TALLER (no se duerme).");
@@ -488,6 +496,10 @@ void setup() {
   snprintf(s_dev_id, sizeof(s_dev_id), "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
   prefs.begin("avonow", false);
+  uint8_t boots = prefs.getUChar("boots", 0);
+  boots = (uint8_t)((boots >= 3 ? 0 : boots) + 1);
+  const bool pair_gesture = boots >= 3;
+  prefs.putUChar("boots", pair_gesture ? 0 : boots);
   NowPeerRecord stored;
   uint8_t b[NOW_PEER_RECORD_LEN];
   size_t n = prefs.getBytes("peer", b, sizeof(b));
@@ -497,6 +509,7 @@ void setup() {
   uint8_t girth_mac[6];   // V3.10.0: girth unit paired before (none: the first one that says HELLO is accepted)
   bool have_girth = prefs.getBytes("girth", girth_mac, 6) == 6;
   core->begin(stored, have_girth ? girth_mac : nullptr);
+  if (pair_gesture) { core->open_pairing(); Serial.println("[AVO ESPALDA] 3 encendidos rapidos: emparejamiento abierto 120 s"); }
   s_vbat_mv = read_battery_mv();
   core->set_battery_mv(s_vbat_mv);
   Serial.printf("[AVO ESPALDA] bateria %u mV (ADC_Ctrl activo %s → placa %s)\n", (unsigned)s_vbat_mv,
@@ -572,6 +585,7 @@ void loop() {
       }
     } else nh = 0;
   }
+  if (!s_boots_cleared && millis() >= QUICK_BOOT_MS) { s_boots_cleared = true; prefs.putUChar("boots", 0); }   // V3.12.0
   static uint32_t last_reed = 0;   // V3.10.3: capsule out of its support for 3 s → deep sleep
   if (millis() - last_reed >= 100) {
     last_reed = millis();
