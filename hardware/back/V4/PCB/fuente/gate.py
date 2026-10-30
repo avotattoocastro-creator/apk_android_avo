@@ -1,4 +1,5 @@
 """Blocking checks after KiCad's DRC/ERC (run from hardware/back/V4/PCB, after the KiCad step).
+# REV B: informe con las existencias del TVS C2827694 (consulta del CI 41050213178)
 
 Pass only if: 0 DRC errors (incl. clearances, shorts, holes, edge, mask, footprints), 0 unconnected items,
 0 schematic-parity problems, 0 ERC errors and 0 ERC warnings. DRC warnings are listed in the report.
