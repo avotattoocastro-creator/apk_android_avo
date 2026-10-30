@@ -62,7 +62,7 @@ jobs:
         shell: pwsh
         run: |
           $ver = "2.0.0.${{ github.run_number }}"
-          $out = dotnet publish windows/AVO.Windows/AVO.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:FileVersion=$ver -p:AssemblyVersion=2.0.0.0 -p:InformationalVersion="2.0.0-pro+${{ github.sha }}" -o windows/publish 2>&1; $code = $LASTEXITCODE
+          $out = dotnet publish windows/AVO.Windows/AVO.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true -p:FileVersion=$ver -p:AssemblyVersion=2.0.0.0 -p:InformationalVersion="2.0.0-pro+${{ github.sha }}" -o windows/publish 2>&1; $code = $LASTEXITCODE
           $out | Write-Output
           if ($code -ne 0) { $out | Select-String -Pattern 'error' | Select-Object -First 40 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
           Get-ChildItem windows/publish | Format-Table Name, Length
@@ -148,3 +148,31 @@ jobs:
           git add -A
           git commit -q -m "Evidencia visual Windows V2 PRO · run ${{ github.run_id }} · ${{ github.sha }}"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci/windows-visual-evidence
+
+  # Direct public download (no GitHub sign-in): pre-release "windows-v2-pro-latest" replaced on every push to the Windows branch.
+  release:
+    needs: test-and-package
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/windows-advanced-analysis'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: AVO-Windows-V2-PRO-x64
+          path: dl
+      - name: Publish pre-release with the EXE and the ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          cd dl
+          unzip -q AVO_Windows_V2_PRO_x64.zip -d app
+          cp app/AVO.Performance.Horse.Windows.exe ./AVO_Performance_Horse_Windows_V2_PRO.exe
+          sha256sum AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip > SHA256SUMS.txt
+          gh release delete windows-v2-pro-latest --repo "$REPO" --yes --cleanup-tag || true
+          gh release create windows-v2-pro-latest --repo "$REPO" --prerelease --target "${{ github.sha }}" \
+            --title "AVO Windows Advanced Analysis V2 PRO (última compilación de prueba)" \
+            --notes "Compilación automática ${{ github.run_id }} del commit ${{ github.sha }}. Ejecutable portable autocontenido para Windows 10/11 x64, SIN FIRMA digital (SmartScreen avisará). No verificado manualmente en Windows." \
+            AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip SHA256SUMS.txt
