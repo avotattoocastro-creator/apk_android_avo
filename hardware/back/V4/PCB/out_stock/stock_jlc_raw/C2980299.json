@@ -7,78 +7,78 @@
     {
      "componentId": 3401551,
      "componentLibraryType": "expand",
-     "stockCount": 2475,
+     "stockCount": 2476,
      "componentTypeEn": "WiFi Modules",
-     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u5c0f\u5c3a\u5bf8\u6a21\u7ec4\uff0c\u96c6\u62102.4GHz Wi-Fi(802.11b/g/n)+Bluetooth 5(LE)",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u4e0d\u5e26\u56fa\u4ef6 \u5c0f\u5c3a\u5bf8\u6a21\u7ec4\uff0c\u96c6\u62102.4GHz Wi-Fi(802.11b/g/n)+Bluetooth 5(LE)",
      "componentSource": "shop",
      "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-s3-mini-1u-n8_C2980299.html",
      "componentPrices": [
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 4.7656
+       "productPrice": 4.7689
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 4.2678
+       "productPrice": 4.2707
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 3.973
+       "productPrice": 3.9757
       },
       {
        "startNumber": 100,
        "endNumber": 649,
-       "productPrice": 3.5963
+       "productPrice": 3.5988
       },
       {
        "startNumber": 650,
        "endNumber": 1299,
-       "productPrice": 3.4309
+       "productPrice": 3.4333
       },
       {
        "startNumber": 1300,
        "endNumber": -1,
-       "productPrice": 3.3556
+       "productPrice": 3.3579
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 100,
        "endNumber": 649,
-       "productPrice": 3.4643
+       "productPrice": 3.4667
       },
       {
        "startNumber": 650,
        "endNumber": 1299,
-       "productPrice": 3.305
+       "productPrice": 3.3073
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 3.8272
+       "productPrice": 3.8298
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 4.5907
+       "productPrice": 4.5939
       },
       {
        "startNumber": 1300,
        "endNumber": -1,
-       "productPrice": 3.2324
+       "productPrice": 3.2347
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 4.1111
+       "productPrice": 4.114
       }
      ],
      "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
      "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
-     "canPresaleNumber": 1932,
+     "canPresaleNumber": 1765,
      "componentProductType": 2,
      "mergedComponentCode": null,
      "urlSuffix": "3401551-ESP32_S3_MINI_1UN8/C2980299",
@@ -95,10 +95,10 @@
      "estimateDate": null,
      "fullReelPrice": null,
      "encapsulationNumber": 650,
-     "shopCostPrice": 16.29329,
+     "shopCostPrice": 16.2951,
      "preMinPurchaseNum": 2,
      "minPurchaseNum": 1,
-     "initialPrice": 4.7656,
+     "initialPrice": 4.7689,
      "componentCode": "C2980299",
      "componentBrandEn": "Espressif Systems",
      "componentModelEn": "ESP32-S3-MINI-1U-N8",
@@ -106,8 +106,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411121055_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299.pdf",
-     "dataManualFileAccessId": "8589039847821987840",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589039847813599232-C2980299.pdf?response-content-disposition=attachment%3B%20filename%3DC2980299.pdf%3B%20filename%2A%3DUTF-8%27%27C2980299.pdf&x-oss-date=20261030T103732Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f4cb47813940c84d9558f4ad1e24849a4ad8ad14076f24ae83db6aa9fbea9400",
      "dataManualOfficialLink": "",
      "componentName": "ESPRESSIF ESP32-S3-MINI-1U-N8",
      "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_front.jpg",

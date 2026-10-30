@@ -7,7 +7,7 @@
     {
      "componentId": 99155,
      "componentLibraryType": "expand",
-     "stockCount": 67333,
+     "stockCount": 63077,
      "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
      "erpComponentName": "100nF \u00b15% 50V",
      "componentSource": "shop",
@@ -16,69 +16,69 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2773
+       "productPrice": 0.2775
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.222
+       "productPrice": 0.2221
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1949
+       "productPrice": 0.1951
       },
       {
        "startNumber": 500,
        "endNumber": 1999,
-       "productPrice": 0.1709
+       "productPrice": 0.171
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 0.1586
+       "productPrice": 0.1587
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 0.1546
+       "productPrice": 0.1548
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2138
+       "productPrice": 0.214
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1878
+       "productPrice": 0.1879
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2671
+       "productPrice": 0.2673
       },
       {
        "startNumber": 2000,
        "endNumber": 3999,
-       "productPrice": 0.1528
+       "productPrice": 0.1529
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 0.149
+       "productPrice": 0.1491
       },
       {
        "startNumber": 500,
        "endNumber": 1999,
-       "productPrice": 0.1646
+       "productPrice": 0.1647
       }
      ],
      "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
      "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
-     "canPresaleNumber": 49102,
+     "canPresaleNumber": 44937,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "MurataElectronics-GRM31C5C1H104JA01L/C97946",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.67406,
      "preMinPurchaseNum": 33,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2773,
+     "initialPrice": 0.2775,
      "componentCode": "C97946",
      "componentBrandEn": "Murata Electronics",
      "componentModelEn": "GRM31C5C1H104JA01L",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583022993383018496",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583022993374629888-C97946/C97946-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103747Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cc3288740e133a8a8eed3a5b1aaa5d5a1e8989ba0a2a09c6919da62775c8783e",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810201313_Murata-Electronics-GRM31C5C1H104JA01L_C97946.pdf",
-     "dataManualFileAccessId": "8588884831379447808",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588884831371059200-C97946.pdf?response-content-disposition=attachment%3B%20filename%3DC97946.pdf%3B%20filename%2A%3DUTF-8%27%27C97946.pdf&x-oss-date=20261030T103747Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fef7c195990f4c04ccaa358273b70898f9ad4fa271fdf8c8b81bbef49e3ee616",
      "dataManualOfficialLink": "",
      "componentName": "muRata GRM31C5C1H104JA01L",
      "minImage": "",
-     "minImageAccessId": "8583022994315100160",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583022994306711552-C97946/C97946-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103747Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f0f417d0c52c9ec9cd8b06509c6629376d963bd6548701c3e5eaf1d9c5c34c81",
      "imageList": [
       {
        "productImage": null,

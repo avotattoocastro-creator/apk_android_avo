@@ -1,0 +1,4462 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 22,
+   "list": [
+    {
+     "componentId": 85544,
+     "componentLibraryType": "expand",
+     "stockCount": 69953,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a12A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_nexperia-pesd5v0s1bl-315_C84374.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0336
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0259
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0218
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0192
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0162
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.015
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.021
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0156
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.025
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0324
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0185
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0144
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 68356,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-PESD5V0S1BL315/C84374",
+     "leastPatchNumber": 20,
+     "lossNumber": 8,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.08132,
+     "preMinPurchaseNum": 349,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0336,
+     "componentCode": "C84374",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "PESD5V0S1BL,315",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582996030299754496-C84374/C84374-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0653a7aa57ab12d6eba0c7cba0c53ca5cb0bd494afbd08415b13ba6ca9113686",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407241045_Nexperia-PESD5V0S1BL-315_C84374.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586196263091490816-C84374.pdf?response-content-disposition=attachment%3B%20filename%3DC84374.pdf%3B%20filename%2A%3DUTF-8%27%27C84374.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6b5995f373fb83002b64c6df27c545034575e8c00446b83f21fd31560dcfeca4",
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia PESD5V0S1BL,315",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582996031202070528-C84374/C84374-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fc77cdcbc064b13afcf3f6771b9dd8a64f612efc887856db63214767fc666c36",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-65\u2103~+150\u2103 1 12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-65\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "35pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "130W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "12A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "5nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>,315",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 296618,
+     "componentLibraryType": "expand",
+     "stockCount": 149637,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_born-pesd5v0s1bln_C314269.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0228
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0181
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0155
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0139
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0105
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0098
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.022
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0149
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0101
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0174
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0134
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 146995,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "BORN-PESD5V0S1BLN/C314269",
+     "leastPatchNumber": 20,
+     "lossNumber": 14,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.053,
+     "preMinPurchaseNum": 499,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0228,
+     "componentCode": "C314269",
+     "componentBrandEn": "BORN",
+     "componentModelEn": "PESD5V0S1BLN",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583285049051787264-C314269/C314269-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1874f8abcea41febc0580301f078d308b2cd51280a464d78e97f072f25e92a2b",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_BORN-PESD5V0S1BLN_C314269.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8803960123909918720-C314269.pdf?response-content-disposition=attachment%3B%20filename%3DC314269.pdf%3B%20filename%2A%3DUTF-8%27%27C314269.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1bbf6badb226ed109706cf56e9071f24bab93e9ba591fdc3c4a941491120b85f",
+     "dataManualOfficialLink": "",
+     "componentName": "BORN PESD5V0S1BLN",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583285049906749440-C314269/C314269-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3afa36de5721bef850bba35035dc4beebd7bfe8efdce0b979bb58510f1c1fee5",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "100W@8/20us 100nA 13V 18pF 5V 6.5V 8A@8/20us Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 Single-channel DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "18pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "100W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "13V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>N",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 573563,
+     "componentLibraryType": "expand",
+     "stockCount": 974,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a12A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_nexperia-pesd5v0s1bld-315_C552566.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1244
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0987
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0858
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0761
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0684
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0645
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0659
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1199
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0826
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0951
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0733
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0621
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 925,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-PESD5V0S1BLD315/C552566",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.3277,
+     "preMinPurchaseNum": 92,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1244,
+     "componentCode": "C552566",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "PESD5V0S1BLD,315",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583467818684071936-C552566/C552566-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0db8c2d7727a0fd2ce3aabf9cf6d71cd2783f85704f4895240bc343e46046660",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407251001_Nexperia-PESD5V0S1BLD-315_C552566.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588913436248326144-C552566.pdf?response-content-disposition=attachment%3B%20filename%3DC552566.pdf%3B%20filename%2A%3DUTF-8%27%27C552566.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4b1b97fd1cd3e5fd041a3903439fe4e034f1d848992969e85f53a821de8839b3",
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia PESD5V0S1BLD,315",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583467819606683648-C552566/C552566-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bc209870b31ebb3be1ffbf3f84cb8aec3871de653b91e57c73ad2f79160cee9c",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2(SOD-882)",
+     "describe": "-55\u2103~+150\u2103 1 12A@8/20us 130W 14V 35pF 5.5V 5V 5nA Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2(SOD-882) ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "35pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "130W"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "12A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "5nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>D,315",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1058628,
+     "componentLibraryType": "expand",
+     "stockCount": 24866,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_tech-public-pesd5v0s1bl-tp_C970020.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0117
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0071
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0064
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.006
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0077
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0058
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0062
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.009
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0069
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 24431,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TECHPUBLIC-PESD5V0S1BLTP/C970020",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0275,
+     "preMinPurchaseNum": 971,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0117,
+     "componentCode": "C970020",
+     "componentBrandEn": "TECH PUBLIC",
+     "componentModelEn": "PESD5V0S1BL-TP",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583485865448783872-C970020/C970020-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cd0fca2f06df56388bc633afcc7a6e3cb66c1d6b5c8e9efda0e0e6547d78d782",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2108132030_TECH-PUBLIC-PESD5V0S1BL-TP_C970020.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588917696817999873-C970020.pdf?response-content-disposition=attachment%3B%20filename%3DC970020.pdf%3B%20filename%2A%3DUTF-8%27%27C970020.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f84422a4dc53093aa5720d9773c4f616184a06a6046d833d01b25cdabf6dc975",
+     "dataManualOfficialLink": "",
+     "componentName": "TECH PUBLIC PESD5V0S1BL-TP",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583485866345553920-C970020/C970020-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=56c196096bbccdd4b33b199310ed1c920054926205ed3d5a60d85198687eabf0",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "10V 15pF 5V 8.4V 80W@8/20us 80nA 8A@8/20us ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "8.4V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "80nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>-TP",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2981129,
+     "componentLibraryType": "expand",
+     "stockCount": 6306,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "PB \u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_msksemi-pesd5v0s1bln-ms_C2830110.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0068
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0058
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0043
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.004
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0041
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0083
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0056
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0039
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 6295,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "MSKSEMI-PESD5V0S1BLNMS/C2830110",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.02033,
+     "preMinPurchaseNum": 1327,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0086,
+     "componentCode": "C2830110",
+     "componentBrandEn": "MSKSEMI",
+     "componentModelEn": "PESD5V0S1BLN-MS",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583866135502589952-C2830110/C2830110-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=61e1fa1979abc57d0544c292e309e97b9d399daada5018550c6d93cfb2a57fbd",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2105241716_MSKSEMI-PESD5V0S1BLN-MS_C2830110.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590182481103122432-C2830110.pdf?response-content-disposition=attachment%3B%20filename%3DC2830110.pdf%3B%20filename%2A%3DUTF-8%27%27C2830110.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4de9596bb1ca3e9486eb0109817eaec95f4233bcf746beb92121186ef477d9ff",
+     "dataManualOfficialLink": "",
+     "componentName": "MSKSEMI PESD5V0S1BLN-MS",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583866136320749568-C2830110/C2830110-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1f05b373c9c2268358a596b596de991028603e0ad90a722f090b37ae3aaeae40",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+125\u2103 1 10V 15pF 1uA 5A 5V 8.4V 80W Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-4 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "60W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "5A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>N-MS",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3119574,
+     "componentLibraryType": "expand",
+     "stockCount": 16,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u8be5\u4ea7\u54c1\u5177\u6709\u5353\u8d8a\u7684\u7535\u6c14\u7279\u6027\uff0c\u5982\u66f4\u4f4e\u7684\u94b3\u4f4d\u7535\u538b\u4e14\u65e0\u5668\u4ef6\u6027\u80fd\u9000\u5316\u95ee\u9898\u3002\u5176\u8bbe\u8ba1\u7528\u4e8e\u4fdd\u62a4\u654f\u611f\u534a\u5bfc\u4f53\u5143\u4ef6\uff0c\u4f7f\u5176\u514d\u53d7\u9759\u7535\u653e\u7535\uff08ESD\uff09\u3001\u96f7\u51fb\u3001\u7535\u5feb\u901f\u77ac\u53d8\uff08EFT\uff09\u548c\u7535\u7f06\u653e\u7535\u4e8b\u4ef6\uff08CDE\uff09\u9020\u6210\u7684\u635f\u574f\u6216\u6545\u969c\u3002",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_kuu-kpesd5v0s1bl_C2891605.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0124
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0082
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0073
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0062
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0059
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0071
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0093
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0063
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0079
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 16,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "KUU-KPESD5V0S1BL/C2891605",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.03,
+     "preMinPurchaseNum": 1101,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0124,
+     "componentCode": "C2891605",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "KPESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583718839728791552-C2891605/C2891605-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=337629294f1e680d30fb7072be1653a215ff896e2bd450a783559ad2d11bc421",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2109011630_KUU-KPESD5V0S1BL_C2891605.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757282995625836544-C2891605.pdf?response-content-disposition=attachment%3B%20filename%3DC2891605.pdf%3B%20filename%2A%3DUTF-8%27%27C2891605.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0adbd7bc39b2b23835def246c9370e7f03b1faaa6b955ad8cecfccbe6e6572f5",
+     "dataManualOfficialLink": "",
+     "componentName": "KUU KPESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583718840560074752-C2891605/C2891605-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f7ef19a88d0445cefe22f6486aabfd11ae428d43c15c6fe0a66bac4ff1c1ac9c",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+150\u2103 1 100nA 10V 15pF 5V 8.4V 80W 8A Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-4 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "K<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3195402,
+     "componentLibraryType": "expand",
+     "stockCount": 77147,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_tech-public-pesd5v0s1bl_C2912556.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0132
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0082
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.016
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0084
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0127
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 76859,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TECHPUBLIC-PESD5V0S1BL/C2912556",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0385,
+     "preMinPurchaseNum": 684,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0166,
+     "componentCode": "C2912556",
+     "componentBrandEn": "TECH PUBLIC",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8619244363244081152-C2912556-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fcb52ac507dd718aec5b974308c05826369b8bb264a3be8c962e728509e2faf5",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2111021630_TECH-PUBLIC-PESD5V0S1BL_C2912556.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589808181703569408-C2912556.pdf?response-content-disposition=attachment%3B%20filename%3DC2912556.pdf%3B%20filename%2A%3DUTF-8%27%27C2912556.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=dfa7d1737c53108455780890155b38c23f1e9275927a532f1ced0008042f9c85",
+     "dataManualOfficialLink": "",
+     "componentName": "TECH PUBLIC PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8619244363755786240-C2912556-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d986d0a49e5d2d1cb16e8e18a828e329385eee121553068f668848fa2cc7a8be",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2(0402)",
+     "describe": "-55\u2103~+125\u2103 10V 15pF 5V 8.4V 80W@8/20us 80nA 8A@8/20us ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2(0402) ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "80nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3233461,
+     "componentLibraryType": "expand",
+     "stockCount": 65,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_weida-pesd5v0s1bl_C2922477.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0137
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.007
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0066
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0103
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0076
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0068
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0132
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0063
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 63,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "WEIDA-PESD5V0S1BL/C2922477",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0337,
+     "preMinPurchaseNum": 844,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0137,
+     "componentCode": "C2922477",
+     "componentBrandEn": "WEIDA",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762378272644571136-C2922477-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e45e3fd4c97549f5f64d73fb1a68eb6361f4f4c3a49591c53f27eb6b44c5d68e",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2111221830_WEIDA-PESD5V0S1BL_C2922477.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590216691704893440-C2922477.pdf?response-content-disposition=attachment%3B%20filename%3DC2922477.pdf%3B%20filename%2A%3DUTF-8%27%27C2922477.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ad5fa6db93d84cf2a6d8e049f4e4c0db7b59b38282bd65151601d38ad4372d3b",
+     "dataManualOfficialLink": "",
+     "componentName": "WEIDA PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762378273776898048-C2922477-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=24d25f0b813a11873675238037dd29ee410cd9ee7a42270a61ebc05576885b94",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+125\u2103 100nA 10V 15pF 5V 6.5V 80W@8/20us 8A@8/20us IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3270919,
+     "componentLibraryType": "expand",
+     "stockCount": 21021,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a12A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_umw-youtai-semiconductor-co-ltd-pesd5v0s1bl_C2931142.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0105
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0082
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0069
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0057
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0046
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0045
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0067
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0101
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0054
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 20537,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3270919-PESD5V0S1BL/C2931142",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0236,
+     "preMinPurchaseNum": 1101,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0105,
+     "componentCode": "C2931142",
+     "componentBrandEn": "UMW(Youtai Semiconductor Co., Ltd.)",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583694733529399296-C2931142/C2931142-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=737dc45641fd7c4c9941d7de01e491a464da57b14cd53f0f5c1f42e0749c799e",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311091739_UMW-Youtai-Semiconductor-Co---Ltd--PESD5V0S1BL_C2931142.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8755880872489177088-C2931142.pdf?response-content-disposition=attachment%3B%20filename%3DC2931142.pdf%3B%20filename%2A%3DUTF-8%27%27C2931142.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8eec79335146077bcbc085d139f95de91cc6fbd5debccacade4522b309363c06",
+     "dataManualOfficialLink": "",
+     "componentName": "UMW PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583694734447140864-C2931142/C2931142-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bd4c518fb3fdc9a4e3c69a25ec25e577d274cafe1f2ae74d034dddb746423bfb",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOD-882",
+     "describe": "12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2 SOD-882 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "35pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "130W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "12A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "9.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "5nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3367459,
+     "componentLibraryType": "expand",
+     "stockCount": 44,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "ESD 5V\u622a\u6b62",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_leiditech-pesd5v0s1bl_C2972449.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0418
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.034
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0299
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0269
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.022
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0207
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0327
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0259
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0288
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0199
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0403
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0212
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 44,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "Leiditech-PESD5V0S1BL/C2972449",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.1011,
+     "preMinPurchaseNum": 266,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0418,
+     "componentCode": "C2972449",
+     "componentBrandEn": "Leiditech",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8584763010737459200-C2972449/C2972449-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=77653cf5de039ad5b68ac99e1700985623d198c4b04b696f04443d2efe13359a",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2201261400_Leiditech-PESD5V0S1BL_C2972449.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590224348226760704-C2972449.pdf?response-content-disposition=attachment%3B%20filename%3DC2972449.pdf%3B%20filename%2A%3DUTF-8%27%27C2972449.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=07e0f67dc7b59129edee815c1e51f354db6c99fda709c2c45b007788ba0eada6",
+     "dataManualOfficialLink": "",
+     "componentName": "Leiditech PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8584763011647488000-C2972449/C2972449-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8355c9dcc116fd6664a814de9ec5a2aa5aa3ed3bdf6fa1f19c82e0c4dfe33161",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "12.5V 15pF 500nA 5V 6V 80W@8/20us ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12.5V"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "500nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5883994,
+     "componentLibraryType": "expand",
+     "stockCount": 48,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u6781\u6027\uff1a\u53cc\u5411 \u5355\u8def\u4fdd\u62a4 \u53cd\u5411\u5173\u65ad\u7535\u538b\uff08\u5178\u578b\u503c\uff09:5V(Max) \u51fb\u7a7f\u7535\u538b\uff08\u6700\u5c0f\u503c\uff09:6V \u94b3\u4f4d\u7535\u538b:8V \u5cf0\u503c\u8109\u51b2\u7535\u6d41:15A (8/20us)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_elecsuper-pesd5v0s1bl-es_C5199194.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0361
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0282
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0243
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0214
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0191
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0179
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0173
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0184
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0348
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0206
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0234
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 48,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "ElecSuper-PESD5V0S1BLES/C5199194",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 320,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0361,
+     "componentCode": "C5199194",
+     "componentBrandEn": "ElecSuper",
+     "componentModelEn": "PESD5V0S1BL-ES",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585173982793879552-C5199194/C5199194-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d82b7f6d1dc602d15d2de8032557b42c93378f9472ede56fae3cd68585e3eb46",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210171700_ElecSuper-PESD5V0S1BL-ES_C5199194.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756370896615956480-C5199194.pdf?response-content-disposition=attachment%3B%20filename%3DC5199194.pdf%3B%20filename%2A%3DUTF-8%27%27C5199194.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9da698e5a8d7f7ea987299d71851c9d44c710e932dd94140eb8cc20ed28cec09",
+     "dataManualOfficialLink": "",
+     "componentName": "ElecSuper PESD5V0S1BL-ES",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585173983784546304-C5199194/C5199194-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2bb215cc2c0fbbc149b3f7b521363931e815c1917cc0c20f2fbc59198237aeab",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "-40\u2103~+125\u2103 1 10V 150W 15A 1uA 30pF 5V 6V Bidirectional ESD IEC 61000-4-2 DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "150W"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "15A"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>-ES",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23904955,
+     "componentLibraryType": "expand",
+     "stockCount": 7826,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u666e\u5bb95.0V\uff0c\u5355\u8def\u53cc\u5411ESD\u9759\u7535\u9632\u62a4\u5668\u4ef6\uff0c30kV\uff0cCJ\uff1a12pF\uff1b\u97f3\u9891/\u89c6\u9891/\u901a\u8baf\u9632\u62a4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_elecsuper-pesd5v0s1bln-es_C22379675.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0088
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0069
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0058
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0052
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0043
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0056
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0085
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0042
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0045
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0066
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 7826,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "ElecSuper-PESD5V0S1BLNES/C22379675",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.02,
+     "preMinPurchaseNum": 1308,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0088,
+     "componentCode": "C22379675",
+     "componentBrandEn": "ElecSuper",
+     "componentModelEn": "PESD5V0S1BLN-ES",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585252591127171072-C22379675/C22379675-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f18670a371d481889052eaab3cd81b7f2d0f933fff41d660c64a98bb2fa7870c",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404091502_ElecSuper-PESD5V0S1BLN-ES_C22379675.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756418218267287552-C22379675.pdf?response-content-disposition=attachment%3B%20filename%3DC22379675.pdf%3B%20filename%2A%3DUTF-8%27%27C22379675.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=31a464882cdc76a7e2f91d6c19b292bdba11d76a6ddf5049d9d8c746e5b55af2",
+     "dataManualOfficialLink": "",
+     "componentName": "ElecSuper PESD5V0S1BLN-ES",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585252592087261184-C22379675/C22379675-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d447479581b1b09ad33eed2ec0a855477704764ad6014e33a5f4fc303212ecdc",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "-40\u2103~+125\u2103 1 10pF 12V 1uA 5.6V 5V 6A@8/20us 72W@8/20us Bidirectional ESD IEC 61000-4-2 DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "10pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "72W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "6A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>N-ES",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 31508673,
+     "componentLibraryType": "expand",
+     "stockCount": 7951,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a18A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_dowo-pesd5v0s1bl_C29779755.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0131
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0101
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0083
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0126
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0105
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0097
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.008
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 7749,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DOWO-PESD5V0S1BL/C29779755",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.044,
+     "preMinPurchaseNum": 689,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0171,
+     "componentCode": "C29779755",
+     "componentBrandEn": "DOWO",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8618731851939008512-C29779755-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c0d61d9674a270f54d334c0b14d6d8d4295047e9794fc4260e4c4d26df875d6e",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407161652_DOWO-PESD5V0S1BL_C29779755.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603383709551124480-C29779755.pdf?response-content-disposition=attachment%3B%20filename%3DC29779755.pdf%3B%20filename%2A%3DUTF-8%27%27C29779755.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e7f2185da24597dd67ff2e93634ca2ca8ce333ef8e877a6c93fe79e2ce8a9d59",
+     "dataManualOfficialLink": "",
+     "componentName": "DOWO PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8618731852861485056-C29779755-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d5cf80cc35c847486ee030bcd759228132916049cfd6def44aa1053f6c575aba",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "-55\u2103~+125\u2103 12V 18A@8/20us 200W@8/20us 35pF 500nA 5V 6.4V Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-5 Single-channel DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "35pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "200W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "18A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6.4V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "500nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23846378,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_kuu-kpesd5v0s1bln_C22368506.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0083
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0065
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0055
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0049
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0044
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0041
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0042
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.008
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.004
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0053
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0047
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0063
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "KUU-KPESD5V0S1BLN/C22368506",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.02,
+     "preMinPurchaseNum": 1389,
+     "minPurchaseNum": 1389,
+     "initialPrice": 0.0065,
+     "componentCode": "C22368506",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "KPESD5V0S1BLN",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585256070327775232-C22368506/C22368506-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1a748ce2c8b7e3b16da5beb49df671fe578e89489d0504a9f6219ca9c0201140",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2403271131_KUU-KPESD5V0S1BLN_C22368506.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757285178790428672-C22368506.pdf?response-content-disposition=attachment%3B%20filename%3DC22368506.pdf%3B%20filename%2A%3DUTF-8%27%27C22368506.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ceeb6a914dd7d3b0e2dbec137f8ca103f09bc0e802b1dcc30f7d35506f85fbbb",
+     "dataManualOfficialLink": "",
+     "componentName": "KUU KPESD5V0S1BLN",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585256071246057472-C22368506/C22368506-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6833bf5d87af080a6df4bc0f096a58c0f8dcdc89be5deb57f05c8cfc23b9029c",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+150\u2103 1 100nA 10V 15pF 5V 8.4V 80W@8/20us 8A@8/20us Bidirectional ESD IEC 61000-4-2\u3001IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6.5V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "K<span class='lucene_highlight_class'>PESD5V0S1BL</span>N",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60388453,
+     "componentLibraryType": "expand",
+     "stockCount": 9780,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "PESD5V0S1BL",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0052
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0044
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0039
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0043
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0032
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0064
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0034
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 9780,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "FUXINSEMI-PESD5V0S1BL/C56161249",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.016,
+     "preMinPurchaseNum": 1736,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0066,
+     "componentCode": "C56161249",
+     "componentBrandEn": "FUXINSEMI",
+     "componentModelEn": "PESD5V0S1BL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8796235542821761024-C56161249-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=25ec3d5e3fd98d02bdc3a4662dde8ba67d914cb727975b96033c22237ddb1d83",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "FUXINSEMI PESD5V0S1BL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8796235543988318208-C56161249-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0fc08c9d8bf2e899013308170d1a3f0063a766e3861ca1ba0ecf39663c0351c5",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "11V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "5.6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 55048143,
+     "componentLibraryType": "expand",
+     "stockCount": 6171,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u5355\u901a\u9053\u53cc\u5411TVS\u4e8c\u6781\u7ba1\uff0c\u8d85\u5c0f\u5c01\u88c5\u3001\u8d85\u4f4e\u7535\u5bb9\u548c\u6f0f\u7535\u6d41\u3001\u4f4e\u5de5\u4f5c\u548c\u94b3\u4f4d\u7535\u538b\uff0c\u7b26\u5408\u591a\u9879\u6807\u51c6",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0348
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0271
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0227
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.02
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0179
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0166
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0218
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0261
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.016
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0335
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0173
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0193
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 6149,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TECHPUBLIC-TPESD5V0S1BLD/C52205416",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.088,
+     "preMinPurchaseNum": 333,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0348,
+     "componentCode": "C52205416",
+     "componentBrandEn": "TECH PUBLIC",
+     "componentModelEn": "TPESD5V0S1BLD",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763669334470610944-C52205416-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=75ca95c84fbf67698c5e5a43e9f8cb15e9ed77e4a95993a25577e5eb700fa729",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757164531016065024-C52205416.pdf?response-content-disposition=attachment%3B%20filename%3DC52205416.pdf%3B%20filename%2A%3DUTF-8%27%27C52205416.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=04fa4d42c38e900a9e60e61fe32d259dd96075153db6d6622fc9b679274c5fde",
+     "dataManualOfficialLink": "",
+     "componentName": "TECH PUBLIC TPESD5V0S1BLD",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763669335518781440-C52205416-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fd32ce8f3d26b009d51bbf8093393f80f76ff390532e0dd40305b8ea37febd75",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+125\u2103 1 12V 20A@8/20us 220W@8/20us 30pF 5V 6V 80nA Bidirectional IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "220W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "20A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "80nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "T<span class='lucene_highlight_class'>PESD5V0S1BL</span>D",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56655853,
+     "componentLibraryType": "expand",
+     "stockCount": 9867,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD\u4fdd\u62a4\u4e8c\u6781\u7ba1\uff0c\u5177\u6709\u6b63\u5e38\u7535\u5bb9\uff0c\u9002\u7528\u4e8e\u9ad8\u5bc6\u5ea6\u5e94\u7528",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0169
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0133
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0113
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0086
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0083
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0163
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0109
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0088
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0128
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 9867,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GOODWORK-PESD5V0S1BLGK/C53477863",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.04,
+     "preMinPurchaseNum": 679,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0169,
+     "componentCode": "C53477863",
+     "componentBrandEn": "GOODWORK",
+     "componentModelEn": "PESD5V0S1BL-GK",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766611594644611072-C53477863-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6705d9678c4eb4e5061c2e50196bff889e84a9f265263d0fa9ad86db3f9afae9",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "GOODWORK PESD5V0S1BL-GK",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766611595743113216-C53477863-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e168a9a537387585cc8db2ec23ea1773e4ff4654168d0b073a5cf2b720581351",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "-55\u2103~+150\u2103 100nA 16V 320W 48pF 5V 8V Bidirectional ESD IEC 61000-4-2 DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "48pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "320W"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>-GK",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51264648,
+     "componentLibraryType": "expand",
+     "stockCount": 273,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a8A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_dowo-pesd5v0s1bln-dw_C48946124.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0058
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0045
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0034
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0029
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0043
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0029
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0055
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0028
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0033
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 238,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "DOWO-PESD5V0S1BLNDW/C48946124",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.014,
+     "preMinPurchaseNum": 2006,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0058,
+     "componentCode": "C48946124",
+     "componentBrandEn": "DOWO",
+     "componentModelEn": "PESD5V0S1BLN-DW",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763614414182461440-C48946124-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e31242b988943ae016d824b19e56fcb02b9a4dedea45e484e2b0cef842cf0127",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2505191720_DOWO-PESD5V0S1BLN-DW_C48946124.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "DOWO PESD5V0S1BLN-DW",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763614415331565568-C48946124-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=520c886dfa9556c72085d17db3955a6e502a0645cd8924a68eb314a146b0171e",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "-55\u2103~+125\u2103 100nA 10V 15pF 5V 8.4V 80W@8/20us 8A@8/20us Bidirectional ESD IEC 61000-4-2 Single-channel DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "10V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "8A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "8.4V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>N-DW",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8599857,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Zener Diodes",
+     "erpComponentName": "PESD5V0S1BL-QYL",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0415
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0327
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0248
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0223
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.021
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0315
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0203
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.04
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0239
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0215
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-PESD5V0S1BLQYL/C7508792",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0992,
+     "preMinPurchaseNum": 276,
+     "minPurchaseNum": 276,
+     "initialPrice": 0.0327,
+     "componentCode": "C7508792",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "PESD5V0S1BL-QYL",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia PESD5V0S1BL-QYL",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "DFN1006-2 Zener Diodes ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Zener Diodes",
+     "secondSortName": "Diodes",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>-QYL",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8599856,
+     "componentLibraryType": "expand",
+     "stockCount": 9841,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "PESD5V0S1BLD-QYL",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0595
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0469
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0405
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0359
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0322
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0302
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0452
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.039
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0291
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0574
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.031
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 9836,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Nexperia-PESD5V0S1BLDQYL/C7508791",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 30000,
+     "shopCostPrice": 0.16,
+     "preMinPurchaseNum": 193,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0595,
+     "componentCode": "C7508791",
+     "componentBrandEn": "Nexperia",
+     "componentModelEn": "PESD5V0S1BLD-QYL",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8781621382050123776-C7508791-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=147f6592978318adfc0aaa12649bc1e0cfb7eb458a4ac639d4d87880e6a87a49",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Nexperia PESD5V0S1BLD-QYL",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8781621382876266496-C7508791-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=faa85a967693d9801110776383a281eb2cd6d02fa32a0e9634c6cdfbb0d5e78a",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOD882D",
+     "describe": "5nA@5V SOD882D ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Junction Temperature Range",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance(Zzk)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance(Zzt)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Zener Voltage(Range)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Zener Voltage(Nom)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "5nA@5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>D-QYL",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56090901,
+     "componentLibraryType": "expand",
+     "stockCount": 13017,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u4f4e\u7535\u5bb9ESD\u4fdd\u62a4\uff0c\u9002\u7528\u4e8e\u9ad8\u901f\u6570\u636e\u7ebf",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.016
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0125
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0092
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0082
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0076
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0074
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0154
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0079
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0121
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0088
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 12918,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JSMSEMI-PESD5V0S1BL_315JSM/C53113914",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.03922,
+     "preMinPurchaseNum": 722,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.016,
+     "componentCode": "C53113914",
+     "componentBrandEn": "JSMSEMI",
+     "componentModelEn": "PESD5V0S1BL,315-JSM",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8764984429960155136-C53113914-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7405b44f24bd134b5c393af5356c491b5a977664088424c8955304013068c030",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JSMSEMI PESD5V0S1BL,315-JSM",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8764984431163514880-C53113914-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fe40b778544a6810623396426ab8265a1cc665bcbdb2e87f683b39c6e7733b24",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2",
+     "describe": "-55\u2103~+150\u2103 1 100nA 17V 5A@8/20us 5V 68W@8/20us 8.9pF 9V ESD IEC 61000-4-2 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "8.9pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "68W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "17V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "5A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "9V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>,315-JSM",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 55929074,
+     "componentLibraryType": "expand",
+     "stockCount": 7892,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u666e\u5bb95.0V\uff0c\u5355\u8def\u53cc\u5411ESD\u9759\u7535\u9632\u62a4\u5668\u4ef6\uff0c18A\uff0c30kV\uff0cCJ\uff1a30pF\uff1b\u97f3\u9891/\u89c6\u9891/\u901a\u8baf\u9632\u62a4\u3002",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0309
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0241
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0205
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0164
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0153
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0198
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0233
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0148
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0176
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0158
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 7793,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "ElecSuper-PESD5V0S1BLD_315_ES/C52994080",
+     "leastPatchNumber": 20,
+     "lossNumber": 8,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.075,
+     "preMinPurchaseNum": 375,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0309,
+     "componentCode": "C52994080",
+     "componentBrandEn": "ElecSuper",
+     "componentModelEn": "PESD5V0S1BLD,315(ES)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8769783501837488128-C52994080-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=631933c7fa2899ce6a0d2eb16ead0a5bfdafcd6dc909eed0910e32f9309ca819",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757185261941858304-C52994080.pdf?response-content-disposition=attachment%3B%20filename%3DC52994080.pdf%3B%20filename%2A%3DUTF-8%27%27C52994080.pdf&x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8ace38f37ff1f0bc63fa9ee7a0a7d5a496e631c9d3ca58e65893021668d00e52",
+     "dataManualOfficialLink": "",
+     "componentName": "ElecSuper PESD5V0S1BLD,315(ES)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8769783503003504640-C52994080-front.jpg?x-oss-date=20261030T103904Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3bb3183bd78fbf03c6603fdddac9354255f9e52807d822d992ec873ed066e72b",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "30pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "180W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "15A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>PESD5V0S1BL</span>D,315(ES)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "PESD5V0S1BL"
+ },
+ "message": null
+}

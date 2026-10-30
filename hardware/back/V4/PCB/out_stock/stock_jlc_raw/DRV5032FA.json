@@ -16,64 +16,64 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2488
+       "productPrice": 0.249
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1953
+       "productPrice": 0.1954
       },
       {
        "startNumber": 150,
        "endNumber": 999,
-       "productPrice": 0.1692
+       "productPrice": 0.1693
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 0.146
+       "productPrice": 0.1461
       },
       {
        "startNumber": 2000,
        "endNumber": 4999,
-       "productPrice": 0.1396
+       "productPrice": 0.1397
       },
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.1356
+       "productPrice": 0.1357
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 0.1406
+       "productPrice": 0.1407
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1881
+       "productPrice": 0.1882
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2397
+       "productPrice": 0.2398
       },
       {
        "startNumber": 2000,
        "endNumber": 4999,
-       "productPrice": 0.1345
+       "productPrice": 0.1346
       },
       {
        "startNumber": 150,
        "endNumber": 999,
-       "productPrice": 0.163
+       "productPrice": 0.1631
       },
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.1307
+       "productPrice": 0.1308
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.78127,
      "preMinPurchaseNum": 37,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2488,
+     "initialPrice": 0.249,
      "componentCode": "C3716252",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FALPG",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585121598894985216",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585121598886596608-C3716252/C3716252-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0569c829c4841f36f1d8338ba9fba08e6161d44d91df60245a1882ec1e2cd017",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302282030_Texas-Instruments-DRV5032FALPG_C3716252.pdf",
-     "dataManualFileAccessId": "8590378941782523904",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590378941761552384-C3716252.pdf?response-content-disposition=attachment%3B%20filename%3DC3716252.pdf%3B%20filename%2A%3DUTF-8%27%27C3716252.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=19b8f7a8d96a91fe8dc8a1c093a26eec695807db7b554af19b7d45988b77452b",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FALPG",
      "minImage": "",
-     "minImageAccessId": "8585121599896342528",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585121599887953920-C3716252/C3716252-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d1cf6500b8b9cd822f9c97bb6df5b7cba83c05f675a95ec97d4d5ee67416adf0",
      "imageList": [
       {
        "productImage": null,
@@ -197,7 +197,7 @@
     {
      "componentId": 152251,
      "componentLibraryType": "expand",
-     "stockCount": 44668,
+     "stockCount": 44647,
      "componentTypeEn": "Hall Switches",
      "erpComponentName": "\u6570\u5b57\u9501\u5b58\u970d\u5c14\u6548\u5e94\u4f20\u611f\u5668",
      "componentSource": "shop",
@@ -206,27 +206,27 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.175
+       "productPrice": 0.1751
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1365
+       "productPrice": 0.1366
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1199
+       "productPrice": 0.12
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.0993
+       "productPrice": 0.0994
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.0901
+       "productPrice": 0.0902
       },
       {
        "startNumber": 6000,
@@ -238,7 +238,7 @@
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.0956
+       "productPrice": 0.0957
       },
       {
        "startNumber": 6000,
@@ -248,27 +248,27 @@
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.0868
+       "productPrice": 0.0869
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1685
+       "productPrice": 0.1687
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1315
+       "productPrice": 0.1316
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1155
+       "productPrice": 0.1156
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
      "secondSortAccessId": "02988f6fa58f408199b837124314e176",
-     "canPresaleNumber": 44327,
+     "canPresaleNumber": 44266,
      "componentProductType": 0,
      "mergedComponentCode": "",
      "urlSuffix": "TexasInstruments-DRV5032FADBZR/C140921",
@@ -285,24 +285,24 @@
      "estimateDate": null,
      "fullReelPrice": null,
      "encapsulationNumber": 3000,
-     "shopCostPrice": 0.46708,
+     "shopCostPrice": 0.46709,
      "preMinPurchaseNum": 67,
      "minPurchaseNum": 1,
-     "initialPrice": 0.175,
+     "initialPrice": 0.1751,
      "componentCode": "C140921",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FADBZR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583671427426103296",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583671427421908992-C140921/C140921-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6e8a87fee36d68798d55c4d94aeb13f3d436941a2153bda419ee7abd9662fb11",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302221930_Texas-Instruments-DRV5032FADBZR_C140921.pdf",
-     "dataManualFileAccessId": "8589785439159947264",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589785439138975744-C140921.pdf?response-content-disposition=attachment%3B%20filename%3DC140921.pdf%3B%20filename%2A%3DUTF-8%27%27C140921.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=653178047fd6c270f2640fc71deda27bcea492295d0f48f150132eb53bfeb3b7",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FADBZR",
      "minImage": "",
-     "minImageAccessId": "8583671428269293568",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583671428260904960-C140921/C140921-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fa5861774423899067c0ee367b6887f6a22cc71e294f6292c5cca226a93fecde",
      "imageList": [
       {
        "productImage": null,
@@ -387,7 +387,7 @@
     {
      "componentId": 2244544,
      "componentLibraryType": "expand",
-     "stockCount": 2602,
+     "stockCount": 2547,
      "componentTypeEn": "Hall Switches",
      "erpComponentName": "\u6570\u5b57\u9501\u5b58\u970d\u5c14\u6548\u5e94\u4f20\u611f\u5668",
      "componentSource": "shop",
@@ -396,69 +396,69 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.283
+       "productPrice": 0.2832
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2242
+       "productPrice": 0.2244
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.199
+       "productPrice": 0.1992
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1675
+       "productPrice": 0.1676
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1535
+       "productPrice": 0.1536
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1451
+       "productPrice": 0.1452
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1614
+       "productPrice": 0.1615
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1398
+       "productPrice": 0.1399
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1479
+       "productPrice": 0.148
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2727
+       "productPrice": 0.2728
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.216
+       "productPrice": 0.2162
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1917
+       "productPrice": 0.1919
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
      "secondSortAccessId": "02988f6fa58f408199b837124314e176",
-     "canPresaleNumber": 2539,
+     "canPresaleNumber": 2489,
      "componentProductType": 0,
      "mergedComponentCode": "",
      "urlSuffix": "TexasInstruments-DRV5032FADMRR/C2152496",
@@ -478,21 +478,21 @@
      "shopCostPrice": 0.73474,
      "preMinPurchaseNum": 32,
      "minPurchaseNum": 1,
-     "initialPrice": 0.283,
+     "initialPrice": 0.2832,
      "componentCode": "C2152496",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FADMRR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583693133184454656",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583693133171871744-C2152496/C2152496-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fd8b17b6a7c28fca397211f708ba31e598a44bbb5240b15ebe292ec0eebf595e",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302221201_Texas-Instruments-DRV5032FADMRR_C2152496.pdf",
-     "dataManualFileAccessId": "8589834889274433536",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589834889253462016-C2152496.pdf?response-content-disposition=attachment%3B%20filename%3DC2152496.pdf%3B%20filename%2A%3DUTF-8%27%27C2152496.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c17af69ad0296d9c64752e24b2569a7ea720cc8c0a1c22b80812d66d55098d54",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FADMRR",
      "minImage": "",
-     "minImageAccessId": "8583693134061064192",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583693134048481280-C2152496/C2152496-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=40d319b2fde4ed79ed956b848d508eaa0f7756e36951c0f8b39a1af78dcf145b",
      "imageList": [
       {
        "productImage": null,
@@ -586,64 +586,64 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2796
+       "productPrice": 0.2798
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2208
+       "productPrice": 0.221
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.192
+       "productPrice": 0.1921
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1664
+       "productPrice": 0.1665
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1594
+       "productPrice": 0.1595
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1551
+       "productPrice": 0.1552
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1494
+       "productPrice": 0.1495
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1535
+       "productPrice": 0.1537
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1603
+       "productPrice": 0.1604
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2693
+       "productPrice": 0.2695
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1849
+       "productPrice": 0.1851
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2127
+       "productPrice": 0.2129
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -668,21 +668,21 @@
      "shopCostPrice": 0.85969,
      "preMinPurchaseNum": 33,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2796,
+     "initialPrice": 0.2798,
      "componentCode": "C2862716",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FALPGM",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8770924550807015424",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770924550777655296-C2862716-front.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2872f3190f79992c8a98f353253610415e364948cfbed6d59001c3686bdeddf5",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302212030_Texas-Instruments-DRV5032FALPGM_C2862716.pdf",
-     "dataManualFileAccessId": "8590185016640122880",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590185016619151360-C2862716.pdf?response-content-disposition=attachment%3B%20filename%3DC2862716.pdf%3B%20filename%2A%3DUTF-8%27%27C2862716.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=76f74982db026b9218f5831870fedb8248e8e31da8ef3670b24c3c9b7325bbfa",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FALPGM",
      "minImage": "",
-     "minImageAccessId": "8770924551943266304",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770924551913906176-C2862716-front.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=94c6139090f73770f52834c1736fa3da2cdc89aa742ece7d70dec4c0db88223e",
      "imageList": [
       {
        "productImage": null,
@@ -776,64 +776,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.112
+       "productPrice": 1.1128
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.0858
+       "productPrice": 1.0866
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.0694
+       "productPrice": 1.0702
       },
       {
        "startNumber": 100,
        "endNumber": 101,
-       "productPrice": 1.0514
+       "productPrice": 1.0521
       },
       {
        "startNumber": 102,
        "endNumber": 103,
-       "productPrice": 1.0514
+       "productPrice": 1.0521
       },
       {
        "startNumber": 104,
        "endNumber": -1,
-       "productPrice": 1.0514
+       "productPrice": 1.0521
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 102,
        "endNumber": 103,
-       "productPrice": 1.0128
+       "productPrice": 1.0135
       },
       {
        "startNumber": 100,
        "endNumber": 101,
-       "productPrice": 1.0128
+       "productPrice": 1.0135
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.0302
+       "productPrice": 1.0309
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.0712
+       "productPrice": 1.0719
       },
       {
        "startNumber": 104,
        "endNumber": -1,
-       "productPrice": 1.0128
+       "productPrice": 1.0135
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.046
+       "productPrice": 1.0467
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -858,21 +858,21 @@
      "shopCostPrice": 5.5312,
      "preMinPurchaseNum": 9,
      "minPurchaseNum": 9,
-     "initialPrice": 1.112,
+     "initialPrice": 1.1128,
      "componentCode": "C2152538",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FADBZT",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583743984875278336",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583743984866889728-C2152538/C2152538-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b21781da03220f7b03ed56a03310a7e83a6bdbc51b7e19fc4be01d2b6fb5cc61",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302281030_Texas-Instruments-DRV5032FADBZT_C2152538.pdf",
-     "dataManualFileAccessId": "8589945411504283648",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589945411483312128-C2152538.pdf?response-content-disposition=attachment%3B%20filename%3DC2152538.pdf%3B%20filename%2A%3DUTF-8%27%27C2152538.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fb84b8a6c41d1cfb60297858e141cefa26354d369bc9c9f5570ab9f6cb4e5096",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FADBZT",
      "minImage": "",
-     "minImageAccessId": "8583743985651494912",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583743985647300608-C2152538/C2152538-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e3310f82e787e7c1e79a9f7792cca05e1993a9950083457c7038ebe864e422a0",
      "imageList": [
       {
        "productImage": null,
@@ -966,64 +966,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.4995
+       "productPrice": 0.4999
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.3882
+       "productPrice": 0.3884
       },
       {
        "startNumber": 30,
        "endNumber": 249,
-       "productPrice": 0.339
+       "productPrice": 0.3393
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 0.2801
+       "productPrice": 0.2803
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.2539
+       "productPrice": 0.2541
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.2375
+       "productPrice": 0.2377
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.3739
+       "productPrice": 0.3742
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.2288
+       "productPrice": 0.229
       },
       {
        "startNumber": 30,
        "endNumber": 249,
-       "productPrice": 0.3266
+       "productPrice": 0.3268
       },
       {
        "startNumber": 250,
        "endNumber": 499,
-       "productPrice": 0.2698
+       "productPrice": 0.27
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.4812
+       "productPrice": 0.4815
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.2446
+       "productPrice": 0.2447
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -1048,21 +1048,21 @@
      "shopCostPrice": 1.35152,
      "preMinPurchaseNum": 24,
      "minPurchaseNum": 24,
-     "initialPrice": 0.3882,
+     "initialPrice": 0.3884,
      "componentCode": "C2655032",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "DRV5032FADMRT",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583799230360670208",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583799230352281600-C2655032/C2655032-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=79fd7d845d91c47ff35555bfde44ced62bbd975a2d59105ca8b0227bf014b996",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302212001_Texas-Instruments-DRV5032FADMRT_C2655032.pdf",
-     "dataManualFileAccessId": "8590150213525803008",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590150213509025792-C2655032.pdf?response-content-disposition=attachment%3B%20filename%3DC2655032.pdf%3B%20filename%2A%3DUTF-8%27%27C2655032.pdf&x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9263ad53b9b1d84d3f8fee2aad39393bf5d1ffb11c46c739e2510cf46edfd1e8",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/drv5032",
      "componentName": "TI DRV5032FADMRT",
      "minImage": "",
-     "minImageAccessId": "8583799231392333824",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583799231379750912-C2655032/C2655032-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103849Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=765b8e1190652a8009631a602105db51c0c4bc05ce7824c7847cfc0cae43bec3",
      "imageList": [
       {
        "productImage": null,

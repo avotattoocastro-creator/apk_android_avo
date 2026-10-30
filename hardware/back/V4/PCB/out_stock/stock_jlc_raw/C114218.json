@@ -7,7 +7,7 @@
     {
      "componentId": 115458,
      "componentLibraryType": "expand",
-     "stockCount": 19399,
+     "stockCount": 19353,
      "componentTypeEn": "SD Card / Memory Card Connector",
      "erpComponentName": "\u81ea\u5f39\u5f0f MicroSD\u5361(TF\u5361) \u5361\u5ea7",
      "componentSource": "shop",
@@ -16,69 +16,69 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.392
+       "productPrice": 1.393
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.1661
+       "productPrice": 1.1669
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.0416
+       "productPrice": 1.0423
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.9008
+       "productPrice": 0.9014
       },
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.7943
+       "productPrice": 0.7949
       },
       {
        "startNumber": 1500,
        "endNumber": -1,
-       "productPrice": 0.7665
+       "productPrice": 0.767
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.7652
+       "productPrice": 0.7657
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.341
+       "productPrice": 1.3419
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.1233
+       "productPrice": 1.124
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.8677
+       "productPrice": 0.8683
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.0034
+       "productPrice": 1.0041
       },
       {
        "startNumber": 1500,
        "endNumber": -1,
-       "productPrice": 0.7383
+       "productPrice": 0.7389
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
      "secondSortAccessId": "6e5e858c9fba429cac8ddaf7d0e9557d",
-     "canPresaleNumber": 19032,
+     "canPresaleNumber": 18982,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "HRS_Hirose-DM3AT_SFPEJM5/C114218",
@@ -98,21 +98,21 @@
      "shopCostPrice": 3.833,
      "preMinPurchaseNum": 7,
      "minPurchaseNum": 1,
-     "initialPrice": 1.392,
+     "initialPrice": 1.393,
      "componentCode": "C114218",
      "componentBrandEn": "HRS(Hirose)",
      "componentModelEn": "DM3AT-SF-PEJM5",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583350597864710144",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583350597852127232-C114218/C114218-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103819Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bc7f9615d05f83b73fe60577dd70da6197affb670c00164ab0b9518de6b5a622",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121938_HRS-Hirose-DM3AT-SF-PEJM5_C114218.pdf",
-     "dataManualFileAccessId": "8588898986388295681",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588898986379907072-C114218.pdf?response-content-disposition=attachment%3B%20filename%3DC114218.pdf%3B%20filename%2A%3DUTF-8%27%27C114218.pdf&x-oss-date=20261030T103819Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b38e14691e624d0b8b218d06fc7e135aa74a7bb1d222e391f1ba73580fed8309",
      "dataManualOfficialLink": "",
      "componentName": "HRS DM3AT-SF-PEJM5",
      "minImage": "",
-     "minImageAccessId": "8583350598721294336",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583350598712905728-C114218/C114218-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103819Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0c23db193dc920aa5b1a6e1d02c29c9a4127ddc3344823cbaf3bf2a172d38314",
      "imageList": [
       {
        "productImage": null,

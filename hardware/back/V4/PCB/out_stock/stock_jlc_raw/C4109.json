@@ -7,7 +7,7 @@
     {
      "componentId": 4516,
      "componentLibraryType": "base",
-     "stockCount": 10037510,
+     "stockCount": 10000134,
      "componentTypeEn": "Chip Resistor - Surface Mount",
      "erpComponentName": "\u539a\u819c\u7535\u963b 2k\u03a9 \u00b11% 62.5mW",
      "componentSource": "shop",
@@ -21,7 +21,7 @@
       {
        "startNumber": 1000,
        "endNumber": 2999,
-       "productPrice": 0.0019
+       "productPrice": 0.002
       },
       {
        "startNumber": 3000,
@@ -63,7 +63,7 @@
       {
        "startNumber": 3000,
        "endNumber": 9999,
-       "productPrice": 0.0015
+       "productPrice": 0.0016
       },
       {
        "startNumber": 1000,
@@ -78,7 +78,7 @@
      ],
      "firstSortAccessId": "b97df1fd049743c0a0330513eac35a72",
      "secondSortAccessId": "a49341812cad4b0bafa2ddd547a82bd4",
-     "canPresaleNumber": 9429996,
+     "canPresaleNumber": 9409084,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "4516-0402WGF2001TCE/C4109",
@@ -103,16 +103,16 @@
      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
      "componentModelEn": "0402WGF2001TCE",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8552478698298228736",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552478698289840128-C4109-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261030T103824Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4414386e9830d983374a53de145f425805cfe7e135d9240048f99756db3bef88",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010230_UNI-ROYAL-Uniroyal-Elec-0402WGF2001TCE_C4109.pdf",
-     "dataManualFileAccessId": "8579707948863373312",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579707948854984704-C4109.pdf?response-content-disposition=attachment%3B%20filename%3DC4109.pdf%3B%20filename%2A%3DUTF-8%27%27C4109.pdf&x-oss-date=20261030T103824Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2e6ff28fb33019cce808e78fd3d19432cb0e82f5e21686a88013c6798fdcf929",
      "dataManualOfficialLink": "",
      "componentName": "UNI-ROYAL 0402WGF2001TCE",
      "minImage": "",
-     "minImageAccessId": "8552478698981765120",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552478698973376512-C4109-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261030T103824Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9987f58b7559055ec20c84727a379a5330a205911b029a28b33a803d2e4821e5",
      "imageList": [
       {
        "productImage": null,
@@ -205,64 +205,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 2.0602
+       "productPrice": 2.0616
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 2.0602
+       "productPrice": 2.0616
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 2.0602
+       "productPrice": 2.0616
       },
       {
        "startNumber": 200,
        "endNumber": 374,
-       "productPrice": 0.7976
+       "productPrice": 0.7981
       },
       {
        "startNumber": 375,
        "endNumber": 1124,
-       "productPrice": 0.7697
+       "productPrice": 0.7703
       },
       {
        "startNumber": 1125,
        "endNumber": -1,
-       "productPrice": 0.7566
+       "productPrice": 0.7572
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 200,
        "endNumber": 374,
-       "productPrice": 0.7683
+       "productPrice": 0.7688
       },
       {
        "startNumber": 375,
        "endNumber": 1124,
-       "productPrice": 0.7415
+       "productPrice": 0.742
       },
       {
        "startNumber": 1125,
        "endNumber": -1,
-       "productPrice": 0.7289
+       "productPrice": 0.7294
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 1.9846
+       "productPrice": 1.986
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 1.9846
+       "productPrice": 1.986
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.9846
+       "productPrice": 1.986
       }
      ],
      "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
@@ -287,7 +287,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 5,
      "minPurchaseNum": 5,
-     "initialPrice": 2.0602,
+     "initialPrice": 2.0616,
      "componentCode": "C1599999",
      "componentBrandEn": "TDK",
      "componentModelEn": "B41858C4109M",
@@ -295,8 +295,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2211021430_TDK-B41858C4109M_C1599999.pdf",
-     "dataManualFileAccessId": "8590146835596668928",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590146835579891712-C1599999.pdf?response-content-disposition=attachment%3B%20filename%3DC1599999.pdf%3B%20filename%2A%3DUTF-8%27%27C1599999.pdf&x-oss-date=20261030T103824Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6f00903acd342e7dbd2b3a402a5832a71ec7439d2d03b82fc935e264f37b6959",
      "dataManualOfficialLink": "",
      "componentName": "TDK B41858C4109M",
      "minImage": null,
@@ -306,7 +306,7 @@
      "manufacturerBlackFlag": null,
      "componentNameEn": null,
      "componentSpecificationEn": "Plugin",
-     "describe": "10000uF 16V \u00b120% \u63d2\u4ef6 Horn-Type Electrolytic Capacitors ROHS",
+     "describe": "10000uF 16V Polarized \u00b120% Plugin Horn-Type Electrolytic Capacitors ROHS",
      "attributes": [
       {
        "attribute_name_en": "Voltage Rating",
@@ -353,64 +353,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.9925
+       "productPrice": 0.9931
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.9925
+       "productPrice": 0.9931
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.9925
+       "productPrice": 0.9931
       },
       {
        "startNumber": 200,
        "endNumber": 374,
-       "productPrice": 0.3964
+       "productPrice": 0.3966
       },
       {
        "startNumber": 375,
        "endNumber": 1124,
-       "productPrice": 0.3833
+       "productPrice": 0.3835
       },
       {
        "startNumber": 1125,
        "endNumber": -1,
-       "productPrice": 0.3767
+       "productPrice": 0.377
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 200,
        "endNumber": 374,
-       "productPrice": 0.3818
+       "productPrice": 0.3821
       },
       {
        "startNumber": 375,
        "endNumber": 1124,
-       "productPrice": 0.3692
+       "productPrice": 0.3695
       },
       {
        "startNumber": 1125,
        "endNumber": -1,
-       "productPrice": 0.3629
+       "productPrice": 0.3631
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.956
+       "productPrice": 0.9567
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.956
+       "productPrice": 0.9567
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.956
+       "productPrice": 0.9567
       }
      ],
      "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
@@ -435,7 +435,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 10,
      "minPurchaseNum": 10,
-     "initialPrice": 0.9925,
+     "initialPrice": 0.9931,
      "componentCode": "C6509172",
      "componentBrandEn": "TDK",
      "componentModelEn": "B41888C4109M000",
@@ -443,8 +443,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2404191500_TDK-B41888C4109M000_C6509172.pdf",
-     "dataManualFileAccessId": "8603304646299561984",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603304646282784768-C6509172.pdf?response-content-disposition=attachment%3B%20filename%3DC6509172.pdf%3B%20filename%2A%3DUTF-8%27%27C6509172.pdf&x-oss-date=20261030T103824Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=69916bc5aef9cfa6e3aaeb00582104221193f5f393a1f953030747054bf19684",
      "dataManualOfficialLink": "",
      "componentName": "TDK B41888C4109M000",
      "minImage": null,

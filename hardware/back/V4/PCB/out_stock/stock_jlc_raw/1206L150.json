@@ -16,64 +16,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.3446
+       "productPrice": 1.3455
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 1.3446
+       "productPrice": 1.3455
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 1.3446
+       "productPrice": 1.3455
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 0.5372
+       "productPrice": 0.5376
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.5192
+       "productPrice": 0.5195
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.511
+       "productPrice": 0.5113
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.4922
+       "productPrice": 0.4926
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 0.5175
+       "productPrice": 0.5178
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 1.2952
+       "productPrice": 1.2961
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 1.2952
+       "productPrice": 1.2961
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.2952
+       "productPrice": 1.2961
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.5001
+       "productPrice": 0.5005
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -98,7 +98,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 7,
      "minPurchaseNum": 7,
-     "initialPrice": 1.3446,
+     "initialPrice": 1.3455,
      "componentCode": "C19603159",
      "componentBrandEn": "Littelfuse",
      "componentModelEn": "1206L150PR",
@@ -106,8 +106,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271507_Littelfuse-1206L150PR_C19603159.pdf",
-     "dataManualFileAccessId": "8603309534631391232",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603309534610419712-C19603159.pdf?response-content-disposition=attachment%3B%20filename%3DC19603159.pdf%3B%20filename%2A%3DUTF-8%27%27C19603159.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=002d4063b4eb7a5e97e1761482b6714939a361284ba8b5f67eced78b7cae4aff",
      "dataManualOfficialLink": "",
      "componentName": "Littelfuse 1206L150PR",
      "minImage": null,
@@ -232,7 +232,7 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0426
+       "productPrice": 0.0427
       },
       {
        "startNumber": 3500,
@@ -242,7 +242,7 @@
       {
        "startNumber": 10500,
        "endNumber": -1,
-       "productPrice": 0.0284
+       "productPrice": 0.0285
       },
       {
        "startNumber": 300,
@@ -252,12 +252,12 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0535
+       "productPrice": 0.0536
       },
       {
        "startNumber": 1000,
        "endNumber": 3499,
-       "productPrice": 0.0333
+       "productPrice": 0.0334
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -287,16 +287,16 @@
      "componentBrandEn": "KUU",
      "componentModelEn": "K1206L150AR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583881889468338176",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583881889459949568-C2892425/C2892425-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cdc2d084659eb90129ad594dad130a596d86bb784033a7fd79f5292bd4a38baf",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2109140930_KUU-K1206L150AR_C2892425.pdf",
-     "dataManualFileAccessId": "8590196354715709440",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590196354690543616-C2892425.pdf?response-content-disposition=attachment%3B%20filename%3DC2892425.pdf%3B%20filename%2A%3DUTF-8%27%27C2892425.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b4819a128b15d6e79b07a6726c5baf309796cf13e705ce37c1a0d7b5959b5a79",
      "dataManualOfficialLink": "",
      "componentName": "KUU K1206L150AR",
      "minImage": "",
-     "minImageAccessId": "8583881890391085056",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583881890378502144-C2892425/C2892425-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a10e08cc6e7e1f25d659ddadcae84313fab964e667f391744562afb4ea053916",
      "imageList": [
       {
        "productImage": null,
@@ -460,12 +460,12 @@
       {
        "startNumber": 1,
        "endNumber": 199,
-       "productPrice": 0.0352
+       "productPrice": 0.0353
       },
       {
        "startNumber": 200,
        "endNumber": 599,
-       "productPrice": 0.0273
+       "productPrice": 0.0274
       },
       {
        "startNumber": 21000,
@@ -500,16 +500,16 @@
      "componentBrandEn": "YTL",
      "componentModelEn": "1206L150/6V",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8763012500302913536",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012500273553408-C49318384-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9c243ca7106c6ee38972641d8f167cda4c9eee6e596cd5eac74bd510c892ffe6",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756297631754522624",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756297631725162496-C49318384.pdf?response-content-disposition=attachment%3B%20filename%3DC49318384.pdf%3B%20filename%2A%3DUTF-8%27%27C49318384.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ec4a68e77e529836b75e2cfaef15ab035c8fcc2eaa1d7da06e2d1df61d8dc042",
      "dataManualOfficialLink": "",
      "componentName": "YTL 1206L150/6V",
      "minImage": "",
-     "minImageAccessId": "8763012501385043968",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012501355683840-C49318384-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3fa3e960ec2c57895ae76fa917ebf54f0b18a4b037c2be8a0f7b052885ac5c50",
      "imageList": [
       {
        "productImage": null,
@@ -666,7 +666,7 @@
       {
        "startNumber": 1,
        "endNumber": 199,
-       "productPrice": 0.0355
+       "productPrice": 0.0356
       },
       {
        "startNumber": 200,
@@ -676,7 +676,7 @@
       {
        "startNumber": 21000,
        "endNumber": -1,
-       "productPrice": 0.0172
+       "productPrice": 0.0173
       }
      ],
      "firstSortAccessId": null,
@@ -706,16 +706,16 @@
      "componentBrandEn": "YTL",
      "componentModelEn": "1206L150/8V",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8763012557366419456",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012557337059328-C49318385-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5069791195547afd110cf65cc4e935c24bff11018b0c7bef9035a274e84a7906",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756297636482043904",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756297636452683776-C49318385.pdf?response-content-disposition=attachment%3B%20filename%3DC49318385.pdf%3B%20filename%2A%3DUTF-8%27%27C49318385.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5f218173c5c68e3e2dfceb4731f61ca7615f7ee8cdbfae5e5752d0b67367f4fd",
      "dataManualOfficialLink": "",
      "componentName": "YTL 1206L150/8V",
      "minImage": "",
-     "minImageAccessId": "8763012558435966976",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012558410801152-C49318385-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6b69e363b5d0e9c5654e0e043a1c7ad7c5827cb790bb6b82662fdd8dd4578423",
      "imageList": [
       {
        "productImage": null,
@@ -816,7 +816,7 @@
     {
      "componentId": 119679,
      "componentLibraryType": "expand",
-     "stockCount": 7803,
+     "stockCount": 7667,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -835,7 +835,7 @@
       {
        "startNumber": 300,
        "endNumber": 2999,
-       "productPrice": 0.0544
+       "productPrice": 0.0545
       },
       {
        "startNumber": 3000,
@@ -862,7 +862,7 @@
       {
        "startNumber": 6000,
        "endNumber": 8999,
-       "productPrice": 0.0352
+       "productPrice": 0.0353
       },
       {
        "startNumber": 100,
@@ -872,7 +872,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0748
+       "productPrice": 0.0749
       },
       {
        "startNumber": 9000,
@@ -882,12 +882,12 @@
       {
        "startNumber": 300,
        "endNumber": 2999,
-       "productPrice": 0.0524
+       "productPrice": 0.0525
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 7699,
+     "canPresaleNumber": 7545,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "Littelfuse-1206L150THWR/C118413",
@@ -912,16 +912,16 @@
      "componentBrandEn": "Littelfuse",
      "componentModelEn": "1206L150THWR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583299787256553472",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583299787248164864-C118413/C118413-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=35cbc864383825d802a9fc603ba5d460acb7e64095d4c4941d5407227a469cd1",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-1206L150THWR_C118413.pdf",
-     "dataManualFileAccessId": "8588895672964038656",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588895672955650048-C118413.pdf?response-content-disposition=attachment%3B%20filename%3DC118413.pdf%3B%20filename%2A%3DUTF-8%27%27C118413.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a7abbaf138aec9a947aa705d826a517f165a8f3e05976c30cbce8161d46f96db",
      "dataManualOfficialLink": "",
      "componentName": "Littelfuse 1206L150THWR",
      "minImage": "",
-     "minImageAccessId": "8583299788100419584",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583299788092030976-C118413/C118413-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e94a89c14e2fd7b0b82ced714cb6ff26491ff7603f2441730ad423548e7d2703",
      "imageList": [
       {
        "productImage": null,
@@ -1029,7 +1029,7 @@
     {
      "componentId": 208156,
      "componentLibraryType": "expand",
-     "stockCount": 1163,
+     "stockCount": 1158,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -1038,69 +1038,69 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2775
+       "productPrice": 0.2777
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2175
+       "productPrice": 0.2177
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1918
+       "productPrice": 0.192
       },
       {
        "startNumber": 500,
        "endNumber": 2499,
-       "productPrice": 0.1599
+       "productPrice": 0.16
       },
       {
        "startNumber": 2500,
        "endNumber": 3999,
-       "productPrice": 0.1456
+       "productPrice": 0.1457
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 0.137
+       "productPrice": 0.1371
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2673
+       "productPrice": 0.2675
       },
       {
        "startNumber": 2500,
        "endNumber": 3999,
-       "productPrice": 0.1403
+       "productPrice": 0.1404
       },
       {
        "startNumber": 500,
        "endNumber": 2499,
-       "productPrice": 0.154
+       "productPrice": 0.1541
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1848
+       "productPrice": 0.1849
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2095
+       "productPrice": 0.2097
       },
       {
        "startNumber": 4000,
        "endNumber": -1,
-       "productPrice": 0.1319
+       "productPrice": 0.132
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 1135,
+     "canPresaleNumber": 1130,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "Littelfuse-1206L150SLYR/C207037",
@@ -1120,21 +1120,21 @@
      "shopCostPrice": 0.7264,
      "preMinPurchaseNum": 33,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2775,
+     "initialPrice": 0.2777,
      "componentCode": "C207037",
      "componentBrandEn": "Littelfuse",
      "componentModelEn": "1206L150SLYR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583442187825139712",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583442187816751104-C207037/C207037-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b443d61d41ca6cb1df7752ff19ebbc322ec439a05e712074881d2f1dc3323ec5",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-1206L150SLYR_C207037.pdf",
-     "dataManualFileAccessId": "8588910128951136257",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588910128942747649-C207037.pdf?response-content-disposition=attachment%3B%20filename%3DC207037.pdf%3B%20filename%2A%3DUTF-8%27%27C207037.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ff9675db3844b99f1969b1ecc6b247dd653682552f79a90e9dc3596f6876a43c",
      "dataManualOfficialLink": "",
      "componentName": "Littelfuse 1206L150SLYR",
      "minImage": "",
-     "minImageAccessId": "8583442188683890688",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583442188671307776-C207037/C207037-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=04a761ea66b628dd4f972cad89d2a036129d4009b69014234b5c586484cd4fea",
      "imageList": [
       {
        "productImage": null,
@@ -1242,7 +1242,7 @@
     {
      "componentId": 20283513,
      "componentLibraryType": "expand",
-     "stockCount": 10572,
+     "stockCount": 6972,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -1266,12 +1266,12 @@
       {
        "startNumber": 3500,
        "endNumber": 10499,
-       "productPrice": 0.0213
+       "productPrice": 0.0214
       },
       {
        "startNumber": 10500,
        "endNumber": 20999,
-       "productPrice": 0.0195
+       "productPrice": 0.0196
       },
       {
        "startNumber": 21000,
@@ -1313,7 +1313,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 10570,
+     "canPresaleNumber": 6970,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "LUTE-1206L1506NR/C19078712",
@@ -1338,16 +1338,16 @@
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/6NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585799125887823872",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585799125879435264-C19078712/C19078712-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3725e72a6ec73a4d6af22265d72f22444a932d8961b39da97f761d7b2263075e",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-6NR_C19078712.pdf",
-     "dataManualFileAccessId": "8586212644588572672",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586212644580184064-C19078712.pdf?response-content-disposition=attachment%3B%20filename%3DC19078712.pdf%3B%20filename%2A%3DUTF-8%27%27C19078712.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bb5325ba2f6676db4603f9849d6e756440a88edfb74f70325a3143679ffafdb6",
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/6NR",
      "minImage": "",
-     "minImageAccessId": "8585799126856843264",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585799126848454656-C19078712/C19078712-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=dbdd4d144a50348a80a5ba65f200c5a9e3f0317ce96c1c50ec0f6fb6dc7c637a",
      "imageList": [
       {
        "productImage": null,
@@ -1455,7 +1455,7 @@
     {
      "componentId": 20283514,
      "componentLibraryType": "expand",
-     "stockCount": 9548,
+     "stockCount": 5451,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -1464,12 +1464,12 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0385
+       "productPrice": 0.0386
       },
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0326
+       "productPrice": 0.0327
       },
       {
        "startNumber": 300,
@@ -1511,7 +1511,7 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0314
+       "productPrice": 0.0315
       },
       {
        "startNumber": 10500,
@@ -1526,7 +1526,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 9522,
+     "canPresaleNumber": 5425,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "LUTE-1206L1508NR/C19078713",
@@ -1544,23 +1544,23 @@
      "fullReelPrice": null,
      "encapsulationNumber": 3500,
      "shopCostPrice": 0.10518,
-     "preMinPurchaseNum": 277,
+     "preMinPurchaseNum": 276,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0385,
+     "initialPrice": 0.0386,
      "componentCode": "C19078713",
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/8NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8770310748994187264",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770310748964827136-C19078713-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9dce7a009ecbdeb52b43361b28cc21807dd1495ad8fc5de47eb0fc2c53a2ce1b",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-8NR_C19078713.pdf",
-     "dataManualFileAccessId": "8586212647902072832",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586212647889489920-C19078713.pdf?response-content-disposition=attachment%3B%20filename%3DC19078713.pdf%3B%20filename%2A%3DUTF-8%27%27C19078713.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e484de80b5612040870325d8d716fe7540e0c0a35a2a17ebb1d5d25f379e05e3",
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/8NR",
      "minImage": "",
-     "minImageAccessId": "8770310750109601792",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770310750080241664-C19078713-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8e7f51c5c90a7046d33190e9e0ee4255aa9c77990af7ff0746d24be9c5271211",
      "imageList": [
       {
        "productImage": null,
@@ -1677,7 +1677,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0508
+       "productPrice": 0.0509
       },
       {
        "startNumber": 100,
@@ -1697,7 +1697,7 @@
       {
        "startNumber": 3500,
        "endNumber": 10499,
-       "productPrice": 0.0272
+       "productPrice": 0.0273
       },
       {
        "startNumber": 10500,
@@ -1709,12 +1709,12 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0385
+       "productPrice": 0.0386
       },
       {
        "startNumber": 3500,
        "endNumber": 10499,
-       "productPrice": 0.0262
+       "productPrice": 0.0263
       },
       {
        "startNumber": 10500,
@@ -1724,7 +1724,7 @@
       {
        "startNumber": 300,
        "endNumber": 999,
-       "productPrice": 0.0333
+       "productPrice": 0.0334
       },
       {
        "startNumber": 1000,
@@ -1759,21 +1759,21 @@
      "shopCostPrice": 0.138,
      "preMinPurchaseNum": 226,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0508,
+     "initialPrice": 0.0509,
      "componentCode": "C49318386",
      "componentBrandEn": "YTL",
      "componentModelEn": "1206L150/12V",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8763012445386620928",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012445353066496-C49318386-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9256caf636c954262b0ab8b3f8369ab44e9b9faaa86d686ca241681b172dfb15",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756297641028399104",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756297640990650368-C49318386.pdf?response-content-disposition=attachment%3B%20filename%3DC49318386.pdf%3B%20filename%2A%3DUTF-8%27%27C49318386.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f7dd9f48df1f2acff15a0c4bbe2ec41acff6873eb763e0e36e971ad6dd5d770c",
      "dataManualOfficialLink": "",
      "componentName": "YTL 1206L150/12V",
      "minImage": "",
-     "minImageAccessId": "8763012446371876864",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012446338322432-C49318386-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3a7dcbf6c7016b9d9b8e567c895289f70030a4eb7b3b7838578127c706880bde",
      "imageList": [
       {
        "productImage": null,
@@ -1883,12 +1883,12 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0644
+       "productPrice": 0.0645
       },
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0508
+       "productPrice": 0.0509
       },
       {
        "startNumber": 300,
@@ -1903,7 +1903,7 @@
       {
        "startNumber": 3500,
        "endNumber": 10499,
-       "productPrice": 0.0349
+       "productPrice": 0.035
       },
       {
        "startNumber": 10500,
@@ -1935,12 +1935,12 @@
       {
        "startNumber": 1000,
        "endNumber": 3499,
-       "productPrice": 0.0374
+       "productPrice": 0.0375
       },
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.062
+       "productPrice": 0.0621
       }
      ],
      "firstSortAccessId": null,
@@ -1965,21 +1965,21 @@
      "shopCostPrice": 0.1725,
      "preMinPurchaseNum": 178,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0644,
+     "initialPrice": 0.0645,
      "componentCode": "C49318388",
      "componentBrandEn": "YTL",
      "componentModelEn": "1206L150/16V",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8763012829031354368",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012829001994240-C49318388-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1d67aca5eaf44b8b273b41f9f3873fbf90b1702739c96350ec08940c0dcc6a00",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756297649529982976",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756297649500622848-C49318388.pdf?response-content-disposition=attachment%3B%20filename%3DC49318388.pdf%3B%20filename%2A%3DUTF-8%27%27C49318388.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a35da732ba14490b99a250f9e95120f8ba75099cc8da39fd1e7ba9c7f5635a55",
      "dataManualOfficialLink": "",
      "componentName": "YTL 1206L150/16V",
      "minImage": "",
-     "minImageAccessId": "8763012830180052992",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012830142304256-C49318388-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=628b4a6be2769753d67d20b82c1190e6123c2df749587aa9d2e6f00e735d984b",
      "imageList": [
       {
        "productImage": null,
@@ -2220,17 +2220,17 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 200,
@@ -2262,22 +2262,22 @@
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.0415
+       "productPrice": 0.0416
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -2302,7 +2302,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 79,
      "minPurchaseNum": 79,
-     "initialPrice": 0.1153,
+     "initialPrice": 0.1154,
      "componentCode": "C3761192",
      "componentBrandEn": "Meritek",
      "componentModelEn": "MPTS1206L150",
@@ -2310,8 +2310,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401161551_Meritek-MPTS1206L150_C3761192.pdf",
-     "dataManualFileAccessId": "8590424145969651712",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590424145948680192-C3761192.pdf?response-content-disposition=attachment%3B%20filename%3DC3761192.pdf%3B%20filename%2A%3DUTF-8%27%27C3761192.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9d1c3984d690921e1f75eebd2da8b062c1583b1ddd5472f865ff9efb19cd4523",
      "dataManualOfficialLink": "",
      "componentName": "Meritek MPTS1206L150",
      "minImage": null,
@@ -2414,7 +2414,7 @@
       {
        "startNumber": 300,
        "endNumber": 999,
-       "productPrice": 0.0349
+       "productPrice": 0.035
       },
       {
        "startNumber": 1000,
@@ -2436,7 +2436,7 @@
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0385
+       "productPrice": 0.0386
       },
       {
        "startNumber": 3500,
@@ -2446,7 +2446,7 @@
       {
        "startNumber": 10500,
        "endNumber": -1,
-       "productPrice": 0.0254
+       "productPrice": 0.0255
       },
       {
        "startNumber": 300,
@@ -2461,7 +2461,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0483
+       "productPrice": 0.0484
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -2491,16 +2491,16 @@
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/12NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585799125816791040",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585799125804208128-C19078714/C19078714-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0d8244dbcfe33231b6cf1ba1fd73a635aececfded0f699f177e0ec64bd1363ec",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-12NR_C19078714.pdf",
-     "dataManualFileAccessId": "8586212652352094208",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586212652343705600-C19078714.pdf?response-content-disposition=attachment%3B%20filename%3DC19078714.pdf%3B%20filename%2A%3DUTF-8%27%27C19078714.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3ccb3aec9d5ae4b9138011be92520351d25a98b4a427258a24811d15c6d6f4e7",
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/12NR",
      "minImage": "",
-     "minImageAccessId": "8585799126894727168",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585799126882144256-C19078714/C19078714-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=30cb63a4ab35508980cf709880828bc4f24851edda60fd130fe5fdbdef5c07ec",
      "imageList": [
       {
        "productImage": null,
@@ -2608,7 +2608,7 @@
     {
      "componentId": 22039715,
      "componentLibraryType": "expand",
-     "stockCount": 18897,
+     "stockCount": 18890,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "24V 1.5A",
      "componentSource": "shop",
@@ -2632,12 +2632,12 @@
       {
        "startNumber": 500,
        "endNumber": 3499,
-       "productPrice": 0.0498
+       "productPrice": 0.0499
       },
       {
        "startNumber": 3500,
        "endNumber": 6999,
-       "productPrice": 0.0462
+       "productPrice": 0.0463
       },
       {
        "startNumber": 7000,
@@ -2654,7 +2654,7 @@
       {
        "startNumber": 3500,
        "endNumber": 6999,
-       "productPrice": 0.0445
+       "productPrice": 0.0446
       },
       {
        "startNumber": 1,
@@ -2674,12 +2674,12 @@
       {
        "startNumber": 7000,
        "endNumber": -1,
-       "productPrice": 0.0426
+       "productPrice": 0.0427
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 18708,
+     "canPresaleNumber": 18775,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "LUTE-1206L15024NR/C20627120",
@@ -2704,16 +2704,16 @@
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/24NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585228935068332032",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585228935059943424-C20627120/C20627120-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=88fbc6cb95c2cd2b9e1960de0d69a070af044810703d8f7627f8e51e0d4cfe0e",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2402291512_LUTE-1206L150-24NR_C20627120.pdf",
-     "dataManualFileAccessId": "8590909007550750720",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590909007525584896-C20627120.pdf?response-content-disposition=attachment%3B%20filename%3DC20627120.pdf%3B%20filename%2A%3DUTF-8%27%27C20627120.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=215bee39dc21f8d0f3c2b132eb1e16ffc39914b3080aa6888fc9183709614d16",
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/24NR",
      "minImage": "",
-     "minImageAccessId": "8585228936003932160",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585228935995543552-C20627120/C20627120-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=185f599ace43cf9af79c3d69251e3d95f9a15a398ba50f6553bedc2904920a0c",
      "imageList": [
       {
        "productImage": null,
@@ -2821,7 +2821,7 @@
     {
      "componentId": 23909883,
      "componentLibraryType": "expand",
-     "stockCount": 28615,
+     "stockCount": 28595,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "16V 1.5A 1206\u81ea\u6062\u590d",
      "componentSource": "shop",
@@ -2830,7 +2830,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0439
+       "productPrice": 0.044
       },
       {
        "startNumber": 100,
@@ -2840,7 +2840,7 @@
       {
        "startNumber": 300,
        "endNumber": 999,
-       "productPrice": 0.0339
+       "productPrice": 0.034
       },
       {
        "startNumber": 1000,
@@ -2882,17 +2882,17 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0423
+       "productPrice": 0.0424
       },
       {
        "startNumber": 1000,
        "endNumber": 3499,
-       "productPrice": 0.0303
+       "productPrice": 0.0304
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 28603,
+     "canPresaleNumber": 28583,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "LUTE-1206L15016NR/C22379952",
@@ -2912,21 +2912,21 @@
      "shopCostPrice": 0.12,
      "preMinPurchaseNum": 242,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0439,
+     "initialPrice": 0.044,
      "componentCode": "C22379952",
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/16NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585251272262373376",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251272249790464-C22379952/C22379952-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fde9f574c26bed32768caa082facf92236f4cfd3a5fdc4a3c87ada4994b4b8bc",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404101641_LUTE-1206L150-16NR_C22379952.pdf",
-     "dataManualFileAccessId": "8590916958168961024",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590916958143795200-C22379952.pdf?response-content-disposition=attachment%3B%20filename%3DC22379952.pdf%3B%20filename%2A%3DUTF-8%27%27C22379952.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f7bf566892f9ecfe266a9ca583980143755c0a4e78f18c3dfeb76508cbcfe70b",
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/16NR",
      "minImage": "",
-     "minImageAccessId": "8585251273196621824",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585251273188233216-C22379952/C22379952-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4fe9cd5e4ac5fe25e1670eb8d07d7a159d3213246331786a08137e3395d0f106",
      "imageList": [
       {
        "productImage": null,
@@ -3027,7 +3027,7 @@
     {
      "componentId": 56346690,
      "componentLibraryType": "expand",
-     "stockCount": 21346,
+     "stockCount": 21265,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "30V 1.50A 1206\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
      "componentSource": "shop",
@@ -3036,17 +3036,17 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1219
+       "productPrice": 0.122
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0993
+       "productPrice": 0.0994
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.088
+       "productPrice": 0.0881
       },
       {
        "startNumber": 500,
@@ -3073,7 +3073,7 @@
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0956
+       "productPrice": 0.0957
       },
       {
        "startNumber": 150,
@@ -3083,7 +3083,7 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1174
+       "productPrice": 0.1175
       },
       {
        "startNumber": 3500,
@@ -3098,7 +3098,7 @@
      ],
      "firstSortAccessId": null,
      "secondSortAccessId": null,
-     "canPresaleNumber": 21271,
+     "canPresaleNumber": 21191,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "LUTE-1206L15030NR/C53280174",
@@ -3118,21 +3118,21 @@
      "shopCostPrice": 0.32,
      "preMinPurchaseNum": 91,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1219,
+     "initialPrice": 0.122,
      "componentCode": "C53280174",
      "componentBrandEn": "LUTE",
      "componentModelEn": "1206L150/30NR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8765616116070518784",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8765616116036964352-C53280174-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5222900655abd0b7dfbe2cd21ad7ec6175e4f20a01c101142edb5394625fb589",
      "dataManualUrl": null,
      "dataManualFileAccessId": "",
      "dataManualFileAccessIdUrl": null,
      "dataManualOfficialLink": "",
      "componentName": "LUTE 1206L150/30NR",
      "minImage": "",
-     "minImageAccessId": "8765616117110976512",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8765616117081616384-C53280174-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0b771a03944999de03370a94b0cfe44a0e20c7fd39bb55b16cf0ccfa0ba60e6b",
      "imageList": [
       {
        "productImage": null,
@@ -3562,7 +3562,7 @@
       {
        "startNumber": 1,
        "endNumber": 999,
-       "productPrice": 0.0058
+       "productPrice": 0.0059
       },
       {
        "startNumber": 1000,
@@ -3644,7 +3644,7 @@
      "shopCostPrice": 0.01464,
      "preMinPurchaseNum": 1962,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0058,
+     "initialPrice": 0.0059,
      "componentCode": "C56273147",
      "componentBrandEn": "Guangdong Hottech",
      "componentModelEn": "RI1206L1504FT",
@@ -3955,17 +3955,17 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.1153
+       "productPrice": 0.1154
       },
       {
        "startNumber": 200,
@@ -3997,22 +3997,22 @@
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.1111
+       "productPrice": 0.1112
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.0415
+       "productPrice": 0.0416
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -4037,7 +4037,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 79,
      "minPurchaseNum": 79,
-     "initialPrice": 0.1153,
+     "initialPrice": 0.1154,
      "componentCode": "C3762087",
      "componentBrandEn": "Meritek",
      "componentModelEn": "MPTS1206L150R",
@@ -4045,8 +4045,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401161601_Meritek-MPTS1206L150R_C3762087.pdf",
-     "dataManualFileAccessId": "8590374709474205696",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590374709449039872-C3762087.pdf?response-content-disposition=attachment%3B%20filename%3DC3762087.pdf%3B%20filename%2A%3DUTF-8%27%27C3762087.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7ae237c21010766e952add93fbda4198d26720de7d3b1a700390d7770984b612",
      "dataManualOfficialLink": "",
      "componentName": "Meritek MPTS1206L150R",
      "minImage": null,
@@ -4139,64 +4139,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.7337
+       "productPrice": 0.7342
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.7173
+       "productPrice": 0.7178
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.7059
+       "productPrice": 0.7064
       },
       {
        "startNumber": 100,
        "endNumber": 101,
-       "productPrice": 0.696
+       "productPrice": 0.6965
       },
       {
        "startNumber": 102,
        "endNumber": 103,
-       "productPrice": 0.696
+       "productPrice": 0.6965
       },
       {
        "startNumber": 104,
        "endNumber": -1,
-       "productPrice": 0.696
+       "productPrice": 0.6965
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 102,
        "endNumber": 103,
-       "productPrice": 0.6705
+       "productPrice": 0.671
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.691
+       "productPrice": 0.6915
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.68
+       "productPrice": 0.6804
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.7068
+       "productPrice": 0.7073
       },
       {
        "startNumber": 100,
        "endNumber": 101,
-       "productPrice": 0.6705
+       "productPrice": 0.671
       },
       {
        "startNumber": 104,
        "endNumber": -1,
-       "productPrice": 0.6705
+       "productPrice": 0.671
       }
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
@@ -4221,21 +4221,21 @@
      "shopCostPrice": 3.5061,
      "preMinPurchaseNum": 13,
      "minPurchaseNum": 1,
-     "initialPrice": 0.7337,
+     "initialPrice": 0.7342,
      "componentCode": "C3760514",
      "componentBrandEn": "Littelfuse",
      "componentModelEn": "1206L150THWR-A",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8789932872847106048",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8789932872826134528-C3760514-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f2d619a85181ca2d8fd5e87106e490a780fc536bf773bed1f70484ea749f5218",
      "dataManualUrl": "",
-     "dataManualFileAccessId": "8590890378415722496",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590890378390556672-C3760514.pdf?response-content-disposition=attachment%3B%20filename%3DC3760514.pdf%3B%20filename%2A%3DUTF-8%27%27C3760514.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3d68ac78e2cbcf1528afd46c73233c97bdec4aa388c6b36c58054bb9be8b987e",
      "dataManualOfficialLink": "",
      "componentName": "Littelfuse 1206L150THWR-A",
      "minImage": "",
-     "minImageAccessId": "8789932873806925824",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8789932873785954304-C3760514-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=df87094f92cfa0415d5e813061d47c3053df000b584ebaf5dace97f3c0ca6925",
      "imageList": [
       {
        "productImage": null,
@@ -4336,7 +4336,7 @@
     {
      "componentId": 44276494,
      "componentLibraryType": "expand",
-     "stockCount": 3035,
+     "stockCount": 3023,
      "componentTypeEn": "Resettable Fuses",
      "erpComponentName": "\u805a\u5408\u7269PTC\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
      "componentSource": "shop",
@@ -4345,12 +4345,12 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.0883
+       "productPrice": 0.0884
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0693
+       "productPrice": 0.0694
       },
       {
        "startNumber": 150,
@@ -4360,7 +4360,7 @@
       {
        "startNumber": 500,
        "endNumber": 3499,
-       "productPrice": 0.0529
+       "productPrice": 0.053
       },
       {
        "startNumber": 3500,
@@ -4370,7 +4370,7 @@
       {
        "startNumber": 7000,
        "endNumber": -1,
-       "productPrice": 0.0444
+       "productPrice": 0.0445
       }
      ],
      "buyComponentPrices": [
@@ -4407,7 +4407,7 @@
      ],
      "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
      "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
-     "canPresaleNumber": 3027,
+     "canPresaleNumber": 3015,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "KUU-K1206L15016AR/C42377642",
@@ -4427,21 +4427,21 @@
      "shopCostPrice": 0.24,
      "preMinPurchaseNum": 131,
      "minPurchaseNum": 1,
-     "initialPrice": 0.0883,
+     "initialPrice": 0.0884,
      "componentCode": "C42377642",
      "componentBrandEn": "KUU",
      "componentModelEn": "K1206L150/16AR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8585921396270092288",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585921396261703680-C42377642/C42377642-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a00df50720c7ecc84aff2500baee7fdce2a2a151922d37b540fda71f9c1f25d5",
      "dataManualUrl": "",
-     "dataManualFileAccessId": "8604434636592734208",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604434636571762688-C42377642.pdf?response-content-disposition=attachment%3B%20filename%3DC42377642.pdf%3B%20filename%2A%3DUTF-8%27%27C42377642.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=543bfd7ec0058ebd5a1b71d7389f1c5814526be4263ea97dd9252932c47f0242",
      "dataManualOfficialLink": "",
      "componentName": "KUU K1206L150/16AR",
      "minImage": "",
-     "minImageAccessId": "8585921397806153728",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585921397797765120-C42377642/C42377642-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f37799283890286dd88fb6bbdf49d25da4256a7e29d6bc213ab53540214c0aff",
      "imageList": [
       {
        "productImage": null,
@@ -4638,16 +4638,16 @@
      "componentBrandEn": "YTL",
      "componentModelEn": "1206L150/13.2V",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8763012472981082112",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012472955916288-C49318387-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=be627401f94528d3f87e75764ad05be082bc103039128a424c9b4de028761a11",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756297645260587008",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756297645235421184-C49318387.pdf?response-content-disposition=attachment%3B%20filename%3DC49318387.pdf%3B%20filename%2A%3DUTF-8%27%27C49318387.pdf&x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=048c7d55ae4c67234458b07a66485f1950730fa4e2c778c17348bcde2c4e4ca6",
      "dataManualOfficialLink": "",
      "componentName": "YTL 1206L150/13.2V",
      "minImage": "",
-     "minImageAccessId": "8763012474000027648",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763012473970667520-C49318387-front.jpg?x-oss-date=20261030T103845Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=807a80ebc20a106d18741ba0736eb3de86ea8ebeb0cb9421b36bb6e29ab03de7",
      "imageList": [
       {
        "productImage": null,

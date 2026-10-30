@@ -7,7 +7,7 @@
     {
      "componentId": 17464,
      "componentLibraryType": "base",
-     "stockCount": 1051141,
+     "stockCount": 1043100,
      "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
      "erpComponentName": "47uF \u00b120% 6.3V",
      "componentSource": "shop",
@@ -16,17 +16,17 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.1019
+       "productPrice": 0.102
       },
       {
        "startNumber": 100,
        "endNumber": 299,
-       "productPrice": 0.0798
+       "productPrice": 0.0799
       },
       {
        "startNumber": 300,
        "endNumber": 1999,
-       "productPrice": 0.0685
+       "productPrice": 0.0686
       },
       {
        "startNumber": 2000,
@@ -68,7 +68,7 @@
       {
        "startNumber": 4000,
        "endNumber": 9999,
-       "productPrice": 0.0538
+       "productPrice": 0.0539
       },
       {
        "startNumber": 300,
@@ -78,7 +78,7 @@
      ],
      "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
      "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
-     "canPresaleNumber": 856133,
+     "canPresaleNumber": 855684,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "17464-CL21A476MQYNNNE/C16780",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.32045,
      "preMinPurchaseNum": 89,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1019,
+     "initialPrice": 0.102,
      "componentCode": "C16780",
      "componentBrandEn": "Samsung Electro-Mechanics",
      "componentModelEn": "CL21A476MQYNNNE",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8582976320041467904",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582976320033079296-C16780/C16780-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103851Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fb1c5bc58042f20dab977c9b27277ecb4e4bfd8e8bd29d14de818aaba90d9095",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL21A476MQYNNNE_C16780.pdf",
-     "dataManualFileAccessId": "8586178594430701568",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586178594422312960-C16780.pdf?response-content-disposition=attachment%3B%20filename%3DC16780.pdf%3B%20filename%2A%3DUTF-8%27%27C16780.pdf&x-oss-date=20261030T103851Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=235a77da42c664229e1158d7238c0c747ebbd3e5d64b02922aff2aff931991c5",
      "dataManualOfficialLink": "",
      "componentName": "Samsung Electro-Mechanics CL21A476MQYNNNE",
      "minImage": "",
-     "minImageAccessId": "8582976320955015168",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582976320942432256-C16780/C16780-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103851Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=93776b22c6caebeca74945b48ab3da892f12d3727834d0db7587d9e447076cf0",
      "imageList": [
       {
        "productImage": null,

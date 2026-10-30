@@ -7,7 +7,7 @@
     {
      "componentId": 3859121,
      "componentLibraryType": "expand",
-     "stockCount": 8709,
+     "stockCount": 8594,
      "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
      "erpComponentName": "3.3V 800mA 20V",
      "componentSource": "shop",
@@ -16,69 +16,69 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.5732
+       "productPrice": 0.5736
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.4913
+       "productPrice": 0.4917
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.4095
+       "productPrice": 0.4097
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.3603
+       "productPrice": 0.3606
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.3276
+       "productPrice": 0.3278
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.3276
+       "productPrice": 0.3278
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.3471
+       "productPrice": 0.3474
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.3944
+       "productPrice": 0.3947
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.3156
+       "productPrice": 0.3158
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.3156
+       "productPrice": 0.3158
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.5522
+       "productPrice": 0.5526
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.4733
+       "productPrice": 0.4736
       }
      ],
      "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
      "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
-     "canPresaleNumber": 8481,
+     "canPresaleNumber": 8368,
      "componentProductType": 0,
      "mergedComponentCode": "",
      "urlSuffix": "SGMICRO-SGM2212_3_3XKC3GTR/C3294699",
@@ -98,21 +98,21 @@
      "shopCostPrice": 1.60147,
      "preMinPurchaseNum": 19,
      "minPurchaseNum": 1,
-     "initialPrice": 0.5732,
+     "initialPrice": 0.5736,
      "componentCode": "C3294699",
      "componentBrandEn": "SGMICRO",
      "componentModelEn": "SGM2212-3.3XKC3G/TR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583701549343756288",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583701549331173376-C3294699/C3294699-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103832Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=033b198518264a0bbab5aa7aa169156d2be6bc8ea43774b8861094301eb37584",
      "dataManualUrl": "",
-     "dataManualFileAccessId": "8589836358505435136",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589836358484463616-C3294699.pdf?response-content-disposition=attachment%3B%20filename%3DC3294699.pdf%3B%20filename%2A%3DUTF-8%27%27C3294699.pdf&x-oss-date=20261030T103832Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4f8368c159862a6e5e357d93348a447eca1d3a5fbea552ed163565c69fa3c4d2",
      "dataManualOfficialLink": "",
      "componentName": "SGMICRO SGM2212-3.3XKC3G/TR",
      "minImage": "",
-     "minImageAccessId": "8583701550258114560",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583701550249725952-C3294699/C3294699-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103832Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1cd306a622a192bd122cfa65e5a906da1e661a752961a3a4e19fe415a02140bd",
      "imageList": [
       {
        "productImage": null,
@@ -218,69 +218,69 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.7927
+       "productPrice": 0.7932
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.6093
+       "productPrice": 0.6097
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.5175
+       "productPrice": 0.5179
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.4258
+       "productPrice": 0.4261
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.4258
+       "productPrice": 0.4261
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.4258
+       "productPrice": 0.4261
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.4102
+       "productPrice": 0.4105
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.4986
+       "productPrice": 0.4989
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.4102
+       "productPrice": 0.4105
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.7636
+       "productPrice": 0.7641
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.4102
+       "productPrice": 0.4105
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.5869
+       "productPrice": 0.5873
       }
      ],
      "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
      "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
-     "canPresaleNumber": 2348,
+     "canPresaleNumber": 2354,
      "componentProductType": 0,
      "mergedComponentCode": "",
      "urlSuffix": "SGMICRO-SGM2212_3_3XOB2GTR/C5152863",
@@ -300,7 +300,7 @@
      "shopCostPrice": 2.3938,
      "preMinPurchaseNum": 15,
      "minPurchaseNum": 1,
-     "initialPrice": 0.7927,
+     "initialPrice": 0.7932,
      "componentCode": "C5152863",
      "componentBrandEn": "SGMICRO",
      "componentModelEn": "SGM2212-3.3XOB2G/TR",
@@ -308,8 +308,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2209281630_SGMICRO-SGM2212-3-3XOB2G-TR_C5152863.pdf",
-     "dataManualFileAccessId": "8552189958913089536",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8552189958908895232-C5152863.pdf?response-content-disposition=attachment%3B%20filename%3DC5152863.pdf%3B%20filename%2A%3DUTF-8%27%27C5152863.pdf&x-oss-date=20261030T103832Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f0359da6752adc2ea7ca6db86c92ea36243d8bb86af12f85ceb813e3d1c19b28",
      "dataManualOfficialLink": "",
      "componentName": "SGMICRO SGM2212-3.3XOB2G/TR",
      "minImage": null,
@@ -398,7 +398,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,
@@ -489,64 +489,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.1382
+       "productPrice": 1.139
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.9073
+       "productPrice": 0.9079
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.7812
+       "productPrice": 0.7817
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.6387
+       "productPrice": 0.6392
       },
       {
        "startNumber": 500,
        "endNumber": 799,
-       "productPrice": 0.6387
+       "productPrice": 0.6392
       },
       {
        "startNumber": 800,
        "endNumber": -1,
-       "productPrice": 0.6387
+       "productPrice": 0.6392
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 800,
        "endNumber": -1,
-       "productPrice": 0.6153
+       "productPrice": 0.6157
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.7525
+       "productPrice": 0.7531
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.0964
+       "productPrice": 1.0972
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.6153
+       "productPrice": 0.6157
       },
       {
        "startNumber": 500,
        "endNumber": 799,
-       "productPrice": 0.6153
+       "productPrice": 0.6157
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.874
+       "productPrice": 0.8746
       }
      ],
      "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
@@ -571,7 +571,7 @@
      "shopCostPrice": 0.0,
      "preMinPurchaseNum": 8,
      "minPurchaseNum": 8,
-     "initialPrice": 1.1382,
+     "initialPrice": 1.139,
      "componentCode": "C5152868",
      "componentBrandEn": "SGMICRO",
      "componentModelEn": "SGM2212-3.3XOA3G/TR",
@@ -579,8 +579,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2209281630_SGMICRO-SGM2212-3-3XOA3G-TR_C5152868.pdf",
-     "dataManualFileAccessId": "8552189971290210304",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8552189971281821696-C5152868.pdf?response-content-disposition=attachment%3B%20filename%3DC5152868.pdf%3B%20filename%2A%3DUTF-8%27%27C5152868.pdf&x-oss-date=20261030T103832Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9ea9b7bca1b4bce6abb9a4de68672970d5761a0bf4361821d211160b6f442484",
      "dataManualOfficialLink": "",
      "componentName": "SGMICRO SGM2212-3.3XOA3G/TR",
      "minImage": null,
@@ -669,7 +669,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,

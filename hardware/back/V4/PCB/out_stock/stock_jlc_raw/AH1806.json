@@ -16,64 +16,64 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2783
+       "productPrice": 0.2785
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2188
+       "productPrice": 0.219
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1935
+       "productPrice": 0.1936
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1617
+       "productPrice": 0.1618
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1474
+       "productPrice": 0.1475
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1391
+       "productPrice": 0.1392
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.142
+       "productPrice": 0.1421
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1864
+       "productPrice": 0.1865
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.134
+       "productPrice": 0.1341
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1558
+       "productPrice": 0.1559
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2681
+       "productPrice": 0.2683
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.2108
+       "productPrice": 0.211
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.71993,
      "preMinPurchaseNum": 33,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2783,
+     "initialPrice": 0.2785,
      "componentCode": "C126663",
      "componentBrandEn": "Diodes Incorporated",
      "componentModelEn": "AH1806-W-7",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8582977651535450112",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582977651527061504-C126663/C126663-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f31f50b87ba12eb83dd7926e3da494d28a131e86846695a9b5eb5651277a012f",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811141121_Diodes-Incorporated-AH1806-W-7_C126663.pdf",
-     "dataManualFileAccessId": "8586182916502130688",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586182916493742080-C126663.pdf?response-content-disposition=attachment%3B%20filename%3DC126663.pdf%3B%20filename%2A%3DUTF-8%27%27C126663.pdf&x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d3991cb3268f6196c55748472680275c2c00f6ff3c11bf0ff0cd74c841cd93b7",
      "dataManualOfficialLink": "",
      "componentName": "DIODES AH1806-W-7",
      "minImage": "",
-     "minImageAccessId": "8582977652441960448",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8582977652429377536-C126663/C126663-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ef4f2ece442691c7ab4a191aca0d6eee91c11d7b3a54b269141db81066a9054d",
      "imageList": [
       {
        "productImage": null,
@@ -202,64 +202,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.2152
+       "productPrice": 1.216
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.9957
+       "productPrice": 0.9964
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.8746
+       "productPrice": 0.8752
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.737
+       "productPrice": 0.7375
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.6764
+       "productPrice": 0.6769
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.6502
+       "productPrice": 0.6506
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.7099
+       "productPrice": 0.7104
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.9592
+       "productPrice": 0.9599
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.6263
+       "productPrice": 0.6268
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.1706
+       "productPrice": 1.1714
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.6516
+       "productPrice": 0.652
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.8425
+       "productPrice": 0.843
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -284,7 +284,7 @@
      "shopCostPrice": 3.7362,
      "preMinPurchaseNum": 8,
      "minPurchaseNum": 1,
-     "initialPrice": 1.2152,
+     "initialPrice": 1.216,
      "componentCode": "C842170",
      "componentBrandEn": "Diodes Incorporated",
      "componentModelEn": "AH1806-Z-7",
@@ -292,8 +292,8 @@
      "productBigImageAccessId": null,
      "productBigImageAccessIdUrl": null,
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2107280040_Diodes-Incorporated-AH1806-Z-7_C842170.pdf",
-     "dataManualFileAccessId": "8560106789456285696",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8560106789452091392-C842170.pdf?response-content-disposition=attachment%3B%20filename%3DC842170.pdf%3B%20filename%2A%3DUTF-8%27%27C842170.pdf&x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b17abd31c8b3c71f39548bd4c3f078face13e89b10f93b1e85e2234ca4ea3f68",
      "dataManualOfficialLink": "",
      "componentName": "DIODES AH1806-Z-7",
      "minImage": null,
@@ -366,64 +366,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.8031
+       "productPrice": 1.8043
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.5263
+       "productPrice": 1.5274
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.3511
+       "productPrice": 1.352
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 1.1186
+       "productPrice": 1.1193
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 1.0383
+       "productPrice": 1.039
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 1.0023
+       "productPrice": 1.003
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 1.0002
+       "productPrice": 1.0009
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 1.3015
+       "productPrice": 1.3024
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.9655
+       "productPrice": 0.9662
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.7369
+       "productPrice": 1.7381
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 1.0775
+       "productPrice": 1.0783
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 1.4703
+       "productPrice": 1.4713
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -448,21 +448,21 @@
      "shopCostPrice": 5.635,
      "preMinPurchaseNum": 6,
      "minPurchaseNum": 6,
-     "initialPrice": 1.8031,
+     "initialPrice": 1.8043,
      "componentCode": "C842162",
      "componentBrandEn": "Diodes Incorporated",
      "componentModelEn": "AH1806-P-A",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583505513606340608",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583505513597952000-C842162/C842162-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ec49de8bc1e6c6f46bf6285bbe9d898ac59d19777702c55930ee841bc7ca640a",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2107280040_Diodes-Incorporated-AH1806-P-A_C842162.pdf",
-     "dataManualFileAccessId": "8560106786465611776",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8560106786457223168-C842162.pdf?response-content-disposition=attachment%3B%20filename%3DC842162.pdf%3B%20filename%2A%3DUTF-8%27%27C842162.pdf&x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=746d18edce36938259a18f7a47fb9e46d2798c68f053a89e10fdc9df95af0833",
      "dataManualOfficialLink": "",
      "componentName": "DIODES AH1806-P-A",
      "minImage": "",
-     "minImageAccessId": "8583505514546270208",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583505514537881600-C842162/C842162-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b6753b0347ff233339f0ffceb3b31debf89d945f440628a8bc049e6882f23b6f",
      "imageList": [
       {
        "productImage": null,
@@ -548,64 +548,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.4242
+       "productPrice": 0.4245
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.339
+       "productPrice": 0.3393
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.303
+       "productPrice": 0.3032
       },
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.2572
+       "productPrice": 0.2573
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.226
+       "productPrice": 0.2262
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.2146
+       "productPrice": 0.2147
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 100,
        "endNumber": 499,
-       "productPrice": 0.2477
+       "productPrice": 0.2479
       },
       {
        "startNumber": 30,
        "endNumber": 99,
-       "productPrice": 0.2919
+       "productPrice": 0.2921
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.2067
+       "productPrice": 0.2069
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 0.4086
+       "productPrice": 0.4089
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.2178
+       "productPrice": 0.2179
       },
       {
        "startNumber": 10,
        "endNumber": 29,
-       "productPrice": 0.3266
+       "productPrice": 0.3268
       }
      ],
      "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
@@ -630,21 +630,21 @@
      "shopCostPrice": 1.03312,
      "preMinPurchaseNum": 27,
      "minPurchaseNum": 27,
-     "initialPrice": 0.339,
+     "initialPrice": 0.3393,
      "componentCode": "C842167",
      "componentBrandEn": "Diodes Incorporated",
      "componentModelEn": "AH1806-P-B",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583507039696408576",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583507039688019968-C842167/C842167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=696f5e29cc3c4840fa20e10fa1ff08994b3ba5c7634bcdee58af791ef6c02ea5",
      "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2107280040_Diodes-Incorporated-AH1806-P-B_C842167.pdf",
-     "dataManualFileAccessId": "8560106786989359104",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8560106786985164800-C842167.pdf?response-content-disposition=attachment%3B%20filename%3DC842167.pdf%3B%20filename%2A%3DUTF-8%27%27C842167.pdf&x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7b5d1370ebc9f7d9c29598032e50f5a8471621bc463bf967dcf5158e26f0624",
      "dataManualOfficialLink": "",
      "componentName": "DIODES AH1806-P-B",
      "minImage": "",
-     "minImageAccessId": "8583507040727937024",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583507040719548416-C842167/C842167-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103850Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9ece1b924694d10120296b23d4892a657db1101bbb3eaf4516734c0643a5b23a",
      "imageList": [
       {
        "productImage": null,

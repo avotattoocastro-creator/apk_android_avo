@@ -7,7 +7,7 @@
     {
      "componentId": 3067417,
      "componentLibraryType": "expand",
-     "stockCount": 143598,
+     "stockCount": 141538,
      "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
      "erpComponentName": "3.3V 300mA 6V",
      "componentSource": "shop",
@@ -16,49 +16,49 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2092
+       "productPrice": 0.2093
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1597
+       "productPrice": 0.1598
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1355
+       "productPrice": 0.1356
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.114
+       "productPrice": 0.1141
       },
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.1081
+       "productPrice": 0.1082
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1045
+       "productPrice": 0.1046
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.1098
+       "productPrice": 0.1099
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.1007
+       "productPrice": 0.1008
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2015
+       "productPrice": 0.2016
       },
       {
        "startNumber": 3000,
@@ -68,17 +68,17 @@
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1539
+       "productPrice": 0.154
       },
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.1305
+       "productPrice": 0.1306
       }
      ],
      "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
      "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
-     "canPresaleNumber": 141068,
+     "canPresaleNumber": 139016,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "TexasInstruments-TPS7A2033PDBVR/C2862740",
@@ -98,21 +98,21 @@
      "shopCostPrice": 0.60198,
      "preMinPurchaseNum": 44,
      "minPurchaseNum": 1,
-     "initialPrice": 0.2092,
+     "initialPrice": 0.2093,
      "componentCode": "C2862740",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "TPS7A2033PDBVR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8583656690025156608",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583656690012573696-C2862740/C2862740-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d8ab1745312a46c16899476de9cfebaa5d11410a6f101f0a2c201d6d93d7338f",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2303010830_Texas-Instruments-TPS7A2033PDBVR_C2862740.pdf",
-     "dataManualFileAccessId": "8589039653551026176",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589039653546831872-C2862740.pdf?response-content-disposition=attachment%3B%20filename%3DC2862740.pdf%3B%20filename%2A%3DUTF-8%27%27C2862740.pdf&x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0759dd3b17af1fcf5de20e56f64324696d84c4d1937508a4ab5ca428f2deb310",
      "dataManualOfficialLink": "https://www.ti.com/cn/lit/ds/symlink/tps7a20.pdf",
      "componentName": "TI TPS7A2033PDBVR",
      "minImage": "",
-     "minImageAccessId": "8583656690931126272",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583656690918543360-C2862740/C2862740-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d27875c301e6686fda4b31a7ebc57cd6ccb1ad2f28a21ff5ad07b89b74045587",
      "imageList": [
       {
        "productImage": null,
@@ -218,64 +218,64 @@
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.0645
+       "productPrice": 1.0653
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 1.0645
+       "productPrice": 1.0653
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 1.0645
+       "productPrice": 1.0653
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 0.4127
+       "productPrice": 0.413
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.398
+       "productPrice": 0.3983
       },
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.3914
+       "productPrice": 0.3917
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 1000,
        "endNumber": -1,
-       "productPrice": 0.3771
+       "productPrice": 0.3773
       },
       {
        "startNumber": 200,
        "endNumber": 499,
-       "productPrice": 0.3976
+       "productPrice": 0.3979
       },
       {
        "startNumber": 10,
        "endNumber": 11,
-       "productPrice": 1.0255
+       "productPrice": 1.0262
       },
       {
        "startNumber": 12,
        "endNumber": 199,
-       "productPrice": 1.0255
+       "productPrice": 1.0262
       },
       {
        "startNumber": 1,
        "endNumber": 9,
-       "productPrice": 1.0255
+       "productPrice": 1.0262
       },
       {
        "startNumber": 500,
        "endNumber": 999,
-       "productPrice": 0.3834
+       "productPrice": 0.3837
       }
      ],
      "firstSortAccessId": null,
@@ -300,7 +300,7 @@
      "shopCostPrice": 0.001,
      "preMinPurchaseNum": 9,
      "minPurchaseNum": 9,
-     "initialPrice": 1.0645,
+     "initialPrice": 1.0653,
      "componentCode": "C2922540",
      "componentBrandEn": "Texas Instruments",
      "componentModelEn": "PTPS7A2033PDBVR",
@@ -349,7 +349,7 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1135
+       "productPrice": 0.1136
       },
       {
        "startNumber": 50,
@@ -364,7 +364,7 @@
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.0693
+       "productPrice": 0.0694
       },
       {
        "startNumber": 3000,
@@ -386,7 +386,7 @@
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0753
+       "productPrice": 0.0754
       },
       {
        "startNumber": 1,
@@ -406,12 +406,12 @@
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.0565
+       "productPrice": 0.0566
       }
      ],
      "firstSortAccessId": null,
      "secondSortAccessId": null,
-     "canPresaleNumber": 3166,
+     "canPresaleNumber": 3165,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "MSKSEMI-MSTPS7A2033PDBVR/C45367201",
@@ -431,21 +431,21 @@
      "shopCostPrice": 0.3,
      "preMinPurchaseNum": 101,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1135,
+     "initialPrice": 0.1136,
      "componentCode": "C45367201",
      "componentBrandEn": "MSKSEMI",
      "componentModelEn": "MSTPS7A2033PDBVR",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8755064186378293248",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8755064186348933120-C45367201-front.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cdac8915a059097abcb6b56346cb11d260cdc21b789f0d4014beed556a5dd9d0",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756299247056490496",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756299247022936064-C45367201.pdf?response-content-disposition=attachment%3B%20filename%3DC45367201.pdf%3B%20filename%2A%3DUTF-8%27%27C45367201.pdf&x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2cda716d9ffea28fc01dbd290919eb77a3389f36654ba99d27a2667e45521e17",
      "dataManualOfficialLink": "",
      "componentName": "MSKSEMI MSTPS7A2033PDBVR",
      "minImage": "",
-     "minImageAccessId": "8755064187469217792",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8755064187444051968-C45367201-front.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cac6d59c281d1d2c8f58d4d425d478342520a4d0985a685bb19bd3e0b858f000",
      "imageList": [
       {
        "productImage": null,
@@ -551,7 +551,7 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.1034
+       "productPrice": 0.1035
       },
       {
        "startNumber": 50,
@@ -588,7 +588,7 @@
       {
        "startNumber": 3000,
        "endNumber": 5999,
-       "productPrice": 0.0543
+       "productPrice": 0.0544
       },
       {
        "startNumber": 500,
@@ -598,7 +598,7 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.0996
+       "productPrice": 0.0997
       },
       {
        "startNumber": 150,
@@ -633,21 +633,21 @@
      "shopCostPrice": 0.275,
      "preMinPurchaseNum": 111,
      "minPurchaseNum": 1,
-     "initialPrice": 0.1034,
+     "initialPrice": 0.1035,
      "componentCode": "C49452001",
      "componentBrandEn": "TECH PUBLIC",
      "componentModelEn": "TPS7A2033PDBVR-TP",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8767035532616712192",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767035532587352064-C49452001-front.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f0e9e37a840ee5d35c9f8cca595349f8c17294abfec8e508de8eeb42fa688310",
      "dataManualUrl": null,
-     "dataManualFileAccessId": "8756422701621747712",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756422701596581888-C49452001.pdf?response-content-disposition=attachment%3B%20filename%3DC49452001.pdf%3B%20filename%2A%3DUTF-8%27%27C49452001.pdf&x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8119767dd5ca07f5c7c3e9a044f7c26168b7f9b9c4c77174602613779b2484cb",
      "dataManualOfficialLink": "",
      "componentName": "TECH PUBLIC TPS7A2033PDBVR-TP",
      "minImage": "",
-     "minImageAccessId": "8767035533577207808",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767035533547847680-C49452001-front.jpg?x-oss-date=20261030T103833Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a49e3a47563913dfe27931e009d7a130217f156d0b570cc0a3d5a75d4f7a2c53",
      "imageList": [
       {
        "productImage": null,

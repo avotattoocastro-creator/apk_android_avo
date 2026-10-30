@@ -16,7 +16,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,
@@ -107,7 +107,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,
@@ -198,7 +198,7 @@
       {
        "startNumber": 1,
        "endNumber": 99,
-       "productPrice": 0.0398
+       "productPrice": 0.0399
       },
       {
        "startNumber": 100,
@@ -280,7 +280,7 @@
     {
      "componentId": 57972444,
      "componentLibraryType": "expand",
-     "stockCount": 5221,
+     "stockCount": 5145,
      "componentTypeEn": "Wire To Board Connector",
      "erpComponentName": "1x2P \u95f4\u8ddd:2mm \u5367\u8d34 \u7cfb\u5217:PH",
      "componentSource": "shop",
@@ -331,7 +331,7 @@
       {
        "startNumber": 5000,
        "endNumber": 9999,
-       "productPrice": 0.0251
+       "productPrice": 0.0252
       },
       {
        "startNumber": 1,
@@ -351,7 +351,7 @@
      ],
      "firstSortAccessId": null,
      "secondSortAccessId": null,
-     "canPresaleNumber": 5062,
+     "canPresaleNumber": 4992,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "XYECONN-XY_S2B_PH_SM4TB/C54582899",
@@ -376,16 +376,16 @@
      "componentBrandEn": "XYECONN",
      "componentModelEn": "XY-S2B-PH-SM4-TB",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8767825959066050560",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767825959036690432-C54582899-front.jpg?x-oss-date=20261030T103838Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=364940b7d5a74495acd8e5d96b42700c40e3ad046dae68ec4d717157639cc0bb",
      "dataManualUrl": null,
      "dataManualFileAccessId": "",
      "dataManualFileAccessIdUrl": null,
      "dataManualOfficialLink": "",
      "componentName": "XYECONN XY-S2B-PH-SM4-TB",
      "minImage": "",
-     "minImageAccessId": "8767825960135462912",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767825960106102784-C54582899-front.jpg?x-oss-date=20261030T103838Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fd57f2e7aae715e2f7d741cd8e5538dc2f5be5b157ee48ece004f9630a804f24",
      "imageList": [
       {
        "productImage": null,
@@ -506,7 +506,7 @@
     {
      "componentId": 280164,
      "componentLibraryType": "expand",
-     "stockCount": 14,
+     "stockCount": 2,
      "componentTypeEn": "Wire To Board Connector",
      "erpComponentName": "1x2P \u95f4\u8ddd:2mm \u5367\u8d34 \u7cfb\u5217:PH",
      "componentSource": "shop",
@@ -515,69 +515,69 @@
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2231
+       "productPrice": 0.2233
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1778
+       "productPrice": 0.1779
       },
       {
        "startNumber": 150,
        "endNumber": 999,
-       "productPrice": 0.1556
+       "productPrice": 0.1557
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 0.136
+       "productPrice": 0.1361
       },
       {
        "startNumber": 2000,
        "endNumber": 4999,
-       "productPrice": 0.1306
+       "productPrice": 0.1307
       },
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.1273
+       "productPrice": 0.1274
       }
      ],
      "buyComponentPrices": [
       {
        "startNumber": 5000,
        "endNumber": -1,
-       "productPrice": 0.1226
+       "productPrice": 0.1227
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.1712
+       "productPrice": 0.1713
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.2149
+       "productPrice": 0.2151
       },
       {
        "startNumber": 1000,
        "endNumber": 1999,
-       "productPrice": 0.131
+       "productPrice": 0.1311
       },
       {
        "startNumber": 150,
        "endNumber": 999,
-       "productPrice": 0.1499
+       "productPrice": 0.15
       },
       {
        "startNumber": 2000,
        "endNumber": 4999,
-       "productPrice": 0.1258
+       "productPrice": 0.1259
       }
      ],
      "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
      "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
-     "canPresaleNumber": -1420,
+     "canPresaleNumber": -1488,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "JST-S2B_PH_SM4_TB_LF_SN/C295747",
@@ -597,21 +597,21 @@
      "shopCostPrice": 0.55145,
      "preMinPurchaseNum": 41,
      "minPurchaseNum": 41,
-     "initialPrice": 0.2231,
+     "initialPrice": 0.2233,
      "componentCode": "C295747",
      "componentBrandEn": "JST",
      "componentModelEn": "S2B-PH-SM4-TB(LF)(SN)",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8718787092454985728",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718787092429819904-C295747-front.jpg?x-oss-date=20261030T103838Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b9ef36e6a3ebae777bde9c1fb2b12d9886ffeeb297dc87d3834a71937f86551b",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2102031704_JST-S2B-PH-SM4-TB-LF-SN_C295747.pdf",
-     "dataManualFileAccessId": "8587740317575483392",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8587740317567094784-C295747.pdf?response-content-disposition=attachment%3B%20filename%3DC295747.pdf%3B%20filename%2A%3DUTF-8%27%27C295747.pdf&x-oss-date=20261030T103838Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3813b82a9fa3a52916376e1090ba8618d3038a31cde5b730f6810fc5b0c1aa15",
      "dataManualOfficialLink": "",
      "componentName": "JST S2B-PH-SM4-TB(LF)(SN)",
      "minImage": "",
-     "minImageAccessId": "8718787093737902080",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8718787093708541952-C295747-front.jpg?x-oss-date=20261030T103838Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c810649d286cfad56e19b5f26e90eea5a1d294751a8faaeb4451b7852fc709ee",
      "imageList": [
       {
        "productImage": null,

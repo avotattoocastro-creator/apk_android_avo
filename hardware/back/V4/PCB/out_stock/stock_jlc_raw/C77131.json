@@ -7,7 +7,7 @@
     {
      "componentId": 78258,
      "componentLibraryType": "expand",
-     "stockCount": 304175,
+     "stockCount": 300534,
      "componentTypeEn": "NTC Thermistors",
      "erpComponentName": "10k\u03a9 3380K 100mW",
      "componentSource": "shop",
@@ -21,27 +21,27 @@
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0149
+       "productPrice": 0.0148
       },
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.0132
+       "productPrice": 0.0131
       },
       {
        "startNumber": 10000,
        "endNumber": 19999,
-       "productPrice": 0.0111
+       "productPrice": 0.011
       },
       {
        "startNumber": 20000,
        "endNumber": 49999,
-       "productPrice": 0.0106
+       "productPrice": 0.0105
       },
       {
        "startNumber": 50000,
        "endNumber": -1,
-       "productPrice": 0.0102
+       "productPrice": 0.0101
       }
      ],
      "buyComponentPrices": [
@@ -58,27 +58,27 @@
       {
        "startNumber": 10000,
        "endNumber": 19999,
-       "productPrice": 0.0107
+       "productPrice": 0.0106
       },
       {
        "startNumber": 1500,
        "endNumber": 9999,
-       "productPrice": 0.0127
+       "productPrice": 0.0126
       },
       {
        "startNumber": 20000,
        "endNumber": 49999,
-       "productPrice": 0.0102
+       "productPrice": 0.0101
       },
       {
        "startNumber": 500,
        "endNumber": 1499,
-       "productPrice": 0.0143
+       "productPrice": 0.0142
       }
      ],
      "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
      "secondSortAccessId": "7bd534bdda8344d6b5a11abb79f12e9b",
-     "canPresaleNumber": 300152,
+     "canPresaleNumber": 296588,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "MurataElectronics-NCP15XH103F03RC/C77131",
@@ -103,16 +103,16 @@
      "componentBrandEn": "Murata Electronics",
      "componentModelEn": "NCP15XH103F03RC",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8762368929585217536",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368929551663104-C77131-front.jpg?x-oss-date=20261030T103742Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6313b1a995e4043d6f5caf2bcd298a6eb641121f604fbb85257ae2440598132d",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Murata-Electronics-NCP15XH103F03RC_C77131.pdf",
-     "dataManualFileAccessId": "8586175050088767488",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8586175050076184576-C77131.pdf?response-content-disposition=attachment%3B%20filename%3DC77131.pdf%3B%20filename%2A%3DUTF-8%27%27C77131.pdf&x-oss-date=20261030T103742Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7bd94b0c46d24e0f8d2644c70ce04669bb8acf16ccdc3dfcde508d1109c8832c",
      "dataManualOfficialLink": "",
      "componentName": "muRata NCP15XH103F03RC",
      "minImage": "",
-     "minImageAccessId": "8762368930768281600",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762368930743115776-C77131-front.jpg?x-oss-date=20261030T103742Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fa85bdd0498a9e4467192e590f6203a995a591d4fa36ca14680f3f63a0f62789",
      "imageList": [
       {
        "productImage": null,

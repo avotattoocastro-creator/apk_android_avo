@@ -7,7 +7,7 @@
     {
      "componentId": 21629,
      "componentLibraryType": "base",
-     "stockCount": 1147148,
+     "stockCount": 1067764,
      "componentTypeEn": "MOSFETs",
      "erpComponentName": "AO3400A",
      "componentSource": "shop",
@@ -26,7 +26,7 @@
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0629
+       "productPrice": 0.063
       },
       {
        "startNumber": 500,
@@ -53,32 +53,32 @@
       {
        "startNumber": 150,
        "endNumber": 499,
-       "productPrice": 0.0606
+       "productPrice": 0.0607
       },
       {
        "startNumber": 6000,
        "endNumber": -1,
-       "productPrice": 0.0494
+       "productPrice": 0.0495
       },
       {
        "startNumber": 500,
        "endNumber": 2999,
-       "productPrice": 0.0535
+       "productPrice": 0.0536
       },
       {
        "startNumber": 1,
        "endNumber": 49,
-       "productPrice": 0.0857
+       "productPrice": 0.0858
       },
       {
        "startNumber": 50,
        "endNumber": 149,
-       "productPrice": 0.0691
+       "productPrice": 0.0692
       }
      ],
      "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
      "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
-     "canPresaleNumber": 994071,
+     "canPresaleNumber": 916059,
      "componentProductType": 0,
      "mergedComponentCode": null,
      "urlSuffix": "Alpha_OmegaSemicon-AO3400A/C20917",
@@ -103,16 +103,16 @@
      "componentBrandEn": "Alpha & Omega Semicon",
      "componentModelEn": "AO3400A",
      "componentImageUrl": "",
-     "productBigImageAccessId": "8550724159412707328",
-     "productBigImageAccessIdUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8550724159404318720-C20917-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261030T103740Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a2bc8505c867da70a8f620ad13e8f984d0568ffc6153d6cee5902542471a4336",
      "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811081213_Alpha---Omega-Semicon-AO3400A_C20917.pdf",
-     "dataManualFileAccessId": "8550723985357750272",
-     "dataManualFileAccessIdUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8550723985349361664-C20917.pdf?response-content-disposition=attachment%3B%20filename%3DC20917.pdf%3B%20filename%2A%3DUTF-8%27%27C20917.pdf&x-oss-date=20261030T103740Z&x-oss-expires=1799&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nwHODijI0U%2FPe7MBf%2FnDM2dt5NgqDa0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcZAnwQx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpmWfMjjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIyEUFPKKWD5sagAFxfSFeFVrmKaPQ6paX6UqYIIUqSNhefRimsYWcDqoF37i4LVdc7EUzq8V%2BYIBuEruYm6ivR%2F8k1iTJMXdxpaQ9dJznYlFfRM7x%2BJxVGb6nIXM9AQF19Bgs3AchWdGMS7xG9H1sb%2B%2FR14sb8Zgad3P8L%2BtU4LpljpjkJjxzVkj1jSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZEWZVaR5K5P21Nx3czQameq1%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7951f7a78a0622270570633ec8aba9c996b7df5e8c87e6129d2858931e021a08",
      "dataManualOfficialLink": "",
      "componentName": "AOS AO3400A",
      "minImage": "",
-     "minImageAccessId": "8550724160079736832",
-     "minImageAccessIdUrl": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8550724160075542528-C20917-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261030T103740Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vsPonz2LUU4qTSMRGCs3cUQOwUgKzfizz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qY01zQcx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1j7cRKsOHrOPxvbRyttiPolYmEQys9nA2HPOZPOGcveBhcDI2%2BdqYIFzsV8sDL0GOfKGsOhx84sZVK1SAU5ch3ARqAAab67LooWpcctDxwXiFYgE2Hc%2FAhOwf2xGiD6GH7O8xOo1Oq%2BWD4xL5XMjaaEvsZ8a8tAGcMTfCyu4%2FAjqV9Kf5iXjI%2B2b5jEVcRuWjUg%2FRC6nQFJlSdS%2FkVT%2BfPVCMXgbgEaW%2BbHzddEnmLyRF9lEN5MT%2BUF3cBZ8QFfU9JqOHNIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXYu3G5j5Uf9373WwALc8oiti%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8e36d84fcb200df97236b25dfeb0fae3692bc86181e84fe6a02085fde4c29ce2",
      "imageList": [
       {
        "productImage": null,
