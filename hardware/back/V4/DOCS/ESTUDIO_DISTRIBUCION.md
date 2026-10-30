@@ -1,5 +1,8 @@
 # AVO BACK V4 · estudio de distribuciones físicas (A–D) y elección
 
+> REV B (30/10/2026): la distribución elegida no cambia; desaparece la bobina Qi bajo la PCB (suelo macizo) y aparecen los
+> 3 contactos del fondo (SYS y BAT en la cola, GND en el centro de la placa). La longitud sigue fijada por la antena Q39.
+
 Punto de partida: carcasa **Rev E.5** (`AVO_V22H_REV_E4_1_COMPLETA` + `AVO_V22H_REV_E5_TAPA`, modelo FreeCAD del usuario):
 cápsula **166,2 × 59,0 × 17,1 mm**, techo interior a Z 15,1. Cotas tomadas del B-Rep, no de fotos.
 

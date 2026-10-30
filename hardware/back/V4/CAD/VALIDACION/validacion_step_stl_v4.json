@@ -69,32 +69,32 @@
   "dif_volumen_STEP_vs_BREP_%": -0.0001
  },
  "BASE": {
-  "brep_volumen_mm3": 17434.0,
+  "brep_volumen_mm3": 18647.4,
   "step": {
    "relectura_valida": true,
    "solidos": 1,
    "cascaras_cerradas": true,
    "unidades_mm": true,
-   "caras": 449,
+   "caras": 455,
    "tipos_superficie": [
     "Cone",
     "Cylinder",
     "Plane"
    ],
-   "volumen_mm3": 17434.0,
+   "volumen_mm3": 18647.4,
    "nombres": [
     "AVO_BACK_V4_BASE"
    ]
   },
   "stl_imprimir": {
-   "triangulos": 21220,
-   "vertices": 10596,
+   "triangulos": 26122,
+   "vertices": 13041,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": -14,
-   "volumen_mm3": 17432.5,
+   "euler": -20,
+   "volumen_mm3": 18645.9,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -109,14 +109,14 @@
    ]
   },
   "stl_montaje": {
-   "triangulos": 21220,
-   "vertices": 10596,
+   "triangulos": 26122,
+   "vertices": 13041,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": -14,
-   "volumen_mm3": 17432.5,
+   "euler": -20,
+   "volumen_mm3": 18645.9,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -131,8 +131,8 @@
    ]
   },
   "orientacion_impresion": "sin giro",
-  "dif_volumen_STL_vs_BREP_%": -0.009,
-  "dif_volumen_STEP_vs_BREP_%": -0.0002
+  "dif_volumen_STL_vs_BREP_%": -0.008,
+  "dif_volumen_STEP_vs_BREP_%": 0.0
  },
  "BANDEJA_URTK": {
   "brep_volumen_mm3": 3207.4,
@@ -265,32 +265,32 @@
   "dif_volumen_STEP_vs_BREP_%": 0.0
  },
  "SOPORTE": {
-  "brep_volumen_mm3": 35424.7,
+  "brep_volumen_mm3": 35441.0,
   "step": {
    "relectura_valida": true,
    "solidos": 1,
    "cascaras_cerradas": true,
    "unidades_mm": true,
-   "caras": 77,
+   "caras": 79,
    "tipos_superficie": [
     "Cone",
     "Cylinder",
     "Plane"
    ],
-   "volumen_mm3": 35424.7,
+   "volumen_mm3": 35441.0,
    "nombres": [
     "AVO_BACK_V4_SOPORTE"
    ]
   },
   "stl_imprimir": {
-   "triangulos": 8992,
-   "vertices": 4498,
+   "triangulos": 9500,
+   "vertices": 4748,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": 2,
-   "volumen_mm3": 35422.9,
+   "euler": -2,
+   "volumen_mm3": 35439.1,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -305,14 +305,14 @@
    ]
   },
   "stl_montaje": {
-   "triangulos": 8992,
-   "vertices": 4498,
+   "triangulos": 9500,
+   "vertices": 4748,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": 2,
-   "volumen_mm3": 35422.9,
+   "euler": -2,
+   "volumen_mm3": 35439.1,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -328,7 +328,7 @@
   },
   "orientacion_impresion": "sin giro",
   "dif_volumen_STL_vs_BREP_%": -0.005,
-  "dif_volumen_STEP_vs_BREP_%": -0.0001
+  "dif_volumen_STEP_vs_BREP_%": 0.0001
  },
  "CONTRAPLACA": {
   "brep_volumen_mm3": 24957.3,
@@ -467,32 +467,32 @@
   "dif_volumen_STEP_vs_BREP_%": -0.024
  },
  "P1_COLA_BASE": {
-  "brep_volumen_mm3": 7060.8,
+  "brep_volumen_mm3": 8223.6,
   "step": {
    "relectura_valida": true,
    "solidos": 1,
    "cascaras_cerradas": true,
    "unidades_mm": true,
-   "caras": 153,
+   "caras": 160,
    "tipos_superficie": [
     "Cone",
     "Cylinder",
     "Plane"
    ],
-   "volumen_mm3": 7060.8,
+   "volumen_mm3": 8223.6,
    "nombres": [
     "AVO_BACK_V4_P1_COLA_BASE"
    ]
   },
   "stl_imprimir": {
-   "triangulos": 9372,
-   "vertices": 4680,
+   "triangulos": 14274,
+   "vertices": 7125,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": -6,
-   "volumen_mm3": 7059.1,
+   "euler": -12,
+   "volumen_mm3": 8222.0,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -507,14 +507,14 @@
    ]
   },
   "stl_montaje": {
-   "triangulos": 9372,
-   "vertices": 4680,
+   "triangulos": 14274,
+   "vertices": 7125,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": -6,
-   "volumen_mm3": 7059.1,
+   "euler": -12,
+   "volumen_mm3": 8222.0,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -529,8 +529,8 @@
    ]
   },
   "orientacion_impresion": "sin giro",
-  "dif_volumen_STL_vs_BREP_%": -0.024,
-  "dif_volumen_STEP_vs_BREP_%": 0.0002
+  "dif_volumen_STL_vs_BREP_%": -0.02,
+  "dif_volumen_STEP_vs_BREP_%": -0.0001
  },
  "P1_COLA_TAPA": {
   "brep_volumen_mm3": 9058.9,
@@ -602,32 +602,32 @@
   "dif_volumen_STEP_vs_BREP_%": 0.0002
  },
  "P1_COLA_SOPORTE": {
-  "brep_volumen_mm3": 13564.8,
+  "brep_volumen_mm3": 13581.0,
   "step": {
    "relectura_valida": true,
    "solidos": 1,
    "cascaras_cerradas": true,
    "unidades_mm": true,
-   "caras": 49,
+   "caras": 51,
    "tipos_superficie": [
     "Cone",
     "Cylinder",
     "Plane"
    ],
-   "volumen_mm3": 13564.8,
+   "volumen_mm3": 13581.0,
    "nombres": [
     "AVO_BACK_V4_P1_COLA_SOPORTE"
    ]
   },
   "stl_imprimir": {
-   "triangulos": 4240,
-   "vertices": 2122,
+   "triangulos": 4748,
+   "vertices": 2372,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": 2,
-   "volumen_mm3": 13563.0,
+   "euler": -2,
+   "volumen_mm3": 13579.3,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -642,14 +642,14 @@
    ]
   },
   "stl_montaje": {
-   "triangulos": 4240,
-   "vertices": 2122,
+   "triangulos": 4748,
+   "vertices": 2372,
    "aristas_no_manifold": 0,
    "aristas_mal_orientadas": 0,
    "triangulos_degenerados": 0,
    "componentes": 1,
-   "euler": 2,
-   "volumen_mm3": 13563.0,
+   "euler": -2,
+   "volumen_mm3": 13579.3,
    "normales_coherentes": 1.0,
    "freecad_isSolid": true,
    "freecad_autointersecciones": false,
@@ -664,8 +664,8 @@
    ]
   },
   "orientacion_impresion": "sin giro",
-  "dif_volumen_STL_vs_BREP_%": -0.013,
-  "dif_volumen_STEP_vs_BREP_%": 0.0003
+  "dif_volumen_STL_vs_BREP_%": -0.012,
+  "dif_volumen_STEP_vs_BREP_%": 0.0
  },
  "P2_CUELLO_BASE": {
   "brep_volumen_mm3": 4756.0,
@@ -939,7 +939,7 @@
    "solidos": 8,
    "cascaras_cerradas": true,
    "unidades_mm": true,
-   "caras": 865,
+   "caras": 873,
    "tipos_superficie": [
     "BSplineSurface",
     "Cone",
@@ -947,7 +947,7 @@
     "Plane",
     "SurfaceOfExtrusion"
    ],
-   "volumen_mm3": 103346.8,
+   "volumen_mm3": 104576.4,
    "nombres": [
     "exp",
     "AVO_BACK_V4_TAPA",
@@ -960,14 +960,14 @@
    ]
   },
   "stl": {
-   "triangulos": 94396,
-   "vertices": 46999,
+   "triangulos": 99806,
+   "vertices": 49694,
    "aristas_no_manifold": 130,
    "aristas_mal_orientadas": 260,
    "triangulos_degenerados": 0,
    "componentes": 6,
-   "euler": -69,
-   "volumen_mm3": 103388.7,
+   "euler": -79,
+   "volumen_mm3": 104618.3,
    "normales_coherentes": 1.0,
    "freecad_isSolid": false,
    "freecad_autointersecciones": true,

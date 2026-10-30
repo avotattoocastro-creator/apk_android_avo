@@ -21,8 +21,8 @@
    "comprobacion_BOP": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 449,
-   "volumen_mm3": 17434.0,
+   "caras": 455,
+   "volumen_mm3": 18647.4,
    "bbox": [
     -0.0,
     118.167,
@@ -69,8 +69,8 @@
    "comprobacion_BOP": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 77,
-   "volumen_mm3": 35424.7,
+   "caras": 79,
+   "volumen_mm3": 35441.0,
    "bbox": [
     -2.72,
     121.392,
@@ -117,8 +117,8 @@
    "comprobacion_BOP": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 153,
-   "volumen_mm3": 7060.8,
+   "caras": 160,
+   "volumen_mm3": 8223.6,
    "bbox": [
     69.467,
     118.174,
@@ -149,8 +149,8 @@
    "comprobacion_BOP": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 49,
-   "volumen_mm3": 13564.8,
+   "caras": 51,
+   "volumen_mm3": 13581.0,
    "bbox": [
     69.467,
     121.394,
@@ -405,13 +405,6 @@
   "PCB_PAD_R": 2.0,
   "PCB_PAD_GAP": 0.1,
   "COMP_MAX_Z": 14.4,
-  "COIL": [
-   30.0,
-   23.0,
-   1.6
-  ],
-  "COIL_CLR": 0.2,
-  "COIL_SKIN": 0.7,
   "FPC": [
    36.0,
    10.0,
@@ -485,32 +478,48 @@
     23.0
    ]
   ],
-  "REED_C": [
-   102.2,
-   -9.0
-  ],
-  "HALL_C": [
-   102.2,
-   -9.0
-  ],
-  "REED_MAGS": [
+  "CONTACTS": [
    [
-    97.2,
-    -9.0
+    101.0,
+    -8.6,
+    "SYS_IN",
+    "P1"
    ],
    [
-    102.2,
-    -9.0
+    106.8,
+    -8.6,
+    "BAT_F",
+    "P2"
    ],
    [
-    107.2,
-    -9.0
+    80.0,
+    0.0,
+    "GND",
+    "P3"
    ]
   ],
-  "COIL_POS": [
-   83.46700000000001,
-   0.0
+  "CONTACT_CSK_D": 4.1,
+  "CONTACT_HOLE": 2.3,
+  "CONTACT_ORING": [
+   2.0,
+   1.0
   ],
+  "CONTACT_GROOVE": [
+   2.2,
+   4.4,
+   0.75
+  ],
+  "POGO_D": 2.05,
+  "POGO_TIP": 0.8,
+  "POGO_CH": [
+   1.6,
+   1.4
+  ],
+  "POGO_ON": [
+   "SYS_IN",
+   "BAT_F"
+  ],
+  "REED_MAGS": [],
   "SUP_SCREWS": [
    [
     18.0,
@@ -586,13 +595,25 @@
     21.5
    ],
    "L_CARA_MACHO_X": 75.967,
-   "BOBINA_C": [
-    83.46700000000001,
-    0.0
-   ],
-   "REED_C": [
-    102.2,
-    -9.0
+   "CONTACTOS": [
+    [
+     101.0,
+     -8.6,
+     "SYS_IN",
+     "P1"
+    ],
+    [
+     106.8,
+     -8.6,
+     "BAT_F",
+     "P2"
+    ],
+    [
+     80.0,
+     0.0,
+     "GND",
+     "P3"
+    ]
    ],
    "TECHO_INTERIOR": 15.100000000000001,
    "TORNILLOS": [
@@ -633,5 +654,5 @@
  },
  "pcb_area_mm2": 1784.9,
  "fallos_redondeo": [],
- "tiempo_s": 27.5
+ "tiempo_s": 33.6
 }

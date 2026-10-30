@@ -5,7 +5,7 @@ exec(open(os.path.join(H, "render_v4.py"), encoding="utf-8").read().rsplit('if _
 OFF = {"AVO_BACK_V4_TAPA": 62, "_antena_GNSS_Q39": 72, "_antena_FPC_2G4": 55, "_urtk_pcb": 34, "_urtk_modulo_ZED": 34, "_urtk_J3_GH6_estimado": 34,
        "_urtk_J1_USBC_estimado": 34, "_urtk_J2_SMA": 34, "_L_tuerca_y_cuerpo_hex": 34, "_L_cuerpo": 34, "_L_rosca_hembra": 34,
        "AVO_BACK_V4_ANILLOS_SEPARADOR": 22, "AVO_BACK_V4_BANDEJA_URTK": 20, "_pcb_placa": 12, "_pcb_componentes": 12,
-       "_bateria_654060": 6, "_qi_bobina": 3, "AVO_BACK_V4_BASE": 0, "_imanes_capsula": 0, "AVO_BACK_V4_SOPORTE": -22,
+       "_bateria_654060": 6, "_contactos_M2": -8, "_juntas_contactos": 4, "_pines_pogo_soporte": -22, "AVO_BACK_V4_BASE": 0, "_imanes_capsula": 0, "AVO_BACK_V4_SOPORTE": -22,
        "_imanes_soporte": -22, "AVO_BACK_V4_CONTRAPLACA": -40}
 _load = load
 def load(k):

@@ -1,5 +1,10 @@
 # AVO BACK V4 · arquitectura electrónica y consumo
 
+> **REV B (30/10/2026):** sin carga Qi ni Hall. La placa se alimenta a través del **puente SYS–BAT del soporte del
+> chaleco** (3 contactos en el fondo: SYS, BAT, GND) y se carga en una base externa entre BAT y GND. Fuera del soporte no
+> tiene alimentación: el consumo «dormida» pasa a **0 µA** (solo el PCM de la celda). El presupuesto en marcha
+> (≈ 230 mA, ≈ 7,8 h) no cambia: el Qi y el Hall no consumían durante el uso. Las filas Qi/Hall de abajo son de la REV A.
+
 ## 1. ¿Uno o dos ESP32? (el brief pide documentarlo antes de cerrar la arquitectura)
 
 | Criterio | 1 × ESP32-S3 (elegida) | ESP32-S3 + ESP32-C3/C6 |

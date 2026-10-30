@@ -12,8 +12,8 @@ def rd(p):
 
 
 PZ = {k: rd(os.path.join(B, "AVO_BACK_V4_%s.brep" % n)) for k, n in
-      dict(tapa="TAPA", base="BASE", bandeja="BANDEJA_URTK", anillos="ANILLOS_SEPARADOR", junta="JUNTA_TPU").items()}
-for e in ("bateria_654060", "qi_bobina", "urtk_pcb", "urtk_modulo_ZED", "urtk_J1_USBC_estimado", "urtk_J3_GH6_estimado",
+      dict(tapa="TAPA", base="BASE", bandeja="BANDEJA_URTK", anillos="ANILLOS_SEPARADOR", junta="JUNTA_TPU", soporte="SOPORTE").items()}
+for e in ("bateria_654060", "contactos_M2", "juntas_contactos", "pines_pogo_soporte", "urtk_pcb", "urtk_modulo_ZED", "urtk_J1_USBC_estimado", "urtk_J3_GH6_estimado",
           "urtk_J2_SMA", "L_cuerpo", "L_tuerca_y_cuerpo_hex", "antena_FPC_2G4"):
     p = os.path.join(R, "_%s.brep" % e)
     if os.path.exists(p):
@@ -22,7 +22,7 @@ S = rd(os.path.join(R, "_pcb_step.brep"))
 sol = S.Solids
 res = dict(solidos_step=len(sol), interferencias={}, holgura_min_mm={},
            nota="Sólidos del STEP de KiCad (placa + modelos 3D disponibles) desplazados a Z = PCB_Z (2,5 mm). Sin modelo 3D "
-                "en el STEP: USB-C, JST SH, RHL-20 y VQFN-16 (comprobados con las envolventes del generador).")
+                "en el STEP: USB-C, JST SH, VQFN-16 y las tuercas de los contactos (comprobados con las envolventes del generador).")
 for k, p in PZ.items():
     pb = p.BoundBox
     dmin = None

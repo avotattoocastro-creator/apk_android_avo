@@ -9,9 +9,10 @@ Distribución elegida (estudio A–D en DOCS/ESTUDIO_DISTRIBUCION.md): MIXTA C +
   · URTK1.2 (ZED-F9P) ENCIMA de la batería, donde estaba la Heltec, a la MISMA altura que en la Rev E (PCB del ZED a Z 9,6):
     la L, la torre y la antena no cambian de altura. Lado −X sobre la bandeja (2 pivotes en sus agujeros + 2 pisadores de la
     tapa); lado +X atornillado a 2 separadores M3 que suben del suelo justo detrás de la batería.
-  · PCB AVO BACK V4 (ESP32-S3) en la COLA, en un bolsillo de la base (Z 4,5–5,5), con recortes para separadores y tornillos.
+  · PCB AVO BACK V4 (ESP32-S3) en la COLA, en un bolsillo de la base (Z 2,5–3,5), con recortes para separadores y tornillos.
     La cola es obligatoria de todos modos: la antena Q39 Ø44,3 necesita ~29 mm de tapa por detrás del eje de la L.
-  · Bobina Qi bajo la PCB; reed bajo la PCB (patas soldadas a la PCB); antena FPC de 2,4 GHz en el techo del cuello.
+  · REV B (30/10/2026): sin Qi ni reed/Hall. 3 contactos en el fondo (tornillos M2: SYS y BAT en la cola, GND aparte);
+    el soporte del chaleco puentea SYS–BAT con 2 pines con muelle. Antena FPC de 2,4 GHz en el techo del cuello.
   · Topes de la L en la TAPA (paredes que bajan del techo alrededor del cuerpo de la L): la base queda libre para la PCB.
   · Mismo grosor (cápsula 17,1; soporte 4,5; contraplaca 2,6) y misma anchura (59,0). Solo se acorta X.
 Ejes: X 0 = cara del cuello, Y lateral (0 = eje de la L), Z 0 = cara inferior de la base. mm.
@@ -65,8 +66,6 @@ RE = dict(
     PCB_PIN=(1.0, 0.8),               # pivote Ø2,0 × 0,8 en agujero NPTH Ø2,2 de la PCB
     PCB_PAD_R=2.0, PCB_PAD_GAP=0.10,  # pisadores de la tapa sobre la PCB (zonas libres reservadas en la PCB, Ø5)
     COMP_MAX_Z=14.4,                  # cota máxima de los componentes de la PCB (techo 15,1 − 0,7)
-    # ----- Qi bajo la PCB (bobina 30 × 23 × 1,6, la de la Rev E, girada: 30 a lo largo de X)
-    COIL=(30.0, 23.0, 1.6), COIL_CLR=0.2, COIL_SKIN=0.7,
     # ----- antena FPC de 2,4 GHz (ESP32-S3-MINI-1U) en el techo del cuello, lejos de la antena GNSS
     FPC=(36.0, 10.0, 0.2),
     # ----- tornillos de cierre: 8 × M3 en 4 parejas. S3/S4 bajo el canto de la URTK1.2: columna CORTA (M3 × 6 + inserto M3 × 3)
@@ -107,12 +106,17 @@ SCREWS = [(round(x * 2) / 2, y) for x, y in SCREWS]       # V4: X a 0,5 mm (puen
 RE["SCREWS"] = [tuple(round(c, 3) for c in s) for s in SCREWS]
 # --- imanes de sujeción (6 × Ø5 × 1) y reed (en la cola, bajo la PCB, a lo largo de Y) con sus 3 imanes en el soporte
 RE["MAGS"] = ((30.0, -23.8), (30.0, 23.8), (52.0, -23.8), (52.0, 23.8), (XA + 8.0, -23.0), (XA + 8.0, 23.0))
-# Sensor de soporte: Hall DRV5032 SOLDADO EN LA PCB (sustituye al reed de vidrio: sin hilos ni alojamiento). Sus 3 imanes Ø5 × 1
-# van en el soporte justo debajo, en línea a lo largo de X (como los del reed de la Rev E.3.2). Posición: la decide el generador de la PCB.
-HALL_C = tuple(PCB_MEC["hall"]) if PCB_MEC and "hall" in PCB_MEC else (101.0, -9.5)
-REED_C = HALL_C; RE["REED_C"] = REED_C; RE["HALL_C"] = HALL_C
-RE["REED_MAGS"] = ((HALL_C[0] - 5.0, HALL_C[1]), (HALL_C[0], HALL_C[1]), (HALL_C[0] + 5.0, HALL_C[1]))
-COIL_C = (ZED_X1 + 13.0, 0.0); RE["COIL_POS"] = COIL_C
+# REV B (30/10/2026): sin Qi ni Hall. Contactos del fondo: tornillo M2 avellanado (inox A2) desde fuera, junta tórica 2 × 1
+# en una ranura de la cara superior del suelo (la aprieta la PCB) y tuerca M2 sobre la PCB. Posiciones: las da el generador
+# de la PCB (SYS y BAT en la cola, donde estaba el reed; GND aparte). En el soporte del chaleco, 2 pines con muelle bajo
+# SYS y BAT unidos por un hilo (puente = encendido).
+CONTACTS = [(tuple(v["pos"]), v["red"], k) for k, v in sorted(PCB_MEC["contactos"].items())] if PCB_MEC and "contactos" in PCB_MEC else \
+    [((101.0, -8.6), "SYS_IN", "P1"), ((106.8, -8.6), "BAT_F", "P2"), ((80.0, 0.0), "GND", "P3")]
+RE["CONTACTS"] = [[round(c[0][0], 3), round(c[0][1], 3), c[1], c[2]] for c in CONTACTS]
+RE.update(CONTACT_CSK_D=4.1, CONTACT_HOLE=2.3, CONTACT_ORING=(2.0, 1.0), CONTACT_GROOVE=(2.2, 4.4, 0.75),
+          POGO_D=2.05, POGO_TIP=0.8, POGO_CH=(1.6, 1.4), POGO_ON=("SYS_IN", "BAT_F"))
+RE["REED_MAGS"] = ()                       # V4 REV B: sin imanes de sensor en el soporte
+REED_C = HALL_C = None
 # --- tornillos del soporte a la contraplaca
 RE["SUP_SCREWS"] = ((18.0, -14.0), (18.0, 14.0), (56.0, -14.0), (56.0, 14.0), (XA + 4.0, -11.0), (XA + 4.0, 11.0))
 def col_r(i): return RE["SCREW_R"].get(i, RE["COL_R"])
@@ -120,8 +124,8 @@ def col_r(i): return RE["SCREW_R"].get(i, RE["COL_R"])
 RE.update(DERIVADOS=dict(LARGO=round(L, 3), XA=round(XA, 3), BAT_X=[round(BX0, 3), round(BX1, 3)], BAT_Y=round(BY, 3), BAT_Z=[BZ0, BZ1],
                          TRAY_Z=[round(TRAY_Z0, 3), round(TRAY_Z1, 3)], ZED_X=[round(ZED_X0, 3), round(ZED_X1, 3)], ZED_Y=[ZED_Y0, round(ZED_Y1, 3)],
                          ZED_AGUJEROS=[[round(a, 3), round(b, 3)] for a, b in ZED_PTS], SALIDA_ANTENA_X=round(OX, 3),
-                         L_Z=[round(L_BOT, 3), round(L_SH, 3), round(L_TIP, 3)], L_CARA_MACHO_X=round(L_NUT, 3), BOBINA_C=list(COIL_C),
-                         REED_C=[round(c, 3) for c in REED_C], TECHO_INTERIOR=CEIL, TORNILLOS=RE["SCREWS"]))
+                         L_Z=[round(L_BOT, 3), round(L_SH, 3), round(L_TIP, 3)], L_CARA_MACHO_X=round(L_NUT, 3), CONTACTOS=RE["CONTACTS"],
+                         TECHO_INTERIOR=CEIL, TORNILLOS=RE["SCREWS"]))
 
 # ============================================================ primitivas (Rev D/E)
 # ============================================================ primitivas (Rev D)
@@ -378,8 +382,13 @@ def build_base(OUTER, CAV, CLIP_CAV):
     # ---- alojamientos en el suelo
     fl = C("CORTE_BATERIA_ALOJAMIENTO", box((BX0, -BY, BZ0), (BX1, BY, ZF + 1)))
     fl = C("CORTE_PASO_CABLE_BATERIA", box((BX1 - 1, wy0, BZ0 + 1.0), (BX1 + RE["POCKET_WALL_X"] + 1, wy1, ZF + 1)))
-    cl, cw, ct = RE["COIL"]; cc = RE["COIL_CLR"]
-    fl = C("CORTE_BOBINA_QI_BAJO_PCB", box((COIL_C[0] - cl / 2 - cc, COIL_C[1] - cw / 2 - cc, RE["COIL_SKIN"]), (COIL_C[0] + cl / 2 + cc, COIL_C[1] + cw / 2 + cc, RE["PCB_Z"] + 0.1)))
+    # ---- contactos del fondo (REV B): avellanado 90° Ø4,1 desde fuera + paso Ø2,3 + ranura de la junta tórica 2 × 1 bajo la PCB
+    gi, go, gd = RE["CONTACT_GROOVE"]; ck = RE["CONTACT_CSK_D"] / 2; hr_ = RE["CONTACT_HOLE"] / 2
+    for (cx_, cy_), net_, ref_ in CONTACTS:
+        cone = Part.makeCone(ck + 0.5, hr_, ck + 0.5 - hr_, V(cx_, cy_, -0.5))          # 90°: radio = ck en Z 0
+        t_ = fuse_all([cone, vcyl(cx_, cy_, hr_, -1, RE["PCB_Z"] + 0.1),
+                       vcyl(cx_, cy_, go / 2, RE["PCB_Z"] - gd, RE["PCB_Z"] + 0.1)]).removeSplitter()
+        fl = C("CORTE_CONTACTO_%s_%s_M2_AVELLANADO_Y_JUNTA" % (ref_, net_), t_)
     md, mt_ = RE["MAG"]
     for i_, (mx, my) in enumerate(RE["MAGS"]):
         fl = C("CORTE_IMAN_%d_D%.2f" % (i_ + 1, md + RE["MAG_CLR"]), vcyl(mx, my, (md + RE["MAG_CLR"]) / 2, RE["MAG_SKIN"], ZF + 1))
@@ -481,6 +490,15 @@ def build_soporte():
     md, mt_ = RE["MAG"]
     for (mx, my) in list(RE["MAGS"]) + [tuple(c) for c in RE["REED_MAGS"]]:
         p = p.cut(vcyl(mx, my, (md + RE["MAG_CLR"]) / 2, -mt_ - 0.05, 1))
+    # REV B: pines con muelle bajo SYS y BAT (Ø2,05 pasante, pegados; la punta sobresale POGO_TIP) y canal del puente por debajo
+    on = [c for c in CONTACTS if c[1] in RE["POGO_ON"]]
+    cw_, ch_ = RE["POGO_CH"]
+    for (cx_, cy_), net_, ref_ in on:
+        p = p.cut(vcyl(cx_, cy_, RE["POGO_D"] / 2, -MT - 1, 1))
+        p = p.cut(vcyl(cx_, cy_, 1.6, -MT - 1, -MT + ch_))                       # alojamiento de la soldadura del hilo
+    if len(on) == 2:
+        (ax_, ay_), (bx_, by_) = on[0][0], on[1][0]
+        p = p.cut(box((min(ax_, bx_), ay_ - cw_ / 2, -MT - 1), (max(ax_, bx_), ay_ + cw_ / 2, -MT + ch_)))
     hd, hdep = RE["INS_SUP"]
     for (sx, sy) in RE["SUP_SCREWS"]:
         p = p.cut(vcyl(sx, sy, hd / 2, -MT - 1, -MT + hdep))
@@ -541,10 +559,15 @@ def build_contraplaca():
 def referencias(pcb_comp=None):
     E = {}
     E["bateria_654060"] = box((BX0 + BC, -BW / 2, BZ0), (BX0 + BC + BL, BW / 2, BZ1))
-    cl, cw, ct = RE["COIL"]
-    E["qi_bobina"] = box((COIL_C[0] - cl / 2, COIL_C[1] - cw / 2, RE["COIL_SKIN"] + 0.02), (COIL_C[0] + cl / 2, COIL_C[1] + cw / 2, RE["COIL_SKIN"] + ct))
-    hx_, hy_ = HALL_C
-    E["sensor_hall_DRV5032"] = box((hx_ - 1.5, hy_ - 1.45, RE["PCB_Z"] + RE["PCB_T"]), (hx_ + 1.5, hy_ + 1.45, RE["PCB_Z"] + RE["PCB_T"] + 1.12))
+    # contactos (REV B): tornillo M2 × 5 avellanado (cabeza Ø3,8 enrasada) + junta tórica 2 × 1 aplastada a 0,75
+    ck_ = 1.9; trs = []
+    for (cx_, cy_), net_, ref_ in CONTACTS:
+        trs += [Part.makeCone(ck_, 1.0, ck_ - 1.0, V(cx_, cy_, 0.02)), vcyl(cx_, cy_, 1.0, 0.9, RE["PCB_Z"] - 0.02)]
+    E["contactos_M2"] = Part.makeCompound(trs)
+    E["juntas_contactos"] = Part.makeCompound([vcyl(cx_, cy_, 2.0, RE["PCB_Z"] - 0.74, RE["PCB_Z"] - 0.01).cut(vcyl(cx_, cy_, 1.12, 0, 9))
+                                             for (cx_, cy_), _, _ in CONTACTS])
+    E["pines_pogo_soporte"] = Part.makeCompound([vcyl(cx_, cy_, 0.95, -RE["MT"] + RE["POGO_CH"][1], RE["POGO_TIP"] - 0.82)
+                                               for (cx_, cy_), net_, _ in CONTACTS if net_ in RE["POGO_ON"]])
     zpcb = box((ZED_X0, ZED_Y0, ZB), (ZED_X1, ZED_Y1, ZB + ZED_T))
     for hx, hy in ZED_PTS: zpcb = zpcb.cut(Part.makeCylinder(1.6, 3, V(hx, hy, ZB - 0.5)))
     E["urtk_pcb"] = zpcb
@@ -567,7 +590,6 @@ def referencias(pcb_comp=None):
     E["imanes_soporte"] = Part.makeCompound([vcyl(mx, my, md / 2, -mth, -0.02) for mx, my in list(RE["MAGS"]) + [tuple(c) for c in RE["REED_MAGS"]]])
     E["pcb_placa"] = pcb_face().extrude(V(0, 0, RE["PCB_T"])).cut(Part.makeCompound([vcyl(x, y, 1.1, 0, 10) for x, y in pcb_pins()]))
     if PCB_MEC and PCB_MEC.get("envolventes"):
-        E.pop("sensor_hall_DRV5032", None)                  # ya está en las envolventes (U8)
         zt = RE["PCB_Z"] + RE["PCB_T"]
         E["pcb_componentes"] = Part.makeCompound([box((a, b, zt + 0.01), (c, d, zt + h)) for _, a, b, c, d, h in PCB_MEC["envolventes"]])
     if pcb_comp is not None: E["pcb_componentes"] = pcb_comp
@@ -650,8 +672,7 @@ if __name__ == "__main__" or "AVO_RUN" in os.environ:
                        topes_L=dict(x0=OX - LB, x1=OX + LB + RE["LSTOP_CLR"] + RE["LSTOP_T"] + 0.3, y=[-(LB + RE["LSTOP_CLR"] + RE["LSTOP_T"] + 0.3), LB + RE["LSTOP_CLR"] + RE["LSTOP_T"] + 0.3],
                                     zmax=L_BOT + RE["LSTOP_ZLOW"] - 0.3),
                        resto=dict(zmax=RE["COMP_MAX_Z"])),
-                   hall=list(HALL_C),
-                   bobina=dict(c=list(COIL_C), dims=list(RE["COIL"])),
+                   contactos=RE["CONTACTS"],
                    bateria_cable_y=list(RE["BAT_WIRE_Y"]), bateria_x1=BX1),
               open(os.path.join(OUT, "pcb_contorno_v4.json"), "w"), indent=1, ensure_ascii=False)
     for part, items in KIT.items():

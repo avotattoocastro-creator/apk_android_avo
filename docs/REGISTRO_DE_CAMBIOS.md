@@ -24,6 +24,50 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Espalda · AVO BACK V4 REV B (contactos pogo, sin Qi ni Hall) + BACK 4.0.0-dev2 + prototipo Rev E.6 con BACK 3.12.0
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `89ad681`…`c1e0e26` y siguientes de esta entrada ·
+**CI:** PCB run 41048486880 (`c1e0e26`): **puerta superada**; firmware V4 4.0.0-dev2 run 41044961345 (`8e38b61`, éxito,
+resultado guardado por el CI en `e151fcc`); BACK 3.12.0 run 41044381974 (`2750d3c`): éxito; existencias run 41042078297
+**Qué cambia:** petición del usuario: quitar todo el Qi y alimentar la espalda por 3 contactos (sistema pogo).
+- **Contactos:** 3 en el fondo de la cápsula, tornillo M2 avellanado inox + junta tórica 2 × 1 + tuerca M2.
+  - **SYS y BAT** en la cola, donde estaba el reed. **GND** aparte, a ~30 mm de BAT.
+  - **Soporte del chaleco:** 2 pines con muelle unidos por un hilo puentean SYS–BAT → encendido. Fuera del soporte, 0 µA.
+  - **Base de carga:** cargador externo entre BAT y GND, con la placa apagada.
+- **PCB REV B:**
+  - Sin BQ51013B, bobina, Hall ni conmutación AD (−24 piezas; 61 montadas).
+  - Celda → F1 → contacto BAT; contacto SYS → Q3 (polaridad) → BAT del BQ24072, que queda solo para el USB-C del taller.
+  - TVS PESD5V0S1BA (C2827694) en SYS y BAT.
+  - KiCad 9 en el CI: DRC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0, ERC 0/0.
+  - La REV A con Qi queda congelada en `hardware/back/V4/PCB_REV_A_QI/`.
+- **Carcasa V4:**
+  - Sin alojamiento de la bobina. Avellanados, pasos y ranuras de junta de los 3 contactos en la base; 2 agujeros de pin
+    y canal del puente en el soporte. Sin imanes del Hall.
+  - 0 interferencias con las envolventes y con el STEP de `c1e0e26`; 0 voladizos fuera de límite.
+  - Medidas sin cambios: 118,2 × 59,0 × 17,1 mm.
+- **BACK 4.0.0-dev2:**
+  - Sin Hall ni sueño por soporte.
+  - Emparejamiento con 3 encendidos de menos de 4 s seguidos (contador en NVS).
+  - microSD vaciada cada 1 s.
+  - Línea `ALIMENTACION` en el monitor.
+- **Prototipo actual (Rev E + Heltec)** — para probar el sistema antes de fabricar:
+  - Base, soporte del chaleco y base de carga **Rev E.6** (`hardware/back/V4/PROTOTIPO_POGO_REV_E6/`): BAT y SYS en
+    (8,8; ∓4), GND en (8,8; 14). Válidas, sin voladizos fuera de límite y sin interferencias con la Heltec ni el ZED.
+  - **BACK 3.12.0** (Heltec): sin reed, emparejamiento con 3 encendidos rápidos.
+  - Guía de adaptación, cableado y pruebas: `hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`.
+**Por qué:** el usuario prefiere contactos pogo a la carga Qi: menos piezas, carga más rápida, encendido y apagado sin
+sensor.
+**Archivos:**
+- `hardware/back/V4/**` (PCB, PCB_REV_A_QI, CAD, PROTOTIPO_POGO_REV_E6, DOCS).
+- `firmware/back/V4_0_0/**`, `firmware/back/V3_8_0/**`.
+- `.github/workflows/build-back-v4-fw.yml`, `build-back-v380.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, pecho, cincha, Android.
+**Validación:** CAD y PCB comprobados por software; los dos firmwares compilan en el CI. **NO VERIFICADO** físicamente
+(nada fabricado, impreso ni montado).
+**Pendiente:**
+- Probar primero el prototipo E.6: rebote del contacto al galope, estanqueidad de los contactos, carga en la base.
+- Medir con polímetro el pinout de la URTK1.2.
+- Diseñar la base de carga definitiva de la V4.
+
 ## 2026-10-30 — Espalda · AVO BACK V4 (PCB propia ESP32-S3 + URTK1.2, carcasa 48 mm más corta) + firmware 4.0.0-dev1
 **Autor:** Claude · Rama `feature/avo-back-v4` (desde `feature/avo-girth-pcb`) · **Commits:** `9573ef3`…`3f81b45` ·
 **CI:** PCB `build-back-v4-pcb.yml` run 40971520610 (`3f81b45`): **puerta superada**; firmware `build-back-v4-fw.yml`
