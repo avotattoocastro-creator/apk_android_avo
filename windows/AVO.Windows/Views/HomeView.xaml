@@ -15,11 +15,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="340"/>
                 </Grid.ColumnDefinitions>
-                <Border CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
-                    <Border.Background>
-                        <ImageBrush ImageSource="../Assets/avo_brand_hero.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Center"/>
-                    </Border.Background>
+                <Border CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" Background="#030406">
                     <Grid>
+                        <Border>
+                            <Border.Background>
+                                <ImageBrush ImageSource="../Assets/avo_brand_hero.jpg" Viewbox="0,0,1,0.62" ViewboxUnits="RelativeToBoundingBox" Stretch="Uniform" AlignmentX="Right" AlignmentY="Center"/>
+                            </Border.Background>
+                        </Border>
                         <Border>
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -100,8 +102,8 @@
                         </DataGrid.InputBindings>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Fecha" Binding="{Binding DateTimeText}" SortMemberPath="Start" Width="130"/>
-                            <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*"/>
-                            <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*"/>
+                            <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*" MinWidth="110"/>
+                            <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*" MinWidth="110"/>
                             <DataGridTextColumn Header="Lugar / modalidad" Binding="{Binding Discipline}" Width="100"/>
                             <DataGridTextColumn Header="Distancia" Binding="{Binding DistanceText}" SortMemberPath="DistanceKmValue" Width="90"/>
                             <DataGridTextColumn Header="Duración" Binding="{Binding DurationText}" Width="80"/>

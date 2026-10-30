@@ -104,6 +104,15 @@ public partial class App : Application
             await vm.LoadEnvironmentAsync(true);
             vm.ReportCompare = true;
         }
+        // Render the real visual tree OFF-SCREEN at the exact logical size: a top-level window is clamped by Windows to the
+        // runner's screen (1280x768 on hosted runners), which would make 1920x1080 / 2560x1440 captures meaningless.
+        var root = (FrameworkElement)window.Content;
+        window.Content = null;
+        root.DataContext = vm;
+        root.Language = System.Windows.Markup.XmlLanguage.GetLanguage("es-ES");
+        System.Windows.Documents.TextElement.SetForeground(root, (Brush)Current.Resources["AvoText"]);
+        System.Windows.Documents.TextElement.SetFontFamily(root, (FontFamily)Current.Resources["AvoFont"]);
+        System.Windows.Documents.TextElement.SetFontSize(root, 13.0);
         var report = new List<object>();
         foreach (var spec in sizes.Split(',', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -111,17 +120,21 @@ public partial class App : Application
             var wh = parts[0].Split('x');
             double w = double.Parse(wh[0], System.Globalization.CultureInfo.InvariantCulture), h = double.Parse(wh[1], System.Globalization.CultureInfo.InvariantCulture);
             double scale = parts.Length > 1 ? double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture) / 100 : 1;
-            window.Width = w / scale; window.Height = h / scale;
+            double lw = w / scale, lh = h / scale;
+            Layout(root, lw, lh);
             await Idle();
             int n = 0;
             foreach (var page in Pages)
             {
                 vm.Page = page;
+                Layout(root, lw, lh);
                 await Idle();
-                if (page is "Map" or "Analysis" or "Segments" or "Compare") await WaitTilesAsync();
-                if (page == "Compare") await Idle();
+                Layout(root, lw, lh);
+                if (page is "Map" or "Analysis" or "Segments" or "Compare" or "Reports") { await WaitTilesAsync(); Layout(root, lw, lh); }
+                await Idle();
+                Layout(root, lw, lh);
                 string name = $"{(int)w}x{(int)h}{(scale != 1 ? $"@{scale * 100:0}" : "")}_{++n:00}_{page}.png";
-                var sizeInfo = Render(window, Path.Combine(dir, name), scale);
+                var sizeInfo = Render(root, Path.Combine(dir, name), scale);
                 report.Add(new { archivo = name, pagina = page, ancho = sizeInfo.w, alto = sizeInfo.h, escala = scale });
             }
         }
@@ -160,9 +173,16 @@ public partial class App : Application
         await Current.Dispatcher.InvokeAsync(() => { }, DispatcherPriority.ApplicationIdle);
     }
 
-    private static (int w, int h) Render(Window window, string file, double scale)
+    private static void Layout(FrameworkElement root, double w, double h)
     {
-        var root = (FrameworkElement)window.Content;
+        root.Width = w; root.Height = h;
+        root.Measure(new Size(w, h));
+        root.Arrange(new Rect(0, 0, w, h));
+        root.UpdateLayout();
+    }
+
+    private static (int w, int h) Render(FrameworkElement root, string file, double scale)
+    {
         root.UpdateLayout();
         int pw = (int)Math.Round(root.ActualWidth * scale), ph = (int)Math.Round(root.ActualHeight * scale);
         var rtb = new RenderTargetBitmap(pw, ph, 96 * scale, 96 * scale, PixelFormats.Pbgra32);

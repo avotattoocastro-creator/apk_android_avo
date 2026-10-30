@@ -54,6 +54,7 @@ public sealed partial class MainViewModel
     }
 
     private string? _envLoadedFor;
+    private int _envRequest;
 
     public async Task LoadEnvironmentAsync(bool force)
     {
@@ -61,6 +62,7 @@ public sealed partial class MainViewModel
         if (s?.Start is not DateTimeOffset start) { EnvironmentStatus = "La sesión no tiene fecha: no se pueden asociar mareas ni meteorología."; ClearEnvironment(); return; }
         if (!force && _envLoadedFor == s.Id) return;
         _envLoadedFor = s.Id;
+        int request = ++_envRequest;
         ClearEnvironment();
         if (!OnlineEnvironment) { EnvironmentStatus = "Consulta en línea desactivada: sin datos de entorno."; return; }
         EnvironmentStatus = "Consultando predicción de mareas (IHM) y modelo meteorológico (Open-Meteo)…";
@@ -87,7 +89,7 @@ public sealed partial class MainViewModel
         try { Weather = await _environment.WeatherAsync(lat, lon, start, CancellationToken.None); }
         catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException or System.Text.Json.JsonException or InvalidDataException or IOException)
         { errors.Add("meteorología: " + ex.Message); Log.Warn("entorno", "Open-Meteo no disponible", ex); }
-        if (Selected != s) return;
+        if (Selected != s || request != _envRequest) return;   // a newer request owns the panels
         FillEnvironment(s, start);
         EnvironmentStatus = errors.Count == 0 ? "Datos de entorno cargados (con copia local para uso sin conexión)." : "Parcial — " + string.Join(" · ", errors);
     }

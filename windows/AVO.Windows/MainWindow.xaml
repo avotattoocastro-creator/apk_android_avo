@@ -5,7 +5,8 @@
         xmlns:vm="clr-namespace:Avo.Windows.ViewModels"
         Title="AVO Performance Horse — Windows Advanced Analysis V2 PRO"
         Width="1600" Height="960" MinWidth="1280" MinHeight="720" WindowStartupLocation="CenterScreen"
-        Icon="Assets/AVO.ico">
+        Icon="Assets/AVO.ico" Style="{StaticResource AvoWindow}" Language="es-ES"
+        Background="{StaticResource AvoBg}" Foreground="{StaticResource AvoText}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
@@ -15,7 +16,7 @@
 
         <!-- ============================== header -->
         <Border Background="{StaticResource AvoHeaderBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,0,1">
-            <Grid Margin="16,0,16,0">
+            <Grid x:Name="HeaderGrid" Margin="16,0,16,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -33,7 +34,7 @@
                     <Border Width="1" Background="{StaticResource AvoLine}" Margin="22,14"/>
                 </StackPanel>
                 <!-- session sub-navigation (analysis area) -->
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,0,0,0">
+                <StackPanel x:Name="HeaderTabs" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,0,0,0">
                     <RadioButton Style="{StaticResource AvoTabButton}" Content="Análisis" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Analysis}"/>
                     <RadioButton Style="{StaticResource AvoTabButton}" Content="Mapa" Tag="{StaticResource IconMap}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Map}"/>
                     <RadioButton Style="{StaticResource AvoTabButton}" Content="Gráficas" Tag="{StaticResource IconCharts}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Charts}"/>

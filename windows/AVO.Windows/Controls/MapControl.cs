@@ -326,22 +326,23 @@ public sealed class MapControl : FrameworkElement
         using (var g = casingGeo.Open()) AddRuns(g, pts, tl, _ => true);
         casingGeo.Freeze();
         dc.DrawGeometry(null, Casing, casingGeo);
+        // With a selected range (chart selection or segment) only the range keeps its colours; the rest is dimmed.
+        bool ranged = !multi && double.IsFinite(RangeStart) && double.IsFinite(RangeEnd) && Math.Abs(RangeEnd - RangeStart) > 0.5;
+        double ra = Math.Min(RangeStart, RangeEnd), rb = Math.Max(RangeStart, RangeEnd);
+        if (ranged)
+        {
+            var dim = new StreamGeometry();
+            using (var g = dim.Open()) AddRuns(g, pts, tl, i => tl.T[i] < ra || tl.T[i] > rb);
+            dim.Freeze();
+            dc.DrawGeometry(null, MakePen(Color.FromArgb(0xB0, 0x93, 0x94, 0x9B), 3.2), dim);
+        }
         foreach (var kv in palette)
         {
             var geo = new StreamGeometry();
             int k = kv.Key;
-            using (var g = geo.Open()) AddRuns(g, pts, tl, i => keys[i] == k);
+            using (var g = geo.Open()) AddRuns(g, pts, tl, i => keys[i] == k && (!ranged || (tl.T[i] >= ra && tl.T[i] <= rb)));
             geo.Freeze();
-            dc.DrawGeometry(null, MakePen(kv.Value, 4.2), geo);
-        }
-        // selected range overlay
-        if (double.IsFinite(RangeStart) && double.IsFinite(RangeEnd))
-        {
-            double a = Math.Min(RangeStart, RangeEnd), b = Math.Max(RangeStart, RangeEnd);
-            var geo = new StreamGeometry();
-            using (var g = geo.Open()) AddRuns(g, pts, tl, i => tl.T[i] >= a && tl.T[i] <= b);
-            geo.Freeze();
-            dc.DrawGeometry(null, MakePen(Color.FromArgb(0xC0, 0xFF, 0xFF, 0xFF), 2), geo);
+            dc.DrawGeometry(null, MakePen(kv.Value, ranged ? 5 : 4.2), geo);
         }
         if (ShowMarkers && !multi)
         {

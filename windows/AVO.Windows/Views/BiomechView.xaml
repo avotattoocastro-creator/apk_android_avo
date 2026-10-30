@@ -15,7 +15,8 @@
         <Border Grid.Row="1" Background="#1AFFC42C" BorderBrush="#66FFC42C" BorderThickness="1" CornerRadius="6" Padding="12,7" Margin="0,0,0,10">
             <TextBlock Text="{Binding BiomechStatus}" Foreground="{StaticResource AvoText}" TextWrapping="Wrap" FontSize="12"/>
         </Border>
-        <Grid Grid.Row="2">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+        <Grid MinHeight="720">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.15*"/>
                 <ColumnDefinition Width="*"/>
@@ -53,7 +54,7 @@
             <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,12,0,0">
                 <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
                 <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                <c:AvoChartPanel Header="Patrón de movimiento · |a| cincha ±2 s del cursor (g)" Margin="0,0,6,0">
+                <c:AvoChartPanel MinHeight="170" Header="Patrón de movimiento · |a| cincha ±2 s del cursor (g)" Margin="0,0,6,0">
                     <c:AvoChartPanel.Legend>
                         <StackPanel Orientation="Horizontal">
                             <c:AvoLegendItem Text="Izq." Swatch="{StaticResource AvoBlue}"/>
@@ -63,7 +64,7 @@
                     </c:AvoChartPanel.Legend>
                     <c:SignalChart Series="{Binding ImuWindowSeries}" Axis="Number" XMin="{Binding ImuWindowMin}" XMax="{Binding ImuWindowMax}" EmptyText="Sin datos de cincha"/>
                 </c:AvoChartPanel>
-                <c:AvoChartPanel Grid.Column="1" Header="Cadencia por sensor (ciclos/min)" Margin="6,0,0,0" Readout="{Binding CursorCadence}">
+                <c:AvoChartPanel Grid.Column="1" MinHeight="170" Header="Cadencia por sensor (ciclos/min)" Margin="6,0,0,0" Readout="{Binding CursorCadence}">
                     <c:SignalChart Series="{Binding CadenceSeries}" Bands="{Binding GaitBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
                                    RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin cadencia: requiere cincha y motor"/>
                 </c:AvoChartPanel>
@@ -84,5 +85,6 @@
                 </c:AvoCard>
             </Grid>
         </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

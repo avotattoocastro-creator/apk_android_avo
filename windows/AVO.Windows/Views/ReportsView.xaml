@@ -58,16 +58,16 @@
                                     <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconReports}" Stroke="White" Style="{StaticResource AvoIcon}"/><TextBlock Text="Informe PDF" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
                                 </Button>
                                 <Button Command="{Binding ExportHtmlCommand}" Margin="4,0,0,8" Padding="10,12">
-                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconReports}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}"/><TextBlock Text="HTML imprimible" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconReports}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}"/><TextBlock Text="HTML" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
                                 </Button>
                                 <Button Command="{Binding ExportCsvCommand}" Margin="0,0,4,8" Padding="10,12">
-                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconCharts}" Stroke="{StaticResource AvoOk}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Datos CSV" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconCharts}" Stroke="{StaticResource AvoOk}" Style="{StaticResource AvoIcon}"/><TextBlock Text="CSV" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
                                 </Button>
                                 <Button Command="{Binding ExportGpxCommand}" Margin="4,0,0,8" Padding="10,12">
-                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconMap}" Stroke="{StaticResource AvoBlue}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Recorrido GPX" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconMap}" Stroke="{StaticResource AvoBlue}" Style="{StaticResource AvoIcon}"/><TextBlock Text="GPX" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
                                 </Button>
                                 <Button Command="{Binding ExportJsonCommand}" Margin="0,0,4,8" Padding="10,12">
-                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconExport}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}"/><TextBlock Text="JSON versionado" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconExport}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}"/><TextBlock Text="JSON" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
                                 </Button>
                                 <Button Command="{Binding OpenLastExportCommand}" Margin="4,0,0,8" Padding="10,12">
                                     <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoSilver}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Abrir último" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>

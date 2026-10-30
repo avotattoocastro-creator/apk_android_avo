@@ -16,6 +16,9 @@ public partial class MainWindow : Window, IDialogs
         DataContext = vm;
         InitializeComponent();
         AllowDrop = true;
+        // Header tabs duplicate the left rail: they are shown only when they fit completely (no clipped tabs on 1366 px).
+        HeaderGrid.SizeChanged += (_, _) => FitHeaderTabs();
+        Loaded += (_, _) => FitHeaderTabs();
         Drop += async (_, e) =>
         {
             if (e.Data.GetData(DataFormats.FileDrop) is string[] files)
@@ -43,6 +46,14 @@ public partial class MainWindow : Window, IDialogs
 
     public void Show(string title, string message, bool error = false) =>
         MessageBox.Show(this, message, title, MessageBoxButton.OK, error ? MessageBoxImage.Warning : MessageBoxImage.Information);
+
+    private void FitHeaderTabs()
+    {
+        HeaderTabs.Visibility = Visibility.Visible;
+        HeaderTabs.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        double available = HeaderGrid.ColumnDefinitions[1].ActualWidth;
+        HeaderTabs.Visibility = HeaderTabs.DesiredSize.Width <= available ? Visibility.Visible : Visibility.Hidden;
+    }
 
     /// <summary>Path helper for the capture mode.</summary>
     public static string EnsureDir(string dir) { Directory.CreateDirectory(dir); return dir; }

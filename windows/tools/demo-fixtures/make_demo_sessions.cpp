@@ -46,14 +46,14 @@ bool write(const std::string& dir, const Spec& sp) {
   // ---------------------------------------------------------------- GNSS track
   std::vector<Epoch> gn;
   double x = 0, y = 0, hdg = sp.heading_deg * PI / 180, v = 0;
-  double turn_start = total * 0.55, turn_len = 40;              // U-turn to come back along the beach
+  double turn_start = total * 0.55, turn_len = 15;              // tight U-turn towards the sea to come back along the beach
   int n = (int)(total * rate);
   for (int k = 0; k < n; k++) {
     double t = k * dt, acc = 0; const Phase* ph = &sp.phases.back();
     for (auto& p : sp.phases) { if (t < acc + p.secs) { ph = &p; break; } acc += p.secs; }
     double target = ph->speed;
     v += (target - v) * std::min(1.0, dt / 6.0);                // smooth transitions (~6 s)
-    double w = (t >= turn_start && t < turn_start + turn_len) ? PI / turn_len : 0.004 * std::sin(t / 37.0);
+    double w = (t >= turn_start && t < turn_start + turn_len) ? -PI / turn_len : 0.0012 * std::sin(t / 37.0);
     double vm = std::max(0.0, v + 0.04 * nz(rng));
     bool outage = t > total * 0.32 && t < total * 0.32 + 6;    // 6 s with no epochs
     int carr = 2;

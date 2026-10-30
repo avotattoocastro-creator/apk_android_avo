@@ -167,7 +167,8 @@ public sealed partial class MainViewModel
         SessionStats.Add(new("Caballo", s.Horse));
         SessionStats.Add(new("Jinete", s.Rider));
         SessionStats.Add(new("Modalidad", s.Discipline));
-        SessionStats.Add(new("Fecha", s.DateTimeText + (s.Start is DateTimeOffset u ? " " + MadridTime.ZoneLabel(u) : "")));
+        SessionStats.Add(new("Fecha", s.DateTimeText));
+        SessionStats.Add(new("Zona horaria", s.Start is DateTimeOffset u ? "Europe/Madrid · " + MadridTime.ZoneLabel(u) : "—"));
         SessionStats.Add(new("Duración", s.DurationText));
         SessionStats.Add(new("Distancia", s.DistanceText));
         SessionStats.Add(new("Datos", s.Kind));

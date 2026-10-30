@@ -54,10 +54,10 @@
                     <StackPanel>
                         <TextBlock Text="{Binding SelectedSegment.Name, FallbackValue='Selecciona o crea un tramo'}" Style="{StaticResource AvoTitle}" FontSize="17"/>
                         <UniformGrid Columns="4" Margin="0,8,0,0">
-                            <StackPanel><TextBlock Text="Distancia" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DistanceM, StringFormat='{}{0:0} m', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
-                            <StackPanel><TextBlock Text="Duración" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DurationS, Converter={StaticResource Clock}, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
-                            <StackPanel><TextBlock Text="Vel. media" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MeanSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
-                            <StackPanel><TextBlock Text="Vel. máxima" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MaxSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
+                            <StackPanel><TextBlock Text="Distancia" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DistanceM, StringFormat='{}{0:0} m', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20" TextTrimming="CharacterEllipsis"/></StackPanel>
+                            <StackPanel><TextBlock Text="Duración" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DurationS, Converter={StaticResource Clock}, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20" TextTrimming="CharacterEllipsis"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. media" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MeanSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20" TextTrimming="CharacterEllipsis"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. máxima" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MaxSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20" TextTrimming="CharacterEllipsis"/></StackPanel>
                         </UniformGrid>
                     </StackPanel>
                 </Border>

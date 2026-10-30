@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Implicit and named styles of the standard WPF controls, all built on AvoColors.xaml. -->
 
-    <Style TargetType="Window">
+    <Style x:Key="AvoWindow" TargetType="Window">
         <Setter Property="Background" Value="{StaticResource AvoBg}"/>
         <Setter Property="Foreground" Value="{StaticResource AvoText}"/>
         <Setter Property="FontFamily" Value="{StaticResource AvoFont}"/>

@@ -139,9 +139,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="c:AvoKeyValue">
                     <Grid>
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                        <TextBlock Text="{TemplateBinding KeyText}" Foreground="{StaticResource AvoTextDim}" FontSize="12" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-                        <TextBlock Grid.Column="1" Text="{TemplateBinding ValueText}" Style="{StaticResource AvoValue}" Margin="12,0,0,0" VerticalAlignment="Center" TextAlignment="Right"/>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <TextBlock Text="{TemplateBinding KeyText}" Foreground="{StaticResource AvoTextDim}" FontSize="12" VerticalAlignment="Top" Margin="0,1,0,0"/>
+                        <TextBlock Grid.Column="1" Text="{TemplateBinding ValueText}" Style="{StaticResource AvoValue}" Margin="12,0,0,0" VerticalAlignment="Top" TextAlignment="Right" TextWrapping="Wrap"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
