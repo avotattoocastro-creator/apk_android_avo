@@ -39,6 +39,10 @@ Generador de sesiones de DEMOSTRACIÓN sintéticas (`windows/tools/demo-fixtures
 **No se ha tocado:** Android, firmware, motor C++ (solo se compila y se usa).
 **Validación:** IMPLEMENTADO · COMPILADO / CI (run 41084991763, `f626309`) · PROBADO AUTOMÁTICAMENTE (106 comprobaciones) ·
 **NO VERIFICADO** con sesiones reales con cincha (no existen) ni manualmente en un PC con Windows.
+**Actualización 30/10 17:30:** pantalla de inicio reproducida como en `AVO_WINDOWS_CONCEPTO_02` (foto, logotipo y lema
+recortados de la imagen de referencia del usuario, acciones reales a la derecha, ventana sin barra ni menú en el inicio); el
+panel anterior pasa a «Entrenamientos». La foto sale de la maqueta (1536×1024) y se reescala: sustituible por un original
+de alta resolución en `windows/AVO.Windows/Assets/avo_home_hero.jpg`.
 **Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
 del ejecutable; modelo 3D autorizado; integración en develop.
 

@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:Avo.Windows.ViewModels">
     <vm:PageVisibility x:Key="PageVis"/>
+    <vm:NotPageVisibility x:Key="NotPageVis"/>
     <vm:EqualsConverter x:Key="Eq"/>
     <vm:BoolVisibility x:Key="BoolVis"/>
     <vm:BoolVisibility x:Key="NotBoolVis" Invert="True"/>
