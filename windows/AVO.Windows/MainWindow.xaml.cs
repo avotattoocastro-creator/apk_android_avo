@@ -40,6 +40,7 @@ public partial class MainWindow : Window
         AnalysisRoute.SelectedIndex = -1;
         AccuracyChart.ShowAccuracy = true;
         Loaded += async (_, _) => await RestoreAsync();
+        InitEngine();
         UpdateViews();
     }
     private void Navigate_Click(object sender, RoutedEventArgs e)
@@ -172,6 +173,7 @@ public partial class MainWindow : Window
         ReportPreview.Text = s is null ? "Importa un entrenamiento para crear informes" :
             $"Caballo: {s.Horse}\nJinete: {s.Rider}\nFecha: {s.DateText}\nDistancia: {s.DistanceM / 1000:0.00} km\nDuración: {Analytics.Duration(s.DurationSeconds)}\nVelocidad máxima: {s.MaxSpeedKmh:0.0} km/h\nIntegridad: {s.Integrity}";
         UpdateComparison();
+        UpdateEngineView();
     }
     private void SelectPoint(int index)
     {
@@ -182,6 +184,7 @@ public partial class MainWindow : Window
         if (_active?.Track is { Count: > 0 } t && index >= 0 && index < t.Count)
             StatPoint.Text = $"{t[index].Latitude:F7}, {t[index].Longitude:F7}\n{t[index].SpeedKmh:0.0} km/h · {t[index].RtkName} · hAcc {t[index].AccuracyM:0.0} m";
         else StatPoint.Text = "Haz clic en la gráfica";
+        EngineSelect(index);
     }
     private void UpdateComparison()
     {

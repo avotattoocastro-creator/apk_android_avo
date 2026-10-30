@@ -112,7 +112,7 @@ try
         using (var write = new StreamWriter(zip.CreateEntry("manifest.json").Open(), Encoding.UTF8)) write.Write(JsonSerializer.Serialize(manifest));
         using (var stream = zip.CreateEntry("segments/" + name).Open()) stream.Write(raw);
     }
-    var session = TrainingImporter.Import(avo);
+    var session = TrainingImporter.Import(avo, Path.Combine(dir, "raw"));
     Assert(session.Integrity.Contains("SHA-256") && session.Track.Count == 2, "ZIP AVO-TRAINING-1 y SHA-256 segmento");
     Assert(session.DistanceM != 1234 && session.HasRawTelemetry, "Se prioriza distancia calculada del RAW sobre resumen declarado");
     string csv = Path.Combine(dir, "export.csv"), gpx = Path.Combine(dir, "export.gpx"), html = Path.Combine(dir, "report.html");
@@ -136,6 +136,60 @@ try
     var torn = raw[..^9]; File.WriteAllBytes(avr, torn);
     var partial = TrainingImporter.Import(avr);
     Assert(partial.Segments[0].Truncated && partial.Integrity.Contains("parcial"), "Bloque incompleto señalado, no interpretado");
+    // ---- AVO Equine Intelligence Engine (avo_equine.dll) on the SYNTHETIC reference session.
+    // RAW -> importer -> P/Invoke -> C++ engine -> JSON -> C# model used by the window. Not a validation on real horses.
+    string fixture = Path.Combine(AppContext.BaseDirectory, "synthetic_session.avo");
+    bool requireNative = Environment.GetEnvironmentVariable("AVO_EQ_REQUIRE_NATIVE") == "1";
+    if (!EquineEngine.Available || !File.Exists(fixture))
+    {
+        Assert(!requireNative, "Motor nativo requerido en CI: " + (EquineEngine.UnavailableReason ?? "falta la sesión de referencia"));
+        Console.WriteLine("AVISO: motor nativo o sesión de referencia no disponibles; pruebas del motor omitidas");
+    }
+    else
+    {
+        Assert(EquineEngine.Version().StartsWith("1.1.0", StringComparison.Ordinal), "Versión del motor " + EquineEngine.Version());
+        var synthetic = File.ReadAllBytes(fixture);
+        string avo2 = Path.Combine(dir, "sintetica.avo");
+        using (var zip = ZipFile.Open(avo2, ZipArchiveMode.Create))
+        {
+            var manifest = new
+            {
+                format = "AVO-TRAINING-1", sessionId = "SINTETICA_0001", horseName = "PRUEBA", riderName = "",
+                segments = 1, startRtcMs = 1792656000000L,
+                segmentHashes = new Dictionary<string, string> { ["P001.avr"] = Convert.ToHexString(SHA256.HashData(synthetic)).ToLowerInvariant() }
+            };
+            using (var write = new StreamWriter(zip.CreateEntry("manifest.json").Open(), Encoding.UTF8)) write.Write(JsonSerializer.Serialize(manifest));
+            using (var stream = zip.CreateEntry("segments/P001.avr").Open()) stream.Write(synthetic);
+        }
+        var s2 = TrainingImporter.Import(avo2, Path.Combine(dir, "raw"));
+        Assert(s2.RawSegmentPaths.Count == 1 && File.Exists(s2.RawSegmentPaths[0]), "Copia RAW verificada para el motor");
+        string cache = Path.Combine(dir, "analisis");
+        var r1 = EquineAnalysis.Parse(EquineEngine.AnalyseJson(s2.RawSegmentPaths, EquineEngine.Options(true, cache)));
+        Assert(r1.SessionId == "SINTETICA_0001" && r1.Cache == "CALCULADO", "Análisis del motor con persistencia");
+        Assert(r1.HasImu && r1.Segments.Any(x => x.Aire == "Paso") && r1.Segments.Any(x => x.Aire == "Trote"), "Rendimiento por aire");
+        Assert(r1.Curves.Count == 1 && r1.Events.Count > 0 && r1.Quality.Count > 0, "Curvas, eventos y calidad");
+        var tp = s2.Track[s2.Track.Count * 3 / 4];
+        double t3 = r1.TimeOf(tp.GpsWeekMs) ?? double.NaN;
+        Assert(Math.Abs(r1.GnssAt(r1.Speed, t3) - tp.SpeedMs) < 0.05, "Series del motor sincronizadas con el recorrido");
+        Assert(Math.Abs(r1.CadenceAt(t3) - 1.45) < 0.05, "Cadencia de la cincha en el instante seleccionado");
+        var r2 = EquineAnalysis.Parse(EquineEngine.AnalyseJson(s2.RawSegmentPaths, EquineEngine.Options(true, cache)));
+        Assert(r2.Cache == "ACIERTO", "Reapertura sin recalcular");
+        var r3 = EquineAnalysis.Parse(EquineEngine.AnalyseJson(s2.RawSegmentPaths, EquineEngine.Options(true, cache, force: true)));
+        Assert(r3.Cache == "RECALCULADO", "Reprocesamiento forzado");
+        using (var cts = new CancellationTokenSource())
+        {
+            cts.Cancel();
+            bool cancelled = false;
+            try { EquineEngine.AnalyseJson(s2.RawSegmentPaths, "{}", cts.Token); } catch (OperationCanceledException) { cancelled = true; }
+            Assert(cancelled, "Cancelación del análisis");
+        }
+        var (rows, verdict) = EquineComparisonRows.Parse(EquineEngine.CompareJson(s2.RawSegmentPaths, s2.RawSegmentPaths, "{\"mismo_recorrido\":true}"));
+        Assert(rows.Count > 0 && verdict.StartsWith("Comparables", StringComparison.Ordinal), "Comparación de sesiones: " + verdict);
+        bool inputError = false;
+        try { EquineEngine.AnalyseJson([Path.Combine(dir, "no_existe.avr")], "{}"); } catch (InvalidDataException) { inputError = true; }
+        Assert(inputError, "Error de entrada informado");
+        Assert(SHA256.HashData(File.ReadAllBytes(s2.RawSegmentPaths[0])).AsSpan().SequenceEqual(SHA256.HashData(synthetic)), "El RAW no se modifica");
+    }
     Console.WriteLine($"TODAS LAS PRUEBAS CORRECTAS: {passed}");
 }
 finally { Directory.Delete(dir, true); }

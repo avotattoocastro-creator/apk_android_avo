@@ -35,6 +35,8 @@ public sealed class TrainingSession
     public int GnssOtherCount { get; set; }
     public List<TrackPoint> Track { get; } = [];
     public List<SegmentSummary> Segments { get; } = [];
+    /// <summary>RAW segment files on disk for the analysis engine (the .avr itself, or verified copies extracted from a .avo package).</summary>
+    public List<string> RawSegmentPaths { get; } = [];
     public string? MarineSource { get; set; }
     public string? MarineKind { get; set; }
     public DateTimeOffset? MarineObservedAt { get; set; }

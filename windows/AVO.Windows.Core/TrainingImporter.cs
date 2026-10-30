@@ -9,7 +9,10 @@ public static class TrainingImporter
 {
     private const long MaxCompressedBytes = 100L * 1024 * 1024;
     private const long MaxSegmentBytes = 50L * 1024 * 1024;
-    public static TrainingSession Import(string path)
+    /// <summary>Default folder for the verified RAW copies extracted from .avo packages (originals are never modified).</summary>
+    public static string DefaultRawCacheDir => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AVO Performance Horse", "Windows", "raw");
+
+    public static TrainingSession Import(string path, string? rawCacheDir = null)
     {
         if (!File.Exists(path)) throw new FileNotFoundException("No existe el entrenamiento", path);
         if (new FileInfo(path).Length > MaxCompressedBytes) throw new InvalidDataException("Archivo de más de 100 MB");
@@ -19,6 +22,7 @@ public static class TrainingImporter
             using var stream = File.OpenRead(path);
             result.Segments.Add(RawReader.Scan(stream, result, Path.GetFileName(path), 0));
             result.HasRawTelemetry = true;
+            result.RawSegmentPaths.Add(Path.GetFullPath(path));
             result.Integrity = result.Segments.All(s => !s.Truncated) ? "CRC válido" : "RAW truncado (parcial)";
             return result;
         }
@@ -70,6 +74,13 @@ public static class TrainingImporter
                 using var stream = new MemoryStream(data, false);
                 result.Segments.Add(RawReader.Scan(stream, result, name, idx));
                 result.HasRawTelemetry = true;
+                // verified copy for the analysis engine (name already restricted to [A-Za-z0-9_.-])
+                string dir = Path.Combine(rawCacheDir ?? DefaultRawCacheDir, string.Concat(result.SessionId.Select(ch => char.IsLetterOrDigit(ch) || ch is '-' or '_' ? ch : '_')));
+                Directory.CreateDirectory(dir);
+                string copy = Path.Combine(dir, name);
+                if (!File.Exists(copy) || !Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(copy))).Equals(expected, StringComparison.OrdinalIgnoreCase))
+                    File.WriteAllBytes(copy, data);
+                result.RawSegmentPaths.Add(copy);
             }
             else result.Segments.Add(new SegmentSummary(name, idx, data.Length, 0, 0, false, false, 0));
             idx++;

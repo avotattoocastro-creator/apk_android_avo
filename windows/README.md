@@ -20,6 +20,13 @@ Aplicación WPF (.NET 10, Windows 10/11 x64), dependencias de tiempo de ejecuci�
 - Servidor: botón abre el panel, importación manual desde URL HTTPS de archivo `.avo`. **No** hay sincronización bidireccional automática sin contrato/API y autenticación verificados.
 - Evaluación visual vs los mockups: `docs/DESIGN_V1.md`.
 
+## Motor de análisis AVO (desde la rama `feature/avo-equine-intelligence-engine`)
+- Pestaña **Motor AVO**: análisis por la DLL `avo_equine.dll` (mismo motor C++ que Android) en segundo plano, cancelable y guardado en
+  `%LOCALAPPDATA%\AVO Performance Horse\Windows\analisis`; gráficas del motor con la misma selección que el recorrido; selección de intervalos;
+  rendimiento por aire, curvas, eventos, calidad, simetría exploratoria; comparación avanzada; exportación JSON y CSV; reprocesado.
+- Los `.avo` se importan como antes; sus segmentos verificados por SHA-256 se copian a `...\Windows\raw` para el motor (el paquete original no cambia).
+- La CI compila la DLL con MSVC (runtime estático) y la incluye en la publicación. Resultados exploratorios; sin cincha real todavía.
+
 ## Compilación local
 
 ```powershell
