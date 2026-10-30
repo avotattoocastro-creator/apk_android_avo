@@ -24,6 +24,35 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — CHEST 3.7.5-usb1 + AVO Windows V1.1 — descarga automática de entrenamientos al PC por USB
+**Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` (desde `feature/avo-wifi-sync`, sin fusionar) · **Commits:** `b4e57c8`, `261bee3`
+**Qué cambia:**
+- **Firmware del pecho 3.7.5-usb1** (`firmware/chest/V3_7_5_USB`), sobre 3.7.5-rc5, la última con pruebas de campo. El parche también se aplica sin cambios sobre 3.7.6-rc1.
+  - Protocolo AVO1 de texto en el puerto serie USB: HELLO, LIST, SHA, READ.
+  - Lo atiende la tarea `loop` de Arduino, que estaba parada. No hay tarea nueva: los buffers van en PSRAM y la RAM interna estática sube 64 B.
+  - Solo lectura. No sirve sesiones OPEN y no responde mientras se graba.
+  - Usa el mismo etag y SHA-256 que la descarga Wi-Fi.
+- **AVO Windows V1.1:**
+  - detecta el reloj al conectarlo (USB VID 303A / PID 1001, con `WM_DEVICECHANGE` y una comprobación cada 4 s);
+  - compara su lista con `Documentos\AVO Performance Horse\Reloj`, incluidos los `.avo` ya importados de Android, que se reconocen por SHA-256;
+  - descarga los que faltan: bloques de 4 KB con CRC-32, reintentos, reanudación y SHA-256 final;
+  - los guarda como `.avo` (AVO-TRAINING-1) y los importa;
+  - añade la tarjeta «RELOJ POR USB» en Inicio y el botón SINCRONIZAR RELOJ.
+- Detalle: `firmware/chest/V3_7_5_USB/PROTOCOLO_USB.md`.
+**Por qué:** petición del usuario. Al conectar el reloj al PC, la app de Windows debe reconocerlo, comparar los entrenamientos y descargar los que falten.
+**Archivos:**
+- `firmware/chest/V3_7_5_USB/*`, `.github/workflows/build-chest-v375-usb.yml`;
+- `windows/AVO.Windows.Core/ChestUsb.cs`, `windows/AVO.Windows/MainWindow.Usb.cs`, XAML y csproj (System.IO.Ports);
+- `windows/AVO.Windows.SelfTest/{SimWatch.cs,usb_transcript.json,Program.cs}`;
+- `TrainingImporter` lee el `sha256` del manifiesto;
+- `build-avo-windows.yml`: se añade la rama.
+**No se ha tocado:** RAW, grabación, BLE, ESP-NOW, NTRIP/RTCM, GNSS, OTA, Wi-Fi, pantalla y particiones del pecho; app Android.
+**CI:**
+- firmware: run 41073707599 (éxito, `261bee3`), BIN de 1.579.967 B. Incluye `usb_sync.cpp` real compilado en el PC y probado: descarga, rechazos, microSD intacta y transcripción idéntica.
+- Windows: run 41072995871 (éxito, `b4e57c8`), 46 autopruebas, 18 de ellas de USB, con el firmware real (transcripción) y un reloj simulado con fallos.
+**Validación:** IMPLEMENTADO · CI. **NO VERIFICADO** en el reloj ni en un PC real.
+**Pendiente:** las pruebas físicas 1–6 de `PROTOCOLO_USB.md`. La más importante: comprobar que el reloj no se reinicia al abrir el puerto y que `[AVO MEM] ready` no baja respecto a la rc5. Después, decidir si se fusiona en `feature/avo-wifi-sync` y se lleva a la 3.7.6.
+
 ## 2026-10-30 — Cincha (CAD) REV 5.9 — conector pogo en lugar del reed, sin Qi, cápsula 70 × 51 × 13,8
 **Autor:** Claude · Rama de propuesta `feature/girth-rev5-9-pogo`, fusionada en `feature/avo-wifi-sync` con el visto bueno del usuario
 **Qué cambia:**
