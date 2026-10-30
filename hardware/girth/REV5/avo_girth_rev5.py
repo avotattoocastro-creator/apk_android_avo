@@ -106,7 +106,7 @@ ZC = 0.10
 CL = 0.12
 RW = 2.6
 RH = GROOVE["z1"] - 0.15
-MT = 4.6
+MT = 6.0      # REV 5.9: placa de 6,0 (antes 4,6) para alojar el macho pogo sin salientes por debajo
 STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 5,6 (antes 1,5) para las bisagras de los cierres
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
@@ -173,7 +173,14 @@ def pod_base():
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
     cw = POGO["cup_wall"]
     b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
-    b = b.cut(rrect(fl, fw, fw / 2 - 0.01, POGO["cup_z"] + 1 - POGO["f_lip"], z0=POGO["f_lip"]).translate((0, py, 0)))
+    ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
+    stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
+    b = b.cut(stad(ft - POGO["f_lip"], POGO["f_lip"]))
+    yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
+    b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
+    wedge = (cq.Workplane("YZ", origin=(-20, 0, 0)).polyline([(py - fw / 2 - 0.01, ft - 0.01), (yin + 0.01, ft - 0.01),
+                                                                 (yin + 0.01, ft + (yin - (py - fw / 2)))]).close().extrude(40))
+    b = b.cut(wedge.intersect(stad(10, ft - 0.02)))                     # en la pared: techo a 45° (sin voladizo)
     ol, ow = POGO["f_l"] - 2 * POGO["f_lip"], POGO["f_w"] - 2 * POGO["f_lip"]
     b = b.cut(rrect(ol, ow, ow / 2 - 0.01, POGO["f_lip"] + 1, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
@@ -391,10 +398,8 @@ def mount():
     # REV 5.9: macho pogo en la placa (sustituye a los imanes del reed): cara a ras de la placa, cuerpo hacia abajo,
     # orejas en un rebaje por debajo con 2 tornillos M1,6 (piloto Ø1,3) y canal para el cable.
     py, cl = POGO["y"], POGO["clear"]
-    zb = -POGO["m_h"] - POGO["boss"] + 0.4                              # cara inferior del refuerzo
-    p = p.union(rrect(POGO["ear_l"] + 4.0, POGO["m_w"] + 6.0, (POGO["m_w"] + 6.0) / 2 - 0.01, -MT - zb + 0.1, z0=zb)
-                .translate((0, py, 0)).edges("<Z").chamfer(0.5))
-    p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, POGO["m_h"] + 2, z0=-POGO["m_h"] - 1)
+    zb = -MT                                                            # cara inferior de la placa
+    p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, MT + 2, z0=-MT - 1)
               .translate((0, py, 0)))
     p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
                     POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.11, z0=zb - 0.01).translate((0, py, 0)))
