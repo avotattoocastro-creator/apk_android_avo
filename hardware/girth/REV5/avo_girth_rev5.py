@@ -84,7 +84,17 @@ REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imanes del reed (en el soporte): Ø5 × 1
 # REV 5.7.2 (modificación del usuario en su CAD): 3 imanes del reed en fila bajo el reed, a −5,1 / 0 / +5,1 en X;
 # los laterales en alojamientos de 1,2 mm de fondo, el central de 1,05.
-REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]
+REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (sin uso desde la REV 5.9)
+# REV 5.9: el reed y sus imanes se sustituyen por un conector magnético pogo de 3 pines (paso 2,54):
+#  - HEMBRA (plana, contactos fijos) en el fondo de la base, entrando por dentro y apoyada en un reborde de 0,6 mm
+#    (la cara queda 0,6 por dentro: el reborde aguanta el empuje de los pines y hace de molde para sellar con epoxi);
+#  - MACHO (pines de muelle, con orejas) en la placa del soporte, con la cara a ras y atornillado por debajo.
+#  Medidas ESTIMADAS (E) a partir de la foto del vendedor escalando el paso de 2,54: hay que confirmarlas con calibre.
+POGO = dict(y=-20.2,
+            f_l=20.3, f_w=7.0, f_t=3.0, f_lip=0.6, f_tail=1.5,                  # hembra (E)
+            m_l=17.5, m_w=6.0, m_h=5.0, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo y pines libres (E)
+            ear_span=25.0, ear_l=29.0, ear_w=5.0, ear_t=2.0, ear_hole=1.5,      # orejas del macho (E; agujero Ø1,5)
+            clear=0.2, cup_wall=1.0, cup_z=5.5, boss=1.4)
 
 RING_T = 1.0
 GROOVE = dict(z0=3.0, z1=4.6, depth=1.0)
@@ -157,8 +167,15 @@ def pod_base():
     for x in (-15, 0, 15):
         for s in (-1, 1):
             b = b.union(box(x, s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
-    rx, ry = REED["center"]
-    b = b.cut(box(rx, ry, REED["z0"], REED["l"] + 2 * G + 2.0, REED["d"] + 2 * G, FLOOR))      # +1 mm por extremo (prueba impresa)
+    # REV 5.9: hembra pogo en el fondo (sustituye al canal del reed). Alojamiento con reborde de 0,6 abajo y una copa
+    # alrededor para sellar con epoxi por dentro.
+    py, cl = POGO["y"], POGO["clear"]
+    fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
+    cw = POGO["cup_wall"]
+    b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
+    b = b.cut(rrect(fl, fw, fw / 2 - 0.01, POGO["cup_z"] + 1 - POGO["f_lip"], z0=POGO["f_lip"]).translate((0, py, 0)))
+    ol, ow = POGO["f_l"] - 2 * POGO["f_lip"], POGO["f_w"] - 2 * POGO["f_lip"]
+    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, POGO["f_lip"] + 1, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
@@ -371,9 +388,20 @@ def mount():
                     .intersect(box(ax, yc, zflat, dh + 1, LATCH["lug_w"] + 4, dh + 1)))
             lug = lug.cut(hole)
             p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
-    rx, ry = REED["center"]
-    for (dx, depth) in REED_MAGS:
-        p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
+    # REV 5.9: macho pogo en la placa (sustituye a los imanes del reed): cara a ras de la placa, cuerpo hacia abajo,
+    # orejas en un rebaje por debajo con 2 tornillos M1,6 (piloto Ø1,3) y canal para el cable.
+    py, cl = POGO["y"], POGO["clear"]
+    zb = -POGO["m_h"] - POGO["boss"] + 0.4                              # cara inferior del refuerzo
+    p = p.union(rrect(POGO["ear_l"] + 4.0, POGO["m_w"] + 6.0, (POGO["m_w"] + 6.0) / 2 - 0.01, -MT - zb + 0.1, z0=zb)
+                .translate((0, py, 0)).edges("<Z").chamfer(0.5))
+    p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, POGO["m_h"] + 2, z0=-POGO["m_h"] - 1)
+              .translate((0, py, 0)))
+    p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
+                    POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.01, z0=zb - 0.01).translate((0, py, 0)))
+    for sx in (-1, 1):
+        p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.3, -1.0 - (zb - 1)))     # piloto M1,6 hasta 1 mm de la cara
+    y1 = -(_mount_geom()[9] / 2 + 1)                                    # canal del cable hasta el borde −Y, por debajo
+    p = p.cut(box(0, (py + y1) / 2, zb - 0.01, 4.0, abs(y1 - py), 1.6))
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
     return p
@@ -437,14 +465,24 @@ def components():
         "placa_Qi": box(qx, qy, TRAY_TOP + 0.02, QI["lx"], QI["wy"], QI["pcb"] - 0.02).union(
             box(qx, qy + 0.5, TRAY_TOP + QI["pcb"], 9.0, 9.0, QI["parts"])),
         "BNO085": bno,
-        "reed": box(rx, ry, REED["z0"] + 0.1, REED["l"], REED["d"], REED["d"]),
+        "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"], z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0)),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
-        "imanes": cyl(rx + REED_MAGS[0][0], ry, -REED_MAGS[0][1] + 0.03, MAG["d"], MAG["t"]).union(
-            cyl(rx + REED_MAGS[1][0], ry, -REED_MAGS[1][1] + 0.03, MAG["d"], MAG["t"])).union(
-            cyl(rx + REED_MAGS[2][0], ry, -REED_MAGS[2][1] + 0.03, MAG["d"], MAG["t"])),
+        "pogo_macho": _pogo_male(),
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
+
+
+def _pogo_male():
+    """Macho pogo en posición (pines comprimidos hasta 0,05 por debajo de la cara de la hembra)."""
+    py = POGO["y"]
+    m = rrect(POGO["m_l"], POGO["m_w"], POGO["m_w"] / 2 - 0.01, POGO["m_h"] - 0.02, z0=-POGO["m_h"] + 0.01).translate((0, py, 0))
+    m = m.union(rrect(POGO["ear_l"], POGO["ear_w"], POGO["ear_w"] / 2 - 0.01, POGO["ear_t"], z0=-POGO["m_h"] + 0.01).translate((0, py, 0)))
+    for sx in (-1, 1):
+        m = m.cut(cyl(sx * POGO["ear_span"] / 2, py, -POGO["m_h"] - 1, POGO["ear_hole"], POGO["ear_t"] + 2))
+    for k in (-1, 0, 1):
+        m = m.union(cyl(k * 2.54, py, -0.01, 1.0, POGO["f_lip"] - 0.05 + 0.01))
+    return m
 
 
 def main():
