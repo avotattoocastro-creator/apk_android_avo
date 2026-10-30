@@ -28,7 +28,7 @@
   },
   "tapa / anillos": {
    "volumen_comun_mm3": 0.0,
-   "distancia_min_mm": 0.899,
+   "distancia_min_mm": 0.929,
    "nota": ""
   },
   "base / bandeja": {
@@ -161,8 +161,8 @@
   "pcb_componentes": {
    "tapa": 0.53,
    "base": 0.589,
-   "bandeja": 2.909,
-   "anillos": 0.317
+   "bandeja": 3.021,
+   "anillos": 0.225
   },
   "pcb_placa": {
    "tapa": 0.1,
@@ -218,8 +218,8 @@
   "S4": 1.801,
   "S5": 1.801,
   "S6": 1.801,
-  "S7": 2.33,
-  "S8": 2.33
+  "S7": 2.316,
+  "S8": 2.316
  },
  "imanes_soporte_vs_insertos_min_mm": 0.38,
  "cotas": {
@@ -242,8 +242,8 @@
   "antena_dentro_del_techo_plano": true
  },
  "volumenes_mm3": {
-  "tapa": 21319.0,
-  "base": 17436.1,
+  "tapa": 21325.7,
+  "base": 17434.7,
   "bandeja": 3207.4,
   "junta": 797.9,
   "soporte": 35425.6,

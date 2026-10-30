@@ -47,8 +47,9 @@ sin aumentar el grosor, una sola placa propia con el ZED integrado físicamente 
 **Archivos:** `hardware/back/V4/**`, `firmware/back/V4_0_0/**`, `.github/workflows/build-back-v4-pcb.yml`,
 `build-back-v4-fw.yml`, `jlc-stock-back-v4.yml`, `docs/REGISTRO_DE_CAMBIOS.md`.
 **No se ha tocado:** `main`, `develop/avo-performance-horse`, Rev E de la espalda, firmware 3.x, pecho, cincha, Android.
-**Validación:** CAD comprobado por software (piezas B-Rep válidas, 0 interferencias con las envolventes de la electrónica;
-comprobación con el STEP de KiCad en curso; STL/STEP releídos; 0 voladizos fuera de límite) · PCB: CI con puerta superada · firmware: CI compila.
+**Validación:** CAD comprobado por software (piezas B-Rep válidas, 0 interferencias con las envolventes de la electrónica y
+con el STEP de KiCad de `3f81b45` (holguras mín.: tapa 0,19, anillos 0,09, bobina 0,20 mm; la placa apoya en la base);
+STL/STEP releídos; 0 voladizos fuera de límite) · PCB: CI con puerta superada · firmware: CI compila.
 **NO VERIFICADO** físicamente (nada impreso, fabricado ni montado).
 **Pendiente:** comprobar con polímetro el pinout de la URTK1.2 (las fotos muestran serigrafías distintas) antes del mazo;
 imprimir las probetas P1/P2; medir la bobina Qi y ajustar C1–C4; BLE directo con Android, Wi-Fi y OTA firmada en el

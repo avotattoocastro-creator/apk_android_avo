@@ -19,6 +19,10 @@ Rediseño conjunto de la electrónica y la carcasa de la espalda de AVO Performa
 | Cables entre placas | ZED (5–7 hilos), Qi, reed, batería, regulador | **1 mazo de 8 hilos** (URTK1.2 ↔ J4) + 2 hilos de la bobina | |
 | microSD | no | **sí** (SDMMC 4 bits) | |
 
+**PCB REV A:** ruteada al 100 %; KiCad 9 en el CI (run 40971520610, `3f81b45`): DRC 0, ERC 0, 0 conexiones incompletas,
+puerta de fabricación superada → `PCB/out/FINAL/`. El STEP de esa placa, montado en el CAD a Z 2,5, no interfiere con
+ninguna pieza (`CAD/VALIDACION/verificacion_pcb_step_v4.json`).
+
 Cotas y volúmenes medidos sobre el modelo B-Rep (no sobre fotos). Pesos: volumen × densidad (PETG 1,27, TPU 1,20 g/cm³),
 como en la Rev E.
 

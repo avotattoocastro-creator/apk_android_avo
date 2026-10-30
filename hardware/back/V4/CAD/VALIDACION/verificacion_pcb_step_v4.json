@@ -1,0 +1,22 @@
+{
+ "solidos_step": 304,
+ "interferencias": {},
+ "holgura_min_mm": {
+  "tapa": 0.19,
+  "base": 0.0,
+  "bandeja": 3.243,
+  "anillos": 0.09,
+  "junta": 3.489,
+  "bateria_654060": 1.5,
+  "qi_bobina": 0.2,
+  "urtk_pcb": null,
+  "urtk_modulo_ZED": null,
+  "urtk_J1_USBC_estimado": null,
+  "urtk_J3_GH6_estimado": null,
+  "urtk_J2_SMA": 2.153,
+  "L_cuerpo": 1.905,
+  "L_tuerca_y_cuerpo_hex": 1.903,
+  "antena_FPC_2G4": null
+ },
+ "nota": "Sólidos del STEP de KiCad (placa + modelos 3D disponibles) desplazados a Z = PCB_Z (2,5 mm). Sin modelo 3D en el STEP: USB-C, JST SH, RHL-20 y VQFN-16 (comprobados con las envolventes del generador)."
+}
