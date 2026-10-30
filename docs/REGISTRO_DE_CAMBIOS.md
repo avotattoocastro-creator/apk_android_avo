@@ -26,7 +26,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ## 2026-10-30 — Espalda · AVO BACK V4 REV B (contactos pogo, sin Qi ni Hall) + BACK 4.0.0-dev2 + prototipo Rev E.6 con BACK 3.12.0
 **Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `89ad681`…`c1e0e26` y siguientes de esta entrada ·
-**CI:** PCB run 41048486880 (`c1e0e26`): **puerta superada**; firmware V4 4.0.0-dev2 run 41044961345 (`8e38b61`, éxito,
+**CI:** PCB run 41048486880 (`c1e0e26`) y 41050496945 (`6e5b54d`, informe con las existencias del TVS: 496 730 uds.): **puerta superada**; firmware V4 4.0.0-dev2 run 41044961345 (`8e38b61`, éxito,
 resultado guardado por el CI en `e151fcc`); BACK 3.12.0 run 41044381974 (`2750d3c`): éxito; existencias run 41042078297
 **Qué cambia:** petición del usuario: quitar todo el Qi y alimentar la espalda por 3 contactos (sistema pogo).
 - **Contactos:** 3 en el fondo de la cápsula, tornillo M2 avellanado inox + junta tórica 2 × 1 + tuerca M2.

@@ -29,7 +29,7 @@ junta tórica): **SYS** y **BAT** en la cola, donde estaba el reed, y **GND** ap
 | Carga | Qi (base inalámbrica) | **contactos BAT–GND** en la base de carga (REV B) · USB-C en el taller | |
 | microSD | no | **sí** (SDMMC 4 bits) | |
 
-**PCB REV B:** ruteada al 100 %; KiCad 9 en el CI (run 41048486880, `c1e0e26`): DRC 0, ERC 0, 0 conexiones incompletas,
+**PCB REV B:** ruteada al 100 %; KiCad 9 en el CI (run 41048486880, `c1e0e26`; repetida en 41050496945, `6e5b54d`, con las existencias del TVS): DRC 0, ERC 0, 0 conexiones incompletas,
 puerta de fabricación superada → `PCB/out/FINAL/` (61 piezas montadas). Su STEP, montado en el CAD a Z 2,5, no interfiere
 con ninguna pieza ni con los tornillos de contacto (`CAD/VALIDACION/verificacion_pcb_step_v4.json`).
 **PCB REV A** (congelada): puerta superada en el CI (run 40971520610, `3f81b45`) → `PCB_REV_A_QI/out/FINAL/`.
