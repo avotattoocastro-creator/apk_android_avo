@@ -397,7 +397,7 @@ def mount():
     p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, POGO["m_h"] + 2, z0=-POGO["m_h"] - 1)
               .translate((0, py, 0)))
     p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
-                    POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.01, z0=zb - 0.01).translate((0, py, 0)))
+                    POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.11, z0=zb - 0.01).translate((0, py, 0)))
     for sx in (-1, 1):
         p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.3, -1.0 - (zb - 1)))     # piloto M1,6 hasta 1 mm de la cara
     y1 = -(_mount_geom()[9] / 2 + 1)                                    # canal del cable hasta el borde −Y, por debajo
