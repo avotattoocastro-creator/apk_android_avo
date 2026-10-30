@@ -1,24 +1,17 @@
 ** Drc report for AVO_BACK_V4_PCB.kicad_pcb **
-** Created on 2026-10-30T11:05:09+0000 **
+** Created on 2026-10-30T11:30:32+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 8 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2085 mm)
-    Rule: board setup constraints edge; error
-    @(65.7000 mm, 84.7250 mm): Segment on Edge.Cuts
-    @(66.2085 mm, 103.1722 mm): Via [VSYS] on F.Cu - B.Cu
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1998 mm)
-    Rule: board setup constraints edge; error
-    @(65.7000 mm, 84.7250 mm): Segment on Edge.Cuts
-    @(66.0498 mm, 103.0135 mm): Track [VSYS] on B.Cu, length 13.2907 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1998 mm)
-    Rule: board setup constraints edge; error
-    @(65.7000 mm, 84.7250 mm): Segment on Edge.Cuts
-    @(66.2085 mm, 103.1722 mm): Track [VSYS] on B.Cu, length 0.2244 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1998 mm)
-    Rule: board setup constraints edge; error
-    @(65.7000 mm, 84.7250 mm): Segment on Edge.Cuts
-    @(66.0498 mm, 89.7228 mm): Track [VSYS] on B.Cu, length 1.3226 mm
+** Found 7 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(85.7750 mm, 95.2750 mm): Track [CHG_ILIM] on F.Cu, length 0.1414 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(88.5750 mm, 95.1750 mm): Track [CHG_ILIM] on F.Cu, length 0.1414 mm
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(80.0750 mm, 114.9750 mm): Track [SD_CLK] on F.Cu, length 0.1414 mm
 [silk_edge_clearance]: Silkscreen clipped by board edge
     Rule: board setup constraints silk; warning
     @(68.9830 mm, 123.7000 mm): Segment on Edge.Cuts
@@ -34,43 +27,7 @@
     Local override; warning
     @(88.0000 mm, 109.0000 mm): PCB text 'AVO BACK V4 · REV B · ESP32-S3 · 2026-10-30' on B.Silkscreen
 
-** Found 9 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.0375 mm, 100.7500 mm): Track [VBAT] on F.Cu, length 0.5000 mm
-    @(89.5000 mm, 100.8491 mm): Track [VBAT] on In2.Cu, length 0.4936 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(90.3200 mm, 97.7500 mm): Track [VBUS] on F.Cu, length 0.1346 mm
-    @(90.2500 mm, 99.0375 mm): Pad 13 [VBUS] of U2 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(92.6163 mm, 93.6014 mm): Track [VBUS] on In2.Cu, length 9.9408 mm
-    @(102.9550 mm, 97.5500 mm): Pad B4 [VBUS] of J1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(102.9550 mm, 97.5500 mm): Pad B4 [VBUS] of J1 on F.Cu
-    @(102.9550 mm, 102.4500 mm): Track [VBUS] on F.Cu, length 1.0267 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(91.8257 mm, 103.0013 mm): Track [VSYS] on F.Cu, length 1.1920 mm
-    @(90.9625 mm, 100.2500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(87.9100 mm, 94.5500 mm): Pad 2 [LED_K] of R15 on F.Cu
-    @(96.7925 mm, 83.4500 mm): Pad 1 [LED_K] of D1 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(80.2000 mm, 103.6300 mm): Pad 2 [SD_CLK] of R46 on F.Cu
-    @(80.8450 mm, 115.4750 mm): Pad 5 [SD_CLK] of J3 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(87.9000 mm, 93.0000 mm): Pad 23 [USB_DM] of U4 on F.Cu
-    @(99.9300 mm, 95.8400 mm): Pad 2 [USB_DM] of R19 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.7500 mm, 93.0000 mm): Pad 24 [USB_DP] of U4 on F.Cu
-    @(100.4400 mm, 94.6800 mm): Pad 2 [USB_DP] of R18 on F.Cu
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 
