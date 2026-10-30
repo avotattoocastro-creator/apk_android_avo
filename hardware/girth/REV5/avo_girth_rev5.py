@@ -264,7 +264,7 @@ def tray():
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
-    xa = -11.0                                      # REV 5.9: canal inferior desde el paso −X del pogo
+    xa = 3.0                                        # REV 5.9: canal inferior desde el paso único del pogo
     yb0, yb1 = BY0 - 0.15 - 1.0 - 0.1 - w, BY0 - 0.15 - 1.0 - 0.1   # canal inferior, bajo el tope −Y del BNO
     xw = 12.0                                       # bajada a la ventana del C6
     t = t.cut(box((xa + xw + w / 2) / 2, (yb0 + yb1) / 2, z, xw + w / 2 - xa, w, hc))
@@ -276,9 +276,9 @@ def tray():
     t = t.cut(box((xg0 + BH[1]) / 2, (BH[2] + BH[3]) / 2, TRAY_Z0 - 1, BH[1] - xg0, BH[3] - BH[2], 4))
     t = t.cut(box(xg0 + 1.0, (BH[2] + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, 2.0, C6_Y0 + 1.0 - BH[2], 4))
     rx, ry = REED["center"]
-    for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):                     # patas del reed → canal inferior
-        t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 4))
-        t = t.cut(box(x, (ry + 1.7 + yb0 + 0.5) / 2, z, 2.2, yb0 + 0.5 - ry - 1.7, hc))
+    # REV 5.9 (petición del usuario): un solo paso para los 3 hilos del pogo, en +X, que entra en el canal inferior
+    t = t.cut(box((xa + 12.5) / 2, ry + 0.2, TRAY_Z0 - 1, 12.5 - xa, 3, 4))
+    t = t.cut(box((xa + 12.5) / 2, (ry + 1.7 + yb0 + 0.5) / 2, z, 12.5 - xa, yb0 + 0.5 - ry - 1.7, hc))
     t = t.cut(box(BX1 - 1.3, (yb1 + BNO_PINS_Y[8] + 0.9) / 2, z, 2.2, BNO_PINS_Y[8] + 0.9 - yb1, hc))  # GND/VCC del BNO
     # BNO085 hundido: su cara superior queda a ras de la del C6 (los pines de los dos, al mismo nivel por arriba).
     # Alojamiento a 0,15 por lado, unido al del C6; apoya en un reborde de 1 mm y debajo queda ventana (soldaduras).
