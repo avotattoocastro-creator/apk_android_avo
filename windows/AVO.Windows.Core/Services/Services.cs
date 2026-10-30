@@ -65,7 +65,7 @@ public sealed class AppSettings
     public string? TidePortId { get; set; }
     public bool OnlineEnvironment { get; set; } = true;
     public string ServerUrl { get; set; } = "https://live.avoperformance.org";
-    public double JerkDensity { get; set; } = 4.0;
+    public double JerkDensity { get; set; } = 1.0;
 
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true, Converters = { new JsonStringEnumConverter() } };
 

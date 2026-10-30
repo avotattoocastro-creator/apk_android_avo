@@ -204,7 +204,7 @@ public sealed class SessionTimeline
 /// </summary>
 public static class SpeedSmoother
 {
-    public sealed record Parameters(double JerkDensity = 4.0, double MinSpeedSigma = 0.05, double FallbackSpeedSigma = 0.15,
+    public sealed record Parameters(double JerkDensity = 1.0, double MinSpeedSigma = 0.05, double FallbackSpeedSigma = 0.15,
         double InitialAccelSigma = 2.0)
     {
         public string Describe() => $"Kalman v-a + suavizado RTS · densidad de sacudida {JerkDensity:0.##} m²/s⁵ · σv mín. {MinSpeedSigma:0.###} m/s · σv sin sAcc {FallbackSpeedSigma:0.###} m/s";

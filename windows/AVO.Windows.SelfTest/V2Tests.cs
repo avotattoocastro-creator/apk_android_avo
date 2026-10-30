@@ -77,8 +77,8 @@ public static class V2Tests
         var tl = SessionTimeline.Build(s);
         A(tl.Count == s.Track.Count && Math.Abs(tl.DurationS - (s.Track.Count - 1) / 8.0) < 1e-9, "Línea temporal: épocas y duración");
         var mid = Enumerable.Range(16, tl.Count - 32).ToArray();
-        double accErr = mid.Average(i => Math.Abs(tl.AccelLong[i] - 0.5));
-        A(accErr < 0.12, $"Kalman+RTS: aceleración media sin sesgo (error medio {accErr:0.000} m/s²)");
+        double accErr = mid.Average(i => Math.Abs(tl.AccelLong[i] - 0.5)), accBias = mid.Average(i => tl.AccelLong[i] - 0.5);
+        A(Math.Abs(accBias) < 0.03 && accErr < 0.12, $"Kalman+RTS: aceleración sin sesgo (sesgo {accBias:+0.000;-0.000}, error medio {accErr:0.000} m/s²)");
         double rmsRaw = Math.Sqrt(mid.Average(i => Math.Pow(tl.SpeedReported[i] - (2 + 0.5 * tl.T[i]), 2)));
         double rmsF = Math.Sqrt(mid.Average(i => Math.Pow(tl.SpeedFiltered[i] - (2 + 0.5 * tl.T[i]), 2)));
         A(rmsF < rmsRaw, $"Kalman+RTS reduce el ruido ({rmsRaw:0.000} → {rmsF:0.000} m/s) y conserva la señal original");
