@@ -94,7 +94,7 @@ class WatchSyncManager(
                 for (m in recent) {
                     if (db.marine().byId(m.sessionId) != null) continue
                     runCatching {
-                        val snapshot = org.avoperformance.horse.ui.screens.marineSnapshotForTraining(m.sessionId, m.startRtcMs)
+                        val snapshot = org.avoperformance.horse.ui.screens.marineSnapshotForTraining(org.avoperformance.horse.tide.TideRepository(ctx), settings, m.sessionId, m.startRtcMs)
                         db.marine().upsert(snapshot)
                     }.onFailure { logEventMarine(m.sessionId, it.message) }
                 }

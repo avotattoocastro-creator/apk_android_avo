@@ -25,6 +25,8 @@ data class HorseEntity(
     val birthYear: Int? = null,
     val notes: String = "",
     val active: Boolean = true,
+    /** Local file (app storage) with the horse photo, or null. */
+    val photoPath: String? = null,
 )
 
 @Entity(tableName = "riders", indices = [Index(value = ["code"], unique = true)])
@@ -159,7 +161,7 @@ interface LogDao {
     @Query("DELETE FROM log WHERE id < (SELECT MAX(id) FROM log) - 5000") suspend fun trim()
 }
 
-@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 3, exportSchema = true)
+@Database(entities = [HorseEntity::class, RiderEntity::class, TrainingEntity::class, FenceEntity::class, LogEntity::class, TrainingMarineEntity::class], version = 4, exportSchema = true)
 abstract class AvoDatabase : RoomDatabase() {
     abstract fun horses(): HorseDao
     abstract fun riders(): RiderDao
@@ -178,6 +180,10 @@ abstract class AvoDatabase : RoomDatabase() {
                 override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
                     db.execSQL("ALTER TABLE training_marine ADD COLUMN tideCoefficient INTEGER")
                     db.execSQL("ALTER TABLE training_marine ADD COLUMN coefficientSource TEXT")
+                }
+            }, object : androidx.room.migration.Migration(3, 4) {
+                override fun migrate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    db.execSQL("ALTER TABLE horses ADD COLUMN photoPath TEXT")
                 }
             }).build()
     }

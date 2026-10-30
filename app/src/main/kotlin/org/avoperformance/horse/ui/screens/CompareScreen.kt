@@ -29,7 +29,6 @@ fun CompareScreen(c: AppContainer, firstId: String, secondId: String) {
         item { AvoCard("Comparativa · ${first?.horseCode}") {
             KV("A", Fmt.date(first?.startRtcMs))
             KV("B", Fmt.date(second?.startRtcMs))
-            Note("La comparación usa únicamente datos GNSS registrados; condiciones, distancia y terreno pueden ser distintos.")
         } }
         if (a != null && b != null) {
             val left = a!!; val right = b!!
@@ -41,13 +40,11 @@ fun CompareScreen(c: AppContainer, firstId: String, secondId: String) {
             } }
             item { AvoCard("Regularidad de velocidad") {
                 CompareMetric("Variación relativa", speedVariation(left), speedVariation(right), "%")
-                Note("Menor variación significa mayor uniformidad en velocidad, no necesariamente mejor entrenamiento.")
             } }
             item { AvoCard("Precisión RTK") {
                 CompareMetric("RTK FIX", left.fixEpochs.toDouble() / left.gnssUsable.coerceAtLeast(1)*100, right.fixEpochs.toDouble() / right.gnssUsable.coerceAtLeast(1)*100, "%")
                 KV("IMU A", if (left.imuAvailable) "${left.imuSamples} muestras" else "Sin datos")
                 KV("IMU B", if (right.imuAvailable) "${right.imuSamples} muestras" else "Sin datos")
-                Note("El análisis biomecánico por cada una de las tres IMU requiere decodificación y validación específica.")
             } }
         } else item { Note("Analizando los dos ficheros locales… Necesitas descargar y verificar ambas sesiones.") }
     }

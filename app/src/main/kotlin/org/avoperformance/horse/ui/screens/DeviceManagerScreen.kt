@@ -1,80 +1,21 @@
 package org.avoperformance.horse.ui.screens
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedButton
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
-import androidx.compose.material3.Checkbox
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import org.avoperformance.horse.core.ble.ChestOtaProtocol
-import java.security.MessageDigest
-import android.provider.OpenableColumns
-import android.net.Uri
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.avoperformance.horse.AppContainer
 import org.avoperformance.horse.ui.components.AvoCard
 import org.avoperformance.horse.ui.components.KV
-import org.avoperformance.horse.ui.components.Note
 import org.avoperformance.horse.ui.theme.AvoColors
 
-/** Capability-driven, read-only device inventory. OTA is deliberately not enabled until
- *  firmware supports authenticated images, rollback, and chunked transport end to end. */
+/** Read-only device inventory. Firmware updates are done with the AVO USB updater app. */
 @Composable
 fun DeviceManagerScreen(c: AppContainer) {
-    val scope = rememberCoroutineScope()
-    val ota by c.chestOta.state.collectAsStateWithLifecycle()
-    var selectedImage by remember { mutableStateOf<ByteArray?>(null) }
-    var userAccepts by remember { mutableStateOf(false) }
-    var inspectedName by remember { mutableStateOf("Ningún firmware seleccionado") }
-    var inspection by remember { mutableStateOf<ChestOtaProtocol.Inspection?>(null) }
-    var error by remember { mutableStateOf<String?>(null) }
-    fun displayName(uri: Uri): String? = runCatching {
-        c.app.contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
-            val column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            if (column >= 0 && cursor.moveToFirst()) cursor.getString(column) else null
-        }
-    }.getOrNull()
-    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri != null) {
-            runCatching {
-                val bytes = c.app.contentResolver.openInputStream(uri)?.use { input ->
-                    val out = java.io.ByteArrayOutputStream()
-                    val buf = ByteArray(8192)
-                    while (true) {
-                        val n = input.read(buf)
-                        if (n < 0) break
-                        if (out.size() + n > ChestOtaProtocol.MAX_FILE_SIZE) error("Archivo demasiado grande")
-                        out.write(buf, 0, n)
-                    }
-                    out.toByteArray()
-                } ?: error("No se puede leer el archivo")
-                val resolvedName = displayName(uri) ?: "firmware seleccionado"
-                inspectedName = resolvedName
-                if (resolvedName != "firmware seleccionado") {
-                    require(resolvedName.endsWith(".bin", ignoreCase = true)) { "El archivo elegido no es .bin: $resolvedName" }
-                }
-                val result = ChestOtaProtocol.inspect(bytes)
-                selectedImage = bytes
-                userAccepts = false
-                inspection = result
-                error = null
-            }.onFailure { error = it.message; inspection = null; selectedImage = null }
-        }
-    }
     val link by c.watch.state.collectAsStateWithLifecycle()
     val info by c.watch.info.collectAsStateWithLifecycle()
     val sample by c.watch.telemetry.collectAsStateWithLifecycle()
@@ -82,60 +23,27 @@ fun DeviceManagerScreen(c: AppContainer) {
     val age = sample?.let { (now - it.receivedMs).coerceAtLeast(0L) }
     val fresh = age != null && age <= 5000L
     val t = sample?.t?.takeIf { fresh }
-    LazyColumn(Modifier.fillMaxSize()) {
+    fun ok(b: Boolean?) = when (b) { true -> AvoColors.Ok; false -> AvoColors.Bad; null -> AvoColors.Unknown }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 8.dp)) {
         item {
-            AvoCard("Dispositivos · estado real") {
-                KV("Enlace Android ↔ pecho", link.texto)
-                KV("Identificador BLE", c.watch.authorizedAddress ?: "No vinculado")
-                KV("Firmware pecho", info?.firmware ?: "No comunicado")
-                KV("Última telemetría", age?.let { "hace ${it} ms" } ?: "Sin datos")
-                KV("Pecho ↔ espalda", t?.let { if (it.backLink) "Conectado" else "Sin enlace" } ?: "No verificado")
-                KV("Espalda ↔ cincha", t?.let { if (it.girth) "Conectada" else "Sin datos" } ?: "No verificado")
-                KV("Firmware espalda", "No comunicado")
-                KV("Firmware cincha", "No comunicado")
-                Note("El estado de espalda y cincha procede de la telemetría del pecho, no de conexiones directas al móvil.")
+            AvoCard("Pecho") {
+                KV("Enlace", link.texto)
+                KV("Identificador", info?.deviceId)
+                KV("Dirección BLE", c.watch.authorizedAddress ?: "No vinculado")
+                KV("Firmware", info?.firmware)
+                KV("Última telemetría", age?.let { "hace ${it} ms" }, if (fresh) AvoColors.Ok else AvoColors.Warn)
             }
         }
         item {
-            AvoCard("Actualización de firmware · PECHO") {
-                KV("Dispositivo", info?.deviceId ?: "Sin conectar")
-                KV("Versión actual", info?.firmware ?: "Sin comunicar")
-                KV("OTA anunciada", if (info?.supportsOta == true) "Sí" else "No verificada")
-                KV("Archivo", inspectedName)
-                KV("Tamaño", inspection?.let { "${it.size} bytes" } ?: "—")
-                KV("Validación de estructura", inspection?.reason ?: "Pendiente de selección")
-                KV("SHA-256", inspection?.sha256?.joinToString("") { "%02x".format(it.toInt() and 255) } ?: "—")
-                OutlinedButton(onClick = { picker.launch(arrayOf("application/octet-stream", "*/*")) }) { Text("Seleccionar firmware .bin") }
-                error?.let { Note("Error al leer archivo: $it") }
-                KV("Imagen autorizada", if (selectedImage?.let { c.chestOta.isApproved(it) } == true) "AVO CHEST compatible (sin firma)" else "No compatible")
-                KV("Estado OTA", ota.phase)
-                if (ota.total > 0) KV("Progreso confirmado", "${ota.confirmed} / ${ota.total} bytes (${(ota.confirmed.toLong() * 100 / ota.total)} %)")
-                ota.error?.let { Note("OTA: $it") }
-                ota.versionBefore?.let { KV("Versión antes de OTA", it) }
-                ota.versionAfter?.let { KV("Versión observada tras OTA", it) }
-                if (ota.events.isNotEmpty()) {
-                    Text("Diagnóstico OTA (confirmaciones y reinicio)")
-                    ota.events.forEach { Note(it) }
-                }
-                Text("OTA experimental: admite imágenes AVO CHEST compatibles de distintas versiones. La estructura y marca se comprueban, pero NO existe autenticación mediante firma digital. El SHA-256 solo verifica integridad, no procedencia. Riesgo de instalar una versión incorrecta, desconexión o fallo; no apagar el reloj.", color = AvoColors.Warn)
-                Row(horizontalArrangement = Arrangement.Start) {
-                    Checkbox(checked = userAccepts, onCheckedChange = { userAccepts = it })
-                    Text("Acepto el riesgo y confirmo que no hay entrenamientos activos")
-                }
-                Button(enabled = selectedImage?.let { c.chestOta.isApproved(it) } == true && userAccepts && c.watch.isReady && ota.phase !in listOf("Preparando", "Transfiriendo", "Verificando en el pecho"), onClick = {
-                    val firmware = selectedImage ?: return@Button
-                    scope.launch { runCatching { c.chestOta.transfer(firmware) }.onFailure { error = it.message } }
-                }) { Text("Actualizar pecho por BLE · experimental") }
-                OutlinedButton(onClick = { c.chestOta.cancel() }) { Text("Solicitar cancelación") }
-                KV("OTA espalda", "No compatible todavía")
-                Note("No borra ni formatea la microSD. La versión posterior y la conservación de sesiones requieren comprobación física. Detén NTRIP antes de actualizar.")
+            AvoCard("Espalda") {
+                KV("Enlace con el pecho", t?.let { if (it.backLink) "Conectado" else "Sin enlace" }, ok(t?.backLink))
+                KV("Firmware", "No comunicado")
             }
         }
         item {
-            AvoCard("Arquitectura") {
-                KV("Actual", "Android ↔ pecho BLE; pecho ↔ espalda ESP-NOW; espalda ↔ cincha ESP-NOW")
-                KV("Futura V4", "Módulo único con capacidades anunciadas por firmware")
-                Note("La futura arquitectura no debe habilitar funciones hasta que los dispositivos comuniquen sus capacidades reales.")
+            AvoCard("Cincha") {
+                KV("Enlace con la espalda", t?.let { if (it.girth) "Conectada" else "Sin datos" }, ok(t?.girth))
+                KV("Firmware", "No comunicado")
             }
         }
     }

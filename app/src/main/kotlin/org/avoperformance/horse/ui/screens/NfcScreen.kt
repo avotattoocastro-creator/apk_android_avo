@@ -141,10 +141,9 @@ fun NfcScreen(c: AppContainer) {
                     OutlinedButton(onClick = { code = id }) { Text(if (code == id) "✓ $name" else name) }
                 }
                 Note("Seleccionado: ${code.ifBlank { "ninguno" }}. Acerca la tarjeta para grabar y verificar.")
-            } else Note("Mantén esta pantalla abierta y acerca una tarjeta AVO. Se seleccionará su ficha y se enviará al reloj si está conectado.")
+            } else Note("Acerca una tarjeta AVO")
             Text(message)
             if (pendingSync) LinearProgressIndicator(Modifier.fillMaxWidth())
-            Note("La lectura de identidad funciona en cualquier pantalla de AVO mientras la app esté abierta. Esta pantalla se utiliza para grabar tarjetas y ver los detalles. Android no garantiza lectura con el móvil bloqueado. No se cambia identidad durante una sesión activa.")
         } }
     }
 }

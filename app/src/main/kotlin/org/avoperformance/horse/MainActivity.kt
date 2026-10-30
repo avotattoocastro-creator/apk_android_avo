@@ -17,7 +17,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.List
@@ -229,16 +239,15 @@ private data class Tab(val route: String, val label: String, val icon: ImageVect
 
 private val tabs = listOf(
     Tab("inicio", "Inicio", Icons.Filled.Home),
-    Tab("entrenamiento", "Entrenamiento", Icons.Filled.PlayArrow),
+    Tab("entrenamiento", "Entrenar", Icons.Filled.PlayArrow),
     Tab("historial", "Historial", Icons.AutoMirrored.Filled.List),
     Tab("mareas", "Mareas", Icons.Filled.Waves),
-    Tab("caballos", "Caballos", Icons.Filled.Favorite),
-    Tab("configuracion", "Configuración", Icons.Filled.Settings),
+    Tab("caballos", "Cuadra", Icons.Filled.Favorite),
 )
 
 private val titles = mapOf(
-    "mareas" to "Mareas · Regatón", "nfc" to "NFC · Caballos y jinetes", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
-    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos y OTA", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "detalle/{id}" to "Entrenamiento", "comparar/{a}/{b}" to "Comparativa",
+    "configuracion" to "Ajustes", "nfc" to "NFC", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
+    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -253,21 +262,33 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
         containerColor = AvoColors.Bg,
         topBar = {
             TopAppBar(
-                title = { Text(tabs.firstOrNull { it.route == route }?.label ?: titles[route] ?: "AVO Performance Horse") },
+                title = {
+                    if (isTab) Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("AVO", color = AvoColors.Red, fontWeight = FontWeight.Black, fontSize = 22.sp, letterSpacing = 2.sp)
+                        Spacer(Modifier.width(10.dp))
+                        Text(tabs.first { it.route == route }.label.uppercase(), color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp, letterSpacing = 1.5.sp)
+                    } else Text((titles[route] ?: "AVO").uppercase(), fontWeight = FontWeight.Bold, fontSize = 17.sp, letterSpacing = 1.2.sp)
+                },
                 navigationIcon = { if (!isTab && route != null) IconButton(onClick = { nav.popBackStack() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Atrás") } },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = AvoColors.Bg, titleContentColor = AvoColors.Gold),
+                actions = { if (isTab) IconButton(onClick = { nav.navigate("configuracion") { launchSingleTop = true } }) { Icon(Icons.Filled.Settings, "Ajustes", tint = AvoColors.Silver) } },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = AvoColors.Bg, titleContentColor = AvoColors.Text, navigationIconContentColor = AvoColors.Text),
             )
         },
         bottomBar = {
-            if (isTab) NavigationBar(containerColor = AvoColors.Surface) {
-                tabs.forEach { t ->
-                    NavigationBarItem(
-                        selected = route == t.route,
-                        onClick = { nav.navigate(t.route) { popUpTo("inicio") { saveState = true }; launchSingleTop = true; restoreState = true } },
-                        icon = { Icon(t.icon, t.label) },
-                        label = { Text(t.label, maxLines = 1) },
-                        colors = NavigationBarItemDefaults.colors(selectedIconColor = AvoColors.Gold, selectedTextColor = AvoColors.Gold, indicatorColor = AvoColors.Surface2),
-                    )
+            if (isTab) Column {
+                HorizontalDivider(color = AvoColors.Line, thickness = 0.5.dp)
+                NavigationBar(containerColor = AvoColors.Bg, tonalElevation = 0.dp) {
+                    tabs.forEach { t ->
+                        NavigationBarItem(
+                            selected = route == t.route,
+                            onClick = { nav.navigate(t.route) { popUpTo("inicio") { saveState = true }; launchSingleTop = true; restoreState = true } },
+                            icon = { Icon(t.icon, t.label) },
+                            label = { Text(t.label, maxLines = 1, fontSize = 11.sp) },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Color.White, selectedTextColor = AvoColors.Red, indicatorColor = AvoColors.Red,
+                                unselectedIconColor = AvoColors.TextDim, unselectedTextColor = AvoColors.TextDim),
+                        )
+                    }
                 }
             }
         },
@@ -281,7 +302,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
             composable("bluetooth") { BluetoothScreen(c, requestPerms) }
             composable("ntrip") { NtripScreen(c) }
             composable("nfc") { NfcScreen(c) }
-            composable("mareas") { TidesScreen() }
+            composable("mareas") { TidesScreen(c) }
             composable("geocercas") { GeofencesScreen(c) }
             composable("sincronizacion") { SyncScreen(c) }
             composable("diagnosticos") { DiagnosticsScreen(c) }

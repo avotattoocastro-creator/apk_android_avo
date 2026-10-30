@@ -1,4 +1,5 @@
 name: Build AVO Android APK
+# V2.0: rediseño completo, mareas IHM y análisis de entrenamientos (2026-10-23).
 
 on:
   workflow_dispatch:
@@ -168,7 +169,11 @@ jobs:
         shell: bash
         run: |
           cd "$AVO_SOURCE_DIR"
-          ./gradlew --no-daemon :app:assembleDebug
+          set -o pipefail
+          ./gradlew --no-daemon :app:assembleDebug 2>&1 | tee "$RUNNER_TEMP/build.log" || {
+            grep -E '^e: ' "$RUNNER_TEMP/build.log" | head -40 | sed -E 's#^e: (file://)?([^:]+):([0-9]+):([0-9]+) (.*)#::error file=\2,line=\3,col=\4::\5#' || true
+            exit 1
+          }
 
       - name: Prepare downloadable APK and SHA256
         shell: bash
@@ -177,8 +182,7 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          VERSION="V1_8_Integrada"
-          if [ "$GITHUB_REF_NAME" = "feature/android-v1-9-nfc-segments" ]; then VERSION="V1_9_Pruebas"; fi
+          VERSION="V2_0"
           OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
           cd "$GITHUB_WORKSPACE/out"
@@ -188,7 +192,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-${{ github.ref_name == 'feature/android-v1-9-nfc-segments' && 'V1-9-Pruebas' || 'V1-8-Integrada' }}-APK
+          name: AVO-Performance-Horse-V2-0-APK
           path: out/
           if-no-files-found: error
           retention-days: 30

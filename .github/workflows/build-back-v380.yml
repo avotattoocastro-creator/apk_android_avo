@@ -1,0 +1,68 @@
+name: Build AVO BACK V3.8.0 (Heltec + ZED-F9P, máxima precisión RTK)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/back/V3_8_0/**'
+      - '.github/workflows/build-back-v380.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  back:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: firmware/back/V3_8_0
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Host tests (ESP-NOW link, pairing, simulated ZED-F9P, precision profile)
+        run: |
+          g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o back_test
+          ./back_test
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Install ESP32 core 3.3.12 (same as the installed back firmware, ESP-IDF 5.5.5)
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+      - name: Build firmware
+        run: ./build_back.sh "$GITHUB_WORKSPACE/out"
+
+      - name: Package
+        run: |
+          cd "$GITHUB_WORKSPACE/out"
+          ls -la
+          BIN=$(ls AVO_BACK_V3_8_0.ino.bin)
+          cp "$BIN" AVO_BACK_V3_8_0_firmware.bin
+          [ -f AVO_BACK_V3_8_0.ino.merged.bin ] && cp AVO_BACK_V3_8_0.ino.merged.bin AVO_BACK_V3_8_0_COMPLETO_0x0.bin || true
+          sha256sum AVO_BACK_V3_8_0_*.bin > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+          python3 - <<'PY'
+          import struct
+          b = open("AVO_BACK_V3_8_0_firmware.bin", "rb").read()
+          assert b[0] == 0xE9 and struct.unpack("<H", b[12:14])[0] == 9, "not an ESP32-S3 app image"
+          assert struct.unpack("<I", b[0x20:0x24])[0] == 0xABCD5432, "no esp_app_desc_t"
+          assert len(b) < 3264 * 1024, "does not fit app0/app1 (3264 KB)"
+          missing = [s for s in (b"3.8.0\x00AVO-BACK", b"AJUSTE_PRECISION", b"PRECISION: perfil") if s not in b]
+          if missing: print(f"::error title=Imagen::faltan {missing}"); raise SystemExit(1)
+          print(f"::notice title=AVO BACK 3.8.0::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0), esp_app_desc OK, version 3.8.0 presente")
+          PY
+          echo "::notice title=Memoria::$(grep -E 'Sketch uses|Global variables' build.log | tr '\n' ' ')"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-BACK-V3-8-0-HELTEC
+          path: |
+            out/AVO_BACK_V3_8_0_*.bin
+            out/SHA256SUMS.txt
+            out/build.log
+          if-no-files-found: error
+          retention-days: 60

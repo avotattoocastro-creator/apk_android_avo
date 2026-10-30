@@ -1,6 +1,33 @@
 package org.avoperformance.horse.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.File
+import org.avoperformance.horse.ui.components.Fmt
+import org.avoperformance.horse.ui.components.MetricTile
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +65,31 @@ import org.avoperformance.horse.ui.components.Note
 import org.avoperformance.horse.ui.components.StatusPill
 import org.avoperformance.horse.ui.theme.AvoColors
 
+/** Copies the picked image into app storage, scaled to ≤ 720 px so it never fills the RAM. */
+suspend fun saveHorsePhoto(ctx: Context, horseId: Long, uri: Uri): String = withContext(Dispatchers.IO) {
+    val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+    ctx.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
+    var sample = 1
+    while (maxOf(bounds.outWidth, bounds.outHeight) / (sample * 2) >= 720) sample *= 2
+    val bmp = ctx.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, BitmapFactory.Options().apply { inSampleSize = sample }) }
+        ?: error("No se pudo leer la imagen")
+    val dir = File(ctx.filesDir, "horses").apply { mkdirs() }
+    val file = File(dir, "horse_${horseId}_${System.currentTimeMillis()}.jpg")
+    file.outputStream().use { bmp.compress(Bitmap.CompressFormat.JPEG, 88, it) }
+    dir.listFiles()?.filter { it.name.startsWith("horse_${horseId}_") && it != file }?.forEach { it.delete() }
+    file.absolutePath
+}
+
+@Composable
+fun HorsePhoto(path: String?, modifier: Modifier = Modifier) {
+    val img = remember(path) { path?.let { runCatching { BitmapFactory.decodeFile(it)?.asImageBitmap() }.getOrNull() } }
+    val shape = RoundedCornerShape(14.dp)
+    Box(modifier.clip(shape).background(AvoColors.Surface2).border(1.dp, AvoColors.RedDark, shape), contentAlignment = Alignment.Center) {
+        if (img != null) Image(img, "Foto del caballo", Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        else Text("🐎", fontSize = 30.sp)
+    }
+}
+
 /** Codes travel to the watch (max 23 bytes, written into each file header). */
 fun codeProblem(code: String): String? = when {
     code.isBlank() -> "El código es obligatorio"
@@ -53,7 +105,18 @@ fun HorsesScreen(c: AppContainer, go: (String) -> Unit) {
     var editing by remember { mutableStateOf<HorseEntity?>(null) }
     var deleting by remember { mutableStateOf<HorseEntity?>(null) }
     var selected by remember { mutableLongStateOf(c.settings.selectedHorseId) }
-    LazyColumn(Modifier.fillMaxSize()) {
+    val trainings by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
+    var photoFor by remember { mutableStateOf<HorseEntity?>(null) }
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        val h = photoFor ?: return@rememberLauncherForActivityResult
+        photoFor = null
+        if (uri != null) scope.launch {
+            runCatching { saveHorsePhoto(c.app, h.id, uri) }
+                .onSuccess { c.db.horses().update(h.copy(photoPath = it)) }
+                .onFailure { c.log.w("DB", "foto: ${it.message}") }
+        }
+    }
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 6.dp)) {
         item {
             Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = { editing = HorseEntity(code = "", name = "") }) { Text("Nuevo caballo") }
@@ -61,24 +124,32 @@ fun HorsesScreen(c: AppContainer, go: (String) -> Unit) {
             }
         }
         items(horses, key = { it.id }) { h ->
+            val mine = trainings.filter { it.horseCode == h.code }
             AvoCard(onClick = { selected = h.id; c.settings.selectedHorseId = h.id }) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    HorsePhoto(h.photoPath, Modifier.size(78.dp).clickable { photoFor = h; picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) })
+                    Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
-                        Text(h.name, color = AvoColors.Text, fontSize = 17.sp)
-                        Text(h.code, color = AvoColors.TextDim, fontSize = 13.sp)
+                        Text(h.name.uppercase(), color = AvoColors.Text, fontSize = 19.sp, fontWeight = FontWeight.Black)
+                        Text(listOf(h.code, h.breed, h.birthYear?.toString().orEmpty()).filter { it.isNotBlank() }.joinToString(" · "), color = AvoColors.TextDim, fontSize = 13.sp)
+                        if (selected == h.id) { Spacer(Modifier.height(4.dp)); StatusPill("Seleccionado", AvoColors.Red) }
                     }
-                    if (selected == h.id) StatusPill("Seleccionado", AvoColors.Gold)
                 }
-                if (h.breed.isNotBlank()) KV("Raza", h.breed)
-                h.birthYear?.let { KV("Año de nacimiento", "$it") }
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    MetricTile("Sesiones", mine.size.toString(), "", Modifier.weight(1f))
+                    MetricTile("Distancia", mine.sumOf { it.distanceM ?: 0.0 }.takeIf { it > 0 }?.let { Fmt.m(it / 1000.0, 1) }, "km", Modifier.weight(1f))
+                    MetricTile("V. máx", mine.mapNotNull { it.maxSpeedMs }.maxOrNull()?.let { Fmt.kmh(it) }, "km/h", Modifier.weight(1f), AvoColors.Red)
+                }
                 if (h.notes.isNotBlank()) Note(h.notes)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     TextButton(onClick = { editing = h }) { Text("Editar") }
+                    TextButton(onClick = { photoFor = h; picker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) }) { Text(if (h.photoPath == null) "Añadir foto" else "Cambiar foto") }
                     TextButton(onClick = { deleting = h }) { Text("Eliminar", color = AvoColors.Bad) }
                 }
             }
         }
-        if (horses.isEmpty()) item { Note("Añade tu primer caballo (por ejemplo, código HORSE_001).") }
+        if (horses.isEmpty()) item { Note("Sin caballos") }
     }
     editing?.let { h ->
         HorseDialog(h, onDismiss = { editing = null }) { n ->
@@ -147,7 +218,7 @@ fun RidersScreen(c: AppContainer) {
                 }
             }
         }
-        if (riders.isEmpty()) item { Note("Añade un jinete para asociarlo a los entrenamientos.") }
+        if (riders.isEmpty()) item { Note("Sin jinetes") }
     }
     editing?.let { r ->
         var code by remember(r) { mutableStateOf(r.code) }
