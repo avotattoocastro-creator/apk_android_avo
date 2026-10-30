@@ -24,7 +24,8 @@ internal sealed class TranscriptLink : IChestLink
     public void WriteLine(string line)
     {
         Sent.Add(line);
-        if (!_answers.TryGetValue(line, out var answer)) throw new InvalidOperationException("Orden fuera de la transcripción: " + line);
+        string key = line.StartsWith("AVO1 PROGRESS ", StringComparison.Ordinal) ? "AVO1 PROGRESS 2 1 2 50 0" : line;   // any PROGRESS: same answer
+        if (!_answers.TryGetValue(key, out var answer)) throw new InvalidOperationException("Orden fuera de la transcripción: " + line);
         foreach (var l in answer.Split('\n', StringSplitOptions.RemoveEmptyEntries)) _out.Enqueue(l);
     }
 
@@ -47,6 +48,7 @@ internal sealed class SimWatch : IChestLink
     public List<Training> Trainings { get; } = [];
     public List<string> Sent { get; } = [];
     public bool Recording { get; set; }
+    public List<string> Screen { get; } = [];          // PROGRESS received (what the watch screen shows)
     public int CorruptReadNumber { get; set; } = -1;   // that READ answer goes out with a bad CRC
     public int DropReadNumber { get; set; } = -1;      // that READ answer never arrives
     public int UnplugAfterReads { get; set; } = -1;    // the cable is pulled after this many READ answers
@@ -133,6 +135,10 @@ internal sealed class SimWatch : IChestLink
                 Say($"DATA {seg} {off} {len} {crc:x8} {Convert.ToBase64String(chunk)}");
                 return;
             }
+            case "PROGRESS":
+                Screen.Add(string.Join(' ', p.Skip(2)));
+                Say("OK PROGRESS");
+                return;
             default:
                 Say($"ERR {p[1]} cmd");
                 return;

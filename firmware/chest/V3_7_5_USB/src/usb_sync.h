@@ -20,12 +20,19 @@ void poll();            // reads the pending USB bytes and answers complete comm
 struct Stats { uint32_t commands, errors, bytes_sent, hellos; };
 void stats(Stats* out);
 
+// For the "CONECTADO AL PC" screen (read by the UI task).
+bool host_present();    // a USB host (PC) is on the cable: USB start-of-frame seen, or an AVO1 command recently
+struct PcStatus { uint8_t phase, pct; uint16_t index, count, new_count; };   // phase = dash::PcPhase
+void pc_status(PcStatus* out);
+
 // Test hook (host build only uses it): microSD root that holds the S... session folders.
 void set_root(const char* root);
 
 // Platform layer: implemented in usb_sync.cpp for the watch, and by the host harness in the tests.
 namespace port {
-int read_byte();                                // next byte from the PC, or -1 if there is none
+int read_byte();
+bool usb_host();                                // USB start-of-frame packets are arriving (a PC, not a charger)
+uint32_t ms();                                // next byte from the PC, or -1 if there is none
 void write(const char* data, size_t n);         // one call per complete line (keeps log lines out of it)
 bool recording();                               // a session is being written to the microSD
 void power(int* batt_pct, bool* vbus, bool* sd_mounted);

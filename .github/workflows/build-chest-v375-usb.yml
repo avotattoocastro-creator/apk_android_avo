@@ -59,6 +59,26 @@ jobs:
           python3 verify_source.py
           python3 verify_ota_interlock.py
           for t in tests/test_*.py; do python3 "$t"; done
+      - name: Preview of the "CONECTADO AL PC" screen (same C++ drawing code, simulated panel)
+        run: |
+          set -euo pipefail
+          D="$RUNNER_TEMP/avo-375usb"
+          mkdir -p ui_preview_pc
+          g++ -std=c++17 -O2 -Wall -Wextra -Werror -Wno-unused-parameter \
+            -I "$D/AVO_CHEST_V3_5_0/src" -I "$D/lib/avo_core/src" \
+            firmware/chest/V3_7_5_USB/host/pc_preview.cpp "$D/AVO_CHEST_V3_5_0/src/ui_fb.cpp" "$D/AVO_CHEST_V3_5_0/src/ui_dash.cpp" \
+            -o pc_preview
+          ./pc_preview ui_preview_pc
+          python3 -m pip install --quiet pillow
+          python3 -c "
+          from PIL import Image; import glob
+          for p in glob.glob('ui_preview_pc/*.ppm'): Image.open(p).save(p[:-4] + '.png')
+          "
+          rm ui_preview_pc/*.ppm
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-CHEST-V3-7-5-USB1-PANTALLA-PC-PREVIEW
+          path: ui_preview_pc/
       - uses: arduino/setup-arduino-cli@v2
       - name: Install ESP32 3.3.12
         run: |

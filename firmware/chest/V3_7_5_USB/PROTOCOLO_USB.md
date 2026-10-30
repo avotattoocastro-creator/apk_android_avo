@@ -3,7 +3,21 @@
 **Base:** 3.7.5-rc5 (la última con pruebas de campo). El parche también se aplica sin cambios sobre 3.7.6-rc1.
 **BIN marcado UNVERIFIED:** compilado en CI, no probado en el reloj. Instalar con AVO Update por USB.
 
-No cambia: formato RAW, grabación, BLE, ESP-NOW, NTRIP/RTCM, GNSS, OTA, Wi-Fi, pantalla ni particiones.
+No cambia: formato RAW, grabación, BLE, ESP-NOW, NTRIP/RTCM, GNSS, OTA, Wi-Fi ni particiones. En la pantalla solo se añade la de «CONECTADO AL PC» (ver abajo); con un cargador todo sigue igual.
+
+## Pantalla «CONECTADO AL PC»
+
+- **Con un PC en el cable**, la pantalla de carga se sustituye por «CONECTADO AL PC». El PC se detecta por las tramas USB de inicio de trama que envía cada milisegundo (`Serial.isPlugged()`), o por haber recibido órdenes AVO1 en los últimos 30 s.
+  - Debajo muestra el estado: «Abre AVO Windows», «Comparando entrenamientos», «Descargando 2 de 5» con barra y %, «Sincronizado · N entrenamientos nuevos» / «Todo está ya en el PC», «Descarga interrumpida» o «Grabando».
+  - Abajo, la batería real.
+- **Con un cargador o una batería externa** no hay tramas USB, así que se ve la **misma pantalla de carga de la 3.7.2, sin ningún cambio**.
+- **Mismas reglas que la pantalla de carga:**
+  - si se graba, se ven las siete tarjetas;
+  - un toque corto enseña las tarjetas 30 s;
+  - OTA y apagado tienen prioridad;
+  - mismo brillo (15 s al máximo y luego atenuada).
+- **Se mostraría también con otro equipo** que haga de anfitrión USB, como un móvil con AVO Update por OTG.
+- **Vista previa:** el artefacto de CI `AVO-CHEST-V3-7-5-USB1-PANTALLA-PC-PREVIEW` se genera con el mismo código de dibujo (`host/pc_preview.cpp`).
 
 ## Funcionamiento
 
@@ -30,6 +44,7 @@ PC (AVO Windows) ──cable USB-C──► puerto serie USB del reloj (USB-Seri
 | `AVO1 HELLO` | `#AVO1 HELLO {"api":1,"name":"AVO-CHEST","fw","device","recording","sd","battery_pct","vbus","raw_format","max_read":4096}`. Responde también durante una grabación. |
 | `AVO1 LIST` | una línea `#AVO1 T {"id","state","ready","segments","size","start_rtc_ms","active_ms","etag","sizes":[…]}` por sesión, y al final `#AVO1 END <n>` |
 | `AVO1 SHA <id>` | `#AVO1 SHA {"id","sha256","size","etag"}` |
+| `AVO1 PROGRESS <fase> <i> <n> <pct> <nuevos>` | `#AVO1 OK PROGRESS`. Solo para la pantalla del reloj. Fases: 1 comparando, 2 descargando i de n (pct %), 3 sincronizado (nuevos), 4 grabando, 5 interrumpida. Sin esta orden, el reloj muestra «Descargando» mientras recibe READ. |
 | `AVO1 READ <id> <seg> <offset> <len> <etag>` | `#AVO1 DATA <seg> <offset> <n> <crc32 hex> <base64>`, con n ≤ 4096. Se recorta al final del segmento. |
 
 **Errores:** `#AVO1 ERR <orden> <código>`.
@@ -90,5 +105,6 @@ Las líneas que no empiezan por `AVO1 ` se ignoran. Las de más de 159 caractere
   2. Conectar al PC con la app abierta: se detecta en ≤ 5 s y descarga los entrenamientos. Que el reloj **no se reinicie** al abrir el puerto.
   3. Desconectar a mitad y volver a conectar: se reanuda y el SHA-256 coincide.
   4. Segunda conexión: «todos ya en el PC», sin descargas.
-  5. Con el reloj conectado al PC, la espalda y el BLE del móvil siguen funcionando. Iniciar una grabación: la descarga se detiene.
-  6. Medir la velocidad real (estimación: 200–500 KB/s) y anotarla.
+  5. Pantalla: con el PC sale «CONECTADO AL PC» y el progreso. Con un cargador de pared sale la pantalla de carga de siempre. Al desconectar del PC vuelve la pantalla de antes.
+  6. Con el reloj conectado al PC, la espalda y el BLE del móvil siguen funcionando. Iniciar una grabación: la descarga se detiene.
+  7. Medir la velocidad real (estimación: 200–500 KB/s) y anotarla.

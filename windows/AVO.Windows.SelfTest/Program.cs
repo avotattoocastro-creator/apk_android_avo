@@ -247,6 +247,8 @@ void UsbTests()
     Assert(opened.SessionId == id1 && opened.Track.Count >= 2 && opened.Segments.Count == 2 && opened.Integrity.Contains("SHA-256", StringComparison.Ordinal),
         "USB: el paquete descargado se abre como cualquier .avo (2 segmentos, recorrido)");
     Assert(progressTexts.Any(t => t.StartsWith("Descargando 1 de 2", StringComparison.Ordinal)), "USB: progreso de la descarga");
+    Assert(sim.Screen.First() == "1 0 0 0 0" && sim.Screen.Contains("2 1 2 100 0") && sim.Screen.Contains("2 2 2 100 0") && sim.Screen.Last() == "3 0 0 100 2",
+        "USB: pantalla del reloj: comparando → descargando 1 y 2 de 2 → sincronizado (2 nuevos)");
 
     // 3. Already on the PC through the Android app (.avo with the same SHA-256): not downloaded again.
     var sim2 = new SimWatch();
@@ -278,7 +280,8 @@ void UsbTests()
     var sim5 = new SimWatch { Recording = true };
     sim5.Trainings.Add(big);
     var r8 = ChestSync.Run(new ChestUsbClient(sim5), new WatchLibrary(Path.Combine(dir, "reloj5")));
-    Assert(r8.Recording && sim5.Sent.Count == 1 && r8.Summary.Contains("grabando", StringComparison.Ordinal), "USB: con el reloj grabando no se descarga");
+    Assert(r8.Recording && !sim5.Sent.Any(x => x.StartsWith("AVO1 LIST", StringComparison.Ordinal) || x.StartsWith("AVO1 READ", StringComparison.Ordinal))
+        && sim5.Screen.SequenceEqual(["4 0 0 0 0"]) && r8.Summary.Contains("grabando", StringComparison.Ordinal), "USB: con el reloj grabando no se descarga (pantalla: grabando)");
 
     // 7. The training changes on the watch during the download, and a watch whose SHA-256 does not match.
     var sim6 = new SimWatch();
@@ -292,6 +295,8 @@ void UsbTests()
     string lib7 = Path.Combine(dir, "reloj7");
     var r10 = ChestSync.Run(new ChestUsbClient(sim7), new WatchLibrary(lib7));
     Assert(r10.Failed == 1 && r10.NewPackages.Count == 0 && !Directory.EnumerateFiles(lib7, "*.avo").Any(), "USB: SHA-256 distinto → no se guarda nada");
+    Assert(sim7.Screen.Last() == "5 0 0 0 0", "USB: pantalla del reloj: descarga interrumpida");
+    Assert(sim2.Screen.Last() == "3 0 0 100 0", "USB: pantalla del reloj: todo ya estaba en el PC");
 
     // 8. Protocol client: rejects a device that is not an AVO watch.
     var bad = new TranscriptLinkStub("#AVO1 HELLO {\"api\":1,\"name\":\"OTRO\",\"fw\":\"1\",\"device\":\"a0b1c2d3e4f5\"}");

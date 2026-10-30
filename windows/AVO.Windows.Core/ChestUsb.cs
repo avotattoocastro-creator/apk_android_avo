@@ -153,6 +153,22 @@ public sealed class ChestUsbClient(IChestLink link)
         return data;
     }
 
+    /// <summary>
+    /// Tells the watch what the PC is doing, for its "CONECTADO AL PC" screen (CHEST >= 3.7.5-usb1).
+    /// Best effort: an older firmware answers ERR cmd and the download goes on.
+    /// Phases: 1 comparing, 2 downloading, 3 synced, 4 recording, 5 error.
+    /// </summary>
+    public void Progress(int phase, int index = 0, int count = 0, int pct = 0, int newCount = 0)
+    {
+        try
+        {
+            link.WriteLine(string.Create(CultureInfo.InvariantCulture,
+                $"AVO1 PROGRESS {phase} {Math.Clamp(index, 0, 65535)} {Math.Clamp(count, 0, 65535)} {Math.Clamp(pct, 0, 100)} {Math.Clamp(newCount, 0, 65535)}"));
+            Answer("PROGRESS", ShortTimeout);
+        }
+        catch (ChestUsbException) { /* screen only */ }
+    }
+
     public static bool ValidId(string id) => Regex.IsMatch(id, "^S[A-Za-z0-9_-]{1,22}$");
 
     public static uint Crc32(ReadOnlySpan<byte> data)
@@ -258,7 +274,8 @@ public static class ChestSync
         client.Drain();
         var hello = client.Hello();
         result.Watch = hello;
-        if (hello.Recording) { result.Recording = true; return result; }
+        if (hello.Recording) { result.Recording = true; client.Progress(4); return result; }
+        client.Progress(1);
         if (!hello.SdMounted) throw new ChestUsbException("HELLO", "sd", ChestUsbClient.ErrorText("sd"));
         int block = Math.Clamp(hello.MaxRead, 256, 65536);
         progress?.Report(new ChestSyncProgress(0, 0, "", 0, 0, "Comparando entrenamientos del reloj con el PC…"));
@@ -287,13 +304,25 @@ public static class ChestSync
             }
             missing.Add((t, null));
         }
+        int lastPct = -1, lastIndex = -1;
+        // Inline (same thread): the watch is asked between two READs, never at the same time.
+        var watchProgress = new InlineProgress<ChestSyncProgress>(p =>
+        {
+            int pct = (int)(p.Done * 100 / Math.Max(1, p.Total));
+            if (p.Index != lastIndex || pct >= lastPct + 5 || (pct == 100 && lastPct != 100))
+            {
+                lastIndex = p.Index; lastPct = pct;
+                client.Progress(2, p.Index, p.Count, pct);
+            }
+            progress?.Report(p);
+        });
         for (int i = 0; i < missing.Count; i++)
         {
             ct.ThrowIfCancellationRequested();
             var (t, sha) = missing[i];
             try
             {
-                var (pkg, warning) = Download(client, library, hello, t, sha, block, i + 1, missing.Count, progress, ct);
+                var (pkg, warning) = Download(client, library, hello, t, sha, block, i + 1, missing.Count, watchProgress, ct);
                 result.NewPackages.Add(pkg);
                 if (warning != null) result.Messages.Add($"{t.Id}: {warning}");
             }
@@ -310,7 +339,15 @@ public static class ChestSync
                 if (ex is ChestUsbException { Code: "timeout" }) break;   // the watch is gone or not answering
             }
         }
+        if (result.Recording) client.Progress(4);
+        else if (result.Failed > 0) client.Progress(5);
+        else client.Progress(3, 0, 0, 100, result.NewPackages.Count);
         return result;
+    }
+
+    private sealed class InlineProgress<T>(Action<T> report) : IProgress<T>
+    {
+        public void Report(T value) => report(value);
     }
 
     private static (string Package, string? Warning) Download(ChestUsbClient client, WatchLibrary lib, ChestHello watch, ChestTraining t, string? sha, int block,

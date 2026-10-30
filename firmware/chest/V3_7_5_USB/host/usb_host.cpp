@@ -35,6 +35,8 @@ void write(const char* data, size_t n) {
   fflush(stdout);
 }
 bool recording() { return g_rec; }
+bool usb_host() { return false; }
+uint32_t ms() { static uint32_t t = 1000; return t += 10; }
 void power(int* pct, bool* vbus, bool* sd) { *pct = 87; *vbus = true; *sd = true; }
 const char* fw_version() { return "3.7.5-usb1"; }
 const char* device_id() { return "a0b1c2d3e4f5"; }
@@ -76,6 +78,13 @@ int main(int argc, char** argv) {
   char line[512];
   while (fgets(line, sizeof(line), stdin)) {
     if (!strncmp(line, "!REC ", 5)) { g_rec = line[5] == '1'; continue; }
+    if (!strncmp(line, "!PC", 3)) {
+      usbsync::PcStatus st;
+      usbsync::pc_status(&st);
+      printf("PCSTATUS %u %u %u %u %u\n", st.phase, st.pct, st.index, st.count, st.new_count);
+      fflush(stdout);
+      continue;
+    }
     if (!strncmp(line, "!LOG", 4)) { fputs("[AVO NOW] paired with back\n", stdout); fflush(stdout); continue; }
     g_pending += line;
     while (!g_pending.empty()) usbsync::poll();

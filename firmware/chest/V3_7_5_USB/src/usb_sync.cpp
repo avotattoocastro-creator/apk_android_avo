@@ -43,6 +43,13 @@ static bool s_in_overflow = false;
 static char* s_out = nullptr;
 static uint8_t* s_chunk = nullptr;
 static Stats s_stats = {};
+// PC screen state. Written by the loop task, read by the UI task (single 32-bit fields: no lock needed).
+static volatile uint8_t s_phase = 0, s_pct = 0;
+static volatile uint16_t s_index = 0, s_count = 0, s_new = 0;
+static volatile uint32_t s_last_cmd_ms = 0, s_last_read_ms = 0;
+static volatile bool s_host_was = false;
+static const uint32_t CMD_PRESENT_MS = 30000;   // an AVO1 command counts as "PC present" for 30 s
+static const uint32_t STALE_MS = 20000;         // app quiet in the middle of a sync → back to "waiting"
 
 struct ShaCache { char id[24]; uint64_t total; uint32_t etag; uint8_t h[32]; bool valid; };
 static const int SHA_SLOTS = 4;
@@ -164,6 +171,23 @@ static SessionInfo* info() {
   return s_si;
 }
 
+bool host_present() {
+  const uint32_t now = port::ms();
+  const bool present = port::usb_host() || (s_last_cmd_ms && now - s_last_cmd_ms < CMD_PRESENT_MS);
+  if (!present && s_host_was) { s_phase = 0; s_pct = 0; s_index = s_count = s_new = 0; s_last_cmd_ms = 0; }  // unplugged
+  s_host_was = present;
+  return present;
+}
+
+void pc_status(PcStatus* o) {
+  const uint32_t now = port::ms();
+  uint8_t ph = s_phase;
+  // Without PROGRESS from the app (older AVO Windows) the watch still says what it sees.
+  if (ph == 0 && s_last_read_ms && now - s_last_read_ms < 3000) ph = 2;
+  if ((ph == 1 || ph == 2) && s_last_cmd_ms && now - s_last_cmd_ms > STALE_MS) ph = s_phase = 0;   // app closed mid-way
+  o->phase = ph; o->pct = s_pct; o->index = s_index; o->count = s_count; o->new_count = s_new;
+}
+
 // ------------------------------------------------------------------ commands
 static void cmd_hello() {
   s_stats.hellos++;
@@ -270,6 +294,7 @@ static void cmd_read(const char* id, unsigned seg, unsigned long off, unsigned l
   if (fseek(f, (long)off, SEEK_SET) == 0) got = fread(s_chunk, 1, len, f);
   fclose(f);
   if (got != len) { send_err("READ", "io"); return; }
+  s_last_read_ms = port::ms();
   int n = snprintf(s_out, OUT_CAP, "#AVO1 DATA %u %lu %lu %08x ", seg, off, (unsigned long)got, (unsigned)crc32(s_chunk, got));
   n += (int)base64(s_chunk, got, s_out + n);
   send_line((size_t)n);
@@ -300,6 +325,7 @@ static void handle(char* line) {
   int k = split(line, t, 8);
   if (k < 2 || strcmp(t[0], "AVO1") != 0) return;   // not for us: ignore silently
   s_stats.commands++;
+  s_last_cmd_ms = port::ms();
   const char* c = t[1];
   if (!strcmp(c, "HELLO") && k == 2) cmd_hello();
   else if (!strcmp(c, "LIST") && k == 2) cmd_list();
@@ -308,11 +334,20 @@ static void handle(char* line) {
     unsigned long seg, off, len;
     if (!parse_ul(t[3], &seg) || !parse_ul(t[4], &off) || !parse_ul(t[5], &len) || seg > MAX_SEGS) send_err("READ", "cmd");
     else cmd_read(t[2], (unsigned)seg, off, len, t[6]);
+  } else if (!strcmp(c, "PROGRESS") && k == 7) {
+    // PROGRESS <phase> <index> <count> <pct> <new>: what the PC app is doing, only for the watch screen.
+    unsigned long ph, i, n, pc, nw;
+    if (!parse_ul(t[2], &ph) || !parse_ul(t[3], &i) || !parse_ul(t[4], &n) || !parse_ul(t[5], &pc) || !parse_ul(t[6], &nw) ||
+        ph > 5 || pc > 100 || i > 65535 || n > 65535 || nw > 65535) { send_err("PROGRESS", "cmd"); return; }
+    s_index = (uint16_t)i; s_count = (uint16_t)n; s_pct = (uint8_t)pc; s_new = (uint16_t)nw; s_phase = (uint8_t)ph;
+    int m = snprintf(s_out, OUT_CAP, "#AVO1 OK PROGRESS");
+    send_line((size_t)m);
   } else send_err(c, "cmd");
 }
 
 void poll() {
   if (!s_in && !init()) return;
+  host_present();   // tracks the unplug edge every 10 ms (resets the PC screen state)
   for (int budget = 0; budget < 512; budget++) {
     int b = port::read_byte();
     if (b < 0) return;
@@ -343,6 +378,11 @@ namespace usbsync {
 namespace port {
 
 int read_byte() { return Serial.available() > 0 ? Serial.read() : -1; }
+
+// HWCDC::isPlugged(): start-of-frame packets in the last few ms. A PC (or any USB host) sends them every 1 ms;
+// a wall charger or a power bank never does, so the charging screen stays as it was.
+bool usb_host() { return Serial.isPlugged(); }
+uint32_t ms() { return millis(); }
 
 void write(const char* data, size_t n) { Serial.write((const uint8_t*)data, n); }
 

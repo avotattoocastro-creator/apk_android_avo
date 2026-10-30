@@ -46,6 +46,11 @@ for bad in ("remove(", "unlink(", "rename(", "\"wb\"", "\"ab\"", "\"r+", "sessio
 check("SessionFileState::OPEN" in usb, "OPEN sessions are never served")
 check(usb.count("port::recording()") >= 4, "every command refuses while recording")
 check("port::write(s_out, n)" in usb and usb.count("port::write(") == 1, "one write() per answer line")
+ui = (SRC / "ui.cpp").read_text()
+check("if (usbsync::host_present()) render_pc(*snap, now);   // V3.7.5-usb1\n            else render_charging(*snap, now);" in ui,
+      "PC screen only with a USB host; a charger keeps the 3.7.2 charging screen")
+check('#include "ui_pc.inc"' in (SRC / "ui_dash.cpp").read_text(), "PC screen drawn with the dashboard fonts (ui_dash.cpp)")
+check("Serial.isPlugged()" in usb, "PC detected by USB start-of-frame (a charger sends none)")
 
 # ---------------------------------------------------------------- 2. host build
 gxx = shutil.which("g++")
@@ -160,6 +165,12 @@ for sid, st, t0, sizes in SESSIONS:
     check(data == on_disk, f"{sid}: downloaded bytes equal the microSD")
     check(hashlib.sha256(data).hexdigest() == sha["sha256"] and sha["size"] == len(data), f"{sid}: SHA-256 of the watch matches")
 
+# PC screen: the app reports its progress; the watch keeps it for the "CONECTADO AL PC" screen.
+check(ask("AVO1 PROGRESS 2 1 2 50 0")[-1] == "OK PROGRESS", "PROGRESS accepted")
+w.raw("!PC")
+st = w.p.stdout.readline().decode().split()
+check(st[:6] == ["PCSTATUS", "2", "50", "1", "2", "0"], f"PC screen state: downloading 1 of 2, 50 % ({st})")
+
 # ---------------------------------------------------------------- 4. refusals and robustness (not in the transcript)
 e = items["S20261025_101500"]["etag"]
 check(ask("AVO1 READ S20261025_101500 1 0 4096 deadbeef", record=False)[-1] == "ERR READ changed", "wrong etag → changed")
@@ -173,6 +184,8 @@ check(ask("AVO1 SHA S..evil", record=False)[-1] == "ERR SHA id", "dots in id →
 d = ask("AVO1 READ S20261025_101500 2 100 99999 " + e, record=False)[-1].split(" ")
 check(d[0] == "DATA" and int(d[3]) == 200, "READ is clamped to the end of the segment")
 check(ask("AVO1 FORMAT", record=False)[-1] == "ERR FORMAT cmd", "unknown command → cmd")
+check(ask("AVO1 PROGRESS 9 0 0 0 0", record=False)[-1] == "ERR PROGRESS cmd", "PROGRESS with an unknown phase → cmd")
+check(ask("AVO1 PROGRESS 2 1 2 101 0", record=False)[-1] == "ERR PROGRESS cmd", "PROGRESS over 100 % → cmd")
 w.raw("hello this is not for the watch")
 w.raw("AVO1 " + "X" * 400)          # too long: dropped
 w.raw("!LOG")
