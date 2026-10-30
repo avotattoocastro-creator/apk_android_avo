@@ -1,5 +1,7 @@
 // AVO BACK V4: board map and small hardware-independent helpers (host-tested in test/test_v4.cpp).
-// PCB: hardware/back/V4/PCB (ESP32-S3-MINI-1U-N8). Pin numbers = GPIO of the module (see PCB README).
+// PCB REV B: hardware/back/V4/PCB (ESP32-S3-MINI-1U-N8). Pin numbers = GPIO of the module (see PCB README).
+// REV B has no Qi receiver and no Hall sensor: the vest support bridges the SYS and BAT contacts, so the board is
+// powered only while it sits on the vest (or from the workshop USB-C).
 #pragma once
 #include <stdint.h>
 #include <string.h>
@@ -9,7 +11,6 @@ namespace v4 {
 
 // ------------------------------------------------------------------ pins (fuente/avo_back_v4_pcb.py, dict GPIO)
 static const int PIN_BOOT = 0;          // TP2 (strapping): LOW at reset = ROM download
-static const int PIN_HALL = 1;          // DRV5032FA (push-pull): LOW = capsule on its support (magnets) · RTC, ext0 wake
 static const int PIN_BAT_ADC = 2;       // VBAT / 2 (1 MΩ / 1 MΩ + 100 nF)
 static const int PIN_ZED_PPS = 4;       // ZED TIMEPULSE (330 Ω)
 static const int PIN_ZED_TX1 = 5;       // S3 RX  <- ZED UART1 TX (TX/MISO pad of the URTK1.2)
@@ -22,34 +23,25 @@ static const int PIN_LED = 11;          // red LED, active LOW
 static const int PIN_SD_CLK = 12, PIN_SD_CMD = 13, PIN_SD_D0 = 14, PIN_SD_D1 = 15, PIN_SD_D2 = 16, PIN_SD_D3 = 17;
 static const int PIN_SD_CD = 18;        // card-detect switch to GND, 100 kΩ pull-up (polarity checked at run time)
 static const int PIN_SD_PWR_N = 21;     // AO3401A gate: LOW = card powered (100 kΩ pull-up: off at boot)
-static const int PIN_CHG_PG = 38;       // BQ24072 PGOOD: LOW = Qi or USB power present
-static const int PIN_CHG_STAT = 39;     // BQ24072 CHG: LOW = charging
-static const int PIN_QI_CHG = 40;       // BQ51013B CHG: LOW = the Qi receiver is delivering power
+static const int PIN_CHG_PG = 38;       // BQ24072 PGOOD: LOW = workshop USB power present
+static const int PIN_CHG_STAT = 39;     // BQ24072 CHG: LOW = charging (USB + capsule on the vest support)
 static const float BAT_DIVIDER = 2.0f;
 
-// ------------------------------------------------------------------ pairing gesture (no button on the V4 board)
-// Put the capsule on its support three times (three Hall "on" edges) within kWindowMs → pairing window opens.
-class PairGesture {
+// ------------------------------------------------------------------ pairing gesture (REV B: no button, no sensor)
+// The board is powered only while the capsule sits on the vest support, so the gesture is three quick power-ups in a
+// row: put the capsule on the support, take it off before kQuickMs, three times. The counter lives in NVS.
+class PowerCycleGesture {
  public:
-  static const uint32_t kWindowMs = 8000;
-  static const uint8_t kEdges = 3;
-  // call on every Hall sample; returns true once when the gesture completes
-  bool update(uint32_t now_ms, bool on_support) {
-    bool fire = false;
-    if (on_support && !last_) {
-      if (n_ == 0 || now_ms - first_ > kWindowMs) { n_ = 0; first_ = now_ms; }
-      n_++;
-      if (n_ >= kEdges) { fire = true; n_ = 0; }
-    }
-    last_ = on_support;
-    return fire;
+  static const uint32_t kQuickMs = 4000;   // a power-up longer than this breaks the sequence
+  static const uint8_t kBoots = 3;
+  // stored = counter read from NVS at boot. Returns the counter to write back now; *fire = gesture complete.
+  static uint8_t on_boot(uint8_t stored, bool* fire) {
+    const uint8_t n = (uint8_t)((stored >= kBoots ? 0 : stored) + 1);
+    *fire = n >= kBoots;
+    return *fire ? 0 : n;
   }
-  void reset(bool on_support) { n_ = 0; last_ = on_support; }
-
- private:
-  bool last_ = true;
-  uint8_t n_ = 0;
-  uint32_t first_ = 0;
+  // once the board has been up for kQuickMs the sequence is broken and the counter must be cleared
+  static bool should_clear(uint32_t uptime_ms) { return uptime_ms >= kQuickMs; }
 };
 
 // ------------------------------------------------------------------ PPS statistics (captured in an ISR, read in loop)

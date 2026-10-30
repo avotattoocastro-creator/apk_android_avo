@@ -1,40 +1,33 @@
-// Host tests of the AVO BACK V4 board helpers (pairing gesture, PPS statistics, SD FIFO, battery scale).
+// Host tests of the AVO BACK V4 board helpers (power-cycle pairing gesture, PPS statistics, SD FIFO, battery scale).
 #include "tiny_test.h"
 #include "avo_board_v4.h"
 
 using namespace avo::v4;
 
-TEST(v4, pair_gesture_three_placements_within_window) {
-  PairGesture g;
-  g.reset(true);
-  uint32_t t = 1000;
-  // off / on three times, 1 s apart
-  int fired = 0;
-  for (int k = 0; k < 3; k++) {
-    fired += g.update(t, false); t += 500;
-    fired += g.update(t, true); t += 500;
-  }
-  CHECK_EQ(fired, 1);
+TEST(v4, power_cycle_gesture_fires_on_third_quick_boot) {
+  bool fire = false;
+  uint8_t c = 0;
+  c = PowerCycleGesture::on_boot(c, &fire); CHECK(!fire); CHECK_EQ(c, 1);
+  c = PowerCycleGesture::on_boot(c, &fire); CHECK(!fire); CHECK_EQ(c, 2);
+  c = PowerCycleGesture::on_boot(c, &fire); CHECK(fire);  CHECK_EQ(c, 0);   // counter cleared after firing
+  c = PowerCycleGesture::on_boot(c, &fire); CHECK(!fire); CHECK_EQ(c, 1);
 }
 
-TEST(v4, pair_gesture_too_slow_does_not_fire) {
-  PairGesture g;
-  g.reset(true);
-  uint32_t t = 0;
-  int fired = 0;
-  for (int k = 0; k < 3; k++) {
-    fired += g.update(t, false); t += 2500;
-    fired += g.update(t, true); t += 2500;     // 3 placements over > 8 s
-  }
-  CHECK_EQ(fired, 0);
+TEST(v4, power_cycle_gesture_broken_by_a_long_power_up) {
+  bool fire = false;
+  uint8_t c = PowerCycleGesture::on_boot(0, &fire);
+  c = PowerCycleGesture::on_boot(c, &fire);
+  CHECK(!PowerCycleGesture::should_clear(3999));
+  CHECK(PowerCycleGesture::should_clear(4000));
+  c = 0;                                                     // what the firmware writes after 4 s of uptime
+  c = PowerCycleGesture::on_boot(c, &fire);
+  CHECK(!fire); CHECK_EQ(c, 1);
 }
 
-TEST(v4, pair_gesture_staying_on_support_never_fires) {
-  PairGesture g;
-  g.reset(true);
-  int fired = 0;
-  for (uint32_t t = 0; t < 60000; t += 100) fired += g.update(t, true);
-  CHECK_EQ(fired, 0);
+TEST(v4, power_cycle_gesture_ignores_garbage_in_nvs) {
+  bool fire = true;
+  uint8_t c = PowerCycleGesture::on_boot(200, &fire);
+  CHECK(!fire); CHECK_EQ(c, 1);
 }
 
 TEST(v4, pps_jitter_and_alive) {
@@ -71,9 +64,9 @@ TEST(v4, battery_scale) {
 }
 
 TEST(v4, pins_do_not_collide_and_avoid_strapping_and_flash) {
-  const int pins[] = {PIN_HALL, PIN_BAT_ADC, PIN_ZED_PPS, PIN_ZED_TX1, PIN_S3_TX1, PIN_ZED_TX2, PIN_S3_TX2, PIN_ZED_RST,
+  const int pins[] = {PIN_BAT_ADC, PIN_ZED_PPS, PIN_ZED_TX1, PIN_S3_TX1, PIN_ZED_TX2, PIN_S3_TX2, PIN_ZED_RST,
                       PIN_ZED_EN, PIN_LED, PIN_SD_CLK, PIN_SD_CMD, PIN_SD_D0, PIN_SD_D1, PIN_SD_D2, PIN_SD_D3, PIN_SD_CD,
-                      PIN_SD_PWR_N, PIN_CHG_PG, PIN_CHG_STAT, PIN_QI_CHG};
+                      PIN_SD_PWR_N, PIN_CHG_PG, PIN_CHG_STAT};
   const int n = sizeof(pins) / sizeof(pins[0]);
   for (int i = 0; i < n; i++) {
     for (int j = i + 1; j < n; j++) CHECK(pins[i] != pins[j]);
@@ -81,5 +74,4 @@ TEST(v4, pins_do_not_collide_and_avoid_strapping_and_flash) {
     CHECK(!(pins[i] >= 26 && pins[i] <= 32));                                // in-package flash
     CHECK(pins[i] != 19 && pins[i] != 20);                                    // native USB
   }
-  CHECK(PIN_HALL <= 21);                                                      // RTC GPIO: ext0 wake-up
 }

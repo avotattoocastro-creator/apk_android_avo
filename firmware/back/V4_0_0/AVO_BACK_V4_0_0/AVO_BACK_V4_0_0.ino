@@ -1,19 +1,21 @@
-/* AVO PERFORMANCE HORSE — BACK V4.0.0-dev1 · placa propia AVO BACK V4 (ESP32-S3-MINI-1U-N8) + URTK1.2 (ZED-F9P)
+/* AVO PERFORMANCE HORSE — BACK V4.0.0-dev2 · placa propia AVO BACK V4 REV B (ESP32-S3-MINI-1U-N8) + URTK1.2 (ZED-F9P)
  *
  * Parte de BACK 3.11.0 (Heltec Wireless Stick Lite V3). El núcleo (lib/avo_core: enlace ESP-NOW con el pecho,
  * emparejamiento, ZED/UBX, RTCM, calidad GNSS, cincha) NO cambia: el pecho y la cincha ven la espalda igual.
  * Cambia la capa de hardware:
  *   - ZED en UART2 (GPIO7 RX / GPIO8 TX) con su propio regulador RT9080 (EN = GPIO10): 0 V al dormir.
  *     UART1 del ZED cableada a GPIO5/GPIO6 (reservada para el registro RAW a alta velocidad, sin usar todavía).
- *   - Sensor de soporte: Hall DRV5032FA en GPIO1 (LOW = cápsula en el soporte), despierta del sueño profundo (ext0).
- *   - Emparejamiento sin botón: poner la cápsula 3 veces en el soporte en menos de 8 s (o la orden PAIR por USB).
- *   - Cargador BQ24072: PGOOD (GPIO38), CHG (GPIO39) y receptor Qi (GPIO40) leídos directamente: modo carga real,
- *     sin deducirlo de la tensión.
+ *   - REV B: sin Qi ni sensor de soporte. El soporte del chaleco puentea los contactos SYS y BAT del fondo: la placa
+ *     solo tiene alimentación en el chaleco (o por el USB-C del taller). Quitar la cápsula = apagado total (0 µA).
+ *   - Emparejamiento sin botón: 3 encendidos seguidos de menos de 4 s cada uno (poner y quitar la cápsula del
+ *     soporte 3 veces), o la orden PAIR por USB. El contador vive en la NVS.
+ *   - Cargador BQ24072 (solo USB del taller): PGOOD (GPIO38) y CHG (GPIO39) se muestran en el monitor.
  *   - microSD (SDMMC 4 bits, alimentación por GPIO21): registro continuo del flujo UBX del ZED en /AVO_xxxxxx.ubx
- *     desde una tarea propia (el bucle GNSS/RTCM nunca espera a la tarjeta).
+ *     desde una tarea propia (el bucle GNSS/RTCM nunca espera a la tarjeta). El fichero se vacía cada segundo: al
+ *     quitar la cápsula se corta la corriente sin aviso y se pierde como mucho el último segundo.
  *   - PPS del ZED en GPIO4: marca de tiempo por interrupción (estadística de periodo/jitter en el monitor).
  *   - Batería por ADC (GPIO2, divisor 1:2).
- * Órdenes por el puerto USB (115200): PAIR · TALLER · DORMIR · SD · ESTADO
+ * Órdenes por el puerto USB (115200): PAIR · DORMIR · SD · ESTADO
  * Build: ../build_back_v4.sh (arduino-cli, núcleo esp32 3.3.12, ESP32S3 Dev Module, 8 MB, USB CDC al arrancar).
  * NO VERIFICADO EN HARDWARE: la placa V4 no se ha fabricado.
  */
@@ -27,7 +29,6 @@
 #include <Preferences.h>
 #include <esp_sleep.h>
 #include <driver/gpio.h>
-#include <driver/rtc_io.h>
 #include <soc/soc_caps.h>
 #include <FS.h>
 #include <SD_MMC.h>
@@ -44,8 +45,7 @@ static const uint32_t CPU_MHZ = 160;
 static const uint32_t ZED_DELAY_MS = 300;    // the ZED has its own regulator: no need to wait for the 3V3 rail
 static TxPowerPolicy s_txp;
 static int8_t s_rssi_worst = 0;
-static ReedGate s_support;                   // same 3 s rule as the reed of 3.10.3/3.11.0, fed by the Hall sensor
-static PairGesture s_gesture;
+static bool s_boots_cleared = false;         // power-cycle pairing counter cleared after PowerCycleGesture::kQuickMs
 static bool s_radio_on = false, s_zed_on = false, s_zed_pending = false;
 static uint32_t s_zed_at = 0;
 static uint16_t s_vbat_mv = 0;
@@ -118,7 +118,7 @@ static void sd_task(void*) {
       if (f.write(chunk, n) != n) { s_sd_errors = s_sd_errors + 1; f.close(); }
       else s_sd_bytes = s_sd_bytes + n;
     }
-    if (millis() - last_flush > 2000) { if (f) f.flush(); last_flush = millis(); }
+    if (millis() - last_flush > 1000) { if (f) f.flush(); last_flush = millis(); }   // power can vanish at any time
     if (n < sizeof(chunk) / 2) vTaskDelay(pdMS_TO_TICKS(20));
   }
 }
@@ -200,8 +200,7 @@ static char s_dev_id[16];
 static BackCore* core = nullptr;
 
 // ------------------------------------------------------------------ helpers
-static bool on_support() { return digitalRead(PIN_HALL) == LOW; }
-static bool ext_power() { return digitalRead(PIN_CHG_PG) == LOW; }     // Qi base or USB present
+static bool usb_power() { return digitalRead(PIN_CHG_PG) == LOW; }     // workshop USB-C present
 static bool charging() { return digitalRead(PIN_CHG_STAT) == LOW; }
 static void led(bool on) { digitalWrite(PIN_LED, on ? LOW : HIGH); }
 
@@ -265,7 +264,7 @@ static void radio_off() {
 
 static void go_to_sleep(const char* why) {
   Serial.printf("\n[AVO ESPALDA V4] A DORMIR (%s): ZED sin corriente, microSD apagada, radio apagada.\n"
-                "[AVO ESPALDA V4] Se despierta al poner la cápsula en el soporte (Hall).\n", why);
+                "[AVO ESPALDA V4] Vuelve a arrancar al quitar y poner la cápsula en el soporte (o con RESET).\n", why);
   Serial.flush();
   radio_off();
   if (s_sd_ok) { delay(300); sd_stop(); }
@@ -278,33 +277,7 @@ static void go_to_sleep(const char* why) {
 #if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
   gpio_deep_sleep_hold_en();
 #endif
-  esp_sleep_enable_ext0_wakeup((gpio_num_t)PIN_HALL, 0);   // the Hall output goes LOW over the support magnets
-  rtc_gpio_pullup_dis((gpio_num_t)PIN_HALL);               // push-pull output: no pull resistor
-  rtc_gpio_pulldown_dis((gpio_num_t)PIN_HALL);
-  esp_deep_sleep_start();
-}
-
-// Charge mode: external power present and the capsule off its support. Everything off except the USB serial port
-// (AVO Update can still install firmware). Back to normal when the capsule returns to the support; sleep when the
-// external power goes away.
-static void charge_mode() {
-  Serial.println("\n[AVO ESPALDA V4] MODO CARGA: GPS, radio y microSD apagados (PGOOD = alimentación externa).");
-  radio_off();
-  if (s_sd_ok) sd_stop();
-  zed_power_off();
-  setCpuFrequencyMhz(80);
-  uint32_t last = 0;
-  for (;;) {
-    if (on_support()) { Serial.println("[AVO ESPALDA V4] cápsula en el soporte: vuelvo a funcionar"); delay(50); ESP.restart(); }
-    if (!ext_power()) go_to_sleep("fin de la carga externa, fuera del soporte");
-    if (millis() - last >= 10000) {
-      last = millis();
-      Serial.printf("[AVO ESPALDA V4] MODO CARGA bateria %u mV · %s · Qi %s\n", (unsigned)read_battery_mv(),
-                    charging() ? "cargando" : "carga terminada", digitalRead(PIN_QI_CHG) == LOW ? "entregando" : "no");
-    }
-    led(charging() ? ((millis() / 1000) & 1) : true);
-    delay(50);
-  }
+  esp_deep_sleep_start();                                  // no wake source: a power cycle restarts the board
 }
 
 // ------------------------------------------------------------------ status print
@@ -334,13 +307,11 @@ static void print_status() {
   portENTER_CRITICAL(&s_pps_mux); pps = s_pps; portEXIT_CRITICAL(&s_pps_mux);
   Serial.printf("  PPS: %s pulsos=%lu periodo=%ld us desviacion max=%ld us\n", pps.alive(esp_timer_get_time()) ? "OK" : "sin pulsos",
                 (unsigned long)pps.count, (long)pps.last_period_us, (long)pps.max_dev_us);
-  Serial.printf("  BATERIA: %u mV | alimentacion externa %s | %s | Qi %s\n", (unsigned)s_vbat_mv, ext_power() ? "SI" : "no",
-                charging() ? "cargando" : "sin carga", digitalRead(PIN_QI_CHG) == LOW ? "entregando" : "no");
+  Serial.printf("  ALIMENTACION: %s | bateria %u mV | %s\n", usb_power() ? "USB-C del taller" : "soporte del chaleco (SYS-BAT)",
+                (unsigned)s_vbat_mv, usb_power() ? (charging() ? "cargando por USB" : "sin carga (sin bateria puenteada o llena)") : "");
   Serial.printf("  MICROSD: %s %s escritos=%lu B perdidos=%lu B errores=%lu (deteccion=%s)\n", s_sd_ok ? "GRABANDO" : "sin tarjeta",
                 s_sd_name, (unsigned long)s_sd_bytes, (unsigned long)s_log.dropped(), (unsigned long)s_sd_errors,
                 digitalRead(PIN_SD_CD) == (s_sd_present_level ? HIGH : LOW) ? "tarjeta" : "?");
-  Serial.printf("  SOPORTE (Hall): %s%s\n", s_support.closed() ? "EN EL SOPORTE" : "FUERA",
-                s_support.workshop() ? " | MODO TALLER: no se duerme" : (s_support.closed() ? "" : " → se duerme"));
   Serial.printf("  AHORRO: CPU %lu MHz | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(), (int)s_txp.dbm(),
                 s_txp.level() == TxPowerPolicy::kLevels - 1 ? " (maxima)" : "");
   {
@@ -365,11 +336,10 @@ static void print_status() {
 
 static void handle_command(const char* c) {
   if (!strcmp(c, "PAIR")) { core->open_pairing(); Serial.println("[AVO ESPALDA V4] emparejamiento abierto 120 s"); }
-  else if (!strcmp(c, "TALLER")) { s_support.set_workshop(true); Serial.println("[AVO ESPALDA V4] MODO TALLER hasta reiniciar"); }
   else if (!strcmp(c, "DORMIR")) go_to_sleep("orden por USB");
   else if (!strcmp(c, "SD")) Serial.printf("[AVO ESPALDA V4] microSD %s %s %lu B\n", s_sd_ok ? "ok" : "no", s_sd_name, (unsigned long)s_sd_bytes);
   else if (!strcmp(c, "ESTADO")) print_status();
-  else Serial.printf("[AVO ESPALDA V4] orden desconocida '%s' (PAIR, TALLER, DORMIR, SD, ESTADO)\n", c);
+  else Serial.printf("[AVO ESPALDA V4] orden desconocida '%s' (PAIR, DORMIR, SD, ESTADO)\n", c);
 }
 
 // ------------------------------------------------------------------ setup / loop
@@ -380,34 +350,15 @@ void setup() {
   gpio_deep_sleep_hold_dis();
 #endif
   for (int p : {PIN_ZED_EN, PIN_S3_TX1, PIN_S3_TX2, PIN_SD_PWR_N, PIN_LED}) gpio_hold_dis((gpio_num_t)p);
-  zed_power_off();                           // ZED at 0 V until the support is confirmed
+  zed_power_off();                           // ZED at 0 V until the 3V3 rail and the ESP32 are up
   pinMode(PIN_SD_PWR_N, OUTPUT); digitalWrite(PIN_SD_PWR_N, HIGH);
   pinMode(PIN_LED, OUTPUT); led(true);
-  const bool woke_by_support = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
-  if (woke_by_support) rtc_gpio_deinit((gpio_num_t)PIN_HALL);
-  pinMode(PIN_HALL, INPUT);
-  pinMode(PIN_CHG_PG, INPUT); pinMode(PIN_CHG_STAT, INPUT); pinMode(PIN_QI_CHG, INPUT);
+  pinMode(PIN_CHG_PG, INPUT); pinMode(PIN_CHG_STAT, INPUT);
   pinMode(PIN_SD_CD, INPUT);
   analogSetPinAttenuation(PIN_BAT_ADC, ADC_11db);
   setCpuFrequencyMhz(CPU_MHZ);
   delay(300);
-  if (woke_by_support) Serial.println("[AVO ESPALDA V4] despierta: cápsula en el soporte");
-  // off its support at power-up: charge mode with external power, otherwise 3 s to send TALLER by USB, then sleep
-  if (!on_support()) {
-    if (ext_power()) charge_mode();
-    Serial.println("[AVO ESPALDA V4] cápsula FUERA del soporte. Escribe TALLER en 3 s para no dormir.");
-    uint32_t t0 = millis();
-    String line;
-    bool workshop = false;
-    while (millis() - t0 < ReedGate::kBootWindowMs && !workshop) {
-      while (Serial.available()) { char ch = (char)Serial.read(); if (ch == '\n' || ch == '\r') { if (line == "TALLER") workshop = true; line = ""; } else line += ch; }
-      if (on_support()) break;
-      delay(10);
-    }
-    if (workshop) { s_support.set_workshop(true); Serial.println("[AVO ESPALDA V4] MODO TALLER: el Hall se ignora hasta reiniciar"); }
-    else if (!on_support()) go_to_sleep("cápsula fuera del soporte al arrancar");
-  }
-  s_gesture.reset(on_support());
+  // REV B: having power means the capsule is on the vest support (or on the workshop USB): everything starts.
   s_zed_at = millis() + ZED_DELAY_MS;
   s_zed_pending = true;
 
@@ -419,6 +370,8 @@ void setup() {
   snprintf(s_dev_id, sizeof(s_dev_id), "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
   prefs.begin("avonow", false);
+  bool pair_gesture = false;
+  prefs.putUChar("boots", PowerCycleGesture::on_boot(prefs.getUChar("boots", 0), &pair_gesture));
   NowPeerRecord stored;
   uint8_t b[NOW_PEER_RECORD_LEN];
   size_t n = prefs.getBytes("peer", b, sizeof(b));
@@ -427,6 +380,7 @@ void setup() {
   uint8_t girth_mac[6];
   bool have_girth = prefs.getBytes("girth", girth_mac, 6) == 6;
   core->begin(stored, have_girth ? girth_mac : nullptr);
+  if (pair_gesture) { core->open_pairing(); Serial.println("[AVO ESPALDA V4] 3 encendidos rápidos: emparejamiento abierto 120 s"); }
   s_vbat_mv = read_battery_mv();
   core->set_battery_mv(s_vbat_mv);
 
@@ -443,7 +397,7 @@ void setup() {
   const char* volatile id = AVO_BACK_IMAGE_ID;
   Serial.printf("\nAVO BACK %s — placa V4 %s, ESP-NOW canal %u, pecho emparejado: %s\n", id + 1, s_dev_id,
                 (unsigned)NOW_CHANNEL_DEFAULT, stored.valid ? pm : "ninguno (se emparejará con el primer pecho que lo pida)");
-  Serial.println("Emparejar: poner la cápsula 3 veces en el soporte en menos de 8 s, u orden PAIR por USB.");
+  Serial.println("Emparejar: poner y quitar la cápsula del soporte 3 veces seguidas (menos de 4 s cada vez), u orden PAIR por USB.");
   led(false);
 }
 
@@ -483,15 +437,9 @@ void loop() {
     s_vbat_mv = (mv == 0 || s_vbat_mv == 0) ? mv : (uint16_t)((s_vbat_mv * 3u + mv) / 4u);
     core->set_battery_mv(s_vbat_mv);
   }
-  static uint32_t last_hall = 0;
-  if (millis() - last_hall >= 100) {
-    last_hall = millis();
-    const bool on = on_support();
-    if (s_gesture.update(millis(), on)) { core->open_pairing(); Serial.println("[AVO ESPALDA V4] gesto de emparejamiento: abierto 120 s"); }
-    if (s_support.update(millis(), on)) {
-      if (ext_power()) charge_mode();
-      go_to_sleep("cápsula fuera del soporte");
-    }
+  if (!s_boots_cleared && PowerCycleGesture::should_clear(millis())) {
+    s_boots_cleared = true;
+    prefs.putUChar("boots", 0);                // this power-up was long: the pairing sequence starts again
   }
   static uint32_t last_txp = 0;
   if (millis() - last_txp >= 1000) {
