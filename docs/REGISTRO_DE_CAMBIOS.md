@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Espalda · prototipo Rev E.6: cuna sin canal −Y y con 4 pinzas sobre el refuerzo
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia** (render anotado del usuario):
+- Quitado el canal del borde −Y y sus labios.
+- 4 pinzas iguales a la del cuello (Y −7,5) sobre el refuerzo, en las posiciones 1–4 marcadas: extremo de la antena (Y 11 y
+  Y −2), entre el Pololu y la Heltec (X 38) y borde −Y junto al cuello (X 14,5).
+- Alojamiento del Pololu: marco a 2,54 mm exactos sobre su suelo (sin cambio, confirmado).
+**No se ha tocado:** base, soportes, tapa E.5, versión V4 con PCB.
+**Validación:** 1 sólido válido, STL estancos, 0 voladizos fuera de límite, 0 interferencias con tapa E.5, Heltec, ZED, Pololu
+y batería. **NO VERIFICADO** físicamente.
+**Pendiente:** medir el espesor de la Heltec con calibre.
+
 ## 2026-10-30 — Espalda · prototipo Rev E.6: cuna de la Heltec nueva (Pololu, sujetacables, pestañas) y batería 1 mm más baja
 **Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia** (anotaciones del usuario sobre la cuna en Shapr3D, 30/10/2026):

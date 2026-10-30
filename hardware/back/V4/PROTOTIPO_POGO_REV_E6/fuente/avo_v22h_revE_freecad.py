@@ -62,8 +62,11 @@ RE = dict(
     POLOLU=(16.51, 11.43, 2.54), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3 (Pololu 2122: 0,45" × 0,65" × 0,1") a 1,0 del borde −Y
     POLOLU_PINS_W=9.0,                                                         # salida de los 4 hilos (SHDN, VIN, GND, VOUT) por el lado +X
     NECK_CLIPS=((-7.5, 4.4, 6.7), (14.5, 4.3, 6.3)),        # sujetacables del cuello (Y, canal X0–X1; cables a lo largo de Y)
-    EDGE_CLIPS_X=(14.5, 25.5, 39.5, 70.0), EDGE_CLIP_Y=(-19.6, -17.3),         # canal + sujetacables en el borde −Y del refuerzo (cables a lo largo de X:
-                                                                               # cuello → Pololu → extremo de la antena)
+    # pinzas sobre el refuerzo (tipo, canal desde, canal hasta, centro): "x" = cables a lo largo de X; "y" = a lo largo de Y
+    RIB_CLIPS=(("x", -18.8, -16.5, 14.5),    # 4: borde −Y junto al cuello
+               ("x", -9.5, -7.2, 38.0),      # 3: entre el Pololu y la Heltec
+               ("y", 69.8, 72.1, -2.0),      # 2: extremo de la antena, centro
+               ("y", 69.8, 72.1, 11.0)),     # 1: extremo de la antena, lado +Y
     CABLE_SLOT=(5.0, 6.9, -2.0, 2.0),                                          # un solo pasacables centrado (sustituye a las 2 ranuras del reed)
     CABLE_LIPS_X=(21.0, 38.0, 53.0), CABLE_LIP=(3.0, 1.2),                     # sujetacables (5 × AWG30) en el canto del refuerzo junto a la Heltec
     EDGE_HOOKS_X=(30.0, 46.0), EDGE_HOOK=(2.5, 1.0, 0.5),                      # pestañas nuevas en el borde +Y (largo, espesor, solape)
@@ -567,18 +570,20 @@ def build_bandeja(CLIP_CAV):
         return fuse_all(out)
     for (yc, xa, xb) in RE["NECK_CLIPS"]:
         b = b.fuse(clip_y(xa, xb, yc, TRAY_Z1))
-    # borde −Y: canal en el refuerzo (hasta la bandeja) a lo largo de X, del cuello al Pololu y del Pololu al extremo de la
-    # antena; pasa junto a los pisadores de la tapa (Y −16,5), que siguen apoyando en el refuerzo del lado interior.
-    # Sujetacables = labios a 45° en los dos cantos del canal.
-    ga, gb = RE["EDGE_CLIP_Y"]; zt2 = TRAY_Z1 + RE["TRAY_RIB"]
-    for (xa_, xb_) in ((x0 - 0.15, POL[0] - 0.8), (POL[2] + 0.8, BX1 + FT)):
-        b = b.cut(box((xa_, ga, TRAY_Z1), (xb_, gb, 30)))
-    for xc in RE["EDGE_CLIPS_X"]:
-        for (edge, sgn) in ((ga, 1), (gb, -1)):
-            pr_ = Part.Face(Part.makePolygon([V(xc - 1.0, edge - sgn * 0.3, zt2 - 1.1), V(xc - 1.0, edge, zt2 - 1.1), V(xc - 1.0, edge + sgn * 0.8, zt2 - 0.3),
-                                              V(xc - 1.0, edge + sgn * 0.8, zt2), V(xc - 1.0, edge - sgn * 0.3, zt2),
-                                              V(xc - 1.0, edge - sgn * 0.3, zt2 - 1.1)])).extrude(V(2.0, 0, 0))
-            b = b.fuse(pr_)
+    # pinzas como las del cuello sobre el refuerzo, en las posiciones 1–4 marcadas por el usuario (30/10/2026)
+    def clip_x(ya, yb, xc, zb, ln=2.0, ho=1.2, lp=0.8):     # cables a lo largo de X (postes en ±Y)
+        out = []
+        zt_ = zb + ho + lp + 0.4
+        for (p0, p1, edge, sgn) in ((ya - 0.8, ya, ya, 1), (yb, yb + 0.8, yb, -1)):
+            out.append(box((xc - ln / 2, p0, zb - 0.1), (xc + ln / 2, p1, zt_)))
+            pr_ = Part.Face(Part.makePolygon([V(xc - ln / 2, edge - sgn * 0.01, zb + ho), V(xc - ln / 2, edge + sgn * lp, zb + ho + lp),
+                                              V(xc - ln / 2, edge + sgn * lp, zt_), V(xc - ln / 2, edge - sgn * 0.01, zt_),
+                                              V(xc - ln / 2, edge - sgn * 0.01, zb + ho)])).extrude(V(ln, 0, 0))
+            out.append(pr_)
+        return fuse_all(out)
+    zr = TRAY_Z1 + RE["TRAY_RIB"]
+    for (kind, a1, a2, c) in RE["RIB_CLIPS"]:
+        b = b.fuse(clip_x(a1, a2, c, zr) if kind == "x" else clip_y(a1, a2, c, zr))
     b = b.removeSplitter()
     for (px, py) in RE["TRAY_POSTS"]: b = b.cut(vcyl(px, py, RE["PIN_R"] + 0.15, TRAY_Z0 - 1, TRAY_Z1 + 5))
     hx0, hx1, hy0, hy1 = RE["TRAY_CABLE_HOLE"]

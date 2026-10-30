@@ -39,10 +39,14 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
   - **Cuello:** 2 pinzas de dos postes con labio a 45°: una en el lado −Y (Y −7,5) y otra en el +Y (Y 14,5, junto al
     contacto GND). Los cables van a lo largo de Y. La pinza de Y −13,5 se ha quitado. No hay pinzas entre Y 0,9 y 13,3
     porque ahí entra la clavija del USB-C.
-  - **Borde −Y (exterior):** canal de 2,3 mm abierto en el refuerzo hasta la bandeja (Y −19,6 a −17,3), del cuello al
-    Pololu y del Pololu al extremo de la antena. Lleva labios a 45° en los dos cantos en X 14,5, 25,5, 39,5 y 70. Los
-    pisadores de la tapa (Y −16,5) siguen apoyando en el refuerzo del lado interior. El canal del extremo de la antena se
-    ha quitado.
+  - **Pinzas sobre el refuerzo (como la del cuello en Y −7,5)**, 4 nuevas en las posiciones marcadas 1–4. Dos postes
+    de 0,8 mm con labio a 45°, canal de 2,3 mm, sobre la cara superior del refuerzo (Z 11,2):
+    1. extremo de la antena, lado +Y (X 69,8–72,1; Y 11), cables a lo largo de Y;
+    2. extremo de la antena, centro (X 69,8–72,1; Y −2), cables a lo largo de Y;
+    3. entre el Pololu y la Heltec (Y −9,5 a −7,2; X 38), cables a lo largo de X;
+    4. borde −Y junto al cuello (Y −18,8 a −16,5; X 14,5), cables a lo largo de X. Los hilos pasan por debajo de la
+       varilla del botón USER de la tapa (queda 0,55 mm sobre el refuerzo en X < 12,75).
+  - El canal del borde −Y y sus labios **se han quitado** (pedido del usuario).
   - **Borde +Y:** junto a las torres de la Heltec en X 30 y 46 hay una **torre exterior separada** (X 28,8–31,3 y
     45,2–47,3; Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
     otro. Las torres exteriores están fuera de los clics de la base, que sujetan la bandeja en X 16–24 y 36–45.
@@ -60,7 +64,6 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
   - 3 de las guías laterales pasan a tener labio (0,5 mm sobre la placa). La guía del borde +Y en el lado USB y su torre
     exterior se han quitado: ahí están los pines 3V3 y GND de la Heltec donde se suelda el GPS;
   - 2 pestañas nuevas en el borde +Y (X 30 y 46).
-  - En el borde −Y no se añaden más, porque ahí va el canal de los cables.
 - **Torres con pestaña también en el extremo USB**, iguales a las del extremo de la antena, entre el USB-C y los pulsadores
   laterales (Y −0,9 a 2,3 y 11,9 a 15,1). Su viga es de 1,1 mm para dejar entrar la clavija del cable USB-C.
 - La bandeja empieza en X 3,5 (antes 3,0): al bajar 1 mm tocaba la pared interior del cuello de la tapa.
