@@ -30,7 +30,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - Quitado el canal del borde −Y y sus labios.
 - 4 pinzas iguales a la del cuello (Y −7,5) sobre el refuerzo, en las posiciones 1–4 marcadas: extremo de la antena (Y 11 y
   Y −2), entre el Pololu y la Heltec (X 38) y borde −Y junto al cuello (X 14,5).
-- Alojamiento del Pololu: marco a 2,54 mm exactos sobre su suelo (sin cambio, confirmado).
+- Alojamiento del Pololu: **1,0 mm de profundidad** (espesor real indicado por el usuario; antes 2,54 mm, el 0,1″ de la ficha
+  de Pololu). Rebajado en el refuerzo y enrasado con él; sin marco por encima.
 **No se ha tocado:** base, soportes, tapa E.5, versión V4 con PCB.
 **Validación:** 1 sólido válido, STL estancos, 0 voladizos fuera de límite, 0 interferencias con tapa E.5, Heltec, ZED, Pololu
 y batería. **NO VERIFICADO** físicamente.

@@ -59,7 +59,7 @@ RE = dict(
     # Rev E.6 (30/10/2026, sin Qi): la batería baja 1,0 (sin bobina debajo) y la bandeja con ella; la Heltec se calza 1,0 sobre
     # la bandeja → queda a la MISMA altura que en la E.5 (la tapa E.5 sirve tal cual) y las pestañas son 1,0 más altas.
     BAT_DROP=1.0, HELTEC_SHIM=1.0,
-    POLOLU=(16.51, 11.43, 2.54), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3 (Pololu 2122: 0,45" × 0,65" × 0,1") a 1,0 del borde −Y
+    POLOLU=(16.51, 11.43, 1.0), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3: 16,51 × 11,43 (0,65" × 0,45"); espesor 1,0 (máx., dato del usuario; Pololu da 0,1" sin aclarar qué incluye); a 1,0 del borde −Y
     POLOLU_PINS_W=9.0,                                                         # salida de los 4 hilos (SHDN, VIN, GND, VOUT) por el lado +X
     NECK_CLIPS=((-7.5, 4.4, 6.7), (14.5, 4.3, 6.3)),        # sujetacables del cuello (Y, canal X0–X1; cables a lo largo de Y)
     # pinzas sobre el refuerzo (tipo, canal desde, canal hasta, centro): "x" = cables a lo largo de X; "y" = a lo largo de Y
@@ -540,15 +540,14 @@ def build_bandeja(CLIP_CAV):
     rb = rb.cut(box((x0 - 0.6, y0 - 1.6, 0), (x1 + 2.0, y1 + 1.6, 30)))                                  # Heltec + pulsadores + pestañas
     pl, pw = RE["POLOLU"][:2]; pc = RE["POLOLU_CLR"]; py0 = -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"] + RE["POLOLU_WALL"]
     POL = (RE["POLOLU_X"] - pl / 2 - pc, py0, RE["POLOLU_X"] + pl / 2 + pc, py0 + pw + 2 * pc)
-    rb = rb.cut(box((POL[0], POL[1], 0), (POL[2], POL[3], 30)))
-    # marco hasta el espesor exacto del Pololu (2,54): queda enrasado con su cara superior
-    ztop = TRAY_Z1 + RE["POLOLU"][2]
-    fr_ = box((POL[0] - 0.8, POL[1] - 0.8, TRAY_Z1 + RE["TRAY_RIB"] - 0.05), (POL[2] + 0.8, POL[3] + 0.8, ztop)).cut(box((POL[0], POL[1], 0), (POL[2], POL[3], 30)))
+    # alojamiento rebajado en el refuerzo con la profundidad exacta del Pololu (1,0 medido por el usuario, 30/10/2026):
+    # su cara superior queda enrasada con el refuerzo (Z 11,2); sin marco por encima
+    zfl = TRAY_Z1 + RE["TRAY_RIB"] - RE["POLOLU"][2]
+    rb = rb.cut(box((POL[0], POL[1], zfl), (POL[2], POL[3], 30)))
     pyc = (POL[1] + POL[3]) / 2; pw2 = RE["POLOLU_PINS_W"] / 2
-    fr_ = fr_.cut(box((POL[2] - 0.1, pyc - pw2, 0), (POL[2] + 1.0, pyc + pw2, 30)))           # salida de los hilos por el lado de los pines
-    rb = rb.fuse(fr_)
+    rb = rb.cut(box((POL[2] - 0.1, pyc - pw2, zfl), (POL[2] + 1.0, pyc + pw2, 30)))               # salida de los hilos por el lado de los pines
     b = b.fuse(rb).removeSplitter()
-    b = b.cut(box((POL[2] - 2.8, pyc - pw2, TRAY_Z1 - 0.5), (POL[2], pyc + pw2, TRAY_Z1 + 0.1)))   # alivio de 0,5 bajo las soldaduras de los pines
+    b = b.cut(box((POL[2] - 2.8, pyc - pw2, zfl - 0.5), (POL[2], pyc + pw2, zfl + 0.1)))   # alivio de 0,5 bajo las soldaduras de los pines
     # sujetacables: labio a 45° en el canto del refuerzo junto a la Heltec (canal de los cables entre el refuerzo y la Heltec)
     ll, lo = RE["CABLE_LIP"]; ye = y0 - 1.6; zt = TRAY_Z1 + RE["TRAY_RIB"]
     for xc in RE["CABLE_LIPS_X"]:

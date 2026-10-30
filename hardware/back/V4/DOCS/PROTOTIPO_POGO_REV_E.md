@@ -28,9 +28,10 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
 - **Un solo pasacables centrado** (X 5,0–6,9 · Y −2,0–2,0) en lugar de las 2 ranuras del reed: por él suben los cables de los
   contactos del fondo.
 - **Ventana bajo la Heltec ampliada** hacia el conector de batería SH1.25 (el «cuadrado» de la foto).
-- **Pololu S7V8F3** (Pololu 2122: 11,43 × 16,51 × 2,54 mm) en el sitio de la placa Qi, **a 1,0 mm del borde −Y**:
-  - alojamiento de 11,83 × 16,91 mm (0,2 mm de holgura); el marco llega a **2,54 mm, el espesor exacto del Pololu**, así
-    que su cara superior queda enrasada;
+- **Pololu S7V8F3** (Pololu 2122: 16,51 × 11,43 mm; **espesor 1,0 mm**, medido por el usuario. Pololu da 0,1″ =
+  2,54 mm sin aclarar qué incluye) en el sitio de la placa Qi, **a 1,0 mm del borde −Y**:
+  - alojamiento de 11,83 × 16,91 mm (0,2 mm de holgura) rebajado **1,0 mm** en el refuerzo: su cara superior queda
+    enrasada con el refuerzo (Z 11,2) y ya no hay marco por encima;
   - lado de los pines (SHDN, VIN, GND, VOUT) hacia la antena, con una salida de 9 mm para los hilos y un alivio de
     0,5 mm bajo las soldaduras.
 - **Sujetacables para 5 cables AWG30:**
