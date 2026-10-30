@@ -110,6 +110,25 @@
                 <v:ReportsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Reports}"/>
                 <v:ServerView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Server}"/>
                 <v:EngineView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Engine}"/>
+                <!-- empty state: no training imported yet -->
+                <Border Background="#E6030406" Visibility="{Binding ShowEmptyState, Converter={StaticResource BoolVis}}">
+                    <Border Width="560" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource AvoCardBrush}"
+                            BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="10" Padding="32,28">
+                        <StackPanel>
+                            <Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoRed}" Style="{StaticResource AvoIcon}" Width="40" Height="40" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Todavía no hay entrenamientos" Style="{StaticResource AvoTitle}" Margin="0,14,0,6"/>
+                            <TextBlock Style="{StaticResource AvoDim}" FontSize="13"
+                                       Text="Abre un archivo .avo exportado desde la app Android (Compartir entrenamiento) o un .avr de la tarjeta SD del pecho. También puedes arrastrarlo a esta ventana. Para ver la aplicación con datos, carga las sesiones de demostración (datos sintéticos, marcados como tales)."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Button Style="{StaticResource AvoPrimaryButton}" Command="{Binding ImportCommand}" Padding="18,9">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/><TextBlock Text="Abrir entrenamiento" Margin="8,0,0,0"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding LoadDemoCommand}" Padding="18,9" Margin="10,0,0,0" Content="Cargar demostración"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding DemoState}" Style="{StaticResource AvoCaption}" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
             </Grid>
         </Grid>
 

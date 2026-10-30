@@ -159,7 +159,7 @@ public sealed partial class MainViewModel
     private double _imuWinMin = double.NaN, _imuWinMax = double.NaN;
     public double ImuWindowMin { get => _imuWinMin; set => Set(ref _imuWinMin, value); }
     public double ImuWindowMax { get => _imuWinMax; set => Set(ref _imuWinMax, value); }
-    public string BiomechStatus { get; private set; } = "";
+    public string BiomechStatus { get; private set; } = "Selecciona un entrenamiento.";
     public bool HasBiomech => Selected?.Engine is { HasImu: true };
     public bool HasGirthRaw => Selected is { Imu.Channels.Count: > 0 };
     public string SymmetryHeadline { get; private set; } = "—";

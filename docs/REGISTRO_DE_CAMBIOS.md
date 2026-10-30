@@ -45,6 +45,10 @@ panel anterior pasa a «Entrenamientos». La foto sale de la maqueta (1536×1024
 de alta resolución en `windows/AVO.Windows/Assets/avo_home_hero.jpg`.
 **Actualización 30/10 21:45:** las 5 acciones del inicio son funcionales y se comprueban en CI pulsándolas por UI Automation
 (abrir → importa y abre «Análisis»; recientes → «Entrenamientos» con historial y favoritos persistentes; servidor; comparar; informes).
+**Actualización 30/10 23:30 (tras la primera prueba del usuario en su PC, sin entrenamientos):** mapa centrado en el Regatón
+cuando no hay recorrido (antes mostraba océano 0°,0° con teselas «Map data not yet available»), panel claro «Todavía no hay
+entrenamientos» con «Abrir» y «Cargar demostración» (descarga las sesiones SINTÉTICAS publicadas en la pre-release).
+Descarga directa: pre-release `windows-v2-pro-latest` (EXE único con el motor incluido).
 **Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
 del ejecutable; modelo 3D autorizado; integración en develop.
 

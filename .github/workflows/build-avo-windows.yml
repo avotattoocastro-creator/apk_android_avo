@@ -161,6 +161,10 @@ jobs:
         with:
           name: AVO-Windows-V2-PRO-x64
           path: dl
+      - uses: actions/download-artifact@v4
+        with:
+          name: AVO-Windows-V2-demo-sintetica
+          path: dl
       - name: Publish pre-release with the EXE and the ZIP
         env:
           GH_TOKEN: ${{ github.token }}
@@ -170,9 +174,9 @@ jobs:
           cd dl
           unzip -q AVO_Windows_V2_PRO_x64.zip -d app
           cp app/AVO.Performance.Horse.Windows.exe ./AVO_Performance_Horse_Windows_V2_PRO.exe
-          sha256sum AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip > SHA256SUMS.txt
+          sha256sum AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip AVO_Windows_V2_DEMO_SINTETICA.zip > SHA256SUMS.txt
           gh release delete windows-v2-pro-latest --repo "$REPO" --yes --cleanup-tag || true
           gh release create windows-v2-pro-latest --repo "$REPO" --prerelease --target "${{ github.sha }}" \
             --title "AVO Windows Advanced Analysis V2 PRO (última compilación de prueba)" \
             --notes "Compilación automática ${{ github.run_id }} del commit ${{ github.sha }}. Ejecutable portable autocontenido para Windows 10/11 x64, SIN FIRMA digital (SmartScreen avisará). No verificado manualmente en Windows." \
-            AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip SHA256SUMS.txt
+            AVO_Performance_Horse_Windows_V2_PRO.exe AVO_Windows_V2_PRO_x64.zip AVO_Windows_V2_DEMO_SINTETICA.zip SHA256SUMS.txt

@@ -66,6 +66,7 @@ public sealed partial class MainViewModel : ObservableObject
         PlayCommand = new RelayCommand(TogglePlay, () => Selected is not null);
         ResetZoomCommand = new RelayCommand(() => { ChartXMin = double.NaN; ChartXMax = double.NaN; });
         ClearRangeCommand = new RelayCommand(() => { RangeStart = double.NaN; RangeEnd = double.NaN; });
+        LoadDemoCommand = new AsyncCommand(_ => LoadDemoAsync(), Fail);
         OpenSessionCommand = new RelayCommand(p => { if (p is SessionItem s) { Selected = s; Page = "Analysis"; } });
         _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(50) };
         _timer.Tick += (_, _) => PlaybackTick();
@@ -92,6 +93,54 @@ public sealed partial class MainViewModel : ObservableObject
         if (Page == "Compare") RefreshCompare();
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
         if (Page == "Reports") RefreshReportPreview();
+        Raise(nameof(ShowEmptyState));
+    }
+
+    /// <summary>Analysis pages without any training: show a clear «import / demo» panel instead of empty widgets.</summary>
+    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine");
+
+    public const string DemoUrl = "https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/windows-v2-pro-latest/AVO_Windows_V2_DEMO_SINTETICA.zip";
+    private string _demoState = "";
+    public string DemoState { get => _demoState; private set => Set(ref _demoState, value); }
+
+    /// <summary>Downloads the SYNTHETIC demonstration sessions published with the build and imports them (clearly labelled demo).</summary>
+    private async Task LoadDemoAsync()
+    {
+        DemoState = "Descargando sesiones de demostración (16 MB)…";
+        Busy = true;
+        string dir = Path.Combine(Paths.Root, "demo");
+        try
+        {
+            Directory.CreateDirectory(dir);
+            string zip = Path.Combine(dir, "demo.zip");
+            using (var http = new System.Net.Http.HttpClient { Timeout = TimeSpan.FromMinutes(3) })
+            using (var r = await http.GetAsync(DemoUrl, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+            {
+                r.EnsureSuccessStatusCode();
+                if (r.Content.Headers.ContentLength > 80_000_000) throw new InvalidDataException("Paquete de demostración demasiado grande");
+                await using var f = File.Create(zip);
+                await r.Content.CopyToAsync(f);
+            }
+            var files = new List<string>();
+            using (var z = System.IO.Compression.ZipFile.OpenRead(zip))
+                foreach (var e in z.Entries)
+                {
+                    // only flat DEMO_*.avr names: no paths from the archive are ever used
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(e.Name, @"^DEMO_[A-Za-z0-9_]{1,60}\.avr$") || e.Length > 40_000_000) continue;
+                    string target = Path.Combine(dir, e.Name);
+                    e.ExtractToFile(target, true);
+                    files.Add(target);
+                }
+            DemoState = $"Importando {files.Count} sesiones de demostración…";
+            await ImportFilesAsync(files);
+            DemoState = files.Count > 0 ? "Sesiones de demostración cargadas (DATOS SINTÉTICOS)." : "El paquete no contenía sesiones válidas.";
+        }
+        catch (Exception ex) when (ex is System.Net.Http.HttpRequestException or IOException or InvalidDataException or TaskCanceledException)
+        {
+            DemoState = "No se pudo descargar la demostración: " + ex.Message;
+            Log.Warn("demo", ex.Message, ex);
+        }
+        finally { Busy = false; }
     }
 
     private string _status = "Listo · importa un entrenamiento .avo o .avr";
@@ -113,6 +162,7 @@ public sealed partial class MainViewModel : ObservableObject
     public ICommand ResetZoomCommand { get; }
     public ICommand ClearRangeCommand { get; }
     public ICommand OpenSessionCommand { get; }
+    public ICommand LoadDemoCommand { get; }
 
     // ------------------------------------------------------------------ filter
     private string _search = "";
@@ -382,7 +432,7 @@ public sealed partial class MainViewModel : ObservableObject
         Horses.Clear();
         foreach (var g in Sessions.GroupBy(s => s.Horse).OrderByDescending(g => g.Count()))
             Horses.Add(new HorseCard(g.Key, g.Count(), g.Max(s => s.Start) is DateTimeOffset d ? MadridTime.Format(d, "dd/MM/yyyy") : "—", g.Max(s => s.MaxSpeedKmh).ToString("0.0", Es) + " km/h"));
-        RaiseMany(nameof(SessionCount), nameof(TotalDistanceText), nameof(DemoDistanceText), nameof(HasDemo), nameof(BestSpeedText), nameof(RecentSessions));
+        RaiseMany(nameof(ShowEmptyState), nameof(SessionCount), nameof(TotalDistanceText), nameof(DemoDistanceText), nameof(HasDemo), nameof(BestSpeedText), nameof(RecentSessions));
     }
 
     // ------------------------------------------------------------------ settings

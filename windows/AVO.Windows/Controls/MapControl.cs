@@ -62,8 +62,11 @@ public sealed class MapControl : FrameworkElement
     /// <summary>Extra room kept free around the route when fitting (overlays on top of the map).</summary>
     public Thickness FitPadding { get => (Thickness)GetValue(FitPaddingProperty); set => SetValue(FitPaddingProperty, value); }
 
-    public double Zoom { get; private set; } = 15;
-    private double _cx = 0.5 * 256, _cy = 0.5 * 256;    // view centre in zoom-0 world pixels
+    public double Zoom { get; private set; } = 14.5;
+    public static double HomeLatitude { get; set; } = TrainingPlace.Regaton.Latitude;
+    public static double HomeLongitude { get; set; } = TrainingPlace.Regaton.Longitude;
+    private double _cx = TileMath.LatLonToPixel(TrainingPlace.Regaton.Latitude, TrainingPlace.Regaton.Longitude, 0).x,
+                   _cy = TileMath.LatLonToPixel(TrainingPlace.Regaton.Latitude, TrainingPlace.Regaton.Longitude, 0).y;    // view centre in zoom-0 world pixels
     private bool _fitPending = true;
     private bool _userMoved;   // keep the user's view on resize; otherwise the route stays fitted
     private Point? _down; private double _downCx, _downCy; private bool _moved;
@@ -115,7 +118,14 @@ public sealed class MapControl : FrameworkElement
         foreach (var t in tracks)
             for (int i = 0; t.Px0 is not null && i < t.Px0.Length; i++)
             { minX = Math.Min(minX, t.Px0[i]); maxX = Math.Max(maxX, t.Px0[i]); minY = Math.Min(minY, t.Py0![i]); maxY = Math.Max(maxY, t.Py0[i]); }
-        if (minX > maxX) { InvalidateVisual(); return; }
+        if (minX > maxX)
+        {
+            // No route: show the usual training area (Playa del Regatón, Laredo) instead of an empty ocean at 0°,0°.
+            var (hx, hy) = TileMath.LatLonToPixel(HomeLatitude, HomeLongitude, 0);
+            _cx = hx; _cy = hy; Zoom = 14.5; _fitPending = false;
+            InvalidateVisual();
+            return;
+        }
         var pad = FitPadding;
         double w = Math.Max(20, ActualWidth - pad.Left - pad.Right), h = Math.Max(20, ActualHeight - pad.Top - pad.Bottom);
         double zx = Math.Log2(w / Math.Max(maxX - minX, 1e-9)), zy = Math.Log2(h / Math.Max(maxY - minY, 1e-9));
@@ -152,8 +162,10 @@ public sealed class MapControl : FrameworkElement
         }
         if (tracks.Count == 0)
         {
-            var ft = Text("Sin recorrido GNSS: importa o selecciona un entrenamiento", 13, new SolidColorBrush(Color.FromRgb(0x9C, 0x9D, 0xA4)));
-            dc.DrawText(ft, new Point((ActualWidth - ft.Width) / 2, (ActualHeight - ft.Height) / 2));
+            var ft = Text("Sin recorrido GNSS: importa o selecciona un entrenamiento", 13, Brushes.White);
+            var box = new Rect((ActualWidth - ft.Width) / 2 - 12, (ActualHeight - ft.Height) / 2 - 7, ft.Width + 24, ft.Height + 14);
+            dc.DrawRoundedRectangle(new SolidColorBrush(Color.FromArgb(0xCC, 0x10, 0x10, 0x14)), null, box, 5, 5);
+            dc.DrawText(ft, new Point(box.X + 12, box.Y + 7));
         }
     }
 
