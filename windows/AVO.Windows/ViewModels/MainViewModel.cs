@@ -128,7 +128,7 @@ public sealed partial class MainViewModel : ObservableObject
                     // only flat DEMO_*.avr names: no paths from the archive are ever used
                     if (!System.Text.RegularExpressions.Regex.IsMatch(e.Name, @"^DEMO_[A-Za-z0-9_]{1,60}\.avr$") || e.Length > 40_000_000) continue;
                     string target = Path.Combine(dir, e.Name);
-                    e.ExtractToFile(target, true);
+                    System.IO.Compression.ZipFileExtensions.ExtractToFile(e, target, true);
                     files.Add(target);
                 }
             DemoState = $"Importando {files.Count} sesiones de demostración…";
