@@ -17,9 +17,9 @@
   "pololu_S7V8F3 / cuna": 0.0,
   "pololu_S7V8F3 / base": 0.0,
   "pololu_S7V8F3 / tapa_E5": 0.0,
-  "cables_cuello_y_cola / cuna": 0.0,
-  "cables_cuello_y_cola / base": 0.0,
-  "cables_cuello_y_cola / tapa_E5": 0.0,
+  "cables_cuello_y_borde / cuna": 0.0,
+  "cables_cuello_y_borde / base": 0.0,
+  "cables_cuello_y_borde / tapa_E5": 0.0,
   "clavija_USB_C / cuna": 0.0,
   "clavija_USB_C / base": 0.0,
   "clavija_USB_C / tapa_E5": 7.324,
@@ -44,7 +44,7 @@
    "cuna": 0.02,
    "tapa_E5": 3.56
   },
-  "cables_cuello_y_cola": {
+  "cables_cuello_y_borde": {
    "cuna": 0.02,
    "tapa_E5": 1.2
   },

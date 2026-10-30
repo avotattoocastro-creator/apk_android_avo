@@ -36,12 +36,13 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
 - **Sujetacables para 5 cables AWG30:**
   - **Borde −Y, junto a la Heltec:** 3 labios a 45° sobre el canal entre el refuerzo y la Heltec (X 21, 38 y 53). El de
     X 21 se movió desde X 24 para no tocar las láminas del botón USER de la tapa.
-  - **Cuello:** 3 pinzas de dos postes con labio a 45°. Dos en el lado −Y (Y −13,5 y −7,5) y una en el +Y (Y 14,5, junto
-    al contacto GND). Los cables van a lo largo de Y. No hay pinzas entre Y 0,9 y 13,3 porque ahí entra la clavija del
-    USB-C.
-  - **Extremo de la antena:** canal de 3,4 mm abierto en el refuerzo hasta la bandeja (X 69,8–73,2, de Y −16 a 13), con
-    labios a 45° en sus cantos en Y −13, −2,5, 6 y 11. Pasa por debajo del pisador (72; −8) de la tapa, que sigue apoyando
-    en el canto +X.
+  - **Cuello:** 2 pinzas de dos postes con labio a 45°: una en el lado −Y (Y −7,5) y otra en el +Y (Y 14,5, junto al
+    contacto GND). Los cables van a lo largo de Y. La pinza de Y −13,5 se ha quitado. No hay pinzas entre Y 0,9 y 13,3
+    porque ahí entra la clavija del USB-C.
+  - **Borde −Y (exterior):** canal de 2,3 mm abierto en el refuerzo hasta la bandeja (Y −19,6 a −17,3), del cuello al
+    Pololu y del Pololu al extremo de la antena. Lleva labios a 45° en los dos cantos en X 14,5, 25,5, 39,5 y 70. Los
+    pisadores de la tapa (Y −16,5) siguen apoyando en el refuerzo del lado interior. El canal del extremo de la antena se
+    ha quitado.
   - **Borde +Y:** junto a las torres de la Heltec en X 30 y 46 hay una **torre exterior separada** (X 28,8–31,3 y
     45,2–47,3; Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
     otro. Las torres exteriores están fuera de los clics de la base, que sujetan la bandeja en X 16–24 y 36–45.

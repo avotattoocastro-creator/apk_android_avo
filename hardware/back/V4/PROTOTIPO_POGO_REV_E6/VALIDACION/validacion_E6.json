@@ -24,14 +24,14 @@
   "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
  },
  "AVO_RevE6_CUNA_HELTEC": {
-  "triangulos": 2176,
-  "vertices": 1078,
+  "triangulos": 2148,
+  "vertices": 1064,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
   "euler": -10,
-  "volumen_mm3": 4341.6,
+  "volumen_mm3": 4311.3,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -44,7 +44,7 @@
    21.0,
    5.4
   ],
-  "volumen_brep_mm3": 4341.6,
+  "volumen_brep_mm3": 4311.2,
   "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
  },
  "AVO_RevE6_SOPORTE_POGO": {
