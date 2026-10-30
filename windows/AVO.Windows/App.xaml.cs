@@ -109,7 +109,13 @@ public partial class App : Application
         }
         // Hosted runners have a 1280x768 screen and Windows clamps resizable captioned windows to it. In capture mode the window
         // is a borderless, non-resizable popup, which may be larger than the screen, so 1920x1080 and 2560x1440 are real sizes.
+        // The content is moved into a Canvas, which arranges it at its explicit size without a layout clip, so it renders
+        // completely even when the window itself is smaller than the requested capture size.
         var root = (FrameworkElement)window.Content;
+        window.Content = null;
+        var canvas = new System.Windows.Controls.Canvas();
+        canvas.Children.Add(root);
+        window.Content = canvas;
         var report = new List<object>();
         foreach (var spec in sizes.Split(',', StringSplitOptions.RemoveEmptyEntries))
         {
