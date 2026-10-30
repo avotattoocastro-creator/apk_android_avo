@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-10-30 10:37 UTC",
+ "date_utc": "2026-10-30 11:44 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C2980299": {
@@ -42,7 +42,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 36403,
+   "stock": 36389,
    "library": "expand",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "BQ51013BRHLR",
    "maker": "Texas Instruments",
    "package": "VQFN-20(4.5x3.5)",
-   "stock": 471,
+   "stock": 469,
    "library": "expand",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "TYPE-C-31-M-12",
    "maker": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 284585,
+   "stock": 284301,
    "library": "expand",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 34295,
+   "stock": 34098,
    "library": "expand",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1019514,
+   "stock": 1021120,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "AO3400A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1067764,
+   "stock": 1068437,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "2N7002",
    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
    "package": "SOT-23",
-   "stock": 3054763,
+   "stock": 3421350,
    "library": "base",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7299516,
+   "stock": 7297951,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "SM02B-SRSS-TB(LF)(SN)",
    "maker": "JST",
    "package": "SMD,P=1mm,Surface Mount，Right Angle",
-   "stock": 75017,
+   "stock": 75012,
    "library": "expand",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "GRM31C5C1H104JA01L",
    "maker": "Murata Electronics",
    "package": "1206",
-   "stock": 63077,
+   "stock": 63129,
    "library": "expand",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 8141381,
+   "stock": 8152201,
    "library": "base",
    "prices": [
     [
@@ -602,7 +602,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 3511830,
+   "stock": 3512279,
    "library": "base",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "CL10A106KP8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 11884257,
+   "stock": 11879012,
    "library": "base",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10277067,
+   "stock": 10342612,
    "library": "base",
    "prices": [
     [
@@ -707,7 +707,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 36046904,
+   "stock": 36047759,
    "library": "base",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6097458,
+   "stock": 6134916,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "0402B223K500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 601359,
+   "stock": 601207,
    "library": "base",
    "prices": [
     [
@@ -812,7 +812,7 @@
    "mpn": "CL10B474KA8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 680324,
+   "stock": 681659,
    "library": "base",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "CL05B224KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 1314449,
+   "stock": 1316302,
    "library": "base",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "CL10A475KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 4248136,
+   "stock": 4249330,
    "library": "base",
    "prices": [
     [
@@ -917,7 +917,7 @@
    "mpn": "CL10A225KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 2852959,
+   "stock": 2850798,
    "library": "base",
    "prices": [
     [
@@ -952,7 +952,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 16775240,
+   "stock": 16828819,
    "library": "base",
    "prices": [
     [
@@ -987,7 +987,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8390086,
+   "stock": 8395967,
    "library": "base",
    "prices": [
     [
@@ -1022,7 +1022,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2930444,
+   "stock": 2929984,
    "library": "base",
    "prices": [
     [
@@ -1057,7 +1057,7 @@
    "mpn": "0402WGF5101TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3771850,
+   "stock": 3786243,
    "library": "base",
    "prices": [
     [
@@ -1092,7 +1092,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2888893,
+   "stock": 2891069,
    "library": "base",
    "prices": [
     [
@@ -1127,7 +1127,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2182960,
+   "stock": 2181265,
    "library": "base",
    "prices": [
     [
@@ -1162,7 +1162,7 @@
    "mpn": "0402WGF2000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1906355,
+   "stock": 1906365,
    "library": "base",
    "prices": [
     [
@@ -1197,7 +1197,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21596913,
+   "stock": 21629223,
    "library": "base",
    "prices": [
     [
@@ -1232,7 +1232,7 @@
    "mpn": "0402WGF3301TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1570571,
+   "stock": 1571396,
    "library": "base",
    "prices": [
     [
@@ -1267,7 +1267,7 @@
    "mpn": "0402WGF4701TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 14844575,
+   "stock": 14846148,
    "library": "base",
    "prices": [
     [
@@ -1302,7 +1302,7 @@
    "mpn": "0402WGF2002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2869947,
+   "stock": 2870362,
    "library": "base",
    "prices": [
     [
@@ -1337,7 +1337,7 @@
    "mpn": "0402WGF0000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 11186508,
+   "stock": 11245390,
    "library": "base",
    "prices": [
     [
@@ -1442,7 +1442,7 @@
    "mpn": "DRV5032FADBZR",
    "maker": "Texas Instruments",
    "package": "SOT-23",
-   "stock": 44647,
+   "stock": 44642,
    "library": "expand",
    "prices": [
     [
@@ -1477,7 +1477,7 @@
    "mpn": "CL21A476MQYNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 1043100,
+   "stock": 1042064,
    "library": "base",
    "prices": [
     [
@@ -1547,7 +1547,7 @@
    "mpn": "0402WGF2001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10000134,
+   "stock": 10000179,
    "library": "base",
    "prices": [
     [
@@ -1582,7 +1582,7 @@
    "mpn": "TLV75733PDBVR",
    "maker": "Texas Instruments",
    "package": "SOT-23-5",
-   "stock": 30076,
+   "stock": 30044,
    "library": "expand",
    "prices": [
     [
@@ -1611,6 +1611,41 @@
     ]
    ],
    "describe": "-40℃~+125℃@(Tj) 1 1A 3.3V 40uA 46dB@(100kHz) 5.5V 650mV@(1A) 71.5uVrms Fixed Positive Under Voltage Lockout、Over Current Protection、Over Temperature Protection、Soft Start SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+  },
+  "C2827694": {
+   "lcsc": "C2827694",
+   "mpn": "PESD5V0S1BA",
+   "maker": "TECH PUBLIC",
+   "package": "SOD-323",
+   "stock": 496730,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0359
+    ],
+    [
+     200,
+     0.0269
+    ],
+    [
+     600,
+     0.023
+    ],
+    [
+     3000,
+     0.0204
+    ],
+    [
+     9000,
+     0.0191
+    ],
+    [
+     21000,
+     0.0182
+    ]
+   ],
+   "describe": "-55℃~+125℃ 1 100nA 20A 300W 5V 7V 9V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
   }
  },
  "search": {
@@ -1805,7 +1840,7 @@
     "mpn": "TLV75733PDBVR",
     "maker": "Texas Instruments",
     "package": "SOT-23-5",
-    "stock": 30076,
+    "stock": 30044,
     "library": "expand",
     "prices": [
      [
@@ -2137,7 +2172,7 @@
     "mpn": "TPS7A2033PDBVR",
     "maker": "Texas Instruments",
     "package": "SOT-23-5",
-    "stock": 141538,
+    "stock": 141025,
     "library": "expand",
     "prices": [
      [
@@ -2207,7 +2242,7 @@
     "mpn": "TPS7A2033PDBVR-TP",
     "maker": "TECH PUBLIC",
     "package": "SOT-23-5",
-    "stock": 2457,
+    "stock": 2447,
     "library": "expand",
     "prices": [
      [
@@ -2314,7 +2349,7 @@
     "mpn": "AP2112K-3.3TRG1",
     "maker": "TECH PUBLIC",
     "package": "SOT-23-5",
-    "stock": 27335,
+    "stock": 27308,
     "library": "expand",
     "prices": [
      [
@@ -2349,7 +2384,7 @@
     "mpn": "AP2112K-3.3TRG1",
     "maker": "Diodes Incorporated",
     "package": "SOT-25-5",
-    "stock": 8790,
+    "stock": 8780,
     "library": "expand",
     "prices": [
      [
@@ -2384,7 +2419,7 @@
     "mpn": "TPAP2112K-3.3TRG1",
     "maker": "TECH PUBLIC",
     "package": "SOT-23-5",
-    "stock": 6100,
+    "stock": 6093,
     "library": "expand",
     "prices": [
      [
@@ -2512,7 +2547,7 @@
     "mpn": "SH-SM08B-GHS-TB(LF)(SN)",
     "maker": "SHOU HAN",
     "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
-    "stock": 35503,
+    "stock": 35502,
     "library": "expand",
     "prices": [
      [
@@ -2547,7 +2582,7 @@
     "mpn": "SM08B-GHS-TB(LF)(SN)",
     "maker": "JST",
     "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
-    "stock": 18519,
+    "stock": 18469,
     "library": "expand",
     "prices": [
      [
@@ -2603,7 +2638,7 @@
     "mpn": "XY-S2B-PH-SM4-TB",
     "maker": "XYECONN",
     "package": "SMD,P=2mm,Surface Mount，Right Angle",
-    "stock": 5145,
+    "stock": 5125,
     "library": "expand",
     "prices": [
      [
@@ -2638,7 +2673,7 @@
     "mpn": "S2B-PH-SM4-TB(LF)(SN)",
     "maker": "JST",
     "package": "SMD,P=2mm,Surface Mount，Right Angle",
-    "stock": 2,
+    "stock": 10,
     "library": "expand",
     "prices": [
      [
@@ -3440,7 +3475,7 @@
     "mpn": "1206L150/16NR",
     "maker": "LUTE",
     "package": "1206",
-    "stock": 28595,
+    "stock": 28585,
     "library": "expand",
     "prices": [
      [
@@ -4286,7 +4321,7 @@
     "mpn": "DRV5032FADBZR",
     "maker": "Texas Instruments",
     "package": "SOT-23",
-    "stock": 44647,
+    "stock": 44642,
     "library": "expand",
     "prices": [
      [
@@ -4640,7 +4675,7 @@
     "mpn": "CL21A476MQYNNNE",
     "maker": "Samsung Electro-Mechanics",
     "package": "0805",
-    "stock": 1043100,
+    "stock": 1042064,
     "library": "base",
     "prices": [
      [
@@ -4677,7 +4712,7 @@
     "mpn": "CL21A476MQYNNNE",
     "maker": "Samsung Electro-Mechanics",
     "package": "0805",
-    "stock": 1043100,
+    "stock": 1042064,
     "library": "base",
     "prices": [
      [
@@ -4887,7 +4922,7 @@
     "mpn": "CC0805MKX5R5BB476",
     "maker": "YAGEO",
     "package": "0805",
-    "stock": 51018,
+    "stock": 51014,
     "library": "expand",
     "prices": [
      [
@@ -4922,7 +4957,7 @@
     "mpn": "0805X476M100NT",
     "maker": "FH (Guangdong Fenghua Advanced Tech)",
     "package": "0805",
-    "stock": 43047,
+    "stock": 42917,
     "library": "expand",
     "prices": [
      [
@@ -5029,7 +5064,7 @@
     "mpn": "CL31A107MQHNNNE",
     "maker": "Samsung Electro-Mechanics",
     "package": "1206",
-    "stock": 1785221,
+    "stock": 1785092,
     "library": "base",
     "prices": [
      [
@@ -5064,7 +5099,7 @@
     "mpn": "TCC1206X5R107M6R3HT",
     "maker": "CCTC",
     "package": "1206",
-    "stock": 206371,
+    "stock": 201762,
     "library": "expand",
     "prices": [
      [
@@ -5134,7 +5169,7 @@
     "mpn": "GRM31CR61A107MEA8L",
     "maker": "Murata Electronics",
     "package": "1206",
-    "stock": 63733,
+    "stock": 63783,
     "library": "expand",
     "prices": [
      [
@@ -5204,7 +5239,7 @@
     "mpn": "GRM31CR61A107ME05L",
     "maker": "Murata Electronics",
     "package": "1206",
-    "stock": 33093,
+    "stock": 32988,
     "library": "expand",
     "prices": [
      [
@@ -5381,7 +5416,7 @@
     "mpn": "0402WGF2001TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 10000134,
+    "stock": 10000179,
     "library": "base",
     "prices": [
      [
@@ -5437,7 +5472,7 @@
     "mpn": "0402WGF1801TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 586462,
+    "stock": 586417,
     "library": "expand",
     "prices": [
      [
@@ -5474,7 +5509,7 @@
     "mpn": "0402WGF1501TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 1541307,
+    "stock": 1542852,
     "library": "base",
     "prices": [
      [
@@ -5511,7 +5546,7 @@
     "mpn": "0402WGF3900TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 201759,
+    "stock": 201739,
     "library": "expand",
     "prices": [
      [
@@ -5548,7 +5583,7 @@
     "mpn": "0402WGF6202TCE",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "0402",
-    "stock": 440613,
+    "stock": 440623,
     "library": "expand",
     "prices": [
      [
@@ -5623,7 +5658,7 @@
     "mpn": "PESD5V0S1BLN",
     "maker": "BORN",
     "package": "DFN1006-2",
-    "stock": 149637,
+    "stock": 149613,
     "library": "expand",
     "prices": [
      [
@@ -5658,7 +5693,7 @@
     "mpn": "PESD5V0S1BL",
     "maker": "TECH PUBLIC",
     "package": "DFN1006-2(0402)",
-    "stock": 77147,
+    "stock": 77167,
     "library": "expand",
     "prices": [
      [
@@ -6327,7 +6362,7 @@
     "mpn": "LESD5D5.0CT1G(UMW)",
     "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
     "package": "SOD-523",
-    "stock": 120560,
+    "stock": 120571,
     "library": "expand",
     "prices": [
      [
@@ -6502,7 +6537,7 @@
     "mpn": "BNLESD5D5.0CT1G",
     "maker": "BORN",
     "package": "SOD-523",
-    "stock": 36645,
+    "stock": 36620,
     "library": "expand",
     "prices": [
      [
@@ -6679,7 +6714,7 @@
     "mpn": "SMF5.0A",
     "maker": "MDD(Microdiode Semiconductor)",
     "package": "SOD-123FL",
-    "stock": 492565,
+    "stock": 492585,
     "library": "expand",
     "prices": [
      [
@@ -6749,7 +6784,7 @@
     "mpn": "SMF5.0A",
     "maker": "DOWO",
     "package": "SOD-123",
-    "stock": 227379,
+    "stock": 227191,
     "library": "expand",
     "prices": [
      [
@@ -6854,7 +6889,7 @@
     "mpn": "SMF5.0A",
     "maker": "Shandong Jingdao Microelectronics",
     "package": "SOD-123FL",
-    "stock": 49081,
+    "stock": 49096,
     "library": "expand",
     "prices": [
      [
@@ -7031,7 +7066,7 @@
     "mpn": "PESD5V0S1BA",
     "maker": "TECH PUBLIC",
     "package": "SOD-323",
-    "stock": 496710,
+    "stock": 496730,
     "library": "expand",
     "prices": [
      [
@@ -7276,7 +7311,7 @@
     "mpn": "PESD5V0S1BA,115",
     "maker": "Nexperia",
     "package": "SOD-323",
-    "stock": 14492,
+    "stock": 14415,
     "library": "expand",
     "prices": [
      [
@@ -7453,7 +7488,7 @@
     "mpn": "SD05C",
     "maker": "MDD(Microdiode Semiconductor)",
     "package": "SOD-323",
-    "stock": 75246,
+    "stock": 75217,
     "library": "expand",
     "prices": [
      [
