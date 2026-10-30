@@ -69,6 +69,7 @@ public sealed partial class MainViewModel : ObservableObject
         OpenSessionCommand = new RelayCommand(p => { if (p is SessionItem s) { Selected = s; Page = "Analysis"; } });
         _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(50) };
         _timer.Tick += (_, _) => PlaybackTick();
+        InitFavorites();
         InitSegments();
         InitCompare();
         InitReports();
@@ -116,8 +117,34 @@ public sealed partial class MainViewModel : ObservableObject
     // ------------------------------------------------------------------ filter
     private string _search = "";
     public string Search { get => _search; set { if (Set(ref _search, value)) SessionsView.Refresh(); } }
+    private bool _onlyFavorites;
+    public bool OnlyFavorites { get => _onlyFavorites; set { if (Set(ref _onlyFavorites, value)) SessionsView.Refresh(); } }
+    private readonly HashSet<string> _favorites = new(StringComparer.Ordinal);
+    private string FavoritesFile => Path.Combine(Paths.Root, "favoritos.json");
+    public ICommand ToggleFavoriteCommand { get; private set; } = null!;
+
+    private void InitFavorites()
+    {
+        try
+        {
+            if (File.Exists(FavoritesFile))
+                foreach (var id in System.Text.Json.JsonSerializer.Deserialize<string[]>(File.ReadAllText(FavoritesFile)) ?? []) _favorites.Add(id);
+        }
+        catch (Exception ex) when (ex is IOException or System.Text.Json.JsonException) { Log.Warn("favoritos", ex.Message, ex); }
+        ToggleFavoriteCommand = new RelayCommand(p =>
+        {
+            if (p is not SessionItem s) return;
+            s.IsFavorite = !s.IsFavorite;
+            if (s.IsFavorite) _favorites.Add(s.Id); else _favorites.Remove(s.Id);
+            try { File.WriteAllText(FavoritesFile, System.Text.Json.JsonSerializer.Serialize(_favorites.OrderBy(x => x).ToArray())); }
+            catch (IOException ex) { Log.Warn("favoritos", ex.Message, ex); }
+            if (OnlyFavorites) SessionsView.Refresh();
+        });
+    }
+
     private bool MatchesFilter(SessionItem s)
     {
+        if (OnlyFavorites && !s.IsFavorite) return false;
         if (string.IsNullOrWhiteSpace(Search)) return true;
         string q = Search.Trim();
         return new[] { s.Horse, s.Rider, s.Id, s.DateText, s.Discipline, s.Kind }.Any(x => x.Contains(q, StringComparison.CurrentCultureIgnoreCase));
@@ -246,6 +273,7 @@ public sealed partial class MainViewModel : ObservableObject
         if (list.Length == 0) return;
         Busy = true;
         int ok = 0, bad = 0, dup = 0, k = 0;
+        SessionItem? lastImported = null;
         try
         {
             foreach (var f in list)
@@ -267,6 +295,8 @@ public sealed partial class MainViewModel : ObservableObject
                 var same = Sessions.FirstOrDefault(s => s.Id == item.Id);
                 if (same is not null) { Sessions.Remove(same); dup++; }
                 Sessions.Add(item);
+                item.IsFavorite = _favorites.Contains(item.Id);
+                lastImported = item;
                 ok++;
                 if (!restoring || ImportLog.Count < 8)
                     ImportLog.Insert(0, new ImportLogRow(DateTime.Now.ToString("HH:mm", Es), outcome.Session.SourceName, outcome.Status + (item.IsSynthetic ? " · DEMOSTRACIÓN" : ""), true));
@@ -277,6 +307,11 @@ public sealed partial class MainViewModel : ObservableObject
         Status = $"Importación: {ok} aceptados, {bad} rechazados, {dup} duplicados · {Sessions.Count} sesiones";
         AssignCompareColors();
         RefreshHome();
+        if (!restoring && lastImported is not null)
+        {
+            Selected = lastImported;                     // what the user just opened
+            if (Page is "Home" or "Sessions") Page = "Analysis";
+        }
         if (Selected is null && Sessions.Count > 0) Selected = Sessions.OrderByDescending(s => s.Start).First();
         if (bad > 0 && !restoring) Dialogs.Show("Importación", $"{bad} archivo(s) rechazados. Consulta «Estado de importaciones» en Inicio.", true);
     }

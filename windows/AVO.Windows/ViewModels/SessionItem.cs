@@ -25,6 +25,9 @@ public sealed class SessionItem : ObservableObject
     private string _notes = "";
     public string Notes { get => _notes; set => Set(ref _notes, value); }
 
+    private bool _favorite;
+    public bool IsFavorite { get => _favorite; set => Set(ref _favorite, value); }
+
     private bool _compare;
     public bool IsCompared { get => _compare; set => Set(ref _compare, value); }
     public Color CompareColor { get; set; } = Color.FromRgb(0x3D, 0x9B, 0xFF);

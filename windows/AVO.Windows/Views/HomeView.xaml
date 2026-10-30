@@ -89,18 +89,37 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="360"/>
                 </Grid.ColumnDefinitions>
-                <c:AvoCard Header="Últimos entrenamientos" MinHeight="360">
+                <c:AvoCard Header="Sesiones recientes · historial y favoritos" MinHeight="360">
                     <c:AvoCard.HeaderTools>
+                        <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Solo favoritos" IsChecked="{Binding OnlyFavorites}" VerticalAlignment="Center" Margin="0,0,14,0"/>
                         <Grid Width="260">
                             <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Padding="30,5,8,5"/>
                             <Path Data="{StaticResource IconSearch}" Stroke="{StaticResource AvoTextDim}" Style="{StaticResource AvoIcon}" Width="14" Height="14" HorizontalAlignment="Left" Margin="10,0,0,0" IsHitTestVisible="False"/>
                         </Grid>
+                        </StackPanel>
                     </c:AvoCard.HeaderTools>
                     <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding SessionsView}" SelectedItem="{Binding Selected}" CanUserSortColumns="True" MinHeight="300">
                         <DataGrid.InputBindings>
                             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding NavigateCommand}" CommandParameter="Analysis"/>
                         </DataGrid.InputBindings>
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="★" Width="36" SortMemberPath="IsFavorite">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource AvoGhostButton}" Padding="2" ToolTip="Marcar / quitar favorito"
+                                                Command="{Binding DataContext.ToggleFavoriteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}">
+                                            <TextBlock x:Name="Star" Text="☆" FontSize="15" Foreground="{StaticResource AvoTextDim}"/>
+                                        </Button>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding IsFavorite}" Value="True">
+                                                <Setter TargetName="Star" Property="Text" Value="★"/>
+                                                <Setter TargetName="Star" Property="Foreground" Value="{StaticResource AvoWarn}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Fecha" Binding="{Binding DateTimeText}" SortMemberPath="Start" Width="130"/>
                             <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*" MinWidth="110"/>
                             <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*" MinWidth="110"/>

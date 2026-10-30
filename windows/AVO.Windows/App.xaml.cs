@@ -16,7 +16,9 @@ public partial class App : Application
 {
     private sealed class SilentDialogs(AppLog log) : IDialogs
     {
-        public string[] OpenTrainingFiles() => [];
+        public string[] NextOpen { get; set; } = [];
+        public int OpenCalls { get; private set; }
+        public string[] OpenTrainingFiles() { OpenCalls++; var r = NextOpen; NextOpen = []; return r; }
         public string? OpenFolder() => null;
         public string? SaveFile(string filter, string defaultName) => null;
         public void Show(string title, string message, bool error = false) => log.Write(error ? "AVISO" : "INFO", "dialogo", $"{title}: {message}");
@@ -76,6 +78,33 @@ public partial class App : Application
         window.Show();
         await Idle();
         perf["arranque_ms"] = sw.ElapsedMilliseconds;
+        // ---- functional check of the five start-screen actions, clicked through UI Automation like a user
+        var clicks = new List<object>();
+        var dialogs = (SilentDialogs)vm.Dialogs;
+        var demoFiles = demoDir is not null && Directory.Exists(demoDir) ? Directory.GetFiles(demoDir, "*.avr").OrderBy(f => f).ToArray() : [];
+        var start = FindAll<Avo.Windows.Views.StartView>(window).FirstOrDefault() ?? throw new InvalidOperationException("No se encuentra la pantalla de inicio");
+        var buttons = FindAll<System.Windows.Controls.Button>(start).ToList();
+        if (buttons.Count != 5) throw new InvalidOperationException($"La pantalla de inicio tiene {buttons.Count} acciones, se esperaban 5");
+        string[] labels = ["Abrir entrenamiento", "Sesiones recientes", "Servidor AVO", "Comparar entrenamientos", "Informes"];
+        string[] expected = ["Analysis", "Sessions", "Server", "Compare", "Reports"];
+        for (int i = 0; i < 5; i++)
+        {
+            vm.Page = "Home";
+            await Idle();
+            if (i == 0 && demoFiles.Length > 0) dialogs.NextOpen = [demoFiles[^1]];
+            var peer = new System.Windows.Automation.Peers.ButtonAutomationPeer(buttons[i]);
+            ((System.Windows.Automation.Provider.IInvokeProvider)peer.GetPattern(System.Windows.Automation.Peers.PatternInterface.Invoke)!).Invoke();
+            var limit = DateTime.UtcNow.AddSeconds(30);
+            while (vm.Page == "Home" && DateTime.UtcNow < limit) await Task.Delay(100);
+            await Idle();
+            bool ok = vm.Page == expected[i] && (i != 0 || (dialogs.OpenCalls == 1 && vm.Sessions.Count == 1));
+            clicks.Add(new { accion = labels[i], pagina = vm.Page, esperada = expected[i], correcto = ok });
+            if (!ok) throw new InvalidOperationException($"Acción de inicio «{labels[i]}» llevó a «{vm.Page}» (esperado «{expected[i]}»)");
+            if (i > 0) Render(window.Content is FrameworkElement fe0 ? fe0 : window, Path.Combine(dir, $"inicio_accion_{i + 1}_{expected[i]}.png"), 1);
+        }
+        perf["acciones_inicio"] = clicks;
+        vm.Page = "Home";
+        await Idle();
         if (demoDir is not null && Directory.Exists(demoDir))
         {
             sw.Restart();
@@ -160,6 +189,17 @@ public partial class App : Application
         perf["entorno"] = vm.EnvironmentStatus;
         perf["capturas"] = report;
         File.WriteAllText(Path.Combine(dir, "capture-report.json"), JsonSerializer.Serialize(perf, new JsonSerializerOptions { WriteIndented = true }));
+    }
+
+    private static IEnumerable<T> FindAll<T>(DependencyObject root) where T : DependencyObject
+    {
+        int n = VisualTreeHelper.GetChildrenCount(root);
+        for (int i = 0; i < n; i++)
+        {
+            var c = VisualTreeHelper.GetChild(root, i);
+            if (c is T t) yield return t;
+            foreach (var d in FindAll<T>(c)) yield return d;
+        }
     }
 
     private static async Task WaitTilesAsync()

@@ -43,6 +43,8 @@ Generador de sesiones de DEMOSTRACIÓN sintéticas (`windows/tools/demo-fixtures
 recortados de la imagen de referencia del usuario, acciones reales a la derecha, ventana sin barra ni menú en el inicio); el
 panel anterior pasa a «Entrenamientos». La foto sale de la maqueta (1536×1024) y se reescala: sustituible por un original
 de alta resolución en `windows/AVO.Windows/Assets/avo_home_hero.jpg`.
+**Actualización 30/10 21:45:** las 5 acciones del inicio son funcionales y se comprueban en CI pulsándolas por UI Automation
+(abrir → importa y abre «Análisis»; recientes → «Entrenamientos» con historial y favoritos persistentes; servidor; comparar; informes).
 **Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
 del ejecutable; modelo 3D autorizado; integración en develop.
 
