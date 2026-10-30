@@ -160,12 +160,10 @@ def pod_base():
     outer = rrect(L, W, R, HB).faces("<Z").edges().chamfer(0.8)                  # chaflán 45°: sin voladizo en la cama
     # pared perimetral MACIZA de 3,6 mm en toda la altura (sin reborde volado): imprime sin soportes
     b = outer.cut(rrect(L - 2 * SEAL_IN, W - 2 * SEAL_IN, R - SEAL_IN, HB, z0=FLOOR))
-    b = b.cut(cyl(0, 0, COIL_Z0, COIL["d"] + 2 * G, FLOOR))                       # alojamiento de la bobina Ø25,4
-    b = b.cut(box(-(11.0 + 31.0) / 2, -5.0, COIL_Z0 + 0.4, 31.0 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
+    # REV 5.9: sin bobina Qi (la carga entra por los contactos pogo): fondo macizo
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
     cr = cr.cut(box(-(bl / 2 + 0.5), bw / 2 - 4.0, FLOOR - 1, 2, 7.0, 10))   # REV 5.7: cables de la batería por −X/+Y
-    cr = cr.cut(box(-(bl / 2 + 0.5), -3.5, FLOOR - 1, 2, 6.0, 10))   # paso de los hilos de la bobina en la pared −X (prueba impresa)
     b = b.union(cr)
     for x in (-15, 0, 15):
         for s in (-1, 1):
@@ -226,8 +224,8 @@ def pod_lid():
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     # REV 5.7.1: sin tubos sobre el BNO (sus taladros están a 1,95 del borde, bajo la pestaña −X que ya lo sujeta)
-    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
-        lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
+    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):          # REV 5.9: sin Qi, estos tubos apoyan en la cama
+        lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, BED_TOP + 0.05, 2.0, CEIL - BED_TOP))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
@@ -260,10 +258,8 @@ def tray():
     t = t.cut(box(cx, cy, TRAY_TOP, C6["lx"] + 0.2, C6["wy"] + 0.2, hb))
     t = t.cut(box(cx, C6_Y1 + C6["usb_over"] / 2 + 0.1, BED_TOP - 0.3, C6["usb_w"] + 0.6, C6["usb_over"] + 0.2, 1))  # bajo el USB-C
     t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6 (pads de la cara inferior)
-    t = t.cut(box(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, hb))
-    qx0, qx1 = qx - QI["lx"] / 2 - 0.15, qx + QI["lx"] / 2 + 0.15
-    # hilos de la bobina: ranura ABIERTA hasta el borde −X de la bandeja (los hilos entran de lado, sin desoldar la bobina)
-    t = t.cut(box((qx0 - L / 2 - 1.0) / 2 + 0.0, -3.0, TRAY_Z0 - 1, qx0 + L / 2 + 1.0, 3.0, 4))
+    # REV 5.9: sin placa Qi ni ranura de la bobina; la cama queda maciza en −X (QI solo fija la posición de los canales)
+    qx1 = qx + QI["lx"] / 2 + 0.15
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
@@ -282,9 +278,6 @@ def tray():
         t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 4))
         t = t.cut(box(x, (ry + 1.7 + yb0 + 0.5) / 2, z, 2.2, yb0 + 0.5 - ry - 1.7, hc))
     t = t.cut(box(BX1 - 1.3, (yb1 + BNO_PINS_Y[8] + 0.9) / 2, z, 2.2, BNO_PINS_Y[8] + 0.9 - yb1, hc))  # GND/VCC del BNO
-    # topes de la Qi en +X (dentro del canal, dejan 2,3 de paso a los cables)
-    for sy in (-1, 1):
-        t = t.union(box(qx1 + 0.3, qy + sy * 5.0, z, 0.6, 2.0, BED_TOP - z))
     # BNO085 hundido: su cara superior queda a ras de la del C6 (los pines de los dos, al mismo nivel por arriba).
     # Alojamiento a 0,15 por lado, unido al del C6; apoya en un reborde de 1 mm y debajo queda ventana (soldaduras).
     bx, by = BNO["center"]
@@ -466,11 +459,8 @@ def components():
     for (x, y) in MAGS[1:]:
         mmags = mmags.union(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"]))
     return {
-        "bobina_Qi": cyl(0, 0, COIL_Z0 + 0.1, COIL["d"], COIL["t"]),
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
-        "placa_Qi": box(qx, qy, TRAY_TOP + 0.02, QI["lx"], QI["wy"], QI["pcb"] - 0.02).union(
-            box(qx, qy + 0.5, TRAY_TOP + QI["pcb"], 9.0, 9.0, QI["parts"])),
         "BNO085": bno,
         "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"], z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0)),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
