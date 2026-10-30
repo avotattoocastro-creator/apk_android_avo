@@ -53,6 +53,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Validación:** IMPLEMENTADO · CI. **NO VERIFICADO** en el reloj ni en un PC real.
 **Pendiente:** las pruebas físicas 1–6 de `PROTOCOLO_USB.md`. La más importante: comprobar que el reloj no se reinicia al abrir el puerto y que `[AVO MEM] ready` no baja respecto a la rc5. Después, decidir si se fusiona en `feature/avo-wifi-sync` y se lleva a la 3.7.6.
 
+---
+
 ## 2026-10-30 — Cincha (CAD) REV 5.9 — conector pogo en lugar del reed, sin Qi, cápsula 70 × 51 × 13,8
 **Autor:** Claude · Rama de propuesta `feature/girth-rev5-9-pogo`, fusionada en `feature/avo-wifi-sync` con el visto bueno del usuario
 **Qué cambia:**
