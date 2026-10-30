@@ -68,6 +68,9 @@ public partial class App : Application
         Directory.CreateDirectory(dir);
         var perf = new Dictionary<string, object?>();
         var sw = Stopwatch.StartNew();
+        window.WindowStyle = WindowStyle.None;
+        window.ResizeMode = ResizeMode.NoResize;
+        window.MinWidth = 0; window.MinHeight = 0;
         window.WindowStartupLocation = WindowStartupLocation.Manual;
         window.Left = 0; window.Top = 0;
         window.Show();
@@ -104,18 +107,9 @@ public partial class App : Application
             await vm.LoadEnvironmentAsync(true);
             vm.ReportCompare = true;
         }
-        // Render the real visual tree OFF-SCREEN at the exact logical size: a top-level window is clamped by Windows to the
-        // runner's screen (1280x768 on hosted runners), which would make 1920x1080 / 2560x1440 captures meaningless.
+        // Hosted runners have a 1280x768 screen and Windows clamps resizable captioned windows to it. In capture mode the window
+        // is a borderless, non-resizable popup, which may be larger than the screen, so 1920x1080 and 2560x1440 are real sizes.
         var root = (FrameworkElement)window.Content;
-        window.Content = null;
-        root.DataContext = vm;
-        root.Language = System.Windows.Markup.XmlLanguage.GetLanguage("es-ES");
-        System.Windows.Documents.TextElement.SetForeground(root, (Brush)Current.Resources["AvoText"]);
-        System.Windows.Documents.TextElement.SetFontFamily(root, (FontFamily)Current.Resources["AvoFont"]);
-        System.Windows.Documents.TextElement.SetFontSize(root, 13.0);
-        Layout(root, 1280, 720);
-        await Idle();
-        Layout(root, 1280, 720);
         var report = new List<object>();
         foreach (var spec in sizes.Split(',', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -124,6 +118,7 @@ public partial class App : Application
             double w = double.Parse(wh[0], System.Globalization.CultureInfo.InvariantCulture), h = double.Parse(wh[1], System.Globalization.CultureInfo.InvariantCulture);
             double scale = parts.Length > 1 ? double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture) / 100 : 1;
             double lw = w / scale, lh = h / scale;
+            window.Width = lw; window.Height = lh;
             Layout(root, lw, lh);
             await Idle();
             int n = 0;
@@ -138,7 +133,7 @@ public partial class App : Application
                 Layout(root, lw, lh);
                 string name = $"{(int)w}x{(int)h}{(scale != 1 ? $"@{scale * 100:0}" : "")}_{++n:00}_{page}.png";
                 var sizeInfo = Render(root, Path.Combine(dir, name), scale);
-                report.Add(new { archivo = name, pagina = page, ancho = sizeInfo.w, alto = sizeInfo.h, escala = scale });
+                report.Add(new { archivo = name, pagina = page, ancho = sizeInfo.w, alto = sizeInfo.h, escala = scale, raiz = $"{root.ActualWidth:0}x{root.ActualHeight:0}", ventana = $"{window.ActualWidth:0}x{window.ActualHeight:0}" });
             }
         }
         // exports produced by the same code paths as the buttons
@@ -179,8 +174,6 @@ public partial class App : Application
     private static void Layout(FrameworkElement root, double w, double h)
     {
         root.Width = w; root.Height = h;
-        root.Measure(new Size(w, h));
-        root.Arrange(new Rect(0, 0, w, h));
         root.UpdateLayout();
     }
 

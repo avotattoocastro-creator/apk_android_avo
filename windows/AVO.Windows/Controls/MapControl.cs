@@ -226,7 +226,7 @@ public sealed class MapControl : FrameworkElement
     {
         string key = Key(layer, z, x, y);
         if (TileMemory.TryGetValue(key, out var img)) return img;
-        if (_tileFailures > 40) return null;    // offline: stop trying, the vector route is still drawn
+        if (_tileFailures > 60) return null;    // offline (60 consecutive failures): stop trying, the vector route is still drawn
         if (Pending.TryAdd(key, 0)) _ = LoadTileAsync(layer, z, x, y, key, TileCacheDir);
         return null;
     }
@@ -258,6 +258,7 @@ public sealed class MapControl : FrameworkElement
                 return b;
             });
             TileMemory[key] = bmp;
+            Interlocked.Exchange(ref _tileFailures, 0);   // consecutive failures only
         }
         catch (Exception ex) when (ex is HttpRequestException or IOException or TaskCanceledException or NotSupportedException or UnauthorizedAccessException or InvalidOperationException)
         {
