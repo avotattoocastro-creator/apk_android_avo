@@ -36,7 +36,7 @@ static const size_t LINE_IN = 160;
 static const size_t OUT_CAP = 6144;             // >= "#AVO1 DATA ..." header + base64(MAX_READ) + "\n"
 static const uint16_t MAX_SEGS = 64;
 
-static char s_root[128] = AVO_SD_MOUNT "/AVO";
+static const char* s_root = AVO_SD_MOUNT "/AVO";   // pointer only: no internal RAM for the path
 static char* s_in = nullptr;
 static size_t s_in_n = 0;
 static bool s_in_overflow = false;
@@ -45,10 +45,11 @@ static uint8_t* s_chunk = nullptr;
 static Stats s_stats = {};
 
 struct ShaCache { char id[24]; uint64_t total; uint32_t etag; uint8_t h[32]; bool valid; };
-static ShaCache s_sha[4] = {};
+static const int SHA_SLOTS = 4;
+static ShaCache* s_sha = nullptr;   // PSRAM (static internal RAM is what the watch lacks)
 static int s_sha_slot = 0;
 
-void set_root(const char* root) { snprintf(s_root, sizeof(s_root), "%s", root); }
+void set_root(const char* root) { s_root = root; }   // test hook: the caller keeps the string alive
 
 void stats(Stats* out) { *out = s_stats; }
 
@@ -56,9 +57,13 @@ bool init() {
   if (!s_in) s_in = (char*)port::alloc(LINE_IN);
   if (!s_out) s_out = (char*)port::alloc(OUT_CAP);
   if (!s_chunk) s_chunk = (uint8_t*)port::alloc(MAX_READ);
+  if (!s_sha) {
+    s_sha = (ShaCache*)port::alloc(SHA_SLOTS * sizeof(ShaCache));
+    if (s_sha) memset(s_sha, 0, SHA_SLOTS * sizeof(ShaCache));
+  }
   s_in_n = 0;
   s_in_overflow = false;
-  return s_in && s_out && s_chunk;
+  return s_in && s_out && s_chunk && s_sha;
 }
 
 // ------------------------------------------------------------------ helpers
@@ -209,8 +214,10 @@ static void cmd_sha(const char* id) {
   if (!servable(*si)) { send_err("SHA", "open"); return; }
   uint8_t h[32];
   bool cached = false;
-  for (auto& c : s_sha)
+  for (int i = 0; i < SHA_SLOTS; i++) {
+    const ShaCache& c = s_sha[i];
     if (c.valid && !strcmp(c.id, id) && c.total == si->total && c.etag == si->etag) { memcpy(h, c.h, 32); cached = true; }
+  }
   if (!cached) {
     Sha256 ctx;
     ctx.init();
@@ -228,7 +235,7 @@ static void cmd_sha(const char* id) {
       fclose(f);
     }
     ctx.final(h);
-    ShaCache& c = s_sha[s_sha_slot++ % 4];
+    ShaCache& c = s_sha[s_sha_slot++ % SHA_SLOTS];
     snprintf(c.id, sizeof(c.id), "%s", id);
     c.total = si->total; c.etag = si->etag; memcpy(c.h, h, 32); c.valid = true;
   }
