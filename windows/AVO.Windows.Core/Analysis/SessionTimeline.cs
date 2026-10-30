@@ -50,15 +50,17 @@ public sealed class SessionTimeline
         return d;
     }
 
-    public static SessionTimeline Build(TrainingSession session, SpeedSmoother.Parameters? parameters = null)
+    /// <param name="timeBaseItowMs">GPS time of week that defines t = 0. Default: first usable epoch. A trimmed session passes the
+    /// time base of the full file, so cursor, segments and engine times keep the same meaning after trimming.</param>
+    public static SessionTimeline Build(TrainingSession session, SpeedSmoother.Parameters? parameters = null, long? timeBaseItowMs = null)
     {
         var p = parameters ?? new SpeedSmoother.Parameters();
         var track = session.Track;
         int n = track.Count;
         if (n == 0) return new SessionTimeline { FilterParameters = p };
-        long itow0 = track[0].GpsWeekMs;
+        long itow0 = timeBaseItowMs ?? track[0].GpsWeekMs;
         var t = new double[n];
-        long acc = 0;
+        long acc = WeekDiffMs(track[0].GpsWeekMs, itow0);
         for (int i = 0; i < n; i++)
         {
             if (i > 0)
@@ -330,5 +332,38 @@ public static class Stats
         double m = double.PositiveInfinity;
         foreach (var v in values) if (double.IsFinite(v) && v < m) m = v;
         return double.IsPositiveInfinity(m) ? fallback : m;
+    }
+}
+
+
+/// <summary>
+/// Useful part of a training chosen by the user (start and end inside the whole recording). The original file is never
+/// modified: a filtered copy of the decoded data is analysed with the time base of the full file.
+/// </summary>
+public static class SessionWindow
+{
+    public static TrainingSession Apply(TrainingSession s, long itow0, double t0, double t1)
+    {
+        bool In(long itow) { double t = SessionTimeline.WeekDiffMs(itow, itow0) / 1000.0; return t >= t0 && t <= t1; }
+        var c = new TrainingSession
+        {
+            SessionId = s.SessionId, Sha256 = s.Sha256, Horse = s.Horse, Rider = s.Rider, StartedAt = s.StartedAt, SourceName = s.SourceName,
+            Integrity = s.Integrity, HasRawTelemetry = s.HasRawTelemetry, DeclaredDistanceM = s.DeclaredDistanceM, DeclaredDurationS = s.DeclaredDurationS,
+            DeclaredMaxSpeedMs = s.DeclaredMaxSpeedMs, TotalImuSamples = s.TotalImuSamples, TotalImuBatches = s.TotalImuBatches, InvalidFrames = s.InvalidFrames,
+            MarkerCount = s.MarkerCount, ImuPeriodUs = s.ImuPeriodUs, ImuOpaqueBatches = s.ImuOpaqueBatches, FileSha256 = s.FileSha256,
+            SourcePath = s.SourcePath, DeclaredCanonicalSha256 = s.DeclaredCanonicalSha256, Discipline = s.Discipline,
+        };
+        c.Track.AddRange(s.Track.Where(p => In(p.GpsWeekMs)));
+        foreach (var e in s.GnssEpochs.Where(e => In(e.GpsWeekMs))) c.GnssEpochs.Add(e);
+        c.GnssSamples = c.GnssEpochs.Count;
+        c.RtkFixCount = c.Track.Count(p => p.CarrierSolution == 2);
+        c.RtkFloatCount = c.Track.Count(p => p.CarrierSolution == 1);
+        c.GnssOtherCount = c.Track.Count - c.RtkFixCount - c.RtkFloatCount;
+        c.UnusableGnssSamples = c.GnssSamples - c.Track.Count;
+        c.Imu.AddRange(s.Imu);            // clipped to the window by ImuTimeline.Build
+        c.Markers.AddRange(s.Markers);
+        c.Segments.AddRange(s.Segments);
+        c.RawSegmentPaths.AddRange(s.RawSegmentPaths);
+        return c;
     }
 }

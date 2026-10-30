@@ -83,7 +83,7 @@ public sealed class ImuTimeline
     /// <summary>imu_id convention in avo_payloads.h: 0 central, 1 left, 2 right.</summary>
     public static string SensorName(byte id) => id switch { 0 => "Central", 1 => "Izquierda", 2 => "Derecha", _ => $"IMU {id}" };
 
-    public static ImuTimeline Build(TrainingSession s, SessionTimeline gnss)
+    public static ImuTimeline Build(TrainingSession s, SessionTimeline gnss, double t0 = double.NegativeInfinity, double t1 = double.PositiveInfinity)
     {
         double offset = 0; bool aligned = false;
         if (gnss.Count > 0)
@@ -96,7 +96,8 @@ public sealed class ImuTimeline
         var tl = new ImuTimeline { OffsetS = offset, Aligned = aligned, SampleRateHz = s.ImuPeriodUs > 0 ? 1e6 / s.ImuPeriodUs : 0 };
         foreach (var g in s.Imu.GroupBy(x => x.ImuId).OrderBy(g => g.Key))
         {
-            var a = g.OrderBy(x => x.TimeS).ToArray();
+            var a = g.Where(x => x.TimeS - offset >= t0 && x.TimeS - offset <= t1).OrderBy(x => x.TimeS).ToArray();
+            if (a.Length == 0) continue;
             tl.Channels.Add(new Channel(g.Key, a.Select(x => x.TimeS - offset).ToArray(), a.Select(x => x.Ax).ToArray(), a.Select(x => x.Ay).ToArray(),
                 a.Select(x => x.Az).ToArray(), a.Select(x => x.Gx).ToArray(), a.Select(x => x.Gy).ToArray(), a.Select(x => x.Gz).ToArray()));
         }

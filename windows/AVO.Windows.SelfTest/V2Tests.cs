@@ -98,6 +98,12 @@ public static class V2Tests
         A(tj.JumpBefore.Count(b => b) >= 1 && tj.TotalDistanceM < 4 * 20 + 1, "Salto de posición (1,1 km) descartado de la distancia");
         // validated acceleration excludes FLOAT/gaps with large sigma? sigma small here -> valid
         A(SegmentAnalyzer.AccelValid(tl, tl.Count / 2), "Aceleración validada con RTK FIX y σ pequeña");
+        // useful window (start/end chosen by the user): same time base, only that part analysed, original untouched
+        var full = SessionTimeline.Build(g);
+        var cut = SessionWindow.Apply(g, full.Itow0Ms, 30, 50);
+        var tw = SessionTimeline.Build(cut, null, full.Itow0Ms);
+        A(Math.Abs(tw.T[0] - 30) < 0.13 && Math.Abs(tw.T[^1] - 50) < 0.13 && Math.Abs(tw.TotalDistanceM - 5 * 20 * (6371008.8 * Math.PI / 180 / 111320)) < 1.5
+          && g.Track.Count == full.Count && cut.Track.Count < g.Track.Count, $"Inicio y fin del entrenamiento útil: 30–50 s, {tw.TotalDistanceM:0.0} m, misma base de tiempo, original intacto");
         // week roll-over
         A(SessionTimeline.WeekDiffMs(1000, 604_799_000) == 2000, "Cambio de semana GPS en iTOW");
         // filter on large dataset: performance target 1 h at 8 Hz < 1.5 s

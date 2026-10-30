@@ -19,6 +19,20 @@
             </Border>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <!-- start / end of the useful training inside the whole recording -->
+            <Border Background="{StaticResource AvoSurface2}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="6" Padding="10,4" Margin="0,0,12,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="{StaticResource IconFlag}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}" Width="14" Height="14" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding WindowText}" Margin="8,0,12,0" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="12"/>
+                    <Button Content="Inicio = cursor" Command="{Binding WindowStartCommand}" Padding="8,3" FontWeight="Normal" FontSize="12"
+                            ToolTip="Marca el inicio del entrenamiento útil en la posición del cursor (clic en mapa o gráfica, o el deslizador)"/>
+                    <Button Content="Fin = cursor" Command="{Binding WindowEndCommand}" Padding="8,3" FontWeight="Normal" FontSize="12" Margin="4,0,0,0"
+                            ToolTip="Marca el final del entrenamiento útil en la posición del cursor"/>
+                    <Button Content="Usar selección" Command="{Binding WindowFromRangeCommand}" Padding="8,3" FontWeight="Normal" FontSize="12" Margin="4,0,0,0"
+                            ToolTip="Usa el intervalo seleccionado con Mayús + arrastrar en una gráfica"/>
+                    <Button Content="Archivo completo" Command="{Binding WindowResetCommand}" Padding="8,3" FontWeight="Normal" FontSize="12" Margin="4,0,0,0"/>
+                </StackPanel>
+            </Border>
             <TextBlock Text="{Binding Selected.EngineState, StringFormat='Motor: {0}', FallbackValue=''}" Style="{StaticResource AvoCaption}" VerticalAlignment="Center" Margin="0,0,12,0"/>
             <Button Content="Reprocesar con el motor" Command="{Binding RunEngineCommand}" Padding="10,5" FontWeight="Normal"/>
         </StackPanel>

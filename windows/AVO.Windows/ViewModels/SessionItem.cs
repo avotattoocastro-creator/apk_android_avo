@@ -10,8 +10,39 @@ public sealed class SessionItem : ObservableObject
 {
     private static readonly CultureInfo Es = CultureInfo.GetCultureInfo("es-ES");
     public TrainingSession Session { get; }
-    public SessionTimeline Timeline { get; }
-    public ImuTimeline Imu { get; }
+    /// <summary>Whole recording, never trimmed.</summary>
+    public SessionTimeline FullTimeline { get; }
+    /// <summary>Analysed part: the whole recording or the start–end window chosen by the user (same time base).</summary>
+    public SessionTimeline Timeline { get; private set; }
+    public ImuTimeline Imu { get; private set; }
+    public double? WindowStart { get; private set; }
+    public double? WindowEnd { get; private set; }
+    public bool IsTrimmed => WindowStart is not null && WindowEnd is not null;
+    public string WindowText => IsTrimmed
+        ? $"Entrenamiento útil {Core.TimeText.Clock(WindowStart!.Value)} – {Core.TimeText.Clock(WindowEnd!.Value)} de {Core.TimeText.Clock(FullTimeline.Count > 1 ? FullTimeline.T[^1] : 0)}"
+        : $"Archivo completo · {Core.TimeText.Clock(FullTimeline.Count > 1 ? FullTimeline.T[^1] : 0)}";
+
+    /// <summary>Applies (or clears with nulls) the useful window. Runs the analysis again on the filtered copy; the file is untouched.</summary>
+    public void ApplyWindow(double? start, double? end, SpeedSmoother.Parameters p)
+    {
+        if (start is double a && end is double b && b - a >= 5 && FullTimeline.Count > 1)
+        {
+            WindowStart = Math.Max(a, FullTimeline.T[0]); WindowEnd = Math.Min(b, FullTimeline.T[^1]);
+            var cut = SessionWindow.Apply(Session, FullTimeline.Itow0Ms, WindowStart.Value, WindowEnd.Value);
+            Timeline = SessionTimeline.Build(cut, p, FullTimeline.Itow0Ms);
+            Imu = ImuTimeline.Build(cut, Timeline, WindowStart.Value, WindowEnd.Value);
+        }
+        else
+        {
+            WindowStart = WindowEnd = null;
+            Timeline = FullTimeline;
+            Imu = _fullImu;
+        }
+        RaiseMany(nameof(Timeline), nameof(Imu), nameof(WindowStart), nameof(WindowEnd), nameof(IsTrimmed), nameof(WindowText), nameof(Start), nameof(DateText),
+            nameof(DateTimeText), nameof(TimeText), nameof(DistanceKmValue), nameof(DistanceText), nameof(DurationText), nameof(MaxSpeedKmh), nameof(MaxSpeedText),
+            nameof(MeanSpeedText), nameof(FixPercent), nameof(FixText), nameof(GirthText), nameof(Summary), nameof(GaitByIndex));
+    }
+    private readonly ImuTimeline _fullImu;
     public ObservableCollection<SegmentDefinition> SegmentDefs { get; } = [];
 
     private EquineAnalysis? _engine;
@@ -35,13 +66,14 @@ public sealed class SessionItem : ObservableObject
 
     public SessionItem(TrainingSession s, SessionTimeline tl, ImuTimeline imu)
     {
-        Session = s; Timeline = tl; Imu = imu;
+        Session = s; FullTimeline = tl; Timeline = tl; Imu = imu; _fullImu = imu;
     }
 
     public string Id => Session.SessionId;
     public string Horse => Session.Horse;
     public string Rider => Session.Rider;
-    public DateTimeOffset? Start => Timeline.Utc0 ?? Session.StartedAt;
+    /// <summary>Start of the recording (date of the training; not moved by the useful-window trim).</summary>
+    public DateTimeOffset? Start => FullTimeline.Utc0 ?? Session.StartedAt;
     public string DateText => MadridTime.Format(Start, "dd/MM/yyyy");
     public string DateTimeText => MadridTime.Format(Start, "dd/MM/yyyy HH:mm");
     public string TimeText => MadridTime.Format(Start, "HH:mm");

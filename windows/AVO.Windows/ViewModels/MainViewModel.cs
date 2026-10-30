@@ -71,6 +71,7 @@ public sealed partial class MainViewModel : ObservableObject
         _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(50) };
         _timer.Tick += (_, _) => PlaybackTick();
         InitFavorites();
+        InitWindows();
         InitUsb();
         InitSegments();
         InitCompare();
@@ -225,7 +226,7 @@ public sealed partial class MainViewModel : ObservableObject
         RefreshBiomech();
         RefreshSessionPanels();
         RefreshReportPreview();
-        RaiseMany(nameof(HasSession), nameof(TimelineEnd));
+        RaiseMany(nameof(HasSession), nameof(TimelineEnd), nameof(TimelineStart), nameof(WindowText), nameof(IsTrimmed));
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
     }
 
@@ -372,6 +373,7 @@ public sealed partial class MainViewModel : ObservableObject
         var tl = SessionTimeline.Build(s, new SpeedSmoother.Parameters(JerkDensity: Settings.JerkDensity));
         var imu = ImuTimeline.Build(s, tl);
         var item = new SessionItem(s, tl, imu);
+        RestoreWindow(item);
         try { foreach (var d in _segmentStore.Load(s.SessionId)) item.SegmentDefs.Add(d); }
         catch (Exception ex) when (ex is IOException or System.Text.Json.JsonException) { Log.Warn("tramos", "No se pudieron leer los tramos guardados", ex); }
         try

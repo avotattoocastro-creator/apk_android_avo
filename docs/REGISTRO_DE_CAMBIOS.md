@@ -53,6 +53,9 @@ Descarga directa: pre-release `windows-v2-pro-latest` (EXE único con el motor i
 (`ChestUsb.cs`, `SimWatch.cs`, `usb_transcript.json` y sus pruebas sin cambios; interfaz portada a MVVM: botón «Reloj USB»,
 tarjeta en «Entrenamientos», aviso en el estado vacío, detección por WM_DEVICECHANGE y sondeo cada 4 s). Requiere el
 firmware de pecho **3.7.5-usb1** (rama `feature/chest-usb-pc-sync`, NO VERIFICADO); con otro firmware se informa al usuario.
+**Actualización 31/10 00:20 (petición del usuario con sesiones reales HORSE_001):** inicio y fin del entrenamiento útil por
+sesión («Inicio = cursor», «Fin = cursor», «Usar selección», «Archivo completo» en la cabecera de sesión). Se guarda en
+`recortes.json`; todas las vistas, tramos, comparativas e informes usan ese tramo con la base de tiempo del archivo completo.
 **Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
 del ejecutable; modelo 3D autorizado; integración en develop.
 
