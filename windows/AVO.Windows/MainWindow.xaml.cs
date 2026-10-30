@@ -16,6 +16,17 @@ public partial class MainWindow : Window, IDialogs
         DataContext = vm;
         InitializeComponent();
         AllowDrop = true;
+        // USB watch: react to device arrival (WM_DEVICECHANGE) and stop polling on close.
+        SourceInitialized += (_, _) =>
+        {
+            if (System.Windows.Interop.HwndSource.FromHwnd(new System.Windows.Interop.WindowInteropHelper(this).Handle) is { } src)
+                src.AddHook((IntPtr h, int msg, IntPtr w, IntPtr l, ref bool handled) =>
+                {
+                    if (msg == 0x0219) _ = vm.UsbDeviceChangedAsync();
+                    return IntPtr.Zero;
+                });
+        };
+        Closing += (_, _) => vm.StopUsb();
         // Header tabs duplicate the left rail: they are shown only when they fit completely (no clipped tabs on 1366 px).
         HeaderGrid.SizeChanged += (_, _) => FitHeaderTabs();
         Loaded += (_, _) => FitHeaderTabs();

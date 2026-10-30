@@ -49,6 +49,10 @@ de alta resolución en `windows/AVO.Windows/Assets/avo_home_hero.jpg`.
 cuando no hay recorrido (antes mostraba océano 0°,0° con teselas «Map data not yet available»), panel claro «Todavía no hay
 entrenamientos» con «Abrir» y «Cargar demostración» (descarga las sesiones SINTÉTICAS publicadas en la pre-release).
 Descarga directa: pre-release `windows-v2-pro-latest` (EXE único con el motor incluido).
+**Actualización 30/10 23:50:** integrada en V2 PRO la descarga automática del reloj por USB de `feature/chest-usb-pc-sync`
+(`ChestUsb.cs`, `SimWatch.cs`, `usb_transcript.json` y sus pruebas sin cambios; interfaz portada a MVVM: botón «Reloj USB»,
+tarjeta en «Entrenamientos», aviso en el estado vacío, detección por WM_DEVICECHANGE y sondeo cada 4 s). Requiere el
+firmware de pecho **3.7.5-usb1** (rama `feature/chest-usb-pc-sync`, NO VERIFICADO); con otro firmware se informa al usuario.
 **Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
 del ejecutable; modelo 3D autorizado; integración en develop.
 

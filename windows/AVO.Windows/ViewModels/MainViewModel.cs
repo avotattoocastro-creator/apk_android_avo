@@ -71,6 +71,7 @@ public sealed partial class MainViewModel : ObservableObject
         _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(50) };
         _timer.Tick += (_, _) => PlaybackTick();
         InitFavorites();
+        InitUsb();
         InitSegments();
         InitCompare();
         InitReports();

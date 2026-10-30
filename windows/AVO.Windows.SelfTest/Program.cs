@@ -1,4 +1,5 @@
 using Avo.Windows.Core;
+using Avo.Windows.SelfTest;
 using System.Buffers.Binary;
 using System.IO.Compression;
 using System.Security.Cryptography;
@@ -65,12 +66,12 @@ byte[] Record(byte[] frame, ulong chestUs)
     frame.CopyTo(record.AsSpan(12));
     return record;
 }
-byte[] BuildRaw()
+byte[] BuildRaw(string rawSessionId = "DEMO_INTEGRATION_001")
 {
     var header = new byte[512];
     "AVORAW1\0"u8.CopyTo(header);
     W16(header, 8, 1); W16(header, 10, 512);
-    Encoding.UTF8.GetBytes("DEMO_INTEGRATION_001").CopyTo(header.AsSpan(12));
+    Encoding.UTF8.GetBytes(rawSessionId).CopyTo(header.AsSpan(12));
     W64(header, 40, 1792656000000);
     Encoding.UTF8.GetBytes("Rayo").CopyTo(header.AsSpan(124));
     Encoding.UTF8.GetBytes("Antonio").CopyTo(header.AsSpan(152));
@@ -191,6 +192,129 @@ try
         Assert(SHA256.HashData(File.ReadAllBytes(s2.RawSegmentPaths[0])).AsSpan().SequenceEqual(SHA256.HashData(synthetic)), "El RAW no se modifica");
     }
     Avo.Windows.SelfTest.V2Tests.Run(dir, Assert);
+    UsbTests();
     Console.WriteLine($"TODAS LAS PRUEBAS CORRECTAS: {passed}");
 }
 finally { Directory.Delete(dir, true); }
+
+// ---------------------------------------------------------------- USB download from the watch (CHEST 3.7.5-usb1)
+void UsbTests()
+{
+    // 1. Answers of the REAL firmware (usb_sync.cpp on the host): compare, download the missing ones, verify.
+    string transcript = Path.Combine(AppContext.BaseDirectory, "usb_transcript.json");
+    Assert(File.Exists(transcript), "Transcripción del firmware USB presente");
+    string libDir = Path.Combine(dir, "reloj");
+    var link = new TranscriptLink(transcript);
+    var r = ChestSync.Run(new ChestUsbClient(link) { ShortTimeout = TimeSpan.FromMilliseconds(200) }, new WatchLibrary(libDir));
+    Assert(r.Watch?.Firmware == "3.7.5-usb1" && r.Watch.Device == "a0b1c2d3e4f5", "USB: HELLO del firmware real");
+    Assert(r.OnWatch == 3 && r.NotReady == 1 && r.AlreadyOnPc == 0 && r.NewPackages.Count == 2 && r.Failed == 0,
+        $"USB: compara y descarga los 2 que faltan (sin el abierto): {r.Summary}");
+    using var tdoc = JsonDocument.Parse(File.ReadAllText(transcript));
+    var shaLines = tdoc.RootElement.GetProperty("exchanges").EnumerateArray()
+        .SelectMany(x => x.GetProperty("out").GetString()!.Split('\n'))
+        .Where(l => l.StartsWith("#AVO1 SHA ", StringComparison.Ordinal)).Select(l => JsonDocument.Parse(l[10..])).ToList();
+    foreach (var pkg in r.NewPackages)
+    {
+        using var zip = ZipFile.OpenRead(pkg);
+        using var man = JsonDocument.Parse(zip.GetEntry("manifest.json")!.Open());
+        string id = man.RootElement.GetProperty("sessionId").GetString()!;
+        using var h = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+        foreach (var e in zip.Entries.Where(e => e.FullName.StartsWith("segments/", StringComparison.Ordinal)).OrderBy(e => e.FullName, StringComparer.Ordinal))
+        {
+            using var st = e.Open(); var ms = new MemoryStream(); st.CopyTo(ms); h.AppendData(ms.ToArray());
+        }
+        string got = Convert.ToHexStringLower(h.GetHashAndReset());
+        Assert(shaLines.Any(d => d.RootElement.GetProperty("id").GetString() == id && d.RootElement.GetProperty("sha256").GetString() == got)
+               && man.RootElement.GetProperty("sha256").GetString() == got, $"USB: {id} idéntico byte a byte al reloj (SHA-256)");
+    }
+    var link2 = new TranscriptLink(transcript);
+    var r2 = ChestSync.Run(new ChestUsbClient(link2), new WatchLibrary(libDir));
+    Assert(r2.AlreadyOnPc == 2 && r2.NewPackages.Count == 0 && !link2.Sent.Any(x => x.StartsWith("AVO1 READ", StringComparison.Ordinal)),
+        "USB: segunda conexión, nada que descargar y ninguna lectura");
+
+    // 2. Simulated watch with real RAW: noise, a damaged block and a lost answer are retried; the package opens.
+    const string id1 = "S20261028_120000", id2 = "S20261029_083000";
+    var sim = new SimWatch { CorruptReadNumber = 1, DropReadNumber = 2 };
+    var raw1 = BuildRaw(id1);
+    sim.Trainings.Add(new SimWatch.Training { Id = id1, StartRtcMs = 1793188800000, Segments = [raw1, BuildRaw(id1)] });
+    sim.Trainings.Add(new SimWatch.Training { Id = id2, StartRtcMs = 1793262600000, Segments = [BuildRaw(id2)] });
+    sim.Trainings.Add(new SimWatch.Training { Id = "S20261030_070000", State = 1, StartRtcMs = 1793343600000, Segments = [BuildRaw("S20261030_070000")] });
+    string lib2 = Path.Combine(dir, "reloj2");
+    var client = new ChestUsbClient(sim) { ShortTimeout = TimeSpan.FromMilliseconds(150) };
+    var progressTexts = new List<string>();
+    var r3 = ChestSync.Run(client, new WatchLibrary(lib2), null, new SyncProgress(progressTexts));
+    Assert(r3.NewPackages.Count == 2 && r3.Failed == 0 && r3.NotReady == 1 && r3.Messages.Count == 0, "USB: bloque con CRC dañado y respuesta perdida se repiten: " + r3.Summary);
+    var opened = TrainingImporter.Import(r3.NewPackages.Single(x => x.Contains(id1, StringComparison.Ordinal)), Path.Combine(dir, "raw_usb"));
+    Assert(opened.SessionId == id1 && opened.Track.Count >= 2 && opened.Segments.Count == 2 && opened.Integrity.Contains("SHA-256", StringComparison.Ordinal),
+        "USB: el paquete descargado se abre como cualquier .avo (2 segmentos, recorrido)");
+    Assert(progressTexts.Any(t => t.StartsWith("Descargando 1 de 2", StringComparison.Ordinal)), "USB: progreso de la descarga");
+    Assert(sim.Screen.First() == "1 0 0 0 0" && sim.Screen.Contains("2 1 2 100 0") && sim.Screen.Contains("2 2 2 100 0") && sim.Screen.Last() == "3 0 0 100 2",
+        "USB: pantalla del reloj: comparando → descargando 1 y 2 de 2 → sincronizado (2 nuevos)");
+
+    // 3. Already on the PC through the Android app (.avo with the same SHA-256): not downloaded again.
+    var sim2 = new SimWatch();
+    sim2.Trainings.AddRange(sim.Trainings);
+    var known = new Dictionary<string, string> { [id1] = SimWatch.Sha(sim.Trainings[0]), [id2] = SimWatch.Sha(sim.Trainings[1]) };
+    var r4 = ChestSync.Run(new ChestUsbClient(sim2), new WatchLibrary(Path.Combine(dir, "reloj3")), known);
+    Assert(r4.AlreadyOnPc == 2 && r4.NewPackages.Count == 0 && sim2.Reads == 0, "USB: reconoce los entrenamientos ya importados desde Android");
+
+    // 4. The phone marked one as uploaded (new etag, same bytes): confirmed by SHA-256, no download.
+    sim2.Trainings[0].State = 4;
+    var r5 = ChestSync.Run(new ChestUsbClient(sim2), new WatchLibrary(lib2));
+    Assert(r5.AlreadyOnPc == 2 && sim2.Reads == 0 && sim2.Sent.Contains("AVO1 SHA " + id1), "USB: cambio de estado sin cambio de datos → sin descarga");
+
+    // 5. Cable pulled halfway: the next connection resumes from the byte already written.
+    var big = new SimWatch.Training { Id = "S20261030_101010", StartRtcMs = 1793354000000, Segments = [SimWatch.Big(20000, 7)] };
+    var sim3 = new SimWatch { UnplugAfterReads = 2 };
+    sim3.Trainings.Add(big);
+    string lib3 = Path.Combine(dir, "reloj4");
+    var r6 = ChestSync.Run(new ChestUsbClient(sim3) { ShortTimeout = TimeSpan.FromMilliseconds(150) }, new WatchLibrary(lib3));
+    Assert(r6.Failed == 1 && r6.NewPackages.Count == 0, "USB: desconexión a mitad informada");
+    var sim4 = new SimWatch();
+    sim4.Trainings.Add(big);
+    var r7 = ChestSync.Run(new ChestUsbClient(sim4), new WatchLibrary(lib3));
+    var firstRead = sim4.Sent.First(x => x.StartsWith("AVO1 READ", StringComparison.Ordinal)).Split(' ');
+    Assert(r7.NewPackages.Count == 1 && firstRead[4] == "8192" && sim4.Reads == 3, "USB: reanuda desde el byte 8192 (3 lecturas, no 5)");
+    Assert(r7.Messages.Count == 1, "USB: RAW no interpretable se conserva verificado y se avisa");
+
+    // 6. Recording on the watch: nothing is listed or read.
+    var sim5 = new SimWatch { Recording = true };
+    sim5.Trainings.Add(big);
+    var r8 = ChestSync.Run(new ChestUsbClient(sim5), new WatchLibrary(Path.Combine(dir, "reloj5")));
+    Assert(r8.Recording && !sim5.Sent.Any(x => x.StartsWith("AVO1 LIST", StringComparison.Ordinal) || x.StartsWith("AVO1 READ", StringComparison.Ordinal))
+        && sim5.Screen.SequenceEqual(["4 0 0 0 0"]) && r8.Summary.Contains("grabando", StringComparison.Ordinal), "USB: con el reloj grabando no se descarga (pantalla: grabando)");
+
+    // 7. The training changes on the watch during the download, and a watch whose SHA-256 does not match.
+    var sim6 = new SimWatch();
+    var moving = new SimWatch.Training { Id = "S20261030_111111", StartRtcMs = 1793357000000, Segments = [SimWatch.Big(10000, 9)] };
+    sim6.Trainings.Add(moving);
+    sim6.OnRead = () => { if (sim6.Reads == 2) moving.State = 3; };
+    var r9 = ChestSync.Run(new ChestUsbClient(sim6), new WatchLibrary(Path.Combine(dir, "reloj6")));
+    Assert(r9.Failed == 1 && r9.Messages[0].Contains("cambió", StringComparison.Ordinal), "USB: entrenamiento modificado durante la descarga");
+    var sim7 = new SimWatch { LieSha = true };
+    sim7.Trainings.Add(new SimWatch.Training { Id = "S20261030_121212", StartRtcMs = 1793360000000, Segments = [SimWatch.Big(3000, 11)] });
+    string lib7 = Path.Combine(dir, "reloj7");
+    var r10 = ChestSync.Run(new ChestUsbClient(sim7), new WatchLibrary(lib7));
+    Assert(r10.Failed == 1 && r10.NewPackages.Count == 0 && !Directory.EnumerateFiles(lib7, "*.avo").Any(), "USB: SHA-256 distinto → no se guarda nada");
+    Assert(sim7.Screen.Last() == "5 0 0 0 0", "USB: pantalla del reloj: descarga interrumpida");
+    Assert(sim2.Screen.Last() == "3 0 0 100 0", "USB: pantalla del reloj: todo ya estaba en el PC");
+
+    // 8. Protocol client: rejects a device that is not an AVO watch.
+    var bad = new TranscriptLinkStub("#AVO1 HELLO {\"api\":1,\"name\":\"OTRO\",\"fw\":\"1\",\"device\":\"a0b1c2d3e4f5\"}");
+    bool rejected = false;
+    try { new ChestUsbClient(bad).Hello(); } catch (ChestUsbException) { rejected = true; }
+    Assert(rejected, "USB: rechaza un dispositivo que no es un reloj AVO");
+}
+
+sealed class SyncProgress(List<string> texts) : IProgress<ChestSyncProgress>
+{
+    public void Report(ChestSyncProgress value) => texts.Add(value.Text);
+}
+
+sealed class TranscriptLinkStub(string answer) : IChestLink
+{
+    private bool _asked;
+    public void WriteLine(string line) => _asked = true;
+    public string? ReadLine(TimeSpan timeout) { if (!_asked) return null; _asked = false; return answer; }
+    public void Dispose() { }
+}

@@ -57,6 +57,12 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                    <Button Margin="10,0,0,0" Command="{Binding UsbSyncCommand}" ToolTip="{Binding UsbStatus}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconDownload}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                            <TextBlock Text="Reloj USB" Margin="7,0,0,0"/>
+                        </StackPanel>
+                    </Button>
                     <Button Style="{StaticResource AvoPrimaryButton}" Margin="10,0,0,0" Command="{Binding ImportCommand}" ToolTip="Abrir entrenamiento .avo / .avr">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
@@ -112,7 +118,7 @@
                 <v:EngineView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Engine}"/>
                 <!-- empty state: no training imported yet -->
                 <Border Background="#E6030406" Visibility="{Binding ShowEmptyState, Converter={StaticResource BoolVis}}">
-                    <Border Width="560" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource AvoCardBrush}"
+                    <Border Width="640" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource AvoCardBrush}"
                             BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="10" Padding="32,28">
                         <StackPanel>
                             <Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoRed}" Style="{StaticResource AvoIcon}" Width="40" Height="40" HorizontalAlignment="Left"/>
@@ -123,8 +129,10 @@
                                 <Button Style="{StaticResource AvoPrimaryButton}" Command="{Binding ImportCommand}" Padding="18,9">
                                     <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/><TextBlock Text="Abrir entrenamiento" Margin="8,0,0,0"/></StackPanel>
                                 </Button>
+                                <Button Command="{Binding UsbSyncCommand}" Padding="18,9" Margin="10,0,0,0" Content="Descargar del reloj (USB)"/>
                                 <Button Command="{Binding LoadDemoCommand}" Padding="18,9" Margin="10,0,0,0" Content="Cargar demostración"/>
                             </StackPanel>
+                            <TextBlock Text="{Binding UsbStatus}" Style="{StaticResource AvoCaption}" Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{StaticResource AvoCyan}"/>
                             <TextBlock Text="{Binding DemoState}" Style="{StaticResource AvoCaption}" Margin="0,12,0,0" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Border>

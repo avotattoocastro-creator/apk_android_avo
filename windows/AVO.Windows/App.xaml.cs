@@ -45,6 +45,7 @@ public partial class App : Application
         if (Arg("--capture") is string captureDir)
         {
             vm.Dialogs = new SilentDialogs(vm.Log);
+            vm.UsbEnabled = false;
             int code = 0;
             try { await CaptureAsync(window, vm, captureDir, Arg("--demo"), Arg("--sizes") ?? "1920x1080,1366x768,2560x1440@150"); }
             catch (Exception ex)
