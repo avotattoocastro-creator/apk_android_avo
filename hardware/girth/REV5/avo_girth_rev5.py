@@ -20,7 +20,7 @@ OUT = "out"
 G = 0.20
 
 # ------------------------------------------------------------------ cápsula
-L, W, R = 73.0, 51.0, 10.0          # REV 5.5: +3/+3 para pared maciza e imanes de esquina sin voladizo
+L, W, R = 70.0, 51.0, 10.0          # REV 5.9: 73 → 70 (sin Qi el largo lo marca la batería + los tornillos de los extremos)
 H = 15.5
 HB = 9.0
 WALL = 2.0
@@ -50,13 +50,13 @@ SCREWS = [(sx * 21.0, sy * (W / 2 - 5.0)) for sx in (-1, 1) for sy in (-1, 1)] +
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
           insert_d=4.1, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,1, REV 5.7.3); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
-MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # entre la cuna y la pared maciza
+MAGS = [(sx * 28.9, sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # REV 5.9: X fija (28,9) para no pisar la cuna
 HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3, n_mount=2)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
 C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.5,   # huella oficial Seeed: USB-C sobresale 1,5
           usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
-C6_C = (17.6, 0.0)
+C6_C = (15.6, 0.0)     # REV 5.9: 2 mm hacia −X (sin Qi) para dejar sitio a los tornillos de +X con L = 70
 C6_X0, C6_X1 = C6_C[0] - C6["lx"] / 2, C6_C[0] + C6["lx"] / 2
 C6_Y0, C6_Y1 = C6_C[1] - C6["wy"] / 2, C6_C[1] + C6["wy"] / 2      # Y0: extremo de la antena
 LED = (C6_C[0] - 1.65, C6_Y0 + 2.0)                # (E)
@@ -163,7 +163,7 @@ def pod_base():
     # REV 5.9: sin bobina Qi (la carga entra por los contactos pogo): fondo macizo
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
-    cr = cr.cut(box(-(bl / 2 + 0.5), bw / 2 - 4.0, FLOOR - 1, 2, 7.0, 10))   # REV 5.7: cables de la batería por −X/+Y
+    cr = cr.cut(box(bl / 2 + 0.5, -(bw / 2 - 4.0), FLOOR - 1, 2, 7.0, 10))   # REV 5.9: cables de la batería por +X/−Y
     b = b.union(cr)
     for x in (-15, 0, 15):
         for s in (-1, 1):
@@ -263,16 +263,17 @@ def tray():
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
-    xa, xb = qx1, BX0 - 0.15 - 0.8                  # canal vertical entre la Qi y el BNO (deja 0,8 de pared al BNO)
+    xa = -11.0                                      # REV 5.9: canal inferior desde el paso −X del pogo
     yb0, yb1 = BY0 - 0.15 - 1.0 - 0.1 - w, BY0 - 0.15 - 1.0 - 0.1   # canal inferior, bajo el tope −Y del BNO
-    yt0, yt1 = 11.1, 11.1 + w                       # canal superior (cables de la batería hasta la Qi)
-    bat_hole = (-26.0, 13.2)
-    t = t.cut(box((xa + xb) / 2, (yb0 + yt1) / 2, z, xb - xa, yt1 - yb0, hc))
-    t = t.cut(box((bat_hole[0] - 1.5 + xa) / 2, (yt0 + yt1) / 2, z, xa - bat_hole[0] + 1.5, w, hc))
     xw = 12.0                                       # bajada a la ventana del C6
     t = t.cut(box((xa + xw + w / 2) / 2, (yb0 + yb1) / 2, z, xw + w / 2 - xa, w, hc))
     t = t.cut(box(xw, (yb0 + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, w, C6_Y0 + 1.0 - yb0, 4))   # pasa bajo el PCB hasta la ventana
-    t = t.cut(box(*bat_hole, TRAY_Z0 - 1, 3, 4, 4))                                    # paso de los cables de la batería (−X/+Y)
+    # REV 5.9 (petición del usuario): cables de la batería por +X/−Y, junto al C6: suben por fuera del extremo de la
+    # batería y pasan bajo el borde del PCB hasta la ventana (pads BAT+/BAT− de la cara inferior del XIAO)
+    BH = (BAT["l"] / 2 + G + 0.2, 27.8, -15.5, -12.5)                                # x0, x1, y0, y1
+    xg0 = C6_X1 - 3.0
+    t = t.cut(box((xg0 + BH[1]) / 2, (BH[2] + BH[3]) / 2, TRAY_Z0 - 1, BH[1] - xg0, BH[3] - BH[2], 4))
+    t = t.cut(box(xg0 + 1.0, (BH[2] + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, 2.0, C6_Y0 + 1.0 - BH[2], 4))
     rx, ry = REED["center"]
     for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):                     # patas del reed → canal inferior
         t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 4))
