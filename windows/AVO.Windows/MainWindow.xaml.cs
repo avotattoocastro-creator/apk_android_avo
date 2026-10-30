@@ -41,6 +41,7 @@ public partial class MainWindow : Window
         AccuracyChart.ShowAccuracy = true;
         Loaded += async (_, _) => await RestoreAsync();
         InitEngine();
+        InitUsb();
         UpdateViews();
     }
     private void Navigate_Click(object sender, RoutedEventArgs e)

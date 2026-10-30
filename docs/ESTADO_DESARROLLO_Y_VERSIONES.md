@@ -17,6 +17,7 @@
 | ESPALDA | Sin versión integrada | **No** | Importar fuentes y validar GNSS/ESP-NOW |
 | CINCHA | Sin versión integrada | **No** | Importar fuentes y validar tres IMU |
 | CHEST pantalla (23/10/2026) | V3.7.2-rc1 | Binario de CI [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870) | Orientación, legibilidad, memoria y estabilidad BLE/espalda en el reloj |
+| CHEST descarga al PC por USB (30/10/2026) | 3.7.5-usb1 + AVO Windows V1.1 (rama `feature/chest-usb-pc-sync`) | BIN y paquete Windows de CI | Instalación, detección sin reinicio del reloj, descarga, reanudación y velocidad en PC real |
 | Programador USB (23/10/2026) | 1.8.0-beta2 / versionCode 11 | APK debug de CI [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136) | «LEER RELOJ», instalación y recuperación con el reloj real |
 
 ## OTA: contrato que falta implementar en receptor

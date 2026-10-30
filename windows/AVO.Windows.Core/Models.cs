@@ -15,6 +15,8 @@ public sealed record SegmentSummary(string Name, int Index, long ValidBytes, int
 public sealed class TrainingSession
 {
     public string SessionId { get; set; } = "";
+    /// <summary>SHA-256 of the concatenated segments declared by the .avo manifest (as verified against the watch), if any.</summary>
+    public string? Sha256 { get; set; }
     public string Horse { get; set; } = "Sin identificar";
     public string Rider { get; set; } = "Sin identificar";
     public DateTimeOffset? StartedAt { get; set; }
