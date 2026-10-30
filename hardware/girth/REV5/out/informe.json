@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 29932.2,
+   "volumen_mm3": 29926.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -81,9 +81,7 @@
    ]
   }
  },
- "interferencias": {
-  "pogo_macho × AVO_GIRTH_R5_soporte": 0.503
- },
+ "interferencias": {},
  "medidas": {
   "soporte_mm": [
    105.64,
