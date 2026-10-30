@@ -36,12 +36,12 @@
 [ OK ] power.a_single_weak_second_blocks_the_step_down
 [ OK ] reed.short_open_never_sleeps_long_open_sleeps
 [ OK ] reed.workshop_mode_ignores_the_reed
-[ OK ] v4.pair_gesture_three_placements_within_window
-[ OK ] v4.pair_gesture_too_slow_does_not_fire
-[ OK ] v4.pair_gesture_staying_on_support_never_fires
+[ OK ] v4.power_cycle_gesture_fires_on_third_quick_boot
+[ OK ] v4.power_cycle_gesture_broken_by_a_long_power_up
+[ OK ] v4.power_cycle_gesture_ignores_garbage_in_nvs
 [ OK ] v4.pps_jitter_and_alive
 [ OK ] v4.fifo_keeps_order_and_counts_drops
 [ OK ] v4.battery_scale
 [ OK ] v4.pins_do_not_collide_and_avoid_strapping_and_flash
 
-44 test cases, 710 checks, 0 failed cases
+44 test cases, 675 checks, 0 failed cases
