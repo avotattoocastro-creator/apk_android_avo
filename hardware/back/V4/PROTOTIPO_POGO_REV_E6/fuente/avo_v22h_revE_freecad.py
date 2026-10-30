@@ -53,9 +53,16 @@ RE = dict(
     # --- bandeja de la Heltec sobre la cuna de la batería
     TRAY_T=0.8, TRAY_HALF_W=21.0,
     TRAY_POSTS=((10.6, -16.0),), POST_R=2.5, PIN_R=1.3, PIN_H=0.7,     # Rev E.1: sin poste +Y (quedaría bajo los SOT-23 de la Heltec)
-    TRAY_PADS=((11.0, -16.0), (20.0, -16.5), (36.0, -16.5), (66.0, -16.5), (72.0, -8.0), (72.0, 16.0)),
+    TRAY_PADS=((16.0, -12.0), (20.0, -16.5), (36.0, -16.5), (66.0, -16.5), (72.0, -8.0), (72.0, 16.0)),   # Rev E.5 (pisadores de la tapa)
     PAD_R=2.0, PAD_GAP=0.05,
-    TRAY_RIB=1.2, TRAY_EDGE=0.7,   # Rev E.2: bandeja 0,8 + 1,2 = 2,0 fuera de la Heltec y de la placa Qi (marco rígido); borde de 0,7 sin engordar para los clics
+    TRAY_RIB=2.2, TRAY_EDGE=0.7,   # Rev E.6: 1,2 → 2,2 (la bandeja baja 1,0: la cara del refuerzo queda donde la pisan los pisadores de la tapa E.5)
+    # Rev E.6 (30/10/2026, sin Qi): la batería baja 1,0 (sin bobina debajo) y la bandeja con ella; la Heltec se calza 1,0 sobre
+    # la bandeja → queda a la MISMA altura que en la E.5 (la tapa E.5 sirve tal cual) y las pestañas son 1,0 más altas.
+    BAT_DROP=1.0, HELTEC_SHIM=1.0,
+    POLOLU=(17.8, 11.4), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,       # S7V8F3 en el sitio de la placa Qi, a 1,0 del borde −Y del refuerzo
+    CABLE_SLOT=(5.0, 6.9, -2.0, 2.0),                                          # un solo pasacables centrado (sustituye a las 2 ranuras del reed)
+    CABLE_LIPS_X=(21.0, 38.0, 53.0), CABLE_LIP=(3.0, 1.2),                     # sujetacables (5 × AWG30) en el canto del refuerzo junto a la Heltec
+    EDGE_HOOKS_X=(30.0, 46.0), EDGE_HOOK=(2.5, 1.0, 0.5),                      # pestañas nuevas en el borde +Y (largo, espesor, solape)   # Rev E.2: bandeja 0,8 + 1,2 = 2,0 fuera de la Heltec y de la placa Qi (marco rígido); borde de 0,7 sin engordar para los clics
     # Rev E.2: pared de tope pegada al marco de la batería (centra la bandeja) + 4 clics de seguridad en la base (la bandeja no cambia)
     STOP_WALL_T=1.2, STOP_WALL_CLR=0.15,
     CLIPS=((20.0, -1, 8.0), (70.5, -1, 4.0), (20.0, 1, 8.0), (40.5, 1, 8.0)), CLIP_ROOT_Z=2.6, CLIP_T=1.2, CLIP_SLOT=0.4, CLIP_ENG=0.40, CLIP_LIP_H=0.6, CLIP_GAP=0.10,   # Rev E.3: clics con raíz en Z 2,6 (rebaje en el suelo): brazo libre 7,5, deformación ≈ 2 %; gancho con voladizo 0,65 (≤ 1,0)
@@ -119,11 +126,11 @@ WALL = g("WALL"); CEIL = RE["TOP_Z"] - WALL
 # --- derivados
 BL, BW, BT = RE["BAT"]; BC = RE["BAT_CLR"]
 BX0 = RE["BAT_X0"]; BX1 = BX0 + BL + 2 * BC; BY = BW / 2 + BC
-BZ0 = RE["COIL_SKIN"] + RE["COIL"][2] + 0.1; BZ1 = BZ0 + BT     # la batería apoya sobre la bobina Qi
+BZ0 = RE["COIL_SKIN"] + RE["COIL"][2] + 0.1 - RE["BAT_DROP"]; BZ1 = BZ0 + BT     # Rev E.6: sin bobina, suelo de 1,4 bajo la batería
 TRAY_Z0 = BZ1 + RE["BAT_HEAD"]; TRAY_Z1 = TRAY_Z0 + RE["TRAY_T"]
 FT = RE["FRAME_T"]
 MCU = dict(x0=RE["MCU_X0"], y0=RE["MCU_Y0"], lx=g("MCU")["lx"], ly=g("MCU")["ly"], t=RE["MCU_T"])
-MCU_X1 = MCU["x0"] + MCU["lx"]; MCU_Y1 = MCU["y0"] + MCU["ly"]; MCU_Z = TRAY_Z1; MCU_T = MCU_Z + MCU["t"]
+MCU_X1 = MCU["x0"] + MCU["lx"]; MCU_Y1 = MCU["y0"] + MCU["ly"]; MCU_Z = TRAY_Z1 + RE["HELTEC_SHIM"]; MCU_T = MCU_Z + MCU["t"]   # Rev E.6: Heltec calzada 1,0
 ZDX = RE["ZED_DX"]
 ZED_X0 = g("ZED_X0") + ZDX; ZED_Y0 = g("ZED_Y0"); ZED_X1 = ZED_X0 + g("ZED_SIZE"); ZED_Y1 = ZED_Y0 + g("ZED_SIZE_Y")
 ZED_PTS = [(x + ZDX, y) for x, y in P["ZED_PTS"]]; ZB = g("ZB") + RE["ZED_DZ"]; ZED_T = 1.6
@@ -411,10 +418,7 @@ def build_base(OUTER, CAV, CLIP_CAV):
         kreg("base", nm_, t_, "corte"); return fl.cut(t_)
     # ---- alojamientos en el suelo
     fl = C("CORTE_BATERIA_ALOJAMIENTO", box((BX0, -BY, BZ0), (BX1, BY, ZF + 1)))
-    cl, cw, ct = RE["COIL"]; cc = RE["COIL_CLR"]
-    fl = C("CORTE_BOBINA_QI_BAJO_BATERIA", box((COIL_C[0] - cl / 2 - cc, COIL_C[1] - cw / 2 - cc, RE["COIL_SKIN"]), (COIL_C[0] + cl / 2 + cc, COIL_C[1] + cw / 2 + cc, ZF + 1)))
-    wx0, wx1 = RE["QI_WIRE_X"]
-    fl = C("CORTE_CANAL_HILOS_BOBINA", box((wx0 + 0.5, -(BY + FT + RE["STOP_WALL_T"] + 0.3), 1.4), (wx1 - 0.5, COIL_C[1] - cw / 2 + 0.5, ZF + 1)))
+    # Rev E.6: sin bobina Qi ni su canal (la batería apoya en el suelo, 1,4 mm)
     cw_ = RE["REED_CLR_W"]; lx_, ly_ = RE["REED_LEG"]; yl = rl / 2 + RE["REED_CLR_L"]
     fl = C("CORTE_REED_L%.1f" % (2 * yl), box((rx - rd_ / 2 - cw_, ry - yl, RE["REED_Z0"]), (rx + rd_ / 2 + cw_, ry + yl, ZF + 1)))
     for sg in (-1, 1):
@@ -460,48 +464,85 @@ REED_TOP = RE["REED_Z0"] + RE["REED"][1] + 0.2
 
 # ============================================================ CUNA DE LA HELTEC (bandeja sobre la batería)
 def build_bandeja(CLIP_CAV):
+    """Rev E.6: cuna de la Heltec para el prototipo con contactos pogo (sin Qi ni reed)."""
     x0, y0, x1, y1 = MCU["x0"], MCU["y0"], MCU_X1, MCU_Y1; g_ = 0.15
-    t = box((RE["TRAY_NECK_X"], -RE["TRAY_HALF_W"], TRAY_Z0), (BX1 + FT, RE["TRAY_HALF_W"], TRAY_Z1))
-    # faldón del cuello: baja de la bandeja y apoya en la lengüeta de la base (0,05 de holgura)
-    sx0, sx1 = RE["NECK_SKIRT_X"]; sy = RE["NECK_SKIRT_Y"]
-    pass                                                                         # Rev E.3: el faldón está en la base
-    # ranuras encima de las patas del reed
-    rx0, rx1 = RE["REED_SLOT_X"]; ry0, ry1 = RE["REED_SLOT_Y"]
-    for sg in (-1, 1): t = t.cut(box((rx0, sg * ry0, TRAY_Z0 - 1), (rx1, sg * ry1, TRAY_Z1 + 5)))
-    # ventana del extremo USB: conector SH1.25 (fuera de la batería) y componentes inferiores SOT-23 (1,0 sobre la batería)
-    t = t.cut(box((x0 + 0.2, y0 + 0.5, TRAY_Z0 - 1), (x0 + RE["SOT_ZONE"][1] + 0.4, y1 - 0.5, TRAY_Z1 + 1)))
+    # la bandeja baja 1,0: en el cuello empieza en X 3,5 (en X 3,0–3,4 la pared interior de la tapa E.5 baja hasta Z 8,6)
+    t = box((RE["TRAY_NECK_X"] + 0.5, -RE["TRAY_HALF_W"], TRAY_Z0), (BX1 + FT, RE["TRAY_HALF_W"], TRAY_Z1))
+    # un solo pasacables centrado (cables de los contactos del fondo)
+    cx0, cx1, cy0, cy1 = RE["CABLE_SLOT"]
+    t = t.cut(box((cx0, cy0, TRAY_Z0 - 1), (cx1, cy1, TRAY_Z1 + 5)))
+    # ventana bajo la Heltec: componentes inferiores (X 10,3–17,6) y conector SH1.25 que cuelga (X 9,2–12,9); el tramo X 8,75–10,15
+    # queda macizo a los lados del conector para los calzos del extremo USB
+    t = t.cut(box((x0 + 1.6, y0 + 0.5, TRAY_Z0 - 1), (x0 + RE["SOT_ZONE"][1] + 0.4, y1 - 0.5, TRAY_Z1 + 1)))
+    t = t.cut(box((x0 + 0.4, 2.85, TRAY_Z0 - 1), (x0 + 4.5, 11.35, TRAY_Z1 + 1)))
     for (px, py) in RE["TRAY_POSTS"]: t = t.cut(vcyl(px, py, RE["PIN_R"] + 0.15, TRAY_Z0 - 1, TRAY_Z1 + 1))
     feats = [t]
+    zs = TRAY_Z1 - 0.1; sh_ = MCU_Z                       # calzos: de la bandeja a la cara inferior de la Heltec
+    # calzos 1,0 (a los dos lados del conector en el extremo USB; extremo de la antena; bajo los apoyos de la tapa)
+    for (a_, b_, c_, d_) in ((x0 + 0.15, y0 + 0.2, x0 + 1.55, 2.65), (x0 + 0.15, 11.55, x0 + 1.55, y1 - 0.2),
+                             (x1 - 5.8, y0 + 0.3, x1 - 0.3, y1 - 0.3),
+                             (28.0, y0 + 0.2, 30.0, y0 + 1.8), (28.0, y1 - 1.8, 30.0, y1 - 0.2),
+                             (46.0, y0 + 0.2, 48.0, y0 + 1.8), (46.0, y1 - 1.8, 48.0, y1 - 0.2)):
+        feats.append(box((a_, b_, zs), (c_, d_, sh_)))
     xw0 = x0 + RE["MCU_WALL_X0"]
+    c0 = 0.6 / math.sqrt(0.5); z0 = MCU_T + 0.05
+    def lip_cut(xa, xb, ya, yb, edge, sgn, axis):
+        """recorte a 45° bajo el labio de una pestaña (se imprime sin soportes); edge = cara del canto de la Heltec"""
+        if axis == "x":
+            hs = Part.makePolygon([V(edge - sgn * 5, ya - 1, z0 + c0 - 5), V(edge + sgn * 10, ya - 1, z0 + c0 + 10), V(edge + sgn * 10, ya - 1, -10),
+                                   V(edge - sgn * 5, ya - 1, -10), V(edge - sgn * 5, ya - 1, z0 + c0 - 5)])
+            return Part.Face(hs).extrude(V(0, yb - ya + 2, 0))
+        hs = Part.makePolygon([V(xa - 1, edge - sgn * 5, z0 + c0 - 5), V(xa - 1, edge + sgn * 10, z0 + c0 + 10), V(xa - 1, edge + sgn * 10, -10),
+                               V(xa - 1, edge - sgn * 5, -10), V(xa - 1, edge - sgn * 5, z0 + c0 - 5)])
+        return Part.Face(hs).extrude(V(xb - xa + 2, 0, 0))
+    # guías laterales existentes, ahora con labio (pestañas en los dos bordes)
     for sg, yy in ((1, y0), (-1, y1)):
         yo, yi = yy - sg * (g_ + 1.2), yy - sg * g_
-        feats.append(box((xw0, yo, TRAY_Z1 - 0.1), (xw0 + 3.0, yi, MCU_T + 1.2)))          # guía lateral (lado USB)
-        feats.append(box((x1 - 6.0, yo, TRAY_Z1 - 0.1), (x1 + g_, yi, MCU_T + 0.6)))       # guía lateral (lado antena)
-    lx = x1 + g_; c0 = 0.6 / math.sqrt(0.5); z0 = MCU_T + 0.05
+        for (xa, xb, top) in ((xw0, xw0 + 3.0, MCU_T + 1.8), (x1 - 6.0, x1 + g_, MCU_T + 1.8)):
+            gd = box((xa, min(yo, yi), zs), (xb, max(yo, yi), top))
+            lip = box((xa, min(yi, yy + sg * 0.5), z0), (xb, max(yi, yy + sg * 0.5), top)).common(lip_cut(xa, xb, 0, 0, yi, -sg, "y"))
+            feats.append(gd.fuse(lip))
+    # pestañas nuevas en el borde +Y (en el −Y va el canal de los cables)
+    hl, ht, ho = RE["EDGE_HOOK"]
+    for xc in RE["EDGE_HOOKS_X"]:
+        xa, xb = xc - hl / 2, xc + hl / 2; yi = y1 + g_
+        beam = box((xa, yi, zs), (xb, yi + ht, MCU_T + 1.8))
+        lip = box((xa, y1 - ho, z0), (xb, yi, MCU_T + 1.8)).common(lip_cut(xa, xb, 0, 0, yi, 1, "y"))
+        feats.append(beam.fuse(lip))
+    # torres con pestaña en los DOS extremos (antena: las de siempre, 1,0 más altas; USB: iguales, entre el USB-C y los pulsadores)
+    lx = x1 + g_
     for (ya, yb) in ((y0 + RE["HOOK_Y"][0], y0 + RE["HOOK_Y"][1]), (y1 - RE["HOOK_Y"][1], y1 - RE["HOOK_Y"][0])):
-        beam = box((lx, ya, TRAY_Z1 - 0.1), (lx + 1.4, yb, MCU_T + 1.8))
+        beam = box((lx, ya, zs), (lx + 1.4, yb, MCU_T + 1.8))
         hook = box((lx - 0.9, ya, z0), (lx + 0.1, yb, MCU_T + 1.8))
-        hs = Part.makePolygon([V(lx - 5, ya - 1, z0 + c0 - 5), V(lx + 10, ya - 1, z0 + c0 + 10), V(lx + 10, ya - 1, -10), V(lx - 5, ya - 1, -10), V(lx - 5, ya - 1, z0 + c0 - 5)])
-        feats.append(beam.fuse(hook.common(Part.Face(hs).extrude(V(0, yb - ya + 2, 0)))))
-    # ---- cuna de la placa Qi sobre la bandeja (lados −X, +X y −Y; el lado de la Heltec queda abierto) + paso de los hilos de la bobina
-    qx, qy = RE["QI_C"]; ql, qw, qt, qp = RE["QI"]; c_ = 0.2
-    qf = box((qx - ql / 2 - c_ - FT, qy - qw / 2 - c_ - FT, TRAY_Z1 - 0.1), (qx + ql / 2 + c_ + FT, qy + qw / 2 + c_, TRAY_Z1 + RE["QI_WALL_H"]))
-    qf = qf.cut(box((qx - ql / 2 - c_, qy - qw / 2 - c_, 0), (qx + ql / 2 + c_, qy + qw / 2 + 5, 30)))
-    wx0, wx1 = RE["QI_WIRE_X"]
-    feats.append(qf)
+        feats.append(beam.fuse(hook.common(lip_cut(0, 0, ya, yb, lx, 1, "x"))))
+    ux = x0 - g_                                           # USB: viga de 1,1 (la clavija del cable llega hasta X 7,3)
+    for (ya, yb) in ((-0.9, 2.3), (11.9, 15.1)):
+        beam = box((ux - 1.1, ya, zs), (ux, yb, MCU_T + 1.8))
+        hook = box((ux - 0.1, ya, z0), (ux + 0.9, yb, MCU_T + 1.8))
+        feats.append(beam.fuse(hook.common(lip_cut(0, 0, ya, yb, ux, -1, "x"))))
     b = fuse_all(feats)
-    b = b.cut(box((wx0, -RE["TRAY_HALF_W"] - 1, TRAY_Z0 - 1), (wx1, qy - qw / 2 - c_ + 0.01, TRAY_Z1 + 5)))       # muesca de los hilos de la bobina
-    # ---- refuerzo: +1,2 sobre la bandeja fuera de la Heltec, de la placa Qi y del borde de los clics
+    # ---- refuerzo (2,2) fuera de la Heltec; alojamiento del Pololu S7V8F3 a 1,0 del borde −Y del refuerzo
     rb = box((x0 - 0.15, -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"], TRAY_Z1 - 0.05), (BX1 + FT, RE["TRAY_HALF_W"] - RE["TRAY_EDGE"], TRAY_Z1 + RE["TRAY_RIB"]))
-    rb = rb.cut(box((x0 - 0.6, y0 - 1.6, 0), (x1 + 2.0, y1 + 1.6, 30)))                                  # Heltec + pulsadores + ganchos
-    rb = rb.cut(box((qx - ql / 2 - c_ - FT - 0.2, qy - qw / 2 - c_ - FT - 0.2, 0), (qx + ql / 2 + c_ + FT + 0.2, qy + qw / 2 + 1.0, 30)))   # placa Qi y su cuna
-    rb = rb.cut(box((wx0, -RE["TRAY_HALF_W"] - 1, 0), (wx1, qy, 30)))                                      # muesca de los hilos de la bobina
+    rb = rb.cut(box((x0 - 0.6, y0 - 1.6, 0), (x1 + 2.0, y1 + 1.6, 30)))                                  # Heltec + pulsadores + pestañas
+    pl, pw = RE["POLOLU"]; pc = RE["POLOLU_CLR"]; py0 = -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"] + RE["POLOLU_WALL"]
+    POL = (RE["POLOLU_X"] - pl / 2 - pc, py0, RE["POLOLU_X"] + pl / 2 + pc, py0 + pw + 2 * pc)
+    rb = rb.cut(box((POL[0], POL[1], 0), (POL[2], POL[3], 30)))
     b = b.fuse(rb).removeSplitter()
+    # sujetacables: labio a 45° en el canto del refuerzo junto a la Heltec (canal de los cables entre el refuerzo y la Heltec)
+    ll, lo = RE["CABLE_LIP"]; ye = y0 - 1.6; zt = TRAY_Z1 + RE["TRAY_RIB"]
+    for xc in RE["CABLE_LIPS_X"]:
+        zb_ = TRAY_Z1 + 1.3; zh = zb_ + lo + 0.8          # canal libre de 1,3 junto al refuerzo (5 × AWG30 en 2 capas); labio 45° hacia la Heltec
+        pr = Part.Face(Part.makePolygon([V(xc - ll / 2, ye - 0.3, zb_), V(xc - ll / 2, ye, zb_), V(xc - ll / 2, ye + lo, zb_ + lo),
+                                         V(xc - ll / 2, ye + lo, zh), V(xc - ll / 2, ye - 0.3, zh), V(xc - ll / 2, ye - 0.3, zb_)])).extrude(V(ll, 0, 0))
+        pr = pr.fuse(box((xc - ll / 2, ye - 0.8, zt - 0.1), (xc + ll / 2, ye, zh)))          # apoyo del labio sobre el refuerzo (lejos de las láminas del botón USER de la tapa)
+        b = b.fuse(pr)
+    b = b.removeSplitter()
     for (px, py) in RE["TRAY_POSTS"]: b = b.cut(vcyl(px, py, RE["PIN_R"] + 0.15, TRAY_Z0 - 1, TRAY_Z1 + 5))
     hx0, hx1, hy0, hy1 = RE["TRAY_CABLE_HOLE"]
     b = b.cut(box((hx0, hy0, TRAY_Z0 - 1), (hx1, hy1, TRAY_Z1 + 5)))                                         # paso de cables de la batería
     b = b.cut(column_keep(0.3)).common(CLIP_CAV)
     for (hx, hy) in ZED_PTS: b = b.cut(vcyl(hx, hy, 4.3, -5, 40))      # libre de los separadores de la ZED (más altos en Rev E.2)
+    RE["POLOLU_ALOJ"] = [round(v, 3) for v in POL]
     return b.removeSplitter()
 
 # ============================================================ JUNTA TPU
@@ -632,7 +673,7 @@ def report(s):
     info = dict(valido=bool(s.isValid()), solidos=len(s.Solids), cascaras_cerradas=all(x.isClosed() for x in s.Shells), caras=len(s.Faces),
                 volumen_mm3=round(mesh_volume(s), 1), bbox=[round(v, 3) for v in (ob.XMin, ob.XMax, ob.YMin, ob.YMax, ob.ZMin, ob.ZMax)])
     return info
-NOMBRES = dict(tapa="AVO_RevE_TAPA", base="AVO_RevE6_BASE_POGO", cuna_heltec="AVO_RevE_CUNA_HELTEC", junta_TPU="AVO_RevE_JUNTA_TPU",
+NOMBRES = dict(tapa="AVO_RevE_TAPA", base="AVO_RevE6_BASE_POGO", cuna_heltec="AVO_RevE6_CUNA_HELTEC", junta_TPU="AVO_RevE_JUNTA_TPU",
                soporte="AVO_RevE6_BASE_CARGA_POGO" if os.environ.get("AVO_E6_CARGA") else "AVO_RevE6_SOPORTE_POGO",
                contraplaca="AVO_RevE_CONTRAPLACA")
 if __name__ == "__main__" or "AVO_RUN" in os.environ:

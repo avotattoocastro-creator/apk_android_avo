@@ -15,13 +15,38 @@ batería 654060) el sistema de alimentación de la V4 REV B **antes** de fabrica
 | Pieza | Acción | Fichero |
 |---|---|---|
 | Base | **reimprimir** (Rev E.6) | `PROTOTIPO_POGO_REV_E6/STL/AVO_RevE6_BASE_POGO.stl` |
+| Cuna de la Heltec | **reimprimir** (Rev E.6, ver §1 b) | `PROTOTIPO_POGO_REV_E6/STL/AVO_RevE6_CUNA_HELTEC.stl` |
 | Soporte del chaleco | **reimprimir** (Rev E.6) | `PROTOTIPO_POGO_REV_E6/STL/AVO_RevE6_SOPORTE_POGO.stl` |
 | Base de carga | **nueva** (el mismo soporte con los pines en BAT y GND y sin puente; se usa sobre la mesa) | `PROTOTIPO_POGO_REV_E6/STL/AVO_RevE6_BASE_CARGA_POGO.stl` |
-| Tapa E.5, cuna de la Heltec, junta TPU, contraplaca | **se conservan** | — |
+| Tapa E.5, junta TPU, contraplaca | **se conservan** (la Heltec queda a la misma altura: la tapa E.5 sirve tal cual) | — |
 | Tope del reed | ya no hace falta | — |
 
-Se imprimen igual que la Rev E (PETG, base y soportes con la cara exterior sobre la cama, **sin soportes**: 0 voladizos
-fuera de límite en `VALIDACION/voladizos.json`).
+Se imprimen igual que la Rev E (PETG, base, cuna y soportes con la cara inferior sobre la cama, **sin soportes**: 0 voladizos
+fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición de impresión; los STEP, en posición de montaje.
+
+### 1 b. Cuna de la Heltec E.6 (cambios pedidos el 30/10/2026)
+- **Un solo pasacables centrado** (X 5,0–6,9 · Y −2,0–2,0) en lugar de las 2 ranuras del reed: por él suben los cables de los
+  contactos del fondo.
+- **Ventana bajo la Heltec ampliada** hacia el conector de batería SH1.25 (el «cuadrado» de la foto).
+- **Pololu S7V8F3** en el sitio de la placa Qi: alojamiento de 18,2 × 11,8 mm hundido en el refuerzo, **a 1,0 mm del borde −Y**
+  (X 41,9–60,1 · Y −19,3 a −7,5; paredes de 2,2 mm).
+- **3 sujetacables** para 5 cables AWG30 en el canto del refuerzo junto a la Heltec (X 21, 38 y 53): canal libre de 1,3 mm de
+  alto junto al refuerzo, labio a 45° hacia la Heltec. El primero se movió de X 24 a X 21 para no tocar las láminas del
+  botón USER de la tapa.
+- **Heltec calzada 1,0 mm**: calzos en el extremo USB (a los dos lados del conector), en el extremo de la antena y bajo los
+  apoyos de la tapa (X 28–30 y 46–48). **Pestañas 1,0 mm más altas.**
+  - Para que la Heltec no suba respecto a la tapa (el USB-C quedaría a 0,5 mm del techo), **la batería baja 1,0 mm**: ya no
+    hay bobina Qi debajo y apoya en el suelo de la base (1,4 mm).
+  - La bandeja baja con ella y su refuerzo pasa de 1,2 a 2,2 mm, así que los pisadores de la tapa E.5 siguen apoyando igual.
+  - Resultado: **la Heltec queda exactamente a la misma altura que en la E.5** (boca USB-C, apoyos y botón USER de la tapa
+    E.5 sin cambios). Comprobado: 0 interferencias con la tapa E.5.
+- **Más pestañas en los dos bordes**:
+  - las 4 guías laterales pasan a tener labio (0,5 mm sobre la placa);
+  - 2 pestañas nuevas en el borde +Y (X 30 y 46).
+  - En el borde −Y no se añaden más, porque ahí va el canal de los cables.
+- **Torres con pestaña también en el extremo USB**, iguales a las del extremo de la antena, entre el USB-C y los pulsadores
+  laterales (Y −0,9 a 2,3 y 11,9 a 15,1). Su viga es de 1,1 mm para dejar entrar la clavija del cable USB-C.
+- La bandeja empieza en X 3,5 (antes 3,0): al bajar 1 mm tocaba la pared interior del cuello de la tapa.
 
 **Por qué hay que reimprimir la base:** el alojamiento del reed deja solo 1 mm de suelo y un tornillo avellanado necesita
 ≈ 2,5 mm (cabeza + junta). En la E.6 el fondo de ese alojamiento sube a 2,5 mm y cada contacto tiene:
@@ -58,9 +83,7 @@ Se movieron de X 7 a X 8,8 porque en X 7 los alojamientos dejaban en el aire el 
 
 ## 3. Desmontar
 1. Abrir la cápsula y **desenchufar la batería**.
-2. **Quitar la placa Qi**: desoldar sus dos hilos de salida donde estén conectados y aislarlos. La **bobina** puede
-   quedarse en su alojamiento **sin conectar**: la batería apoya encima, así que hace de calzo de 1,6 mm. Si se quita,
-   hay que poner un calzo de 1,6 mm.
+2. **Quitar la placa Qi y la bobina** (la base E.6 ya no tiene su alojamiento: la batería apoya en el suelo).
 3. **Quitar el reed** y su hilo a GPIO7. GPIO7 queda sin conectar.
 4. Pasar la Heltec, la URTK1.2, la bandeja y la batería a la base E.6.
 

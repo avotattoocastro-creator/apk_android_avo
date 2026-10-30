@@ -4,8 +4,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 169,
-   "volumen_mm3": 28605.6,
+   "caras": 171,
+   "volumen_mm3": 28632.7,
    "bbox": [
     -0.0,
     166.214,
@@ -19,8 +19,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 452,
-   "volumen_mm3": 45747.7,
+   "caras": 439,
+   "volumen_mm3": 44248.6,
    "bbox": [
     -0.0,
     166.214,
@@ -34,14 +34,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 98,
-   "volumen_mm3": 3262.6,
+   "caras": 184,
+   "volumen_mm3": 4489.1,
    "bbox": [
-    3.0,
+    3.5,
     74.5,
     -21.0,
     21.0,
-    9.2,
+    8.2,
     13.6
    ]
   },
@@ -139,23 +139,23 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 162,
-   "volumen_mm3": 6574.2,
+   "caras": 157,
+   "volumen_mm3": 5947.8,
    "bbox": [
     -0.008,
     26.0,
     -29.508,
     29.508,
     -0.008,
-    11.2
+    10.2
    ]
   },
   "probeta_P2_CUELLO_TAPA": {
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 67,
-   "volumen_mm3": 5678.4,
+   "caras": 69,
+   "volumen_mm3": 5705.4,
    "bbox": [
     -0.027,
     26.0,
@@ -225,8 +225,8 @@
   "PIN_H": 0.7,
   "TRAY_PADS": [
    [
-    11.0,
-    -16.0
+    16.0,
+    -12.0
    ],
    [
     20.0,
@@ -251,8 +251,41 @@
   ],
   "PAD_R": 2.0,
   "PAD_GAP": 0.05,
-  "TRAY_RIB": 1.2,
+  "TRAY_RIB": 2.2,
   "TRAY_EDGE": 0.7,
+  "BAT_DROP": 1.0,
+  "HELTEC_SHIM": 1.0,
+  "POLOLU": [
+   17.8,
+   11.4
+  ],
+  "POLOLU_CLR": 0.2,
+  "POLOLU_X": 51.0,
+  "POLOLU_WALL": 1.0,
+  "CABLE_SLOT": [
+   5.0,
+   6.9,
+   -2.0,
+   2.0
+  ],
+  "CABLE_LIPS_X": [
+   21.0,
+   38.0,
+   53.0
+  ],
+  "CABLE_LIP": [
+   3.0,
+   1.2
+  ],
+  "EDGE_HOOKS_X": [
+   30.0,
+   46.0
+  ],
+  "EDGE_HOOK": [
+   2.5,
+   1.0,
+   0.5
+  ],
   "STOP_WALL_T": 1.2,
   "STOP_WALL_CLR": 0.15,
   "CLIPS": [
@@ -614,12 +647,12 @@
    ],
    "BAT_Y": 20.2,
    "BAT_Z": [
-    2.4,
-    8.9
+    1.4,
+    7.9
    ],
    "TRAY_Z": [
-    9.2,
-    10.0
+    8.2,
+    9.0
    ],
    "MCU_Z": 10.0,
    "ZED_X": [
@@ -639,9 +672,15 @@
     -5.0
    ],
    "TECHO_INTERIOR": 15.100000000000001
-  }
+  },
+  "POLOLU_ALOJ": [
+   41.9,
+   -19.3,
+   60.1,
+   -7.5
+  ]
  },
  "logotipo": {},
  "fallos_redondeo": [],
- "tiempo_s": 39.1
+ "tiempo_s": 21.7
 }

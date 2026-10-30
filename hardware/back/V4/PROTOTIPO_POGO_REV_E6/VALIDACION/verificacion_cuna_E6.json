@@ -1,0 +1,71 @@
+{
+ "piezas": {
+  "cuna / base": 0.0,
+  "cuna / tapa_E5": 0.0,
+  "base / tapa_E5": 0.0
+ },
+ "electronica": {
+  "heltec / cuna": 0.0,
+  "heltec / base": 0.0,
+  "heltec / tapa_E5": 0.0,
+  "zed_y_L / cuna": 0.0,
+  "zed_y_L / base": 0.0,
+  "zed_y_L / tapa_E5": 0.0,
+  "bateria_654060 / cuna": 0.0,
+  "bateria_654060 / base": 0.0,
+  "bateria_654060 / tapa_E5": 0.0,
+  "pololu_S7V8F3 / cuna": 0.0,
+  "pololu_S7V8F3 / base": 0.0,
+  "pololu_S7V8F3 / tapa_E5": 0.0,
+  "clavija_USB_C / cuna": 0.0,
+  "clavija_USB_C / base": 0.0,
+  "clavija_USB_C / tapa_E5": 7.324,
+  "cables_5xAWG30 / cuna": 0.0,
+  "cables_5xAWG30 / base": 0.0,
+  "cables_5xAWG30 / tapa_E5": 0.0
+ },
+ "holguras": {
+  "heltec": {
+   "cuna": 0.0,
+   "tapa_E5": 0.15
+  },
+  "zed_y_L": {
+   "cuna": 0.58,
+   "tapa_E5": 0.0
+  },
+  "bateria_654060": {
+   "cuna": 0.3,
+   "tapa_E5": 1.0
+  },
+  "pololu_S7V8F3": {
+   "cuna": 0.02,
+   "tapa_E5": 3.1
+  },
+  "clavija_USB_C": {
+   "cuna": 0.05,
+   "tapa_E5": 0.0
+  },
+  "cables_5xAWG30": {
+   "cuna": 0.02,
+   "tapa_E5": 1.792
+  }
+ },
+ "cotas": {
+  "BAT_Z": [
+   1.4,
+   7.9
+  ],
+  "TRAY_Z": [
+   8.2,
+   9.0
+  ],
+  "MCU_Z": 10.0,
+  "POLOLU": [
+   41.9,
+   -19.3,
+   60.1,
+   -7.5
+  ]
+ },
+ "heltec_vs_pololu": 0.0
+}

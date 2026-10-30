@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Espalda · prototipo Rev E.6: cuna de la Heltec nueva (Pololu, sujetacables, pestañas) y batería 1 mm más baja
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia** (anotaciones del usuario sobre la cuna en Shapr3D, 30/10/2026):
+- **Cuna `AVO_RevE6_CUNA_HELTEC`:**
+  - un solo pasacables centrado en lugar de las 2 ranuras del reed;
+  - ventana ampliada hacia el conector SH1.25;
+  - alojamiento del Pololu S7V8F3 a 1 mm del borde −Y, en el sitio de la placa Qi;
+  - 3 sujetacables para 5 × AWG30;
+  - Heltec calzada 1 mm, con todas las pestañas 1 mm más altas;
+  - labio en las 4 guías laterales y 2 pestañas nuevas en el borde +Y;
+  - torres con pestaña también en el extremo USB, entre el USB-C y los pulsadores.
+- **Base `AVO_RevE6_BASE_POGO`:** sin bobina Qi; la batería apoya en el suelo (1,4 mm) y baja 1 mm. La bandeja baja con
+  ella, así que la Heltec queda a la misma altura que en la E.5 y la **tapa E.5 se conserva**. El refuerzo de la bandeja
+  pasa de 1,2 a 2,2 mm para que los pisadores de la tapa sigan apoyando igual.
+- **Guía actualizada:** `hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`.
+**Validación:**
+- Software: piezas B-Rep válidas (1 sólido), STL estancos.
+- Voladizos: 0 fuera de límite.
+- Interferencias: 0 con la tapa E.5, la Heltec, el ZED + L, la batería, el Pololu y el canal de cables. Las únicas
+  coincidencias con la clavija USB-C son las esquinas redondeadas de la boca (aproximación de la comprobación).
+- **NO PROBADO** físicamente.
+**Pendiente:** imprimir y comprobar el encaje real de la Heltec (pestañas de 0,5 mm en los bordes) y del Pololu.
+
 ## 2026-10-30 — Espalda · AVO BACK V4 REV B (contactos pogo, sin Qi ni Hall) + BACK 4.0.0-dev2 + prototipo Rev E.6 con BACK 3.12.0
 **Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `89ad681`…`c1e0e26` y siguientes de esta entrada ·
 **CI:** PCB run 41048486880 (`c1e0e26`) y 41050496945 (`6e5b54d`, informe con las existencias del TVS: 496 730 uds.): **puerta superada**; firmware V4 4.0.0-dev2 run 41044961345 (`8e38b61`, éxito,

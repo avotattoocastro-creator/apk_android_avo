@@ -54,10 +54,11 @@ def check_stl(path):
 S = os.path.join(H, "salida"); O = os.path.join(S, "STL"); os.makedirs(O, exist_ok=True)
 res = {}
 P = {}
-for nm in ("AVO_RevE6_BASE_POGO", "AVO_RevE6_SOPORTE_POGO", "AVO_RevE6_BASE_CARGA_POGO"):
+for nm in ("AVO_RevE6_BASE_POGO", "AVO_RevE6_CUNA_HELTEC", "AVO_RevE6_SOPORTE_POGO", "AVO_RevE6_BASE_CARGA_POGO"):
     s = rd(os.path.join(S, "BREP", nm + ".brep")); P[nm] = s
-    p = os.path.join(O, nm + ".stl"); write_stl(p, s, nm)
-    r = check_stl(p); r["volumen_brep_mm3"] = round(mv(s), 1); res[nm] = r
+    sp = s.copy(); sp.translate(V(0, 0, -s.BoundBox.ZMin))          # posición de impresión: cara inferior sobre la cama (Z 0)
+    p = os.path.join(O, nm + ".stl"); write_stl(p, sp, nm)
+    r = check_stl(p); r["volumen_brep_mm3"] = round(mv(s), 1); r["nota"] = "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"; res[nm] = r
 R = "/home/claude/v4/ref_E41/AVO_V22H_REV_E4_1_COMPLETA/REFERENCIAS_ELECTRONICA"
 inter = {}
 for e in ("HELTEC_WIRELESS_STICK_LITE_V3.step", "ZED_F9P_Y_ADAPTADOR_L.step"):

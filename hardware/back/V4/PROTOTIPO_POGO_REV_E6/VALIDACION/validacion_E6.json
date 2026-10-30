@@ -1,13 +1,13 @@
 {
  "AVO_RevE6_BASE_POGO": {
-  "triangulos": 27214,
-  "vertices": 13587,
+  "triangulos": 27166,
+  "vertices": 13563,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
   "euler": -20,
-  "volumen_mm3": 45745.8,
+  "volumen_mm3": 44246.7,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -15,12 +15,37 @@
   "bbox_mm": [
    -0.0,
    -29.5,
-   -0.0,
+   0.0,
    166.214,
    29.5,
    12.7
   ],
-  "volumen_brep_mm3": 45747.7
+  "volumen_brep_mm3": 44248.6,
+  "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
+ },
+ "AVO_RevE6_CUNA_HELTEC": {
+  "triangulos": 1840,
+  "vertices": 910,
+  "aristas_no_manifold": 0,
+  "aristas_mal_orientadas": 0,
+  "triangulos_degenerados": 0,
+  "componentes": 1,
+  "euler": -10,
+  "volumen_mm3": 4489.1,
+  "normales_coherentes": 1.0,
+  "freecad_isSolid": true,
+  "freecad_autointersecciones": false,
+  "freecad_puntos_no_manifold": 0,
+  "bbox_mm": [
+   3.5,
+   -21.0,
+   0.0,
+   74.5,
+   21.0,
+   5.4
+  ],
+  "volumen_brep_mm3": 4489.1,
+  "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
  },
  "AVO_RevE6_SOPORTE_POGO": {
   "triangulos": 9500,
@@ -38,12 +63,13 @@
   "bbox_mm": [
    -2.72,
    -32.22,
-   -4.5,
+   0.0,
    169.439,
    32.22,
-   4.45
+   8.95
   ],
-  "volumen_brep_mm3": 50050.0
+  "volumen_brep_mm3": 50050.0,
+  "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
  },
  "AVO_RevE6_BASE_CARGA_POGO": {
   "triangulos": 9656,
@@ -61,18 +87,21 @@
   "bbox_mm": [
    -2.72,
    -32.22,
-   -4.5,
+   0.0,
    169.439,
    32.22,
-   4.45
+   8.95
   ],
-  "volumen_brep_mm3": 50061.1
+  "volumen_brep_mm3": 50061.1,
+  "nota": "STL en posición de impresión (Z mínima = 0); STEP en posición de montaje"
  },
  "interferencias_mm3": {
   "HELTEC_WIRELESS_STICK_LITE_V3 / AVO_RevE6_BASE_POGO": 0.0,
+  "HELTEC_WIRELESS_STICK_LITE_V3 / AVO_RevE6_CUNA_HELTEC": 0.0,
   "HELTEC_WIRELESS_STICK_LITE_V3 / AVO_RevE6_SOPORTE_POGO": 0.0,
   "HELTEC_WIRELESS_STICK_LITE_V3 / AVO_RevE6_BASE_CARGA_POGO": 0.0,
   "ZED_F9P_Y_ADAPTADOR_L / AVO_RevE6_BASE_POGO": 0.0,
+  "ZED_F9P_Y_ADAPTADOR_L / AVO_RevE6_CUNA_HELTEC": 0.0,
   "ZED_F9P_Y_ADAPTADOR_L / AVO_RevE6_SOPORTE_POGO": 0.0,
   "ZED_F9P_Y_ADAPTADOR_L / AVO_RevE6_BASE_CARGA_POGO": 0.0
  }
