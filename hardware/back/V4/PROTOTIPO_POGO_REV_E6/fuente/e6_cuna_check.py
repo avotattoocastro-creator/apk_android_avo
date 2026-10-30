@@ -17,7 +17,7 @@ POL = inf["POLOLU_ALOJ"]; tz1 = d["TRAY_Z"][1]
 EL = {"heltec": Part.read(os.path.join(REF, "HELTEC_WIRELESS_STICK_LITE_V3.step")),
       "zed_y_L": Part.read(os.path.join(REF, "ZED_F9P_Y_ADAPTADOR_L.step")),
       "bateria_654060": box((bx0 + 0.2, -by + 0.2, bz0 + 0.02), (bx1 - 0.2, by - 0.2, bz1)),
-      "pololu_S7V8F3": box((POL[0] + 0.2, POL[1] + 0.2, tz1 + 1.22), (POL[2] - 0.2, POL[3] - 0.2, tz1 + 2.2)),
+      "pololu_S7V8F3": box((POL[0] + 0.2, POL[1] + 0.2, tz1 + 1.02), (POL[2] - 0.2, POL[3] - 0.2, tz1 + 2.2)),
       "cables_cuello_y_borde": Part.makeCompound([box((4.45, -8.4, tz1 + 0.02), (6.65, -6.6, tz1 + 1.1)), box((13.0, -18.7, tz1 + 2.22), (16.0, -16.6, tz1 + 3.3)), box((36.0, -9.4, tz1 + 2.22), (40.0, -7.3, tz1 + 3.3)), box((69.9, -3.0, tz1 + 2.22), (72.0, 12.0, tz1 + 3.3))]),
       "clavija_USB_C": box((-5.0, 7.1 - 6.2, 13.2 - 3.2), (7.3, 7.1 + 6.2, 13.2 + 3.2)),
       "cables_5xAWG30": box((19.0, -5.75, tz1 + 0.02), (60.0, -4.6, tz1 + 1.2))}

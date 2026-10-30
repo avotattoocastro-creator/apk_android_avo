@@ -28,9 +28,9 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
 - **Un solo pasacables centrado** (X 5,0–6,9 · Y −2,0–2,0) en lugar de las 2 ranuras del reed: por él suben los cables de los
   contactos del fondo.
 - **Ventana bajo la Heltec ampliada** hacia el conector de batería SH1.25 (el «cuadrado» de la foto).
-- **Pololu S7V8F3** (Pololu 2122: 16,51 × 11,43 mm; **espesor 1,0 mm**, medido por el usuario. Pololu da 0,1″ =
-  2,54 mm sin aclarar qué incluye) en el sitio de la placa Qi, **a 1,0 mm del borde −Y**:
-  - alojamiento de 11,83 × 16,91 mm (0,2 mm de holgura) rebajado **1,0 mm** en el refuerzo: su cara superior queda
+- **Pololu S7V8F3** (Pololu 2122: 16,51 × 11,43 mm; **espesor 1,2 mm**, medido con calibre el 30/10/2026. Pololu da
+  0,1″ = 2,54 mm sin aclarar qué incluye) en el sitio de la placa Qi, **a 1,0 mm del borde −Y**:
+  - alojamiento de 11,83 × 16,91 mm (0,2 mm de holgura) rebajado **1,2 mm** en el refuerzo: su cara superior queda
     enrasada con el refuerzo (Z 11,2) y ya no hay marco por encima;
   - lado de los pines (SHDN, VIN, GND, VOUT) hacia la antena, con una salida de 9 mm para los hilos y un alivio de
     0,5 mm bajo las soldaduras.
@@ -51,9 +51,9 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
   - **Borde +Y:** junto a las torres de la Heltec en X 30 y 46 hay una **torre exterior separada** (X 28,8–31,3 y
     45,2–47,3; Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
     otro. Las torres exteriores están fuera de los clics de la base, que sujetan la bandeja en X 16–24 y 36–45.
-- **Espesor de la Heltec**: las pestañas quedan 0,05 mm por encima de una placa de **1,8 mm**. Ese espesor sale del modelo
-  3MF y **nunca se ha medido con calibre** (estaba en las pendientes de la Rev E). Si la placa real es más fina, la Heltec
-  bailará: hay que medirla y cambiar `MCU["t"]`.
+- **Espesor de la Heltec**: las pestañas quedan 0,05 mm por encima de una placa de **1,8 mm** (modelo 3MF). La foto del
+  calibre del 30/10/2026 da entre 1,7 y 1,9 mm (lectura por foto, ±0,1), compatible con el modelo: no se cambia. Si al
+  montarla baila, medir con el nonio y cambiar `MCU["t"]`.
 - **Heltec calzada 1,0 mm**: calzos en el extremo USB (a los dos lados del conector), en el extremo de la antena y bajo los
   apoyos de la tapa (X 28–30 y 46–48). **Pestañas 1,0 mm más altas.**
   - Para que la Heltec no suba respecto a la tapa (el USB-C quedaría a 0,5 mm del techo), **la batería baja 1,0 mm**: ya no

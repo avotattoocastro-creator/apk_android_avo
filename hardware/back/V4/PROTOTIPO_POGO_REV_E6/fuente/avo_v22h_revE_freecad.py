@@ -59,7 +59,7 @@ RE = dict(
     # Rev E.6 (30/10/2026, sin Qi): la batería baja 1,0 (sin bobina debajo) y la bandeja con ella; la Heltec se calza 1,0 sobre
     # la bandeja → queda a la MISMA altura que en la E.5 (la tapa E.5 sirve tal cual) y las pestañas son 1,0 más altas.
     BAT_DROP=1.0, HELTEC_SHIM=1.0,
-    POLOLU=(16.51, 11.43, 1.0), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3: 16,51 × 11,43 (0,65" × 0,45"); espesor 1,0 (máx., dato del usuario; Pololu da 0,1" sin aclarar qué incluye); a 1,0 del borde −Y
+    POLOLU=(16.51, 11.43, 1.2), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3: 16,51 × 11,43 (0,65" × 0,45"); espesor 1,2 (medido con calibre por el usuario, 30/10/2026); a 1,0 del borde −Y
     POLOLU_PINS_W=9.0,                                                         # salida de los 4 hilos (SHDN, VIN, GND, VOUT) por el lado +X
     NECK_CLIPS=((-7.5, 4.4, 6.7), (14.5, 4.3, 6.3)),        # sujetacables del cuello (Y, canal X0–X1; cables a lo largo de Y)
     # pinzas sobre el refuerzo (tipo, canal desde, canal hasta, centro): "x" = cables a lo largo de X; "y" = a lo largo de Y
@@ -540,7 +540,7 @@ def build_bandeja(CLIP_CAV):
     rb = rb.cut(box((x0 - 0.6, y0 - 1.6, 0), (x1 + 2.0, y1 + 1.6, 30)))                                  # Heltec + pulsadores + pestañas
     pl, pw = RE["POLOLU"][:2]; pc = RE["POLOLU_CLR"]; py0 = -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"] + RE["POLOLU_WALL"]
     POL = (RE["POLOLU_X"] - pl / 2 - pc, py0, RE["POLOLU_X"] + pl / 2 + pc, py0 + pw + 2 * pc)
-    # alojamiento rebajado en el refuerzo con la profundidad exacta del Pololu (1,0 medido por el usuario, 30/10/2026):
+    # alojamiento rebajado en el refuerzo con la profundidad exacta del Pololu (1,2 medido con calibre, 30/10/2026):
     # su cara superior queda enrasada con el refuerzo (Z 11,2); sin marco por encima
     zfl = TRAY_Z1 + RE["TRAY_RIB"] - RE["POLOLU"][2]
     rb = rb.cut(box((POL[0], POL[1], zfl), (POL[2], POL[3], 30)))
