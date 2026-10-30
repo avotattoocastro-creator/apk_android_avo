@@ -34,8 +34,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 184,
-   "volumen_mm3": 4489.1,
+   "caras": 286,
+   "volumen_mm3": 4365.2,
    "bbox": [
     3.5,
     74.5,
@@ -256,12 +256,41 @@
   "BAT_DROP": 1.0,
   "HELTEC_SHIM": 1.0,
   "POLOLU": [
-   17.8,
-   11.4
+   16.51,
+   11.43,
+   2.54
   ],
   "POLOLU_CLR": 0.2,
   "POLOLU_X": 51.0,
   "POLOLU_WALL": 1.0,
+  "POLOLU_PINS_W": 9.0,
+  "NECK_CLIPS": [
+   [
+    -13.5,
+    4.4,
+    6.7
+   ],
+   [
+    -7.5,
+    4.4,
+    6.7
+   ],
+   [
+    14.5,
+    4.3,
+    6.3
+   ]
+  ],
+  "END_CLIPS_Y": [
+   -13.0,
+   -2.5,
+   6.0,
+   11.0
+  ],
+  "END_CLIP_X": [
+   69.8,
+   73.2
+  ],
   "CABLE_SLOT": [
    5.0,
    6.9,
@@ -285,6 +314,24 @@
    2.5,
    1.0,
    0.5
+  ],
+  "OUTER_TOWERS_X": [
+   [
+    13.6,
+    15.6
+   ],
+   [
+    28.75,
+    31.25
+   ],
+   [
+    45.2,
+    47.25
+   ]
+  ],
+  "OUTER_TOWER_Y": [
+   20.35,
+   21.0
   ],
   "STOP_WALL_T": 1.2,
   "STOP_WALL_CLR": 0.15,
@@ -674,13 +721,13 @@
    "TECHO_INTERIOR": 15.100000000000001
   },
   "POLOLU_ALOJ": [
-   41.9,
+   42.545,
    -19.3,
-   60.1,
-   -7.5
+   59.455,
+   -7.47
   ]
  },
  "logotipo": {},
  "fallos_redondeo": [],
- "tiempo_s": 21.7
+ "tiempo_s": 19.7
 }

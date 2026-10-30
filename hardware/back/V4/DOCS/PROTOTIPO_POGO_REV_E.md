@@ -28,11 +28,26 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
 - **Un solo pasacables centrado** (X 5,0–6,9 · Y −2,0–2,0) en lugar de las 2 ranuras del reed: por él suben los cables de los
   contactos del fondo.
 - **Ventana bajo la Heltec ampliada** hacia el conector de batería SH1.25 (el «cuadrado» de la foto).
-- **Pololu S7V8F3** en el sitio de la placa Qi: alojamiento de 18,2 × 11,8 mm hundido en el refuerzo, **a 1,0 mm del borde −Y**
-  (X 41,9–60,1 · Y −19,3 a −7,5; paredes de 2,2 mm).
-- **3 sujetacables** para 5 cables AWG30 en el canto del refuerzo junto a la Heltec (X 21, 38 y 53): canal libre de 1,3 mm de
-  alto junto al refuerzo, labio a 45° hacia la Heltec. El primero se movió de X 24 a X 21 para no tocar las láminas del
-  botón USER de la tapa.
+- **Pololu S7V8F3** (Pololu 2122: 11,43 × 16,51 × 2,54 mm) en el sitio de la placa Qi, **a 1,0 mm del borde −Y**:
+  - alojamiento de 11,83 × 16,91 mm (0,2 mm de holgura); el marco llega a **2,54 mm, el espesor exacto del Pololu**, así
+    que su cara superior queda enrasada;
+  - lado de los pines (SHDN, VIN, GND, VOUT) hacia la antena, con una salida de 9 mm para los hilos y un alivio de
+    0,5 mm bajo las soldaduras.
+- **Sujetacables para 5 cables AWG30:**
+  - **Borde −Y, junto a la Heltec:** 3 labios a 45° sobre el canal entre el refuerzo y la Heltec (X 21, 38 y 53). El de
+    X 21 se movió desde X 24 para no tocar las láminas del botón USER de la tapa.
+  - **Cuello:** 3 pinzas de dos postes con labio a 45°. Dos en el lado −Y (Y −13,5 y −7,5) y una en el +Y (Y 14,5, junto
+    al contacto GND). Los cables van a lo largo de Y. No hay pinzas entre Y 0,9 y 13,3 porque ahí entra la clavija del
+    USB-C.
+  - **Extremo de la antena:** canal de 3,4 mm abierto en el refuerzo hasta la bandeja (X 69,8–73,2, de Y −16 a 13), con
+    labios a 45° en sus cantos en Y −13, −2,5, 6 y 11. Pasa por debajo del pisador (72; −8) de la tapa, que sigue apoyando
+    en el canto +X.
+  - **Borde +Y:** junto a cada torre de la Heltec hay una **torre exterior separada** (X 13,6–15,6, 28,8–31,3 y 45,2–47,3;
+    Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
+    otro. Las torres exteriores están fuera de los clics de la base, que sujetan la bandeja en X 16–24 y 36–45.
+- **Espesor de la Heltec**: las pestañas quedan 0,05 mm por encima de una placa de **1,8 mm**. Ese espesor sale del modelo
+  3MF y **nunca se ha medido con calibre** (estaba en las pendientes de la Rev E). Si la placa real es más fina, la Heltec
+  bailará: hay que medirla y cambiar `MCU["t"]`.
 - **Heltec calzada 1,0 mm**: calzos en el extremo USB (a los dos lados del conector), en el extremo de la antena y bajo los
   apoyos de la tapa (X 28–30 y 46–48). **Pestañas 1,0 mm más altas.**
   - Para que la Heltec no suba respecto a la tapa (el USB-C quedaría a 0,5 mm del techo), **la batería baja 1,0 mm**: ya no

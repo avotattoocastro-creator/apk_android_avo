@@ -17,6 +17,9 @@
   "pololu_S7V8F3 / cuna": 0.0,
   "pololu_S7V8F3 / base": 0.0,
   "pololu_S7V8F3 / tapa_E5": 0.0,
+  "cables_cuello_y_cola / cuna": 0.0,
+  "cables_cuello_y_cola / base": 0.0,
+  "cables_cuello_y_cola / tapa_E5": 0.0,
   "clavija_USB_C / cuna": 0.0,
   "clavija_USB_C / base": 0.0,
   "clavija_USB_C / tapa_E5": 7.324,
@@ -39,7 +42,11 @@
   },
   "pololu_S7V8F3": {
    "cuna": 0.02,
-   "tapa_E5": 3.1
+   "tapa_E5": 3.56
+  },
+  "cables_cuello_y_cola": {
+   "cuna": 0.02,
+   "tapa_E5": 1.2
   },
   "clavija_USB_C": {
    "cuna": 0.05,
@@ -61,10 +68,10 @@
   ],
   "MCU_Z": 10.0,
   "POLOLU": [
-   41.9,
+   42.545,
    -19.3,
-   60.1,
-   -7.5
+   59.455,
+   -7.47
   ]
  },
  "heltec_vs_pololu": 0.0

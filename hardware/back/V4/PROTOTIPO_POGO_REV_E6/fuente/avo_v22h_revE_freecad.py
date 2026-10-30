@@ -59,10 +59,15 @@ RE = dict(
     # Rev E.6 (30/10/2026, sin Qi): la batería baja 1,0 (sin bobina debajo) y la bandeja con ella; la Heltec se calza 1,0 sobre
     # la bandeja → queda a la MISMA altura que en la E.5 (la tapa E.5 sirve tal cual) y las pestañas son 1,0 más altas.
     BAT_DROP=1.0, HELTEC_SHIM=1.0,
-    POLOLU=(17.8, 11.4), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,       # S7V8F3 en el sitio de la placa Qi, a 1,0 del borde −Y del refuerzo
+    POLOLU=(16.51, 11.43, 2.54), POLOLU_CLR=0.2, POLOLU_X=51.0, POLOLU_WALL=1.0,   # S7V8F3 (Pololu 2122: 0,45" × 0,65" × 0,1") a 1,0 del borde −Y
+    POLOLU_PINS_W=9.0,                                                         # salida de los 4 hilos (SHDN, VIN, GND, VOUT) por el lado +X
+    NECK_CLIPS=((-13.5, 4.4, 6.7), (-7.5, 4.4, 6.7), (14.5, 4.3, 6.3)),        # sujetacables del cuello (Y, canal X0–X1; cables a lo largo de Y)
+    END_CLIPS_Y=(-13.0, -2.5, 6.0, 11.0), END_CLIP_X=(69.8, 73.2),             # sujetacables del extremo de la antena (sobre el refuerzo)
     CABLE_SLOT=(5.0, 6.9, -2.0, 2.0),                                          # un solo pasacables centrado (sustituye a las 2 ranuras del reed)
     CABLE_LIPS_X=(21.0, 38.0, 53.0), CABLE_LIP=(3.0, 1.2),                     # sujetacables (5 × AWG30) en el canto del refuerzo junto a la Heltec
-    EDGE_HOOKS_X=(30.0, 46.0), EDGE_HOOK=(2.5, 1.0, 0.5),                      # pestañas nuevas en el borde +Y (largo, espesor, solape)   # Rev E.2: bandeja 0,8 + 1,2 = 2,0 fuera de la Heltec y de la placa Qi (marco rígido); borde de 0,7 sin engordar para los clics
+    EDGE_HOOKS_X=(30.0, 46.0), EDGE_HOOK=(2.5, 1.0, 0.5),                      # pestañas nuevas en el borde +Y (largo, espesor, solape)
+    OUTER_TOWERS_X=((13.6, 15.6), (28.75, 31.25), (45.2, 47.25)), OUTER_TOWER_Y=(20.35, 21.0),   # torres exteriores del borde +Y: pasacables
+                                                                               # entre cada torre de la Heltec y su torre exterior (fuera de los clics de la base)   # Rev E.2: bandeja 0,8 + 1,2 = 2,0 fuera de la Heltec y de la placa Qi (marco rígido); borde de 0,7 sin engordar para los clics
     # Rev E.2: pared de tope pegada al marco de la batería (centra la bandeja) + 4 clics de seguridad en la base (la bandeja no cambia)
     STOP_WALL_T=1.2, STOP_WALL_CLR=0.15,
     CLIPS=((20.0, -1, 8.0), (70.5, -1, 4.0), (20.0, 1, 8.0), (40.5, 1, 8.0)), CLIP_ROOT_Z=2.6, CLIP_T=1.2, CLIP_SLOT=0.4, CLIP_ENG=0.40, CLIP_LIP_H=0.6, CLIP_GAP=0.10,   # Rev E.3: clics con raíz en Z 2,6 (rebaje en el suelo): brazo libre 7,5, deformación ≈ 2 %; gancho con voladizo 0,65 (≤ 1,0)
@@ -509,6 +514,10 @@ def build_bandeja(CLIP_CAV):
         beam = box((xa, yi, zs), (xb, yi + ht, MCU_T + 1.8))
         lip = box((xa, y1 - ho, z0), (xb, yi, MCU_T + 1.8)).common(lip_cut(xa, xb, 0, 0, yi, 1, "y"))
         feats.append(beam.fuse(lip))
+    # torres exteriores separadas de las del borde +Y: entre las dos queda el pasacables
+    oy0, oy1 = RE["OUTER_TOWER_Y"]
+    for (xa, xb) in RE["OUTER_TOWERS_X"]:
+        feats.append(box((xa, oy0, zs), (xb, oy1, MCU_T + 1.8)))
     # torres con pestaña en los DOS extremos (antena: las de siempre, 1,0 más altas; USB: iguales, entre el USB-C y los pulsadores)
     lx = x1 + g_
     for (ya, yb) in ((y0 + RE["HOOK_Y"][0], y0 + RE["HOOK_Y"][1]), (y1 - RE["HOOK_Y"][1], y1 - RE["HOOK_Y"][0])):
@@ -524,10 +533,17 @@ def build_bandeja(CLIP_CAV):
     # ---- refuerzo (2,2) fuera de la Heltec; alojamiento del Pololu S7V8F3 a 1,0 del borde −Y del refuerzo
     rb = box((x0 - 0.15, -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"], TRAY_Z1 - 0.05), (BX1 + FT, RE["TRAY_HALF_W"] - RE["TRAY_EDGE"], TRAY_Z1 + RE["TRAY_RIB"]))
     rb = rb.cut(box((x0 - 0.6, y0 - 1.6, 0), (x1 + 2.0, y1 + 1.6, 30)))                                  # Heltec + pulsadores + pestañas
-    pl, pw = RE["POLOLU"]; pc = RE["POLOLU_CLR"]; py0 = -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"] + RE["POLOLU_WALL"]
+    pl, pw = RE["POLOLU"][:2]; pc = RE["POLOLU_CLR"]; py0 = -RE["TRAY_HALF_W"] + RE["TRAY_EDGE"] + RE["POLOLU_WALL"]
     POL = (RE["POLOLU_X"] - pl / 2 - pc, py0, RE["POLOLU_X"] + pl / 2 + pc, py0 + pw + 2 * pc)
     rb = rb.cut(box((POL[0], POL[1], 0), (POL[2], POL[3], 30)))
+    # marco hasta el espesor exacto del Pololu (2,54): queda enrasado con su cara superior
+    ztop = TRAY_Z1 + RE["POLOLU"][2]
+    fr_ = box((POL[0] - 0.8, POL[1] - 0.8, TRAY_Z1 + RE["TRAY_RIB"] - 0.05), (POL[2] + 0.8, POL[3] + 0.8, ztop)).cut(box((POL[0], POL[1], 0), (POL[2], POL[3], 30)))
+    pyc = (POL[1] + POL[3]) / 2; pw2 = RE["POLOLU_PINS_W"] / 2
+    fr_ = fr_.cut(box((POL[2] - 0.1, pyc - pw2, 0), (POL[2] + 1.0, pyc + pw2, 30)))           # salida de los hilos por el lado de los pines
+    rb = rb.fuse(fr_)
     b = b.fuse(rb).removeSplitter()
+    b = b.cut(box((POL[2] - 2.8, pyc - pw2, TRAY_Z1 - 0.5), (POL[2], pyc + pw2, TRAY_Z1 + 0.1)))   # alivio de 0,5 bajo las soldaduras de los pines
     # sujetacables: labio a 45° en el canto del refuerzo junto a la Heltec (canal de los cables entre el refuerzo y la Heltec)
     ll, lo = RE["CABLE_LIP"]; ye = y0 - 1.6; zt = TRAY_Z1 + RE["TRAY_RIB"]
     for xc in RE["CABLE_LIPS_X"]:
@@ -536,6 +552,30 @@ def build_bandeja(CLIP_CAV):
                                          V(xc - ll / 2, ye + lo, zh), V(xc - ll / 2, ye - 0.3, zh), V(xc - ll / 2, ye - 0.3, zb_)])).extrude(V(ll, 0, 0))
         pr = pr.fuse(box((xc - ll / 2, ye - 0.8, zt - 0.1), (xc + ll / 2, ye, zh)))          # apoyo del labio sobre el refuerzo (lejos de las láminas del botón USER de la tapa)
         b = b.fuse(pr)
+    # sujetacables en Y (5 × AWG30): dos postes de 0,8 con labio a 45° hacia el canal; entrada de 0,7 entre labios
+    def clip_y(xa, xb, yc, zb, ln=2.0, ho=1.2, lp=0.8):
+        out = []
+        zt_ = zb + ho + lp + 0.4
+        for (p0, p1, edge, sgn) in ((xa - 0.8, xa, xa, 1), (xb, xb + 0.8, xb, -1)):
+            out.append(box((p0, yc - ln / 2, zb - 0.1), (p1, yc + ln / 2, zt_)))
+            pr_ = Part.Face(Part.makePolygon([V(edge - sgn * 0.01, yc - ln / 2, zb + ho), V(edge + sgn * lp, yc - ln / 2, zb + ho + lp),
+                                              V(edge + sgn * lp, yc - ln / 2, zt_), V(edge - sgn * 0.01, yc - ln / 2, zt_),
+                                              V(edge - sgn * 0.01, yc - ln / 2, zb + ho)])).extrude(V(0, ln, 0))
+            out.append(pr_)
+        return fuse_all(out)
+    for (yc, xa, xb) in RE["NECK_CLIPS"]:
+        b = b.fuse(clip_y(xa, xb, yc, TRAY_Z1))
+    # extremo de la antena: canal en el refuerzo (hasta la bandeja) a lo largo de Y; pasa bajo los pisadores (72; −8) de la tapa,
+    # que siguen apoyando en el lado +X del canal. Labios a 45° en los dos cantos en las posiciones de los sujetacables.
+    ea, eb = RE["END_CLIP_X"]; ys_ = [y for y in RE["END_CLIPS_Y"]]
+    b = b.cut(box((ea, min(ys_) - 3.0, TRAY_Z1), (eb, max(ys_) + 2.0, 30)))
+    zt2 = TRAY_Z1 + RE["TRAY_RIB"]
+    for yc in ys_:
+        for (edge, sgn) in ((ea, 1), (eb, -1)):
+            pr_ = Part.Face(Part.makePolygon([V(edge - sgn * 0.3, yc - 1.0, zt2 - 1.1), V(edge, yc - 1.0, zt2 - 1.1), V(edge + sgn * 0.8, yc - 1.0, zt2 - 0.3),
+                                              V(edge + sgn * 0.8, yc - 1.0, zt2), V(edge - sgn * 0.3, yc - 1.0, zt2),
+                                              V(edge - sgn * 0.3, yc - 1.0, zt2 - 1.1)])).extrude(V(0, 2.0, 0))
+            b = b.fuse(pr_)
     b = b.removeSplitter()
     for (px, py) in RE["TRAY_POSTS"]: b = b.cut(vcyl(px, py, RE["PIN_R"] + 0.15, TRAY_Z0 - 1, TRAY_Z1 + 5))
     hx0, hx1, hy0, hy1 = RE["TRAY_CABLE_HOLE"]
