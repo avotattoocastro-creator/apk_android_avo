@@ -21,17 +21,17 @@ G = 0.20
 
 # ------------------------------------------------------------------ cápsula
 L, W, R = 70.0, 51.0, 10.0          # REV 5.9: 73 → 70 (sin Qi el largo lo marca la batería + los tornillos de los extremos)
-H = 15.5
-HB = 9.0
+H = 13.8      # REV 5.9: 15,5 → 13,8 (−1,2 abajo sin la bobina, −0,5 en el techo de la tapa)
+HB = 7.8      # REV 5.9: 9,0 → 7,8
 WALL = 2.0
 IL, IW, IR = L - 2 * WALL, W - 2 * WALL, R - WALL   # interior 66 × 44
-CEIL = H - 2.3
+CEIL = H - 1.8                # REV 5.9: techo de la tapa 2,3 → 1,8
 
-FLOOR = 2.6
+FLOOR = 1.4                   # REV 5.9: 2,6 → 1,4 (sin el hueco de la bobina Qi)
 COIL = dict(d=25.0, t=1.0)                         # bobina Qi redonda Ø25 (nuevo receptor); espesor (E)
 COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
-TRAY_Z0, TRAY_T = 7.2, 1.0
+TRAY_Z0, TRAY_T = 6.0, 1.0     # REV 5.9: 7,2 → 6,0 (misma holgura de 0,25 sobre la batería)
 TRAY_TOP = TRAY_Z0 + TRAY_T
 BED_TOP = TRAY_TOP + 1.0          # REV 5.7: cama maciza a ras de la cara superior de los PCB (C6 y Qi)
 BED_OFF = 3.75 + 1.2 + 0.15       # la cama queda dentro del labio de la tapa
@@ -127,7 +127,7 @@ KEY = dict(out=2.4, z1=4.0, clear=0.2)
 # REV 5.8 (2.ª ronda): nervio a ras de la cara superior de la tapa (se imprime apoyado en la cama, sin soportes).
 # Cara inferior inclinada 20° hacia fuera (gancho de arpón): al abrir, el labio del cierre sube y sale a la vez y tiene
 # que flexar ≈0,8 mm → clic fuerte. Arriba, el cierre abraza el nervio por encima: sujeta la cápsula hacia abajo.
-RIB = dict(out=1.6, z_wall=13.0, z_front=12.4, w=16.0, lead=0.3)
+RIB = dict(out=1.6, z_wall=H - 2.5, z_front=H - 3.1, w=16.0, lead=0.3)   # REV 5.9: relativo a H
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
 
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
@@ -271,7 +271,7 @@ def tray():
     t = t.cut(box(xw, (yb0 + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, w, C6_Y0 + 1.0 - yb0, 4))   # pasa bajo el PCB hasta la ventana
     # REV 5.9 (petición del usuario): cables de la batería por +X/−Y, junto al C6: suben por fuera del extremo de la
     # batería y pasan bajo el borde del PCB hasta la ventana (pads BAT+/BAT− de la cara inferior del XIAO)
-    BH = (BAT["l"] / 2 + G + 0.2, 27.8, -15.5, -12.5)                                # x0, x1, y0, y1
+    BH = (BAT["l"] / 2 + G - 0.6, 26.8, -15.0, -12.8)          # x0, x1, y0, y1 · REV 5.9: más adentro, no corta el borde de la cama
     xg0 = C6_X1 - 3.0
     t = t.cut(box((xg0 + BH[1]) / 2, (BH[2] + BH[3]) / 2, TRAY_Z0 - 1, BH[1] - xg0, BH[3] - BH[2], 4))
     t = t.cut(box(xg0 + 1.0, (BH[2] + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, 2.0, C6_Y0 + 1.0 - BH[2], 4))
