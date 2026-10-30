@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — CHEST 3.7.5-usb1 — pantalla «CONECTADO AL PC» (solo con PC; con cargador, la de siempre)
+**Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` · **Commits:** `1192c49`, `4801bec`
+**Qué cambia:**
+- **Detección:** con un PC en el cable, el reloj muestra «CONECTADO AL PC» en lugar de la pantalla de carga. El PC se reconoce por las tramas USB de inicio de trama (`Serial.isPlugged()`) o por órdenes AVO1 en los últimos 30 s.
+- **Contenido:** estado (abre AVO Windows / comparando / descargando i de n con barra y % / sincronizado con N nuevos / interrumpida / grabando) y la batería real.
+- **Con un cargador o batería externa** se ve la pantalla de carga de la 3.7.2 sin ningún cambio.
+- **Mismas reglas que la pantalla de carga:** grabación → tarjetas, toque → tarjetas 30 s, OTA y apagado con prioridad, mismo brillo.
+- **Nueva orden `AVO1 PROGRESS`:** AVO Windows la envía en cada fase y cada 5 %. Con un firmware anterior es inofensiva.
+**Por qué:** petición del usuario. La pantalla debe aparecer al conectar al PC y, sin PC, seguir como estaba.
+**Archivos:**
+- `firmware/chest/V3_7_5_USB/src/{ui_pc.h,ui_pc_draw.h,usb_sync.*}`, `tools/apply_v375_usb.py` (parches en `ui.cpp` y `ui_dash.cpp` durante la compilación; no cambian las fuentes de `V3_7_2_UI`), `host/pc_preview.cpp`, `PROTOCOLO_USB.md`, workflow;
+- `windows/AVO.Windows.Core/ChestUsb.cs` y las autopruebas.
+**CI:**
+- firmware: run 41076422328 (éxito, `4801bec`). BIN de 1.582.203 B; RAM estática +96 B respecto a la rc5. Incluye la vista previa `AVO-CHEST-V3-7-5-USB1-PANTALLA-PC-PREVIEW`.
+- Windows: run 41075952072 (éxito, `1192c49`), 49 autopruebas.
+**Validación:** IMPLEMENTADO · CI. **NO VERIFICADO** en el reloj.
+**Pendiente:** comprobar en el reloj que `isPlugged()` distingue el PC del cargador de pared y de la batería externa (prueba 5 de `PROTOCOLO_USB.md`).
+
+---
+
 ## 2026-10-30 — CHEST 3.7.5-usb1 + AVO Windows V1.1 — descarga automática de entrenamientos al PC por USB
 **Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` (desde `feature/avo-wifi-sync`, sin fusionar) · **Commits:** `b4e57c8`, `261bee3`
 **Qué cambia:**
