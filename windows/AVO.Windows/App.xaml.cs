@@ -113,6 +113,9 @@ public partial class App : Application
         System.Windows.Documents.TextElement.SetForeground(root, (Brush)Current.Resources["AvoText"]);
         System.Windows.Documents.TextElement.SetFontFamily(root, (FontFamily)Current.Resources["AvoFont"]);
         System.Windows.Documents.TextElement.SetFontSize(root, 13.0);
+        Layout(root, 1280, 720);
+        await Idle();
+        Layout(root, 1280, 720);
         var report = new List<object>();
         foreach (var spec in sizes.Split(',', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -186,13 +189,10 @@ public partial class App : Application
         root.UpdateLayout();
         int pw = (int)Math.Round(root.ActualWidth * scale), ph = (int)Math.Round(root.ActualHeight * scale);
         var rtb = new RenderTargetBitmap(pw, ph, 96 * scale, 96 * scale, PixelFormats.Pbgra32);
-        var dv = new DrawingVisual();
-        using (var dc = dv.RenderOpen())
-        {
-            dc.DrawRectangle((Brush)Current.Resources["AvoBg"], null, new Rect(0, 0, root.ActualWidth, root.ActualHeight));
-            dc.DrawRectangle(new VisualBrush(root), null, new Rect(0, 0, root.ActualWidth, root.ActualHeight));
-        }
-        rtb.Render(dv);
+        var bg = new DrawingVisual();
+        using (var dc = bg.RenderOpen()) dc.DrawRectangle((Brush)Current.Resources["AvoBg"], null, new Rect(0, 0, root.ActualWidth, root.ActualHeight));
+        rtb.Render(bg);
+        rtb.Render(root);   // the element itself (not a VisualBrush, which would rescale to the descendants' bounds)
         var enc = new PngBitmapEncoder();
         enc.Frames.Add(BitmapFrame.Create(rtb));
         using var f = File.Create(file);

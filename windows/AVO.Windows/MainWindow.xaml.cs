@@ -52,7 +52,7 @@ public partial class MainWindow : Window, IDialogs
         HeaderTabs.Visibility = Visibility.Visible;
         HeaderTabs.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
         double available = HeaderGrid.ColumnDefinitions[1].ActualWidth;
-        HeaderTabs.Visibility = HeaderTabs.DesiredSize.Width <= available ? Visibility.Visible : Visibility.Hidden;
+        HeaderTabs.Visibility = HeaderTabs.DesiredSize.Width <= available ? Visibility.Visible : Visibility.Collapsed;
     }
 
     /// <summary>Path helper for the capture mode.</summary>

@@ -65,6 +65,7 @@ public sealed class MapControl : FrameworkElement
     public double Zoom { get; private set; } = 15;
     private double _cx = 0.5 * 256, _cy = 0.5 * 256;    // view centre in zoom-0 world pixels
     private bool _fitPending = true;
+    private bool _userMoved;   // keep the user's view on resize; otherwise the route stays fitted
     private Point? _down; private double _downCx, _downCy; private bool _moved;
 
     private static readonly HttpClient Http = CreateHttp();
@@ -88,7 +89,7 @@ public sealed class MapControl : FrameworkElement
     {
         ClipToBounds = true;
         Cursor = Cursors.Hand;
-        SizeChanged += (_, _) => { if (_fitPending) FitToRoute(); };
+        SizeChanged += (_, _) => { if (_fitPending || !_userMoved) FitToRoute(); };
     }
 
     private void OnTracksChanged()
@@ -101,11 +102,13 @@ public sealed class MapControl : FrameworkElement
             for (int i = 0; i < tl.Count; i++) { var (x, y) = TileMath.LatLonToPixel(tl.Lat[i], tl.Lon[i], 0); t.Px0[i] = x; t.Py0[i] = y; }
         }
         _fitPending = true;
+        _userMoved = false;
         FitToRoute();
     }
 
     public void FitToRoute()
     {
+        _userMoved = false;
         var tracks = Tracks ?? [];
         if (ActualWidth < 10 || ActualHeight < 10) { _fitPending = true; return; }
         double minX = double.MaxValue, minY = double.MaxValue, maxX = double.MinValue, maxY = double.MinValue;
@@ -125,7 +128,7 @@ public sealed class MapControl : FrameworkElement
         InvalidateVisual();
     }
 
-    public void ZoomBy(double delta) { Zoom = Math.Clamp(Zoom + delta, 2, 19.5); InvalidateVisual(); }
+    public void ZoomBy(double delta) { _userMoved = true; Zoom = Math.Clamp(Zoom + delta, 2, 19.5); InvalidateVisual(); }
 
     private Point Screen(double x0, double y0)
     {
@@ -413,6 +416,7 @@ public sealed class MapControl : FrameworkElement
         var pos = e.GetPosition(this);
         double s0 = Math.Pow(2, Zoom);
         double wx = _cx + (pos.X - ActualWidth / 2) / s0, wy = _cy + (pos.Y - ActualHeight / 2) / s0;
+        _userMoved = true;
         Zoom = Math.Clamp(Zoom + (e.Delta > 0 ? 0.5 : -0.5), 2, 19.5);
         double s1 = Math.Pow(2, Zoom);
         _cx = wx - (pos.X - ActualWidth / 2) / s1; _cy = wy - (pos.Y - ActualHeight / 2) / s1;
@@ -423,7 +427,7 @@ public sealed class MapControl : FrameworkElement
     protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
     {
         base.OnMouseLeftButtonDown(e);
-        if (e.ClickCount == 2) { FitToRoute(); return; }
+        if (e.ClickCount == 2) { _userMoved = false; FitToRoute(); return; }
         _down = e.GetPosition(this); _downCx = _cx; _downCy = _cy; _moved = false;
         CaptureMouse();
     }
@@ -435,6 +439,7 @@ public sealed class MapControl : FrameworkElement
         var p = e.GetPosition(this);
         if (Math.Abs(p.X - d.X) + Math.Abs(p.Y - d.Y) > 3) _moved = true;
         if (!_moved) return;
+        _userMoved = true;
         double s = Math.Pow(2, Zoom);
         _cx = _downCx - (p.X - d.X) / s; _cy = _downCy - (p.Y - d.Y) / s;
         InvalidateVisual();

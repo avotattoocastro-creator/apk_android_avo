@@ -233,7 +233,11 @@ public sealed class EnvironmentService
     {
         Directory.CreateDirectory(_cacheDir);
         string file = Path.Combine(_cacheDir, Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(url)))[..32] + ".json");
-        if (File.Exists(file) && DateTime.UtcNow - File.GetLastWriteTimeUtc(file) < maxAge) return await File.ReadAllTextAsync(file, ct);
+        if (File.Exists(file) && DateTime.UtcNow - File.GetLastWriteTimeUtc(file) < maxAge)
+        {
+            try { return await File.ReadAllTextAsync(file, ct); }
+            catch (IOException) { /* being replaced by a concurrent request: fetch again */ }
+        }
         try
         {
             using var r = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, ct);
@@ -242,8 +246,10 @@ public sealed class EnvironmentService
             string text = await r.Content.ReadAsStringAsync(ct);
             if (text.Length > 8_000_000) throw new InvalidDataException("Respuesta demasiado grande");
             using (JsonDocument.Parse(text)) { }
-            await File.WriteAllTextAsync(file + ".tmp", text, ct);
-            File.Move(file + ".tmp", file, true);
+            string tmp = file + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            await File.WriteAllTextAsync(tmp, text, ct);
+            try { File.Move(tmp, file, true); }
+            catch (IOException) { File.Delete(tmp); }   // a concurrent request already stored the same response
             return text;
         }
         catch (Exception) when (File.Exists(file))
