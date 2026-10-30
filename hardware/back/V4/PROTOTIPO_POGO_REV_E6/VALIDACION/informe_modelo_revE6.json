@@ -1,0 +1,647 @@
+{
+ "piezas": {
+  "tapa": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 169,
+   "volumen_mm3": 28605.6,
+   "bbox": [
+    -0.0,
+    166.214,
+    -29.5,
+    29.5,
+    6.0,
+    17.1
+   ]
+  },
+  "base": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 452,
+   "volumen_mm3": 45747.7,
+   "bbox": [
+    -0.0,
+    166.214,
+    -29.5,
+    29.5,
+    -0.0,
+    12.7
+   ]
+  },
+  "cuna_heltec": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 98,
+   "volumen_mm3": 3262.6,
+   "bbox": [
+    3.0,
+    74.5,
+    -21.0,
+    21.0,
+    9.2,
+    13.6
+   ]
+  },
+  "junta_TPU": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 14,
+   "volumen_mm3": 1043.9,
+   "bbox": [
+    1.0,
+    165.214,
+    -28.5,
+    28.5,
+    4.8,
+    6.4
+   ]
+  },
+  "soporte": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 79,
+   "volumen_mm3": 50050.0,
+   "bbox": [
+    -2.72,
+    169.439,
+    -32.22,
+    32.22,
+    -4.5,
+    4.45
+   ]
+  },
+  "contraplaca": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 208,
+   "volumen_mm3": 34397.3,
+   "bbox": [
+    -4.007,
+    170.217,
+    -33.537,
+    33.544,
+    -10.94,
+    -5.993
+   ]
+  },
+  "probeta_P1_L_ANTENA_BASE": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 147,
+   "volumen_mm3": 14700.9,
+   "bbox": [
+    117.514,
+    166.221,
+    -29.506,
+    29.506,
+    -0.006,
+    12.7
+   ]
+  },
+  "probeta_P1_L_ANTENA_TAPA": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 84,
+   "volumen_mm3": 8375.4,
+   "bbox": [
+    117.514,
+    166.243,
+    -29.531,
+    29.531,
+    5.997,
+    17.131
+   ]
+  },
+  "probeta_P1_L_ANTENA_SOPORTE": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 44,
+   "volumen_mm3": 13630.1,
+   "bbox": [
+    117.514,
+    169.441,
+    -32.226,
+    32.226,
+    -4.506,
+    4.453
+   ]
+  },
+  "probeta_P2_CUELLO_BASE": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 162,
+   "volumen_mm3": 6574.2,
+   "bbox": [
+    -0.008,
+    26.0,
+    -29.508,
+    29.508,
+    -0.008,
+    11.2
+   ]
+  },
+  "probeta_P2_CUELLO_TAPA": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 67,
+   "volumen_mm3": 5678.4,
+   "bbox": [
+    -0.027,
+    26.0,
+    -29.527,
+    29.527,
+    5.999,
+    17.127
+   ]
+  },
+  "probeta_P2_CUELLO_SOPORTE": {
+   "valido": true,
+   "solidos": 1,
+   "cascaras_cerradas": true,
+   "caras": 35,
+   "volumen_mm3": 8778.0,
+   "bbox": [
+    -2.728,
+    26.0,
+    -32.228,
+    32.228,
+    -4.508,
+    2.851
+   ]
+  }
+ },
+ "RE": {
+  "ZF": 6.0,
+  "TOP_CHAMFER": [
+   3.5,
+   4.2
+  ],
+  "BOT_CHAMFER": 0.8,
+  "SCREW_CB": [
+   5.9,
+   3.7,
+   0.0
+  ],
+  "SCREW_BRIDGE": 0.2,
+  "INSERT": [
+   4.0,
+   5.0,
+   3.2
+  ],
+  "SCREW_TIP_Z": 13.6,
+  "COL_WEB": 0.7,
+  "TOP_Z": 17.1,
+  "CROWN_DROP": 1.2,
+  "BAT": [
+   60.0,
+   40.0,
+   6.5
+  ],
+  "BAT_CLR": 0.2,
+  "BAT_X0": 13.3,
+  "BAT_HEAD": 0.3,
+  "FRAME_T": 0.8,
+  "TRAY_T": 0.8,
+  "TRAY_HALF_W": 21.0,
+  "TRAY_POSTS": [
+   [
+    10.6,
+    -16.0
+   ]
+  ],
+  "POST_R": 2.5,
+  "PIN_R": 1.3,
+  "PIN_H": 0.7,
+  "TRAY_PADS": [
+   [
+    11.0,
+    -16.0
+   ],
+   [
+    20.0,
+    -16.5
+   ],
+   [
+    36.0,
+    -16.5
+   ],
+   [
+    66.0,
+    -16.5
+   ],
+   [
+    72.0,
+    -8.0
+   ],
+   [
+    72.0,
+    16.0
+   ]
+  ],
+  "PAD_R": 2.0,
+  "PAD_GAP": 0.05,
+  "TRAY_RIB": 1.2,
+  "TRAY_EDGE": 0.7,
+  "STOP_WALL_T": 1.2,
+  "STOP_WALL_CLR": 0.15,
+  "CLIPS": [
+   [
+    20.0,
+    -1,
+    8.0
+   ],
+   [
+    70.5,
+    -1,
+    4.0
+   ],
+   [
+    20.0,
+    1,
+    8.0
+   ],
+   [
+    40.5,
+    1,
+    8.0
+   ]
+  ],
+  "CLIP_ROOT_Z": 2.6,
+  "CLIP_T": 1.2,
+  "CLIP_SLOT": 0.4,
+  "CLIP_ENG": 0.4,
+  "CLIP_LIP_H": 0.6,
+  "CLIP_GAP": 0.1,
+  "END_STOPS_Y": [
+   -11.0,
+   11.0
+  ],
+  "END_STOP": [
+   0.35,
+   5.0
+  ],
+  "MCU_X0": 8.6,
+  "MCU_T": 1.8,
+  "MCU_Y0": -4.2,
+  "SOT_ZONE": [
+   1.7,
+   9.0,
+   1.0
+  ],
+  "USB_H": 2.8,
+  "USB_OVER": 1.3,
+  "SHIELD_H": 2.8,
+  "BTN_ZONE": [
+   0.7,
+   5.8
+  ],
+  "BTN_STEM": [
+   2.2,
+   4.3,
+   1.1,
+   1.4
+  ],
+  "BTN_TOP": 1.9,
+  "MCU_WALL_X0": 7.0,
+  "HOOK_Y": [
+   0.5,
+   3.0
+  ],
+  "CONN_POCKET": [
+   0.6,
+   4.3,
+   4.05,
+   3.5,
+   0.4
+  ],
+  "ZED_DX": 5.4,
+  "ZED_DZ": 4.1,
+  "ZED_CEIL_RELIEF": 0.7,
+  "L_FROM_EDGE": 18.6,
+  "L_BODY": 7.6,
+  "L_THREAD_D": 6.2,
+  "L_THREAD_LEN": 8.6,
+  "L_HEIGHT": 14.9,
+  "L_LENGTH": 16.9,
+  "L_NUT_ENV_R": 4.39,
+  "STOP_CLR": 0.1,
+  "STOP_T": 2.5,
+  "STOP_TOP": 8.6,
+  "POCKET_Z": 1.3,
+  "TOWER_R": 6.0,
+  "HOLE_CLR": 0.3,
+  "ORING_ANT": [
+   6.0,
+   1.0
+  ],
+  "ORING_DEPTH": 0.75,
+  "ANT_D": 44.3,
+  "ANT_H": 40.8,
+  "ANT_SEAT_CLR": 0.3,
+  "ANT_ENGAGE": 4.4,
+  "LID_THICK_ZB": 11.2,
+  "LID_THICK_R": 24.8,
+  "COIL": [
+   23.0,
+   30.0,
+   1.6
+  ],
+  "COIL_CLR": 0.2,
+  "COIL_SKIN": 0.7,
+  "COIL_POS": [
+   52.5,
+   -5.0
+  ],
+  "QI": [
+   18.0,
+   15.0,
+   1.0,
+   1.2
+  ],
+  "QI_C": [
+   51.0,
+   -12.35
+  ],
+  "QI_WALL_H": 1.6,
+  "QI_WIRE_X": [
+   55.5,
+   59.5
+  ],
+  "REED": [
+   14.0,
+   3.2
+  ],
+  "REED_C": [
+   7.0,
+   0.0
+  ],
+  "REED_Z0": 2.5,
+  "REED_CLR_L": 1.0,
+  "REED_CLR_W": 0.4,
+  "REED_LEG": [
+   4.0,
+   4.0
+  ],
+  "TRAY_CABLE_HOLE": [
+   10.0,
+   15.0,
+   -10.0,
+   -5.0
+  ],
+  "TRAY_NECK_X": 3.0,
+  "NECK_SKIRT_X": [
+   4.0,
+   5.0
+  ],
+  "NECK_SKIRT_Y": 16.0,
+  "REED_SLOT_X": [
+   5.0,
+   8.2
+  ],
+  "REED_SLOT_Y": [
+   8.5,
+   12.5
+  ],
+  "MAGS": [
+   [
+    48.0,
+    -23.8
+   ],
+   [
+    48.0,
+    23.8
+   ],
+   [
+    96.0,
+    -21.5
+   ],
+   [
+    92.0,
+    21.5
+   ],
+   [
+    158.0,
+    -9.5
+   ],
+   [
+    158.0,
+    9.5
+   ]
+  ],
+  "MAG": [
+   5.0,
+   1.0
+  ],
+  "MAG_SKIN": 0.3,
+  "MAG_CLR": 0.15,
+  "REED_STOP": [
+   0.1,
+   0.1,
+   0.1,
+   6.5,
+   0.4
+  ],
+  "REED_MAGS": [],
+  "CONTACTS": [
+   [
+    [
+     8.8,
+     -4.0
+    ],
+    "BAT"
+   ],
+   [
+    [
+     8.8,
+     4.0
+    ],
+    "SYS"
+   ],
+   [
+    [
+     8.8,
+     14.0
+    ],
+    "GND"
+   ]
+  ],
+  "CONTACT_CSK_D": 4.1,
+  "CONTACT_HOLE": 2.3,
+  "CONTACT_GROOVE": [
+   2.2,
+   4.4,
+   0.75
+  ],
+  "CONTACT_Z": 2.5,
+  "CONTACT_POCKET_R": 3.4,
+  "POGO_D": 2.05,
+  "POGO_CH": [
+   1.6,
+   1.4
+  ],
+  "POGO_ON": [
+   "SYS",
+   "BAT"
+  ],
+  "SCREWS": [
+   [
+    6.0,
+    -21.5
+   ],
+   [
+    6.0,
+    21.5
+   ],
+   [
+    64.0,
+    -24.3
+   ],
+   [
+    64.0,
+    24.3
+   ],
+   [
+    122.2,
+    -23.8
+   ],
+   [
+    122.2,
+    23.8
+   ],
+   [
+    152.0,
+    -17.0
+   ],
+   [
+    152.0,
+    17.0
+   ]
+  ],
+  "SCREW_R": {},
+  "COL_R": 3.3,
+  "CSK_D": 6.3,
+  "ORING_SCREW": [
+   3.0,
+   1.0
+  ],
+  "ORING_CB_D": 5.1,
+  "ORING_CB_H": 0.75,
+  "GROOVE": [
+   1.4,
+   3.0,
+   0.9
+  ],
+  "LIP_Y": 10.0,
+  "HOOK_HALF": 5.0,
+  "ZC": 0.1,
+  "CL": 0.12,
+  "RW": 2.6,
+  "MT": 4.5,
+  "BEAM_T": 1.4,
+  "BEAM_Y": [
+   -9.5,
+   7.5
+  ],
+  "SUP_HOOK_Y": [
+   -1.0,
+   7.0
+  ],
+  "HOOK_DEPTH": 0.76,
+  "RIM_CUT_Y": [
+   -8.6,
+   9.2
+  ],
+  "TAB": [
+   1.8,
+   5.0
+  ],
+  "SUP_SCREWS": [
+   [
+    22.0,
+    -14.0
+   ],
+   [
+    22.0,
+    14.0
+   ],
+   [
+    80.0,
+    -14.0
+   ],
+   [
+    80.0,
+    14.0
+   ],
+   [
+    142.0,
+    -11.0
+   ],
+   [
+    142.0,
+    11.0
+   ]
+  ],
+  "INS_SUP": [
+   4.0,
+   4.2
+  ],
+  "FABRIC": 1.5,
+  "PLATE_T": 2.6,
+  "PLATE_MARGIN": 4.0,
+  "BACK_R": 220.0,
+  "LOGO": null,
+  "ANT_SEAT": false,
+  "LOGO_TXT": "AVO.PERFORMANCE",
+  "LOGO_CAP": 6.4,
+  "LOGO_X": 60.0,
+  "LOGO_RELIEF": 0.6,
+  "CROWN_R": 362.6041666666667,
+  "DERIVADOS": {
+   "BAT_X": [
+    13.3,
+    73.7
+   ],
+   "BAT_Y": 20.2,
+   "BAT_Z": [
+    2.4,
+    8.9
+   ],
+   "TRAY_Z": [
+    9.2,
+    10.0
+   ],
+   "MCU_Z": 10.0,
+   "ZED_X": [
+    75.08,
+    118.514
+   ],
+   "SALIDA_ANTENA_X": 137.114,
+   "L_Z": [
+    6.6,
+    12.9,
+    21.5
+   ],
+   "L_CARA_MACHO_X": 124.014,
+   "ASIENTO_ANTENA_Z": 17.1,
+   "BOBINA_C": [
+    52.5,
+    -5.0
+   ],
+   "TECHO_INTERIOR": 15.100000000000001
+  }
+ },
+ "logotipo": {},
+ "fallos_redondeo": [],
+ "tiempo_s": 39.1
+}
