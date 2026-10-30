@@ -29,8 +29,8 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0.36*" MinWidth="330" MaxWidth="520"/>
+            <ColumnDefinition Width="0.729*"/>
+            <ColumnDefinition Width="0.271*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="../Assets/avo_home_hero.jpg" Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Center"/>
@@ -39,9 +39,9 @@
         <Border Grid.Column="1">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E6202B3B" Offset="0"/>
-                    <GradientStop Color="#F0172130" Offset="0.55"/>
-                    <GradientStop Color="#F512192A" Offset="1"/>
+                    <GradientStop Color="#A6202B3B" Offset="0"/>
+                    <GradientStop Color="#B8172130" Offset="0.55"/>
+                    <GradientStop Color="#C812192A" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid Margin="10,0,24,0">
