@@ -27,7 +27,7 @@ def patch(path, old, new, count=1):
 
 SRC = "AVO_CHEST_V3_5_0/src"
 
-for f in ("usb_sync.h", "usb_sync.cpp", "ui_pc.h", "ui_pc.inc"):
+for f in ("usb_sync.h", "usb_sync.cpp", "ui_pc.h", "ui_pc_draw.h"):
     if not Path(f"{SRC}/{f}").is_file():
         sys.exit(f"apply_v375_usb: {SRC}/{f} missing (copy firmware/chest/V3_7_5_USB/src first)")
 
@@ -53,7 +53,7 @@ patch(f"{SRC}/app_main.cpp",
 
 # 3. PC screen
 Path(f"{SRC}/ui_dash.cpp").write_text(Path(f"{SRC}/ui_dash.cpp").read_text() +
-                                      '\n// V3.7.5-usb1: "CONECTADO AL PC" screen (same fonts/icons/colours)\n#include "ui_pc.inc"\n')
+                                      '\n// V3.7.5-usb1: "CONECTADO AL PC" screen (same fonts/icons/colours)\n#include "ui_pc_draw.h"\n')
 patch(f"{SRC}/ui.cpp", '#include "ui_model.h"\n', '#include "ui_model.h"\n#include "ui_pc.h"\n#include "usb_sync.h"\n')
 patch(f"{SRC}/ui.cpp",
       "static bool pair_latched = false;\n",

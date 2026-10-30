@@ -1,4 +1,4 @@
-// Host preview of the V3.7.5-usb1 "CONECTADO AL PC" screen. Compiles the SAME ui_fb / ui_dash (+ ui_pc.inc)
+// Host preview of the V3.7.5-usb1 "CONECTADO AL PC" screen. Compiles the SAME ui_fb / ui_dash (+ ui_pc_draw.h)
 // code as the firmware with a simulated panel and writes PPM images as the rider sees them.
 // Values are TEST INPUTS for the preview only; the firmware shows the live USB and battery state.
 #include <stdio.h>

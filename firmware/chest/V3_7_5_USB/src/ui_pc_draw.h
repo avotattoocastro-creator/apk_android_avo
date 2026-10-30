@@ -1,3 +1,4 @@
+#pragma once   // included ONLY by ui_dash.cpp (needs its fonts, icons and colours)
 // AVO CHEST V3.7.5-usb1 — "CONECTADO AL PC" screen. Appended to ui_dash.cpp by apply_v375_usb.py so it uses the
 // same fonts, icons and colours (ui_assets.h is included only once). Values come only from the real USB state.
 #include "ui_pc.h"

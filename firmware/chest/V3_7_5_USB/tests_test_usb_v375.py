@@ -49,7 +49,7 @@ check("port::write(s_out, n)" in usb and usb.count("port::write(") == 1, "one wr
 ui = (SRC / "ui.cpp").read_text()
 check("if (usbsync::host_present()) render_pc(*snap, now);   // V3.7.5-usb1\n            else render_charging(*snap, now);" in ui,
       "PC screen only with a USB host; a charger keeps the 3.7.2 charging screen")
-check('#include "ui_pc.inc"' in (SRC / "ui_dash.cpp").read_text(), "PC screen drawn with the dashboard fonts (ui_dash.cpp)")
+check('#include "ui_pc_draw.h"' in (SRC / "ui_dash.cpp").read_text(), "PC screen drawn with the dashboard fonts (ui_dash.cpp)")
 check("Serial.isPlugged()" in usb, "PC detected by USB start-of-frame (a charger sends none)")
 
 # ---------------------------------------------------------------- 2. host build
