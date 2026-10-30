@@ -1,6 +1,6 @@
 """Colocación de la placa AVO BACK V4.
 
-Las piezas grandes y las que fija la mecánica (módulo, conectores, microSD, Hall, pivotes, pisadores, anillos) tienen
+Las piezas grandes y las que fija la mecánica (módulo, conectores, microSD, contactos del fondo, pivotes, pisadores, anillos) tienen
 posición a mano (FIJAS). El resto se coloca con un algoritmo voraz: cada pieza va al hueco libre más cercano a su
 objetivo (el pin del integrado al que se conecta o el ancla del bloque), dentro del contorno, sin solapar patios
 (+0,1 mm) y respetando la altura máxima de cada zona de la carcasa (bajo la URTK1.2, bajo J2/L, topes de la L).
@@ -18,37 +18,26 @@ POSF = os.path.join(HERE, "colocacion_v4.json")
 FIJAS = {
     # módulo y conectores
     "U4": (87.9, 14.0, 0), "J4": (75.2, 12.2, 0), "J2": (73.7, -10.0, 270), "J3": (88.57, -13.85, 90),
-    "J1": (107.0, 0.0, 90), "U8": (102.2, -9.0, 0),
+    "J1": (107.0, 0.0, 90),
+    # REV B: contactos del fondo. SYS y BAT en la cola, donde estaban el reed / el Hall (paso 5,8 mm); GND aparte, en el
+    # hueco que deja el Qi, para que BAT y GND no queden juntos (sudor, objetos metálicos)
+    "P1": (101.0, -8.6, 0), "P2": (106.8, -8.6, 0), "P3": (80.0, 0.0, 0),
     # mecánica
     "H1": (67.6, -13.8, 0), "H2": (99.0, -12.6, 0), "MP1": (98.0, -3.5, 0), "MP2": (98.4, 13.2, 0),
     "MR1": (67.8, -20.406, 0), "MR2": (67.8, 18.075, 0),
-    # bobina Qi (hilos desde abajo, junto al receptor)
-    "L1": (71.6, 3.6, 0), "L2": (71.6, 1.2, 0),
 }
 # anclas de los bloques (integrados): objetivo de la búsqueda
 ANCLAS = {
-    "U1": (77.5, 0.0), "U2": (89.5, -0.5), "U3": (73.4, -15.6), "U7": (68.3, 9.5), "U6": (102.5, 8.6),
-    "Q1": (83.0, 3.5), "Q2": (83.0, -3.5), "Q3": (67.8, -4.6), "F1": (70.6, -4.6), "Q4": (82.0, -4.0),
-    "D1": (97.0, 16.0),
+    "U2": (89.5, -0.5), "U3": (73.4, -15.6), "U7": (68.3, 9.5), "U6": (102.5, 8.6),
+    "Q3": (94.5, -4.5), "F1": (70.6, -4.6), "Q4": (82.0, -4.0), "D1": (97.0, 16.0),
 }
-# Núcleo del receptor Qi copiado de la cincha (REV A/B, ruteada al 100 % con el mismo BQ51013B RHL):
-# desplazamientos (dX, dY, giro) respecto a U1, que va girado 90°. Rev. 2 de la colocación V4.
-U1_POS = (79.3, -0.9, 90)
-QI_CORE = {
-    "C4": (-5.7, 0.0, 90), "C5": (-3.9, 0.0, 90),
-    "C6": (-2.9, -6.4, 270), "C7": (-1.1, -6.6, 270), "C8": (0.1, -6.4, 270),
-    "C9": (-0.7, 6.0, 90), "C10": (0.6, 6.3, 90), "C11": (1.9, 6.0, 90),
-    "C12": (-3.5, 3.9, 90), "C13": (-5.0, 3.9, 90), "C14": (-2.1, 4.2, 90),
-    "R1": (3.2, 4.6, 90), "R2": (4.3, 4.6, 90), "R3": (5.4, 4.6, 90), "RT1": (3.5, 1.4, 90),
-}
-ORDEN_IC = ["U1", "U2", "U3", "U7", "U6", "Q1", "Q2", "Q3", "F1", "Q4", "D1"]
+ORDEN_IC = ["U2", "U3", "U7", "U6", "Q3", "F1", "Q4", "D1"]
 # condensadores de desacoplo → integrado al que sirven (se colocan junto a su pin, no en el centro de la red)
 DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("U7", "5"), "C62": ("J4", "1"),
          "C24": ("U4", "3"), "C25": ("U4", "3"), "C26": ("U4", "3"), "C18": ("U2", "13"), "C19": ("U2", "10"),
-         "C20": ("U2", "2"), "C35": ("U2", "11"), "C12": ("U1", "18"), "C13": ("U1", "18"), "C14": ("U1", "18"),
-         "C15": ("U1", "4"), "C16": ("U1", "4"), "C17": ("Q1", "3"), "C28": ("J1", "A4"), "C40": ("Q4", "3"),
-         "C41": ("J3", "4"), "C33": ("U8", "1"), "TP9": ("J4", "1"), "TP6": ("U3", "5"), "TP8": ("U3", "1"),
-         "TP7": ("Q3", "2"), "R60": ("U7", "3"), "R40": ("Q4", "1")}
+         "C20": ("U2", "2"), "C35": ("U2", "11"), "C28": ("J1", "A4"), "C40": ("Q4", "3"),
+         "C41": ("J3", "4"), "TP9": ("J4", "1"), "TP6": ("U3", "5"), "TP8": ("U3", "1"),
+         "TP7": ("Q3", "2"), "R60": ("U7", "3"), "R40": ("Q4", "1"), "D2": ("P1", "1"), "D3": ("P2", "1")}
 GAP = 0.12            # separación mínima entre patios
 STEP = 0.2
 
@@ -91,8 +80,8 @@ def main():
 
     def mark(p):
         b = bbox(p, p["pos"], p["rot"])
-        if p["fp"] in ("PAD_LID", "RING"):
-            r = 2.5 if p["fp"] == "PAD_LID" else 4.6
+        if p["fp"] in ("PAD_LID", "RING", "CONTACT_M2"):
+            r = {"PAD_LID": 2.5, "RING": 4.6, "CONTACT_M2": 2.9 + GAP / 2}[p["fp"]]
             occ[(XX - p["pos"][0]) ** 2 + (YY - p["pos"][1]) ** 2 < r * r] = True
         else:
             i0, i1, j0, j1 = cells(b, GAP / 2)
@@ -142,28 +131,10 @@ def main():
         placed[ref] = (bbox(p, p["pos"], r), p); mark(p)
     for nm, x0, y0, x1, y1 in D.KEEPOUT_RECTS:
         occ[(XX >= x0) & (XX <= x1) & (YY >= y0) & (YY <= y1)] = True
-    # U1 y el núcleo Qi en posición fija (si alguna pieza no cabe, se busca el hueco más cercano)
-    u = byref["U1"]; u["pos"], u["rot"] = (U1_POS[0], U1_POS[1]), U1_POS[2]
-    placed["U1"] = (bbox(u, u["pos"], u["rot"]), u); mark(u)
-    for ref, (dx, dy, rr) in QI_CORE.items():
-        q = byref[ref]; pos = (round(U1_POS[0] + dx, 2), round(U1_POS[1] + dy, 2))
-        if ok(q, pos, rr):
-            q["pos"], q["rot"] = pos, rr
-            placed[ref] = (bbox(q, pos, rr), q); mark(q)
-        else:
-            print("núcleo Qi: %s no cabe en %s, se busca hueco" % (ref, pos))
-            place(q, pos, (rr, (rr + 180) % 360, (rr + 90) % 360, (rr + 270) % 360))
-    # canales de salida de los pines de U1 (como en la cincha): ninguna otra pieza entre U1 y las filas C6–C8 / C12–C14
-    ux, uy = U1_POS[0], U1_POS[1]
-    occ[(XX >= ux - 3.6) & (XX <= ux + 3.6) & (YY >= uy - 5.9) & (YY <= uy - 2.3)] = True
-    occ[(XX >= ux - 3.6) & (XX <= ux + 3.6) & (YY >= uy + 2.3) & (YY <= uy + 3.3)] = True
-    # condensadores de resonancia junto a los hilos de la bobina (L1/L2), antes que el resto
-    for ref in ("C1", "C2", "C3"):
-        place(byref[ref], (FIJAS["L1"][0] - 2.0, FIJAS["L1"][1]))
-    for ref in ORDEN_IC[1:]:
+    for ref in ORDEN_IC:
         place(byref[ref], ANCLAS[ref], (0, 90))
 
-    BIG = {D.GND, D.V3, D.VSYS, D.VBAT, D.VBUS, D.VIN5, D.VZED, D.VSD}
+    BIG = {D.GND, D.V3, D.VSYS, D.VBAT, D.VBUS, D.VZED, D.VSD}
 
     def target_of(p):
         if p["ref"] in DECAP:

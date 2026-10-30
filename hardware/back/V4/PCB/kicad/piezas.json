@@ -1,410 +1,5 @@
 [
  {
-  "ref": "U1",
-  "value": "BQ51013BRHLR",
-  "footprint": "Texas_VQFN-RHL-20_ThermalVias",
-  "lcsc": "C55663",
-  "mpn": "BQ51013BRHLR",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 79.3,
-  "y": -0.9,
-  "rot": 90
- },
- {
-  "ref": "L1",
-  "value": "BOBINA Qi (1)",
-  "footprint": "WirePad_D1.5_Drill0.8",
-  "lcsc": "",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": true,
-  "note": "hilo de la bobina 30 × 23 (desde abajo, por el agujero)",
-  "jlc_rot": 0,
-  "x": 71.6,
-  "y": 3.6,
-  "rot": 0
- },
- {
-  "ref": "L2",
-  "value": "BOBINA Qi (2)",
-  "footprint": "WirePad_D1.5_Drill0.8",
-  "lcsc": "",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": true,
-  "note": "hilo de la bobina 30 × 23 (desde abajo, por el agujero)",
-  "jlc_rot": 0,
-  "x": 71.6,
-  "y": 1.2,
-  "rot": 0
- },
- {
-  "ref": "C1",
-  "value": "100n C0G 50V",
-  "footprint": "C_1206_3216Metric",
-  "lcsc": "C97946",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 69.25,
-  "y": 3.8,
-  "rot": 90
- },
- {
-  "ref": "C2",
-  "value": "100n C0G 50V",
-  "footprint": "C_1206_3216Metric",
-  "lcsc": "C97946",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 69.85,
-  "y": 7.59,
-  "rot": 0
- },
- {
-  "ref": "C3",
-  "value": "47n C0G 50V",
-  "footprint": "C_1206_3216Metric",
-  "lcsc": "C21812",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 69.0,
-  "y": -0.96,
-  "rot": 90
- },
- {
-  "ref": "C4",
-  "value": "2n2 C0G 50V",
-  "footprint": "C_0805_2012Metric",
-  "lcsc": "C51795",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 73.8,
-  "y": -0.9,
-  "rot": 90
- },
- {
-  "ref": "C5",
-  "value": "1n C0G 50V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C1636",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": true,
-  "no_assembly": false,
-  "note": "ajuste de C2 (sin montar)",
-  "jlc_rot": 0,
-  "x": 75.7,
-  "y": -0.38,
-  "rot": 90
- },
- {
-  "ref": "C6",
-  "value": "10n 50V",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C15195",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 76.93,
-  "y": -6.45,
-  "rot": 0
- },
- {
-  "ref": "C7",
-  "value": "470n 25V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C1623",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 78.8,
-  "y": -7.5,
-  "rot": 270
- },
- {
-  "ref": "C8",
-  "value": "22n 50V",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C1532",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 79.9,
-  "y": -5.36,
-  "rot": 0
- },
- {
-  "ref": "C9",
-  "value": "10n 50V",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C15195",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 78.6,
-  "y": 5.1,
-  "rot": 90
- },
- {
-  "ref": "C10",
-  "value": "470n 25V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C1623",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 80.05,
-  "y": 4.41,
-  "rot": 90
- },
- {
-  "ref": "C11",
-  "value": "22n 50V",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C1532",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 81.55,
-  "y": 4.9,
-  "rot": 90
- },
- {
-  "ref": "C12",
-  "value": "10u 25V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C96446",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 75.8,
-  "y": 3.0,
-  "rot": 90
- },
- {
-  "ref": "C13",
-  "value": "10u 25V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C96446",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 74.2,
-  "y": 3.17,
-  "rot": 90
- },
- {
-  "ref": "C14",
-  "value": "100n",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C1525",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 77.2,
-  "y": 3.3,
-  "rot": 90
- },
- {
-  "ref": "C15",
-  "value": "10u 25V",
-  "footprint": "C_0603_1608Metric",
-  "lcsc": "C96446",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 74.78,
-  "y": -4.4,
-  "rot": 90
- },
- {
-  "ref": "C16",
-  "value": "100n",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C1525",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 73.31,
-  "y": -3.84,
-  "rot": 90
- },
- {
-  "ref": "R1",
-  "value": "330R",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25104",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 82.7,
-  "y": 3.7,
-  "rot": 90
- },
- {
-  "ref": "R2",
-  "value": "200R",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25087",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 84.0,
-  "y": 3.7,
-  "rot": 90
- },
- {
-  "ref": "R3",
-  "value": "20k",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25765",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "R_OS (TI: RECT → FOD); se ajusta en la calibración FOD",
-  "jlc_rot": 0,
-  "x": 85.3,
-  "y": 3.7,
-  "rot": 90
- },
- {
-  "ref": "RT1",
-  "value": "NTC 10k B3380",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C77131",
-  "mpn": "NCP15XH103F03RC",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 82.8,
-  "y": 0.5,
-  "rot": 90
- },
- {
-  "ref": "R4",
-  "value": "100k",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25741",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 93.08,
-  "y": 4.49,
-  "rot": 90
- },
- {
-  "ref": "C17",
-  "value": "1u",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C52923",
-  "mpn": "",
-  "block": "Qi",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 87.61,
-  "y": -3.28,
-  "rot": 0
- },
- {
-  "ref": "Q1",
-  "value": "AO3401A",
-  "footprint": "SOT-23",
-  "lcsc": "C15127",
-  "mpn": "",
-  "block": "USB",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 85.27,
-  "y": 0.7,
-  "rot": 0
- },
- {
-  "ref": "Q2",
-  "value": "AO3401A",
-  "footprint": "SOT-23",
-  "lcsc": "C15127",
-  "mpn": "",
-  "block": "USB",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 84.8,
-  "y": -3.5,
-  "rot": 0
- },
- {
   "ref": "U2",
   "value": "BQ24072RGTR",
   "footprint": "VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias",
@@ -430,9 +25,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 92.25,
-  "y": 0.96,
-  "rot": 90
+  "x": 90.8,
+  "y": 2.25,
+  "rot": 0
  },
  {
   "ref": "C19",
@@ -445,8 +40,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 92.6,
-  "y": -1.89,
+  "x": 92.51,
+  "y": -0.35,
   "rot": 90
  },
  {
@@ -460,9 +55,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 90.18,
-  "y": -3.63,
-  "rot": 0
+  "x": 86.49,
+  "y": 0.15,
+  "rot": 90
  },
  {
   "ref": "C35",
@@ -475,8 +70,8 @@
   "no_assembly": false,
   "note": "reserva de VSYS para los picos de radio y del ZED",
   "jlc_rot": 0,
-  "x": 93.89,
-  "y": 1.48,
+  "x": 94.56,
+  "y": -0.05,
   "rot": 90
  },
  {
@@ -490,9 +85,9 @@
   "no_assembly": false,
   "note": "I_carga = 890/2k ≈ 445 mA (0,22 C de 2000 mAh)",
   "jlc_rot": 0,
-  "x": 94.28,
-  "y": 4.55,
-  "rot": 90
+  "x": 89.52,
+  "y": 5.43,
+  "rot": 0
  },
  {
   "ref": "R7",
@@ -503,11 +98,11 @@
   "block": "Cargador",
   "dnp": false,
   "no_assembly": false,
-  "note": "I_entrada = 1525/2k ≈ 760 mA (el receptor Qi limita a ≈ 0,5 A)",
+  "note": "I_entrada = 1525/2k ≈ 760 mA (USB-C del taller)",
   "jlc_rot": 0,
-  "x": 95.46,
-  "y": 4.49,
-  "rot": 90
+  "x": 84.98,
+  "y": 5.41,
+  "rot": 0
  },
  {
   "ref": "RT2",
@@ -520,9 +115,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 96.61,
-  "y": 8.21,
-  "rot": 90
+  "x": 87.34,
+  "y": 4.36,
+  "rot": 0
  },
  {
   "ref": "R8",
@@ -535,8 +130,8 @@
   "no_assembly": false,
   "note": "EN2 = 1, EN1 = 0: límite por ILIM",
   "jlc_rot": 0,
-  "x": 88.7,
-  "y": -5.04,
+  "x": 83.92,
+  "y": -1.54,
   "rot": 0
  },
  {
@@ -550,9 +145,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 94.46,
-  "y": -0.83,
-  "rot": 0
+  "x": 88.95,
+  "y": 3.74,
+  "rot": 90
  },
  {
   "ref": "R10",
@@ -565,9 +160,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 95.54,
-  "y": 2.06,
-  "rot": 90
+  "x": 90.62,
+  "y": 4.34,
+  "rot": 0
  },
  {
   "ref": "J2",
@@ -593,11 +188,11 @@
   "block": "Batería",
   "dnp": false,
   "no_assembly": false,
-  "note": "fusible rearmable (la celda lleva además su PCM)",
+  "note": "fusible rearmable entre la celda y el contacto BAT (la celda lleva además su PCM)",
   "jlc_rot": 0,
-  "x": 71.5,
-  "y": -3.52,
-  "rot": 90
+  "x": 70.6,
+  "y": -4.6,
+  "rot": 0
  },
  {
   "ref": "Q3",
@@ -608,11 +203,86 @@
   "block": "Batería",
   "dnp": false,
   "no_assembly": false,
-  "note": "protección de polaridad (PMOS: D a la batería, S a VBAT)",
+  "note": "polaridad del contacto SYS (PMOS: D al contacto, S a VBAT); deja pasar la carga por USB hacia la celda",
   "jlc_rot": 0,
-  "x": 67.9,
-  "y": -5.19,
-  "rot": 90
+  "x": 93.74,
+  "y": -3.85,
+  "rot": 0
+ },
+ {
+  "ref": "P1",
+  "value": "CONTACTO SYS",
+  "footprint": "AVO_Contacto_M2_Tornillo",
+  "lcsc": "",
+  "mpn": "",
+  "block": "Contactos",
+  "dnp": false,
+  "no_assembly": true,
+  "note": "puente SYS–BAT en el soporte del chaleco = encendido",
+  "jlc_rot": 0,
+  "x": 101.0,
+  "y": -8.6,
+  "rot": 0
+ },
+ {
+  "ref": "P2",
+  "value": "CONTACTO BAT",
+  "footprint": "AVO_Contacto_M2_Tornillo",
+  "lcsc": "",
+  "mpn": "",
+  "block": "Contactos",
+  "dnp": false,
+  "no_assembly": true,
+  "note": "+ de la celda (tras F1): puente en el chaleco, cargador en la base",
+  "jlc_rot": 0,
+  "x": 106.8,
+  "y": -8.6,
+  "rot": 0
+ },
+ {
+  "ref": "P3",
+  "value": "CONTACTO GND",
+  "footprint": "AVO_Contacto_M2_Tornillo",
+  "lcsc": "",
+  "mpn": "",
+  "block": "Contactos",
+  "dnp": false,
+  "no_assembly": true,
+  "note": "solo para la base de carga (lejos de BAT)",
+  "jlc_rot": 0,
+  "x": 80.0,
+  "y": 0.0,
+  "rot": 0
+ },
+ {
+  "ref": "D2",
+  "value": "TVS 5 V",
+  "footprint": "D_SOD-323",
+  "lcsc": "C2827694",
+  "mpn": "PESD5V0S1BA",
+  "block": "Contactos",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "ESD en el contacto SYS",
+  "jlc_rot": 0,
+  "x": 99.8,
+  "y": 0.12,
+  "rot": 0
+ },
+ {
+  "ref": "D3",
+  "value": "TVS 5 V",
+  "footprint": "D_SOD-323",
+  "lcsc": "C2827694",
+  "mpn": "PESD5V0S1BA",
+  "block": "Contactos",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "ESD en el contacto BAT",
+  "jlc_rot": 0,
+  "x": 99.79,
+  "y": 2.35,
+  "rot": 0
  },
  {
   "ref": "R30",
@@ -625,9 +295,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 96.55,
-  "y": 5.69,
-  "rot": 90
+  "x": 91.95,
+  "y": 5.47,
+  "rot": 0
  },
  {
   "ref": "R32",
@@ -640,8 +310,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 85.17,
-  "y": 22.53,
+  "x": 82.29,
+  "y": 5.42,
   "rot": 0
  },
  {
@@ -655,8 +325,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 97.07,
-  "y": 9.84,
+  "x": 84.73,
+  "y": 4.24,
   "rot": 0
  },
  {
@@ -670,9 +340,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 97.73,
-  "y": 7.25,
-  "rot": 90
+  "x": 86.9,
+  "y": 3.25,
+  "rot": 0
  },
  {
   "ref": "U3",
@@ -730,8 +400,8 @@
   "no_assembly": false,
   "note": "regulador propio del ZED: el pico de arranque no toca el 3,3 V del ESP32; EN = 0 corta el receptor",
   "jlc_rot": 0,
-  "x": 68.55,
-  "y": 10.67,
+  "x": 68.3,
+  "y": 9.5,
   "rot": 0
  },
  {
@@ -745,9 +415,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 71.59,
-  "y": 12.02,
-  "rot": 90
+  "x": 67.76,
+  "y": 12.15,
+  "rot": 0
  },
  {
   "ref": "C61",
@@ -760,8 +430,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 74.32,
-  "y": 5.85,
+  "x": 70.09,
+  "y": 6.5,
   "rot": 0
  },
  {
@@ -790,9 +460,9 @@
   "no_assembly": false,
   "note": "ZED apagado mientras arranca el ESP32",
   "jlc_rot": 0,
-  "x": 66.72,
-  "y": 7.84,
-  "rot": 90
+  "x": 67.11,
+  "y": 7.15,
+  "rot": 0
  },
  {
   "ref": "U4",
@@ -865,8 +535,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 98.66,
-  "y": 9.4,
+  "x": 96.47,
+  "y": 10.02,
   "rot": 90
  },
  {
@@ -880,8 +550,8 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": 96.71,
-  "y": 3.63,
+  "x": 93.55,
+  "y": 5.03,
   "rot": 90
  },
  {
@@ -895,8 +565,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 85.64,
-  "y": 5.41,
+  "x": 87.4,
+  "y": 5.45,
   "rot": 0
  },
  {
@@ -940,8 +610,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 96.7,
-  "y": 1.34,
+  "x": 92.36,
+  "y": 3.83,
   "rot": 90
  },
  {
@@ -955,8 +625,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 98.91,
-  "y": 7.09,
+  "x": 96.46,
+  "y": 7.99,
   "rot": 90
  },
  {
@@ -1016,7 +686,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 101.05,
-  "y": -1.85,
+  "y": -3.05,
   "rot": 90
  },
  {
@@ -1045,9 +715,9 @@
   "no_assembly": false,
   "note": "alimentación de la tarjeta: GPIO21 = 0 la enciende",
   "jlc_rot": 0,
-  "x": 88.92,
-  "y": 3.49,
-  "rot": 90
+  "x": 83.8,
+  "y": -4.0,
+  "rot": 0
  },
  {
   "ref": "R40",
@@ -1060,8 +730,8 @@
   "no_assembly": false,
   "note": "tarjeta apagada mientras arranca el ESP32",
   "jlc_rot": 0,
-  "x": 86.56,
-  "y": 3.61,
+  "x": 81.4,
+  "y": -3.82,
   "rot": 90
  },
  {
@@ -1075,8 +745,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 91.6,
-  "y": 3.69,
+  "x": 86.4,
+  "y": -4.0,
   "rot": 90
  },
  {
@@ -1105,9 +775,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 78.36,
-  "y": -9.68,
-  "rot": 0
+  "x": 78.93,
+  "y": -3.93,
+  "rot": 90
  },
  {
   "ref": "R42",
@@ -1120,9 +790,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 78.34,
-  "y": -10.9,
-  "rot": 0
+  "x": 78.94,
+  "y": -6.14,
+  "rot": 90
  },
  {
   "ref": "R43",
@@ -1135,9 +805,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 78.25,
-  "y": -12.07,
-  "rot": 0
+  "x": 79.02,
+  "y": -8.34,
+  "rot": 90
  },
  {
   "ref": "R44",
@@ -1150,8 +820,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 90.81,
-  "y": -5.36,
+  "x": 84.32,
+  "y": -0.46,
   "rot": 0
  },
  {
@@ -1165,9 +835,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 92.46,
-  "y": -4.77,
-  "rot": 90
+  "x": 84.42,
+  "y": 0.69,
+  "rot": 0
  },
  {
   "ref": "R46",
@@ -1180,8 +850,8 @@
   "no_assembly": false,
   "note": "serie del reloj (amortigua el flanco)",
   "jlc_rot": 0,
-  "x": 87.17,
-  "y": -4.84,
+  "x": 80.2,
+  "y": -4.14,
   "rot": 90
  },
  {
@@ -1195,8 +865,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 93.64,
-  "y": -4.85,
+  "x": 77.78,
+  "y": -3.68,
   "rot": 90
  },
  {
@@ -1270,8 +940,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 76.71,
-  "y": 5.74,
+  "x": 71.86,
+  "y": 14.01,
   "rot": 90
  },
  {
@@ -1285,8 +955,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 69.64,
-  "y": 13.07,
+  "x": 76.27,
+  "y": 6.32,
   "rot": 0
  },
  {
@@ -1300,39 +970,9 @@
   "no_assembly": false,
   "note": "PPS → GPIO4 (captura MCPWM para la marca de tiempo)",
   "jlc_rot": 0,
-  "x": 83.23,
-  "y": 5.41,
+  "x": 78.46,
+  "y": 6.3,
   "rot": 0
- },
- {
-  "ref": "U8",
-  "value": "DRV5032FADBZR",
-  "footprint": "SOT-23",
-  "lcsc": "C140921",
-  "mpn": "DRV5032FADBZR",
-  "block": "Soporte",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "omnipolar, salida push-pull (TI SLVSDC7H §7.3.2.3): LOW con los imanes del soporte debajo; sustituye al reed (V4)",
-  "jlc_rot": 0,
-  "x": 102.2,
-  "y": -9.0,
-  "rot": 0
- },
- {
-  "ref": "C33",
-  "value": "100n",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C1525",
-  "mpn": "",
-  "block": "Soporte",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "",
-  "jlc_rot": 0,
-  "x": 99.83,
-  "y": -7.75,
-  "rot": 90
  },
  {
   "ref": "TP1",
@@ -1345,8 +985,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 101.52,
-  "y": 11.26,
+  "x": 97.78,
+  "y": 9.8,
   "rot": 0
  },
  {
@@ -1360,8 +1000,8 @@
   "no_assembly": true,
   "note": "GPIO0 a GND al arrancar = descarga",
   "jlc_rot": 0,
-  "x": 71.74,
-  "y": 5.52,
+  "x": 71.47,
+  "y": 12.13,
   "rot": 0
  },
  {
@@ -1375,8 +1015,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 94.28,
-  "y": -2.17,
+  "x": 82.66,
+  "y": 3.97,
   "rot": 0
  },
  {
@@ -1435,8 +1075,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 66.87,
-  "y": -2.49,
+  "x": 91.12,
+  "y": -4.02,
   "rot": 0
  },
  {
@@ -1465,8 +1105,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 67.06,
-  "y": 5.45,
+  "x": 71.59,
+  "y": 10.49,
   "rot": 0
  },
  {
@@ -1480,8 +1120,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 98.78,
-  "y": 19.21,
+  "x": 99.37,
+  "y": 9.78,
   "rot": 0
  }
 ]

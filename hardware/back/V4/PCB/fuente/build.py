@@ -26,7 +26,7 @@ VIA = (0.5, 0.3)
 
 # widths per net (mm)
 WIDTH = {"QI_AC1": 0.5, "QI_AC2": 0.5, "QI_COIL1": 0.5, "QI_RECT": 0.4, D.VIN5: 0.4, D.VBUS: 0.4,
-         D.VSYS: 0.5, D.VBAT: 0.5, "AD_SRC": 0.4, "BAT_IN": 0.5, "BAT_F": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3}
+         D.VSYS: 0.5, D.VBAT: 0.5, "AD_SRC": 0.4, "BAT_IN": 0.5, "BAT_F": 0.5, "SYS_IN": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3}
 ORDER = ["QI_COIL1", "QI_AC1", "QI_AC2", "QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1",
          "QI_COMM2", "QI_RECT", "QI_ILIM", "QI_FOD", "QI_TS", D.VIN5, "AD_SRC", "QI_ADEN", D.VBUS, D.VBAT,
          "BAT_IN", "BAT_F", "BAT_G", "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS, D.VZED, D.V3, D.VSD,
@@ -172,7 +172,7 @@ def via_drops(r, pads, log):
 
 # GND pins of the QFNs that sit next to their exposed pad: a short inward stub joins them to it (the EP has its
 # own thermal vias to the planes), so no fan-out via blocks the escape of the neighbouring signal pins.
-EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15"), ("U1", "1"), ("U1", "20"), ("U1", "10"), ("U1", "11")}
+EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15")}
 
 
 def ep_stubs(r, pads):
@@ -350,7 +350,11 @@ def write_board(r, path, outer_pours=True):
     # texts
     tree.append(B.gr_text("AVO BACK V4 · REV " + D.REV + " · ESP32-S3 · " + D.DATE, *D.K(88.0, -9.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(88.0, -11.0), "B.SilkS", 0.8, mirror=True, bold=False))
-    tree.append(B.gr_text("BOBINA Qi DEBAJO", *D.K(83.0, -12.6), "B.SilkS", 0.8, mirror=True, bold=False))
+    for p_ in D.PARTS:
+        if p_["fp"] == "CONTACT_M2":
+            x_, y_ = p_["pos"]
+            tree.append(B.gr_text(p_["nets"]["1"].replace("_IN", "").replace("_F", ""), *D.K(x_, y_ - 3.6), "B.SilkS", 0.8,
+                                  mirror=True, bold=False))
     B.write(path, tree)
 
 

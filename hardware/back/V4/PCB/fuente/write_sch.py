@@ -7,15 +7,14 @@ import project
 import schematic as SCH
 
 BLOCKS = {   # name: (x0, y0, x1, y1, title)
-    "Qi": (0, 0, 0, 0, "RECEPTOR Qi (BQ51013B) · bobina 30 × 23 bajo la placa · USB por AD/AD-EN"),
-    "Cargador": (0, 0, 0, 0, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S 2000 mAh (654060)"),
-    "Batería": (0, 0, 0, 0, "BATERÍA: PTC + protección de polaridad · medida por ADC"),
+    "Contactos": (0, 0, 0, 0, "CONTACTOS DEL FONDO (REV B): SYS y BAT en la cola, GND aparte · chaleco = puente SYS–BAT · base de carga = cargador entre BAT y GND"),
+    "Cargador": (0, 0, 0, 0, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · solo USB-C del taller · batería 1S 2000 mAh (654060)"),
+    "Batería": (0, 0, 0, 0, "BATERÍA: PTC hacia el contacto BAT · protección de polaridad del contacto SYS · medida por ADC"),
     "3V3": (0, 0, 0, 0, "3,3 V PRINCIPAL (TLV75733P, 1 A)"),
     "ZED": (0, 0, 0, 0, "URTK1.2 / ZED-F9P: 3,3 V propio con EN (RT9080) · UART1 · UART2 · PPS · RESET"),
     "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-MINI-1U-N8 · arranque · LED"),
-    "USB": (0, 0, 0, 0, "USB-C (programación y carga) · ESD"),
+    "USB": (0, 0, 0, 0, "USB-C (taller: programación, datos y carga) · ESD"),
     "microSD": (0, 0, 0, 0, "microSD (SDMMC 4 bits) · alimentación conmutada"),
-    "Soporte": (0, 0, 0, 0, "SENSOR DE SOPORTE: Hall DRV5032FA (imanes del soporte)"),
     "Pruebas": (0, 0, 0, 0, "PUNTOS DE PRUEBA"),
 }
 BLOCK_OF = {}
@@ -136,7 +135,7 @@ def write(path_sch, path_pro, path_parts):
                         priority=0)],
                   [("QI_AC*", "Qi_AC"), ("QI_COIL*", "Qi_AC"), ("VBUS", "Potencia"), ("VIN5", "Potencia"),
                    ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_IN", "Potencia"), ("BAT_F", "Potencia"),
-                   ("QI_RECT", "Potencia"), ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia")])
+                   ("SYS_IN", "Potencia"), ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia")])
 
     rows = []
     for p in D.PARTS:

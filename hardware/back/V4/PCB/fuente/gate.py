@@ -54,7 +54,7 @@ name = "AVO_BACK_V4_PCB_REPORTE.md" if ok else "AVO_BACK_V4_PCB_DIAGNOSTICO_REPO
 state = ("**DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**"
          if ok else "**DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar")
 L = []
-L.append("# AVO BACK V4 · placa de la espalda · REV A (ESP32-S3) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
+L.append("# AVO BACK V4 · placa de la espalda · REV B (ESP32-S3, contactos pogo) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
 L.append("")
 L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
@@ -107,7 +107,7 @@ if os.path.exists(mp):
              % (len([x for x in ml if x.startswith("OK ")]), ", ".join(falta) or "ninguno"))
 L.append("- ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.")
 # REV B: elección del microcontrolador, diferencias, firmware y riesgos (texto fijo del diseño)
-inf = os.path.join("..", "DOCS", "INFORME_PCB_REV_A.md")
+inf = os.path.join("..", "DOCS", "INFORME_PCB_REV_B.md")
 if os.path.exists(inf):
     L.append("")
     L += open(inf, encoding="utf-8").read().rstrip("\n").split("\n")
@@ -135,7 +135,7 @@ L.append("- Apto para solicitar prototipos: %s" % ("**sí, pendiente de validaci
 L.append("- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
-for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos (como la cincha).",
+for t in ("REV B: contactos del fondo por tornillo M2 (SYS, BAT, GND); la estanqueidad depende de las juntas tóricas de los tornillos.",
           "Pinout de la URTK1.2 por verificar con polímetro antes de hacer el mazo (DOCS/INTEGRACION_GNSS.md).",
           "Pines 9/10 (detección) de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",
           "Batería 654060 con clavija PH2.0: cambiarla a JST SH 1,0 (J2) y comprobar la polaridad.",

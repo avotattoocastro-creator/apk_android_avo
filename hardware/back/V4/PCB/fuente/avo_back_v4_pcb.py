@@ -1,14 +1,16 @@
 """AVO BACK V4 · placa de la espalda (ESP32-S3) — generador del proyecto KiCad 9.
 
 Un solo origen de datos (piezas, redes, posiciones) genera el esquema, la placa, las reglas, la lista de piezas para
-JLCPCB, las comprobaciones de colocación y pcb_mecanica.json (pivotes, pisadores y sensor Hall para el CAD).
+JLCPCB, las comprobaciones de colocación y pcb_mecanica.json (pivotes, pisadores y contactos del fondo para el CAD).
 Coordenadas de diseño = las de la carcasa V4 (CAD/avo_back_v4_freecad.py): X del cuello a la cola, Y lateral,
 vista desde la tapa. En KiCad: x = X, y = 100 − Y. El contorno sale del CAD (pcb_contorno_v4.json).
 
-Bloques (la mayoría heredados de la placa de la cincha REV B, ya pasada por ERC/DRC en el CI):
-  Qi BQ51013B + cargador BQ24072 (camino de potencia) · batería con PTC y protección de polaridad · 3,3 V principal
+REV B (30/10/2026): sin Qi ni Hall. Alimentación por 3 contactos en el fondo de la cápsula (tornillos M2 pasantes):
+  SYS y BAT en la cola (donde estaba el reed) y GND aparte. Soporte del chaleco = puente SYS–BAT (encendido); base de
+  carga = cargador externo entre BAT y GND. Cargador BQ24072 solo para el USB-C del taller (camino de potencia).
+Bloques: batería con PTC · protección de polaridad del contacto SYS · TVS en los contactos expuestos · 3,3 V principal
   TLV75733P (1 A) · 3,3 V del ZED RT9080 con EN (corte físico del receptor) · ESP32-S3-MINI-1U-N8 · USB-C · microSD
-  (SDMMC 4 bits, alimentación conmutada) · conexión a la URTK1.2 (UART1 + UART2 + PPS + RESET) · sensor Hall de soporte.
+  (SDMMC 4 bits, alimentación conmutada) · conexión a la URTK1.2 (UART1 + UART2 + PPS + RESET).
 Uso:  python avo_back_v4_pcb.py --place   (comprueba la colocación)
 """
 import json
@@ -19,13 +21,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-from custom_fp import test_pad, wire_pad   # noqa: E402
+from custom_fp import test_pad   # noqa: E402
 from fplib import Footprint, Pad, circle, load, rect_lines   # noqa: E402
 
 OUT = os.path.join(HERE, "..", "kicad")
 os.makedirs(OUT, exist_ok=True)
 NAME = "AVO_BACK_V4_PCB"
-REV, DATE = "A", "2026-10-29"
+REV, DATE = "B", "2026-10-30"
 THICK = 1.0
 
 
@@ -117,6 +119,15 @@ def pads_2x4():
     return Footprint("AVO_URTK_Pads_2x04_P2.54mm", pads, g, "through_hole", None, "Conexión a la URTK1.2 (8 hilos)", 0.0)
 
 
+def contact_m2():
+    """Contacto del fondo: tornillo M2 avellanado (inox A2) desde fuera de la base + tuerca M2 sobre la placa.
+    Taladro metalizado Ø2,3, corona Ø4,6 en las dos caras (apoyo de la tuerca arriba y de la junta tórica abajo)."""
+    pads = [Pad("1", "thru_hole", "circle", 0, 0, 4.6, 4.6, drill=2.3, layers=["*.Cu", "*.Mask"])]
+    g = [circle(0, 0, 2.9, "F.CrtYd", 0.05), circle(0, 0, 2.6, "F.SilkS", 0.12), circle(0, 0, 2.9, "B.CrtYd", 0.05)]
+    return Footprint("AVO_Contacto_M2_Tornillo", pads, g, "through_hole", None,
+                     "Contacto pogo del fondo (tornillo M2 × 5 + tuerca DIN 934)", 1.8)
+
+
 S3 = load("ESP32-S3-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-S3-MINI-1U.STEP", 2.6)
 # patio: cuerpo 15,4 + 0,15 (el de la librería, ±8, deja 0,3 mm más; el borde de cobre se comprueba aparte)
 S3.graphics = [g for g in S3.graphics if not (len(g) > 1 and any(isinstance(x, list) and x[0] == "layer" and "CrtYd" in str(x[1]) for x in g))]
@@ -132,7 +143,6 @@ FP = {
     "SOT23": load("SOT-23.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23.step", 1.1),
     "SOT23-5": load("SOT-23-5.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23-5.step", 1.45),
     "SOT23-6": load("SOT-23-6.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23-6.step", 1.45),
-    "RHL20": load("Texas_VQFN-RHL-20_ThermalVias.kicad_mod", M3 + "Package_DFN_QFN.3dshapes/Texas_VQFN-RHL-20.step", 1.0),
     "RGT16": load("VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias.kicad_mod",
                   M3 + "Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step", 1.0),
     "USBC": load("USB_C_Receptacle_HRO_TYPE-C-31-M-12.kicad_mod",
@@ -141,15 +151,16 @@ FP = {
                     M3 + "Connector_JST.3dshapes/JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal.step", 2.95),
     "MICROSD": load("microSD_HC_Hirose_DM3AT-SF-PEJM5.kicad_mod",
                     M3 + "Connector_Card.3dshapes/microSD_HC_Hirose_DM3AT-SF-PEJM5.step", 1.6),
+    "SOD323": load("D_SOD-323.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-323.step", 1.1),
+    "CONTACT_M2": contact_m2(),
     "MINI1U": S3,
     "URTK8": pads_2x4(),
-    "WIRE": wire_pad("bobina / reed"),
     "TP": test_pad(1.0),
     "PIVOT": pivot_hole(2.2),
     "PAD_LID": keepout_disc(2.5),
     "RING": keepout_disc(4.6),
 }
-for k in ("RHL20", "RGT16"):
+for k in ("RGT16",):
     for p in FP[k].pads:
         if p.kind == "thru_hole":
             p.drill, p.w, p.h = 0.3, 0.5, 0.5
@@ -174,7 +185,7 @@ LC = {
     "100n C0G": "C97946", "47n C0G": "C21812", "2n2 C0G": "C51795", "1n C0G": "C1636",
     "NTC10k": "C77131", "AO3401A": "C15127", "AO3400A": "C20917", "2N7002": "C8545", "USBLC6": "C7519", "LED": "C2286",
     "RT9080": "C841192", "TLV75733P": "C485517", "BQ51013B": "C55663", "BQ24072": "C140288", "MINI1U": "C2980299",
-    "USBC": "C165948", "JST_SH2": "C160402", "MICROSD": "C114218", "PTC": "C20802", "DRV5032FA": "C140921",
+    "USBC": "C165948", "JST_SH2": "C160402", "MICROSD": "C114218", "PTC": "C20802", "DRV5032FA": "C140921", "TVS": "C2827694",
 }
 
 
@@ -192,64 +203,20 @@ GND, V3, VSYS, VBAT, VBUS, VIN5, VZED, VSD = "GND", "+3V3", "VSYS", "VBAT", "VBU
 TP = lambda ref, label, net, note="": part(ref, "TP", label, (0, 0), 0, {1: net}, block="Pruebas", sym="TP",
                                            no_assembly=True, note=note)
 
-# ---------------------------------------------------------------------------------------- Qi (U1) — como la cincha REV B
-part("U1", "RHL20", "BQ51013BRHLR", (0, 0), 0,
-     {1: GND, 20: GND, 21: GND, 2: "QI_AC1", 19: "QI_AC2", 3: "QI_BOOT1", 17: "QI_BOOT2", 4: VIN5,
-      5: "QI_CLAMP1", 16: "QI_CLAMP2", 6: "QI_COMM1", 15: "QI_COMM2", 7: "QI_CHG", 8: "QI_ADEN", 9: VBUS,
-      10: GND, 11: GND, 12: "QI_ILIM", 13: "QI_TS", 14: "QI_FOD", 18: "QI_RECT"},
-     LC["BQ51013B"], "BQ51013BRHLR", "Qi",
-     sym=dict(L=[(2, "AC1"), (19, "AC2"), (3, "BOOT1"), (17, "BOOT2"), (5, "CLAMP1"), (16, "CLAMP2"),
-                 (6, "COMM1"), (15, "COMM2"), (9, "AD"), (8, "AD-EN"), (10, "EN1"), (11, "EN2")],
-              R=[(18, "RECT"), (4, "OUT"), (7, "CHG"), (12, "ILIM"), (14, "FOD"), (13, "TS/CTRL"),
-                 (1, "PGND"), (20, "PGND"), (21, "EP")]))
-part("L1", "WIRE", "BOBINA Qi (1)", (0, 0), 0, {1: "QI_COIL1"}, block="Qi", sym="TP", no_assembly=True,
-     note="hilo de la bobina 30 × 23 (desde abajo, por el agujero)")
-part("L2", "WIRE", "BOBINA Qi (2)", (0, 0), 0, {1: "QI_AC2"}, block="Qi", sym="TP", no_assembly=True,
-     note="hilo de la bobina 30 × 23 (desde abajo, por el agujero)")
-# resonancia supuesta para Ls' ≈ 10 µH (como la cincha): AJUSTAR con la bobina real (DOCS/AJUSTE_QI.md)
-C("C1", "100n C0G 50V", "QI_COIL1", "QI_AC1", block="Qi", fp="C1206")
-C("C2", "100n C0G 50V", "QI_COIL1", "QI_AC1", block="Qi", fp="C1206")
-C("C3", "47n C0G 50V", "QI_COIL1", "QI_AC1", block="Qi", fp="C1206")
-C("C4", "2n2 C0G 50V", "QI_AC1", "QI_AC2", block="Qi", fp="C0805")
-C("C5", "1n C0G 50V", "QI_AC1", "QI_AC2", block="Qi", fp="C0603", dnp=True, note="ajuste de C2 (sin montar)")
-C("C6", "10n 50V", "QI_BOOT1", "QI_AC1", block="Qi")
-C("C7", "470n 25V", "QI_CLAMP1", "QI_AC1", block="Qi", fp="C0603")
-C("C8", "22n 50V", "QI_COMM1", "QI_AC1", block="Qi")
-C("C9", "10n 50V", "QI_BOOT2", "QI_AC2", block="Qi")
-C("C10", "470n 25V", "QI_CLAMP2", "QI_AC2", block="Qi", fp="C0603")
-C("C11", "22n 50V", "QI_COMM2", "QI_AC2", block="Qi")
-C("C12", "10u 25V", "QI_RECT", GND, block="Qi", fp="C0603")
-C("C13", "10u 25V", "QI_RECT", GND, block="Qi", fp="C0603")
-C("C14", "100n", "QI_RECT", GND, block="Qi")
-C("C15", "10u 25V", VIN5, GND, block="Qi", fp="C0603")
-C("C16", "100n", VIN5, GND, block="Qi")
-# V4: límite del receptor 262 / (330 + 200) ≈ 0,49 A → 262 / (R1 + R_FOD); con R1 = 22 + R_FOD 200 ≈ 1,18 A máx. Se deja
-# 330 + 200 (≈ 0,5 A, como la cincha): la carga es de 0,45 A y la electrónica en carga ~0,2 A sale de la batería/VSYS.
-R("R1", "330R", "QI_ILIM", "QI_FOD", block="Qi")
-R("R2", "200R", "QI_FOD", GND, block="Qi")
-R("R3", "20k", "QI_RECT", "QI_FOD", block="Qi", note="R_OS (TI: RECT → FOD); se ajusta en la calibración FOD")
-part("RT1", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "QI_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Qi", sym="R")
-R("R4", "100k", "QI_CHG", V3, block="Qi")
-C("C17", "1u", VBUS, GND, block="Qi")
-part("Q1", "SOT23", "AO3401A", (0, 0), 0, {1: "QI_ADEN", 2: "AD_SRC", 3: VBUS}, LC["AO3401A"],
-     block="USB", sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-part("Q2", "SOT23", "AO3401A", (0, 0), 0, {1: "QI_ADEN", 2: "AD_SRC", 3: VIN5}, LC["AO3401A"],
-     block="USB", sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]))
-
 # ---------------------------------------------------------------------------------------- cargador (U2)
 part("U2", "RGT16", "BQ24072RGTR", (0, 0), 0,
      {1: "CHG_TS", 2: VBAT, 3: VBAT, 4: GND, 5: "CHG_EN2", 6: GND, 7: "CHG_PG", 8: GND, 9: "CHG_STAT",
-      10: VSYS, 11: VSYS, 12: "CHG_ILIM", 13: VIN5, 14: None, 15: GND, 16: "CHG_ISET", 17: GND},
+      10: VSYS, 11: VSYS, 12: "CHG_ILIM", 13: VBUS, 14: None, 15: GND, 16: "CHG_ISET", 17: GND},
      LC["BQ24072"], "BQ24072RGTR", "Cargador",
      sym=dict(L=[(13, "IN"), (4, "CE"), (6, "EN1"), (5, "EN2"), (16, "ISET"), (12, "ILIM"), (14, "TMR"),
                  (15, "TD"), (1, "TS")],
               R=[(10, "OUT"), (11, "OUT"), (2, "BAT"), (3, "BAT"), (7, "PGOOD"), (9, "CHG"), (8, "VSS"), (17, "EP")]))
-C("C18", "1u", VIN5, GND, block="Cargador")
+C("C18", "1u", VBUS, GND, block="Cargador")
 C("C19", "10u 25V", VSYS, GND, block="Cargador", fp="C0603")
 C("C20", "10u 25V", VBAT, GND, block="Cargador", fp="C0603")
 C("C35", "47u 6V3", VSYS, GND, block="Cargador", fp="C0805", note="reserva de VSYS para los picos de radio y del ZED")
 R("R6", "2k", "CHG_ISET", GND, block="Cargador", note="I_carga = 890/2k ≈ 445 mA (0,22 C de 2000 mAh)")
-R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = 1525/2k ≈ 760 mA (el receptor Qi limita a ≈ 0,5 A)")
+R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = 1525/2k ≈ 760 mA (USB-C del taller)")
 part("RT2", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Cargador", sym="R")
 R("R8", "100k", "CHG_EN2", VSYS, block="Cargador", note="EN2 = 1, EN1 = 0: límite por ILIM")
 R("R9", "100k", "CHG_PG", V3, block="Cargador")
@@ -260,9 +227,19 @@ part("J2", "JST_SH2", "BATERÍA 1S", (0, 0), 0, {1: "BAT_IN", 2: GND, "MP": GND}
      "SM02B-SRSS-TB (JST SH 1,0)", "Batería", sym=dict(L=[(1, "+"), (2, "−")], R=[("MP", "MP")]),
      note="pin 1 = + · la 654060 trae PH2.0: cambiar la clavija a SH 1,0 y comprobar la polaridad antes de enchufar")
 part("F1", "F1206", "PTC 1,5 A", (0, 0), 0, {1: "BAT_IN", 2: "BAT_F"}, LC["PTC"], "SMD1206P150TF", "Batería", sym="R",
-     note="fusible rearmable (la celda lleva además su PCM)")
-part("Q3", "SOT23", "AO3401A", (0, 0), 0, {1: "BAT_G", 2: VBAT, 3: "BAT_F"}, LC["AO3401A"], block="Batería",
-     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]), note="protección de polaridad (PMOS: D a la batería, S a VBAT)")
+     note="fusible rearmable entre la celda y el contacto BAT (la celda lleva además su PCM)")
+part("Q3", "SOT23", "AO3401A", (0, 0), 0, {1: "BAT_G", 2: VBAT, 3: "SYS_IN"}, LC["AO3401A"], block="Batería",
+     sym=dict(L=[(1, "G")], R=[(3, "D"), (2, "S")]),
+     note="polaridad del contacto SYS (PMOS: D al contacto, S a VBAT); deja pasar la carga por USB hacia la celda")
+# contactos del fondo (tornillo M2 avellanado de acero inoxidable desde fuera + tuerca M2 sobre la placa)
+for ref, net, lab, nt in (("P1", "SYS_IN", "CONTACTO SYS", "puente SYS–BAT en el soporte del chaleco = encendido"),
+                          ("P2", "BAT_F", "CONTACTO BAT", "+ de la celda (tras F1): puente en el chaleco, cargador en la base"),
+                          ("P3", GND, "CONTACTO GND", "solo para la base de carga (lejos de BAT)")):
+    part(ref, "CONTACT_M2", lab, (0, 0), 0, {1: net}, block="Contactos", sym="TP", no_assembly=True, note=nt)
+part("D2", "SOD323", "TVS 5 V", (0, 0), 0, {1: "SYS_IN", 2: GND}, LC["TVS"], "PESD5V0S1BA", "Contactos",
+     sym=dict(L=[(1, "K")], R=[(2, "A")]), note="ESD en el contacto SYS")
+part("D3", "SOD323", "TVS 5 V", (0, 0), 0, {1: "BAT_F", 2: GND}, LC["TVS"], "PESD5V0S1BA", "Contactos",
+     sym=dict(L=[(1, "K")], R=[(2, "A")]), note="ESD en el contacto BAT")
 R("R30", "10k", "BAT_G", GND, block="Batería")
 R("R32", "1M", VBAT, "BAT_ADC", block="Batería", note="divisor 1:2 → GPIO2 (ADC1_CH1)")
 R("R33", "1M", "BAT_ADC", GND, block="Batería")
@@ -284,14 +261,14 @@ R("R60", "100k", "ZED_EN", GND, block="ZED", note="ZED apagado mientras arranca 
 
 # ---------------------------------------------------------------------------------------- ESP32-S3 (U4)
 GPIO = {  # pad del módulo: (GPIO, red)
-    4: ("IO0", "BOOT"), 5: ("IO1", "HALL"), 6: ("IO2", "BAT_ADC"), 7: ("IO3", None),
+    4: ("IO0", "BOOT"), 5: ("IO1", None), 6: ("IO2", "BAT_ADC"), 7: ("IO3", None),
     8: ("IO4", "ZED_PPS"), 9: ("IO5", "ZED_TX1"), 10: ("IO6", "S3_TX1"), 11: ("IO7", "ZED_TX2"), 12: ("IO8", "S3_TX2"),
     13: ("IO9", "S3_ZRST"), 14: ("IO10", "ZED_EN"), 15: ("IO11", "LED"),
     16: ("IO12", "SD_CLK0"), 17: ("IO13", "SD_CMD"), 18: ("IO14", "SD_D0"), 19: ("IO15", "SD_D1"), 20: ("IO16", "SD_D2"),
     21: ("IO17", "SD_D3"), 22: ("IO18", "SD_CD"), 23: ("IO19 D-", "USB_DM"), 24: ("IO20 D+", "USB_DP"), 25: ("IO21", "SD_PWR_N"),
     26: ("IO26", None), 27: ("IO47", None), 28: ("IO33", None), 29: ("IO34", None), 30: ("IO48", None),
     31: ("IO35", None), 32: ("IO36", None), 33: ("IO37", None), 34: ("IO38", "CHG_PG"), 35: ("IO39", "CHG_STAT"),
-    36: ("IO40", "QI_CHG"), 37: ("IO41", "GPIO41"), 38: ("IO42", None), 39: ("TXD0", "U0TX"), 40: ("RXD0", "U0RX"),
+    36: ("IO40", None), 37: ("IO41", "GPIO41"), 38: ("IO42", None), 39: ("TXD0", "U0TX"), 40: ("RXD0", "U0RX"),
     41: ("IO45", None), 44: ("IO46", None), 45: ("EN", "EN"), 3: ("3V3", V3),
 }
 GND_PADS = (1, 2, 42, 43) + tuple(range(46, 66))
@@ -363,12 +340,6 @@ R("R52", "1k", "S3_ZRST", "ZED_RST", block="ZED", note="RESET_N del ZED (GPIO9 e
 R("R53", "330R", "ZED_TX1_C", "ZED_TX1", block="ZED")
 R("R54", "330R", "ZED_TX2_C", "ZED_TX2", block="ZED")
 R("R55", "330R", "ZED_PPS_C", "ZED_PPS", block="ZED", note="PPS → GPIO4 (captura MCPWM para la marca de tiempo)")
-
-# ---------------------------------------------------------------------------------------- sensor de soporte (Hall) y reed opcional
-part("U8", "SOT23", "DRV5032FADBZR", (0, 0), 0, {1: V3, 2: "HALL", 3: GND}, LC["DRV5032FA"], "DRV5032FADBZR", "Soporte",
-     sym=dict(L=[(1, "VDD")], R=[(2, "OUT"), (3, "GND")]),
-     note="omnipolar, salida push-pull (TI SLVSDC7H §7.3.2.3): LOW con los imanes del soporte debajo; sustituye al reed (V4)")
-C("C33", "100n", V3, GND, block="Soporte")
 
 # ---------------------------------------------------------------------------------------- pruebas y mecánica
 TP("TP1", "EN", "EN"); TP("TP2", "BOOT", "BOOT", "GPIO0 a GND al arrancar = descarga")
@@ -468,6 +439,9 @@ def zone_limit(x, y):
     return z - Z_PCB_TOP
 
 
+CIRC = {"PAD_LID": 2.5, "RING": 4.6, "CONTACT_M2": 2.9, "PIVOT": 1.4}   # patios circulares (radio)
+
+
 def check_placement():
     errs = []
     boxes = [(p["ref"], courtyard_abs(p)) for p in PARTS]
@@ -478,13 +452,17 @@ def check_placement():
             if pa["fp"] == "PIVOT" or pb["fp"] == "PIVOT":
                 if pa["fp"] in ("PAD_LID", "RING") or pb["fp"] in ("PAD_LID", "RING"):
                     continue
+            if pa["fp"] in CIRC and pb["fp"] in CIRC:
+                (ax_, ay_), (bx_, by_) = kpos(pa), kpos(pb)
+                if math.hypot(ax_ - bx_, ay_ - by_) >= CIRC[pa["fp"]] + CIRC[pb["fp"]]:
+                    continue
             if ba[0] < bb[2] and bb[0] < ba[2] and ba[1] < bb[3] and bb[1] < ba[3]:
                 ox = min(ba[2], bb[2]) - max(ba[0], bb[0]); oy = min(ba[3], bb[3]) - max(ba[1], bb[1])
                 if ox > 0.02 and oy > 0.02:
-                    if (pa["fp"] in ("PAD_LID", "RING") or pb["fp"] in ("PAD_LID", "RING")):
+                    if (pa["fp"] in CIRC or pb["fp"] in CIRC):
                         # zona circular: solape real con el disco
-                        q, z = (pa, pb) if pa["fp"] in ("PAD_LID", "RING") else (pb, pa)
-                        r = 2.5 if q["fp"] == "PAD_LID" else 4.6
+                        q, z = (pa, pb) if pa["fp"] in CIRC else (pb, pa)
+                        r = CIRC[q["fp"]]
                         zx0, zy0, zx1, zy1 = courtyard_abs(z); cx, cy = kpos(q)
                         dx = max(zx0 - cx, 0, cx - zx1); dy = max(zy0 - cy, 0, cy - zy1)
                         if math.hypot(dx, dy) >= r:
@@ -499,7 +477,10 @@ def check_placement():
     for ref, bb in boxes:
         p = next(q for q in PARTS if q["ref"] == ref)
         samples = []
-        for k in range(9):
+        if p["fp"] == "CONTACT_M2":
+            cx, cy = kpos(p)
+            samples = [(cx + 2.9 * math.cos(math.radians(a)), cy + 2.9 * math.sin(math.radians(a))) for a in range(0, 360, 15)]
+        for k in range(9 if p["fp"] != "CONTACT_M2" else 0):
             t = k / 8
             samples += [(bb[0] + t * (bb[2] - bb[0]), bb[1]), (bb[0] + t * (bb[2] - bb[0]), bb[3]),
                         (bb[0], bb[1] + t * (bb[3] - bb[1])), (bb[2], bb[1] + t * (bb[3] - bb[1]))]
@@ -544,16 +525,16 @@ def dist_to_poly(x, y, poly):
 
 
 def mecanica():
-    """pivotes, pisadores, anillos y sensor Hall → CAD (pcb_mecanica.json)"""
+    """pivotes, pisadores, anillos y contactos del fondo → CAD (pcb_mecanica.json)"""
     g = lambda pref: [list(p["pos"]) for p in PARTS if p["ref"].startswith(pref) and p["fp"] in ("PIVOT", "PAD_LID", "RING")]
-    hall = next(p for p in PARTS if p["ref"] == "U8")["pos"]
+    contactos = {p["ref"]: dict(pos=list(p["pos"]), red=p["nets"]["1"]) for p in PARTS if p["fp"] == "CONTACT_M2"}
     env = []
     for p in PARTS:
         h = fp_of(p).height
         if h > 0:
             x0, y0, x1, y1 = courtyard_casing(p)
             env.append([p["ref"], round(x0, 3), round(y0, 3), round(x1, 3), round(y1, 3), h])
-    return dict(pivotes=g("H"), pisadores=g("MP"), anillos=g("MR"), hall=list(hall), envolventes=env,
+    return dict(pivotes=g("H"), pisadores=g("MP"), anillos=g("MR"), contactos=contactos, envolventes=env,
                 nota_envolventes="patio × altura de la huella (conservador); la comprobación fina usa el STEP de KiCad",
                 origen="generado por PCB/fuente/avo_back_v4_pcb.py (colocacion_v4.json)")
 

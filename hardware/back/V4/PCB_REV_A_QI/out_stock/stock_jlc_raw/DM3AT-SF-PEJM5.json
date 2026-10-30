@@ -1,0 +1,883 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 115458,
+     "componentLibraryType": "expand",
+     "stockCount": 19399,
+     "componentTypeEn": "SD Card / Memory Card Connector",
+     "erpComponentName": "\u81ea\u5f39\u5f0f MicroSD\u5361(TF\u5361) \u5361\u5ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sd-card-memory-card-connector_hrs-hirose-dm3at-sf-pejm5_C114218.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.392
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.1661
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.0416
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.9008
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.7943
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.7665
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.7652
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.341
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.1233
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.8677
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.0034
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.7383
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "6e5e858c9fba429cac8ddaf7d0e9557d",
+     "canPresaleNumber": 19032,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-DM3AT_SFPEJM5/C114218",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 3.833,
+     "preMinPurchaseNum": 7,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.392,
+     "componentCode": "C114218",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "DM3AT-SF-PEJM5",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583350597864710144",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121938_HRS-Hirose-DM3AT-SF-PEJM5_C114218.pdf",
+     "dataManualFileAccessId": "8588898986388295681",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS DM3AT-SF-PEJM5",
+     "minImage": "",
+     "minImageAccessId": "8583350598721294336",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-25\u2103~+85\u2103 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "15.95mm"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Connector and Ejector"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Card Connection Mode",
+       "attribute_value_name": "Push-Push"
+      },
+      {
+       "attribute_name_en": "Height Above Board",
+       "attribute_value_name": "1.68mm"
+      },
+      {
+       "attribute_name_en": "Card Type",
+       "attribute_value_name": "MicroSD Card (TF Card)"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "13.85mm"
+      },
+      {
+       "attribute_name_en": "Additional Card Detection Pins",
+       "attribute_value_name": "No"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SD Card / Memory Card Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>DM3AT-SF-PEJM5</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 626587,
+     "componentLibraryType": "expand",
+     "stockCount": 94,
+     "componentTypeEn": "SD Card / Memory Card Connector",
+     "erpComponentName": "\u81ea\u5f39\u5f0f MicroSD\u5361(TF\u5361) \u5361\u5ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sd-card-memory-card-connector_hrs-hirose-dm3at-sf-pejm5-40_C597971.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.8561
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.4238
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.1536
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 399,
+       "productPrice": 1.8768
+      },
+      {
+       "startNumber": 400,
+       "endNumber": 799,
+       "productPrice": 1.7507
+      },
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 1.6967
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 1.6344
+      },
+      {
+       "startNumber": 400,
+       "endNumber": 799,
+       "productPrice": 1.6864
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 399,
+       "productPrice": 1.8079
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.3348
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.0745
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.7513
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "6e5e858c9fba429cac8ddaf7d0e9557d",
+     "canPresaleNumber": 92,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "HRS_Hirose-DM3AT_SF_PEJM5_40/C597971",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 400,
+     "shopCostPrice": 8.75616,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 1,
+     "initialPrice": 2.8561,
+     "componentCode": "C597971",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "DM3AT-SF-PEJM5(40)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8766899331930968064",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8590160946619850752",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS DM3AT-SF-PEJM5(40)",
+     "minImage": "",
+     "minImageAccessId": "8766899332929347584",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-25\u2103~+85\u2103 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "15.95mm"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Connector and Ejector"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Card Connection Mode",
+       "attribute_value_name": "Push-Push"
+      },
+      {
+       "attribute_name_en": "Height Above Board",
+       "attribute_value_name": "1.68mm"
+      },
+      {
+       "attribute_name_en": "Card Type",
+       "attribute_value_name": "MicroSD Card (TF Card)"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "13.85mm"
+      },
+      {
+       "attribute_name_en": "Additional Card Detection Pins",
+       "attribute_value_name": "No"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SD Card / Memory Card Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>DM3AT-SF-PEJM5</span>(40)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51700018,
+     "componentLibraryType": "expand",
+     "stockCount": 2900,
+     "componentTypeEn": "SD Card / Memory Card Connector",
+     "erpComponentName": "DM3AT-SF-PEJM5(21)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.8877
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.7075
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.6174
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.529
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.475
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.4471
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.4575
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.5948
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.8551
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.5096
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.4307
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.6816
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 2894,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-DM3AT_SF_PEJM5_21/C49260564",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 2.54795,
+     "preMinPurchaseNum": 13,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.8877,
+     "componentCode": "C49260564",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "DM3AT-SF-PEJM5(21)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS DM3AT-SF-PEJM5(21)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- SD Card / Memory Card Connector ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SD Card / Memory Card Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>DM3AT-SF-PEJM5</span>(21)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3757185,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SD Card / Memory Card Connector",
+     "erpComponentName": "\u81ea\u5f39\u5f0f MicroSD\u5361(TF\u5361) \u5361\u5ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.9652
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.9652
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.9652
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.7616
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.7354
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.7206
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.7336
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": -1,
+       "productPrice": 0.6942
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.8931
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.8931
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.8931
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.7084
+      }
+     ],
+     "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
+     "secondSortAccessId": "cfa9bf2378174788abc09e74d45d5b30",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "HRS_Hirose-DM3AT_SF_PEJM5_11/C3195425",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 5,
+     "minPurchaseNum": 5,
+     "initialPrice": 1.9652,
+     "componentCode": "C3195425",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "DM3AT-SF-PEJM5(11)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8589839100799975424",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS DM3AT-SF-PEJM5(11)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-25\u2103~+85\u2103 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "15.95mm"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Connector and Ejector"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Card Connection Mode",
+       "attribute_value_name": "Push-Push"
+      },
+      {
+       "attribute_name_en": "Height Above Board",
+       "attribute_value_name": "1.68mm"
+      },
+      {
+       "attribute_name_en": "Card Type",
+       "attribute_value_name": "MicroSD Card (TF Card)"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "13.85mm"
+      },
+      {
+       "attribute_name_en": "Additional Card Detection Pins",
+       "attribute_value_name": "No"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SD Card / Memory Card Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>DM3AT-SF-PEJM5</span>(11)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23432440,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SD Card / Memory Card Connector",
+     "erpComponentName": "\u81ea\u5f39\u5f0f MicroSD\u5361(TF\u5361) \u5361\u5ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sim-card-connectors_hrs-hirose-dm3at-sf-pejm5-42_C22002019.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.8962
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 6.8962
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 6.8962
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 399,
+       "productPrice": 2.7513
+      },
+      {
+       "startNumber": 400,
+       "endNumber": 799,
+       "productPrice": 2.6596
+      },
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 2.6137
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 800,
+       "endNumber": -1,
+       "productPrice": 2.5178
+      },
+      {
+       "startNumber": 400,
+       "endNumber": 799,
+       "productPrice": 2.562
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 399,
+       "productPrice": 2.6503
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 6.6431
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 6.6431
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.6431
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "fdf3ccf2c9444ffbbd395a2d49e3b99f",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-DM3AT_SF_PEJM5_42/C22002019",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 400,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 6.8962,
+     "componentCode": "C22002019",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "DM3AT-SF-PEJM5(42)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8603639013249339392",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS DM3AT-SF-PEJM5(42)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "-25\u2103~+85\u2103 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push - SD Card / Memory Card Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Connector and Ejector"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Card Connection Mode",
+       "attribute_value_name": "Push-Push"
+      },
+      {
+       "attribute_name_en": "Height Above Board",
+       "attribute_value_name": "1.68mm"
+      },
+      {
+       "attribute_name_en": "Card Type",
+       "attribute_value_name": "MicroSD Card (TF Card)"
+      },
+      {
+       "attribute_name_en": "Additional Card Detection Pins",
+       "attribute_value_name": "No"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SD Card / Memory Card Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>DM3AT-SF-PEJM5</span>(42)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "DM3AT-SF-PEJM5"
+ },
+ "message": null
+}

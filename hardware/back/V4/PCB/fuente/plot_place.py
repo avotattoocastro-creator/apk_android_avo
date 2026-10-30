@@ -9,7 +9,7 @@ ax.add_patch(Polygon(D.outline_pts(3), fill=False, lw=1.5, color="g"))
 z = D.ZONAS; b = z["bajo_J2_L"]; ax.add_patch(Rectangle((b["x0"], b["y"][0]), b["x1"] - b["x0"], b["y"][1] - b["y"][0], color="r", alpha=0.12))
 t = z["topes_L"]; ax.add_patch(Rectangle((t["x0"], t["y"][0]), t["x1"] - t["x0"], t["y"][1] - t["y"][0], color="orange", alpha=0.12))
 ax.axvspan(60, z["bajo_URTK"]["x1"], color="b", alpha=0.06)
-col = {"Qi": "tab:purple", "Cargador": "tab:orange", "USB": "tab:cyan", "ESP32-S3": "tab:blue", "microSD": "tab:green", "ZED": "tab:red",
+col = {"Contactos": "tab:purple", "Cargador": "tab:orange", "USB": "tab:cyan", "ESP32-S3": "tab:blue", "microSD": "tab:green", "ZED": "tab:red",
        "3V3": "tab:brown", "Batería": "gold", "Soporte": "k", "Pruebas": "gray", "Mecánica": "m"}
 for p in D.PARTS:
     if p["fp"] in ("PAD_LID", "RING"):
