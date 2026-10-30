@@ -66,7 +66,7 @@ RE = dict(
     CABLE_SLOT=(5.0, 6.9, -2.0, 2.0),                                          # un solo pasacables centrado (sustituye a las 2 ranuras del reed)
     CABLE_LIPS_X=(21.0, 38.0, 53.0), CABLE_LIP=(3.0, 1.2),                     # sujetacables (5 × AWG30) en el canto del refuerzo junto a la Heltec
     EDGE_HOOKS_X=(30.0, 46.0), EDGE_HOOK=(2.5, 1.0, 0.5),                      # pestañas nuevas en el borde +Y (largo, espesor, solape)
-    OUTER_TOWERS_X=((13.6, 15.6), (28.75, 31.25), (45.2, 47.25)), OUTER_TOWER_Y=(20.35, 21.0),   # torres exteriores del borde +Y: pasacables
+    OUTER_TOWERS_X=((28.75, 31.25), (45.2, 47.25)), OUTER_TOWER_Y=(20.35, 21.0),   # torres exteriores del borde +Y: pasacables
                                                                                # entre cada torre de la Heltec y su torre exterior (fuera de los clics de la base)   # Rev E.2: bandeja 0,8 + 1,2 = 2,0 fuera de la Heltec y de la placa Qi (marco rígido); borde de 0,7 sin engordar para los clics
     # Rev E.2: pared de tope pegada al marco de la batería (centra la bandeja) + 4 clics de seguridad en la base (la bandeja no cambia)
     STOP_WALL_T=1.2, STOP_WALL_CLR=0.15,
@@ -504,6 +504,7 @@ def build_bandeja(CLIP_CAV):
     for sg, yy in ((1, y0), (-1, y1)):
         yo, yi = yy - sg * (g_ + 1.2), yy - sg * g_
         for (xa, xb, top) in ((xw0, xw0 + 3.0, MCU_T + 1.8), (x1 - 6.0, x1 + g_, MCU_T + 1.8)):
+            if sg < 0 and xa == xw0: continue          # borde +Y, lado USB: libre para los hilos 3V3 y GND del GPS (pines de la Heltec)
             gd = box((xa, min(yo, yi), zs), (xb, max(yo, yi), top))
             lip = box((xa, min(yi, yy + sg * 0.5), z0), (xb, max(yi, yy + sg * 0.5), top)).common(lip_cut(xa, xb, 0, 0, yi, -sg, "y"))
             feats.append(gd.fuse(lip))

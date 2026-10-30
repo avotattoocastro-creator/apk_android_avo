@@ -42,8 +42,8 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
   - **Extremo de la antena:** canal de 3,4 mm abierto en el refuerzo hasta la bandeja (X 69,8–73,2, de Y −16 a 13), con
     labios a 45° en sus cantos en Y −13, −2,5, 6 y 11. Pasa por debajo del pisador (72; −8) de la tapa, que sigue apoyando
     en el canto +X.
-  - **Borde +Y:** junto a cada torre de la Heltec hay una **torre exterior separada** (X 13,6–15,6, 28,8–31,3 y 45,2–47,3;
-    Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
+  - **Borde +Y:** junto a las torres de la Heltec en X 30 y 46 hay una **torre exterior separada** (X 28,8–31,3 y
+    45,2–47,3; Y 20,35–21,0). Entre cada pareja queda un pasacables de 0,8 mm de ancho y 4,6 mm de alto, con los 5 hilos uno encima de
     otro. Las torres exteriores están fuera de los clics de la base, que sujetan la bandeja en X 16–24 y 36–45.
 - **Espesor de la Heltec**: las pestañas quedan 0,05 mm por encima de una placa de **1,8 mm**. Ese espesor sale del modelo
   3MF y **nunca se ha medido con calibre** (estaba en las pendientes de la Rev E). Si la placa real es más fina, la Heltec
@@ -56,7 +56,8 @@ fuera de límite en `VALIDACION/voladizos.json`). Los STL ya están en posición
   - Resultado: **la Heltec queda exactamente a la misma altura que en la E.5** (boca USB-C, apoyos y botón USER de la tapa
     E.5 sin cambios). Comprobado: 0 interferencias con la tapa E.5.
 - **Más pestañas en los dos bordes**:
-  - las 4 guías laterales pasan a tener labio (0,5 mm sobre la placa);
+  - 3 de las guías laterales pasan a tener labio (0,5 mm sobre la placa). La guía del borde +Y en el lado USB y su torre
+    exterior se han quitado: ahí están los pines 3V3 y GND de la Heltec donde se suelda el GPS;
   - 2 pestañas nuevas en el borde +Y (X 30 y 46).
   - En el borde −Y no se añaden más, porque ahí va el canal de los cables.
 - **Torres con pestaña también en el extremo USB**, iguales a las del extremo de la antena, entre el USB-C y los pulsadores

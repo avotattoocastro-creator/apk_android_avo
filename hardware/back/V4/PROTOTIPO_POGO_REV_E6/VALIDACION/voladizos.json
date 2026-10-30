@@ -1099,19 +1099,6 @@
     "z": 3.71,
     "tipo": "VOLADIZO",
     "voladizo_mm": 0.4,
-    "area_mm2": 1.2,
-    "caja": [
-     15.6,
-     18.5,
-     17.9,
-     18.2
-    ],
-    "ok": true
-   },
-   {
-    "z": 3.71,
-    "tipo": "VOLADIZO",
-    "voladizo_mm": 0.4,
     "area_mm2": 1.04,
     "caja": [
      28.7,
