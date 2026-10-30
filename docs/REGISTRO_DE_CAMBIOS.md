@@ -35,6 +35,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Por qué:** petición del usuario (cambiar reed + imán por el conector pogo; carga por contactos; ajustar la cápsula a la batería).
 **Archivos:** `hardware/girth/REV5/avo_girth_rev5.py`, `hardware/girth/REV5/README.md`, `hardware/girth/REV5/out/*` (CI).
 **No se ha tocado:** firmware, app, comunicaciones del pecho.
+**CI:** run 41048766609 (éxito, SHA `9af8785`).
 **Validación:** CAD por CI sin interferencias y 1 sólido por pieza; voladizos revisados. **NO VERIFICADO** físicamente. Medidas del conector **estimadas** (foto del vendedor): confirmar con calibre antes de imprimir.
 **Pendiente:** medir el conector real; prueba impresa; sellado con epoxi y prueba de inmersión; diseñar la base de carga si se pide.
 
