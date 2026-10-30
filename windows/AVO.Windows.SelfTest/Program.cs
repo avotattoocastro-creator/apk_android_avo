@@ -190,6 +190,7 @@ try
         Assert(inputError, "Error de entrada informado");
         Assert(SHA256.HashData(File.ReadAllBytes(s2.RawSegmentPaths[0])).AsSpan().SequenceEqual(SHA256.HashData(synthetic)), "El RAW no se modifica");
     }
+    Avo.Windows.SelfTest.V2Tests.Run(dir, Assert);
     Console.WriteLine($"TODAS LAS PRUEBAS CORRECTAS: {passed}");
 }
 finally { Directory.Delete(dir, true); }

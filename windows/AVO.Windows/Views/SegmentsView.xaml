@@ -1,0 +1,99 @@
+<UserControl x:Class="Avo.Windows.Views.SegmentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Segment analysis (concept 02, screen 4): index on the left, selected segment with map, profile and metrics -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="290"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+            <c:AvoCard Header="Tramos">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                        <TextBlock Text="CREAR TRAMOS" Style="{StaticResource AvoLabel}" Margin="0,0,0,6"/>
+                        <Button Content="Desde la selección de las gráficas" Command="{Binding AddSegmentFromRangeCommand}" HorizontalContentAlignment="Left" Margin="0,2"/>
+                        <DockPanel Margin="0,2">
+                            <ComboBox DockPanel.Dock="Right" Width="88" ItemsSource="{Binding SegmentLengths}" SelectedItem="{Binding SegmentLength}" ItemStringFormat="{}{0} m" Margin="6,0,0,0"/>
+                            <Button Content="Automático por distancia" Command="{Binding AutoDistanceCommand}" HorizontalContentAlignment="Left"/>
+                        </DockPanel>
+                        <Button Content="Automático por banda de velocidad" Command="{Binding AutoSpeedBandCommand}" HorizontalContentAlignment="Left" Margin="0,2"/>
+                        <Button Content="Por aire (motor AVO · cincha)" Command="{Binding EngineSegmentsCommand}" HorizontalContentAlignment="Left" Margin="0,2"/>
+                        <Button Content="Borrar todos los tramos" Command="{Binding ClearSegmentsCommand}" HorizontalContentAlignment="Left" Margin="0,2"/>
+                        <TextBlock Text="Los tramos se guardan aparte; la telemetría original nunca se modifica. Las bandas de velocidad no son aires." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                    </StackPanel>
+                    <ListBox ItemsSource="{Binding SegmentRows}" SelectedItem="{Binding SelectedSegment}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock FontSize="11.5" Opacity="0.8">
+                                        <Run Text="{Binding T0, Mode=OneWay, Converter={StaticResource Clock}}"/><Run Text=" – "/><Run Text="{Binding T1, Mode=OneWay, Converter={StaticResource Clock}}"/><Run Text=" · "/><Run Text="{Binding DistanceM, Mode=OneWay, StringFormat='{}{0:0} m'}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </c:AvoCard>
+            <Grid Grid.Column="1" Margin="12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="190"/>
+                </Grid.RowDefinitions>
+                <Border Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="6" Padding="16,10">
+                    <StackPanel>
+                        <TextBlock Text="{Binding SelectedSegment.Name, FallbackValue='Selecciona o crea un tramo'}" Style="{StaticResource AvoTitle}" FontSize="17"/>
+                        <UniformGrid Columns="4" Margin="0,8,0,0">
+                            <StackPanel><TextBlock Text="Distancia" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DistanceM, StringFormat='{}{0:0} m', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
+                            <StackPanel><TextBlock Text="Duración" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.DurationS, Converter={StaticResource Clock}, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. media" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MeanSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. máxima" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding SelectedSegment.MaxSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='Sin datos', FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="24"/></StackPanel>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Margin="0,10" CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                    <c:MapControl Tracks="{Binding SegmentTracks}" CursorTime="{Binding CursorTime}" ColorMode="Speed" Provider="{Binding MapProvider}"
+                                  RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" TileCacheDir="{Binding TileCacheDir}"/>
+                </Border>
+                <c:AvoChartPanel Grid.Row="2" Header="Velocidad en el tramo (km/h)" Readout="{Binding CursorSpeed, StringFormat='{}{0} km/h'}">
+                    <c:SignalChart Series="{Binding SegmentSpeedSeries}" CursorX="{Binding CursorTime}" IncludeZero="True" EmptyText="Selecciona un tramo"/>
+                </c:AvoChartPanel>
+            </Grid>
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <c:AvoCard Header="Métricas del tramo">
+                        <ItemsControl ItemsSource="{Binding SegmentDetail}">
+                            <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Observaciones" Margin="0,10,0,0">
+                        <TextBlock Text="{Binding SegmentObservations}" Style="{StaticResource AvoDim}"/>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Identificar y renombrar" Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Nombre" Style="{StaticResource AvoLabel}"/>
+                            <TextBox Text="{Binding SegmentName, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,8"/>
+                            <TextBlock Text="Notas" Style="{StaticResource AvoLabel}"/>
+                            <TextBox Text="{Binding SegmentNotes, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,8" Height="64" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top"/>
+                            <WrapPanel>
+                                <Button Content="Guardar" Style="{StaticResource AvoPrimaryButton}" Command="{Binding SaveSegmentCommand}" Margin="0,0,6,0" Padding="12,5"/>
+                                <Button Content="Eliminar" Command="{Binding DeleteSegmentCommand}" Padding="12,5"/>
+                            </WrapPanel>
+                            <TextBlock Text="«Guardar» aplica también la selección actual de las gráficas como nuevos límites del tramo." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

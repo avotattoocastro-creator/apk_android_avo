@@ -7,7 +7,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>AVO.Performance.Horse.Windows</AssemblyName>
+    <RootNamespace>Avo.Windows</RootNamespace>
     <ApplicationIcon>Assets\AVO.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>AVO Performance Horse — Windows Advanced Analysis V2 PRO</Product>
+    <Company>AVO Performance</Company>
+    <Version>2.0.0</Version>
+    <InformationalVersion>2.0.0-pro-dev1</InformationalVersion>
+    <!-- WPF temporary projects do not see implicit usings of the SDK for System.IO; files import it explicitly -->
   </PropertyGroup>
-  <ItemGroup><ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" /></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\avo_brand_hero.jpg" />
+    <Resource Include="Assets\avo_logo_128.png" />
+    <Resource Include="Assets\AVO.ico" />
+  </ItemGroup>
 </Project>

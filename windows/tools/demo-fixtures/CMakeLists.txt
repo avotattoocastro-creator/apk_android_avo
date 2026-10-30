@@ -1,0 +1,13 @@
+# Generator of DEMONSTRATION (synthetic) AVO RAW sessions for the Windows tests and the CI screenshots.
+cmake_minimum_required(VERSION 3.16)
+project(avo_windows_demo_fixtures CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(AVO_CORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../firmware/back/V3_8_0/lib/avo_core/src CACHE PATH "avo_core sources")
+if(MSVC)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../equine-intelligence/compat/msvc)
+  add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+endif()
+file(GLOB AVO_CORE_SRC ${AVO_CORE_DIR}/*.cpp)
+add_executable(make_demo_sessions make_demo_sessions.cpp ${AVO_CORE_SRC})
+target_include_directories(make_demo_sessions PRIVATE ${AVO_CORE_DIR})

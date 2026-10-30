@@ -1,0 +1,73 @@
+<UserControl x:Class="Avo.Windows.Views.TidesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Tides and conditions (concept 02 screen 7 / concept 01 screen 6). Prediction / model / measurement are always labelled;
+         missing data is shown as «Sin datos». Values of a reference port are never presented as measured at the beach. -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="460"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <c:AvoCard Header="Condiciones de la sesión">
+                <UniformGrid Columns="2" Rows="3">
+                    <c:AvoMetricTile Label="MAREA (predicción)" Value="{Binding TideTrend}" ValueSize="20" Caption="{Binding SelectedPort.Name, StringFormat='Puerto de referencia: {0}', FallbackValue='Sin puerto'}" Margin="0,0,6,6" Background="Transparent"/>
+                    <c:AvoMetricTile Label="ALTURA DE MAREA" Value="{Binding TideHeadline}" ValueSize="20" Caption="Sobre el cero hidrográfico" Margin="6,0,0,6" Background="Transparent"/>
+                    <c:AvoMetricTile Label="VIENTO (modelo)" Value="{Binding WindHeadline}" ValueSize="20" Caption="Open-Meteo" Margin="0,0,6,6" Background="Transparent"/>
+                    <c:AvoMetricTile Label="TEMPERATURA (modelo)" Value="{Binding TempHeadline}" ValueSize="20" Caption="Open-Meteo" Margin="6,0,0,6" Background="Transparent"/>
+                    <c:AvoMetricTile Label="PRESIÓN (modelo)" Value="{Binding PressureHeadline}" ValueSize="20" Caption="Nivel del mar" Margin="0,0,6,0" Background="Transparent"/>
+                    <c:AvoMetricTile Label="OLEAJE (modelo)" Value="{Binding WaveHeadline}" ValueSize="20" Caption="Altura significativa" Margin="6,0,0,0" Background="Transparent"/>
+                </UniformGrid>
+            </c:AvoCard>
+            <c:AvoChartPanel Grid.Column="1" Margin="12,0,0,0" Header="Gráfica de mareas del día (Europe/Madrid) · línea roja = hora del entrenamiento" Height="300">
+                <c:SignalChart Series="{Binding TideSeries}" Axis="HourOfDay" MarkerX="{Binding TideMarker}" XMin="{Binding TideXMin}" XMax="{Binding TideXMax}"
+                               EmptyText="Sin datos de marea (consulta en línea desactivada, sin conexión o sin fecha)"/>
+            </c:AvoChartPanel>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,12,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+            <c:AvoCard Header="Marea · fuente y valores">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding TideRows}">
+                        <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="PLEAMARES Y BAJAMARES DEL DÍA" Style="{StaticResource AvoLabel}" Margin="0,12,0,4"/>
+                    <ItemsControl ItemsSource="{Binding TideEvents}">
+                        <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </c:AvoCard>
+            <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Meteorología y oleaje · fuente y valores">
+                <ItemsControl ItemsSource="{Binding WeatherRows}">
+                    <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </c:AvoCard>
+            <c:AvoCard Grid.Column="2" Margin="12,0,0,0" Header="Origen de los datos">
+                <StackPanel>
+                    <TextBlock Text="Zona de entrenamiento" Style="{StaticResource AvoLabel}"/>
+                    <TextBlock Text="{Binding PlaceName}" Style="{StaticResource AvoBody}" Margin="0,2,0,8"/>
+                    <TextBlock Text="Puerto de referencia (IHM)" Style="{StaticResource AvoLabel}"/>
+                    <ComboBox ItemsSource="{Binding TidePorts}" SelectedItem="{Binding SelectedPort}" DisplayMemberPath="Name" Margin="0,4,0,8"/>
+                    <CheckBox Content="Consultar fuentes en línea (IHM, Open-Meteo)" IsChecked="{Binding OnlineEnvironment}"/>
+                    <Button Content="Actualizar datos de entorno" Style="{StaticResource AvoPrimaryButton}" Command="{Binding LoadEnvironmentCommand}" Margin="0,8,0,0"/>
+                    <TextBlock Text="{Binding EnvironmentStatus}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                    <Separator/>
+                    <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap"
+                               Text="Mareas: predicción oficial del Instituto Hidrográfico de la Marina para un puerto de referencia (no medición en la playa del Regatón). Meteorología y oleaje: modelo numérico de Open-Meteo. Horas en Europe/Madrid con cambio de horario. Cualquier relación con el rendimiento es exploratoria y no implica causalidad."/>
+                </StackPanel>
+            </c:AvoCard>
+        </Grid>
+    </Grid>
+</UserControl>

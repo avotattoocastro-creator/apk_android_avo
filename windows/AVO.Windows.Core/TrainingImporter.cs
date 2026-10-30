@@ -38,6 +38,7 @@ public static class TrainingImporter
         var root = json.RootElement;
         if (String(root, "format") != "AVO-TRAINING-1") throw new InvalidDataException("Formato AVO no compatible");
         result.SessionId = String(root, "sessionId") ?? throw new InvalidDataException("Falta sessionId");
+        result.DeclaredCanonicalSha256 = String(root, "sha256");
         if (result.SessionId.Length is < 3 or > 128 || result.SessionId.Contains('/') || result.SessionId.Contains('\\'))
             throw new InvalidDataException("ID de sesión inválido");
         result.Horse = String(root, "horseName") is { Length: > 0 } horse ? horse : "Sin identificar";

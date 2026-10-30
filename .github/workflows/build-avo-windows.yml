@@ -1,4 +1,4 @@
-name: AVO Windows - build and self-tests
+name: AVO Windows - build, tests, screenshots and package
 on:
   push:
     branches:
@@ -13,15 +13,22 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: avo-windows-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test-and-package:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+
       - name: Build AVO Equine Intelligence Engine DLL (MSVC, static runtime)
         shell: pwsh
         run: |
@@ -29,29 +36,115 @@ jobs:
           cmake --build eqw --config Release --target avo_eq_shared
           New-Item -ItemType Directory -Force windows/native | Out-Null
           Copy-Item eqw/Release/avo_equine.dll windows/native/avo_equine.dll
-      - name: Run real format interoperability tests (incl. engine through P/Invoke)
-        env:
-          AVO_EQ_REQUIRE_NATIVE: '1'
+
+      - name: Generate DEMONSTRATION sessions (synthetic, AVO RAW written with the chest writer)
         shell: pwsh
         run: |
+          cmake -S windows/tools/demo-fixtures -B demofx -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+          cmake --build demofx --config Release
+          New-Item -ItemType Directory -Force windows/demo | Out-Null
+          ./demofx/Release/make_demo_sessions.exe windows/demo
+          Get-ChildItem windows/demo | Format-Table Name, Length
+
+      - name: Self-tests (formats, security, algorithms, exports, engine through P/Invoke, demo sessions)
+        env:
+          AVO_EQ_REQUIRE_NATIVE: '1'
+          AVO_REQUIRE_DEMO: '1'
+        shell: pwsh
+        run: |
+          $env:AVO_DEMO_DIR = (Resolve-Path windows/demo).Path
           $out = dotnet run --project windows/AVO.Windows.SelfTest/AVO.Windows.SelfTest.csproj -c Release 2>&1; $code = $LASTEXITCODE
           $out | Write-Output
-          if ($code -ne 0) { $out | Select-String -Pattern 'FAILED|error|Exception' | Select-Object -First 30 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
+          if ($code -ne 0) { $out | Select-String -Pattern 'FAILED|error|Exception' | Select-Object -First 40 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
           $out | Select-String -Pattern 'TODAS LAS PRUEBAS' | ForEach-Object { Write-Output "::notice::$_" }
+
       - name: Compile WPF and publish standalone Windows x64
         shell: pwsh
         run: |
-          $out = dotnet publish windows/AVO.Windows/AVO.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o windows/publish 2>&1; $code = $LASTEXITCODE
+          $ver = "2.0.0.${{ github.run_number }}"
+          $out = dotnet publish windows/AVO.Windows/AVO.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:FileVersion=$ver -p:AssemblyVersion=2.0.0.0 -p:InformationalVersion="2.0.0-pro+${{ github.sha }}" -o windows/publish 2>&1; $code = $LASTEXITCODE
           $out | Write-Output
-          if ($code -ne 0) { $out | Select-String -Pattern 'error' | Select-Object -First 30 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
-      - name: Archive Windows application
+          if ($code -ne 0) { $out | Select-String -Pattern 'error' | Select-Object -First 40 | ForEach-Object { Write-Output "::error::$_" }; exit $code }
+          Get-ChildItem windows/publish | Format-Table Name, Length
+
+      - name: Run the real application in capture mode (screenshots 1366x768, 1920x1080, 2560x1440 @150 %, exports)
         shell: pwsh
         run: |
-          Compress-Archive -Path windows/publish/* -DestinationPath windows/AVO_Windows_V1_x64.zip -Force
-      - name: Publish portable EXE bundle
+          $cap = Join-Path $PWD 'capturas'
+          $root = Join-Path $PWD 'appdata'
+          $demo = (Resolve-Path windows/demo).Path
+          $p = Start-Process -FilePath windows/publish/AVO.Performance.Horse.Windows.exe -ArgumentList @('--capture', $cap, '--demo', $demo, '--root', $root, '--sizes', '1920x1080,1366x768,2560x1440@150') -PassThru
+          if (-not $p.WaitForExit(900000)) { $p.Kill(); Write-Output "::error::La aplicación no terminó la captura en 15 min"; exit 1 }
+          if (Test-Path "$cap/ERROR.txt") { Get-Content "$cap/ERROR.txt" | ForEach-Object { Write-Output "::error::$_" }; exit 1 }
+          if ($p.ExitCode -ne 0) { Write-Output "::error::Código de salida $($p.ExitCode)"; exit 1 }
+          $png = Get-ChildItem $cap -Filter *.png
+          Write-Output "::notice::Capturas generadas: $($png.Count)"
+          if ($png.Count -lt 30) { Write-Output "::error::Faltan capturas"; exit 1 }
+          foreach ($f in @('informe_demo.pdf','informe_demo.html','serie_demo.csv','recorrido_demo.gpx','analisis_demo.json','capture-report.json')) { if (-not (Test-Path "$cap/$f")) { Write-Output "::error::Falta $f"; exit 1 } }
+          Get-Content "$cap/capture-report.json" -TotalCount 20 | Write-Output
+          Copy-Item -Recurse "$root/registros" "$cap/registros" -ErrorAction SilentlyContinue
+
+      - name: Archive Windows application (portable, self-contained, not signed)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force pkg | Out-Null
+          Copy-Item windows/publish/* pkg/
+          Copy-Item windows/docs/INSTALACION_WINDOWS.md pkg/LEEME_INSTALACION.md
+          "AVO Performance Horse - Windows Advanced Analysis V2 PRO`nVersion 2.0.0.${{ github.run_number }} ($env:GITHUB_SHA)`nCompilacion CI: ${{ github.run_id }}`nDistribucion portable SIN FIRMA digital." | Out-File -Encoding utf8 pkg/VERSION.txt
+          Compress-Archive -Path pkg/* -DestinationPath windows/AVO_Windows_V2_PRO_x64.zip -Force
+          Compress-Archive -Path windows/demo/* -DestinationPath windows/AVO_Windows_V2_DEMO_SINTETICA.zip -Force
+
+      - name: Publish portable application
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Windows-V1-x64
-          path: windows/AVO_Windows_V1_x64.zip
+          name: AVO-Windows-V2-PRO-x64
+          path: windows/AVO_Windows_V2_PRO_x64.zip
           if-no-files-found: error
           retention-days: 30
+      - name: Publish screenshots and exports (visual validation evidence)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-Windows-V2-capturas
+          path: capturas
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish demonstration sessions (synthetic)
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-Windows-V2-demo-sintetica
+          path: windows/AVO_Windows_V2_DEMO_SINTETICA.zip
+          retention-days: 30
+      - name: Hand screenshots to the next job
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-handoff
+          path: capturas
+          retention-days: 1
+
+  # The screenshots are also committed to the orphan branch ci/windows-visual-evidence (overwritten on every run) so they can
+  # be reviewed without signing in to download artifacts. Only for pushes to the Windows feature branch.
+  publish-evidence:
+    needs: test-and-package
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/windows-advanced-analysis'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: evidence-handoff
+          path: capturas
+      - name: Commit evidence to ci/windows-visual-evidence
+        run: |
+          set -e
+          mkdir ev && cd ev
+          git init -q
+          git config user.name "avo-windows-ci"
+          git config user.email "avo-windows-ci@users.noreply.github.com"
+          git checkout -q --orphan ci/windows-visual-evidence
+          cp -r ../capturas/* .
+          rm -rf registros
+          printf "# Evidencia visual Windows V2 PRO\n\nRun %s · commit %s\n\nCapturas reales renderizadas por la aplicación publicada (modo --capture) con sesiones de DEMOSTRACIÓN sintéticas.\n" "${{ github.run_id }}" "${{ github.sha }}" > README.md
+          git add -A
+          git commit -q -m "Evidencia visual Windows V2 PRO · run ${{ github.run_id }} · ${{ github.sha }}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci/windows-visual-evidence

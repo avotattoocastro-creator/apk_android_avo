@@ -1,0 +1,88 @@
+<UserControl x:Class="Avo.Windows.Views.BiomechView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Biomechanics (concept 02 screen 5 / concept 01 screen 4). Every index comes from the AVO Equine Intelligence engine and is
+         labelled exploratory: uncalibrated IMU, no clinical diagnosis, no limb load. Without girth data nothing is computed. -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Border Grid.Row="1" Background="#1AFFC42C" BorderBrush="#66FFC42C" BorderThickness="1" CornerRadius="6" Padding="12,7" Margin="0,0,0,10">
+            <TextBlock Text="{Binding BiomechStatus}" Foreground="{StaticResource AvoText}" TextWrapping="Wrap" FontSize="12"/>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.15*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.1*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <c:AvoCard Header="Cincha · posición de los sensores">
+                <c:HorseDiagram ActiveSensors="{Binding ActiveSensors}" MinHeight="220"/>
+            </c:AvoCard>
+            <Grid Grid.Column="1" Margin="12,0,0,0">
+                <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <c:AvoMetricTile Label="ASIMETRÍA TEMPORAL (exploratoria)" Value="{Binding SymmetryHeadline}" Unit="%" Caption="(d1 − d2)/(d1 + d2), grupos reproducibles" ValueBrush="{StaticResource AvoCyan}" Margin="0,0,6,6"/>
+                <c:AvoMetricTile Grid.Column="1" Label="CADENCIA MEDIA" Value="{Binding CadenceHeadline}" Unit="ciclos/min" Caption="Sensor central · ventanas válidas" Margin="6,0,0,6"/>
+                <c:AvoMetricTile Grid.Row="1" Label="REGULARIDAD" Value="{Binding RegularityHeadline}" Caption="Correlación entre ciclos (0–1)" ValueBrush="{StaticResource AvoOk}" Margin="0,6,6,0"/>
+                <c:AvoMetricTile Grid.Row="1" Grid.Column="1" Label="LONGITUD DE TRANCO" Value="{Binding StrideHeadline}" Unit="m" Caption="Velocidad GNSS / cadencia (estimación)" Margin="6,6,0,0"/>
+            </Grid>
+            <c:AvoCard Grid.Column="2" Grid.RowSpan="2" Margin="12,0,0,0" Header="Índices del motor por sensor">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding BiomechMetrics}">
+                            <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="CONTROLES DE SIMETRÍA" Style="{StaticResource AvoLabel}" Margin="0,12,0,4"/>
+                        <ItemsControl ItemsSource="{Binding SymmetryControls}">
+                            <ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,2"/></DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="{Binding ImuScaleNote}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </c:AvoCard>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,12,0,0">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                <c:AvoChartPanel Header="Patrón de movimiento · |a| cincha ±2 s del cursor (g)" Margin="0,0,6,0">
+                    <c:AvoChartPanel.Legend>
+                        <StackPanel Orientation="Horizontal">
+                            <c:AvoLegendItem Text="Izq." Swatch="{StaticResource AvoBlue}"/>
+                            <c:AvoLegendItem Text="Central" Swatch="{StaticResource AvoOk}"/>
+                            <c:AvoLegendItem Text="Der." Swatch="{StaticResource AvoWarn}"/>
+                        </StackPanel>
+                    </c:AvoChartPanel.Legend>
+                    <c:SignalChart Series="{Binding ImuWindowSeries}" Axis="Number" XMin="{Binding ImuWindowMin}" XMax="{Binding ImuWindowMax}" EmptyText="Sin datos de cincha"/>
+                </c:AvoChartPanel>
+                <c:AvoChartPanel Grid.Column="1" Header="Cadencia por sensor (ciclos/min)" Margin="6,0,0,0" Readout="{Binding CursorCadence}">
+                    <c:SignalChart Series="{Binding CadenceSeries}" Bands="{Binding GaitBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                   RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin cadencia: requiere cincha y motor"/>
+                </c:AvoChartPanel>
+                <c:AvoCard Grid.Row="1" Grid.ColumnSpan="2" Header="Simetría exploratoria por sensor y aire (motor AVO)" Margin="0,12,0,0">
+                    <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding SymmetryRows}" MaxHeight="170">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="IMU" Binding="{Binding Imu}" Width="50"/>
+                            <DataGridTextColumn Header="Aire" Binding="{Binding Gait}" Width="90"/>
+                            <DataGridTextColumn Header="Ventanas" Binding="{Binding Windows}" Width="70"/>
+                            <DataGridTextColumn Header="Trancos" Binding="{Binding Strides}" Width="70"/>
+                            <DataGridTextColumn Header="ln(A1/A2)" Binding="{Binding LogAmplitudeRatio, StringFormat='0.000'}" Width="80"/>
+                            <DataGridCheckBoxColumn Header="Reproducible" Binding="{Binding AmplitudeReproducible}" Width="90"/>
+                            <DataGridTextColumn Header="Asim. temporal" Binding="{Binding TemporalAsymmetry, StringFormat='0.000'}" Width="100"/>
+                            <DataGridCheckBoxColumn Header="Reproducible" Binding="{Binding TemporalReproducible}" Width="90"/>
+                            <DataGridTextColumn Header="Similitud mitades" Binding="{Binding HalfSimilarity, StringFormat='0.00'}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </c:AvoCard>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,97 @@
+<UserControl x:Class="Avo.Windows.Views.CompareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls">
+    <!-- Training comparison (concept 02 screen 6 / concept 01 screen 5) -->
+    <Grid Margin="16,12,16,14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <c:AvoCard Header="Entrenamientos a comparar">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                    <TextBlock Text="ALINEAR SERIES POR" Style="{StaticResource AvoLabel}" Margin="0,0,0,6"/>
+                    <UniformGrid Columns="2">
+                        <RadioButton GroupName="align" Style="{StaticResource AvoSegmentButton}" Content="Tiempo relativo" Margin="0,0,3,0" IsChecked="{Binding Alignment, Converter={StaticResource Eq}, ConverterParameter=RelativeTime}"/>
+                        <RadioButton GroupName="align" Style="{StaticResource AvoSegmentButton}" Content="Distancia" Margin="3,0,0,0" IsChecked="{Binding Alignment, Converter={StaticResource Eq}, ConverterParameter=Distance}"/>
+                    </UniformGrid>
+                    <Button Content="Actualizar comparación" Command="{Binding RefreshCompareCommand}" Margin="0,10,0,0"/>
+                    <Button Content="Comparar con el motor (2 sesiones)" Style="{StaticResource AvoPrimaryButton}" Command="{Binding EngineCompareCommand}" Margin="0,6,0,0"/>
+                    <TextBlock Text="{Binding CompareVerdict}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                </StackPanel>
+                <ListBox ItemsSource="{Binding SessionsView}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <Setter Property="Padding" Value="6,6"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <CheckBox DockPanel.Dock="Left" IsChecked="{Binding IsCompared}" Command="{Binding DataContext.RefreshCompareCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" VerticalAlignment="Center"/>
+                                <Border DockPanel.Dock="Left" Width="4" Margin="2,2,10,2" CornerRadius="2" Background="{Binding CompareColor, Converter={StaticResource ColorBrush}}"/>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding DateTimeText}" FontWeight="SemiBold"/>
+                                    <TextBlock Style="{StaticResource AvoCaption}"><Run Text="{Binding Horse, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding DistanceText, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding Kind, Mode=OneWay}"/></TextBlock>
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </c:AvoCard>
+        <Grid Grid.Column="1" Margin="12,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <Border CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" Margin="0,0,6,0">
+                    <Grid>
+                        <c:MapControl Tracks="{Binding CompareTracks}" Provider="{Binding MapProvider}" TileCacheDir="{Binding TileCacheDir}" ShowMarkers="False"/>
+                        <TextBlock Text="Recorridos superpuestos (chaleco GNSS)" Margin="12,10" Foreground="{StaticResource AvoText}" FontWeight="SemiBold" VerticalAlignment="Top"/>
+                    </Grid>
+                </Border>
+                <c:AvoChartPanel Grid.Column="1" Header="Velocidad comparada (km/h)" Margin="6,0,0,0">
+                    <c:SignalChart Series="{Binding CompareSpeedSeries}" Axis="{Binding CompareAxis}" IncludeZero="True" EmptyText="Marca entrenamientos para compararlos"/>
+                </c:AvoChartPanel>
+            </Grid>
+            <c:AvoChartPanel Grid.Row="1" Header="Aceleración longitudinal validada (m/s²)" Margin="0,10,0,0">
+                <c:SignalChart Series="{Binding CompareAccelSeries}" Axis="{Binding CompareAxis}" IncludeZero="True"/>
+            </c:AvoChartPanel>
+            <c:AvoCard Grid.Row="2" Header="Estadísticas comparativas" Margin="0,10,0,0">
+                <StackPanel>
+                    <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding CompareRows}" MaxHeight="190">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="" Width="16">
+                                <DataGridTemplateColumn.CellTemplate><DataTemplate><Border Width="10" Height="10" CornerRadius="2" Background="{Binding Color, Converter={StaticResource ColorBrush}}"/></DataTemplate></DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Entrenamiento" Binding="{Binding Label}" Width="*"/>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding Date}" Width="120"/>
+                            <DataGridTextColumn Header="Distancia" Binding="{Binding Distance}" Width="85"/>
+                            <DataGridTextColumn Header="Duración" Binding="{Binding Duration}" Width="75"/>
+                            <DataGridTextColumn Header="V. media" Binding="{Binding MeanSpeed}" Width="85"/>
+                            <DataGridTextColumn Header="V. máx" Binding="{Binding MaxSpeed}" Width="85"/>
+                            <DataGridTextColumn Header="Acel. máx" Binding="{Binding MaxAccel}" Width="90"/>
+                            <DataGridTextColumn Header="RTK FIX" Binding="{Binding Fix}" Width="65"/>
+                            <DataGridTextColumn Header="Cadencia" Binding="{Binding Cadence}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding EngineDiffRows}" MaxHeight="160" Margin="0,8,0,0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Métrica (motor)" Binding="{Binding Metrica}" Width="*"/>
+                            <DataGridTextColumn Header="A" Binding="{Binding A}" Width="90"/>
+                            <DataGridTextColumn Header="B" Binding="{Binding B}" Width="90"/>
+                            <DataGridTextColumn Header="Diferencia" Binding="{Binding Diferencia}" Width="90"/>
+                            <DataGridTextColumn Header="Comparable" Binding="{Binding Comparable}" Width="90"/>
+                            <DataGridTextColumn Header="Contexto" Binding="{Binding Contexto}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </c:AvoCard>
+        </Grid>
+    </Grid>
+</UserControl>

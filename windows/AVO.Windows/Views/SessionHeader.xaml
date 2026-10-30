@@ -1,0 +1,26 @@
+<UserControl x:Class="Avo.Windows.Views.SessionHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- AvoSessionHeader: active training, data origin badge and engine state -->
+    <Grid Margin="0,0,0,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Border Width="4" Background="{StaticResource AvoRed}" CornerRadius="2" Margin="0,2,12,2"/>
+            <StackPanel>
+                <TextBlock Text="{Binding SessionHeaderTitle}" Style="{StaticResource AvoTitle}" FontSize="19"/>
+                <TextBlock Text="{Binding SessionHeaderSubtitle}" Style="{StaticResource AvoDim}"/>
+            </StackPanel>
+            <Border Margin="16,0,0,0" VerticalAlignment="Center" CornerRadius="3" Padding="8,3" Background="#33FFC42C" BorderBrush="{StaticResource AvoWarn}" BorderThickness="1"
+                    Visibility="{Binding Selected.IsSynthetic, Converter={StaticResource BoolVis}, FallbackValue=Collapsed}">
+                <TextBlock Text="DEMOSTRACIÓN · DATOS SINTÉTICOS" Foreground="{StaticResource AvoWarn}" FontWeight="SemiBold" FontSize="11"/>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="{Binding Selected.EngineState, StringFormat='Motor: {0}', FallbackValue=''}" Style="{StaticResource AvoCaption}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <Button Content="Reprocesar con el motor" Command="{Binding RunEngineCommand}" Padding="10,5" FontWeight="Normal"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

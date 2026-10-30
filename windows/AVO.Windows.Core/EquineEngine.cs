@@ -102,7 +102,18 @@ public static class EquineEngine
 public sealed record EngineQualityRow(string Dominio, string Nivel, string Motivos);
 public sealed record EngineSegmentRow(int Id, string Aire, string Desde, string Hasta, string Distancia, string VelocidadMedia, string VelocidadMax,
     string Cadencia, string Tranco, string CorrCiclos, string CvIntervalos, string CalidadGnss, string CalidadImu, string Avisos)
-{ public double T0 { get; init; } public double T1 { get; init; } }
+{
+    public double T0 { get; init; }
+    public double T1 { get; init; }
+    public string GaitCode { get; init; } = "";
+    public double? CadenceHz { get; init; }
+    public double? CycleCorrelation { get; init; }
+    public double? IntervalCv { get; init; }
+    public double? StrideLengthM { get; init; }
+}
+/// <summary>Exploratory symmetry group (one IMU, one gait) — EXPLORATORY_MOTION_SYMMETRY, never a clinical result.</summary>
+public sealed record EngineSymmetryGroup(int Imu, string Gait, int Windows, int Strides, double? LogAmplitudeRatio, bool AmplitudeReproducible,
+    double? TemporalAsymmetry, bool TemporalReproducible, double? HalfSimilarity);
 public sealed record EngineGaitRow(string Aire, int Tramos, string Duracion, string FraccionTiempo, string Distancia, string VelocidadMedia, string Cadencia, string Tranco);
 public sealed record EngineCurveRow(int Id, string Direccion, string Inicio, string Giro, string Radio, string VEntrada, string VSalida, string LateralEstimada, string Cadencia, string Calidad)
 { public double T0 { get; init; } }
@@ -139,6 +150,14 @@ public sealed class EquineAnalysis
     public double[] GirthT { get; private set; } = [];
     public double[] GirthCadenceHz { get; private set; } = [];
     public string[] GirthStatus { get; private set; } = [];
+    public double[] GirthStrideM { get; private set; } = [];
+    public double[] GirthCycleCorrelation { get; private set; } = [];
+    public double[] GirthIntervalCv { get; private set; } = [];
+    public double[] GirthAmplitudeCv { get; private set; } = [];
+    public double[] GirthSpectralStability { get; private set; } = [];
+    public List<EngineSymmetryGroup> SymmetryGroups { get; } = [];
+    public int SymmetryWindows { get; private set; }
+    public double? Metric(string name) => Metrics.TryGetValue(name, out var v) && double.IsFinite(v) ? v : null;
     public string RawJson { get; private set; } = "";
 
     private static readonly CultureInfo Es = CultureInfo.GetCultureInfo("es-ES");
@@ -180,7 +199,11 @@ public sealed class EquineAnalysis
                 F(Num(s, "velocidad_media") * 3.6, "0.0", " km/h"), F(Num(s, "velocidad_max") * 3.6, "0.0", " km/h"),
                 Num(s, "cadencia_media_hz") is double f ? F(f * 60, "0", " /min") : (a.HasImu ? "—" : "SIN DATOS DE CINCHA"),
                 F(Num(s, "longitud_tranco_m"), "0.00", " m"), F(Num(s, "correlacion_ciclos"), "0.00"), F(Num(s, "cv_intervalos"), "0.000"),
-                Str(s, "calidad_gnss"), Str(s, "calidad_imu"), Strings(s, "avisos")) { T0 = t0, T1 = t1 });
+                Str(s, "calidad_gnss"), Str(s, "calidad_imu"), Strings(s, "avisos"))
+            {
+                T0 = t0, T1 = t1, GaitCode = Str(s, "codigo"), CadenceHz = Num(s, "cadencia_media_hz"),
+                CycleCorrelation = Num(s, "correlacion_ciclos"), IntervalCv = Num(s, "cv_intervalos"), StrideLengthM = Num(s, "longitud_tranco_m"),
+            });
         }
         foreach (var g in Arr(perf, "por_aire"))
             a.PerGait.Add(new EngineGaitRow(GaitText(Str(g, "codigo")), (int)(Num(g, "segmentos") ?? 0), Time(Num(g, "duracion_s") ?? double.NaN),
@@ -203,6 +226,13 @@ public sealed class EquineAnalysis
         var sy = Obj(r, "simetria");
         a.SymmetryLabel = Str(sy, "etiqueta"); a.SymmetryAllowed = Bool(sy, "conclusiones_permitidas");
         a.SymmetryControls.AddRange(Arr(sy, "controles").Select(x => $"{Str(x, "control")}: {Str(x, "estado")} — {Str(x, "motivo")}"));
+        a.SymmetryWindows = (int)(Num(sy, "ventanas_usadas") ?? 0);
+        foreach (var g in Arr(sy, "grupos"))
+        {
+            var la = Obj(g, "log_cociente_amplitud"); var ta = Obj(g, "asimetria_temporal"); var hm = Obj(g, "similitud_mitades");
+            a.SymmetryGroups.Add(new EngineSymmetryGroup((int)(Num(g, "imu") ?? 0), Str(g, "aire"), (int)(Num(g, "ventanas") ?? 0), (int)(Num(g, "trancos") ?? 0),
+                Num(la, "mediana"), Bool(la, "reproducible"), Num(ta, "mediana"), Bool(ta, "reproducible"), Num(hm, "mediana")));
+        }
         var se = Obj(r, "series");
         if (se.ValueKind == JsonValueKind.Object)
         {
@@ -214,6 +244,8 @@ public sealed class EquineAnalysis
         {
             a.GirthImu = Doubles(gi, "imu").Select(x => (int)x).ToArray(); a.GirthT = Doubles(gi, "t"); a.GirthCadenceHz = Doubles(gi, "cadencia_hz");
             a.GirthStatus = Arr(gi, "estado").Select(x => x.GetString() ?? "").ToArray();
+            a.GirthStrideM = Doubles(gi, "longitud_tranco_m"); a.GirthCycleCorrelation = Doubles(gi, "correlacion_ciclos");
+            a.GirthIntervalCv = Doubles(gi, "cv_intervalos"); a.GirthAmplitudeCv = Doubles(gi, "cv_amplitud"); a.GirthSpectralStability = Doubles(gi, "estabilidad_espectral");
         }
         return a;
     }

@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Avo.Windows.ViewModels">
+    <vm:PageVisibility x:Key="PageVis"/>
+    <vm:EqualsConverter x:Key="Eq"/>
+    <vm:BoolVisibility x:Key="BoolVis"/>
+    <vm:BoolVisibility x:Key="NotBoolVis" Invert="True"/>
+    <vm:NullVisibility x:Key="NullVis"/>
+    <vm:ColorBrush x:Key="ColorBrush"/>
+    <vm:ClockConverter x:Key="Clock"/>
+</ResourceDictionary>

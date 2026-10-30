@@ -1,80 +1,127 @@
-<Window x:Class="Avo.Windows.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Avo.Windows" Title="AVO Performance Horse — Advanced Training Analysis" Width="1560" Height="940" MinWidth="1080" MinHeight="690" WindowStartupLocation="CenterScreen">
- <Grid>
-  <Grid.RowDefinitions><RowDefinition Height="77"/><RowDefinition Height="*"/><RowDefinition Height="36"/></Grid.RowDefinitions>
-  <Border Background="#06101A" BorderBrush="#21516F" BorderThickness="0,0,0,1">
-   <Grid Margin="24,10"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center"><TextBlock Text="AVO" FontSize="38" FontWeight="Light" Foreground="White"/><StackPanel Margin="15,8,0,0"><TextBlock Text="PERFORMANCE HORSE" FontWeight="Bold" FontSize="14" Foreground="#76C8FF"/><TextBlock Text="WINDOWS · TRAINING ANALYSIS" Foreground="#93ACC2" FontSize="11"/></StackPanel></StackPanel>
-    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="36,0"><TextBlock Text="ANÁLISIS · CIENCIA · RENDIMIENTO" FontSize="16" FontWeight="SemiBold" Foreground="#A7C3D8"/><TextBlock Text="GNSS / RTK  ·  CINCHA IMU  ·  COMPARATIVAS  ·  MAREAS" Foreground="#607E96" FontSize="11"/></StackPanel>
-    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"><Button Content="＋ ABRIR ENTRENAMIENTO" Click="Open_Click"/><Button Content="IMPORTAR CARPETA" Click="Folder_Click"/><Button Content="EXPORTAR INFORME" Click="ExportHtml_Click"/></StackPanel>
-   </Grid>
-  </Border>
-  <Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="192"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-   <Border Background="#0B1B2B" BorderBrush="#1D3850" BorderThickness="0,0,1,0">
-    <DockPanel Margin="8,18"><StackPanel DockPanel.Dock="Top">
-     <TextBlock Text="NAVEGACIÓN" Foreground="#789EBB" FontSize="11" Margin="18,3,0,14" FontWeight="Bold"/>
-     <Button Content="⌂   Inicio" Tag="0" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="◈   Análisis" Tag="1" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="⌁   Gráficas" Tag="2" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="▤   Tramos" Tag="3" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="♞   Biomecánica" Tag="4" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="≋   Comparativas" Tag="5" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="◴   Mareas" Tag="6" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="▧   Informes" Tag="7" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="☁   Servidor" Tag="8" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Button Content="⚙   Motor AVO" Tag="9" Click="Navigate_Click" HorizontalContentAlignment="Left"/>
-     <Separator Margin="10,18" Background="#36546B"/>
-     <TextBlock Text="SESIÓN ACTIVA" Foreground="#789EBB" FontSize="11" Margin="12,4"/>
-     <ComboBox x:Name="SessionPicker" SelectionChanged="SessionPicker_SelectionChanged" DisplayMemberPath="Summary" MinWidth="160"/>
-     <TextBlock x:Name="SideIntegrity" Text="Importa un entrenamiento" TextWrapping="Wrap" Foreground="#67C9A8" Margin="12,10" FontSize="12"/>
-    </StackPanel><StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Margin="8"><TextBlock Text="AVO WINDOWS · V1.0" Foreground="#6F96AF" FontSize="11"/><TextBlock Text="Formato AVO-TRAINING-1" Foreground="#56788F" FontSize="10"/></StackPanel></DockPanel>
-   </Border>
-   <TabControl x:Name="Views" Grid.Column="1" Background="{StaticResource Background}" BorderThickness="0" TabStripPlacement="Top">
-    <TabItem Header="Inicio"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="20"><TextBlock Text="Bienvenido a AVO Performance Horse" Style="{StaticResource SectionTitle}"/><TextBlock Text="Centro de análisis avanzado del rendimiento ecuestre" Foreground="#9CB7D1" FontSize="16" Margin="8,0,0,18"/>
-       <UniformGrid Columns="4"><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="ENTRENAMIENTOS" Foreground="#7FBEE6"/><TextBlock x:Name="HomeCount" FontSize="32" Text="0" FontWeight="Bold"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="CABALLO ACTUAL" Foreground="#7FBEE6"/><TextBlock x:Name="HomeHorse" Text="—" FontSize="23"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="VELOCIDAD MÁX." Foreground="#7FBEE6"/><TextBlock x:Name="HomeSpeed" Text="—" FontSize="28"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="ESTADO DE LOS DATOS" Foreground="#7FBEE6"/><TextBlock x:Name="HomeIntegrity" Text="—" TextWrapping="Wrap" FontSize="17"/></StackPanel></Border></UniformGrid>
-       <TextBlock Text="Entrenamientos importados" Style="{StaticResource SectionTitle}" Margin="5,22,5,10"/><DataGrid x:Name="HomeList" Height="320" SelectionChanged="HomeList_SelectionChanged"/><WrapPanel Margin="5,16"><Button Content="Abrir archivo .avo / .avr" Click="Open_Click"/><Button Content="Comparar sesiones" Tag="5" Click="Navigate_Click"/><Button Content="Analizar recorrido" Tag="1" Click="Navigate_Click"/><Button Content="Importar contexto de mareas" Click="MarineImport_Click"/></WrapPanel>
-       <TextBlock Text="Integración AVO: los datos GNSS son del chaleco del jinete; las IMU corresponden a la cincha del caballo." Foreground="#80A5C0" Margin="8" TextWrapping="Wrap"/></StackPanel></ScrollViewer></TabItem>
-    <TabItem Header="Análisis"><Grid Margin="12"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="155"/></Grid.RowDefinitions><TextBlock Text="Mapa de recorrido GNSS/RTK · velocidad por color" Style="{StaticResource SectionTitle}"/><Grid Grid.Row="1"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="240"/></Grid.ColumnDefinitions>
-       <Border BorderBrush="#24516E" BorderThickness="1" Background="#122637" CornerRadius="7" ClipToBounds="True"><local:RouteView x:Name="AnalysisRoute"/></Border>
-       <StackPanel Grid.Column="1" Margin="8,0,0"><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="DISTANCIA" Foreground="#9CBDD4"/><TextBlock x:Name="StatDistance" FontSize="27" FontWeight="Bold"/><TextBlock Text="DURACIÓN" Foreground="#9CBDD4" Margin="0,14,0,0"/><TextBlock x:Name="StatDuration" FontSize="24"/><TextBlock Text="VELOCIDAD MÁXIMA" Foreground="#9CBDD4" Margin="0,14,0,0"/><TextBlock x:Name="StatMax" FontSize="23"/><TextBlock Text="VELOCIDAD MEDIA" Foreground="#9CBDD4" Margin="0,14,0,0"/><TextBlock x:Name="StatMean" FontSize="23"/><TextBlock Text="RTK FIX" Foreground="#9CBDD4" Margin="0,14,0,0"/><TextBlock x:Name="StatFix" FontSize="23"/><TextBlock Text="PUNTO SELECCIONADO" Foreground="#9CBDD4" Margin="0,14,0,0"/><TextBlock x:Name="StatPoint" TextWrapping="Wrap" FontSize="13"/></StackPanel></Border></StackPanel></Grid>
-       <Border Grid.Row="2" Style="{StaticResource StatCard}"><local:TelemetryChart x:Name="AnalysisChart"/></Border></Grid></TabItem>
-    <TabItem Header="Gráficas"><Grid Margin="15"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions><TextBlock Text="Gráficas GNSS sincronizadas · posición, velocidad, precisión" Style="{StaticResource SectionTitle}"/><Border Grid.Row="1" Style="{StaticResource StatCard}"><local:TelemetryChart x:Name="VelocityChart"/></Border><Border Grid.Row="2" Style="{StaticResource StatCard}"><local:TelemetryChart x:Name="AccuracyChart"/></Border><TextBlock Grid.Row="3" Text="Selecciona un punto en cualquiera de las gráficas para localizarlo en el mapa. La IMU requiere decodificación y calibración validadas antes de representar ejes físicos." Foreground="#91ADC6" TextWrapping="Wrap" Margin="12"/></Grid></TabItem>
-    <TabItem Header="Tramos"><StackPanel Margin="20"><TextBlock Text="Análisis por tramos de 500 metros" Style="{StaticResource SectionTitle}"/><TextBlock Text="Distancia geodésica, tiempo GNSS, velocidad media y máxima" Foreground="#8DB4CE"/><DataGrid x:Name="SegmentsTable" Margin="5,18" Height="540"/></StackPanel></TabItem>
-    <TabItem Header="Biomecánica"><ScrollViewer><StackPanel Margin="22"><TextBlock Text="Análisis biomecánico · cincha de 3 IMU" Style="{StaticResource SectionTitle}"/><UniformGrid Columns="3"><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="MUESTRAS IMU EN RAW" Foreground="#85C4EA"/><TextBlock x:Name="ImuSamplesText" FontSize="36"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="LOTES RECIBIDOS" Foreground="#85C4EA"/><TextBlock x:Name="ImuBatchesText" FontSize="36"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="TRAMAS RECHAZADAS" Foreground="#85C4EA"/><TextBlock x:Name="InvalidFramesText" FontSize="36"/></StackPanel></Border></UniformGrid><Border Style="{StaticResource StatCard}" Margin="8,24"><StackPanel><TextBlock Text="INTERPRETACIÓN RESPONSABLE" FontSize="24" Foreground="#62BAF3" Margin="0,0,0,14"/><TextBlock Text="La cincha está instalada en el caballo y transmite tres IMU a la espalda del jinete por ESP-NOW. Este módulo mide disponibilidad de datos y calidad de adquisición. La simetría, apoyo, vuelo y cadencia físicos necesitan validar el payload IMU, orientación, unidades y calibración antes de calcular índices clínicos." TextWrapping="Wrap" FontSize="16" Foreground="#CBDCEC"/><TextBlock Text="No se generan porcentajes de simetría ficticios ni diagnósticos veterinarios." Margin="0,18,0,0" Foreground="#6DD5BA"/></StackPanel></Border></StackPanel></ScrollViewer></TabItem>
-    <TabItem Header="Comparar"><Grid Margin="20"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="230"/></Grid.RowDefinitions><TextBlock Text="Comparación de entrenamientos" Style="{StaticResource SectionTitle}"/><StackPanel Orientation="Horizontal" Grid.Row="1"><TextBlock Text="Segunda sesión:" VerticalAlignment="Center" Foreground="#AFCEE0" Margin="8"/><ComboBox x:Name="ComparePicker" MinWidth="330" DisplayMemberPath="Summary" SelectionChanged="ComparePicker_SelectionChanged"/></StackPanel><Border Grid.Row="2" Style="{StaticResource StatCard}"><local:TelemetryChart x:Name="CompareChart"/></Border><DataGrid x:Name="CompareTable" Grid.Row="3"/></Grid></TabItem>
-    <TabItem Header="Mareas"><ScrollViewer><StackPanel Margin="24"><TextBlock Text="Condiciones marítimas vinculadas a la sesión" Style="{StaticResource SectionTitle}"/><TextBlock Text="Diferenciamos predicción, modelo y medición. No se inventan valores ni se equipara Santander con el nivel observado en El Regatón." TextWrapping="Wrap" Foreground="#AEC4D5" Margin="8,0,0,18"/><UniformGrid Columns="3"><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="MAREA (m)" Foreground="#7EBFE9"/><TextBlock x:Name="MarineTide" FontSize="30"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="VIENTO (km/h)" Foreground="#7EBFE9"/><TextBlock x:Name="MarineWind" FontSize="30"/></StackPanel></Border><Border Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="OLEAJE (m)" Foreground="#7EBFE9"/><TextBlock x:Name="MarineWave" FontSize="30"/></StackPanel></Border></UniformGrid><Border Style="{StaticResource StatCard}" Margin="8,14"><StackPanel><TextBlock Text="ORIGEN Y ACTUALIZACIÓN" Foreground="#86C8F0"/><TextBlock x:Name="MarineSourceText" TextWrapping="Wrap" FontSize="16" Margin="0,10"/></StackPanel></Border><Button Content="Importar instantánea marina JSON con procedencia" Click="MarineImport_Click" HorizontalAlignment="Left"/><TextBlock Text="Formato JSON: source, kind (prediccion/medicion/modelo), timestamp ISO 8601 con zona, tideHeightM, windKmh, waveHeightM y notes opcionales." TextWrapping="Wrap" Foreground="#7B9EB7" Margin="10,14"/></StackPanel></ScrollViewer></TabItem>
-    <TabItem Header="Informes"><StackPanel Margin="26"><TextBlock Text="Informes profesionales y exportación" Style="{StaticResource SectionTitle}"/><TextBlock Text="Las exportaciones conservan mediciones disponibles; nunca se completan los datos ausentes con estimaciones inventadas." Foreground="#AFCADE" Margin="8,0,8,16" TextWrapping="Wrap"/><WrapPanel><Button Content="Exportar informe HTML (imprimible a PDF)" Click="ExportHtml_Click"/><Button Content="Exportar datos CSV" Click="ExportCsv_Click"/><Button Content="Exportar recorrido GPX" Click="ExportGpx_Click"/></WrapPanel><Border Style="{StaticResource StatCard}" Margin="8,28"><StackPanel><TextBlock Text="INFORME AVO V1" FontSize="29" FontWeight="Bold" Foreground="#9EE1FF"/><TextBlock x:Name="ReportPreview" FontSize="16" Margin="0,18,0,0" TextWrapping="Wrap"/></StackPanel></Border></StackPanel></TabItem>
-    <TabItem Header="Servidor"><ScrollViewer><StackPanel Margin="25"><TextBlock Text="Servidor AVO · sincronización controlada" Style="{StaticResource SectionTitle}"/><TextBlock Text="Sin contrato HTTP validado, Windows NO indicará subidas ni descargas automáticas verificadas. Es posible abrir el panel del servidor y descargar manualmente un archivo .avo por HTTPS." Foreground="#E5C797" TextWrapping="Wrap" Margin="8,0,8,20"/><TextBlock Text="Panel del servidor" Foreground="#A7C1D6"/><TextBox x:Name="ServerPanelUrl" Text="https://live.avoperformance.org" Margin="5,8,5,12"/><Button Content="Abrir panel en navegador" Click="OpenServer_Click" HorizontalAlignment="Left"/><Separator Margin="4,24" Background="#426079"/><TextBlock Text="URL directa de descarga de entrenamiento .avo (HTTPS)" Foreground="#A7C1D6"/><TextBox x:Name="DownloadUrl" Margin="5,8,5,12"/><Button Content="Descargar e importar .avo" Click="DownloadAvo_Click" HorizontalAlignment="Left"/><TextBlock x:Name="ServerStatus" Foreground="#8EB3CE" Margin="8,18,8,0" TextWrapping="Wrap" Text="Estado: servidor no configurado para sincronización automática"/></StackPanel></ScrollViewer></TabItem>
-    <TabItem Header="Motor AVO"><ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="20">
-      <TextBlock Text="AVO Equine Intelligence Engine · análisis avanzado" Style="{StaticResource SectionTitle}"/>
-      <TextBlock Text="Mismo motor C++ que la app Android. GNSS del chaleco del jinete e IMU de la cincha: se asocian en el tiempo, no se mezclan sus aceleraciones. Resultados exploratorios, sin diagnóstico veterinario." TextWrapping="Wrap" Foreground="#9CB7D1" Margin="8,0,8,12"/>
-      <WrapPanel><Button Content="ANALIZAR" Click="EngineAnalyse_Click"/><Button Content="REPROCESAR" Click="EngineReprocess_Click"/><Button Content="CANCELAR" Click="EngineCancel_Click"/><Button Content="EXPORTAR RESULTADO (JSON)" Click="EngineExportJson_Click"/><Button Content="EXPORTAR TRAMOS POR AIRE (CSV)" Click="EngineExportCsv_Click"/></WrapPanel>
-      <TextBlock x:Name="EngineStatus" Text="Selecciona una sesión" Foreground="#8CB9D8" Margin="8,8" TextWrapping="Wrap"/>
-      <Border Style="{StaticResource StatCard}" Height="150"><local:EngineChart x:Name="EngSpeedChart" Title="Velocidad (motor)" Unit="km/h"/></Border>
-      <Border Style="{StaticResource StatCard}" Height="150"><local:EngineChart x:Name="EngAccelChart" Title="Aceleración longitudinal de la trayectoria" Unit="m/s²"/></Border>
-      <Border Style="{StaticResource StatCard}" Height="150"><local:EngineChart x:Name="EngCadenceChart" Title="Cadencia de la cincha" Unit="/min" EmptyText="SIN DATOS DE CINCHA"/></Border>
-      <Border Style="{StaticResource StatCard}" Height="64"><local:EngineChart x:Name="EngGaitChart" Title="Aire detectado"/></Border>
-      <TextBlock x:Name="EngInstant" Text="Haz clic en una gráfica para ver los valores del instante" Foreground="#C9DCEB" Margin="8" TextWrapping="Wrap"/>
-      <TextBlock Text="Selección de intervalo (segundos GNSS)" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <StackPanel Orientation="Horizontal" Margin="8,0"><TextBlock Text="Desde" VerticalAlignment="Center" Foreground="#9CB7D1"/><TextBox x:Name="EngFrom" Width="80" Margin="6,0"/><TextBlock Text="Hasta" VerticalAlignment="Center" Foreground="#9CB7D1"/><TextBox x:Name="EngTo" Width="80" Margin="6,0"/><Button Content="Inicio = punto" Click="EngFromPoint_Click"/><Button Content="Fin = punto" Click="EngToPoint_Click"/><Button Content="ANALIZAR INTERVALO" Click="EngInterval_Click"/></StackPanel>
-      <DataGrid x:Name="EngIntervalTable" Height="190" Margin="5,8" IsReadOnly="True"/>
-      <TextBlock Text="Rendimiento por aire" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <DataGrid x:Name="EngGaitTable" Height="150" Margin="5,4" IsReadOnly="True"/>
-      <DataGrid x:Name="EngSegmentsTable" Height="220" Margin="5,4" IsReadOnly="True" SelectionChanged="EngRow_SelectionChanged"/>
-      <TextBlock Text="Curvas" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <DataGrid x:Name="EngCurvesTable" Height="160" Margin="5,4" IsReadOnly="True" SelectionChanged="EngRow_SelectionChanged"/>
-      <TextBlock Text="Eventos" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <DataGrid x:Name="EngEventsTable" Height="220" Margin="5,4" IsReadOnly="True" SelectionChanged="EngRow_SelectionChanged"/>
-      <TextBlock Text="Calidad de los datos y fiabilidad" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <DataGrid x:Name="EngQualityTable" Height="190" Margin="5,4" IsReadOnly="True"/>
-      <TextBlock x:Name="EngFusion" Foreground="#9CB7D1" Margin="8" TextWrapping="Wrap"/>
-      <TextBlock x:Name="EngSymmetry" Foreground="#9CB7D1" Margin="8" TextWrapping="Wrap"/>
-      <TextBlock Text="Comparación avanzada de sesiones" Style="{StaticResource SectionTitle}" Margin="5,16,5,6"/>
-      <StackPanel Orientation="Horizontal" Margin="8,0"><TextBlock Text="Comparar con:" VerticalAlignment="Center" Foreground="#9CB7D1"/><ComboBox x:Name="EngComparePicker" DisplayMemberPath="Summary" MinWidth="320" Margin="8,0"/><CheckBox x:Name="EngSameRoute" Content="Mismo recorrido" IsChecked="True" Foreground="#C9DCEB" VerticalAlignment="Center" Margin="8,0"/><Button Content="COMPARAR" Click="EngCompare_Click"/></StackPanel>
-      <TextBlock x:Name="EngCompareVerdict" Foreground="#E5C797" Margin="8" TextWrapping="Wrap"/>
-      <DataGrid x:Name="EngCompareTable" Height="260" Margin="5,4" IsReadOnly="True"/>
-    </StackPanel></ScrollViewer></TabItem>
-   </TabControl>
-  </Grid>
-  <Border Grid.Row="2" Background="#071522" BorderBrush="#1E496A" BorderThickness="0,1,0,0"><Grid Margin="14,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock x:Name="StatusLine" Text="AVO Windows listo · abre un entrenamiento" VerticalAlignment="Center" Foreground="#8CB9D8"/><TextBlock Grid.Column="1" Text="AVO PERFORMANCE HORSE  ·  TELEMETRÍA ORIGINAL INTACTA" VerticalAlignment="Center" Foreground="#587E99" FontSize="11"/></Grid></Border>
- </Grid>
+<Window x:Class="Avo.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:Avo.Windows.Views"
+        xmlns:vm="clr-namespace:Avo.Windows.ViewModels"
+        Title="AVO Performance Horse — Windows Advanced Analysis V2 PRO"
+        Width="1600" Height="960" MinWidth="1280" MinHeight="720" WindowStartupLocation="CenterScreen"
+        Icon="Assets/AVO.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============================== header -->
+        <Border Background="{StaticResource AvoHeaderBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,0,16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="Assets/avo_logo_128.png" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <TextBlock Text="AVO" FontFamily="{StaticResource AvoDisplayFont}" FontSize="32" FontWeight="Light" Foreground="{StaticResource AvoSilver}" Margin="10,0,0,2" VerticalAlignment="Center"/>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="PERFORMANCE HORSE" FontWeight="SemiBold" FontSize="12.5" Foreground="{StaticResource AvoText}"/>
+                        <TextBlock FontSize="11" Foreground="{StaticResource AvoTextDim}">
+                            <Run Text="Windows · Advanced Analysis"/><Run Text=" V2 PRO" Foreground="{StaticResource AvoRed}" FontWeight="SemiBold"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <Border Width="1" Background="{StaticResource AvoLine}" Margin="22,14"/>
+                </StackPanel>
+                <!-- session sub-navigation (analysis area) -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,0,0,0">
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Análisis" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Analysis}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Mapa" Tag="{StaticResource IconMap}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Map}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Gráficas" Tag="{StaticResource IconCharts}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Charts}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Biomecánica" Tag="{StaticResource IconBiomech}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Biomech}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Tramos" Tag="{StaticResource IconSegments}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Segments}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Comparar" Tag="{StaticResource IconCompare}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Compare}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Mareas" Tag="{StaticResource IconTides}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Tides}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Informes" Tag="{StaticResource IconReports}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Reports}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ComboBox Width="300" ItemsSource="{Binding SessionsView}" SelectedItem="{Binding Selected}" ToolTip="Entrenamiento activo">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding DateTimeText}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Horse, StringFormat=' · {0}'}" Foreground="{StaticResource AvoTextDim}"/>
+                                    <TextBlock Text="{Binding DistanceText, StringFormat=' · {0}'}" Foreground="{StaticResource AvoTextDim}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Style="{StaticResource AvoPrimaryButton}" Margin="10,0,0,0" Command="{Binding ImportCommand}" ToolTip="Abrir entrenamiento .avo / .avr">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                            <TextBlock Text="Abrir" Margin="7,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ============================== body -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="196"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{StaticResource AvoSurface}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,1,0">
+                <DockPanel Margin="0,12,0,10">
+                    <StackPanel DockPanel.Dock="Bottom" Margin="16,0">
+                        <TextBlock Text="{Binding EngineInfo}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                        <TextBlock Text="Formato AVO-TRAINING-1 · AVORAW1" Style="{StaticResource AvoCaption}" Margin="0,3,0,0"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Inicio" Tag="{StaticResource IconHome}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Home}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Análisis" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Analysis}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Mapa" Tag="{StaticResource IconMap}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Map}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Gráficas" Tag="{StaticResource IconCharts}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Charts}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Tramos" Tag="{StaticResource IconSegments}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Segments}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Biomecánica" Tag="{StaticResource IconBiomech}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Biomech}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Comparar" Tag="{StaticResource IconCompare}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Compare}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Mareas y entorno" Tag="{StaticResource IconTides}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Tides}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Informes" Tag="{StaticResource IconReports}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Reports}"/>
+                        <Separator Margin="18,8"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Servidor AVO" Tag="{StaticResource IconServer}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Server}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Motor AVO" Tag="{StaticResource IconEngine}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Engine}"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <Grid Grid.Column="1">
+                <v:HomeView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Home}"/>
+                <v:AnalysisView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Analysis}"/>
+                <v:MapView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Map}"/>
+                <v:ChartsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Charts}"/>
+                <v:SegmentsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Segments}"/>
+                <v:BiomechView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Biomech}"/>
+                <v:CompareView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Compare}"/>
+                <v:TidesView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Tides}"/>
+                <v:ReportsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Reports}"/>
+                <v:ServerView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Server}"/>
+                <v:EngineView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Engine}"/>
+            </Grid>
+        </Grid>
+
+        <!-- ============================== status bar -->
+        <Border Grid.Row="2" Background="{StaticResource AvoSurface}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,1,0,0">
+            <Grid Margin="14,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar Width="80" Height="4" IsIndeterminate="True" Margin="0,0,10,0" Visibility="{Binding Busy, Converter={StaticResource BoolVis}}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Status}" Style="{StaticResource AvoCaption}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Column="2" Style="{StaticResource AvoCaption}" VerticalAlignment="Center">
+                    <Run Text="TELEMETRÍA ORIGINAL INTACTA · GNSS = CHALECO DEL JINETE · IMU = CINCHA · Europe/Madrid · v"/><Run Text="{Binding Source={x:Static vm:MainViewModel.Version}, Mode=OneWay}"/>
+                </TextBlock>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

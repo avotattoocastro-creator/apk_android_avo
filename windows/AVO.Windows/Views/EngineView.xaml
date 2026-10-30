@@ -1,0 +1,76 @@
+<UserControl x:Class="Avo.Windows.Views.EngineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Detailed results of the AVO Equine Intelligence Engine (same C++ engine as Android), kept from Windows V1 «Motor AVO» -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Border Grid.Row="1" Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="6" Padding="14,10" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="{Binding EngineInfo}" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Selected.Engine.FusionSummary, FallbackValue=''}" Style="{StaticResource AvoCaption}" Margin="0,4,0,0"/>
+                <ItemsControl ItemsSource="{Binding Selected.Engine.Warnings, FallbackValue={x:Null}}">
+                    <ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding}" Foreground="{StaticResource AvoWarn}" FontSize="12"/></DataTemplate></ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <c:AvoCard Header="Segmentos de rendimiento (clasificador de aires)" Margin="0,0,6,6">
+                <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.Segments, FallbackValue={x:Null}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="30"/>
+                        <DataGridTextColumn Header="Aire" Binding="{Binding Aire}" Width="90"/>
+                        <DataGridTextColumn Header="Desde" Binding="{Binding Desde}" Width="60"/>
+                        <DataGridTextColumn Header="Hasta" Binding="{Binding Hasta}" Width="60"/>
+                        <DataGridTextColumn Header="Distancia" Binding="{Binding Distancia}" Width="75"/>
+                        <DataGridTextColumn Header="V. media" Binding="{Binding VelocidadMedia}" Width="80"/>
+                        <DataGridTextColumn Header="Cadencia" Binding="{Binding Cadencia}" Width="80"/>
+                        <DataGridTextColumn Header="Tranco" Binding="{Binding Tranco}" Width="65"/>
+                        <DataGridTextColumn Header="GNSS" Binding="{Binding CalidadGnss}" Width="80"/>
+                        <DataGridTextColumn Header="IMU" Binding="{Binding CalidadImu}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </c:AvoCard>
+            <c:AvoCard Grid.Column="1" Header="Calidad por dominio" Margin="6,0,0,6">
+                <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.Quality, FallbackValue={x:Null}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Dominio" Binding="{Binding Dominio}" Width="110"/>
+                        <DataGridTextColumn Header="Nivel" Binding="{Binding Nivel}" Width="100"/>
+                        <DataGridTextColumn Header="Motivos" Binding="{Binding Motivos}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </c:AvoCard>
+            <c:AvoCard Grid.Row="1" Header="Curvas detectadas" Margin="0,6,6,0">
+                <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.Curves, FallbackValue={x:Null}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="30"/>
+                        <DataGridTextColumn Header="Sentido" Binding="{Binding Direccion}" Width="70"/>
+                        <DataGridTextColumn Header="Inicio" Binding="{Binding Inicio}" Width="60"/>
+                        <DataGridTextColumn Header="Giro" Binding="{Binding Giro}" Width="60"/>
+                        <DataGridTextColumn Header="Radio" Binding="{Binding Radio}" Width="110"/>
+                        <DataGridTextColumn Header="Lateral estimada" Binding="{Binding LateralEstimada}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </c:AvoCard>
+            <c:AvoCard Grid.Row="1" Grid.Column="1" Header="Eventos trazables" Margin="6,6,0,0">
+                <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Selected.Engine.Events, FallbackValue={x:Null}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="60"/>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="130"/>
+                        <DataGridTextColumn Header="Inicio" Binding="{Binding Inicio}" Width="60"/>
+                        <DataGridTextColumn Header="Fin" Binding="{Binding Fin}" Width="60"/>
+                        <DataGridTextColumn Header="Motivo" Binding="{Binding Motivo}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </c:AvoCard>
+        </Grid>
+    </Grid>
+</UserControl>

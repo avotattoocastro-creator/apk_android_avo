@@ -2,11 +2,29 @@ using System.Globalization;
 
 namespace Avo.Windows.Core;
 
+/// <summary>One usable GNSS epoch of the rider's vest (ZED-F9P NAV-PVT relayed as GNSS_SAMPLE). Position is the rider's
+/// antenna, never an anatomical point of the horse. AltitudeM keeps the historical meaning (ellipsoid height);
+/// MslAltitudeM is the height above mean sea level reported by the receiver.</summary>
 public sealed record TrackPoint(double Latitude, double Longitude, double SpeedMs, double AccuracyM,
-    int CarrierSolution, long GpsWeekMs, double AltitudeM = 0, double? ElapsedSeconds = null)
+    int CarrierSolution, long GpsWeekMs, double AltitudeM = 0, double? ElapsedSeconds = null,
+    int FixType = 0, int NumSv = 0, bool DiffSoln = false, double SpeedAccMs = double.NaN,
+    double VelNorthMs = double.NaN, double VelEastMs = double.NaN, double HeadingDeg = double.NaN,
+    double MslAltitudeM = double.NaN, DateTimeOffset? UtcTime = null, ulong ChestUs = 0)
 {
     public double SpeedKmh => SpeedMs * 3.6;
     public string RtkName => CarrierSolution switch { 2 => "FIX", 1 => "FLOAT", _ => "GNSS" };
+    public GnssSolution Solution => GnssQuality.Classify(true, FixType == 0 ? 3 : FixType, DiffSoln, CarrierSolution, false);
+}
+
+/// <summary>Every GNSS_SAMPLE received (usable or not): basis for quality timelines and signal-loss intervals.</summary>
+public readonly record struct GnssEpoch(long GpsWeekMs, GnssSolution Solution, int NumSv, double HAccM, ulong ChestUs);
+
+/// <summary>Raw 9-axis sample of one girth IMU (IMU_SAMPLE fmt 0). Values are sensor LSB, NOT physical units.</summary>
+public readonly record struct ImuRawSample(byte ImuId, double TimeS, short Ax, short Ay, short Az, short Gx, short Gy, short Gz, short Mx, short My, short Mz);
+
+public sealed record MarkerEvent(ulong ChestUs, int Source, uint Count)
+{
+    public string SourceName => Source switch { 0 => "Botón", 1 => "App", 2 => "Desarrollo", 3 => "Alimentación", 4 => "Sistema", _ => "Desconocido" };
 }
 
 public sealed record SegmentSummary(string Name, int Index, long ValidBytes, int Blocks, int Records,
@@ -34,7 +52,21 @@ public sealed class TrainingSession
     public int RtkFloatCount { get; set; }
     public int GnssOtherCount { get; set; }
     public List<TrackPoint> Track { get; } = [];
+    public List<GnssEpoch> GnssEpochs { get; } = [];
+    /// <summary>Decoded girth IMU samples; TimeS is chest time in seconds (aligned to GNSS later by the timeline).</summary>
+    public List<ImuRawSample> Imu { get; } = [];
+    public int ImuPeriodUs { get; set; }
+    public int ImuOpaqueBatches { get; set; }
+    public List<MarkerEvent> Markers { get; } = [];
     public List<SegmentSummary> Segments { get; } = [];
+    /// <summary>SHA-256 of the imported file as received (duplicate detection). Not the watch canonical hash.</summary>
+    public string? FileSha256 { get; set; }
+    public string? SourcePath { get; set; }
+    /// <summary>Canonical hash declared by the watch in manifest.json (sha256 over the segments); informative only.</summary>
+    public string? DeclaredCanonicalSha256 { get; set; }
+    /// <summary>Synthetic/demonstration data: never to be presented as a measured training.</summary>
+    public bool IsSynthetic => SessionId.StartsWith("SINTETICA", StringComparison.OrdinalIgnoreCase) || SessionId.StartsWith("DEMO", StringComparison.OrdinalIgnoreCase);
+    public string Discipline { get; set; } = "";
     /// <summary>RAW segment files on disk for the analysis engine (the .avr itself, or verified copies extracted from a .avo package).</summary>
     public List<string> RawSegmentPaths { get; } = [];
     public string? MarineSource { get; set; }

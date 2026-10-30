@@ -1,0 +1,173 @@
+<UserControl x:Class="Avo.Windows.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20,16,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- hero + main actions (concept 02, screen 1) -->
+            <Grid Height="330">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="340"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                    <Border.Background>
+                        <ImageBrush ImageSource="../Assets/avo_brand_hero.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Center"/>
+                    </Border.Background>
+                    <Grid>
+                        <Border>
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#F2030406" Offset="0"/>
+                                    <GradientStop Color="#B3030406" Offset="0.45"/>
+                                    <GradientStop Color="#00030406" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center" Margin="36,0,0,0" MaxWidth="520" HorizontalAlignment="Left">
+                            <TextBlock Text="AVO" FontFamily="{StaticResource AvoDisplayFont}" FontSize="64" FontWeight="Light" Foreground="{StaticResource AvoText}"/>
+                            <TextBlock Text="PERFORMANCE HORSE" FontSize="20" FontWeight="SemiBold" Foreground="{StaticResource AvoSilver}" Margin="2,-6,0,0"/>
+                            <Border Height="3" Width="120" Background="{StaticResource AvoRed}" HorizontalAlignment="Left" Margin="2,14,0,14" CornerRadius="1.5"/>
+                            <TextBlock Text="Bienvenido a AVO Performance Horse" Style="{StaticResource AvoTitle}"/>
+                            <TextBlock Text="Análisis avanzado del rendimiento ecuestre: GNSS/RTK del chaleco, IMU de la cincha, tramos, comparativas, mareas e informes." Style="{StaticResource AvoDim}" FontSize="13" Margin="0,6,0,0"/>
+                            <TextBlock Text="CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO" Foreground="{StaticResource AvoTextDim}" FontSize="11" FontWeight="SemiBold" Margin="0,22,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1" Margin="14,0,0,0" Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="8">
+                    <StackPanel Margin="8">
+                        <StackPanel.Resources>
+                            <Style x:Key="Action" TargetType="Button" BasedOn="{StaticResource AvoGhostButton}">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="12,10"/>
+                                <Setter Property="Margin" Value="0,1"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Style="{StaticResource Action}" Command="{Binding ImportCommand}">
+                            <DockPanel><Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoRedSoft}"><Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}"/></Border>
+                                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center"><TextBlock Text="Abrir entrenamiento" FontWeight="SemiBold"/><TextBlock Text="Archivos .avo (Android) / .avr (RAW)" Style="{StaticResource AvoCaption}"/></StackPanel></DockPanel>
+                        </Button>
+                        <Button Style="{StaticResource Action}" Command="{Binding ImportFolderCommand}">
+                            <DockPanel><Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoRedSoft}"><Path Data="{StaticResource IconHistory}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}"/></Border>
+                                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center"><TextBlock Text="Importar carpeta" FontWeight="SemiBold"/><TextBlock Text="Varias sesiones a la vez, con detección de duplicados" Style="{StaticResource AvoCaption}"/></StackPanel></DockPanel>
+                        </Button>
+                        <Button Style="{StaticResource Action}" Command="{Binding NavigateCommand}" CommandParameter="Server">
+                            <DockPanel><Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoRedSoft}"><Path Data="{StaticResource IconServer}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}"/></Border>
+                                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center"><TextBlock Text="Servidor AVO" FontWeight="SemiBold"/><TextBlock Text="Panel web y descarga HTTPS de .avo" Style="{StaticResource AvoCaption}"/></StackPanel></DockPanel>
+                        </Button>
+                        <Button Style="{StaticResource Action}" Command="{Binding NavigateCommand}" CommandParameter="Compare">
+                            <DockPanel><Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoRedSoft}"><Path Data="{StaticResource IconCompare}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}"/></Border>
+                                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center"><TextBlock Text="Comparar entrenamientos" FontWeight="SemiBold"/><TextBlock Text="Recorridos y curvas superpuestas" Style="{StaticResource AvoCaption}"/></StackPanel></DockPanel>
+                        </Button>
+                        <Button Style="{StaticResource Action}" Command="{Binding NavigateCommand}" CommandParameter="Reports">
+                            <DockPanel><Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoRedSoft}"><Path Data="{StaticResource IconReports}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}"/></Border>
+                                <StackPanel Margin="14,0,0,0" VerticalAlignment="Center"><TextBlock Text="Informes" FontWeight="SemiBold"/><TextBlock Text="PDF, HTML, CSV, GPX y JSON" Style="{StaticResource AvoCaption}"/></StackPanel></DockPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- headline metrics -->
+            <UniformGrid Grid.Row="1" Columns="5" Margin="0,14,0,0">
+                <c:AvoMetricTile Label="ENTRENAMIENTOS" Value="{Binding SessionCount}" Caption="Importados y verificados" Margin="0,0,10,0"/>
+                <c:AvoMetricTile Label="DISTANCIA MEDIDA" Value="{Binding TotalDistanceText}" Caption="Solo sesiones reales" Margin="0,0,10,0"/>
+                <c:AvoMetricTile Label="DISTANCIA DEMOSTRACIÓN" Value="{Binding DemoDistanceText}" Caption="Datos sintéticos, no medidos" ValueBrush="{StaticResource AvoWarn}" Margin="0,0,10,0"/>
+                <c:AvoMetricTile Label="VELOCIDAD MÁXIMA" Value="{Binding BestSpeedText}" Caption="Filtrada, todas las sesiones" Margin="0,0,10,0"/>
+                <c:AvoMetricTile Label="SESIÓN ACTIVA" Value="{Binding Selected.DateText, FallbackValue='—'}" ValueSize="20" Caption="{Binding Selected.Horse, FallbackValue='Ninguna'}"/>
+            </UniformGrid>
+
+            <!-- trainings / horses / status (concept 01, screen 1) -->
+            <Grid Grid.Row="2" Margin="0,14,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="360"/>
+                </Grid.ColumnDefinitions>
+                <c:AvoCard Header="Últimos entrenamientos" MinHeight="360">
+                    <c:AvoCard.HeaderTools>
+                        <Grid Width="260">
+                            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Padding="30,5,8,5"/>
+                            <Path Data="{StaticResource IconSearch}" Stroke="{StaticResource AvoTextDim}" Style="{StaticResource AvoIcon}" Width="14" Height="14" HorizontalAlignment="Left" Margin="10,0,0,0" IsHitTestVisible="False"/>
+                        </Grid>
+                    </c:AvoCard.HeaderTools>
+                    <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding SessionsView}" SelectedItem="{Binding Selected}" CanUserSortColumns="True" MinHeight="300">
+                        <DataGrid.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding NavigateCommand}" CommandParameter="Analysis"/>
+                        </DataGrid.InputBindings>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding DateTimeText}" SortMemberPath="Start" Width="130"/>
+                            <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*"/>
+                            <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*"/>
+                            <DataGridTextColumn Header="Lugar / modalidad" Binding="{Binding Discipline}" Width="100"/>
+                            <DataGridTextColumn Header="Distancia" Binding="{Binding DistanceText}" SortMemberPath="DistanceKmValue" Width="90"/>
+                            <DataGridTextColumn Header="Duración" Binding="{Binding DurationText}" Width="80"/>
+                            <DataGridTextColumn Header="V. máx" Binding="{Binding MaxSpeedText}" SortMemberPath="MaxSpeedKmh" Width="90"/>
+                            <DataGridTextColumn Header="RTK FIX" Binding="{Binding FixText}" SortMemberPath="FixPercent" Width="70"/>
+                            <DataGridTextColumn Header="Cincha" Binding="{Binding GirthText}" Width="150"/>
+                            <DataGridTextColumn Header="Origen" Binding="{Binding Kind}" Width="110"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </c:AvoCard>
+                <StackPanel Grid.Column="1" Margin="14,0,0,0">
+                    <c:AvoCard Header="Caballos">
+                        <ItemsControl ItemsSource="{Binding Horses}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <Border Width="34" Height="34" CornerRadius="17" Background="{StaticResource AvoSurface2}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                                            <Path Data="{StaticResource IconHorse}" Stroke="{StaticResource AvoSilver}" Style="{StaticResource AvoIcon}" Width="16" Height="16"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                            <TextBlock Style="{StaticResource AvoCaption}"><Run Text="{Binding Sessions, Mode=OneWay}"/><Run Text=" entrenamientos · último "/><Run Text="{Binding LastDate, Mode=OneWay}"/></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding BestSpeed}" Style="{StaticResource AvoValue}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Calidad y disponibilidad de sensores" Margin="0,12,0,0">
+                        <ItemsControl ItemsSource="{Binding SensorStatus}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Estado de importaciones" Margin="0,12,0,0">
+                        <ItemsControl ItemsSource="{Binding ImportLog}" MaxHeight="150">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <Ellipse x:Name="Dot" Width="8" Height="8" Fill="{StaticResource AvoOk}" VerticalAlignment="Top" Margin="0,5,8,0"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding File}" FontSize="12" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding Result}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Ok}" Value="False"><Setter TargetName="Dot" Property="Fill" Value="{StaticResource AvoBad}"/></DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Estado del sistema" Margin="0,12,0,0">
+                        <StackPanel>
+                            <c:AvoStatusIndicator Text="Motor AVO Equine Intelligence" Detail="{Binding EngineShort}" State="{Binding EngineIndicator}" ToolTip="{Binding EngineInfo}"/>
+                            <c:AvoStatusIndicator Text="Importación segura (SHA-256 / CRC)" Detail="Activa" State="Ok"/>
+                            <c:AvoStatusIndicator Text="Servidor AVO" Detail="Contrato pendiente" State="Warning"/>
+                            <c:AvoStatusIndicator Text="Mareas IHM / Open-Meteo" Detail="Bajo demanda" State="Info"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

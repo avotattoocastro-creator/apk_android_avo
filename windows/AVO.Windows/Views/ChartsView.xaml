@@ -1,0 +1,119 @@
+<UserControl x:Class="Avo.Windows.Views.ChartsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Synchronised scientific charts (concept 01 screen 3 + concept 02 screen 3). All charts share the x-viewport, the cursor
+         and the selected range with the map. Click: cursor · drag: pan · Shift+drag: select · wheel: zoom · double click: all. -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.8*"/>
+                </Grid.RowDefinitions>
+                <c:AvoChartPanel Header="Velocidad (km/h)" Readout="{Binding CursorSpeed, StringFormat='{}{0} km/h'}" Margin="0,0,0,8" Visibility="{Binding ChartSpeed, Converter={StaticResource BoolVis}}">
+                    <c:AvoChartPanel.Legend>
+                        <StackPanel Orientation="Horizontal">
+                            <c:AvoLegendItem Text="Filtrada" Swatch="{StaticResource AvoRed}"/>
+                            <c:AvoLegendItem Text="Reportada" Swatch="{StaticResource AvoBlue}"/>
+                            <c:AvoLegendItem Text="Derivada" Swatch="{StaticResource AvoSilver}"/>
+                            <c:AvoLegendItem Text="Calidad RTK (banda)" Swatch="{StaticResource AvoOk}"/>
+                        </StackPanel>
+                    </c:AvoChartPanel.Legend>
+                    <c:SignalChart Series="{Binding SpeedSeries}" Bands="{Binding QualityBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}"
+                                   CursorX="{Binding CursorTime}" RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+                </c:AvoChartPanel>
+                <c:AvoChartPanel Grid.Row="1" Header="Aceleración (m/s²)" Readout="{Binding CursorAccel, StringFormat='{}{0} m/s²'}" Margin="0,0,0,8" Visibility="{Binding ChartAccel, Converter={StaticResource BoolVis}}">
+                    <c:AvoChartPanel.Legend>
+                        <StackPanel Orientation="Horizontal">
+                            <c:AvoLegendItem Text="Longitudinal" Swatch="{StaticResource AvoWarn}"/>
+                            <c:AvoLegendItem Text="Lateral" Swatch="{StaticResource AvoCyan}"/>
+                        </StackPanel>
+                    </c:AvoChartPanel.Legend>
+                    <c:SignalChart Series="{Binding AccelSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                   RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+                </c:AvoChartPanel>
+                <c:AvoChartPanel Grid.Row="2" Header="IMU cincha · aceleración vertical z (g, escala nominal)" Margin="0,0,0,8" Visibility="{Binding ChartImu, Converter={StaticResource BoolVis}}">
+                    <c:AvoChartPanel.Legend>
+                        <StackPanel Orientation="Horizontal">
+                            <c:AvoLegendItem Text="Izquierda" Swatch="{StaticResource AvoBlue}"/>
+                            <c:AvoLegendItem Text="Central" Swatch="{StaticResource AvoOk}"/>
+                            <c:AvoLegendItem Text="Derecha" Swatch="{StaticResource AvoWarn}"/>
+                        </StackPanel>
+                    </c:AvoChartPanel.Legend>
+                    <c:SignalChart Series="{Binding ImuSeries}" Bands="{Binding GaitBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                   RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin datos de cincha en esta sesión"/>
+                </c:AvoChartPanel>
+                <c:AvoChartPanel Grid.Row="3" Header="Cadencia por sensor (ciclos/min, motor AVO)" Readout="{Binding CursorCadence}" Margin="0,0,0,8" Visibility="{Binding ChartCadence, Converter={StaticResource BoolVis}}">
+                    <c:SignalChart Series="{Binding CadenceSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                   RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin cadencia: requiere datos de cincha y el motor AVO"/>
+                </c:AvoChartPanel>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <c:AvoChartPanel Header="Altitud GNSS (m)" Readout="{Binding CursorAltitude, StringFormat='{}{0} m'}" Margin="0,0,4,0" Visibility="{Binding ChartAltitude, Converter={StaticResource BoolVis}}">
+                        <c:SignalChart Series="{Binding AltitudeSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                       RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}"/>
+                    </c:AvoChartPanel>
+                    <c:AvoChartPanel Grid.Column="1" Header="Precisión horizontal reportada (m)" Margin="4,0,0,0" Visibility="{Binding ChartPrecision, Converter={StaticResource BoolVis}}">
+                        <c:SignalChart Series="{Binding PrecisionSeries}" Bands="{Binding QualityBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                       RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+                    </c:AvoChartPanel>
+                </Grid>
+            </Grid>
+            <ScrollViewer Grid.Column="1" Margin="12,0,0,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <c:AvoCard Header="Selección de tramo">
+                        <StackPanel>
+                            <TextBlock Text="Mayús + arrastrar en una gráfica para seleccionar un intervalo." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Visibility="{Binding HasRange, Converter={StaticResource NotBoolVis}}"/>
+                            <ItemsControl ItemsSource="{Binding RangeStats}">
+                                <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <WrapPanel Margin="0,8,0,0">
+                                <Button Content="Guardar como tramo" Style="{StaticResource AvoPrimaryButton}" Command="{Binding AddSegmentFromRangeCommand}" Padding="10,5" Margin="0,0,6,6"/>
+                                <Button Content="Quitar selección" Command="{Binding ClearRangeCommand}" Padding="10,5" Margin="0,0,6,6"/>
+                                <Button Content="Exportar CSV" Command="{Binding ExportCsvCommand}" Padding="10,5" Margin="0,0,6,6"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Mostrar datos" Margin="0,10,0,0">
+                        <StackPanel>
+                            <CheckBox Content="Velocidad" IsChecked="{Binding ChartSpeed}"/>
+                            <CheckBox Content="Aceleración" IsChecked="{Binding ChartAccel}"/>
+                            <CheckBox Content="IMU cincha" IsChecked="{Binding ChartImu}"/>
+                            <CheckBox Content="Cadencia (motor)" IsChecked="{Binding ChartCadence}"/>
+                            <CheckBox Content="Altitud" IsChecked="{Binding ChartAltitude}"/>
+                            <CheckBox Content="Precisión GNSS" IsChecked="{Binding ChartPrecision}"/>
+                            <Separator/>
+                            <TextBlock Text="VELOCIDAD" Style="{StaticResource AvoLabel}" Margin="0,0,0,4"/>
+                            <CheckBox Content="Filtrada (Kalman + RTS)" IsChecked="{Binding ShowSpeedFiltered}"/>
+                            <CheckBox Content="Reportada por el receptor" IsChecked="{Binding ShowSpeedReported}"/>
+                            <CheckBox Content="Derivada de posiciones" IsChecked="{Binding ShowSpeedDerived}"/>
+                            <CheckBox Content="Aceleración lateral" IsChecked="{Binding ShowLateral}"/>
+                            <Button Content="Ver todo (restablecer zoom)" Command="{Binding ResetZoomCommand}" Margin="0,8,0,0" HorizontalAlignment="Left" Padding="10,5"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Filtrado y unidades" Margin="0,10,0,0">
+                        <StackPanel>
+                            <TextBlock Text="{Binding FilterDescription}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                            <TextBlock Text="La señal original se conserva: la velocidad reportada y la derivada de posiciones se pueden mostrar sin filtrar. Las aceleraciones solo se muestran con σ ≤ 0,8 m/s², solución ≥ DGNSS y sin cortes." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            <TextBlock Text="{Binding ImuScaleNote}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,103 @@
+<UserControl x:Class="Avo.Windows.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Reports and export (concept 02 screen 8 / concept 01 screen 7): printable preview, real PDF/HTML/CSV/GPX/JSON -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="430"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- preview: white page like the printed report -->
+            <Border Background="White" CornerRadius="4" Padding="22,18" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="AVO" FontFamily="{StaticResource AvoDisplayFont}" FontSize="30" FontWeight="Light" Foreground="#101014"/>
+                            <StackPanel Margin="10,4,0,0">
+                                <TextBlock Text="PERFORMANCE HORSE" FontWeight="SemiBold" FontSize="11" Foreground="#101014"/>
+                                <TextBlock Text="Training analysis" FontSize="10" Foreground="#5B5C63"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Border Height="3" Background="{StaticResource AvoRed}" Margin="0,8,0,10"/>
+                        <TextBlock Text="{Binding ReportPreviewTitle}" FontSize="17" FontWeight="SemiBold" Foreground="#101014"/>
+                        <Border Background="#FFF1C9" Padding="8,4" Margin="0,6,0,0" Visibility="{Binding Selected.IsSynthetic, Converter={StaticResource BoolVis}, FallbackValue=Collapsed}">
+                            <TextBlock Text="DEMOSTRACIÓN — DATOS SINTÉTICOS" Foreground="#7A5200" FontWeight="SemiBold" FontSize="11"/>
+                        </Border>
+                    </StackPanel>
+                    <ItemsControl DockPanel.Dock="Bottom" ItemsSource="{Binding ReportPreviewRows}" Margin="0,10,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Key, StringFormat='{}{0}:'}" FontWeight="SemiBold" Foreground="#101014" FontSize="12"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Value}" Foreground="#101014" FontSize="12"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Border Margin="0,12,0,0" CornerRadius="3" ClipToBounds="True" MinHeight="180">
+                        <c:MapControl Tracks="{Binding Tracks}" Provider="{Binding MapProvider}" TileCacheDir="{Binding TileCacheDir}" ColorMode="Speed" FitPadding="24"/>
+                    </Border>
+                </DockPanel>
+            </Border>
+            <Grid Grid.Column="1" Margin="14,0,0,0">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <c:AvoCard Header="Exportar">
+                        <StackPanel>
+                            <UniformGrid Columns="2">
+                                <Button Style="{StaticResource AvoPrimaryButton}" Command="{Binding ExportPdfCommand}" Margin="0,0,4,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconReports}" Stroke="White" Style="{StaticResource AvoIcon}"/><TextBlock Text="Informe PDF" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding ExportHtmlCommand}" Margin="4,0,0,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconReports}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}"/><TextBlock Text="HTML imprimible" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding ExportCsvCommand}" Margin="0,0,4,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconCharts}" Stroke="{StaticResource AvoOk}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Datos CSV" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding ExportGpxCommand}" Margin="4,0,0,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconMap}" Stroke="{StaticResource AvoBlue}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Recorrido GPX" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding ExportJsonCommand}" Margin="0,0,4,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconExport}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}"/><TextBlock Text="JSON versionado" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding OpenLastExportCommand}" Margin="4,0,0,8" Padding="10,12">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoSilver}" Style="{StaticResource AvoIcon}"/><TextBlock Text="Abrir último" Margin="8,0,0,0" VerticalAlignment="Center"/></StackPanel>
+                                </Button>
+                            </UniformGrid>
+                            <TextBlock Text="{Binding LastExport, StringFormat='Último: {0}'}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                            <TextBlock Text="CSV y GPX exportan el intervalo seleccionado si hay uno; si no, la sesión completa. El PDF se genera internamente (sin dependencias externas)." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Notas y observaciones" Margin="0,12,0,0">
+                        <TextBox Text="{Binding SessionNotes, UpdateSourceTrigger=LostFocus}" Height="140" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                    </c:AvoCard>
+                </StackPanel>
+                <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Opciones del informe" VerticalAlignment="Top">
+                    <StackPanel>
+                        <CheckBox Content="Datos generales" IsChecked="{Binding ReportGeneral}"/>
+                        <CheckBox Content="Caballo y jinete" IsChecked="{Binding ReportHorseRider}"/>
+                        <CheckBox Content="Fecha y duración" IsChecked="{Binding ReportDate}"/>
+                        <CheckBox Content="Mapa del recorrido" IsChecked="{Binding ReportMap}"/>
+                        <CheckBox Content="Estadísticas GNSS / RTK" IsChecked="{Binding ReportGnss}"/>
+                        <CheckBox Content="Velocidades y aceleraciones" IsChecked="{Binding ReportSpeed}"/>
+                        <CheckBox Content="Gráficas" IsChecked="{Binding ReportCharts}"/>
+                        <CheckBox Content="Tramos" IsChecked="{Binding ReportSegments}"/>
+                        <CheckBox Content="Biomecánica" IsChecked="{Binding ReportBiomech}"/>
+                        <CheckBox Content="Comparativas (sesiones marcadas)" IsChecked="{Binding ReportCompare}"/>
+                        <CheckBox Content="Mareas y entorno" IsChecked="{Binding ReportTides}"/>
+                        <CheckBox Content="Notas y observaciones" IsChecked="{Binding ReportNotes}"/>
+                    </StackPanel>
+                </c:AvoCard>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
