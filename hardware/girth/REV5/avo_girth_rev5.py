@@ -90,6 +90,9 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 #    (la cara queda 0,6 por dentro: el reborde aguanta el empuje de los pines y hace de molde para sellar con epoxi);
 #  - MACHO (pines de muelle, con orejas) en la placa del soporte, con la cara a ras y atornillado por debajo.
 #  Medidas ESTIMADAS (E) a partir de la foto del vendedor escalando el paso de 2,54: hay que confirmarlas con calibre.
+# Contactos (vistos desde abajo, 1 = −X): 1 = VBUS 5 V (solo base de carga) · 2 = GND (centro) · 3 = DET (pull-up).
+#   Soporte: puente 2–3 → DET a GND = "en el soporte" (sustituye al reed); 1 sin conectar.
+#   Base de carga: 5 V en 1 y GND en 2; 3 sin conectar.
 POGO = dict(y=-20.2,
             f_l=20.3, f_w=7.0, f_t=3.0, f_lip=0.6, f_tail=1.5,                  # hembra (E)
             m_l=17.5, m_w=6.0, m_h=5.0, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo y pines libres (E)
@@ -405,8 +408,7 @@ def mount():
                     POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.11, z0=zb - 0.01).translate((0, py, 0)))
     for sx in (-1, 1):
         p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.3, -1.0 - (zb - 1)))     # piloto M1,6 hasta 1 mm de la cara
-    y1 = -(_mount_geom()[9] / 2 + 1)                                    # canal del cable hasta el borde −Y, por debajo
-    p = p.cut(box(0, (py + y1) / 2, zb - 0.01, 4.0, abs(y1 - py), 1.6))
+    # sin canal de cable: en el soporte el macho solo lleva un puente GND–DET soldado por detrás (interruptor)
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
     return p
