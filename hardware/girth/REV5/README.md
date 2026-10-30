@@ -1,6 +1,39 @@
-# AVO GIRTH REV 5: cápsula estanca de 70 × 48 mm, 8 tornillos M3 y 4 + 4 imanes
+# AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
-**REV 5.8.1 (actual):**
+**REV 5.9 (actual): conector magnético pogo en lugar del reed, sin carga Qi y cápsula más pequeña.**
+- **Conector pogo de 3 pines (paso 2,54), en el centro del lado −Y:**
+  - **hembra plana en la base:** entra desde dentro y apoya en un reborde de 0,6 mm, con su cara 0,6 mm por dentro del fondo. Alrededor tiene una **copa que se rellena con epoxi**; la estanqueidad (IP67) depende de ese sellado. Donde se mete en la pared, el techo va a 45° y se imprime sin soportes;
+  - **macho con muelles en el soporte:** entra desde abajo y su cara queda a ras del fondo del cerco. Las orejas van en un rebaje y se sujetan con 2 tornillos M1,6 (agujero guía de Ø1,3). La placa del soporte pasa de 4,6 a 6,0 mm para que el macho no sobresalga por debajo;
+  - **medidas del conector ESTIMADAS** a partir de la foto del vendedor (solo son seguros el paso de 2,54, los pines de Ø0,7 × 1,5, el recorrido de 1,1 y el agujero de Ø1,5). Hay que **medirlo con calibre antes de imprimir**: hembra ≈ 20,3 × 7,0 × 3,0; macho ≈ 17,5 × 6,0 × 5,0; orejas ≈ 29 × 5 × 2 con 25 mm entre agujeros.
+- **Contactos** (1 = lado −X):
+
+  | Contacto | Cápsula (hembra) | Soporte (macho) | Base de carga (macho) |
+  |---|---|---|---|
+  | 1 | 5V del XIAO (con diodo Schottky en serie) | sin conectar | +5 V |
+  | 2 (centro) | GND | puente con el 3 | GND |
+  | 3 | entrada del antiguo reed (con 1 kΩ en serie) | puente con el 2 | sin conectar |
+
+  - En el soporte, el puente 2–3 hace de interruptor «puesto en el soporte», igual que el reed.
+  - En la base de carga entran 5 V y el cargador del XIAO carga la batería.
+  - El diodo evita que los 5 V del USB salgan al contacto de la hembra; la resistencia protege la entrada si la cápsula se pone girada en la base de carga.
+- **Sin carga Qi:** se quitan la bobina, la placa receptora y sus alojamientos. La batería va soldada a los pads BAT+ y BAT− de la cara inferior del XIAO.
+- **Cápsula de 70 × 51 × 13,8 mm** (antes 73 × 51 × 15,5):
+  - 3 mm más corta: el C6 y el BNO se mueven 2 mm hacia −X y los imanes de las esquinas se acercan a la batería, a (±27,3, ±17,9). Siguen admitiendo 3 imanes apilados y se meten desde dentro;
+  - 1,2 mm más baja por abajo: el fondo pasa de 2,6 a 1,4 mm;
+  - 0,5 mm más baja por arriba: el techo de la tapa pasa de 2,3 a 1,8 mm. El USB-C es lo más alto de dentro y le quedan ~0,7 mm.
+- **Tornillos: M3 × 8** (ya no 9–10: la punta de un M3 × 10 llegaría casi al techo de la tapa).
+- **Bandeja:**
+  - cama maciza donde iba la placa Qi;
+  - **un solo paso para los 3 hilos del pogo** (lado +X), que sigue por el canal inferior hasta la ventana del C6;
+  - **salida de los cables de la batería en +X/−Y:** suben por fuera del extremo de la batería (muesca en la cuna) y pasan bajo el borde del C6 hasta la ventana.
+- **Soporte:** 102,7 × 61,5 mm, sin los imanes del reed.
+- **Cierres:** se recalculan solos con la nueva altura; en el CAD el clic va de 1° a 6° y gira libre desde 7°.
+- **CI:** 1 sólido por pieza, sin interferencias en posición cerrada ni en el barrido del cierre. Voladizos: solo puentes cortos (rebaje de las orejas del macho, ~5 mm) y las capas de sacrificio de siempre.
+- Renders: `renders/conjunto_5_9.png`, `renders/bandeja_5_9.png`, `renders/base_5_9.png`, `renders/pogo_corte.png` y `renders/pogo_soporte_abajo.png` (los dos de pogo son de antes de bajar la altura).
+- **Pendiente (NO VERIFICADO):** medir el conector pogo real; prueba impresa; sellado de la hembra con epoxi y prueba de inmersión; firmware sin cambios (el contacto 3 usa la misma entrada que el reed).
+
+**REV 5.8.1:**
+
 - **Curvas:**
   - en el cierre: esquina superior R1,0, tirador R1,35, rincones R1,0 / R0,8 y labio R0,4;
   - en el nervio de la tapa: extremos redondeados R1,0 en planta.

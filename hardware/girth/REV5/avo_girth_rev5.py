@@ -20,18 +20,18 @@ OUT = "out"
 G = 0.20
 
 # ------------------------------------------------------------------ cápsula
-L, W, R = 73.0, 51.0, 10.0          # REV 5.5: +3/+3 para pared maciza e imanes de esquina sin voladizo
-H = 15.5
-HB = 9.0
+L, W, R = 70.0, 51.0, 10.0          # REV 5.9: 73 → 70 (sin Qi el largo lo marca la batería + los tornillos de los extremos)
+H = 13.8      # REV 5.9: 15,5 → 13,8 (−1,2 abajo sin la bobina, −0,5 en el techo de la tapa)
+HB = 7.8      # REV 5.9: 9,0 → 7,8
 WALL = 2.0
 IL, IW, IR = L - 2 * WALL, W - 2 * WALL, R - WALL   # interior 66 × 44
-CEIL = H - 2.3
+CEIL = H - 1.8                # REV 5.9: techo de la tapa 2,3 → 1,8
 
-FLOOR = 2.6
+FLOOR = 1.4                   # REV 5.9: 2,6 → 1,4 (sin el hueco de la bobina Qi)
 COIL = dict(d=25.0, t=1.0)                         # bobina Qi redonda Ø25 (nuevo receptor); espesor (E)
 COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
-TRAY_Z0, TRAY_T = 7.2, 1.0
+TRAY_Z0, TRAY_T = 6.0, 1.0     # REV 5.9: 7,2 → 6,0 (misma holgura de 0,25 sobre la batería)
 TRAY_TOP = TRAY_Z0 + TRAY_T
 BED_TOP = TRAY_TOP + 1.0          # REV 5.7: cama maciza a ras de la cara superior de los PCB (C6 y Qi)
 BED_OFF = 3.75 + 1.2 + 0.15       # la cama queda dentro del labio de la tapa
@@ -50,13 +50,13 @@ SCREWS = [(sx * 21.0, sy * (W / 2 - 5.0)) for sx in (-1, 1) for sy in (-1, 1)] +
 M3 = dict(hole=3.4, pilot=2.5, cb_d=5.9, cb_h=3.7, boss_lo=6.9, boss_lo_h=4.5, boss=5.6, pilot_top=14.0,
           insert_d=4.1, insert_depth=5.0, boss_lid=7.0)   # tapa: inserto roscado M3 de hasta 5 mm de largo (taladro Ø4,1, REV 5.7.3); deja 1 mm de techo
 # imanes de sujeción Ø5 × 1 (cápsula y soporte, enfrentados)
-MAGS = [(sx * (L / 2 - 7.6), sy * (W / 2 - 7.2)) for sx in (-1, 1) for sy in (-1, 1)]   # entre la cuna y la pared maciza
+MAGS = [(sx * 27.3, sy * 17.9) for sx in (-1, 1) for sy in (-1, 1)]   # REV 5.9 (L 70): corridos hacia la esquina de la batería
 HMAG = dict(d=5.0, t=1.0, skin=0.3, n_base=3, n_mount=2)   # REV 5.7.5: la base admite hasta 3 imanes apilados por esquina
 
 # ESP32-C6: 18 a lo largo de X, 21 a lo largo de Y, USB-C hacia +Y (dentro)
 C6 = dict(lx=17.8, wy=21.0, pcb=1.0, usb_over=1.5,   # huella oficial Seeed: USB-C sobresale 1,5
           usb_w=8.94, usb_h=3.26, usb_l=7.35, shield=2.4)
-C6_C = (17.6, 0.0)
+C6_C = (15.6, 0.0)     # REV 5.9: 2 mm hacia −X (sin Qi) para dejar sitio a los tornillos de +X con L = 70
 C6_X0, C6_X1 = C6_C[0] - C6["lx"] / 2, C6_C[0] + C6["lx"] / 2
 C6_Y0, C6_Y1 = C6_C[1] - C6["wy"] / 2, C6_C[1] + C6["wy"] / 2      # Y0: extremo de la antena
 LED = (C6_C[0] - 1.65, C6_Y0 + 2.0)                # (E)
@@ -84,7 +84,20 @@ REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imanes del reed (en el soporte): Ø5 × 1
 # REV 5.7.2 (modificación del usuario en su CAD): 3 imanes del reed en fila bajo el reed, a −5,1 / 0 / +5,1 en X;
 # los laterales en alojamientos de 1,2 mm de fondo, el central de 1,05.
-REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]
+REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (sin uso desde la REV 5.9)
+# REV 5.9: el reed y sus imanes se sustituyen por un conector magnético pogo de 3 pines (paso 2,54):
+#  - HEMBRA (plana, contactos fijos) en el fondo de la base, entrando por dentro y apoyada en un reborde de 0,6 mm
+#    (la cara queda 0,6 por dentro: el reborde aguanta el empuje de los pines y hace de molde para sellar con epoxi);
+#  - MACHO (pines de muelle, con orejas) en la placa del soporte, con la cara a ras y atornillado por debajo.
+#  Medidas ESTIMADAS (E) a partir de la foto del vendedor escalando el paso de 2,54: hay que confirmarlas con calibre.
+# Contactos (vistos desde abajo, 1 = −X): 1 = VBUS 5 V (solo base de carga) · 2 = GND (centro) · 3 = DET (pull-up).
+#   Soporte: puente 2–3 → DET a GND = "en el soporte" (sustituye al reed); 1 sin conectar.
+#   Base de carga: 5 V en 1 y GND en 2; 3 sin conectar.
+POGO = dict(y=-20.2,
+            f_l=20.3, f_w=7.0, f_t=3.0, f_lip=0.6, f_tail=1.5,                  # hembra (E)
+            m_l=17.5, m_w=6.0, m_h=5.0, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo y pines libres (E)
+            ear_span=25.0, ear_l=29.0, ear_w=5.0, ear_t=2.0, ear_hole=1.5,      # orejas del macho (E; agujero Ø1,5)
+            clear=0.2, cup_wall=1.0, cup_z=5.5, boss=1.4)
 
 RING_T = 1.0
 GROOVE = dict(z0=3.0, z1=4.6, depth=1.0)
@@ -96,7 +109,7 @@ ZC = 0.10
 CL = 0.12
 RW = 2.6
 RH = GROOVE["z1"] - 0.15
-MT = 4.6
+MT = 6.0      # REV 5.9: placa de 6,0 (antes 4,6) para alojar el macho pogo sin salientes por debajo
 STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 5,6 (antes 1,5) para las bisagras de los cierres
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
@@ -114,7 +127,7 @@ KEY = dict(out=2.4, z1=4.0, clear=0.2)
 # REV 5.8 (2.ª ronda): nervio a ras de la cara superior de la tapa (se imprime apoyado en la cama, sin soportes).
 # Cara inferior inclinada 20° hacia fuera (gancho de arpón): al abrir, el labio del cierre sube y sale a la vez y tiene
 # que flexar ≈0,8 mm → clic fuerte. Arriba, el cierre abraza el nervio por encima: sujeta la cápsula hacia abajo.
-RIB = dict(out=1.6, z_wall=13.0, z_front=12.4, w=16.0, lead=0.3)
+RIB = dict(out=1.6, z_wall=H - 2.5, z_front=H - 3.1, w=16.0, lead=0.3)   # REV 5.9: relativo a H
 PIN = dict(d=2.1, flat=0.2, head_d=3.8, head_t=1.0)
 
 BEAM = dict(t=1.6, y_root=-13.5, y_free=12.3, z0=0.6)
@@ -147,18 +160,30 @@ def pod_base():
     outer = rrect(L, W, R, HB).faces("<Z").edges().chamfer(0.8)                  # chaflán 45°: sin voladizo en la cama
     # pared perimetral MACIZA de 3,6 mm en toda la altura (sin reborde volado): imprime sin soportes
     b = outer.cut(rrect(L - 2 * SEAL_IN, W - 2 * SEAL_IN, R - SEAL_IN, HB, z0=FLOOR))
-    b = b.cut(cyl(0, 0, COIL_Z0, COIL["d"] + 2 * G, FLOOR))                       # alojamiento de la bobina Ø25,4
-    b = b.cut(box(-(11.0 + 31.0) / 2, -5.0, COIL_Z0 + 0.4, 31.0 - 11.0, 2.0, FLOOR))   # hilos de la bobina hacia −X
+    # REV 5.9: sin bobina Qi (la carga entra por los contactos pogo): fondo macizo
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
     cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
-    cr = cr.cut(box(-(bl / 2 + 0.5), bw / 2 - 4.0, FLOOR - 1, 2, 7.0, 10))   # REV 5.7: cables de la batería por −X/+Y
-    cr = cr.cut(box(-(bl / 2 + 0.5), -3.5, FLOOR - 1, 2, 6.0, 10))   # paso de los hilos de la bobina en la pared −X (prueba impresa)
+    cr = cr.cut(box(bl / 2 + 0.5, -(bw / 2 - 4.0), FLOOR - 1, 2, 7.0, 10))   # REV 5.9: cables de la batería por +X/−Y
     b = b.union(cr)
     for x in (-15, 0, 15):
         for s in (-1, 1):
             b = b.union(box(x, s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
-    rx, ry = REED["center"]
-    b = b.cut(box(rx, ry, REED["z0"], REED["l"] + 2 * G + 2.0, REED["d"] + 2 * G, FLOOR))      # +1 mm por extremo (prueba impresa)
+    # REV 5.9: hembra pogo en el fondo (sustituye al canal del reed). Alojamiento con reborde de 0,6 abajo y una copa
+    # alrededor para sellar con epoxi por dentro.
+    py, cl = POGO["y"], POGO["clear"]
+    fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
+    cw = POGO["cup_wall"]
+    b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
+    ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
+    stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
+    b = b.cut(stad(ft - POGO["f_lip"], POGO["f_lip"]))
+    yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
+    b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
+    wedge = (cq.Workplane("YZ", origin=(-20, 0, 0)).polyline([(py - fw / 2 - 0.01, ft - 0.01), (yin + 0.01, ft - 0.01),
+                                                                 (yin + 0.01, ft + (yin - (py - fw / 2)))]).close().extrude(40))
+    b = b.cut(wedge.intersect(stad(10, ft - 0.02)))                     # en la pared: techo a 45° (sin voladizo)
+    ol, ow = POGO["f_l"] - 2 * POGO["f_lip"], POGO["f_w"] - 2 * POGO["f_lip"]
+    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, POGO["f_lip"] + 1, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
@@ -169,8 +194,9 @@ def pod_base():
     for (x, y) in MAGS:
         # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
         top = HMAG["skin"] + HMAG["n_base"] * HMAG["t"] + 0.1
-        b = b.union(cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1))
-        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, top - HMAG["skin"] + 0.01))   # no entra en la cuna (sin voladizo)
+        rec = cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1)
+        b = b.union(rec.cut(box(0, 0, FLOOR - 1, BAT["l"] + 2 * G, BAT["w"] + 2 * G, 10)))   # REV 5.9: el recrecido no pisa la batería
+        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, TRAY_Z0 - HMAG["skin"]))   # boca libre hasta arriba (corta la esquina de la cuna)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
     # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa); tacos de posición de distinto ancho
@@ -199,8 +225,8 @@ def pod_lid():
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     # REV 5.7.1: sin tubos sobre el BNO (sus taladros están a 1,95 del borde, bajo la pestaña −X que ya lo sujeta)
-    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):
-        lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, TRAY_TOP + QI["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - QI["pcb"]))
+    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):          # REV 5.9: sin Qi, estos tubos apoyan en la cama
+        lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, BED_TOP + 0.05, 2.0, CEIL - BED_TOP))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
@@ -233,31 +259,27 @@ def tray():
     t = t.cut(box(cx, cy, TRAY_TOP, C6["lx"] + 0.2, C6["wy"] + 0.2, hb))
     t = t.cut(box(cx, C6_Y1 + C6["usb_over"] / 2 + 0.1, BED_TOP - 0.3, C6["usb_w"] + 0.6, C6["usb_over"] + 0.2, 1))  # bajo el USB-C
     t = t.cut(box(cx, cy, TRAY_Z0 - 1, C6["lx"] - 2.0, C6["wy"] - 2.0, 3))     # ventana bajo el C6 (pads de la cara inferior)
-    t = t.cut(box(qx, qy, TRAY_TOP, QI["lx"] + 0.3, QI["wy"] + 0.3, hb))
-    qx0, qx1 = qx - QI["lx"] / 2 - 0.15, qx + QI["lx"] / 2 + 0.15
-    # hilos de la bobina: ranura ABIERTA hasta el borde −X de la bandeja (los hilos entran de lado, sin desoldar la bobina)
-    t = t.cut(box((qx0 - L / 2 - 1.0) / 2 + 0.0, -3.0, TRAY_Z0 - 1, qx0 + L / 2 + 1.0, 3.0, 4))
+    # REV 5.9: sin placa Qi ni ranura de la bobina; la cama queda maciza en −X (QI solo fija la posición de los canales)
+    qx1 = qx + QI["lx"] / 2 + 0.15
     # --- canales (suelo a 0,8 sobre la batería)
     z, w = CH["floor"], CH["w"]
     hc = BED_TOP - z + 1
-    xa, xb = qx1, BX0 - 0.15 - 0.8                  # canal vertical entre la Qi y el BNO (deja 0,8 de pared al BNO)
+    xa = 3.0                                        # REV 5.9: canal inferior desde el paso único del pogo
     yb0, yb1 = BY0 - 0.15 - 1.0 - 0.1 - w, BY0 - 0.15 - 1.0 - 0.1   # canal inferior, bajo el tope −Y del BNO
-    yt0, yt1 = 11.1, 11.1 + w                       # canal superior (cables de la batería hasta la Qi)
-    bat_hole = (-26.0, 13.2)
-    t = t.cut(box((xa + xb) / 2, (yb0 + yt1) / 2, z, xb - xa, yt1 - yb0, hc))
-    t = t.cut(box((bat_hole[0] - 1.5 + xa) / 2, (yt0 + yt1) / 2, z, xa - bat_hole[0] + 1.5, w, hc))
     xw = 12.0                                       # bajada a la ventana del C6
     t = t.cut(box((xa + xw + w / 2) / 2, (yb0 + yb1) / 2, z, xw + w / 2 - xa, w, hc))
     t = t.cut(box(xw, (yb0 + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, w, C6_Y0 + 1.0 - yb0, 4))   # pasa bajo el PCB hasta la ventana
-    t = t.cut(box(*bat_hole, TRAY_Z0 - 1, 3, 4, 4))                                    # paso de los cables de la batería (−X/+Y)
+    # REV 5.9 (petición del usuario): cables de la batería por +X/−Y, junto al C6: suben por fuera del extremo de la
+    # batería y pasan bajo el borde del PCB hasta la ventana (pads BAT+/BAT− de la cara inferior del XIAO)
+    BH = (BAT["l"] / 2 + G - 0.6, 26.8, -15.0, -12.8)          # x0, x1, y0, y1 · REV 5.9: más adentro, no corta el borde de la cama
+    xg0 = C6_X1 - 3.0
+    t = t.cut(box((xg0 + BH[1]) / 2, (BH[2] + BH[3]) / 2, TRAY_Z0 - 1, BH[1] - xg0, BH[3] - BH[2], 4))
+    t = t.cut(box(xg0 + 1.0, (BH[2] + C6_Y0 + 1.0) / 2, TRAY_Z0 - 1, 2.0, C6_Y0 + 1.0 - BH[2], 4))
     rx, ry = REED["center"]
-    for x in (rx - REED["l"] / 2 - 2.5, rx + REED["l"] / 2 + 2.5):                     # patas del reed → canal inferior
-        t = t.cut(box(x, ry + 0.2, TRAY_Z0 - 1, 3, 3, 4))
-        t = t.cut(box(x, (ry + 1.7 + yb0 + 0.5) / 2, z, 2.2, yb0 + 0.5 - ry - 1.7, hc))
+    # REV 5.9 (petición del usuario): un solo paso para los 3 hilos del pogo, en +X, que entra en el canal inferior
+    t = t.cut(box((xa + 12.5) / 2, ry + 0.2, TRAY_Z0 - 1, 12.5 - xa, 3, 4))
+    t = t.cut(box((xa + 12.5) / 2, (ry + 1.7 + yb0 + 0.5) / 2, z, 12.5 - xa, yb0 + 0.5 - ry - 1.7, hc))
     t = t.cut(box(BX1 - 1.3, (yb1 + BNO_PINS_Y[8] + 0.9) / 2, z, 2.2, BNO_PINS_Y[8] + 0.9 - yb1, hc))  # GND/VCC del BNO
-    # topes de la Qi en +X (dentro del canal, dejan 2,3 de paso a los cables)
-    for sy in (-1, 1):
-        t = t.union(box(qx1 + 0.3, qy + sy * 5.0, z, 0.6, 2.0, BED_TOP - z))
     # BNO085 hundido: su cara superior queda a ras de la del C6 (los pines de los dos, al mismo nivel por arriba).
     # Alojamiento a 0,15 por lado, unido al del C6; apoya en un reborde de 1 mm y debajo queda ventana (soldaduras).
     bx, by = BNO["center"]
@@ -371,9 +393,17 @@ def mount():
                     .intersect(box(ax, yc, zflat, dh + 1, LATCH["lug_w"] + 4, dh + 1)))
             lug = lug.cut(hole)
             p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
-    rx, ry = REED["center"]
-    for (dx, depth) in REED_MAGS:
-        p = p.cut(cyl(rx + dx, ry, -depth, MAG["d"] + 0.15, 2))
+    # REV 5.9: macho pogo en la placa (sustituye a los imanes del reed): cara a ras de la placa, cuerpo hacia abajo,
+    # orejas en un rebaje por debajo con 2 tornillos M1,6 (piloto Ø1,3) y canal para el cable.
+    py, cl = POGO["y"], POGO["clear"]
+    zb = -MT                                                            # cara inferior de la placa
+    p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, MT + 2, z0=-MT - 1)
+              .translate((0, py, 0)))
+    p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
+                    POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.11, z0=zb - 0.01).translate((0, py, 0)))
+    for sx in (-1, 1):
+        p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.3, -1.0 - (zb - 1)))     # piloto M1,6 hasta 1 mm de la cara
+    # sin canal de cable: en el soporte el macho solo lleva un puente GND–DET soldado por detrás (interruptor)
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
     return p
@@ -431,20 +461,27 @@ def components():
     for (x, y) in MAGS[1:]:
         mmags = mmags.union(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"]))
     return {
-        "bobina_Qi": cyl(0, 0, COIL_Z0 + 0.1, COIL["d"], COIL["t"]),
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
-        "placa_Qi": box(qx, qy, TRAY_TOP + 0.02, QI["lx"], QI["wy"], QI["pcb"] - 0.02).union(
-            box(qx, qy + 0.5, TRAY_TOP + QI["pcb"], 9.0, 9.0, QI["parts"])),
         "BNO085": bno,
-        "reed": box(rx, ry, REED["z0"] + 0.1, REED["l"], REED["d"], REED["d"]),
+        "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"], z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0)),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
-        "imanes": cyl(rx + REED_MAGS[0][0], ry, -REED_MAGS[0][1] + 0.03, MAG["d"], MAG["t"]).union(
-            cyl(rx + REED_MAGS[1][0], ry, -REED_MAGS[1][1] + 0.03, MAG["d"], MAG["t"])).union(
-            cyl(rx + REED_MAGS[2][0], ry, -REED_MAGS[2][1] + 0.03, MAG["d"], MAG["t"])),
+        "pogo_macho": _pogo_male(),
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
+
+
+def _pogo_male():
+    """Macho pogo en posición (pines comprimidos hasta 0,05 por debajo de la cara de la hembra)."""
+    py = POGO["y"]
+    m = rrect(POGO["m_l"], POGO["m_w"], POGO["m_w"] / 2 - 0.01, POGO["m_h"] - 0.02, z0=-POGO["m_h"] + 0.01).translate((0, py, 0))
+    m = m.union(rrect(POGO["ear_l"], POGO["ear_w"], POGO["ear_w"] / 2 - 0.01, POGO["ear_t"], z0=-POGO["m_h"] + 0.01).translate((0, py, 0)))
+    for sx in (-1, 1):
+        m = m.cut(cyl(sx * POGO["ear_span"] / 2, py, -POGO["m_h"] - 1, POGO["ear_hole"], POGO["ear_t"] + 2))
+    for k in (-1, 0, 1):
+        m = m.union(cyl(k * 2.54, py, -0.01, 1.0, POGO["f_lip"] - 0.05 + 0.01))
+    return m
 
 
 def main():

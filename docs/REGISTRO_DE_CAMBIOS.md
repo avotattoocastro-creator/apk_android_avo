@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Cincha (CAD) REV 5.9 — conector pogo en lugar del reed, sin Qi, cápsula 70 × 51 × 13,8
+**Autor:** Claude · Rama de propuesta `feature/girth-rev5-9-pogo`, fusionada en `feature/avo-wifi-sync` con el visto bueno del usuario
+**Qué cambia:**
+- El reed y sus 3 imanes se sustituyen por un conector magnético pogo de 3 pines: la hembra plana en la base (sellada con epoxi en una copa) y el macho con muelles en el soporte (atornillado por debajo, placa de 6,0 mm).
+- Contactos: 1 = 5 V (solo base de carga), 2 = GND, 3 = detección. En el soporte un puente 2–3 sustituye al reed.
+- Se quita la carga Qi (bobina, placa y alojamientos); la batería va a los pads BAT del XIAO.
+- Cápsula 73 × 51 × 15,5 → 70 × 51 × 13,8: fondo 1,4, techo de la tapa 1,8, C6 y BNO 2 mm a −X, imanes en (±27,3, ±17,9). Tornillos M3 × 8.
+- Bandeja: un solo paso para los hilos del pogo (+X) y salida de los cables de la batería en +X/−Y.
+**Por qué:** petición del usuario (cambiar reed + imán por el conector pogo; carga por contactos; ajustar la cápsula a la batería).
+**Archivos:** `hardware/girth/REV5/avo_girth_rev5.py`, `hardware/girth/REV5/README.md`, `hardware/girth/REV5/out/*` (CI).
+**No se ha tocado:** firmware, app, comunicaciones del pecho.
+**Validación:** CAD por CI sin interferencias y 1 sólido por pieza; voladizos revisados. **NO VERIFICADO** físicamente. Medidas del conector **estimadas** (foto del vendedor): confirmar con calibre antes de imprimir.
+**Pendiente:** medir el conector real; prueba impresa; sellado con epoxi y prueba de inmersión; diseñar la base de carga si se pide.
+
+---
+
 ## 2026-10-24 — Android 2.1-motor — inicio automático en segundo plano
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
 **Qué cambia:** el servicio de enlace (BLE con el chaleco, NTRIP, descarga automática) arranca sin abrir la app: al encender el móvil,
