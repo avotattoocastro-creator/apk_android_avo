@@ -1,7 +1,7 @@
 # AVO BACK V4 · placa de la espalda · REV B (ESP32-S3, contactos pogo) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `c1e0e26b63beb865c8883951074bc387bdedbc01` · ejecución de CI: 41048486880
+- Commit: `6e5b54d08f07fb70a83dc86f642444b79314bd54` · ejecución de CI: 41050496945
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno de la cola de la carcasa V4 (CAD/pcb_contorno_v4.json), ≈ 1785 mm²
 - Componentes: 75 en total, 61 para montar, 0 sin montar (DNP: —), 14 a mano (pads de hilo y de prueba)
@@ -65,37 +65,37 @@
 | 9 | RESET_N del ZED | 43 / 44 | TXD0 / RXD0 (TP4 / TP5) |
 | 10 | EN del regulador del ZED | 11 | LED (activo bajo) |
 
-## Existencias en JLCPCB (consulta del CI: 2026-10-30 10:37 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-10-30 11:44 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C2980299 | ESP32-S3-MINI-1U-N8 | 1 | 2476 | Extended | 4.7689 US$ |
 | C114218 | DM3AT-SF-PEJM5 | 1 | 19353 | Extended | 1.3930 US$ |
 | C140288 | BQ24072RGTR | 1 | 2861 | Extended | 0.9964 US$ |
-| C485517 | TLV75733PDBVR | 1 | 30076 | Extended | 0.2162 US$ |
-| C45783 | CL21A226MAQNNNE | 3 | 3511830 | Basic | 0.1920 US$ |
-| C165948 | TYPE-C-31-M-12 | 1 | 284585 | Extended | 0.1872 US$ |
-| C7519 | USBLC6-2SC6 | 1 | 34295 | Extended | 0.1799 US$ |
-| C160402 | SM02B-SRSS-TB(LF)(SN) | 1 | 75017 | Extended | 0.1325 US$ |
-| C841192 | RT9080-33GJ5 | 1 | 36403 | Extended | 0.1198 US$ |
+| C485517 | TLV75733PDBVR | 1 | 30044 | Extended | 0.2162 US$ |
+| C45783 | CL21A226MAQNNNE | 3 | 3512279 | Basic | 0.1920 US$ |
+| C165948 | TYPE-C-31-M-12 | 1 | 284301 | Extended | 0.1872 US$ |
+| C7519 | USBLC6-2SC6 | 1 | 34098 | Extended | 0.1799 US$ |
+| C160402 | SM02B-SRSS-TB(LF)(SN) | 1 | 75012 | Extended | 0.1325 US$ |
+| C841192 | RT9080-33GJ5 | 1 | 36389 | Extended | 0.1198 US$ |
 | C20802 | SMD1206P150TF | 1 | 11691 | Extended | 0.1189 US$ |
-| C16780 | CL21A476MQYNNNE | 2 | 1043100 | Basic | 0.1020 US$ |
-| C15127 | AO3401A | 2 | 1019514 | Basic | 0.0961 US$ |
-| C96446 | CL10A106MA8NRNC | 5 | 8141381 | Basic | 0.0377 US$ |
+| C16780 | CL21A476MQYNNNE | 2 | 1042064 | Basic | 0.1020 US$ |
+| C15127 | AO3401A | 2 | 1021120 | Basic | 0.0961 US$ |
+| C96446 | CL10A106MA8NRNC | 5 | 8152201 | Basic | 0.0377 US$ |
+| C2827694 | PESD5V0S1BA | 2 | 496730 | Extended | 0.0359 US$ |
 | C77131 | NCP15XH103F03RC | 1 | 300534 | Extended | 0.0187 US$ |
-| C2286 | KT-0603R | 1 | 7299516 | Basic | 0.0077 US$ |
-| C52923 | CL05A105KA5NQNC | 4 | 10277067 | Basic | 0.0064 US$ |
-| C1525 | CL05B104KO5NNNC | 3 | 36046904 | Basic | 0.0031 US$ |
-| C4109 | 0402WGF2001TCE | 2 | 10000134 | Basic | 0.0026 US$ |
-| C25744 | 0402WGF1002TCE | 7 | 16775240 | Basic | 0.0024 US$ |
-| C25905 | 0402WGF5101TCE | 2 | 3771850 | Basic | 0.0023 US$ |
-| C26083 | 0402WGF1004TCE | 2 | 2930444 | Basic | 0.0015 US$ |
-| C25092 | 0402WGF220JTCE | 3 | 2888893 | Basic | 0.0014 US$ |
-| C11702 | 0402WGF1001TCE | 4 | 21596913 | Basic | 0.0013 US$ |
-| C25741 | 0402WGF1003TCE | 6 | 8390086 | Basic | 0.0012 US$ |
-| C25104 | 0402WGF3300TCE | 3 | 2182960 | Basic | 0.0011 US$ |
-| C2827694 | ? | 2 | sin respuesta | Extended | ? |
+| C2286 | KT-0603R | 1 | 7297951 | Basic | 0.0077 US$ |
+| C52923 | CL05A105KA5NQNC | 4 | 10342612 | Basic | 0.0064 US$ |
+| C1525 | CL05B104KO5NNNC | 3 | 36047759 | Basic | 0.0031 US$ |
+| C4109 | 0402WGF2001TCE | 2 | 10000179 | Basic | 0.0026 US$ |
+| C25744 | 0402WGF1002TCE | 7 | 16828819 | Basic | 0.0024 US$ |
+| C25905 | 0402WGF5101TCE | 2 | 3786243 | Basic | 0.0023 US$ |
+| C26083 | 0402WGF1004TCE | 2 | 2929984 | Basic | 0.0015 US$ |
+| C25092 | 0402WGF220JTCE | 3 | 2891069 | Basic | 0.0014 US$ |
+| C11702 | 0402WGF1001TCE | 4 | 21629223 | Basic | 0.0013 US$ |
+| C25741 | 0402WGF1003TCE | 6 | 8395967 | Basic | 0.0012 US$ |
+| C25104 | 0402WGF3300TCE | 3 | 2181265 | Basic | 0.0011 US$ |
 
-- Piezas sin existencias para 5 placas: C2827694
+- Piezas sin existencias para 5 placas: ninguna
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**
