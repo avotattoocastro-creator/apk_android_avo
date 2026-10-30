@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-30 — Windows Advanced Analysis V2 PRO 2.0.0 (rama feature/windows-advanced-analysis)
+**Autor:** Claude · **Commits:** `2d3383c` (importa motor EIE + Windows de `feature/avo-wifi-sync`), `f9f9fdc` (integra develop
+18a9823), `18bbe5c`…`f626309` · **CI:** build-avo-windows run [41084991763](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41084991763) (éxito: 106 autopruebas, publicación, 33 capturas)
+**Qué cambia:** nueva app Windows V2 PRO sobre la V1 con motor (pestaña «Motor AVO» de EIE): paleta de `Theme.kt`, componentes
+XAML reutilizables, MVVM, 11 vistas (inicio, análisis, mapa satélite/híbrido Esri con reproducción, gráficas sincronizadas con
+el mapa, tramos persistentes, biomecánica con el motor, comparador, mareas IHM + Open-Meteo, informes PDF/HTML/CSV/GPX/JSON,
+servidor no conectado, motor). Lectura RAW ampliada (todos los campos de GNSS_SAMPLE, IMU_SAMPLE 9 ejes en LSB, MARKER),
+velocidad reportada/derivada/filtrada (Kalman + RTS documentado), biblioteca con SHA-256 y duplicados, registro JSON.
+Generador de sesiones de DEMOSTRACIÓN sintéticas (`windows/tools/demo-fixtures`) y modo `--capture` para evidencia visual.
+**Por qué:** encargo «Windows Advanced Analysis V2 PRO» con las referencias `AVO_WINDOWS_CONCEPTO_01/02`.
+**Archivos:** `windows/**`, `equine-intelligence/**` (copia sin cambios de wifi-sync), `.github/workflows/build-avo-windows.yml`,
+`build-equine-engine.yml`, `core/src/test/resources/equine/*` (fixtures).
+**No se ha tocado:** Android, firmware, motor C++ (solo se compila y se usa).
+**Validación:** IMPLEMENTADO · COMPILADO / CI (run 41084991763, `f626309`) · PROBADO AUTOMÁTICAMENTE (106 comprobaciones) ·
+**NO VERIFICADO** con sesiones reales con cincha (no existen) ni manualmente en un PC con Windows.
+**Pendiente:** prueba manual en Windows; sesiones reales `.avo`; calibración/orientación IMU; contrato del servidor; firma
+del ejecutable; modelo 3D autorizado; integración en develop.
+
+---
+
 ## 2026-10-23 — Copias de código fuente y traspaso para asistentes
 **Autor:** Claude · Zips en la raíz: `AVO_ANDROID_V2_0_REDISENO_MAREAS_ANALISIS_FUENTES.zip` (actualizado),
 `AVO_UPDATER_V2_1_0_FUENTES.zip`, `AVO_BACK_V3_8_0_FUENTES.zip`. Documento `docs/TRASPASO_ASISTENTES_2026-10-23.md`

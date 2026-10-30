@@ -1,3 +1,17 @@
+# AVO Performance Horse — Windows Advanced Analysis V2 PRO
+
+Aplicación WPF (.NET 10, Windows 10/11 x64), portable y autocontenida. Documentación: `docs/DESIGN_V2_PRO.md` (diseño,
+arquitectura, filtrado, validación visual), `docs/INSTALACION_WINDOWS.md`, `docs/SERVIDOR_CONTRATO_PENDIENTE.md`.
+
+- CI: `.github/workflows/build-avo-windows.yml` → artefactos `AVO-Windows-V2-PRO-x64`, `AVO-Windows-V2-capturas`,
+  `AVO-Windows-V2-demo-sintetica`; capturas también en la rama `ci/windows-visual-evidence`.
+- Pruebas: `dotnet run --project windows/AVO.Windows.SelfTest -c Release` (con `windows/native/avo_equine.dll`;
+  `AVO_DEMO_DIR` apunta a las sesiones de demostración generadas por `windows/tools/demo-fixtures`).
+
+---
+
+## Historial V1 (se conserva)
+
 # AVO Performance Horse — Windows Advanced Training Analysis V1
 
 Aplicación WPF (.NET 10, Windows 10/11 x64), dependencias de tiempo de ejecución incluidas en la publicación de CI. Abre y valida sesiones Android `.avo` o segmentos RAW `.avr`, compara recorridos reales, genera métricas, tramos, gráficas y exportaciones.
