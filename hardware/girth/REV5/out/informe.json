@@ -1,7 +1,7 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 13987.4,
+   "volumen_mm3": 13636.0,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -51,13 +51,13 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 30201.4,
+   "volumen_mm3": 29932.2,
    "valido": true,
    "solidos": 1,
    "caja": [
     105.66,
     61.46,
-    9.61
+    11.01
    ]
   },
   "AVO_GIRTH_R5_cierre_x2": {
@@ -81,7 +81,9 @@
    ]
   }
  },
- "interferencias": {},
+ "interferencias": {
+  "pogo_macho × AVO_GIRTH_R5_soporte": 0.503
+ },
  "medidas": {
   "soporte_mm": [
    105.64,
