@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha 0.4.3 + Windows V2 PRO — PRUEBA FÍSICA: IMU de la cincha en unidades reales
+**Autor:** Claude · Evidencia: foto de Windows Advanced Analysis V2 PRO (build de `feature/windows-girth-bno-units`, CI run 41217576644), «Entrenamiento 31/10/2026 17:10», HORSE_001
+- **PROBADO FÍSICAMENTE:**
+  - la app reconoce las unidades declaradas por la cincha 0.4.3: la gráfica muestra «g, unidades del BNO085»;
+  - en reposo la aceleración vertical está en torno a 1 g (menos al inclinar la cincha) y, al moverla a mano, da picos de más de 2 g.
+- Fusionado `feature/windows-girth-bno-units` → `feature/windows-advanced-analysis` (`28bd3cd`).
+- **Pendiente:**
+  - dibujar fmt 1 (aceleración lineal y cuaternión);
+  - cadencia con el caballo en marcha;
+  - unidades en la app de Android (RawSession solo usa |a| para la cadencia; no le afecta la escala).
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.3 — las muestras de IMU declaran sus unidades
 **Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
 **Qué cambia:**
