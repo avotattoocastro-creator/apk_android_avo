@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.13.2 (ESP-NOW) · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.3 (ESP-NOW) · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -63,6 +63,11 @@ static const int VBAT_CTRL_PIN = 37;
 static const float VBAT_DIVIDER = 4.9f;  // 390k + 100k (Heltec reference design)
 static uint8_t s_vbat_active = HIGH;
 static uint16_t s_vbat_mv = 0;
+// V3.13.3: low-battery cut-off (protects the LiPo and avoids the brown-out loop when the radio starts)
+static const uint16_t LOW_BATT_MV = 3300, LOW_BATT_RESUME_MV = 3450;
+static const uint32_t LOW_BATT_POLL_S = 60;
+RTC_DATA_ATTR static bool s_low_batt = false;
+static uint32_t s_sleep_s = 3;            // timer of the next deep sleep
 static const uint8_t NAV_RATE_HZ = 8;  // RTK limit of the ZED-F9P with 4 constellations
 // V3.10.2: battery saving. The SX1262 LoRa radio of the Heltec is not used; after power-up it sits in standby
 // (~0.6 mA) until told to sleep. Heltec Wireless Stick Lite V3 pins.
@@ -104,7 +109,6 @@ static const int USB_SENSE_PIN = 7;
 static const uint16_t USB_SENSE_MV = 1500;      // V3.13.1: above this on GPIO7 (ADC, internal pull-down) = USB present
 static const uint32_t USB_POLL_S = 3;           // V3.13.1: while charging, USB checked every 3 s
 static bool s_usb_workshop = false;
-static uint16_t usb_sense_mv();
 static bool usb_present();
 static bool usb_sense2();
 static uint32_t s_vext_at = 0;
@@ -219,8 +223,8 @@ static void print_status() {
   Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
                 s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
 #else
-  Serial.printf("  INTERRUPTOR: reed no usado | USB: %s (GPIO7 %u mV, GPIO20 %s)%s | GPS: Pololu SHDN GPIO34 %s\n",   // V3.13.0
-                usb_present() ? "CONECTADO" : "no", (unsigned)usb_sense_mv(), usb_sense2() ? "ALTO" : "bajo", s_usb_workshop ? " MODO TALLER" : "",
+  Serial.printf("  INTERRUPTOR: reed no usado | USB: %s (GPIO20 %s)%s | GPS: Pololu SHDN GPIO34 %s\n",   // V3.13.0
+                usb_present() ? "CONECTADO" : "no", usb_sense2() ? "ALTO" : "bajo", s_usb_workshop ? " MODO TALLER" : "",
                 s_zed_on ? "ENCENDIDO" : "apagado");
 #endif
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
@@ -355,12 +359,6 @@ static void zed_power_on() {
 }
 
 // V3.13.0: USB 5 V present? (divider on GPIO7, internal pull-down so an unwired pin reads 0)
-static uint16_t usb_sense_mv() {
-  pinMode(USB_SENSE_PIN, INPUT_PULLDOWN);
-  uint32_t acc = 0;
-  for (int i = 0; i < 4; i++) acc += analogReadMilliVolts(USB_SENSE_PIN);
-  return (uint16_t)(acc / 4);
-}
 // V3.13.2: second sense input, GPIO20 (header pin 8 of the 5V·3V3·GND·47·48·0·26·20 row, close to the 5V pin). On this
 // board GPIO20 is the unused USB D+ of the ESP32-S3 (the USB-C goes to the CP2102): its USB pad and D+ pull-up are
 // switched off so the pin is a plain input. ADC2 cannot be read while the radio is on, so it is read as a digital
@@ -380,13 +378,16 @@ static bool usb_sense2() {
   for (int i = 0; i < 5; i++) hi += digitalRead(USB_SENSE_PIN2);
   return hi >= 4;
 }
-static bool usb_present() { return usb_sense_mv() > USB_SENSE_MV || usb_sense2(); }
+// V3.13.3: GPIO20 only. analogRead() turns GPIO7 into an analog pad without pulls: unwired it floats and read as
+// "USB present" at random (user test 31/10 02:04: off for a second and on again).
+static bool usb_present() { return usb_sense2(); }
 
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 // V3.13.0: used for USB charging: wakes when the USB 5 V disappears (GPIO7 LOW).
-static void go_to_sleep(const char* why) {
+static void go_to_sleep(const char* why, uint32_t wake_s = 3) {
+  s_sleep_s = wake_s;
   Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS sin corriente (GPIO34 = SHDN del Pololu), radio apagada, LEDs apagados.\n"
-                "[AVO ESPALDA] Solo carga la bateria. Se despierta al desconectar el USB.\n", why);
+                "[AVO ESPALDA] Solo carga la bateria. Despierta cada %lu s para mirar el USB y la bateria.\n", why, (unsigned long)s_sleep_s);
   Serial.flush();
   if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
   // V3.10.8: software backup first (it is what saves if the ZED is still on 3V3); GPIO35 (ZED RX + white LED) ends
@@ -411,11 +412,10 @@ static void go_to_sleep(const char* why) {
 #endif
   // V3.13.1: no level wake-up on GPIO7 any more: with the divider the pin sits close to the RTC input threshold and
   // the board woke up after ~1 s with the USB still plugged in (user test 31/10). Instead it wakes every USB_POLL_S,
-  // reads GPIO7 with the ADC at the very start of setup() (a few ms, from the USB power) and goes back to sleep while
+  // reads GPIO20 (V3.13.3) at the very start of setup() (a few ms, from the USB power) and goes back to sleep while
   // the USB is still there; with the holds above still on, nothing else switches on in between.
   pinMode(USB_SENSE_PIN, INPUT);
-  pinMode(USB_SENSE_PIN2, INPUT_PULLDOWN); gpio_hold_en((gpio_num_t)USB_SENSE_PIN2);   // V3.13.2
-  esp_sleep_enable_timer_wakeup((uint64_t)USB_POLL_S * 1000000ULL);
+  esp_sleep_enable_timer_wakeup((uint64_t)s_sleep_s * 1000000ULL);
   esp_deep_sleep_start();
 }
 
@@ -472,7 +472,6 @@ void setup() {
   // radio stay off). Only when the USB is gone does the back start.
   if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER && usb_present()) {
     pinMode(USB_SENSE_PIN, INPUT);
-    pinMode(USB_SENSE_PIN2, INPUT_PULLDOWN); gpio_hold_en((gpio_num_t)USB_SENSE_PIN2);   // V3.13.2
 #if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
     gpio_deep_sleep_hold_en();
 #endif
@@ -511,12 +510,24 @@ void setup() {
   pinMode(VBAT_CTRL_PIN, OUTPUT);
   digitalWrite(VBAT_CTRL_PIN, !s_vbat_active);
   analogSetPinAttenuation(VBAT_PIN, ADC_11db);
+  // V3.13.3: battery at rest, before the radio: too low → sleep (ZED off) and try again every 60 s
+  {
+    const uint16_t mv0 = read_battery_mv();
+    const bool usb0 = usb_present();
+    Serial.printf("[AVO ESPALDA] bateria en reposo %u mV | USB (GPIO20): %s\n", (unsigned)mv0, usb0 ? "ALTO = conectado" : "bajo = no detectado");
+    const uint16_t lim = s_low_batt ? LOW_BATT_RESUME_MV : LOW_BATT_MV;
+    if (mv0 && mv0 < lim && !usb0) {
+      s_low_batt = true;
+      go_to_sleep("BATERIA AGOTADA: hay que cargarla", LOW_BATT_POLL_S);
+    }
+    s_low_batt = false;
+  }
   // V3.10.3: capsule out of its support at power-up → sleep, unless USER is pressed within 3 s (workshop mode)
   delay(20);
   if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: USB desconectado");
   // V3.13.0: USB connected at power-up / reset → only charging (deep sleep), unless USER within 3 s (workshop)
   if (usb_present()) {
-    Serial.printf("[AVO ESPALDA] USB conectado (GPIO7 %u mV): a dormir para cargar. Pulsa USER en 3 s para el MODO TALLER.\n", (unsigned)usb_sense_mv());
+    Serial.println("[AVO ESPALDA] USB conectado (GPIO20 alto): a dormir para cargar. Pulsa USER en 3 s para el MODO TALLER.");
     uint32_t t0 = millis();
     while (millis() - t0 < 3000 && digitalRead(PRG_PIN) == HIGH) delay(10);
     if (digitalRead(PRG_PIN) == LOW) {

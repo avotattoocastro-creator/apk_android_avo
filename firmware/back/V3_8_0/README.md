@@ -232,3 +232,12 @@ A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·
 - GPIO20 es el D+ del USB propio del ESP32-S3 (sin conectar en esta placa, el USB-C va al CP2102): el firmware apaga ese
   USB y su pull-up para usarlo como entrada normal.
 - GPIO7 con 10 kΩ / 15 kΩ sigue valiendo. El firmware mira los dos: vale cualquiera de las dos conexiones.
+
+## V3.13.3 — corte por batería baja y USB solo en GPIO20 (2026-10-31)
+- Monitor del usuario (02:05): batería **2954 mV** y `Brownout detector was triggered` al arrancar la radio, en bucle
+  (`rst:0x3`, motivo 9). Ese era el «se duerme un segundo y vuelve a arrancar».
+- **Corte por batería baja:** antes de encender la radio mide la batería en reposo; por debajo de **3,30 V** (y sin USB)
+  se duerme con el ZED sin corriente y vuelve a mirar cada 60 s; arranca de nuevo por encima de **3,45 V**.
+- USB solo por **GPIO20** (digital con pull-down; divisor 5V ─ 5,1 kΩ ─ GPIO20 ─ 10 kΩ ─ GND). La lectura por ADC de
+  GPIO7 se quita: sin nada conectado flotaba y daba «USB conectado» al azar.
+- Al arrancar imprime `bateria en reposo N mV | USB (GPIO20): ALTO = conectado / bajo = no detectado`.

@@ -1143,3 +1143,13 @@ desactivan el pad USB-Serial-JTAG y los pull-up de D+/D− para usar GPIO20 como
 durante el sueño. El monitor muestra `GPIO20 ALTO/bajo`.
 **Por qué:** el usuario prefiere GPIO20 (está junto al pin 5V en la misma fila).
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.3 (Heltec) — corte por batería baja, USB solo en GPIO20
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** antes de arrancar la radio, batería en reposo < 3,30 V sin USB → sueño profundo (ZED sin corriente),
+reintento cada 60 s, vuelve por encima de 3,45 V (estado en RTC). Detección del USB solo por GPIO20 digital; se quita la
+lectura ADC de GPIO7. Línea de arranque con la batería y el nivel de GPIO20.
+**Por qué:** monitor del usuario 31/10 02:05 con la 3.13.2 y el USB del móvil: batería 2954 mV, `E BOD: Brownout detector
+was triggered` justo al encender la radio y reinicio (`rst:0x3`, `esp_reset_reason` 9) en bucle; el USB no se detectó
+(no salió «USB conectado»). analogRead deja GPIO7 sin pull-down: sin divisor flotaba.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
