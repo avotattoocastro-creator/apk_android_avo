@@ -1,4 +1,8 @@
-/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.0 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.1 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+ * 0.4.1 (first hardware test of 0.4.0: BNO085 OK, SH-2 3.2.13, ~125 Hz): the batch period comes from the real
+ *   timestamps (the BNO runs at its nearest supported rate, ~125 Hz when 100 Hz is asked), the confirmed
+ *   periods are printed at start, and no "GPIO isr service is not installed" message on the first start.
+ *
  *
  * Built on GIRTH 0.1.0 (ESP-NOW link with the back, protocol avo_girth_link.h shared with BACK ≥ 3.10.0).
  * The 0.2.0 binary has no source in the repository, so it is not the base.
@@ -40,8 +44,8 @@
 
 using namespace avo;
 
-#define AVO_GIRTH_VERSION "0.4.0"
-// Identity marker read by AVO Update ("0.4.0" followed by "AVO-GIRTH"): never installed on chest or back.
+#define AVO_GIRTH_VERSION "0.4.1"
+// Identity marker read by AVO Update ("0.4.1" followed by "AVO-GIRTH"): never installed on chest or back.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
 // ---------------------------------------------------------------- pins (XIAO ESP32-C6)
@@ -242,13 +246,18 @@ static void forget_back() {
 // ---------------------------------------------------------------- IMU batches
 static girth::Sample s_batch[girth::BATCH_MAX];
 static uint8_t s_batch_n = 0;
+// 0.4.1: real sample period, from the timestamps (the BNO runs at its own nearest rate: ~125 Hz when 100 Hz is asked)
+static float s_period_us = IMU_INTERVAL_US;
 static uint32_t s_batch_no = 0, s_batch_first_ms = 0;
 
 static void flush_batch() {
   if (!s_batch_n) return;
   if (!linked()) { s_imu_discard_nolink += s_batch_n; s_batch_n = 0; return; }
   girth::BatchMeta m;
-  m.girth_id = 0; m.imu_id = 0; m.batch = ++s_batch_no; m.period_us = (uint16_t)IMU_INTERVAL_US;
+  uint32_t per = (uint32_t)(s_period_us + 0.5f);
+  if (s_batch_n > 1) per = (uint32_t)((s_batch[s_batch_n - 1].t_us - s_batch[0].t_us + (s_batch_n - 1) / 2) / (uint32_t)(s_batch_n - 1));
+  if (per < 1000 || per > 60000) per = (uint32_t)(s_period_us + 0.5f);
+  m.girth_id = 0; m.imu_id = 0; m.batch = ++s_batch_no; m.period_us = (uint16_t)per;
   uint8_t body[GIRTH_MAX_BODY];
   for (uint8_t fmt : {girth::FMT_9AXIS, girth::FMT_FUSED}) {
     size_t n = girth::encode_batch(fmt, m, s_batch, s_batch_n, body, sizeof(body));
@@ -262,7 +271,11 @@ static void pump_imu() {
   girth::Sample s;
   while (xQueueReceive(s_imuq, &s, 0) == pdTRUE) {
     // a gap (> 1,5 periods) closes the batch: t0 + i × period must stay true for every sample
-    if (s_batch_n && (uint32_t)(s.t_us - s_batch[s_batch_n - 1].t_us) > IMU_INTERVAL_US * 3 / 2) flush_batch();
+    if (s_batch_n) {
+      uint32_t dt = s.t_us - s_batch[s_batch_n - 1].t_us;
+      if (dt > 2000 && dt < 50000) s_period_us += 0.02f * ((float)dt - s_period_us);   // slow average of the real period
+      if ((float)dt > s_period_us * 1.5f) flush_batch();
+    }
     if (!s_batch_n) s_batch_first_ms = millis();
     s_batch[s_batch_n++] = s;
     if (s_batch_n >= girth::BATCH_MAX) flush_batch();
@@ -359,8 +372,8 @@ static void print_status() {
   }
   Serial.printf(" | arranques %lu fallidos %lu reinicios %lu errores I2C %lu | ultimo error: %s\n", (unsigned long)b.starts,
                 (unsigned long)b.start_failures, (unsigned long)b.restarts_running, (unsigned long)b.i2c_errors, b.last_error);
-  Serial.printf("[AVO CINCHA %s] ENVIO IMU lotes ok %lu sin confirmar %lu | muestras descartadas sin enlace %lu | BATERIA %s",
-                AVO_GIRTH_VERSION, (unsigned long)s_imu_sent_ok, (unsigned long)s_imu_unconfirmed,
+  Serial.printf("[AVO CINCHA %s] ENVIO IMU periodo real %.0f us | lotes ok %lu sin confirmar %lu | muestras descartadas sin enlace %lu | BATERIA %s",
+                AVO_GIRTH_VERSION, s_period_us, (unsigned long)s_imu_sent_ok, (unsigned long)s_imu_unconfirmed,
                 (unsigned long)s_imu_discard_nolink, s_bat_mv ? "" : "no medida");
   if (s_bat_mv) Serial.printf("%u mV (~%u %%, estimado)", s_bat_mv, s_bat_pct);
   Serial.printf(" [pin GPIO5 %u mV, divisor %.2f sin verificar] | soporte %s | reposo %s\n", s_bat_pin_mv, s_bat_ratio,
@@ -407,7 +420,7 @@ void setup() {
   const char* volatile id = AVO_GIRTH_IMAGE_ID;     // keeps the marker in the image
   char bm[18] = "-";
   if (s_paired) now_mac_str(s_back, bm);
-  Serial.printf("\n[AVO] AVO-GIRTH %s ready — XIAO ESP32-C6 %s, ESP-NOW canal %u, antena %s, espalda: %s, IMU: BNO085 I2C (SDA 23, SCL 16)\n",
+  Serial.printf("\n[AVO] AVO-GIRTH %s ready - XIAO ESP32-C6 %s, ESP-NOW canal %u, antena %s, espalda: %s, IMU: BNO085 I2C (SDA 23, SCL 16)\n",
                 id + 1, s_dev_id, (unsigned)NOW_CHANNEL_DEFAULT, s_ant_ext ? "externa" : "interna", s_paired ? bm : "ninguna (buscando)");
   print_help();
   read_battery();

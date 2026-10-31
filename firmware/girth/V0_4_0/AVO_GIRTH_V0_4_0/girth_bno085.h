@@ -69,6 +69,8 @@ class Bno085 {
   SemaphoreHandle_t mtx_ = nullptr;
   volatile uint32_t int_us_ = 0;
   volatile bool restart_req_ = false;
+  bool attached_ = false;
+  void detach_int();
   uint8_t addr_ = 0x4A;
   uint32_t hz_ = 400000;
   uint8_t seq_[6] = {0};

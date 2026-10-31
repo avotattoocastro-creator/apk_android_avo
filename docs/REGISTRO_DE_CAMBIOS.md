@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.1 (XIAO ESP32-C6) — periodo real en los lotes; primera prueba física de la IMU
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
+**Prueba física de 0.4.0 (monitor serie del usuario):**
+- BNO085 en 0x4A, SH-2 3.2.13; ~125 Hz sin pérdidas ni errores I²C; |acc| ≈ 9,84 m/s² en reposo. **IMU PROBADA FÍSICAMENTE.**
+- Enlace: la espalda guardada AC:A7:04:06:CD:24 no da ACK; responde otra espalda, AC:A7:04:06:C0:B4, que la cincha ignora porque no es la guardada. Hay que emparejar de nuevo (BOOT 5 s en la cincha). Enlace NO VERIFICADO todavía.
+**Qué cambia:** los lotes usan el periodo real sacado de las marcas de tiempo (0.4.0 escribía 10 000 µs, pero el BNO da ~8 ms); se muestran los periodos que confirma el BNO; sin aviso de ISR al arrancar.
+**No se ha tocado:** espalda, pecho, app, particiones, actualización.
+**Validación:** CI pendiente de esta entrada (ver el siguiente commit del bot). Enlace y datos en la sesión del pecho: NO VERIFICADO.
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.0 (XIAO ESP32-C6) — BNO085 por SH-2, antena interna, enlace confirmado
 **Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085` (desde `feature/avo-wifi-sync`) · **Commits:** `066ac4c`, `efc9d31` · **CI:** run 41212893621 (éxito)
 **Qué cambia:** firmware nuevo de la cincha sobre GIRTH 0.1.0 (el código de 0.2.0 no está en el repositorio):

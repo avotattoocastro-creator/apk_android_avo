@@ -44,10 +44,15 @@ void Bno085::fail(const char* why) {
 void Bno085::hold_in_reset() {
   restart_req_ = true;
   if (th_) vTaskSuspend(th_);
-  detachInterrupt(pins_.intn);
+  detach_int();
   Wire.end();
   pinMode(pins_.rst, OUTPUT);
   digitalWrite(pins_.rst, LOW);
+}
+
+// 0.4.1: only detach when attached (0.4.0 printed "GPIO isr service is not installed" on the first start)
+void Bno085::detach_int() {
+  if (attached_) { detachInterrupt(pins_.intn); attached_ = false; }
 }
 
 bool Bno085::wait_int_low(uint32_t ms) {
@@ -129,7 +134,7 @@ bool Bno085::start() {
   st_.state = BnoState::STARTING;
   st_.starts++;
   xSemaphoreGive(mtx_);
-  detachInterrupt(pins_.intn);
+  detach_int();
   Wire.end();
   memset(seq_, 0, sizeof(seq_));
   asm_.reset_state();
@@ -163,6 +168,7 @@ bool Bno085::start() {
   if (!addr_) { fail("sin ACK en 0x4A ni 0x4B (SDA/SCL, PS0/PS1 o ADD)"); return false; }
 
   attachInterruptArg(digitalPinToInterrupt(pins_.intn), &Bno085::isr, this, FALLING);
+  attached_ = true;
   int_us_ = (uint32_t)esp_timer_get_time();
 
   // 3. Start-up packets (advertisement, reset complete): read for up to 300 ms
@@ -211,6 +217,11 @@ bool Bno085::start() {
   Serial.printf("[AVO CINCHA] IMU: BNO085 en 0x%02X a %lu kHz, INT a los %d ms, SH-2 %u.%u.%u (pieza %lu, build %lu), "
                 "%lu muestras en 1 s\n", addr_, (unsigned long)(hz_ / 1000), st_.int_ms, p.sw_major, p.sw_minor, p.patch,
                 (unsigned long)p.part, (unsigned long)p.build, (unsigned long)(asm_.samples - s0));
+  // 0.4.1: the BNO picks its nearest supported period (100 Hz asked -> ~125 Hz seen): show what it confirmed
+  Serial.printf("[AVO CINCHA] IMU: periodo pedido %lu us; confirmado por el BNO: acc %lu, giro %lu, mag %lu, lin %lu, cuaternion %lu us\n",
+                (unsigned long)interval_us_, (unsigned long)asm_.feature_interval_us[R_ACCEL], (unsigned long)asm_.feature_interval_us[R_GYRO],
+                (unsigned long)asm_.feature_interval_us[R_MAG], (unsigned long)asm_.feature_interval_us[R_LINACC],
+                (unsigned long)asm_.feature_interval_us[R_GAME_RV]);
   rate_t0_ = millis();
   rate_count_ = 0;
   last_sample_ms_ = millis();
@@ -261,7 +272,7 @@ void Bno085::task() {
       fails++;
       if (fails >= 3) hz_ = (fails % 2) ? 100000 : 400000;   // try the slow bus too
     }
-    detachInterrupt(pins_.intn);
+    detach_int();
     vTaskDelay(pdMS_TO_TICKS(pause_ms));
     if (pause_ms < 10000) pause_ms *= 2;
   }

@@ -1,4 +1,19 @@
-# AVO GIRTH V0.4.0 — cincha XIAO ESP32-C6 + BNO085
+# AVO GIRTH V0.4.x — cincha XIAO ESP32-C6 + BNO085
+
+## 0.4.1 (31/10/2026) — tras la primera prueba de 0.4.0 en el hardware
+- **Resultado de 0.4.0 en la cincha (PROBADO FÍSICAMENTE, monitor serie del usuario):**
+  - **IMU:** BNO085 en 0x4A a 400 kHz, INT a los 100 ms, SH-2 3.2.13 (pieza 10004148, build 6);
+  - 124,8–126 Hz, sin muestras perdidas y sin errores I²C;
+  - en reposo, acc (0,00, −3,98, 9,00) m/s² con |a| ≈ 9,84; aceleración lineal ≈ 0; cuaternión coherente con
+    unos 24° de inclinación.
+- **Enlace (log de 0.4.0):** la espalda guardada (AC:A7:04:06:CD:24) no da ningún ACK. Responde **otra** espalda,
+  AC:A7:04:06:C0:B4. La cincha la ignora a propósito, porque solo acepta la espalda guardada. → En la cincha,
+  BOOT 5 s para olvidar la antigua y emparejar con la actual.
+- **Correcciones de 0.4.1:**
+  - el BNO elige su periodo admitido más cercano: al pedir 100 Hz da ~125 Hz. 0.4.0 escribía 10 000 µs en los
+    lotes; **0.4.1 usa el periodo real** sacado de las marcas de tiempo y muestra al arrancar los periodos que
+    confirma el BNO;
+  - ya no sale el mensaje «GPIO isr service is not installed» en el primer arranque.
 
 Rama: `feature/girth-fw-0-4-0-bno085` (sale de `feature/avo-wifi-sync`). No toca `main`, la espalda, el pecho, las
 particiones ni el mecanismo de actualización.
