@@ -1163,7 +1163,7 @@ USB conectado. El usuario pide bajar el umbral de tensión para dormir.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-31 — BACK 3.13.5 (Heltec) — divisor del USB en cualquier pin libre de la fila del 5V
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `0e07869` · **CI:** [41155792294](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41155792294) (éxito)
 **Qué cambia:** la detección del USB acepta nivel alto en GPIO20, 18, 21, 19, 47 o 48 (pull-down interno) y al arrancar
 imprime el nivel de todos y el ADC de 20/18/19.
 **Por qué:** monitor del usuario 31/10 02:29 con la 3.13.4: `USB (GPIO20 171 mV): no detectado` con el USB conectado; con
