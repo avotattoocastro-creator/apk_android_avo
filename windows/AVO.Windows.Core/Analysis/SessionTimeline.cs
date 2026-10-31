@@ -350,7 +350,7 @@ public static class SessionWindow
             SessionId = s.SessionId, Sha256 = s.Sha256, Horse = s.Horse, Rider = s.Rider, HorseCode = s.HorseCode, RiderCode = s.RiderCode, HorseInFile = s.HorseInFile, RiderInFile = s.RiderInFile, IdentityApplied = s.IdentityApplied, StartedAt = s.StartedAt, SourceName = s.SourceName,
             Integrity = s.Integrity, HasRawTelemetry = s.HasRawTelemetry, DeclaredDistanceM = s.DeclaredDistanceM, DeclaredDurationS = s.DeclaredDurationS,
             DeclaredMaxSpeedMs = s.DeclaredMaxSpeedMs, TotalImuSamples = s.TotalImuSamples, TotalImuBatches = s.TotalImuBatches, InvalidFrames = s.InvalidFrames,
-            MarkerCount = s.MarkerCount, ImuPeriodUs = s.ImuPeriodUs, ImuOpaqueBatches = s.ImuOpaqueBatches, FileSha256 = s.FileSha256,
+            MarkerCount = s.MarkerCount, ImuPeriodUs = s.ImuPeriodUs, ImuOpaqueBatches = s.ImuOpaqueBatches, ImuUnits = s.ImuUnits, ImuFusedBatches = s.ImuFusedBatches, FileSha256 = s.FileSha256,
             SourcePath = s.SourcePath, DeclaredCanonicalSha256 = s.DeclaredCanonicalSha256, Discipline = s.Discipline,
         };
         c.Track.AddRange(s.Track.Where(p => In(p.GpsWeekMs)));
@@ -361,6 +361,7 @@ public static class SessionWindow
         c.GnssOtherCount = c.Track.Count - c.RtkFixCount - c.RtkFloatCount;
         c.UnusableGnssSamples = c.GnssSamples - c.Track.Count;
         c.Imu.AddRange(s.Imu);            // clipped to the window by ImuTimeline.Build
+        c.ImuFused.AddRange(s.ImuFused);
         c.Markers.AddRange(s.Markers);
         c.Segments.AddRange(s.Segments);
         c.RawSegmentPaths.AddRange(s.RawSegmentPaths);

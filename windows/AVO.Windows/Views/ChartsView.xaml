@@ -46,7 +46,7 @@
                     <c:SignalChart Series="{Binding AccelSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
                                    RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
                 </c:AvoChartPanel>
-                <c:AvoChartPanel Grid.Row="2" Header="IMU cincha · aceleración vertical z (g, escala nominal)" Margin="0,0,0,8" Visibility="{Binding ChartImu, Converter={StaticResource BoolVis}}">
+                <c:AvoChartPanel Grid.Row="2" Header="{Binding ImuChartHeader}" Margin="0,0,0,8" Visibility="{Binding ChartImu, Converter={StaticResource BoolVis}}">
                     <c:AvoChartPanel.Legend>
                         <StackPanel Orientation="Horizontal">
                             <c:AvoLegendItem Text="Izquierda" Swatch="{StaticResource AvoBlue}"/>

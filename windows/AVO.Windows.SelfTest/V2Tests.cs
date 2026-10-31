@@ -26,6 +26,7 @@ public static class V2Tests
         TidesWeatherAndTime();
         Geometry();
         RawImuDecoding(dir);
+        RawImuBno085Units(dir);
         ImporterSecurity(dir);
         Library(dir);
         Exports(dir);
@@ -249,6 +250,31 @@ public static class V2Tests
         for (int i = 0; i < samples.Length; i++)
             for (int k = 0; k < 9; k++) BinaryPrimitives.WriteInt16LittleEndian(p.AsSpan(24 + i * 18 + 2 * k), samples[i][k]);
         return p;
+    }
+
+    /// <summary>GIRTH 0.4.3+: header byte 15 = 1 declares BNO085 units (acc Q8 m/s², gyro Q9 rad/s); fmt 1 carries linear
+    /// acceleration and quaternion. A session without the byte keeps the nominal scale.</summary>
+    private static void RawImuBno085Units(string dir)
+    {
+        short[] s1 = [0, 0, 2511, 512, 0, 0, 16, 0, 0], s2 = [256, 0, 2511, 0, 0, 0, 16, 0, 0];
+        var b0 = Imu(0, 0, s1, s2);
+        b0[15] = 1;
+        var b1 = new byte[24 + 2 * 14];
+        b1[1] = 0; b1[2] = 2; b1[3] = 1; b1[15] = 1;
+        BinaryPrimitives.WriteUInt16LittleEndian(b1.AsSpan(12), 7978);
+        short[] f = [128, 0, 0, 0, 0, 0, 16384];
+        for (int i = 0; i < 2; i++) for (int k = 0; k < 7; k++) BinaryPrimitives.WriteInt16LittleEndian(b1.AsSpan(24 + i * 14 + 2 * k), f[k]);
+        var raw = Raw("SINTETICA_BNO", (1, 3_000_000, Uart(0x20, b0)), (1, 3_000_000, Uart(0x20, b1)));
+        string file = Path.Combine(dir, "imu_bno.avr");
+        File.WriteAllBytes(file, raw);
+        var s = TrainingImporter.Import(file);
+        A(s.ImuUnits == 1 && s.Imu.Count == 2 && s.ImuOpaqueBatches == 0, "Cincha 0.4.3: unidades del BNO085 declaradas en la cabecera");
+        A(s.ImuFusedBatches == 1 && s.ImuFused.Count == 2 && s.ImuFused[0].Lx == 128 && s.ImuFused[1].Qr == 16384, "IMU fmt 1: aceleración lineal y cuaternión decodificados");
+        var imu = ImuTimeline.Build(s, SessionTimeline.Build(s));
+        A(imu.Note == ImuTimeline.Bno085ScaleNote && Math.Abs(2511 * imu.AccelGPerLsb - 1.0) < 1e-3 && Math.Abs(512 * imu.GyroDpsPerLsb - 57.2958) < 1e-3,
+            "Escala BNO085: 2511 LSB = 1 g, 512 LSB = 1 rad/s = 57,3 °/s");
+        var old = new TrainingSession();
+        A(ImuTimeline.Build(old, SessionTimeline.Build(old)).AccelGPerLsb == ImuTimeline.NominalAccelGPerLsb, "Sin unidades declaradas: escala nominal como antes");
     }
 
     private static void RawImuDecoding(string dir)

@@ -219,7 +219,7 @@ public sealed partial class MainViewModel
             int i1 = Array.BinarySearch(ch.T, b); if (i1 < 0) i1 = ~i1;
             if (i1 - i0 < 4) continue;
             var x = new double[i1 - i0]; var y = new double[i1 - i0];
-            for (int i = i0; i < i1; i++) { x[i - i0] = ch.T[i] - a; y[i - i0] = Math.Sqrt((double)ch.Ax[i] * ch.Ax[i] + (double)ch.Ay[i] * ch.Ay[i] + (double)ch.Az[i] * ch.Az[i]) * ImuTimeline.NominalAccelGPerLsb; }
+            for (int i = i0; i < i1; i++) { x[i - i0] = ch.T[i] - a; y[i - i0] = Math.Sqrt((double)ch.Ax[i] * ch.Ax[i] + (double)ch.Ay[i] * ch.Ay[i] + (double)ch.Az[i] * ch.Az[i]) * ch.AccelGPerLsb; }
             list.Add(new ChartSeries { Name = ch.Name, X = x, Y = y, Color = HorseDiagram.SensorColor(ch.ImuId), Thickness = 1.4, Unit = "g", Format = "0.00" });
         }
         ImuWindowSeries = list;
