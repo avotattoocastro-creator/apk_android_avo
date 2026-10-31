@@ -797,9 +797,7 @@ void setup() {
 // ZedManager (UBX, RTK, 8 Hz), NAV-PVT, ESP-NOW, telemetry and RTCM all come back exactly as at power-up.
 static void usb_charge_mode() {
   const uint32_t t0 = millis();
-  Serial.printf("
-[USB] t=%lu ms: USB CONECTADO -> modo carga
-", (unsigned long)t0);
+  Serial.printf("\n[USB] t=%lu ms: USB CONECTADO -> modo carga\n", (unsigned long)t0);
   // 1. nothing more is sent to the ZED (zed_write is guarded by s_zed_on) and its UART is stopped
   if (s_zed_on) { ZED.flush(); s_zed_on = false; ZED.end(); }
   // 2. GPIO33 (TX) and GPIO35 (RX) in high impedance: no level can feed the ZED through its UART pins
@@ -818,8 +816,7 @@ static void usb_charge_mode() {
     if (now - last >= 250) {
       last = now;
       if (!usb_threshold_update(now)) {
-        Serial.printf("[USB] t=%lu ms: USB RETIRADO tras %lu s de carga -> libero GPIO34 (alta impedancia), espero 1500 ms y reinicio limpio
-",
+        Serial.printf("[USB] t=%lu ms: USB RETIRADO tras %lu s de carga -> libero GPIO34 (alta impedancia), espero 1500 ms y reinicio limpio\n",
                       (unsigned long)now, (unsigned long)((now - t0) / 1000));
         zed_shdn(true);
         delay(1500);
@@ -830,8 +827,7 @@ static void usb_charge_mode() {
     }
     if (now - last_print >= 1000) {
       last_print = now;
-      Serial.printf("[USB] carga %lu s | GPIO20=%u mV (%u/9 validas) | USB=%s%s | GPIO34=OUTPUT LOW | POLOLU APAGADO — USB CONECTADO | bateria %u mV
-",
+      Serial.printf("[USB] carga %lu s | GPIO20=%u mV (%u/9 validas) | USB=%s%s | GPIO34=OUTPUT LOW | POLOLU APAGADO — USB CONECTADO | bateria %u mV\n",
                     (unsigned long)((now - t0) / 1000), (unsigned)s_usb20_mv, (unsigned)s_usb20_valid, s_usb_on ? "CONECTADO" : "DESCONECTADO",
                     s_usb_cand == 0 ? " (confirmando DESCONECTADO)" : "", (unsigned)read_battery_mv());
     }
