@@ -24,6 +24,35 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Windows V2 PRO — geocercas, líneas de salida y meta con sentido, y envío al reloj por Bluetooth
+**Autor:** Claude · **Rama:** `feature/windows-advanced-analysis`
+**Qué cambia:**
+- **Página «Geocercas y líneas»:** mapa editable por clic con los 8 huecos de geocerca del reloj (círculo de 5 m a 5 km o polígono de hasta 24 vértices, activa o no) y sus 4 líneas virtuales (extremos A y B, uso salida y meta, salida, meta o control, y sentido que marca).
+  - Las validaciones son las de `validate_fence()`.
+  - Los cruces del entrenamiento abierto aparecen con su sentido y con «Marca» o «No marca», junto con las vueltas y los tiempos de salida a meta.
+  - «Crear tramos» convierte esos tiempos en tramos.
+- **Enviar al reloj / Leer del reloj** por Bluetooth del PC (WinRT), con el **mismo protocolo y formato que la app Android** (portado de `BleProtocol.kt`, `AvoClient.kt`, `WatchConfig.kt` y `Fence.kt`):
+  - emparejamiento sin código y autorización del PC con BOOT, la misma reclamación de Android;
+  - clave guardada con DPAPI por usuario;
+  - `SET_FENCE` por hueco, `SET_ACTIVE_FENCES` y `SET_CONFIG` leer-modificar-escribir solo para las líneas;
+  - comprobación final con `GET_CONFIG`.
+  - Antes de enviar se confirma la lista de cambios. Solo se envía lo que cambia y se conservan la identidad y las secciones desconocidas.
+**Limitación del reloj (no se ha tocado el firmware):** el pecho cuenta los cruces de las líneas en los dos sentidos.
+- `VirtualLine` no tiene campo de sentido y `crosses()` es simétrico.
+- El sentido se guarda en el PC y se aplica al analizar el entrenamiento.
+- La línea 1 es la que el reloj usa para cronometrar vueltas.
+- Para que el reloj marque solo en un sentido habría que ampliar el firmware: un byte de sentido al final de la sección de línea, que el formato permite.
+**Archivos:**
+- `windows/AVO.Windows.Core/Watch/{AvoBle.cs,AvoConfig.cs,Geofences.cs}`, `windows/AVO.Windows/Ble/WinBle.cs`;
+- `ViewModels/MainViewModel.Geofences.cs`, `Views/GeofencesView.*`, `Controls/MapControl.cs` (formas y clic);
+- csproj: TFM `net10.0-windows10.0.19041.0` y DPAPI;
+- `windows/tools/watch-vectors/`, `AVO.Windows.SelfTest/{WatchTests.cs,watch_vectors.json}`.
+**Validación:**
+- IMPLEMENTADO.
+- Las autopruebas comprueban la configuración, las geocercas, los fragmentos BLE, las pruebas HMAC y el test de cruce **byte a byte contra el código real del firmware**.
+- Flujo completo (autorización con BOOT, envío, verificación y rechazo sin autorización) contra un reloj simulado.
+- **NO VERIFICADO con el reloj ni con Bluetooth real.**
+
 ## 2026-10-31 — Windows V2 PRO — pantalla de inicio: logo y letras nítidos (vectoriales)
 **Autor:** Claude · **Rama:** `feature/windows-advanced-analysis`
 **Qué cambia:**

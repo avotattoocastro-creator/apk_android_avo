@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Avo.Windows.Core;
 
-public enum SegmentKind { Manual, Distance, SpeedBand, Engine }
+public enum SegmentKind { Manual, Distance, SpeedBand, Engine, Lines }
 
 /// <summary>User or automatic selection of a time interval of one session. Stored apart from the telemetry.</summary>
 public sealed class SegmentDefinition

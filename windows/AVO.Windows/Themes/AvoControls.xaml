@@ -183,7 +183,7 @@
     <!-- Left navigation rail item (AvoNavigationItem): icon + text, red when active -->
     <Style x:Key="AvoNavItem" TargetType="RadioButton">
         <Setter Property="Foreground" Value="{StaticResource AvoTextDim}"/>
-        <Setter Property="Height" Value="40"/>
+        <Setter Property="Height" Value="36"/>
         <Setter Property="Margin" Value="8,2"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

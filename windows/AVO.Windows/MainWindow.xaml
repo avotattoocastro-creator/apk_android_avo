@@ -92,6 +92,7 @@
                         <TextBlock Text="{Binding EngineInfo}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
                         <TextBlock Text="Formato AVO-TRAINING-1 · AVORAW1" Style="{StaticResource AvoCaption}" Margin="0,3,0,0"/>
                     </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Inicio" Tag="{StaticResource IconHome}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Home}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Entrenamientos" Tag="{StaticResource IconHistory}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Sessions}"/>
@@ -103,12 +104,14 @@
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Tramos" Tag="{StaticResource IconSegments}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Segments}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Biomecánica" Tag="{StaticResource IconBiomech}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Biomech}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Comparar" Tag="{StaticResource IconCompare}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Compare}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Geocercas y líneas" Tag="{StaticResource IconFlag}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Geofences}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Mareas y entorno" Tag="{StaticResource IconTides}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Tides}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Informes" Tag="{StaticResource IconReports}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Reports}"/>
                         <Separator Margin="18,8"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Servidor AVO" Tag="{StaticResource IconServer}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Server}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Motor AVO" Tag="{StaticResource IconEngine}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Engine}"/>
                     </StackPanel>
+                    </ScrollViewer>
                 </DockPanel>
             </Border>
             <Grid Grid.Column="1">
@@ -122,6 +125,7 @@
                 <v:SegmentsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Segments}"/>
                 <v:BiomechView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Biomech}"/>
                 <v:CompareView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Compare}"/>
+                <v:GeofencesView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Geofences}"/>
                 <v:TidesView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Tides}"/>
                 <v:ReportsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Reports}"/>
                 <v:ServerView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Server}"/>

@@ -67,7 +67,7 @@ public partial class App : Application
     }
 
     // ------------------------------------------------------------------ capture mode (CI visual evidence)
-    private static readonly string[] Pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Charts", "Segments", "Biomech", "Compare", "Tides", "Reports", "Server", "Engine"];
+    private static readonly string[] Pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Charts", "Segments", "Biomech", "Compare", "Geofences", "Tides", "Reports", "Server", "Engine"];
 
     private static async Task CaptureAsync(MainWindow window, MainViewModel vm, string dir, string? demoDir, string sizes)
     {
@@ -137,6 +137,7 @@ public partial class App : Application
             vm.CursorTime = t;
             vm.SelectedSegment = vm.SegmentRows.Skip(2).FirstOrDefault() ?? vm.SegmentRows.FirstOrDefault();
             vm.CursorTime = t;
+            vm.LoadExampleGeofences();
             vm.Page = "Tides";
             await vm.LoadEnvironmentAsync(true);
             vm.ReportCompare = true;

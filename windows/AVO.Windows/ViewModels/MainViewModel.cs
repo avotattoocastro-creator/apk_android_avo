@@ -79,6 +79,7 @@ public sealed partial class MainViewModel : ObservableObject
         InitServer();
         InitEnvironment();
         InitStable();
+        InitGeofences();
     }
 
     private void Fail(Exception ex)
@@ -96,11 +97,12 @@ public sealed partial class MainViewModel : ObservableObject
         if (Page == "Compare") RefreshCompare();
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
         if (Page == "Reports") RefreshReportPreview();
+        if (Page == "Geofences") RefreshGeo();
         Raise(nameof(ShowEmptyState));
     }
 
     /// <summary>Analysis pages without any training: show a clear «import / demo» panel instead of empty widgets.</summary>
-    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine" or "Stable" or "Riders");
+    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine" or "Stable" or "Riders" or "Geofences");
 
     public const string DemoUrl = "https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/windows-v2-pro-latest/AVO_Windows_V2_DEMO_SINTETICA.zip";
     private string _demoState = "";
@@ -227,6 +229,7 @@ public sealed partial class MainViewModel : ObservableObject
         RefreshBiomech();
         RefreshSessionPanels();
         RefreshReportPreview();
+        if (GeoPlan is not null) RefreshCrossings();
         RaiseMany(nameof(HasSession), nameof(TimelineEnd), nameof(TimelineStart), nameof(WindowText), nameof(IsTrimmed));
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
     }

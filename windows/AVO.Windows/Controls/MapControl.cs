@@ -23,6 +23,25 @@ public sealed class MapTrack
     internal double[]? Px0, Py0;   // projected coordinates at zoom 0 (256 px world)
 }
 
+/// <summary>Shape drawn over the map (geofence outline, start/finish line…), in lat/lon.</summary>
+public sealed class MapShape
+{
+    public required IReadOnlyList<(double Lat, double Lon)> Points { get; init; }
+    public bool Closed { get; init; }
+    public Color Stroke { get; init; } = Color.FromRgb(0xED, 0x12, 0x2A);
+    public Color Fill { get; init; } = Colors.Transparent;
+    public double Thickness { get; init; } = 2.5;
+    public string? Label { get; init; }
+    public bool ShowVertices { get; init; }
+    /// <summary>Lines only: 0 = no arrow, 1 = crossing counts left→right (seen from A to B), -1 = right→left, 2 = both directions.</summary>
+    public int Arrow { get; init; }
+    /// <summary>Lines only: write A and B at the ends.</summary>
+    public bool EndLabels { get; init; }
+}
+
+/// <summary>Point clicked on the map when <see cref="MapControl.MapClickCommand"/> is set.</summary>
+public sealed record MapClick(double Lat, double Lon);
+
 /// <summary>
 /// Interactive Web-Mercator map with optional imagery tiles (Esri World Imagery / hybrid, same provider and attribution
 /// as the Android app) cached on disk, and an offline vector mode. Mouse wheel zooms, drag pans, click selects the nearest
@@ -47,6 +66,9 @@ public sealed class MapControl : FrameworkElement
         new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
     public static readonly DependencyProperty ShowRouteProperty = DependencyProperty.Register(nameof(ShowRoute), typeof(bool), typeof(MapControl),
         new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
+    public static readonly DependencyProperty ShapesProperty = DependencyProperty.Register(nameof(Shapes), typeof(IReadOnlyList<MapShape>), typeof(MapControl),
+        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, (d, _) => ((MapControl)d).OnShapesChanged()));
+    public static readonly DependencyProperty MapClickCommandProperty = DependencyProperty.Register(nameof(MapClickCommand), typeof(ICommand), typeof(MapControl));
     public static readonly DependencyProperty FitPaddingProperty = DependencyProperty.Register(nameof(FitPadding), typeof(Thickness), typeof(MapControl),
         new PropertyMetadata(new Thickness(40)));
 
@@ -61,6 +83,16 @@ public sealed class MapControl : FrameworkElement
     public bool ShowRoute { get => (bool)GetValue(ShowRouteProperty); set => SetValue(ShowRouteProperty, value); }
     /// <summary>Extra room kept free around the route when fitting (overlays on top of the map).</summary>
     public Thickness FitPadding { get => (Thickness)GetValue(FitPaddingProperty); set => SetValue(FitPaddingProperty, value); }
+
+    public IReadOnlyList<MapShape>? Shapes { get => (IReadOnlyList<MapShape>?)GetValue(ShapesProperty); set => SetValue(ShapesProperty, value); }
+    /// <summary>When set, a click (without dragging) sends a <see cref="MapClick"/> instead of selecting the nearest route point.</summary>
+    public ICommand? MapClickCommand { get => (ICommand?)GetValue(MapClickCommandProperty); set => SetValue(MapClickCommandProperty, value); }
+    private bool _shapesFitted;
+    private void OnShapesChanged()
+    {
+        // without a route, the first shapes decide the view (later edits keep the user's view)
+        if (!_shapesFitted && (Tracks is null || Tracks.Count == 0) && Shapes is { Count: > 0 } && !_userMoved) { _shapesFitted = true; FitToRoute(); }
+    }
 
     public double Zoom { get; private set; } = 14.5;
     public static double HomeLatitude { get; set; } = TrainingPlace.Regaton.Latitude;
@@ -119,6 +151,14 @@ public sealed class MapControl : FrameworkElement
             for (int i = 0; t.Px0 is not null && i < t.Px0.Length; i++)
             { minX = Math.Min(minX, t.Px0[i]); maxX = Math.Max(maxX, t.Px0[i]); minY = Math.Min(minY, t.Py0![i]); maxY = Math.Max(maxY, t.Py0[i]); }
         if (minX > maxX)
+            foreach (var sh in Shapes ?? [])
+                foreach (var (la, lo) in sh.Points)
+                {
+                    var (x, y) = TileMath.LatLonToPixel(la, lo, 0);
+                    minX = Math.Min(minX, x); maxX = Math.Max(maxX, x); minY = Math.Min(minY, y); maxY = Math.Max(maxY, y);
+                }
+        if (maxX - minX < 1e-6 && maxX >= minX) { minX -= 0.002; maxX += 0.002; minY -= 0.002; maxY += 0.002; }   // a single point
+        if (minX > maxX)
         {
             // No route: show the usual training area (Playa del Regatón, Laredo) instead of an empty ocean at 0°,0°.
             var (hx, hy) = TileMath.LatLonToPixel(HomeLatitude, HomeLongitude, 0);
@@ -153,6 +193,7 @@ public sealed class MapControl : FrameworkElement
         else DrawGrid(dc);
         var tracks = Tracks ?? [];
         if (ShowRoute) foreach (var t in tracks) DrawTrack(dc, t, tracks.Count > 1);
+        foreach (var sh in Shapes ?? []) DrawShape(dc, sh);
         DrawScale(dc);
         if (Provider != MapProvider.VectorOffline)
         {
@@ -403,6 +444,65 @@ public sealed class MapControl : FrameworkElement
         dc.DrawText(ft, new Point(box.X + 6, box.Y + 2));
     }
 
+    private Point ScreenOf(double lat, double lon) { var (x, y) = TileMath.LatLonToPixel(lat, lon, 0); return Screen(x, y); }
+
+    private void DrawShape(DrawingContext dc, MapShape sh)
+    {
+        if (sh.Points.Count == 0) return;
+        var pts = sh.Points.Select(p => ScreenOf(p.Lat, p.Lon)).ToArray();
+        var pen = new Pen(new SolidColorBrush(sh.Stroke), sh.Thickness) { LineJoin = PenLineJoin.Round, StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round };
+        if (pts.Length > 1)
+        {
+            var g = new StreamGeometry();
+            using (var c = g.Open())
+            {
+                c.BeginFigure(pts[0], sh.Closed && sh.Fill.A > 0, sh.Closed);
+                c.PolyLineTo(pts.Skip(1).ToList(), true, true);
+            }
+            g.Freeze();
+            dc.DrawGeometry(sh.Closed && sh.Fill.A > 0 ? new SolidColorBrush(sh.Fill) : null, pen, g);
+        }
+        var white = new Pen(Brushes.White, 1.5);
+        if (sh.ShowVertices || pts.Length == 1)
+            foreach (var p in pts) dc.DrawEllipse(new SolidColorBrush(sh.Stroke), white, p, 4.5, 4.5);
+        if (sh.Arrow != 0 && pts.Length >= 2)
+        {
+            var a = pts[0]; var b = pts[^1];
+            var m = new Point((a.X + b.X) / 2, (a.Y + b.Y) / 2);
+            double dx = b.X - a.X, dy = b.Y - a.Y, len = Math.Sqrt(dx * dx + dy * dy);
+            if (len > 4)
+            {
+                // left of A→B on screen (north up, y down) = (dy, -dx)/len ; a left→right crossing points the other way
+                var lr = new Vector(-dy / len, dx / len);
+                void Arrow(Vector dir)
+                {
+                    var tip = m + dir * 30;
+                    var side = new Vector(-dir.Y, dir.X);
+                    dc.DrawLine(pen, m, tip);
+                    var head = new StreamGeometry();
+                    using (var c = head.Open()) { c.BeginFigure(tip, true, true); c.LineTo(tip - dir * 10 + side * 6, true, true); c.LineTo(tip - dir * 10 - side * 6, true, true); }
+                    head.Freeze();
+                    dc.DrawGeometry(new SolidColorBrush(sh.Stroke), null, head);
+                }
+                if (sh.Arrow is 1 or 2) Arrow(lr);
+                if (sh.Arrow is -1 or 2) Arrow(-lr);
+            }
+        }
+        if (sh.EndLabels && pts.Length >= 2)
+        {
+            dc.DrawText(Text("A", 11, Brushes.White), pts[0] + new Vector(6, -16));
+            dc.DrawText(Text("B", 11, Brushes.White), pts[^1] + new Vector(6, -16));
+        }
+        if (!string.IsNullOrEmpty(sh.Label))
+        {
+            var at = pts.Length > 2 && sh.Closed ? new Point(pts.Average(p => p.X), pts.Average(p => p.Y)) : pts[0];
+            var ft = Text(sh.Label, 11, Brushes.White);
+            var box = new Rect(at.X - ft.Width / 2 - 5, at.Y - ft.Height - 10, ft.Width + 10, ft.Height + 4);
+            dc.DrawRoundedRectangle(new SolidColorBrush(Color.FromArgb(0xD8, 0x10, 0x10, 0x14)), new Pen(new SolidColorBrush(sh.Stroke), 1), box, 3, 3);
+            dc.DrawText(ft, new Point(box.X + 5, box.Y + 2));
+        }
+    }
+
     private void DrawScale(DrawingContext dc)
     {
         double lat = TileMath.PixelToLatLon(_cx, _cy, 0).lat;
@@ -462,7 +562,17 @@ public sealed class MapControl : FrameworkElement
     {
         base.OnMouseLeftButtonUp(e);
         ReleaseMouseCapture();
-        if (_down is Point d && !_moved) SelectNearest(d);
+        if (_down is Point d && !_moved)
+        {
+            if (MapClickCommand is { } cmd)
+            {
+                double sc = Math.Pow(2, Zoom);
+                var (lat, lon) = TileMath.PixelToLatLon(_cx + (d.X - ActualWidth / 2) / sc, _cy + (d.Y - ActualHeight / 2) / sc, 0);
+                var click = new MapClick(lat, lon);
+                if (cmd.CanExecute(click)) cmd.Execute(click);
+            }
+            else SelectNearest(d);
+        }
         _down = null;
     }
 
