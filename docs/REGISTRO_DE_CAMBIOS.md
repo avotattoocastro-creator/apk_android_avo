@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — BACK 3.13.9 (Heltec) — GPS apagado con el USB conectado
+**Autor:** Claude · Rama `fix/back-3-13-9-usb-gps-off` (desde `diag/back-3-13-8-pololu-libre`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:** `zed_shdn()`: GPS encendido = GPIO34 en alta impedancia (pull-up del Pololu a VIN = 3V3), apagado =
+GPIO34 OUTPUT LOW; nunca ALTO. USB confirmado con 8 lecturas seguidas en ALTO de GPIO20 → paro de GNSS/RTCM, GPIO34
+LOW, TX a LOW, sueño profundo durante la carga; al retirarlo, GPIO34 libre, UART1 RX35/TX33 y recuperación de UBX y
+NAV-PVT, con tiempos en el monitor. Modo carga 3.8.2: TX del ZED a LOW.
+**Por qué:** petición del usuario; la 3.13.8 ha recuperado la comunicación GNSS (460800). Cableado nuevo: VIN del Pololu al 3V3.
+**No se ha tocado:** UART (RX35/TX33), `ZedManager`, NAV-PVT, ESP-NOW, RTCM, brownout, umbrales de batería.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. **La detección del USB no es fiable** (GPIO20 0,16–0,17 V con USB):
+mientras no se arregle el circuito el GPS no se apaga por USB. El apagado real de VOUT solo se dará por bueno midiéndolo.
+**Pendiente:** señal física de USB a GPIO20; medir VOUT ≈ 0 V con USB; pruebas de las tres situaciones en la espalda.
+
 ## 2026-10-31 — BACK 3.13.8 DIAGNÓSTICO (Heltec) — Pololu siempre encendido
 **Autor:** Claude · Rama `diag/back-3-13-8-pololu-libre` (desde `fix/back-3-13-8-gps-uart`) · **Commits:** `39ce718`, `90c26a0` · **CI:** [41160703337](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41160703337) (éxito: imagen de 915 776 B)
 **Qué cambia:** `AVO_POLOLU_FREE 1`: todo el control de GPIO34 pasa por `zed_shdn()`/`zed_shdn_sleep()`; en esta

@@ -301,3 +301,22 @@ Rama `diag/back-3-13-8-pololu-libre`, binario `AVO_BACK_V3_13_8_DIAG_POLOLU_firm
 - Con GPIO34 suelto, el pull-up del Pololu sube el pin hacia la tensión de la batería (hasta 4,2 V) a través de 100 kΩ:
   unos µA por el diodo de protección del ESP32-S3. Para una prueba corta no es un problema; si se deja así, poner
   100 kΩ de SHDN a GND (el pin queda ≤ 2,1 V y el Pololu sigue encendido).
+
+## V3.13.9 — GPS apagado con el USB conectado (2026-10-31)
+Rama `fix/back-3-13-9-usb-gps-off` (desde la 3.13.8). Cableado confirmado: **VIN del Pololu = 3V3 de la Heltec**,
+SHDN = GPIO34, VOUT = GPS. UART sin cambios: RX=GPIO35, TX=GPIO33 (el ZED queda a 460800 tras la configuración).
+- **Pololu habilitado:** GPIO34 en alta impedancia (`INPUT` sin pulls). El SHDN sube por su pull-up de 100 kΩ a VIN,
+  que ahora es 3,3 V: el pin nunca ve más de 3,3 V. **GPIO34 nunca se pone en ALTO.**
+- **Pololu deshabilitado:** GPIO34 `OUTPUT LOW` (fijado durante el sueño profundo).
+- **USB:** confirmado solo con 8 lecturas seguidas en ALTO de GPIO20 (2 s). Entonces: se para el GNSS y el RTCM
+  (radio apagada), GPIO34 LOW, TX (GPIO33) a LOW, RX (GPIO35) como entrada, y sueño profundo mientras carga
+  (comprueba el USB cada 3 s). Al retirarlo: GPIO34 libre, 1,5 s, UART1 RX35/TX33, escucha, configuración UBX y NAV-PVT.
+- Monitor con tiempos: `[USB] t=… GPIO20 HIGH`, `[USB] … USB CONFIRMADO`, `[USB] … despierta: USB retirado`,
+  `[GNSS] t=… GPIO34 OUTPUT LOW / ALTA IMPEDANCIA`, `[GNSS] primer UBX valido … ms`, `[GNSS] primer NAV-PVT … ms`.
+- **Detección del USB todavía sin resolver (eléctrico):** GPIO20 está libre en esta placa (es el D+ del USB propio del
+  ESP32-S3, que no va al USB-C; el firmware desactiva ese USB y sus pull-up), pero con el USB conectado mide 0,16–0,17 V:
+  la señal no llega. Con GPIO20 siempre en LOW el GPS sigue funcionando y nunca se apaga por USB.
+- **Pendiente físico:** encontrar un punto con 5 V solo con USB (medir con polímetro) y llevarlo a GPIO20 por el
+  divisor 5,1 k / 10 k; comprobar después con polímetro que VOUT del Pololu cae a ≈ 0 V con el USB conectado.
+- Nota: con VIN en el 3V3 de la Heltec, el arranque del GPS vuelve a tirar del regulador de la Heltec (a través del
+  arranque suave del Pololu). Vigilar `motivo de reinicio 9` (brownout) al habilitar el Pololu.

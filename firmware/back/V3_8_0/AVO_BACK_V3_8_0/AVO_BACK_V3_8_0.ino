@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.13.8 (ESP-NOW) · V3.13.8: GPS UART PIN FIX: UART1 RX=GPIO35 (green wire, ZED TX) and TX=GPIO33 (white wire, ZED RX) per the confirmed wiring; GPIO35 never driven (no LED use, not held LOW while asleep); USB sensed only by GPIO20 as a filtered digital input (no ADC2); monitor lines GNSS bytes/UBX/NMEA/NAV-PVT/estado · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.9 (ESP-NOW) · V3.13.9: Pololu (VIN on the Heltec 3V3) enabled by leaving GPIO34 in high impedance (its own pull-up), disabled with GPIO34 OUTPUT LOW; never driven HIGH. USB confirmed on GPIO20 (2 s of HIGH readings) → GNSS and RTCM stop, GPIO34 LOW, deep sleep while charging; USB removed → GPIO34 released, UART1 RX35/TX33 restarted, times to first UBX / NAV-PVT logged · V3.13.8: GPS UART PIN FIX: UART1 RX=GPIO35 (green wire, ZED TX) and TX=GPIO33 (white wire, ZED RX) per the confirmed wiring; GPIO35 never driven (no LED use, not held LOW while asleep); USB sensed only by GPIO20 as a filtered digital input (no ADC2); monitor lines GNSS bytes/UBX/NMEA/NAV-PVT/estado · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -107,31 +107,24 @@ static const uint32_t VEXT_DELAY_MS = 1000;
 // wires on GPIO33 and GPIO35 (checked against the Heltec pin list). Not an RTC pin: held LOW in deep sleep with
 // gpio_hold_en + gpio_deep_sleep_hold_en (ESP32-S3: SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP).
 static const int ZED_INT_PIN = 34;
-// V3.13.8 DIAGNOSTIC BUILD (branch diag/back-3-13-8-pololu-libre): AVO_POLOLU_FREE 1 = GPIO34 is never driven.
-// It is released from any hold and left as an INPUT without pulls, so the Pololu SHDN stays HIGH through its own
-// 100 kΩ pull-up to VIN: the GPS power is permanently REQUESTED, also in deep sleep and while charging.
-// NOT a power-saving build. 0 = normal 3.13.8 (GPIO34 switches the Pololu).
-#define AVO_POLOLU_FREE 1
+// V3.13.9: Pololu S7V8F3 control, wiring confirmed by the user: VIN = Heltec 3V3, SHDN = GPIO34, VOUT = GPS.
+//   GPS ON  → GPIO34 INPUT without pulls (high impedance): SHDN goes HIGH through the Pololu's own 100 kΩ pull-up to
+//             VIN = 3.3 V (so the pin never sees more than 3.3 V). GPIO34 is NEVER driven HIGH.
+//   GPS OFF → GPIO34 OUTPUT LOW (held LOW during deep sleep).
+// "OFF" here is only what was ORDERED: the firmware cannot measure VOUT; check it with a meter (≈ 0 V expected).
 static void zed_shdn(bool on) {          // the only place that touches GPIO34
-#if AVO_POLOLU_FREE
-  (void)on;
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
-  pinMode(ZED_INT_PIN, INPUT);           // high impedance, no internal pull-up / pull-down
-  s_zed_pwr_req = true;                  // requested through the Pololu's own pull-up (voltage not measured)
-#else
-  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
-  pinMode(ZED_INT_PIN, OUTPUT);
-  digitalWrite(ZED_INT_PIN, on ? HIGH : LOW);
+  if (on) {
+    pinMode(ZED_INT_PIN, INPUT);         // high impedance, no internal pull-up / pull-down
+  } else {
+    pinMode(ZED_INT_PIN, OUTPUT);
+    digitalWrite(ZED_INT_PIN, LOW);
+  }
   s_zed_pwr_req = on;
-#endif
 }
-static void zed_shdn_sleep() {           // before deep sleep
-#if AVO_POLOLU_FREE
-  zed_shdn(true);                        // left free: no hold on GPIO34 (the GPS may stay powered while asleep)
-#else
+static void zed_shdn_sleep() {           // before deep sleep: Pololu off and held off
   zed_shdn(false);
   gpio_hold_en((gpio_num_t)ZED_INT_PIN);
-#endif
 }
 // V3.13.0: USB charging. The Heltec has no "USB powered" pin (CP2102 + TP4054), so the 5V header pin (USB 5 V) goes
 // to GPIO7 through a divider: 5V ─ 10 kΩ ─ GPIO7 ─ 15 kΩ ─ GND (≈ 3.0 V with USB, 0 V without). USB present → the
@@ -247,13 +240,8 @@ static void print_status() {
     const char* est = !s_zed_pwr_req ? "GPS_SIN_ALIMENTACION_SOLICITADA" : s_zed_bytes == 0 ? "SIN_BYTES (no llega nada por GPIO35)" :
                       (ubx == 0 && nmea == 0) ? "BYTES_SIN_TRAMAS_VALIDAS (baudios o senal)" : pvt == 0 ? "TRAMAS_OK_SIN_NAV-PVT (GPS NO VERIFICADO)" :
                       "NAV-PVT_RECIBIDOS (comunicacion GNSS correcta)";
-#if AVO_POLOLU_FREE
-    Serial.printf("  UART1: RX=%d TX=%d | POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA | GPS: alimentacion permanente solicitada (tension no medida)\n",
-                  ZED_RX_PIN, ZED_TX_PIN);
-#else
-    Serial.printf("  GNSS UART1: RX=GPIO%d TX=GPIO%d | POLOLU: SHDN GPIO34=%s (solicitado, tension no medida)\n", ZED_RX_PIN, ZED_TX_PIN,
-                  s_zed_pwr_req ? "HIGH" : "LOW");
-#endif
+    Serial.printf("  GNSS UART1: RX=GPIO%d TX=GPIO%d | POLOLU: GPIO34=%s (orden; VOUT no medida)\n", ZED_RX_PIN, ZED_TX_PIN,
+                  s_zed_pwr_req ? "ALTA IMPEDANCIA -> Pololu habilitado por su pull-up" : "OUTPUT LOW -> Pololu deshabilitado");
     Serial.printf("  GNSS: bytes recibidos=%lu (%lu B/s) | UBX validos=%lu malos=%lu | NMEA validos=%lu | NAV-PVT=%lu | estado=%s\n",
                   (unsigned long)s_zed_bytes, (unsigned long)(dt ? db * 1000 / dt : 0), (unsigned long)ubx, (unsigned long)z.stream().bad_checksum(),
                   (unsigned long)nmea, (unsigned long)pvt, est);
@@ -436,7 +424,7 @@ static void go_to_sleep(const char* why, uint32_t wake_s = 3) {
   // V3.10.8: software backup first (it is what saves if the ZED is still on 3V3); GPIO35 (ZED RX + white LED) ends
   // held LOW inside zed_backup()
   zed_backup();
-  zed_shdn_sleep();                      // V3.11.0 / diag 3.13.8: see AVO_POLOLU_FREE
+  zed_shdn_sleep();                      // V3.13.9: GPIO34 OUTPUT LOW + hold → Pololu off while asleep
   pinMode(ZED_RX_PIN, INPUT);
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V
@@ -484,7 +472,9 @@ static void charge_mode(const char* why) {
   if (s_zed_on) { ZED.end(); s_zed_on = false; }
   s_vext_pending = false;
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P without power
-  zed_shdn(false);                       // V3.11.0: ZED regulator off (diag build: GPIO34 stays free)
+  zed_shdn(false);                       // V3.13.9: Pololu off (GPIO34 OUTPUT LOW)
+  pinMode(ZED_TX_PIN, OUTPUT);           // no HIGH level into the RX of an unpowered ZED
+  digitalWrite(ZED_TX_PIN, LOW);
   setCpuFrequencyMhz(80);
   uint16_t peak = 0;
   uint32_t last = 0, since = millis();
@@ -516,25 +506,13 @@ static void charge_mode(const char* why) {
 // It never switches the ZED off. The configuration (UBX, RTK, 8 Hz) is done afterwards by ZedManager in loop().
 static void gnss_bringup_diag() {
   static const uint32_t bauds[] = {38400, 9600, 115200, 230400, 460800, 921600};
-#if AVO_POLOLU_FREE
-  Serial.printf("AVO BACK V%s (DIAGNOSTICO: POLOLU SIEMPRE ENCENDIDO)\nUART1: RX=%d TX=%d\n", AVO_FW_VERSION, ZED_RX_PIN, ZED_TX_PIN);
-#else
   Serial.printf("AVO BACK V%s\n", AVO_FW_VERSION);
-#endif
   Serial.println("[GNSS] ---- arranque y diagnostico del GPS (sin enviar ordenes al ZED) ----");
-#if AVO_POLOLU_FREE
-  zed_shdn(true);
-  Serial.println("POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA (INPUT sin pull-up ni pull-down, sin hold)");
-  Serial.println("GPS: alimentacion permanente solicitada (por el pull-up del Pololu; la tension real NO se mide)");
-  Serial.println("AVISO: version de DIAGNOSTICO: el GPS puede seguir encendido dormida o cargando. No es la version de ahorro.");
-  Serial.println("[GNSS] espero 1500 ms");
-#else
   zed_shdn(false);
-  Serial.println("[GNSS] GPIO34 = 0 (Pololu SHDN): alimentacion del GPS SOLICITADA apagada, 500 ms");
+  Serial.printf("[GNSS] t=%lu ms: GPIO34 OUTPUT LOW (Pololu deshabilitado) 500 ms: arranque limpio del GPS\n", (unsigned long)millis());
   delay(500);
   zed_shdn(true);
-  Serial.println("POLOLU: SHDN GPIO34=HIGH (alimentacion del GPS SOLICITADA; la tension real NO se mide en esta placa); espero 1500 ms");
-#endif
+  Serial.printf("[GNSS] t=%lu ms: GPIO34 en ALTA IMPEDANCIA -> Pololu habilitado por su pull-up (VOUT no medida); espero 1500 ms\n", (unsigned long)millis());
   delay(1500);
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
@@ -611,7 +589,7 @@ void setup() {
   gpio_hold_dis((gpio_num_t)LORA_RST);
   gpio_hold_dis((gpio_num_t)33);           // V3.13.6: both ZED UART pins (either may be TX)
   gpio_hold_dis((gpio_num_t)35);
-  zed_shdn(false);                           // normal: Pololu off until the GPS start-up; diag: GPIO34 free
+  zed_shdn(false);                           // V3.13.9: Pololu off until the GPS start-up (gnss_bringup_diag)
   const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER;   // V3.13.1: USB unplugged while asleep
   Serial.printf("[AVO ESPALDA] arranque: motivo de reinicio %d, despertar %d (1=encendido 3=software 4=panico 8=sueño 9=caida de tension; despertar 4=temporizador)\n",
                 (int)esp_reset_reason(), (int)esp_sleep_get_wakeup_cause());
@@ -643,7 +621,7 @@ void setup() {
   gnss_bringup_diag();                   // V3.13.7: GPS first, radio later
   // V3.10.3: capsule out of its support at power-up → sleep, unless USER is pressed within 3 s (workshop mode)
   delay(20);
-  if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: USB desconectado");
+  if (woke_by_reed) Serial.printf("[USB] t=%lu ms: despierta: USB retirado (GPIO20 LOW) -> Pololu, UART1 RX35/TX33 y UBX se recuperan ahora\n", (unsigned long)millis());
   // V3.13.0: USB connected at power-up / reset → only charging (deep sleep), unless USER within 3 s (workshop)
   if (usb_present()) {
     Serial.println("[AVO ESPALDA] USB conectado (GPIO20 alto): a dormir para cargar. Pulsa USER en 3 s para el MODO TALLER.");
@@ -795,14 +773,33 @@ void loop() {
     } else nh = 0;
   }
   if (!s_boots_cleared && millis() >= QUICK_BOOT_MS) { s_boots_cleared = true; prefs.putUChar("boots", 0); }   // V3.12.0
-  static uint32_t last_usb = 0, usb_since = 0; static uint8_t s_usb_miss = 0;   // V3.13.0: USB 5 V seen for 1.5 s → everything sleeps, only charging
+  // V3.13.9: USB confirmed only after 8 consecutive HIGH readings of GPIO20 (2 s); one LOW reading starts again.
+  // While GPIO20 never reads HIGH (current hardware: 0.16–0.17 V with USB), the GPS simply keeps running.
+  static uint32_t last_usb = 0; static uint8_t usb_hi = 0;
   if (!s_usb_workshop && millis() - last_usb >= 250) {
     last_usb = millis();
     if (usb_present()) {
-      s_usb_miss = 0;
-      if (!usb_since) usb_since = millis() | 1;
-      if (millis() - usb_since >= 1500) { prefs.putUChar("boots", 0); go_to_sleep("USB conectado: solo carga"); }
-    } else if (usb_since && ++s_usb_miss >= 2) { usb_since = 0; s_usb_miss = 0; }
+      if (usb_hi == 0) Serial.printf("[USB] t=%lu ms: GPIO20 HIGH (USB posible), confirmando 2 s\n", (unsigned long)millis());
+      if (++usb_hi >= 8) {
+        Serial.printf("[USB] t=%lu ms: USB CONFIRMADO -> paro GNSS y RTCM (radio apagada), GPIO34 OUTPUT LOW, sueno profundo mientras carga\n",
+                      (unsigned long)millis());
+        prefs.putUChar("boots", 0);
+        go_to_sleep("USB conectado: solo carga");
+      }
+    } else usb_hi = 0;
+  }
+  // V3.13.9: times from GPS power-on to the first valid UBX frame and the first NAV-PVT
+  {
+    static bool got_ubx = false, got_pvt = false;
+    if (s_zed_on && !got_ubx && core->zed().stream().frames() > 0) {
+      got_ubx = true;
+      Serial.printf("[GNSS] primer UBX valido %lu ms despues de habilitar el Pololu\n", (unsigned long)(millis() - s_zed_on_at));
+    }
+    if (s_zed_on && !got_pvt && core->stats().nav_pvt > 0) {
+      got_pvt = true;
+      Serial.printf("[GNSS] primer NAV-PVT %lu ms despues de habilitar el Pololu (comunicacion GNSS recuperada en este arranque)\n",
+                    (unsigned long)(millis() - s_zed_on_at));
+    }
   }
   static uint32_t last_reed = 0;   // V3.10.3: capsule out of its support for 3 s → deep sleep
   if (millis() - last_reed >= 100) {
