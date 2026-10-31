@@ -36,7 +36,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - el periodo de los lotes es la media desde el arranque;
 - si la espalda guardada no da ACK en 30 s y otra espalda acepta a la cincha (WELCOME), la cincha pasa a esa espalda.
 **No se ha tocado:** espalda, pecho, app, particiones, actualización.
-**Validación:** CI pendiente; enlace y datos en la sesión: NO VERIFICADO.
+**CI:** run 41215973513 (éxito). Enlace y datos en la sesión: NO VERIFICADO.
 
 ---
 
