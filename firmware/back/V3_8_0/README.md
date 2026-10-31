@@ -247,3 +247,9 @@ A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·
   mide con el ADC: más de **1,0 V** = USB. Si la lectura falla (ADC2 ocupado por la radio) decide la entrada digital y un
   fallo suelto no reinicia la cuenta de 1,5 s.
 - El monitor muestra la tensión medida: `USB (GPIO20 … mV)` al arrancar y `GPIO20 ALTO/bajo, … mV` en el estado.
+
+## V3.13.5 — el divisor del USB puede estar en cualquier pin libre de la fila del 5V (2026-10-31)
+- Con la 3.13.4 GPIO20 medía 0,17 V con el USB conectado: no le llega el divisor (pin o soldadura distinta).
+- Ahora vale un nivel alto en **GPIO20, 18, 21, 19, 47 o 48** (entrada con pull-down). GPIO26 no se toca (es la flash).
+- Al arrancar imprime el nivel de cada uno: `USB, pines candidatos (1 = tension): GPIO20=… GPIO18=… …` y el pin que lo
+  ha detectado (`conectado por GPIOn`).

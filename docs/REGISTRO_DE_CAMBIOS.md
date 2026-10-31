@@ -1161,3 +1161,12 @@ ignoradas). Antirrebote del bucle: hacen falta 2 fallos seguidos para reiniciar 
 **Por qué:** monitor del usuario 31/10 02:16 con la 3.13.3: arranca bien con 3351 mV, pero `USB: no (GPIO20 bajo)` con el
 USB conectado. El usuario pide bajar el umbral de tensión para dormir.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.5 (Heltec) — divisor del USB en cualquier pin libre de la fila del 5V
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** la detección del USB acepta nivel alto en GPIO20, 18, 21, 19, 47 o 48 (pull-down interno) y al arrancar
+imprime el nivel de todos y el ADC de 20/18/19.
+**Por qué:** monitor del usuario 31/10 02:29 con la 3.13.4: `USB (GPIO20 171 mV): no detectado` con el USB conectado; con
+5,1 k / 10 k desde 5 V debería medir ≈ 3,3 V → el divisor no está en GPIO20. También: reinicio por caída de tensión tras
+instalar (batería 3454 mV) y `ZED: SIN_RESPUESTA_UBX` en los primeros segundos.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
