@@ -119,11 +119,12 @@ RE = dict(
     #    Medidas por foto (±0,3): largo 15,0 (otra foto 16,5: CONFIRMAR) × ancho 6,2; grueso no medido (escalón a Z 4,0).
     OVAL=(15.0, 6.2), OVAL_CLR=0.15, OVAL_C=(9.0, 0.0), OVAL_LEDGE_Z=4.0, OVAL_LEDGE=0.8,
     #  · SOPORTE: conector de MUELLES con orejas. Del usuario: puntas 1,5 fuera, agujeros Ø2,5 a 19,5 entre centros, imanes a ras.
-    #    Por foto (±0,3): largo total 24,7, cuerpo 14,6 × 5,5, grueso del cuerpo ≈ 2,9 sin pines, orejas 1,7 (a ras de la cara trasera).
+    #    Por foto (±0,3): largo total 24,7, cuerpo 14,6 × 5,5, grueso del cuerpo ≈ 2,9 sin pines, orejas 1,7.
+    #    Rev E.7.1 (31/10/2026): las orejas están a ras de la cara de los MUELLES (foto de perfil) → se monta desde arriba.
     #    Cara del cuerpo 0,2 por debajo de la cara de apoyo (si el cuerpo es algo más grueso no sobresale); los muelles siguen
     #    apretados 1,3 de 1,5 con la cápsula puesta.
     EAR_BODY=(14.6, 5.5, 2.9), EAR_LEN=24.7, EAR_W=5.5, EAR_T=1.7, EAR_HOLE=(2.5, 19.5), EAR_TIP=1.5, EAR_CLR=0.15, EAR_RECESS=0.2,
-    EAR_CORNER_R=0.4, EAR_CABLE=(2.0, 1.4), EAR_MEMBRANE=0.2,   # Rev E.3.2: 3 imanes Ø5 × 1 del reed en línea con el reed (eje Y), central en la posición de la Rev E, sin separación (se tocan; alojamientos Ø5,15 unidos)
+    EAR_CORNER_R=0.4, EAR_CABLE=(2.0, 1.4),   # Rev E.3.2: 3 imanes Ø5 × 1 del reed en línea con el reed (eje Y), central en la posición de la Rev E, sin separación (se tocan; alojamientos Ø5,15 unidos)
     # --- tornillos de cierre: M3 avellanado (ISO 10642) desde abajo → inserto M3×6 en la columna de la tapa
     # Rev E.4: 8 tornillos en 4 parejas simétricas (se quitan los de X 32, X 100 y la punta X 160,5)
     SCREWS=((6.0, -21.5), (6.0, 21.5), (64.0, -24.3), (64.0, 24.3),
@@ -377,14 +378,17 @@ def oval_pocket():
     t = obround_solid(cx, cy, li, wi, zl + d - 0.01, ZF + 1)
     return fuse_all([a, b, t]).removeSplitter()
 def ear_pocket():
-    """conector de muelles en el soporte: cuerpo pasante (cara 0,2 bajo la cara de apoyo) + orejas desde abajo"""
+    """Rev E.7.1: conector de muelles MONTADO DESDE ARRIBA. Las orejas están a ras de la cara de los muelles y los imanes
+    (foto de perfil del usuario): rebaje de las orejas desde la cara de apoyo hasta EAR_RECESS + EAR_T (el suelo del rebaje
+    aguanta el empuje de la cápsula) y debajo el hueco del cuerpo, pasante hasta la cara inferior (patas y cables).
+    Bajo cada agujero de oreja, un taladro ciego Ø2,0 para que el epoxi haga de remache."""
     (bl, bw, bt), c_ = RE["EAR_BODY"], RE["EAR_CLR"]; cx, cy = RE["OVAL_C"]
-    zf = -RE["EAR_RECESS"]; zb = zf - bt; ze = zb + RE["EAR_T"]          # cara del cuerpo, cara trasera, techo de las orejas
-    # membrana de sacrificio de 0,2 sobre las orejas: el techo de las orejas se imprime como PUENTE apoyado en todo su borde
-    # (sin ella quedaría al aire por el lado del cuerpo). Se corta con un cúter por el hueco del cuerpo antes de montar.
-    body = rrect_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, RE["EAR_CORNER_R"] + c_, ze + RE["EAR_MEMBRANE"], 1.0)
-    ears = obround_solid(cx, cy, RE["EAR_LEN"] + 2 * c_, RE["EAR_W"] + 2 * c_, -RE["MT"] - 1, ze)
-    return body.fuse(ears).removeSplitter(), (zf, zb, ze)
+    zf = -RE["EAR_RECESS"]; ze = zf - RE["EAR_T"]; zb = zf - bt          # cara de los muelles, apoyo de las orejas, cara trasera
+    ears = obround_solid(cx, cy, RE["EAR_LEN"] + 2 * c_, RE["EAR_W"] + 2 * c_, ze, 1.0)
+    body = rrect_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, RE["EAR_CORNER_R"] + c_, -RE["MT"] - 1, ze + 0.01)
+    hd, hs = RE["EAR_HOLE"]
+    keys = [vcyl(cx, cy + sg * hs / 2, 1.0, ze - 2.0, ze + 0.01) for sg in (-1, 1)]
+    return fuse_all([ears, body] + keys).removeSplitter(), (zf, zb, ze)
 def column_keep(extra=0.3):
     return Part.makeCompound([vcyl(sx, sy, col_r(i) + extra, -5, 60) for i, (sx, sy) in enumerate(SCREWS)])
 def build_base(OUTER, CAV, CLIP_CAV):
@@ -668,7 +672,7 @@ def build_soporte():
     md, mt_ = RE["MAG"]
     for (mx, my) in list(RE["MAGS"]) + [tuple(c) for c in RE["REED_MAGS"]]:
         p = p.cut(vcyl(mx, my, (md + RE["MAG_CLR"]) / 2, -mt_ - 0.05, 1))
-    # Rev E.7: conector de muelles con orejas (cuerpo pasante, orejas desde abajo); en la base de carga, canal para el cable
+    # Rev E.7.1: conector de muelles desde arriba (orejas en un rebaje de la cara de apoyo, cuerpo pasante); base de carga: canal del cable
     ep, _ = ear_pocket(); p = p.cut(ep)
     if "GND" in RE["POGO_ON"]:
         cw_, ch_ = RE["EAR_CABLE"]; cx_, cy_ = RE["OVAL_C"]

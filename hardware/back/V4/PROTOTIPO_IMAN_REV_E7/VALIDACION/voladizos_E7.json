@@ -16,19 +16,6 @@
     "ok": true
    },
    {
-    "z": 3.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 125.59,
-    "caja": [
-     6.3,
-     11.6,
-     -12.3,
-     12.2
-    ],
-    "ok": true
-   },
-   {
     "z": 4.31,
     "tipo": "PUENTE",
     "voladizo_mm": 3.39,
@@ -1048,19 +1035,6 @@
      0.7
     ],
     "ok": true
-   },
-   {
-    "z": 3.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 125.64,
-    "caja": [
-     6.3,
-     11.6,
-     -12.3,
-     12.2
-    ],
-    "ok": true
    }
   ],
   "peor": 0.0,
@@ -1068,40 +1042,13 @@
  },
  "AVO_RevE7_PROBETA_CONECTOR_SOPORTE": {
   "capas": 23,
-  "zonas": [
-   {
-    "z": 3.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 125.64,
-    "caja": [
-     6.3,
-     11.6,
-     -12.3,
-     12.2
-    ],
-    "ok": true
-   }
-  ],
+  "zonas": [],
   "peor": 0.0,
   "n_mal": 0
  },
  "AVO_RevE7_SOPORTE_IMAN": {
   "capas": 45,
   "zonas": [
-   {
-    "z": 3.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 125.59,
-    "caja": [
-     6.3,
-     11.6,
-     -12.3,
-     12.2
-    ],
-    "ok": true
-   },
    {
     "z": 4.31,
     "tipo": "PUENTE",

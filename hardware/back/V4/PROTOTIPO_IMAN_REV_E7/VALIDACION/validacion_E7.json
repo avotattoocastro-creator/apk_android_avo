@@ -24,14 +24,14 @@
   "brep_valido": true
  },
  "AVO_RevE7_SOPORTE_IMAN": {
-  "triangulos": 8672,
-  "vertices": 4338,
+  "triangulos": 9684,
+  "vertices": 4842,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
-  "euler": 2,
-  "volumen_mm3": 49571.7,
+  "euler": 0,
+  "volumen_mm3": 49603.8,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -44,18 +44,18 @@
    32.22,
    8.95
   ],
-  "volumen_brep_mm3": 49573.6,
+  "volumen_brep_mm3": 49605.7,
   "brep_valido": true
  },
  "AVO_RevE7_BASE_CARGA_IMAN": {
-  "triangulos": 8692,
-  "vertices": 4348,
+  "triangulos": 9704,
+  "vertices": 4852,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
-  "euler": 2,
-  "volumen_mm3": 49547.6,
+  "euler": 0,
+  "volumen_mm3": 49579.8,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -68,7 +68,7 @@
    32.22,
    8.95
   ],
-  "volumen_brep_mm3": 49549.5,
+  "volumen_brep_mm3": 49581.6,
   "brep_valido": true
  },
  "AVO_RevE7_PROBETA_CONECTOR_BASE": {
@@ -96,14 +96,14 @@
   "brep_valido": true
  },
  "AVO_RevE7_PROBETA_CONECTOR_SOPORTE": {
-  "triangulos": 1052,
-  "vertices": 528,
+  "triangulos": 2064,
+  "vertices": 1032,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
-  "euler": 2,
-  "volumen_mm3": 1629.5,
+  "euler": 0,
+  "volumen_mm3": 1661.7,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -116,18 +116,18 @@
    16.0,
    4.5
   ],
-  "volumen_brep_mm3": 1629.5,
+  "volumen_brep_mm3": 1661.6,
   "brep_valido": true
  },
  "AVO_RevE7_PROBETA_CONECTOR_BASE_CARGA": {
-  "triangulos": 1068,
-  "vertices": 536,
+  "triangulos": 2080,
+  "vertices": 1040,
   "aristas_no_manifold": 0,
   "aristas_mal_orientadas": 0,
   "triangulos_degenerados": 0,
   "componentes": 1,
-  "euler": 2,
-  "volumen_mm3": 1618.0,
+  "euler": 0,
+  "volumen_mm3": 1650.2,
   "normales_coherentes": 1.0,
   "freecad_isSolid": true,
   "freecad_autointersecciones": false,
@@ -140,7 +140,7 @@
    16.0,
    4.5
   ],
-  "volumen_brep_mm3": 1618.0,
+  "volumen_brep_mm3": 1650.2,
   "brep_valido": true
  }
 }

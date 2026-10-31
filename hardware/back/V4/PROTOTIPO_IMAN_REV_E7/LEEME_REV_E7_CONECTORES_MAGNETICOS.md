@@ -1,4 +1,8 @@
-# AVO espalda · Rev E.7 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
+# AVO espalda · Rev E.7.1 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
+
+> **E.7.1 corrige la E.7:** las orejas del conector de muelles están a ras de la cara de los muelles y los imanes, no por detrás.
+> El conector se monta **desde arriba**: muelles hacia ARRIBA y orejas a ras de la cara de apoyo. La cápsula no cambia: el
+> conector plano va a ras del fondo, con los contactos hacia ABAJO. **No imprimas el soporte ni las probetas de la E.7.**
 
 **Estado: diseñado y comprobado por software (CAD) · NO PROBADO.** Antes de imprimir la base y el soporte enteros, imprime las
 **probetas** y comprueba el encaje.
@@ -33,13 +37,14 @@ Los dos conectores van centrados en **X 9, Y 0** (donde estaba el reed), con el 
 - Encima, un escalón a 45° que se estrecha 0,8 mm y sube al interior, por donde pasan las patas y los cables.
 - La cara de contactos queda **enrasada con el fondo**.
 
-**Conector de muelles, en el soporte:**
-- **Ventana del cuerpo:** 14,9 × 5,8, que atraviesa la cara de apoyo.
-- **Alojamiento de las orejas:** óvalo de 25,0 × 5,8, abierto por abajo hasta Z −1,4.
-- **Membrana de 0,2 mm** entre los dos: se imprime para que el techo de las orejas sea un puente. **Córtala con un cúter** por la
-  ventana antes de montar.
-- La cara del cuerpo queda **0,2 mm por debajo** de la cara de apoyo. Así no sobresale aunque el cuerpo sea un poco más grueso, y
-  con la cápsula puesta los muelles siguen apretados unos 1,3 mm de los 1,5.
+**Conector de muelles, en el soporte (se mete DESDE ARRIBA, muelles hacia arriba):**
+- **Rebaje de las orejas en la cara de apoyo:** óvalo de 25,0 × 5,8 y 1,9 de hondo. Su suelo, a Z −1,9, aguanta el empuje de
+  la cápsula.
+- **Hueco del cuerpo:** 14,9 × 5,8, pasante hasta la cara inferior. Por ahí salen las patas y los cables.
+- **Bajo cada agujero de oreja:** un taladro ciego de Ø2,0 × 2 para que el epoxi haga de remache.
+- La cara de los muelles queda **0,2 mm por debajo** de la cara de apoyo, así que no sobresale aunque la pieza sea algo más
+  gruesa. Con la cápsula puesta los muelles se aprietan unos 1,3 mm de los 1,5.
+- Ya no hay membrana que cortar.
 
 **Medidas que has dado tú:**
 - las puntas salen 1,5 mm;
@@ -55,7 +60,7 @@ Los dos conectores van centrados en **X 9, Y 0** (donde estaba el reed), con el 
 | Grueso del conector plano | ≤ 4,0 (escalón a Z 4,0) | Si es más grueso no queda a ras: `OVAL_LEDGE_Z` |
 | Cuerpo del conector de muelles | 14,6 × 5,5 × 2,9 (sin pines) | `EAR_BODY` |
 | Largo total con orejas | 24,7 | `EAR_LEN` |
-| Grueso de las orejas | 1,7, a ras de la cara trasera | `EAR_T` |
+| Grueso de las orejas | 1,7, a ras de la cara de los muelles | `EAR_T` (si es distinto, la cara queda más alta o más baja) |
 
 ![secciones](IMAGENES/E7_secciones_conectores.png)
 
@@ -73,7 +78,7 @@ harían cortocircuito, quedan en los extremos.
 
 ## 4. Montaje
 1. **Polaridad de los imanes.** Antes de pegar nada:
-   - pon el conector de muelles en el soporte, sin pegar, con la membrana ya cortada;
+   - pon el conector de muelles en el soporte, sin pegar;
    - acopla el conector plano encima y marca con rotulador qué extremo queda hacia el lado del botón USER (Y −).
    
    Si lo pegas girado, los imanes se repelen y el orden BAT/GND se invierte.
@@ -86,9 +91,11 @@ harían cortocircuito, quedan en los extremos.
 4. **Pegar el conector de muelles en el soporte:**
    - **soporte del chaleco:** suelda un hilo corto entre las patas de **BAT y SYS** (las dos del lado del botón USER), sin tocar
      GND;
-   - mételo desde abajo, con las orejas en su alojamiento, y pon epoxi en las orejas y sus agujeros;
-   - unta el fondo de la cápsula con vaselina o pon cinta alrededor del conector plano y coloca la cápsula en el soporte. Los
-     imanes suben el conector hasta el tope y lo centran con el de la cápsula mientras cura el epoxi.
+   - pasa las patas y los cables por el hueco del cuerpo;
+   - pon epoxi en el suelo del rebaje y en los 2 taladros de las orejas;
+   - mete el conector **desde arriba**, con los muelles hacia arriba y las orejas apoyadas en el suelo del rebaje;
+   - deja que el epoxi rellene los agujeros de las orejas y limpia lo que suba a la cara de apoyo;
+   - el puente BAT–SYS queda por debajo, en el hueco del cuerpo.
 5. **Base de carga:**
    - pega el conector igual que en el soporte, pero **sin puente**;
    - une BAT a **B+** del TP4056 y GND a **B−**, y deja SYS libre. El cable sale por el canal inferior hacia el cuello;
@@ -109,7 +116,8 @@ harían cortocircuito, quedan en los extremos.
 
 ## 6. Qué comprobar con las probetas
 1. El conector plano entra en el alojamiento y queda a ras (o un poco hundido, nunca saliente).
-2. Una vez cortada la membrana, el de muelles entra desde abajo y su cara queda unos 0,2 mm bajo la cara de apoyo.
+2. El de muelles entra desde arriba, las orejas apoyan en el suelo del rebaje y su cara queda unos 0,2 mm bajo la cara de apoyo,
+   con los muelles hacia arriba.
 3. Pon la probeta de la base sobre la del soporte, alineadas por los bordes en X 2 y X 17:
    - los imanes se atraen;
    - los 3 muelles bajan;

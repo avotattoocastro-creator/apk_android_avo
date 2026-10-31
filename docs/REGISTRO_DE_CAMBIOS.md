@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Espalda · Rev E.7.1: conector de muelles montado desde arriba (corrige la E.7)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Error de la E.7:** supuse que las orejas del conector de muelles iban a ras de la cara trasera y diseñé el soporte para
+  meterlo desde abajo. La foto de perfil muestra que las orejas están a ras de la cara de los **muelles y los imanes**. Con la
+  E.7, la cara habría quedado 1,4 mm hundida y los muelles apenas habrían asomado.
+- **Soporte y base de carga E.7.1:** conector **desde arriba**, con los muelles hacia arriba:
+  - rebaje de las orejas en la cara de apoyo, óvalo de 25,0 × 5,8 y 1,9 de hondo;
+  - hueco del cuerpo de 14,9 × 5,8, pasante hasta la cara inferior;
+  - taladros ciegos de Ø2,0 bajo los agujeros de las orejas, para que el epoxi haga de remache;
+  - cara de los muelles 0,2 bajo la cara de apoyo;
+  - sin membrana.
+- **Base:** sin cambios. El conector plano va a ras del fondo, con los contactos hacia abajo.
+
+**Validación:** IMPLEMENTADO (CAD):
+- sólidos válidos;
+- STL cerrados de 1 cuerpo;
+- 0 voladizos fuera de límite;
+- 0 interferencias entre los conectores y sus piezas.
+
+**NO VERIFICADO** físicamente.
+**Pendiente:** el mismo que en la E.7.
+
 ## 2026-10-31 — Espalda · prototipo Rev E.7: conectores magnéticos de 3 vías en lugar del reed
 **Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` (sale de `feature/avo-back-v4`) · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia:**
