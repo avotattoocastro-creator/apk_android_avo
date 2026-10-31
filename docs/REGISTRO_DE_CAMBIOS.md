@@ -1137,7 +1137,7 @@ conectar. Aun así, con el divisor el nivel de GPIO7 en sueño queda cerca del u
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-31 — BACK 3.13.2 (Heltec) — detección del USB también en GPIO20
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `f0d20f7` · **CI:** [41151554311](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41151554311) (éxito)
 **Qué cambia:** `usb_present()` = GPIO7 por ADC (> 1,5 V) **o** GPIO20 digital con pull-down (divisor 10 k / 22 k). Se
 desactivan el pad USB-Serial-JTAG y los pull-up de D+/D− para usar GPIO20 como entrada; GPIO20 fijado con pull-down
 durante el sueño. El monitor muestra `GPIO20 ALTO/bajo`.
