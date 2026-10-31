@@ -1,0 +1,111 @@
+name: Build AVO GIRTH V0.4.x (cincha XIAO ESP32-C6 + BNO085)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/girth-fw-0-4-0-bno085, feature/avo-wifi-sync]
+    paths:
+      - 'firmware/girth/V0_4_0/**'
+      - 'firmware/back/V3_8_0/lib/avo_core/src/avo_girth_link.*'
+      - 'firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.*'
+      - '.github/workflows/build-girth-v040.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: girth-v040-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  girth:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: firmware/girth/V0_4_0
+    steps:
+      - uses: actions/checkout@v4
+      - name: Host tests (SH-2 parser, batches, round trip through the back's GirthHub)
+        run: |
+          g++ -std=c++17 -O1 -Wall -Wextra -I../../back/V3_8_0/lib/avo_core/src test/test_girth.cpp \
+            AVO_GIRTH_V0_4_0/girth_sh2.cpp ../../back/V3_8_0/lib/avo_core/src/*.cpp -o test_girth
+          ./test_girth | tee "$GITHUB_WORKSPACE/host_tests.txt"
+      - name: Host tests of the back link library (unchanged)
+        working-directory: firmware/back/V3_8_0
+        run: |
+          g++ -std=c++17 -O1 -Wall -Ilib/avo_core/src test/test_espnow.cpp lib/avo_core/src/*.cpp -o back_test
+          ./back_test | tail -3
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 core 3.3.12
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Build firmware
+        run: |
+          if ! ./build_girth.sh "$GITHUB_WORKSPACE/out"; then
+            grep -E "error:|Error " "$GITHUB_WORKSPACE/out/build.log" | head -20 | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+          if grep -E "girth_|AVO_GIRTH_V0_4_0.ino" "$GITHUB_WORKSPACE/out/build.log" | grep -q "warning:"; then
+            grep -E "warning:" "$GITHUB_WORKSPACE/out/build.log" | grep -E "girth_|AVO_GIRTH" | while IFS= read -r l; do echo "::warning::${l//%/%25}"; done
+          fi
+      - name: Package and check the image
+        run: |
+          cd "$GITHUB_WORKSPACE/out"
+          cp AVO_GIRTH_V0_4_0.ino.bin AVO_GIRTH_V0_4_2_app.bin
+          cp AVO_GIRTH_V0_4_0.ino.merged.bin AVO_GIRTH_V0_4_2_COMPLETO.bin
+          python3 - <<'PY'
+          import struct, sys
+          m = open("AVO_GIRTH_V0_4_2_COMPLETO.bin", "rb").read()
+          a = open("AVO_GIRTH_V0_4_2_app.bin", "rb").read()
+          tail = m[0x10000 + len(a):]
+          if tail and tail.count(0xFF) != len(tail): print("::error title=Imagen::datos tras la app en la imagen completa"); sys.exit(1)
+          m = m[:0x10000 + len(a)]
+          open("AVO_GIRTH_V0_4_2_COMPLETO.bin", "wb").write(m)
+          ents = []
+          for i in range(0x8000, 0x9000, 32):
+              e = m[i:i+32]
+              if e[:2] != b"\xaa\x50": break
+              ents.append((e[2], e[3], hex(struct.unpack("<I", e[4:8])[0]), hex(struct.unpack("<I", e[8:12])[0]), e[12:28].split(b"\0")[0].decode()))
+          print(f"::notice title=Particiones::{ents}")
+          open("particiones.txt", "w").write("\n".join(map(str, ents)) + "\n")
+          errs = []
+          if not (m[0] == 0xE9 and struct.unpack("<H", m[12:14])[0] == 13): errs.append("bootloader at 0x0 is not ESP32-C6")
+          if m[0x8000:0x8002] != b"\xaa\x50": errs.append("no partition table at 0x8000")
+          app0 = [e for e in ents if e[0] == 0 and e[1] == 0x10]
+          if not app0 or app0[0][2] != "0x10000": errs.append("ota_0 must start at 0x10000")
+          if not any(e[0] == 0 and e[1] == 0x11 for e in ents): errs.append("second OTA slot missing")
+          if m[0x10000:0x10000 + len(a)] != a: errs.append("merged image does not contain the app at 0x10000")
+          if not (a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.4.2\x00AVO-GIRTH" in a): errs.append("app marker / chip")
+          for e in errs: print(f"::error title=Imagen::{e}")
+          if errs: sys.exit(1)
+          print(f"::notice title=AVO GIRTH 0.4.2::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
+          PY
+          grep -E 'Sketch uses|Global variables' build.log > memoria.txt || true
+          cp "$GITHUB_WORKSPACE/host_tests.txt" pruebas_host.txt
+          sha256sum AVO_GIRTH_V0_4_2_*.bin > SHA256SUMS.txt
+          echo "::notice title=Memoria::$(cat memoria.txt | tr '\n' ' ')"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AVO-GIRTH-V0-4-2-ESP32C6
+          path: |
+            out/AVO_GIRTH_V0_4_2_*.bin
+            out/SHA256SUMS.txt
+            out/build.log
+            out/pruebas_host.txt
+            out/particiones.txt
+          if-no-files-found: error
+          retention-days: 60
+      - name: Commit the binaries to the branch
+        working-directory: ${{ github.workspace }}
+        run: |
+          F=firmware/girth/V0_4_0
+          mkdir -p /tmp/bin && cp out/AVO_GIRTH_V0_4_2_*.bin out/SHA256SUMS.txt out/pruebas_host.txt out/particiones.txt out/memoria.txt /tmp/bin/
+          cp out/build.log /tmp/bin/compilacion.log
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+          mkdir -p $F/out && cp /tmp/bin/* $F/out/
+          git add -A $F/out
+          git commit -m "Cincha V0.4.2: binarios del CI de ${GITHUB_SHA::7} (run ${{ github.run_id }}) [skip ci]" || echo "sin cambios"
+          git push origin HEAD:${{ github.ref_name }}

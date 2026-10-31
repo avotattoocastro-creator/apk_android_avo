@@ -24,6 +24,83 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA de extremo a extremo: datos de la cincha en la sesión
+**Autor:** Claude · Evidencia: foto de Windows Advanced Analysis V2 PRO, «Entrenamiento 31/10/2026 16:52», HORSE_001
+- **PROBADO FÍSICAMENTE:** la gráfica «IMU cincha – aceleración vertical z» muestra la traza «Central» (imu_id 0) durante toda la sesión, con picos al mover la cincha (00:39–00:42). Cadena completa: BNO085 → cincha 0.4.2 → espalda 3.13.11 → pecho 3.7.6 → archivo → app de Windows.
+- **Escala:** la app dibuja la IMU en LSB «sin calibrar» con una escala nominal. Con GIRTH 0.4.x, acc = Q8 m/s² (256 LSB = 1 m/s², 1 g ≈ 2511 LSB), giro = Q9 rad/s y mag = Q4 µT. Falta pasar estas unidades a la app y al motor de análisis.
+- **Pendiente:**
+  - cadencia con el caballo en marcha (en esta prueba la cincha se movió a mano);
+  - lectura de fmt 1 (aceleración lineal y cuaternión) en la app y en el motor de análisis;
+  - batería y reposo.
+
+---
+
+## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA: IMU y enlace con la espalda funcionando
+**Autor:** Claude · Evidencia: monitor serie de la cincha (captura del usuario, 16:51)
+- **Enlace PROBADO FÍSICAMENTE:**
+  - la cincha se re-emparejó sola con la espalda AC:A7:04:06:C0:B4 (BACK 3.13.11);
+  - estado CONFIRMADA con 40 PING recibidos;
+  - la espalda confirma 1352 paquetes y **0 perdidos**;
+  - RSSI −65/−66 dBm en la cincha y −60/−61 dBm en la espalda; antena interna.
+- **IMU PROBADA FÍSICAMENTE:**
+  - BNO085 en 0x4A, 124,8–125,9 Hz, 7656 muestras;
+  - 0 perdidas en el sensor, 0 en la cola y 0 errores I²C;
+  - periodo de 7977–7979 µs, estable;
+  - 1376 lotes enviados, sin ninguno sin confirmar;
+  - en reposo, |acc| ≈ 9,77 m/s² y aceleración lineal ≈ 0.
+- **Pendiente:**
+  - comprobar en una sesión del pecho que se guardan los IMU_SAMPLE (fmt 0 y fmt 1) y que la app los dibuja;
+  - la precisión del giroscopio sale 0 en reposo (ver si sube al moverlo);
+  - batería (divisor no montado) y reposo (contacto del pogo).
+
+---
+
+## 2026-10-31 — Cincha GIRTH 0.4.2 (XIAO ESP32-C6) — re-emparejamiento automático, monitor sin bloqueo, periodo estable
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
+**Prueba física de 0.4.1 (monitor del usuario):**
+- IMU estable a ~125 Hz, sin pérdidas del sensor.
+- La cincha seguía emparejada con la espalda antigua CD:24 (0 ACK), así que la sesión del pecho del 31/10 16:37 salió sin datos de cincha.
+- Se perdieron 12 046 muestras de una vez en la cola, porque el monitor serie bloqueaba el bucle.
+- El periodo estimado era inestable.
+**Qué cambia:**
+- el monitor serie no bloquea;
+- el periodo de los lotes es la media desde el arranque;
+- si la espalda guardada no da ACK en 30 s y otra espalda acepta a la cincha (WELCOME), la cincha pasa a esa espalda.
+**No se ha tocado:** espalda, pecho, app, particiones, actualización.
+**CI:** run 41215973513 (éxito). Enlace y datos en la sesión: NO VERIFICADO.
+
+---
+
+## 2026-10-31 — Cincha GIRTH 0.4.1 (XIAO ESP32-C6) — periodo real en los lotes; primera prueba física de la IMU
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
+**Prueba física de 0.4.0 (monitor serie del usuario):**
+- BNO085 en 0x4A, SH-2 3.2.13; ~125 Hz sin pérdidas ni errores I²C; |acc| ≈ 9,84 m/s² en reposo. **IMU PROBADA FÍSICAMENTE.**
+- Enlace: la espalda guardada AC:A7:04:06:CD:24 no da ACK; responde otra espalda, AC:A7:04:06:C0:B4, que la cincha ignora porque no es la guardada. Hay que emparejar de nuevo (BOOT 5 s en la cincha). Enlace NO VERIFICADO todavía.
+**Qué cambia:** los lotes usan el periodo real sacado de las marcas de tiempo (0.4.0 escribía 10 000 µs, pero el BNO da ~8 ms); se muestran los periodos que confirma el BNO; sin aviso de ISR al arrancar.
+**No se ha tocado:** espalda, pecho, app, particiones, actualización.
+**CI:** run 41215234946 (éxito). Enlace y datos en la sesión del pecho: NO VERIFICADO.
+
+---
+
+## 2026-10-31 — Cincha GIRTH 0.4.0 (XIAO ESP32-C6) — BNO085 por SH-2, antena interna, enlace confirmado
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085` (desde `feature/avo-wifi-sync`) · **Commits:** `066ac4c`, `efc9d31` · **CI:** run 41212893621 (éxito)
+**Qué cambia:** firmware nuevo de la cincha sobre GIRTH 0.1.0 (el código de 0.2.0 no está en el repositorio):
+- controlador SHTP/SH-2 propio para el BNO085 por I²C, en una tarea propia guiada por INT. A 100 Hz da
+  acelerómetro, giroscopio, magnetómetro, aceleración lineal y game rotation vector. Solo da el arranque por bueno
+  si el BNO responde a la petición de identificación y entrega muestras, y si falla reintenta solo;
+- antena interna (0.2.0 seleccionaba la externa sin antena);
+- lotes fmt 0 (los que ya existen) y fmt 1 (nuevo: aceleración lineal y cuaternión);
+- enlace confirmado por el PING de la espalda;
+- batería: «no medida» fuera de 3,0–4,5 V;
+- reposo por GPIO6, desactivado por defecto.
+**Por qué:** 0.2.0 daba «IMU NO RESPONDE», «muestras=0», «envios ok=37 fallo=74» (la espalda nunca dio ACK de radio) y la batería a 0 o 512 mV (divisor no montado). Causas en `firmware/girth/V0_4_0/README.md`.
+**Archivos:** `firmware/girth/V0_4_0/**`, `.github/workflows/build-girth-v040.yml`.
+**No se ha tocado:** espalda, pecho, app, particiones, firma ni actualización, `main`, `develop/avo-performance-horse`.
+**Validación:** CI (compilación ESP32-C6, imagen y 40/40 pruebas de host, simulación). **NO VERIFICADO** en el hardware.
+**Pendiente:** prueba en el hardware (BNO085, enlace con BACK ≥ 3.10.0, batería con divisor), lectura de fmt 1 en la app y en el motor de análisis, consumo y reposo con el contacto del pogo.
+
+---
+
 ## 2026-10-30 — Cincha (CAD) REV 5.9 — conector pogo en lugar del reed, sin Qi, cápsula 70 × 51 × 13,8
 **Autor:** Claude · Rama de propuesta `feature/girth-rev5-9-pogo`, fusionada en `feature/avo-wifi-sync` con el visto bueno del usuario
 **Qué cambia:**
