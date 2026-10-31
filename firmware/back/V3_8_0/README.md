@@ -320,3 +320,24 @@ SHDN = GPIO34, VOUT = GPS. UART sin cambios: RX=GPIO35, TX=GPIO33 (el ZED queda 
   divisor 5,1 k / 10 k; comprobar después con polímetro que VOUT del Pololu cae a ≈ 0 V con el USB conectado.
 - Nota: con VIN en el 3V3 de la Heltec, el arranque del GPS vuelve a tirar del regulador de la Heltec (a través del
   arranque suave del Pololu). Vigilar `motivo de reinicio 9` (brownout) al habilitar el Pololu.
+
+## V3.13.10 — DIAGNÓSTICO: USB por umbrales de tensión en GPIO20 (2026-10-31)
+Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (RX=GPIO35, TX=GPIO33).
+- Cada 250 ms: mediana de 9 lecturas del ADC en **GPIO20** y en **GPIO7**. Umbrales en GPIO20: **> 100 mV = conectado**,
+  **< 50 mV = desconectado**, entre ambos se mantiene el estado. Un cambio se confirma tras **2 s** seguidos.
+- **El apagado automático está DESACTIVADO** (`AVO_USB_AUTO_OFF 0`): las transiciones solo se anotan
+  (`[USB] TRANSICION … motivo …` y `SIMULACION …`). El GPS sigue encendido siempre. Con `AVO_USB_AUTO_OFF 1` la
+  transición a «conectado» haría lo de la 3.13.9 (GPIO34 LOW, sueño mientras carga, recuperación al quitar el USB).
+- Monitor cada segundo: `[USB] GPIO20=… mV (ADC2, n/9 lecturas a 0) | GPIO7=… mV (ADC1) | USB=… | GPIO34=… | GNSS=… | ultimo cambio: …`.
+
+### Auditoría de GPIO20 como entrada analógica
+- **ADC2_CH9.** En el ESP32-S3 el ADC2 lo comparte la Wi-Fi: con ESP-NOW funcionando, una lectura puede ser rechazada
+  y Arduino devuelve 0. Por eso se cuentan las lecturas a 0 y se usa la mediana.
+- **D+ del USB propio del ESP32-S3** (no va al USB-C en esta placa): se desactivan el pad USB-Serial-JTAG y sus pull-up.
+- **Precisión:** el ADC del S3 tiene desplazamiento y no linealidad en los primeros ~100 mV; además GPIO20 **sin nada
+  conectado** ya leía ~170 mV (registros de la 3.13.4–3.13.5). Unos umbrales de 100 / 50 mV no distinguen un pin suelto de
+  una señal real: no sirven para decidir el apagado.
+- **Propuesta:** pasar el punto medio del divisor (5,1 kΩ / 10 kΩ) a **GPIO7** (ADC1_CH6, libre desde que no hay reed,
+  se lee con la radio encendida) y alimentar el divisor desde un punto con ~5 V solo con USB. Con el divisor, la señal
+  sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
+  < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).

@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — BACK 3.13.10 (Heltec) — diagnóstico de USB por umbrales en GPIO20
+**Autor:** Claude · Rama `fix/back-3-13-10-usb-umbral` (desde `fix/back-3-13-9-usb-gps-off`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:** USB por tensión en GPIO20 (ADC, mediana de 9, > 100 mV conectado / < 50 mV desconectado, histéresis,
+confirmación de 2 s), GPIO7 (ADC1) medido como alternativa, línea `[USB]` cada segundo y motivo de cada transición.
+`AVO_USB_AUTO_OFF 0`: **ningún apagado por USB** (ni en el bucle, ni al arrancar, ni al despertar); las transiciones se
+registran como simulación. Se elimina la lectura digital de GPIO20 de la 3.13.9.
+**Por qué:** petición del usuario; requisito de seguridad de no apagar el GPS con estos umbrales sin comprobarlos.
+**Auditoría:** ADC2 compartido con la Wi-Fi (lecturas rechazadas = 0), GPIO20 = D+ del USB nativo (pad desactivado),
+ADC impreciso por debajo de ~100 mV y lectura de ~170 mV con el pin suelto: umbrales de 100/50 mV no fiables. Propuesto
+GPIO7 (ADC1) con el mismo divisor alimentado desde un punto con 5 V solo con USB.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. Apagado por USB no validado (desactivado).
+
 ## 2026-10-31 — BACK 3.13.9 (Heltec) — GPS apagado con el USB conectado
 **Autor:** Claude · Rama `fix/back-3-13-9-usb-gps-off` (desde `diag/back-3-13-8-pololu-libre`) · **Commits:** `0a48cfa` · **CI:** [41161727290](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41161727290) (éxito: pruebas de ordenador + imagen de 916 224 B)
 **Qué cambia:** `zed_shdn()`: GPS encendido = GPIO34 en alta impedancia (pull-up del Pololu a VIN = 3V3), apagado =
