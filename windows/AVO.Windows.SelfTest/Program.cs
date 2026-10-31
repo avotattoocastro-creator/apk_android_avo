@@ -193,6 +193,7 @@ try
     }
     Avo.Windows.SelfTest.V2Tests.Run(dir, Assert);
     Avo.Windows.SelfTest.StableTests.Run(dir, Assert);
+    Avo.Windows.SelfTest.WatchTests.Run(dir, Assert);
     UsbTests();
     Console.WriteLine($"TODAS LAS PRUEBAS CORRECTAS: {passed}");
 }
