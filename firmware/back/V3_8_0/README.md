@@ -341,3 +341,20 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   se lee con la radio encendida) y alimentar el divisor desde un punto con ~5 V solo con USB. Con el divisor, la señal
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
+
+## V3.13.11 — apagado real del Pololu con el USB (2026-10-31)
+Rama `fix/back-3-13-11-usb-pololu-off` (desde la 3.13.10). **`AVO_USB_AUTO_OFF 1`** (petición del usuario).
+- GPIO20 se lee con una unidad ADC2 propia (`adc_oneshot`): una lectura rechazada por la radio es **inválida**, no 0 V.
+  Cada muestra es la mediana de las lecturas válidas de 9; con menos de 5 válidas la muestra se ignora.
+- Umbrales: > 100 mV = conectado, < 50 mV = desconectado, entre ambos se mantiene. Un cambio necesita **2 s** y al menos
+  6 muestras válidas de acuerdo, sin ninguna válida en contra.
+- **USB conectado:** se deja de escribir al ZED y se cierra su UART, GPIO33 (TX) y GPIO35 (RX) en alta impedancia,
+  **GPIO34 OUTPUT LOW**, radio apagada (sin telemetría ni RTCM), CPU a 80 MHz. Monitor: `POLOLU APAGADO — USB CONECTADO`.
+  **No hay sueño profundo**: la placa queda despierta en un bucle de carga que mantiene GPIO34 en LOW de forma activa y
+  mira el USB cada 250 ms con la radio apagada (lecturas del ADC2 válidas).
+- **USB retirado:** GPIO34 en alta impedancia (Pololu habilitado por su pull-up), 1500 ms y **reinicio limpio**: UART1
+  RX=35/TX=33, escucha pasiva, configuración del ZED (UBX, RTK, 8 Hz), NAV-PVT, ESP-NOW, telemetría y RTCM, como en el
+  arranque. El reinicio evita ciclos rápidos: para volver a apagar hacen falta otros 2 s por encima de 100 mV.
+- **Riesgo conocido:** con el pin suelto el ADC ya marcó ~170 mV. Si GPIO20 no tiene un divisor real a GND, la espalda
+  puede quedarse en modo carga sin USB (GPS apagado). En ese caso, revisar el divisor o volver a la 3.13.10.
+- No se mide VOUT: el apagado del GPS solo se da por bueno midiendo con polímetro.
