@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-31 — CHEST 3.7.6 GNSS QUALITY — calidad GNSS de la espalda hasta Android, sobre la 3.7.5-usb1
-**Autor:** Claude · **Rama:** `feature/chest-v3-7-6-gnss-quality` (desde `feature/chest-usb-pc-sync`) · **Commits:** ver `git log` de la rama
+**Autor:** Claude · **Rama:** `feature/chest-v3-7-6-gnss-quality` (desde `feature/chest-usb-pc-sync`) · **Commits:** `8494035`, `e76347d`
 **Qué cambia:**
 - **Cadena de compilación:** el pecho se compila como la 3.7.5-usb1 y después se le aplica la calidad GNSS:
   - `avo_payloads` de la espalda, que es el mismo archivo con el que se compila la 3.13.11 y decodifica `BackStatus` v3;
@@ -56,7 +56,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - todas las de la usb1 antes y después del parche, incluida la transcripción USB de Windows;
   - la `TELEMETRY` v3 es idéntica byte a byte al vector de `FirmwareVectorsTest` de Android;
   - el `BackStatus` v3 de la espalda se decodifica en el pecho.
-- CI: ver entrada siguiente o el run del workflow.
+- CI: run 41190303008 (éxito, `e76347d`), los 13 pasos en verde.
+  - `AVO_CHEST_V3_7_6_GNSS_QUALITY.bin`: 1.582.779 B, +576 B respecto a la usb1.
+  - SHA-256 `d413f5ec14d6d3cf0c9885c062f924eb8e2aa4447e28f0c17e497d7abae7af4b`.
+  - RAM estática: 71.800 B.
+  - Artefacto `AVO-CHEST-V3-7-6-GNSS-QUALITY-UNVERIFIED` (13038657376), caduca el 29/01/2027.
 - **NO VERIFICADO en el reloj.**
 **Pendiente:** prueba física, según el apartado 6 de `INFORME_COMPATIBILIDAD.md`.
 
