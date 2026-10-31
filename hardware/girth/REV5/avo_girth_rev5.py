@@ -93,10 +93,15 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 # Contactos (vistos desde abajo, 1 = −X): 1 = VBUS 5 V (solo base de carga) · 2 = GND (centro) · 3 = DET (pull-up).
 #   Soporte: puente 2–3 → DET a GND = "en el soporte" (sustituye al reed); 1 sin conectar.
 #   Base de carga: 5 V en 1 y GND en 2; 3 sin conectar.
+# REV 5.9.1: medidas con calibre del usuario (31/10/2026; lectura del nonio en fotos, ±0,1):
+#   HEMBRA (plana, sin orejas): cara 15,1 × 4,4 que sobresale 0,8 de una base de 16,7 × 6,3; grueso total 2,6
+#     (base 1,8 + cara 0,8). La cara pasa por el fondo y la base apoya encima del fondo por dentro.
+#   MACHO (pines de muelle, con orejas): cuerpo 14,4 × 5,5 × 5,1; largo con orejas 24,2; orejas 4,4 de ancho y
+#     1,7 de grueso, a ras de la parte de atrás; agujero Ø1,5 (vendedor); entre agujeros ≈ 24,2 − 4,4 = 19,8.
 POGO = dict(y=-20.2,
-            f_l=20.3, f_w=7.0, f_t=3.0, f_lip=0.6, f_tail=1.5,                  # hembra (E)
-            m_l=17.5, m_w=6.0, m_h=5.0, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo y pines libres (E)
-            ear_span=25.0, ear_l=29.0, ear_w=5.0, ear_t=2.0, ear_hole=1.5,      # orejas del macho (E; agujero Ø1,5)
+            f_l=16.7, f_w=6.3, f_t=2.6, f_bl=15.1, f_bw=4.4, f_bh=0.8, f_lip=0.6,   # hembra (f_lip: cara 0,6 por dentro)
+            m_l=14.4, m_w=5.5, m_h=5.1, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo; pines libres (E)
+            ear_span=19.8, ear_l=24.2, ear_w=4.4, ear_t=1.7, ear_hole=1.5,      # orejas del macho
             clear=0.2, cup_wall=1.0, cup_z=5.5, boss=1.4)
 
 RING_T = 1.0
@@ -174,16 +179,17 @@ def pod_base():
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
     cw = POGO["cup_wall"]
     b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
+    zfl = POGO["f_lip"] + POGO["f_bh"]                                  # REV 5.9.1: la base de la hembra apoya aquí
     ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
     stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
-    b = b.cut(stad(ft - POGO["f_lip"], POGO["f_lip"]))
+    b = b.cut(stad(ft - zfl, zfl))
     yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
     b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
     wedge = (cq.Workplane("YZ", origin=(-20, 0, 0)).polyline([(py - fw / 2 - 0.01, ft - 0.01), (yin + 0.01, ft - 0.01),
                                                                  (yin + 0.01, ft + (yin - (py - fw / 2)))]).close().extrude(40))
     b = b.cut(wedge.intersect(stad(10, ft - 0.02)))                     # en la pared: techo a 45° (sin voladizo)
-    ol, ow = POGO["f_l"] - 2 * POGO["f_lip"], POGO["f_w"] - 2 * POGO["f_lip"]
-    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, POGO["f_lip"] + 1, z0=-1).translate((0, py, 0)))
+    ol, ow = POGO["f_bl"] + 2 * cl, POGO["f_bw"] + 2 * cl                 # REV 5.9.1: paso de la cara (15,1 × 4,4)
+    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, zfl + 1.01, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
@@ -464,7 +470,10 @@ def components():
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
         "BNO085": bno,
-        "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"], z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0)),
+        "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"] - POGO["f_bh"],
+                             z0=POGO["f_lip"] + POGO["f_bh"] + 0.02).translate((0, POGO["y"], 0)).union(
+                       rrect(POGO["f_bl"], POGO["f_bw"], POGO["f_bw"] / 2 - 0.01, POGO["f_bh"] + 0.01,
+                             z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0))),
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
         "pogo_macho": _pogo_male(),
         "imanes_capsula_5x1": mags,
