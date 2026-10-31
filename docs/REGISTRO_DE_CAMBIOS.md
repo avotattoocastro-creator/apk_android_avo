@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha (CAD) REV 5.9.2 — pogo empotrado por completo en el soporte
+**Autor:** Claude · Rama `feature/girth-rev5-9-2-pogo-empotrado` (propuesta, sin fusionar)
+**Qué cambia:**
+- placa del soporte `MT` de 6,0 a 8,5 mm;
+- el lado de los pines del pogo (cuerpo de 6,0 + colas de 1,5) queda dentro de la placa, con 1,0 mm libre bajo las colas;
+- el rebaje de las orejas sigue abierto por abajo; tornillos M2 × 4 como máximo.
+**Por qué:** petición del usuario: «engrosar el soporte para que quede empotrado completamente el pogo».
+**Validación:** CI sin interferencias y 1 sólido por pieza. NO VERIFICADO en impresión.
+
+---
+
 ## 2026-10-31 — Cincha (CAD) REV 5.9.1 — conector pogo según el modelo STEP real
 **Autor:** Claude · Rama `feature/girth-rev5-9-1-pogo-medido`, fusionada en `feature/avo-wifi-sync` a petición del usuario
 **Qué cambia:**

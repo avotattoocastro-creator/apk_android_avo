@@ -1,6 +1,12 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
-**REV 5.9.1 (actual): conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
+**REV 5.9.2 (propuesta): lado de los pines del pogo empotrado por completo**, a petición del usuario.
+- La placa del soporte pasa de 6,0 a **8,5 mm** (soporte de 12,95 mm de alto con el cerco).
+- El cuerpo (6,0) y las colas de los pines (1,5) quedan dentro, con 1,0 mm libre bajo las colas para el puente soldado: nada sobresale por debajo.
+- El rebaje de las orejas sigue abierto por abajo (4,0 mm de hondo bajo las orejas). Tornillos **M2 × 4** como máximo.
+- **CI:** sin interferencias, 1 sólido por pieza. Render: `renders/pogo_5_9_2_corte.png`.
+
+**REV 5.9.1: conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
 - **Placa** (contactos planos), en la base:
   - cara 15,5 × 4,65, que pasa por el fondo y queda **a ras**;
   - reborde de 17,1 × 6,25 apoyado por dentro, 3,5 de alto en total;
