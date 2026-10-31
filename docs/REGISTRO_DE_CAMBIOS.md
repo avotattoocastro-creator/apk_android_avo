@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-31 — BACK 3.13.8 (Heltec) — GPS UART PIN FIX
-**Autor:** Claude · Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`) · **Commits:** pendiente · **CI:** pendiente
+**Autor:** Claude · Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`) · **Commits:** `3238588`, `53854f4` (disparador del CI) · **CI:** [41160700496](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41160700496) (éxito: pruebas de ordenador + imagen de 915 568 B)
 **Qué cambia:** UART1 del ZED con **RX=GPIO35, TX=GPIO33** según el cableado confirmado (blanco = RX del ZED → GPIO33,
 verde = TX del ZED → GPIO35, amarillo = SHDN del Pololu → GPIO34). GPIO35 solo entrada: no se escribe ni se fija al
 dormir (se aparca GPIO33). USB solo por GPIO20 digital filtrado (sin ADC2, sin otros pines candidatos). Monitor con
@@ -34,7 +34,7 @@ dormir (se aparca GPIO33). USB solo por GPIO20 digital filtrado (sin ADC2, sin o
 **Archivos:** `firmware/back/V3_8_0/AVO_BACK_V3_8_0/AVO_BACK_V3_8_0.ino`, `lib/avo_core/src/avo_version.h`, `README.md`,
 `docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md` (sección 6), `.github/workflows/build-back-v380.yml`, este registro, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
 **No se ha tocado:** detector de brownout, corte por batería baja, sueño por USB, ESP-NOW, RTCM, configuración RTK, `ZedManager`.
-**Validación:** IMPLEMENTADO · **NO VERIFICADO**. GPS no recuperado hasta ver NAV-PVT en el dispositivo. USB por GPIO20:
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. GPS no recuperado hasta ver NAV-PVT en el dispositivo. USB por GPIO20:
 sin resolver (0,16–0,17 V con USB conectado: la señal física no llega).
 **Pendiente:** prueba en la espalda; si `UBX malos` alto, quitar el LED blanco de GPIO35.
 
