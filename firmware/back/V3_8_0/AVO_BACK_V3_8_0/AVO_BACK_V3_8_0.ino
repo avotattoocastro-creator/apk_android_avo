@@ -107,6 +107,7 @@ static const int ZED_INT_PIN = 34;
 // mode by rising voltage is still there).
 static const int USB_SENSE_PIN = 7;
 static const uint16_t USB_SENSE_MV = 1000;      // V3.13.4: above this on GPIO20 (ADC) = USB present
+static uint16_t s_usb_mv = 0;                   // V3.13.4: last good GPIO20 reading (monitor)
 static const uint32_t USB_POLL_S = 3;           // V3.13.1: while charging, USB checked every 3 s
 static bool s_usb_workshop = false;
 static bool usb_present();
@@ -383,7 +384,6 @@ static bool usb_sense2() {
 // V3.13.4: the digital input needs ≈ 2.5 V; with the ADC any voltage above USB_SENSE_MV counts. GPIO20 is ADC2: while
 // the radio is transmitting a read can fail (returns 0) — then the digital reading decides. s_usb_mv keeps the last good
 // value for the monitor.
-static uint16_t s_usb_mv = 0;
 static bool usb_present() {
   if (usb_sense2()) { s_usb_mv = 3300; return true; }
   uint32_t acc = 0; int n = 0;
