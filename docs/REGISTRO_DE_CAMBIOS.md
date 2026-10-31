@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-31 — BACK 3.13.7 (Heltec) — recuperación del GPS ZED-F9P
-**Autor:** Claude · Rama `fix/back-3-13-7-gps` (desde `develop/avo-performance-horse`) · **Commits:** pendiente · **CI:** pendiente
+**Autor:** Claude · Rama `fix/back-3-13-7-gps` (desde `develop/avo-performance-horse`) · **Commits:** `f6b8ee3` · **CI:** [41157825892](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41157825892) (éxito: pruebas de ordenador + imagen ESP32-S3 de 915 840 B, 27 % de app0)
 **Qué cambia:** se trae a esta rama la espalda 3.13.6 de `feature/avo-back-v4` y sobre ella: pines del ZED fijos
 RX=GPIO33/TX=GPIO35 (sin intercambio automático), ciclo de corriente del ZED por GPIO34 al arrancar, escucha pasiva en
 todos los baudios antes de cualquier orden y antes de la radio, ESP-NOW después del diagnóstico, sin UBX-RXM-PMREQ al
@@ -34,7 +34,7 @@ dormir, línea `GNSS:` en el monitor (B/s, UBX, NMEA, NAV-PVT, GPIO34 solicitado
 el funcionamiento de la 3.9.0 sin perder las funciones de la 3.13.6. Auditoría: `firmware/back/V3_8_0/docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md`.
 **Archivos:** `firmware/back/V3_8_0/**`, `.github/workflows/build-back-v380.yml`, este registro, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
 **No se ha tocado:** detector de brownout, cargador, umbrales del corte por batería baja (3,30 / 3,45 V), protocolo con el pecho.
-**Validación:** IMPLEMENTADO · **NO VERIFICADO**. El GPS no se da por recuperado hasta ver NAV-PVT en el monitor.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. El GPS no se da por recuperado hasta ver NAV-PVT en el monitor.
 **Pendiente:** prueba en la espalda; si no hay bytes del ZED en ningún baudio, medir VOUT del Pololu, VIN, GND y TX del ZED → GPIO33.
 Recomendado: 100 kΩ de SHDN a GND (GPIO34 queda por debajo de 3,3 V mientras el pin está suelto en el arranque).
 
