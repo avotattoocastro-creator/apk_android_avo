@@ -24,6 +24,43 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Espalda · prototipo Rev E.7: conectores magnéticos de 3 vías en lugar del reed
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` (sale de `feature/avo-back-v4`) · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Base E.7:** se quitan los 3 contactos de tornillo M2 de la E.6 y el alojamiento del reed. Ahora lleva el conector
+  magnético PLANO, ovalado:
+  - alojamiento de 15,3 × 6,5 en (X 9, Y 0), desde el fondo hasta Z 4,0, con escalón a 45° y paso al interior;
+  - cara enrasada con el fondo y pegada con epoxi.
+- **Soporte del chaleco E.7 / base de carga E.7:** en lugar de los 2 pines sueltos, el conector de MUELLES con orejas:
+  - ventana del cuerpo de 14,9 × 5,8;
+  - orejas de 25,0 × 5,8 desde abajo hasta Z −1,4, con membrana de sacrificio de 0,2 que hay que cortar;
+  - cara del cuerpo 0,2 bajo la cara de apoyo;
+  - la base de carga lleva un canal para el cable.
+- **Orden de los contactos:** BAT (Y−) · SYS · GND (Y+). El soporte une BAT y SYS; la base de carga lleva BAT y GND.
+- **Probetas P3** del cuello para la base, el soporte y la base de carga.
+
+**Por qué:** el usuario ha comprado conectores magnéticos comerciales (fotos con calibre del 31/10/2026). Los planos van en la
+caja y los de muelles en el soporte.
+**Medidas:**
+- **Del usuario:** puntas 1,5, agujeros de las orejas Ø2,5 a 19,5 entre centros, imanes a ras.
+- **Por foto (±0,3):** conector plano 15,0 × 6,2 (otra foto dio 16,5: pendiente de confirmar); cuerpo de muelles 14,6 × 5,5 × 2,9;
+  largo total 24,7; orejas 1,7.
+
+**Archivos:** `hardware/back/V4/PROTOTIPO_IMAN_REV_E7/` (STL, STEP, fuente, VALIDACION, IMAGENES, LEEME).
+**No se ha tocado:** tapa E.5, cuna de la Heltec E.6, junta, contraplaca, firmware (la 3.13.11 ya va sin reed) y `main`.
+**Validación:** IMPLEMENTADO (CAD):
+- sólidos válidos;
+- STL cerrados de 1 cuerpo;
+- 0 voladizos fuera de límite;
+- el conector plano no interfiere con la base;
+- en el soporte, la única interferencia es la membrana de sacrificio (16 mm³, prevista).
+
+**NO VERIFICADO** físicamente.
+**Pendiente:**
+- imprimir las probetas;
+- confirmar el largo del conector plano y los gruesos;
+- probar el rebote del contacto al galope.
+
 ## 2026-10-30 — Espalda · prototipo Rev E.6: cuna sin canal −Y y con 4 pinzas sobre el refuerzo
 **Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia** (render anotado del usuario):
