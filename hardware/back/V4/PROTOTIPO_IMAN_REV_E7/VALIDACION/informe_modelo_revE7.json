@@ -65,13 +65,13 @@
    "solidos": 1,
    "cascaras_cerradas": true,
    "caras": 86,
-   "volumen_mm3": 49662.5,
+   "volumen_mm3": 94469.2,
    "bbox": [
     -2.72,
     169.439,
     -32.22,
     32.22,
-    -4.5,
+    -8.8,
     4.45
    ]
   },
@@ -79,15 +79,15 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 217,
-   "volumen_mm3": 34017.5,
+   "caras": 208,
+   "volumen_mm3": 34397.3,
    "bbox": [
     -4.007,
     170.217,
     -33.537,
     33.544,
-    -10.94,
-    -5.993
+    -15.24,
+    -10.293
    ]
   },
   "probeta_P1_L_ANTENA_BASE": {
@@ -125,13 +125,13 @@
    "solidos": 1,
    "cascaras_cerradas": true,
    "caras": 44,
-   "volumen_mm3": 13630.1,
+   "volumen_mm3": 25895.2,
    "bbox": [
     117.514,
     169.441,
     -32.226,
     32.226,
-    -4.506,
+    -8.806,
     4.453
    ]
   },
@@ -170,13 +170,13 @@
    "solidos": 1,
    "cascaras_cerradas": true,
    "caras": 42,
-   "volumen_mm3": 8390.5,
+   "volumen_mm3": 15574.2,
    "bbox": [
     -2.728,
     26.0,
     -32.228,
     32.228,
-    -4.508,
+    -8.808,
     2.851
    ]
   },
@@ -200,13 +200,13 @@
    "solidos": 1,
    "cascaras_cerradas": true,
    "caras": 20,
-   "volumen_mm3": 1718.5,
+   "volumen_mm3": 3182.5,
    "bbox": [
     2.0,
     17.0,
     -16.0,
     16.0,
-    -4.5,
+    -8.8,
     0.0
    ]
   }
@@ -651,16 +651,13 @@
    1.6,
    2.0
   ],
-  "PN_PLATE_POCKET": [
-   26.0,
-   7.0,
-   2.1
-  ],
-  "MT_CARGA": 9.0,
+  "PN_PLATE_POCKET": null,
+  "MT_CARGA": 8.8,
   "EAR_CABLE": [
    2.0,
    1.4
   ],
+  "MT_E73": 8.8,
   "SCREWS": [
    [
     6.0,
@@ -714,7 +711,7 @@
   "ZC": 0.1,
   "CL": 0.12,
   "RW": 2.6,
-  "MT": 4.5,
+  "MT": 8.8,
   "BEAM_T": 1.4,
   "BEAM_Y": [
    -9.5,
@@ -816,5 +813,5 @@
  },
  "logotipo": {},
  "fallos_redondeo": [],
- "tiempo_s": 21.3
+ "tiempo_s": 18.2
 }

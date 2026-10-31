@@ -31,7 +31,8 @@ res["cara_plano_Z"] = round(plb.ZMin, 3); res["cara_muelles_Z"] = round(pins["Bo
 res["punta_pines_Z"] = round(max(pins[k].BoundBox.ZMax for k in ("Pogopin", "Pogopin 2", "Pogopin 3")), 3)
 res["fondo_conector_muelles_Z"] = round(pb.ZMin, 3); res["patas_muelles_Z"] = round(min(pins[k].BoundBox.ZMin for k in ("Pogopin", "Pogopin 2", "Pogopin 3")), 3)
 res["patas_plano_Z"] = round(max(plate[k].BoundBox.ZMax for k in ("Kontakt 1", "Kontakt 2", "Kontakt 3")), 3)
-res["contraplaca_cara_Z"] = round(-RE["MT"] - RE["FABRIC"], 3)
+res["contraplaca_cara_Z"] = round(-RE["MT"] - RE["FABRIC"], 3); res["cara_inferior_soporte_Z"] = -RE["MT"]
+res["holgura_patas_a_cara_inferior_mm"] = round(min(pins[k].BoundBox.ZMin for k in ("Pogopin", "Pogopin 2", "Pogopin 3")) + RE["MT"], 3)
 # huecos tornillos M2 (cabeza Ø3,8 × 1,6) bajo las orejas
 zf, ze1, ze0, zb = pin_geom()
 heads = Part.makeCompound([vcyl(cx, cy + sg * RE["PN_HOLE"][1] / 2, 1.9, ze0 - 1.6, ze0) for sg in (-1, 1)])

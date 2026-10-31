@@ -1,12 +1,13 @@
-# AVO espalda · Rev E.7.2 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
+# AVO espalda · Rev E.7.3 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
 
 **Estado: diseñado y comprobado con el STEP de los conectores (CAD) · NO PROBADO.** Imprime primero las **probetas**.
 
 **Historial de esta revisión:**
 - **E.7:** medidas sacadas de fotos.
 - **E.7.1:** soporte montado desde arriba.
-- **E.7.2 (esta):** cotas exactas del STEP del usuario, `Assembly Pogo 3er` (Onshape). **No imprimas nada de la E.7 ni de la
-  E.7.1.**
+- **E.7.2:** cotas exactas del STEP del usuario, `Assembly Pogo 3er` (Onshape).
+- **E.7.3 (esta):** el conector queda **completamente empotrado** en el soporte, que pasa de 4,5 a **8,8 mm**. No se corta la tela
+  y la contraplaca es la original. **No imprimas nada de la E.7, la E.7.1 ni la E.7.2.**
 
 **Disposición:**
 - **Cápsula (base):** conector **PLANO**, con la cara a ras del fondo y los contactos hacia **abajo**.
@@ -27,19 +28,18 @@
 | Agujeros de las orejas | — | Ø2,0 a 19,5 (tú mediste Ø2,5) |
 
 ## 2. Qué se imprime
-STL en posición de impresión, **sin soportes**: 0 voladizos fuera de límite en las 7 piezas (`VALIDACION/voladizos_E7.json`).
+STL en posición de impresión, **sin soportes**: 0 voladizos fuera de límite en las 6 piezas (`VALIDACION/voladizos_E7.json`).
 
 | Pieza | Fichero |
 |---|---|
 | Probeta de la base | `STL/AVO_RevE7_PROBETA_CONECTOR_BASE.stl` |
 | Probeta del soporte | `STL/AVO_RevE7_PROBETA_CONECTOR_SOPORTE.stl` |
 | Probeta de la base de carga | `STL/AVO_RevE7_PROBETA_CONECTOR_BASE_CARGA.stl` |
-| Base E.7.2 | `STL/AVO_RevE7_BASE_IMAN.stl` |
-| Soporte del chaleco E.7.2 | `STL/AVO_RevE7_SOPORTE_IMAN.stl` |
-| **Contraplaca E.7.2** (nueva: hueco para el conector) | `STL/AVO_RevE7_CONTRAPLACA.stl` (con la cara de la tela en la cama) |
-| Base de carga E.7.2 (9 mm de grueso, para la mesa) | `STL/AVO_RevE7_BASE_CARGA_IMAN.stl` |
+| Base E.7.3 (igual que la E.7.2) | `STL/AVO_RevE7_BASE_IMAN.stl` |
+| Soporte del chaleco E.7.3 (**8,8 mm** de grueso) | `STL/AVO_RevE7_SOPORTE_IMAN.stl` |
+| Base de carga E.7.3 (8,8 mm) | `STL/AVO_RevE7_BASE_CARGA_IMAN.stl` |
 
-Sin cambios: tapa E.5, cuna de la Heltec E.6 y junta TPU.
+Sin cambios: tapa E.5, cuna de la Heltec E.6, junta TPU y **contraplaca original** (los mismos tornillos M3 × 8).
 
 ## 3. Cómo va cada conector
 ![secciones](IMAGENES/E7_secciones_conectores.png)
@@ -57,8 +57,11 @@ Sin cambios: tapa E.5, cuna de la Heltec E.6 y junta TPU.
 - **membrana de 0,2 mm** sobre la ventana: deja imprimir el techo de las orejas como puente. **Córtala con un cúter** antes de
   montar;
 - **2 pilotos de Ø1,6 × 2** para tornillos **M2 de rosca chapa** (M2 × 4 o M2 × 5) por los agujeros de las orejas;
-- **lo que asoma por debajo del soporte:** 1,7 de cuerpo, las cabezas M2 y 1,5 de patas (hasta Z −7,7). Atraviesa la tela y
-  entra en un **hueco de la contraplaca** de 26 × 7 × 2,1 (fondo a Z −8,1; quedan 0,5 mm de piel por detrás).
+- **todo el conector queda dentro del soporte** (E.7.3):
+  - fondo del cuerpo a Z −6,2, cabezas M2 hasta −6,3, patas hasta −7,74;
+  - la cara inferior del soporte está a −8,8, así que queda **1,06 mm libre** para el puente y los hilos;
+  - el alojamiento, abierto por abajo, lo tapan la tela y la contraplaca;
+  - **la espalda queda 4,3 mm más separada del caballo** que con el soporte de 4,5.
 
 ## 4. Orden de los contactos (los dos conectores, a lo largo de Y)
 | Posición | Contacto | Lado de la cápsula |
@@ -81,10 +84,11 @@ Si el sudor une dos contactos vecinos, como mucho se enciende. BAT y GND no est�
    - comprueba con una regla que la cara queda a ras.
 3. **Conector de muelles (soporte del chaleco):**
    - corta la membrana;
-   - acorta las patas a ~1 mm y suelda un puente **BAT–SYS** (las dos del extremo marcado) tumbado sobre las patas, sin tocar GND;
+   - suelda un puente **BAT–SYS** (las dos patas del extremo marcado) tumbado sobre las patas, sin tocar GND. Debe quedar dentro
+     del soporte: hay 1 mm libre bajo las patas;
    - mételo desde abajo y atorníllalo con 2 × M2 de rosca chapa. Un punto de epoxi en las orejas, si quieres.
-4. **Tela del chaleco:** haz una **ranura de 26 × 7 mm** donde va el conector, igual que los 6 agujeros de los tornillos M3.
-   Monta la contraplaca nueva por dentro: su hueco recoge el conector, las cabezas M2 y el puente.
+4. **Chaleco:** sin cambios. **No hay que cortar la tela**: el soporte se monta con la contraplaca original y los mismos 6
+   tornillos M3.
 5. **Base de carga:** mismo montaje, **sin puente**:
    - BAT a **B+** del TP4056 y GND a **B−**; SYS libre;
    - el cable sale por el canal inferior hacia el cuello;
@@ -104,11 +108,11 @@ Si el sudor une dos contactos vecinos, como mucho se enciende. BAT y GND no est�
 ## 7. Comprobaciones hechas (con el STEP colocado en las piezas)
 - **Conector plano / base:** 0 mm³ de interferencia. Cara a Z 0,00, a ras.
 - **Conector de muelles / soporte:** la única interferencia es la membrana de 0,2 (13,5 mm³, prevista).
-- **Conector de muelles / contraplaca:** 0 mm³. Las cabezas M2 tampoco tocan.
+- **Conector de muelles / contraplaca:** 0 mm³. Las cabezas M2 tampoco tocan. El conector queda entero dentro del soporte.
 - **Alturas:**
   - cara de los muelles a Z −0,2 y puntas a Z +1,3;
   - fondo del conector a −6,2 y patas a −7,74;
-  - fondo del hueco de la contraplaca a −8,1.
+  - cara inferior del soporte a −8,8 (1,06 libre).
 - **Mallas:** cerradas, 1 cuerpo, sin autointersecciones (`VALIDACION/validacion_E7.json`).
 - **Datos:** `VALIDACION/interferencias_conectores_STEP.json`.
 
@@ -118,5 +122,5 @@ Si el sudor une dos contactos vecinos, como mucho se enciende. BAT y GND no est�
 - probar el rebote del contacto al galope.
 
 ## 8. Fuente
-`fuente/avo_v22h_revE7_freecad.py` (parámetros `PL_*`, `PN_*`, `CON_C`, `MT_CARGA`).
+`fuente/avo_v22h_revE7_freecad.py` (parámetros `PL_*`, `PN_*`, `CON_C`, `MT_E73`).
 `fuente/e7_sec.py` coloca el STEP de los conectores (`fuente/ref/Assembly_Pogo_3er.step`) y comprueba interferencias.

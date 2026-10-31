@@ -56,7 +56,6 @@ O = os.path.join(H, "E7", "STL"); os.makedirs(O, exist_ok=True)
 J = [("salida_E7/BREP/AVO_RevE7_BASE_IMAN.brep", "AVO_RevE7_BASE_IMAN"),
      ("salida_E7/BREP/AVO_RevE7_SOPORTE_IMAN.brep", "AVO_RevE7_SOPORTE_IMAN"),
      ("salida_E7_carga/BREP/AVO_RevE7_BASE_CARGA_IMAN.brep", "AVO_RevE7_BASE_CARGA_IMAN"),
-     ("salida_E7/BREP/AVO_RevE_CONTRAPLACA.brep", "AVO_RevE7_CONTRAPLACA"),
      ("salida_E7/PROBETAS/AVO_RevE_P3_CONECTOR_BASE.brep", "AVO_RevE7_PROBETA_CONECTOR_BASE"),
      ("salida_E7/PROBETAS/AVO_RevE_P3_CONECTOR_SOPORTE.brep", "AVO_RevE7_PROBETA_CONECTOR_SOPORTE"),
      ("salida_E7_carga/PROBETAS/AVO_RevE_P3_CONECTOR_SOPORTE.brep", "AVO_RevE7_PROBETA_CONECTOR_BASE_CARGA")]

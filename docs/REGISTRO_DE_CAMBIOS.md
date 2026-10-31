@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Espalda · Rev E.7.3: conector de muelles completamente empotrado (soporte de 8,8 mm)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:** el usuario (captura de Shapr3D) pide que el conector de muelles no asome por debajo del soporte, sino que quede
+completamente empotrado.
+- **Soporte y base de carga:** pasan de 4,5 a **8,8 mm** (`MT_E73`). El conector queda dentro: cuerpo hasta −6,2, patas hasta
+  −7,74 y 1,06 libre para el puente. La cara superior y el cierre a la cápsula no cambian.
+- **La espalda queda 4,3 mm más separada del caballo.**
+- **Contraplaca:** vuelve a la original, sin hueco, construida igual y bajada con el soporte. **La tela no se corta.**
+- **Probetas:** las del soporte llegan ahora hasta la cara inferior.
+
+**Validación:** IMPLEMENTADO (CAD, con el STEP colocado):
+- 0 interferencias, salvo la membrana prevista;
+- 0 voladizos fuera de límite en 6 piezas;
+- STL cerrados de 1 cuerpo.
+
+**NO VERIFICADO** físicamente.
+
 ## 2026-10-31 — Espalda · Rev E.7.2: conectores con las cotas del STEP del usuario
 **Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia:** el usuario envió el STEP de los conectores (`Assembly Pogo 3er`, Onshape) y una captura de Shapr3D con la

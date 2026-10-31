@@ -29,7 +29,9 @@
  "fondo_conector_muelles_Z": -6.2,
  "patas_muelles_Z": -7.74,
  "patas_plano_Z": 4.5,
- "contraplaca_cara_Z": -6.0,
+ "contraplaca_cara_Z": -10.3,
+ "cara_inferior_soporte_Z": -8.8,
+ "holgura_patas_a_cara_inferior_mm": 1.06,
  "cabezas_M2 vs contraplaca": 0.0,
  "cabezas_M2 vs soporte": 0.0
 }

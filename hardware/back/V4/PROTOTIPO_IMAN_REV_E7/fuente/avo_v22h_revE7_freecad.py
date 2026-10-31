@@ -125,7 +125,11 @@ RE = dict(
     #    Lo que sobresale por debajo (1,7 de cuerpo + tornillos + 1,5 de patas) va por una ranura de la tela a un hueco de la
     #    contraplaca. Base de carga: más gruesa (MT_CARGA) para que todo quede dentro.
     PN_BODY=(15.5, 4.65, 6.0), PN_EARS=(25.0, 5.5, 2.0), PN_EAR_Z=2.5, PN_HOLE=(2.0, 19.5), PN_TIP=1.5, PN_CLR=0.15,
-    PN_RECESS=0.2, PN_MEMBRANE=0.2, PN_PILOT=(1.6, 2.0), PN_PLATE_POCKET=(26.0, 7.0, 2.1), MT_CARGA=9.0, EAR_CABLE=(2.0, 1.4),
+    PN_RECESS=0.2, PN_MEMBRANE=0.2, PN_PILOT=(1.6, 2.0), PN_PLATE_POCKET=None, MT_CARGA=8.8, EAR_CABLE=(2.0, 1.4),
+    # Rev E.7.3 (31/10/2026, petición del usuario: el conector tiene que quedar COMPLETAMENTE empotrado): el soporte pasa de 4,5 a
+    # 8,8 mm. El conector (cara −0,2, fondo −6,2, patas −7,74 + puente) queda dentro del soporte; la tela no se corta y la
+    # contraplaca vuelve a ser la original (sin hueco).
+    MT_E73=8.8,
     # --- tornillos de cierre: M3 avellanado (ISO 10642) desde abajo → inserto M3×6 en la columna de la tapa
     # Rev E.4: 8 tornillos en 4 parejas simétricas (se quitan los de X 32, X 100 y la punta X 160,5)
     SCREWS=((6.0, -21.5), (6.0, 21.5), (64.0, -24.3), (64.0, 24.3),
@@ -142,6 +146,7 @@ RE = dict(
 )
 if os.environ.get("AVO_E6_CARGA") or os.environ.get("AVO_E7_CARGA"):   # variante: base de carga (BAT y GND al cargador, sin puente)
     RE["POGO_ON"] = ("BAT", "GND"); RE["MT"] = RE["MT_CARGA"]   # Rev E.7.2: la base de carga va en la mesa, más gruesa
+RE["MT"] = RE["MT_E73"]                                 # Rev E.7.3: soporte de 8,8 (también la base de carga)
 RE["CROWN_R"] = HW ** 2 / (2 * RE["CROWN_DROP"])
 P["ZF"] = RE["ZF"]; ZF = RE["ZF"]
 WALL = g("WALL"); CEIL = RE["TOP_Z"] - WALL
@@ -697,7 +702,9 @@ def build_tope_reed():
 # ============================================================ CONTRAPLACA (por dentro del chaleco; tela entre soporte y contraplaca)
 CONTRA_R = [1.6]
 def build_contraplaca():
-    ztop = -RE["MT"] - RE["FABRIC"]; t = RE["PLATE_T"]; R = RE["BACK_R"]; m = RE["PLATE_MARGIN"]
+    # Rev E.7.3: la contraplaca es la ORIGINAL (soporte de 4,5); se construye igual y se baja lo que ha crecido el soporte
+    dz_ = RE["MT"] - 4.5
+    ztop = -4.5 - RE["FABRIC"]; t = RE["PLATE_T"]; R = RE["BACK_R"]; m = RE["PLATE_MARGIN"]
     pl = prism(m, -14, ztop)
     Y = 45.0; zf = lambda y: ztop - t - y * y / (2 * R)
     par = Part.BezierCurve(); par.setPoles([V(0, -Y, zf(-Y)), V(0, 0, zf(-Y) + (Y / R) * Y), V(0, Y, zf(Y))])
@@ -706,8 +713,9 @@ def build_contraplaca():
     f = Part.Face(w); f.translate(V(-20, 0, 0)); below = f.extrude(V(L + 40, 0, 0))
     pl = pl.cut(below).removeSplitter()
     # Rev E.7.2: hueco para lo que asoma bajo el soporte (cuerpo del conector de muelles, cabezas M2, patas y puente)
-    cx_, cy_ = RE["CON_C"]; pl_, pw_, pd_ = RE["PN_PLATE_POCKET"]
-    pl = pl.cut(obround_solid(cx_, cy_, pl_, pw_, ztop - pd_, ztop + 1)).removeSplitter()
+    if RE["PN_PLATE_POCKET"]:                               # Rev E.7.3: sin hueco (el conector va entero dentro del soporte)
+        cx_, cy_ = RE["CON_C"]; pl_, pw_, pd_ = RE["PN_PLATE_POCKET"]
+        pl = pl.cut(obround_solid(cx_, cy_, pl_, pw_, ztop - pd_, ztop + 1)).removeSplitter()
     top_e = [e for e in pl.Edges if abs(e.BoundBox.ZMax - ztop) < 1e-6 and abs(e.BoundBox.ZMin - ztop) < 1e-6]
     pl = pl.makeChamfer(0.8, top_e)                                                 # 45°: esta cara va en la cama
     def bottom_edge(e):
@@ -733,6 +741,7 @@ def build_contraplaca():
             sl.append(fuse_all([vcyl(x, sy - 2.5, 1.5, -40, 10), vcyl(x, sy + 2.5, 1.5, -40, 10), box((x - 1.5, sy - 2.5, -40), (x + 1.5, sy + 2.5, 10))]))
         x += 8.5
     pl = pl.cut(fuse_all(sl))
+    pl.translate(V(0, 0, -dz_))
     return pl.removeSplitter()
 
 # ============================================================ PROBETAS (trozos reales de la base y la tapa para probar antes de imprimir todo)
@@ -742,16 +751,16 @@ def probetas(parts):
     bx = box((ZED_X1 - 1.0, -40, -6), (L + 5.0, 40, 60))          # Rev E.3: hasta el final (no corta el alojamiento del tornillo S12)
     pr["P1_L_ANTENA_BASE"] = parts["base"].common(bx)
     pr["P1_L_ANTENA_TAPA"] = parts["tapa"].common(bx)
-    pr["P1_L_ANTENA_SOPORTE"] = parts["soporte"].common(box((ZED_X1 - 1.0, -40, -6), (L + 10.0, 40, 60)))   # gancho del extremo
+    pr["P1_L_ANTENA_SOPORTE"] = parts["soporte"].common(box((ZED_X1 - 1.0, -40, -RE["MT"] - 2), (L + 10.0, 40, 60)))   # gancho del extremo
     # P2: cuello: columnas S1/S2 con avellanado + junta tórica, postes y extremo USB de la bandeja, ranura del labio
     bx = box((-5, -40, -6), (26.0, 40, 60))
     pr["P2_CUELLO_BASE"] = parts["base"].common(bx)
     pr["P2_CUELLO_TAPA"] = parts["tapa"].common(bx)
-    pr["P2_CUELLO_SOPORTE"] = parts["soporte"].common(bx)
+    pr["P2_CUELLO_SOPORTE"] = parts["soporte"].common(box((-5, -40, -RE["MT"] - 2), (26.0, 40, 60)))
     # Rev E.7 · P3: probetas pequeñas de los conectores (solo suelo de la base / soporte en X 2–17, Y ±16)
     bx = box((2.0, -16.0, -6), (17.0, 16.0, ZF))
     pr["P3_CONECTOR_BASE"] = parts["base"].common(bx)
-    pr["P3_CONECTOR_SOPORTE"] = parts["soporte"].common(box((2.0, -16.0, -6), (17.0, 16.0, 0.0)))
+    pr["P3_CONECTOR_SOPORTE"] = parts["soporte"].common(box((2.0, -16.0, -RE["MT"] - 2), (17.0, 16.0, 0.0)))
     return {k: v.removeSplitter() for k, v in pr.items()}
 
 # ============================================================ informe

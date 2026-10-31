@@ -65,13 +65,13 @@
    "solidos": 1,
    "cascaras_cerradas": true,
    "caras": 90,
-   "volumen_mm3": 96529.1,
+   "volumen_mm3": 94445.1,
    "bbox": [
     -2.72,
     169.439,
     -32.22,
     32.22,
-    -9.0,
+    -8.8,
     4.45
    ]
   },
@@ -79,15 +79,15 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 213,
-   "volumen_mm3": 31196.9,
+   "caras": 208,
+   "volumen_mm3": 34397.3,
    "bbox": [
     -4.007,
     170.217,
-    -33.507,
-    33.507,
-    -14.003,
-    -10.493
+    -33.537,
+    33.544,
+    -15.24,
+    -10.293
    ]
   },
   "probeta_P1_L_ANTENA_BASE": {
@@ -124,14 +124,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 40,
-   "volumen_mm3": 18023.4,
+   "caras": 44,
+   "volumen_mm3": 25895.2,
    "bbox": [
     117.514,
-    169.439,
-    -32.22,
-    32.22,
-    -6.0,
+    169.441,
+    -32.226,
+    32.226,
+    -8.806,
     4.453
    ]
   },
@@ -169,14 +169,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 37,
-   "volumen_mm3": 11007.9,
+   "caras": 46,
+   "volumen_mm3": 15550.2,
    "bbox": [
-    -2.72,
+    -2.728,
     26.0,
-    -32.22,
-    32.22,
-    -6.0,
+    -32.228,
+    32.228,
+    -8.808,
     2.851
    ]
   },
@@ -199,14 +199,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 20,
-   "volumen_mm3": 2229.2,
+   "caras": 23,
+   "volumen_mm3": 3171.0,
    "bbox": [
     2.0,
     17.0,
     -16.0,
     16.0,
-    -6.0,
+    -8.8,
     0.0
    ]
   }
@@ -651,16 +651,13 @@
    1.6,
    2.0
   ],
-  "PN_PLATE_POCKET": [
-   26.0,
-   7.0,
-   2.1
-  ],
-  "MT_CARGA": 9.0,
+  "PN_PLATE_POCKET": null,
+  "MT_CARGA": 8.8,
   "EAR_CABLE": [
    2.0,
    1.4
   ],
+  "MT_E73": 8.8,
   "SCREWS": [
    [
     6.0,
@@ -714,7 +711,7 @@
   "ZC": 0.1,
   "CL": 0.12,
   "RW": 2.6,
-  "MT": 9.0,
+  "MT": 8.8,
   "BEAM_T": 1.4,
   "BEAM_Y": [
    -9.5,
@@ -815,8 +812,6 @@
   ]
  },
  "logotipo": {},
- "fallos_redondeo": [
-  "contraplaca arista espalda R1.3"
- ],
- "tiempo_s": 18.3
+ "fallos_redondeo": [],
+ "tiempo_s": 17.9
 }
