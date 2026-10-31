@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — BACK 3.13.8 DIAGNÓSTICO (Heltec) — Pololu siempre encendido
+**Autor:** Claude · Rama `diag/back-3-13-8-pololu-libre` (desde `fix/back-3-13-8-gps-uart`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:** `AVO_POLOLU_FREE 1`: todo el control de GPIO34 pasa por `zed_shdn()`/`zed_shdn_sleep()`; en esta
+compilación GPIO34 se libera (`gpio_hold_dis`) y queda `INPUT` sin pulls, sin `digitalWrite` ni `gpio_hold_en`. El
+`gpio_deep_sleep_hold_en()` global sigue para los demás pines (TX GPIO33, Vext, ADC, LoRa), no afecta a GPIO34 porque no
+tiene hold propio. Binario y artefacto con nombre DIAG_POLOLU.
+**Por qué:** prueba pedida por el usuario para descartar que el control de SHDN impida funcionar al ZED-F9P.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. No es versión de ahorro: el GPS puede quedar encendido dormida o cargando.
+La alimentación del GPS no se da por correcta sin medir VOUT del Pololu.
+
 ## 2026-10-31 — BACK 3.13.8 (Heltec) — GPS UART PIN FIX
 **Autor:** Claude · Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`) · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia:** UART1 del ZED con **RX=GPIO35, TX=GPIO33** según el cableado confirmado (blanco = RX del ZED → GPIO33,

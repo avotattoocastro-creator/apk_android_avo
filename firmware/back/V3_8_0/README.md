@@ -289,3 +289,15 @@ Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`). Cableado físico 
   **no está resuelto**.
 - Monitor: `AVO BACK V3.13.8`, `GNSS UART1: RX=GPIO35 TX=GPIO33`, `POLOLU: SHDN GPIO34=HIGH` y cada 2 s
   `GNSS: bytes recibidos=… | UBX validos=… | NMEA validos=… | NAV-PVT=… | estado=…`.
+
+## V3.13.8 DIAGNÓSTICO — Pololu siempre encendido (2026-10-31)
+Rama `diag/back-3-13-8-pololu-libre`, binario `AVO_BACK_V3_13_8_DIAG_POLOLU_firmware.bin`. **No es una versión de ahorro.**
+- `AVO_POLOLU_FREE 1`: GPIO34 se libera de cualquier hold y queda como `INPUT` sin pull-up ni pull-down; nunca se escribe
+  ni se fija (ni despierta, ni dormida, ni en modo carga). El SHDN del Pololu queda en ALTO por su propia resistencia de
+  100 kΩ a VIN: el GPS tiene la alimentación **solicitada** siempre, también en sueño profundo y cargando.
+- UART1 RX=35 / TX=33 y el diagnóstico de bytes de la 3.13.8 sin cambios.
+- Monitor: `POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA`, `GPS: alimentacion permanente solicitada`, `UART1: RX=35 TX=33`,
+  `GNSS: bytes recibidos=…`.
+- Con GPIO34 suelto, el pull-up del Pololu sube el pin hacia la tensión de la batería (hasta 4,2 V) a través de 100 kΩ:
+  unos µA por el diodo de protección del ESP32-S3. Para una prueba corta no es un problema; si se deja así, poner
+  100 kΩ de SHDN a GND (el pin queda ≤ 2,1 V y el Pololu sigue encendido).

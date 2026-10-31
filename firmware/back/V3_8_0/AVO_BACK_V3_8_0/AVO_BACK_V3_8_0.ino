@@ -107,6 +107,32 @@ static const uint32_t VEXT_DELAY_MS = 1000;
 // wires on GPIO33 and GPIO35 (checked against the Heltec pin list). Not an RTC pin: held LOW in deep sleep with
 // gpio_hold_en + gpio_deep_sleep_hold_en (ESP32-S3: SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP).
 static const int ZED_INT_PIN = 34;
+// V3.13.8 DIAGNOSTIC BUILD (branch diag/back-3-13-8-pololu-libre): AVO_POLOLU_FREE 1 = GPIO34 is never driven.
+// It is released from any hold and left as an INPUT without pulls, so the Pololu SHDN stays HIGH through its own
+// 100 kΩ pull-up to VIN: the GPS power is permanently REQUESTED, also in deep sleep and while charging.
+// NOT a power-saving build. 0 = normal 3.13.8 (GPIO34 switches the Pololu).
+#define AVO_POLOLU_FREE 1
+static void zed_shdn(bool on) {          // the only place that touches GPIO34
+#if AVO_POLOLU_FREE
+  (void)on;
+  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
+  pinMode(ZED_INT_PIN, INPUT);           // high impedance, no internal pull-up / pull-down
+  s_zed_pwr_req = true;                  // requested through the Pololu's own pull-up (voltage not measured)
+#else
+  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
+  pinMode(ZED_INT_PIN, OUTPUT);
+  digitalWrite(ZED_INT_PIN, on ? HIGH : LOW);
+  s_zed_pwr_req = on;
+#endif
+}
+static void zed_shdn_sleep() {           // before deep sleep
+#if AVO_POLOLU_FREE
+  zed_shdn(true);                        // left free: no hold on GPIO34 (the GPS may stay powered while asleep)
+#else
+  zed_shdn(false);
+  gpio_hold_en((gpio_num_t)ZED_INT_PIN);
+#endif
+}
 // V3.13.0: USB charging. The Heltec has no "USB powered" pin (CP2102 + TP4054), so the 5V header pin (USB 5 V) goes
 // to GPIO7 through a divider: 5V ─ 10 kΩ ─ GPIO7 ─ 15 kΩ ─ GND (≈ 3.0 V with USB, 0 V without). USB present → the
 // whole back sleeps (ZED at 0 V, radio off, LEDs off) and only the battery charges; USB unplugged → GPIO7 LOW →
@@ -221,8 +247,13 @@ static void print_status() {
     const char* est = !s_zed_pwr_req ? "GPS_SIN_ALIMENTACION_SOLICITADA" : s_zed_bytes == 0 ? "SIN_BYTES (no llega nada por GPIO35)" :
                       (ubx == 0 && nmea == 0) ? "BYTES_SIN_TRAMAS_VALIDAS (baudios o senal)" : pvt == 0 ? "TRAMAS_OK_SIN_NAV-PVT (GPS NO VERIFICADO)" :
                       "NAV-PVT_RECIBIDOS (comunicacion GNSS correcta)";
+#if AVO_POLOLU_FREE
+    Serial.printf("  UART1: RX=%d TX=%d | POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA | GPS: alimentacion permanente solicitada (tension no medida)\n",
+                  ZED_RX_PIN, ZED_TX_PIN);
+#else
     Serial.printf("  GNSS UART1: RX=GPIO%d TX=GPIO%d | POLOLU: SHDN GPIO34=%s (solicitado, tension no medida)\n", ZED_RX_PIN, ZED_TX_PIN,
                   s_zed_pwr_req ? "HIGH" : "LOW");
+#endif
     Serial.printf("  GNSS: bytes recibidos=%lu (%lu B/s) | UBX validos=%lu malos=%lu | NMEA validos=%lu | NAV-PVT=%lu | estado=%s\n",
                   (unsigned long)s_zed_bytes, (unsigned long)(dt ? db * 1000 / dt : 0), (unsigned long)ubx, (unsigned long)z.stream().bad_checksum(),
                   (unsigned long)nmea, (unsigned long)pvt, est);
@@ -326,9 +357,7 @@ static void vext_on_soft() {
 // V3.11.0: ZED regulator (Pololu S7V8F3, SHDN on GPIO6) on. Its own soft start; fed from the battery, so the ZED
 // start-up current never touches the 3V3 of the Heltec (no boot loop as with Ve).
 static void zed_wake_pulse() {
-  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
-  pinMode(ZED_INT_PIN, OUTPUT);
-  digitalWrite(ZED_INT_PIN, HIGH);
+  zed_shdn(true);
   delay(50);
 }
 
@@ -407,10 +436,7 @@ static void go_to_sleep(const char* why, uint32_t wake_s = 3) {
   // V3.10.8: software backup first (it is what saves if the ZED is still on 3V3); GPIO35 (ZED RX + white LED) ends
   // held LOW inside zed_backup()
   zed_backup();
-  pinMode(ZED_INT_PIN, OUTPUT);          // V3.11.0: S7V8F3 SHDN LOW → ZED at 0 V, all its LEDs off
-  digitalWrite(ZED_INT_PIN, LOW);
-  s_zed_pwr_req = false;
-  gpio_hold_en((gpio_num_t)ZED_INT_PIN);
+  zed_shdn_sleep();                      // V3.11.0 / diag 3.13.8: see AVO_POLOLU_FREE
   pinMode(ZED_RX_PIN, INPUT);
   pinMode(VEXT_PIN, OUTPUT);
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P and antenna at 0 V
@@ -458,9 +484,7 @@ static void charge_mode(const char* why) {
   if (s_zed_on) { ZED.end(); s_zed_on = false; }
   s_vext_pending = false;
   digitalWrite(VEXT_PIN, HIGH);          // Vext off → ZED-F9P without power
-  pinMode(ZED_INT_PIN, OUTPUT);          // V3.11.0: ZED regulator off
-  digitalWrite(ZED_INT_PIN, LOW);
-  s_zed_pwr_req = false;
+  zed_shdn(false);                       // V3.11.0: ZED regulator off (diag build: GPIO34 stays free)
   setCpuFrequencyMhz(80);
   uint16_t peak = 0;
   uint32_t last = 0, since = millis();
@@ -492,17 +516,25 @@ static void charge_mode(const char* why) {
 // It never switches the ZED off. The configuration (UBX, RTK, 8 Hz) is done afterwards by ZedManager in loop().
 static void gnss_bringup_diag() {
   static const uint32_t bauds[] = {38400, 9600, 115200, 230400, 460800, 921600};
+#if AVO_POLOLU_FREE
+  Serial.printf("AVO BACK V%s (DIAGNOSTICO: POLOLU SIEMPRE ENCENDIDO)\nUART1: RX=%d TX=%d\n", AVO_FW_VERSION, ZED_RX_PIN, ZED_TX_PIN);
+#else
   Serial.printf("AVO BACK V%s\n", AVO_FW_VERSION);
+#endif
   Serial.println("[GNSS] ---- arranque y diagnostico del GPS (sin enviar ordenes al ZED) ----");
-  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
-  pinMode(ZED_INT_PIN, OUTPUT);
-  digitalWrite(ZED_INT_PIN, LOW);
-  s_zed_pwr_req = false;
+#if AVO_POLOLU_FREE
+  zed_shdn(true);
+  Serial.println("POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA (INPUT sin pull-up ni pull-down, sin hold)");
+  Serial.println("GPS: alimentacion permanente solicitada (por el pull-up del Pololu; la tension real NO se mide)");
+  Serial.println("AVISO: version de DIAGNOSTICO: el GPS puede seguir encendido dormida o cargando. No es la version de ahorro.");
+  Serial.println("[GNSS] espero 1500 ms");
+#else
+  zed_shdn(false);
   Serial.println("[GNSS] GPIO34 = 0 (Pololu SHDN): alimentacion del GPS SOLICITADA apagada, 500 ms");
   delay(500);
-  digitalWrite(ZED_INT_PIN, HIGH);
-  s_zed_pwr_req = true;
+  zed_shdn(true);
   Serial.println("POLOLU: SHDN GPIO34=HIGH (alimentacion del GPS SOLICITADA; la tension real NO se mide en esta placa); espero 1500 ms");
+#endif
   delay(1500);
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
@@ -579,9 +611,7 @@ void setup() {
   gpio_hold_dis((gpio_num_t)LORA_RST);
   gpio_hold_dis((gpio_num_t)33);           // V3.13.6: both ZED UART pins (either may be TX)
   gpio_hold_dis((gpio_num_t)35);
-  pinMode(ZED_INT_PIN, OUTPUT);              // V3.11.0: ZED regulator off until the reed is confirmed
-  digitalWrite(ZED_INT_PIN, LOW);
-  gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
+  zed_shdn(false);                           // normal: Pololu off until the GPS start-up; diag: GPIO34 free
   const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER;   // V3.13.1: USB unplugged while asleep
   Serial.printf("[AVO ESPALDA] arranque: motivo de reinicio %d, despertar %d (1=encendido 3=software 4=panico 8=sueño 9=caida de tension; despertar 4=temporizador)\n",
                 (int)esp_reset_reason(), (int)esp_sleep_get_wakeup_cause());

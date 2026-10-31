@@ -1,4 +1,4 @@
-name: Build AVO BACK V3.13.8 (Heltec + ZED-F9P, RTK + batería)
+name: Build AVO BACK V3.13.8 DIAG POLOLU LIBRE (Heltec + ZED-F9P, RTK + batería)
 
 on:
   workflow_dispatch:
@@ -45,17 +45,17 @@ jobs:
           cd "$GITHUB_WORKSPACE/out"
           ls -la
           BIN=$(ls AVO_BACK_V3_8_0.ino.bin)
-          cp "$BIN" AVO_BACK_V3_13_8_firmware.bin
-          [ -f AVO_BACK_V3_8_0.ino.merged.bin ] && cp AVO_BACK_V3_8_0.ino.merged.bin AVO_BACK_V3_13_8_COMPLETO_0x0.bin || true
-          sha256sum AVO_BACK_V3_13_8_*.bin > SHA256SUMS.txt
+          cp "$BIN" AVO_BACK_V3_13_8_DIAG_POLOLU_firmware.bin
+          [ -f AVO_BACK_V3_8_0.ino.merged.bin ] && cp AVO_BACK_V3_8_0.ino.merged.bin AVO_BACK_V3_13_8_DIAG_POLOLU_COMPLETO_0x0.bin || true
+          sha256sum AVO_BACK_V3_13_8_DIAG_POLOLU_*.bin > SHA256SUMS.txt
           cat SHA256SUMS.txt
           python3 - <<'PY'
           import struct
-          b = open("AVO_BACK_V3_13_8_firmware.bin", "rb").read()
+          b = open("AVO_BACK_V3_13_8_DIAG_POLOLU_firmware.bin", "rb").read()
           assert b[0] == 0xE9 and struct.unpack("<H", b[12:14])[0] == 9, "not an ESP32-S3 app image"
           assert struct.unpack("<I", b[0x20:0x24])[0] == 0xABCD5432, "no esp_app_desc_t"
           assert len(b) < 3264 * 1024, "does not fit app0/app1 (3264 KB)"
-          missing = [s for s in (b"3.13.8\x00AVO-BACK", b"AJUSTE_PRECISION", b"PRECISION: perfil", b"AHORRO: CPU", b"INTERRUPTOR: reed", b"USB conectado", b"[GNSS] escucha", b"GNSS UART1: RX=GPIO") if s not in b]
+          missing = [s for s in (b"3.13.8\x00AVO-BACK", b"AJUSTE_PRECISION", b"PRECISION: perfil", b"AHORRO: CPU", b"INTERRUPTOR: reed", b"USB conectado", b"[GNSS] escucha", b"GNSS UART1: RX=GPIO", b"POLOLU: SHDN LIBRE") if s not in b]
           if missing: print(f"::error title=Imagen::faltan {missing}"); raise SystemExit(1)
           print(f"::notice title=AVO BACK 3.13.8::imagen ESP32-S3 valida, {len(b)} bytes ({len(b)*100//(3264*1024)} % de app0), esp_app_desc OK, version 3.13.8 presente")
           PY
@@ -63,9 +63,9 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AVO-BACK-V3-13-8-HELTEC
+          name: AVO-BACK-V3-13-8-DIAG-POLOLU-LIBRE
           path: |
-            out/AVO_BACK_V3_13_8_*.bin
+            out/AVO_BACK_V3_13_8_DIAG_POLOLU_*.bin
             out/SHA256SUMS.txt
             out/build.log
           if-no-files-found: error
