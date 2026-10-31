@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.13.0 (ESP-NOW) · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.1 (ESP-NOW) · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -100,7 +100,8 @@ static const int ZED_INT_PIN = 34;
 // Without the divider GPIO7 reads 0 V (internal pull-down) and the back never sleeps for USB (the old 3.8.2 charge
 // mode by rising voltage is still there).
 static const int USB_SENSE_PIN = 7;
-static const uint16_t USB_SENSE_MV = 2000;      // above this on GPIO7 = USB 5 V present
+static const uint16_t USB_SENSE_MV = 1500;      // V3.13.1: above this on GPIO7 (ADC, internal pull-down) = USB present
+static const uint32_t USB_POLL_S = 3;           // V3.13.1: while charging, USB checked every 3 s
 static bool s_usb_workshop = false;
 static uint16_t usb_sense_mv();
 static bool usb_present();
@@ -387,9 +388,12 @@ static void go_to_sleep(const char* why) {
 #if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
   gpio_deep_sleep_hold_en();
 #endif
-  esp_sleep_enable_ext0_wakeup((gpio_num_t)USB_SENSE_PIN, 0);   // V3.13.0: wake when the USB 5 V goes away (LOW)
-  rtc_gpio_pullup_dis((gpio_num_t)USB_SENSE_PIN);                 // only the divider: ≈ 3.0 V with USB, 0 V without
-  rtc_gpio_pulldown_dis((gpio_num_t)USB_SENSE_PIN);
+  // V3.13.1: no level wake-up on GPIO7 any more: with the divider the pin sits close to the RTC input threshold and
+  // the board woke up after ~1 s with the USB still plugged in (user test 31/10). Instead it wakes every USB_POLL_S,
+  // reads GPIO7 with the ADC at the very start of setup() (a few ms, from the USB power) and goes back to sleep while
+  // the USB is still there; with the holds above still on, nothing else switches on in between.
+  pinMode(USB_SENSE_PIN, INPUT);
+  esp_sleep_enable_timer_wakeup((uint64_t)USB_POLL_S * 1000000ULL);
   esp_deep_sleep_start();
 }
 
@@ -442,6 +446,16 @@ static void charge_mode(const char* why) {
 
 // ------------------------------------------------------------------ setup / loop
 void setup() {
+  // V3.13.1: timer wake-up while charging: USB still there → straight back to sleep (holds still on: ZED, LED and
+  // radio stay off). Only when the USB is gone does the back start.
+  if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER && usb_present()) {
+    pinMode(USB_SENSE_PIN, INPUT);
+#if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
+    gpio_deep_sleep_hold_en();
+#endif
+    esp_sleep_enable_timer_wakeup((uint64_t)USB_POLL_S * 1000000ULL);
+    esp_deep_sleep_start();
+  }
   Serial.setTxBufferSize(4096);          // status printing must never block the GNSS/RTCM loop
   Serial.begin(115200);
   delay(300);
@@ -459,8 +473,9 @@ void setup() {
   pinMode(ZED_INT_PIN, OUTPUT);              // V3.11.0: ZED regulator off until the reed is confirmed
   digitalWrite(ZED_INT_PIN, LOW);
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
-  const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
-  if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)USB_SENSE_PIN);   // V3.13.0: ext0 is now the USB sense pin
+  const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER;   // V3.13.1: USB unplugged while asleep
+  Serial.printf("[AVO ESPALDA] arranque: motivo de reinicio %d, despertar %d (1=encendido 3=software 4=panico 8=sueño 9=caida de tension; despertar 4=temporizador)\n",
+                (int)esp_reset_reason(), (int)esp_sleep_get_wakeup_cause());
 #if AVO_REED_SLEEP
   pinMode(REED_PIN, INPUT_PULLUP);
 #endif

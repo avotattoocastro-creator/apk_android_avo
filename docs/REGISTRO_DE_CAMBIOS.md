@@ -1125,3 +1125,13 @@ por ext0 al desaparecer los 5 V. USER en 3 s = modo taller. Contador de encendid
 **Por qué:** el usuario quita el Qi y carga por el USB-C; pide que con el USB conectado solo cargue y que al desconectarlo
 se despierte todo. La Heltec (CP2102 + TP4054) no tiene ningún pin que indique USB: hace falta el divisor.
 **Validación:** IMPLEMENTADO · COMPILADO-CI · **NO VERIFICADO** en la placa.
+
+## 2026-10-31 — BACK 3.13.1 (Heltec) — USB comprobado por temporizador
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** el sueño por USB despierta cada 3 s por temporizador y vuelve a dormir al instante si el ADC sigue viendo
+el USB en GPIO7 (umbral 1,5 V con pull-down interno), en vez de despertar por nivel bajo en GPIO7 (ext0). Se imprime el
+motivo de reinicio y de despertar al arrancar.
+**Por qué:** prueba del usuario 31/10 01:34 con la 3.13.0: «al conectar el USB lo duerme un segundo y vuelve a arrancar».
+La placa estaba **sin el divisor**, así que el firmware no podía detectar el USB: lo que se ve es el reinicio del CP2102 al
+conectar. Aun así, con el divisor el nivel de GPIO7 en sueño queda cerca del umbral de entrada RTC: el ADC es más seguro.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

@@ -216,3 +216,11 @@ boca USB de la tapa Rev E.5).
 - Sin el divisor en GPIO7 la espalda no se duerme con el USB (queda el modo carga de la 3.8.2 por tensión subiendo).
 - Los 3 encendidos rápidos para emparejar solo cuentan arranques reales (no los despertares tras cargar).
 - Monitor: `INTERRUPTOR: reed no usado | USB: CONECTADO/no (GPIO7 … mV) | GPS: Pololu SHDN GPIO34 ENCENDIDO/apagado`.
+
+## V3.13.1 — comprobación del USB por temporizador (2026-10-31)
+- Dormida por USB ya no se despierta por nivel en GPIO7 (con el divisor el pin queda cerca del umbral de entrada):
+  se despierta cada 3 s, mide GPIO7 con el ADC al principio de `setup()` y vuelve a dormir si sigue el USB. ZED, LED y
+  radio siguen apagados entre medias (pines fijados). Al quitar el USB arranca en ≤ 3 s.
+- Al arrancar imprime el motivo de reinicio y de despertar (`arranque: motivo de reinicio N, despertar M`).
+- **Sin el divisor 10 k / 15 k en GPIO7 la placa no puede saber que hay USB**: no se duerme. El reinicio que se ve al
+  enchufar el USB a un móvil u ordenador es el del CP2102 (DTR/RTS al abrir el puerto), no el sueño.
