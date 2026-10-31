@@ -122,7 +122,8 @@ ZC = 0.10
 CL = 0.12
 RW = 2.6
 RH = GROOVE["z1"] - 0.15
-MT = 6.0      # REV 5.9: placa de 6,0 (antes 4,6) para alojar el macho pogo sin salientes por debajo
+MT = 8.5      # REV 5.9.2: placa de 8,5 (antes 6,0): el lado de los pines (6,0) y sus colas (1,5) quedan empotrados
+              # por completo, con 1,0 de hueco bajo las colas para el puente soldado; nada sobresale por debajo
 STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 5,6 (antes 1,5) para las bisagras de los cierres
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
