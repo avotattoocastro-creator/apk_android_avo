@@ -1,4 +1,5 @@
-/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.2 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.3 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+ * 0.4.3: the IMU batches declare their units (header byte 15 = 1: BNO085 Q8/Q9/Q4/Q14) so the apps can show m/s² and °/s.
  * 0.4.2: steady batch period (long-run average), serial monitor never blocks (0.4.1 lost samples), and if the
  *   stored back gives no radio ACK for 30 s while another back WELCOMEs us (it has accepted this girth), follow it.
  * 0.4.1 (first hardware test of 0.4.0: BNO085 OK, SH-2 3.2.13, ~125 Hz): the batch period comes from the real
@@ -46,8 +47,8 @@
 
 using namespace avo;
 
-#define AVO_GIRTH_VERSION "0.4.2"
-// Identity marker read by AVO Update ("0.4.2" followed by "AVO-GIRTH"): never installed on chest or back.
+#define AVO_GIRTH_VERSION "0.4.3"
+// Identity marker read by AVO Update ("0.4.3" followed by "AVO-GIRTH"): never installed on chest or back.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
 // ---------------------------------------------------------------- pins (XIAO ESP32-C6)

@@ -53,16 +53,16 @@ jobs:
       - name: Package and check the image
         run: |
           cd "$GITHUB_WORKSPACE/out"
-          cp AVO_GIRTH_V0_4_0.ino.bin AVO_GIRTH_V0_4_2_app.bin
-          cp AVO_GIRTH_V0_4_0.ino.merged.bin AVO_GIRTH_V0_4_2_COMPLETO.bin
+          cp AVO_GIRTH_V0_4_0.ino.bin AVO_GIRTH_V0_4_3_app.bin
+          cp AVO_GIRTH_V0_4_0.ino.merged.bin AVO_GIRTH_V0_4_3_COMPLETO.bin
           python3 - <<'PY'
           import struct, sys
-          m = open("AVO_GIRTH_V0_4_2_COMPLETO.bin", "rb").read()
-          a = open("AVO_GIRTH_V0_4_2_app.bin", "rb").read()
+          m = open("AVO_GIRTH_V0_4_3_COMPLETO.bin", "rb").read()
+          a = open("AVO_GIRTH_V0_4_3_app.bin", "rb").read()
           tail = m[0x10000 + len(a):]
           if tail and tail.count(0xFF) != len(tail): print("::error title=Imagen::datos tras la app en la imagen completa"); sys.exit(1)
           m = m[:0x10000 + len(a)]
-          open("AVO_GIRTH_V0_4_2_COMPLETO.bin", "wb").write(m)
+          open("AVO_GIRTH_V0_4_3_COMPLETO.bin", "wb").write(m)
           ents = []
           for i in range(0x8000, 0x9000, 32):
               e = m[i:i+32]
@@ -77,20 +77,20 @@ jobs:
           if not app0 or app0[0][2] != "0x10000": errs.append("ota_0 must start at 0x10000")
           if not any(e[0] == 0 and e[1] == 0x11 for e in ents): errs.append("second OTA slot missing")
           if m[0x10000:0x10000 + len(a)] != a: errs.append("merged image does not contain the app at 0x10000")
-          if not (a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.4.2\x00AVO-GIRTH" in a): errs.append("app marker / chip")
+          if not (a[0] == 0xE9 and struct.unpack("<H", a[12:14])[0] == 13 and b"0.4.3\x00AVO-GIRTH" in a): errs.append("app marker / chip")
           for e in errs: print(f"::error title=Imagen::{e}")
           if errs: sys.exit(1)
-          print(f"::notice title=AVO GIRTH 0.4.2::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
+          print(f"::notice title=AVO GIRTH 0.4.3::ESP32-C6 OK, app {len(a)} bytes, imagen completa {len(m)} bytes, ota_0 0x10000")
           PY
           grep -E 'Sketch uses|Global variables' build.log > memoria.txt || true
           cp "$GITHUB_WORKSPACE/host_tests.txt" pruebas_host.txt
-          sha256sum AVO_GIRTH_V0_4_2_*.bin > SHA256SUMS.txt
+          sha256sum AVO_GIRTH_V0_4_3_*.bin > SHA256SUMS.txt
           echo "::notice title=Memoria::$(cat memoria.txt | tr '\n' ' ')"
       - uses: actions/upload-artifact@v4
         with:
-          name: AVO-GIRTH-V0-4-2-ESP32C6
+          name: AVO-GIRTH-V0-4-3-ESP32C6
           path: |
-            out/AVO_GIRTH_V0_4_2_*.bin
+            out/AVO_GIRTH_V0_4_3_*.bin
             out/SHA256SUMS.txt
             out/build.log
             out/pruebas_host.txt
@@ -101,11 +101,11 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
           F=firmware/girth/V0_4_0
-          mkdir -p /tmp/bin && cp out/AVO_GIRTH_V0_4_2_*.bin out/SHA256SUMS.txt out/pruebas_host.txt out/particiones.txt out/memoria.txt /tmp/bin/
+          mkdir -p /tmp/bin && cp out/AVO_GIRTH_V0_4_3_*.bin out/SHA256SUMS.txt out/pruebas_host.txt out/particiones.txt out/memoria.txt /tmp/bin/
           cp out/build.log /tmp/bin/compilacion.log
           git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
           git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
           mkdir -p $F/out && cp /tmp/bin/* $F/out/
           git add -A $F/out
-          git commit -m "Cincha V0.4.2: binarios del CI de ${GITHUB_SHA::7} (run ${{ github.run_id }}) [skip ci]" || echo "sin cambios"
+          git commit -m "Cincha V0.4.3: binarios del CI de ${GITHUB_SHA::7} (run ${{ github.run_id }}) [skip ci]" || echo "sin cambios"
           git push origin HEAD:${{ github.ref_name }}
