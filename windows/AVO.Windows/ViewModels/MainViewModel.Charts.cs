@@ -45,7 +45,9 @@ public sealed partial class MainViewModel
     public bool ChartPrecision { get => _chartPrecision; set => Set(ref _chartPrecision, value); }
     public bool ChartCadence { get => _chartCadence; set => Set(ref _chartCadence, value); }
     public string FilterDescription => Selected?.Timeline.FilterParameters.Describe() ?? new SpeedSmoother.Parameters().Describe();
-    public string ImuScaleNote => ImuTimeline.ScaleNote;
+    public string ImuScaleNote => Selected?.Imu.Note ?? ImuTimeline.ScaleNote;
+    public string ImuChartHeader => Selected?.Session.ImuUnits == 1
+        ? "IMU cincha · aceleración vertical z (g, unidades del BNO085)" : "IMU cincha · aceleración vertical z (g, escala nominal)";
 
     public ObservableCollection<KeyValueRow> RangeStats { get; } = [];
     public ObservableCollection<KeyValueRow> SessionStats { get; } = [];
@@ -131,6 +133,8 @@ public sealed partial class MainViewModel
         AltitudeSpark = tl.AltitudeMsl.Any(double.IsFinite) ? tl.AltitudeMsl : null;
         CadenceSpark = cad.Count > 0 ? cad[0].Y : null;
         Raise(nameof(FilterDescription));
+        Raise(nameof(ImuScaleNote));
+        Raise(nameof(ImuChartHeader));
     }
 
     private void RefreshRangeStats()

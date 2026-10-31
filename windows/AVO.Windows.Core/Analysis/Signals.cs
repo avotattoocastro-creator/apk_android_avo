@@ -60,18 +60,29 @@ public sealed class ImuTimeline
     public const double NominalAccelGPerLsb = 0.000244;
     public const double NominalGyroDpsPerLsb = 0.070;
     public const string ScaleNote = "Escala nominal del sensor (±8 g, ±2000 °/s) sin calibrar; orientación de ejes no verificada en el caballo.";
+    /// <summary>BNO085 fixed point declared by GIRTH 0.4.3+ (header byte 15 = 1): acc Q8 m/s², gyro Q9 rad/s.</summary>
+    public const double Bno085AccelGPerLsb = 1.0 / (256.0 * 9.80665);
+    public const double Bno085GyroDpsPerLsb = 180.0 / Math.PI / 512.0;
+    public const string Bno085ScaleNote = "Unidades declaradas por la cincha (BNO085: aceleración en m/s² Q8, giro en rad/s Q9), " +
+        "calibración dinámica del propio sensor; orientación de ejes no verificada en el caballo.";
+    public static string ScaleNoteFor(byte units) => units == 1 ? Bno085ScaleNote : ScaleNote;
+    /// <summary>Scale actually used for this session.</summary>
+    public string Note { get; private init; } = ScaleNote;
+    public double AccelGPerLsb { get; private init; } = NominalAccelGPerLsb;
+    public double GyroDpsPerLsb { get; private init; } = NominalGyroDpsPerLsb;
 
-    public sealed record Channel(byte ImuId, double[] T, short[] Ax, short[] Ay, short[] Az, short[] Gx, short[] Gy, short[] Gz)
+    public sealed record Channel(byte ImuId, double[] T, short[] Ax, short[] Ay, short[] Az, short[] Gx, short[] Gy, short[] Gz,
+        double AccelGPerLsb = NominalAccelGPerLsb, double GyroDpsPerLsb = NominalGyroDpsPerLsb)
     {
         public string Name => ImuTimeline.SensorName(ImuId);
         public double[] AccelMagnitudeG()
         {
             var r = new double[T.Length];
-            for (int i = 0; i < r.Length; i++) r[i] = Math.Sqrt((double)Ax[i] * Ax[i] + (double)Ay[i] * Ay[i] + (double)Az[i] * Az[i]) * NominalAccelGPerLsb;
+            for (int i = 0; i < r.Length; i++) r[i] = Math.Sqrt((double)Ax[i] * Ax[i] + (double)Ay[i] * Ay[i] + (double)Az[i] * Az[i]) * AccelGPerLsb;
             return r;
         }
-        public double[] AxisG(char axis) => (axis switch { 'x' => Ax, 'y' => Ay, _ => Az }).Select(v => v * NominalAccelGPerLsb).ToArray();
-        public double[] GyroDps(char axis) => (axis switch { 'x' => Gx, 'y' => Gy, _ => Gz }).Select(v => v * NominalGyroDpsPerLsb).ToArray();
+        public double[] AxisG(char axis) => (axis switch { 'x' => Ax, 'y' => Ay, _ => Az }).Select(v => v * AccelGPerLsb).ToArray();
+        public double[] GyroDps(char axis) => (axis switch { 'x' => Gx, 'y' => Gy, _ => Gz }).Select(v => v * GyroDpsPerLsb).ToArray();
     }
 
     public List<Channel> Channels { get; } = [];
@@ -93,13 +104,19 @@ public sealed class ImuTimeline
                 if (p.ChestUs > 0) diffs.Add(p.ChestUs / 1e6 - gnss.TimeOfItow(p.GpsWeekMs));
             if (diffs.Count > 0) { offset = Stats.Median(diffs); aligned = true; }
         }
-        var tl = new ImuTimeline { OffsetS = offset, Aligned = aligned, SampleRateHz = s.ImuPeriodUs > 0 ? 1e6 / s.ImuPeriodUs : 0 };
+        bool bno = s.ImuUnits == 1;
+        var tl = new ImuTimeline
+        {
+            OffsetS = offset, Aligned = aligned, SampleRateHz = s.ImuPeriodUs > 0 ? 1e6 / s.ImuPeriodUs : 0, Note = ScaleNoteFor(s.ImuUnits),
+            AccelGPerLsb = bno ? Bno085AccelGPerLsb : NominalAccelGPerLsb, GyroDpsPerLsb = bno ? Bno085GyroDpsPerLsb : NominalGyroDpsPerLsb,
+        };
         foreach (var g in s.Imu.GroupBy(x => x.ImuId).OrderBy(g => g.Key))
         {
             var a = g.Where(x => x.TimeS - offset >= t0 && x.TimeS - offset <= t1).OrderBy(x => x.TimeS).ToArray();
             if (a.Length == 0) continue;
             tl.Channels.Add(new Channel(g.Key, a.Select(x => x.TimeS - offset).ToArray(), a.Select(x => x.Ax).ToArray(), a.Select(x => x.Ay).ToArray(),
-                a.Select(x => x.Az).ToArray(), a.Select(x => x.Gx).ToArray(), a.Select(x => x.Gy).ToArray(), a.Select(x => x.Gz).ToArray()));
+                a.Select(x => x.Az).ToArray(), a.Select(x => x.Gx).ToArray(), a.Select(x => x.Gy).ToArray(), a.Select(x => x.Gz).ToArray(),
+                tl.AccelGPerLsb, tl.GyroDpsPerLsb));
         }
         return tl;
     }

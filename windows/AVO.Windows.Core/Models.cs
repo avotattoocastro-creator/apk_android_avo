@@ -22,6 +22,10 @@ public readonly record struct GnssEpoch(long GpsWeekMs, GnssSolution Solution, i
 /// <summary>Raw 9-axis sample of one girth IMU (IMU_SAMPLE fmt 0). Values are sensor LSB, NOT physical units.</summary>
 public readonly record struct ImuRawSample(byte ImuId, double TimeS, short Ax, short Ay, short Az, short Gx, short Gy, short Gz, short Mx, short My, short Mz);
 
+/// <summary>Fused sample of the BNO085 girth (IMU_SAMPLE fmt 1, GIRTH 0.4.x): linear acceleration (gravity removed)
+/// and game rotation vector quaternion, in sensor fixed point (Q8 m/s², Q14). Same times as the fmt 0 batch.</summary>
+public readonly record struct ImuFusedSample(byte ImuId, double TimeS, short Lx, short Ly, short Lz, short Qi, short Qj, short Qk, short Qr);
+
 public sealed record MarkerEvent(ulong ChestUs, int Source, uint Count)
 {
     public string SourceName => Source switch { 0 => "Botón", 1 => "App", 2 => "Desarrollo", 3 => "Alimentación", 4 => "Sistema", _ => "Desconocido" };
@@ -67,6 +71,11 @@ public sealed class TrainingSession
     public List<ImuRawSample> Imu { get; } = [];
     public int ImuPeriodUs { get; set; }
     public int ImuOpaqueBatches { get; set; }
+    /// <summary>Units declared by the girth in the IMU header (byte 15): 0 = not declared (nominal scale of the REV B
+    /// LSM6), 1 = BNO085 fixed point (GIRTH 0.4.3+: acc Q8 m/s², gyro Q9 rad/s, mag Q4 µT, quaternion Q14).</summary>
+    public byte ImuUnits { get; set; }
+    public List<ImuFusedSample> ImuFused { get; } = [];
+    public int ImuFusedBatches { get; set; }
     public List<MarkerEvent> Markers { get; } = [];
     public List<SegmentSummary> Segments { get; } = [];
     /// <summary>SHA-256 of the imported file as received (duplicate detection). Not the watch canonical hash.</summary>

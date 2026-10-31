@@ -139,9 +139,22 @@ public static class RawReader
     {
         int count = p[2], fmt = p[3];
         int period = U16(p.Slice(12, 2));
+        if (fmt == 1)
+        {   // GIRTH 0.4.x: linear acceleration + quaternion, 14 bytes per sample
+            if (count == 0 || p.Length < 24 + count * 14 || period is < 1000 or > 100000) { session.InvalidFrames++; return; }
+            session.ImuFusedBatches++;
+            for (int i = 0; i < count; i++)
+            {
+                var f = p.Slice(24 + i * 14, 14);
+                double tf = ((double)chestUs - (double)(count - 1 - i) * period) / 1e6;
+                session.ImuFused.Add(new ImuFusedSample(p[1], tf, I16(f), I16(f[2..]), I16(f[4..]), I16(f[6..]), I16(f[8..]), I16(f[10..]), I16(f[12..])));
+            }
+            return;
+        }
         if (fmt != 0) { session.ImuOpaqueBatches++; return; }
         if (count == 0 || p.Length < 24 + count * 18 || period is < 1000 or > 100000) { session.InvalidFrames++; return; }
         if (session.ImuPeriodUs == 0) session.ImuPeriodUs = period;
+        if (p[15] == 1) session.ImuUnits = 1;   // units declared by the girth (GIRTH 0.4.3+: BNO085 fixed point)
         byte imu = p[1];
         for (int i = 0; i < count; i++)
         {
