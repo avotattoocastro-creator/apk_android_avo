@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA de extremo a extremo: datos de la cincha en la sesión
+**Autor:** Claude · Evidencia: foto de Windows Advanced Analysis V2 PRO, «Entrenamiento 31/10/2026 16:52», HORSE_001
+- **PROBADO FÍSICAMENTE:** la gráfica «IMU cincha – aceleración vertical z» muestra la traza «Central» (imu_id 0) durante toda la sesión, con picos al mover la cincha (00:39–00:42). Cadena completa: BNO085 → cincha 0.4.2 → espalda 3.13.11 → pecho 3.7.6 → archivo → app de Windows.
+- **Escala:** la app dibuja la IMU en LSB «sin calibrar» con una escala nominal. Con GIRTH 0.4.x, acc = Q8 m/s² (256 LSB = 1 m/s², 1 g ≈ 2511 LSB), giro = Q9 rad/s y mag = Q4 µT. Falta pasar estas unidades a la app y al motor de análisis.
+- **Pendiente:**
+  - cadencia con el caballo en marcha (en esta prueba la cincha se movió a mano);
+  - lectura de fmt 1 (aceleración lineal y cuaternión) en la app y en el motor de análisis;
+  - batería y reposo.
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA: IMU y enlace con la espalda funcionando
 **Autor:** Claude · Evidencia: monitor serie de la cincha (captura del usuario, 16:51)
 - **Enlace PROBADO FÍSICAMENTE:**
