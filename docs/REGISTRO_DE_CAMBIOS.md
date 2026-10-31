@@ -1170,3 +1170,11 @@ imprime el nivel de todos y el ADC de 20/18/19.
 5,1 k / 10 k desde 5 V debería medir ≈ 3,3 V → el divisor no está en GPIO20. También: reinicio por caída de tensión tras
 instalar (batería 3454 mV) y `ZED: SIN_RESPUESTA_UBX` en los primeros segundos.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.6 (Heltec) — RX/TX del ZED cruzados automáticamente
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** pines del UART del ZED variables; sin bytes del ZED durante 10 s tras darle corriente → se intercambian
+GPIO33/GPIO35 (alternando); con más de 64 bytes recibidos se guarda el orden en NVS `zedswap`. Al arrancar se liberan los
+holds de los dos pines.
+**Por qué:** el usuario dice que el GPS no funciona y pide invertir RX/TX por si los soldó al revés.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

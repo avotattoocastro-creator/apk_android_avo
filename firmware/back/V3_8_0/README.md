@@ -253,3 +253,9 @@ A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·
 - Ahora vale un nivel alto en **GPIO20, 18, 21, 19, 47 o 48** (entrada con pull-down). GPIO26 no se toca (es la flash).
 - Al arrancar imprime el nivel de cada uno: `USB, pines candidatos (1 = tension): GPIO20=… GPIO18=… …` y el pin que lo
   ha detectado (`conectado por GPIOn`).
+
+## V3.13.6 — cables RX/TX del ZED probados en los dos sentidos (2026-10-31)
+- Si el ZED no envía nada en 10 s desde que tiene corriente, la espalda cruza RX y TX (GPIO33 ↔ GPIO35) y vuelve a
+  buscar; alterna cada 10 s hasta recibir datos. El orden que funciona se guarda en NVS (`zedswap`) para el siguiente
+  arranque. Monitor: `el ZED no envia nada: pruebo los cables al reves …` / `el ZED responde con RX=GPIOx TX=GPIOy`.
+- Con los cables cruzados el LED blanco (GPIO35) parpadea con los datos del ZED: es normal.

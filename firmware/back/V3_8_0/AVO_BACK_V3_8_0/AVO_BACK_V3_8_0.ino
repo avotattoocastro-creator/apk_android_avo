@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.13.5 (ESP-NOW) · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.6 (ESP-NOW) · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -51,8 +51,15 @@ using namespace avo;
 extern "C" const char AVO_BACK_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_FW_VERSION "\0AVO-BACK";
 
 // ------------------------------------------------------------------ hardware
-static const int ZED_RX_PIN = 33;      // Heltec RX  <- ZED TX
-static const int ZED_TX_PIN = 35;      // Heltec TX  -> ZED RX
+// V3.13.6: the two ZED UART wires (GPIO33 / GPIO35) are tried both ways: if nothing arrives from the ZED for
+// ZED_SWAP_MS after it is powered, RX and TX are swapped (and again, alternating, until bytes arrive). The order that
+// works is saved in NVS ("zedswap"). Swapped, the white LED (GPIO35) blinks with the data coming from the ZED.
+static int ZED_RX_PIN = 33;            // Heltec RX  <- ZED TX
+static int ZED_TX_PIN = 35;            // Heltec TX  -> ZED RX
+static const uint32_t ZED_SWAP_MS = 10000;
+static uint32_t s_zed_bytes = 0, s_zed_on_at = 0;
+static bool s_zed_swap_saved = false;
+static void zed_pins_from_swap(bool swapped) { ZED_RX_PIN = swapped ? 35 : 33; ZED_TX_PIN = swapped ? 33 : 35; }
 static const int PRG_PIN = 0;          // PRG / USER button (active LOW)
 static const int VEXT_PIN = 36;        // Heltec Vext switch (LOW = 3.3 V on Vext)
 // V3.8.1: battery voltage. VBAT through a divider on GPIO1, divider enabled by GPIO37 (ADC_Ctrl).
@@ -350,6 +357,7 @@ static void zed_power_on() {
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
+  s_zed_on_at = millis(); s_zed_bytes = 0;   // V3.13.6
   ZED.setRxTimeout(1);                   // hand each NAV-PVT over as soon as the line goes idle
   const uint8_t wake[8] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
   ZED.write(wake, sizeof(wake));         // V3.10.8: edges on the ZED RX line = out of backup (ignored when awake)
@@ -527,7 +535,8 @@ void setup() {
   gpio_hold_dis((gpio_num_t)VBAT_CTRL_PIN);
   gpio_hold_dis((gpio_num_t)LORA_NSS);
   gpio_hold_dis((gpio_num_t)LORA_RST);
-  gpio_hold_dis((gpio_num_t)ZED_TX_PIN);   // V3.10.6
+  gpio_hold_dis((gpio_num_t)33);           // V3.13.6: both ZED UART pins (either may be TX)
+  gpio_hold_dis((gpio_num_t)35);
   pinMode(ZED_INT_PIN, OUTPUT);              // V3.11.0: ZED regulator off until the reed is confirmed
   digitalWrite(ZED_INT_PIN, LOW);
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
@@ -625,6 +634,7 @@ void setup() {
   snprintf(s_dev_id, sizeof(s_dev_id), "%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
   prefs.begin("avonow", false);
+  zed_pins_from_swap(prefs.getBool("zedswap", false));   // V3.13.6
   uint8_t boots = prefs.getUChar("boots", 0);
   // V3.13.0: only real power-ups count (a wake-up after USB charging is not one)
   if (esp_reset_reason() == ESP_RST_POWERON) boots = (uint8_t)((boots >= 3 ? 0 : boots) + 1); else boots = 0;
@@ -673,10 +683,27 @@ void loop() {
   while (s_zed_on && (avail = ZED.available()) > 0) {
     int n = ZED.readBytes(buf, avail > (int)sizeof(buf) ? (int)sizeof(buf) : avail);
     if (n <= 0) break;
+    s_zed_bytes += (uint32_t)n;          // V3.13.6
     core->on_zed(buf, (size_t)n);
     worked = true;
   }
   core->tick();
+  // V3.13.6: nothing from the ZED for 10 s → swap RX/TX; first bytes → remember the order
+  if (s_zed_on) {
+    if (s_zed_bytes == 0 && millis() - s_zed_on_at >= ZED_SWAP_MS) {
+      ZED.end();
+      zed_pins_from_swap(ZED_RX_PIN == 33);
+      ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
+      ZED.setRxTimeout(1);
+      s_zed_on_at = millis();
+      Serial.printf("[AVO ESPALDA] el ZED no envia nada: pruebo los cables al reves (RX=GPIO%d TX=GPIO%d)\n", ZED_RX_PIN, ZED_TX_PIN);
+    } else if (s_zed_bytes > 64 && !s_zed_swap_saved) {
+      s_zed_swap_saved = true;
+      const bool sw = ZED_RX_PIN == 35;
+      if (prefs.getBool("zedswap", false) != sw) prefs.putBool("zedswap", sw);
+      Serial.printf("[AVO ESPALDA] el ZED responde con RX=GPIO%d TX=GPIO%d%s\n", ZED_RX_PIN, ZED_TX_PIN, sw ? " (cables cruzados, guardado)" : "");
+    }
+  }
 
   // PRG held 3 s -> accept a new chest for 120 s
   static uint32_t prg_t = 0;
