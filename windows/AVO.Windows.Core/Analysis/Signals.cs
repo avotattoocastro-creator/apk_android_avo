@@ -86,6 +86,33 @@ public sealed class ImuTimeline
     }
 
     public List<Channel> Channels { get; } = [];
+
+    /// <summary>Girth movement from the BNO085 fused output (IMU_SAMPLE fmt 1, GIRTH 0.4.x): linear acceleration (gravity
+    /// removed) rotated to the world frame of the game rotation vector (Z up), and roll / pitch of the girth. The game
+    /// rotation vector does not use the magnetometer, so the heading (yaw) drifts and is not shown.</summary>
+    public sealed record FusedChannel(byte ImuId, double[] T, double[] VerticalMs2, double[] HorizontalMs2, double[] RollDeg, double[] PitchDeg)
+    {
+        public string Name => ImuTimeline.SensorName(ImuId);
+    }
+    public List<FusedChannel> Fused { get; } = [];
+
+    /// <summary>One fused sample: lin = linear acceleration in sensor axes (Q8 m/s²), q = (i, j, k, real) in Q14.
+    /// Returns world-up and horizontal linear acceleration (m/s²) and roll / pitch (degrees).</summary>
+    public static (double Up, double Horizontal, double RollDeg, double PitchDeg) Fuse(short lx, short ly, short lz, short qi, short qj, short qk, short qr)
+    {
+        double x = qi / 16384.0, y = qj / 16384.0, z = qk / 16384.0, w = qr / 16384.0;
+        double n = Math.Sqrt(x * x + y * y + z * z + w * w);
+        if (n < 1e-6) return (double.NaN, double.NaN, double.NaN, double.NaN);
+        x /= n; y /= n; z /= n; w /= n;
+        double ax = lx / 256.0, ay = ly / 256.0, az = lz / 256.0;
+        // v_world = R(q) · v_sensor
+        double wx = (1 - 2 * (y * y + z * z)) * ax + 2 * (x * y - z * w) * ay + 2 * (x * z + y * w) * az;
+        double wy = 2 * (x * y + z * w) * ax + (1 - 2 * (x * x + z * z)) * ay + 2 * (y * z - x * w) * az;
+        double wz = 2 * (x * z - y * w) * ax + 2 * (y * z + x * w) * ay + (1 - 2 * (x * x + y * y)) * az;
+        double roll = Math.Atan2(2 * (w * x + y * z), 1 - 2 * (x * x + y * y)) * 180 / Math.PI;
+        double pitch = Math.Asin(Math.Clamp(2 * (w * y - z * x), -1, 1)) * 180 / Math.PI;
+        return (wz, Math.Sqrt(wx * wx + wy * wy), roll, pitch);
+    }
     /// <summary>Chest-to-GNSS offset used (s): t_gnss = t_chest - Offset. Median of (chest time - GNSS time) over GNSS records.</summary>
     public double OffsetS { get; private init; }
     public bool Aligned { get; private init; }
@@ -117,6 +144,20 @@ public sealed class ImuTimeline
             tl.Channels.Add(new Channel(g.Key, a.Select(x => x.TimeS - offset).ToArray(), a.Select(x => x.Ax).ToArray(), a.Select(x => x.Ay).ToArray(),
                 a.Select(x => x.Az).ToArray(), a.Select(x => x.Gx).ToArray(), a.Select(x => x.Gy).ToArray(), a.Select(x => x.Gz).ToArray(),
                 tl.AccelGPerLsb, tl.GyroDpsPerLsb));
+        }
+        foreach (var g in s.ImuFused.GroupBy(x => x.ImuId).OrderBy(g => g.Key))
+        {
+            var a = g.Where(x => x.TimeS - offset >= t0 && x.TimeS - offset <= t1).OrderBy(x => x.TimeS).ToArray();
+            if (a.Length == 0) continue;
+            int n = a.Length;
+            var t = new double[n]; var up = new double[n]; var hz = new double[n]; var roll = new double[n]; var pitch = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                var f = a[i];
+                t[i] = f.TimeS - offset;
+                (up[i], hz[i], roll[i], pitch[i]) = Fuse(f.Lx, f.Ly, f.Lz, f.Qi, f.Qj, f.Qk, f.Qr);
+            }
+            tl.Fused.Add(new FusedChannel(g.Key, t, up, hz, roll, pitch));
         }
         return tl;
     }

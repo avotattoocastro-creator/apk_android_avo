@@ -21,6 +21,7 @@
                     <RowDefinition Height="1.3*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="{Binding FusedRowHeight}"/>
                     <RowDefinition Height="0.8*"/>
                     <RowDefinition Height="0.8*"/>
                 </Grid.RowDefinitions>
@@ -57,11 +58,34 @@
                     <c:SignalChart Series="{Binding ImuSeries}" Bands="{Binding GaitBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
                                    RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin datos de cincha en esta sesión"/>
                 </c:AvoChartPanel>
-                <c:AvoChartPanel Grid.Row="3" Header="Cadencia por sensor (ciclos/min, motor AVO)" Readout="{Binding CursorCadence}" Margin="0,0,0,8" Visibility="{Binding ChartCadence, Converter={StaticResource BoolVis}}">
+                <Grid Grid.Row="3" Margin="0,0,0,8" Visibility="{Binding HasFused, Converter={StaticResource BoolVis}}">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <c:AvoChartPanel Header="Cincha · aceleración sin gravedad (m/s², ejes del mundo)" Margin="0,0,4,0">
+                        <c:AvoChartPanel.Legend>
+                            <StackPanel Orientation="Horizontal">
+                                <c:AvoLegendItem Text="Vertical" Swatch="{StaticResource AvoRed}"/>
+                                <c:AvoLegendItem Text="Horizontal" Swatch="{StaticResource AvoCyan}"/>
+                            </StackPanel>
+                        </c:AvoChartPanel.Legend>
+                        <c:SignalChart Series="{Binding FusedAccelSeries}" Bands="{Binding GaitBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                       RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+                    </c:AvoChartPanel>
+                    <c:AvoChartPanel Grid.Column="1" Header="Cincha · orientación (°)" Margin="4,0,0,0">
+                        <c:AvoChartPanel.Legend>
+                            <StackPanel Orientation="Horizontal">
+                                <c:AvoLegendItem Text="Balanceo" Swatch="{StaticResource AvoWarn}"/>
+                                <c:AvoLegendItem Text="Cabeceo" Swatch="#A86BFF"/>
+                            </StackPanel>
+                        </c:AvoChartPanel.Legend>
+                        <c:SignalChart Series="{Binding OrientationSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                                       RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+                    </c:AvoChartPanel>
+                </Grid>
+                <c:AvoChartPanel Grid.Row="4" Header="Cadencia por sensor (ciclos/min, motor AVO)" Readout="{Binding CursorCadence}" Margin="0,0,0,8" Visibility="{Binding ChartCadence, Converter={StaticResource BoolVis}}">
                     <c:SignalChart Series="{Binding CadenceSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
                                    RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" EmptyText="Sin cadencia: requiere datos de cincha y el motor AVO"/>
                 </c:AvoChartPanel>
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
                     <c:AvoChartPanel Header="Altitud GNSS (m)" Readout="{Binding CursorAltitude, StringFormat='{}{0} m'}" Margin="0,0,4,0" Visibility="{Binding ChartAltitude, Converter={StaticResource BoolVis}}">
                         <c:SignalChart Series="{Binding AltitudeSeries}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
@@ -93,6 +117,7 @@
                             <CheckBox Content="Velocidad" IsChecked="{Binding ChartSpeed}"/>
                             <CheckBox Content="Aceleración" IsChecked="{Binding ChartAccel}"/>
                             <CheckBox Content="IMU cincha" IsChecked="{Binding ChartImu}"/>
+                            <CheckBox Content="Movimiento de la cincha (sin gravedad y orientación)" IsChecked="{Binding ChartFused}" IsEnabled="{Binding HasFused}"/>
                             <CheckBox Content="Cadencia (motor)" IsChecked="{Binding ChartCadence}"/>
                             <CheckBox Content="Altitud" IsChecked="{Binding ChartAltitude}"/>
                             <CheckBox Content="Precisión GNSS" IsChecked="{Binding ChartPrecision}"/>

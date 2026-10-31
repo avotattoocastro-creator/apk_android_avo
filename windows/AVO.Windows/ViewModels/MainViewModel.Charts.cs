@@ -22,6 +22,17 @@ public sealed partial class MainViewModel
     public IReadOnlyList<ChartSeries> ImuSeries { get => _imuSeries; private set => Set(ref _imuSeries, value); }
     public IReadOnlyList<ChartSeries> GyroSeries { get => _gyroSeries; private set => Set(ref _gyroSeries, value); }
     public IReadOnlyList<ChartSeries> CadenceSeries { get => _cadSeries; private set => Set(ref _cadSeries, value); }
+    private IReadOnlyList<ChartSeries> _fusedAccelSeries = [], _orientSeries = [];
+    /// <summary>Girth linear acceleration in the world frame (GIRTH 0.4.x fmt 1): vertical (up) and horizontal, m/s².</summary>
+    public IReadOnlyList<ChartSeries> FusedAccelSeries { get => _fusedAccelSeries; private set => Set(ref _fusedAccelSeries, value); }
+    /// <summary>Girth roll and pitch from the game rotation vector, degrees.</summary>
+    public IReadOnlyList<ChartSeries> OrientationSeries { get => _orientSeries; private set => Set(ref _orientSeries, value); }
+    private bool _chartFused = true;
+    public bool ChartFused { get => _chartFused; set { if (Set(ref _chartFused, value)) Raise(nameof(FusedRowHeight)); } }
+    public bool HasFused => Selected?.Imu.Fused.Count > 0;
+    /// <summary>The movement row only takes space when the session has fused data and the user shows it.</summary>
+    public System.Windows.GridLength FusedRowHeight => ChartFused && HasFused
+        ? new System.Windows.GridLength(0.9, System.Windows.GridUnitType.Star) : new System.Windows.GridLength(0);
     private IReadOnlyList<ChartBand> _qualityBands = [], _gaitBands = [];
     public IReadOnlyList<ChartBand> QualityBands { get => _qualityBands; private set => Set(ref _qualityBands, value); }
     public IReadOnlyList<ChartBand> GaitBands { get => _gaitBands; private set => Set(ref _gaitBands, value); }
@@ -61,6 +72,7 @@ public sealed partial class MainViewModel
         if (s is null || s.Timeline.Count < 2)
         {
             SpeedSeries = []; AccelSeries = []; AltitudeSeries = []; PrecisionSeries = []; SatelliteSeries = []; ImuSeries = []; GyroSeries = []; CadenceSeries = [];
+            FusedAccelSeries = []; OrientationSeries = []; Raise(nameof(HasFused)); Raise(nameof(FusedRowHeight));
             QualityBands = []; GaitBands = []; SpeedSpark = null; AccelSpark = null; AltitudeSpark = null; CadenceSpark = null;
             return;
         }
@@ -113,6 +125,19 @@ public sealed partial class MainViewModel
             gyro.Add(new ChartSeries { Name = ch.Name, X = ch.T, Y = ch.GyroDps('x'), Color = c, Thickness = 1, Unit = "°/s", Format = "0" });
         }
         ImuSeries = imu; GyroSeries = gyro;
+        // girth movement (BNO085 fused output): world-frame linear acceleration and roll / pitch
+        var fa = new List<ChartSeries>(); var fo = new List<ChartSeries>();
+        bool many = s.Imu.Fused.Count > 1;
+        foreach (var f in s.Imu.Fused)
+        {
+            string p = many ? f.Name + " · " : "";
+            fa.Add(new ChartSeries { Name = p + "Vertical (arriba +)", X = f.T, Y = f.VerticalMs2, Color = Red, Thickness = 1.2, Unit = "m/s²", Format = "0.00" });
+            fa.Add(new ChartSeries { Name = p + "Horizontal", X = f.T, Y = f.HorizontalMs2, Color = Cyan, Thickness = 1, Unit = "m/s²", Format = "0.00" });
+            fo.Add(new ChartSeries { Name = p + "Balanceo (lateral)", X = f.T, Y = f.RollDeg, Color = Warn, Thickness = 1.2, Unit = "°", Format = "0.0" });
+            fo.Add(new ChartSeries { Name = p + "Cabeceo (adelante/atrás)", X = f.T, Y = f.PitchDeg, Color = Violet, Thickness = 1.2, Unit = "°", Format = "0.0" });
+        }
+        FusedAccelSeries = fa; OrientationSeries = fo;
+        Raise(nameof(HasFused)); Raise(nameof(FusedRowHeight));
         var cad = new List<ChartSeries>();
         if (s.Engine is { HasImu: true } e2 && e2.GirthT.Length > 0)
         {

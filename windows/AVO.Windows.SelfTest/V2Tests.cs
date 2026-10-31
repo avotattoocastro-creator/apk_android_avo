@@ -273,6 +273,13 @@ public static class V2Tests
         var imu = ImuTimeline.Build(s, SessionTimeline.Build(s));
         A(imu.Note == ImuTimeline.Bno085ScaleNote && Math.Abs(2511 * imu.AccelGPerLsb - 1.0) < 1e-3 && Math.Abs(512 * imu.GyroDpsPerLsb - 57.2958) < 1e-3,
             "Escala BNO085: 2511 LSB = 1 g, 512 LSB = 1 rad/s = 57,3 °/s");
+        A(imu.Fused.Count == 1 && imu.Fused[0].T.Length == 2 && Math.Abs(imu.Fused[0].VerticalMs2[0]) < 1e-9 && Math.Abs(imu.Fused[0].HorizontalMs2[0] - 0.5) < 1e-9,
+            "Movimiento de la cincha: aceleración lineal 0,5 m/s² en x con cuaternión identidad = 0,5 horizontal, 0 vertical");
+        var up = ImuTimeline.Fuse(0, 256, 0, 11585, 0, 0, 11585);   // 90° about x: the sensor y axis points up
+        A(Math.Abs(up.Up - 1.0) < 1e-3 && up.Horizontal < 1e-3 && Math.Abs(up.RollDeg - 90) < 0.1 && Math.Abs(up.PitchDeg) < 0.1,
+            "Cuaternión → ejes del mundo: con 90° de balanceo, y del sensor = vertical");
+        var tilt = ImuTimeline.Fuse(0, 0, 0, 1170, -804, -59, 16322);   // monitor 0.4.2 at rest: quat 0.0714 -0.0491 -0.0036 0.9962
+        A(Math.Abs(tilt.RollDeg - 8.2) < 0.3 && Math.Abs(tilt.PitchDeg + 5.6) < 0.3, "Balanceo y cabeceo de la cincha en reposo (≈8,2° y −5,6°)");
         var old = new TrainingSession();
         A(ImuTimeline.Build(old, SessionTimeline.Build(old)).AccelGPerLsb == ImuTimeline.NominalAccelGPerLsb, "Sin unidades declaradas: escala nominal como antes");
     }
