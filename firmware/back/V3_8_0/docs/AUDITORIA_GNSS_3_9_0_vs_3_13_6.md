@@ -67,3 +67,12 @@ Fuentes comparadas (código real del repositorio):
 - Si el diagnóstico dice `SIN DATOS DEL ZED en ningun baudio`, el problema es de hardware: medir VOUT del Pololu (3,3 V),
   VIN (batería), GND común y continuidad del TX del ZED a GPIO33.
 - El GPS solo se da por recuperado cuando el monitor muestre **NAV-PVT > 0**.
+
+## 6. Corrección 3.13.8 (31/10/2026)
+- El usuario confirma por colores de cable: blanco = RX del ZED → GPIO33; verde = TX del ZED → GPIO35. La 3.13.7 (y la
+  3.9.0) usaban RX=33/TX=35: el ESP32 escuchaba en el pin donde el ZED escucha, por eso no llegaba ningún byte.
+- 3.13.8: UART1 con RX=GPIO35, TX=GPIO33. Referencias a GPIO35 revisadas: no hay código de LED; las únicas escrituras
+  eran del TX (aparcarlo a LOW al dormir), que ahora se aplican a GPIO33.
+- Conflicto de hardware que queda: el LED blanco de la Heltec cuelga de GPIO35, así que carga la línea TX del ZED
+  (LED blanco + resistencia a GND; con ~2,8–3 V de caída, la corriente es muy pequeña). Si las tramas llegaran con
+  errores (UBX malos altos), retirar o desoldar ese LED.

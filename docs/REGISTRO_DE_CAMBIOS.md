@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — BACK 3.13.8 (Heltec) — GPS UART PIN FIX
+**Autor:** Claude · Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:** UART1 del ZED con **RX=GPIO35, TX=GPIO33** según el cableado confirmado (blanco = RX del ZED → GPIO33,
+verde = TX del ZED → GPIO35, amarillo = SHDN del Pololu → GPIO34). GPIO35 solo entrada: no se escribe ni se fija al
+dormir (se aparca GPIO33). USB solo por GPIO20 digital filtrado (sin ADC2, sin otros pines candidatos). Monitor con
+`GNSS UART1`, `POLOLU: SHDN GPIO34`, `GNSS: bytes recibidos / UBX / NMEA / NAV-PVT / estado`.
+**Por qué:** con RX=33 no llegaba ningún byte del ZED (UBX=0, NMEA=0). Petición del usuario con el cableado por colores.
+**Archivos:** `firmware/back/V3_8_0/AVO_BACK_V3_8_0/AVO_BACK_V3_8_0.ino`, `lib/avo_core/src/avo_version.h`, `README.md`,
+`docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md` (sección 6), `.github/workflows/build-back-v380.yml`, este registro, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**No se ha tocado:** detector de brownout, corte por batería baja, sueño por USB, ESP-NOW, RTCM, configuración RTK, `ZedManager`.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. GPS no recuperado hasta ver NAV-PVT en el dispositivo. USB por GPIO20:
+sin resolver (0,16–0,17 V con USB conectado: la señal física no llega).
+**Pendiente:** prueba en la espalda; si `UBX malos` alto, quitar el LED blanco de GPIO35.
+
 ## 2026-10-31 — BACK 3.13.7 (Heltec) — recuperación del GPS ZED-F9P
 **Autor:** Claude · Rama `fix/back-3-13-7-gps` (desde `develop/avo-performance-horse`) · **Commits:** `f6b8ee3` · **CI:** [41157825892](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41157825892) (éxito: pruebas de ordenador + imagen ESP32-S3 de 915 840 B, 27 % de app0)
 **Qué cambia:** se trae a esta rama la espalda 3.13.6 de `feature/avo-back-v4` y sobre ella: pines del ZED fijos

@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.13.7 (ESP-NOW) · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.8 (ESP-NOW) · V3.13.8: GPS UART PIN FIX: UART1 RX=GPIO35 (green wire, ZED TX) and TX=GPIO33 (white wire, ZED RX) per the confirmed wiring; GPIO35 never driven (no LED use, not held LOW while asleep); USB sensed only by GPIO20 as a filtered digital input (no ADC2); monitor lines GNSS bytes/UBX/NMEA/NAV-PVT/estado · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -16,7 +16,7 @@
  *
  * Wiring (same as the V3.4.5 test firmware the user already has):
  *   Heltec GPIO33 (RX)  <- ZED TX (UART1 or UART2: detected automatically)
- *   Heltec GPIO35 (TX)  -> ZED RX   (GPIO35 is also the white LED: it flickers with RTCM, that is normal)
+ *   V3.13.8 wiring: Heltec GPIO35 (RX) <- ZED TX (green wire) · Heltec GPIO33 (TX) -> ZED RX (white wire) · GPIO34 -> Pololu SHDN (yellow)
  *   GND common. ZED powered as per its module (if it is fed from the Heltec Vext pin, Vext is switched on).
  *
  * What it does (all logic in lib/avo_core/src/avo_back_core.* and avo_ubx_zed.*, host-tested):
@@ -51,11 +51,13 @@ using namespace avo;
 extern "C" const char AVO_BACK_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_FW_VERSION "\0AVO-BACK";
 
 // ------------------------------------------------------------------ hardware
-// V3.13.7: fixed wiring, confirmed by the user: GPIO33 = Heltec RX <- ZED TX, GPIO35 = Heltec TX -> ZED RX (GPIO35 is
-// also the white LED: it lights while the UART line idles HIGH and flickers with what is sent to the ZED; nothing else
-// in the firmware drives GPIO35). The automatic RX/TX swap of 3.13.6 is gone.
-static const int ZED_RX_PIN = 33;      // Heltec RX  <- ZED TX
-static const int ZED_TX_PIN = 35;      // Heltec TX  -> ZED RX
+// V3.13.8: physical wiring confirmed by the user (cable colours): white = ZED RX -> GPIO33, green = ZED TX -> GPIO35,
+// yellow = Pololu SHDN -> GPIO34. So UART1 is RX=GPIO35, TX=GPIO33 (3.13.7 had them the other way round). GPIO35 is
+// also the white LED of the Heltec (LED + resistor to GND): it is now only an input of UART1 — the firmware never sets
+// it as OUTPUT, never writes it and never holds it; the LED simply follows the ZED's TX line (lit while it idles HIGH).
+// No automatic swap.
+static const int ZED_RX_PIN = 35;      // Heltec RX  <- ZED TX (green)
+static const int ZED_TX_PIN = 33;      // Heltec TX  -> ZED RX (white)
 static uint32_t s_zed_bytes = 0, s_zed_on_at = 0;   // bytes received from the ZED since it was powered
 static bool s_zed_pwr_req = false;     // V3.13.7: GPIO34 driven HIGH = power REQUESTED (the voltage is not measured)
 static uint32_t s_diag_baud = 0;       // V3.13.7: baud rate where the passive listening heard the ZED (0 = nothing)
@@ -112,8 +114,6 @@ static const int ZED_INT_PIN = 34;
 // Without the divider GPIO7 reads 0 V (internal pull-down) and the back never sleeps for USB (the old 3.8.2 charge
 // mode by rising voltage is still there).
 static const int USB_SENSE_PIN = 7;
-static const uint16_t USB_SENSE_MV = 1000;      // V3.13.4: above this on GPIO20 (ADC) = USB present
-static uint16_t s_usb_mv = 0;                   // V3.13.4: last good GPIO20 reading (monitor)
 static const uint32_t USB_POLL_S = 3;           // V3.13.1: while charging, USB checked every 3 s
 static bool s_usb_workshop = false;
 static bool usb_present();
@@ -213,15 +213,19 @@ static void print_status() {
                 core->pairing_open() ? "EMPAREJAMIENTO ABIERTO" : (core->paired() ? "emparejado" : "SIN EMPAREJAR"),
                 (int)st.rssi, (unsigned long)st.tx_packets, (unsigned long)st.tx_fail, (unsigned long)st.tx_retries,
                 (unsigned long)st.rx_packets, (unsigned long)st.rx_foreign, (unsigned long)st.rx_bad, (unsigned long)s_rxq_drop);
-  {  // V3.13.7: what really arrives from the ZED
+  {  // V3.13.8: what really arrives from the ZED (requested monitor format)
     static uint32_t prev_b = 0, prev_t = 0;
     const uint32_t now = millis(), db = s_zed_bytes - prev_b, dt = now - prev_t;
     prev_b = s_zed_bytes; prev_t = now;
-    Serial.printf("  GNSS: UART1 RX=GPIO%d TX=GPIO%d | %lu B/s (total %lu B) | UBX validos=%lu malos=%lu | NMEA validos=%lu | NAV-PVT=%lu | GPIO34=%d (alimentacion %s, tension no medida)%s\n",
-                  ZED_RX_PIN, ZED_TX_PIN, (unsigned long)(dt ? db * 1000 / dt : 0), (unsigned long)s_zed_bytes,
-                  (unsigned long)z.stream().frames(), (unsigned long)z.stream().bad_checksum(), (unsigned long)z.stream().nmea_sentences(),
-                  (unsigned long)st.nav_pvt, s_zed_pwr_req ? 1 : 0, s_zed_pwr_req ? "SOLICITADA" : "cortada",
-                  st.nav_pvt ? "" : " | GPS NO VERIFICADO (sin NAV-PVT)");
+    const uint32_t ubx = z.stream().frames(), nmea = z.stream().nmea_sentences(), pvt = st.nav_pvt;
+    const char* est = !s_zed_pwr_req ? "GPS_SIN_ALIMENTACION_SOLICITADA" : s_zed_bytes == 0 ? "SIN_BYTES (no llega nada por GPIO35)" :
+                      (ubx == 0 && nmea == 0) ? "BYTES_SIN_TRAMAS_VALIDAS (baudios o senal)" : pvt == 0 ? "TRAMAS_OK_SIN_NAV-PVT (GPS NO VERIFICADO)" :
+                      "NAV-PVT_RECIBIDOS (comunicacion GNSS correcta)";
+    Serial.printf("  GNSS UART1: RX=GPIO%d TX=GPIO%d | POLOLU: SHDN GPIO34=%s (solicitado, tension no medida)\n", ZED_RX_PIN, ZED_TX_PIN,
+                  s_zed_pwr_req ? "HIGH" : "LOW");
+    Serial.printf("  GNSS: bytes recibidos=%lu (%lu B/s) | UBX validos=%lu malos=%lu | NMEA validos=%lu | NAV-PVT=%lu | estado=%s\n",
+                  (unsigned long)s_zed_bytes, (unsigned long)(dt ? db * 1000 / dt : 0), (unsigned long)ubx, (unsigned long)z.stream().bad_checksum(),
+                  (unsigned long)nmea, (unsigned long)pvt, est);
   }
   Serial.printf("  ZED: %s baudios=%lu puerto del ZED=%s config=%s ritmo=%u Hz (medido %.1f Hz) UBX=%lu NMEA=%lu NAV-PVT=%lu\n",
                 ZedManager::state_name(z.state()), (unsigned long)z.baud(), z.port() == 1 ? "UART1" : z.port() == 2 ? "UART2" : "?",
@@ -240,8 +244,8 @@ static void print_status() {
   Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
                 s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
 #else
-  Serial.printf("  INTERRUPTOR: reed no usado | USB: %s (GPIO20 %s, %u mV)%s | GPS: Pololu SHDN GPIO34 %s\n",   // V3.13.0
-                usb_present() ? "CONECTADO" : "no", usb_sense2() ? "ALTO" : "bajo", (unsigned)s_usb_mv, s_usb_workshop ? " MODO TALLER" : "",
+  Serial.printf("  INTERRUPTOR: reed no usado | USB: %s (GPIO20=%s)%s | GPS: Pololu SHDN GPIO34 %s\n",   // V3.13.0
+                usb_present() ? "CONECTADO" : "no", usb_sense2() ? "HIGH" : "LOW", s_usb_workshop ? " MODO TALLER" : "",
                 s_zed_on ? "ENCENDIDO" : "apagado");
 #endif
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
@@ -373,9 +377,6 @@ static void zed_power_on() {
 // switched off so the pin is a plain input. ADC2 cannot be read while the radio is on, so it is read as a digital
 // input with the internal pull-down: divider 5V ─ 10 kΩ ─ GPIO20 ─ 22 kΩ ─ GND ≈ 2.7–3.0 V with USB, 0 V without.
 static const int USB_SENSE_PIN2 = 20;
-static const int USB_CAND[] = {18, 21, 19, 47, 48};
-static const int USB_N_CAND = 5;
-static int s_usb_pin = -1;
 static bool usb_sense2() {
   static bool pad_off = false;
   if (!pad_off) {
@@ -388,43 +389,12 @@ static bool usb_sense2() {
   delayMicroseconds(50);
   int hi = 0;
   for (int i = 0; i < 5; i++) hi += digitalRead(USB_SENSE_PIN2);
-  if (hi >= 4) { s_usb_pin = USB_SENSE_PIN2; return true; }
-  // V3.13.5: the other free pins of that row (GPIO26 excluded: it is the flash of the ESP32-S3FN8)
-  for (int k = 0; k < USB_N_CAND; k++) {
-    const int pin = USB_CAND[k];
-    pinMode(pin, INPUT_PULLDOWN);
-    delayMicroseconds(50);
-    int h = 0;
-    for (int i = 0; i < 5; i++) h += digitalRead(pin);
-    if (h >= 4) { s_usb_pin = pin; return true; }
-  }
-  return false;
-}
-static void usb_diag() {   // V3.13.5: level of every candidate pin (with internal pull-down)
-  usb_sense2();
-  Serial.print("[AVO ESPALDA] USB, pines candidatos (1 = tension):");
-  pinMode(USB_SENSE_PIN2, INPUT_PULLDOWN); delayMicroseconds(50);
-  Serial.printf(" GPIO20=%d", digitalRead(USB_SENSE_PIN2));
-  for (int k = 0; k < USB_N_CAND; k++) {
-    pinMode(USB_CAND[k], INPUT_PULLDOWN); delayMicroseconds(50);
-    Serial.printf(" GPIO%d=%d", USB_CAND[k], digitalRead(USB_CAND[k]));
-  }
-  Serial.printf(" | ADC GPIO20=%u mV GPIO18=%u mV GPIO19=%u mV\n", (unsigned)analogReadMilliVolts(20), (unsigned)analogReadMilliVolts(18),
-                (unsigned)analogReadMilliVolts(19));
+  return hi >= 4;                        // V3.13.8: GPIO20 only, 4 of 5 readings HIGH
 }
 // V3.13.3: GPIO20 only. analogRead() turns GPIO7 into an analog pad without pulls: unwired it floats and read as
 // "USB present" at random (user test 31/10 02:04: off for a second and on again).
-// V3.13.4: the digital input needs ≈ 2.5 V; with the ADC any voltage above USB_SENSE_MV counts. GPIO20 is ADC2: while
-// the radio is transmitting a read can fail (returns 0) — then the digital reading decides. s_usb_mv keeps the last good
-// value for the monitor.
-static bool usb_present() {
-  if (usb_sense2()) { s_usb_mv = 3300; return true; }
-  uint32_t acc = 0; int n = 0;
-  for (int i = 0; i < 4; i++) { const uint32_t v = analogReadMilliVolts(USB_SENSE_PIN2); if (v) { acc += v; n++; } }
-  if (!n) return false;
-  s_usb_mv = (uint16_t)(acc / n);
-  return s_usb_mv > USB_SENSE_MV;
-}
+// V3.13.8: USB = GPIO20 digital input only (filtered). No ADC2: its readings are not used to decide.
+static bool usb_present() { return usb_sense2(); }
 
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
 // V3.13.0: used for USB charging: wakes when the USB 5 V disappears (GPIO7 LOW).
@@ -522,6 +492,7 @@ static void charge_mode(const char* why) {
 // It never switches the ZED off. The configuration (UBX, RTK, 8 Hz) is done afterwards by ZedManager in loop().
 static void gnss_bringup_diag() {
   static const uint32_t bauds[] = {38400, 9600, 115200, 230400, 460800, 921600};
+  Serial.printf("AVO BACK V%s\n", AVO_FW_VERSION);
   Serial.println("[GNSS] ---- arranque y diagnostico del GPS (sin enviar ordenes al ZED) ----");
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
   pinMode(ZED_INT_PIN, OUTPUT);
@@ -531,14 +502,14 @@ static void gnss_bringup_diag() {
   delay(500);
   digitalWrite(ZED_INT_PIN, HIGH);
   s_zed_pwr_req = true;
-  Serial.println("[GNSS] GPIO34 = 1: alimentacion del GPS SOLICITADA encendida (la tension real NO se mide en esta placa); espero 1,5 s");
+  Serial.println("POLOLU: SHDN GPIO34=HIGH (alimentacion del GPS SOLICITADA; la tension real NO se mide en esta placa); espero 1500 ms");
   delay(1500);
   ZED.setRxBufferSize(8192);
   ZED.setTxBufferSize(4096);
   ZED.begin(38400, SERIAL_8N1, ZED_RX_PIN, ZED_TX_PIN);
   ZED.setRxTimeout(1);
   s_zed_on = true; s_zed_on_at = millis(); s_zed_bytes = 0; s_vext_pending = false;
-  Serial.printf("[GNSS] UART1 (HardwareSerial ZED(1)) RX=GPIO%d <- TX del ZED, TX=GPIO%d -> RX del ZED (GPIO35 es tambien el LED blanco)\n",
+  Serial.printf("GNSS UART1: RX=GPIO%d TX=GPIO%d  (RX <- TX del ZED, cable verde; TX -> RX del ZED, cable blanco; GPIO35 solo entrada)\n",
                 ZED_RX_PIN, ZED_TX_PIN);
   uint8_t buf[256];
   for (int round = 0; round < 2 && !s_diag_baud; round++) {
@@ -630,10 +601,8 @@ void setup() {
   {
     const uint16_t mv0 = read_battery_mv();
     const bool usb0 = usb_present();
-    Serial.printf("[AVO ESPALDA] bateria en reposo %u mV | USB (GPIO20 %u mV): %s", (unsigned)mv0, (unsigned)s_usb_mv, usb0 ? "conectado" : "no detectado");
-    if (usb0) Serial.printf(" por GPIO%d", s_usb_pin);
-    Serial.println();
-    usb_diag();
+    Serial.printf("[AVO ESPALDA] bateria en reposo %u mV | USB GPIO20=%s%s\n", (unsigned)mv0, usb0 ? "HIGH" : "LOW",
+                  usb0 ? " (USB detectado)" : " (USB no detectado; con USB conectado y LOW, la senal fisica no llega a GPIO20)");
     const uint16_t lim = s_low_batt ? LOW_BATT_RESUME_MV : LOW_BATT_MV;
     if (mv0 && mv0 < lim && !usb0) {
       s_low_batt = true;

@@ -270,3 +270,22 @@ Rama `fix/back-3-13-7-gps` (derivada de `develop/avo-performance-horse`). Audito
 - Sin UBX-RXM-PMREQ al dormir (el Pololu corta la corriente).
 - Monitor: línea `GNSS:` con B/s, UBX, NMEA, NAV-PVT y GPIO34 (alimentación **solicitada**, tensión no medida);
   `GPS NO VERIFICADO (sin NAV-PVT)` mientras no lleguen NAV-PVT.
+
+## V3.13.8 — GPS UART PIN FIX (2026-10-31)
+Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`). Cableado físico confirmado por el usuario:
+| Cable | Origen | Destino Heltec | Uso en el firmware |
+|---|---|---|---|
+| Blanco | RX del ZED-F9P | GPIO33 | **TX** de UART1 |
+| Verde | TX del ZED-F9P | GPIO35 | **RX** de UART1 |
+| Amarillo | SHDN del Pololu S7V8F3 | GPIO34 | encendido del GPS |
+- `HardwareSerial ZED(1); ZED.begin(baud, SERIAL_8N1, 35, 33)` en todas las aperturas (diagnóstico, encendido y
+  cargador de reserva). Sin intercambio automático.
+- **GPIO35 / LED blanco:** el firmware no tiene código de LED. GPIO35 ya no se configura como salida, no se escribe ni se
+  fija al dormir (antes, como TX, se fijaba a LOW). Al dormir se fija a LOW el **GPIO33** (TX). El LED, conectado por
+  hardware a GPIO35, se ve encendido mientras la línea TX del ZED está en reposo (ALTO) y parpadea con sus datos: es
+  normal y no lo controla el firmware.
+- **USB:** solo GPIO20 como entrada digital con pull-down, 4 de 5 lecturas en ALTO. Sin ADC2. El monitor dice
+  `USB GPIO20=HIGH/LOW`. Si con el USB conectado sigue en LOW, la señal física no llega a GPIO20 (medido 0,16–0,17 V):
+  **no está resuelto**.
+- Monitor: `AVO BACK V3.13.8`, `GNSS UART1: RX=GPIO35 TX=GPIO33`, `POLOLU: SHDN GPIO34=HIGH` y cada 2 s
+  `GNSS: bytes recibidos=… | UBX validos=… | NMEA validos=… | NAV-PVT=… | estado=…`.

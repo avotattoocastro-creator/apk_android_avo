@@ -19,7 +19,7 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | OTA desde la app Android | **Retirada en 2.0** | El firmware se instala con el programador USB |
 | Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
 | Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
-| Firmware espalda **3.13.7** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P (Pololu en GPIO34), RTK 8 Hz, diagnóstico GNSS al arrancar | Rama `fix/back-3-13-7-gps`; **GPS no verificado** |
+| Firmware espalda **3.13.8** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P (UART1 RX=35/TX=33, Pololu en GPIO34), RTK 8 Hz, diagnóstico GNSS | Rama `fix/back-3-13-8-gps-uart`; **GPS no verificado** |
 | Programador USB **2.1.0** (`usb-updater/`) | Instalación en pecho y espalda + lectura, identificación y copia completa de cualquier ESP32-S3 | CI correcto [40009097029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40009097029); **no verificado con el pecho ni la espalda** |
 
 ## Documentación compartida (Claude y ChatGPT)
