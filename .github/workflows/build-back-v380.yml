@@ -3,7 +3,7 @@ name: Build AVO BACK V3.13.8 (Heltec + ZED-F9P, RTK + batería)
 on:
   workflow_dispatch:
   push:
-    branches: [develop/avo-performance-horse, feature/avo-wifi-sync, feature/avo-back-v4, fix/back-3-13-8-gps]
+    branches: [develop/avo-performance-horse, feature/avo-wifi-sync, feature/avo-back-v4, fix/back-3-13-7-gps, fix/back-3-13-8-gps-uart, diag/back-3-13-8-pololu-libre]
     paths:
       - 'firmware/back/V3_8_0/**'
       - '.github/workflows/build-back-v380.yml'
