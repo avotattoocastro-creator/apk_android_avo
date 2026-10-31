@@ -32,7 +32,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - el rebaje de las orejas sigue abierto por abajo; tornillos M2 × 4 como máximo;
 - la pared de la cápsula se recorta en vertical con la forma de la placa pogo, que entra desde arriba;
 - conector de y = −20,2 a y = −18,7 (0,8 mm de pared hasta la ranura de la junta); cuna de la batería 1,0 mm hacia +Y (`BAT_Y`).
-**Por qué:** petición del usuario: «engrosar el soporte para que quede empotrado completamente el pogo» y «recortar la pared para poder introducir por arriba el pogo sin problemas».
+- los 8 agujeros M3 del cierre en la base pasan a ser pasantes (sin capa de sacrificio).
+**Por qué:** petición del usuario: «engrosar el soporte para que quede empotrado completamente el pogo» y «recortar la pared para poder introducir por arriba el pogo sin problemas»; «faltan los agujeros pasantes para todos los tornillos que cierran la caja».
 **Validación:** CI sin interferencias y 1 sólido por pieza. NO VERIFICADO en impresión.
 
 ---
