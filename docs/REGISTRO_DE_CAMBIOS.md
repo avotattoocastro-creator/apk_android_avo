@@ -24,6 +24,25 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.0 (XIAO ESP32-C6) — BNO085 por SH-2, antena interna, enlace confirmado
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085` (desde `feature/avo-wifi-sync`) · **Commits:** `066ac4c`, `efc9d31` · **CI:** run 41212893621 (éxito)
+**Qué cambia:** firmware nuevo de la cincha sobre GIRTH 0.1.0 (el código de 0.2.0 no está en el repositorio):
+- controlador SHTP/SH-2 propio para el BNO085 por I²C, en una tarea propia guiada por INT. A 100 Hz da
+  acelerómetro, giroscopio, magnetómetro, aceleración lineal y game rotation vector. Solo da el arranque por bueno
+  si el BNO responde a la petición de identificación y entrega muestras, y si falla reintenta solo;
+- antena interna (0.2.0 seleccionaba la externa sin antena);
+- lotes fmt 0 (los que ya existen) y fmt 1 (nuevo: aceleración lineal y cuaternión);
+- enlace confirmado por el PING de la espalda;
+- batería: «no medida» fuera de 3,0–4,5 V;
+- reposo por GPIO6, desactivado por defecto.
+**Por qué:** 0.2.0 daba «IMU NO RESPONDE», «muestras=0», «envios ok=37 fallo=74» (la espalda nunca dio ACK de radio) y la batería a 0 o 512 mV (divisor no montado). Causas en `firmware/girth/V0_4_0/README.md`.
+**Archivos:** `firmware/girth/V0_4_0/**`, `.github/workflows/build-girth-v040.yml`.
+**No se ha tocado:** espalda, pecho, app, particiones, firma ni actualización, `main`, `develop/avo-performance-horse`.
+**Validación:** CI (compilación ESP32-C6, imagen y 40/40 pruebas de host, simulación). **NO VERIFICADO** en el hardware.
+**Pendiente:** prueba en el hardware (BNO085, enlace con BACK ≥ 3.10.0, batería con divisor), lectura de fmt 1 en la app y en el motor de análisis, consumo y reposo con el contacto del pogo.
+
+---
+
 ## 2026-10-30 — Cincha (CAD) REV 5.9 — conector pogo en lugar del reed, sin Qi, cápsula 70 × 51 × 13,8
 **Autor:** Claude · Rama de propuesta `feature/girth-rev5-9-pogo`, fusionada en `feature/avo-wifi-sync` con el visto bueno del usuario
 **Qué cambia:**
