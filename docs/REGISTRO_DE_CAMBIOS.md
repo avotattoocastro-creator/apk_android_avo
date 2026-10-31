@@ -1127,7 +1127,7 @@ se despierte todo. La Heltec (CP2102 + TP4054) no tiene ningún pin que indique 
 **Validación:** IMPLEMENTADO · COMPILADO-CI · **NO VERIFICADO** en la placa.
 
 ## 2026-10-31 — BACK 3.13.1 (Heltec) — USB comprobado por temporizador
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `f3b19d5` · **CI:** [41151001126](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41151001126) (éxito)
 **Qué cambia:** el sueño por USB despierta cada 3 s por temporizador y vuelve a dormir al instante si el ADC sigue viendo
 el USB en GPIO7 (umbral 1,5 V con pull-down interno), en vez de despertar por nivel bajo en GPIO7 (ext0). Se imprime el
 motivo de reinicio y de despertar al arrancar.
