@@ -24,6 +24,42 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — CHEST 3.7.6 GNSS QUALITY — calidad GNSS de la espalda hasta Android, sobre la 3.7.5-usb1
+**Autor:** Claude · **Rama:** `feature/chest-v3-7-6-gnss-quality` (desde `feature/chest-usb-pc-sync`) · **Commits:** ver `git log` de la rama
+**Qué cambia:**
+- **Cadena de compilación:** el pecho se compila como la 3.7.5-usb1 y después se le aplica la calidad GNSS:
+  - `avo_payloads` de la espalda, que es el mismo archivo con el que se compila la 3.13.11 y decodifica `BackStatus` v3;
+  - `apply_v376.py`, que envía `TELEMETRY` v3 de 116 B por BLE, el formato que Android ya decodifica;
+  - un parche nuevo de frescura.
+- **Frescura:** si el último `BackStatus` tiene más de 5 s, se envía `q_flags = 0`. Además, `quality_age_s` suma la antigüedad del enlace. Así no se presentan como actuales valores viejos de una espalda apagada.
+- **Versión:** `3.7.6`, sin sufijo.
+**Por qué:**
+- Con la espalda 3.13.11 y el pecho 3.7.5-usb1, Android mostraba «Necesita espalda 3.9.0 y pecho 3.7.6».
+- La usb1 se compiló sobre la rc5, sin el parche 3.7.6. Su decodificador solo lee la v2 (82 B) y envía `TELEMETRY` v2 (83 B).
+- La espalda sí envía la v3 (108 B, `s.v3 = true`).
+**Hallazgo (no corregido, documentado):**
+- `ota.cpp` `version_cmp()` rechaza toda OTA firmada si la versión instalada lleva sufijo (`3.7.5-usb1`, `3.7.0-rc2`). Comprobado en el PC con el código real.
+- Por eso la 3.7.6 se instala con AVO Update por USB y se llama `3.7.6`, para que la próxima OTA firmada funcione.
+- No se ha tocado la verificación ES256.
+**Archivos:**
+- `firmware/chest/V3_7_6_GNSS_QUALITY/{tools/apply_v376_gq.py, tests_test_gnss_quality_v376.py, host/gnss_quality_host.cpp, INFORME_COMPATIBILIDAD.md}`;
+- `.github/workflows/build-chest-v376-gnss-quality.yml`.
+- En el árbol compilado solo cambian `avo_payloads.*`, `avo_ble_proto.*`, `ble_service.cpp` y `avo_version.h`. El CI lo comprueba con `diff`.
+**No se ha tocado:**
+- `main`, el firmware y la alimentación de la espalda, ni Android (no necesita cambios);
+- RAW, sesiones y geocercas;
+- UART/ESP-NOW, NTRIP/RTCM y GNSS;
+- pantallas, batería, OTA con ES256, particiones, Wi-Fi y USB AVO1.
+**Validación:**
+- IMPLEMENTADO.
+- Pruebas locales y en CI:
+  - todas las de la usb1 antes y después del parche, incluida la transcripción USB de Windows;
+  - la `TELEMETRY` v3 es idéntica byte a byte al vector de `FirmwareVectorsTest` de Android;
+  - el `BackStatus` v3 de la espalda se decodifica en el pecho.
+- CI: ver entrada siguiente o el run del workflow.
+- **NO VERIFICADO en el reloj.**
+**Pendiente:** prueba física, según el apartado 6 de `INFORME_COMPATIBILIDAD.md`.
+
 ## 2026-10-30 — CHEST 3.7.5-usb1 — pantalla «CONECTADO AL PC» (solo con PC; con cargador, la de siempre)
 **Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` · **Commits:** `1192c49`, `4801bec`
 **Qué cambia:**

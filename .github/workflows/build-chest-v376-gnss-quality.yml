@@ -1,0 +1,164 @@
+name: Build AVO CHEST V3.7.6 GNSS QUALITY (3.7.5-usb1 + calidad GNSS de la espalda)
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/chest-v3-7-6-gnss-quality]
+    paths:
+      - 'firmware/chest/V3_7_2_UI/**'
+      - 'firmware/chest/V3_7_3_READFILE/**'
+      - 'firmware/chest/V3_7_4_WIFI/**'
+      - 'firmware/chest/V3_7_5_RAM/**'
+      - 'firmware/chest/V3_7_5_USB/**'
+      - 'firmware/chest/V3_7_6_GNSS/**'
+      - 'firmware/chest/V3_7_6_GNSS_QUALITY/**'
+      - 'firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.*'
+      - 'windows/AVO.Windows.SelfTest/usb_transcript.json'
+      - '.github/workflows/build-chest-v376-gnss-quality.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      D: ${{ runner.temp }}/avo-376gq
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare 3.7.5-usb1 sources (identical chain to build-chest-v375-usb.yml)
+        run: |
+          set -euo pipefail
+          mkdir -p "$D"
+          unzip -q firmware/chest/V3_7_0_RC2/AVO_CHEST_V3_7_0_RC2_UI_CORRECTED_UNVERIFIED.zip -d "$D"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_2_UI/tools/apply_v372.py")
+          cp firmware/chest/V3_7_2_UI/src/* "$D/AVO_CHEST_V3_5_0/src/"
+          cp firmware/chest/V3_7_2_UI/tests_test_ui_v372.py "$D/tests/test_ui_v372.py"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_3_READFILE/tools/apply_v373.py")
+          cp firmware/chest/V3_7_3_READFILE/tests_test_readfile_v373.py "$D/tests/test_readfile_v373.py"
+          cp firmware/chest/V3_7_4_WIFI/src/* "$D/AVO_CHEST_V3_5_0/src/"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_4_WIFI/tools/apply_v374.py")
+          cp firmware/chest/V3_7_4_WIFI/tests_test_wifi_v374.py "$D/tests/test_wifi_v374.py"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_5_RAM/tools/apply_v375.py")
+          cp firmware/chest/V3_7_5_RAM/tests_test_ram_v375.py "$D/tests/test_ram_v375.py"
+          cp firmware/chest/V3_7_5_USB/src/* "$D/AVO_CHEST_V3_5_0/src/"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_5_USB/tools/apply_v375_usb.py")
+          cp firmware/chest/V3_7_5_USB/tests_test_usb_v375.py "$D/tests/test_usb_v375.py"
+          cp firmware/chest/V3_7_5_USB/host/usb_host.cpp "$D/tests/usb_host.cpp"
+          cd "$D"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('lib/avo_core/src/avo_version.h')
+          s = p.read_text()
+          assert '#define AVO_FW_VERSION "3.7.0-rc2"' in s and '#define AVO_FW_VERSION_NUM 0x030700' in s
+          p.write_text(s.replace('"3.7.0-rc2"', '"3.7.5-usb1"').replace('0x030700', '0x030705'))
+          PY
+      - name: Baseline — every 3.7.5-usb1 test BEFORE the GNSS changes (incl. the Windows USB transcript)
+        env:
+          AVO_USB_TRANSCRIPT: ${{ github.workspace }}/windows/AVO.Windows.SelfTest/usb_transcript.json
+        run: |
+          set -euo pipefail
+          cd "$D"
+          python3 verify_source.py
+          python3 verify_ota_interlock.py
+          for t in tests/test_*.py; do python3 "$t"; done
+          cp -r "$D" "$RUNNER_TEMP/avo-375usb-baseline"
+      - name: Apply 3.7.6 GNSS QUALITY (BackStatus v3 decoder + TELEMETRY v3 + freshness) and set version 3.7.6
+        run: |
+          set -euo pipefail
+          # Same avo_payloads.{h,cpp} that BACK 3.13.11 (fix/back-3-13-11-usb-pololu-off) is built with.
+          cp firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.h firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.cpp "$D/lib/avo_core/src/"
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_6_GNSS/tools/apply_v376.py")
+          (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_6_GNSS_QUALITY/tools/apply_v376_gq.py")
+          cp firmware/chest/V3_7_6_GNSS/tests_test_gnss_v376.py "$D/tests/test_gnss_v376.py"
+          cp firmware/chest/V3_7_6_GNSS_QUALITY/tests_test_gnss_quality_v376.py "$D/tests/test_gnss_quality_v376.py"
+          cd "$D"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('lib/avo_core/src/avo_version.h')
+          s = p.read_text()
+          assert '#define AVO_FW_VERSION "3.7.5-usb1"' in s and '#define AVO_FW_VERSION_NUM 0x030705' in s
+          p.write_text(s.replace('"3.7.5-usb1"', '"3.7.6"').replace('0x030705', '0x030706'))
+          PY
+          grep -n "AVO_FW_VERSION" lib/avo_core/src/avo_version.h
+      - name: What changed against 3.7.5-usb1 (only these files may differ)
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          diff -rq avo-375usb-baseline avo-376gq | grep -v '__pycache__' | tee changed.txt || true
+          python3 - <<'PY'
+          import os
+          allowed = {'lib/avo_core/src/avo_payloads.h', 'lib/avo_core/src/avo_payloads.cpp', 'lib/avo_core/src/avo_ble_proto.h',
+                     'lib/avo_core/src/avo_ble_proto.cpp', 'AVO_CHEST_V3_5_0/src/ble_service.cpp', 'lib/avo_core/src/avo_version.h',
+                     'tests/test_gnss_v376.py', 'tests/test_gnss_quality_v376.py'}
+          bad = []
+          for line in open('changed.txt'):
+              line = line.strip()
+              if not line:
+                  continue
+              if line.startswith('Only in avo-376gq/tests'):
+                  name = 'tests/' + line.split(': ')[1]
+              elif line.startswith('Files '):
+                  name = line.split(' and ')[1].split(' differ')[0].split('avo-376gq/', 1)[1]
+              else:
+                  name = line
+              if name not in allowed:
+                  bad.append(name)
+          assert not bad, f'unexpected changes: {bad}'
+          print('only the allowed files changed')
+          PY
+          diff -u avo-375usb-baseline/AVO_CHEST_V3_5_0/src/ble_service.cpp avo-376gq/AVO_CHEST_V3_5_0/src/ble_service.cpp || true
+      - name: Static checks and every Python test on the 3.7.6 tree
+        run: |
+          set -euo pipefail
+          cd "$D"
+          python3 verify_source.py
+          python3 verify_ota_interlock.py
+          for t in tests/test_*.py; do python3 "$t"; done
+      - name: Host test — back v3 encoder → chest decoder → TELEMETRY v3 == Android vector
+        run: |
+          set -euo pipefail
+          g++ -std=c++17 -O1 -Wall -Wextra -Werror -I "$D/lib/avo_core/src" \
+            firmware/chest/V3_7_6_GNSS_QUALITY/host/gnss_quality_host.cpp \
+            "$D/lib/avo_core/src/avo_payloads.cpp" "$D/lib/avo_core/src/avo_ble_proto.cpp" "$D/lib/avo_core/src/avo_crc.cpp" -o gq
+          ./gq
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 3.3.12
+        run: |
+          set -euo pipefail
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Compile firmware
+        run: |
+          set -euo pipefail
+          cd "$D"
+          if ! FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"; then
+            grep -E "error:|Error " "$GITHUB_WORKSPACE/firmware_out/build.log" | head -20 | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
+            exit 1
+          fi
+          grep -E "Sketch uses|Global variables" "$GITHUB_WORKSPACE/firmware_out/build.log" | while IFS= read -r l; do echo "::notice::$l"; done
+      - name: Check image, name it and label it unverified
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('firmware_out/AVO_CHEST_V3_5_0.ino.bin')
+          b = p.read_bytes()
+          assert p.is_file() and 100000 < len(b) < 6291456, len(b)
+          assert b[0] == 0xE9 and b[12] == 9, 'not an ESP32-S3 app image'
+          import re
+          hits = [m.start() for m in re.finditer(rb'(?<![0-9.])3\.7\.6\x00', b)]
+          assert any(0 < b.find(b'AVO-CHEST\x00', i) - i < 32 for i in hits), 'AVO version string 3.7.6 missing'
+          assert b.find(b'3.7.5-usb1\x00') < 0, 'old version string still in the image'
+          assert b.find(b'AVOCHEST-IMG-V1:WS-AMOLED-2.06') >= 0, 'OTA compatibility marker missing'
+          p.rename('firmware_out/AVO_CHEST_V3_7_6_GNSS_QUALITY.bin')
+          Path('firmware_out/NO_VERIFICADO.txt').write_text(
+              'AVO CHEST 3.7.6 GNSS QUALITY: compilado en CI, NO VERIFICADO en el reloj.\n'
+              'Instalar con AVO Update por USB. Ver firmware/chest/V3_7_6_GNSS_QUALITY/INFORME_COMPATIBILIDAD.md\n')
+          PY
+          cd firmware_out && sha256sum AVO_CHEST_V3_7_6_GNSS_QUALITY.bin > SHA256SUMS.txt && cat SHA256SUMS.txt
+          echo "::notice::$(cat SHA256SUMS.txt)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-CHEST-V3-7-6-GNSS-QUALITY-UNVERIFIED
+          path: firmware_out/
+          if-no-files-found: warn
