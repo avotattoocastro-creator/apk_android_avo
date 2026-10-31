@@ -1,6 +1,20 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
-**REV 5.9 (actual): conector magnético pogo en lugar del reed, sin carga Qi y cápsula más pequeña.**
+**REV 5.9.1 (actual): conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
+- **Placa** (contactos planos), en la base:
+  - cara 15,5 × 4,65, que pasa por el fondo y queda **a ras**;
+  - reborde de 17,1 × 6,25 apoyado por dentro, 3,5 de alto en total;
+  - contactos Ø2 a **paso 2,3** e imanes Ø3;
+  - la copa de epoxi sigue igual.
+- **Lado de los pines**, en el soporte:
+  - cuerpo de 15,5 × 4,65 × 6,0, con la cara a ras del fondo del cerco;
+  - **orejas de 25 × 5,5 a media altura** (entre 2,5 y 4,5 mm de la cara), en un rebaje abierto por abajo;
+  - 2 tornillos **M2** en guías de Ø1,6, a 19,5 mm entre ellos;
+  - las colas de los pines asoman 1,5 mm por debajo del soporte, como en el diseño del usuario.
+- Las piezas de referencia `ref_pogo_*` salen del propio STEP.
+- **CI:** sin interferencias, 1 sólido por pieza. Render: `renders/pogo_5_9_1_corte.png`.
+
+**REV 5.9: conector magnético pogo en lugar del reed, sin carga Qi y cápsula más pequeña.**
 - **Conector pogo de 3 pines (paso 2,54), en el centro del lado −Y:**
   - **hembra plana en la base:** entra desde dentro y apoya en un reborde de 0,6 mm, con su cara 0,6 mm por dentro del fondo. Alrededor tiene una **copa que se rellena con epoxi**; la estanqueidad (IP67) depende de ese sellado. Donde se mete en la pared, el techo va a 45° y se imprime sin soportes;
   - **macho con muelles en el soporte:** entra desde abajo y su cara queda a ras del fondo del cerco. Las orejas van en un rebaje y se sujetan con 2 tornillos M1,6 (agujero guía de Ø1,3). La placa del soporte pasa de 4,6 a 6,0 mm para que el macho no sobresalga por debajo;

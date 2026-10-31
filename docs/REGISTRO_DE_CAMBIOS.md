@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha (CAD) REV 5.9.1 — conector pogo según el modelo STEP real
+**Autor:** Claude · Rama `feature/girth-rev5-9-1-pogo-medido`, fusionada en `feature/avo-wifi-sync` a petición del usuario
+**Qué cambia:**
+- el conector sale del modelo STEP que aporta el usuario (`hardware/girth/REV5/ref/pogo_3pin_assembly.step`, exportado de Onshape), medido en el CI (`inspect_pogo.py`);
+- **placa en la base:** cara de 15,5 × 4,65 a ras del fondo y reborde de 17,1 × 6,25 × 3,5;
+- **pines en el soporte:** cuerpo de 15,5 × 4,65 × 6 con la cara a ras; orejas de 25 × 5,5 a media altura en un rebaje abierto por abajo; tornillos M2 a 19,5 mm;
+- paso de 2,3 entre contactos (no 2,54);
+- las piezas de referencia salen del STEP.
+**Por qué:** petición del usuario, que sustituye a las medidas estimadas y a las lecturas de calibre en fotos.
+**Validación:** CI sin interferencias y 1 sólido por pieza. NO VERIFICADO en impresión.
+**Pendiente:** prueba impresa del encaje de las dos mitades y de los tornillos M2.
+
+---
+
 ## 2026-10-31 — Windows V2 PRO — gráficas del movimiento de la cincha (propuesta)
 **Autor:** Claude · Rama `feature/windows-girth-movimiento` (desde `feature/windows-advanced-analysis`) · **CI:** run 41221077611 (éxito: autopruebas, compilación, capturas)
 **Qué cambia:** nueva fila de Gráficas, que solo aparece si la sesión trae IMU_SAMPLE fmt 1 (cincha GIRTH 0.4.x):

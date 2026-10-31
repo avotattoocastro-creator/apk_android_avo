@@ -14,6 +14,7 @@ Componentes (medidas de los anuncios del usuario; (E) = estimado sobre la foto):
   Receptor Qi 5 W: placa 15 × 18; bobina redonda Ø25. Batería LP403048 50,8 × 30,5 × 4,3. Reed 14 × 3,2. Imanes Ø5 × 1.
 """
 import json
+import os
 import cadquery as cq
 
 OUT = "out"
@@ -93,10 +94,22 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 # Contactos (vistos desde abajo, 1 = −X): 1 = VBUS 5 V (solo base de carga) · 2 = GND (centro) · 3 = DET (pull-up).
 #   Soporte: puente 2–3 → DET a GND = "en el soporte" (sustituye al reed); 1 sin conectar.
 #   Base de carga: 5 V en 1 y GND en 2; 3 sin conectar.
-POGO = dict(y=-20.2,
-            f_l=20.3, f_w=7.0, f_t=3.0, f_lip=0.6, f_tail=1.5,                  # hembra (E)
-            m_l=17.5, m_w=6.0, m_h=5.0, m_pin=1.5, m_tail=1.5,                  # macho: cuerpo y pines libres (E)
-            ear_span=25.0, ear_l=29.0, ear_w=5.0, ear_t=2.0, ear_hole=1.5,      # orejas del macho (E; agujero Ø1,5)
+# REV 5.9.1: medidas con calibre del usuario (31/10/2026; lectura del nonio en fotos, ±0,1):
+#   HEMBRA (plana, sin orejas): cara 15,1 × 4,4 que sobresale 0,8 de una base de 16,7 × 6,3; grueso total 2,6
+#     (base 1,8 + cara 0,8). La cara pasa por el fondo y la base apoya encima del fondo por dentro.
+#   MACHO (pines de muelle, con orejas): cuerpo 14,4 × 5,5 × 5,1; largo con orejas 24,2; orejas 4,4 de ancho y
+#     1,7 de grueso, a ras de la parte de atrás; agujero Ø1,5 (vendedor); entre agujeros ≈ 24,2 − 4,4 = 19,8.
+# REV 5.9.1 (2.ª): medidas del modelo STEP del conector que aporta el usuario (ref/pogo_3pin_assembly.step, Onshape),
+# medido en el CI por inspect_pogo.py (out/pogo_step_medidas.txt). Sustituye a las lecturas de calibre en fotos.
+#   PLACA (contactos planos, va en la cápsula): cara 15,5 × 4,65 (r 2,325) de 1,7 de alto sobre un reborde
+#     17,1 × 6,25 (r 3,125); 3,5 en total. 3 contactos Ø2 a paso 2,3 (salen 1,0 por detrás) e imanes Ø3 en ±5,425.
+#   PINES (va en el soporte): cuerpo 15,5 × 4,65 × 6,0; orejas 25 × 5,5 (r 2,75) entre 2,5 y 4,5 mm de la cara,
+#     agujeros Ø2 en ±9,75; pines Ø0,8 a paso 2,3 que sobresalen 1,5 por delante (muelle) y 1,5 por detrás.
+# Las dos caras quedan a ras (cápsula por abajo, soporte por arriba): al apoyar la cápsula los pines se comprimen.
+POGO = dict(y=-20.2, pitch=2.3,
+            f_l=17.1, f_w=6.25, f_t=3.5, f_bl=15.5, f_bw=4.65, f_bh=1.7, f_lip=0.0,  # placa (cara a ras del fondo)
+            m_l=15.5, m_w=4.65, m_h=6.0, m_pin=1.5, m_tail=1.5,                  # cuerpo del lado de los pines
+            ear_span=19.5, ear_l=25.0, ear_w=5.5, ear_t=2.0, ear_z0=2.5, ear_hole=2.0,   # orejas (de 2,5 a 4,5 de la cara)
             clear=0.2, cup_wall=1.0, cup_z=5.5, boss=1.4)
 
 RING_T = 1.0
@@ -174,16 +187,17 @@ def pod_base():
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
     cw = POGO["cup_wall"]
     b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
+    zfl = POGO["f_lip"] + POGO["f_bh"]                                  # REV 5.9.1: la base de la hembra apoya aquí
     ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
     stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
-    b = b.cut(stad(ft - POGO["f_lip"], POGO["f_lip"]))
+    b = b.cut(stad(ft - zfl, zfl))
     yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
     b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
     wedge = (cq.Workplane("YZ", origin=(-20, 0, 0)).polyline([(py - fw / 2 - 0.01, ft - 0.01), (yin + 0.01, ft - 0.01),
                                                                  (yin + 0.01, ft + (yin - (py - fw / 2)))]).close().extrude(40))
     b = b.cut(wedge.intersect(stad(10, ft - 0.02)))                     # en la pared: techo a 45° (sin voladizo)
-    ol, ow = POGO["f_l"] - 2 * POGO["f_lip"], POGO["f_w"] - 2 * POGO["f_lip"]
-    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, POGO["f_lip"] + 1, z0=-1).translate((0, py, 0)))
+    ol, ow = POGO["f_bl"] + 2 * cl, POGO["f_bw"] + 2 * cl                 # REV 5.9.1: paso de la cara (15,1 × 4,4)
+    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, zfl + 1.01, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
@@ -399,10 +413,11 @@ def mount():
     zb = -MT                                                            # cara inferior de la placa
     p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, MT + 2, z0=-MT - 1)
               .translate((0, py, 0)))
+    # orejas a media altura del cuerpo: el alojamiento se abre por abajo hasta 0,1 por encima de ellas
     p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
-                    POGO["ear_t"] + (-POGO["m_h"] - zb) + 0.11, z0=zb - 0.01).translate((0, py, 0)))
+                    (-POGO["ear_z0"] + 0.1) - zb + 0.01, z0=zb - 0.01).translate((0, py, 0)))
     for sx in (-1, 1):
-        p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.3, -1.0 - (zb - 1)))     # piloto M1,6 hasta 1 mm de la cara
+        p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.6, -0.8 - (zb - 1)))     # piloto M2 (Ø1,6) hasta 0,8 de la cara
     # sin canal de cable: en el soporte el macho solo lleva un puente GND–DET soldado por detrás (interruptor)
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
@@ -464,12 +479,70 @@ def components():
         "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
         "BNO085": bno,
-        "pogo_hembra": rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"], z0=POGO["f_lip"] + 0.02).translate((0, POGO["y"], 0)),
+        "pogo_hembra": _pogo_step()[0],
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
-        "pogo_macho": _pogo_male(),
+        "pogo_macho": _pogo_step()[1],
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
+
+
+_POGO_CACHE = []
+
+
+def _pogo_step():
+    """Las dos mitades del conector, del STEP real del usuario, en su sitio: (placa en la cápsula, lado de los pines en el
+    soporte). El STEP tiene la placa con la cara en z = 0 hacia +z y los pines hacia −z: se gira 180° sobre X.
+    Los pines del soporte se recortan en la cara (comprimidos), como quedan con la cápsula apoyada."""
+    if _POGO_CACHE:
+        return _POGO_CACHE[0]
+    try:
+        from OCP.STEPCAFControl import STEPCAFControl_Reader
+        from OCP.TDocStd import TDocStd_Document
+        from OCP.TCollection import TCollection_ExtendedString
+        from OCP.XCAFDoc import XCAFDoc_DocumentTool
+        from OCP.TDF import TDF_LabelSequence
+        from OCP.TDataStd import TDataStd_Name
+        from OCP.TopLoc import TopLoc_Location
+        doc = TDocStd_Document(TCollection_ExtendedString("doc"))
+        r = STEPCAFControl_Reader()
+        r.SetNameMode(True)
+        r.ReadFile(os.path.join(os.path.dirname(os.path.abspath(__file__)), "ref", "pogo_3pin_assembly.step"))
+        r.Transfer(doc)
+        st = XCAFDoc_DocumentTool.ShapeTool_s(doc.Main())
+        groups = {"plate": [], "pins": []}
+
+        def nm(lab):
+            n = TDataStd_Name()
+            return n.Get().ToExtString() if lab.FindAttribute(TDataStd_Name.GetID_s(), n) else ""
+
+        def walk(lab, loc, top):
+            if st.IsAssembly_s(lab):
+                cs = TDF_LabelSequence()
+                st.GetComponents_s(lab, cs)
+                for i in range(1, cs.Length() + 1):
+                    c = cs.Value(i)
+                    ref = c.__class__()
+                    st.GetReferredShape_s(c, ref)
+                    walk(ref, loc.Multiplied(st.GetLocation_s(c)), top or nm(c))
+            else:
+                key = "plate" if "Kontaktplatte" in top else "pins"
+                groups[key].append(cq.Shape.cast(st.GetShape_s(lab).Moved(loc)))
+        free = TDF_LabelSequence()
+        st.GetFreeShapes(free)
+        for i in range(1, free.Length() + 1):
+            walk(free.Value(i), TopLoc_Location(), "")
+        place = lambda sh: cq.Workplane("XY").add(sh).rotate((0, 0, 0), (1, 0, 0), 180).translate((0, POGO["y"], 0))
+        plate = place(cq.Compound.makeCompound(groups["plate"])).combine()
+        pins = place(cq.Compound.makeCompound(groups["pins"])).combine()
+        pins = pins.intersect(box(0, 0, -30, 200, 200, 30))     # pines comprimidos a ras de la cara
+        _POGO_CACHE.append((plate, pins))
+    except Exception as e:                                       # sin el STEP: el modelo paramétrico de antes
+        print("STEP del pogo no disponible:", e)
+        f = rrect(POGO["f_l"], POGO["f_w"], POGO["f_w"] / 2 - 0.01, POGO["f_t"] - POGO["f_bh"], z0=POGO["f_bh"] + 0.02).union(
+            rrect(POGO["f_bl"], POGO["f_bw"], POGO["f_bw"] / 2 - 0.01, POGO["f_bh"], z0=0.02)).translate((0, POGO["y"], 0))
+        _POGO_CACHE.append((f, _pogo_male()))
+    return _POGO_CACHE[0]
 
 
 def _pogo_male():
@@ -480,7 +553,7 @@ def _pogo_male():
     for sx in (-1, 1):
         m = m.cut(cyl(sx * POGO["ear_span"] / 2, py, -POGO["m_h"] - 1, POGO["ear_hole"], POGO["ear_t"] + 2))
     for k in (-1, 0, 1):
-        m = m.union(cyl(k * 2.54, py, -0.01, 1.0, POGO["f_lip"] - 0.05 + 0.01))
+        m = m.union(cyl(k * POGO["pitch"], py, -0.01, 1.0, 0.01))
     return m
 
 

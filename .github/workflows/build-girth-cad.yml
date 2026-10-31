@@ -25,6 +25,8 @@ jobs:
       - name: Build
         working-directory: hardware/girth/REV5
         run: |
+          mkdir -p out
+          python inspect_pogo.py 2>&1 | tee out/pogo_step_medidas.txt || echo "inspect_pogo falló (no bloquea)"
           set -o pipefail
           if ! python avo_girth_rev5.py 2>&1 | tee build.log; then
             tail -25 build.log | while IFS= read -r l; do echo "::error::${l//%/%25}"; done
