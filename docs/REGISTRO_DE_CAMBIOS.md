@@ -1153,3 +1153,11 @@ lectura ADC de GPIO7. Línea de arranque con la batería y el nivel de GPIO20.
 was triggered` justo al encender la radio y reinicio (`rst:0x3`, `esp_reset_reason` 9) en bucle; el USB no se detectó
 (no salió «USB conectado»). analogRead deja GPIO7 sin pull-down: sin divisor flotaba.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.4 (Heltec) — USB en GPIO20 también por ADC (umbral 1,0 V)
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** `usb_present()` = GPIO20 digital alto **o** ADC de GPIO20 > 1000 mV (lecturas a 0 por el árbitro del ADC2
+ignoradas). Antirrebote del bucle: hacen falta 2 fallos seguidos para reiniciar la cuenta. Tensión de GPIO20 en el monitor.
+**Por qué:** monitor del usuario 31/10 02:16 con la 3.13.3: arranca bien con 3351 mV, pero `USB: no (GPIO20 bajo)` con el
+USB conectado. El usuario pide bajar el umbral de tensión para dormir.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

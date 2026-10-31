@@ -241,3 +241,9 @@ A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·
 - USB solo por **GPIO20** (digital con pull-down; divisor 5V ─ 5,1 kΩ ─ GPIO20 ─ 10 kΩ ─ GND). La lectura por ADC de
   GPIO7 se quita: sin nada conectado flotaba y daba «USB conectado» al azar.
 - Al arrancar imprime `bateria en reposo N mV | USB (GPIO20): ALTO = conectado / bajo = no detectado`.
+
+## V3.13.4 — USB en GPIO20 también por ADC, umbral 1,0 V (2026-10-31)
+- La entrada digital necesita ≈ 2,5 V y en la placa del usuario leía «bajo» con el USB conectado. Ahora GPIO20 también se
+  mide con el ADC: más de **1,0 V** = USB. Si la lectura falla (ADC2 ocupado por la radio) decide la entrada digital y un
+  fallo suelto no reinicia la cuenta de 1,5 s.
+- El monitor muestra la tensión medida: `USB (GPIO20 … mV)` al arrancar y `GPIO20 ALTO/bajo, … mV` en el estado.
