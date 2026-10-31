@@ -169,7 +169,7 @@ public static class NtagApdu
         if (cc[0] != 0xE1) throw new NfcException("La etiqueta no está formateada como NDEF (Type 2)");
         int size = cc[2] * 8;
         if (size < 16 || size > 2048) throw new NfcException("Tamaño de etiqueta no válido");
-        return (size, (cc[3] & 0xF0) == 0x00);
+        return (size, (cc[3] & 0x0F) == 0x00);   // CC byte 3: high nibble = read access, low nibble = write access
     }
 
     /// <summary>Reads the NDEF message (null when the tag has none).</summary>
