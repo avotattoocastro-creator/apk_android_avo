@@ -1155,7 +1155,7 @@ was triggered` justo al encender la radio y reinicio (`rst:0x3`, `esp_reset_reas
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-31 — BACK 3.13.4 (Heltec) — USB en GPIO20 también por ADC (umbral 1,0 V)
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `4a8ca17` (CI 41154849274 falló: variable declarada tarde), `c648d5a` · **CI:** [41155004469](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41155004469) (éxito)
 **Qué cambia:** `usb_present()` = GPIO20 digital alto **o** ADC de GPIO20 > 1000 mV (lecturas a 0 por el árbitro del ADC2
 ignoradas). Antirrebote del bucle: hacen falta 2 fallos seguidos para reiniciar la cuenta. Tensión de GPIO20 en el monitor.
 **Por qué:** monitor del usuario 31/10 02:16 con la 3.13.3: arranca bien con 3351 mV, pero `USB: no (GPIO20 bajo)` con el
