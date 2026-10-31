@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-31 — BACK 3.13.8 DIAGNÓSTICO (Heltec) — Pololu siempre encendido
-**Autor:** Claude · Rama `diag/back-3-13-8-pololu-libre` (desde `fix/back-3-13-8-gps-uart`) · **Commits:** pendiente · **CI:** pendiente
+**Autor:** Claude · Rama `diag/back-3-13-8-pololu-libre` (desde `fix/back-3-13-8-gps-uart`) · **Commits:** `39ce718`, `90c26a0` · **CI:** [41160703337](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41160703337) (éxito: imagen de 915 776 B)
 **Qué cambia:** `AVO_POLOLU_FREE 1`: todo el control de GPIO34 pasa por `zed_shdn()`/`zed_shdn_sleep()`; en esta
 compilación GPIO34 se libera (`gpio_hold_dis`) y queda `INPUT` sin pulls, sin `digitalWrite` ni `gpio_hold_en`. El
 `gpio_deep_sleep_hold_en()` global sigue para los demás pines (TX GPIO33, Vext, ADC, LoRa), no afecta a GPIO34 porque no
