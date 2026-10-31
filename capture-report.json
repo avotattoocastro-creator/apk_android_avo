@@ -1,0 +1,497 @@
+{
+  "arranque_ms": 672,
+  "acciones_inicio": [
+    {
+      "accion": "Abrir entrenamiento",
+      "pagina": "Analysis",
+      "esperada": "Analysis",
+      "correcto": true
+    },
+    {
+      "accion": "Sesiones recientes",
+      "pagina": "Sessions",
+      "esperada": "Sessions",
+      "correcto": true
+    },
+    {
+      "accion": "Servidor AVO",
+      "pagina": "Server",
+      "esperada": "Server",
+      "correcto": true
+    },
+    {
+      "accion": "Comparar entrenamientos",
+      "pagina": "Compare",
+      "esperada": "Compare",
+      "correcto": true
+    },
+    {
+      "accion": "Informes",
+      "pagina": "Reports",
+      "esperada": "Reports",
+      "correcto": true
+    }
+  ],
+  "importacion_ms": 3172,
+  "sesiones": 4,
+  "motor_ms": 3512,
+  "nfc_cuadra": [
+    {
+      "paso": "etiqueta de caballo registrada en la Cuadra",
+      "correcto": true
+    },
+    {
+      "paso": "la Cuadra muestra el caballo le\u00EDdo",
+      "correcto": true
+    },
+    {
+      "paso": "tarjeta de jinete registrada en Jinetes",
+      "correcto": true
+    },
+    {
+      "paso": "releer la etiqueta no sobrescribe la ficha",
+      "correcto": true
+    },
+    {
+      "paso": "etiqueta no AVO rechazada",
+      "correcto": true
+    },
+    {
+      "paso": "el panel Asignar se rellena con las etiquetas",
+      "correcto": true
+    },
+    {
+      "paso": "entrenamiento asignado",
+      "correcto": true
+    },
+    {
+      "paso": "el entrenamiento aparece en la ficha del caballo y del jinete",
+      "correcto": true
+    },
+    {
+      "paso": "archivo original intacto",
+      "correcto": true
+    },
+    {
+      "paso": "grabaci\u00F3n de etiqueta preparada",
+      "correcto": true
+    },
+    {
+      "paso": "etiqueta grabada con el formato Android y asociada a la ficha",
+      "correcto": true
+    }
+  ],
+  "pdf_ms": 60,
+  "memoria_trabajo_mb": 472.125,
+  "memoria_gc_mb": 147.4034881591797,
+  "teselas_cargadas": 72,
+  "motor": "Motor AVO Equine 1.1.0-dev1",
+  "entorno": "Datos de entorno cargados (con copia local para uso sin conexi\u00F3n).",
+  "capturas": [
+    {
+      "archivo": "1920x1080_01_Home.png",
+      "pagina": "Home",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_02_Sessions.png",
+      "pagina": "Sessions",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_03_Stable.png",
+      "pagina": "Stable",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_04_Riders.png",
+      "pagina": "Riders",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_05_Analysis.png",
+      "pagina": "Analysis",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_06_Map.png",
+      "pagina": "Map",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_07_Charts.png",
+      "pagina": "Charts",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_08_Segments.png",
+      "pagina": "Segments",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_09_Biomech.png",
+      "pagina": "Biomech",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_10_Compare.png",
+      "pagina": "Compare",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_11_Geofences.png",
+      "pagina": "Geofences",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_12_Tides.png",
+      "pagina": "Tides",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_13_Reports.png",
+      "pagina": "Reports",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_14_Server.png",
+      "pagina": "Server",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1920x1080_15_Engine.png",
+      "pagina": "Engine",
+      "ancho": 1920,
+      "alto": 1080,
+      "escala": 1,
+      "raiz": "1920x1080",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "1366x768_01_Home.png",
+      "pagina": "Home",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_02_Sessions.png",
+      "pagina": "Sessions",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_03_Stable.png",
+      "pagina": "Stable",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_04_Riders.png",
+      "pagina": "Riders",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_05_Analysis.png",
+      "pagina": "Analysis",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_06_Map.png",
+      "pagina": "Map",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_07_Charts.png",
+      "pagina": "Charts",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_08_Segments.png",
+      "pagina": "Segments",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_09_Biomech.png",
+      "pagina": "Biomech",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_10_Compare.png",
+      "pagina": "Compare",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_11_Geofences.png",
+      "pagina": "Geofences",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_12_Tides.png",
+      "pagina": "Tides",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_13_Reports.png",
+      "pagina": "Reports",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_14_Server.png",
+      "pagina": "Server",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "1366x768_15_Engine.png",
+      "pagina": "Engine",
+      "ancho": 1366,
+      "alto": 768,
+      "escala": 1,
+      "raiz": "1366x768",
+      "ventana": "1044x768"
+    },
+    {
+      "archivo": "2560x1440@150_01_Home.png",
+      "pagina": "Home",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_02_Sessions.png",
+      "pagina": "Sessions",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_03_Stable.png",
+      "pagina": "Stable",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_04_Riders.png",
+      "pagina": "Riders",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_05_Analysis.png",
+      "pagina": "Analysis",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_06_Map.png",
+      "pagina": "Map",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_07_Charts.png",
+      "pagina": "Charts",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_08_Segments.png",
+      "pagina": "Segments",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_09_Biomech.png",
+      "pagina": "Biomech",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_10_Compare.png",
+      "pagina": "Compare",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_11_Geofences.png",
+      "pagina": "Geofences",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_12_Tides.png",
+      "pagina": "Tides",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_13_Reports.png",
+      "pagina": "Reports",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_14_Server.png",
+      "pagina": "Server",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    },
+    {
+      "archivo": "2560x1440@150_15_Engine.png",
+      "pagina": "Engine",
+      "ancho": 2560,
+      "alto": 1440,
+      "escala": 1.5,
+      "raiz": "1707x960",
+      "ventana": "1044x788"
+    }
+  ]
+}
