@@ -8,6 +8,26 @@ arquitectura, filtrado, validación visual), `docs/INSTALACION_WINDOWS.md`, `doc
 - Pruebas: `dotnet run --project windows/AVO.Windows.SelfTest -c Release` (con `windows/native/avo_equine.dll`;
   `AVO_DEMO_DIR` apunta a las sesiones de demostración generadas por `windows/tools/demo-fixtures`).
 
+## Cuadra, Jinetes y lector NFC
+
+- **Cuadra** y **Jinetes** (menú lateral):
+  - Fichas con los mismos campos que la app Android: código del reloj, nombre, raza, año, notas y activo.
+  - Cada ficha muestra sus entrenamientos y sus totales.
+  - Se guardan en `%LOCALAPPDATA%\AVO Performance Horse\Windows\cuadra.json`.
+- **Asignar** (cabecera, lista de entrenamientos y ficha): elige o escribe el caballo y el jinete de un entrenamiento que
+  llegó sin ellos.
+  - Opcionalmente se rellena lo que falta en los demás.
+  - Solo cambia la ficha en este PC: el `.avo`/`.avr` no se modifica.
+  - «Vaciar» vuelve a lo que dice el archivo.
+- **Lector NFC USB** (PC/SC, por ejemplo ACS ACR122U), sin instalar nada más que el controlador del lector:
+  - **Leer:** al acercar una etiqueta de caballo o una tarjeta de jinete grabadas con la app Android
+    (`avohorse://identity/…`), se registran. Si ya existen, no se sobrescriben.
+  - **Asignar:** con el panel Asignar abierto, la etiqueta lo rellena.
+  - **Grabar:** «Grabar etiqueta NFC» escribe la ficha en una NTAG213/215/216, en el mismo formato que Android, y la verifica
+    leyéndola. Solo se escribe el área NDEF: nunca el UID, el CC ni las páginas de bloqueo o configuración. Las etiquetas
+    bloqueadas se rechazan.
+  - Probado con un lector simulado (autopruebas y modo captura). **No verificado con un lector real.**
+
 ---
 
 ## Historial V1 (se conserva)

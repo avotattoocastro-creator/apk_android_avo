@@ -192,6 +192,7 @@ try
         Assert(SHA256.HashData(File.ReadAllBytes(s2.RawSegmentPaths[0])).AsSpan().SequenceEqual(SHA256.HashData(synthetic)), "El RAW no se modifica");
     }
     Avo.Windows.SelfTest.V2Tests.Run(dir, Assert);
+    Avo.Windows.SelfTest.StableTests.Run(dir, Assert);
     UsbTests();
     Console.WriteLine($"TODAS LAS PRUEBAS CORRECTAS: {passed}");
 }

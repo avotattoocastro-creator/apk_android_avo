@@ -12,6 +12,12 @@ public static class TrainingImporter
     /// <summary>Default folder for the verified RAW copies extracted from .avo packages (originals are never modified).</summary>
     public static string DefaultRawCacheDir => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AVO Performance Horse", "Windows", "raw");
 
+    private static TrainingSession KeepFileIdentity(TrainingSession s)
+    {
+        s.HorseInFile = s.Horse; s.RiderInFile = s.Rider;
+        return s;
+    }
+
     public static TrainingSession Import(string path, string? rawCacheDir = null)
     {
         if (!File.Exists(path)) throw new FileNotFoundException("No existe el entrenamiento", path);
@@ -24,7 +30,7 @@ public static class TrainingImporter
             result.HasRawTelemetry = true;
             result.RawSegmentPaths.Add(Path.GetFullPath(path));
             result.Integrity = result.Segments.All(s => !s.Truncated) ? "CRC válido" : "RAW truncado (parcial)";
-            return result;
+            return KeepFileIdentity(result);
         }
         if (!Path.GetExtension(path).Equals(".avo", StringComparison.OrdinalIgnoreCase))
             throw new InvalidDataException("Formato no compatible: se esperan archivos .avo o .avr");
@@ -44,6 +50,8 @@ public static class TrainingImporter
             throw new InvalidDataException("ID de sesión inválido");
         result.Horse = String(root, "horseName") is { Length: > 0 } horse ? horse : "Sin identificar";
         result.Rider = String(root, "riderName") is { Length: > 0 } rider ? rider : "Sin identificar";
+        if (String(root, "horseCode") is { Length: > 0 } hc) result.HorseCode = hc.Trim();
+        if (String(root, "riderCode") is { Length: > 0 } rc) result.RiderCode = rc.Trim();
         result.DeclaredDistanceM = Number(root, "distanceM");
         result.DeclaredDurationS = Number(root, "durationS");
         result.DeclaredMaxSpeedMs = Number(root, "maxSpeedMs");
@@ -88,7 +96,7 @@ public static class TrainingImporter
             idx++;
         }
         result.Integrity = result.Segments.Any(s => s.Truncated) ? "SHA válido · RAW parcial" : "SHA-256 verificado por segmento";
-        return result;
+        return KeepFileIdentity(result);
     }
     private static string? String(JsonElement element, string name) =>
         element.TryGetProperty(name, out var value) && value.ValueKind == JsonValueKind.String ? value.GetString() : null;

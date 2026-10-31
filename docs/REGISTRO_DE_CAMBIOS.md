@@ -24,6 +24,37 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Windows V2 PRO — Cuadra, Jinetes, asignación de entrenamientos y lector NFC USB
+**Autor:** Claude · **Rama:** `feature/windows-advanced-analysis` · **Commits:** ver `git log`
+**Qué cambia:**
+- **Cuadra y Jinetes:** páginas nuevas en el menú lateral.
+  - Fichas con los campos de Android (`HorseEntity`/`RiderEntity`).
+  - Cada ficha muestra sus entrenamientos, totales (entrenamientos, km, tiempo, velocidad máxima, último) y la etiqueta NFC asociada.
+  - Los caballos y jinetes que traen los archivos importados se dan de alta solos: por código, o por nombre si no hay código. Los de demostración quedan marcados DEMO.
+- **Asignar caballo y jinete** a un entrenamiento, desde la cabecera, la lista de entrenamientos o la ficha.
+  - Si se escribe un nombre nuevo, se crea su ficha.
+  - Opción para rellenar lo que falte en los demás entrenamientos.
+  - Botón «Asignar a los N sin caballo/jinete» en la ficha.
+  - Orden de prioridad: asignación del usuario > código del archivo > nombre del archivo.
+  - Solo se cambian los metadatos en el PC (`cuadra.json`); el archivo no se toca.
+- **Lector NFC USB PC/SC** (`winscard.dll`):
+  - Lee las etiquetas `avohorse://identity/horse|rider/…` de la app Android con las mismas validaciones que `AvoNfc.import`, incluidas las tarjetas de usuario con licencia. Nunca sobrescribe una ficha existente.
+  - Rellena el panel Asignar.
+  - Graba fichas en NTAG213/215/216 con el mismo NDEF que `NfcScreen` de Android y lo verifica leyéndolo.
+  - Solo escribe el área NDEF y rechaza las etiquetas bloqueadas.
+**Por qué:** lo pidió el usuario. Quiere los caballos con sus entrenamientos, los jinetes con los suyos, asignar los entrenamientos que llegan sin ellos y registrar caballos y jinetes por NFC.
+**Archivos:**
+- `windows/AVO.Windows.Core/Stable/{Stable.cs,Nfc.cs}`; `Models.cs`, `TrainingImporter.cs`, `RawReader.cs` (código del archivo) y `SessionTimeline.cs`;
+- `windows/AVO.Windows/ViewModels/{MainViewModel.Stable.cs,SessionItem.cs,Mvvm.cs,MainViewModel.cs}`, `Views/StableView.*`, `MainWindow.xaml`, `HomeView.xaml`, temas;
+- `App.xaml.cs`: recorrido NFC en el modo captura;
+- `windows/AVO.Windows.SelfTest/StableTests.cs`.
+**No se ha tocado:** firmware, Android ni el formato de los archivos.
+**Validación:**
+- IMPLEMENTADO.
+- Autopruebas de URI, NDEF, NTAG215 simulada tras un lector PC/SC y almacén.
+- Recorrido NFC en el modo captura de CI con lector simulado.
+- **NO VERIFICADO con un lector NFC real ni con etiquetas físicas.**
+
 ## 2026-10-30 — Windows Advanced Analysis V2 PRO 2.0.0 (rama feature/windows-advanced-analysis)
 **Autor:** Claude · **Commits:** `2d3383c` (importa motor EIE + Windows de `feature/avo-wifi-sync`), `f9f9fdc` (integra develop
 18a9823), `18bbe5c`…`f626309` · **CI:** build-avo-windows run [41084991763](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41084991763) (éxito: 106 autopruebas, publicación, 33 capturas)

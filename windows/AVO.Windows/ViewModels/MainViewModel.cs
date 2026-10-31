@@ -78,6 +78,7 @@ public sealed partial class MainViewModel : ObservableObject
         InitReports();
         InitServer();
         InitEnvironment();
+        InitStable();
     }
 
     private void Fail(Exception ex)
@@ -99,7 +100,7 @@ public sealed partial class MainViewModel : ObservableObject
     }
 
     /// <summary>Analysis pages without any training: show a clear «import / demo» panel instead of empty widgets.</summary>
-    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine");
+    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine" or "Stable" or "Riders");
 
     public const string DemoUrl = "https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/windows-v2-pro-latest/AVO_Windows_V2_DEMO_SINTETICA.zip";
     private string _demoState = "";
@@ -199,7 +200,7 @@ public sealed partial class MainViewModel : ObservableObject
         if (OnlyFavorites && !s.IsFavorite) return false;
         if (string.IsNullOrWhiteSpace(Search)) return true;
         string q = Search.Trim();
-        return new[] { s.Horse, s.Rider, s.Id, s.DateText, s.Discipline, s.Kind }.Any(x => x.Contains(q, StringComparison.CurrentCultureIgnoreCase));
+        return new[] { s.Horse, s.Rider, s.HorseCode ?? "", s.RiderCode ?? "", s.Id, s.DateText, s.Discipline, s.Kind }.Any(x => x.Contains(q, StringComparison.CurrentCultureIgnoreCase));
     }
 
     // ------------------------------------------------------------------ selection
@@ -326,6 +327,7 @@ public sealed partial class MainViewModel : ObservableObject
         Busy = true;
         int ok = 0, bad = 0, dup = 0, k = 0;
         SessionItem? lastImported = null;
+        var imported = new List<SessionItem>();
         try
         {
             foreach (var f in list)
@@ -349,6 +351,7 @@ public sealed partial class MainViewModel : ObservableObject
                 Sessions.Add(item);
                 item.IsFavorite = _favorites.Contains(item.Id);
                 lastImported = item;
+                imported.Add(item);
                 ok++;
                 if (!restoring || ImportLog.Count < 8)
                     ImportLog.Insert(0, new ImportLogRow(DateTime.Now.ToString("HH:mm", Es), outcome.Session.SourceName, outcome.Status + (item.IsSynthetic ? " · DEMOSTRACIÓN" : ""), true));
@@ -358,7 +361,7 @@ public sealed partial class MainViewModel : ObservableObject
         finally { Busy = false; Progress = 0; }
         Status = $"Importación: {ok} aceptados, {bad} rechazados, {dup} duplicados · {Sessions.Count} sesiones";
         AssignCompareColors();
-        RefreshHome();
+        RegisterImported(imported);
         if (!restoring && lastImported is not null)
         {
             Selected = lastImported;                     // what the user just opened
@@ -433,7 +436,7 @@ public sealed partial class MainViewModel : ObservableObject
     private void RefreshHome()
     {
         Horses.Clear();
-        foreach (var g in Sessions.GroupBy(s => s.Horse).OrderByDescending(g => g.Count()))
+        foreach (var g in Sessions.GroupBy(s => s.Horse).OrderByDescending(g => g.Count()).Take(8))
             Horses.Add(new HorseCard(g.Key, g.Count(), g.Max(s => s.Start) is DateTimeOffset d ? MadridTime.Format(d, "dd/MM/yyyy") : "—", g.Max(s => s.MaxSpeedKmh).ToString("0.0", Es) + " km/h"));
         RaiseMany(nameof(ShowEmptyState), nameof(SessionCount), nameof(TotalDistanceText), nameof(DemoDistanceText), nameof(HasDemo), nameof(BestSpeedText), nameof(RecentSessions));
     }

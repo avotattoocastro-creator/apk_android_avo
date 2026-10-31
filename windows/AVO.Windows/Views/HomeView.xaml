@@ -130,6 +130,20 @@
                             <DataGridTextColumn Header="RTK FIX" Binding="{Binding FixText}" SortMemberPath="FixPercent" Width="70"/>
                             <DataGridTextColumn Header="Cincha" Binding="{Binding GirthText}" Width="150"/>
                             <DataGridTextColumn Header="Origen" Binding="{Binding Kind}" Width="110"/>
+                            <DataGridTemplateColumn Header="" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="Assign" Content="Asignar" Padding="8,2" ToolTip="Asignar caballo y jinete"
+                                                Command="{Binding DataContext.OpenAssignCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding NeedsIdentity}" Value="True">
+                                                <Setter TargetName="Assign" Property="Background" Value="{StaticResource AvoRed}"/>
+                                                <Setter TargetName="Assign" Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </c:AvoCard>
@@ -145,6 +159,9 @@
                         </StackPanel>
                     </c:AvoCard>
                     <c:AvoCard Header="Caballos">
+                        <c:AvoCard.HeaderTools>
+                            <Button Style="{StaticResource AvoGhostButton}" Content="Ver cuadra ›" Padding="6,2" Command="{Binding NavigateCommand}" CommandParameter="Stable"/>
+                        </c:AvoCard.HeaderTools>
                         <ItemsControl ItemsSource="{Binding Horses}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>

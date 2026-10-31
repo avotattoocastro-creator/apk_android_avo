@@ -22,6 +22,8 @@ public partial class App : Application
         public string? OpenFolder() => null;
         public string? SaveFile(string filter, string defaultName) => null;
         public void Show(string title, string message, bool error = false) => log.Write(error ? "AVISO" : "INFO", "dialogo", $"{title}: {message}");
+        public bool ConfirmAnswer { get; set; } = true;
+        public bool Confirm(string title, string message) { log.Write("INFO", "dialogo", $"{title}: {message} → {(ConfirmAnswer ? "sí" : "no")}"); return ConfirmAnswer; }
     }
 
     protected override async void OnStartup(StartupEventArgs e)
@@ -46,6 +48,7 @@ public partial class App : Application
         {
             vm.Dialogs = new SilentDialogs(vm.Log);
             vm.UsbEnabled = false;
+            vm.UseNfcReader(new SimulatedNfcReader());
             int code = 0;
             try { await CaptureAsync(window, vm, captureDir, Arg("--demo"), Arg("--sizes") ?? "1920x1080,1366x768,2560x1440@150"); }
             catch (Exception ex)
@@ -64,7 +67,7 @@ public partial class App : Application
     }
 
     // ------------------------------------------------------------------ capture mode (CI visual evidence)
-    private static readonly string[] Pages = ["Home", "Sessions", "Analysis", "Map", "Charts", "Segments", "Biomech", "Compare", "Tides", "Reports", "Server", "Engine"];
+    private static readonly string[] Pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Charts", "Segments", "Biomech", "Compare", "Tides", "Reports", "Server", "Engine"];
 
     private static async Task CaptureAsync(MainWindow window, MainViewModel vm, string dir, string? demoDir, string sizes)
     {
@@ -118,6 +121,7 @@ public partial class App : Application
             perf["motor_ms"] = sw.ElapsedMilliseconds;
         }
         var main = vm.Sessions.Where(s => s.HasGirth).OrderByDescending(s => s.Start).FirstOrDefault() ?? vm.Sessions.FirstOrDefault();
+        perf["nfc_cuadra"] = await NfcWalkthroughAsync(window, vm, dir, main);
         if (main is not null)
         {
             vm.Selected = main;
@@ -190,6 +194,71 @@ public partial class App : Application
         perf["entorno"] = vm.EnvironmentStatus;
         perf["capturas"] = report;
         File.WriteAllText(Path.Combine(dir, "capture-report.json"), JsonSerializer.Serialize(perf, new JsonSerializerOptions { WriteIndented = true }));
+    }
+
+    /// <summary>
+    /// Cuadra / Jinetes / assignment / NFC through the real view models with a SIMULATED reader (no hardware on the runner):
+    /// tags in the Android format are "presented", registered, used in the assignment panel and written. Fails the capture if
+    /// any step does not do what it should.
+    /// </summary>
+    private static async Task<object> NfcWalkthroughAsync(MainWindow window, MainViewModel vm, string dir, SessionItem? main)
+    {
+        var sim = (SimulatedNfcReader)vm.Nfc;
+        var steps = new List<object>();
+        void Check(bool ok, string what) { steps.Add(new { paso = what, correcto = ok }); if (!ok) throw new InvalidOperationException("NFC/Cuadra: " + what); }
+        var horse = new IdentityRecord { Code = "HORSE_901", Name = "Tormenta (prueba NFC)", Breed = "PRE", BirthYear = 2017, Notes = "Etiqueta simulada en CI" };
+        var rider = new IdentityRecord { Code = "RIDER_901", Name = "Lucía (prueba NFC)", Notes = "Tarjeta simulada en CI" };
+        vm.Page = "Stable";
+        await Idle();
+        sim.Present("04A1B2C3D4E5F6", AvoIdentityTag.BuildUri(IdentityKind.Horse, horse));
+        await Idle();
+        Check(vm.Stable.Find(IdentityKind.Horse, "HORSE_901") is { Name: "Tormenta (prueba NFC)", Breed: "PRE", BirthYear: 2017, NfcUid: "04A1B2C3D4E5F6" }, "etiqueta de caballo registrada en la Cuadra");
+        Check(vm.Page == "Stable" && vm.HorsesPage.Selected?.Code == "HORSE_901", "la Cuadra muestra el caballo leído");
+        vm.Page = "Riders";
+        await Idle();
+        sim.Present("04112233445566", AvoIdentityTag.BuildUri(IdentityKind.Rider, rider));
+        await Idle();
+        Check(vm.Stable.Find(IdentityKind.Rider, "RIDER_901") is { Name: "Lucía (prueba NFC)" } && vm.RidersPage.Selected?.Code == "RIDER_901", "tarjeta de jinete registrada en Jinetes");
+        // a second read never overwrites what the user has
+        vm.Stable.Update(IdentityKind.Horse, "HORSE_901", r => r.Notes = "editado en el PC");
+        sim.Present("04A1B2C3D4E5F6", AvoIdentityTag.BuildUri(IdentityKind.Horse, horse));
+        await Idle();
+        Check(vm.Stable.Find(IdentityKind.Horse, "HORSE_901")!.Notes == "editado en el PC", "releer la etiqueta no sobrescribe la ficha");
+        sim.Present("04FFFFFFFFFFFF", "https://example.org/otra");
+        await Idle();
+        Check(!vm.NfcLastOk && vm.Stable.Horses.All(h => h.Code != ""), "etiqueta no AVO rechazada");
+        // assignment of a training through the panel, filled by NFC
+        var target = vm.Sessions.Where(s => s != main).OrderBy(s => s.Start).FirstOrDefault() ?? main;
+        if (target is not null)
+        {
+            vm.Page = "Sessions";
+            vm.OpenAssignCommand.Execute(target);
+            await Idle();
+            sim.Present("04A1B2C3D4E5F6", AvoIdentityTag.BuildUri(IdentityKind.Horse, horse));
+            sim.Present("04112233445566", AvoIdentityTag.BuildUri(IdentityKind.Rider, rider));
+            await Idle();
+            Check(vm.AssignVisible && vm.AssignHorseText == "Tormenta (prueba NFC)" && vm.AssignRiderText == "Lucía (prueba NFC)", "el panel Asignar se rellena con las etiquetas");
+            Render(window.Content is FrameworkElement fe ? fe : window, Path.Combine(dir, "asignar_caballo_jinete.png"), 1);
+            vm.ConfirmAssignCommand.Execute(null);
+            await Idle();
+            Check(!vm.AssignVisible && target.Horse == "Tormenta (prueba NFC)" && target.Rider == "Lucía (prueba NFC)" && target.HorseCode == "HORSE_901", "entrenamiento asignado");
+            Check(vm.HorsesPage.Items.First(i => i.Code == "HORSE_901").Count == 1 && vm.RidersPage.Items.First(i => i.Code == "RIDER_901").Count == 1, "el entrenamiento aparece en la ficha del caballo y del jinete");
+            Check(File.Exists(target.Session.RawSegmentPaths.FirstOrDefault() ?? "") || target.Session.RawSegmentPaths.Count == 0, "archivo original intacto");
+        }
+        // write a tag from the record
+        vm.Page = "Stable";
+        vm.HorsesPage.Select("HORSE_901");
+        vm.HorsesPage.WriteTagCommand.Execute(null);
+        Check(vm.WriteArmed && sim.WriteArmed, "grabación de etiqueta preparada");
+        sim.Present("04CAFE0000BEEF", "");
+        await Idle();
+        var expected = Ndef.UriMessage(AvoIdentityTag.BuildUri(IdentityKind.Horse, vm.Stable.Find(IdentityKind.Horse, "HORSE_901")!));
+        Check(!vm.WriteArmed && sim.LastWritten is { } w && w.AsSpan().SequenceEqual(expected) && vm.Stable.Find(IdentityKind.Horse, "HORSE_901")!.NfcUid == "04CAFE0000BEEF",
+            "etiqueta grabada con el formato Android y asociada a la ficha");
+        vm.HorsesPage.Select("HORSE_901");
+        vm.RidersPage.Select("RIDER_901");
+        await Idle();
+        return steps;
     }
 
     private static IEnumerable<T> FindAll<T>(DependencyObject root) where T : DependencyObject

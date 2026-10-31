@@ -57,6 +57,7 @@ public interface IDialogs
     string? OpenFolder();
     string? SaveFile(string filter, string defaultName);
     void Show(string title, string message, bool error = false);
+    bool Confirm(string title, string message);
 }
 
 public sealed class PageVisibility : IValueConverter
@@ -114,5 +115,20 @@ public sealed class ClockConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         value is double d ? Core.TimeText.Clock(d) : "—";
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
+}
+
+public sealed class NotConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is not true;
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => value is not true;
+}
+
+/// <summary>Count → Visible when zero (Invert: when not zero).</summary>
+public sealed class ZeroVisibility : IValueConverter
+{
+    public bool Invert { get; set; }
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
+        (value is int i && i == 0) ^ Invert ? Visibility.Visible : Visibility.Collapsed;
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => Binding.DoNothing;
 }

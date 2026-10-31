@@ -26,7 +26,7 @@ public partial class MainWindow : Window, IDialogs
                     return IntPtr.Zero;
                 });
         };
-        Closing += (_, _) => vm.StopUsb();
+        Closing += (_, _) => { vm.StopUsb(); vm.StopNfc(); };
         // Header tabs duplicate the left rail: they are shown only when they fit completely (no clipped tabs on 1366 px).
         HeaderGrid.SizeChanged += (_, _) => FitHeaderTabs();
         Loaded += (_, _) => FitHeaderTabs();
@@ -57,6 +57,8 @@ public partial class MainWindow : Window, IDialogs
 
     public void Show(string title, string message, bool error = false) =>
         MessageBox.Show(this, message, title, MessageBoxButton.OK, error ? MessageBoxImage.Warning : MessageBoxImage.Information);
+    public bool Confirm(string title, string message) =>
+        MessageBox.Show(this, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes;
 
     private void FitHeaderTabs()
     {

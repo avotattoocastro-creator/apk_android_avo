@@ -1,0 +1,228 @@
+<UserControl x:Class="Avo.Windows.Views.StableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls">
+    <!-- DataContext = IdentityPage (Cuadra or Jinetes). The shell view model is reached through the window. -->
+    <Grid Margin="20,16,20,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- title + NFC reader status -->
+        <Grid Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="{Binding Title}" Style="{StaticResource AvoTitle}"/>
+                <TextBlock Style="{StaticResource AvoDim}" Margin="0,2,0,0">
+                    <Run Text="{Binding Items.Count, Mode=OneWay}"/><Run Text=" registrados · "/><Run Text="{Binding UnknownText, Mode=OneWay}"/>
+                </TextBlock>
+            </StackPanel>
+            <Border Grid.Column="1" Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="8" Padding="14,8" MinWidth="420" MaxWidth="620">
+                <DockPanel>
+                    <Border DockPanel.Dock="Left" Width="34" Height="34" CornerRadius="17" Background="{StaticResource AvoRedSoft}" VerticalAlignment="Center">
+                        <Path Data="{StaticResource IconNfc}" Stroke="{StaticResource AvoRedLight}" Style="{StaticResource AvoIcon}" Width="17" Height="17"/>
+                    </Border>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding DataContext.NfcStatus, RelativeSource={RelativeSource AncestorType=Window}}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding DataContext.NfcLast, RelativeSource={RelativeSource AncestorType=Window}}" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource AvoCaption}">
+                                    <Setter Property="Foreground" Value="{StaticResource AvoOk}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext.NfcLastOk, RelativeSource={RelativeSource AncestorType=Window}}" Value="False">
+                                            <Setter Property="Foreground" Value="{StaticResource AvoWarn}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding DataContext.WriteArmedText, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource AvoCaption}" Foreground="{StaticResource AvoWarn}"
+                                   Visibility="{Binding DataContext.WriteArmed, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolVis}}"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ============ list -->
+            <c:AvoCard Header="{Binding Title}">
+                <c:AvoCard.HeaderTools>
+                    <Button Style="{StaticResource AvoPrimaryButton}" Command="{Binding NewCommand}" Padding="10,4">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconPlus}" Stroke="White" Style="{StaticResource AvoIcon}" Width="13" Height="13"/>
+                            <TextBlock Text="{Binding NewLabel}" Margin="6,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </c:AvoCard.HeaderTools>
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                        <Grid>
+                            <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Padding="30,5,8,5" ToolTip="Buscar por nombre, código o raza"/>
+                            <Path Data="{StaticResource IconSearch}" Stroke="{StaticResource AvoTextDim}" Style="{StaticResource AvoIcon}" Width="14" Height="14" HorizontalAlignment="Left" Margin="10,0,0,0" IsHitTestVisible="False"/>
+                        </Grid>
+                        <CheckBox Content="Mostrar inactivos" IsChecked="{Binding ShowInactive}" Margin="0,8,0,0"/>
+                    </StackPanel>
+                    <Grid>
+                        <TextBlock Text="{Binding EmptyText}" Style="{StaticResource AvoDim}" TextWrapping="Wrap" Margin="4,10"
+                                   Visibility="{Binding IsEmpty, Converter={StaticResource BoolVis}}"/>
+                        <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding Selected}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Width="38" Height="38" CornerRadius="19" Background="{StaticResource AvoSurface2}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                                            <TextBlock Text="{Binding Initial}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AvoSilver}"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" Margin="10,0,6,0" VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                                <Border Background="#33F2A33A" CornerRadius="3" Padding="4,0" Margin="6,0,0,0" Visibility="{Binding IsDemo, Converter={StaticResource BoolVis}}">
+                                                    <TextBlock Text="DEMO" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource AvoWarn}"/>
+                                                </Border>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Subtitle}" Style="{StaticResource AvoCaption}" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Style="{StaticResource AvoCaption}"><Run Text="{Binding CountText, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding DistanceText, Mode=OneWay}"/></TextBlock>
+                                        </StackPanel>
+                                        <Path Grid.Column="2" Data="{StaticResource IconNfc}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}" Width="15" Height="15" VerticalAlignment="Center"
+                                              ToolTip="Tiene etiqueta NFC" Visibility="{Binding HasNfc, Converter={StaticResource BoolVis}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </DockPanel>
+            </c:AvoCard>
+
+            <!-- ============ detail -->
+            <Grid Grid.Column="1" Margin="14,0,0,0">
+                <Border Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="8" Padding="28"
+                        Visibility="{Binding HasSelection, Converter={StaticResource NotBoolVis}}" VerticalAlignment="Top">
+                    <StackPanel>
+                        <Path Data="{StaticResource IconNfc}" Stroke="{StaticResource AvoRed}" Style="{StaticResource AvoIcon}" Width="38" Height="38" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Elige uno de la lista, crea uno nuevo o acerca su etiqueta NFC" Style="{StaticResource AvoSectionTitle}" Margin="0,12,0,6"/>
+                        <TextBlock Style="{StaticResource AvoDim}" TextWrapping="Wrap"
+                                   Text="Con un lector NFC USB (PC/SC, por ejemplo ACS ACR122U) conectado, al acercar la etiqueta de un caballo o la tarjeta de un jinete grabadas con la app Android se registra aquí automáticamente. Si ya existe, no se sobrescribe. También puedes grabar etiquetas nuevas (NTAG213/215/216) desde la ficha."/>
+                    </StackPanel>
+                </Border>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding HasSelection, Converter={StaticResource BoolVis}}">
+                    <StackPanel>
+                        <c:AvoCard Header="{Binding Header}">
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="NOMBRE" Style="{StaticResource AvoLabel}"/>
+                                        <TextBox Text="{Binding EditName, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,10" MaxLength="120"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="CÓDIGO (RELOJ Y ETIQUETA NFC)" Style="{StaticResource AvoLabel}"/>
+                                        <TextBox Text="{Binding EditCode, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding CodeEditable, Converter={StaticResource Not}}" Margin="0,4,0,10" MaxLength="23"
+                                                 ToolTip="El código no se puede cambiar una vez creado: es el que llevan el reloj, los entrenamientos y las etiquetas"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Visibility="{Binding IsHorse, Converter={StaticResource BoolVis}}">
+                                        <TextBlock Text="RAZA" Style="{StaticResource AvoLabel}"/>
+                                        <TextBox Text="{Binding EditBreed, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,10" MaxLength="120"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="2" Visibility="{Binding IsHorse, Converter={StaticResource BoolVis}}">
+                                        <TextBlock Text="AÑO DE NACIMIENTO" Style="{StaticResource AvoLabel}"/>
+                                        <TextBox Text="{Binding EditYear, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,10" MaxLength="4"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3">
+                                        <TextBlock Text="NOTAS" Style="{StaticResource AvoLabel}"/>
+                                        <TextBox Text="{Binding EditNotes, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,8" Height="58" TextWrapping="Wrap" AcceptsReturn="True" MaxLength="512" VerticalContentAlignment="Top"/>
+                                        <CheckBox Content="Activo (aparece al asignar entrenamientos)" IsChecked="{Binding EditActive}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <WrapPanel Margin="0,14,0,0">
+                                    <Button Style="{StaticResource AvoPrimaryButton}" Content="Guardar" Command="{Binding SaveCommand}" Padding="16,6" Margin="0,0,8,6"/>
+                                    <Button Command="{Binding WriteTagCommand}" Padding="12,6" Margin="0,0,8,6" ToolTip="Graba esta ficha en una etiqueta NTAG213/215/216 (mismo formato que la app Android)">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Path Data="{StaticResource IconNfc}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="14" Height="14"/>
+                                            <TextBlock Text="Grabar etiqueta NFC" Margin="7,0,0,0"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Content="Cancelar grabación" Command="{Binding CancelWriteCommand}" Padding="12,6" Margin="0,0,8,6"
+                                            Visibility="{Binding DataContext.WriteArmed, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolVis}}"/>
+                                    <Button Style="{StaticResource AvoGhostButton}" Content="Eliminar" Command="{Binding DeleteCommand}" Padding="12,6" Margin="0,0,8,6" Foreground="{StaticResource AvoBad}"/>
+                                </WrapPanel>
+                                <TextBlock Text="{Binding Message}" Style="{StaticResource AvoCaption}" Foreground="{StaticResource AvoCyan}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                <TextBlock Style="{StaticResource AvoCaption}" Margin="0,4,0,0"><Run Text="{Binding TagText, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding OriginText, Mode=OneWay}"/></TextBlock>
+                            </StackPanel>
+                        </c:AvoCard>
+
+                        <UniformGrid Columns="5" Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">
+                            <c:AvoMetricTile Label="ENTRENAMIENTOS" Value="{Binding Selected.Count, FallbackValue='0'}" Caption="Asignados o del archivo" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="DISTANCIA" Value="{Binding Selected.DistanceText, FallbackValue='—'}" Caption="Suma de entrenamientos" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="TIEMPO" Value="{Binding Selected.TotalTimeText, FallbackValue='—'}" Caption="Suma de duraciones" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="VELOCIDAD MÁXIMA" Value="{Binding Selected.BestSpeedText, FallbackValue='—'}" Caption="Filtrada" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="ÚLTIMO" Value="{Binding Selected.LastText, FallbackValue='—'}" ValueSize="15" Caption="Europe/Madrid"/>
+                        </UniformGrid>
+
+                        <c:AvoCard Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">
+                            <c:AvoCard.Header>
+                                <TextBlock><Run Text="Entrenamientos de "/><Run Text="{Binding Selected.Name, Mode=OneWay}"/></TextBlock>
+                            </c:AvoCard.Header>
+                            <c:AvoCard.HeaderTools>
+                                <Button Command="{Binding AssignUnknownCommand}" Padding="10,4" ToolTip="Asigna esta ficha a todos los entrenamientos que no la tienen">
+                                    <TextBlock><Run Text="Asignar a los "/><Run Text="{Binding UnknownCount, Mode=OneWay}"/><Run Text=" sin "/><Run Text="{Binding Singular, Mode=OneWay}"/></TextBlock>
+                                </Button>
+                            </c:AvoCard.HeaderTools>
+                            <Grid>
+                                <TextBlock Text="Sin entrenamientos todavía. Asígnalos desde «Entrenamientos» (botón Asignar) o con el botón de arriba." Style="{StaticResource AvoDim}" TextWrapping="Wrap" Margin="4,8"
+                                           Visibility="{Binding Trainings.Count, Converter={StaticResource ZeroVis}}"/>
+                                <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding Trainings}" MinHeight="120" MaxHeight="440"
+                                          Visibility="{Binding Trainings.Count, Converter={StaticResource NonZeroVis}}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Fecha" Binding="{Binding DateTimeText}" SortMemberPath="Start" Width="130"/>
+                                        <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*" MinWidth="100"/>
+                                        <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*" MinWidth="100"/>
+                                        <DataGridTextColumn Header="Distancia" Binding="{Binding DistanceText}" SortMemberPath="DistanceKmValue" Width="85"/>
+                                        <DataGridTextColumn Header="Duración" Binding="{Binding DurationText}" Width="75"/>
+                                        <DataGridTextColumn Header="V. máx" Binding="{Binding MaxSpeedText}" SortMemberPath="MaxSpeedKmh" Width="85"/>
+                                        <DataGridTextColumn Header="RTK FIX" Binding="{Binding FixText}" SortMemberPath="FixPercent" Width="65"/>
+                                        <DataGridTextColumn Header="Origen" Binding="{Binding Kind}" Width="100"/>
+                                        <DataGridTemplateColumn Header="" Width="Auto">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button Content="Abrir" Padding="8,2" Margin="0,0,4,0"
+                                                                Command="{Binding DataContext.OpenTrainingCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}"/>
+                                                        <Button Content="Asignar" Padding="8,2"
+                                                                Command="{Binding DataContext.OpenAssignCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </c:AvoCard>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -70,8 +70,21 @@ public sealed class SessionItem : ObservableObject
     }
 
     public string Id => Session.SessionId;
+    /// <summary>Name shown (Cuadra/Jinetes when known, otherwise what the file carries).</summary>
     public string Horse => Session.Horse;
     public string Rider => Session.Rider;
+    public string? HorseCode { get; private set; }
+    public string? RiderCode { get; private set; }
+    public bool HorseKnown { get; private set; }
+    public bool RiderKnown { get; private set; }
+    public string IdentitySource { get; private set; } = "";
+    public void SetIdentity(ResolvedIdentity h, ResolvedIdentity r)
+    {
+        HorseCode = h.Code; RiderCode = r.Code; HorseKnown = h.Known; RiderKnown = r.Known;
+        IdentitySource = $"Caballo: {h.Source} · Jinete: {r.Source}";
+        RaiseMany(nameof(Horse), nameof(Rider), nameof(HorseCode), nameof(RiderCode), nameof(HorseKnown), nameof(RiderKnown), nameof(IdentitySource), nameof(Summary), nameof(NeedsIdentity));
+    }
+    public bool NeedsIdentity => !HorseKnown || !RiderKnown;
     /// <summary>Start of the recording (date of the training; not moved by the useful-window trim).</summary>
     public DateTimeOffset? Start => FullTimeline.Utc0 ?? Session.StartedAt;
     public string DateText => MadridTime.Format(Start, "dd/MM/yyyy");

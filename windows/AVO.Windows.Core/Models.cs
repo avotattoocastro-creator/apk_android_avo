@@ -37,6 +37,14 @@ public sealed class TrainingSession
     public string? Sha256 { get; set; }
     public string Horse { get; set; } = "Sin identificar";
     public string Rider { get; set; } = "Sin identificar";
+    /// <summary>Horse / rider code written in the file (manifest horseCode/riderCode or AVORAW1 header), null if none.</summary>
+    public string? HorseCode { get; set; }
+    public string? RiderCode { get; set; }
+    /// <summary>Names exactly as the file carries them (Horse/Rider may later show the Cuadra/Jinetes name; the file is never changed).</summary>
+    public string HorseInFile { get; set; } = "Sin identificar";
+    public string RiderInFile { get; set; } = "Sin identificar";
+    /// <summary>Set once the Cuadra/Jinetes names have been applied to Horse/Rider (in memory only).</summary>
+    public bool IdentityApplied { get; set; }
     public DateTimeOffset? StartedAt { get; set; }
     public string SourceName { get; set; } = "";
     public string Integrity { get; set; } = "Pendiente";

@@ -9,4 +9,7 @@
     <vm:NullVisibility x:Key="NullVis"/>
     <vm:ColorBrush x:Key="ColorBrush"/>
     <vm:ClockConverter x:Key="Clock"/>
+    <vm:NotConverter x:Key="Not"/>
+    <vm:ZeroVisibility x:Key="ZeroVis"/>
+    <vm:ZeroVisibility x:Key="NonZeroVis" Invert="True"/>
 </ResourceDictionary>

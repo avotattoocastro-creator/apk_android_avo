@@ -347,7 +347,7 @@ public static class SessionWindow
         bool In(long itow) { double t = SessionTimeline.WeekDiffMs(itow, itow0) / 1000.0; return t >= t0 && t <= t1; }
         var c = new TrainingSession
         {
-            SessionId = s.SessionId, Sha256 = s.Sha256, Horse = s.Horse, Rider = s.Rider, StartedAt = s.StartedAt, SourceName = s.SourceName,
+            SessionId = s.SessionId, Sha256 = s.Sha256, Horse = s.Horse, Rider = s.Rider, HorseCode = s.HorseCode, RiderCode = s.RiderCode, HorseInFile = s.HorseInFile, RiderInFile = s.RiderInFile, IdentityApplied = s.IdentityApplied, StartedAt = s.StartedAt, SourceName = s.SourceName,
             Integrity = s.Integrity, HasRawTelemetry = s.HasRawTelemetry, DeclaredDistanceM = s.DeclaredDistanceM, DeclaredDurationS = s.DeclaredDurationS,
             DeclaredMaxSpeedMs = s.DeclaredMaxSpeedMs, TotalImuSamples = s.TotalImuSamples, TotalImuBatches = s.TotalImuBatches, InvalidFrames = s.InvalidFrames,
             MarkerCount = s.MarkerCount, ImuPeriodUs = s.ImuPeriodUs, ImuOpaqueBatches = s.ImuOpaqueBatches, FileSha256 = s.FileSha256,
