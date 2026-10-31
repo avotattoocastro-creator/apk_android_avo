@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Windows V2 PRO — gráficas del movimiento de la cincha (propuesta)
+**Autor:** Claude · Rama `feature/windows-girth-movimiento` (desde `feature/windows-advanced-analysis`) · **CI:** run 41221077611 (éxito: autopruebas, compilación, capturas)
+**Qué cambia:** nueva fila de Gráficas, que solo aparece si la sesión trae IMU_SAMPLE fmt 1 (cincha GIRTH 0.4.x):
+- **Aceleración sin gravedad (m/s²) en ejes del mundo:** la vertical (arriba +) y la horizontal salen de rotar la aceleración lineal con el cuaternión del game rotation vector;
+- **Orientación de la cincha (°):** balanceo y cabeceo. El rumbo no se muestra porque, sin magnetómetro, deriva.
+- Casilla «Movimiento de la cincha» en «Mostrar datos».
+**Autopruebas:** cuaternión identidad; giro de 90° en x; reposo real de la cincha (balanceo ≈ 8,2°, cabeceo ≈ −5,6°, igual que el monitor serie de 0.4.2).
+**Validación:** CI. Pendiente de ver en el PC del usuario con una sesión real (NO VERIFICADO).
+
+---
+
 ## 2026-10-31 — Cincha 0.4.3 + Windows V2 PRO — PRUEBA FÍSICA: IMU de la cincha en unidades reales
 **Autor:** Claude · Evidencia: foto de Windows Advanced Analysis V2 PRO (build de `feature/windows-girth-bno-units`, CI run 41217576644), «Entrenamiento 31/10/2026 17:10», HORSE_001
 - **PROBADO FÍSICAMENTE:**
