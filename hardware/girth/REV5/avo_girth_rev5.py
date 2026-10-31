@@ -106,7 +106,8 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 #   PINES (va en el soporte): cuerpo 15,5 × 4,65 × 6,0; orejas 25 × 5,5 (r 2,75) entre 2,5 y 4,5 mm de la cara,
 #     agujeros Ø2 en ±9,75; pines Ø0,8 a paso 2,3 que sobresalen 1,5 por delante (muelle) y 1,5 por detrás.
 # Las dos caras quedan a ras (cápsula por abajo, soporte por arriba): al apoyar la cápsula los pines se comprimen.
-POGO = dict(y=-20.2, pitch=2.3,
+POGO = dict(y=-19.2,   # REV 5.9.2: −20,2 → −19,2 para entrar desde arriba sin tocar la ranura de la junta
+            pitch=2.3,
             f_l=17.1, f_w=6.25, f_t=3.5, f_bl=15.5, f_bw=4.65, f_bh=1.7, f_lip=0.0,  # placa (cara a ras del fondo)
             m_l=15.5, m_w=4.65, m_h=6.0, m_pin=1.5, m_tail=1.5,                  # cuerpo del lado de los pines
             ear_span=19.5, ear_l=25.0, ear_w=5.5, ear_t=2.0, ear_z0=2.5, ear_hole=2.0,   # orejas (de 2,5 a 4,5 de la cara)
@@ -187,16 +188,18 @@ def pod_base():
     py, cl = POGO["y"], POGO["clear"]
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
     cw = POGO["cup_wall"]
-    b = b.union(rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0)))
+    cup = rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0))
+    y_cr = -(BAT["w"] / 2 + G + 1.0)                                    # REV 5.9.2: cara exterior de la cuna de la batería
+    b = b.union(cup.intersect(box(0, y_cr - 10 + 0.01, -1, 40, 20, 20)))  # del lado +Y hace de pared la propia cuna
     zfl = POGO["f_lip"] + POGO["f_bh"]                                  # REV 5.9.1: la base de la hembra apoya aquí
     ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
     stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
     b = b.cut(stad(ft - zfl, zfl))
     yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
     b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
-    wedge = (cq.Workplane("YZ", origin=(-20, 0, 0)).polyline([(py - fw / 2 - 0.01, ft - 0.01), (yin + 0.01, ft - 0.01),
-                                                                 (yin + 0.01, ft + (yin - (py - fw / 2)))]).close().extrude(40))
-    b = b.cut(wedge.intersect(stad(10, ft - 0.02)))                     # en la pared: techo a 45° (sin voladizo)
+    # REV 5.9.2: la pared se recorta en vertical hasta arriba con la forma de la placa, para meterla desde arriba
+    # (antes el reborde quedaba bajo un techo a 45° de la pared). Quedan ≥ 0,85 mm de pared hasta la ranura de la junta.
+    b = b.cut(stad(HB + 1 - ft, ft - 0.02).intersect(box(0, yin + 0.02 - 10, -1, 40, 20, 20)))
     ol, ow = POGO["f_bl"] + 2 * cl, POGO["f_bw"] + 2 * cl                 # REV 5.9.1: paso de la cara (15,1 × 4,4)
     b = b.cut(rrect(ol, ow, ow / 2 - 0.01, zfl + 1.01, z0=-1).translate((0, py, 0)))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
