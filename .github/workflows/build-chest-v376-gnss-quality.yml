@@ -20,13 +20,13 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
-    env:
-      D: ${{ runner.temp }}/avo-376gq
     steps:
       - uses: actions/checkout@v4
       - name: Prepare 3.7.5-usb1 sources (identical chain to build-chest-v375-usb.yml)
         run: |
           set -euo pipefail
+          D="$RUNNER_TEMP/avo-376gq"
+          echo "D=$D" >> "$GITHUB_ENV"
           mkdir -p "$D"
           unzip -q firmware/chest/V3_7_0_RC2/AVO_CHEST_V3_7_0_RC2_UI_CORRECTED_UNVERIFIED.zip -d "$D"
           (cd "$D" && python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_2_UI/tools/apply_v372.py")
