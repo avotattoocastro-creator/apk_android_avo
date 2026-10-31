@@ -247,7 +247,8 @@ public static class WatchAuth
         var dev = new byte[12];
         var d = Encoding.ASCII.GetBytes(devId);
         Array.Copy(d, dev, Math.Min(12, d.Length));
-        return HMACSHA256.HashData(key, [.. Encoding.ASCII.GetBytes(tag), .. a, .. b, .. dev]);
+        byte[] msg = [.. Encoding.ASCII.GetBytes(tag), .. a, .. b, .. dev];
+        return HMACSHA256.HashData(key, msg);
     }
     /// <summary>watch_proof = HMAC-SHA256(K, "AVOW" | pn | wn | dev_id)</summary>
     public static byte[] WatchProof(byte[] key, byte[] phoneNonce, byte[] watchNonce, string devId) => Proof("AVOW", key, phoneNonce, watchNonce, devId);
