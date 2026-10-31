@@ -31,7 +31,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - con 0 (cinchas anteriores o REV B), las apps siguen usando su escala nominal.
 **Por qué:** la app de Windows dibujaba la IMU con la escala nominal del LSM6 (±8 g): 1 g del BNO085 (2511 LSB) salía como 0,61 g.
 **No se ha tocado:** espalda, pecho y formato de la trama (mismo tamaño y mismos campos).
-**Validación:** host 40/40 (la prueba comprueba que la espalda conserva el byte). CI pendiente. NO VERIFICADO en el hardware.
+**Validación:** host 40/40 (la prueba comprueba que la espalda conserva el byte). **CI:** run 41217466325 (éxito). App de Windows: rama `feature/windows-girth-bno-units`, CI run 41217576644 (éxito). NO VERIFICADO en el hardware.
 
 ---
 
