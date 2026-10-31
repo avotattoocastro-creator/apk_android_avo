@@ -49,7 +49,7 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="360"/>
+                <ColumnDefinition Width="0.27*" MinWidth="270" MaxWidth="380"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -174,11 +174,11 @@
                         </c:AvoCard>
 
                         <UniformGrid Columns="5" Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">
-                            <c:AvoMetricTile Label="ENTRENAMIENTOS" Value="{Binding Selected.Count, FallbackValue='0'}" Caption="Asignados o del archivo" Margin="0,0,10,0"/>
-                            <c:AvoMetricTile Label="DISTANCIA" Value="{Binding Selected.DistanceText, FallbackValue='—'}" Caption="Suma de entrenamientos" Margin="0,0,10,0"/>
-                            <c:AvoMetricTile Label="TIEMPO" Value="{Binding Selected.TotalTimeText, FallbackValue='—'}" Caption="Suma de duraciones" Margin="0,0,10,0"/>
-                            <c:AvoMetricTile Label="VELOCIDAD MÁXIMA" Value="{Binding Selected.BestSpeedText, FallbackValue='—'}" Caption="Filtrada" Margin="0,0,10,0"/>
-                            <c:AvoMetricTile Label="ÚLTIMO" Value="{Binding Selected.LastText, FallbackValue='—'}" ValueSize="15" Caption="Europe/Madrid"/>
+                            <c:AvoMetricTile Label="ENTRENAMIENTOS" Value="{Binding Selected.Count, FallbackValue='0'}" ValueSize="22" Caption="Asignados o del archivo" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="DISTANCIA" Value="{Binding Selected.DistanceText, FallbackValue='—'}" ValueSize="22" Caption="Suma" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="TIEMPO" Value="{Binding Selected.TotalTimeText, FallbackValue='—'}" ValueSize="22" Caption="Suma" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="V. MÁXIMA" Value="{Binding Selected.BestSpeedText, FallbackValue='—'}" ValueSize="22" Caption="Filtrada" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="ÚLTIMO" Value="{Binding Selected.LastDateText, FallbackValue='—'}" ValueSize="22" Caption="Europe/Madrid"/>
                         </UniformGrid>
 
                         <c:AvoCard Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">

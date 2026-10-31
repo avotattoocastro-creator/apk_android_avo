@@ -34,9 +34,10 @@ public sealed class IdentityRow : ObservableObject
         }
     }
     public int Count => Sessions.Count;
-    private IEnumerable<SessionItem> Real => Sessions.Where(s => !s.IsSynthetic);
     public string CountText => Count == 1 ? "1 entrenamiento" : $"{Count} entrenamientos";
-    public string DistanceText => (IsDemo ? Sessions : Real).Sum(s => s.DistanceKmValue).ToString("0.0", MainViewModel.Es) + " km";
+    /// <summary>All its trainings; marked when demonstration (synthetic) sessions are included.</summary>
+    public string DistanceText => Sessions.Sum(s => s.DistanceKmValue).ToString("0.0", MainViewModel.Es) + " km" + (!IsDemo && Sessions.Any(s => s.IsSynthetic) ? " (demo)" : "");
+    public string LastDateText => Sessions.Count == 0 ? "—" : MadridTime.Format(Sessions.Max(s => s.Start), "dd/MM/yyyy");
     public string LastText => Sessions.Count == 0 ? "Sin entrenamientos" : "Último " + MadridTime.Format(Sessions.Max(s => s.Start), "dd/MM/yyyy");
     public string BestSpeedText => Sessions.Count == 0 ? "—" : Sessions.Max(s => s.MaxSpeedKmh).ToString("0.0", MainViewModel.Es) + " km/h";
     public string TotalTimeText => Core.TimeText.Clock(Sessions.Sum(s => s.Timeline.Count > 1 ? s.Timeline.DurationS : s.Session.DurationSeconds));
@@ -261,8 +262,9 @@ public sealed partial class MainViewModel
         var d = Application.Current?.Dispatcher;
         if (d is null || d.CheckAccess()) a(); else d.BeginInvoke(a);
     }
-    private void OnNfcStatusBg(string s) => OnUi(() => NfcStatus = s);
-    private void OnNfcEventBg(NfcTagEvent e) => OnUi(() => OnNfcEvent(e));
+    // events of a reader that has just been replaced are ignored
+    private void OnNfcStatusBg(string s) { var r = Nfc; OnUi(() => { if (ReferenceEquals(r, Nfc)) NfcStatus = s; }); }
+    private void OnNfcEventBg(NfcTagEvent e) { var r = Nfc; OnUi(() => { if (ReferenceEquals(r, Nfc)) OnNfcEvent(e); }); }
 
     private string _nfcStatus = "";
     public string NfcStatus { get => _nfcStatus; private set => Set(ref _nfcStatus, value); }

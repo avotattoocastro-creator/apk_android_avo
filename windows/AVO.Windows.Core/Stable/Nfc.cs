@@ -260,7 +260,7 @@ public sealed class PcscNfcReader : INfcReader
                 if (_ctx == IntPtr.Zero)
                 {
                     int rc = W.SCardEstablishContext(W.ScopeUser, IntPtr.Zero, IntPtr.Zero, out _ctx);
-                    if (rc != 0) { _ctx = IntPtr.Zero; ReaderPresent = false; SetStatus("Lector NFC: servicio de tarjetas inteligentes no disponible"); Sleep(3000); continue; }
+                    if (rc != 0) { _ctx = IntPtr.Zero; ReaderPresent = false; SetStatus("Lector NFC: no hay lector conectado (servicio de tarjetas inteligentes inactivo)"); Sleep(3000); continue; }
                 }
                 var readers = W.ListReaders(_ctx, out int lrc);
                 if (lrc is W.ErrNoService or W.ErrServiceStopped or W.ErrInvalidHandle) { Release(); continue; }
