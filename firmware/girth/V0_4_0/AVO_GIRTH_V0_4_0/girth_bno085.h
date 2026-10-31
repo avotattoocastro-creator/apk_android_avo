@@ -35,6 +35,7 @@ struct BnoStatus {
   uint32_t starts = 0, start_failures = 0, i2c_errors = 0, restarts_running = 0;
   uint32_t samples = 0, lost = 0, dropped_queue = 0, unknown = 0, resets_seen = 0;
   float rate_hz = 0;              // measured accelerometer rate over the last second
+  float period_us = 0;            // 0.4.2: real sample period averaged since the start (0 = not enough samples yet)
   ProductId product;
   uint32_t interval_us[16] = {0}; // confirmed by the BNO (Get Feature Response), by report id
   Sample last;                    // last sample (for the serial monitor)
@@ -78,6 +79,8 @@ class Bno085 {
   Assembler asm_;
   BnoStatus st_;
   uint32_t rate_count_ = 0, rate_t0_ = 0, last_sample_ms_ = 0;
+  int64_t run_t0_us_ = 0;
+  uint32_t run_s0_ = 0;
 };
 
 }  // namespace girth

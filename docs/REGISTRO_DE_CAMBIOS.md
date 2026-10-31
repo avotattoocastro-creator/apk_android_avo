@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.2 (XIAO ESP32-C6) — re-emparejamiento automático, monitor sin bloqueo, periodo estable
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
+**Prueba física de 0.4.1 (monitor del usuario):**
+- IMU estable a ~125 Hz, sin pérdidas del sensor.
+- La cincha seguía emparejada con la espalda antigua CD:24 (0 ACK), así que la sesión del pecho del 31/10 16:37 salió sin datos de cincha.
+- Se perdieron 12 046 muestras de una vez en la cola, porque el monitor serie bloqueaba el bucle.
+- El periodo estimado era inestable.
+**Qué cambia:**
+- el monitor serie no bloquea;
+- el periodo de los lotes es la media desde el arranque;
+- si la espalda guardada no da ACK en 30 s y otra espalda acepta a la cincha (WELCOME), la cincha pasa a esa espalda.
+**No se ha tocado:** espalda, pecho, app, particiones, actualización.
+**Validación:** CI pendiente; enlace y datos en la sesión: NO VERIFICADO.
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.1 (XIAO ESP32-C6) — periodo real en los lotes; primera prueba física de la IMU
 **Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
 **Prueba física de 0.4.0 (monitor serie del usuario):**

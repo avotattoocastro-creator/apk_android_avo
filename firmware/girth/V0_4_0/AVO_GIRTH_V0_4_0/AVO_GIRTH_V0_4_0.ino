@@ -1,4 +1,6 @@
-/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.1 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+/* AVO PERFORMANCE HORSE — GIRTH (cincha) V0.4.2 · XIAO ESP32-C6 + BNO085 (GY-BNO08X, I²C)
+ * 0.4.2: steady batch period (long-run average), serial monitor never blocks (0.4.1 lost samples), and if the
+ *   stored back gives no radio ACK for 30 s while another back WELCOMEs us (it has accepted this girth), follow it.
  * 0.4.1 (first hardware test of 0.4.0: BNO085 OK, SH-2 3.2.13, ~125 Hz): the batch period comes from the real
  *   timestamps (the BNO runs at its nearest supported rate, ~125 Hz when 100 Hz is asked), the confirmed
  *   periods are printed at start, and no "GPIO isr service is not installed" message on the first start.
@@ -44,8 +46,8 @@
 
 using namespace avo;
 
-#define AVO_GIRTH_VERSION "0.4.1"
-// Identity marker read by AVO Update ("0.4.1" followed by "AVO-GIRTH"): never installed on chest or back.
+#define AVO_GIRTH_VERSION "0.4.2"
+// Identity marker read by AVO Update ("0.4.2" followed by "AVO-GIRTH"): never installed on chest or back.
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
 // ---------------------------------------------------------------- pins (XIAO ESP32-C6)
@@ -84,6 +86,7 @@ static uint32_t s_rx_at_first_ping = 0, s_sent_at_first_ping = 0;
 static bool s_have_ping_base = false;
 static uint8_t s_other_back[6] = {0};
 static uint32_t s_other_back_ms = 0;
+static uint32_t s_stored_ack_ms = 0;          // 0.4.2: last MAC ACK from the stored back
 
 // settings (NVS)
 static bool s_ant_ext = false, s_sleep_enabled = false;
@@ -132,7 +135,7 @@ static bool radio_send(const uint8_t* mac, const uint8_t* d, size_t n) {
   bool done = xSemaphoreTake(s_sent, pdMS_TO_TICKS(25)) == pdTRUE;
   bool ok = done && (s_sent_ok || bc);
   if (ok) s_st.tx_ok++; else s_st.tx_fail++;
-  if (!bc) { if (done && s_sent_ok) s_uni_ack++; else s_uni_noack++; }
+  if (!bc) { if (done && s_sent_ok) { s_uni_ack++; if (!memcmp(mac, s_back, 6)) s_stored_ack_ms = millis(); } else s_uni_noack++; }
   return ok;
 }
 
@@ -204,10 +207,22 @@ static void handle(const RxPkt& p) {
   if (h.kind == GirthKind::WELCOME) {
     GirthHello w;
     if (!girth_hello_decode(body, h.body_len, &w)) return;
-    if (s_paired && !from_back) {                  // only the stored back (BOOT 5 s forgets it)
+    if (s_paired && !from_back) {
       memcpy(s_other_back, p.mac, 6);
       s_other_back_ms = millis();
-      return;
+      // 0.4.2: a back only sends WELCOME to a girth it has accepted (its paired girth, or its pairing window is
+      // open). If the stored back has not given a single radio ACK for 30 s, follow the back that accepted us.
+      uint32_t now = millis();
+      if (now > 20000 && !linked() && (!s_stored_ack_ms || now - s_stored_ack_ms > 30000)) {
+        char om[18], nm[18]; now_mac_str(s_back, om); now_mac_str(p.mac, nm);
+        Serial.printf("[AVO CINCHA] la espalda guardada %s no responde desde hace 30 s y la espalda %s nos ha aceptado: "
+                      "se cambia a ella\n", om, nm);
+        if (esp_now_is_peer_exist(s_back)) esp_now_del_peer(s_back);
+        s_paired = false;
+        s_have_ping_base = false;
+      } else {
+        return;
+      }
     }
     if (!s_paired) {
       memcpy(s_back, p.mac, 6);
@@ -248,15 +263,16 @@ static girth::Sample s_batch[girth::BATCH_MAX];
 static uint8_t s_batch_n = 0;
 // 0.4.1: real sample period, from the timestamps (the BNO runs at its own nearest rate: ~125 Hz when 100 Hz is asked)
 static float s_period_us = IMU_INTERVAL_US;
+static float s_period_ref = 0;   // 0.4.2: long-run period from the IMU task (0 = not known yet)
 static uint32_t s_batch_no = 0, s_batch_first_ms = 0;
 
 static void flush_batch() {
   if (!s_batch_n) return;
   if (!linked()) { s_imu_discard_nolink += s_batch_n; s_batch_n = 0; return; }
   girth::BatchMeta m;
-  uint32_t per = (uint32_t)(s_period_us + 0.5f);
-  if (s_batch_n > 1) per = (uint32_t)((s_batch[s_batch_n - 1].t_us - s_batch[0].t_us + (s_batch_n - 1) / 2) / (uint32_t)(s_batch_n - 1));
-  if (per < 1000 || per > 60000) per = (uint32_t)(s_period_us + 0.5f);
+  // 0.4.2: the long-run period (steady); before it is known, the slow average of the timestamps
+  uint32_t per = (uint32_t)((s_period_ref > 0 ? s_period_ref : s_period_us) + 0.5f);
+  if (per < 1000 || per > 60000) per = IMU_INTERVAL_US;
   m.girth_id = 0; m.imu_id = 0; m.batch = ++s_batch_no; m.period_us = (uint16_t)per;
   uint8_t body[GIRTH_MAX_BODY];
   for (uint8_t fmt : {girth::FMT_9AXIS, girth::FMT_FUSED}) {
@@ -274,7 +290,7 @@ static void pump_imu() {
     if (s_batch_n) {
       uint32_t dt = s.t_us - s_batch[s_batch_n - 1].t_us;
       if (dt > 2000 && dt < 50000) s_period_us += 0.02f * ((float)dt - s_period_us);   // slow average of the real period
-      if ((float)dt > s_period_us * 1.5f) flush_batch();
+      if ((float)dt > (s_period_ref > 0 ? s_period_ref : s_period_us) * 1.5f) flush_batch();
     }
     if (!s_batch_n) s_batch_first_ms = millis();
     s_batch[s_batch_n++] = s;
@@ -373,7 +389,7 @@ static void print_status() {
   Serial.printf(" | arranques %lu fallidos %lu reinicios %lu errores I2C %lu | ultimo error: %s\n", (unsigned long)b.starts,
                 (unsigned long)b.start_failures, (unsigned long)b.restarts_running, (unsigned long)b.i2c_errors, b.last_error);
   Serial.printf("[AVO CINCHA %s] ENVIO IMU periodo real %.0f us | lotes ok %lu sin confirmar %lu | muestras descartadas sin enlace %lu | BATERIA %s",
-                AVO_GIRTH_VERSION, s_period_us, (unsigned long)s_imu_sent_ok, (unsigned long)s_imu_unconfirmed,
+                AVO_GIRTH_VERSION, s_period_ref > 0 ? s_period_ref : s_period_us, (unsigned long)s_imu_sent_ok, (unsigned long)s_imu_unconfirmed,
                 (unsigned long)s_imu_discard_nolink, s_bat_mv ? "" : "no medida");
   if (s_bat_mv) Serial.printf("%u mV (~%u %%, estimado)", s_bat_mv, s_bat_pct);
   Serial.printf(" [pin GPIO5 %u mV, divisor %.2f sin verificar] | soporte %s | reposo %s\n", s_bat_pin_mv, s_bat_ratio,
@@ -383,6 +399,7 @@ static void print_status() {
 // ---------------------------------------------------------------- setup / loop
 void setup() {
   Serial.begin(115200);
+  Serial.setTxTimeoutMs(0);   // 0.4.2: the monitor never blocks the loop (0.4.1 lost IMU samples while printing)
   delay(300);
   pinMode(PIN_LED, OUTPUT);
   digitalWrite(PIN_LED, HIGH);
@@ -442,6 +459,8 @@ void loop() {
   if (linked() && now - s_last_status_ms >= 1000) { s_last_status_ms = now; send_status(); }
   pump_imu();
 
+  static uint32_t per_ms = 0;
+  if (now - per_ms >= 1000) { per_ms = now; girth::BnoStatus bs = bno.status(); if (bs.period_us > 1000 && bs.period_us < 60000) s_period_ref = bs.period_us; }
   static uint32_t bat_ms = 0;
   if (now - bat_ms >= 10000) { bat_ms = now; read_battery(); }
 

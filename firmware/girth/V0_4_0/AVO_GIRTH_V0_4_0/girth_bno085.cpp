@@ -225,6 +225,8 @@ bool Bno085::start() {
   rate_t0_ = millis();
   rate_count_ = 0;
   last_sample_ms_ = millis();
+  run_t0_us_ = esp_timer_get_time();
+  run_s0_ = asm_.samples;
   return true;
 }
 
@@ -249,6 +251,9 @@ void Bno085::run() {
     if (now - rate_t0_ >= 1000) {
       xSemaphoreTake(mtx_, portMAX_DELAY);
       st_.rate_hz = rate_count_ * 1000.0f / (float)(now - rate_t0_);
+      // 0.4.2: long-run period (samples counted over the whole run: steady, unlike the per-packet timestamps)
+      uint32_t ns = asm_.samples - run_s0_;
+      if (ns >= 250) st_.period_us = (float)(esp_timer_get_time() - run_t0_us_) / (float)ns;
       st_.samples = asm_.samples; st_.lost = asm_.lost; st_.unknown = asm_.unknown; st_.resets_seen = asm_.resets_seen;
       memcpy(st_.interval_us, asm_.feature_interval_us, sizeof(st_.interval_us));
       xSemaphoreGive(mtx_);

@@ -1,5 +1,20 @@
 # AVO GIRTH V0.4.x — cincha XIAO ESP32-C6 + BNO085
 
+## 0.4.2 (31/10/2026) — tras la prueba de 0.4.1 en el hardware
+- **Resultado de 0.4.1 (monitor del usuario):**
+  - IMU estable, de 124,8 a 126,0 Hz, sin pérdidas del sensor, |acc| ≈ 9,9 m/s²;
+  - la cincha seguía emparejada con la espalda antigua CD:24 (0 ACK de 128), así que la sesión del pecho salió
+    sin datos de cincha;
+  - en la cola se perdieron **12 046 muestras de una vez**: el monitor serie bloqueaba el bucle;
+  - el periodo estimado oscilaba entre 8156 y 8639 µs (el real es ~7940 µs).
+- **Correcciones de 0.4.2:**
+  - el monitor serie ya no bloquea nunca (`setTxTimeoutMs(0)`);
+  - el periodo de los lotes es la media desde el arranque (muestras contadas y tiempo transcurrido), estable;
+  - **re-emparejamiento automático:** si la espalda guardada no da ningún ACK de radio en 30 s y otra espalda
+    responde con WELCOME, la cincha pasa a esa espalda. La espalda solo da la bienvenida a la cincha que ya tiene
+    aceptada o con su ventana de emparejamiento abierta, así que los dos lados están de acuerdo. Ya no hace falta
+    pulsar BOOT en este caso.
+
 ## 0.4.1 (31/10/2026) — tras la primera prueba de 0.4.0 en el hardware
 - **Resultado de 0.4.0 en la cincha (PROBADO FÍSICAMENTE, monitor serie del usuario):**
   - **IMU:** BNO085 en 0x4A a 400 kHz, INT a los 100 ms, SH-2 3.2.13 (pieza 10004148, build 6);
