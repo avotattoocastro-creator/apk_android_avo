@@ -19,8 +19,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 429,
-   "volumen_mm3": 44390.6,
+   "caras": 425,
+   "volumen_mm3": 44315.8,
    "bbox": [
     -0.0,
     166.214,
@@ -64,14 +64,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 92,
-   "volumen_mm3": 49581.6,
+   "caras": 90,
+   "volumen_mm3": 96529.1,
    "bbox": [
     -2.72,
     169.439,
     -32.22,
     32.22,
-    -4.5,
+    -9.0,
     4.45
    ]
   },
@@ -79,15 +79,15 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 208,
-   "volumen_mm3": 34397.3,
+   "caras": 213,
+   "volumen_mm3": 31196.9,
    "bbox": [
     -4.007,
     170.217,
-    -33.537,
-    33.544,
-    -10.94,
-    -5.993
+    -33.507,
+    33.507,
+    -14.003,
+    -10.493
    ]
   },
   "probeta_P1_L_ANTENA_BASE": {
@@ -124,14 +124,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 44,
-   "volumen_mm3": 13630.1,
+   "caras": 40,
+   "volumen_mm3": 18023.4,
    "bbox": [
     117.514,
-    169.441,
-    -32.226,
-    32.226,
-    -4.506,
+    169.439,
+    -32.22,
+    32.22,
+    -6.0,
     4.453
    ]
   },
@@ -139,8 +139,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 147,
-   "volumen_mm3": 6089.8,
+   "caras": 143,
+   "volumen_mm3": 6015.0,
    "bbox": [
     -0.008,
     26.0,
@@ -169,14 +169,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 48,
-   "volumen_mm3": 8309.7,
+   "caras": 37,
+   "volumen_mm3": 11007.9,
    "bbox": [
-    -2.728,
+    -2.72,
     26.0,
-    -32.228,
-    32.228,
-    -4.508,
+    -32.22,
+    32.22,
+    -6.0,
     2.851
    ]
   },
@@ -184,8 +184,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 23,
-   "volumen_mm3": 1811.9,
+   "caras": 19,
+   "volumen_mm3": 1737.2,
    "bbox": [
     2.0,
     17.0,
@@ -199,14 +199,14 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 25,
-   "volumen_mm3": 1650.2,
+   "caras": 20,
+   "volumen_mm3": 2229.2,
    "bbox": [
     2.0,
     17.0,
     -16.0,
     16.0,
-    -4.5,
+    -6.0,
     0.0
    ]
   }
@@ -611,38 +611,56 @@
    "BAT",
    "GND"
   ],
-  "OVAL": [
-   15.0,
-   6.2
+  "PL_FACE": [
+   15.5,
+   4.65,
+   1.7
   ],
-  "OVAL_CLR": 0.15,
-  "OVAL_C": [
+  "PL_FLANGE": [
+   17.1,
+   6.25,
+   1.8
+  ],
+  "PL_TAILS": 1.0,
+  "PL_CLR_FACE": 0.1,
+  "PL_CLR_FLANGE": 0.15,
+  "CON_C": [
    9.0,
    0.0
   ],
-  "OVAL_LEDGE_Z": 4.0,
-  "OVAL_LEDGE": 0.8,
-  "EAR_BODY": [
-   14.6,
-   5.5,
-   2.9
+  "PN_BODY": [
+   15.5,
+   4.65,
+   6.0
   ],
-  "EAR_LEN": 24.7,
-  "EAR_W": 5.5,
-  "EAR_T": 1.7,
-  "EAR_HOLE": [
-   2.5,
+  "PN_EARS": [
+   25.0,
+   5.5,
+   2.0
+  ],
+  "PN_EAR_Z": 2.5,
+  "PN_HOLE": [
+   2.0,
    19.5
   ],
-  "EAR_TIP": 1.5,
-  "EAR_CLR": 0.15,
-  "EAR_RECESS": 0.2,
-  "EAR_CORNER_R": 0.4,
+  "PN_TIP": 1.5,
+  "PN_CLR": 0.15,
+  "PN_RECESS": 0.2,
+  "PN_MEMBRANE": 0.2,
+  "PN_PILOT": [
+   1.6,
+   2.0
+  ],
+  "PN_PLATE_POCKET": [
+   26.0,
+   7.0,
+   2.1
+  ],
+  "MT_CARGA": 9.0,
   "EAR_CABLE": [
    2.0,
    1.4
   ],
-  "EAR_MEMBRANE": 0.2,
   "SCREWS": [
    [
     6.0,
@@ -696,7 +714,7 @@
   "ZC": 0.1,
   "CL": 0.12,
   "RW": 2.6,
-  "MT": 4.5,
+  "MT": 9.0,
   "BEAM_T": 1.4,
   "BEAM_Y": [
    -9.5,
@@ -797,6 +815,8 @@
   ]
  },
  "logotipo": {},
- "fallos_redondeo": [],
- "tiempo_s": 20.3
+ "fallos_redondeo": [
+  "contraplaca arista espalda R1.3"
+ ],
+ "tiempo_s": 18.3
 }

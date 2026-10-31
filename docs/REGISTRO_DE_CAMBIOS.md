@@ -24,6 +24,44 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Espalda · Rev E.7.2: conectores con las cotas del STEP del usuario
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:** el usuario envió el STEP de los conectores (`Assembly Pogo 3er`, Onshape) y una captura de Shapr3D con la
+orientación: el plano en la cápsula con los contactos hacia abajo y el de muelles en el soporte con las puntas hacia arriba.
+
+**Cotas del STEP:**
+- **plano:** cara 15,5 × 4,65 × 1,7, reborde 17,1 × 6,25 × 1,8, patas 1,0;
+- **muelles:** cuerpo 15,5 × 4,65 × **6,0**, orejas 25 × 5,5 × 2,0 en medio del grueso, agujeros Ø2,0 a 19,5, puntas y patas
+  de 1,5;
+- contactos a 2,3; imanes Ø3 a ±5,42.
+
+**Base:** el conector plano se mete desde dentro. La cara pasa por un agujero de 15,7 × 4,85 y queda a ras; el reborde apoya en
+un escalón a Z 1,7.
+
+**Soporte:** el conector de muelles va desde abajo, atornillado con 2 × M2 de rosca chapa (pilotos Ø1,6):
+- ventana del cuerpo hasta la cara de apoyo, con la cara 0,2 por debajo;
+- orejas con techo a Z −2,7;
+- membrana de sacrificio de 0,2 que hay que cortar.
+
+**Contraplaca (nueva):** hueco de 26 × 7 × 2,1 para lo que asoma bajo el soporte (cuerpo, cabezas M2, patas y puente). En la
+tela hace falta una ranura de 26 × 7.
+
+**Base de carga:** 9 mm de grueso (`MT_CARGA`).
+
+**Validación:** IMPLEMENTADO (CAD, con el STEP colocado):
+- plano / base: 0 mm³;
+- muelles / soporte: solo la membrana (13,5 mm³, prevista);
+- muelles y cabezas M2 / contraplaca: 0 mm³;
+- puntas a Z +1,3;
+- 0 voladizos fuera de límite en las 7 piezas;
+- STL cerrados de 1 cuerpo.
+
+**NO VERIFICADO** físicamente.
+**Pendiente:**
+- confirmar que el conector real es como el STEP: 6,0 de grueso, orejas en medio y agujeros Ø2,0 (el usuario midió Ø2,5);
+- imprimir las probetas;
+- probar el rebote al galope.
+
 ## 2026-10-31 — Espalda · Rev E.7.1: conector de muelles montado desde arriba (corrige la E.7)
 **Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia:**

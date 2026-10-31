@@ -113,18 +113,19 @@ RE = dict(
     CONTACTS=(((8.8, -4.0), "BAT"), ((8.8, 4.0), "SYS"), ((8.8, 14.0), "GND")),
     CONTACT_CSK_D=4.1, CONTACT_HOLE=2.3, CONTACT_GROOVE=(2.2, 4.4, 0.75), CONTACT_Z=2.5, CONTACT_POCKET_R=3.4,
     POGO_D=2.05, POGO_CH=(1.6, 1.4), POGO_ON=("SYS", "BAT"),
-    # ===== Rev E.7 (31/10/2026): los contactos son 2 conectores magnéticos comerciales de 3 vías (en lugar de los tornillos M2
-    # de la E.6 y de los pines sueltos). Orden a lo largo de Y: BAT (Y−) · SYS (centro) · GND (Y+).
-    #  · CÁPSULA (base): conector PLANO ovalado, cara enrasada con el fondo, pegado con epoxi desde dentro sobre un cristal.
-    #    Medidas por foto (±0,3): largo 15,0 (otra foto 16,5: CONFIRMAR) × ancho 6,2; grueso no medido (escalón a Z 4,0).
-    OVAL=(15.0, 6.2), OVAL_CLR=0.15, OVAL_C=(9.0, 0.0), OVAL_LEDGE_Z=4.0, OVAL_LEDGE=0.8,
-    #  · SOPORTE: conector de MUELLES con orejas. Del usuario: puntas 1,5 fuera, agujeros Ø2,5 a 19,5 entre centros, imanes a ras.
-    #    Por foto (±0,3): largo total 24,7, cuerpo 14,6 × 5,5, grueso del cuerpo ≈ 2,9 sin pines, orejas 1,7.
-    #    Rev E.7.1 (31/10/2026): las orejas están a ras de la cara de los MUELLES (foto de perfil) → se monta desde arriba.
-    #    Cara del cuerpo 0,2 por debajo de la cara de apoyo (si el cuerpo es algo más grueso no sobresale); los muelles siguen
-    #    apretados 1,3 de 1,5 con la cápsula puesta.
-    EAR_BODY=(14.6, 5.5, 2.9), EAR_LEN=24.7, EAR_W=5.5, EAR_T=1.7, EAR_HOLE=(2.5, 19.5), EAR_TIP=1.5, EAR_CLR=0.15, EAR_RECESS=0.2,
-    EAR_CORNER_R=0.4, EAR_CABLE=(2.0, 1.4),   # Rev E.3.2: 3 imanes Ø5 × 1 del reed en línea con el reed (eje Y), central en la posición de la Rev E, sin separación (se tocan; alojamientos Ø5,15 unidos)
+    # ===== Rev E.7.2 (31/10/2026): 2 conectores magnéticos de 3 vías con las cotas del STEP del usuario («Assembly Pogo 3er»,
+    # Onshape). Orden a lo largo de Y: BAT (Y−) · SYS (centro) · GND (Y+). Paso de contactos 2,3; imanes Ø3 a ±5,42.
+    #  · CÁPSULA (base): conector PLANO. Cara de 15,5 × 4,65 × 1,7 (óvalo, R 2,325) + reborde de 17,1 × 6,25 × 1,8 (R 3,125);
+    #    patas 1,0. Se mete DESDE DENTRO: la cara asoma por el agujero del fondo y queda a ras; el reborde apoya en el escalón
+    #    (Z 1,7), que aguanta el empuje de los muelles. Epoxi por encima del reborde (sella y lo retiene).
+    PL_FACE=(15.5, 4.65, 1.7), PL_FLANGE=(17.1, 6.25, 1.8), PL_TAILS=1.0, PL_CLR_FACE=0.10, PL_CLR_FLANGE=0.15, CON_C=(9.0, 0.0),
+    #  · SOPORTE: conector de MUELLES. Cuerpo 15,5 × 4,65 × 6,0 (óvalo R 2,325); orejas 25,0 × 5,5 × 2,0 EN MEDIO del grueso
+    #    (de 2,5 a 4,5 desde la cara); agujeros Ø2,0 (el usuario midió 2,5) a 19,5; pines Ø0,8 con 1,5 fuera por cada lado.
+    #    Se mete DESDE ABAJO y se atornilla por las orejas (2 × M2 rosca chapa, pilotos Ø1,6). Cara 0,2 bajo la cara de apoyo.
+    #    Lo que sobresale por debajo (1,7 de cuerpo + tornillos + 1,5 de patas) va por una ranura de la tela a un hueco de la
+    #    contraplaca. Base de carga: más gruesa (MT_CARGA) para que todo quede dentro.
+    PN_BODY=(15.5, 4.65, 6.0), PN_EARS=(25.0, 5.5, 2.0), PN_EAR_Z=2.5, PN_HOLE=(2.0, 19.5), PN_TIP=1.5, PN_CLR=0.15,
+    PN_RECESS=0.2, PN_MEMBRANE=0.2, PN_PILOT=(1.6, 2.0), PN_PLATE_POCKET=(26.0, 7.0, 2.1), MT_CARGA=9.0, EAR_CABLE=(2.0, 1.4),
     # --- tornillos de cierre: M3 avellanado (ISO 10642) desde abajo → inserto M3×6 en la columna de la tapa
     # Rev E.4: 8 tornillos en 4 parejas simétricas (se quitan los de X 32, X 100 y la punta X 160,5)
     SCREWS=((6.0, -21.5), (6.0, 21.5), (64.0, -24.3), (64.0, 24.3),
@@ -140,7 +141,7 @@ RE = dict(
     LOGO_TXT="AVO.PERFORMANCE", LOGO_CAP=6.4, LOGO_X=60.0, LOGO_RELIEF=0.6,
 )
 if os.environ.get("AVO_E6_CARGA") or os.environ.get("AVO_E7_CARGA"):   # variante: base de carga (BAT y GND al cargador, sin puente)
-    RE["POGO_ON"] = ("BAT", "GND")
+    RE["POGO_ON"] = ("BAT", "GND"); RE["MT"] = RE["MT_CARGA"]   # Rev E.7.2: la base de carga va en la mesa, más gruesa
 RE["CROWN_R"] = HW ** 2 / (2 * RE["CROWN_DROP"])
 P["ZF"] = RE["ZF"]; ZF = RE["ZF"]
 WALL = g("WALL"); CEIL = RE["TOP_Z"] - WALL
@@ -370,25 +371,26 @@ def obround_solid(cx, cy, ly, wx, z0, z1): return Part.Face(obround(cx, cy, ly, 
 def rrect_solid(cx, cy, ly, wx, r, z0, z1):
     b = box((cx - wx / 2, cy - ly / 2, z0), (cx + wx / 2, cy + ly / 2, z1))
     return b.makeFillet(r, [e for e in b.Edges if abs(e.BoundBox.ZLength - (z1 - z0)) < 1e-6])
-def oval_pocket():
-    (ol, ow), c_ = RE["OVAL"], RE["OVAL_CLR"]; cx, cy = RE["OVAL_C"]; zl, d = RE["OVAL_LEDGE_Z"], RE["OVAL_LEDGE"]
-    lo, wo = ol + 2 * c_, ow + 2 * c_; li, wi = lo - 2 * d, wo - 2 * d
-    a = obround_solid(cx, cy, lo, wo, -1.0, zl)
-    b = Part.makeLoft([obround(cx, cy, lo, wo, zl - 0.001), obround(cx, cy, li, wi, zl + d)], True, True)
-    t = obround_solid(cx, cy, li, wi, zl + d - 0.01, ZF + 1)
-    return fuse_all([a, b, t]).removeSplitter()
+def plate_pocket():
+    """Rev E.7.2: conector PLANO desde dentro: agujero de la cara (a ras del fondo) + alojamiento del reborde abierto al interior"""
+    cx, cy = RE["CON_C"]; (fl_, fw, fh), (gl, gw, gh) = RE["PL_FACE"], RE["PL_FLANGE"]; cf, cg = RE["PL_CLR_FACE"], RE["PL_CLR_FLANGE"]
+    face = obround_solid(cx, cy, fl_ + 2 * cf, fw + 2 * cf, -1.0, fh + 0.01)
+    fla = obround_solid(cx, cy, gl + 2 * cg, gw + 2 * cg, fh, ZF + 1)
+    return face.fuse(fla).removeSplitter()
+def pin_geom():
+    zf = -RE["PN_RECESS"]; ze1 = zf - RE["PN_EAR_Z"]; ze0 = ze1 - RE["PN_EARS"][2]; zb = zf - RE["PN_BODY"][2]
+    return zf, ze1, ze0, zb                                   # cara, cara superior de las orejas, inferior, cara trasera
 def ear_pocket():
-    """Rev E.7.1: conector de muelles MONTADO DESDE ARRIBA. Las orejas están a ras de la cara de los muelles y los imanes
-    (foto de perfil del usuario): rebaje de las orejas desde la cara de apoyo hasta EAR_RECESS + EAR_T (el suelo del rebaje
-    aguanta el empuje de la cápsula) y debajo el hueco del cuerpo, pasante hasta la cara inferior (patas y cables).
-    Bajo cada agujero de oreja, un taladro ciego Ø2,0 para que el epoxi haga de remache."""
-    (bl, bw, bt), c_ = RE["EAR_BODY"], RE["EAR_CLR"]; cx, cy = RE["OVAL_C"]
-    zf = -RE["EAR_RECESS"]; ze = zf - RE["EAR_T"]; zb = zf - bt          # cara de los muelles, apoyo de las orejas, cara trasera
-    ears = obround_solid(cx, cy, RE["EAR_LEN"] + 2 * c_, RE["EAR_W"] + 2 * c_, ze, 1.0)
-    body = rrect_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, RE["EAR_CORNER_R"] + c_, -RE["MT"] - 1, ze + 0.01)
-    hd, hs = RE["EAR_HOLE"]
-    keys = [vcyl(cx, cy + sg * hs / 2, 1.0, ze - 2.0, ze + 0.01) for sg in (-1, 1)]
-    return fuse_all([ears, body] + keys).removeSplitter(), (zf, zb, ze)
+    """Rev E.7.2: conector de MUELLES desde abajo. Ventana del cuerpo hasta la cara de apoyo; alojamiento de las orejas abierto
+    por abajo con techo en la cara superior de las orejas; membrana de sacrificio de 0,2 sobre la ventana (el techo de las
+    orejas se imprime como puente; se corta con un cúter). Pilotos Ø1,6 para 2 tornillos M2 de rosca chapa por las orejas."""
+    cx, cy = RE["CON_C"]; (bl, bw, bt), (el, ew, et), c_ = RE["PN_BODY"], RE["PN_EARS"], RE["PN_CLR"]
+    zf, ze1, ze0, zb = pin_geom()
+    body = obround_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, ze1 + RE["PN_MEMBRANE"], 1.0)
+    ears = obround_solid(cx, cy, el + 2 * c_, ew + 2 * c_, -RE["MT"] - 1, ze1)
+    pd, pl_ = RE["PN_PILOT"]; hs = RE["PN_HOLE"][1]
+    pil = [vcyl(cx, cy + sg * hs / 2, pd / 2, ze1 - 0.01, ze1 + pl_) for sg in (-1, 1)]
+    return fuse_all([body, ears] + pil).removeSplitter(), (zf, zb, ze1)
 def column_keep(extra=0.3):
     return Part.makeCompound([vcyl(sx, sy, col_r(i) + extra, -5, 60) for i, (sx, sy) in enumerate(SCREWS)])
 def build_base(OUTER, CAV, CLIP_CAV):
@@ -472,10 +474,8 @@ def build_base(OUTER, CAV, CLIP_CAV):
     # ---- alojamientos en el suelo
     fl = C("CORTE_BATERIA_ALOJAMIENTO", box((BX0, -BY, BZ0), (BX1, BY, ZF + 1)))
     # Rev E.6: sin bobina Qi ni su canal (la batería apoya en el suelo, 1,4 mm)
-    # ---- Rev E.7: conector PLANO ovalado en el suelo del cuello (cara enrasada con el fondo; se mete desde fuera).
-    #      Alojamiento ovalado (holgura 0,15) de Z 0 a OVAL_LEDGE_Z, transición a 45° hasta un paso 0,8 más estrecho que sube al
-    #      interior (patas y cables). El escalón impide que los muelles del soporte empujen el conector hacia dentro.
-    fl = C("CORTE_CONECTOR_PLANO_OVALADO_%.1fx%.1f" % RE["OVAL"], oval_pocket())
+    # ---- Rev E.7.2: conector PLANO en el suelo del cuello, metido desde dentro (cara a ras del fondo, reborde sobre el escalón)
+    fl = C("CORTE_CONECTOR_PLANO_CARA_%.2fx%.2f_REBORDE_%.2fx%.2f" % (RE["PL_FACE"][0], RE["PL_FACE"][1], RE["PL_FLANGE"][0], RE["PL_FLANGE"][1]), plate_pocket())
     md, mt_ = RE["MAG"]
     for i_, (mx, my) in enumerate(RE["MAGS"]):
         fl = C("CORTE_IMAN_%d_D%.2f" % (i_ + 1, md + RE["MAG_CLR"]), vcyl(mx, my, (md + RE["MAG_CLR"]) / 2, RE["MAG_SKIN"], ZF + 1))
@@ -675,7 +675,7 @@ def build_soporte():
     # Rev E.7.1: conector de muelles desde arriba (orejas en un rebaje de la cara de apoyo, cuerpo pasante); base de carga: canal del cable
     ep, _ = ear_pocket(); p = p.cut(ep)
     if "GND" in RE["POGO_ON"]:
-        cw_, ch_ = RE["EAR_CABLE"]; cx_, cy_ = RE["OVAL_C"]
+        cw_, ch_ = RE["EAR_CABLE"]; cx_, cy_ = RE["CON_C"]
         p = p.cut(box((-10.0, cy_ - cw_ / 2, -RE["MT"] - 1), (cx_, cy_ + cw_ / 2, -RE["MT"] + ch_)))
     hd, hdep = RE["INS_SUP"]
     for (sx, sy) in RE["SUP_SCREWS"]:
@@ -705,6 +705,9 @@ def build_contraplaca():
                    Part.LineSegment(V(0, -Y, -30), V(0, -Y, zf(-Y))).toShape()])
     f = Part.Face(w); f.translate(V(-20, 0, 0)); below = f.extrude(V(L + 40, 0, 0))
     pl = pl.cut(below).removeSplitter()
+    # Rev E.7.2: hueco para lo que asoma bajo el soporte (cuerpo del conector de muelles, cabezas M2, patas y puente)
+    cx_, cy_ = RE["CON_C"]; pl_, pw_, pd_ = RE["PN_PLATE_POCKET"]
+    pl = pl.cut(obround_solid(cx_, cy_, pl_, pw_, ztop - pd_, ztop + 1)).removeSplitter()
     top_e = [e for e in pl.Edges if abs(e.BoundBox.ZMax - ztop) < 1e-6 and abs(e.BoundBox.ZMin - ztop) < 1e-6]
     pl = pl.makeChamfer(0.8, top_e)                                                 # 45°: esta cara va en la cama
     def bottom_edge(e):

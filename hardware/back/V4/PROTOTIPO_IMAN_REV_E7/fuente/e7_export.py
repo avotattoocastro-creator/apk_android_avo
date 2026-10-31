@@ -56,12 +56,15 @@ O = os.path.join(H, "E7", "STL"); os.makedirs(O, exist_ok=True)
 J = [("salida_E7/BREP/AVO_RevE7_BASE_IMAN.brep", "AVO_RevE7_BASE_IMAN"),
      ("salida_E7/BREP/AVO_RevE7_SOPORTE_IMAN.brep", "AVO_RevE7_SOPORTE_IMAN"),
      ("salida_E7_carga/BREP/AVO_RevE7_BASE_CARGA_IMAN.brep", "AVO_RevE7_BASE_CARGA_IMAN"),
+     ("salida_E7/BREP/AVO_RevE_CONTRAPLACA.brep", "AVO_RevE7_CONTRAPLACA"),
      ("salida_E7/PROBETAS/AVO_RevE_P3_CONECTOR_BASE.brep", "AVO_RevE7_PROBETA_CONECTOR_BASE"),
      ("salida_E7/PROBETAS/AVO_RevE_P3_CONECTOR_SOPORTE.brep", "AVO_RevE7_PROBETA_CONECTOR_SOPORTE"),
      ("salida_E7_carga/PROBETAS/AVO_RevE_P3_CONECTOR_SOPORTE.brep", "AVO_RevE7_PROBETA_CONECTOR_BASE_CARGA")]
 for src, nm in J:
     s_ = rd(os.path.join(H, src))
-    sp = s_.copy(); sp.translate(V(0, 0, -s_.BoundBox.ZMin))
+    sp = s_.copy()
+    if "CONTRAPLACA" in nm: sp.rotate(V(0, 0, 0), V(1, 0, 0), 180)     # la contraplaca se imprime con la cara de la tela en la cama
+    sp.translate(V(0, 0, -sp.BoundBox.ZMin))
     p = os.path.join(O, nm + ".stl"); write_stl(p, sp, nm)
     r = check_stl(p); r["volumen_brep_mm3"] = round(mv(s_), 1); r["brep_valido"] = bool(s_.isValid()); res[nm] = r
 json.dump(res, open(os.path.join(H, "E7", "validacion_E7.json"), "w"), indent=1, ensure_ascii=False)
