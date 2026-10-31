@@ -207,8 +207,8 @@ def pod_base():
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
     for (x, y) in SCREWS:
-        # capa de sacrificio de 0,3 mm sobre el avellanado: se imprime como puente (sin soportes); se perfora con el tornillo
-        b = b.cut(cyl(x, y, M3["cb_h"] + 0.3, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
+        # REV 5.9.2: agujero pasante (antes, capa de sacrificio de 0,3 mm sobre el avellanado, que se perforaba con el tornillo)
+        b = b.cut(cyl(x, y, -1, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
     # imanes de sujeción: alojamiento desde dentro, 0,3 mm de piel abajo
     for (x, y) in MAGS:
         # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
