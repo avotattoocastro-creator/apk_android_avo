@@ -135,6 +135,18 @@ static void zed_shdn_sleep() {           // before deep sleep: Pololu off and he
 static const int USB_SENSE_PIN = 7;
 static const uint32_t USB_POLL_S = 3;           // V3.13.1: while charging, USB checked every 3 s
 static bool s_usb_workshop = false;
+// V3.13.10: USB threshold diagnosis state (see usb_threshold_update)
+#define AVO_USB_AUTO_OFF 0
+static const int USB_ADC_PIN = 20, USB_ADC_ALT = 7;
+static const uint16_t USB_ON_MV = 100, USB_OFF_MV = 50;
+static const uint32_t USB_CONFIRM_MS = 2000;
+static uint16_t s_usb20_mv = 0, s_usb7_mv = 0;
+static uint8_t s_usb20_zero = 0;
+static bool s_usb_on = false;                // confirmed state (starts "disconnected")
+static int8_t s_usb_cand = -1;               // candidate state waiting for the 2 s confirmation
+static uint32_t s_usb_cand_t = 0;
+static char s_usb_why[96] = "arranque (estado inicial: desconectado)";
+
 static bool usb_present();
 static uint32_t s_vext_at = 0;
 static bool s_vext_pending = false;
@@ -403,16 +415,6 @@ static const int USB_SENSE_PIN2 = 20;
 //   a pin with NOTHING connected already read ~170 mV before (V3.13.4–3.13.5 logs). Thresholds of 100 / 50 mV are inside
 //   that zone, so the decision is only LOGGED: AVO_USB_AUTO_OFF 0 never switches the GPS off.
 //   GPIO7 (ADC1_CH6, free since the reed is gone, usable with Wi-Fi on) is read and shown as the proposed alternative.
-#define AVO_USB_AUTO_OFF 0
-static const int USB_ADC_PIN = 20, USB_ADC_ALT = 7;
-static const uint16_t USB_ON_MV = 100, USB_OFF_MV = 50;
-static const uint32_t USB_CONFIRM_MS = 2000;
-static uint16_t s_usb20_mv = 0, s_usb7_mv = 0;
-static uint8_t s_usb20_zero = 0;
-static bool s_usb_on = false;                // confirmed state (starts "disconnected")
-static int8_t s_usb_cand = -1;               // candidate state waiting for the 2 s confirmation
-static uint32_t s_usb_cand_t = 0;
-static char s_usb_why[96] = "arranque (estado inicial: desconectado)";
 static void usb_pad_off() {
   static bool done = false;
   if (done) return;
