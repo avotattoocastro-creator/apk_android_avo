@@ -29,8 +29,10 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Qué cambia:**
 - placa del soporte `MT` de 6,0 a 8,5 mm;
 - el lado de los pines del pogo (cuerpo de 6,0 + colas de 1,5) queda dentro de la placa, con 1,0 mm libre bajo las colas;
-- el rebaje de las orejas sigue abierto por abajo; tornillos M2 × 4 como máximo.
-**Por qué:** petición del usuario: «engrosar el soporte para que quede empotrado completamente el pogo».
+- el rebaje de las orejas sigue abierto por abajo; tornillos M2 × 4 como máximo;
+- la pared de la cápsula se recorta en vertical con la forma de la placa pogo, que entra desde arriba;
+- conector de y = −20,2 a y = −18,7 (0,8 mm de pared hasta la ranura de la junta); cuna de la batería 1,0 mm hacia +Y (`BAT_Y`).
+**Por qué:** petición del usuario: «engrosar el soporte para que quede empotrado completamente el pogo» y «recortar la pared para poder introducir por arriba el pogo sin problemas».
 **Validación:** CI sin interferencias y 1 sólido por pieza. NO VERIFICADO en impresión.
 
 ---

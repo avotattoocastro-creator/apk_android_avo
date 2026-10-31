@@ -4,6 +4,7 @@
 - La placa del soporte pasa de 6,0 a **8,5 mm** (soporte de 12,95 mm de alto con el cerco).
 - El cuerpo (6,0) y las colas de los pines (1,5) quedan dentro, con 1,0 mm libre bajo las colas para el puente soldado: nada sobresale por debajo.
 - El rebaje de las orejas sigue abierto por abajo (4,0 mm de hondo bajo las orejas). Tornillos **M2 × 4** como máximo.
+- **Placa pogo entra desde arriba:** la pared de la cápsula se recorta en vertical, con la forma de la placa, hasta arriba (antes el reborde quedaba bajo un techo a 45° de la pared). Para dejar 0,8 mm de pared hasta la ranura de la junta, el conector pasa de y = −20,2 a **y = −18,7** y la cuna de la batería se desplaza **1,0 mm hacia +Y**. En el lado +Y la propia cuna hace de pared de la copa de epoxi.
 - **CI:** sin interferencias, 1 sólido por pieza. Render: `renders/pogo_5_9_2_corte.png`.
 
 **REV 5.9.1: conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
