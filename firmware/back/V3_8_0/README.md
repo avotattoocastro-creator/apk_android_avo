@@ -224,3 +224,11 @@ boca USB de la tapa Rev E.5).
 - Al arrancar imprime el motivo de reinicio y de despertar (`arranque: motivo de reinicio N, despertar M`).
 - **Sin el divisor 10 k / 15 k en GPIO7 la placa no puede saber que hay USB**: no se duerme. El reinicio que se ve al
   enchufar el USB a un móvil u ordenador es el del CP2102 (DTR/RTS al abrir el puerto), no el sueño.
+
+## V3.13.2 — detección del USB también en GPIO20 (2026-10-31)
+A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·3V3·GND·47·48·0·26·**20**, junto al pin 5V):
+- **5V ─ 10 kΩ ─ GPIO20 ─ 22 kΩ ─ GND** (≈ 2,7–3,0 V con USB y el pull-down interno). Se lee como entrada digital: GPIO20
+  es ADC2, que no se puede leer con la radio encendida.
+- GPIO20 es el D+ del USB propio del ESP32-S3 (sin conectar en esta placa, el USB-C va al CP2102): el firmware apaga ese
+  USB y su pull-up para usarlo como entrada normal.
+- GPIO7 con 10 kΩ / 15 kΩ sigue valiendo. El firmware mira los dos: vale cualquiera de las dos conexiones.

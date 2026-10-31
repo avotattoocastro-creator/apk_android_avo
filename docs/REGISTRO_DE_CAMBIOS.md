@@ -1135,3 +1135,11 @@ motivo de reinicio y de despertar al arrancar.
 La placa estaba **sin el divisor**, así que el firmware no podía detectar el USB: lo que se ve es el reinicio del CP2102 al
 conectar. Aun así, con el divisor el nivel de GPIO7 en sueño queda cerca del umbral de entrada RTC: el ADC es más seguro.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.2 (Heltec) — detección del USB también en GPIO20
+**Autor:** Claude · Rama `feature/avo-back-v4`
+**Qué cambia:** `usb_present()` = GPIO7 por ADC (> 1,5 V) **o** GPIO20 digital con pull-down (divisor 10 k / 22 k). Se
+desactivan el pad USB-Serial-JTAG y los pull-up de D+/D− para usar GPIO20 como entrada; GPIO20 fijado con pull-down
+durante el sueño. El monitor muestra `GPIO20 ALTO/bajo`.
+**Por qué:** el usuario prefiere GPIO20 (está junto al pin 5V en la misma fila).
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
