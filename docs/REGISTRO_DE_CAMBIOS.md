@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Windows V2 PRO — pantalla de inicio: logo y letras nítidos (vectoriales)
+**Autor:** Claude · **Rama:** `feature/windows-advanced-analysis`
+**Qué cambia:**
+- **Antes:** la foto de inicio (recorte ampliado ×3 de CONCEPTO_02) llevaba la cabeza de caballo y los textos incrustados y borrosos.
+- **Foto:** se han borrado de ella con *inpainting* (OpenCV); la escena no cambia.
+- **Cabeza de caballo:** trazada desde el original como contornos de grosor variable.
+- **«AVO»:** reconstruido geométricamente con las medidas del original.
+- **Textos:** PERFORMANCE HORSE, TRAINING ANALYSIS y CIENCIA · TECNOLOGÍA · RENDIMIENTO pasan a contornos de Montserrat (OFL), con el interletrado ajustado al ancho original.
+- **Resultado:** todo se dibuja en vectores sobre la foto (`Views/HeroArt.xaml`), así que se ve nítido a cualquier tamaño y escala.
+**Por qué:** lo pidió el usuario. Las letras y la cabeza del caballo se veían borrosas en el PC.
+**Archivos:** `windows/AVO.Windows/{Views/HeroArt.xaml(.cs),Views/StartView.xaml,Assets/avo_home_hero.jpg}`, `windows/tools/hero-art/`.
+**Validación:** IMPLEMENTADO · capturas del CI.
+
 ## 2026-10-31 — Windows V2 PRO — Cuadra, Jinetes, asignación de entrenamientos y lector NFC USB
 **Autor:** Claude · **Rama:** `feature/windows-advanced-analysis` · **Commits:** ver `git log`
 **Qué cambia:**

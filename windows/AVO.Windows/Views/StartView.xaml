@@ -1,8 +1,9 @@
 <UserControl x:Class="Avo.Windows.Views.StartView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
     <!-- Start screen reproducing AVO_WINDOWS_CONCEPTO_02, screen 1: full-window hero photo with the AVO logo on the left and the
-         five main actions in a column on the right. The photo (with logo and motto) is taken from the user's reference image. -->
+         five main actions in a column on the right. The photo comes from the user's reference image; logo and texts are vectors (HeroArt). -->
     <UserControl.Resources>
         <SolidColorBrush x:Key="StartIconFill" Color="#1F3A5C"/>
         <SolidColorBrush x:Key="StartIcon" Color="#A9C9F2"/>
@@ -32,9 +33,10 @@
             <ColumnDefinition Width="0.729*"/>
             <ColumnDefinition Width="0.271*"/>
         </Grid.ColumnDefinitions>
-        <Grid.Background>
-            <ImageBrush ImageSource="../Assets/avo_home_hero.jpg" Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Center"/>
-        </Grid.Background>
+        <!-- photo + vector logo and lettering (sharp at any size); spans both columns like the original background -->
+        <Grid Grid.ColumnSpan="2" ClipToBounds="True" Background="#0B1020">
+            <v:HeroArt/>
+        </Grid>
         <!-- right column: translucent navy panel over the photo, as in the reference -->
         <Border Grid.Column="1">
             <Border.Background>
