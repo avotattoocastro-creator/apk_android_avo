@@ -1172,7 +1172,7 @@ instalar (batería 3454 mV) y `ZED: SIN_RESPUESTA_UBX` en los primeros segundos.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-31 — BACK 3.13.6 (Heltec) — RX/TX del ZED cruzados automáticamente
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `a1c3ea1` · **CI:** [41156288729](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41156288729) (éxito)
 **Qué cambia:** pines del UART del ZED variables; sin bytes del ZED durante 10 s tras darle corriente → se intercambian
 GPIO33/GPIO35 (alternando); con más de 64 bytes recibidos se guarda el orden en NVS `zedswap`. Al arrancar se liberan los
 holds de los dos pines.
