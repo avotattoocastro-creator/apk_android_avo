@@ -199,3 +199,20 @@ Firmware para probar en el prototipo actual el sistema de alimentación de la es
 - **Emparejamiento sin abrir la cápsula:** poner y quitar la cápsula del soporte 3 veces seguidas, cada vez menos de
   4 s → emparejamiento abierto 120 s (contador `boots` en la NVS, se borra a los 4 s de funcionamiento). El PRG 3 s sigue.
 - Monitor: `INTERRUPTOR: reed no usado (V3.12: contactos pogo …)`.
+
+## V3.13.0 — Pololu en GPIO34 y carga por USB con todo dormido (2026-10-31)
+Para la espalda con la Heltec, el Pololu S7V8F3 para el ZED y **sin Qi** (la batería se carga por el USB-C de la Heltec,
+boca USB de la tapa Rev E.5).
+| Señal | Conexión |
+|---|---|
+| SHDN del Pololu | **GPIO34** = pin 7 de la fila Ve·GND·12·RX·TX·33·**34**·35·36… (entre los cables del ZED en 33 y 35) |
+| VIN / GND / VOUT del Pololu | + batería / GND / 3V3 de la URTK1.2 (sin cambios) |
+| Detección del USB | pin **5V** de la Heltec ─ **10 kΩ** ─ **GPIO7** ─ **15 kΩ** ─ **GND** (≈ 3,0 V con USB, 0 V sin USB) |
+- Con el USB conectado (1,5 s seguidos, o al arrancar): todo se duerme (ZED a 0 V por el Pololu, radio apagada, LoRa
+  dormida, LED blanco apagado) y solo carga la batería (cargador TP4054 de la Heltec).
+- Al desconectar el USB, GPIO7 baja a 0 V y despierta la placa (ext0): funciona normal y se enlaza con el reloj.
+- **Modo taller** (monitor serie con el USB conectado): pulsar USER en los 3 s siguientes a enchufar o reiniciar. Instalar
+  firmware con AVO Update funciona igual (la app reinicia la placa en el cargador de arranque).
+- Sin el divisor en GPIO7 la espalda no se duerme con el USB (queda el modo carga de la 3.8.2 por tensión subiendo).
+- Los 3 encendidos rápidos para emparejar solo cuentan arranques reales (no los despertares tras cargar).
+- Monitor: `INTERRUPTOR: reed no usado | USB: CONECTADO/no (GPIO7 … mV) | GPS: Pololu SHDN GPIO34 ENCENDIDO/apagado`.

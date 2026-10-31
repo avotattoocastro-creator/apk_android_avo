@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.12.0 (ESP-NOW) · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.13.0 (ESP-NOW) · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -89,7 +89,21 @@ static const uint32_t VEXT_DELAY_MS = 1000;
 // URTK1.2 board) wired to GPIO6. The line idles HIGH and is held HIGH during deep sleep (no edge → no false wake).
 // V3.11.0: GPIO6 = SHDN of the Pololu S7V8F3 that powers the ZED from the battery (HIGH = ZED on, LOW = 0 V).
 // It replaces the INT wire of 3.10.7 (the ZED INT pin must NOT be wired to GPIO6 any more).
-static const int ZED_INT_PIN = 6;   // V3.10.6: 1 s (the 10 s test of 3.10.5 did not change the boot loop: that one is hardware)
+// V3.13.0: SHDN of the Pololu moved to GPIO34: header pin 7 of the row Ve·GND·12·RX·TX·33·34·35·36…, between the ZED
+// wires on GPIO33 and GPIO35 (checked against the Heltec pin list). Not an RTC pin: held LOW in deep sleep with
+// gpio_hold_en + gpio_deep_sleep_hold_en (ESP32-S3: SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP).
+static const int ZED_INT_PIN = 34;
+// V3.13.0: USB charging. The Heltec has no "USB powered" pin (CP2102 + TP4054), so the 5V header pin (USB 5 V) goes
+// to GPIO7 through a divider: 5V ─ 10 kΩ ─ GPIO7 ─ 15 kΩ ─ GND (≈ 3.0 V with USB, 0 V without). USB present → the
+// whole back sleeps (ZED at 0 V, radio off, LEDs off) and only the battery charges; USB unplugged → GPIO7 LOW →
+// wakes (ext0) and works as usual. USER pressed within 3 s of USB being seen = WORKSHOP mode (stays awake with USB).
+// Without the divider GPIO7 reads 0 V (internal pull-down) and the back never sleeps for USB (the old 3.8.2 charge
+// mode by rising voltage is still there).
+static const int USB_SENSE_PIN = 7;
+static const uint16_t USB_SENSE_MV = 2000;      // above this on GPIO7 = USB 5 V present
+static bool s_usb_workshop = false;
+static uint16_t usb_sense_mv();
+static bool usb_present();
 static uint32_t s_vext_at = 0;
 static bool s_vext_pending = false;
 
@@ -202,7 +216,9 @@ static void print_status() {
   Serial.printf("  INTERRUPTOR: reed %s%s\n", s_reed.closed() ? "CERRADO (en el soporte)" : "ABIERTO",   // V3.10.3
                 s_reed.workshop() ? " | MODO TALLER: no se duerme" : (s_reed.closed() ? "" : " → se duerme"));
 #else
-  Serial.println("  INTERRUPTOR: reed no usado (V3.12: contactos pogo, con corriente = en el soporte del chaleco)");
+  Serial.printf("  INTERRUPTOR: reed no usado | USB: %s (GPIO7 %u mV)%s | GPS: Pololu SHDN GPIO34 %s\n",   // V3.13.0
+                usb_present() ? "CONECTADO" : "no", (unsigned)usb_sense_mv(), s_usb_workshop ? " MODO TALLER" : "",
+                s_zed_on ? "ENCENDIDO" : "apagado");
 #endif
   Serial.printf("  AHORRO: CPU %lu MHz | LoRa %s | potencia radio %d dBm%s\n", (unsigned long)getCpuFrequencyMhz(),   // V3.10.2
                 s_lora_asleep ? "dormida" : "NO dormida", (int)s_txp.dbm(), s_txp.level() == TxPowerPolicy::kLevels - 1 ? " (maxima)" : "");
@@ -335,10 +351,20 @@ static void zed_power_on() {
   Serial.println("[AVO ESPALDA] Vext encendido: el ZED tiene corriente");
 }
 
+// V3.13.0: USB 5 V present? (divider on GPIO7, internal pull-down so an unwired pin reads 0)
+static uint16_t usb_sense_mv() {
+  pinMode(USB_SENSE_PIN, INPUT_PULLDOWN);
+  uint32_t acc = 0;
+  for (int i = 0; i < 4; i++) acc += analogReadMilliVolts(USB_SENSE_PIN);
+  return (uint16_t)(acc / 4);
+}
+static bool usb_present() { return usb_sense_mv() > USB_SENSE_MV; }
+
 // V3.10.3: everything off and deep sleep until the reed closes again (capsule back in its support).
+// V3.13.0: used for USB charging: wakes when the USB 5 V disappears (GPIO7 LOW).
 static void go_to_sleep(const char* why) {
-  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS en reposo (orden UBX; sin corriente por GPIO6 = SHDN del S7V8F3), radio apagada.\n"
-                "[AVO ESPALDA] Se despierta al poner la capsula en el soporte (reed cerrado).\n", why);
+  Serial.printf("\n[AVO ESPALDA] A DORMIR (%s): GPS sin corriente (GPIO34 = SHDN del Pololu), radio apagada, LEDs apagados.\n"
+                "[AVO ESPALDA] Solo carga la bateria. Se despierta al desconectar el USB.\n", why);
   Serial.flush();
   if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
   // V3.10.8: software backup first (it is what saves if the ZED is still on 3V3); GPIO35 (ZED RX + white LED) ends
@@ -361,9 +387,9 @@ static void go_to_sleep(const char* why) {
 #if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
   gpio_deep_sleep_hold_en();
 #endif
-  esp_sleep_enable_ext0_wakeup((gpio_num_t)REED_PIN, 0);   // wake when the reed closes (LOW)
-  rtc_gpio_pullup_en((gpio_num_t)REED_PIN);
-  rtc_gpio_pulldown_dis((gpio_num_t)REED_PIN);
+  esp_sleep_enable_ext0_wakeup((gpio_num_t)USB_SENSE_PIN, 0);   // V3.13.0: wake when the USB 5 V goes away (LOW)
+  rtc_gpio_pullup_dis((gpio_num_t)USB_SENSE_PIN);                 // only the divider: ≈ 3.0 V with USB, 0 V without
+  rtc_gpio_pulldown_dis((gpio_num_t)USB_SENSE_PIN);
   esp_deep_sleep_start();
 }
 
@@ -434,8 +460,10 @@ void setup() {
   digitalWrite(ZED_INT_PIN, LOW);
   gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
   const bool woke_by_reed = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_EXT0;
-  if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)REED_PIN);
+  if (woke_by_reed) rtc_gpio_deinit((gpio_num_t)USB_SENSE_PIN);   // V3.13.0: ext0 is now the USB sense pin
+#if AVO_REED_SLEEP
   pinMode(REED_PIN, INPUT_PULLUP);
+#endif
   pinMode(PRG_PIN, INPUT_PULLUP);
   setCpuFrequencyMhz(CPU_MHZ);           // V3.10.2 (before Wi-Fi starts)
   s_lora_asleep = lora_sleep();          // V3.10.2
@@ -447,7 +475,20 @@ void setup() {
   analogSetPinAttenuation(VBAT_PIN, ADC_11db);
   // V3.10.3: capsule out of its support at power-up → sleep, unless USER is pressed within 3 s (workshop mode)
   delay(20);
-  if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: capsula en el soporte");
+  if (woke_by_reed) Serial.println("[AVO ESPALDA] despierta: USB desconectado");
+  // V3.13.0: USB connected at power-up / reset → only charging (deep sleep), unless USER within 3 s (workshop)
+  if (usb_present()) {
+    Serial.printf("[AVO ESPALDA] USB conectado (GPIO7 %u mV): a dormir para cargar. Pulsa USER en 3 s para el MODO TALLER.\n", (unsigned)usb_sense_mv());
+    uint32_t t0 = millis();
+    while (millis() - t0 < 3000 && digitalRead(PRG_PIN) == HIGH) delay(10);
+    if (digitalRead(PRG_PIN) == LOW) {
+      s_usb_workshop = true;
+      Serial.println("[AVO ESPALDA] MODO TALLER: no se duerme con el USB hasta reiniciar");
+      while (digitalRead(PRG_PIN) == LOW) delay(10);
+    } else if (usb_present()) {
+      go_to_sleep("USB conectado al arrancar");
+    }
+  }
 #if !AVO_REED_SLEEP
   s_reed.set_workshop(true);             // V3.10.9: reed ignored, the back never sleeps
   Serial.println("[AVO ESPALDA] V3.12: sin reed (contactos pogo): la placa solo tiene corriente en el soporte del chaleco");
@@ -497,7 +538,8 @@ void setup() {
 
   prefs.begin("avonow", false);
   uint8_t boots = prefs.getUChar("boots", 0);
-  boots = (uint8_t)((boots >= 3 ? 0 : boots) + 1);
+  // V3.13.0: only real power-ups count (a wake-up after USB charging is not one)
+  if (esp_reset_reason() == ESP_RST_POWERON) boots = (uint8_t)((boots >= 3 ? 0 : boots) + 1); else boots = 0;
   const bool pair_gesture = boots >= 3;
   prefs.putUChar("boots", pair_gesture ? 0 : boots);
   NowPeerRecord stored;
@@ -586,6 +628,14 @@ void loop() {
     } else nh = 0;
   }
   if (!s_boots_cleared && millis() >= QUICK_BOOT_MS) { s_boots_cleared = true; prefs.putUChar("boots", 0); }   // V3.12.0
+  static uint32_t last_usb = 0, usb_since = 0;   // V3.13.0: USB 5 V seen for 1.5 s → everything sleeps, only charging
+  if (!s_usb_workshop && millis() - last_usb >= 250) {
+    last_usb = millis();
+    if (usb_present()) {
+      if (!usb_since) usb_since = millis() | 1;
+      if (millis() - usb_since >= 1500) { prefs.putUChar("boots", 0); go_to_sleep("USB conectado: solo carga"); }
+    } else usb_since = 0;
+  }
   static uint32_t last_reed = 0;   // V3.10.3: capsule out of its support for 3 s → deep sleep
   if (millis() - last_reed >= 100) {
     last_reed = millis();
