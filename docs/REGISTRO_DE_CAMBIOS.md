@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-10-31 — BACK 3.13.11 (Heltec) — apagado real del Pololu con el USB
-**Autor:** Claude · Rama `fix/back-3-13-11-usb-pololu-off` (desde `fix/back-3-13-10-usb-umbral`) · **Commits:** pendiente · **CI:** pendiente
+**Autor:** Claude · Rama `fix/back-3-13-11-usb-pololu-off` (desde `fix/back-3-13-10-usb-umbral`) · **Commits:** `e097c69` (CI 41165198487 falló: saltos de línea sin escapar), `b54848c` · **CI:** [41165334025](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41165334025) (éxito: pruebas de ordenador + imagen de 917 696 B)
 **Qué cambia:** `AVO_USB_AUTO_OFF 1`. GPIO20 por unidad ADC2 propia (lecturas rechazadas = inválidas, se ignoran);
 confirmación de 2 s con ≥ 6 muestras válidas. USB conectado → UART del ZED cerrada, GPIO33/35 en alta impedancia,
 GPIO34 OUTPUT LOW, radio apagada, bucle de carga despierto (sin sueño profundo) que mantiene SHDN en LOW. USB retirado →
@@ -33,7 +33,7 @@ GPIO34 libre, 1,5 s y reinicio limpio (UART1 RX35/TX33, GNSS, NAV-PVT, ESP-NOW, 
 **Por qué:** petición del usuario (activar el apagado real con los umbrales de 100/50 mV).
 **Riesgo:** umbrales dentro de la zona imprecisa del ADC; un GPIO20 sin divisor real puede dar ~170 mV y dejar la espalda
 en modo carga sin USB.
-**Validación:** IMPLEMENTADO · **NO VERIFICADO**. VOUT no medida; detección USB por umbrales sin comprobar en la placa.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. VOUT no medida; detección USB por umbrales sin comprobar en la placa.
 
 ## 2026-10-31 — BACK 3.13.10 (Heltec) — diagnóstico de USB por umbrales en GPIO20
 **Autor:** Claude · Rama `fix/back-3-13-10-usb-umbral` (desde `fix/back-3-13-9-usb-gps-off`) · **Commits:** `b35e976` (CI 41164215802 falló: variable declarada tarde), `0302d6a` · **CI:** [41164361647](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41164361647) (éxito: pruebas de ordenador + imagen de 916 880 B)
