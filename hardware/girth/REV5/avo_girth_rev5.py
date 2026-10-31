@@ -32,6 +32,7 @@ FLOOR = 1.4                   # REV 5.9: 2,6 → 1,4 (sin el hueco de la bobina 
 COIL = dict(d=25.0, t=1.0)                         # bobina Qi redonda Ø25 (nuevo receptor); espesor (E)
 COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
+BAT_Y = 1.0   # REV 5.9.2: cuna de la batería 1,0 mm hacia +Y (deja sitio a la placa pogo sin tocar la ranura de la junta)
 TRAY_Z0, TRAY_T = 6.0, 1.0     # REV 5.9: 7,2 → 6,0 (misma holgura de 0,25 sobre la batería)
 TRAY_TOP = TRAY_Z0 + TRAY_T
 BED_TOP = TRAY_TOP + 1.0          # REV 5.7: cama maciza a ras de la cara superior de los PCB (C6 y Qi)
@@ -106,7 +107,7 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 #   PINES (va en el soporte): cuerpo 15,5 × 4,65 × 6,0; orejas 25 × 5,5 (r 2,75) entre 2,5 y 4,5 mm de la cara,
 #     agujeros Ø2 en ±9,75; pines Ø0,8 a paso 2,3 que sobresalen 1,5 por delante (muelle) y 1,5 por detrás.
 # Las dos caras quedan a ras (cápsula por abajo, soporte por arriba): al apoyar la cápsula los pines se comprimen.
-POGO = dict(y=-19.2,   # REV 5.9.2: −20,2 → −19,2 para entrar desde arriba sin tocar la ranura de la junta
+POGO = dict(y=-18.7,   # REV 5.9.2: −20,2 → −18,7: entra desde arriba y deja 0,8 de pared hasta la ranura de la junta
             pitch=2.3,
             f_l=17.1, f_w=6.25, f_t=3.5, f_bl=15.5, f_bw=4.65, f_bh=1.7, f_lip=0.0,  # placa (cara a ras del fondo)
             m_l=15.5, m_w=4.65, m_h=6.0, m_pin=1.5, m_tail=1.5,                  # cuerpo del lado de los pines
@@ -177,19 +178,19 @@ def pod_base():
     b = outer.cut(rrect(L - 2 * SEAL_IN, W - 2 * SEAL_IN, R - SEAL_IN, HB, z0=FLOOR))
     # REV 5.9: sin bobina Qi (la carga entra por los contactos pogo): fondo macizo
     bl, bw = BAT["l"] + 2 * G, BAT["w"] + 2 * G
-    cr = frame(0, 0, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
-    cr = cr.cut(box(bl / 2 + 0.5, -(bw / 2 - 4.0), FLOOR - 1, 2, 7.0, 10))   # REV 5.9: cables de la batería por +X/−Y
+    cr = frame(0, BAT_Y, FLOOR, bl, bw, 1.0, TRAY_Z0 - FLOOR - 0.05)
+    cr = cr.cut(box(bl / 2 + 0.5, BAT_Y - (bw / 2 - 4.0), FLOOR - 1, 2, 7.0, 10))   # REV 5.9: cables de la batería por +X/−Y
     b = b.union(cr)
     for x in (-15, 0, 15):
         for s in (-1, 1):
-            b = b.union(box(x, s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
+            b = b.union(box(x, BAT_Y + s * (bw / 2 - 0.15), FLOOR, 1.2, 0.3, BAT["t"]))
     # REV 5.9: hembra pogo en el fondo (sustituye al canal del reed). Alojamiento con reborde de 0,6 abajo y una copa
     # alrededor para sellar con epoxi por dentro.
     py, cl = POGO["y"], POGO["clear"]
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
     cw = POGO["cup_wall"]
     cup = rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0))
-    y_cr = -(BAT["w"] / 2 + G + 1.0)                                    # REV 5.9.2: cara exterior de la cuna de la batería
+    y_cr = BAT_Y - (BAT["w"] / 2 + G + 1.0)                                    # REV 5.9.2: cara exterior de la cuna de la batería
     b = b.union(cup.intersect(box(0, y_cr - 10 + 0.01, -1, 40, 20, 20)))  # del lado +Y hace de pared la propia cuna
     zfl = POGO["f_lip"] + POGO["f_bh"]                                  # REV 5.9.1: la base de la hembra apoya aquí
     ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
@@ -213,7 +214,7 @@ def pod_base():
         # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
         top = HMAG["skin"] + HMAG["n_base"] * HMAG["t"] + 0.1
         rec = cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1)
-        b = b.union(rec.cut(box(0, 0, FLOOR - 1, BAT["l"] + 2 * G, BAT["w"] + 2 * G, 10)))   # REV 5.9: el recrecido no pisa la batería
+        b = b.union(rec.cut(box(0, BAT_Y, FLOOR - 1, BAT["l"] + 2 * G, BAT["w"] + 2 * G, 10)))   # REV 5.9: el recrecido no pisa la batería
         b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, TRAY_Z0 - HMAG["skin"]))   # boca libre hasta arriba (corta la esquina de la cuna)
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
@@ -480,7 +481,7 @@ def components():
     for (x, y) in MAGS[1:]:
         mmags = mmags.union(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"]))
     return {
-        "bateria_LP403048": box(0, 0, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
+        "bateria_LP403048": box(0, BAT_Y, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
         "BNO085": bno,
         "pogo_hembra": _pogo_step()[0],
