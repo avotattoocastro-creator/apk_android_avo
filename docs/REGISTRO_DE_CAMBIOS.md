@@ -1117,11 +1117,11 @@ propio regulador desde la batería y apagado por pin.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO** (módulo aún sin montar).
 
 ## 2026-10-31 — BACK 3.13.0 (Heltec) — Pololu en GPIO34 y carga por USB con todo dormido
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `93cb8a9` · **CI:** [41150163565](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41150163565) (éxito)
 **Qué cambia:** SHDN del Pololu S7V8F3 de GPIO6 a **GPIO34** (pin entre los del ZED en 33 y 35, comprobado con la lista
 de pines de la Heltec Wireless Stick Lite V3). Detección del USB por el pin 5V con divisor 10 k / 15 k a **GPIO7** (antes
 reed): con USB la placa entra en sueño profundo con el ZED sin corriente, radio y LEDs apagados (solo carga) y se despierta
 por ext0 al desaparecer los 5 V. USER en 3 s = modo taller. Contador de encendidos rápidos solo con `ESP_RST_POWERON`.
 **Por qué:** el usuario quita el Qi y carga por el USB-C; pide que con el USB conectado solo cargue y que al desconectarlo
 se despierte todo. La Heltec (CP2102 + TP4054) no tiene ningún pin que indique USB: hace falta el divisor.
-**Validación:** IMPLEMENTADO · **NO VERIFICADO** en la placa.
+**Validación:** IMPLEMENTADO · COMPILADO-CI · **NO VERIFICADO** en la placa.
