@@ -9,14 +9,17 @@ namespace avo {
 static const uint8_t BACK_NAV_RATE_DEFAULT = 8;
 
 BackCore::BackCore(BackPlatform* p, const char* dev_id, uint8_t nav_rate_hz)
-    : p_(p), pair_(NowRole::BACK), dec_(on_chest_frame, this), zed_(this, nav_rate_hz ? nav_rate_hz : BACK_NAV_RATE_DEFAULT) {
+    : p_(p), pair_(NowRole::BACK), dec_(on_chest_frame, this), zed_(this, nav_rate_hz ? nav_rate_hz : BACK_NAV_RATE_DEFAULT),
+      girth_(this, dev_id ? dev_id : "", AVO_FW_VERSION, 0) {
   memset(dev_, 0, sizeof(dev_));
   strncpy(dev_, dev_id ? dev_id : "", sizeof(dev_) - 1);
   boot_id_ = 0;
 }
 
-void BackCore::begin(const NowPeerRecord& stored) {
+void BackCore::begin(const NowPeerRecord& stored, const uint8_t* girth_mac) {
   boot_id_ = p_->random32() | 1u;
+  girth_.set_boot_id(boot_id_);
+  girth_.begin(girth_mac);
   pair_.load(stored);
   if (stored.valid) p_->radio_set_peer(stored.mac);
   zed_.set_ubx_cb(on_ubx, this);
@@ -28,7 +31,13 @@ bool BackCore::chest_online() const {
 }
 
 // ------------------------------------------------------------------ radio in
+void BackCore::forward_imu(const uint8_t* payload, size_t n) {
+  if (pair_.paired() && chest_online()) queue_frame(FrameType::IMU_SAMPLE, 0, payload, n, true);
+}
+
 void BackCore::on_radio(const uint8_t mac[6], const uint8_t* d, size_t n, int8_t rssi) {
+  // V3.10.0: girth unit packets (own magic) first
+  if (girth_.on_radio(mac, d, n, rssi, p_->now_ms(), pairing_open())) return;
   NowHeader h;
   const uint8_t* body;
   if (!now_parse(d, n, &h, &body)) { st_.rx_bad++; return; }
@@ -141,11 +150,26 @@ void BackCore::ubx(uint8_t cls, uint8_t id, const uint8_t* pl, uint16_t plen) {
     st_.nav_pvt++;
     rate_n_++;
     g.back_rx_ms = now;
+    {  // V3.9.0: RTK FIX tracking (time in FIX/FLOAT, FIX losses, time to first FIX)
+      uint8_t carr = g.carr_soln();
+      if (last_pvt_ms_ && now - last_pvt_ms_ < 2000) {
+        if (last_carr_ == 2) fixed_ms_ += now - last_pvt_ms_;
+        else if (last_carr_ == 1) float_ms_ += now - last_pvt_ms_;
+      }
+      if (last_carr_ == 2 && carr != 2 && fix_lost_ < 0xFFFF) fix_lost_++;
+      if (carr == 2 && ttff_fix_s_ == 0xFFFF) ttff_fix_s_ = (uint16_t)(now / 1000 > 0xFFFE ? 0xFFFE : now / 1000);
+      last_carr_ = carr;
+      last_pvt_ms_ = now;
+    }
     g.pps_locked = 0;
     g.nav_rate_hz = zed_.rate_applied() ? zed_.nav_rate() : (uint8_t)((rate_x10_ + 5) / 10);
     uint8_t b[GNSS_SAMPLE_V1_LEN + 8];
     size_t n = encode_gnss(g, b, sizeof(b));
     if (n && pair_.paired() && chest_online()) { queue_frame(FrameType::GNSS_SAMPLE, 0, b, n, true); st_.gnss_sent++; }   // position: send at once
+  } else if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SAT) {
+    ubx_quality_nav_sat(pl, plen, &q_);
+  } else if (cls == UBX_CLS_NAV && id == UBX_ID_NAV_SIG) {
+    if (ubx_quality_nav_sig(pl, plen, &q_)) q_ms_ = now | 1;
   } else if (cls == UBX_CLS_RXM && id == UBX_ID_RXM_RTCM) {
     RxmRtcm r;
     if (ubx_decode_rxm_rtcm(pl, plen, &r)) {
@@ -202,7 +226,10 @@ BackStatus BackCore::status() const {
   s.uptime_ms = p_->now_ms();
   s.zed_state = zed_.status_code();
   s.pps_state = 0;          // PPS not wired on this back
-  s.girth_connected = 0;    // no girth IMU on this back
+  s.girth_connected = girth_.connected(p_->now_ms()) ? 1 : 0;   // V3.10.0 girth unit over ESP-NOW
+  s.girth_rssi = girth_.rssi();
+  s.girth_pkts = girth_.rx_packets();
+  s.girth_lost = girth_.lost();
   s.rtcm_rx_bytes = st_.rtcm_rx_bytes;
   s.rtcm_to_zed_bytes = st_.rtcm_to_zed;
   s.rtcm_frames_ok = obs_.stats().frames_ok;
@@ -210,7 +237,7 @@ BackStatus BackCore::status() const {
   s.rxm_rtcm_used = st_.rxm_used;
   s.rxm_rtcm_failed = st_.rxm_failed;
   s.uart_crc_err = dec_.stats().crc_err + dec_.stats().hdr_crc_err;
-  s.back_batt_mv = 0;
+  s.back_batt_mv = batt_mv_;   // V3.8.1: measured by the platform (0 = unknown)
   s.gnss_rate_hz_x10 = rate_x10_;
   s.v2 = true;
   s.zed_baud = zed_.baud();
@@ -224,12 +251,21 @@ BackStatus BackCore::status() const {
   s.link_rssi = st_.rssi;
   s.ubx_frames = zed_.stream().frames();
   s.nmea_sentences = zed_.stream().nmea_sentences();
+  s.v3 = true;
+  s.sv_tracked = q_.sv_tracked; s.sv_used = q_.sv_used;
+  s.sig_tracked = q_.sig_tracked; s.sig_used = q_.sig_used; s.sig_cr_used = q_.sig_cr_used; s.sig_corr = q_.sig_corr;
+  s.sig_l2 = q_.sig_l2; s.sig_l2_used = q_.sig_l2_used; s.sig_weak = q_.sig_weak;
+  s.cno_mean = q_.cno_mean; s.cno_min = q_.cno_min; s.cno_max = q_.cno_max;
+  uint32_t qa = q_ms_ ? (p_->now_ms() - q_ms_) / 1000 : 255;
+  s.quality_age_s = (uint8_t)(qa > 254 ? 255 : qa);
+  s.quality_mon = zed_.monitor_state();
+  s.fix_lost = fix_lost_; s.ttff_fix_s = ttff_fix_s_; s.fixed_ms = fixed_ms_; s.float_ms = float_ms_;
   return s;
 }
 
 void BackCore::send_status() {
   BackStatus s = status();
-  uint8_t b[BACK_STATUS_V2_LEN + 8];
+  uint8_t b[BACK_STATUS_V3_LEN + 8];
   size_t n = encode_status(s, b, sizeof(b));
   if (n) queue_frame(FrameType::STATUS, 0, b, n, false);
 }
@@ -256,6 +292,7 @@ void BackCore::tick() {
     rate_n_ = 0;
     rate_t0_ = now;
   }
+  girth_.tick(now, chest_online());   // V3.10.0
   if (!pair_.paired()) return;
   if (now - last_hb_ >= 1000) {
     last_hb_ = now;
