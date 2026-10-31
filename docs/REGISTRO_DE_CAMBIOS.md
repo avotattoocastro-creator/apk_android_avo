@@ -1145,7 +1145,7 @@ durante el sueño. El monitor muestra `GPIO20 ALTO/bajo`.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO**.
 
 ## 2026-10-31 — BACK 3.13.3 (Heltec) — corte por batería baja, USB solo en GPIO20
-**Autor:** Claude · Rama `feature/avo-back-v4`
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `69f851c` · **CI:** [41153737708](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41153737708) (éxito)
 **Qué cambia:** antes de arrancar la radio, batería en reposo < 3,30 V sin USB → sueño profundo (ZED sin corriente),
 reintento cada 60 s, vuelve por encima de 3,45 V (estado en RTC). Detección del USB solo por GPIO20 digital; se quita la
 lectura ADC de GPIO7. Línea de arranque con la batería y el nivel de GPIO20.
