@@ -31,7 +31,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - Enlace: la espalda guardada AC:A7:04:06:CD:24 no da ACK; responde otra espalda, AC:A7:04:06:C0:B4, que la cincha ignora porque no es la guardada. Hay que emparejar de nuevo (BOOT 5 s en la cincha). Enlace NO VERIFICADO todavía.
 **Qué cambia:** los lotes usan el periodo real sacado de las marcas de tiempo (0.4.0 escribía 10 000 µs, pero el BNO da ~8 ms); se muestran los periodos que confirma el BNO; sin aviso de ISR al arrancar.
 **No se ha tocado:** espalda, pecho, app, particiones, actualización.
-**Validación:** CI pendiente de esta entrada (ver el siguiente commit del bot). Enlace y datos en la sesión del pecho: NO VERIFICADO.
+**CI:** run 41215234946 (éxito). Enlace y datos en la sesión del pecho: NO VERIFICADO.
 
 ---
 
