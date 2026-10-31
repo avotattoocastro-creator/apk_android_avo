@@ -181,14 +181,18 @@ public sealed partial class MainViewModel
         {
             var e = s.Engine;
             BiomechStatus = $"{e.FusionSummary}. Índices exploratorios de IMU sin calibrar: no son diagnóstico clínico, carga de extremidad ni lesión.";
+            if (e.Metric("cadencia_media_imu0") is null)
+                BiomechStatus += " La cincha tiene datos, pero el motor no ha encontrado ciclos de marcha (paso, trote o galope): " +
+                                 "los índices aparecen con el caballo en movimiento al menos unos segundos seguidos.";
             foreach (var id in e.GirthImu.Distinct().OrderBy(x => x))
             {
                 string n = ImuTimeline.SensorName((byte)id);
-                BiomechMetrics.Add(new($"{n} · cadencia", Core.TimeText.Num(e.Metric($"cadencia_media_imu{id}"), "0", " ciclos/min")));
-                BiomechMetrics.Add(new($"{n} · correlación entre ciclos", Core.TimeText.Num(e.Metric($"correlacion_entre_ciclos_imu{id}"), "0.000")));
-                BiomechMetrics.Add(new($"{n} · CV de intervalos", Core.TimeText.Num(e.Metric($"variabilidad_intervalos_imu{id}"), "0.000")));
-                BiomechMetrics.Add(new($"{n} · CV de amplitud", Core.TimeText.Num(e.Metric($"regularidad_amplitud_cv_imu{id}"), "0.000")));
-                BiomechMetrics.Add(new($"{n} · estabilidad espectral", Core.TimeText.Num(e.Metric($"estabilidad_espectral_imu{id}"), "0.000")));
+                const string none = "sin ciclos de marcha";
+                BiomechMetrics.Add(new($"{n} · cadencia", Core.TimeText.Num(e.Metric($"cadencia_media_imu{id}"), "0", " ciclos/min", none)));
+                BiomechMetrics.Add(new($"{n} · correlación entre ciclos", Core.TimeText.Num(e.Metric($"correlacion_entre_ciclos_imu{id}"), "0.000", "", none)));
+                BiomechMetrics.Add(new($"{n} · CV de intervalos", Core.TimeText.Num(e.Metric($"variabilidad_intervalos_imu{id}"), "0.000", "", none)));
+                BiomechMetrics.Add(new($"{n} · CV de amplitud", Core.TimeText.Num(e.Metric($"regularidad_amplitud_cv_imu{id}"), "0.000", "", none)));
+                BiomechMetrics.Add(new($"{n} · estabilidad espectral", Core.TimeText.Num(e.Metric($"estabilidad_espectral_imu{id}"), "0.000", "", none)));
             }
             foreach (var g in e.SymmetryGroups) SymmetryRows.Add(g);
             foreach (var c in e.SymmetryControls) SymmetryControls.Add(c);
@@ -210,7 +214,12 @@ public sealed partial class MainViewModel
     {
         var s = Selected;
         if (s is null || s.Imu.Channels.Count == 0) { ImuWindowSeries = []; return; }
-        double c = double.IsFinite(CursorTime) ? CursorTime : s.Timeline.T[0] + 60;
+        // Without a cursor (or with the cursor outside the girth data) the window goes to the moment of most movement of the
+        // girth, not to a fixed second: a 58 s session showed nothing with the old "start + 60 s".
+        var ch0 = s.Imu.Channels[0];
+        double tMin = ch0.T[0], tMax = ch0.T[^1];
+        double c = double.IsFinite(CursorTime) && CursorTime >= tMin && CursorTime <= tMax ? CursorTime : MostMovement(ch0);
+        c = Math.Clamp(c, tMin + Math.Min(2, (tMax - tMin) / 2), tMax - Math.Min(2, (tMax - tMin) / 2));
         double a = c - 2, b = c + 2;
         var list = new List<ChartSeries>();
         foreach (var ch in s.Imu.Channels)
@@ -223,5 +232,15 @@ public sealed partial class MainViewModel
             list.Add(new ChartSeries { Name = ch.Name, X = x, Y = y, Color = HorseDiagram.SensorColor(ch.ImuId), Thickness = 1.4, Unit = "g", Format = "0.00" });
         }
         ImuWindowSeries = list;
+    }
+
+    /// <summary>Time of the largest deviation of |a| from its median (the most visible movement of the girth).</summary>
+    private static double MostMovement(ImuTimeline.Channel ch)
+    {
+        var mag = ch.AccelMagnitudeG();
+        if (mag.Length == 0) return 0;
+        double med = Stats.Median(mag), best = -1; int k = mag.Length / 2;
+        for (int i = 0; i < mag.Length; i++) { double d = Math.Abs(mag[i] - med); if (d > best) { best = d; k = i; } }
+        return ch.T[k];
     }
 }
