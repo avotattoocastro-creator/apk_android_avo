@@ -1,5 +1,15 @@
 # AVO GIRTH V0.4.x — cincha XIAO ESP32-C6 + BNO085
 
+## Estado tras la prueba de 0.4.2 (31/10/2026, 16:51)
+**PROBADO FÍSICAMENTE:**
+- **Enlace con la espalda (BACK 3.13.11):**
+  - re-emparejamiento automático con C0:B4 y estado CONFIRMADA;
+  - la espalda confirma 1352 paquetes, 0 perdidos;
+  - −60/−66 dBm con la antena interna.
+- **IMU:** ~125 Hz, 0 muestras perdidas, 0 errores I²C, periodo estable de 7978 µs.
+
+**Falta:** ver los datos de IMU en una sesión del pecho y en la app.
+
 ## 0.4.2 (31/10/2026) — tras la prueba de 0.4.1 en el hardware
 - **Resultado de 0.4.1 (monitor del usuario):**
   - IMU estable, de 124,8 a 126,0 Hz, sin pérdidas del sensor, |acc| ≈ 9,9 m/s²;

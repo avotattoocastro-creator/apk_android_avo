@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA: IMU y enlace con la espalda funcionando
+**Autor:** Claude · Evidencia: monitor serie de la cincha (captura del usuario, 16:51)
+- **Enlace PROBADO FÍSICAMENTE:**
+  - la cincha se re-emparejó sola con la espalda AC:A7:04:06:C0:B4 (BACK 3.13.11);
+  - estado CONFIRMADA con 40 PING recibidos;
+  - la espalda confirma 1352 paquetes y **0 perdidos**;
+  - RSSI −65/−66 dBm en la cincha y −60/−61 dBm en la espalda; antena interna.
+- **IMU PROBADA FÍSICAMENTE:**
+  - BNO085 en 0x4A, 124,8–125,9 Hz, 7656 muestras;
+  - 0 perdidas en el sensor, 0 en la cola y 0 errores I²C;
+  - periodo de 7977–7979 µs, estable;
+  - 1376 lotes enviados, sin ninguno sin confirmar;
+  - en reposo, |acc| ≈ 9,77 m/s² y aceleración lineal ≈ 0.
+- **Pendiente:**
+  - comprobar en una sesión del pecho que se guardan los IMU_SAMPLE (fmt 0 y fmt 1) y que la app los dibuja;
+  - la precisión del giroscopio sale 0 en reposo (ver si sube al moverlo);
+  - batería (divisor no montado) y reposo (contacto del pogo).
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.2 (XIAO ESP32-C6) — re-emparejamiento automático, monitor sin bloqueo, periodo estable
 **Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
 **Prueba física de 0.4.1 (monitor del usuario):**
