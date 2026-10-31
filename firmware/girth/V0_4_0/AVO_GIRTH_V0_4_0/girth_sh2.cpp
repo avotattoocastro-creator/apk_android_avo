@@ -157,7 +157,7 @@ size_t encode_batch(uint8_t fmt, const BatchMeta& m, const Sample* s, uint8_t co
   put32(out + 8, s[0].t_us);
   put16(out + 12, m.period_us);
   out[14] = 0;                  // sync_state: none (the back stamps its own receive time)
-  out[15] = 0;
+  out[15] = UNITS_BNO085_Q;     // 0.4.3: units declared (was "reserved" = 0)
   put32(out + 16, 0);           // back_rx_ms (filled by the back)
   put32(out + 20, 0);           // girth_to_back_us (not estimated on the girth)
   uint8_t* p = out + 24;

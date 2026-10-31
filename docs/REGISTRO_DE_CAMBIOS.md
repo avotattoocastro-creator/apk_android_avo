@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-10-31 — Cincha GIRTH 0.4.3 — las muestras de IMU declaran sus unidades
+**Autor:** Claude · Rama `feature/girth-fw-0-4-0-bno085`
+**Qué cambia:**
+- el byte 15 de la cabecera IMU_SAMPLE («reserved» en avo_payloads.h, que la espalda conserva al reenviar) vale 1, que significa «unidades del BNO085»: acc y aceleración lineal Q8 m/s², giro Q9 rad/s, mag Q4 µT y cuaternión Q14;
+- con 0 (cinchas anteriores o REV B), las apps siguen usando su escala nominal.
+**Por qué:** la app de Windows dibujaba la IMU con la escala nominal del LSM6 (±8 g): 1 g del BNO085 (2511 LSB) salía como 0,61 g.
+**No se ha tocado:** espalda, pecho y formato de la trama (mismo tamaño y mismos campos).
+**Validación:** host 40/40 (la prueba comprueba que la espalda conserva el byte). **CI:** run 41217466325 (éxito). App de Windows: rama `feature/windows-girth-bno-units`, CI run 41217576644 (éxito). NO VERIFICADO en el hardware.
+
+---
+
 ## 2026-10-31 — Cincha GIRTH 0.4.2 — PRUEBA FÍSICA de extremo a extremo: datos de la cincha en la sesión
 **Autor:** Claude · Evidencia: foto de Windows Advanced Analysis V2 PRO, «Entrenamiento 31/10/2026 16:52», HORSE_001
 - **PROBADO FÍSICAMENTE:** la gráfica «IMU cincha – aceleración vertical z» muestra la traza «Central» (imu_id 0) durante toda la sesión, con picos al mover la cincha (00:39–00:42). Cadena completa: BNO085 → cincha 0.4.2 → espalda 3.13.11 → pecho 3.7.6 → archivo → app de Windows.

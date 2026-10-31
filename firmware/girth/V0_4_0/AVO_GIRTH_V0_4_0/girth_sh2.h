@@ -98,7 +98,11 @@ class Assembler {
 static const uint8_t FMT_9AXIS = 0;
 static const uint8_t FMT_FUSED = 1;
 static const size_t FMT0_LEN = 18, FMT1_LEN = 14;
-static const uint8_t BATCH_MAX = 10;   // the back accepts up to 24 + 10 × 18 = 204 bytes of IMU body
+static const uint8_t BATCH_MAX = 10;
+// 0.4.3: units of the samples, in the header byte that avo_payloads.h calls "reserved" (offset 15; the back keeps it):
+//   0 = not declared (older girths, REV B: the receivers use their nominal scale)
+//   1 = BNO085 fixed point: acc and linear acc Q8 m/s², gyro Q9 rad/s, mag Q4 µT, quaternion Q14
+static const uint8_t UNITS_BNO085_Q = 1;   // the back accepts up to 24 + 10 × 18 = 204 bytes of IMU body
 
 struct BatchMeta {
   uint8_t girth_id = 0, imu_id = 0;

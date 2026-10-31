@@ -161,7 +161,7 @@ static void test_hub() {
   if (io.fwd.size() == 2) {
     avo::ImuBatchHeader ih;
     CHECK(avo::decode_imu_header(io.fwd[0].data(), io.fwd[0].size(), &ih) && ih.fmt == 0 && ih.count == 10 && ih.girth_seq == 7 &&
-          ih.girth_t0_us == 5000000 && ih.period_us == 10000 && ih.back_rx_ms == 1010, "fmt 0 header after the back");
+          ih.girth_t0_us == 5000000 && ih.period_us == 10000 && ih.back_rx_ms == 1010 && ih.reserved == UNITS_BNO085_Q, "fmt 0 header after the back (units byte kept by the back)");
     CHECK(io.fwd[0].size() == b0 && !memcmp(io.fwd[0].data() + 24, body0 + 24, b0 - 24), "fmt 0 samples untouched");
     const uint8_t* p = io.fwd[0].data() + 24 + 9 * 18;   // last sample: gyro x = 9 at offset 6
     CHECK(p[4] == (2511 & 0xFF) && p[6] == 9, "fmt 0 sample layout ax ay az gx ...");
