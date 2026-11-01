@@ -48,7 +48,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Archivos:** `ipad/**`, `.github/workflows/build-avo-ipad.yml`.
 **No se ha tocado:** `windows/`, Android, firmware y motor (solo se compilan).
 **Validación:** COMPILADO / CI run 41297030454 (`commit` de la rama): compilación, 51 pruebas unitarias en verde (formatos, seguridad, algoritmos, vectores del reloj, Wi‑Fi simulado, motor, sesiones DEMO) y 32 capturas. **NO VERIFICADO** en un iPad real, con el reloj por Bluetooth o Wi‑Fi, ni con sesiones reales.
-**Pendiente:** añadir los secretos de App Store Connect para TestFlight, probar en el iPad, probar la descarga Wi‑Fi con un pecho 3.7.4 o posterior, e integrar en develop.
+**TestFlight:** compilación 1.0.0 (8) firmada con Xcode 26.6 y subida a App Store Connect (`org.avoperformance.horse.ipad`, equipo 4J2D6P5BJX), run 41307176561, 01/11/2026 13:40.
+**Pendiente:** probar en el iPad, probar la descarga Wi‑Fi con un pecho 3.7.4 o posterior, e integrar en develop.
 
 ## 2026-10-31 — Windows V2 PRO — geocercas, líneas de salida y meta con sentido, y envío al reloj por Bluetooth
 **Autor:** Claude · **Rama:** `feature/windows-advanced-analysis`
