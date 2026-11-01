@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — líneas de salida y meta en el mapa, zonas arrastrables e integración en `feature/ipad-app`
+**Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → **`feature/ipad-app`** (avance rápido, sin cambios de otros autores desde `babaf8c`) · **Commits:** `78ed42c`, `d3b038d` · **CI:** iPad run 41343000760 ✅ (83 pruebas unitarias; capturas)
+**Qué cambia:**
+- **Mapa de Análisis:** líneas de salida (verde) y meta (roja) de las correcciones, con una bandera y el nombre, y una **flecha hacia el lado por el que cuenta el cruce**. Sin flecha si el sentido es AMBOS. Archivos: `MapCourseLine`, `CourseLineOverlay` y `CourseLabelAnnotation` en `MapKitRoute.swift`.
+- **Perfil de velocidad:** **asas arrastrables** en los bordes de la fase de trabajo (fila baja) y de cada repetición (fila alta).
+  - Al arrastrar, el cursor se mueve (el mapa sigue al caballo) y aparece la hora.
+  - Al soltar, se guarda la corrección y el motor vuelve a analizar.
+  - Archivos: `SyncHandle`, `SyncHandleLayer` y `CorrectionsModel.handles/moveHandle`.
+  - Solo las asas reciben los toques; el resto de la gráfica mantiene el cursor, el rango y el zoom.
+- **Prueba unitaria:** dirección de la flecha (DCHA_A_IZQ con A al oeste y B al este → norte) y sin flecha con AMBOS.
+**Validación:** IMPLEMENTADO · CI ✅ · captura del simulador con las asas sobre las franjas · **NO VERIFICADO** en el iPad real.
+**Pendiente:** Windows y Android.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — navegación reorganizada y «Análisis» con zonas editables (+ motor: correcciones manuales)
 **Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` (sale de `feature/ipad-app` `babaf8c` + `feature/avo-training-analytics`) · **Commits:** `008443c`, `3e5045f`, `4287548` · **CI:** iPad run 41338103300 ✅ (compilación, 83 pruebas unitarias, capturas; falla la captura de Inicio en horizontal, que no ha cambiado) · motor run 41337324883 ✅
 **Qué cambia (petición del usuario con una foto de la pantalla):**
