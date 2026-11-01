@@ -59,11 +59,11 @@ enum AvoFormat {
 
     static func f(_ x: Double, _ decimals: Int) -> String {
         guard x.isFinite else { return "—" }
-        return String(format: "%.\(decimals)f", locale: es, x)
+        return String(format: "%.\(decimals)f", x).replacingOccurrences(of: ".", with: ",")
     }
     static func inv(_ x: Double, _ decimals: Int) -> String {
         guard x.isFinite else { return "" }
-        return String(format: "%.\(decimals)f", locale: invariant, x)
+        return String(format: "%.\(decimals)f", x)
     }
     /// Shortest round-trip invariant representation (C# double.ToString("R", InvariantCulture)).
     static func invR(_ x: Double) -> String {

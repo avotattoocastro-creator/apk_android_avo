@@ -1,0 +1,550 @@
+import SwiftUI
+import UIKit
+import MapKit
+
+/// One-shot command for a map (zoom buttons, fit). A new `id` triggers it once.
+struct RouteMapCommand: Equatable {
+    enum Kind: Equatable { case none, zoomIn, zoomOut, fit }
+    var id: Int = 0
+    var kind: Kind = .none
+
+    func next(_ kind: Kind) -> RouteMapCommand { RouteMapCommand(id: id + 1, kind: kind) }
+}
+
+/// MKMapView wrapper = port of Windows Controls/MapControl.cs: Esri imagery / hybrid tiles cached on disk, offline vector
+/// mode (dark grid, route only), coloured route, dimmed route outside the selected range, dashed signal losses, start/end
+/// and session markers, cursor marker following the shared cursor, tap = nearest route point.
+struct MapKitRoute: UIViewRepresentable {
+    var data: RouteRenderData?
+    var provider: MapProvider
+    var tileCacheDir: String
+    var cursorTime: Double
+    var rangeStart: Double
+    var rangeEnd: Double
+    var showMarkers: Bool
+    var fitPadding: UIEdgeInsets = UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
+    var home: CLLocationCoordinate2D
+    var command: RouteMapCommand = RouteMapCommand()
+    var onTap: (Double) -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> RouteMapView {
+        let map = RouteMapView(frame: .zero)
+        map.delegate = context.coordinator
+        map.overrideUserInterfaceStyle = .dark
+        map.pointOfInterestFilter = .excludingAll
+        map.showsCompass = true
+        map.showsScale = true
+        map.isRotateEnabled = false
+        map.isPitchEnabled = false
+        map.backgroundColor = UIColor(red: 0x0B / 255.0, green: 0x0C / 255.0, blue: 0x10 / 255.0, alpha: 1)
+        map.cameraZoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 120)
+        let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
+        tap.numberOfTapsRequired = 1
+        map.addGestureRecognizer(tap)
+        context.coordinator.map = map
+        context.coordinator.lastCommandId = command.id
+        context.coordinator.onTap = onTap
+        context.coordinator.applyProvider(provider, cacheDir: tileCacheDir)
+        context.coordinator.home = home
+        context.coordinator.fitPadding = fitPadding
+        map.pendingFit = { [weak coordinator = context.coordinator] in coordinator?.fit(animated: false) }
+        return map
+    }
+
+    func updateUIView(_ map: RouteMapView, context: Context) {
+        let c: Coordinator = context.coordinator
+        c.onTap = onTap
+        c.home = home
+        c.fitPadding = fitPadding
+        c.applyProvider(provider, cacheDir: tileCacheDir)
+        c.applyRoute(data)
+        c.applyMarkers(showMarkers)
+        c.applyRange(rangeStart, rangeEnd)
+        c.applyCursor(cursorTime)
+        if command.id != c.lastCommandId {
+            c.lastCommandId = command.id
+            switch command.kind {
+            case .zoomIn: c.zoom(by: 0.5)
+            case .zoomOut: c.zoom(by: 2)
+            case .fit: c.fit(animated: true)
+            case .none: break
+            }
+        }
+    }
+
+    final class Coordinator: NSObject, MKMapViewDelegate {
+        weak var map: RouteMapView?
+        var onTap: ((Double) -> Void)?
+        var home: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 43.45, longitude: -3.46)
+        var fitPadding: UIEdgeInsets = UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
+        var lastCommandId: Int = 0
+
+        private var provider: MapProvider? = nil
+        private var tileOverlays: [MKTileOverlay] = []
+        private var routeOverlay: RouteOverlay? = nil
+        private var routeRenderer: RouteOverlayRenderer? = nil
+        private var dataId: UUID? = nil
+        private var sessionKey: String? = nil
+        private var data: RouteRenderData? = nil
+        private var markerAnnotations: [RouteMarkerAnnotation] = []
+        private var markersShown: Bool = true
+        private var cursor: RouteMarkerAnnotation? = nil
+        private var cursorIndex: Int = -2
+        private var rangeLo: Double = .nan
+        private var rangeHi: Double = .nan
+
+        // ------------------------------------------------------------ base layer
+        func applyProvider(_ p: MapProvider, cacheDir: String) {
+            guard let map = map, p != provider else { return }
+            provider = p
+            map.removeOverlays(tileOverlays)
+            var layers: [MKTileOverlay] = []
+            switch p {
+            case .esriSatellite:
+                layers = [RouteEsriTileOverlay(layer: "World_Imagery", cacheDir: cacheDir)]
+            case .esriHybrid:
+                layers = [RouteEsriTileOverlay(layer: "World_Imagery", cacheDir: cacheDir),
+                          RouteEsriTileOverlay(layer: "Reference/World_Transportation", cacheDir: cacheDir),
+                          RouteEsriTileOverlay(layer: "Reference/World_Boundaries_and_Places", cacheDir: cacheDir)]
+            case .vectorOffline:
+                layers = [RouteOfflineGridOverlay()]
+            }
+            for (k, o) in layers.enumerated() { map.insertOverlay(o, at: k, level: .aboveLabels) }
+            tileOverlays = layers
+        }
+
+        // ------------------------------------------------------------ route
+        func applyRoute(_ d: RouteRenderData?) {
+            guard let map = map else { return }
+            if d?.id == dataId { return }
+            dataId = d?.id
+            data = d
+            if let o = routeOverlay { map.removeOverlay(o) }
+            routeOverlay = nil
+            routeRenderer = nil
+            map.removeAnnotations(markerAnnotations)
+            markerAnnotations = []
+            if let c = cursor { map.removeAnnotation(c) }
+            cursor = nil
+            cursorIndex = -2
+            guard let d = d else {
+                if sessionKey != nil || !map.didInitialFit {
+                    sessionKey = nil
+                    fit(animated: false)
+                }
+                return
+            }
+            let o = RouteOverlay(data: d)
+            routeOverlay = o
+            map.addOverlay(o, level: .aboveLabels)
+            for m in d.markers {
+                let a = RouteMarkerAnnotation(kind: m.kind == .start ? .start : (m.kind == .end ? .end : .marker))
+                a.coordinate = m.coordinate
+                a.title = m.title
+                markerAnnotations.append(a)
+            }
+            if markersShown { map.addAnnotations(markerAnnotations) }
+            // a new session fits the view; a new colour mode of the same session keeps the user's view
+            if d.sessionKey != sessionKey || !map.didInitialFit {
+                sessionKey = d.sessionKey
+                fit(animated: false)
+            }
+            rangeLo = .nan
+            rangeHi = .nan
+        }
+
+        func applyMarkers(_ show: Bool) {
+            guard let map = map, show != markersShown else { return }
+            markersShown = show
+            if show { map.addAnnotations(markerAnnotations) } else { map.removeAnnotations(markerAnnotations) }
+        }
+
+        func applyRange(_ a: Double, _ b: Double) {
+            let ranged: Bool = a.isFinite && b.isFinite && abs(b - a) > 0.5
+            let lo: Double = ranged ? min(a, b) : .nan
+            let hi: Double = ranged ? max(a, b) : .nan
+            let same: Bool = (lo == rangeLo || (lo.isNaN && rangeLo.isNaN)) && (hi == rangeHi || (hi.isNaN && rangeHi.isNaN))
+            if same { return }
+            rangeLo = lo
+            rangeHi = hi
+            guard let d = data else { return }
+            let chunks: [RouteChunk]? = ranged ? d.rangeChunks(lo, hi) : nil
+            if let r = routeRenderer {
+                r.setRange(chunks)
+            } else if let o = routeOverlay {
+                o.pendingRange = chunks
+            }
+        }
+
+        func applyCursor(_ time: Double) {
+            guard let map = map else { return }
+            let i: Int = data?.indexAt(time) ?? -1
+            if i == cursorIndex { return }
+            cursorIndex = i
+            guard let d = data, i >= 0, i < d.points.count else {
+                if let c = cursor { map.removeAnnotation(c) }
+                cursor = nil
+                return
+            }
+            let coord: CLLocationCoordinate2D = d.points[i].coordinate
+            if let c = cursor {
+                c.coordinate = coord
+            } else {
+                let c = RouteMarkerAnnotation(kind: .cursor)
+                c.coordinate = coord
+                cursor = c
+                map.addAnnotation(c)
+            }
+        }
+
+        // ------------------------------------------------------------ view
+        func fit(animated: Bool) {
+            guard let map = map else { return }
+            if map.bounds.width < 10 || map.bounds.height < 10 { map.fitWanted = true; return }
+            map.fitWanted = false
+            map.didInitialFit = true
+            if let d = data {
+                var r: MKMapRect = d.routeRect
+                if r.width < 60 && r.height < 60 { r = r.insetBy(dx: -300, dy: -300) }
+                let pad: UIEdgeInsets = clampedPadding(map)
+                map.setVisibleMapRect(r, edgePadding: pad, animated: animated)
+            } else {
+                // No route: the usual training area (Windows: Playa del Regatón at zoom 14.5).
+                let region = MKCoordinateRegion(center: home, latitudinalMeters: 2200, longitudinalMeters: 2200)
+                map.setRegion(region, animated: animated)
+            }
+        }
+
+        private func clampedPadding(_ map: MKMapView) -> UIEdgeInsets {
+            var p: UIEdgeInsets = fitPadding
+            let w: CGFloat = map.bounds.width
+            let h: CGFloat = map.bounds.height
+            if p.left + p.right > w * 0.7 { p.left = 20; p.right = 20 }
+            if p.top + p.bottom > h * 0.7 { p.top = 20; p.bottom = 20 }
+            return p
+        }
+
+        func zoom(by factor: Double) {
+            guard let map = map else { return }
+            let v: MKMapRect = map.visibleMapRect
+            let w: Double = v.width * factor
+            let h: Double = v.height * factor
+            let r = MKMapRect(x: v.midX - w / 2, y: v.midY - h / 2, width: w, height: h)
+            map.setVisibleMapRect(r, animated: true)
+        }
+
+        @objc func handleTap(_ g: UITapGestureRecognizer) {
+            guard let map = map, let d = data, g.state == .ended else { return }
+            let pt: CGPoint = g.location(in: map)
+            let coord: CLLocationCoordinate2D = map.convert(pt, toCoordinateFrom: map)
+            let mp: MKMapPoint = MKMapPoint(coord)
+            let zoomScale: Double = map.bounds.width > 0 ? Double(map.bounds.width) / map.visibleMapRect.width : 1
+            let maxD: Double = 44 / max(zoomScale, 1e-12)
+            let i: Int = d.nearestIndex(to: mp, maxDistance: maxD)
+            if i >= 0 && i < d.t.count { onTap?(d.t[i]) }
+        }
+
+        // ------------------------------------------------------------ delegate
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            if let o = overlay as? RouteOverlay {
+                let r = RouteOverlayRenderer(overlay: o)
+                if o === routeOverlay {
+                    routeRenderer = r
+                    if let pending = o.pendingRange { r.setRange(pending) }
+                    else if rangeLo.isFinite && rangeHi.isFinite { r.setRange(o.data.rangeChunks(rangeLo, rangeHi)) }
+                }
+                return r
+            }
+            if let t = overlay as? MKTileOverlay {
+                return MKTileOverlayRenderer(tileOverlay: t)
+            }
+            return MKOverlayRenderer(overlay: overlay)
+        }
+
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard let a = annotation as? RouteMarkerAnnotation else { return nil }
+            let reuse: String = "route.\(a.kind.rawValue)"
+            let v: MKAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse)
+                ?? MKAnnotationView(annotation: a, reuseIdentifier: reuse)
+            v.annotation = a
+            v.canShowCallout = a.kind == .marker
+            v.collisionMode = .circle
+            v.displayPriority = .required
+            let img: UIImage = RouteMarkerImages.image(a.kind, label: a.kind == .marker ? nil : a.title)
+            v.image = img
+            // the dot (left part of the image) sits on the coordinate
+            v.centerOffset = CGPoint(x: img.size.width / 2 - RouteMarkerImages.dotRadius(a.kind) - 2, y: 0)
+            v.zPriority = a.kind == .cursor ? .max : .defaultUnselected
+            return v
+        }
+    }
+}
+
+/// MKMapView that runs a pending fit once it has a size.
+final class RouteMapView: MKMapView {
+    var fitWanted: Bool = true
+    var didInitialFit: Bool = false
+    var pendingFit: (() -> Void)?
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if fitWanted && bounds.width >= 10 && bounds.height >= 10 {
+            fitWanted = false
+            let f = pendingFit
+            DispatchQueue.main.async { f?() }
+        }
+    }
+}
+
+// MARK: - Route overlay + renderer
+
+final class RouteOverlay: NSObject, MKOverlay {
+    let data: RouteRenderData
+    var pendingRange: [RouteChunk]? = nil
+
+    init(data: RouteRenderData) { self.data = data }
+
+    var coordinate: CLLocationCoordinate2D { MKMapPoint(x: data.bounds.midX, y: data.bounds.midY).coordinate }
+    var boundingMapRect: MKMapRect { data.bounds }
+}
+
+/// Draws the precomputed chunks: black casing, then (with a range) the dimmed route and the highlighted range in colour,
+/// otherwise the coloured route; signal losses dashed on top. Only chunks intersecting the tile are stroked.
+final class RouteOverlayRenderer: MKOverlayRenderer {
+    private let lock = NSLock()
+    private var range: [RouteChunk]? = nil
+
+    func setRange(_ chunks: [RouteChunk]?) {
+        lock.lock()
+        range = chunks
+        lock.unlock()
+        setNeedsDisplay()
+    }
+
+    override func draw(_ mapRect: MKMapRect, zoomScale: MKZoomScale, in context: CGContext) {
+        guard let o = overlay as? RouteOverlay else { return }
+        let d: RouteRenderData = o.data
+        lock.lock()
+        let ranged: [RouteChunk]? = range
+        lock.unlock()
+        let k: CGFloat = 1 / max(zoomScale, 1e-12)
+        let cull: MKMapRect = mapRect.insetBy(dx: -Double(12 * k), dy: -Double(12 * k))
+        context.setLineCap(.round)
+        context.setLineJoin(.round)
+
+        func stroke(_ chunks: [RouteChunk], _ width: CGFloat, _ color: (Int) -> UIColor) {
+            context.setLineWidth(width * k)
+            for c in chunks where c.rect.intersects(cull) {
+                context.setStrokeColor(color(c.key).cgColor)
+                context.addPath(c.path)
+                context.strokePath()
+            }
+        }
+
+        let casingColor = UIColor(white: 0, alpha: 170.0 / 255.0)
+        stroke(d.casing, 7.5) { (_: Int) -> UIColor in casingColor }
+        let palette: [Int: UIColor] = d.palette
+        if let r = ranged {
+            let dim = UIColor(red: 0x93 / 255.0, green: 0x94 / 255.0, blue: 0x9B / 255.0, alpha: 0xB0 / 255.0)
+            stroke(d.casing, 3.2) { (_: Int) -> UIColor in dim }
+            stroke(r, 5) { (key: Int) -> UIColor in palette[key] ?? UIColor.systemBlue }
+        } else {
+            stroke(d.colored, 4.2) { (key: Int) -> UIColor in palette[key] ?? UIColor.systemBlue }
+        }
+        // signal losses: dashed, never interpolated as route
+        if !d.gaps.isEmpty {
+            context.saveGState()
+            context.setLineDash(phase: 0, lengths: [6 * k, 5 * k])
+            let lossColor = UIColor(red: 1, green: 0x39 / 255.0, blue: 0x45 / 255.0, alpha: 0.9)
+            stroke(d.gaps, 2.2) { (_: Int) -> UIColor in lossColor }
+            context.restoreGState()
+        }
+    }
+}
+
+// MARK: - Annotations
+
+final class RouteMarkerAnnotation: MKPointAnnotation {
+    enum Kind: String { case start, end, marker, cursor }
+    let kind: Kind
+    init(kind: Kind) {
+        self.kind = kind
+        super.init()
+    }
+}
+
+enum RouteMarkerImages {
+    private static var cache: [String: UIImage] = [:]
+
+    static func dotRadius(_ kind: RouteMarkerAnnotation.Kind) -> CGFloat {
+        switch kind {
+        case .cursor: return 8
+        case .marker: return 5
+        default: return 7
+        }
+    }
+
+    /// Dot on the left (Windows Marker: coloured circle with white ring) and optional label pill on the right.
+    static func image(_ kind: RouteMarkerAnnotation.Kind, label: String?) -> UIImage {
+        let key: String = kind.rawValue + "|" + (label ?? "")
+        if let img = cache[key] { return img }
+        let r: CGFloat = dotRadius(kind)
+        let fill: UIColor
+        let ring: UIColor
+        let ringWidth: CGFloat
+        switch kind {
+        case .start: fill = UIColor(red: 0x52 / 255.0, green: 0xDD / 255.0, blue: 0x40 / 255.0, alpha: 1); ring = .white; ringWidth = 2
+        case .end: fill = UIColor(red: 0xED / 255.0, green: 0x12 / 255.0, blue: 0x2A / 255.0, alpha: 1); ring = .white; ringWidth = 2
+        case .marker: fill = UIColor(red: 0xFF / 255.0, green: 0xC4 / 255.0, blue: 0x2C / 255.0, alpha: 1); ring = .white; ringWidth = 1.5
+        case .cursor: fill = .white; ring = UIColor(red: 0xED / 255.0, green: 0x12 / 255.0, blue: 0x2A / 255.0, alpha: 1); ringWidth = 3
+        }
+        let font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+        var textSize: CGSize = .zero
+        if let l = label { textSize = (l as NSString).size(withAttributes: [.font: font]) }
+        let pad: CGFloat = 2
+        let dotBox: CGFloat = 2 * r + 2 * pad
+        let labelW: CGFloat = label == nil ? 0 : textSize.width + 12 + 4
+        let height: CGFloat = max(dotBox, label == nil ? 0 : textSize.height + 4)
+        let size = CGSize(width: dotBox + labelW, height: height)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let img: UIImage = renderer.image { (ctx: UIGraphicsImageRendererContext) in
+            let cg: CGContext = ctx.cgContext
+            let dotRect = CGRect(x: pad, y: (height - 2 * r) / 2, width: 2 * r, height: 2 * r)
+            cg.setFillColor(fill.cgColor)
+            cg.fillEllipse(in: dotRect)
+            cg.setStrokeColor(ring.cgColor)
+            cg.setLineWidth(ringWidth)
+            cg.strokeEllipse(in: dotRect.insetBy(dx: ringWidth / 2, dy: ringWidth / 2))
+            if let l = label {
+                let box = CGRect(x: dotBox + 4, y: (height - textSize.height - 4) / 2, width: textSize.width + 12, height: textSize.height + 4)
+                let path = UIBezierPath(roundedRect: box, cornerRadius: 3)
+                UIColor(red: 0x10 / 255.0, green: 0x10 / 255.0, blue: 0x14 / 255.0, alpha: 0xD8 / 255.0).setFill()
+                path.fill()
+                fill.setStroke()
+                path.lineWidth = 1
+                path.stroke()
+                (l as NSString).draw(at: CGPoint(x: box.minX + 6, y: box.minY + 2), withAttributes: [.font: font, .foregroundColor: UIColor.white])
+            }
+        }
+        cache[key] = img
+        return img
+    }
+}
+
+// MARK: - Tiles
+
+/// Shared state of the tile loader (Windows MapControl: 6 parallel downloads, 60 consecutive failures = offline).
+enum RouteTileNet {
+    private static let lock = NSLock()
+    private static var failuresValue: Int = 0
+    static let session: URLSession = {
+        let cfg = URLSessionConfiguration.default
+        cfg.timeoutIntervalForRequest = 20
+        cfg.httpMaximumConnectionsPerHost = 6
+        cfg.httpAdditionalHeaders = ["User-Agent": "AVO-Performance-Horse-iPad/2.0"]
+        cfg.requestCachePolicy = .reloadIgnoringLocalCacheData
+        cfg.urlCache = nil
+        return URLSession(configuration: cfg)
+    }()
+
+    static var failures: Int {
+        lock.lock(); defer { lock.unlock() }
+        return failuresValue
+    }
+    static func failed() { lock.lock(); failuresValue += 1; lock.unlock() }
+    static func succeeded() { lock.lock(); failuresValue = 0; lock.unlock() }
+
+    static let attribution: String = "Imágenes: © Esri, Maxar, Earthstar Geographics y GIS User Community"
+}
+
+/// Esri ArcGIS tile layer with a disk cache in AppPaths.tiles (same layout as Windows: <layer>/<z>/<y>/<x>.<ext>, 30 days).
+final class RouteEsriTileOverlay: MKTileOverlay {
+    let layerName: String
+    let cacheDir: String
+    private let ext: String
+
+    init(layer: String, cacheDir: String) {
+        self.layerName = layer
+        self.cacheDir = cacheDir
+        self.ext = layer == "World_Imagery" ? "jpg" : "png"
+        super.init(urlTemplate: nil)
+        self.tileSize = CGSize(width: 256, height: 256)
+        self.minimumZ = 1
+        self.maximumZ = 19
+        self.canReplaceMapContent = layer == "World_Imagery"
+    }
+
+    override func url(forTilePath path: MKTileOverlayPath) -> URL {
+        let s: String = "https://server.arcgisonline.com/ArcGIS/rest/services/\(layerName)/MapServer/tile/\(path.z)/\(path.y)/\(path.x)"
+        return URL(string: s) ?? URL(fileURLWithPath: "/")
+    }
+
+    private func file(_ path: MKTileOverlayPath) -> String {
+        AvoFiles.join(cacheDir, layerName.replacingOccurrences(of: "/", with: "_"), String(path.z), String(path.y), "\(path.x).\(ext)")
+    }
+
+    override func loadTile(at path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
+        let f: String = file(path)
+        if let attrs = try? FileManager.default.attributesOfItem(atPath: f),
+           let modified = attrs[.modificationDate] as? Date,
+           Date().timeIntervalSince(modified) < 30 * 86400,
+           let data = AvoFiles.read(f), !data.isEmpty {
+            result(data, nil)
+            return
+        }
+        if RouteTileNet.failures > 60 {
+            // offline: stop trying, the route is still drawn
+            result(nil, AvoError.invalidOperation("sin conexión"))
+            return
+        }
+        let url: URL = url(forTilePath: path)
+        let task = RouteTileNet.session.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+            let status: Int = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if let d = data, error == nil, status == 200, !d.isEmpty {
+                RouteTileNet.succeeded()
+                try? AvoFiles.writeAtomic(d, to: f)
+                result(d, nil)
+            } else {
+                if error != nil { RouteTileNet.failed() }
+                result(nil, error ?? AvoError.invalidData("tesela \(status)"))
+            }
+        }
+        task.resume()
+    }
+}
+
+/// «Vectorial sin conexión»: no tiles, dark background with a 64 px grid (Windows MapControl.DrawGrid).
+final class RouteOfflineGridOverlay: MKTileOverlay {
+    private static let tile: Data = {
+        let size = CGSize(width: 256, height: 256)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 2
+        let img: UIImage = UIGraphicsImageRenderer(size: size, format: format).image { (ctx: UIGraphicsImageRendererContext) in
+            let cg: CGContext = ctx.cgContext
+            cg.setFillColor(UIColor(red: 0x0B / 255.0, green: 0x0C / 255.0, blue: 0x10 / 255.0, alpha: 1).cgColor)
+            cg.fill(CGRect(origin: .zero, size: size))
+            cg.setStrokeColor(UIColor(red: 0xC9 / 255.0, green: 0xCB / 255.0, blue: 0xD1 / 255.0, alpha: 0x22 / 255.0).cgColor)
+            cg.setLineWidth(1)
+            var v: CGFloat = 0
+            while v < 256 {
+                cg.move(to: CGPoint(x: v + 0.5, y: 0)); cg.addLine(to: CGPoint(x: v + 0.5, y: 256))
+                cg.move(to: CGPoint(x: 0, y: v + 0.5)); cg.addLine(to: CGPoint(x: 256, y: v + 0.5))
+                v += 64
+            }
+            cg.strokePath()
+        }
+        return img.pngData() ?? Data()
+    }()
+
+    init() {
+        super.init(urlTemplate: nil)
+        self.tileSize = CGSize(width: 256, height: 256)
+        self.canReplaceMapContent = true
+    }
+
+    override func loadTile(at path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
+        result(RouteOfflineGridOverlay.tile, nil)
+    }
+}

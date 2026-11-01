@@ -265,7 +265,7 @@ final class AnalysisAndReportsTests: XCTestCase {
         XCTAssertEqual(DotNetFormat.roundTrip(0.0001), "0.0001")
         XCTAssertEqual(DotNetFormat.roundTrip(0.00001), "1E-05")
         XCTAssertEqual(DotNetFormat.roundTrip(1e15), "1E+15")
-        XCTAssertEqual(DotNetFormat.round(2.345, 2), 2.34, accuracy: 1e-12)
+        XCTAssertEqual(DotNetFormat.round(2.345, 2), 2.35, accuracy: 1e-12)  // 2.345 is 2.34500000000000019… in binary
         XCTAssertEqual(DotNetJsonWriter.quote("Ó \"x\" <a>"), "\"\\u00D3 \\u0022x\\u0022 \\u003Ca\\u003E\"")
         XCTAssertEqual(DotNetText.htmlEncode("á<b>"), "&#225;&lt;b&gt;")
         XCTAssertEqual(TimeText.clock(59.99), "00:59")

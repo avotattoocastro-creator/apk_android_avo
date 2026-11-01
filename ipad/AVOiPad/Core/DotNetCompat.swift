@@ -192,7 +192,7 @@ enum DotNetFormat {
     /// 15 significant digits of a non-negative finite value: digits d0…d14 and scale (number of integer digits).
     private static func significantDigits(_ v: Double) -> (digits: [Int], scale: Int) {
         if v == 0 { return ([0], 1) }
-        let s: String = String(format: "%.14e", locale: posix, v)
+        let s: String = String(format: "%.14e", v)
         guard let eIdx = s.firstIndex(of: "e") else { return ([0], 1) }
         let mantissa: String = String(s[..<eIdx]).replacingOccurrences(of: ".", with: "")
         let expText: String = String(s[s.index(after: eIdx)...]).replacingOccurrences(of: "+", with: "")
