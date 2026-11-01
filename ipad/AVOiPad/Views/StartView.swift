@@ -20,16 +20,29 @@ struct StartView: View {
                     .frame(width: StartView.artW * s, height: StartView.artH * s, alignment: .topLeading)
                     .frame(width: w, height: h, alignment: .topLeading)
                     .clipped()
-                HStack(spacing: 0) {
-                    Spacer(minLength: 0)
-                    actions
-                        .frame(width: max(w * 0.271, 300))
-                        .frame(maxHeight: .infinity)
-                        .background(
-                            LinearGradient(colors: [Color(hex: 0x202B3B, alpha: 0.65), Color(hex: 0x172130, alpha: 0.72),
-                                                    Color(hex: 0x12192A, alpha: 0.78)],
-                                           startPoint: .topLeading, endPoint: .bottomTrailing)
-                        )
+                if h > w {
+                    // portrait: the actions go in a band at the bottom so they never cover the title
+                    VStack(spacing: 0) {
+                        Spacer(minLength: 0)
+                        actions
+                            .frame(width: w, height: max(h * 0.34, 330))
+                            .background(
+                                LinearGradient(colors: [Color(hex: 0x202B3B, alpha: 0.70), Color(hex: 0x12192A, alpha: 0.86)],
+                                               startPoint: .top, endPoint: .bottom)
+                            )
+                    }
+                } else {
+                    HStack(spacing: 0) {
+                        Spacer(minLength: 0)
+                        actions
+                            .frame(width: max(w * 0.271, 300))
+                            .frame(maxHeight: .infinity)
+                            .background(
+                                LinearGradient(colors: [Color(hex: 0x202B3B, alpha: 0.65), Color(hex: 0x172130, alpha: 0.72),
+                                                        Color(hex: 0x12192A, alpha: 0.78)],
+                                               startPoint: .topLeading, endPoint: .bottomTrailing)
+                            )
+                    }
                 }
             }
             .frame(width: w, height: h)

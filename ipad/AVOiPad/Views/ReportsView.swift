@@ -12,6 +12,7 @@ struct ReportsView: View {
     var body: some View {
         let model: ReportsModel = app.reports
         @Bindable var m = model
+        GeometryReader { geo in
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 FeatureSessionHeader()
@@ -20,6 +21,16 @@ struct ReportsView: View {
                     ReportsExportCard(model: model)
                     ReportsNotesCard(model: model)
                     ReportsOptionsCard(model: model)
+                } else if geo.size.width < 1100 {
+                    // iPad in portrait or Split View: preview on top, controls in two columns below
+                    ReportsPreviewCard(model: model).frame(height: 640)
+                    HStack(alignment: .top, spacing: 12) {
+                        VStack(spacing: 12) {
+                            ReportsExportCard(model: model)
+                            ReportsNotesCard(model: model)
+                        }
+                        ReportsOptionsCard(model: model).frame(width: 300)
+                    }
                 } else {
                     HStack(alignment: .top, spacing: 14) {
                         ReportsPreviewCard(model: model).frame(minWidth: 380, idealWidth: 460).frame(height: 760)
@@ -36,6 +47,7 @@ struct ReportsView: View {
                 }
             }
             .padding(16)
+        }
         }
         .background(Avo.bg)
         .onAppear { model.pageShown() }
@@ -155,7 +167,7 @@ private struct ReportsExportCard: View {
 
     @ViewBuilder
     private func exportButton(_ k: ReportExportKind) -> some View {
-        let label = Label(k.title, systemImage: k.icon).frame(maxWidth: .infinity)
+        let label = Label(k.title, systemImage: k.icon).lineLimit(1).minimumScaleFactor(0.7).frame(maxWidth: .infinity)
         if k == .pdf {
             Button { Task { await model.export(k) } } label: { label }
                 .buttonStyle(.avoPrimary)

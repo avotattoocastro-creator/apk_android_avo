@@ -24,6 +24,32 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.0 — duplicado de la app Windows V2 PRO para iPad Pro M4 (SwiftUI nativo)
+**Autor:** Claude · **Rama:** `feature/ipad-app` (sale de `feature/windows-girth-movimiento` `8101304`)
+**Qué cambia:**
+- **Nueva app `ipad/`**, nativa en SwiftUI para iPadOS 17 o posterior, con las 16 pantallas de Windows: Inicio, Entrenamientos, Cuadra, Jinetes, Análisis, Mapa (Esri satélite/híbrido con caché, o vectorial sin conexión, más reproducción), Gráficas sincronizadas, Tramos, Biomecánica, Comparar, Geocercas y líneas, Mareas y entorno, Informes, Servidor y Motor, además de la hoja Asignar.
+- **Núcleo portado de `AVO.Windows.Core` a Swift** con los mismos formatos y cálculos:
+  - lectura de `.avo` y `.avr` con SHA-256 y lector ZIP propio;
+  - filtro Kalman con suavizado RTS, tramos, comparador, entorno IHM y Open-Meteo;
+  - informes PDF (escritor propio), HTML, CSV, GPX y JSON;
+  - `cuadra.json`, `geocercas.json` y `recortes.json`, intercambiables con Windows.
+- **Motor C++ AVO Equine:** el mismo código fuente compilado dentro de la app, con su API en C.
+- **Reloj:**
+  - protocolo BLE portado de Windows/Android, con la clave en el llavero de iOS;
+  - envío y lectura de geocercas;
+  - **descarga por Wi‑Fi** (`WIFI_SYNC` + HTTP, pecho ≥ 3.7.4) en lugar del USB.
+- **Sin NFC:** el iPad no tiene NFC.
+- **CI `build-avo-ipad.yml` (macOS):**
+  - sesiones DEMO, XcodeGen y compilación;
+  - XCTest en el simulador del iPad Pro 13" (M4);
+  - capturas en horizontal y vertical en `ci/ipad-visual-evidence`;
+  - subida a TestFlight cuando están los secretos `APPLE_TEAM_ID`, `ASC_KEY_ID`, `ASC_ISSUER_ID` y `ASC_KEY_P8_BASE64` (ver `ipad/README.md`).
+**Por qué:** usar la app de análisis en el iPad Pro M4.
+**Archivos:** `ipad/**`, `.github/workflows/build-avo-ipad.yml`.
+**No se ha tocado:** `windows/`, Android, firmware y motor (solo se compilan).
+**Validación:** COMPILADO / CI run 41297030454 (`commit` de la rama): compilación, 51 pruebas unitarias en verde (formatos, seguridad, algoritmos, vectores del reloj, Wi‑Fi simulado, motor, sesiones DEMO) y 32 capturas. **NO VERIFICADO** en un iPad real, con el reloj por Bluetooth o Wi‑Fi, ni con sesiones reales.
+**Pendiente:** añadir los secretos de App Store Connect para TestFlight, probar en el iPad, probar la descarga Wi‑Fi con un pecho 3.7.4 o posterior, e integrar en develop.
+
 ## 2026-10-31 — Windows V2 PRO — geocercas, líneas de salida y meta con sentido, y envío al reloj por Bluetooth
 **Autor:** Claude · **Rama:** `feature/windows-advanced-analysis`
 **Qué cambia:**
