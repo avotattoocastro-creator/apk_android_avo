@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-01 — Motor AVO Equine — AVO Track Work 1.0.0: el módulo de «carreras» pasa a ser de ENTRENAMIENTO (fases, series, recuperación)
-**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `ef704d8` · **CI:** run 41330093878 ✅ (Linux ASan/UBSan 79 casos/1103 comprobaciones, Windows MSVC, Android NDK ×3, JNI, fixtures)
 **Por qué:** el usuario aclara que el objetivo es analizar los **entrenamientos** de caballos de carreras PSI y árabes, no las carreras. Esta entrada corrige el enfoque de la anterior («AVO Racing 1.0.0»).
 **Qué cambia:**
 - **Nombres:**
