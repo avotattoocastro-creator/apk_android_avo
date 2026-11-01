@@ -57,6 +57,22 @@ AVO_EQ_API int avo_eq_compare_ex(const char* const* paths_a, int na, const char*
 /* Removes stored analyses made by other engine / algorithm versions. Returns files removed, -1 on error. */
 AVO_EQ_API int avo_eq_cache_invalidate(const char* cache_dir);
 
+/* ---------------- Análisis de entrenamientos (AVO Training Analytics 1.0.0) ----------------
+ * avo_eq_training_summary: resumen pequeño de UNA sesión ("avo-training-session") a partir del JSON de
+ *   avo_eq_analyse_ex. Guardarlo junto a la sesión: la historia se analiza con resúmenes, no con los análisis completos.
+ *   extra_json (puede ser NULL) completa o corrige: {"id","caballo","jinete","fecha_utc",
+ *   "valoracion": {"rpe": 1..10, "estado": "BIEN|CANSADO|RARO|COJERA", "nota"}, "pista": {"superficie","estado"}}
+ * avo_eq_training_analyse: historia de un caballo ("avo-training-analysis").
+ *   input_json: {"caballo": "...", "fecha_referencia": "AAAA-MM-DD" (opcional), "sesiones": [ cada una con
+ *   "resumen" (avo-training-session) o "analisis" (avo-equine-analysis) o "ruta_resumen"/"ruta_analisis" (fichero),
+ *   más los mismos campos de extra_json ] }
+ *   options_json (puede ser NULL): factor_paso, factor_trote, factor_galope, alta_velocidad_m_s, factor_alta_velocidad,
+ *   dias_aguda, dias_cronica, acwr_alto, acwr_bajo, monotonia_alta, dias_linea_base, min_sesiones_linea_base,
+ *   z_vigilar, z_revisar, min_segundos_aire, dias_tendencia, min_sesiones_tendencia, dias_descanso_aviso.
+ * Mismos códigos de retorno que la API 2; el texto devuelto se libera con avo_eq_free. */
+AVO_EQ_API int avo_eq_training_summary(const char* analysis_json, const char* extra_json, char** json_out);
+AVO_EQ_API int avo_eq_training_analyse(const char* input_json, const char* options_json, const volatile int* cancel, char** json_out);
+
 #ifdef __cplusplus
 }
 #endif

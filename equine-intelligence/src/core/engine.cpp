@@ -342,12 +342,24 @@ static void write_series(std::ostringstream& o, const Analysis& a, const EngineC
   o << ",\"estado\":["; for (size_t i = 0; i < w.size(); i++) o << (i ? "," : "") << "\"" << w[i].status << "\""; o << "]}";
 }
 
+// First GNSS epoch with a resolved UTC date and time, as a JSON string (null when the receiver never had one).
+static std::string start_utc(const Session& s) {
+  for (const auto& e : s.gnss)
+    if ((e.valid & 3) == 3 && e.year >= 2000 && e.month >= 1 && e.month <= 12 && e.day >= 1 && e.day <= 31) {
+      char b[40];
+      snprintf(b, sizeof(b), "\"%04u-%02u-%02uT%02u:%02u:%02uZ\"", (unsigned)e.year, (unsigned)e.month, (unsigned)e.day,
+               (unsigned)e.hour, (unsigned)e.minute, (unsigned)e.second);
+      return b;
+    }
+  return "null";
+}
+
 std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, bool series) {
   std::ostringstream o;
   o << "{\"formato\":\"avo-equine-analysis\",\"version_formato\":2,\"motor\":\"" << a.engine_version << "\",\"procesado_utc\":\"" << esc(a.processed_at_utc)
     << "\",\"sesion\":{\"id\":\"" << esc(s.session_id) << "\",\"caballo\":\"" << esc(s.horse) << "\",\"jinete\":\"" << esc(s.rider)
     << "\",\"fw_pecho\":\"" << esc(s.chest_fw) << "\",\"fw_espalda\":\"" << esc(s.back_fw) << "\",\"segmentos\":" << s.segments
-    << ",\"epocas_gnss\":" << s.gnss.size() << ",\"muestras_imu\":" << s.imu.size() << ",\"marcas\":" << s.markers.size() << "}";
+    << ",\"epocas_gnss\":" << s.gnss.size() << ",\"muestras_imu\":" << s.imu.size() << ",\"marcas\":" << s.markers.size() << ",\"inicio_utc\":" << start_utc(s) << "}";
   o << ",\"parametros\":{\"gnss_ventana_derivada_s\":" << num(c.gnss.deriv_half_window_s) << ",\"cadencia_ventana_s\":" << num(c.cadence.window_s)
     << ",\"cadencia_f_min\":" << num(c.cadence.f_min) << ",\"cadencia_f_max\":" << num(c.cadence.f_max)
     << ",\"aire_v_parado\":" << num(c.gait.stop_max) << ",\"aire_v_paso\":" << num(c.gait.walk_max) << ",\"aire_v_trote\":" << num(c.gait.trot_max)

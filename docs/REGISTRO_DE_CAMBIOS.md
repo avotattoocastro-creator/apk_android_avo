@@ -54,6 +54,38 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **No se ha tocado:** núcleo (`Core/`, `Engine/`), importación (`importFiles`), descarga Wi-Fi/BLE del reloj, resto de páginas.
 **Validación:** IMPLEMENTADO · sin compilar en la sesión (CI macOS pendiente) · NO VERIFICADO en iPad.
 **Pendiente:** compilar en CI; probar en iPad la tabla (columnas, orden, selección), el doble toque (no implementado: se abre con el botón de la fila o el menú contextual) y la búsqueda con archivos reales en Archivos.
+## 2026-11-01 — Motor AVO Equine — AVO Training Analytics 1.0.0 (análisis de la historia de entrenamientos, fase 1)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` (sale de `feature/ipad-app` `33476df`) · **Commits:** `78893e4`, `d1edc03`, `6816a98` · **CI:** run 41315952401 ✅ (Linux ASan/UBSan 71 casos/1020 comprobaciones, Windows MSVC 71 casos, Android NDK ×3, JNI en JVM, fixtures, resumen → historia) sobre `6816a98`
+**Qué cambia (petición del usuario: analizar los entrenamientos para Android, Windows e iOS):**
+- **Nuevo módulo del motor C++** `src/training/` + `include/avo_eq/training.h`. Es una sola implementación para
+  las tres plataformas: Android (JNI), Windows (DLL) e iPad (compila `equine-intelligence/src` entero).
+- **Resumen por sesión** (`avo-training-session`):
+  - tiempo y distancia por aire;
+  - velocidad, tranco, cadencia y regularidad;
+  - distancia a alta velocidad;
+  - aceleraciones de la trayectoria GNSS;
+  - calidad, valoración del entrenador (RPE, estado, nota) y pista.
+- **Historia del caballo** (`avo-training-analysis`):
+  - carga externa por aires (heurística `AVO_TRAINING_LOAD_V1`, configurable) y carga sRPE;
+  - carga aguda 7 d, crónica 28 d, ACWR, monotonía y tensión;
+  - línea base propia (mediana y MAD de 60 d, mínimo 4 sesiones) y desvíos z robustos;
+  - tendencias Theil-Sen por semana;
+  - estado NORMAL / VIGILAR / REVISAR con motivos. No es un diagnóstico.
+- **API C:** `avo_eq_training_summary` y `avo_eq_training_analyse`, con cancelación y los mismos códigos.
+- **CLI:** `avo_training_cli`.
+- **Análisis de sesión:** añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC). Fixtures
+  `core/src/test/resources/equine/*_analysis.json` regeneradas (solo cambia esa clave).
+- **CI:** `build-equine-engine.yml` se lanza también en esta rama y ejecuta resumen → historia con la fixture.
+- `tests/test_fusion.cpp`: falta `#include <algorithm>` (rompía la compilación con el GCC nuevo del runner, run 41314987063).
+- `tests/test_dsp.cpp`: `normal_distribution` con desviación 0 abortaba con las aserciones de GCC 15 (run 41315372137); se construye con 1 cuando no hay ruido (no se usa).
+**Archivos:** `equine-intelligence/{include/avo_eq/training.h,include/avo_eq/avo_eq_c.h,src/training/training.cpp,src/capi/training_capi.cpp,src/core/engine.cpp,tools/training/avo_training_cli.cpp,tests/test_training.cpp,CMakeLists.txt,README.md,docs/FORMATO_RESULTADOS.md,docs/algoritmos/12_ENTRENAMIENTO.md}`, `core/src/test/resources/equine/{synthetic,sample}_analysis.json`, `.github/workflows/build-equine-engine.yml`.
+**No se ha tocado:** el resto de algoritmos del motor, las apps Android, Windows e iPad (sin pantallas todavía) y el firmware.
+**Validación:** IMPLEMENTADO · compilado y probado en Linux (71 casos, 1020 comprobaciones, ASan/UBSan) · CI run 41315952401 en verde · **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida.
+**Pendiente:**
+- Integrar en las apps: JNI/Kotlin, P/Invoke/C# y Swift.
+- Pantalla «Entrenamientos del caballo» y formulario de valoración tras cada sesión.
+- Ajustar umbrales con datos reales.
+- Fases 2 (etiquetas) y 3 (modelos).
 
 ---
 

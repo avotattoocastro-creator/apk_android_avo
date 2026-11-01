@@ -26,3 +26,23 @@ regularidad, velocidad, estado). Con persistencia: `cache`, `fichero_resultado`.
 Métricas nuevas: `distancia_puenteada` (regla del analizador Kotlin anterior, solo para comparar), `regularidad_amplitud_cv`,
 `estabilidad_espectral`, `incertidumbre_media_ventana`, `ventanas_cadencia_validas`.
 **Cambio de semántica:** `frecuencia_hz` de una ventana es 0 salvo estado VALIDA; GAIT_CLASSIFIER_V1 (1.0.1) solo recibe cadencias válidas.
+
+## Análisis de entrenamientos (AVO Training Analytics 1.0.0) — ficha 12
+API: `avo_eq_training_summary(analisis_json, extra_json, &json)` y `avo_eq_training_analyse(entrada_json, opciones_json, cancel, &json)`.
+Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
+- **`avo-training-session` v1** (resumen de una sesión): `id`, `caballo`, `jinete`, `fecha_utc`, `tiempo_movimiento_s`,
+  `distancia_m`, `velocidad_max`, `distancia_alta_velocidad_m`, `tiene_cincha`, `aires.{PASO,TROTE,GALOPE}`
+  (`duracion_s`, `distancia_m`, `velocidad_media`, `velocidad_max`, `longitud_tranco_m`, `cadencia_hz`,
+  `correlacion_ciclos`, `cv_intervalos`), `aceleraciones`, `calidad`, `valoracion` (`rpe`, `estado`, `nota`),
+  `pista`, `avisos`.
+- **`avo-training-analysis` v1** (historia): `caballo`, `fecha_referencia`, `sesiones_usadas`, `parametros`,
+  `estado` (`nivel` NORMAL|VIGILAR|REVISAR, `motivos`, `dias_desde_ultima`, `carga`), `carga_diaria` (28 días),
+  `lineas_base` (`metrica`, `mediana`, `mad`, `n`, `estado`), `tendencias` (`pendiente_semana`, `pendiente_p10`,
+  `pendiente_p90`, `relativa_semana`, `n`, `direccion`), `sesiones[]` (`nivel`, `motivos`, `carga`, `desvios`, `resumen`),
+  `avisos`.
+- `carga`: `externa`, `srpe`, `aguda`, `cronica_semanal`, `acwr`, `aguda_srpe`, `cronica_semanal_srpe`, `acwr_srpe`,
+  `monotonia`, `tension`, `dias_desde_anterior`.
+- Métricas: `AIRE.velocidad_media`, `AIRE.longitud_tranco_m`, `AIRE.cadencia_hz`, `AIRE.correlacion_ciclos`,
+  `AIRE.cv_intervalos`, más `carga_externa` y `distancia_m` en las tendencias.
+
+`avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
