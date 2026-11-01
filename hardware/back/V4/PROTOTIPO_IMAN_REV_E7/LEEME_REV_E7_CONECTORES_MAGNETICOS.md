@@ -1,4 +1,4 @@
-# AVO espalda · Rev E.7.3 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
+# AVO espalda · Rev E.7.4 · conectores magnéticos de 3 vías en lugar del reed (31/10/2026)
 
 **Estado: diseñado y comprobado con el STEP de los conectores (CAD) · NO PROBADO.** Imprime primero las **probetas**.
 
@@ -6,8 +6,10 @@
 - **E.7:** medidas sacadas de fotos.
 - **E.7.1:** soporte montado desde arriba.
 - **E.7.2:** cotas exactas del STEP del usuario, `Assembly Pogo 3er` (Onshape).
-- **E.7.3 (esta):** el conector queda **completamente empotrado** en el soporte, que pasa de 4,5 a **8,8 mm**. No se corta la tela
-  y la contraplaca es la original. **No imprimas nada de la E.7, la E.7.1 ni la E.7.2.**
+- **E.7.4 (esta, 01/11/2026):** igual que la E.7.3, pero el alojamiento del conector de muelles es **pasante** y ya no hay
+  membrana que cortar.
+- **E.7.3:** el conector queda **completamente empotrado** en el soporte, que pasa de 4,5 a **8,8 mm**. No se corta la tela
+  y la contraplaca es la original. **No imprimas nada de la E.7, la E.7.1, la E.7.2 ni la E.7.3.**
 
 **Disposición:**
 - **Cápsula (base):** conector **PLANO**, con la cara a ras del fondo y los contactos hacia **abajo**.
@@ -28,16 +30,19 @@
 | Agujeros de las orejas | — | Ø2,0 a 19,5 (tú mediste Ø2,5) |
 
 ## 2. Qué se imprime
-STL en posición de impresión, **sin soportes**: 0 voladizos fuera de límite en las 6 piezas (`VALIDACION/voladizos_E7.json`).
+STL en posición de impresión, **sin soportes**. Único aviso: en el soporte y la base de carga, el techo de las orejas (a 6,1 mm
+de la cama) es un **puente de 5,8 mm** entre las dos paredes largas, con un lado abierto hacia el agujero pasante. En PETG se
+imprime bien con la detección de puentes del laminador, que viene activada por defecto. El resto no tiene voladizos fuera de
+límite (`VALIDACION/voladizos_E7.json`).
 
 | Pieza | Fichero |
 |---|---|
-| Probeta de la base | `STL/AVO_RevE7_PROBETA_CONECTOR_BASE.stl` |
-| Probeta del soporte | `STL/AVO_RevE7_PROBETA_CONECTOR_SOPORTE.stl` |
-| Probeta de la base de carga | `STL/AVO_RevE7_PROBETA_CONECTOR_BASE_CARGA.stl` |
-| Base E.7.3 (igual que la E.7.2) | `STL/AVO_RevE7_BASE_IMAN.stl` |
-| Soporte del chaleco E.7.3 (**8,8 mm** de grueso) | `STL/AVO_RevE7_SOPORTE_IMAN.stl` |
-| Base de carga E.7.3 (8,8 mm) | `STL/AVO_RevE7_BASE_CARGA_IMAN.stl` |
+| Probeta de la base | `STL/AVO_RevE7_4_PROBETA_CONECTOR_BASE.stl` |
+| Probeta del soporte | `STL/AVO_RevE7_4_PROBETA_CONECTOR_SOPORTE.stl` |
+| Probeta de la base de carga | `STL/AVO_RevE7_4_PROBETA_CONECTOR_BASE_CARGA.stl` |
+| Base E.7.4 (igual que la E.7.2) | `STL/AVO_RevE7_4_BASE_IMAN.stl` |
+| Soporte del chaleco E.7.4 (**8,8 mm** de grueso; altura total con el borde 13,25) | `STL/AVO_RevE7_4_SOPORTE_IMAN.stl` |
+| Base de carga E.7.4 (8,8 mm) | `STL/AVO_RevE7_4_BASE_CARGA_IMAN.stl` |
 
 Sin cambios: tapa E.5, cuna de la Heltec E.6, junta TPU y **contraplaca original** (los mismos tornillos M3 × 8).
 
@@ -54,8 +59,7 @@ Sin cambios: tapa E.5, cuna de la Heltec E.6, junta TPU y **contraplaca original
 - **ventana del cuerpo** de 15,8 × 4,95 hasta la cara de apoyo. La cara de los muelles queda **0,2 mm por debajo** de la cara
   de apoyo, así que las puntas salen 1,3 mm;
 - **alojamiento de las orejas**, abierto por abajo, con techo en Z −2,7 (cara superior de las orejas);
-- **membrana de 0,2 mm** sobre la ventana: deja imprimir el techo de las orejas como puente. **Córtala con un cúter** antes de
-  montar;
+- el agujero es **pasante** de arriba abajo, sin membrana;
 - **2 pilotos de Ø1,6 × 2** para tornillos **M2 de rosca chapa** (M2 × 4 o M2 × 5) por los agujeros de las orejas;
 - **todo el conector queda dentro del soporte** (E.7.3):
   - fondo del cuerpo a Z −6,2, cabezas M2 hasta −6,3, patas hasta −7,74;
@@ -83,7 +87,6 @@ Si el sudor une dos contactos vecinos, como mucho se enciende. BAT y GND no est�
    - pon epoxi por encima del reborde. Sella el agujero y lo sujeta cuando los imanes del soporte tiran al sacar la cápsula;
    - comprueba con una regla que la cara queda a ras.
 3. **Conector de muelles (soporte del chaleco):**
-   - corta la membrana;
    - suelda un puente **BAT–SYS** (las dos patas del extremo marcado) tumbado sobre las patas, sin tocar GND. Debe quedar dentro
      del soporte: hay 1 mm libre bajo las patas;
    - mételo desde abajo y atorníllalo con 2 × M2 de rosca chapa. Un punto de epoxi en las orejas, si quieres.
@@ -107,7 +110,7 @@ Si el sudor une dos contactos vecinos, como mucho se enciende. BAT y GND no est�
 
 ## 7. Comprobaciones hechas (con el STEP colocado en las piezas)
 - **Conector plano / base:** 0 mm³ de interferencia. Cara a Z 0,00, a ras.
-- **Conector de muelles / soporte:** la única interferencia es la membrana de 0,2 (13,5 mm³, prevista).
+- **Conector de muelles / soporte:** 0 mm³ (pasante, sin membrana).
 - **Conector de muelles / contraplaca:** 0 mm³. Las cabezas M2 tampoco tocan. El conector queda entero dentro del soporte.
 - **Alturas:**
   - cara de los muelles a Z −0,2 y puntas a Z +1,3;

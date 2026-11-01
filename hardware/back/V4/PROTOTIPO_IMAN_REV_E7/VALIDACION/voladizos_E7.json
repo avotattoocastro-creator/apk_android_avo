@@ -95,16 +95,16 @@
    },
    {
     "z": 6.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 123.21,
+    "tipo": "VOLADIZO",
+    "voladizo_mm": 2.7,
+    "area_mm2": 49.68,
     "caja": [
      6.3,
      11.6,
      -12.4,
      12.4
     ],
-    "ok": true
+    "ok": false
    },
    {
     "z": 8.11,
@@ -159,8 +159,8 @@
     "ok": true
    }
   ],
-  "peor": 0.0,
-  "n_mal": 0
+  "peor": 2.7,
+  "n_mal": 1
  },
  "AVO_RevE7_BASE_IMAN": {
   "capas": 64,
@@ -1077,16 +1077,16 @@
    },
    {
     "z": 6.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 123.36,
+    "tipo": "VOLADIZO",
+    "voladizo_mm": 2.7,
+    "area_mm2": 49.8,
     "caja": [
      6.3,
      11.6,
      -12.4,
      12.3
     ],
-    "ok": true
+    "ok": false
    },
    {
     "z": 8.11,
@@ -1115,24 +1115,24 @@
     "ok": true
    }
   ],
-  "peor": 0.0,
-  "n_mal": 0
+  "peor": 2.7,
+  "n_mal": 1
  },
  "AVO_RevE7_PROBETA_CONECTOR_SOPORTE": {
   "capas": 44,
   "zonas": [
    {
     "z": 6.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 123.36,
+    "tipo": "VOLADIZO",
+    "voladizo_mm": 2.7,
+    "area_mm2": 49.8,
     "caja": [
      6.3,
      11.6,
      -12.4,
      12.3
     ],
-    "ok": true
+    "ok": false
    },
    {
     "z": 8.11,
@@ -1161,8 +1161,8 @@
     "ok": true
    }
   ],
-  "peor": 0.0,
-  "n_mal": 0
+  "peor": 2.7,
+  "n_mal": 1
  },
  "AVO_RevE7_SOPORTE_IMAN": {
   "capas": 67,
@@ -1247,16 +1247,16 @@
    },
    {
     "z": 6.11,
-    "tipo": "PUENTE",
-    "voladizo_mm": 5.4,
-    "area_mm2": 123.21,
+    "tipo": "VOLADIZO",
+    "voladizo_mm": 2.7,
+    "area_mm2": 49.68,
     "caja": [
      6.3,
      11.6,
      -12.4,
      12.4
     ],
-    "ok": true
+    "ok": false
    },
    {
     "z": 8.11,
@@ -1311,7 +1311,7 @@
     "ok": true
    }
   ],
-  "peor": 0.0,
-  "n_mal": 0
+  "peor": 2.7,
+  "n_mal": 1
  }
 }

@@ -125,7 +125,8 @@ RE = dict(
     #    Lo que sobresale por debajo (1,7 de cuerpo + tornillos + 1,5 de patas) va por una ranura de la tela a un hueco de la
     #    contraplaca. Base de carga: más gruesa (MT_CARGA) para que todo quede dentro.
     PN_BODY=(15.5, 4.65, 6.0), PN_EARS=(25.0, 5.5, 2.0), PN_EAR_Z=2.5, PN_HOLE=(2.0, 19.5), PN_TIP=1.5, PN_CLR=0.15,
-    PN_RECESS=0.2, PN_MEMBRANE=0.2, PN_PILOT=(1.6, 2.0), PN_PLATE_POCKET=None, MT_CARGA=8.8, EAR_CABLE=(2.0, 1.4),
+    PN_RECESS=0.2, PN_MEMBRANE=0.0,   # Rev E.7.4: sin membrana, agujero PASANTE (petición del usuario)
+    PN_PILOT=(1.6, 2.0), PN_PLATE_POCKET=None, MT_CARGA=8.8, EAR_CABLE=(2.0, 1.4),
     # Rev E.7.3 (31/10/2026, petición del usuario: el conector tiene que quedar COMPLETAMENTE empotrado): el soporte pasa de 4,5 a
     # 8,8 mm. El conector (cara −0,2, fondo −6,2, patas −7,74 + puente) queda dentro del soporte; la tela no se corta y la
     # contraplaca vuelve a ser la original (sin hueco).
@@ -391,7 +392,7 @@ def ear_pocket():
     orejas se imprime como puente; se corta con un cúter). Pilotos Ø1,6 para 2 tornillos M2 de rosca chapa por las orejas."""
     cx, cy = RE["CON_C"]; (bl, bw, bt), (el, ew, et), c_ = RE["PN_BODY"], RE["PN_EARS"], RE["PN_CLR"]
     zf, ze1, ze0, zb = pin_geom()
-    body = obround_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, ze1 + RE["PN_MEMBRANE"], 1.0)
+    body = obround_solid(cx, cy, bl + 2 * c_, bw + 2 * c_, ze1 + RE["PN_MEMBRANE"] - (0.01 if RE["PN_MEMBRANE"] == 0 else 0), 1.0)
     ears = obround_solid(cx, cy, el + 2 * c_, ew + 2 * c_, -RE["MT"] - 1, ze1)
     pd, pl_ = RE["PN_PILOT"]; hs = RE["PN_HOLE"][1]
     pil = [vcyl(cx, cy + sg * hs / 2, pd / 2, ze1 - 0.01, ze1 + pl_) for sg in (-1, 1)]

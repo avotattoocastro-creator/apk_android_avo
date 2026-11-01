@@ -64,8 +64,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 90,
-   "volumen_mm3": 94445.1,
+   "caras": 89,
+   "volumen_mm3": 94430.5,
    "bbox": [
     -2.72,
     169.439,
@@ -169,8 +169,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 46,
-   "volumen_mm3": 15550.2,
+   "caras": 45,
+   "volumen_mm3": 15535.6,
    "bbox": [
     -2.728,
     26.0,
@@ -199,8 +199,8 @@
    "valido": true,
    "solidos": 1,
    "cascaras_cerradas": true,
-   "caras": 23,
-   "volumen_mm3": 3171.0,
+   "caras": 22,
+   "volumen_mm3": 3156.5,
    "bbox": [
     2.0,
     17.0,
@@ -646,7 +646,7 @@
   "PN_TIP": 1.5,
   "PN_CLR": 0.15,
   "PN_RECESS": 0.2,
-  "PN_MEMBRANE": 0.2,
+  "PN_MEMBRANE": 0.0,
   "PN_PILOT": [
    1.6,
    2.0
@@ -813,5 +813,5 @@
  },
  "logotipo": {},
  "fallos_redondeo": [],
- "tiempo_s": 17.9
+ "tiempo_s": 17.2
 }

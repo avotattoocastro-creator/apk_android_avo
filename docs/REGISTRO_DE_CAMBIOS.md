@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Espalda · Rev E.7.4: alojamiento del conector de muelles pasante (sin membrana)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Petición del usuario:** el soporte tiene que tener un agujero pasante para el pogo. Estaba mirando el STL de la E.7.2 (4,5 mm).
+- **Soporte y base de carga:** se quita la membrana de sacrificio de 0,2 → el alojamiento es pasante de arriba abajo.
+- **Ficheros:** STL y STEP renombrados con la versión (`AVO_RevE7_4_*`) para no confundirlos con los anteriores.
+
+**Validación:** IMPLEMENTADO (CAD):
+- conector STEP / soporte: 0 mm³;
+- STL cerrados de 1 cuerpo.
+- Voladizos: el techo de las orejas es un puente de 5,8 mm con un lado abierto hacia el agujero (el analizador lo marca como
+  voladizo de 2,7). Se imprime como puente en PETG. El resto, 0 fuera de límite.
+
+**NO VERIFICADO** físicamente.
+
 ## 2026-10-31 — Espalda · Rev E.7.3: conector de muelles completamente empotrado (soporte de 8,8 mm)
 **Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
 **Qué cambia:** el usuario (captura de Shapr3D) pide que el conector de muelles no asome por debajo del soporte, sino que quede
