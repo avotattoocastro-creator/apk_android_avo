@@ -44,6 +44,7 @@ AVO_EQ_API void avo_eq_free(char* p);
  *   "clasificador_rendimiento": "V1" | "V2" (default V1)                "modelo_aires": path to an ml/avo_ml.py model
  *   "cache_dir": directory for derived results (RAW files are never modified)   "forzar": true = recalculate
  *   "sensores_calibrados": true|false
+ *   "raza": "GENERICO" | "PSI" | "ARABE"   "parcial_m": 200 (201.168 = furlong)   "signo_mano": 0 (autocalibrar) | 1 | -1
  * With cache_dir the result always contains series and a "cache" key: ACIERTO | CALCULADO | RECALCULADO. */
 AVO_EQ_API int avo_eq_api_version(void);
 AVO_EQ_API int avo_eq_analyse_ex(const char* const* paths, int n, const char* options_json, const volatile int* cancel, char** json_out);

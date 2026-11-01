@@ -97,6 +97,35 @@ const MetricDef kMetrics[] = {
     {"cv_intervalos", &GaitSummary::interval_cv, true, +1, 0.005},
 };
 
+// Every metric judged against the horse's own history: per gait plus racing (AVO Racing).
+struct MetricSpec {
+  std::string name; std::function<double(const SessionSummary&)> get; bool raises_level; int worse; double floor_abs;
+};
+std::vector<MetricSpec> metric_specs() {
+  std::vector<MetricSpec> v;
+  for (int gi = 0; gi < 3; gi++)
+    for (const auto& m : kMetrics) {
+      auto field = m.field;
+      v.push_back({std::string(tgait_name((TGait)gi)) + "." + m.key, [gi, field](const SessionSummary& s) { return s.gait[gi].*field; },
+                   m.raises_level, m.worse, m.floor_abs});
+    }
+  auto race = [](double RaceSummary::*f) { return [f](const SessionSummary& s) { return s.race.present ? s.race.*f : kNaN; }; };
+  v.push_back({"CARRERA.f_v1_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[0] : kNaN; }, true, 0, 0.02});
+  v.push_back({"CARRERA.l_v1_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[0] : kNaN; }, true, -1, 0.10});
+  v.push_back({"CARRERA.f_v2_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[1] : kNaN; }, true, 0, 0.02});
+  v.push_back({"CARRERA.l_v2_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[1] : kNaN; }, true, -1, 0.10});
+  v.push_back({"CARRERA.mano_de_fuera_curva_pct", race(&RaceSummary::wrong_lead_curve_pct), true, +1, 5.0});
+  v.push_back({"CARRERA.indice_caida_pct", race(&RaceSummary::fatigue_pct), false, +1, 2.0});
+  v.push_back({"CARRERA.v_max", race(&RaceSummary::vmax), false, 0, 0.2});
+  v.push_back({"CARRERA.mejor_200m_s", race(&RaceSummary::best_200_s), false, 0, 0.2});
+  v.push_back({"CARRERA.f_en_v_max_hz", race(&RaceSummary::sf_at_vmax), false, 0, 0.02});
+  v.push_back({"CARRERA.l_en_v_max_m", race(&RaceSummary::sl_at_vmax), false, 0, 0.10});
+  v.push_back({"CARRERA.desplazamiento_vertical_m", race(&RaceSummary::vert_disp_m), false, 0, 0.005});
+  v.push_back({"CINCHA.vedba_galope_g", race(&RaceSummary::vedba_gallop_g), false, 0, 0.02});
+  return v;
+}
+
+
 int level_rank(const std::string& l) { return l == "REVISAR" ? 2 : l == "VIGILAR" ? 1 : 0; }
 void raise(std::string* level, const std::string& to) { if (level_rank(to) > level_rank(*level)) *level = to; }
 
@@ -128,6 +157,8 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     return false;
   }
   SessionSummary s;
+  TrainingConfig cc = c;
+  if (a["carreras"]["perfil"]["v_alta"].type == json::Value::NUM) cc.high_speed_m_s = a["carreras"]["perfil"]["v_alta"].n;
   const json::Value& ses = a["sesion"];
   s.id = ses["id"].str(); s.horse = ses["caballo"].str(); s.rider = ses["jinete"].str();
   s.date_utc = ses["inicio_utc"].str();
@@ -153,7 +184,7 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
       double v = nnum(g["velocidad_media"]), vmax = nnum(g["velocidad_max"]);
       if (gnss_ok && !std::isnan(v) && dur > 0) { speed_wsum[gi] += v * dur; speed_w[gi] += dur; }
       if (gnss_ok && !std::isnan(vmax) && (std::isnan(G.speed_max) || vmax > G.speed_max)) G.speed_max = vmax;
-      if (gnss_ok && !std::isnan(v) && v > c.high_speed_m_s && !std::isnan(dist)) s.high_speed_m += dist;
+      if (gnss_ok && !std::isnan(v) && v > cc.high_speed_m_s && !std::isnan(dist)) s.high_speed_m += dist;
       bool imu_ok = g["calidad_imu"].str() != "NO_UTILIZABLE";
       if (gnss_ok) wm[gi][0].push_back({nnum(g["longitud_tranco_m"]), dur});
       if (imu_ok) {
@@ -183,7 +214,7 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
       double dt = nnum(st.a[i]) - nnum(st.a[i - 1]), v0 = nnum(sv.a[i - 1]), v1 = nnum(sv.a[i]);
       if (std::isnan(dt) || dt <= 0 || dt > 2 || std::isnan(v0) || std::isnan(v1)) continue;
       double vm = 0.5 * (v0 + v1);
-      if (vm > c.high_speed_m_s) hs += vm * dt;
+      if (vm > cc.high_speed_m_s) hs += vm * dt;
     }
     s.high_speed_m = hs;
   }
@@ -214,6 +245,44 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     if (qv["dominio"].str() == "GNSS") s.gnss_quality = qv["nivel"].str();
     if (qv["dominio"].str() == "IMU") s.imu_quality = qv["nivel"].str();
   }
+  // AVO Racing
+  const json::Value& rc = a["carreras"];
+  if (rc.type == json::Value::OBJ) {
+    RaceSummary& R = s.race;
+    R.present = true;
+    R.breed = rc["perfil"]["raza"].str();
+    R.vedba_load_gmin = nnum(rc["cincha"]["carga_vedba_g_min"]);
+    R.vedba_gallop_g = nnum(rc["cincha"]["vedba_por_aire_g"]["GALOPE"]);
+    R.gallop_left_s = rc["cincha"]["giros_por_aire"]["GALOPE"]["izquierda_s"].num(0);
+    R.gallop_right_s = rc["cincha"]["giros_por_aire"]["GALOPE"]["derecha_s"].num(0);
+    R.lead_calibration = rc["mano"]["calibracion"].str();
+    R.lead_left = (int)rc["mano"]["zancadas_izquierda"].num(0); R.lead_right = (int)rc["mano"]["zancadas_derecha"].num(0);
+    R.lead_changes = (int)rc["mano"]["cambios"].num(0);
+    R.wrong_lead_curve_pct = nnum(rc["mano"]["mano_de_fuera_en_curva_pct"]);
+    R.vert_disp_m = nnum(rc["zancadas"]["desplazamiento_vertical_mediano_m"]);
+    const json::Value& tr = rc["trabajos"];
+    R.vmax = nnum(tr["v_max"]); R.best_200_s = nnum(tr["mejor_200m_s"]);
+    R.dist_fast_m = tr["distancia_rapida_m"].num(0); R.dist_work_m = tr["distancia_galope_trabajo_m"].num(0);
+    R.ref_speed[0] = nnum(rc["perfil"]["v_referencia"][0]); R.ref_speed[1] = nnum(rc["perfil"]["v_referencia"][1]);
+    std::vector<double> sf[2], sl[2];
+    double best_v = -1;
+    for (const auto& e : tr["lista"].a) {
+      R.efforts++;
+      if (e["tipo"].str() == "TRABAJO_RAPIDO") R.fast_efforts++;
+      double v = nnum(e["v_max"]);
+      if (!std::isnan(v) && v > best_v) { best_v = v; R.fatigue_pct = nnum(e["indice_caida_pct"]); R.sf_at_vmax = nnum(e["f_en_v_max_hz"]); R.sl_at_vmax = nnum(e["l_en_v_max_m"]); }
+      for (int k = 0; k < 2; k++) {
+        double f = nnum(e["referencia"][k]["f_hz"]), l = nnum(e["referencia"][k]["l_m"]);
+        if (!std::isnan(f)) sf[k].push_back(f);
+        if (!std::isnan(l)) sl[k].push_back(l);
+      }
+    }
+    for (int k = 0; k < 2; k++) { R.sf_ref[k] = median(sf[k]); R.sl_ref[k] = median(sl[k]); }
+    for (const auto& e : rc["eventos"].a) {
+      std::string t = e["tipo"].str();
+      if (t == "IMPACTO_ATIPICO") R.impacts++; else if (t == "MOVIMIENTO_LATERAL_BRUSCO") R.lateral_jolts++; else if (t == "SATURACION") R.saturations++;
+    }
+  }
   if (s.gnss_quality == "NO_UTILIZABLE") s.warnings.push_back("GNSS no utilizable: distancias y velocidades no fiables");
   if (!s.has_imu) s.warnings.push_back("sesión sin cincha: sin cadencia ni regularidad");
   *out = s;
@@ -236,7 +305,21 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"pico_aceleracion_m_s2\":" << num(s.accel_peak) << ",\"pico_frenada_m_s2\":" << num(s.decel_peak) << ",\"fuente\":\"TRAYECTORIA_GNSS\"}"
     << ",\"calidad\":{\"gnss\":" << q(s.gnss_quality) << ",\"imu\":" << q(s.imu_quality) << "}"
     << ",\"valoracion\":{\"rpe\":" << num(s.rpe) << ",\"estado\":" << q(s.state) << ",\"nota\":" << q(s.note) << "}"
-    << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << "},\"avisos\":[";
+    << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << "}";
+  if (s.race.present) {
+    const RaceSummary& R = s.race;
+    o << ",\"carreras\":{\"raza\":" << q(R.breed) << ",\"carga_vedba_g_min\":" << num(R.vedba_load_gmin) << ",\"vedba_galope_g\":" << num(R.vedba_gallop_g)
+      << ",\"galope_girando_izquierda_s\":" << num(R.gallop_left_s) << ",\"galope_girando_derecha_s\":" << num(R.gallop_right_s)
+      << ",\"mano\":{\"calibracion\":" << q(R.lead_calibration) << ",\"izquierda\":" << R.lead_left << ",\"derecha\":" << R.lead_right << ",\"cambios\":" << R.lead_changes
+      << ",\"mano_de_fuera_en_curva_pct\":" << num(R.wrong_lead_curve_pct) << "},\"trabajos\":" << R.efforts << ",\"trabajos_rapidos\":" << R.fast_efforts
+      << ",\"v_max\":" << num(R.vmax) << ",\"mejor_200m_s\":" << num(R.best_200_s) << ",\"distancia_rapida_m\":" << num(R.dist_fast_m)
+      << ",\"distancia_galope_trabajo_m\":" << num(R.dist_work_m) << ",\"indice_caida_pct\":" << num(R.fatigue_pct)
+      << ",\"referencia\":[";
+    for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(R.ref_speed[k]) << ",\"f_hz\":" << num(R.sf_ref[k]) << ",\"l_m\":" << num(R.sl_ref[k]) << "}";
+    o << "],\"f_en_v_max_hz\":" << num(R.sf_at_vmax) << ",\"l_en_v_max_m\":" << num(R.sl_at_vmax) << ",\"desplazamiento_vertical_m\":" << num(R.vert_disp_m)
+      << ",\"eventos\":{\"impactos_atipicos\":" << R.impacts << ",\"laterales_bruscos\":" << R.lateral_jolts << ",\"saturacion\":" << R.saturations << "}}";
+  }
+  o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
   o << "]}";
   return o.str();
@@ -261,6 +344,23 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
   s.gnss_quality = v["calidad"]["gnss"].str(); s.imu_quality = v["calidad"]["imu"].str();
   s.rpe = nnum(v["valoracion"]["rpe"]); s.state = v["valoracion"]["estado"].str(); s.note = v["valoracion"]["nota"].str();
   s.surface = v["pista"]["superficie"].str(); s.track_state = v["pista"]["estado"].str();
+  const json::Value& rc = v["carreras"];
+  if (rc.type == json::Value::OBJ) {
+    RaceSummary& R = s.race;
+    R.present = true; R.breed = rc["raza"].str();
+    R.vedba_load_gmin = nnum(rc["carga_vedba_g_min"]); R.vedba_gallop_g = nnum(rc["vedba_galope_g"]);
+    R.gallop_left_s = rc["galope_girando_izquierda_s"].num(0); R.gallop_right_s = rc["galope_girando_derecha_s"].num(0);
+    R.lead_calibration = rc["mano"]["calibracion"].str(); R.lead_left = (int)rc["mano"]["izquierda"].num(0);
+    R.lead_right = (int)rc["mano"]["derecha"].num(0); R.lead_changes = (int)rc["mano"]["cambios"].num(0);
+    R.wrong_lead_curve_pct = nnum(rc["mano"]["mano_de_fuera_en_curva_pct"]);
+    R.efforts = (int)rc["trabajos"].num(0); R.fast_efforts = (int)rc["trabajos_rapidos"].num(0);
+    R.vmax = nnum(rc["v_max"]); R.best_200_s = nnum(rc["mejor_200m_s"]); R.dist_fast_m = rc["distancia_rapida_m"].num(0);
+    R.dist_work_m = rc["distancia_galope_trabajo_m"].num(0); R.fatigue_pct = nnum(rc["indice_caida_pct"]);
+    for (int k = 0; k < 2; k++) { R.ref_speed[k] = nnum(rc["referencia"][k]["v"]); R.sf_ref[k] = nnum(rc["referencia"][k]["f_hz"]); R.sl_ref[k] = nnum(rc["referencia"][k]["l_m"]); }
+    R.sf_at_vmax = nnum(rc["f_en_v_max_hz"]); R.sl_at_vmax = nnum(rc["l_en_v_max_m"]); R.vert_disp_m = nnum(rc["desplazamiento_vertical_m"]);
+    R.impacts = (int)rc["eventos"]["impactos_atipicos"].num(0); R.lateral_jolts = (int)rc["eventos"]["laterales_bruscos"].num(0);
+    R.saturations = (int)rc["eventos"]["saturacion"].num(0);
+  }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
   return true;
@@ -316,22 +416,19 @@ Baseline baseline_of(const std::vector<double>& vals) {
   return b;
 }
 
+// Secondary load (sRPE, girth VeDBA): only when every session of the chronic window has it.
+struct Series2 { std::map<long, double> load; std::map<long, int> missing; };
+
 // Load windows at day d. loads: day -> load; first_day: first day of the history.
-void windows_at(long d, const std::map<long, double>& loads, const std::map<long, double>& srpe, const std::map<long, int>& missing_rpe,
-                long first_day, const TrainingConfig& c, SessionLoad* L, std::vector<std::string>* notes) {
-  double acute = 0, chronic = 0, acute_s = 0, chronic_s = 0;
-  int miss_chronic = 0;
+void windows_at(long d, const std::map<long, double>& loads, const Series2& rpe, const Series2& imu, long first_day,
+                const TrainingConfig& c, SessionLoad* L, std::vector<std::string>* notes) {
+  double acute = 0, chronic = 0;
   std::vector<double> week;
   for (long k = d - c.chronic_days + 1; k <= d; k++) {
     auto it = loads.find(k);
     double l = it == loads.end() ? 0 : it->second;
     chronic += l;
-    auto is = srpe.find(k);
-    double ls = is == srpe.end() ? 0 : is->second;
-    chronic_s += ls;
-    auto im = missing_rpe.find(k);
-    if (im != missing_rpe.end()) miss_chronic += im->second;
-    if (k > d - c.acute_days) { acute += l; acute_s += ls; week.push_back(l); }
+    if (k > d - c.acute_days) { acute += l; week.push_back(l); }
   }
   double weeks = c.chronic_days / 7.0, acute_weeks = c.acute_days / 7.0;
   L->acute = acute;
@@ -339,10 +436,20 @@ void windows_at(long d, const std::map<long, double>& loads, const std::map<long
   bool covered = first_day <= d - c.chronic_days + 1;
   if (covered && L->chronic_weekly > 0) L->acwr = (acute / acute_weeks) / L->chronic_weekly;
   else if (notes && !covered) notes->push_back("historia menor de " + std::to_string(c.chronic_days) + " días: sin ACWR");
-  if (miss_chronic == 0 && chronic_s > 0) {
-    L->acute_srpe = acute_s; L->chronic_weekly_srpe = chronic_s / weeks;
-    if (covered && L->chronic_weekly_srpe > 0) L->acwr_srpe = (acute_s / acute_weeks) / L->chronic_weekly_srpe;
-  }
+  auto second = [&](const Series2& S, double* a_out, double* c_out, double* r_out) {
+    double a = 0, ch = 0; int miss = 0;
+    for (long k = d - c.chronic_days + 1; k <= d; k++) {
+      auto it = S.load.find(k); double l = it == S.load.end() ? 0 : it->second;
+      ch += l; if (k > d - c.acute_days) a += l;
+      auto im = S.missing.find(k); if (im != S.missing.end()) miss += im->second;
+    }
+    if (miss == 0 && ch > 0) {
+      *a_out = a; *c_out = ch / weeks;
+      if (covered && *c_out > 0) *r_out = (a / acute_weeks) / *c_out;
+    }
+  };
+  second(rpe, &L->acute_srpe, &L->chronic_weekly_srpe, &L->acwr_srpe);
+  second(imu, &L->acute_imu, &L->chronic_weekly_imu, &L->acwr_imu);
   // Foster monotony over the acute window (days without training count as 0).
   double mean = 0; for (double x : week) mean += x; mean /= week.size();
   double var = 0; for (double x : week) var += (x - mean) * (x - mean); var /= week.size();
@@ -358,6 +465,10 @@ void load_flags(const SessionLoad& L, const TrainingConfig& c, std::string* leve
   }
   if (!std::isnan(L.acwr_srpe) && L.acwr_srpe > c.acwr_high) {
     snprintf(b, sizeof(b), "carga percibida (sRPE) %.2f veces la habitual", L.acwr_srpe);
+    raise(level, "VIGILAR"); reasons->push_back(b);
+  }
+  if (!std::isnan(L.acwr_imu) && L.acwr_imu > c.acwr_high) {
+    snprintf(b, sizeof(b), "carga de la cincha (VeDBA) %.2f veces la habitual", L.acwr_imu);
     raise(level, "VIGILAR"); reasons->push_back(b);
   }
   if (!std::isnan(L.monotony) && L.monotony > c.monotony_high) {
@@ -404,13 +515,15 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   if (ok.empty()) { r.warnings.push_back("sin sesiones con fecha"); r.level = "NORMAL"; return r; }
   for (auto& s : ok) if (!s.horse.empty()) { r.horse = s.horse; break; }
 
-  std::map<long, double> loads, srpe;
-  std::map<long, int> missing_rpe;
+  std::map<long, double> loads;
+  Series2 rpe, imu;
   for (auto& s : ok) {
     double L = external_load(s, c);
     loads[s.day] += L;
-    if (!std::isnan(s.rpe)) srpe[s.day] += s.rpe * s.moving_s / 60.0; else missing_rpe[s.day]++;
+    if (!std::isnan(s.rpe)) rpe.load[s.day] += s.rpe * s.moving_s / 60.0; else rpe.missing[s.day]++;
+    if (s.race.present && !std::isnan(s.race.vedba_load_gmin)) imu.load[s.day] += s.race.vedba_load_gmin; else imu.missing[s.day]++;
   }
+  const std::vector<MetricSpec> specs = metric_specs();
   long first_day = ok.front().day;
 
   for (size_t i = 0; i < ok.size(); i++) {
@@ -418,39 +531,45 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     const SessionSummary& s = ok[i];
     R.load.external = external_load(s, c);
     if (!std::isnan(s.rpe)) R.load.srpe = s.rpe * s.moving_s / 60.0;
+    if (s.race.present) R.load.imu = s.race.vedba_load_gmin;
     if (i > 0) R.load.rest_days_before = (int)(s.day - ok[i - 1].day);
-    windows_at(s.day, loads, srpe, missing_rpe, first_day, c, &R.load, nullptr);
+    windows_at(s.day, loads, rpe, imu, first_day, c, &R.load, nullptr);
     load_flags(R.load, c, &R.level, &R.reasons);
     if (R.load.rest_days_before > c.rest_watch_days)
       R.reasons.push_back("vuelta al trabajo tras " + std::to_string(R.load.rest_days_before) + " días sin sesiones");
 
     // Deviations against the horse's own previous sessions.
-    for (int gi = 0; gi < 3; gi++)
-      for (const auto& m : kMetrics) {
-        double x = s.gait[gi].*(m.field);
-        if (std::isnan(x)) continue;
-        std::vector<double> hist;
-        for (size_t j = 0; j < i; j++)
-          if (ok[j].day >= s.day - c.baseline_days) { double y = ok[j].gait[gi].*(m.field); if (!std::isnan(y)) hist.push_back(y); }
-        if ((int)hist.size() < c.baseline_min_sessions) continue;
-        Baseline b = baseline_of(hist);
-        double scale = std::max(1.4826 * b.mad, std::max(m.floor_abs, 0.02 * std::fabs(b.med)));
-        Deviation d;
-        d.metric = std::string(tgait_name((TGait)gi)) + "." + m.key;
-        d.value = x; d.baseline = b.med; d.mad = b.mad; d.n = b.n; d.z = (x - b.med) / scale;
-        d.direction = d.z >= 0 ? "MAYOR" : "MENOR";
-        bool worse = m.worse == 0 || (m.worse > 0 && d.z > 0) || (m.worse < 0 && d.z < 0);
-        double az = std::fabs(d.z);
-        d.level = az >= c.z_review ? "REVISAR" : az >= c.z_watch ? "VIGILAR" : "NORMAL";
-        if (d.level != "NORMAL" && m.raises_level && worse) {
-          raise(&R.level, d.level);
-          char b2[240];
-          snprintf(b2, sizeof(b2), "%s %s de lo habitual: %.3g frente a %.3g (z = %.1f, %d sesiones)", d.metric.c_str(),
-                   d.z > 0 ? "por encima" : "por debajo", x, b.med, d.z, b.n);
-          R.reasons.push_back(b2);
-        }
-        R.deviations.push_back(d);
+    for (const auto& m : specs) {
+      double x = m.get(s);
+      if (std::isnan(x)) continue;
+      std::vector<double> hist;
+      for (size_t j = 0; j < i; j++)
+        if (ok[j].day >= s.day - c.baseline_days) { double y = m.get(ok[j]); if (!std::isnan(y)) hist.push_back(y); }
+      if ((int)hist.size() < c.baseline_min_sessions) continue;
+      Baseline b = baseline_of(hist);
+      double scale = std::max(1.4826 * b.mad, std::max(m.floor_abs, 0.02 * std::fabs(b.med)));
+      Deviation d;
+      d.metric = m.name;
+      d.value = x; d.baseline = b.med; d.mad = b.mad; d.n = b.n; d.z = (x - b.med) / scale;
+      d.direction = d.z >= 0 ? "MAYOR" : "MENOR";
+      bool worse = m.worse == 0 || (m.worse > 0 && d.z > 0) || (m.worse < 0 && d.z < 0);
+      double az = std::fabs(d.z);
+      d.level = az >= c.z_review ? "REVISAR" : az >= c.z_watch ? "VIGILAR" : "NORMAL";
+      if (d.level != "NORMAL" && m.raises_level && worse) {
+        raise(&R.level, d.level);
+        char b2[240];
+        snprintf(b2, sizeof(b2), "%s %s de lo habitual: %.3g frente a %.3g (z = %.1f, %d sesiones)", d.metric.c_str(),
+                 d.z > 0 ? "por encima" : "por debajo", x, b.med, d.z, b.n);
+        R.reasons.push_back(b2);
       }
+      R.deviations.push_back(d);
+    }
+    if (s.race.present && s.race.impacts > 0) {
+      raise(&R.level, "VIGILAR");
+      R.reasons.push_back(std::to_string(s.race.impacts) + " impactos atípicos en la cincha (posible tropiezo o mala pisada)");
+    }
+    if (s.race.present && s.race.lateral_jolts > 0)
+      R.reasons.push_back(std::to_string(s.race.lateral_jolts) + " movimientos laterales bruscos (posible espantada o quiebro)");
     // Trainer's assessment.
     std::string st = upper_ascii(s.state);
     if (st == "COJERA" || st == "COJO" || st == "DOLOR") { raise(&R.level, "REVISAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
@@ -460,10 +579,11 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   }
 
   // Current state at the reference day.
-  windows_at(r.reference_day, loads, srpe, missing_rpe, first_day, c, &r.current, &r.warnings);
+  windows_at(r.reference_day, loads, rpe, imu, first_day, c, &r.current, &r.warnings);
   r.current.rest_days_before = -1;
   { auto it = loads.find(r.reference_day); r.current.external = it == loads.end() ? 0 : it->second;
-    auto is = srpe.find(r.reference_day); if (is != srpe.end() && !missing_rpe.count(r.reference_day)) r.current.srpe = is->second; }
+    auto is = rpe.load.find(r.reference_day); if (is != rpe.load.end() && !rpe.missing.count(r.reference_day)) r.current.srpe = is->second;
+    auto ii = imu.load.find(r.reference_day); if (ii != imu.load.end() && !imu.missing.count(r.reference_day)) r.current.imu = ii->second; }
   r.days_since_last = (int)(r.reference_day - ok.back().day);
   for (long k = r.reference_day - c.chronic_days + 1; k <= r.reference_day; k++) {
     auto it = loads.find(k);
@@ -481,15 +601,16 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     r.reasons.push_back(std::to_string(r.days_since_last) + " días sin sesiones: volver a subir la carga poco a poco");
 
   // Current baselines.
-  for (int gi = 0; gi < 3; gi++)
-    for (const auto& m : kMetrics) {
-      std::vector<double> hist;
-      for (const auto& s : ok) if (s.day >= r.reference_day - c.baseline_days) { double y = s.gait[gi].*(m.field); if (!std::isnan(y)) hist.push_back(y); }
-      Baseline b = baseline_of(hist);
-      Deviation d; d.metric = std::string(tgait_name((TGait)gi)) + "." + m.key; d.baseline = b.med; d.mad = b.mad; d.n = b.n;
-      d.level = b.n >= c.baseline_min_sessions ? "DISPONIBLE" : "INSUFICIENTE";
-      r.baselines.push_back(d);
-    }
+  for (const auto& m : specs) {
+    std::vector<double> hist;
+    for (const auto& s : ok) if (s.day >= r.reference_day - c.baseline_days) { double y = m.get(s); if (!std::isnan(y)) hist.push_back(y); }
+    if (hist.empty() && m.name.compare(0, 8, "CARRERA.") == 0) continue;
+    if (hist.empty() && m.name.compare(0, 7, "CINCHA.") == 0) continue;
+    Baseline b = baseline_of(hist);
+    Deviation d; d.metric = m.name; d.baseline = b.med; d.mad = b.mad; d.n = b.n;
+    d.level = b.n >= c.baseline_min_sessions ? "DISPONIBLE" : "INSUFICIENTE";
+    r.baselines.push_back(d);
+  }
 
   // Trends (per week) over the trend window.
   auto add_trend = [&](const std::string& name, std::function<double(const SessionSummary&)> f) {
@@ -507,11 +628,14 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     t.direction = t.slope_low > 0 ? "SUBE" : t.slope_high < 0 ? "BAJA" : "ESTABLE";
     r.trends.push_back(t);
   };
-  for (int gi = 0; gi < 3; gi++)
-    for (const auto& m : kMetrics) {
-      auto field = m.field;
-      add_trend(std::string(tgait_name((TGait)gi)) + "." + m.key, [gi, field](const SessionSummary& s) { return s.gait[gi].*field; });
-    }
+  bool any_race = false;
+  for (const auto& s : ok) if (s.race.present) any_race = true;
+  for (const auto& m : specs) {
+    bool race_metric = m.name.compare(0, 8, "CARRERA.") == 0 || m.name.compare(0, 7, "CINCHA.") == 0;
+    if (race_metric && !any_race) continue;
+    add_trend(m.name, m.get);
+  }
+  if (any_race) add_trend("carga_vedba", [](const SessionSummary& s) { return s.race.present ? s.race.vedba_load_gmin : kNaN; });
   add_trend("carga_externa", [&](const SessionSummary& s) { return external_load(s, c); });
   add_trend("distancia_m", [](const SessionSummary& s) { return s.distance_m; });
 
@@ -524,7 +648,8 @@ namespace {
 void load_json(std::ostringstream& o, const SessionLoad& L) {
   o << "{\"externa\":" << num(L.external) << ",\"srpe\":" << num(L.srpe) << ",\"aguda\":" << num(L.acute) << ",\"cronica_semanal\":" << num(L.chronic_weekly)
     << ",\"acwr\":" << num(L.acwr) << ",\"aguda_srpe\":" << num(L.acute_srpe) << ",\"cronica_semanal_srpe\":" << num(L.chronic_weekly_srpe)
-    << ",\"acwr_srpe\":" << num(L.acwr_srpe) << ",\"monotonia\":" << num(L.monotony) << ",\"tension\":" << num(L.strain)
+    << ",\"acwr_srpe\":" << num(L.acwr_srpe) << ",\"vedba\":" << num(L.imu) << ",\"aguda_vedba\":" << num(L.acute_imu)
+    << ",\"cronica_semanal_vedba\":" << num(L.chronic_weekly_imu) << ",\"acwr_vedba\":" << num(L.acwr_imu) << ",\"monotonia\":" << num(L.monotony) << ",\"tension\":" << num(L.strain)
     << ",\"dias_desde_anterior\":" << (L.rest_days_before < 0 ? std::string("null") : std::to_string(L.rest_days_before)) << "}";
 }
 void strs(std::ostringstream& o, const std::vector<std::string>& v) {

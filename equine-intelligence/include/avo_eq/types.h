@@ -64,6 +64,8 @@ struct Session {
   std::vector<MarkerEvent> markers;
   // ingestion bookkeeping
   uint32_t records = 0, bad_records = 0, unknown_frames = 0, segments = 0;
+  uint8_t imu_units = 0;          // IMU header byte 15: 1 = BNO085 fixed point (acc Q8 m/s², gyro Q9 rad/s), 0 = raw LSB
+  uint32_t imu_fused_batches = 0; // GIRTH 0.4.x fused batches (linear acc + quaternion), counted, not used yet
   bool clean_close = false, tail_garbage = false;
 };
 

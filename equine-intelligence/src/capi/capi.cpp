@@ -97,6 +97,19 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
   std::string cl = v["clasificador_rendimiento"].str("V1");
   if (cl == "V2") o->cfg.performance_uses_v2 = true; else if (cl != "V1") { *err = "clasificador desconocido: " + cl; return false; }
   o->cfg.symmetry.sensors_calibrated = v["sensores_calibrados"].boolean(false);
+  // AVO Racing: breed profile and options
+  std::string raza = v["raza"].str("GENERICO");
+  if (!avoeq::breed_profile(raza, &o->cfg.racing.breed)) { *err = "raza desconocida: " + raza + " (GENERICO, PSI o ARABE)"; return false; }
+  if (v.has("parcial_m")) {
+    double d = v["parcial_m"].num(-1);
+    if (!(d >= 50 && d <= 1000)) { *err = "parcial_m fuera de rango (50–1000)"; return false; }
+    o->cfg.racing.split_m = d;
+  }
+  if (v.has("signo_mano")) {
+    double sm = v["signo_mano"].num(0);
+    if (sm != 1 && sm != -1 && sm != 0) { *err = "signo_mano debe ser 1, -1 o 0"; return false; }
+    o->cfg.racing.lead_sign = sm;
+  }
   std::string mp = v["modelo_aires"].str("");
   if (!mp.empty()) {
     std::ifstream f(mp, std::ios::binary); if (!f) { *err = "no se puede leer el modelo " + mp; return false; }

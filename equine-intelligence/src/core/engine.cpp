@@ -102,7 +102,7 @@ static void assess_quality(const Session& s, Analysis& a) {
 std::vector<std::pair<std::string, std::string>> algorithm_versions() {
   return {{"motor", ENGINE_VERSION}, {"gnss", "1.1.0"}, {"aceleracion", KINEMATICS_VERSION}, {"curvas", CURVES_VERSION},
           {"cadencia", CADENCE_VERSION}, {GAIT_V1_ID, "1.0.1"}, {GAIT_V2_ID, "2.0.0"}, {"fusion", FUSION_VERSION},
-          {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}};
+          {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}, {"carreras", RACING_VERSION}};
 }
 
 std::string params_hash(const EngineConfig& c) {
@@ -116,8 +116,12 @@ std::string params_hash(const EngineConfig& c) {
            c.gait_v2.confirm_points, c.accel.sustained_min, c.accel.peak_min, c.curves.enter_radius, c.curves.exit_radius,
            (int)c.fusion.mode, c.fusion.max_sync_sigma_s, c.symmetry.min_cycle_corr, (int)c.performance_uses_v2,
            c.gait_model ? c.gait_model->id().c_str() : "-", c.symmetry.sensors_calibrated ? 1 : 0);
+  char rb[256];
+  snprintf(rb, sizeof(rb), "|%s|%g|%g|%g|%g|%g|%g|%g|%g", c.racing.breed.name.c_str(), c.racing.breed.work_speed, c.racing.breed.fast_speed,
+           c.racing.breed.ref_speed[0], c.racing.breed.ref_speed[1], c.racing.split_m, c.racing.lead_sign, c.racing.turn_min_deg_s, c.racing.event_k);
+  std::string all = std::string(b) + rb;
   uint64_t h = 1469598103934665603ull;
-  for (const char* p = b; *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
+  for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);
   return out;
 }
@@ -170,6 +174,7 @@ Analysis analyse(const Session& s, const EngineConfig& c, const std::string& whe
   EventInputs in; in.gnss = &a.gnss; in.kin = &a.kinematics; in.curves = &a.curves; in.gait = &chosen; in.fusion = &a.fusion;
   in.validation = &a.validation; in.imu = &a.imu; in.girth_to_gnss = a.girth_to_gnss;
   a.events = detect_events(in, c.events);
+  a.racing = analyse_racing(a.gnss, a.imu, a.girth_to_gnss, chosen, s.imu_units, c.racing); step();
   find_anomalies(a);
   assess_quality(s, a);
   return a;
@@ -397,6 +402,7 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
   }
   o << "]";
   write_v2_blocks(o, a, s);
+  o << ",\"carreras\":" << racing_json(a.racing, c.racing);
   if (series) write_series(o, a, c);
   o << "}";
   return o.str();

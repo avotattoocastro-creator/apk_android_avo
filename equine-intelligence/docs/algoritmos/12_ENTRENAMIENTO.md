@@ -85,3 +85,9 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
 - **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida y hay que
   ajustarlos con la historia real de cada cuadra.
 - Las tendencias con pocas sesiones son orientativas. El intervalo p10–p90 no es un intervalo de confianza formal.
+
+## Ampliación carreras (AVO Racing, ficha 13)
+- Con el bloque `carreras` del análisis, el resumen guarda la raza, la carga VeDBA, la mano, los trabajos, la zancada a las velocidades de referencia, el índice de caída y los eventos.
+- La distancia a alta velocidad usa el umbral de la raza.
+- La historia añade la carga VeDBA (aguda, crónica semanal y ACWR) y las líneas base y tendencias `CARRERA.*` y `CINCHA.*`.
+- Los impactos atípicos suben a VIGILAR.

@@ -24,6 +24,58 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Motor AVO Equine — AVO Racing 1.0.0 (caballos de carreras PSI y árabe)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia (petición del usuario: «añadir todo lo posible a los caballos de carreras PSI y árabes»):**
+- **Nuevo módulo** `src/racing/` + `include/avo_eq/racing.h`. Añade el bloque `carreras` al análisis y lo documenta la ficha 13.
+- **Perfiles de raza** `GENERICO` / `PSI` / `ARABE`: velocidades de trabajo, rápida y alta, velocidades de referencia y rangos de zancada.
+- **Cincha en el marco del caballo:**
+  - escala BNO085 (byte 15 = 1) o por gravedad;
+  - vertical por gravedad y eje de avance por PCA, con el sentido confirmado por la inclinación frente a la aceleración GNSS;
+  - **VeDBA** y carga de la cincha;
+  - **giros a cada mano** (tiempo y grados, por aire);
+  - saturación.
+- **Zancadas en galope:**
+  - frecuencia y longitud (con la velocidad GNSS);
+  - pico vertical y desplazamiento vertical del tronco;
+  - rasgo lateral.
+- **Mano de galope** (experimental): el rasgo lateral es especular entre manos. Se autocalibra en curvas o se fija con `signo_mano`. Da los cambios de mano y el porcentaje de mano de fuera en curva.
+- **Trabajos (GNSS):**
+  - galope de trabajo o trabajo rápido;
+  - parciales cada 200 m o cada furlong (`parcial_m`);
+  - mejores 200–1600 m;
+  - máxima y tiempo hasta ella, distancia por encima del 90 %;
+  - últimos 200/400 m e **índice de caída**;
+  - zancada a la máxima, rectas frecuencia/longitud–velocidad y **zancada a las velocidades de referencia**.
+- **Eventos** (experimentales): impacto atípico, movimiento lateral brusco y saturación.
+- **Ingesta:** `Session::imu_units` (byte 15 de la cabecera IMU) y recuento de lotes fusionados (formato 1).
+- **Historia de entrenamientos:**
+  - el resumen guarda el bloque `carreras`;
+  - la distancia a alta velocidad usa el umbral de la raza;
+  - carga VeDBA con ACWR;
+  - líneas base y tendencias `CARRERA.*` y `CINCHA.*`;
+  - las métricas se definen en una sola tabla (`metric_specs`).
+- **Opciones de la API** (`avo_eq_analyse_ex`): `raza`, `parcial_m` y `signo_mano`. El hash de parámetros y `procedencia.algoritmos.carreras` invalidan la caché.
+- **Fixtures** `core/src/test/resources/equine/*_analysis.json` regeneradas: añaden el bloque `carreras` y cambia el hash de parámetros.
+**Archivos:** `equine-intelligence/{include/avo_eq/racing.h,src/racing/racing.cpp,include/avo_eq/{types,engine,training,avo_eq_c}.h,src/core/engine.cpp,src/capi/capi.cpp,src/ingestion/ingestion.cpp,src/training/training.cpp,tests/test_racing.cpp,tests/test_training.cpp,README.md,docs/FORMATO_RESULTADOS.md,docs/algoritmos/{12_ENTRENAMIENTO,13_CARRERAS}.md}`, fixtures.
+**Validación:**
+- IMPLEMENTADO.
+- Linux: 78 casos y 1086 comprobaciones con ASan/UBSan, y en Release.
+- Sesión sintética con física conocida (cincha girada 170°/35°, curvas y cambios de mano):
+  - máxima 17,04 m/s;
+  - frecuencia 2,451 Hz (real 2,43) y longitud 6,95 m (real 7,0);
+  - mano 100 % en curvas y 2 de 2 cambios;
+  - giros de 71° y 85° (reales 73° y 86°).
+- **NO VERIFICADO** con caballos reales.
+**Pendiente:**
+- Validar la mano con vídeo.
+- Ajustar los perfiles PSI y árabe con sesiones reales.
+- Usar los lotes fusionados (cuaternión) del BNO085.
+- Rango de ±16 g para impactos fuertes.
+- Pantallas en las apps.
+
+---
+
 ## 2026-11-01 — Motor AVO Equine — AVO Training Analytics 1.0.0 (análisis de la historia de entrenamientos, fase 1)
 **Autor:** Claude · **Rama:** `feature/avo-training-analytics` (sale de `feature/ipad-app` `33476df`) · **Commits:** `78893e4`, `d1edc03`, `6816a98` · **CI:** run 41315952401 ✅ (Linux ASan/UBSan 71 casos/1020 comprobaciones, Windows MSVC 71 casos, Android NDK ×3, JNI en JVM, fixtures, resumen → historia) sobre `6816a98`
 **Qué cambia (petición del usuario: analizar los entrenamientos para Android, Windows e iOS):**

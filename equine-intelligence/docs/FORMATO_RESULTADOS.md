@@ -46,3 +46,18 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
   `AIRE.cv_intervalos`, más `carga_externa` y `distancia_m` en las tendencias.
 
 `avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
+
+## Bloque `carreras` (AVO Racing 1.0.0) — ficha 13
+Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (200; 201.168 = furlong), `signo_mano` (0 | 1 | −1).
+`carreras`:
+- `perfil`;
+- `cincha`: `escala`, `lsb_por_g`, `calidad_vertical`, `sentido_avance_confirmado`, `vedba_media_g`, `carga_vedba_g_min`,
+  `vedba_por_aire_g`, `giros`, `giros_por_aire`, `muestras_saturadas`;
+- `zancadas`: medianas y `lista` con t0, t1, f_hz, v, l_m, pico_v_g, desp_v_m, vedba_g, rasgo_lateral, giro_deg_s, mano y curva;
+- `mano`: `signo`, `calibracion`, `acuerdo_curvas`, zancadas por mano, `cambios`, `mano_de_fuera_en_curva_pct`;
+- `trabajos`: distancias, `v_max`, `mejor_200m_s` y `lista` con, para cada trabajo: tipo, velocidades, `parciales`, `mejores`,
+  últimos 200/400 m, `indice_caida_pct`, zancada a la máxima, `ajuste_f`, `ajuste_l`, `referencia` y mano;
+- `eventos`;
+- `avisos`.
+
+El resumen `avo-training-session` añade `carreras` y la carga de la historia añade `vedba`, `aguda_vedba`, `cronica_semanal_vedba` y `acwr_vedba`.
