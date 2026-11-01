@@ -46,3 +46,23 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
   `AIRE.cv_intervalos`, más `carga_externa` y `distancia_m` en las tendencias.
 
 `avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
+
+## Bloque `trabajo_pista` (AVO Track Work 1.0.0: entrenamiento de caballos de carreras) — ficha 13
+Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (200; 201.168 = furlong), `signo_mano` (0 | 1 | −1),
+`recorrido` ({`nombre`, `salida` / `meta` / `salida_meta`: {`a`, `b`: [lat, lon], `sentido`}, `geocerca`: [[lat, lon], …]}) o `plan_geocercas` (objeto de `geocercas.json`).
+`trabajo_pista`:
+- `modulo` = `AVO_TRACK_WORK`, `perfil`;
+- `cincha`: `escala`, `lsb_por_g`, `calidad_vertical`, `sentido_avance_confirmado`, `vedba_media_g`, `carga_vedba_g_min`,
+  `vedba_por_aire_g`, `giros`, `giros_por_aire`, `muestras_saturadas`;
+- `zancadas`: medianas y `lista` con t0, t1, f_hz, v, l_m, pico_v_g, desp_v_m, vedba_g, rasgo_lateral, giro_deg_s, mano y curva;
+- `mano`: `signo`, `calibracion`, `acuerdo_curvas`, zancadas por mano, `cambios`, `mano_de_fuera_en_curva_pct`;
+- `trabajos`: distancias, `v_max`, `mejor_200m_s` y `lista` con, para cada trabajo: tipo, velocidades, `parciales`, `mejores`,
+  últimos 200/400 m, `indice_caida_pct`, zancada a la máxima, `ajuste_f`, `ajuste_l`, `referencia`, mano,
+  `recuperacion_hasta_paso_s`, `pausa_hasta_siguiente_s` y `v_media_pausa`;
+- `recorrido` (`null` sin líneas): `nombre`, `distancia_salida_meta_m`, `dentro_geocerca_pct`, `mejor_pasada_s`, `cruces` (línea, t, sentido, cuenta) y `pasadas` (mismo formato que los trabajos, con tipo `PASADA`);
+- `fases`: `base` (`VELOCIDAD` o `LINEAS`), `calentamiento`, `trabajo` y `vuelta_a_la_calma`, cada una con duración, distancia y segundos parado, al paso, al trote y al galope (`null` si no hay trabajos);
+- `series`: `repeticiones`, `rapidas`, `caida_v_max_pct`, `caida_zancada_pct`, `recuperacion_media_s`, `calentamiento_corto`;
+- `eventos`;
+- `avisos`.
+
+El resumen `avo-training-session` añade `trabajo_pista` (con `sesion`) y la carga de la historia añade `vedba`, `aguda_vedba`, `cronica_semanal_vedba` y `acwr_vedba`.

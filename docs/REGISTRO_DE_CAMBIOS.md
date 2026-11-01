@@ -24,6 +24,122 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Motor AVO Equine — Track Work: recorrido de entrenamiento con líneas de salida y meta (opcional)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `7a34604` · **CI:** run 41334018208 ✅ (Linux ASan/UBSan 82 casos/1157 comprobaciones, Windows MSVC, Android NDK ×3, JNI, fixtures)
+**Por qué:** el usuario comparte su zona de entrenamiento (Playa del Regatón, Laredo), con la geocerca de grabación, el calentamiento, la salida, el trabajo, la meta y el enfriamiento.
+- Aclara que es una **referencia aproximada que puede variar**.
+- Aclara que **todos los datos salen del chaleco GPS RTK y de la cincha BNO085**.
+- Por eso el recorrido es **opcional**: sin líneas sigue la detección por velocidad y cincha.
+**Qué cambia:**
+- **Opciones** `recorrido` (líneas `salida`, `meta` o `salida_meta` con sentido, y `geocerca`) o `plan_geocercas` (el `geocercas.json` de Windows/iPad: `Lines` con `Role` y `Direction`, y `Fences` de tipo polígono).
+- **Cruces:** misma geometría que el reloj y AVO Windows, con el instante interpolado.
+- **Pasadas** SALIDA → META con el mismo análisis que los trabajos. La SALIDA cruzada al revés anula la salida pendiente; así el calentamiento que pasa la línea hacia atrás no crea pasadas falsas.
+- **Fases** por líneas (`fases.base` = `LINEAS`).
+- **Geocerca:** porcentaje de épocas dentro y aviso.
+- **Parciales:** último tramo hasta la línea.
+- **Hash de parámetros** con el recorrido.
+- **Historia:** `RECORRIDO.mejor_pasada_s` y `RECORRIDO.v_media_mejor`.
+- **Refactorización:** el cálculo de un trabajo se hace en una sola función (`fill_effort`) para trabajos y pasadas.
+- **Fixtures** regeneradas.
+**Validación:**
+- IMPLEMENTADO. 82 casos y 1157 comprobaciones con ASan/UBSan, y en Release.
+- **Recorrido sintético como el del dibujo:** calentamiento hacia atrás pasando la salida, giro, galope de 1200 m, enfriamiento pasando la meta y vuelta cruzando la meta al revés.
+  - 1 pasada de 75,08 s (real 75,08 s).
+  - Recuperación de 15,8 s (real 15,83 s).
+  - Igual con sentido AMBOS.
+  - Con las líneas en el sentido equivocado no aparecen pasadas.
+  - Con una geocerca menor, avisa.
+  - También a través de la API C con un `geocercas.json` de Windows.
+- **NO VERIFICADO** con datos reales.
+**Pendiente:** que las apps pasen su `geocercas.json` al motor.
+
+---
+
+## 2026-11-01 — Motor AVO Equine — AVO Track Work 1.0.0: el módulo de «carreras» pasa a ser de ENTRENAMIENTO (fases, series, recuperación)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `ef704d8` · **CI:** run 41330093878 ✅ (Linux ASan/UBSan 79 casos/1103 comprobaciones, Windows MSVC, Android NDK ×3, JNI, fixtures)
+**Por qué:** el usuario aclara que el objetivo es analizar los **entrenamientos** de caballos de carreras PSI y árabes, no las carreras. Esta entrada corrige el enfoque de la anterior («AVO Racing 1.0.0»).
+**Qué cambia:**
+- **Nombres:**
+  - bloque JSON `carreras` → **`trabajo_pista`** (con `modulo` = `AVO_TRACK_WORK`);
+  - `procedencia.algoritmos.carreras` → `trabajo_pista`;
+  - métricas de la historia `CARRERA.*` → **`TRABAJO.*`**;
+  - resumen de sesión `carreras` → `trabajo_pista`;
+  - ficha `13_CARRERAS.md` → **`13_TRABAJO_PISTA.md`**.
+  - El código interno se sigue llamando `racing`.
+  - Ninguna app leía todavía estos nombres.
+- **Nuevo: estructura del entrenamiento (`SESSION_PHASES_V1`):**
+  - fases de calentamiento, trabajo y vuelta a la calma, con duración, distancia y tiempo por aire;
+  - por trabajo: **recuperación hasta el paso** y **pausa hasta la siguiente repetición**, con su velocidad;
+  - **series:** repeticiones y rápidas, **caída de la máxima y de la zancada** entre la primera y la última repetición rápida, y recuperación media;
+  - aviso de **calentamiento corto** (menos de 10 min antes del primer trabajo rápido; valor de partida).
+- **Historia:**
+  - el resumen guarda `trabajo_pista.sesion`;
+  - métricas informativas `TRABAJO.recuperacion_hasta_paso_s`, `TRABAJO.caida_entre_series_pct` y `TRABAJO.calentamiento_s`;
+  - el calentamiento corto aparece como motivo.
+- **Fixtures** regeneradas.
+**Validación:**
+- IMPLEMENTADO.
+- 79 casos y 1103 comprobaciones con ASan/UBSan.
+- Nueva prueba `pista.training_morning_structure`: mañana sintética con calentamiento de 4 min, 2 repeticiones a 16 y 15 m/s con paseo entre ellas y vuelta a la calma.
+  - Caída 6,24 % (real 6,25 %).
+  - Recuperación 6,5 s (real 6,1 s).
+  - Pausa y fases correctas.
+- **NO VERIFICADO** con caballos reales.
+
+---
+
+## 2026-11-01 — Motor AVO Equine — AVO Racing 1.0.0 (caballos de carreras PSI y árabe)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `3631bd9` · **CI:** run 41328572986 ✅ (Linux ASan/UBSan 78 casos/1086 comprobaciones, Windows MSVC 78 casos, Android NDK ×3, JNI en JVM, fixtures)
+**Qué cambia (petición del usuario: «añadir todo lo posible a los caballos de carreras PSI y árabes»):**
+- **Nuevo módulo** `src/racing/` + `include/avo_eq/racing.h`. Añade el bloque `carreras` al análisis y lo documenta la ficha 13.
+- **Perfiles de raza** `GENERICO` / `PSI` / `ARABE`: velocidades de trabajo, rápida y alta, velocidades de referencia y rangos de zancada.
+- **Cincha en el marco del caballo:**
+  - escala BNO085 (byte 15 = 1) o por gravedad;
+  - vertical por gravedad y eje de avance por PCA, con el sentido confirmado por la inclinación frente a la aceleración GNSS;
+  - **VeDBA** y carga de la cincha;
+  - **giros a cada mano** (tiempo y grados, por aire);
+  - saturación.
+- **Zancadas en galope:**
+  - frecuencia y longitud (con la velocidad GNSS);
+  - pico vertical y desplazamiento vertical del tronco;
+  - rasgo lateral.
+- **Mano de galope** (experimental): el rasgo lateral es especular entre manos. Se autocalibra en curvas o se fija con `signo_mano`. Da los cambios de mano y el porcentaje de mano de fuera en curva.
+- **Trabajos (GNSS):**
+  - galope de trabajo o trabajo rápido;
+  - parciales cada 200 m o cada furlong (`parcial_m`);
+  - mejores 200–1600 m;
+  - máxima y tiempo hasta ella, distancia por encima del 90 %;
+  - últimos 200/400 m e **índice de caída**;
+  - zancada a la máxima, rectas frecuencia/longitud–velocidad y **zancada a las velocidades de referencia**.
+- **Eventos** (experimentales): impacto atípico, movimiento lateral brusco y saturación.
+- **Ingesta:** `Session::imu_units` (byte 15 de la cabecera IMU) y recuento de lotes fusionados (formato 1).
+- **Historia de entrenamientos:**
+  - el resumen guarda el bloque `carreras`;
+  - la distancia a alta velocidad usa el umbral de la raza;
+  - carga VeDBA con ACWR;
+  - líneas base y tendencias `CARRERA.*` y `CINCHA.*`;
+  - las métricas se definen en una sola tabla (`metric_specs`).
+- **Opciones de la API** (`avo_eq_analyse_ex`): `raza`, `parcial_m` y `signo_mano`. El hash de parámetros y `procedencia.algoritmos.carreras` invalidan la caché.
+- **Fixtures** `core/src/test/resources/equine/*_analysis.json` regeneradas: añaden el bloque `carreras` y cambia el hash de parámetros.
+**Archivos:** `equine-intelligence/{include/avo_eq/racing.h,src/racing/racing.cpp,include/avo_eq/{types,engine,training,avo_eq_c}.h,src/core/engine.cpp,src/capi/capi.cpp,src/ingestion/ingestion.cpp,src/training/training.cpp,tests/test_racing.cpp,tests/test_training.cpp,README.md,docs/FORMATO_RESULTADOS.md,docs/algoritmos/{12_ENTRENAMIENTO,13_CARRERAS}.md}`, fixtures.
+**Validación:**
+- IMPLEMENTADO.
+- Linux: 78 casos y 1086 comprobaciones con ASan/UBSan, y en Release.
+- Sesión sintética con física conocida (cincha girada 170°/35°, curvas y cambios de mano):
+  - máxima 17,04 m/s;
+  - frecuencia 2,451 Hz (real 2,43) y longitud 6,95 m (real 7,0);
+  - mano 100 % en curvas y 2 de 2 cambios;
+  - giros de 71° y 85° (reales 73° y 86°).
+- **NO VERIFICADO** con caballos reales.
+**Pendiente:**
+- Validar la mano con vídeo.
+- Ajustar los perfiles PSI y árabe con sesiones reales.
+- Usar los lotes fusionados (cuaternión) del BNO085.
+- Rango de ±16 g para impactos fuertes.
+- Pantallas en las apps.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — AVO Training Analytics 1.0.0 en la app: valoración del entrenador, «Historia del caballo» y forma antes de la carrera
 **Autor:** Claude · **Rama:** `feature/ipad-app` (sobre `18e647e`) · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia:**

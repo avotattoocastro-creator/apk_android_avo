@@ -46,6 +46,32 @@ struct GaitSummary {
   double cycle_corr = NAN, interval_cv = NAN;   // regularidad (mediana ponderada por duración de segmentos)
 };
 
+// Trabajo en pista de la sesión (bloque "trabajo_pista" del análisis): entrenamiento de caballos de carreras.
+struct RaceSummary {
+  bool present = false;
+  std::string breed;                            // GENERICO | PSI | ARABE
+  double vedba_load_gmin = NAN, vedba_gallop_g = NAN;
+  double gallop_left_s = 0, gallop_right_s = 0; // tiempo girando a cada mano en galope
+  int lead_left = 0, lead_right = 0, lead_changes = 0;
+  double wrong_lead_curve_pct = NAN;
+  std::string lead_calibration;
+  int efforts = 0, fast_efforts = 0;
+  double vmax = NAN, best_200_s = NAN, dist_fast_m = 0, dist_work_m = 0;
+  double fatigue_pct = NAN;                     // del trabajo con mayor velocidad
+  double ref_speed[2] = {NAN, NAN}, sf_ref[2] = {NAN, NAN}, sl_ref[2] = {NAN, NAN};
+  double sf_at_vmax = NAN, sl_at_vmax = NAN, vert_disp_m = NAN;
+  int impacts = 0, lateral_jolts = 0, saturations = 0;
+  // estructura del entrenamiento
+  double warmup_s = NAN, cooldown_s = NAN;
+  int reps = 0, fast_reps = 0;
+  double vmax_drop_pct = NAN, stride_drop_pct = NAN, recovery_mean_s = NAN;
+  bool warmup_short = false;
+  // recorrido (líneas de salida y meta)
+  std::string course_name;
+  int passes = 0;
+  double best_pass_s = NAN, best_pass_speed = NAN, best_pass_fatigue_pct = NAN;
+};
+
 struct SessionSummary {
   std::string id, horse, rider, date_utc;       // date_utc ISO-8601 (AAAA-MM-DD[THH:MM:SSZ])
   long day = 0;                                 // días desde 1970-01-01 (calculado)
@@ -60,6 +86,7 @@ struct SessionSummary {
   double rpe = NAN;                             // 1..10
   std::string state, note;                      // BIEN | CANSADO | RARO | COJERA | … texto libre
   std::string surface, track_state;             // pista
+  RaceSummary race;
   std::vector<std::string> warnings;
 };
 
@@ -80,6 +107,7 @@ struct SessionLoad {
   double external = 0, srpe = NAN;
   double acute = 0, chronic_weekly = 0, acwr = NAN;      // sobre la carga externa
   double acute_srpe = NAN, chronic_weekly_srpe = NAN, acwr_srpe = NAN;
+  double imu = NAN, acute_imu = NAN, chronic_weekly_imu = NAN, acwr_imu = NAN;   // carga VeDBA de la cincha (g·min)
   double monotony = NAN, strain = NAN;
   int rest_days_before = -1;   // días desde la sesión anterior (-1: primera)
 };

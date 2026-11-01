@@ -10,6 +10,7 @@
 #include "avo_eq/kinematics.h"
 #include "avo_eq/motion.h"
 #include "avo_eq/performance.h"
+#include "avo_eq/racing.h"
 #include "avo_eq/symmetry.h"
 #include "avo_eq/sync.h"
 #include "avo_eq/types.h"
@@ -43,6 +44,7 @@ struct EngineConfig {
   PerfConfig perf;
   EventConfig events;
   SymmetryConfig symmetry;
+  RacingConfig racing;             // AVO Racing: breed profile (GENERICO | PSI | ARABE) and options
   bool performance_uses_v2 = false;   // V1 stays the reference until V2 is shown better on labelled data
   const GaitModel* gait_model = nullptr;   // optional trained model for V2 (not owned)
   const volatile int* cancel = nullptr;    // non-zero = stop as soon as possible (throws Cancelled)
@@ -71,6 +73,7 @@ struct Analysis {
   PerformanceResult performance;
   SymmetryResult symmetry;
   std::vector<Event> events;
+  RacingResult racing;
   AnalysisMode mode = AnalysisMode::OFFLINE_ANALYSIS;
   std::string input_fingerprint, parameters_hash;
   bool has_imu = false, has_gnss = false;

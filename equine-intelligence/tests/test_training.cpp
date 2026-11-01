@@ -266,3 +266,32 @@ EQ_TEST(entreno, c_api) {
   avo_eq_free(out);
   CHECK(avo_eq_training_summary("{\"formato\":\"x\"}", nullptr, &out) == 1); avo_eq_free(out);
 }
+
+EQ_TEST(entreno, racing_metrics_history) {
+  TrainingConfig c;
+  std::vector<SessionSummary> v;
+  const double l1[] = {6.40, 6.45, 6.38, 6.42, 6.41, 6.39};
+  for (int i = 0; i < 6; i++) {
+    SessionSummary s = make("R" + std::to_string(i), D0 + 3 * i, 15, 10, 8);
+    s.race.present = true; s.race.breed = "PSI"; s.race.vedba_load_gmin = 20; s.race.vedba_gallop_g = 0.75;
+    s.race.ref_speed[0] = 14; s.race.sf_ref[0] = 2.31; s.race.sl_ref[0] = l1[i]; s.race.fatigue_pct = 15; s.race.vmax = 16.8;
+    v.push_back(s);
+  }
+  SessionSummary bad = make("CORTA", D0 + 18, 15, 10, 8);
+  bad.race = v.back().race; bad.race.sl_ref[0] = 5.90; bad.race.impacts = 2;   // much shorter stride at 14 m/s
+  v.push_back(bad);
+  TrainingResult r = analyse_training(v, "", c);
+  const SessionResult* x = find(r, "CORTA");
+  const Deviation* d = dev(x, "TRABAJO.l_v1_m");
+  CHECK(d && d->level == "REVISAR" && d->direction == "MENOR");
+  CHECK(x && x->level == "REVISAR");
+  CHECK(x && contains(x->reasons, "impactos atípicos"));
+  CHECK(trend(r, "TRABAJO.l_v1_m") != nullptr);
+  CHECK(trend(r, "carga_vedba") != nullptr);
+  CHECK_NEAR(r.current.acute_imu, 20 * 3, 1e-9);   // sessions on days 12, 15, 18
+  // summary JSON round trip keeps the racing block
+  json::Value sv; std::string err; SessionSummary back;
+  CHECK(json::parse(training_summary_to_json(bad), &sv, &err) && training_summary_from_json(sv, &back, &err));
+  CHECK(back.race.present && back.race.impacts == 2 && std::fabs(back.race.sl_ref[0] - 5.9) < 1e-9 && back.race.breed == "PSI");
+  CHECK(training_summary_to_json(back) == training_summary_to_json(bad));
+}
