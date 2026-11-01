@@ -1,4 +1,5 @@
 import SwiftUI
+import Charts
 
 /// «Análisis» page = port of windows/AVO.Windows/Views/AnalysisView.xaml + SessionHeader.xaml, focused on the HORSE:
 /// training data, cursor metrics with sparklines and playback, useful-window trim, «Análisis del caballo» (gaits, speed
