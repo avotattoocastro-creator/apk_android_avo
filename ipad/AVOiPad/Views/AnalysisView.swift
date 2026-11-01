@@ -18,15 +18,16 @@ struct AnalysisView: View {
                     if app.selected == nil {
                         AvoCard { AvoNoData(text: "Sin entrenamiento seleccionado") }
                     } else if wide {
+                        // top: training data | playback + cursor tiles in one row; then the horse analysis at full width
                         HStack(alignment: .top, spacing: 12) {
-                            AnalysisSessionCard().frame(width: 270)
+                            AnalysisSessionCard().frame(width: 300)
                             VStack(spacing: 12) {
                                 AnalysisPlaybackBar()
-                                AnalysisHorseSection(summary: horse, wide: true)
+                                AnalysisTiles(columns: 2, horse: horse)
                             }
                             .frame(maxWidth: .infinity)
-                            AnalysisTiles(columns: 1, horse: horse).frame(width: 250)
                         }
+                        AnalysisHorseSection(summary: horse, wide: true)
                         HStack(alignment: .top, spacing: 12) {
                             AnalysisEngineCard().frame(maxWidth: .infinity)
                             AnalysisNotesCard().frame(width: 380)
@@ -524,13 +525,15 @@ private struct AnalysisHorseSection: View {
             if let h = summary {
                 HorseGaitCard(summary: h)
                 if wide {
+                    // three equal columns across the whole page
                     HStack(alignment: .top, spacing: 12) {
                         HorseZonesCard(summary: h).frame(maxWidth: .infinity)
                         HorseEffortCard(summary: h).frame(maxWidth: .infinity)
-                    }
-                    HStack(alignment: .top, spacing: 12) {
-                        HorseAccelCard(summary: h).frame(maxWidth: .infinity)
-                        HorseCurvesCard(summary: h).frame(maxWidth: .infinity)
+                        VStack(spacing: 12) {
+                            HorseAccelCard(summary: h)
+                            HorseCurvesCard(summary: h)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                 } else {
                     HorseZonesCard(summary: h)
@@ -682,12 +685,12 @@ private struct HorseZonesCard: View {
                 ForEach(h.zones) { (z: HorseSpeedZone) in
                     HStack(spacing: 8) {
                         RoundedRectangle(cornerRadius: 2).fill(z.color).frame(width: 10, height: 10)
-                        Text(z.range).font(.caption.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 82, alignment: .leading)
-                        Text(z.gaitHint).font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
+                        Text(z.range).font(.caption.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1).fixedSize()
                         Spacer(minLength: 4)
                         Text(TimeText.clock(z.seconds)).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
+                            .lineLimit(1).fixedSize()
                         Text(HorseFmt.km(z.meters)).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
-                            .frame(width: 70, alignment: .trailing)
+                            .lineLimit(1).fixedSize().frame(minWidth: 62, alignment: .trailing)
                     }
                 }
                 Text("Las bandas son de velocidad, no aires medidos: el aire real lo da el motor con la cincha.")
@@ -723,15 +726,15 @@ private struct HorseEffortCard: View {
                             app.rangeStart = b.t0
                             app.rangeEnd = b.t1
                         } label: {
-                            HStack(spacing: 10) {
-                                Text("#\(b.id)").font(.caption.weight(.semibold)).foregroundStyle(Avo.red).frame(width: 30, alignment: .leading)
-                                Text(TimeText.clock(b.t0)).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
-                                Text(TimeText.num(b.durationS, "0", " s")).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
-                                Text("máx " + TimeText.num(b.maxKmh, "0.0", " km/h")).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
-                                Text(TimeText.num(b.meters, "0", " m")).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
-                                Spacer(minLength: 4)
-                                Text(b.recoveryBeforeS.isFinite ? "recup. " + TimeText.clock(b.recoveryBeforeS) : "primero")
-                                    .font(.caption2).foregroundStyle(Avo.textDim)
+                            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                                Text("#\(b.id)").font(.caption.weight(.semibold)).foregroundStyle(Avo.red).lineLimit(1).fixedSize()
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(TimeText.clock(b.t0) + " · " + TimeText.num(b.durationS, "0", " s") + " · máx " + TimeText.num(b.maxKmh, "0.0", " km/h"))
+                                        .font(.caption.monospacedDigit()).foregroundStyle(Avo.text).lineLimit(1).minimumScaleFactor(0.8)
+                                    Text(TimeText.num(b.meters, "0", " m") + " · " + (b.recoveryBeforeS.isFinite ? "recuperación " + TimeText.clock(b.recoveryBeforeS) : "primer esfuerzo"))
+                                        .font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                                }
+                                Spacer(minLength: 0)
                             }
                             .padding(.vertical, 5)
                             .contentShape(Rectangle())
