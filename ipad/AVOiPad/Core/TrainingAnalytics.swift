@@ -83,7 +83,7 @@ enum TrainingRatingStore {
         guard let o = AvoJSON.object(d) else { return [:] }
         var out: [String: TrainingRating] = [:]
         for (k, v) in o {
-            guard JSONSerialization.isValidJSONObject([v]),
+            guard (v is [String: Any]), JSONSerialization.isValidJSONObject(v),
                   let vd = try? JSONSerialization.data(withJSONObject: v, options: []),
                   let r = try? JSONDecoder().decode(TrainingRating.self, from: vd) else { continue }
             out[k] = r
