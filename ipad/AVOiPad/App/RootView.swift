@@ -9,35 +9,41 @@ struct RootNavEntry: Identifiable {
     var id: String { page.rawValue }
 }
 
-/// Main window = port of windows/AVO.Windows/MainWindow.xaml: sidebar, header (active training, Asignar, Reloj, Abrir),
-/// page area with the empty state, status bar, alerts and the assignment sheet.
+/// Main window: sidebar with the GENERAL pages only, header (active training, Asignar, Reloj, Abrir) on general pages and
+/// the training bar (active training + pages of that training) on the pages of one training, page area with the empty
+/// state, status bar, alerts and the assignment sheet.
 struct RootView: View {
     @Environment(AppModel.self) private var app
     /// The start screen (Inicio) shows no sidebar; every other page shows it (restored when leaving Inicio).
     @State private var columns: NavigationSplitViewVisibility = .detailOnly
 
+    /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
         RootNavEntry(page: .home, title: "Inicio", icon: "house"),
         RootNavEntry(page: .sessions, title: "Entrenamientos", icon: "clock.arrow.circlepath"),
         RootNavEntry(page: .trainingList, title: "Listado", icon: "list.bullet.rectangle"),
+        RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
-        RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
-        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
-        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
-        RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
-        RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
-        RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
-        RootNavEntry(page: .compare, title: "Comparar", icon: "square.split.2x1"),
         RootNavEntry(page: .geofences, title: "Geocercas y líneas", icon: "flag"),
         RootNavEntry(page: .watchWifi, title: "Reloj Wi-Fi", icon: "wifi"),
-        RootNavEntry(page: .tides, title: "Mareas y entorno", icon: "water.waves"),
-        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
     ]
     static let systemEntries: [RootNavEntry] = [
         RootNavEntry(page: .server, title: "Servidor AVO", icon: "server.rack"),
-        RootNavEntry(page: .engine, title: "Motor AVO", icon: "cpu"),
+    ]
+    /// Pages of ONE training, in the training bar at the top of «Análisis».
+    static let trainingTabs: [RootNavEntry] = [
+        RootNavEntry(page: .analysis, title: "Análisis", icon: "map"),
+        RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
+        RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
+        RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
+        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
+        RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
+        RootNavEntry(page: .compare, title: "Comparar", icon: "square.split.2x1"),
+        RootNavEntry(page: .tides, title: "Mareas", icon: "water.waves"),
+        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
+        RootNavEntry(page: .engine, title: "Motor", icon: "cpu"),
     ]
 
     static var trainingTypes: [UTType] {
@@ -116,7 +122,8 @@ struct RootView: View {
     }
 
     private func navButton(_ e: RootNavEntry) -> some View {
-        let active: Bool = app.page == e.page
+        // «Análisis» stays highlighted on every page of the training
+        let active: Bool = e.page == .analysis ? app.page.isTrainingPage : app.page == e.page
         return Button {
             app.page = e.page
             if e.page == .home { columns = .detailOnly }
@@ -143,7 +150,11 @@ struct RootView: View {
     // ------------------------------------------------------------------ detail
     private var detail: some View {
         VStack(spacing: 0) {
-            if app.page != .home { RootHeader() }
+            if app.page.isTrainingPage {
+                TrainingBar()
+            } else if app.page != .home {
+                RootHeader()
+            }
             ZStack {
                 Avo.bg.ignoresSafeArea()
                 pageView(app.page)
@@ -186,6 +197,7 @@ struct RootView: View {
     }
 
     static func title(_ p: Page) -> String {
+        for e in trainingTabs where e.page == p { return e.title }
         for e in mainEntries + systemEntries where e.page == p { return e.title }
         return "AVO"
     }
@@ -199,8 +211,8 @@ struct RootView: View {
         case .races: RacesView()
         case .stable: StableView(kind: .horse)
         case .riders: StableView(kind: .rider)
-        case .analysis: AnalysisView()
-        case .map: MapPageView()
+        case .analysis, .map: MapPageView()
+        case .summary: AnalysisView()
         case .gps: GpsView()
         case .charts: ChartsView()
         case .segments: SegmentsView()
@@ -237,7 +249,7 @@ private struct RootHeader: View {
                 .fixedSize()
             }
             Spacer(minLength: 8)
-            sessionMenu
+            RootSessionMenu()
             Button {
                 app.stable.openAssign(app.selected)
             } label: {
@@ -263,39 +275,6 @@ private struct RootHeader: View {
         .padding(.vertical, 10)
         .background(Avo.headerBrush)
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
-    }
-
-    private var sessionMenu: some View {
-        Menu {
-            ForEach(app.sessionsView) { (s: SessionItem) in
-                Button {
-                    app.select(s)
-                } label: {
-                    if s === app.selected {
-                        Label("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)", systemImage: "checkmark")
-                    } else {
-                        Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)")
-                    }
-                }
-            }
-        } label: {
-            HStack(spacing: 6) {
-                if let s = app.selected {
-                    Text(s.dateTimeText).fontWeight(.semibold).foregroundStyle(Avo.text)
-                    Text("· \(s.horse) · \(s.distanceText)").foregroundStyle(Avo.textDim)
-                } else {
-                    Text("Sin entrenamiento").foregroundStyle(Avo.textDim)
-                }
-                Image(systemName: "chevron.down").font(.caption).foregroundStyle(Avo.textDim)
-            }
-            .font(.callout)
-            .padding(.horizontal, 12).padding(.vertical, 8)
-            .frame(maxWidth: 340, alignment: .leading)
-            .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
-            .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
-        }
-        .disabled(app.sessions.isEmpty)
-        .accessibilityLabel("Entrenamiento activo")
     }
 }
 
@@ -376,5 +355,96 @@ private struct RootEmptyState: View {
         }
         .buttonStyle(.avoSecondary)
         .disabled(app.busy)
+    }
+}
+
+/// Active training selector (header of the general pages and training bar).
+struct RootSessionMenu: View {
+    @Environment(AppModel.self) private var app
+    var maxWidth: CGFloat = 340
+
+    var body: some View {
+        Menu {
+            ForEach(app.sessionsView) { (s: SessionItem) in
+                Button {
+                    app.select(s)
+                } label: {
+                    if s === app.selected {
+                        Label("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)", systemImage: "checkmark")
+                    } else {
+                        Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)")
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: 6) {
+                if let s = app.selected {
+                    Text(s.dateTimeText).fontWeight(.semibold).foregroundStyle(Avo.text)
+                    Text("· \(s.horse) · \(s.distanceText)").foregroundStyle(Avo.textDim)
+                } else {
+                    Text("Sin entrenamiento").foregroundStyle(Avo.textDim)
+                }
+                Image(systemName: "chevron.down").font(.caption).foregroundStyle(Avo.textDim)
+            }
+            .font(.callout)
+            .lineLimit(1)
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .frame(maxWidth: maxWidth, alignment: .leading)
+            .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+            .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
+        }
+        .disabled(app.sessions.isEmpty)
+        .accessibilityLabel("Entrenamiento activo")
+    }
+}
+
+/// Bar of the pages of ONE training (top of «Análisis»): active training, its pages and «Asignar».
+private struct TrainingBar: View {
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        HStack(spacing: 10) {
+            RootSessionMenu(maxWidth: 300)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 4) {
+                    ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
+                }
+                .padding(.vertical, 2)
+            }
+            .accessibilityIdentifier("training.tabs")
+            Button {
+                app.stable.openAssign(app.selected)
+            } label: {
+                Label("Asignar", systemImage: "figure.equestrian.sports")
+            }
+            .buttonStyle(.avoSecondary)
+            .disabled(app.selected == nil)
+        }
+        .lineLimit(1)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(Avo.headerBrush)
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+    }
+
+    private func tab(_ e: RootNavEntry) -> some View {
+        let active: Bool = app.page == e.page || (e.page == .analysis && app.page == .map)
+        return Button {
+            app.page = e.page
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: e.icon).font(.footnote)
+                Text(e.title).font(.callout.weight(active ? .semibold : .regular))
+            }
+            .foregroundStyle(active ? Avo.text : Avo.silver)
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .background(active ? Avo.redSoft : Color.clear, in: RoundedRectangle(cornerRadius: 7))
+            .overlay(alignment: .bottom) {
+                if active { RoundedRectangle(cornerRadius: 1.5).fill(Avo.red).frame(height: 3).padding(.horizontal, 8) }
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("tab.\(e.page.rawValue)")
     }
 }

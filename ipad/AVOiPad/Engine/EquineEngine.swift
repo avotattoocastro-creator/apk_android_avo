@@ -365,6 +365,8 @@ final class EquineAnalysis {
     private(set) var symmetryGroups: [EngineSymmetryGroup] = []
     private(set) var symmetryWindows: Int = 0
     private(set) var rawJson: String = ""
+    /// «trabajo_pista»: phases, efforts, course passes and corrections (AVO Track Work, Core/TrackWork.swift).
+    private(set) var trackWork: TrackWorkResult = TrackWorkResult()
 
     private init() {}
 
@@ -509,6 +511,7 @@ final class EquineAnalysis {
             a.girthAmplitudeCv = J.doubles(gi, "cv_amplitud")
             a.girthSpectralStability = J.doubles(gi, "estabilidad_espectral")
         }
+        a.trackWork = TrackWorkResult.parse(J.obj(r, "trabajo_pista"))
         return a
     }
 

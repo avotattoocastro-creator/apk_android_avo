@@ -5,8 +5,12 @@ import XCTest
 /// Screenshots go to the folder in the AVO_SHOTS environment variable (TEST_RUNNER_AVO_SHOTS in xcodebuild) and are
 /// also attached to the result bundle.
 final class ScreenshotTests: XCTestCase {
-    static let pages = ["Home", "Sessions", "List", "Races", "Stable", "Riders", "Analysis", "Map", "Gps", "Charts", "Segments", "Biomech",
-                        "Compare", "Geofences", "Tides", "Reports", "WatchWifi", "Server", "Engine"]
+    /// (identifier, is a tab of the training bar). Sidebar = general pages; «Análisis» opens the training and its pages
+    /// are in the training bar at the top.
+    static let pages: [(String, Bool)] = [("Home", false), ("Sessions", false), ("List", false), ("Races", false), ("Stable", false),
+                                          ("Riders", false), ("Analysis", false), ("Summary", true), ("Charts", true), ("Segments", true),
+                                          ("Gps", true), ("Biomech", true), ("Compare", true), ("Tides", true), ("Reports", true),
+                                          ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Server", false)]
 
     override func setUp() { continueAfterFailure = true }
 
@@ -20,9 +24,10 @@ final class ScreenshotTests: XCTestCase {
         XCUIDevice.shared.orientation = orientation
         // the capture mode imports the demo sessions and runs the engine before showing the ready marker
         _ = app.otherElements["capture.ready"].waitForExistence(timeout: 240) || app.staticTexts["capture.ready"].waitForExistence(timeout: 5)
-        for (i, page) in Self.pages.enumerated() {
-            let nav = app.buttons["nav.\(page)"]
-            if !nav.waitForExistence(timeout: 4) {
+        for (i, entry) in Self.pages.enumerated() {
+            let (page, isTab) = entry
+            let nav = app.buttons[(isTab ? "tab." : "nav.") + page]
+            if !isTab && !nav.waitForExistence(timeout: 4) {
                 // the start screen hides the sidebar: its «Menú» button shows it again
                 let menu = app.buttons["start.menu"]
                 if menu.exists {
@@ -33,9 +38,16 @@ final class ScreenshotTests: XCTestCase {
                     if toggle.exists { toggle.tap() }
                 }
             }
-            guard nav.waitForExistence(timeout: 5) else { XCTFail("No existe nav.\(page)"); continue }
+            guard nav.waitForExistence(timeout: 5) else { XCTFail("No existe \(isTab ? "tab" : "nav").\(page)"); continue }
+            // narrow screens: the training bar scrolls horizontally
+            var tries = 0
+            while isTab && !nav.isHittable && tries < 4 {
+                let bar = app.scrollViews["training.tabs"]
+                if bar.exists { bar.swipeLeft() }
+                tries += 1
+            }
             nav.tap()
-            Thread.sleep(forTimeInterval: page == "Map" || page == "Geofences" ? 6 : 2)
+            Thread.sleep(forTimeInterval: page == "Analysis" || page == "Geofences" ? 6 : 2)
             save(app, name: String(format: "%02d_%@_%@", i + 1, page, suffix))
         }
     }

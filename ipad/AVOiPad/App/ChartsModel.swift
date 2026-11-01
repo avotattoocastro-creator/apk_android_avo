@@ -81,6 +81,9 @@ struct SyncBand: Identifiable {
     var x0: Double
     var x1: Double
     var color: Color
+    /// Strip drawn at the bottom of the plot: lane 0 is the lowest; height in points.
+    var lane: Int = 0
+    var height: CGFloat = 4
 }
 
 /// Drawable content of one chart for the current window.

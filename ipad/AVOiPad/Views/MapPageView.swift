@@ -2,8 +2,10 @@ import SwiftUI
 import UIKit
 import MapKit
 
-/// Map and route (Windows Views/MapView.xaml): layers panel over the map, statistics, legend, segment list
-/// and selected point on the right (the GNSS quality is on the «GPS» page), synchronised speed profile and playback at the bottom.
+/// «Análisis» of one training (formerly «Mapa»): map with the layers panel, statistics, the training zones (phases,
+/// repetitions, passes), legend, segments and selected point on the right; speed profile with the zone strips, time bar
+/// and the zone buttons (start / finish lines, work limits, repetitions) at the bottom. The pages of the training are in
+/// the training bar above (RootView.TrainingBar).
 struct MapPageView: View {
     @Environment(AppModel.self) private var app
     @State private var command: RouteMapCommand = RouteMapCommand()
@@ -13,8 +15,6 @@ struct MapPageView: View {
         GeometryReader { (geo: GeometryProxy) in
             let wide: Bool = geo.size.width >= 900
             VStack(alignment: .leading, spacing: 10) {
-                AvoPageTitle(title: "Mapa y recorrido",
-                             subtitle: app.selected.map { $0.summary } ?? "Sin entrenamiento seleccionado · importa un archivo .avo o .avr")
                 if wide {
                     HStack(alignment: .top, spacing: 12) {
                         mapArea(wide: true)
@@ -30,8 +30,9 @@ struct MapPageView: View {
                 }
                 MapProfilePanel()
                     .frame(height: 170)
+                ZoneToolbar()
             }
-            .padding(16)
+            .padding(12)
         }
         .background(Avo.bg)
         .onAppear { app.map.pageShown() }
@@ -194,6 +195,9 @@ private struct MapSidePanel: View {
                     }
                 }
             }
+            AvoCard(title: "Entrenamiento") {
+                TrainingZonesCard()
+            }
             AvoCard(title: model.legendTitle) {
                 RouteLegendView(model: model)
             }
@@ -326,8 +330,8 @@ private struct MapProfilePanel: View {
         SyncChartBox(title: "Perfil de velocidad (km/h)", legend: [],
                      readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
             VStack(spacing: 6) {
-                SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: charts.gaitBands, includeZero: true,
-                                emptyText: "Sin datos")
+                SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: app.corrections.bands(app.selected),
+                                includeZero: true, emptyText: "Sin datos")
                 SyncPlaybackBar(compact: false)
             }
         }
@@ -397,6 +401,153 @@ private struct PlaybackScrubber: View {
                 .accessibilityLabel("Posición de reproducción")
         } else {
             Slider(value: .constant(0), in: 0...1).disabled(true)
+        }
+    }
+}
+
+// MARK: - Training zones (AVO Track Work + corrections)
+
+/// Phases, repetitions and course passes of the training (engine «trabajo_pista»). Tapping a row selects it on the
+/// map and the profile.
+private struct TrainingZonesCard: View {
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if let s = app.selected, let e = s.engine {
+                let tw: TrackWorkResult = e.trackWork
+                let off: Double = s.engineOffsetS
+                if !tw.present {
+                    Text("Este resultado del motor no trae el análisis del trabajo: vuelve a analizar el entrenamiento.")
+                        .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                } else {
+                    phaseRow("Calentamiento", CorrectionsModel.warmupColor, tw.warmup)
+                    phaseRow("Trabajo", CorrectionsModel.workColor, tw.work)
+                    phaseRow("Vuelta a la calma", CorrectionsModel.cooldownColor, tw.cooldown)
+                    Text("Fases \(tw.phaseBasisText)" + (tw.breed.isEmpty ? "" : " · perfil \(tw.breed)"))
+                        .font(.caption2).foregroundStyle(Avo.textDim)
+                    if !tw.efforts.isEmpty || !tw.passes.isEmpty { Divider().background(Avo.line) }
+                    ForEach(tw.efforts) { (w: TrackWorkEffort) in effortRow(w, off) }
+                    if !tw.passes.isEmpty {
+                        Text("PASADAS SALIDA → META").font(.caption2.weight(.semibold)).tracking(0.5).foregroundStyle(Avo.textDim).padding(.top, 4)
+                        ForEach(tw.passes) { (p: TrackWorkEffort) in effortRow(p, off) }
+                    }
+                    if tw.efforts.isEmpty && tw.passes.isEmpty {
+                        Text("Sin trabajos detectados. Márcalos con «Inicio / Fin repetición».")
+                            .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    }
+                    if tw.fastReps >= 2 {
+                        Text("Series: \(tw.fastReps) rápidas · caída \(AvoFormat.f(tw.vmaxDropPct, 1)) % · recuperación \(AvoFormat.f(tw.recoveryMeanS, 0)) s")
+                            .font(.caption).foregroundStyle(Avo.text)
+                    }
+                    if tw.warmupShort {
+                        Label("Calentamiento corto antes del trabajo rápido", systemImage: "exclamationmark.triangle")
+                            .font(.caption).foregroundStyle(Avo.redLight)
+                    }
+                }
+            } else if let s = app.selected {
+                Text(s.engineState).font(.caption).foregroundStyle(Avo.textDim)
+            } else {
+                Text("Sin entrenamiento").font(.caption).foregroundStyle(Avo.textDim)
+            }
+        }
+    }
+
+    private func phaseRow(_ name: String, _ color: Color, _ p: TrackWorkPhase) -> some View {
+        HStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10, height: 10)
+            Text(name).font(.caption).foregroundStyle(Avo.text)
+            Spacer(minLength: 6)
+            Text(p.present ? "\(TimeText.clock(p.durationS)) · \(AvoFormat.f(p.distanceM / 1000, 2)) km" : "—")
+                .font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
+        }
+    }
+
+    private func effortRow(_ w: TrackWorkEffort, _ off: Double) -> some View {
+        let color: Color = w.kind == "PASADA" ? CorrectionsModel.passColor : w.kind == "TRABAJO_RAPIDO" ? CorrectionsModel.fastColor : CorrectionsModel.canterColor
+        return Button {
+            app.rangeStart = w.t0 - off
+            app.rangeEnd = w.t1 - off
+            app.cursorTime = w.t0 - off
+        } label: {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10, height: 10)
+                    Text("\(w.id). \(w.kindText)" + (w.manual ? " · a mano" : "")).font(.caption.weight(.semibold)).foregroundStyle(Avo.text)
+                    Spacer(minLength: 6)
+                    Text(TimeText.clock(w.durationS)).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
+                }
+                Text("\(AvoFormat.f(w.distanceM, 0)) m · máx \(AvoFormat.f(w.vmax * 3.6, 1)) km/h · caída \(AvoFormat.f(w.fatiguePct, 0)) % · recup. \(AvoFormat.f(w.recoveryS, 0)) s")
+                    .font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.7)
+            }
+            .padding(.vertical, 3).padding(.horizontal, 4)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// «Botones mod. zonas»: move the zones of the training with the time bar. Every change is saved (correcciones.json)
+/// and the engine analyses the training again; «Restablecer» goes back to the automatic zones.
+private struct ZoneToolbar: View {
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        let c: CorrectionsModel = app.corrections
+        let can: Bool = c.canEdit
+        VStack(alignment: .leading, spacing: 6) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    Text("ZONAS").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+                    zoneButton("Salida aquí", "flag", "zone.start") { c.setLine(finish: false) }.disabled(!can)
+                    zoneButton("Meta aquí", "flag.checkered", "zone.finish") { c.setLine(finish: true) }.disabled(!can)
+                    separator
+                    zoneButton("Inicio trabajo", "arrow.right.to.line", "zone.workStart") { c.setWorkLimit(end: false) }.disabled(!can)
+                    zoneButton("Fin trabajo", "arrow.left.to.line", "zone.workEnd") { c.setWorkLimit(end: true) }.disabled(!can)
+                    separator
+                    if c.pendingRepStart.isFinite {
+                        Button { c.endRepetition() } label: { Label("Fin repetición", systemImage: "stop.circle") }
+                            .buttonStyle(.avoPrimary).disabled(!can)
+                            .accessibilityIdentifier("zone.repEnd")
+                    } else {
+                        zoneButton("Inicio repetición", "record.circle", "zone.repStart") { c.beginRepetition() }.disabled(!can)
+                    }
+                    zoneButton("Quitar repetición", "minus.circle", "zone.repRemove") { c.removeRepetitionAtCursor() }.disabled(!can)
+                    separator
+                    zoneButton("Restablecer", "arrow.counterclockwise", "zone.reset") { c.reset() }.disabled(!c.hasCorrections)
+                }
+                .padding(.vertical, 1)
+            }
+            HStack(spacing: 12) {
+                legend("Calentamiento", CorrectionsModel.warmupColor)
+                legend("Trabajo", CorrectionsModel.workColor)
+                legend("Calma", CorrectionsModel.cooldownColor)
+                legend("Rápido", CorrectionsModel.fastColor)
+                legend("Galope", CorrectionsModel.canterColor)
+                legend("Pasada", CorrectionsModel.passColor)
+                Spacer(minLength: 8)
+                Text(c.message.isEmpty ? c.summaryText : c.message)
+                    .font(.caption).foregroundStyle(c.hasCorrections ? Avo.cyan : Avo.textDim)
+                    .lineLimit(1).truncationMode(.tail)
+            }
+        }
+        .padding(.horizontal, 10).padding(.vertical, 8)
+        .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+    }
+
+    private var separator: some View { Rectangle().fill(Avo.line).frame(width: 1, height: 26) }
+
+    private func zoneButton(_ title: String, _ icon: String, _ id: String, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) { Label(title, systemImage: icon) }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier(id)
+    }
+
+    private func legend(_ text: String, _ color: Color) -> some View {
+        HStack(spacing: 4) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 12, height: 6)
+            Text(text).font(.caption2).foregroundStyle(Avo.textDim)
         }
     }
 }

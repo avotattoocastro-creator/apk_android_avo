@@ -95,7 +95,7 @@ private struct AnalysisSessionCard: View {
                 }
             }
             Button {
-                app.page = .map
+                app.page = .analysis
             } label: {
                 Label("Ver recorrido en el mapa", systemImage: "map")
             }
@@ -839,7 +839,7 @@ private struct AnalysisRouteMap: View {
                     Image(systemName: "arrow.up.left.and.arrow.down.right").frame(width: 34, height: 34)
                 }
                 .accessibilityLabel("Ajustar recorrido")
-                Button { app.page = .map } label: {
+                Button { app.page = .analysis } label: {
                     Image(systemName: "map").frame(width: 34, height: 34)
                 }
                 .accessibilityLabel("Abrir en Mapa")

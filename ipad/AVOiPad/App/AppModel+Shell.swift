@@ -87,7 +87,7 @@ extension AppModel {
     func onPageChanged() {
         switch page {
         case .stable, .riders: stable?.pageShown()
-        case .map: map?.pageShown()
+        case .map, .analysis: map?.pageShown()
         case .charts: charts?.pageShown()
         case .segments: segments?.pageShown()
         case .biomech: biomech?.pageShown()
@@ -99,7 +99,7 @@ extension AppModel {
         case .gps: gps?.pageShown()
         case .trainingList: trainingList?.pageShown()
         case .races: races?.pageShown()
-        case .home, .sessions, .analysis, .server, .engine: break
+        case .home, .sessions, .server, .engine, .summary: break
         }
     }
 
@@ -542,7 +542,8 @@ extension AppModel {
         let dir: String = engineDir(item.id)
         let segs: [String] = item.session.rawSegmentPaths
         do {
-            let options: String = EquineEngine.options(series: true, cacheDir: dir, force: force)
+            // breed profile of the horse + zones corrected by the user (CorrectionsModel), part of the engine parameters
+            let options: String = EquineEngine.options(series: true, cacheDir: dir, force: force, extra: corrections.engineOptions(item))
             let json: String = try await EquineEngine.analyseJson(segs, options)
             let analysis: EquineAnalysis = try await Task.detached(priority: .userInitiated) { () -> EquineAnalysis in
                 try EquineAnalysis.parse(json)

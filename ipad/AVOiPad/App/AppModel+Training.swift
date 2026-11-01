@@ -93,7 +93,8 @@ extension AppModel {
         shellState.engineBusy = true
         var json: String = ""
         do {
-            let options: String = EquineEngine.options(series: true, cacheDir: engineDir(item.id), force: false)
+            let options: String = EquineEngine.options(series: true, cacheDir: engineDir(item.id), force: false,
+                                                       extra: corrections.engineOptions(item))
             json = try await EquineEngine.analyseJson(item.session.rawSegmentPaths, options)
         } catch {
             shellState.engineBusy = false

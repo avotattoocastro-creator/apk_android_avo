@@ -645,7 +645,8 @@ struct SyncBandLayer: View {
                     let x0: CGFloat = max(plot.minX + p0, plot.minX)
                     let x1: CGFloat = min(plot.minX + p1, plot.maxX)
                     if x1 <= x0 { continue }
-                    ctx.fill(Path(CGRect(x: x0, y: plot.maxY - 4, width: x1 - x0, height: 4)), with: .color(b.color))
+                    let y: CGFloat = plot.maxY - b.height - CGFloat(b.lane) * (b.height + 2)
+                    ctx.fill(Path(CGRect(x: x0, y: y, width: x1 - x0, height: b.height)), with: .color(b.color))
                 }
             }
             .allowsHitTesting(false)
