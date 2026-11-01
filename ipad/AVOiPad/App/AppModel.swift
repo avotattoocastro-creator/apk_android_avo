@@ -3,7 +3,7 @@ import Observation
 
 /// Pages of the app (same ids as Windows MainViewModel.Page). "WatchWifi" replaces the Windows "Reloj USB" button.
 enum Page: String, CaseIterable, Identifiable {
-    case home = "Home", sessions = "Sessions", trainingList = "List", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
+    case home = "Home", sessions = "Sessions", trainingList = "List", races = "Races", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine"
     var id: String { rawValue }
@@ -34,6 +34,7 @@ final class AppModel {
     @ObservationIgnored var geofences: GeofencesModel!    // MainViewModel.Geofences.cs (+ Bluetooth send)
     @ObservationIgnored var watchWifi: WatchWifiModel!    // replaces MainViewModel.Usb.cs: download over the watch Wi-Fi
     @ObservationIgnored var trainingList: TrainingListModel! // «Listado»: table + filters + recovery of lost trainings
+    @ObservationIgnored var races: RacesModel!            // «Carreras»: tracking PDFs of races + analysis vs trainings
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
@@ -84,6 +85,7 @@ final class AppModel {
         self.geofences = GeofencesModel(app: self)
         self.watchWifi = WatchWifiModel(app: self)
         self.trainingList = TrainingListModel(app: self)
+        self.races = RacesModel(app: self)
         initShell()
     }
 }

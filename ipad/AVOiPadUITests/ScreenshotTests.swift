@@ -5,7 +5,7 @@ import XCTest
 /// Screenshots go to the folder in the AVO_SHOTS environment variable (TEST_RUNNER_AVO_SHOTS in xcodebuild) and are
 /// also attached to the result bundle.
 final class ScreenshotTests: XCTestCase {
-    static let pages = ["Home", "Sessions", "List", "Stable", "Riders", "Analysis", "Map", "Gps", "Charts", "Segments", "Biomech",
+    static let pages = ["Home", "Sessions", "List", "Races", "Stable", "Riders", "Analysis", "Map", "Gps", "Charts", "Segments", "Biomech",
                         "Compare", "Geofences", "Tides", "Reports", "WatchWifi", "Server", "Engine"]
 
     override func setUp() { continueAfterFailure = true }

@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — «Carreras»: PDF de tracking de France Galop / McLloyd y análisis frente a los entrenamientos
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia (petición del entrenador):**
+- **Nueva página «Carreras»** (`Page.races` = "Races", menú tras «Listado», icono `flag.checkered`, `App/RacesModel.swift`, `Views/RacesView.swift`): lista con fecha, hipódromo, carrera, distancia, caballo, puesto/participantes, tiempo y diferencia con el ganador; filtros por caballo y fechas; botón **«Añadir carrera»** (selector de PDF).
+- **Ficha del caballo (Cuadra):** tarjeta «Carreras de …» con **«Añadir carrera»** y la lista de sus carreras (al tocar, se abre la ficha de la carrera).
+- **Lectura del PDF «Statistiques Tracking»** (`Core/RaceTrackingParser.swift`, PDFKit): cabecera (hipódromo, categoría, carrera, distancia, fecha y «Redk du 1er»), resumen (número, cuerda, tiempo oficial, últimos 600 m, «Parcouru vs. 1er») y una página por caballo (jockey, puesto, tiempo y redk, tramo más rápido, velocidad máxima y media; por tramo de 200 m: tiempo acumulado, tiempo del tramo, velocidad media, foulées). Acepta texto con un valor por línea o con etiqueta y valores en la misma línea. Las posiciones por tramo se calculan ordenando los tiempos acumulados (el texto del gráfico de posiciones del PDF no tiene un orden fiable); coinciden con el PDF en la muestra. Zancada = longitud del tramo / foulées (primer tramo = distancia − resto). Otro PDF: «Formato de carrera no reconocido».
+- **Caballo:** se busca por nombre normalizado y prefijo de palabras (Zakyna ⊂ ZAKYNA AL ZARAYAN). Desde la ficha del caballo se guarda directamente si hay una sola coincidencia; si no, o desde «Carreras», hoja «Añadir carrera» para confirmar caballo de la Cuadra y participante (preseleccionada la mejor coincidencia).
+- **Guardado:** `carreras.json` en la carpeta de la app (escritura atómica) + copia del PDF en `carreras/`.
+- **Ficha de la carrera** (`Views/RaceDetailView.swift`): cabecera, resultado (puesto, tiempo oficial, distancia al ganador en s y cuerpos con 1 cuerpo ≈ 0,2 s), tabla completa transcrita (nuestro caballo resaltado), tabla por tramos de cualquier participante, gráficas (velocidad por tramo frente a ganador y mediana del campo, posición en carrera, foulées y zancada, distancia al primero), notas, compartir el PDF y eliminar.
+- **«Análisis según los entrenamientos»** (`Core/RaceAnalysis.swift`, funciones puras): caída en el final (último tramo / mejor tramo anterior) frente a la mediana del campo, segundos perdidos en el final, por terreno de más y en la salida; entrenamientos del caballo anteriores al día de la carrera (mejor 200/400/600 m sostenido con ventana por distancia y velocidad filtrada, trabajos > 40 km/h ≥ 200 m, caída en trabajos ≥ 400 m, tendencia de los 3 últimos); tiempo corregido y puesto estimado («habría ganado N posiciones» / «no habría cambiado el puesto: le faltaron X s para el N.º»), «Hemos optimizado N posiciones» cuando el caballo terminó mejor de lo que indicaba su perfil, nivel de confianza (Alta/Media/Baja), observaciones concretas y nota de método. Se comparan proporciones, no velocidades absolutas.
+- **Capturas (CI):** en modo captura se importa la carrera de muestra incluida en la app (`Resources/demo_race_20261029BOU03.pdf`) enlazada al caballo DEMO «Rayo (demo)» como Zakyna, marcada DEMOSTRACIÓN; `ScreenshotTests` incluye "Races".
+**Archivos:** `ipad/AVOiPad/Core/{RaceModels,RaceTrackingParser,RaceAnalysis}.swift`, `ipad/AVOiPad/App/{RacesModel,AppModel,AppModel+Shell,RootView}.swift`, `ipad/AVOiPad/Views/{RacesView,RaceDetailView,SharedRaceImport,StableView}.swift`, `ipad/AVOiPad/Resources/demo_race_20261029BOU03.pdf`, `ipad/AVOiPadTests/RaceParserTests.swift`, `ipad/AVOiPadTests/Fixtures/20261029BOU03_last_times_fr.pdf`, `ipad/AVOiPadUITests/ScreenshotTests.swift`, `ipad/UI_CONTRACT.md`.
+**No se ha tocado:** núcleo de entrenamientos (`SessionTimeline`, importación .avo/.avr), motor, reloj Wi‑Fi/BLE, resto de páginas.
+**Validación:** IMPLEMENTADO · sin compilar en la sesión (CI macOS pendiente) · el algoritmo de lectura se comprobó fuera de Swift con `pdftotext` (texto simple y con maquetación) sobre la muestra · **NO VERIFICADO** en iPad ni con el texto real que devuelve PDFKit.
+**Pendiente:** compilar en CI y pasar `RaceParserTests`; comprobar con PDFKit en iPad que el orden del texto es el esperado; probar con más PDF de France Galop (otras distancias, no clasificados, empates); validar con el entrenador la referencia de caída y el umbral de 40 km/h.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — página «Listado de entrenamientos» y búsqueda de entrenamientos perdidos
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia (petición del entrenador):**

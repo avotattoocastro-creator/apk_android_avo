@@ -25,6 +25,7 @@ struct StableView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
         .onAppear { app.stable.pageShown() }
+        .raceImport(app.races) { (e: Error) in app.fail(e) }
         .alert(app.stable.confirm?.title ?? "",
                isPresented: Binding(get: { app.stable.confirm != nil }, set: { if !$0 { app.stable.confirm = nil } }),
                presenting: app.stable.confirm) { c in
@@ -196,6 +197,7 @@ private struct StableDetailPane: View {
                     StableEditorCard(page: page)
                     if !page.isNew, let sel = page.selected {
                         StableTotals(row: sel)
+                        if page.isHorse { StableRacesCard(row: sel) }
                         StableTrainingsCard(page: page, row: sel)
                     }
                 }
@@ -350,6 +352,44 @@ private struct StableTrainingsCard: View {
                                 Divider().overlay(Avo.line)
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// «Carreras» of the horse (race card on tap) and «Añadir carrera» (tracking PDF, App/RacesModel.swift).
+private struct StableRacesCard: View {
+    let row: StableIdentityRow
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        let list: [Race] = app.races.racesOf(horse: row.code)
+        AvoCard {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .center) {
+                    Text("CARRERAS DE \(row.name.uppercased())")
+                        .font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                    Spacer()
+                    if app.races.busy { ProgressView().controlSize(.small) }
+                    Button {
+                        app.races.startImport(horseCode: row.code)
+                    } label: {
+                        Label("Añadir carrera", systemImage: "flag.checkered")
+                    }
+                    .buttonStyle(.avoPrimary)
+                    .disabled(app.races.busy)
+                    .accessibilityIdentifier("stable.addRace")
+                }
+                if list.isEmpty {
+                    Text("Sin carreras. Pulsa «Añadir carrera» y elige el PDF «Statistiques Tracking» de la carrera: se busca a \(row.name) entre los participantes, se transcribe la carrera y se analiza con sus entrenamientos.")
+                        .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                } else {
+                    ForEach(list) { (r: Race) in
+                        RaceRowView(race: r)
+                            .contentShape(Rectangle())
+                            .onTapGesture { app.races.open(r) }
                     }
                 }
             }

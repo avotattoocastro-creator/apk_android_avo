@@ -96,6 +96,7 @@ extension AppModel {
         case .watchWifi: watchWifi?.pageShown()
         case .gps: gps?.pageShown()
         case .trainingList: trainingList?.pageShown()
+        case .races: races?.pageShown()
         case .home, .sessions, .analysis, .server, .engine: break
         }
     }
@@ -104,7 +105,7 @@ extension AppModel {
     var showEmptyState: Bool {
         if !sessions.isEmpty { return false }
         switch page {
-        case .home, .sessions, .trainingList, .server, .engine, .stable, .riders, .geofences, .watchWifi: return false
+        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi: return false
         default: return true
         }
     }
@@ -209,6 +210,7 @@ extension AppModel {
         geofences?.sessionChanged()
         watchWifi?.sessionChanged()
         trainingList?.sessionChanged()
+        races?.sessionChanged()
     }
 
     var timelineStart: Double {
@@ -765,6 +767,7 @@ extension AppModel {
         captureMode = true
         await loadDemo()
         await runEngineForAll()
+        await races.importDemoForCapture()   // sample race linked to the DEMO horse (DEMOSTRACIÓN)
         let regaton: [SessionItem] = AppModel.byDateDescending(sessions.filter { $0.id.hasPrefix("DEMO_REGATON") })
         let main: SessionItem? = regaton.first(where: { $0.id == "DEMO_REGATON_20261022" })
             ?? regaton.first(where: { $0.hasGirth }) ?? regaton.first ?? AppModel.byDateDescending(sessions).first
