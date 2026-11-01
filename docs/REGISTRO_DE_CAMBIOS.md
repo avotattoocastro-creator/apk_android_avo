@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-01 — Motor AVO Equine — AVO Racing 1.0.0 (caballos de carreras PSI y árabe)
-**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `3631bd9` · **CI:** run 41328572986 ✅ (Linux ASan/UBSan 78 casos/1086 comprobaciones, Windows MSVC 78 casos, Android NDK ×3, JNI en JVM, fixtures)
 **Qué cambia (petición del usuario: «añadir todo lo posible a los caballos de carreras PSI y árabes»):**
 - **Nuevo módulo** `src/racing/` + `include/avo_eq/racing.h`. Añade el bloque `carreras` al análisis y lo documenta la ficha 13.
 - **Perfiles de raza** `GENERICO` / `PSI` / `ARABE`: velocidades de trabajo, rápida y alta, velocidades de referencia y rangos de zancada.
