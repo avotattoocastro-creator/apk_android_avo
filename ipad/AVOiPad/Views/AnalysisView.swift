@@ -31,7 +31,11 @@ struct AnalysisView: View {
                         AnalysisHorseSection(summary: horse, wide: true)
                         HStack(alignment: .top, spacing: 12) {
                             AnalysisEngineCard().frame(maxWidth: .infinity)
-                            AnalysisNotesCard().frame(width: 380)
+                            VStack(spacing: 12) {
+                                TrainingRatingCard()
+                                AnalysisNotesCard()
+                            }
+                            .frame(width: 420)
                         }
                     } else {
                         AnalysisPlaybackBar()
@@ -40,6 +44,7 @@ struct AnalysisView: View {
                         AnalysisHorseSection(summary: horse, wide: false)
                         AnalysisSessionCard()
                         AnalysisEngineCard()
+                        TrainingRatingCard()
                         AnalysisNotesCard()
                     }
                 }

@@ -53,6 +53,7 @@ Cada uno es `@Observable final class XxxModel` en su propio archivo `App/XxxMode
 | `WatchWifiModel` | sustituye MainViewModel.Usb.cs | WatchWifi |
 | `TrainingListModel` | nuevo en iPad (sin equivalente Windows) | List («Listado»: tabla filtrable + buscar entrenamientos perdidos) |
 | `RacesModel` | nuevo en iPad (sin equivalente Windows) | Races («Carreras»: PDF «Statistiques Tracking» de France Galop / McLloyd, `carreras.json` + copia del PDF en `carreras/`, análisis frente a los entrenamientos; también desde la ficha del caballo en Cuadra) |
+| `HorseHistoryModel` | nuevo en iPad (AVO Training Analytics 1.0.0) | «Historia del caballo» (`HorseHistoryView`, pantalla completa desde RootView, no es página del menú): se abre desde la ficha del caballo en Cuadra y desde el nombre del caballo en Análisis; valoraciones del entrenador en `valoraciones.json` (`App/AppModel+Training.swift`) |
 
 ## Vistas (nombres fijos, cada una en `Views/<Nombre>.swift`)
 `StartView`, `HomeView` (Entrenamientos), `AnalysisView`, `MapPageView`, `ChartsView`, `SegmentsView`, `BiomechView`,

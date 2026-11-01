@@ -197,7 +197,17 @@ private struct StableDetailPane: View {
                     StableEditorCard(page: page)
                     if !page.isNew, let sel = page.selected {
                         StableTotals(row: sel)
-                        if page.isHorse { StableRacesCard(row: sel) }
+                        if page.isHorse {
+                            Button {
+                                app.horseHistory.open(horseKey: sel.code, name: sel.name)
+                            } label: {
+                                Label("Historia de entrenamientos", systemImage: "chart.line.uptrend.xyaxis")
+                            }
+                            .buttonStyle(.avoPrimary)
+                            .disabled(sel.count == 0)
+                            .accessibilityIdentifier("stable.horseHistory")
+                            StableRacesCard(row: sel)
+                        }
                         StableTrainingsCard(page: page, row: sel)
                     }
                 }

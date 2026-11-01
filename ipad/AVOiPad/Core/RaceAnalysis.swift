@@ -198,6 +198,35 @@ struct RaceReport {
     var confidenceReason: String = ""
     var observations: [String] = []
     var method: [String] = []
+
+    // «Forma antes de la carrera» (AVO Training Analytics at the race date; filled in later by RacesModel)
+    var form: RaceTrainingForm? = nil
+    /// "" pending, otherwise why there is no form (error, engine not available…).
+    var formState: String = ""
+}
+
+/// State of the horse at the race date from the history of its trainings (avo-training-analysis, fecha_referencia =
+/// day of the race). Orientative, never a veterinary diagnosis.
+struct RaceTrainingForm: Equatable {
+    var reference: String
+    var level: String
+    var reasons: [String]
+    var acwr: Double?
+    var acwrLow: Double
+    var acwrHigh: Double
+    var acute: Double?
+    var chronicWeekly: Double?
+    var monotony: Double?
+    var monotonyHigh: Double
+    var daysSinceLast: Int?
+    var sessionsUsed: Int
+    var trends: [TrainingTrend]
+    var demo: Bool
+
+    var acwrOutOfBand: Bool {
+        guard let a = acwr else { return false }
+        return a > acwrHigh || a < acwrLow
+    }
 }
 
 enum RaceAnalysis {
@@ -482,6 +511,35 @@ enum RaceAnalysis {
         if let tf = rep.trainingFade, let f = rep.ourFade {
             out.append("Caída en sus trabajos rápidos (mediana de \(rep.worksWithFade)): conserva el \(RaceFormat.percent(tf)); en la carrera, el \(RaceFormat.percent(f)).")
         }
+        return out
+    }
+
+    // ------------------------------------------------------------------ form before the race (AVO Training Analytics)
+    static func form(_ r: TrainingAnalysisResult, demo: Bool) -> RaceTrainingForm {
+        let keep: [String] = ["carga_externa", "distancia_m", "GALOPE.velocidad_media", "GALOPE.longitud_tranco_m",
+                              "TROTE.longitud_tranco_m", "TROTE.correlacion_ciclos", "GALOPE.correlacion_ciclos"]
+        var trends: [TrainingTrend] = []
+        for k in keep { if let t = r.trend(k), t.hasData { trends.append(t) } }
+        for t in r.tendencias where t.hasData && !keep.contains(t.metrica) && t.direccion != "ESTABLE" { trends.append(t) }
+        return RaceTrainingForm(reference: r.fechaReferencia, level: r.nivel, reasons: r.motivos, acwr: r.carga.acwr,
+                                acwrLow: r.acwrLow, acwrHigh: r.acwrHigh, acute: r.carga.aguda, chronicWeekly: r.carga.cronicaSemanal,
+                                monotony: r.carga.monotonia, monotonyHigh: r.monotonyHigh, daysSinceLast: r.diasDesdeUltima,
+                                sessionsUsed: r.sesionesUsadas, trends: trends, demo: demo)
+    }
+
+    /// Observations added to the verdict when the state is VIGILAR / REVISAR or the ACWR is outside its band.
+    static func formObservations(_ f: RaceTrainingForm) -> [String] {
+        var out: [String] = []
+        if f.level == "VIGILAR" || f.level == "REVISAR" {
+            var s: String = "Forma antes de la carrera: \(f.level) según la historia de entrenamientos (orientativo, no es un diagnóstico)"
+            if !f.reasons.isEmpty { s += ": " + f.reasons.prefix(3).joined(separator: "; ") }
+            out.append(s + ".")
+        }
+        if let a = f.acwr, f.acwrOutOfBand {
+            let what: String = a > f.acwrHigh ? "subida brusca de la carga en la última semana" : "carga reciente baja (descarga o parada)"
+            out.append("ACWR \(AvoFormat.f(a, 2)) antes de la carrera, fuera de la banda \(AvoFormat.f(f.acwrLow, 1))–\(AvoFormat.f(f.acwrHigh, 1)): \(what).")
+        }
+        if f.demo && !out.isEmpty { out[out.count - 1] += " (DEMOSTRACIÓN: datos sintéticos)" }
         return out
     }
 }

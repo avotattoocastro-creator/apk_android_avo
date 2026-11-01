@@ -82,6 +82,12 @@ struct RootView: View {
                 .environment(app)
                 .preferredColorScheme(.dark)
         }
+        .fullScreenCover(isPresented: Binding(get: { app.horseHistory.visible },
+                                              set: { (v: Bool) in if !v { app.horseHistory.close() } })) {
+            HorseHistoryView(model: app.horseHistory)
+                .environment(app)
+                .preferredColorScheme(.dark)
+        }
     }
 
     // ------------------------------------------------------------------ sidebar

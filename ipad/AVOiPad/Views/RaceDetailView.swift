@@ -498,6 +498,7 @@ private struct RaceAnalysisSection: View {
                     trainingCard(rep)
                 }
             }
+            RaceFormCard(report: rep, horseName: race.horseName ?? "—", raceDate: race.dateText)
             estimateCard(rep)
             AvoCard(title: "Observaciones") {
                 if rep.observations.isEmpty {
@@ -594,5 +595,59 @@ private struct RaceAnalysisSection: View {
     private func rangeText(_ rep: RaceReport) -> String? {
         guard let a = rep.placeLow, let b = rep.placeHigh else { return nil }
         return a == b ? "Margen ±: sin cambio" : "Margen ±: entre \(a).º y \(b).º"
+    }
+}
+
+/// «Forma antes de la carrera»: state of the horse at the race date from the history of its trainings (AVO Training
+/// Analytics, fecha_referencia = day of the race). Orientative, never a veterinary diagnosis.
+private struct RaceFormCard: View {
+    let report: RaceReport
+    let horseName: String
+    let raceDate: String
+
+    var body: some View {
+        AvoCard(title: "Forma antes de la carrera",
+                subtitle: "Historia de entrenamientos de \(horseName) hasta el \(raceDate) · orientativo, no es un diagnóstico veterinario") {
+            if let f = report.form {
+                let color: Color = HorseHistoryModel.levelColor(f.level)
+                HStack(spacing: 10) {
+                    AvoPill(text: f.level, color: color)
+                    Text("\(f.sessionsUsed) sesiones · referencia \(f.reference)").font(.caption).foregroundStyle(Avo.textDim)
+                    if f.demo { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) }
+                }
+                ShellKeyValue(key: "ACWR (aguda / crónica)",
+                              value: (f.acwr.map { AvoFormat.f($0, 2) } ?? "— (menos de 28 días)") + " · banda \(AvoFormat.f(f.acwrLow, 1))–\(AvoFormat.f(f.acwrHigh, 1))")
+                ShellKeyValue(key: "Carga aguda 7 d / crónica semanal",
+                              value: "\(f.acute.map { AvoFormat.f($0, 0) } ?? "—") / \(f.chronicWeekly.map { AvoFormat.f($0, 0) } ?? "—")")
+                ShellKeyValue(key: "Monotonía", value: f.monotony.map { AvoFormat.f($0, 2) } ?? "—")
+                ShellKeyValue(key: "Días desde el último entrenamiento", value: f.daysSinceLast.map { String($0) } ?? "—")
+                if !f.reasons.isEmpty {
+                    VStack(alignment: .leading, spacing: 3) {
+                        ForEach(Array(f.reasons.enumerated()), id: \.offset) { (item: (offset: Int, element: String)) in
+                            Text("· " + item.element).font(.caption).foregroundStyle(Avo.text).fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+                if !f.trends.isEmpty {
+                    Text("TENDENCIAS DE 8 SEMANAS").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim).padding(.top, 4)
+                    ForEach(f.trends) { (t: TrainingTrend) in
+                        HStack(spacing: 6) {
+                            Image(systemName: t.arrow).font(.caption.weight(.bold)).foregroundStyle(Avo.cyan).frame(width: 16)
+                            Text(TrainingAnalytics.fullLabel(t.metrica)).font(.footnote).foregroundStyle(Avo.text)
+                            Spacer(minLength: 6)
+                            Text("\(t.direccion) · \(TrainingAnalytics.formatSlope(TrainingAnalytics.split(t.metrica).key, t.pendienteSemana))")
+                                .font(.caption).foregroundStyle(Avo.textDim)
+                        }
+                    }
+                }
+            } else if !report.formState.isEmpty {
+                Text(report.formState).font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            } else {
+                HStack(spacing: 8) {
+                    ProgressView().controlSize(.small)
+                    Text("Analizando la historia de entrenamientos…").font(.footnote).foregroundStyle(Avo.textDim)
+                }
+            }
+        }
     }
 }

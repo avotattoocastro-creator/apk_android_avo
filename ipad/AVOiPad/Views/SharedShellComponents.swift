@@ -26,16 +26,24 @@ struct ShellSessionHeader: View {
                 }
                 Spacer(minLength: 0)
                 if horseOnRight, let s = app.selected {
-                    VStack(alignment: .trailing, spacing: 2) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "figure.equestrian.sports").font(.title3).foregroundStyle(Avo.red)
-                            Text(s.horse).font(.system(size: 28, weight: .bold, design: .rounded)).foregroundStyle(Avo.text)
-                                .lineLimit(1).minimumScaleFactor(0.6)
+                    // tap on the horse name: «Historia del caballo» (AVO Training Analytics)
+                    Button {
+                        app.horseHistory.open(for: s)
+                    } label: {
+                        VStack(alignment: .trailing, spacing: 2) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "figure.equestrian.sports").font(.title3).foregroundStyle(Avo.red)
+                                Text(s.horse).font(.system(size: 28, weight: .bold, design: .rounded)).foregroundStyle(Avo.text)
+                                    .lineLimit(1).minimumScaleFactor(0.6)
+                                Image(systemName: "chart.line.uptrend.xyaxis").font(.callout).foregroundStyle(Avo.textDim)
+                            }
+                            Text("\(s.rider) · \(s.discipline) · Historia de entrenamientos").font(.callout).foregroundStyle(Avo.silver).lineLimit(1)
                         }
-                        Text("\(s.rider) · \(s.discipline)").font(.callout).foregroundStyle(Avo.silver).lineLimit(1)
                     }
+                    .buttonStyle(.plain)
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("Caballo \(s.horse), jinete \(s.rider), \(s.discipline)")
+                    .accessibilityLabel("Caballo \(s.horse), jinete \(s.rider), \(s.discipline). Abrir historia de entrenamientos")
+                    .accessibilityIdentifier("analysis.horseHistory")
                 }
             }
             ScrollView(.horizontal, showsIndicators: false) {

@@ -35,6 +35,7 @@ final class AppModel {
     @ObservationIgnored var watchWifi: WatchWifiModel!    // replaces MainViewModel.Usb.cs: download over the watch Wi-Fi
     @ObservationIgnored var trainingList: TrainingListModel! // «Listado»: table + filters + recovery of lost trainings
     @ObservationIgnored var races: RacesModel!            // «Carreras»: tracking PDFs of races + analysis vs trainings
+    @ObservationIgnored var horseHistory: HorseHistoryModel! // «Historia del caballo» (AVO Training Analytics), full-screen cover
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
@@ -86,6 +87,7 @@ final class AppModel {
         self.watchWifi = WatchWifiModel(app: self)
         self.trainingList = TrainingListModel(app: self)
         self.races = RacesModel(app: self)
+        self.horseHistory = HorseHistoryModel(app: self)
         initShell()
     }
 }

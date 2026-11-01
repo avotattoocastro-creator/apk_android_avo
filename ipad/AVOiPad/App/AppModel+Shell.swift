@@ -16,6 +16,8 @@ final class ShellState {
     /// Engine runs are serialized (Windows SemaphoreSlim(1)).
     var engineBusy: Bool = false
     var started: Bool = false
+    /// Trainer ratings per session id (valoraciones.json), loaded on first use (AppModel+Training.swift).
+    var ratings: [String: TrainingRating]? = nil
     init() {}
 }
 
@@ -537,11 +539,7 @@ extension AppModel {
         if item.engine != nil && !force { return }
         item.engineState = "Analizando…"
         if item === selected { status = "Motor AVO analizando \(item.id)…" }
-        var safe: String = ""
-        for c in item.id {
-            if c.isLetter || c.isNumber || c == "-" || c == "_" { safe.append(c) } else { safe.append("_") }
-        }
-        let dir: String = AvoFiles.join(paths.analysis, safe)
+        let dir: String = engineDir(item.id)
         let segs: [String] = item.session.rawSegmentPaths
         do {
             let options: String = EquineEngine.options(series: true, cacheDir: dir, force: force)
@@ -551,6 +549,8 @@ extension AppModel {
             }.value
             item.engine = analysis
             item.engineState = analysis.cache == "ACIERTO" ? "Resultado guardado reutilizado" : "Calculado"
+            // AVO Training Analytics: small per-session summary next to the analysis (AppModel+Training.swift)
+            await writeTrainingSummary(item, analysisJson: json)
             if item === selected {
                 status = "Motor \(analysis.engine): \(item.engineState)"
                 notifySessionChanged()
@@ -559,6 +559,15 @@ extension AppModel {
             item.engineState = "Error del motor: " + error.localizedDescription
             log.error("motor", error.localizedDescription, error)
         }
+    }
+
+    /// Folder of the engine results of one session (paths.analysis/<id with safe characters>).
+    func engineDir(_ id: String) -> String {
+        var safe: String = ""
+        for c in id {
+            if c.isLetter || c.isNumber || c == "-" || c == "_" { safe.append(c) } else { safe.append("_") }
+        }
+        return AvoFiles.join(paths.analysis, safe)
     }
 
     /// Waits for the engine of every loaded session (used by the capture mode).

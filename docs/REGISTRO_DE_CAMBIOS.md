@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — AVO Training Analytics 1.0.0 en la app: valoración del entrenador, «Historia del caballo» y forma antes de la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-app` (sobre `18e647e`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:**
+- **Envoltorios Swift** (`Engine/EquineEngine.swift`): `trainingSummary(analysisJson:extraJson:)` (síncrono) y `trainingAnalyse(inputJson:optionsJson:)` (async, cancelable con la bandera nativa, más `trainingAnalyseSync`), mismos códigos y `{"error"}` que `analyseJson`.
+- **Modelos** (`Core/TrainingAnalytics.swift`): «avo-training-session» y «avo-training-analysis» con decodificación tolerante (claves ausentes, `null` o tipos erróneos → nil): carga (externa, sRPE, aguda, crónica semanal, ACWR, monotonía, tensión), desvíos con z y VIGILAR/REVISAR (solo el sentido malo se marca; la velocidad es informativa), líneas base, tendencias SUBE/BAJA/ESTABLE y estado NORMAL/VIGILAR/REVISAR con motivos. `TrainingRating` + `valoraciones.json`.
+- **Resumen por sesión** (`App/AppModel+Training.swift`, `runEngine`): tras cada análisis se guarda `paths.analysis/<id>/training_summary.json` con extra `{"id","caballo" (código de la Cuadra o nombre),"jinete","fecha_utc" (inicio de la sesión, ISO UTC),"valoracion","pista"}`; se regenera al cambiar la valoración. Si falta el resumen, la historia lo genera reutilizando el resultado guardado del motor.
+- **Análisis:** tarjeta «Valoración del entrenador» (RPE 1–10, estado BIEN/CANSADO/RARO/COJERA, pista superficie/estado, nota) guardada en `paths.root/valoraciones.json` por id de sesión. El nombre del caballo de la cabecera abre su historia.
+- **«Historia del caballo»** (`App/HorseHistoryModel.swift`, `Views/HorseHistoryView.swift`, pantalla completa desde RootView): botón «Historia de entrenamientos» en la ficha del caballo (Cuadra) y desde Análisis. Estado con motivos («orientativo, no es un diagnóstico veterinario»), carga por día/semana apilada por aire + alta velocidad con aguda 7 d / crónica 28 d, ACWR con la banda, sRPE, monotonía/tensión, última sesión frente a su línea base, tendencias de 8 semanas y lista de sesiones (abre la sesión en Análisis). Excluye DEMO salvo caballo DEMO.
+- **Carreras:** bloque «Forma antes de la carrera» en la ficha (`fecha_referencia` = día de la carrera): estado, ACWR, monotonía y tendencias; se añade a las observaciones si es VIGILAR/REVISAR o el ACWR sale de la banda.
+- **Pruebas** `AVOiPadTests/TrainingAnalyticsTests.swift`: API C real con resúmenes sintéticos (ACWR ≈ 1 con carga estable, línea base con ≥ 4 sesiones, z ≥ 2 → VIGILAR, z ≥ 3 → REVISAR, COJERA y sRPE, errores y cancelación, valoraciones tolerantes).
+**Archivos:** `ipad/AVOiPad/Engine/EquineEngine.swift`, `ipad/AVOiPad/Core/{TrainingAnalytics,RaceAnalysis}.swift`, `ipad/AVOiPad/App/{AppModel,AppModel+Shell,AppModel+Training,HorseHistoryModel,RacesModel,RootView}.swift`, `ipad/AVOiPad/Views/{HorseHistoryView,TrainingRatingCard,AnalysisView,SharedShellComponents,StableView,RaceDetailView}.swift`, `ipad/AVOiPadTests/TrainingAnalyticsTests.swift`.
+**No se ha tocado:** motor C++ (`equine-intelligence/`), importación, reloj, capturas (la historia no es una página del menú).
+**Validación:** IMPLEMENTADO · sin compilador Swift en la sesión (CI macOS pendiente) · **NO VERIFICADO** en iPad ni con sesiones reales.
+**Pendiente:** compilar en CI y pasar `TrainingAnalyticsTests`; probar en iPad con la historia real de un caballo; ajustar factores de carga y umbrales con el entrenador; la primera apertura de la historia puede tardar si hay muchas sesiones sin resumen (se generan una a una con el resultado guardado del motor).
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — «Carreras»: PDF de tracking de France Galop / McLloyd y análisis frente a los entrenamientos
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia (petición del entrenador):**

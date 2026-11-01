@@ -112,6 +112,65 @@ enum EquineEngine {
         return text
     }
 
+    // MARK: AVO Training Analytics 1.0.0 (avo_eq_training_summary / avo_eq_training_analyse)
+
+    /// Small summary of ONE session («avo-training-session», ~2 KB) from the JSON of analyseJson. `extraJson` (may be nil)
+    /// completes or corrects it: {"id","caballo","jinete","fecha_utc","valoracion":{…},"pista":{…}}. Fast and blocking.
+    static func trainingSummary(analysisJson: String, extraJson: String?) throws -> String {
+        if !available { throw AvoError.invalidOperation(unavailableReason ?? "motor no disponible") }
+        var json: UnsafeMutablePointer<CChar>? = nil
+        let rc: Int32 = analysisJson.withCString { (a: UnsafePointer<CChar>) -> Int32 in
+            if let x = extraJson, !x.isEmpty {
+                return x.withCString { (e: UnsafePointer<CChar>) -> Int32 in avo_eq_training_summary(a, e, &json) }
+            }
+            return avo_eq_training_summary(a, nil, &json)
+        }
+        defer { if let j = json { avo_eq_free(j) } }
+        let text: String = json.map { String(cString: $0) } ?? ""
+        if rc == 4 { throw CancellationError() }
+        if rc != 0 { throw AvoError.invalidData(errorOf(text)) }
+        return text
+    }
+
+    /// History of one horse («avo-training-analysis»). Runs off the caller's thread; Task cancellation sets the native flag.
+    static func trainingAnalyse(inputJson: String, optionsJson: String?) async throws -> String {
+        let flag = EngineCancelFlag()
+        if Task.isCancelled { flag.cancel() }
+        return try await withTaskCancellationHandler {
+            try await withCheckedThrowingContinuation { (cont: CheckedContinuation<String, Error>) in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    do {
+                        let text: String = try EquineEngine.trainingAnalyseSync(inputJson: inputJson, optionsJson: optionsJson, cancel: flag)
+                        cont.resume(returning: text)
+                    } catch {
+                        cont.resume(throwing: error)
+                    }
+                }
+            }
+        } onCancel: {
+            flag.cancel()
+        }
+    }
+
+    static func trainingAnalyseSync(inputJson: String, optionsJson: String?, cancel: EngineCancelFlag? = nil) throws -> String {
+        if !available { throw AvoError.invalidOperation(unavailableReason ?? "motor no disponible") }
+        let flag: EngineCancelFlag = cancel ?? EngineCancelFlag()
+        let cancelPtr: UnsafePointer<Int32> = UnsafePointer<Int32>(flag.pointer)
+        var json: UnsafeMutablePointer<CChar>? = nil
+        let rc: Int32 = inputJson.withCString { (i: UnsafePointer<CChar>) -> Int32 in
+            if let o = optionsJson, !o.isEmpty {
+                return o.withCString { (op: UnsafePointer<CChar>) -> Int32 in avo_eq_training_analyse(i, op, cancelPtr, &json) }
+            }
+            return avo_eq_training_analyse(i, nil, cancelPtr, &json)
+        }
+        defer { if let j = json { avo_eq_free(j) } }
+        let text: String = json.map { String(cString: $0) } ?? ""
+        withExtendedLifetime(flag) {}
+        if rc == 4 { throw CancellationError() }
+        if rc != 0 { throw AvoError.invalidData(errorOf(text)) }
+        return text
+    }
+
     private static func errorOf(_ json: String) -> String {
         guard let o = AvoJSON.object(Data(json.utf8)) else { return json }
         if let e = o["error"] { return (e as? String) ?? json }

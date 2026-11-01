@@ -338,6 +338,40 @@ final class RacesModel {
             let rep: RaceReport = RaceAnalysis.analyze(race: race, ourIndex: idx, trainings: all)
             self.reports[race.id] = rep
             self.computing.remove(race.id)
+            await self.computeForm(race)
+        }
+    }
+
+    /// «Forma antes de la carrera»: history of the horse at the race date (AVO Training Analytics), added to the report.
+    @MainActor
+    private func computeForm(_ race: Race) async {
+        guard let code = race.horseRecordCode, !code.isEmpty else {
+            reports[race.id]?.formState = "Carrera sin caballo de la Cuadra"
+            return
+        }
+        guard let date = race.date else {
+            reports[race.id]?.formState = "Carrera sin fecha"
+            return
+        }
+        let reference: String = AvoTime.formatter("yyyy-MM-dd").string(from: date)
+        // sessions up to the end of the race day (Europe/Madrid); the engine ignores those after fecha_referencia
+        let until: Date = RacesModel.madridCalendar.date(byAdding: .day, value: 1, to: RacesModel.madridCalendar.startOfDay(for: date)) ?? date
+        do {
+            let r: (result: TrainingAnalysisResult, missing: Int) = try await app.analyseHorseHistory(code, reference: reference, until: until)
+            if r.result.sesionesUsadas == 0 {
+                reports[race.id]?.formState = "Sin entrenamientos analizables de este caballo hasta el día de la carrera"
+                return
+            }
+            let form: RaceTrainingForm = RaceAnalysis.form(r.result, demo: app.isDemoHorse(code))
+            guard reports[race.id] != nil else { return }
+            reports[race.id]?.form = form
+            reports[race.id]?.formState = ""
+            reports[race.id]?.observations.append(contentsOf: RaceAnalysis.formObservations(form))
+        } catch is CancellationError {
+            return
+        } catch {
+            reports[race.id]?.formState = "No se pudo calcular: " + error.localizedDescription
+            app.log.warn("carreras", "Forma antes de la carrera: " + error.localizedDescription, error)
         }
     }
 
