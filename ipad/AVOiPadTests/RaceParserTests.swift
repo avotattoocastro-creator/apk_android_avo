@@ -33,6 +33,33 @@ final class RaceParserTests: XCTestCase {
         }
     }
 
+    /// Same race from the text that PDFKit produced on the iPad simulator (column groups, header block first).
+    func testParsesPdfKitTextOrder() throws {
+        var pages: [String] = []
+        for i in 1...7 {
+            guard let u = Bundle(for: RaceParserTests.self).url(forResource: "race_pdfkit_page\(i)", withExtension: "txt") else {
+                throw XCTSkip("faltan los textos PDFKit de muestra")
+            }
+            pages.append(try String(contentsOf: u, encoding: .utf8))
+        }
+        let race: Race = try RaceTrackingParser.parse(pages: pages, sourceFile: "muestra.pdf")
+        XCTAssertEqual(race.runners.count, 6)
+        let z = try runner(race, "ZAKYNA AL ZARAYAN")
+        XCTAssertEqual(z.finish, 5)
+        XCTAssertEqual(z.jockey, "R. DUBORD")
+        XCTAssertEqual(z.officialTimeS ?? 0, 99.99, accuracy: 0.001)
+        XCTAssertEqual(z.sectors.map { $0.sectorS }, [17.80, 13.39, 13.56, 13.54, 13.26, 13.39, 15.02])
+        XCTAssertEqual(z.sectors.compactMap { $0.strides }, [37, 31, 30, 32, 30, 30, 32])
+        XCTAssertEqual(z.sectors.compactMap { $0.meanSpeedKmh }, [49.9, 53.9, 53, 53.8, 55, 53.8, 47.8])
+        XCTAssertEqual(z.sectors.compactMap { $0.position }, [5, 4, 4, 4, 6, 5, 5])
+        XCTAssertEqual(z.number, 6)
+        XCTAssertEqual(z.draw, 3)
+        XCTAssertEqual(z.distanceVsWinnerM ?? 0, 1.54, accuracy: 0.001)
+        let lino = try runner(race, "LINO")
+        XCTAssertEqual(lino.finish, 1)
+        XCTAssertEqual(lino.officialTimeS ?? 0, 96.57, accuracy: 0.001)
+    }
+
     // ---------------------------------------------------------------- parser
     func testParsesHeaderAndRunners() throws {
         let race: Race = try sample()

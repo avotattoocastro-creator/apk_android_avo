@@ -118,13 +118,28 @@ enum RaceTrackingParser {
     static func parseRunnerPage(_ page: String, distanceM: Double, summary: String = "") -> RaceRunner? {
         let toks: [String] = tokens(page)
         guard toks.contains(where: { key($0) == key("Cheval") }) else { return nil }
-        let sec = row(toks, "Temps du tronçon", isTime, count: nil, from: 0)
-        let n: Int = sec.values.count
+        // 1) column groups (PDFKit order: per group of sectors, the label pairs, then cumulative/sector time pairs, speeds,
+        //    strides, chart values); 2) rows by label (text extractors that keep table rows together)
+        var secValues: [String] = []
+        var cumValues: [String] = []
+        var speedValues: [String] = []
+        var strideValues: [String] = []
+        if let c = columnGroups(page) {
+            cumValues = c.cum; secValues = c.sec; speedValues = c.speeds; strideValues = c.strides
+        } else {
+            let sec = row(toks, "Temps du tronçon", isTime, count: nil, from: 0)
+            secValues = sec.values
+            cumValues = row(toks, "Temps de parcours", isTime, count: secValues.count, from: 0).values
+            speedValues = row(toks, "Vitesse moyenne", isNumber, count: secValues.count, from: 0).values
+            strideValues = row(toks, "Nombre de foulées", isInteger, count: secValues.count, from: 0).values
+        }
+        let n: Int = secValues.count
         if n < 2 { return nil }
-        let cum = row(toks, "Temps de parcours", isTime, count: n, from: 0)
-        if cum.values.count != n { return nil }
-        let speeds = row(toks, "Vitesse moyenne", isNumber, count: n, from: 0)
-        let strides = row(toks, "Nombre de foulées", isInteger, count: n, from: 0)
+        if cumValues.count != n { return nil }
+        let speeds: (index: Int, values: [String]) = (0, speedValues)
+        let strides: (index: Int, values: [String]) = (0, strideValues)
+        let cum: (index: Int, values: [String]) = (0, cumValues)
+        let sec: (index: Int, values: [String]) = (0, secValues)
 
         // sector geometry: the last n-1 sectors are `width` m, the first one is the rest of the distance
         let width: Double = sectorWidth(toks)
@@ -153,7 +168,25 @@ enum RaceTrackingParser {
         if h0 < h1 {
             for t in toks[h0..<h1] where !labelKeys.contains(key(t)) { values.append(t) }
         }
-        let joined: String = values.joined(separator: " ")
+        // PDFKit puts the header block («Cheval NAME», «Jockey …», «Rang d'arrivée 5»…) before «Redk du 1er»: read the
+        // labelled lines directly and search the regexes over the whole page
+        let pageLines: [String] = cleanLines(page)
+        let joined: String = pageLines.joined(separator: " ")
+        func labelled(_ label: String) -> String? {
+            let lk: String = key(label) + " "
+            for l in pageLines where key(l).hasPrefix(lk) {
+                let v: String = String(l.dropFirst(label.count)).trimmed
+                if !v.isEmpty { return v }
+            }
+            return nil
+        }
+        if values.isEmpty || !values.contains(where: { summary.isEmpty || summary.contains($0) }) {
+            values = []
+            if let v = labelled("Cheval") { values.append(v) }
+            if let v = labelled("Jockey") { values.append(v) }
+            if let v = labelled("Rang d'arrivée") { values.append(v) }
+            if let v = labelled("Vitesse moyenne"), isNumber(v) { values.append(v) }
+        }
         // horse name: an upper-case value (no dots: jockeys are «G. NAME») also present in the summary; else the first value
         let named: String? = values.first(where: { (v: String) -> Bool in
             v.matches(#"^[A-Z0-9][A-Z0-9 '\-ÀÂÄÇÉÈÊËÎÏÔÖÙÛÜ]*$"#) && !isNumber(v) && (summary.isEmpty || summary.contains(v))
@@ -190,6 +223,54 @@ enum RaceTrackingParser {
         return r
     }
 
+    /// Sector table read by column groups: each group starts with its «DEP/1200m/…» labels; inside it the times come as
+    /// (cumulative, sector) pairs and the first k numbers are the speeds, the next k the strides. Validated: the sector
+    /// times must be the differences of the cumulative times.
+    static func columnGroups(_ page: String) -> (cum: [String], sec: [String], speeds: [String], strides: [String])? {
+        let lines: [String] = cleanLines(page)
+        guard let start = lines.firstIndex(where: { (l: String) -> Bool in
+            let k: String = key(l)
+            return k.hasPrefix("troncons de") && !k.contains("dep")
+        }) else { return nil }
+        var groups: [(times: [String], nums: [String])] = []
+        var prevLabel: Bool = false
+        for l in lines[(start + 1)...] {
+            if l.matches(#"^(DEP|ARR|\d{3,4} ?m)$"#) {
+                if !prevLabel { groups.append((times: [], nums: [])) }
+                prevLabel = true
+                continue
+            }
+            prevLabel = false
+            if groups.isEmpty { continue }
+            if isTime(l) { groups[groups.count - 1].times.append(l) }
+            else if isNumber(l) { groups[groups.count - 1].nums.append(l) }
+        }
+        var cum: [String] = [], sec: [String] = [], speeds: [String] = [], strides: [String] = []
+        for g in groups {
+            if g.times.isEmpty || g.times.count % 2 != 0 { return nil }
+            let k: Int = g.times.count / 2
+            for j in 0..<k {
+                cum.append(g.times[2 * j])
+                sec.append(g.times[2 * j + 1])
+            }
+            if g.nums.count >= 2 * k {
+                speeds.append(contentsOf: g.nums[0..<k])
+                strides.append(contentsOf: g.nums[k..<(2 * k)])
+            }
+        }
+        if cum.count < 2 { return nil }
+        // validation
+        var prev: Double = 0
+        for j in 0..<cum.count {
+            guard let c = timeSeconds(cum[j]), let s = timeSeconds(sec[j]) else { return nil }
+            if abs((c - prev) - s) > 0.06 { return nil }
+            prev = c
+        }
+        if speeds.count != cum.count { speeds = [] }
+        if strides.count != cum.count || !strides.allSatisfy({ isInteger($0) }) { strides = [] }
+        return (cum, sec, speeds, strides)
+    }
+
     private static func sectorWidth(_ toks: [String]) -> Double {
         for t in toks {
             if let g = RaceRegex.groups(#"^tron[cç]ons de (\d{2,4}) ?m$"#, key(t)), let w = Double(g[1]), w > 0 { return w }
@@ -209,6 +290,14 @@ enum RaceTrackingParser {
                     runners[i].number = num
                 } else if k > 0, isInteger(lines[k - 1]) {
                     runners[i].number = Int(lines[k - 1])
+                } else if k > 1, let d = RaceRegex.groups(#"^\((\d{1,2})\)$"#, lines[k - 1]), isInteger(lines[k - 2]) {
+                    // PDFKit order: «3», «(6)», «LINO», «G. GUEDJ-GAY»
+                    runners[i].number = Int(lines[k - 2])
+                    runners[i].draw = Int(d[1])
+                    if runners[i].jockey.isEmpty, k + 1 < lines.count, !isTime(lines[k + 1]), !isNumber(lines[k + 1]) {
+                        runners[i].jockey = lines[k + 1]
+                    }
+                    break
                 }
                 if k + 1 < lines.count, let d = RaceRegex.groups(#"^\((\d{1,2})\)"#, lines[k + 1]) {
                     runners[i].draw = Int(d[1])
