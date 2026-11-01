@@ -24,6 +24,45 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — navegación reorganizada y «Análisis» con zonas editables (+ motor: correcciones manuales)
+**Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` (sale de `feature/ipad-app` `babaf8c` + `feature/avo-training-analytics`) · **Commits:** `008443c`, `3e5045f`, `4287548` · **CI:** iPad run 41338103300 ✅ (compilación, 83 pruebas unitarias, capturas; falla la captura de Inicio en horizontal, que no ha cambiado) · motor run 41337324883 ✅
+**Qué cambia (petición del usuario con una foto de la pantalla):**
+- **Barra lateral solo con páginas generales:** Inicio, Entrenamientos, Listado, Análisis, Carreras, Cuadra, Jinetes, Geocercas y líneas, Reloj Wi-Fi y Servidor AVO.
+- **Barra del entrenamiento**, arriba en las páginas de un entrenamiento (`TrainingBar` en `RootView.swift`):
+  - entrenamiento activo;
+  - pestañas Análisis, Resumen, Gráficas, Tramos, GPS, Biomecánica, Comparar, Mareas, Informes y Motor;
+  - Asignar.
+  - `Page.isTrainingPage`; nueva página `.summary`, que es la antigua vista «Análisis del caballo».
+- **«Análisis» = la foto:** es la antigua página Mapa.
+  - Mapa y panel derecho con distancia, tiempo y velocidades, la nueva tarjeta **«Entrenamiento»** (fases, repeticiones y pasadas, que se seleccionan al tocarlas), la leyenda, los tramos y el punto seleccionado.
+  - Perfil de velocidad con **franjas de zonas**: fases, repeticiones y pasadas (`SyncBand` con `lane` y `height`).
+  - Barra de tiempo.
+  - **Botones de zonas:** Salida aquí, Meta aquí, Inicio trabajo, Fin trabajo, Inicio/Fin repetición, Quitar repetición y Restablecer.
+- **Correcciones:**
+  - se guardan en `correcciones.json` (`CorrectionsModel`), en tiempo GPS absoluto (iTOW), sin tocar los datos;
+  - cada cambio vuelve a analizar con el motor;
+  - las líneas de salida y meta se calculan a 50 m a través del recorrido en el cursor, en el sentido del movimiento (`DCHA_A_IZQ`).
+- **Raza:** el texto de la Cuadra (PSI, Pura sangre inglés, Árabe…) se pasa al motor como `raza` (`TrackWorkBreed`).
+- **Motor:**
+  - opciones `trabajos_manuales` y `fases_manuales` (iTOW);
+  - trabajos `manual`, `fases.base` = `MANUAL` y `correcciones_manuales`;
+  - el hash de parámetros incluye las correcciones;
+  - prueba `pista.manual_corrections` (83 casos).
+- **Swift:** `Core/TrackWork.swift` lee `trabajo_pista`; `EquineAnalysis.trackWork`.
+- **Prueba de capturas:** navega por la barra lateral y por las pestañas (`tab.*`).
+**Validación:**
+- IMPLEMENTADO · CI ✅.
+- Capturas del simulador iPad Pro 13" en horizontal y vertical (rama `ci/ipad-visual-evidence`).
+- Prueba unitaria con la sesión DEMO del Regatón: 1 repetición manual de 30 s, fase MANUAL y recorrido con salida y meta.
+- **NO VERIFICADO** en el iPad real.
+**Pendiente:**
+- Dibujar las líneas de salida y meta en el mapa.
+- Mover las zonas arrastrándolas.
+- Llevar lo mismo a Windows y Android.
+- Integrar en `feature/ipad-app`.
+
+---
+
 ## 2026-11-01 — Motor AVO Equine — Track Work: recorrido de entrenamiento con líneas de salida y meta (opcional)
 **Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `7a34604` · **CI:** run 41334018208 ✅ (Linux ASan/UBSan 82 casos/1157 comprobaciones, Windows MSVC, Android NDK ×3, JNI, fixtures)
 **Por qué:** el usuario comparte su zona de entrenamiento (Playa del Regatón, Laredo), con la geocerca de grabación, el calentamiento, la salida, el trabajo, la meta y el enfriamiento.
