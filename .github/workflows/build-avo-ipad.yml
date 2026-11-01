@@ -153,9 +153,8 @@ jobs:
   # (App Store Connect API key with the App Manager or Admin role) and the app record created in App Store Connect with
   # the bundle id AVO_BUNDLE_ID. Without the secrets the job is skipped and the build stays unsigned.
   testflight:
-    needs: build-test-capture
     if: github.event_name == 'workflow_dispatch' && inputs.testflight || github.event_name == 'push' && github.ref == 'refs/heads/feature/ipad-app'
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 60
     env:
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
@@ -178,6 +177,9 @@ jobs:
       - name: Demo sessions, project and API key
         if: steps.check.outputs.ok == 'true'
         run: |
+          # App Store Connect only accepts builds made with the iOS 26 SDK (Xcode 26) or later
+          X=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1); [ -n "$X" ] && sudo xcode-select -s "$X"
+          xcodebuild -version
           brew install xcodegen >/dev/null
           cmake -S windows/tools/demo-fixtures -B demofx -DCMAKE_BUILD_TYPE=Release
           cmake --build demofx --config Release -j 4
