@@ -673,10 +673,10 @@ struct SyncHandleLayer: View {
                     let t: Double = dragId == h.id ? dragT : h.x
                     if let x = xOf(t, plot), x >= plot.minX - 1, x <= plot.maxX + 1 {
                         grip(h, active: dragId == h.id)
-                            .frame(width: 30, height: 40)
+                            .frame(width: 30, height: 30)
                             .contentShape(Rectangle())
                             .gesture(drag(h, plot))
-                            .position(x: x, y: plot.maxY - 18)
+                            .position(x: x, y: plot.maxY - 14 - CGFloat(h.lane) * 30)
                             .accessibilityLabel(h.label)
                             .accessibilityIdentifier("zone.handle.\(h.id)")
                     }

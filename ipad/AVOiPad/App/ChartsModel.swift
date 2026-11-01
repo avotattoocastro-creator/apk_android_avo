@@ -92,6 +92,8 @@ struct SyncHandle: Identifiable {
     var x: Double
     var color: Color
     var label: String
+    /// 0 = lowest row of grips (phase limits); 1 = the row above (repetitions), so coincident limits stay reachable.
+    var lane: Int = 0
 }
 
 /// Drawable content of one chart for the current window.

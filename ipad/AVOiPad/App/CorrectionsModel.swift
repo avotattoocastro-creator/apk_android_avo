@@ -109,8 +109,8 @@ final class CorrectionsModel {
         }
         for (k, w) in tw.efforts.enumerated() {
             let c: Color = w.kind == "TRABAJO_RAPIDO" ? CorrectionsModel.fastColor : CorrectionsModel.canterColor
-            h.append(SyncHandle(id: 100 + 2 * k, x: w.t0 - off, color: c, label: "Inicio rep. \(k + 1)"))
-            h.append(SyncHandle(id: 101 + 2 * k, x: w.t1 - off, color: c, label: "Fin rep. \(k + 1)"))
+            h.append(SyncHandle(id: 100 + 2 * k, x: w.t0 - off, color: c, label: "Inicio rep. \(k + 1)", lane: 1))
+            h.append(SyncHandle(id: 101 + 2 * k, x: w.t1 - off, color: c, label: "Fin rep. \(k + 1)", lane: 1))
         }
         return h
     }
