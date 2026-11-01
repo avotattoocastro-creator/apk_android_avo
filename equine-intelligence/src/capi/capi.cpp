@@ -159,6 +159,23 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
   // training course: "recorrido" {salida, meta, salida_meta: {a:[lat,lon], b:[lat,lon], sentido}, geocerca:[[lat,lon],…], nombre}
   // or "plan_geocercas": the geocercas.json object written by AVO Windows / iPad (Lines with Role/Direction, Fences)
   if (!course_from_options(v, &o->cfg.racing.course, err)) return false;
+  // manual corrections (absolute GPS time, iTOW ms): "trabajos_manuales": [{"itow0_ms","itow1_ms"}, …] (empty = none),
+  // "fases_manuales": {"inicio_trabajo_itow_ms", "fin_trabajo_itow_ms"} (either may be missing)
+  if (v.has("trabajos_manuales")) {
+    const auto& L = v["trabajos_manuales"];
+    if (L.type != avoeq::json::Value::ARR) { *err = "«trabajos_manuales» debe ser una lista"; return false; }
+    o->cfg.racing.manual_efforts_set = true;
+    for (const auto& e : L.a) {
+      double a = e["itow0_ms"].num(NAN), b = e["itow1_ms"].num(NAN);
+      if (std::isnan(a) || std::isnan(b) || b <= a) { *err = "trabajo manual: itow0_ms < itow1_ms"; return false; }
+      o->cfg.racing.manual_efforts_itow.push_back({a, b});
+    }
+  }
+  if (v.has("fases_manuales")) {
+    const auto& f = v["fases_manuales"];
+    o->cfg.racing.manual_work_start_itow = f["inicio_trabajo_itow_ms"].num(NAN);
+    o->cfg.racing.manual_work_end_itow = f["fin_trabajo_itow_ms"].num(NAN);
+  }
   std::string mp = v["modelo_aires"].str("");
   if (!mp.empty()) {
     std::ifstream f(mp, std::ios::binary); if (!f) { *err = "no se puede leer el modelo " + mp; return false; }

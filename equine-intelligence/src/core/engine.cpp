@@ -123,6 +123,8 @@ std::string params_hash(const EngineConfig& c) {
   auto gate = [&](const Gate& g) { char x[160]; snprintf(x, sizeof(x), "|%d,%.7f,%.7f,%.7f,%.7f,%d", g.enabled ? 1 : 0, g.a.lat, g.a.lon, g.b.lat, g.b.lon, g.direction); all += x; };
   gate(c.racing.course.start); gate(c.racing.course.finish); gate(c.racing.course.start_finish);
   for (const auto& p : c.racing.course.fence) { char x[64]; snprintf(x, sizeof(x), "|%.7f,%.7f", p.lat, p.lon); all += x; }
+  { char x[96]; snprintf(x, sizeof(x), "|M%d|%.0f|%.0f", c.racing.manual_efforts_set ? 1 : 0, c.racing.manual_work_start_itow, c.racing.manual_work_end_itow); all += x; }
+  for (const auto& e : c.racing.manual_efforts_itow) { char x[64]; snprintf(x, sizeof(x), "|%.0f-%.0f", e.first, e.second); all += x; }
   uint64_t h = 1469598103934665603ull;
   for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);
@@ -177,7 +179,8 @@ Analysis analyse(const Session& s, const EngineConfig& c, const std::string& whe
   EventInputs in; in.gnss = &a.gnss; in.kin = &a.kinematics; in.curves = &a.curves; in.gait = &chosen; in.fusion = &a.fusion;
   in.validation = &a.validation; in.imu = &a.imu; in.girth_to_gnss = a.girth_to_gnss;
   a.events = detect_events(in, c.events);
-  a.racing = analyse_racing(a.gnss, a.imu, a.girth_to_gnss, chosen, s.imu_units, c.racing); step();
+  a.racing = analyse_racing(a.gnss, a.imu, a.girth_to_gnss, chosen, s.imu_units, c.racing,
+                            s.gnss.empty() ? NAN : (double)s.gnss[0].itow_ms); step();
   find_anomalies(a);
   assess_quality(s, a);
   return a;

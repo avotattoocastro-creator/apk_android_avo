@@ -434,3 +434,42 @@ EQ_TEST(pista, course_in_training_summary) {
   CHECK(training_summary_from_json(v, &back, &err) && back.race.passes == 1 && std::fabs(back.race.best_pass_s - 75.08) < 0.1);
   avo_eq_free(out);
 }
+
+EQ_TEST(pista, manual_corrections) {
+  Session s;
+  s.session_id = "MANANA"; s.horse = "FLECHA";
+  s.gnss = synth::track_fn(600, 10, morning_v, straight, 0.03, 0.0, 8);
+  const double base = 345600000;   // iTOW of the first epoch in synth::track_fn
+  // the user keeps only the first fast work and trims it to 250–280 s
+  EngineConfig c = psi();
+  c.racing.manual_efforts_set = true;
+  c.racing.manual_efforts_itow = {{base + 250000, base + 280000}};
+  Analysis a = analyse(s, c);
+  const RacingResult& r = a.racing;
+  CHECK(r.manual_corrections);
+  CHECK(r.efforts.size() == 1);
+  if (!r.efforts.empty()) {
+    CHECK(r.efforts[0].manual);
+    CHECK_NEAR(r.efforts[0].duration_s, 30, 1e-6);
+    CHECK_NEAR(r.efforts[0].distance_m, 480, 3);
+    CHECK_NEAR(r.efforts[0].vmax, 16, 0.1);
+    CHECK(r.efforts[0].type == "TRABAJO_RAPIDO");
+  }
+  CHECK(r.reps == 1 && r.fast_reps == 1);
+  // work phase moved by hand: 200 s to 470 s
+  c.racing.manual_work_start_itow = base + 200000; c.racing.manual_work_end_itow = base + 470000;
+  Analysis b = analyse(s, c);
+  CHECK(b.racing.phase_basis == "MANUAL");
+  CHECK_NEAR(b.racing.warmup.duration_s, 200, 0.2);
+  CHECK_NEAR(b.racing.work.t0, 200, 1e-6);
+  CHECK_NEAR(b.racing.work.t1, 470, 1e-6);
+  // empty list: the user removed every work
+  EngineConfig e = psi(); e.racing.manual_efforts_set = true;
+  Analysis d = analyse(s, e);
+  CHECK(d.racing.efforts.empty() && d.racing.manual_corrections);
+  // the parameters hash changes, so a cached result is recalculated
+  CHECK(params_hash(c) != params_hash(psi()));
+  std::string js = to_json(b, s, c, false);
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err) && v["trabajo_pista"]["correcciones_manuales"].boolean() && v["trabajo_pista"]["trabajos"]["lista"][0]["manual"].boolean());
+}

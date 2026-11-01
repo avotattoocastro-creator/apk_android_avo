@@ -201,8 +201,25 @@ void fill_effort(Effort* E, const Track& T, const RacingResult& r, const RacingC
 }  // namespace
 
 RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& imu, const ClockMap girth_to_gnss[3],
-                            const GaitResult& gait, uint8_t imu_units, const RacingConfig& c) {
+                            const GaitResult& gait, uint8_t imu_units, const RacingConfig& c, double itow0_ms) {
   RacingResult r;
+  // iTOW (ms) -> session seconds (same base as g.t), across a week rollover
+  auto t_of_itow = [&](double itow) {
+    if (std::isnan(itow) || std::isnan(itow0_ms)) return kNaN;
+    const double WEEK = 604800000.0;
+    double d = itow - itow0_ms;
+    if (d < -WEEK / 2) d += WEEK; else if (d > WEEK / 2) d -= WEEK;
+    return d / 1000.0;
+  };
+  // slice of the track between two times with interpolated ends
+  auto make_track = [&](double a, double b, Track* T) {
+    size_t n = g.t.size();
+    T->t.push_back(a); T->d.push_back(interp(g.t, g.dist, a)); T->v.push_back(interp(g.t, g.speed, a)); T->a.push_back(interp(g.t, g.accel, a));
+    for (size_t k = 0; k < n; k++)
+      if (g.t[k] > a && g.t[k] < b) { T->t.push_back(g.t[k]); T->d.push_back(g.dist[k]); T->v.push_back(g.speed[k]); T->a.push_back(g.accel[k]); }
+    T->t.push_back(b); T->d.push_back(interp(g.t, g.dist, b)); T->v.push_back(interp(g.t, g.speed, b)); T->a.push_back(interp(g.t, g.accel, b));
+    return !std::isnan(T->d.front()) && !std::isnan(T->d.back());
+  };
   r.profile = c.breed.name;
   GaitLookup gl(gait);
 
@@ -530,8 +547,25 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       if (vm >= c.breed.work_speed) r.dist_work_m += dd;
       if (vm >= c.breed.fast_speed) r.dist_fast_m += dd;
     }
-    size_t i = 0;
+    size_t i = c.manual_efforts_set ? n : 0;   // manual list: no automatic detection
     int id = 0;
+    if (c.manual_efforts_set) {
+      r.manual_corrections = true;
+      for (const auto& sp : c.manual_efforts_itow) {
+        double a = std::max(t_of_itow(sp.first), g.t.front()), b = std::min(t_of_itow(sp.second), g.t.back());
+        if (std::isnan(a) || std::isnan(b) || b - a < 2.0) { r.warnings.push_back("trabajo manual fuera de la sesión o demasiado corto: no se usa"); continue; }
+        Track T;
+        if (!make_track(a, b, &T)) continue;
+        Effort e; e.id = ++id; e.manual = true;
+        fill_effort(&e, T, r, c);
+        e.type = e.vmax >= c.breed.fast_speed ? "TRABAJO_RAPIDO" : "GALOPE_TRABAJO";
+        if (std::isnan(r.vmax) || e.vmax > r.vmax) r.vmax = e.vmax;
+        for (const auto& bs : e.best) if (bs.distance_m == 200 && !std::isnan(bs.time_s) && (std::isnan(r.best_200_s) || bs.time_s < r.best_200_s)) r.best_200_s = bs.time_s;
+        r.efforts.push_back(e);
+      }
+      std::sort(r.efforts.begin(), r.efforts.end(), [](const Effort& x, const Effort& y) { return x.t0 < y.t0; });
+      for (size_t k = 0; k < r.efforts.size(); k++) r.efforts[k].id = (int)k + 1;
+    }
     while (i < n) {
       if (std::isnan(g.speed[i]) || g.speed[i] < c.breed.work_speed) { i++; continue; }
       size_t j = i, end = i;
@@ -608,11 +642,7 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
     for (const auto& sp : spans) {
       if (sp.second - sp.first < 5.0) continue;
       Track T;
-      T.t.push_back(sp.first); T.d.push_back(interp(g.t, g.dist, sp.first)); T.v.push_back(interp(g.t, g.speed, sp.first)); T.a.push_back(interp(g.t, g.accel, sp.first));
-      for (size_t k = 0; k < n; k++)
-        if (g.t[k] > sp.first && g.t[k] < sp.second) { T.t.push_back(g.t[k]); T.d.push_back(g.dist[k]); T.v.push_back(g.speed[k]); T.a.push_back(g.accel[k]); }
-      T.t.push_back(sp.second); T.d.push_back(interp(g.t, g.dist, sp.second)); T.v.push_back(interp(g.t, g.speed, sp.second)); T.a.push_back(interp(g.t, g.accel, sp.second));
-      if (std::isnan(T.d.front()) || std::isnan(T.d.back())) continue;
+      if (!make_track(sp.first, sp.second, &T)) continue;
       Effort e; e.id = ++id;
       fill_effort(&e, T, r, c);
       e.type = "PASADA";
@@ -659,7 +689,16 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
         else if (s.gait == Gait::CANTER_GALLOP) P->canter_s += o; else if (s.gait == Gait::STOPPED) P->stopped_s += o;
       }
     };
-    if (!r.passes.empty() && !std::isnan(ts)) {
+    double mw0 = t_of_itow(c.manual_work_start_itow), mw1 = t_of_itow(c.manual_work_end_itow);
+    if ((!std::isnan(mw0) || !std::isnan(mw1)) && !std::isnan(ts)) {
+      // work phase limits set by hand; a missing one comes from the passes / efforts (or the session end)
+      double a = mw0, b = mw1;
+      if (std::isnan(a)) a = !r.passes.empty() ? r.passes.front().t0 : !r.efforts.empty() ? r.efforts.front().t0 : ts;
+      if (std::isnan(b)) b = !r.passes.empty() ? r.passes.back().t1 : !r.efforts.empty() ? r.efforts.back().t1 : te;
+      a = std::max(ts, std::min(a, te)); b = std::max(a, std::min(b, te));
+      r.phase_basis = "MANUAL"; r.manual_corrections = true;
+      fill(&r.warmup, ts, a); fill(&r.work, a, b); fill(&r.cooldown, b, te);
+    } else if (!r.passes.empty() && !std::isnan(ts)) {
       r.phase_basis = "LINEAS";
       fill(&r.warmup, ts, r.passes.front().t0);
       fill(&r.work, r.passes.front().t0, r.passes.back().t1);
@@ -769,7 +808,7 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
     for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(c.breed.ref_speed[k]) << ",\"f_hz\":" << num(e.sf_ref[k]) << ",\"l_m\":" << num(e.sl_ref[k]) << "}";
     o << "],\"mano\":{\"izquierda\":" << e.lead_left << ",\"derecha\":" << e.lead_right << ",\"cambios\":" << e.lead_changes << "}"
       << ",\"recuperacion_hasta_paso_s\":" << num(e.recovery_to_walk_s) << ",\"pausa_hasta_siguiente_s\":" << num(e.pause_to_next_s)
-      << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << "}";
+      << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << ",\"manual\":" << (e.manual ? "true" : "false") << "}";
   }
   };
   o << ",\"trabajos\":{\"algoritmo\":\"EFFORT_V1\",\"distancia_galope_trabajo_m\":" << num(r.dist_work_m) << ",\"distancia_rapida_m\":" << num(r.dist_fast_m)
@@ -787,6 +826,7 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
     effort_json(r.passes);
     o << "]}";
   }
+  o << ",\"correcciones_manuales\":" << (r.manual_corrections ? "true" : "false");
   o << ",\"fases\":{\"base\":" << q(r.phase_basis) << ",";
   auto ph = [&](const char* name, const PhaseStats& P, bool comma) {
     o << (comma ? "," : "") << "\"" << name << "\":";

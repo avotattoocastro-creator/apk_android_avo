@@ -72,6 +72,10 @@ struct RacingConfig {
   double walk_speed = 2.2;           // m/s: recuperación = hasta volver al paso (por debajo de esto)…
   double recovery_hold_s = 5.0;      // …y mantenerlo este tiempo
   double warmup_min_s = 600.0;       // aviso si el calentamiento antes del primer trabajo rápido es más corto
+  // Correcciones manuales del usuario (tiempo GPS absoluto, iTOW en ms; los datos grabados no se tocan)
+  bool manual_efforts_set = false;   // true: los trabajos son exactamente estos (lista vacía = ninguno)
+  std::vector<std::pair<double, double>> manual_efforts_itow;
+  double manual_work_start_itow = NAN, manual_work_end_itow = NAN;   // límites de la fase de trabajo
 };
 
 struct Stride {
@@ -110,6 +114,7 @@ struct Effort {
   // entrenamiento
   double recovery_to_walk_s = NAN;   // desde el final del trabajo hasta volver al paso (NaN: no volvió antes del final)
   double pause_to_next_s = NAN, pause_speed_mean = NAN;   // pausa hasta la siguiente repetición
+  bool manual = false;               // límites puestos a mano por el usuario
 };
 
 struct GateCrossing { std::string gate; double t = 0; bool left_to_right = false; bool counts = false; };
@@ -159,7 +164,8 @@ struct RacingResult {
   double best_pass_s = NAN;
   double fence_inside_pct = NAN;     // épocas GNSS dentro de la geocerca
   // F. estructura de la sesión
-  std::string phase_basis = "VELOCIDAD";   // LINEAS cuando hay pasadas por el recorrido
+  std::string phase_basis = "VELOCIDAD";   // LINEAS con pasadas por el recorrido; MANUAL con límites corregidos a mano
+  bool manual_corrections = false;
   PhaseStats warmup, work, cooldown;
   int reps = 0, fast_reps = 0;
   double vmax_drop_pct = NAN;        // (máxima de la 1.ª repetición rápida − de la última) / 1.ª
@@ -172,8 +178,9 @@ struct RacingResult {
 };
 
 // imu_units: 1 = la cincha declara unidades del BNO085 (acc Q8 m/s², giro Q9 rad/s); 0 = escala por gravedad.
+// itow0_ms: iTOW de la primera época GNSS de la sesión (base de g.t), para las correcciones manuales.
 RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& imu, const ClockMap girth_to_gnss[3],
-                            const GaitResult& gait, uint8_t imu_units, const RacingConfig& c);
+                            const GaitResult& gait, uint8_t imu_units, const RacingConfig& c, double itow0_ms = NAN);
 std::string racing_json(const RacingResult& r, const RacingConfig& c);
 
 }  // namespace avoeq

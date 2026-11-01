@@ -47,6 +47,8 @@ AVO_EQ_API void avo_eq_free(char* p);
  *   "raza": "GENERICO" | "PSI" | "ARABE"   "parcial_m": 200 (201.168 = furlong)   "signo_mano": 0 (autocalibrar) | 1 | -1
  *   "recorrido": {"nombre", "salida"|"meta"|"salida_meta": {"a":[lat,lon], "b":[lat,lon], "sentido": "AMBOS|IZQ_A_DCHA|DCHA_A_IZQ"},
  *                 "geocerca": [[lat,lon], …]}   o   "plan_geocercas": el objeto de geocercas.json de AVO Windows / iPad
+ *   "trabajos_manuales": [{"itow0_ms", "itow1_ms"}, …] (corrección: los trabajos son estos; [] = ninguno)
+ *   "fases_manuales": {"inicio_trabajo_itow_ms", "fin_trabajo_itow_ms"} (límites de la fase de trabajo, iTOW GPS en ms)
  * With cache_dir the result always contains series and a "cache" key: ACIERTO | CALCULADO | RECALCULADO. */
 AVO_EQ_API int avo_eq_api_version(void);
 AVO_EQ_API int avo_eq_analyse_ex(const char* const* paths, int n, const char* options_json, const volatile int* cancel, char** json_out);
