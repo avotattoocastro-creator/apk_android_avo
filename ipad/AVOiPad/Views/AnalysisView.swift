@@ -24,6 +24,7 @@ struct AnalysisView: View {
                             VStack(spacing: 12) {
                                 AnalysisPlaybackBar()
                                 AnalysisTiles(columns: 2, horse: horse)
+                                AnalysisRouteMap().frame(height: 360)
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -35,6 +36,7 @@ struct AnalysisView: View {
                     } else {
                         AnalysisPlaybackBar()
                         AnalysisTiles(columns: 2, horse: horse)
+                        AnalysisRouteMap().frame(height: 320)
                         AnalysisHorseSection(summary: horse, wide: false)
                         AnalysisSessionCard()
                         AnalysisEngineCard()
@@ -815,5 +817,37 @@ private struct HorseGirthCard: View {
                 .padding(.vertical, 6)
             }
         }
+    }
+}
+
+
+/// Route of the training on the satellite map, synced with the playback cursor (tap = move the cursor there).
+private struct AnalysisRouteMap: View {
+    @Environment(AppModel.self) private var app
+    @State private var command: RouteMapCommand = RouteMapCommand()
+
+    var body: some View {
+        ZStack(alignment: .topTrailing) {
+            MapRouteContainer(command: command, fitPadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30))
+            HStack(spacing: 6) {
+                Button { command = command.next(.fit) } label: {
+                    Image(systemName: "arrow.up.left.and.arrow.down.right").frame(width: 34, height: 34)
+                }
+                .accessibilityLabel("Ajustar recorrido")
+                Button { app.page = .map } label: {
+                    Image(systemName: "map").frame(width: 34, height: 34)
+                }
+                .accessibilityLabel("Abrir en Mapa")
+            }
+            .foregroundStyle(Avo.text)
+            .background(Color(hex: 0x101014, alpha: 0.9), in: RoundedRectangle(cornerRadius: 7))
+            .padding(10)
+            if app.map.route == nil {
+                ProgressView().controlSize(.small).padding(14).frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+        .onAppear { app.map.pageShown() }
     }
 }
