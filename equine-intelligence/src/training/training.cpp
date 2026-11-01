@@ -110,18 +110,21 @@ std::vector<MetricSpec> metric_specs() {
                    m.raises_level, m.worse, m.floor_abs});
     }
   auto race = [](double RaceSummary::*f) { return [f](const SessionSummary& s) { return s.race.present ? s.race.*f : kNaN; }; };
-  v.push_back({"CARRERA.f_v1_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[0] : kNaN; }, true, 0, 0.02});
-  v.push_back({"CARRERA.l_v1_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[0] : kNaN; }, true, -1, 0.10});
-  v.push_back({"CARRERA.f_v2_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[1] : kNaN; }, true, 0, 0.02});
-  v.push_back({"CARRERA.l_v2_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[1] : kNaN; }, true, -1, 0.10});
-  v.push_back({"CARRERA.mano_de_fuera_curva_pct", race(&RaceSummary::wrong_lead_curve_pct), true, +1, 5.0});
-  v.push_back({"CARRERA.indice_caida_pct", race(&RaceSummary::fatigue_pct), false, +1, 2.0});
-  v.push_back({"CARRERA.v_max", race(&RaceSummary::vmax), false, 0, 0.2});
-  v.push_back({"CARRERA.mejor_200m_s", race(&RaceSummary::best_200_s), false, 0, 0.2});
-  v.push_back({"CARRERA.f_en_v_max_hz", race(&RaceSummary::sf_at_vmax), false, 0, 0.02});
-  v.push_back({"CARRERA.l_en_v_max_m", race(&RaceSummary::sl_at_vmax), false, 0, 0.10});
-  v.push_back({"CARRERA.desplazamiento_vertical_m", race(&RaceSummary::vert_disp_m), false, 0, 0.005});
+  v.push_back({"TRABAJO.f_v1_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[0] : kNaN; }, true, 0, 0.02});
+  v.push_back({"TRABAJO.l_v1_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[0] : kNaN; }, true, -1, 0.10});
+  v.push_back({"TRABAJO.f_v2_hz", [](const SessionSummary& s) { return s.race.present ? s.race.sf_ref[1] : kNaN; }, true, 0, 0.02});
+  v.push_back({"TRABAJO.l_v2_m", [](const SessionSummary& s) { return s.race.present ? s.race.sl_ref[1] : kNaN; }, true, -1, 0.10});
+  v.push_back({"TRABAJO.mano_de_fuera_curva_pct", race(&RaceSummary::wrong_lead_curve_pct), true, +1, 5.0});
+  v.push_back({"TRABAJO.indice_caida_pct", race(&RaceSummary::fatigue_pct), false, +1, 2.0});
+  v.push_back({"TRABAJO.v_max", race(&RaceSummary::vmax), false, 0, 0.2});
+  v.push_back({"TRABAJO.mejor_200m_s", race(&RaceSummary::best_200_s), false, 0, 0.2});
+  v.push_back({"TRABAJO.f_en_v_max_hz", race(&RaceSummary::sf_at_vmax), false, 0, 0.02});
+  v.push_back({"TRABAJO.l_en_v_max_m", race(&RaceSummary::sl_at_vmax), false, 0, 0.10});
+  v.push_back({"TRABAJO.desplazamiento_vertical_m", race(&RaceSummary::vert_disp_m), false, 0, 0.005});
   v.push_back({"CINCHA.vedba_galope_g", race(&RaceSummary::vedba_gallop_g), false, 0, 0.02});
+  v.push_back({"TRABAJO.recuperacion_hasta_paso_s", race(&RaceSummary::recovery_mean_s), false, +1, 3.0});
+  v.push_back({"TRABAJO.caida_entre_series_pct", race(&RaceSummary::vmax_drop_pct), false, +1, 2.0});
+  v.push_back({"TRABAJO.calentamiento_s", race(&RaceSummary::warmup_s), false, 0, 60.0});
   return v;
 }
 
@@ -158,7 +161,7 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
   }
   SessionSummary s;
   TrainingConfig cc = c;
-  if (a["carreras"]["perfil"]["v_alta"].type == json::Value::NUM) cc.high_speed_m_s = a["carreras"]["perfil"]["v_alta"].n;
+  if (a["trabajo_pista"]["perfil"]["v_alta"].type == json::Value::NUM) cc.high_speed_m_s = a["trabajo_pista"]["perfil"]["v_alta"].n;
   const json::Value& ses = a["sesion"];
   s.id = ses["id"].str(); s.horse = ses["caballo"].str(); s.rider = ses["jinete"].str();
   s.date_utc = ses["inicio_utc"].str();
@@ -246,7 +249,7 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     if (qv["dominio"].str() == "IMU") s.imu_quality = qv["nivel"].str();
   }
   // AVO Racing
-  const json::Value& rc = a["carreras"];
+  const json::Value& rc = a["trabajo_pista"];
   if (rc.type == json::Value::OBJ) {
     RaceSummary& R = s.race;
     R.present = true;
@@ -278,6 +281,11 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
       }
     }
     for (int k = 0; k < 2; k++) { R.sf_ref[k] = median(sf[k]); R.sl_ref[k] = median(sl[k]); }
+    if (rc["fases"]["calentamiento"].type == json::Value::OBJ) R.warmup_s = nnum(rc["fases"]["calentamiento"]["duracion_s"]);
+    if (rc["fases"]["vuelta_a_la_calma"].type == json::Value::OBJ) R.cooldown_s = nnum(rc["fases"]["vuelta_a_la_calma"]["duracion_s"]);
+    R.reps = (int)rc["series"]["repeticiones"].num(0); R.fast_reps = (int)rc["series"]["rapidas"].num(0);
+    R.vmax_drop_pct = nnum(rc["series"]["caida_v_max_pct"]); R.stride_drop_pct = nnum(rc["series"]["caida_zancada_pct"]);
+    R.recovery_mean_s = nnum(rc["series"]["recuperacion_media_s"]); R.warmup_short = rc["series"]["calentamiento_corto"].boolean(false);
     for (const auto& e : rc["eventos"].a) {
       std::string t = e["tipo"].str();
       if (t == "IMPACTO_ATIPICO") R.impacts++; else if (t == "MOVIMIENTO_LATERAL_BRUSCO") R.lateral_jolts++; else if (t == "SATURACION") R.saturations++;
@@ -308,7 +316,7 @@ std::string training_summary_to_json(const SessionSummary& s) {
     << ",\"pista\":{\"superficie\":" << q(s.surface) << ",\"estado\":" << q(s.track_state) << "}";
   if (s.race.present) {
     const RaceSummary& R = s.race;
-    o << ",\"carreras\":{\"raza\":" << q(R.breed) << ",\"carga_vedba_g_min\":" << num(R.vedba_load_gmin) << ",\"vedba_galope_g\":" << num(R.vedba_gallop_g)
+    o << ",\"trabajo_pista\":{\"raza\":" << q(R.breed) << ",\"carga_vedba_g_min\":" << num(R.vedba_load_gmin) << ",\"vedba_galope_g\":" << num(R.vedba_gallop_g)
       << ",\"galope_girando_izquierda_s\":" << num(R.gallop_left_s) << ",\"galope_girando_derecha_s\":" << num(R.gallop_right_s)
       << ",\"mano\":{\"calibracion\":" << q(R.lead_calibration) << ",\"izquierda\":" << R.lead_left << ",\"derecha\":" << R.lead_right << ",\"cambios\":" << R.lead_changes
       << ",\"mano_de_fuera_en_curva_pct\":" << num(R.wrong_lead_curve_pct) << "},\"trabajos\":" << R.efforts << ",\"trabajos_rapidos\":" << R.fast_efforts
@@ -317,7 +325,10 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"referencia\":[";
     for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(R.ref_speed[k]) << ",\"f_hz\":" << num(R.sf_ref[k]) << ",\"l_m\":" << num(R.sl_ref[k]) << "}";
     o << "],\"f_en_v_max_hz\":" << num(R.sf_at_vmax) << ",\"l_en_v_max_m\":" << num(R.sl_at_vmax) << ",\"desplazamiento_vertical_m\":" << num(R.vert_disp_m)
-      << ",\"eventos\":{\"impactos_atipicos\":" << R.impacts << ",\"laterales_bruscos\":" << R.lateral_jolts << ",\"saturacion\":" << R.saturations << "}}";
+      << ",\"eventos\":{\"impactos_atipicos\":" << R.impacts << ",\"laterales_bruscos\":" << R.lateral_jolts << ",\"saturacion\":" << R.saturations << "}"
+      << ",\"sesion\":{\"calentamiento_s\":" << num(R.warmup_s) << ",\"vuelta_a_la_calma_s\":" << num(R.cooldown_s) << ",\"repeticiones\":" << R.reps
+      << ",\"rapidas\":" << R.fast_reps << ",\"caida_v_max_pct\":" << num(R.vmax_drop_pct) << ",\"caida_zancada_pct\":" << num(R.stride_drop_pct)
+      << ",\"recuperacion_media_s\":" << num(R.recovery_mean_s) << ",\"calentamiento_corto\":" << (R.warmup_short ? "true" : "false") << "}}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -344,7 +355,7 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
   s.gnss_quality = v["calidad"]["gnss"].str(); s.imu_quality = v["calidad"]["imu"].str();
   s.rpe = nnum(v["valoracion"]["rpe"]); s.state = v["valoracion"]["estado"].str(); s.note = v["valoracion"]["nota"].str();
   s.surface = v["pista"]["superficie"].str(); s.track_state = v["pista"]["estado"].str();
-  const json::Value& rc = v["carreras"];
+  const json::Value& rc = v["trabajo_pista"];
   if (rc.type == json::Value::OBJ) {
     RaceSummary& R = s.race;
     R.present = true; R.breed = rc["raza"].str();
@@ -360,6 +371,11 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     R.sf_at_vmax = nnum(rc["f_en_v_max_hz"]); R.sl_at_vmax = nnum(rc["l_en_v_max_m"]); R.vert_disp_m = nnum(rc["desplazamiento_vertical_m"]);
     R.impacts = (int)rc["eventos"]["impactos_atipicos"].num(0); R.lateral_jolts = (int)rc["eventos"]["laterales_bruscos"].num(0);
     R.saturations = (int)rc["eventos"]["saturacion"].num(0);
+    const json::Value& se = rc["sesion"];
+    R.warmup_s = nnum(se["calentamiento_s"]); R.cooldown_s = nnum(se["vuelta_a_la_calma_s"]);
+    R.reps = (int)se["repeticiones"].num(0); R.fast_reps = (int)se["rapidas"].num(0);
+    R.vmax_drop_pct = nnum(se["caida_v_max_pct"]); R.stride_drop_pct = nnum(se["caida_zancada_pct"]);
+    R.recovery_mean_s = nnum(se["recuperacion_media_s"]); R.warmup_short = se["calentamiento_corto"].boolean(false);
   }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
@@ -568,6 +584,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
       raise(&R.level, "VIGILAR");
       R.reasons.push_back(std::to_string(s.race.impacts) + " impactos atípicos en la cincha (posible tropiezo o mala pisada)");
     }
+    if (s.race.present && s.race.warmup_short) R.reasons.push_back("calentamiento corto antes del trabajo rápido");
     if (s.race.present && s.race.lateral_jolts > 0)
       R.reasons.push_back(std::to_string(s.race.lateral_jolts) + " movimientos laterales bruscos (posible espantada o quiebro)");
     // Trainer's assessment.
@@ -604,7 +621,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   for (const auto& m : specs) {
     std::vector<double> hist;
     for (const auto& s : ok) if (s.day >= r.reference_day - c.baseline_days) { double y = m.get(s); if (!std::isnan(y)) hist.push_back(y); }
-    if (hist.empty() && m.name.compare(0, 8, "CARRERA.") == 0) continue;
+    if (hist.empty() && m.name.compare(0, 8, "TRABAJO.") == 0) continue;
     if (hist.empty() && m.name.compare(0, 7, "CINCHA.") == 0) continue;
     Baseline b = baseline_of(hist);
     Deviation d; d.metric = m.name; d.baseline = b.med; d.mad = b.mad; d.n = b.n;
@@ -631,7 +648,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   bool any_race = false;
   for (const auto& s : ok) if (s.race.present) any_race = true;
   for (const auto& m : specs) {
-    bool race_metric = m.name.compare(0, 8, "CARRERA.") == 0 || m.name.compare(0, 7, "CINCHA.") == 0;
+    bool race_metric = m.name.compare(0, 8, "TRABAJO.") == 0 || m.name.compare(0, 7, "CINCHA.") == 0;
     if (race_metric && !any_race) continue;
     add_trend(m.name, m.get);
   }

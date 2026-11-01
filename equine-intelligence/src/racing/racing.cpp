@@ -1,4 +1,4 @@
-// AVO Racing 1.0.0. Ver include/avo_eq/racing.h y docs/algoritmos/13_CARRERAS.md.
+// AVO Track Work 1.0.0 (entrenamiento de caballos de carreras). Ver include/avo_eq/racing.h y docs/algoritmos/13_TRABAJO_PISTA.md.
 #include "avo_eq/racing.h"
 #include <algorithm>
 #include <cmath>
@@ -533,6 +533,62 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       r.efforts.push_back(e);
     }
   }
+  // ================================================================ F. session structure
+  if (n > 2) {
+    double ts = kNaN, te = kNaN;
+    for (size_t k = 0; k < n; k++) if (!std::isnan(g.speed[k])) { if (std::isnan(ts)) ts = g.t[k]; te = g.t[k]; }
+    auto dist_at = [&](double t) { return interp(g.t, g.dist, t); };
+    auto fill = [&](PhaseStats* P, double a, double b) {
+      if (std::isnan(a) || std::isnan(b) || b <= a) return;
+      P->present = true; P->t0 = a; P->t1 = b; P->duration_s = b - a;
+      double d0 = dist_at(a), d1 = dist_at(b);
+      P->distance_m = !std::isnan(d0) && !std::isnan(d1) ? d1 - d0 : 0;
+      for (const auto& s : gait.segments) {
+        double o = std::min(b, s.t1) - std::max(a, s.t0);
+        if (o <= 0) continue;
+        if (s.gait == Gait::WALK) P->walk_s += o; else if (s.gait == Gait::TROT) P->trot_s += o;
+        else if (s.gait == Gait::CANTER_GALLOP) P->canter_s += o; else if (s.gait == Gait::STOPPED) P->stopped_s += o;
+      }
+    };
+    if (!r.efforts.empty() && !std::isnan(ts)) {
+      fill(&r.warmup, ts, r.efforts.front().t0);
+      fill(&r.work, r.efforts.front().t0, r.efforts.back().t1);
+      fill(&r.cooldown, r.efforts.back().t1, te);
+    }
+    // recovery to walk and pauses between repetitions
+    std::vector<double> rec;
+    for (size_t k = 0; k < r.efforts.size(); k++) {
+      Effort& e = r.efforts[k];
+      size_t q = std::lower_bound(g.t.begin(), g.t.end(), e.t1) - g.t.begin();
+      for (; q < n; q++) {
+        if (std::isnan(g.speed[q]) || g.speed[q] > c.walk_speed) continue;
+        size_t m = q; bool held = true;
+        while (m < n && g.t[m] - g.t[q] < c.recovery_hold_s) { if (!std::isnan(g.speed[m]) && g.speed[m] > 1.2 * c.walk_speed) { held = false; break; } m++; }
+        if (held && m < n) { e.recovery_to_walk_s = g.t[q] - e.t1; break; }
+        if (k + 1 < r.efforts.size() && g.t[q] >= r.efforts[k + 1].t0) break;
+      }
+      if (k + 1 < r.efforts.size()) {
+        const Effort& nx = r.efforts[k + 1];
+        e.pause_to_next_s = nx.t0 - e.t1;
+        double d0 = dist_at(e.t1), d1 = dist_at(nx.t0);
+        if (e.pause_to_next_s > 0 && !std::isnan(d0) && !std::isnan(d1)) e.pause_speed_mean = (d1 - d0) / e.pause_to_next_s;
+      }
+      if (e.type == "TRABAJO_RAPIDO" && !std::isnan(e.recovery_to_walk_s)) rec.push_back(e.recovery_to_walk_s);
+    }
+    if (!rec.empty()) { double s = 0; for (double x : rec) s += x; r.recovery_mean_s = s / rec.size(); }
+    r.reps = (int)r.efforts.size();
+    const Effort* first = nullptr; const Effort* lastf = nullptr;
+    for (const auto& e : r.efforts) if (e.type == "TRABAJO_RAPIDO") { r.fast_reps++; if (!first) first = &e; lastf = &e; }
+    if (r.fast_reps >= 2 && first->vmax > 0) {
+      r.vmax_drop_pct = 100.0 * (first->vmax - lastf->vmax) / first->vmax;
+      if (first->sl_at_vmax > 0 && !std::isnan(lastf->sl_at_vmax)) r.stride_drop_pct = 100.0 * (first->sl_at_vmax - lastf->sl_at_vmax) / first->sl_at_vmax;
+    }
+    if (first && !std::isnan(ts) && first->t0 - ts < c.warmup_min_s) {
+      r.warmup_short = true;
+      char b[160]; snprintf(b, sizeof(b), "calentamiento de %.0f min antes del primer trabajo rápido (referencia %.0f min)", (first->t0 - ts) / 60, c.warmup_min_s / 60);
+      r.warnings.push_back(b);
+    }
+  }
   std::sort(r.events.begin(), r.events.end(), [](const RacingEvent& a, const RacingEvent& b) { return a.t < b.t; });
   return r;
 }
@@ -551,7 +607,7 @@ void turns(std::ostringstream& o, const TurnStats& t) {
 std::string racing_json(const RacingResult& r, const RacingConfig& c) {
   std::ostringstream o;
   const BreedProfile& b = c.breed;
-  o << "{\"version\":\"" << RACING_VERSION << "\",\"perfil\":{\"raza\":" << q(b.name) << ",\"v_trabajo\":" << num(b.work_speed) << ",\"v_rapido\":" << num(b.fast_speed)
+  o << "{\"modulo\":\"AVO_TRACK_WORK\",\"version\":\"" << RACING_VERSION << "\",\"perfil\":{\"raza\":" << q(b.name) << ",\"v_trabajo\":" << num(b.work_speed) << ",\"v_rapido\":" << num(b.fast_speed)
     << ",\"v_alta\":" << num(b.high_speed) << ",\"v_referencia\":[" << num(b.ref_speed[0]) << "," << num(b.ref_speed[1]) << "],\"frecuencia_zancada_hz\":["
     << num(b.sf_min) << "," << num(b.sf_max) << "],\"longitud_zancada_m\":[" << num(b.sl_min) << "," << num(b.sl_max) << "],\"parcial_m\":" << num(c.split_m) << "}";
   o << ",\"cincha\":{\"disponible\":" << (r.has_imu ? "true" : "false") << ",\"escala\":" << q(r.scale) << ",\"lsb_por_g\":" << num(r.g_lsb)
@@ -594,14 +650,27 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
       << ",\"l_max_m\":" << num(e.sl_max) << ",\"ajuste_f\":{\"a\":" << num(e.sf_icpt) << ",\"b\":" << num(e.sf_slope) << ",\"r\":" << num(e.fit_r_sf) << "},\"ajuste_l\":{\"a\":"
       << num(e.sl_icpt) << ",\"b\":" << num(e.sl_slope) << "},\"referencia\":[";
     for (int k = 0; k < 2; k++) o << (k ? "," : "") << "{\"v\":" << num(c.breed.ref_speed[k]) << ",\"f_hz\":" << num(e.sf_ref[k]) << ",\"l_m\":" << num(e.sl_ref[k]) << "}";
-    o << "],\"mano\":{\"izquierda\":" << e.lead_left << ",\"derecha\":" << e.lead_right << ",\"cambios\":" << e.lead_changes << "}}";
+    o << "],\"mano\":{\"izquierda\":" << e.lead_left << ",\"derecha\":" << e.lead_right << ",\"cambios\":" << e.lead_changes << "}"
+      << ",\"recuperacion_hasta_paso_s\":" << num(e.recovery_to_walk_s) << ",\"pausa_hasta_siguiente_s\":" << num(e.pause_to_next_s)
+      << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << "}";
   }
-  o << "]},\"eventos\":[";
+  o << "]},\"fases\":{";
+  auto ph = [&](const char* name, const PhaseStats& P, bool comma) {
+    o << (comma ? "," : "") << "\"" << name << "\":";
+    if (!P.present) { o << "null"; return; }
+    o << "{\"t0\":" << num(P.t0) << ",\"t1\":" << num(P.t1) << ",\"duracion_s\":" << num(P.duration_s) << ",\"distancia_m\":" << num(P.distance_m)
+      << ",\"parado_s\":" << num(P.stopped_s) << ",\"paso_s\":" << num(P.walk_s) << ",\"trote_s\":" << num(P.trot_s) << ",\"galope_s\":" << num(P.canter_s) << "}";
+  };
+  ph("calentamiento", r.warmup, false); ph("trabajo", r.work, true); ph("vuelta_a_la_calma", r.cooldown, true);
+  o << ",\"algoritmo\":\"SESSION_PHASES_V1\"},\"series\":{\"repeticiones\":" << r.reps << ",\"rapidas\":" << r.fast_reps
+    << ",\"caida_v_max_pct\":" << num(r.vmax_drop_pct) << ",\"caida_zancada_pct\":" << num(r.stride_drop_pct)
+    << ",\"recuperacion_media_s\":" << num(r.recovery_mean_s) << ",\"calentamiento_corto\":" << (r.warmup_short ? "true" : "false") << "}";
+  o << ",\"eventos\":[";
   for (size_t i = 0; i < r.events.size(); i++)
     o << (i ? "," : "") << "{\"tipo\":" << q(r.events[i].type) << ",\"t\":" << num(r.events[i].t) << ",\"valor\":" << num(r.events[i].value) << ",\"detalle\":" << q(r.events[i].detail) << "}";
   o << "],\"avisos\":[";
   for (size_t i = 0; i < r.warnings.size(); i++) o << (i ? "," : "") << q(r.warnings[i]);
-  o << "],\"nota\":\"exploratorio, sin validar con caballos reales; perfiles de raza = valores de partida\"}";
+  o << "],\"nota\":\"entrenamiento de caballos de carreras; exploratorio, sin validar con caballos reales; perfiles de raza = valores de partida\"}";
   return o.str();
 }
 

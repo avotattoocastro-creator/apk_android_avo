@@ -86,8 +86,8 @@ Es **orientativo, no es un diagnóstico veterinario**, y no usa términos clíni
   ajustarlos con la historia real de cada cuadra.
 - Las tendencias con pocas sesiones son orientativas. El intervalo p10–p90 no es un intervalo de confianza formal.
 
-## Ampliación carreras (AVO Racing, ficha 13)
-- Con el bloque `carreras` del análisis, el resumen guarda la raza, la carga VeDBA, la mano, los trabajos, la zancada a las velocidades de referencia, el índice de caída y los eventos.
+## Ampliación trabajo en pista (entrenamiento de caballos de carreras, ficha 13)
+- Con el bloque `trabajo_pista` del análisis, el resumen guarda la raza, la carga VeDBA, la mano, los trabajos, las fases, las series, la recuperación, la zancada a las velocidades de referencia, el índice de caída y los eventos.
 - La distancia a alta velocidad usa el umbral de la raza.
-- La historia añade la carga VeDBA (aguda, crónica semanal y ACWR) y las líneas base y tendencias `CARRERA.*` y `CINCHA.*`.
+- La historia añade la carga VeDBA (aguda, crónica semanal y ACWR) y las líneas base y tendencias `TRABAJO.*` y `CINCHA.*`.
 - Los impactos atípicos suben a VIGILAR.

@@ -282,11 +282,11 @@ EQ_TEST(entreno, racing_metrics_history) {
   v.push_back(bad);
   TrainingResult r = analyse_training(v, "", c);
   const SessionResult* x = find(r, "CORTA");
-  const Deviation* d = dev(x, "CARRERA.l_v1_m");
+  const Deviation* d = dev(x, "TRABAJO.l_v1_m");
   CHECK(d && d->level == "REVISAR" && d->direction == "MENOR");
   CHECK(x && x->level == "REVISAR");
   CHECK(x && contains(x->reasons, "impactos atípicos"));
-  CHECK(trend(r, "CARRERA.l_v1_m") != nullptr);
+  CHECK(trend(r, "TRABAJO.l_v1_m") != nullptr);
   CHECK(trend(r, "carga_vedba") != nullptr);
   CHECK_NEAR(r.current.acute_imu, 20 * 3, 1e-9);   // sessions on days 12, 15, 18
   // summary JSON round trip keeps the racing block

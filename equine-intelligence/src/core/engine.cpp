@@ -102,7 +102,7 @@ static void assess_quality(const Session& s, Analysis& a) {
 std::vector<std::pair<std::string, std::string>> algorithm_versions() {
   return {{"motor", ENGINE_VERSION}, {"gnss", "1.1.0"}, {"aceleracion", KINEMATICS_VERSION}, {"curvas", CURVES_VERSION},
           {"cadencia", CADENCE_VERSION}, {GAIT_V1_ID, "1.0.1"}, {GAIT_V2_ID, "2.0.0"}, {"fusion", FUSION_VERSION},
-          {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}, {"carreras", RACING_VERSION}};
+          {"rendimiento", PERFORMANCE_VERSION}, {"eventos", EVENTS_VERSION}, {"simetria", SYMMETRY_VERSION}, {"trabajo_pista", RACING_VERSION}};
 }
 
 std::string params_hash(const EngineConfig& c) {
@@ -402,7 +402,7 @@ std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, 
   }
   o << "]";
   write_v2_blocks(o, a, s);
-  o << ",\"carreras\":" << racing_json(a.racing, c.racing);
+  o << ",\"trabajo_pista\":" << racing_json(a.racing, c.racing);
   if (series) write_series(o, a, c);
   o << "}";
   return o.str();

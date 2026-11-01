@@ -1,4 +1,4 @@
-// AVO Racing: sesión sintética de carreras con verdad analítica (velocidad, curvas, mano, zancada, montaje girado).
+// AVO Track Work: entrenamiento sintético de un caballo de carreras con verdad analítica (velocidad, curvas, mano, zancada, montaje girado).
 #include <cmath>
 #include <random>
 #include "avo_eq/avo_eq_c.h"
@@ -55,7 +55,7 @@ void to_sensor(const Mount& M, const double h[3], double s[3]) {
 
 Session race_session(double secs, uint8_t units, double spike_t = -1, int lead_flip = 1) {
   Session s;
-  s.session_id = "CARRERA_SINT"; s.horse = "FLECHA";
+  s.session_id = "ENTRENO_SINT"; s.horse = "FLECHA";
   s.gnss = synth::track_fn(secs, 10, race_v, race_w, 0.05, 0.0, 5);
   s.imu_units = units;
   const double fs = 125, offset = -3.2, drift = 40e-6;
@@ -114,7 +114,7 @@ EngineConfig psi() { EngineConfig c; breed_profile("PSI", &c.racing.breed); retu
 
 }  // namespace
 
-EQ_TEST(carreras, profiles) {
+EQ_TEST(pista, profiles) {
   BreedProfile p;
   CHECK(breed_profile("PSI", &p) && p.name == "PSI" && p.fast_speed > 14);
   CHECK(breed_profile("ARABE", &p) && p.name == "ARABE" && p.work_speed < 11);
@@ -122,7 +122,7 @@ EQ_TEST(carreras, profiles) {
   CHECK(!breed_profile("PONI", &p));
 }
 
-EQ_TEST(carreras, race_session_psi) {
+EQ_TEST(pista, race_session_psi) {
   Session s = race_session(140, 1);
   Analysis a = analyse(s, psi());
   const RacingResult& r = a.racing;
@@ -172,7 +172,7 @@ EQ_TEST(carreras, race_session_psi) {
   CHECK(r.saturated_samples == 0);
 }
 
-EQ_TEST(carreras, impact_event_and_gravity_scale) {
+EQ_TEST(pista, impact_event_and_gravity_scale) {
   Session s = race_session(140, 0, 50.0);
   Analysis a = analyse(s, psi());
   const RacingResult& r = a.racing;
@@ -184,7 +184,7 @@ EQ_TEST(carreras, impact_event_and_gravity_scale) {
   CHECK(r.efforts.size() == 1 && r.strides.size() > 100);
 }
 
-EQ_TEST(carreras, lead_sign_option) {
+EQ_TEST(pista, lead_sign_option) {
   // Calibration in curves assumes the inside lead. A horse that gallops every curve on the OUTSIDE lead is
   // reported as inside lead (documented limitation); with the sign saved from a normal session it is right.
   Session normal = race_session(140, 1);
@@ -204,7 +204,7 @@ EQ_TEST(carreras, lead_sign_option) {
   CHECK(d.racing.wrong_lead_curve_pct > 80);
 }
 
-EQ_TEST(carreras, gnss_only_and_json) {
+EQ_TEST(pista, gnss_only_and_json) {
   Session s = race_session(140, 1);
   s.imu.clear();
   EngineConfig c; breed_profile("ARABE", &c.racing.breed);
@@ -215,12 +215,12 @@ EQ_TEST(carreras, gnss_only_and_json) {
   std::string js = to_json(a, s, c, false);
   json::Value v; std::string err;
   CHECK(json::parse(js, &v, &err));
-  CHECK(v["carreras"]["perfil"]["raza"].str() == "ARABE");
-  CHECK(v["carreras"]["trabajos"]["lista"][0]["tipo"].str() == "TRABAJO_RAPIDO");
-  CHECK(v["procedencia"]["algoritmos"]["carreras"].str() == RACING_VERSION);
+  CHECK(v["trabajo_pista"]["perfil"]["raza"].str() == "ARABE");
+  CHECK(v["trabajo_pista"]["trabajos"]["lista"][0]["tipo"].str() == "TRABAJO_RAPIDO");
+  CHECK(v["procedencia"]["algoritmos"]["trabajo_pista"].str() == RACING_VERSION);
 }
 
-EQ_TEST(carreras, chain_to_training_summary) {
+EQ_TEST(pista, chain_to_training_summary) {
   Session s = race_session(140, 1);
   EngineConfig c = psi();
   Analysis a = analyse(s, c);
@@ -229,7 +229,7 @@ EQ_TEST(carreras, chain_to_training_summary) {
   CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-10-20\"}", &out) == 0);
   json::Value v; std::string err;
   CHECK(out && json::parse(out, &v, &err));
-  const json::Value& rc = v["carreras"];
+  const json::Value& rc = v["trabajo_pista"];
   CHECK(rc["raza"].str() == "PSI");
   CHECK(rc["trabajos_rapidos"].num() == 1);
   CHECK_NEAR(rc["v_max"].num(), 17, 0.2);
@@ -239,5 +239,57 @@ EQ_TEST(carreras, chain_to_training_summary) {
   double hs = v["distancia_alta_velocidad_m"].num();
   REPORT("distancia > 15 m/s: %.0f m\n", hs);
   CHECK(hs > 30 * 17 * 0.9 && hs < 30 * 17 + 15 * 16.5);
+  avo_eq_free(out);
+}
+
+namespace {
+// Typical track morning: walk + trot warm-up (4 min), two fast repetitions (16 and 15 m/s) with a walk between, walk cool-down.
+double morning_v(double t) {
+  if (t < 120) return 1.6;
+  if (t < 240) return 3.5;
+  if (t < 250) return 3.5 + 1.25 * (t - 240);
+  if (t < 280) return 16.0;
+  if (t < 290) return 16.0 - 1.44 * (t - 280);
+  if (t < 400) return 1.6;
+  if (t < 410) return 1.6 + 1.34 * (t - 400);
+  if (t < 440) return 15.0;
+  if (t < 450) return 15.0 - 1.34 * (t - 440);
+  return 1.6;
+}
+double straight(double) { return 0; }
+}  // namespace
+
+EQ_TEST(pista, training_morning_structure) {
+  Session s;
+  s.session_id = "MANANA"; s.horse = "FLECHA";
+  s.gnss = synth::track_fn(600, 10, morning_v, straight, 0.03, 0.0, 8);
+  EngineConfig c = psi();
+  Analysis a = analyse(s, c);
+  const RacingResult& r = a.racing;
+  REPORT("repeticiones %d (rápidas %d), caída %.2f %%, recuperación media %.1f s, calentamiento %.0f s (paso %.0f, trote %.0f), calma %.0f s\n",
+         r.reps, r.fast_reps, r.vmax_drop_pct, r.recovery_mean_s, r.warmup.duration_s, r.warmup.walk_s, r.warmup.trot_s, r.cooldown.duration_s);
+  CHECK(r.reps == 2 && r.fast_reps == 2);
+  CHECK_NEAR(r.vmax_drop_pct, 100.0 * (16 - 15) / 16, 1.0);
+  CHECK(r.efforts.size() == 2);
+  if (r.efforts.size() == 2) {
+    // 16 -> 2.2 m/s at 1.44 m/s²: walk at 289.6 s; the effort ends when the speed falls below 11 m/s (~283.5 s)
+    CHECK_NEAR(r.efforts[0].recovery_to_walk_s, 289.58 - 283.47, 0.6);
+    CHECK_NEAR(r.efforts[0].pause_to_next_s, (400 + 9.4 / 1.34) - 283.47, 1.0);
+    CHECK(std::isnan(r.efforts[1].pause_to_next_s));
+  }
+  CHECK(r.warmup.present && r.work.present && r.cooldown.present);
+  CHECK_NEAR(r.warmup.duration_s, 240 + 7.5 / 1.25, 1.0);   // until the first effort starts (11 m/s at 246 s)
+  CHECK(r.warmup.walk_s > 90 && r.warmup.trot_s > 90);
+  CHECK(r.cooldown.duration_s > 140);
+  CHECK(r.warmup_short);                                       // 4 min < 10 min reference
+  std::string js = to_json(a, s, c, false);
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err));
+  CHECK(v["trabajo_pista"]["series"]["rapidas"].num() == 2);
+  CHECK(v["trabajo_pista"]["fases"]["calentamiento"]["duracion_s"].num() > 200);
+  char* out = nullptr;
+  CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-10-21\"}", &out) == 0);
+  CHECK(out && json::parse(out, &v, &err));
+  CHECK(v["trabajo_pista"]["sesion"]["rapidas"].num() == 2 && v["trabajo_pista"]["sesion"]["calentamiento_corto"].boolean());
   avo_eq_free(out);
 }

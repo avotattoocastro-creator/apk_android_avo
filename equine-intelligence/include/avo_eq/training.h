@@ -46,7 +46,7 @@ struct GaitSummary {
   double cycle_corr = NAN, interval_cv = NAN;   // regularidad (mediana ponderada por duración de segmentos)
 };
 
-// Datos de carreras de la sesión (bloque "carreras" del análisis, AVO Racing).
+// Trabajo en pista de la sesión (bloque "trabajo_pista" del análisis): entrenamiento de caballos de carreras.
 struct RaceSummary {
   bool present = false;
   std::string breed;                            // GENERICO | PSI | ARABE
@@ -61,6 +61,11 @@ struct RaceSummary {
   double ref_speed[2] = {NAN, NAN}, sf_ref[2] = {NAN, NAN}, sl_ref[2] = {NAN, NAN};
   double sf_at_vmax = NAN, sl_at_vmax = NAN, vert_disp_m = NAN;
   int impacts = 0, lateral_jolts = 0, saturations = 0;
+  // estructura del entrenamiento
+  double warmup_s = NAN, cooldown_s = NAN;
+  int reps = 0, fast_reps = 0;
+  double vmax_drop_pct = NAN, stride_drop_pct = NAN, recovery_mean_s = NAN;
+  bool warmup_short = false;
 };
 
 struct SessionSummary {

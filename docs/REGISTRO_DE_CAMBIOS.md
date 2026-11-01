@@ -24,6 +24,39 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Motor AVO Equine — AVO Track Work 1.0.0: el módulo de «carreras» pasa a ser de ENTRENAMIENTO (fases, series, recuperación)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** ver `git log` · **CI:** pendiente
+**Por qué:** el usuario aclara que el objetivo es analizar los **entrenamientos** de caballos de carreras PSI y árabes, no las carreras. Esta entrada corrige el enfoque de la anterior («AVO Racing 1.0.0»).
+**Qué cambia:**
+- **Nombres:**
+  - bloque JSON `carreras` → **`trabajo_pista`** (con `modulo` = `AVO_TRACK_WORK`);
+  - `procedencia.algoritmos.carreras` → `trabajo_pista`;
+  - métricas de la historia `CARRERA.*` → **`TRABAJO.*`**;
+  - resumen de sesión `carreras` → `trabajo_pista`;
+  - ficha `13_CARRERAS.md` → **`13_TRABAJO_PISTA.md`**.
+  - El código interno se sigue llamando `racing`.
+  - Ninguna app leía todavía estos nombres.
+- **Nuevo: estructura del entrenamiento (`SESSION_PHASES_V1`):**
+  - fases de calentamiento, trabajo y vuelta a la calma, con duración, distancia y tiempo por aire;
+  - por trabajo: **recuperación hasta el paso** y **pausa hasta la siguiente repetición**, con su velocidad;
+  - **series:** repeticiones y rápidas, **caída de la máxima y de la zancada** entre la primera y la última repetición rápida, y recuperación media;
+  - aviso de **calentamiento corto** (menos de 10 min antes del primer trabajo rápido; valor de partida).
+- **Historia:**
+  - el resumen guarda `trabajo_pista.sesion`;
+  - métricas informativas `TRABAJO.recuperacion_hasta_paso_s`, `TRABAJO.caida_entre_series_pct` y `TRABAJO.calentamiento_s`;
+  - el calentamiento corto aparece como motivo.
+- **Fixtures** regeneradas.
+**Validación:**
+- IMPLEMENTADO.
+- 79 casos y 1103 comprobaciones con ASan/UBSan.
+- Nueva prueba `pista.training_morning_structure`: mañana sintética con calentamiento de 4 min, 2 repeticiones a 16 y 15 m/s con paseo entre ellas y vuelta a la calma.
+  - Caída 6,24 % (real 6,25 %).
+  - Recuperación 6,5 s (real 6,1 s).
+  - Pausa y fases correctas.
+- **NO VERIFICADO** con caballos reales.
+
+---
+
 ## 2026-11-01 — Motor AVO Equine — AVO Racing 1.0.0 (caballos de carreras PSI y árabe)
 **Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `3631bd9` · **CI:** run 41328572986 ✅ (Linux ASan/UBSan 78 casos/1086 comprobaciones, Windows MSVC 78 casos, Android NDK ×3, JNI en JVM, fixtures)
 **Qué cambia (petición del usuario: «añadir todo lo posible a los caballos de carreras PSI y árabes»):**

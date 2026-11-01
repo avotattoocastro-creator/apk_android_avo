@@ -1,4 +1,5 @@
-// AVO Racing (carreras) 1.0.0 — análisis para caballos de carreras (perfiles PSI y árabe) con la cincha y el GNSS.
+// AVO Track Work 1.0.0 — análisis de los ENTRENAMIENTOS de caballos de carreras (perfiles PSI y árabe) con la cincha
+// y el GNSS. Código interno con nombre «racing»; bloque JSON «trabajo_pista».
 //
 // A. Cincha sola (IMU_HORSE_FRAME_V1): escala física, vertical por gravedad, ejes de avance y lateral (PCA),
 //    VeDBA (aceleración dinámica del cuerpo), giro sobre la vertical (tiempo y grados a cada mano), saturación.
@@ -6,9 +7,11 @@
 //    VeDBA, velocidad GNSS y longitud de zancada; relación frecuencia/longitud con la velocidad.
 // C. Mano de galope (LEAD_V1, EXPERIMENTAL): el rasgo lateral cambia de signo entre mano izquierda y derecha
 //    (simetría especular). El signo se calibra en las curvas (se espera la mano de dentro) o por opción.
-// D. Trabajos (EFFORT_V1, GNSS): galopes de trabajo y trabajos rápidos con parciales cada 200 m (o furlong),
-//    mejores 200/400/600/800/1000/1200/1600 m, velocidad máxima, tiempo hasta ella, distancia ≥ 90 % de la máxima,
-//    índice de caída final (fatiga) y zancada a velocidad de referencia.
+// D. Trabajos del entrenamiento (EFFORT_V1, GNSS): galopes de trabajo y trabajos rápidos con parciales cada 200 m
+//    (o furlong), mejores distancias, velocidad máxima, índice de caída (fatiga), zancada a velocidad de referencia,
+//    recuperación hasta el paso y pausa hasta la siguiente repetición.
+// F. Estructura de la sesión (SESSION_PHASES_V1): calentamiento, trabajo y vuelta a la calma (tiempo por aire y
+//    distancia), series (repeticiones, caída de velocidad y de zancada entre la primera y la última).
 // E. Eventos de la cincha (EXPERIMENTAL): impactos atípicos, movimientos laterales bruscos, saturación.
 // Todo es exploratorio y NO VERIFICADO con caballos reales; los perfiles de raza son valores de partida.
 #pragma once
@@ -49,6 +52,9 @@ struct RacingConfig {
   int lead_min_curve_strides = 12;
   double event_k = 6.0;              // eventos: pico por encima de mediana + k·MAD de los picos de zancada
   double event_min_g = 1.5;          // y por encima de este valor absoluto (g)
+  double walk_speed = 2.2;           // m/s: recuperación = hasta volver al paso (por debajo de esto)…
+  double recovery_hold_s = 5.0;      // …y mantenerlo este tiempo
+  double warmup_min_s = 600.0;       // aviso si el calentamiento antes del primer trabajo rápido es más corto
 };
 
 struct Stride {
@@ -84,6 +90,15 @@ struct Effort {
   double sf_slope = NAN, sf_icpt = NAN, sl_slope = NAN, sl_icpt = NAN, fit_r_sf = NAN;   // f = a + b·v ; l = c + d·v
   double sf_ref[2] = {NAN, NAN}, sl_ref[2] = {NAN, NAN};          // a las velocidades de referencia (si están en rango)
   int lead_left = 0, lead_right = 0, lead_changes = 0;
+  // entrenamiento
+  double recovery_to_walk_s = NAN;   // desde el final del trabajo hasta volver al paso (NaN: no volvió antes del final)
+  double pause_to_next_s = NAN, pause_speed_mean = NAN;   // pausa hasta la siguiente repetición
+};
+
+struct PhaseStats {
+  bool present = false;
+  double t0 = NAN, t1 = NAN, duration_s = 0, distance_m = 0;
+  double walk_s = 0, trot_s = 0, canter_s = 0, stopped_s = 0;
 };
 
 struct RacingEvent {
@@ -116,6 +131,13 @@ struct RacingResult {
   // D. trabajos
   std::vector<Effort> efforts;
   double best_200_s = NAN, vmax = NAN, dist_fast_m = 0, dist_work_m = 0;
+  // F. estructura de la sesión
+  PhaseStats warmup, work, cooldown;
+  int reps = 0, fast_reps = 0;
+  double vmax_drop_pct = NAN;        // (máxima de la 1.ª repetición rápida − de la última) / 1.ª
+  double stride_drop_pct = NAN;      // igual con la longitud de zancada a la máxima
+  double recovery_mean_s = NAN;      // media de la recuperación hasta el paso tras los trabajos rápidos
+  bool warmup_short = false;
   // E. eventos
   std::vector<RacingEvent> events;
   std::vector<std::string> warnings;

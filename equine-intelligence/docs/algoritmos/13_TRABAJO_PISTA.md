@@ -1,7 +1,9 @@
-# 13 · AVO Racing 1.0.0 — caballos de carreras (perfiles PSI y árabe)
+# 13 · AVO Track Work 1.0.0 — entrenamientos de caballos de carreras (perfiles PSI y árabe)
 
-Código: `include/avo_eq/racing.h`, `src/racing/racing.cpp`. Pruebas: `tests/test_racing.cpp` (suite `carreras`, 6 casos).
-Bloque `carreras` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analyse_ex`:
+**Objetivo: analizar los ENTRENAMIENTOS (trabajo en pista), no las carreras.** El código interno se llama `racing`.
+
+Código: `include/avo_eq/racing.h`, `src/racing/racing.cpp`. Pruebas: `tests/test_racing.cpp` (suite `pista`, 7 casos).
+Bloque `trabajo_pista` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analyse_ex`:
 - `raza`: `GENERICO` (por defecto), `PSI` o `ARABE`;
 - `parcial_m`: 200 por defecto (201.168 = furlong);
 - `signo_mano`: 0 = autocalibrar, 1 o −1.
@@ -52,7 +54,7 @@ Bloque `carreras` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analyse_ex
 - Se suaviza por mayoría de 5 zancadas, y una mano tiene que durar al menos 3 zancadas. Se dan los cambios de mano (eventos `CAMBIO_DE_MANO`) y el porcentaje de mano de fuera en curva.
 - **Límite:** con la autocalibración, un caballo que galopa siempre por fuera en las curvas sale «por dentro». La prueba `lead_sign_option` lo documenta.
 
-## D. Trabajos (`EFFORT_V1`, solo GNSS)
+## D. Trabajos del entrenamiento (`EFFORT_V1`, solo GNSS)
 - Un trabajo es un tramo con velocidad ≥ v_trabajo, que admite bajadas de hasta 3 s y dura al menos 10 s. Es `TRABAJO_RAPIDO` si la máxima llega a v_rápido; si no, es `GALOPE_TRABAJO`.
 - De cada trabajo se calcula:
   - distancia, duración y velocidad media;
@@ -70,21 +72,37 @@ Bloque `carreras` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analyse_ex
   - **frecuencia y longitud a las velocidades de referencia**, solo dentro del rango medido. Es lo que permite comparar sesiones con trabajos distintos.
 - Para toda la sesión: distancia de galope de trabajo, distancia rápida, máxima y mejor 200 m.
 
+## F. Estructura del entrenamiento (`SESSION_PHASES_V1`)
+- **Fases:**
+  - **calentamiento:** desde el inicio hasta el primer trabajo;
+  - **trabajo:** desde el primer trabajo hasta el último;
+  - **vuelta a la calma:** desde el último trabajo hasta el final.
+  - De cada fase se dan la duración, la distancia y el tiempo parado, al paso, al trote y al galope.
+- **Por trabajo:**
+  - **recuperación hasta el paso:** tiempo desde el final hasta bajar de 2,2 m/s y mantenerse 5 s;
+  - **pausa hasta la siguiente repetición** y su velocidad media.
+- **Series:**
+  - repeticiones y repeticiones rápidas;
+  - **caída de la velocidad máxima** y **de la longitud de zancada** entre la primera y la última repetición rápida;
+  - recuperación media.
+- **Calentamiento corto:** aviso si el primer trabajo rápido empieza antes de 10 min (`warmup_min_s`, valor de partida).
+
 ## E. Eventos de la cincha (EXPERIMENTAL)
 - `IMPACTO_ATIPICO`: pico vertical de una zancada por encima de mediana + 6·MAD de la sesión y de 1,5 g. Puede ser un tropiezo o una mala pisada.
 - `MOVIMIENTO_LATERAL_BRUSCO`: en ventanas de 1 s, pico lateral por encima de mediana + 6·MAD y de 1 g, junto con un giro de más de 30 °/s. Puede ser una espantada o un quiebro.
 - `SATURACION`: episodios fuera de ±8 g.
 
 ## Historia de entrenamientos (ficha 12)
-El resumen de sesión (`avo-training-session`) añade el bloque `carreras`. La distancia a alta velocidad usa el umbral de la raza.
+El resumen de sesión (`avo-training-session`) añade el bloque `trabajo_pista`, con `sesion` (calentamiento, vuelta a la calma, repeticiones, caídas, recuperación y calentamiento corto). La distancia a alta velocidad usa el umbral de la raza.
 
 La historia incluye:
 - **Carga VeDBA** con su propia ACWR (ACWR > 1,5 → VIGILAR).
 - **Líneas base y tendencias** de:
-  - `CARRERA.f_v1_hz`, `l_v1_m`, `f_v2_hz` y `l_v2_m` (zancada a las velocidades de referencia);
+  - `TRABAJO.f_v1_hz`, `l_v1_m`, `f_v2_hz` y `l_v2_m` (zancada a las velocidades de referencia);
   - `mano_de_fuera_curva_pct`;
   - `indice_caida_pct`, `v_max`, `mejor_200m_s`, `f_en_v_max_hz`, `l_en_v_max_m` y `desplazamiento_vertical_m`;
-  - `CINCHA.vedba_galope_g`.
+  - `CINCHA.vedba_galope_g`;
+  - `TRABAJO.recuperacion_hasta_paso_s`, `TRABAJO.caida_entre_series_pct` y `TRABAJO.calentamiento_s` (informativas).
 - **Métricas que suben el nivel:** la zancada a la velocidad de referencia (la longitud solo si baja) y la mano de fuera en curva (solo si sube). Las demás son informativas.
 - Los impactos atípicos suben a VIGILAR.
 
@@ -101,6 +119,7 @@ La historia incluye:
   - mano 100 % en curvas y 2 cambios detectados de 2;
   - giros de 71° y 85° (reales 73° y 86°);
   - impacto inyectado detectado;
+  - mañana de entrenamiento sintética (calentamiento de 4 min, 2 repeticiones a 16 y 15 m/s con paseo entre ellas y vuelta a la calma): repeticiones, caída del 6,24 % (real 6,25 %), recuperación de 6,5 s (real 6,1 s), fases y aviso de calentamiento corto;
   - cadena análisis → resumen → historia.
 - **NO VERIFICADO** con caballos reales:
   - falta comprobar el rasgo de la mano con sesiones etiquetadas (vídeo), los rangos de zancada por raza y los umbrales de los eventos;
