@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — página «Listado de entrenamientos» y búsqueda de entrenamientos perdidos
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia (petición del entrenador):**
+- **Nueva página «Listado»** (`Page.trainingList` = "List", menú tras «Entrenamientos», `App/TrainingListModel.swift`, `Views/TrainingListView.swift`): tabla densa a todo el ancho (`Table` ordenable en ancho regular, lista de filas en ancho compacto) con Fecha y hora, Caballo, Jinete, Modalidad, Duración, Distancia, Vel. máx., Cincha, Geocercas visitadas, Origen (Archivo / Wi-Fi / Bluetooth / Demo / Recuperado, leído del `source` del manifiesto .avo), Estado del motor y favorito. Tocar una fila la selecciona (entrenamiento activo); el botón «Abrir» de la fila o el menú contextual la abre en Análisis. Cabecera «N entrenamientos · X km · HH:MM total» del conjunto filtrado.
+- **Filtros** (guardados en UserDefaults): texto, caballo y jinete (sesiones + Cuadra/Jinetes), modalidad, fecha desde/hasta (días de Europe/Madrid) con atajos Hoy / 7 días / 30 días / Todo, geocerca (las definidas en `geocercas.json`; un entrenamiento coincide si algún punto del recorrido cae dentro: círculo por haversine, polígono por punto en polígono; se calcula una vez por sesión fuera del hilo principal y se guarda en caché hasta que cambien las geocercas), solo con cincha, solo favoritos, ocultar DEMO y «Limpiar filtros».
+- **«Buscar entrenamientos perdidos»:** recorre fuera del hilo principal Documents (Archivos › En mi iPad › AVO Horse), Documents/Inbox, tmp, Library/Caches, Application Support y la carpeta de la app (biblioteca, caché RAW, `reloj/descargas`). Toma .avo, .avr y carpetas de segmentos P00n.avr; descarta por SHA-256 del archivo, SHA-256 de segmentos o ID de sesión lo que ya está cargado; las carpetas completas se empaquetan como .avo (`AvoPackageWriter`, `source: recuperado-ipad`, en `reloj/recuperados`) y las que tienen `.wifi_etag`/`.ble_sizes` o huecos se informan como incompletas; .part/.tmp como interrumpidas. Lo nuevo se importa con `app.importFiles`. Hoja de resultado «N archivos revisados · M recuperados · K duplicados · J incompletos/dañados» con la lista y el motivo. «Buscar en una carpeta…»: carpeta de Archivos con acceso de seguridad, profundidad 6 y máximo 2000 archivos (los archivos se copian a `entrada` antes de importar).
+- Estado vacío «No hay entrenamientos en el iPad» con Abrir / Reloj Wi-Fi / Buscar perdidos.
+- `Info.plist`: `LSSupportsOpeningDocumentsInPlace = true`; al arrancar se crea `Documents/Entrenamientos` para que la carpeta de la app aparezca en Archivos.
+**Archivos:** `ipad/AVOiPad/App/{TrainingListModel,AppModel,AppModel+Shell,RootView}.swift`, `ipad/AVOiPad/Views/TrainingListView.swift`, `ipad/AVOiPad/Resources/Info.plist`, `ipad/AVOiPadTests/TrainingListTests.swift`, `ipad/AVOiPadUITests/ScreenshotTests.swift`, `ipad/UI_CONTRACT.md`.
+**No se ha tocado:** núcleo (`Core/`, `Engine/`), importación (`importFiles`), descarga Wi-Fi/BLE del reloj, resto de páginas.
+**Validación:** IMPLEMENTADO · sin compilar en la sesión (CI macOS pendiente) · NO VERIFICADO en iPad.
+**Pendiente:** compilar en CI; probar en iPad la tabla (columnas, orden, selección), el doble toque (no implementado: se abre con el botón de la fila o el menú contextual) y la búsqueda con archivos reales en Archivos.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — página GPS, Análisis centrado en el caballo, Comparar rediseñado
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia (petición del usuario tras revisar la app en su iPad):**

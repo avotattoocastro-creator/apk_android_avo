@@ -19,6 +19,7 @@ struct RootView: View {
     static let mainEntries: [RootNavEntry] = [
         RootNavEntry(page: .home, title: "Inicio", icon: "house"),
         RootNavEntry(page: .sessions, title: "Entrenamientos", icon: "clock.arrow.circlepath"),
+        RootNavEntry(page: .trainingList, title: "Listado", icon: "list.bullet.rectangle"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
@@ -187,6 +188,7 @@ struct RootView: View {
         switch p {
         case .home: StartView()
         case .sessions: HomeView()
+        case .trainingList: TrainingListView()
         case .stable: StableView(kind: .horse)
         case .riders: StableView(kind: .rider)
         case .analysis: AnalysisView()

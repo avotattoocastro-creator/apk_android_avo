@@ -95,6 +95,7 @@ extension AppModel {
         case .reports: reports?.pageShown()
         case .watchWifi: watchWifi?.pageShown()
         case .gps: gps?.pageShown()
+        case .trainingList: trainingList?.pageShown()
         case .home, .sessions, .analysis, .server, .engine: break
         }
     }
@@ -103,7 +104,7 @@ extension AppModel {
     var showEmptyState: Bool {
         if !sessions.isEmpty { return false }
         switch page {
-        case .home, .sessions, .server, .engine, .stable, .riders, .geofences, .watchWifi: return false
+        case .home, .sessions, .trainingList, .server, .engine, .stable, .riders, .geofences, .watchWifi: return false
         default: return true
         }
     }
@@ -207,6 +208,7 @@ extension AppModel {
         stable?.sessionChanged()
         geofences?.sessionChanged()
         watchWifi?.sessionChanged()
+        trainingList?.sessionChanged()
     }
 
     var timelineStart: Double {

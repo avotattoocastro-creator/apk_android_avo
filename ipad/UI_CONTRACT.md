@@ -51,10 +51,11 @@ Cada uno es `@Observable final class XxxModel` en su propio archivo `App/XxxMode
 | `StableModel` | MainViewModel.Stable.cs (Cuadra, Jinetes, Asignar) | Stable, Riders + hoja Asignar |
 | `GeofencesModel` | MainViewModel.Geofences.cs | Geofences |
 | `WatchWifiModel` | sustituye MainViewModel.Usb.cs | WatchWifi |
+| `TrainingListModel` | nuevo en iPad (sin equivalente Windows) | List («Listado»: tabla filtrable + buscar entrenamientos perdidos) |
 
 ## Vistas (nombres fijos, cada una en `Views/<Nombre>.swift`)
 `StartView`, `HomeView` (Entrenamientos), `AnalysisView`, `MapPageView`, `ChartsView`, `SegmentsView`, `BiomechView`,
-`CompareView`, `GeofencesView`, `TidesView`, `ReportsView`, `WatchWifiView`, `ServerView`, `EngineView`,
+`CompareView`, `GeofencesView`, `TidesView`, `ReportsView`, `WatchWifiView`, `ServerView`, `EngineView`, `TrainingListView`,
 `StableView(kind: IdentityKind)` (Cuadra = caballos, Jinetes = jinetes), `AssignSheet` (hoja «Caballo y jinete del
 entrenamiento», se presenta desde RootView cuando `app.stable.assignVisible` es true).
 Componentes compartidos que necesites en más de una vista: en un archivo propio con nombre único

@@ -45,7 +45,7 @@
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<false/>
+	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Para enviar geocercas y líneas al reloj AVO y para pedirle que active su Wi-Fi de descarga.</string>
 	<key>NSLocalNetworkUsageDescription</key>
