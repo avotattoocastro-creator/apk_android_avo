@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Android 2.6-ntrip-auto-dev1 — mountpoint NTRIP automático según la posición
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (desde `feature/avo-license-nfc` 43f2fc0, app 2.5) · **CI:** ver la ejecución posterior a esta entrada
+**Qué cambia:**
+- Núcleo:
+  - `core/ntrip/MountSelector.kt`: `SourceEntry`, que lee todas las columnas de las líneas STR de la sourcetable (posición, formato, frecuencias, red/VRS, NMEA).
+  - `MountSelector.choose`: elige solo RTCM 3; la base más cercana de doble frecuencia dentro de `autoMaxKm` (20 km por defecto); más lejos, la red/VRS del caster; sin red, la base más cercana aunque esté lejos (nunca una de solo L1 si hay otra); histéresis de 5 km y 20 % para no saltar entre bases parecidas; tres bases de reserva y la red al final.
+  - `NtripClient.fetchSourcetableText/Entries`.
+  - 8 pruebas con una sourcetable inventada.
+- App:
+  - opción «Elegir mountpoint automáticamente según la posición GPS» y distancia máxima en Ajustes → NTRIP;
+  - tarjeta «Selección automática» (en uso, motivo, reservas, los 8 más cercanos con distancia y frecuencias, botón para actualizar la lista).
+- Gestor:
+  - la sourcetable se guarda en caché 24 h (y se usa sin red);
+  - posición de la espalda o, sin FIX, la última guardada; sin ninguna, la red/VRS o el mountpoint manual de respaldo;
+  - revisa cada minuto y al primer FIX;
+  - **cambia de base solo cuando no se está grabando** (se apunta y se cambia al terminar);
+  - tras un fallo de la base principal se queda 10 min en la reserva;
+  - el failover existente se mantiene.
+- CI: la rama nueva compila la APK.
+**Por qué:** petición del usuario: activar el servidor NTRIP mejor para la zona según la posición del GPS.
+**Alcance:** un solo caster, el configurado; elige entre sus mountpoints. Varios casters con cuentas distintas quedan para otra versión.
+**Validación:** IMPLEMENTADO · selector 8/8 pruebas JVM en local · **NO VERIFICADO** con un caster real ni en el móvil.
+
 ## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commit:** `438a887` · **CI:** [40471096243](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40471096243) (**éxito** a la primera: core 132 pruebas, emulador 2; licencias activadas con F5EEE5D2; app y Tarjetas con el mismo certificado estable SHA-256 8807ef9cec7f4eb2…)
 **Qué cambia:**

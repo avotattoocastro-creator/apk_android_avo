@@ -17,6 +17,10 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         val ggaIntervalS: Int = 10, val timeoutS: Int = 15, val reconnect: Boolean = true,
         /** Backup mountpoints on the same caster, comma separated: used in order if the main one fails. */
         val backupMounts: String = "",
+        /** Choose the mountpoint automatically from the caster sourcetable and the GPS position (nearest base). */
+        val autoSelect: Boolean = false,
+        /** Maximum distance to a single base before preferring a network/VRS mountpoint (km). */
+        val autoMaxKm: Int = 20,
     ) {
         fun backups(): List<String> = backupMounts.split(',', ';', ' ').map { it.trim() }.filter { it.isNotEmpty() && it != mountpoint.trim() }.distinct()
     }
@@ -29,16 +33,23 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         p.getString("ntrip.mount", "")!!, p.getString("ntrip.user", "")!!, p.getBoolean("ntrip.tls", false),
         p.getBoolean("ntrip.v2", true), p.getBoolean("ntrip.gga", true), p.getInt("ntrip.ggaS", 10),
         p.getInt("ntrip.timeoutS", 15), p.getBoolean("ntrip.reconnect", true), p.getString("ntrip.backups", "")!!,
+        p.getBoolean("ntrip.auto", false), p.getInt("ntrip.autoKm", 20),
     )
 
     fun saveNtrip(n: Ntrip, password: String?) {
         p.edit().putBoolean("ntrip.enabled", n.enabled).putString("ntrip.host", n.host.trim()).putInt("ntrip.port", n.port)
             .putString("ntrip.mount", n.mountpoint.trim()).putString("ntrip.user", n.user).putBoolean("ntrip.tls", n.tls)
             .putBoolean("ntrip.v2", n.v2).putBoolean("ntrip.gga", n.sendGga).putInt("ntrip.ggaS", n.ggaIntervalS)
-            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).putString("ntrip.backups", n.backupMounts.trim()).apply()
+            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).putString("ntrip.backups", n.backupMounts.trim())
+            .putBoolean("ntrip.auto", n.autoSelect).putInt("ntrip.autoKm", n.autoMaxKm.coerceIn(1, 200)).apply()
         if (password != null) secure.ntripPassword = password
         _ntrip.value = n
     }
+
+    /** Last good receiver position (lat, lon), to choose the mountpoint before the first fix of a session. */
+    var ntripLastPosition: Pair<Double, Double>?
+        get() = p.getString("ntrip.lastPos", null)?.split(',')?.mapNotNull { it.toDoubleOrNull() }?.takeIf { it.size == 2 }?.let { it[0] to it[1] }
+        set(v) { p.edit().putString("ntrip.lastPos", v?.let { "${it.first},${it.second}" }).apply() }
 
     fun ntripConfig(): NtripConfig {
         val n = _ntrip.value

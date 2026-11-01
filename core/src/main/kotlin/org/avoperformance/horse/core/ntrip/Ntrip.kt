@@ -275,7 +275,13 @@ class NtripClient(
             text.lineSequence().filter { it.startsWith("STR;") }.mapNotNull { it.split(';').getOrNull(1) }.toList()
 
         /** Fetches the caster's mountpoint list (GET /). */
-        fun fetchSourcetable(cfg: NtripConfig): List<String> {
+        fun fetchSourcetable(cfg: NtripConfig): List<String> = parseSourcetable(fetchSourcetableText(cfg))
+
+        /** Fetches the caster's full sourcetable (with the position of every base). */
+        fun fetchSourcetableEntries(cfg: NtripConfig): List<SourceEntry> = SourceEntry.parseAll(fetchSourcetableText(cfg))
+
+        /** Raw sourcetable text (GET /). */
+        fun fetchSourcetableText(cfg: NtripConfig): String {
             val s: Socket = if (cfg.tls) SSLSocketFactory.getDefault().createSocket() else Socket()
             s.use {
                 it.connect(InetSocketAddress(cfg.host, cfg.port), cfg.connectTimeoutMs)
@@ -286,8 +292,7 @@ class NtripClient(
                 val ins = it.getInputStream().buffered()
                 readLine(ins)
                 val h = readHeaders(ins)
-                val body = if (h["transfer-encoding"]?.contains("chunked", true) == true) readBody(ChunkedInputStream(ins)) else readBody(ins)
-                return parseSourcetable(body)
+                return if (h["transfer-encoding"]?.contains("chunked", true) == true) readBody(ChunkedInputStream(ins)) else readBody(ins)
             }
         }
     }
