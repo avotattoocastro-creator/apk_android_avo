@@ -512,6 +512,7 @@ final class ImportAndServicesTests: XCTestCase {
                 c.works = [[a, a + 30_000]]
                 c.workStartItow = a - 10_000
                 c.start = TrainingLine(aLat: 43.40, aLon: -3.43, bLat: 43.401, bLon: -3.43, direction: "DCHA_A_IZQ")
+                c.finish = TrainingLine(aLat: 43.41, aLon: -3.43, bLat: 43.411, bLon: -3.43, direction: "DCHA_A_IZQ")
                 let frag: String = c.optionsFragment()
                 XCTAssertTrue(frag.contains("\"trabajos_manuales\"") && frag.contains("\"fases_manuales\"") && frag.contains("\"recorrido\""), frag)
                 let m = try EquineAnalysis.parse(try await EquineEngine.analyseJson([file], EquineEngine.options(series: false, cacheDir: path("eng2"), extra: frag)))
@@ -519,7 +520,7 @@ final class ImportAndServicesTests: XCTestCase {
                               "Corrección manual de repeticiones")
                 XCTAssertEqual(m.trackWork.efforts.first?.durationS ?? 0, 30, accuracy: 0.05, "Repetición de 30 s")
                 XCTAssertEqual(m.trackWork.phaseBasis, "MANUAL", "Fase de trabajo corregida a mano")
-                XCTAssertTrue(m.trackWork.courseDefined, "Salida enviada al motor")
+                XCTAssertTrue(m.trackWork.courseDefined, "Salida y meta enviadas al motor (el recorrido necesita las dos)")
             }
             XCTAssertEqual(TrackWorkBreed.engineName("Pura Sangre Inglés"), "PSI")
             XCTAssertEqual(TrackWorkBreed.engineName("Árabe"), "ARABE")
