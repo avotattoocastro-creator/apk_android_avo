@@ -47,6 +47,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   `core/src/test/resources/equine/*_analysis.json` regeneradas (solo cambia esa clave).
 - **CI:** `build-equine-engine.yml` se lanza también en esta rama y ejecuta resumen → historia con la fixture.
 - `tests/test_fusion.cpp`: falta `#include <algorithm>` (rompía la compilación con el GCC nuevo del runner, run 41314987063).
+- `tests/test_dsp.cpp`: `normal_distribution` con desviación 0 abortaba con las aserciones de GCC 15 (run 41315372137); se construye con 1 cuando no hay ruido (no se usa).
 **Archivos:** `equine-intelligence/{include/avo_eq/training.h,include/avo_eq/avo_eq_c.h,src/training/training.cpp,src/capi/training_capi.cpp,src/core/engine.cpp,tools/training/avo_training_cli.cpp,tests/test_training.cpp,CMakeLists.txt,README.md,docs/FORMATO_RESULTADOS.md,docs/algoritmos/12_ENTRENAMIENTO.md}`, `core/src/test/resources/equine/{synthetic,sample}_analysis.json`, `.github/workflows/build-equine-engine.yml`.
 **No se ha tocado:** el resto de algoritmos del motor, las apps Android, Windows e iPad (sin pantallas todavía) y el firmware.
 **Validación:** IMPLEMENTADO · compilado y probado en la sesión en Linux: 71 casos y 1020 comprobaciones con ASan/UBSan, y en Release; fixtures OK · CI pendiente · **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida.
