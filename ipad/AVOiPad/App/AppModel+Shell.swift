@@ -366,6 +366,7 @@ extension AppModel {
             lastImported = item
             imported.append(item)
             ok += 1
+            if !restoring { forgetDeleted(sha: session.fileSha256, sessionId: item.id) }
             if !restoring || importLog.count < 8 {
                 importLog.insert(ImportLogRow(time: timeFormatter.string(from: Date()), file: session.sourceName,
                                               result: outcome.status + (item.isSynthetic ? " · DEMOSTRACIÓN" : ""), ok: true), at: 0)

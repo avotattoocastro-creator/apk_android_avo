@@ -660,7 +660,10 @@ final class TrainingListModel {
         }
         let loaded: Set<String> = Set(shas)
         for e in app.library.entries where loaded.contains(e.sha256.lowercased()) { paths.append(e.storedPath) }
-        return (shas, app.sessions.map { $0.id }, paths)
+        // trainings deleted by the user count as known: the scan must not bring them back
+        let deleted = app.loadDeleted()
+        shas.append(contentsOf: deleted.shas)
+        return (shas, app.sessions.map { $0.id } + deleted.sessionIds, paths)
     }
 
     private static func makeKnown(_ k: (shas: [String], ids: [String], paths: [String])) -> TrainingRecoveryKnown {

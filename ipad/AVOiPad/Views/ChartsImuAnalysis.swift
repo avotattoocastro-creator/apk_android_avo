@@ -109,6 +109,8 @@ enum ChartsImuAnalysis {
     static let pitchColor: Color = Color(hex: 0xA86BFF)
     static let verticalColor: Color = Color(hex: 0xED122A)
     static let markerColor: Color = Color(hex: 0xFF3945)
+    /// Marker of a vertical jump (drawn on the roll line).
+    static let jumpColor: Color = Color(hex: 0xFF8A3D)
 
     // ------------------------------------------------------------------ entry point
     static func analyze(_ tl: SessionTimeline, _ imu: ImuTimeline, _ fusedRaw: [ImuFusedSample]) -> ChartsImuResult {
@@ -355,7 +357,7 @@ enum ChartsImuAnalysis {
             cand.append(ChartsImuEvent(id: 0, t: t[i], kind: "Vertical", value: vertical[i],
                                        deviation: abs(vertical[i] - vb.median[i]), unit: "m/s²"))
             // the vertical jump is drawn on the roll line (same instant) so the marker stays inside the chart in degrees
-            cmk.append(SyncMarker(id: 0, x: t[i], y: roll[i].isFinite ? roll[i] : 0, color: Color(hex: 0xFF8A3D)))
+            cmk.append(SyncMarker(id: 0, x: t[i], y: roll[i].isFinite ? roll[i] : 0, color: jumpColor))
         }
         // order by time, ids
         let order: [Int] = Array(0..<cand.count).sorted { (a: Int, b: Int) -> Bool in

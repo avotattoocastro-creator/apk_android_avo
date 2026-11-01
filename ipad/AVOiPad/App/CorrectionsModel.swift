@@ -43,6 +43,12 @@ final class CorrectionsModel {
         }
     }
 
+    /// The training was deleted: its corrections go too.
+    func forget(_ id: String) {
+        if entries.removeValue(forKey: id) != nil { save() }
+        if app.selected?.id == id { pendingRepStart = .nan; message = "" }
+    }
+
     // ------------------------------------------------------------------ queries
     func correction(_ id: String) -> TrainingCorrection? { entries[id] }
     var current: TrainingCorrection? { app.selected.flatMap { entries[$0.id] } }

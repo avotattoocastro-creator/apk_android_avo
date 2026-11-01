@@ -99,6 +99,40 @@ final class TrainingListTests: XCTestCase {
 
     // MARK: filters
 
+    /// «Eliminar entrenamiento»: out of the list and the library, the user's own file untouched, remembered as deleted
+    /// (the recovery scan will not bring it back) and imported again when the user opens the file on purpose.
+    @MainActor
+    func testDeleteTrainingRemovesItAndRemembersIt() async throws {
+        var raw: Data? = nil
+        for b in [Bundle(for: TrainingListTests.self), Bundle.main] {
+            if raw == nil, let u = b.url(forResource: "synthetic_session", withExtension: "avo") { raw = try? Data(contentsOf: u) }
+        }
+        guard let data = raw else { throw XCTSkip("Falta synthetic_session.avo") }
+        let tmp = (NSTemporaryDirectory() as NSString).appendingPathComponent("avo-del-" + UUID().uuidString)
+        defer { try? FileManager.default.removeItem(atPath: tmp) }
+        let root = (tmp as NSString).appendingPathComponent("app")
+        let userDir = (tmp as NSString).appendingPathComponent("usuario")
+        try FileManager.default.createDirectory(atPath: root, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(atPath: userDir, withIntermediateDirectories: true)
+        let file = (userDir as NSString).appendingPathComponent("sesion.avr")
+        try data.write(to: URL(fileURLWithPath: file))
+        let app = AppModel(paths: AppPaths(root: root))
+        await app.importFiles([file])
+        XCTAssertEqual(app.sessions.count, 1, "Importado")
+        guard let item = app.sessions.first else { return }
+        let stored: String = app.library.entries.first?.storedPath ?? ""
+        XCTAssertTrue(FileManager.default.fileExists(atPath: stored), "Copia en la biblioteca")
+        app.deleteTraining(item)
+        XCTAssertTrue(app.sessions.isEmpty, "Fuera de la lista")
+        XCTAssertTrue(app.library.entries.isEmpty, "Fuera de la biblioteca")
+        XCTAssertFalse(FileManager.default.fileExists(atPath: stored), "Copia de la biblioteca borrada")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: file), "El archivo del usuario no se toca")
+        XCTAssertTrue(app.loadDeleted().sessionIds.contains(item.id), "Recordado como eliminado")
+        await app.importFiles([file])
+        XCTAssertEqual(app.sessions.count, 1, "Abrirlo a propósito lo vuelve a importar")
+        XCTAssertFalse(app.loadDeleted().sessionIds.contains(item.id), "Y deja de estar marcado como eliminado")
+    }
+
     func testFilterLogic() {
         let cal: Calendar = TrainingListFilter.calendar
         let d1: Date = cal.date(from: DateComponents(year: 2026, month: 10, day: 20, hour: 9))!

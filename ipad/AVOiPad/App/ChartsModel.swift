@@ -149,6 +149,8 @@ final class ChartsModel {
     private(set) var panels: [SyncPanelId: SyncPanel] = [:]
     private(set) var qualityBands: [SyncBand] = []
     private(set) var gaitBands: [SyncBand] = []
+    /// Legend entries switched off by the user, "chartId|legend text" (kept while the app runs, for every session).
+    private(set) var hiddenLegend: Set<String> = []
     private(set) var hasImuRaw: Bool = false
     private(set) var hasFused: Bool = false
     private(set) var hasCadence: Bool = false
@@ -206,6 +208,30 @@ final class ChartsModel {
     }
 
     func panel(_ id: SyncPanelId) -> SyncPanel { panels[id] ?? SyncPanel() }
+
+    // ------------------------------------------------------------ legend switches
+    func isHidden(_ chart: String, _ text: String) -> Bool { hiddenLegend.contains(chart + "|" + text) }
+
+    func toggleLegend(_ chart: String, _ text: String) {
+        let k: String = chart + "|" + text
+        if hiddenLegend.contains(k) { hiddenLegend.remove(k) } else { hiddenLegend.insert(k) }
+    }
+
+    /// The panel without the lines / envelope / markers of the legend entries switched off in this chart.
+    func panel(_ id: SyncPanelId, chart: String, legend: [SyncLegend]) -> SyncPanel {
+        var p: SyncPanel = panel(id)
+        let off: [SyncLegend] = legend.filter { isHidden(chart, $0.text) }
+        if off.isEmpty { return p }
+        for l in off {
+            if l.sigma { p.sigma = [] }
+            if let mc = l.marker { p.markers.removeAll { $0.color == mc } }
+            if !l.sigma && l.marker == nil {
+                let keys: [String] = l.keys.isEmpty ? [l.text] : l.keys
+                p.lines.removeAll { (line: SyncLine) -> Bool in keys.contains { line.id.contains($0) } }
+            }
+        }
+        return p
+    }
 
     /// Current x window: zoom of the app (chartXMin/Max) or the whole session.
     var domain: ClosedRange<Double> {

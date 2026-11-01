@@ -17,6 +17,8 @@ private struct TrainingListContent: View {
     @Bindable var model: TrainingListModel
     @State private var sortOrder: [KeyPathComparator<TrainingListRow>] = [KeyPathComparator(\TrainingListRow.startKey, order: .reverse)]
     @State private var selection: String? = nil
+    /// Training waiting for the «Eliminar» confirmation.
+    @State private var pendingDelete: SessionItem? = nil
 
     var body: some View {
         let rows: [TrainingListRow] = model.rows.sorted(using: sortOrder)
@@ -336,7 +338,24 @@ private struct TrainingListContent: View {
                 } label: {
                     Label("Asignar caballo y jinete", systemImage: "figure.equestrian.sports")
                 }
+                Divider()
+                Button(role: .destructive) {
+                    pendingDelete = model.item(id)
+                } label: {
+                    Label("Eliminar entrenamiento…", systemImage: "trash")
+                }
             }
+        }
+        .alert("¿Eliminar este entrenamiento?",
+               isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }),
+               presenting: pendingDelete) { (s: SessionItem) in
+            Button("Eliminar", role: .destructive) {
+                app.deleteTraining(s)
+                pendingDelete = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDelete = nil }
+        } message: { (s: SessionItem) in
+            Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)\n\nSe borrarán del iPad el entrenamiento y todo lo calculado con él: análisis del motor, zonas corregidas, valoración, tramos y notas. Los archivos que tengas en Archivos no se tocan. No se puede deshacer.")
         }
         .font(.callout)
         .scrollContentBackground(.hidden)

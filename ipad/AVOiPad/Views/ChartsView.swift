@@ -25,6 +25,7 @@ struct ChartsView: View {
                 if app.hasRange && !charts.rangeStats.isEmpty {
                     ChartsRangeStrip(rows: charts.rangeStats)
                 }
+                ChartsNavigator(charts: charts)
                 ScrollView(.vertical) {
                     ChartsStack(charts: charts)
                         .padding(.bottom, 24)
@@ -164,6 +165,157 @@ private struct ChartsToolbar: View {
     }
 }
 
+/// Phase filter (Completo · Calentamiento · Trabajo · Enfriamiento) and the overview bar to scroll through the session.
+private struct ChartsNavigator: View {
+    @Environment(AppModel.self) private var app
+    let charts: ChartsModel
+
+    var body: some View {
+        let tw: TrackWorkResult? = app.selected?.engine?.trackWork
+        let off: Double = app.selected?.engineOffsetS ?? 0
+        let d: ClosedRange<Double> = charts.domain
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Text("VER").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+                phaseButton("Completo", nil, off, Avo.silver, active: !charts.isZoomed)
+                phaseButton("Calentamiento", tw?.warmup, off, CorrectionsModel.warmupColor, active: isActive(tw?.warmup, off, d))
+                phaseButton("Trabajo", tw?.work, off, CorrectionsModel.workColor, active: isActive(tw?.work, off, d))
+                phaseButton("Enfriamiento", tw?.cooldown, off, CorrectionsModel.cooldownColor, active: isActive(tw?.cooldown, off, d))
+                Spacer(minLength: 8)
+                Text(charts.isZoomed ? "\(TimeText.clock(d.lowerBound)) – \(TimeText.clock(d.upperBound)) de \(TimeText.clock(charts.fullHi))"
+                                     : "Toca la barra para acercar · arrastra el recuadro para moverte")
+                    .font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.7)
+            }
+            ChartsOverviewBar(charts: charts)
+                .frame(height: 34)
+        }
+    }
+
+    private func range(_ p: TrackWorkPhase?, _ off: Double) -> (Double, Double)? {
+        guard let p = p, p.present, p.t0.isFinite, p.t1.isFinite, p.t1 > p.t0 else { return nil }
+        return (p.t0 - off, p.t1 - off)
+    }
+
+    private func isActive(_ p: TrackWorkPhase?, _ off: Double, _ d: ClosedRange<Double>) -> Bool {
+        guard charts.isZoomed, let r = range(p, off) else { return false }
+        return abs(d.lowerBound - max(r.0, charts.fullLo)) < 1 && abs(d.upperBound - min(r.1, charts.fullHi)) < 1
+    }
+
+    private func phaseButton(_ title: String, _ p: TrackWorkPhase?, _ off: Double, _ color: Color, active: Bool) -> some View {
+        let r: (Double, Double)? = range(p, off)
+        let enabled: Bool = p == nil ? true : r != nil
+        return Button {
+            if title == "Completo" { charts.resetZoom() } else if let r = r { charts.setViewport(r.0, r.1) }
+        } label: {
+            HStack(spacing: 5) {
+                RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10, height: 10)
+                Text(title).font(.callout.weight(active ? .semibold : .regular))
+            }
+            .foregroundStyle(active ? Avo.text : Avo.silver)
+            .padding(.horizontal, 10).padding(.vertical, 6)
+            .background(active ? Avo.redSoft : Avo.surface2, in: RoundedRectangle(cornerRadius: 6))
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(active ? Avo.red : Avo.line, lineWidth: 1))
+            .opacity(enabled ? 1 : 0.4)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+        .accessibilityIdentifier("charts.phase.\(title)")
+    }
+}
+
+/// Overview of the whole session: speed outline, phase / repetition strips, cursor and the visible window. Dragging the
+/// window scrolls the charts; touching outside it moves the window there; without zoom, a touch zooms to a quarter of
+/// the session around that point.
+private struct ChartsOverviewBar: View {
+    @Environment(AppModel.self) private var app
+    let charts: ChartsModel
+    @State private var grab: Double? = nil
+
+    var body: some View {
+        GeometryReader { (geo: GeometryProxy) in
+            let w: CGFloat = max(geo.size.width, 1)
+            let h: CGFloat = geo.size.height
+            let lo: Double = charts.fullLo
+            let span: Double = max(charts.fullHi - charts.fullLo, 1e-6)
+            let d: ClosedRange<Double> = charts.domain
+            let x0: CGFloat = CGFloat((d.lowerBound - lo) / span) * w
+            let x1: CGFloat = CGFloat((d.upperBound - lo) / span) * w
+            ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: 6).fill(Avo.surface2)
+                Canvas { (ctx: inout GraphicsContext, size: CGSize) in
+                    // speed outline (filtered speed of the timeline, decimated)
+                    if let tl = app.selected?.timeline, tl.count > 1 {
+                        let n: Int = tl.count
+                        let step: Int = max(1, n / 500)
+                        var vmax: Double = 1
+                        var k: Int = 0
+                        while k < n { let v = tl.speedFiltered[k]; if v.isFinite && v > vmax { vmax = v }; k += step }
+                        var path = Path()
+                        var started: Bool = false
+                        k = 0
+                        while k < n {
+                            let v: Double = tl.speedFiltered[k]
+                            if v.isFinite {
+                                let x: CGFloat = CGFloat((tl.t[k] - lo) / span) * size.width
+                                let y: CGFloat = size.height - 9 - CGFloat(v / vmax) * (size.height - 14)
+                                if started { path.addLine(to: CGPoint(x: x, y: y)) } else { path.move(to: CGPoint(x: x, y: y)); started = true }
+                            } else {
+                                started = false
+                            }
+                            k += step
+                        }
+                        ctx.stroke(path, with: .color(Avo.red.opacity(0.75)), lineWidth: 1)
+                    }
+                    // phases (bottom) and repetitions (above)
+                    for b in app.corrections.bands(app.selected) {
+                        let a: CGFloat = CGFloat((b.x0 - lo) / span) * size.width
+                        let z: CGFloat = CGFloat((b.x1 - lo) / span) * size.width
+                        ctx.fill(Path(CGRect(x: a, y: size.height - 4 - CGFloat(b.lane) * 5, width: max(1, z - a), height: 4)), with: .color(b.color))
+                    }
+                    if app.cursorTime.isFinite {
+                        let cx: CGFloat = CGFloat((app.cursorTime - lo) / span) * size.width
+                        ctx.fill(Path(CGRect(x: cx - 0.75, y: 0, width: 1.5, height: size.height)), with: .color(Color.white.opacity(0.9)))
+                    }
+                }
+                if charts.isZoomed {
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.white.opacity(0.10))
+                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.white.opacity(0.85), lineWidth: 1.5))
+                        .frame(width: max(x1 - x0, 10), height: h)
+                        .offset(x: min(x0, w - max(x1 - x0, 10)))
+                        .allowsHitTesting(false)
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 6))
+            .overlay(RoundedRectangle(cornerRadius: 6).stroke(Avo.line, lineWidth: 1))
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { (v: DragGesture.Value) in
+                        let t: Double = lo + Double(min(max(v.location.x, 0), w) / w) * span
+                        let cur: ClosedRange<Double> = charts.domain
+                        if !charts.isZoomed {
+                            charts.setViewport(t - span / 8, t + span / 8)
+                            grab = span / 8
+                            return
+                        }
+                        let width: Double = cur.upperBound - cur.lowerBound
+                        if grab == nil {
+                            let ts: Double = lo + Double(min(max(v.startLocation.x, 0), w) / w) * span
+                            grab = (ts >= cur.lowerBound && ts <= cur.upperBound) ? ts - cur.lowerBound : width / 2
+                        }
+                        let a: Double = t - (grab ?? width / 2)
+                        charts.setViewport(a, a + width)
+                    }
+                    .onEnded { (_: DragGesture.Value) in grab = nil }
+            )
+            .accessibilityLabel("Barra de desplazamiento de las gráficas")
+            .accessibilityIdentifier("charts.overview")
+        }
+    }
+}
+
 /// Statistics of the selected range in one horizontal strip (only while a range exists).
 private struct ChartsRangeStrip: View {
     let rows: [SyncStatRow]
@@ -189,6 +341,26 @@ private struct ChartsRangeStrip: View {
 
 // MARK: Charts (full width, stacked)
 
+/// Legends of the charts. Each entry is a switch (SyncChartBox chartId): `keys` match the series names of ChartsModel /
+/// ChartsImuAnalysis, `sigma` the ±σ envelope and `marker` the point markers of that colour.
+enum ChartsLegends {
+    static let speed: [SyncLegend] = [SyncLegend("Filtrada", Avo.red, keys: ["Filtrada"]), SyncLegend("Reportada", Avo.blue, keys: ["Reportada"]),
+                                      SyncLegend("Derivada", Avo.silver, keys: ["Derivada"]), SyncLegend("±1σ", Avo.red.opacity(0.35), sigma: true)]
+    static let accel: [SyncLegend] = [SyncLegend("Longitudinal (validada)", Avo.warn, keys: ["Longitudinal"]),
+                                      SyncLegend("Lateral", Avo.cyan, keys: ["Lateral"])]
+    static let lateral: [SyncLegend] = [SyncLegend("Lateral (izquierda +)", ChartsImuAnalysis.lateralColor, keys: ["·Lateral·"]),
+                                        SyncLegend("Umbral", ChartsImuAnalysis.lateralColor.opacity(0.3), keys: ["Umbral"]),
+                                        SyncLegend("Desvío brusco", ChartsImuAnalysis.markerColor, marker: ChartsImuAnalysis.markerColor)]
+    static let tilt: [SyncLegend] = [SyncLegend("Balanceo", ChartsImuAnalysis.rollColor, keys: ["Balanceo"]),
+                                     SyncLegend("Cabeceo", ChartsImuAnalysis.pitchColor, keys: ["Cabeceo"]),
+                                     SyncLegend("Anomalía", ChartsImuAnalysis.markerColor, marker: ChartsImuAnalysis.markerColor),
+                                     SyncLegend("Salto vertical", ChartsImuAnalysis.jumpColor, marker: ChartsImuAnalysis.jumpColor)]
+    static let vertical: [SyncLegend] = [SyncLegend("Vertical", ChartsImuAnalysis.verticalColor, keys: ["Vertical"]),
+                                         SyncLegend("|a|", ChartsImuAnalysis.lateralColor, keys: ["|a|"])]
+    static let sensors: [SyncLegend] = [SyncLegend("Izquierda", Avo.blue, keys: ["Izquierda"]), SyncLegend("Central", Avo.ok, keys: ["Central"]),
+                                        SyncLegend("Derecha", Avo.warn, keys: ["Derecha"])]
+}
+
 private enum ChartsHeights {
     static let speed: CGFloat = 300
     static let main: CGFloat = 220
@@ -208,20 +380,17 @@ private struct ChartsStack: View {
         LazyVStack(alignment: .leading, spacing: 10) {
             // 1. speed (no RTK quality strip on this page)
             if charts.chartSpeed {
-                SyncChartBox(title: "Velocidad (km/h)",
-                             legend: [SyncLegend("Filtrada", Avo.red), SyncLegend("Reportada", Avo.blue), SyncLegend("Derivada", Avo.silver),
-                                      SyncLegend("±1σ", Avo.red.opacity(0.35))],
-                             readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
-                    SyncSignalChart(panel: charts.panel(.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true)
+                SyncChartBox(title: "Velocidad (km/h)", legend: ChartsLegends.speed,
+                             readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }, chartId: "speed") {
+                    SyncSignalChart(panel: charts.panel(.speed, chart: "speed", legend: ChartsLegends.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true)
                 }
                 .frame(height: ChartsHeights.speed)
             }
             // 2. acceleration
             if charts.chartAccel {
-                SyncChartBox(title: "Aceleración (m/s²)",
-                             legend: [SyncLegend("Longitudinal (validada)", Avo.warn), SyncLegend("Lateral", Avo.cyan)],
-                             readout: { (a: AppModel) -> String in a.cursorAccel + " m/s²" }) {
-                    SyncSignalChart(panel: charts.panel(.accel), domain: d, includeZero: true,
+                SyncChartBox(title: "Aceleración (m/s²)", legend: ChartsLegends.accel,
+                             readout: { (a: AppModel) -> String in a.cursorAccel + " m/s²" }, chartId: "accel") {
+                    SyncSignalChart(panel: charts.panel(.accel, chart: "accel", legend: ChartsLegends.accel), domain: d, includeZero: true,
                                     emptyText: charts.building ? "Calculando…" : "Sin aceleración validada", scrollFriendly: true)
                 }
                 .frame(height: ChartsHeights.main)
@@ -229,13 +398,10 @@ private struct ChartsStack: View {
             // 3. girth lateral deviations
             if charts.chartLateral {
                 if charts.hasGirthImu {
-                    SyncChartBox(title: "IMU cincha → Desvíos laterales (m/s²)",
-                                 legend: [SyncLegend("Lateral (izquierda +)", ChartsImuAnalysis.lateralColor),
-                                          SyncLegend("Umbral", ChartsImuAnalysis.lateralColor.opacity(0.3)),
-                                          SyncLegend("Desvío brusco", ChartsImuAnalysis.markerColor)],
-                                 readout: { (a: AppModel) -> String in a.charts.lateralReadout(a.cursorTime) }) {
+                    SyncChartBox(title: "IMU cincha → Desvíos laterales (m/s²)", legend: ChartsLegends.lateral,
+                                 readout: { (a: AppModel) -> String in a.charts.lateralReadout(a.cursorTime) }, chartId: "lateral") {
                         VStack(alignment: .leading, spacing: 4) {
-                            SyncSignalChart(panel: charts.panel(.lateral), domain: d, bands: charts.gaitBands, includeZero: true,
+                            SyncSignalChart(panel: charts.panel(.lateral, chart: "lateral", legend: ChartsLegends.lateral), domain: d, bands: charts.gaitBands, includeZero: true,
                                             emptyText: empty, scrollFriendly: true)
                             ChartsCaption(text: "Aceleración lateral de la cincha respecto a la dirección de avance; picos = desvíos bruscos (espantadas). Banda = mediana ± máx(5·MAD, 2 m/s²) en 20 s. " + charts.imuHeadingNote + sensorText)
                             ChartsEventList(events: charts.lateralEvents, noun: "desvíos",
@@ -250,12 +416,10 @@ private struct ChartsStack: View {
             // 4. girth tilt / anomalies
             if charts.chartTilt {
                 if charts.hasGirthImu {
-                    SyncChartBox(title: "IMU cincha → Inclinaciones / anomalías (°)",
-                                 legend: [SyncLegend("Balanceo", ChartsImuAnalysis.rollColor), SyncLegend("Cabeceo", ChartsImuAnalysis.pitchColor),
-                                          SyncLegend("Anomalía", ChartsImuAnalysis.markerColor), SyncLegend("Salto vertical", Color(hex: 0xFF8A3D))],
-                                 readout: { (a: AppModel) -> String in a.charts.tiltReadout(a.cursorTime) }) {
+                    SyncChartBox(title: "IMU cincha → Inclinaciones / anomalías (°)", legend: ChartsLegends.tilt,
+                                 readout: { (a: AppModel) -> String in a.charts.tiltReadout(a.cursorTime) }, chartId: "tilt") {
                         VStack(alignment: .leading, spacing: 4) {
-                            SyncSignalChart(panel: charts.panel(.tilt), domain: d, bands: charts.gaitBands, includeZero: false,
+                            SyncSignalChart(panel: charts.panel(.tilt, chart: "tilt", legend: ChartsLegends.tilt), domain: d, bands: charts.gaitBands, includeZero: false,
                                             emptyText: empty, scrollFriendly: true)
                             ChartsCaption(text: "Balanceo (inclinación lateral) y cabeceo de la cincha. Puntos = saltos anómalos: ángulo fuera de mediana ± máx(5·MAD, 5°) o aceleración vertical fuera de mediana ± máx(6·MAD, 4 m/s²), ventana móvil de 20 s." + sensorText)
                             ChartsEventList(events: charts.tiltEvents, noun: "anomalías",
@@ -299,18 +463,17 @@ private struct ChartsMoreCharts: View {
         if showVert {
             SyncChartBox(title: charts.imuSource == 2 ? "Cincha · vertical y |a| (m/s², aproximación sin fusión)"
                                                        : "Cincha · vertical y |a| sin gravedad (m/s², ejes del mundo)",
-                         legend: [SyncLegend("Vertical", ChartsImuAnalysis.verticalColor), SyncLegend("|a|", ChartsImuAnalysis.lateralColor)],
-                         readout: { (a: AppModel) -> String in a.charts.verticalReadout(a.cursorTime) }) {
-                SyncSignalChart(panel: charts.panel(.fusedAccel), domain: d, bands: charts.gaitBands, includeZero: true,
+                         legend: ChartsLegends.vertical,
+                         readout: { (a: AppModel) -> String in a.charts.verticalReadout(a.cursorTime) }, chartId: "vertical") {
+                SyncSignalChart(panel: charts.panel(.fusedAccel, chart: "vertical", legend: ChartsLegends.vertical), domain: d, bands: charts.gaitBands, includeZero: true,
                                 emptyText: empty, scrollFriendly: true)
             }
             .frame(height: ChartsHeights.more)
         }
         if showCad {
-            SyncChartBox(title: "Cadencia (motor AVO, ciclos/min) · banda = aire",
-                         legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)],
-                         readout: { (a: AppModel) -> String in a.cursorCadence }) {
-                SyncSignalChart(panel: charts.panel(.cadence), domain: d, bands: charts.gaitBands, includeZero: false,
+            SyncChartBox(title: "Cadencia (motor AVO, ciclos/min) · banda = aire", legend: ChartsLegends.sensors,
+                         readout: { (a: AppModel) -> String in a.cursorCadence }, chartId: "cadence") {
+                SyncSignalChart(panel: charts.panel(.cadence, chart: "cadence", legend: ChartsLegends.sensors), domain: d, bands: charts.gaitBands, includeZero: false,
                                 emptyText: charts.hasCadence ? "El motor no ha encontrado ciclos de marcha"
                                                              : "Sin cadencia del motor (requiere datos de cincha y análisis del motor)",
                                 scrollFriendly: true)
@@ -318,9 +481,8 @@ private struct ChartsMoreCharts: View {
             .frame(height: charts.hasCadence ? ChartsHeights.more : ChartsHeights.placeholder)
         }
         if showRaw {
-            SyncChartBox(title: charts.imuChartHeader,
-                         legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)]) {
-                SyncSignalChart(panel: charts.panel(.imu), domain: d, bands: charts.gaitBands, includeZero: false,
+            SyncChartBox(title: charts.imuChartHeader, legend: ChartsLegends.sensors, chartId: "imu") {
+                SyncSignalChart(panel: charts.panel(.imu, chart: "imu", legend: ChartsLegends.sensors), domain: d, bands: charts.gaitBands, includeZero: false,
                                 emptyText: "Sin datos de cincha en esta sesión", scrollFriendly: true)
             }
             .frame(height: ChartsHeights.more)
@@ -477,15 +639,25 @@ enum SyncExportFiles {
 struct SyncLegend: Identifiable {
     var text: String
     var color: Color
+    /// What the entry controls when it is switched off: lines whose name contains any key (the text when empty),
+    /// the ±σ envelope, or the point markers of one colour.
+    var keys: [String] = []
+    var sigma: Bool = false
+    var marker: Color? = nil
     var id: String { text }
-    init(_ text: String, _ color: Color) { self.text = text; self.color = color }
+    init(_ text: String, _ color: Color, keys: [String] = [], sigma: Bool = false, marker: Color? = nil) {
+        self.text = text; self.color = color; self.keys = keys; self.sigma = sigma; self.marker = marker
+    }
 }
 
 /// Windows AvoChartPanel: header, legend, cursor readout and the chart.
 struct SyncChartBox<Content: View>: View {
+    @Environment(AppModel.self) private var app
     var title: String
     var legend: [SyncLegend] = []
     var readout: ((AppModel) -> String)? = nil
+    /// With an id, every legend entry is a switch that shows / hides its lines (ChartsModel.hiddenLegend).
+    var chartId: String? = nil
     @ViewBuilder var content: () -> Content
 
     var body: some View {
@@ -493,9 +665,29 @@ struct SyncChartBox<Content: View>: View {
             HStack(spacing: 10) {
                 Text(title.uppercased()).font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver).lineLimit(1)
                 ForEach(legend) { l in
-                    HStack(spacing: 4) {
-                        RoundedRectangle(cornerRadius: 1).fill(l.color).frame(width: 12, height: 3)
-                        Text(l.text).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                    if let cid = chartId {
+                        let off: Bool = app.charts.isHidden(cid, l.text)
+                        Button {
+                            app.charts.toggleLegend(cid, l.text)
+                        } label: {
+                            HStack(spacing: 4) {
+                                RoundedRectangle(cornerRadius: 1).fill(off ? Avo.textDim.opacity(0.4) : l.color).frame(width: 12, height: 3)
+                                Text(l.text).font(.caption2).foregroundStyle(off ? Avo.textDim.opacity(0.5) : Avo.text)
+                                    .strikethrough(off).lineLimit(1)
+                            }
+                            .padding(.horizontal, 6).padding(.vertical, 4)
+                            .background(off ? Color.clear : Avo.surface2, in: RoundedRectangle(cornerRadius: 5))
+                            .overlay(RoundedRectangle(cornerRadius: 5).stroke(Avo.line, lineWidth: 1))
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel((off ? "Mostrar " : "Ocultar ") + l.text)
+                        .accessibilityIdentifier("legend.\(cid).\(l.text)")
+                    } else {
+                        HStack(spacing: 4) {
+                            RoundedRectangle(cornerRadius: 1).fill(l.color).frame(width: 12, height: 3)
+                            Text(l.text).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                        }
                     }
                 }
                 Spacer(minLength: 4)
