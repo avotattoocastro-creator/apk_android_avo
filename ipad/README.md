@@ -35,7 +35,7 @@ Pasos una sola vez, con la cuenta Apple Developer:
 3. **Añadir los secretos:** en GitHub → Settings → Secrets and variables → Actions, añade:
    - `APPLE_TEAM_ID`: el ID del equipo, de 10 caracteres, que aparece en developer.apple.com → Membership;
    - `ASC_KEY_ID` y `ASC_ISSUER_ID`: los dos se ven en la página de la clave;
-   - `ASC_KEY_P8_BASE64`: el resultado de `base64 -i AuthKey_XXXX.p8`.
+   - `ASC_KEY_P8`: el texto completo del `.p8`, desde `-----BEGIN PRIVATE KEY-----` hasta `-----END PRIVATE KEY-----`. También vale `ASC_KEY_P8_BASE64` con el archivo en base64.
 4. **Lanzar la compilación:** en Actions → «AVO iPad» → Run workflow (o haz push a `feature/ipad-app`). Cuando Apple
    termine de procesarla, la compilación aparece en la app **TestFlight** del iPad.
 5. **Para las siguientes versiones:** cada push a `feature/ipad-app` sube una compilación nueva.

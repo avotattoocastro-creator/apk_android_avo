@@ -161,12 +161,13 @@ jobs:
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+      ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
       - name: Check signing secrets
         id: check
         run: |
-          if [ -z "$ASC_KEY_ID" ] || [ -z "$ASC_ISSUER_ID" ] || [ -z "$ASC_KEY_P8_BASE64" ] || [ -z "$APPLE_TEAM_ID" ]; then
+          if [ -z "$ASC_KEY_ID" ] || [ -z "$ASC_ISSUER_ID" ] || { [ -z "$ASC_KEY_P8_BASE64" ] && [ -z "$ASC_KEY_P8" ]; } || [ -z "$APPLE_TEAM_ID" ]; then
             echo "::notice::Sin secretos de App Store Connect: no se firma ni se sube a TestFlight."
             echo "ok=false" >> "$GITHUB_OUTPUT"
           else
@@ -183,7 +184,9 @@ jobs:
           mkdir -p ipad/demo && ./demofx/make_demo_sessions ipad/demo
           (cd ipad && xcodegen generate)
           mkdir -p ~/private_keys
-          echo "$ASC_KEY_P8_BASE64" | base64 --decode > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          # the key can be given as the plain text of the .p8 (ASC_KEY_P8, easy to paste from an iPad) or in base64
+          if [ -n "$ASC_KEY_P8" ]; then printf '%s\n' "$ASC_KEY_P8" > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          else echo "$ASC_KEY_P8_BASE64" | base64 --decode > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8; fi
       - name: Archive (automatic signing with the App Store Connect API key)
         if: steps.check.outputs.ok == 'true'
         working-directory: ipad
