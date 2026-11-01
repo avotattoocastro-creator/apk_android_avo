@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-01 — Android 2.6-ntrip-auto-dev1 — mountpoint NTRIP automático según la posición
-**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (desde `feature/avo-license-nfc` 43f2fc0, app 2.5) · **CI:** ver la ejecución posterior a esta entrada
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (desde `feature/avo-license-nfc` 43f2fc0, app 2.5) · **Commit:** `2b1d36f` · **CI:** [41292158228](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41292158228) (**éxito** a la primera: core 140 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV1-APK`)
 **Qué cambia:**
 - Núcleo:
   - `core/ntrip/MountSelector.kt`: `SourceEntry`, que lee todas las columnas de las líneas STR de la sourcetable (posición, formato, frecuencias, red/VRS, NMEA).
@@ -45,7 +45,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - CI: la rama nueva compila la APK.
 **Por qué:** petición del usuario: activar el servidor NTRIP mejor para la zona según la posición del GPS.
 **Alcance:** un solo caster, el configurado; elige entre sus mountpoints. Varios casters con cuentas distintas quedan para otra versión.
-**Validación:** IMPLEMENTADO · selector 8/8 pruebas JVM en local · **NO VERIFICADO** con un caster real ni en el móvil.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41292158228 · selector 8/8 pruebas JVM · **NO VERIFICADO** con un caster real ni en el móvil.
 
 ## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commit:** `438a887` · **CI:** [40471096243](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40471096243) (**éxito** a la primera: core 132 pruebas, emulador 2; licencias activadas con F5EEE5D2; app y Tarjetas con el mismo certificado estable SHA-256 8807ef9cec7f4eb2…)
