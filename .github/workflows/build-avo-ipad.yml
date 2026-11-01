@@ -1,0 +1,218 @@
+name: AVO iPad - build, tests, screenshots and TestFlight
+on:
+  push:
+    branches:
+      - 'feature/ipad-app'
+      - 'ci/ipad-smoke'
+      - 'develop/avo-performance-horse'
+    paths:
+      - 'ipad/**'
+      - 'equine-intelligence/**'
+      - 'firmware/back/V3_8_0/lib/avo_core/**'
+      - 'windows/tools/demo-fixtures/**'
+      - '.github/workflows/build-avo-ipad.yml'
+  workflow_dispatch:
+    inputs:
+      testflight:
+        description: 'Subir a TestFlight (necesita los secretos de App Store Connect)'
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: avo-ipad-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  AVO_BUNDLE_ID: ${{ vars.AVO_IPAD_BUNDLE_ID || 'org.avoperformance.horse.ipad' }}
+  AVO_BUILD_NUMBER: ${{ github.run_number }}
+jobs:
+  build-test-capture:
+    runs-on: macos-15
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tools (XcodeGen) and Xcode version
+        run: |
+          brew install xcodegen >/dev/null
+          xcodebuild -version
+          xcrun simctl list devicetypes | grep -i ipad || true
+
+      - name: Generate DEMONSTRATION sessions (synthetic, AVO RAW written with the chest writer)
+        run: |
+          cmake -S windows/tools/demo-fixtures -B demofx -DCMAKE_BUILD_TYPE=Release
+          cmake --build demofx --config Release -j 4
+          mkdir -p ipad/demo
+          ./demofx/make_demo_sessions ipad/demo
+          ls -la ipad/demo
+
+      - name: Generate Xcode project
+        working-directory: ipad
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: xcodegen generate
+
+      - name: Pick the iPad Pro 13-inch (M4) simulator
+        id: sim
+        run: |
+          NAME=$(xcrun simctl list devices available | grep -E "iPad Pro 13-inch \(M4\)" | head -1 | sed -E 's/^ *(iPad Pro 13-inch \(M4\)).*/\1/')
+          if [ -z "$NAME" ]; then NAME=$(xcrun simctl list devices available | grep -E "iPad Pro" | head -1 | sed -E 's/^ *([^()]*\([^()]*\)|[^(]*) \(.*/\1/' | sed 's/ *$//'); fi
+          echo "Simulator: $NAME"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Build for testing (simulator)
+        working-directory: ipad
+        run: |
+          set -o pipefail
+          xcodebuild build-for-testing -project AVOiPad.xcodeproj -scheme AVOiPad \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -derivedDataPath ../dd CODE_SIGNING_ALLOWED=NO 2>&1 | tee ../build.log | grep -E "error:|warning: unre|BUILD|\*\*" || true
+          if grep -q "\*\* TEST BUILD FAILED \*\*\|\*\* BUILD FAILED \*\*" ../build.log; then
+            grep -E "error:" ../build.log | sort -u | head -150
+            exit 1
+          fi
+
+      - name: Unit tests (formats, security, algorithms, watch protocol, engine, demo sessions)
+        working-directory: ipad
+        run: |
+          set -o pipefail
+          xcodebuild test-without-building -project AVOiPad.xcodeproj -scheme AVOiPad -only-testing:AVOiPadTests \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -derivedDataPath ../dd -resultBundlePath ../unit.xcresult 2>&1 | tee ../unit.log | grep -E "Test Case .*(passed|failed)|error:|Executed|\*\*" | grep -v "passed" || true
+          grep -E "Executed [0-9]+ tests" ../unit.log | tail -1
+          if ! grep -q "\*\* TEST EXECUTE SUCCEEDED \*\*" ../unit.log; then
+            grep -E "error:|failed" ../unit.log | sort -u | head -100
+            exit 1
+          fi
+
+      - name: Screenshots of every page (UI tests on the iPad Pro 13-inch M4 simulator, landscape and portrait)
+        working-directory: ipad
+        env:
+          TEST_RUNNER_AVO_SHOTS: ${{ github.workspace }}/capturas
+        run: |
+          mkdir -p "$TEST_RUNNER_AVO_SHOTS"
+          xcodebuild test-without-building -project AVOiPad.xcodeproj -scheme AVOiPad -only-testing:AVOiPadUITests \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -derivedDataPath ../dd -resultBundlePath ../ui.xcresult 2>&1 | tee ../ui.log | grep -E "error:|failed|Executed|\*\*" || true
+          ls -la "$TEST_RUNNER_AVO_SHOTS" | head -80
+          if ! grep -q "\*\* TEST EXECUTE SUCCEEDED \*\*" ../ui.log; then echo "::warning::Algunas capturas fallaron"; fi
+
+      - name: Logs
+        if: always()
+        run: |
+          mkdir -p logs
+          cp build.log unit.log ui.log logs/ 2>/dev/null || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-iPad-capturas-y-registros
+          path: |
+            capturas
+            logs
+          retention-days: 30
+
+      - name: Hand screenshots to the evidence job
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipad-evidence-handoff
+          path: |
+            capturas
+            logs
+          retention-days: 1
+
+  # Screenshots and logs also go to the orphan branch ci/ipad-visual-evidence (overwritten every run), so they can be
+  # reviewed without signing in to download artifacts.
+  publish-evidence:
+    needs: build-test-capture
+    if: always() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: ipad-evidence-handoff
+          path: ev-in
+      - name: Commit evidence to ci/ipad-visual-evidence
+        run: |
+          set -e
+          mkdir ev && cd ev
+          git init -q
+          git config user.name "avo-ipad-ci"
+          git config user.email "avo-ipad-ci@users.noreply.github.com"
+          git checkout -q --orphan ci/ipad-visual-evidence
+          cp -r ../ev-in/* . 2>/dev/null || true
+          printf "# Evidencia visual iPad\n\nRun %s · commit %s · rama %s\n\nCapturas del simulador iPad Pro 13 pulgadas (M4) con sesiones de DEMOSTRACIÓN sintéticas.\n" "${{ github.run_id }}" "${{ github.sha }}" "${{ github.ref_name }}" > README.md
+          git add -A
+          git commit -q -m "Evidencia visual iPad · run ${{ github.run_id }} · ${{ github.sha }}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci/ipad-visual-evidence
+
+  # Signed build to TestFlight. Needs repository secrets: APPLE_TEAM_ID, ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8_BASE64
+  # (App Store Connect API key with the App Manager or Admin role) and the app record created in App Store Connect with
+  # the bundle id AVO_BUNDLE_ID. Without the secrets the job is skipped and the build stays unsigned.
+  testflight:
+    needs: build-test-capture
+    if: github.event_name == 'workflow_dispatch' && inputs.testflight || github.event_name == 'push' && github.ref == 'refs/heads/feature/ipad-app'
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8_BASE64: ${{ secrets.ASC_KEY_P8_BASE64 }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+    steps:
+      - name: Check signing secrets
+        id: check
+        run: |
+          if [ -z "$ASC_KEY_ID" ] || [ -z "$ASC_ISSUER_ID" ] || [ -z "$ASC_KEY_P8_BASE64" ] || [ -z "$APPLE_TEAM_ID" ]; then
+            echo "::notice::Sin secretos de App Store Connect: no se firma ni se sube a TestFlight."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ok == 'true'
+      - name: Demo sessions, project and API key
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          brew install xcodegen >/dev/null
+          cmake -S windows/tools/demo-fixtures -B demofx -DCMAKE_BUILD_TYPE=Release
+          cmake --build demofx --config Release -j 4
+          mkdir -p ipad/demo && ./demofx/make_demo_sessions ipad/demo
+          (cd ipad && xcodegen generate)
+          mkdir -p ~/private_keys
+          echo "$ASC_KEY_P8_BASE64" | base64 --decode > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+      - name: Archive (automatic signing with the App Store Connect API key)
+        if: steps.check.outputs.ok == 'true'
+        working-directory: ipad
+        run: |
+          set -o pipefail
+          xcodebuild archive -project AVOiPad.xcodeproj -scheme AVOiPad -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath ../build/AVOiPad.xcarchive \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath ~/private_keys/AuthKey_${ASC_KEY_ID}.p8 \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic 2>&1 | tail -40
+      - name: Upload to TestFlight
+        if: steps.check.outputs.ok == 'true'
+        run: |
+          cat > ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>${APPLE_TEAM_ID}</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict></plist>
+          EOF
+          set -o pipefail
+          xcodebuild -exportArchive -archivePath build/AVOiPad.xcarchive -exportOptionsPlist ExportOptions.plist \
+            -exportPath build/export -allowProvisioningUpdates \
+            -authenticationKeyPath ~/private_keys/AuthKey_${ASC_KEY_ID}.p8 \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" 2>&1 | tail -40
+          echo "::notice::Compilación ${AVO_BUILD_NUMBER} enviada a TestFlight (${AVO_BUNDLE_ID}). Aparecerá en la app TestFlight del iPad cuando Apple termine de procesarla."
