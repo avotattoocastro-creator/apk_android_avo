@@ -185,8 +185,21 @@ jobs:
           (cd ipad && xcodegen generate)
           mkdir -p ~/private_keys
           # the key can be given as the plain text of the .p8 (ASC_KEY_P8, easy to paste from an iPad) or in base64
-          if [ -n "$ASC_KEY_P8" ]; then printf '%s\n' "$ASC_KEY_P8" > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
-          else echo "$ASC_KEY_P8_BASE64" | base64 --decode > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8; fi
+          if [ -n "$ASC_KEY_P8" ]; then printf '%s' "$ASC_KEY_P8" > /tmp/key_raw.txt
+          else echo "$ASC_KEY_P8_BASE64" | base64 --decode > /tmp/key_raw.txt; fi
+          # normalise: text pasted from an iPad may lose the line breaks or carry spaces/CR; rebuild a clean PEM
+          python3 - "$HOME/private_keys/AuthKey_${ASC_KEY_ID}.p8" <<'PY'
+          import re, sys, base64
+          raw = open('/tmp/key_raw.txt', encoding='utf-8', errors='ignore').read()
+          body = re.sub(r'-----(BEGIN|END) PRIVATE KEY-----', '', raw)
+          body = re.sub(r'[^A-Za-z0-9+/=]', '', body)
+          der = base64.b64decode(body)   # fails loudly if the secret is not a key
+          b64 = base64.b64encode(der).decode()
+          pem = '-----BEGIN PRIVATE KEY-----\n' + '\n'.join(b64[i:i+64] for i in range(0, len(b64), 64)) + '\n-----END PRIVATE KEY-----\n'
+          open(sys.argv[1], 'w').write(pem)
+          print('Clave .p8 normalizada:', len(der), 'bytes DER')
+          PY
+          rm -f /tmp/key_raw.txt
       - name: Archive (automatic signing with the App Store Connect API key)
         if: steps.check.outputs.ok == 'true'
         working-directory: ipad
