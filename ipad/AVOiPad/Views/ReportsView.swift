@@ -220,7 +220,7 @@ private struct ReportsOptionsCard: View {
                 Toggle("Caballo y jinete", isOn: $m.horseRider)
                 Toggle("Fecha y duración", isOn: $m.date)
                 Toggle("Mapa del recorrido", isOn: $m.map)
-                Toggle("Estadísticas GNSS / RTK", isOn: $m.gnss)
+                Toggle("Datos GPS", isOn: $m.gnss)
                 Toggle("Velocidades y aceleraciones", isOn: $m.speed)
                 Toggle("Gráficas", isOn: $m.charts)
                 Toggle("Tramos", isOn: $m.segments)

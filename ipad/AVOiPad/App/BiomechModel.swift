@@ -174,8 +174,8 @@ final class BiomechModel {
             alignmentText = "Sin datos"
         } else {
             alignmentText = s.imu.aligned
-                ? "Alineada con GNSS · desfase " + DotNetFormat.custom(s.imu.offsetS, "0.000", spanish: true) + " s"
-                : "Sin alinear con GNSS (sin marcas de tiempo del pecho)"
+                ? "Alineada con la línea de tiempo · desfase " + DotNetFormat.custom(s.imu.offsetS, "0.000", spanish: true) + " s"
+                : "Sin alinear con la línea de tiempo (sin marcas de tiempo del pecho)"
         }
         if !list.contains(where: { $0.id == windowSensor }), let first = s.imu.channels.first {
             windowSensor = Int(first.imuId)

@@ -359,7 +359,7 @@ private struct StableTrainingsCard: View {
 
 private enum StableCols {
     static let date: CGFloat = 130, name: CGFloat = 130, dist: CGFloat = 85, dur: CGFloat = 75, speed: CGFloat = 85,
-               fix: CGFloat = 65, origin: CGFloat = 110, actions: CGFloat = 170
+               origin: CGFloat = 110, actions: CGFloat = 170
 }
 
 private struct StableTrainingHeader: View {
@@ -371,7 +371,6 @@ private struct StableTrainingHeader: View {
             cell("Distancia", StableCols.dist)
             cell("Duración", StableCols.dur)
             cell("V. máx", StableCols.speed)
-            cell("RTK FIX", StableCols.fix)
             cell("Origen", StableCols.origin)
             cell("", StableCols.actions)
         }
@@ -394,7 +393,6 @@ private struct StableTrainingRow: View {
             cell(s.distanceText, StableCols.dist)
             cell(s.durationText, StableCols.dur)
             cell(s.maxSpeedText, StableCols.speed)
-            cell(s.fixText, StableCols.fix)
             HStack(spacing: 4) {
                 if s.isSynthetic { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) } else { Text(s.kind) }
             }

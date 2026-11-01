@@ -20,9 +20,11 @@ struct SyncSource {
     var runId: [Int]
     /// Optional ±1σ half width (same units as y): drawn as a band around the line.
     var sigma: [Double]?
+    /// Fill of the band (nil = the red ±1σ of the speed chart).
+    var sigmaColor: Color?
 
     init(name: String, color: Color, width: CGFloat = 1, dashed: Bool = false, x: [Double], y: [Double], breaks: [Bool]? = nil,
-         sigma: [Double]? = nil) {
+         sigma: [Double]? = nil, sigmaColor: Color? = nil) {
         self.name = name
         self.color = color
         self.width = width
@@ -31,6 +33,7 @@ struct SyncSource {
         self.x = n == x.count ? x : Array(x[0..<n])
         self.y = n == y.count ? y : Array(y[0..<n])
         self.sigma = sigma
+        self.sigmaColor = sigmaColor
         var run: Int = 0
         var lastFinite: Bool = false
         var ids: [Int] = [Int](repeating: 0, count: n)
@@ -68,6 +71,8 @@ struct SyncSigma: Identifiable {
     var x1: Double
     var lo: Double
     var hi: Double
+    /// nil = default red ±1σ fill.
+    var color: Color? = nil
 }
 
 /// Coloured strip at the bottom of a chart (Windows ChartBand: RTK quality, gait).
@@ -82,6 +87,8 @@ struct SyncBand: Identifiable {
 struct SyncPanel {
     var lines: [SyncLine] = []
     var sigma: [SyncSigma] = []
+    /// Event markers (points) inside the window.
+    var markers: [SyncMarker] = []
     var isEmpty: Bool {
         for l in lines where l.points.count > 1 { return false }
         return true
@@ -90,10 +97,16 @@ struct SyncPanel {
 
 enum SyncPanelId: String, CaseIterable {
     case speed, accel, imu, fusedAccel, orientation, cadence, altitude, precision, satellites
+    /// Girth lateral acceleration perpendicular to the direction of travel (ChartsImuAnalysis).
+    case lateral
+    /// Girth roll / pitch with anomaly markers (ChartsImuAnalysis).
+    case tilt
 }
 
 /// Port of MainViewModel.Charts.cs: synchronized charts (shared cursor, range and x window with the map), range
-/// statistics and the session/GNSS panels. Heavy work (series building, LTTB) runs off the main thread.
+/// statistics and the session/GNSS panels. Heavy work (series building, girth analysis, LTTB) runs off the main thread.
+/// The «Gráficas» page no longer shows GNSS quality/altitude/hAcc/satellites (they live on the GPS page), but the
+/// series (`.altitude`, `.precision`, `.satellites`), `qualityBands` and `gnssStats` are still built for other pages.
 @Observable
 final class ChartsModel {
     unowned let app: AppModel
@@ -112,6 +125,10 @@ final class ChartsModel {
     var chartCadence: Bool = true
     var chartAltitude: Bool = true
     var chartPrecision: Bool = true
+    /// «IMU cincha → Desvíos laterales».
+    var chartLateral: Bool = true
+    /// «IMU cincha → Inclinaciones / anomalías».
+    var chartTilt: Bool = true
     /// Touch replacement of Windows Shift+drag: while on, dragging on a chart selects a range.
     var rangeMode: Bool = false
 
@@ -136,10 +153,26 @@ final class ChartsModel {
     private(set) var imuScaleNote: String = ImuTimeline.scaleNote
     private(set) var imuChartHeader: String = "IMU cincha · aceleración vertical z (g, escala nominal)"
 
+    // ------------------------------------------------------------ girth analysis (ChartsImuAnalysis)
+    /// 0 no girth data, 1 fused (fmt 1), 2 raw only (fmt 0).
+    private(set) var imuSource: Int = 0
+    private(set) var imuSensorName: String = ""
+    private(set) var imuHeadingNote: String = ""
+    private(set) var lateralEvents: [ChartsImuEvent] = []
+    private(set) var tiltEvents: [ChartsImuEvent] = []
+    /// The session has girth samples (fused or raw): the IMU charts are drawn, otherwise a placeholder.
+    var hasGirthImu: Bool { hasFused || hasImuRaw }
+
     /// Points per drawn series (LTTB threshold).
     static let threshold: Int = 1500
 
     @ObservationIgnored private var sources: [SyncPanelId: [SyncSource]] = [:]
+    @ObservationIgnored private var markerSources: [SyncPanelId: [SyncMarker]] = [:]
+    /// Girth analysis cached per (timeline, imu) so toggling speed options does not recompute it.
+    @ObservationIgnored private var imuCache: ChartsImuResult? = nil
+    @ObservationIgnored private var imuCacheKey: String = ""
+    /// Primary-sensor series for the cursor readouts (not observed: read when the cursor moves).
+    @ObservationIgnored private var imuReadout: ChartsImuResult = ChartsImuResult()
     @ObservationIgnored private var generation: Int = 0
     @ObservationIgnored private var displayGeneration: Int = 0
     @ObservationIgnored private var displayTask: Task<Void, Never>? = nil
@@ -183,6 +216,7 @@ final class ChartsModel {
 
     struct BuildResult {
         var sources: [SyncPanelId: [SyncSource]] = [:]
+        var markers: [SyncPanelId: [SyncMarker]] = [:]
         var qualityBands: [SyncBand] = []
         var gaitBands: [SyncBand] = []
     }
@@ -194,8 +228,12 @@ final class ChartsModel {
         dirty = false
         guard let s = app.selected, s.timeline.count >= 2 else {
             sources = [:]
+            markerSources = [:]
             panels = [:]
             qualityBands = []
+            imuSource = 0; imuSensorName = ""; imuHeadingNote = ""
+            lateralEvents = []; tiltEvents = []
+            imuReadout = ChartsImuResult()
             gaitBands = []
             hasImuRaw = false; hasFused = false; hasCadence = false; hasAltitude = false
             building = false
@@ -208,6 +246,10 @@ final class ChartsModel {
         let imu: ImuTimeline = s.imu
         let engine: EquineAnalysis? = s.engine
         let offset: Double = s.engineOffsetS
+        let fusedRaw: [ImuFusedSample] = imu.fused.isEmpty ? [] : s.session.imuFused
+        let key: String = "\(s.id)|\(ObjectIdentifier(tl).hashValue)|\(ObjectIdentifier(imu).hashValue)|\(tl.count)|" +
+            "\(tl.t[0])|\(tl.t[tl.count - 1])|\(fusedRaw.count)|\(imu.channels.count)|\(imu.fused.count)"
+        let cached: ChartsImuResult? = key == imuCacheKey ? imuCache : nil
         let opts = BuildOptions(reported: showSpeedReported, derived: showSpeedDerived, filtered: showSpeedFiltered,
                                 sigma: showSigma, lateral: showLateral)
         fullLo = tl.t[0]
@@ -229,20 +271,41 @@ final class ChartsModel {
         let hi: Double = d.upperBound
         building = true
         Task.detached(priority: .userInitiated) { [weak self] in
-            let built: BuildResult = ChartsModel.buildSources(tl, imu, engine, offset, opts)
-            let shown: [SyncPanelId: SyncPanel] = ChartsModel.makePanels(built.sources, lo, hi)
+            var work: BuildResult = ChartsModel.buildSources(tl, imu, engine, offset, opts)
+            let girth: ChartsImuResult = cached ?? ChartsImuAnalysis.analyze(tl, imu, fusedRaw)
+            ChartsModel.addImu(&work, girth)
+            let built: BuildResult = work
+            let shown: [SyncPanelId: SyncPanel] = ChartsModel.makePanels(built.sources, built.markers, lo, hi)
             await MainActor.run {
                 guard let self = self, self.generation == gen else { return }
                 self.sources = built.sources
+                self.markerSources = built.markers
                 self.qualityBands = built.qualityBands
                 self.gaitBands = built.gaitBands
                 self.panels = shown
+                self.imuCache = girth
+                self.imuCacheKey = key
+                self.imuReadout = girth
+                self.imuSource = girth.source
+                self.imuSensorName = girth.sensorName
+                self.imuHeadingNote = girth.headingNote
+                self.lateralEvents = girth.lateralEvents
+                self.tiltEvents = girth.tiltEvents
                 self.building = false
             }
         }
     }
 
     private static func scale(_ v: [Double], _ k: Double) -> [Double] { v.map { $0 * k } }
+
+    /// Girth analysis → panels `.lateral`, `.tilt` and `.fusedAccel` (vertical and |a|, also for raw-only sessions).
+    static func addImu(_ r: inout BuildResult, _ g: ChartsImuResult) {
+        r.sources[.lateral] = g.lateral
+        r.sources[.tilt] = g.tilt
+        r.markers[.lateral] = g.lateralMarkers
+        r.markers[.tilt] = g.tiltMarkers
+        if !g.vertical.isEmpty { r.sources[.fusedAccel] = g.vertical }
+    }
 
     static func sensorColor(_ id: Int) -> Color {
         switch id {
@@ -262,7 +325,7 @@ final class ChartsModel {
         // speed
         var sp: [SyncSource] = []
         if o.reported {
-            sp.append(SyncSource(name: "Reportada (GNSS)", color: Color(hex: 0x3D9BFF, alpha: 0xA0 / 255.0), width: 1,
+            sp.append(SyncSource(name: "Reportada", color: Color(hex: 0x3D9BFF, alpha: 0xA0 / 255.0), width: 1,
                                  x: tl.t, y: scale(tl.speedReported, 3.6), breaks: brk))
         }
         if o.derived {
@@ -388,8 +451,19 @@ final class ChartsModel {
     }
 
     static func makePanels(_ sources: [SyncPanelId: [SyncSource]], _ lo: Double, _ hi: Double) -> [SyncPanelId: SyncPanel] {
+        makePanels(sources, [:], lo, hi)
+    }
+
+    static func makePanels(_ sources: [SyncPanelId: [SyncSource]], _ markers: [SyncPanelId: [SyncMarker]], _ lo: Double,
+                           _ hi: Double) -> [SyncPanelId: SyncPanel] {
         var out: [SyncPanelId: SyncPanel] = [:]
-        for (id, list) in sources { out[id] = makePanel(list, lo, hi, threshold: threshold) }
+        for (id, list) in sources {
+            var p: SyncPanel = makePanel(list, lo, hi, threshold: threshold)
+            if let mk = markers[id] {
+                p.markers = mk.filter { (m: SyncMarker) -> Bool in m.x >= lo && m.x <= hi && m.y.isFinite }
+            }
+            out[id] = p
+        }
         return out
     }
 
@@ -423,7 +497,11 @@ final class ChartsModel {
             }
             closeLine()
             if let sig = s.sigma, sig.count >= n {
-                p.sigma.append(contentsOf: sigmaEnvelope(s, sig, a, b, buckets: 300, idBase: si * 1_000_000))
+                var env: [SyncSigma] = sigmaEnvelope(s, sig, a, b, buckets: 300, idBase: si * 1_000_000)
+                if let c = s.sigmaColor {
+                    for k in 0..<env.count { env[k].color = c }
+                }
+                p.sigma.append(contentsOf: env)
             }
         }
         return p
@@ -478,12 +556,13 @@ final class ChartsModel {
         displayGeneration += 1
         let gen: Int = displayGeneration
         let src: [SyncPanelId: [SyncSource]] = sources
+        let mk: [SyncPanelId: [SyncMarker]] = markerSources
         if src.isEmpty { return }
         let d: ClosedRange<Double> = domain
         let lo: Double = d.lowerBound
         let hi: Double = d.upperBound
         Task.detached(priority: .userInitiated) { [weak self] in
-            let shown: [SyncPanelId: SyncPanel] = ChartsModel.makePanels(src, lo, hi)
+            let shown: [SyncPanelId: SyncPanel] = ChartsModel.makePanels(src, mk, lo, hi)
             await MainActor.run {
                 guard let self = self, self.displayGeneration == gen else { return }
                 self.panels = shown
@@ -540,6 +619,42 @@ final class ChartsModel {
         }
     }
 
+    /// Moves the shared cursor to `t` (event list) and centres the zoomed window on it when it is outside.
+    func focus(_ t: Double) {
+        guard t.isFinite else { return }
+        app.cursorTime = t
+        if isZoomed {
+            let d: ClosedRange<Double> = domain
+            if t < d.lowerBound || t > d.upperBound {
+                let w: Double = d.upperBound - d.lowerBound
+                setViewport(t - w / 2, t + w / 2)
+            }
+        }
+    }
+
+    // ------------------------------------------------------------ cursor readouts of the girth charts
+    func lateralReadout(_ t: Double) -> String {
+        let r: ChartsImuResult = imuReadout
+        let v: Double = ChartsImuAnalysis.valueAt(r.t, r.lateralY, t)
+        return v.isFinite ? DotNetFormat.custom(v, "0.0", spanish: true) + " m/s²" : "—"
+    }
+
+    func tiltReadout(_ t: Double) -> String {
+        let r: ChartsImuResult = imuReadout
+        let a: Double = ChartsImuAnalysis.valueAt(r.t, r.rollY, t)
+        let b: Double = ChartsImuAnalysis.valueAt(r.t, r.pitchY, t)
+        if !a.isFinite && !b.isFinite { return "—" }
+        let ra: String = a.isFinite ? DotNetFormat.custom(a, "0.0", spanish: true) + "°" : "—"
+        let pb: String = b.isFinite ? DotNetFormat.custom(b, "0.0", spanish: true) + "°" : "—"
+        return "Bal. " + ra + " · Cab. " + pb
+    }
+
+    func verticalReadout(_ t: Double) -> String {
+        let r: ChartsImuResult = imuReadout
+        let v: Double = ChartsImuAnalysis.valueAt(r.t, r.verticalY, t)
+        return v.isFinite ? DotNetFormat.custom(v, "0.0", spanish: true) + " m/s²" : "—"
+    }
+
     func clearRange() {
         app.rangeStart = .nan
         app.rangeEnd = .nan
@@ -565,7 +680,7 @@ final class ChartsModel {
         r.append(SyncStatRow(key: "Aceleración máx. validada", value: TimeText.num(m.maxAccel, "0.00", " m/s²")))
         r.append(SyncStatRow(key: "Frenada máx. validada", value: TimeText.num(m.maxDecel, "0.00", " m/s²")))
         r.append(SyncStatRow(key: "Cambios de ritmo", value: String(m.speedChanges)))
-        r.append(SyncStatRow(key: "RTK FIX", value: TimeText.num(m.fixFraction * 100, "0", " %")))
+        // RTK FIX moved to the GPS page
         r.append(SyncStatRow(key: "Cadencia (motor)", value: TimeText.num(m.cadence, "0", " ciclos/min")))
         r.append(SyncStatRow(key: "Regularidad (correlación ciclos)", value: TimeText.num(m.cycleCorrelation, "0.00")))
         return r

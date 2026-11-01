@@ -155,7 +155,7 @@ private struct TidesOriginCard: View {
                         Button("Guardar zona") { model.savePlace(); editingPlace = false }.buttonStyle(.avoPrimary)
                         Button("Playa del Regatón") { model.resetPlace(); editingPlace = false }.buttonStyle(.avoSecondary)
                     }
-                    Text("Se usa cuando la sesión no tiene posición GNSS; los puertos se ordenan por distancia a la sesión.")
+                    Text("Se usa cuando la sesión no tiene posición; los puertos se ordenan por distancia a la sesión.")
                         .font(.caption2).foregroundStyle(Avo.textDim)
                 }
             }

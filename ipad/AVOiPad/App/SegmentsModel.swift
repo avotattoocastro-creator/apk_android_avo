@@ -30,7 +30,21 @@ final class SegmentsModel {
         return rows.first { $0.id == id }
     }
 
-    var observations: String { selected?.observations ?? "" }
+    /// Observations of the selected segment without the GNSS-quality remarks (those live only on the «GPS» page).
+    var observations: String {
+        guard let m = selected else { return "" }
+        return SegmentsModel.horseObservations(m.observations)
+    }
+
+    /// Drops the GNSS/RTK remarks («pérdida(s) de señal GNSS», «menos del 50 % en RTK FIX»…) from an observations text.
+    static func horseObservations(_ text: String) -> String {
+        if text.isEmpty { return "" }
+        if text == "Sin datos GNSS utilizables en el intervalo" { return "Sin datos utilizables en el intervalo" }
+        let parts: [String] = text.components(separatedBy: "; ")
+        let kept: [String] = parts.filter { (p: String) -> Bool in !GpsTerms.mentionsGnss(p) && !p.lowercased().contains("pérdida(s) de señal") }
+        if kept.isEmpty { return "Datos completos" }
+        return kept.joined(separator: "; ")
+    }
 
     var hasSession: Bool { app.selected != nil }
     var hasEngineGait: Bool { app.selected?.engine?.hasImu == true }
@@ -214,7 +228,7 @@ final class SegmentsModel {
             speedPanel = SyncPanel()
             return
         }
-        detail = ChartsModel.metricRows(m)
+        detail = ChartsModel.metricRows(m).filter { (r: SyncStatRow) -> Bool in !GpsTerms.mentionsGnss(r.key) }
         let tl: SessionTimeline = s.timeline
         let src = SyncSource(name: "Velocidad filtrada", color: Avo.blue, width: 1.6, x: tl.t, y: tl.speedFiltered.map { $0 * 3.6 },
                              breaks: tl.breakBefore)

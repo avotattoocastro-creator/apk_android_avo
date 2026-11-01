@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — página GPS, Análisis centrado en el caballo, Comparar rediseñado
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia (petición del usuario tras revisar la app en su iPad):**
+- **Nueva página «GPS»** (`Page.gps`, menú tras «Mapa», `App/GpsModel.swift`, `Views/GpsView.swift`): todos los datos GNSS/RTK del chaleco sin mapa (distribución de soluciones y franja temporal, satélites, hAcc mediana/p95, precisión de velocidad, pérdidas de señal, saltos descartados, frecuencia, épocas, altitud MSL, velocidad reportada frente a derivada, receptor y sensores, nota de la antena del chaleco).
+- **GNSS fuera del resto de páginas:** Análisis, Mapa (sin modo «Calidad GNSS» ni tarjeta GNSS/RTK), Tramos (sin fila RTK FIX ni observaciones GNSS), Comparar, Motor (sin dominio GNSS ni eventos GNSS), Entrenamientos, Cuadra, pie de página, Biomecánica y Mareas. En Informes la opción pasa a «Datos GPS», desactivada por defecto. Las exportaciones CSV/Core no cambian.
+- **Análisis centrado en el caballo:** caballo · jinete · modalidad a la derecha del título; sección «Análisis del caballo» (aires del motor, zonas de velocidad, esfuerzo, aceleraciones/frenadas validadas, curvas, marcha de la cincha) solo con datos medidos; el mosaico de altitud pasa a «Esfuerzo · tiempo en movimiento».
+- **Inicio sin menú lateral** (botón «Menú» arriba a la izquierda); accesos «Entrenamientos» y «Análisis» en Inicio.
+- **Comparar:** columna derecha con un único desplazamiento vertical (recorridos, velocidad, aceleración, IMU cincha → desvíos laterales e inclinaciones, cadencia del motor, estadísticas y motor al final); `Views/CompareImuSeries.swift`.
+- Diagrama de la cincha: las etiquetas ya no se cortan en el borde.
+**Archivos:** `ipad/AVOiPad/App/{GpsModel,AppModel,AppModel+Shell,RootView,MapModel,SegmentsModel,ReportsModel,CompareModel,BiomechModel}.swift`, `ipad/AVOiPad/Views/{GpsView,CompareImuSeries,AnalysisView,MapPageView,SegmentsView,CompareView,EngineView,HomeView,StableView,StartView,ReportsView,BiomechView,HorseDiagramView,TidesView,SharedShellComponents}.swift`, `ipad/AVOiPadUITests/ScreenshotTests.swift`.
+**No se ha tocado:** núcleo (`Core/`, `Engine/`), Gráficas, Reloj Wi‑Fi/BLE.
+**Validación:** IMPLEMENTADO · sin compilar en la sesión (CI macOS pendiente) · NO VERIFICADO en iPad.
+
+---
+
 ## 2026-11-01 — iPad 1.0.0 — duplicado de la app Windows V2 PRO para iPad Pro M4 (SwiftUI nativo)
 **Autor:** Claude · **Rama:** `feature/ipad-app` (sale de `feature/windows-girth-movimiento` `8101304`)
 **Qué cambia:**

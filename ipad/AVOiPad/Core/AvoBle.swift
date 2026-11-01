@@ -26,6 +26,9 @@ enum MsgType: UInt8 {
     case sessionCmd = 0x10
     case getConfig = 0x20, setConfig = 0x21, setFence = 0x22, getFence = 0x23, setActiveFences = 0x24
     case rtcm = 0x30, rtcmAck = 0x31
+    /// Training download over BLE (firmware ≥ 3.5.4; Android core/ble/BleProtocol.kt). READ_FILE answers arrive on FILE_TX
+    /// with type FILE_DATA and the request msg_id. See Core/BleDownload.swift.
+    case listSessions = 0x40, readFile = 0x41, fileSha256 = 0x42, fileData = 0x46
     /// V3.7.4: Wi-Fi download (1 start, 2 stop, 3 status, 4 regenerate password). Not in AVO Windows (it used USB).
     case wifiSync = 0x64
     case nack = 0x7E, ack = 0x7F, telemetry = 0x80, event = 0x81
@@ -48,6 +51,10 @@ enum MsgType: UInt8 {
         case .setActiveFences: return "SetActiveFences"
         case .rtcm: return "Rtcm"
         case .rtcmAck: return "RtcmAck"
+        case .listSessions: return "ListSessions"
+        case .readFile: return "ReadFile"
+        case .fileSha256: return "FileSha256"
+        case .fileData: return "FileData"
         case .wifiSync: return "WifiSync"
         case .nack: return "Nack"
         case .ack: return "Ack"
@@ -524,6 +531,13 @@ final class AvoClient {
     /// Unsolicited messages (telemetry, events). Called on the transport's notification thread.
     var unsolicited: ((BleMessage) -> Void)?
     var lateResponses: Int { lock.lock(); defer { lock.unlock() }; return late }
+    /// ATT payload of the link (negotiated MTU − 3), to size READ_FILE blocks.
+    var attPayload: Int { t.attPayload }
+    /// Notifications dropped by the reassemblers (bad CRC / missing fragment), for diagnostics.
+    var linkErrors: (crc: Int, gaps: Int) {
+        lock.lock(); defer { lock.unlock() }
+        return (ctrl.crcErrors + other.crcErrors, ctrl.gaps + other.gaps)
+    }
 
     init(_ t: AvoTransport, startMsgId: Int? = nil) {
         self.t = t

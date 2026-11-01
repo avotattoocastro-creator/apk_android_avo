@@ -13,11 +13,10 @@ struct CompareRow: Identifiable {
     var meanSpeed: String
     var maxSpeed: String
     var maxAccel: String
-    var fix: String
     var cadence: String
 }
 
-/// Route of one compared session, split at signal losses / rejected jumps (drawn with MapKit).
+/// Route of one compared session, split at gaps / rejected jumps (drawn with MapKit).
 struct CompareTrack: Identifiable {
     let id: String
     var label: String
@@ -39,6 +38,14 @@ final class CompareModel {
     var tracks: [CompareTrack] = []
     var speedSeries: [FeatureLineSeries] = []
     var accelSeries: [FeatureLineSeries] = []
+    /// Girth IMU comparisons (CompareImuSeries): lateral deviation and tilts; cadence from the engine.
+    var lateralSeries: [FeatureLineSeries] = []
+    var tiltSeries: [FeatureLineSeries] = []
+    var cadenceSeries: [FeatureLineSeries] = []
+    /// «fecha · caballo» of the compared sessions without girth IMU data.
+    var imuMissing: [String] = []
+    var imuSources: [String] = []
+    var cadenceMissing: [String] = []
     var alignment: AlignmentMode = .relativeTime {
         didSet { if oldValue != alignment { refresh() } }
     }
@@ -119,6 +126,8 @@ final class CompareModel {
         var timeline: SessionTimeline
         var engine: EquineAnalysis?
         var offset: Double
+        var session: TrainingSession
+        var imu: ImuTimeline
     }
 
     private struct Output {
@@ -126,19 +135,27 @@ final class CompareModel {
         var tracks: [CompareTrack]
         var speed: [FeatureLineSeries]
         var accel: [FeatureLineSeries]
+        var lateral: [FeatureLineSeries]
+        var tilt: [FeatureLineSeries]
+        var cadence: [FeatureLineSeries]
+        var imuMissing: [String]
+        var imuSources: [String]
+        var cadenceMissing: [String]
     }
 
     func refresh() {
         let picked: [SessionItem] = CompareModel.byDateDescending(app.sessions.filter { $0.isCompared && $0.timeline.count > 1 })
         let inputs: [Input] = picked.map { (s: SessionItem) -> Input in
             Input(id: s.id, label: "\(s.horse) · \(s.rider)", summaryLabel: s.summary, color: s.compareColor, dateText: s.dateText,
-                  dateTimeText: s.dateTimeText, timeline: s.timeline, engine: s.engine, offset: s.engineOffsetS)
+                  dateTimeText: s.dateTimeText, timeline: s.timeline, engine: s.engine, offset: s.engineOffsetS,
+                  session: s.session, imu: s.imu)
         }
         let mode: AlignmentMode = alignment
         request += 1
         let req: Int = request
         if inputs.isEmpty {
             rows = []; tracks = []; speedSeries = []; accelSeries = []
+            lateralSeries = []; tiltSeries = []; cadenceSeries = []; imuMissing = []; imuSources = []; cadenceMissing = []
             computing = false
             return
         }
@@ -152,10 +169,16 @@ final class CompareModel {
                 model.tracks = out.tracks
                 model.speedSeries = out.speed
                 model.accelSeries = out.accel
+                model.lateralSeries = out.lateral
+                model.tiltSeries = out.tilt
+                model.cadenceSeries = out.cadence
+                model.imuMissing = out.imuMissing
+                model.imuSources = out.imuSources
+                model.cadenceMissing = out.cadenceMissing
                 model.computing = false
                 if model.verdict.hasPrefix("Marca") || model.verdict.hasPrefix("Comparando") {
                     model.verdict = "\(inputs.count) entrenamientos alineados por \(mode == .distance ? "distancia recorrida" : "tiempo relativo"). " +
-                        "Las series no se interpolan a través de pérdidas de señal. La correspondencia espacial se comprueba con el motor (botón «Comparar con el motor»)."
+                        "Las series no se interpolan a través de huecos sin datos. La correspondencia espacial se comprueba con el motor (botón «Comparar con el motor»)."
                 }
             }
         }
@@ -169,7 +192,7 @@ final class CompareModel {
             rows.append(CompareRow(id: s.id, label: s.label, color: s.color, date: s.dateTimeText,
                                    distance: TimeText.num(m.distanceKm, "0.00", " km"), duration: TimeText.clock(m.durationS),
                                    meanSpeed: TimeText.num(m.meanSpeedKmh, "0.0", " km/h"), maxSpeed: TimeText.num(m.maxSpeedKmh, "0.0", " km/h"),
-                                   maxAccel: TimeText.num(m.maxAccel, "0.00", " m/s²"), fix: TimeText.num(m.fixPercent, "0", " %"),
+                                   maxAccel: TimeText.num(m.maxAccel, "0.00", " m/s²"),
                                    cadence: TimeText.num(m.cadence, "0", " /min")))
             tracks.append(CompareTrack(id: s.id, label: s.summaryLabel, color: s.color, runs: routeRuns(s.timeline)))
         }
@@ -193,7 +216,77 @@ final class CompareModel {
                                                format: "0.00", width: 1.1))
             }
         }
-        return Output(rows: rows, tracks: tracks, speed: speed, accel: accel)
+        // girth IMU (resampled per epoch, then aligned like the speed) and engine cadence
+        var imuMissing: [String] = []
+        var imuSources: [String] = []
+        var cadenceMissing: [String] = []
+        var imuByTl: [ObjectIdentifier: CompareImuSeries.Result] = [:]
+        var cadByTl: [ObjectIdentifier: [Double]] = [:]
+        var imuTls: [SessionTimeline] = []
+        var imuInputs: [Input] = []
+        var cadTls: [SessionTimeline] = []
+        var cadInputs: [Input] = []
+        for s in inputs {
+            let tag: String = "\(s.dateText) · \(s.label)"
+            if let r = CompareImuSeries.build(session: s.session, imu: s.imu, timeline: s.timeline) {
+                imuByTl[ObjectIdentifier(s.timeline)] = r
+                imuTls.append(s.timeline)
+                imuInputs.append(s)
+                imuSources.append("\(s.dateText): \(r.source)")
+            } else {
+                imuMissing.append(tag)
+            }
+            if let c = CompareImuSeries.cadence(s.engine, offset: s.offset, timeline: s.timeline) {
+                cadByTl[ObjectIdentifier(s.timeline)] = c
+                cadTls.append(s.timeline)
+                cadInputs.append(s)
+            } else {
+                cadenceMissing.append(tag)
+            }
+        }
+        var lateral: [FeatureLineSeries] = []
+        var tilt: [FeatureLineSeries] = []
+        if !imuTls.isEmpty {
+            func pickImu(_ t: SessionTimeline, _ f: (CompareImuSeries.Result) -> [Double]) -> [Double] {
+                guard let r = imuByTl[ObjectIdentifier(t)] else { return [] }
+                return f(r)
+            }
+            let la: SeriesAligner.Aligned = SeriesAligner.align(imuTls, { (t: SessionTimeline) -> [Double] in
+                pickImu(t, { $0.lateral })
+            }, mode, step)
+            let ro: SeriesAligner.Aligned = SeriesAligner.align(imuTls, { (t: SessionTimeline) -> [Double] in
+                pickImu(t, { $0.roll })
+            }, mode, step)
+            let pi: SeriesAligner.Aligned = SeriesAligner.align(imuTls, { (t: SessionTimeline) -> [Double] in
+                pickImu(t, { $0.pitch })
+            }, mode, step)
+            for (i, s) in imuInputs.enumerated() {
+                if i < la.values.count {
+                    lateral.append(FeatureLineSeries(id: s.id + ".lat", name: s.dateText, color: s.color, x: la.axis, y: la.values[i],
+                                                     unit: "m/s²", format: "0.00", width: 1.1))
+                }
+                if i < ro.values.count {
+                    tilt.append(FeatureLineSeries(id: s.id + ".roll", name: s.dateText + " · lateral", color: s.color, x: ro.axis,
+                                                  y: ro.values[i], unit: "°", format: "0.0", width: 1.2))
+                }
+                if i < pi.values.count {
+                    tilt.append(FeatureLineSeries(id: s.id + ".pitch", name: s.dateText + " · longitudinal", color: s.color, x: pi.axis,
+                                                  y: pi.values[i], unit: "°", format: "0.0", width: 1.0, dashed: true))
+                }
+            }
+        }
+        var cadence: [FeatureLineSeries] = []
+        if !cadTls.isEmpty {
+            let ca: SeriesAligner.Aligned = SeriesAligner.align(cadTls, { (t: SessionTimeline) -> [Double] in
+                cadByTl[ObjectIdentifier(t)] ?? []
+            }, mode, step)
+            for (i, s) in cadInputs.enumerated() where i < ca.values.count {
+                cadence.append(FeatureLineSeries(id: s.id + ".cad", name: s.dateText, color: s.color, x: ca.axis, y: ca.values[i],
+                                                 unit: "/min", format: "0", width: 1.2))
+            }
+        }
+        return Output(rows: rows, tracks: tracks, speed: speed, accel: accel, lateral: lateral, tilt: tilt, cadence: cadence,
+                      imuMissing: imuMissing, imuSources: imuSources, cadenceMissing: cadenceMissing)
     }
 
     /// Route split at gaps and rejected jumps, thinned to ≤ 1500 points for drawing.

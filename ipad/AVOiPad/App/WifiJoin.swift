@@ -156,7 +156,7 @@ final class WifiSyncManager {
         if pending.isEmpty { return WifiSyncReport(verified: [], failed: [:], fallbackBle: []) }
         if !supported {
             log(unsupportedReason() ?? "Wi-Fi no disponible")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: pending.map { $0.0 })
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: pending.map { $0.0 }, wifiUnavailable: true)
         }
         log("pidiendo Wi-Fi al reloj \(info()?.firmware ?? "") para \(pending.count) entrenamiento(s)")
         let r = try await coordinator.sync(pending)
@@ -170,7 +170,7 @@ final class WifiSyncManager {
     func syncAvailable(_ want: @escaping (RemoteTraining) -> String??) async throws -> WifiSyncReport {
         if !supported {
             log(unsupportedReason() ?? "Wi-Fi no disponible")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: [])
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: [], wifiUnavailable: true)
         }
         let r = try await coordinator.syncAvailable(want)
         if client() != nil { control.bootGuard.clearAttempt() }

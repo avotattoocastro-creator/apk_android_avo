@@ -5,6 +5,8 @@ import SwiftUI
 /// Windows Views/SessionHeader.xaml: active training, DEMO badge, useful-window trim controls and engine state.
 struct ShellSessionHeader: View {
     @Environment(AppModel.self) private var app
+    /// Analysis page: «caballo · jinete · modalidad» goes to the right of the title row, with the horse name prominent.
+    var horseOnRight: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -12,7 +14,9 @@ struct ShellSessionHeader: View {
                 RoundedRectangle(cornerRadius: 2).fill(Avo.red).frame(width: 4, height: 40)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(app.sessionHeaderTitle).font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
-                    Text(app.sessionHeaderSubtitle).font(.subheadline).foregroundStyle(Avo.textDim)
+                    if !horseOnRight || app.selected == nil {
+                        Text(app.sessionHeaderSubtitle).font(.subheadline).foregroundStyle(Avo.textDim)
+                    }
                 }
                 if app.selected?.isSynthetic == true {
                     Text("DEMOSTRACIÓN · DATOS SINTÉTICOS").font(.caption2.weight(.semibold)).foregroundStyle(Avo.warn)
@@ -21,6 +25,18 @@ struct ShellSessionHeader: View {
                         .overlay(RoundedRectangle(cornerRadius: 3).stroke(Avo.warn, lineWidth: 1))
                 }
                 Spacer(minLength: 0)
+                if horseOnRight, let s = app.selected {
+                    VStack(alignment: .trailing, spacing: 2) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "figure.equestrian.sports").font(.title3).foregroundStyle(Avo.red)
+                            Text(s.horse).font(.system(size: 28, weight: .bold, design: .rounded)).foregroundStyle(Avo.text)
+                                .lineLimit(1).minimumScaleFactor(0.6)
+                        }
+                        Text("\(s.rider) · \(s.discipline)").font(.callout).foregroundStyle(Avo.silver).lineLimit(1)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("Caballo \(s.horse), jinete \(s.rider), \(s.discipline)")
+                }
             }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {

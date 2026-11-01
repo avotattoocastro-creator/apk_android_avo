@@ -4,7 +4,7 @@ import Observation
 /// Pages of the app (same ids as Windows MainViewModel.Page). "WatchWifi" replaces the Windows "Reloj USB" button.
 enum Page: String, CaseIterable, Identifiable {
     case home = "Home", sessions = "Sessions", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
-         charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
+         gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine"
     var id: String { rawValue }
 }
@@ -24,6 +24,7 @@ final class AppModel {
     // ---------------------------------------------------------------- feature models (defined in their own files)
     @ObservationIgnored var charts: ChartsModel!          // MainViewModel.Charts.cs + map route (MapModel lives inside)
     @ObservationIgnored var map: MapModel!                // map provider, colour mode, route rebuild
+    @ObservationIgnored var gps: GpsModel!                // «GPS» page: every GNSS/RTK datum of the vest (no map)
     @ObservationIgnored var segments: SegmentsModel!      // MainViewModel.Segments.cs
     @ObservationIgnored var compare: CompareModel!        // MainViewModel.Compare.cs
     @ObservationIgnored var biomech: BiomechModel!        // biomechanics page (girth IMU)
@@ -72,6 +73,7 @@ final class AppModel {
         self.segmentStore = SegmentStore(paths.segments)
         self.charts = ChartsModel(app: self)
         self.map = MapModel(app: self)
+        self.gps = GpsModel(app: self)
         self.segments = SegmentsModel(app: self)
         self.compare = CompareModel(app: self)
         self.biomech = BiomechModel(app: self)

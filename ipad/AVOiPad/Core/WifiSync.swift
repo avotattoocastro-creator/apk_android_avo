@@ -545,11 +545,24 @@ struct WifiSyncProgress: Equatable {
     var done: Int = 0
     var pending: Int = 0
     var message: String? = nil
+    /// true when the bytes come over Bluetooth (READ_FILE fallback, Core/BleDownload.swift).
+    var viaBle: Bool = false
+    /// Measured transfer speed (bytes/s) of the current training; 0 when unknown.
+    var bytesPerSecond: Double = 0
 
     var percent: Int { total > 0 ? Int(min(100, max(0, bytes * 100 / total))) : 0 }
+    /// «12,3 kB/s» or "" when unknown.
+    var speedText: String { bytesPerSecond > 0 ? AvoFormat.f(bytesPerSecond / 1024.0, 1) + " kB/s" : "" }
+    /// «340 de 2.800 kB».
+    var bytesText: String { total > 0 ? "\(bytes / 1024) de \(total / 1024) kB" : "\(bytes / 1024) kB" }
     /// Simple text for Entrenamientos.
     var label: String {
         switch state {
+        case .downloading where viaBle:
+            var s = "Descargando por Bluetooth (más lento)… \(percent) % · \(bytesText)"
+            if !speedText.isEmpty { s += " · " + speedText }
+            if let m = message, !m.isEmpty { s += " · " + m }
+            return s
         case .downloading: return "Descargando · \(percent) %"
         case .idle, .cleanup: return ""
         default: return message ?? state.texto
@@ -563,6 +576,9 @@ struct WifiSyncReport: Equatable {
     var failed: [String: String]
     var fallbackBle: [String]
     var skipped: Bool = false
+    /// Wi-Fi could not be used at all (firmware without it, blocked by WifiBootGuard, refused for good or the iPad did not
+    /// join): the caller downloads over Bluetooth instead (also for «Descargar todo», where fallbackBle has no ids yet).
+    var wifiUnavailable: Bool = false
 }
 
 /// IDLE → DISCOVERING → WIFI_STARTING → CONNECTING → DOWNLOADING → VERIFYING → COMPLETED → CLEANUP (→ IDLE) with WAITING
@@ -703,7 +719,7 @@ final class WifiSyncCoordinator {
             creds = c
         case .unsupported:
             log("wifi: firmware sin Wi-Fi → BLE")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
         case .refused(let reason, let retryLater):
             log("wifi: rechazado (\(reason))")
             set(.waiting, msg: "Pendiente de conexión")
@@ -711,13 +727,13 @@ final class WifiSyncCoordinator {
                 for id in ids { pass.failed[id] = reason }
                 return WifiSyncReport(verified: [], failed: pass.failed, fallbackBle: [])
             }
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
         }
         pass.started = true
         set(.connecting, pending: ids.count)
         guard let link = await connector.connect(creds) else {
             log("wifi: el iPad no conectó con la red del reloj")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
         }
         pass.link = link
         var pending: [(String, String?)]
@@ -840,6 +856,12 @@ final class WifiBootGuard {
     func clearAttempt() {
         d.removeObject(forKey: "attempt_fw")
         d.removeObject(forKey: "attempt_boot")
+    }
+    /// «Volver a intentar el Wi-Fi»: forgets the block and the pending attempt (the user says the watch did NOT reboot).
+    /// If it really reboots again, the next connection blocks Wi-Fi again by itself.
+    func reset() {
+        d.removeObject(forKey: "blocked_fw")
+        clearAttempt()
     }
     var paused: Bool {
         get { d.bool(forKey: "paused") }

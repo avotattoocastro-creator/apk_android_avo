@@ -197,7 +197,7 @@ private struct SegmentsCenter: View {
                          readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
                 if let seg = m, seg.t1 > seg.t0 {
                     SyncSignalChart(panel: model.speedPanel, domain: seg.t0...seg.t1, includeZero: true,
-                                    emptyText: "Sin datos GNSS en el tramo", zoomable: false)
+                                    emptyText: "Sin datos de velocidad en el tramo", zoomable: false)
                 } else {
                     AvoNoData(text: "Selecciona un tramo")
                 }

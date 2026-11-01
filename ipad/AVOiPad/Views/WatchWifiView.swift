@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// «Reloj Wi-Fi»: replaces the Windows «Reloj USB» page (iPadOS has no USB serial access). Downloads the trainings of the
-/// chest watch over its own Wi-Fi network, verifies them (SHA-256) and imports them.
+/// chest watch over its own Wi-Fi network (or over Bluetooth when Wi-Fi is not available), verifies them (SHA-256) and
+/// imports them.
 struct WatchWifiView: View {
     @Environment(AppModel.self) private var app
 
@@ -10,7 +11,7 @@ struct WatchWifiView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 AvoPageTitle(title: "Reloj Wi-Fi",
-                             subtitle: "Descarga los entrenamientos del reloj de pecho por su propia red Wi-Fi (sustituye al cable USB de Windows)")
+                             subtitle: "Descarga los entrenamientos del reloj de pecho por su propia red Wi-Fi o, si no es posible, por Bluetooth (sustituye al cable USB de Windows)")
                 ViewThatFits(in: .horizontal) {
                     HStack(alignment: .top, spacing: 14) {
                         WatchWifiConnectCard(w: w).frame(maxWidth: .infinity)
@@ -63,12 +64,26 @@ private struct WatchWifiConnectCard: View {
                     if w.connecting { ProgressView().tint(Avo.red) }
                     Spacer(minLength: 0)
                     if w.connected {
-                        AvoPill(text: w.supportsWifi ? "WI-FI DISPONIBLE" : "SIN WI-FI", color: w.supportsWifi ? Avo.ok : Avo.warn)
+                        AvoPill(text: w.supportsWifi ? "WI-FI DISPONIBLE" : "SOLO BLUETOOTH", color: w.supportsWifi ? Avo.ok : Avo.warn)
                     }
                 }
                 if w.connected && !w.supportsWifi && !w.unsupportedText.isEmpty {
                     Label(w.unsupportedText, systemImage: "exclamationmark.triangle")
                         .font(.footnote).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+                }
+                if w.connected && w.wifiBlocked && !w.supportsWifi {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Button {
+                            w.retryWifi()
+                        } label: {
+                            Label("Volver a intentar el Wi-Fi", systemImage: "wifi.exclamationmark")
+                        }
+                        .buttonStyle(.avoSecondary)
+                        .disabled(w.busy)
+                        .accessibilityIdentifier("wifi.retryWifi")
+                        Text(w.retryWifiNote)
+                            .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    }
                 }
                 ViewThatFits(in: .horizontal) {
                     HStack(spacing: 8) { actionButtons }
@@ -76,12 +91,18 @@ private struct WatchWifiConnectCard: View {
                 }
                 if w.busy {
                     VStack(alignment: .leading, spacing: 6) {
+                        if !w.transport.isEmpty {
+                            AvoPill(text: w.transport == "Bluetooth" ? "POR BLUETOOTH (MÁS LENTO)" : "POR WI-FI",
+                                    color: w.transport == "Bluetooth" ? Avo.warn : Avo.ok)
+                        }
                         if !w.phase.isEmpty {
                             Text(w.phase).font(.footnote.weight(.semibold)).foregroundStyle(Avo.text)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                         if w.overall.state == .downloading && w.overall.total > 0 {
                             ProgressView(value: Double(w.overall.bytes), total: Double(max(1, w.overall.total))).tint(Avo.red)
-                            Text("Entrenamiento \(min(w.overall.done + 1, max(1, w.overall.pending))) de \(max(1, w.overall.pending))")
+                            Text("Entrenamiento \(min(w.overall.done + 1, max(1, w.overall.pending))) de \(max(1, w.overall.pending)) · \(w.overall.percent) % · \(w.overall.bytesText)"
+                                 + (w.overall.speedText.isEmpty ? "" : " · " + w.overall.speedText))
                                 .font(.caption).foregroundStyle(Avo.textDim)
                         } else {
                             ProgressView().tint(Avo.red)
@@ -119,13 +140,14 @@ private struct WatchWifiHowCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 step("1", "El iPad se conecta al reloj por Bluetooth. La primera vez el reloj pide pulsar BOOT para autorizar este iPad.")
                 step("2", "El reloj enciende su propia red Wi-Fi AVO_CHEST_XXXX y el iPad se une a ella. La primera vez iOS pregunta «¿Conectarse a la red Wi-Fi AVO_CHEST_…?»: pulsa «Conectarse». Esa red no tiene Internet; al terminar el iPad vuelve a su Wi-Fi habitual.")
+                step("·", "Si el Wi-Fi no está disponible o falla, se descarga por Bluetooth (más lento, unos kB/s) con la misma comprobación SHA-256.")
                 step("3", "Se descarga cada entrenamiento (se reanuda si se corta), se comprueba su huella SHA-256 con el reloj y se importa. El original del reloj no se borra.")
                 Divider().overlay(Avo.line)
                 Label("El reloj no debe estar grabando (termina la sesión antes).", systemImage: "record.circle")
                     .font(.caption).foregroundStyle(Avo.textDim)
                 Label("Batería del reloj al menos al 15 % (o conectado al cargador).", systemImage: "battery.25")
                     .font(.caption).foregroundStyle(Avo.textDim)
-                Label("Firmware del pecho CHEST 3.7.4 o posterior.", systemImage: "cpu")
+                Label("Wi-Fi: firmware del pecho CHEST 3.7.4 o posterior (si no, Bluetooth).", systemImage: "cpu")
                     .font(.caption).foregroundStyle(Avo.textDim)
                 Label("Mantén la app abierta y el iPad cerca del reloj mientras descarga.", systemImage: "ipad")
                     .font(.caption).foregroundStyle(Avo.textDim)

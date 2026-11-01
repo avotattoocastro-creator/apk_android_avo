@@ -94,6 +94,7 @@ extension AppModel {
         case .tides: environment?.pageShown()
         case .reports: reports?.pageShown()
         case .watchWifi: watchWifi?.pageShown()
+        case .gps: gps?.pageShown()
         case .home, .sessions, .analysis, .server, .engine: break
         }
     }
@@ -197,6 +198,7 @@ extension AppModel {
     func notifySessionChanged() {
         charts?.sessionChanged()
         map?.sessionChanged()
+        gps?.sessionChanged()
         segments?.sessionChanged()
         compare?.sessionChanged()
         biomech?.sessionChanged()
@@ -744,7 +746,6 @@ extension AppModel {
     var sensorStatusRows: [ShellRow] {
         guard let s = selected else { return [] }
         return [
-            ShellRow(key: "GNSS/RTK chaleco", value: "\(s.session.gnssSamples) épocas · \(s.fixText) FIX"),
             ShellRow(key: "Cincha IMU", value: s.girthText),
             ShellRow(key: "Marcadores", value: "\(s.session.markers.count)"),
             ShellRow(key: "Integridad", value: s.integrity),

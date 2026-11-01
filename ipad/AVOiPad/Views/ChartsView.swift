@@ -2,40 +2,39 @@ import SwiftUI
 import UIKit
 import Charts
 
-// MARK: - Charts page (Windows Views/ChartsView.xaml)
+// MARK: - Charts page (Windows Views/ChartsView.xaml, iPad layout requested by the trainer)
 
-/// Synchronised scientific charts. All charts share the x window, the cursor and the selected range with the map.
-/// Touch: tap/drag = cursor · hold then drag (or «Seleccionar rango») = range · pinch = zoom.
+/// Synchronised scientific charts, full width and stacked in a vertical scroll. All charts share the x window, the cursor
+/// and the selected range with the map. Order: speed · acceleration · girth lateral deviations · girth tilt/anomalies ·
+/// «Más gráficas» · «Mostrar datos». No GNSS quality/altitude/hAcc/satellites here (GPS page).
+/// Touch: tap/drag horizontally = cursor · hold then drag (or «Seleccionar rango») = range · pinch = zoom · vertical
+/// swipe = scroll.
 struct ChartsView: View {
     @Environment(AppModel.self) private var app
 
     var body: some View {
         let charts: ChartsModel = app.charts
-        GeometryReader { geo in
-            let wide: Bool = geo.size.width >= 900
-            VStack(alignment: .leading, spacing: 10) {
-                AvoPageTitle(title: "Gráficas",
-                             subtitle: app.selected.map { $0.summary } ?? "Sin entrenamiento seleccionado · importa un archivo .avo o .avr")
-                if app.selected == nil {
-                    AvoCard { AvoNoData(text: "Selecciona un entrenamiento para ver las gráficas") }
-                    Spacer(minLength: 0)
-                } else if wide {
-                    HStack(alignment: .top, spacing: 12) {
-                        ChartsColumn(charts: charts)
-                        ScrollView { ChartsSidePanel(charts: charts) }
-                            .frame(width: 300)
-                    }
-                } else {
-                    VStack(spacing: 10) {
-                        ChartsColumn(charts: charts)
-                            .frame(maxHeight: .infinity)
-                        ScrollView { ChartsSidePanel(charts: charts) }
-                            .frame(height: max(220, geo.size.height * 0.34))
-                    }
+        VStack(alignment: .leading, spacing: 10) {
+            AvoPageTitle(title: "Gráficas",
+                         subtitle: app.selected.map { $0.summary } ?? "Sin entrenamiento seleccionado · importa un archivo .avo o .avr")
+            if app.selected == nil {
+                AvoCard { AvoNoData(text: "Selecciona un entrenamiento para ver las gráficas") }
+                Spacer(minLength: 0)
+            } else {
+                ChartsToolbar(charts: charts)
+                if app.hasRange && !charts.rangeStats.isEmpty {
+                    ChartsRangeStrip(rows: charts.rangeStats)
                 }
+                ScrollView(.vertical) {
+                    ChartsStack(charts: charts)
+                        .padding(.bottom, 24)
+                }
+                // while «Seleccionar rango» is on, a drag on a chart must select, never scroll
+                .scrollDisabled(charts.rangeMode)
             }
-            .padding(16)
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
         .background(ChartsRangeWatcher())
         .onAppear { app.charts.pageShown() }
@@ -61,181 +60,81 @@ private struct ChartsRangeWatcher: View {
     }
 }
 
-private struct ChartsColumn: View {
-    @Environment(AppModel.self) private var app
-    let charts: ChartsModel
-
-    var body: some View {
-        let d: ClosedRange<Double> = charts.domain
-        VStack(spacing: 8) {
-            ChartsToolbar(charts: charts)
-            if charts.chartSpeed {
-                SyncChartBox(title: "Velocidad (km/h)",
-                             legend: [SyncLegend("Filtrada", Avo.red), SyncLegend("Reportada", Avo.blue), SyncLegend("Derivada", Avo.silver),
-                                      SyncLegend("±1σ", Avo.red.opacity(0.35)), SyncLegend("Calidad RTK (banda)", Avo.ok)],
-                             readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
-                    SyncSignalChart(panel: charts.panel(.speed), domain: d, bands: charts.qualityBands, includeZero: true)
-                }
-                .frame(minHeight: 150, maxHeight: .infinity)
-                .layoutPriority(1)
-            }
-            if charts.chartAccel {
-                SyncChartBox(title: "Aceleración (m/s²)",
-                             legend: [SyncLegend("Longitudinal", Avo.warn), SyncLegend("Lateral", Avo.cyan)],
-                             readout: { (a: AppModel) -> String in a.cursorAccel + " m/s²" }) {
-                    SyncSignalChart(panel: charts.panel(.accel), domain: d, includeZero: true, emptyText: "Sin aceleración validada")
-                }
-                .frame(minHeight: 110, maxHeight: .infinity)
-            }
-            if charts.chartImu && charts.hasImuRaw {
-                SyncChartBox(title: charts.imuChartHeader,
-                             legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)]) {
-                    SyncSignalChart(panel: charts.panel(.imu), domain: d, bands: charts.gaitBands, includeZero: false,
-                                    emptyText: "Sin datos de cincha en esta sesión")
-                }
-                .frame(minHeight: 110, maxHeight: .infinity)
-            }
-            if charts.chartFused && charts.hasFused {
-                HStack(spacing: 8) {
-                    SyncChartBox(title: "Cincha · aceleración sin gravedad (m/s², ejes del mundo)",
-                                 legend: [SyncLegend("Vertical", Avo.red), SyncLegend("Horizontal", Avo.cyan)]) {
-                        SyncSignalChart(panel: charts.panel(.fusedAccel), domain: d, bands: charts.gaitBands, includeZero: true)
-                    }
-                    SyncChartBox(title: "Cincha · orientación (°)",
-                                 legend: [SyncLegend("Balanceo", Avo.warn), SyncLegend("Cabeceo", ChartsModel.violet)]) {
-                        SyncSignalChart(panel: charts.panel(.orientation), domain: d, includeZero: false)
-                    }
-                }
-                .frame(minHeight: 110, maxHeight: .infinity)
-            }
-            let showCad: Bool = charts.chartCadence && charts.hasCadence
-            let showAlt: Bool = charts.chartAltitude && charts.hasAltitude
-            if showCad || showAlt {
-                HStack(spacing: 8) {
-                    if showCad {
-                        SyncChartBox(title: "Cadencia (motor AVO, ciclos/min)",
-                                     legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)],
-                                     readout: { (a: AppModel) -> String in a.cursorCadence }) {
-                            SyncSignalChart(panel: charts.panel(.cadence), domain: d, bands: charts.gaitBands, includeZero: false,
-                                            emptyText: "El motor no ha encontrado ciclos de marcha")
-                        }
-                    }
-                    if showAlt {
-                        SyncChartBox(title: "Altitud (m)", legend: [SyncLegend("GNSS (nivel medio del mar)", Avo.ok)],
-                                     readout: { (a: AppModel) -> String in a.cursorAltitude + " m" }) {
-                            SyncSignalChart(panel: charts.panel(.altitude), domain: d, includeZero: false)
-                        }
-                    }
-                }
-                .frame(minHeight: 100, maxHeight: .infinity)
-            }
-            if charts.chartPrecision {
-                HStack(spacing: 8) {
-                    SyncChartBox(title: "Precisión horizontal hAcc (m)", legend: [SyncLegend("hAcc reportada", ChartsModel.violet)]) {
-                        SyncSignalChart(panel: charts.panel(.precision), domain: d, bands: charts.qualityBands, includeZero: true)
-                    }
-                    SyncChartBox(title: "Satélites", legend: [SyncLegend("Satélites usados", Avo.silver)]) {
-                        SyncSignalChart(panel: charts.panel(.satellites), domain: d, includeZero: true)
-                    }
-                }
-                .frame(minHeight: 100, maxHeight: .infinity)
-            }
-        }
-    }
-}
+// MARK: Toolbar (zoom / pan · tramo actions · playback)
 
 private struct ChartsToolbar: View {
-    @Environment(AppModel.self) private var app
-    let charts: ChartsModel
-
-    var body: some View {
-        @Bindable var c = charts
-        HStack(spacing: 8) {
-            Toggle(isOn: $c.rangeMode) {
-                Label("Seleccionar rango", systemImage: "arrow.left.and.right.square")
-            }
-            .toggleStyle(.button)
-            .tint(Avo.red)
-            .accessibilityIdentifier("charts.rangeMode")
-            Divider().frame(height: 22)
-            Button { charts.zoom(1.5) } label: { Image(systemName: "minus.magnifyingglass") }
-                .buttonStyle(.avoSecondary).accessibilityLabel("Alejar")
-            Button { charts.zoom(1 / 1.5) } label: { Image(systemName: "plus.magnifyingglass") }
-                .buttonStyle(.avoSecondary).accessibilityLabel("Acercar")
-            Button { charts.pan(-0.4) } label: { Image(systemName: "chevron.left") }
-                .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la izquierda")
-            Button { charts.pan(0.4) } label: { Image(systemName: "chevron.right") }
-                .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la derecha")
-            Button("Restablecer zoom") { charts.resetZoom() }
-                .buttonStyle(.avoSecondary).disabled(!charts.isZoomed)
-                .accessibilityIdentifier("charts.resetZoom")
-            if charts.building { ProgressView().controlSize(.small) }
-            Spacer(minLength: 8)
-            SyncPlaybackBar(compact: true)
-        }
-    }
-}
-
-private struct ChartsSidePanel: View {
     @Environment(AppModel.self) private var app
     let charts: ChartsModel
     @State private var csvURL: URL? = nil
     @State private var exporting: Bool = false
 
     var body: some View {
+        // one row when it fits (iPad Pro 13 landscape), otherwise view controls and tramo actions on two rows
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 8) {
+                viewControls
+                Spacer(minLength: 12)
+                rangeActions
+                Divider().frame(height: 22)
+                SyncPlaybackBar(compact: true)
+            }
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 8) {
+                    viewControls
+                    Spacer(minLength: 8)
+                    SyncPlaybackBar(compact: true)
+                }
+                HStack(spacing: 8) {
+                    Spacer(minLength: 0)
+                    rangeActions
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var viewControls: some View {
         @Bindable var c = charts
-        VStack(alignment: .leading, spacing: 10) {
-            AvoCard(title: "Selección de tramo") {
-                if !app.hasRange {
-                    Text("Mantén pulsado y arrastra en una gráfica (o activa «Seleccionar rango» y arrastra) para seleccionar un intervalo.")
-                        .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-                }
-                SyncKeyValueRows(rows: charts.rangeStats)
-                SyncFlowButtons {
-                    Button("Guardar como tramo") { app.segments.addFromRange() }
-                        .buttonStyle(.avoPrimary).disabled(!app.hasRange)
-                    Button("Quitar selección") { charts.clearRange() }
-                        .buttonStyle(.avoSecondary).disabled(!app.hasRange)
-                    Button(exporting ? "Preparando…" : "Exportar CSV") { exportCsv() }
-                        .buttonStyle(.avoSecondary).disabled(exporting)
-                }
-                if let url = csvURL {
-                    ShareLink(item: url) {
-                        Label("Compartir \(url.lastPathComponent)", systemImage: "square.and.arrow.up")
-                            .font(.caption)
-                    }
-                }
+        Toggle(isOn: $c.rangeMode) {
+            Label("Seleccionar rango", systemImage: "arrow.left.and.right.square")
+        }
+        .toggleStyle(.button)
+        .tint(Avo.red)
+        .fixedSize()
+        .accessibilityIdentifier("charts.rangeMode")
+        Divider().frame(height: 22)
+        Button { charts.zoom(1.5) } label: { Image(systemName: "minus.magnifyingglass") }
+            .buttonStyle(.avoSecondary).accessibilityLabel("Alejar")
+        Button { charts.zoom(1 / 1.5) } label: { Image(systemName: "plus.magnifyingglass") }
+            .buttonStyle(.avoSecondary).accessibilityLabel("Acercar")
+        Button { charts.pan(-0.4) } label: { Image(systemName: "chevron.left") }
+            .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la izquierda")
+        Button { charts.pan(0.4) } label: { Image(systemName: "chevron.right") }
+            .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la derecha")
+        Button { charts.resetZoom() } label: { Image(systemName: "arrow.up.left.and.down.right.magnifyingglass") }
+            .buttonStyle(.avoSecondary).disabled(!charts.isZoomed)
+            .accessibilityLabel("Restablecer zoom")
+            .accessibilityIdentifier("charts.resetZoom")
+        if charts.building { ProgressView().controlSize(.small) }
+    }
+
+    @ViewBuilder
+    private var rangeActions: some View {
+        Button("Guardar como tramo") { app.segments.addFromRange() }
+            .buttonStyle(.avoPrimary).disabled(!app.hasRange).fixedSize()
+            .accessibilityIdentifier("charts.saveSegment")
+        Button("Quitar selección") { charts.clearRange() }
+            .buttonStyle(.avoSecondary).disabled(!app.hasRange).fixedSize()
+            .accessibilityIdentifier("charts.clearRange")
+        Button(exporting ? "Preparando…" : "Exportar CSV") { exportCsv() }
+            .buttonStyle(.avoSecondary).disabled(exporting).fixedSize()
+            .accessibilityIdentifier("charts.exportCsv")
+        if let url = csvURL {
+            ShareLink(item: url) {
+                Image(systemName: "square.and.arrow.up")
             }
-            AvoCard(title: "Mostrar datos") {
-                VStack(alignment: .leading, spacing: 6) {
-                    Toggle("Velocidad", isOn: $c.chartSpeed)
-                    Toggle("Aceleración", isOn: $c.chartAccel)
-                    Toggle(charts.hasImuRaw ? "IMU cincha" : "IMU cincha (sin datos)", isOn: $c.chartImu).disabled(!charts.hasImuRaw)
-                    Toggle("Movimiento de la cincha (sin gravedad y orientación)", isOn: $c.chartFused).disabled(!charts.hasFused)
-                    Toggle(charts.hasCadence ? "Cadencia (motor)" : "Cadencia (motor, sin datos)", isOn: $c.chartCadence).disabled(!charts.hasCadence)
-                    Toggle(charts.hasAltitude ? "Altitud" : "Altitud (sin datos)", isOn: $c.chartAltitude).disabled(!charts.hasAltitude)
-                    Toggle("Precisión GNSS", isOn: $c.chartPrecision)
-                    Divider().overlay(Avo.line)
-                    Text("VELOCIDAD").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
-                    Toggle("Filtrada (Kalman + RTS)", isOn: $c.showSpeedFiltered)
-                    Toggle("Banda ±1σ de la filtrada", isOn: $c.showSigma).disabled(!charts.showSpeedFiltered)
-                    Toggle("Reportada por el receptor", isOn: $c.showSpeedReported)
-                    Toggle("Derivada de posiciones", isOn: $c.showSpeedDerived)
-                    Toggle("Aceleración lateral", isOn: $c.showLateral)
-                    Button("Ver todo (restablecer zoom)") { charts.resetZoom() }
-                        .buttonStyle(.avoSecondary).padding(.top, 4)
-                }
-                .font(.callout)
-                .tint(Avo.red)
-            }
-            AvoCard(title: "Filtrado y unidades") {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(charts.filterDescription)
-                    Text("La señal original se conserva: la velocidad reportada y la derivada de posiciones se pueden mostrar sin filtrar. Las aceleraciones solo se muestran con σ ≤ 0,8 m/s², solución ≥ DGNSS y sin cortes.")
-                    Text(charts.imuScaleNote)
-                }
-                .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityLabel("Compartir \(url.lastPathComponent)")
         }
     }
 
@@ -261,6 +160,291 @@ private struct ChartsSidePanel: View {
                     app.show("Exportar CSV", e.localizedDescription, error: true)
                 }
             }
+        }
+    }
+}
+
+/// Statistics of the selected range in one horizontal strip (only while a range exists).
+private struct ChartsRangeStrip: View {
+    let rows: [SyncStatRow]
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 14) {
+                Text("SELECCIÓN").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.red)
+                ForEach(rows) { (r: SyncStatRow) in
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(r.key).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                        Text(r.value).font(.caption.monospacedDigit().weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                    }
+                }
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+        }
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+    }
+}
+
+// MARK: Charts (full width, stacked)
+
+private enum ChartsHeights {
+    static let speed: CGFloat = 300
+    static let main: CGFloat = 220
+    /// IMU charts: plot + caption + event list.
+    static let imu: CGFloat = 300
+    static let more: CGFloat = 210
+    static let placeholder: CGFloat = 96
+}
+
+private struct ChartsStack: View {
+    @Environment(AppModel.self) private var app
+    let charts: ChartsModel
+
+    var body: some View {
+        let d: ClosedRange<Double> = charts.domain
+        let empty: String = charts.building ? "Calculando…" : "Sin datos"
+        LazyVStack(alignment: .leading, spacing: 10) {
+            // 1. speed (no RTK quality strip on this page)
+            if charts.chartSpeed {
+                SyncChartBox(title: "Velocidad (km/h)",
+                             legend: [SyncLegend("Filtrada", Avo.red), SyncLegend("Reportada", Avo.blue), SyncLegend("Derivada", Avo.silver),
+                                      SyncLegend("±1σ", Avo.red.opacity(0.35))],
+                             readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
+                    SyncSignalChart(panel: charts.panel(.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true)
+                }
+                .frame(height: ChartsHeights.speed)
+            }
+            // 2. acceleration
+            if charts.chartAccel {
+                SyncChartBox(title: "Aceleración (m/s²)",
+                             legend: [SyncLegend("Longitudinal (validada)", Avo.warn), SyncLegend("Lateral", Avo.cyan)],
+                             readout: { (a: AppModel) -> String in a.cursorAccel + " m/s²" }) {
+                    SyncSignalChart(panel: charts.panel(.accel), domain: d, includeZero: true,
+                                    emptyText: charts.building ? "Calculando…" : "Sin aceleración validada", scrollFriendly: true)
+                }
+                .frame(height: ChartsHeights.main)
+            }
+            // 3. girth lateral deviations
+            if charts.chartLateral {
+                if charts.hasGirthImu {
+                    SyncChartBox(title: "IMU cincha → Desvíos laterales (m/s²)",
+                                 legend: [SyncLegend("Lateral (izquierda +)", ChartsImuAnalysis.lateralColor),
+                                          SyncLegend("Umbral", ChartsImuAnalysis.lateralColor.opacity(0.3)),
+                                          SyncLegend("Desvío brusco", ChartsImuAnalysis.markerColor)],
+                                 readout: { (a: AppModel) -> String in a.charts.lateralReadout(a.cursorTime) }) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            SyncSignalChart(panel: charts.panel(.lateral), domain: d, bands: charts.gaitBands, includeZero: true,
+                                            emptyText: empty, scrollFriendly: true)
+                            ChartsCaption(text: "Aceleración lateral de la cincha respecto a la dirección de avance; picos = desvíos bruscos (espantadas). Banda = mediana ± máx(5·MAD, 2 m/s²) en 20 s. " + charts.imuHeadingNote + sensorText)
+                            ChartsEventList(events: charts.lateralEvents, noun: "desvíos",
+                                            emptyText: charts.building ? "Calculando…" : "Sin desvíos por encima del umbral")
+                        }
+                    }
+                    .frame(height: ChartsHeights.imu)
+                } else {
+                    ChartsNoGirth(title: "IMU cincha → Desvíos laterales")
+                }
+            }
+            // 4. girth tilt / anomalies
+            if charts.chartTilt {
+                if charts.hasGirthImu {
+                    SyncChartBox(title: "IMU cincha → Inclinaciones / anomalías (°)",
+                                 legend: [SyncLegend("Balanceo", ChartsImuAnalysis.rollColor), SyncLegend("Cabeceo", ChartsImuAnalysis.pitchColor),
+                                          SyncLegend("Anomalía", ChartsImuAnalysis.markerColor), SyncLegend("Salto vertical", Color(hex: 0xFF8A3D))],
+                                 readout: { (a: AppModel) -> String in a.charts.tiltReadout(a.cursorTime) }) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            SyncSignalChart(panel: charts.panel(.tilt), domain: d, bands: charts.gaitBands, includeZero: false,
+                                            emptyText: empty, scrollFriendly: true)
+                            ChartsCaption(text: "Balanceo (inclinación lateral) y cabeceo de la cincha. Puntos = saltos anómalos: ángulo fuera de mediana ± máx(5·MAD, 5°) o aceleración vertical fuera de mediana ± máx(6·MAD, 4 m/s²), ventana móvil de 20 s." + sensorText)
+                            ChartsEventList(events: charts.tiltEvents, noun: "anomalías",
+                                            emptyText: charts.building ? "Calculando…" : "Sin anomalías por encima del umbral")
+                        }
+                    }
+                    .frame(height: ChartsHeights.imu)
+                } else {
+                    ChartsNoGirth(title: "IMU cincha → Inclinaciones / anomalías")
+                }
+            }
+            // 5. more charts
+            ChartsMoreCharts(charts: charts, domain: d)
+            // data toggles at the end of the scroll
+            ChartsDataToggles(charts: charts)
+            ChartsNotes(charts: charts)
+        }
+    }
+
+    private var sensorText: String {
+        charts.imuSensorName.isEmpty ? "" : " Sensor analizado: " + charts.imuSensorName + "."
+    }
+}
+
+private struct ChartsMoreCharts: View {
+    @Environment(AppModel.self) private var app
+    let charts: ChartsModel
+    let domain: ClosedRange<Double>
+
+    var body: some View {
+        let d: ClosedRange<Double> = domain
+        let empty: String = charts.building ? "Calculando…" : "Sin datos"
+        let showVert: Bool = charts.chartFused && charts.hasGirthImu
+        let showCad: Bool = charts.chartCadence
+        let showRaw: Bool = charts.chartImu && charts.hasImuRaw && !charts.hasFused
+        VStack(alignment: .leading, spacing: 10) {
+        if showVert || showCad || showRaw {
+            Text("MÁS GRÁFICAS").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                .padding(.top, 6)
+        }
+        if showVert {
+            SyncChartBox(title: charts.imuSource == 2 ? "Cincha · vertical y |a| (m/s², aproximación sin fusión)"
+                                                       : "Cincha · vertical y |a| sin gravedad (m/s², ejes del mundo)",
+                         legend: [SyncLegend("Vertical", ChartsImuAnalysis.verticalColor), SyncLegend("|a|", ChartsImuAnalysis.lateralColor)],
+                         readout: { (a: AppModel) -> String in a.charts.verticalReadout(a.cursorTime) }) {
+                SyncSignalChart(panel: charts.panel(.fusedAccel), domain: d, bands: charts.gaitBands, includeZero: true,
+                                emptyText: empty, scrollFriendly: true)
+            }
+            .frame(height: ChartsHeights.more)
+        }
+        if showCad {
+            SyncChartBox(title: "Cadencia (motor AVO, ciclos/min) · banda = aire",
+                         legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)],
+                         readout: { (a: AppModel) -> String in a.cursorCadence }) {
+                SyncSignalChart(panel: charts.panel(.cadence), domain: d, bands: charts.gaitBands, includeZero: false,
+                                emptyText: charts.hasCadence ? "El motor no ha encontrado ciclos de marcha"
+                                                             : "Sin cadencia del motor (requiere datos de cincha y análisis del motor)",
+                                scrollFriendly: true)
+            }
+            .frame(height: charts.hasCadence ? ChartsHeights.more : ChartsHeights.placeholder)
+        }
+        if showRaw {
+            SyncChartBox(title: charts.imuChartHeader,
+                         legend: [SyncLegend("Izquierda", Avo.blue), SyncLegend("Central", Avo.ok), SyncLegend("Derecha", Avo.warn)]) {
+                SyncSignalChart(panel: charts.panel(.imu), domain: d, bands: charts.gaitBands, includeZero: false,
+                                emptyText: "Sin datos de cincha en esta sesión", scrollFriendly: true)
+            }
+            .frame(height: ChartsHeights.more)
+        }
+        }
+    }
+}
+
+/// Compact placeholder of an IMU chart when the session has no girth data (keeps the same layout for every session).
+private struct ChartsNoGirth: View {
+    let title: String
+    var body: some View {
+        SyncChartBox(title: title) {
+            Text("Sin datos de cincha (IMU)")
+                .font(.footnote).foregroundStyle(Avo.textDim)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .frame(height: ChartsHeights.placeholder)
+    }
+}
+
+private struct ChartsCaption: View {
+    let text: String
+    var body: some View {
+        Text(text).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(3).fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+/// Count and list of detected events; tapping one moves the shared cursor there.
+private struct ChartsEventList: View {
+    @Environment(AppModel.self) private var app
+    let events: [ChartsImuEvent]
+    let noun: String
+    let emptyText: String
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Text("\(events.count) \(noun)")
+                .font(.caption.weight(.semibold).monospacedDigit())
+                .foregroundStyle(events.isEmpty ? Avo.textDim : ChartsImuAnalysis.markerColor)
+                .fixedSize()
+            if events.isEmpty {
+                Text(emptyText).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                Spacer(minLength: 0)
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 6) {
+                        ForEach(events) { (e: ChartsImuEvent) in
+                            Button {
+                                app.charts.focus(e.t)
+                            } label: {
+                                Text(e.text)
+                                    .font(.caption2.monospacedDigit())
+                                    .foregroundStyle(Avo.text)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(Avo.surface2, in: Capsule())
+                                    .overlay(Capsule().stroke(ChartsImuAnalysis.markerColor.opacity(0.5), lineWidth: 1))
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel("Ir a " + e.text)
+                        }
+                    }
+                }
+            }
+        }
+        .frame(height: 26)
+    }
+}
+
+// MARK: Bottom: data toggles and notes
+
+private struct ChartsDataToggles: View {
+    let charts: ChartsModel
+
+    var body: some View {
+        @Bindable var c = charts
+        let cols: [GridItem] = [GridItem(.adaptive(minimum: 250, maximum: 420), spacing: 16, alignment: .leading)]
+        AvoCard(title: "Mostrar datos") {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("GRÁFICAS").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+                LazyVGrid(columns: cols, alignment: .leading, spacing: 8) {
+                    Toggle("Velocidad", isOn: $c.chartSpeed)
+                    Toggle("Aceleración", isOn: $c.chartAccel)
+                    Toggle(charts.hasGirthImu ? "Desvíos laterales (cincha)" : "Desvíos laterales (sin datos)", isOn: $c.chartLateral)
+                    Toggle(charts.hasGirthImu ? "Inclinaciones / anomalías" : "Inclinaciones (sin datos)", isOn: $c.chartTilt)
+                    Toggle(charts.hasGirthImu ? "Vertical y |a| (cincha)" : "Vertical y |a| (sin datos)", isOn: $c.chartFused)
+                        .disabled(!charts.hasGirthImu)
+                    Toggle(charts.hasCadence ? "Cadencia (motor)" : "Cadencia (motor, sin datos)", isOn: $c.chartCadence)
+                    Toggle(charts.hasImuRaw && !charts.hasFused ? "Canales brutos de la cincha" : "Canales brutos (solo fmt 0)",
+                           isOn: $c.chartImu)
+                        .disabled(!(charts.hasImuRaw && !charts.hasFused))
+                }
+                Divider().overlay(Avo.line)
+                Text("VELOCIDAD Y ACELERACIÓN").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+                LazyVGrid(columns: cols, alignment: .leading, spacing: 8) {
+                    Toggle("Filtrada (Kalman + RTS)", isOn: $c.showSpeedFiltered)
+                    Toggle("Banda ±1σ de la filtrada", isOn: $c.showSigma).disabled(!charts.showSpeedFiltered)
+                    Toggle("Reportada por el receptor", isOn: $c.showSpeedReported)
+                    Toggle("Derivada de posiciones", isOn: $c.showSpeedDerived)
+                    Toggle("Aceleración lateral", isOn: $c.showLateral)
+                }
+                Button("Ver todo (restablecer zoom)") { charts.resetZoom() }
+                    .buttonStyle(.avoSecondary).padding(.top, 2)
+            }
+            .font(.callout)
+            .tint(Avo.red)
+        }
+    }
+}
+
+private struct ChartsNotes: View {
+    let charts: ChartsModel
+
+    var body: some View {
+        AvoCard(title: "Uso, filtrado y unidades") {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Toca o arrastra en horizontal para mover el cursor; mantén pulsado y arrastra (o activa «Seleccionar rango») para seleccionar un tramo; pellizca para ampliar; desliza en vertical para desplazarte.")
+                Text(charts.filterDescription)
+                Text("La señal original se conserva: la velocidad reportada y la derivada de posiciones se pueden mostrar sin filtrar. Las aceleraciones solo se muestran con σ ≤ 0,8 m/s², solución ≥ DGNSS y sin cortes.")
+                Text("Cincha: aceleración lineal (sin gravedad) girada a ejes del mundo con el cuaternión del BNO085; el lateral se proyecta sobre el rumbo GNSS cuando la velocidad es ≥ 2 m/s y, si no, sobre el eje lateral del sensor. Umbrales robustos (mediana ± k·MAD, ventana móvil de 20 s). Orientación de montaje no verificada en el caballo.")
+                Text(charts.imuScaleNote)
+            }
+            .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
     }
 }
@@ -370,13 +554,17 @@ struct SyncSignalChart: View {
     var includeZero: Bool = true
     var emptyText: String = "Sin datos"
     var zoomable: Bool = true
+    /// The chart lives in a vertical ScrollView: touches are recognised together with the scroll and a mainly vertical
+    /// swipe scrolls instead of moving the cursor.
+    var scrollFriendly: Bool = false
 
     var body: some View {
         if panel.isEmpty {
             AvoNoData(text: emptyText)
                 .frame(maxHeight: .infinity)
         } else {
-            SyncChartPlot(panel: panel, domain: domain, bands: bands, includeZero: includeZero, zoomable: zoomable)
+            SyncChartPlot(panel: panel, domain: domain, bands: bands, includeZero: includeZero, zoomable: zoomable,
+                          scrollFriendly: scrollFriendly)
         }
     }
 }
@@ -388,6 +576,7 @@ struct SyncChartPlot: View {
     let bands: [SyncBand]
     let includeZero: Bool
     let zoomable: Bool
+    var scrollFriendly: Bool = false
 
     static func clockLabel(_ value: AxisValue) -> String {
         guard let d = value.as(Double.self) else { return "" }
@@ -398,7 +587,7 @@ struct SyncChartPlot: View {
         Chart {
             ForEach(panel.sigma) { (s: SyncSigma) in
                 RectangleMark(xStart: .value("t", s.x0), xEnd: .value("t", s.x1), yStart: .value("v", s.lo), yEnd: .value("v", s.hi))
-                    .foregroundStyle(Avo.red.opacity(0.16))
+                    .foregroundStyle(s.color ?? Avo.red.opacity(0.16))
             }
             ForEach(panel.lines) { (line: SyncLine) in
                 ForEach(line.points) { (p: SyncPoint) in
@@ -407,6 +596,11 @@ struct SyncChartPlot: View {
                         .lineStyle(StrokeStyle(lineWidth: line.width, dash: line.dashed ? [4, 3] : []))
                         .interpolationMethod(.linear)
                 }
+            }
+            ForEach(panel.markers) { (m: SyncMarker) in
+                PointMark(x: .value("t", m.x), y: .value("v", m.y))
+                    .foregroundStyle(m.color)
+                    .symbolSize(40)
             }
         }
         .chartXScale(domain: domain)
@@ -431,7 +625,7 @@ struct SyncChartPlot: View {
             SyncBandLayer(proxy: proxy, bands: bands)
         }
         .chartOverlay { (proxy: ChartProxy) in
-            SyncChartCursorLayer(proxy: proxy, domain: domain, zoomable: zoomable)
+            SyncChartCursorLayer(proxy: proxy, domain: domain, zoomable: zoomable, scrollFriendly: scrollFriendly)
         }
         .environment(\.locale, Locale(identifier: "es_ES"))
     }
@@ -466,9 +660,11 @@ struct SyncChartCursorLayer: View {
     let proxy: ChartProxy
     let domain: ClosedRange<Double>
     let zoomable: Bool
+    var scrollFriendly: Bool = false
 
     @State private var dragBegan: Date? = nil
-    /// 0 undecided (tap), 1 cursor, 2 range.
+    @State private var dragStart: CGPoint = .zero
+    /// 0 undecided (tap), 1 cursor, 2 range, 3 vertical swipe (scroll, ignored).
     @State private var dragMode: Int = 0
     @State private var anchorT: Double = .nan
     @State private var pinchBase: ClosedRange<Double>? = nil
@@ -477,10 +673,18 @@ struct SyncChartCursorLayer: View {
         GeometryReader { (geo: GeometryProxy) in
             let plot: CGRect = proxy.plotFrame.map { geo[$0] } ?? CGRect(origin: .zero, size: geo.size)
             ZStack(alignment: .topLeading) {
-                Color.clear
-                    .contentShape(Rectangle())
-                    .gesture(dragGesture(plot))
-                    .simultaneousGesture(pinchGesture(), including: zoomable ? .all : .subviews)
+                if scrollFriendly {
+                    // recognised together with the ScrollView pan so vertical swipes still scroll the page
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .simultaneousGesture(dragGesture(plot))
+                        .simultaneousGesture(pinchGesture(), including: zoomable ? .all : .subviews)
+                } else {
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .gesture(dragGesture(plot))
+                        .simultaneousGesture(pinchGesture(), including: zoomable ? .all : .subviews)
+                }
                 rangeView(plot).allowsHitTesting(false)
                 cursorView(plot).allowsHitTesting(false)
             }
@@ -528,16 +732,29 @@ struct SyncChartCursorLayer: View {
         DragGesture(minimumDistance: 0)
             .onChanged { (v: DragGesture.Value) in
                 let t: Double = timeAt(v.location.x, plot)
+                // a gesture cancelled by the scroll view may never call onEnded: a new start point = a new gesture
+                if dragBegan != nil && v.startLocation != dragStart {
+                    dragBegan = nil
+                    dragMode = 0
+                }
                 if dragBegan == nil {
                     dragBegan = v.time
+                    dragStart = v.startLocation
                     anchorT = timeAt(v.startLocation.x, plot)
                     dragMode = app.charts.rangeMode ? 2 : 0
-                    if dragMode == 0 { app.cursorTime = anchorT }
+                    // inside a scroll view the cursor moves on tap-up / horizontal drag, not on touch-down
+                    if dragMode == 0 && !scrollFriendly { app.cursorTime = anchorT }
                 }
-                if dragMode == 0 && abs(v.translation.width) > 8 {
-                    let held: TimeInterval = v.time.timeIntervalSince(dragBegan ?? v.time)
-                    dragMode = held > 0.45 ? 2 : 1
-                    if dragMode == 2 { UISelectionFeedbackGenerator().selectionChanged() }
+                if dragMode == 0 {
+                    let dx: CGFloat = abs(v.translation.width)
+                    let dy: CGFloat = abs(v.translation.height)
+                    if scrollFriendly && dy > 10 && dy > dx {
+                        dragMode = 3
+                    } else if dx > 8 {
+                        let held: TimeInterval = v.time.timeIntervalSince(dragBegan ?? v.time)
+                        dragMode = held > 0.45 ? 2 : 1
+                        if dragMode == 2 { UISelectionFeedbackGenerator().selectionChanged() }
+                    }
                 }
                 if dragMode == 1 {
                     app.cursorTime = t

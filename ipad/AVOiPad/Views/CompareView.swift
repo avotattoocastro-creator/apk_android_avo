@@ -1,30 +1,35 @@
 import SwiftUI
 import MapKit
 
-/// Training comparison (Windows Views/CompareView.xaml): sessions to compare, overlaid routes, aligned speed and validated
-/// acceleration, comparative statistics and the engine comparison of two sessions.
+/// Training comparison (Windows Views/CompareView.xaml): sessions to compare on the left; on the right ONE vertical scroll
+/// with full-width blocks: overlaid routes, aligned speed, validated acceleration, girth IMU (lateral deviation, tilts),
+/// engine cadence, comparative statistics and the engine comparison of two sessions.
 struct CompareView: View {
     @Environment(AppModel.self) private var app
     @Environment(\.horizontalSizeClass) private var hSize
 
     var body: some View {
         let model: CompareModel = app.compare
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                AvoPageTitle(title: "Comparar entrenamientos",
-                             subtitle: "Series alineadas por tiempo relativo o distancia; sin interpolar a través de pérdidas de señal")
-                if hSize == .compact {
-                    CompareSessionPicker(model: model)
-                    CompareResults(model: model)
-                } else {
-                    HStack(alignment: .top, spacing: 12) {
-                        CompareSessionPicker(model: model).frame(width: 300)
+        VStack(alignment: .leading, spacing: 12) {
+            AvoPageTitle(title: "Comparar entrenamientos",
+                         subtitle: "Series alineadas por tiempo relativo o distancia; sin interpolar a través de huecos sin datos")
+            if hSize == .compact {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 12) {
+                        CompareSessionPicker(model: model)
                         CompareResults(model: model)
                     }
                 }
+            } else {
+                HStack(alignment: .top, spacing: 12) {
+                    ScrollView { CompareSessionPicker(model: model) }
+                        .frame(width: 300)
+                    ScrollView { CompareResults(model: model) }
+                        .frame(maxWidth: .infinity)
+                }
             }
-            .padding(16)
         }
+        .padding(16)
         .background(Avo.bg)
         .onAppear { model.pageShown() }
     }
@@ -77,6 +82,97 @@ private struct CompareSessionPicker: View {
             Button("Actualizar comparación") { model.refresh() }
                 .buttonStyle(.avoSecondary)
                 .frame(maxWidth: .infinity)
+            Text("La comparación con el motor AVO está al final de los resultados.")
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+private struct CompareResults: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    private var empty: String { model.computing ? "Calculando…" : "Marca entrenamientos para compararlos" }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // 1) overlaid routes
+            CompareMap(model: model).frame(height: 320)
+            // 2) speed
+            FeatureChartPanel(title: "Velocidad comparada (km/h)", minHeight: 240) {
+                FeatureLineChart(series: model.speedSeries, axis: model.axis, includeZero: true, emptyText: empty)
+            }
+            // 3) validated acceleration
+            FeatureChartPanel(title: "Aceleración longitudinal validada (m/s²)", minHeight: 220) {
+                FeatureLineChart(series: model.accelSeries, axis: model.axis, includeZero: true, emptyText: empty)
+            }
+            // 4) girth IMU
+            FeatureChartPanel(title: "IMU cincha → Desvíos laterales (m/s²)", minHeight: 220) {
+                VStack(alignment: .leading, spacing: 6) {
+                    FeatureLineChart(series: model.lateralSeries, axis: model.axis, includeZero: true,
+                                     emptyText: model.computing ? "Calculando…" : "Sin datos de cincha (IMU)")
+                        .frame(minHeight: 200)
+                    Text("Aceleración horizontal perpendicular al eje longitudinal del caballo (eje X de la cincha, montaje no verificado), media por época. Positivo = hacia la izquierda.")
+                        .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    imuNotes
+                }
+            }
+            FeatureChartPanel(title: "IMU cincha → Inclinaciones (°)", minHeight: 220) {
+                VStack(alignment: .leading, spacing: 6) {
+                    FeatureLineChart(series: model.tiltSeries, axis: model.axis, includeZero: true,
+                                     emptyText: model.computing ? "Calculando…" : "Sin datos de cincha (IMU)")
+                        .frame(minHeight: 200)
+                    Text("Inclinación lateral (línea continua) y longitudinal (discontinua) de la cincha respecto a la mediana de cada entrenamiento.")
+                        .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    imuNotes
+                }
+            }
+            // 5) engine cadence
+            if !model.cadenceSeries.isEmpty {
+                FeatureChartPanel(title: "Cadencia (motor, ciclos/min)", minHeight: 220) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        FeatureLineChart(series: model.cadenceSeries, axis: model.axis, includeZero: false, emptyText: "Sin datos")
+                            .frame(minHeight: 200)
+                        if !model.cadenceMissing.isEmpty {
+                            Text("Sin cadencia del motor: " + model.cadenceMissing.joined(separator: " · "))
+                                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+            }
+            AvoCard(title: "Estadísticas comparativas") {
+                FeatureTable(headers: ["Entrenamiento", "Fecha", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "Cadencia"],
+                             widths: [190, 120, 85, 75, 85, 85, 90, 80],
+                             rows: model.rows.map { (r: CompareRow) -> [String] in
+                                 [r.label, r.date, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.cadence]
+                             },
+                             colors: model.rows.map { (r: CompareRow) -> Color? in r.color },
+                             emptyText: "Marca entrenamientos para compararlos")
+            }
+            CompareEngineCard(model: model)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private var imuNotes: some View {
+        if !model.imuMissing.isEmpty {
+            Text("Sin datos de cincha (IMU): " + model.imuMissing.joined(separator: " · "))
+                .font(.caption2).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+        }
+        if !model.imuSources.isEmpty {
+            Text(model.imuSources.joined(separator: " · "))
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+/// Engine comparison of the first two marked sessions (button, verdict and differences), at the bottom of the results.
+private struct CompareEngineCard: View {
+    var model: CompareModel
+
+    var body: some View {
+        AvoCard(title: "Comparación con el motor AVO") {
             Button {
                 Task { await model.compareWithEngine() }
             } label: {
@@ -90,60 +186,22 @@ private struct CompareSessionPicker: View {
             .disabled(model.engineBusy)
             .accessibilityIdentifier("compare.engine")
             Text(model.verdict).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            let engineRows: [EngineDiffRow] = model.engineRows.filter { (r: EngineDiffRow) -> Bool in
+                !GpsTerms.mentionsGnss(r.metrica)
+            }
+            if !engineRows.isEmpty {
+                Divider().background(Avo.line)
+                FeatureTable(headers: ["Métrica (motor)", "A", "B", "Diferencia", "Comparable", "Contexto"],
+                             widths: [200, 90, 90, 90, 90, 280],
+                             rows: engineRows.map { (r: EngineDiffRow) -> [String] in
+                                 [r.metrica, r.a, r.b, r.diferencia, r.comparable, r.contexto]
+                             })
+            }
         }
     }
 }
 
-private struct CompareResults: View {
-    @Environment(AppModel.self) private var app
-    @Environment(\.horizontalSizeClass) private var hSize
-    var model: CompareModel
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            if hSize == .compact {
-                CompareMap(model: model).frame(height: 300)
-                speedPanel
-            } else {
-                HStack(alignment: .top, spacing: 12) {
-                    CompareMap(model: model).frame(minHeight: 300)
-                    speedPanel
-                }
-            }
-            FeatureChartPanel(title: "Aceleración longitudinal validada (m/s²)", minHeight: 200) {
-                FeatureLineChart(series: model.accelSeries, axis: model.axis, includeZero: true,
-                                 emptyText: model.computing ? "Calculando…" : "Sin datos")
-            }
-            AvoCard(title: "Estadísticas comparativas") {
-                FeatureTable(headers: ["Entrenamiento", "Fecha", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "RTK FIX", "Cadencia"],
-                             widths: [190, 120, 85, 75, 85, 85, 90, 65, 80],
-                             rows: model.rows.map { (r: CompareRow) -> [String] in
-                                 [r.label, r.date, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.fix, r.cadence]
-                             },
-                             colors: model.rows.map { (r: CompareRow) -> Color? in r.color },
-                             emptyText: "Marca entrenamientos para compararlos")
-                if !model.engineRows.isEmpty {
-                    Divider().background(Avo.line)
-                    FeatureTable(headers: ["Métrica (motor)", "A", "B", "Diferencia", "Comparable", "Contexto"],
-                                 widths: [200, 90, 90, 90, 90, 280],
-                                 rows: model.engineRows.map { (r: EngineDiffRow) -> [String] in
-                                     [r.metrica, r.a, r.b, r.diferencia, r.comparable, r.contexto]
-                                 })
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-    }
-
-    private var speedPanel: some View {
-        FeatureChartPanel(title: "Velocidad comparada (km/h)", minHeight: 260) {
-            FeatureLineChart(series: model.speedSeries, axis: model.axis, includeZero: true,
-                             emptyText: model.computing ? "Calculando…" : "Marca entrenamientos para compararlos")
-        }
-    }
-}
-
-/// «Recorridos superpuestos (chaleco GNSS)»: every compared route in its comparison colour.
+/// «Recorridos superpuestos»: every compared route in its comparison colour.
 private struct CompareMap: View {
     @Environment(AppModel.self) private var app
     var model: CompareModel
@@ -164,7 +222,7 @@ private struct CompareMap: View {
                 }
                 .mapStyle(app.settings.map == .vectorOffline ? MapStyle.standard : MapStyle.imagery)
             }
-            Text("Recorridos superpuestos (chaleco GNSS)")
+            Text("Recorridos superpuestos")
                 .font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
                 .padding(.horizontal, 10).padding(.vertical, 6)
                 .background(Avo.bg.opacity(0.7), in: RoundedRectangle(cornerRadius: 6))

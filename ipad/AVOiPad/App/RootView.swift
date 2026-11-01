@@ -13,7 +13,8 @@ struct RootNavEntry: Identifiable {
 /// page area with the empty state, status bar, alerts and the assignment sheet.
 struct RootView: View {
     @Environment(AppModel.self) private var app
-    @State private var columns: NavigationSplitViewVisibility = .all
+    /// The start screen (Inicio) shows no sidebar; every other page shows it (restored when leaving Inicio).
+    @State private var columns: NavigationSplitViewVisibility = .detailOnly
 
     static let mainEntries: [RootNavEntry] = [
         RootNavEntry(page: .home, title: "Inicio", icon: "house"),
@@ -22,6 +23,7 @@ struct RootView: View {
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
+        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
         RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
@@ -52,6 +54,12 @@ struct RootView: View {
             detail
         }
         .navigationSplitViewStyle(.balanced)
+        .onAppear { columns = app.page == .home ? .detailOnly : .all }
+        .onChange(of: app.page) { (_: Page, newPage: Page) in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                columns = newPage == .home ? .detailOnly : .all
+            }
+        }
         .fileImporter(isPresented: Binding(get: { app.showImporter }, set: { app.showImporter = $0 }),
                       allowedContentTypes: RootView.trainingTypes, allowsMultipleSelection: true) { result in
             switch result {
@@ -103,6 +111,7 @@ struct RootView: View {
         let active: Bool = app.page == e.page
         return Button {
             app.page = e.page
+            if e.page == .home { columns = .detailOnly }
         } label: {
             HStack(spacing: 12) {
                 Image(systemName: e.icon).font(.body).frame(width: 22)
@@ -132,6 +141,24 @@ struct RootView: View {
                 pageView(app.page)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if app.showEmptyState { RootEmptyState() }
+                if app.page == .home && columns == .detailOnly {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
+                    } label: {
+                        Label("Menú", systemImage: "sidebar.left")
+                            .font(.callout.weight(.semibold))
+                            .foregroundStyle(Color(hex: 0xF2F4F7))
+                            .padding(.horizontal, 12).padding(.vertical, 8)
+                            .background(Color(hex: 0x12192A, alpha: 0.72), in: RoundedRectangle(cornerRadius: 8))
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: 0x3A4A60), lineWidth: 1))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.leading, 16)
+                    .padding(.top, 12)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .accessibilityLabel("Mostrar menú")
+                    .accessibilityIdentifier("start.menu")
+                }
                 if app.captureMode && app.captureReady {
                     Text("capture.ready")
                         .font(.system(size: 2))
@@ -164,6 +191,7 @@ struct RootView: View {
         case .riders: StableView(kind: .rider)
         case .analysis: AnalysisView()
         case .map: MapPageView()
+        case .gps: GpsView()
         case .charts: ChartsView()
         case .segments: SegmentsView()
         case .biomech: BiomechView()
@@ -276,7 +304,7 @@ private struct RootStatusBar: View {
             }
             Text(app.status).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).truncationMode(.tail)
             Spacer(minLength: 8)
-            Text("TELEMETRÍA ORIGINAL INTACTA · GNSS = CHALECO DEL JINETE · IMU = CINCHA · Europe/Madrid · v\(AppModel.appVersion)")
+            Text("TELEMETRÍA ORIGINAL INTACTA · IMU = CINCHA · Europe/Madrid · v\(AppModel.appVersion)")
                 .font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.6)
         }
         .padding(.horizontal, 14)

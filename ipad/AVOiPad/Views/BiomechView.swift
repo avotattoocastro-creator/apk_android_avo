@@ -91,7 +91,7 @@ private struct BiomechHeadlines: View {
             GridRow {
                 AvoMetric(label: "Regularidad", value: model.regularityHeadline, caption: "Correlación entre ciclos (0–1)", accent: Avo.ok)
                 AvoMetric(label: "Longitud de tranco", value: model.strideHeadline, unit: "m",
-                          caption: "Velocidad GNSS / cadencia (estimación)")
+                          caption: "Velocidad / cadencia (estimación)")
             }
         }
     }

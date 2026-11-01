@@ -5,7 +5,7 @@ import XCTest
 /// Screenshots go to the folder in the AVO_SHOTS environment variable (TEST_RUNNER_AVO_SHOTS in xcodebuild) and are
 /// also attached to the result bundle.
 final class ScreenshotTests: XCTestCase {
-    static let pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Charts", "Segments", "Biomech",
+    static let pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Gps", "Charts", "Segments", "Biomech",
                         "Compare", "Geofences", "Tides", "Reports", "WatchWifi", "Server", "Engine"]
 
     override func setUp() { continueAfterFailure = true }
@@ -22,10 +22,16 @@ final class ScreenshotTests: XCTestCase {
         _ = app.otherElements["capture.ready"].waitForExistence(timeout: 240) || app.staticTexts["capture.ready"].waitForExistence(timeout: 5)
         for (i, page) in Self.pages.enumerated() {
             let nav = app.buttons["nav.\(page)"]
-            if !nav.waitForExistence(timeout: 10) {
-                // compact width: the sidebar may be hidden behind its toggle
-                let toggle = app.buttons["ToggleSidebar"]
-                if toggle.exists { toggle.tap() }
+            if !nav.waitForExistence(timeout: 4) {
+                // the start screen hides the sidebar: its «Menú» button shows it again
+                let menu = app.buttons["start.menu"]
+                if menu.exists {
+                    menu.tap()
+                } else {
+                    // compact width: the sidebar may be hidden behind its toggle
+                    let toggle = app.buttons["ToggleSidebar"]
+                    if toggle.exists { toggle.tap() }
+                }
             }
             guard nav.waitForExistence(timeout: 5) else { XCTFail("No existe nav.\(page)"); continue }
             nav.tap()

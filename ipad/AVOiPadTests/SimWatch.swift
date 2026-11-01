@@ -1,9 +1,12 @@
 import Foundation
+import CryptoKit
 @testable import AVO_Horse
 
 // Watch doubles for the tests. No hardware involved.
 //  · SimWatch: BLE watch (port of the SimWatch nested in windows/AVO.Windows.SelfTest/WatchTests.cs), same message handling
-//    rules as ble_service.cpp for the messages used here, over the same BLE framing.
+//    rules as ble_service.cpp for the messages used here, over the same BLE framing. Also the BLE training download
+//    (GET_STATUS, LIST_SESSIONS, READ_FILE → FILE_DATA on FILE_TX, FILE_SHA256) as the Android FakeWatch of
+//    core/DownloadProtocolTest.kt (branch fix/chest-v373-readfile), with injectable faults.
 //  · SimWifiWatch: replaces the USB simulator of windows/AVO.Windows.SelfTest/SimWatch.cs (USB is not available on iPad):
 //    CHEST V3.7.4 Wi-Fi semantics (WIFI_SYNC start/stop, Range, If-Match/etag, token, 409 while recording, SHA over the
 //    segments), as the Android FakeWatch of core/wifi/WifiSyncTest.kt.
@@ -59,22 +62,89 @@ final class SimWatch: AvoTransport {
     private let rx = BleReassembler()
     var attPayload: Int { 244 }
 
+    // ---- BLE training download (READ_FILE). Sessions: id → segments (P001, P002…).
+    var bleOrder: [String] = []
+    var bleSessions: [String: [[UInt8]]] = [:]
+    /// Sessions still open on the watch (file state OPEN, recording_now).
+    var bleOpen: Set<String> = []
+    /// Most bytes per FILE_DATA answer (firmware: 2048).
+    var maxRead = 2048
+    var fileReads = 0, shaRequests = 0, statusRequests = 0
+    /// (id, segment, offset) of every READ_FILE received.
+    var readLog: [(String, Int, Int64)] = []
+    /// READ_FILE indexes (0-based, counted in fileReads) whose answer never leaves the watch.
+    var dropReads: Set<Int> = []
+    /// READ_FILE indexes answered with a wrong CRC-32 in the FILE_DATA header.
+    var corruptReads: Set<Int> = []
+    /// After answering this many READ_FILE in total the Bluetooth link drops (once). -1 = never.
+    var disconnectAfterReads = -1
+    /// After this many READ_FILE in total the watch starts recording (once). -1 = never.
+    var recordAfterReads = -1
+    /// false: every write fails like a lost GATT link.
+    var linkUp = true
+    var wrongBleSha = false
+
+    func addBleSession(_ id: String, _ sizes: [Int], seed: UInt64) {
+        var r = WatchTestRandom(seed: seed)
+        if bleSessions[id] == nil { bleOrder.append(id) }
+        bleSessions[id] = sizes.map { r.bytes($0) }
+    }
+
+    func bleSha(_ id: String) -> [UInt8] {
+        var h = SHA256()
+        for s in bleSessions[id] ?? [] { h.update(data: Data(s)) }
+        return Array(h.finalize())
+    }
+
     init(_ blob: [UInt8]) throws {
         self.blob = blob
         self.config = try WatchConfig.decode(blob)
     }
 
     func writeCtrl(_ fragment: [UInt8]) async throws {
+        if !linkUp { throw BleLinkError("Escritura BLE fallida (sin conexión)") }
         if let m = rx.feed(fragment) { handle(m) }
     }
 
-    private func reply(_ m: BleMessage, _ st: BleStatus, _ payload: [UInt8] = []) {
+    private func reply(_ m: BleMessage, _ st: BleStatus, _ payload: [UInt8] = [], channel: UUID = AvoGatt.ctrlTx, type: UInt8? = nil) {
         let cnt = BleFraming.count(payload.count, attPayload), per = attPayload - BleFraming.overhead
         for i in 0..<cnt {
             let off = i * per
             let n = min(per, payload.count - off)
             let part: [UInt8] = n > 0 ? Array(payload[off..<(off + n)]) : []
-            client?.onNotification(AvoGatt.ctrlTx, BleFraming.build(m.type, m.msgId, i, cnt, BleFraming.flagResponse, st.rawValue, part))
+            client?.onNotification(channel, BleFraming.build(type ?? m.type, m.msgId, i, cnt, BleFraming.flagResponse, st.rawValue, part))
+        }
+    }
+
+    /// READ_FILE as storage.cpp op_read + ble_service.cpp: FILE_DATA on FILE_TX, NOT_FOUND after the last segment.
+    private func readFile(_ m: BleMessage, _ r: LeReader) {
+        let id = r.str(24)
+        let seg = r.u16()
+        let off = r.u32()
+        let len = Int(r.u32())
+        let index = fileReads
+        fileReads += 1
+        readLog.append((id, seg, off))
+        let fileData = MsgType.fileData.rawValue
+        if recordAfterReads >= 0 && index >= recordAfterReads { recordAfterReads = -1; recording = true }
+        if recording { reply(m, .stateConflict, [], channel: AvoGatt.fileTx, type: fileData); return }
+        guard let segs = bleSessions[id], seg >= 1, seg <= segs.count else {
+            reply(m, .notFound, [], channel: AvoGatt.fileTx, type: fileData)
+            return
+        }
+        let file = segs[seg - 1]
+        if off > Int64(file.count) { reply(m, .badFormat, [], channel: AvoGatt.fileTx, type: fileData); return }
+        if dropReads.contains(index) { return }
+        let n = min(len, maxRead, file.count - Int(off))
+        let data: [UInt8] = n > 0 ? Array(file[Int(off)..<(Int(off) + n)]) : []
+        var crc = WatchFileChunk.crc(data)
+        if corruptReads.contains(index) { crc ^= 0xFFFF }
+        let chunk = WatchFileChunk(offset: off, fileSize: Int64(file.count), crc32: crc, data: data)
+        reply(m, .ok, chunk.encode(), channel: AvoGatt.fileTx, type: fileData)
+        if disconnectAfterReads >= 0 && fileReads >= disconnectAfterReads {
+            disconnectAfterReads = -1
+            linkUp = false
+            client?.onDisconnected()
         }
     }
 
@@ -165,6 +235,34 @@ final class SimWatch: AvoTransport {
             default:
                 reply(m, .badFormat)
             }
+        case .getStatus:
+            statusRequests += 1
+            // session state (2 = recording), geofence, rec status, sd, free, session id… (only the head matters here)
+            let w = LeWriter().u8(recording ? 2 : 0).u8(0).u8(recording ? 1 : 0).u8(1).u64(1 << 30).str(recording ? "S_REC" : "", 24)
+            w.u8(0).u8(0).u8(80).u16(3900).u8(0).u8(0).u8(1).u8(0).u8(0).u64(0).u8(1).u32(0).u16(0)
+            reply(m, .ok, w.toArray())
+        case .listSessions:
+            let page = r.u16()
+            let per = 10
+            let from = page * per
+            let ids: [String] = from < bleOrder.count ? Array(bleOrder[from..<min(bleOrder.count, from + per)]) : []
+            let w = LeWriter().u16(page).u8(ids.count)
+            for id in ids {
+                let segs = bleSessions[id] ?? []
+                let open = bleOpen.contains(id)
+                WatchSessionEntry(id: id, state: open ? WatchSessionEntry.fileOpen : 2, segments: segs.count,
+                                  totalBytes: segs.reduce(Int64(0)) { $0 + Int64($1.count) }, startRtcMs: 1_760_000_000_000 + Int64(from),
+                                  activeMs: 60_000, recordingNow: open && recording).encode(w)
+            }
+            w.u8(from + per < bleOrder.count ? 1 : 0)
+            reply(m, .ok, w.toArray())
+        case .readFile:
+            readFile(m, r)
+        case .fileSha256:
+            shaRequests += 1
+            let id = r.str(24)
+            guard bleSessions[id] != nil else { reply(m, .notFound); return }
+            reply(m, .ok, wrongBleSha ? [UInt8](repeating: 0, count: 32) : bleSha(id))
         default:
             reply(m, .unknownType)
         }

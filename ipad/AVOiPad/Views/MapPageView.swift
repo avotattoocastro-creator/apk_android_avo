@@ -2,8 +2,8 @@ import SwiftUI
 import UIKit
 import MapKit
 
-/// Map and route (Windows Views/MapView.xaml): layers panel over the map, statistics, legend, segment list, GNSS quality
-/// and selected point on the right, synchronised speed profile and playback at the bottom.
+/// Map and route (Windows Views/MapView.xaml): layers panel over the map, statistics, legend, segment list
+/// and selected point on the right (the GNSS quality is on the «GPS» page), synchronised speed profile and playback at the bottom.
 struct MapPageView: View {
     @Environment(AppModel.self) private var app
     @State private var command: RouteMapCommand = RouteMapCommand()
@@ -77,7 +77,7 @@ struct MapPageView: View {
                     if model.building {
                         ProgressView("Preparando recorrido…").tint(Avo.text)
                     } else {
-                        Text("Sin recorrido GNSS: importa o selecciona un entrenamiento")
+                        Text("Sin recorrido: importa o selecciona un entrenamiento")
                             .font(.callout).foregroundStyle(Color.white)
                     }
                 }
@@ -223,9 +223,6 @@ private struct MapSidePanel: View {
                     .buttonStyle(.avoSecondary)
                     .padding(.top, 4)
             }
-            AvoCard(title: "Calidad GNSS / RTK") {
-                if app.charts.gnssStats.isEmpty { AvoNoData() } else { SyncKeyValueRows(rows: app.charts.gnssStats) }
-            }
             AvoCard(title: "Punto seleccionado") {
                 MapCursorRows()
             }
@@ -252,7 +249,6 @@ private struct MapCursorRows: View {
                 SyncStatRow(key: "Distancia", value: app.cursorDistance + " km"),
                 SyncStatRow(key: "Posición (chaleco)", value: app.cursorPosition),
             ])
-            Text(app.cursorQuality).font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
     }
 }
@@ -282,11 +278,8 @@ struct RouteLegendView: View {
                     Spacer()
                     Text("+2 m/s²").font(.caption2).foregroundStyle(Avo.textDim)
                 }
-                Text("Solo aceleración validada (σ ≤ 0,8 m/s², ≥ DGNSS, sin cortes); el resto en gris.")
+                Text("Solo aceleración validada (incertidumbre ≤ 0,8 m/s², sin cortes); el resto en gris.")
                     .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-            case .gnssQuality:
-                items([("FIX", SpeedScale.solution(.rtkFix)), ("FLOAT", SpeedScale.solution(.rtkFloat)), ("DGNSS", SpeedScale.solution(.dgnss)),
-                       ("Autónomo", SpeedScale.solution(.autonomous)), ("Sin solución", SpeedScale.solution(.none))])
             case .gait:
                 items([("Parado", SpeedScale.gait(0)), ("Paso", SpeedScale.gait(1)), ("Trote", SpeedScale.gait(2)),
                        ("Galope", SpeedScale.gait(3)), ("Sin dato", SpeedScale.gait(-1))])
@@ -298,7 +291,7 @@ struct RouteLegendView: View {
             HStack(spacing: 6) {
                 RoundedRectangle(cornerRadius: 1).stroke(Color(hex: 0xFF3945), style: StrokeStyle(lineWidth: 2, dash: [5, 4]))
                     .frame(width: 22, height: 2)
-                Text("Pérdida de señal GNSS (sin interpolar)").font(.caption2).foregroundStyle(Avo.textDim)
+                Text("Tramo sin posición (sin interpolar)").font(.caption2).foregroundStyle(Avo.textDim)
             }
             Text("Posiciones de la antena del chaleco (jinete), no de un punto del caballo.")
                 .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
@@ -333,7 +326,7 @@ private struct MapProfilePanel: View {
         SyncChartBox(title: "Perfil de velocidad (km/h)", legend: [],
                      readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
             VStack(spacing: 6) {
-                SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: charts.qualityBands, includeZero: true,
+                SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: charts.gaitBands, includeZero: true,
                                 emptyText: "Sin datos")
                 SyncPlaybackBar(compact: false)
             }

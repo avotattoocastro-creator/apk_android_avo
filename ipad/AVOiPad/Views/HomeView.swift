@@ -73,7 +73,7 @@ struct HomeView: View {
                 Text("PERFORMANCE HORSE").font(.system(size: 20, weight: .semibold)).foregroundStyle(Avo.silver).padding(.leading, 2)
                 RoundedRectangle(cornerRadius: 1.5).fill(Avo.red).frame(width: 120, height: 3).padding(.vertical, 14).padding(.leading, 2)
                 Text("Bienvenido a AVO Performance Horse").font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
-                Text("Análisis avanzado del rendimiento ecuestre: GNSS/RTK del chaleco, IMU de la cincha, tramos, comparativas, mareas e informes.")
+                Text("Análisis avanzado del rendimiento ecuestre: velocidad, aires, esfuerzo, cincha, tramos, comparativas, mareas e informes.")
                     .font(.footnote).foregroundStyle(Avo.textDim).padding(.top, 6).fixedSize(horizontal: false, vertical: true)
                 Text("CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO").font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim).padding(.top, 22)
             }
@@ -198,7 +198,7 @@ struct HomeView: View {
                     }
                 }
             }
-            AvoCard(title: "Calidad y disponibilidad de sensores") {
+            AvoCard(title: "Disponibilidad de sensores") {
                 let rows: [ShellRow] = app.sensorStatusRows
                 if rows.isEmpty {
                     AvoNoData()
@@ -237,7 +237,7 @@ struct HomeView: View {
     }
 }
 
-/// One training of the list (Windows DataGrid row: ★, date, horse, rider, place, distance, duration, max speed, FIX,
+/// One training of the list (Windows DataGrid row: ★, date, horse, rider, place, distance, duration, max speed,
 /// girth, origin, Asignar). Tap = active training; «Análisis» opens it.
 private struct HomeSessionRow: View {
     @Environment(AppModel.self) private var app
@@ -262,7 +262,7 @@ private struct HomeSessionRow: View {
                     AvoPill(text: item.kind, color: item.isSynthetic ? Avo.warn : Avo.ok)
                 }
                 Text([item.discipline, item.distanceText, item.durationText, "máx " + item.maxSpeedText,
-                      "RTK FIX " + item.fixText, item.girthText].joined(separator: " · "))
+                      item.girthText].joined(separator: " · "))
                     .font(.caption).foregroundStyle(Avo.textDim).lineLimit(2)
             }
             Spacer(minLength: 6)

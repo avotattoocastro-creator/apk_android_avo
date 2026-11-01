@@ -3,11 +3,11 @@ import UIKit
 import MapKit
 import Observation
 
-/// Colour of the route (Windows Controls/MapControl.cs RouteColorMode, without `Single`, which is only used for comparisons).
+/// Colour of the route (Windows Controls/MapControl.cs RouteColorMode, without `Single`, which is only used for comparisons,
+/// and without the GNSS-quality colouring: the GNSS data live only on the «GPS» page).
 enum RouteColorMode: String, CaseIterable, Identifiable {
     case speed = "Speed"
     case acceleration = "Acceleration"
-    case gnssQuality = "GnssQuality"
     case gait = "Gait"
 
     var id: String { rawValue }
@@ -17,7 +17,6 @@ enum RouteColorMode: String, CaseIterable, Identifiable {
         switch self {
         case .speed: return "Velocidad"
         case .acceleration: return "Aceleración"
-        case .gnssQuality: return "Calidad GNSS"
         case .gait: return "Aire (motor)"
         }
     }
@@ -57,7 +56,6 @@ final class MapModel {
         switch colorMode {
         case .speed: return "Velocidad (km/h)"
         case .acceleration: return "Aceleración longitudinal (m/s²)"
-        case .gnssQuality: return "Calidad GNSS"
         case .gait: return "Aire (motor AVO)"
         }
     }
@@ -248,9 +246,6 @@ final class RouteRenderData {
                 let b: Int = Int(((c + 1) / 2 * binsM1).rounded(.toNearestOrEven))
                 key = 100 + b
                 rgb = SpeedScale.diverging(Double(b) / binsM1 * 2 - 1, 1)
-            case .gnssQuality:
-                key = 200 + tl.solution[i].rawValue
-                rgb = SpeedScale.solution(tl.solution[i])
             case .gait:
                 let code: Int = i < gait.count ? gait[i] : -1
                 key = 300 + code

@@ -44,8 +44,9 @@ struct EngineView: View {
                 if !e.fusionSummary.isEmpty {
                     Text(e.fusionSummary).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
                 }
-                ForEach(0..<e.warnings.count, id: \.self) { (i: Int) in
-                    Text(e.warnings[i]).font(.caption).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+                let warnings: [String] = e.warnings.filter { (w: String) -> Bool in !GpsTerms.mentionsGnss(w) }
+                ForEach(0..<warnings.count, id: \.self) { (i: Int) in
+                    Text(warnings[i]).font(.caption).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
                 }
             } else if let s = app.selected {
                 Text("Motor: \(s.engineState)").font(.caption).foregroundStyle(Avo.textDim)
@@ -65,9 +66,9 @@ struct EngineView: View {
                 ShellTable.Column(title: "Desde", width: 60), ShellTable.Column(title: "Hasta", width: 60),
                 ShellTable.Column(title: "Distancia", width: 75), ShellTable.Column(title: "V. media", width: 80),
                 ShellTable.Column(title: "Cadencia", width: 80), ShellTable.Column(title: "Tranco", width: 65),
-                ShellTable.Column(title: "GNSS", width: 80), ShellTable.Column(title: "IMU", width: 160),
+                ShellTable.Column(title: "IMU", width: 160),
             ], rows: (engine?.segments ?? []).map { (r: EngineSegmentRow) -> [String] in
-                ["\(r.id)", r.aire, r.desde, r.hasta, r.distancia, r.velocidadMedia, r.cadencia, r.tranco, r.calidadGnss, r.calidadImu]
+                ["\(r.id)", r.aire, r.desde, r.hasta, r.distancia, r.velocidadMedia, r.cadencia, r.tranco, r.calidadImu]
             })
         }
     }
@@ -77,7 +78,9 @@ struct EngineView: View {
             ShellTable(columns: [
                 ShellTable.Column(title: "Dominio", width: 110), ShellTable.Column(title: "Nivel", width: 100),
                 ShellTable.Column(title: "Motivos", width: 280),
-            ], rows: (engine?.quality ?? []).map { (r: EngineQualityRow) -> [String] in [r.dominio, r.nivel, r.motivos] })
+            ], rows: (engine?.quality ?? [])
+                .filter { (r: EngineQualityRow) -> Bool in !GpsTerms.mentionsGnss(r.dominio) }
+                .map { (r: EngineQualityRow) -> [String] in [r.dominio, r.nivel, r.motivos] })
         }
     }
 
@@ -99,7 +102,9 @@ struct EngineView: View {
                 ShellTable.Column(title: "Id", width: 60), ShellTable.Column(title: "Tipo", width: 130),
                 ShellTable.Column(title: "Inicio", width: 60), ShellTable.Column(title: "Fin", width: 60),
                 ShellTable.Column(title: "Motivo", width: 240),
-            ], rows: (engine?.events ?? []).map { (r: EngineEventRow) -> [String] in [r.id, r.tipo, r.inicio, r.fin, r.motivo] })
+            ], rows: (engine?.events ?? [])
+                .filter { (r: EngineEventRow) -> Bool in !GpsTerms.mentionsGnss(r.tipo) && !GpsTerms.mentionsGnss(r.motivo) }
+                .map { (r: EngineEventRow) -> [String] in [r.id, r.tipo, r.inicio, r.fin, r.motivo] })
         }
     }
 }

@@ -46,12 +46,13 @@ struct ExportedFile: Identifiable, Equatable {
 final class ReportsModel {
     unowned let app: AppModel
 
-    // sections (Windows defaults: everything except Comparativas)
+    // sections (Windows defaults: everything except Comparativas; iPad: «Datos GPS» also off)
     var general: Bool = true { didSet { schedulePreview() } }
     var horseRider: Bool = true { didSet { schedulePreview() } }
     var date: Bool = true { didSet { schedulePreview() } }
     var map: Bool = true { didSet { schedulePreview() } }
-    var gnss: Bool = true { didSet { schedulePreview() } }
+    /// «Datos GPS» (GNSS/RTK statistics of the vest): off by default, the GPS data have their own page.
+    var gnss: Bool = false { didSet { schedulePreview() } }
     var speed: Bool = true { didSet { schedulePreview() } }
     var charts: Bool = true { didSet { schedulePreview() } }
     var segments: Bool = true { didSet { schedulePreview() } }
@@ -146,7 +147,6 @@ final class ReportsModel {
             rows.add("Duración", s.durationText)
             rows.add("Distancia", s.distanceText)
             rows.add("Vel. máxima", s.maxSpeedText)
-            rows.add("RTK FIX", s.fixText)
         }
         previewRows = rows
     }
