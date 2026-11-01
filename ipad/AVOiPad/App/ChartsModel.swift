@@ -219,7 +219,12 @@ final class ChartsModel {
 
     /// The panel without the lines / envelope / markers of the legend entries switched off in this chart.
     func panel(_ id: SyncPanelId, chart: String, legend: [SyncLegend]) -> SyncPanel {
-        var p: SyncPanel = panel(id)
+        filtered(panel(id), chart: chart, legend: legend)
+    }
+
+    /// Any panel without the series of the legend entries switched off in this chart.
+    func filtered(_ panel: SyncPanel, chart: String, legend: [SyncLegend]) -> SyncPanel {
+        var p: SyncPanel = panel
         let off: [SyncLegend] = legend.filter { isHidden(chart, $0.text) }
         if off.isEmpty { return p }
         for l in off {

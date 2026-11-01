@@ -165,8 +165,47 @@ private struct ChartsToolbar: View {
     }
 }
 
+/// Zoom, pan and range ("tramo") controls of the shared timeline, for pages other than «Gráficas» (Biomecánica).
+struct SyncZoomBar: View {
+    @Environment(AppModel.self) private var app
+    let charts: ChartsModel
+
+    var body: some View {
+        @Bindable var c = charts
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                Toggle(isOn: $c.rangeMode) { Label("Seleccionar tramo", systemImage: "arrow.left.and.right.square") }
+                    .toggleStyle(.button).tint(Avo.red).fixedSize()
+                Button { charts.zoom(1.5) } label: { Image(systemName: "minus.magnifyingglass") }
+                    .buttonStyle(.avoSecondary).accessibilityLabel("Alejar")
+                Button { charts.zoom(1 / 1.5) } label: { Image(systemName: "plus.magnifyingglass") }
+                    .buttonStyle(.avoSecondary).accessibilityLabel("Acercar")
+                Button { charts.pan(-0.4) } label: { Image(systemName: "chevron.left") }
+                    .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la izquierda")
+                Button { charts.pan(0.4) } label: { Image(systemName: "chevron.right") }
+                    .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Desplazar a la derecha")
+                Button { charts.resetZoom() } label: { Image(systemName: "arrow.up.left.and.down.right.magnifyingglass") }
+                    .buttonStyle(.avoSecondary).disabled(!charts.isZoomed).accessibilityLabel("Restablecer zoom")
+                Button {
+                    let t: Double = app.cursorTime
+                    if t.isFinite { charts.setViewport(t - 2, t + 2) }
+                } label: { Label("Ver ±2 s del cursor", systemImage: "scope") }
+                    .buttonStyle(.avoSecondary).disabled(!app.cursorTime.isFinite)
+                    .accessibilityIdentifier("sync.zoomCursor")
+                Divider().frame(height: 22)
+                Button("Guardar como tramo") { app.segments.addFromRange() }
+                    .buttonStyle(.avoPrimary).disabled(!app.hasRange).fixedSize()
+                Button("Quitar selección") { charts.clearRange() }
+                    .buttonStyle(.avoSecondary).disabled(!app.hasRange).fixedSize()
+                SyncPlaybackBar(compact: true)
+            }
+            .padding(.vertical, 1)
+        }
+    }
+}
+
 /// Phase filter (Completo · Calentamiento · Trabajo · Enfriamiento) and the overview bar to scroll through the session.
-private struct ChartsNavigator: View {
+struct ChartsNavigator: View {
     @Environment(AppModel.self) private var app
     let charts: ChartsModel
 

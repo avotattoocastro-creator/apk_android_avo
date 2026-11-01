@@ -35,12 +35,6 @@ struct BiomechView: View {
                 }
                 BiomechChannelsCard(model: model)
                 BiomechWindowCharts(model: model)
-                FeatureChartPanel(title: "Cadencia por sensor (ciclos/min)", readout: app.cursorCadence, minHeight: 190) {
-                    FeatureLineChart(series: model.cadenceSeries, axis: .clock, xMin: app.chartXMin, xMax: app.chartXMax,
-                                     cursorX: app.cursorTime, rangeStart: app.rangeStart, rangeEnd: app.rangeEnd,
-                                     bands: model.gaitBands, emptyText: "Sin cadencia: requiere cincha y motor",
-                                     onTapX: { (x: Double) in app.cursorTime = x })
-                }
                 AvoCard(title: "Simetría exploratoria por sensor y aire (motor AVO)") {
                     FeatureTable(headers: ["IMU", "Aire", "Ventanas", "Trancos", "ln(A1/A2)", "Reproducible", "Asim. temporal", "Reproducible", "Similitud mitades"],
                                  widths: [50, 90, 70, 70, 80, 90, 100, 90, 120],
@@ -54,9 +48,11 @@ struct BiomechView: View {
             }
             .padding(16)
         }
+        // while «Seleccionar tramo» is on, a drag on a chart selects instead of scrolling
+        .scrollDisabled(app.charts.rangeMode)
         .background(Avo.bg)
-        .onAppear { model.pageShown() }
-        .onChange(of: app.cursorTime) { model.cursorChanged() }
+        // the girth charts share the timeline window of «Gráficas» (its full extent comes from the charts model)
+        .onAppear { model.pageShown(); app.charts.pageShown() }
     }
 
     /// DataGrid StringFormat on a double? (empty when null).
@@ -145,16 +141,24 @@ private struct BiomechChannelsCard: View {
     }
 }
 
-/// IMU window ±2 s around the cursor: |a| / axes / gyro and the fused girth movement (fmt 1).
+/// Girth charts on the SHARED timeline of the training: same cursor, zoom, range («tramo»), phase filter and scroll bar
+/// as «Análisis» and «Gráficas». Legends switch every line on/off. «Ver ±2 s del cursor» gives the detailed view.
 private struct BiomechWindowCharts: View {
+    @Environment(AppModel.self) private var app
     @Environment(\.horizontalSizeClass) private var hSize
     var model: BiomechModel
 
     var body: some View {
         @Bindable var m = model
+        let charts: ChartsModel = app.charts
+        let d: ClosedRange<Double> = charts.domain
+        let bands: [SyncBand] = app.corrections.bands(app.selected)
+        let key: String = "\(d.lowerBound)|\(d.upperBound)|\(model.windowSignal.rawValue)|\(model.windowSensor)|\(app.selected?.id ?? "")|\(app.selected?.engine == nil)"
         VStack(alignment: .leading, spacing: 12) {
-            FeatureChartPanel(title: title, minHeight: 190) {
-                VStack(alignment: .leading, spacing: 8) {
+            SyncZoomBar(charts: charts)
+            ChartsNavigator(charts: charts)
+            SyncChartBox(title: title, legend: model.legendMain, chartId: "bio.main.\(model.windowSignal.rawValue)") {
+                VStack(alignment: .leading, spacing: 6) {
                     HStack {
                         Picker("Señal", selection: $m.windowSignal) {
                             ForEach(BiomechWindowSignal.allCases) { (s: BiomechWindowSignal) in Text(s.rawValue).tag(s) }
@@ -169,43 +173,56 @@ private struct BiomechWindowCharts: View {
                         }
                         Spacer()
                     }
-                    FeatureLineChart(series: model.imuWindowSeries, axis: .number, xMin: model.imuWindowMin, xMax: model.imuWindowMax,
-                                     emptyText: "Sin datos de cincha")
-                    if !model.windowCaption.isEmpty {
-                        Text(model.windowCaption).font(.caption2).foregroundStyle(Avo.textDim)
-                    }
+                    SyncSignalChart(panel: charts.filtered(model.panelMain, chart: "bio.main.\(model.windowSignal.rawValue)", legend: model.legendMain),
+                                    domain: d, bands: bands, includeZero: false, emptyText: "Sin datos de cincha", scrollFriendly: true)
                 }
             }
+            .frame(height: 300)
             if model.hasFused {
                 if hSize == .compact {
-                    fusedAccel
-                    orientation
+                    fusedAccel(d, bands).frame(height: 240)
+                    orientation(d, bands).frame(height: 240)
                 } else {
-                    HStack(alignment: .top, spacing: 12) { fusedAccel; orientation }
+                    HStack(alignment: .top, spacing: 12) {
+                        fusedAccel(d, bands)
+                        orientation(d, bands)
+                    }
+                    .frame(height: 260)
                 }
             }
+            SyncChartBox(title: "Cadencia por sensor (ciclos/min)", legend: model.legendCadence,
+                         readout: { (a: AppModel) -> String in a.cursorCadence }, chartId: "bio.cadence") {
+                SyncSignalChart(panel: charts.filtered(model.panelCadence, chart: "bio.cadence", legend: model.legendCadence),
+                                domain: d, bands: bands, includeZero: false, emptyText: "Sin cadencia: requiere cincha y motor", scrollFriendly: true)
+            }
+            .frame(height: 220)
+        }
+        .task(id: key) {
+            try? await Task.sleep(nanoseconds: 40_000_000)
+            if Task.isCancelled { return }
+            await model.refreshPanels(d.lowerBound, d.upperBound)
         }
     }
 
     private var title: String {
         switch model.windowSignal {
-        case .magnitude: return "Patrón de movimiento · |a| cincha ±2 s del cursor (g)"
-        case .axes: return "Aceleración por ejes · cincha ±2 s del cursor (g)"
-        case .gyro: return "Velocidad de giro · cincha ±2 s del cursor (°/s)"
+        case .magnitude: return "Patrón de movimiento · |a| de la cincha (g)"
+        case .axes: return "Aceleración por ejes · cincha (g)"
+        case .gyro: return "Velocidad de giro · cincha (°/s)"
         }
     }
 
-    private var fusedAccel: some View {
-        FeatureChartPanel(title: "Movimiento de la cincha · aceleración sin gravedad (m/s²)", minHeight: 170) {
-            FeatureLineChart(series: model.fusedAccelWindow, axis: .number, xMin: model.imuWindowMin, xMax: model.imuWindowMax,
-                             includeZero: true, emptyText: "Sin datos")
+    private func fusedAccel(_ d: ClosedRange<Double>, _ bands: [SyncBand]) -> some View {
+        SyncChartBox(title: "Movimiento de la cincha · aceleración sin gravedad (m/s²)", legend: model.legendFused, chartId: "bio.fused") {
+            SyncSignalChart(panel: app.charts.filtered(model.panelFused, chart: "bio.fused", legend: model.legendFused),
+                            domain: d, bands: bands, includeZero: true, emptyText: "Sin datos", scrollFriendly: true)
         }
     }
 
-    private var orientation: some View {
-        FeatureChartPanel(title: "Balanceo y cabeceo de la cincha (°)", minHeight: 170) {
-            FeatureLineChart(series: model.orientationWindow, axis: .number, xMin: model.imuWindowMin, xMax: model.imuWindowMax,
-                             emptyText: "Sin datos")
+    private func orientation(_ d: ClosedRange<Double>, _ bands: [SyncBand]) -> some View {
+        SyncChartBox(title: "Balanceo y cabeceo de la cincha (°)", legend: model.legendOrient, chartId: "bio.orient") {
+            SyncSignalChart(panel: app.charts.filtered(model.panelOrient, chart: "bio.orient", legend: model.legendOrient),
+                            domain: d, bands: bands, includeZero: false, emptyText: "Sin datos", scrollFriendly: true)
         }
     }
 }

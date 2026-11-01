@@ -75,9 +75,117 @@ final class BiomechModel {
         refreshBiomech()
     }
 
-    /// Windows: the IMU window follows the cursor while the Biomech page is visible.
-    func cursorChanged() {
-        refreshImuWindow()
+    /// The girth charts are on the shared timeline now (zoom / range / cursor of the training): nothing to follow.
+    func cursorChanged() {}
+
+    // ------------------------------------------------------------------ girth charts on the shared timeline
+    /// Panels of the girth charts for the current window of the training (LTTB, same as «Gráficas»).
+    var panelMain: SyncPanel = SyncPanel()
+    var panelFused: SyncPanel = SyncPanel()
+    var panelOrient: SyncPanel = SyncPanel()
+    var panelCadence: SyncPanel = SyncPanel()
+    var legendMain: [SyncLegend] = []
+    var legendFused: [SyncLegend] = []
+    var legendOrient: [SyncLegend] = []
+    var legendCadence: [SyncLegend] = []
+    @ObservationIgnored private var srcKey: String = ""
+    @ObservationIgnored private var srcMain: [SyncSource] = []
+    @ObservationIgnored private var srcFused: [SyncSource] = []
+    @ObservationIgnored private var srcOrient: [SyncSource] = []
+    @ObservationIgnored private var srcCadence: [SyncSource] = []
+    @ObservationIgnored private var panelGen: Int = 0
+
+    /// Legend switches of a chart: one per series, matched by its exact name inside the line id ("i·name·run").
+    private static func legend(_ src: [SyncSource]) -> [SyncLegend] {
+        var seen: Set<String> = []
+        var out: [SyncLegend] = []
+        for s in src where !seen.contains(s.name) {
+            seen.insert(s.name)
+            out.append(SyncLegend(s.name, s.color, keys: ["·" + s.name + "·"]))
+        }
+        return out
+    }
+
+    /// Full-session series of the girth (timeline seconds), rebuilt when the session, the signal or the sensor change.
+    private func buildSources() {
+        guard let s = app.selected else {
+            srcKey = ""; srcMain = []; srcFused = []; srcOrient = []; srcCadence = []
+            return
+        }
+        let key: String = "\(s.id)|\(windowSignal.rawValue)|\(windowSensor)|\(s.engine == nil ? 0 : 1)"
+        if key == srcKey { return }
+        srcKey = key
+        var main: [SyncSource] = []
+        switch windowSignal {
+        case .magnitude:
+            for ch in s.imu.channels where ch.t.count > 3 {
+                let n: Int = ch.t.count
+                var y: [Double] = [Double](repeating: .nan, count: n)
+                for i in 0..<n {
+                    let ax: Double = Double(ch.ax[i]), ay: Double = Double(ch.ay[i]), az: Double = Double(ch.az[i])
+                    y[i] = (ax * ax + ay * ay + az * az).squareRoot() * ch.accelGPerLsb
+                }
+                main.append(SyncSource(name: ch.name + " |a|", color: BiomechModel.sensorColor(Int(ch.imuId)), width: 1.2, x: ch.t, y: y))
+            }
+        case .axes, .gyro:
+            if let ch = s.imu.channels.first(where: { Int($0.imuId) == windowSensor }) ?? s.imu.channels.first, ch.t.count > 3 {
+                let gyro: Bool = windowSignal == .gyro
+                let k: Double = gyro ? ch.gyroDpsPerLsb : ch.accelGPerLsb
+                let srcs: [(String, [Int16], Color)] = gyro
+                    ? [("x", ch.gx, Avo.red), ("y", ch.gy, Avo.ok), ("z", ch.gz, Avo.blue)]
+                    : [("x", ch.ax, Avo.red), ("y", ch.ay, Avo.ok), ("z", ch.az, Avo.blue)]
+                for (axis, raw, color) in srcs {
+                    main.append(SyncSource(name: "\(ch.name) · \(axis)", color: color, width: 1.1, x: ch.t, y: raw.map { Double($0) * k }))
+                }
+            }
+        }
+        var fa: [SyncSource] = []
+        var fo: [SyncSource] = []
+        let many: Bool = s.imu.fused.count > 1
+        for f in s.imu.fused where f.t.count > 3 {
+            let p: String = many ? f.name + " · " : ""
+            fa.append(SyncSource(name: p + "Vertical (arriba +)", color: Avo.red, width: 1.2, x: f.t, y: f.verticalMs2))
+            fa.append(SyncSource(name: p + "Horizontal", color: Avo.cyan, width: 1, x: f.t, y: f.horizontalMs2))
+            fo.append(SyncSource(name: p + "Balanceo (lateral)", color: Avo.warn, width: 1.2, x: f.t, y: f.rollDeg))
+            fo.append(SyncSource(name: p + "Cabeceo (adelante/atrás)", color: Color(hex: 0xA86BFF), width: 1.2, x: f.t, y: f.pitchDeg))
+        }
+        var cad: [SyncSource] = []
+        if let e = s.engine, e.hasImu {
+            let off: Double = s.engineOffsetS
+            let n: Int = min(e.girthT.count, min(e.girthImu.count, min(e.girthCadenceHz.count, e.girthStatus.count)))
+            if n > 0 {
+                for id in Array(Set(e.girthImu.prefix(n))).sorted() {
+                    var idx: [Int] = []
+                    for k in 0..<n where e.girthImu[k] == id && e.girthT[k].isFinite { idx.append(k) }
+                    idx.sort { e.girthT[$0] < e.girthT[$1] }
+                    cad.append(SyncSource(name: ImuTimeline.sensorName(UInt8(clamping: id)) + " cadencia", color: BiomechModel.sensorColor(id),
+                                          width: 1.4, x: idx.map { e.girthT[$0] - off },
+                                          y: idx.map { e.girthStatus[$0] == "OK" ? e.girthCadenceHz[$0] * 60 : Double.nan }))
+                }
+            }
+        }
+        srcMain = main; srcFused = fa; srcOrient = fo; srcCadence = cad
+        legendMain = BiomechModel.legend(main)
+        legendFused = BiomechModel.legend(fa)
+        legendOrient = BiomechModel.legend(fo)
+        legendCadence = BiomechModel.legend(cad)
+    }
+
+    /// Recomputes the panels for the window [lo, hi] of the training (off the main thread).
+    @MainActor
+    func refreshPanels(_ lo: Double, _ hi: Double) async {
+        buildSources()
+        panelGen += 1
+        let gen: Int = panelGen
+        let m: [SyncSource] = srcMain, f: [SyncSource] = srcFused, o: [SyncSource] = srcOrient, c: [SyncSource] = srcCadence
+        let th: Int = ChartsModel.threshold
+        let r: (SyncPanel, SyncPanel, SyncPanel, SyncPanel) = await Task.detached(priority: .userInitiated) {
+            () -> (SyncPanel, SyncPanel, SyncPanel, SyncPanel) in
+            (ChartsModel.makePanel(m, lo, hi, threshold: th), ChartsModel.makePanel(f, lo, hi, threshold: th),
+             ChartsModel.makePanel(o, lo, hi, threshold: th), ChartsModel.makePanel(c, lo, hi, threshold: th))
+        }.value
+        if gen != panelGen { return }
+        panelMain = r.0; panelFused = r.1; panelOrient = r.2; panelCadence = r.3
     }
 
     static func sensorColor(_ id: Int) -> Color {

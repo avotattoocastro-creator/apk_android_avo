@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — Biomecánica en la línea de tiempo del entrenamiento (zoom, tramo, desplazamiento, leyendas activables)
+**Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → `feature/ipad-app` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia (petición del usuario con captura):**
+- Las gráficas de la cincha ya no usan una ventana local de 4 s: están en la **línea de tiempo compartida** (`charts.domain`), igual que Análisis y Gráficas.
+  - Gráficas: |a|, ejes x/y/z, giro, movimiento sin gravedad, balanceo/cabeceo y cadencia.
+  - Comparten cursor, zoom (pellizco y botones), selección de tramo («Guardar como tramo»), filtro por fase y barra de desplazamiento (`ChartsNavigator`).
+- **Barra común `SyncZoomBar`:** seleccionar tramo, acercar y alejar, desplazar, restablecer, **«Ver ±2 s del cursor»** (la vista de detalle anterior), guardar o quitar tramo y reproducción.
+- **Leyendas activables** en todas las gráficas de la cincha (`BiomechModel.legend`, que busca el nombre exacto de la serie).
+- **Datos:** series de sesión completa (`SyncSource`) reducidas con LTTB a la ventana visible fuera del hilo principal (`BiomechModel.refreshPanels`); franjas de fases bajo cada gráfica.
+**Validación:** IMPLEMENTADO · CI pendiente · NO VERIFICADO en el iPad.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — Gráficas: líneas activables, barra de desplazamiento y filtro por fase; Listado: eliminar y exportar entrenamientos
 **Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → `feature/ipad-app` · **Commits:** `ed7d6fc` y siguientes · **CI:** iPad run 41349352965 ✅ (84 pruebas, todas las capturas)
 **Qué cambia (peticiones del usuario con capturas del iPad):**
