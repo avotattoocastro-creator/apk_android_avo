@@ -22,6 +22,17 @@ final class RaceParserTests: XCTestCase {
         try XCTUnwrap(race.runners.first { $0.name == name }, "Participante \(name)")
     }
 
+    /// Diagnostics: writes the PDFKit text of every page (the order differs from pdftotext) to AVO_SHOTS for CI review.
+    func testDumpPdfKitText() throws {
+        guard let dir = ProcessInfo.processInfo.environment["AVO_SHOTS"], !dir.isEmpty else { throw XCTSkip("sin AVO_SHOTS") }
+        let doc = try XCTUnwrap(PDFDocument(url: try fixtureURL()))
+        try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
+        for i in 0..<doc.pageCount {
+            let t: String = doc.page(at: i)?.string ?? ""
+            try? t.write(toFile: (dir as NSString).appendingPathComponent("pdfkit_page\(i + 1).txt"), atomically: true, encoding: .utf8)
+        }
+    }
+
     // ---------------------------------------------------------------- parser
     func testParsesHeaderAndRunners() throws {
         let race: Race = try sample()

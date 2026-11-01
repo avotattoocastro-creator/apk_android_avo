@@ -73,6 +73,8 @@ jobs:
 
       - name: Unit tests (formats, security, algorithms, watch protocol, engine, demo sessions)
         working-directory: ipad
+        env:
+          TEST_RUNNER_AVO_SHOTS: ${{ github.workspace }}/capturas/diagnostico
         run: |
           set -o pipefail
           xcodebuild test-without-building -project AVOiPad.xcodeproj -scheme AVOiPad -only-testing:AVOiPadTests \
