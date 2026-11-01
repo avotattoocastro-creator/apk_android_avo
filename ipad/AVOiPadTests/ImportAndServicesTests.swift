@@ -522,6 +522,14 @@ final class ImportAndServicesTests: XCTestCase {
                 XCTAssertEqual(m.trackWork.phaseBasis, "MANUAL", "Fase de trabajo corregida a mano")
                 XCTAssertTrue(m.trackWork.courseDefined, "Salida y meta enviadas al motor (el recorrido necesita las dos)")
             }
+            // start line drawn on the map: A west, B east, counted moving north (DCHA_A_IZQ) -> the arrow points north
+            let ml = CorrectionsModel.mapLine(TrainingLine(aLat: 43.40, aLon: -3.4303, bLat: 43.40, bLon: -3.4297, direction: "DCHA_A_IZQ"),
+                                              id: "salida", title: "Salida", color: 0x30A46C)
+            XCTAssertEqual(ml.arrow.count, 3, "Flecha del sentido de la línea")
+            XCTAssertGreaterThan(ml.arrow[0][1][0], 43.40 + 10 / 111_320.0, "La flecha apunta al lado por el que se cruza (norte)")
+            XCTAssertEqual(ml.arrow[0][1][1], -3.43, accuracy: 1e-6, "Flecha en el centro de la línea")
+            XCTAssertTrue(CorrectionsModel.mapLine(TrainingLine(aLat: 43.40, aLon: -3.4303, bLat: 43.40, bLon: -3.4297, direction: "AMBOS"),
+                                                   id: "m", title: "Meta", color: 0).arrow.isEmpty, "Sin flecha si cuentan los dos sentidos")
             XCTAssertEqual(TrackWorkBreed.engineName("Pura Sangre Inglés"), "PSI")
             XCTAssertEqual(TrackWorkBreed.engineName("Árabe"), "ARABE")
             XCTAssertEqual(TrackWorkBreed.engineName("Hispano-bretón"), "GENERICO")

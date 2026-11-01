@@ -86,6 +86,14 @@ struct SyncBand: Identifiable {
     var height: CGFloat = 4
 }
 
+/// Draggable vertical handle on a chart (zones of the Análisis page): id, time (timeline seconds), colour and label.
+struct SyncHandle: Identifiable {
+    var id: Int
+    var x: Double
+    var color: Color
+    var label: String
+}
+
 /// Drawable content of one chart for the current window.
 struct SyncPanel {
     var lines: [SyncLine] = []

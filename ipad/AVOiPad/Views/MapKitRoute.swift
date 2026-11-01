@@ -11,6 +11,27 @@ struct RouteMapCommand: Equatable {
     func next(_ kind: Kind) -> RouteMapCommand { RouteMapCommand(id: id + 1, kind: kind) }
 }
 
+/// Start / finish line of a training course drawn on the map (with an arrow in the counting direction).
+struct MapCourseLine: Equatable, Identifiable {
+    var id: String
+    var title: String
+    var colorHex: UInt32
+    /// The line itself and, optionally, the arrow (shaft + two barbs), as (lat, lon) pairs.
+    var line: [[Double]]
+    var arrow: [[[Double]]] = []
+}
+
+/// MKPolyline of a course line (own colour and width).
+final class CourseLineOverlay: MKPolyline {
+    var color: UIColor = .white
+    var width: CGFloat = 5
+}
+
+/// Label of a course line (title next to it).
+final class CourseLabelAnnotation: MKPointAnnotation {
+    var color: UIColor = .white
+}
+
 /// MKMapView wrapper = port of Windows Controls/MapControl.cs: Esri imagery / hybrid tiles cached on disk, offline vector
 /// mode (dark grid, route only), coloured route, dimmed route outside the selected range, dashed signal losses, start/end
 /// and session markers, cursor marker following the shared cursor, tap = nearest route point.
@@ -25,6 +46,8 @@ struct MapKitRoute: UIViewRepresentable {
     var fitPadding: UIEdgeInsets = UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
     var home: CLLocationCoordinate2D
     var command: RouteMapCommand = RouteMapCommand()
+    /// Start / finish lines of the training (Análisis zones).
+    var courseLines: [MapCourseLine] = []
     var onTap: (Double) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator() }
@@ -63,6 +86,7 @@ struct MapKitRoute: UIViewRepresentable {
         c.applyMarkers(showMarkers)
         c.applyRange(rangeStart, rangeEnd)
         c.applyCursor(cursorTime)
+        c.applyCourseLines(courseLines)
         if command.id != c.lastCommandId {
             c.lastCommandId = command.id
             switch command.kind {
@@ -94,6 +118,42 @@ struct MapKitRoute: UIViewRepresentable {
         private var cursorIndex: Int = -2
         private var rangeLo: Double = .nan
         private var rangeHi: Double = .nan
+        private var courseLines: [MapCourseLine] = []
+        private var courseOverlays: [CourseLineOverlay] = []
+        private var courseLabels: [CourseLabelAnnotation] = []
+
+        // ------------------------------------------------------------ course lines (start / finish)
+        func applyCourseLines(_ lines: [MapCourseLine]) {
+            guard let map = map, lines != courseLines else { return }
+            courseLines = lines
+            map.removeOverlays(courseOverlays)
+            map.removeAnnotations(courseLabels)
+            courseOverlays = []
+            courseLabels = []
+            for l in lines {
+                let color = UIColor(red: CGFloat((l.colorHex >> 16) & 0xFF) / 255, green: CGFloat((l.colorHex >> 8) & 0xFF) / 255,
+                                    blue: CGFloat(l.colorHex & 0xFF) / 255, alpha: 1)
+                func poly(_ pts: [[Double]], _ width: CGFloat) {
+                    let coords: [CLLocationCoordinate2D] = pts.filter { $0.count == 2 }.map { CLLocationCoordinate2D(latitude: $0[0], longitude: $0[1]) }
+                    guard coords.count >= 2 else { return }
+                    let o = CourseLineOverlay(coordinates: coords, count: coords.count)
+                    o.color = color
+                    o.width = width
+                    courseOverlays.append(o)
+                }
+                poly(l.line, 5)
+                for a in l.arrow { poly(a, 3) }
+                if l.line.count >= 2, l.line[0].count == 2 {
+                    let lab = CourseLabelAnnotation()
+                    lab.coordinate = CLLocationCoordinate2D(latitude: l.line[0][0], longitude: l.line[0][1])
+                    lab.title = l.title
+                    lab.color = color
+                    courseLabels.append(lab)
+                }
+            }
+            for o in courseOverlays { map.addOverlay(o, level: .aboveLabels) }
+            map.addAnnotations(courseLabels)
+        }
 
         // ------------------------------------------------------------ base layer
         func applyProvider(_ p: MapProvider, cacheDir: String) {
@@ -257,6 +317,13 @@ struct MapKitRoute: UIViewRepresentable {
                 }
                 return r
             }
+            if let l = overlay as? CourseLineOverlay {
+                let r = MKPolylineRenderer(polyline: l)
+                r.strokeColor = l.color
+                r.lineWidth = l.width
+                r.lineCap = .round
+                return r
+            }
             if let t = overlay as? MKTileOverlay {
                 return MKTileOverlayRenderer(tileOverlay: t)
             }
@@ -264,6 +331,17 @@ struct MapKitRoute: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if let lab = annotation as? CourseLabelAnnotation {
+                let reuse: String = "course.label"
+                let v = (mapView.dequeueReusableAnnotationView(withIdentifier: reuse) as? MKMarkerAnnotationView)
+                    ?? MKMarkerAnnotationView(annotation: lab, reuseIdentifier: reuse)
+                v.annotation = lab
+                v.markerTintColor = lab.color
+                v.glyphImage = UIImage(systemName: "flag.fill")
+                v.titleVisibility = .visible
+                v.displayPriority = .required
+                return v
+            }
             guard let a = annotation as? RouteMarkerAnnotation else { return nil }
             let reuse: String = "route.\(a.kind.rawValue)"
             let v: MKAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse)

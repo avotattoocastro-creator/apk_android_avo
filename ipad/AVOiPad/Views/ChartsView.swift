@@ -557,6 +557,9 @@ struct SyncSignalChart: View {
     /// The chart lives in a vertical ScrollView: touches are recognised together with the scroll and a mainly vertical
     /// swipe scrolls instead of moving the cursor.
     var scrollFriendly: Bool = false
+    /// Draggable zone limits (Análisis page); `onHandle(id, time)` when one is dropped.
+    var handles: [SyncHandle] = []
+    var onHandle: ((Int, Double) -> Void)? = nil
 
     var body: some View {
         if panel.isEmpty {
@@ -564,7 +567,7 @@ struct SyncSignalChart: View {
                 .frame(maxHeight: .infinity)
         } else {
             SyncChartPlot(panel: panel, domain: domain, bands: bands, includeZero: includeZero, zoomable: zoomable,
-                          scrollFriendly: scrollFriendly)
+                          scrollFriendly: scrollFriendly, handles: handles, onHandle: onHandle)
         }
     }
 }
@@ -577,6 +580,8 @@ struct SyncChartPlot: View {
     let includeZero: Bool
     let zoomable: Bool
     var scrollFriendly: Bool = false
+    var handles: [SyncHandle] = []
+    var onHandle: ((Int, Double) -> Void)? = nil
 
     static func clockLabel(_ value: AxisValue) -> String {
         guard let d = value.as(Double.self) else { return "" }
@@ -625,9 +630,100 @@ struct SyncChartPlot: View {
             SyncBandLayer(proxy: proxy, bands: bands)
         }
         .chartOverlay { (proxy: ChartProxy) in
-            SyncChartCursorLayer(proxy: proxy, domain: domain, zoomable: zoomable, scrollFriendly: scrollFriendly)
+            ZStack {
+                SyncChartCursorLayer(proxy: proxy, domain: domain, zoomable: zoomable, scrollFriendly: scrollFriendly)
+                if !handles.isEmpty {
+                    SyncHandleLayer(proxy: proxy, domain: domain, handles: handles, onCommit: onHandle)
+                }
+            }
         }
         .environment(\.locale, Locale(identifier: "es_ES"))
+    }
+}
+
+/// Draggable limits of the training zones: a grip at the bottom of the plot for each limit. Dragging moves the shared
+/// cursor (map and readouts follow) and shows the time; dropping calls `onCommit(id, time)`. Only the grips take
+/// touches: the rest of the chart keeps the cursor / range / zoom gestures.
+struct SyncHandleLayer: View {
+    @Environment(AppModel.self) private var app
+    let proxy: ChartProxy
+    let domain: ClosedRange<Double>
+    let handles: [SyncHandle]
+    var onCommit: ((Int, Double) -> Void)?
+
+    @State private var dragId: Int? = nil
+    @State private var dragT: Double = .nan
+
+    var body: some View {
+        GeometryReader { (geo: GeometryProxy) in
+            let plot: CGRect = proxy.plotFrame.map { geo[$0] } ?? CGRect(origin: .zero, size: geo.size)
+            ZStack(alignment: .topLeading) {
+                if let id = dragId, let h = handles.first(where: { $0.id == id }), let x = xOf(dragT, plot) {
+                    Rectangle().fill(h.color).frame(width: 2, height: plot.height).position(x: x, y: plot.midY)
+                        .allowsHitTesting(false)
+                    Text("\(h.label) · \(TimeText.clock(dragT))")
+                        .font(.caption2.weight(.semibold)).foregroundStyle(Color.black)
+                        .padding(.horizontal, 6).padding(.vertical, 3)
+                        .background(h.color, in: RoundedRectangle(cornerRadius: 4))
+                        .fixedSize()
+                        .position(x: min(max(x, plot.minX + 70), plot.maxX - 70), y: plot.minY + 12)
+                        .allowsHitTesting(false)
+                }
+                ForEach(handles) { (h: SyncHandle) in
+                    let t: Double = dragId == h.id ? dragT : h.x
+                    if let x = xOf(t, plot), x >= plot.minX - 1, x <= plot.maxX + 1 {
+                        grip(h, active: dragId == h.id)
+                            .frame(width: 30, height: 40)
+                            .contentShape(Rectangle())
+                            .gesture(drag(h, plot))
+                            .position(x: x, y: plot.maxY - 18)
+                            .accessibilityLabel(h.label)
+                            .accessibilityIdentifier("zone.handle.\(h.id)")
+                    }
+                }
+            }
+            .coordinateSpace(name: "zone.handles")
+        }
+    }
+
+    private func grip(_ h: SyncHandle, active: Bool) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 3).fill(h.color.opacity(active ? 1 : 0.9))
+                .frame(width: active ? 12 : 10, height: active ? 30 : 24)
+            RoundedRectangle(cornerRadius: 3).stroke(Color.black.opacity(0.6), lineWidth: 1)
+                .frame(width: active ? 12 : 10, height: active ? 30 : 24)
+            VStack(spacing: 2) {
+                ForEach(0..<3, id: \.self) { (_: Int) in Rectangle().fill(Color.black.opacity(0.55)).frame(width: 5, height: 1) }
+            }
+        }
+    }
+
+    private func xOf(_ t: Double, _ plot: CGRect) -> CGFloat? {
+        guard t.isFinite, let p = proxy.position(forX: t) else { return nil }
+        return plot.minX + p
+    }
+
+    private func timeAt(_ x: CGFloat, _ plot: CGRect) -> Double {
+        let v: Double = proxy.value(atX: x - plot.minX, as: Double.self) ?? domain.lowerBound
+        return min(max(v, domain.lowerBound), domain.upperBound)
+    }
+
+    private func drag(_ h: SyncHandle, _ plot: CGRect) -> some Gesture {
+        DragGesture(minimumDistance: 2, coordinateSpace: .named("zone.handles"))
+            .onChanged { (v: DragGesture.Value) in
+                if dragId != h.id {
+                    dragId = h.id
+                    UISelectionFeedbackGenerator().selectionChanged()
+                }
+                dragT = timeAt(v.location.x, plot)
+                app.cursorTime = dragT
+            }
+            .onEnded { (v: DragGesture.Value) in
+                let t: Double = timeAt(v.location.x, plot)
+                dragId = nil
+                dragT = .nan
+                if abs(v.translation.width) >= 2 { onCommit?(h.id, t) }
+            }
     }
 }
 

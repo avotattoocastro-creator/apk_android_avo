@@ -42,7 +42,8 @@ struct MapPageView: View {
         let model: MapModel = app.map
         return ZStack(alignment: .topLeading) {
             MapRouteContainer(command: command,
-                              fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 70))
+                              fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 70),
+                              showCourse: true)
             if showLayers {
                 MapLayersPanel(model: model, onClose: { showLayers = false })
                     .padding(12)
@@ -111,6 +112,8 @@ struct MapRouteContainer: View {
     /// nil = the map model's current route.
     var overrideRoute: RouteRenderData? = nil
     var useOverride: Bool = false
+    /// Draw the start / finish lines of the training zones (Análisis page).
+    var showCourse: Bool = false
 
     var body: some View {
         let model: MapModel = app.map
@@ -124,6 +127,7 @@ struct MapRouteContainer: View {
                     fitPadding: fitPadding,
                     home: model.home,
                     command: command,
+                    courseLines: showCourse ? app.corrections.mapLines(app.selected) : [],
                     onTap: { (t: Double) in app.cursorTime = t })
     }
 }
@@ -331,7 +335,9 @@ private struct MapProfilePanel: View {
                      readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
             VStack(spacing: 6) {
                 SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: app.corrections.bands(app.selected),
-                                includeZero: true, emptyText: "Sin datos")
+                                includeZero: true, emptyText: "Sin datos",
+                                handles: app.corrections.handles(app.selected),
+                                onHandle: { (id: Int, t: Double) in app.corrections.moveHandle(id, to: t) })
                 SyncPlaybackBar(compact: false)
             }
         }

@@ -62,7 +62,7 @@ final class CorrectionsModel {
     }
 
     var summaryText: String {
-        guard let c = current, !c.isEmpty else { return "Zonas automáticas (velocidad RTK y cincha)" }
+        guard let c = current, !c.isEmpty else { return "Zonas automáticas · arrastra los bordes en la gráfica para corregirlas" }
         var p: [String] = []
         if c.start != nil { p.append("salida") }
         if c.finish != nil { p.append("meta") }
@@ -94,6 +94,80 @@ final class CorrectionsModel {
             if z > a { b.append(SyncBand(id: b.count, x0: a, x1: z, color: Color.white.opacity(0.75), lane: 1, height: 7)) }
         }
         return b
+    }
+
+    // ------------------------------------------------------------------ drag handles on the speed profile
+    /// Ids: 1 start of the work phase, 2 end of the work phase, 100 + 2k start and 101 + 2k end of repetition k.
+    func handles(_ s: SessionItem?) -> [SyncHandle] {
+        guard let s = s, let e = s.engine else { return [] }
+        let tw: TrackWorkResult = e.trackWork
+        let off: Double = s.engineOffsetS
+        var h: [SyncHandle] = []
+        if tw.work.present && tw.work.t0.isFinite && tw.work.t1.isFinite {
+            h.append(SyncHandle(id: 1, x: tw.work.t0 - off, color: CorrectionsModel.workColor, label: "Inicio trabajo"))
+            h.append(SyncHandle(id: 2, x: tw.work.t1 - off, color: CorrectionsModel.workColor, label: "Fin trabajo"))
+        }
+        for (k, w) in tw.efforts.enumerated() {
+            let c: Color = w.kind == "TRABAJO_RAPIDO" ? CorrectionsModel.fastColor : CorrectionsModel.canterColor
+            h.append(SyncHandle(id: 100 + 2 * k, x: w.t0 - off, color: c, label: "Inicio rep. \(k + 1)"))
+            h.append(SyncHandle(id: 101 + 2 * k, x: w.t1 - off, color: c, label: "Fin rep. \(k + 1)"))
+        }
+        return h
+    }
+
+    /// A handle was dropped at `t` (timeline seconds): moves that limit and analyses again.
+    func moveHandle(_ id: Int, to t: Double) {
+        guard let s = app.selected, t.isFinite else { return }
+        let v: Double = itow(s, t)
+        if id == 1 || id == 2 {
+            mutate { (c: inout TrainingCorrection) in if id == 1 { c.workStartItow = v } else { c.workEndItow = v } }
+            message = (id == 1 ? "Inicio" : "Fin") + " del trabajo movido a \(TimeText.clock(t))"
+            return
+        }
+        guard id >= 100 else { return }
+        let k: Int = (id - 100) / 2
+        let isEnd: Bool = (id - 100) % 2 == 1
+        var moved: Bool = false
+        mutate { (c: inout TrainingCorrection) in
+            var list: [[Double]] = c.works ?? self.automaticWorks(s)
+            guard k < list.count, list[k].count == 2 else { return }
+            var w: [Double] = list[k]
+            if isEnd { w[1] = max(v, w[0] + 2000) } else { w[0] = min(v, w[1] - 2000) }
+            list[k] = w
+            list.sort { $0[0] < $1[0] }
+            c.works = list
+            moved = true
+        }
+        message = moved ? "Repetición \(k + 1): \(isEnd ? "fin" : "inicio") en \(TimeText.clock(t))" : "No se pudo mover la repetición"
+    }
+
+    // ------------------------------------------------------------------ start / finish lines on the map
+    func mapLines(_ s: SessionItem?) -> [MapCourseLine] {
+        guard let s = s, let c = entries[s.id] else { return [] }
+        var out: [MapCourseLine] = []
+        if let l = c.start { out.append(CorrectionsModel.mapLine(l, id: "salida", title: "Salida", color: 0x30A46C)) }
+        if let l = c.finish { out.append(CorrectionsModel.mapLine(l, id: "meta", title: "Meta", color: 0xE5484D)) }
+        return out
+    }
+
+    /// The line and an arrow from its middle towards the side the horse crosses to (counting direction).
+    static func mapLine(_ l: TrainingLine, id: String, title: String, color: UInt32) -> MapCourseLine {
+        var m = MapCourseLine(id: id, title: title, colorHex: color, line: [[l.aLat, l.aLon], [l.bLat, l.bLon]])
+        let lat0: Double = (l.aLat + l.bLat) / 2, lon0: Double = (l.aLon + l.bLon) / 2
+        let ky: Double = 111_320.0, kx: Double = 111_320.0 * cos(lat0 * Double.pi / 180)
+        let dx: Double = (l.bLon - l.aLon) * kx, dy: Double = (l.bLat - l.aLat) * ky
+        let n: Double = hypot(dx, dy)
+        guard n > 0.5, l.direction != "AMBOS" else { return m }
+        let ux: Double = dx / n, uy: Double = dy / n
+        // seen from A towards B: DCHA_A_IZQ ends on the left (−uy, ux), IZQ_A_DCHA on the right (uy, −ux)
+        let fx: Double = l.direction == "DCHA_A_IZQ" ? -uy : uy
+        let fy: Double = l.direction == "DCHA_A_IZQ" ? ux : -ux
+        func pt(_ e: Double, _ nn: Double) -> [Double] { [lat0 + nn / ky, lon0 + e / kx] }
+        let tipE: Double = fx * 14, tipN: Double = fy * 14
+        m.arrow = [[pt(0, 0), pt(tipE, tipN)],
+                   [pt(tipE, tipN), pt(tipE - fx * 5 + ux * 4, tipN - fy * 5 + uy * 4)],
+                   [pt(tipE, tipN), pt(tipE - fx * 5 - ux * 4, tipN - fy * 5 - uy * 4)]]
+        return m
     }
 
     static let warmupColor: Color = Color(hex: 0x3D8BFD)
