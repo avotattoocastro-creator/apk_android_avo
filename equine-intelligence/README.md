@@ -13,14 +13,17 @@ Motor de análisis único en C++17 para Android (JNI), Windows (DLL, P/Invoke) y
 | Simetría exploratoria | `src/imu/symmetry.cpp` | 09 |
 | Comparación de sesiones | `src/core/compare.cpp` | 10 |
 | Persistencia de resultados | `src/core/store.cpp` | 11 |
+| **Análisis de entrenamientos** (historia del caballo: carga, ACWR, línea base, desvíos, tendencias) | `src/training`, `src/capi/training_capi.cpp` | 12 |
 | API C v2, JSON v2 | `src/capi`, `src/core/engine.cpp` | `docs/FORMATO_RESULTADOS.md` |
 
 ## Compilar y probar
 ```
-cmake -S . -B build -DAVO_EQ_SANITIZE=ON && cmake --build build && ./build/avo_eq_tests     # 61 casos
+cmake -S . -B build -DAVO_EQ_SANITIZE=ON && cmake --build build && ./build/avo_eq_tests     # 71 casos
 python3 tools/scientific-bench/bench.py --lib build/libavo_equine.so                           # banco científico
 python3 tools/fixtures/check_fixtures.py build/avo_eq_cli                                      # cadena RAW -> JSON de Kotlin/Android/Windows
 build/avo_eq_cli SESION.avr --out salida --series                                              # analizar una sesión
+build/avo_training_cli --resumen salida/analysis.json extra.json                                # resumen de entrenamiento
+build/avo_training_cli historia.json [opciones.json]                                           # historia de un caballo
 ```
 ## Integraciones
 - **Android** (`app/`): `engine/AvoEquine.kt` (JNI, UTF-8, cancelación), `engine/EquineEngine.kt` (flujo real: descarga → análisis en
