@@ -122,6 +122,15 @@ final class TrainingListTests: XCTestCase {
         guard let item = app.sessions.first else { return }
         let stored: String = app.library.entries.first?.storedPath ?? ""
         XCTAssertTrue(FileManager.default.fileExists(atPath: stored), "Copia en la biblioteca")
+        // export: the verified original copied to Documents/Exportados, once
+        let r1 = await app.exportTrainings([item])
+        XCTAssertEqual(r1.copied, 1, "Exportado")
+        let exported = (app.exportDir as NSString).appendingPathComponent(AppModel.exportName(item, ext: ".avr"))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: exported), "En AVO Horse › Exportados")
+        XCTAssertEqual(try TrainingLibrary.fileSha256(exported), try TrainingLibrary.fileSha256(stored), "Mismo archivo original")
+        let r2 = await app.exportTrainings([item])
+        XCTAssertTrue(r2.copied == 0 && r2.existing == 1, "Sin duplicar si ya estaba exportado")
+        try? FileManager.default.removeItem(atPath: exported)
         app.deleteTraining(item)
         XCTAssertTrue(app.sessions.isEmpty, "Fuera de la lista")
         XCTAssertTrue(app.library.entries.isEmpty, "Fuera de la biblioteca")

@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — iPad 1.0.x — Gráficas: líneas activables, barra de desplazamiento y filtro por fase; Listado: eliminar y exportar entrenamientos
+**Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → `feature/ipad-app` · **Commits:** `ed7d6fc` y siguientes · **CI:** iPad run 41349352965 ✅ (84 pruebas, todas las capturas)
+**Qué cambia (peticiones del usuario con capturas del iPad):**
+- **Gráficas:**
+  - cada entrada de la leyenda es un interruptor que muestra u oculta su línea, la banda ±σ o los marcadores de su color (`SyncLegend.keys`, `sigma` y `marker`; `ChartsModel.hiddenLegend`; `ChartsLegends`);
+  - **barra de vista general** (`ChartsOverviewBar`) con el perfil de velocidad, las fases, las repeticiones, el cursor y el **recuadro de la ventana visible, que se arrastra para desplazarse** con zoom o en sesiones largas. Sin zoom, al tocar se acerca a ¼ de la sesión;
+  - **filtro por fase:** Completo, Calentamiento, Trabajo y Enfriamiento hacen zoom a la fase del motor.
+- **Listado, «Eliminar entrenamiento…»:**
+  - pide confirmación;
+  - borra solo lo que guarda la app (copia de la biblioteca, RAW, análisis, resumen, correcciones, valoración, tramos, notas y favorito) y **nunca los archivos del usuario**;
+  - `eliminados.json` evita que «Buscar entrenamientos perdidos» lo vuelva a importar; abrirlo a propósito lo importa otra vez.
+- **Listado, «Exportar a AVO Horse»** (de uno o de todos los filtrados):
+  - copia el **original verificado** (.avo o .avr, mismo SHA-256) en Archivos › En mi iPad › AVO Horse › **Exportados** con el nombre `AVO_<fecha_hora>_<caballo>`;
+  - si ya estaba exportado, no lo duplica;
+  - sirve para enviarlo por AirDrop o correo, o para pasarlo a otro iPad, a AVO Windows o a Android.
+- **Pruebas:** borrar (lista, biblioteca, archivo del usuario intacto, marca de eliminado, reimportar) y exportar (mismo SHA-256, sin duplicar).
+**Validación:** IMPLEMENTADO · CI ✅ · **NO VERIFICADO** en el iPad real.
+
+---
+
 ## 2026-11-01 — iPad 1.0.x — líneas de salida y meta en el mapa, zonas arrastrables e integración en `feature/ipad-app`
 **Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → **`feature/ipad-app`** (avance rápido, sin cambios de otros autores desde `babaf8c`) · **Commits:** `78ed42c`, `d3b038d` · **CI:** iPad run 41343000760 ✅ (83 pruebas unitarias; capturas)
 **Qué cambia:**

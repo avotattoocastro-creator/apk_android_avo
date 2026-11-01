@@ -124,6 +124,15 @@ private struct TrainingListContent: View {
         }
         .buttonStyle(.avoSecondary)
         .disabled(model.scanning || app.busy)
+        Button {
+            let items: [SessionItem] = model.rows.compactMap { model.item($0.id) }
+            Task { @MainActor in await app.exportTrainingsAndReport(items) }
+        } label: {
+            Label("Exportar \(model.rows.count) a AVO Horse", systemImage: "square.and.arrow.up.on.square")
+        }
+        .buttonStyle(.avoSecondary)
+        .disabled(model.rows.isEmpty || app.busy)
+        .accessibilityIdentifier("list.export")
     }
 
     // ------------------------------------------------------------------ filters
@@ -337,6 +346,11 @@ private struct TrainingListContent: View {
                     if let s = model.item(id) { app.stable.openAssign(s) }
                 } label: {
                     Label("Asignar caballo y jinete", systemImage: "figure.equestrian.sports")
+                }
+                Button {
+                    if let s = model.item(id) { Task { @MainActor in await app.exportTrainingsAndReport([s]) } }
+                } label: {
+                    Label("Exportar a AVO Horse", systemImage: "square.and.arrow.up")
                 }
                 Divider()
                 Button(role: .destructive) {
