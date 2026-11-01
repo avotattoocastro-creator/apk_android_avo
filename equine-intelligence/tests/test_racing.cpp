@@ -4,6 +4,7 @@
 #include "avo_eq/avo_eq_c.h"
 #include "avo_eq/engine.h"
 #include "avo_eq/json.h"
+#include "avo_eq/training.h"
 #include "eq_test.h"
 #include "synth.h"
 
@@ -291,5 +292,145 @@ EQ_TEST(pista, training_morning_structure) {
   CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-10-21\"}", &out) == 0);
   CHECK(out && json::parse(out, &v, &err));
   CHECK(v["trabajo_pista"]["sesion"]["rapidas"].num() == 2 && v["trabajo_pista"]["sesion"]["calentamiento_corto"].boolean());
+  avo_eq_free(out);
+}
+
+// ---------------------------------------------------------------- training course (start / finish lines)
+#include <cstdio>
+#include "raw_writer.h"
+namespace {
+// Laredo-style morning along a straight beach (here: south-north). Warm-up goes AWAY from the work direction past the
+// start line, turn, gallop from SALIDA (y = 600 m) to META (y = 1800 m), pull up past the finish, loop and walk back
+// across the finish line to the exit (y ≈ 1500 m).
+struct Seg { double t0, t1, v0, v1; int dir; };
+const Seg kCourse[] = {{0, 100, 1.6, 1.6, -1}, {100, 340, 3.5, 3.5, -1}, {340, 360, 1.6, 1.6, 1}, {360, 370, 1.6, 16, 1},
+                       {370, 450, 16, 16, 1}, {450, 460, 16, 1.6, 1}, {460, 480, 1.6, 1.6, 1}, {480, 810, 1.6, 1.6, -1}};
+const double LAT0 = 43.4, LON0 = -3.43, MD = 111320.0;
+Session course_session() {
+  Session s; s.session_id = "REGATON"; s.horse = "FLECHA";
+  double y = 1500, dt = 0.1;
+  for (int k = 0; k < 8100; k++) {
+    double t = k * dt, v = 0; int dir = 1;
+    for (const auto& g : kCourse) if (t >= g.t0 && t < g.t1) { v = g.v0 + (g.v1 - g.v0) * (t - g.t0) / (g.t1 - g.t0); dir = g.dir; }
+    GnssEpoch e;
+    e.itow_ms = 345600000 + (uint32_t)std::lround(t * 1000); e.fix_type = 3; e.num_sv = 24; e.flags = 0x01 | 0x02 | (2 << 6);
+    e.lat_deg = LAT0 + y / MD; e.lon_deg = LON0;
+    e.gspeed_ms = v; e.sacc_ms = 0.05; e.veln_ms = v * dir; e.vele_ms = 0; e.hacc_m = 0.014; e.vacc_m = 0.03;
+    e.chest_us = (uint64_t)((t + 1000.0) * 1e6 + 8000); e.nav_rate_hz = 10;
+    s.gnss.push_back(e);
+    // exact integration of the piecewise-linear speed over the step
+    double t1 = t + dt, v1 = v;
+    for (const auto& g : kCourse) if (t1 >= g.t0 && t1 < g.t1 && g.dir == dir) v1 = g.v0 + (g.v1 - g.v0) * (t1 - g.t0) / (g.t1 - g.t0);
+    y += dir * 0.5 * (v + v1) * dt;
+  }
+  return s;
+}
+Gate line_at(double y, int dir) {   // A west, B east (60 m wide)
+  Gate g; g.enabled = true;
+  double kx = MD * std::cos(LAT0 * PI / 180);
+  g.a = {LAT0 + y / MD, LON0 - 30 / kx}; g.b = {LAT0 + y / MD, LON0 + 30 / kx}; g.direction = dir;
+  return g;
+}
+}  // namespace
+
+EQ_TEST(pista, course_lines_like_laredo) {
+  Session s = course_session();
+  for (int dir : {-1, 0}) {   // DCHA_A_IZQ (moving north) and AMBOS: the same single pass
+    EngineConfig c = psi();
+    c.racing.course.start = line_at(600, dir); c.racing.course.start.name = "Salida";
+    c.racing.course.finish = line_at(1800, dir); c.racing.course.finish.name = "Meta";
+    double kx = MD * std::cos(LAT0 * PI / 180);
+    for (auto p : {std::make_pair(-200.0, -100.0), std::make_pair(200.0, -100.0), std::make_pair(200.0, 2500.0), std::make_pair(-200.0, 2500.0)})
+      c.racing.course.fence.push_back({LAT0 + p.second / MD, LON0 + p.first / kx});
+    Analysis a = analyse(s, c);
+    const RacingResult& r = a.racing;
+    REPORT("sentido %d: cruces %zu, pasadas %zu, base %s\n", dir, r.crossings.size(), r.passes.size(), r.phase_basis.c_str());
+    CHECK(r.course_defined);
+    CHECK(r.crossings.size() == 4);
+    CHECK(r.passes.size() == 1);
+    CHECK_NEAR(r.gate_distance_m, 1200, 0.5);
+    CHECK_NEAR(r.fence_inside_pct, 100, 1e-9);
+    if (!r.passes.empty()) {
+      const Effort& p = r.passes[0];
+      REPORT("pasada %.2f s, %.1f m, vmax %.2f, recuperación %.1f s, parciales %zu\n", p.duration_s, p.distance_m, p.vmax, p.recovery_to_walk_s, p.sectionals.size());
+      CHECK_NEAR(p.t0, 368.67, 0.05);
+      CHECK_NEAR(p.t1, 443.75, 0.05);
+      CHECK_NEAR(p.duration_s, 75.08, 0.08);
+      CHECK_NEAR(p.distance_m, 1200, 3);
+      CHECK_NEAR(p.vmax, 16, 0.1);
+      CHECK(p.sectionals.size() == 6);
+      CHECK_NEAR(p.recovery_to_walk_s, 459.58 - 443.75, 0.3);
+      CHECK_NEAR(r.best_pass_s, p.duration_s, 1e-9);
+    }
+    CHECK(r.phase_basis == "LINEAS");
+    CHECK_NEAR(r.warmup.duration_s, 368.67, 0.1);
+    CHECK_NEAR(r.cooldown.t0, 443.75, 0.05);
+    CHECK(r.warmup.trot_s > 200);
+    int counting = 0; for (const auto& x : r.crossings) counting += x.counts;
+    CHECK(counting == (dir == 0 ? 4 : 2));
+  }
+  // smaller fence: part of the session outside -> warning
+  EngineConfig c = psi();
+  c.racing.course.start = line_at(600, -1); c.racing.course.finish = line_at(1800, -1);
+  double kx = MD * std::cos(LAT0 * PI / 180);
+  for (auto p : {std::make_pair(-200.0, 0.0), std::make_pair(200.0, 0.0), std::make_pair(200.0, 1900.0), std::make_pair(-200.0, 1900.0)})
+    c.racing.course.fence.push_back({LAT0 + p.second / MD, LON0 + p.first / kx});
+  Analysis b = analyse(s, c);
+  CHECK(b.racing.fence_inside_pct < 95);
+  bool warned = false; for (const auto& w : b.racing.warnings) if (w.find("fuera de la geocerca") != std::string::npos) warned = true;
+  CHECK(warned);
+  // wrong direction: no pass, and a clear warning
+  c.racing.course.start = line_at(600, 1); c.racing.course.finish = line_at(1800, 1);
+  Analysis d = analyse(s, c);
+  CHECK(d.racing.passes.empty());
+}
+
+EQ_TEST(pista, course_from_geocercas_json_via_c_api) {
+  Session s = course_session();
+  const char* path = "pista_regaton_test.avr";
+  CHECK(eqfix::write_raw(path, s));
+  Gate st = line_at(600, -1), fi = line_at(1800, -1);
+  char opt[2048];
+  snprintf(opt, sizeof(opt),
+           "{\"raza\":\"PSI\",\"plan_geocercas\":{\"Version\":1,\"Lines\":["
+           "{\"Enabled\":false,\"Name\":\"Salida / meta\",\"Role\":\"StartFinish\"},"
+           "{\"Enabled\":true,\"Name\":\"Salida\",\"Role\":\"Start\",\"A\":{\"Lat\":%.8f,\"Lon\":%.8f},\"B\":{\"Lat\":%.8f,\"Lon\":%.8f},\"Direction\":\"RightToLeft\"},"
+           "{\"Enabled\":true,\"Name\":\"Meta\",\"Role\":\"Finish\",\"A\":{\"Lat\":%.8f,\"Lon\":%.8f},\"B\":{\"Lat\":%.8f,\"Lon\":%.8f},\"Direction\":\"RightToLeft\"},"
+           "{\"Enabled\":false,\"Name\":\"Control\",\"Role\":\"Checkpoint\"}],"
+           "\"Fences\":[{\"Name\":\"Regaton\",\"Type\":\"Polygon\",\"Active\":true,\"Vertices\":[{\"Lat\":43.39,\"Lon\":-3.44},{\"Lat\":43.39,\"Lon\":-3.42},{\"Lat\":43.43,\"Lon\":-3.42},{\"Lat\":43.43,\"Lon\":-3.44}]},null]}}",
+           st.a.lat, st.a.lon, st.b.lat, st.b.lon, fi.a.lat, fi.a.lon, fi.b.lat, fi.b.lon);
+  const char* paths[1] = {path};
+  char* out = nullptr;
+  int rc = avo_eq_analyse_ex(paths, 1, opt, nullptr, &out);
+  CHECK(rc == 0 && out);
+  json::Value v; std::string err;
+  CHECK(out && json::parse(out, &v, &err));
+  const json::Value& rec = v["trabajo_pista"]["recorrido"];
+  CHECK(rec["nombre"].str() == "Regaton");
+  CHECK(rec["pasadas"].a.size() == 1);
+  CHECK_NEAR(rec["pasadas"][0]["duracion_s"].num(), 75.08, 0.1);
+  CHECK_NEAR(rec["dentro_geocerca_pct"].num(), 100, 1e-9);
+  CHECK(v["trabajo_pista"]["fases"]["base"].str() == "LINEAS");
+  avo_eq_free(out);
+  CHECK(avo_eq_analyse_ex(paths, 1, "{\"recorrido\":{\"salida\":{\"a\":[43.4,-3.43]}}}", nullptr, &out) == 5); avo_eq_free(out);
+  CHECK(avo_eq_analyse_ex(paths, 1, "{\"raza\":\"PONI\"}", nullptr, &out) == 5); avo_eq_free(out);
+  std::remove(path);
+}
+
+EQ_TEST(pista, course_in_training_summary) {
+  Session s = course_session();
+  EngineConfig c = psi();
+  c.racing.course.start = line_at(600, -1); c.racing.course.finish = line_at(1800, -1); c.racing.course.name = "Regaton";
+  Analysis a = analyse(s, c);
+  std::string js = to_json(a, s, c, false);
+  char* out = nullptr;
+  CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-11-01\"}", &out) == 0);
+  json::Value v; std::string err;
+  CHECK(out && json::parse(out, &v, &err));
+  const json::Value& rc = v["trabajo_pista"]["recorrido"];
+  CHECK(rc["nombre"].str() == "Regaton" && rc["pasadas"].num() == 1);
+  CHECK_NEAR(rc["mejor_pasada_s"].num(), 75.08, 0.1);
+  SessionSummary back;
+  CHECK(training_summary_from_json(v, &back, &err) && back.race.passes == 1 && std::fabs(back.race.best_pass_s - 75.08) < 0.1);
   avo_eq_free(out);
 }

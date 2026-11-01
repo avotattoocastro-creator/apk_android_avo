@@ -120,6 +120,9 @@ std::string params_hash(const EngineConfig& c) {
   snprintf(rb, sizeof(rb), "|%s|%g|%g|%g|%g|%g|%g|%g|%g", c.racing.breed.name.c_str(), c.racing.breed.work_speed, c.racing.breed.fast_speed,
            c.racing.breed.ref_speed[0], c.racing.breed.ref_speed[1], c.racing.split_m, c.racing.lead_sign, c.racing.turn_min_deg_s, c.racing.event_k);
   std::string all = std::string(b) + rb;
+  auto gate = [&](const Gate& g) { char x[160]; snprintf(x, sizeof(x), "|%d,%.7f,%.7f,%.7f,%.7f,%d", g.enabled ? 1 : 0, g.a.lat, g.a.lon, g.b.lat, g.b.lon, g.direction); all += x; };
+  gate(c.racing.course.start); gate(c.racing.course.finish); gate(c.racing.course.start_finish);
+  for (const auto& p : c.racing.course.fence) { char x[64]; snprintf(x, sizeof(x), "|%.7f,%.7f", p.lat, p.lon); all += x; }
   uint64_t h = 1469598103934665603ull;
   for (const char* p = all.c_str(); *p; p++) { h ^= (uint8_t)*p; h *= 1099511628211ull; }
   char out[20]; snprintf(out, sizeof(out), "%016llx", (unsigned long long)h);

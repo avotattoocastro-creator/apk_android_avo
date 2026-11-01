@@ -2,7 +2,7 @@
 
 **Objetivo: analizar los ENTRENAMIENTOS (trabajo en pista), no las carreras.** El código interno se llama `racing`.
 
-Código: `include/avo_eq/racing.h`, `src/racing/racing.cpp`. Pruebas: `tests/test_racing.cpp` (suite `pista`, 7 casos).
+Código: `include/avo_eq/racing.h`, `src/racing/racing.cpp`. Pruebas: `tests/test_racing.cpp` (suite `pista`, 10 casos).
 Bloque `trabajo_pista` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analyse_ex`:
 - `raza`: `GENERICO` (por defecto), `PSI` o `ARABE`;
 - `parcial_m`: 200 por defecto (201.168 = furlong);
@@ -86,6 +86,19 @@ Bloque `trabajo_pista` del JSON `avo-equine-analysis`. Opciones de `avo_eq_analy
   - **caída de la velocidad máxima** y **de la longitud de zancada** entre la primera y la última repetición rápida;
   - recuperación media.
 - **Calentamiento corto:** aviso si el primer trabajo rápido empieza antes de 10 min (`warmup_min_s`, valor de partida).
+
+## G. Recorrido de entrenamiento (líneas de salida y meta, geocerca), OPCIONAL
+- **Fuentes de datos:** todo sale del **chaleco GPS RTK** y de la **cincha BNO085**.
+- **Sin líneas** (lo normal), el motor detecta calentamiento, trabajos, series y vuelta a la calma por la velocidad RTK y la cincha, en cualquier zona. La zona de entrenamiento puede cambiar.
+- **Con líneas** (opción `recorrido` o `plan_geocercas`, que es el mismo `geocercas.json` de Windows e iPad), las pasadas se cortan exactamente en las líneas:
+  - **detección del cruce:** se usa la misma prueba geométrica que el reloj (`avo_session.cpp`) y AVO Windows (`LineAnalysis.Crosses`), con el instante interpolado;
+  - **sentido:** AMBOS, IZQ_A_DCHA o DCHA_A_IZQ, mirando de A a B, como en Windows;
+  - **qué es una pasada:** va de la última SALIDA en el sentido correcto a la META siguiente que cuenta. Si la línea de SALIDA se cruza en sentido contrario (el calentamiento que va hacia el otro lado), la salida pendiente se anula. Con una línea SALIDA_META, se cuentan las vueltas;
+  - **qué se calcula de cada pasada:** lo mismo que de un trabajo (parciales con un último tramo hasta la meta, máxima, caída, zancada, mano y recuperación);
+  - **fases:** pasan a contarse por las líneas (`fases.base` = `LINEAS`).
+- **Geocerca de grabación:** es opcional. Se da el porcentaje de épocas dentro de ella, y avisa si baja del 95 %.
+- **Historia:** `RECORRIDO.mejor_pasada_s` y `RECORRIDO.v_media_mejor` (informativas). Sirven para comparar días en el mismo recorrido.
+- **Referencia del usuario:** Playa del Regatón (Laredo). Calentamiento hacia el oeste hasta pasada la salida, trabajo de la salida a la meta hacia el este, vuelta a la calma pasada la meta y salida por el acceso central. Es aproximada y puede variar.
 
 ## E. Eventos de la cincha (EXPERIMENTAL)
 - `IMPACTO_ATIPICO`: pico vertical de una zancada por encima de mediana + 6·MAD de la sesión y de 1,5 g. Puede ser un tropiezo o una mala pisada.

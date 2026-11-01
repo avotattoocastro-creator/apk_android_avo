@@ -110,6 +110,94 @@ void fit_line(const std::vector<double>& x, const std::vector<double>& y, double
   *b = sxy / sxx; *a = my - *b * mx; *r = syy > 0 ? sxy / std::sqrt(sxx * syy) : kNaN;
 }
 
+// Track slice of one effort or pass: first and last points are its exact limits (possibly interpolated).
+struct Track { std::vector<double> t, d, v, a; };
+
+void fill_effort(Effort* E, const Track& T, const RacingResult& r, const RacingConfig& c) {
+  Effort& e = *E;
+  size_t n = T.t.size(), i0 = 0, i1 = n - 1;
+  e.t0 = T.t[i0]; e.t1 = T.t[i1]; e.duration_s = e.t1 - e.t0;
+  double d0 = T.d[i0], d1 = T.d[i1];
+  e.distance_m = d1 - d0; e.speed_mean = e.duration_s > 0 ? e.distance_m / e.duration_s : kNaN;
+  // vmax over a 1 s moving mean (no single-epoch spikes)
+  double best = -1, tbest = e.t0;
+  for (size_t k = i0; k <= i1; k++) {
+    double s = 0; int m = 0;
+    for (size_t q = k; q <= i1 && T.t[q] - T.t[k] < 1.0 + 1e-9; q++) if (!std::isnan(T.v[q])) { s += T.v[q]; m++; }
+    if (m && s / m > best) { best = s / m; tbest = T.t[k]; }
+  }
+  e.vmax = best > 0 ? best : kNaN; e.t_to_vmax_s = tbest - e.t0;
+  e.dist_above_90_m = 0;
+  for (size_t k = i0 + 1; k <= i1; k++)
+    if (!std::isnan(T.v[k]) && !std::isnan(T.v[k - 1]) && !std::isnan(T.d[k]) && !std::isnan(T.d[k - 1]) && 0.5 * (T.v[k] + T.v[k - 1]) >= 0.9 * e.vmax)
+      e.dist_above_90_m += T.d[k] - T.d[k - 1];
+  for (size_t k = i0; k <= i1; k++) if (!std::isnan(T.a[k]) && (std::isnan(e.accel_max) || T.a[k] > e.accel_max)) e.accel_max = T.a[k];
+  for (double d = d0 + c.split_m; d <= d1 + 1e-6; d += c.split_m) {
+    Sectional s; s.from_m = d - c.split_m - d0; s.to_m = d - d0;
+    double ta = s.from_m == 0 ? e.t0 : time_at_dist(T.t, T.d, i0, i1, d - c.split_m), tb = time_at_dist(T.t, T.d, i0, i1, std::min(d, d1));
+    if (!std::isnan(ta) && !std::isnan(tb) && tb > ta) { s.time_s = tb - ta; s.speed = c.split_m / s.time_s; }
+    e.sectionals.push_back(s);
+  }
+  // last piece up to the end (the finish line of a course) when it is at least a quarter of a split
+  {
+    double done = c.split_m * std::floor((d1 - d0) / c.split_m + 1e-9), rest = (d1 - d0) - done;
+    if (rest >= 0.25 * c.split_m) {
+      Sectional s; s.from_m = done; s.to_m = d1 - d0;
+      double ta = done == 0 ? e.t0 : time_at_dist(T.t, T.d, i0, i1, d0 + done);
+      if (!std::isnan(ta) && e.t1 > ta) { s.time_s = e.t1 - ta; s.speed = rest / s.time_s; }
+      e.sectionals.push_back(s);
+    }
+  }
+  auto tail = [&](double D, double* tt, double* vv) {
+    if (e.distance_m < D) return;
+    double ta = time_at_dist(T.t, T.d, i0, i1, d1 - D);
+    if (!std::isnan(ta) && e.t1 > ta) { *tt = e.t1 - ta; *vv = D / *tt; }
+  };
+  tail(200, &e.last_200_s, &e.v_last_200);
+  tail(400, &e.last_400_s, &e.v_last_400);
+  if (e.distance_m >= 400 && !std::isnan(e.v_last_200) && e.vmax > 0) e.fatigue_pct = 100.0 * (e.vmax - e.v_last_200) / e.vmax;
+  const double Ds[] = {200, 400, 600, 800, 1000, 1200, 1600};
+  for (double D : Ds) {
+    if (D > e.distance_m + 1e-6) break;
+    BestSplit b; b.distance_m = D;
+    for (size_t k = i0; k <= i1; k++) {
+      if (std::isnan(T.d[k]) || T.d[k] + D > d1 + 1e-6) continue;
+      double tb = time_at_dist(T.t, T.d, k, i1, T.d[k] + D);
+      if (!std::isnan(tb) && (std::isnan(b.time_s) || tb - T.t[k] < b.time_s)) { b.time_s = tb - T.t[k]; b.t0 = T.t[k]; }
+    }
+    e.best.push_back(b);
+  }
+  // strides of this effort
+  std::vector<double> sv, sf, sl, sfx, slx, sft, slt;
+  int last = 0; double last_t = -1e9;
+  for (const auto& s : r.strides) {
+    double tm = 0.5 * (s.t0 + s.t1);
+    if (tm < e.t0 || tm > e.t1) continue;
+    e.strides++;
+    if (s.lead > 0) e.lead_left++; else if (s.lead < 0) e.lead_right++;
+    if (s.lead != 0) { if (last != 0 && s.lead != last && s.t0 - last_t < 2.0) e.lead_changes++; last = s.lead; last_t = s.t1; }
+    sft.push_back(s.freq_hz);
+    if (!std::isnan(s.length_m)) slt.push_back(s.length_m);
+    if (std::isnan(s.speed) || std::isnan(s.length_m)) continue;
+    if (s.speed >= 0.95 * e.vmax) { sfx.push_back(s.freq_hz); slx.push_back(s.length_m); }
+    if (s.speed >= c.breed.work_speed) { sv.push_back(s.speed); sf.push_back(s.freq_hz); sl.push_back(s.length_m); }
+  }
+  e.sf_at_vmax = median_of(sfx); e.sl_at_vmax = median_of(slx);
+  e.sf_max = pct(sft, 0.95); e.sl_max = pct(slt, 0.95);
+  if (sv.size() >= 8) {
+    double vmin = *std::min_element(sv.begin(), sv.end()), vmx = *std::max_element(sv.begin(), sv.end());
+    if (vmx - vmin >= 1.5) {
+      double rl;
+      fit_line(sv, sf, &e.sf_icpt, &e.sf_slope, &e.fit_r_sf);
+      fit_line(sv, sl, &e.sl_icpt, &e.sl_slope, &rl);
+      for (int k = 0; k < 2; k++) {
+        double vr = c.breed.ref_speed[k];
+        if (vr >= vmin - 0.25 && vr <= vmx + 0.25) { e.sf_ref[k] = e.sf_icpt + e.sf_slope * vr; e.sl_ref[k] = e.sl_icpt + e.sl_slope * vr; }
+      }
+    }
+  }
+}
+
 }  // namespace
 
 RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& imu, const ClockMap girth_to_gnss[3],
@@ -455,84 +543,105 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
       size_t i0 = i, i1 = end;
       i = end + 1;
       if (g.t[i1] - g.t[i0] < c.effort_min_s) continue;
+      Track T;
+      for (size_t k = i0; k <= i1; k++) { T.t.push_back(g.t[k]); T.d.push_back(g.dist[k]); T.v.push_back(g.speed[k]); T.a.push_back(g.accel[k]); }
+      if (std::isnan(T.d.front()) || std::isnan(T.d.back())) continue;
       Effort e; e.id = ++id;
-      e.t0 = g.t[i0]; e.t1 = g.t[i1]; e.duration_s = e.t1 - e.t0;
-      double d0 = g.dist[i0], d1 = g.dist[i1];
-      if (std::isnan(d0) || std::isnan(d1)) continue;
-      e.distance_m = d1 - d0; e.speed_mean = e.duration_s > 0 ? e.distance_m / e.duration_s : kNaN;
-      // vmax over a 1 s moving mean (no single-epoch spikes)
-      double best = -1, tbest = e.t0;
-      for (size_t k = i0; k <= i1; k++) {
-        double s = 0; int m = 0;
-        for (size_t q = k; q <= i1 && g.t[q] - g.t[k] < 1.0 + 1e-9; q++) if (!std::isnan(g.speed[q])) { s += g.speed[q]; m++; }
-        if (m && s / m > best) { best = s / m; tbest = g.t[k]; }
-      }
-      e.vmax = best > 0 ? best : kNaN; e.t_to_vmax_s = tbest - e.t0;
-      e.dist_above_90_m = 0;
-      for (size_t k = i0 + 1; k <= i1; k++)
-        if (!std::isnan(g.speed[k]) && !std::isnan(g.speed[k - 1]) && 0.5 * (g.speed[k] + g.speed[k - 1]) >= 0.9 * e.vmax) e.dist_above_90_m += g.dist[k] - g.dist[k - 1];
-      for (size_t k = i0; k <= i1; k++) if (!std::isnan(g.accel[k]) && (std::isnan(e.accel_max) || g.accel[k] > e.accel_max)) e.accel_max = g.accel[k];
-      for (double d = d0 + c.split_m; d <= d1 + 1e-6; d += c.split_m) {
-        Sectional s; s.from_m = d - c.split_m - d0; s.to_m = d - d0;
-        double ta = time_at_dist(g.t, g.dist, i0, i1, d - c.split_m), tb = time_at_dist(g.t, g.dist, i0, i1, d);
-        if (s.from_m == 0) ta = e.t0;
-        if (!std::isnan(ta) && !std::isnan(tb) && tb > ta) { s.time_s = tb - ta; s.speed = c.split_m / s.time_s; }
-        e.sectionals.push_back(s);
-      }
-      auto tail = [&](double D, double* tt, double* vv) {
-        if (e.distance_m < D) return;
-        double ta = time_at_dist(g.t, g.dist, i0, i1, d1 - D);
-        if (!std::isnan(ta) && e.t1 > ta) { *tt = e.t1 - ta; *vv = D / *tt; }
-      };
-      tail(200, &e.last_200_s, &e.v_last_200);
-      tail(400, &e.last_400_s, &e.v_last_400);
-      if (e.distance_m >= 400 && !std::isnan(e.v_last_200) && e.vmax > 0) e.fatigue_pct = 100.0 * (e.vmax - e.v_last_200) / e.vmax;
-      const double Ds[] = {200, 400, 600, 800, 1000, 1200, 1600};
-      for (double D : Ds) {
-        if (D > e.distance_m + 1e-6) break;
-        BestSplit b; b.distance_m = D;
-        for (size_t k = i0; k <= i1; k++) {
-          if (std::isnan(g.dist[k]) || g.dist[k] + D > d1 + 1e-6) continue;
-          double tb = time_at_dist(g.t, g.dist, k, i1, g.dist[k] + D);
-          if (!std::isnan(tb) && (std::isnan(b.time_s) || tb - g.t[k] < b.time_s)) { b.time_s = tb - g.t[k]; b.t0 = g.t[k]; }
-        }
-        e.best.push_back(b);
-        if (D == 200 && !std::isnan(b.time_s) && (std::isnan(r.best_200_s) || b.time_s < r.best_200_s)) r.best_200_s = b.time_s;
-      }
-      // strides of this effort
-      std::vector<double> sv, sf, sl, sfx, slx, sft, slt;
-      int last = 0; double last_t = -1e9;
-      for (const auto& s : r.strides) {
-        double tm = 0.5 * (s.t0 + s.t1);
-        if (tm < e.t0 || tm > e.t1) continue;
-        e.strides++;
-        if (s.lead > 0) e.lead_left++; else if (s.lead < 0) e.lead_right++;
-        if (s.lead != 0) { if (last != 0 && s.lead != last && s.t0 - last_t < 2.0) e.lead_changes++; last = s.lead; last_t = s.t1; }
-        sft.push_back(s.freq_hz);
-        if (!std::isnan(s.length_m)) slt.push_back(s.length_m);
-        if (std::isnan(s.speed) || std::isnan(s.length_m)) continue;
-        if (s.speed >= 0.95 * e.vmax) { sfx.push_back(s.freq_hz); slx.push_back(s.length_m); }
-        if (s.speed >= c.breed.work_speed) { sv.push_back(s.speed); sf.push_back(s.freq_hz); sl.push_back(s.length_m); }
-      }
-      e.sf_at_vmax = median_of(sfx); e.sl_at_vmax = median_of(slx);
-      e.sf_max = pct(sft, 0.95); e.sl_max = pct(slt, 0.95);
-      if (sv.size() >= 8) {
-        double vmin = *std::min_element(sv.begin(), sv.end()), vmx = *std::max_element(sv.begin(), sv.end());
-        if (vmx - vmin >= 1.5) {
-          double rl;
-          fit_line(sv, sf, &e.sf_icpt, &e.sf_slope, &e.fit_r_sf);
-          fit_line(sv, sl, &e.sl_icpt, &e.sl_slope, &rl);
-          for (int k = 0; k < 2; k++) {
-            double vr = c.breed.ref_speed[k];
-            if (vr >= vmin - 0.25 && vr <= vmx + 0.25) { e.sf_ref[k] = e.sf_icpt + e.sf_slope * vr; e.sl_ref[k] = e.sl_icpt + e.sl_slope * vr; }
-          }
-        }
-      }
+      fill_effort(&e, T, r, c);
       e.type = e.vmax >= c.breed.fast_speed ? "TRABAJO_RAPIDO" : "GALOPE_TRABAJO";
       if (std::isnan(r.vmax) || e.vmax > r.vmax) r.vmax = e.vmax;
+      for (const auto& bs : e.best) if (bs.distance_m == 200 && !std::isnan(bs.time_s) && (std::isnan(r.best_200_s) || bs.time_s < r.best_200_s)) r.best_200_s = bs.time_s;
       r.efforts.push_back(e);
     }
   }
+  // ================================================================ G. course: start / finish lines
+  if (c.course.defined() && n > 2) {
+    r.course_defined = true; r.course_name = c.course.name;
+    const Gate* ref = c.course.start.enabled ? &c.course.start : &c.course.start_finish;
+    const double lat0 = ref->a.lat, lon0 = ref->a.lon, M = 111320.0, kx = M * std::cos(lat0 * 0.017453292519943295);
+    auto X = [&](double lon) { return (lon - lon0) * kx; };
+    auto Y = [&](double lat) { return (lat - lat0) * M; };
+    if (c.course.start.enabled && c.course.finish.enabled) {
+      double sx = 0.5 * (X(c.course.start.a.lon) + X(c.course.start.b.lon)), sy = 0.5 * (Y(c.course.start.a.lat) + Y(c.course.start.b.lat));
+      double fx = 0.5 * (X(c.course.finish.a.lon) + X(c.course.finish.b.lon)), fy = 0.5 * (Y(c.course.finish.a.lat) + Y(c.course.finish.b.lat));
+      r.gate_distance_m = std::hypot(fx - sx, fy - sy);
+    }
+    // same geometry as the watch (avo_session.cpp crosses()) and AVO Windows (LineAnalysis.Crosses)
+    auto detect = [&](const Gate& G, const char* role) {
+      if (!G.enabled) return;
+      double ax = X(G.a.lon), ay = Y(G.a.lat), bx = X(G.b.lon), by = Y(G.b.lat);
+      size_t prev = SIZE_MAX;
+      for (size_t k = 0; k < n; k++) {
+        if (std::isnan(g.lat[k]) || std::isnan(g.lon[k])) continue;
+        if (prev != SIZE_MAX && g.t[k] - g.t[prev] <= 2.0) {
+          double px = X(g.lon[prev]), py = Y(g.lat[prev]), qx = X(g.lon[k]), qy = Y(g.lat[k]);
+          double sp = (bx - ax) * (py - ay) - (by - ay) * (px - ax), sq = (bx - ax) * (qy - ay) - (by - ay) * (qx - ax);
+          bool pp = sp >= 0, qp = sq >= 0;
+          if (pp != qp) {
+            double sa = (qx - px) * (ay - py) - (qy - py) * (ax - px), sb = (qx - px) * (by - py) - (qy - py) * (bx - px);
+            if ((sa >= 0) != (sb >= 0) || sa == 0 || sb == 0) {
+              double dx = qx - px, dy = qy - py, ex = bx - ax, ey = by - ay, den = dx * ey - dy * ex;
+              double f = std::fabs(den) > 1e-12 ? std::max(0.0, std::min(1.0, ((ax - px) * ey - (ay - py) * ex) / den)) : 0.5;
+              GateCrossing x; x.gate = role; x.t = g.t[prev] + f * (g.t[k] - g.t[prev]); x.left_to_right = pp && !qp;
+              x.counts = G.direction == 0 || (G.direction > 0) == x.left_to_right;
+              r.crossings.push_back(x);
+            }
+          }
+        }
+        prev = k;
+      }
+    };
+    detect(c.course.start, "SALIDA"); detect(c.course.finish, "META"); detect(c.course.start_finish, "SALIDA_META");
+    std::sort(r.crossings.begin(), r.crossings.end(), [](const GateCrossing& a, const GateCrossing& b) { return a.t < b.t; });
+    // passes: last SALIDA crossing (in the right direction) before the next counting META, as AVO Windows, except
+    // that a SALIDA crossing in the wrong direction cancels the pending start; laps between SALIDA_META crossings
+    std::vector<std::pair<double, double>> spans;
+    double start = kNaN, lap = kNaN;
+    for (const auto& x : r.crossings) {
+      // crossing the start line the wrong way cancels a pending start (warm-up passing the line backwards)
+      if (x.gate == "SALIDA") { start = x.counts ? x.t : kNaN; continue; }
+      if (!x.counts) continue;
+      else if (x.gate == "META" && !std::isnan(start)) { spans.push_back({start, x.t}); start = kNaN; }
+      else if (x.gate == "SALIDA_META") { if (!std::isnan(lap)) spans.push_back({lap, x.t}); lap = x.t; }
+    }
+    int id = 0;
+    for (const auto& sp : spans) {
+      if (sp.second - sp.first < 5.0) continue;
+      Track T;
+      T.t.push_back(sp.first); T.d.push_back(interp(g.t, g.dist, sp.first)); T.v.push_back(interp(g.t, g.speed, sp.first)); T.a.push_back(interp(g.t, g.accel, sp.first));
+      for (size_t k = 0; k < n; k++)
+        if (g.t[k] > sp.first && g.t[k] < sp.second) { T.t.push_back(g.t[k]); T.d.push_back(g.dist[k]); T.v.push_back(g.speed[k]); T.a.push_back(g.accel[k]); }
+      T.t.push_back(sp.second); T.d.push_back(interp(g.t, g.dist, sp.second)); T.v.push_back(interp(g.t, g.speed, sp.second)); T.a.push_back(interp(g.t, g.accel, sp.second));
+      if (std::isnan(T.d.front()) || std::isnan(T.d.back())) continue;
+      Effort e; e.id = ++id;
+      fill_effort(&e, T, r, c);
+      e.type = "PASADA";
+      if (!std::isnan(r.gate_distance_m) && e.distance_m < 0.5 * r.gate_distance_m) continue;   // not a real pass
+      if (std::isnan(r.best_pass_s) || e.duration_s < r.best_pass_s) r.best_pass_s = e.duration_s;
+      r.passes.push_back(e);
+    }
+    if (r.passes.empty()) r.warnings.push_back("recorrido definido pero sin pasadas completas de la salida a la meta (revisar el sentido de las líneas)");
+    // recording geofence
+    if (c.course.fence.size() >= 3) {
+      size_t in = 0, tot = 0;
+      for (size_t k = 0; k < n; k++) {
+        if (std::isnan(g.lat[k])) continue;
+        double px = X(g.lon[k]), py = Y(g.lat[k]);
+        bool inside = false;
+        for (size_t i = 0, j = c.course.fence.size() - 1; i < c.course.fence.size(); j = i++) {
+          double xi = X(c.course.fence[i].lon), yi = Y(c.course.fence[i].lat), xj = X(c.course.fence[j].lon), yj = Y(c.course.fence[j].lat);
+          if ((yi > py) != (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) inside = !inside;
+        }
+        tot++; if (inside) in++;
+      }
+      if (tot) r.fence_inside_pct = 100.0 * in / tot;
+      if (tot && r.fence_inside_pct < 95) {
+        char b[140]; snprintf(b, sizeof(b), "%.0f %% de la sesión fuera de la geocerca de grabación", 100 - r.fence_inside_pct);
+        r.warnings.push_back(b);
+      }
+    }
+  }
+
   // ================================================================ F. session structure
   if (n > 2) {
     double ts = kNaN, te = kNaN;
@@ -550,31 +659,40 @@ RacingResult analyse_racing(const GnssResult& g, const std::vector<ImuSeries>& i
         else if (s.gait == Gait::CANTER_GALLOP) P->canter_s += o; else if (s.gait == Gait::STOPPED) P->stopped_s += o;
       }
     };
-    if (!r.efforts.empty() && !std::isnan(ts)) {
+    if (!r.passes.empty() && !std::isnan(ts)) {
+      r.phase_basis = "LINEAS";
+      fill(&r.warmup, ts, r.passes.front().t0);
+      fill(&r.work, r.passes.front().t0, r.passes.back().t1);
+      fill(&r.cooldown, r.passes.back().t1, te);
+    } else if (!r.efforts.empty() && !std::isnan(ts)) {
       fill(&r.warmup, ts, r.efforts.front().t0);
       fill(&r.work, r.efforts.front().t0, r.efforts.back().t1);
       fill(&r.cooldown, r.efforts.back().t1, te);
     }
-    // recovery to walk and pauses between repetitions
+    // recovery to walk and pauses between repetitions (efforts and course passes)
     std::vector<double> rec;
-    for (size_t k = 0; k < r.efforts.size(); k++) {
-      Effort& e = r.efforts[k];
+    auto recovery = [&](std::vector<Effort>& list, bool collect) {
+    for (size_t k = 0; k < list.size(); k++) {
+      Effort& e = list[k];
       size_t q = std::lower_bound(g.t.begin(), g.t.end(), e.t1) - g.t.begin();
       for (; q < n; q++) {
         if (std::isnan(g.speed[q]) || g.speed[q] > c.walk_speed) continue;
         size_t m = q; bool held = true;
         while (m < n && g.t[m] - g.t[q] < c.recovery_hold_s) { if (!std::isnan(g.speed[m]) && g.speed[m] > 1.2 * c.walk_speed) { held = false; break; } m++; }
         if (held && m < n) { e.recovery_to_walk_s = g.t[q] - e.t1; break; }
-        if (k + 1 < r.efforts.size() && g.t[q] >= r.efforts[k + 1].t0) break;
+        if (k + 1 < list.size() && g.t[q] >= list[k + 1].t0) break;
       }
-      if (k + 1 < r.efforts.size()) {
-        const Effort& nx = r.efforts[k + 1];
+      if (k + 1 < list.size()) {
+        const Effort& nx = list[k + 1];
         e.pause_to_next_s = nx.t0 - e.t1;
         double d0 = dist_at(e.t1), d1 = dist_at(nx.t0);
         if (e.pause_to_next_s > 0 && !std::isnan(d0) && !std::isnan(d1)) e.pause_speed_mean = (d1 - d0) / e.pause_to_next_s;
       }
-      if (e.type == "TRABAJO_RAPIDO" && !std::isnan(e.recovery_to_walk_s)) rec.push_back(e.recovery_to_walk_s);
+      if (collect && e.type == "TRABAJO_RAPIDO" && !std::isnan(e.recovery_to_walk_s)) rec.push_back(e.recovery_to_walk_s);
     }
+    };
+    recovery(r.efforts, true);
+    recovery(r.passes, false);
     if (!rec.empty()) { double s = 0; for (double x : rec) s += x; r.recovery_mean_s = s / rec.size(); }
     r.reps = (int)r.efforts.size();
     const Effort* first = nullptr; const Effort* lastf = nullptr;
@@ -633,10 +751,9 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
   o << ",\"mano\":{\"algoritmo\":\"LEAD_V1\",\"experimental\":true,\"calibracion\":" << q(r.lead_calibration) << ",\"signo\":" << num(r.lead_sign_used) << ",\"acuerdo_curvas\":" << num(r.lead_agreement)
     << ",\"zancadas_izquierda\":" << r.lead_left << ",\"zancadas_derecha\":" << r.lead_right << ",\"cambios\":" << r.lead_changes
     << ",\"mano_de_fuera_en_curva_pct\":" << num(r.wrong_lead_curve_pct) << "}";
-  o << ",\"trabajos\":{\"algoritmo\":\"EFFORT_V1\",\"distancia_galope_trabajo_m\":" << num(r.dist_work_m) << ",\"distancia_rapida_m\":" << num(r.dist_fast_m)
-    << ",\"v_max\":" << num(r.vmax) << ",\"mejor_200m_s\":" << num(r.best_200_s) << ",\"lista\":[";
-  for (size_t i = 0; i < r.efforts.size(); i++) {
-    const Effort& e = r.efforts[i];
+  auto effort_json = [&](const std::vector<Effort>& list) {
+  for (size_t i = 0; i < list.size(); i++) {
+    const Effort& e = list[i];
     o << (i ? "," : "") << "{\"id\":" << e.id << ",\"tipo\":" << q(e.type) << ",\"t0\":" << num(e.t0) << ",\"t1\":" << num(e.t1) << ",\"duracion_s\":" << num(e.duration_s)
       << ",\"distancia_m\":" << num(e.distance_m) << ",\"v_media\":" << num(e.speed_mean) << ",\"v_max\":" << num(e.vmax) << ",\"t_hasta_v_max_s\":" << num(e.t_to_vmax_s)
       << ",\"distancia_90_pct_m\":" << num(e.dist_above_90_m) << ",\"aceleracion_max\":" << num(e.accel_max) << ",\"ultimos_200m_s\":" << num(e.last_200_s)
@@ -654,7 +771,23 @@ std::string racing_json(const RacingResult& r, const RacingConfig& c) {
       << ",\"recuperacion_hasta_paso_s\":" << num(e.recovery_to_walk_s) << ",\"pausa_hasta_siguiente_s\":" << num(e.pause_to_next_s)
       << ",\"v_media_pausa\":" << num(e.pause_speed_mean) << "}";
   }
-  o << "]},\"fases\":{";
+  };
+  o << ",\"trabajos\":{\"algoritmo\":\"EFFORT_V1\",\"distancia_galope_trabajo_m\":" << num(r.dist_work_m) << ",\"distancia_rapida_m\":" << num(r.dist_fast_m)
+    << ",\"v_max\":" << num(r.vmax) << ",\"mejor_200m_s\":" << num(r.best_200_s) << ",\"lista\":[";
+  effort_json(r.efforts);
+  o << "]},\"recorrido\":";
+  if (!r.course_defined) o << "null";
+  else {
+    o << "{\"nombre\":" << q(r.course_name) << ",\"distancia_salida_meta_m\":" << num(r.gate_distance_m) << ",\"dentro_geocerca_pct\":" << num(r.fence_inside_pct)
+      << ",\"mejor_pasada_s\":" << num(r.best_pass_s) << ",\"cruces\":[";
+    for (size_t i = 0; i < r.crossings.size(); i++)
+      o << (i ? "," : "") << "{\"linea\":" << q(r.crossings[i].gate) << ",\"t\":" << num(r.crossings[i].t) << ",\"sentido\":\""
+        << (r.crossings[i].left_to_right ? "IZQ_A_DCHA" : "DCHA_A_IZQ") << "\",\"cuenta\":" << (r.crossings[i].counts ? "true" : "false") << "}";
+    o << "],\"pasadas\":[";
+    effort_json(r.passes);
+    o << "]}";
+  }
+  o << ",\"fases\":{\"base\":" << q(r.phase_basis) << ",";
   auto ph = [&](const char* name, const PhaseStats& P, bool comma) {
     o << (comma ? "," : "") << "\"" << name << "\":";
     if (!P.present) { o << "null"; return; }

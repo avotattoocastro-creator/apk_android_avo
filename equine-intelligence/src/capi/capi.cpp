@@ -1,4 +1,5 @@
 #include "avo_eq/avo_eq_c.h"
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 #include <string>
@@ -84,6 +85,51 @@ struct Opts {
   std::string when, cache_dir;
   avoeq::json::Value raw;
 };
+bool point(const avoeq::json::Value& p, avoeq::GeoPoint* g) {
+  if (p.type == avoeq::json::Value::ARR && p.a.size() == 2) { g->lat = p[0].num(NAN); g->lon = p[1].num(NAN); }
+  else if (p.type == avoeq::json::Value::OBJ) { g->lat = p.has("Lat") ? p["Lat"].num(NAN) : p["lat"].num(NAN); g->lon = p.has("Lon") ? p["Lon"].num(NAN) : p["lon"].num(NAN); }
+  else return false;
+  return g->lat >= -90 && g->lat <= 90 && g->lon >= -180 && g->lon <= 180;
+}
+int direction(const std::string& s) {
+  if (s == "IZQ_A_DCHA" || s == "LeftToRight") return 1;
+  if (s == "DCHA_A_IZQ" || s == "RightToLeft") return -1;
+  return 0;
+}
+bool course_from_options(const avoeq::json::Value& v, avoeq::CourseConfig* c, std::string* err) {
+  auto gate = [&](const avoeq::json::Value& x, avoeq::Gate* g, const char* what) {
+    if (x.is_null()) return true;
+    if (!point(x["a"], &g->a) || !point(x["b"], &g->b)) { *err = std::string("línea «") + what + "»: faltan los extremos a y b [lat, lon]"; return false; }
+    std::string s = x["sentido"].str("AMBOS");
+    if (s != "AMBOS" && s != "IZQ_A_DCHA" && s != "DCHA_A_IZQ") { *err = std::string("línea «") + what + "»: sentido AMBOS, IZQ_A_DCHA o DCHA_A_IZQ"; return false; }
+    g->direction = direction(s); g->enabled = true; g->name = x["nombre"].str(what);
+    return true;
+  };
+  const avoeq::json::Value& r = v["recorrido"];
+  if (!r.is_null()) {
+    if (r.type != avoeq::json::Value::OBJ) { *err = "«recorrido» debe ser un objeto"; return false; }
+    c->name = r["nombre"].str("");
+    if (!gate(r["salida"], &c->start, "salida") || !gate(r["meta"], &c->finish, "meta") || !gate(r["salida_meta"], &c->start_finish, "salida_meta")) return false;
+    for (const auto& p : r["geocerca"].a) { avoeq::GeoPoint g; if (!point(p, &g)) { *err = "geocerca: vértice no válido"; return false; } c->fence.push_back(g); }
+  }
+  const avoeq::json::Value& plan = v["plan_geocercas"];
+  if (!plan.is_null()) {
+    for (const auto& L : plan["Lines"].a) {
+      if (!L["Enabled"].boolean(false)) continue;
+      avoeq::Gate g; g.enabled = true; g.name = L["Name"].str("");
+      if (!point(L["A"], &g.a) || !point(L["B"], &g.b)) continue;
+      g.direction = direction(L["Direction"].str("Both"));
+      std::string role = L["Role"].str("StartFinish");
+      if (role == "Start") c->start = g; else if (role == "Finish") c->finish = g; else if (role == "StartFinish") c->start_finish = g;
+    }
+    for (const auto& F : plan["Fences"].a) {
+      if (F.is_null() || !F["Active"].boolean(true) || F["Type"].str("") != "Polygon" || !c->fence.empty()) continue;
+      for (const auto& p : F["Vertices"].a) { avoeq::GeoPoint g; if (point(p, &g)) c->fence.push_back(g); }
+      if (c->name.empty()) c->name = F["Name"].str("");
+    }
+  }
+  return true;
+}
 bool parse_opts(const char* text, Opts* o, std::string* err) {
   if (text && *text) { if (!avoeq::json::parse(text, &o->raw, err)) return false; if (o->raw.type != avoeq::json::Value::OBJ) { *err = "las opciones deben ser un objeto JSON"; return false; } }
   const auto& v = o->raw;
@@ -110,6 +156,9 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
     if (sm != 1 && sm != -1 && sm != 0) { *err = "signo_mano debe ser 1, -1 o 0"; return false; }
     o->cfg.racing.lead_sign = sm;
   }
+  // training course: "recorrido" {salida, meta, salida_meta: {a:[lat,lon], b:[lat,lon], sentido}, geocerca:[[lat,lon],…], nombre}
+  // or "plan_geocercas": the geocercas.json object written by AVO Windows / iPad (Lines with Role/Direction, Fences)
+  if (!course_from_options(v, &o->cfg.racing.course, err)) return false;
   std::string mp = v["modelo_aires"].str("");
   if (!mp.empty()) {
     std::ifstream f(mp, std::ios::binary); if (!f) { *err = "no se puede leer el modelo " + mp; return false; }

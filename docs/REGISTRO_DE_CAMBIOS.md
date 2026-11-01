@@ -24,6 +24,37 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-01 — Motor AVO Equine — Track Work: recorrido de entrenamiento con líneas de salida y meta (opcional)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** ver `git log` · **CI:** pendiente
+**Por qué:** el usuario comparte su zona de entrenamiento (Playa del Regatón, Laredo), con la geocerca de grabación, el calentamiento, la salida, el trabajo, la meta y el enfriamiento.
+- Aclara que es una **referencia aproximada que puede variar**.
+- Aclara que **todos los datos salen del chaleco GPS RTK y de la cincha BNO085**.
+- Por eso el recorrido es **opcional**: sin líneas sigue la detección por velocidad y cincha.
+**Qué cambia:**
+- **Opciones** `recorrido` (líneas `salida`, `meta` o `salida_meta` con sentido, y `geocerca`) o `plan_geocercas` (el `geocercas.json` de Windows/iPad: `Lines` con `Role` y `Direction`, y `Fences` de tipo polígono).
+- **Cruces:** misma geometría que el reloj y AVO Windows, con el instante interpolado.
+- **Pasadas** SALIDA → META con el mismo análisis que los trabajos. La SALIDA cruzada al revés anula la salida pendiente; así el calentamiento que pasa la línea hacia atrás no crea pasadas falsas.
+- **Fases** por líneas (`fases.base` = `LINEAS`).
+- **Geocerca:** porcentaje de épocas dentro y aviso.
+- **Parciales:** último tramo hasta la línea.
+- **Hash de parámetros** con el recorrido.
+- **Historia:** `RECORRIDO.mejor_pasada_s` y `RECORRIDO.v_media_mejor`.
+- **Refactorización:** el cálculo de un trabajo se hace en una sola función (`fill_effort`) para trabajos y pasadas.
+- **Fixtures** regeneradas.
+**Validación:**
+- IMPLEMENTADO. 82 casos y 1157 comprobaciones con ASan/UBSan, y en Release.
+- **Recorrido sintético como el del dibujo:** calentamiento hacia atrás pasando la salida, giro, galope de 1200 m, enfriamiento pasando la meta y vuelta cruzando la meta al revés.
+  - 1 pasada de 75,08 s (real 75,08 s).
+  - Recuperación de 15,8 s (real 15,83 s).
+  - Igual con sentido AMBOS.
+  - Con las líneas en el sentido equivocado no aparecen pasadas.
+  - Con una geocerca menor, avisa.
+  - También a través de la API C con un `geocercas.json` de Windows.
+- **NO VERIFICADO** con datos reales.
+**Pendiente:** que las apps pasen su `geocercas.json` al motor.
+
+---
+
 ## 2026-11-01 — Motor AVO Equine — AVO Track Work 1.0.0: el módulo de «carreras» pasa a ser de ENTRENAMIENTO (fases, series, recuperación)
 **Autor:** Claude · **Rama:** `feature/avo-training-analytics` · **Commits:** `ef704d8` · **CI:** run 41330093878 ✅ (Linux ASan/UBSan 79 casos/1103 comprobaciones, Windows MSVC, Android NDK ×3, JNI, fixtures)
 **Por qué:** el usuario aclara que el objetivo es analizar los **entrenamientos** de caballos de carreras PSI y árabes, no las carreras. Esta entrada corrige el enfoque de la anterior («AVO Racing 1.0.0»).

@@ -48,7 +48,8 @@ Mismos códigos de retorno; el texto se libera con `avo_eq_free`.
 `avo-equine-analysis` v2 añade `sesion.inicio_utc` (primera época GNSS con fecha y hora UTC, o `null`).
 
 ## Bloque `trabajo_pista` (AVO Track Work 1.0.0: entrenamiento de caballos de carreras) — ficha 13
-Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (200; 201.168 = furlong), `signo_mano` (0 | 1 | −1).
+Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (200; 201.168 = furlong), `signo_mano` (0 | 1 | −1),
+`recorrido` ({`nombre`, `salida` / `meta` / `salida_meta`: {`a`, `b`: [lat, lon], `sentido`}, `geocerca`: [[lat, lon], …]}) o `plan_geocercas` (objeto de `geocercas.json`).
 `trabajo_pista`:
 - `modulo` = `AVO_TRACK_WORK`, `perfil`;
 - `cincha`: `escala`, `lsb_por_g`, `calidad_vertical`, `sentido_avance_confirmado`, `vedba_media_g`, `carga_vedba_g_min`,
@@ -58,7 +59,8 @@ Opciones de `avo_eq_analyse_ex`: `raza` (GENERICO | PSI | ARABE), `parcial_m` (2
 - `trabajos`: distancias, `v_max`, `mejor_200m_s` y `lista` con, para cada trabajo: tipo, velocidades, `parciales`, `mejores`,
   últimos 200/400 m, `indice_caida_pct`, zancada a la máxima, `ajuste_f`, `ajuste_l`, `referencia`, mano,
   `recuperacion_hasta_paso_s`, `pausa_hasta_siguiente_s` y `v_media_pausa`;
-- `fases`: `calentamiento`, `trabajo` y `vuelta_a_la_calma`, cada una con duración, distancia y segundos parado, al paso, al trote y al galope (`null` si no hay trabajos);
+- `recorrido` (`null` sin líneas): `nombre`, `distancia_salida_meta_m`, `dentro_geocerca_pct`, `mejor_pasada_s`, `cruces` (línea, t, sentido, cuenta) y `pasadas` (mismo formato que los trabajos, con tipo `PASADA`);
+- `fases`: `base` (`VELOCIDAD` o `LINEAS`), `calentamiento`, `trabajo` y `vuelta_a_la_calma`, cada una con duración, distancia y segundos parado, al paso, al trote y al galope (`null` si no hay trabajos);
 - `series`: `repeticiones`, `rapidas`, `caida_v_max_pct`, `caida_zancada_pct`, `recuperacion_media_s`, `calentamiento_corto`;
 - `eventos`;
 - `avisos`.

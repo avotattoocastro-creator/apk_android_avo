@@ -39,8 +39,25 @@ struct BreedProfile {
 // "PSI" (pura sangre inglés), "ARABE" (pura sangre árabe) o "GENERICO". false si no se conoce.
 bool breed_profile(const std::string& name, BreedProfile* p);
 
+// Recorrido de entrenamiento (mismo formato que geocercas.json de Windows/iPad: líneas A→B con sentido).
+struct GeoPoint { double lat = NAN, lon = NAN; };
+struct Gate {
+  bool enabled = false;
+  std::string name;
+  GeoPoint a, b;
+  int direction = 0;                 // 0 ambos; +1 de izquierda a derecha (mirando de A a B); −1 de derecha a izquierda
+};
+struct CourseConfig {
+  Gate start, finish;                // SALIDA y META (si solo hay una línea SALIDA_META: vueltas entre cruces)
+  Gate start_finish;
+  std::vector<GeoPoint> fence;       // geocerca de grabación (polígono), opcional
+  std::string name;
+  bool defined() const { return (start.enabled && finish.enabled) || start_finish.enabled; }
+};
+
 struct RacingConfig {
   BreedProfile breed;
+  CourseConfig course;
   double split_m = 200.0;            // parciales (201.168 = furlong)
   double effort_min_s = 10.0;        // duración mínima de un trabajo
   double effort_gap_s = 3.0;         // bajadas cortas por debajo del umbral dentro del mismo trabajo
@@ -95,6 +112,8 @@ struct Effort {
   double pause_to_next_s = NAN, pause_speed_mean = NAN;   // pausa hasta la siguiente repetición
 };
 
+struct GateCrossing { std::string gate; double t = 0; bool left_to_right = false; bool counts = false; };
+
 struct PhaseStats {
   bool present = false;
   double t0 = NAN, t1 = NAN, duration_s = 0, distance_m = 0;
@@ -131,7 +150,16 @@ struct RacingResult {
   // D. trabajos
   std::vector<Effort> efforts;
   double best_200_s = NAN, vmax = NAN, dist_fast_m = 0, dist_work_m = 0;
+  // G. recorrido (líneas de salida y meta)
+  bool course_defined = false;
+  std::string course_name;
+  double gate_distance_m = NAN;      // distancia en línea recta entre los centros de salida y meta
+  std::vector<GateCrossing> crossings;
+  std::vector<Effort> passes;        // PASADA: de la salida a la meta (o vueltas)
+  double best_pass_s = NAN;
+  double fence_inside_pct = NAN;     // épocas GNSS dentro de la geocerca
   // F. estructura de la sesión
+  std::string phase_basis = "VELOCIDAD";   // LINEAS cuando hay pasadas por el recorrido
   PhaseStats warmup, work, cooldown;
   int reps = 0, fast_reps = 0;
   double vmax_drop_pct = NAN;        // (máxima de la 1.ª repetición rápida − de la última) / 1.ª

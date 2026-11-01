@@ -66,6 +66,10 @@ struct RaceSummary {
   int reps = 0, fast_reps = 0;
   double vmax_drop_pct = NAN, stride_drop_pct = NAN, recovery_mean_s = NAN;
   bool warmup_short = false;
+  // recorrido (líneas de salida y meta)
+  std::string course_name;
+  int passes = 0;
+  double best_pass_s = NAN, best_pass_speed = NAN, best_pass_fatigue_pct = NAN;
 };
 
 struct SessionSummary {

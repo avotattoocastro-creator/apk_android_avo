@@ -125,6 +125,8 @@ std::vector<MetricSpec> metric_specs() {
   v.push_back({"TRABAJO.recuperacion_hasta_paso_s", race(&RaceSummary::recovery_mean_s), false, +1, 3.0});
   v.push_back({"TRABAJO.caida_entre_series_pct", race(&RaceSummary::vmax_drop_pct), false, +1, 2.0});
   v.push_back({"TRABAJO.calentamiento_s", race(&RaceSummary::warmup_s), false, 0, 60.0});
+  v.push_back({"RECORRIDO.mejor_pasada_s", race(&RaceSummary::best_pass_s), false, 0, 0.5});
+  v.push_back({"RECORRIDO.v_media_mejor", race(&RaceSummary::best_pass_speed), false, 0, 0.1});
   return v;
 }
 
@@ -286,6 +288,15 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
     R.reps = (int)rc["series"]["repeticiones"].num(0); R.fast_reps = (int)rc["series"]["rapidas"].num(0);
     R.vmax_drop_pct = nnum(rc["series"]["caida_v_max_pct"]); R.stride_drop_pct = nnum(rc["series"]["caida_zancada_pct"]);
     R.recovery_mean_s = nnum(rc["series"]["recuperacion_media_s"]); R.warmup_short = rc["series"]["calentamiento_corto"].boolean(false);
+    const json::Value& co = rc["recorrido"];
+    if (co.type == json::Value::OBJ) {
+      R.course_name = co["nombre"].str();
+      R.passes = (int)co["pasadas"].a.size();
+      for (const auto& p : co["pasadas"].a) {
+        double d = nnum(p["duracion_s"]);
+        if (!std::isnan(d) && (std::isnan(R.best_pass_s) || d < R.best_pass_s)) { R.best_pass_s = d; R.best_pass_speed = nnum(p["v_media"]); R.best_pass_fatigue_pct = nnum(p["indice_caida_pct"]); }
+      }
+    }
     for (const auto& e : rc["eventos"].a) {
       std::string t = e["tipo"].str();
       if (t == "IMPACTO_ATIPICO") R.impacts++; else if (t == "MOVIMIENTO_LATERAL_BRUSCO") R.lateral_jolts++; else if (t == "SATURACION") R.saturations++;
@@ -328,7 +339,9 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"eventos\":{\"impactos_atipicos\":" << R.impacts << ",\"laterales_bruscos\":" << R.lateral_jolts << ",\"saturacion\":" << R.saturations << "}"
       << ",\"sesion\":{\"calentamiento_s\":" << num(R.warmup_s) << ",\"vuelta_a_la_calma_s\":" << num(R.cooldown_s) << ",\"repeticiones\":" << R.reps
       << ",\"rapidas\":" << R.fast_reps << ",\"caida_v_max_pct\":" << num(R.vmax_drop_pct) << ",\"caida_zancada_pct\":" << num(R.stride_drop_pct)
-      << ",\"recuperacion_media_s\":" << num(R.recovery_mean_s) << ",\"calentamiento_corto\":" << (R.warmup_short ? "true" : "false") << "}}";
+      << ",\"recuperacion_media_s\":" << num(R.recovery_mean_s) << ",\"calentamiento_corto\":" << (R.warmup_short ? "true" : "false") << "}"
+      << ",\"recorrido\":{\"nombre\":" << q(R.course_name) << ",\"pasadas\":" << R.passes << ",\"mejor_pasada_s\":" << num(R.best_pass_s)
+      << ",\"v_media_mejor\":" << num(R.best_pass_speed) << ",\"indice_caida_mejor_pct\":" << num(R.best_pass_fatigue_pct) << "}}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -376,6 +389,9 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     R.reps = (int)se["repeticiones"].num(0); R.fast_reps = (int)se["rapidas"].num(0);
     R.vmax_drop_pct = nnum(se["caida_v_max_pct"]); R.stride_drop_pct = nnum(se["caida_zancada_pct"]);
     R.recovery_mean_s = nnum(se["recuperacion_media_s"]); R.warmup_short = se["calentamiento_corto"].boolean(false);
+    const json::Value& co = rc["recorrido"];
+    R.course_name = co["nombre"].str(); R.passes = (int)co["pasadas"].num(0); R.best_pass_s = nnum(co["mejor_pasada_s"]);
+    R.best_pass_speed = nnum(co["v_media_mejor"]); R.best_pass_fatigue_pct = nnum(co["indice_caida_mejor_pct"]);
   }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
@@ -623,6 +639,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     for (const auto& s : ok) if (s.day >= r.reference_day - c.baseline_days) { double y = m.get(s); if (!std::isnan(y)) hist.push_back(y); }
     if (hist.empty() && m.name.compare(0, 8, "TRABAJO.") == 0) continue;
     if (hist.empty() && m.name.compare(0, 7, "CINCHA.") == 0) continue;
+    if (hist.empty() && m.name.compare(0, 10, "RECORRIDO.") == 0) continue;
     Baseline b = baseline_of(hist);
     Deviation d; d.metric = m.name; d.baseline = b.med; d.mad = b.mad; d.n = b.n;
     d.level = b.n >= c.baseline_min_sessions ? "DISPONIBLE" : "INSUFICIENTE";
@@ -648,7 +665,7 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   bool any_race = false;
   for (const auto& s : ok) if (s.race.present) any_race = true;
   for (const auto& m : specs) {
-    bool race_metric = m.name.compare(0, 8, "TRABAJO.") == 0 || m.name.compare(0, 7, "CINCHA.") == 0;
+    bool race_metric = m.name.compare(0, 8, "TRABAJO.") == 0 || m.name.compare(0, 7, "CINCHA.") == 0 || m.name.compare(0, 10, "RECORRIDO.") == 0;
     if (race_metric && !any_race) continue;
     add_trend(m.name, m.get);
   }
