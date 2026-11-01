@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-01 — Motor AVO Equine — AVO Training Analytics 1.0.0 (análisis de la historia de entrenamientos, fase 1)
-**Autor:** Claude · **Rama:** `feature/avo-training-analytics` (sale de `feature/ipad-app` `33476df`) · **Commits:** ver `git log` · **CI:** `build-equine-engine.yml` (pendiente)
+**Autor:** Claude · **Rama:** `feature/avo-training-analytics` (sale de `feature/ipad-app` `33476df`) · **Commits:** `78893e4`, `d1edc03`, `6816a98` · **CI:** run 41315952401 ✅ (Linux ASan/UBSan 71 casos/1020 comprobaciones, Windows MSVC 71 casos, Android NDK ×3, JNI en JVM, fixtures, resumen → historia) sobre `6816a98`
 **Qué cambia (petición del usuario: analizar los entrenamientos para Android, Windows e iOS):**
 - **Nuevo módulo del motor C++** `src/training/` + `include/avo_eq/training.h`. Es una sola implementación para
   las tres plataformas: Android (JNI), Windows (DLL) e iPad (compila `equine-intelligence/src` entero).
@@ -50,7 +50,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - `tests/test_dsp.cpp`: `normal_distribution` con desviación 0 abortaba con las aserciones de GCC 15 (run 41315372137); se construye con 1 cuando no hay ruido (no se usa).
 **Archivos:** `equine-intelligence/{include/avo_eq/training.h,include/avo_eq/avo_eq_c.h,src/training/training.cpp,src/capi/training_capi.cpp,src/core/engine.cpp,tools/training/avo_training_cli.cpp,tests/test_training.cpp,CMakeLists.txt,README.md,docs/FORMATO_RESULTADOS.md,docs/algoritmos/12_ENTRENAMIENTO.md}`, `core/src/test/resources/equine/{synthetic,sample}_analysis.json`, `.github/workflows/build-equine-engine.yml`.
 **No se ha tocado:** el resto de algoritmos del motor, las apps Android, Windows e iPad (sin pantallas todavía) y el firmware.
-**Validación:** IMPLEMENTADO · compilado y probado en la sesión en Linux: 71 casos y 1020 comprobaciones con ASan/UBSan, y en Release; fixtures OK · CI pendiente · **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida.
+**Validación:** IMPLEMENTADO · compilado y probado en Linux (71 casos, 1020 comprobaciones, ASan/UBSan) · CI run 41315952401 en verde · **NO VERIFICADO** con sesiones reales. Los factores de carga y los umbrales son valores de partida.
 **Pendiente:**
 - Integrar en las apps: JNI/Kotlin, P/Invoke/C# y Swift.
 - Pantalla «Entrenamientos del caballo» y formulario de valoración tras cada sesión.
