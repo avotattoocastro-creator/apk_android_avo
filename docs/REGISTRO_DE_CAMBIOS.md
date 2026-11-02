@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-02 — BACK 3.13.12 (Heltec) — vigilancia del resumen de señales y de reinicios del receptor
-**Autor:** Claude · **Rama:** `fix/back-3-13-12-nav-sig-watchdog` (desde `fix/back-3-13-11-usb-pololu-off` 9dce9f4) · **Commit:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `fix/back-3-13-12-nav-sig-watchdog` (desde `fix/back-3-13-11-usb-pololu-off` 9dce9f4) · **Commit:** `483e98f` · **CI:** [41533949119](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41533949119) (**éxito**: pruebas de host, imagen ESP32-S3 válida de 917 888 B con la versión 3.13.12; artefacto `AVO-BACK-V3-13-12-HELTEC`, caduca 01/01/2027)
 **Por qué:** prueba del 02/11/2026 (22:54), con el pecho 3.7.6, la espalda 3.13.11 al 28 % y la app 2.6-ntrip-auto-dev2.
 - La tarjeta «Calidad GNSS» se quedó fija en «Esperando el resumen de señales del receptor».
 - NAV-PVT seguía llegando (DGNSS, 43 cm) y el receptor usaba RTCM (17 195 mensajes).
@@ -36,7 +36,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - `.ino`: línea `VIGILANCIA` en el monitor serie. Versión 3.13.12. CI con la rama nueva.
 - 2 pruebas nuevas en el host: 39 casos y 432 comprobaciones, todas en verde en local.
 **No se ha tocado:** NAV-PVT, RTCM, ESP-NOW, la batería, el modo carga ni el Pololu.
-**Validación:** IMPLEMENTADO · pruebas de host en verde · CI pendiente · **NO VERIFICADO** en la espalda.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41533949119 · **NO VERIFICADO** en la espalda.
 **Pendiente:** instalar y comprobar que el resumen vuelve solo y que los contadores se ven en la app dev3.
 
 ## 2026-10-31 — BACK 3.13.11 (Heltec) — apagado real del Pololu con el USB
