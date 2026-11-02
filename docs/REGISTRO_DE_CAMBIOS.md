@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev3 — estado de los mensajes de calidad y contadores de la espalda 3.13.12
-**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** `ff3f2ce` · **CI:** [41534048266](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41534048266) (**éxito**: core 145 pruebas, emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV3-APK`, caduca 02/12/2026)
 **Prueba de la dev2 (02/11/2026, 22:54–22:57):**
 - «Edad de la corrección: hace 0,4 s»: funciona con el contador RTCM.
 - NTRIP: 1 reconexión, 4 GGA, 0 errores. DGNSS con 42,6 cm.
@@ -43,7 +43,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - `QualityMonBitsTest`: 2 pruebas nuevas. El vector del firmware comprueba también los campos nuevos.
 - Versión 2.6-ntrip-auto-dev3 (vc 39).
 
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en el móvil.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41534048266 · **NO VERIFICADO** en el móvil.
 
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev2 — arreglos de la prueba GNSS/NTRIP del balcón
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** `fb985d8` · **CI:** [41520440227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41520440227) (**éxito** a la primera: core 143 pruebas, 3 nuevas; emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV2-APK`, caduca 02/12/2026)
