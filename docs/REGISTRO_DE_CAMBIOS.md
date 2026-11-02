@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-02 — BACK 3.13.12 (Heltec) — vigilancia del resumen de señales y de reinicios del receptor
+**Autor:** Claude · **Rama:** `fix/back-3-13-12-nav-sig-watchdog` (desde `fix/back-3-13-11-usb-pololu-off` 9dce9f4) · **Commit:** ver `git log` · **CI:** pendiente
+**Por qué:** prueba del 02/11/2026 (22:54), con el pecho 3.7.6, la espalda 3.13.11 al 28 % y la app 2.6-ntrip-auto-dev2.
+- La tarjeta «Calidad GNSS» se quedó fija en «Esperando el resumen de señales del receptor».
+- NAV-PVT seguía llegando (DGNSS, 43 cm) y el receptor usaba RTCM (17 195 mensajes).
+- La 3.13.11 activa NAV-SAT/NAV-SIG en RAM una sola vez. Si el receptor pierde ese ajuste sin quedarse callado 5 s (reinicio breve, bajada de tensión), no lo vuelve a pedir.
+**Qué cambia:**
+- `avo_ubx_zed.{h,cpp}`: vigila el mensaje del resumen. Si en 10 s no llega, lo vuelve a pedir; tras 3 peticiones seguidas, una por minuto. Contadores `monitor_rearms()` y `receiver_resets()`. Diferencias con signo para no dar una pérdida falsa cuando el byte llega con una marca de tiempo posterior a la del tick.
+- `avo_back_core.cpp`: `quality_mon` = estado (bits 0–3), peticiones repetidas (bits 4–5) y redetecciones del receptor (bits 6–7), con saturación en 3. **Sin cambio de formato ni de longitud**: el pecho 3.7.6 lo reenvía tal cual.
+- `.ino`: línea `VIGILANCIA` en el monitor serie. Versión 3.13.12. CI con la rama nueva.
+- 2 pruebas nuevas en el host: 39 casos y 432 comprobaciones, todas en verde en local.
+**No se ha tocado:** NAV-PVT, RTCM, ESP-NOW, la batería, el modo carga ni el Pololu.
+**Validación:** IMPLEMENTADO · pruebas de host en verde · CI pendiente · **NO VERIFICADO** en la espalda.
+**Pendiente:** instalar y comprobar que el resumen vuelve solo y que los contadores se ven en la app dev3.
+
 ## 2026-10-31 — BACK 3.13.11 (Heltec) — apagado real del Pololu con el USB
 **Autor:** Claude · Rama `fix/back-3-13-11-usb-pololu-off` (desde `fix/back-3-13-10-usb-umbral`) · **Commits:** `e097c69` (CI 41165198487 falló: saltos de línea sin escapar), `b54848c` · **CI:** [41165334025](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41165334025) (éxito: pruebas de ordenador + imagen de 917 696 B)
 **Qué cambia:** `AVO_USB_AUTO_OFF 1`. GPIO20 por unidad ADC2 propia (lecturas rechazadas = inválidas, se ignoran);

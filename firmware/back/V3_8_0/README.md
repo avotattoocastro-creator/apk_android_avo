@@ -342,6 +342,18 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
 
+## V3.13.12 — vigilancia del resumen de señales y de reinicios del receptor (2026-11-02)
+Prueba del 02/11/2026: con la espalda 3.13.11 al 28 %, la tarjeta «Calidad GNSS» de Android se quedó fija en «Esperando el
+resumen de señales del receptor», aunque NAV-PVT y RTCM seguían funcionando (DGNSS, 17 195 mensajes RTCM usados).
+La 3.13.11 activaba NAV-SAT/NAV-SIG (en RAM) una sola vez y no lo volvía a pedir si dejaba de llegar.
+- `ZedManager`: si el mensaje del resumen (NAV-SIG; NAV-SAT si NAV-SIG fue rechazado) no llega en 10 s, se vuelve a pedir
+  con la misma secuencia del arranque. Tras 3 peticiones seguidas sin respuesta, solo una por minuto. No toca NAV-PVT ni RTCM.
+- Contadores `monitor_rearms()` (peticiones repetidas) y `receiver_resets()` (receptor callado 5 s y detectado de nuevo).
+- `BackStatus.quality_mon`: bits 0–3 estado (igual que antes), bits 4–5 peticiones repetidas, bits 6–7 redetecciones (saturan en 3).
+  El pecho 3.7.6 reenvía el byte sin cambios; Android 2.6-ntrip-auto-dev3 los muestra.
+- Monitor serie: línea `VIGILANCIA: NAV-SAT/SIG pedidos de nuevo N veces | receptor redetectado M veces`.
+- Pruebas: `quality.lost_nav_sig_output_is_requested_again`, `quality.silent_receiver_counts_as_reset`.
+
 ## V3.13.11 — apagado real del Pololu con el USB (2026-10-31)
 Rama `fix/back-3-13-11-usb-pololu-off` (desde la 3.13.10). **`AVO_USB_AUTO_OFF 1`** (petición del usuario).
 - GPIO20 se lee con una unidad ADC2 propia (`adc_oneshot`): una lectura rechazada por la radio es **inválida**, no 0 V.

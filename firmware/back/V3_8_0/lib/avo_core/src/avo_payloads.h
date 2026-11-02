@@ -121,7 +121,7 @@ struct BackStatus {
   uint8_t sig_l2 = 0, sig_l2_used = 0, sig_weak = 0;
   uint8_t cno_mean = 0, cno_min = 0, cno_max = 0;
   uint8_t quality_age_s = 255;     // seconds since the last NAV-SIG (255 = never / not enabled)
-  uint8_t quality_mon = 0;         // NAV-SAT/SIG output: 0 not requested, 1 enabled, 2 rejected, 3 skipped (slow UART)
+  uint8_t quality_mon = 0;         // b0-3 NAV-SAT/SIG output: 0 not requested, 1 enabled, 2 rejected, 3 skipped (slow UART)...; V3.13.12: b4-5 re-requests, b6-7 receiver re-detections (0..3)
   uint16_t fix_lost = 0;           // RTK FIX -> no FIX transitions since boot
   uint16_t ttff_fix_s = 0xFFFF;    // seconds from boot to the first RTK FIX (0xFFFF = not yet)
   uint32_t fixed_ms = 0, float_ms = 0;   // time spent in RTK FIX / FLOAT since boot

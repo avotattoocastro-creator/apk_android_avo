@@ -922,6 +922,45 @@ TEST(girth, status_losses_imu_forwarding_and_ping) {
   CHECK(hub.rejected() >= 2u);
 }
 
+// V3.13.12: field 02/11/2026, the summary stopped arriving while NAV-PVT kept flowing. The back asks again.
+TEST(quality, lost_nav_sig_output_is_requested_again) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);
+  uint32_t resets = w.back->zed().receiver_resets();
+  w.zed.sat_every[w.zed.port] = 0; w.zed.sig_every[w.zed.port] = 0;   // receiver forgets the setting, keeps NAV-PVT
+  size_t before = w.chest.gnss.size();
+  w.run_ms(5000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);                       // not before 10 s
+  w.run_ms(8000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 1u);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+  CHECK(w.chest.gnss.size() > before + 50);                           // positions never stopped
+  CHECK_EQ(w.back->zed().receiver_resets(), resets);                  // not a receiver reset
+  BackStatus st = w.back->status();
+  CHECK_EQ(st.quality_mon & 0x0F, 1); CHECK_EQ((st.quality_mon >> 4) & 3, 1); CHECK_EQ(st.quality_mon >> 6, 0);
+  CHECK(st.quality_age_s <= 2);                                       // summary fresh again
+  w.run_ms(30000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 1u);                       // no more requests while it arrives
+  w.zed.sig_every[w.zed.port] = 0;                                    // only NAV-SIG lost, NAV-SAT still arriving
+  w.run_ms(13000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 2u);
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+}
+
+TEST(quality, silent_receiver_counts_as_reset) {
+  World w(2);
+  w.run_ms(15000);
+  uint32_t r = w.back->zed().receiver_resets();
+  w.zed.alive = false; w.run_ms(7000); w.zed.alive = true;
+  w.run_ms(20000);
+  CHECK_EQ(w.back->zed().receiver_resets(), r + 1);
+  CHECK_EQ((int)w.back->zed().state(), (int)ZedManager::RUNNING);
+  CHECK_EQ(w.back->status().quality_mon >> 6, (int)(r + 1 > 3 ? 3 : r + 1));
+}
+
 TEST(quality, receiver_without_nav_sig_keeps_nav_sat) {
   World w(2);
   w.zed.no_sig_key = true;

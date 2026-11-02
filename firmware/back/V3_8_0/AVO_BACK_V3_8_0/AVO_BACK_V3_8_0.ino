@@ -301,6 +301,8 @@ static void print_status() {
                   q.sv_used, q.sv_tracked, q.sig_tracked, q.sig_used, q.sig_cr_used, q.sig_corr, q.sig_l2,
                   (q.have_sig && q.sig_l2 == 0) ? " (ANTENA SOLO L1: sin RTK FIX)" : "", q.cno_mean, q.cno_min, q.cno_max,
                   q.sig_weak, mon[bs.quality_mon & 7], (unsigned)bs.quality_age_s);
+    Serial.printf("  VIGILANCIA: NAV-SAT/SIG pedidos de nuevo %lu veces | receptor redetectado %lu veces\n",
+                  (unsigned long)core->zed().monitor_rearms(), (unsigned long)core->zed().receiver_resets());
     Serial.printf("  RECEPTOR: firmware %s\n", core->zed().receiver_fw()[0] ? core->zed().receiver_fw() : "(sin leer)");
     Serial.printf("  RTK: FIX %lu s, FLOAT %lu s, perdidas de FIX %u, primer FIX %s%u s\n", (unsigned long)(bs.fixed_ms / 1000),
                   (unsigned long)(bs.float_ms / 1000), bs.fix_lost, bs.ttff_fix_s == 0xFFFF ? "aun no " : "a los ",

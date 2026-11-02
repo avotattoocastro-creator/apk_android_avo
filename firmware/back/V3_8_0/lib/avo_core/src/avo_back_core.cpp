@@ -258,7 +258,12 @@ BackStatus BackCore::status() const {
   s.cno_mean = q_.cno_mean; s.cno_min = q_.cno_min; s.cno_max = q_.cno_max;
   uint32_t qa = q_ms_ ? (p_->now_ms() - q_ms_) / 1000 : 255;
   s.quality_age_s = (uint8_t)(qa > 254 ? 255 : qa);
-  s.quality_mon = zed_.monitor_state();
+  // V3.13.12: low nibble = output state (0..6), bits 4-5 = NAV-SAT/SIG re-requests, bits 6-7 = receiver re-detections
+  // (both saturate at 3). Chest 3.7.6 forwards the byte unchanged; Android 2.6-ntrip-auto-dev3 shows both counters.
+  {
+    uint32_t ra = zed_.monitor_rearms(), rr = zed_.receiver_resets();
+    s.quality_mon = (uint8_t)((zed_.monitor_state() & 0x0F) | ((ra > 3 ? 3 : ra) << 4) | ((rr > 3 ? 3 : rr) << 6));
+  }
   s.fix_lost = fix_lost_; s.ttff_fix_s = ttff_fix_s_; s.fixed_ms = fixed_ms_; s.float_ms = float_ms_;
   return s;
 }
