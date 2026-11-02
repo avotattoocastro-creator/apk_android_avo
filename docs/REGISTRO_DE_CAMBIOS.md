@@ -24,6 +24,27 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-02 — Android 2.6-ntrip-auto-dev3 — estado de los mensajes de calidad y contadores de la espalda 3.13.12
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** ver `git log` · **CI:** pendiente
+**Prueba de la dev2 (02/11/2026, 22:54–22:57):**
+- «Edad de la corrección: hace 0,4 s»: funciona con el contador RTCM.
+- NTRIP: 1 reconexión, 4 GGA, 0 errores. DGNSS con 42,6 cm.
+- «Calidad GNSS» se quedó fija en «Esperando el resumen de señales del receptor». La causa está en la espalda: ver BACK 3.13.12 en la rama `fix/back-3-13-12-nav-sig-watchdog`.
+
+**Qué cambia:**
+- `TelemetryV3.monitorState`, `monitorRearms` y `receiverResets` leen el byte `quality_mon`: estado en los bits 0–3, peticiones repetidas en los bits 4–5 y redetecciones del receptor en los bits 6–7.
+  - Una espalda anterior envía 0 en los bits altos.
+  - El pecho 3.7.6 no cambia.
+- Tarjeta «Calidad GNSS»:
+  - con el resumen caducado, el estado 0 se muestra como «pidiéndolos al receptor»;
+  - el estado 1 se muestra como «activados, pero no llegan (último hace N s)»;
+  - el estado 5 se muestra como «solo NAV-SIG»; antes no se mostraba ninguno de los tres;
+  - filas nuevas «Resumen de señales pedido de nuevo» y «Reinicios del receptor», con «3 o más».
+- `QualityMonBitsTest`: 2 pruebas nuevas. El vector del firmware comprueba también los campos nuevos.
+- Versión 2.6-ntrip-auto-dev3 (vc 39).
+
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en el móvil.
+
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev2 — arreglos de la prueba GNSS/NTRIP del balcón
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** `fb985d8` · **CI:** [41520440227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41520440227) (**éxito** a la primera: core 143 pruebas, 3 nuevas; emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV2-APK`, caduca 02/12/2026)
 **Prueba que lo motiva (02/11/2026, 21:23–21:30, balcón de casa, de noche):** pecho 3.7.6 GNSS QUALITY + espalda 3.13.11 + app 2.6-ntrip-auto-dev1, caster IMAX3.

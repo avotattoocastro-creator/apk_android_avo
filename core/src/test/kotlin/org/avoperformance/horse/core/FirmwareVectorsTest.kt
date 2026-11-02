@@ -159,7 +159,7 @@ class FirmwareVectorsTest {
         assertEquals(31, q.svTracked); assertEquals(27, q.svUsed); assertEquals(58, q.sigTracked); assertEquals(50, q.sigUsed)
         assertEquals(44, q.sigCarrierUsed); assertEquals(48, q.sigCorrected); assertEquals(26, q.sigL2); assertEquals(22, q.sigL2Used)
         assertEquals(5, q.sigWeak); assertEquals(41, q.cnoMean); assertEquals(28, q.cnoMin); assertEquals(49, q.cnoMax)
-        assertEquals(1, q.qualityAgeS); assertEquals(1, q.qualityMon); assertEquals(3, q.fixLost); assertEquals(95, q.firstFixS)
+        assertEquals(1, q.qualityAgeS); assertEquals(1, q.qualityMon); assertEquals(1, q.monitorState); assertEquals(0, q.monitorRearms); assertEquals(0, q.receiverResets); assertEquals(3, q.fixLost); assertEquals(95, q.firstFixS)
         assertEquals(600000L, q.fixedMs); assertEquals(45000L, q.floatMs); assertEquals(62L, q.sAccMmS); assertEquals(118, q.pdopE2)
         // L1-only antenna: signals tracked, none on the second band
         assertTrue(q.copy(sigL2 = 0, sigL2Used = 0).l1Only)

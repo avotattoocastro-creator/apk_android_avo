@@ -235,10 +235,14 @@ private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, s
                 if (q.cnoMean in 1..34) AvoColors.Warn else AvoColors.Text)
             KV("Señales débiles (< 30 dBHz)", q.sigWeak.toString(), if (q.sigWeak > q.sigTracked / 3) AvoColors.Warn else AvoColors.Text)
         } else {
-            when (q.qualityMon) {
+            when (q.monitorState) {
+                0 -> KV("Mensajes de calidad", "pidiéndolos al receptor", AvoColors.Unknown)
+                1 -> KV("Mensajes de calidad", "activados, pero no llegan" +
+                    if (q.qualityAgeS < 255) " (último hace ${q.qualityAgeS} s)" else "", AvoColors.Warn)
                 2 -> KV("Mensajes de calidad", "rechazados por el receptor", AvoColors.Warn)
                 3 -> KV("Mensajes de calidad", "UART del receptor demasiado lenta", AvoColors.Warn)
                 4 -> KV("Mensajes de calidad", "solo NAV-SAT (el firmware del receptor no admite NAV-SIG)", AvoColors.Warn)
+                5 -> KV("Mensajes de calidad", "solo NAV-SIG (sin NAV-SAT)", AvoColors.Warn)
                 6 -> KV("Mensajes de calidad", "rechazados; reintentando", AvoColors.Warn)
             }
             if (q.svTracked > 0) KV("Satélites usados / seguidos", "${q.svUsed} / ${q.svTracked}")
@@ -248,5 +252,9 @@ private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, s
         KV("Primer RTK FIX", q.firstFixS?.let { "a los ${it / 60} min ${it % 60} s del arranque" } ?: "todavía no")
         KV("Tiempo en FIX / FLOAT", "${Fmt.duration(q.fixedMs)} / ${Fmt.duration(q.floatMs)}")
         KV("Pérdidas de FIX", q.fixLost.toString(), if (q.fixLost > 0) AvoColors.Warn else AvoColors.Text)
+        // BACK 3.13.12+: watchdog counters since the back started (an older back always reports 0 here).
+        fun n3(v: Int) = if (v >= 3) "3 o más" else v.toString()
+        KV("Resumen de señales pedido de nuevo", n3(q.monitorRearms), if (q.monitorRearms > 0) AvoColors.Warn else AvoColors.Text)
+        KV("Reinicios del receptor", n3(q.receiverResets), if (q.receiverResets > 0) AvoColors.Bad else AvoColors.Text)
     }
 }
