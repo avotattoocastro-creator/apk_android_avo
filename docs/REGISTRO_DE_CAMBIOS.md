@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev2 — arreglos de la prueba GNSS/NTRIP del balcón
-**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** ver `git log` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** `fb985d8` · **CI:** [41520440227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41520440227) (**éxito** a la primera: core 143 pruebas, 3 nuevas; emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV2-APK`, caduca 02/12/2026)
 **Prueba que lo motiva (02/11/2026, 21:23–21:30, balcón de casa, de noche):** pecho 3.7.6 GNSS QUALITY + espalda 3.13.11 + app 2.6-ntrip-auto-dev1, caster IMAX3.
 - La tarjeta «Calidad GNSS» ya muestra datos (22–25/32–33 satélites, C/N₀ media 35–36 dBHz, 16–22 señales < 30 dBHz, L2 5/10–11, **0 con fase de portadora**, 6–7 con correcciones). Sin FLOAT ni FIX: cielo tapado y reflejos.
 - Cadena RTCM correcta de punta a punta: 1,1 MB del caster, 4525–4575 tramas válidas y 0 con CRC erróneo, 0 B descartados, 1,1 MB reenviado a la espalda, **4139 mensajes usados por el receptor**. Tipos 1006, 1008, 1013, 1029, 1032, 1033, 1075, 1085, 1095, 1125 y 1230 (MSM5, 1 Hz).
@@ -44,7 +44,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 4. Versión 2.6-ntrip-auto-dev2 (vc 38).
 
 **No se ha tocado:** firmware del pecho ni de la espalda, BLE, formato de telemetría, selector de mountpoint.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en el móvil.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41520440227 · **NO VERIFICADO** en el móvil.
 **Pendiente:** prueba al aire libre (FLOAT/FIX) con 2.6-ntrip-auto-dev2.
 
 ## 2026-11-01 — Android 2.6-ntrip-auto-dev1 — mountpoint NTRIP automático según la posición
