@@ -7,6 +7,7 @@
 
 | Módulo | Versión fuente | Listo para probar | Validación pendiente |
 |---|---|---|---|
+| Arreglos GNSS/NTRIP de la prueba del 02/11/2026 | Android 2.6-ntrip-auto-dev2 (vc 38), rama `feature/avo-ntrip-auto` | APK de CI; 3 pruebas JVM nuevas | Pocas reconexiones con la app abierta sin chaleco; «Edad de la corrección» con valor; aviso de señal reflejada en el balcón; RTK FLOAT/FIX al aire libre |
 | NTRIP automático por posición (01/11/2026) | Android 2.6-ntrip-auto-dev1 (vc 37), rama `feature/avo-ntrip-auto` (sobre 2.5 de `feature/avo-license-nfc`) | APK de CI; selector con 8 pruebas JVM | Caster real: lista de mountpoints, elección y cambio de base fuera de grabación, red/VRS lejos de las bases |
 | Licencias y roles de la app (27/10/2026) | Android 2.5-roles-dev1 (vc 36) + AVO Tarjetas 1.3-registro-dev1 (vc 4), rama `feature/avo-license-nfc` | APK de CI (`build-android.yml`); núcleo con 34 pruebas JVM; reglas Firebase con campo `lic` | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
 | Android | **V2.0 / versionCode 12** | APK debug CI [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) | Prueba en teléfono y reloj |

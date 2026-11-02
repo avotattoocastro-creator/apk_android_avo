@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-02 — Android 2.6-ntrip-auto-dev2 — arreglos de la prueba GNSS/NTRIP del balcón
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** ver `git log` · **CI:** pendiente
+**Prueba que lo motiva (02/11/2026, 21:23–21:30, balcón de casa, de noche):** pecho 3.7.6 GNSS QUALITY + espalda 3.13.11 + app 2.6-ntrip-auto-dev1, caster IMAX3.
+- La tarjeta «Calidad GNSS» ya muestra datos (22–25/32–33 satélites, C/N₀ media 35–36 dBHz, 16–22 señales < 30 dBHz, L2 5/10–11, **0 con fase de portadora**, 6–7 con correcciones). Sin FLOAT ni FIX: cielo tapado y reflejos.
+- Cadena RTCM correcta de punta a punta: 1,1 MB del caster, 4525–4575 tramas válidas y 0 con CRC erróneo, 0 B descartados, 1,1 MB reenviado a la espalda, **4139 mensajes usados por el receptor**. Tipos 1006, 1008, 1013, 1029, 1032, 1033, 1075, 1085, 1095, 1125 y 1230 (MSM5, 1 Hz).
+- Esto cierra para la 3.7.6 el punto «RTK con NTRIP (RTCM usado > 0)».
+
+**Qué cambia:**
+1. **NTRIP, reconexiones (`core/ntrip/Ntrip.kt`).** La espera entre intentos volvía a 1 s después de cada sesión aceptada, aunque el caster cerrara al momento. Con la app abierta sin chaleco, el caster de red cerraba la conexión por falta de GGA y se acumularon **966 reconexiones**. Eso arriesga un bloqueo de la cuenta.
+   - Ahora la espera solo vuelve a 1 s si la sesión duró al menos `stableSessionMs` (30 s). Si no, sigue creciendo 1, 2, 4… hasta 60 s.
+   - El último error lo explica: «sin posición GNSS para enviar GGA».
+   - Prueba `shortSessionsKeepBackoffGrowing`.
+2. **«Edad de la corrección» (Inicio).** El receptor deja NAV-PVT `lastCorrectionAge` = 0 («no disponible») aunque usa las correcciones, y la app mostraba «—».
+   - Si falta ese dato, la edad se mide con el contador «RTCM usado por el receptor» de la espalda (`core/telemetry/RtcmUseTracker.kt`), con resolución de unos 0,5 s.
+   - Se muestra en amarillo por encima de 10 s.
+   - 2 pruebas en `RtcmUseTrackerTest`.
+3. **Aviso de «Calidad GNSS».** Con 0 señales con fase y más de un tercio de señales débiles (o C/N₀ media ≤ 37), ya no dice «RTK aún convergiendo». Ahora dice «Correcciones recibidas, pero la señal es débil o reflejada: sin fase de portadora no hay RTK (cielo tapado, paredes o tejados cerca)».
+4. Versión 2.6-ntrip-auto-dev2 (vc 38).
+
+**No se ha tocado:** firmware del pecho ni de la espalda, BLE, formato de telemetría, selector de mountpoint.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en el móvil.
+**Pendiente:** prueba al aire libre (FLOAT/FIX) con 2.6-ntrip-auto-dev2.
+
 ## 2026-11-01 — Android 2.6-ntrip-auto-dev1 — mountpoint NTRIP automático según la posición
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (desde `feature/avo-license-nfc` 43f2fc0, app 2.5) · **Commit:** `2b1d36f` · **CI:** [41292158228](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41292158228) (**éxito** a la primera: core 140 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV1-APK`)
 **Qué cambia:**

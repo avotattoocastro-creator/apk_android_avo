@@ -39,6 +39,7 @@ import org.avoperformance.horse.AppContainer
 import org.avoperformance.horse.ble.LinkState
 import org.avoperformance.horse.core.ntrip.NtripState
 import org.avoperformance.horse.core.telemetry.RtkDeriver
+import org.avoperformance.horse.core.telemetry.RtcmUseTracker
 import org.avoperformance.horse.service.AvoLinkService
 import org.avoperformance.horse.ui.components.AvoCard
 import org.avoperformance.horse.ui.components.Fmt
@@ -104,6 +105,11 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
         LinkState.NECESITA_AUTORIZACION, LinkState.ESPERANDO_BOOT -> AvoColors.Warn; else -> AvoColors.Unknown }
     val ntripColor = when (ntripState) { is NtripState.Streaming -> AvoColors.Ok; is NtripState.Failed -> AvoColors.Bad; is NtripState.Stopped -> AvoColors.Unknown; else -> AvoColors.Warn }
     val recording = t?.rec?.texto?.contains("grab", true) == true
+    // Correction age measured from the receiver's "RTCM used" counter, for receivers that report
+    // NAV-PVT lastCorrectionAge = 0 ("not available") while applying corrections.
+    val rtcmTracker = remember { RtcmUseTracker() }
+    LaunchedEffect(tel) { tel?.let { tt -> tt.t.v2?.let { rtcmTracker.update(it.rtcmUsedByReceiver, tt.receivedMs) } } }
+    val rtcmUsedAgeMs = if (fresh) rtcmTracker.ageMs(now) else null
 
     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(vertical = 6.dp)) {
         item {
@@ -152,7 +158,10 @@ fun HomeScreen(c: AppContainer, go: (String) -> Unit) {
                 KV("Sesión", t?.session?.texto)
                 KV("Geocerca", t?.geofence?.texto)
                 KV("Grabación", t?.rec?.texto)
-                KV("Edad de la corrección", rtk.correctionAgeMaxMs?.let { if (it == Long.MAX_VALUE) "> 120 s" else "≤ ${it / 1000} s" })
+                val corrAge = rtk.correctionAgeMaxMs?.let { if (it == Long.MAX_VALUE) "> 120 s" else "≤ ${it / 1000} s" }
+                    ?: rtcmUsedAgeMs?.let { if (it > 120_000) "> 120 s" else String.format(Locale.forLanguageTag("es-ES"), "hace %.1f s", it / 1000.0) }
+                KV("Edad de la corrección", corrAge,
+                    if ((rtk.correctionAgeMaxMs ?: rtcmUsedAgeMs ?: 0L) > 10_000L) AvoColors.Warn else AvoColors.Text)
                 KV("Último dato GNSS", rtk.gnssAgeMs?.let { "hace ${it} ms" })
                 KV("Telemetría", tel?.let { if (fresh) "hace ${age} ms" else "sin datos recientes" }, if (tel != null && !fresh) AvoColors.Warn else AvoColors.Text)
                 if ((t?.droppedRecords ?: 0L) > 0L) KV("Registros descartados", t!!.droppedRecords.toString(), AvoColors.Bad)
@@ -207,6 +216,10 @@ private fun GnssQualityCard(q: org.avoperformance.horse.core.ble.TelemetryV3?, s
             (rtcmUsed ?: 0L) == 0L -> "El receptor no está usando correcciones RTCM" to AvoColors.Warn
             state == org.avoperformance.horse.core.telemetry.RtkState.FIX -> "RTK FIX: precisión centimétrica" to AvoColors.Ok
             q.cnoMean in 1..34 -> "Señal débil (cielo tapado o antena mal colocada)" to AvoColors.Warn
+            // Corrections arrive and are used, but no signal keeps a clean carrier phase: typical of a balcony or a
+            // street between buildings (reflections). Saying "converging" there was misleading (field test 02/11/2026).
+            q.sigCarrierUsed == 0 && q.sigTracked > 0 && (q.sigWeak * 3 > q.sigTracked || q.cnoMean in 1..37) ->
+                "Correcciones recibidas, pero la señal es débil o reflejada: sin fase de portadora no hay RTK (cielo tapado, paredes o tejados cerca)" to AvoColors.Warn
             q.sigCarrierUsed < 10 -> "Pocas señales con fase de portadora: RTK aún convergiendo" to AvoColors.Warn
             else -> "Correcciones aplicadas, convergiendo hacia FIX" to AvoColors.Blue
         }

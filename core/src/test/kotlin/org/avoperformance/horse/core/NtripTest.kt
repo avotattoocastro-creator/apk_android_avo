@@ -143,6 +143,22 @@ class NtripTest {
         assertTrue(st.any { it is NtripState.WaitingRetry })
     }
 
+    /** A network caster that accepts and closes at once (no GGA yet) must not be hammered every second:
+     *  the retry wait keeps growing until a session streams for [NtripConfig.stableSessionMs]. */
+    @Test fun shortSessionsKeepBackoffGrowing() {
+        val caster3 = Caster { s, _, _ -> s.getOutputStream().apply { write("ICY 200 OK\r\n\r\n".toByteArray()); flush() } }
+        val st = ArrayList<NtripState>()
+        lateinit var cl: NtripClient
+        cl = NtripClient(cfg(caster3.port, NtripVersion.V1, reconnect = true).copy(maxBackoffMs = 16_000), { null }, { _, _, _ -> },
+            { synchronized(st) { st += it; if (st.count { s -> s is NtripState.WaitingRetry } >= 5) cl.stop() } }, sleeper = {})
+        val th = thread { cl.run() }
+        th.join(15_000); if (th.isAlive) { cl.stop(); th.join(2000) }
+        caster3.close()
+        val waits = synchronized(st) { st.filterIsInstance<NtripState.WaitingRetry>().map { it.inMs } }
+        assertEquals(listOf(1000L, 2000L, 4000L, 8000L, 16_000L), waits.take(5))
+        assertTrue(cl.stats.lastError!!.contains("GGA"))
+    }
+
     @Test fun ggaChecksumAndFormat() {
         // Reference sentence checked by hand with the NMEA XOR rule
         val g = Gga.build(((12 * 3600 + 34 * 60 + 56) * 1000L + 780), 40.5, -3.25, 4, 25, 0.9, 650.0)
