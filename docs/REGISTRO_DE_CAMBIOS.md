@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-03 — Android 2.7-borrado-reloj-dev1 — borrar entrenamientos del reloj con contraseña «AVO»
-**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev3) · **CI:** ver la ejecución posterior a esta entrada
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev3) · **Commit:** `a64fc96` · **CI:** [41608193129](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41608193129) (**éxito** a la primera: core 149 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_7_BORRADO_RELOJ_DEV1-APK`)
 **Situación anterior:** «Borrar del reloj» solo se activaba con entrenamientos verificados por el servidor, que no está configurado, así que nunca se podía usar. Además la app no enviaba `force`, y el reloj rechaza sin él lo que no está marcado como subido (`storage.cpp`, DELETE_COMMIT).
 **Qué cambia:**
 - `core/sync/WatchDelete.kt`:
@@ -46,7 +46,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - tarjeta «Liberar espacio en el reloj» en Ajustes → Descarga del reloj.
 - Corrección: al refrescar la lista del reloj, los entrenamientos que ya no están en él conservan su `watchState`. Antes pasaban a «UNKNOWN», y se perdían las marcas «IMPORTADO» y «BORRADO_RELOJ».
 **Nota:** la contraseña evita borrados por error; está en el código público, no es una clave de seguridad.
-**Validación:** IMPLEMENTADO · reglas 4/4 pruebas JVM en local · **NO VERIFICADO** con el reloj.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41608193129 · reglas 4/4 pruebas JVM · **NO VERIFICADO** con el reloj.
 
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev3 — estado de los mensajes de calidad y contadores de la espalda 3.13.12
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** `ff3f2ce` · **CI:** [41534048266](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41534048266) (**éxito**: core 145 pruebas, emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV3-APK`, caduca 02/12/2026)
