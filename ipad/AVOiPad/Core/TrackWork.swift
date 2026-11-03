@@ -165,8 +165,47 @@ enum TrackWorkBreed {
     static func engineName(_ breedText: String) -> String {
         let t = breedText.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES")).lowercased()
         if t.isEmpty { return "GENERICO" }
-        if t.contains("psi") || t.contains("ingl") || t.contains("thoroughbred") || t.contains("english") { return "PSI" }
+        if t.contains("trot") || t.contains("standardbred") || t.contains("cuarto de milla") || t.contains("quarter") { return "GENERICO" }
+        if t.contains("psi") || t.contains("ingl") || t.contains("thoroughbred") || t.contains("english") || t.contains("aqps")
+            || t.contains("pur-sang") { return "PSI" }
         if t.contains("arab") || t.contains("pra") { return "ARABE" }
         return "GENERICO"
+    }
+}
+
+
+/// Turf racing breeds offered in the horse card (value stored as the text of «Breed», compatible with Android/Windows).
+struct RacingBreed: Identifiable, Hashable {
+    let label: String
+    let group: String
+    var id: String { label }
+    var engineProfile: String { TrackWorkBreed.engineName(label) }
+
+    static let all: [RacingBreed] = [
+        RacingBreed(label: "Pura Sangre Inglés (PSI)", group: "Galope"),
+        RacingBreed(label: "AQPS (Autre Que Pur-Sang)", group: "Galope"),
+        RacingBreed(label: "Pura Sangre Árabe (PSA)", group: "Galope"),
+        RacingBreed(label: "Anglo-Árabe (AA)", group: "Galope"),
+        RacingBreed(label: "Cuarto de Milla de carreras", group: "Galope"),
+        RacingBreed(label: "Trotón Francés", group: "Trote"),
+        RacingBreed(label: "Standardbred (trotón americano)", group: "Trote"),
+        RacingBreed(label: "Trotón escandinavo / sueco", group: "Trote"),
+        RacingBreed(label: "Otra", group: "Otras"),
+    ]
+    static let groups: [String] = ["Galope", "Trote", "Otras"]
+
+    /// Short explanation of the analysis profile the engine will use for this breed text.
+    static func profileText(_ breedText: String) -> String {
+        let t = breedText.lowercased()
+        if t.contains("trot") || t.contains("standardbred") {
+            return "Perfil genérico: el análisis de galope de trabajo no aplica a carreras al trote."
+        }
+        switch TrackWorkBreed.engineName(breedText) {
+        case "PSI": return "Perfil PSI: galope de trabajo ≥ 11 m/s, trabajo rápido ≥ 14,5 m/s, alta velocidad > 15 m/s."
+        case "ARABE": return "Perfil árabe: galope de trabajo ≥ 10 m/s, trabajo rápido ≥ 13 m/s, alta velocidad > 13,5 m/s."
+        default: return breedText.trimmingCharacters(in: .whitespaces).isEmpty
+            ? "Sin raza: se usa el perfil genérico (galope de trabajo ≥ 9 m/s)."
+            : "Perfil genérico: galope de trabajo ≥ 9 m/s, trabajo rápido ≥ 12 m/s."
+        }
     }
 }

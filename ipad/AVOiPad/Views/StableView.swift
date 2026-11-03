@@ -237,7 +237,34 @@ private struct StableEditorCard: View {
                 if page.isHorse {
                     HStack(alignment: .top, spacing: 16) {
                         field("RAZA") {
-                            TextField("", text: $p.editBreed).modifier(StableFieldStyle())
+                            VStack(alignment: .leading, spacing: 6) {
+                                Menu {
+                                    ForEach(RacingBreed.groups, id: \.self) { (g: String) in
+                                        Section(g) {
+                                            ForEach(RacingBreed.all.filter { $0.group == g }) { (b: RacingBreed) in
+                                                Button {
+                                                    p.editBreed = b.label == "Otra" ? "" : b.label
+                                                } label: {
+                                                    if p.editBreed == b.label { Label(b.label, systemImage: "checkmark") } else { Text(b.label) }
+                                                }
+                                            }
+                                        }
+                                    }
+                                } label: {
+                                    HStack {
+                                        Text(p.editBreed.isEmpty ? "Elegir raza…" : p.editBreed)
+                                            .foregroundStyle(p.editBreed.isEmpty ? Avo.textDim : Avo.text).lineLimit(1)
+                                        Spacer(minLength: 4)
+                                        Image(systemName: "chevron.up.chevron.down").font(.caption).foregroundStyle(Avo.textDim)
+                                    }
+                                    .modifier(StableFieldStyle())
+                                }
+                                if !RacingBreed.all.contains(where: { $0.label == p.editBreed }) {
+                                    TextField("Otra raza (escribe)", text: $p.editBreed).modifier(StableFieldStyle())
+                                }
+                                Text(RacingBreed.profileText(p.editBreed)).font(.caption2).foregroundStyle(Avo.textDim)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                         }
                         field("AÑO DE NACIMIENTO") {
                             TextField("", text: $p.editYear).keyboardType(.numberPad).modifier(StableFieldStyle())

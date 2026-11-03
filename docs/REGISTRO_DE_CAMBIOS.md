@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-03 — iPad — raza en la ficha del caballo: desplegable de razas de carreras
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:** el campo «Raza» de la ficha del caballo (Cuadra) pasa a ser un desplegable agrupado:
+- **Galope:** Pura Sangre Inglés (PSI), AQPS, Pura Sangre Árabe (PSA), Anglo-Árabe (AA) y Cuarto de Milla de carreras.
+- **Trote:** Trotón Francés, Standardbred y Trotón escandinavo/sueco.
+- **Otra:** texto libre.
+
+Debajo se indica el perfil de AVO Track Work que se aplicará:
+- PSI y AQPS → `PSI`;
+- PSA y AA → `ARABE`;
+- trotones y Cuarto de Milla → `GENERICO`, con un aviso de que el análisis de galope no aplica al trote.
+
+Se guarda como texto en `Breed`, compatible con Android y Windows; las razas escritas a mano se conservan.
+**Archivos:** `ipad/AVOiPad/Core/TrackWork.swift`, `ipad/AVOiPad/Views/StableView.swift`, `ipad/AVOiPadTests/RacingBreedTests.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO.
+
 ## 2026-11-01 — iPad 1.0.x — Biomecánica en la línea de tiempo del entrenamiento (zoom, tramo, desplazamiento, leyendas activables)
 **Autor:** Claude · **Rama:** `feature/ipad-analisis-entreno` → `feature/ipad-app` · **Commits:** ver `git log` · **CI:** pendiente
 **Qué cambia (petición del usuario con captura):**
