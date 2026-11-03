@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-03 — Android 2.7-borrado-reloj-dev1 — borrar entrenamientos del reloj con contraseña «AVO»
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev3) · **CI:** ver la ejecución posterior a esta entrada
+**Situación anterior:** «Borrar del reloj» solo se activaba con entrenamientos verificados por el servidor, que no está configurado, así que nunca se podía usar. Además la app no enviaba `force`, y el reloj rechaza sin él lo que no está marcado como subido (`storage.cpp`, DELETE_COMMIT).
+**Qué cambia:**
+- `core/sync/WatchDelete.kt`:
+  - contraseña exacta «AVO» (ignora espacios alrededor; en minúsculas no vale);
+  - seguridad: copia en el móvil verificada con el SHA-256 del reloj, o «se perderá para siempre»;
+  - nunca grabando ni dos veces;
+  - lista de los que se pueden liberar sin perder nada;
+  - 4 pruebas.
+- `AvoClient.deleteSession(force)`: `force` = 1 solo después de la contraseña. El reloj sigue negándose a borrar la sesión que se graba (STATE_CONFLICT).
+- `WatchSyncManager.deleteFromWatchProtected`:
+  - comprueba contraseña, licencia, que no se esté grabando ni descargando ese entrenamiento, y la conexión;
+  - con copia verificada, la conserva y la marca `BORRADO_RELOJ`;
+  - sin copia, quita también los restos del móvil y la fila de la lista.
+- `freeWatch`: borra todos los ya guardados.
+- Interfaz:
+  - diálogo común con la contraseña (teclado en mayúsculas, aviso en rojo si se pierde el entrenamiento);
+  - «Borrar del reloj» en cada entrenamiento de la lista y en el análisis;
+  - tarjeta «Liberar espacio en el reloj» en Ajustes → Descarga del reloj.
+- Corrección: al refrescar la lista del reloj, los entrenamientos que ya no están en él conservan su `watchState`. Antes pasaban a «UNKNOWN», y se perdían las marcas «IMPORTADO» y «BORRADO_RELOJ».
+**Nota:** la contraseña evita borrados por error; está en el código público, no es una clave de seguridad.
+**Validación:** IMPLEMENTADO · reglas 4/4 pruebas JVM en local · **NO VERIFICADO** con el reloj.
+
 ## 2026-11-02 — Android 2.6-ntrip-auto-dev3 — estado de los mensajes de calidad y contadores de la espalda 3.13.12
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** `ff3f2ce` · **CI:** [41534048266](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41534048266) (**éxito**: core 145 pruebas, emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV3-APK`, caduca 02/12/2026)
 **Prueba de la dev2 (02/11/2026, 22:54–22:57):**

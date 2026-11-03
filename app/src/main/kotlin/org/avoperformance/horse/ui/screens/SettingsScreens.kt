@@ -480,6 +480,25 @@ fun SyncScreen(c: AppContainer) {
             }
         }
         item {
+            val freeable = org.avoperformance.horse.core.sync.WatchDelete.freeable(all.map { it.forWatchDelete() to it.watchState })
+            var ask by remember { mutableStateOf(false) }
+            var freeMsg by remember { mutableStateOf<String?>(null) }
+            var running by remember { mutableStateOf(false) }
+            AvoCard("Liberar espacio en el reloj") {
+                KV("Guardados en el móvil y aún en el reloj", freeable.size.toString())
+                Note("Borra del reloj todos los entrenamientos que ya están descargados y verificados en el móvil. No se pierde nada. " +
+                    "Para borrar uno concreto (también uno sin descargar), usa «Borrar del reloj» en la lista de entrenamientos. Contraseña: la de borrado.")
+                OutlinedButton(enabled = freeable.isNotEmpty() && !running && c.watch.isReady, onClick = { ask = true }) {
+                    Text(if (running) "Borrando…" else "Borrar del reloj los ya guardados", color = AvoColors.Bad)
+                }
+                freeMsg?.let { Note(it) }
+            }
+            if (ask) WatchDeleteDialog("Liberar el reloj", "Se borrarán del chaleco ${freeable.size} entrenamientos que ya están guardados y verificados en el móvil.",
+                loses = false, confirmLabel = "Borrar ${freeable.size}",
+                onConfirm = { p -> ask = false; running = true; c.scope.launch { freeMsg = c.sync.freeWatch(p); running = false } },
+                onDismiss = { ask = false })
+        }
+        item {
             AvoCard("Resumen") {
                 org.avoperformance.horse.core.sync.SyncState.values().forEach { s ->
                     val n = all.count { it.state == s.name }
@@ -562,7 +581,7 @@ fun StorageScreen(c: AppContainer) {
             AvoCard("Chaleco (tarjeta SD)") {
                 KV("Libre", Fmt.bytes(status?.sdFreeBytes))
                 KV("Montada", status?.sdMounted?.let { if (it) "sí" else "no" })
-                KV("Entrenamientos en el reloj", all.count { it.watchState != "UNKNOWN" }.toString())
+                KV("Entrenamientos en el reloj", all.count { it.watchState != "UNKNOWN" && it.watchState != "IMPORTADO" && it.watchState != org.avoperformance.horse.core.sync.WatchDelete.DELETED_ON_WATCH }.toString())
             }
         }
         item {

@@ -183,13 +183,14 @@ class AvoClient(
     /**
      * Manual deletion of a session on the watch, in two steps (token valid 60 s).
      * The watch itself refuses (NOT_ALLOWED) to delete a session that is not marked UPLOADED unless force=1;
-     * this app never sends force=1.
+     * force=1 is only sent after the user typed the deletion password (see WatchDelete). The watch never deletes
+     * the session being recorded (STATE_CONFLICT).
      */
-    suspend fun deleteSession(sessionId: String): BleStatus {
+    suspend fun deleteSession(sessionId: String, force: Boolean = false): BleStatus {
         val prep = request(MsgType.DELETE_PREPARE, Requests.sessionOnly(sessionId), Idempotency.STATE_CHANGING)
         if (prep.statusEnum != BleStatus.OK || prep.payload.size < 4) return prep.statusEnum
         val token = org.avoperformance.horse.core.bytes.leU32(prep.payload, 0)
-        return request(MsgType.DELETE_COMMIT, Requests.deleteCommit(sessionId, token, force = false), Idempotency.STATE_CHANGING, 15_000).statusEnum
+        return request(MsgType.DELETE_COMMIT, Requests.deleteCommit(sessionId, token, force), Idempotency.STATE_CHANGING, 15_000).statusEnum
     }
 
     suspend fun getConfig(): ByteArray = requestOk(MsgType.GET_CONFIG, timeoutMs = 5000)

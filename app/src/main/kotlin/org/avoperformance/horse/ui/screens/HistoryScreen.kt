@@ -130,6 +130,13 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             whatsAppLauncher.launch(intent)
         } catch (e: Exception) { msg = e.message ?: "No se pudo enviar por WhatsApp" }
     }
+    var confirmDeleteWatch by remember { mutableStateOf<TrainingEntity?>(null) }
+    confirmDeleteWatch?.let { d ->
+        val safe = org.avoperformance.horse.core.sync.WatchDelete.safety(d.forWatchDelete()) == org.avoperformance.horse.core.sync.WatchDelete.Safety.COPIA_EN_MOVIL
+        WatchDeleteDialog("Borrar del reloj", "Se borrará ${Fmt.date(d.startRtcMs) ?: ""} · ${d.sessionId} de la tarjeta del chaleco.", loses = !safe,
+            onConfirm = { p -> confirmDeleteWatch = null; c.scope.launch { msg = c.sync.deleteFromWatchProtected(d.sessionId, p) ?: "Borrado del reloj" } },
+            onDismiss = { confirmDeleteWatch = null })
+    }
     var confirmDeleteLocal by remember { mutableStateOf<TrainingEntity?>(null) }
     confirmDeleteLocal?.let { d ->
         AlertDialog(onDismissRequest = { confirmDeleteLocal = null },
@@ -258,7 +265,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }, onDeleteWatch = { confirmDeleteWatch = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -296,7 +303,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         if (first != null && second != null && first.horseCode != second.horseCode) Note("La comparación requiere el mismo caballo", AvoColors.Warn)
                     }
                 }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }, onDeleteWatch = { confirmDeleteWatch = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -304,7 +311,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
 }
 
 @Composable
-private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null) {
+private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null, onDeleteWatch: (() -> Unit)? = null) {
     val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -336,6 +343,8 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
             confirmButton = {}, dismissButton = { androidx.compose.material3.TextButton(onClick = { shareMenu = false }) { Text("Cancelar") } })
         if (onAssign != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onAssign) { Text("Caballo y jinete") }
         if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
+        if (onDeleteWatch != null && t.canDeleteFromWatch()) androidx.compose.material3.TextButton(onClick = onDeleteWatch) { Text("Borrar del reloj", color = AvoColors.Bad) }
+        if (t.deletedFromWatch()) Note("Borrado del reloj · copia en el móvil", AvoColors.TextDim)
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
             OutlinedButton(onClick = onDownload) { Text(if (t.downloadedBytes > 0) "Reanudar descarga" else "Descargar") }
     }
