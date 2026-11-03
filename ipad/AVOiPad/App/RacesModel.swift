@@ -342,6 +342,48 @@ final class RacesModel {
         }
     }
 
+    // ---------------------------------------------------------------- training vs race, sector by sector (AVO Track Work)
+    /// Trainings of the horse in the `RaceTrainingSplits.windowDays` days before the race.
+    func splitTrainings(for r: Race) -> [SessionItem] {
+        guard let d = r.date else { return [] }
+        let cal: Calendar = RacesModel.madridCalendar
+        let from: Date = cal.date(byAdding: .day, value: -RaceTrainingSplits.windowDays, to: cal.startOfDay(for: d)) ?? d
+        return trainings(for: r).filter { (s: SessionItem) -> Bool in (s.start ?? .distantPast) >= from }
+    }
+
+    /// Efforts and passes with splits of those trainings (only the ones already analysed by the engine).
+    func splitCandidates(for r: Race) -> [RaceTrainingCandidate] {
+        guard let d = r.date else { return [] }
+        let sources: [RaceTrainingSource] = splitTrainings(for: r).compactMap { (s: SessionItem) -> RaceTrainingSource? in
+            guard let e = s.engine else { return nil }
+            return RaceTrainingSource(sessionId: s.id, date: s.start, isDemo: s.isSynthetic, trackWork: e.trackWork)
+        }
+        return RaceTrainingSplits.candidates(sources, raceDate: d, calendar: RacesModel.madridCalendar)
+    }
+
+    /// Trainings of the window without an engine result yet.
+    func splitPending(for r: Race) -> Int {
+        splitTrainings(for: r).filter { $0.engine == nil }.count
+    }
+
+    /// Races whose trainings are being analysed for the sector comparison.
+    var splitsAnalysing: Set<String> = []
+
+    /// Runs the engine (cached results are reused) on the trainings of the window that have no result yet.
+    func analyseSplitTrainings(_ r: Race) {
+        if splitsAnalysing.contains(r.id) { return }
+        let pending: [SessionItem] = splitTrainings(for: r).filter { $0.engine == nil }
+        if pending.isEmpty { return }
+        splitsAnalysing.insert(r.id)
+        Task { @MainActor [weak self] in
+            for s in pending {
+                guard let self = self else { return }
+                await self.app.runEngine(s, force: false)
+            }
+            self?.splitsAnalysing.remove(r.id)
+        }
+    }
+
     /// «Forma antes de la carrera»: history of the horse at the race date (AVO Training Analytics), added to the report.
     @MainActor
     private func computeForm(_ race: Race) async {

@@ -37,6 +37,7 @@ struct RootView: View {
         RootNavEntry(page: .analysis, title: "Análisis", icon: "map"),
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
+        RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
         RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
         RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
@@ -215,6 +216,7 @@ struct RootView: View {
         case .summary: AnalysisView()
         case .gps: GpsView()
         case .charts: ChartsView()
+        case .trackWork: TrackWorkView()
         case .segments: SegmentsView()
         case .biomech: BiomechView()
         case .compare: CompareView()

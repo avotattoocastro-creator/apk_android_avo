@@ -167,8 +167,20 @@ enum TrainingAnalytics {
         case "PASO": return "Paso"
         case "TROTE": return "Trote"
         case "GALOPE": return "Galope"
+        case "TRABAJO": return "Trabajo en pista"
+        case "CINCHA": return "Cincha"
+        case "RECORRIDO": return "Recorrido"
         default: return g
         }
+    }
+
+    /// Prefixes of the AVO Track Work metrics of the history (docs/algoritmos/13_TRABAJO_PISTA.md).
+    static let trackWorkPrefixes: [String] = ["TRABAJO", "CINCHA", "RECORRIDO"]
+
+    /// True for the AVO Track Work metrics (TRABAJO.*, CINCHA.*, RECORRIDO.* and the VeDBA load).
+    static func isTrackWorkMetric(_ metric: String) -> Bool {
+        if metric == "carga_vedba" { return true }
+        return trackWorkPrefixes.contains(split(metric).gait)
     }
 
     static func metricLabel(_ key: String) -> String {
@@ -180,6 +192,25 @@ enum TrainingAnalytics {
         case "cv_intervalos": return "CV de intervalos"
         case "carga_externa": return "Carga externa"
         case "distancia_m": return "Distancia"
+        // AVO Track Work
+        case "f_v1_hz": return "Frecuencia de zancada a v. ref. 1"
+        case "l_v1_m": return "Longitud de zancada a v. ref. 1"
+        case "f_v2_hz": return "Frecuencia de zancada a v. ref. 2"
+        case "l_v2_m": return "Longitud de zancada a v. ref. 2"
+        case "mano_de_fuera_curva_pct": return "Mano de fuera en curva"
+        case "indice_caida_pct": return "Índice de caída"
+        case "v_max": return "Velocidad máxima"
+        case "mejor_200m_s": return "Mejor 200 m"
+        case "f_en_v_max_hz": return "Frecuencia a la máxima"
+        case "l_en_v_max_m": return "Longitud a la máxima"
+        case "desplazamiento_vertical_m": return "Desplazamiento vertical"
+        case "vedba_galope_g": return "VeDBA en galope"
+        case "recuperacion_hasta_paso_s": return "Recuperación hasta el paso"
+        case "caida_entre_series_pct": return "Caída entre series"
+        case "calentamiento_s": return "Calentamiento"
+        case "mejor_pasada_s": return "Mejor pasada"
+        case "v_media_mejor": return "Velocidad media de la mejor pasada"
+        case "carga_vedba": return "Carga VeDBA"
         default: return key
         }
     }
@@ -201,6 +232,10 @@ enum TrainingAnalytics {
         case "longitud_tranco_m", "cadencia_hz": return 0
         case "correlacion_ciclos": return -1
         case "cv_intervalos": return 1
+        // AVO Track Work: stride at the reference speed (length only when it drops) and outside lead in curves
+        case "f_v1_hz", "f_v2_hz": return 0
+        case "l_v1_m", "l_v2_m": return -1
+        case "mano_de_fuera_curva_pct": return 1
         default: return nil
         }
     }
@@ -216,6 +251,16 @@ enum TrainingAnalytics {
         case "cv_intervalos": return AvoFormat.f(x, 3)
         case "carga_externa": return AvoFormat.f(x, 0)
         case "distancia_m": return AvoFormat.f(x, 0) + " m"
+        case "f_v1_hz", "f_v2_hz", "f_en_v_max_hz": return AvoFormat.f(x, 2) + " Hz"
+        case "l_v1_m", "l_v2_m", "l_en_v_max_m": return AvoFormat.f(x, 2) + " m"
+        case "desplazamiento_vertical_m": return AvoFormat.f(x, 3) + " m"
+        case "mano_de_fuera_curva_pct", "indice_caida_pct", "caida_entre_series_pct": return AvoFormat.f(x, 1) + " %"
+        case "v_max", "v_media_mejor": return AvoFormat.f(x * 3.6, 1) + " km/h"
+        case "mejor_200m_s", "mejor_pasada_s": return AvoFormat.f(x, 2) + " s"
+        case "recuperacion_hasta_paso_s": return AvoFormat.f(x, 0) + " s"
+        case "calentamiento_s": return AvoFormat.f(x / 60, 1) + " min"
+        case "vedba_galope_g": return AvoFormat.f(x, 3) + " g"
+        case "carga_vedba": return AvoFormat.f(x, 2) + " g·min"
         default: return AvoFormat.f(x, 2)
         }
     }
@@ -230,6 +275,11 @@ enum TrainingAnalytics {
         case "cadencia_hz": return sign + AvoFormat.f(x * 60, 2) + " /min/sem"
         case "carga_externa": return sign + AvoFormat.f(x, 1) + "/sem"
         case "distancia_m": return sign + AvoFormat.f(x, 0) + " m/sem"
+        case "v_max", "v_media_mejor": return sign + AvoFormat.f(x * 3.6, 2) + " km/h/sem"
+        case "mejor_200m_s", "mejor_pasada_s", "recuperacion_hasta_paso_s": return sign + AvoFormat.f(x, 2) + " s/sem"
+        case "mano_de_fuera_curva_pct", "indice_caida_pct", "caida_entre_series_pct": return sign + AvoFormat.f(x, 2) + " %/sem"
+        case "calentamiento_s": return sign + AvoFormat.f(x / 60, 2) + " min/sem"
+        case "carga_vedba": return sign + AvoFormat.f(x, 2) + " g·min/sem"
         default: return sign + AvoFormat.f(x, 4) + "/sem"
         }
     }
@@ -302,6 +352,8 @@ struct TrainingSessionSummary: Equatable {
     var superficie: String?
     var estadoPista: String?
     var avisos: [String]
+    /// «trabajo_pista» of the summary (AVO Track Work), nil for sessions analysed without it.
+    var trabajoPista: TrainingTrackWorkSummary?
 
     static func parse(_ json: String) throws -> TrainingSessionSummary {
         let r = try TJ.root(json)
@@ -345,6 +397,7 @@ struct TrainingSessionSummary: Equatable {
         superficie = TrainingSessionSummary.opt(TJ.str(p, "superficie"))
         estadoPista = TrainingSessionSummary.opt(TJ.str(p, "estado"))
         avisos = TJ.arr(o, "avisos").compactMap { $0 as? String }
+        trabajoPista = TrainingTrackWorkSummary(TJ.obj(o, "trabajo_pista"))
     }
 
     private static func opt(_ s: String) -> String? { s.isEmpty ? nil : s }
@@ -355,6 +408,90 @@ struct TrainingSessionSummary: Equatable {
         case "TROTE": return trote
         default: return galope
         }
+    }
+}
+
+/// «trabajo_pista» of one session summary (AVO Track Work): what the history uses (best pass, fatigue, recovery, VeDBA).
+struct TrainingTrackWorkSummary: Equatable {
+    var raza: String
+    var cargaVedbaGmin: Double?
+    var vedbaGalopeG: Double?
+    var galopeGirandoIzquierdaS: Double?
+    var galopeGirandoDerechaS: Double?
+    var manoCalibracion: String
+    var manoIzquierda: Int
+    var manoDerecha: Int
+    var manoCambios: Int
+    var manoDeFueraCurvaPct: Double?
+    var trabajos: Int
+    var trabajosRapidos: Int
+    var vMax: Double?
+    var mejor200S: Double?
+    var distanciaRapidaM: Double?
+    var distanciaGalopeTrabajoM: Double?
+    var indiceCaidaPct: Double?
+    var fEnVMaxHz: Double?
+    var lEnVMaxM: Double?
+    var desplazamientoVerticalM: Double?
+    var impactosAtipicos: Int
+    var lateralesBruscos: Int
+    var saturacion: Int
+    var calentamientoS: Double?
+    var vueltaCalmaS: Double?
+    var repeticiones: Int
+    var rapidas: Int
+    var caidaVMaxPct: Double?
+    var caidaZancadaPct: Double?
+    var recuperacionMediaS: Double?
+    var calentamientoCorto: Bool
+    var recorrido: String
+    var pasadas: Int
+    var mejorPasadaS: Double?
+    var vMediaMejor: Double?
+    var indiceCaidaMejorPct: Double?
+
+    init?(_ o: [String: Any]?) {
+        guard let o = o else { return nil }
+        raza = TJ.str(o, "raza")
+        cargaVedbaGmin = TJ.num(o, "carga_vedba_g_min")
+        vedbaGalopeG = TJ.num(o, "vedba_galope_g")
+        galopeGirandoIzquierdaS = TJ.num(o, "galope_girando_izquierda_s")
+        galopeGirandoDerechaS = TJ.num(o, "galope_girando_derecha_s")
+        let m = TJ.obj(o, "mano")
+        manoCalibracion = TJ.str(m, "calibracion")
+        manoIzquierda = TJ.int(TJ.num(m, "izquierda") ?? 0)
+        manoDerecha = TJ.int(TJ.num(m, "derecha") ?? 0)
+        manoCambios = TJ.int(TJ.num(m, "cambios") ?? 0)
+        manoDeFueraCurvaPct = TJ.num(m, "mano_de_fuera_en_curva_pct")
+        trabajos = TJ.int(TJ.num(o, "trabajos") ?? 0)
+        trabajosRapidos = TJ.int(TJ.num(o, "trabajos_rapidos") ?? 0)
+        vMax = TJ.num(o, "v_max")
+        mejor200S = TJ.num(o, "mejor_200m_s")
+        distanciaRapidaM = TJ.num(o, "distancia_rapida_m")
+        distanciaGalopeTrabajoM = TJ.num(o, "distancia_galope_trabajo_m")
+        indiceCaidaPct = TJ.num(o, "indice_caida_pct")
+        fEnVMaxHz = TJ.num(o, "f_en_v_max_hz")
+        lEnVMaxM = TJ.num(o, "l_en_v_max_m")
+        desplazamientoVerticalM = TJ.num(o, "desplazamiento_vertical_m")
+        let ev = TJ.obj(o, "eventos")
+        impactosAtipicos = TJ.int(TJ.num(ev, "impactos_atipicos") ?? 0)
+        lateralesBruscos = TJ.int(TJ.num(ev, "laterales_bruscos") ?? 0)
+        saturacion = TJ.int(TJ.num(ev, "saturacion") ?? 0)
+        let se = TJ.obj(o, "sesion")
+        calentamientoS = TJ.num(se, "calentamiento_s")
+        vueltaCalmaS = TJ.num(se, "vuelta_a_la_calma_s")
+        repeticiones = TJ.int(TJ.num(se, "repeticiones") ?? 0)
+        rapidas = TJ.int(TJ.num(se, "rapidas") ?? 0)
+        caidaVMaxPct = TJ.num(se, "caida_v_max_pct")
+        caidaZancadaPct = TJ.num(se, "caida_zancada_pct")
+        recuperacionMediaS = TJ.num(se, "recuperacion_media_s")
+        calentamientoCorto = TJ.bool(se, "calentamiento_corto")
+        let rc = TJ.obj(o, "recorrido")
+        recorrido = TJ.str(rc, "nombre")
+        pasadas = TJ.int(TJ.num(rc, "pasadas") ?? 0)
+        mejorPasadaS = TJ.num(rc, "mejor_pasada_s")
+        vMediaMejor = TJ.num(rc, "v_media_mejor")
+        indiceCaidaMejorPct = TJ.num(rc, "indice_caida_mejor_pct")
     }
 }
 
@@ -372,6 +509,11 @@ struct TrainingLoad: Equatable {
     var monotonia: Double?
     var tension: Double?
     var diasDesdeAnterior: Int?
+    /// VeDBA load of the girth (g·min, AVO Track Work) with its own acute / chronic / ACWR.
+    var vedba: Double?
+    var agudaVedba: Double?
+    var cronicaSemanalVedba: Double?
+    var acwrVedba: Double?
 
     init(_ o: [String: Any]?) {
         externa = TJ.num(o, "externa")
@@ -385,6 +527,10 @@ struct TrainingLoad: Equatable {
         monotonia = TJ.num(o, "monotonia")
         tension = TJ.num(o, "tension")
         diasDesdeAnterior = TJ.num(o, "dias_desde_anterior").map { TJ.int($0) }
+        vedba = TJ.num(o, "vedba")
+        agudaVedba = TJ.num(o, "aguda_vedba")
+        cronicaSemanalVedba = TJ.num(o, "cronica_semanal_vedba")
+        acwrVedba = TJ.num(o, "acwr_vedba")
     }
 }
 

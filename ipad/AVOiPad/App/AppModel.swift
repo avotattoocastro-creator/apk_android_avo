@@ -6,14 +6,14 @@ enum Page: String, CaseIterable, Identifiable {
     case home = "Home", sessions = "Sessions", trainingList = "List", races = "Races", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
-         summary = "Summary"
+         summary = "Summary", trackWork = "TrackWork"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
     /// «Mapa» is now the «Análisis» page itself (map, profile, time bar and zones).
     var isTrainingPage: Bool {
         switch self {
-        case .analysis, .map, .summary, .gps, .charts, .segments, .biomech, .compare, .tides, .reports, .engine: return true
+        case .analysis, .map, .summary, .gps, .charts, .trackWork, .segments, .biomech, .compare, .tides, .reports, .engine: return true
         default: return false
         }
     }
@@ -47,6 +47,7 @@ final class AppModel {
     @ObservationIgnored var races: RacesModel!            // «Carreras»: tracking PDFs of races + analysis vs trainings
     @ObservationIgnored var horseHistory: HorseHistoryModel! // «Historia del caballo» (AVO Training Analytics), full-screen cover
     @ObservationIgnored var corrections: CorrectionsModel!  // zones moved by the user (correcciones.json) for the engine
+    @ObservationIgnored var trackWork: TrackWorkModel!    // «Trabajo en pista» (AVO Track Work): efforts, splits, best distances
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
@@ -100,6 +101,7 @@ final class AppModel {
         self.races = RacesModel(app: self)
         self.horseHistory = HorseHistoryModel(app: self)
         self.corrections = CorrectionsModel(app: self)
+        self.trackWork = TrackWorkModel(app: self)
         initShell()
     }
 }

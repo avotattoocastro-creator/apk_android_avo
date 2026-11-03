@@ -24,6 +24,34 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-03 — iPad — AVO Track Work 1.0.0 integrado: página «Trabajo en pista», entrenamiento vs carrera y Track Work en la historia
+**Autor:** Claude · **Rama:** `feature/ipad-app` (sobre `7a6bb83`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:**
+- **`Core/TrackWork.swift`:** decodifica TODO el bloque `trabajo_pista` (tolerante, `nil` si falta):
+  - perfil de raza (umbrales, velocidades de referencia, base de parciales 200 m o furlong);
+  - cincha (VeDBA medio, por aire y carga, giros y grados por mano, saturación), zancadas (resumen y lista), mano (EXPERIMENTAL);
+  - trabajos y pasadas: parciales con tiempo acumulado y velocidad, mejores 200…1600 m (tiempo, velocidad, dónde), v. máx y tiempo hasta ella, distancia > 90 %, últimos 200/400 m, índice de caída, zancada a la máxima y a las velocidades de referencia, ajustes f/l, mano por trabajo, recuperación y pausa;
+  - recorrido (pasadas, mejor pasada, % dentro de la geocerca, cruces ignorados en sentido contrario), fases, series, eventos y avisos.
+  - Se mantienen los nombres antiguos (`efforts`, `passes`, `sectionals`, `fatiguePct`, `recoveryS`…).
+- **Nueva página «Trabajo en pista»** (`Page.trackWork`, pestaña de la barra del entrenamiento después de Gráficas, `tab.TrackWork`; `App/TrackWorkModel.swift`, `Views/TrackWorkView.swift`):
+  - cabecera con la raza de la ficha, el perfil usado (aviso y «Volver a analizar» si no coinciden), la base de las fases (velocidad / líneas / corregidas) y los avisos;
+  - franja de la estructura (calentamiento / trabajo / calma con minutos al paso, trote y galope) y fichas de resumen de las series;
+  - tabla ordenable de trabajos y pasadas; al tocar una fila se selecciona en toda la app (rango, cursor y ventana de Gráficas) y se abre su detalle: parciales (tabla y barras en s o km/h), mejores distancias, velocidad frente a distancia con la máxima y la franja del 90 %, frecuencia y longitud de zancada frente a la velocidad con los valores de referencia resaltados, cincha y giros del trabajo, eventos;
+  - «Mejores distancias de la sesión», cincha de la sesión, recorrido y eventos.
+  - Sin datos: «Sin datos», «Requiere cincha» o «Requiere líneas de salida y meta».
+- **Análisis (mapa):** el panel «Entrenamiento» queda como resumen (fases, recuentos, seleccionado) con el botón «Ver trabajo en pista»; la lista de trabajos pasa a la nueva página.
+- **Ficha de la carrera:** bloque «Entrenamiento vs carrera, tramo a tramo» (`Views/RaceTrainingSplitsView.swift`, `RaceTrainingSplits` en `Core/RaceAnalysis.swift`):
+  - por defecto, el trabajo o pasada más rápido por velocidad media (con ≥ 2 parciales completos) de los 60 días anteriores a la carrera; menú para elegir otro;
+  - tramos alineados desde la meta (último parcial completo ↔ 200–ARR), solo piezas completas; tiempo y km/h de entrenamiento y carrera, % de la velocidad de carrera y perfil de caída (último / mejor tramo) en ambos;
+  - analiza con el motor (resultado en caché) los entrenamientos de la ventana que aún no tienen resultado;
+  - explica que los parciales del entrenamiento son en la playa y los de la carrera en la pista.
+- **Historia del caballo:** sección «Trabajo en pista»: evolución de la mejor pasada, su velocidad media, índice de caída, recuperación y VeDBA en galope; carga VeDBA por día/semana con su ACWR; tabla de líneas base y tendencias de `TRABAJO.*`, `CINCHA.*`, `RECORRIDO.*` y `carga_vedba`; impactos atípicos y motivos de la cincha. `TrainingSessionSummary.trabajoPista` y la carga VeDBA de `TrainingLoad` se decodifican; las tendencias de Track Work salen de la tarjeta general.
+- **Pruebas:** `AVOiPadTests/TrackWorkTests.swift` (JSON real del motor para las sesiones sintéticas de `test_racing.cpp` con cincha y con líneas tipo Regatón; decodificación tolerante; velocidad-distancia; motor real sobre la demo con raza PSI; alineación entrenamiento-carrera). Capturas: página `TrackWork` añadida a `ScreenshotTests`.
+**Supuestos:** «mejor pasada» por defecto en la carrera = mayor velocidad media (el motor llama mejor pasada a la más corta en tiempo); un parcial cuenta como completo si mide ±5 % de la base; los giros por mano de un trabajo se calculan con el giro medio de sus zancadas (|giro| ≥ 4 °/s).
+**Archivos:** `ipad/AVOiPad/Core/TrackWork.swift`, `ipad/AVOiPad/Core/RaceAnalysis.swift`, `ipad/AVOiPad/Core/TrainingAnalytics.swift`, `ipad/AVOiPad/App/TrackWorkModel.swift` (nuevo), `ipad/AVOiPad/App/AppModel.swift`, `ipad/AVOiPad/App/AppModel+Shell.swift`, `ipad/AVOiPad/App/RootView.swift`, `ipad/AVOiPad/App/RacesModel.swift`, `ipad/AVOiPad/App/HorseHistoryModel.swift`, `ipad/AVOiPad/Views/TrackWorkView.swift` (nuevo), `ipad/AVOiPad/Views/RaceTrainingSplitsView.swift` (nuevo), `ipad/AVOiPad/Views/RaceDetailView.swift`, `ipad/AVOiPad/Views/MapPageView.swift`, `ipad/AVOiPad/Views/HorseHistoryView.swift`, `ipad/AVOiPadTests/TrackWorkTests.swift` (nuevo), `ipad/AVOiPadUITests/ScreenshotTests.swift`, `ipad/UI_CONTRACT.md`.
+**No se ha tocado:** el motor (`equine-intelligence`), Android, Windows, firmware.
+**Validación:** IMPLEMENTADO · sin compilador Swift en la sesión (pendiente de CI macOS) · NO VERIFICADO en el iPad ni con caballos reales.
+
 ## 2026-11-03 — iPad — raza en la ficha del caballo: desplegable de razas de carreras
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:** el campo «Raza» de la ficha del caballo (Cuadra) pasa a ser un desplegable agrupado:

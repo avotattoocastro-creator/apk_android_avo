@@ -413,8 +413,8 @@ private struct PlaybackScrubber: View {
 
 // MARK: - Training zones (AVO Track Work + corrections)
 
-/// Phases, repetitions and course passes of the training (engine «trabajo_pista»). Tapping a row selects it on the
-/// map and the profile.
+/// Compact summary of the training zones (engine «trabajo_pista»): phases and counts. The full analysis (table of
+/// efforts and passes, splits, best distances, stride, girth, events) is the «Trabajo en pista» page.
 private struct TrainingZonesCard: View {
     @Environment(AppModel.self) private var app
 
@@ -422,7 +422,6 @@ private struct TrainingZonesCard: View {
         VStack(alignment: .leading, spacing: 6) {
             if let s = app.selected, let e = s.engine {
                 let tw: TrackWorkResult = e.trackWork
-                let off: Double = s.engineOffsetS
                 if !tw.present {
                     Text("Este resultado del motor no trae el análisis del trabajo: vuelve a analizar el entrenamiento.")
                         .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
@@ -432,24 +431,23 @@ private struct TrainingZonesCard: View {
                     phaseRow("Vuelta a la calma", CorrectionsModel.cooldownColor, tw.cooldown)
                     Text("Fases \(tw.phaseBasisText)" + (tw.breed.isEmpty ? "" : " · perfil \(tw.breed)"))
                         .font(.caption2).foregroundStyle(Avo.textDim)
-                    if !tw.efforts.isEmpty || !tw.passes.isEmpty { Divider().background(Avo.line) }
-                    ForEach(tw.efforts) { (w: TrackWorkEffort) in effortRow(w, off) }
-                    if !tw.passes.isEmpty {
-                        Text("PASADAS SALIDA → META").font(.caption2.weight(.semibold)).tracking(0.5).foregroundStyle(Avo.textDim).padding(.top, 4)
-                        ForEach(tw.passes) { (p: TrackWorkEffort) in effortRow(p, off) }
-                    }
-                    if tw.efforts.isEmpty && tw.passes.isEmpty {
-                        Text("Sin trabajos detectados. Márcalos con «Inicio / Fin repetición».")
-                            .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-                    }
-                    if tw.fastReps >= 2 {
-                        Text("Series: \(tw.fastReps) rápidas · caída \(AvoFormat.f(tw.vmaxDropPct, 1)) % · recuperación \(AvoFormat.f(tw.recoveryMeanS, 0)) s")
-                            .font(.caption).foregroundStyle(Avo.text)
+                    Text(countsText(tw))
+                        .font(.caption).foregroundStyle(Avo.text).fixedSize(horizontal: false, vertical: true)
+                    if let sel = app.trackWork.selected {
+                        Text("Seleccionado: \(sel.title) · \(TrackWorkText.metres(sel.distanceOpt)) · máx \(TrackWorkText.kmh(sel.vmaxOpt))")
+                            .font(.caption).foregroundStyle(Avo.cyan).lineLimit(1).minimumScaleFactor(0.7)
                     }
                     if tw.warmupShort {
                         Label("Calentamiento corto antes del trabajo rápido", systemImage: "exclamationmark.triangle")
                             .font(.caption).foregroundStyle(Avo.redLight)
                     }
+                    Button {
+                        app.page = .trackWork
+                    } label: {
+                        Label("Ver trabajo en pista", systemImage: "stopwatch")
+                    }
+                    .buttonStyle(.avoSecondary)
+                    .accessibilityIdentifier("map.trackWork")
                 }
             } else if let s = app.selected {
                 Text(s.engineState).font(.caption).foregroundStyle(Avo.textDim)
@@ -457,6 +455,16 @@ private struct TrainingZonesCard: View {
                 Text("Sin entrenamiento").font(.caption).foregroundStyle(Avo.textDim)
             }
         }
+    }
+
+    private func countsText(_ tw: TrackWorkResult) -> String {
+        if tw.efforts.isEmpty && tw.passes.isEmpty {
+            return "Sin trabajos detectados. Márcalos con «Inicio / Fin repetición»."
+        }
+        var p: [String] = ["\(tw.efforts.count) trabajos (\(tw.fastReps) rápidos)"]
+        if tw.courseDefined { p.append("\(tw.passes.count) pasadas") }
+        if let b = tw.sessionBest200S { p.append("mejor 200 m " + TrackWorkText.seconds(b)) }
+        return p.joined(separator: " · ")
     }
 
     private func phaseRow(_ name: String, _ color: Color, _ p: TrackWorkPhase) -> some View {
@@ -467,29 +475,6 @@ private struct TrainingZonesCard: View {
             Text(p.present ? "\(TimeText.clock(p.durationS)) · \(AvoFormat.f(p.distanceM / 1000, 2)) km" : "—")
                 .font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
         }
-    }
-
-    private func effortRow(_ w: TrackWorkEffort, _ off: Double) -> some View {
-        let color: Color = w.kind == "PASADA" ? CorrectionsModel.passColor : w.kind == "TRABAJO_RAPIDO" ? CorrectionsModel.fastColor : CorrectionsModel.canterColor
-        return Button {
-            app.rangeStart = w.t0 - off
-            app.rangeEnd = w.t1 - off
-            app.cursorTime = w.t0 - off
-        } label: {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10, height: 10)
-                    Text("\(w.id). \(w.kindText)" + (w.manual ? " · a mano" : "")).font(.caption.weight(.semibold)).foregroundStyle(Avo.text)
-                    Spacer(minLength: 6)
-                    Text(TimeText.clock(w.durationS)).font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
-                }
-                Text("\(AvoFormat.f(w.distanceM, 0)) m · máx \(AvoFormat.f(w.vmax * 3.6, 1)) km/h · caída \(AvoFormat.f(w.fatiguePct, 0)) % · recup. \(AvoFormat.f(w.recoveryS, 0)) s")
-                    .font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.7)
-            }
-            .padding(.vertical, 3).padding(.horizontal, 4)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
     }
 }
 

@@ -543,3 +543,134 @@ enum RaceAnalysis {
         return out
     }
 }
+
+// MARK: - training vs race, sector by sector (AVO Track Work splits)
+
+/// One training session of the horse with its Track Work result (engine «trabajo_pista»).
+struct RaceTrainingSource {
+    var sessionId: String
+    var date: Date?
+    var isDemo: Bool
+    var trackWork: TrackWorkResult
+}
+
+/// An effort or course pass of a training that has splits (200 m or furlong), offered for the comparison with a race.
+struct RaceTrainingCandidate: Identifiable, Equatable {
+    var sessionId: String
+    var date: Date?
+    var isDemo: Bool
+    var effort: TrackWorkEffort
+    /// Split basis of that training (200 or 201.168 m).
+    var basisM: Double
+
+    var id: String { sessionId + "|" + effort.key }
+    var fullSplits: Int { effort.fullSplits(basisM).count }
+    var label: String {
+        let d: String = date.map { AvoTime.text($0, "dd/MM") } ?? "—"
+        return "\(d) · \(effort.title) · \(TrackWorkText.metres(effort.distanceOpt)) · media \(TrackWorkText.kmh(effort.speedMeanOpt))"
+            + (isDemo ? " · DEMO" : "")
+    }
+}
+
+/// One row of «Entrenamiento vs carrera, tramo a tramo»: the k-th 200 m piece counted from the end (1 = the last one).
+struct RaceSectorComparisonRow: Identifiable, Equatable {
+    var id: Int
+    var label: String
+    var trainingS: Double?
+    var trainingKmh: Double?
+    var raceS: Double?
+    var raceKmh: Double?
+    /// Training speed / race speed of the same piece.
+    var pctOfRace: Double?
+}
+
+struct RaceSectorComparison: Equatable {
+    /// From the first compared piece to the finish.
+    var rows: [RaceSectorComparisonRow]
+    var trainingBestKmh: Double?
+    var trainingLastKmh: Double?
+    /// Last full split / best previous full split (training).
+    var trainingFade: Double?
+    var raceBestKmh: Double?
+    var raceLastKmh: Double?
+    /// Last 200 m sector / best previous 200 m sector (race).
+    var raceFade: Double?
+    /// Mean of `pctOfRace` over the rows with both values.
+    var meanPctOfRace: Double?
+    var trainingIsFurlong: Bool
+    /// The final split of the training was shorter than the basis and is not compared.
+    var trainingPartialEndSkipped: Bool
+}
+
+/// Aligns the splits of one training effort with the 200 m sectors of the race, counting from the END (the last
+/// training split with the last race sector, and so on), because the race sectors are named by the distance to the finish
+/// and the fade is measured in the final. Only full pieces are compared (the first race sector «DEP–…» is usually longer
+/// or shorter than 200 m; the last training split up to the end of the effort is usually shorter). Training is on the
+/// beach and the race on the track: the comparison shows ratios, not a prediction.
+enum RaceTrainingSplits {
+    static let windowDays: Int = 60
+
+    static func isFullRaceSector(_ s: RaceSector) -> Bool { s.lengthM >= 190 && s.lengthM <= 210 && s.sectorS > 0 }
+
+    /// Efforts and passes with at least one full split, of the sessions in the `windowDays` days before the race day.
+    static func candidates(_ sources: [RaceTrainingSource], raceDate: Date, calendar: Calendar) -> [RaceTrainingCandidate] {
+        let limit: Date = calendar.startOfDay(for: raceDate)
+        let from: Date = calendar.date(byAdding: .day, value: -windowDays, to: limit) ?? limit
+        var out: [RaceTrainingCandidate] = []
+        for s in sources {
+            guard let d = s.date, d >= from, d < limit, s.trackWork.present else { continue }
+            let basis: Double = s.trackWork.splitBasisM
+            for e in s.trackWork.allEfforts {
+                let c = RaceTrainingCandidate(sessionId: s.sessionId, date: d, isDemo: s.isDemo, effort: e, basisM: basis)
+                if c.fullSplits >= 1 { out.append(c) }
+            }
+        }
+        return out.sorted { (a: RaceTrainingCandidate, b: RaceTrainingCandidate) -> Bool in
+            let da: Date = a.date ?? .distantPast, db: Date = b.date ?? .distantPast
+            if da != db { return da > db }
+            return a.effort.t0 < b.effort.t0
+        }
+    }
+
+    /// Default: the fastest by mean speed among those with ≥ 2 full splits (else among all).
+    static func defaultCandidate(_ list: [RaceTrainingCandidate]) -> RaceTrainingCandidate? {
+        let two: [RaceTrainingCandidate] = list.filter { $0.fullSplits >= 2 && $0.effort.speedMeanOpt != nil }
+        let pool: [RaceTrainingCandidate] = two.isEmpty ? list.filter { $0.effort.speedMeanOpt != nil } : two
+        return pool.max { ($0.effort.speedMeanOpt ?? 0) < ($1.effort.speedMeanOpt ?? 0) }
+    }
+
+    static func compare(_ c: RaceTrainingCandidate, _ runner: RaceRunner) -> RaceSectorComparison {
+        let train: [TrackWorkSplit] = c.effort.fullSplits(c.basisM)
+        let race: [RaceSector] = runner.sectors.filter { isFullRaceSector($0) }
+        let lastSplit: TrackWorkSplit? = c.effort.splits.last
+        let partialSkipped: Bool = lastSplit.map { !$0.isFull(c.basisM) } ?? false
+        let n: Int = max(train.count, race.count)
+        var rows: [RaceSectorComparisonRow] = []
+        var pcts: [Double] = []
+        if n > 0 {
+            for k in stride(from: n, through: 1, by: -1) {
+                let t: TrackWorkSplit? = k <= train.count ? train[train.count - k] : nil
+                let r: RaceSector? = k <= race.count ? race[race.count - k] : nil
+                let tk: Double? = t?.speedKmh
+                let rk: Double? = r?.speedKmh
+                var pct: Double? = nil
+                if let a = tk, let b = rk, b > 0 { pct = a / b; pcts.append(a / b) }
+                let label: String = r?.shortLabel ?? (String(k * 200) + "–" + (k == 1 ? "ARR" : String((k - 1) * 200)))
+                rows.append(RaceSectorComparisonRow(id: k, label: label, trainingS: t?.timeS, trainingKmh: tk, raceS: r?.sectorS, raceKmh: rk,
+                                                    pctOfRace: pct))
+            }
+        }
+        let tv: [Double] = train.compactMap { $0.speedKmh }
+        let rv: [Double] = race.compactMap { $0.speedKmh }
+        return RaceSectorComparison(rows: rows, trainingBestKmh: tv.max(), trainingLastKmh: tv.last, trainingFade: fade(tv),
+                                    raceBestKmh: rv.max(), raceLastKmh: rv.last, raceFade: fade(rv),
+                                    meanPctOfRace: pcts.isEmpty ? nil : pcts.reduce(0, +) / Double(pcts.count),
+                                    trainingIsFurlong: c.basisM > 200.5, trainingPartialEndSkipped: partialSkipped)
+    }
+
+    /// last / best of the previous values (nil with fewer than 2).
+    static func fade(_ v: [Double]) -> Double? {
+        guard v.count >= 2, let last = v.last, let best = v.dropLast().max(), best > 0 else { return nil }
+        return last / best
+    }
+}

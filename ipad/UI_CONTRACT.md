@@ -53,11 +53,13 @@ Cada uno es `@Observable final class XxxModel` en su propio archivo `App/XxxMode
 | `WatchWifiModel` | sustituye MainViewModel.Usb.cs | WatchWifi |
 | `TrainingListModel` | nuevo en iPad (sin equivalente Windows) | List («Listado»: tabla filtrable + buscar entrenamientos perdidos) |
 | `RacesModel` | nuevo en iPad (sin equivalente Windows) | Races («Carreras»: PDF «Statistiques Tracking» de France Galop / McLloyd, `carreras.json` + copia del PDF en `carreras/`, análisis frente a los entrenamientos; también desde la ficha del caballo en Cuadra) |
+| `TrackWorkModel` | nuevo en iPad (AVO Track Work 1.0.0) | «Trabajo en pista» (`Page.trackWork` = `TrackWork`, pestaña de la barra del entrenamiento junto a Análisis / Resumen / Gráficas, `tab.TrackWork`): estructura de la sesión, tabla de trabajos y pasadas (ordenable), detalle del seleccionado (parciales, mejores distancias, velocidad-distancia, zancada-velocidad, cincha, giros, eventos), mejores distancias de la sesión, cincha, recorrido y eventos. `select(_:)` pone `rangeStart`/`rangeEnd`/`cursorTime` (y la ventana de Gráficas) en el trabajo; `selectedKey` = `T<id>` (trabajo) o `P<id>` (pasada) |
 | `HorseHistoryModel` | nuevo en iPad (AVO Training Analytics 1.0.0) | «Historia del caballo» (`HorseHistoryView`, pantalla completa desde RootView, no es página del menú): se abre desde la ficha del caballo en Cuadra y desde el nombre del caballo en Análisis; valoraciones del entrenador en `valoraciones.json` (`App/AppModel+Training.swift`) |
 
 ## Vistas (nombres fijos, cada una en `Views/<Nombre>.swift`)
 `StartView`, `HomeView` (Entrenamientos), `AnalysisView`, `MapPageView`, `ChartsView`, `SegmentsView`, `BiomechView`,
 `CompareView`, `GeofencesView`, `TidesView`, `ReportsView`, `WatchWifiView`, `ServerView`, `EngineView`, `TrainingListView`, `RacesView` (+ `RaceDetailView`, ficha de la carrera; importación compartida en `SharedRaceImport.swift`),
+`TrackWorkView` (bloque «trabajo_pista» completo; modelo en `Core/TrackWork.swift`: `TrackWorkResult`, `TrackWorkEffort` con `splits`/`best`/zancada/mano, `TrackWorkGirth`, `TrackWorkLead`, `TrackWorkEvent`, `TrackWorkText`; el panel «Entrenamiento» de `MapPageView` queda como resumen con el botón «Ver trabajo en pista»), `RaceTrainingSplitsCard` (`Views/RaceTrainingSplitsView.swift`, bloque «Entrenamiento vs carrera, tramo a tramo» de la ficha de la carrera; alineación en `Core/RaceAnalysis.swift`, `RaceTrainingSplits`),
 `StableView(kind: IdentityKind)` (Cuadra = caballos, Jinetes = jinetes), `AssignSheet` (hoja «Caballo y jinete del
 entrenamiento», se presenta desde RootView cuando `app.stable.assignVisible` es true).
 Componentes compartidos que necesites en más de una vista: en un archivo propio con nombre único
@@ -68,4 +70,6 @@ Componentes compartidos que necesites en más de una vista: en un archivo propio
 - Cálculos pesados fuera del hilo principal (`Task.detached`), resultados al modelo en `@MainActor`.
 - Exportar = `ShareLink`/`fileExporter` con el archivo generado en `paths.root/exportaciones`.
 - Identificadores de accesibilidad: botones del menú lateral `nav.<Page.rawValue>` (los pone RootView).
+- AVO Track Work: sin cincha → «Requiere cincha»; sin líneas de salida y meta → «Requiere líneas de salida y meta»; mano de galope y
+  eventos de la cincha siempre marcados EXPERIMENTAL. Los tiempos del motor son segundos del motor: tiempo de la app = motor − `engineOffsetS`.
 - Swift 5, iOS 17, sin dependencias externas. No hay compilador en la sesión: código conservador, tipos explícitos.

@@ -98,6 +98,7 @@ struct HorseHistoryView: View {
             if !model.srpeBars.isEmpty { srpeCard }
             baselineCard(r)
             trendsCard
+            if model.hasTrackWork { trackWorkSection(r) }
             sessionsCard
         }
         if !r.avisos.isEmpty {
@@ -331,6 +332,183 @@ struct HorseHistoryView: View {
                         .padding(8)
                         .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
                         .accessibilityElement(children: .combine)
+                    }
+                }
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------- AVO Track Work
+    private func trackWorkSection(_ r: TrainingAnalysisResult) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 10) {
+                RoundedRectangle(cornerRadius: 2).fill(Avo.red).frame(width: 4, height: 24)
+                Text("Trabajo en pista").font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
+                AvoPill(text: "AVO Track Work · exploratorio", color: Avo.cyan)
+            }
+            trackWorkAlertsCard
+            trackWorkChartsCard
+            vedbaCard(r)
+            trackWorkTableCard
+        }
+        .accessibilityIdentifier("history.trackWork")
+    }
+
+    private var trackWorkAlertsCard: some View {
+        let reasons: [String] = model.trackWorkReasons
+        let impacts: [HorseImpactRow] = model.impactRows
+        return AvoCard(title: "Cincha: impactos atípicos y motivos", subtitle: "Los impactos atípicos (posible tropiezo o mala pisada) suben el nivel a VIGILAR · EXPERIMENTAL") {
+            if reasons.isEmpty && impacts.isEmpty {
+                Text("Sin impactos atípicos ni movimientos laterales bruscos en las sesiones con cincha.")
+                    .font(.footnote).foregroundStyle(Avo.textDim)
+            }
+            if !reasons.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(Array(reasons.enumerated()), id: \.offset) { (item: (offset: Int, element: String)) in
+                        Label(item.element, systemImage: "exclamationmark.triangle.fill")
+                            .font(.footnote).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+            if !impacts.isEmpty {
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(impacts) { (row: HorseImpactRow) in
+                        HStack(spacing: 8) {
+                            Text(row.date).frame(width: 110, alignment: .leading)
+                            Text("\(row.impacts) impacto(s) atípico(s)").frame(width: 170, alignment: .leading)
+                            Text(row.lateral > 0 ? "\(row.lateral) lateral(es) brusco(s)" : "").foregroundStyle(Avo.textDim)
+                        }
+                        .font(.caption.monospacedDigit()).foregroundStyle(Avo.text)
+                    }
+                }
+            }
+        }
+    }
+
+    private var trackWorkChartsCard: some View {
+        AvoCard(title: "Evolución por sesión", subtitle: "Mejor pasada y su velocidad media (requieren líneas de salida y meta), índice de caída, recuperación y VeDBA en galope (requiere cincha)") {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 12)], spacing: 12) {
+                ForEach(HorseHistoryModel.trackWorkSeries, id: \.key) { (sr: (name: String, key: String)) in
+                    trackWorkMiniChart(sr.name, sr.key)
+                }
+            }
+        }
+    }
+
+    private func trackWorkMiniChart(_ name: String, _ key: String) -> some View {
+        let pts: [HorseLinePoint] = model.trackWorkPoints(key)
+        let unit: String = trackWorkUnit(key)
+        return VStack(alignment: .leading, spacing: 4) {
+            Text(name.uppercased() + (unit.isEmpty ? "" : " (" + unit + ")"))
+                .font(.caption2.weight(.semibold)).tracking(0.5).foregroundStyle(Avo.textDim).lineLimit(1)
+            if pts.isEmpty {
+                AvoNoData()
+            } else {
+                Chart(pts) { (p: HorseLinePoint) in
+                    LineMark(x: .value("Fecha", p.date), y: .value(unit, p.value))
+                        .foregroundStyle(Avo.cyan)
+                    PointMark(x: .value("Fecha", p.date), y: .value(unit, p.value))
+                        .foregroundStyle(Avo.cyan)
+                        .symbolSize(28)
+                }
+                .chartYScale(domain: .automatic(includesZero: false))
+                .chartXAxis { dateAxis }
+                .chartYAxis { valueAxis(key == "vedba_galope_g" ? 2 : 1) }
+                .frame(height: 140)
+            }
+        }
+        .padding(10)
+        .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func trackWorkUnit(_ key: String) -> String {
+        switch key {
+        case "mejor_pasada_s", "recuperacion_hasta_paso_s": return "s"
+        case "v_media_mejor": return "km/h"
+        case "indice_caida_pct": return "%"
+        case "vedba_galope_g": return "g"
+        default: return ""
+        }
+    }
+
+    private func vedbaCard(_ r: TrainingAnalysisResult) -> some View {
+        let bars: [HorseLinePoint] = model.vedbaLoadBars
+        let acwr: [HorseLinePoint] = model.acwrVedbaPoints
+        let unit: Calendar.Component = model.byWeek ? .weekOfYear : .day
+        return AvoCard(title: "Carga VeDBA de la cincha", subtitle: "∫VeDBA (g·min) por \(model.byWeek ? "semana" : "día") y su ACWR (aguda / crónica): por encima de \(AvoFormat.f(r.acwrHigh, 1)) → VIGILAR") {
+            if bars.isEmpty {
+                AvoNoData(text: "Requiere cincha")
+            } else {
+                Chart(bars) { (p: HorseLinePoint) in
+                    BarMark(x: .value("Fecha", p.date, unit: unit), y: .value("g·min", p.value))
+                        .foregroundStyle(HorseHistoryView.partColors[2])
+                        .cornerRadius(2)
+                }
+                .chartXAxis { dateAxis }
+                .chartYAxis { valueAxis(1) }
+                .frame(height: 160)
+            }
+            HStack(spacing: 16) {
+                ShellKeyValue(key: "ACWR VeDBA actual", value: num(r.carga.acwrVedba, 2))
+                ShellKeyValue(key: "Aguda 7 d", value: num(r.carga.agudaVedba, 1))
+                ShellKeyValue(key: "Crónica semanal", value: num(r.carga.cronicaSemanalVedba, 1))
+            }
+            if !acwr.isEmpty {
+                let hi: Double = r.acwrHigh
+                Chart {
+                    RuleMark(y: .value("Alto", hi)).foregroundStyle(Avo.warn).lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                    ForEach(acwr) { (p: HorseLinePoint) in
+                        LineMark(x: .value("Fecha", p.date), y: .value("ACWR", p.value))
+                            .foregroundStyle(HorseHistoryView.partColors[2])
+                        PointMark(x: .value("Fecha", p.date), y: .value("ACWR", p.value))
+                            .foregroundStyle((p.value > hi) ? Avo.warn : HorseHistoryView.partColors[2])
+                            .symbolSize(30)
+                    }
+                }
+                .chartXAxis { dateAxis }
+                .chartYAxis { valueAxis(1) }
+                .frame(height: 150)
+            }
+        }
+    }
+
+    private var trackWorkTableCard: some View {
+        let rows: [HorseTrackWorkRow] = model.trackWorkRows
+        return AvoCard(title: "Líneas base y tendencias del trabajo en pista",
+                       subtitle: "Última sesión frente a su mediana de 60 días · suben el nivel: la zancada a la velocidad de referencia (la longitud solo si baja) y la mano de fuera en curva (solo si sube); el resto es informativo") {
+            if rows.isEmpty {
+                AvoNoData()
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        HStack(spacing: 8) {
+                            head("Métrica", 290); head("Última", 100); head("Mediana", 100); head("n", 40); head("Estado", 200); head("Tendencia 8 sem.", 220)
+                        }
+                        .padding(.vertical, 6)
+                        Divider().overlay(Avo.line)
+                        ForEach(rows) { (row: HorseTrackWorkRow) in
+                            HStack(spacing: 8) {
+                                cell(row.label, 290)
+                                cell(row.last, 100)
+                                cell(row.median, 100)
+                                cell(String(row.n), 40)
+                                HStack(spacing: 6) {
+                                    if row.flag == "VIGILAR" || row.flag == "REVISAR" {
+                                        AvoPill(text: row.flag, color: HorseHistoryModel.levelColor(row.flag))
+                                    } else {
+                                        Text(row.flagText).foregroundStyle(row.flag == "NORMAL" ? Avo.text : Avo.textDim).lineLimit(1)
+                                    }
+                                }
+                                .frame(width: 200, alignment: .leading)
+                                HStack(spacing: 4) {
+                                    Image(systemName: row.trendArrow).foregroundStyle(row.trendHasData ? Avo.cyan : Avo.unknown)
+                                    Text(row.trendText).lineLimit(1)
+                                }
+                                .frame(width: 220, alignment: .leading)
+                            }
+                            .font(.footnote).foregroundStyle(Avo.text)
+                            .padding(.vertical, 4)
+                        }
                     }
                 }
             }

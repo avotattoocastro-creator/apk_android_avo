@@ -99,6 +99,7 @@ extension AppModel {
         case .gps: gps?.pageShown()
         case .trainingList: trainingList?.pageShown()
         case .races: races?.pageShown()
+        case .trackWork: trackWork?.pageShown()
         case .home, .sessions, .server, .engine, .summary: break
         }
     }
@@ -213,6 +214,7 @@ extension AppModel {
         watchWifi?.sessionChanged()
         trainingList?.sessionChanged()
         races?.sessionChanged()
+        trackWork?.sessionChanged()
     }
 
     var timelineStart: Double {

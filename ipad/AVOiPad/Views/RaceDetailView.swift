@@ -31,6 +31,9 @@ struct RaceDetailView: View {
                 RaceRunnersTable(race: race)
                 RaceSectorsTable(race: race, runnerName: $sectorRunner)
                 RaceChartsSection(race: race)
+                if let us = race.ourRunner {
+                    RaceTrainingSplitsCard(model: model, race: race, us: us)
+                }
                 analysis
                 notesCard
             }
