@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-06 — iPad — Análisis rediseñado: mapa a todo el ancho, línea de tiempo y todas las gráficas con scroll; «Entreno 2»; «Mapa» en el menú
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (pedido del usuario sobre una captura anotada de la compilación 33):**
+- **Análisis** (`MapPageView`): una sola columna con scroll vertical:
+  - mapa a todo el ancho (58 % de la altura, mínimo 380 pt); el panel «Capa base / Trazo» queda oculto tras el botón «Capas»; distancia, tiempo, velocidad media y máxima van en pequeño sobre la esquina superior derecha del mapa (`MapStatsOverlay`); los botones de zoom bajan a la esquina inferior derecha;
+  - debajo, la línea de tiempo (perfil de velocidad con zonas y asas, reproducción) y los botones de zonas;
+  - después, TODAS las gráficas de «Gráficas» (`ChartsNavigator` + `ChartsStack(skipSpeed: true)`, sin repetir la velocidad), con el mismo cursor, zoom y rango;
+  - al final, las tarjetas que estaban en la columna derecha: Entrenamiento (fases), leyenda y punto seleccionado (`MapInfoCards`). Se elimina `MapSidePanel`; los tramos siguen en su página.
+- **«Entreno 2»** (`RootPairMenu`, en la barra del entrenamiento junto al entrenamiento activo): elige un segundo entrenamiento y Análisis pasa a comparar los dos (entreno 1 azul, entreno 2 amarillo): cabecera con ambos y «Quitar entreno 2», barra de zoom y rango de la comparación, recorridos superpuestos grandes y gráficas alineadas (`CompareResults`, `CompareMap`, `CompareChartToolbar`, `CompareRangeCard` pasan a ser internos). `CompareModel.pairId` / `setPair(_:)`: la comparación contiene solo esos dos; al cambiar el entrenamiento activo se mantiene el entreno 2 (si coinciden, se quita).
+- **Menú lateral:** nueva entrada **«Mapa»** debajo de «Análisis» (`Page.map`, `nav.Map`): el mapa ocupa la página con la línea de tiempo debajo y sin gráficas (o los dos recorridos con «Entreno 2»).
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`, `ipad/AVOiPad/Views/ChartsView.swift`, `ipad/AVOiPad/Views/CompareView.swift`, `ipad/AVOiPad/App/CompareModel.swift`, `ipad/AVOiPad/App/RootView.swift`, `ipad/AVOiPad/App/AppModel+Shell.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+**Pendiente:** cursor de la línea de tiempo sobre el mapa de la comparación; revisar con el usuario la altura del mapa.
+
 ## 2026-11-06 — iPad — Asistente IA: corrección de «Probar conexión» que borraba la clave
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:** en Ajustes del asistente, «Guardar clave», «Probar conexión» y «Borrar clave» estaban en la misma fila del `Form`; en SwiftUI un toque en esa fila dispara todos los botones, así que «Probar conexión» borraba la clave y respondía «No hay clave guardada» (visto en el iPad con la compilación 33). Ahora cada botón va en su fila con `.buttonStyle(.borderless)` y «Borrar clave del iPad» queda aparte, al final. Al guardar, se comprueba que la clave se lee del Llavero y el asistente pasa a usar Claude (se desactiva «Usar el modelo de Apple»).

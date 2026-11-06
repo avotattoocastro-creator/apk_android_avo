@@ -409,16 +409,18 @@ private enum ChartsHeights {
     static let placeholder: CGFloat = 96
 }
 
-private struct ChartsStack: View {
+struct ChartsStack: View {
     @Environment(AppModel.self) private var app
     let charts: ChartsModel
+    /// Análisis: la velocidad ya está en el perfil de la línea de tiempo, encima.
+    var skipSpeed: Bool = false
 
     var body: some View {
         let d: ClosedRange<Double> = charts.domain
         let empty: String = charts.building ? "Calculando…" : "Sin datos"
         LazyVStack(alignment: .leading, spacing: 10) {
             // 1. speed (no RTK quality strip on this page)
-            if charts.chartSpeed {
+            if charts.chartSpeed && !skipSpeed {
                 SyncChartBox(title: "Velocidad (km/h)", legend: ChartsLegends.speed,
                              readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }, chartId: "speed") {
                     SyncSignalChart(panel: charts.panel(.speed, chart: "speed", legend: ChartsLegends.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true)

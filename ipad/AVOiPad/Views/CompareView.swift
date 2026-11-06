@@ -120,7 +120,7 @@ private struct CompareSessionPicker: View {
 
 // MARK: Toolbar (shared zoom / pan / range of every compare chart)
 
-private struct CompareChartToolbar: View {
+struct CompareChartToolbar: View {
     var model: CompareModel
 
     private var rangeBinding: Binding<Bool> {
@@ -181,7 +181,7 @@ private struct CompareChartToolbar: View {
 
 // MARK: «Tramo seleccionado»
 
-private struct CompareRangeCard: View {
+struct CompareRangeCard: View {
     var model: CompareModel
 
     var body: some View {
@@ -218,9 +218,11 @@ private struct CompareRangeCard: View {
 
 // MARK: Results column
 
-private struct CompareResults: View {
+struct CompareResults: View {
     @Environment(AppModel.self) private var app
     var model: CompareModel
+    /// Altura del mapa de recorridos (página Comparar 340; Análisis con «Entreno 2», más grande).
+    var mapHeight: CGFloat = 340
 
     private var empty: String { model.computing ? "Calculando…" : "Marca entrenamientos para compararlos" }
 
@@ -229,7 +231,7 @@ private struct CompareResults: View {
             // 1) overlaid routes (a Map inside a ScrollView needs an explicit height)
             CompareMap(model: model)
                 .frame(maxWidth: .infinity)
-                .frame(height: 340)
+                .frame(height: mapHeight)
             // 2) speed
             FeatureChartPanel(title: "Velocidad comparada (km/h)", minHeight: 240) {
                 CompareChart(model: model, series: model.speedSeries, includeZero: true, emptyText: empty)
@@ -544,11 +546,14 @@ private struct CompareEngineCard: View {
 
 /// «Recorridos superpuestos»: every compared route in its comparison colour; the selected range is highlighted on each
 /// route. Buttons: fit all, zoom in / out and fit the selected range.
-private struct CompareMap: View {
+struct CompareMap: View {
     @Environment(AppModel.self) private var app
     var model: CompareModel
     @State private var position: MapCameraPosition = .automatic
     @State private var region: MKCoordinateRegion? = nil
+
+    /// Explícito: los `@State` privados harían privado el inicializador por miembros (se usa también en Análisis).
+    init(model: CompareModel) { self.model = model }
 
     var body: some View {
         let dim: Double = model.rangeTracks.isEmpty ? 1.0 : 0.4

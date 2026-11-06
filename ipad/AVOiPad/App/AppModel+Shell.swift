@@ -87,7 +87,8 @@ extension AppModel {
     func onPageChanged() {
         switch page {
         case .stable, .riders: stable?.pageShown()
-        case .map, .analysis: map?.pageShown()
+        case .map: map?.pageShown()
+        case .analysis: map?.pageShown(); charts?.pageShown()
         case .charts: charts?.pageShown()
         case .segments: segments?.pageShown()
         case .biomech: biomech?.pageShown()

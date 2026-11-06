@@ -2,48 +2,87 @@ import SwiftUI
 import UIKit
 import MapKit
 
-/// «Análisis» of one training (formerly «Mapa»): map with the layers panel, statistics, the training zones (phases,
-/// repetitions, passes), legend, segments and selected point on the right; speed profile with the zone strips, time bar
-/// and the zone buttons (start / finish lines, work limits, repetitions) at the bottom. The pages of the training are in
-/// the training bar above (RootView.TrainingBar).
+/// «Análisis» of one training: map at FULL WIDTH (statistics over the map, layers behind a small button), then the
+/// timeline (speed profile with the zone strips, playback and zone buttons) and below ALL the charts of «Gráficas» in one
+/// vertical scroll, sharing cursor, zoom and range. «Entreno 2» (training bar) turns the page into the comparison of
+/// the active training (blue) with the second one (yellow): overlaid routes and aligned charts.
+/// `mapOnly` = «Mapa» of the sidebar: the map fills the page, with the timeline below and no charts.
 struct MapPageView: View {
     @Environment(AppModel.self) private var app
     @State private var command: RouteMapCommand = RouteMapCommand()
-    @State private var showLayers: Bool = true
+    @State private var showLayers: Bool = false
+    var mapOnly: Bool = false
 
     var body: some View {
         GeometryReader { (geo: GeometryProxy) in
-            let wide: Bool = geo.size.width >= 900
-            VStack(alignment: .leading, spacing: 10) {
-                if wide {
-                    HStack(alignment: .top, spacing: 12) {
+            Group {
+                if app.compare.isPaired {
+                    pairedLayout(geo)
+                } else if mapOnly {
+                    VStack(alignment: .leading, spacing: 10) {
                         mapArea(wide: true)
-                        ScrollView { MapSidePanel() }
-                            .frame(width: 300)
+                            .frame(maxHeight: .infinity)
+                        MapProfilePanel()
+                            .frame(height: 170)
+                        ZoneToolbar()
                     }
-                    .frame(maxHeight: .infinity)
                 } else {
-                    mapArea(wide: false)
-                        .frame(maxHeight: .infinity)
-                    ScrollView { MapSidePanel() }
-                        .frame(height: max(200, geo.size.height * 0.28))
+                    ScrollView(.vertical) {
+                        LazyVStack(alignment: .leading, spacing: 10) {
+                            mapArea(wide: true)
+                                .frame(height: max(380, geo.size.height * 0.58))
+                            MapProfilePanel()
+                                .frame(height: 170)
+                            ZoneToolbar()
+                            ChartsNavigator(charts: app.charts)
+                            ChartsStack(charts: app.charts, skipSpeed: true)
+                            MapInfoCards(wide: geo.size.width >= 900)
+                        }
+                        .padding(.bottom, 24)
+                    }
+                    // while «Seleccionar rango» is on, a drag on a chart must select, never scroll
+                    .scrollDisabled(app.charts.rangeMode)
                 }
-                MapProfilePanel()
-                    .frame(height: 170)
-                ZoneToolbar()
             }
             .padding(12)
         }
         .background(Avo.bg)
-        .onAppear { app.map.pageShown() }
+        .onAppear {
+            app.map.pageShown()
+            app.charts.pageShown()
+        }
+    }
+
+    /// «Entreno 1 | Entreno 2»: overlaid routes and aligned charts of the two trainings.
+    @ViewBuilder
+    private func pairedLayout(_ geo: GeometryProxy) -> some View {
+        let model: CompareModel = app.compare
+        VStack(alignment: .leading, spacing: 10) {
+            PairHeader(model: model)
+            if mapOnly {
+                CompareMap(model: model)
+                    .frame(maxHeight: .infinity)
+            } else {
+                CompareChartToolbar(model: model)
+                if model.hasRange { CompareRangeCard(model: model) }
+                ScrollView(.vertical) {
+                    CompareResults(model: model, mapHeight: max(380, geo.size.height * 0.55))
+                        .padding(.bottom, 24)
+                }
+                .scrollDisabled(model.rangeMode)
+            }
+        }
     }
 
     private func mapArea(wide: Bool) -> some View {
         let model: MapModel = app.map
         return ZStack(alignment: .topLeading) {
             MapRouteContainer(command: command,
-                              fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 70),
+                              fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 260),
                               showCourse: true)
+            MapStatsOverlay()
+                .padding(12)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             if showLayers {
                 MapLayersPanel(model: model, onClose: { showLayers = false })
                     .padding(12)
@@ -57,8 +96,9 @@ struct MapPageView: View {
                 mapButton("minus", "Alejar") { command = command.next(.zoomOut) }
                 mapButton("arrow.up.left.and.arrow.down.right", "Ajustar recorrido") { command = command.next(.fit) }
             }
-            .padding(12)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+            .padding(.trailing, 12)
+            .padding(.bottom, 28)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             if model.provider != .vectorOffline {
                 Text(RouteTileNet.attribution)
                     .font(.system(size: 9.5))
@@ -101,6 +141,86 @@ struct MapPageView: View {
         .background(Color(hex: 0x101014, alpha: 0.9), in: RoundedRectangle(cornerRadius: 7))
         .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
         .accessibilityLabel(label)
+    }
+}
+
+/// Distance / time / speeds of the active training, small, over the top-right corner of the map.
+private struct MapStatsOverlay: View {
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        Grid(alignment: .leading, horizontalSpacing: 14, verticalSpacing: 6) {
+            GridRow {
+                stat("Distancia", app.selected?.distanceText ?? "—")
+                stat("Tiempo", app.selected?.durationText ?? "—")
+            }
+            GridRow {
+                stat("Vel. media", app.selected?.meanSpeedText ?? "—")
+                stat("Vel. máx.", app.selected?.maxSpeedText ?? "—")
+            }
+        }
+        .padding(.horizontal, 12).padding(.vertical, 9)
+        .background(Color(hex: 0x101014, alpha: 0.82), in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        .allowsHitTesting(false)
+    }
+
+    private func stat(_ label: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(label.uppercased()).font(.system(size: 9.5, weight: .semibold)).tracking(0.4).foregroundStyle(Avo.textDim)
+            Text(value).font(.system(size: 15, weight: .semibold, design: .rounded)).foregroundStyle(Avo.text)
+                .lineLimit(1).minimumScaleFactor(0.6)
+        }
+    }
+}
+
+/// Cards that were in the right column (training zones, legend, segments, selected point), now after the charts.
+private struct MapInfoCards: View {
+    @Environment(AppModel.self) private var app
+    var wide: Bool
+
+    var body: some View {
+        let model: MapModel = app.map
+        let cards = Group {
+            AvoCard(title: "Entrenamiento") { TrainingZonesCard() }
+            AvoCard(title: model.legendTitle) { RouteLegendView(model: model) }
+            AvoCard(title: "Punto seleccionado") { MapCursorRows() }
+        }
+        if wide {
+            HStack(alignment: .top, spacing: 10) { cards }
+        } else {
+            VStack(alignment: .leading, spacing: 10) { cards }
+        }
+    }
+}
+
+/// «Entreno 1 (azul) · Entreno 2 (amarillo)» over the comparison of the Análisis page.
+private struct PairHeader: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    var body: some View {
+        HStack(spacing: 14) {
+            if let a = app.selected { item("Entreno 1", a, CompareModel.pairColors.first) }
+            if let b = model.pairSession { item("Entreno 2", b, CompareModel.pairColors.second) }
+            Spacer(minLength: 0)
+            Button { model.setPair(nil) } label: { Label("Quitar entreno 2", systemImage: "xmark") }
+                .buttonStyle(.avoSecondary)
+        }
+    }
+
+    private func item(_ title: String, _ s: SessionItem, _ color: Color) -> some View {
+        HStack(spacing: 8) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 14, height: 4)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(title.uppercased()).font(.caption2.weight(.semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
+                Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)").font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                    .lineLimit(1)
+            }
+        }
+        .padding(.horizontal, 10).padding(.vertical, 6)
+        .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+        .overlay(RoundedRectangle(cornerRadius: 7).stroke(color.opacity(0.6), lineWidth: 1))
     }
 }
 
@@ -177,72 +297,6 @@ private struct MapLayersPanel: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-    }
-}
-
-/// Right column of the map page.
-private struct MapSidePanel: View {
-    @Environment(AppModel.self) private var app
-
-    var body: some View {
-        let model: MapModel = app.map
-        VStack(alignment: .leading, spacing: 10) {
-            AvoCard {
-                Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
-                    GridRow {
-                        stat("Distancia", app.selected?.distanceText ?? "—")
-                        stat("Tiempo", app.selected?.durationText ?? "—")
-                    }
-                    GridRow {
-                        stat("Vel. media", app.selected?.meanSpeedText ?? "—")
-                        stat("Vel. máxima", app.selected?.maxSpeedText ?? "—")
-                    }
-                }
-            }
-            AvoCard(title: "Entrenamiento") {
-                TrainingZonesCard()
-            }
-            AvoCard(title: model.legendTitle) {
-                RouteLegendView(model: model)
-            }
-            AvoCard(title: "Análisis de tramos") {
-                let rows: [SegmentMetrics] = app.segments.rows
-                if rows.isEmpty {
-                    Text("Sin tramos guardados").font(.caption).foregroundStyle(Avo.textDim)
-                } else {
-                    VStack(spacing: 2) {
-                        ForEach(rows.prefix(30), id: \.id) { (r: SegmentMetrics) in
-                            Button { app.segments.select(r.id) } label: {
-                                HStack {
-                                    Text(r.name).font(.caption).lineLimit(1).foregroundStyle(Avo.text)
-                                    Spacer(minLength: 6)
-                                    Text(TimeText.num(r.maxSpeedKmh, "0.0", " km/h", missing: "—"))
-                                        .font(.caption.weight(.semibold).monospacedDigit()).foregroundStyle(Avo.text)
-                                }
-                                .padding(.vertical, 4).padding(.horizontal, 6)
-                                .background(app.segments.selectedId == r.id ? Avo.redSoft : Color.clear, in: RoundedRectangle(cornerRadius: 4))
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                }
-                Button("Gestionar tramos") { app.page = .segments }
-                    .buttonStyle(.avoSecondary)
-                    .padding(.top, 4)
-            }
-            AvoCard(title: "Punto seleccionado") {
-                MapCursorRows()
-            }
-        }
-    }
-
-    private func stat(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(label.uppercased()).font(.caption2.weight(.semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
-            Text(value).font(.system(size: 20, weight: .semibold, design: .rounded)).foregroundStyle(Avo.text)
-                .lineLimit(1).minimumScaleFactor(0.6)
-        }
     }
 }
 

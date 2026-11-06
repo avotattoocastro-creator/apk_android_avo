@@ -158,7 +158,40 @@ final class CompareModel {
     // ------------------------------------------------------------------ contract
     func sessionChanged() {
         assignColorsIfNeeded()
+        if pairId != nil {
+            // «Entreno 2» de Análisis: el entreno 1 es siempre el activo
+            setPair(pairId)
+            return
+        }
         if app.page == .compare { refresh() }
+    }
+
+    // ------------------------------------------------------------------ «Entreno 1 | Entreno 2» (Análisis)
+    /// Segundo entrenamiento elegido en la barra del entrenamiento. nil = Análisis de un solo entrenamiento.
+    /// Con pareja, la comparación contiene SOLO el entrenamiento activo (azul) y este (amarillo).
+    var pairId: String? = nil
+
+    var pairSession: SessionItem? {
+        guard let id = pairId else { return nil }
+        return app.sessions.first { $0.id == id }
+    }
+
+    var isPaired: Bool { pairSession != nil && app.selected != nil }
+
+    static let pairColors: (first: Color, second: Color) = (Color(hex: 0x3D9BFF), Color(hex: 0xFFC42C))
+
+    func setPair(_ id: String?) {
+        guard let id = id, let first = app.selected, id != first.id,
+              let second = app.sessions.first(where: { $0.id == id }) else {
+            pairId = nil
+            return
+        }
+        pairId = id
+        for s in app.sessions { s.isCompared = s.id == first.id || s.id == second.id }
+        assignColorsIfNeeded()
+        first.compareColor = CompareModel.pairColors.first
+        second.compareColor = CompareModel.pairColors.second
+        refresh()
     }
 
     func pageShown() {

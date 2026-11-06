@@ -23,6 +23,7 @@ struct RootView: View {
         RootNavEntry(page: .sessions, title: "Entrenamientos", icon: "clock.arrow.circlepath"),
         RootNavEntry(page: .trainingList, title: "Listado", icon: "list.bullet.rectangle"),
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
+        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
@@ -125,7 +126,8 @@ struct RootView: View {
 
     private func navButton(_ e: RootNavEntry) -> some View {
         // «Análisis» stays highlighted on every page of the training
-        let active: Bool = e.page == .analysis ? app.page.isTrainingPage : app.page == e.page
+        // «Análisis» stays highlighted on every page of the training except the full-screen «Mapa»
+        let active: Bool = e.page == .analysis ? (app.page.isTrainingPage && app.page != .map) : app.page == e.page
         return Button {
             app.page = e.page
             if e.page == .home { columns = .detailOnly }
@@ -213,7 +215,8 @@ struct RootView: View {
         case .races: RacesView()
         case .stable: StableView(kind: .horse)
         case .riders: StableView(kind: .rider)
-        case .analysis, .map: MapPageView()
+        case .analysis: MapPageView()
+        case .map: MapPageView(mapOnly: true)
         case .summary: AnalysisView()
         case .gps: GpsView()
         case .charts: ChartsView()
@@ -402,13 +405,63 @@ struct RootSessionMenu: View {
     }
 }
 
+/// «Entreno 2»: second training to compare with the active one on «Análisis» / «Mapa» (overlaid, blue vs yellow).
+struct RootPairMenu: View {
+    @Environment(AppModel.self) private var app
+    var maxWidth: CGFloat = 260
+
+    var body: some View {
+        let pair: SessionItem? = app.compare.isPaired ? app.compare.pairSession : nil
+        Menu {
+            if pair != nil {
+                Button(role: .destructive) { app.compare.setPair(nil) } label: { Label("Sin entreno 2", systemImage: "xmark") }
+                Divider()
+            }
+            ForEach(app.sessionsView.filter { $0.id != app.selected?.id }) { (s: SessionItem) in
+                Button {
+                    app.compare.setPair(s.id)
+                    if app.page != .analysis && app.page != .map { app.page = .analysis }
+                } label: {
+                    if s.id == pair?.id {
+                        Label("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)", systemImage: "checkmark")
+                    } else {
+                        Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)")
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: 6) {
+                if let p = pair {
+                    RoundedRectangle(cornerRadius: 2).fill(CompareModel.pairColors.second).frame(width: 12, height: 4)
+                    Text(p.dateTimeText).fontWeight(.semibold).foregroundStyle(Avo.text)
+                    Text("· \(p.horse)").foregroundStyle(Avo.textDim)
+                } else {
+                    Image(systemName: "plus.square.on.square").foregroundStyle(Avo.textDim)
+                    Text("Entreno 2").foregroundStyle(Avo.textDim)
+                }
+                Image(systemName: "chevron.down").font(.caption).foregroundStyle(Avo.textDim)
+            }
+            .font(.callout)
+            .lineLimit(1)
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .frame(maxWidth: maxWidth, alignment: .leading)
+            .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+            .overlay(RoundedRectangle(cornerRadius: 7).stroke(pair == nil ? Avo.line : CompareModel.pairColors.second.opacity(0.6), lineWidth: 1))
+        }
+        .disabled(app.sessions.count < 2 || app.selected == nil)
+        .accessibilityLabel("Entreno 2 para comparar")
+        .accessibilityIdentifier("training.pair")
+    }
+}
+
 /// Bar of the pages of ONE training (top of «Análisis»): active training, its pages and «Asignar».
 private struct TrainingBar: View {
     @Environment(AppModel.self) private var app
 
     var body: some View {
         HStack(spacing: 10) {
-            RootSessionMenu(maxWidth: 300)
+            RootSessionMenu(maxWidth: 280)
+            RootPairMenu(maxWidth: 240)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
@@ -432,7 +485,7 @@ private struct TrainingBar: View {
     }
 
     private func tab(_ e: RootNavEntry) -> some View {
-        let active: Bool = app.page == e.page || (e.page == .analysis && app.page == .map)
+        let active: Bool = app.page == e.page
         return Button {
             app.page = e.page
         } label: {
