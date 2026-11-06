@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-06 — iPad — Asistente IA: Claude (API) y modelo de Apple analizan el entrenamiento activo
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** ver `git log` · **CI:** pendiente
+**Qué cambia:**
+- **Nueva pestaña «Asistente IA»** en la barra del entrenamiento (`Page.assistant` = `Assistant`, `tab.Assistant`, después de «Trabajo en pista»; `App/AssistantModel.swift`, `Views/AssistantView.swift`):
+  - conversación sobre el entrenamiento activo con respuesta en streaming, botón Detener y «Nueva conversación»;
+  - preguntas rápidas: explicar la sesión, fatiga y recuperación, comparar con la historia, zancada y cincha, próximo entrenamiento;
+  - la conversación se reinicia al cambiar de entrenamiento.
+- **Claude por la API, directo desde el iPad** (`Core/ClaudeAPI.swift`): `POST https://api.anthropic.com/v1/messages` (`anthropic-version: 2023-06-01`, SSE).
+  - Modelos: Sonnet 5.5 (por defecto), Haiku 5.5 y Opus 5.5.
+  - **Contexto:** cabecera (caballo, raza de la Cuadra, jinete, fecha, ventana útil, estado del motor), resumen `avo-training-session`, análisis completo del motor compactado (sin `series`, listas numéricas largas resumidas en n/mín./máx./media, listas de objetos recortadas, decimales redondeados; incluye `trabajo_pista`) y resúmenes ya calculados de hasta 15 sesiones anteriores del mismo caballo. Tope de 180 000 caracteres (por debajo de los 100 000 tokens de Haiku 5.5).
+  - El contexto va en un bloque de sistema con `cache_control` (las preguntas siguientes leen de caché) y se reutiliza mientras no cambie la sesión ni su análisis.
+  - Instrucciones: responder en español, solo con los datos recibidos, citando cifras; umbrales de raza y mano de galope tratados como no validados; sin diagnósticos veterinarios.
+- **Clave de API en el Llavero de iOS** (`AvoKeychain`, `kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`): la pega el usuario en Ajustes del asistente; nunca está en el código ni en el repositorio (regla 6). «Probar conexión» y «Borrar clave».
+- **Gasto:** estimación por respuesta con los precios de lista (tokens y ~$ en el pie de cada respuesta), contador del mes en el iPad y límite configurable (5–100 $, 50 $ por defecto) que bloquea las preguntas al alcanzarlo. El tope real son los 100 $/mes de créditos de API del plan Max en Claude Console (organización sin método de pago ni recarga automática).
+- **Modelo de Apple sin conexión** (`Core/OnDeviceAssistant.swift`, Foundation Models, iPadOS 26 con Apple Intelligence): opción gratuita que solo recibe el resumen de la sesión; compila con `#if canImport(FoundationModels)`, así que el CI de pruebas con un SDK anterior lo deja desactivado.
+- **Pruebas:** `AVOiPadTests/AssistantTests.swift` (compactación del JSON, coste estimado, forma de la clave, mensajes de error, mezcla del `usage` del streaming); captura de la página `Assistant` en `ScreenshotTests` (sin clave: tarjeta de configuración).
+**Por qué:** el usuario quiere un analista IA dentro de la app con los créditos de API incluidos en su plan Max, sin servidor (el Servidor AVO aún no funciona). Cuando funcione, `ClaudeClient.endpoint` puede apuntar a él y quitar la clave del iPad.
+**Archivos:** `ipad/AVOiPad/Core/ClaudeAPI.swift` (nuevo), `ipad/AVOiPad/Core/OnDeviceAssistant.swift` (nuevo), `ipad/AVOiPad/App/AssistantModel.swift` (nuevo), `ipad/AVOiPad/Views/AssistantView.swift` (nuevo), `ipad/AVOiPad/App/AppModel.swift`, `ipad/AVOiPad/App/AppModel+Shell.swift`, `ipad/AVOiPad/App/RootView.swift`, `ipad/AVOiPadTests/AssistantTests.swift` (nuevo), `ipad/AVOiPadUITests/ScreenshotTests.swift`, `ipad/UI_CONTRACT.md`.
+**No se ha tocado:** el motor (`equine-intelligence`), Android, Windows, firmware.
+**Validación:** IMPLEMENTADO · sin compilador Swift en la sesión (pendiente de CI macOS) · NO VERIFICADO en el iPad ni con la API real.
+**Pendiente:** probar en el iPad con la clave real; renderizado completo de Markdown (títulos y listas se muestran como texto); llevarlo a Android y Windows; pasar por el Servidor AVO cuando esté operativo.
+
 ## 2026-11-03 — iPad — AVO Track Work 1.0.0 integrado: página «Trabajo en pista», entrenamiento vs carrera y Track Work en la historia
 **Autor:** Claude · **Rama:** `feature/ipad-app` (sobre `7a6bb83`) · **Commits:** pendiente · **CI:** pendiente
 **Qué cambia:**

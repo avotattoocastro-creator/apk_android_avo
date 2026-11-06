@@ -100,6 +100,7 @@ extension AppModel {
         case .trainingList: trainingList?.pageShown()
         case .races: races?.pageShown()
         case .trackWork: trackWork?.pageShown()
+        case .assistant: assistant?.pageShown()
         case .home, .sessions, .server, .engine, .summary: break
         }
     }
@@ -215,6 +216,7 @@ extension AppModel {
         trainingList?.sessionChanged()
         races?.sessionChanged()
         trackWork?.sessionChanged()
+        assistant?.sessionChanged()
     }
 
     var timelineStart: Double {
