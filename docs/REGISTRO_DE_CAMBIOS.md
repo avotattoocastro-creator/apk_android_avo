@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Mapa: playa en horizontal y giro con dos dedos
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:** el mapa del recorrido (`MapKitRoute`) se puede girar con dos dedos y «Ajustar» lo orienta para que el recorrido quede en HORIZONTAL: eje principal de las posiciones (componentes principales en Web Mercator), rumbo de la cámara elegido lo más cerca posible del norte (en el Regatón el mar queda arriba); si el recorrido no tiene una dirección clara (ratio de varianzas < 1,6) se deja el norte arriba. El encuadre mide el recorrido a lo largo y a lo ancho de la pantalla girada y respeta los márgenes (datos arriba a la derecha). El zoom +/− mantiene el giro (cámara en vez de `setVisibleMapRect`). Botón nuevo en Análisis y Mapa: «Norte arriba» / «Recorrido en horizontal» (se recuerda en `map.alignRoute`). Petición del usuario: «necesito ver la playa en horizontal».
+**Archivos:** `ipad/AVOiPad/Views/MapKitRoute.swift`, `ipad/AVOiPad/Views/MapPageView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad. El mapa de la comparación (Entreno 2, SwiftUI `Map`) se gira con dos dedos pero no se orienta solo.
+
 ## 2026-11-06 — iPad — Análisis rediseñado: mapa a todo el ancho, línea de tiempo y todas las gráficas con scroll; «Entreno 2»; «Mapa» en el menú
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (pedido del usuario sobre una captura anotada de la compilación 33):**

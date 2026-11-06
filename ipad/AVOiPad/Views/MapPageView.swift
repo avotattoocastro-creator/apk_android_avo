@@ -11,6 +11,8 @@ struct MapPageView: View {
     @Environment(AppModel.self) private var app
     @State private var command: RouteMapCommand = RouteMapCommand()
     @State private var showLayers: Bool = false
+    /// Recorrido en horizontal (por defecto) o norte arriba; se recuerda entre sesiones.
+    @AppStorage("map.alignRoute") private var alignRoute: Bool = true
     var mapOnly: Bool = false
 
     var body: some View {
@@ -79,7 +81,7 @@ struct MapPageView: View {
         return ZStack(alignment: .topLeading) {
             MapRouteContainer(command: command,
                               fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 260),
-                              showCourse: true)
+                              showCourse: true, alignRoute: alignRoute)
             MapStatsOverlay()
                 .padding(12)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
@@ -95,6 +97,8 @@ struct MapPageView: View {
                 mapButton("plus", "Acercar") { command = command.next(.zoomIn) }
                 mapButton("minus", "Alejar") { command = command.next(.zoomOut) }
                 mapButton("arrow.up.left.and.arrow.down.right", "Ajustar recorrido") { command = command.next(.fit) }
+                mapButton(alignRoute ? "location.north.line" : "arrow.left.and.right",
+                          alignRoute ? "Norte arriba" : "Recorrido en horizontal") { alignRoute.toggle() }
             }
             .padding(.trailing, 12)
             .padding(.bottom, 28)
@@ -234,6 +238,8 @@ struct MapRouteContainer: View {
     var useOverride: Bool = false
     /// Draw the start / finish lines of the training zones (Análisis page).
     var showCourse: Bool = false
+    /// Playa / recorrido en horizontal (true) o norte arriba (false).
+    var alignRoute: Bool = true
 
     var body: some View {
         let model: MapModel = app.map
@@ -248,6 +254,7 @@ struct MapRouteContainer: View {
                     home: model.home,
                     command: command,
                     courseLines: showCourse ? app.corrections.mapLines(app.selected) : [],
+                    alignRoute: alignRoute,
                     onTap: { (t: Double) in app.cursorTime = t })
     }
 }

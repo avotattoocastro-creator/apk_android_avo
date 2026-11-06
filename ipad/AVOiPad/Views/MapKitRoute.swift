@@ -48,6 +48,8 @@ struct MapKitRoute: UIViewRepresentable {
     var command: RouteMapCommand = RouteMapCommand()
     /// Start / finish lines of the training (Análisis zones).
     var courseLines: [MapCourseLine] = []
+    /// true = «Ajustar» gira el mapa para que el recorrido (la playa) quede en horizontal; false = norte arriba.
+    var alignRoute: Bool = true
     var onTap: (Double) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator() }
@@ -59,7 +61,7 @@ struct MapKitRoute: UIViewRepresentable {
         map.pointOfInterestFilter = .excludingAll
         map.showsCompass = true
         map.showsScale = true
-        map.isRotateEnabled = false
+        map.isRotateEnabled = true   // giro con dos dedos; «Ajustar» orienta el recorrido en horizontal
         map.isPitchEnabled = false
         map.backgroundColor = UIColor(red: 0x0B / 255.0, green: 0x0C / 255.0, blue: 0x10 / 255.0, alpha: 1)
         map.cameraZoomRange = MKMapView.CameraZoomRange(minCenterCoordinateDistance: 120)
@@ -72,6 +74,7 @@ struct MapKitRoute: UIViewRepresentable {
         context.coordinator.applyProvider(provider, cacheDir: tileCacheDir)
         context.coordinator.home = home
         context.coordinator.fitPadding = fitPadding
+        context.coordinator.alignRoute = alignRoute
         map.pendingFit = { [weak coordinator = context.coordinator] in coordinator?.fit(animated: false) }
         return map
     }
@@ -87,6 +90,10 @@ struct MapKitRoute: UIViewRepresentable {
         c.applyRange(rangeStart, rangeEnd)
         c.applyCursor(cursorTime)
         c.applyCourseLines(courseLines)
+        if c.alignRoute != alignRoute {
+            c.alignRoute = alignRoute
+            c.fit(animated: true)
+        }
         if command.id != c.lastCommandId {
             c.lastCommandId = command.id
             switch command.kind {
@@ -104,6 +111,7 @@ struct MapKitRoute: UIViewRepresentable {
         var home: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 43.45, longitude: -3.46)
         var fitPadding: UIEdgeInsets = UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40)
         var lastCommandId: Int = 0
+        var alignRoute: Bool = true
 
         private var provider: MapProvider? = nil
         private var tileOverlays: [MKTileOverlay] = []
@@ -265,11 +273,8 @@ struct MapKitRoute: UIViewRepresentable {
             if map.bounds.width < 10 || map.bounds.height < 10 { map.fitWanted = true; return }
             map.fitWanted = false
             map.didInitialFit = true
-            if let d = data {
-                var r: MKMapRect = d.routeRect
-                if r.width < 60 && r.height < 60 { r = r.insetBy(dx: -300, dy: -300) }
-                let pad: UIEdgeInsets = clampedPadding(map)
-                map.setVisibleMapRect(r, edgePadding: pad, animated: animated)
+            if let d = data, !d.points.isEmpty {
+                fitRotated(map, d, animated: animated)
             } else {
                 // No route: the usual training area (Windows: Playa del Regatón at zoom 14.5).
                 let region = MKCoordinateRegion(center: home, latitudinalMeters: 2200, longitudinalMeters: 2200)
@@ -286,13 +291,109 @@ struct MapKitRoute: UIViewRepresentable {
             return p
         }
 
+        /// Zoom keeping the current rotation (setVisibleMapRect would not respect the heading).
         func zoom(by factor: Double) {
-            guard let map = map else { return }
-            let v: MKMapRect = map.visibleMapRect
-            let w: Double = v.width * factor
-            let h: Double = v.height * factor
-            let r = MKMapRect(x: v.midX - w / 2, y: v.midY - h / 2, width: w, height: h)
-            map.setVisibleMapRect(r, animated: true)
+            guard let map = map, let cam = map.camera.copy() as? MKMapCamera else { return }
+            cam.centerCoordinateDistance = max(120, cam.centerCoordinateDistance * factor)
+            map.setCamera(cam, animated: true)
+        }
+
+        /// Main direction of the route (principal axis of the positions, Web Mercator) as an angle from east towards
+        /// south (radians), or nil when the route has no clear direction (round course, too few points).
+        static func routeAxis(_ pts: [MKMapPoint]) -> Double? {
+            let n: Int = pts.count
+            if n < 3 { return nil }
+            let step: Int = max(1, n / 3000)
+            var sx: Double = 0, sy: Double = 0, k: Double = 0
+            var i: Int = 0
+            while i < n {
+                let p: MKMapPoint = pts[i]
+                if p.x.isFinite && p.y.isFinite { sx += p.x; sy += p.y; k += 1 }
+                i += step
+            }
+            if k < 3 { return nil }
+            let mx: Double = sx / k, my: Double = sy / k
+            var cxx: Double = 0, cyy: Double = 0, cxy: Double = 0
+            i = 0
+            while i < n {
+                let p: MKMapPoint = pts[i]
+                if p.x.isFinite && p.y.isFinite {
+                    let dx: Double = p.x - mx, dy: Double = p.y - my
+                    cxx += dx * dx; cyy += dy * dy; cxy += dx * dy
+                }
+                i += step
+            }
+            let tr: Double = cxx + cyy
+            let det: Double = cxx * cyy - cxy * cxy
+            let disc: Double = sqrt(max(0, tr * tr / 4 - det))
+            let l1: Double = tr / 2 + disc, l2: Double = tr / 2 - disc
+            if l1 <= 0 || l1 < 1.6 * max(l2, 1e-9) { return nil }
+            return 0.5 * atan2(2 * cxy, cxx - cyy)
+        }
+
+        /// Camera heading (degrees, 0 = north up) that puts the route axis horizontal, choosing the orientation that is
+        /// closest to north up (the sea of the Regatón stays at the top).
+        static func horizontalHeading(axis theta: Double) -> Double {
+            // axis direction: east = cos θ, north = −sin θ → bearing β; screen-up = β − 90°
+            let beta: Double = atan2(cos(theta), -sin(theta)) * 180 / .pi
+            var h: Double = beta - 90
+            while h > 90 { h -= 180 }
+            while h <= -90 { h += 180 }
+            return h < 0 ? h + 360 : h
+        }
+
+        /// Fit the route with a given heading: extent measured along / across the screen axes, padding kept, then the
+        /// camera distance taken from an equivalent north-up rect.
+        private func fitRotated(_ map: MKMapView, _ d: RouteRenderData, animated: Bool) {
+            let theta: Double? = alignRoute ? Coordinator.routeAxis(d.points) : nil
+            let heading: Double = theta.map { Coordinator.horizontalHeading(axis: $0) } ?? 0
+            let hr: Double = heading * .pi / 180
+            // screen right / down as Web Mercator vectors (x east, y south)
+            let rx: Double = cos(hr), ry: Double = sin(hr)
+            let dxv: Double = -sin(hr), dyv: Double = cos(hr)
+            var uMin: Double = .infinity, uMax: Double = -.infinity, vMin: Double = .infinity, vMax: Double = -.infinity
+            let c0: MKMapPoint = MKMapPoint(x: d.routeRect.midX, y: d.routeRect.midY)
+            let step: Int = max(1, d.points.count / 4000)
+            var i: Int = 0
+            while i < d.points.count {
+                let p: MKMapPoint = d.points[i]
+                if p.x.isFinite && p.y.isFinite {
+                    let ox: Double = p.x - c0.x, oy: Double = p.y - c0.y
+                    let u: Double = ox * rx + oy * ry
+                    let v: Double = ox * dxv + oy * dyv
+                    uMin = min(uMin, u); uMax = max(uMax, u); vMin = min(vMin, v); vMax = max(vMax, v)
+                }
+                i += step
+            }
+            if !uMin.isFinite || !vMin.isFinite { return }
+            let minSize: Double = 300 * MKMapPointsPerMeterAtLatitude(c0.coordinate.latitude)
+            let w: Double = max(uMax - uMin, minSize), h: Double = max(vMax - vMin, minSize)
+            let pad: UIEdgeInsets = clampedPadding(map)
+            let bw: Double = Double(map.bounds.width), bh: Double = Double(map.bounds.height)
+            let availW: Double = max(40, bw - Double(pad.left + pad.right))
+            let availH: Double = max(40, bh - Double(pad.top + pad.bottom))
+            let mpp: Double = max(w / availW, h / availH)
+            // route centre in the rotated frame, shifted so the route sits inside the padded area
+            let um: Double = (uMin + uMax) / 2 + Double(pad.right - pad.left) / 2 * mpp
+            let vm: Double = (vMin + vMax) / 2 + Double(pad.bottom - pad.top) / 2 * mpp
+            let centre = MKMapPoint(x: c0.x + um * rx + vm * dxv, y: c0.y + um * ry + vm * dyv)
+            // camera distance of the equivalent north-up view
+            let old: MKMapCamera? = map.camera.copy() as? MKMapCamera
+            if let flat = map.camera.copy() as? MKMapCamera {
+                flat.heading = 0
+                flat.pitch = 0
+                map.setCamera(flat, animated: false)
+            }
+            map.setVisibleMapRect(MKMapRect(x: centre.x - mpp * bw / 2, y: centre.y - mpp * bh / 2, width: mpp * bw, height: mpp * bh),
+                                  animated: false)
+            let distance: Double = map.camera.centerCoordinateDistance
+            let target = MKMapCamera(lookingAtCenter: centre.coordinate, fromDistance: distance, pitch: 0, heading: heading)
+            if animated, let o = old {
+                map.setCamera(o, animated: false)
+                map.setCamera(target, animated: true)
+            } else {
+                map.setCamera(target, animated: false)
+            }
         }
 
         @objc func handleTap(_ g: UITapGestureRecognizer) {
