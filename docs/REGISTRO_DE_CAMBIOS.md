@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-06 — iPad — Asistente IA: corrección de «Probar conexión» que borraba la clave
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:** en Ajustes del asistente, «Guardar clave», «Probar conexión» y «Borrar clave» estaban en la misma fila del `Form`; en SwiftUI un toque en esa fila dispara todos los botones, así que «Probar conexión» borraba la clave y respondía «No hay clave guardada» (visto en el iPad con la compilación 33). Ahora cada botón va en su fila con `.buttonStyle(.borderless)` y «Borrar clave del iPad» queda aparte, al final. Al guardar, se comprueba que la clave se lee del Llavero y el asistente pasa a usar Claude (se desactiva «Usar el modelo de Apple»).
+**Archivos:** `ipad/AVOiPad/Views/AssistantView.swift`, `ipad/AVOiPad/App/AssistantModel.swift`.
+**Validación:** IMPLEMENTADO · error reproducido por el usuario en el iPad (compilación 33) · corrección NO VERIFICADA.
+
 ## 2026-11-06 — iPad — Asistente IA: Claude (API) y modelo de Apple analizan el entrenamiento activo
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **Commits:** ver `git log` · **CI:** pendiente
 **Qué cambia:**

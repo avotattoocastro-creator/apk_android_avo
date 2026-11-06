@@ -206,27 +206,31 @@ struct AssistantSettingsView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .accessibilityIdentifier("assistant.key")
-                    HStack {
-                        Button("Guardar clave") {
-                            if let e = a.saveKey(keyText) { show(e, ok: false) } else { keyText = ""; show("Clave guardada.", ok: true) }
-                        }
-                        .disabled(keyText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                        Spacer()
-                        if a.hasKey {
-                            Button(testing ? "Probando…" : "Probar conexión") {
-                                testing = true
-                                Task { @MainActor in
-                                    let r = await a.testConnection()
-                                    testing = false
-                                    show(r.text, ok: r.ok)
-                                }
+                    // Cada botón en su propia fila y con estilo «borderless»: en un Form, varios botones en la MISMA fila
+                    // se disparan todos con un solo toque (en la compilación 33, «Probar conexión» también borraba la clave).
+                    Button("Guardar clave") {
+                        if let e = a.saveKey(keyText) { show(e, ok: false) } else { keyText = ""; show("Clave guardada.", ok: true) }
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(keyText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    if a.hasKey {
+                        Button(testing ? "Probando…" : "Probar conexión") {
+                            testing = true
+                            Task { @MainActor in
+                                let r = await a.testConnection()
+                                testing = false
+                                show(r.text, ok: r.ok)
                             }
-                            .disabled(testing)
-                            Button("Borrar clave", role: .destructive) { a.removeKey(); show("Clave borrada del iPad.", ok: true) }
                         }
+                        .buttonStyle(.borderless)
+                        .disabled(testing)
                     }
                     if !message.isEmpty {
                         Text(message).font(.caption).foregroundStyle(messageOk ? Avo.ok : Avo.bad)
+                    }
+                    if a.hasKey {
+                        Button("Borrar clave del iPad", role: .destructive) { a.removeKey(); show("Clave borrada del iPad.", ok: true) }
+                            .buttonStyle(.borderless)
                     }
                 } header: {
                     Text("Clave de API de Claude")

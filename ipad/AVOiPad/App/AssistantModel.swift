@@ -144,7 +144,9 @@ final class AssistantModel {
         let k: String = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         if !ClaudeClient.looksLikeKey(k) { return "No parece una clave de API de Claude (empieza por sk-ant-)." }
         if !AvoKeychain.write(k) { return "No se pudo guardar la clave en el Llavero." }
-        hasKey = true
+        hasKey = AvoKeychain.read() == k
+        if !hasKey { return "La clave no se pudo leer del Llavero después de guardarla." }
+        useOnDevice = false   // con clave, el asistente pasa a usar Claude
         app.log.info("asistente", "Clave de API guardada en el Llavero")
         return nil
     }
