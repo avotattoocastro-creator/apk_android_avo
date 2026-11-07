@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Mapa: datos del cursor en una franja horizontal
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:** en la compilación 38 el recuadro del cursor ocupaba todo el ancho y casi la mitad del mapa (el `Divider` lo estiraba). Ahora es una sola franja horizontal y baja en la parte inferior del mapa, como en el boceto del usuario: Punto · tiempo · distancia · velocidad · aceleración | fase · tiempo fase · distancia fase · «de» total; solo ocupa lo que necesita y deja libres los botones de zoom.
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Mapa: tiempo y distancia del cursor dentro de la fase
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:** el recuadro «Punto del cursor» añade, cuando el cursor cae dentro de una fase del motor (calentamiento, trabajo o enfriamiento de «trabajo_pista», ya con las correcciones a mano), «En <fase>»: tiempo y distancia desde el inicio de esa fase y la duración y distancia totales de la fase. Se detecta por la posición del cursor, sin tener que pulsar «Ver: Calentamiento / Trabajo / Enfriamiento» (que solo acerca las gráficas), así que funciona también en «Mapa».

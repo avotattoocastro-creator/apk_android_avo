@@ -87,7 +87,8 @@ struct MapPageView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             MapCursorOverlay()
                 .padding(.leading, 12)
-                .padding(.bottom, 26)
+                .padding(.trailing, 64)   // zoom buttons on the right
+                .padding(.bottom, 24)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             if showLayers {
                 MapLayersPanel(model: model, onClose: { showLayers = false })
@@ -189,42 +190,36 @@ private struct MapCursorOverlay: View {
 
     var body: some View {
         let has: Bool = app.selected != nil && app.cursorTime.isFinite
-        VStack(alignment: .leading, spacing: 6) {
+        // One horizontal strip along the bottom of the map (the trainer's sketch): point data, then the phase data.
+        HStack(alignment: .center, spacing: 14) {
             HStack(spacing: 6) {
                 Circle().fill(Avo.red).frame(width: 8, height: 8)
-                Text("PUNTO DEL CURSOR").font(.system(size: 9.5, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
+                Text("PUNTO").font(.system(size: 9.5, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
             }
             if has {
-                Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 6) {
-                    GridRow {
-                        stat("Tiempo", app.cursorText, "")
-                        stat("Distancia", app.cursorDistanceM, "m")
-                    }
-                    GridRow {
-                        stat("Velocidad", app.cursorSpeed, "km/h")
-                        stat("Aceleración", app.cursorAccel, "m/s²")
-                    }
-                }
+                stat("Tiempo", app.cursorText, "")
+                stat("Distancia", app.cursorDistanceM, "m")
+                stat("Velocidad", app.cursorSpeed, "km/h")
+                stat("Aceleración", app.cursorAccel, "m/s²")
                 if let ph = phase {
-                    Divider().overlay(Avo.line)
+                    Rectangle().fill(Avo.line).frame(width: 1, height: 34)
                     HStack(spacing: 6) {
                         RoundedRectangle(cornerRadius: 2).fill(ph.color).frame(width: 10, height: 10)
-                        Text("EN " + ph.name.uppercased()).font(.system(size: 9.5, weight: .semibold)).tracking(0.5)
+                        Text(ph.name.uppercased()).font(.system(size: 9.5, weight: .semibold)).tracking(0.5)
                             .foregroundStyle(Avo.textDim)
                     }
-                    Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 6) {
-                        GridRow {
-                            stat("Tiempo fase", ph.elapsed, "")
-                            stat("Distancia fase", ph.distance, "m")
-                        }
-                    }
-                    Text("de " + ph.total).font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
+                    stat("Tiempo fase", ph.elapsed, "")
+                    stat("Distancia fase", ph.distance, "m")
+                    Text("de " + ph.total).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1)
                 }
             } else {
                 Text("Toca el recorrido o la línea de tiempo").font(.caption).foregroundStyle(Avo.textDim)
             }
         }
-        .padding(.horizontal, 12).padding(.vertical, 9)
+        .lineLimit(1)
+        .padding(.horizontal, 12).padding(.vertical, 7)
+        .minimumScaleFactor(0.7)
+        .fixedSize(horizontal: false, vertical: true)
         .background(Color(hex: 0x101014, alpha: 0.86), in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.red.opacity(0.5), lineWidth: 1))
         .allowsHitTesting(false)
@@ -258,14 +253,14 @@ private struct MapCursorOverlay: View {
 
     private func stat(_ label: String, _ value: String, _ unit: String) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text(label.uppercased()).font(.system(size: 9.5, weight: .semibold)).tracking(0.4).foregroundStyle(Avo.textDim)
+            Text(label.uppercased()).font(.system(size: 9, weight: .semibold)).tracking(0.4).foregroundStyle(Avo.textDim)
             HStack(alignment: .firstTextBaseline, spacing: 3) {
-                Text(value).font(.system(size: 19, weight: .semibold, design: .rounded).monospacedDigit()).foregroundStyle(Avo.text)
+                Text(value).font(.system(size: 17, weight: .semibold, design: .rounded).monospacedDigit()).foregroundStyle(Avo.text)
                     .lineLimit(1)
                 if !unit.isEmpty && value != "—" { Text(unit).font(.caption2).foregroundStyle(Avo.textDim) }
             }
         }
-        .frame(minWidth: 92, alignment: .leading)
+        .frame(minWidth: 64, alignment: .leading)
     }
 }
 
