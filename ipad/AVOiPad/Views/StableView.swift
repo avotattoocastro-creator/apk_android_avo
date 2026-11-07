@@ -41,17 +41,8 @@ struct StableView: View {
 
     @ViewBuilder
     private func header(_ page: StableIdentityPage) -> some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(alignment: .center, spacing: 16) {
-                AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
-                Spacer(minLength: 8)
-                StableLinkCard().frame(maxWidth: 560)
-            }
-            VStack(alignment: .leading, spacing: 10) {
-                AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
-                StableLinkCard()
-            }
-        }
+        // the «El iPad no tiene NFC…» card was removed at the trainer's request (07/11/2026)
+        AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
     }
 }
 
@@ -183,9 +174,9 @@ private struct StableDetailPane: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Image(systemName: page.isHorse ? "list.bullet.rectangle" : "person.crop.rectangle")
                         .font(.system(size: 34)).foregroundStyle(Avo.red)
-                    Text("Elige uno de la lista, crea uno nuevo o pega el enlace de su etiqueta")
+                    Text("Elige uno de la lista o crea uno nuevo")
                         .font(.headline).foregroundStyle(Avo.text)
-                    Text("El iPad no tiene NFC: graba las etiquetas con el móvil Android o con Windows. Si copias el enlace avohorse://identity/… de una ficha (por ejemplo desde Windows o Android) y pulsas «Pegar enlace avohorse://…», se registra aquí. Si ya existe, no se sobrescribe. Los entrenamientos importados también registran el caballo y el jinete que traen.")
+                    Text("Los entrenamientos importados también registran el caballo y el jinete que traen.")
                         .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(8)
@@ -300,8 +291,6 @@ private struct StableEditorCard: View {
                 if !page.isNew {
                     Text(page.tagText + (page.originText.isEmpty ? "" : "  ·  " + page.originText))
                         .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-                    Text("El iPad no tiene NFC: graba las etiquetas con el móvil Android o con Windows")
-                        .font(.caption2).foregroundStyle(Avo.textDim)
                 }
             }
         }

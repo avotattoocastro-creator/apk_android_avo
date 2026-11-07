@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Satélite con zoom máximo y fuera el aviso NFC de Cuadra/Jinetes
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:**
+- Mapa: con el zoom al máximo la imagen de satélite desaparecía (rejilla vacía), porque Esri solo sirve hasta el nivel 19. `RouteEsriTileOverlay` llega ahora al nivel 22 ampliando un trozo de la tesela del nivel 19; si falta una tesela en un nivel ≥ 16 se amplía la del nivel anterior.
+- Cuadra y Jinetes: quitada la tarjeta «El iPad no tiene NFC… / Pegar enlace avohorse://…» de la cabecera y la nota NFC de la ficha (petición del entrenador).
+**Archivos:** `ipad/AVOiPad/Views/MapKitRoute.swift`, `ipad/AVOiPad/Views/StableView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Mapa: sigue al cursor, datos del tramo, mapa en la mitad y desplazamiento lateral con zoom
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (bocetos del entrenador, 23:25–23:31):**

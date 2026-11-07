@@ -675,7 +675,7 @@ final class RouteEsriTileOverlay: MKTileOverlay {
         super.init(urlTemplate: nil)
         self.tileSize = CGSize(width: 256, height: 256)
         self.minimumZ = 1
-        self.maximumZ = 19
+        self.maximumZ = 22   // 20–22: enlarged from level 19 (overzoom)
         self.canReplaceMapContent = layer == "World_Imagery"
     }
 
@@ -688,7 +688,55 @@ final class RouteEsriTileOverlay: MKTileOverlay {
         AvoFiles.join(cacheDir, layerName.replacingOccurrences(of: "/", with: "_"), String(path.z), String(path.y), "\(path.x).\(ext)")
     }
 
+    /// Deepest zoom Esri serves for this layer; closer zooms enlarge a piece of a tile of this level so the
+    /// satellite view never turns into an empty grid at maximum zoom.
+    static let nativeMaxZ: Int = 19
+
     override func loadTile(at path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
+        if path.z > RouteEsriTileOverlay.nativeMaxZ {
+            overzoom(path, parentZ: RouteEsriTileOverlay.nativeMaxZ, result: result)
+            return
+        }
+        loadNative(path) { [weak self] (data: Data?, error: Error?) in
+            // a missing tile at a deep level (no imagery there yet): enlarge the level above instead of a hole
+            if data == nil, path.z >= 16, let self = self {
+                self.overzoom(path, parentZ: path.z - 1, result: result)
+            } else {
+                result(data, error)
+            }
+        }
+    }
+
+    /// The tile `path` cut out of its ancestor at `parentZ` and scaled up to the tile size.
+    private func overzoom(_ path: MKTileOverlayPath, parentZ: Int, result: @escaping (Data?, Error?) -> Void) {
+        let k: Int = path.z - parentZ
+        guard k > 0, k <= 8 else { result(nil, AvoError.invalidData("tesela fuera de rango")); return }
+        var parent: MKTileOverlayPath = path
+        parent.z = parentZ
+        parent.x = path.x >> k
+        parent.y = path.y >> k
+        let n: Int = 1 << k
+        let qx: Int = path.x & (n - 1)
+        let qy: Int = path.y & (n - 1)
+        let jpeg: Bool = ext == "jpg"
+        loadNative(parent) { (data: Data?, error: Error?) in
+            guard let d = data, let img = UIImage(data: d), let cg = img.cgImage else { result(nil, error); return }
+            let side: CGFloat = CGFloat(cg.width) / CGFloat(n)
+            let crop = CGRect(x: CGFloat(qx) * side, y: CGFloat(qy) * side, width: side, height: side).integral
+            guard let piece = cg.cropping(to: crop) else { result(nil, error); return }
+            let out = CGSize(width: 256, height: 256)
+            let format = UIGraphicsImageRendererFormat()
+            format.scale = 1
+            format.opaque = jpeg
+            let scaled: UIImage = UIGraphicsImageRenderer(size: out, format: format).image { (ctx: UIGraphicsImageRendererContext) in
+                ctx.cgContext.interpolationQuality = .high
+                UIImage(cgImage: piece).draw(in: CGRect(origin: .zero, size: out))
+            }
+            result(jpeg ? scaled.jpegData(compressionQuality: 0.9) : scaled.pngData(), nil)
+        }
+    }
+
+    private func loadNative(_ path: MKTileOverlayPath, result: @escaping (Data?, Error?) -> Void) {
         let f: String = file(path)
         if let attrs = try? FileManager.default.attributesOfItem(atPath: f),
            let modified = attrs[.modificationDate] as? Date,
