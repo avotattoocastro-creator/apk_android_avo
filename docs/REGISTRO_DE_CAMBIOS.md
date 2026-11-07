@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Menú: Dashboard, Entrenamientos y Mapa antes de Análisis
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (bocetos del entrenador, 00:20–00:24):**
+- Barra lateral: «Entrenamientos» (página `.sessions`) pasa a **Dashboard**; «Listado» pasa a **Entrenamientos** (título de la página también); **Mapa** va antes que Análisis.
+- Dashboard: solo la portada, los accesos rápidos y las cifras (entrenamientos, distancia medida, demostración, velocidad máxima, sesión activa). Quitadas las tarjetas de sesiones recientes, Reloj AVO, Caballos, Disponibilidad de sensores, Estado de importaciones y Estado del sistema.
+**Archivos:** `ipad/AVOiPad/App/RootView.swift`, `ipad/AVOiPad/Views/HomeView.swift`, `ipad/AVOiPad/Views/StartView.swift`, `ipad/AVOiPad/Views/TrainingListView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-08 — iPad — Marca fija de velocidad máxima y barra de «Mapa» solo con el entrenamiento
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:**

@@ -86,7 +86,7 @@ private struct TrainingListContent: View {
 
     private func titleBlock(_ rows: [TrainingListRow]) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text("Listado de entrenamientos").font(.title2.weight(.semibold)).foregroundStyle(Avo.text)
+            Text("Entrenamientos").font(.title2.weight(.semibold)).foregroundStyle(Avo.text)
             HStack(spacing: 8) {
                 Text(TrainingListFilter.summary(rows)).font(.footnote.monospacedDigit()).foregroundStyle(Avo.silver)
                 if rows.count != app.sessions.count {

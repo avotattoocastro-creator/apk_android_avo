@@ -15,15 +15,9 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     hero(wide: wide)
                     metrics(columns: wide ? 5 : 3)
-                    if wide {
-                        HStack(alignment: .top, spacing: 14) {
-                            sessionsCard.frame(maxWidth: .infinity)
-                            sideColumn.frame(width: 360)
-                        }
-                    } else {
-                        sessionsCard
-                        sideColumn
-                    }
+                    // «Dashboard» (trainer's sketch 08/11/2026): only the banner, quick actions and the figures; the
+                    // recent sessions, watch, horses, sensors, imports and system cards were removed
+                    // (the trainings are in «Entrenamientos», the watch in «Reloj Wi-Fi», the horses in «Cuadra»)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)

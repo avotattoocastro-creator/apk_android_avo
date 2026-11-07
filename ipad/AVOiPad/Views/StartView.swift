@@ -95,7 +95,7 @@ struct StartView: View {
             Spacer(minLength: 0).frame(maxHeight: .infinity).layoutPriority(-1)
             Rectangle().fill(Color(hex: 0x3A4A60)).frame(height: 1).padding(.horizontal, 10)
             action(icon: "folder", title: "Abrir entrenamiento", subtitle: "Archivos .avo / .avr") { app.showImporter = true }
-            action(icon: "clock.arrow.circlepath", title: "Entrenamientos", subtitle: "Sesiones recientes, historial y favoritos") { app.page = .sessions }
+            action(icon: "square.grid.2x2", title: "Dashboard", subtitle: "Resumen de entrenamientos y accesos rápidos") { app.page = .sessions }
             action(icon: "waveform.path.ecg", title: "Análisis", subtitle: "El caballo en el entrenamiento activo") { openAnalysis() }
             action(icon: "server.rack", title: "Servidor AVO", subtitle: "Descargar sesiones") { app.page = .server }
             action(icon: "square.split.2x1", title: "Comparar entrenamientos", subtitle: "Análisis avanzado") { app.page = .compare }

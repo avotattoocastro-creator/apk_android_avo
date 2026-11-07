@@ -20,10 +20,11 @@ struct RootView: View {
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
         RootNavEntry(page: .home, title: "Inicio", icon: "house"),
-        RootNavEntry(page: .sessions, title: "Entrenamientos", icon: "clock.arrow.circlepath"),
-        RootNavEntry(page: .trainingList, title: "Listado", icon: "list.bullet.rectangle"),
-        RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
+        // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
+        RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
+        RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
+        RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
