@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Mapa: datos del punto exacto del cursor
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:** recuadro «Punto del cursor» en la esquina inferior izquierda del mapa (Análisis y Mapa, `MapCursorOverlay`): tiempo, distancia desde el inicio (m), velocidad (km/h) y aceleración longitudinal validada (m/s²) del punto exacto donde está el cursor (toque en el recorrido, en la línea de tiempo o reproducción). Usa los mismos valores que las lecturas de las gráficas (`cursorSpeed`, `cursorAccel`; nuevo `cursorDistanceM`). Petición del usuario sobre captura de la compilación 36.
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`, `ipad/AVOiPad/App/AppModel+Shell.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Mapa: playa en horizontal y giro con dos dedos
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:** el mapa del recorrido (`MapKitRoute`) se puede girar con dos dedos y «Ajustar» lo orienta para que el recorrido quede en HORIZONTAL: eje principal de las posiciones (componentes principales en Web Mercator), rumbo de la cámara elegido lo más cerca posible del norte (en el Regatón el mar queda arriba); si el recorrido no tiene una dirección clara (ratio de varianzas < 1,6) se deja el norte arriba. El encuadre mide el recorrido a lo largo y a lo ancho de la pantalla girada y respeta los márgenes (datos arriba a la derecha). El zoom +/− mantiene el giro (cámara en vez de `setVisibleMapRect`). Botón nuevo en Análisis y Mapa: «Norte arriba» / «Recorrido en horizontal» (se recuerda en `map.alignRoute`). Petición del usuario: «necesito ver la playa en horizontal».

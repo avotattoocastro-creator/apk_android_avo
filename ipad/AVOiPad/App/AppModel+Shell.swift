@@ -255,6 +255,8 @@ extension AppModel {
     var cursorAccel: String { cursorValue({ tl, i in SegmentAnalyzer.accelValid(tl, i) ? tl.accelLong[i] : .nan }, "0.00") }
     var cursorAltitude: String { cursorValue({ tl, i in tl.altitudeMsl[i] }, "0.0") }
     var cursorDistance: String { cursorValue({ tl, i in tl.distance[i] / 1000 }, "0.00") }
+    /// Distance from the start at the cursor, in metres (map overlay «Punto del cursor»).
+    var cursorDistanceM: String { cursorValue({ tl, i in tl.distance[i] }, "0") }
     var cursorQuality: String {
         let i: Int = cursorIndex
         guard i >= 0, let s = selected else { return "—" }
