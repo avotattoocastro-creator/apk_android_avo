@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Mapa: nueva distribución según el boceto del entrenador
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (página «Mapa»; los elementos sobre el mapa también en «Análisis»):**
+- Franja de datos del punto del cursor (tiempo, distancia, velocidad, aceleración y fase) arriba del mapa, en lugar de abajo.
+- Estadísticas en columna arriba a la derecha: Distancia, Vel. media, Tiempo, Vel. máx.
+- Reproducción (play, velocidad, barra y tiempo) sobre el borde inferior del mapa.
+- «Capas» abajo a la derecha, junto a los botones de zoom (el panel se abre encima).
+- Debajo del mapa, una sola gráfica grande con pestañas Velocidad · Aceleración · Lateral · Inclinación · Vertical · Cadencia (las de cincha y cadencia solo si hay datos), con las franjas y asas de zonas y los botones de zonas dentro de la misma tarjeta. La pestaña elegida se recuerda.
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Reloj Wi-Fi: motivo real del fallo, sondeo HTTP y protección de reinicios
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:**

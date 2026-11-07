@@ -24,9 +24,8 @@ struct MapPageView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         mapArea(wide: true)
                             .frame(maxHeight: .infinity)
-                        MapProfilePanel()
-                            .frame(height: 170)
-                        ZoneToolbar()
+                        MapMetricPanel()
+                            .frame(height: max(300, geo.size.height * 0.42))
                     }
                 } else {
                     ScrollView(.vertical) {
@@ -34,7 +33,7 @@ struct MapPageView: View {
                             mapArea(wide: true)
                                 .frame(height: max(380, geo.size.height * 0.58))
                             MapProfilePanel()
-                                .frame(height: 170)
+                                .frame(height: 150)
                             ZoneToolbar()
                             ChartsNavigator(charts: app.charts)
                             ChartsStack(charts: app.charts, skipSpeed: true)
@@ -80,24 +79,40 @@ struct MapPageView: View {
         let model: MapModel = app.map
         return ZStack(alignment: .topLeading) {
             MapRouteContainer(command: command,
-                              fitPadding: UIEdgeInsets(top: 40, left: showLayers && wide ? 230 : 40, bottom: 40, right: 260),
+                              fitPadding: UIEdgeInsets(top: 76, left: 40, bottom: 84, right: 170),
                               showCourse: true, alignRoute: alignRoute)
+            // top-right: Distancia · Vel. media · Tiempo · Vel. máx., one under the other
             MapStatsOverlay()
                 .padding(12)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            // top: data of the point under the cursor (and its phase), left of the statistics column
             MapCursorOverlay()
                 .padding(.leading, 12)
-                .padding(.trailing, 64)   // zoom buttons on the right
+                .padding(.top, 12)
+                .padding(.trailing, 160)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            // bottom: playback (play, speed, scrubber, time) over the map, left of Capas and the zoom buttons
+            SyncPlaybackBar(compact: false)
+                .padding(.horizontal, 10).padding(.vertical, 6)
+                .background(Color(hex: 0x101014, alpha: 0.86), in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+                .padding(.leading, 12)
+                .padding(.trailing, 58 + 118)
                 .padding(.bottom, 24)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            if showLayers {
-                MapLayersPanel(model: model, onClose: { showLayers = false })
-                    .padding(12)
-            } else {
-                Button { showLayers = true } label: { Label("Capas", systemImage: "square.3.layers.3d") }
-                    .buttonStyle(.avoSecondary)
-                    .padding(12)
+            // bottom-right, next to the zoom buttons: Capas (the panel opens above it)
+            Group {
+                if showLayers {
+                    MapLayersPanel(model: model, onClose: { showLayers = false })
+                } else {
+                    Button { showLayers = true } label: { Label("Capas", systemImage: "square.3.layers.3d") }
+                        .buttonStyle(.avoSecondary)
+                        .accessibilityIdentifier("map.layers")
+                }
             }
+            .padding(.trailing, 58)
+            .padding(.bottom, 28)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             VStack(spacing: 6) {
                 mapButton("plus", "Acercar") { command = command.next(.zoomIn) }
                 mapButton("minus", "Alejar") { command = command.next(.zoomOut) }
@@ -153,21 +168,18 @@ struct MapPageView: View {
     }
 }
 
-/// Distance / time / speeds of the active training, small, over the top-right corner of the map.
+/// Distance, mean speed, time and max speed of the active training, one under the other, top-right of the map.
 private struct MapStatsOverlay: View {
     @Environment(AppModel.self) private var app
 
     var body: some View {
-        Grid(alignment: .leading, horizontalSpacing: 14, verticalSpacing: 6) {
-            GridRow {
-                stat("Distancia", app.selected?.distanceText ?? "—")
-                stat("Tiempo", app.selected?.durationText ?? "—")
-            }
-            GridRow {
-                stat("Vel. media", app.selected?.meanSpeedText ?? "—")
-                stat("Vel. máx.", app.selected?.maxSpeedText ?? "—")
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            stat("Distancia", app.selected?.distanceText ?? "—")
+            stat("Vel. media", app.selected?.meanSpeedText ?? "—")
+            stat("Tiempo", app.selected?.durationText ?? "—")
+            stat("Vel. máx.", app.selected?.maxSpeedText ?? "—")
         }
+        .frame(minWidth: 108, alignment: .leading)
         .padding(.horizontal, 12).padding(.vertical, 9)
         .background(Color(hex: 0x101014, alpha: 0.82), in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
@@ -190,7 +202,7 @@ private struct MapCursorOverlay: View {
 
     var body: some View {
         let has: Bool = app.selected != nil && app.cursorTime.isFinite
-        // One horizontal strip along the bottom of the map (the trainer's sketch): point data, then the phase data.
+        // One horizontal strip along the top of the map (the trainer's sketch): point data, then the phase data.
         HStack(alignment: .center, spacing: 14) {
             HStack(spacing: 6) {
                 Circle().fill(Avo.red).frame(width: 8, height: 8)
@@ -472,7 +484,7 @@ struct RouteLegendView: View {
     }
 }
 
-/// «Perfil de velocidad (km/h)» synchronised with the charts, plus playback.
+/// «Perfil de velocidad (km/h)» synchronised with the charts (playback is over the map).
 private struct MapProfilePanel: View {
     @Environment(AppModel.self) private var app
 
@@ -485,8 +497,113 @@ private struct MapProfilePanel: View {
                                 includeZero: true, emptyText: "Sin datos",
                                 handles: app.corrections.handles(app.selected),
                                 onHandle: { (id: Int, t: Double) in app.corrections.moveHandle(id, to: t) })
-                SyncPlaybackBar(compact: false)
             }
+        }
+    }
+}
+
+// MARK: - «Mapa»: one big chart with a metric selector (the trainer's sketch)
+
+/// Metrics of the «Mapa» chart. The girth ones only appear when the session has girth IMU data, cadence when the engine has it.
+enum MapMetric: String, CaseIterable, Identifiable {
+    case speed, accel, lateral, tilt, vertical, cadence
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .speed: return "Velocidad"
+        case .accel: return "Aceleración"
+        case .lateral: return "Lateral"
+        case .tilt: return "Inclinación"
+        case .vertical: return "Vertical"
+        case .cadence: return "Cadencia"
+        }
+    }
+    var unit: String {
+        switch self {
+        case .speed: return "km/h"
+        case .accel, .lateral, .vertical: return "m/s²"
+        case .tilt: return "°"
+        case .cadence: return "ciclos/min"
+        }
+    }
+    var panelId: SyncPanelId {
+        switch self {
+        case .speed: return .speed
+        case .accel: return .accel
+        case .lateral: return .lateral
+        case .tilt: return .tilt
+        case .vertical: return .fusedAccel
+        case .cadence: return .cadence
+        }
+    }
+}
+
+/// Chart under the map of «Mapa»: tabs Velocidad / Aceleración / … , the chart with the zone strips and handles, and the
+/// zone buttons, all in one card. Same cursor, zoom and range as every other chart.
+private struct MapMetricPanel: View {
+    @Environment(AppModel.self) private var app
+    @AppStorage("map.metric") private var metricRaw: String = MapMetric.speed.rawValue
+
+    private func available(_ charts: ChartsModel) -> [MapMetric] {
+        var out: [MapMetric] = [.speed, .accel]
+        if charts.hasGirthImu { out += [.lateral, .tilt, .vertical] }
+        if charts.hasCadence { out.append(.cadence) }
+        return out
+    }
+
+    var body: some View {
+        let charts: ChartsModel = app.charts
+        let list: [MapMetric] = available(charts)
+        let metric: MapMetric = list.first { $0.rawValue == metricRaw } ?? .speed
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 6) {
+                        ForEach(list) { (m: MapMetric) in
+                            let on: Bool = m == metric
+                            Button {
+                                metricRaw = m.rawValue
+                            } label: {
+                                Text(m.title)
+                                    .font(.callout.weight(on ? .semibold : .regular))
+                                    .foregroundStyle(on ? Color.white : Avo.text)
+                                    .padding(.horizontal, 12).padding(.vertical, 6)
+                                    .background(on ? Avo.red : Avo.surface2, in: RoundedRectangle(cornerRadius: 6))
+                                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(on ? Avo.red : Avo.line, lineWidth: 1))
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("map.metric.\(m.rawValue)")
+                        }
+                    }
+                }
+                Spacer(minLength: 6)
+                Text(metric.unit).font(.caption2).foregroundStyle(Avo.textDim)
+                SyncReadout(text: { (a: AppModel) -> String in MapMetricPanel.readout(metric, a) })
+            }
+            SyncSignalChart(panel: charts.panel(metric.panelId), domain: charts.domain,
+                            bands: app.corrections.bands(app.selected),
+                            includeZero: metric != .tilt && metric != .cadence,
+                            emptyText: charts.building ? "Calculando…" : "Sin datos",
+                            handles: app.corrections.handles(app.selected),
+                            onHandle: { (id: Int, t: Double) in app.corrections.moveHandle(id, to: t) })
+                .frame(maxHeight: .infinity)
+            ZoneToolbar(embedded: true)
+        }
+        .padding(.horizontal, 10).padding(.vertical, 8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        .accessibilityIdentifier("map.metricPanel")
+    }
+
+    static func readout(_ m: MapMetric, _ a: AppModel) -> String {
+        switch m {
+        case .speed: return a.cursorSpeed + " km/h"
+        case .accel: return a.cursorAccel + " m/s²"
+        case .lateral: return a.charts.lateralReadout(a.cursorTime)
+        case .tilt: return a.charts.tiltReadout(a.cursorTime)
+        case .vertical: return a.charts.verticalReadout(a.cursorTime)
+        case .cadence: return a.cursorCadence
         }
     }
 }
@@ -629,6 +746,8 @@ private struct TrainingZonesCard: View {
 /// and the engine analyses the training again; «Restablecer» goes back to the automatic zones.
 private struct ZoneToolbar: View {
     @Environment(AppModel.self) private var app
+    /// Inside another card (MapMetricPanel): no own background or border.
+    var embedded: Bool = false
 
     var body: some View {
         let c: CorrectionsModel = app.corrections
@@ -669,9 +788,9 @@ private struct ZoneToolbar: View {
                     .lineLimit(1).truncationMode(.tail)
             }
         }
-        .padding(.horizontal, 10).padding(.vertical, 8)
-        .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        .padding(.horizontal, embedded ? 0 : 10).padding(.vertical, embedded ? 0 : 8)
+        .background(embedded ? Color.clear : Avo.surface, in: RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(embedded ? Color.clear : Avo.line, lineWidth: 1))
     }
 
     private var separator: some View { Rectangle().fill(Avo.line).frame(width: 1, height: 26) }
