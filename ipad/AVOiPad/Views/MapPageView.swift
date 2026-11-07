@@ -98,6 +98,14 @@ struct MapPageView: View {
                 .padding(.top, 12)
                 .padding(.trailing, 160)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            // with a stretch selected the top strip shows the stretch: the point under the cursor goes bottom-left
+            if !playbackOnMap && app.hasRange && !app.charts.rangeStats.isEmpty {
+                MapCursorOverlay(pointOnly: true)
+                    .padding(.leading, 12)
+                    .padding(.trailing, 58 + 130)
+                    .padding(.bottom, 24)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            }
             // Análisis: playback (play, speed, scrubber, time) over the bottom of the map, left of Capas and the zoom buttons.
             // «Mapa» has it as its own time bar between the map and the charts.
             if playbackOnMap {
@@ -209,10 +217,12 @@ private struct MapStatsOverlay: View {
 /// acceleration, over the bottom-left corner of the map. Own view: only this re-renders when the cursor moves.
 private struct MapCursorOverlay: View {
     @Environment(AppModel.self) private var app
+    /// Bottom-left copy: only the point (and phase) data, shown while the top strip shows a selected stretch.
+    var pointOnly: Bool = false
 
     var body: some View {
         let has: Bool = app.selected != nil && app.cursorTime.isFinite
-        let rows: [SyncStatRow] = app.hasRange ? app.charts.rangeStats : []
+        let rows: [SyncStatRow] = (app.hasRange && !pointOnly) ? app.charts.rangeStats : []
         // One horizontal strip along the top of the map (the trainer's sketch): the selected stretch when there is one,
         // otherwise the point data and then the phase data.
         HStack(alignment: .center, spacing: 14) {

@@ -30,6 +30,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - Marca fija en el punto de velocidad máxima (velocidad filtrada): en el mapa, marcador naranja con rayo y «Vmáx 51,1 km/h» (`VmaxAnnotation`); en la gráfica de velocidad de «Mapa» y en el perfil de «Análisis», punto naranja. `SessionItem.maxSpeedPoint` (en caché por línea de tiempo).
 - «Mapa»: la barra de arriba solo tiene el selector de entrenamiento (boceto del entrenador); Entreno 2, pestañas y Asignar siguen en «Análisis». «Mapa» ya no usa la vista de comparación.
 **Archivos:** `ipad/AVOiPad/App/SessionItem.swift`, `ipad/AVOiPad/App/RootView.swift`, `ipad/AVOiPad/Views/MapKitRoute.swift`, `ipad/AVOiPad/Views/MapPageView.swift`.
+- «Mapa» con un tramo seleccionado: arriba los datos del tramo y, a la vez, abajo a la izquierda los del punto seleccionado (tiempo, distancia, velocidad, aceleración y fase).
 **Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
 
 ## 2026-11-08 — iPad — Mapa sin tarjetas inferiores y doble toque para quitar el tramo
