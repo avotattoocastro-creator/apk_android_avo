@@ -80,31 +80,55 @@ final class HotspotWifiConnector: WifiConnector {
         func close() async { WifiJoin.leave(ssid: ssid) }
     }
 
+    /// Why the last connect() failed (Spanish, shown in the Reloj Wi-Fi page).
+    private(set) var lastFailure: String?
+
     func connect(_ creds: WifiCredentials) async -> WifiLink? {
-        do {
-            try await WifiJoin.join(ssid: creds.ssid, passphrase: creds.password)
-        } catch {
-            log("wifi: el iPad no se unió a \(creds.ssid): \(error.localizedDescription)")
-            return nil
+        lastFailure = nil
+        // The watch answers WIFI_SYNC(start) before its SoftAP is always beaconing: one more try after a pause.
+        var joined = false
+        for attempt in 1...2 {
+            do {
+                try await WifiJoin.join(ssid: creds.ssid, passphrase: creds.password)
+                joined = true
+                break
+            } catch {
+                let denied = (error as? WifiJoinError)?.userDenied ?? false
+                log("wifi: el iPad no se unió a \(creds.ssid) (intento \(attempt)): \(error.localizedDescription)")
+                lastFailure = denied ? "no se aceptó unirse a \(creds.ssid) (pulsa «Conectarse» cuando iOS lo pregunte)"
+                                     : "el iPad no se unió a \(creds.ssid): \(error.localizedDescription)"
+                if denied || attempt == 2 || Task.isCancelled { return nil }
+                try? await Task.sleep(nanoseconds: 3_000_000_000)
+            }
+        }
+        if !joined { return nil }
+        if let cur = await WifiJoin.currentSsid(), cur != creds.ssid {
+            log("wifi: iOS dice que está en \(cur), no en \(creds.ssid)")
         }
         log("wifi: unido a \(creds.ssid)")
         let http = UrlWatchHttp(creds, client: makeClient())
-        // DHCP and the route to 192.168.4.x take a moment: probe the API for up to 20 s
-        let until = Date().addingTimeInterval(20)
+        // DHCP, the route to 192.168.4.x and the first-use «local network» permission take a moment: probe the API with a
+        // short timeout every second for up to 30 s (a single 20 s request used to use up the whole window).
+        let until = Date().addingTimeInterval(30)
+        var lastError = ""
         while Date() < until {
             do {
-                _ = try await http.list()
+                try await http.probe(timeout: 4)
                 return Link(http: http, ssid: creds.ssid)
             } catch let e as WatchHttpError {
                 // the watch answered (token/recording…): the network works, the coordinator handles the error
                 log("wifi: el reloj respondió \(e.code)")
                 return Link(http: http, ssid: creds.ssid)
             } catch {
+                lastError = error.localizedDescription
                 if Task.isCancelled { break }
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
             }
         }
-        log("wifi: sin respuesta HTTP del reloj en \(creds.ssid)")
+        log("wifi: sin respuesta HTTP del reloj en \(creds.ssid): \(lastError)")
+        lastFailure = "el iPad se unió a \(creds.ssid) pero el reloj no respondió"
+            + (ns.isEmpty ? "" : " (\(lastError))")
+            + ". Revisa Ajustes › Privacidad › Red local › AVO"
         WifiJoin.leave(ssid: creds.ssid)
         return nil
     }

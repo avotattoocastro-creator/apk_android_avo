@@ -146,6 +146,8 @@ final class WatchWifiModel {
     var supportsWifi: Bool = false
     /// Wi-Fi blocked by WifiBootGuard for this firmware (the watch rebooted when turning it on).
     var wifiBlocked: Bool = false
+    /// Why the last Wi-Fi attempt with this watch failed (nil = not tried yet or it worked). Shown instead of «WI-FI DISPONIBLE».
+    var wifiFailure: String? = nil
     var unsupportedText: String = ""
     var status: String = "Conecta con el reloj por Bluetooth para ver sus entrenamientos."
     var statusOk: Bool = true
@@ -245,6 +247,7 @@ final class WatchWifiModel {
                 Task { @MainActor in self?.linkLost() }
             }
             conn = c
+            wifiFailure = nil
             shared.setWatch(device: c.info.deviceId, firmware: c.info.firmware)
             let log = app.log
             let sharedRef = shared
@@ -329,6 +332,7 @@ final class WatchWifiModel {
         connected = false
         supportsWifi = false
         wifiBlocked = false
+        wifiFailure = nil
         watchText = "Sin conectar"
     }
 
@@ -394,7 +398,8 @@ final class WatchWifiModel {
                     } else {
                         await ctl.stop()
                         if conn != nil { ctl.bootGuard.clearAttempt() }
-                        failure = "El iPad no pudo unirse a la red Wi-Fi del reloj (\(creds.ssid))."
+                        failure = connector.lastFailure.map { $0.prefix(1).uppercased() + $0.dropFirst() }
+                            ?? "El iPad no pudo unirse a la red Wi-Fi del reloj (\(creds.ssid))."
                     }
                 case .refused(let reason, _):
                     recording = reason == "grabando"
@@ -409,6 +414,7 @@ final class WatchWifiModel {
             if failure != nil && !recording && conn != nil {
                 viaBle = true
             }
+            wifiFailure = recording ? nil : failure
         }
         var bleNote = ""
         if viaBle {
@@ -569,20 +575,21 @@ final class WatchWifiModel {
             }
             if let rep = report, !rep.skipped, !cancelRequested {
                 if rep.wifiUnavailable {
-                    wifiProblem = "no se pudo usar el Wi-Fi del reloj"
+                    wifiProblem = "no se pudo usar el Wi-Fi del reloj: " + (rep.wifiReason ?? "motivo desconocido")
                     if ids == nil { bleAll = true } else { bleIds = rep.fallbackBle }
                 } else {
                     // failed over Wi-Fi (cut, radio, list…): those go over Bluetooth now; recording is never retried
                     let retry: [String] = rep.failed.filter { $0.key != "*" && $0.value != "grabando" }.map { $0.key }.sorted()
                     if !retry.isEmpty {
                         bleIds = retry
-                        wifiProblem = "el Wi-Fi falló"
+                        wifiProblem = "el Wi-Fi falló: " + (rep.failed[retry[0]] ?? "motivo desconocido")
                     } else if let g = rep.failed["*"], g != "grabando", ids == nil {
                         bleAll = true
                         wifiProblem = "el Wi-Fi falló: " + g
                     }
                 }
             }
+            if wifiProblem == nil && failure == nil && report != nil { wifiFailure = nil }
         } else if ids == nil {
             bleAll = true
         } else {
@@ -596,6 +603,7 @@ final class WatchWifiModel {
             transport = "Bluetooth"
             phase = WatchWifiModel.bleBusyText
             status = WatchWifiModel.bleBusyText + (wifiProblem.map { " (\($0))" } ?? "")
+            if let w = wifiProblem { wifiFailure = w }
             for id in bleIds { setRow(id) { $0.state = "Pendiente (Bluetooth)"; $0.stateOk = true; $0.progress = nil } }
             let knownSha: [String: String] = [:]
             do {

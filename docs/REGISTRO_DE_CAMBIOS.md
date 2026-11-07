@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Reloj Wi-Fi: motivo real del fallo, sondeo HTTP y protección de reinicios
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:**
+- Con el pecho 3.7.6 (AVO_1E8C) la página decía «WI-FI DISPONIBLE» mientras descargaba por Bluetooth «(no se pudo usar el Wi-Fi del reloj)», sin el motivo. Ahora `WifiSyncReport.wifiReason` y `WifiConnector.lastFailure` llevan el motivo hasta la pantalla (reloj rechaza activar el Wi-Fi, el iPad no se une a la red, o se une pero el reloj no responde por HTTP), y la etiqueta pasa a «WI-FI FALLÓ» con el motivo debajo hasta que una pasada por Wi-Fi funcione o se reconecte.
+- Sondeo HTTP tras unirse: antes una sola petición con 20 s de tiempo de espera agotaba toda la ventana de 20 s; ahora peticiones de 4 s cada segundo durante 30 s (DHCP, ruta a 192.168.4.x y permiso de red local de iOS la primera vez).
+- Unión a la red del reloj: un segundo intento a los 3 s si el primero falla (el SoftAP puede no estar emitiendo todavía), salvo que el usuario la rechace.
+- `WifiBootGuard`: si `WIFI_SYNC(start)` no respondía (excepción) el intento quedaba marcado; cualquier apagado y encendido normal posterior del reloj bloqueaba el Wi-Fi como si se hubiera reiniciado por él. Ahora se borra el intento si el enlace Bluetooth sigue vivo.
+**Archivos:** `ipad/AVOiPad/Core/WifiSync.swift`, `ipad/AVOiPad/App/WifiJoin.swift`, `ipad/AVOiPad/App/WatchWifiModel.swift`, `ipad/AVOiPad/Views/WatchWifiView.swift`.
+**No se ha tocado:** firmware del pecho, protocolo BLE/HTTP, descarga por Bluetooth.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+**Pendiente:** con el motivo visible, decidir si el fallo está en el reloj (3.7.6) o en iOS. La app Android tiene la misma marca de intento en `AvoWifiSyncManager` (revisar).
+
 ## 2026-11-07 — iPad — Mapa: datos del cursor en una franja horizontal
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:** en la compilación 38 el recuadro del cursor ocupaba todo el ancho y casi la mitad del mapa (el `Divider` lo estiraba). Ahora es una sola franja horizontal y baja en la parte inferior del mapa, como en el boceto del usuario: Punto · tiempo · distancia · velocidad · aceleración | fase · tiempo fase · distancia fase · «de» total; solo ocupa lo que necesita y deja libres los botones de zoom.

@@ -321,6 +321,11 @@ final class UrlWatchHttp: WatchHttp {
     }
 
     func list() async throws -> [RemoteTraining] { WatchHttpJson.parseList(try await text("/api/v1/trainings")) }
+    /// Same request with a short timeout, to probe in a loop while DHCP, the route and iOS's local-network permission settle.
+    func probe(timeout: TimeInterval) async throws {
+        let (status, _) = try await client.send(request("/api/v1/trainings", timeout: timeout))
+        if status != 200 { throw WatchHttpError.forStatus(status) }
+    }
     func metadata(_ id: String) async throws -> RemoteMeta { try WatchHttpJson.parseMeta(try await text("/api/v1/trainings/\(path(id))/metadata")) }
     func sha256(_ id: String) async throws -> String { WatchHttpJson.parseSha(try await text("/api/v1/trainings/\(path(id))/sha256")) }
 
@@ -535,6 +540,12 @@ protocol WifiLink: AnyObject {
 /// Connection to the watch network (NEHotspotConfiguration in the app). nil = not obtained (rejected/timeout).
 protocol WifiConnector: AnyObject {
     func connect(_ creds: WifiCredentials) async -> WifiLink?
+    /// Why the last connect() returned nil (Spanish, for the UI).
+    var lastFailure: String? { get }
+}
+
+extension WifiConnector {
+    var lastFailure: String? { nil }
 }
 
 struct WifiSyncProgress: Equatable {
@@ -579,6 +590,8 @@ struct WifiSyncReport: Equatable {
     /// Wi-Fi could not be used at all (firmware without it, blocked by WifiBootGuard, refused for good or the iPad did not
     /// join): the caller downloads over Bluetooth instead (also for «Descargar todo», where fallbackBle has no ids yet).
     var wifiUnavailable: Bool = false
+    /// Why Wi-Fi could not be used (Spanish, for the UI) when wifiUnavailable; nil otherwise.
+    var wifiReason: String? = nil
 }
 
 /// IDLE → DISCOVERING → WIFI_STARTING → CONNECTING → DOWNLOADING → VERIFYING → COMPLETED → CLEANUP (→ IDLE) with WAITING
@@ -719,7 +732,8 @@ final class WifiSyncCoordinator {
             creds = c
         case .unsupported:
             log("wifi: firmware sin Wi-Fi → BLE")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true,
+                                  wifiReason: "el reloj no admite Wi-Fi o está desactivado para este firmware")
         case .refused(let reason, let retryLater):
             log("wifi: rechazado (\(reason))")
             set(.waiting, msg: "Pendiente de conexión")
@@ -727,13 +741,15 @@ final class WifiSyncCoordinator {
                 for id in ids { pass.failed[id] = reason }
                 return WifiSyncReport(verified: [], failed: pass.failed, fallbackBle: [])
             }
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true,
+                                  wifiReason: "el reloj no pudo activar su Wi-Fi (\(reason))")
         }
         pass.started = true
         set(.connecting, pending: ids.count)
         guard let link = await connector.connect(creds) else {
             log("wifi: el iPad no conectó con la red del reloj")
-            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true)
+            return WifiSyncReport(verified: [], failed: [:], fallbackBle: ids, wifiUnavailable: true,
+                                  wifiReason: connector.lastFailure ?? "el iPad no se unió a la red \(creds.ssid)")
         }
         pass.link = link
         var pending: [(String, String?)]
@@ -892,7 +908,15 @@ final class BleWifiControl: WatchWifiControl {
         if !supported { return .unsupported }
         guard let c = client() else { throw WifiIoError("Sin conexión con el reloj") }
         bootGuard.markAttempt(info())
-        let m = try await c.wifiSync(.start, timeoutMs: 10_000)
+        let m: BleMessage
+        do {
+            m = try await c.wifiSync(.start, timeoutMs: 10_000)
+        } catch {
+            // no answer but the Bluetooth link is still up: the watch did not reboot, do not leave the attempt pending
+            // (otherwise any later normal power cycle would block Wi-Fi as if it had rebooted because of it)
+            if client() != nil { bootGuard.clearAttempt() }
+            throw error
+        }
         if m.statusEnum != .ok { bootGuard.clearAttempt() }   // clean refusal: the watch is still on
         switch m.statusEnum {
         case .ok:

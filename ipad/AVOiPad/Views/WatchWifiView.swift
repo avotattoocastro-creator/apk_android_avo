@@ -64,8 +64,14 @@ private struct WatchWifiConnectCard: View {
                     if w.connecting { ProgressView().tint(Avo.red) }
                     Spacer(minLength: 0)
                     if w.connected {
-                        AvoPill(text: w.supportsWifi ? "WI-FI DISPONIBLE" : "SOLO BLUETOOTH", color: w.supportsWifi ? Avo.ok : Avo.warn)
+                        AvoPill(text: !w.supportsWifi ? "SOLO BLUETOOTH" : (w.wifiFailure != nil ? "WI-FI FALLÓ" : "WI-FI DISPONIBLE"),
+                                color: w.supportsWifi && w.wifiFailure == nil ? Avo.ok : Avo.warn)
                     }
+                }
+                if w.connected && w.supportsWifi, let f = w.wifiFailure {
+                    Label("Wi-Fi: " + f, systemImage: "wifi.exclamationmark")
+                        .font(.footnote).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("wifi.failure")
                 }
                 if w.connected && !w.supportsWifi && !w.unsupportedText.isEmpty {
                     Label(w.unsupportedText, systemImage: "exclamationmark.triangle")
