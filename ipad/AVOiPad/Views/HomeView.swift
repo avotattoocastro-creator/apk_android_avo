@@ -11,16 +11,30 @@ struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 980
-            ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    hero(wide: wide)
-                    metrics(columns: wide ? 5 : 3)
-                    // «Dashboard» (trainer's sketch 08/11/2026): only the banner, quick actions and the figures; the
-                    // recent sessions, watch, horses, sensors, imports and system cards were removed
-                    // (the trainings are in «Entrenamientos», the watch in «Reloj Wi-Fi», the horses in «Cuadra»)
+            // «Dashboard» (trainer's sketches 08/11/2026): only the banner, quick actions and the figures; the recent
+            // sessions, watch, horses, sensors, imports and system cards were removed (the trainings are in
+            // «Entrenamientos», the watch in «Reloj Wi-Fi», the horses in «Cuadra»). Landscape: no scroll, so nothing is
+            // ever cut at the top: banner + figures on the left, the actions down the whole right side.
+            if wide {
+                HStack(alignment: .top, spacing: 14) {
+                    VStack(alignment: .leading, spacing: 14) {
+                        heroBanner.frame(maxHeight: .infinity)
+                        metrics(columns: geo.size.width >= 1250 ? 5 : 3)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    actionsCard(fill: true).frame(width: 340).frame(maxHeight: .infinity)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
+            } else {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 14) {
+                        hero(wide: false)
+                        metrics(columns: 3)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
+                }
             }
         }
         .background(Avo.bg)
@@ -79,15 +93,21 @@ struct HomeView: View {
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
 
-    private var actionsCard: some View {
-        VStack(spacing: 2) {
+    private var actionsCard: some View { actionsCard(fill: false) }
+
+    /// fill = the card takes the whole height (landscape Dashboard) and the actions spread over it.
+    private func actionsCard(fill: Bool) -> some View {
+        VStack(spacing: fill ? 10 : 2) {
             homeAction("folder", "Abrir entrenamiento", "Archivos .avo (Android) / .avr (RAW)") { app.showImporter = true }
             homeAction("clock.arrow.circlepath", "Importar carpeta", "Varias sesiones a la vez, con detección de duplicados") { pickingFolder = true }
             homeAction("server.rack", "Servidor AVO", "Panel web y descarga HTTPS de .avo") { app.page = .server }
             homeAction("square.split.2x1", "Comparar entrenamientos", "Recorridos y curvas superpuestas") { app.page = .compare }
             homeAction("doc.richtext", "Informes", "PDF, HTML, CSV, GPX y JSON") { app.page = .reports }
+            if fill { Spacer(minLength: 0) }
         }
         .padding(8)
+        .padding(.top, fill ? 8 : 0)
+        .frame(maxHeight: fill ? .infinity : nil, alignment: .top)
         .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
