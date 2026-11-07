@@ -205,6 +205,21 @@ private struct MapCursorOverlay: View {
                         stat("Aceleración", app.cursorAccel, "m/s²")
                     }
                 }
+                if let ph = phase {
+                    Divider().overlay(Avo.line)
+                    HStack(spacing: 6) {
+                        RoundedRectangle(cornerRadius: 2).fill(ph.color).frame(width: 10, height: 10)
+                        Text("EN " + ph.name.uppercased()).font(.system(size: 9.5, weight: .semibold)).tracking(0.5)
+                            .foregroundStyle(Avo.textDim)
+                    }
+                    Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 6) {
+                        GridRow {
+                            stat("Tiempo fase", ph.elapsed, "")
+                            stat("Distancia fase", ph.distance, "m")
+                        }
+                    }
+                    Text("de " + ph.total).font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
+                }
             } else {
                 Text("Toca el recorrido o la línea de tiempo").font(.caption).foregroundStyle(Avo.textDim)
             }
@@ -214,6 +229,31 @@ private struct MapCursorOverlay: View {
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.red.opacity(0.5), lineWidth: 1))
         .allowsHitTesting(false)
         .accessibilityIdentifier("map.cursorData")
+    }
+
+    /// Phase of the session (engine «trabajo_pista», with the manual corrections) that contains the cursor, with the
+    /// time and distance since the start of that phase.
+    private var phase: (name: String, color: Color, elapsed: String, distance: String, total: String)? {
+        guard let s = app.selected, let tw = s.engine?.trackWork, tw.present, app.cursorTime.isFinite else { return nil }
+        let tl: SessionTimeline = s.timeline
+        let i: Int = app.cursorIndex
+        guard i >= 0, i < tl.distance.count else { return nil }
+        let off: Double = s.engineOffsetS
+        let te: Double = app.cursorTime + off
+        let list: [(String, Color, TrackWorkPhase)] = [("Calentamiento", CorrectionsModel.warmupColor, tw.warmup),
+                                                        ("Trabajo", CorrectionsModel.workColor, tw.work),
+                                                        ("Enfriamiento", CorrectionsModel.cooldownColor, tw.cooldown)]
+        for (name, color, p) in list {
+            guard p.present, p.t0.isFinite, p.t1.isFinite, te >= p.t0, te <= p.t1 else { continue }
+            let i0: Int = tl.indexAt(p.t0 - off)
+            guard i0 >= 0, i0 < tl.distance.count else { return nil }
+            let dm: Double = tl.distance[i] - tl.distance[i0]
+            let total: String = TimeText.clock(p.durationS.isFinite ? p.durationS : p.t1 - p.t0)
+                + (p.distanceM.isFinite ? " · " + DotNetFormat.custom(p.distanceM, "0", spanish: true) + " m" : "")
+            return (name, color, TimeText.clock(max(0, te - p.t0)),
+                    dm.isFinite ? DotNetFormat.custom(max(0, dm), "0", spanish: true) : "—", total)
+        }
+        return nil
     }
 
     private func stat(_ label: String, _ value: String, _ unit: String) -> some View {
