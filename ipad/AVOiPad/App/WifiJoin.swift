@@ -127,7 +127,7 @@ final class HotspotWifiConnector: WifiConnector {
         }
         log("wifi: sin respuesta HTTP del reloj en \(creds.ssid): \(lastError)")
         lastFailure = "el iPad se unió a \(creds.ssid) pero el reloj no respondió"
-            + (ns.isEmpty ? "" : " (\(lastError))")
+            + (lastError.isEmpty ? "" : " (\(lastError))")
             + ". Revisa Ajustes › Privacidad › Red local › AVO"
         WifiJoin.leave(ssid: creds.ssid)
         return nil
