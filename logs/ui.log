@@ -1,0 +1,2209 @@
+Command line invocation:
+    /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project AVOiPad.xcodeproj -scheme AVOiPad "-only-testing:AVOiPadUITests" -destination "platform=iOS Simulator,name=iPad Pro 13-inch (M4)" -derivedDataPath ../dd -resultBundlePath ../ui.xcresult
+
+2026-11-07 10:06:14.154 xcodebuild[12301:40124] warning:  The file reference for "../firmware/back/V3_8_0/lib/avo_core/src" is a member of multiple groups ("avo_core" and "AvoCoreFirmware"); this indicates a malformed project.  Only the membership in one of the groups will be preserved (but membership in targets will be unaffected).  If you want a reference to the same file in more than one group, please add another reference to the same path.
+2026-11-07 10:06:14.155 xcodebuild[12301:40124] warning:  The file reference for "../equine-intelligence/src" is a member of multiple groups ("equine-intelligence" and "EquineEngine"); this indicates a malformed project.  Only the membership in one of the groups will be preserved (but membership in targets will be unaffected).  If you want a reference to the same file in more than one group, please add another reference to the same path.
+Writing result bundle at path:
+	/Users/runner/work/apk_android_avo/apk_android_avo/ui.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:04A9C222-F4D9-4FD4-98BE-4054EEE6F66B, OS:26.2, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:04A9C222-F4D9-4FD4-98BE-4054EEE6F66B, OS:26.2, name:iPad Pro 13-inch (M4) }
+2026-11-07 10:07:47.843849+0000 AVOiPadUITests-Runner[13808:45619] [UIKit App Config] `UIScene` lifecycle will soon be required. Failure to adopt will result in an assert in the future.
+2026-11-07 10:07:47.850323+0000 AVOiPadUITests-Runner[13808:45619] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'All tests' started at 2026-11-07 10:07:55.142.
+Test Suite 'AVOiPadUITests.xctest' started at 2026-11-07 10:07:55.142.
+Test Suite 'ScreenshotTests' started at 2026-11-07 10:07:55.142.
+Test Case '-[AVOiPadUITests.ScreenshotTests testCaptureEveryPageLandscape]' started.
+    t =     0.00s Start Test at 2026-11-07 10:07:55.143
+    t =     0.72s Set Up
+    t =     0.73s Open org.avoperformance.horse.ipad
+    t =     0.73s     Launch org.avoperformance.horse.ipad
+    t =     8.19s         Setting up automation session
+    t =     9.70s         Wait for org.avoperformance.horse.ipad to idle
+    t =    12.01s Setting device orientation to Landscape Left
+    t =    12.06s     Device orientation changed to Landscape Left
+    t =    12.27s     Interface orientation changed to Landscape Right
+    t =    13.86s     Wait for org.avoperformance.horse.ipad to idle
+    t =    13.88s     Wait for com.apple.springboard to idle
+    t =    14.93s Waiting 240.0s for "capture.ready" Other to exist
+    t =    15.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    15.94s         Checking existence of `"capture.ready" Other`
+    t =    16.20s         Capturing element debug description
+    t =    16.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    16.94s         Checking existence of `"capture.ready" Other`
+    t =    17.14s         Capturing element debug description
+    t =    18.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    18.02s         Checking existence of `"capture.ready" Other`
+    t =    18.06s         Capturing element debug description
+    t =    18.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    18.96s         Checking existence of `"capture.ready" Other`
+    t =    18.98s         Capturing element debug description
+    t =    20.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    20.02s         Checking existence of `"capture.ready" Other`
+    t =    20.06s         Capturing element debug description
+    t =    21.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    21.02s         Checking existence of `"capture.ready" Other`
+    t =    24.60s         Capturing element debug description
+    t =    24.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    24.95s         Checking existence of `"capture.ready" Other`
+    t =    26.67s         Capturing element debug description
+    t =    27.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    27.01s         Checking existence of `"capture.ready" Other`
+    t =    28.90s         Capturing element debug description
+    t =    29.08s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    29.08s         Checking existence of `"capture.ready" Other`
+    t =    35.90s         Capturing element debug description
+    t =    36.18s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    36.19s         Checking existence of `"capture.ready" Other`
+    t =    39.43s         Capturing element debug description
+    t =    40.16s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    40.17s         Checking existence of `"capture.ready" Other`
+    t =    57.08s         Capturing element debug description
+    t =    57.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    57.94s         Checking existence of `"capture.ready" Other`
+    t =    58.88s         Capturing element debug description
+    t =    58.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    58.99s         Checking existence of `"capture.ready" Other`
+    t =    59.61s         Capturing element debug description
+    t =    60.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    60.03s         Checking existence of `"capture.ready" Other`
+    t =    60.59s         Capturing element debug description
+    t =    61.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    61.01s         Checking existence of `"capture.ready" Other`
+    t =    61.85s         Capturing element debug description
+    t =    61.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    61.98s         Checking existence of `"capture.ready" Other`
+    t =    62.62s         Capturing element debug description
+    t =    62.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    62.94s         Checking existence of `"capture.ready" Other`
+    t =    63.39s         Capturing element debug description
+    t =    64.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    64.01s         Checking existence of `"capture.ready" Other`
+    t =    64.42s         Capturing element debug description
+    t =    65.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    65.01s         Checking existence of `"capture.ready" Other`
+    t =    65.97s         Capturing element debug description
+    t =    67.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    67.02s         Checking existence of `"capture.ready" Other`
+    t =    67.54s         Capturing element debug description
+    t =    67.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    67.95s         Checking existence of `"capture.ready" Other`
+    t =    68.48s         Capturing element debug description
+    t =    68.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    68.98s         Checking existence of `"capture.ready" Other`
+    t =    69.39s         Capturing element debug description
+    t =    69.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    69.96s         Checking existence of `"capture.ready" Other`
+    t =    70.55s         Capturing element debug description
+    t =    70.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    70.96s         Checking existence of `"capture.ready" Other`
+    t =    71.36s         Capturing element debug description
+    t =    71.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    71.96s         Checking existence of `"capture.ready" Other`
+    t =    72.49s         Capturing element debug description
+    t =    72.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    72.96s         Checking existence of `"capture.ready" Other`
+    t =    73.41s         Capturing element debug description
+    t =    73.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    73.94s         Checking existence of `"capture.ready" Other`
+    t =    74.22s         Capturing element debug description
+    t =    74.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    74.96s         Checking existence of `"capture.ready" Other`
+    t =    75.32s         Capturing element debug description
+    t =    75.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    75.95s         Checking existence of `"capture.ready" Other`
+    t =    76.29s         Capturing element debug description
+    t =    76.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    76.96s         Checking existence of `"capture.ready" Other`
+    t =    77.31s         Capturing element debug description
+    t =    77.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    77.94s         Checking existence of `"capture.ready" Other`
+    t =    78.31s         Capturing element debug description
+    t =    78.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    78.94s         Checking existence of `"capture.ready" Other`
+    t =    79.22s         Capturing element debug description
+    t =    79.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    79.96s         Checking existence of `"capture.ready" Other`
+    t =    80.40s         Capturing element debug description
+    t =    80.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    80.95s         Checking existence of `"capture.ready" Other`
+    t =    81.37s         Capturing element debug description
+    t =    81.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    81.98s         Checking existence of `"capture.ready" Other`
+    t =    82.35s         Capturing element debug description
+    t =    82.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    82.95s         Checking existence of `"capture.ready" Other`
+    t =    83.23s         Capturing element debug description
+    t =    83.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    83.94s         Checking existence of `"capture.ready" Other`
+    t =    84.28s         Capturing element debug description
+    t =    84.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    84.96s         Checking existence of `"capture.ready" Other`
+    t =    85.33s         Capturing element debug description
+    t =    85.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    85.96s         Checking existence of `"capture.ready" Other`
+    t =    86.30s         Capturing element debug description
+    t =    86.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    86.94s         Checking existence of `"capture.ready" Other`
+    t =    87.27s         Capturing element debug description
+    t =    87.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    87.96s         Checking existence of `"capture.ready" Other`
+    t =    88.28s         Capturing element debug description
+    t =    88.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    88.99s         Checking existence of `"capture.ready" Other`
+    t =    89.40s         Capturing element debug description
+    t =    89.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    89.94s         Checking existence of `"capture.ready" Other`
+    t =    90.33s         Capturing element debug description
+    t =    90.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    90.96s         Checking existence of `"capture.ready" Other`
+    t =    91.30s         Capturing element debug description
+    t =    91.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    91.96s         Checking existence of `"capture.ready" Other`
+    t =    92.29s         Capturing element debug description
+    t =    92.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    92.96s         Checking existence of `"capture.ready" Other`
+    t =    93.22s         Capturing element debug description
+    t =    93.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    93.94s         Checking existence of `"capture.ready" Other`
+    t =    94.37s         Capturing element debug description
+    t =    94.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    94.98s         Checking existence of `"capture.ready" Other`
+    t =    95.33s         Capturing element debug description
+    t =    95.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    95.96s         Checking existence of `"capture.ready" Other`
+    t =    96.36s         Capturing element debug description
+    t =    96.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    96.96s         Checking existence of `"capture.ready" Other`
+    t =    97.25s         Capturing element debug description
+    t =    97.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    97.98s         Checking existence of `"capture.ready" Other`
+    t =    98.32s         Capturing element debug description
+    t =    98.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    98.95s         Checking existence of `"capture.ready" Other`
+    t =    99.31s         Capturing element debug description
+    t =    99.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    99.95s         Checking existence of `"capture.ready" Other`
+    t =   100.31s         Capturing element debug description
+    t =   100.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   100.94s         Checking existence of `"capture.ready" Other`
+    t =   101.29s         Capturing element debug description
+    t =   101.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   101.94s         Checking existence of `"capture.ready" Other`
+    t =   102.24s         Capturing element debug description
+    t =   102.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   102.97s         Checking existence of `"capture.ready" Other`
+    t =   103.33s         Capturing element debug description
+    t =   103.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   103.96s         Checking existence of `"capture.ready" Other`
+    t =   104.31s         Capturing element debug description
+    t =   104.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   104.96s         Checking existence of `"capture.ready" Other`
+    t =   105.34s         Capturing element debug description
+    t =   105.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   105.96s         Checking existence of `"capture.ready" Other`
+    t =   106.39s         Capturing element debug description
+    t =   107.00s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   107.00s         Checking existence of `"capture.ready" Other`
+    t =   107.64s         Capturing element debug description
+    t =   107.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   107.96s         Checking existence of `"capture.ready" Other`
+    t =   108.37s         Capturing element debug description
+    t =   108.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   108.96s         Checking existence of `"capture.ready" Other`
+    t =   109.98s         Capturing element debug description
+    t =   110.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   110.98s         Checking existence of `"capture.ready" Other`
+    t =   112.11s         Capturing element debug description
+    t =   113.36s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   113.36s         Checking existence of `"capture.ready" Other`
+    t =   114.44s         Capturing element debug description
+    t =   114.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   114.94s         Checking existence of `"capture.ready" Other`
+    t =   115.76s         Capturing element debug description
+    t =   115.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   115.96s         Checking existence of `"capture.ready" Other`
+    t =   116.03s         Capturing element debug description
+    t =   116.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   116.96s         Checking existence of `"capture.ready" Other`
+    t =   117.01s         Capturing element debug description
+    t =   117.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   117.94s         Checking existence of `"capture.ready" Other`
+    t =   117.97s         Capturing element debug description
+    t =   118.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   118.98s         Checking existence of `"capture.ready" Other`
+    t =   119.01s         Capturing element debug description
+    t =   119.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   119.96s         Checking existence of `"capture.ready" Other`
+    t =   120.00s         Capturing element debug description
+    t =   120.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   120.94s         Checking existence of `"capture.ready" Other`
+    t =   120.98s         Capturing element debug description
+    t =   122.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   122.02s         Checking existence of `"capture.ready" Other`
+    t =   122.06s         Capturing element debug description
+    t =   122.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   122.95s         Checking existence of `"capture.ready" Other`
+    t =   122.98s         Capturing element debug description
+    t =   123.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   123.94s         Checking existence of `"capture.ready" Other`
+    t =   123.99s         Capturing element debug description
+    t =   124.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   124.95s         Checking existence of `"capture.ready" Other`
+    t =   125.15s         Capturing element debug description
+    t =   125.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   125.96s         Checking existence of `"capture.ready" Other`
+    t =   126.00s         Capturing element debug description
+    t =   126.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   126.96s         Checking existence of `"capture.ready" Other`
+    t =   126.98s         Capturing element debug description
+    t =   128.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   128.02s         Checking existence of `"capture.ready" Other`
+    t =   128.04s         Capturing element debug description
+    t =   128.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   128.98s         Checking existence of `"capture.ready" Other`
+    t =   129.02s         Capturing element debug description
+    t =   129.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   129.97s         Checking existence of `"capture.ready" Other`
+    t =   130.04s         Capturing element debug description
+    t =   131.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   131.03s         Checking existence of `"capture.ready" Other`
+    t =   131.06s         Capturing element debug description
+    t =   132.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   132.03s         Checking existence of `"capture.ready" Other`
+    t =   132.06s         Capturing element debug description
+    t =   132.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   132.96s         Checking existence of `"capture.ready" Other`
+    t =   133.03s         Capturing element debug description
+    t =   133.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   133.94s         Checking existence of `"capture.ready" Other`
+    t =   133.97s         Capturing element debug description
+    t =   134.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   134.99s         Checking existence of `"capture.ready" Other`
+    t =   135.04s         Capturing element debug description
+    t =   135.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   135.95s         Checking existence of `"capture.ready" Other`
+    t =   136.01s         Capturing element debug description
+    t =   136.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   136.94s         Checking existence of `"capture.ready" Other`
+    t =   136.98s         Capturing element debug description
+    t =   137.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   137.98s         Checking existence of `"capture.ready" Other`
+    t =   138.02s         Capturing element debug description
+    t =   138.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   138.96s         Checking existence of `"capture.ready" Other`
+    t =   138.99s         Capturing element debug description
+    t =   139.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   139.94s         Checking existence of `"capture.ready" Other`
+    t =   139.98s         Capturing element debug description
+    t =   140.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   140.94s         Checking existence of `"capture.ready" Other`
+    t =   141.01s         Capturing element debug description
+    t =   141.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   141.96s         Checking existence of `"capture.ready" Other`
+    t =   142.03s         Capturing element debug description
+    t =   142.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   142.98s         Checking existence of `"capture.ready" Other`
+    t =   143.03s         Capturing element debug description
+    t =   143.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   143.98s         Checking existence of `"capture.ready" Other`
+    t =   144.03s         Capturing element debug description
+    t =   144.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   144.98s         Checking existence of `"capture.ready" Other`
+    t =   145.00s         Capturing element debug description
+    t =   145.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   145.98s         Checking existence of `"capture.ready" Other`
+    t =   146.03s         Capturing element debug description
+    t =   146.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   146.96s         Checking existence of `"capture.ready" Other`
+    t =   147.00s         Capturing element debug description
+    t =   147.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   147.94s         Checking existence of `"capture.ready" Other`
+    t =   147.99s         Capturing element debug description
+    t =   148.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   148.94s         Checking existence of `"capture.ready" Other`
+    t =   149.00s         Capturing element debug description
+    t =   149.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   149.95s         Checking existence of `"capture.ready" Other`
+    t =   150.04s         Capturing element debug description
+    t =   150.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   150.96s         Checking existence of `"capture.ready" Other`
+    t =   151.05s         Capturing element debug description
+    t =   151.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   151.96s         Checking existence of `"capture.ready" Other`
+    t =   152.00s         Capturing element debug description
+    t =   152.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   152.94s         Checking existence of `"capture.ready" Other`
+    t =   153.07s         Capturing element debug description
+    t =   153.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   153.98s         Checking existence of `"capture.ready" Other`
+    t =   154.02s         Capturing element debug description
+    t =   154.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   154.96s         Checking existence of `"capture.ready" Other`
+    t =   155.00s         Capturing element debug description
+    t =   155.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   155.94s         Checking existence of `"capture.ready" Other`
+    t =   156.01s         Capturing element debug description
+    t =   156.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   156.96s         Checking existence of `"capture.ready" Other`
+    t =   157.01s         Capturing element debug description
+    t =   157.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   157.96s         Checking existence of `"capture.ready" Other`
+    t =   158.01s         Capturing element debug description
+    t =   158.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   158.95s         Checking existence of `"capture.ready" Other`
+    t =   158.98s         Capturing element debug description
+    t =   160.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   160.01s         Checking existence of `"capture.ready" Other`
+    t =   160.06s         Capturing element debug description
+    t =   160.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   160.98s         Checking existence of `"capture.ready" Other`
+    t =   161.03s         Capturing element debug description
+    t =   161.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   161.97s         Checking existence of `"capture.ready" Other`
+    t =   162.00s         Capturing element debug description
+    t =   162.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   162.94s         Checking existence of `"capture.ready" Other`
+    t =   162.97s         Capturing element debug description
+    t =   163.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   163.95s         Checking existence of `"capture.ready" Other`
+    t =   164.04s         Capturing element debug description
+    t =   164.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   164.96s         Checking existence of `"capture.ready" Other`
+    t =   165.00s         Capturing element debug description
+    t =   165.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   165.94s         Checking existence of `"capture.ready" Other`
+    t =   165.97s         Capturing element debug description
+    t =   166.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   166.98s         Checking existence of `"capture.ready" Other`
+    t =   167.03s         Capturing element debug description
+    t =   167.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   167.96s         Checking existence of `"capture.ready" Other`
+    t =   167.99s         Capturing element debug description
+    t =   168.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   168.94s         Checking existence of `"capture.ready" Other`
+    t =   168.98s         Capturing element debug description
+    t =   169.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   169.94s         Checking existence of `"capture.ready" Other`
+    t =   169.98s         Capturing element debug description
+    t =   170.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   170.96s         Checking existence of `"capture.ready" Other`
+    t =   171.01s         Capturing element debug description
+    t =   171.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   171.96s         Checking existence of `"capture.ready" Other`
+    t =   171.99s         Capturing element debug description
+    t =   172.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   172.96s         Checking existence of `"capture.ready" Other`
+    t =   173.00s         Capturing element debug description
+    t =   173.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   173.94s         Checking existence of `"capture.ready" Other`
+    t =   173.97s         Capturing element debug description
+    t =   175.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   175.02s         Checking existence of `"capture.ready" Other`
+    t =   175.05s         Capturing element debug description
+    t =   175.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   175.98s         Checking existence of `"capture.ready" Other`
+    t =   176.01s         Capturing element debug description
+    t =   176.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   176.96s         Checking existence of `"capture.ready" Other`
+    t =   176.99s         Capturing element debug description
+    t =   177.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   177.94s         Checking existence of `"capture.ready" Other`
+    t =   178.00s         Capturing element debug description
+    t =   178.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   178.94s         Checking existence of `"capture.ready" Other`
+    t =   178.97s         Capturing element debug description
+    t =   179.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   179.96s         Checking existence of `"capture.ready" Other`
+    t =   180.00s         Capturing element debug description
+    t =   180.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   180.94s         Checking existence of `"capture.ready" Other`
+    t =   180.99s         Capturing element debug description
+    t =   181.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   181.96s         Checking existence of `"capture.ready" Other`
+    t =   181.98s         Capturing element debug description
+    t =   182.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   182.98s         Checking existence of `"capture.ready" Other`
+    t =   183.02s         Capturing element debug description
+    t =   183.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   183.96s         Checking existence of `"capture.ready" Other`
+    t =   183.99s         Capturing element debug description
+    t =   184.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   184.99s         Checking existence of `"capture.ready" Other`
+    t =   185.15s         Capturing element debug description
+    t =   185.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   185.98s         Checking existence of `"capture.ready" Other`
+    t =   186.01s         Capturing element debug description
+    t =   186.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   186.94s         Checking existence of `"capture.ready" Other`
+    t =   187.01s         Capturing element debug description
+    t =   187.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   187.94s         Checking existence of `"capture.ready" Other`
+    t =   187.97s         Capturing element debug description
+    t =   189.00s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   189.00s         Checking existence of `"capture.ready" Other`
+    t =   189.06s         Capturing element debug description
+    t =   189.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   189.96s         Checking existence of `"capture.ready" Other`
+    t =   189.99s         Capturing element debug description
+    t =   190.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   190.95s         Checking existence of `"capture.ready" Other`
+    t =   190.97s         Capturing element debug description
+    t =   192.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   192.02s         Checking existence of `"capture.ready" Other`
+    t =   192.05s         Capturing element debug description
+    t =   192.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   192.96s         Checking existence of `"capture.ready" Other`
+    t =   192.98s         Capturing element debug description
+    t =   193.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   193.96s         Checking existence of `"capture.ready" Other`
+    t =   193.98s         Capturing element debug description
+    t =   195.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   195.03s         Checking existence of `"capture.ready" Other`
+    t =   195.10s         Capturing element debug description
+    t =   195.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   195.95s         Checking existence of `"capture.ready" Other`
+    t =   195.99s         Capturing element debug description
+    t =   197.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   197.03s         Checking existence of `"capture.ready" Other`
+    t =   197.08s         Capturing element debug description
+    t =   197.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   197.98s         Checking existence of `"capture.ready" Other`
+    t =   198.02s         Capturing element debug description
+    t =   198.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   198.96s         Checking existence of `"capture.ready" Other`
+    t =   199.02s         Capturing element debug description
+    t =   199.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   199.94s         Checking existence of `"capture.ready" Other`
+    t =   200.00s         Capturing element debug description
+    t =   200.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   200.95s         Checking existence of `"capture.ready" Other`
+    t =   201.02s         Capturing element debug description
+    t =   201.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   201.96s         Checking existence of `"capture.ready" Other`
+    t =   201.99s         Capturing element debug description
+    t =   202.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   202.94s         Checking existence of `"capture.ready" Other`
+    t =   202.99s         Capturing element debug description
+    t =   203.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   203.94s         Checking existence of `"capture.ready" Other`
+    t =   204.01s         Capturing element debug description
+    t =   204.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   204.94s         Checking existence of `"capture.ready" Other`
+    t =   204.98s         Capturing element debug description
+    t =   205.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   205.94s         Checking existence of `"capture.ready" Other`
+    t =   205.99s         Capturing element debug description
+    t =   206.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   206.94s         Checking existence of `"capture.ready" Other`
+    t =   206.98s         Capturing element debug description
+    t =   208.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   208.02s         Checking existence of `"capture.ready" Other`
+    t =   208.09s         Capturing element debug description
+    t =   208.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   208.96s         Checking existence of `"capture.ready" Other`
+    t =   209.06s         Capturing element debug description
+    t =   209.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   209.96s         Checking existence of `"capture.ready" Other`
+    t =   210.00s         Capturing element debug description
+    t =   210.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   210.95s         Checking existence of `"capture.ready" Other`
+    t =   211.00s         Capturing element debug description
+    t =   211.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   211.95s         Checking existence of `"capture.ready" Other`
+    t =   211.98s         Capturing element debug description
+    t =   212.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   212.94s         Checking existence of `"capture.ready" Other`
+    t =   212.98s         Capturing element debug description
+    t =   213.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   213.94s         Checking existence of `"capture.ready" Other`
+    t =   214.00s         Capturing element debug description
+    t =   214.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   214.96s         Checking existence of `"capture.ready" Other`
+    t =   215.01s         Capturing element debug description
+    t =   215.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   215.96s         Checking existence of `"capture.ready" Other`
+    t =   215.98s         Capturing element debug description
+    t =   216.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   216.94s         Checking existence of `"capture.ready" Other`
+    t =   216.96s         Capturing element debug description
+    t =   217.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   217.98s         Checking existence of `"capture.ready" Other`
+    t =   218.01s         Capturing element debug description
+    t =   218.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   218.94s         Checking existence of `"capture.ready" Other`
+    t =   218.97s         Capturing element debug description
+    t =   219.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   219.94s         Checking existence of `"capture.ready" Other`
+    t =   219.99s         Capturing element debug description
+    t =   221.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   221.03s         Checking existence of `"capture.ready" Other`
+    t =   221.07s         Capturing element debug description
+    t =   221.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   221.96s         Checking existence of `"capture.ready" Other`
+    t =   221.99s         Capturing element debug description
+    t =   222.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   222.94s         Checking existence of `"capture.ready" Other`
+    t =   222.97s         Capturing element debug description
+    t =   224.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   224.03s         Checking existence of `"capture.ready" Other`
+    t =   224.05s         Capturing element debug description
+    t =   224.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   224.98s         Checking existence of `"capture.ready" Other`
+    t =   225.04s         Capturing element debug description
+    t =   225.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   225.99s         Checking existence of `"capture.ready" Other`
+    t =   226.03s         Capturing element debug description
+    t =   226.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   226.96s         Checking existence of `"capture.ready" Other`
+    t =   226.99s         Capturing element debug description
+    t =   227.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   227.96s         Checking existence of `"capture.ready" Other`
+    t =   227.98s         Capturing element debug description
+    t =   228.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   228.96s         Checking existence of `"capture.ready" Other`
+    t =   228.98s         Capturing element debug description
+    t =   230.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   230.02s         Checking existence of `"capture.ready" Other`
+    t =   230.05s         Capturing element debug description
+    t =   230.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   230.96s         Checking existence of `"capture.ready" Other`
+    t =   231.00s         Capturing element debug description
+    t =   231.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   231.94s         Checking existence of `"capture.ready" Other`
+    t =   231.98s         Capturing element debug description
+    t =   232.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   232.98s         Checking existence of `"capture.ready" Other`
+    t =   233.02s         Capturing element debug description
+    t =   233.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   233.98s         Checking existence of `"capture.ready" Other`
+    t =   234.01s         Capturing element debug description
+    t =   234.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   234.94s         Checking existence of `"capture.ready" Other`
+    t =   234.98s         Capturing element debug description
+    t =   235.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   235.96s         Checking existence of `"capture.ready" Other`
+    t =   236.00s         Capturing element debug description
+    t =   236.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   236.94s         Checking existence of `"capture.ready" Other`
+    t =   237.01s         Capturing element debug description
+    t =   237.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   237.99s         Checking existence of `"capture.ready" Other`
+    t =   238.04s         Capturing element debug description
+    t =   238.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   238.99s         Checking existence of `"capture.ready" Other`
+    t =   239.03s         Capturing element debug description
+    t =   239.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   239.96s         Checking existence of `"capture.ready" Other`
+    t =   240.10s         Capturing element debug description
+    t =   241.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   241.03s         Checking existence of `"capture.ready" Other`
+    t =   241.07s         Capturing element debug description
+    t =   241.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   241.99s         Checking existence of `"capture.ready" Other`
+    t =   242.08s         Capturing element debug description
+    t =   242.99s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   243.01s         Checking existence of `"capture.ready" Other`
+    t =   243.09s         Capturing element debug description
+    t =   244.02s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   244.02s         Checking existence of `"capture.ready" Other`
+    t =   244.09s         Capturing element debug description
+    t =   244.97s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   244.97s         Checking existence of `"capture.ready" Other`
+    t =   245.23s         Capturing element debug description
+    t =   245.95s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   245.96s         Checking existence of `"capture.ready" Other`
+    t =   246.08s         Capturing element debug description
+    t =   247.03s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   247.03s         Checking existence of `"capture.ready" Other`
+    t =   247.12s         Capturing element debug description
+    t =   247.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   247.96s         Checking existence of `"capture.ready" Other`
+    t =   248.01s         Capturing element debug description
+    t =   248.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   248.96s         Checking existence of `"capture.ready" Other`
+    t =   250.77s         Capturing element debug description
+    t =   250.96s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   250.96s         Checking existence of `"capture.ready" Other`
+    t =   251.28s         Capturing element debug description
+    t =   251.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   251.98s         Checking existence of `"capture.ready" Other`
+    t =   252.01s         Capturing element debug description
+    t =   252.94s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   252.94s         Checking existence of `"capture.ready" Other`
+    t =   252.97s         Capturing element debug description
+    t =   254.01s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   254.01s         Checking existence of `"capture.ready" Other`
+    t =   254.04s         Capturing element debug description
+    t =   254.98s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   254.98s         Checking existence of `"capture.ready" Other`
+    t =   255.06s         Capturing element debug description
+    t =   255.06s     Checking existence of `"capture.ready" Other`
+    t =   255.11s Collecting debug information to assist test failure triage
+    t =   255.12s     Requesting snapshot of accessibility hierarchy for app with pid 14663
+    t =   255.21s Waiting 5.0s for "capture.ready" StaticText to exist
+    t =   256.25s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" StaticText`
+    t =   256.25s         Checking existence of `"capture.ready" StaticText`
+    t =   256.29s Waiting 4.0s for "nav.Home" Button to exist
+    t =   257.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   257.29s         Checking existence of `"nav.Home" Button`
+    t =   257.44s         Capturing element debug description
+    t =   258.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   258.29s         Checking existence of `"nav.Home" Button`
+    t =   258.36s         Capturing element debug description
+    t =   259.30s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   259.30s         Checking existence of `"nav.Home" Button`
+    t =   259.35s         Capturing element debug description
+    t =   260.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   260.29s         Checking existence of `"nav.Home" Button`
+    t =   260.34s         Capturing element debug description
+    t =   260.34s     Checking existence of `"nav.Home" Button`
+    t =   260.37s Collecting debug information to assist test failure triage
+    t =   260.37s     Requesting snapshot of accessibility hierarchy for app with pid 14663
+    t =   260.42s Checking existence of `"start.menu" Button`
+    t =   260.46s Tap "start.menu" Button
+    t =   260.46s     Wait for org.avoperformance.horse.ipad to idle
+    t =   260.46s     Find the "start.menu" Button
+    t =   260.58s     Check for interrupting elements affecting "start.menu" Button
+    t =   260.78s         Wait for com.apple.springboard to idle
+    t =   261.07s     Synthesize event
+    t =   261.78s     Wait for org.avoperformance.horse.ipad to idle
+    t =   262.24s Waiting 5.0s for "nav.Home" Button to exist
+    t =   263.30s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   263.31s         Checking existence of `"nav.Home" Button`
+    t =   263.50s Tap "nav.Home" Button
+    t =   263.50s     Wait for org.avoperformance.horse.ipad to idle
+    t =   263.51s     Find the "nav.Home" Button
+    t =   263.62s     Check for interrupting elements affecting "nav.Home" Button
+    t =   263.71s         Wait for com.apple.springboard to idle
+    t =   263.76s     Synthesize event
+    t =   264.08s     Wait for org.avoperformance.horse.ipad to idle
+    t =   267.26s Added attachment named '01_Home_horizontal'
+    t =   267.28s Waiting 4.0s for "nav.Sessions" Button to exist
+    t =   268.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   268.29s         Checking existence of `"nav.Sessions" Button`
+    t =   268.34s         Capturing element debug description
+    t =   269.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   269.29s         Checking existence of `"nav.Sessions" Button`
+    t =   269.33s         Capturing element debug description
+    t =   270.28s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   270.28s         Checking existence of `"nav.Sessions" Button`
+    t =   270.31s         Capturing element debug description
+    t =   271.28s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   271.28s         Checking existence of `"nav.Sessions" Button`
+    t =   271.32s         Capturing element debug description
+    t =   271.32s     Checking existence of `"nav.Sessions" Button`
+    t =   271.36s Collecting debug information to assist test failure triage
+    t =   271.36s     Requesting snapshot of accessibility hierarchy for app with pid 14663
+    t =   271.41s Checking existence of `"start.menu" Button`
+    t =   271.44s Tap "start.menu" Button
+    t =   271.44s     Wait for org.avoperformance.horse.ipad to idle
+    t =   271.45s     Find the "start.menu" Button
+    t =   271.49s     Check for interrupting elements affecting "start.menu" Button
+    t =   271.60s         Wait for com.apple.springboard to idle
+    t =   271.66s     Synthesize event
+    t =   271.98s     Wait for org.avoperformance.horse.ipad to idle
+    t =   272.44s Waiting 5.0s for "nav.Sessions" Button to exist
+    t =   273.49s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   273.49s         Checking existence of `"nav.Sessions" Button`
+    t =   273.63s Tap "nav.Sessions" Button
+    t =   273.63s     Wait for org.avoperformance.horse.ipad to idle
+    t =   273.64s     Find the "nav.Sessions" Button
+    t =   273.72s     Check for interrupting elements affecting "nav.Sessions" Button
+    t =   273.84s         Wait for com.apple.springboard to idle
+    t =   273.90s     Synthesize event
+    t =   274.23s     Wait for org.avoperformance.horse.ipad to idle
+    t =   277.90s Added attachment named '02_Sessions_horizontal'
+    t =   277.91s Waiting 4.0s for "nav.List" Button to exist
+    t =   278.96s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.List" Button`
+    t =   278.96s         Checking existence of `"nav.List" Button`
+    t =   279.19s Waiting 5.0s for "nav.List" Button to exist
+    t =   280.25s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.List" Button`
+    t =   280.25s         Checking existence of `"nav.List" Button`
+    t =   280.39s Tap "nav.List" Button
+    t =   280.39s     Wait for org.avoperformance.horse.ipad to idle
+    t =   280.40s     Find the "nav.List" Button
+    t =   280.54s     Check for interrupting elements affecting "nav.List" Button
+    t =   280.63s         Wait for com.apple.springboard to idle
+    t =   280.68s     Synthesize event
+    t =   281.00s     Wait for org.avoperformance.horse.ipad to idle
+    t =   283.99s Added attachment named '03_List_horizontal'
+    t =   283.99s Waiting 4.0s for "nav.Races" Button to exist
+    t =   285.02s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Races" Button`
+    t =   285.02s         Checking existence of `"nav.Races" Button`
+    t =   285.23s Waiting 5.0s for "nav.Races" Button to exist
+    t =   286.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Races" Button`
+    t =   286.29s         Checking existence of `"nav.Races" Button`
+    t =   286.41s Tap "nav.Races" Button
+    t =   286.41s     Wait for org.avoperformance.horse.ipad to idle
+    t =   286.42s     Find the "nav.Races" Button
+    t =   286.58s     Check for interrupting elements affecting "nav.Races" Button
+    t =   286.68s         Wait for com.apple.springboard to idle
+    t =   286.72s     Synthesize event
+    t =   287.03s     Wait for org.avoperformance.horse.ipad to idle
+    t =   290.67s Added attachment named '04_Races_horizontal'
+    t =   290.68s Waiting 4.0s for "nav.Stable" Button to exist
+    t =   291.69s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Stable" Button`
+    t =   291.69s         Checking existence of `"nav.Stable" Button`
+    t =   292.29s Waiting 5.0s for "nav.Stable" Button to exist
+    t =   293.35s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Stable" Button`
+    t =   293.36s         Checking existence of `"nav.Stable" Button`
+    t =   293.75s Tap "nav.Stable" Button
+    t =   293.75s     Wait for org.avoperformance.horse.ipad to idle
+    t =   293.75s     Find the "nav.Stable" Button
+    t =   294.08s     Check for interrupting elements affecting "nav.Stable" Button
+    t =   294.35s         Wait for com.apple.springboard to idle
+    t =   294.38s     Synthesize event
+    t =   294.70s     Wait for org.avoperformance.horse.ipad to idle
+    t =   297.18s Added attachment named '05_Stable_horizontal'
+    t =   297.18s Waiting 4.0s for "nav.Riders" Button to exist
+    t =   298.24s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Riders" Button`
+    t =   298.24s         Checking existence of `"nav.Riders" Button`
+    t =   298.33s Waiting 5.0s for "nav.Riders" Button to exist
+    t =   299.35s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Riders" Button`
+    t =   299.35s         Checking existence of `"nav.Riders" Button`
+    t =   299.43s Tap "nav.Riders" Button
+    t =   299.43s     Wait for org.avoperformance.horse.ipad to idle
+    t =   299.44s     Find the "nav.Riders" Button
+    t =   299.52s     Check for interrupting elements affecting "nav.Riders" Button
+    t =   299.62s         Wait for com.apple.springboard to idle
+    t =   299.66s     Synthesize event
+    t =   299.98s     Wait for org.avoperformance.horse.ipad to idle
+    t =   302.46s Added attachment named '06_Riders_horizontal'
+    t =   302.47s Waiting 4.0s for "nav.Analysis" Button to exist
+    t =   303.49s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Analysis" Button`
+    t =   303.49s         Checking existence of `"nav.Analysis" Button`
+    t =   303.58s Waiting 5.0s for "nav.Analysis" Button to exist
+    t =   304.59s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Analysis" Button`
+    t =   304.59s         Checking existence of `"nav.Analysis" Button`
+    t =   304.66s Tap "nav.Analysis" Button
+    t =   304.66s     Wait for org.avoperformance.horse.ipad to idle
+    t =   304.66s     Find the "nav.Analysis" Button
+    t =   304.74s     Check for interrupting elements affecting "nav.Analysis" Button
+    t =   304.81s         Wait for com.apple.springboard to idle
+    t =   304.84s     Synthesize event
+    t =   305.23s     Wait for org.avoperformance.horse.ipad to idle
+    t =   313.95s Added attachment named '07_Analysis_horizontal'
+    t =   313.97s Waiting 5.0s for "tab.Summary" Button to exist
+    t =   315.04s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Summary" Button`
+    t =   315.04s         Checking existence of `"tab.Summary" Button`
+    t =   315.94s Find the "tab.Summary" Button
+    t =   316.63s Tap "tab.Summary" Button
+    t =   316.63s     Wait for org.avoperformance.horse.ipad to idle
+    t =   316.65s     Find the "tab.Summary" Button
+    t =   317.39s     Check for interrupting elements affecting "tab.Summary" Button
+    t =   317.67s         Wait for com.apple.springboard to idle
+    t =   317.75s     Synthesize event
+    t =   318.08s     Wait for org.avoperformance.horse.ipad to idle
+    t =   321.52s Added attachment named '08_Summary_horizontal'
+    t =   321.53s Waiting 5.0s for "tab.Charts" Button to exist
+    t =   322.59s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Charts" Button`
+    t =   322.59s         Checking existence of `"tab.Charts" Button`
+    t =   322.85s Find the "tab.Charts" Button
+    t =   323.09s Tap "tab.Charts" Button
+    t =   323.09s     Wait for org.avoperformance.horse.ipad to idle
+    t =   323.10s     Find the "tab.Charts" Button
+    t =   323.46s     Check for interrupting elements affecting "tab.Charts" Button
+    t =   323.70s         Wait for com.apple.springboard to idle
+    t =   323.77s     Synthesize event
+    t =   324.11s     Wait for org.avoperformance.horse.ipad to idle
+    t =   328.08s Added attachment named '09_Charts_horizontal'
+    t =   328.09s Waiting 5.0s for "tab.TrackWork" Button to exist
+    t =   329.14s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.TrackWork" Button`
+    t =   329.14s         Checking existence of `"tab.TrackWork" Button`
+    t =   329.78s Find the "tab.TrackWork" Button
+    t =   330.37s Tap "tab.TrackWork" Button
+    t =   330.37s     Wait for org.avoperformance.horse.ipad to idle
+    t =   330.38s     Find the "tab.TrackWork" Button
+    t =   330.89s     Check for interrupting elements affecting "tab.TrackWork" Button
+    t =   331.10s         Wait for com.apple.springboard to idle
+    t =   331.15s     Synthesize event
+    t =   331.47s     Wait for org.avoperformance.horse.ipad to idle
+    t =   334.51s Added attachment named '10_TrackWork_horizontal'
+    t =   334.52s Waiting 5.0s for "tab.Assistant" Button to exist
+    t =   335.55s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Assistant" Button`
+    t =   335.56s         Checking existence of `"tab.Assistant" Button`
+    t =   335.89s Find the "tab.Assistant" Button
+    t =   336.18s Checking existence of `"training.tabs" ScrollView`
+    t =   336.45s Swipe left "training.tabs" ScrollView
+    t =   336.45s     Wait for org.avoperformance.horse.ipad to idle
+    t =   336.46s     Find the "training.tabs" ScrollView
+    t =   336.76s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   337.04s         Wait for com.apple.springboard to idle
+    t =   337.07s     Synthesize event
+    t =   337.54s     Wait for org.avoperformance.horse.ipad to idle
+    t =   339.67s Find the "tab.Assistant" Button
+    t =   339.96s Checking existence of `"training.tabs" ScrollView`
+    t =   340.23s Swipe left "training.tabs" ScrollView
+    t =   340.23s     Wait for org.avoperformance.horse.ipad to idle
+    t =   340.23s     Find the "training.tabs" ScrollView
+    t =   340.51s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   340.77s         Wait for com.apple.springboard to idle
+    t =   340.79s     Synthesize event
+    t =   341.27s     Wait for org.avoperformance.horse.ipad to idle
+    t =   341.80s Find the "tab.Assistant" Button
+    t =   342.10s Checking existence of `"training.tabs" ScrollView`
+    t =   342.38s Swipe left "training.tabs" ScrollView
+    t =   342.38s     Wait for org.avoperformance.horse.ipad to idle
+    t =   342.39s     Find the "training.tabs" ScrollView
+    t =   342.67s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   342.91s         Wait for com.apple.springboard to idle
+    t =   342.94s     Synthesize event
+    t =   343.42s     Wait for org.avoperformance.horse.ipad to idle
+    t =   343.91s Find the "tab.Assistant" Button
+    t =   344.20s Checking existence of `"training.tabs" ScrollView`
+    t =   344.50s Swipe left "training.tabs" ScrollView
+    t =   344.50s     Wait for org.avoperformance.horse.ipad to idle
+    t =   344.50s     Find the "training.tabs" ScrollView
+    t =   344.84s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   345.10s         Wait for com.apple.springboard to idle
+    t =   345.12s     Synthesize event
+    t =   345.58s     Wait for org.avoperformance.horse.ipad to idle
+    t =   346.07s Find the "tab.Assistant" Button
+    t =   346.53s Tap "tab.Assistant" Button
+    t =   346.53s     Wait for org.avoperformance.horse.ipad to idle
+    t =   346.54s     Find the "tab.Assistant" Button
+    t =   346.98s     Check for interrupting elements affecting "tab.Assistant" Button
+    t =   347.31s         Wait for com.apple.springboard to idle
+    t =   347.33s     Synthesize event
+    t =   347.35s         Scroll element to visible
+    t =   347.36s         Find the "tab.Assistant" Button
+    t =   347.67s         Computed hit point {922.25, 877.75} after scrolling to visible
+    t =   347.95s     Wait for org.avoperformance.horse.ipad to idle
+    t =   350.24s Added attachment named '11_Assistant_horizontal'
+    t =   350.24s Waiting 5.0s for "tab.Segments" Button to exist
+    t =   351.25s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Segments" Button`
+    t =   351.25s         Checking existence of `"tab.Segments" Button`
+    t =   351.34s Find the "tab.Segments" Button
+    t =   351.46s Tap "tab.Segments" Button
+    t =   351.46s     Wait for org.avoperformance.horse.ipad to idle
+    t =   351.46s     Find the "tab.Segments" Button
+    t =   351.54s     Check for interrupting elements affecting "tab.Segments" Button
+    t =   351.60s         Wait for com.apple.springboard to idle
+    t =   351.63s     Synthesize event
+    t =   351.94s     Wait for org.avoperformance.horse.ipad to idle
+    t =   354.41s Added attachment named '12_Segments_horizontal'
+    t =   354.42s Waiting 5.0s for "tab.Gps" Button to exist
+    t =   355.48s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Gps" Button`
+    t =   355.48s         Checking existence of `"tab.Gps" Button`
+    t =   355.61s Find the "tab.Gps" Button
+    t =   355.73s Tap "tab.Gps" Button
+    t =   355.73s     Wait for org.avoperformance.horse.ipad to idle
+    t =   355.73s     Find the "tab.Gps" Button
+    t =   355.87s     Check for interrupting elements affecting "tab.Gps" Button
+    t =   355.96s         Wait for com.apple.springboard to idle
+    t =   356.00s     Synthesize event
+    t =   356.32s     Wait for org.avoperformance.horse.ipad to idle
+    t =   359.94s Added attachment named '13_Gps_horizontal'
+    t =   359.94s Waiting 5.0s for "tab.Biomech" Button to exist
+    t =   360.98s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Biomech" Button`
+    t =   360.98s         Checking existence of `"tab.Biomech" Button`
+    t =   361.14s Find the "tab.Biomech" Button
+    t =   361.35s Tap "tab.Biomech" Button
+    t =   361.35s     Wait for org.avoperformance.horse.ipad to idle
+    t =   361.35s     Find the "tab.Biomech" Button
+    t =   361.50s     Check for interrupting elements affecting "tab.Biomech" Button
+    t =   361.62s         Wait for com.apple.springboard to idle
+    t =   361.66s     Synthesize event
+    t =   361.99s     Wait for org.avoperformance.horse.ipad to idle
+    t =   365.32s Added attachment named '14_Biomech_horizontal'
+    t =   365.32s Waiting 5.0s for "tab.Compare" Button to exist
+    t =   366.35s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Compare" Button`
+    t =   366.36s         Checking existence of `"tab.Compare" Button`
+    t =   366.97s Find the "tab.Compare" Button
+    t =   367.58s Checking existence of `"training.tabs" ScrollView`
+    t =   367.93s Swipe left "training.tabs" ScrollView
+    t =   367.93s     Wait for org.avoperformance.horse.ipad to idle
+    t =   367.94s     Find the "training.tabs" ScrollView
+    t =   368.26s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   368.51s         Wait for com.apple.springboard to idle
+    t =   368.58s     Synthesize event
+    t =   369.27s     Wait for org.avoperformance.horse.ipad to idle
+    t =   370.12s Find the "tab.Compare" Button
+    t =   370.73s Tap "tab.Compare" Button
+    t =   370.73s     Wait for org.avoperformance.horse.ipad to idle
+    t =   370.78s     Find the "tab.Compare" Button
+    t =   371.23s     Check for interrupting elements affecting "tab.Compare" Button
+    t =   371.59s         Wait for com.apple.springboard to idle
+    t =   371.66s     Synthesize event
+    t =   372.05s     Wait for org.avoperformance.horse.ipad to idle
+    t =   374.97s Added attachment named '15_Compare_horizontal'
+    t =   374.97s Waiting 5.0s for "tab.Tides" Button to exist
+    t =   376.08s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Tides" Button`
+    t =   376.08s         Checking existence of `"tab.Tides" Button`
+    t =   380.38s         Capturing element debug description
+    t =   380.41s     Checking existence of `"tab.Tides" Button`
+    t =   381.14s Find the "tab.Tides" Button
+    t =   381.57s Tap "tab.Tides" Button
+    t =   381.57s     Wait for org.avoperformance.horse.ipad to idle
+    t =   381.63s     Find the "tab.Tides" Button
+    t =   382.00s     Check for interrupting elements affecting "tab.Tides" Button
+    t =   382.25s         Wait for com.apple.springboard to idle
+    t =   382.31s     Synthesize event
+    t =   382.70s     Wait for org.avoperformance.horse.ipad to idle
+    t =   385.51s Added attachment named '16_Tides_horizontal'
+    t =   385.52s Waiting 5.0s for "tab.Reports" Button to exist
+    t =   386.55s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Reports" Button`
+    t =   386.56s         Checking existence of `"tab.Reports" Button`
+    t =   387.07s Find the "tab.Reports" Button
+    t =   387.55s Tap "tab.Reports" Button
+    t =   387.55s     Wait for org.avoperformance.horse.ipad to idle
+    t =   387.56s     Find the "tab.Reports" Button
+    t =   388.05s     Check for interrupting elements affecting "tab.Reports" Button
+    t =   388.49s         Wait for com.apple.springboard to idle
+    t =   388.55s     Synthesize event
+    t =   388.93s     Wait for org.avoperformance.horse.ipad to idle
+    t =   393.18s Added attachment named '17_Reports_horizontal'
+    t =   393.19s Waiting 5.0s for "tab.Engine" Button to exist
+    t =   394.24s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Engine" Button`
+    t =   394.24s         Checking existence of `"tab.Engine" Button`
+    t =   394.86s Find the "tab.Engine" Button
+    t =   395.65s Tap "tab.Engine" Button
+    t =   395.65s     Wait for org.avoperformance.horse.ipad to idle
+    t =   395.65s     Find the "tab.Engine" Button
+    t =   396.53s     Check for interrupting elements affecting "tab.Engine" Button
+    t =   396.93s         Wait for com.apple.springboard to idle
+    t =   397.02s     Synthesize event
+    t =   397.37s     Wait for org.avoperformance.horse.ipad to idle
+    t =   400.13s Added attachment named '18_Engine_horizontal'
+    t =   400.14s Waiting 4.0s for "nav.Geofences" Button to exist
+    t =   401.17s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Geofences" Button`
+    t =   401.17s         Checking existence of `"nav.Geofences" Button`
+    t =   401.42s Waiting 5.0s for "nav.Geofences" Button to exist
+    t =   402.44s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Geofences" Button`
+    t =   402.44s         Checking existence of `"nav.Geofences" Button`
+    t =   402.66s Tap "nav.Geofences" Button
+    t =   402.66s     Wait for org.avoperformance.horse.ipad to idle
+    t =   402.67s     Find the "nav.Geofences" Button
+    t =   402.95s     Check for interrupting elements affecting "nav.Geofences" Button
+    t =   403.17s         Wait for com.apple.springboard to idle
+    t =   403.23s     Synthesize event
+    t =   403.54s     Wait for org.avoperformance.horse.ipad to idle
+    t =   410.30s Added attachment named '19_Geofences_horizontal'
+    t =   410.30s Waiting 4.0s for "nav.WatchWifi" Button to exist
+    t =   411.35s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.WatchWifi" Button`
+    t =   411.36s         Checking existence of `"nav.WatchWifi" Button`
+    t =   411.45s Waiting 5.0s for "nav.WatchWifi" Button to exist
+    t =   412.45s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.WatchWifi" Button`
+    t =   412.45s         Checking existence of `"nav.WatchWifi" Button`
+    t =   412.56s Tap "nav.WatchWifi" Button
+    t =   412.56s     Wait for org.avoperformance.horse.ipad to idle
+    t =   412.56s     Find the "nav.WatchWifi" Button
+    t =   412.66s     Check for interrupting elements affecting "nav.WatchWifi" Button
+    t =   412.77s         Wait for com.apple.springboard to idle
+    t =   412.82s     Synthesize event
+    t =   413.16s     Wait for org.avoperformance.horse.ipad to idle
+    t =   415.73s Added attachment named '20_WatchWifi_horizontal'
+    t =   415.74s Waiting 4.0s for "nav.Server" Button to exist
+    t =   416.77s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Server" Button`
+    t =   416.77s         Checking existence of `"nav.Server" Button`
+    t =   416.83s Waiting 5.0s for "nav.Server" Button to exist
+    t =   417.85s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Server" Button`
+    t =   417.85s         Checking existence of `"nav.Server" Button`
+    t =   417.92s Tap "nav.Server" Button
+    t =   417.92s     Wait for org.avoperformance.horse.ipad to idle
+    t =   417.93s     Find the "nav.Server" Button
+    t =   417.99s     Check for interrupting elements affecting "nav.Server" Button
+    t =   418.08s         Wait for com.apple.springboard to idle
+    t =   418.12s     Synthesize event
+    t =   418.53s     Wait for org.avoperformance.horse.ipad to idle
+    t =   420.93s Added attachment named '21_Server_horizontal'
+    t =   420.95s Tear Down
+Test Case '-[AVOiPadUITests.ScreenshotTests testCaptureEveryPageLandscape]' passed (421.755 seconds).
+Test Case '-[AVOiPadUITests.ScreenshotTests testCaptureEveryPagePortrait]' started.
+    t =     0.00s Start Test at 2026-11-07 10:14:56.899
+    t =     0.10s Set Up
+    t =     0.10s Open org.avoperformance.horse.ipad
+    t =     0.10s     Launch org.avoperformance.horse.ipad
+    t =     0.11s         Terminate org.avoperformance.horse.ipad:14663
+    t =     4.96s         Setting up automation session
+    t =     7.07s         Wait for org.avoperformance.horse.ipad to idle
+    t =     9.31s Setting device orientation to Portrait
+    t =     9.33s     Device orientation changed to Portrait
+    t =     9.56s     Interface orientation changed to Portrait
+    t =    10.59s     Wait for org.avoperformance.horse.ipad to idle
+    t =    10.61s     Wait for com.apple.springboard to idle
+    t =    10.76s Waiting 240.0s for "capture.ready" Other to exist
+    t =    11.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    11.82s         Checking existence of `"capture.ready" Other`
+    t =    11.91s         Capturing element debug description
+    t =    12.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    12.82s         Checking existence of `"capture.ready" Other`
+    t =    12.96s         Capturing element debug description
+    t =    13.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    13.77s         Checking existence of `"capture.ready" Other`
+    t =    13.81s         Capturing element debug description
+    t =    14.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    14.82s         Checking existence of `"capture.ready" Other`
+    t =    14.88s         Capturing element debug description
+    t =    15.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    15.80s         Checking existence of `"capture.ready" Other`
+    t =    15.83s         Capturing element debug description
+    t =    16.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    16.80s         Checking existence of `"capture.ready" Other`
+    t =    18.82s         Capturing element debug description
+    t =    20.00s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    20.00s         Checking existence of `"capture.ready" Other`
+    t =    22.87s         Capturing element debug description
+    t =    23.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    23.77s         Checking existence of `"capture.ready" Other`
+    t =    25.73s         Capturing element debug description
+    t =    25.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    25.82s         Checking existence of `"capture.ready" Other`
+    t =    26.68s         Capturing element debug description
+    t =    26.81s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    26.81s         Checking existence of `"capture.ready" Other`
+    t =    29.25s         Capturing element debug description
+    t =    29.81s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    29.81s         Checking existence of `"capture.ready" Other`
+    t =    32.20s         Capturing element debug description
+    t =    32.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    32.80s         Checking existence of `"capture.ready" Other`
+    t =    35.05s         Capturing element debug description
+    t =    35.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    35.76s         Checking existence of `"capture.ready" Other`
+    t =    36.13s         Capturing element debug description
+    t =    36.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    36.82s         Checking existence of `"capture.ready" Other`
+    t =    37.14s         Capturing element debug description
+    t =    37.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    37.76s         Checking existence of `"capture.ready" Other`
+    t =    38.19s         Capturing element debug description
+    t =    38.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    38.80s         Checking existence of `"capture.ready" Other`
+    t =    39.16s         Capturing element debug description
+    t =    39.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    39.76s         Checking existence of `"capture.ready" Other`
+    t =    40.14s         Capturing element debug description
+    t =    40.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    40.76s         Checking existence of `"capture.ready" Other`
+    t =    41.06s         Capturing element debug description
+    t =    41.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    41.76s         Checking existence of `"capture.ready" Other`
+    t =    42.05s         Capturing element debug description
+    t =    42.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    42.76s         Checking existence of `"capture.ready" Other`
+    t =    43.06s         Capturing element debug description
+    t =    43.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    43.76s         Checking existence of `"capture.ready" Other`
+    t =    44.06s         Capturing element debug description
+    t =    44.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    44.76s         Checking existence of `"capture.ready" Other`
+    t =    45.12s         Capturing element debug description
+    t =    45.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    45.76s         Checking existence of `"capture.ready" Other`
+    t =    46.10s         Capturing element debug description
+    t =    46.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    46.80s         Checking existence of `"capture.ready" Other`
+    t =    47.14s         Capturing element debug description
+    t =    47.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    47.76s         Checking existence of `"capture.ready" Other`
+    t =    48.21s         Capturing element debug description
+    t =    48.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    48.82s         Checking existence of `"capture.ready" Other`
+    t =    49.20s         Capturing element debug description
+    t =    49.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    49.80s         Checking existence of `"capture.ready" Other`
+    t =    50.15s         Capturing element debug description
+    t =    50.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    50.76s         Checking existence of `"capture.ready" Other`
+    t =    51.11s         Capturing element debug description
+    t =    51.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    51.82s         Checking existence of `"capture.ready" Other`
+    t =    52.23s         Capturing element debug description
+    t =    52.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    52.76s         Checking existence of `"capture.ready" Other`
+    t =    53.12s         Capturing element debug description
+    t =    53.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    53.76s         Checking existence of `"capture.ready" Other`
+    t =    54.23s         Capturing element debug description
+    t =    54.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    54.76s         Checking existence of `"capture.ready" Other`
+    t =    55.10s         Capturing element debug description
+    t =    55.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    55.80s         Checking existence of `"capture.ready" Other`
+    t =    56.20s         Capturing element debug description
+    t =    56.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    56.80s         Checking existence of `"capture.ready" Other`
+    t =    57.16s         Capturing element debug description
+    t =    57.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    57.76s         Checking existence of `"capture.ready" Other`
+    t =    58.22s         Capturing element debug description
+    t =    58.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    58.80s         Checking existence of `"capture.ready" Other`
+    t =    60.01s         Capturing element debug description
+    t =    60.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    60.82s         Checking existence of `"capture.ready" Other`
+    t =    61.52s         Capturing element debug description
+    t =    61.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    61.82s         Checking existence of `"capture.ready" Other`
+    t =    62.36s         Capturing element debug description
+    t =    62.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    62.76s         Checking existence of `"capture.ready" Other`
+    t =    63.50s         Capturing element debug description
+    t =    63.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    63.81s         Checking existence of `"capture.ready" Other`
+    t =    64.31s         Capturing element debug description
+    t =    64.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    64.80s         Checking existence of `"capture.ready" Other`
+    t =    65.36s         Capturing element debug description
+    t =    65.78s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    65.78s         Checking existence of `"capture.ready" Other`
+    t =    66.26s         Capturing element debug description
+    t =    66.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    66.76s         Checking existence of `"capture.ready" Other`
+    t =    67.05s         Capturing element debug description
+    t =    67.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    67.76s         Checking existence of `"capture.ready" Other`
+    t =    68.16s         Capturing element debug description
+    t =    68.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    68.76s         Checking existence of `"capture.ready" Other`
+    t =    69.08s         Capturing element debug description
+    t =    69.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    69.80s         Checking existence of `"capture.ready" Other`
+    t =    70.13s         Capturing element debug description
+    t =    70.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    70.76s         Checking existence of `"capture.ready" Other`
+    t =    71.03s         Capturing element debug description
+    t =    71.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    71.76s         Checking existence of `"capture.ready" Other`
+    t =    72.07s         Capturing element debug description
+    t =    72.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    72.76s         Checking existence of `"capture.ready" Other`
+    t =    73.09s         Capturing element debug description
+    t =    73.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    73.80s         Checking existence of `"capture.ready" Other`
+    t =    74.13s         Capturing element debug description
+    t =    74.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    74.80s         Checking existence of `"capture.ready" Other`
+    t =    75.17s         Capturing element debug description
+    t =    75.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    75.80s         Checking existence of `"capture.ready" Other`
+    t =    76.21s         Capturing element debug description
+    t =    76.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    76.82s         Checking existence of `"capture.ready" Other`
+    t =    77.12s         Capturing element debug description
+    t =    77.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    77.82s         Checking existence of `"capture.ready" Other`
+    t =    78.20s         Capturing element debug description
+    t =    78.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    78.82s         Checking existence of `"capture.ready" Other`
+    t =    79.31s         Capturing element debug description
+    t =    79.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    79.80s         Checking existence of `"capture.ready" Other`
+    t =    80.28s         Capturing element debug description
+    t =    80.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    80.76s         Checking existence of `"capture.ready" Other`
+    t =    81.15s         Capturing element debug description
+    t =    81.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    81.76s         Checking existence of `"capture.ready" Other`
+    t =    82.06s         Capturing element debug description
+    t =    82.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    82.76s         Checking existence of `"capture.ready" Other`
+    t =    83.06s         Capturing element debug description
+    t =    83.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    83.80s         Checking existence of `"capture.ready" Other`
+    t =    84.18s         Capturing element debug description
+    t =    84.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    84.80s         Checking existence of `"capture.ready" Other`
+    t =    85.15s         Capturing element debug description
+    t =    85.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    85.76s         Checking existence of `"capture.ready" Other`
+    t =    86.12s         Capturing element debug description
+    t =    86.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    86.76s         Checking existence of `"capture.ready" Other`
+    t =    87.13s         Capturing element debug description
+    t =    87.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    87.76s         Checking existence of `"capture.ready" Other`
+    t =    88.08s         Capturing element debug description
+    t =    88.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    88.82s         Checking existence of `"capture.ready" Other`
+    t =    89.16s         Capturing element debug description
+    t =    89.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    89.77s         Checking existence of `"capture.ready" Other`
+    t =    90.15s         Capturing element debug description
+    t =    90.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    90.77s         Checking existence of `"capture.ready" Other`
+    t =    91.07s         Capturing element debug description
+    t =    91.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    91.80s         Checking existence of `"capture.ready" Other`
+    t =    92.10s         Capturing element debug description
+    t =    92.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    92.80s         Checking existence of `"capture.ready" Other`
+    t =    93.40s         Capturing element debug description
+    t =    93.81s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    93.81s         Checking existence of `"capture.ready" Other`
+    t =    95.75s         Capturing element debug description
+    t =    95.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    95.80s         Checking existence of `"capture.ready" Other`
+    t =    96.24s         Capturing element debug description
+    t =    96.78s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    96.78s         Checking existence of `"capture.ready" Other`
+    t =    97.04s         Capturing element debug description
+    t =    97.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    97.76s         Checking existence of `"capture.ready" Other`
+    t =    97.79s         Capturing element debug description
+    t =    98.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    98.76s         Checking existence of `"capture.ready" Other`
+    t =    98.88s         Capturing element debug description
+    t =    99.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =    99.80s         Checking existence of `"capture.ready" Other`
+    t =    99.84s         Capturing element debug description
+    t =   100.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   100.76s         Checking existence of `"capture.ready" Other`
+    t =   100.79s         Capturing element debug description
+    t =   101.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   101.80s         Checking existence of `"capture.ready" Other`
+    t =   101.82s         Capturing element debug description
+    t =   102.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   102.76s         Checking existence of `"capture.ready" Other`
+    t =   102.78s         Capturing element debug description
+    t =   103.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   103.80s         Checking existence of `"capture.ready" Other`
+    t =   103.82s         Capturing element debug description
+    t =   104.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   104.76s         Checking existence of `"capture.ready" Other`
+    t =   104.78s         Capturing element debug description
+    t =   105.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   105.80s         Checking existence of `"capture.ready" Other`
+    t =   105.83s         Capturing element debug description
+    t =   106.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   106.76s         Checking existence of `"capture.ready" Other`
+    t =   106.78s         Capturing element debug description
+    t =   107.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   107.80s         Checking existence of `"capture.ready" Other`
+    t =   107.82s         Capturing element debug description
+    t =   108.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   108.76s         Checking existence of `"capture.ready" Other`
+    t =   108.77s         Capturing element debug description
+    t =   109.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   109.80s         Checking existence of `"capture.ready" Other`
+    t =   109.83s         Capturing element debug description
+    t =   110.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   110.77s         Checking existence of `"capture.ready" Other`
+    t =   110.80s         Capturing element debug description
+    t =   111.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   111.76s         Checking existence of `"capture.ready" Other`
+    t =   111.80s         Capturing element debug description
+    t =   112.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   112.76s         Checking existence of `"capture.ready" Other`
+    t =   112.78s         Capturing element debug description
+    t =   113.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   113.80s         Checking existence of `"capture.ready" Other`
+    t =   113.82s         Capturing element debug description
+    t =   114.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   114.76s         Checking existence of `"capture.ready" Other`
+    t =   114.78s         Capturing element debug description
+    t =   115.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   115.80s         Checking existence of `"capture.ready" Other`
+    t =   115.82s         Capturing element debug description
+    t =   116.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   116.76s         Checking existence of `"capture.ready" Other`
+    t =   116.78s         Capturing element debug description
+    t =   117.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   117.82s         Checking existence of `"capture.ready" Other`
+    t =   117.83s         Capturing element debug description
+    t =   118.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   118.76s         Checking existence of `"capture.ready" Other`
+    t =   118.78s         Capturing element debug description
+    t =   119.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   119.80s         Checking existence of `"capture.ready" Other`
+    t =   119.83s         Capturing element debug description
+    t =   120.78s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   120.78s         Checking existence of `"capture.ready" Other`
+    t =   120.81s         Capturing element debug description
+    t =   121.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   121.76s         Checking existence of `"capture.ready" Other`
+    t =   121.78s         Capturing element debug description
+    t =   122.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   122.82s         Checking existence of `"capture.ready" Other`
+    t =   122.85s         Capturing element debug description
+    t =   123.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   123.76s         Checking existence of `"capture.ready" Other`
+    t =   123.80s         Capturing element debug description
+    t =   124.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   124.76s         Checking existence of `"capture.ready" Other`
+    t =   124.79s         Capturing element debug description
+    t =   125.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   125.82s         Checking existence of `"capture.ready" Other`
+    t =   125.84s         Capturing element debug description
+    t =   126.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   126.76s         Checking existence of `"capture.ready" Other`
+    t =   126.78s         Capturing element debug description
+    t =   127.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   127.82s         Checking existence of `"capture.ready" Other`
+    t =   127.86s         Capturing element debug description
+    t =   128.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   128.76s         Checking existence of `"capture.ready" Other`
+    t =   128.82s         Capturing element debug description
+    t =   129.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   129.76s         Checking existence of `"capture.ready" Other`
+    t =   129.78s         Capturing element debug description
+    t =   130.83s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   130.83s         Checking existence of `"capture.ready" Other`
+    t =   130.86s         Capturing element debug description
+    t =   131.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   131.80s         Checking existence of `"capture.ready" Other`
+    t =   131.82s         Capturing element debug description
+    t =   132.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   132.76s         Checking existence of `"capture.ready" Other`
+    t =   132.78s         Capturing element debug description
+    t =   133.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   133.82s         Checking existence of `"capture.ready" Other`
+    t =   133.85s         Capturing element debug description
+    t =   134.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   134.80s         Checking existence of `"capture.ready" Other`
+    t =   134.84s         Capturing element debug description
+    t =   135.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   135.76s         Checking existence of `"capture.ready" Other`
+    t =   135.78s         Capturing element debug description
+    t =   136.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   136.80s         Checking existence of `"capture.ready" Other`
+    t =   136.83s         Capturing element debug description
+    t =   137.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   137.76s         Checking existence of `"capture.ready" Other`
+    t =   137.80s         Capturing element debug description
+    t =   138.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   138.76s         Checking existence of `"capture.ready" Other`
+    t =   138.79s         Capturing element debug description
+    t =   139.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   139.82s         Checking existence of `"capture.ready" Other`
+    t =   139.85s         Capturing element debug description
+    t =   140.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   140.76s         Checking existence of `"capture.ready" Other`
+    t =   140.79s         Capturing element debug description
+    t =   141.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   141.82s         Checking existence of `"capture.ready" Other`
+    t =   141.84s         Capturing element debug description
+    t =   142.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   142.76s         Checking existence of `"capture.ready" Other`
+    t =   142.79s         Capturing element debug description
+    t =   143.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   143.82s         Checking existence of `"capture.ready" Other`
+    t =   143.84s         Capturing element debug description
+    t =   144.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   144.76s         Checking existence of `"capture.ready" Other`
+    t =   144.78s         Capturing element debug description
+    t =   145.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   145.83s         Checking existence of `"capture.ready" Other`
+    t =   145.84s         Capturing element debug description
+    t =   146.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   146.76s         Checking existence of `"capture.ready" Other`
+    t =   146.77s         Capturing element debug description
+    t =   147.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   147.80s         Checking existence of `"capture.ready" Other`
+    t =   147.82s         Capturing element debug description
+    t =   148.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   148.76s         Checking existence of `"capture.ready" Other`
+    t =   148.79s         Capturing element debug description
+    t =   149.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   149.82s         Checking existence of `"capture.ready" Other`
+    t =   149.87s         Capturing element debug description
+    t =   150.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   150.80s         Checking existence of `"capture.ready" Other`
+    t =   150.82s         Capturing element debug description
+    t =   151.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   151.82s         Checking existence of `"capture.ready" Other`
+    t =   151.85s         Capturing element debug description
+    t =   152.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   152.76s         Checking existence of `"capture.ready" Other`
+    t =   152.78s         Capturing element debug description
+    t =   153.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   153.80s         Checking existence of `"capture.ready" Other`
+    t =   153.83s         Capturing element debug description
+    t =   154.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   154.76s         Checking existence of `"capture.ready" Other`
+    t =   154.79s         Capturing element debug description
+    t =   155.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   155.83s         Checking existence of `"capture.ready" Other`
+    t =   155.88s         Capturing element debug description
+    t =   156.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   156.77s         Checking existence of `"capture.ready" Other`
+    t =   156.84s         Capturing element debug description
+    t =   157.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   157.80s         Checking existence of `"capture.ready" Other`
+    t =   157.83s         Capturing element debug description
+    t =   158.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   158.77s         Checking existence of `"capture.ready" Other`
+    t =   158.78s         Capturing element debug description
+    t =   159.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   159.80s         Checking existence of `"capture.ready" Other`
+    t =   159.83s         Capturing element debug description
+    t =   160.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   160.76s         Checking existence of `"capture.ready" Other`
+    t =   160.80s         Capturing element debug description
+    t =   161.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   161.80s         Checking existence of `"capture.ready" Other`
+    t =   161.84s         Capturing element debug description
+    t =   162.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   162.76s         Checking existence of `"capture.ready" Other`
+    t =   162.81s         Capturing element debug description
+    t =   163.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   163.76s         Checking existence of `"capture.ready" Other`
+    t =   163.81s         Capturing element debug description
+    t =   164.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   164.76s         Checking existence of `"capture.ready" Other`
+    t =   164.78s         Capturing element debug description
+    t =   165.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   165.80s         Checking existence of `"capture.ready" Other`
+    t =   165.83s         Capturing element debug description
+    t =   166.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   166.76s         Checking existence of `"capture.ready" Other`
+    t =   166.79s         Capturing element debug description
+    t =   167.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   167.80s         Checking existence of `"capture.ready" Other`
+    t =   167.84s         Capturing element debug description
+    t =   168.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   168.76s         Checking existence of `"capture.ready" Other`
+    t =   168.78s         Capturing element debug description
+    t =   169.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   169.80s         Checking existence of `"capture.ready" Other`
+    t =   169.82s         Capturing element debug description
+    t =   170.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   170.76s         Checking existence of `"capture.ready" Other`
+    t =   170.79s         Capturing element debug description
+    t =   171.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   171.80s         Checking existence of `"capture.ready" Other`
+    t =   171.84s         Capturing element debug description
+    t =   172.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   172.76s         Checking existence of `"capture.ready" Other`
+    t =   172.82s         Capturing element debug description
+    t =   173.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   173.76s         Checking existence of `"capture.ready" Other`
+    t =   173.79s         Capturing element debug description
+    t =   174.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   174.82s         Checking existence of `"capture.ready" Other`
+    t =   174.83s         Capturing element debug description
+    t =   175.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   175.76s         Checking existence of `"capture.ready" Other`
+    t =   175.79s         Capturing element debug description
+    t =   176.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   176.80s         Checking existence of `"capture.ready" Other`
+    t =   176.85s         Capturing element debug description
+    t =   177.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   177.76s         Checking existence of `"capture.ready" Other`
+    t =   177.78s         Capturing element debug description
+    t =   178.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   178.80s         Checking existence of `"capture.ready" Other`
+    t =   178.85s         Capturing element debug description
+    t =   179.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   179.76s         Checking existence of `"capture.ready" Other`
+    t =   179.79s         Capturing element debug description
+    t =   180.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   180.80s         Checking existence of `"capture.ready" Other`
+    t =   180.82s         Capturing element debug description
+    t =   181.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   181.76s         Checking existence of `"capture.ready" Other`
+    t =   181.78s         Capturing element debug description
+    t =   182.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   182.82s         Checking existence of `"capture.ready" Other`
+    t =   182.84s         Capturing element debug description
+    t =   183.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   183.80s         Checking existence of `"capture.ready" Other`
+    t =   183.85s         Capturing element debug description
+    t =   184.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   184.76s         Checking existence of `"capture.ready" Other`
+    t =   184.78s         Capturing element debug description
+    t =   185.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   185.82s         Checking existence of `"capture.ready" Other`
+    t =   185.85s         Capturing element debug description
+    t =   186.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   186.76s         Checking existence of `"capture.ready" Other`
+    t =   186.78s         Capturing element debug description
+    t =   187.83s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   187.83s         Checking existence of `"capture.ready" Other`
+    t =   187.85s         Capturing element debug description
+    t =   188.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   188.76s         Checking existence of `"capture.ready" Other`
+    t =   188.80s         Capturing element debug description
+    t =   189.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   189.82s         Checking existence of `"capture.ready" Other`
+    t =   189.86s         Capturing element debug description
+    t =   190.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   190.80s         Checking existence of `"capture.ready" Other`
+    t =   190.82s         Capturing element debug description
+    t =   191.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   191.76s         Checking existence of `"capture.ready" Other`
+    t =   191.81s         Capturing element debug description
+    t =   192.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   192.76s         Checking existence of `"capture.ready" Other`
+    t =   192.78s         Capturing element debug description
+    t =   193.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   193.80s         Checking existence of `"capture.ready" Other`
+    t =   193.82s         Capturing element debug description
+    t =   194.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   194.76s         Checking existence of `"capture.ready" Other`
+    t =   194.80s         Capturing element debug description
+    t =   195.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   195.82s         Checking existence of `"capture.ready" Other`
+    t =   195.85s         Capturing element debug description
+    t =   196.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   196.76s         Checking existence of `"capture.ready" Other`
+    t =   196.78s         Capturing element debug description
+    t =   197.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   197.80s         Checking existence of `"capture.ready" Other`
+    t =   197.83s         Capturing element debug description
+    t =   198.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   198.76s         Checking existence of `"capture.ready" Other`
+    t =   198.79s         Capturing element debug description
+    t =   199.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   199.80s         Checking existence of `"capture.ready" Other`
+    t =   199.82s         Capturing element debug description
+    t =   200.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   200.77s         Checking existence of `"capture.ready" Other`
+    t =   200.78s         Capturing element debug description
+    t =   201.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   201.80s         Checking existence of `"capture.ready" Other`
+    t =   201.82s         Capturing element debug description
+    t =   202.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   202.76s         Checking existence of `"capture.ready" Other`
+    t =   202.80s         Capturing element debug description
+    t =   203.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   203.76s         Checking existence of `"capture.ready" Other`
+    t =   203.80s         Capturing element debug description
+    t =   204.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   204.76s         Checking existence of `"capture.ready" Other`
+    t =   204.84s         Capturing element debug description
+    t =   205.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   205.77s         Checking existence of `"capture.ready" Other`
+    t =   205.80s         Capturing element debug description
+    t =   206.83s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   206.83s         Checking existence of `"capture.ready" Other`
+    t =   206.91s         Capturing element debug description
+    t =   207.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   207.80s         Checking existence of `"capture.ready" Other`
+    t =   207.82s         Capturing element debug description
+    t =   208.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   208.76s         Checking existence of `"capture.ready" Other`
+    t =   208.80s         Capturing element debug description
+    t =   209.83s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   209.83s         Checking existence of `"capture.ready" Other`
+    t =   209.86s         Capturing element debug description
+    t =   210.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   210.80s         Checking existence of `"capture.ready" Other`
+    t =   210.84s         Capturing element debug description
+    t =   211.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   211.76s         Checking existence of `"capture.ready" Other`
+    t =   211.79s         Capturing element debug description
+    t =   212.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   212.80s         Checking existence of `"capture.ready" Other`
+    t =   212.82s         Capturing element debug description
+    t =   213.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   213.76s         Checking existence of `"capture.ready" Other`
+    t =   213.79s         Capturing element debug description
+    t =   214.84s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   214.84s         Checking existence of `"capture.ready" Other`
+    t =   214.86s         Capturing element debug description
+    t =   215.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   215.80s         Checking existence of `"capture.ready" Other`
+    t =   215.84s         Capturing element debug description
+    t =   216.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   216.77s         Checking existence of `"capture.ready" Other`
+    t =   216.79s         Capturing element debug description
+    t =   217.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   217.80s         Checking existence of `"capture.ready" Other`
+    t =   217.82s         Capturing element debug description
+    t =   218.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   218.76s         Checking existence of `"capture.ready" Other`
+    t =   218.79s         Capturing element debug description
+    t =   219.84s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   219.85s         Checking existence of `"capture.ready" Other`
+    t =   219.88s         Capturing element debug description
+    t =   220.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   220.80s         Checking existence of `"capture.ready" Other`
+    t =   220.82s         Capturing element debug description
+    t =   221.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   221.76s         Checking existence of `"capture.ready" Other`
+    t =   221.78s         Capturing element debug description
+    t =   222.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   222.80s         Checking existence of `"capture.ready" Other`
+    t =   222.84s         Capturing element debug description
+    t =   223.77s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   223.77s         Checking existence of `"capture.ready" Other`
+    t =   223.80s         Capturing element debug description
+    t =   224.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   224.80s         Checking existence of `"capture.ready" Other`
+    t =   224.84s         Capturing element debug description
+    t =   225.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   225.80s         Checking existence of `"capture.ready" Other`
+    t =   225.82s         Capturing element debug description
+    t =   226.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   226.76s         Checking existence of `"capture.ready" Other`
+    t =   226.78s         Capturing element debug description
+    t =   227.82s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   227.82s         Checking existence of `"capture.ready" Other`
+    t =   227.87s         Capturing element debug description
+    t =   228.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   228.80s         Checking existence of `"capture.ready" Other`
+    t =   228.83s         Capturing element debug description
+    t =   229.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   229.76s         Checking existence of `"capture.ready" Other`
+    t =   229.84s         Capturing element debug description
+    t =   230.78s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   230.79s         Checking existence of `"capture.ready" Other`
+    t =   230.82s         Capturing element debug description
+    t =   231.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   231.80s         Checking existence of `"capture.ready" Other`
+    t =   232.07s         Capturing element debug description
+    t =   232.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   232.80s         Checking existence of `"capture.ready" Other`
+    t =   232.96s         Capturing element debug description
+    t =   233.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   233.80s         Checking existence of `"capture.ready" Other`
+    t =   233.83s         Capturing element debug description
+    t =   234.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   234.77s         Checking existence of `"capture.ready" Other`
+    t =   235.19s         Capturing element debug description
+    t =   235.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   235.80s         Checking existence of `"capture.ready" Other`
+    t =   235.83s         Capturing element debug description
+    t =   236.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   236.76s         Checking existence of `"capture.ready" Other`
+    t =   236.80s         Capturing element debug description
+    t =   237.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   237.80s         Checking existence of `"capture.ready" Other`
+    t =   237.82s         Capturing element debug description
+    t =   238.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   238.76s         Checking existence of `"capture.ready" Other`
+    t =   238.78s         Capturing element debug description
+    t =   239.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   239.80s         Checking existence of `"capture.ready" Other`
+    t =   239.83s         Capturing element debug description
+    t =   240.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   240.76s         Checking existence of `"capture.ready" Other`
+    t =   240.79s         Capturing element debug description
+    t =   241.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   241.80s         Checking existence of `"capture.ready" Other`
+    t =   241.83s         Capturing element debug description
+    t =   242.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   242.76s         Checking existence of `"capture.ready" Other`
+    t =   242.79s         Capturing element debug description
+    t =   243.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   243.76s         Checking existence of `"capture.ready" Other`
+    t =   243.81s         Capturing element debug description
+    t =   244.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   244.76s         Checking existence of `"capture.ready" Other`
+    t =   244.78s         Capturing element debug description
+    t =   245.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   245.80s         Checking existence of `"capture.ready" Other`
+    t =   245.83s         Capturing element debug description
+    t =   246.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   246.76s         Checking existence of `"capture.ready" Other`
+    t =   246.80s         Capturing element debug description
+    t =   247.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   247.76s         Checking existence of `"capture.ready" Other`
+    t =   247.81s         Capturing element debug description
+    t =   248.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   248.76s         Checking existence of `"capture.ready" Other`
+    t =   248.87s         Capturing element debug description
+    t =   249.80s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   249.80s         Checking existence of `"capture.ready" Other`
+    t =   249.83s         Capturing element debug description
+    t =   250.76s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" Other`
+    t =   250.76s         Checking existence of `"capture.ready" Other`
+    t =   250.78s         Capturing element debug description
+    t =   250.81s     Checking existence of `"capture.ready" Other`
+    t =   250.86s Collecting debug information to assist test failure triage
+    t =   250.87s     Requesting snapshot of accessibility hierarchy for app with pid 30343
+    t =   250.98s Waiting 5.0s for "capture.ready" StaticText to exist
+    t =   252.00s     Checking `Expect predicate `existsNoRetry == 1` for object "capture.ready" StaticText`
+    t =   252.00s         Checking existence of `"capture.ready" StaticText`
+    t =   252.03s Waiting 4.0s for "nav.Home" Button to exist
+    t =   253.07s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   253.07s         Checking existence of `"nav.Home" Button`
+    t =   253.10s         Capturing element debug description
+    t =   254.04s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   254.04s         Checking existence of `"nav.Home" Button`
+    t =   254.13s         Capturing element debug description
+    t =   255.07s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   255.07s         Checking existence of `"nav.Home" Button`
+    t =   255.09s         Capturing element debug description
+    t =   256.04s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   256.04s         Checking existence of `"nav.Home" Button`
+    t =   256.07s         Capturing element debug description
+    t =   256.07s     Checking existence of `"nav.Home" Button`
+    t =   256.10s Collecting debug information to assist test failure triage
+    t =   256.10s     Requesting snapshot of accessibility hierarchy for app with pid 30343
+    t =   256.14s Checking existence of `"start.menu" Button`
+    t =   256.18s Tap "start.menu" Button
+    t =   256.18s     Wait for org.avoperformance.horse.ipad to idle
+    t =   256.19s     Find the "start.menu" Button
+    t =   256.22s     Check for interrupting elements affecting "start.menu" Button
+    t =   256.41s         Wait for com.apple.springboard to idle
+    t =   256.51s     Synthesize event
+    t =   256.96s     Wait for org.avoperformance.horse.ipad to idle
+    t =   257.33s Waiting 5.0s for "nav.Home" Button to exist
+    t =   258.40s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Home" Button`
+    t =   258.40s         Checking existence of `"nav.Home" Button`
+    t =   258.48s Tap "nav.Home" Button
+    t =   258.48s     Wait for org.avoperformance.horse.ipad to idle
+    t =   258.49s     Find the "nav.Home" Button
+    t =   258.54s     Check for interrupting elements affecting "nav.Home" Button
+    t =   258.62s         Wait for com.apple.springboard to idle
+    t =   258.67s     Synthesize event
+    t =   259.19s     Wait for org.avoperformance.horse.ipad to idle
+    t =   262.17s Added attachment named '01_Home_vertical'
+    t =   262.18s Waiting 4.0s for "nav.Sessions" Button to exist
+    t =   263.23s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   263.23s         Checking existence of `"nav.Sessions" Button`
+    t =   263.30s         Capturing element debug description
+    t =   264.20s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   264.20s         Checking existence of `"nav.Sessions" Button`
+    t =   264.24s         Capturing element debug description
+    t =   265.27s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   265.27s         Checking existence of `"nav.Sessions" Button`
+    t =   265.30s         Capturing element debug description
+    t =   266.19s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   266.19s         Checking existence of `"nav.Sessions" Button`
+    t =   266.23s         Capturing element debug description
+    t =   266.23s     Checking existence of `"nav.Sessions" Button`
+    t =   266.26s Collecting debug information to assist test failure triage
+    t =   266.26s     Requesting snapshot of accessibility hierarchy for app with pid 30343
+    t =   266.30s Checking existence of `"start.menu" Button`
+    t =   266.33s Tap "start.menu" Button
+    t =   266.33s     Wait for org.avoperformance.horse.ipad to idle
+    t =   266.34s     Find the "start.menu" Button
+    t =   266.40s     Check for interrupting elements affecting "start.menu" Button
+    t =   266.42s         Wait for com.apple.springboard to idle
+    t =   266.46s     Synthesize event
+    t =   266.83s     Wait for org.avoperformance.horse.ipad to idle
+    t =   267.25s Waiting 5.0s for "nav.Sessions" Button to exist
+    t =   268.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Sessions" Button`
+    t =   268.29s         Checking existence of `"nav.Sessions" Button`
+    t =   268.40s Tap "nav.Sessions" Button
+    t =   268.40s     Wait for org.avoperformance.horse.ipad to idle
+    t =   268.41s     Find the "nav.Sessions" Button
+    t =   268.49s     Check for interrupting elements affecting "nav.Sessions" Button
+    t =   268.53s         Wait for com.apple.springboard to idle
+    t =   268.57s     Synthesize event
+    t =   268.88s     Wait for org.avoperformance.horse.ipad to idle
+    t =   271.84s Added attachment named '02_Sessions_vertical'
+    t =   271.84s Waiting 4.0s for "nav.List" Button to exist
+    t =   272.88s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.List" Button`
+    t =   272.89s         Checking existence of `"nav.List" Button`
+    t =   273.08s Waiting 5.0s for "nav.List" Button to exist
+    t =   274.10s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.List" Button`
+    t =   274.10s         Checking existence of `"nav.List" Button`
+    t =   274.20s Tap "nav.List" Button
+    t =   274.20s     Wait for org.avoperformance.horse.ipad to idle
+    t =   274.20s     Find the "nav.List" Button
+    t =   274.33s     Check for interrupting elements affecting "nav.List" Button
+    t =   274.49s         Wait for com.apple.springboard to idle
+    t =   274.54s     Synthesize event
+    t =   274.88s     Wait for org.avoperformance.horse.ipad to idle
+    t =   277.91s Added attachment named '03_List_vertical'
+    t =   277.91s Waiting 4.0s for "nav.Races" Button to exist
+    t =   278.93s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Races" Button`
+    t =   278.93s         Checking existence of `"nav.Races" Button`
+    t =   279.20s Waiting 5.0s for "nav.Races" Button to exist
+    t =   280.20s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Races" Button`
+    t =   280.20s         Checking existence of `"nav.Races" Button`
+    t =   280.36s Tap "nav.Races" Button
+    t =   280.36s     Wait for org.avoperformance.horse.ipad to idle
+    t =   280.38s     Find the "nav.Races" Button
+    t =   280.52s     Check for interrupting elements affecting "nav.Races" Button
+    t =   280.67s         Wait for com.apple.springboard to idle
+    t =   280.71s     Synthesize event
+    t =   281.03s     Wait for org.avoperformance.horse.ipad to idle
+    t =   284.30s Added attachment named '04_Races_vertical'
+    t =   284.30s Waiting 4.0s for "nav.Stable" Button to exist
+    t =   285.35s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Stable" Button`
+    t =   285.35s         Checking existence of `"nav.Stable" Button`
+    t =   285.90s Waiting 5.0s for "nav.Stable" Button to exist
+    t =   286.94s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Stable" Button`
+    t =   286.94s         Checking existence of `"nav.Stable" Button`
+    t =   287.29s Tap "nav.Stable" Button
+    t =   287.29s     Wait for org.avoperformance.horse.ipad to idle
+    t =   287.29s     Find the "nav.Stable" Button
+    t =   287.62s     Check for interrupting elements affecting "nav.Stable" Button
+    t =   287.93s         Wait for com.apple.springboard to idle
+    t =   287.96s     Synthesize event
+    t =   288.26s     Wait for org.avoperformance.horse.ipad to idle
+    t =   290.66s Added attachment named '05_Stable_vertical'
+    t =   290.67s Waiting 4.0s for "nav.Riders" Button to exist
+    t =   291.70s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Riders" Button`
+    t =   291.70s         Checking existence of `"nav.Riders" Button`
+    t =   291.79s Waiting 5.0s for "nav.Riders" Button to exist
+    t =   292.80s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Riders" Button`
+    t =   292.80s         Checking existence of `"nav.Riders" Button`
+    t =   292.86s Tap "nav.Riders" Button
+    t =   292.86s     Wait for org.avoperformance.horse.ipad to idle
+    t =   292.87s     Find the "nav.Riders" Button
+    t =   292.95s     Check for interrupting elements affecting "nav.Riders" Button
+    t =   293.04s         Wait for com.apple.springboard to idle
+    t =   293.09s     Synthesize event
+    t =   293.47s     Wait for org.avoperformance.horse.ipad to idle
+    t =   295.81s Added attachment named '06_Riders_vertical'
+    t =   295.82s Waiting 4.0s for "nav.Analysis" Button to exist
+    t =   296.85s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Analysis" Button`
+    t =   296.85s         Checking existence of `"nav.Analysis" Button`
+    t =   296.93s Waiting 5.0s for "nav.Analysis" Button to exist
+    t =   297.95s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Analysis" Button`
+    t =   297.95s         Checking existence of `"nav.Analysis" Button`
+    t =   298.02s Tap "nav.Analysis" Button
+    t =   298.02s     Wait for org.avoperformance.horse.ipad to idle
+    t =   298.03s     Find the "nav.Analysis" Button
+    t =   298.20s     Check for interrupting elements affecting "nav.Analysis" Button
+    t =   298.28s         Wait for com.apple.springboard to idle
+    t =   298.32s     Synthesize event
+    t =   298.67s     Wait for org.avoperformance.horse.ipad to idle
+    t =   308.42s Added attachment named '07_Analysis_vertical'
+    t =   308.43s Waiting 5.0s for "tab.Summary" Button to exist
+    t =   309.47s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Summary" Button`
+    t =   309.47s         Checking existence of `"tab.Summary" Button`
+    t =   310.18s Find the "tab.Summary" Button
+    t =   310.78s Tap "tab.Summary" Button
+    t =   310.78s     Wait for org.avoperformance.horse.ipad to idle
+    t =   310.79s     Find the "tab.Summary" Button
+    t =   311.48s     Check for interrupting elements affecting "tab.Summary" Button
+    t =   311.70s         Wait for com.apple.springboard to idle
+    t =   311.76s     Synthesize event
+    t =   312.08s     Wait for org.avoperformance.horse.ipad to idle
+    t =   315.17s Added attachment named '08_Summary_vertical'
+    t =   315.17s Waiting 5.0s for "tab.Charts" Button to exist
+    t =   316.22s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Charts" Button`
+    t =   316.22s         Checking existence of `"tab.Charts" Button`
+    t =   316.44s Find the "tab.Charts" Button
+    t =   316.63s Checking existence of `"training.tabs" ScrollView`
+    t =   316.79s Swipe left "training.tabs" ScrollView
+    t =   316.79s     Wait for org.avoperformance.horse.ipad to idle
+    t =   316.80s     Find the "training.tabs" ScrollView
+    t =   317.03s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   317.22s         Wait for com.apple.springboard to idle
+    t =   317.25s     Synthesize event
+    t =   317.79s     Wait for org.avoperformance.horse.ipad to idle
+    t =   319.91s Find the "tab.Charts" Button
+    t =   320.26s Checking existence of `"training.tabs" ScrollView`
+    t =   320.49s Swipe left "training.tabs" ScrollView
+    t =   320.49s     Wait for org.avoperformance.horse.ipad to idle
+    t =   320.49s     Find the "training.tabs" ScrollView
+    t =   320.68s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   320.87s         Wait for com.apple.springboard to idle
+    t =   320.91s     Synthesize event
+    t =   321.45s     Wait for org.avoperformance.horse.ipad to idle
+    t =   322.33s Find the "tab.Charts" Button
+    t =   322.60s Checking existence of `"training.tabs" ScrollView`
+    t =   322.82s Swipe left "training.tabs" ScrollView
+    t =   322.82s     Wait for org.avoperformance.horse.ipad to idle
+    t =   322.83s     Find the "training.tabs" ScrollView
+    t =   323.01s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   323.14s         Wait for com.apple.springboard to idle
+    t =   323.18s     Synthesize event
+    t =   323.70s     Wait for org.avoperformance.horse.ipad to idle
+    t =   324.17s Find the "tab.Charts" Button
+    t =   324.39s Checking existence of `"training.tabs" ScrollView`
+    t =   324.56s Swipe left "training.tabs" ScrollView
+    t =   324.56s     Wait for org.avoperformance.horse.ipad to idle
+    t =   324.56s     Find the "training.tabs" ScrollView
+    t =   324.70s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   324.85s         Wait for com.apple.springboard to idle
+    t =   324.87s     Synthesize event
+    t =   325.33s     Wait for org.avoperformance.horse.ipad to idle
+    t =   325.81s Find the "tab.Charts" Button
+    t =   326.08s Tap "tab.Charts" Button
+    t =   326.08s     Wait for org.avoperformance.horse.ipad to idle
+    t =   326.08s     Find the "tab.Charts" Button
+    t =   326.29s     Check for interrupting elements affecting "tab.Charts" Button
+    t =   326.44s         Wait for com.apple.springboard to idle
+    t =   326.48s     Synthesize event
+    t =   326.54s         Scroll element to visible
+    t =   326.54s         Find the "tab.Charts" Button
+    t =   326.80s         Computed hit point {776.25, 109.75} after scrolling to visible
+    t =   327.09s     Wait for org.avoperformance.horse.ipad to idle
+    t =   332.16s Added attachment named '09_Charts_vertical'
+    t =   332.16s Waiting 5.0s for "tab.TrackWork" Button to exist
+    t =   333.20s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.TrackWork" Button`
+    t =   333.20s         Checking existence of `"tab.TrackWork" Button`
+    t =   334.04s Find the "tab.TrackWork" Button
+    t =   334.80s Tap "tab.TrackWork" Button
+    t =   334.80s     Wait for org.avoperformance.horse.ipad to idle
+    t =   334.81s     Find the "tab.TrackWork" Button
+    t =   335.47s     Check for interrupting elements affecting "tab.TrackWork" Button
+    t =   335.68s         Wait for com.apple.springboard to idle
+    t =   335.73s     Synthesize event
+    t =   336.05s     Wait for org.avoperformance.horse.ipad to idle
+    t =   338.99s Added attachment named '10_TrackWork_vertical'
+    t =   338.99s Waiting 5.0s for "tab.Assistant" Button to exist
+    t =   340.02s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Assistant" Button`
+    t =   340.02s         Checking existence of `"tab.Assistant" Button`
+    t =   340.41s Find the "tab.Assistant" Button
+    t =   340.70s Checking existence of `"training.tabs" ScrollView`
+    t =   341.04s Swipe left "training.tabs" ScrollView
+    t =   341.04s     Wait for org.avoperformance.horse.ipad to idle
+    t =   341.04s     Find the "training.tabs" ScrollView
+    t =   341.35s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   341.61s         Wait for com.apple.springboard to idle
+    t =   341.64s     Synthesize event
+    t =   342.11s     Wait for org.avoperformance.horse.ipad to idle
+    t =   344.23s Find the "tab.Assistant" Button
+    t =   344.49s Checking existence of `"training.tabs" ScrollView`
+    t =   344.75s Swipe left "training.tabs" ScrollView
+    t =   344.75s     Wait for org.avoperformance.horse.ipad to idle
+    t =   344.76s     Find the "training.tabs" ScrollView
+    t =   344.96s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   345.14s         Wait for com.apple.springboard to idle
+    t =   345.17s     Synthesize event
+    t =   345.72s     Wait for org.avoperformance.horse.ipad to idle
+    t =   346.32s Find the "tab.Assistant" Button
+    t =   346.67s Checking existence of `"training.tabs" ScrollView`
+    t =   347.00s Swipe left "training.tabs" ScrollView
+    t =   347.00s     Wait for org.avoperformance.horse.ipad to idle
+    t =   347.01s     Find the "training.tabs" ScrollView
+    t =   347.37s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   347.67s         Wait for com.apple.springboard to idle
+    t =   347.70s     Synthesize event
+    t =   348.23s     Wait for org.avoperformance.horse.ipad to idle
+    t =   348.70s Find the "tab.Assistant" Button
+    t =   349.00s Checking existence of `"training.tabs" ScrollView`
+    t =   349.25s Swipe left "training.tabs" ScrollView
+    t =   349.25s     Wait for org.avoperformance.horse.ipad to idle
+    t =   349.25s     Find the "training.tabs" ScrollView
+    t =   349.52s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   349.81s         Wait for com.apple.springboard to idle
+    t =   349.85s     Synthesize event
+    t =   350.39s     Wait for org.avoperformance.horse.ipad to idle
+    t =   350.86s Find the "tab.Assistant" Button
+    t =   351.18s Tap "tab.Assistant" Button
+    t =   351.18s     Wait for org.avoperformance.horse.ipad to idle
+    t =   351.18s     Find the "tab.Assistant" Button
+    t =   351.46s     Check for interrupting elements affecting "tab.Assistant" Button
+    t =   351.76s         Wait for com.apple.springboard to idle
+    t =   351.80s     Synthesize event
+    t =   351.85s         Scroll element to visible
+    t =   351.85s         Find the "tab.Assistant" Button
+    t =   352.16s         Computed hit point {788.25, 109.75} after scrolling to visible
+    t =   352.46s     Wait for org.avoperformance.horse.ipad to idle
+    t =   354.90s Added attachment named '11_Assistant_vertical'
+    t =   354.91s Waiting 5.0s for "tab.Segments" Button to exist
+    t =   355.95s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Segments" Button`
+    t =   355.95s         Checking existence of `"tab.Segments" Button`
+    t =   356.20s Find the "tab.Segments" Button
+    t =   356.62s Tap "tab.Segments" Button
+    t =   356.62s     Wait for org.avoperformance.horse.ipad to idle
+    t =   356.62s     Find the "tab.Segments" Button
+    t =   356.82s     Check for interrupting elements affecting "tab.Segments" Button
+    t =   357.30s         Wait for com.apple.springboard to idle
+    t =   357.33s     Synthesize event
+    t =   358.01s     Wait for org.avoperformance.horse.ipad to idle
+    t =   360.76s Added attachment named '12_Segments_vertical'
+    t =   360.76s Waiting 5.0s for "tab.Gps" Button to exist
+    t =   361.80s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Gps" Button`
+    t =   361.80s         Checking existence of `"tab.Gps" Button`
+    t =   362.13s Find the "tab.Gps" Button
+    t =   363.04s Checking existence of `"training.tabs" ScrollView`
+    t =   363.33s Swipe left "training.tabs" ScrollView
+    t =   363.33s     Wait for org.avoperformance.horse.ipad to idle
+    t =   363.35s     Find the "training.tabs" ScrollView
+    t =   363.54s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   363.74s         Wait for com.apple.springboard to idle
+    t =   363.78s     Synthesize event
+    t =   364.75s     Wait for org.avoperformance.horse.ipad to idle
+    t =   366.90s Find the "tab.Gps" Button
+    t =   367.32s Checking existence of `"training.tabs" ScrollView`
+    t =   367.66s Swipe left "training.tabs" ScrollView
+    t =   367.66s     Wait for org.avoperformance.horse.ipad to idle
+    t =   367.67s     Find the "training.tabs" ScrollView
+    t =   367.80s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   367.95s         Wait for com.apple.springboard to idle
+    t =   367.99s     Synthesize event
+    t =   368.54s     Wait for org.avoperformance.horse.ipad to idle
+    t =   368.98s Find the "tab.Gps" Button
+    t =   369.20s Checking existence of `"training.tabs" ScrollView`
+    t =   369.31s Swipe left "training.tabs" ScrollView
+    t =   369.31s     Wait for org.avoperformance.horse.ipad to idle
+    t =   369.31s     Find the "training.tabs" ScrollView
+    t =   369.45s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   369.56s         Wait for com.apple.springboard to idle
+    t =   369.59s     Synthesize event
+    t =   370.10s     Wait for org.avoperformance.horse.ipad to idle
+    t =   370.58s Find the "tab.Gps" Button
+    t =   370.70s Checking existence of `"training.tabs" ScrollView`
+    t =   370.78s Swipe left "training.tabs" ScrollView
+    t =   370.78s     Wait for org.avoperformance.horse.ipad to idle
+    t =   370.81s     Find the "training.tabs" ScrollView
+    t =   370.92s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   371.01s         Wait for com.apple.springboard to idle
+    t =   371.04s     Synthesize event
+    t =   371.54s     Wait for org.avoperformance.horse.ipad to idle
+    t =   372.04s Find the "tab.Gps" Button
+    t =   372.26s Tap "tab.Gps" Button
+    t =   372.26s     Wait for org.avoperformance.horse.ipad to idle
+    t =   372.27s     Find the "tab.Gps" Button
+    t =   372.42s     Check for interrupting elements affecting "tab.Gps" Button
+    t =   372.50s         Wait for com.apple.springboard to idle
+    t =   372.52s     Synthesize event
+    t =   372.55s         Scroll element to visible
+    t =   372.56s         Find the "tab.Gps" Button
+    t =   372.71s         Computed hit point {760.75, 109.75} after scrolling to visible
+    t =   373.04s     Wait for org.avoperformance.horse.ipad to idle
+    t =   375.38s Added attachment named '13_Gps_vertical'
+    t =   375.38s Waiting 5.0s for "tab.Biomech" Button to exist
+    t =   376.42s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Biomech" Button`
+    t =   376.42s         Checking existence of `"tab.Biomech" Button`
+    t =   376.59s Find the "tab.Biomech" Button
+    t =   376.80s Tap "tab.Biomech" Button
+    t =   376.80s     Wait for org.avoperformance.horse.ipad to idle
+    t =   376.81s     Find the "tab.Biomech" Button
+    t =   376.95s     Check for interrupting elements affecting "tab.Biomech" Button
+    t =   377.05s         Wait for com.apple.springboard to idle
+    t =   377.08s     Synthesize event
+    t =   377.41s     Wait for org.avoperformance.horse.ipad to idle
+    t =   381.89s Added attachment named '14_Biomech_vertical'
+    t =   381.90s Waiting 5.0s for "tab.Compare" Button to exist
+    t =   382.91s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Compare" Button`
+    t =   382.92s         Checking existence of `"tab.Compare" Button`
+    t =   383.29s Find the "tab.Compare" Button
+    t =   383.63s Checking existence of `"training.tabs" ScrollView`
+    t =   383.92s Swipe left "training.tabs" ScrollView
+    t =   383.92s     Wait for org.avoperformance.horse.ipad to idle
+    t =   383.95s     Find the "training.tabs" ScrollView
+    t =   384.23s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   384.48s         Wait for com.apple.springboard to idle
+    t =   384.54s     Synthesize event
+    t =   385.11s     Wait for org.avoperformance.horse.ipad to idle
+    t =   385.93s Find the "tab.Compare" Button
+    t =   386.32s Checking existence of `"training.tabs" ScrollView`
+    t =   386.55s Swipe left "training.tabs" ScrollView
+    t =   386.55s     Wait for org.avoperformance.horse.ipad to idle
+    t =   386.55s     Find the "training.tabs" ScrollView
+    t =   386.79s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   387.02s         Wait for com.apple.springboard to idle
+    t =   387.06s     Synthesize event
+    t =   387.69s     Wait for org.avoperformance.horse.ipad to idle
+    t =   388.17s Find the "tab.Compare" Button
+    t =   388.51s Checking existence of `"training.tabs" ScrollView`
+    t =   388.82s Swipe left "training.tabs" ScrollView
+    t =   388.82s     Wait for org.avoperformance.horse.ipad to idle
+    t =   388.85s     Find the "training.tabs" ScrollView
+    t =   389.16s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   389.31s         Wait for com.apple.springboard to idle
+    t =   389.36s     Synthesize event
+    t =   390.01s     Wait for org.avoperformance.horse.ipad to idle
+    t =   390.48s Find the "tab.Compare" Button
+    t =   390.78s Checking existence of `"training.tabs" ScrollView`
+    t =   391.13s Swipe left "training.tabs" ScrollView
+    t =   391.13s     Wait for org.avoperformance.horse.ipad to idle
+    t =   391.16s     Find the "training.tabs" ScrollView
+    t =   391.40s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   391.61s         Wait for com.apple.springboard to idle
+    t =   391.64s     Synthesize event
+    t =   392.24s     Wait for org.avoperformance.horse.ipad to idle
+    t =   392.72s Find the "tab.Compare" Button
+    t =   393.08s Tap "tab.Compare" Button
+    t =   393.08s     Wait for org.avoperformance.horse.ipad to idle
+    t =   393.08s     Find the "tab.Compare" Button
+    t =   393.37s     Check for interrupting elements affecting "tab.Compare" Button
+    t =   393.66s         Wait for com.apple.springboard to idle
+    t =   393.70s     Synthesize event
+    t =   393.73s         Scroll element to visible
+    t =   393.73s         Find the "tab.Compare" Button
+    t =   393.99s         Computed hit point {781, 109.75} after scrolling to visible
+    t =   394.30s     Wait for org.avoperformance.horse.ipad to idle
+    t =   397.04s Added attachment named '15_Compare_vertical'
+    t =   397.05s Waiting 5.0s for "tab.Tides" Button to exist
+    t =   398.07s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Tides" Button`
+    t =   398.07s         Checking existence of `"tab.Tides" Button`
+    t =   400.09s Find the "tab.Tides" Button
+    t =   400.46s Tap "tab.Tides" Button
+    t =   400.46s     Wait for org.avoperformance.horse.ipad to idle
+    t =   400.47s     Find the "tab.Tides" Button
+    t =   400.62s     Check for interrupting elements affecting "tab.Tides" Button
+    t =   400.76s         Wait for com.apple.springboard to idle
+    t =   400.80s     Synthesize event
+    t =   401.13s     Wait for org.avoperformance.horse.ipad to idle
+    t =   403.63s Added attachment named '16_Tides_vertical'
+    t =   403.64s Waiting 5.0s for "tab.Reports" Button to exist
+    t =   404.67s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Reports" Button`
+    t =   404.67s         Checking existence of `"tab.Reports" Button`
+    t =   405.11s Find the "tab.Reports" Button
+    t =   405.44s Checking existence of `"training.tabs" ScrollView`
+    t =   405.76s Swipe left "training.tabs" ScrollView
+    t =   405.76s     Wait for org.avoperformance.horse.ipad to idle
+    t =   405.77s     Find the "training.tabs" ScrollView
+    t =   406.05s     Check for interrupting elements affecting "training.tabs" ScrollView
+    t =   406.35s         Wait for com.apple.springboard to idle
+    t =   406.39s     Synthesize event
+    t =   406.88s     Wait for org.avoperformance.horse.ipad to idle
+    t =   407.43s Find the "tab.Reports" Button
+    t =   407.70s Tap "tab.Reports" Button
+    t =   407.70s     Wait for org.avoperformance.horse.ipad to idle
+    t =   407.71s     Find the "tab.Reports" Button
+    t =   407.97s     Check for interrupting elements affecting "tab.Reports" Button
+    t =   408.21s         Wait for com.apple.springboard to idle
+    t =   408.25s     Synthesize event
+    t =   408.58s     Wait for org.avoperformance.horse.ipad to idle
+    t =   411.72s Added attachment named '17_Reports_vertical'
+    t =   411.75s Waiting 5.0s for "tab.Engine" Button to exist
+    t =   412.80s     Checking `Expect predicate `existsNoRetry == 1` for object "tab.Engine" Button`
+    t =   412.82s         Checking existence of `"tab.Engine" Button`
+    t =   414.26s Find the "tab.Engine" Button
+    t =   415.22s Tap "tab.Engine" Button
+    t =   415.22s     Wait for org.avoperformance.horse.ipad to idle
+    t =   415.22s     Find the "tab.Engine" Button
+    t =   415.51s     Check for interrupting elements affecting "tab.Engine" Button
+    t =   415.70s         Wait for com.apple.springboard to idle
+    t =   415.76s     Synthesize event
+    t =   416.09s     Wait for org.avoperformance.horse.ipad to idle
+    t =   418.60s Added attachment named '18_Engine_vertical'
+    t =   418.61s Waiting 4.0s for "nav.Geofences" Button to exist
+    t =   419.65s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Geofences" Button`
+    t =   419.65s         Checking existence of `"nav.Geofences" Button`
+    t =   419.93s Waiting 5.0s for "nav.Geofences" Button to exist
+    t =   420.96s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Geofences" Button`
+    t =   420.96s         Checking existence of `"nav.Geofences" Button`
+    t =   421.13s Tap "nav.Geofences" Button
+    t =   421.13s     Wait for org.avoperformance.horse.ipad to idle
+    t =   421.13s     Find the "nav.Geofences" Button
+    t =   421.31s     Check for interrupting elements affecting "nav.Geofences" Button
+    t =   421.44s         Wait for com.apple.springboard to idle
+    t =   421.48s     Synthesize event
+    t =   421.79s     Wait for org.avoperformance.horse.ipad to idle
+    t =   428.52s Added attachment named '19_Geofences_vertical'
+    t =   428.53s Waiting 4.0s for "nav.WatchWifi" Button to exist
+    t =   429.53s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.WatchWifi" Button`
+    t =   429.53s         Checking existence of `"nav.WatchWifi" Button`
+    t =   429.72s Waiting 5.0s for "nav.WatchWifi" Button to exist
+    t =   430.75s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.WatchWifi" Button`
+    t =   430.75s         Checking existence of `"nav.WatchWifi" Button`
+    t =   430.86s Tap "nav.WatchWifi" Button
+    t =   430.86s     Wait for org.avoperformance.horse.ipad to idle
+    t =   430.86s     Find the "nav.WatchWifi" Button
+    t =   430.97s     Check for interrupting elements affecting "nav.WatchWifi" Button
+    t =   431.08s         Wait for com.apple.springboard to idle
+    t =   431.14s     Synthesize event
+    t =   431.45s     Wait for org.avoperformance.horse.ipad to idle
+    t =   434.14s Added attachment named '20_WatchWifi_vertical'
+    t =   434.15s Waiting 4.0s for "nav.Server" Button to exist
+    t =   435.15s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Server" Button`
+    t =   435.15s         Checking existence of `"nav.Server" Button`
+    t =   435.24s Waiting 5.0s for "nav.Server" Button to exist
+    t =   436.29s     Checking `Expect predicate `existsNoRetry == 1` for object "nav.Server" Button`
+    t =   436.29s         Checking existence of `"nav.Server" Button`
+    t =   436.41s Tap "nav.Server" Button
+    t =   436.41s     Wait for org.avoperformance.horse.ipad to idle
+    t =   436.41s     Find the "nav.Server" Button
+    t =   436.51s     Check for interrupting elements affecting "nav.Server" Button
+    t =   436.61s         Wait for com.apple.springboard to idle
+    t =   436.66s     Synthesize event
+    t =   437.05s     Wait for org.avoperformance.horse.ipad to idle
+    t =   439.39s Added attachment named '21_Server_vertical'
+    t =   439.41s Tear Down
+Test Case '-[AVOiPadUITests.ScreenshotTests testCaptureEveryPagePortrait]' passed (440.411 seconds).
+Test Suite 'ScreenshotTests' passed at 2026-11-07 10:22:17.311.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 862.166 (862.169) seconds
+Test Suite 'AVOiPadUITests.xctest' passed at 2026-11-07 10:22:17.314.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 862.166 (862.172) seconds
+Test Suite 'All tests' passed at 2026-11-07 10:22:17.315.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 862.166 (862.173) seconds
+2026-11-07 10:22:20.812 xcodebuild[12301:40124] [MT] IDETestOperationsObserverDebug: 965.540 elapsed -- Testing started completed.
+2026-11-07 10:22:20.812 xcodebuild[12301:40124] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-07 10:22:20.812 xcodebuild[12301:40124] [MT] IDETestOperationsObserverDebug: 965.540 sec, +965.540 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/apk_android_avo/apk_android_avo/ui.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
