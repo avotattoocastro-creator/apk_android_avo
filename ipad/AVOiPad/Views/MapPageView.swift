@@ -21,7 +21,7 @@ struct MapPageView: View {
                 if app.compare.isPaired {
                     pairedLayout(geo)
                 } else if mapOnly {
-                    // the trainer's sketch: map in the top half, the time bar, then the charts (scroll) in the bottom half
+                    // the trainer's sketch: map in the top half, the time bar, then the chart in the bottom half
                     VStack(alignment: .leading, spacing: 8) {
                         mapArea(wide: true, playbackOnMap: false)
                             .frame(height: max(320, geo.size.height * 0.5))
@@ -30,15 +30,9 @@ struct MapPageView: View {
                             .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
                             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
                             .accessibilityIdentifier("map.timeBar")
-                        ScrollView(.vertical) {
-                            VStack(alignment: .leading, spacing: 10) {
-                                MapMetricPanel()
-                                    .frame(height: max(280, geo.size.height * 0.36))
-                                MapInfoCards(wide: geo.size.width >= 900)
-                            }
-                            .padding(.bottom, 16)
-                        }
-                        .scrollDisabled(app.charts.rangeMode)
+                        // the chart fills the rest (the Entrenamiento / legend / point cards were removed at the trainer's request)
+                        MapMetricPanel()
+                            .frame(maxHeight: .infinity)
                     }
                 } else {
                     ScrollView(.vertical) {

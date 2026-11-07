@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Mapa sin tarjetas inferiores y doble toque para quitar el tramo
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:**
+- «Mapa»: quitadas las tarjetas Entrenamiento, leyenda de velocidad y Punto seleccionado bajo la gráfica (boceto del entrenador); la gráfica con pestañas y zonas ocupa el resto de la página, sin desplazamiento vertical. En «Análisis» siguen.
+- Todas las gráficas sincronizadas: doble toque con el dedo o doble toque lateral del Apple Pencil (`UIPencilInteraction`) quita el tramo seleccionado.
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`, `ipad/AVOiPad/Views/ChartsView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Satélite con zoom máximo y fuera el aviso NFC de Cuadra/Jinetes
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:**

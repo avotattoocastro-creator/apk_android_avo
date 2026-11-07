@@ -990,6 +990,7 @@ struct TwoFingerPan: UIViewRepresentable {
     var onBegan: () -> Void
     var onChanged: (CGFloat) -> Void
     var onEnded: () -> Void
+    var onPencilDoubleTap: (() -> Void)? = nil
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
@@ -1004,14 +1005,18 @@ struct TwoFingerPan: UIViewRepresentable {
         g.delaysTouchesEnded = false
         g.delegate = context.coordinator
         v.addGestureRecognizer(g)
+        let pencil = UIPencilInteraction()
+        pencil.delegate = context.coordinator
+        v.addInteraction(pencil)
         context.coordinator.parent = self
         return v
     }
 
     func updateUIView(_ uiView: UIView, context: Context) { context.coordinator.parent = self }
 
-    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate, UIPencilInteractionDelegate {
         var parent: TwoFingerPan?
+        func pencilInteractionDidTap(_ interaction: UIPencilInteraction) { parent?.onPencilDoubleTap?() }
         @objc func pan(_ g: UIPanGestureRecognizer) {
             switch g.state {
             case .began: parent?.onBegan()
@@ -1060,10 +1065,12 @@ struct SyncChartCursorLayer: View {
             let plot: CGRect = proxy.plotFrame.map { geo[$0] } ?? CGRect(origin: .zero, size: geo.size)
             ZStack(alignment: .topLeading) {
                 // two fingers sideways = scroll the zoomed window (UIKit: SwiftUI on iPadOS 17 has no two-finger drag)
+                // also: Apple Pencil double tap (side of the pencil) = remove the selected stretch
                 if zoomable {
                     TwoFingerPan(onBegan: { panBase = domain },
                                  onChanged: { (dx: CGFloat) in panBy(dx, plot) },
-                                 onEnded: { panBase = nil; app.charts.scheduleDisplay(delayMs: 0) })
+                                 onEnded: { panBase = nil; app.charts.scheduleDisplay(delayMs: 0) },
+                                 onPencilDoubleTap: { clearRangeIfAny() })
                 }
                 if scrollFriendly {
                     // recognised together with the ScrollView pan so vertical swipes still scroll the page
@@ -1080,7 +1087,15 @@ struct SyncChartCursorLayer: View {
                 rangeView(plot).allowsHitTesting(false)
                 cursorView(plot).allowsHitTesting(false)
             }
+            // double tap with a finger on the chart = remove the selected stretch
+            .simultaneousGesture(TapGesture(count: 2).onEnded { clearRangeIfAny() })
         }
+    }
+
+    private func clearRangeIfAny() {
+        guard app.rangeStart.isFinite || app.rangeEnd.isFinite else { return }
+        app.charts.clearRange()
+        UISelectionFeedbackGenerator().selectionChanged()
     }
 
     private func timeAt(_ x: CGFloat, _ plot: CGRect) -> Double {
