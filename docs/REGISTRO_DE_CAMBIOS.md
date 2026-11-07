@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Inicio: sin logo redondo, rótulo y accesos más arriba
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia:** pantalla de inicio (`StartView`): quitado el logo redondo; el rótulo AVO / PERFORMANCE HORSE / TRAINING ANALYSIS sube a su sitio; la columna de accesos empieza arriba (antes centrada). Petición del entrenador: el jinete de la foto con los colores de la Cuadra Lezama — **no hecho**: requiere una foto propia (no se usan imágenes de Internet).
+**Archivos:** `ipad/AVOiPad/Views/StartView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-08 — iPad — Menú: Dashboard, Entrenamientos y Mapa antes de Análisis
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (bocetos del entrenador, 00:20–00:24):**

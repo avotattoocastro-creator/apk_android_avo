@@ -55,28 +55,25 @@ struct StartView: View {
         ZStack(alignment: .topLeading) {
             Image("avo_home_hero").resizable().frame(width: StartView.artW * s, height: StartView.artH * s)
             Group {
-                Image("avo_logo").resizable().scaledToFit()
-                    .frame(width: 170 * s, height: 170 * s)
-                    .blendMode(.screen)
-                    .position(x: 352 * s, y: 165 * s)
+                // round logo removed and the lettering moved up into its place (trainer's sketch 08/11/2026)
                 Text("AVO")
                     .font(.system(size: 150 * s, weight: .light))
                     .tracking(14 * s)
                     .foregroundStyle(Color(hex: 0xF7F7F5))
                     .fixedSize()
-                    .position(x: 341 * s, y: 378 * s)
+                    .position(x: 341 * s, y: 190 * s)
                 Text("PERFORMANCE HORSE")
                     .font(.system(size: 41 * s, weight: .medium))
                     .tracking(5 * s)
                     .foregroundStyle(Color(hex: 0xF7F7F5))
                     .fixedSize()
-                    .position(x: 340 * s, y: 481 * s)
+                    .position(x: 340 * s, y: 293 * s)
                 Text("TRAINING ANALYSIS")
                     .font(.system(size: 29 * s, weight: .semibold))
                     .tracking(4 * s)
                     .foregroundStyle(Color(hex: 0xF7F7F5))
                     .fixedSize()
-                    .position(x: 342 * s, y: 544 * s)
+                    .position(x: 342 * s, y: 356 * s)
                 Text("CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO")
                     .font(.system(size: 32 * s, weight: .semibold))
                     .tracking(4 * s)
@@ -92,7 +89,8 @@ struct StartView: View {
     // ------------------------------------------------------------------ actions
     private var actions: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 0).frame(maxHeight: .infinity).layoutPriority(-1)
+            // actions start at the top, level with the lettering (trainer's sketch 08/11/2026)
+            Spacer(minLength: 0).frame(height: 90)
             Rectangle().fill(Color(hex: 0x3A4A60)).frame(height: 1).padding(.horizontal, 10)
             action(icon: "folder", title: "Abrir entrenamiento", subtitle: "Archivos .avo / .avr") { app.showImporter = true }
             action(icon: "square.grid.2x2", title: "Dashboard", subtitle: "Resumen de entrenamientos y accesos rápidos") { app.page = .sessions }
