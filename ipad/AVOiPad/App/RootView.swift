@@ -460,6 +460,11 @@ private struct TrainingBar: View {
 
     var body: some View {
         HStack(spacing: 10) {
+            if app.page == .map {
+                // «Mapa»: only the training picker (trainer's sketch); the other pages and «Asignar» are in «Análisis»
+                RootSessionMenu(maxWidth: 420)
+                Spacer(minLength: 0)
+            } else {
             RootSessionMenu(maxWidth: 280)
             RootPairMenu(maxWidth: 240)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -476,6 +481,7 @@ private struct TrainingBar: View {
             }
             .buttonStyle(.avoSecondary)
             .disabled(app.selected == nil)
+            }
         }
         .lineLimit(1)
         .padding(.horizontal, 12)

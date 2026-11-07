@@ -50,6 +50,9 @@ struct MapKitRoute: UIViewRepresentable {
     var courseLines: [MapCourseLine] = []
     /// true = «Ajustar» gira el mapa para que el recorrido (la playa) quede en horizontal; false = norte arriba.
     var alignRoute: Bool = true
+    /// Fixed marker at the maximum speed: time on the timeline and its label («Vmáx 51,1 km/h»).
+    var vmaxTime: Double = .nan
+    var vmaxLabel: String = ""
     var onTap: (Double) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator() }
@@ -89,6 +92,7 @@ struct MapKitRoute: UIViewRepresentable {
         c.applyMarkers(showMarkers)
         c.applyRange(rangeStart, rangeEnd)
         c.applyCursor(cursorTime)
+        c.applyVmax(vmaxTime, vmaxLabel)
         c.applyCourseLines(courseLines)
         if c.alignRoute != alignRoute {
             c.alignRoute = alignRoute
@@ -129,6 +133,26 @@ struct MapKitRoute: UIViewRepresentable {
         private var courseLines: [MapCourseLine] = []
         private var courseOverlays: [CourseLineOverlay] = []
         private var courseLabels: [CourseLabelAnnotation] = []
+
+        // ------------------------------------------------------------ max speed marker
+        private var vmax: VmaxAnnotation? = nil
+        private var vmaxKey: String = ""
+
+        func applyVmax(_ time: Double, _ label: String) {
+            guard let map = map else { return }
+            let i: Int = time.isFinite ? (data?.indexAt(time) ?? -1) : -1
+            let key: String = "\(dataId?.uuidString ?? "")|\(i)|\(label)"
+            if key == vmaxKey { return }
+            vmaxKey = key
+            if let v = vmax { map.removeAnnotation(v) }
+            vmax = nil
+            guard let d = data, i >= 0, i < d.points.count else { return }
+            let a = VmaxAnnotation()
+            a.coordinate = d.points[i].coordinate
+            a.title = label
+            vmax = a
+            map.addAnnotation(a)
+        }
 
         // ------------------------------------------------------------ course lines (start / finish)
         func applyCourseLines(_ lines: [MapCourseLine]) {
@@ -467,6 +491,18 @@ struct MapKitRoute: UIViewRepresentable {
                 v.displayPriority = .required
                 return v
             }
+            if let vm = annotation as? VmaxAnnotation {
+                let reuse: String = "route.vmax"
+                let v = (mapView.dequeueReusableAnnotationView(withIdentifier: reuse) as? MKMarkerAnnotationView)
+                    ?? MKMarkerAnnotationView(annotation: vm, reuseIdentifier: reuse)
+                v.annotation = vm
+                v.markerTintColor = UIColor(red: 1, green: 0x8A / 255.0, blue: 0, alpha: 1)
+                v.glyphImage = UIImage(systemName: "bolt.fill")
+                v.titleVisibility = .visible
+                v.displayPriority = .required
+                v.zPriority = .defaultSelected
+                return v
+            }
             guard let a = annotation as? RouteMarkerAnnotation else { return nil }
             let reuse: String = "route.\(a.kind.rawValue)"
             let v: MKAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuse)
@@ -568,6 +604,9 @@ final class RouteOverlayRenderer: MKOverlayRenderer {
 }
 
 // MARK: - Annotations
+
+/// Maximum speed of the training (fixed, orange marker with a bolt).
+final class VmaxAnnotation: MKPointAnnotation {}
 
 final class RouteMarkerAnnotation: MKPointAnnotation {
     enum Kind: String { case start, end, marker, cursor }

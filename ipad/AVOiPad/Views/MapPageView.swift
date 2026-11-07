@@ -18,7 +18,7 @@ struct MapPageView: View {
     var body: some View {
         GeometryReader { (geo: GeometryProxy) in
             Group {
-                if app.compare.isPaired {
+                if app.compare.isPaired && !mapOnly {
                     pairedLayout(geo)
                 } else if mapOnly {
                     // the trainer's sketch: map in the top half, the time bar, then the chart in the bottom half
@@ -384,6 +384,8 @@ struct MapRouteContainer: View {
                     command: command,
                     courseLines: showCourse ? app.corrections.mapLines(app.selected) : [],
                     alignRoute: alignRoute,
+                    vmaxTime: useOverride ? .nan : (app.selected?.maxSpeedPoint?.t ?? .nan),
+                    vmaxLabel: app.selected?.maxSpeedPoint.map { "Vmáx " + DotNetFormat.custom($0.kmh, "0.0", spanish: true) + " km/h" } ?? "",
                     onTap: { (t: Double) in app.cursorTime = t })
     }
 }
@@ -524,12 +526,23 @@ private struct MapProfilePanel: View {
         SyncChartBox(title: "Perfil de velocidad (km/h)", legend: [],
                      readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }) {
             VStack(spacing: 6) {
-                SyncSignalChart(panel: charts.panel(.speed), domain: charts.domain, bands: app.corrections.bands(app.selected),
+                SyncSignalChart(panel: MapVmaxMark.add(charts.panel(.speed), app.selected), domain: charts.domain, bands: app.corrections.bands(app.selected),
                                 includeZero: true, emptyText: "Sin datos",
                                 handles: app.corrections.handles(app.selected),
                                 onHandle: { (id: Int, t: Double) in app.corrections.moveHandle(id, to: t) })
             }
         }
+    }
+}
+
+/// Fixed point at the maximum speed on the speed charts (same point as the map's bolt marker).
+enum MapVmaxMark {
+    static let color: Color = Color(hex: 0xFF8A00)
+    static func add(_ panel: SyncPanel, _ s: SessionItem?) -> SyncPanel {
+        guard let p = s?.maxSpeedPoint, !panel.isEmpty else { return panel }
+        var out: SyncPanel = panel
+        out.markers.append(SyncMarker(id: -9001, x: p.t, y: p.kmh, color: color))
+        return out
     }
 }
 
@@ -611,7 +624,8 @@ private struct MapMetricPanel: View {
                 Text(metric.unit).font(.caption2).foregroundStyle(Avo.textDim)
                 SyncReadout(text: { (a: AppModel) -> String in MapMetricPanel.readout(metric, a) })
             }
-            SyncSignalChart(panel: charts.panel(metric.panelId), domain: charts.domain,
+            SyncSignalChart(panel: metric == .speed ? MapVmaxMark.add(charts.panel(.speed), app.selected) : charts.panel(metric.panelId),
+                            domain: charts.domain,
                             bands: app.corrections.bands(app.selected),
                             includeZero: metric != .tilt && metric != .cadence,
                             emptyText: charts.building ? "Calculando…" : "Sin datos",

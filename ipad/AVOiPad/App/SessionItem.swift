@@ -108,6 +108,21 @@ final class SessionItem: Identifiable {
         timeline.count > 0 ? Stats.maxFinite(timeline.speedFiltered, fallback: 0) * 3.6 : session.maxSpeedKmh
     }
     var maxSpeedText: String { DotNetFormat.custom(maxSpeedKmh, "0.0", spanish: true) + " km/h" }
+
+    /// Time (timeline seconds) and value (km/h) of the maximum filtered speed: fixed marker on the map and the speed chart.
+    /// Cached per timeline (it is read on every cursor move of the map).
+    var maxSpeedPoint: (t: Double, kmh: Double)? {
+        let n: Int = timeline.count
+        if let c = maxSpeedCache, c.n == n { return c.value }
+        var best: Int = -1
+        var bv: Double = -.infinity
+        let v: [Double] = timeline.speedFiltered
+        for i in 0..<min(n, v.count) where v[i].isFinite && v[i] > bv { bv = v[i]; best = i }
+        let value: (t: Double, kmh: Double)? = best >= 0 ? (timeline.t[best], bv * 3.6) : nil
+        maxSpeedCache = (n, value)
+        return value
+    }
+    @ObservationIgnored private var maxSpeedCache: (n: Int, value: (t: Double, kmh: Double)?)? = nil
     var meanSpeedText: String {
         if timeline.count < 2 { return "Sin datos" }
         let seg = SegmentDefinition(name: "", t0: timeline.t[0], t1: timeline.t[timeline.count - 1])
