@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-07 — iPad — Mapa: sigue al cursor, datos del tramo, mapa en la mitad y desplazamiento lateral con zoom
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (bocetos del entrenador, 23:25–23:31):**
+- El mapa se centra en el punto elegido en la gráfica o en la barra de tiempo **sin cambiar el zoom ni el giro** (`MapKitRoute.applyCursor`). No se mueve cuando el punto se toca en el propio mapa ni en el primer cursor de un recorrido.
+- Con un tramo seleccionado en la gráfica, la franja superior del mapa muestra los datos del **tramo**: duración, distancia, vel. media, vel. máx., aceleración y frenada máx. validadas, inicio–fin.
+- «Mapa»: mapa en la mitad superior, barra de tiempo (reproducción) entre el mapa y las gráficas, y debajo las gráficas con desplazamiento vertical (gráfica con pestañas + zonas, y las tarjetas Entrenamiento / leyenda / punto). En «Análisis» la reproducción sigue sobre el mapa.
+- Gráficas con zoom: desplazamiento lateral con **dos dedos** (`TwoFingerPan`, UIKit, simultáneo con el resto de gestos), al arrastrar el cursor contra un borde, y en «Mapa» la barra de vista general con el recuadro arrastrable y «Completo».
+**Archivos:** `ipad/AVOiPad/Views/MapPageView.swift`, `ipad/AVOiPad/Views/MapKitRoute.swift`, `ipad/AVOiPad/Views/ChartsView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-07 — iPad — Mapa: nueva distribución según el boceto del entrenador
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (página «Mapa»; los elementos sobre el mapa también en «Análisis»):**

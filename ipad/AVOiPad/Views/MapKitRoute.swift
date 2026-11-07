@@ -257,6 +257,11 @@ struct MapKitRoute: UIViewRepresentable {
                 return
             }
             let coord: CLLocationCoordinate2D = d.points[i].coordinate
+            // Follow the cursor chosen on the charts / time bar: centre the map on it keeping the zoom and rotation.
+            // Not for the first cursor of a route (keeps «Ajustar») nor when the point was tapped on the map itself.
+            let follow: Bool = cursor != nil && !tappedOnMap && map.didInitialFit
+            tappedOnMap = false
+            if follow { centre(map, on: coord) }
             if let c = cursor {
                 c.coordinate = coord
             } else {
@@ -265,6 +270,22 @@ struct MapKitRoute: UIViewRepresentable {
                 cursor = c
                 map.addAnnotation(c)
             }
+        }
+
+        /// The last cursor change came from a tap on the route (the map must not jump).
+        private var tappedOnMap: Bool = false
+
+        /// Centre on `coord` without touching the zoom (camera altitude) or the heading. Short moves (playback, dragging
+        /// the cursor) are not animated so the map keeps up; jumps are.
+        private func centre(_ map: MKMapView, on coord: CLLocationCoordinate2D) {
+            guard CLLocationCoordinate2DIsValid(coord) else { return }
+            let here: CGPoint = map.convert(coord, toPointTo: map)
+            let mid: CGPoint = CGPoint(x: map.bounds.midX, y: map.bounds.midY)
+            let jump: CGFloat = hypot(here.x - mid.x, here.y - mid.y)
+            if jump < 2 { return }
+            let cam: MKMapCamera = map.camera.copy() as? MKMapCamera ?? map.camera
+            cam.centerCoordinate = coord
+            map.setCamera(cam, animated: jump > min(map.bounds.width, map.bounds.height) * 0.25)
         }
 
         // ------------------------------------------------------------ view
@@ -404,7 +425,10 @@ struct MapKitRoute: UIViewRepresentable {
             let zoomScale: Double = map.bounds.width > 0 ? Double(map.bounds.width) / map.visibleMapRect.width : 1
             let maxD: Double = 44 / max(zoomScale, 1e-12)
             let i: Int = d.nearestIndex(to: mp, maxDistance: maxD)
-            if i >= 0 && i < d.t.count { onTap?(d.t[i]) }
+            if i >= 0 && i < d.t.count {
+                tappedOnMap = true
+                onTap?(d.t[i])
+            }
         }
 
         // ------------------------------------------------------------ delegate

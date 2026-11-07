@@ -266,7 +266,7 @@ struct ChartsNavigator: View {
 /// Overview of the whole session: speed outline, phase / repetition strips, cursor and the visible window. Dragging the
 /// window scrolls the charts; touching outside it moves the window there; without zoom, a touch zooms to a quarter of
 /// the session around that point.
-private struct ChartsOverviewBar: View {
+struct ChartsOverviewBar: View {
     @Environment(AppModel.self) private var app
     let charts: ChartsModel
     @State private var grab: Double? = nil
@@ -983,6 +983,53 @@ struct SyncBandLayer: View {
     }
 }
 
+/// Two-finger horizontal pan on top of a SwiftUI chart. The view only adds a UIPanGestureRecognizer (2 touches) that
+/// recognises together with everything else and does not cancel touches, so one-finger cursor / range drags and the
+/// pinch zoom keep working.
+struct TwoFingerPan: UIViewRepresentable {
+    var onBegan: () -> Void
+    var onChanged: (CGFloat) -> Void
+    var onEnded: () -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> UIView {
+        let v = UIView(frame: .zero)
+        v.backgroundColor = .clear
+        let g = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.pan(_:)))
+        g.minimumNumberOfTouches = 2
+        g.maximumNumberOfTouches = 2
+        g.cancelsTouchesInView = false
+        g.delaysTouchesBegan = false
+        g.delaysTouchesEnded = false
+        g.delegate = context.coordinator
+        v.addGestureRecognizer(g)
+        context.coordinator.parent = self
+        return v
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) { context.coordinator.parent = self }
+
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var parent: TwoFingerPan?
+        @objc func pan(_ g: UIPanGestureRecognizer) {
+            switch g.state {
+            case .began: parent?.onBegan()
+            case .changed: parent?.onChanged(g.translation(in: g.view).x)
+            case .ended, .cancelled, .failed: parent?.onEnded()
+            default: break
+            }
+        }
+        func gestureRecognizer(_ g: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer) -> Bool { true }
+        /// Only mostly-horizontal two-finger moves; vertical ones are left to the page scroll.
+        func gestureRecognizerShouldBegin(_ g: UIGestureRecognizer) -> Bool {
+            guard let p = g as? UIPanGestureRecognizer else { return true }
+            let v: CGPoint = p.velocity(in: p.view)
+            return abs(v.x) >= abs(v.y)
+        }
+    }
+}
+
 /// Cursor line, selected range and touch handling of a chart. Reads the shared cursor/range itself so moving the cursor
 /// never re-renders the chart marks.
 struct SyncChartCursorLayer: View {
@@ -998,11 +1045,26 @@ struct SyncChartCursorLayer: View {
     @State private var dragMode: Int = 0
     @State private var anchorT: Double = .nan
     @State private var pinchBase: ClosedRange<Double>? = nil
+    @State private var panBase: ClosedRange<Double>? = nil
+
+    /// Two-finger sideways scroll of the zoomed window: finger moves right → earlier times (like a map).
+    private func panBy(_ dx: CGFloat, _ plot: CGRect) {
+        guard app.charts.isZoomed, let b = panBase, plot.width > 1 else { return }
+        let w: Double = b.upperBound - b.lowerBound
+        let dt: Double = -Double(dx / plot.width) * w
+        app.charts.setViewport(b.lowerBound + dt, b.upperBound + dt, refresh: false)
+    }
 
     var body: some View {
         GeometryReader { (geo: GeometryProxy) in
             let plot: CGRect = proxy.plotFrame.map { geo[$0] } ?? CGRect(origin: .zero, size: geo.size)
             ZStack(alignment: .topLeading) {
+                // two fingers sideways = scroll the zoomed window (UIKit: SwiftUI on iPadOS 17 has no two-finger drag)
+                if zoomable {
+                    TwoFingerPan(onBegan: { panBase = domain },
+                                 onChanged: { (dx: CGFloat) in panBy(dx, plot) },
+                                 onEnded: { panBase = nil; app.charts.scheduleDisplay(delayMs: 0) })
+                }
                 if scrollFriendly {
                     // recognised together with the ScrollView pan so vertical swipes still scroll the page
                     Color.clear
@@ -1088,6 +1150,11 @@ struct SyncChartCursorLayer: View {
                 }
                 if dragMode == 1 {
                     app.cursorTime = t
+                    // zoomed: dragging the cursor against an edge scrolls the window that way
+                    if app.charts.isZoomed {
+                        if v.location.x >= plot.maxX - 14 { app.charts.pan(0.03) }
+                        else if v.location.x <= plot.minX + 14 { app.charts.pan(-0.03) }
+                    }
                 } else if dragMode == 2 {
                     app.rangeStart = anchorT
                     app.rangeEnd = t

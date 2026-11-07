@@ -21,16 +21,29 @@ struct MapPageView: View {
                 if app.compare.isPaired {
                     pairedLayout(geo)
                 } else if mapOnly {
-                    VStack(alignment: .leading, spacing: 10) {
-                        mapArea(wide: true)
-                            .frame(maxHeight: .infinity)
-                        MapMetricPanel()
-                            .frame(height: max(300, geo.size.height * 0.42))
+                    // the trainer's sketch: map in the top half, the time bar, then the charts (scroll) in the bottom half
+                    VStack(alignment: .leading, spacing: 8) {
+                        mapArea(wide: true, playbackOnMap: false)
+                            .frame(height: max(320, geo.size.height * 0.5))
+                        SyncPlaybackBar(compact: false)
+                            .padding(.horizontal, 10).padding(.vertical, 6)
+                            .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+                            .accessibilityIdentifier("map.timeBar")
+                        ScrollView(.vertical) {
+                            VStack(alignment: .leading, spacing: 10) {
+                                MapMetricPanel()
+                                    .frame(height: max(280, geo.size.height * 0.36))
+                                MapInfoCards(wide: geo.size.width >= 900)
+                            }
+                            .padding(.bottom, 16)
+                        }
+                        .scrollDisabled(app.charts.rangeMode)
                     }
                 } else {
                     ScrollView(.vertical) {
                         LazyVStack(alignment: .leading, spacing: 10) {
-                            mapArea(wide: true)
+                            mapArea(wide: true, playbackOnMap: true)
                                 .frame(height: max(380, geo.size.height * 0.58))
                             MapProfilePanel()
                                 .frame(height: 150)
@@ -75,7 +88,7 @@ struct MapPageView: View {
         }
     }
 
-    private func mapArea(wide: Bool) -> some View {
+    private func mapArea(wide: Bool, playbackOnMap: Bool) -> some View {
         let model: MapModel = app.map
         return ZStack(alignment: .topLeading) {
             MapRouteContainer(command: command,
@@ -91,7 +104,9 @@ struct MapPageView: View {
                 .padding(.top, 12)
                 .padding(.trailing, 160)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            // bottom: playback (play, speed, scrubber, time) over the map, left of Capas and the zoom buttons
+            // Análisis: playback (play, speed, scrubber, time) over the bottom of the map, left of Capas and the zoom buttons.
+            // «Mapa» has it as its own time bar between the map and the charts.
+            if playbackOnMap {
             SyncPlaybackBar(compact: false)
                 .padding(.horizontal, 10).padding(.vertical, 6)
                 .background(Color(hex: 0x101014, alpha: 0.86), in: RoundedRectangle(cornerRadius: 8))
@@ -100,6 +115,7 @@ struct MapPageView: View {
                 .padding(.trailing, 58 + 118)
                 .padding(.bottom, 24)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            }
             // bottom-right, next to the zoom buttons: Capas (the panel opens above it)
             Group {
                 if showLayers {
@@ -202,8 +218,24 @@ private struct MapCursorOverlay: View {
 
     var body: some View {
         let has: Bool = app.selected != nil && app.cursorTime.isFinite
-        // One horizontal strip along the top of the map (the trainer's sketch): point data, then the phase data.
+        let rows: [SyncStatRow] = app.hasRange ? app.charts.rangeStats : []
+        // One horizontal strip along the top of the map (the trainer's sketch): the selected stretch when there is one,
+        // otherwise the point data and then the phase data.
         HStack(alignment: .center, spacing: 14) {
+            if !rows.isEmpty {
+                HStack(spacing: 6) {
+                    RoundedRectangle(cornerRadius: 2).fill(Avo.red.opacity(0.6)).frame(width: 10, height: 10)
+                    Text("TRAMO").font(.system(size: 9.5, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
+                }
+                stat("Duración", value(rows, "Duración"), "")
+                stat("Distancia", value(rows, "Distancia"), "")
+                stat("Vel. media", value(rows, "Vel. media"), "")
+                stat("Vel. máx.", value(rows, "Vel. máxima"), "")
+                stat("Acel. máx.", value(rows, "Aceleración máx. validada"), "")
+                stat("Frenada máx.", value(rows, "Frenada máx. validada"), "")
+                Text(value(rows, "Inicio") + " – " + value(rows, "Fin"))
+                    .font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1)
+            } else {
             HStack(spacing: 6) {
                 Circle().fill(Avo.red).frame(width: 8, height: 8)
                 Text("PUNTO").font(.system(size: 9.5, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.textDim)
@@ -226,6 +258,7 @@ private struct MapCursorOverlay: View {
                 }
             } else {
                 Text("Toca el recorrido o la línea de tiempo").font(.caption).foregroundStyle(Avo.textDim)
+            }
             }
         }
         .lineLimit(1)
@@ -261,6 +294,10 @@ private struct MapCursorOverlay: View {
                     dm.isFinite ? DotNetFormat.custom(max(0, dm), "0", spanish: true) : "—", total)
         }
         return nil
+    }
+
+    private func value(_ rows: [SyncStatRow], _ key: String) -> String {
+        rows.first { $0.key == key }?.value ?? "—"
     }
 
     private func stat(_ label: String, _ value: String, _ unit: String) -> some View {
@@ -587,6 +624,16 @@ private struct MapMetricPanel: View {
                             handles: app.corrections.handles(app.selected),
                             onHandle: { (id: Int, t: Double) in app.corrections.moveHandle(id, to: t) })
                 .frame(maxHeight: .infinity)
+            // with zoom: overview bar of the whole session; drag its window to scroll sideways (also two fingers on the chart)
+            if charts.isZoomed {
+                HStack(spacing: 8) {
+                    ChartsOverviewBar(charts: charts)
+                        .frame(height: 28)
+                    Button { charts.resetZoom() } label: { Label("Completo", systemImage: "arrow.left.and.right") }
+                        .buttonStyle(.avoSecondary)
+                        .accessibilityIdentifier("map.zoomReset")
+                }
+            }
             ZoneToolbar(embedded: true)
         }
         .padding(.horizontal, 10).padding(.vertical, 8)
