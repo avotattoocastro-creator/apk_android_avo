@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — IA sin texto («respuesta cortada por longitud») y cifras del Dashboard
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:**
+- Análisis IA del tramo: gastaba ~7600 tokens y no mostraba texto. Claude Sonnet 5.5 piensa por defecto (pensamiento adaptativo) y `max_tokens` cubre pensamiento + texto: con 4096 todo se iba en pensar. Ahora el tramo usa `max_tokens` 32 000 con `output_config.effort = "medium"`, y el Asistente IA 16 000 (antes 4096, mismo problema posible). `ClaudeClient.stream` acepta `effort`.
+- Dashboard: las 5 cifras siempre en una fila (con 3 columnas se cortaban Velocidad máxima y Sesión activa).
+**Archivos:** `Core/ClaudeAPI.swift`, `App/AssistantModel.swift`, `App/StretchModel.swift`, `Views/HomeView.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Corrige el archivo para TestFlight (Xcode 26)
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:** el run 42429837057 compiló y pasó las pruebas, pero el archivo Release falló: «the compiler is unable to type-check this expression in reasonable time» en la fila de «Tramos guardados» (`StableView.swift`). La fila pasa a una vista propia (`StableStretchRow`) y se simplifican las expresiones largas de `StretchAnalysisView` (parciales y observaciones). Sin cambios de comportamiento.

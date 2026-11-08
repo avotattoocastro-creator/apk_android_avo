@@ -19,7 +19,7 @@ struct HomeView: View {
                 HStack(alignment: .top, spacing: 14) {
                     VStack(alignment: .leading, spacing: 14) {
                         heroBanner.frame(maxHeight: .infinity)
-                        metrics(columns: geo.size.width >= 1250 ? 5 : 3)
+                        metrics(columns: 5)   // always one row of 5 (with 3 columns the last two were cut off)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     actionsCard(fill: true).frame(width: 340).frame(maxHeight: .infinity)

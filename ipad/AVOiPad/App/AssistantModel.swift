@@ -61,8 +61,9 @@ final class AssistantModel {
         static func spent(_ month: String) -> String { "assistant.spentUSD." + month }
     }
 
-    /// Respuesta máxima de Claude (tokens).
-    static let maxOutputTokens: Int = 4_096
+    /// Respuesta máxima de Claude (tokens). Incluye el pensamiento adaptativo de los modelos 5.5 (activo por defecto):
+    /// con 4096 el modelo podía gastarlo todo pensando y no escribir nada («respuesta cortada por longitud»).
+    static let maxOutputTokens: Int = 16_000
     /// Tope del contexto para Claude (~60 000 tokens; queda por debajo del umbral de 100 000 de Haiku 5.5).
     static let maxContextChars: Int = 180_000
     /// Sesiones anteriores del caballo que se añaden como historia.

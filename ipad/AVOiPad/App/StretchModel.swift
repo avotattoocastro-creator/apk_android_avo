@@ -208,13 +208,15 @@ final class StretchModel {
             ["type": "text", "text": "Datos del tramo seleccionado:\n" + context],
         ]
         let messages: [[String: Any]] = [["role": "user", "content": StretchModel.aiQuestion]]
-        aiStatus = "Claude \(m.title) está analizando el tramo…"
+        aiStatus = "Claude \(m.title) está analizando el tramo (primero piensa; puede tardar 1–2 minutos)…"
         do {
+            // long, complete answer: room for thinking + ~10 000 tokens of text; medium effort bounds the thinking
             for try await ev in ClaudeClient(apiKey: key).stream(model: m, system: system, messages: messages,
-                                                                  maxTokens: AssistantModel.maxOutputTokens) {
+                                                                  maxTokens: 32_000, effort: "medium") {
                 if Task.isCancelled { break }
                 switch ev {
                 case .text(let t):
+                    if aiText.isEmpty { aiStatus = "Claude \(m.title) está escribiendo…" }
                     aiText += t
                 case .done(let stop, let usage):
                     let cost: Double = usage.costUSD(m)

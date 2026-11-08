@@ -175,10 +175,14 @@ struct ClaudeClient {
     }
 
     /// Mensaje con streaming (SSE). `system` son bloques de texto (el último puede llevar `cache_control`).
+    /// The 5.5 models think (adaptive thinking) before answering by default and `max_tokens` covers thinking + text:
+    /// with a small limit the whole budget can go into thinking and no text arrives. `effort` (low/medium/high) bounds
+    /// how much it thinks; nil = API default (high).
     func stream(model: ClaudeModel, system: [[String: Any]], messages: [[String: Any]],
-                maxTokens: Int) -> AsyncThrowingStream<ClaudeStreamEvent, Error> {
-        let body: [String: Any] = ["model": model.rawValue, "max_tokens": maxTokens, "stream": true,
+                maxTokens: Int, effort: String? = nil) -> AsyncThrowingStream<ClaudeStreamEvent, Error> {
+        var body: [String: Any] = ["model": model.rawValue, "max_tokens": maxTokens, "stream": true,
                                    "system": system, "messages": messages]
+        if let e = effort { body["output_config"] = ["effort": e] }
         return AsyncThrowingStream { (cont: AsyncThrowingStream<ClaudeStreamEvent, Error>.Continuation) in
             let task = Task {
                 do {
