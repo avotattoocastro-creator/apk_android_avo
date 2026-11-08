@@ -394,9 +394,21 @@ struct MapRouteContainer: View {
                     command: command,
                     courseLines: showCourse ? app.corrections.mapLines(app.selected) : [],
                     alignRoute: alignRoute,
+                    focusStart: useOverride ? .nan : MapRouteContainer.workSpan(app.selected).t0,
+                    focusEnd: useOverride ? .nan : MapRouteContainer.workSpan(app.selected).t1,
                     vmaxTime: useOverride ? .nan : (app.selected?.maxSpeedPoint?.t ?? .nan),
                     vmaxLabel: app.selected?.maxSpeedPoint.map { "Vmáx " + DotNetFormat.custom($0.kmh, "0.0", spanish: true) + " km/h" } ?? "",
                     onTap: { (t: Double) in app.cursorTime = t })
+    }
+}
+
+extension MapRouteContainer {
+    /// Work phase of the engine (with the manual corrections) in timeline seconds; (NaN, NaN) when there is none.
+    static func workSpan(_ s: SessionItem?) -> (t0: Double, t1: Double) {
+        guard let s = s, let tw = s.engine?.trackWork, tw.present, tw.work.present,
+              tw.work.t0.isFinite, tw.work.t1.isFinite, tw.work.t1 > tw.work.t0 else { return (.nan, .nan) }
+        let off: Double = s.engineOffsetS
+        return (tw.work.t0 - off, tw.work.t1 - off)
     }
 }
 

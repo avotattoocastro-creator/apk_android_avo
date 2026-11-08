@@ -50,6 +50,10 @@ struct MapKitRoute: UIViewRepresentable {
     var courseLines: [MapCourseLine] = []
     /// true = «Ajustar» gira el mapa para que el recorrido (la playa) quede en horizontal; false = norte arriba.
     var alignRoute: Bool = true
+    /// Default framing (trainer's request 08/11/2026): «Ajustar» and the first view zoom on this time span (the work
+    /// phase of the engine) instead of the whole route; NaN = whole route.
+    var focusStart: Double = .nan
+    var focusEnd: Double = .nan
     /// Fixed marker at the maximum speed: time on the timeline and its label («Vmáx 51,1 km/h»).
     var vmaxTime: Double = .nan
     var vmaxLabel: String = ""
@@ -89,6 +93,7 @@ struct MapKitRoute: UIViewRepresentable {
         c.fitPadding = fitPadding
         c.applyProvider(provider, cacheDir: tileCacheDir)
         c.applyRoute(data)
+        c.applyFocus(focusStart, focusEnd)
         c.applyMarkers(showMarkers)
         c.applyRange(rangeStart, rangeEnd)
         c.applyCursor(cursorTime)
@@ -313,6 +318,24 @@ struct MapKitRoute: UIViewRepresentable {
         }
 
         // ------------------------------------------------------------ view
+        private var focus: ClosedRange<Double>? = nil
+
+        /// New work span (the engine result usually arrives after the route): frame it once.
+        func applyFocus(_ a: Double, _ b: Double) {
+            let f: ClosedRange<Double>? = (a.isFinite && b.isFinite && b > a) ? a...b : nil
+            if f == focus { return }
+            focus = f
+            if let map = map, map.didInitialFit, f != nil { fit(animated: true) }
+        }
+
+        /// Route points used for framing: those of the focus span when there are enough, otherwise all.
+        private func framePoints(_ d: RouteRenderData) -> [MKMapPoint] {
+            guard let f = focus, d.t.count == d.points.count else { return d.points }
+            var out: [MKMapPoint] = []
+            for i in 0..<d.points.count where f.contains(d.t[i]) { out.append(d.points[i]) }
+            return out.count >= 10 ? out : d.points
+        }
+
         func fit(animated: Bool) {
             guard let map = map else { return }
             if map.bounds.width < 10 || map.bounds.height < 10 { map.fitWanted = true; return }
@@ -390,18 +413,19 @@ struct MapKitRoute: UIViewRepresentable {
         /// Fit the route with a given heading: extent measured along / across the screen axes, padding kept, then the
         /// camera distance taken from an equivalent north-up rect.
         private func fitRotated(_ map: MKMapView, _ d: RouteRenderData, animated: Bool) {
-            let theta: Double? = alignRoute ? Coordinator.routeAxis(d.points) : nil
+            let pts: [MKMapPoint] = framePoints(d)
+            let theta: Double? = alignRoute ? Coordinator.routeAxis(pts) : nil
             let heading: Double = theta.map { Coordinator.horizontalHeading(axis: $0) } ?? 0
             let hr: Double = heading * .pi / 180
             // screen right / down as Web Mercator vectors (x east, y south)
             let rx: Double = cos(hr), ry: Double = sin(hr)
             let dxv: Double = -sin(hr), dyv: Double = cos(hr)
             var uMin: Double = .infinity, uMax: Double = -.infinity, vMin: Double = .infinity, vMax: Double = -.infinity
-            let c0: MKMapPoint = MKMapPoint(x: d.routeRect.midX, y: d.routeRect.midY)
-            let step: Int = max(1, d.points.count / 4000)
+            let c0: MKMapPoint = pts.count == d.points.count ? MKMapPoint(x: d.routeRect.midX, y: d.routeRect.midY) : pts[pts.count / 2]
+            let step: Int = max(1, pts.count / 4000)
             var i: Int = 0
-            while i < d.points.count {
-                let p: MKMapPoint = d.points[i]
+            while i < pts.count {
+                let p: MKMapPoint = pts[i]
                 if p.x.isFinite && p.y.isFinite {
                     let ox: Double = p.x - c0.x, oy: Double = p.y - c0.y
                     let u: Double = ox * rx + oy * ry
