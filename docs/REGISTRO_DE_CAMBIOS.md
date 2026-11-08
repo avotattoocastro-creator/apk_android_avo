@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Informe PDF del tramo, recorrido horizontal en los informes y cifras del Dashboard
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (capturas del entrenador 10:41–10:45):**
+- «Análisis del tramo»: botón **Informe PDF** (junto a «Guardar en…»): PDF con datos del tramo, 12 cifras, recorrido del tramo, velocidad frente a metros con líneas cada 200 m y Vmáx, desglose de 200 m, observaciones, comparación con los tramos guardados y el análisis IA (si se ha hecho). Se guarda en `exportaciones/AVO_tramo_<sesión>_<hhmmss>.pdf` y abre el menú de compartir. `ReportBuilder.stretchPdf` reutiliza la cabecera y tablas de los informes (`PdfReportWriter` ya no es `final`; subtítulo configurable).
+- Informes (PDF y vista HTML): el **recorrido se dibuja girado en horizontal** (eje principal por PCA, inicio a la izquierda), con flecha de norte girada y escala correcta (`ReportBuilder.routeLayout`). Antes salía en vertical, norte arriba.
+- Dashboard: las 5 cifras en una fila a **todo el ancho** bajo la portada y los accesos, sin cortarse.
+**Archivos:** `Core/ReportBuilder.swift`, `App/StretchModel.swift`, `Views/StretchAnalysisView.swift`, `Views/ReportsView.swift`, `Views/HomeView.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — IA sin texto («respuesta cortada por longitud») y cifras del Dashboard
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:**

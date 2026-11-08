@@ -24,6 +24,8 @@ final class StretchModel {
     var aiFooter: String = ""
     /// Bumped when the saved list changes (views of the horse refresh).
     var version: Int = 0
+    /// PDF written by «Informe PDF», shown in the share sheet (Files, AirDrop, Mail…).
+    var pdfFile: ExportedFile? = nil
 
     init(app: AppModel) {
         self.app = app
@@ -126,6 +128,29 @@ final class StretchModel {
             version += 1
         } catch {
             app.fail(error)
+        }
+    }
+
+    // ---------------------------------------------------------------- PDF report
+    /// «Informe PDF»: the whole analysis (figures, route, speed, 200 m splits, observations, comparison and the AI text if
+    /// there is one) in exportaciones/AVO_tramo_<session>_<hhmmss>.pdf, then the share sheet.
+    func exportPdf() {
+        guard let s = session, let r = report else { return }
+        let data = StretchPdfData(session: s.session, timeline: s.timeline, report: r, horse: s.horse, rider: s.rider,
+                                  dateText: s.dateTimeText, name: saveName.trimmingCharacters(in: .whitespacesAndNewlines),
+                                  others: otherSaved(s), aiText: aiText)
+        let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
+        AvoFiles.ensureDir(dir)
+        let stamp: String = TimeText.clock(r.metrics.t0).replacingOccurrences(of: ":", with: "")
+        let name: String = "AVO_tramo_" + s.id + "_" + stamp + ".pdf"
+        let path: String = AvoFiles.join(dir, name)
+        do {
+            try AvoFiles.writeAtomic(ReportBuilder.stretchPdf(data), to: path)
+            pdfFile = ExportedFile(id: path, url: URL(fileURLWithPath: path), name: name, kind: .pdf,
+                                   time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
+            message = "Informe PDF creado: " + name
+        } catch {
+            message = "No se pudo crear el PDF: " + error.localizedDescription
         }
     }
 

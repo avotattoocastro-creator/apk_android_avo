@@ -88,51 +88,101 @@ enum ReportBuilder {
         try AvoFiles.writeAtomic(writePdf(d), to: path)
     }
 
-    fileprivate static func drawRoute(_ pdf: PdfDocument, _ tl: SessionTimeline, _ x: Double, _ y: Double, _ w: Double, _ h: Double) {
+    /// Route projected and turned so its main direction is horizontal (as the beach on the «Mapa» page), start on the
+    /// left, fitted into w × h. metersPerPoint for the scale bar; north = unit vector of north in the turned drawing.
+    struct RouteLayout {
+        var pts: [(x: Double, y: Double)?]
+        var metersPerPoint: Double
+        var north: (x: Double, y: Double)
+    }
+
+    static func routeLayout(_ tl: SessionTimeline, _ w: Double, _ h: Double, padding: Double = 24,
+                            from: Int = 0, to: Int? = nil) -> RouteLayout? {
+        let last: Int = min(to ?? tl.count - 1, tl.count - 1)
+        guard last - from >= 1, from >= 0 else { return nil }
+        let z: Double = 20
+        var raw: [(x: Double, y: Double)?] = []
+        var mx: Double = 0, my: Double = 0, n: Double = 0, latSum: Double = 0
+        for i in from...last {
+            let la: Double = tl.lat[i], lo: Double = tl.lon[i]
+            if !la.isFinite || !lo.isFinite { raw.append(nil); continue }
+            let q = TileMath.latLonToPixel(la, lo, z)
+            raw.append((x: q.x, y: q.y)); mx += q.x; my += q.y; n += 1; latSum += la
+        }
+        guard n >= 2 else { return nil }
+        mx /= n; my /= n
+        var sxx: Double = 0, syy: Double = 0, sxy: Double = 0
+        for case let q? in raw { let dx = q.x - mx, dy = q.y - my; sxx += dx * dx; syy += dy * dy; sxy += dx * dy }
+        let th: Double = 0.5 * atan2(2 * sxy, sxx - syy)   // main axis
+        let c: Double = cos(th), sn: Double = sin(th)
+        var rot: [(x: Double, y: Double)?] = []
+        for q in raw {
+            guard let q = q else { rot.append(nil); continue }
+            let dx: Double = q.x - mx
+            let dy: Double = q.y - my
+            rot.append((x: dx * c + dy * sn, y: -dx * sn + dy * c))
+        }
+        var nx: Double = -sn
+        var ny: Double = -c                                  // north (0,-1) turned by -th
+        let valid: [(x: Double, y: Double)] = rot.compactMap { (q: (x: Double, y: Double)?) -> (x: Double, y: Double)? in q }
+        if let f = valid.first, let l = valid.last, f.x > l.x {   // start on the left: turn 180°
+            var flipped: [(x: Double, y: Double)?] = []
+            for q in rot {
+                if let q = q { flipped.append((x: -q.x, y: -q.y)) } else { flipped.append(nil) }
+            }
+            rot = flipped
+            nx = -nx
+            ny = -ny
+        }
+        var minX: Double = .infinity, maxX: Double = -.infinity, minY: Double = .infinity, maxY: Double = -.infinity
+        for case let q? in rot { minX = min(minX, q.x); maxX = max(maxX, q.x); minY = min(minY, q.y); maxY = max(maxY, q.y) }
+        let bw: Double = max(maxX - minX, 1), bh: Double = max(maxY - minY, 1)
+        let k: Double = min((w - 2 * padding) / bw, (h - 2 * padding) / bh)
+        let cx: Double = (minX + maxX) / 2, cy: Double = (minY + maxY) / 2
+        var pts: [(x: Double, y: Double)?] = []
+        for q in rot {
+            if let q = q { pts.append((x: w / 2 + (q.x - cx) * k, y: h / 2 + (q.y - cy) * k)) } else { pts.append(nil) }
+        }
+        return RouteLayout(pts: pts, metersPerPoint: TileMath.metersPerPixel(latSum / n, z) / k, north: (nx, ny))
+    }
+
+    static func drawRoute(_ pdf: PdfDocument, _ tl: SessionTimeline, _ x: Double, _ y: Double, _ w: Double, _ h: Double,
+                          from: Int = 0, to: Int? = nil) {
         pdf.fillRect(x, y, w, h, (r: 0xEC, g: 0xED, b: 0xF0))
         pdf.strokeRect(x, y, w, h, lineColor)
-        var minLat: Double = Double.infinity
-        var maxLat: Double = -Double.infinity
-        var minLon: Double = Double.infinity
-        var maxLon: Double = -Double.infinity
-        for i in 0..<tl.count {
-            minLat = min(minLat, tl.lat[i]); maxLat = max(maxLat, tl.lat[i])
-            minLon = min(minLon, tl.lon[i]); maxLon = max(maxLon, tl.lon[i])
-        }
-        let zoom: Double = TileMath.fitZoom(minLat, minLon, maxLat, maxLon, w, h, padding: 24)
-        let c0 = TileMath.latLonToPixel((minLat + maxLat) / 2, (minLon + maxLon) / 2, zoom)
-        func p(_ i: Int) -> (x: Double, y: Double) {
-            let q = TileMath.latLonToPixel(tl.lat[i], tl.lon[i], zoom)
-            return (x: x + w / 2 + (q.x - c0.x), y: y + h / 2 + (q.y - c0.y))
-        }
+        guard let L = routeLayout(tl, w, h, from: from, to: to) else { return }
         let vmax: Double = max(0.1, Stats.maxFinite(tl.speedFiltered, fallback: 0.1))
-        if tl.count > 1 {
-            for i in 1..<tl.count {
-                if tl.breakBefore[i] || tl.jumpBefore[i] { continue }
-                let a = p(i - 1)
-                let b = p(i)
-                pdf.line(a.x, a.y, b.x, b.y, SpeedScale.color(tl.speedFiltered[i], vmax), width: 2.2)
+        var prev: (x: Double, y: Double)? = nil
+        for (k, q) in L.pts.enumerated() {
+            let i: Int = from + k
+            guard let q = q else { prev = nil; continue }
+            if let a = prev, !(tl.breakBefore[i] || tl.jumpBefore[i]) {
+                pdf.line(x + a.x, y + a.y, x + q.x, y + q.y, SpeedScale.color(tl.speedFiltered[i], vmax), width: 2.2)
             }
+            prev = q
         }
-        let s0 = p(0)
-        let s1 = p(tl.count - 1)
-        pdf.circle(s0.x, s0.y, 4.5, (r: 0x52, g: 0xDD, b: 0x40))
-        pdf.circle(s1.x, s1.y, 4.5, red)
-        pdf.text(s0.x + 7, s0.y - 5, "Inicio", size: 7.5, bold: true, color: ink)
-        pdf.text(s1.x + 7, s1.y - 5, "Fin", size: 7.5, bold: true, color: ink)
+        let valid: [(x: Double, y: Double)] = L.pts.compactMap { (q: (x: Double, y: Double)?) -> (x: Double, y: Double)? in q }
+        if let s0 = valid.first, let s1 = valid.last {
+            pdf.circle(x + s0.x, y + s0.y, 4.5, (r: 0x52, g: 0xDD, b: 0x40))
+            pdf.circle(x + s1.x, y + s1.y, 4.5, red)
+            pdf.text(x + s0.x + 7, y + s0.y - 5, "Inicio", size: 7.5, bold: true, color: ink)
+            pdf.text(x + s1.x + 7, y + s1.y - 5, "Fin", size: 7.5, bold: true, color: ink)
+        }
         // scale bar
-        let mpp: Double = TileMath.metersPerPixel((minLat + maxLat) / 2, zoom)
-        let target: Double = mpp * 100
+        let target: Double = L.metersPerPoint * 100
         let candidates: [Double] = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]
         var nice: Double = candidates[0]
         var bestDiff: Double = abs(candidates[0] - target)
         for v in candidates.dropFirst() where abs(v - target) < bestDiff { nice = v; bestDiff = abs(v - target) }
-        let px: Double = nice / mpp
+        let px: Double = nice / L.metersPerPoint
         pdf.fillRect(x + 12, y + h - 18, px, 3, ink)
         let label: String = nice >= 1000 ? DotNetFormat.custom(nice / 1000, "0", spanish: true) + " km" : DotNetFormat.custom(nice, "0", spanish: true) + " m"
         pdf.text(x + 12, y + h - 32, label, size: 7.5, bold: true, color: ink)
-        pdf.text(x + w - 14, y + 10, "N", size: 10, bold: true, color: ink, align: .center)
-        pdf.line(x + w - 14, y + 24, x + w - 14, y + 40, ink, width: 1.2)
+        // north arrow (the drawing is turned)
+        let ax: Double = x + w - 22, ay: Double = y + 30
+        pdf.line(ax - L.north.x * 10, ay - L.north.y * 10, ax + L.north.x * 10, ay + L.north.y * 10, ink, width: 1.2)
+        pdf.circle(ax + L.north.x * 10, ay + L.north.y * 10, 2, ink)
+        pdf.text(ax + L.north.x * 19, ay + L.north.y * 19 - 5, "N", size: 9, bold: true, color: ink, align: .center)
     }
 
     fileprivate static func chart(_ pdf: PdfDocument, _ title: String, _ t: [Double], _ series: [[Double]], _ colors: [AvoRGB],
@@ -285,34 +335,25 @@ enum ReportBuilder {
     }
 
     static func routeSvg(_ tl: SessionTimeline, _ w: Int = 900, _ h: Int = 420) -> String {
-        var minLat: Double = Double.infinity
-        var maxLat: Double = -Double.infinity
-        var minLon: Double = Double.infinity
-        var maxLon: Double = -Double.infinity
-        for i in 0..<tl.count {
-            minLat = min(minLat, tl.lat[i]); maxLat = max(maxLat, tl.lat[i])
-            minLon = min(minLon, tl.lon[i]); maxLon = max(maxLon, tl.lon[i])
-        }
         let wd: Double = Double(w)
         let hd: Double = Double(h)
-        let zoom: Double = TileMath.fitZoom(minLat, minLon, maxLat, maxLon, wd, hd, padding: 24)
-        let c0 = TileMath.latLonToPixel((minLat + maxLat) / 2, (minLon + maxLon) / 2, zoom)
-        let vmax: Double = max(0.1, Stats.maxFinite(tl.speedFiltered, fallback: 0.1))
         func g(_ v: Double) -> String { DotNetFormat.custom(v, "0.#", spanish: false) }
         var sb: String = "<svg viewBox=\"0 0 \(w) \(h)\" xmlns=\"http://www.w3.org/2000/svg\">"
-        if tl.count > 1 {
-            for i in 1..<tl.count {
-                if tl.breakBefore[i] || tl.jumpBefore[i] { continue }
-                let a = TileMath.latLonToPixel(tl.lat[i - 1], tl.lon[i - 1], zoom)
-                let b = TileMath.latLonToPixel(tl.lat[i], tl.lon[i], zoom)
-                let c: AvoRGB = SpeedScale.color(tl.speedFiltered[i], vmax)
-                let x1: String = g(wd / 2.0 + a.x - c0.x)
-                let y1: String = g(hd / 2.0 + a.y - c0.y)
-                let x2: String = g(wd / 2.0 + b.x - c0.x)
-                let y2: String = g(hd / 2.0 + b.y - c0.y)
-                let col: String = DotNetFormat.hex2(c.r) + DotNetFormat.hex2(c.g) + DotNetFormat.hex2(c.b)
-                sb += "<line x1=\"\(x1)\" y1=\"\(y1)\" x2=\"\(x2)\" y2=\"\(y2)\" stroke=\"#\(col)\" stroke-width=\"3\" stroke-linecap=\"round\"/>"
+        if let L = routeLayout(tl, wd, hd) {
+            let vmax: Double = max(0.1, Stats.maxFinite(tl.speedFiltered, fallback: 0.1))
+            var prev: (x: Double, y: Double)? = nil
+            for (i, q) in L.pts.enumerated() {
+                guard let q = q else { prev = nil; continue }
+                if let a = prev, !(tl.breakBefore[i] || tl.jumpBefore[i]) {
+                    let c: AvoRGB = SpeedScale.color(tl.speedFiltered[i], vmax)
+                    let col: String = DotNetFormat.hex2(c.r) + DotNetFormat.hex2(c.g) + DotNetFormat.hex2(c.b)
+                    sb += "<line x1=\"\(g(a.x))\" y1=\"\(g(a.y))\" x2=\"\(g(q.x))\" y2=\"\(g(q.y))\" stroke=\"#\(col)\" stroke-width=\"3\" stroke-linecap=\"round\"/>"
+                }
+                prev = q
             }
+            let ax: Double = wd - 30, ay: Double = 40
+            sb += "<line x1=\"\(g(ax - L.north.x * 14))\" y1=\"\(g(ay - L.north.y * 14))\" x2=\"\(g(ax + L.north.x * 14))\" y2=\"\(g(ay + L.north.y * 14))\" stroke=\"#111\" stroke-width=\"2\"/>"
+            sb += "<text x=\"\(g(ax + L.north.x * 26))\" y=\"\(g(ay + L.north.y * 26 + 5))\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">N</text>"
         }
         sb += "</svg>"
         return sb
@@ -320,8 +361,9 @@ enum ReportBuilder {
 }
 
 /// State of one PDF report being written (the local functions of C# ReportBuilder.WritePdf).
-private final class PdfReportWriter {
+private class PdfReportWriter {
     let d: ReportData
+    var subtitle: String = "Informe de entrenamiento"
     let pdf: PdfDocument = PdfDocument()
     var y: Double = 0
     let m: Double = 40
@@ -345,7 +387,7 @@ private final class PdfReportWriter {
         pdf.fillRect(0, 64, pdf.width, 3, red)
         pdf.text(m, 16, "AVO", size: 26, bold: true, color: ReportBuilder.white)
         pdf.text(m + 62, 20, "PERFORMANCE HORSE", size: 11, bold: true, color: (r: 0xC9, g: 0xCB, b: 0xD1))
-        pdf.text(m + 62, 35, "Informe de entrenamiento", size: 9, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4))
+        pdf.text(m + 62, 35, subtitle, size: 9, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4))
         pdf.text(pdf.width - m, 22, ReportBuilder.madrid(d.timeline.utc0 ?? d.session.startedAt, "dd/MM/yyyy HH:mm") + " (Europe/Madrid)",
                  size: 9, bold: false, color: ReportBuilder.white, align: .right)
         pdf.text(pdf.width - m, 37, "Sesión " + d.session.sessionId, size: 8, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4), align: .right)
@@ -611,6 +653,168 @@ private final class PdfReportWriter {
         if sec.contains(.notes) && !d.notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             title("Notas y observaciones")
             y += pdf.paragraph(m, y, w, d.notes, size: 9.5)
+        }
+        return pdf.save()
+    }
+}
+
+// MARK: - «Análisis del tramo» PDF
+
+/// What the stretch PDF needs (built by StretchModel).
+struct StretchPdfData {
+    var session: TrainingSession
+    var timeline: SessionTimeline
+    var report: StretchReport
+    var horse: String
+    var rider: String
+    var dateText: String
+    var name: String
+    var others: [SavedStretch]
+    var aiText: String
+}
+
+extension ReportBuilder {
+    static func stretchPdf(_ s: StretchPdfData) -> Data {
+        StretchPdfWriter(s).build()
+    }
+
+    /// AI markdown to plain paragraphs for the PDF (no #, **, `).
+    static func plainParagraphs(_ md: String) -> [String] {
+        var out: [String] = []
+        for raw in md.components(separatedBy: .newlines) {
+            var l: String = raw.trimmingCharacters(in: .whitespaces)
+            while l.hasPrefix("#") { l = String(l.dropFirst()) }
+            l = l.replacingOccurrences(of: "**", with: "").replacingOccurrences(of: "`", with: "")
+            if l.hasPrefix("- ") || l.hasPrefix("* ") { l = "• " + l.dropFirst(2) }
+            l = l.trimmingCharacters(in: .whitespaces)
+            if l.isEmpty || l == "---" { continue }
+            out.append(l)
+        }
+        return out
+    }
+}
+
+private final class StretchPdfWriter: PdfReportWriter {
+    let st: StretchPdfData
+
+    init(_ s: StretchPdfData) {
+        st = s
+        super.init(ReportData(session: s.session, timeline: s.timeline))
+        subtitle = "Análisis del tramo"
+        pdf.title = "Tramo AVO " + s.session.sessionId
+    }
+
+    private func paragraph(_ text: String, size: Double = 9, bold: Bool = false) {
+        let est: Double = (PdfDocument.measureText(text, size, bold) / w + 1) * size * 1.3 + 4
+        ensure(est)
+        let used: Double = pdf.paragraph(m, y, w, text, size: size, bold: bold, color: ReportBuilder.ink, leading: 1.3)
+        y += used + 4
+    }
+
+    private func speedChart(_ r: StretchReport) {
+        let h: Double = 170
+        ensure(h + 20)
+        let x0: Double = m + 26
+        let cw: Double = w - 30
+        pdf.fillRect(m, y, w, h, ReportBuilder.panel)
+        let maxM: Double = max(r.samples.last?.m ?? 1, 1)
+        var top: Double = 10
+        for p in r.samples { top = max(top, p.kmh) }
+        top = (top / 10).rounded(.up) * 10
+        func px(_ mm: Double) -> Double { x0 + mm / maxM * cw }
+        func py(_ v: Double) -> Double { y + h - 14 - v / top * (h - 24) }
+        var v: Double = 0
+        while v <= top {
+            pdf.line(x0, py(v), x0 + cw, py(v), ReportBuilder.lineColor, width: 0.4)
+            pdf.text(m + 2, py(v) - 4, DotNetFormat.custom(v, "0", spanish: true), size: 6.5, bold: false, color: ReportBuilder.dim)
+            v += 10
+        }
+        for sp in r.splits {
+            pdf.line(px(sp.toM), y + 6, px(sp.toM), y + h - 14, ReportBuilder.lineColor, width: 0.4)
+            pdf.text(px(sp.toM), y + h - 11, DotNetFormat.custom(sp.toM, "0", spanish: true), size: 6, bold: false,
+                     color: ReportBuilder.dim, align: .center)
+        }
+        var pts: [(x: Double, y: Double)] = []
+        for p in r.samples { pts.append((x: px(p.m), y: py(p.kmh))) }
+        pdf.polyline(pts, ReportBuilder.red, width: 1.1)
+        if let vm = r.vmaxAtM, let vk = r.metrics.maxSpeedKmh {
+            pdf.circle(px(vm), py(vk), 3, (r: 0xFF, g: 0x8A, b: 0x00))
+        }
+        y += h + 6
+        pdf.text(m, y, "km/h frente a metros desde el inicio del tramo · líneas cada 200 m · punto naranja = velocidad máxima",
+                 size: 7, bold: false, color: ReportBuilder.dim)
+        y += 14
+    }
+
+    override func build() -> Data {
+        let num = ReportBuilder.num
+        let r: StretchReport = st.report
+        let mt: SegmentMetrics = r.metrics
+        header()
+        title("Tramo")
+        var rows: [(k: String, v: String)] = [(k: "Caballo", v: st.horse), (k: "Jinete", v: st.rider),
+                                                (k: "Entrenamiento", v: st.dateText),
+                                                (k: "Tramo", v: TimeText.clock(mt.t0) + " – " + TimeText.clock(mt.t1))]
+        if !st.name.isEmpty { rows.insert((k: "Nombre", v: st.name), at: 0) }
+        keyValues(rows)
+        tiles([(label: "Distancia", value: num(mt.distanceM, "0", " m")), (label: "Duración", value: TimeText.clock(mt.durationS)),
+               (label: "Vel. media", value: num(mt.meanSpeedKmh, "0.0", " km/h")), (label: "Vel. máxima", value: num(mt.maxSpeedKmh, "0.0", " km/h"))])
+        tiles([(label: "Mejor 200 m", value: num(r.best200S, "0.00", " s")), (label: "Último 200 vs mejor", value: num(r.lastVsBestPct, "+0.0;-0.0", " %")),
+               (label: "2.ª mitad vs 1.ª", value: num(r.halvesPct, "+0.0;-0.0", " %")), (label: "RTK FIX", value: num(mt.fixFraction * 100, "0", " %"))])
+        tiles([(label: "Hasta 90 % Vmáx", value: num(r.to90S, "0.0", " s")), (label: "Sobre 90 % Vmáx", value: num(r.above90M, "0", " m")),
+               (label: "Acel. máx.", value: num(mt.maxAccel, "0.00", " m/s²")), (label: "Frenada máx.", value: num(mt.maxDecel, "0.00", " m/s²"))])
+
+        let tl: SessionTimeline = st.timeline
+        let i0: Int = tl.indexAt(mt.t0)
+        let i1: Int = tl.indexAt(mt.t1)
+        if i0 >= 0 && i1 > i0 {
+            title("Recorrido del tramo")
+            ensure(250)
+            ReportBuilder.drawRoute(pdf, tl, m, y, w, 230, from: i0, to: i1)
+            y += 240
+        }
+        title("Velocidad en el tramo")
+        speedChart(r)
+
+        title("Desglose por tramos de 200 m")
+        var splitRows: [[String]] = []
+        for sp in r.splits {
+            var row: [String] = [String(sp.index) + (sp.partial ? "*" : "")]
+            row.append(num(sp.fromM, "0") + "–" + num(sp.toM, "0") + " m")
+            row.append(num(sp.durationS, "0.00", " s"))
+            row.append(num(sp.meanKmh, "0.0", " km/h"))
+            row.append(num(sp.maxKmh, "0.0", " km/h"))
+            row.append(num(sp.accel, "+0.00;-0.00", " m/s²"))
+            row.append(sp.index == r.best200Index ? "mejor" : "")
+            splitRows.append(row)
+        }
+        table(["#", "Metros", "Tiempo", "Media", "Máx.", "Acel. media", ""], [26, 90, 64, 70, 70, 74, 40], splitRows)
+        if r.splits.contains(where: { $0.partial }) {
+            pdf.text(m, y, "* parcial final de menos de 200 m (no cuenta para el mejor 200 m).", size: 7, bold: false, color: ReportBuilder.dim)
+            y += 12
+        }
+
+        title("Observaciones")
+        for o in r.observations { paragraph("• " + o) }
+        if mt.observations != "Datos completos" { paragraph("• Datos: " + mt.observations) }
+
+        if !st.others.isEmpty {
+            title("Comparación con los tramos guardados de " + st.horse)
+            var cmp: [[String]] = [["Este tramo", num(mt.distanceM, "0", " m"), TimeText.clock(mt.durationS),
+                                    num(mt.meanSpeedKmh, "0.0"), num(mt.maxSpeedKmh, "0.0"), num(r.best200S, "0.00", " s")]]
+            for o in st.others.prefix(20) {
+                cmp.append([o.title, num(o.distanceM, "0", " m"), TimeText.clock(o.durationS), num(o.meanKmh, "0.0"),
+                            num(o.maxKmh, "0.0"), num(o.best200S, "0.00", " s")])
+            }
+            table(["Tramo", "Distancia", "Tiempo", "Media km/h", "Máx. km/h", "Mejor 200"], [170, 64, 56, 64, 64, 64], cmp)
+        }
+
+        if !st.aiText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            title("Análisis IA y recomendaciones")
+            for p in ReportBuilder.plainParagraphs(st.aiText) { paragraph(p) }
+            pdf.text(m, y, "Texto generado por IA a partir de los datos del tramo; revísalo con criterio profesional.",
+                     size: 7, bold: false, color: ReportBuilder.dim)
+            y += 12
         }
         return pdf.save()
     }

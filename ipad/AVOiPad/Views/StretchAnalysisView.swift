@@ -36,6 +36,9 @@ struct StretchAnalysisView: View {
             }
         }
         .background(Avo.bg)
+        .sheet(item: $model.pdfFile) { (f: ExportedFile) in
+            ReportsActivitySheet(url: f.url).ignoresSafeArea()
+        }
     }
 
     // ---------------------------------------------------------------- top bar
@@ -55,6 +58,14 @@ struct StretchAnalysisView: View {
                 .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
                 .frame(maxWidth: 260)
+            Button {
+                model.exportPdf()
+            } label: {
+                Label("Informe PDF", systemImage: "doc.richtext")
+            }
+            .buttonStyle(.avoSecondary)
+            .disabled(model.report == nil)
+            .accessibilityIdentifier("stretch.pdf")
             Button {
                 model.save()
             } label: {

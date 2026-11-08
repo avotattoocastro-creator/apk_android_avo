@@ -16,13 +16,15 @@ struct HomeView: View {
             // «Entrenamientos», the watch in «Reloj Wi-Fi», the horses in «Cuadra»). Landscape: no scroll, so nothing is
             // ever cut at the top: banner + figures on the left, the actions down the whole right side.
             if wide {
-                HStack(alignment: .top, spacing: 14) {
-                    VStack(alignment: .leading, spacing: 14) {
-                        heroBanner.frame(maxHeight: .infinity)
-                        metrics(columns: 5)   // always one row of 5 (with 3 columns the last two were cut off)
+                // banner + actions on top (they take the free height), the 5 figures in one row across the whole width
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack(alignment: .top, spacing: 14) {
+                        heroBanner.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        actionsCard(fill: true).frame(width: 340).frame(maxHeight: .infinity)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    actionsCard(fill: true).frame(width: 340).frame(maxHeight: .infinity)
+                    .frame(maxHeight: .infinity)
+                    metrics(columns: 5)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)

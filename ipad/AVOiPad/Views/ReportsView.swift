@@ -294,7 +294,7 @@ private struct ReportsPdfView: UIViewRepresentable {
 }
 
 /// Share sheet for an exported file (Save to Files, AirDrop, Mail…).
-private struct ReportsActivitySheet: UIViewControllerRepresentable {
+struct ReportsActivitySheet: UIViewControllerRepresentable {
     var url: URL
 
     func makeUIViewController(context: Context) -> UIActivityViewController {
