@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Análisis del tramo (pantalla completa) y tramos guardados por caballo
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (petición del entrenador 00:57):**
+- «Mapa»: botón **Análisis tramo** (arriba a la derecha, activo con un tramo seleccionado) que abre a pantalla completa `StretchAnalysisView`:
+  - 14 cifras del tramo (distancia, duración, vel. media/máx., mejor 200 m, último 200 m frente al mejor, 2.ª mitad frente a 1.ª, tiempo hasta el 90 % de Vmáx, distancia y tiempo por encima del 90 %, aceleración/frenada máx. validadas, regularidad CV, cadencia, RTK FIX);
+  - perfil de velocidad frente a metros con líneas cada 200 m y la Vmáx;
+  - **desglose por tramos de 200 m** (tiempo, media, máx., aceleración media; el mejor resaltado; parcial final marcado);
+  - observaciones calculadas con los datos (caída final, mitades, regularidad, punta, calidad GNSS, comparación con su mejor tramo guardado de distancia parecida);
+  - comparación con los tramos guardados del caballo;
+  - **análisis completo IA y recomendaciones** (Claude con la clave del Asistente IA, o el modelo de Apple), con el tramo, el resumen del entrenamiento completo y los tramos guardados; respeta el límite de gasto mensual.
+- **Guardar el tramo en el caballo** (`tramos_guardados.json` en la carpeta de la app; con nombre opcional y el texto IA). Cuadra › caballo: además de «Entrenamientos de …» (completos), nueva lista **«Tramos guardados de …»** con Abrir (selecciona el entrenamiento y el tramo y abre el análisis) y Borrar.
+**Archivos:** `ipad/AVOiPad/Core/StretchAnalysis.swift`, `ipad/AVOiPad/App/StretchModel.swift`, `ipad/AVOiPad/Views/StretchAnalysisView.swift` (nuevos); `AppModel.swift`, `RootView.swift`, `StableView.swift`, `AssistantModel.swift` (`addSpend` accesible).
+**Validación:** IMPLEMENTADO · NO VERIFICADO en el iPad.
+
 ## 2026-11-08 — iPad — Inicio: sin logo redondo, rótulo y accesos más arriba
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia:** pantalla de inicio (`StartView`): quitado el logo redondo; el rótulo AVO / PERFORMANCE HORSE / TRAINING ANALYSIS sube a su sitio; la columna de accesos empieza arriba (antes centrada). Petición del entrenador: el jinete de la foto con los colores de la Cuadra Lezama — **no hecho**: requiere una foto propia (no se usan imágenes de Internet).

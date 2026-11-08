@@ -170,7 +170,7 @@ final class AssistantModel {
         }
     }
 
-    private func addSpend(_ usd: Double) {
+    func addSpend(_ usd: Double) {
         let k: String = Keys.spent(AssistantModel.monthKey())
         monthSpentUSD = defaults.double(forKey: k) + usd
         defaults.set(monthSpentUSD, forKey: k)

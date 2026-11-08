@@ -200,6 +200,7 @@ private struct StableDetailPane: View {
                             StableRacesCard(row: sel)
                         }
                         StableTrainingsCard(page: page, row: sel)
+                        if page.isHorse { StableStretchesCard(row: sel) }
                     }
                 }
             }
@@ -378,6 +379,65 @@ private struct StableTrainingsCard: View {
                                 Divider().overlay(Avo.line)
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// «Tramos guardados» of the horse: stretches saved from «Análisis tramo» for later comparisons (App/StretchModel.swift).
+private struct StableStretchesCard: View {
+    let row: StableIdentityRow
+    @Environment(AppModel.self) private var app
+
+    var body: some View {
+        let list: [SavedStretch] = app.stretch.savedOf(horse: row.code)
+        AvoCard {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("TRAMOS GUARDADOS DE \(row.name.uppercased())")
+                    .font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                if list.isEmpty {
+                    Text("Sin tramos guardados. En «Mapa», selecciona un tramo en la gráfica, pulsa «Análisis tramo» y «Guardar en \(row.name)».")
+                        .font(.footnote).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                } else {
+                    HStack(spacing: 8) {
+                        Text("ENTRENAMIENTO · TRAMO").frame(maxWidth: .infinity, alignment: .leading)
+                        Text("DIST.").frame(width: 70, alignment: .trailing)
+                        Text("TIEMPO").frame(width: 64, alignment: .trailing)
+                        Text("MEDIA").frame(width: 64, alignment: .trailing)
+                        Text("MÁX.").frame(width: 64, alignment: .trailing)
+                        Text("MEJOR 200").frame(width: 80, alignment: .trailing)
+                        Spacer().frame(width: 150)
+                    }
+                    .font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim)
+                    ForEach(list) { (s: SavedStretch) in
+                        HStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 1) {
+                                Text(s.sessionDate).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                                Text((s.name.isEmpty ? "" : s.name + " · ") + TimeText.clock(s.t0) + " – " + TimeText.clock(s.t1)
+                                     + (s.aiText.isEmpty ? "" : " · con análisis IA"))
+                                    .font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            Group {
+                                Text(TimeText.num(s.distanceM, "0", " m")).frame(width: 70, alignment: .trailing)
+                                Text(TimeText.clock(s.durationS)).frame(width: 64, alignment: .trailing)
+                                Text(TimeText.num(s.meanKmh, "0.0")).frame(width: 64, alignment: .trailing)
+                                Text(TimeText.num(s.maxKmh, "0.0")).frame(width: 64, alignment: .trailing)
+                                Text(TimeText.num(s.best200S, "0.00", " s")).frame(width: 80, alignment: .trailing)
+                            }
+                            .font(.callout.monospacedDigit()).foregroundStyle(Avo.text)
+                            HStack(spacing: 6) {
+                                Button("Abrir") { app.stretch.openSaved(s) }.buttonStyle(.avoSecondary)
+                                Button(role: .destructive) { app.stretch.delete(s.id) } label: { Image(systemName: "trash") }
+                                    .buttonStyle(.avoSecondary).foregroundStyle(Avo.bad)
+                                    .accessibilityLabel("Borrar tramo")
+                            }
+                            .frame(width: 150, alignment: .trailing)
+                        }
+                        .padding(.vertical, 4)
+                        Divider().overlay(Avo.line)
                     }
                 }
             }

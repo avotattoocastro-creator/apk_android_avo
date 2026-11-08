@@ -98,6 +98,12 @@ struct RootView: View {
                 .environment(app)
                 .preferredColorScheme(.dark)
         }
+        .fullScreenCover(isPresented: Binding(get: { app.stretch.visible },
+                                              set: { (v: Bool) in if !v { app.stretch.close() } })) {
+            StretchAnalysisView(model: app.stretch)
+                .environment(app)
+                .preferredColorScheme(.dark)
+        }
     }
 
     // ------------------------------------------------------------------ sidebar
@@ -465,6 +471,15 @@ private struct TrainingBar: View {
                 // «Mapa»: only the training picker (trainer's sketch); the other pages and «Asignar» are in «Análisis»
                 RootSessionMenu(maxWidth: 420)
                 Spacer(minLength: 0)
+                // «Análisis tramo»: full-screen analysis of the stretch selected on the chart (trainer's sketch 08/11/2026)
+                Button {
+                    app.stretch.openCurrent()
+                } label: {
+                    Label("Análisis tramo", systemImage: "chart.bar.doc.horizontal")
+                }
+                .buttonStyle(.avoPrimary)
+                .disabled(!app.hasRange || app.selected == nil)
+                .accessibilityIdentifier("map.stretchAnalysis")
             } else {
             RootSessionMenu(maxWidth: 280)
             RootPairMenu(maxWidth: 240)
