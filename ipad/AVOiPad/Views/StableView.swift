@@ -42,7 +42,20 @@ struct StableView: View {
     @ViewBuilder
     private func header(_ page: StableIdentityPage) -> some View {
         // the «El iPad no tiene NFC…» card was removed at the trainer's request (07/11/2026)
-        AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
+        HStack(alignment: .center, spacing: 12) {
+            AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
+            Spacer(minLength: 8)
+            if page.isHorse {
+                // whole stable from France Galop: open the trainer's page, link the horses, refresh them all
+                Button {
+                    app.franceGalop.open()
+                } label: {
+                    Label("France Galop", systemImage: "globe.europe.africa")
+                }
+                .buttonStyle(.avoPrimary)
+                .accessibilityIdentifier("stable.franceGalopAll")
+            }
+        }
     }
 }
 
@@ -198,6 +211,7 @@ private struct StableDetailPane: View {
                             .disabled(sel.count == 0)
                             .accessibilityIdentifier("stable.horseHistory")
                             StableRacesCard(row: sel)
+                            FranceGalopHorseCard(row: sel)
                         }
                         StableTrainingsCard(page: page, row: sel)
                         if page.isHorse { StableStretchesCard(row: sel) }

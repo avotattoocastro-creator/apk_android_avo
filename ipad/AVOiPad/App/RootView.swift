@@ -104,6 +104,12 @@ struct RootView: View {
                 .environment(app)
                 .preferredColorScheme(.dark)
         }
+        .fullScreenCover(isPresented: Binding(get: { app.franceGalop.visible },
+                                              set: { (v: Bool) in if !v { app.franceGalop.close() } })) {
+            FranceGalopView(model: app.franceGalop)
+                .environment(app)
+                .preferredColorScheme(.dark)
+        }
     }
 
     // ------------------------------------------------------------------ sidebar

@@ -47,6 +47,7 @@ final class AppModel {
     @ObservationIgnored var races: RacesModel!            // «Carreras»: tracking PDFs of races + analysis vs trainings
     @ObservationIgnored var horseHistory: HorseHistoryModel! // «Historia del caballo» (AVO Training Analytics), full-screen cover
     @ObservationIgnored var corrections: CorrectionsModel!  // zones moved by the user (correcciones.json) for the engine
+    @ObservationIgnored var franceGalop: FranceGalopModel! // France Galop: horse sheets / whole stable read in an in-app browser
     @ObservationIgnored var stretch: StretchModel!        // «Análisis del tramo» (full-screen) + stretches saved per horse
     @ObservationIgnored var trackWork: TrackWorkModel!    // «Trabajo en pista» (AVO Track Work): efforts, splits, best distances
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
@@ -106,6 +107,7 @@ final class AppModel {
         self.trackWork = TrackWorkModel(app: self)
         self.assistant = AssistantModel(app: self)
         self.stretch = StretchModel(app: self)
+        self.franceGalop = FranceGalopModel(app: self)
         initShell()
     }
 }

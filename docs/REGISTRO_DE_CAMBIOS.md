@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — France Galop: fichas de la cuadra y carreras (uso privado)
+**Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
+**Qué cambia (petición del entrenador 01:01/01:16, uso privado):**
+- Cuadra: botón **France Galop** (cabecera) que abre france-galop.com en un navegador dentro de la app (`FranceGalopView`, WKWebView). «Leer página» lee lo que muestra la página: datos de la ficha (sexo/raza/capa, nacimiento, padres, entrenador, colores, criadores, valor, actuaciones, país…), **todas sus tablas** (resumen de carrera, actuaciones = carreras, compromisos) y los enlaces a fichas de caballos (página del entrenador o propietario = **toda la cuadra**).
+- Ficha leída → «Guardar en la Cuadra» en un caballo existente o creándolo (nombre, raza y año de la ficha; solo rellena raza/año si estaban vacíos).
+- Página del entrenador → «Vincular estos caballos con la Cuadra» (propone el caballo por nombre; «Crear en la Cuadra») → «Actualizar toda la cuadra»: abre cada ficha vinculada una a una, con pausas de ~3 s, y guarda sus datos y tablas.
+- Ficha del caballo en Cuadra: tarjeta **France Galop** con los datos y las tablas guardadas, «Actualizar» y «Desvincular».
+- No depende de la estructura interna de la web (lee texto visible, tablas HTML y enlaces); solo a petición del usuario. Datos en `france_galop.json` en la carpeta de la app.
+**Archivos:** `ipad/AVOiPad/Core/FranceGalop.swift`, `ipad/AVOiPad/App/FranceGalopModel.swift`, `ipad/AVOiPad/Views/FranceGalopView.swift` (nuevos); `AppModel.swift`, `RootView.swift`, `StableView.swift`.
+**Validación:** IMPLEMENTADO · NO VERIFICADO (sin acceso a france-galop.com desde el entorno de desarrollo: la lectura de etiquetas está hecha con la ficha de la captura del usuario).
+
 ## 2026-11-08 — iPad — Análisis del tramo (pantalla completa) y tramos guardados por caballo
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (petición del entrenador 00:57):**
