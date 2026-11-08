@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — PDF del tramo: regla de distancias sobre el satélite
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (boceto 13:05):** en la imagen «Recorrido del tramo» del PDF, una regla arriba con una marca cada 200 m (0, 200, 400…) y líneas de puntos azules desde cada marca hasta su punto del recorrido; la Vmáx con una línea de puntos roja y su distancia desde el inicio (p. ej. «1910 m»). `RouteImageRenderer.render(distanceMarks:)`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — PDF del tramo: ajustes tras la primera prueba
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:** PDF del tramo revisado con el iPad (BELLA AL SHAHANIA, 07/11/2026): satélite, giro, Vmáx y parciales correctos. Ajustes: la etiqueta «Fin»/«Inicio» ya no se sale de la imagen; más solape entre teselas (se veían líneas finas); el título «Velocidad en el tramo» no se queda solo al final de la página.

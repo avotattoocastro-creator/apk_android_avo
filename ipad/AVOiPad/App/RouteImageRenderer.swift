@@ -7,8 +7,10 @@ import MapKit
 /// nil when no tile could be obtained (no connection and nothing cached): the report then draws the route on a plain
 /// background as before.
 enum RouteImageRenderer {
+    /// distanceMarks: ruler along the top with a mark every 200 m, dotted lines down to the route, and the maximum speed
+    /// marked with its distance from the start (stretch report, trainer's sketch 08/11/2026).
     static func render(_ tl: SessionTimeline, widthPt: Double, heightPt: Double, from: Int = 0, to: Int? = nil,
-                       cacheDir: String, scale: Double = 2) async -> RouteImage? {
+                       cacheDir: String, scale: Double = 2, distanceMarks: Bool = false) async -> RouteImage? {
         guard let L = ReportBuilder.routeLayout(tl, widthPt, heightPt, from: from, to: to) else { return nil }
         let cosT: Double = cos(L.theta)
         let sinT: Double = sin(L.theta)
@@ -99,6 +101,7 @@ enum RouteImageRenderer {
                 }
                 prev = q
             }
+            if distanceMarks { drawDistanceMarks(g, tl, L, from: first, widthPt: widthPt) }
             let valid: [(x: Double, y: Double)] = L.pts.compactMap { (q: (x: Double, y: Double)?) -> (x: Double, y: Double)? in q }
             if let s0 = valid.first, let s1 = valid.last {
                 dot(g, s0, UIColor(red: 0.32, green: 0.87, blue: 0.25, alpha: 1))
@@ -145,6 +148,90 @@ enum RouteImageRenderer {
     }
 
     private static let pillAttrs: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 9), .foregroundColor: UIColor.white]
+
+    /// Point of the route at `d` metres from the start of the drawn range (linear between samples), in the picture.
+    private static func pointAt(_ tl: SessionTimeline, _ L: ReportBuilder.RouteLayout, from: Int, _ d: Double) -> (x: Double, y: Double)? {
+        let d0: Double = tl.distance[from]
+        var prev: (k: Int, d: Double, p: (x: Double, y: Double))? = nil
+        for (k, q) in L.pts.enumerated() {
+            guard let q = q else { continue }
+            let dk: Double = tl.distance[from + k] - d0
+            if !dk.isFinite { continue }
+            if dk >= d {
+                guard let a = prev, dk > a.d else { return q }
+                let u: Double = (d - a.d) / (dk - a.d)
+                return (x: a.p.x + (q.x - a.p.x) * u, y: a.p.y + (q.y - a.p.y) * u)
+            }
+            prev = (k: k, d: dk, p: q)
+        }
+        return nil
+    }
+
+    private static func drawDistanceMarks(_ g: CGContext, _ tl: SessionTimeline, _ L: ReportBuilder.RouteLayout,
+                                          from: Int, widthPt: Double) {
+        let last: Int = from + L.pts.count - 1
+        guard last > from, last < tl.count else { return }
+        let total: Double = tl.distance[last] - tl.distance[from]
+        guard total.isFinite, total > 50 else { return }
+        let rulerY: Double = 22
+        let blue = UIColor(red: 0.30, green: 0.62, blue: 1.0, alpha: 1)
+        var marks: [(d: Double, p: (x: Double, y: Double))] = []
+        var d: Double = 0
+        while d <= total + 0.5 {
+            if let p = pointAt(tl, L, from: from, d) { marks.append((d: d, p: p)) }
+            d += 200
+        }
+        guard let firstX = marks.first?.p.x, let lastX = marks.last?.p.x else { return }
+        // ruler band
+        g.setFillColor(UIColor(white: 0, alpha: 0.55).cgColor)
+        g.fill(CGRect(x: min(firstX, lastX) - 14, y: 4, width: abs(lastX - firstX) + 28, height: 30))
+        g.setStrokeColor(blue.cgColor)
+        g.setLineWidth(2)
+        g.setLineDash(phase: 0, lengths: [])
+        g.move(to: CGPoint(x: firstX, y: rulerY))
+        g.addLine(to: CGPoint(x: lastX, y: rulerY))
+        g.strokePath()
+        let small: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 7.5), .foregroundColor: UIColor.white]
+        for m in marks {
+            // tick + label on the ruler
+            g.setStrokeColor(blue.cgColor)
+            g.setLineWidth(2)
+            g.setLineDash(phase: 0, lengths: [])
+            g.move(to: CGPoint(x: m.p.x, y: rulerY - 5))
+            g.addLine(to: CGPoint(x: m.p.x, y: rulerY + 5))
+            g.strokePath()
+            let label: String = DotNetFormat.custom(m.d, "0", spanish: true)
+            let sz: CGSize = (label as NSString).size(withAttributes: small)
+            (label as NSString).draw(at: CGPoint(x: m.p.x - Double(sz.width) / 2, y: 6), withAttributes: small)
+            // dotted line down to the route
+            g.setStrokeColor(blue.withAlphaComponent(0.9).cgColor)
+            g.setLineWidth(1.4)
+            g.setLineDash(phase: 0, lengths: [2, 3])
+            g.move(to: CGPoint(x: m.p.x, y: rulerY + 5))
+            g.addLine(to: CGPoint(x: m.p.x, y: m.p.y))
+            g.strokePath()
+        }
+        // maximum speed: red dotted line with its distance from the start
+        let vi: Int = ReportBuilder.vmaxIndex(tl, from: from, to: last)
+        if vi >= from, vi - from < L.pts.count, let q = L.pts[vi - from] {
+            let dv: Double = tl.distance[vi] - tl.distance[from]
+            let red = UIColor(red: 1, green: 0.23, blue: 0.23, alpha: 1)
+            g.setStrokeColor(red.cgColor)
+            g.setLineWidth(1.6)
+            g.setLineDash(phase: 0, lengths: [2, 3])
+            g.move(to: CGPoint(x: q.x, y: rulerY + 5))
+            g.addLine(to: CGPoint(x: q.x, y: q.y))
+            g.strokePath()
+            let label: String = DotNetFormat.custom(dv, "0", spanish: true) + " m"
+            let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 8.5), .foregroundColor: red]
+            let sz: CGSize = (label as NSString).size(withAttributes: attrs)
+            let lx: Double = min(max(q.x - Double(sz.width) / 2, 4), widthPt - Double(sz.width) - 4)
+            g.setFillColor(UIColor(white: 0, alpha: 0.7).cgColor)
+            g.fill(CGRect(x: lx - 3, y: rulerY + 9, width: Double(sz.width) + 6, height: Double(sz.height) + 2))
+            (label as NSString).draw(at: CGPoint(x: lx, y: rulerY + 10), withAttributes: attrs)
+        }
+        g.setLineDash(phase: 0, lengths: [])
+    }
 
     /// Moves a label so it stays inside the picture (it goes to the left of the point near the right edge).
     private static func inside(_ p: CGPoint, _ text: String, _ w: Double, _ h: Double) -> CGPoint {

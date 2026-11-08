@@ -145,7 +145,7 @@ final class StretchModel {
             var image: RouteImage? = nil
             if i0 >= 0 && i1 > i0 {
                 image = await RouteImageRenderer.render(tl, widthPt: PdfDocument.a4Width - 80, heightPt: 230, from: i0, to: i1,
-                                                        cacheDir: self.app.paths.tiles)
+                                                        cacheDir: self.app.paths.tiles, distanceMarks: true)
             }
             self.writePdf(s, r, image)
         }
