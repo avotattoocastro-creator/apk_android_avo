@@ -426,36 +426,59 @@ private struct StableStretchesCard: View {
                     }
                     .font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim)
                     ForEach(list) { (s: SavedStretch) in
-                        HStack(spacing: 8) {
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(s.sessionDate).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
-                                Text((s.name.isEmpty ? "" : s.name + " · ") + TimeText.clock(s.t0) + " – " + TimeText.clock(s.t1)
-                                     + (s.aiText.isEmpty ? "" : " · con análisis IA"))
-                                    .font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            Group {
-                                Text(TimeText.num(s.distanceM, "0", " m")).frame(width: 70, alignment: .trailing)
-                                Text(TimeText.clock(s.durationS)).frame(width: 64, alignment: .trailing)
-                                Text(TimeText.num(s.meanKmh, "0.0")).frame(width: 64, alignment: .trailing)
-                                Text(TimeText.num(s.maxKmh, "0.0")).frame(width: 64, alignment: .trailing)
-                                Text(TimeText.num(s.best200S, "0.00", " s")).frame(width: 80, alignment: .trailing)
-                            }
-                            .font(.callout.monospacedDigit()).foregroundStyle(Avo.text)
-                            HStack(spacing: 6) {
-                                Button("Abrir") { app.stretch.openSaved(s) }.buttonStyle(.avoSecondary)
-                                Button(role: .destructive) { app.stretch.delete(s.id) } label: { Image(systemName: "trash") }
-                                    .buttonStyle(.avoSecondary).foregroundStyle(Avo.bad)
-                                    .accessibilityLabel("Borrar tramo")
-                            }
-                            .frame(width: 150, alignment: .trailing)
-                        }
-                        .padding(.vertical, 4)
+                        StableStretchRow(s: s)
                         Divider().overlay(Avo.line)
                     }
                 }
             }
         }
+    }
+}
+
+/// One saved stretch of the horse (own view: keeps the type checker fast in Release builds).
+private struct StableStretchRow: View {
+    let s: SavedStretch
+    @Environment(AppModel.self) private var app
+
+    private var subtitle: String {
+        var t: String = s.name.isEmpty ? "" : s.name + " · "
+        t += TimeText.clock(s.t0) + " – " + TimeText.clock(s.t1)
+        if !s.aiText.isEmpty { t += " · con análisis IA" }
+        return t
+    }
+
+    var body: some View {
+        HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 1) {
+                Text(s.sessionDate).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                Text(subtitle).font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            numbers
+            actions
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var numbers: some View {
+        HStack(spacing: 8) {
+            Text(TimeText.num(s.distanceM, "0", " m")).frame(width: 70, alignment: .trailing)
+            Text(TimeText.clock(s.durationS)).frame(width: 64, alignment: .trailing)
+            Text(TimeText.num(s.meanKmh, "0.0")).frame(width: 64, alignment: .trailing)
+            Text(TimeText.num(s.maxKmh, "0.0")).frame(width: 64, alignment: .trailing)
+            Text(TimeText.num(s.best200S, "0.00", " s")).frame(width: 80, alignment: .trailing)
+        }
+        .font(.callout.monospacedDigit()).foregroundStyle(Avo.text)
+    }
+
+    private var actions: some View {
+        HStack(spacing: 6) {
+            Button("Abrir") { app.stretch.openSaved(s) }.buttonStyle(.avoSecondary)
+            Button(role: .destructive) { app.stretch.delete(s.id) } label: { Image(systemName: "trash") }
+                .buttonStyle(.avoSecondary).foregroundStyle(Avo.bad)
+                .accessibilityLabel("Borrar tramo")
+        }
+        .frame(width: 150, alignment: .trailing)
     }
 }
 

@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Corrige el archivo para TestFlight (Xcode 26)
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:** el run 42429837057 compiló y pasó las pruebas, pero el archivo Release falló: «the compiler is unable to type-check this expression in reasonable time» en la fila de «Tramos guardados» (`StableView.swift`). La fila pasa a una vista propia (`StableStretchRow`) y se simplifican las expresiones largas de `StretchAnalysisView` (parciales y observaciones). Sin cambios de comportamiento.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — France Galop: fichas de la cuadra y carreras (uso privado)
 **Autor:** Claude · **Rama:** `feature/ipad-app` · **CI:** pendiente
 **Qué cambia (petición del entrenador 01:01/01:16, uso privado):**

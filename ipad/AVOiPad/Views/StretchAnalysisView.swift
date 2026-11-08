@@ -140,13 +140,7 @@ struct StretchAnalysisView: View {
                 VStack(spacing: 0) {
                     row(["#", "Metros", "Tiempo", "Media", "Máx.", "Acel."], header: true, best: false)
                     ForEach(r.splits) { (s: StretchSplit) in
-                        row(["\(s.index)\(s.partial ? "*" : "")",
-                             TimeText.num(s.fromM, "0") + "–" + TimeText.num(s.toM, "0"),
-                             TimeText.num(s.durationS, "0.00", " s"),
-                             TimeText.num(s.meanKmh, "0.0"),
-                             TimeText.num(s.maxKmh, "0.0"),
-                             TimeText.num(s.accel, "+0.00;-0.00")],
-                            header: false, best: s.index == r.best200Index)
+                        row(StretchAnalysisView.cells(s), header: false, best: s.index == r.best200Index)
                     }
                 }
                 if r.splits.contains(where: { $0.partial }) {
@@ -154,6 +148,22 @@ struct StretchAnalysisView: View {
                 }
             }
         }
+    }
+
+    static func cells(_ s: StretchSplit) -> [String] {
+        let n: String = String(s.index) + (s.partial ? "*" : "")
+        let metres: String = TimeText.num(s.fromM, "0") + "–" + TimeText.num(s.toM, "0")
+        let time: String = TimeText.num(s.durationS, "0.00", " s")
+        let mean: String = TimeText.num(s.meanKmh, "0.0")
+        let max: String = TimeText.num(s.maxKmh, "0.0")
+        let acc: String = TimeText.num(s.accel, "+0.00;-0.00")
+        return [n, metres, time, mean, max, acc]
+    }
+
+    static func observationList(_ r: StretchReport) -> [String] {
+        var o: [String] = r.observations
+        if r.metrics.observations != "Datos completos" { o.append("Datos: " + r.metrics.observations) }
+        return o
     }
 
     private func row(_ cells: [String], header: Bool, best: Bool) -> some View {
@@ -175,8 +185,7 @@ struct StretchAnalysisView: View {
     // ---------------------------------------------------------------- observations / comparison
     private func observationsCard(_ r: StretchReport) -> some View {
         AvoCard(title: "Observaciones", subtitle: "calculadas con los datos del tramo") {
-            ForEach(Array((r.observations + (r.metrics.observations == "Datos completos" ? [] : ["Datos: " + r.metrics.observations])).enumerated()),
-                    id: \.offset) { (_: Int, o: String) in
+            ForEach(Array(StretchAnalysisView.observationList(r).enumerated()), id: \.offset) { (_: Int, o: String) in
                 HStack(alignment: .top, spacing: 8) {
                     Circle().fill(Avo.red).frame(width: 6, height: 6).padding(.top, 6)
                     Text(o).font(.footnote).foregroundStyle(Avo.text).fixedSize(horizontal: false, vertical: true)
