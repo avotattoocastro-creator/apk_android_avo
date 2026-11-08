@@ -747,7 +747,7 @@ private final class StretchPdfWriter: PdfReportWriter {
     }
 
     override func build() -> Data {
-        let num = ReportBuilder.num
+        func num(_ v: Double?, _ f: String, _ u: String = "") -> String { ReportBuilder.num(v, f, u) }
         let r: StretchReport = st.report
         let mt: SegmentMetrics = r.metrics
         header()

@@ -490,6 +490,7 @@ private struct TrainingBar: View {
     @Environment(AppModel.self) private var app
 
     var body: some View {
+        VStack(spacing: 0) {
         HStack(spacing: 10) {
             if app.page == .map {
                 // «Mapa»: only the training picker (trainer's sketch); the other pages and «Asignar» are in «Análisis»
@@ -505,15 +506,9 @@ private struct TrainingBar: View {
                 .disabled(!app.hasRange || app.selected == nil)
                 .accessibilityIdentifier("map.stretchAnalysis")
             } else {
-            RootSessionMenu(maxWidth: 280)
-            RootPairMenu(maxWidth: 240)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 4) {
-                    ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
-                }
-                .padding(.vertical, 2)
-            }
-            .accessibilityIdentifier("training.tabs")
+            RootSessionMenu(maxWidth: 360)
+            RootPairMenu(maxWidth: 260)
+            Spacer(minLength: 0)
             Button {
                 app.stable.openAssign(app.selected)
             } label: {
@@ -528,6 +523,19 @@ private struct TrainingBar: View {
         .padding(.vertical, 8)
         .background(Avo.headerBrush)
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+        // pages of the training in their own row under the bar, all visible (trainer's sketch 08/11/2026)
+        if app.page != .map {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 4) {
+                    ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
+                }
+                .padding(.horizontal, 12).padding(.vertical, 4)
+            }
+            .accessibilityIdentifier("training.tabs")
+            .background(Avo.headerBrush)
+            .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+        }
+        }
     }
 
     private func tab(_ e: RootNavEntry) -> some View {
