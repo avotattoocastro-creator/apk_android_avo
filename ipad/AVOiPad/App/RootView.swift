@@ -167,10 +167,28 @@ struct RootView: View {
     // ------------------------------------------------------------------ detail
     private var detail: some View {
         VStack(spacing: 0) {
-            if app.page.isTrainingPage {
-                TrainingBar()
-            } else if app.page != .home {
-                RootHeader()
+            // no navigation title bar (trainer's sketch 08/11/2026): the AVO header / training bar is the top row of
+            // every page; with the sidebar hidden, a button at its left brings the menu back
+            if app.page != .home {
+                HStack(spacing: 0) {
+                    if columns == .detailOnly {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
+                        } label: {
+                            Image(systemName: "sidebar.left").font(.system(size: 18, weight: .semibold))
+                                .foregroundStyle(Avo.text).frame(width: 44, height: 44)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.leading, 8)
+                        .accessibilityLabel("Mostrar menú")
+                    }
+                    if app.page.isTrainingPage {
+                        TrainingBar()
+                    } else {
+                        RootHeader()
+                    }
+                }
+                .background(Avo.headerBrush)
             }
             ZStack {
                 Avo.bg.ignoresSafeArea()
@@ -210,7 +228,7 @@ struct RootView: View {
         .navigationTitle(RootView.title(app.page))
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(Avo.surface, for: .navigationBar)
-        .toolbar(app.page == .home ? .hidden : .visible, for: .navigationBar)
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     static func title(_ p: Page) -> String {
