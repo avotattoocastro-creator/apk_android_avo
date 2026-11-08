@@ -824,6 +824,7 @@ private final class StretchPdfWriter: PdfReportWriter {
             ReportBuilder.drawRoute(pdf, tl, m, y, w, 230, from: i0, to: i1, image: st.routeImage)
             y += 240
         }
+        ensure(230)   // keep the title with its chart
         title("Velocidad en el tramo")
         speedChart(r)
 

@@ -73,8 +73,9 @@ enum RouteImageRenderer {
             let f: Double = pow(2, L.z - Double(z)) * 256
             for t in tiles {
                 guard let im = images["\(t.x)/\(t.y)"] else { continue }
-                // a hairline of overlap hides the seams between rotated tiles
-                im.draw(in: CGRect(x: Double(t.x) * f - 0.5, y: Double(t.y) * f - 0.5, width: f + 1, height: f + 1))
+                // ~1.5 output pixels of overlap hide the seams between rotated tiles
+                let o: Double = 1.5 / (L.k * scale)
+                im.draw(in: CGRect(x: Double(t.x) * f - o, y: Double(t.y) * f - o, width: f + 2 * o, height: f + 2 * o))
             }
             g.restoreGState()
             g.setFillColor(UIColor(white: 0, alpha: 0.12).cgColor)
@@ -102,8 +103,8 @@ enum RouteImageRenderer {
             if let s0 = valid.first, let s1 = valid.last {
                 dot(g, s0, UIColor(red: 0.32, green: 0.87, blue: 0.25, alpha: 1))
                 dot(g, s1, UIColor(red: 0.93, green: 0.07, blue: 0.16, alpha: 1))
-                pill("Inicio", at: CGPoint(x: s0.x + 8, y: s0.y - 18))
-                pill("Fin", at: CGPoint(x: s1.x + 8, y: s1.y + 4))
+                pill("Inicio", at: inside(CGPoint(x: s0.x + 8, y: s0.y - 18), "Inicio", widthPt, heightPt))
+                pill("Fin", at: inside(CGPoint(x: s1.x + 8, y: s1.y + 4), "Fin", widthPt, heightPt))
             }
             let vi: Int = ReportBuilder.vmaxIndex(tl, from: from, to: to)
             if vi >= first, vi - first < L.pts.count, let q = L.pts[vi - first] {
@@ -144,6 +145,15 @@ enum RouteImageRenderer {
     }
 
     private static let pillAttrs: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 9), .foregroundColor: UIColor.white]
+
+    /// Moves a label so it stays inside the picture (it goes to the left of the point near the right edge).
+    private static func inside(_ p: CGPoint, _ text: String, _ w: Double, _ h: Double) -> CGPoint {
+        let s: CGSize = (text as NSString).size(withAttributes: pillAttrs)
+        let pw: Double = Double(s.width) + 12, ph: Double = Double(s.height) + 6
+        var x: Double = Double(p.x)
+        if x + pw > w - 4 { x = x - pw - 16 }
+        return CGPoint(x: max(4, x), y: min(max(4, Double(p.y)), h - ph - 4))
+    }
 
     private static func dot(_ g: CGContext, _ p: (x: Double, y: Double), _ color: UIColor, r: Double = 5) {
         g.setFillColor(UIColor.white.cgColor)

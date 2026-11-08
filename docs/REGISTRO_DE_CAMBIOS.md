@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — PDF del tramo: ajustes tras la primera prueba
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:** PDF del tramo revisado con el iPad (BELLA AL SHAHANIA, 07/11/2026): satélite, giro, Vmáx y parciales correctos. Ajustes: la etiqueta «Fin»/«Inicio» ya no se sale de la imagen; más solape entre teselas (se veían líneas finas); el título «Velocidad en el tramo» no se queda solo al final de la página.
+**Validación:** PROBADO FÍSICAMENTE (iPad, compilación anterior) lo descrito; los ajustes IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Satélite de fondo en los informes y Vmáx con su valor
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (peticiones 10:54–10:56):**
