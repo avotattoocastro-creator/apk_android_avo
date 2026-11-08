@@ -58,6 +58,8 @@ final class AppModel {
     var importLog: [ImportLogRow] = []
     var status: String = "Listo · importa un entrenamiento .avo o .avr"
     var busy: Bool = false
+    /// PDF shown over any page (Informe IA, informe completo from Cuadra) with «Compartir».
+    var pdfViewer: ExportedFile? = nil
     var progress: Double = 0
     var demoState: String = ""
     var search: String = ""

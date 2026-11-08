@@ -105,6 +105,10 @@ struct RootView: View {
                 .environment(app)
                 .preferredColorScheme(.dark)
         }
+        .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
+            PdfViewerSheet(file: f)
+                .preferredColorScheme(.dark)
+        }
         .fullScreenCover(isPresented: Binding(get: { app.franceGalop.visible },
                                               set: { (v: Bool) in if !v { app.franceGalop.close() } })) {
             FranceGalopView(model: app.franceGalop)

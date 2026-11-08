@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — iPad — Informes IA guardados en la ficha del caballo
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (bocetos 09/11/2026 00:09):**
+- Asistente IA: botón **«Guardar informe PDF»** bajo cada respuesta. Guarda pregunta + respuesta en `informes_ia.json` (carpeta de la app) asociado al caballo y al entrenamiento, genera el PDF (cabecera AVO, datos del entrenamiento, pregunta, análisis con títulos, listas y tablas con celdas que se ajustan) y lo abre con «Compartir».
+- Cuadra › Entrenamientos del caballo: los botones son ahora **Abrir · Tramo · Análisis IA · Informe completo** (sale «Asignar», que sigue en la barra superior). «Tramo» abre el tramo guardado de ese entrenamiento (menú si hay varios); «Análisis IA» abre el informe IA guardado (menú si hay varios); «Informe completo» genera el PDF de «Informes» con las secciones activas y lo muestra.
+- Informe completo: la sección «Análisis IA y recomendaciones» incluye también los informes del asistente guardados. Las tablas Markdown de la IA se dibujan como tablas en PDF y HTML (antes salían como líneas con «|»).
+- Visor de PDF común (`Views/PdfViewerSheet.swift`).
+**Archivos:** `Core/AIReports.swift` (nuevo), `Core/ReportBuilder.swift`, `Core/PdfDocument.swift`, `App/AssistantModel.swift`, `App/ReportsModel.swift`, `App/AppModel.swift`, `App/RootView.swift`, `Views/AssistantView.swift`, `Views/StableView.swift`, `Views/ReportsView.swift`, `Views/PdfViewerSheet.swift` (nuevo).
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Análisis IA en los informes
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (petición 13:55):**

@@ -136,6 +136,22 @@ final class PdfDocument {
         return used
     }
 
+    /// Lines that `paragraph` would use for this text (same word wrapping, nothing drawn).
+    static func lineCount(_ text: String, _ maxWidth: Double, size: Double, bold: Bool) -> Int {
+        var n: Int = 0
+        for para in text.replacingOccurrences(of: "\r", with: "").components(separatedBy: "\n") {
+            let words: [String] = para.components(separatedBy: " ").filter { !$0.isEmpty }
+            if words.isEmpty { continue }
+            var line: String = ""
+            n += 1
+            for word in words {
+                let probe: String = line.isEmpty ? word : line + " " + word
+                if measureText(probe, size, bold) > maxWidth && !line.isEmpty { n += 1; line = word } else { line = probe }
+            }
+        }
+        return max(n, 1)
+    }
+
     static func measureText(_ text: String, _ size: Double, _ bold: Bool) -> Double {
         var w: Double = 0
         for ch in text.utf16 { w += glyphWidth(ch, bold) }

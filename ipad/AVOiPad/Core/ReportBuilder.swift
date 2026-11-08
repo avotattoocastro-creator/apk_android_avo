@@ -378,7 +378,7 @@ enum ReportBuilder {
             sb += "<h2>Análisis IA y recomendaciones</h2>"
             for a in d.aiSections {
                 sb += "<h3>" + e(a.title) + "</h3>"
-                for p in ReportBuilder.plainParagraphs(a.text) { sb += "<p>" + e(p) + "</p>" }
+                sb += ReportBuilder.markdownHtml(a.text)
             }
             sb += "<p class=\"note\">Texto generado por IA a partir de los datos; revísalo con criterio profesional.</p>"
         }
@@ -471,6 +471,85 @@ private class PdfReportWriter {
         ensure(est)
         let used: Double = pdf.paragraph(m, y, w, text, size: size, bold: bold, color: ReportBuilder.ink, leading: 1.3)
         y += used + 4
+    }
+
+    /// AI markdown (Claude / Apple): titles, lists, paragraphs and tables with wrapped cells.
+    func markdown(_ md: String) {
+        let lines: [String] = md.components(separatedBy: .newlines)
+        var i: Int = 0
+        while i < lines.count {
+            let l: String = lines[i].trimmingCharacters(in: .whitespaces)
+            if l.hasPrefix("|") {
+                var rows: [[String]] = []
+                while i < lines.count {
+                    let t: String = lines[i].trimmingCharacters(in: .whitespaces)
+                    if !t.hasPrefix("|") { break }
+                    let cells: [String] = ReportBuilder.tableCells(t)
+                    if !ReportBuilder.isSeparatorRow(cells) { rows.append(cells) }
+                    i += 1
+                }
+                if !rows.isEmpty { mdTable(rows) }
+                continue
+            }
+            i += 1
+            var level: Int = 0
+            var t: String = l
+            while t.hasPrefix("#") { level += 1; t = String(t.dropFirst()) }
+            t = ReportBuilder.cleanInline(t).trimmingCharacters(in: .whitespaces)
+            if t.isEmpty || t == "---" { continue }
+            if level > 0 {
+                ensure(40)
+                y += 4
+                paragraph(t, size: level <= 1 ? 12 : 10.5, bold: true)
+            } else {
+                if t.hasPrefix("- ") || t.hasPrefix("* ") { t = "• " + t.dropFirst(2) }
+                paragraph(t)
+            }
+        }
+    }
+
+    /// Markdown table: column widths from the content, wrapped cells, header repeated on a new page.
+    private func mdTable(_ rows: [[String]]) {
+        let n: Int = rows.map { $0.count }.max() ?? 0
+        if n == 0 { return }
+        let size: Double = 7.5
+        let lead: Double = 1.25
+        let data: [[String]] = rows.map { (r: [String]) -> [String] in
+            (0..<n).map { (k: Int) -> String in k < r.count ? ReportBuilder.cleanInline(r[k]) : "" }
+        }
+        var weights: [Double] = Array(repeating: 40, count: n)
+        for r in data {
+            for k in 0..<n { weights[k] = max(weights[k], min(PdfDocument.measureText(r[k], size, false) + 10, 260)) }
+        }
+        var total: Double = 0
+        for x in weights { total += x }
+        let cw: [Double] = weights.map { $0 / total * w }
+        func height(_ r: [String], _ bold: Bool) -> Double {
+            var lines: Int = 1
+            for k in 0..<n { lines = max(lines, PdfDocument.lineCount(r[k], cw[k] - 8, size: size, bold: bold)) }
+            return Double(lines) * size * lead + 6
+        }
+        func draw(_ r: [String], head: Bool, shade: Bool) {
+            let h: Double = height(r, head)
+            if head { pdf.fillRect(m, y, w, h, ReportBuilder.dark) } else if shade { pdf.fillRect(m, y, w, h, ReportBuilder.panel) }
+            var x: Double = m
+            for k in 0..<n {
+                pdf.paragraph(x + 4, y + 3, cw[k] - 8, r[k], size: size, bold: head,
+                              color: head ? ReportBuilder.white : ReportBuilder.ink, leading: lead)
+                x += cw[k]
+            }
+            y += h
+        }
+        ensure(height(data[0], true) + (data.count > 1 ? height(data[1], false) : 0) + 4)
+        draw(data[0], head: true, shade: false)
+        var r: Int = 0
+        for row in data.dropFirst() {
+            let h: Double = height(row, false)
+            if y + h > pdf.height - 50 { header(); draw(data[0], head: true, shade: false) }
+            draw(row, head: false, shade: r % 2 == 1)
+            r += 1
+        }
+        y += 8
     }
 
     func title(_ t: String) {
@@ -721,7 +800,7 @@ private class PdfReportWriter {
             title("Análisis IA y recomendaciones")
             for a in d.aiSections {
                 paragraph(a.title, size: 10, bold: true)
-                for p in ReportBuilder.plainParagraphs(a.text) { paragraph(p) }
+                markdown(a.text)
                 y += 6
             }
             ensure(14)
@@ -760,16 +839,79 @@ extension ReportBuilder {
     }
 
     /// AI markdown to plain paragraphs for the PDF (no #, **, `).
+    /// Inline markdown off (**, `) and the symbols the PDF fonts (WinAnsi) cannot print.
+    static func cleanInline(_ s: String) -> String {
+        var l: String = s.replacingOccurrences(of: "**", with: "").replacingOccurrences(of: "`", with: "")
+        for (a, b) in [("≈", "~"), ("→", "->"), ("←", "<-"), ("≥", ">="), ("≤", "<="), ("−", "-"), ("Δ", "D"), ("≠", "!="),
+                       ("–", "-"), ("—", "-"), ("×", "x")] {
+            l = l.replacingOccurrences(of: a, with: b)
+        }
+        return l
+    }
+
+    static func tableCells(_ line: String) -> [String] {
+        var parts: [String] = line.components(separatedBy: "|").map { $0.trimmingCharacters(in: .whitespaces) }
+        if parts.first == "" { parts.removeFirst() }
+        if parts.last == "" { parts.removeLast() }
+        return parts
+    }
+
+    static func isSeparatorRow(_ cells: [String]) -> Bool {
+        !cells.isEmpty && cells.allSatisfy { (c: String) -> Bool in !c.isEmpty && c.allSatisfy { $0 == "-" || $0 == ":" || $0 == " " } }
+    }
+
+    /// AI markdown to HTML (titles, lists, tables, **bold**).
+    static func markdownHtml(_ md: String) -> String {
+        func esc(_ s: String) -> String {
+            var t: String = DotNetText.htmlEncode(s)
+            while let a = t.range(of: "**"), let b = t.range(of: "**", range: a.upperBound..<t.endIndex) {
+                t = String(t[..<a.lowerBound]) + "<b>" + String(t[a.upperBound..<b.lowerBound]) + "</b>" + String(t[b.upperBound...])
+            }
+            return t.replacingOccurrences(of: "`", with: "")
+        }
+        var out: String = ""
+        var inList: Bool = false
+        var inTable: Bool = false
+        var firstRow: Bool = true
+        func closeAll() {
+            if inList { out += "</ul>"; inList = false }
+            if inTable { out += "</table>"; inTable = false }
+        }
+        for raw in md.components(separatedBy: .newlines) {
+            let l: String = raw.trimmingCharacters(in: .whitespaces)
+            if l.hasPrefix("|") {
+                let cells: [String] = tableCells(l)
+                if isSeparatorRow(cells) { continue }
+                if !inTable { closeAll(); out += "<table>"; inTable = true; firstRow = true }
+                let tag: String = firstRow ? "th" : "td"
+                out += "<tr>" + cells.map { "<" + tag + ">" + esc($0) + "</" + tag + ">" }.joined() + "</tr>"
+                firstRow = false
+                continue
+            }
+            if l.hasPrefix("- ") || l.hasPrefix("* ") {
+                if inTable { out += "</table>"; inTable = false }
+                if !inList { out += "<ul>"; inList = true }
+                out += "<li>" + esc(String(l.dropFirst(2))) + "</li>"
+                continue
+            }
+            closeAll()
+            if l.isEmpty || l == "---" { continue }
+            var level: Int = 0
+            var t: String = l
+            while t.hasPrefix("#") { level += 1; t = String(t.dropFirst()) }
+            t = t.trimmingCharacters(in: .whitespaces)
+            if level > 0 { out += (level <= 1 ? "<h3>" : "<h4>") + esc(t) + (level <= 1 ? "</h3>" : "</h4>") } else { out += "<p>" + esc(t) + "</p>" }
+        }
+        closeAll()
+        return out
+    }
+
     static func plainParagraphs(_ md: String) -> [String] {
         var out: [String] = []
         for raw in md.components(separatedBy: .newlines) {
             var l: String = raw.trimmingCharacters(in: .whitespaces)
             while l.hasPrefix("#") { l = String(l.dropFirst()) }
-            l = l.replacingOccurrences(of: "**", with: "").replacingOccurrences(of: "`", with: "")
-            // symbols the PDF fonts (WinAnsi) cannot print
-            for (a, b) in [("≈", "~"), ("→", "->"), ("←", "<-"), ("≥", ">="), ("≤", "<="), ("−", "-"), ("Δ", "D"), ("≠", "!=")] {
-                l = l.replacingOccurrences(of: a, with: b)
-            }
+            l = cleanInline(l)
             if l.hasPrefix("- ") || l.hasPrefix("* ") { l = "• " + l.dropFirst(2) }
             l = l.trimmingCharacters(in: .whitespaces)
             if l.isEmpty || l == "---" { continue }
@@ -892,11 +1034,55 @@ private final class StretchPdfWriter: PdfReportWriter {
 
         if !st.aiText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             title("Análisis IA y recomendaciones")
-            for p in ReportBuilder.plainParagraphs(st.aiText) { paragraph(p) }
+            markdown(st.aiText)
             pdf.text(m, y, "Texto generado por IA a partir de los datos del tramo; revísalo con criterio profesional.",
                      size: 7, bold: false, color: ReportBuilder.dim)
             y += 12
         }
+        return pdf.save()
+    }
+}
+
+// MARK: - «Informe IA» (answer of the Asistente IA saved on the horse, trainer's request 09/11/2026)
+
+struct AIReportPdfData {
+    var session: TrainingSession
+    var timeline: SessionTimeline
+    var rows: [(k: String, v: String)]
+    var question: String
+    var text: String
+}
+
+extension ReportBuilder {
+    static func aiReportPdf(_ d: AIReportPdfData) -> Data {
+        AIReportPdfWriter(d).build()
+    }
+}
+
+private final class AIReportPdfWriter: PdfReportWriter {
+    let ai: AIReportPdfData
+
+    init(_ d: AIReportPdfData) {
+        ai = d
+        super.init(ReportData(session: d.session, timeline: d.timeline))
+        subtitle = "Informe IA del entrenamiento"
+        pdf.title = "Informe IA AVO " + d.session.sessionId
+    }
+
+    override func build() -> Data {
+        header()
+        title("Entrenamiento")
+        keyValues(ai.rows)
+        if !ai.question.isEmpty {
+            title("Pregunta")
+            paragraph(ReportBuilder.cleanInline(ai.question), size: 9.5, bold: true)
+        }
+        title("Análisis IA")
+        markdown(ai.text)
+        ensure(14)
+        pdf.text(m, y, "Texto generado por IA a partir de los datos del entrenamiento; revísalo con criterio profesional.",
+                 size: 7, bold: false, color: ReportBuilder.dim)
+        y += 12
         return pdf.save()
     }
 }

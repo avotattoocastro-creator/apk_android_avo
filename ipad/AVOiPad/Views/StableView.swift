@@ -388,8 +388,7 @@ private struct StableTrainingsCard: View {
                         VStack(alignment: .leading, spacing: 0) {
                             StableTrainingHeader()
                             ForEach(list) { s in
-                                StableTrainingRow(s: s, open: { app.stable.openTraining(s) },
-                                                  assign: { app.stable.openAssign(s) })
+                                StableTrainingRow(s: s, open: { app.stable.openTraining(s) })
                                 Divider().overlay(Avo.line)
                             }
                         }
@@ -522,7 +521,7 @@ private struct StableRacesCard: View {
 
 private enum StableCols {
     static let date: CGFloat = 130, name: CGFloat = 130, dist: CGFloat = 85, dur: CGFloat = 75, speed: CGFloat = 85,
-               origin: CGFloat = 110, actions: CGFloat = 170
+               origin: CGFloat = 110, actions: CGFloat = 520
 }
 
 private struct StableTrainingHeader: View {
@@ -546,7 +545,7 @@ private struct StableTrainingHeader: View {
 private struct StableTrainingRow: View {
     let s: SessionItem
     let open: () -> Void
-    let assign: () -> Void
+    @Environment(AppModel.self) private var app
 
     var body: some View {
         HStack(spacing: 8) {
@@ -560,16 +559,89 @@ private struct StableTrainingRow: View {
                 if s.isSynthetic { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) } else { Text(s.kind) }
             }
             .frame(width: StableCols.origin, alignment: .leading)
-            HStack(spacing: 6) {
-                Button("Abrir", action: open).buttonStyle(.avoSecondary)
-                Button("Asignar", action: assign).buttonStyle(.avoSecondary)
-            }
-            .frame(width: StableCols.actions, alignment: .leading)
+            StableTrainingActions(s: s, open: open)
+                .frame(width: StableCols.actions, alignment: .leading)
         }
         .font(.footnote).foregroundStyle(Avo.text)
         .padding(.vertical, 4)
     }
     private func cell(_ t: String, _ w: CGFloat) -> some View {
         Text(t).lineLimit(1).truncationMode(.tail).frame(width: w, alignment: .leading)
+    }
+}
+
+/// Buttons of a training in the horse sheet (trainer's sketch 09/11/2026): Abrir · Tramo (saved stretches of the training)
+/// · Análisis IA (saved «Informes IA» of the Asistente IA) · Informe completo (PDF of «Informes»).
+private struct StableTrainingActions: View {
+    let s: SessionItem
+    let open: () -> Void
+    @Environment(AppModel.self) private var app
+    @State private var building: Bool = false
+
+    var body: some View {
+        let stretches: [SavedStretch] = stretchesOfTraining
+        let reports: [SavedAIReport] = app.assistant.reportsOf(s)
+        HStack(spacing: 6) {
+            Button("Abrir", action: open).buttonStyle(.avoSecondary)
+            stretchButton(stretches)
+            reportButton(reports)
+            Button {
+                building = true
+                Task { @MainActor in
+                    await app.reports.openFullReport(s)
+                    building = false
+                }
+            } label: {
+                if building { ProgressView().controlSize(.small) } else { Label("Informe completo", systemImage: "doc.richtext") }
+            }
+            .buttonStyle(.avoSecondary)
+            .disabled(building)
+        }
+    }
+
+    private var stretchesOfTraining: [SavedStretch] {
+        _ = app.stretch.version
+        guard let code = s.horseCode, !code.isEmpty else { return [] }
+        return app.stretch.savedOf(horse: code).filter { $0.sessionId == s.id }.sorted { $0.t0 < $1.t0 }
+    }
+
+    @ViewBuilder
+    private func stretchButton(_ list: [SavedStretch]) -> some View {
+        if list.count > 1 {
+            Menu {
+                ForEach(list) { (st: SavedStretch) in
+                    Button((st.name.isEmpty ? "" : st.name + " · ") + TimeText.clock(st.t0) + " – " + TimeText.clock(st.t1)) {
+                        app.stretch.openSaved(st)
+                    }
+                }
+            } label: {
+                Label("Tramo (\(list.count))", systemImage: "ruler")
+            }
+            .buttonStyle(.avoSecondary)
+        } else {
+            Button { if let st = list.first { app.stretch.openSaved(st) } } label: { Label("Tramo", systemImage: "ruler") }
+                .buttonStyle(.avoSecondary)
+                .disabled(list.isEmpty)
+                .opacity(list.isEmpty ? 0.45 : 1)
+        }
+    }
+
+    @ViewBuilder
+    private func reportButton(_ list: [SavedAIReport]) -> some View {
+        if list.count > 1 {
+            Menu {
+                ForEach(list) { (r: SavedAIReport) in
+                    Button(r.menuTitle) { app.assistant.openReport(r) }
+                }
+            } label: {
+                Label("Análisis IA (\(list.count))", systemImage: "sparkles")
+            }
+            .buttonStyle(.avoSecondary)
+        } else {
+            Button { if let r = list.first { app.assistant.openReport(r) } } label: { Label("Análisis IA", systemImage: "sparkles") }
+                .buttonStyle(.avoSecondary)
+                .disabled(list.isEmpty)
+                .opacity(list.isEmpty ? 0.45 : 1)
+        }
     }
 }

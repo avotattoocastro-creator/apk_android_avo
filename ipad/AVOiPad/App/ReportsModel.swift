@@ -159,7 +159,7 @@ final class ReportsModel {
         var d = ReportData(session: s.session, timeline: s.timeline, engine: s.engine, segments: metrics, comparison: comparison,
                            tides: envOk ? env.tides : nil, weather: envOk ? env.weather : nil, notes: s.notes, sections: selectedSections())
         if routeImageFor == s.id { d.routeImage = routeImage }
-        d.aiSections = app.stretch.aiAnalyses(for: s)
+        d.aiSections = app.assistant.reportSections(for: s) + app.stretch.aiAnalyses(for: s)
         return d
     }
 
@@ -300,6 +300,21 @@ final class ReportsModel {
             app.log.error("ui", msg, error)
             app.status = "Error: " + msg
             app.show("AVO Performance Horse", msg, error: true)
+        }
+    }
+
+    /// «Informe completo» from Cuadra: opens the training, waits for the engine, writes the PDF with the current
+    /// sections of «Informes» and shows it in the PDF viewer.
+    @MainActor
+    func openFullReport(_ s: SessionItem) async {
+        app.select(s)
+        app.status = "Preparando el informe completo de \(s.horse) · \(s.dateTimeText)…"
+        if s.engine == nil { await app.runEngine(s, force: false) }
+        loadNotes()
+        await export(.pdf)
+        if let f = shareFile {
+            shareFile = nil
+            app.pdfViewer = f
         }
     }
 

@@ -10,6 +10,8 @@ struct AssistantTurn: Identifiable {
     var isError: Bool = false
     /// «Claude Sonnet 5.5 · 12 400 tokens · ~0,031 $» o «Apple (en el iPad)».
     var footer: String = ""
+    /// Id of the «Informe IA» saved from this answer (button «Guardar informe PDF»).
+    var savedId: String? = nil
 }
 
 /// Pregunta rápida (botones encima del cuadro de texto).
@@ -35,6 +37,10 @@ final class AssistantModel {
     @ObservationIgnored private let defaults: UserDefaults = .standard
 
     var turns: [AssistantTurn] = []
+    /// «Informes IA» saved on the horses (informes_ia.json).
+    @ObservationIgnored private(set) var reports: AIReportStore! = nil
+    /// Changes when a report is saved or deleted (Cuadra refreshes its buttons).
+    var reportsVersion: Int = 0
     var input: String = ""
     var busy: Bool = false
     var status: String = ""
@@ -84,12 +90,81 @@ final class AssistantModel {
 
     init(app: AppModel) {
         self.app = app
+        self.reports = AIReportStore(root: app.paths.root)
         if let m = defaults.string(forKey: Keys.model).flatMap({ ClaudeModel(rawValue: $0) }) { model = m }
         useOnDevice = defaults.bool(forKey: Keys.onDevice)
         let l: Double = defaults.double(forKey: Keys.limit)
         if l > 0 { monthLimitUSD = l }
         hasKey = AvoKeychain.read() != nil
         monthSpentUSD = defaults.double(forKey: Keys.spent(AssistantModel.monthKey()))
+    }
+
+    // ---------------------------------------------------------------- saved reports
+    /// «Guardar informe PDF»: saves the answer (with its question) on the horse of the training and opens the PDF.
+    func saveReport(_ turnId: UUID) {
+        guard let i = turns.firstIndex(where: { $0.id == turnId }), let s = app.selected else { return }
+        let t: AssistantTurn = turns[i]
+        if t.role != .assistant || t.isError || t.text.isEmpty { return }
+        if let id = t.savedId, let r = reports.items.first(where: { $0.id == id }) { openReport(r); return }
+        var question: String = ""
+        if i > 0 && turns[i - 1].role == .user { question = turns[i - 1].text }
+        let r = SavedAIReport(horseCode: s.horseCode ?? "", horseName: s.horse, rider: s.rider, sessionId: s.id,
+                              sessionDate: s.dateTimeText, question: question, text: t.text, model: t.footer)
+        do {
+            try reports.add(r)
+            turns[i].savedId = r.id
+            reportsVersion += 1
+            status = (s.horseCode ?? "").isEmpty
+                ? "Informe IA guardado. Asigna un caballo a este entrenamiento para verlo en su ficha de Cuadra."
+                : "Informe IA guardado en la ficha de \(s.horse) (Cuadra › entrenamiento › «Análisis IA»)."
+            openReport(r)
+        } catch {
+            status = "No se pudo guardar el informe: " + error.localizedDescription
+        }
+    }
+
+    func reportsOf(_ s: SessionItem) -> [SavedAIReport] {
+        _ = reportsVersion
+        return reports.of(session: s.id)
+    }
+
+    func deleteReport(_ id: String) {
+        try? reports.remove(id)
+        for k in turns.indices where turns[k].savedId == id { turns[k].savedId = nil }
+        reportsVersion += 1
+    }
+
+    /// Writes the PDF of a saved report in «exportaciones» and shows it (PDF viewer with «Compartir»).
+    func openReport(_ r: SavedAIReport) {
+        guard let s = app.sessions.first(where: { $0.id == r.sessionId }) else {
+            app.show("Informe IA", "El entrenamiento de este informe (\(r.sessionDate)) no está cargado en el iPad.")
+            return
+        }
+        var rows: [(k: String, v: String)] = [(k: "Caballo", v: s.horse), (k: "Jinete", v: s.rider),
+                                              (k: "Entrenamiento", v: s.dateTimeText),
+                                              (k: "Distancia · duración", v: s.distanceText + " · " + s.durationText),
+                                              (k: "Velocidad máxima", v: s.maxSpeedText),
+                                              (k: "Informe guardado", v: MadridTime.format(r.savedAt, "dd/MM/yyyy HH:mm"))]
+        if !r.model.isEmpty { rows.append((k: "Modelo", v: r.model)) }
+        let data = AIReportPdfData(session: s.session, timeline: s.timeline, rows: rows, question: r.question, text: r.text)
+        let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
+        AvoFiles.ensureDir(dir)
+        let name: String = ExportNaming.name(s, "Informe_IA_" + MadridTime.format(r.savedAt, "HHmmss"), "pdf")
+        let path: String = AvoFiles.join(dir, name)
+        do {
+            try AvoFiles.writeAtomic(ReportBuilder.aiReportPdf(data), to: path)
+            app.pdfViewer = ExportedFile(id: path + "|" + String(Date().timeIntervalSince1970), url: URL(fileURLWithPath: path),
+                                         name: name, kind: .pdf, time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
+        } catch {
+            app.show("Informe IA", "No se pudo crear el PDF: " + error.localizedDescription)
+        }
+    }
+
+    /// Saved reports of a training for the full report («Análisis IA y recomendaciones»).
+    func reportSections(for s: SessionItem) -> [(title: String, text: String)] {
+        reports.of(session: s.id).map { (r: SavedAIReport) -> (title: String, text: String) in
+            (title: "Asistente IA · " + (r.question.isEmpty ? MadridTime.format(r.savedAt, "dd/MM/yyyy HH:mm") : r.question), text: r.text)
+        }
     }
 
     // ---------------------------------------------------------------- contract

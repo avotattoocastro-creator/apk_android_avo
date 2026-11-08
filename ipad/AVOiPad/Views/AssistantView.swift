@@ -79,7 +79,8 @@ struct AssistantView: View {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     if a.turns.isEmpty { emptyState(a) }
                     ForEach(a.turns) { (t: AssistantTurn) in
-                        AssistantBubble(turn: t, streaming: a.busy && t.id == a.turns.last?.id)
+                        AssistantBubble(turn: t, streaming: a.busy && t.id == a.turns.last?.id,
+                                        save: { a.saveReport(t.id) })
                             .id(t.id)
                     }
                     if !a.status.isEmpty {
@@ -152,6 +153,7 @@ struct AssistantView: View {
 private struct AssistantBubble: View {
     var turn: AssistantTurn
     var streaming: Bool
+    var save: () -> Void
 
     var body: some View {
         let user: Bool = turn.role == .user
@@ -169,6 +171,15 @@ private struct AssistantBubble: View {
                 }
                 if !turn.footer.isEmpty {
                     Text(turn.footer).font(.caption2).foregroundStyle(Avo.textDim)
+                }
+                if !user && !streaming && !turn.isError && !turn.text.isEmpty {
+                    Button(action: save) {
+                        Label(turn.savedId == nil ? "Guardar informe PDF" : "Ver informe PDF (guardado en la ficha)",
+                              systemImage: turn.savedId == nil ? "square.and.arrow.down" : "doc.richtext")
+                    }
+                    .buttonStyle(.avoSecondary)
+                    .padding(.top, 2)
+                    .accessibilityIdentifier("assistant.saveReport")
                 }
             }
             .padding(12)
