@@ -14,9 +14,9 @@ struct ChartsView: View {
 
     var body: some View {
         let charts: ChartsModel = app.charts
+        // trainer's sketch 08/11/2026: no page title, no «Seleccionar rango» (hold and drag selects) and no «VER» phase
+        // buttons; zoom, tramo actions and playback on one row, then the overview bar
         VStack(alignment: .leading, spacing: 10) {
-            AvoPageTitle(title: "Gráficas",
-                         subtitle: app.selected.map { $0.summary } ?? "Sin entrenamiento seleccionado · importa un archivo .avo o .avr")
             if app.selected == nil {
                 AvoCard { AvoNoData(text: "Selecciona un entrenamiento para ver las gráficas") }
                 Spacer(minLength: 0)
@@ -25,7 +25,8 @@ struct ChartsView: View {
                 if app.hasRange && !charts.rangeStats.isEmpty {
                     ChartsRangeStrip(rows: charts.rangeStats)
                 }
-                ChartsNavigator(charts: charts)
+                ChartsOverviewBar(charts: charts)
+                    .frame(height: 34)
                 ScrollView(.vertical) {
                     ChartsStack(charts: charts)
                         .padding(.bottom, 24)
@@ -38,7 +39,10 @@ struct ChartsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
         .background(ChartsRangeWatcher())
-        .onAppear { app.charts.pageShown() }
+        .onAppear {
+            app.charts.rangeMode = false   // the toggle is gone on this page: hold and drag selects
+            app.charts.pageShown()
+        }
     }
 }
 
@@ -95,15 +99,6 @@ private struct ChartsToolbar: View {
 
     @ViewBuilder
     private var viewControls: some View {
-        @Bindable var c = charts
-        Toggle(isOn: $c.rangeMode) {
-            Label("Seleccionar rango", systemImage: "arrow.left.and.right.square")
-        }
-        .toggleStyle(.button)
-        .tint(Avo.red)
-        .fixedSize()
-        .accessibilityIdentifier("charts.rangeMode")
-        Divider().frame(height: 22)
         Button { charts.zoom(1.5) } label: { Image(systemName: "minus.magnifyingglass") }
             .buttonStyle(.avoSecondary).accessibilityLabel("Alejar")
         Button { charts.zoom(1 / 1.5) } label: { Image(systemName: "plus.magnifyingglass") }

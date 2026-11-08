@@ -25,6 +25,9 @@ struct RootView: View {
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
+        // trainer's sketch 08/11/2026: Informes and Biomecánica in the sidebar under Análisis (out of the training bar)
+        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
+        RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
@@ -43,10 +46,8 @@ struct RootView: View {
         RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
         RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
         RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
-        RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
         RootNavEntry(page: .compare, title: "Comparar", icon: "square.split.2x1"),
         RootNavEntry(page: .tides, title: "Mareas", icon: "water.waves"),
-        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .engine, title: "Motor", icon: "cpu"),
     ]
 
@@ -140,7 +141,9 @@ struct RootView: View {
     private func navButton(_ e: RootNavEntry) -> some View {
         // «Análisis» stays highlighted on every page of the training
         // «Análisis» stays highlighted on every page of the training except the full-screen «Mapa»
-        let active: Bool = e.page == .analysis ? (app.page.isTrainingPage && app.page != .map) : app.page == e.page
+        let active: Bool = e.page == .analysis
+            ? (app.page.isTrainingPage && app.page != .map && app.page != .reports && app.page != .biomech)
+            : app.page == e.page
         return Button {
             app.page = e.page
             if e.page == .home { columns = .detailOnly }

@@ -10,7 +10,7 @@ final class ScreenshotTests: XCTestCase {
     static let pages: [(String, Bool)] = [("Home", false), ("Sessions", false), ("List", false), ("Races", false), ("Stable", false),
                                           ("Riders", false), ("Analysis", false), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
-                                          ("Gps", true), ("Biomech", true), ("Compare", true), ("Tides", true), ("Reports", true),
+                                          ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),
                                           ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Server", false)]
 
     override func setUp() { continueAfterFailure = true }
