@@ -18,7 +18,9 @@ struct ReportSections: OptionSet, Equatable {
     static let comparison: ReportSections = ReportSections(rawValue: 512)
     static let tides: ReportSections = ReportSections(rawValue: 1024)
     static let notes: ReportSections = ReportSections(rawValue: 2048)
-    static let all: ReportSections = ReportSections(rawValue: 4095)
+    /// AI analyses of the stretches of this training (trainer's request 08/11/2026).
+    static let ai: ReportSections = ReportSections(rawValue: 4096)
+    static let all: ReportSections = ReportSections(rawValue: 8191)
 }
 
 /// Everything a report may contain. Missing parts are printed as «Sin datos» / «No disponible».
@@ -32,6 +34,8 @@ struct RouteImage {
 struct ReportData {
     /// Satellite picture of the whole route for the «Mapa del recorrido» box (nil = vector drawing).
     var routeImage: RouteImage? = nil
+    /// AI analyses («Análisis del tramo») of this training: title + markdown text.
+    var aiSections: [(title: String, text: String)] = []
     var session: TrainingSession
     var timeline: SessionTimeline
     var engine: EquineAnalysis?
@@ -370,6 +374,14 @@ enum ReportBuilder {
             }
             sb += "</table>"
         }
+        if d.sections.contains(.ai) && !d.aiSections.isEmpty {
+            sb += "<h2>Análisis IA y recomendaciones</h2>"
+            for a in d.aiSections {
+                sb += "<h3>" + e(a.title) + "</h3>"
+                for p in ReportBuilder.plainParagraphs(a.text) { sb += "<p>" + e(p) + "</p>" }
+            }
+            sb += "<p class=\"note\">Texto generado por IA a partir de los datos; revísalo con criterio profesional.</p>"
+        }
         if d.sections.contains(.notes) && !d.notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             sb += "<h2>Notas</h2><p>" + e(d.notes).replacingOccurrences(of: "\n", with: "<br>") + "</p>"
         }
@@ -452,6 +464,14 @@ private class PdfReportWriter {
     }
 
     func ensure(_ h: Double) { if y + h > pdf.height - 50 { header() } }
+
+    /// Wrapped paragraph that moves to a new page when it does not fit.
+    func paragraph(_ text: String, size: Double = 9, bold: Bool = false) {
+        let est: Double = (PdfDocument.measureText(text, size, bold) / w + 1) * size * 1.3 + 4
+        ensure(est)
+        let used: Double = pdf.paragraph(m, y, w, text, size: size, bold: bold, color: ReportBuilder.ink, leading: 1.3)
+        y += used + 4
+    }
 
     func title(_ t: String) {
         ensure(40)
@@ -697,6 +717,18 @@ private class PdfReportWriter {
                                size: 7.5, bold: false, color: dim)
         }
 
+        if sec.contains(.ai) && !d.aiSections.isEmpty {
+            title("Análisis IA y recomendaciones")
+            for a in d.aiSections {
+                paragraph(a.title, size: 10, bold: true)
+                for p in ReportBuilder.plainParagraphs(a.text) { paragraph(p) }
+                y += 6
+            }
+            ensure(14)
+            pdf.text(m, y, "Texto generado por IA a partir de los datos; revísalo con criterio profesional.",
+                     size: 7, bold: false, color: ReportBuilder.dim)
+            y += 12
+        }
         if sec.contains(.notes) && !d.notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             title("Notas y observaciones")
             y += pdf.paragraph(m, y, w, d.notes, size: 9.5)
@@ -734,6 +766,10 @@ extension ReportBuilder {
             var l: String = raw.trimmingCharacters(in: .whitespaces)
             while l.hasPrefix("#") { l = String(l.dropFirst()) }
             l = l.replacingOccurrences(of: "**", with: "").replacingOccurrences(of: "`", with: "")
+            // symbols the PDF fonts (WinAnsi) cannot print
+            for (a, b) in [("≈", "~"), ("→", "->"), ("←", "<-"), ("≥", ">="), ("≤", "<="), ("−", "-"), ("Δ", "D"), ("≠", "!=")] {
+                l = l.replacingOccurrences(of: a, with: b)
+            }
             if l.hasPrefix("- ") || l.hasPrefix("* ") { l = "• " + l.dropFirst(2) }
             l = l.trimmingCharacters(in: .whitespaces)
             if l.isEmpty || l == "---" { continue }
@@ -751,13 +787,6 @@ private final class StretchPdfWriter: PdfReportWriter {
         super.init(ReportData(session: s.session, timeline: s.timeline))
         subtitle = "Análisis del tramo"
         pdf.title = "Tramo AVO " + s.session.sessionId
-    }
-
-    private func paragraph(_ text: String, size: Double = 9, bold: Bool = false) {
-        let est: Double = (PdfDocument.measureText(text, size, bold) / w + 1) * size * 1.3 + 4
-        ensure(est)
-        let used: Double = pdf.paragraph(m, y, w, text, size: size, bold: bold, color: ReportBuilder.ink, leading: 1.3)
-        y += used + 4
     }
 
     private func speedChart(_ r: StretchReport) {

@@ -227,6 +227,7 @@ private struct ReportsOptionsCard: View {
                 Toggle("Biomecánica", isOn: $m.biomech)
                 Toggle("Comparativas (sesiones marcadas)", isOn: $m.compare)
                 Toggle("Mareas y entorno", isOn: $m.tides)
+                Toggle("Análisis IA (tramos)", isOn: $m.aiSection)
                 Toggle("Notas y observaciones", isOn: $m.notesSection)
             }
             .toggleStyle(.switch)

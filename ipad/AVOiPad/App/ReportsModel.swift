@@ -60,6 +60,7 @@ final class ReportsModel {
     var compare: Bool = false { didSet { schedulePreview() } }
     var tides: Bool = true { didSet { schedulePreview() } }
     var notesSection: Bool = true { didSet { schedulePreview() } }
+    var aiSection: Bool = true { didSet { schedulePreview() } }
 
     /// Notes of the selected session being edited (saved on «Guardar notas», focus loss or leaving the page).
     var notesDraft: String = ""
@@ -137,6 +138,7 @@ final class ReportsModel {
         if compare { r.insert(.comparison) }
         if tides { r.insert(.tides) }
         if notesSection { r.insert(.notes) }
+        if aiSection { r.insert(.ai) }
         return r
     }
 
@@ -157,6 +159,7 @@ final class ReportsModel {
         var d = ReportData(session: s.session, timeline: s.timeline, engine: s.engine, segments: metrics, comparison: comparison,
                            tides: envOk ? env.tides : nil, weather: envOk ? env.weather : nil, notes: s.notes, sections: selectedSections())
         if routeImageFor == s.id { d.routeImage = routeImage }
+        d.aiSections = app.stretch.aiAnalyses(for: s)
         return d
     }
 

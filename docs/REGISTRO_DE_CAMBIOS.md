@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Análisis IA en los informes
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (petición 13:55):**
+- Informe del entrenamiento (PDF y HTML): nueva sección **«Análisis IA y recomendaciones»** (opción «Análisis IA (tramos)», activada) con el análisis IA de cada tramo de ese entrenamiento: los guardados con texto IA y los analizados en esta ejecución aunque no se hayan guardado.
+- Análisis del tramo: el texto IA se conserva al cerrar y volver a abrir el tramo, se guarda solo en el tramo guardado al terminar, y «Informe PDF» espera a que termine el análisis.
+- PDF: «≈ → ← ≥ ≤ − Δ ≠» se escriben como «~ -> <- >= <= - D !=» (antes salían como «?»).
+**Archivos:** `Core/ReportBuilder.swift`, `App/ReportsModel.swift`, `App/StretchModel.swift`, `Views/ReportsView.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Nombres de archivo: caballo, fecha y tipo
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (boceto 13:34):** los archivos exportados se llaman `<Caballo>_<aaaa-mm-dd>_<hhmm>_<Tipo>.<ext>` (fecha y hora del entrenamiento, Europe/Madrid): informe/HTML/JSON `…_Completo`, CSV/GPX con selección `…_Tramo_<inicio>-<fin>`, PDF del tramo `…_Tramo[-nombre]_<inicio>-<fin>.pdf`, CSV de Gráficas `…_Datos-completo` / `…_Datos-tramo_<inicio>-<fin>`, CSV de Tramos `…_Tramos`. Antes: `AVO_<sesión>…`. `App/ExportNaming.swift` (nuevo).

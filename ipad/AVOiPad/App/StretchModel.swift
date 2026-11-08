@@ -24,6 +24,9 @@ final class StretchModel {
     var aiFooter: String = ""
     /// Bumped when the saved list changes (views of the horse refresh).
     var version: Int = 0
+    /// Last AI analysis of each stretch analysed in this run of the app (session|t0|t1), so it survives closing the page
+    /// and goes into the reports even when the stretch was not saved.
+    @ObservationIgnored private var aiCache: [String: (sessionId: String, t0: Double, t1: Double, text: String)] = [:]
     /// PDF written by «Informe PDF», shown in the share sheet (Files, AirDrop, Mail…).
     var pdfFile: ExportedFile? = nil
 
@@ -66,6 +69,10 @@ final class StretchModel {
         saveName = saved?.name ?? ""
         aiText = saved?.aiText ?? ""
         aiFooter = saved?.aiText.isEmpty == false ? "Análisis guardado con el tramo" : ""
+        if aiText.isEmpty, let c = aiCache[StretchModel.key(s.id, a, b)] {
+            aiText = c.text
+            aiFooter = "Análisis IA anterior de este tramo"
+        }
         aiStatus = ""
         message = ""
         report = StretchAnalyzer.compute(s.timeline, t0: a, t1: b, engine: s.engine, engineOffsetS: s.engineOffsetS,
@@ -76,6 +83,40 @@ final class StretchModel {
     func close() {
         stopAI()
         visible = false
+    }
+
+    static func key(_ sid: String, _ a: Double, _ b: Double) -> String {
+        sid + "|" + String(format: "%.1f", min(a, b)) + "|" + String(format: "%.1f", max(a, b))
+    }
+
+    /// AI analyses of a training for the reports: saved stretches with AI text, then the ones analysed but not saved.
+    func aiAnalyses(for s: SessionItem) -> [(title: String, text: String)] {
+        var out: [(title: String, text: String)] = []
+        var seen = Set<String>()
+        if let code = s.horseCode, !code.isEmpty {
+            let mine: [SavedStretch] = store.of(horse: code).filter { $0.sessionId == s.id && !$0.aiText.isEmpty }
+            for st in mine.sorted(by: { $0.t0 < $1.t0 }) {
+                let name: String = st.name.isEmpty ? "" : st.name + " · "
+                out.append((title: "Tramo " + name + TimeText.clock(st.t0) + " – " + TimeText.clock(st.t1), text: st.aiText))
+                seen.insert(StretchModel.key(s.id, st.t0, st.t1))
+            }
+        }
+        let cached = aiCache.filter { $0.value.sessionId == s.id && !seen.contains($0.key) && !$0.value.text.isEmpty }
+        for c in cached.values.sorted(by: { $0.t0 < $1.t0 }) {
+            out.append((title: "Tramo " + TimeText.clock(c.t0) + " – " + TimeText.clock(c.t1), text: c.text))
+        }
+        return out
+    }
+
+    /// Keeps the finished AI text: cache, and the saved stretch when it is one.
+    private func keepAI() {
+        guard let s = session, !aiText.isEmpty else { return }
+        aiCache[StretchModel.key(s.id, t0, t1)] = (sessionId: s.id, t0: min(t0, t1), t1: max(t0, t1), text: aiText)
+        if let id = savedId, var st = store.items.first(where: { $0.id == id }) {
+            st.aiText = aiText
+            try? store.update(st)
+            version += 1
+        }
     }
 
     // ---------------------------------------------------------------- saved stretches
@@ -136,6 +177,10 @@ final class StretchModel {
     /// there is one) in exportaciones/AVO_tramo_<session>_<hhmmss>.pdf, then the share sheet.
     func exportPdf() {
         guard let s = session, let r = report else { return }
+        if aiBusy {
+            message = "Espera a que termine el análisis IA para que entre en el informe PDF."
+            return
+        }
         message = "Preparando el informe PDF (imagen de satélite del tramo)…"
         Task { @MainActor [weak self] in
             guard let self = self else { return }
@@ -216,6 +261,7 @@ final class StretchModel {
             }
             self.aiBusy = false
             self.aiTask = nil
+            self.keepAI()
         }
     }
 
