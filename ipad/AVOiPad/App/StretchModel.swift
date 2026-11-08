@@ -158,8 +158,7 @@ final class StretchModel {
         data.routeImage = image
         let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
         AvoFiles.ensureDir(dir)
-        let stamp: String = TimeText.clock(r.metrics.t0).replacingOccurrences(of: ":", with: "")
-        let name: String = "AVO_tramo_" + s.id + "_" + stamp + ".pdf"
+        let name: String = ExportNaming.name(s, ExportNaming.rangeKind(r.metrics.t0, r.metrics.t1, label: saveName), "pdf")
         let path: String = AvoFiles.join(dir, name)
         do {
             try AvoFiles.writeAtomic(ReportBuilder.stretchPdf(data), to: path)

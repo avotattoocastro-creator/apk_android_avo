@@ -270,7 +270,7 @@ final class SegmentsModel {
         guard let s = app.selected, !rows.isEmpty else { return }
         var data: Data = Data([0xEF, 0xBB, 0xBF])
         data.append(Data(SegmentsModel.csvText(rows).utf8))
-        let name: String = SyncExportFiles.name("tramos", s.session.sessionId, "csv")
+        let name: String = ExportNaming.name(s, "Tramos", "csv")
         switch SyncExportFiles.write(data, root: app.paths.root, name: name) {
         case .success(let url):
             exportURL = url

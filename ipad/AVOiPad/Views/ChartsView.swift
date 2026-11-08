@@ -140,7 +140,7 @@ private struct ChartsToolbar: View {
         let t0: Double = app.hasRange ? min(app.rangeStart, app.rangeEnd) : -Double.infinity
         let t1: Double = app.hasRange ? max(app.rangeStart, app.rangeEnd) : Double.infinity
         let root: String = app.paths.root
-        let name: String = SyncExportFiles.name("serie", s.session.sessionId, "csv")
+        let name: String = ExportNaming.name(s, app.hasRange ? ExportNaming.rangeKind(t0, t1, base: "Datos-tramo") : "Datos-completo", "csv")
         exporting = true
         Task.detached(priority: .userInitiated) {
             let data: Data = AnalysisExport.timelineCsvData(tl, t0: t0, t1: t1)

@@ -261,11 +261,11 @@ final class ReportsModel {
             app.show("Exportar", "Selecciona un entrenamiento.")
             return
         }
-        var safe: String = ""
-        for ch in data.session.sessionId {
-            safe.append(ch.isLetter || ch.isNumber || ch == "-" || ch == "_" ? ch : "_")
-        }
-        let name: String = "AVO_\(safe).\(kind.rawValue)"
+        guard let item = app.selected else { return }
+        // «<Caballo>_<fecha>_<hora>_Completo» (CSV and GPX of a selected interval: «…_Tramo_<inicio>-<fin>»)
+        let ranged: Bool = app.hasRange && (kind == .csv || kind == .gpx)
+        let what: String = ranged ? ExportNaming.rangeKind(app.rangeStart, app.rangeEnd) : "Completo"
+        let name: String = ExportNaming.name(item, what, kind.rawValue)
         let dir: String = exportDir
         let path: String = AvoFiles.join(dir, name)
         let t0: Double = rangeT0

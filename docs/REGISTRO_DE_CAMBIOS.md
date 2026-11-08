@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Nombres de archivo: caballo, fecha y tipo
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (boceto 13:34):** los archivos exportados se llaman `<Caballo>_<aaaa-mm-dd>_<hhmm>_<Tipo>.<ext>` (fecha y hora del entrenamiento, Europe/Madrid): informe/HTML/JSON `…_Completo`, CSV/GPX con selección `…_Tramo_<inicio>-<fin>`, PDF del tramo `…_Tramo[-nombre]_<inicio>-<fin>.pdf`, CSV de Gráficas `…_Datos-completo` / `…_Datos-tramo_<inicio>-<fin>`, CSV de Tramos `…_Tramos`. Antes: `AVO_<sesión>…`. `App/ExportNaming.swift` (nuevo).
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Gráficas en una fila; Informes y Biomecánica al menú lateral
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (bocetos 13:10–13:13):**
