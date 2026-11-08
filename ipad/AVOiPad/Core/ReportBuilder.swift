@@ -22,7 +22,16 @@ struct ReportSections: OptionSet, Equatable {
 }
 
 /// Everything a report may contain. Missing parts are printed as «Sin datos» / «No disponible».
+/// Satellite picture of the route (JPEG, made by the app with the map tiles), for the PDF and the HTML report.
+struct RouteImage {
+    var jpeg: Data
+    var width: Int
+    var height: Int
+}
+
 struct ReportData {
+    /// Satellite picture of the whole route for the «Mapa del recorrido» box (nil = vector drawing).
+    var routeImage: RouteImage? = nil
     var session: TrainingSession
     var timeline: SessionTimeline
     var engine: EquineAnalysis?
@@ -94,6 +103,9 @@ enum ReportBuilder {
         var pts: [(x: Double, y: Double)?]
         var metersPerPoint: Double
         var north: (x: Double, y: Double)
+        /// Transform from Web Mercator pixels at zoom `z` to the box: out = ((R(−theta)·(p − m))·flip − c)·k + (w/2, h/2).
+        var z: Double = 20
+        var mx: Double = 0, my: Double = 0, theta: Double = 0, flip: Double = 1, k: Double = 1, cx: Double = 0, cy: Double = 0
     }
 
     static func routeLayout(_ tl: SessionTimeline, _ w: Double, _ h: Double, padding: Double = 24,
@@ -124,6 +136,7 @@ enum ReportBuilder {
         }
         var nx: Double = -sn
         var ny: Double = -c                                  // north (0,-1) turned by -th
+        var flip: Double = 1
         let valid: [(x: Double, y: Double)] = rot.compactMap { (q: (x: Double, y: Double)?) -> (x: Double, y: Double)? in q }
         if let f = valid.first, let l = valid.last, f.x > l.x {   // start on the left: turn 180°
             var flipped: [(x: Double, y: Double)?] = []
@@ -133,6 +146,7 @@ enum ReportBuilder {
             rot = flipped
             nx = -nx
             ny = -ny
+            flip = -1
         }
         var minX: Double = .infinity, maxX: Double = -.infinity, minY: Double = .infinity, maxY: Double = -.infinity
         for case let q? in rot { minX = min(minX, q.x); maxX = max(maxX, q.x); minY = min(minY, q.y); maxY = max(maxY, q.y) }
@@ -143,11 +157,34 @@ enum ReportBuilder {
         for q in rot {
             if let q = q { pts.append((x: w / 2 + (q.x - cx) * k, y: h / 2 + (q.y - cy) * k)) } else { pts.append(nil) }
         }
-        return RouteLayout(pts: pts, metersPerPoint: TileMath.metersPerPixel(latSum / n, z) / k, north: (nx, ny))
+        return RouteLayout(pts: pts, metersPerPoint: TileMath.metersPerPixel(latSum / n, z) / k, north: (nx, ny),
+                           z: z, mx: mx, my: my, theta: th, flip: flip, k: k, cx: cx, cy: cy)
     }
 
+    /// Index of the maximum filtered speed in [from, to] (−1 if none).
+    static func vmaxIndex(_ tl: SessionTimeline, from: Int = 0, to: Int? = nil) -> Int {
+        let last: Int = min(to ?? tl.count - 1, tl.count - 1)
+        var bi: Int = -1
+        var bv: Double = -.infinity
+        if from <= last {
+            for i in from...last where tl.speedFiltered[i].isFinite && tl.speedFiltered[i] > bv { bv = tl.speedFiltered[i]; bi = i }
+        }
+        return bi
+    }
+
+    static func vmaxLabel(_ tl: SessionTimeline, _ i: Int) -> String {
+        "Vmáx " + DotNetFormat.custom(tl.speedFiltered[i] * 3.6, "0.0", spanish: true) + " km/h"
+    }
+
+    /// Route box of the reports: the satellite picture with the route (RouteImage, made in the app) when there is one,
+    /// otherwise the route drawn on a plain background. Turned so the route is horizontal.
     static func drawRoute(_ pdf: PdfDocument, _ tl: SessionTimeline, _ x: Double, _ y: Double, _ w: Double, _ h: Double,
-                          from: Int = 0, to: Int? = nil) {
+                          from: Int = 0, to: Int? = nil, image: RouteImage? = nil) {
+        if let im = image {
+            pdf.image(im.jpeg, pixelWidth: im.width, pixelHeight: im.height, x, y, w, h)
+            pdf.strokeRect(x, y, w, h, lineColor)
+            return
+        }
         pdf.fillRect(x, y, w, h, (r: 0xEC, g: 0xED, b: 0xF0))
         pdf.strokeRect(x, y, w, h, lineColor)
         guard let L = routeLayout(tl, w, h, from: from, to: to) else { return }
@@ -167,6 +204,11 @@ enum ReportBuilder {
             pdf.circle(x + s1.x, y + s1.y, 4.5, red)
             pdf.text(x + s0.x + 7, y + s0.y - 5, "Inicio", size: 7.5, bold: true, color: ink)
             pdf.text(x + s1.x + 7, y + s1.y - 5, "Fin", size: 7.5, bold: true, color: ink)
+        }
+        let vi: Int = vmaxIndex(tl, from: from, to: to)
+        if vi >= from, vi - from < L.pts.count, let q = L.pts[vi - from] {
+            pdf.circle(x + q.x, y + q.y, 4.5, (r: 0xFF, g: 0x8A, b: 0x00))
+            pdf.text(x + q.x, y + q.y - 18, vmaxLabel(tl, vi), size: 8, bold: true, color: ink, align: .center)
         }
         // scale bar
         let target: Double = L.metersPerPoint * 100
@@ -275,7 +317,12 @@ enum ReportBuilder {
         sb += "</div>"
         if d.sections.contains(.map) && tl.count > 1 {
             sb += "<h2>Recorrido</h2>"
-            sb += routeSvg(tl)
+            if let im = d.routeImage {
+                sb += "<img alt=\"Recorrido\" style=\"width:100%;height:auto;display:block\" src=\"data:image/jpeg;base64,"
+                    + im.jpeg.base64EncodedString() + "\">"
+            } else {
+                sb += routeSvg(tl)
+            }
             sb += "<p class=\"note\">Posiciones del chaleco GNSS del jinete; color por velocidad filtrada (azul → cian → amarillo → rojo).</p>"
         }
         if d.sections.contains(.segments) && !d.segments.isEmpty {
@@ -507,7 +554,7 @@ private class PdfReportWriter {
         if sec.contains(.map) && tl.count > 1 {
             title("Mapa del recorrido (velocidad filtrada)")
             ensure(300)
-            ReportBuilder.drawRoute(pdf, tl, m, y, w, 280)
+            ReportBuilder.drawRoute(pdf, tl, m, y, w, 280, image: d.routeImage)
             y += 288
             pdf.text(m, y, "Escala de velocidad azul → cian → amarillo → rojo (igual que Android). Posiciones del chaleco GNSS del jinete.", size: 7.5, bold: false, color: dim)
             y += 14
@@ -671,6 +718,8 @@ struct StretchPdfData {
     var name: String
     var others: [SavedStretch]
     var aiText: String
+    /// Satellite picture of the stretch route (nil = vector drawing).
+    var routeImage: RouteImage? = nil
 }
 
 extension ReportBuilder {
@@ -739,6 +788,8 @@ private final class StretchPdfWriter: PdfReportWriter {
         pdf.polyline(pts, ReportBuilder.red, width: 1.1)
         if let vm = r.vmaxAtM, let vk = r.metrics.maxSpeedKmh {
             pdf.circle(px(vm), py(vk), 3, (r: 0xFF, g: 0x8A, b: 0x00))
+            let label: String = "Vmáx " + DotNetFormat.custom(vk, "0.0", spanish: true) + " km/h"
+            pdf.text(px(vm), py(vk) - 14, label, size: 8, bold: true, color: ReportBuilder.ink, align: px(vm) > x0 + cw - 60 ? .right : .center)
         }
         y += h + 6
         pdf.text(m, y, "km/h frente a metros desde el inicio del tramo · líneas cada 200 m · punto naranja = velocidad máxima",
@@ -770,7 +821,7 @@ private final class StretchPdfWriter: PdfReportWriter {
         if i0 >= 0 && i1 > i0 {
             title("Recorrido del tramo")
             ensure(250)
-            ReportBuilder.drawRoute(pdf, tl, m, y, w, 230, from: i0, to: i1)
+            ReportBuilder.drawRoute(pdf, tl, m, y, w, 230, from: i0, to: i1, image: st.routeImage)
             y += 240
         }
         title("Velocidad en el tramo")

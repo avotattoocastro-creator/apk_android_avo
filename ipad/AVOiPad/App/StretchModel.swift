@@ -136,9 +136,26 @@ final class StretchModel {
     /// there is one) in exportaciones/AVO_tramo_<session>_<hhmmss>.pdf, then the share sheet.
     func exportPdf() {
         guard let s = session, let r = report else { return }
-        let data = StretchPdfData(session: s.session, timeline: s.timeline, report: r, horse: s.horse, rider: s.rider,
+        message = "Preparando el informe PDF (imagen de satélite del tramo)…"
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            let tl: SessionTimeline = s.timeline
+            let i0: Int = tl.indexAt(r.metrics.t0)
+            let i1: Int = tl.indexAt(r.metrics.t1)
+            var image: RouteImage? = nil
+            if i0 >= 0 && i1 > i0 {
+                image = await RouteImageRenderer.render(tl, widthPt: PdfDocument.a4Width - 80, heightPt: 230, from: i0, to: i1,
+                                                        cacheDir: self.app.paths.tiles)
+            }
+            self.writePdf(s, r, image)
+        }
+    }
+
+    private func writePdf(_ s: SessionItem, _ r: StretchReport, _ image: RouteImage?) {
+        var data = StretchPdfData(session: s.session, timeline: s.timeline, report: r, horse: s.horse, rider: s.rider,
                                   dateText: s.dateTimeText, name: saveName.trimmingCharacters(in: .whitespacesAndNewlines),
                                   others: otherSaved(s), aiText: aiText)
+        data.routeImage = image
         let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
         AvoFiles.ensureDir(dir)
         let stamp: String = TimeText.clock(r.metrics.t0).replacingOccurrences(of: ":", with: "")

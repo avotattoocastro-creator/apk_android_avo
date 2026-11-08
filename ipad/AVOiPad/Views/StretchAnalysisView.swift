@@ -123,6 +123,13 @@ struct StretchAnalysisView: View {
                 }
                 if let vm = r.vmaxAtM, let v = r.metrics.maxSpeedKmh {
                     PointMark(x: .value("m", vm), y: .value("km/h", v)).foregroundStyle(MapVmaxMark.color).symbolSize(70)
+                        .annotation(position: .top, alignment: .center, spacing: 4,
+                                    overflowResolution: AnnotationOverflowResolution(x: .fit(to: .chart), y: .fit(to: .chart))) {
+                            Text("Vmáx " + TimeText.num(v, "0.0", " km/h"))
+                                .font(.caption.weight(.bold)).foregroundStyle(Color.black)
+                                .padding(.horizontal, 6).padding(.vertical, 2)
+                                .background(MapVmaxMark.color, in: RoundedRectangle(cornerRadius: 4))
+                        }
                 }
             }
             .chartYScale(domain: .automatic(includesZero: true))

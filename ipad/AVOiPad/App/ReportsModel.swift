@@ -83,6 +83,26 @@ final class ReportsModel {
 
     var exportDir: String { AvoFiles.join(app.paths.root, "exportaciones") }
 
+    // ------------------------------------------------------------------ satellite picture of the route
+    @ObservationIgnored private var routeImage: RouteImage? = nil
+    @ObservationIgnored private var routeImageFor: String = ""
+    @ObservationIgnored private var routeImageBusy: Bool = false
+
+    /// Makes (once per training) the satellite picture of the route for «Mapa del recorrido».
+    @MainActor
+    func ensureRouteImage() async {
+        guard let s = app.selected, map else { return }
+        if routeImageFor == s.id || routeImageBusy { return }
+        routeImageBusy = true
+        let im: RouteImage? = await RouteImageRenderer.render(s.timeline, widthPt: PdfDocument.a4Width - 80, heightPt: 280,
+                                                             cacheDir: app.paths.tiles)
+        routeImageBusy = false
+        if app.selected?.id == s.id {
+            routeImage = im
+            routeImageFor = s.id
+        }
+    }
+
     var previewTitle: String {
         if let s = app.selected { return "Informe de entrenamiento · \(s.dateText)" }
         return "Informe de entrenamiento"
@@ -134,8 +154,10 @@ final class ReportsModel {
         }
         let env: EnvironmentModel = app.environment
         let envOk: Bool = env.loadedFor == s.id
-        return ReportData(session: s.session, timeline: s.timeline, engine: s.engine, segments: metrics, comparison: comparison,
-                          tides: envOk ? env.tides : nil, weather: envOk ? env.weather : nil, notes: s.notes, sections: selectedSections())
+        var d = ReportData(session: s.session, timeline: s.timeline, engine: s.engine, segments: metrics, comparison: comparison,
+                           tides: envOk ? env.tides : nil, weather: envOk ? env.weather : nil, notes: s.notes, sections: selectedSections())
+        if routeImageFor == s.id { d.routeImage = routeImage }
+        return d
     }
 
     private func refreshPreviewRows() {
@@ -162,6 +184,13 @@ final class ReportsModel {
             previewPdf = nil
             previewBusy = false
             return
+        }
+        if map, let s = app.selected, routeImageFor != s.id, !routeImageBusy {
+            // the preview is shown at once with the plain drawing and again when the satellite picture is ready
+            Task { @MainActor [weak self] in
+                await self?.ensureRouteImage()
+                if self?.app.page == .reports { self?.schedulePreview(immediate: true) }
+            }
         }
         let mode: ReportPreviewMode = previewMode
         previewBusy = true
@@ -227,6 +256,7 @@ final class ReportsModel {
     @MainActor
     func export(_ kind: ReportExportKind) async {
         saveNotes()
+        if kind == .pdf || kind == .html { await ensureRouteImage() }
         guard let data = buildReportData() else {
             app.show("Exportar", "Selecciona un entrenamiento.")
             return

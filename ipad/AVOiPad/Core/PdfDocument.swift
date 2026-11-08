@@ -33,6 +33,17 @@ final class PdfDocument {
         "\(n(Double(c.r) / 255.0)) \(n(Double(c.g) / 255.0)) \(n(Double(c.b) / 255.0))"
     }
 
+    /// JPEG images (DCTDecode XObjects), drawn with `image`.
+    private var images: [(data: Data, w: Int, h: Int)] = []
+
+    /// Draws a baseline RGB JPEG in the box (x, y top-left, w × h points).
+    func image(_ jpeg: Data, pixelWidth: Int, pixelHeight: Int, _ x: Double, _ y: Double, _ w: Double, _ h: Double) {
+        guard pixelWidth > 0, pixelHeight > 0, !jpeg.isEmpty else { return }
+        let N = PdfDocument.n
+        images.append((data: jpeg, w: pixelWidth, h: pixelHeight))
+        append("q \(N(w)) 0 0 \(N(h)) \(N(x)) \(N(height - y - h)) cm /Im\(images.count) Do Q\n")
+    }
+
     func fillRect(_ x: Double, _ y: Double, _ w: Double, _ h: Double, _ color: AvoRGB) {
         let N = PdfDocument.n
         append("\(PdfDocument.rgb(color)) rg \(N(x)) \(N(height - y - h)) \(N(w)) \(N(h)) re f\n")
@@ -298,11 +309,19 @@ final class PdfDocument {
         offsets.append(bytes.count); w("2 0 obj\n<< /Type /Pages /Kids [\(kids)] /Count \(pageCount) >>\nendobj\n")
         offsets.append(bytes.count); w("3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n")
         offsets.append(bytes.count); w("4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n")
+        // images go after the pages: objects firstPageObj + 2·pageCount …, then the info object
+        let firstImageObj: Int = firstPageObj + 2 * pageCount
+        var xobjects: String = ""
+        if !images.isEmpty {
+            xobjects = " /XObject << "
+            for k in 0..<images.count { xobjects += "/Im\(k + 1) \(firstImageObj + k) 0 R " }
+            xobjects += ">>"
+        }
         for i in 0..<pageCount {
             let pageObj: Int = firstPageObj + 2 * i
             let contentObj: Int = pageObj + 1
             offsets.append(bytes.count)
-            w("\(pageObj) 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 \(N(width)) \(N(height))] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents \(contentObj) 0 R >>\nendobj\n")
+            w("\(pageObj) 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 \(N(width)) \(N(height))] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>\(xobjects) >> /Contents \(contentObj) 0 R >>\nendobj\n")
             let raw: [UInt8] = PdfDocument.latin1(pages[i])
             let packed: [UInt8] = PdfDocument.zlib(raw)
             offsets.append(bytes.count)
@@ -310,7 +329,13 @@ final class PdfDocument {
             bytes.append(contentsOf: packed)
             w("\nendstream\nendobj\n")
         }
-        let infoObj: Int = firstPageObj + 2 * pageCount
+        for (k, im) in images.enumerated() {
+            offsets.append(bytes.count)
+            w("\(firstImageObj + k) 0 obj\n<< /Type /XObject /Subtype /Image /Width \(im.w) /Height \(im.h) /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length \(im.data.count) >>\nstream\n")
+            bytes.append(contentsOf: [UInt8](im.data))
+            w("\nendstream\nendobj\n")
+        }
+        let infoObj: Int = firstImageObj + images.count
         offsets.append(bytes.count)
         let stamp: DateFormatter = AvoTime.formatter("yyyyMMddHHmmss", utc: true)
         stamp.locale = Locale(identifier: "en_US_POSIX")

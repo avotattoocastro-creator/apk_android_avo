@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-08 — iPad — Satélite de fondo en los informes y Vmáx con su valor
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (peticiones 10:54–10:56):**
+- Informes (PDF y vista HTML) y PDF del tramo: el recorrido se dibuja **sobre la imagen de satélite** (Esri World Imagery, primero la caché de teselas del mapa, después la red), girado igual que antes (horizontal), con colores por velocidad, inicio/fin, **Vmáx con su valor**, escala, norte y atribución. Sin teselas (sin conexión ni caché) se dibuja como antes sobre fondo liso. `App/RouteImageRenderer.swift` (nuevo); `PdfDocument.image` (JPEG como XObject DCTDecode); `ReportData.routeImage`, `StretchPdfData.routeImage`; `RouteLayout` guarda su transformación.
+- Vmáx con la velocidad exacta visible: gráfica del «Análisis del tramo» (etiqueta sobre el punto), gráfica del PDF del tramo y mapas de los informes (también en el dibujo sin satélite).
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-08 — iPad — Informe PDF del tramo, recorrido horizontal en los informes y cifras del Dashboard
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (capturas del entrenador 10:41–10:45):**
