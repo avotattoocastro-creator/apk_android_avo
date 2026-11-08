@@ -884,7 +884,12 @@ extension ReportBuilder {
                 if isSeparatorRow(cells) { continue }
                 if !inTable { closeAll(); out += "<table>"; inTable = true; firstRow = true }
                 let tag: String = firstRow ? "th" : "td"
-                out += "<tr>" + cells.map { "<" + tag + ">" + esc($0) + "</" + tag + ">" }.joined() + "</tr>"
+                var row: String = "<tr>"
+                for c in cells {
+                    let cell: String = esc(c)
+                    row += "<\(tag)>\(cell)</\(tag)>"
+                }
+                out += row + "</tr>"
                 firstRow = false
                 continue
             }
