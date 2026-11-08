@@ -33,7 +33,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (bocetos 13:10–13:13):**
 - Gráficas: sin título de página, sin el botón «Seleccionar rango» (el tramo se selecciona manteniendo pulsado y arrastrando) y sin la fila «VER Completo/Calentamiento/Trabajo/Enfriamiento»; zoom, «Guardar como tramo», «Quitar selección», «Exportar CSV» y reproducción en una sola fila; debajo, la barra de vista general.
-- Menú lateral: **Informes** y **Biomecánica** debajo de Análisis (salen de la barra de pestañas del entrenamiento). «Análisis» no se resalta en esas dos páginas. Prueba de capturas actualizada (nav.Biomech, nav.Reports).
+- Menú lateral: **Informes** y **Biomecánica** debajo de Análisis (salen de la barra de pestañas del entrenamiento). «Análisis» no se resalta en esas dos páginas. Prueba de capturas actualizada (nav.Biomech, nav.Reports). En Informes y Biomecánica no se muestra la fila de pestañas del entrenamiento (boceto 13:35).
 **Archivos:** `App/RootView.swift`, `Views/ChartsView.swift`, `AVOiPadUITests/ScreenshotTests.swift`.
 **Validación:** IMPLEMENTADO · CI pendiente.
 

@@ -526,8 +526,9 @@ private struct TrainingBar: View {
         .padding(.vertical, 8)
         .background(Avo.headerBrush)
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
-        // pages of the training in their own row under the bar, all visible (trainer's sketch 08/11/2026)
-        if app.page != .map {
+        // pages of the training in their own row under the bar, all visible (trainer's sketch 08/11/2026);
+        // not on Mapa, Informes and Biomecánica (sidebar pages)
+        if app.page != .map && app.page != .reports && app.page != .biomech {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
