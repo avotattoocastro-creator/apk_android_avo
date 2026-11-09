@@ -1,0 +1,54 @@
+# AVO CHEST 3.7.7 DESPERTAR
+
+Rama `feature/chest-3-7-7-despertar-espalda`, creada desde `feature/chest-v3-7-6-gnss-quality` (la 3.7.6 instalada).
+Cadena: 3.7.6 GNSS QUALITY → `V3_7_7_DESPERTAR/tools/apply_v377.py` → versión `3.7.7` / `0x030707`.
+Workflow: `.github/workflows/build-chest-v377-despertar.yml`.
+
+Estado: **IMPLEMENTADO · NO VERIFICADO en el reloj.**
+
+## 1. Sueño de la espalda (necesita BACK ≥ 3.14.0)
+- **Al apagar el reloj** (`controlled_shutdown`, también por batería crítica): con la SD ya cerrada y justo antes de
+  cortar el AXP2101, manda a la espalda la orden `BACK_SLEEP` (8) dos veces, separadas 150 ms. La espalda contesta el ACK
+  y se duerme. Si el cierre de la SD falla, el reloj sigue encendido y no se manda.
+- **Baliza de despertar:** mientras el reloj tiene espalda emparejada pero el enlace está caído (más de 2 s sin oírla),
+  manda cada 100 ms un paquete DATA corto (una trama HEARTBEAT) a su espalda, en un solo intento. La espalda dormida
+  escucha 160 ms cada 10 s y arranca al oírlo. Coste: unos 10 paquetes por segundo de ~40 B en el canal 1; el RTCM
+  no se manda mientras no hay enlace, así que no compite.
+- Con una espalda anterior a la 3.14.0 la orden 8 recibe NACK (orden desconocida) y no pasa nada.
+
+## 2. Descarga por Wi-Fi
+- **Causa encontrada (probable) de los fallos:** el bloqueo de seguridad «el reloj se reinició al encender el AP»
+  (NVS `wifi_off`) era **para siempre**: sobrevivía a cualquier actualización de firmware y ninguna app lo levantaba
+  (Android no manda `WIFI_SYNC 5`). El reinicio en bucle de la 3.7.4-wifi-rc1 lo dejó puesto: desde entonces todos los
+  firmwares rechazan el Wi-Fi («radio del reloj») y la app pasa a Bluetooth.
+- **3.7.7:** el bloqueo guarda qué firmware lo puso (`wifi_off_fw`). Al arrancar con otro firmware (o si lo puso uno
+  anterior a la 3.7.7, que no lo guardaba) se borra y el Wi-Fi vuelve. Si **esta** versión se reinicia al encender el AP,
+  se vuelve a bloquear igual que antes.
+- Motivos de rechazo separados por BLE: `6` = bloqueado tras un reinicio, `7` = poca RAM interna (antes los dos eran `4`).
+  El monitor serie dice cuál fue.
+
+## 3. Bluetooth con varios móviles
+- **Causa encontrada:** NimBLE-Arduino 2.5.1 guardaba como máximo **3 vínculos y 8 CCCD** (`nimconfig.h`). Cada móvil se
+  suscribe a 3 notificaciones (CTRL_TX, TELEM y FILE). Con el tercer móvil se llenaba el almacén de CCCD y NimBLE
+  (`ble_store_util_status_rr`) **borraba el vínculo del móvil más antiguo**. Ese móvil seguía teniendo su clave: al
+  volver, el cifrado fallaba y se desconectaba enseguida; la app no lo arreglaba sola porque Android seguía diciendo
+  «vinculado».
+- **3.7.7:** `-DCONFIG_BT_NIMBLE_MAX_BONDS=6 -DCONFIG_BT_NIMBLE_MAX_CCCDS=20` en `build_chest.sh` (6 móviles × 3).
+  RAM interna estática: unos +0,9 KB (estimado).
+- Un móvil que ya perdió su vínculo necesita olvidar el reloj en Ajustes › Bluetooth una vez, o la app Android
+  ≥ 2.8 (que lo hace sola).
+
+## 4. Sin cambios
+RAW/SD, sesiones y geocercas, tramas ESP-NOW (la baliza es una trama HEARTBEAT normal), NTRIP/RTCM, GNSS, pantallas,
+USB AVO1, OTA, particiones. Todas las pruebas de la 3.7.6 pasan sobre el árbol 3.7.7 + `test_despertar_v377.py`.
+
+## 5. Instalación
+AVO Update por USB, igual que la 3.7.6 (imagen de aplicación). La 3.7.6 no tiene sufijo, así que la 3.7.7 también se
+puede firmar para OTA con AVO Signer si se quiere.
+
+## 6. Verificación física pendiente
+1. Monitor serie: `AVO-CHEST 3.7.7 ready`. Anotar `[AVO MEM] ready` y comparar con la 3.7.6.
+2. Con la espalda 3.14.0: apagar el reloj → la espalda debe dormirse en ≤ 1 s (`A DORMIR (el pecho se apaga…`).
+3. Encender el reloj → la espalda debe arrancar en ≤ 10 s y enlazar (`[SUENO] despierta: pecho encendido oido…`).
+4. Wi-Fi: en el monitor, `Wi-Fi block left by firmware … cleared` (si estaba bloqueado) y descarga por Wi-Fi correcta.
+5. Bluetooth: vincular 3–4 móviles distintos y comprobar que el primero sigue conectando.
