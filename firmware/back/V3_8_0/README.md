@@ -342,6 +342,18 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
 
+## V3.14.3 — dormida esperando al pecho: enchufar y desenchufar el USB no la despierta (2026-11-09)
+Petición del usuario: si la espalda está dormida y se conecta el USB para cargar, que no se despierte, que cargue y que al
+desconectarlo siga dormida.
+- El estado «esperando al pecho» se guarda en NVS (`avonow/wait`) al entrar en `chest_wait_mode()` y se borra al oír al
+  pecho (o con PRG). Así sobrevive a un reinicio (el CP2102 o un bajón de tensión al enchufar pueden reiniciar la placa).
+- Al arrancar con ese estado: el GPS **no se enciende**; se mira el USB 2,6 s con la radio apagada.
+  - USB presente → `usb_charge_mode()` (solo carga, GPS apagado). Al quitar el USB **vuelve a esperar al pecho** en vez de
+    reiniciar normal.
+  - Sin USB → vuelve directamente a esperar.
+- Si no se reinicia al enchufar, sigue esperando sin más (el GPS ya está apagado y la batería carga por hardware).
+- Arranque normal a propósito: PRG pulsado (también despierta el sueño ligero) o los 3 encendidos rápidos (emparejar).
+
 ## V3.14.2 — sin pecho, GPS cortado con el Pololu como en el modo carga (2026-11-09)
 Petición del usuario tras ver el LED blanco encendido con la 3.14.0: «cuando se desconecta el pecho tiene que cortar la
 corriente del GPS con el Pololu como hace cuando se pone en modo carga».
