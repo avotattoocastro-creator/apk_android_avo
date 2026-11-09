@@ -231,7 +231,7 @@ private struct RaceVideoDataCard: View {
                 field("Caballo (Cuadra)") {
                     Picker("", selection: $model.horseCode) {
                         Text("Sin elegir").tag("")
-                        ForEach(app.races.horses) { (h: IdentityRecord) in Text(h.name).tag(h.code) }
+                        ForEach(app.races.horses, id: \.code) { (h: IdentityRecord) in Text(h.name).tag(h.code) }
                     }
                     .pickerStyle(.menu)
                 }
