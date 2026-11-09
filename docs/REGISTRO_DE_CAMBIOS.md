@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Espalda 3.14.3 — dormida, el USB solo carga y al desenchufar sigue dormida
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` · **Commit:** `084a64c` · **CI:** [42636407029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42636407029) (**éxito**)
+**Qué cambia:** el estado «esperando al pecho» se guarda en NVS (`avonow/wait`). Tras un reinicio con ese estado no enciende el GPS: con USB, modo carga y al desenchufar vuelve a esperar; sin USB, espera directamente. PRG o 3 encendidos rápidos fuerzan el arranque normal.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO**.
+
 ## 2026-11-09 — Espalda 3.14.1 / 3.14.2 — GPS cortado con el Pololu al perder el pecho
 **Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` · **Commits:** `d32cd05` (3.14.1), `9015857` (3.14.2) · **CI:** [42602791173](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173) (**éxito**; artefacto [`AVO-BACK-V3-14-2-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173/artifacts/13667705186))
 **Por qué:** con la 3.14.0 y el pecho apagado el LED blanco (TX del ZED, GPIO35) seguía encendido: el GPS tenía corriente en el sueño profundo. El usuario pide cortar el GPS con el Pololu como en el modo carga.
