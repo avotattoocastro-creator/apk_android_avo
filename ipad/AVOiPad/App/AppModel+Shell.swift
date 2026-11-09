@@ -78,6 +78,7 @@ extension AppModel {
                 await self.runCapture()
             } else {
                 await self.restoreLibrary()
+                self.startDocumentsSync()
             }
         }
     }

@@ -64,11 +64,12 @@ private struct RacesContent: View {
             HStack(alignment: .center, spacing: 12) {
                 titleBlock(rows)
                 Spacer(minLength: 8)
+                videoButton
                 addButton
             }
             VStack(alignment: .leading, spacing: 10) {
                 titleBlock(rows)
-                addButton
+                HStack(spacing: 10) { videoButton; addButton }
             }
         }
         .padding(.horizontal, 20)
@@ -104,6 +105,16 @@ private struct RacesContent: View {
         .buttonStyle(.avoPrimary)
         .disabled(model.busy)
         .accessibilityIdentifier("races.add")
+    }
+
+    private var videoButton: some View {
+        Button {
+            app.raceVideo.openEmpty()
+        } label: {
+            Label("Analizar vídeo", systemImage: "video.badge.waveform")
+        }
+        .buttonStyle(.avoSecondary)
+        .accessibilityIdentifier("races.video")
     }
 
     private var filters: some View {

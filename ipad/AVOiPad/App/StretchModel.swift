@@ -209,7 +209,8 @@ final class StretchModel {
             try AvoFiles.writeAtomic(ReportBuilder.stretchPdf(data), to: path)
             pdfFile = ExportedFile(id: path, url: URL(fileURLWithPath: path), name: name, kind: .pdf,
                                    time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
-            message = "Informe PDF creado: " + name
+            message = "Informe PDF creado: " + name + " (copia en AVO Horse › Informes)"
+            app.scheduleDocumentsSync()
         } catch {
             message = "No se pudo crear el PDF: " + error.localizedDescription
         }

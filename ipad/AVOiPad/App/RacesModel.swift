@@ -81,6 +81,7 @@ final class RacesModel {
     }
 
     private func save() {
+        defer { app.scheduleDocumentsSync() }
         do {
             let enc = JSONEncoder()
             enc.dateEncodingStrategy = .iso8601
@@ -265,11 +266,22 @@ final class RacesModel {
         requestReport(r)
     }
 
+    /// Race estimated from the video (RaceVideoModel): saved like an imported race and opened in «Carreras».
+    func addVideoRace(_ race: Race) {
+        races.append(race)
+        save()
+        app.log.info("carreras", "Carrera analizada desde vídeo", ["race": race.raceName, "horse": race.horseRecordCode ?? ""])
+        app.status = "Carrera analizada desde el vídeo: \(race.title) · \(race.horseName ?? race.ourRunnerName ?? "")"
+        selectedRaceId = race.id
+        if app.page != .races { app.page = .races }
+        requestReport(race)
+    }
+
     // ---------------------------------------------------------------- edit
     func delete(_ id: String) {
         guard let r = race(id) else { return }
         races.removeAll { $0.id == id }
-        if !r.isDemo { try? FileManager.default.removeItem(atPath: AvoFiles.join(pdfDir, r.sourceFile)) }
+        if !r.isDemo && !r.sourceFile.isEmpty { try? FileManager.default.removeItem(atPath: AvoFiles.join(pdfDir, r.sourceFile)) }
         if selectedRaceId == id { selectedRaceId = nil }
         reports.removeValue(forKey: id)
         save()
@@ -289,6 +301,7 @@ final class RacesModel {
 
     func pdfPath(_ r: Race) -> String? {
         if r.isDemo { return Bundle.main.path(forResource: "demo_race_20261029BOU03", ofType: "pdf") }
+        if r.sourceFile.isEmpty { return nil }
         let p: String = AvoFiles.join(pdfDir, r.sourceFile)
         return AvoFiles.exists(p) ? p : nil
     }

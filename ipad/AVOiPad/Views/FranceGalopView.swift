@@ -56,6 +56,12 @@ struct FranceGalopView: View {
             }
         }
         .background(Avo.bg)
+        .fullScreenCover(isPresented: Binding(get: { app.raceVideo.visible },
+                                              set: { (v: Bool) in if !v { app.raceVideo.close() } })) {
+            RaceVideoView(model: app.raceVideo)
+                .environment(app)
+                .preferredColorScheme(.dark)
+        }
     }
 
     private var topBar: some View {
@@ -102,6 +108,18 @@ struct FranceGalopView: View {
                     Spacer()
                     Button("Detener") { model.stopQueue() }.buttonStyle(.avoSecondary)
                 }
+            }
+            AvoCard(title: "Vídeo de la carrera", subtitle: "Análisis automático sin tracker") {
+                Button {
+                    Task { @MainActor in await app.raceVideo.openFromFranceGalop() }
+                } label: {
+                    Label("Analizar el vídeo de esta carrera", systemImage: "video.badge.waveform")
+                }
+                .buttonStyle(.avoPrimary)
+                .disabled(model.loading)
+                .accessibilityIdentifier("fg.raceVideo")
+                Text("Abre la carrera (con su vídeo) y pulsa aquí: la app lee los participantes, los colores de cada jinete, la distancia y el tiempo, sigue a tu caballo en el vídeo y calcula velocidad, parciales cada 200 m, zancada y posición.")
+                    .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             }
             if let p = model.page, p.isHorseSheet { sheetBox(p) }
             if let p = model.page, !p.horseLinks.isEmpty { stableBox(p) }

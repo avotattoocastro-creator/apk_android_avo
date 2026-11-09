@@ -109,6 +109,12 @@ struct RootView: View {
             PdfViewerSheet(file: f)
                 .preferredColorScheme(.dark)
         }
+        .fullScreenCover(isPresented: Binding(get: { app.raceVideo.visible && !app.franceGalop.visible },
+                                              set: { (v: Bool) in if !v && !app.franceGalop.visible { app.raceVideo.close() } })) {
+            RaceVideoView(model: app.raceVideo)
+                .environment(app)
+                .preferredColorScheme(.dark)
+        }
         .fullScreenCover(isPresented: Binding(get: { app.franceGalop.visible },
                                               set: { (v: Bool) in if !v { app.franceGalop.close() } })) {
             FranceGalopView(model: app.franceGalop)

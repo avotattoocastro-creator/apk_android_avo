@@ -22,6 +22,13 @@ struct RaceDetailView: View {
                         .background(Avo.warn.opacity(0.15), in: RoundedRectangle(cornerRadius: 6))
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Avo.warn, lineWidth: 1))
                 }
+                if race.isVideo {
+                    Text("VÍDEO · carrera analizada automáticamente desde el vídeo, sin tracker: velocidades, parciales, zancadas y posiciones son ESTIMACIONES")
+                        .font(.caption.weight(.semibold)).foregroundStyle(Avo.cyan)
+                        .padding(.horizontal, 10).padding(.vertical, 6)
+                        .background(Avo.cyan.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
+                        .overlay(RoundedRectangle(cornerRadius: 6).stroke(Avo.cyan, lineWidth: 1))
+                }
                 RaceHeaderCard(race: race)
                 if let us = race.ourRunner {
                     RaceResultCard(race: race, us: us)

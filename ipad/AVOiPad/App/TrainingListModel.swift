@@ -255,7 +255,8 @@ struct TrainingRecoveryReport {
 enum TrainingRecovery {
     static let segmentPattern: String = "^P[0-9]{3}\\.avr$"
     /// Folders of the app root that never hold trainings (map tiles, weather cache, logs, engine cache).
-    static let skippedDirNames: Set<String> = ["teselas", "entorno", "registros", "analisis", "tramos", "notas", ".Trash"]
+    static let skippedDirNames: Set<String> = ["teselas", "entorno", "registros", "analisis", "tramos", "notas", ".Trash",
+                                               "Informes", "Informes IA", "Carreras", "Copia de seguridad", "carreras_video", "exportaciones"]
 
     static func canonical(_ p: String) -> String {
         URL(fileURLWithPath: p).resolvingSymlinksInPath().standardizedFileURL.path

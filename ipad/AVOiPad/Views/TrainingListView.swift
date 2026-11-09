@@ -133,6 +133,14 @@ private struct TrainingListContent: View {
         .buttonStyle(.avoSecondary)
         .disabled(model.rows.isEmpty || app.busy)
         .accessibilityIdentifier("list.export")
+        Button {
+            Task { @MainActor in await app.syncDocumentsAndReport() }
+        } label: {
+            Label("Copiar todo a AVO Horse", systemImage: "externaldrive.badge.checkmark")
+        }
+        .buttonStyle(.avoSecondary)
+        .disabled(app.busy)
+        .accessibilityIdentifier("list.syncDocs")
     }
 
     // ------------------------------------------------------------------ filters

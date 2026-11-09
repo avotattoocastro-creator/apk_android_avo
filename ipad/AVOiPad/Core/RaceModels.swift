@@ -97,6 +97,9 @@ struct Race: Codable, Equatable, Identifiable {
 
     var fieldSize: Int { runners.count }
 
+    /// Race analysed automatically from the video (no tracker): estimated values (Core/RaceVideoAnalysis.swift).
+    var isVideo: Bool { id.hasPrefix("video-") }
+
     var ourIndex: Int? {
         guard let n = ourRunnerName else { return nil }
         return runners.firstIndex { $0.name == n }

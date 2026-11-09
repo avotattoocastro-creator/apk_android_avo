@@ -155,6 +155,7 @@ final class AssistantModel {
             try AvoFiles.writeAtomic(ReportBuilder.aiReportPdf(data), to: path)
             app.pdfViewer = ExportedFile(id: path + "|" + String(Date().timeIntervalSince1970), url: URL(fileURLWithPath: path),
                                          name: name, kind: .pdf, time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
+            app.scheduleDocumentsSync()
         } catch {
             app.show("Informe IA", "No se pudo crear el PDF: " + error.localizedDescription)
         }

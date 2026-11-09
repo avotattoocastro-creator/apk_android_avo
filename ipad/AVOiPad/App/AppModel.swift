@@ -50,6 +50,7 @@ final class AppModel {
     @ObservationIgnored var franceGalop: FranceGalopModel! // France Galop: horse sheets / whole stable read in an in-app browser
     @ObservationIgnored var stretch: StretchModel!        // «Análisis del tramo» (full-screen) + stretches saved per horse
     @ObservationIgnored var trackWork: TrackWorkModel!    // «Trabajo en pista» (AVO Track Work): efforts, splits, best distances
+    @ObservationIgnored var raceVideo: RaceVideoModel!     // «Analizar vídeo» de una carrera (seguimiento automático)
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
@@ -108,6 +109,7 @@ final class AppModel {
         self.corrections = CorrectionsModel(app: self)
         self.trackWork = TrackWorkModel(app: self)
         self.assistant = AssistantModel(app: self)
+        self.raceVideo = RaceVideoModel(app: self)
         self.stretch = StretchModel(app: self)
         self.franceGalop = FranceGalopModel(app: self)
         initShell()

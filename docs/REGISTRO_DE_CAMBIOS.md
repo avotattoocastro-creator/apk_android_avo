@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — iPad — Copia automática en «AVO Horse» y análisis automático del vídeo de carrera
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:**
+- **Copia automática en Archivos › En mi iPad › AVO Horse** (petición 09:37): la app comprueba y crea sus carpetas y copia, por caballo, `Entrenamientos/<caballo>` (originales verificados .avo/.avr), `Informes/<caballo>` (todo lo de «Informes» y los PDF de tramo), `Informes IA/<caballo>`, `Carreras/<caballo>` (PDF de tracking) y `Carreras/Vídeos`, y `Copia de seguridad` (los .json de la app y las notas). Se ejecuta al abrir, cada 2 min, al pasar a segundo plano y tras crear cada informe. Solo añade o actualiza; nunca borra. Botón «Copiar todo a AVO Horse» en Entrenamientos. La búsqueda de entrenamientos perdidos ignora esas carpetas (y las copias de entrenamientos salen como duplicadas por SHA-256).
+- **Análisis automático del vídeo de la carrera** (petición 09:28, «Fase 2 en automático»): en el navegador de France Galop, «Analizar el vídeo de esta carrera» lee participantes, puestos, números y colores de cada chaquetilla, distancia y tiempo, y abre el vídeo (HLS/MP4 de la página; si no se puede, grabación de pantalla desde Fotos o Archivos; también «Analizar vídeo» en Carreras). Vision detecta los jinetes en cada fotograma, encuentra el nuestro por los colores (o por un toque, y aprende sus colores), lo sigue tras los cortes de cámara y mide el movimiento de cámara. `Core/RaceVideoAnalysis.swift` calcula la velocidad relativa (alturas de jinete/s, independiente del zoom), la calibra con distancia y tiempo oficiales, y obtiene parciales de 200 m, frecuencia de zancada (rebote del jinete, autocorrelación 1,6–3,2 Hz), zancadas y posición estimada. Se guarda como carrera «VÍDEO» (valores ESTIMADOS, con confianza y cobertura) y usa la misma comparación con entrenamientos que las carreras con tracker.
+**Archivos:** `App/AppModel+DocumentsSync.swift` (nuevo), `App/AVOiPadApp.swift`, `App/AppModel+Shell.swift`, `App/TrainingListModel.swift`, `Views/TrainingListView.swift`, `App/ReportsModel.swift`, `App/StretchModel.swift`, `App/AssistantModel.swift`, `App/RacesModel.swift`, `Core/RaceVideoAnalysis.swift` (nuevo), `App/RaceVideoTracker.swift` (nuevo), `App/RaceVideoModel.swift` (nuevo), `Views/RaceVideoView.swift` (nuevo), `Views/FranceGalopView.swift`, `Views/RacesView.swift`, `Views/RaceDetailView.swift`, `Core/RaceModels.swift`, `App/AppModel.swift`, `App/RootView.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente. El análisis de vídeo no se ha podido probar con un vídeo real de France Galop.
+
 ## 2026-11-09 — iPad — Informes IA guardados en la ficha del caballo
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (bocetos 09/11/2026 00:09):**

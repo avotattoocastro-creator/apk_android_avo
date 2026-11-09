@@ -295,6 +295,7 @@ final class ReportsModel {
             app.status = "Exportado: " + path
             app.log.info("exportar", "Exportado", ["archivo": name])
             shareFile = file
+            app.scheduleDocumentsSync()
         } catch {
             let msg: String = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
             app.log.error("ui", msg, error)
