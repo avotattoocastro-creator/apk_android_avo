@@ -75,7 +75,8 @@ class NfcActivationTest {
     }
 
     @Test fun notArmedAndNotAvo() {
-        assertEquals(NfcActivation.Outcome.NotArmed, NfcActivation.read({ card(armed = false).process(it) }, phoneA))
+        val idle = card(armed = false)
+        assertEquals(NfcActivation.Outcome.NotArmed, NfcActivation.read({ idle.process(it) }, phoneA))
         // another HCE app / payment card: SELECT of our AID is not found
         assertEquals(NfcActivation.Outcome.NotAvo, NfcActivation.read({ byteArrayOf(0x6A, 0x82.toByte()) }, phoneA))
         // the link breaks
