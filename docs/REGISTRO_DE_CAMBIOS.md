@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Pecho 3.7.9 CARGA — la espalda no se despierta con el pecho cargando
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commits:** `57edcd0`, siguiente · **CI:** [42617435387](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42617435387) (**éxito**; incluye 3.7.7 y 3.7.8)
+**Por qué:** el usuario vio que al conectar el pecho a cargar la espalda se despertaba (baliza de la 3.7.7).
+**Qué cambia:** con USB y sin grabar: `BACK_SLEEP` si la espalda está enlazada y, 1,5 s después, ninguna transmisión a la espalda (ni baliza ni DATA). Al quitar el USB o grabar, vuelve la baliza. `V3_7_9_CARGA/tools/apply_v379.py`.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el reloj.
+
 ## 2026-11-09 — Pecho 3.7.8 VINCULAR — 3 pulsaciones de BOOT para vincular un móvil
 **Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commit:** `94e6053` · **CI:** [42603761121](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121) (**éxito**; artefacto [`AVO-CHEST-V3-7-8-VINCULAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121/artifacts/13665944700); incluye todo lo de la 3.7.7)
 **Qué cambia:** evento `TRIPLE` de `BootButton`; triple pulsación → 120 s de modo vincular: desconecta y bloquea el móvil actual, anuncia, autoriza el CLAIM del nuevo sin pulsar BOOT, pantalla «MODO VINCULAR». La doble pulsación se reconoce 350 ms después de soltar. Detalle: `V3_7_7_DESPERTAR/INFORME.md` §7.
