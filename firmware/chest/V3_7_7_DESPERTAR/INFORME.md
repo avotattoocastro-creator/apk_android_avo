@@ -78,3 +78,16 @@ el firmware arranca (pantalla de carga) y la 3.7.7 emitía la baliza de desperta
     lo oye nunca.
 - Al quitar el USB (o al empezar a grabar) vuelve la baliza y la espalda se despierta en ≤ 10 s.
 - Parche: `firmware/chest/V3_7_9_CARGA/tools/apply_v379.py`; prueba `tests_test_carga_v379.py`.
+
+## 9. 3.7.10 CARGA APAGADO (encima de la 3.7.9)
+Petición del usuario: con el pecho apagado, al conectarlo a cargar y desenchufarlo debe apagarse solo, y en ningún
+momento del proceso debe despertar a la espalda.
+- Al arrancar se lee por qué se encendió el AXP2101 (registro 0x20: bit0 = tecla PWR, bit2 = USB conectado).
+  Encendido por el USB y no por PWR → **arranque de carga** (monitor: `encendido por USB (solo carga)`).
+- Durante un arranque de carga el pecho **no transmite nada a la espalda** (ni baliza ni DATA), tampoco después de
+  desenchufar, hasta que se apaga. En los primeros segundos de cualquier arranque, antes de leer el PMU, tampoco.
+- **USB retirado 2 s** en un arranque de carga, sin sesión → apagado controlado (SD cerrada y corte del AXP2101,
+  como una pulsación larga de PWR).
+- Si durante la carga se pulsa BOOT o PWR, o empieza una sesión, pasa a ser un encendido normal: al desenchufar
+  sigue encendido y llama a la espalda como siempre.
+- Parche: `firmware/chest/V3_7_10_CARGA_APAGADO/tools/apply_v3710.py`.
