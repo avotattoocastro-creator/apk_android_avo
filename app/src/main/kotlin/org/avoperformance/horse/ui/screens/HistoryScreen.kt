@@ -252,6 +252,14 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                     LinearProgressIndicator(progress = { (wifi.bytes.toFloat() / wifi.total).coerceIn(0f, 1f) }, color = AvoColors.Blue,
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp))
             }
+            // 2.8: Wi-Fi blocked for this watch firmware (reboot when turning it on): the user can try again
+            var wifiBlocked by remember { mutableStateOf(c.wifiSync.blockedFirmware) }
+            wifiBlocked?.let { fw ->
+                Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Wi-Fi desactivado para el reloj $fw (se reinició al encenderlo): se usa Bluetooth", color = AvoColors.Warn, modifier = Modifier.weight(1f))
+                    androidx.compose.material3.TextButton(onClick = { c.wifiSync.unblock(); wifiBlocked = null; c.sync.autoSync(force = true) }) { Text("Probar Wi-Fi") }
+                }
+            }
             progress.message?.let { Note(it) }
             msg?.let { Note(it, AvoColors.Warn) }
             if (progress.busy && progress.total > 0) LinearProgressIndicator(progress = { (progress.bytes.toFloat() / progress.total).coerceIn(0f, 1f) }, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp))

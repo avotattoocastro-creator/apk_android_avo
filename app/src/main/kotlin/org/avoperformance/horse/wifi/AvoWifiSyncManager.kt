@@ -62,6 +62,10 @@ class AvoWifiSyncManager(
         if (fwBlocked != null && fwBlocked != info.firmware) guard.edit().remove("blocked_fw").apply()   // new firmware: try again
         val attFw = guard.getString("attempt_fw", null)
         val attBoot = guard.getLong("attempt_boot", -1)
+        val attAt = guard.getLong("attempt_at", 0L)
+        // 2.8: only a reboot shortly after the attempt counts. Before, a WIFI_SYNC(start) left without an answer stayed
+        // marked and the next NORMAL power-off/on of the watch (boot counter up) blocked Wi-Fi for that firmware forever.
+        if (attFw != null && attAt > 0 && System.currentTimeMillis() - attAt > REBOOT_WINDOW_MS) { clearAttempt(); return true }
         if (attFw != null && attFw == info.firmware && attBoot >= 0 && info.bootCount > attBoot) {
             guard.edit().putString("blocked_fw", info.firmware).remove("attempt_fw").remove("attempt_boot").apply()
             log.w("WIFI", "el reloj se reinició al activar el Wi-Fi (arranque $attBoot → ${info.bootCount}): Wi-Fi desactivado para ${info.firmware}, se usa Bluetooth")
@@ -69,8 +73,13 @@ class AvoWifiSyncManager(
         }
         return true
     }
-    private fun markAttempt() { watch.info.value?.let { guard.edit().putString("attempt_fw", it.firmware).putLong("attempt_boot", it.bootCount).commit() } }
-    private fun clearAttempt() { guard.edit().remove("attempt_fw").remove("attempt_boot").apply() }
+    private fun markAttempt() { watch.info.value?.let { guard.edit().putString("attempt_fw", it.firmware).putLong("attempt_boot", it.bootCount).putLong("attempt_at", System.currentTimeMillis()).commit() } }
+    private fun clearAttempt() { guard.edit().remove("attempt_fw").remove("attempt_boot").remove("attempt_at").apply() }
+
+    /** 2.8: lets the user try Wi-Fi again after a block (Dispositivos). */
+    fun unblock() { guard.edit().remove("blocked_fw").remove("attempt_fw").remove("attempt_boot").remove("attempt_at").apply() }
+
+    private companion object { const val REBOOT_WINDOW_MS = 5 * 60_000L }
 
     /** The watch firmware rebooted when turning on Wi-Fi: blocked until another firmware. */
     val blockedFirmware: String? get() = guard.getString("blocked_fw", null)
@@ -83,8 +92,9 @@ class AvoWifiSyncManager(
             if (!supported) return WatchWifiControl.Start.Unsupported
             val c = watch.client ?: throw IOException("Sin conexión con el reloj")
             markAttempt()
-            val m = c.request(MsgType.WIFI_SYNC, byteArrayOf(1), Idempotency.STATE_CHANGING, timeoutMs = 10_000)
-            if (m.statusEnum != BleStatus.OK) clearAttempt()   // clean refusal: the watch is still on
+            val m = c.request(MsgType.WIFI_SYNC, byteArrayOf(1), Idempotency.STATE_CHANGING, timeoutMs = 12_000)
+            // 2.8: any answer means the watch did NOT reboot while turning the AP on (it answers after the AP is up)
+            clearAttempt()
             return when (m.statusEnum) {
                 BleStatus.OK -> WifiCredentials.decode(m.payload)?.let { WatchWifiControl.Start.Ok(it) }
                     ?: WatchWifiControl.Start.Refused("credenciales ilegibles", false)
@@ -92,8 +102,12 @@ class AvoWifiSyncManager(
                 BleStatus.NOT_ALLOWED -> WatchWifiControl.Start.Refused("batería baja", true)
                 BleStatus.BUSY -> WatchWifiControl.Start.Refused("ocupado", true)
                 BleStatus.UNKNOWN_TYPE -> WatchWifiControl.Start.Unsupported
-                else -> if (m.payload.firstOrNull()?.toInt() == 3) WatchWifiControl.Start.Refused("sin microSD", true)
-                        else WatchWifiControl.Start.Refused("radio del reloj", false)
+                else -> when (m.payload.firstOrNull()?.toInt()) {
+                    3 -> WatchWifiControl.Start.Refused("sin microSD", true)
+                    6 -> WatchWifiControl.Start.Refused("Wi-Fi del reloj bloqueado tras un reinicio (se desbloquea al actualizar el reloj)", false)
+                    7 -> WatchWifiControl.Start.Refused("poca memoria libre en el reloj", false)
+                    else -> WatchWifiControl.Start.Refused("radio del reloj", false)
+                }.also { log.w("WIFI", "el reloj rechazó el Wi-Fi: ${it.reason} (estado ${m.statusEnum}, motivo ${m.payload.firstOrNull()})") }
             }
         }
         override suspend fun stop() { runCatching { watch.client?.request(MsgType.WIFI_SYNC, byteArrayOf(2), Idempotency.STATE_CHANGING, timeoutMs = 4000) } }
@@ -101,7 +115,31 @@ class AvoWifiSyncManager(
     }
 
     private val connector = object : WifiConnector {
-        override suspend fun connect(creds: WifiCredentials): WifiConnector.Link? = suspendCancellableCoroutine { cont ->
+        /**
+         * 2.8: after Android joins the watch network the first requests can be lost (address/route still being set up:
+         * same case seen on the iPad on 07/11). Before, the first metadata request failing ended the pass and the app
+         * went to Bluetooth. Now /api/v1/status is polled (4 s per try, every second, up to 30 s) before downloading.
+         */
+        override suspend fun connect(creds: WifiCredentials): WifiConnector.Link? {
+            val link = join(creds) ?: return null
+            val http = link.http as NetworkWatchHttp
+            val t0 = System.currentTimeMillis()
+            var tries = 0
+            var last: String? = null
+            while (System.currentTimeMillis() - t0 < 30_000) {
+                tries++
+                val r = runCatching { http.probe() }
+                if (r.isSuccess) { log.i("WIFI", "el reloj responde por Wi-Fi (intento $tries, ${System.currentTimeMillis() - t0} ms)"); return link }
+                last = r.exceptionOrNull()?.let { "${it.javaClass.simpleName}: ${it.message}" }
+                if (r.exceptionOrNull() is AuthException) break
+                kotlinx.coroutines.delay(1000)
+            }
+            log.w("WIFI", "conectado a ${creds.ssid} pero el reloj no responde por HTTP tras $tries intentos ($last) → Bluetooth")
+            link.close()
+            return null
+        }
+
+        private suspend fun join(creds: WifiCredentials): WifiConnector.Link? = suspendCancellableCoroutine { cont ->
             val spec = WifiNetworkSpecifier.Builder().setSsid(creds.ssid).setWpa2Passphrase(creds.password)
                 .apply { runCatching { setBssid(MacAddress.fromBytes(creds.bssid)) } }.build()
             val req = NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
@@ -196,6 +234,15 @@ private class NetworkWatchHttp(private val network: Network, private val c: Wifi
     private fun text(path: String): String {
         val conn = check(open(path), 200)
         return try { conn.inputStream.use { it.readBytes().toString(Charsets.UTF_8) } } finally { conn.disconnect() }
+    }
+
+    /** 2.8: short status request used to check that the watch answers over Wi-Fi. */
+    fun probe() {
+        val conn = open("/api/v1/status")
+        conn.connectTimeout = 3_000
+        conn.readTimeout = 4_000
+        check(conn, 200)
+        try { conn.inputStream.use { it.readBytes() } } finally { conn.disconnect() }
     }
 
     override fun list() = WatchHttp.parseList(text("/api/v1/trainings"))

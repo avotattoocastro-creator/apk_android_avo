@@ -139,12 +139,17 @@ class WatchConnection(
                 val ok = runCatching { connectOnce() }.onFailure {
                     _detail.value = it.message
                     log.w("BLE", "conexión fallida: ${it.message}")
+                    // 2.8: GATT came up but notifications / encryption failed within 20 s → candidate stale bond
+                    val m = it.message.orEmpty()
+                    if (gattStartAt > 0 && System.currentTimeMillis() - gattStartAt < 20_000 &&
+                        (m.contains("notificaciones") || Regex("estado (5|8|15|19|22|61|133|137)\\b").containsMatchIn(m))) noteQuickFailure(m)
                 }.getOrDefault(false)
                 if (ok) {
                     backoff = 2000L
                     linkLost.await()            // until the link drops
                     reconnects++
                 }
+                settings.authorizedWatch?.let { a -> runCatching { adapter?.getRemoteDevice(a)?.let { dropStaleBondIfNeeded(it) } } }
                 cleanup()
                 if (!wanted) break
                 if (_state.value != LinkState.NECESITA_AUTORIZACION) _state.value = LinkState.DESCONECTADO
@@ -163,6 +168,26 @@ class WatchConnection(
     }
 
     private var linkLost = CompletableDeferred<Unit>()
+
+    // 2.8: stale bond. The watch (CHEST <= 3.7.6) kept only 3 bonds / 8 CCCDs and deleted the OLDEST phone's bond when a
+    // third phone subscribed. That phone still says "bonded", its encryption fails and the link drops seconds after
+    // connecting, forever. After 2 such quick failures in a row the phone's bond is removed and made again.
+    @Volatile private var gattStartAt = 0L
+    @Volatile private var quickFails = 0
+    private fun encryptionLikeStatus(st: Int) = st in setOf(5, 8, 15, 19, 22, 61, 133, 137)
+    private fun noteQuickFailure(why: String) {
+        quickFails++
+        log.w("BLE", "fallo rápido tras conectar ($why), $quickFails seguido(s)")
+    }
+    @SuppressLint("MissingPermission")
+    private fun dropStaleBondIfNeeded(dev: BluetoothDevice) {
+        if (quickFails < 2 || dev.bondState != BluetoothDevice.BOND_BONDED) return
+        quickFails = 0
+        val ok = runCatching { dev.javaClass.getMethod("removeBond").invoke(dev) as Boolean }.getOrDefault(false)
+        log.w("BLE", if (ok) "vínculo Bluetooth antiguo borrado: se vuelve a emparejar con el reloj"
+                     else "no se pudo borrar el vínculo antiguo: olvida el reloj en Ajustes › Bluetooth y vuelve a conectar")
+        _detail.value = if (ok) "Volviendo a emparejar con el reloj" else "Olvida el reloj en Ajustes › Bluetooth del teléfono y vuelve a conectar"
+    }
 
     private fun cleanup() {
         client?.onDisconnected()
@@ -185,7 +210,14 @@ class WatchConnection(
         // 2) GATT
         _state.value = LinkState.CONECTANDO
         linkLost = CompletableDeferred()
-        val t = GattTransport(ctx, dev, ::onNotify) { st -> log.w("BLE", "enlace perdido (estado $st)"); linkLost.complete(Unit) }
+        gattStartAt = System.currentTimeMillis()
+        val t = GattTransport(ctx, dev, ::onNotify) { st ->
+            log.w("BLE", "enlace perdido (estado $st)")
+            val up = System.currentTimeMillis() - gattStartAt
+            if (up < 10_000 && encryptionLikeStatus(st)) noteQuickFailure("enlace perdido a los $up ms, estado $st")
+            else if (up >= 10_000) quickFails = 0
+            linkLost.complete(Unit)
+        }
         transport = t
         val c = AvoClient(t, ::onUnsolicited)
         client = c
@@ -214,7 +246,7 @@ class WatchConnection(
         }
         afterReady(c)
         true
-    }
+    }.also { if (it) { val since = gattStartAt; scope.launch { delay(10_000); if (gattStartAt == since && isReady) quickFails = 0 } } }
 
     private suspend fun afterReady(c: AvoClient) {
         _detail.value = null
