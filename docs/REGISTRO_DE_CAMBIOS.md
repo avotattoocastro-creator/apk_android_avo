@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Pecho 3.7.7 DESPERTAR — sueño de la espalda, bloqueo Wi-Fi y vínculos Bluetooth
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` (desde 3.7.6 GNSS QUALITY) · **Commits:** `5cf704c` … `7e5c0b0` · **CI:** [42587757628](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628) (**éxito**; artefacto [`AVO-CHEST-V3-7-7-DESPERTAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628/artifacts/13659991810), SHA-256 `365c2851…2fff`)
+**Qué cambia:** `V3_7_7_DESPERTAR/tools/apply_v377.py` + `build-chest-v377-despertar.yml`. Al apagar manda `BACK_SLEEP` (2 veces) antes de cortar el AXP2101; baliza DATA cada 100 ms mientras la espalda no responde; el bloqueo Wi-Fi `wifi_off` guarda el firmware que lo puso y se borra con otro firmware; motivos 6/7; NimBLE con 6 vínculos y 20 CCCD (antes 3/8: el tercer móvil borraba el vínculo del más antiguo). Detalle: `firmware/chest/V3_7_7_DESPERTAR/INFORME.md`.
+**Hallazgo en CI:** un texto que terminaba en «3.7.7» hacía que el enlazador fusionara con él la cadena de versión (ya no quedaba junto a `AVO-CHEST`); corregido en `7e5c0b0`.
+**No se ha tocado:** RAW/SD, sesiones, tramas ESP-NOW, NTRIP/RTCM, GNSS, pantallas, USB, OTA, particiones (todas las pruebas de la 3.7.6 pasan).
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el reloj.
+**Pendiente:** pasos de `INFORME.md` §6.
+
 ## 2026-10-31 — CHEST 3.7.6 GNSS QUALITY — calidad GNSS de la espalda hasta Android, sobre la 3.7.5-usb1
 **Autor:** Claude · **Rama:** `feature/chest-v3-7-6-gnss-quality` (desde `feature/chest-usb-pc-sync`) · **Commits:** `8494035`, `e76347d`
 **Qué cambia:**
