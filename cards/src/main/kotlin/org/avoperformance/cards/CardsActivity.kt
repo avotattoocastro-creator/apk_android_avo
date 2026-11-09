@@ -9,6 +9,10 @@ import android.net.Uri
 import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.os.SystemClock
+import android.content.ComponentName
+import android.content.pm.PackageManager
+import android.nfc.cardemulation.CardEmulation
+import kotlinx.coroutines.delay
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,8 +74,8 @@ private sealed interface Mode {
     data class Write(val card: AvoUserCard, val kind: RegEvent.Kind, val licenseUntil: LocalDate?, val roles: Set<LicenseRole> = emptySet()) : Mode
 }
 
-/** Licence editor for a registered user: on the card, or as a file to send. */
-private data class LicenseAsk(val user: RegUser, val byFile: Boolean)
+/** Licence editor for a registered user: on the card, as a file to send, or to a phone over NFC ([phone]). */
+private data class LicenseAsk(val user: RegUser, val byFile: Boolean, val phone: Boolean = false)
 
 /** Password dialog purpose. */
 private sealed interface PwdAsk {
@@ -127,13 +131,52 @@ class CardsActivity : ComponentActivity() {
             !a.isEnabled -> "Activa NFC en los ajustes de Android."
             else -> status
         }
-        a?.takeIf { it.isEnabled }?.enableReaderMode(this, { tag -> onTag(tag) },
-            NfcAdapter.FLAG_READER_NFC_A, null)
+        // while a phone activation is armed this phone must act as a CARD (HCE), not as a reader
+        if (PhoneActivation.armedNow() == null) enableReader() else preferHce(true)
     }
 
     override fun onPause() {
         runCatching { adapter?.disableReaderMode(this) }
+        preferHce(false)
         super.onPause()
+    }
+
+    private fun enableReader() {
+        adapter?.takeIf { it.isEnabled }?.enableReaderMode(this, { tag -> onTag(tag) }, NfcAdapter.FLAG_READER_NFC_A, null)
+    }
+
+    /** Our HCE service is preferred while this screen is in front (no other app answers the AVO AID meanwhile). */
+    private fun preferHce(on: Boolean) {
+        val a = adapter ?: return
+        runCatching {
+            val ce = CardEmulation.getInstance(a)
+            if (on) ce.setPreferredService(this, ComponentName(this, AvoHceService::class.java)) else ce.unsetPreferredService(this)
+        }
+    }
+
+    // ---- «Activar móvil por NFC» (this phone acts as the user's card for the AVO app of another phone)
+
+    private fun startPhoneActivation(u: RegUser, lastDay: LocalDate, roles: Set<LicenseRole>) {
+        val k = key ?: return
+        val a = adapter
+        when {
+            a == null -> { status = "Este móvil no tiene NFC."; return }
+            !packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION) -> {
+                status = "Este móvil no puede hacer de tarjeta NFC (no tiene emulación de tarjeta, HCE)."; return
+            }
+            !a.isEnabled -> { status = "Activa NFC en los ajustes de Android."; return }
+        }
+        try {
+            PhoneActivation.arm(u, roles, lastDay, k)
+        } catch (e: Exception) { status = "No se pudo preparar: ${e.message}"; return }
+        runCatching { a!!.disableReaderMode(this) }
+        preferHce(true)
+        status = "Esperando el móvil de ${u.card.name}…"
+    }
+
+    private fun endPhoneActivation() {
+        preferHce(false)
+        if (lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)) enableReader()
     }
 
     private fun keyIdHex(k: KeyPair) = LicenseCrypto.keyId(k.public).joinToString("") { "%02X".format(it) }
@@ -520,19 +563,22 @@ class CardsActivity : ComponentActivity() {
         }
         openUser?.let { code ->
             reg.user(code)?.let { u ->
-                UserDialog(u, onDismiss = { openUser = null }, onLicense = { byFile -> openUser = null; licenseAsk = LicenseAsk(u, byFile) })
+                UserDialog(u, onDismiss = { openUser = null }, onLicense = { byFile -> openUser = null; licenseAsk = LicenseAsk(u, byFile) },
+                    onPhone = { openUser = null; licenseAsk = LicenseAsk(u, byFile = false, phone = true) })
             } ?: run { openUser = null }
         }
         licenseAsk?.let { ask ->
             LicenseDialog(ask, onDismiss = { licenseAsk = null }) { day, roles, channel ->
                 licenseAsk = null
-                if (ask.byFile) sendLicenseFile(ask.user, day, roles, channel)
+                if (ask.phone) startPhoneActivation(ask.user, day, roles)
+                else if (ask.byFile) sendLicenseFile(ask.user, day, roles, channel)
                 else {
                     mode = Mode.Write(ask.user.card, RegEvent.Kind.TARJETA, day, roles)
                     status = "Acerca la tarjeta de ${ask.user.card.name} para grabar la licencia (${LicenseRole.label(roles)}) hasta el ${day.format(DAY)}."
                 }
             }
         }
+        PhoneActivationDialog()
         if (confirmGenerate) ConfirmDialog(title = "Generar clave de licencias",
             text = "Se crea la clave que firma todas las licencias. Haz después la copia completa: si pierdes este móvil sin copia, habrá que regrabar todas las tarjetas y publicar una app nueva.",
             confirm = "Generar", onConfirm = { confirmGenerate = false; installKey(keys.generate(), fromBackup = false) }, onDismiss = { confirmGenerate = false })
@@ -560,7 +606,7 @@ class CardsActivity : ComponentActivity() {
 
     /** One user of the register: data, licence, history and actions (with or without the card). */
     @Composable
-    private fun UserDialog(u: RegUser, onDismiss: () -> Unit, onLicense: (byFile: Boolean) -> Unit) {
+    private fun UserDialog(u: RegUser, onDismiss: () -> Unit, onLicense: (byFile: Boolean) -> Unit, onPhone: () -> Unit) {
         var editing by remember { mutableStateOf(false) }
         var phone by remember(u) { mutableStateOf(u.phone) }
         var email by remember(u) { mutableStateOf(u.email) }
@@ -601,6 +647,7 @@ class CardsActivity : ComponentActivity() {
                     }
                     HorizontalDivider(color = AvoColors.Line, modifier = Modifier.padding(vertical = 6.dp))
                     if (!u.revoked && k != null) {
+                        Button(onClick = onPhone, modifier = Modifier.fillMaxWidth()) { Text("ACTIVAR SU MÓVIL POR NFC (SIN TARJETA)", fontWeight = FontWeight.Bold) }
                         Button(onClick = { onLicense(true) }, modifier = Modifier.fillMaxWidth()) { Text("ACTIVAR POR ARCHIVO (SIN TARJETA)", fontWeight = FontWeight.Bold) }
                         OutlinedButton(onClick = { onLicense(false) }, modifier = Modifier.fillMaxWidth()) {
                             Text(if (u.expiresS > 0) "Renovar en la tarjeta" else "Grabar licencia en la tarjeta")
@@ -663,13 +710,19 @@ class CardsActivity : ComponentActivity() {
         var day by remember { mutableStateOf<LocalDate?>(null) }
         val ready = day != null && roles.isNotEmpty()
         AlertDialog(onDismissRequest = onDismiss, containerColor = AvoColors.Surface,
-            title = { Text((if (ask.byFile) "Activar por archivo · " else "Licencia en tarjeta · ") + ask.user.card.name) },
+            title = { Text((if (ask.phone) "Activar su móvil por NFC · " else if (ask.byFile) "Activar por archivo · " else "Licencia en tarjeta · ") + ask.user.card.name) },
             text = {
                 Column(Modifier.heightIn(max = 560.dp).verticalScroll(rememberScrollState())) {
                     RolePicker(roles) { roles = it }
                     Spacer(Modifier.height(6.dp))
                     OutlinedButton(onClick = { pickDate(day) { day = it } }, modifier = Modifier.fillMaxWidth()) {
                         Text(day?.let { "Activa hasta el ${it.format(DAY)}" } ?: "Elegir fecha de activación")
+                    }
+                    if (ask.phone) {
+                        Spacer(Modifier.height(8.dp))
+                        Note("Al pulsar «Preparar», junta la parte de atrás de este móvil con la del móvil de ${ask.user.card.name}, " +
+                            "con la app AVO abierta y los dos desbloqueados. Su app recibe la licencia firmada PARA ESE MÓVIL (no vale en otro) " +
+                            "y también su identidad AVO, como si acercara su tarjeta.")
                     }
                     if (ask.byFile) {
                         Spacer(Modifier.height(8.dp))
@@ -683,9 +736,65 @@ class CardsActivity : ComponentActivity() {
                 }
             },
             confirmButton = {
-                if (!ask.byFile) TextButton(enabled = ready, onClick = { day?.let { onOk(it, roles, Channel.OTRA) } }) { Text("Grabar en la tarjeta") }
+                if (!ask.byFile) TextButton(enabled = ready, onClick = { day?.let { onOk(it, roles, Channel.OTRA) } }) {
+                    Text(if (ask.phone) "Preparar" else "Grabar en la tarjeta")
+                }
             },
             dismissButton = { TextButton(onClick = onDismiss) { Text("Cancelar") } })
+    }
+
+    /** Waiting for the user's phone / result of «Activar móvil por NFC». */
+    @Composable
+    private fun PhoneActivationDialog() {
+        val st by PhoneActivation.state.collectAsState()
+        var wasWaiting by remember { mutableStateOf(false) }
+        LaunchedEffect(st) {
+            val waiting = st is PhoneActivation.State.Waiting
+            if (wasWaiting && !waiting) {
+                endPhoneActivation()
+                if (st is PhoneActivation.State.Done) { registry = store.load(); backedUp = false }
+            }
+            wasWaiting = waiting
+        }
+        when (val s = st) {
+            PhoneActivation.State.Idle -> Unit
+            is PhoneActivation.State.Waiting -> {
+                var left by remember(s) { mutableStateOf(PhoneActivation.WINDOW_MS / 1000) }
+                LaunchedEffect(s) {
+                    while (true) {
+                        left = maxOf(0, (s.armed.untilElapsed - SystemClock.elapsedRealtime()) / 1000)
+                        if (PhoneActivation.armedNow() == null) break   // also turns a timeout into Failed
+                        delay(1000)
+                    }
+                }
+                AlertDialog(onDismissRequest = {}, containerColor = AvoColors.Surface,
+                    title = { Text("Junta los dos móviles") },
+                    text = {
+                        Column {
+                            Text("${s.armed.user.card.name} · ${LicenseRole.label(s.armed.roles)} · hasta el ${s.armed.lastDay.format(DAY)}",
+                                color = AvoColors.Text, fontWeight = FontWeight.SemiBold)
+                            Spacer(Modifier.height(8.dp))
+                            Note("Pon la parte de atrás de este móvil contra la del móvil del usuario, con la app AVO abierta y desbloqueado, " +
+                                "y mantenlos juntos 2 segundos.")
+                            Spacer(Modifier.height(8.dp))
+                            Text("Esperando… ${left / 60}:${"%02d".format(left % 60)}", color = AvoColors.TextDim, fontFamily = FontFamily.Monospace)
+                        }
+                    },
+                    confirmButton = {},
+                    dismissButton = { TextButton(onClick = { PhoneActivation.cancel() }) { Text("Cancelar") } })
+            }
+            is PhoneActivation.State.Done -> AlertDialog(onDismissRequest = { PhoneActivation.acknowledge() }, containerColor = AvoColors.Surface,
+                title = { Text("Móvil activado", color = AvoColors.Ok) },
+                text = {
+                    Note("${s.user.card.name}: licencia ${LicenseRole.label(s.token.roleSet)} hasta el ${day(s.token.expiresAtS)}, " +
+                        "solo para su móvil (${s.deviceHex.take(8)}). Queda en su historial.")
+                },
+                confirmButton = { TextButton(onClick = { PhoneActivation.acknowledge() }) { Text("OK") } })
+            is PhoneActivation.State.Failed -> AlertDialog(onDismissRequest = { PhoneActivation.acknowledge() }, containerColor = AvoColors.Surface,
+                title = { Text("No se activó", color = AvoColors.Bad) },
+                text = { Note(s.reason) },
+                confirmButton = { TextButton(onClick = { PhoneActivation.acknowledge() }) { Text("OK") } })
+        }
     }
 
     @Composable

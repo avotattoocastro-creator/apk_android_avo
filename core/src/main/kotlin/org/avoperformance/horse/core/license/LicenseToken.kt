@@ -54,6 +54,8 @@ class LicenseToken(
     val expiresAtMs: Long get() = expiresAtS * 1000
     /** Licence delivered as a file (email/WhatsApp) instead of written on the card. */
     val isRemote: Boolean get() = flags and FLAG_REMOTE != 0
+    /** Licence issued for ONE phone over NFC ([NfcActivation]): [uid] is that phone's device id, not a chip UID. */
+    val isDeviceBound: Boolean get() = flags and FLAG_DEVICE != 0
     val issuedAtMs: Long get() = issuedAtS * 1000
 
     /** Bytes covered by the signature (domain-separated). */
@@ -79,6 +81,7 @@ class LicenseToken(
         val MAGIC = byteArrayOf('A'.code.toByte(), 'V'.code.toByte(), 'O'.code.toByte(), 'L'.code.toByte())
         const val VERSION = 2
         const val FLAG_REMOTE = 0x01
+        const val FLAG_DEVICE = 0x02
         const val MAX_UID = 10
         const val NDEF_DOMAIN = "avoperformance.org"
         const val NDEF_TYPE = "lic"

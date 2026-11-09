@@ -13,8 +13,8 @@ android {
         applicationId = "org.avoperformance.cards"
         minSdk = 29
         targetSdk = 35
-        versionCode = 4
-        versionName = "1.3-registro-dev1"
+        versionCode = 5
+        versionName = "1.4-nfc-movil-dev1"
     }
 
     signingConfigs {

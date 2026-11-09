@@ -24,6 +24,7 @@ import org.avoperformance.horse.core.license.LicenseFile
 import org.avoperformance.horse.core.license.LicenseIssuer
 import org.avoperformance.horse.core.license.LicensePolicy
 import org.avoperformance.horse.core.license.LicenseStatus
+import org.avoperformance.horse.core.license.NfcActivation
 import org.avoperformance.horse.core.license.StoredLicense
 import org.avoperformance.horse.security.SecureStore
 import java.security.PublicKey
@@ -161,6 +162,24 @@ class LicenseManager(private val app: Application, private val secure: SecureSto
         }
         val r = LicensePolicy.activate(licenseBytes, tagUid, card?.code, card?.name ?: "", trusted, stored, readClock(stored))
         return applyResult(r, "tarjeta")
+    }
+
+    /**
+     * Id of THIS phone for licences activated from AVO Tarjetas over NFC ([NfcActivation.deviceId]): derived from the
+     * Android id of the app, stable on this phone (also after reinstalling the app).
+     */
+    val deviceId: ByteArray by lazy {
+        @Suppress("HardwareIds")
+        val androidId = Settings.Secure.getString(app.contentResolver, Settings.Secure.ANDROID_ID).orEmpty()
+        NfcActivation.deviceId(androidId, app.packageName)
+    }
+
+    /** Licence received from AVO Tarjetas acting as the user's card (phone against phone): signed for this phone. */
+    @Synchronized
+    fun activateFromPhone(r: NfcActivation.Result): String {
+        if (!enforced) return "Esta versión de la app no usa licencias"
+        val res = LicensePolicy.activateOnDevice(r.token, deviceId, r.card.code, r.card.name, trusted, stored, readClock(stored))
+        return applyResult(res, "móvil (NFC)")!!
     }
 
     /** Licence file received by email/WhatsApp; it is decrypted with the secret of the phone's identity card. */

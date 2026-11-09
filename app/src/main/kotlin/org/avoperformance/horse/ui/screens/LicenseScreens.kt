@@ -209,6 +209,13 @@ fun LicenseScreen(c: AppContainer) {
                 }
             }
             item {
+                AvoCard("Activar sin tarjeta, con el móvil de AVO") {
+                    Note("AVO puede activar este móvil juntándolo con el suyo (AVO Tarjetas): deja esta app abierta, el móvil " +
+                        "desbloqueado y la parte trasera contra la del otro móvil. La licencia se firma solo para este móvil " +
+                        "y también queda guardada tu identidad AVO.")
+                }
+            }
+            item {
                 AvoCard("Activar con un archivo de licencia") {
                     Note("Si no puedes llevar tu tarjeta para renovarla, AVO te puede enviar un archivo de licencia por WhatsApp o email. " +
                         "Solo funciona en el móvil que ya conoce tu tarjeta.")

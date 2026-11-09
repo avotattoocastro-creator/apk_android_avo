@@ -29,4 +29,20 @@ object LicenseIssuer {
             ByteArray(4).also(random::nextBytes), if (remote) LicenseToken.FLAG_REMOTE else 0, LicenseRole.toBits(roles))
         return LicenseCrypto.sign(unsigned, pair.private, pair.public)
     }
+
+    /**
+     * Licence for ONE phone, issued during «Activar móvil por NFC» ([NfcActivation]): the UID field carries the
+     * phone's [deviceId] and [LicenseToken.FLAG_DEVICE] is set, so it is only accepted by that phone.
+     */
+    fun issueForDevice(pair: KeyPair, deviceId: ByteArray, userCode: String, nowMs: Long, lastDay: LocalDate, zone: ZoneId,
+                       roles: Set<LicenseRole>, random: SecureRandom = SecureRandom()): LicenseToken {
+        require(roles.isNotEmpty()) { "Marca al menos un rol" }
+        require(deviceId.size in 1..LicenseToken.MAX_UID) { "Id de móvil no válido" }
+        val expires = expiryForLastDay(lastDay, zone)
+        val issued = nowMs / 1000
+        require(expires > issued) { "La fecha de activación ya ha pasado" }
+        val unsigned = LicenseToken.unsigned(LicenseCrypto.keyId(pair.public), deviceId, userCode, issued, expires,
+            ByteArray(4).also(random::nextBytes), LicenseToken.FLAG_DEVICE, LicenseRole.toBits(roles))
+        return LicenseCrypto.sign(unsigned, pair.private, pair.public)
+    }
 }

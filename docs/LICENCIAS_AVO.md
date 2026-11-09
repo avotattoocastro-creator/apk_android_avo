@@ -1,6 +1,6 @@
 # Licencias de AVO Performance Horse (tarjeta NFC y archivo)
 
-App Android **2.5-roles-dev1** · AVO Tarjetas **1.3-registro-dev1** · rama `feature/avo-license-nfc` · 27/10/2026.
+App Android **2.5-roles-dev2** · AVO Tarjetas **1.4-nfc-movil-dev1** · rama `feature/avo-license-nfc` · 09/11/2026.
 Estado: implementado, núcleo probado en JVM (34 pruebas), **NO VERIFICADO** en teléfono ni con tarjetas reales.
 
 ## Qué hace
@@ -55,6 +55,25 @@ Con cualquier licencia activa se pueden ver siempre los entrenamientos, el anál
   - El aviso «COPIA PENDIENTE» aparece cuando hay cambios posteriores a la última copia.
 - **Actualizar sin desinstalar:** AVO Tarjetas se firma con la misma clave estable que la app. El CI lo comprueba con `apksigner` en cada compilación y falla si las firmas no coinciden.
   - Si alguna vez hubiera que desinstalarla, se borran la clave y el registro del móvil. Se recuperan con la copia completa.
+
+## Activar un móvil por NFC con AVO Tarjetas (1.4)
+
+AVO Tarjetas puede hacer de **tarjeta NFC** (emulación de tarjeta de Android, HCE) para activar la app AVO de otro móvil sin tarjeta física.
+
+1. En AVO Tarjetas, toca el usuario → **ACTIVAR SU MÓVIL POR NFC (SIN TARJETA)**, elige roles y fecha y pulsa **Preparar**.
+2. Durante 2 minutos, junta la parte de atrás de los dos móviles. El del usuario debe tener la app AVO abierta y los dos deben estar desbloqueados.
+3. La app AVO recibe:
+   - la **identidad AVO** del usuario (código, nombre y clave, como al acercar su tarjeta), que sirve también para abrir después archivos de licencia;
+   - una **licencia firmada en ese momento para ese móvil**: en el campo UID va el **id del móvil** (SHA-256 del Android ID de la app y del paquete, 10 bytes) y la marca `FLAG_DEVICE` (0x02).
+4. AVO Tarjetas guarda en el historial «Licencia en móvil por NFC · móvil XXXXXXXX» y actualiza la licencia del usuario.
+
+Seguridad:
+- La licencia **solo vale en ese móvil**: otro móvil tiene otro id y la rechaza («es de otro móvil (copia)»). Tampoco vale grabada en una tarjeta ni como archivo.
+- AVO Tarjetas **solo responde mientras está preparado** (una activación, 2 minutos) y con la pantalla desbloqueada (`requireDeviceUnlock`). Mientras espera, deja de leer tarjetas para poder hacer de tarjeta.
+- El id del móvil se mantiene si se reinstala la app (misma firma). Si se restablece el móvil de fábrica, cambia: hay que activarlo de nuevo.
+- Un iPhone o un iPad no pueden hacer de tarjeta ni el iPad leerla (no tiene NFC): esto es solo entre móviles Android.
+
+Protocolo (APDU ISO 7816, AID propio `F041564F4C494301`): SELECT → «AVOA» + versión + preparado; ACTIVATE `80 10` con el id del móvil → longitud; READ `80 12` por trozos de 240 bytes → «AVOA» | ver | URI de la tarjeta de usuario | licencia. Código: `core/.../license/NfcActivation.kt` (pruebas en `NfcActivationTest.kt`), `cards/.../PhoneActivation.kt` (servicio `AvoHceService`), `app/.../MainActivity.kt` (`onPhoneCard`).
 
 ## Seguridad
 
@@ -115,6 +134,8 @@ Con cualquier licencia activa se pueden ver siempre los entrenamientos, el anál
   - `cards/`.
 
 ## Pendiente de verificar en teléfono
+
+0. **Activar móvil por NFC (1.4):** dos Android con NFC; preparar en AVO Tarjetas, juntar con la app AVO abierta, comprobar «Licencia activada» e identidad; repetir con otro móvil y comprobar que la licencia del primero no sirve; probar «Cancelar» y el tiempo agotado; comprobar que AVO Tarjetas vuelve a leer tarjetas después.
 
 1. Generar la clave, exportar e importar la copia en otro móvil.
 2. Compilar con la variable y comprobar que la app pide la licencia.

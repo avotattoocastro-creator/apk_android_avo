@@ -108,6 +108,7 @@ object LicensePolicy {
         if (tokenBytes == null) return ActivationResult.Refused("Esta tarjeta no lleva licencia de la app")
         val token = decodeOrNull(tokenBytes) ?: return ActivationResult.Refused("Licencia dañada")
         if (!verifySignature(token, trusted)) return ActivationResult.Refused("Licencia no válida: firma incorrecta o emitida por otra clave")
+        if (token.isDeviceBound) return ActivationResult.Refused("Licencia no válida: es de un móvil, no de una tarjeta (copia)")
         if (tagUid == null || !tagUid.contentEquals(token.uid)) return ActivationResult.Refused("Licencia no válida: no pertenece a esta tarjeta (copia)")
         if (userCode != null && userCode != token.userCode) return ActivationResult.Refused("Licencia no válida: no corresponde al usuario de la tarjeta")
         return accept(token, userName, trusted, current, clock)
@@ -123,9 +124,26 @@ object LicensePolicy {
     ): ActivationResult {
         if (trusted.isEmpty()) return ActivationResult.Refused("Esta versión de la app no tiene licencias configuradas")
         val token = decodeOrNull(tokenBytes) ?: return ActivationResult.Refused("Licencia dañada")
-        if (!token.isRemote) return ActivationResult.Refused("Licencia no válida para activar por archivo")
+        if (!token.isRemote || token.isDeviceBound) return ActivationResult.Refused("Licencia no válida para activar por archivo")
         if (!verifySignature(token, trusted)) return ActivationResult.Refused("Licencia no válida: firma incorrecta o emitida por otra clave")
         if (token.userCode != identityCode) return ActivationResult.Refused("Licencia no válida: es de otro usuario")
+        return accept(token, userName, trusted, current, clock)
+    }
+
+    /**
+     * Licence received from AVO Tarjetas over NFC ([NfcActivation]): it must be signed for THIS phone
+     * ([LicenseToken.FLAG_DEVICE] and uid = [deviceId]) and belong to the user card received with it ([userCode]).
+     */
+    fun activateOnDevice(
+        tokenBytes: ByteArray, deviceId: ByteArray, userCode: String, userName: String,
+        trusted: List<PublicKey>, current: StoredLicense?, clock: ClockReading,
+    ): ActivationResult {
+        if (trusted.isEmpty()) return ActivationResult.Refused("Esta versión de la app no tiene licencias configuradas")
+        val token = decodeOrNull(tokenBytes) ?: return ActivationResult.Refused("Licencia dañada")
+        if (!verifySignature(token, trusted)) return ActivationResult.Refused("Licencia no válida: firma incorrecta o emitida por otra clave")
+        if (!token.isDeviceBound) return ActivationResult.Refused("Licencia no válida para activar un móvil")
+        if (!token.uid.contentEquals(deviceId)) return ActivationResult.Refused("Licencia no válida: es de otro móvil (copia)")
+        if (token.userCode != userCode) return ActivationResult.Refused("Licencia no válida: no corresponde al usuario recibido")
         return accept(token, userName, trusted, current, clock)
     }
 

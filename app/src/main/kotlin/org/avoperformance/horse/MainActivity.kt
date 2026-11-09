@@ -117,6 +117,8 @@ class MainActivity : ComponentActivity() {
             lastNfcRead = now
             lifecycleScope.launch {
                 try {
+                    // AVO Tarjetas on another phone acting as the user's card («Activar móvil por NFC», HCE / IsoDep)
+                    if (Ndef.get(tag) == null && android.nfc.tech.IsoDep.get(tag) != null) { onPhoneCard(tag); return@launch }
                     val msg = withContext(Dispatchers.IO) {
                         val ndef = Ndef.get(tag) ?: return@withContext null
                         ndef.connect()
@@ -212,6 +214,39 @@ class MainActivity : ComponentActivity() {
         org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "tarjeta AVO")
         val text = listOfNotNull(licText, idText).joinToString("\n")
         runOnUiThread { android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show() }
+    }
+
+    /**
+     * The tapped "card" is a phone: if it is AVO Tarjetas with an activation armed, this phone receives the user card
+     * (adopted as identity like a real card) and a licence signed for THIS phone. Anything else is ignored silently.
+     */
+    private suspend fun onPhoneCard(tag: android.nfc.Tag) {
+        val c = (application as AvoApp).container
+        val outcome = withContext(Dispatchers.IO) {
+            val iso = android.nfc.tech.IsoDep.get(tag) ?: return@withContext org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo
+            try {
+                iso.connect()
+                iso.timeout = 3000
+                org.avoperformance.horse.core.license.NfcActivation.read({ iso.transceive(it) }, c.license.deviceId)
+            } catch (e: Exception) {
+                org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo
+            } finally { runCatching { iso.close() } }
+        }
+        val text = when (outcome) {
+            org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo -> return
+            org.avoperformance.horse.core.license.NfcActivation.Outcome.NotArmed ->
+                "AVO Tarjetas: pulsa «Activar su móvil por NFC» en el usuario y vuelve a juntar los móviles"
+            is org.avoperformance.horse.core.license.NfcActivation.Outcome.Failed -> "Activación NFC: ${outcome.reason}"
+            is org.avoperformance.horse.core.license.NfcActivation.Outcome.Received -> {
+                val r = outcome.result
+                val idText = try { c.identity.message(c.identity.onCardTapped(r.card.toUri())) } catch (e: Exception) { null }
+                val licText = runCatching { c.license.activateFromPhone(r) }.getOrElse { "Licencia: ${it.message}" }
+                org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "activación NFC")
+                listOfNotNull(licText, idText).joinToString("\n")
+            }
+        }
+        android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show()
+        if (outcome is org.avoperformance.horse.core.license.NfcActivation.Outcome.Received) openLicense = true
     }
 
     /** A licence file (.avolic) opened from WhatsApp/email: activated here instead of being imported as a training. */

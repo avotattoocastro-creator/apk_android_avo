@@ -31,6 +31,7 @@ data class RegEvent(val ms: Long, val code: String, val kind: Kind, val rolesBit
     enum class Kind(val label: String) {
         ALTA("Alta"), TARJETA("Licencia en tarjeta"), ARCHIVO("Licencia por archivo"), COPIA("Copia de tarjeta"),
         BAJA("Baja"), REACTIVADA("Reactivada"), EDITADO("Datos editados"), IMPORTADA("Añadida desde una tarjeta"),
+        MOVIL("Licencia en móvil por NFC"),
     }
 }
 
