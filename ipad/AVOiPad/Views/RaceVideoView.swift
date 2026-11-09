@@ -98,7 +98,16 @@ struct RaceVideoView: View {
             Toggle("½ velocidad", isOn: $model.slow)
                 .toggleStyle(.button)
                 .disabled(model.running)
+            Toggle("Pausa automática", isOn: $model.autoPause)
+                .toggleStyle(.button)
             if model.running {
+                if model.paused {
+                    Button { model.resume() } label: { Label("Continuar", systemImage: "play.fill") }
+                        .buttonStyle(.avoPrimary)
+                } else {
+                    Button { model.pause(waiting: false) } label: { Label("Pausar", systemImage: "pause.fill") }
+                        .buttonStyle(.avoSecondary)
+                }
                 Button { model.finishNow() } label: { Label("Detener y calcular", systemImage: "stop.fill") }
                     .buttonStyle(.avoSecondary)
             } else {
@@ -139,6 +148,7 @@ private struct PlayerLayerView: UIViewRepresentable {
 
 private struct RaceVideoStage: View {
     @Bindable var model: RaceVideoModel
+    @State private var stroke: [CGPoint] = []
 
     var body: some View {
         GeometryReader { (geo: GeometryProxy) in
@@ -159,6 +169,11 @@ private struct RaceVideoStage: View {
                                       y: max(10, rect.minY + (t.minY / model.frameSize.height) * rect.height - 12))
                     }
                 }
+                if stroke.count > 1 {
+                    Path { (p: inout Path) in p.addLines(stroke) }
+                        .stroke(Avo.red, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                }
+                if model.waitingSelection { selectionBanner }
                 if !model.hasVideo {
                     VStack(spacing: 8) {
                         Image(systemName: "video.slash").font(.largeTitle).foregroundStyle(Avo.textDim)
@@ -168,14 +183,68 @@ private struct RaceVideoStage: View {
                 }
             }
             .contentShape(Rectangle())
-            .onTapGesture(coordinateSpace: .local) { (p: CGPoint) in
-                let r: CGRect = fit(model.frameSize.width > 0 ? model.frameSize : CGSize(width: 16, height: 9), geo.size)
-                guard r.contains(p) else { return }
-                model.tapVideo(CGPoint(x: (p.x - r.minX) / r.width, y: (p.y - r.minY) / r.height))
-            }
+            // circle (or box) the horse with the Pencil or a finger: the video pauses and the drawn area is followed
+            .gesture(
+                DragGesture(minimumDistance: 4, coordinateSpace: .local)
+                    .onChanged { (v: DragGesture.Value) in
+                        if stroke.isEmpty {
+                            stroke = [v.startLocation]
+                            if model.running && !model.paused { model.pause(waiting: true) }
+                        }
+                        stroke.append(v.location)
+                    }
+                    .onEnded { (_: DragGesture.Value) in
+                        let pts: [CGPoint] = stroke
+                        stroke = []
+                        let r: CGRect = fit(model.frameSize.width > 0 ? model.frameSize : CGSize(width: 16, height: 9), geo.size)
+                        guard let n = RaceVideoStage.normalizedBounds(pts, in: r) else { return }
+                        model.selectBox(n)
+                    }
+            )
+            .simultaneousGesture(
+                SpatialTapGesture(coordinateSpace: .local).onEnded { (v: SpatialTapGesture.Value) in
+                    let p: CGPoint = v.location
+                    let r: CGRect = fit(model.frameSize.width > 0 ? model.frameSize : CGSize(width: 16, height: 9), geo.size)
+                    guard r.contains(p) else { return }
+                    model.tapVideo(CGPoint(x: (p.x - r.minX) / r.width, y: (p.y - r.minY) / r.height))
+                }
+            )
         }
         .background(Color.black)
         .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private var selectionBanner: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(model.targetBox == nil ? "Rodea a tu caballo con el Pencil o el dedo" : "Caballo marcado")
+                .font(.headline).foregroundStyle(.white)
+            Text(model.trackStatus).font(.footnote).foregroundStyle(.white.opacity(0.85)).fixedSize(horizontal: false, vertical: true)
+            HStack(spacing: 8) {
+                Button { model.resume() } label: { Label("Continuar", systemImage: "play.fill") }
+                    .buttonStyle(.avoPrimary)
+                    .disabled(model.targetBox == nil)
+                Button { model.skipUntilCut() } label: { Label("No se ve: seguir", systemImage: "forward.fill") }
+                    .buttonStyle(.avoSecondary)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: 520, alignment: .leading)
+        .background(Color.black.opacity(0.72), in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.red, lineWidth: 1))
+        .padding(12)
+    }
+
+    /// Bounding box of the stroke inside the video rectangle, normalised 0…1 (top-left origin).
+    static func normalizedBounds(_ pts: [CGPoint], in r: CGRect) -> CGRect? {
+        guard pts.count >= 2, r.width > 0, r.height > 0 else { return nil }
+        var minX: CGFloat = .greatestFiniteMagnitude, minY: CGFloat = .greatestFiniteMagnitude
+        var maxX: CGFloat = -.greatestFiniteMagnitude, maxY: CGFloat = -.greatestFiniteMagnitude
+        for p in pts {
+            minX = min(minX, p.x); minY = min(minY, p.y); maxX = max(maxX, p.x); maxY = max(maxY, p.y)
+        }
+        let a: CGRect = CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY).intersection(r)
+        if a.isNull || a.width < 8 || a.height < 8 { return nil }
+        return CGRect(x: (a.minX - r.minX) / r.width, y: (a.minY - r.minY) / r.height, width: a.width / r.width, height: a.height / r.height)
     }
 
     private func fit(_ video: CGSize, _ box: CGSize) -> CGRect {
@@ -210,7 +279,7 @@ private struct RaceVideoProgress: View {
             if !model.trackStatus.isEmpty {
                 Text(model.trackStatus).font(.footnote).foregroundStyle(Avo.cyan).fixedSize(horizontal: false, vertical: true)
             }
-            Text("Toca a tu jinete en el vídeo si la app no lo encuentra o sigue a otro: aprende sus colores y lo vuelve a buscar tras cada cambio de cámara.")
+            Text("Rodea a tu caballo con el Pencil o el dedo (el vídeo se pausa) y pulsa «Continuar». Si lo pierde en un cambio de cámara, el vídeo se pausa solo para que lo vuelvas a marcar; con «No se ve» sigue sin él hasta el siguiente cambio.")
                 .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
     }

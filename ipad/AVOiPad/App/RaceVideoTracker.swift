@@ -172,7 +172,8 @@ final class RaceVideoTracker {
             tap = nil
         } else if let tg = target, detected {
             // re-anchor the tracker on the matching detection (keeps the box the size of a jockey)
-            if let m = others.max(by: { RaceVideoTracker.iou($0, tg) < RaceVideoTracker.iou($1, tg) }), RaceVideoTracker.iou(m, tg) > 0.3 {
+            if let m = others.max(by: { RaceVideoTracker.iou($0, tg) < RaceVideoTracker.iou($1, tg) }), RaceVideoTracker.iou(m, tg) > 0.3,
+               m.height / max(tg.height, 1) > 0.7, m.height / max(tg.height, 1) < 1.4 {
                 startTracking(m, pb, size)
             }
         } else if target == nil && detected && !silk.isEmpty && !others.isEmpty {
@@ -199,6 +200,26 @@ final class RaceVideoTracker {
                                      x: tg.map { Double($0.midX) }, y: tg.map { Double($0.midY) }, h: tg.map { Double($0.height) },
                                      others: otherCenters, frameW: w)
         return RaceVideoFrameResult(sample: sample, target: tg, others: detected ? others : lastOthers, frameSize: size, status: status)
+    }
+
+    /// Box drawn by the trainer on the paused frame (normalised, top-left origin): follow it from now on. When a jockey is
+    /// detected inside the drawn area, the jockey box is used (same size reference as the automatic search).
+    func select(_ n: CGRect) -> CGRect? {
+        guard let pb = prev else { return nil }
+        let w: Double = Double(CVPixelBufferGetWidth(pb))
+        let h: Double = Double(CVPixelBufferGetHeight(pb))
+        let size = CGSize(width: w, height: h)
+        let drawn = CGRect(x: n.minX * w, y: n.minY * h, width: n.width * w, height: n.height * h)
+        if drawn.width < 6 || drawn.height < 6 { return nil }
+        var box: CGRect = drawn
+        let inside: [CGRect] = RaceVideoTracker.detectJockeys(pb, size).filter { (j: CGRect) -> Bool in
+            drawn.contains(CGPoint(x: j.midX, y: j.midY))
+        }
+        if let j = inside.max(by: { ($0.width * $0.height) < ($1.width * $1.height) }) { box = j }
+        startTracking(box, pb, size)
+        silk = RaceVideoTracker.signature(pb, box)
+        learned = true
+        return box
     }
 
     private func startTracking(_ r: CGRect, _ pb: CVPixelBuffer, _ size: CGSize) {

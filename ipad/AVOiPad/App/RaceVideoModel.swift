@@ -62,6 +62,14 @@ final class RaceVideoModel {
     var frameSize: CGSize = .zero
     var targetBox: CGRect? = nil
     var otherBoxes: [CGRect] = []
+    /// Video paused by the trainer or by the app (camera change without our horse).
+    var paused: Bool = false
+    /// Paused waiting for the trainer to mark the horse (circle it with the Pencil or a finger).
+    var waitingSelection: Bool = false
+    /// Pause on its own when the horse is lost after a camera change (trainer's request 09/11/2026).
+    var autoPause: Bool = true
+    @ObservationIgnored private var lostFrames: Int = 0
+    @ObservationIgnored private var suppressUntilCut: Bool = false
 
     // data of the race (prefilled from the page, editable)
     var runners: [RaceVideoRunner] = []
@@ -194,13 +202,23 @@ final class RaceVideoModel {
         targetBox = nil
         otherBoxes = []
         let item = AVPlayerItem(asset: asset)
-        let out = AVPlayerItemVideoOutput(pixelBufferAttributes: [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)])
-        item.add(out)
         let p = AVPlayer(playerItem: item)
         p.isMuted = true
         p.actionAtItemEnd = .pause
         player = p
-        output = out
+        output = nil
+        paused = false
+        waitingSelection = false
+        // frames analysed at ≤ 960 px wide (a full-resolution iPad screen recording was far too slow for Vision)
+        Task { @MainActor [weak self] in
+            for _ in 0..<100 {
+                if item.status == .readyToPlay && item.presentationSize.width > 0 { break }
+                if item.status == .failed { break }
+                try? await Task.sleep(nanoseconds: 100_000_000)
+            }
+            guard let self = self, self.player?.currentItem === item, self.output == nil else { return }
+            self.attachOutput(item)
+        }
         playerVersion += 1
         sourceLabel = label
         status = "Vídeo cargado. Pulsa «Analizar automáticamente»."
@@ -208,6 +226,63 @@ final class RaceVideoModel {
     }
 
     var hasVideo: Bool { player != nil }
+
+    private func attachOutput(_ item: AVPlayerItem) {
+        var attrs: [String: Any] = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
+        let s: CGSize = item.presentationSize
+        if s.width > 960 && s.height > 0 {
+            let w: Int = 960
+            let h: Int = Int((Double(s.height) * 960 / Double(s.width) / 2).rounded()) * 2
+            attrs[kCVPixelBufferWidthKey as String] = w
+            attrs[kCVPixelBufferHeightKey as String] = h
+        }
+        let out = AVPlayerItemVideoOutput(pixelBufferAttributes: attrs)
+        item.add(out)
+        output = out
+    }
+
+    // ---------------------------------------------------------------- pause / mark the horse
+    func pause(waiting: Bool) {
+        guard running else { return }
+        player?.pause()
+        paused = true
+        if waiting { waitingSelection = true }
+    }
+
+    func resume() {
+        guard running else { return }
+        paused = false
+        waitingSelection = false
+        lostFrames = 0
+        player?.playImmediately(atRate: slow ? 0.5 : 1.0)
+    }
+
+    /// «No se ve: seguir»: continue without the horse until the next camera change.
+    func skipUntilCut() {
+        suppressUntilCut = true
+        trackStatus = "Sigo sin tu caballo hasta el próximo cambio de cámara."
+        resume()
+    }
+
+    /// Box drawn around the horse (normalised 0…1, top-left origin) on the paused frame.
+    func selectBox(_ n: CGRect) {
+        if running && !paused { pause(waiting: true) }
+        let tr: RaceVideoTracker = tracker
+        queue.async { [weak self] in
+            let r: CGRect? = tr.select(n)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                if let b = r {
+                    self.targetBox = b
+                    self.lostFrames = 0
+                    self.suppressUntilCut = false
+                    self.trackStatus = self.running ? "Caballo marcado. Pulsa «Continuar»." : "Caballo marcado. Pulsa «Analizar automáticamente»."
+                } else {
+                    self.trackStatus = "No hay imagen para marcar todavía: pulsa «Analizar automáticamente» y pausa el vídeo."
+                }
+            }
+        }
+    }
 
     // ---------------------------------------------------------------- analysis run
     func start() {
@@ -221,6 +296,11 @@ final class RaceVideoModel {
         sampleCount = 0
         foundCount = 0
         lastTime = -1
+        lostFrames = 0
+        suppressUntilCut = false
+        paused = false
+        waitingSelection = false
+        if output == nil { attachOutput(item) }
         p.seek(to: .zero, toleranceBefore: .zero, toleranceAfter: .zero)
         running = true
         status = "Analizando el vídeo…"
@@ -233,6 +313,8 @@ final class RaceVideoModel {
     func stop() {
         timer?.invalidate()
         timer = nil
+        paused = false
+        waitingSelection = false
         if running {
             running = false
             player?.pause()
@@ -284,10 +366,24 @@ final class RaceVideoModel {
         targetBox = r.target
         otherBoxes = r.others
         if !r.status.isEmpty { trackStatus = r.status }
+        // automatic pause: horse not found for ~0,4 s (start of the video or after a camera change)
+        if r.sample.cut { suppressUntilCut = false }
+        if r.target != nil {
+            lostFrames = 0
+        } else {
+            lostFrames += 1
+            if running && !paused && autoPause && !suppressUntilCut && lostFrames >= 6 {
+                pause(waiting: true)
+                trackStatus = foundCount == 0
+                    ? "Vídeo en pausa: rodea a tu caballo con el Pencil (o el dedo) y pulsa «Continuar»."
+                    : "Cambio de cámara: no encuentro a tu caballo. Rodéalo con el Pencil y pulsa «Continuar», o «No se ve» si no aparece."
+            }
+        }
     }
 
     /// Trainer taps the video (normalised point, top-left origin): choose / correct our jockey.
     func tapVideo(_ p: CGPoint) {
+        if running && paused { return }      // paused: the horse is marked by circling it (buttons of the banner are taps too)
         let tr: RaceVideoTracker = tracker
         queue.async { tr.tap = p }
         trackStatus = "Buscando el jinete que has tocado…"

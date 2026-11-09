@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — iPad — Vídeo de carrera: marcar el caballo con el Pencil y pausa automática
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (prueba del entrenador 11:55: «se vuelve loco buscando»):**
+- Rodear el caballo con el Pencil o el dedo pausa el vídeo y sigue esa zona (si dentro hay un jinete detectado, se usa su recuadro). Botones «Pausar» / «Continuar».
+- Pausa automática (activada por defecto): si al empezar o tras un cambio de cámara no encuentra el caballo en ~6 fotogramas, el vídeo se para y pide marcarlo; «No se ve: seguir» continúa sin él hasta el siguiente cambio de cámara.
+- Fotogramas analizados a 960 px de ancho (una grabación de pantalla del iPad a resolución completa solo dejó analizar 14 fotogramas).
+- El reanclaje del seguimiento a un jinete detectado solo se hace si el tamaño es parecido (evita saltos de escala).
+**Archivos:** `App/RaceVideoTracker.swift`, `App/RaceVideoModel.swift`, `Views/RaceVideoView.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-09 — iPad — Reloj: «internal error» del Wi-Fi y cortes de Bluetooth durante la descarga
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia (captura 11:43, pecho 3.7.7):**
