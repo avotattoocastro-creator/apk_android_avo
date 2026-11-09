@@ -170,7 +170,7 @@ class AvoWifiSyncManager(
         }
     }
 
-    val coordinator = WifiSyncCoordinator(control, connector, { id -> File(trainingsDir(), id) }, sink) { log.i("WIFI", it) }
+    val coordinator = WifiSyncCoordinator(control, connector, { id -> File(trainingsDir(), id) }, sink, log = { log.i("WIFI", it) })
     val progress get() = coordinator.progress
 
     /** One pass (only one at a time). NTRIP to the watch in pause while it lasts. */
