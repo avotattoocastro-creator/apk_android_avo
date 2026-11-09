@@ -118,7 +118,7 @@ patch(WS,
       '    if (sys::nvs_get_u32("wifi_off", &off) && off && (!have_fw || strcmp(fw, AVO_FW_VERSION) != 0)) {\n'
       '      sys::nvs_set_u32("wifi_off", 0);\n'
       '      bb::log(BbCode::SHUTDOWN, 0, 0x57, 0x0FF0, "wifi: old block cleared (new firmware)");\n'
-      '      Serial.printf("[AVO WIFI] Wi-Fi block left by firmware %s cleared: Wi-Fi enabled again\\n", have_fw ? fw : "< 3.7.7");\n'
+      '      Serial.printf("[AVO WIFI] Wi-Fi block left by firmware %s cleared: Wi-Fi enabled again\\n", have_fw ? fw : "(older than 3.7.7, unrecorded)");\n'
       '    }\n'
       '  }\n'
       '  uint32_t tried = 0;\n'

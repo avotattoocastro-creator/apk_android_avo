@@ -169,7 +169,8 @@ jobs:
           import re
           hits = [m.start() for m in re.finditer(rb'(?<![0-9.])3\.7\.7\x00', b)]
           for i in hits[:4]: print('3.7.7 at', i, b[max(0, i - 24):i + 40])
-          assert hits and b.find(b'AVO-CHEST') >= 0, 'AVO version string 3.7.7 missing'
+          # the updater identifies the image by the version string next to AVO-CHEST (same check as 3.7.6)
+          assert any(0 < b.find(b'AVO-CHEST\x00', i) - i < 32 for i in hits), 'AVO version string 3.7.7 missing'
           assert not re.search(rb'(?<![0-9.])3\.7\.6\x00', b), 'old version string 3.7.6 still in the image'
           for marker in (b'baliza de despertar cada 100 ms', b'back sleep sent', b'old block cleared (new firmware)'):
               assert b.find(marker) >= 0, f'3.7.7 marker missing: {marker}'
