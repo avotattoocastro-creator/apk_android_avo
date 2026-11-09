@@ -342,6 +342,21 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
 
+## V3.14.2 — sin pecho, GPS cortado con el Pololu como en el modo carga (2026-11-09)
+Petición del usuario tras ver el LED blanco encendido con la 3.14.0: «cuando se desconecta el pecho tiene que cortar la
+corriente del GPS con el Pololu como hace cuando se pone en modo carga».
+- Con la orden `BACK_SLEEP` o tras 90 s sin pecho, la espalda entra en **modo espera** (`chest_wait_mode`), con los mismos
+  pasos que `usb_charge_mode()` de la 3.13.11 (el que sí apaga el GPS): UART del ZED cerrada, GPIO33/35 en alta impedancia
+  y **GPIO34 OUTPUT LOW de forma activa**, además de `gpio_hold`. Radio apagada.
+- **Sin sueño profundo** (era lo que dejaba el GPS encendido en la 3.14.0/3.14.1): sueño **ligero** entre escuchas, que
+  conserva la CPU, la RAM y las salidas. Cada 10 s escucha 160 ms; si oye a su pecho, libera GPIO34 (Pololu encendido),
+  espera 1,5 s y reinicia limpio, igual que al quitar el USB.
+- Batería < 3,30 V: deja de escuchar y mide cada 5 min.
+- Monitor: `POLOLU APAGADO — ESPERANDO AL PECHO`, `[ESPERA] N s esperando al pecho…` cada minuto y
+  `[ESPERA] pecho oido… reinicio limpio`.
+- Consumo estimado sin medir: 1,5–3 mA (sueño ligero ~0,3–1 mA + escuchas).
+- El sueño profundo (y el cambio de VDD_SPI de la 3.14.1) queda solo para la batería agotada al arrancar.
+
 ## V3.14.1 — VDD_SPI encendido en el sueño (2026-11-09)
 Prueba del usuario con la 3.14.0: con el pecho apagado, el **LED blanco de la espalda seguía encendido**. Ese LED está en
 GPIO35, la línea TX del ZED: encendido = el ZED tiene corriente (o la espalda no llegó a dormirse).

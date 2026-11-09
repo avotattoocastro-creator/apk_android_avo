@@ -1,4 +1,4 @@
-/* AVO PERFORMANCE HORSE — BACK V3.14.1 (ESP-NOW) · V3.14.1: GPS really OFF while asleep: GPIO33–37 are in the VDD_SPI power domain of the ESP32-S3, which deep sleep switched off, so GPIO34 could not hold the Pololu SHDN LOW (its pull-up switched the ZED back on: white LED lit on GPIO35 with the chest off). VDD_SPI is now kept on in deep sleep · V3.14.0: SLEEP WHILE THE CHEST IS OFF: deep sleep (GPS at 0 V, radio off) when the chest says it is switching off (BACK_SLEEP, chest >= 3.7.7) or after 90 s without hearing the paired chest; wakes every 10 s, listens 160 ms on the ESP-NOW channel and starts only when its own chest is heard (chest >= 3.7.7 sends a short packet every 100 ms while it has no back); USB charging unchanged · V3.13.12: NAV-SAT/SIG watchdog · V3.13.11: V3.13.11: REAL Pololu shutdown on USB (AVO_USB_AUTO_OFF 1): GPIO20 read with an own ADC2 oneshot unit (failed reads = invalid, never 0 V), USB confirmed with >100 mV for 2 s → ZED UART stopped, GPIO33 high impedance, GPIO34 OUTPUT LOW, radio off, awake low-power charging loop (no deep sleep) that keeps SHDN LOW; <50 mV for 2 s → GPIO34 released, 1.5 s, clean restart (UART1 RX35/TX33, GNSS, ESP-NOW) · V3.13.10: USB DIAGNOSTIC by thresholds on GPIO20 (ADC, >100 mV connected, <50 mV disconnected, hysteresis, 2 s confirmation), GPIO7 (ADC1) measured alongside; automatic GPS shutdown DISABLED (AVO_USB_AUTO_OFF 0): transitions are only logged · V3.13.9: Pololu (VIN on the Heltec 3V3) enabled by leaving GPIO34 in high impedance (its own pull-up), disabled with GPIO34 OUTPUT LOW; never driven HIGH. USB confirmed on GPIO20 (2 s of HIGH readings) → GNSS and RTCM stop, GPIO34 LOW, deep sleep while charging; USB removed → GPIO34 released, UART1 RX35/TX33 restarted, times to first UBX / NAV-PVT logged · V3.13.8: GPS UART PIN FIX: UART1 RX=GPIO35 (green wire, ZED TX) and TX=GPIO33 (white wire, ZED RX) per the confirmed wiring; GPIO35 never driven (no LED use, not held LOW while asleep); USB sensed only by GPIO20 as a filtered digital input (no ADC2); monitor lines GNSS bytes/UBX/NMEA/NAV-PVT/estado · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
+/* AVO PERFORMANCE HORSE — BACK V3.14.2 (ESP-NOW) · V3.14.2: chest gone (BACK_SLEEP or 90 s) → GPS power cut with the Pololu exactly as in the USB charging mode (GPIO34 actively OUTPUT LOW, ZED UART pins in high impedance), no deep sleep: light sleep between 160 ms listening windows every 10 s; chest heard → Pololu on and clean restart · V3.14.1: GPS really OFF while asleep: GPIO33–37 are in the VDD_SPI power domain of the ESP32-S3, which deep sleep switched off, so GPIO34 could not hold the Pololu SHDN LOW (its pull-up switched the ZED back on: white LED lit on GPIO35 with the chest off). VDD_SPI is now kept on in deep sleep · V3.14.0: SLEEP WHILE THE CHEST IS OFF: deep sleep (GPS at 0 V, radio off) when the chest says it is switching off (BACK_SLEEP, chest >= 3.7.7) or after 90 s without hearing the paired chest; wakes every 10 s, listens 160 ms on the ESP-NOW channel and starts only when its own chest is heard (chest >= 3.7.7 sends a short packet every 100 ms while it has no back); USB charging unchanged · V3.13.12: NAV-SAT/SIG watchdog · V3.13.11: V3.13.11: REAL Pololu shutdown on USB (AVO_USB_AUTO_OFF 1): GPIO20 read with an own ADC2 oneshot unit (failed reads = invalid, never 0 V), USB confirmed with >100 mV for 2 s → ZED UART stopped, GPIO33 high impedance, GPIO34 OUTPUT LOW, radio off, awake low-power charging loop (no deep sleep) that keeps SHDN LOW; <50 mV for 2 s → GPIO34 released, 1.5 s, clean restart (UART1 RX35/TX33, GNSS, ESP-NOW) · V3.13.10: USB DIAGNOSTIC by thresholds on GPIO20 (ADC, >100 mV connected, <50 mV disconnected, hysteresis, 2 s confirmation), GPIO7 (ADC1) measured alongside; automatic GPS shutdown DISABLED (AVO_USB_AUTO_OFF 0): transitions are only logged · V3.13.9: Pololu (VIN on the Heltec 3V3) enabled by leaving GPIO34 in high impedance (its own pull-up), disabled with GPIO34 OUTPUT LOW; never driven HIGH. USB confirmed on GPIO20 (2 s of HIGH readings) → GNSS and RTCM stop, GPIO34 LOW, deep sleep while charging; USB removed → GPIO34 released, UART1 RX35/TX33 restarted, times to first UBX / NAV-PVT logged · V3.13.8: GPS UART PIN FIX: UART1 RX=GPIO35 (green wire, ZED TX) and TX=GPIO33 (white wire, ZED RX) per the confirmed wiring; GPIO35 never driven (no LED use, not held LOW while asleep); USB sensed only by GPIO20 as a filtered digital input (no ADC2); monitor lines GNSS bytes/UBX/NMEA/NAV-PVT/estado · V3.13.7: GNSS recovery: fixed pins RX=GPIO33 TX=GPIO35 (no automatic swap), clean power cycle of the ZED through GPIO34 at start-up, passive listening at every baud rate before any command, ESP-NOW started after that diagnosis, no UBX-RXM-PMREQ before sleeping (the Pololu cuts the power), GNSS bytes/s, UBX, NMEA, NAV-PVT and GPIO34 in the monitor · V3.13.6: ZED UART pins swapped automatically (GPIO33/35) when nothing arrives from the ZED for 10 s; the working order is kept in NVS · V3.13.5: USB divider found on any free pin of the 5V row (GPIO20, 18, 21, 19, 47, 48; GPIO20 read 0.17 V = not wired there on the user's board) and the level of every candidate printed at start-up · V3.13.4: GPIO20 also read with the ADC, USB = more than 1.0 V (the digital input needs ~2.5 V and read LOW on the user's board); a failed ADC read (radio busy) is ignored · V3.13.3: low-battery cut-off (below 3.30 V at rest, before the radio starts: deep sleep, ZED off, retried every 60 s, back above 3.45 V; the user's board was at 2.95 V and reset by brown-out every time Wi-Fi started); USB sensed ONLY on GPIO20 (digital, pull-down); the GPIO7 ADC reading floated when nothing was wired there (analogRead drops the pull-down) and woke / slept the board at random; GPIO20 no longer held during sleep · V3.13.2: USB sense also on GPIO20 (next to the 5V pin; digital, divider 10k/22k), GPIO7 kept · V3.13.1: USB charging sleep checked with the ADC every 3 s (timer wake-up) instead of a GPIO level wake-up (woke after 1 s on the user's board); reset and wake-up reasons printed · V3.13.0: Pololu S7V8F3 SHDN on GPIO34 (between the ZED TX and RX pins of the header); USB charging: with USB 5 V present (divider 5V→GPIO7) everything sleeps and only the battery charges, unplugging wakes it · V3.12.0: pogo contacts (prototype Rev E + Heltec): no Qi, no reed; the vest support bridges the SYS and BAT contacts, so the board only has power on the vest; pairing = 3 quick power-ups (or PRG 3 s) · V3.11.0: ZED powered by a Pololu S7V8F3 from the battery, SHDN on GPIO6 (0 V asleep), reed sleep back on · V3.10.9: reed switch disabled (never sleeps), ZED woken at start-up (UART + EXTINT) · V3.10.8: ZED also woken through its UART RX line (no INT wire needed), line held LOW from the last byte of the backup order · V3.10.7: ZED to software backup (UBX-RXM-PMREQ) while asleep, woken through EXTINT · V3.10.6: white LED (GPIO35) held off while asleep, ZED powered 1 s after start-up · V3.10.5: ZED powered 10 s after start-up (test) · V3.10.4: soft start of Vext (no 3V3 dip when the ZED switches on) · V3.10.3: on/off with the reed of the support (deep sleep, ZED on Vext cut) · V3.10.2: battery saving (CPU 160 MHz, LoRa radio asleep, adaptive ESP-NOW power) · V3.10.0: girth unit (ESP32-C6) hub · V3.9.0: GNSS quality (NAV-SAT/SIG), RTK FIX tracking · V3.8.2: charge mode · V3.8.1: battery voltage sent to the chest
  * BACK V3.8.0 (ESP-NOW) · máxima precisión RTK
  *
  * V3.8.0 sobre V3.5.0 (instalada hasta ahora en la espalda, copia del 23-10-2026):
@@ -627,61 +627,65 @@ static void nap_recv(const uint8_t* mac, const uint8_t* d, int n) {
 }
 #endif
 
-static void nap_sleep(uint32_t s) {
-#if SOC_GPIO_SUPPORT_HOLD_IO_IN_DSLP && !SOC_GPIO_SUPPORT_HOLD_SINGLE_IO_IN_DSLP
-  gpio_deep_sleep_hold_en();
-#endif
-  esp_sleep_enable_timer_wakeup((uint64_t)s * 1000000ULL);
-  deep_sleep_now();                      // V3.14.1: VDD_SPI kept on
-}
-
-static uint16_t nap_battery_mv() {          // same reading as read_battery_mv(), with the divider hold released
-  if (!s_vbat_active_rtc) return 0;
-  const uint8_t act = s_vbat_active_rtc == 2 ? HIGH : LOW;
-  gpio_hold_dis((gpio_num_t)VBAT_CTRL_PIN);
-  pinMode(VBAT_CTRL_PIN, OUTPUT);
-  digitalWrite(VBAT_CTRL_PIN, act);
-  analogSetPinAttenuation(VBAT_PIN, ADC_11db);
-  delayMicroseconds(200);
-  uint32_t acc = 0;
-  for (int i = 0; i < 16; i++) acc += analogReadMilliVolts(VBAT_PIN);
-  digitalWrite(VBAT_CTRL_PIN, !act);
-  gpio_hold_en((gpio_num_t)VBAT_CTRL_PIN);
-  const uint32_t mv = (uint32_t)((acc / 16) * VBAT_DIVIDER);
-  return (mv < 2500 || mv > 4600) ? 0 : (uint16_t)mv;
-}
-
-// Returns only when the back must start normally (its chest was heard, or it has no chest to wait for).
-static void chest_nap_listen() {
-  s_nap_wakes++;
-  if (s_nap_wakes % NAP_BATT_EVERY == 0 || s_nap_low_batt) {
-    const uint16_t mv = nap_battery_mv();
-    s_nap_low_batt = mv && mv < (s_nap_low_batt ? LOW_BATT_RESUME_MV : LOW_BATT_MV);
-  }
-  if (s_nap_low_batt) nap_sleep(NAP_LOW_BATT_S);   // flat battery: do not spend it on listening
-  {
-    Preferences pr;
-    pr.begin("avonow", true);
-    uint8_t b[NOW_PEER_RECORD_LEN];
-    size_t n = pr.getBytes("peer", b, sizeof(b));
-    pr.end();
-    if (!now_peer_deserialize(b, n, &s_wake_peer)) s_wake_peer = NowPeerRecord();
-  }
-  if (!s_wake_peer.valid) { s_chest_nap = false; return; }   // nothing to wait for: normal start (pairing)
+// V3.14.2: CHEST WAIT MODE. User request (09/11/2026): when the chest is gone, cut the GPS power with the Pololu exactly
+// as the USB charging mode does (3.13.11, the one that really switches the ZED off): ZED UART stopped, GPIO33/35 in high
+// impedance and GPIO34 actively driven OUTPUT LOW by a board that does NOT enter deep sleep (3.14.0/3.14.1 used deep
+// sleep and the white LED on the ZED TX line stayed lit: the GPS kept its power). Between listening windows the board is
+// in LIGHT sleep (CPU, RAM and GPIO outputs kept; GPIO34 also held), radio off. Every LISTEN_PERIOD_S (10 s) it listens
+// LISTEN_WINDOW_MS for its chest; when heard: GPIO34 released (Pololu on) and clean restart, as when the USB is removed.
+static void chest_wait_mode(const char* why) {
+  const uint32_t t0 = millis();
+  Serial.printf("\n[ESPERA] t=%lu ms: %s -> GPS SIN CORRIENTE (GPIO34 OUTPUT LOW, como en el modo carga), radio apagada. "
+                "Escucha al pecho %lu ms cada %lu s\n", (unsigned long)t0, why, (unsigned long)LISTEN_WINDOW_MS, (unsigned long)LISTEN_PERIOD_S);
+  // 1-3. exactly as usb_charge_mode(): nothing more to the ZED, UART stopped, its pins in high impedance, Pololu OFF
+  if (s_zed_on) { ZED.flush(); s_zed_on = false; ZED.end(); }
+  gpio_hold_dis((gpio_num_t)ZED_TX_PIN);
+  pinMode(ZED_TX_PIN, INPUT);
+  pinMode(ZED_RX_PIN, INPUT);
+  zed_shdn(false);                                   // GPIO34 OUTPUT LOW (actively driven: the board stays powered)
+  gpio_hold_en((gpio_num_t)ZED_INT_PIN);             // and held through every light sleep
+  // 4. radio off between listening windows
+  if (s_radio_on) { esp_now_deinit(); WiFi.mode(WIFI_OFF); s_radio_on = false; }
   setCpuFrequencyMhz(80);
-  s_wake_heard = false;
-  WiFi.mode(WIFI_STA);
-  esp_wifi_set_ps(WIFI_PS_NONE);
-  esp_wifi_set_channel(NOW_CHANNEL_DEFAULT, WIFI_SECOND_CHAN_NONE);
-  if (esp_now_init() == ESP_OK) {
-    esp_now_register_recv_cb(nap_recv);
-    const uint32_t t0 = millis();
-    while (!s_wake_heard && millis() - t0 < LISTEN_WINDOW_MS) delay(2);
-    esp_now_deinit();
+  s_wake_peer = core->peer();
+  Serial.println("POLOLU APAGADO — ESPERANDO AL PECHO (GPIO34 OUTPUT LOW; la tension de VOUT NO se mide: comprobar con polimetro)");
+  uint32_t wakes = 0;
+  bool low = false;
+  for (;;) {
+    Serial.flush();
+    esp_sleep_enable_timer_wakeup((uint64_t)(low ? NAP_LOW_BATT_S : LISTEN_PERIOD_S) * 1000000ULL);
+    esp_light_sleep_start();                        // GPIO34 stays LOW (output kept + hold)
+    wakes++;
+    if (wakes % NAP_BATT_EVERY == 0 || low) {
+      const uint16_t mv = read_battery_mv();
+      low = mv && mv < (low ? LOW_BATT_RESUME_MV : LOW_BATT_MV);
+      if (low) Serial.printf("[ESPERA] bateria %u mV: deja de escuchar, mide cada %lu s\n", (unsigned)mv, (unsigned long)NAP_LOW_BATT_S);
+    }
+    if (low) continue;                               // flat battery: do not spend it on listening
+    s_wake_heard = false;
+    WiFi.mode(WIFI_STA);
+    esp_wifi_set_ps(WIFI_PS_NONE);
+    esp_wifi_set_channel(NOW_CHANNEL_DEFAULT, WIFI_SECOND_CHAN_NONE);
+    if (esp_now_init() == ESP_OK) {
+      esp_now_register_recv_cb(nap_recv);
+      const uint32_t tl = millis();
+      while (!s_wake_heard && millis() - tl < LISTEN_WINDOW_MS) delay(2);
+      esp_now_deinit();
+    }
+    WiFi.mode(WIFI_OFF);
+    if (s_wake_heard) {
+      Serial.printf("[ESPERA] pecho oido tras %lu escuchas (%lu s esperando): libero GPIO34 (Pololu encendido), 1500 ms y reinicio limpio\n",
+                    (unsigned long)wakes, (unsigned long)((millis() - t0) / 1000));
+      gpio_hold_dis((gpio_num_t)ZED_INT_PIN);
+      zed_shdn(true);
+      delay(1500);
+      Serial.flush();
+      ESP.restart();                                 // GNSS, ESP-NOW, telemetry and RTCM come back as at power-up
+    }
+    if (wakes % 6 == 0)
+      Serial.printf("[ESPERA] %lu s esperando al pecho | GPIO34=OUTPUT LOW | POLOLU APAGADO | bateria %u mV\n",
+                    (unsigned long)((millis() - t0) / 1000), (unsigned)read_battery_mv());
   }
-  WiFi.mode(WIFI_OFF);
-  if (!s_wake_heard) nap_sleep(LISTEN_PERIOD_S);
-  s_chest_nap = false;                       // our chest is on: start as after a power-up
 }
 
 // ------------------------------------------------------------------ setup / loop
@@ -752,10 +756,8 @@ static void gnss_bringup_diag() {
 }
 
 void setup() {
-  // V3.14.0: asleep while the chest is off → listen a moment; back to sleep unless the chest is heard
-  if (s_chest_nap && esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER) chest_nap_listen();
-  const bool woke_by_chest = esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER && s_nap_wakes > 0 && !s_chest_nap;
-  s_chest_nap = false;
+  s_chest_nap = false;   // V3.14.2: the chest wait mode no longer uses deep sleep
+  const bool woke_by_chest = false;
   // V3.13.1: timer wake-up while charging: USB still there → straight back to sleep (holds still on: ZED, LED and
   // radio stay off). Only when the USB is gone does the back start.
   if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER && usb_present()) {
@@ -989,13 +991,13 @@ void loop() {
   }
   core->tick();
   // V3.14.0: sleep while the chest is off
-  if (s_sleep_req) go_to_sleep("el pecho se apaga (orden BACK_SLEEP)", LISTEN_PERIOD_S, true);
+  if (s_sleep_req) chest_wait_mode("el pecho se apaga (orden BACK_SLEEP)");   // V3.14.2
   {
     static uint32_t last_nap_check = 0;
     if (millis() - last_nap_check >= 1000) {
       last_nap_check = millis();
       if (s_chest_policy.should_sleep(millis(), core->paired(), core->stats().last_chest_rx_ms, core->pairing_open() || s_usb_workshop))
-        go_to_sleep("90 s sin ver el pecho", LISTEN_PERIOD_S, true);
+        chest_wait_mode("90 s sin ver el pecho");   // V3.14.2
     }
   }
   // PRG held 3 s -> accept a new chest for 120 s
