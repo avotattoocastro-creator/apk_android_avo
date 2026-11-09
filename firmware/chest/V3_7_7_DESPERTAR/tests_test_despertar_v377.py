@@ -29,7 +29,7 @@ check(fail < sl, 'not sent when the SD close fails (the chest stays on)')
 # wake beacon: only while paired and the link is down, every 100 ms, single shot
 b = ul[ul.index('wake beacon for a sleeping back'):]
 b = b[:b.index('\n    }\n')]
-check('s_pair.paired() && !link_up && now - last_wake >= 100' in b, 'beacon only paired + link down, 100 ms')
+check('s_pair.paired() && !link_up' in b and 'now - last_wake >= 100' in b, 'beacon only paired + link down, 100 ms (3.7.9 adds: not while charging)')
 check('radio_send(s_pair.peer().mac' in b and 'for (' not in b, 'unicast to the paired back, no retries')
 check('FrameType::HEARTBEAT' in b and 'NowKind::DATA' in b and 's_pair.peer().pair_id' in b, 'valid DATA packet of the couple')
 check(ul.index('wake beacon for a sleeping back') < ul.index('// 1) RTCM first'), 'beacon inside the ESP-NOW tx loop')
