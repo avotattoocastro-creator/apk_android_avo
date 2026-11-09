@@ -86,11 +86,11 @@ WH = SRC / 'wifi_sync.h'
 patch(WH,
       'enum class StartResult : uint8_t { OK = 0, RECORDING = 1, LOW_BATTERY = 2, NO_SD = 3, RADIO_ERROR = 4, BUSY = 5 };',
       'enum class StartResult : uint8_t { OK = 0, RECORDING = 1, LOW_BATTERY = 2, NO_SD = 3, RADIO_ERROR = 4, BUSY = 5,\n'
-      '                                   DISABLED = 6, LOW_RAM = 7 };   // V3.7.7: reasons that were RADIO_ERROR')
+      '                                   BLOCKED_AFTER_REBOOT = 6, LOW_INTERNAL_RAM = 7 };   // V3.7.7: reasons that were RADIO_ERROR')
 WS = SRC / 'wifi_sync.cpp'
 patch(WS,
       '  if (sys::nvs_get_u32("wifi_off", &off) && off) { unlock(); return StartResult::RADIO_ERROR; }',
-      '  if (sys::nvs_get_u32("wifi_off", &off) && off) { unlock(); Serial.println("[AVO WIFI] refused: disabled after a reboot while starting the AP"); return StartResult::DISABLED; }')
+      '  if (sys::nvs_get_u32("wifi_off", &off) && off) { unlock(); Serial.println("[AVO WIFI] refused: disabled after a reboot while starting the AP"); return StartResult::BLOCKED_AFTER_REBOOT; }')
 patch(WS,
       '    bb::log(BbCode::SHUTDOWN, 1, 0x57, (uint32_t)freeb, "wifi: low internal RAM");\n'
       '    ui::resume_after_wifi();\n'
@@ -101,7 +101,7 @@ patch(WS,
       '                  (unsigned)MIN_INTERNAL_FREE, (unsigned)largest, (unsigned)MIN_INTERNAL_BLOCK);\n'
       '    ui::resume_after_wifi();\n'
       '    unlock();\n'
-      '    return StartResult::LOW_RAM;')
+      '    return StartResult::LOW_INTERNAL_RAM;')
 patch(WS,
       'bool init() {\n'
       '  uint32_t tried = 0;\n'

@@ -34,8 +34,8 @@ check('radio_send(s_pair.peer().mac' in b and 'for (' not in b, 'unicast to the 
 check('FrameType::HEARTBEAT' in b and 'NowKind::DATA' in b and 's_pair.peer().pair_id' in b, 'valid DATA packet of the couple')
 check(ul.index('wake beacon for a sleeping back') < ul.index('// 1) RTCM first'), 'beacon inside the ESP-NOW tx loop')
 # Wi-Fi
-check('DISABLED = 6, LOW_RAM = 7' in wh, 'new refusal reasons')
-check('return StartResult::DISABLED;' in ws and 'return StartResult::LOW_RAM;' in ws, 'reasons returned')
+check('BLOCKED_AFTER_REBOOT = 6, LOW_INTERNAL_RAM = 7' in wh, 'new refusal reasons')
+check('return StartResult::BLOCKED_AFTER_REBOOT;' in ws and 'return StartResult::LOW_INTERNAL_RAM;' in ws, 'reasons returned')
 check('"wifi_off_fw"' in ws and 'strcmp(fw, AVO_FW_VERSION) != 0' in ws, 'block remembered per firmware')
 i_clear = ws.index('old block cleared'); i_try = ws.index('nvs_get_u32("wifi_try", &tried)')
 check(i_clear < i_try, 'old block cleared before the breadcrumb check (a reboot of THIS firmware still blocks)')
