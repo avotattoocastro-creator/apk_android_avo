@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — iPad — Reloj: emparejamiento Bluetooth perdido
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia:** el error de CoreBluetooth «Peer removed pairing information» (CBError 14, y 15 «encryption timed out») aparecía en inglés. Significa que el reloj borró su emparejamiento (actualización de firmware o borrado de emparejamientos) y el iPad conserva el antiguo; iOS no deja borrarlo desde una app. Ahora la app explica qué hacer: Ajustes › Bluetooth › (i) AVO_CHEST… › «Omitir este dispositivo», volver a conectar y pulsar BOOT.
+**Archivos:** `App/IosBle.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente.
+
 ## 2026-11-09 — iPad — Copia automática en «AVO Horse» y análisis automático del vídeo de carrera
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:**

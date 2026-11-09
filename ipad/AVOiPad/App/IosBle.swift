@@ -190,7 +190,7 @@ final class IosBleCentral: NSObject, CBCentralManagerDelegate {
         let w = connectWaiters.removeValue(forKey: peripheral.identifier)
         disconnectHandlers.removeValue(forKey: peripheral.identifier)
         lock.unlock()
-        w?.fail(BleLinkError("No se pudo conectar con el reloj: " + (error?.localizedDescription ?? "error desconocido")))
+        w?.fail(BleLinkError(IosBleTransport.connectErrorText(error)))
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -198,7 +198,7 @@ final class IosBleCentral: NSObject, CBCentralManagerDelegate {
         let w = connectWaiters.removeValue(forKey: peripheral.identifier)
         let h = disconnectHandlers.removeValue(forKey: peripheral.identifier)
         lock.unlock()
-        w?.fail(BleLinkError("El reloj se desconectó"))
+        w?.fail(BleLinkError(IosBleTransport.isPairingLost(error) ? IosBleTransport.pairingLostText : "El reloj se desconectó"))
         h?(error)
     }
 }
@@ -285,7 +285,26 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
         }
     }
 
+    /// Pairing lost on the watch side (firmware update or bonds erased): only the user can remove the old pairing of
+    /// the iPad (iOS does not let apps do it).
+    static let pairingLostText: String =
+        "El reloj ha olvidado el emparejamiento con este iPad (pasa al actualizar su firmware o al borrar sus emparejamientos). "
+        + "En el iPad abre Ajustes › Bluetooth, toca (i) junto a AVO_CHEST… y elige «Omitir este dispositivo». "
+        + "Después vuelve aquí, pulsa «Conectar por Bluetooth» y pulsa BOOT en el reloj cuando lo pida."
+
+    static func isPairingLost(_ e: Error?) -> Bool {
+        guard let ns = e as NSError? else { return false }
+        // CBErrorPeerRemovedPairingInformation = 14, CBErrorEncryptionTimedOut = 15
+        return ns.domain == CBErrorDomain && (ns.code == 14 || ns.code == 15)
+    }
+
+    static func connectErrorText(_ e: Error?) -> String {
+        if isPairingLost(e) { return pairingLostText }
+        return "No se pudo conectar con el reloj: " + (e?.localizedDescription ?? "error desconocido")
+    }
+
     private static func describe(_ e: Error) -> String {
+        if isPairingLost(e) { return pairingLostText }
         if let att = e as? CBATTError,
            att.code == .insufficientAuthentication || att.code == .insufficientEncryption || att.code == .insufficientAuthorization {
             return "El reloj exige un enlace cifrado: acepta el emparejamiento Bluetooth y vuelve a intentarlo."
@@ -326,7 +345,7 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
         lock.lock()
         closed = true
         lock.unlock()
-        failAll(BleLinkError("El reloj se desconectó"))
+        failAll(BleLinkError(IosBleTransport.isPairingLost(err) ? IosBleTransport.pairingLostText : "El reloj se desconectó"))
         onDisconnected?()
     }
 
