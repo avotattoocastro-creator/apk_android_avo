@@ -1,4 +1,4 @@
-name: Build AVO CHEST V3.7.10 CARGA APAGADO (encendido por USB: no despierta la espalda y se apaga al desenchufar)
+name: "Build AVO CHEST V3.7.10 CARGA APAGADO (encendido por USB, no despierta la espalda y se apaga al desenchufar)"
 on:
   workflow_dispatch:
   push:
