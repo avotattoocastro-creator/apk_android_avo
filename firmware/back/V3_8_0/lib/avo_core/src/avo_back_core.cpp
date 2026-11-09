@@ -97,6 +97,7 @@ void BackCore::chest_frame(const FrameView& f) {
           case BackCmd::REQ_STATUS: last_status_ = 0; break;
           case BackCmd::SET_GNSS_RATE: if (c.arg_len >= 1 && c.args[0] >= 1 && c.args[0] <= 25) zed_.set_nav_rate(c.args[0], p_->now_ms()); else ok = false; break;
           case BackCmd::REBOOT: break;
+          case BackCmd::BACK_SLEEP: break;   // V3.14.0: acted on after the ACK
           default: ok = false; break;   // girth commands: no girth on this back
         }
         done_cmd_[done_n_ % 8] = c.cmd_id;
@@ -104,6 +105,7 @@ void BackCore::chest_frame(const FrameView& f) {
       }
       send_ack(f.type, f, c.cmd_id, ok ? 0 : 1, !ok);
       if (!done && ok && (BackCmd)c.cmd == BackCmd::REBOOT) { flush(); p_->reboot(); }
+      if (!done && ok && (BackCmd)c.cmd == BackCmd::BACK_SLEEP) { flush(); p_->request_sleep(); }   // V3.14.0
       break;
     }
     case FrameType::CAPS:

@@ -342,6 +342,27 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
 
+## V3.14.0 — sueño con el pecho apagado (2026-11-09)
+Rama `fix/back-3-14-0-sueno-pecho` (desde la 3.13.12). Petición del usuario: que la espalda se duerma del todo cuando se
+apaga el pecho, que se despierte sola al encenderlo, que se duerma también si no ve el pecho en 90 s y que escuche cada 10 s.
+- **Se duerme** (GPS a 0 V con GPIO34 LOW, Vext cortado, radio apagada, LoRa dormida) cuando:
+  - el pecho avisa de que se apaga: orden `BackCmd::BACK_SLEEP` (8), que manda el pecho ≥ 3.7.7 justo antes de cortar;
+    la espalda contesta el ACK y después se duerme;
+  - o no oye a su pecho emparejado durante **90 s** (`CHEST_SILENT_SLEEP_MS`), contados desde el arranque si nunca lo oyó.
+  - No se duerme sin pecho emparejado, con la ventana de emparejamiento abierta ni en modo taller.
+- **Dormida:** despierta por temporizador cada **10 s** (`LISTEN_PERIOD_S`), sin abrir el monitor serie y sin soltar los
+  `gpio_hold` (el GPS sigue sin corriente), a 80 MHz; escucha **160 ms** el canal ESP-NOW y solo arranca si oye un paquete
+  válido de **su** pecho (`now_is_wake_packet`: misma MAC y `pair_id`, o un PAIR_REQ de esa MAC). Si no, vuelve a dormir.
+  - El pecho ≥ 3.7.7 manda un paquete corto cada 100 ms mientras no tiene espalda, para que lo oiga en esa ventana.
+  - Con un pecho anterior (solo latido de 1 s) puede tardar más en despertar (probabilidad ~15–20 % por escucha).
+- **Batería dormida:** cada 30 escuchas (5 min) mide la batería; por debajo de 3,30 V deja de escuchar y despierta cada
+  5 min solo para medir (vuelve a escuchar por encima de 3,45 V).
+- **Carga por USB:** sin cambios (3.13.11): con USB la espalda apaga el GPS y la radio y solo carga.
+- Consumo estimado dormida (sin medir): unos 2–3 mA de media (arranque + radio ~0,2–0,3 s cada 10 s) → unas 4–6 semanas
+  con la 2000 mAh. Arranque del GPS al despertar: en frío (~30 s hasta posición), porque V_BCKP no está conectado.
+- Monitor serie: `SUENO: pecho visto | se duerme en N s si no lo oye` y, al despertar, `[SUENO] despierta: pecho encendido oido…`.
+- Pruebas: `chest_sleep.*` (orden con ACK e idempotente, política de 90 s con desbordamiento de millis, solo nuestro pecho despierta).
+
 ## V3.13.12 — vigilancia del resumen de señales y de reinicios del receptor (2026-11-02)
 Prueba del 02/11/2026: con la espalda 3.13.11 al 28 %, la tarjeta «Calidad GNSS» de Android se quedó fija en «Esperando el
 resumen de señales del receptor», aunque NAV-PVT y RTCM seguían funcionando (DGNSS, 17 195 mensajes RTCM usados).

@@ -170,6 +170,7 @@ bool decode_event(const uint8_t* p, size_t n, EventMsg* e);
 enum class BackCmd : uint16_t {
   REQ_CAPS = 1, REQ_STATUS = 2, SET_GNSS_RATE = 3, GIRTH_PAIR = 4, GIRTH_UNPAIR = 5,
   TIME_REQUEST = 6, REBOOT = 7,
+  BACK_SLEEP = 8,   // V3.14.0 (chest >= 3.7.7): the chest is switching off -> the back goes to deep sleep
 };
 struct Command {
   uint16_t cmd = 0;
