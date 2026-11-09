@@ -52,3 +52,18 @@ puede firmar para OTA con AVO Signer si se quiere.
 3. Encender el reloj → la espalda debe arrancar en ≤ 10 s y enlazar (`[SUENO] despierta: pecho encendido oido…`).
 4. Wi-Fi: en el monitor, `Wi-Fi block left by firmware … cleared` (si estaba bloqueado) y descarga por Wi-Fi correcta.
 5. Bluetooth: vincular 3–4 móviles distintos y comprobar que el primero sigue conectando.
+
+## 7. 3.7.8 VINCULAR (encima de la 3.7.7)
+Petición del usuario: 3 pulsaciones rápidas del botón BOOT (USER) ponen el reloj en modo «conectar un móvil».
+Parche: `firmware/chest/V3_7_8_VINCULAR/tools/apply_v378.py` (el mismo workflow compila ya la 3.7.8).
+- `BootButton` tiene un evento nuevo `TRIPLE` (3 pulsaciones, cada una a menos de 350 ms de la anterior). La doble
+  pulsación (volver a la pantalla principal) se reconoce ahora 350 ms después de soltar, por si llega la tercera.
+- **3 pulsaciones → modo vincular durante 120 s** (otra triple pulsación lo cierra):
+  - si hay un móvil conectado, se desconecta y queda bloqueado durante la ventana, para que su reconexión automática
+    no vuelva a quedarse con el reloj (el reloj solo admite un móvil a la vez);
+  - el reloj se anuncia de nuevo por Bluetooth;
+  - la petición de autorización del móvil nuevo («Autorizar» en la app) se confirma sola: la triple pulsación ya es la
+    confirmación física, no hace falta pulsar BOOT otra vez;
+  - la ventana se cierra al autorizar el móvil nuevo o a los 120 s.
+- Pantalla: la tarjeta Bluetooth dice **MODO VINCULAR** mientras dura.
+- Pruebas: `tests_test_vincular_v378.py` (estática) y `host/bootbutton_host.cpp` (pulsación, doble, triple y larga).

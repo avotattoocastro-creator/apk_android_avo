@@ -1,4 +1,4 @@
-name: Build AVO CHEST V3.7.7 DESPERTAR (3.7.6 GNSS QUALITY + sueño de la espalda, Wi-Fi y Bluetooth)
+name: Build AVO CHEST V3.7.8 VINCULAR (3.7.7 DESPERTAR + 3 pulsaciones de BOOT para vincular un móvil)
 on:
   workflow_dispatch:
   push:
@@ -12,6 +12,7 @@ on:
       - 'firmware/chest/V3_7_6_GNSS/**'
       - 'firmware/chest/V3_7_6_GNSS_QUALITY/**'
       - 'firmware/chest/V3_7_7_DESPERTAR/**'
+      - 'firmware/chest/V3_7_8_VINCULAR/**'
       - 'firmware/back/V3_8_0/lib/avo_core/src/avo_payloads.*'
       - 'windows/AVO.Windows.SelfTest/usb_transcript.json'
       - '.github/workflows/build-chest-v377-despertar.yml'
@@ -86,15 +87,19 @@ jobs:
           cd "$D"
           python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_7_DESPERTAR/tools/apply_v377.py"
           cp "$GITHUB_WORKSPACE/firmware/chest/V3_7_7_DESPERTAR/tests_test_despertar_v377.py" tests/test_despertar_v377.py
+          # V3.7.8 VINCULAR on top: BOOT x3 -> connect-a-phone window
+          python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_8_VINCULAR/tools/apply_v378.py"
+          cp "$GITHUB_WORKSPACE/firmware/chest/V3_7_8_VINCULAR/tests_test_vincular_v378.py" tests/test_vincular_v378.py
+          g++ -std=c++17 -Wall -Werror -I lib/avo_core/src "$GITHUB_WORKSPACE/firmware/chest/V3_7_8_VINCULAR/host/bootbutton_host.cpp" lib/avo_core/src/avo_input.cpp -o "$RUNNER_TEMP/bb" && "$RUNNER_TEMP/bb"
           # the 3.7.6 test pins its own version number: from here on the tree is 3.7.7
-          sed -i 's/AVO_FW_VERSION "3\.7\.6"/AVO_FW_VERSION "3.7.7"/; s/0x030706/0x030707/g; s#version 3\.7\.6 / #version 3.7.7 / #' tests/test_gnss_quality_v376.py
-          grep -n '3\.7\.7' tests/test_gnss_quality_v376.py
+          sed -i 's/AVO_FW_VERSION "3\.7\.6"/AVO_FW_VERSION "3.7.8"/; s/0x030706/0x030708/g; s#version 3\.7\.6 / #version 3.7.8 / #' tests/test_gnss_quality_v376.py
+          grep -n '3\.7\.8' tests/test_gnss_quality_v376.py
           python3 - <<'PY'
           from pathlib import Path
           p = Path('lib/avo_core/src/avo_version.h')
           s = p.read_text()
           assert '#define AVO_FW_VERSION "3.7.6"' in s and '#define AVO_FW_VERSION_NUM 0x030706' in s
-          p.write_text(s.replace('"3.7.6"', '"3.7.7"').replace('0x030706', '0x030707'))
+          p.write_text(s.replace('"3.7.6"', '"3.7.8"').replace('0x030706', '0x030708'))
           PY
           grep -n "AVO_FW_VERSION" lib/avo_core/src/avo_version.h
       - name: What changed against 3.7.5-usb1 (only these files may differ)
@@ -110,7 +115,10 @@ jobs:
                      # V3.7.7 DESPERTAR
                      'AVO_CHEST_V3_5_0/src/uart_link.cpp', 'AVO_CHEST_V3_5_0/src/controller.cpp', 'AVO_CHEST_V3_5_0/src/services.h',
                      'AVO_CHEST_V3_5_0/src/wifi_sync.cpp', 'AVO_CHEST_V3_5_0/src/wifi_sync.h', 'build_chest.sh',
-                     'tests/test_despertar_v377.py'}
+                     'tests/test_despertar_v377.py',
+                     # V3.7.8 VINCULAR
+                     'AVO_CHEST_V3_5_0/src/app_state.h', 'AVO_CHEST_V3_5_0/src/ui_model.cpp', 'lib/avo_core/src/avo_input.h',
+                     'lib/avo_core/src/avo_input.cpp', 'tests/test_vincular_v378.py'}
           bad = []
           for line in open('changed.txt'):
               line = line.strip()
@@ -167,25 +175,25 @@ jobs:
           assert p.is_file() and 100000 < len(b) < 6291456, len(b)
           assert b[0] == 0xE9 and b[12] == 9, 'not an ESP32-S3 app image'
           import re
-          hits = [m.start() for m in re.finditer(rb'(?<![0-9.])3\.7\.7\x00', b)]
-          for i in hits[:4]: print('3.7.7 at', i, b[max(0, i - 24):i + 40])
+          hits = [m.start() for m in re.finditer(rb'(?<![0-9.])3\.7\.8\x00', b)]
+          for i in hits[:4]: print('3.7.8 at', i, b[max(0, i - 24):i + 40])
           # the updater identifies the image by the version string next to AVO-CHEST (same check as 3.7.6)
-          assert any(0 < b.find(b'AVO-CHEST\x00', i) - i < 32 for i in hits), 'AVO version string 3.7.7 missing'
+          assert any(0 < b.find(b'AVO-CHEST\x00', i) - i < 32 for i in hits), 'AVO version string 3.7.8 missing'
           assert not re.search(rb'(?<![0-9.])3\.7\.6\x00', b), 'old version string 3.7.6 still in the image'
-          for marker in (b'baliza de despertar cada 100 ms', b'back sleep sent', b'old block cleared (new firmware)'):
+          for marker in (b'baliza de despertar cada 100 ms', b'back sleep sent', b'old block cleared (new firmware)', b'MODO VINCULAR', b'pair mode (3 clicks)'):
               assert b.find(marker) >= 0, f'3.7.7 marker missing: {marker}'
           assert b.find(b'3.7.5-usb1\x00') < 0, 'old version string still in the image'
           assert b.find(b'AVOCHEST-IMG-V1:WS-AMOLED-2.06') >= 0, 'OTA compatibility marker missing'
-          p.rename('firmware_out/AVO_CHEST_V3_7_7_DESPERTAR.bin')
+          p.rename('firmware_out/AVO_CHEST_V3_7_8_VINCULAR.bin')
           Path('firmware_out/NO_VERIFICADO.txt').write_text(
-              'AVO CHEST 3.7.7 DESPERTAR: compilado en CI, NO VERIFICADO en el reloj.\n'
+              'AVO CHEST 3.7.8 VINCULAR: compilado en CI, NO VERIFICADO en el reloj.\n'
               'Instalar con AVO Update por USB. Ver firmware/chest/V3_7_7_DESPERTAR/INFORME.md\n')
           PY
-          cd firmware_out && sha256sum AVO_CHEST_V3_7_7_DESPERTAR.bin > SHA256SUMS.txt && cat SHA256SUMS.txt
+          cd firmware_out && sha256sum AVO_CHEST_V3_7_8_VINCULAR.bin > SHA256SUMS.txt && cat SHA256SUMS.txt
           echo "::notice::$(cat SHA256SUMS.txt)"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: AVO-CHEST-V3-7-7-DESPERTAR-UNVERIFIED
+          name: AVO-CHEST-V3-7-8-VINCULAR-UNVERIFIED
           path: firmware_out/
           if-no-files-found: warn
