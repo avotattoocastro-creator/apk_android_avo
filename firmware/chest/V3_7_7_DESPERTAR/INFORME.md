@@ -67,3 +67,14 @@ Parche: `firmware/chest/V3_7_8_VINCULAR/tools/apply_v378.py` (el mismo workflow 
   - la ventana se cierra al autorizar el móvil nuevo o a los 120 s.
 - Pantalla: la tarjeta Bluetooth dice **MODO VINCULAR** mientras dura.
 - Pruebas: `tests_test_vincular_v378.py` (estática) y `host/bootbutton_host.cpp` (pulsación, doble, triple y larga).
+
+## 8. 3.7.9 CARGA (encima de la 3.7.8)
+Prueba del usuario (09/11): al conectar el pecho a cargar se despertaba la espalda. Con USB el AXP2101 enciende el reloj,
+el firmware arranca (pantalla de carga) y la 3.7.7 emitía la baliza de despertar.
+- Con USB y **sin grabar** («retención por carga»):
+  - si la espalda está enlazada, se le manda `BACK_SLEEP` (dos veces) y, 1,5 s después, el pecho deja de transmitirle;
+  - si no está enlazada, el silencio es inmediato;
+  - en silencio no hay baliza ni paquetes DATA (latido, CAPS, órdenes se descartan), así que una espalda dormida no
+    lo oye nunca.
+- Al quitar el USB (o al empezar a grabar) vuelve la baliza y la espalda se despierta en ≤ 10 s.
+- Parche: `firmware/chest/V3_7_9_CARGA/tools/apply_v379.py`; prueba `tests_test_carga_v379.py`.
