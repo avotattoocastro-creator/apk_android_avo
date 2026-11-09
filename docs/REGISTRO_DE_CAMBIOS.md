@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — iPad — Reloj: «internal error» del Wi-Fi y cortes de Bluetooth durante la descarga
+**Autor:** Claude · **Rama:** `feature/ipad-app`
+**Qué cambia (captura 11:43, pecho 3.7.7):**
+- Wi-Fi: el error `NEHotspotConfigurationError.internal` («internal error») de iOS al unirse a AVO_CHEST_… ahora se trata como fallo conocido: se borra la configuración de esa red, se espera 2 s y se reintenta (3 intentos). Si sigue, la app pide apagar y encender el Wi-Fi del iPad.
+- Bluetooth: si el enlace se corta en mitad de la descarga, la app se reconectaba sola pero dejaba el entreno «Pendiente» sin decir por qué. Ahora espera la reconexión (hasta 30 s) y continúa la descarga una vez; si no puede, el motivo es «se cortó el Bluetooth con el reloj durante la descarga».
+**Archivos:** `App/WifiJoin.swift`, `App/WatchWifiModel.swift`.
+**Validación:** IMPLEMENTADO · CI pendiente. Hipótesis del «Pendiente» sin motivo: corte del enlace BLE (linkLost cancela la pasada y reconecta); no confirmada con el registro del iPad.
+
 ## 2026-11-09 — iPad — Reloj: emparejamiento Bluetooth perdido
 **Autor:** Claude · **Rama:** `feature/ipad-app`
 **Qué cambia:** el error de CoreBluetooth «Peer removed pairing information» (CBError 14, y 15 «encryption timed out») aparecía en inglés. Significa que el reloj borró su emparejamiento (actualización de firmware o borrado de emparejamientos) y el iPad conserva el antiguo; iOS no deja borrarlo desde una app. Ahora la app explica qué hacer: Ajustes › Bluetooth › (i) AVO_CHEST… › «Omitir este dispositivo», volver a conectar y pulsar BOOT.

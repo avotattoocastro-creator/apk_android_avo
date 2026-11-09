@@ -17,7 +17,11 @@ import NetworkExtension
 struct WifiJoinError: Error, LocalizedError {
     var message: String
     var userDenied: Bool = false
-    init(_ message: String, userDenied: Bool = false) { self.message = message; self.userDenied = userDenied }
+    /// NEHotspotConfigurationError.internal: known iOS failure, usually fixed by removing the configuration and retrying.
+    var internalError: Bool = false
+    init(_ message: String, userDenied: Bool = false, internalError: Bool = false) {
+        self.message = message; self.userDenied = userDenied; self.internalError = internalError
+    }
     var errorDescription: String? { message }
 }
 
@@ -37,6 +41,9 @@ enum WifiJoin {
                     shot.succeed(())
                 case .some(.userDenied):
                     shot.fail(WifiJoinError("No se aceptó unirse a la red Wi-Fi del reloj.", userDenied: true))
+                case .some(.internal), .some(.pending):
+                    shot.fail(WifiJoinError("iOS dio un error interno al unirse a la red Wi-Fi del reloj (\(error.localizedDescription)).",
+                                            internalError: true))
                 case .some(.invalidWPAPassphrase), .some(.invalidSSID):
                     shot.fail(WifiJoinError("Datos de la red Wi-Fi del reloj no válidos."))
                 default:
@@ -87,18 +94,34 @@ final class HotspotWifiConnector: WifiConnector {
         lastFailure = nil
         // The watch answers WIFI_SYNC(start) before its SoftAP is always beaconing: one more try after a pause.
         var joined = false
-        for attempt in 1...2 {
+        // «internal error» of iOS: forget the network configuration and try again (3 attempts in all)
+        var internalErrors = 0
+        for attempt in 1...3 {
             do {
                 try await WifiJoin.join(ssid: creds.ssid, passphrase: creds.password)
                 joined = true
                 break
             } catch {
-                let denied = (error as? WifiJoinError)?.userDenied ?? false
+                let je = error as? WifiJoinError
+                let denied = je?.userDenied ?? false
+                let internalErr = je?.internalError ?? false
+                if internalErr { internalErrors += 1 }
                 log("wifi: el iPad no se unió a \(creds.ssid) (intento \(attempt)): \(error.localizedDescription)")
-                lastFailure = denied ? "no se aceptó unirse a \(creds.ssid) (pulsa «Conectarse» cuando iOS lo pregunte)"
-                                     : "el iPad no se unió a \(creds.ssid): \(error.localizedDescription)"
-                if denied || attempt == 2 || Task.isCancelled { return nil }
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                if denied {
+                    lastFailure = "no se aceptó unirse a \(creds.ssid) (pulsa «Conectarse» cuando iOS lo pregunte)"
+                } else if internalErr {
+                    lastFailure = "iOS dio un error interno al unirse a \(creds.ssid) \(internalErrors) vez/veces (fallo conocido de iOS). "
+                        + "Si se repite: apaga y enciende el Wi-Fi del iPad (Centro de control) y vuelve a descargar"
+                } else {
+                    lastFailure = "el iPad no se unió a \(creds.ssid): \(error.localizedDescription)"
+                }
+                if denied || attempt == 3 || Task.isCancelled { return nil }
+                if internalErr {
+                    WifiJoin.leave(ssid: creds.ssid)
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
+                } else {
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                }
             }
         }
         if !joined { return nil }

@@ -142,6 +142,8 @@ final class WatchWifiModel {
     var connected: Bool = false
     var connecting: Bool = false
     var busy: Bool = false
+    /// The Bluetooth link dropped during the current download pass (linkLost reconnects on its own).
+    @ObservationIgnored private var lostDuringPass: Bool = false
     var watchText: String = "Sin conectar"
     var supportsWifi: Bool = false
     /// Wi-Fi blocked by WifiBootGuard for this firmware (the watch rebooted when turning it on).
@@ -338,6 +340,7 @@ final class WatchWifiModel {
 
     private func linkLost() {
         if conn == nil { return }
+        if busy { lostDuringPass = true }
         conn = nil
         connected = false
         supportsWifi = false
@@ -542,6 +545,7 @@ final class WatchWifiModel {
         if busy { return }
         busy = true
         cancelRequested = false
+        lostDuringPass = false
         statusOk = true
         if let ids = ids {
             for id in ids { setRow(id) { $0.state = "Pendiente"; $0.stateOk = true; $0.progress = nil } }
@@ -621,6 +625,45 @@ final class WatchWifiModel {
                 report = merged
             } catch {
                 failure = error.localizedDescription
+            }
+            // the Bluetooth link dropped during the download: wait for the automatic reconnection and continue once
+            if lostDuringPass && !cancelRequested {
+                let again: [String]? = failure != nil ? (bleAll ? nil : bleIds)
+                    : report.map { (r: WifiSyncReport) -> [String] in
+                        r.failed.filter { $0.key != "*" && $0.value != "grabando" && $0.value != "Huella SHA-256 distinta" }.map { $0.key }.sorted()
+                    }
+                if again == nil || !(again ?? []).isEmpty {
+                    status = "Se cortó el Bluetooth con el reloj: reconectando para continuar la descarga…"
+                    app.log.warn("ble", "enlace perdido durante la descarga; reanudando")
+                    var waited: Double = 0
+                    while !(connected && ble != nil && conn != nil) && waited < 30 && !cancelRequested {
+                        try? await Task.sleep(nanoseconds: 500_000_000)
+                        waited += 0.5
+                    }
+                    if connected, let b2 = ble, !cancelRequested {
+                        lostDuringPass = false
+                        failure = nil
+                        status = WatchWifiModel.bleBusyText + " (reanudando tras el corte)"
+                        do {
+                            let r2: WifiSyncReport = try await b2.sync(ids: again, want: { (e: WatchSessionEntry) -> Bool in
+                                !(known.contains(e.id) || loaded.contains(e.id) || sharedRef.downloaded(e.id) != nil)
+                            }, knownSha: knownSha, listed: { (all: [WatchSessionEntry]) -> Void in
+                                for e in all { sharedRef.noteSeen(e.remote) }
+                            })
+                            var m: WifiSyncReport = report ?? WifiSyncReport(verified: [], failed: [:], fallbackBle: [])
+                            m.verified += r2.verified
+                            for id in again ?? [] { m.failed.removeValue(forKey: id) }
+                            for (k, v) in r2.failed { m.failed[k] = v }
+                            report = m
+                        } catch {
+                            failure = error.localizedDescription
+                        }
+                    }
+                }
+            }
+            if lostDuringPass, var rep = report {
+                for (k, v) in rep.failed where v == "pendiente" { rep.failed[k] = "se cortó el Bluetooth con el reloj durante la descarga" }
+                report = rep
             }
         }
         // trainings listed during «Descargar todo» (Wi-Fi and/or Bluetooth)
