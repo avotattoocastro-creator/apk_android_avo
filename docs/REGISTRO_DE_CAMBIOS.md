@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Pecho 3.7.10 CARGA APAGADO — encendido por USB: sin despertar la espalda y apagado al desenchufar
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commits:** `bf7022b` + corrección del workflow · **CI:** [42619748077](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42619748077) (**éxito**; incluye 3.7.7–3.7.9)
+**Qué cambia:** lee el origen del encendido del AXP2101 (reg. 0x20). Encendido por USB: nunca transmite a la espalda y se apaga (apagado controlado) 2 s después de desenchufar, salvo si se pulsa BOOT/PWR o empieza una sesión. Tampoco transmite antes de leer el PMU. `V3_7_10_CARGA_APAGADO/tools/apply_v3710.py`.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** (falta confirmar en el reloj el valor del registro 0x20 en el monitor: `encendido por USB (solo carga) (AXP2101 0x20 = 0x..)`).
+
 ## 2026-11-09 — Pecho 3.7.9 CARGA — la espalda no se despierta con el pecho cargando
 **Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commits:** `57edcd0`, siguiente · **CI:** [42617435387](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42617435387) (**éxito**; incluye 3.7.7 y 3.7.8)
 **Por qué:** el usuario vio que al conectar el pecho a cargar la espalda se despertaba (baliza de la 3.7.7).
