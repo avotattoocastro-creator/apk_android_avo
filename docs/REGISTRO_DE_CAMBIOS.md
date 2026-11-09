@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Espalda 3.14.0 — sueño con el pecho apagado
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` (desde 3.13.12) · **Commit:** `09c68ab` · **CI:** [42585459626](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626) (**éxito**: 43 casos de host, 456 comprobaciones; artefacto [`AVO-BACK-V3-14-0-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626/artifacts/13658587927), SHA-256 `818e11ec…a4`)
+**Qué cambia:** se duerme (GPS a 0 V, radio apagada) con la orden `BackCmd::BACK_SLEEP` (8) del pecho ≥ 3.7.7 o tras 90 s sin oír a su pecho; dormida despierta cada 10 s, escucha 160 ms y solo arranca si oye a su pecho (`avo_chest_sleep.h`). Batería < 3,30 V dormida: deja de escuchar (despierta cada 5 min a medir). Carga USB sin cambios.
+**Por qué:** petición del usuario (09/11): dormir del todo con el pecho apagado, despertar al encenderlo, 90 s y 10 s.
+**No se ha tocado:** protocolo con el pecho (la orden 8 es nueva y opcional), GNSS/RTK, RTCM, cincha, modo carga USB.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en la espalda. Sin V_BCKP el GPS arranca en frío al despertar (~30 s).
+**Pendiente:** con el pecho 3.7.7: apagar el pecho → la espalda duerme en ≤ 1 s; encenderlo → arranca en ≤ 10 s. Medir el consumo dormida.
+
 ## 2026-11-02 — BACK 3.13.12 (Heltec) — vigilancia del resumen de señales y de reinicios del receptor
 **Autor:** Claude · **Rama:** `fix/back-3-13-12-nav-sig-watchdog` (desde `fix/back-3-13-11-usb-pololu-off` 9dce9f4) · **Commit:** `483e98f` · **CI:** [41533949119](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41533949119) (**éxito**: pruebas de host, imagen ESP32-S3 válida de 917 888 B con la versión 3.13.12; artefacto `AVO-BACK-V3-13-12-HELTEC`, caduca 01/01/2027)
 **Por qué:** prueba del 02/11/2026 (22:54), con el pecho 3.7.6, la espalda 3.13.11 al 28 % y la app 2.6-ntrip-auto-dev2.
