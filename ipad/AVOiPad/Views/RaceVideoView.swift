@@ -40,7 +40,19 @@ struct RaceVideoView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 12) {
                         RaceVideoDataCard(model: model)
-                        if let r = model.result { RaceVideoResultCard(model: model, result: r) }
+                        if let r = model.result {
+                            RaceVideoResultCard(model: model, result: r)
+                        } else if model.analysed {
+                            AvoCard(title: "Falta para ver y guardar el resultado", subtitle: "El vídeo ya está analizado: no hace falta repetirlo") {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    ForEach(model.missing, id: \.self) { (t: String) in
+                                        Text("• " + t).font(.callout).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
+                                    }
+                                    Text("Al rellenarlo aparece el resultado y el botón «Guardar en Carreras». El análisis se guarda en Carreras (ficha «VÍDEO» de la carrera, con la comparación con entrenamientos) y el vídeo en Archivos › AVO Horse › Carreras › Vídeos.")
+                                        .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                        }
                     }
                     .padding(14)
                 }
@@ -296,7 +308,7 @@ private struct RaceVideoDataCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 field("Carrera") { TextField("Nombre de la carrera", text: $model.raceName) }
                 field("Distancia (m)") { TextField("1400", text: $model.distanceText).keyboardType(.numberPad) }
-                field("Tiempo del ganador") { TextField("1'36\"57", text: $model.winnerTimeText) }
+                field("Tiempo del ganador") { TextField("p. ej. 2'25\"30", text: $model.winnerTimeText) }
                 field("Caballo (Cuadra)") {
                     Picker("", selection: $model.horseCode) {
                         Text("Sin elegir").tag("")

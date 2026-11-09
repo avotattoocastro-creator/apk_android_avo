@@ -476,7 +476,17 @@ final class RaceVideoModel {
     }
 
     // ---------------------------------------------------------------- save
-    var canSave: Bool { result.map { !$0.sectors.isEmpty } ?? false && !runnerName.isEmpty }
+    var canSave: Bool { result.map { !$0.sectors.isEmpty } ?? false && (!runnerName.isEmpty || !horseCode.isEmpty) }
+
+    /// What is missing to show the result (after the video has been analysed).
+    var missing: [String] {
+        var m: [String] = []
+        if distanceM == nil { m.append("la distancia de la carrera (m)") }
+        if winnerTimeS == nil { m.append("el tiempo del ganador (por ejemplo 2'25\"30)") }
+        if runnerName.isEmpty && horseCode.isEmpty { m.append("tu caballo (Cuadra o «En la carrera»)") }
+        if !runners.isEmpty && runnerName.isEmpty { m.append("tu caballo en la lista «En la carrera» (para su puesto y sus colores)") }
+        return m
+    }
 
     func save() {
         guard let r = result, !r.sectors.isEmpty else { return }
