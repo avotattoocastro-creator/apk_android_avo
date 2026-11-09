@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Espalda 3.14.1 / 3.14.2 — GPS cortado con el Pololu al perder el pecho
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` · **Commits:** `d32cd05` (3.14.1), `9015857` (3.14.2) · **CI:** [42602791173](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173) (**éxito**; artefacto [`AVO-BACK-V3-14-2-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173/artifacts/13667705186))
+**Por qué:** con la 3.14.0 y el pecho apagado el LED blanco (TX del ZED, GPIO35) seguía encendido: el GPS tenía corriente en el sueño profundo. El usuario pide cortar el GPS con el Pololu como en el modo carga.
+**Qué cambia:** 3.14.1 deja VDD_SPI encendido en el sueño profundo (hipótesis no confirmada). 3.14.2: sin pecho (BACK_SLEEP o 90 s) → `chest_wait_mode()`, los mismos pasos que `usb_charge_mode()` (UART cerrada, GPIO33/35 en alta impedancia, GPIO34 OUTPUT LOW activo + hold), **sin sueño profundo**: sueño ligero entre escuchas de 160 ms cada 10 s; al oír el pecho, Pololu encendido y reinicio limpio.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO**. Comprobar: LED blanco apagado y VOUT del Pololu ≈ 0 V con polímetro tras 90 s sin pecho.
+
 ## 2026-11-09 — Espalda 3.14.0 — sueño con el pecho apagado
 **Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` (desde 3.13.12) · **Commit:** `09c68ab` · **CI:** [42585459626](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626) (**éxito**: 43 casos de host, 456 comprobaciones; artefacto [`AVO-BACK-V3-14-0-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626/artifacts/13658587927), SHA-256 `818e11ec…a4`)
 **Qué cambia:** se duerme (GPS a 0 V, radio apagada) con la orden `BackCmd::BACK_SLEEP` (8) del pecho ≥ 3.7.7 o tras 90 s sin oír a su pecho; dormida despierta cada 10 s, escucha 160 ms y solo arranca si oye a su pecho (`avo_chest_sleep.h`). Batería < 3,30 V dormida: deja de escuchar (despierta cada 5 min a medir). Carga USB sin cambios.
