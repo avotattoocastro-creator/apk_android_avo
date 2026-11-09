@@ -86,6 +86,9 @@ jobs:
           cd "$D"
           python3 "$GITHUB_WORKSPACE/firmware/chest/V3_7_7_DESPERTAR/tools/apply_v377.py"
           cp "$GITHUB_WORKSPACE/firmware/chest/V3_7_7_DESPERTAR/tests_test_despertar_v377.py" tests/test_despertar_v377.py
+          # the 3.7.6 test pins its own version number: from here on the tree is 3.7.7
+          sed -i 's/AVO_FW_VERSION "3\.7\.6"/AVO_FW_VERSION "3.7.7"/; s/0x030706/0x030707/g; s#version 3\.7\.6 / #version 3.7.7 / #' tests/test_gnss_quality_v376.py
+          grep -n '3\.7\.7' tests/test_gnss_quality_v376.py
           python3 - <<'PY'
           from pathlib import Path
           p = Path('lib/avo_core/src/avo_version.h')
