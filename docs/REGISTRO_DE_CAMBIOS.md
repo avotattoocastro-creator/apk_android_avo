@@ -26,7 +26,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 ## 2026-11-09 — Licencias — AVO Tarjetas 1.4-nfc-movil-dev1 + Android 2.5-roles-dev2: activar un móvil por NFC con AVO Tarjetas
-**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **CI:** pendiente
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commits:** `ac97d61`, `0f2bad2` · **CI:** run 42672931752 ✅ (`android-apk`: 141 pruebas core, 0 fallos; app y AVO Tarjetas compiladas y firmadas; el trabajo del emulador no llegó a arrancar por un fallo de GitHub al crear los trabajos)
 **Qué cambia:**
 - **AVO Tarjetas hace de tarjeta NFC** (Host Card Emulation, `AvoHceService`, AID `F041564F4C494301`, `requireDeviceUnlock`): en un usuario del registro, «ACTIVAR SU MÓVIL POR NFC (SIN TARJETA)» → roles y fecha → «Preparar»; durante 2 minutos (una sola activación) responde al móvil que se le junte. Mientras espera, desactiva el modo lector y se marca como servicio preferido. Diálogo con cuenta atrás, cancelar, resultado; historial «Licencia en móvil por NFC · móvil XXXXXXXX» (`RegEvent.Kind.MOVIL`).
 - **La licencia queda atada al móvil activado:** `LicenseIssuer.issueForDevice` firma un token v2 con el **id del móvil** (SHA-256 de Android ID + paquete, 10 B) en el campo UID y `LicenseToken.FLAG_DEVICE` (0x02). `LicensePolicy.activateOnDevice` lo exige; la tarjeta y el archivo rechazan tokens de móvil y viceversa.
@@ -34,7 +34,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - **Protocolo** en `core/.../license/NfcActivation.kt` (SELECT / ACTIVATE / READ por trozos de 240 B), sin Android, con pruebas JVM `NfcActivationTest` (intercambio completo en bucle, nombre largo en varios trozos, otro móvil, tarjeta y archivo con token de móvil, otra clave, no preparado, comandos mal formados).
 **Por qué:** el usuario pide que AVO Tarjetas sirva como tarjeta NFC para activar un móvil; eligió que el móvil del emisor active al del usuario y que la licencia quede atada al móvil activado.
 **Archivos:** `core/.../license/NfcActivation.kt` (nuevo), `LicenseToken.kt`, `LicenseIssuer.kt`, `LicensePolicy.kt`, `IssuerRegistry.kt`, `core/src/test/.../NfcActivationTest.kt` (nuevo), `cards/.../PhoneActivation.kt` (nuevo), `cards/.../CardsActivity.kt`, `cards/src/main/AndroidManifest.xml`, `cards/src/main/res/xml/avo_hce_service.xml` (nuevo), `cards/src/main/res/values/strings.xml` (nuevo), `app/.../MainActivity.kt`, `app/.../license/LicenseManager.kt`, `app/.../ui/screens/LicenseScreens.kt`, versiones, `docs/LICENCIAS_AVO.md`, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
-**Validación:** IMPLEMENTADO · sin compilador en la sesión (pendiente de CI) · NO VERIFICADO con dos móviles.
+**Validación:** IMPLEMENTADO · CI ✅ (run 42672931752) · NO VERIFICADO con dos móviles.
 **Limitaciones:** solo Android ↔ Android con NFC y HCE; el iPad no tiene NFC. Restablecer el móvil de fábrica cambia su id (hay que activarlo otra vez).
 
 ## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
