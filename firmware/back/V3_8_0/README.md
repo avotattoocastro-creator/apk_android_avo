@@ -342,6 +342,19 @@ Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (
   sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
   < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
 
+## V3.14.1 — GPS apagado de verdad durante el sueño (2026-11-09)
+Prueba del usuario con la 3.14.0: con el pecho apagado, el **LED blanco de la espalda seguía encendido**. Ese LED está en
+GPIO35, la línea TX del ZED: encendido = el ZED tiene corriente.
+- **Causa:** GPIO33–GPIO37 son pines del dominio **VDD_SPI** del ESP32-S3 (los que usa la PSRAM octal en otros modelos).
+  En sueño profundo ESP-IDF apaga VDD_SPI por defecto, así que el `gpio_hold` de GPIO34 se queda sin alimentación,
+  el SHDN del Pololu queda suelto, su pull-up de 100 kΩ a VIN (3V3 de la Heltec, que sigue encendido) lo habilita y el
+  ZED funciona toda la noche (~70 mA). Probablemente es también el motivo de que en la 3.13.11 hubiera que dejar la
+  placa despierta durante la carga USB.
+- **Corrección:** `esp_sleep_pd_config(ESP_PD_DOMAIN_VDDSDIO, ESP_PD_OPTION_ON)` antes de cada sueño profundo
+  (`deep_sleep_now()`): VDD_SPI sigue encendido (la flash en reposo, unas decenas de µA) y GPIO34 mantiene el LOW.
+- Monitor: `VDD_SPI encendido en el sueno: GPIO34 mantiene el GPS apagado`.
+- Durante los primeros 90 s sin pecho la espalda está despierta y el LED encendido es lo normal.
+
 ## V3.14.0 — sueño con el pecho apagado (2026-11-09)
 Rama `fix/back-3-14-0-sueno-pecho` (desde la 3.13.12). Petición del usuario: que la espalda se duerma del todo cuando se
 apaga el pecho, que se despierte sola al encenderlo, que se duerma también si no ve el pecho en 90 s y que escuche cada 10 s.
