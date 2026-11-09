@@ -24,6 +24,11 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Pecho 3.7.8 VINCULAR — 3 pulsaciones de BOOT para vincular un móvil
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commit:** `94e6053` · **CI:** [42603761121](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121) (**éxito**; artefacto [`AVO-CHEST-V3-7-8-VINCULAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121/artifacts/13665944700); incluye todo lo de la 3.7.7)
+**Qué cambia:** evento `TRIPLE` de `BootButton`; triple pulsación → 120 s de modo vincular: desconecta y bloquea el móvil actual, anuncia, autoriza el CLAIM del nuevo sin pulsar BOOT, pantalla «MODO VINCULAR». La doble pulsación se reconoce 350 ms después de soltar. Detalle: `V3_7_7_DESPERTAR/INFORME.md` §7.
+**Validación:** IMPLEMENTADO · CI (prueba de host del botón) · **NO VERIFICADO** en el reloj.
+
 ## 2026-11-09 — Pecho 3.7.7 DESPERTAR — sueño de la espalda, bloqueo Wi-Fi y vínculos Bluetooth
 **Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` (desde 3.7.6 GNSS QUALITY) · **Commits:** `5cf704c` … `7e5c0b0` · **CI:** [42587757628](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628) (**éxito**; artefacto [`AVO-CHEST-V3-7-7-DESPERTAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628/artifacts/13659991810), SHA-256 `365c2851…2fff`)
 **Qué cambia:** `V3_7_7_DESPERTAR/tools/apply_v377.py` + `build-chest-v377-despertar.yml`. Al apagar manda `BACK_SLEEP` (2 veces) antes de cortar el AXP2101; baliza DATA cada 100 ms mientras la espalda no responde; el bloqueo Wi-Fi `wifi_off` guarda el firmware que lo puso y se borra con otro firmware; motivos 6/7; NimBLE con 6 vínculos y 20 CCCD (antes 3/8: el tercer móvil borraba el vínculo del más antiguo). Detalle: `firmware/chest/V3_7_7_DESPERTAR/INFORME.md`.
