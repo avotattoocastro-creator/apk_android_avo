@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Android 2.8-wifi-ble-dev1 — descarga Wi-Fi y Bluetooth con varios móviles
+**Autor:** Claude · **Rama:** `feature/android-2-8-wifi-ble` (desde 2.7-borrado-reloj-dev1) · **Commits:** `c134463`, `ee93fa1` · **CI:** [42587795621](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587795621) (**éxito**: core 150 pruebas, emulador 2, firma estable, licencias F5EEE5D2; artefacto [`AVO-Performance-Horse-V2_8_WIFI_BLE_DEV1-APK`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587795621/artifacts/13659668221)), versionCode 41
+**Qué cambia:**
+- Bloqueo Wi-Fi: el intento se borra con cualquier respuesta a `WIFI_SYNC(start)`; solo cuenta un reinicio en los 5 min siguientes (antes un `start` sin respuesta + un apagado normal del reloj bloqueaba el Wi-Fi para siempre). Botón «Probar Wi-Fi» en Entrenamientos.
+- Tras unirse a la red del reloj: `/api/v1/status` cada segundo (4 s) hasta 30 s antes de descargar (mismo caso que el iPad el 07/11).
+- Un corte corto reintenta el mismo entrenamiento 2 veces y reanuda (prueba `t21_shortHiccupIsRetriedInTheSamePass`).
+- Motivos 6 y 7 del pecho 3.7.7 en el registro.
+- BLE: dos fallos rápidos seguidos tras conectar con el reloj «vinculado» → se borra el vínculo del móvil y se empareja de nuevo (la clave AVO de la app se conserva).
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el móvil.
+**Pendiente:** descarga Wi-Fi real con el pecho 3.7.7; un segundo y tercer móvil conectando y el primero sin perder el enlace.
+
 ## 2026-11-03 — Android 2.7-borrado-reloj-dev1 — borrar entrenamientos del reloj con contraseña «AVO»
 **Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev3) · **Commit:** `a64fc96` · **CI:** [41608193129](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41608193129) (**éxito** a la primera: core 149 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_7_BORRADO_RELOJ_DEV1-APK`)
 **Situación anterior:** «Borrar del reloj» solo se activaba con entrenamientos verificados por el servidor, que no está configurado, así que nunca se podía usar. Además la app no enviaba `force`, y el reloj rechaza sin él lo que no está marcado como subido (`storage.cpp`, DELETE_COMMIT).
