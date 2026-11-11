@@ -21,7 +21,8 @@ OUT = "out"
 G = 0.20
 
 # ------------------------------------------------------------------ cápsula
-L, W, R = 70.0, 51.0, 10.0          # REV 5.9: 73 → 70 (sin Qi el largo lo marca la batería + los tornillos de los extremos)
+L, W, R = 70.0, 53.0, 10.0   # REV 5.10: W 51 → 53 para el segundo pogo (electrodos del pulso) en +Y
+#         # REV 5.9: 73 → 70 (sin Qi el largo lo marca la batería + los tornillos de los extremos)
 H = 13.8      # REV 5.9: 15,5 → 13,8 (−1,2 abajo sin la bobina, −0,5 en el techo de la tapa)
 HB = 7.8      # REV 5.9: 9,0 → 7,8
 WALL = 2.0
@@ -32,7 +33,7 @@ FLOOR = 1.4                   # REV 5.9: 2,6 → 1,4 (sin el hueco de la bobina 
 COIL = dict(d=25.0, t=1.0)                         # bobina Qi redonda Ø25 (nuevo receptor); espesor (E)
 COIL_Z0 = 1.2
 BAT = dict(l=50.8, w=30.5, t=4.3)
-BAT_Y = 1.0   # REV 5.9.2: cuna de la batería 1,0 mm hacia +Y (deja sitio a la placa pogo sin tocar la ranura de la junta)
+BAT_Y = 0.0   # REV 5.10: otra vez centrada (5.9.2: +1,0); con W 53 caben los dos pogos, uno a cada lado
 TRAY_Z0, TRAY_T = 6.0, 1.0     # REV 5.9: 7,2 → 6,0 (misma holgura de 0,25 sobre la batería)
 TRAY_TOP = TRAY_Z0 + TRAY_T
 BED_TOP = TRAY_TOP + 1.0          # REV 5.7: cama maciza a ras de la cara superior de los PCB (C6 y Qi)
@@ -82,6 +83,10 @@ BX0, BX1 = BNO["center"][0] - BNO["lx"] / 2, BNO["center"][0] + BNO["lx"] / 2
 BY0, BY1 = BNO["center"][1] - BNO["wy"] / 2, BNO["center"][1] + BNO["wy"] / 2
 BNO_Z0 = TRAY_TOP + 1.0 - BNO["t"]   # REV 5.7: cara superior del BNO a ras de la del C6 (puentes por arriba, al mismo nivel)
 BNO_HOLES = [(BX0 + BNO["hole_x"], BY0 + BNO["hole_y"]), (BX0 + BNO["hole_x"], BY1 - BNO["hole_y"])]
+# REV 5.10: módulo de pulso CJMCU-30003 (MAX30003, ECG de un canal). Medidas del usuario: 21 × 16 × 8 con el jack de 3,5;
+# el jack se quita (los electrodos llegan por el segundo pogo) y la placa queda en ≤ 4,2 mm (E) sobre la bandeja.
+# Va en el hueco de −X de la bandeja (donde iba el Qi): 16 en X, 21 en Y, apoyada en la placa de la bandeja.
+ECG = dict(lx=16.0, wy=21.0, h=4.2, pcb=1.6, clear=0.2, center=(-17.8, 0.0))
 REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imanes del reed (en el soporte): Ø5 × 1
 # REV 5.7.2 (modificación del usuario en su CAD): 3 imanes del reed en fila bajo el reed, a −5,1 / 0 / +5,1 en X;
@@ -107,7 +112,7 @@ REED_MAGS = [(-5.1, 1.2), (0.0, MAG["t"] * MAG["n"] + 0.05), (5.1, 1.2)]   # (si
 #   PINES (va en el soporte): cuerpo 15,5 × 4,65 × 6,0; orejas 25 × 5,5 (r 2,75) entre 2,5 y 4,5 mm de la cara,
 #     agujeros Ø2 en ±9,75; pines Ø0,8 a paso 2,3 que sobresalen 1,5 por delante (muelle) y 1,5 por detrás.
 # Las dos caras quedan a ras (cápsula por abajo, soporte por arriba): al apoyar la cápsula los pines se comprimen.
-POGO = dict(y=-18.7,   # REV 5.9.2: −20,2 → −18,7: entra desde arriba y deja 0,8 de pared hasta la ranura de la junta
+POGO = dict(y=-19.7,   # REV 5.10 (W 53): 0,8 de pared hasta la ranura de la junta; el segundo pogo (pulso) en y = +19,7
             pitch=2.3,
             f_l=17.1, f_w=6.25, f_t=3.5, f_bl=15.5, f_bw=4.65, f_bh=1.7, f_lip=0.0,  # placa (cara a ras del fondo)
             m_l=15.5, m_w=4.65, m_h=6.0, m_pin=1.5, m_tail=1.5,                  # cuerpo del lado de los pines
@@ -191,18 +196,20 @@ def pod_base():
     cw = POGO["cup_wall"]
     cup = rrect(fl + 2 * cw, fw + 2 * cw, fw / 2 + cw - 0.01, POGO["cup_z"] - FLOOR + 0.1, z0=FLOOR - 0.1).translate((0, py, 0))
     y_cr = BAT_Y - (BAT["w"] / 2 + G + 1.0)                                    # REV 5.9.2: cara exterior de la cuna de la batería
-    b = b.union(cup.intersect(box(0, y_cr - 10 + 0.01, -1, 40, 20, 20)))  # del lado +Y hace de pared la propia cuna
+    add_ = (cup.intersect(box(0, y_cr - 10 + 0.01, -1, 40, 20, 20)))  # del lado +Y hace de pared la propia cuna
     zfl = POGO["f_lip"] + POGO["f_bh"]                                  # REV 5.9.1: la base de la hembra apoya aquí
     ft = POGO["f_lip"] + POGO["f_t"] + 0.05                              # techo del alojamiento de la hembra
     stad = lambda h, z0: rrect(fl, fw, fw / 2 - 0.01, h, z0=z0).translate((0, py, 0))
-    b = b.cut(stad(ft - zfl, zfl))
+    cut_ = stad(ft - zfl, zfl)
     yin = -(W / 2 - SEAL_IN)                                            # cara interior de la pared maciza
-    b = b.cut(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
+    cut_ = cut_.union(stad(POGO["cup_z"] + 1 - ft, ft).intersect(box(0, yin + 10, ft - 1, 40, 20, 20)))   # copa (dentro)
     # REV 5.9.2: la pared se recorta en vertical hasta arriba con la forma de la placa, para meterla desde arriba
     # (antes el reborde quedaba bajo un techo a 45° de la pared). Quedan ≥ 0,85 mm de pared hasta la ranura de la junta.
-    b = b.cut(stad(HB + 1 - ft, ft - 0.02).intersect(box(0, yin + 0.02 - 10, -1, 40, 20, 20)))
+    cut_ = cut_.union(stad(HB + 1 - ft, ft - 0.02).intersect(box(0, yin + 0.02 - 10, -1, 40, 20, 20)))
     ol, ow = POGO["f_bl"] + 2 * cl, POGO["f_bw"] + 2 * cl                 # REV 5.9.1: paso de la cara (15,1 × 4,4)
-    b = b.cut(rrect(ol, ow, ow / 2 - 0.01, zfl + 1.01, z0=-1).translate((0, py, 0)))
+    cut_ = cut_.union(rrect(ol, ow, ow / 2 - 0.01, zfl + 1.01, z0=-1).translate((0, py, 0)))
+    # REV 5.10: segundo pogo, simétrico en +Y (electrodos del módulo de pulso)
+    b = b.union(add_).union(add_.mirror("XZ")).cut(cut_).cut(cut_.mirror("XZ"))
     # 8 columnas M3: más gruesas abajo (avellanado Ø5,9 para cabeza + junta tórica)
     for (x, y) in SCREWS:
         b = b.union(cyl(x, y, 0, M3["boss_lo"], M3["boss_lo_h"])).union(cyl(x, y, 0, M3["boss"], HB))
@@ -313,6 +320,20 @@ def tray():
     t = t.union(box(C6_X1 + 0.1 + 0.5, (ly0 + ly1) / 2, BED_TOP - 0.1, 1.0, ly1 - ly0, 1.3))
     # REV 5.7.4 (prueba impresa: el C6 no entraba): cara inferior de la pestaña a 0,15 sobre el PCB (antes 0,05)
     t = t.union(box(C6_X1 + 0.1 - 0.3, (ly0 + ly1) / 2, BED_TOP + 0.15, 0.6, ly1 - ly0, 1.05))
+    # REV 5.10: módulo de pulso (CJMCU-30003) en −X: alojamiento en la cama con la placa apoyada en la bandeja y una
+    # ventana debajo para las soldaduras; paso de los 3 hilos del segundo pogo (+Y) y canal hasta el módulo;
+    # canal por +Y hasta el C6 para los 7 hilos (3V3, GND, SCK, SDO, SDI, CSB, INT1 y FCLK si hace falta).
+    ex, ey = ECG["center"]
+    t = t.cut(box(ex, ey, TRAY_TOP, ECG["lx"] + 2 * ECG["clear"], ECG["wy"] + 2 * ECG["clear"], hb))
+    t = t.cut(box(ex, ey, TRAY_Z0 - 1, ECG["lx"] - 3.0, ECG["wy"] - 3.0, 3))
+    pyp = -POGO["y"]
+    t = t.cut(box(-3.5, pyp + 0.2, TRAY_Z0 - 1, 7.0, 3.0, 4))                     # paso sobre la copa del pogo
+    t = t.cut(box(-7.5, pyp + 0.2, z, 15.0, 3.0, hc))                              # canal hacia −X
+    t = t.cut(box(-13.5, (ey + ECG["wy"] / 2 - 1 + pyp + 1.7) / 2, z, 3.0, pyp + 1.7 - (ey + ECG["wy"] / 2 - 1), hc))
+    yc = C6_Y1 + C6["usb_over"] + 1.6                                              # por delante del USB-C
+    xr0, xr1 = -15.0, C6_X1 + 0.5
+    t = t.cut(box((xr0 + xr1) / 2, yc, z, xr1 - xr0, 3.0, hc))
+    t = t.cut(box(C6_X1 - 1.0, (C6_Y1 - 1.0 + yc + 1.5) / 2, z, 3.0, yc + 1.5 - (C6_Y1 - 1.0), hc))
     for (x, y) in SCREWS:
         t = t.cut(cyl(x, y, TRAY_Z0 - 1, M3["boss_lid"] + 0.4, 6))      # holgura para las columnas Ø7 de la tapa
     return t.intersect(rrect(TRAY_L, TRAY_W, TRAY_R, 10, z0=TRAY_Z0 - 1))
@@ -414,15 +435,19 @@ def mount():
             p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
     # REV 5.9: macho pogo en la placa (sustituye a los imanes del reed): cara a ras de la placa, cuerpo hacia abajo,
     # orejas en un rebaje por debajo con 2 tornillos M1,6 (piloto Ø1,3) y canal para el cable.
-    py, cl = POGO["y"], POGO["clear"]
+    cl = POGO["clear"]
     zb = -MT                                                            # cara inferior de la placa
-    p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, MT + 2, z0=-MT - 1)
+    for py in (POGO["y"], -POGO["y"]):                                  # REV 5.10: segundo pogo (pulso) en +Y
+      p = p.cut(rrect(POGO["m_l"] + 2 * cl, POGO["m_w"] + 2 * cl, (POGO["m_w"] + 2 * cl) / 2 - 0.01, MT + 2, z0=-MT - 1)
               .translate((0, py, 0)))
-    # orejas a media altura del cuerpo: el alojamiento se abre por abajo hasta 0,1 por encima de ellas
-    p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
-                    (-POGO["ear_z0"] + 0.1) - zb + 0.01, z0=zb - 0.01).translate((0, py, 0)))
-    for sx in (-1, 1):
-        p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.6, -0.8 - (zb - 1)))     # piloto M2 (Ø1,6) hasta 0,8 de la cara
+      # orejas a media altura del cuerpo: el alojamiento se abre por abajo hasta 0,1 por encima de ellas
+      p = p.cut(rrect(POGO["ear_l"] + 2 * cl, POGO["ear_w"] + 2 * cl, (POGO["ear_w"] + 2 * cl) / 2 - 0.01,
+                      (-POGO["ear_z0"] + 0.1) - zb + 0.01, z0=zb - 0.01).translate((0, py, 0)))
+      for sx in (-1, 1):
+          p = p.cut(cyl(sx * POGO["ear_span"] / 2, py, zb - 1, 1.6, -0.8 - (zb - 1)))     # piloto M2 (Ø1,6) hasta 0,8 de la cara
+    # REV 5.10: canal de 4 × 2 por debajo, del pogo del pulso (+Y) al borde +Y, para los 3 cables de los electrodos
+    pw = _mount_geom()[9]
+    p = p.cut(box(0, (-POGO["y"] + pw / 2 + 2) / 2, zb - 1, 4.0, pw / 2 + 2 + POGO["y"], 3.0))
     # sin canal de cable: en el soporte el macho solo lleva un puente GND–DET soldado por detrás (interruptor)
     for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
         p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
@@ -487,6 +512,9 @@ def components():
         "pogo_hembra": _pogo_step()[0],
         "antena_FPC": box(-7, -4.5, CEIL - 0.35, 28, 6, 0.3),
         "pogo_macho": _pogo_step()[1],
+        "pogo_pulso_placa": _pogo_step()[0].mirror("XZ"),
+        "pogo_pulso_pines": _pogo_step()[1].mirror("XZ"),
+        "modulo_pulso_MAX30003": box(ECG["center"][0], ECG["center"][1], TRAY_TOP + 0.02, ECG["lx"], ECG["wy"], ECG["h"]),
         "imanes_capsula_5x1": mags,
         "imanes_soporte_5x1": mmags,
     }
