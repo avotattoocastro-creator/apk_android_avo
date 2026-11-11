@@ -86,7 +86,7 @@ BNO_HOLES = [(BX0 + BNO["hole_x"], BY0 + BNO["hole_y"]), (BX0 + BNO["hole_x"], B
 # REV 5.10: módulo de pulso CJMCU-30003 (MAX30003, ECG de un canal). Medidas del usuario: 21 × 16 × 8 con el jack de 3,5;
 # el jack se quita (los electrodos llegan por el segundo pogo) y la placa queda en ≤ 4,2 mm (E) sobre la bandeja.
 # Va en el hueco de −X de la bandeja (donde iba el Qi): 16 en X, 21 en Y, apoyada en la placa de la bandeja.
-ECG = dict(lx=16.0, wy=21.0, h=4.2, pcb=1.6, clear=0.2, center=(-17.8, 0.0))
+ECG = dict(lx=16.0, wy=21.0, h=4.2, pcb=1.6, clear=0.2, center=(-18.2, 0.0))
 REED = dict(l=14.0, d=3.2, center=(0.0, -(W / 2 - 6.2)), z0=1.0)
 MAG = dict(d=5.0, t=1.0, n=1)                     # imanes del reed (en el soporte): Ø5 × 1
 # REV 5.7.2 (modificación del usuario en su CAD): 3 imanes del reed en fila bajo el reed, a −5,1 / 0 / +5,1 en X;
@@ -251,8 +251,12 @@ def pod_lid():
     for (x, y) in ((C6_X0 + 1.0 + BNO_GAP, C6_Y0 + 0.8), (C6_X1 - 0.8, C6_Y0 + 0.8)):   # el del lado −X no toca el BNO
         lid = lid.union(cyl(x, y, TRAY_TOP + C6["pcb"] + 0.05, 2.0, CEIL - TRAY_TOP - C6["pcb"]))
     # REV 5.7.1: sin tubos sobre el BNO (sus taladros están a 1,95 del borde, bajo la pestaña −X que ya lo sujeta)
-    for x in (qx - QI["lx"] / 2 + 1.5, qx + QI["lx"] / 2 - 1.5):          # REV 5.9: sin Qi, estos tubos apoyan en la cama
-        lid = lid.union(cyl(x, qy + QI["wy"] / 2 - 0.8, BED_TOP + 0.05, 2.0, CEIL - BED_TOP))
+    # REV 5.10: los 2 tubos que apoyaban en la cama (zona del antiguo Qi) quedan sobre el módulo de pulso, a 0,2 de su
+    # altura máxima (4,2 E): no aprietan componentes, solo impiden que la placa se levante
+    ex, ey = ECG["center"]
+    for x in (ex - ECG["lx"] / 2 + 1.5, ex + ECG["lx"] / 2 - 1.5):
+        zt = TRAY_TOP + ECG["h"] + 0.2
+        lid = lid.union(cyl(x, ey + ECG["wy"] / 2 - 1.5, zt, 2.0, CEIL - zt))
     # tope que aprieta el conector USB-C desde arriba (sujeta el extremo del USB; las esquinas tienen los botones)
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
