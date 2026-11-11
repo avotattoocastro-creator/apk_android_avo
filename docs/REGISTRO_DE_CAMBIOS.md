@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-11 — Cincha (CAD) REV 5.10 — módulo de pulso MAX30003 y segundo pogo
+**Autor:** Claude · Rama `feature/girth-rev5-10-pulso` (propuesta, sin fusionar), sobre `feature/girth-rev5-9-2-pogo-empotrado`
+**Qué cambia:**
+- cápsula de W 51 a 53 (70 × 53 × 13,8); batería otra vez centrada (`BAT_Y` = 0);
+- módulo CJMCU-30003 (21 × 16 × 8 con el jack, según el usuario; sin el jack, ≤ 4,2 E) en el hueco −X de la bandeja, con ventana debajo;
+- los tubos de la tapa del antiguo Qi pasan a ser topes a 0,2 mm sobre el módulo;
+- segundo pogo de 3 pines en y = +19,7 (simétrico al de y = −19,7) para los electrodos: ECGP, VCM y ECGN;
+- en la bandeja, paso y canales de los hilos (pogo → módulo y módulo → C6);
+- en el soporte, segundo alojamiento de pines y canal inferior de 4 × 2 hasta el borde +Y;
+- conexión propuesta: CSB D7, SCK D8, SDO D9, SDI D10, INT1 MTDO (GPIO7) y FCLK MTMS (GPIO4) si hace falta.
+**Por qué:** petición del usuario: «Necesitamos meter en la caja el módulo de pulso». El usuario eligió la cápsula de la cincha y el segundo pogo.
+**Validación:** CI sin interferencias y 1 sólido por pieza. NO VERIFICADO en impresión ni con el módulo.
+**Pendiente:** altura real sin el jack; si la placa lleva oscilador de 32 768 Hz; firmware del MAX30003.
+
+---
+
 ## 2026-10-31 — Cincha (CAD) REV 5.9.2 — pogo empotrado por completo en el soporte
 **Autor:** Claude · Rama `feature/girth-rev5-9-2-pogo-empotrado` (propuesta, sin fusionar)
 **Qué cambia:**
