@@ -1,0 +1,10 @@
+0x40381f78 in esp_cpu_wait_for_intr () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/cpu.c:64
+warning: 64	/home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/cpu.c: No such file or directory
+#0  0x40381f78 in esp_cpu_wait_for_intr () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_hw_support/cpu.c:64
+#1  0x42026718 in esp_vApplicationIdleHook () at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/esp_system/freertos_hooks.c:58
+#2  0x40385aea in prvIdleTask (pvParameters=<error reading variable: value has been optimized out>) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:4350
+#3  0x40385124 in vPortTaskWrapper (pxCode=<optimized out>, pvParameters=<optimized out>) at /home/runner/work/esp32-arduino-lib-builder/esp32-arduino-lib-builder/esp-idf/components/freertos/FreeRTOS-Kernel/portable/riscv/port.c:257
+pc             0x40381f78	0x40381f78 <esp_cpu_wait_for_intr+24>
+ra             0x40381f68	0x40381f68 <esp_cpu_wait_for_intr+8>
+sp             0x3fc952a0	0x3fc952a0
+[Inferior 1 (process 1) detached]

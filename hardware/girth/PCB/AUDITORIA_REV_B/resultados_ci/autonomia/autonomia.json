@@ -1,0 +1,123 @@
+{
+ "fuentes": {
+  "esp_rx": [
+   0.082,
+   "ESP32-C3-MINI-1 datasheet, tabla 9: RX 802.11b/g/n HT20 82 mA"
+  ],
+  "esp_tx": [
+   0.35,
+   "ESP32-C3-MINI-1 datasheet, tabla 9: TX 802.11b 1 Mbps 20,5 dBm 350 mA (pico)"
+  ],
+  "esp_modem": [
+   0.023,
+   "ESP32-C3-MINI-1 datasheet, tabla 10: modem-sleep 160 MHz CPU activa 23 mA"
+  ],
+  "esp_deep": [
+   5e-06,
+   "ESP32-C3-MINI-1 datasheet, tabla 11: deep-sleep 5 µA"
+  ],
+  "lsm6": [
+   0.0009,
+   "ST LSM6DS3TR-C, página de producto: 0,90 mA en modo combinado de alto rendimiento"
+  ],
+  "mmc_per_meas": [
+   3.2142857142857144e-05,
+   "MEMSIC MMC5983MA Rev A: BW=01 225 µA con 7 medidas/s (proporcional al nº de medidas)"
+  ],
+  "mmc_pd": [
+   1e-06,
+   "MEMSIC MMC5983MA Rev A: power-down 1,0 µA"
+  ],
+  "ldo_iq": [
+   2e-06,
+   "Richtek RT9080: corriente de reposo 2 µA típ."
+  ],
+  "bq_ibat": [
+   6.5e-06,
+   "TI BQ2407x SLUS937C: IBAT(PDWN) ≤ 6,5 µA sin entrada"
+  ]
+ },
+ "tx_duty_pc": 2.89,
+ "escenarios": [
+  {
+   "nombre": "Funcionando (firmware V0.3.0: WIFI_PS_NONE, receptor siempre encendido)",
+   "corriente_mA": 93.96,
+   "componentes_mA": {
+    "esp": 89.753,
+    "sensores": 4.114,
+    "divisor_bat": 0.002,
+    "R40_puerta_Q10": 0.004,
+    "R45_reed": 0.004,
+    "R49_R50_reed": 0.004,
+    "R31_GPIO1_reed_cerrado": 0.033,
+    "ldo": 0.002,
+    "led": 0.042
+   },
+   "autonomia_h": {
+    "nueva_25C": 5.1,
+    "envejecida_80pc": 4.0,
+    "frio_0C": 4.3
+   }
+  },
+  {
+   "nombre": "Funcionando con ahorro de radio (propuesta: ventana de recepción ~15 %)",
+   "corriente_mA": 45.52,
+   "componentes_mA": {
+    "esp": 41.31,
+    "sensores": 4.114,
+    "divisor_bat": 0.002,
+    "R40_puerta_Q10": 0.004,
+    "R45_reed": 0.004,
+    "R49_R50_reed": 0.004,
+    "R31_GPIO1_reed_cerrado": 0.033,
+    "ldo": 0.002,
+    "led": 0.042
+   },
+   "autonomia_h": {
+    "nueva_25C": 10.4,
+    "envejecida_80pc": 8.3,
+    "frio_0C": 8.9
+   }
+  },
+  {
+   "nombre": "Funcionando con ahorro de radio y magnetómetro a 20 Hz (propuesta)",
+   "corriente_mA": 42.94,
+   "componentes_mA": {
+    "esp": 41.31,
+    "sensores": 1.543,
+    "divisor_bat": 0.002,
+    "R40_puerta_Q10": 0.004,
+    "R45_reed": 0.004,
+    "R49_R50_reed": 0.004,
+    "R31_GPIO1_reed_cerrado": 0.033,
+    "ldo": 0.002,
+    "led": 0.042
+   },
+   "autonomia_h": {
+    "nueva_25C": 11.1,
+    "envejecida_80pc": 8.8,
+    "frio_0C": 9.4
+   }
+  }
+ ],
+ "apagada": {
+  "fuera_soporte_uA": 1.0,
+  "dentro_soporte_uA": 9.02,
+  "anos_fuera": 57.1,
+  "anos_dentro": 6.3,
+  "nota": "la autodescarga de la celda LiPo (≈ 2–3 %/mes, dato típico de fabricantes) domina"
+ },
+ "carga": {
+  "ichg_mA": {
+   "min": 242.0,
+   "tip": 270.0,
+   "max": 295.0
+  },
+  "iin_mA": {
+   "min": 403.0,
+   "tip": 458.0,
+   "max": 515.0
+  },
+  "tiempo_h": "≈ 1.9–2.7 (CC hasta ~80 % + CV, estimado)"
+ }
+}

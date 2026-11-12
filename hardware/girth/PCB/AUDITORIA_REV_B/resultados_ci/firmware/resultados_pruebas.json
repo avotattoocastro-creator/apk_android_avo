@@ -1,0 +1,14 @@
+{
+ "pruebas": 19, "comprobaciones": 4313, "fallidas": 0,
+ "carga": {"bytes_paquete_imu":220,"paquetes_por_s":11.4,"bytes_por_s":2329},
+ "corrupcion": {"paquetes_alterados":200,"rechazados":200},
+ "desorden": {"enviados":40,"reenviados":40,"perdidos_contados":19},
+ "duplicados": {"enviados":50,"duplicados":10,"reenviados_al_pecho":60},
+ "galope": {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":5.19,"pico_dps":178,"pico_G":0.57,"err_max_g":0.00012,"err_max_dps":0.034,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0},
+ "paso": {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":1.35,"pico_dps":32,"pico_G":0.53,"err_max_g":0.00012,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0},
+ "perdida_1": {"p":0.01,"perdidos":3,"contados_espalda":3},
+ "perdida_20": {"p":0.20,"perdidos":35,"contados_espalda":35},
+ "perdida_5": {"p":0.05,"perdidos":12,"contados_espalda":12},
+ "salto": {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":12.94,"pico_dps":229,"pico_G":0.59,"err_max_g":4.94215,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":5,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0},
+ "trote": {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":3.19,"pico_dps":76,"pico_G":0.54,"err_max_g":0.00012,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0}
+}

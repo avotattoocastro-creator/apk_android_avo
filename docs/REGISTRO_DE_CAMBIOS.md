@@ -708,6 +708,34 @@ STL/STEP releídos; 0 voladizos fuera de límite) · PCB: CI con puerta superada
 imprimir las probetas P1/P2; medir la bobina Qi y ajustar C1–C4; BLE directo con Android, Wi-Fi y OTA firmada en el
 firmware V4; revisar giros en la vista previa de JLCPCB; pruebas de consumo, GNSS (C/N0), alcance y estanqueidad.
 
+## 2026-10-29 — Cincha · auditoría de validación virtual de la PCB REV B y propuesta REV B.1
+**Autor:** Claude · Rama `audit/avo-girth-pcb-revb` (derivada de `feature/avo-girth-pcb` en `2a70369`) · **Commits:**
+`82b9609`…`b582bed` y el de esta entrada · **CI:** `audit-girth-revb.yml`, runs 40938084601 … 40955158865 (éxito; las
+evidencias se guardan en `hardware/girth/PCB/AUDITORIA_REV_B/resultados_ci/`)
+**Qué cambia:** informe `hardware/girth/PCB/AUDITORIA_REV_B/INFORME_VALIDACION_REV_B.md` con veredicto **APTO PARA
+PROTOTIPOS CON RIESGOS IDENTIFICADOS**. Fases ejecutadas: KiCad 9 (ERC, DRC con paridad, DRC tras rellenar zonas,
+auditoría de redes, Gerber regenerados = entregados), ngspice (alimentación, enclavamiento Q10/Q11, Monte Carlo de 200),
+Qi (`qi/`), mecánica frente al STL (`mecanica/`), GPIO, sensores con simulador de marcha, pruebas de ESP-NOW con la
+`avo_core` real, autonomía, fabricación JLCPCB (existencias, BOM/CPL, giros, presupuesto 5 PCB / 2 montadas) y QEMU.
+**REV B.1 propuesta** (`AUDITORIA_REV_B/corregida/`, generada desde la placa entregada sin tocarla): BQ24072 en USB500
+(EN1 = VSYS, EN2 = GND, R8 DNP), C41 220 n → 470 n (C47339), R40 1 M → 100 k, cajetín «B.1». Firmware (rama de
+auditoría): corregido `out_since = now | 1` (apagado instantáneo ≈ 50 %), `girth_pack.h`/`girth_policy.h`,
+`gpio_hold_en` en PWR_HOLD, línea de arranque temprana. Documentación: fórmula de C2 en `DOCS/AJUSTE_QI.md`, autonomía
+(≈ 5 h, no 11–20 h) y consumo apagado en el README, «W.FL / MHF III» en `fuente/gate.py`.
+**Por qué:** misión de validación virtual exhaustiva antes de fabricar 5 PCB y montar 2.
+**Archivos:** `hardware/girth/PCB/AUDITORIA_REV_B/**`, `.github/workflows/audit-girth-revb.yml`,
+`firmware/girth/V0_3_0_C3/**`, `hardware/girth/PCB/README.md`, `DOCS/AJUSTE_QI.md`, `fuente/gate.py` (solo texto).
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, `feature/avo-girth-pcb`, los ficheros entregados de
+`hardware/girth/PCB/out/C3/`, el firmware de la espalda. **No se ha hecho ningún pedido.**
+**Validación:** CI (KiCad: REV B y REV B.1 con ERC 0 / DRC 0 / paridad 0; firmware compila, 19 + 37 pruebas en el PC sin
+fallos; SPICE con modelos de nivel 1 y de comportamiento). QEMU: el boceto de control arranca; la cincha se queda en la
+calibración del ADC2 de ESP-IDF (QEMU no emula el ADC del C3). **NO VERIFICADO** físicamente.
+**Pendiente:** pruebas físicas de la sección 14 del informe; bobina Qi (TDK WR202010-18M8-ID); NTC en la celda; CAD de
+la cápsula REV 5.9; duplicados/desorden en `GirthHub`; ±16 g; pasar los cambios de cobre de la B.1 a `fuente/` si se
+adopta.
+
+---
+
 ## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
 **Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
 **CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
@@ -716,9 +744,9 @@ firmware `build-girth-c3.yml` (compilación correcta en `01f8093`)
 1191 uds. y 3,15 US$ el 2026-10-29 según la consulta del CI); IMU **LSM6DS3TR-C + MMC5983MA** por I²C en lugar del
 BNO085 (19,50 US$, 80 uds.); corte de batería con **enclavamiento de MOSFET** en lugar del relé biestable; R6/R7
 Basic. Mismas funciones (ESP-NOW, IMU de 9 ejes, encendido magnético, apagado remoto, < 1 µA apagada, carga USB y
-Qi, medida de batería, programación por USB y UART0, antena externa). 81 piezas montadas (antes 104), 13 Extended
-(antes 17). Coste de componentes + cargo de Extended: 21,5 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,2 a 10 uds.
-(REV A ≥ 32,9): −46 % a −54 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
+Qi, medida de batería, programación por USB y UART0, antena externa). 85 piezas montadas (antes 104), 14 Extended
+(antes 17). Coste de componentes + cargo de Extended: 22,1 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,5 a 10 uds.
+(REV A ≥ 32,9): −45 % a −53 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
 C3 con IMU, batería, enclavamiento, apagado remoto (bit 1 de `GirthPing.flags`, la espalda aún no lo envía) y
 diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
 **Por qué:** placa montable entera por JLCPCB y coste a la mitad sin perder funciones (petición del usuario).
@@ -728,6 +756,9 @@ diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
 **No se ha tocado:** `main`, `develop/avo-performance-horse`, app Android, AVO Update, firmware de pecho y espalda.
 **Validación:** CI (KiCad 9: DRC 0, ERC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0; firmware compila
 para ESP32-C3). **NO VERIFICADO** físicamente.
+**Revisión independiente** (agente sin acceso al razonamiento del diseño): sin errores de pines; corregidos el
+despertar por reed ya cerrado (no se podía apagar), el rearmado lento del reed, la lectura retrasada del reed, la
+corriente sin límite por el reed y el ritmo de lectura de la IMU.
 **Pendiente:** ajustar el Qi con la bobina real; medir los tiempos del enclavamiento; comprobar ejes de la IMU;
 adaptar AVO Update al ESP32-C3 (id 5) y la espalda para enviar el apagado remoto; revisar giros en JLCPCB.
 
