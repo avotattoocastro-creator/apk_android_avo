@@ -15,7 +15,11 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         val enabled: Boolean = false, val host: String = "", val port: Int = 2101, val mountpoint: String = "",
         val user: String = "", val tls: Boolean = false, val v2: Boolean = true, val sendGga: Boolean = true,
         val ggaIntervalS: Int = 10, val timeoutS: Int = 15, val reconnect: Boolean = true,
-    )
+        /** Backup mountpoints on the same caster, comma separated: used in order if the main one fails. */
+        val backupMounts: String = "",
+    ) {
+        fun backups(): List<String> = backupMounts.split(',', ';', ' ').map { it.trim() }.filter { it.isNotEmpty() && it != mountpoint.trim() }.distinct()
+    }
 
     private val _ntrip = MutableStateFlow(loadNtrip())
     val ntrip: StateFlow<Ntrip> = _ntrip
@@ -24,14 +28,14 @@ class Settings(ctx: Context, private val secure: SecureStore) {
         p.getBoolean("ntrip.enabled", false), p.getString("ntrip.host", "")!!, p.getInt("ntrip.port", 2101),
         p.getString("ntrip.mount", "")!!, p.getString("ntrip.user", "")!!, p.getBoolean("ntrip.tls", false),
         p.getBoolean("ntrip.v2", true), p.getBoolean("ntrip.gga", true), p.getInt("ntrip.ggaS", 10),
-        p.getInt("ntrip.timeoutS", 15), p.getBoolean("ntrip.reconnect", true),
+        p.getInt("ntrip.timeoutS", 15), p.getBoolean("ntrip.reconnect", true), p.getString("ntrip.backups", "")!!,
     )
 
     fun saveNtrip(n: Ntrip, password: String?) {
         p.edit().putBoolean("ntrip.enabled", n.enabled).putString("ntrip.host", n.host.trim()).putInt("ntrip.port", n.port)
             .putString("ntrip.mount", n.mountpoint.trim()).putString("ntrip.user", n.user).putBoolean("ntrip.tls", n.tls)
             .putBoolean("ntrip.v2", n.v2).putBoolean("ntrip.gga", n.sendGga).putInt("ntrip.ggaS", n.ggaIntervalS)
-            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).apply()
+            .putInt("ntrip.timeoutS", n.timeoutS).putBoolean("ntrip.reconnect", n.reconnect).putString("ntrip.backups", n.backupMounts.trim()).apply()
         if (password != null) secure.ntripPassword = password
         _ntrip.value = n
     }
@@ -78,6 +82,64 @@ class Settings(ctx: Context, private val secure: SecureStore) {
     var autoDndGeofence: Boolean
         get() = p.getBoolean("training.dnd.geofence", false)
         set(v) { p.edit().putBoolean("training.dnd.geofence", v).apply() }
+
+    /** Start the link service in the background (boot, app update, Bluetooth link with the watch) without opening the app. */
+    var autoStart: Boolean
+        get() = p.getBoolean("link.autoStart", true)
+        set(v) { p.edit().putBoolean("link.autoStart", v).apply() }
+    /** The user pressed "Desconectar": no automatic start until they connect again. */
+    var autoStartPaused: Boolean
+        get() = p.getBoolean("link.autoStartPaused", false)
+        set(v) { p.edit().putBoolean("link.autoStartPaused", v).apply() }
+
+    /** WhatsApp: delete the training from the phone after sending it (the watch copy is kept). */
+    var deleteAfterWhatsApp: Boolean
+        get() = p.getBoolean("share.deleteAfterWhatsApp", true)
+        set(v) { p.edit().putBoolean("share.deleteAfterWhatsApp", v).apply() }
+
+    // ---- Sharing between AVO users (Firebase)
+    /** Mode A: global recipients enabled. */
+    var shareGlobalEnabled: Boolean
+        get() = p.getBoolean("share.globalEnabled", true)
+        set(v) { p.edit().putBoolean("share.globalEnabled", v).apply() }
+    /** Mode B: horses whose automatic sending is disabled (enabled by default). */
+    var shareHorsesDisabled: Set<String>
+        get() = p.getStringSet("share.horsesDisabled", emptySet())?.toSet() ?: emptySet()
+        set(v) { p.edit().putStringSet("share.horsesDisabled", v).apply() }
+    var shareAllowWifi: Boolean
+        get() = p.getBoolean("share.allowWifi", true)
+        set(v) { p.edit().putBoolean("share.allowWifi", v).apply() }
+    var shareAllowMobile: Boolean
+        get() = p.getBoolean("share.allowMobile", true)
+        set(v) { p.edit().putBoolean("share.allowMobile", v).apply() }
+    /** Trainings bigger than this (MB) wait for Wi-Fi; 0 = no limit. */
+    var shareWifiOnlyLargeMb: Int
+        get() = p.getInt("share.wifiOnlyLargeMb", 5)
+        set(v) { p.edit().putInt("share.wifiOnlyLargeMb", v).apply() }
+    var shareAutoRetry: Boolean
+        get() = p.getBoolean("share.autoRetry", true)
+        set(v) { p.edit().putBoolean("share.autoRetry", v).apply() }
+    var sharePaused: Boolean
+        get() = p.getBoolean("share.paused", false)
+        set(v) { p.edit().putBoolean("share.paused", v).apply() }
+    /** Maximum size per training (MB, ≤ 30 because of the rules). */
+    var shareMaxMb: Int
+        get() = p.getInt("share.maxMb", 30)
+        set(v) { p.edit().putInt("share.maxMb", v.coerceIn(1, 30)).apply() }
+    /** Monthly warning of Firebase consumption (MB uploaded + downloaded by this phone). */
+    var shareMonthlyWarnMb: Int
+        get() = p.getInt("share.monthlyWarnMb", 2048)
+        set(v) { p.edit().putInt("share.monthlyWarnMb", v).apply() }
+
+    private fun monthKey() = java.text.SimpleDateFormat("yyyy-MM", java.util.Locale.ROOT).format(java.util.Date())
+    @Synchronized fun addShareUsage(up: Long, down: Long) {
+        val k = monthKey()
+        if (p.getString("share.usageMonth", null) != k) p.edit().putString("share.usageMonth", k).putLong("share.usageUp", 0).putLong("share.usageDown", 0).commit()
+        p.edit().putLong("share.usageUp", p.getLong("share.usageUp", 0) + up).putLong("share.usageDown", p.getLong("share.usageDown", 0) + down).apply()
+    }
+    /** (uploaded, downloaded) this month in bytes. */
+    val shareUsage: Pair<Long, Long> get() =
+        if (p.getString("share.usageMonth", null) != monthKey()) 0L to 0L else p.getLong("share.usageUp", 0) to p.getLong("share.usageDown", 0)
 
     var autoDownload: Boolean
         get() = p.getBoolean("sync.autoDownload", true)

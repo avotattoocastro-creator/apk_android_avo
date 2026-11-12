@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!-- AVO Equine Intelligence Engine: native DLL built by CI from equine-intelligence/ (CMake + MSVC) -->
+  <ItemGroup Condition="Exists('..\native\avo_equine.dll')">
+    <None Include="..\native\avo_equine.dll" Link="avo_equine.dll" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

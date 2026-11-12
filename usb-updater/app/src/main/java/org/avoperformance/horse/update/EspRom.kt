@@ -196,6 +196,16 @@ internal class EspRom(
         writeReg(RTC_CNTL_SWD_WPROTECT_REG, 0)
     }
 
+    /** esptool ESP32C6ROM/ESP32C3ROM.disable_watchdogs() (LP_WDT block of the C6): same reason as on the S3. */
+    fun disableWatchdogsC6() {
+        writeReg(C6_LP_WDT_WPROTECT_REG, C6_WDT_WKEY)
+        writeReg(C6_LP_WDT_CONFIG0_REG, 0)
+        writeReg(C6_LP_WDT_WPROTECT_REG, 0)
+        writeReg(C6_LP_WDT_SWD_WPROTECT_REG, C6_WDT_WKEY)
+        writeReg(C6_LP_WDT_SWD_CONF_REG, readReg(C6_LP_WDT_SWD_CONF_REG) or C6_SWD_AUTO_FEED_EN)
+        writeReg(C6_LP_WDT_SWD_WPROTECT_REG, 0)
+    }
+
     /** esptool ESP32S3ROM.hard_reset(): clear "force download boot" so the reset runs the app. */
     fun clearForceDownloadBoot() {
         runCatching { writeReg(RTC_CNTL_OPTION1_REG, 0, RTC_CNTL_FORCE_DOWNLOAD_BOOT_MASK) }
@@ -312,6 +322,15 @@ internal class EspRom(
         const val RTC_CNTL_SWD_WKEY = 0x8F1D312AL
         const val RTC_CNTL_OPTION1_REG = 0x6000812CL
         const val RTC_CNTL_FORCE_DOWNLOAD_BOOT_MASK = 1L
+
+        // ESP32-C6 (esptool targets/esp32c6.py): LP_WDT
+        const val C6_LP_WDT_BASE = 0x600B1C00L
+        const val C6_LP_WDT_CONFIG0_REG = C6_LP_WDT_BASE + 0x0
+        const val C6_LP_WDT_WPROTECT_REG = C6_LP_WDT_BASE + 0x18
+        const val C6_LP_WDT_SWD_CONF_REG = C6_LP_WDT_BASE + 0x1C
+        const val C6_LP_WDT_SWD_WPROTECT_REG = C6_LP_WDT_BASE + 0x20
+        const val C6_SWD_AUTO_FEED_EN = 1L shl 18
+        const val C6_WDT_WKEY = 0x50D83AA1L
 
         const val EFUSE_BASE = 0x60007000L
         const val EFUSE_RD_REG_BASE = EFUSE_BASE + 0x30

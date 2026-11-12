@@ -116,6 +116,7 @@ class MainActivity : ComponentActivity() {
                         finally { ndef.close() }
                     }
                     if (uri?.scheme != "avohorse" || uri.host != "identity") return@launch
+                    if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return@launch }
                     val type = uri.pathSegments.getOrNull(0)
                     val code = uri.pathSegments.getOrNull(1) ?: return@launch
                     if (type != "horse" && type != "rider") return@launch
@@ -155,6 +156,8 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         enableGlobalNfc()
+        // recovery when the app opens: pending deliveries and received trainings
+        (application as AvoApp).container.let { c -> if (c.identity.card.value != null) { c.share.schedule(); c.share.runNow() } }
     }
 
     override fun onPause() {
@@ -163,18 +166,29 @@ class MainActivity : ComponentActivity() {
     }
 
     private var incomingAvo by mutableStateOf<Uri?>(null)
+    private var openShare by mutableStateOf(false)
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
         incomingAvo = extractAvoUri(intent)
+        if (intent.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
+    }
+
+    /** AVO user card: adopted as the phone identity only if there is none (see UserIdentity). */
+    private fun onUserCard(uri: String) {
+        val c = (application as AvoApp).container
+        val text = try { c.identity.message(c.identity.onCardTapped(uri)) } catch (e: Exception) { "NFC: ${e.message ?: "tarjeta no válida"}" }
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "tarjeta AVO")
+        runOnUiThread { android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show() }
     }
 
     private fun handleSystemNfc(intent: Intent?) {
         if (intent?.action != NfcAdapter.ACTION_NDEF_DISCOVERED) return
         val uri = intent.data ?: return
         if (uri.scheme != "avohorse" || uri.host != "identity") return
+        if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return }
         val type = uri.pathSegments.getOrNull(0)
         val code = uri.pathSegments.getOrNull(1) ?: return
         if (type !in listOf("horse", "rider")) return
@@ -222,14 +236,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         val c = (application as AvoApp).container
         incomingAvo = extractAvoUri(intent)
+        if (intent?.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
+        // with a watch (Bluetooth) or, without a watch, to receive trainings from other AVO users
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "app abierta")
         setContent {
             AvoTheme {
                 var bootVisible by rememberSaveable { mutableStateOf(savedInstanceState == null) }
                 LaunchedEffect(Unit) { delay(3000L); bootVisible = false }
                 if (bootVisible) AvoBootScreen(c, onContinue = { bootVisible = false })
-                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }) { permLauncher.launch(Perms.required) }
+                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }, openShare = openShare, onShareOpened = { openShare = false }) { permLauncher.launch(Perms.required) }
             }
         }
     }
@@ -240,21 +257,23 @@ private data class Tab(val route: String, val label: String, val icon: ImageVect
 private val tabs = listOf(
     Tab("inicio", "Inicio", Icons.Filled.Home),
     Tab("entrenamiento", "Entrenar", Icons.Filled.PlayArrow),
-    Tab("historial", "Historial", Icons.AutoMirrored.Filled.List),
+    Tab("historial", "Entrenos", Icons.AutoMirrored.Filled.List),
     Tab("mareas", "Mareas", Icons.Filled.Waves),
     Tab("caballos", "Cuadra", Icons.Filled.Favorite),
 )
 
 private val titles = mapOf(
-    "configuracion" to "Ajustes", "nfc" to "NFC", "bluetooth" to "Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Sincronización",
-    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
+    "configuracion" to "Ajustes", "nfc" to "Tarjetas NFC", "bluetooth" to "Reloj y Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Descarga del reloj",
+    "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "compartir" to "Compartir y sincronizar", "lugar" to "Lugar de entrenamiento", "nomolestar" to "No molestar", "favoritos" to "WhatsApp · favoritos",
+    "copias" to "Copias de seguridad", "acerca" to "Acerca de", "caballo/{code}" to "Caballo", "jinete/{code}" to "Jinete", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, requestPerms: () -> Unit) {
+fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, openShare: Boolean = false, onShareOpened: () -> Unit = {}, requestPerms: () -> Unit) {
     val nav = rememberNavController()
     LaunchedEffect(incomingAvo) { if (incomingAvo != null) nav.navigate("historial") { launchSingleTop = true } }
+    LaunchedEffect(openShare) { if (openShare) { nav.navigate("compartir") { launchSingleTop = true }; onShareOpened() } }
     val entry by nav.currentBackStackEntryAsState()
     val route = entry?.destination?.route
     val isTab = tabs.any { it.route == route }
@@ -266,7 +285,7 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
                     if (isTab) Row(verticalAlignment = Alignment.CenterVertically) {
                         Text("AVO", color = AvoColors.Red, fontWeight = FontWeight.Black, fontSize = 22.sp, letterSpacing = 2.sp)
                         Spacer(Modifier.width(10.dp))
-                        Text(tabs.first { it.route == route }.label.uppercase(), color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp, letterSpacing = 1.5.sp)
+                        Text((if (route == "historial") "Entrenamientos" else tabs.first { it.route == route }.label).uppercase(), color = AvoColors.Text, fontWeight = FontWeight.Bold, fontSize = 16.sp, letterSpacing = 1.5.sp)
                     } else Text((titles[route] ?: "AVO").uppercase(), fontWeight = FontWeight.Bold, fontSize = 17.sp, letterSpacing = 1.2.sp)
                 },
                 navigationIcon = { if (!isTab && route != null) IconButton(onClick = { nav.popBackStack() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Atrás") } },
@@ -308,7 +327,15 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
             composable("diagnosticos") { DiagnosticsScreen(c) }
             composable("dispositivos") { DeviceManagerScreen(c) }
             composable("almacenamiento") { StorageScreen(c) }
-            composable("jinetes") { RidersScreen(c) }
+            composable("jinetes") { RidersScreen(c, go(nav)) }
+            composable("compartir") { org.avoperformance.horse.ui.screens.ShareScreen(c) }
+            composable("lugar") { org.avoperformance.horse.ui.screens.SpotScreen(c) }
+            composable("nomolestar") { org.avoperformance.horse.ui.screens.DndScreen(c) }
+            composable("favoritos") { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) }
+            composable("copias") { org.avoperformance.horse.ui.screens.BackupScreen(c) }
+            composable("acerca") { org.avoperformance.horse.ui.screens.AboutScreen() }
+            composable("caballo/{code}") { org.avoperformance.horse.ui.screens.HorseProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
+            composable("jinete/{code}") { org.avoperformance.horse.ui.screens.RiderProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
             composable("comparar/{a}/{b}") { back -> CompareScreen(c, back.arguments?.getString("a") ?: "", back.arguments?.getString("b") ?: "") }
             composable("detalle/{id}") { TrainingDetailScreen(c, it.arguments?.getString("id") ?: "") }
         }

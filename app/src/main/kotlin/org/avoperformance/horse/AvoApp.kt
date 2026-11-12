@@ -26,6 +26,8 @@ class AppContainer(val app: Application) {
     val db = AvoDatabase.create(app)
     val secure = SecureStore(app)
     val settings = Settings(app, secure)
+    /** AVO user identity (NFC card) for app-to-app sending. */
+    val identity = org.avoperformance.horse.identity.UserIdentity(secure)
     /** Server layer on hold: no endpoint is invented. */
     val server: ServerApi = NotConfiguredServer
     val log = AppLog(this)
@@ -35,6 +37,26 @@ class AppContainer(val app: Application) {
     val ntrip = NtripManager(settings, watch, log, scope)
     val tides = org.avoperformance.horse.tide.TideRepository(app)
     val sync = WatchSyncManager(app, db, settings, watch, server, log, scope)
+    /** Training download over Wi-Fi (CHEST V3.7.4+), BLE as fallback. */
+    val wifiSync = org.avoperformance.horse.wifi.AvoWifiSyncManager(app, watch, log, { sync.trainingsDir },
+        org.avoperformance.horse.core.wifi.VerifiedSink { id, dir, sha, bytes -> sync.completeFromWifi(id, dir, sha, bytes) }).also { sync.wifi = it }
+    /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
+    val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
+    /** Sharing between AVO users over Firebase (global, per horse and manual). */
+    val share = org.avoperformance.horse.cloud.ShareManager(this).also { s -> sync.onVerified = { id -> s.onTrainingVerified(id) } }
+    /** V3.9 GNSS: records RTK FIX losses and an L1-only antenna in the app log (Ajustes → Diagnóstico). */
+    init {
+        scope.launch {
+            var lastLost = -1; var l1Warned = false
+            watch.telemetry.collect { s ->
+                val q = s?.t?.v3 ?: return@collect
+                if (lastLost >= 0 && q.fixLost > lastLost) log.w("RTK", "FIX perdido (${q.fixLost} desde el arranque de la espalda)")
+                lastLost = q.fixLost
+                if (q.l1Only && !l1Warned) { l1Warned = true; log.w("RTK", "antena sin segunda frecuencia (L2/E5b/B2): no habrá RTK FIX") }
+                if (!q.l1Only && q.signalsFresh) l1Warned = false
+            }
+        }
+    }
 }
 
 class AppLog(private val c: AppContainer) {
@@ -54,6 +76,7 @@ class AvoApp : Application() {
     override fun onCreate() {
         super.onCreate()
         container = AppContainer(this)
+        MainThreadWatchdog(container.log).start()   // diagnostic: records where the UI freezes
         Configuration.getInstance().userAgentValue = packageName
         Configuration.getInstance().osmdroidBasePath = filesDir.resolve("osmdroid")
         Configuration.getInstance().osmdroidTileCache = cacheDir.resolve("osmdroid_tiles")

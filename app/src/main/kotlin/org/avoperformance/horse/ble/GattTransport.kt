@@ -122,11 +122,11 @@ class GattTransport(
     override suspend fun writeCtrl(frag: ByteArray) {
         val c = ch(AvoGatt.CTRL_RX)
         var st = -2
-        for (i in 0 until 3) {   // the stack may be momentarily busy
+        for (i in 0 until 4) {   // the stack may be momentarily busy (-2) or report a transient GATT error (133)
             st = gattOp { write(c, frag, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT) }
             if (st == BluetoothGatt.GATT_SUCCESS) return
-            if (st != -2) break
-            kotlinx.coroutines.delay(20)
+            if (st != -2 && st != 133) break
+            kotlinx.coroutines.delay(if (st == 133) 150L else 20L)
         }
         throw IOException("Escritura BLE fallida (estado $st)")
     }

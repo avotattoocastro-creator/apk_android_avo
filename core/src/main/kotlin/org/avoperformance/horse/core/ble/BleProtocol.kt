@@ -33,6 +33,7 @@ enum class MsgType(val code: Int) {
     LIST_SESSIONS(0x40), READ_FILE(0x41), FILE_SHA256(0x42), MARK_UPLOADED(0x43),
     DELETE_PREPARE(0x44), DELETE_COMMIT(0x45), FILE_DATA(0x46),
     DIAG_GET(0x60), BLACKBOX_READ(0x61), REBOOT(0x62),
+    WIFI_SYNC(0x64),   // V3.7.4: Wi-Fi download (1 start, 2 stop, 3 status, 4 regenerate password)
     TIME_SET(0x70), CREDITS(0x71),
     NACK(0x7E), ACK(0x7F),
     TELEMETRY(0x80), EVENT(0x81);

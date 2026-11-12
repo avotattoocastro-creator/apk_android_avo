@@ -4,7 +4,7 @@ name: Build AVO Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse]
+    branches: [main, feature/android-v1-4-ota-pecho, feature/android-v1-9-nfc-segments, develop/avo-performance-horse, feature/avo-equine-intelligence-engine, feature/avo-nfc-identity, feature/avo-firebase-sync, feature/avo-wifi-sync]
     paths:
       - 'AVO_ANDROID_V1_0_FUENTES_PARA_GITHUB.zip'
       - 'AVO_ANDROID_V1_1_FUENTES_PARA_GITHUB.zip'
@@ -24,6 +24,9 @@ on:
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'AVO_ANDROID_V1_8_BLE_RECOVERY_FUENTES.zip'
       - 'app/**'
+      - 'cards/**'
+      - 'equine-intelligence/**'
+      - 'firmware/back/V3_8_0/lib/avo_core/**'
       - 'core/**'
       - 'gradle/**'
       - 'gradlew'
@@ -126,7 +129,7 @@ jobs:
           fi
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
@@ -139,7 +142,7 @@ jobs:
       - name: Install Android SDK 35
         shell: bash
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools" "ndk;27.0.12077973" "cmake;3.22.1"
 
       - name: Setup Gradle cache
         uses: gradle/actions/setup-gradle@v4
@@ -157,20 +160,54 @@ jobs:
         shell: bash
         run: |
           cd "$AVO_SOURCE_DIR"
-          ./gradlew --no-daemon :core:test
+          set -o pipefail
+          ./gradlew --no-daemon :core:test 2>&1 | tee "$RUNNER_TEMP/core.log" || {
+            grep -E '^e: ' "$RUNNER_TEMP/core.log" | head -30 | sed -E 's#^e: (file://)?([^:]+):([0-9]+):([0-9]+) (.*)#::error file=\2,line=\3,col=\4::\5#' || true
+            grep -E ' > .* FAILED$' -A3 "$RUNNER_TEMP/core.log" | head -40 | tr '\n' ' ' | sed 's/^/::error title=Prueba core::/' ; echo
+            exit 1
+          }
 
+      - name: Resumen de pruebas JVM
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import glob, xml.etree.ElementTree as ET
+          t = f = 0
+          for x in glob.glob("${{ env.AVO_SOURCE_DIR }}/core/build/test-results/test/*.xml", recursive=True):
+              r = ET.parse(x).getroot()
+              for s in ([r] if r.tag == "testsuite" else r.iter("testsuite")):
+                  t += int(s.get("tests", 0)); f += int(s.get("failures", 0)) + int(s.get("errors", 0))
+          print(f"::notice::Pruebas core (incluye EquineResultTest): {t} pruebas, {f} fallos")
+          PY
       - name: Verify Android JVM tests
         shell: bash
         run: |
           cd "$AVO_SOURCE_DIR"
           ./gradlew --no-daemon :app:testDebugUnitTest
 
+      - name: Stable signing key (secrets)
+        env:
+          AVO_KEYSTORE_BASE64: ${{ secrets.AVO_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$AVO_KEYSTORE_BASE64" ]; then
+            echo "$AVO_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/avo.jks"
+            echo "AVO_KEYSTORE_FILE=$RUNNER_TEMP/avo.jks" >> "$GITHUB_ENV"
+            echo "::notice::APK firmado con la clave estable AVO"
+          else
+            echo "::warning::Sin secreto AVO_KEYSTORE_BASE64: APK con clave debug temporal (requerirá desinstalar)"
+          fi
+
       - name: Build debug APK
+        env:
+          AVO_KEYSTORE_PASSWORD: ${{ secrets.AVO_KEYSTORE_PASSWORD }}
+          AVO_KEY_ALIAS: ${{ secrets.AVO_KEY_ALIAS }}
+          AVO_KEY_PASSWORD: ${{ secrets.AVO_KEY_PASSWORD }}
         shell: bash
         run: |
           cd "$AVO_SOURCE_DIR"
           set -o pipefail
-          ./gradlew --no-daemon :app:assembleDebug 2>&1 | tee "$RUNNER_TEMP/build.log" || {
+          ./gradlew --no-daemon :app:assembleDebug :cards:assembleDebug 2>&1 | tee "$RUNNER_TEMP/build.log" || {
             grep -E '^e: ' "$RUNNER_TEMP/build.log" | head -40 | sed -E 's#^e: (file://)?([^:]+):([0-9]+):([0-9]+) (.*)#::error file=\2,line=\3,col=\4::\5#' || true
             exit 1
           }
@@ -182,9 +219,13 @@ jobs:
           mkdir -p "$GITHUB_WORKSPACE/out"
           APK=$(find "$AVO_SOURCE_DIR/app/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit)
           test -n "$APK"
-          VERSION="V2_0"
+          VERSION="V2_1_MOTOR_1_1_0_DEV1"
+          # the APK must contain the engine for every supported ABI
+          for abi in arm64-v8a armeabi-v7a x86_64; do unzip -l "$APK" | grep -q "lib/$abi/libavo_equine_jni.so" || { echo "::error::falta libavo_equine_jni.so para $abi"; exit 1; }; done
           OUTPUT="AVO_Performance_Horse_${VERSION}_debug.apk"
           cp "$APK" "$GITHUB_WORKSPACE/out/$OUTPUT"
+          CARDS=$(find "$AVO_SOURCE_DIR/cards/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -print -quit 2>/dev/null || true)
+          if [ -n "$CARDS" ]; then cp "$CARDS" "$GITHUB_WORKSPACE/out/AVO_Tarjetas_V1_0_DEV1_debug.apk"; (cd "$GITHUB_WORKSPACE/out" && sha256sum AVO_Tarjetas_V1_0_DEV1_debug.apk > AVO_Tarjetas_V1_0_DEV1_debug.apk.sha256); fi
           cd "$GITHUB_WORKSPACE/out"
           sha256sum "$OUTPUT" > "$OUTPUT.sha256"
           cat "$OUTPUT.sha256"
@@ -192,7 +233,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AVO-Performance-Horse-V2-0-APK
+          name: AVO-Performance-Horse-V2-1-motor-APK
           path: out/
           if-no-files-found: error
           retention-days: 30
@@ -205,3 +246,53 @@ jobs:
           path: ${{ env.AVO_SOURCE_DIR }}/core/build/reports/tests/test/
           if-no-files-found: ignore
           retention-days: 14
+
+  # RAW -> JNI -> C++ engine -> Kotlin model on a real Android runtime (x86_64 emulator).
+  android-device-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v4
+        with: { packages: 'platform-tools' }
+      - name: SDK, NDK y CMake
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.0.12077973" "cmake;3.22.1"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Habilitar KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Pruebas instrumentadas en emulador
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          arch: x86_64
+          target: default
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            chmod +x gradlew
+            ./gradlew --no-daemon :app:connectedDebugAndroidTest
+      - name: Resumen de pruebas instrumentadas
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import glob, xml.etree.ElementTree as ET
+          t = f = 0
+          for x in glob.glob("app/build/outputs/androidTest-results/connected/**/*.xml", recursive=True):
+              r = ET.parse(x).getroot()
+              for s in ([r] if r.tag == "testsuite" else r.iter("testsuite")):
+                  t += int(s.get("tests", 0)); f += int(s.get("failures", 0)) + int(s.get("errors", 0))
+          print(f"::notice::Pruebas en emulador (RAW -> JNI -> motor -> Kotlin): {t} pruebas, {f} fallos")
+          PY
+      - name: Informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AVO-device-test-report
+          path: app/build/reports/androidTests/connected/
+          if-no-files-found: ignore

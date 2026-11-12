@@ -14,7 +14,9 @@ internal object FirmwareImage {
         val chipId: Int?,
         val reason: String,
         val info: AppImage.Info? = null,
-        val image: ByteArray? = null
+        val image: ByteArray? = null,
+        /** Full image of the girth unit (ESP32-C6): installed by [GirthInstaller], never by the S3 path. */
+        val girth: GirthImage.Info? = null
     )
 
     fun inspect(input: InputStream): Result {
@@ -36,6 +38,11 @@ internal object FirmwareImage {
         val sha = hex(digest.digest())
         val bytes = complete.toByteArray()
         val chipId = if (bytes.size >= 14 && (bytes[0].toInt() and 255) == AppImage.MAGIC) u16le(bytes, 12) else null
+        if (GirthImage.looksLikeGirthFull(bytes)) return try {
+            val g = GirthImage.parse(bytes)
+            Result(total, sha, true, chipId, "Imagen completa AVO GIRTH ${g.version} para la cincha (ESP32-C6): " +
+                g.regions.joinToString(", ") { it.name } + ". La NVS (emparejamiento) no se toca.", g.app, null, g)
+        } catch (e: UpdateException) { Result(total, sha, false, chipId, e.message ?: "Imagen de la cincha inválida") }
         return try {
             val info = AppImage.parse(bytes)
             if (bytes.size >= 0x8000 && looksLikeMergedFlashImage(bytes))

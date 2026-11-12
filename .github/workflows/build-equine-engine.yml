@@ -1,0 +1,64 @@
+name: Equine Intelligence Engine
+on:
+  push:
+    branches: [feature/avo-equine-intelligence-engine]
+    paths: ['equine-intelligence/**', 'firmware/back/V3_8_0/lib/avo_core/**', 'core/src/test/resources/**', '.github/workflows/build-equine-engine.yml']
+  workflow_dispatch:
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tests con ASan/UBSan
+        run: |
+          cmake -S equine-intelligence -B eqb -DAVO_EQ_SANITIZE=ON -DCMAKE_BUILD_TYPE=Debug
+          cmake --build eqb -j
+          ./eqb/avo_eq_tests > tests.txt 2>&1 || { grep -E "FALLO|ERROR|runtime error" tests.txt | head -30 | sed 's/^/::error::/'; tail -3 tests.txt; exit 1; }
+          tail -1 tests.txt | sed 's/^/::notice::/'
+          grep -E "^    " tests.txt | head -60
+      - name: Release + banco + ML demo
+        run: |
+          cmake -S equine-intelligence -B eqr -DCMAKE_BUILD_TYPE=Release
+          cmake --build eqr -j
+          python3 equine-intelligence/tools/scientific-bench/bench.py --lib eqr/libavo_equine.so --out bench_out
+          python3 equine-intelligence/ml/avo_ml.py demo --out demo.jsonl
+          python3 equine-intelligence/ml/avo_ml.py evaluate --dataset demo.jsonl --report demo_eval.json
+      - name: Fixtures RAW -> motor -> JSON (consumidos por Kotlin, Android y Windows)
+        run: python3 equine-intelligence/tools/fixtures/check_fixtures.py eqr/avo_eq_cli
+      - uses: actions/setup-java@v5
+        with: { distribution: temurin, java-version: '17' }
+      - name: Puente JNI en JVM anfitriona (mismo avo_eq_jni.cpp que Android)
+        run: |
+          set -e
+          mkdir -p jni_out
+          g++ -std=c++17 -O2 -shared -fPIC -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" -Iequine-intelligence/include \
+            equine-intelligence/integrations/android/jni/avo_eq_jni.cpp -Wl,--whole-archive eqr/libavo_eq.a -Wl,--no-whole-archive -o jni_out/libavo_equine_jni.so
+          H=equine-intelligence/integrations/android/host-test
+          javac -d jni_classes $H/org/avoperformance/horse/engine/AvoEquine.java $H/JniChainTest.java
+          LC_ALL=C.UTF-8 java -Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8 -Djava.library.path=jni_out -cp jni_classes JniChainTest core/src/test/resources/equine/synthetic_session.avo jni_work | tee jni.txt
+          grep -q "cadena completa correcta" jni.txt && echo "::notice::$(tail -1 jni.txt)"
+      - uses: actions/upload-artifact@v4
+        with: { name: equine-linux, path: "eqr/libavo_equine.so\nbench_out\ndemo_eval.json" }
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - shell: bash
+        run: |
+          set -o pipefail
+          cmake -S equine-intelligence -B eqw > log.txt 2>&1 || { grep -iE "error" log.txt | head -20 | sed 's/^/::error::/'; exit 1; }
+          cmake --build eqw --config Release >> log.txt 2>&1 || { grep -E "error" log.txt | head -20 | sed 's/^/::error::/'; exit 1; }
+          ./eqw/Release/avo_eq_tests.exe > t.txt 2>&1 || { grep -iE "FALLO|fail|error" t.txt | head -20 | sed 's/^/::error::/'; tail -3 t.txt | sed 's/^/::error::/'; exit 1; }
+          tail -1 t.txt | sed 's/^/::notice::/'
+      - uses: actions/upload-artifact@v4
+        with: { name: equine-windows-dll, path: eqw/Release/avo_equine.dll }
+  android:
+    runs-on: ubuntu-latest
+    strategy: { matrix: { abi: [arm64-v8a, armeabi-v7a, x86_64] } }
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cmake -S equine-intelligence/integrations/android -B eqa -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake -DANDROID_ABI=${{ matrix.abi }} -DANDROID_PLATFORM=24 -DCMAKE_BUILD_TYPE=Release
+          cmake --build eqa -j
+      - uses: actions/upload-artifact@v4
+        with: { name: "equine-android-${{ matrix.abi }}", path: eqa/libavo_equine_jni.so }

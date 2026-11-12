@@ -1,0 +1,162 @@
+{
+ "piezas": {
+  "AVO_GIRTH_R5_base": {
+   "volumen_mm3": 10387.4,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    74.8,
+    51.02,
+    7.81
+   ]
+  },
+  "AVO_GIRTH_R5_aro_rojo": {
+   "volumen_mm3": 221.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    70.01,
+    51.01,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R5_tapa": {
+   "volumen_mm3": 10699.4,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    73.2,
+    51.05,
+    6.78
+   ]
+  },
+  "AVO_GIRTH_R5_bandeja": {
+   "volumen_mm3": 3158.1,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    62.51,
+    43.51,
+    3.2
+   ]
+  },
+  "AVO_GIRTH_R5_junta_TPU": {
+   "volumen_mm3": 254.7,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    67.21,
+    48.21,
+    1.01
+   ]
+  },
+  "AVO_GIRTH_R5_soporte": {
+   "volumen_mm3": 36915.3,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    102.66,
+    61.46,
+    11.01
+   ]
+  },
+  "AVO_GIRTH_R5_cierre_x2": {
+   "volumen_mm3": 938.6,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    8.72,
+    16.0,
+    14.92
+   ]
+  },
+  "AVO_GIRTH_R5_pasador_x2": {
+   "volumen_mm3": 82.6,
+   "valido": true,
+   "solidos": 1,
+   "caja": [
+    3.8,
+    23.4,
+    2.75
+   ]
+  }
+ },
+ "interferencias": {},
+ "medidas": {
+  "soporte_mm": [
+   102.64,
+   61.44,
+   10.45
+  ],
+  "capsula_mm": [
+   70.0,
+   51.0,
+   13.8
+  ],
+  "aberturas_al_exterior": 0,
+  "tornillos_M3": 8,
+  "imanes_5x1": 8,
+  "junta_compresion_pct": 29,
+  "bno_taladros": [
+   [
+    -7.000000000000001,
+    -11.419999999999998
+   ],
+   [
+    -7.000000000000001,
+    8.879999999999999
+   ]
+  ],
+  "bno_pines_y": {
+   "PS0": 10.16,
+   "PS1": 7.62,
+   "RST": 5.08,
+   "INT": 2.54,
+   "CS": 0.0,
+   "AD0": -2.54,
+   "SDA": -5.08,
+   "SCL": -7.62,
+   "GND": -10.16,
+   "VCC": -12.7
+  },
+  "c6_pads_D0_D6_y": [
+   7.62,
+   5.08,
+   2.54,
+   0.0,
+   -2.54,
+   -5.08,
+   -7.62
+  ],
+  "c6_centro": [
+   15.6,
+   0.0
+  ],
+  "led": [
+   13.95,
+   -8.5
+  ]
+ },
+ "clic_interferencia_grados_mm3": {
+  "1": 0.25,
+  "2": 1.15,
+  "3": 1.7,
+  "4": 1.86,
+  "5": 1.5,
+  "6": 0.76,
+  "7": 0.0,
+  "8": 0.0,
+  "9": 0.0,
+  "10": 0.0,
+  "11": 0.0
+ },
+ "barrido_cierre_grados_mm3": {
+  "0": 0.0,
+  "12": 0.0,
+  "15": 0.0,
+  "20": 0.0,
+  "30": 0.0,
+  "45": 0.0,
+  "60": 0.0
+ }
+}

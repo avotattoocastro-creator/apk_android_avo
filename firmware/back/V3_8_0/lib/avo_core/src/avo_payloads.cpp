@@ -81,6 +81,11 @@ size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap) {
     w.u32(s.zed_baud); w.u8(s.zed_port); w.u8(s.zed_cfg); w.u8(s.nav_rate_cfg_hz); w.u8(s.zed_detail);
     w.u32(s.rtcm_gaps_bytes); w.u32(s.rtcm_not_written); w.u32(s.link_tx_fail); w.i8(s.link_rssi); w.u8(0);
     w.u32(s.ubx_frames); w.u32(s.nmea_sentences);
+    if (s.v3) {
+      w.u8(s.sv_tracked); w.u8(s.sv_used); w.u8(s.sig_tracked); w.u8(s.sig_used); w.u8(s.sig_cr_used); w.u8(s.sig_corr);
+      w.u8(s.sig_l2); w.u8(s.sig_l2_used); w.u8(s.sig_weak); w.u8(s.cno_mean); w.u8(s.cno_min); w.u8(s.cno_max);
+      w.u8(s.quality_age_s); w.u8(s.quality_mon); w.u16(s.fix_lost); w.u16(s.ttff_fix_s); w.u32(s.fixed_ms); w.u32(s.float_ms);
+    }
   }
   return w.ok() ? w.size() : 0;
 }
@@ -100,6 +105,14 @@ bool decode_status(const uint8_t* p, size_t n, BackStatus* s) {
     s->rtcm_gaps_bytes = r.u32(); s->rtcm_not_written = r.u32(); s->link_tx_fail = r.u32(); s->link_rssi = r.i8(); r.u8();
     s->ubx_frames = r.u32(); s->nmea_sentences = r.u32();
     s->v2 = r.ok();
+  }
+  s->v3 = false;
+  if (s->v2 && r.remaining() >= BACK_STATUS_V3_LEN - BACK_STATUS_V2_LEN) {
+    s->sv_tracked = r.u8(); s->sv_used = r.u8(); s->sig_tracked = r.u8(); s->sig_used = r.u8(); s->sig_cr_used = r.u8();
+    s->sig_corr = r.u8(); s->sig_l2 = r.u8(); s->sig_l2_used = r.u8(); s->sig_weak = r.u8(); s->cno_mean = r.u8();
+    s->cno_min = r.u8(); s->cno_max = r.u8(); s->quality_age_s = r.u8(); s->quality_mon = r.u8();
+    s->fix_lost = r.u16(); s->ttff_fix_s = r.u16(); s->fixed_ms = r.u32(); s->float_ms = r.u32();
+    s->v3 = r.ok();
   }
   return true;
 }

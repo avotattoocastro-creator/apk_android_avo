@@ -11,6 +11,7 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | Componente | Versión en código | Estado comprobado |
 | --- | --- | --- |
 | App Android AVO Performance Horse | **2.0** (`versionCode=12`) | Rediseño, mareas IHM y análisis; CI correcto [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) (commit `049abc7`); **no verificado en móvil** |
+| Motor de análisis AVO (Equine Intelligence Engine) | **1.1.0-dev1** en rama `feature/avo-equine-intelligence-engine` | Integrado en Android 2.1-motor y Windows; CI en verde (motor 40041495035, Android 40041494960, Windows 40041494972); **no verificado físicamente** |
 | Módulo de mareas | Android 2.0 | Predicción oficial del IHM, coeficiente, sol y luna, Open-Meteo; lectura real no verificada en móvil |
 | Metadatos marítimos de entrenamientos | Android 2.0 (IHM + Open-Meteo, cualquier fecha) | Persistencia y enriquecimiento de sesiones recientes incorporados; falta ensayo con sesión real |
 | Firmware CHEST Waveshare ESP32-S3 | **V3.5.6** (última fuente/parche integrada) | Fuentes V3.5.4 y parches V3.5.5/V3.5.6 disponibles; no se afirma prueba de firma en hardware |
@@ -19,7 +20,7 @@ Repositorio conjunto para la aplicación Android, el firmware de pecho y la herr
 | OTA desde la app Android | **Retirada en 2.0** | El firmware se instala con el programador USB |
 | Firmware espalda y cincha | No integrados en esta rama | Pendientes de importar desde fuentes verificadas |
 | Firmware CHEST pantalla **V3.7.2-rc1** (23/10/2026) | Siete franjas legibles sin LVGL, pantallas de carga y apagado | CI correcto [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870); **no verificado en el reloj** |
-| Firmware espalda **3.8.0** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P, RTK 8 Hz 4 constelaciones, perfil de precisión | CI correcto; **no verificado en la espalda** |
+| Firmware espalda **3.10.2** (`firmware/back/V3_8_0`) | Heltec + ZED-F9P, RTK 8 Hz 4 constelaciones, perfil de precisión, batería, modo carga, cincha, ahorro de batería (3.10.2) | 3.10.1 en uso en la espalda; 3.10.2 **no verificada en la espalda** |
 | Programador USB **2.1.0** (`usb-updater/`) | Instalación en pecho y espalda + lectura, identificación y copia completa de cualquier ESP32-S3 | CI correcto [40009097029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40009097029); **no verificado con el pecho ni la espalda** |
 
 ## Documentación compartida (Claude y ChatGPT)

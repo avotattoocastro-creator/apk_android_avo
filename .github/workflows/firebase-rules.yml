@@ -1,0 +1,46 @@
+name: Firebase rules (emulator)
+# Tests of the Realtime Database security rules with Firebase Emulator Suite.
+# The production rules are only published by hand after these tests pass.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-firebase-sync, develop/avo-performance-horse]
+    paths:
+      - 'firebase/**'
+      - '.github/workflows/firebase-rules.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  rules:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: firebase
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Rules tests in the emulator
+        shell: bash
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee "$RUNNER_TEMP/rules.log"
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          P=$(grep -cE '^# pass|^ok ' "$RUNNER_TEMP/rules.log" || true)
+          grep -E '^# (tests|pass|fail)' "$RUNNER_TEMP/rules.log" | tr '\n' ' ' | sed 's/^/::notice title=Reglas Firebase::/' || true
+          echo
+          grep -E '^not ok' -A12 "$RUNNER_TEMP/rules.log" | head -60 | tr '\n' ' ' | sed 's/^/::error title=Regla fallida::/' || true

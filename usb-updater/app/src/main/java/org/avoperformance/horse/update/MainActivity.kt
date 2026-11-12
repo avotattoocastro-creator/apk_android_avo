@@ -103,6 +103,15 @@ class MainActivity : Activity() {
     private lateinit var backupButton: Button
     private lateinit var reportButton: Button
     private lateinit var autoBoot: CheckBox
+    // ---- Serial monitor (V2.2): what the watch prints over USB (boot, reboot reason, memory)
+    private lateinit var monitorView: TextView
+    private lateinit var monitorStartButton: Button
+    private lateinit var monitorResetButton: Button
+    private lateinit var monitorStopButton: Button
+    private lateinit var monitorSaveButton: Button
+    private val monitorRunning = AtomicBoolean(false)
+    private val monitorLog = StringBuilder()
+    @Volatile private var monitorDirty = false
     private lateinit var root: FrameLayout
     private var boot: View? = null
     private var bootRows: LinearLayout? = null
@@ -309,6 +318,13 @@ class MainActivity : Activity() {
             cancel.set(true); stepState.text = "Cancelando… (si se está activando, se termina primero de forma segura)"
         }.apply { visibility = View.GONE }
 
+        val mon = card(col, "Monitor serie")
+        monitorStartButton = secondary(mon, "Iniciar monitor") { startMonitor(reset = false) }
+        monitorResetButton = secondary(mon, "Reiniciar reloj y capturar") { startMonitor(reset = true) }
+        monitorStopButton = secondary(mon, "Parar monitor") { monitorRunning.set(false) }.apply { visibility = View.GONE }
+        monitorSaveButton = secondary(mon, "Guardar monitor (.txt)") { saveMonitor() }
+        monitorView = row(mon, 10f, cSilver).apply { typeface = Typeface.MONOSPACE; setTextIsSelectable(true); text = "—" }
+
         val lg = card(col, "Registro")
         logView = row(lg, 11f, cDim).apply { typeface = Typeface.MONOSPACE; setTextIsSelectable(true) }
 
@@ -372,7 +388,7 @@ class MainActivity : Activity() {
         val s = snapshot
         val info = firmware?.info
         planText = null; planError = null
-        if (s != null && info != null) {
+        if (s != null && info != null && firmware?.girth == null) {
             try { planText = InstallPlanner.plan(s, info).summary().joinToString("\n") }
             catch (e: UpdateException) { planError = e.userMessage }
         }
@@ -380,6 +396,7 @@ class MainActivity : Activity() {
             planError != null -> "✖ $planError"
             planText != null -> planText
             firmware?.validHeader != true -> "Selecciona un firmware válido."
+            firmware?.girth != null -> "Cincha (ESP32-C6): conecta el módulo por USB y pulsa INSTALAR. No hace falta comprobar particiones."
             s == null -> "Pulsa COMPROBAR MÓDULO PARA INSTALAR (particiones, slot activo y seguridad)."
             else -> ""
         }
@@ -389,8 +406,12 @@ class MainActivity : Activity() {
         val idle = !busy.get()
         val any = UsbLinks.find(usb) != null
         readButton.enable(idle && any)
+        monitorStartButton.enable(idle && any)
+        monitorResetButton.enable(idle && any)
+        monitorSaveButton.enable(idle)
         selectButton.enable(idle)
-        installButton.enable(idle && planText != null && firmware?.validHeader == true && any)
+        val girth = firmware?.girth != null
+        installButton.enable(idle && firmware?.validHeader == true && any && (girth || planText != null))
         infoButton.enable(idle && any)
         readFwButton.enable(idle && any)
         readPartButton.enable(idle && any && lastInfo?.partitions?.isNotEmpty() == true)
@@ -438,6 +459,15 @@ class MainActivity : Activity() {
 
     private fun readWatch() = runExclusive {
         val auto = autoBoot.isChecked
+        if (firmware?.girth != null) {   // girth unit (ESP32-C6): no OTA partition check, only chip/security
+            try {
+                val lines = GirthInstaller(port(), listener(), cancel).probe(auto)
+                ui { lines.forEach(::appendLog); stepState.text = lines.first() + "\nPulsa INSTALAR FIRMWARE POR USB."; progress.visibility = View.GONE }
+            } catch (e: Exception) {
+                ui { stepState.text = "✖ " + message(e); progress.visibility = View.GONE; appendLog("Error: ${message(e)}") }
+            }
+            return@runExclusive
+        }
         try {
             val snap = Installer(port(), listener(), cancel).probe(auto)
             ui {
@@ -453,14 +483,50 @@ class MainActivity : Activity() {
     }
 
     private fun confirmInstall() {
-        val plan = planText ?: return
         val f = firmware ?: return
+        f.girth?.let { g ->
+            AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+                .setTitle("¿Instalar ${g.label} en la cincha?")
+                .setMessage("Módulo ESP32-C6 de la cincha.\n\nSe escriben: " + g.regions.joinToString(", ") { "${it.name} (${it.length / 1024} KB)" } +
+                    ".\nNo se toca la NVS: si ya estaba emparejada con la espalda, lo sigue estando.\n\nNo desconectes el módulo hasta que termine.")
+                .setPositiveButton("INSTALAR") { _, _ -> installGirth(g) }
+                .setNegativeButton("Cancelar", null)
+                .show()
+            return
+        }
+        val plan = planText ?: return
         AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
             .setTitle("¿Instalar ${f.info?.label ?: firmwareName}?")
             .setMessage("$plan\n\nNo desconectes el reloj ni cierres la aplicación hasta que termine. El reloj se reiniciará varias veces.")
             .setPositiveButton("INSTALAR") { _, _ -> install() }
             .setNegativeButton("Cancelar", null)
             .show()
+    }
+
+    /** Girth unit (ESP32-C6): full image, own installer; then the serial monitor keeps capturing. */
+    private fun installGirth(g: GirthImage.Info) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val auto = autoBoot.isChecked
+        runExclusive {
+            try {
+                val out = GirthInstaller(port(), listener(), cancel).install(g, auto)
+                ui {
+                    resultState.setTextColor(if (out.confirmed) cOk else cWarn)
+                    resultState.text = (if (out.confirmed) "✔ " else "⚠ ") + out.message
+                    if (out.usbText.isNotBlank()) appendLog("Salida USB de la cincha:\n" + out.usbText.takeLast(1500))
+                }
+                monitorLoop(false, "[tras instalar: ${out.message}]\n")
+            } catch (e: Exception) {
+                ui {
+                    resultState.setTextColor(cBad)
+                    resultState.text = "✖ " + message(e)
+                    stepState.text = "Instalación no completada"
+                    appendLog("Error: ${message(e)}")
+                }
+            } finally {
+                ui { window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
+            }
+        }
     }
 
     private fun install() {
@@ -477,6 +543,10 @@ class MainActivity : Activity() {
                     if (out.usbText.isNotBlank()) appendLog("Salida USB del firmware:\n" + out.usbText.takeLast(1500))
                     snapshot = null; updatePlan()
                 }
+                // 2.2.2: keep capturing right away so the first boot of the new firmware (and a possible
+                // rollback) ends up in the monitor; stop it with "Parar" and save with "Guardar monitor".
+                monitorLoop(false, "[tras instalar: ${out.message}]\n" +
+                    (if (out.usbText.isNotBlank()) "--- salida USB durante la verificación ---\n${out.usbText}\n--- monitor en vivo ---\n" else ""))
             } catch (e: Exception) {
                 ui {
                     resultState.setTextColor(cBad)
@@ -603,6 +673,81 @@ class MainActivity : Activity() {
             stepState.text = "✔ Copia completa verificada (MD5 del chip en cada bloque)"
             offerSave(tmp, "${baseName(s.info)}_FLASH_COMPLETA_${size shr 20}MB_$stamp.bin")
         }
+    }
+
+    // ------------------------------------------------------------------ serial monitor
+
+    private fun monitorAppend(text: String) {
+        synchronized(monitorLog) {
+            monitorLog.append(text)
+            if (monitorLog.length > 4_000_000) monitorLog.delete(0, monitorLog.length - 3_000_000)
+        }
+        monitorDirty = true
+    }
+
+    private fun monitorRefresh() {
+        if (!monitorDirty) return
+        monitorDirty = false
+        val tail = synchronized(monitorLog) { monitorLog.substring(maxOf(0, monitorLog.length - 12_000)) }
+        ui { monitorView.text = tail }
+    }
+
+    /**
+     * Reads what the watch prints on its USB port (Serial/ESP log) and keeps it. When the watch reboots the
+     * USB port disappears and reappears: the monitor reconnects on its own and keeps capturing, so the boot of
+     * the next start (reset reason, [AVO MEM]) is recorded. Writes nothing to the watch except, with
+     * [reset], a normal reboot (the same as the button) to capture from the start.
+     */
+    private fun startMonitor(reset: Boolean) = runExclusive { monitorLoop(reset, null) }
+
+    /** Monitor body; also run right after an install so the first boot of the new firmware is captured. */
+    private fun monitorLoop(reset: Boolean, header: String?) {
+        monitorRunning.set(true)
+        synchronized(monitorLog) { monitorLog.setLength(0) }
+        monitorAppend("=== Monitor serie AVO · %s ===\n".format(java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())))
+        if (header != null) monitorAppend(header)
+        ui { monitorStopButton.visibility = View.VISIBLE; stepState.text = "Monitor serie activo" }
+        var link: RomLink? = null
+        var firstOpen = true
+        val buf = ByteArray(4096)
+        var lastUi = 0L
+        try {
+            while (monitorRunning.get() && !cancel.get()) {
+                if (link == null || !link.isOpen) {
+                    runCatching { link?.close() }
+                    link = runCatching { anyPort().open(2_000) }.getOrNull()
+                    if (link == null) { android.os.SystemClock.sleep(200); continue }
+                    link.setBaud(115_200)
+                    if (firstOpen && reset) {
+                        monitorAppend("[reiniciando el reloj]\n")
+                        link.setLines(dtr = false, rts = true); android.os.SystemClock.sleep(120); link.setLines(dtr = false, rts = false)
+                    } else link.setLines(dtr = false, rts = false)
+                    monitorAppend(if (firstOpen) "[conectado: ${link.kind.text}]\n" else "\n[reconectado ${java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())}]\n")
+                    firstOpen = false
+                }
+                val n = link.read(buf, 200)
+                if (n > 0) monitorAppend(String(buf, 0, n, Charsets.ISO_8859_1))
+                else if (!link.isOpen) {   // n <= 0 with the port present = no data (timeout), not a disconnection
+                    monitorAppend("\n[USB desconectado ${java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.ROOT).format(java.util.Date())} — reinicio del reloj? reconectando…]\n")
+                    runCatching { link.close() }; link = null
+                }
+                val now = android.os.SystemClock.elapsedRealtime()
+                if (now - lastUi > 300) { lastUi = now; monitorRefresh() }
+            }
+        } finally {
+            runCatching { link?.close() }
+            monitorRunning.set(false)
+            monitorAppend("\n=== monitor parado ===\n")
+            monitorRefresh()
+            ui { monitorStopButton.visibility = View.GONE; stepState.text = "Monitor serie parado" }
+        }
+    }
+
+    private fun saveMonitor() {
+        val text = synchronized(monitorLog) { monitorLog.toString() }
+        if (text.isBlank()) { appendLog("El monitor está vacío"); return }
+        val tmp = File(cacheDir, "monitor.txt").apply { writeText(text) }
+        offerSave(tmp, "AVO_monitor_serie_$stamp.txt", "text/plain")
     }
 
     private fun saveReport() {

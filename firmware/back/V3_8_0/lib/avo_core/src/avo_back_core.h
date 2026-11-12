@@ -14,6 +14,8 @@
 #include "avo_payloads.h"
 #include "avo_uart_proto.h"
 #include "avo_ubx_zed.h"
+#include "avo_gnss_quality.h"
+#include "avo_girth_link.h"
 
 namespace avo {
 
@@ -28,6 +30,8 @@ class BackPlatform {
   virtual bool radio_send(const uint8_t* mac, const uint8_t* d, size_t n) = 0;
   virtual void radio_set_peer(const uint8_t mac[6]) = 0;
   virtual void save_peer(const NowPeerRecord& r) = 0;
+  // V3.10.0 girth unit: persist the paired girth MAC (default: not persisted)
+  virtual void save_girth(const uint8_t mac[6]) { (void)mac; }
   virtual uint32_t random32() = 0;
   virtual void reboot() = 0;
 };
@@ -43,10 +47,12 @@ struct BackStats {
   uint32_t last_chest_rx_ms = 0;
 };
 
-class BackCore : public ZedIo {
+class BackCore : public ZedIo, private GirthHub::Io {
  public:
   BackCore(BackPlatform* p, const char* dev_id, uint8_t nav_rate_hz);
-  void begin(const NowPeerRecord& stored);
+  // girth_mac: girth stored in NVS (nullptr = none yet)
+  void begin(const NowPeerRecord& stored, const uint8_t* girth_mac = nullptr);
+  const GirthHub& girth() const { return girth_; }
   // Call from the main loop with every packet the radio received (copied out of the WiFi task).
   void on_radio(const uint8_t mac[6], const uint8_t* d, size_t n, int8_t rssi);
   // Call with every byte block read from the ZED UART.
@@ -62,6 +68,10 @@ class BackCore : public ZedIo {
   const ZedManager& zed() const { return zed_; }
   const RtcmStats& rtcm_stats() const { return obs_.stats(); }
   BackStatus status() const;
+  const GnssQuality& quality() const { return q_; }
+  uint16_t fix_lost() const { return fix_lost_; }
+  // V3.8.1: battery voltage measured by the board (0 = unknown); sent to the chest in STATUS.
+  void set_battery_mv(uint16_t mv) { batt_mv_ = mv; }
 
   // ZedIo
   void zed_set_baud(uint32_t b) override { p_->zed_set_baud(b); }
@@ -89,6 +99,20 @@ class BackCore : public ZedIo {
   RtcmObserver obs_;
   BackStats st_;
   uint32_t boot_id_;
+  uint16_t batt_mv_ = 0;
+  // V3.10.0 girth unit (GirthHub::Io)
+  GirthHub girth_;
+  bool send(const uint8_t mac[6], const uint8_t* d, size_t n) override { return p_->radio_send(mac, d, n); }
+  void add_peer(const uint8_t mac[6]) override { p_->radio_set_peer(mac); }
+  void store_girth(const uint8_t mac[6]) override { p_->save_girth(mac); }
+  void forward_imu(const uint8_t* payload, size_t n) override;
+  // V3.9.0 GNSS quality and RTK FIX tracking
+  GnssQuality q_;
+  uint32_t q_ms_ = 0;                 // when the last NAV-SIG arrived (0 = never)
+  uint8_t last_carr_ = 0;
+  uint32_t last_pvt_ms_ = 0;
+  uint16_t fix_lost_ = 0, ttff_fix_s_ = 0xFFFF;
+  uint32_t fixed_ms_ = 0, float_ms_ = 0;
   uint16_t seq_ = 0;
   bool have_off_ = false;
   uint32_t exp_off_ = 0;

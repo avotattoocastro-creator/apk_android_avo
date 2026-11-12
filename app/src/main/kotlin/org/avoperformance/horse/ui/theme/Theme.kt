@@ -30,6 +30,7 @@ object AvoColors {
     val TextDim = Color(0xFF9C9DA4)
     val Ok = Color(0xFF52DD40)
     val Warn = Color(0xFFFFC42C)
+    val Low = Color(0xFFFF8A1F)   // low battery (orange)
     val Bad = Color(0xFFFF3945)
     val Info = Blue
     val Unknown = Color(0xFF93949B)

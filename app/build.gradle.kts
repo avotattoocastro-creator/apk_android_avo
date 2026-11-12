@@ -13,8 +13,20 @@ android {
         applicationId = "org.avoperformance.horse"
         minSdk = 29          // Android 10
         targetSdk = 35
-        versionCode = 12
-        versionName = "2.0"
+        versionCode = 34
+        versionName = "2.3-wifi-dev9"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // AVO Equine Intelligence Engine (C++17, equine-intelligence/) built with the NDK for the supported ABIs
+        ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
+        externalNativeBuild { cmake { arguments += listOf("-DANDROID_STL=c++_static") } }
+    }
+
+    ndkVersion = "27.0.12077973"
+    externalNativeBuild {
+        cmake {
+            path = file("../equine-intelligence/integrations/android/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 
     signingConfigs {
@@ -31,6 +43,11 @@ android {
     }
 
     buildTypes {
+        // Stable signing: when CI has the AVO_KEYSTORE_* secrets, the debug APK is signed with the
+        // same key, so each new version installs over the previous one without losing data.
+        debug {
+            if (System.getenv("AVO_KEYSTORE_FILE") != null) signingConfig = signingConfigs.getByName("release")
+        }
         release {
             isMinifyEnabled = false
             if (System.getenv("AVO_KEYSTORE_FILE") != null) signingConfig = signingConfigs.getByName("release")
@@ -71,5 +88,11 @@ dependencies {
     implementation(libs.work.runtime.ktx)
     implementation(libs.coroutines.android)
     implementation(libs.osmdroid)
+    // App-to-app sending over the internet (Firebase Spark: Authentication + Realtime Database)
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
     testImplementation(libs.junit)
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:runner:1.6.2")
 }

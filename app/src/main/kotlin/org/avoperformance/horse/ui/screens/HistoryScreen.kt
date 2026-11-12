@@ -17,6 +17,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
@@ -65,9 +66,20 @@ fun syncColor(s: SyncState?) = when (s) {
 @Composable
 fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.net.Uri? = null, onImportHandled: () -> Unit = {}) {
     val context = LocalContext.current
+    // Opening the trainings syncs with Firebase (sending, confirmations and receptions) without waiting for the periodic task
+    LaunchedEffect(Unit) {
+        if (c.identity.card.value != null) c.share.runNow()
+        // D) opening Entrenamientos downloads what is pending (if the automatic download is enabled)
+        if (c.settings.autoDownload && c.watch.isReady && c.sync.pendingOnWatch().isNotEmpty()) c.sync.autoSync()
+    }
+    val wifi by c.wifiSync.progress.collectAsStateWithLifecycle()
+    var wifiPaused by remember { mutableStateOf(c.wifiSync.paused) }
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val all by c.db.trainings().all().collectAsStateWithLifecycle(emptyList())
     val progress by c.sync.progress.collectAsStateWithLifecycle()
+    // modo descarga: pantalla encendida mientras se descarga (evita que Android limite el Bluetooth en segundo plano)
+    val view = androidx.compose.ui.platform.LocalView.current
+    DisposableEffect(progress.busy) { view.keepScreenOn = progress.busy; onDispose { view.keepScreenOn = false } }
     var msg by remember { mutableStateOf<String?>(null) }
     var horseFilter by remember { mutableStateOf("") }
     var dateFilter by remember { mutableStateOf("") }
@@ -92,6 +104,45 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
         }
     }
+    // ---- WhatsApp: download if needed, send, then delete from the phone (the watch keeps its copy)
+    var whatsAppPending by remember { mutableStateOf<String?>(null) }
+    val whatsAppLauncher = rememberLauncherForActivityResult(androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()) {
+        val id = whatsAppPending ?: return@rememberLauncherForActivityResult
+        whatsAppPending = null
+        if (c.settings.deleteAfterWhatsApp) c.scope.launch { msg = c.sync.deleteLocal(id) ?: "Enviado por WhatsApp y borrado del móvil (sigue en el reloj)" }
+    }
+    fun whatsApp(t: TrainingEntity) = c.scope.launch {
+        try {
+            var current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no encontrada")
+            if (current.localSha256 == null || current.localSha256 != current.watchSha256) {
+                msg = "Descargando para enviar por WhatsApp…"
+                val err = c.sync.download(t.sessionId); if (err != null) error(err)
+                current = c.db.trainings().byId(t.sessionId) ?: error("Sesión no disponible")
+            }
+            val horse = savedHorses.firstOrNull { it.code == current.horseCode }?.name.orEmpty()
+            val rider = savedRiders.firstOrNull { it.code == current.riderCode }?.name.orEmpty()
+            if (horse.isBlank() || rider.isBlank()) { shareSelected(current); msg = "Asigna caballo y jinete; después pulsa WhatsApp otra vez"; return@launch }
+            val intent = TrainingShare.prepare(context, current, horse, rider)
+            val pkg = listOf("com.whatsapp", "com.whatsapp.w4b").firstOrNull { p -> runCatching { context.packageManager.getPackageInfo(p, 0) }.isSuccess }
+                ?: error("WhatsApp no está instalado")
+            intent.setPackage(pkg)
+            whatsAppPending = current.sessionId
+            whatsAppLauncher.launch(intent)
+        } catch (e: Exception) { msg = e.message ?: "No se pudo enviar por WhatsApp" }
+    }
+    var confirmDeleteLocal by remember { mutableStateOf<TrainingEntity?>(null) }
+    confirmDeleteLocal?.let { d ->
+        AlertDialog(onDismissRequest = { confirmDeleteLocal = null },
+            title = { Text("Borrar del móvil") },
+            text = { Text("Se borra la copia del teléfono de ${d.sessionId}. La del reloj no se toca y se puede volver a descargar mientras siga en el reloj.") },
+            confirmButton = { TextButton(onClick = { confirmDeleteLocal = null; c.scope.launch { msg = c.sync.deleteLocal(d.sessionId) ?: "Borrado del móvil" } }) { Text("Borrar", color = AvoColors.Bad) } },
+            dismissButton = { TextButton(onClick = { confirmDeleteLocal = null }) { Text("Cancelar") } })
+    }
+    // ---- COMPARTIR AVO (Firebase): multi-select dialog shared with the analysis screen
+    var shareAvo by remember { mutableStateOf<TrainingEntity?>(null) }
+    var assignFor by remember { mutableStateOf<TrainingEntity?>(null) }
+    assignFor?.let { t -> AssignHorseRiderDialog(c, t, onDismiss = { assignFor = null }, onDone = { assignFor = null; msg = "Caballo y jinete guardados" }) }
+    shareAvo?.let { t -> ShareDialog(c, t.sessionId, onDismiss = { shareAvo = null }) }
     shareCandidate?.let { pending ->
         AlertDialog(
             onDismissRequest = { shareCandidate = null },
@@ -177,7 +228,22 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
         if (tab == 0) {
             Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(enabled = !progress.busy, onClick = { c.scope.launch { msg = c.sync.refresh() } }) { Text("Leer lista del reloj") }
-                OutlinedButton(enabled = !progress.busy, onClick = { c.sync.autoSync() }) { Text("Descargar todo") }
+                OutlinedButton(enabled = !progress.busy && !c.wifiSync.coordinator.busy, onClick = { c.sync.autoSync(force = true) }) { Text("Descargar todo") }
+            }
+            // Wi-Fi download: simple states and real progress (bytes written to the phone)
+            val wifiActive = wifi.state !in setOf(org.avoperformance.horse.core.wifi.WifiSyncState.IDLE, org.avoperformance.horse.core.wifi.WifiSyncState.CLEANUP)
+            if (wifiActive || wifiPaused) {
+                Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text(if (wifiPaused) "En pausa" else wifi.label, color = if (wifi.state == org.avoperformance.horse.core.wifi.WifiSyncState.COMPLETED) AvoColors.Ok else AvoColors.Blue,
+                        modifier = Modifier.weight(1f))
+                    androidx.compose.material3.TextButton(onClick = { wifiPaused = !wifiPaused; c.wifiSync.paused = wifiPaused; if (!wifiPaused) c.sync.autoSync(force = true) }) {
+                        Text(if (wifiPaused) "Reanudar" else "Pausar")
+                    }
+                    if (c.wifiSync.coordinator.busy) androidx.compose.material3.TextButton(onClick = { c.wifiSync.cancel() }) { Text("Cancelar", color = AvoColors.Bad) }
+                }
+                if (wifi.state == org.avoperformance.horse.core.wifi.WifiSyncState.DOWNLOADING && wifi.total > 0)
+                    LinearProgressIndicator(progress = { (wifi.bytes.toFloat() / wifi.total).coerceIn(0f, 1f) }, color = AvoColors.Blue,
+                        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp))
             }
             progress.message?.let { Note(it) }
             msg?.let { Note(it, AvoColors.Warn) }
@@ -192,7 +258,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -230,12 +296,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         if (first != null && second != null && first.horseCode != second.horseCode) Note("La comparación requiere el mismo caballo", AvoColors.Warn)
                     }
                 }
-                item {
-                    AvoCard("Servidor") {
-                        KV("Estado", if (c.sync.serverConfigured) "Conectado" else "En pausa · copias en el teléfono")
-                    }
-                }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -243,7 +304,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
 }
 
 @Composable
-private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?) {
+private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null) {
     val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -262,12 +323,28 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
         }
         KV("Tamaño", if (t.downloadedBytes in 1 until t.totalBytes) "${Fmt.bytes(t.downloadedBytes)} de ${Fmt.bytes(t.totalBytes)}" else Fmt.bytes(t.totalBytes))
         t.lastError?.let { Note(it, AvoColors.Warn) }
-        if (onShare != null) OutlinedButton(onClick = onShare) { Text("Compartir") }
+        var shareMenu by remember { mutableStateOf(false) }
+        if (onShare != null || onWhatsApp != null || onInternet != null) OutlinedButton(onClick = { shareMenu = true }) { Text("Compartir") }
+        if (shareMenu) AlertDialog(onDismissRequest = { shareMenu = false }, title = { Text("Compartir") },
+            text = {
+                Column {
+                    if (onInternet != null) ShareOption("Usuarios AVO") { shareMenu = false; onInternet() }
+                    if (onWhatsApp != null) ShareOption("WhatsApp y borrar del móvil") { shareMenu = false; onWhatsApp() }
+                    if (onShare != null) ShareOption("Otras aplicaciones") { shareMenu = false; onShare() }
+                }
+            },
+            confirmButton = {}, dismissButton = { androidx.compose.material3.TextButton(onClick = { shareMenu = false }) { Text("Cancelar") } })
+        if (onAssign != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onAssign) { Text("Caballo y jinete") }
+        if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
             OutlinedButton(onClick = onDownload) { Text(if (t.downloadedBytes > 0) "Reanudar descarga" else "Descargar") }
     }
 }
 
+
+@Composable
+private fun ShareOption(label: String, onClick: () -> Unit) =
+    OutlinedButton(onClick = onClick, modifier = Modifier.fillMaxWidth().padding(vertical = 3.dp)) { Text(label) }
 
 private suspend fun prepareShareWithNames(c: AppContainer, context: android.content.Context, t: TrainingEntity): Intent {
     val horses = c.db.horses().all().first()

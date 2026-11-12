@@ -24,6 +24,9 @@ static const uint32_t UART2INPROT_UBX = 0x10750001, UART2INPROT_NMEA = 0x1075000
 static const uint32_t UART2OUTPROT_UBX = 0x10760001, UART2OUTPROT_NMEA = 0x10760002, UART2OUTPROT_RTCM3X = 0x10760004;
 static const uint32_t MSGOUT_NAV_PVT_UART1 = 0x20910007, MSGOUT_NAV_PVT_UART2 = 0x20910008;
 static const uint32_t MSGOUT_RXM_RTCM_UART1 = 0x20910269, MSGOUT_RXM_RTCM_UART2 = 0x2091026A;
+// V3.9.0 quality monitoring (output rate = once every N navigation epochs)
+static const uint32_t MSGOUT_NAV_SAT_UART1 = 0x20910016, MSGOUT_NAV_SAT_UART2 = 0x20910017;
+static const uint32_t MSGOUT_NAV_SIG_UART1 = 0x20910346, MSGOUT_NAV_SIG_UART2 = 0x20910347;
 // ---- V3.8.0 precision profile (u-blox F9 HPG Interface Description)
 static const uint32_t NAVSPG_DYNMODEL = 0x20110021;      // E1
 static const uint32_t NAVSPG_INFIL_MINELEV = 0x201100A4; // I1 degrees
@@ -74,7 +77,7 @@ class UbxStream {
   void nmea_byte(uint8_t b);
   FrameCb cb_;
   void* ctx_;
-  uint8_t buf_[1100];
+  uint8_t buf_[2100];   // V3.9.0: NAV-SIG with ~120 signals is ~1.9 KB
   size_t have_ = 0, need_ = 0;
   uint32_t frames_ = 0, bad_ = 0, nmea_ = 0;
   char nm_[96];
@@ -112,6 +115,10 @@ class ZedManager {
   bool rate_applied() const { return rate_ok_; }
   // Precision profile: 0 not sent, 1 full (model + RTK fixed + constellations + masks), 2 reduced (model + RTK fixed), 3 rejected
   uint8_t tune_state() const { return tune_; }
+  // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 both enabled, 2 rejected, 3 skipped (UART too slow),
+  // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
+  uint8_t monitor_state() const { return mon_; }
+  const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
   const ZedGnssSet& gnss_set() const { return set_; }
   void set_dyn_model(ZedDynModel m) { dyn_ = m; }
   ZedDynModel dyn_model() const { return dyn_; }
@@ -130,6 +137,10 @@ class ZedManager {
   void send_baud(uint8_t port, uint32_t baud);
   void send_config(bool with_rate);
   void send_tune(bool full);
+  void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
+  uint8_t mon_ = 0, mon_try_ = 3, mon_ok_ = 0, mon_rounds_ = 0;
+  uint32_t mon_t0_ = 0;
+  char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;
   UbxCb ucb_ = nullptr;

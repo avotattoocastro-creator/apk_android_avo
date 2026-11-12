@@ -114,9 +114,21 @@ struct BackStatus {
   int8_t link_rssi = 0;            // RSSI of the last packet from the chest (dBm)
   uint32_t ubx_frames = 0;         // valid UBX frames from the ZED
   uint32_t nmea_sentences = 0;     // valid NMEA sentences from the ZED
+  // ---- v3 (BACK V3.9.0): GNSS quality (UBX-NAV-SAT/NAV-SIG summary) and RTK FIX tracking; appended
+  bool v3 = false;
+  uint8_t sv_tracked = 0, sv_used = 0;
+  uint8_t sig_tracked = 0, sig_used = 0, sig_cr_used = 0, sig_corr = 0;
+  uint8_t sig_l2 = 0, sig_l2_used = 0, sig_weak = 0;
+  uint8_t cno_mean = 0, cno_min = 0, cno_max = 0;
+  uint8_t quality_age_s = 255;     // seconds since the last NAV-SIG (255 = never / not enabled)
+  uint8_t quality_mon = 0;         // NAV-SAT/SIG output: 0 not requested, 1 enabled, 2 rejected, 3 skipped (slow UART)
+  uint16_t fix_lost = 0;           // RTK FIX -> no FIX transitions since boot
+  uint16_t ttff_fix_s = 0xFFFF;    // seconds from boot to the first RTK FIX (0xFFFF = not yet)
+  uint32_t fixed_ms = 0, float_ms = 0;   // time spent in RTK FIX / FLOAT since boot
 };
 static const size_t BACK_STATUS_V1_LEN = 52;
 static const size_t BACK_STATUS_V2_LEN = 82;
+static const size_t BACK_STATUS_V3_LEN = 82 + 14 + 4 + 8;
 size_t encode_status(const BackStatus& s, uint8_t* out, size_t cap);
 bool decode_status(const uint8_t* p, size_t n, BackStatus* s);
 
