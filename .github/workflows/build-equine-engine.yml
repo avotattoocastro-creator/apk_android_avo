@@ -1,7 +1,7 @@
 name: Equine Intelligence Engine
 on:
   push:
-    branches: [feature/avo-equine-intelligence-engine]
+    branches: [feature/avo-equine-intelligence-engine, feature/avo-training-analytics]
     paths: ['equine-intelligence/**', 'firmware/back/V3_8_0/lib/avo_core/**', 'core/src/test/resources/**', '.github/workflows/build-equine-engine.yml']
   workflow_dispatch:
 jobs:
@@ -25,6 +25,14 @@ jobs:
           python3 equine-intelligence/ml/avo_ml.py evaluate --dataset demo.jsonl --report demo_eval.json
       - name: Fixtures RAW -> motor -> JSON (consumidos por Kotlin, Android y Windows)
         run: python3 equine-intelligence/tools/fixtures/check_fixtures.py eqr/avo_eq_cli
+      - name: Entrenamientos (resumen de sesión -> historia) con el análisis de la fixture
+        run: |
+          set -e
+          echo '{"fecha_utc":"2026-10-01","valoracion":{"rpe":5}}' > extra.json
+          ./eqr/avo_training_cli --resumen core/src/test/resources/equine/synthetic_analysis.json extra.json --out resumen.json
+          python3 -c "import json; r=json.load(open('resumen.json')); s=[{'resumen':dict(r,id='S%d'%i,fecha_utc='2026-09-%02d'%(i+1))} for i in range(30)]; json.dump({'sesiones':s},open('historia.json','w'))"
+          ./eqr/avo_training_cli historia.json --out historia_out.json
+          python3 -c "import json; r=json.load(open('historia_out.json')); assert r['formato']=='avo-training-analysis' and r['sesiones_usadas']==30, r; print('::notice::entrenamientos', r['estado']['nivel'], 'ACWR', r['estado']['carga']['acwr'])"
       - uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: '17' }
       - name: Puente JNI en JVM anfitriona (mismo avo_eq_jni.cpp que Android)

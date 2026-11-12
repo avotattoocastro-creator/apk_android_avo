@@ -1,0 +1,99 @@
+# XcodeGen spec for the iPad app (generated in CI with `xcodegen generate`; the .xcodeproj is not committed).
+name: AVOiPad
+options:
+  bundleIdPrefix: org.avoperformance
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CLANG_CXX_LANGUAGE_STANDARD: c++17
+    CLANG_CXX_LIBRARY: libc++
+    DEVELOPMENT_TEAM: ${APPLE_TEAM_ID}
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: ${AVO_BUILD_NUMBER}
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  AVOiPad:
+    type: application
+    platform: iOS
+    sources:
+      - path: AVOiPad
+      - path: ../equine-intelligence/src
+        group: EquineEngine
+      - path: ../firmware/back/V3_8_0/lib/avo_core/src
+        group: AvoCoreFirmware
+      - path: demo
+        type: folder
+        optional: true
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_NAME: AVO Horse
+        PRODUCT_BUNDLE_IDENTIFIER: ${AVO_BUNDLE_ID}
+        TARGETED_DEVICE_FAMILY: "2"
+        SUPPORTS_MACCATALYST: NO
+        INFOPLIST_FILE: AVOiPad/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: AVOiPad/Resources/AVOiPad.entitlements
+        CODE_SIGN_STYLE: Automatic
+        SWIFT_OBJC_BRIDGING_HEADER: AVOiPad/Engine/AVOiPad-Bridging-Header.h
+        HEADER_SEARCH_PATHS:
+          - $(SRCROOT)/../equine-intelligence/include
+          - $(SRCROOT)/../firmware/back/V3_8_0/lib/avo_core/src
+        GCC_PREPROCESSOR_DEFINITIONS:
+          - $(inherited)
+          - AVO_EQ_STATIC=1
+        OTHER_CPLUSPLUSFLAGS:
+          - $(inherited)
+          - -Wno-unused-parameter
+          - -Wno-shorten-64-to-32
+          - -Wno-comma
+        GCC_WARN_INHIBIT_ALL_WARNINGS: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+  AVOiPadTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AVOiPadTests
+    dependencies:
+      - target: AVOiPad
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: ${AVO_BUNDLE_ID}.tests
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/AVO Horse.app/AVO Horse
+        BUNDLE_LOADER: $(TEST_HOST)
+        SWIFT_OBJC_BRIDGING_HEADER: AVOiPad/Engine/AVOiPad-Bridging-Header.h
+        HEADER_SEARCH_PATHS:
+          - $(SRCROOT)/../equine-intelligence/include
+        GCC_PREPROCESSOR_DEFINITIONS:
+          - $(inherited)
+          - AVO_EQ_STATIC=1
+  AVOiPadUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: AVOiPadUITests
+    dependencies:
+      - target: AVOiPad
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: ${AVO_BUNDLE_ID}.uitests
+        TEST_TARGET_NAME: AVOiPad
+schemes:
+  AVOiPad:
+    build:
+      targets:
+        AVOiPad: all
+        AVOiPadTests: [test]
+        AVOiPadUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - AVOiPadTests
+        - AVOiPadUITests
+    archive:
+      config: Release

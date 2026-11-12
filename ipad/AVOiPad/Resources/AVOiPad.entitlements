@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Join the watch's own Wi-Fi network (AVO_CHEST_XXXX) to download trainings, as Android 2.3-wifi does -->
+	<key>com.apple.developer.networking.HotspotConfiguration</key>
+	<true/>
+</dict>
+</plist>

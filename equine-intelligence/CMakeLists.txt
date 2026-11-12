@@ -36,6 +36,8 @@ set_target_properties(avo_eq_shared PROPERTIES OUTPUT_NAME avo_equine)
 if(AVO_EQ_BUILD_TOOLS)
 add_executable(avo_eq_cli tools/session-inspector/avo_eq_cli.cpp)
 target_link_libraries(avo_eq_cli avo_eq)
+add_executable(avo_training_cli tools/training/avo_training_cli.cpp)
+target_link_libraries(avo_training_cli avo_eq)
 
 enable_testing()
 file(GLOB EQ_TEST_SRC ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)

@@ -35,7 +35,10 @@ void on_frame(const avo::FrameView& f, void* vctx) {
     s.gnss.push_back(e);
   } else if (f.type == avo::FrameType::IMU_SAMPLE) {
     avo::ImuBatchHeader h;
-    if (!avo::decode_imu_header(f.payload, f.len, &h) || h.fmt != avo::IMU_FMT_9AXIS_I16) { s.bad_records++; return; }
+    if (!avo::decode_imu_header(f.payload, f.len, &h)) { s.bad_records++; return; }
+    if (h.reserved == 1) s.imu_units = 1;   // GIRTH 0.4.3+: units of the BNO085 declared in byte 15
+    if (h.fmt == 1) { s.imu_fused_batches++; return; }   // GIRTH 0.4.x fused batch (linear acc + quaternion): not used yet
+    if (h.fmt != avo::IMU_FMT_9AXIS_I16) { s.bad_records++; return; }
     size_t need = avo::IMU_HDR_LEN + (size_t)h.count * avo::IMU_SAMPLE_LEN_9AXIS;
     if (need > f.len) { s.bad_records++; return; }
     const uint8_t* p = f.payload + avo::IMU_HDR_LEN;

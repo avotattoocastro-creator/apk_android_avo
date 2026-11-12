@@ -1,5 +1,6 @@
 // Sensor Fusion Engine: temporal association, uncertainty propagation, relations, and strict causality of
 // the real-time mode (results must not change when later data is removed). Simulation only.
+#include <algorithm>
 #include "eq_test.h"
 #include "avo_eq/engine.h"
 #include "avo_eq/fusion.h"

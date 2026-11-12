@@ -1,14 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <!-- Windows 10 SDK projection: Bluetooth LE (Windows.Devices.Bluetooth) for sending geofences to the watch -->
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
     <UseWPF>true</UseWPF>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>AVO.Performance.Horse.Windows</AssemblyName>
+    <RootNamespace>Avo.Windows</RootNamespace>
     <ApplicationIcon>Assets\AVO.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>AVO Performance Horse — Windows Advanced Analysis V2 PRO</Product>
+    <Company>AVO Performance</Company>
+    <Version>2.0.0</Version>
+    <InformationalVersion>2.0.0-pro-dev1</InformationalVersion>
+    <!-- WPF temporary projects do not see implicit usings of the SDK for System.IO; files import it explicitly -->
   </PropertyGroup>
-  <ItemGroup><PackageReference Include="System.IO.Ports" Version="10.0.0" /></ItemGroup>
-  <ItemGroup><ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" /></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="10.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+    <ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\avo_brand_hero.jpg" />
+    <Resource Include="Assets\avo_home_hero.jpg" />
+    <Resource Include="Assets\avo_logo_128.png" />
+    <Resource Include="Assets\horse_xray.png" />
+    <Resource Include="Assets\AVO.ico" />
+  </ItemGroup>
 </Project>

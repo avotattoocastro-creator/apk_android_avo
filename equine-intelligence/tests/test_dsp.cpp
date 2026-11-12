@@ -6,7 +6,7 @@ using namespace avoeq;
 static const double PI = 3.14159265358979323846;
 
 static std::vector<double> sine(double f, double fs, double secs, double noise, unsigned seed, double amp = 1.0) {
-  std::mt19937 rng(seed); std::normal_distribution<double> n(0, noise);
+  std::mt19937 rng(seed); std::normal_distribution<double> n(0, noise > 0 ? noise : 1.0);   // stddev 0 is invalid (GCC 15 assertion); unused then
   std::vector<double> x((size_t)(fs * secs));
   for (size_t i = 0; i < x.size(); i++) x[i] = amp * std::sin(2 * PI * f * i / fs) + (noise > 0 ? n(rng) : 0);
   return x;
