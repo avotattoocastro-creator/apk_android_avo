@@ -1,0 +1,256 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-29T21:43:45+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_GIRTH_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 123.02,
+                        "y": 104.32
+                    },
+                    "uuid": "9a83bab4-7f94-5873-aba8-5a1b561bdb7e"
+                }
+            ],
+            "severity": "error",
+            "type": "annular_width"
+        },
+        {
+            "description": "Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 104.32
+                    },
+                    "uuid": "c99a8e78-3169-5d8b-aed9-adb68a4e7a03"
+                }
+            ],
+            "severity": "error",
+            "type": "annular_width"
+        },
+        {
+            "description": "Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 123.02,
+                        "y": 95.68
+                    },
+                    "uuid": "1f33c27c-a1a4-5477-9cd4-c4aca7cbcd95"
+                }
+            ],
+            "severity": "error",
+            "type": "annular_width"
+        },
+        {
+            "description": "Annular width (rule 'AISLER ranura PTH: anillo mín. 300 µm' min annular width 0.3000 mm; actual 0.1957 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 95.68
+                    },
+                    "uuid": "8b1cf82b-689c-5147-bd0e-8b53e01f98a3"
+                }
+            ],
+            "severity": "error",
+            "type": "annular_width"
+        },
+        {
+            "description": "Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 123.02,
+                        "y": 104.32
+                    },
+                    "uuid": "9a83bab4-7f94-5873-aba8-5a1b561bdb7e"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 104.32
+                    },
+                    "uuid": "c99a8e78-3169-5d8b-aed9-adb68a4e7a03"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 123.02,
+                        "y": 95.68
+                    },
+                    "uuid": "1f33c27c-a1a4-5477-9cd4-c4aca7cbcd95"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (rule 'AISLER ranura PTH: ancho 0,7–2,6 mm' min hole 0.7000 mm; actual 0.6000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad S1 [GND] of J1",
+                    "pos": {
+                        "x": 127.2,
+                        "y": 95.68
+                    },
+                    "uuid": "8b1cf82b-689c-5147-bd0e-8b53e01f98a3"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'BOBINA' on F.Silkscreen",
+                    "pos": {
+                        "x": 71.4,
+                        "y": 99.8
+                    },
+                    "uuid": "8b58a64a-cb8d-5acf-908a-b7f1c362cda9"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_thickness"
+        },
+        {
+            "description": "Text height out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min height 0.8000 mm; actual 0.7000 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'BOBINA' on F.Silkscreen",
+                    "pos": {
+                        "x": 71.4,
+                        "y": 99.8
+                    },
+                    "uuid": "8b58a64a-cb8d-5acf-908a-b7f1c362cda9"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'REED' on F.Silkscreen",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 119.4
+                    },
+                    "uuid": "a9086d24-a662-5415-baf3-cdf97a66a2f8"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_thickness"
+        },
+        {
+            "description": "Text height out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min height 0.8000 mm; actual 0.7000 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'REED' on F.Silkscreen",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 119.4
+                    },
+                    "uuid": "a9086d24-a662-5415-baf3-cdf97a66a2f8"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PCB text '+ BAT −' on F.Silkscreen",
+                    "pos": {
+                        "x": 79.5,
+                        "y": 93.7
+                    },
+                    "uuid": "f47a8131-05ba-5b95-b243-e151986b9d19"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_thickness"
+        },
+        {
+            "description": "Text height out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min height 0.8000 mm; actual 0.7000 mm)",
+            "items": [
+                {
+                    "description": "PCB text '+ BAT −' on F.Silkscreen",
+                    "pos": {
+                        "x": 79.5,
+                        "y": 93.7
+                    },
+                    "uuid": "f47a8131-05ba-5b95-b243-e151986b9d19"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PCB text 'ANTENA FPC (sin cobre)' on F.Silkscreen",
+                    "pos": {
+                        "x": 111.0,
+                        "y": 84.0
+                    },
+                    "uuid": "e922021d-920f-5139-8a0f-5eee0fca5b1e"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_thickness"
+        },
+        {
+            "description": "Text thickness out of range (rule 'AISLER serigrafía: texto mín. 0,8 mm de alto y 0,15 mm de trazo' min thickness 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PCB text '4 capas 1,0 mm · ENIG' on B.Silkscreen",
+                    "pos": {
+                        "x": 100.0,
+                        "y": 104.6
+                    },
+                    "uuid": "62392044-3b71-502f-8e59-0d5b3c0ad56c"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_thickness"
+        }
+    ]
+}
