@@ -45,6 +45,10 @@ test('registration: each card only writes its own profile, with its own uid', as
   await assertFails(set(ref(db(B), 'users/' + A), { name: 'Hacker', uid: 'uid_' + B }));
   await assertFails(set(ref(db(A), 'users/' + A), { name: 'Ana', uid: 'otro' }));
   await assertFails(set(ref(db(A), 'users/' + A), { name: 'Ana', uid: 'uid_' + A, telefono: '600' }));
+  // public licence (base64, roles verified by the receiving app): allowed, bounded and base64 only
+  await assertSucceeds(set(ref(db(A), 'users/' + A), { name: 'Ana', uid: 'uid_' + A, lic: 'QVZPTAI' + 'A'.repeat(130) + '==' }));
+  await assertFails(set(ref(db(A), 'users/' + A), { name: 'Ana', uid: 'uid_' + A, lic: 'A'.repeat(201) }));
+  await assertFails(set(ref(db(A), 'users/' + A), { name: 'Ana', uid: 'uid_' + A, lic: '<script>' }));
   await assertSucceeds(get(ref(db(B), 'users')));
 });
 

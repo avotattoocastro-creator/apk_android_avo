@@ -80,6 +80,14 @@ import org.avoperformance.horse.ui.screens.SyncScreen
 import org.avoperformance.horse.ui.screens.TrainingDetailScreen
 import org.avoperformance.horse.ui.screens.CompareScreen
 import org.avoperformance.horse.ui.screens.TrainingScreen
+import org.avoperformance.horse.ui.screens.LicenseNotice
+import org.avoperformance.horse.ui.screens.LicenseScreen
+import org.avoperformance.horse.ui.screens.LockedFeature
+import org.avoperformance.horse.ui.screens.RestrictedHome
+import org.avoperformance.horse.core.license.LicenseFeature
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.avoperformance.horse.ui.theme.AvoColors
 import org.avoperformance.horse.ui.theme.AvoTheme
 
@@ -109,18 +117,28 @@ class MainActivity : ComponentActivity() {
             lastNfcRead = now
             lifecycleScope.launch {
                 try {
-                    val uri = withContext(Dispatchers.IO) {
+                    // AVO Tarjetas on another phone acting as the user's card («Activar móvil por NFC», HCE / IsoDep)
+                    if (Ndef.get(tag) == null && android.nfc.tech.IsoDep.get(tag) != null) { onPhoneCard(tag); return@launch }
+                    val msg = withContext(Dispatchers.IO) {
                         val ndef = Ndef.get(tag) ?: return@withContext null
                         ndef.connect()
-                        try { ndef.ndefMessage?.records?.firstNotNullOfOrNull { it.toUri() } }
-                        finally { ndef.close() }
+                        try { ndef.ndefMessage } finally { ndef.close() }
                     }
+                    val uri = msg?.records?.firstNotNullOfOrNull { it.toUri() }
                     if (uri?.scheme != "avohorse" || uri.host != "identity") return@launch
-                    if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return@launch }
+                    if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString(), licenseOf(msg), tag.id); return@launch }
                     val type = uri.pathSegments.getOrNull(0)
                     val code = uri.pathSegments.getOrNull(1) ?: return@launch
                     if (type != "horse" && type != "rider") return@launch
                     val c = (application as AvoApp).container
+                    if (!org.avoperformance.horse.license.LicenseGate.canRecord) {
+                        android.widget.Toast.makeText(this@MainActivity, "NFC: ${org.avoperformance.horse.license.LicenseGate.BLOCKED}", android.widget.Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                    if (type == "rider" && c.license.riderLocked) {
+                        android.widget.Toast.makeText(this@MainActivity, "NFC: el jinete lo fija tu licencia (${c.license.licenseRider?.second})", android.widget.Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
                     val status = c.watch.status.value
                     if (status?.session == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING ||
                         status?.session == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED ||
@@ -155,6 +173,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        (application as AvoApp).container.license.refresh()
         enableGlobalNfc()
         // recovery when the app opens: pending deliveries and received trainings
         (application as AvoApp).container.let { c -> if (c.identity.card.value != null) { c.share.schedule(); c.share.runNow() } }
@@ -167,28 +186,112 @@ class MainActivity : ComponentActivity() {
 
     private var incomingAvo by mutableStateOf<Uri?>(null)
     private var openShare by mutableStateOf(false)
+    private var openLicense by mutableStateOf(false)
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        incomingAvo = extractAvoUri(intent)
+        routeIncoming(extractAvoUri(intent))
         if (intent.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
     }
 
-    /** AVO user card: adopted as the phone identity only if there is none (see UserIdentity). */
-    private fun onUserCard(uri: String) {
+    /** Licence record (external type avoperformance.org:lic) of a card, if any. */
+    private fun licenseOf(msg: android.nfc.NdefMessage?): ByteArray? = msg?.records?.firstOrNull {
+        it.tnf == android.nfc.NdefRecord.TNF_EXTERNAL_TYPE &&
+            String(it.type, Charsets.US_ASCII).lowercase() == org.avoperformance.horse.core.license.LicenseToken.NDEF_EXTERNAL_TYPE
+    }?.payload
+
+    /**
+     * AVO user card: adopted as the phone identity only if there is none (see UserIdentity), and its app
+     * licence (signed, tied to the chip UID) is activated or renewed.
+     */
+    private fun onUserCard(uri: String, license: ByteArray?, tagUid: ByteArray?) {
         val c = (application as AvoApp).container
-        val text = try { c.identity.message(c.identity.onCardTapped(uri)) } catch (e: Exception) { "NFC: ${e.message ?: "tarjeta no válida"}" }
+        val tapped = runCatching { org.avoperformance.horse.core.identity.AvoUserCard.parse(uri) }.getOrNull()
+        val idText = try { c.identity.message(c.identity.onCardTapped(uri)) } catch (e: Exception) { "NFC: ${e.message ?: "tarjeta no válida"}" }
+        val licText = runCatching { c.license.activateFromCard(license, tagUid, tapped) }.getOrElse { "Licencia: ${it.message}" }
         org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "tarjeta AVO")
+        val text = listOfNotNull(licText, idText).joinToString("\n")
         runOnUiThread { android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show() }
+    }
+
+    /**
+     * The tapped "card" is a phone: if it is AVO Tarjetas with an activation armed, this phone receives the user card
+     * (adopted as identity like a real card) and a licence signed for THIS phone. Anything else is ignored silently.
+     */
+    private suspend fun onPhoneCard(tag: android.nfc.Tag) {
+        val c = (application as AvoApp).container
+        val outcome = withContext(Dispatchers.IO) {
+            val iso = android.nfc.tech.IsoDep.get(tag) ?: return@withContext org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo
+            try {
+                iso.connect()
+                iso.timeout = 3000
+                org.avoperformance.horse.core.license.NfcActivation.read({ iso.transceive(it) }, c.license.deviceId)
+            } catch (e: Exception) {
+                org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo
+            } finally { runCatching { iso.close() } }
+        }
+        val text = when (outcome) {
+            org.avoperformance.horse.core.license.NfcActivation.Outcome.NotAvo -> return
+            org.avoperformance.horse.core.license.NfcActivation.Outcome.NotArmed ->
+                "AVO Tarjetas: pulsa «Activar su móvil por NFC» en el usuario y vuelve a juntar los móviles"
+            is org.avoperformance.horse.core.license.NfcActivation.Outcome.Failed -> "Activación NFC: ${outcome.reason}"
+            is org.avoperformance.horse.core.license.NfcActivation.Outcome.Received -> {
+                val r = outcome.result
+                val idText = try { c.identity.message(c.identity.onCardTapped(r.card.toUri())) } catch (e: Exception) { null }
+                val licText = runCatching { c.license.activateFromPhone(r) }.getOrElse { "Licencia: ${it.message}" }
+                org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(this, "activación NFC")
+                listOfNotNull(licText, idText).joinToString("\n")
+            }
+        }
+        android.widget.Toast.makeText(this, text, android.widget.Toast.LENGTH_LONG).show()
+        if (outcome is org.avoperformance.horse.core.license.NfcActivation.Outcome.Received) openLicense = true
+    }
+
+    /** A licence file (.avolic) opened from WhatsApp/email: activated here instead of being imported as a training. */
+    private fun routeIncoming(uri: Uri?) {
+        if (uri == null) { incomingAvo = null; return }
+        lifecycleScope.launch {
+            val text = withContext(Dispatchers.IO) {
+                runCatching {
+                    contentResolver.openInputStream(uri)?.use { s ->
+                        val head = ByteArray(org.avoperformance.horse.core.license.LicenseFile.HEADER.length)
+                        var n = 0
+                        while (n < head.size) { val r = s.read(head, n, head.size - n); if (r < 0) break; n += r }
+                        if (!org.avoperformance.horse.core.license.LicenseFile.looksLikeLicenseFile(head.copyOf(n))) null
+                        else (head.copyOf(n) + s.readBytes().take(64 * 1024)).toString(Charsets.US_ASCII)
+                    }
+                }.getOrNull()
+            }
+            if (text == null) { incomingAvo = uri; return@launch }
+            val c = (application as AvoApp).container
+            val result = withContext(Dispatchers.Default) { c.license.activateFromFile(text, c.identity.card.value) }
+            android.widget.Toast.makeText(this@MainActivity, result, android.widget.Toast.LENGTH_LONG).show()
+            openLicense = true
+        }
     }
 
     private fun handleSystemNfc(intent: Intent?) {
         if (intent?.action != NfcAdapter.ACTION_NDEF_DISCOVERED) return
         val uri = intent.data ?: return
         if (uri.scheme != "avohorse" || uri.host != "identity") return
-        if (uri.pathSegments.getOrNull(0) == "user") { onUserCard(uri.toString()); return }
+        if (uri.pathSegments.getOrNull(0) == "user") {
+            val tag: android.nfc.Tag? = if (Build.VERSION.SDK_INT >= 33) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, android.nfc.Tag::class.java)
+                else @Suppress("DEPRECATION") intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+            val msgs = if (Build.VERSION.SDK_INT >= 33) intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES, android.nfc.NdefMessage::class.java)
+                else @Suppress("DEPRECATION") intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+            onUserCard(uri.toString(), licenseOf(msgs?.firstOrNull() as? android.nfc.NdefMessage), tag?.id)
+            return
+        }
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) {
+            android.widget.Toast.makeText(this, "NFC: ${org.avoperformance.horse.license.LicenseGate.BLOCKED}", android.widget.Toast.LENGTH_LONG).show()
+            return
+        }
+        if (uri.pathSegments.getOrNull(0) == "rider" && (application as AvoApp).container.license.riderLocked) {
+            android.widget.Toast.makeText(this, "NFC: el jinete lo fija tu licencia", android.widget.Toast.LENGTH_LONG).show()
+            return
+        }
         val type = uri.pathSegments.getOrNull(0)
         val code = uri.pathSegments.getOrNull(1) ?: return
         if (type !in listOf("horse", "rider")) return
@@ -235,7 +338,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val c = (application as AvoApp).container
-        incomingAvo = extractAvoUri(intent)
+        routeIncoming(extractAvoUri(intent))
         if (intent?.action == org.avoperformance.horse.cloud.ShareManager.ACTION_OPEN_SHARE) openShare = true
         handleSystemNfc(intent)
         if (!Perms.bluetoothGranted(this)) permLauncher.launch(Perms.required)
@@ -246,7 +349,8 @@ class MainActivity : ComponentActivity() {
                 var bootVisible by rememberSaveable { mutableStateOf(savedInstanceState == null) }
                 LaunchedEffect(Unit) { delay(3000L); bootVisible = false }
                 if (bootVisible) AvoBootScreen(c, onContinue = { bootVisible = false })
-                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }, openShare = openShare, onShareOpened = { openShare = false }) { permLauncher.launch(Perms.required) }
+                else AvoNav(c, incomingAvo, onImportHandled = { incomingAvo = null }, openShare = openShare, onShareOpened = { openShare = false },
+                    openLicense = openLicense, onLicenseOpened = { openLicense = false }) { permLauncher.launch(Perms.required) }
             }
         }
     }
@@ -265,13 +369,18 @@ private val tabs = listOf(
 private val titles = mapOf(
     "configuracion" to "Ajustes", "nfc" to "Tarjetas NFC", "bluetooth" to "Reloj y Bluetooth", "ntrip" to "NTRIP", "geocercas" to "Geocercas", "sincronizacion" to "Descarga del reloj",
     "diagnosticos" to "Diagnósticos", "dispositivos" to "Dispositivos", "almacenamiento" to "Almacenamiento", "jinetes" to "Jinetes", "compartir" to "Compartir y sincronizar", "lugar" to "Lugar de entrenamiento", "nomolestar" to "No molestar", "favoritos" to "WhatsApp · favoritos",
-    "copias" to "Copias de seguridad", "acerca" to "Acerca de", "caballo/{code}" to "Caballo", "jinete/{code}" to "Jinete", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
+    "copias" to "Copias de seguridad", "acerca" to "Acerca de", "licencia" to "Licencia", "caballo/{code}" to "Caballo", "jinete/{code}" to "Jinete", "detalle/{id}" to "Análisis", "comparar/{a}/{b}" to "Comparativa",
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, openShare: Boolean = false, onShareOpened: () -> Unit = {}, requestPerms: () -> Unit) {
+fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Unit = {}, openShare: Boolean = false, onShareOpened: () -> Unit = {},
+           openLicense: Boolean = false, onLicenseOpened: () -> Unit = {}, requestPerms: () -> Unit) {
     val nav = rememberNavController()
+    val licenseStatus by c.license.status.collectAsStateWithLifecycle()
+    val full = licenseStatus.fullAccess
+    val features by c.license.features.collectAsStateWithLifecycle()
+    LaunchedEffect(openLicense) { if (openLicense) { nav.navigate("licencia") { launchSingleTop = true }; onLicenseOpened() } }
     LaunchedEffect(incomingAvo) { if (incomingAvo != null) nav.navigate("historial") { launchSingleTop = true } }
     LaunchedEffect(openShare) { if (openShare) { nav.navigate("compartir") { launchSingleTop = true }; onShareOpened() } }
     val entry by nav.currentBackStackEntryAsState()
@@ -313,26 +422,30 @@ fun AvoNav(c: AppContainer, incomingAvo: Uri? = null, onImportHandled: () -> Uni
         },
     ) { pad ->
         NavHost(nav, startDestination = "inicio", modifier = Modifier.padding(pad)) {
-            composable("inicio") { HomeScreen(c, go(nav)) }
-            composable("entrenamiento") { TrainingScreen(c, go(nav)) }
+            composable("inicio") {
+                if (!full || LicenseFeature.GRABAR !in features) RestrictedHome(c, go(nav))
+                else Column(Modifier.fillMaxSize()) { LicenseNotice(c, go(nav)); Box(Modifier.weight(1f)) { HomeScreen(c, go(nav)) } }
+            }
+            composable("licencia") { LicenseScreen(c) }
+            composable("entrenamiento") { if (LicenseFeature.GRABAR in features) { TrainingScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
             composable("historial") { HistoryScreen(c, go(nav), incomingAvo, onImportHandled) }
             composable("caballos") { HorsesScreen(c, go(nav)) }
-            composable("configuracion") { SettingsScreen(c, go(nav)) }
-            composable("bluetooth") { BluetoothScreen(c, requestPerms) }
-            composable("ntrip") { NtripScreen(c) }
-            composable("nfc") { NfcScreen(c) }
-            composable("mareas") { TidesScreen(c) }
-            composable("geocercas") { GeofencesScreen(c) }
-            composable("sincronizacion") { SyncScreen(c) }
-            composable("diagnosticos") { DiagnosticsScreen(c) }
-            composable("dispositivos") { DeviceManagerScreen(c) }
-            composable("almacenamiento") { StorageScreen(c) }
-            composable("jinetes") { RidersScreen(c, go(nav)) }
-            composable("compartir") { org.avoperformance.horse.ui.screens.ShareScreen(c) }
-            composable("lugar") { org.avoperformance.horse.ui.screens.SpotScreen(c) }
-            composable("nomolestar") { org.avoperformance.horse.ui.screens.DndScreen(c) }
-            composable("favoritos") { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) }
-            composable("copias") { org.avoperformance.horse.ui.screens.BackupScreen(c) }
+            composable("configuracion") { if (LicenseFeature.AJUSTES in features) { SettingsScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
+            composable("bluetooth") { if (LicenseFeature.GRABAR in features) { BluetoothScreen(c, requestPerms) } else LockedFeature(c, go(nav)) }
+            composable("ntrip") { if (LicenseFeature.GRABAR in features) { NtripScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("nfc") { if (LicenseFeature.AJUSTES in features) { NfcScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("mareas") { if (LicenseFeature.MAREAS in features) { TidesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("geocercas") { if (LicenseFeature.GRABAR in features) { GeofencesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("sincronizacion") { if (LicenseFeature.GRABAR in features) { SyncScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("diagnosticos") { if (LicenseFeature.DIAGNOSTICO in features) { DiagnosticsScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("dispositivos") { if (LicenseFeature.GRABAR in features) { DeviceManagerScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("almacenamiento") { if (LicenseFeature.AJUSTES in features) { StorageScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("jinetes") { if (LicenseFeature.AJUSTES in features) { RidersScreen(c, go(nav)) } else LockedFeature(c, go(nav)) }
+            composable("compartir") { if (LicenseFeature.COMPARTIR in features) { org.avoperformance.horse.ui.screens.ShareScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("lugar") { if (LicenseFeature.GRABAR in features) { org.avoperformance.horse.ui.screens.SpotScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("nomolestar") { if (LicenseFeature.GRABAR in features) { org.avoperformance.horse.ui.screens.DndScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("favoritos") { if (LicenseFeature.COMPARTIR in features) { org.avoperformance.horse.ui.screens.WhatsAppFavoritesScreen(c) } else LockedFeature(c, go(nav)) }
+            composable("copias") { if (LicenseFeature.AJUSTES in features) { org.avoperformance.horse.ui.screens.BackupScreen(c) } else LockedFeature(c, go(nav)) }
             composable("acerca") { org.avoperformance.horse.ui.screens.AboutScreen() }
             composable("caballo/{code}") { org.avoperformance.horse.ui.screens.HorseProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }
             composable("jinete/{code}") { org.avoperformance.horse.ui.screens.RiderProfileScreen(c, it.arguments?.getString("code") ?: "", go(nav)) }

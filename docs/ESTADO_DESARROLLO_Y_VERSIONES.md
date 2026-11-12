@@ -7,6 +7,7 @@
 
 | Módulo | Versión fuente | Listo para probar | Validación pendiente |
 |---|---|---|---|
+| Licencias y roles de la app (09/11/2026) | Android 2.5-roles-dev2 (vc 37) + AVO Tarjetas 1.4-nfc-movil-dev1 (vc 5), rama `feature/avo-license-nfc` (activar móvil por NFC con HCE) | APK de CI (`build-android.yml`); núcleo con 34 pruebas JVM; reglas Firebase con campo `lic` | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
 | Android | **V2.0 / versionCode 12** | APK debug CI [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) | Prueba en teléfono y reloj |
 | Motor de análisis AVO + app Android 2.1-motor + Windows | 1.1.0-dev1 (rama `feature/avo-equine-intelligence-engine`) | APK y paquete Windows de CI (40041494960 / 40041494972) | Teléfono, PC y cincha reales |
 | Mareas | V2.0 | IHM oficial, coeficiente, sol/luna, Open-Meteo | Comparar con Tu Marea / tabla del puerto en el móvil |
