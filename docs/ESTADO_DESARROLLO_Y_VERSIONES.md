@@ -14,7 +14,7 @@
 | CHEST | V3.5.6 | Fuentes base y parches disponibles | Hardware, persistencia, firma |
 | CHEST OTA firmado | V3.5.7 propuesto | **No** | Receptor ES256, OTA_AUTH, anti-rollback, recuperación |
 | AVO Signer | V0.1 | Código y vector de firma | Respaldo/recuperación de clave y pruebas Android reales |
-| ESPALDA | Sin versión integrada | **No** | Importar fuentes y validar GNSS/ESP-NOW |
+| ESPALDA | BACK 3.13.12 vigilancia del resumen de señales y de reinicios del receptor (rama `fix/back-3-13-12-nav-sig-watchdog`, sin probar); 3.13.11 apagado del GPS con USB (rama `fix/back-3-13-11-usb-pololu-off`); 3.13.10 diagnóstico USB (rama `fix/back-3-13-10-usb-umbral`); 3.13.9 (rama `fix/back-3-13-9-usb-gps-off`) | **Parcial** (usuario: GNSS recuperado con 3.13.8 a 460800) | Apagado del GPS por USB: falta señal física en GPIO20 y medir VOUT |
 | CINCHA | Sin versión integrada | **No** | Importar fuentes y validar tres IMU |
 | CHEST pantalla (23/10/2026) | V3.7.2-rc1 | Binario de CI [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870) | Orientación, legibilidad, memoria y estabilidad BLE/espalda en el reloj |
 | CHEST descarga al PC por USB (30/10/2026) | 3.7.5-usb1 + AVO Windows V1.1 (rama `feature/chest-usb-pc-sync`) | BIN y paquete Windows de CI | Instalación, detección sin reinicio del reloj, descarga, reanudación y velocidad en PC real |

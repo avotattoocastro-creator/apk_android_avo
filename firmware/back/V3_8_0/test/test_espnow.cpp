@@ -410,6 +410,8 @@ struct TestPlatform : public BackPlatform {
   void save_peer(const NowPeerRecord& r) override { saved = r; }
   uint32_t random32() override { return rng(); }
   void reboot() override { reboots++; }
+  uint32_t sleeps = 0;                                   // V3.14.0
+  void request_sleep() override { sleeps++; }
 };
 
 struct World {
@@ -922,6 +924,45 @@ TEST(girth, status_losses_imu_forwarding_and_ping) {
   CHECK(hub.rejected() >= 2u);
 }
 
+// V3.13.12: field 02/11/2026, the summary stopped arriving while NAV-PVT kept flowing. The back asks again.
+TEST(quality, lost_nav_sig_output_is_requested_again) {
+  World w(2);
+  w.run_ms(15000);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);
+  uint32_t resets = w.back->zed().receiver_resets();
+  w.zed.sat_every[w.zed.port] = 0; w.zed.sig_every[w.zed.port] = 0;   // receiver forgets the setting, keeps NAV-PVT
+  size_t before = w.chest.gnss.size();
+  w.run_ms(5000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 0u);                       // not before 10 s
+  w.run_ms(8000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 1u);
+  CHECK_EQ((int)w.back->zed().monitor_state(), 1);
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+  CHECK(w.chest.gnss.size() > before + 50);                           // positions never stopped
+  CHECK_EQ(w.back->zed().receiver_resets(), resets);                  // not a receiver reset
+  BackStatus st = w.back->status();
+  CHECK_EQ(st.quality_mon & 0x0F, 1); CHECK_EQ((st.quality_mon >> 4) & 3, 1); CHECK_EQ(st.quality_mon >> 6, 0);
+  CHECK(st.quality_age_s <= 2);                                       // summary fresh again
+  w.run_ms(30000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 1u);                       // no more requests while it arrives
+  w.zed.sig_every[w.zed.port] = 0;                                    // only NAV-SIG lost, NAV-SAT still arriving
+  w.run_ms(13000);
+  CHECK_EQ(w.back->zed().monitor_rearms(), 2u);
+  CHECK_EQ(w.zed.sig_every[w.zed.port], (uint32_t)w.back->zed().nav_rate());
+}
+
+TEST(quality, silent_receiver_counts_as_reset) {
+  World w(2);
+  w.run_ms(15000);
+  uint32_t r = w.back->zed().receiver_resets();
+  w.zed.alive = false; w.run_ms(7000); w.zed.alive = true;
+  w.run_ms(20000);
+  CHECK_EQ(w.back->zed().receiver_resets(), r + 1);
+  CHECK_EQ((int)w.back->zed().state(), (int)ZedManager::RUNNING);
+  CHECK_EQ(w.back->status().quality_mon >> 6, (int)(r + 1 > 3 ? 3 : r + 1));
+}
+
 TEST(quality, receiver_without_nav_sig_keeps_nav_sat) {
   World w(2);
   w.zed.no_sig_key = true;
@@ -1002,6 +1043,71 @@ TEST(reed, workshop_mode_ignores_the_reed) {
   uint32_t t = 0;
   for (int i = 0; i < 100; i++) { t += 100; CHECK(!g.update(t, false)); }
   CHECK_EQ((int)g.ms_to_sleep(t), 0);
+}
+
+
+// ---------------------------------------------------------------- V3.14.0 sleep while the chest is off
+TEST(chest_sleep, back_sleep_command_is_acked_then_sleeps_once) {
+  World w(2);
+  w.run_ms(3000);
+  CHECK(w.back->paired());
+  CHECK(w.back->chest_online());
+  Command c; c.cmd = (uint16_t)BackCmd::BACK_SLEEP; c.cmd_id = 77;
+  uint8_t b[64]; size_t n = encode_command(c, b, sizeof(b));
+  w.chest_frames(FrameType::COMMAND, b, n);
+  w.chest_frames(FrameType::COMMAND, b, n);   // retransmission with the same cmd_id: not executed twice
+  w.run_ms(50);
+  CHECK_EQ(w.plat.sleeps, 1u);
+  CHECK_EQ(w.plat.reboots, 0u);
+}
+
+TEST(chest_sleep, old_commands_still_answered_and_do_not_sleep) {
+  World w(2);
+  w.run_ms(3000);
+  Command c; c.cmd = (uint16_t)BackCmd::REQ_STATUS; c.cmd_id = 5;
+  uint8_t b[64]; size_t n = encode_command(c, b, sizeof(b));
+  w.chest_frames(FrameType::COMMAND, b, n);
+  w.run_ms(50);
+  CHECK_EQ(w.plat.sleeps, 0u);
+}
+
+TEST(chest_sleep, policy_90_s_without_the_chest) {
+  ChestSleepPolicy p; p.begin(1000);
+  CHECK(!p.should_sleep(50000, true, 0, false));            // never heard: counts from boot
+  CHECK(!p.should_sleep(90999, true, 0, false));
+  CHECK(p.should_sleep(91000, true, 0, false));
+  CHECK(!p.should_sleep(200000, true, 150000, false));      // heard 50 s ago
+  CHECK(p.should_sleep(240000, true, 150000, false));       // 90 s
+  CHECK(!p.should_sleep(240000, false, 150000, false));     // unpaired: stays awake to be paired
+  CHECK(!p.should_sleep(240000, true, 150000, true));       // blocked (pairing window, workshop)
+  CHECK_EQ(p.left_ms(200000, 150000), 40000u);
+  CHECK_EQ(p.left_ms(300000, 150000), 0u);
+  ChestSleepPolicy q; q.begin(0xFFFFF000u);                 // millis() wrap
+  CHECK(!q.should_sleep(0x00001000u, true, 0, false));
+  CHECK(q.should_sleep(0xFFFFF000u + CHEST_SILENT_SLEEP_MS, true, 0, false));
+  CHECK_EQ(LISTEN_PERIOD_S, 10u);
+  CHECK_EQ(CHEST_SILENT_SLEEP_MS, 90000u);
+}
+
+TEST(chest_sleep, only_our_chest_wakes_the_back) {
+  NowPeerRecord peer; peer.valid = true; memcpy(peer.mac, MAC_CA, 6); peer.pair_id = 0xB0B0;
+  uint8_t other[6]; memcpy(other, MAC_CA, 6); other[5] ^= 1;
+  uint8_t hb[HEARTBEAT_V1_LEN]; Heartbeat h0; encode_heartbeat(h0, hb, sizeof(hb));
+  uint8_t f[64]; size_t fn = uart_encode(FrameType::HEARTBEAT, 0, 2, 1, 0, hb, sizeof(hb), f, sizeof(f));
+  NowHeader h; h.kind = NowKind::DATA; h.pair_id = 0xB0B0; h.boot_id = 9;
+  uint8_t pkt[NOW_MAX_PACKET]; size_t n = now_build(h, f, fn, pkt, sizeof(pkt));
+  CHECK(now_is_wake_packet(MAC_CA, pkt, n, peer));
+  CHECK(!now_is_wake_packet(other, pkt, n, peer));                 // another chest
+  h.pair_id = 0xB0B1; n = now_build(h, f, fn, pkt, sizeof(pkt));
+  CHECK(!now_is_wake_packet(MAC_CA, pkt, n, peer));                // another couple
+  h.pair_id = 0xB0B0; n = now_build(h, f, fn, pkt, sizeof(pkt)); pkt[20] ^= 0x55;
+  CHECK(!now_is_wake_packet(MAC_CA, pkt, n, peer));                // broken packet
+  NowPairMsg m; uint8_t pb[NOW_PAIR_BODY]; size_t pl = now_pair_encode(m, pb, sizeof(pb));
+  NowHeader rq; rq.kind = NowKind::PAIR_REQ; rq.pair_id = 0x1234;
+  n = now_build(rq, pb, pl, pkt, sizeof(pkt));
+  CHECK(now_is_wake_packet(MAC_CA, pkt, n, peer));                 // our chest asking to pair again
+  NowPeerRecord none;
+  CHECK(!now_is_wake_packet(MAC_CA, pkt, n, none));                // unpaired back: never sleeps anyway
 }
 
 int main(int argc, char** argv) { return tt_run_all(argc > 1 ? argv[1] : nullptr); }

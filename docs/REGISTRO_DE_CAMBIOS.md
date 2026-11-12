@@ -358,6 +358,112 @@ fichas de algoritmos y `docs/VALIDACION_Y_LIMITACIONES.md`.
 **Validación:** IMPLEMENTADO + simulación (23 casos / 671 comprobaciones, 0 fallos; cadencia error máx 0,088 Hz con SNR ≥ 5 dB;
 deriva de reloj 49,9/50 ppm). **NO VERIFICADO físicamente**: no hay datos reales de IMU (cincha inexistente en el hardware actual).
 **Pendiente:** fusión GNSS+IMU, rendimiento por aire, comparación de sesiones, integración en las apps, PPS (sesgo ≈5 ms sin él).
+## 2026-11-09 — Espalda 3.14.3 — dormida, el USB solo carga y al desenchufar sigue dormida
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` · **Commit:** `084a64c` · **CI:** [42636407029](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42636407029) (**éxito**)
+**Qué cambia:** el estado «esperando al pecho» se guarda en NVS (`avonow/wait`). Tras un reinicio con ese estado no enciende el GPS: con USB, modo carga y al desenchufar vuelve a esperar; sin USB, espera directamente. PRG o 3 encendidos rápidos fuerzan el arranque normal.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO**.
+
+## 2026-11-09 — Espalda 3.14.1 / 3.14.2 — GPS cortado con el Pololu al perder el pecho
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` · **Commits:** `d32cd05` (3.14.1), `9015857` (3.14.2) · **CI:** [42602791173](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173) (**éxito**; artefacto [`AVO-BACK-V3-14-2-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42602791173/artifacts/13667705186))
+**Por qué:** con la 3.14.0 y el pecho apagado el LED blanco (TX del ZED, GPIO35) seguía encendido: el GPS tenía corriente en el sueño profundo. El usuario pide cortar el GPS con el Pololu como en el modo carga.
+**Qué cambia:** 3.14.1 deja VDD_SPI encendido en el sueño profundo (hipótesis no confirmada). 3.14.2: sin pecho (BACK_SLEEP o 90 s) → `chest_wait_mode()`, los mismos pasos que `usb_charge_mode()` (UART cerrada, GPIO33/35 en alta impedancia, GPIO34 OUTPUT LOW activo + hold), **sin sueño profundo**: sueño ligero entre escuchas de 160 ms cada 10 s; al oír el pecho, Pololu encendido y reinicio limpio.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO**. Comprobar: LED blanco apagado y VOUT del Pololu ≈ 0 V con polímetro tras 90 s sin pecho.
+
+## 2026-11-09 — Espalda 3.14.0 — sueño con el pecho apagado
+**Autor:** Claude · **Rama:** `fix/back-3-14-0-sueno-pecho` (desde 3.13.12) · **Commit:** `09c68ab` · **CI:** [42585459626](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626) (**éxito**: 43 casos de host, 456 comprobaciones; artefacto [`AVO-BACK-V3-14-0-HELTEC`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42585459626/artifacts/13658587927), SHA-256 `818e11ec…a4`)
+**Qué cambia:** se duerme (GPS a 0 V, radio apagada) con la orden `BackCmd::BACK_SLEEP` (8) del pecho ≥ 3.7.7 o tras 90 s sin oír a su pecho; dormida despierta cada 10 s, escucha 160 ms y solo arranca si oye a su pecho (`avo_chest_sleep.h`). Batería < 3,30 V dormida: deja de escuchar (despierta cada 5 min a medir). Carga USB sin cambios.
+**Por qué:** petición del usuario (09/11): dormir del todo con el pecho apagado, despertar al encenderlo, 90 s y 10 s.
+**No se ha tocado:** protocolo con el pecho (la orden 8 es nueva y opcional), GNSS/RTK, RTCM, cincha, modo carga USB.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en la espalda. Sin V_BCKP el GPS arranca en frío al despertar (~30 s).
+**Pendiente:** con el pecho 3.7.7: apagar el pecho → la espalda duerme en ≤ 1 s; encenderlo → arranca en ≤ 10 s. Medir el consumo dormida.
+
+## 2026-11-02 — BACK 3.13.12 (Heltec) — vigilancia del resumen de señales y de reinicios del receptor
+**Autor:** Claude · **Rama:** `fix/back-3-13-12-nav-sig-watchdog` (desde `fix/back-3-13-11-usb-pololu-off` 9dce9f4) · **Commit:** `483e98f` · **CI:** [41533949119](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41533949119) (**éxito**: pruebas de host, imagen ESP32-S3 válida de 917 888 B con la versión 3.13.12; artefacto `AVO-BACK-V3-13-12-HELTEC`, caduca 01/01/2027)
+**Por qué:** prueba del 02/11/2026 (22:54), con el pecho 3.7.6, la espalda 3.13.11 al 28 % y la app 2.6-ntrip-auto-dev2.
+- La tarjeta «Calidad GNSS» se quedó fija en «Esperando el resumen de señales del receptor».
+- NAV-PVT seguía llegando (DGNSS, 43 cm) y el receptor usaba RTCM (17 195 mensajes).
+- La 3.13.11 activa NAV-SAT/NAV-SIG en RAM una sola vez. Si el receptor pierde ese ajuste sin quedarse callado 5 s (reinicio breve, bajada de tensión), no lo vuelve a pedir.
+**Qué cambia:**
+- `avo_ubx_zed.{h,cpp}`: vigila el mensaje del resumen. Si en 10 s no llega, lo vuelve a pedir; tras 3 peticiones seguidas, una por minuto. Contadores `monitor_rearms()` y `receiver_resets()`. Diferencias con signo para no dar una pérdida falsa cuando el byte llega con una marca de tiempo posterior a la del tick.
+- `avo_back_core.cpp`: `quality_mon` = estado (bits 0–3), peticiones repetidas (bits 4–5) y redetecciones del receptor (bits 6–7), con saturación en 3. **Sin cambio de formato ni de longitud**: el pecho 3.7.6 lo reenvía tal cual.
+- `.ino`: línea `VIGILANCIA` en el monitor serie. Versión 3.13.12. CI con la rama nueva.
+- 2 pruebas nuevas en el host: 39 casos y 432 comprobaciones, todas en verde en local.
+**No se ha tocado:** NAV-PVT, RTCM, ESP-NOW, la batería, el modo carga ni el Pololu.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41533949119 · **NO VERIFICADO** en la espalda.
+**Pendiente:** instalar y comprobar que el resumen vuelve solo y que los contadores se ven en la app dev3.
+
+## 2026-10-31 — BACK 3.13.11 (Heltec) — apagado real del Pololu con el USB
+**Autor:** Claude · Rama `fix/back-3-13-11-usb-pololu-off` (desde `fix/back-3-13-10-usb-umbral`) · **Commits:** `e097c69` (CI 41165198487 falló: saltos de línea sin escapar), `b54848c` · **CI:** [41165334025](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41165334025) (éxito: pruebas de ordenador + imagen de 917 696 B)
+**Qué cambia:** `AVO_USB_AUTO_OFF 1`. GPIO20 por unidad ADC2 propia (lecturas rechazadas = inválidas, se ignoran);
+confirmación de 2 s con ≥ 6 muestras válidas. USB conectado → UART del ZED cerrada, GPIO33/35 en alta impedancia,
+GPIO34 OUTPUT LOW, radio apagada, bucle de carga despierto (sin sueño profundo) que mantiene SHDN en LOW. USB retirado →
+GPIO34 libre, 1,5 s y reinicio limpio (UART1 RX35/TX33, GNSS, NAV-PVT, ESP-NOW, RTCM).
+**Por qué:** petición del usuario (activar el apagado real con los umbrales de 100/50 mV).
+**Riesgo:** umbrales dentro de la zona imprecisa del ADC; un GPIO20 sin divisor real puede dar ~170 mV y dejar la espalda
+en modo carga sin USB.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. VOUT no medida; detección USB por umbrales sin comprobar en la placa.
+
+## 2026-10-31 — BACK 3.13.10 (Heltec) — diagnóstico de USB por umbrales en GPIO20
+**Autor:** Claude · Rama `fix/back-3-13-10-usb-umbral` (desde `fix/back-3-13-9-usb-gps-off`) · **Commits:** `b35e976` (CI 41164215802 falló: variable declarada tarde), `0302d6a` · **CI:** [41164361647](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41164361647) (éxito: pruebas de ordenador + imagen de 916 880 B)
+**Qué cambia:** USB por tensión en GPIO20 (ADC, mediana de 9, > 100 mV conectado / < 50 mV desconectado, histéresis,
+confirmación de 2 s), GPIO7 (ADC1) medido como alternativa, línea `[USB]` cada segundo y motivo de cada transición.
+`AVO_USB_AUTO_OFF 0`: **ningún apagado por USB** (ni en el bucle, ni al arrancar, ni al despertar); las transiciones se
+registran como simulación. Se elimina la lectura digital de GPIO20 de la 3.13.9.
+**Por qué:** petición del usuario; requisito de seguridad de no apagar el GPS con estos umbrales sin comprobarlos.
+**Auditoría:** ADC2 compartido con la Wi-Fi (lecturas rechazadas = 0), GPIO20 = D+ del USB nativo (pad desactivado),
+ADC impreciso por debajo de ~100 mV y lectura de ~170 mV con el pin suelto: umbrales de 100/50 mV no fiables. Propuesto
+GPIO7 (ADC1) con el mismo divisor alimentado desde un punto con 5 V solo con USB.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. Apagado por USB no validado (desactivado).
+
+## 2026-10-31 — BACK 3.13.9 (Heltec) — GPS apagado con el USB conectado
+**Autor:** Claude · Rama `fix/back-3-13-9-usb-gps-off` (desde `diag/back-3-13-8-pololu-libre`) · **Commits:** `0a48cfa` · **CI:** [41161727290](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41161727290) (éxito: pruebas de ordenador + imagen de 916 224 B)
+**Qué cambia:** `zed_shdn()`: GPS encendido = GPIO34 en alta impedancia (pull-up del Pololu a VIN = 3V3), apagado =
+GPIO34 OUTPUT LOW; nunca ALTO. USB confirmado con 8 lecturas seguidas en ALTO de GPIO20 → paro de GNSS/RTCM, GPIO34
+LOW, TX a LOW, sueño profundo durante la carga; al retirarlo, GPIO34 libre, UART1 RX35/TX33 y recuperación de UBX y
+NAV-PVT, con tiempos en el monitor. Modo carga 3.8.2: TX del ZED a LOW.
+**Por qué:** petición del usuario; la 3.13.8 ha recuperado la comunicación GNSS (460800). Cableado nuevo: VIN del Pololu al 3V3.
+**No se ha tocado:** UART (RX35/TX33), `ZedManager`, NAV-PVT, ESP-NOW, RTCM, brownout, umbrales de batería.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. **La detección del USB no es fiable** (GPIO20 0,16–0,17 V con USB):
+mientras no se arregle el circuito el GPS no se apaga por USB. El apagado real de VOUT solo se dará por bueno midiéndolo.
+**Pendiente:** señal física de USB a GPIO20; medir VOUT ≈ 0 V con USB; pruebas de las tres situaciones en la espalda.
+
+## 2026-10-31 — BACK 3.13.8 DIAGNÓSTICO (Heltec) — Pololu siempre encendido
+**Autor:** Claude · Rama `diag/back-3-13-8-pololu-libre` (desde `fix/back-3-13-8-gps-uart`) · **Commits:** `39ce718`, `90c26a0` · **CI:** [41160703337](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41160703337) (éxito: imagen de 915 776 B)
+**Qué cambia:** `AVO_POLOLU_FREE 1`: todo el control de GPIO34 pasa por `zed_shdn()`/`zed_shdn_sleep()`; en esta
+compilación GPIO34 se libera (`gpio_hold_dis`) y queda `INPUT` sin pulls, sin `digitalWrite` ni `gpio_hold_en`. El
+`gpio_deep_sleep_hold_en()` global sigue para los demás pines (TX GPIO33, Vext, ADC, LoRa), no afecta a GPIO34 porque no
+tiene hold propio. Binario y artefacto con nombre DIAG_POLOLU.
+**Por qué:** prueba pedida por el usuario para descartar que el control de SHDN impida funcionar al ZED-F9P.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. No es versión de ahorro: el GPS puede quedar encendido dormida o cargando.
+La alimentación del GPS no se da por correcta sin medir VOUT del Pololu.
+
+## 2026-10-31 — BACK 3.13.8 (Heltec) — GPS UART PIN FIX
+**Autor:** Claude · Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`) · **Commits:** pendiente · **CI:** pendiente
+**Qué cambia:** UART1 del ZED con **RX=GPIO35, TX=GPIO33** según el cableado confirmado (blanco = RX del ZED → GPIO33,
+verde = TX del ZED → GPIO35, amarillo = SHDN del Pololu → GPIO34). GPIO35 solo entrada: no se escribe ni se fija al
+dormir (se aparca GPIO33). USB solo por GPIO20 digital filtrado (sin ADC2, sin otros pines candidatos). Monitor con
+`GNSS UART1`, `POLOLU: SHDN GPIO34`, `GNSS: bytes recibidos / UBX / NMEA / NAV-PVT / estado`.
+**Por qué:** con RX=33 no llegaba ningún byte del ZED (UBX=0, NMEA=0). Petición del usuario con el cableado por colores.
+**Archivos:** `firmware/back/V3_8_0/AVO_BACK_V3_8_0/AVO_BACK_V3_8_0.ino`, `lib/avo_core/src/avo_version.h`, `README.md`,
+`docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md` (sección 6), `.github/workflows/build-back-v380.yml`, este registro, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**No se ha tocado:** detector de brownout, corte por batería baja, sueño por USB, ESP-NOW, RTCM, configuración RTK, `ZedManager`.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**. GPS no recuperado hasta ver NAV-PVT en el dispositivo. USB por GPIO20:
+sin resolver (0,16–0,17 V con USB conectado: la señal física no llega).
+**Pendiente:** prueba en la espalda; si `UBX malos` alto, quitar el LED blanco de GPIO35.
+
+## 2026-10-31 — BACK 3.13.7 (Heltec) — recuperación del GPS ZED-F9P
+**Autor:** Claude · Rama `fix/back-3-13-7-gps` (desde `develop/avo-performance-horse`) · **Commits:** `f6b8ee3` · **CI:** [41157825892](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41157825892) (éxito: pruebas de ordenador + imagen ESP32-S3 de 915 840 B, 27 % de app0)
+**Qué cambia:** se trae a esta rama la espalda 3.13.6 de `feature/avo-back-v4` y sobre ella: pines del ZED fijos
+RX=GPIO33/TX=GPIO35 (sin intercambio automático), ciclo de corriente del ZED por GPIO34 al arrancar, escucha pasiva en
+todos los baudios antes de cualquier orden y antes de la radio, ESP-NOW después del diagnóstico, sin UBX-RXM-PMREQ al
+dormir, línea `GNSS:` en el monitor (B/s, UBX, NMEA, NAV-PVT, GPIO34 solicitado frente a tensión no medida).
+**Por qué:** el GPS no responde desde las pruebas del 31/10 (UBX=0 NMEA=0, ni un byte). Petición del usuario: recuperar
+el funcionamiento de la 3.9.0 sin perder las funciones de la 3.13.6. Auditoría: `firmware/back/V3_8_0/docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md`.
+**Archivos:** `firmware/back/V3_8_0/**`, `.github/workflows/build-back-v380.yml`, este registro, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**No se ha tocado:** detector de brownout, cargador, umbrales del corte por batería baja (3,30 / 3,45 V), protocolo con el pecho.
+**Validación:** IMPLEMENTADO · COMPILADO / CI · **NO VERIFICADO**. El GPS no se da por recuperado hasta ver NAV-PVT en el monitor.
+**Pendiente:** prueba en la espalda; si no hay bytes del ZED en ningún baudio, medir VOUT del Pololu, VIN, GND y TX del ZED → GPIO33.
+Recomendado: 100 kΩ de SHDN a GND (GPIO34 queda por debajo de 3,3 V mientras el pin está suelto en el arranque).
 
 ## 2026-10-23 — Copias de código fuente y traspaso para asistentes
 **Autor:** Claude · Zips en la raíz: `AVO_ANDROID_V2_0_REDISENO_MAREAS_ANALISIS_FUENTES.zip` (actualizado),
