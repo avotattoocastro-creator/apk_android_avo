@@ -1,6 +1,53 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
-**REV 5.9.1 (actual): conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
+**REV 5.10 (propuesta): módulo de pulso CJMCU-30003 (MAX30003, ECG de un canal) dentro de la cápsula**, a petición del usuario.
+- **Cápsula de 70 × 53 × 13,8** (antes 70 × 51). Soporte de 102,7 × 63,4 × 12,95.
+- **Módulo:** medidas del usuario, 21 × 16 × 8 con el jack de 3,5 mm.
+  - **El jack se quita**: los electrodos llegan por el segundo pogo.
+  - Sin el jack, la altura prevista es ≤ 4,2 mm (**E**, por confirmar).
+  - Va en el hueco de −X de la bandeja (donde iba el Qi), en (−18,2, 0), girado: 16 en X y 21 en Y. Apoya en la placa de la bandeja y debajo tiene una ventana para las soldaduras.
+  - Dos tubos de la tapa quedan a 0,2 mm por encima: no aprietan, solo impiden que se levante.
+- **Segundo pogo**, el mismo modelo, en **y = +19,7**, simétrico al de carga y soporte (y = −19,7). Cada placa deja 0,8 mm de pared hasta la junta. La batería vuelve al centro.
+- **Contactos del pogo del pulso** (1 = lado −X):
+
+| Contacto | Cápsula (módulo) | Soporte |
+|---|---|---|
+| 1 | ECGP (electrodo +) | cable al electrodo + |
+| 2 (centro) | VCM / referencia | cable al electrodo de referencia |
+| 3 | ECGN (electrodo −) | cable al electrodo − |
+
+  En el módulo se sueldan a las patillas del jack quitado; hay que comprobar con el multímetro cuál es cada una.
+- **Bandeja:**
+  - paso de los 3 hilos sobre la copa del pogo del pulso, con canal hasta el módulo;
+  - canal por delante del USB-C hasta el C6 para los hilos SPI.
+- **Soporte:**
+  - segundo alojamiento de pines, igual que el primero, con las orejas atornilladas por debajo;
+  - canal de 4 × 2 mm por debajo, del pogo del pulso al borde +Y, para los cables de los electrodos.
+- **Conexión al XIAO ESP32-C6** (los pines D0–D6 son del BNO085):
+
+| CJMCU-30003 | XIAO | GPIO |
+|---|---|---|
+| VCC | 3V3 | — |
+| GND | GND | — |
+| CSB | D7 | 17 |
+| SCK | D8 | 19 |
+| SDO (MISO) | D9 | 20 |
+| SDI (MOSI) | D10 | 18 |
+| INT1 | MTDO (pad de abajo) | 7 |
+| FCLK | MTMS (pad de abajo) | 4: reloj de 32 768 Hz desde el ESP32, solo si la placa no lleva oscilador (por comprobar) |
+
+- **CI:** sin interferencias, 1 sólido por pieza. Render: `renders/rev5_10_planta.png`.
+- **NO VERIFICADO:** ni la impresión ni el módulo. Falta el firmware del MAX30003.
+
+**REV 5.9.2 (propuesta): lado de los pines del pogo empotrado por completo**, a petición del usuario.
+- La placa del soporte pasa de 6,0 a **8,5 mm** (soporte de 12,95 mm de alto con el cerco).
+- El cuerpo (6,0) y las colas de los pines (1,5) quedan dentro, con 1,0 mm libre bajo las colas para el puente soldado: nada sobresale por debajo.
+- El rebaje de las orejas sigue abierto por abajo (4,0 mm de hondo bajo las orejas). Tornillos **M2 × 4** como máximo.
+- **Placa pogo entra desde arriba:** la pared de la cápsula se recorta en vertical, con la forma de la placa, hasta arriba (antes el reborde quedaba bajo un techo a 45° de la pared). Para dejar 0,8 mm de pared hasta la ranura de la junta, el conector pasa de y = −20,2 a **y = −18,7** y la cuna de la batería se desplaza **1,0 mm hacia +Y**. En el lado +Y la propia cuna hace de pared de la copa de epoxi.
+- **Tornillos del cierre:** los 8 agujeros M3 de la base son pasantes (Ø3,4). Se quita la capa de sacrificio de 0,3 mm sobre los avellanados; el techo de cada avellanado (corona de Ø5,9 a Ø3,4, a 3,7 mm) se imprime como un pequeño puente.
+- **CI:** sin interferencias, 1 sólido por pieza. Render: `renders/pogo_5_9_2_corte.png`.
+
+**REV 5.9.1: conector pogo según el modelo STEP real del usuario** (`ref/pogo_3pin_assembly.step`, medido en el CI por `inspect_pogo.py` → `out/pogo_step_medidas.txt`).
 - **Placa** (contactos planos), en la base:
   - cara 15,5 × 4,65, que pasa por el fondo y queda **a ras**;
   - reborde de 17,1 × 6,25 apoyado por dentro, 3,5 de alto en total;
