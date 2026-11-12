@@ -24,6 +24,33 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
+**Autor:** Claude · Rama `claude/asignacion-caballo` · Contrato: `docs/ASIGNACION_CABALLO.md`
+**Qué cambia:**
+- **Motor:** opción `asignacion` (bloque del manifiesto) en `avo_eq_analyse_ex`/`compare_ex`; `sesion.caballo`/`jinete` con
+  la asignación y, nuevos, `caballo_nombre`, `jinete_nombre`, `caballo_raw`, `jinete_raw` e `identidad` (RAW | ASIGNACION).
+  La asignación entra en el hash de parámetros. `avo_eq_cli --caballo/--caballo-nombre/--jinete/--jinete-nombre`.
+  Pruebas `test_identity.cpp` (2 casos, 23 comprobaciones). Referencias JSON regeneradas: solo esas 5 claves.
+- **Android:** el caballo y el jinete elegidos se envían al reloj al elegirlos y antes de INICIAR (aviso si no hay caballo);
+  el `.avo` compartido lleva el bloque `asignacion` (con la cabecera RAW en `raw`); al importar manda el bloque y gana la
+  asignación más reciente; el motor recibe la asignación; la sincronización ya no pisa un caballo asignado a mano.
+  `core/share/AvoAssignment.kt` + `AvoAssignmentTest` (6 pruebas).
+- **Windows:** `AvoAssignment.cs`; asignar reescribe el manifiesto de la copia de la biblioteca y de los `.avo` de la
+  carpeta del reloj (RAW byte a byte, verificado, sustitución atómica); la biblioteca guarda la huella anterior
+  (`PreviousSha256`); la cuadra adopta asignaciones más recientes; el motor recibe la asignación. `AssignmentTests`.
+- **iPad:** `AvoAssignment.swift`; mismo flujo que Windows; `AvoPackageWriter` ya no deja el caballo en blanco en los
+  paquetes de la descarga (Android los rechazaba) y admite reescribir con `manifestBase`. `AssignmentTests` (4 pruebas).
+**Por qué:** petición del usuario: «cuando se asigne caballo en la app iOS, Android o Windows también modifique en el raw para
+no tener problemas». Decisión del usuario: **no se modifica el RAW** (su SHA-256 identifica el entrenamiento); la identidad
+vive en el manifiesto `.avo` y se elige en origen.
+**Probado con datos reales:** sesión del 08/11 11:38 (`HORSE_001` en el RAW) analizada con la asignación «Zakina» /
+«Andoni Lezama»: identidad correcta, distancia idéntica, RAW sin cambios.
+**Validación:** CI de motor, Android, Windows e iPad sobre la rama (ver PR) · **NO VERIFICADO** en móvil, PC, iPad ni reloj.
+**Pendiente:** comparación de dos sesiones con caballos distintos (la opción es común a las dos); que el reloj muestre el
+caballo configurado antes de grabar.
+
+---
+
 ## 2026-11-12 — Reglas y CI tras la integración — AGENTS.md, CLAUDE.md, TestFlight y pecho desde develop
 **Autor:** Claude · Rama `claude/reglas-ci-tras-integracion` · **CI:** al fusionar (ver PR)
 **Qué cambia:**
