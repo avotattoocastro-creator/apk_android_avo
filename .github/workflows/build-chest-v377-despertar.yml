@@ -2,7 +2,7 @@ name: "Build AVO CHEST V3.7.10 CARGA APAGADO (encendido por USB, no despierta la
 on:
   workflow_dispatch:
   push:
-    branches: [feature/chest-3-7-7-despertar-espalda]
+    branches: [develop/avo-performance-horse, feature/chest-3-7-7-despertar-espalda]
     paths:
       - 'firmware/chest/V3_7_2_UI/**'
       - 'firmware/chest/V3_7_3_READFILE/**'

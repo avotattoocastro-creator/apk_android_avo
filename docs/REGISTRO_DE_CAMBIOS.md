@@ -24,6 +24,44 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-12 — Reglas y CI tras la integración — AGENTS.md, CLAUDE.md, TestFlight y pecho desde develop
+**Autor:** Claude · Rama `claude/reglas-ci-tras-integracion` · **CI:** al fusionar (ver PR)
+**Qué cambia:**
+- `AGENTS.md` (reglas comunes) y `CLAUDE.md` (resumen): una sola `develop` con ramas cortas por tarea integradas por PR
+  con *merge commit*; prohibido borrar ramas antiguas hasta tener las 53 etiquetas `backup/2026-11-12/*`; lista de
+  ficheros secretos prohibidos (la clave privada ECDSA de licencias vive solo en AVO Tarjetas); hardware actual,
+  contratos binarios y CI; tabla de componentes actualizada (Windows, iPad, motor, cincha, espalda V4).
+- `.github/workflows/build-avo-ipad.yml`: el trabajo `testflight` se ejecuta con push a **`develop`** (antes, a
+  `feature/ipad-app`). Los filtros `paths:` y el número de build (`run_number`) no cambian.
+- `.github/workflows/build-chest-v377-despertar.yml`: añade `develop` a sus ramas; sus `paths:` ya eran solo las carpetas
+  `firmware/chest/V3_7_*` del pecho 3.7.10.
+- `docs/crear_tags_backup.sh`: script de las 53 etiquetas de respaldo con los commits auditados.
+**Por qué:** petición del usuario tras terminar la integración: reglas permanentes y TestFlight/pecho desde `develop`.
+**No se ha tocado:** código de apps ni firmware, secretos, firma, `Info.plist`, `paths:` de los workflows.
+**Validación:** IMPLEMENTADO · YAML validado · NO VERIFICADO hasta el primer push a `develop` que cambie esas carpetas.
+
+---
+
+## 2026-11-12 — Integración en develop — 11 fusiones (PR #7 a #17)
+**Autor:** Claude · **Plan:** `PLAN_INTEGRACION_DEVELOP.md` (conocimiento del proyecto)
+**Qué cambia:** `develop/avo-performance-horse` pasa de `18a9823` (23/10) a reunir todo el trabajo vigente:
+`feature/avo-wifi-sync` (#7), cincha REV 5.9.2/5.10 (#8), **pecho 3.7.10** (#9), **espalda 3.14.3** con 3.13.12 (#10),
+licencias 2.5 + **AVO Tarjetas 1.4** (#11), Android 2.6 + 2.8 → **2.9-integrada-dev1, vc 42** (#12), **iPad + motor
+Equine (Training Analytics, Track Work) + Windows V2 PRO** (#13), registro de `ipad-analisis-entreno` (#14), **espalda V4
++ CAD Rev E.7** sin tocar la 3.14.3 (#15), auditoría de la PCB de la cincha REV B/B.1 (#16) y ODB++ para AISLER (#17).
+**Conflictos resueltos:** registro y README (los dos lados); espalda → 3.14.3 (contrato binario solo con añadidos);
+Android → vc 42; motor y Windows → lado iPad (descendiente del de develop) y retirada de 5 ficheros de la UI de
+Windows V1 (`EngineChart`, `MainWindow.Engine`, `MainWindow.Usb`, `RouteView`, `TelemetryChart`): la descarga USB se
+conserva porque `ChestUsb.cs`, `SimWatch.cs` y `usb_transcript.json` son idénticos.
+**CI en develop:** Android, Windows, AVO Update, espalda 3.14.3, cincha, Firebase e iPad en verde; pecho 3.7.10
+compilado a mano sobre develop (run 43270226647).
+**No integradas a propósito:** `main`, `feature/avo-measurement-engine-v4`, `fix/chest-v373-readfile`,
+`fix/back-3-13-8-gps-uart` y `ci/*`.
+**Validación:** COMPILADO / CI · NO VERIFICADO en hardware como conjunto.
+**Pendiente:** etiquetas de respaldo (esta sesión no puede crearlas); tabla única de versiones en `README.md`.
+
+---
+
 ## 2026-11-11 — Cincha (CAD) REV 5.10 — módulo de pulso MAX30003 y segundo pogo
 **Autor:** Claude · Rama `feature/girth-rev5-10-pulso` (propuesta, sin fusionar), sobre `feature/girth-rev5-9-2-pogo-empotrado`
 **Qué cambia:**

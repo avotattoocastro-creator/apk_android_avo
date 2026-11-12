@@ -155,7 +155,8 @@ jobs:
   # (App Store Connect API key with the App Manager or Admin role) and the app record created in App Store Connect with
   # the bundle id AVO_BUNDLE_ID. Without the secrets the job is skipped and the build stays unsigned.
   testflight:
-    if: github.event_name == 'workflow_dispatch' && inputs.testflight || github.event_name == 'push' && github.ref == 'refs/heads/feature/ipad-app'
+    # Desde el 12/11/2026 TestFlight sale de develop (antes, de feature/ipad-app, ya integrada en develop por el PR #13).
+    if: github.event_name == 'workflow_dispatch' && inputs.testflight || github.event_name == 'push' && github.ref == 'refs/heads/develop/avo-performance-horse'
     runs-on: macos-26
     timeout-minutes: 60
     env:
