@@ -90,6 +90,7 @@ fun SettingsScreen(c: AppContainer, go: (String) -> Unit) {
             SettingsEntry("copias", "Copias de seguridad"),
         ),
         "Sistema" to listOf(
+            SettingsEntry("licencia", "Licencia"),
             SettingsEntry("diagnosticos", "Diagnósticos"),
             SettingsEntry("acerca", "Acerca de"),
         ),

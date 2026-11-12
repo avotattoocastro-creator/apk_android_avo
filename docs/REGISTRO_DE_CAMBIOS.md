@@ -309,6 +309,64 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-09 — Licencias — AVO Tarjetas 1.4-nfc-movil-dev1 + Android 2.5-roles-dev2: activar un móvil por NFC con AVO Tarjetas
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commits:** `ac97d61`, `0f2bad2` · **CI:** run 42672931752 ✅ (`android-apk`: 141 pruebas core, 0 fallos; app y AVO Tarjetas compiladas y firmadas; el trabajo del emulador no llegó a arrancar por un fallo de GitHub al crear los trabajos)
+**Qué cambia:**
+- **AVO Tarjetas hace de tarjeta NFC** (Host Card Emulation, `AvoHceService`, AID `F041564F4C494301`, `requireDeviceUnlock`): en un usuario del registro, «ACTIVAR SU MÓVIL POR NFC (SIN TARJETA)» → roles y fecha → «Preparar»; durante 2 minutos (una sola activación) responde al móvil que se le junte. Mientras espera, desactiva el modo lector y se marca como servicio preferido. Diálogo con cuenta atrás, cancelar, resultado; historial «Licencia en móvil por NFC · móvil XXXXXXXX» (`RegEvent.Kind.MOVIL`).
+- **La licencia queda atada al móvil activado:** `LicenseIssuer.issueForDevice` firma un token v2 con el **id del móvil** (SHA-256 de Android ID + paquete, 10 B) en el campo UID y `LicenseToken.FLAG_DEVICE` (0x02). `LicensePolicy.activateOnDevice` lo exige; la tarjeta y el archivo rechazan tokens de móvil y viceversa.
+- **App AVO:** en el lector NFC global, una etiqueta sin NDEF con IsoDep se prueba como AVO Tarjetas (`onPhoneCard`): recibe la tarjeta de usuario (adoptada como identidad igual que al acercar la tarjeta) y la licencia (`LicenseManager.activateFromPhone`, `deviceId`). Otros dispositivos se ignoran sin aviso. Tarjeta nueva en Ajustes → Licencia explicándolo.
+- **Protocolo** en `core/.../license/NfcActivation.kt` (SELECT / ACTIVATE / READ por trozos de 240 B), sin Android, con pruebas JVM `NfcActivationTest` (intercambio completo en bucle, nombre largo en varios trozos, otro móvil, tarjeta y archivo con token de móvil, otra clave, no preparado, comandos mal formados).
+**Por qué:** el usuario pide que AVO Tarjetas sirva como tarjeta NFC para activar un móvil; eligió que el móvil del emisor active al del usuario y que la licencia quede atada al móvil activado.
+**Archivos:** `core/.../license/NfcActivation.kt` (nuevo), `LicenseToken.kt`, `LicenseIssuer.kt`, `LicensePolicy.kt`, `IssuerRegistry.kt`, `core/src/test/.../NfcActivationTest.kt` (nuevo), `cards/.../PhoneActivation.kt` (nuevo), `cards/.../CardsActivity.kt`, `cards/src/main/AndroidManifest.xml`, `cards/src/main/res/xml/avo_hce_service.xml` (nuevo), `cards/src/main/res/values/strings.xml` (nuevo), `app/.../MainActivity.kt`, `app/.../license/LicenseManager.kt`, `app/.../ui/screens/LicenseScreens.kt`, versiones, `docs/LICENCIAS_AVO.md`, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
+**Validación:** IMPLEMENTADO · CI ✅ (run 42672931752) · NO VERIFICADO con dos móviles.
+**Limitaciones:** solo Android ↔ Android con NFC y HCE; el iPad no tiene NFC. Restablecer el móvil de fábrica cambia su id (hay que activarlo otra vez).
+
+## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commit:** `438a887` · **CI:** [40471096243](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40471096243) (**éxito** a la primera: core 132 pruebas, emulador 2; licencias activadas con F5EEE5D2; app y Tarjetas con el mismo certificado estable SHA-256 8807ef9cec7f4eb2…)
+**Qué cambia:**
+- Núcleo: `IssuerRegistry` (usuarios, licencias, contactos e historial; formato de texto con campos base64; fusión de copias), `IssuerBackup` (clave + registro en un archivo con contraseña), `PasswordBox`. 6 pruebas nuevas (34 en total de licencias).
+- AVO Tarjetas:
+  - registro cifrado con el Keystore (migra y borra la lista anterior, que guardaba las claves de las tarjetas en claro);
+  - búsqueda;
+  - ficha de usuario con historial, edición de datos, «Activar por archivo (sin tarjeta)» por WhatsApp (a su número), email (a su dirección) u otra app, renovar en tarjeta, copia, baja y reactivación;
+  - «Añadir al registro» para tarjetas leídas que no estaban;
+  - copia completa (clave + registro) y restauración, compatible con la copia de solo la clave;
+  - aviso de copia pendiente.
+- CI: `apksigner` comprueba que la app y AVO Tarjetas llevan el mismo certificado estable (falla si no), para que se actualicen sin desinstalar.
+**Por qué:** peticiones del usuario: actualizar AVO Tarjetas sin borrarla y tener una base de datos para activar licencias y crear archivos sin leer la tarjeta.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 40471096243 · 34/34 pruebas JVM del núcleo de licencias · **NO VERIFICADO** en el teléfono.
+
+## 2026-10-27 — Claves públicas de licencias desde `config/license_public_keys.txt`
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc`
+**Qué cambia:** si no existe la variable de Actions `AVO_LICENSE_PUBLIC_KEYS`, la compilación lee las claves públicas de `config/license_public_keys.txt`, una por línea y con `#` para comentarios. El aviso de CI muestra el identificador de cada clave (los 4 primeros bytes del SHA-256 del SPKI, el mismo que muestra AVO Tarjetas). Se añade la clave pública **F5EEE5D2** (P-256, generada por el usuario en AVO Tarjetas el 27/10/2026; comprobada con openssl: SPKI de 91 B, curva prime256v1, identificador igual al de su copia cifrada). **Desde esta compilación la app exige licencia.**
+**Por qué:** desde esta sesión no se pueden crear variables de Actions, y el usuario pide que la clave la meta el asistente.
+**Validación:** CI [40469807184](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40469807184): «Licencias ACTIVADAS: 1 clave (id: F5EEE5D2)».
+
+## 2026-10-27 — Android 2.5-roles-dev1 + AVO Tarjetas 1.2-roles-dev1 — roles en la licencia
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commits:** `d506983`, `42d4f0f` · **CI:** Android [40468818227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468818227) (**éxito**: core 126 pruebas, emulador 2, artefacto `AVO-Performance-Horse-V2_5_ROLES_DEV1-APK`; la 40468164700 falló por `LicenseAsk` dentro de `Mode` en Tarjetas, corregido en `42d4f0f`) · reglas Firebase [40468164673](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40468164673) (**éxito**, 11 pruebas)
+**Qué cambia:**
+- Licencia v2 (108 B): byte de roles firmado (jinete, entrenador, desarrollador, propietario, veterinario). La v1 se sigue leyendo como todos los roles. Tabla única rol → funciones en `core/.../license/LicenseRoles.kt`.
+- App: las pantallas y los servicios se habilitan por función (chaleco y grabación, elegir jinete, mareas, enviar y recibir, ajustes, diagnósticos). Inicio en modo consulta para roles sin chaleco (propietario, veterinario). Pantalla Licencia con roles y funciones.
+- Jinete: el titular queda como jinete (fijo si no es también entrenador o desarrollador). Se escribe en el chaleco al conectar (`WatchConfigOps.setRider`, nunca grabando) y se pone en los entrenamientos descargados sin jinete (no en los importados).
+- Envío entre apps: la licencia se publica en el perfil (`users/<código>/lic`) y la app receptora verifica la firma y muestra «Nombre · roles» en invitaciones, destinatarios, buscador, enviados y recibidos. Reglas de Firebase ampliadas (campo `lic`, base64 ≤ 200) y pruebas del emulador.
+- AVO Tarjetas: casillas de roles al crear, renovar y enviar por archivo, con las funciones que activa cada combinación; los roles se muestran en la lectura y en las tarjetas emitidas.
+**Supuesto:** «desaroyador» se ha interpretado como **Desarrollador** (todas las funciones y diagnósticos). Pendiente de confirmar.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 40468818227 · núcleo 28/28 pruebas JVM · **NO VERIFICADO** en teléfono. **Hay que publicar las reglas nuevas de Firebase.**
+
+## 2026-10-27 — Android 2.4-license-dev1 + AVO Tarjetas 1.1-license-dev1 — licencia de la app por tarjeta NFC o archivo
+**Autor:** Claude · **Rama:** `feature/avo-license-nfc` (desde `feature/avo-wifi-sync` 2ab1ff4) · **Commit:** `1fbf2e3` · **CI:** [40433800797](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40433800797) (**éxito**: core 123 pruebas, emulador 2, artefacto `AVO-Performance-Horse-V2_4_LICENSE_DEV1-APK`; compilada **sin** `AVO_LICENSE_PUBLIC_KEYS` → sin control de licencias)
+**Qué cambia:**
+- **Núcleo** (`core/.../license/`): licencia binaria firmada ECDSA P-256 ligada al UID del chip, registro NDEF externo `avoperformance.org:lic`, reloj anti-retroceso (hora de red, última hora conocida, contador desde el arranque), estados y reglas de activación/renovación sin rebaja, archivo de licencia `.avolic` cifrado con el secreto de la tarjeta del usuario, copia de la clave con contraseña (PBKDF2 + AES-GCM).
+- **AVO Tarjetas 1.1** (vc 2): generar / exportar / importar la clave de firma (guardada con SecureStore del Keystore), opción «Licencia de la app» con fecha al crear, «Renovar», «Por archivo» (compartir por WhatsApp/email), lectura que comprueba firma, UID y caducidad. Las tarjetas con licencia no se bloquean.
+- **App 2.4-license-dev1** (vc 35): activación al acercar la tarjeta de usuario o al abrir el archivo; pantalla Licencia (también en Ajustes → Sistema); aviso en Inicio 7 días antes; **modo consulta** al caducar o sin licencia (entrenamientos, análisis, comparativas y cuadra visibles; chaleco, grabación, descargas, NTRIP, mareas, compartir, ajustes y NFC de caballo/jinete bloqueados; servicio en segundo plano detenido).
+- Claves públicas desde la variable de Actions `AVO_LICENSE_PUBLIC_KEYS` (BuildConfig). **Sin la variable la APK no controla licencias** (aviso en CI y en la app).
+- CI: nombre del APK y del artefacto con la versión real (antes fijo «V2-1-motor»).
+**Por qué:** petición del usuario: activación de la app hasta una fecha por la tarjeta NFC, sin que se pueda copiar ni cambiar la fecha, y activación remota por archivo.
+**Corrección a lo dicho en el chat:** la hora del reloj de pecho la fija el móvil (`TIME_SET`), así que no sirve como referencia independiente; se usa hora de red de Android y contador monotónico.
+**No se ha tocado:** firmware, protocolo BLE/ESP-NOW/Wi-Fi, formato RAW, base de datos.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 40433800797 · núcleo 25/25 pruebas JVM · **NO VERIFICADO** en teléfono ni con tarjetas. Limitaciones: tarjetas «mágicas» con UID modificable pueden clonar una NTAG21x; el repositorio público permite recompilar sin licencias.
+**Pendiente:** lista de `docs/LICENCIAS_AVO.md` (apartado «Pendiente de verificar en teléfono»).
+
 ## 2026-10-24 — Android 2.1-motor — inicio automático en segundo plano
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
 **Qué cambia:** el servicio de enlace (BLE con el chaleco, NTRIP, descarga automática) arranca sin abrir la app: al encender el móvil,

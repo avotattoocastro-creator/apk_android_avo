@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AVO Tarjetas as an NFC card for «Activar móvil por NFC». Only answers while unlocked and while an activation is armed. -->
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/hce_description"
+    android:requireDeviceUnlock="true">
+    <aid-group android:description="@string/hce_description" android:category="other">
+        <!-- NfcActivation.AID: F0 "AVOLIC" 01 -->
+        <aid-filter android:name="F041564F4C494301" />
+    </aid-group>
+</host-apdu-service>

@@ -10,6 +10,7 @@
         ".validate": "$code.matches(/^AVO-[A-Z2-9]{4}-[A-Z2-9]{4}$/) && newData.hasChildren(['name', 'uid']) && newData.child('uid').val() === auth.uid && newData.child('name').isString() && newData.child('name').val().length >= 1 && newData.child('name').val().length <= 40",
         "name": { ".validate": true },
         "uid": { ".validate": true },
+        "lic": { ".validate": "newData.isString() && newData.val().length <= 200 && newData.val().matches(/^[A-Za-z0-9+\\/=]+$/)" },
         "$other": { ".validate": false }
       }
     },
