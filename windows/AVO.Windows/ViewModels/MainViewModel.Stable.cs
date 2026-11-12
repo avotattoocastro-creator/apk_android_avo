@@ -359,6 +359,38 @@ public sealed partial class MainViewModel
         if (Page == "Reports") RefreshReportPreview();
     }
 
+    /// <summary>
+    /// AVO-ASSIGN-1: writes the assignment into the training files this app owns (library copy and, for USB downloads,
+    /// the .avo in the watch folder) so Android and iPad see the same horse. The RAW segments are never changed.
+    /// A file that cannot be written keeps the assignment on this PC only (cuadra.json) and is reported.
+    /// </summary>
+    private void WriteAssignmentToFiles(IEnumerable<SessionItem> items)
+    {
+        int written = 0, failed = 0;
+        foreach (var s in items.ToList())
+        {
+            if (s.IsSynthetic) continue;
+            var (h, r) = (Stable.Resolve(s.Session, IdentityKind.Horse), Stable.Resolve(s.Session, IdentityKind.Rider));
+            var a = new AvoAssignmentData(h.Code, h.Known ? h.Name : "", r.Code, r.Known ? r.Name : "", DateTimeOffset.UtcNow, "windows");
+            try
+            {
+                if (_library.WriteAssignment(s.Id, a, s.Session.RawHorse, s.Session.RawRider) is { } sha) { s.Session.FileSha256 = sha; written++; }
+                if (s.Session.SourcePath is { } src && src.EndsWith(".avo", StringComparison.OrdinalIgnoreCase) && File.Exists(src)
+                    && Path.GetFullPath(src).StartsWith(Path.GetFullPath(WatchLibrary.DefaultFolder), StringComparison.OrdinalIgnoreCase))
+                    AvoAssignment.Write(src, a, s.Session.RawHorse, s.Session.RawRider);
+                s.Engine = null;   // the analysis carries the identity: recomputed with the new assignment
+                s.EngineState = "Pendiente (nueva asignación)";
+            }
+            catch (Exception ex) when (ex is IOException or InvalidDataException or UnauthorizedAccessException or System.Text.Json.JsonException)
+            {
+                failed++;
+                Log.Warn("cuadra", $"no se pudo escribir la asignación en el archivo de {s.Id}: {ex.Message}");
+            }
+        }
+        if (failed > 0) Status = $"Asignación guardada en este PC; {failed} archivo(s) no se pudieron actualizar (ver registro)";
+        else if (written > 0) Log.Info("cuadra", "asignación escrita en los archivos", new { written });
+    }
+
     private void ApplyIdentity(SessionItem s)
     {
         var (h, r) = Stable.Apply(s.Session);
@@ -444,6 +476,7 @@ public sealed partial class MainViewModel
         {
             string? h = CodeFor(IdentityKind.Horse, AssignHorseText), r = CodeFor(IdentityKind.Rider, AssignRiderText);
             Stable.Assign(t.Id, true, h, true, r);
+            var touched = new List<SessionItem> { t };
             int extra = 0;
             if (AssignAlsoUnknown)
                 foreach (var s in Sessions.Where(x => x != t))
@@ -451,11 +484,13 @@ public sealed partial class MainViewModel
                     bool sh = !s.HorseKnown && h is not null, sr = !s.RiderKnown && r is not null;
                     if (!sh && !sr) continue;
                     Stable.Assign(s.Id, sh, h, sr, r);
+                    touched.Add(s);
                     extra++;
                 }
             Log.Info("cuadra", "asignación", new { session = t.Id, horse = h, rider = r, extra });
             AssignVisible = false;
             ReapplyIdentities();
+            WriteAssignmentToFiles(touched);
             Status = $"Asignado: {t.Horse} · {t.Rider}{(extra > 0 ? $" (y {extra} entrenamiento(s) más)" : "")}";
         }
         catch (Exception ex) when (ex is ArgumentException or KeyNotFoundException or IOException)
@@ -475,6 +510,7 @@ public sealed partial class MainViewModel
         foreach (var s in list) Stable.Assign(s.Id, page.IsHorse, page.IsHorse ? page.Selected.Code : null, !page.IsHorse, page.IsHorse ? null : page.Selected.Code);
         string code = page.Selected.Code;
         ReapplyIdentities();
+        WriteAssignmentToFiles(list);
         page.Select(code);
         page.Message = $"Asignado a {list.Count} entrenamiento(s).";
     }

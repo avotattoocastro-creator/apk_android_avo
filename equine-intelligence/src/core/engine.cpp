@@ -123,6 +123,7 @@ std::string params_hash(const EngineConfig& c) {
   auto gate = [&](const Gate& g) { char x[160]; snprintf(x, sizeof(x), "|%d,%.7f,%.7f,%.7f,%.7f,%d", g.enabled ? 1 : 0, g.a.lat, g.a.lon, g.b.lat, g.b.lon, g.direction); all += x; };
   gate(c.racing.course.start); gate(c.racing.course.finish); gate(c.racing.course.start_finish);
   for (const auto& p : c.racing.course.fence) { char x[64]; snprintf(x, sizeof(x), "|%.7f,%.7f", p.lat, p.lon); all += x; }
+  if (c.identity.any()) all += "|id:" + c.identity.horse_code + "\x1f" + c.identity.horse_name + "\x1f" + c.identity.rider_code + "\x1f" + c.identity.rider_name;
   { char x[96]; snprintf(x, sizeof(x), "|M%d|%.0f|%.0f", c.racing.manual_efforts_set ? 1 : 0, c.racing.manual_work_start_itow, c.racing.manual_work_end_itow); all += x; }
   for (const auto& e : c.racing.manual_efforts_itow) { char x[64]; snprintf(x, sizeof(x), "|%.0f-%.0f", e.first, e.second); all += x; }
   uint64_t h = 1469598103934665603ull;
@@ -367,8 +368,15 @@ static std::string start_utc(const Session& s) {
 
 std::string to_json(const Analysis& a, const Session& s, const EngineConfig& c, bool series) {
   std::ostringstream o;
+  // AVO-ASSIGN-1: the assigned code wins; an assignment with only a name uses the name as the identifier
+  const std::string horse = !c.identity.horse_code.empty() ? c.identity.horse_code : !c.identity.horse_name.empty() ? c.identity.horse_name : s.horse;
+  const std::string rider = !c.identity.rider_code.empty() ? c.identity.rider_code : !c.identity.rider_name.empty() ? c.identity.rider_name : s.rider;
+  auto opt_str = [](const std::string& v) { return v.empty() ? std::string("null") : "\"" + esc(v) + "\""; };
   o << "{\"formato\":\"avo-equine-analysis\",\"version_formato\":2,\"motor\":\"" << a.engine_version << "\",\"procesado_utc\":\"" << esc(a.processed_at_utc)
-    << "\",\"sesion\":{\"id\":\"" << esc(s.session_id) << "\",\"caballo\":\"" << esc(s.horse) << "\",\"jinete\":\"" << esc(s.rider)
+    << "\",\"sesion\":{\"id\":\"" << esc(s.session_id) << "\",\"caballo\":\"" << esc(horse) << "\",\"jinete\":\"" << esc(rider)
+    << "\",\"caballo_nombre\":" << opt_str(c.identity.horse_name) << ",\"jinete_nombre\":" << opt_str(c.identity.rider_name)
+    << ",\"caballo_raw\":\"" << esc(s.horse) << "\",\"jinete_raw\":\"" << esc(s.rider)
+    << "\",\"identidad\":\"" << (c.identity.any() ? "ASIGNACION" : "RAW")
     << "\",\"fw_pecho\":\"" << esc(s.chest_fw) << "\",\"fw_espalda\":\"" << esc(s.back_fw) << "\",\"segmentos\":" << s.segments
     << ",\"epocas_gnss\":" << s.gnss.size() << ",\"muestras_imu\":" << s.imu.size() << ",\"marcas\":" << s.markers.size() << ",\"inicio_utc\":" << start_utc(s) << "}";
   o << ",\"parametros\":{\"gnss_ventana_derivada_s\":" << num(c.gnss.deriv_half_window_s) << ",\"cadencia_ventana_s\":" << num(c.cadence.window_s)

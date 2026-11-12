@@ -182,7 +182,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                             val riderCode = existingRider?.code ?: "R_" + java.util.UUID.randomUUID().toString().take(16)
                             if (existingHorse == null) c.db.horses().insert(HorseEntity(code = horseCode, name = horse))
                             if (existingRider == null) c.db.riders().insert(RiderEntity(code = riderCode, name = rider))
-                            val linked = pending.copy(horseCode = horseCode, riderCode = riderCode)
+                            val linked = pending.copy(horseCode = horseCode, riderCode = riderCode, updatedMs = System.currentTimeMillis())   // AVO-ASSIGN-1: time of the assignment
                             c.db.trainings().upsert(linked)
                             context.startActivity(Intent.createChooser(TrainingShare.prepare(context, linked, horse, rider),
                                 c.settings.shareDefaultFavorite.takeIf { it.isNotBlank() }?.let { "Compartir · favorito: $it" } ?: "Compartir entrenamiento"))

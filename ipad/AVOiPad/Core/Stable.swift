@@ -339,6 +339,27 @@ final class StableStore {
     }
 
     // ------------------------------------------------------------------ assignments
+    /// AVO-ASSIGN-1: a file reassigned in another app (newer «asignacion» than this iPad's assignment) wins. Registers the
+    /// horse and rider if needed. Returns true when this iPad's assignment changed.
+    @discardableResult
+    func adoptFileAssignment(_ s: TrainingSession) throws -> Bool {
+        guard let fa = s.fileAssignment else { return false }
+        let local = assignment(s.sessionId)
+        if let l = local, l.updated >= fa.updated { return false }
+        _ = try registerOne(.horse, fa.horseCode, fa.horseName, s.isSynthetic)
+        _ = try registerOne(.rider, fa.riderCode, fa.riderName, s.isSynthetic)
+        let h: String? = (find(.horse, fa.horseCode ?? "") ?? findByName(.horse, fa.horseName))?.code
+        let r: String? = (find(.rider, fa.riderCode ?? "") ?? findByName(.rider, fa.riderName))?.code
+        if h == nil && r == nil { return false }
+        if let l = local, l.horseCode == h, l.riderCode == r { return false }
+        gate.lock()
+        let a = TrainingAssignment(); a.horseCode = h; a.riderCode = r; a.updated = fa.updated
+        assignments[s.sessionId] = a
+        gate.unlock()
+        try save()
+        return true
+    }
+
     func assignment(_ sessionId: String) -> TrainingAssignment? {
         gate.lock(); defer { gate.unlock() }
         return assignments[sessionId]

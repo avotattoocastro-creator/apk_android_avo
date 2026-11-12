@@ -61,6 +61,8 @@ public static class RawReader
         }
         var horse = Str(header.AsSpan(124, 24));
         var rider = Str(header.AsSpan(152, 24));
+        if (!string.IsNullOrWhiteSpace(horse)) session.RawHorse ??= horse.Trim();
+        if (!string.IsNullOrWhiteSpace(rider)) session.RawRider ??= rider.Trim();
         if (!string.IsNullOrWhiteSpace(horse) && session.Horse == "Sin identificar") session.Horse = horse;
         if (!string.IsNullOrWhiteSpace(rider) && session.Rider == "Sin identificar") session.Rider = rider;
         // the AVORAW1 header carries the code written to the watch (e.g. HORSE_001)

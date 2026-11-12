@@ -18,6 +18,10 @@ enum AvoPackageWriter {
         var startRtcMs: Int64
         var activeMs: Int64
         var source: String = "wifi-ipad"
+        var horseCode: String = ""
+        var horseName: String = ""
+        var riderCode: String = ""
+        var riderName: String = ""
     }
 
     /// Same name as Windows WatchLibrary.PackageName: AVO_{id}_{device}.avo
@@ -81,8 +85,9 @@ enum AvoPackageWriter {
         return [
             "format": "AVO-TRAINING-1",
             "sessionId": meta.sessionId,
-            "horseName": "",
-            "riderName": "",
+            // AVO-ASSIGN-1: what the watch recorded (RAW header); empty names made Android reject the package
+            "horseCode": meta.horseCode, "horseName": meta.horseName,
+            "riderCode": meta.riderCode, "riderName": meta.riderName,
             "sha256": meta.sha256.lowercased(),
             "watchDevice": meta.watchDevice,
             "watchFirmware": meta.watchFirmware,
@@ -96,7 +101,9 @@ enum AvoPackageWriter {
 
     /// Writes `target` (.avo) from `segments` (P001.avr, P002.avr… in order). Throws AvoError on any problem; a partial
     /// package is never left behind.
-    static func write(target: String, meta: Meta, segments: [String]) throws {
+    /// `manifestBase` (AVO-ASSIGN-1 rewrite of an existing package): that manifest is kept as it is, except "segments" and
+    /// "segmentHashes", which are recomputed and must equal the ones it declares.
+    static func write(target: String, meta: Meta, segments: [String], manifestBase: [String: Any]? = nil) throws {
         if segments.isEmpty { throw AvoError.invalidData("No hay segmentos que empaquetar") }
         let idLen = meta.sessionId.utf16.count
         if idLen < 3 || idLen > 128 || meta.sessionId.contains("/") || meta.sessionId.contains("\\") {
@@ -118,7 +125,22 @@ enum AvoPackageWriter {
         if total > 100 * 1024 * 1024 { throw AvoError.invalidData("Entrenamiento de más de 100 MB") }
         infos.sort { $0.name < $1.name }
 
-        let manifestData: Data = try JSONSerialization.data(withJSONObject: manifest(meta, hashes: hashes),
+        var meta = meta
+        if manifestBase == nil, meta.horseName.isEmpty, let first = infos.first {
+            let raw = AvoAssignment.rawHeaderIdentity(first.path)
+            meta.horseCode = raw.horse ?? ""; meta.horseName = raw.horse ?? ""
+            meta.riderCode = raw.rider ?? ""; meta.riderName = raw.rider ?? ""
+        }
+        var body: [String: Any] = manifest(meta, hashes: hashes)
+        if var base = manifestBase {
+            if let declared = AvoJSON.dict(base, "segmentHashes") {
+                for (k, v) in declared where (v as? String)?.lowercased() != hashes[k] { throw AvoError.invalidData("La huella de \(k) cambió") }
+                if declared.count != hashes.count { throw AvoError.invalidData("El número de segmentos cambió") }
+            }
+            base["segments"] = hashes.count; base["segmentHashes"] = hashes
+            body = base
+        }
+        let manifestData: Data = try JSONSerialization.data(withJSONObject: body,
                                                             options: [.sortedKeys, .withoutEscapingSlashes])
         let manifestBytes: [UInt8] = [UInt8](manifestData)
 

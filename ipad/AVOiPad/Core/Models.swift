@@ -114,6 +114,11 @@ final class TrainingSession {
     /// Names exactly as the file carries them (horse/rider may later show the Cuadra/Jinetes name; the file is never changed).
     var horseInFile: String = "Sin identificar"
     var riderInFile: String = "Sin identificar"
+    /// What the AVORAW1 header itself says (horse_name / rider_name), whatever the manifest says (AVO-ASSIGN-1 «raw»).
+    var rawHorse: String?
+    var rawRider: String?
+    /// The «asignacion» block of the .avo manifest (AVO-ASSIGN-1), nil if the file has none.
+    var fileAssignment: AvoAssignmentData?
     /// Set once the Cuadra/Jinetes names have been applied to horse/rider (in memory only).
     var identityApplied: Bool = false
     var startedAt: Date?

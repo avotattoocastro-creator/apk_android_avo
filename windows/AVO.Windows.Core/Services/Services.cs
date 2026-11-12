@@ -91,6 +91,8 @@ public sealed class LibraryEntry
     public string OriginalName { get; set; } = "";
     public string StoredPath { get; set; } = "";
     public DateTimeOffset ImportedUtc { get; set; }
+    /// <summary>File SHA-256 before AVO-ASSIGN-1 rewrote the manifest: re-importing the original is still a duplicate.</summary>
+    public List<string> PreviousSha256 { get; set; } = [];
 }
 
 public sealed record ImportOutcome(TrainingSession? Session, string File, string Status, bool Duplicate, string? Error);
@@ -126,7 +128,7 @@ public sealed class TrainingLibrary
         try
         {
             string sha = FileSha256(path);
-            var existing = _entries.FirstOrDefault(e => e.Sha256 == sha && File.Exists(e.StoredPath));
+            var existing = _entries.FirstOrDefault(e => (e.Sha256 == sha || e.PreviousSha256.Contains(sha)) && File.Exists(e.StoredPath));
             if (existing is not null)
             {
                 var again = TrainingImporter.Import(existing.StoredPath);
@@ -153,6 +155,27 @@ public sealed class TrainingLibrary
             if (created is not null) { try { File.Delete(created); } catch (IOException) { } }
             return new ImportOutcome(null, path, "Rechazado", false, ex.Message);
         }
+    }
+
+    /// <summary>
+    /// AVO-ASSIGN-1: writes the assignment into the library copy of a session (.avo only; .avr files have no manifest).
+    /// The RAW segments do not change; the file SHA-256 does, so the old one is kept for duplicate detection.
+    /// Returns the new file SHA-256, or null if the session has no .avo in the library.
+    /// </summary>
+    public string? WriteAssignment(string sessionId, AvoAssignmentData a, string? rawHorse, string? rawRider)
+    {
+        var e = _entries.FirstOrDefault(x => x.SessionId == sessionId && File.Exists(x.StoredPath)
+                                             && x.StoredPath.EndsWith(".avo", StringComparison.OrdinalIgnoreCase));
+        if (e is null) return null;
+        AvoAssignment.Write(e.StoredPath, a, rawHorse, rawRider);
+        string sha = FileSha256(e.StoredPath);
+        if (sha != e.Sha256)
+        {
+            if (!e.PreviousSha256.Contains(e.Sha256)) e.PreviousSha256.Add(e.Sha256);
+            e.Sha256 = sha;
+            SaveIndex();
+        }
+        return sha;
     }
 
     public IEnumerable<string> StoredFiles() => _entries.Where(e => File.Exists(e.StoredPath)).Select(e => e.StoredPath);

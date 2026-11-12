@@ -9,6 +9,8 @@ import org.avoperformance.horse.data.TrainingEntity
 import java.io.File
 import java.security.MessageDigest
 import org.json.JSONObject
+import org.avoperformance.horse.core.raw.RawFileHeader
+import org.avoperformance.horse.core.share.AvoAssignment
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -36,6 +38,11 @@ object TrainingShare {
         require(horseName.isNotBlank() && riderName.isNotBlank()) {
             "Selecciona el caballo y el jinete antes de compartir"
         }
+        val rawHeader = files.first().inputStream().use { ins ->
+            val b = ByteArray(RawFileHeader.SIZE); var n = 0
+            while (n < b.size) { val k = ins.read(b, n, b.size - n); if (k < 0) break; n += k }
+            RawFileHeader.decode(b)
+        }
         val share = File(context.cacheDir, "share").also { it.mkdirs() }
         val target = File(share, "AVO_${t.sessionId.replace(Regex("[^A-Za-z0-9_-]"), "_")}.avo")
         ZipOutputStream(target.outputStream().buffered()).use { zip ->
@@ -49,7 +56,11 @@ object TrainingShare {
                     val digest = MessageDigest.getInstance("SHA-256")
                     f.inputStream().use { input -> val buffer = ByteArray(8192); while (true) { val n = input.read(buffer); if (n < 0) break; digest.update(buffer, 0, n) } }
                     hashes.put(f.name, digest.digest().joinToString("") { "%02x".format(it) })
-                } }).put("segments", files.size).toString()
+                } }).put("segments", files.size)
+                // AVO-ASSIGN-1: the assignment travels in the manifest; «raw» keeps what the RAW header says
+                .put("asignacion", JSONObject(AvoAssignment(t.horseCode, horseName, t.riderCode, riderName, t.updatedMs, "android",
+                    rawHorse = rawHeader?.horseName, rawRider = rawHeader?.riderName).toJson()))
+                .toString()
             zip.putNextEntry(ZipEntry("manifest.json")); zip.write(manifest.toByteArray()); zip.closeEntry()
             files.forEach { file ->
                 zip.putNextEntry(ZipEntry("segments/${file.name}"))

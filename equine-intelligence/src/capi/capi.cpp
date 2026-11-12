@@ -140,6 +140,12 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
   o->force = v["forzar"].boolean(false);
   o->when = v["procesado_utc"].str("");
   o->cache_dir = v["cache_dir"].str("");
+  // AVO-ASSIGN-1: "asignacion" is the block of the .avo manifest, passed verbatim by the apps
+  const auto& asg = v["asignacion"];
+  if (asg.type == avoeq::json::Value::OBJ) {
+    o->cfg.identity.horse_code = asg["horseCode"].str(""); o->cfg.identity.horse_name = asg["horseName"].str("");
+    o->cfg.identity.rider_code = asg["riderCode"].str(""); o->cfg.identity.rider_name = asg["riderName"].str("");
+  } else if (v.has("asignacion") && asg.type != avoeq::json::Value::NUL) { *err = "«asignacion» debe ser un objeto"; return false; }
   std::string cl = v["clasificador_rendimiento"].str("V1");
   if (cl == "V2") o->cfg.performance_uses_v2 = true; else if (cl != "V1") { *err = "clasificador desconocido: " + cl; return false; }
   o->cfg.symmetry.sensors_calibrated = v["sensores_calibrados"].boolean(false);

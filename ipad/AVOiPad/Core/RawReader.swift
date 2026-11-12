@@ -58,6 +58,8 @@ enum RawReader {
         }
         let horse = str(b, 124, 24)
         let rider = str(b, 152, 24)
+        if !isBlank(horse) && session.rawHorse == nil { session.rawHorse = horse.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if !isBlank(rider) && session.rawRider == nil { session.rawRider = rider.trimmingCharacters(in: .whitespacesAndNewlines) }
         if !isBlank(horse) && session.horse == "Sin identificar" { session.horse = horse }
         if !isBlank(rider) && session.rider == "Sin identificar" { session.rider = rider }
         // the AVORAW1 header carries the code written to the watch (e.g. HORSE_001)

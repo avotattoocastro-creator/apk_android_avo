@@ -1,5 +1,7 @@
 // avo_eq_cli — analyse an AVO RAW session from the command line (Windows / Linux / macOS).
 //   avo_eq_cli SESSION.avo [SEGMENT2.avo ...] [--out DIR] [--series] [--when ISO8601]
+//              [--caballo CODIGO] [--caballo-nombre NOMBRE] [--jinete CODIGO] [--jinete-nombre NOMBRE]
+//   Las cuatro últimas son la asignación AVO-ASSIGN-1 del manifiesto .avo (docs/ASIGNACION_CABALLO.md).
 // Writes analysis.json, gnss.csv, aires.csv, cadencia.csv in DIR (default: current directory).
 #include <cstdio>
 #include <ctime>
@@ -11,6 +13,7 @@
 #include "avo_eq/store.h"
 
 int main(int argc, char** argv) {
+  avoeq::IdentityConfig ident;
   std::vector<std::string> files;
   std::string out = ".";
   bool series = false;
@@ -19,6 +22,10 @@ int main(int argc, char** argv) {
     std::string a = argv[i];
     if (a == "--out" && i + 1 < argc) out = argv[++i];
     else if (a == "--series") series = true;
+    else if (a == "--caballo" && i + 1 < argc) ident.horse_code = argv[++i];
+    else if (a == "--caballo-nombre" && i + 1 < argc) ident.horse_name = argv[++i];
+    else if (a == "--jinete" && i + 1 < argc) ident.rider_code = argv[++i];
+    else if (a == "--jinete-nombre" && i + 1 < argc) ident.rider_name = argv[++i];
     else if (a == "--when" && i + 1 < argc) when_opt = argv[++i];
     else files.push_back(a);
   }
@@ -28,6 +35,7 @@ int main(int argc, char** argv) {
   char when[32]; std::time_t now = std::time(nullptr); std::strftime(when, sizeof(when), "%Y-%m-%dT%H:%M:%SZ", std::gmtime(&now));
   if (!when_opt.empty()) snprintf(when, sizeof(when), "%s", when_opt.c_str());
   avoeq::EngineConfig c;
+  c.identity = ident;
   avoeq::Analysis a = avoeq::analyse(s, c, when);
   a.input_fingerprint = avoeq::fingerprint_files(files, &err);
   auto put = [&](const char* name, const std::string& data) { std::ofstream f(out + "/" + name, std::ios::binary); f << data; };

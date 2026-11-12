@@ -348,6 +348,7 @@ public sealed partial class MainViewModel : ObservableObject
                 }
                 if (Sessions.Any(s => s.Session.FileSha256 == outcome.Session.FileSha256)) { dup++; continue; }
                 var item = await Task.Run(() => BuildItem(outcome.Session));
+                if (Stable.AdoptFileAssignment(outcome.Session)) ApplyIdentity(item);   // AVO-ASSIGN-1: newer assignment from another app
                 item.ImportStatus = outcome.Status;
                 var same = Sessions.FirstOrDefault(s => s.Id == item.Id);
                 if (same is not null) { Sessions.Remove(same); dup++; }
@@ -405,7 +406,10 @@ public sealed partial class MainViewModel : ObservableObject
             if (item == Selected) Status = $"Motor AVO analizando {item.Id}…";
             string dir = Path.Combine(Paths.Analysis, string.Concat(item.Id.Select(c => char.IsLetterOrDigit(c) || c is '-' or '_' ? c : '_')));
             var paths = item.Session.RawSegmentPaths.ToList();
-            var json = await Task.Run(() => EquineEngine.AnalyseJson(paths, EquineEngine.Options(true, dir, force)));
+            // AVO-ASSIGN-1: the engine reports the assigned horse/rider (the RAW header may still say HORSE_001)
+            var hi = Stable.Resolve(item.Session, IdentityKind.Horse); var ri = Stable.Resolve(item.Session, IdentityKind.Rider);
+            string? asg = AvoAssignment.EngineOption(hi.Code, hi.Known ? hi.Name : null, ri.Code, ri.Known ? ri.Name : null);
+            var json = await Task.Run(() => EquineEngine.AnalyseJson(paths, EquineEngine.Options(true, dir, force, asg)));
             item.Engine = await Task.Run(() => EquineAnalysis.Parse(json));
             item.EngineState = item.Engine.Cache == "ACIERTO" ? "Resultado guardado reutilizado" : "Calculado";
             if (item == Selected)

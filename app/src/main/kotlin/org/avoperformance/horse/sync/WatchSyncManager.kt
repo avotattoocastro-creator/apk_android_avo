@@ -202,7 +202,8 @@ class WatchSyncManager(
             RawFileHeader.decode(b)
         }
         val a = TrainingAnalyzer.analyze(segs.map { f -> { f.inputStream().buffered(256 * 1024) } })
-        db.trainings().upsert(t.copy(horseCode = header?.horseName?.ifBlank { null }, riderCode = header?.riderName?.ifBlank { null } ?: t.riderCode
+        // AVO-ASSIGN-1: the RAW header only fills an empty horse/rider; a manual assignment is never overwritten
+        db.trainings().upsert(t.copy(horseCode = t.horseCode ?: header?.horseName?.ifBlank { null }, riderCode = t.riderCode ?: header?.riderName?.ifBlank { null }
             ?: org.avoperformance.horse.license.LicenseGate.defaultRiderCode.takeIf { t.watchState != "IMPORTADO" },
             distanceM = a.distanceM, maxSpeedMs = a.maxSpeedMs, durationS = a.durationS, fixTimeS = a.fixTimeS, floatTimeS = a.floatTimeS,
             imuSamples = a.imuSamples, gnssUsable = a.gnssUsable))

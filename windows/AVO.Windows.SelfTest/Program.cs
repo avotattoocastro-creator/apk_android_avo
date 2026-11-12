@@ -114,6 +114,7 @@ try
         using (var stream = zip.CreateEntry("segments/" + name).Open()) stream.Write(raw);
     }
     var session = TrainingImporter.Import(avo, Path.Combine(dir, "raw"));
+    Avo.Windows.SelfTest.AssignmentTests.Run(dir, Assert, avo);   // AVO-ASSIGN-1
     Assert(session.Integrity.Contains("SHA-256") && session.Track.Count == 2, "ZIP AVO-TRAINING-1 y SHA-256 segmento");
     Assert(session.DistanceM != 1234 && session.HasRawTelemetry, "Se prioriza distancia calculada del RAW sobre resumen declarado");
     string csv = Path.Combine(dir, "export.csv"), gpx = Path.Combine(dir, "export.gpx"), html = Path.Combine(dir, "report.html");
