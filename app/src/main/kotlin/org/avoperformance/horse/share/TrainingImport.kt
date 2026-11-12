@@ -10,6 +10,7 @@ import org.avoperformance.horse.data.HorseEntity
 import org.avoperformance.horse.data.RiderEntity
 import org.avoperformance.horse.data.TrainingEntity
 import org.json.JSONObject
+import org.avoperformance.horse.core.share.AvoAssignment
 import java.io.File
 import java.security.MessageDigest
 import java.util.zip.ZipFile
@@ -18,7 +19,7 @@ import java.util.zip.ZipFile
 object TrainingImport {
     data class Preview(val staged: File, val sessionId: String, val horseCode: String, val riderCode: String,
                        val horseName: String, val riderName: String, val sha256: String, val manifest: JSONObject, val duplicate: Boolean,
-                       val identical: Boolean)
+                       val identical: Boolean, val assignment: AvoAssignment? = null)
 
     suspend fun inspect(c: AppContainer, uri: Uri): Preview = withContext(Dispatchers.IO) {
         val staged = File.createTempFile("avo_received_", ".avo", c.app.cacheDir)
@@ -45,14 +46,21 @@ object TrainingImport {
             require(manifest.optString("format") == "AVO-TRAINING-1") { "Formato AVO no compatible" }
             val id = manifest.getString("sessionId").trim()
             require(id.length in 3..128 && !id.contains('/') && !id.contains('\\')) { "ID de sesión no válido" }
-            val horse = manifest.getString("horseName").trim()
-            val rider = manifest.getString("riderName").trim()
+            // AVO-ASSIGN-1: the «asignacion» block wins over the top-level fields
+            val block = manifest.optJSONObject("asignacion")?.let { b ->
+                AvoAssignment.fromFields({ k -> if (b.isNull(k)) null else b.optString(k, "") },
+                    { k -> b.optJSONObject("raw")?.let { r -> if (r.isNull(k)) null else r.optString(k, "") } })
+            }
+            val ident = AvoAssignment.resolve(block, manifest.optString("horseCode"), manifest.optString("horseName"),
+                manifest.optString("riderCode"), manifest.optString("riderName"))
+            val horse = ident.horseName.orEmpty()
+            val rider = ident.riderName.orEmpty()
             require(horse.isNotBlank() && rider.isNotBlank() && horse.length <= 120 && rider.length <= 120) { "Faltan caballo o jinete" }
             val sha = manifest.getString("sha256").lowercase()
             require(sha.matches(Regex("[a-f0-9]{64}"))) { "Huella SHA-256 no válida" }
             val old = c.db.trainings().byId(id)
-            Preview(staged, id, manifest.optString("horseCode"), manifest.optString("riderCode"),
-                horse, rider, sha, manifest, old != null, old?.localSha256.equals(sha, true))
+            Preview(staged, id, ident.horseCode.orEmpty(), ident.riderCode.orEmpty(),
+                horse, rider, sha, manifest, old != null, old?.localSha256.equals(sha, true), block)
         } catch (t: Throwable) { staged.delete(); throw t }
     }
 
@@ -102,6 +110,8 @@ object TrainingImport {
             require(count > 0 && count == p.manifest.getInt("segments")) { "Paquete incompleto" }
             // Watch's SHA-256 is a canonical training digest. Preserve it as metadata;
             // do not falsely claim ZIP SHA-256 equals the original watch digest.
+            // AVO-ASSIGN-1: an existing training keeps this phone's assignment unless the file's one is newer
+            val keepLocal = original != null && !AvoAssignment.fileWins(p.assignment, original.horseCode, original.updatedMs)
             val horses = c.db.horses().all().first()
             val riders = c.db.riders().all().first()
             val horseCode = p.horseCode.takeIf { it.isNotBlank() } ?: "IMPH_${shaCode(p.horseName)}"
@@ -113,16 +123,17 @@ object TrainingImport {
             if (backup != null) require(dest.renameTo(backup)) { "No se pudo preservar la versión anterior" }
             try {
                 require(temp.renameTo(dest)) { "No se pudo instalar el entrenamiento" }
-                if (existingHorse == null) c.db.horses().insert(HorseEntity(code = horseCode, name = p.horseName))
-                if (existingRider == null) c.db.riders().insert(RiderEntity(code = riderCode, name = p.riderName))
+                if (!keepLocal && existingHorse == null) c.db.horses().insert(HorseEntity(code = horseCode, name = p.horseName))
+                if (!keepLocal && existingRider == null) c.db.riders().insert(RiderEntity(code = riderCode, name = p.riderName))
                 c.db.trainings().upsert((original ?: TrainingEntity(
                     sessionId = p.sessionId, watchAddress = "importado", segments = count,
                     totalBytes = total, state = "VERIFICADO_LOCAL", watchState = "IMPORTADO",
                     startRtcMs = p.manifest.optLong("startRtcMs", System.currentTimeMillis()), activeMs = p.manifest.optLong("activeMs", 0)
                 )).copy(segments = count, totalBytes = total, downloadedBytes = total,
                     localDir = dest.absolutePath, localSha256 = p.sha256,
-                    watchSha256 = p.sha256, horseCode = existingHorse?.code ?: horseCode,
-                    riderCode = existingRider?.code ?: riderCode, state = "VERIFICADO_LOCAL",
+                    watchSha256 = p.sha256,
+                    horseCode = if (keepLocal) original!!.horseCode else existingHorse?.code ?: horseCode,
+                    riderCode = if (keepLocal) original!!.riderCode else existingRider?.code ?: riderCode, state = "VERIFICADO_LOCAL",
                     lastError = null, updatedMs = System.currentTimeMillis(),
                     distanceM = p.manifest.optDouble("distanceM").takeUnless { it.isNaN() } ?: original?.distanceM,
                     durationS = p.manifest.optDouble("durationS").takeUnless { it.isNaN() } ?: original?.durationS,
@@ -133,7 +144,8 @@ object TrainingImport {
                 if (backup != null) backup.renameTo(dest)
                 throw t
             }
-            "Entrenamiento importado: ${p.horseName} · ${p.riderName}"
+            if (keepLocal) "Entrenamiento importado; se conserva el caballo y el jinete asignados en este móvil (más recientes)"
+            else "Entrenamiento importado: ${p.horseName} · ${p.riderName}"
         } finally { temp.deleteRecursively(); p.staged.delete() }
     }
 

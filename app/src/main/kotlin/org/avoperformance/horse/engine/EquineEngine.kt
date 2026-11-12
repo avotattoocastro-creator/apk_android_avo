@@ -79,7 +79,9 @@ class EquineEngine(private val ctx: Context, private val log: AppLog, private va
         val segs = segments(t)
         require(segs.isNotEmpty()) { "la sesión no está descargada en el teléfono" }
         val dir = resultDir(t.sessionId).apply { mkdirs() }
-        val opts = """{"series":true,"cache_dir":${jsonStr(dir.absolutePath)},"forzar":$reprocess,"procesado_utc":${jsonStr(Instant.now().toString())}}"""
+        // AVO-ASSIGN-1: the engine reports the horse/rider assigned in the app (the RAW header may say HORSE_001)
+        val asg = org.avoperformance.horse.core.share.AvoAssignment.engineOption(t.horseCode, null, t.riderCode, null)?.let { ",$it" } ?: ""
+        val opts = """{"series":true,"cache_dir":${jsonStr(dir.absolutePath)},"forzar":$reprocess,"procesado_utc":${jsonStr(Instant.now().toString())}$asg}"""
         val text = runNative { token -> AvoEquine.nativeAnalyse(segs.map { AvoEquine.utf8(it.absolutePath) }.toTypedArray(), AvoEquine.utf8(opts), token) }
         return EquineResult.parse(text)
     }

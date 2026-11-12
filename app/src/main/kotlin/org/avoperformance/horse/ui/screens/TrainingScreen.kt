@@ -78,11 +78,27 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
         c.watch.resetCommand()
     }
 
+    // AVO-ASSIGN-1 in origin: the watch copies its configured horse/rider into the RAW header, so it must carry the
+    // ones chosen here before recording (also for automatic recordings started by a geofence).
+    fun pushIdentity(silent: Boolean, then: (() -> Unit)? = null) = scope.launch {
+        val h = horses.firstOrNull { it.id == selHorse }
+        val r = riders.firstOrNull { it.id == selRider }
+        val conf = c.config.config.value
+        if (h != null && c.watch.isReady && session != WatchSessionState.RECORDING && session != WatchSessionState.PAUSED &&
+            org.avoperformance.horse.core.share.AvoAssignment.watchNeedsIdentity(conf?.horseName, conf?.riderName, h.code, r?.code)) {
+            val err = c.config.setIdentity(h.id, h.code, r?.id ?: 0, r?.code ?: conf?.riderName.orEmpty())
+            if (err != null) { msg = "No se pudo enviar el caballo al reloj: $err"; return@launch }
+            if (!silent) msg = "Caballo y jinete guardados en el reloj"
+        }
+        then?.invoke()
+    }
+
     LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = 6.dp)) {
         item {
             AvoCard("Caballo y jinete") {
                 Picker("Caballo", horses.firstOrNull { it.id == selHorse }?.let { "${it.code} · ${it.name}" }, horses.map { it.id to "${it.code} · ${it.name}" }) {
                     selHorse = it; c.settings.selectedHorseId = it
+                    pushIdentity(silent = false)
                 }
                 // Jinete licence: the holder is the fixed rider of every training recorded with this app
                 if (c.license.riderLocked) {
@@ -90,6 +106,7 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
                     KV("Jinete", (riders.firstOrNull { it.id == selRider }?.name ?: c.license.licenseRider?.second ?: "—") + " · fijado por la licencia")
                 } else Picker("Jinete", riders.firstOrNull { it.id == selRider }?.let { "${it.code} · ${it.name}" }, riders.map { it.id to "${it.code} · ${it.name}" }) {
                     selRider = it; c.settings.selectedRiderId = it
+                    pushIdentity(silent = false)
                 }
                 KV("En el reloj", cfg?.let { "${it.horseName.ifBlank { "—" }} / ${it.riderName.ifBlank { "—" }}" })
                 Spacer(Modifier.height(6.dp))
@@ -152,8 +169,14 @@ fun TrainingScreen(c: AppContainer, go: (String) -> Unit) {
         }
     }
 
-    if (confirmStart) ConfirmDialog("Iniciar grabación", "¿Iniciar ahora una grabación manual en el chaleco?", "Iniciar",
-        onConfirm = { send(SessionCmd.START) }, onDismiss = { confirmStart = false })
+    if (confirmStart) {
+        val h = horses.firstOrNull { it.id == selHorse }
+        val text = if (h == null) "No has elegido caballo: el entrenamiento se grabará como «${cfg?.horseName?.ifBlank { null } ?: "sin caballo"}». " +
+            "Podrás asignarlo después en el historial. ¿Iniciar ahora la grabación?"
+        else "¿Iniciar ahora una grabación manual con ${h.name}?"
+        ConfirmDialog("Iniciar grabación", text, "Iniciar",
+            onConfirm = { pushIdentity(silent = true) { send(SessionCmd.START) } }, onDismiss = { confirmStart = false })
+    }
     if (confirmStop) ConfirmDialog("Detener grabación", "La sesión se cerrará en el reloj. ¿Detener la grabación?", "Detener", danger = true,
         onConfirm = { send(SessionCmd.STOP, stopConfirmed = true) }, onDismiss = { confirmStop = false })
 }
