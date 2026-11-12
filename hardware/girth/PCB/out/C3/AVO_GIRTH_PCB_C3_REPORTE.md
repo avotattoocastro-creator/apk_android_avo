@@ -1,11 +1,11 @@
 # AVO GIRTH · placa de la cincha · REV B (ESP32-C3) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `60589c550067bf237ee5b4193ba4677d7fc4ee77` · ejecución de CI: 40904279353
+- Commit: `2a703697abf613d9128fc1a258e179d274a839ee` · ejecución de CI: 40909031839
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, cobre exterior 1 oz; contorno 65,5 × 43,5 mm con 8 muescas para los tornillos y una ranura para el cable de la batería
-- Componentes: 94 en total, 81 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
-- Pistas: 883 · vías: 148 · ruteado completo (0 conexiones incompletas)
+- Componentes: 98 en total, 85 para montar, 1 sin montar (DNP: C5), 12 a mano (pads de hilo y de prueba)
+- Pistas: 898 · vías: 164 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -51,7 +51,8 @@ El C3 tiene 13 GPIO libres + USB: con el BNO085 por SPI habrían hecho falta 16.
 - Corte de batería: relé biestable G6KU (+ 2 × 220 µF, 9 transistores) → **enclavamiento con 2 MOSFET y 2 diodos**.
   Mismas funciones: encendido magnético, apagado remoto, consumo apagado < 1 µA, no se bloquea al cargar.
 - R6/R7 a 3,3 kΩ (pieza *Basic*): carga 270 mA, entrada 462 mA.
-- 81 piezas montadas (REV A: 104); 13 referencias *Extended* (REV A: 17).
+- 85 piezas montadas (REV A: 104); 14 referencias *Extended* (REV A: 17; la 14.ª es la resistencia de 10 MΩ del corte,
+  que JLCPCB solo tiene como *Extended*).
 - Contorno, capas, grosor, acabado, conectores (USB-C, batería, bobina, reed) y posiciones de los conectores: **sin
   cambios**. La tapa ya no necesita el rebaje del relé.
 
@@ -65,64 +66,75 @@ placa.** AVO Update todavía solo instala en el ESP32-C6: la primera carga se ha
 
 ## Riesgos eléctricos y mecánicos
 - **Qi:** inductancia de la bobina sin medir; C1–C5 supuestos. Ajustar con la primera placa (`DOCS/AJUSTE_QI.md`).
-- **Corte de batería:** calculado, no medido. Si Q11 tuviera un umbral alto y la celda estuviera baja, el impulso del
-  reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603).
-- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,5 s; medir el tiempo real hasta PWR_HOLD.
+- **Corte de batería:** calculado, no medido; la red del reed se corrigió tras una revisión independiente (rearmado,
+  aislamiento de la lectura, corriente por el reed). Si Q11 tuviera un umbral alto y la celda estuviera baja, el
+  impulso del reed podría quedarse corto: el arreglo es subir C40 (misma huella 0603). Las redes de 10 MΩ son
+  sensibles a la suciedad: medir los tiempos en la placa montada.
+- **Arranque del ESP32-C3 tras un reinicio:** el corte aguanta ~1,2 s; medir el tiempo real hasta PWR_HOLD.
 - **IMU:** ejes y signos sin comprobar; el magnetómetro necesita calibración dentro de la cápsula (imanes).
 - **BQ51013B:** 476 uds. en JLCPCB: es la pieza con menos existencias; reservarla si se va a tardar en pedir.
 - **Mecánica:** cuna +0,6 mm, ranura del cable y postes de la tapa pendientes en el CAD de la cápsula.
 - **Giro de las piezas:** el CPL sale de KiCad sin corregir; revisar la vista previa de JLCPCB.
 
-## Existencias en JLCPCB (consulta del CI: 2026-10-29 15:27 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-10-29 15:50 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C55663 | BQ51013BRHLR | 1 | 476 | Extended | 3.6045 US$ |
 | C2911374 | ESP32-C3-MINI-1U-N4 | 1 | 1191 | Extended | 3.1542 US$ |
-| C404329 | MMC5983MA | 1 | 7710 | Extended | 1.9914 US$ |
+| C404329 | MMC5983MA | 1 | 7712 | Extended | 1.9914 US$ |
 | C967633 | LSM6DS3TR-C | 1 | 23404 | Extended | 1.4559 US$ |
 | C140288 | BQ24072RGTR | 1 | 2873 | Extended | 0.9957 US$ |
 | C97946 | GRM31C5C1H104JA01L | 2 | 67333 | Extended | 0.2773 US$ |
-| C45783 | CL21A226MAQNNNE | 1 | 3820092 | Basic | 0.1918 US$ |
-| C165948 | TYPE-C-31-M-12 | 1 | 290139 | Extended | 0.1871 US$ |
-| C7519 | USBLC6-2SC6 | 1 | 38837 | Extended | 0.1798 US$ |
+| C45783 | CL21A226MAQNNNE | 1 | 3818302 | Basic | 0.1918 US$ |
+| C165948 | TYPE-C-31-M-12 | 1 | 289680 | Extended | 0.1871 US$ |
+| C7519 | USBLC6-2SC6 | 1 | 38817 | Extended | 0.1798 US$ |
 | C21812 | GRM31M5C1H473JA01L | 1 | 66831 | Extended | 0.1689 US$ |
 | C160402 | SM02B-SRSS-TB(LF)(SN) | 1 | 75764 | Extended | 0.1324 US$ |
 | C841192 | RT9080-33GJ5 | 1 | 36728 | Extended | 0.1198 US$ |
-| C15127 | AO3401A | 3 | 949077 | Basic | 0.0960 US$ |
-| C20917 | AO3400A | 1 | 1147315 | Basic | 0.0890 US$ |
+| C15127 | AO3401A | 3 | 949074 | Basic | 0.0960 US$ |
+| C20917 | AO3400A | 1 | 1147261 | Basic | 0.0890 US$ |
 | C51795 | 0805CG222J500NT | 1 | 3262 | Extended | 0.0425 US$ |
-| C96446 | CL10A106MA8NRNC | 7 | 8289919 | Basic | 0.0387 US$ |
-| C19702 | CL10A106KP8NNNC | 2 | 12137255 | Basic | 0.0212 US$ |
-| C77131 | NCP15XH103F03RC | 2 | 295086 | Extended | 0.0187 US$ |
-| C8545 | 2N7002 | 1 | 3093827 | Basic | 0.0161 US$ |
-| C68978 | BAV70 | 2 | 637912 | Basic | 0.0152 US$ |
-| C1623 | CL10B474KA8NNNC | 2 | 691127 | Basic | 0.0130 US$ |
-| C23630 | CL10A225KO8NNNC | 1 | 2898561 | Basic | 0.0122 US$ |
-| C2286 | KT-0603R | 1 | 7358378 | Basic | 0.0077 US$ |
-| C52923 | CL05A105KA5NQNC | 5 | 10458281 | Basic | 0.0064 US$ |
-| C1532 | 0402B223K500NT | 2 | 610107 | Basic | 0.0049 US$ |
-| C15195 | CL05B103KB5NNNC | 3 | 6256201 | Basic | 0.0039 US$ |
-| C25890 | 0402WGF3301TCE | 2 | 1623716 | Basic | 0.0036 US$ |
-| C1525 | CL05B104KO5NNNC | 7 | 32023248 | Basic | 0.0031 US$ |
-| C25087 | 0402WGF2000TCE | 1 | 1923580 | Basic | 0.0029 US$ |
-| C25744 | 0402WGF1002TCE | 3 | 17223387 | Basic | 0.0024 US$ |
-| C25905 | 0402WGF5101TCE | 2 | 3841658 | Basic | 0.0023 US$ |
-| C25900 | 0402WGF4701TCE | 2 | 15195941 | Basic | 0.0020 US$ |
-| C26083 | 0402WGF1004TCE | 6 | 3011508 | Basic | 0.0015 US$ |
-| C25092 | 0402WGF220JTCE | 2 | 2995327 | Basic | 0.0014 US$ |
-| C11702 | 0402WGF1001TCE | 1 | 21984432 | Basic | 0.0013 US$ |
-| C25741 | 0402WGF1003TCE | 7 | 8556838 | Basic | 0.0012 US$ |
-| C25104 | 0402WGF3300TCE | 1 | 2205913 | Basic | 0.0011 US$ |
-| C25765 | 0402WGF2002TCE | 1 | 2906534 | Basic | 0.0011 US$ |
+| C96446 | CL10A106MA8NRNC | 7 | 8289532 | Basic | 0.0387 US$ |
+| C19702 | CL10A106KP8NNNC | 1 | 12135036 | Basic | 0.0212 US$ |
+| C77131 | NCP15XH103F03RC | 2 | 295066 | Extended | 0.0187 US$ |
+| C8545 | 2N7002 | 1 | 3093822 | Basic | 0.0161 US$ |
+| C68978 | BAV70 | 4 | 637912 | Basic | 0.0152 US$ |
+| C1623 | CL10B474KA8NNNC | 2 | 691087 | Basic | 0.0130 US$ |
+| C23630 | CL10A225KO8NNNC | 1 | 2899346 | Basic | 0.0122 US$ |
+| C2286 | KT-0603R | 1 | 7357387 | Basic | 0.0077 US$ |
+| C52923 | CL05A105KA5NQNC | 5 | 10459677 | Basic | 0.0064 US$ |
+| C1532 | 0402B223K500NT | 2 | 610117 | Basic | 0.0049 US$ |
+| C16772 | CL05B224KO5NNNC | 1 | 1338197 | Basic | 0.0047 US$ |
+| C15195 | CL05B103KB5NNNC | 3 | 6254171 | Basic | 0.0039 US$ |
+| C25890 | 0402WGF3301TCE | 2 | 1623693 | Basic | 0.0036 US$ |
+| C1525 | CL05B104KO5NNNC | 7 | 32012702 | Basic | 0.0031 US$ |
+| C25087 | 0402WGF2000TCE | 1 | 1923595 | Basic | 0.0029 US$ |
+| C25744 | 0402WGF1002TCE | 3 | 17202506 | Basic | 0.0024 US$ |
+| C25905 | 0402WGF5101TCE | 2 | 3840291 | Basic | 0.0023 US$ |
+| C25900 | 0402WGF4701TCE | 2 | 15191381 | Basic | 0.0020 US$ |
+| C25091 | 0402WGF2200TCE | 1 | 2038888 | Basic | 0.0018 US$ |
+| C26083 | 0402WGF1004TCE | 5 | 3011547 | Basic | 0.0015 US$ |
+| C25092 | 0402WGF220JTCE | 2 | 2989587 | Basic | 0.0014 US$ |
+| C11702 | 0402WGF1001TCE | 1 | 21923472 | Basic | 0.0013 US$ |
+| C25741 | 0402WGF1003TCE | 7 | 8556109 | Basic | 0.0012 US$ |
+| C26082 | 0402WGF1005TCE | 2 | 82741 | Extended | 0.0012 US$ |
+| C25104 | 0402WGF3300TCE | 1 | 2205969 | Basic | 0.0011 US$ |
+| C25765 | 0402WGF2002TCE | 1 | 2906544 | Basic | 0.0011 US$ |
 
 - Piezas sin existencias para 5 placas: ninguna
 
 ## Coste por placa frente a la REV A (componentes + cargo de piezas Extended; detalle en out_stock/COSTE.md)
 | Pedido | REV A componentes | REV A Extended | REV A total | REV B componentes | REV B Extended | REV B total | Reducción |
 |---|---|---|---|---|---|---|---|
-| 5 placas | 29.74 US$ | 17 · 10.20 US$ | **39.94 US$** | 13.72 US$ | 13 · 7.80 US$ | **21.52 US$** | **46 %** |
-| 10 placas | 27.80 US$ | 17 · 5.10 US$ | **32.90 US$** | 12.31 US$ | 13 · 3.90 US$ | **16.21 US$** | **51 %** |
-| 30 placas | 25.32 US$ | 17 · 1.70 US$ | **27.02 US$** | 11.15 US$ | 13 · 1.30 US$ | **12.45 US$** | **54 %** |
+| 5 placas | 29.74 US$ | 17 · 10.20 US$ | **39.94 US$** | 13.74 US$ | 14 · 8.40 US$ | **22.14 US$** | **45 %** |
+| 10 placas | 27.80 US$ | 17 · 5.10 US$ | **32.90 US$** | 12.32 US$ | 14 · 4.20 US$ | **16.52 US$** | **50 %** |
+| 30 placas | 25.32 US$ | 17 · 1.70 US$ | **27.02 US$** | 11.17 US$ | 14 · 1.40 US$ | **12.57 US$** | **53 %** |
+
+## Firmware incluido
+- `AVO_GIRTH_PCB_C3_FIRMWARE.zip` (compilado por `build-girth-c3.yml`), SHA256 `edfc3e2aa61b50d829b5663dde9533968086931c723b8c88d834a55e2b751b22`
+- Sketch uses 1010445 bytes (77%) of program storage space. Maximum is 1310720 bytes.
+- Global variables use 37832 bytes (11%) of dynamic memory, leaving 289848 bytes for local variables. Maximum is 327680 bytes.
+- Compila; **no probado en placa**.
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**

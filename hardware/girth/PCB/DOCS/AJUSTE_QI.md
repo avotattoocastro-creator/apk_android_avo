@@ -24,7 +24,10 @@ si el condensador serie (C1 + C2 + C3) resuena con la bobina a **100 kHz** y el 
 
 ## Fórmulas
 - C1 (total serie) = 1 / ((2π · 100 kHz)² · Ls′)
-- C2 (total paralelo) = 1 / ((2π · 1 MHz)² · (Ls − 1 / ((2π · 100 kHz)² · C1)))
+- C2 (total paralelo) = 1 / ((2π · 1 MHz)² · Ls − 1 / C1)  (TI SLUSB62D §9.2.1.2.2, ec. 6; con C1 en faradios y Ls,
+  la bobina sola, sin ferrita del transmisor). *Corregido en la auditoría REV B (hallazgo Qi H-2): la fórmula
+  anterior, 1 / ((2π · 1 MHz)² · (Ls − 1 / ((2π · 100 kHz)² · C1))), equivale a 1 / (ωD² · (Ls − Ls′)) y da una
+  división por cero o un valor negativo.*
 
 | Ls′ | C1 total | Combinación (1206 C0G) |
 |---|---|---|

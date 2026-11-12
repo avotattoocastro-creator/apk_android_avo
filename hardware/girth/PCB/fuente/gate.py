@@ -136,6 +136,21 @@ if os.path.exists(cst):
     L.append("| Pedido | REV A componentes | REV A Extended | REV A total | REV B componentes | REV B Extended | REV B total | Reducción |")
     L.append("|---|---|---|---|---|---|---|---|")
     L += rows
+fw = os.path.join("..", "..", "..", "firmware", "girth", "V0_3_0_C3", "out")
+fz = os.path.join(fw, "AVO_GIRTH_PCB_C3_FIRMWARE.zip")
+L.append("")
+L.append("## Firmware incluido")
+if os.path.exists(fz):
+    import hashlib
+    L.append("- `AVO_GIRTH_PCB_C3_FIRMWARE.zip` (compilado por `build-girth-c3.yml`), SHA256 `%s`"
+             % hashlib.sha256(open(fz, "rb").read()).hexdigest())
+    mem = os.path.join(fw, "bin", "memoria.txt")
+    if os.path.exists(mem):
+        for l in open(mem, encoding="utf-8"):
+            L.append("- " + l.strip())
+    L.append("- Compila; **no probado en placa**.")
+else:
+    L.append("- **Falta**: no hay firmware compilado en la rama.")
 L.append("")
 L.append("## Estado de fabricación")
 L.append("- Diseño verificado por software (KiCad 9 en el CI): %s" % ("**sí**" if ok else "**no**"))
@@ -147,7 +162,7 @@ for t in ("Inductancia de la bobina Qi sin medir: C1–C5 con valores supuestos 
           "Existencias consultadas en el CI (out_stock/stock_jlc.json): volver a comprobarlas el día del pedido.",
           "Enclavamiento de la batería (Q10/Q11) calculado, no medido: comprobar tiempos de encendido y de apagado.",
           "Tensión de umbral de Q11 (AO3400A, 0,65–1,45 V) y tiempos de C40/C41: medir en el prototipo.",
-          "Antena externa con conector del módulo (U.FL / MHF I del ESP32-C3-MINI-1U).",
+          "Antena externa con conector del módulo (W.FL / MHF III, 3.ª generación, del ESP32-C3-MINI-1U).",
           "Cambios en la carcasa (cuna +0,6 mm, ranura del cable, postes de la tapa); ya no hace falta el rebaje del relé.",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)

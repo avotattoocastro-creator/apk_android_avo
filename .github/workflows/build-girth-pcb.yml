@@ -148,12 +148,15 @@ jobs:
           rm -rf $P/out/modelos3d
           cp -r $P/out $T/out
           cp $P/kicad/AVO_GIRTH_PCB.kicad_pcb $T/
-          git fetch origin ${{ github.ref_name }}
-          git reset -q --hard origin/${{ github.ref_name }}
-          rm -rf $P/out && cp -r $T/out $P/out && cp $T/AVO_GIRTH_PCB.kicad_pcb $P/kicad/
-          git add -A $P/out $P/kicad/AVO_GIRTH_PCB.kicad_pcb
-          git commit -m "PCB cincha: resultados de KiCad 9 de ${GITHUB_SHA::7} (puerta: ${{ steps.gate.outputs.ok }}) [skip ci]" || echo "sin cambios"
-          git push origin HEAD:${{ github.ref_name }}
+          for i in 1 2 3 4 5; do
+            git fetch origin ${{ github.ref_name }}
+            git reset -q --hard origin/${{ github.ref_name }}
+            rm -rf $P/out && cp -r $T/out $P/out && cp $T/AVO_GIRTH_PCB.kicad_pcb $P/kicad/
+            git add -A $P/out $P/kicad/AVO_GIRTH_PCB.kicad_pcb
+            git commit -m "PCB cincha: resultados de KiCad 9 de ${GITHUB_SHA::7} (puerta: ${{ steps.gate.outputs.ok }}) [skip ci]" || { echo "sin cambios"; break; }
+            git push origin HEAD:${{ github.ref_name }} && break
+            sleep $((i * 10))
+          done
 
       - uses: actions/upload-artifact@v4
         if: always()
