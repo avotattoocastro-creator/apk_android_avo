@@ -149,6 +149,13 @@ data class TelemetryV3(
     /** Signals tracked but none on the second band: the antenna (or its cable) gives L1 only → no RTK FIX. */
     val l1Only get() = signalsFresh && sigTracked >= 8 && sigL2 == 0
     val firstFixS: Int? get() = if (ttffFixS == 0xFFFF) null else ttffFixS
+    /** NAV-SAT/SIG output state in the back (0 not requested, 1 both, 2 rejected, 3 slow UART, 4 only NAV-SAT,
+     *  5 only NAV-SIG, 6 retrying). Low nibble of [qualityMon]. */
+    val monitorState get() = qualityMon and 0x0F
+    /** BACK 3.13.12+: times the back asked again for NAV-SAT/SIG because it stopped arriving (saturates at 3). */
+    val monitorRearms get() = (qualityMon shr 4) and 3
+    /** BACK 3.13.12+: times the receiver went silent 5 s and was detected again (reset, brown-out, cable). Saturates at 3. */
+    val receiverResets get() = (qualityMon shr 6) and 3
 }
 
 data class RtcmAck(val freeBytes: Long, val expectedSeq: Long, val droppedBytes: Long) {

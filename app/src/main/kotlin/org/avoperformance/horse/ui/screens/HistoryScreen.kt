@@ -130,6 +130,13 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
             whatsAppLauncher.launch(intent)
         } catch (e: Exception) { msg = e.message ?: "No se pudo enviar por WhatsApp" }
     }
+    var confirmDeleteWatch by remember { mutableStateOf<TrainingEntity?>(null) }
+    confirmDeleteWatch?.let { d ->
+        val safe = org.avoperformance.horse.core.sync.WatchDelete.safety(d.forWatchDelete()) == org.avoperformance.horse.core.sync.WatchDelete.Safety.COPIA_EN_MOVIL
+        WatchDeleteDialog("Borrar del reloj", "Se borrará ${Fmt.date(d.startRtcMs) ?: ""} · ${d.sessionId} de la tarjeta del chaleco.", loses = !safe,
+            onConfirm = { p -> confirmDeleteWatch = null; c.scope.launch { msg = c.sync.deleteFromWatchProtected(d.sessionId, p) ?: "Borrado del reloj" } },
+            onDismiss = { confirmDeleteWatch = null })
+    }
     var confirmDeleteLocal by remember { mutableStateOf<TrainingEntity?>(null) }
     confirmDeleteLocal?.let { d ->
         AlertDialog(onDismissRequest = { confirmDeleteLocal = null },
@@ -245,6 +252,14 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                     LinearProgressIndicator(progress = { (wifi.bytes.toFloat() / wifi.total).coerceIn(0f, 1f) }, color = AvoColors.Blue,
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp))
             }
+            // 2.8: Wi-Fi blocked for this watch firmware (reboot when turning it on): the user can try again
+            var wifiBlocked by remember { mutableStateOf(c.wifiSync.blockedFirmware) }
+            wifiBlocked?.let { fw ->
+                Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Wi-Fi desactivado para el reloj $fw (se reinició al encenderlo): se usa Bluetooth", color = AvoColors.Warn, modifier = Modifier.weight(1f))
+                    androidx.compose.material3.TextButton(onClick = { c.wifiSync.unblock(); wifiBlocked = null; c.sync.autoSync(force = true) }) { Text("Probar Wi-Fi") }
+                }
+            }
             progress.message?.let { Note(it) }
             msg?.let { Note(it, AvoColors.Warn) }
             if (progress.busy && progress.total > 0) LinearProgressIndicator(progress = { (progress.bytes.toFloat() / progress.total).coerceIn(0f, 1f) }, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp))
@@ -258,7 +273,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         }
                         shareSelected(current)
                     } catch (e: Exception) { msg = e.message ?: "No se pudo compartir" }
-                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
+                } }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }, onDeleteWatch = { confirmDeleteWatch = t }) }
                 if (all.isEmpty()) item { Note("Sin entrenamientos") }
             }
         } else {
@@ -296,7 +311,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
                         if (first != null && second != null && first.horseCode != second.horseCode) Note("La comparación requiere el mismo caballo", AvoColors.Warn)
                     }
                 }
-                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }) }
+                items(mine, key = { it.sessionId }) { t -> TrainingRow(t, onOpen = { go("detalle/${t.sessionId}") }, onDownload = null, onShare = { shareSelected(t) }, onWhatsApp = { whatsApp(t) }, onDeleteLocal = { confirmDeleteLocal = t }, onInternet = { shareAvo = t }, onAssign = { assignFor = t }, onDeleteWatch = { confirmDeleteWatch = t }) }
                 if (mine.isEmpty()) item { Note("Sin entrenamientos descargados") }
             }
         }
@@ -304,7 +319,7 @@ fun HistoryScreen(c: AppContainer, go: (String) -> Unit, incomingAvo: android.ne
 }
 
 @Composable
-private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null) {
+private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -> Unit)?, onShare: (() -> Unit)?, onWhatsApp: (() -> Unit)? = null, onDeleteLocal: (() -> Unit)? = null, onInternet: (() -> Unit)? = null, onAssign: (() -> Unit)? = null, onDeleteWatch: (() -> Unit)? = null) {
     val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
     AvoCard(onClick = onOpen) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
@@ -336,6 +351,8 @@ private fun TrainingRow(t: TrainingEntity, onOpen: () -> Unit, onDownload: (() -
             confirmButton = {}, dismissButton = { androidx.compose.material3.TextButton(onClick = { shareMenu = false }) { Text("Cancelar") } })
         if (onAssign != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onAssign) { Text("Caballo y jinete") }
         if (onDeleteLocal != null && t.localDir != null) androidx.compose.material3.TextButton(onClick = onDeleteLocal) { Text("Borrar del móvil", color = AvoColors.Bad) }
+        if (onDeleteWatch != null && t.canDeleteFromWatch()) androidx.compose.material3.TextButton(onClick = onDeleteWatch) { Text("Borrar del reloj", color = AvoColors.Bad) }
+        if (t.deletedFromWatch()) Note("Borrado del reloj · copia en el móvil", AvoColors.TextDim)
         if (onDownload != null && (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.ERROR_INTEGRIDAD))
             OutlinedButton(onClick = onDownload) { Text(if (t.downloadedBytes > 0) "Reanudar descarga" else "Descargar") }
     }

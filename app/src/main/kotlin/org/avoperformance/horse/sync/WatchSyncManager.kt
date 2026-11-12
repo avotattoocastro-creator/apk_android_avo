@@ -81,11 +81,14 @@ class WatchSyncManager(
             val list = c.listSessions()
             val local = db.trainings().snapshot().associateBy { it.sessionId }
             val merged = SyncRules.merge(list, local.mapValues { it.value.toLocal() })
+            val onWatch = list.map { it.sessionId }.toSet()
             for (m in merged) {
                 val old = local[m.sessionId]
+                // a training no longer on the watch keeps its own watchState ("IMPORTADO", "BORRADO_RELOJ"…)
+                val ws = if (m.sessionId in onWatch || old == null) m.watchState.name else old.watchState
                 db.trainings().upsert((old ?: TrainingEntity(m.sessionId, watch.authorizedAddress ?: "", m.segments, m.totalBytes, state = m.state.name,
                     watchState = m.watchState.name, startRtcMs = m.startRtcMs, activeMs = m.activeMs))
-                    .copy(segments = m.segments, totalBytes = m.totalBytes, state = m.state.name, watchState = m.watchState.name,
+                    .copy(segments = m.segments, totalBytes = m.totalBytes, state = m.state.name, watchState = ws,
                         startRtcMs = m.startRtcMs, activeMs = m.activeMs, updatedMs = System.currentTimeMillis()))
             }
             // Automatically enrich newly discovered recent trainings; never fabricate historical forecasts.
@@ -342,6 +345,55 @@ class WatchSyncManager(
         log.i("SYNC", "$sessionId borrado del reloj a petición del usuario")
         refresh()
         return null
+    }
+
+    /**
+     * Deletion from the watch protected with the password "AVO" (WatchDelete). The phone copy, if verified, is kept and
+     * marked as deleted on the watch; a training with no copy on the phone disappears from the list too.
+     */
+    suspend fun deleteFromWatchProtected(sessionId: String, password: String): String? = withContext(Dispatchers.IO) {
+        if (!org.avoperformance.horse.core.sync.WatchDelete.passwordOk(password)) return@withContext "Contraseña incorrecta"
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return@withContext org.avoperformance.horse.license.LicenseGate.BLOCKED
+        if (watchRecording()) return@withContext "El reloj está grabando: termina el entrenamiento antes de borrar"
+        if (isBusy && _progress.value.sessionId == sessionId) return@withContext "Se está descargando: espera a que termine"
+        val t = db.trainings().byId(sessionId) ?: return@withContext "Entrenamiento desconocido"
+        val local = t.toLocal()
+        if (!org.avoperformance.horse.core.sync.WatchDelete.canDelete(local, t.watchState)) return@withContext "Este entrenamiento no se puede borrar del reloj"
+        val c = watch.client ?: return@withContext "Sin conexión con el reloj"
+        if (!watch.isReady) return@withContext "El reloj no está autorizado"
+        val st = lock.withLock { c.deleteSession(sessionId, force = true) }
+        when (st) {
+            BleStatus.OK, BleStatus.NOT_FOUND -> Unit   // NOT_FOUND: it was no longer on the watch
+            BleStatus.STATE_CONFLICT -> return@withContext "El reloj está grabando este entrenamiento"
+            else -> return@withContext "El reloj respondió: ${st.texto}"
+        }
+        if (org.avoperformance.horse.core.sync.WatchDelete.safety(local) == org.avoperformance.horse.core.sync.WatchDelete.Safety.COPIA_EN_MOVIL) {
+            db.trainings().upsert(t.copy(watchState = org.avoperformance.horse.core.sync.WatchDelete.DELETED_ON_WATCH, updatedMs = System.currentTimeMillis()))
+            log.i("SYNC", "$sessionId borrado del reloj con contraseña (copia verificada en el móvil)")
+        } else {
+            t.localDir?.let { File(it).deleteRecursively() }
+            File(trainingsDir, sessionId).deleteRecursively()
+            File(ctx.filesDir, "equine/$sessionId").deleteRecursively()
+            db.trainings().delete(sessionId)
+            log.w("SYNC", "$sessionId borrado del reloj con contraseña SIN copia en el móvil")
+        }
+        refresh()
+        null
+    }
+
+    /** "Liberar el reloj": deletes from the watch every training already verified on the phone. Returns a summary. */
+    suspend fun freeWatch(password: String): String = withContext(Dispatchers.IO) {
+        if (!org.avoperformance.horse.core.sync.WatchDelete.passwordOk(password)) return@withContext "Contraseña incorrecta"
+        refresh()?.let { return@withContext it }
+        val all = db.trainings().snapshot().map { it.toLocal() to it.watchState }
+        val ids = org.avoperformance.horse.core.sync.WatchDelete.freeable(all).map { it.sessionId }
+        if (ids.isEmpty()) return@withContext "No hay entrenamientos guardados en el móvil que estén todavía en el reloj"
+        var ok = 0; var firstError: String? = null
+        for (id in ids) {
+            val err = deleteFromWatchProtected(id, password)
+            if (err == null) ok++ else if (firstError == null) firstError = "$id: $err"
+        }
+        "Borrados del reloj: $ok de ${ids.size}" + (firstError?.let { ". Primer error: $it" } ?: "")
     }
 
     fun scheduleWorker() {

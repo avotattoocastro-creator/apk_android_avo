@@ -31,6 +31,10 @@ data class NtripConfig(
     val readTimeoutMs: Int = 15_000,
     val reconnect: Boolean = true,
     val maxBackoffMs: Long = 60_000,
+    /** A session must stream at least this long before the retry wait goes back to 1 s. Network casters (VRS/iMAX)
+     *  accept the connection and close it at once while there is no GGA position: without this the client
+     *  reconnected every second (966 reconnections seen in field, 02/11/2026). */
+    val stableSessionMs: Long = 30_000,
 ) {
     fun problems(): List<String> {
         val p = ArrayList<String>()
@@ -128,9 +132,11 @@ class NtripClient(
             onState(NtripState.Connecting(attempt))
             try {
                 session()
-                backoff = 1000L
+                val streamedMs = stats.connectedSinceMs?.let { clock() - it } ?: 0L
+                if (streamedMs >= cfg.stableSessionMs) backoff = 1000L
                 if (!running) break
-                fail("El caster cerró la conexión")
+                fail(if (streamedMs < cfg.stableSessionMs && cfg.sendGga && position() == null)
+                    "El caster cerró la conexión (sin posición GNSS para enviar GGA)" else "El caster cerró la conexión")
             } catch (e: SourcetableException) {
                 onState(NtripState.Failed("Mountpoint \"${cfg.mountpoint}\" no existe. Disponibles: ${e.mountpoints.take(20).joinToString()}"))
                 stats = stats.copy(lastError = e.message); onStats(stats)
@@ -275,7 +281,13 @@ class NtripClient(
             text.lineSequence().filter { it.startsWith("STR;") }.mapNotNull { it.split(';').getOrNull(1) }.toList()
 
         /** Fetches the caster's mountpoint list (GET /). */
-        fun fetchSourcetable(cfg: NtripConfig): List<String> {
+        fun fetchSourcetable(cfg: NtripConfig): List<String> = parseSourcetable(fetchSourcetableText(cfg))
+
+        /** Fetches the caster's full sourcetable (with the position of every base). */
+        fun fetchSourcetableEntries(cfg: NtripConfig): List<SourceEntry> = SourceEntry.parseAll(fetchSourcetableText(cfg))
+
+        /** Raw sourcetable text (GET /). */
+        fun fetchSourcetableText(cfg: NtripConfig): String {
             val s: Socket = if (cfg.tls) SSLSocketFactory.getDefault().createSocket() else Socket()
             s.use {
                 it.connect(InetSocketAddress(cfg.host, cfg.port), cfg.connectTimeoutMs)
@@ -286,8 +298,7 @@ class NtripClient(
                 val ins = it.getInputStream().buffered()
                 readLine(ins)
                 val h = readHeaders(ins)
-                val body = if (h["transfer-encoding"]?.contains("chunked", true) == true) readBody(ChunkedInputStream(ins)) else readBody(ins)
-                return parseSourcetable(body)
+                return if (h["transfer-encoding"]?.contains("chunked", true) == true) readBody(ChunkedInputStream(ins)) else readBody(ins)
             }
         }
     }

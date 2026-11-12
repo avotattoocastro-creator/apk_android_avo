@@ -144,6 +144,7 @@ interface TrainingDao {
     @Query("SELECT * FROM trainings WHERE sessionId = :id") suspend fun byId(id: String): TrainingEntity?
     @Query("SELECT * FROM trainings WHERE sessionId = :id") fun observe(id: String): Flow<TrainingEntity?>
     @Upsert suspend fun upsert(t: TrainingEntity)
+    @Query("DELETE FROM trainings WHERE sessionId = :id") suspend fun delete(id: String)
 }
 
 @Dao

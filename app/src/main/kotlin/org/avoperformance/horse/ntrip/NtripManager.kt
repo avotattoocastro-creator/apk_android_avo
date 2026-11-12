@@ -11,6 +11,10 @@ import org.avoperformance.horse.AppLog
 import org.avoperformance.horse.ble.WatchConnection
 import org.avoperformance.horse.core.ble.Requests
 import org.avoperformance.horse.core.ntrip.Gga
+import org.avoperformance.horse.core.ntrip.MountChoice
+import org.avoperformance.horse.core.ntrip.MountSelector
+import org.avoperformance.horse.core.ntrip.RankedMount
+import org.avoperformance.horse.core.ntrip.SourceEntry
 import org.avoperformance.horse.core.ntrip.GgaPosition
 import org.avoperformance.horse.core.ntrip.NtripClient
 import org.avoperformance.horse.core.ntrip.NtripState
@@ -38,6 +42,8 @@ class NtripManager(
     private val watch: WatchConnection,
     private val log: AppLog,
     private val scope: CoroutineScope,
+    /** Where the caster sourcetable is cached (automatic mountpoint selection). */
+    private val cacheDir: java.io.File? = null,
 ) {
     private val _state = MutableStateFlow<NtripState>(NtripState.Stopped)
     val state: StateFlow<NtripState> = _state
@@ -63,17 +69,124 @@ class NtripManager(
     private var lastDataMs = 0L
     private var watchdog: Job? = null
 
-    /** Mountpoints in order of preference: main first, then the backups from the settings. */
-    private fun mounts(): List<String> = listOf(settings.ntrip.value.mountpoint.trim()) + settings.ntrip.value.backups()
+    // ---- automatic selection by position
+    @Volatile private var entries: List<SourceEntry> = emptyList()
+    @Volatile private var entriesMs = 0L
+    @Volatile private var autoList: List<String> = emptyList()
+    private val _choice = MutableStateFlow<MountChoice?>(null)
+    /** Current automatic choice (main mountpoint, distance and why). Null in manual mode or before a choice. */
+    val choice: StateFlow<MountChoice?> = _choice
+    private val _ranking = MutableStateFlow<List<RankedMount>>(emptyList())
+    /** Usable mountpoints of the caster ranked for the last known position (for the settings screen). */
+    val ranking: StateFlow<List<RankedMount>> = _ranking
+    private val _autoNote = MutableStateFlow<String?>(null)
+    val autoNote: StateFlow<String?> = _autoNote
+    private var lastSavedPosMs = 0L
+    @Volatile private var lastFailoverMs = 0L
+
+    private val auto get() = settings.ntrip.value.autoSelect
+
+    /** Mountpoints in order of preference: automatic list, or main + backups from the settings. */
+    private fun mounts(): List<String> {
+        if (auto && autoList.isNotEmpty()) return autoList
+        return (listOf(settings.ntrip.value.mountpoint.trim()) + settings.ntrip.value.backups()).filter { it.isNotEmpty() }
+    }
+
+    private fun cacheFile() = cacheDir?.let { java.io.File(it, "ntrip_sourcetable_${settings.ntrip.value.host.hashCode()}_${settings.ntrip.value.port}.txt") }
+
+    /** Sourcetable of the configured caster: memory → disk cache (24 h) → network. Stale cache is used offline. */
+    private fun loadEntries(force: Boolean = false): List<SourceEntry> {
+        val now = System.currentTimeMillis()
+        if (!force && entries.isNotEmpty() && now - entriesMs < 24 * 3_600_000L) return entries
+        val f = cacheFile()
+        if (!force && f != null && f.exists() && now - f.lastModified() < 24 * 3_600_000L) {
+            SourceEntry.parseAll(f.readText()).takeIf { it.isNotEmpty() }?.let { entries = it; entriesMs = f.lastModified(); return it }
+        }
+        return try {
+            val text = NtripClient.fetchSourcetableText(settings.ntripConfig())
+            val parsed = SourceEntry.parseAll(text)
+            if (parsed.isNotEmpty()) { f?.writeText(text); entries = parsed; entriesMs = now; log.i("NTRIP", "lista del caster: ${parsed.size} mountpoints") }
+            parsed.ifEmpty { entries }
+        } catch (e: Exception) {
+            log.w("NTRIP", "no se pudo leer la lista del caster: ${e.message}")
+            if (entries.isEmpty() && f != null && f.exists()) entries = SourceEntry.parseAll(f.readText())
+            entries
+        }
+    }
+
+    /** Receiver position (fresh fix) or, failing that, the last one saved. */
+    private fun position(): Pair<Double, Double>? = ggaPosition()?.let { it.lat to it.lon } ?: settings.ntripLastPosition
+
+    private fun recording(): Boolean {
+        val s = watch.telemetry.value?.t?.session
+        return s == org.avoperformance.horse.core.ble.WatchSessionState.RECORDING || s == org.avoperformance.horse.core.ble.WatchSessionState.PAUSED
+    }
+
+    /** Computes the automatic choice for the current position. Returns null when there is nothing to choose with. */
+    private fun evaluate(current: String?): MountChoice? {
+        val list = loadEntries()
+        if (list.isEmpty()) { _autoNote.value = "Sin lista de mountpoints del caster (revisa servidor y usuario)"; return null }
+        val pos = position()
+        if (pos == null) {
+            // no position yet: a network/VRS mountpoint works anywhere (it uses the GGA sent later)
+            val net = list.firstOrNull { it.isRtcm3 && it.network }
+            _autoNote.value = "Esperando posición GPS" + (net?.let { "; mientras tanto, red ${it.mountpoint}" } ?: "")
+            return net?.let { MountChoice(listOf(it.mountpoint), it, null, "sin posición todavía: red / VRS") }
+        }
+        _ranking.value = MountSelector.rank(list, pos.first, pos.second).take(8)
+        val c = MountSelector.choose(list, pos.first, pos.second, current, settings.ntrip.value.autoMaxKm)
+        _autoNote.value = if (c == null) "El caster no tiene mountpoints RTCM 3" else null
+        return c
+    }
+
+    /** Re-checks the choice; switches source only when not recording (a switch restarts RTK convergence). */
+    @Synchronized
+    private fun reevaluate(forceStart: Boolean = false) {
+        if (!auto) { _choice.value = null; return }
+        ggaPosition()?.let { p ->
+            val now = System.currentTimeMillis()
+            if (now - lastSavedPosMs > 60_000) { settings.ntripLastPosition = p.lat to p.lon; lastSavedPosMs = now }
+        }
+        val active = _activeMount.value
+        val c = evaluate(active) ?: return
+        _choice.value = c
+        val newMain = c.ordered.first()
+        if (client == null) {
+            if (forceStart || _state.value is NtripState.Failed) { autoList = c.ordered; log.i("NTRIP", "automático: $newMain (${c.reason})"); startOn(0) }
+            return
+        }
+        if (newMain == active) { autoList = c.ordered; return }
+        // after a failover (main without corrections) stay on the backup for 10 min before trying the main again
+        if (active != null && active in c.ordered && System.currentTimeMillis() - lastFailoverMs < 10 * 60_000L) return
+        if (recording()) { _autoNote.value = "Mejor fuente: $newMain (${c.reason}); se cambiará al terminar la grabación"; return }
+        log.i("NTRIP", "automático: cambio de $active a $newMain (${c.reason})")
+        autoList = c.ordered
+        client?.stop(); client = null
+        synchronized(pacer) { pacer.clear() }
+        startOn(0)
+    }
 
     fun start() {
         if (!org.avoperformance.horse.license.LicenseGate.canRecord) return
         if (client != null) return
         mountIndex = 0
-        startOn(0)
         watchdog?.cancel()
-        watchdog = scope.launch { failoverLoop() }
+        if (auto) {
+            _state.value = NtripState.Connecting(0)
+            watchdog = scope.launch(Dispatchers.IO) {
+                reevaluate(forceStart = true)
+                if (client == null && mounts().isNotEmpty()) startOn(0)   // no automatic choice: manual mountpoint, if any
+                if (client == null) _state.value = NtripState.Failed(_autoNote.value ?: "Sin mountpoint")
+                failoverLoop()
+            }
+        } else {
+            startOn(0)
+            watchdog = scope.launch { failoverLoop() }
+        }
     }
+
+    /** Forces a fresh sourcetable and a new automatic choice (settings screen). */
+    fun refreshAuto() = scope.launch(Dispatchers.IO) { loadEntries(force = true); reevaluate(forceStart = client == null && auto) }
 
     /**
      * Automatic failover: a mountpoint that fails 3 connections in a row, or streams nothing for 30 s, is replaced
@@ -81,8 +194,21 @@ class NtripManager(
      * bases are never mixed in the receiver.
      */
     private suspend fun failoverLoop() {
+        var lastAuto = System.currentTimeMillis()
+        var hadFix = ggaPosition() != null
         while (true) {
             delay(1000)
+            if (auto) {
+                // every minute, at the first fix and right after a recording ends
+                val fix = ggaPosition() != null
+                val now = System.currentTimeMillis()
+                if (now - lastAuto >= 60_000 || (fix && !hadFix)) {
+                    lastAuto = now
+                    runCatching { kotlinx.coroutines.withContext(Dispatchers.IO) { reevaluate() } }
+                        .onFailure { log.w("NTRIP", "selección automática: ${it.message}") }
+                }
+                hadFix = fix
+            }
             val list = mounts()
             if (client == null || list.size < 2) continue
             val st = _state.value
@@ -90,6 +216,7 @@ class NtripManager(
             if (failsInRow >= 3 || silent) {
                 val from = list.getOrNull(mountIndex)
                 val next = (mountIndex + 1) % list.size
+                lastFailoverMs = System.currentTimeMillis()
                 log.w("NTRIP", "fuente ${from ?: "?"} sin correcciones (${if (silent) "30 s sin datos" else "$failsInRow fallos seguidos"}): cambio a ${list[next]}")
                 client?.stop(); client = null
                 synchronized(pacer) { pacer.clear() }
@@ -100,6 +227,7 @@ class NtripManager(
 
     private fun startOn(index: Int) {
         val list = mounts()
+        if (list.isEmpty()) { _state.value = NtripState.Failed(if (auto) (_autoNote.value ?: "Esperando posición GPS") else "Falta el mountpoint"); return }
         mountIndex = index.coerceIn(0, list.lastIndex)
         failsInRow = 0
         lastDataMs = 0L
@@ -130,6 +258,7 @@ class NtripManager(
 
     fun stop() {
         watchdog?.cancel(); watchdog = null
+        autoList = emptyList()
         _activeMount.value = null
         client?.stop()
         client = null
