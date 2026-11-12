@@ -177,6 +177,118 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **No se ha tocado:** espalda, pecho, app, particiones, firma ni actualización, `main`, `develop/avo-performance-horse`.
 **Validación:** CI (compilación ESP32-C6, imagen y 40/40 pruebas de host, simulación). **NO VERIFICADO** en el hardware.
 **Pendiente:** prueba en el hardware (BNO085, enlace con BACK ≥ 3.10.0, batería con divisor), lectura de fmt 1 en la app y en el motor de análisis, consumo y reposo con el contacto del pogo.
+## 2026-11-09 — Pecho 3.7.10 CARGA APAGADO — encendido por USB: sin despertar la espalda y apagado al desenchufar
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commits:** `bf7022b` + corrección del workflow · **CI:** [42619748077](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42619748077) (**éxito**; incluye 3.7.7–3.7.9)
+**Qué cambia:** lee el origen del encendido del AXP2101 (reg. 0x20). Encendido por USB: nunca transmite a la espalda y se apaga (apagado controlado) 2 s después de desenchufar, salvo si se pulsa BOOT/PWR o empieza una sesión. Tampoco transmite antes de leer el PMU. `V3_7_10_CARGA_APAGADO/tools/apply_v3710.py`.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** (falta confirmar en el reloj el valor del registro 0x20 en el monitor: `encendido por USB (solo carga) (AXP2101 0x20 = 0x..)`).
+
+## 2026-11-09 — Pecho 3.7.9 CARGA — la espalda no se despierta con el pecho cargando
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commits:** `57edcd0`, siguiente · **CI:** [42617435387](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42617435387) (**éxito**; incluye 3.7.7 y 3.7.8)
+**Por qué:** el usuario vio que al conectar el pecho a cargar la espalda se despertaba (baliza de la 3.7.7).
+**Qué cambia:** con USB y sin grabar: `BACK_SLEEP` si la espalda está enlazada y, 1,5 s después, ninguna transmisión a la espalda (ni baliza ni DATA). Al quitar el USB o grabar, vuelve la baliza. `V3_7_9_CARGA/tools/apply_v379.py`.
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el reloj.
+
+## 2026-11-09 — Pecho 3.7.8 VINCULAR — 3 pulsaciones de BOOT para vincular un móvil
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` · **Commit:** `94e6053` · **CI:** [42603761121](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121) (**éxito**; artefacto [`AVO-CHEST-V3-7-8-VINCULAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42603761121/artifacts/13665944700); incluye todo lo de la 3.7.7)
+**Qué cambia:** evento `TRIPLE` de `BootButton`; triple pulsación → 120 s de modo vincular: desconecta y bloquea el móvil actual, anuncia, autoriza el CLAIM del nuevo sin pulsar BOOT, pantalla «MODO VINCULAR». La doble pulsación se reconoce 350 ms después de soltar. Detalle: `V3_7_7_DESPERTAR/INFORME.md` §7.
+**Validación:** IMPLEMENTADO · CI (prueba de host del botón) · **NO VERIFICADO** en el reloj.
+
+## 2026-11-09 — Pecho 3.7.7 DESPERTAR — sueño de la espalda, bloqueo Wi-Fi y vínculos Bluetooth
+**Autor:** Claude · **Rama:** `feature/chest-3-7-7-despertar-espalda` (desde 3.7.6 GNSS QUALITY) · **Commits:** `5cf704c` … `7e5c0b0` · **CI:** [42587757628](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628) (**éxito**; artefacto [`AVO-CHEST-V3-7-7-DESPERTAR-UNVERIFIED`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587757628/artifacts/13659991810), SHA-256 `365c2851…2fff`)
+**Qué cambia:** `V3_7_7_DESPERTAR/tools/apply_v377.py` + `build-chest-v377-despertar.yml`. Al apagar manda `BACK_SLEEP` (2 veces) antes de cortar el AXP2101; baliza DATA cada 100 ms mientras la espalda no responde; el bloqueo Wi-Fi `wifi_off` guarda el firmware que lo puso y se borra con otro firmware; motivos 6/7; NimBLE con 6 vínculos y 20 CCCD (antes 3/8: el tercer móvil borraba el vínculo del más antiguo). Detalle: `firmware/chest/V3_7_7_DESPERTAR/INFORME.md`.
+**Hallazgo en CI:** un texto que terminaba en «3.7.7» hacía que el enlazador fusionara con él la cadena de versión (ya no quedaba junto a `AVO-CHEST`); corregido en `7e5c0b0`.
+**No se ha tocado:** RAW/SD, sesiones, tramas ESP-NOW, NTRIP/RTCM, GNSS, pantallas, USB, OTA, particiones (todas las pruebas de la 3.7.6 pasan).
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el reloj.
+**Pendiente:** pasos de `INFORME.md` §6.
+
+## 2026-10-31 — CHEST 3.7.6 GNSS QUALITY — calidad GNSS de la espalda hasta Android, sobre la 3.7.5-usb1
+**Autor:** Claude · **Rama:** `feature/chest-v3-7-6-gnss-quality` (desde `feature/chest-usb-pc-sync`) · **Commits:** `8494035`, `e76347d`
+**Qué cambia:**
+- **Cadena de compilación:** el pecho se compila como la 3.7.5-usb1 y después se le aplica la calidad GNSS:
+  - `avo_payloads` de la espalda, que es el mismo archivo con el que se compila la 3.13.11 y decodifica `BackStatus` v3;
+  - `apply_v376.py`, que envía `TELEMETRY` v3 de 116 B por BLE, el formato que Android ya decodifica;
+  - un parche nuevo de frescura.
+- **Frescura:** si el último `BackStatus` tiene más de 5 s, se envía `q_flags = 0`. Además, `quality_age_s` suma la antigüedad del enlace. Así no se presentan como actuales valores viejos de una espalda apagada.
+- **Versión:** `3.7.6`, sin sufijo.
+**Por qué:**
+- Con la espalda 3.13.11 y el pecho 3.7.5-usb1, Android mostraba «Necesita espalda 3.9.0 y pecho 3.7.6».
+- La usb1 se compiló sobre la rc5, sin el parche 3.7.6. Su decodificador solo lee la v2 (82 B) y envía `TELEMETRY` v2 (83 B).
+- La espalda sí envía la v3 (108 B, `s.v3 = true`).
+**Hallazgo (no corregido, documentado):**
+- `ota.cpp` `version_cmp()` rechaza toda OTA firmada si la versión instalada lleva sufijo (`3.7.5-usb1`, `3.7.0-rc2`). Comprobado en el PC con el código real.
+- Por eso la 3.7.6 se instala con AVO Update por USB y se llama `3.7.6`, para que la próxima OTA firmada funcione.
+- No se ha tocado la verificación ES256.
+**Archivos:**
+- `firmware/chest/V3_7_6_GNSS_QUALITY/{tools/apply_v376_gq.py, tests_test_gnss_quality_v376.py, host/gnss_quality_host.cpp, INFORME_COMPATIBILIDAD.md}`;
+- `.github/workflows/build-chest-v376-gnss-quality.yml`.
+- En el árbol compilado solo cambian `avo_payloads.*`, `avo_ble_proto.*`, `ble_service.cpp` y `avo_version.h`. El CI lo comprueba con `diff`.
+**No se ha tocado:**
+- `main`, el firmware y la alimentación de la espalda, ni Android (no necesita cambios);
+- RAW, sesiones y geocercas;
+- UART/ESP-NOW, NTRIP/RTCM y GNSS;
+- pantallas, batería, OTA con ES256, particiones, Wi-Fi y USB AVO1.
+**Validación:**
+- IMPLEMENTADO.
+- Pruebas locales y en CI:
+  - todas las de la usb1 antes y después del parche, incluida la transcripción USB de Windows;
+  - la `TELEMETRY` v3 es idéntica byte a byte al vector de `FirmwareVectorsTest` de Android;
+  - el `BackStatus` v3 de la espalda se decodifica en el pecho.
+- CI: run 41190303008 (éxito, `e76347d`), los 13 pasos en verde.
+  - `AVO_CHEST_V3_7_6_GNSS_QUALITY.bin`: 1.582.779 B, +576 B respecto a la usb1.
+  - SHA-256 `d413f5ec14d6d3cf0c9885c062f924eb8e2aa4447e28f0c17e497d7abae7af4b`.
+  - RAM estática: 71.800 B.
+  - Artefacto `AVO-CHEST-V3-7-6-GNSS-QUALITY-UNVERIFIED` (13038657376), caduca el 29/01/2027.
+- **NO VERIFICADO en el reloj.**
+**Pendiente:** prueba física, según el apartado 6 de `INFORME_COMPATIBILIDAD.md`.
+
+## 2026-10-30 — CHEST 3.7.5-usb1 — pantalla «CONECTADO AL PC» (solo con PC; con cargador, la de siempre)
+**Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` · **Commits:** `1192c49`, `4801bec`
+**Qué cambia:**
+- **Detección:** con un PC en el cable, el reloj muestra «CONECTADO AL PC» en lugar de la pantalla de carga. El PC se reconoce por las tramas USB de inicio de trama (`Serial.isPlugged()`) o por órdenes AVO1 en los últimos 30 s.
+- **Contenido:** estado (abre AVO Windows / comparando / descargando i de n con barra y % / sincronizado con N nuevos / interrumpida / grabando) y la batería real.
+- **Con un cargador o batería externa** se ve la pantalla de carga de la 3.7.2 sin ningún cambio.
+- **Mismas reglas que la pantalla de carga:** grabación → tarjetas, toque → tarjetas 30 s, OTA y apagado con prioridad, mismo brillo.
+- **Nueva orden `AVO1 PROGRESS`:** AVO Windows la envía en cada fase y cada 5 %. Con un firmware anterior es inofensiva.
+**Por qué:** petición del usuario. La pantalla debe aparecer al conectar al PC y, sin PC, seguir como estaba.
+**Archivos:**
+- `firmware/chest/V3_7_5_USB/src/{ui_pc.h,ui_pc_draw.h,usb_sync.*}`, `tools/apply_v375_usb.py` (parches en `ui.cpp` y `ui_dash.cpp` durante la compilación; no cambian las fuentes de `V3_7_2_UI`), `host/pc_preview.cpp`, `PROTOCOLO_USB.md`, workflow;
+- `windows/AVO.Windows.Core/ChestUsb.cs` y las autopruebas.
+**CI:**
+- firmware: run 41076422328 (éxito, `4801bec`). BIN de 1.582.203 B; RAM estática +96 B respecto a la rc5. Incluye la vista previa `AVO-CHEST-V3-7-5-USB1-PANTALLA-PC-PREVIEW`.
+- Windows: run 41075952072 (éxito, `1192c49`), 49 autopruebas.
+**Validación:** IMPLEMENTADO · CI. **NO VERIFICADO** en el reloj.
+**Pendiente:** comprobar en el reloj que `isPlugged()` distingue el PC del cargador de pared y de la batería externa (prueba 5 de `PROTOCOLO_USB.md`).
+
+---
+
+## 2026-10-30 — CHEST 3.7.5-usb1 + AVO Windows V1.1 — descarga automática de entrenamientos al PC por USB
+**Autor:** Claude · **Rama:** `feature/chest-usb-pc-sync` (desde `feature/avo-wifi-sync`, sin fusionar) · **Commits:** `b4e57c8`, `261bee3`
+**Qué cambia:**
+- **Firmware del pecho 3.7.5-usb1** (`firmware/chest/V3_7_5_USB`), sobre 3.7.5-rc5, la última con pruebas de campo. El parche también se aplica sin cambios sobre 3.7.6-rc1.
+  - Protocolo AVO1 de texto en el puerto serie USB: HELLO, LIST, SHA, READ.
+  - Lo atiende la tarea `loop` de Arduino, que estaba parada. No hay tarea nueva: los buffers van en PSRAM y la RAM interna estática sube 64 B.
+  - Solo lectura. No sirve sesiones OPEN y no responde mientras se graba.
+  - Usa el mismo etag y SHA-256 que la descarga Wi-Fi.
+- **AVO Windows V1.1:**
+  - detecta el reloj al conectarlo (USB VID 303A / PID 1001, con `WM_DEVICECHANGE` y una comprobación cada 4 s);
+  - compara su lista con `Documentos\AVO Performance Horse\Reloj`, incluidos los `.avo` ya importados de Android, que se reconocen por SHA-256;
+  - descarga los que faltan: bloques de 4 KB con CRC-32, reintentos, reanudación y SHA-256 final;
+  - los guarda como `.avo` (AVO-TRAINING-1) y los importa;
+  - añade la tarjeta «RELOJ POR USB» en Inicio y el botón SINCRONIZAR RELOJ.
+- Detalle: `firmware/chest/V3_7_5_USB/PROTOCOLO_USB.md`.
+**Por qué:** petición del usuario. Al conectar el reloj al PC, la app de Windows debe reconocerlo, comparar los entrenamientos y descargar los que falten.
+**Archivos:**
+- `firmware/chest/V3_7_5_USB/*`, `.github/workflows/build-chest-v375-usb.yml`;
+- `windows/AVO.Windows.Core/ChestUsb.cs`, `windows/AVO.Windows/MainWindow.Usb.cs`, XAML y csproj (System.IO.Ports);
+- `windows/AVO.Windows.SelfTest/{SimWatch.cs,usb_transcript.json,Program.cs}`;
+- `TrainingImporter` lee el `sha256` del manifiesto;
+- `build-avo-windows.yml`: se añade la rama.
+**No se ha tocado:** RAW, grabación, BLE, ESP-NOW, NTRIP/RTCM, GNSS, OTA, Wi-Fi, pantalla y particiones del pecho; app Android.
+**CI:**
+- firmware: run 41073707599 (éxito, `261bee3`), BIN de 1.579.967 B. Incluye `usb_sync.cpp` real compilado en el PC y probado: descarga, rechazos, microSD intacta y transcripción idéntica.
+- Windows: run 41072995871 (éxito, `b4e57c8`), 46 autopruebas, 18 de ellas de USB, con el firmware real (transcripción) y un reloj simulado con fallos.
+**Validación:** IMPLEMENTADO · CI. **NO VERIFICADO** en el reloj ni en un PC real.
+**Pendiente:** las pruebas físicas 1–6 de `PROTOCOLO_USB.md`. La más importante: comprobar que el reloj no se reinicia al abrir el puerto y que `[AVO MEM] ready` no baja respecto a la rc5. Después, decidir si se fusiona en `feature/avo-wifi-sync` y se lleva a la 3.7.6.
 
 ---
 

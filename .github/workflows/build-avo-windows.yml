@@ -5,6 +5,7 @@ on:
       - 'feature/windows-advanced-analysis'
       - 'develop/avo-performance-horse'
       - 'feature/avo-equine-intelligence-engine'
+      - 'feature/chest-usb-pc-sync'
     paths:
       - 'windows/**'
       - 'equine-intelligence/**'

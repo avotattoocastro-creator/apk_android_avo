@@ -9,5 +9,6 @@
     <AssemblyName>AVO.Performance.Horse.Windows</AssemblyName>
     <ApplicationIcon>Assets\AVO.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup><PackageReference Include="System.IO.Ports" Version="10.0.0" /></ItemGroup>
   <ItemGroup><ProjectReference Include="..\AVO.Windows.Core\AVO.Windows.Core.csproj" /></ItemGroup>
 </Project>
