@@ -58,6 +58,9 @@ class WifiSyncCoordinator(
     private val dirFor: (String) -> File,
     private val sink: VerifiedSink,
     private val log: (String) -> Unit = {},
+    /** 2.8: a transient network error (not auth / recording / changed) retries the same training this many times. */
+    private val ioRetries: Int = 2,
+    private val retryDelayMs: Long = 1500,
 ) {
     private val running = Mutex()
     private val _progress = MutableStateFlow(WifiSyncProgress())
@@ -103,7 +106,7 @@ class WifiSyncCoordinator(
                 if (control.recording()) { set(WifiSyncState.WAITING, msg = "Pendiente: el reloj está grabando"); failed[id] = "grabando"; break }
                 set(WifiSyncState.DOWNLOADING, id, done = n, pending = ids.size)
                 val r = try {
-                    dl.download(id, localSha) { b, t -> _progress.value = _progress.value.copy(state = WifiSyncState.DOWNLOADING, sessionId = id, bytes = b, total = t) }
+                    downloadWithRetry(dl, id, localSha)
                 } catch (e: RecordingException) { failed[id] = "grabando"; break }
                   catch (e: AuthException) { failed[id] = e.message ?: "token"; break }
                   catch (e: ChangedException) { failed[id] = "El fichero cambió; se repetirá"; continue }
@@ -140,6 +143,23 @@ class WifiSyncCoordinator(
                 done = verified.size, pending = ids.size,
                 message = if (verified.size == ids.size) "Entrenamiento guardado ✓" else if (failed.isNotEmpty()) "Pendiente de conexión" else last.message)
             running.unlock()
+        }
+    }
+
+    /** 2.8: a short Wi-Fi hiccup no longer ends the pass: the same training is retried and resumes from the confirmed bytes. */
+    private suspend fun downloadWithRetry(dl: WifiDownloader, id: String, localSha: String?): DownloadResult {
+        var attempt = 0
+        while (true) {
+            try {
+                return dl.download(id, localSha) { b, t -> _progress.value = _progress.value.copy(state = WifiSyncState.DOWNLOADING, sessionId = id, bytes = b, total = t) }
+            } catch (e: WatchHttpException) {
+                if (e is AuthException || e is RecordingException || e is ChangedException || attempt >= ioRetries) throw e
+                attempt++; log("wifi: $id ${e.message} → reintento $attempt de $ioRetries")
+            } catch (e: IOException) {
+                if (attempt >= ioRetries || cancelRequested || control.recording()) throw e
+                attempt++; log("wifi: $id ${e.message} → reintento $attempt de $ioRetries")
+            }
+            kotlinx.coroutines.delay(retryDelayMs)
         }
     }
 

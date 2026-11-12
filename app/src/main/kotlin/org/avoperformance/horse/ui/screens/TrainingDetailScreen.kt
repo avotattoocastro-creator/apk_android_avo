@@ -462,10 +462,9 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
                     }
                     msg?.let { Note(it, AvoColors.Warn) }
                     Spacer(Modifier.height(6.dp))
-                    OutlinedButton(enabled = SyncRules.canOfferDelete(org.avoperformance.horse.core.sync.LocalTraining(tt.sessionId, tt.segments, tt.totalBytes,
-                        tt.downloadedBytes, tt.localSha256, tt.watchSha256, tt.serverSha256, st ?: SyncState.EN_RELOJ,
-                        org.avoperformance.horse.core.ble.WatchFileState.UNKNOWN, tt.startRtcMs, tt.activeMs)), onClick = { confirmDelete = true }) {
-                        Text("Borrar del reloj")
+                    if (tt.deletedFromWatch()) KV("Reloj", "borrado del reloj (copia en el móvil)", AvoColors.Ok)
+                    OutlinedButton(enabled = tt.canDeleteFromWatch(), onClick = { confirmDelete = true }) {
+                        Text(if (tt.deletedFromWatch()) "Ya borrado del reloj" else "Borrar del reloj", color = if (tt.canDeleteFromWatch()) AvoColors.Bad else AvoColors.TextDim)
                     }
                 }
             }
@@ -475,8 +474,12 @@ fun TrainingDetailScreen(c: AppContainer, id: String) {
         if (tab == 3) engineItems(engine, onAnalyse = { c.equine.open(tt) }, onReprocess = { c.equine.open(tt, reprocess = true) },
             onCancel = { c.equine.cancel(tt.sessionId) }, select = ::pickTime)
     }
-    if (confirmDelete) ConfirmDialog("Borrar del reloj", "Se borrará ${tt.sessionId} de la tarjeta del chaleco. La copia del teléfono se conserva.", "Borrar", danger = true,
-        onConfirm = { c.scope.launch { msg = c.sync.deleteFromWatch(tt.sessionId) ?: "Borrado del reloj" } }, onDismiss = { confirmDelete = false })
+    if (confirmDelete) {
+        val safe = org.avoperformance.horse.core.sync.WatchDelete.safety(tt.forWatchDelete()) == org.avoperformance.horse.core.sync.WatchDelete.Safety.COPIA_EN_MOVIL
+        WatchDeleteDialog("Borrar del reloj", "Se borrará ${tt.sessionId} de la tarjeta del chaleco.", loses = !safe,
+            onConfirm = { p -> confirmDelete = false; c.scope.launch { msg = c.sync.deleteFromWatchProtected(tt.sessionId, p) ?: "Borrado del reloj" } },
+            onDismiss = { confirmDelete = false })
+    }
 }
 
 @Composable

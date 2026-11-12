@@ -320,6 +320,107 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Archivos:** `core/.../license/NfcActivation.kt` (nuevo), `LicenseToken.kt`, `LicenseIssuer.kt`, `LicensePolicy.kt`, `IssuerRegistry.kt`, `core/src/test/.../NfcActivationTest.kt` (nuevo), `cards/.../PhoneActivation.kt` (nuevo), `cards/.../CardsActivity.kt`, `cards/src/main/AndroidManifest.xml`, `cards/src/main/res/xml/avo_hce_service.xml` (nuevo), `cards/src/main/res/values/strings.xml` (nuevo), `app/.../MainActivity.kt`, `app/.../license/LicenseManager.kt`, `app/.../ui/screens/LicenseScreens.kt`, versiones, `docs/LICENCIAS_AVO.md`, `README.md`, `docs/ESTADO_DESARROLLO_Y_VERSIONES.md`.
 **Validación:** IMPLEMENTADO · CI ✅ (run 42672931752) · NO VERIFICADO con dos móviles.
 **Limitaciones:** solo Android ↔ Android con NFC y HCE; el iPad no tiene NFC. Restablecer el móvil de fábrica cambia su id (hay que activarlo otra vez).
+## 2026-11-09 — Android 2.8-wifi-ble-dev1 — descarga Wi-Fi y Bluetooth con varios móviles
+**Autor:** Claude · **Rama:** `feature/android-2-8-wifi-ble` (desde 2.7-borrado-reloj-dev1) · **Commits:** `c134463`, `ee93fa1` · **CI:** [42587795621](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587795621) (**éxito**: core 150 pruebas, emulador 2, firma estable, licencias F5EEE5D2; artefacto [`AVO-Performance-Horse-V2_8_WIFI_BLE_DEV1-APK`](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/42587795621/artifacts/13659668221)), versionCode 41
+**Qué cambia:**
+- Bloqueo Wi-Fi: el intento se borra con cualquier respuesta a `WIFI_SYNC(start)`; solo cuenta un reinicio en los 5 min siguientes (antes un `start` sin respuesta + un apagado normal del reloj bloqueaba el Wi-Fi para siempre). Botón «Probar Wi-Fi» en Entrenamientos.
+- Tras unirse a la red del reloj: `/api/v1/status` cada segundo (4 s) hasta 30 s antes de descargar (mismo caso que el iPad el 07/11).
+- Un corte corto reintenta el mismo entrenamiento 2 veces y reanuda (prueba `t21_shortHiccupIsRetriedInTheSamePass`).
+- Motivos 6 y 7 del pecho 3.7.7 en el registro.
+- BLE: dos fallos rápidos seguidos tras conectar con el reloj «vinculado» → se borra el vínculo del móvil y se empareja de nuevo (la clave AVO de la app se conserva).
+**Validación:** IMPLEMENTADO · CI · **NO VERIFICADO** en el móvil.
+**Pendiente:** descarga Wi-Fi real con el pecho 3.7.7; un segundo y tercer móvil conectando y el primero sin perder el enlace.
+
+## 2026-11-03 — Android 2.7-borrado-reloj-dev1 — borrar entrenamientos del reloj con contraseña «AVO»
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev3) · **Commit:** `a64fc96` · **CI:** [41608193129](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41608193129) (**éxito** a la primera: core 149 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_7_BORRADO_RELOJ_DEV1-APK`)
+**Situación anterior:** «Borrar del reloj» solo se activaba con entrenamientos verificados por el servidor, que no está configurado, así que nunca se podía usar. Además la app no enviaba `force`, y el reloj rechaza sin él lo que no está marcado como subido (`storage.cpp`, DELETE_COMMIT).
+**Qué cambia:**
+- `core/sync/WatchDelete.kt`:
+  - contraseña exacta «AVO» (ignora espacios alrededor; en minúsculas no vale);
+  - seguridad: copia en el móvil verificada con el SHA-256 del reloj, o «se perderá para siempre»;
+  - nunca grabando ni dos veces;
+  - lista de los que se pueden liberar sin perder nada;
+  - 4 pruebas.
+- `AvoClient.deleteSession(force)`: `force` = 1 solo después de la contraseña. El reloj sigue negándose a borrar la sesión que se graba (STATE_CONFLICT).
+- `WatchSyncManager.deleteFromWatchProtected`:
+  - comprueba contraseña, licencia, que no se esté grabando ni descargando ese entrenamiento, y la conexión;
+  - con copia verificada, la conserva y la marca `BORRADO_RELOJ`;
+  - sin copia, quita también los restos del móvil y la fila de la lista.
+- `freeWatch`: borra todos los ya guardados.
+- Interfaz:
+  - diálogo común con la contraseña (teclado en mayúsculas, aviso en rojo si se pierde el entrenamiento);
+  - «Borrar del reloj» en cada entrenamiento de la lista y en el análisis;
+  - tarjeta «Liberar espacio en el reloj» en Ajustes → Descarga del reloj.
+- Corrección: al refrescar la lista del reloj, los entrenamientos que ya no están en él conservan su `watchState`. Antes pasaban a «UNKNOWN», y se perdían las marcas «IMPORTADO» y «BORRADO_RELOJ».
+**Nota:** la contraseña evita borrados por error; está en el código público, no es una clave de seguridad.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41608193129 · reglas 4/4 pruebas JVM · **NO VERIFICADO** con el reloj.
+
+## 2026-11-02 — Android 2.6-ntrip-auto-dev3 — estado de los mensajes de calidad y contadores de la espalda 3.13.12
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre dev2 `72222af`) · **Commit:** `ff3f2ce` · **CI:** [41534048266](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41534048266) (**éxito**: core 145 pruebas, emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV3-APK`, caduca 02/12/2026)
+**Prueba de la dev2 (02/11/2026, 22:54–22:57):**
+- «Edad de la corrección: hace 0,4 s»: funciona con el contador RTCM.
+- NTRIP: 1 reconexión, 4 GGA, 0 errores. DGNSS con 42,6 cm.
+- «Calidad GNSS» se quedó fija en «Esperando el resumen de señales del receptor». La causa está en la espalda: ver BACK 3.13.12 en la rama `fix/back-3-13-12-nav-sig-watchdog`.
+
+**Qué cambia:**
+- `TelemetryV3.monitorState`, `monitorRearms` y `receiverResets` leen el byte `quality_mon`: estado en los bits 0–3, peticiones repetidas en los bits 4–5 y redetecciones del receptor en los bits 6–7.
+  - Una espalda anterior envía 0 en los bits altos.
+  - El pecho 3.7.6 no cambia.
+- Tarjeta «Calidad GNSS»:
+  - con el resumen caducado, el estado 0 se muestra como «pidiéndolos al receptor»;
+  - el estado 1 se muestra como «activados, pero no llegan (último hace N s)»;
+  - el estado 5 se muestra como «solo NAV-SIG»; antes no se mostraba ninguno de los tres;
+  - filas nuevas «Resumen de señales pedido de nuevo» y «Reinicios del receptor», con «3 o más».
+- `QualityMonBitsTest`: 2 pruebas nuevas. El vector del firmware comprueba también los campos nuevos.
+- Versión 2.6-ntrip-auto-dev3 (vc 39).
+
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41534048266 · **NO VERIFICADO** en el móvil.
+
+## 2026-11-02 — Android 2.6-ntrip-auto-dev2 — arreglos de la prueba GNSS/NTRIP del balcón
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (sobre 2.6-ntrip-auto-dev1 `e6ff84d`) · **Commit:** `fb985d8` · **CI:** [41520440227](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41520440227) (**éxito** a la primera: core 143 pruebas, 3 nuevas; emulador 2; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV2-APK`, caduca 02/12/2026)
+**Prueba que lo motiva (02/11/2026, 21:23–21:30, balcón de casa, de noche):** pecho 3.7.6 GNSS QUALITY + espalda 3.13.11 + app 2.6-ntrip-auto-dev1, caster IMAX3.
+- La tarjeta «Calidad GNSS» ya muestra datos (22–25/32–33 satélites, C/N₀ media 35–36 dBHz, 16–22 señales < 30 dBHz, L2 5/10–11, **0 con fase de portadora**, 6–7 con correcciones). Sin FLOAT ni FIX: cielo tapado y reflejos.
+- Cadena RTCM correcta de punta a punta: 1,1 MB del caster, 4525–4575 tramas válidas y 0 con CRC erróneo, 0 B descartados, 1,1 MB reenviado a la espalda, **4139 mensajes usados por el receptor**. Tipos 1006, 1008, 1013, 1029, 1032, 1033, 1075, 1085, 1095, 1125 y 1230 (MSM5, 1 Hz).
+- Esto cierra para la 3.7.6 el punto «RTK con NTRIP (RTCM usado > 0)».
+
+**Qué cambia:**
+1. **NTRIP, reconexiones (`core/ntrip/Ntrip.kt`).** La espera entre intentos volvía a 1 s después de cada sesión aceptada, aunque el caster cerrara al momento. Con la app abierta sin chaleco, el caster de red cerraba la conexión por falta de GGA y se acumularon **966 reconexiones**. Eso arriesga un bloqueo de la cuenta.
+   - Ahora la espera solo vuelve a 1 s si la sesión duró al menos `stableSessionMs` (30 s). Si no, sigue creciendo 1, 2, 4… hasta 60 s.
+   - El último error lo explica: «sin posición GNSS para enviar GGA».
+   - Prueba `shortSessionsKeepBackoffGrowing`.
+2. **«Edad de la corrección» (Inicio).** El receptor deja NAV-PVT `lastCorrectionAge` = 0 («no disponible») aunque usa las correcciones, y la app mostraba «—».
+   - Si falta ese dato, la edad se mide con el contador «RTCM usado por el receptor» de la espalda (`core/telemetry/RtcmUseTracker.kt`), con resolución de unos 0,5 s.
+   - Se muestra en amarillo por encima de 10 s.
+   - 2 pruebas en `RtcmUseTrackerTest`.
+3. **Aviso de «Calidad GNSS».** Con 0 señales con fase y más de un tercio de señales débiles (o C/N₀ media ≤ 37), ya no dice «RTK aún convergiendo». Ahora dice «Correcciones recibidas, pero la señal es débil o reflejada: sin fase de portadora no hay RTK (cielo tapado, paredes o tejados cerca)».
+4. Versión 2.6-ntrip-auto-dev2 (vc 38).
+
+**No se ha tocado:** firmware del pecho ni de la espalda, BLE, formato de telemetría, selector de mountpoint.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41520440227 · **NO VERIFICADO** en el móvil.
+**Pendiente:** prueba al aire libre (FLOAT/FIX) con 2.6-ntrip-auto-dev2.
+
+## 2026-11-01 — Android 2.6-ntrip-auto-dev1 — mountpoint NTRIP automático según la posición
+**Autor:** Claude · **Rama:** `feature/avo-ntrip-auto` (desde `feature/avo-license-nfc` 43f2fc0, app 2.5) · **Commit:** `2b1d36f` · **CI:** [41292158228](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41292158228) (**éxito** a la primera: core 140 pruebas, emulador 2, licencias F5EEE5D2, firma estable; artefacto `AVO-Performance-Horse-V2_6_NTRIP_AUTO_DEV1-APK`)
+**Qué cambia:**
+- Núcleo:
+  - `core/ntrip/MountSelector.kt`: `SourceEntry`, que lee todas las columnas de las líneas STR de la sourcetable (posición, formato, frecuencias, red/VRS, NMEA).
+  - `MountSelector.choose`: elige solo RTCM 3; la base más cercana de doble frecuencia dentro de `autoMaxKm` (20 km por defecto); más lejos, la red/VRS del caster; sin red, la base más cercana aunque esté lejos (nunca una de solo L1 si hay otra); histéresis de 5 km y 20 % para no saltar entre bases parecidas; tres bases de reserva y la red al final.
+  - `NtripClient.fetchSourcetableText/Entries`.
+  - 8 pruebas con una sourcetable inventada.
+- App:
+  - opción «Elegir mountpoint automáticamente según la posición GPS» y distancia máxima en Ajustes → NTRIP;
+  - tarjeta «Selección automática» (en uso, motivo, reservas, los 8 más cercanos con distancia y frecuencias, botón para actualizar la lista).
+- Gestor:
+  - la sourcetable se guarda en caché 24 h (y se usa sin red);
+  - posición de la espalda o, sin FIX, la última guardada; sin ninguna, la red/VRS o el mountpoint manual de respaldo;
+  - revisa cada minuto y al primer FIX;
+  - **cambia de base solo cuando no se está grabando** (se apunta y se cambia al terminar);
+  - tras un fallo de la base principal se queda 10 min en la reserva;
+  - el failover existente se mantiene.
+- CI: la rama nueva compila la APK.
+**Por qué:** petición del usuario: activar el servidor NTRIP mejor para la zona según la posición del GPS.
+**Alcance:** un solo caster, el configurado; elige entre sus mountpoints. Varios casters con cuentas distintas quedan para otra versión.
+**Validación:** IMPLEMENTADO · COMPILADO / CI 41292158228 · selector 8/8 pruebas JVM · **NO VERIFICADO** con un caster real ni en el móvil.
 
 ## 2026-10-27 — AVO Tarjetas 1.3-registro-dev1 — registro de usuarios, activar sin tarjeta y copia completa
 **Autor:** Claude · **Rama:** `feature/avo-license-nfc` · **Commit:** `438a887` · **CI:** [40471096243](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/40471096243) (**éxito** a la primera: core 132 pruebas, emulador 2; licencias activadas con F5EEE5D2; app y Tarjetas con el mismo certificado estable SHA-256 8807ef9cec7f4eb2…)

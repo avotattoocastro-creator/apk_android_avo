@@ -348,8 +348,16 @@ fun NtripScreen(c: AppContainer) {
                 OutlinedTextField(n.host, { n = n.copy(host = it.trim()) }, label = { Text("Servidor (host)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(n.port.toString(), { n = n.copy(port = it.filter(Char::isDigit).take(5).toIntOrNull() ?: 0) }, label = { Text("Puerto") }, singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(n.mountpoint, { n = n.copy(mountpoint = it.trim()) }, label = { Text("Mountpoint") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(n.backupMounts, { n = n.copy(backupMounts = it) }, label = { Text("Mountpoints de reserva (separados por comas)") }, placeholder = { Text("p. ej. VRS3M, LARE3") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                Toggle("Elegir mountpoint automáticamente según la posición GPS", n.autoSelect) { n = n.copy(autoSelect = it) }
+                if (n.autoSelect) {
+                    OutlinedTextField(n.autoMaxKm.toString(), { n = n.copy(autoMaxKm = it.filter(Char::isDigit).take(3).toIntOrNull() ?: 0) },
+                        label = { Text("Distancia máxima a una base (km)") }, singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+                    Note("Se usa la base más cercana con RTCM 3 de doble frecuencia. Más lejos de esta distancia, la red / VRS del caster si la tiene. " +
+                        "Con el mountpoint de abajo como respaldo si todavía no hay posición.")
+                }
+                OutlinedTextField(n.mountpoint, { n = n.copy(mountpoint = it.trim()) }, label = { Text(if (n.autoSelect) "Mountpoint de respaldo (opcional)" else "Mountpoint") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                if (!n.autoSelect) OutlinedTextField(n.backupMounts, { n = n.copy(backupMounts = it) }, label = { Text("Mountpoints de reserva (separados por comas)") }, placeholder = { Text("p. ej. VRS3M, LARE3") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(n.user, { n = n.copy(user = it) }, label = { Text("Usuario") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(pass, { pass = it }, label = { Text(if (hasPass) "Contraseña (guardada; escribe para cambiarla)" else "Contraseña") }, singleLine = true,
                     visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password), modifier = Modifier.fillMaxWidth())
@@ -365,9 +373,13 @@ fun NtripScreen(c: AppContainer) {
                 msg?.let { Note(it, AvoColors.Warn) }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = {
+                        val wasAuto = saved.autoSelect
                         c.settings.saveNtrip(n, pass.ifEmpty { null }); pass = ""
-                        val p = c.settings.ntripConfig().problems()
+                        val p = c.settings.ntripConfig().problems().filterNot { n.autoSelect && it.contains("mountpoint", true) }
                         msg = if (p.isEmpty()) "Guardado" else p.joinToString("\n")
+                        if (n.autoSelect) c.ntrip.refreshAuto()
+                        // switching mode while running: restart so the new mode takes effect
+                        if (c.ntrip.running && wasAuto != n.autoSelect) { c.ntrip.stop(); c.ntrip.start() }
                     }) { Text("Guardar") }
                     OutlinedButton(onClick = {
                         c.settings.saveNtrip(n, pass.ifEmpty { null }); pass = ""
@@ -379,6 +391,38 @@ fun NtripScreen(c: AppContainer) {
                     }) { Text("Ver mountpoints") }
                 }
                 mounts.take(60).forEach { m -> androidx.compose.material3.TextButton(onClick = { n = n.copy(mountpoint = m) }) { Text(m) } }
+            }
+        }
+        if (saved.autoSelect) item {
+            val choice by c.ntrip.choice.collectAsStateWithLifecycle()
+            val ranking by c.ntrip.ranking.collectAsStateWithLifecycle()
+            val note by c.ntrip.autoNote.collectAsStateWithLifecycle()
+            val active by c.ntrip.activeMount.collectAsStateWithLifecycle()
+            AvoCard("Selección automática") {
+                KV("En uso", active ?: "—")
+                choice?.let { ch ->
+                    KV("Elegido", ch.main.mountpoint + (ch.main.identifier.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""))
+                    Note("Motivo: ${ch.reason}")
+                    if (ch.ordered.size > 1) KV("Reservas", ch.ordered.drop(1).joinToString(", "))
+                }
+                note?.let { Note(it, AvoColors.Warn) }
+                if (ranking.isNotEmpty()) {
+                    Spacer(Modifier.height(6.dp))
+                    Text("Más cercanos a la última posición", color = AvoColors.TextDim, fontSize = 12.sp)
+                    ranking.forEach { r ->
+                        val e = r.entry
+                        val tag = listOfNotNull(
+                            if (e.network) "red/VRS" else "base",
+                            when { e.dualFrequency -> "L1+L2"; e.singleFrequency -> "solo L1"; else -> null },
+                            e.navSystems.takeIf { it.isNotBlank() }?.take(24),
+                        ).joinToString(" · ")
+                        Text("${e.mountpoint} · ${r.distanceKm?.let { String.format(Locale.US, "%.1f km", it) } ?: "—"} · $tag",
+                            color = if (e.mountpoint == active) AvoColors.Ok else AvoColors.Text, fontSize = 13.sp)
+                    }
+                }
+                Spacer(Modifier.height(6.dp))
+                OutlinedButton(onClick = { c.ntrip.refreshAuto() }) { Text("Actualizar lista y volver a elegir") }
+                Note("El cambio de base solo se hace cuando no se está grabando, porque cambiar de base reinicia la convergencia RTK.")
             }
         }
         item {
@@ -434,6 +478,25 @@ fun SyncScreen(c: AppContainer) {
                 OutlinedButton(onClick = { c.sync.autoSync() }) { Text("Sincronizar ahora") }
                 progress.message?.let { Note(it) }
             }
+        }
+        item {
+            val freeable = org.avoperformance.horse.core.sync.WatchDelete.freeable(all.map { it.forWatchDelete() to it.watchState })
+            var ask by remember { mutableStateOf(false) }
+            var freeMsg by remember { mutableStateOf<String?>(null) }
+            var running by remember { mutableStateOf(false) }
+            AvoCard("Liberar espacio en el reloj") {
+                KV("Guardados en el móvil y aún en el reloj", freeable.size.toString())
+                Note("Borra del reloj todos los entrenamientos que ya están descargados y verificados en el móvil. No se pierde nada. " +
+                    "Para borrar uno concreto (también uno sin descargar), usa «Borrar del reloj» en la lista de entrenamientos. Contraseña: la de borrado.")
+                OutlinedButton(enabled = freeable.isNotEmpty() && !running && c.watch.isReady, onClick = { ask = true }) {
+                    Text(if (running) "Borrando…" else "Borrar del reloj los ya guardados", color = AvoColors.Bad)
+                }
+                freeMsg?.let { Note(it) }
+            }
+            if (ask) WatchDeleteDialog("Liberar el reloj", "Se borrarán del chaleco ${freeable.size} entrenamientos que ya están guardados y verificados en el móvil.",
+                loses = false, confirmLabel = "Borrar ${freeable.size}",
+                onConfirm = { p -> ask = false; running = true; c.scope.launch { freeMsg = c.sync.freeWatch(p); running = false } },
+                onDismiss = { ask = false })
         }
         item {
             AvoCard("Resumen") {
@@ -518,7 +581,7 @@ fun StorageScreen(c: AppContainer) {
             AvoCard("Chaleco (tarjeta SD)") {
                 KV("Libre", Fmt.bytes(status?.sdFreeBytes))
                 KV("Montada", status?.sdMounted?.let { if (it) "sí" else "no" })
-                KV("Entrenamientos en el reloj", all.count { it.watchState != "UNKNOWN" }.toString())
+                KV("Entrenamientos en el reloj", all.count { it.watchState != "UNKNOWN" && it.watchState != "IMPORTADO" && it.watchState != org.avoperformance.horse.core.sync.WatchDelete.DELETED_ON_WATCH }.toString())
             }
         }
         item {

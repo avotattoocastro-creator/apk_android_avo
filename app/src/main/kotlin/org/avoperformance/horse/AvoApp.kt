@@ -39,7 +39,7 @@ class AppContainer(val app: Application) {
     val dnd = GeofenceDndController(app, settings, log)
     val watch = WatchConnection(app, settings, secure, log, scope)
     val config = WatchConfigOps(watch)
-    val ntrip = NtripManager(settings, watch, log, scope)
+    val ntrip = NtripManager(settings, watch, log, scope, app.cacheDir)
     val tides = org.avoperformance.horse.tide.TideRepository(app)
     val sync = WatchSyncManager(app, db, settings, watch, server, log, scope)
     /** Training download over Wi-Fi (CHEST V3.7.4+), BLE as fallback. */

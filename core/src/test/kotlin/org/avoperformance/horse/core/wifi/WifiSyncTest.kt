@@ -31,6 +31,8 @@ class FakeWatch {
     var bytesServed = 0L
     /** Cuts the connection after serving this many bytes (once). */
     var cutAfter: Long = -1
+    /** 2.8: drops the connection ONCE after this many bytes, but the network stays up (short hiccup). */
+    var hiccupAfter: Long = -1
     /** Modifies the file after serving this many bytes (once). */
     var modifyAfter: Long = -1
     var wrongSha = false
@@ -63,6 +65,7 @@ class FakeWatch {
                 override fun read(b: ByteArray, off: Int, len: Int): Int {
                     if (!apOn) throw IOException("Wi-Fi caído")
                     if (cutAfter in 0..bytesServed) { cutAfter = -1; apOn = false; throw IOException("Wi-Fi caído") }
+                    if (hiccupAfter in 0..bytesServed) { hiccupAfter = -1; throw IOException("Read timed out") }
                     if (modifyAfter in 0..bytesServed) { modifyAfter = -1; sessions[id]!![seg - 1] = data.copyOf().also { it[0] = (it[0] + 1).toByte() } }
                     val n = src.read(b, off, minOf(len, 8192))
                     if (n > 0) bytesServed += n
@@ -98,7 +101,7 @@ class WifiSyncTest {
     private lateinit var w: FakeWatch
     private val saved = LinkedHashMap<String, String>()
     private fun dirFor(id: String) = File(tmp.root, id)
-    private fun coordinator() = WifiSyncCoordinator(w.control, w.connector, ::dirFor, { id, _, sha, _ -> saved[id] = sha })
+    private fun coordinator() = WifiSyncCoordinator(w.control, w.connector, ::dirFor, { id, _, sha, _ -> saved[id] = sha }, retryDelayMs = 10)
 
     private fun session(id: String, vararg sizes: Int, seed: Int = id.hashCode()) {
         val r = Random(seed)
@@ -106,6 +109,15 @@ class WifiSyncTest {
     }
 
     @Before fun setUp() { w = FakeWatch(); saved.clear() }
+
+    @Test fun t21_shortHiccupIsRetriedInTheSamePass() = runBlocking {
+        session("S0021", 300_000, 300_000)
+        w.hiccupAfter = 350_000
+        val r = coordinator().sync(listOf("S0021" to null))
+        assertEquals(listOf("S0021"), r.verified)                  // 2.8: no second pass needed
+        assertEquals(600_000L, w.bytesServed)                       // resumed: nothing downloaded twice
+        assertEquals(1, w.starts)
+    }
 
     @Test fun t01_smallFile() = runBlocking {
         session("S0001", 3_700)
