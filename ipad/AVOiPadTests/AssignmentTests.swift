@@ -28,7 +28,7 @@ final class AssignmentTests: XCTestCase {
         try FileManager.default.createDirectory(atPath: (seg as NSString).deletingLastPathComponent, withIntermediateDirectories: true)
         try rawFixture().write(to: URL(fileURLWithPath: seg))
         let target = path(name)
-        try AvoPackageWriter.write(target: target, meta: AvoPackageWriter.Meta(sessionId: "SINTETICA_ASIG", sha256: String(repeating: "0", count: 64),
+        try AvoPackageWriter.write(target: target, meta: AvoPackageWriter.Meta(sessionId: "SINTETICA_0001", sha256: String(repeating: "0", count: 64),
                                                                               watchDevice: "", watchFirmware: "", startRtcMs: 1_792_656_000_000, activeMs: 0),
                                    segments: [seg])
         return target
