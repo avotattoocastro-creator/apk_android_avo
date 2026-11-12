@@ -1,6 +1,7 @@
 #include "avo_ubx_zed.h"
 #include "avo_bytes.h"
 #include "avo_gnss_codecs.h"
+#include "avo_gnss_quality.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -164,6 +165,8 @@ void ZedManager::handle(const uint8_t* f, size_t n) {
   // Bytes that were already in flight when the baud rate changed are ignored.
   if (now_ - t0_ >= 25 || st_ == RUNNING) got_ubx_ = true;
   last_ubx_ms_ = now_;
+  // V3.13.12: the message that carries the summary is watched (NAV-SIG; NAV-SAT only when NAV-SIG was refused).
+  if (cls == UBX_CLS_NAV && ((id == UBX_ID_NAV_SIG && mon_ != 4) || (id == UBX_ID_NAV_SAT && mon_ == 4))) { mon_last_ms_ = now_ | 1; mon_streak_ = 0; }
   if (cls == UBX_CLS_ACK && plen >= 2 && pl[0] == UBX_CLS_CFG && pl[1] == UBX_ID_CFG_VALSET) ack_ = (id == UBX_ID_ACK_ACK) ? 1 : 2;
   if (cls == UBX_CLS_MON && id == UBX_ID_MON_VER && plen >= 40) {   // V3.10.1: receiver firmware (FWVER=HPG x.yy)
     for (size_t off = 40; off + 30 <= plen; off += 30) {
@@ -417,14 +420,25 @@ void ZedManager::tick(uint32_t now_ms) {
           else if (mon_try_ == 1) { mon_try_ = 2; mon_t0_ = 0; }            // then NAV-SIG alone
           else {
             mon_ = mon_ok_ == 3 ? 1 : mon_ok_ == 1 ? 4 : mon_ok_ == 2 ? 5 : 2;
+            mon_set_ms_ = now_ms;
             if (mon_ == 2 && mon_rounds_ < 2) { mon_rounds_++; mon_try_ = 3; mon_t0_ = now_ms | 1; mon_ = 6; }   // retry in 30 s
           }
         }
       }
       if (mon_ == 6 && now_ms - mon_t0_ >= 30000) { mon_ = 0; mon_t0_ = 0; mon_ok_ = 0; }
+      // V3.13.12: the output was accepted but nothing arrives any more (receiver lost its RAM setting without going
+      // silent for 5 s): ask again, same sequence as at start. NAV-PVT and RTCM are not touched.
+      // After 3 requests in a row with nothing back, only once a minute (never floods the UART).
+      uint32_t wait = mon_streak_ < 3 ? kMonitorLostMs : 60000;
+      // Signed differences: bytes fed after this tick's clock reading can carry a slightly later time.
+      if ((mon_ == 1 || mon_ == 4 || mon_ == 5) && (int32_t)(now_ms - mon_set_ms_) >= (int32_t)wait &&
+          (mon_last_ms_ == 0 || (int32_t)(now_ms - mon_last_ms_) >= (int32_t)wait)) {
+        mon_rearms_++; if (mon_streak_ < 255) mon_streak_++;
+        mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; mon_last_ms_ = 0;
+      }
       uint32_t quiet = now_ms - last_ubx_ms_;
       if (quiet >= 1500 && dt >= 1000) { poll_ver(); t0_ = now_ms; }
-      if (quiet >= 5000) { cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
+      if (quiet >= 5000) { zed_resets_++; cand_ = 0; set_applied_ = false; tune_ = 0; mon_ = 0; mon_t0_ = 0; mon_try_ = 3; mon_ok_ = 0; mon_rounds_ = 0; go(DETECT, now_ms); }   // receiver reset or unplugged
       break;
     }
   }

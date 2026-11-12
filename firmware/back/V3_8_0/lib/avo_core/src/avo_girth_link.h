@@ -51,7 +51,7 @@ bool girth_parse(const uint8_t* p, size_t n, GirthHeader* h, const uint8_t** bod
 struct GirthHello {
   char dev_id[16] = {0};   // MAC as hex
   char fw[16] = {0};       // firmware version
-  uint8_t hw = 0;          // girth: 1 = ESP32-C6 · back: 0
+  uint8_t hw = 0;          // girth: 1 = ESP32-C6 (XIAO) · 2 = placa REV B ESP32-C3 · back: 0
   uint8_t imu_count = 0;   // IMUs the girth expects (0 while none is wired)
 };
 static const size_t GIRTH_HELLO_LEN = 34;
@@ -75,12 +75,14 @@ bool girth_status_decode(const uint8_t* p, size_t n, GirthStatus* s);
 
 // PING (back -> girth, 1 Hz): lets the girth know the link is alive both ways.
 struct GirthPing {
-  uint8_t flags = 0;          // b0 chest online (back <-> chest link up)
+  uint8_t flags = 0;          // b0 chest online (back <-> chest link up) · b1 apagar la cincha (GIRTH_PING_SHUTDOWN)
   int8_t rssi_girth = 0;      // RSSI the back sees from the girth
   uint32_t rx_packets = 0;    // girth packets the back accepted
   uint32_t lost = 0;          // girth packets the back detected as lost (seq gaps)
 };
 static const size_t GIRTH_PING_LEN = 10;
+static const uint8_t GIRTH_PING_SHUTDOWN = 0x02;   // girth V0.3.0+: apagar (la espalda todavía no lo envía)
+static const uint8_t GIRTH_HW_C6_XIAO = 1, GIRTH_HW_C3_REVB = 2;
 size_t girth_ping_encode(const GirthPing& p, uint8_t* out, size_t cap);
 bool girth_ping_decode(const uint8_t* p, size_t n, GirthPing* g);
 

@@ -34,6 +34,8 @@ class BackPlatform {
   virtual void save_girth(const uint8_t mac[6]) { (void)mac; }
   virtual uint32_t random32() = 0;
   virtual void reboot() = 0;
+  // V3.14.0: the chest asked the back to sleep (BACK_SLEEP). Called after the ACK has been sent.
+  virtual void request_sleep() {}
 };
 
 struct BackStats {

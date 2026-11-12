@@ -118,6 +118,12 @@ class ZedManager {
   // V3.9.0: NAV-SAT/NAV-SIG output (1 Hz): 0 not requested yet, 1 both enabled, 2 rejected, 3 skipped (UART too slow),
   // 4 only NAV-SAT accepted, 5 only NAV-SIG accepted (V3.10.1: each one is retried on its own after a NAK)
   uint8_t monitor_state() const { return mon_; }
+  // V3.13.12: times the NAV-SAT/SIG output was asked for again because it stopped arriving for 10 s (field 02/11/2026:
+  // the card stayed in "waiting for the signal summary" while NAV-PVT kept flowing), and times the receiver went
+  // silent for 5 s and had to be detected again (reset, brown-out or cable).
+  uint32_t monitor_rearms() const { return mon_rearms_; }
+  uint32_t receiver_resets() const { return zed_resets_; }
+  static const uint32_t kMonitorLostMs = 10000;
   const char* receiver_fw() const { return fwver_; }   // "HPG 1.32" etc. (empty until MON-VER arrives)
   const ZedGnssSet& gnss_set() const { return set_; }
   void set_dyn_model(ZedDynModel m) { dyn_ = m; }
@@ -140,6 +146,8 @@ class ZedManager {
   void send_monitor(uint8_t which);   // 3 both, 1 NAV-SAT, 2 NAV-SIG
   uint8_t mon_ = 0, mon_try_ = 3, mon_ok_ = 0, mon_rounds_ = 0;
   uint32_t mon_t0_ = 0;
+  uint32_t mon_last_ms_ = 0, mon_set_ms_ = 0, mon_rearms_ = 0, zed_resets_ = 0;
+  uint8_t mon_streak_ = 0;
   char fwver_[25] = {0};
   ZedIo* io_;
   UbxStream ubx_;

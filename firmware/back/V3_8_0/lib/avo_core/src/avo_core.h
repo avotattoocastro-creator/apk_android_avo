@@ -23,3 +23,4 @@
 #include "avo_back_core.h"
 #include "avo_tx_power.h"
 #include "avo_reed_gate.h"
+#include "avo_chest_sleep.h"

@@ -188,3 +188,246 @@ desde la batería y la Heltec lo enciende y apaga por **SHDN**. Su arranque ya n
 - Se mantiene la orden de reposo `UBX-RXM-PMREQ` antes de cortar: si el ZED sigue en 3V3 (sin el módulo), funciona como
   la 3.10.8.
 - Consumo del S7V8F3 apagado: ~10 µA por voltio de entrada por su resistencia de 100 kΩ en SHDN (~40 µA a 4 V).
+
+## V3.12.0 — contactos pogo, sin Qi ni reed (prototipo Rev E + Heltec) (2026-10-30)
+Firmware para probar en el prototipo actual el sistema de alimentación de la espalda V4 REV B (guía de cableado y piezas:
+`hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`).
+- La cápsula lleva 3 contactos en el fondo: **SYS** (entrada de la Heltec y del S7V8F3), **BAT** (+ de la celda, tras
+  un fusible rearmable) y **GND**. El soporte del chaleco puentea SYS–BAT: la placa solo tiene corriente en el chaleco.
+  La base de carga carga la celda entre BAT y GND con la Heltec apagada.
+- `AVO_REED_SLEEP 0`: sin reed (GPIO7 queda libre). No hay sueño por soporte: quitar la cápsula = 0 V.
+- **Emparejamiento sin abrir la cápsula:** poner y quitar la cápsula del soporte 3 veces seguidas, cada vez menos de
+  4 s → emparejamiento abierto 120 s (contador `boots` en la NVS, se borra a los 4 s de funcionamiento). El PRG 3 s sigue.
+- Monitor: `INTERRUPTOR: reed no usado (V3.12: contactos pogo …)`.
+
+## V3.13.0 — Pololu en GPIO34 y carga por USB con todo dormido (2026-10-31)
+Para la espalda con la Heltec, el Pololu S7V8F3 para el ZED y **sin Qi** (la batería se carga por el USB-C de la Heltec,
+boca USB de la tapa Rev E.5).
+| Señal | Conexión |
+|---|---|
+| SHDN del Pololu | **GPIO34** = pin 7 de la fila Ve·GND·12·RX·TX·33·**34**·35·36… (entre los cables del ZED en 33 y 35) |
+| VIN / GND / VOUT del Pololu | + batería / GND / 3V3 de la URTK1.2 (sin cambios) |
+| Detección del USB | pin **5V** de la Heltec ─ **10 kΩ** ─ **GPIO7** ─ **15 kΩ** ─ **GND** (≈ 3,0 V con USB, 0 V sin USB) |
+- Con el USB conectado (1,5 s seguidos, o al arrancar): todo se duerme (ZED a 0 V por el Pololu, radio apagada, LoRa
+  dormida, LED blanco apagado) y solo carga la batería (cargador TP4054 de la Heltec).
+- Al desconectar el USB, GPIO7 baja a 0 V y despierta la placa (ext0): funciona normal y se enlaza con el reloj.
+- **Modo taller** (monitor serie con el USB conectado): pulsar USER en los 3 s siguientes a enchufar o reiniciar. Instalar
+  firmware con AVO Update funciona igual (la app reinicia la placa en el cargador de arranque).
+- Sin el divisor en GPIO7 la espalda no se duerme con el USB (queda el modo carga de la 3.8.2 por tensión subiendo).
+- Los 3 encendidos rápidos para emparejar solo cuentan arranques reales (no los despertares tras cargar).
+- Monitor: `INTERRUPTOR: reed no usado | USB: CONECTADO/no (GPIO7 … mV) | GPS: Pololu SHDN GPIO34 ENCENDIDO/apagado`.
+
+## V3.13.1 — comprobación del USB por temporizador (2026-10-31)
+- Dormida por USB ya no se despierta por nivel en GPIO7 (con el divisor el pin queda cerca del umbral de entrada):
+  se despierta cada 3 s, mide GPIO7 con el ADC al principio de `setup()` y vuelve a dormir si sigue el USB. ZED, LED y
+  radio siguen apagados entre medias (pines fijados). Al quitar el USB arranca en ≤ 3 s.
+- Al arrancar imprime el motivo de reinicio y de despertar (`arranque: motivo de reinicio N, despertar M`).
+- **Sin el divisor 10 k / 15 k en GPIO7 la placa no puede saber que hay USB**: no se duerme. El reinicio que se ve al
+  enchufar el USB a un móvil u ordenador es el del CP2102 (DTR/RTS al abrir el puerto), no el sueño.
+
+## V3.13.2 — detección del USB también en GPIO20 (2026-10-31)
+A petición del usuario, el divisor puede ir a **GPIO20** (pin 8 de la fila 5V·3V3·GND·47·48·0·26·**20**, junto al pin 5V):
+- **5V ─ 10 kΩ ─ GPIO20 ─ 22 kΩ ─ GND** (≈ 2,7–3,0 V con USB y el pull-down interno). Se lee como entrada digital: GPIO20
+  es ADC2, que no se puede leer con la radio encendida.
+- GPIO20 es el D+ del USB propio del ESP32-S3 (sin conectar en esta placa, el USB-C va al CP2102): el firmware apaga ese
+  USB y su pull-up para usarlo como entrada normal.
+- GPIO7 con 10 kΩ / 15 kΩ sigue valiendo. El firmware mira los dos: vale cualquiera de las dos conexiones.
+
+## V3.13.3 — corte por batería baja y USB solo en GPIO20 (2026-10-31)
+- Monitor del usuario (02:05): batería **2954 mV** y `Brownout detector was triggered` al arrancar la radio, en bucle
+  (`rst:0x3`, motivo 9). Ese era el «se duerme un segundo y vuelve a arrancar».
+- **Corte por batería baja:** antes de encender la radio mide la batería en reposo; por debajo de **3,30 V** (y sin USB)
+  se duerme con el ZED sin corriente y vuelve a mirar cada 60 s; arranca de nuevo por encima de **3,45 V**.
+- USB solo por **GPIO20** (digital con pull-down; divisor 5V ─ 5,1 kΩ ─ GPIO20 ─ 10 kΩ ─ GND). La lectura por ADC de
+  GPIO7 se quita: sin nada conectado flotaba y daba «USB conectado» al azar.
+- Al arrancar imprime `bateria en reposo N mV | USB (GPIO20): ALTO = conectado / bajo = no detectado`.
+
+## V3.13.4 — USB en GPIO20 también por ADC, umbral 1,0 V (2026-10-31)
+- La entrada digital necesita ≈ 2,5 V y en la placa del usuario leía «bajo» con el USB conectado. Ahora GPIO20 también se
+  mide con el ADC: más de **1,0 V** = USB. Si la lectura falla (ADC2 ocupado por la radio) decide la entrada digital y un
+  fallo suelto no reinicia la cuenta de 1,5 s.
+- El monitor muestra la tensión medida: `USB (GPIO20 … mV)` al arrancar y `GPIO20 ALTO/bajo, … mV` en el estado.
+
+## V3.13.5 — el divisor del USB puede estar en cualquier pin libre de la fila del 5V (2026-10-31)
+- Con la 3.13.4 GPIO20 medía 0,17 V con el USB conectado: no le llega el divisor (pin o soldadura distinta).
+- Ahora vale un nivel alto en **GPIO20, 18, 21, 19, 47 o 48** (entrada con pull-down). GPIO26 no se toca (es la flash).
+- Al arrancar imprime el nivel de cada uno: `USB, pines candidatos (1 = tension): GPIO20=… GPIO18=… …` y el pin que lo
+  ha detectado (`conectado por GPIOn`).
+
+## V3.13.6 — cables RX/TX del ZED probados en los dos sentidos (2026-10-31)
+- Si el ZED no envía nada en 10 s desde que tiene corriente, la espalda cruza RX y TX (GPIO33 ↔ GPIO35) y vuelve a
+  buscar; alterna cada 10 s hasta recibir datos. El orden que funciona se guarda en NVS (`zedswap`) para el siguiente
+  arranque. Monitor: `el ZED no envia nada: pruebo los cables al reves …` / `el ZED responde con RX=GPIOx TX=GPIOy`.
+- Con los cables cruzados el LED blanco (GPIO35) parpadea con los datos del ZED: es normal.
+
+## V3.13.7 — recuperación del GPS (2026-10-31)
+Rama `fix/back-3-13-7-gps` (derivada de `develop/avo-performance-horse`). Auditoría completa en
+`docs/AUDITORIA_GNSS_3_9_0_vs_3_13_6.md`.
+- Pines fijos **RX=GPIO33 / TX=GPIO35** (UART1); sin intercambio automático (se borra `zedswap`).
+- Al arrancar, **antes de la radio**: ciclo de corriente del ZED por GPIO34 (0 → 500 ms → 1), 1,5 s, UART1 y **solo
+  escucha** en todos los baudios (bytes, B/s, UBX y NMEA válidos); si no oye nada, un flanco 0xFF y otra vuelta.
+  Después se activa ESP-NOW y `ZedManager` configura UBX, RTK y 8 Hz como en la 3.9.0.
+- Sin UBX-RXM-PMREQ al dormir (el Pololu corta la corriente).
+- Monitor: línea `GNSS:` con B/s, UBX, NMEA, NAV-PVT y GPIO34 (alimentación **solicitada**, tensión no medida);
+  `GPS NO VERIFICADO (sin NAV-PVT)` mientras no lleguen NAV-PVT.
+
+## V3.13.8 — GPS UART PIN FIX (2026-10-31)
+Rama `fix/back-3-13-8-gps-uart` (desde `fix/back-3-13-7-gps`). Cableado físico confirmado por el usuario:
+| Cable | Origen | Destino Heltec | Uso en el firmware |
+|---|---|---|---|
+| Blanco | RX del ZED-F9P | GPIO33 | **TX** de UART1 |
+| Verde | TX del ZED-F9P | GPIO35 | **RX** de UART1 |
+| Amarillo | SHDN del Pololu S7V8F3 | GPIO34 | encendido del GPS |
+- `HardwareSerial ZED(1); ZED.begin(baud, SERIAL_8N1, 35, 33)` en todas las aperturas (diagnóstico, encendido y
+  cargador de reserva). Sin intercambio automático.
+- **GPIO35 / LED blanco:** el firmware no tiene código de LED. GPIO35 ya no se configura como salida, no se escribe ni se
+  fija al dormir (antes, como TX, se fijaba a LOW). Al dormir se fija a LOW el **GPIO33** (TX). El LED, conectado por
+  hardware a GPIO35, se ve encendido mientras la línea TX del ZED está en reposo (ALTO) y parpadea con sus datos: es
+  normal y no lo controla el firmware.
+- **USB:** solo GPIO20 como entrada digital con pull-down, 4 de 5 lecturas en ALTO. Sin ADC2. El monitor dice
+  `USB GPIO20=HIGH/LOW`. Si con el USB conectado sigue en LOW, la señal física no llega a GPIO20 (medido 0,16–0,17 V):
+  **no está resuelto**.
+- Monitor: `AVO BACK V3.13.8`, `GNSS UART1: RX=GPIO35 TX=GPIO33`, `POLOLU: SHDN GPIO34=HIGH` y cada 2 s
+  `GNSS: bytes recibidos=… | UBX validos=… | NMEA validos=… | NAV-PVT=… | estado=…`.
+
+## V3.13.8 DIAGNÓSTICO — Pololu siempre encendido (2026-10-31)
+Rama `diag/back-3-13-8-pololu-libre`, binario `AVO_BACK_V3_13_8_DIAG_POLOLU_firmware.bin`. **No es una versión de ahorro.**
+- `AVO_POLOLU_FREE 1`: GPIO34 se libera de cualquier hold y queda como `INPUT` sin pull-up ni pull-down; nunca se escribe
+  ni se fija (ni despierta, ni dormida, ni en modo carga). El SHDN del Pololu queda en ALTO por su propia resistencia de
+  100 kΩ a VIN: el GPS tiene la alimentación **solicitada** siempre, también en sueño profundo y cargando.
+- UART1 RX=35 / TX=33 y el diagnóstico de bytes de la 3.13.8 sin cambios.
+- Monitor: `POLOLU: SHDN LIBRE — GPIO34 EN ALTA IMPEDANCIA`, `GPS: alimentacion permanente solicitada`, `UART1: RX=35 TX=33`,
+  `GNSS: bytes recibidos=…`.
+- Con GPIO34 suelto, el pull-up del Pololu sube el pin hacia la tensión de la batería (hasta 4,2 V) a través de 100 kΩ:
+  unos µA por el diodo de protección del ESP32-S3. Para una prueba corta no es un problema; si se deja así, poner
+  100 kΩ de SHDN a GND (el pin queda ≤ 2,1 V y el Pololu sigue encendido).
+
+## V3.13.9 — GPS apagado con el USB conectado (2026-10-31)
+Rama `fix/back-3-13-9-usb-gps-off` (desde la 3.13.8). Cableado confirmado: **VIN del Pololu = 3V3 de la Heltec**,
+SHDN = GPIO34, VOUT = GPS. UART sin cambios: RX=GPIO35, TX=GPIO33 (el ZED queda a 460800 tras la configuración).
+- **Pololu habilitado:** GPIO34 en alta impedancia (`INPUT` sin pulls). El SHDN sube por su pull-up de 100 kΩ a VIN,
+  que ahora es 3,3 V: el pin nunca ve más de 3,3 V. **GPIO34 nunca se pone en ALTO.**
+- **Pololu deshabilitado:** GPIO34 `OUTPUT LOW` (fijado durante el sueño profundo).
+- **USB:** confirmado solo con 8 lecturas seguidas en ALTO de GPIO20 (2 s). Entonces: se para el GNSS y el RTCM
+  (radio apagada), GPIO34 LOW, TX (GPIO33) a LOW, RX (GPIO35) como entrada, y sueño profundo mientras carga
+  (comprueba el USB cada 3 s). Al retirarlo: GPIO34 libre, 1,5 s, UART1 RX35/TX33, escucha, configuración UBX y NAV-PVT.
+- Monitor con tiempos: `[USB] t=… GPIO20 HIGH`, `[USB] … USB CONFIRMADO`, `[USB] … despierta: USB retirado`,
+  `[GNSS] t=… GPIO34 OUTPUT LOW / ALTA IMPEDANCIA`, `[GNSS] primer UBX valido … ms`, `[GNSS] primer NAV-PVT … ms`.
+- **Detección del USB todavía sin resolver (eléctrico):** GPIO20 está libre en esta placa (es el D+ del USB propio del
+  ESP32-S3, que no va al USB-C; el firmware desactiva ese USB y sus pull-up), pero con el USB conectado mide 0,16–0,17 V:
+  la señal no llega. Con GPIO20 siempre en LOW el GPS sigue funcionando y nunca se apaga por USB.
+- **Pendiente físico:** encontrar un punto con 5 V solo con USB (medir con polímetro) y llevarlo a GPIO20 por el
+  divisor 5,1 k / 10 k; comprobar después con polímetro que VOUT del Pololu cae a ≈ 0 V con el USB conectado.
+- Nota: con VIN en el 3V3 de la Heltec, el arranque del GPS vuelve a tirar del regulador de la Heltec (a través del
+  arranque suave del Pololu). Vigilar `motivo de reinicio 9` (brownout) al habilitar el Pololu.
+
+## V3.13.10 — DIAGNÓSTICO: USB por umbrales de tensión en GPIO20 (2026-10-31)
+Rama `fix/back-3-13-10-usb-umbral` (desde la 3.13.9). UART del GPS sin cambios (RX=GPIO35, TX=GPIO33).
+- Cada 250 ms: mediana de 9 lecturas del ADC en **GPIO20** y en **GPIO7**. Umbrales en GPIO20: **> 100 mV = conectado**,
+  **< 50 mV = desconectado**, entre ambos se mantiene el estado. Un cambio se confirma tras **2 s** seguidos.
+- **El apagado automático está DESACTIVADO** (`AVO_USB_AUTO_OFF 0`): las transiciones solo se anotan
+  (`[USB] TRANSICION … motivo …` y `SIMULACION …`). El GPS sigue encendido siempre. Con `AVO_USB_AUTO_OFF 1` la
+  transición a «conectado» haría lo de la 3.13.9 (GPIO34 LOW, sueño mientras carga, recuperación al quitar el USB).
+- Monitor cada segundo: `[USB] GPIO20=… mV (ADC2, n/9 lecturas a 0) | GPIO7=… mV (ADC1) | USB=… | GPIO34=… | GNSS=… | ultimo cambio: …`.
+
+### Auditoría de GPIO20 como entrada analógica
+- **ADC2_CH9.** En el ESP32-S3 el ADC2 lo comparte la Wi-Fi: con ESP-NOW funcionando, una lectura puede ser rechazada
+  y Arduino devuelve 0. Por eso se cuentan las lecturas a 0 y se usa la mediana.
+- **D+ del USB propio del ESP32-S3** (no va al USB-C en esta placa): se desactivan el pad USB-Serial-JTAG y sus pull-up.
+- **Precisión:** el ADC del S3 tiene desplazamiento y no linealidad en los primeros ~100 mV; además GPIO20 **sin nada
+  conectado** ya leía ~170 mV (registros de la 3.13.4–3.13.5). Unos umbrales de 100 / 50 mV no distinguen un pin suelto de
+  una señal real: no sirven para decidir el apagado.
+- **Propuesta:** pasar el punto medio del divisor (5,1 kΩ / 10 kΩ) a **GPIO7** (ADC1_CH6, libre desde que no hay reed,
+  se lee con la radio encendida) y alimentar el divisor desde un punto con ~5 V solo con USB. Con el divisor, la señal
+  sería ≈ 3,3 V con USB y 0 V sin él, lejos de la zona imprecisa; entonces sí se pueden usar umbrales (p. ej. > 2000 mV /
+  < 500 mV). Otros ADC1 libres en la Heltec: GPIO2, 4, 5, 6 (GPIO1 = batería; GPIO8–10 = LoRa; GPIO3 = configuración de JTAG).
+
+## V3.14.3 — dormida esperando al pecho: enchufar y desenchufar el USB no la despierta (2026-11-09)
+Petición del usuario: si la espalda está dormida y se conecta el USB para cargar, que no se despierte, que cargue y que al
+desconectarlo siga dormida.
+- El estado «esperando al pecho» se guarda en NVS (`avonow/wait`) al entrar en `chest_wait_mode()` y se borra al oír al
+  pecho (o con PRG). Así sobrevive a un reinicio (el CP2102 o un bajón de tensión al enchufar pueden reiniciar la placa).
+- Al arrancar con ese estado: el GPS **no se enciende**; se mira el USB 2,6 s con la radio apagada.
+  - USB presente → `usb_charge_mode()` (solo carga, GPS apagado). Al quitar el USB **vuelve a esperar al pecho** en vez de
+    reiniciar normal.
+  - Sin USB → vuelve directamente a esperar.
+- Si no se reinicia al enchufar, sigue esperando sin más (el GPS ya está apagado y la batería carga por hardware).
+- Arranque normal a propósito: PRG pulsado (también despierta el sueño ligero) o los 3 encendidos rápidos (emparejar).
+
+## V3.14.2 — sin pecho, GPS cortado con el Pololu como en el modo carga (2026-11-09)
+Petición del usuario tras ver el LED blanco encendido con la 3.14.0: «cuando se desconecta el pecho tiene que cortar la
+corriente del GPS con el Pololu como hace cuando se pone en modo carga».
+- Con la orden `BACK_SLEEP` o tras 90 s sin pecho, la espalda entra en **modo espera** (`chest_wait_mode`), con los mismos
+  pasos que `usb_charge_mode()` de la 3.13.11 (el que sí apaga el GPS): UART del ZED cerrada, GPIO33/35 en alta impedancia
+  y **GPIO34 OUTPUT LOW de forma activa**, además de `gpio_hold`. Radio apagada.
+- **Sin sueño profundo** (era lo que dejaba el GPS encendido en la 3.14.0/3.14.1): sueño **ligero** entre escuchas, que
+  conserva la CPU, la RAM y las salidas. Cada 10 s escucha 160 ms; si oye a su pecho, libera GPIO34 (Pololu encendido),
+  espera 1,5 s y reinicia limpio, igual que al quitar el USB.
+- Batería < 3,30 V: deja de escuchar y mide cada 5 min.
+- Monitor: `POLOLU APAGADO — ESPERANDO AL PECHO`, `[ESPERA] N s esperando al pecho…` cada minuto y
+  `[ESPERA] pecho oido… reinicio limpio`.
+- Consumo estimado sin medir: 1,5–3 mA (sueño ligero ~0,3–1 mA + escuchas).
+- El sueño profundo (y el cambio de VDD_SPI de la 3.14.1) queda solo para la batería agotada al arrancar.
+
+## V3.14.1 — VDD_SPI encendido en el sueño (2026-11-09)
+Prueba del usuario con la 3.14.0: con el pecho apagado, el **LED blanco de la espalda seguía encendido**. Ese LED está en
+GPIO35, la línea TX del ZED: encendido = el ZED tiene corriente (o la espalda no llegó a dormirse).
+- **Hipótesis (no confirmada):** GPIO33–GPIO37 pueden alimentarse desde VDD3P3_CPU (por defecto) o desde **VDD_SPI**
+  (configurable por eFuse; datasheet del ESP32-S3, nota 3 de la tabla de pines). Si en esta placa están en VDD_SPI, el
+  sueño profundo apaga ese dominio, el `gpio_hold` de GPIO34 se queda sin alimentación, el pull-up de 100 kΩ del Pololu
+  lo habilita y el ZED sigue encendido.
+- **Cambio:** `esp_sleep_pd_config(ESP_PD_DOMAIN_VDDSDIO, ESP_PD_OPTION_ON)` antes de cada sueño (`deep_sleep_now()`).
+  Inocuo si la hipótesis es falsa (unas decenas de µA más).
+- **Otra causa posible:** que la espalda no llegara a dormirse (por ejemplo, menos de 90 s sin pecho, o USB conectado).
+  El monitor serie lo dice: `A DORMIR (…)` seguido de `VDD_SPI encendido en el sueno…`.
+- Durante los primeros 90 s sin pecho la espalda está despierta y el LED encendido es lo normal.
+
+## V3.14.0 — sueño con el pecho apagado (2026-11-09)
+Rama `fix/back-3-14-0-sueno-pecho` (desde la 3.13.12). Petición del usuario: que la espalda se duerma del todo cuando se
+apaga el pecho, que se despierte sola al encenderlo, que se duerma también si no ve el pecho en 90 s y que escuche cada 10 s.
+- **Se duerme** (GPS a 0 V con GPIO34 LOW, Vext cortado, radio apagada, LoRa dormida) cuando:
+  - el pecho avisa de que se apaga: orden `BackCmd::BACK_SLEEP` (8), que manda el pecho ≥ 3.7.7 justo antes de cortar;
+    la espalda contesta el ACK y después se duerme;
+  - o no oye a su pecho emparejado durante **90 s** (`CHEST_SILENT_SLEEP_MS`), contados desde el arranque si nunca lo oyó.
+  - No se duerme sin pecho emparejado, con la ventana de emparejamiento abierta ni en modo taller.
+- **Dormida:** despierta por temporizador cada **10 s** (`LISTEN_PERIOD_S`), sin abrir el monitor serie y sin soltar los
+  `gpio_hold` (el GPS sigue sin corriente), a 80 MHz; escucha **160 ms** el canal ESP-NOW y solo arranca si oye un paquete
+  válido de **su** pecho (`now_is_wake_packet`: misma MAC y `pair_id`, o un PAIR_REQ de esa MAC). Si no, vuelve a dormir.
+  - El pecho ≥ 3.7.7 manda un paquete corto cada 100 ms mientras no tiene espalda, para que lo oiga en esa ventana.
+  - Con un pecho anterior (solo latido de 1 s) puede tardar más en despertar (probabilidad ~15–20 % por escucha).
+- **Batería dormida:** cada 30 escuchas (5 min) mide la batería; por debajo de 3,30 V deja de escuchar y despierta cada
+  5 min solo para medir (vuelve a escuchar por encima de 3,45 V).
+- **Carga por USB:** sin cambios (3.13.11): con USB la espalda apaga el GPS y la radio y solo carga.
+- Consumo estimado dormida (sin medir): unos 2–3 mA de media (arranque + radio ~0,2–0,3 s cada 10 s) → unas 4–6 semanas
+  con la 2000 mAh. Arranque del GPS al despertar: en frío (~30 s hasta posición), porque V_BCKP no está conectado.
+- Monitor serie: `SUENO: pecho visto | se duerme en N s si no lo oye` y, al despertar, `[SUENO] despierta: pecho encendido oido…`.
+- Pruebas: `chest_sleep.*` (orden con ACK e idempotente, política de 90 s con desbordamiento de millis, solo nuestro pecho despierta).
+
+## V3.13.12 — vigilancia del resumen de señales y de reinicios del receptor (2026-11-02)
+Prueba del 02/11/2026: con la espalda 3.13.11 al 28 %, la tarjeta «Calidad GNSS» de Android se quedó fija en «Esperando el
+resumen de señales del receptor», aunque NAV-PVT y RTCM seguían funcionando (DGNSS, 17 195 mensajes RTCM usados).
+La 3.13.11 activaba NAV-SAT/NAV-SIG (en RAM) una sola vez y no lo volvía a pedir si dejaba de llegar.
+- `ZedManager`: si el mensaje del resumen (NAV-SIG; NAV-SAT si NAV-SIG fue rechazado) no llega en 10 s, se vuelve a pedir
+  con la misma secuencia del arranque. Tras 3 peticiones seguidas sin respuesta, solo una por minuto. No toca NAV-PVT ni RTCM.
+- Contadores `monitor_rearms()` (peticiones repetidas) y `receiver_resets()` (receptor callado 5 s y detectado de nuevo).
+- `BackStatus.quality_mon`: bits 0–3 estado (igual que antes), bits 4–5 peticiones repetidas, bits 6–7 redetecciones (saturan en 3).
+  El pecho 3.7.6 reenvía el byte sin cambios; Android 2.6-ntrip-auto-dev3 los muestra.
+- Monitor serie: línea `VIGILANCIA: NAV-SAT/SIG pedidos de nuevo N veces | receptor redetectado M veces`.
+- Pruebas: `quality.lost_nav_sig_output_is_requested_again`, `quality.silent_receiver_counts_as_reset`.
+
+## V3.13.11 — apagado real del Pololu con el USB (2026-10-31)
+Rama `fix/back-3-13-11-usb-pololu-off` (desde la 3.13.10). **`AVO_USB_AUTO_OFF 1`** (petición del usuario).
+- GPIO20 se lee con una unidad ADC2 propia (`adc_oneshot`): una lectura rechazada por la radio es **inválida**, no 0 V.
+  Cada muestra es la mediana de las lecturas válidas de 9; con menos de 5 válidas la muestra se ignora.
+- Umbrales: > 100 mV = conectado, < 50 mV = desconectado, entre ambos se mantiene. Un cambio necesita **2 s** y al menos
+  6 muestras válidas de acuerdo, sin ninguna válida en contra.
+- **USB conectado:** se deja de escribir al ZED y se cierra su UART, GPIO33 (TX) y GPIO35 (RX) en alta impedancia,
+  **GPIO34 OUTPUT LOW**, radio apagada (sin telemetría ni RTCM), CPU a 80 MHz. Monitor: `POLOLU APAGADO — USB CONECTADO`.
+  **No hay sueño profundo**: la placa queda despierta en un bucle de carga que mantiene GPIO34 en LOW de forma activa y
+  mira el USB cada 250 ms con la radio apagada (lecturas del ADC2 válidas).
+- **USB retirado:** GPIO34 en alta impedancia (Pololu habilitado por su pull-up), 1500 ms y **reinicio limpio**: UART1
+  RX=35/TX=33, escucha pasiva, configuración del ZED (UBX, RTK, 8 Hz), NAV-PVT, ESP-NOW, telemetría y RTCM, como en el
+  arranque. El reinicio evita ciclos rápidos: para volver a apagar hacen falta otros 2 s por encima de 100 mV.
+- **Riesgo conocido:** con el pin suelto el ADC ya marcó ~170 mV. Si GPIO20 no tiene un divisor real a GND, la espalda
+  puede quedarse en modo carga sin USB (GPS apagado). En ese caso, revisar el divisor o volver a la 3.13.10.
+- No se mide VOUT: el apagado del GPS solo se da por bueno midiendo con polímetro.
