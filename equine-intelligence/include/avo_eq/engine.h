@@ -31,7 +31,15 @@ struct Anomaly {
   std::vector<std::pair<std::string, double>> evidence;
 };
 
+// AVO-ASSIGN-1: horse and rider assigned in an app after recording (docs/ASIGNACION_CABALLO.md).
+// Empty = use what the RAW header says. The RAW itself is never modified.
+struct IdentityConfig {
+  std::string horse_code, horse_name, rider_code, rider_name;
+  bool any() const { return !horse_code.empty() || !horse_name.empty() || !rider_code.empty() || !rider_name.empty(); }
+};
+
 struct EngineConfig {
+  IdentityConfig identity;         // AVO-ASSIGN-1 (changes only the identity in the output, never the numbers)
   ValidationConfig validation;
   GnssConfig gnss;
   CadenceConfig cadence;
