@@ -1,0 +1,109 @@
+<UserControl x:Class="Avo.Windows.Views.MapView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- Map and route (concept 01, screen 2): layers panel over the map, statistics, legend and segment analysis on the right,
+         synchronised speed profile at the bottom -->
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="8" ClipToBounds="True" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                <Grid>
+                    <c:MapControl x:Name="Map" Tracks="{Binding Tracks}" CursorTime="{Binding CursorTime}" ColorMode="{Binding ColorMode}" Provider="{Binding MapProvider}"
+                                  RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" TileCacheDir="{Binding TileCacheDir}" FitPadding="230,40,70,40"/>
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="10" Background="#E6101014" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="6" Width="190">
+                        <StackPanel>
+                            <TextBlock Text="CAPA BASE" Style="{StaticResource AvoLabel}" Margin="0,0,0,4"/>
+                            <RadioButton GroupName="base" Style="{StaticResource AvoSegmentButton}" HorizontalContentAlignment="Left" Margin="0,1" Content="Satélite" IsChecked="{Binding MapProvider, Converter={StaticResource Eq}, ConverterParameter=EsriSatellite}"/>
+                            <RadioButton GroupName="base" Style="{StaticResource AvoSegmentButton}" HorizontalContentAlignment="Left" Margin="0,1" Content="Híbrido" IsChecked="{Binding MapProvider, Converter={StaticResource Eq}, ConverterParameter=EsriHybrid}"/>
+                            <RadioButton GroupName="base" Style="{StaticResource AvoSegmentButton}" HorizontalContentAlignment="Left" Margin="0,1" Content="Vectorial sin conexión" IsChecked="{Binding MapProvider, Converter={StaticResource Eq}, ConverterParameter=VectorOffline}"/>
+                            <TextBlock Text="TRAZO" Style="{StaticResource AvoLabel}" Margin="0,10,0,4"/>
+                            <RadioButton GroupName="mode" Content="Velocidad" Margin="0,2" IsChecked="{Binding ColorMode, Converter={StaticResource Eq}, ConverterParameter=Speed}" Foreground="{StaticResource AvoText}"/>
+                            <RadioButton GroupName="mode" Content="Aceleración" Margin="0,2" IsChecked="{Binding ColorMode, Converter={StaticResource Eq}, ConverterParameter=Acceleration}" Foreground="{StaticResource AvoText}"/>
+                            <RadioButton GroupName="mode" Content="Calidad GNSS" Margin="0,2" IsChecked="{Binding ColorMode, Converter={StaticResource Eq}, ConverterParameter=GnssQuality}" Foreground="{StaticResource AvoText}"/>
+                            <RadioButton GroupName="mode" Content="Aire (motor)" Margin="0,2" IsChecked="{Binding ColorMode, Converter={StaticResource Eq}, ConverterParameter=Gait}" Foreground="{StaticResource AvoText}"/>
+                            <CheckBox Content="Inicio / final" IsChecked="{Binding ShowMarkers, ElementName=Map}" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="12">
+                        <Button Style="{StaticResource AvoIconButton}" Click="ZoomIn" ToolTip="Acercar"><Path Data="{StaticResource IconPlus}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="14" Height="14"/></Button>
+                        <Button Style="{StaticResource AvoIconButton}" Click="ZoomOut" ToolTip="Alejar" Margin="0,4,0,0"><Path Data="{StaticResource IconMinus}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="14" Height="14"/></Button>
+                        <Button Style="{StaticResource AvoIconButton}" Click="Fit" ToolTip="Ajustar recorrido" Margin="0,4,0,0"><Path Data="{StaticResource IconFit}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="14" Height="14"/></Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Column="1" Margin="12,0,0,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Border Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="6" Padding="14,10">
+                        <UniformGrid Columns="2">
+                            <StackPanel Margin="0,0,0,8"><TextBlock Text="Distancia" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding Selected.DistanceText, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="22"/></StackPanel>
+                            <StackPanel Margin="0,0,0,8"><TextBlock Text="Tiempo" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding Selected.DurationText, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="22"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. media" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding Selected.MeanSpeedText, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20"/></StackPanel>
+                            <StackPanel><TextBlock Text="Vel. máxima" Style="{StaticResource AvoLabel}"/><TextBlock Text="{Binding Selected.MaxSpeedText, FallbackValue='—'}" Style="{StaticResource AvoMetricValue}" FontSize="20"/></StackPanel>
+                        </UniformGrid>
+                    </Border>
+                    <c:AvoCard Header="{Binding LegendTitle}" Margin="0,10,0,0">
+                        <StackPanel>
+                            <Border Height="10" CornerRadius="2" Background="{StaticResource AvoSpeedScale}"/>
+                            <Grid Margin="0,4,0,0">
+                                <TextBlock Text="0" Style="{StaticResource AvoCaption}"/>
+                                <TextBlock Text="{Binding Selected.MaxSpeedText, FallbackValue=''}" Style="{StaticResource AvoCaption}" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <WrapPanel Margin="0,8,0,0">
+                                <c:AvoLegendItem Text="FIX" Swatch="{StaticResource AvoOk}" Margin="0,0,10,0"/>
+                                <c:AvoLegendItem Text="FLOAT" Swatch="{StaticResource AvoWarn}" Margin="0,0,10,0"/>
+                                <c:AvoLegendItem Text="DGNSS" Swatch="{StaticResource AvoBlue}" Margin="0,0,10,0"/>
+                                <c:AvoLegendItem Text="Autónomo" Swatch="{StaticResource AvoSilver}" Margin="0,0,10,0"/>
+                                <c:AvoLegendItem Text="Sin solución" Swatch="{StaticResource AvoBad}" Margin="0"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Análisis de tramos" Margin="0,10,0,0">
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding SegmentRows}" SelectedItem="{Binding SelectedSegment}" MaxHeight="230">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" FontSize="12"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding MaxSpeedKmh, StringFormat='{}{0:0.0} km/h', TargetNullValue='—'}" FontSize="12" FontWeight="SemiBold"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <Button Content="Gestionar tramos" Command="{Binding NavigateCommand}" CommandParameter="Segments" Margin="0,8,0,0" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Calidad GNSS / RTK" Margin="0,10,0,0">
+                        <ItemsControl ItemsSource="{Binding GnssStats}">
+                            <ItemsControl.ItemTemplate><DataTemplate><c:AvoKeyValue KeyText="{Binding Key}" ValueText="{Binding Value}"/></DataTemplate></ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Header="Punto seleccionado" Margin="0,10,0,0">
+                        <StackPanel>
+                            <c:AvoKeyValue KeyText="Tiempo" ValueText="{Binding CursorText}"/>
+                            <c:AvoKeyValue KeyText="Velocidad" ValueText="{Binding CursorSpeed, StringFormat='{}{0} km/h'}"/>
+                            <c:AvoKeyValue KeyText="Distancia" ValueText="{Binding CursorDistance, StringFormat='{}{0} km'}"/>
+                            <c:AvoKeyValue KeyText="Posición (chaleco)" ValueText="{Binding CursorPosition}"/>
+                            <TextBlock Text="{Binding CursorQuality}" Style="{StaticResource AvoCaption}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </c:AvoCard>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <c:AvoChartPanel Grid.Row="2" Margin="0,10,0,0" Header="Perfil de velocidad (km/h)" Readout="{Binding CursorSpeed, StringFormat='{}{0} km/h'}">
+            <c:SignalChart Series="{Binding SpeedSeries}" Bands="{Binding QualityBands}" XMin="{Binding ChartXMin}" XMax="{Binding ChartXMax}" CursorX="{Binding CursorTime}"
+                           RangeStart="{Binding RangeStart}" RangeEnd="{Binding RangeEnd}" IncludeZero="True"/>
+        </c:AvoChartPanel>
+    </Grid>
+</UserControl>
