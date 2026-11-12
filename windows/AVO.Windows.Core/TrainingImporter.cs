@@ -40,6 +40,7 @@ public static class TrainingImporter
         result.SessionId = String(root, "sessionId") ?? throw new InvalidDataException("Falta sessionId");
         if (result.SessionId.Length is < 3 or > 128 || result.SessionId.Contains('/') || result.SessionId.Contains('\\'))
             throw new InvalidDataException("ID de sesión inválido");
+        if (String(root, "sha256") is { Length: 64 } wholeSha && Regex.IsMatch(wholeSha, "^[a-fA-F0-9]{64}$")) result.Sha256 = wholeSha.ToLowerInvariant();
         result.Horse = String(root, "horseName") is { Length: > 0 } horse ? horse : "Sin identificar";
         result.Rider = String(root, "riderName") is { Length: > 0 } rider ? rider : "Sin identificar";
         result.DeclaredDistanceM = Number(root, "distanceM");
