@@ -1,0 +1,235 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 3522392,
+     "componentLibraryType": "expand",
+     "stockCount": 2214,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6  \u547d\u540d\u66f4\u6539\uff0c4MB\u5373H4\uff0c\u4e3a\u5c3e\u7f00\uff0c\u6a21\u7ec4\u4e1d\u5370\u66f4\u6539\u4e3aH4\uff0cH\u4e3a\u9ad8\u6e29105\u00b0C\uff0c\u8f6f\u786c\u4ef6\u65e0\u66f4\u6539 \u652f\u63012.4GHz Wi-Fi\u548c\u84dd\u72595\u7684\u5c0f\u5c3a\u5bf8\u6a21\u7ec4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-c3-mini-1u-h4_C3013922.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.4489
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.0854
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.8692
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.6891
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.5679
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.5138
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.5904
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.4216
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.4736
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.7639
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.3224
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.9721
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 1778,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "3522392-ESP32_C3_MINI_1UH4/C3013922",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 11.94,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.4489,
+     "componentCode": "C3013922",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-C3-MINI-1U-H4",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583696819906097152",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2206021745_Espressif-Systems-ESP32-C3-MINI-1U-H4_C3013922.pdf",
+     "dataManualFileAccessId": "8589835524556435456",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-C3-MINI-1U-H4",
+     "minImage": "",
+     "minImageAccessId": "8583696820787171328",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,13.2x12.5mm",
+     "describe": "-104dBm -40\u2103~+105\u2103 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FH4 UART\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB SMD,13.2x12.5mm WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-104dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "20.5dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Integrated Bluetooth function\u3001Support USB interface"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-C3FH4"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "82mA"
+      },
+      {
+       "attribute_name_en": "Wireless Standard",
+       "attribute_value_name": "Bluetooth5.0"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "350mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C3013922</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C3013922"
+ },
+ "message": null
+}

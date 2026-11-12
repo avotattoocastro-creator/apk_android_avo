@@ -1,0 +1,243 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 151614,
+     "componentLibraryType": "expand",
+     "stockCount": 2861,
+     "componentTypeEn": "Battery Management",
+     "erpComponentName": "1.5-A USB\u53cb\u597d\u578b\u9502\u79bb\u5b50\u7535\u6c60\u5145\u7535\u5668\u548c\u7535\u6e90\u8def\u5f84\u7ba1\u7406IC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/battery-management_texas-instruments-bq24072rgtr_C140288.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9964
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.8194
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7228
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.613
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5638
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5425
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9599
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.7894
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.6962
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.5905
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5431
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5226
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "cca499faefe0487cab22251edb29c551",
+     "canPresaleNumber": 2796,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ24072RGTR/C140288",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 3.00181,
+     "preMinPurchaseNum": 12,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.9964,
+     "componentCode": "C140288",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ24072RGTR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583004967116951552-C140288/C140288-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114431Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=80ca6cdc1f60ea2ea6662d1e86791b226ea3ed19b189697febe0df7c799a51a8",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1806131014_Texas-Instruments-BQ24072RGTR_C140288.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588881677363367936-C140288.pdf?response-content-disposition=attachment%3B%20filename%3DC140288.pdf%3B%20filename%2A%3DUTF-8%27%27C140288.pdf&x-oss-date=20261030T114431Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7509979f390a6f93521d85858f8655317ab4fbce973b484d194f7c849b8e641",
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq24079",
+     "componentName": "TI BQ24072RGTR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583004968026169344-C140288/C140288-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114431Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0b48bce3734b8b4a18367e1e151b5d01cec28f09bc8976b23e9df14394d617e8",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-16-EP(3x3)",
+     "describe": "-40\u2103~+125\u2103 1 1.5A 1.5mA 4.2V 4.35V~6.6V Charging IC Lithium Battery Support QFN-16-EP(3x3) Battery Management ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Charging Saturation Voltage",
+       "attribute_value_name": "4.2V"
+      },
+      {
+       "attribute_name_en": "Supply Current (Iq)",
+       "attribute_value_name": "1.5mA"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "The Chip Type",
+       "attribute_value_name": "Charging IC"
+      },
+      {
+       "attribute_name_en": "Balance Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Type of Battery",
+       "attribute_value_name": "Lithium Battery"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.35V~6.6V"
+      },
+      {
+       "attribute_name_en": "Charge Current - Max",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Number of Cells",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Battery Temperature Detection",
+       "attribute_value_name": "Support"
+      },
+      {
+       "attribute_name_en": "End-Off Voltage",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "0V Battery Charge",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Battery Management",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C140288</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C140288"
+ },
+ "message": null
+}

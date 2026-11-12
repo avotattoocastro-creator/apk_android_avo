@@ -1,0 +1,486 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 3,
+   "list": [
+    {
+     "componentId": 391847,
+     "componentLibraryType": "expand",
+     "stockCount": 21894,
+     "componentTypeEn": "3D Magnetic Sensors",
+     "erpComponentName": "\u4e09\u8f74\u78c1\u4f20\u611f\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/3d-magnetic-sensors_memsic-mmc5603nj_C404328.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2886
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2296
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2044
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1684
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1543
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.146
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1406
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.278
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1487
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1969
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2212
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1622
+      }
+     ],
+     "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
+     "secondSortAccessId": "e63448351b364243b24b0e6120b76476",
+     "canPresaleNumber": 20189,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "MEMSIC-MMC5603NJ/C404328",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.71297,
+     "preMinPurchaseNum": 32,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2886,
+     "componentCode": "C404328",
+     "componentBrandEn": "MEMSIC",
+     "componentModelEn": "MMC5603NJ",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8557210614914441216",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_MEMSIC-MMC5603NJ_C404328.pdf",
+     "dataManualFileAccessId": "8551813659874775040",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MEMSIC MMC5603NJ",
+     "minImage": "",
+     "minImageAccessId": "8557210615912550400",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "WLP-4(0.8x0.8)",
+     "describe": "-40\u2103~+85\u2103 1.62V~3.6V 20bit 750uA\u30011.3mA\u30012.4mA\u30013.4mA I2C \u00b13mT \u00b13mT WLP-4(0.8x0.8) 3D Magnetic Sensors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Magnetic Sensing Range(Z)",
+       "attribute_value_name": "\u00b13mT"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Output bit",
+       "attribute_value_name": "20bit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.62V~3.6V"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "750uA\u30011.3mA\u30012.4mA\u30013.4mA"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "I2C"
+      },
+      {
+       "attribute_name_en": "Magnetic Sensing Range(X,Y)",
+       "attribute_value_name": "\u00b13mT"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "3D Magnetic Sensors",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>MMC5603NJ</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44361794,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "MMC5603NJ",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": "b1a62a896e084350a4358222151368b0",
+     "secondSortAccessId": "0d8193397208416a9e2a837f72446a55",
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-MMC5603NJ/C9900157564",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900157564",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "MMC5603NJ",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT MMC5603NJ",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "WLP-4",
+     "describe": "WLP-4 New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>MMC5603NJ</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18342452,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Specialized Sensors",
+     "erpComponentName": "MMC560x-B \u539f\u578b\u5f00\u53d1\u677f",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/specialized-sensors_memsic-mmc5603nj-b_C17213384.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 25.3803
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 25.3803
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 25.3803
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 10.1272
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 9.7883
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.6212
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.2681
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 9.7556
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 24.4489
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 24.4489
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 24.4489
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 9.4291
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "e4559ff79aed48cca3c5e0251a4f3991",
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "MEMSIC-MMC5603NJB/C17213384",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 25.3803,
+     "componentCode": "C17213384",
+     "componentBrandEn": "MEMSIC",
+     "componentModelEn": "MMC5603NJ-B",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8602833179061600256",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "MEMSIC MMC5603NJ-B",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Specialized Sensors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sensor Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Diameter (\u03c6D)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "I2C"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Specialized Sensors",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>MMC5603NJ</span>-B",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "MMC5603NJ"
+ },
+ "message": null
+}

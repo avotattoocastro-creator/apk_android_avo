@@ -1,0 +1,598 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 3,
+   "list": [
+    {
+     "componentId": 23972426,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "SM08B-GHS-TB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
+     "secondSortAccessId": "cfa9bf2378174788abc09e74d45d5b30",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JST-SM08B_GHSTB/C22391766",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C22391766",
+     "componentBrandEn": "JST",
+     "componentModelEn": "SM08B-GHS-TB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JST SM08B-GHS-TB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD-8P",
+     "describe": "SMD-8P New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SM08B-GHS-TB</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 255482,
+     "componentLibraryType": "expand",
+     "stockCount": 19269,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "1x8P \u95f4\u8ddd:1.25mm \u5367\u8d34 \u7cfb\u5217:GH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_jst-sm08b-ghs-tb-lf-sn_C265111.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2952
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2333
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2066
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1735
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1587
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1499
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1671
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1444
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2843
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2247
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1529
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.199
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 18386,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JST-SM08B_GHS_TB_LF_SN/C265111",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 0.59,
+     "preMinPurchaseNum": 31,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2952,
+     "componentCode": "C265111",
+     "componentBrandEn": "JST",
+     "componentModelEn": "SM08B-GHS-TB(LF)(SN)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583657104423337984",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010331_JST-SM08B-GHS-TB-LF-SN_C265111.pdf",
+     "dataManualFileAccessId": "8589039734664941568",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JST SM08B-GHS-TB(LF)(SN)",
+     "minImage": "",
+     "minImageAccessId": "8583657105324302336",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
+     "describe": "-25\u2103~+85\u2103 1 1.25mm 13.25mm 1A 1x8P 4.13mm 4.25mm 50V 8 8P Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1.25mm,\u5367\u8d34 Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "White"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "1A"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "1x8P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "4.13mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "13.25mm"
+      },
+      {
+       "attribute_name_en": "Reference Series",
+       "attribute_value_name": "GH"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "8P"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "Auxiliary Solder Pin"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "4.25mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "PA9T"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "8"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SM08B-GHS-TB</span>(LF)(SN)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44272941,
+     "componentLibraryType": "expand",
+     "stockCount": 26543,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "\u7c73\u8272 1x8P \u95f4\u8ddd:1.25mm \u5367\u8d34 \u7cfb\u5217:GH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_shou-han-sh-sm08b-ghs-tb-lf-sn_C42376901.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0844
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0667
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.0579
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.0511
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.0457
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.0431
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.0493
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.0557
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0813
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0643
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.0441
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.0415
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": 24610,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SHOUHAN-SH_SM08B_GHS_TB_LF_SN/C42376901",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 0.226,
+     "preMinPurchaseNum": 136,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0844,
+     "componentCode": "C42376901",
+     "componentBrandEn": "SHOU HAN",
+     "componentModelEn": "SH-SM08B-GHS-TB(LF)(SN)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585921366562648066",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8604434607618482176",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SHOU HAN SH-SM08B-GHS-TB(LF)(SN)",
+     "minImage": "",
+     "minImageAccessId": "8585921367548039168",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
+     "describe": "-25\u2103~+85\u2103 1 1.25mm 125V 1A 1x8P 8 8P Beige GH LCP Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 SMD,P=1.25mm,Surface Mount\uff0cRight Angle Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "125V"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Beige"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "1A"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "1x8P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Reference Series",
+       "attribute_value_name": "GH"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "8P"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Phosphor Bronze"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "8"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SH-<span class='lucene_highlight_class'>SM08B-GHS-TB</span>(LF)(SN)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "SM08B-GHS-TB"
+ },
+ "message": null
+}

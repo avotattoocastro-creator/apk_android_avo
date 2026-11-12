@@ -1,0 +1,4778 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 39,
+   "list": [
+    {
+     "componentId": 20890844,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "1206L150PR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_littelfuse-1206l150pr_C19603159.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.3446
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.3446
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.3446
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.5372
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5192
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.511
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.4922
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.5175
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.2952
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.2952
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.2952
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5001
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-1206L150PR/C19603159",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 7,
+     "minPurchaseNum": 7,
+     "initialPrice": 1.3446,
+     "componentCode": "C19603159",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "1206L150PR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271507_Littelfuse-1206L150PR_C19603159.pdf",
+     "dataManualFileAccessId": "8603309534631391232",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse 1206L150PR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "-40\u2103~+85\u2103 1.4mm 1.5A 1.8mm 100A 120m\u03a9 1s 3.4mm 3A 40m\u03a9 6V 800mW - Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.4mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.4mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "120m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>PR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3124044,
+     "componentLibraryType": "expand",
+     "stockCount": 3185,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_kuu-k1206l150ar_C2892425.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0556
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0443
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0387
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0312
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0295
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0426
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.03
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0373
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0535
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0333
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 3181,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "KUU-K1206L150AR/C2892425",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.142,
+     "preMinPurchaseNum": 204,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0556,
+     "componentCode": "C2892425",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "K1206L150AR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583881889468338176",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2109140930_KUU-K1206L150AR_C2892425.pdf",
+     "dataManualFileAccessId": "8590196354715709440",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "KUU K1206L150AR",
+     "minImage": "",
+     "minImageAccessId": "8583881890391085056",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.8mm 100A 170m\u03a9 1mm 3.4mm 300ms 30m\u03a9 3A 600mW 6V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "600mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.4mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "170m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "K<span class='lucene_highlight_class'>1206L150</span>AR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51790276,
+     "componentLibraryType": "expand",
+     "stockCount": 2949,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0366
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0238
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0212
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0189
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0176
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0229
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0204
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0352
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0273
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0169
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 2949,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YTL-1206L1506V/C49318384",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.092,
+     "preMinPurchaseNum": 318,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0366,
+     "componentCode": "C49318384",
+     "componentBrandEn": "YTL",
+     "componentModelEn": "1206L150/6V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8763012500302913536",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756297631754522624",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "YTL 1206L150/6V",
+     "minImage": "",
+     "minImageAccessId": "8763012501385043968",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 100A 130m\u03a9 25m\u03a9 3.2mm 300ms 3A 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/6V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51790277,
+     "componentLibraryType": "expand",
+     "stockCount": 3519,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0369
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0287
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0243
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0215
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0192
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0179
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0185
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0234
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0207
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0355
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 3519,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YTL-1206L1508V/C49318385",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.092,
+     "preMinPurchaseNum": 315,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0369,
+     "componentCode": "C49318385",
+     "componentBrandEn": "YTL",
+     "componentModelEn": "1206L150/8V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8763012557366419456",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756297636482043904",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "YTL 1206L150/8V",
+     "minImage": "",
+     "minImageAccessId": "8763012558435966976",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 100A 130m\u03a9 25m\u03a9 3.2mm 300ms 3A 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/8V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 119679,
+     "componentLibraryType": "expand",
+     "stockCount": 7803,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_littelfuse-1206l150thwr_C118413.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0777
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0623
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0544
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0413
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0366
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0343
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0352
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.06
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0748
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.033
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0524
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 7699,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-1206L150THWR/C118413",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1253,
+     "preMinPurchaseNum": 145,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0777,
+     "componentCode": "C118413",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "1206L150THWR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583299787256553472",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-1206L150THWR_C118413.pdf",
+     "dataManualFileAccessId": "8588895672964038656",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse 1206L150THWR",
+     "minImage": "",
+     "minImageAccessId": "8583299788100419584",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 120m\u03a9 300ms 3A 40m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "120m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>THWR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 208156,
+     "componentLibraryType": "expand",
+     "stockCount": 1163,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_littelfuse-1206l150slyr_C207037.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2775
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2175
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1918
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1599
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 3999,
+       "productPrice": 0.1456
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.137
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2673
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 3999,
+       "productPrice": 0.1403
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.154
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1848
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2095
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 0.1319
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 1135,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-1206L150SLYR/C207037",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.7264,
+     "preMinPurchaseNum": 33,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2775,
+     "componentCode": "C207037",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "1206L150SLYR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583442187825139712",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-1206L150SLYR_C207037.pdf",
+     "dataManualFileAccessId": "8588910128951136257",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse 1206L150SLYR",
+     "minImage": "",
+     "minImageAccessId": "8583442188683890688",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 10m\u03a9 3.2mm 3.9A 300ms 50A 65m\u03a9 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "10m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3.9A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "50A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "65m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>SLYR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20283513,
+     "componentLibraryType": "expand",
+     "stockCount": 10572,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_lute-1206l150-6nr_C19078712.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0341
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0282
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0248
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0213
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0195
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0187
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.018
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0188
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0239
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0329
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0206
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 10570,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L1506NR/C19078712",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.096,
+     "preMinPurchaseNum": 320,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0341,
+     "componentCode": "C19078712",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/6NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585799125887823872",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-6NR_C19078712.pdf",
+     "dataManualFileAccessId": "8586212644588572672",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/6NR",
+     "minImage": "",
+     "minImageAccessId": "8585799126856843264",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 1.9mm 100A 130m\u03a9 25m\u03a9 3.6mm 300ms 3A 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/6NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20283514,
+     "componentLibraryType": "expand",
+     "stockCount": 9548,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_lute-1206l150-8nr_C19078713.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0385
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0326
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0299
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0259
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0251
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0288
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.025
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0314
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0242
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0371
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 9522,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L1508NR/C19078713",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.10518,
+     "preMinPurchaseNum": 277,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0385,
+     "componentCode": "C19078713",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/8NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8770310748994187264",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-8NR_C19078713.pdf",
+     "dataManualFileAccessId": "8586212647902072832",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/8NR",
+     "minImage": "",
+     "minImageAccessId": "8770310750109601792",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 1.9mm 100A 130m\u03a9 25m\u03a9 3.6mm 300ms 3A 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/8NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51790278,
+     "componentLibraryType": "expand",
+     "stockCount": 3234,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "12V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0508
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.04
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0305
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0256
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0385
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0262
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0247
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0294
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.049
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 3234,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YTL-1206L15012V/C49318386",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.138,
+     "preMinPurchaseNum": 226,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0508,
+     "componentCode": "C49318386",
+     "componentBrandEn": "YTL",
+     "componentModelEn": "1206L150/12V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8763012445386620928",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756297641028399104",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "YTL 1206L150/12V",
+     "minImage": "",
+     "minImageAccessId": "8763012446371876864",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 1.6mm 12V 130m\u03a9 25m\u03a9 3.2mm 300ms 3A 40A 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/12V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51790280,
+     "componentLibraryType": "expand",
+     "stockCount": 3371,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "16V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0644
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0508
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0441
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0389
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0349
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0328
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.049
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0337
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0316
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0425
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0374
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.062
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 3371,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YTL-1206L15016V/C49318388",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.1725,
+     "preMinPurchaseNum": 178,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0644,
+     "componentCode": "C49318388",
+     "componentBrandEn": "YTL",
+     "componentModelEn": "1206L150/16V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8763012829031354368",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756297649529982976",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "YTL 1206L150/16V",
+     "minImage": "",
+     "minImageAccessId": "8763012830180052992",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.2W 1.5A 1.6mm 130m\u03a9 16V 25m\u03a9 3.2mm 300ms 3A 40A 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "1.2W"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/16V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60571681,
+     "componentLibraryType": "expand",
+     "stockCount": 20000,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u8d34\u7247\u7535\u963b;\u5de5\u4e1a\u7ea7\u6807\u51c6\uff0cROHS;",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0026
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0021
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0019
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0016
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0018
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.002
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0025
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 20000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L150JT/C56273358",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.00825,
+     "preMinPurchaseNum": 3471,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0035,
+     "componentCode": "C56273358",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L150JT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L150JT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>JT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4328723,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A \u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_meritek-mpts1206l150_C3761192.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0448
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0423
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0408
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0415
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Meritek-MPTS1206L150/C3761192",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 79,
+     "minPurchaseNum": 79,
+     "initialPrice": 0.1153,
+     "componentCode": "C3761192",
+     "componentBrandEn": "Meritek",
+     "componentModelEn": "MPTS1206L150",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401161551_Meritek-MPTS1206L150_C3761192.pdf",
+     "dataManualFileAccessId": "8590424145969651712",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Meritek MPTS1206L150",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.4mm 1.5A 1.8mm 100A 120m\u03a9 1s 3.5mm 3A 40m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.4mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "120m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "MPTS<span class='lucene_highlight_class'>1206L150</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20283515,
+     "componentLibraryType": "expand",
+     "stockCount": 7423,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "12V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_lute-1206l150-12nr_C19078714.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0502
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.04
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0349
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.031
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0281
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0264
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0385
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.027
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0254
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0337
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0299
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0483
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 7423,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L15012NR/C19078714",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.12001,
+     "preMinPurchaseNum": 226,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0502,
+     "componentCode": "C19078714",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/12NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585799125816791040",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2310251505_LUTE-1206L150-12NR_C19078714.pdf",
+     "dataManualFileAccessId": "8586212652352094208",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/12NR",
+     "minImage": "",
+     "minImageAccessId": "8585799126894727168",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 1.9mm 12V 130m\u03a9 130m\u03a9 3.6mm 300ms 3A 40A 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/12NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 22039715,
+     "componentLibraryType": "expand",
+     "stockCount": 18897,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "24V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_lute-1206l150-24nr_C20627120.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0733
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0608
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0546
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0498
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0462
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0443
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.048
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0445
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0706
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0586
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0526
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0426
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 18708,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L15024NR/C20627120",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.22705,
+     "preMinPurchaseNum": 149,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0733,
+     "componentCode": "C20627120",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/24NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585228935068332032",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2402291512_LUTE-1206L150-24NR_C20627120.pdf",
+     "dataManualFileAccessId": "8590909007550750720",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/24NR",
+     "minImage": "",
+     "minImageAccessId": "8585228936003932160",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.2W 1.5A 1.6mm 1.9mm 130m\u03a9 24V 25m\u03a9 3.6mm 300ms 3A 40A 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "24V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "1.2W"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/24NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23909883,
+     "componentLibraryType": "expand",
+     "stockCount": 28615,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "16V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_lute-1206l150-16nr_C22379952.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0439
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0374
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0339
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0315
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0276
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0266
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.036
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0266
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0327
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0423
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0303
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 28603,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L15016NR/C22379952",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.12,
+     "preMinPurchaseNum": 242,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0439,
+     "componentCode": "C22379952",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/16NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585251272262373376",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404101641_LUTE-1206L150-16NR_C22379952.pdf",
+     "dataManualFileAccessId": "8590916958168961024",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/16NR",
+     "minImage": "",
+     "minImageAccessId": "8585251273196621824",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.2W 1.5A 1.6mm 1.9mm 130m\u03a9 16V 25m\u03a9 3.6mm 300ms 3A 40A 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "1.2W"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/16NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56346690,
+     "componentLibraryType": "expand",
+     "stockCount": 21346,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "30V 1.50A 1206\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1219
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0993
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.088
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0795
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.069
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0656
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0632
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0956
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0848
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1174
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0665
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0766
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 21271,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LUTE-1206L15030NR/C53280174",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.32,
+     "preMinPurchaseNum": 91,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1219,
+     "componentCode": "C53280174",
+     "componentBrandEn": "LUTE",
+     "componentModelEn": "1206L150/30NR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8765616116070518784",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "LUTE 1206L150/30NR",
+     "minImage": "",
+     "minImageAccessId": "8765616117110976512",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "1.2W"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/30NR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 59652915,
+     "componentLibraryType": "expand",
+     "stockCount": 5000,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u7535\u963b 15k\u03a9 \u00b11% 250mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0031
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0028
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0025
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0023
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0022
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0024
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 5000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L1502FT/C55585827",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.01198,
+     "preMinPurchaseNum": 2439,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0048,
+     "componentCode": "C55585827",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L1502FT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L1502FT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "15k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "250mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thick Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "200V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b11%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b1100ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>2FT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 59652950,
+     "componentLibraryType": "expand",
+     "stockCount": 4800,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u7535\u963b 150k\u03a9 \u00b11% 250mW",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0039
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0025
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0029
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0024
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0032
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0026
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 4800,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L1503FT/C55585862",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.01198,
+     "preMinPurchaseNum": 2314,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.005,
+     "componentCode": "C55585862",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L1503FT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L1503FT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Resistance",
+       "attribute_value_name": "150k\u03a9"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+155\u2103"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "250mW"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Thick Film Resistor"
+      },
+      {
+       "attribute_name_en": "Voltage-Supply(Max)",
+       "attribute_value_name": "200V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b11%"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "\u00b1100ppm/\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>3FT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60571470,
+     "componentLibraryType": "expand",
+     "stockCount": 20000,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u8d34\u7247\u7535\u963b;\u5de5\u4e1a\u7ea7\u6807\u51c6\uff0cROHS;",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0058
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0034
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0028
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0056
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0044
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0029
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 20000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L1504FT/C56273147",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.01464,
+     "preMinPurchaseNum": 1962,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0058,
+     "componentCode": "C56273147",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L1504FT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L1504FT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>4FT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60571596,
+     "componentLibraryType": "expand",
+     "stockCount": 20000,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u8d34\u7247\u7535\u963b;\u5de5\u4e1a\u7ea7\u6807\u51c6\uff0cROHS;",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0031
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0028
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0025
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0023
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0022
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0024
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 20000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L1500FT/C56273273",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.01198,
+     "preMinPurchaseNum": 2439,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0048,
+     "componentCode": "C56273273",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L1500FT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L1500FT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>0FT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60571961,
+     "componentLibraryType": "expand",
+     "stockCount": 20000,
+     "componentTypeEn": "Chip Resistor - Surface Mount",
+     "erpComponentName": "\u539a\u819c\u8d34\u7247\u7535\u963b;\u5de5\u4e1a\u7ea7\u6807\u51c6\uff0cROHS;",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0031
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0028
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0025
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0023
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0027
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0022
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.003
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0024
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 20000,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GuangdongHottech-RI1206L1501FT/C56273636",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.01198,
+     "preMinPurchaseNum": 2439,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0048,
+     "componentCode": "C56273636",
+     "componentBrandEn": "Guangdong Hottech",
+     "componentModelEn": "RI1206L1501FT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Guangdong Hottech RI1206L1501FT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Chip Resistor - Surface Mount ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Chip Resistor - Surface Mount",
+     "secondSortName": "Resistors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "RI<span class='lucene_highlight_class'>1206L150</span>1FT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4329618,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A \u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_meritek-mpts1206l150r_C3762087.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.1153
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0448
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0423
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0408
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.1111
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0415
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Meritek-MPTS1206L150R/C3762087",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 79,
+     "minPurchaseNum": 79,
+     "initialPrice": 0.1153,
+     "componentCode": "C3762087",
+     "componentBrandEn": "Meritek",
+     "componentModelEn": "MPTS1206L150R",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401161601_Meritek-MPTS1206L150R_C3762087.pdf",
+     "dataManualFileAccessId": "8590374709474205696",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Meritek MPTS1206L150R",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 120m\u03a9 1s 3A 40m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "120m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "MPTS<span class='lucene_highlight_class'>1206L150</span>R",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4328045,
+     "componentLibraryType": "expand",
+     "stockCount": 110,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "1206L150THWR-A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_littelfuse-1206l150thwr-a_C3760514.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7337
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.7173
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7059
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 0.696
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 0.696
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 0.696
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 0.6705
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.691
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.68
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7068
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 0.6705
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 0.6705
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 107,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-1206L150THWRA/C3760514",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 3.5061,
+     "preMinPurchaseNum": 13,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.7337,
+     "componentCode": "C3760514",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "1206L150THWR-A",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8789932872847106048",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8590890378415722496",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse 1206L150THWR-A",
+     "minImage": "",
+     "minImageAccessId": "8789932873806925824",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 120m\u03a9 300ms 3A 40m\u03a9 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "120m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "40m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>THWR-A",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44276494,
+     "componentLibraryType": "expand",
+     "stockCount": 3035,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "\u805a\u5408\u7269PTC\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_kuu-k1206l150-16ar_C42377642.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0883
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0693
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.06
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0529
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0472
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0444
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0428
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0455
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.051
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0851
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0668
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0578
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 3027,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "KUU-K1206L15016AR/C42377642",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.24,
+     "preMinPurchaseNum": 131,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0883,
+     "componentCode": "C42377642",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "K1206L150/16AR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585921396270092288",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8604434636592734208",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "KUU K1206L150/16AR",
+     "minImage": "",
+     "minImageAccessId": "8585921397806153728",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.9mm 130m\u03a9 16V 1mm 25m\u03a9 3.6mm 300ms 35A 3A 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "35A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "K<span class='lucene_highlight_class'>1206L150</span>/16AR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51790279,
+     "componentLibraryType": "expand",
+     "stockCount": 3310,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "13.2V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0515
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0407
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0353
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0312
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0279
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0263
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0392
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0269
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0253
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.034
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.03
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0496
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 3310,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YTL-1206L150_132V/C49318387",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.138,
+     "preMinPurchaseNum": 222,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0515,
+     "componentCode": "C49318387",
+     "componentBrandEn": "YTL",
+     "componentModelEn": "1206L150/13.2V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8763012472981082112",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8756297645260587008",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "YTL 1206L150/13.2V",
+     "minImage": "",
+     "minImageAccessId": "8763012474000027648",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.6mm 13.2V 130m\u03a9 1W 25m\u03a9 3.2mm 300ms 3A 40A 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "1W"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "13.2V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>1206L150</span>/13.2V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 2,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "1206L150"
+ },
+ "message": null
+}

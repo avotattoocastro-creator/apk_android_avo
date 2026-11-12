@@ -1,0 +1,970 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 6,
+   "list": [
+    {
+     "componentId": 15801,
+     "componentLibraryType": "base",
+     "stockCount": 1021120,
+     "componentTypeEn": "MOSFETs",
+     "erpComponentName": "AO3401A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/mosfets_alpha-omega-semicon-ao3401a_C15127.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0961
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0784
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0692
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0618
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0592
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0574
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0926
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0596
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0755
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.057
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0553
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0667
+      }
+     ],
+     "firstSortAccessId": "af6f8457ec9d400e9ccbfa9dd9889152",
+     "secondSortAccessId": "c379c2fda52a490e92606b90e6c81760",
+     "canPresaleNumber": 890219,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Alpha_OmegaSemicon-AO3401A/C15127",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.25125,
+     "preMinPurchaseNum": 116,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0961,
+     "componentCode": "C15127",
+     "componentBrandEn": "Alpha & Omega Semicon",
+     "componentModelEn": "AO3401A",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770913661298712576-C15127-front.jpg?x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=312b04c942a439cc8957b91dd495f794d2a7c32e1bcf4ee4add9433e1d262eb7",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2412061733_Alpha---Omega-Semicon-AO3401A_C15127.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8776572966194683904-C15127.pdf?response-content-disposition=attachment%3B%20filename%3DC15127.pdf%3B%20filename%2A%3DUTF-8%27%27C15127.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=adf88fb69dec18cb814fc6ed5fe87177307f68c4ddf9e86fb63b21c14e7af636",
+     "dataManualOfficialLink": "",
+     "componentName": "AOS AO3401A",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770913662368124928-C15127-front.jpg?x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3ddfbc46b396114c3bb1d230be8fdd43ef89a9b7aa4b2b35936511fa40fc3aef",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23",
+     "describe": "1 P-Channel 14nC@10V 30V 47m\u03a9@10V\u300160m\u03a9@4.5V\u300185m\u03a9@2.5V 4A 55pF 645pF 80pF 900mV SOT-23 MOSFETs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Input Capacitance(Ciss)",
+       "attribute_value_name": "645pF"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gate Threshold Voltage (Vgs(th))",
+       "attribute_value_name": "900mV"
+      },
+      {
+       "attribute_name_en": "Number",
+       "attribute_value_name": "1 P-Channel"
+      },
+      {
+       "attribute_name_en": "Gate Charge(Qg)",
+       "attribute_value_name": "14nC@10V"
+      },
+      {
+       "attribute_name_en": "Reverse Transfer Capacitance (Crss@Vds)",
+       "attribute_value_name": "55pF"
+      },
+      {
+       "attribute_name_en": "Current - Continuous Drain(Id)",
+       "attribute_value_name": "4A"
+      },
+      {
+       "attribute_name_en": "Drain to Source Voltage",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Output Capacitance(Coss)",
+       "attribute_value_name": "80pF"
+      },
+      {
+       "attribute_name_en": "Pd - Power Dissipation",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "RDS(on)",
+       "attribute_value_name": "47m\u03a9@10V\u300160m\u03a9@4.5V\u300185m\u03a9@2.5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "MOSFETs",
+     "secondSortName": "Transistors/Thyristors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C15127</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3341337,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SRAM",
+     "erpComponentName": "CY7C1512-70ZI",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sram_infineon-cypress-semicon-cy7c1512-70zi_C2955059.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.5113
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.5113
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 0.5113
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1983
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1918
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1885
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1816
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1911
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 0.4926
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4926
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1848
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.4926
+      }
+     ],
+     "firstSortAccessId": "9b9f940a554b41dfbb16725c834c0a0b",
+     "secondSortAccessId": "e5f33687c82c4ff291f410dddcbaedd5",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "3341337-CY7C151270ZI/C2955059",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 25,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 18,
+     "minPurchaseNum": 18,
+     "initialPrice": 0.5113,
+     "componentCode": "C2955059",
+     "componentBrandEn": "Infineon/Cypress Semicon",
+     "componentModelEn": "CY7C1512-70ZI",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590221457163776000-C2955059.pdf?response-content-disposition=attachment%3B%20filename%3DC2955059.pdf%3B%20filename%2A%3DUTF-8%27%27C2955059.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9d77b830f6b1313e44652a9fe10e80af58b16ce313fd2973a35df2e7be106f68",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon/CYPRESS CY7C1512-70ZI",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "-40\u2103~+85\u2103 110mA 4.5V~5.5V 512Kbit 5mA 70ns Parallel Port (Parallel) - SRAM ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Access Time",
+       "attribute_value_name": "70ns"
+      },
+      {
+       "attribute_name_en": "Memory Size",
+       "attribute_value_name": "512Kbit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.5V~5.5V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Auto power-down function"
+      },
+      {
+       "attribute_name_en": "Standby Current (Iq)",
+       "attribute_value_name": "5mA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Parallel Port (Parallel)"
+      },
+      {
+       "attribute_name_en": "Supply Current (Icc)",
+       "attribute_value_name": "110mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SRAM",
+     "secondSortName": "Memory",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18596188,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Thermal Fuses (TCO)",
+     "erpComponentName": "MHP-TAC15-12-72",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/thermal-fuses-tco_littelfuse-mhp-tac15-12-72_C17466995.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3535
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3535
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3535
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1411
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1364
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1341
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1292
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.136
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3406
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3406
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3406
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1314
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "7a7ba08df012451d883b2ca3bb14c085",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-MHP_TAC15_1272/C17466995",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 26,
+     "minPurchaseNum": 26,
+     "initialPrice": 0.3535,
+     "componentCode": "C17466995",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "MHP-TAC15-12-72",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311150959_Littelfuse-MHP-TAC15-12-72_C17466995.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8597523183482114048-C17466995.pdf?response-content-disposition=attachment%3B%20filename%3DC17466995.pdf%3B%20filename%2A%3DUTF-8%27%27C17466995.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c16d1e78f283129adbb42cfc1e39111d41b95a2d14e589bed3574eab9dc4de4c",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse MHP-TAC15-12-72",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "25A 72\u2103 - Thermal Fuses (TCO) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "25A"
+      },
+      {
+       "attribute_name_en": "Rated Functioning Temperature",
+       "attribute_value_name": "72\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Thermal Fuses (TCO)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18813891,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Thermal Fuses (TCO)",
+     "erpComponentName": "MHP-TAC15-12-77",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/thermal-fuses-tco_littelfuse-mhp-tac15-12-77_C17684618.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3135
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3135
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3135
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1251
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.121
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1189
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1145
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1205
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.302
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.302
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.302
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1166
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "7a7ba08df012451d883b2ca3bb14c085",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-MHP_TAC15_1277/C17684618",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 29,
+     "minPurchaseNum": 29,
+     "initialPrice": 0.3135,
+     "componentCode": "C17684618",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "MHP-TAC15-12-77",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311161711_Littelfuse-MHP-TAC15-12-77_C17684618.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603095066941026304-C17684618.pdf?response-content-disposition=attachment%3B%20filename%3DC17684618.pdf%3B%20filename%2A%3DUTF-8%27%27C17684618.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c14fb933f5077f3c51a15fca922aac7e35b4df28928387a629f7c1c8942982b6",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse MHP-TAC15-12-77",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "25A 77\u2103 - Thermal Fuses (TCO) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "25A"
+      },
+      {
+       "attribute_name_en": "Rated Functioning Temperature",
+       "attribute_value_name": "77\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Thermal Fuses (TCO)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18466284,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Thermal Fuses (TCO)",
+     "erpComponentName": "MHP-TAC15-12-77N",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/thermal-fuses-tco_littelfuse-mhp-tac15-12-77n_C17337122.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3199
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3199
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3199
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1277
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1234
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1213
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1169
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.123
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3082
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3082
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3082
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1189
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "7a7ba08df012451d883b2ca3bb14c085",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-MHP_TAC15_1277N/C17337122",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 29,
+     "minPurchaseNum": 29,
+     "initialPrice": 0.3199,
+     "componentCode": "C17337122",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "MHP-TAC15-12-77N",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311141617_Littelfuse-MHP-TAC15-12-77N_C17337122.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8600569036677652480-C17337122.pdf?response-content-disposition=attachment%3B%20filename%3DC17337122.pdf%3B%20filename%2A%3DUTF-8%27%27C17337122.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=266253c1b2ca62e6b74e884c572aad2abdb30e660f7c72f8d0705e0397f947e7",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse MHP-TAC15-12-77N",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "25A 77\u2103 - Thermal Fuses (TCO) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "25A"
+      },
+      {
+       "attribute_name_en": "Rated Functioning Temperature",
+       "attribute_value_name": "77\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Thermal Fuses (TCO)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18775843,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Thermal Fuses (TCO)",
+     "erpComponentName": "MHP-TAC15-12-72N",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/thermal-fuses-tco_littelfuse-mhp-tac15-12-72n_C17646581.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3328
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3328
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3328
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1328
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1284
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1262
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1216
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1279
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.3206
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.3206
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.3206
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1237
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "7a7ba08df012451d883b2ca3bb14c085",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-MHP_TAC15_1272N/C17646581",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 28,
+     "minPurchaseNum": 28,
+     "initialPrice": 0.3328,
+     "componentCode": "C17646581",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "MHP-TAC15-12-72N",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311161028_Littelfuse-MHP-TAC15-12-72N_C17646581.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602702175726821376-C17646581.pdf?response-content-disposition=attachment%3B%20filename%3DC17646581.pdf%3B%20filename%2A%3DUTF-8%27%27C17646581.pdf&x-oss-date=20261030T114436Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=52076ac4a285f29ef21e26ce2f50213739f36a64b37363d817597b01ff5ffd9d",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse MHP-TAC15-12-72N",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "25A 72\u2103 - Thermal Fuses (TCO) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "25A"
+      },
+      {
+       "attribute_name_en": "Rated Functioning Temperature",
+       "attribute_value_name": "72\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Thermal Fuses (TCO)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C15127"
+ },
+ "message": null
+}
