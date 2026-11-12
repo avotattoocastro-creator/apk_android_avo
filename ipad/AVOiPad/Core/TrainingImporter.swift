@@ -65,6 +65,14 @@ enum TrainingImporter {
         if let rider = AvoJSON.string(root, "riderName"), !rider.isEmpty { result.rider = rider } else { result.rider = "Sin identificar" }
         if let hc = AvoJSON.string(root, "horseCode"), !hc.isEmpty { result.horseCode = hc.trimmingCharacters(in: .whitespacesAndNewlines) }
         if let rc = AvoJSON.string(root, "riderCode"), !rc.isEmpty { result.riderCode = rc.trimmingCharacters(in: .whitespacesAndNewlines) }
+        // AVO-ASSIGN-1: the «asignacion» block wins over the top-level fields (which older readers use)
+        if let asg = AvoAssignment.read(root) {
+            result.fileAssignment = asg
+            if !asg.horseName.isEmpty { result.horse = asg.horseName }
+            if !asg.riderName.isEmpty { result.rider = asg.riderName }
+            if let hc = asg.horseCode { result.horseCode = hc }
+            if let rc = asg.riderCode { result.riderCode = rc }
+        }
         result.declaredDistanceM = AvoJSON.number(root, "distanceM")
         result.declaredDurationS = AvoJSON.number(root, "durationS")
         result.declaredMaxSpeedMs = AvoJSON.number(root, "maxSpeedMs")

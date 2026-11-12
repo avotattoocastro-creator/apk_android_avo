@@ -179,6 +179,8 @@ struct LibraryEntry: Codable, Equatable {
     var originalName: String = ""
     var storedPath: String = ""
     var importedUtc: Date = Date(timeIntervalSince1970: 0)
+    /// File SHA-256 before AVO-ASSIGN-1 rewrote the manifest: re-importing the original is still a duplicate.
+    var previousSha256: [String] = []
 
     enum CodingKeys: String, CodingKey {
         case sha256 = "Sha256"
@@ -186,6 +188,7 @@ struct LibraryEntry: Codable, Equatable {
         case originalName = "OriginalName"
         case storedPath = "StoredPath"
         case importedUtc = "ImportedUtc"
+        case previousSha256 = "PreviousSha256"
     }
 
     init(sha256: String = "", sessionId: String = "", originalName: String = "", storedPath: String = "", importedUtc: Date = Date(timeIntervalSince1970: 0)) {
@@ -205,10 +208,12 @@ struct LibraryEntry: Codable, Equatable {
             }
             importedUtc = d
         }
+        previousSha256 = try c.decodeIfPresent([String].self, forKey: .previousSha256) ?? []
     }
 
     func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
+        if !previousSha256.isEmpty { try c.encode(previousSha256, forKey: .previousSha256) }
         try c.encode(sha256, forKey: .sha256)
         try c.encode(sessionId, forKey: .sessionId)
         try c.encode(originalName, forKey: .originalName)
@@ -265,7 +270,7 @@ final class TrainingLibrary {
         var created: String? = nil
         do {
             let sha = try TrainingLibrary.fileSha256(path)
-            if let existing = entries.first(where: { $0.sha256 == sha && AvoFiles.exists($0.storedPath) }) {
+            if let existing = entries.first(where: { ($0.sha256 == sha || $0.previousSha256.contains(sha)) && AvoFiles.exists($0.storedPath) }) {
                 let again = try TrainingImporter.importFile(existing.storedPath)
                 again.fileSha256 = sha
                 again.sourcePath = path
@@ -299,6 +304,23 @@ final class TrainingLibrary {
             if let c = created { try? FileManager.default.removeItem(atPath: c) }
             return ImportOutcome(session: nil, file: path, status: "Rechazado", duplicate: false, error: error.localizedDescription)
         }
+    }
+
+    /// AVO-ASSIGN-1: writes the assignment into the library copy of a session (.avo only; .avr files have no manifest).
+    /// The RAW segments do not change; the file SHA-256 does, so the old one is kept for duplicate detection.
+    /// Returns the new file SHA-256, or nil if the session has no .avo in the library.
+    @discardableResult
+    func writeAssignment(_ sessionId: String, _ a: AvoAssignmentData, rawHorse: String?, rawRider: String?) throws -> String? {
+        guard let i = entries.firstIndex(where: { $0.sessionId == sessionId && AvoFiles.exists($0.storedPath)
+                                                  && $0.storedPath.lowercased().hasSuffix(".avo") }) else { return nil }
+        try AvoAssignment.write(entries[i].storedPath, a, rawHorse: rawHorse, rawRider: rawRider)
+        let sha = try TrainingLibrary.fileSha256(entries[i].storedPath)
+        if sha != entries[i].sha256 {
+            if !entries[i].previousSha256.contains(entries[i].sha256) { entries[i].previousSha256.append(entries[i].sha256) }
+            entries[i].sha256 = sha
+            try saveIndex()
+        }
+        return sha
     }
 
     func storedFiles() -> [String] { entries.filter { AvoFiles.exists($0.storedPath) }.map { $0.storedPath } }

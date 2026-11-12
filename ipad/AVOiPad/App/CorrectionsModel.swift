@@ -60,6 +60,11 @@ final class CorrectionsModel {
         var parts: [String] = []
         let breedText: String = app.stable.store.find(.horse, app.horseKey(item))?.breed ?? ""
         parts.append("\"raza\":" + AvoJSON.quote(TrackWorkBreed.engineName(breedText)))
+        // AVO-ASSIGN-1: the engine reports the assigned horse/rider (the RAW header may still say HORSE_001)
+        let h = app.stable.store.resolve(item.session, .horse), r = app.stable.store.resolve(item.session, .rider)
+        if let asg = AvoAssignment.engineOption(horseCode: h.code, horseName: h.known ? h.name : nil, riderCode: r.code, riderName: r.known ? r.name : nil) {
+            parts.append(asg)
+        }
         if let c = entries[item.id], !c.isEmpty {
             let f: String = c.optionsFragment()
             if !f.isEmpty { parts.append(f) }

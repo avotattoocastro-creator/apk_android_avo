@@ -439,6 +439,7 @@ enum SessionWindow {
         let c = TrainingSession()
         c.sessionId = s.sessionId; c.sha256 = s.sha256; c.horse = s.horse; c.rider = s.rider; c.horseCode = s.horseCode
         c.riderCode = s.riderCode; c.horseInFile = s.horseInFile; c.riderInFile = s.riderInFile; c.identityApplied = s.identityApplied
+        c.rawHorse = s.rawHorse; c.rawRider = s.rawRider; c.fileAssignment = s.fileAssignment
         c.startedAt = s.startedAt; c.sourceName = s.sourceName
         c.integrity = s.integrity; c.hasRawTelemetry = s.hasRawTelemetry; c.declaredDistanceM = s.declaredDistanceM
         c.declaredDurationS = s.declaredDurationS

@@ -331,6 +331,28 @@ final class StableModel {
     func pageShown() { refreshStable() }
 
     // ---------------------------------------------------------------- identities
+    /// AVO-ASSIGN-1: writes the assignment into the library copy (.avo) of each training so that the exported package,
+    /// Android and Windows see the same horse. The RAW segments are never changed. If a file cannot be written the
+    /// assignment stays in this iPad's Cuadra only and it is reported.
+    func writeAssignmentToFiles(_ items: [SessionItem]) {
+        var failed = 0
+        for s in items where !s.isSynthetic {
+            let h = store.resolve(s.session, .horse), r = store.resolve(s.session, .rider)
+            let a = AvoAssignmentData(horseCode: h.code, horseName: h.known ? h.name : "", riderCode: r.code, riderName: r.known ? r.name : "",
+                                      updated: Date(), app: "ipad")
+            do {
+                if let sha = try app.library.writeAssignment(s.id, a, rawHorse: s.session.rawHorse, rawRider: s.session.rawRider) {
+                    s.session.fileSha256 = sha
+                }
+                s.engine = nil   // the analysis carries the identity: recomputed with the new assignment
+            } catch {
+                failed += 1
+                app.log.warn("cuadra", "no se pudo escribir la asignación en el archivo de \(s.id): \(error.localizedDescription)", error)
+            }
+        }
+        if failed > 0 { app.status = "Asignación guardada en este iPad; \(failed) archivo(s) no se pudieron actualizar (ver registro)" }
+    }
+
     /// Applies the Cuadra/Jinetes names to one training (in memory; the file is never changed).
     func applyIdentity(_ s: SessionItem) {
         let r = store.apply(s.session)
@@ -374,6 +396,7 @@ final class StableModel {
         for s in items {
             do {
                 try store.registerFromTraining(s.session)
+                try store.adoptFileAssignment(s.session)   // AVO-ASSIGN-1: newer assignment made in another app
             } catch {
                 app.log.warn("cuadra", error.localizedDescription, error)
             }
@@ -474,6 +497,7 @@ final class StableModel {
             let h: String? = try codeFor(.horse, assignHorseText)
             let r: String? = try codeFor(.rider, assignRiderText)
             try store.assign(t.id, setHorse: true, horseCode: h, setRider: true, riderCode: r)
+            var touched: [SessionItem] = [t]
             var extra = 0
             if assignAlsoUnknown {
                 for s in app.sessions where s !== t {
@@ -481,12 +505,14 @@ final class StableModel {
                     let sr: Bool = !s.riderKnown && r != nil
                     if !sh && !sr { continue }
                     try store.assign(s.id, setHorse: sh, horseCode: h, setRider: sr, riderCode: r)
+                    touched.append(s)
                     extra += 1
                 }
             }
             app.log.info("cuadra", "asignación", ["session": t.id, "horse": h ?? "", "rider": r ?? "", "extra": extra] as [String: Any])
             assignVisible = false
             reapplyIdentities()
+            writeAssignmentToFiles(touched)
             app.status = "Asignado: \(t.horse) · \(t.rider)" + (extra > 0 ? " (y \(extra) entrenamiento(s) más)" : "")
         } catch {
             assignMessage = error.localizedDescription
@@ -515,6 +541,7 @@ final class StableModel {
                     return
                 }
                 self.reapplyIdentities()
+                self.writeAssignmentToFiles(list)
                 p.select(code)
                 p.message = "Asignado a \(list.count) entrenamiento(s)."
             }
