@@ -47,6 +47,11 @@ public sealed class TrainingSession
     /// <summary>Names exactly as the file carries them (Horse/Rider may later show the Cuadra/Jinetes name; the file is never changed).</summary>
     public string HorseInFile { get; set; } = "Sin identificar";
     public string RiderInFile { get; set; } = "Sin identificar";
+    /// <summary>What the AVORAW1 header itself says (horse_name / rider_name), whatever the manifest says (AVO-ASSIGN-1 «raw»).</summary>
+    public string? RawHorse { get; set; }
+    public string? RawRider { get; set; }
+    /// <summary>The «asignacion» block of the .avo manifest (AVO-ASSIGN-1), null if the file has none.</summary>
+    public AvoAssignmentData? FileAssignment { get; set; }
     /// <summary>Set once the Cuadra/Jinetes names have been applied to Horse/Rider (in memory only).</summary>
     public bool IdentityApplied { get; set; }
     public DateTimeOffset? StartedAt { get; set; }

@@ -52,6 +52,15 @@ public static class TrainingImporter
         result.Rider = String(root, "riderName") is { Length: > 0 } rider ? rider : "Sin identificar";
         if (String(root, "horseCode") is { Length: > 0 } hc) result.HorseCode = hc.Trim();
         if (String(root, "riderCode") is { Length: > 0 } rc) result.RiderCode = rc.Trim();
+        // AVO-ASSIGN-1: the «asignacion» block wins over the top-level fields (which older readers use)
+        if (AvoAssignment.Read(root) is { } asg)
+        {
+            result.FileAssignment = asg;
+            if (asg.HorseName.Length > 0) result.Horse = asg.HorseName;
+            if (asg.RiderName.Length > 0) result.Rider = asg.RiderName;
+            if (asg.HorseCode is not null) result.HorseCode = asg.HorseCode;
+            if (asg.RiderCode is not null) result.RiderCode = asg.RiderCode;
+        }
         result.DeclaredDistanceM = Number(root, "distanceM");
         result.DeclaredDurationS = Number(root, "durationS");
         result.DeclaredMaxSpeedMs = Number(root, "maxSpeedMs");

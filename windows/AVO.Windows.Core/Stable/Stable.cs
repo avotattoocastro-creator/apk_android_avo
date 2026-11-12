@@ -206,6 +206,26 @@ public sealed class StableStore
     }
 
     // ------------------------------------------------------------------ assignments
+    /// <summary>
+    /// AVO-ASSIGN-1: a file reassigned in another app (newer «asignacion» than this PC's assignment) wins. Registers the horse
+    /// and rider if needed. Returns true when this PC's assignment changed.
+    /// </summary>
+    public bool AdoptFileAssignment(TrainingSession s)
+    {
+        if (s.FileAssignment is not { } fa) return false;
+        var local = Assignment(s.SessionId);
+        if (local is not null && local.Updated >= fa.UpdatedUtc) return false;
+        RegisterOne(IdentityKind.Horse, fa.HorseCode, fa.HorseName, s.IsSynthetic);
+        RegisterOne(IdentityKind.Rider, fa.RiderCode, fa.RiderName, s.IsSynthetic);
+        string? h = (Find(IdentityKind.Horse, fa.HorseCode) ?? FindByName(IdentityKind.Horse, fa.HorseName))?.Code;
+        string? r = (Find(IdentityKind.Rider, fa.RiderCode) ?? FindByName(IdentityKind.Rider, fa.RiderName))?.Code;
+        if (h is null && r is null) return false;
+        if (local is not null && local.HorseCode == h && local.RiderCode == r) return false;
+        lock (_gate) _d.Assignments[s.SessionId] = new TrainingAssignment { HorseCode = h, RiderCode = r, Updated = fa.UpdatedUtc };
+        Save();
+        return true;
+    }
+
     public TrainingAssignment? Assignment(string sessionId)
     {
         lock (_gate) return _d.Assignments.TryGetValue(sessionId, out var a) ? a : null;
