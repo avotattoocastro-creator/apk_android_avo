@@ -1,0 +1,239 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 5993808,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Accelerometers",
+     "erpComponentName": "6\u8f74\u60ef\u6027\u6d4b\u91cf\u5355\u5143\uff08IMU\uff09\uff0c\u5e26\u5d4c\u5165\u5f0f\u4f20\u611f\u5668\u878d\u5408\u3001I3C\u3001OIS/EIS\uff0c\u9002\u7528\u4e8e\u667a\u80fd\u5e94\u7528",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/accelerometers_stmicroelectronics-lsm6dsvtr_C5267399.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.2628
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.1908
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.1433
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.0942
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.0942
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.0942
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 3.9439
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.9912
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.1064
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 3.9439
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 3.9439
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.037
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "7127ae9b6b6c4ae0ae8f8f53ff827b21",
+     "canPresaleNumber": -176,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "STMicroelectronics-LSM6DSVTR/C5267399",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 15.29271,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 4.2628,
+     "componentCode": "C5267399",
+     "componentBrandEn": "STMicroelectronics",
+     "componentModelEn": "LSM6DSVTR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585205701468180480",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309061516_STMicroelectronics-LSM6DSVTR_C5267399.pdf",
+     "dataManualFileAccessId": "8590904606862233600",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ST LSM6DSVTR",
+     "minImage": "",
+     "minImageAccessId": "8585205702507421696",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-14(2.5x3)",
+     "describe": "-40\u2103~+85\u2103 1.71V~3.6V 16bit 4.5KB Accelerometer Gyroscope SPI\u3001I2C\u3001I3C X,Y,Z X,Y,Z \u00b116g \u00b14000dps LGA-14(2.5x3) Accelerometers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Gyroscope Measurement Range (MAX)",
+       "attribute_value_name": "\u00b14000dps"
+      },
+      {
+       "attribute_name_en": "Output Bits",
+       "attribute_value_name": "16bit"
+      },
+      {
+       "attribute_name_en": "Standby Current",
+       "attribute_value_name": "2.6uA"
+      },
+      {
+       "attribute_name_en": "Sensor Type",
+       "attribute_value_name": "IMU (accelerometer + gyroscope)"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.71V~3.6V"
+      },
+      {
+       "attribute_name_en": "Acceleration Measurement Range (MAX)",
+       "attribute_value_name": "\u00b116g"
+      },
+      {
+       "attribute_name_en": "Cache Size",
+       "attribute_value_name": "4.5KB"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Gyroscope Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Accelerometer Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI\u3001I2C\u3001I3C"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Accelerometers",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C5267399</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C5267399"
+ },
+ "message": null
+}

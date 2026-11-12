@@ -1,0 +1,235 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 7204880,
+     "componentLibraryType": "expand",
+     "stockCount": 610,
+     "componentTypeEn": "Magnetic Latching Relays",
+     "erpComponentName": "3V 1A \u4e24\u7ec4\u8f6c\u6362:2C(\u53cc\u5200\u53cc\u63b7-\u8f6c\u6362)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/magnetic-latching-relays_omron-electronics-g6ku-2f-y-tr-dc3_C6259328.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.6099
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.3495
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.2086
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.0465
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 899,
+       "productPrice": 0.9761
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 0.9433
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.0081
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.2999
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 0.9087
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.1643
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.5508
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 899,
+       "productPrice": 0.9403
+      }
+     ],
+     "firstSortAccessId": "4effce29e9e84c2d97e464b0ba0f3279",
+     "secondSortAccessId": "e4ecd2b553aa4579be61f50738f22047",
+     "canPresaleNumber": 561,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "OmronElectronics-G6KU_2F_Y_TRDC3/C6259328",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 900,
+     "shopCostPrice": 4.3934,
+     "preMinPurchaseNum": 6,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.6099,
+     "componentCode": "C6259328",
+     "componentBrandEn": "Omron Electronics",
+     "componentModelEn": "G6KU-2F-Y-TR DC3",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585303114651455488",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312091453_Omron-Electronics-G6KU-2F-Y-TR-DC3_C6259328.pdf",
+     "dataManualFileAccessId": "8601115427313766400",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "OMRON G6KU-2F-Y-TR DC3",
+     "minImage": "",
+     "minImageAccessId": "8585303115558506496",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,10x6.5mm",
+     "describe": "-40\u2103~+70\u2103 1A 2 Form C: 2C (DPDT-CO) 3V 3ms 3ms 60V@DC\u3001125V@AC Silver + Gold Plated Single Coil SMD,10x6.5mm Magnetic Latching Relays ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "10mm"
+      },
+      {
+       "attribute_name_en": "Operate Time",
+       "attribute_value_name": "3ms"
+      },
+      {
+       "attribute_name_en": "Switching Current(Max)",
+       "attribute_value_name": "1A"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Silver + Gold Plated"
+      },
+      {
+       "attribute_name_en": "Coil Voltage",
+       "attribute_value_name": "3V"
+      },
+      {
+       "attribute_name_en": "Release Time",
+       "attribute_value_name": "3ms"
+      },
+      {
+       "attribute_name_en": "Switching Voltage(Max)",
+       "attribute_value_name": "60V@DC\u3001125V@AC"
+      },
+      {
+       "attribute_name_en": "Coil Type",
+       "attribute_value_name": "Single Coil"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "6.5mm"
+      },
+      {
+       "attribute_name_en": "Contact Form",
+       "attribute_value_name": "2 Form C: 2C (DPDT-CO)"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Magnetic Latching Relays",
+     "secondSortName": "Relays",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C6259328</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C6259328"
+ },
+ "message": null
+}

@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-29T23:13:12+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_BACK_V4_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 68.983,
+                        "y": 123.7
+                    },
+                    "uuid": "566e1beb-cc8b-54ec-8bcf-14d3cf919998"
+                },
+                {
+                    "description": "Circle of MR1 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 120.406
+                    },
+                    "uuid": "4be55da0-8c3f-5fc4-ae89-10410ead0ed7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 65.7,
+                        "y": 76.3
+                    },
+                    "uuid": "3cbc5cf2-4584-5b9c-a32d-7e6318dd59b8"
+                },
+                {
+                    "description": "Circle of MR2 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 81.925
+                    },
+                    "uuid": "bb3b1144-d689-5842-92ae-6ddc04b69cd2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        }
+    ]
+}

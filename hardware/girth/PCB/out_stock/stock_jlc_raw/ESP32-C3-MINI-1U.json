@@ -1,0 +1,964 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 7,
+   "list": [
+    {
+     "componentId": 3174851,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "ESP32-C3-MINI-1U",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0002
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0002
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-ESP32_C3_MINI1U/C9900000796",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.001,
+     "preMinPurchaseNum": 1000,
+     "minPurchaseNum": 1000,
+     "initialPrice": 0.0002,
+     "componentCode": "C9900000796",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-C3-MINI-1U",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-C3-MINI-1U",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD_12.5X13.2",
+     "describe": "SMD_12.5X13.2 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44422203,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "ESP32-C3-MINI-1U",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-ESP32_C3_MINI1U/C9900162485",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900162485",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-C3-MINI-1U",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-C3-MINI-1U",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,12.5x13.2mm",
+     "describe": "SMD,12.5x13.2mm New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3191061,
+     "componentLibraryType": "expand",
+     "stockCount": 1191,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u652f\u63012.4GHz Wi-Fi\u548c\u84dd\u72595\u7684\u5c0f\u5c3a\u5bf8\u6a21\u7ec4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-c3-mini-1u-n4_C2911374.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.1542
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.8152
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.6121
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.4451
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.3321
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.2813
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.3553
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.2465
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.5162
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.0384
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.7119
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.1976
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 1062,
+     "componentProductType": 2,
+     "mergedComponentCode": "C3013922",
+     "urlSuffix": "3191061-ESP32_C3_MINI_1UN4/C2911374",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "C3013922",
+     "replaceUrlSuffix": "3522392-ESP32_C3_MINI_1UH4/C3013922",
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 11.14,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.1542,
+     "componentCode": "C2911374",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-C3-MINI-1U-N4",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583497715070210048",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2206021800_Espressif-Systems-ESP32-C3-MINI-1U-N4_C2911374.pdf",
+     "dataManualFileAccessId": "8588919855575126016",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-C3-MINI-1U-N4",
+     "minImage": "",
+     "minImageAccessId": "8583497715955478528",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,13.2x12.5mm",
+     "describe": "-104dBm -40\u2103~+85\u2103 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FN4 UART\u3001SPI\u3001I2C\u3001I2S\u3001USB SMD,13.2x12.5mm WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-104dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "20.5dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-C3FN4"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SPI\u3001I2C\u3001I2S\u3001USB"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "82mA"
+      },
+      {
+       "attribute_name_en": "Wireless Standard",
+       "attribute_value_name": "Bluetooth5.0"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "350mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>-N4",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3522392,
+     "componentLibraryType": "expand",
+     "stockCount": 2214,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6  \u547d\u540d\u66f4\u6539\uff0c4MB\u5373H4\uff0c\u4e3a\u5c3e\u7f00\uff0c\u6a21\u7ec4\u4e1d\u5370\u66f4\u6539\u4e3aH4\uff0cH\u4e3a\u9ad8\u6e29105\u00b0C\uff0c\u8f6f\u786c\u4ef6\u65e0\u66f4\u6539 \u652f\u63012.4GHz Wi-Fi\u548c\u84dd\u72595\u7684\u5c0f\u5c3a\u5bf8\u6a21\u7ec4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-c3-mini-1u-h4_C3013922.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.4489
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.0854
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.8692
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.6891
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.5679
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.5138
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 2.5904
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 2.4216
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 2.4736
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.7639
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.3224
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.9721
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 1778,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "3522392-ESP32_C3_MINI_1UH4/C3013922",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 11.94,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.4489,
+     "componentCode": "C3013922",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-C3-MINI-1U-H4",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583696819906097152",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2206021745_Espressif-Systems-ESP32-C3-MINI-1U-H4_C3013922.pdf",
+     "dataManualFileAccessId": "8589835524556435456",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-C3-MINI-1U-H4",
+     "minImage": "",
+     "minImageAccessId": "8583696820787171328",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,13.2x12.5mm",
+     "describe": "-104dBm -40\u2103~+105\u2103 2.4GHz 20.5dBm 350mA 3V~3.6V 82mA Bluetooth5.0 ESP32-C3FH4 UART\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB SMD,13.2x12.5mm WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-104dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "20.5dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Integrated Bluetooth function\u3001Support USB interface"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-C3FH4"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "82mA"
+      },
+      {
+       "attribute_name_en": "Wireless Standard",
+       "attribute_value_name": "Bluetooth5.0"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "350mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>-H4",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 24184846,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "ESP32-C3-MINI-1U-H4",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "24184846-ESP32_C3_MINI_1UH4/C9900122610",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 100,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 100,
+     "minPurchaseNum": 100,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900122610",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-C3-MINI-1U-H4",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-C3-MINI-1U-H4",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,12.5x13.2mm",
+     "describe": "SMD,12.5x13.2mm New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>-H4",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 51643679,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011\u4e0d\u5e26\u56fa\u4ef6",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.8046
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 9.8046
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 9.8046
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 3.9124
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.7814
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.7175
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 3.7688
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.5811
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 9.4448
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.4448
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.6426
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 9.4448
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "51643679-ESP32_C3_MINI_1UN4X/C49230958",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 9.8046,
+     "componentCode": "C49230958",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-C3-MINI-1U-N4X",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-C3-MINI-1U-N4X",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>-N4X",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 53011755,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "HWDG",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.2434
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.2434
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.2434
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.8905
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.7939
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.7464
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.7844
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.6456
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 6.9775
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.9775
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.6913
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.9775
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "53011755-ESP32_C3_MINI_1UH4X/C50389650",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 7.2434,
+     "componentCode": "C50389650",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-C3-MINI-1U-H4X",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-C3-MINI-1U-H4X",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- HWDG ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "HWDG",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-C3-MINI-1U</span>-H4X",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "ESP32-C3-MINI-1U"
+ },
+ "message": null
+}

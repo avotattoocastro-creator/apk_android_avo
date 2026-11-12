@@ -1,0 +1,777 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 44248320,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "S2B-PH-SM4-TB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": "b1a62a896e084350a4358222151368b0",
+     "secondSortAccessId": "0d8193397208416a9e2a837f72446a55",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-S2B_PH_SM4TB/C9900150953",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900150953",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "S2B-PH-SM4-TB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT S2B-PH-SM4-TB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=2mm,2P",
+     "describe": "SMD,P=2mm,2P New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>S2B-PH-SM4-TB</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56695431,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011S2B-PH-SM4-TB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-S2B_PH_SM4TB/C9900258397",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900258397",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "S2B-PH-SM4-TB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT S2B-PH-SM4-TB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "Through hole",
+     "describe": "Through hole SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>S2B-PH-SM4-TB</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60454580,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011S2B-PH-SM4-TB",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-S2B_PH_SM4TB/C9900322031",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900322031",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "S2B-PH-SM4-TB",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT S2B-PH-SM4-TB",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "Through hole",
+     "describe": "Through hole SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>S2B-PH-SM4-TB</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 57972444,
+     "componentLibraryType": "expand",
+     "stockCount": 5221,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "1x2P \u95f4\u8ddd:2mm \u5367\u8d34 \u7cfb\u5217:PH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0469
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0374
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0325
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0289
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0261
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0246
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0278
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0237
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0251
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0452
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0313
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.036
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 5062,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "XYECONN-XY_S2B_PH_SM4TB/C54582899",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1219,
+     "preMinPurchaseNum": 242,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0469,
+     "componentCode": "C54582899",
+     "componentBrandEn": "XYECONN",
+     "componentModelEn": "XY-S2B-PH-SM4-TB",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8767825959066050560",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "XYECONN XY-S2B-PH-SM4-TB",
+     "minImage": "",
+     "minImageAccessId": "8767825960135462912",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=2mm,Surface Mount\uff0cRight Angle",
+     "describe": "SMD,P=2mm,\u5367\u8d34 Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "250V"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Beige"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2A"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "1x2P"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "7.59mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "8mm"
+      },
+      {
+       "attribute_name_en": "Reference Series",
+       "attribute_value_name": "PH"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "2P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Brass"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "Auxiliary Solder Pin"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.6mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "LCP"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "2"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "XY-<span class='lucene_highlight_class'>S2B-PH-SM4-TB</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 280164,
+     "componentLibraryType": "expand",
+     "stockCount": 14,
+     "componentTypeEn": "Wire To Board Connector",
+     "erpComponentName": "1x2P \u95f4\u8ddd:2mm \u5367\u8d34 \u7cfb\u5217:PH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wire-to-board-connector_jst-s2b-ph-sm4-tb-lf-sn_C295747.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2231
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1778
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 999,
+       "productPrice": 0.1556
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 0.136
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 4999,
+       "productPrice": 0.1306
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1273
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1226
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1712
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2149
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 0.131
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 999,
+       "productPrice": 0.1499
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 4999,
+       "productPrice": 0.1258
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "173a9139d1ba47df8739d202796819ee",
+     "canPresaleNumber": -1420,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JST-S2B_PH_SM4_TB_LF_SN/C295747",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.55145,
+     "preMinPurchaseNum": 41,
+     "minPurchaseNum": 41,
+     "initialPrice": 0.2231,
+     "componentCode": "C295747",
+     "componentBrandEn": "JST",
+     "componentModelEn": "S2B-PH-SM4-TB(LF)(SN)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8718787092454985728",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2102031704_JST-S2B-PH-SM4-TB-LF-SN_C295747.pdf",
+     "dataManualFileAccessId": "8587740317575483392",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JST S2B-PH-SM4-TB(LF)(SN)",
+     "minImage": "",
+     "minImageAccessId": "8718787093737902080",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=2mm,Surface Mount\uff0cRight Angle",
+     "describe": "-25\u2103~+85\u2103 1 100V 1x2P 2 2A 2P 2mm 5.5mm 7.9mm 8.6mm Auxiliary Solder Pin Beige Copper alloy PA PH Surface Mount, Right Angle Tin UL94V-0 SMD,P=2mm,\u5367\u8d34 Wire To Board Connector ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-25\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Number of Rows",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_name_en": "Color",
+       "attribute_value_name": "Beige"
+      },
+      {
+       "attribute_name_en": "Current Rating",
+       "attribute_value_name": "2A"
+      },
+      {
+       "attribute_name_en": "Pins Structure",
+       "attribute_value_name": "1x2P"
+      },
+      {
+       "attribute_name_en": "Row Spacing",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount, Right Angle"
+      },
+      {
+       "attribute_name_en": "Flame Retardant Rating",
+       "attribute_value_name": "UL94V-0"
+      },
+      {
+       "attribute_name_en": "Y-Width of Bottom Edge on Board",
+       "attribute_value_name": "8.6mm"
+      },
+      {
+       "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+       "attribute_value_name": "7.9mm"
+      },
+      {
+       "attribute_name_en": "Reference Series",
+       "attribute_value_name": "PH"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Tin"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "2P"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Copper Alloy"
+      },
+      {
+       "attribute_name_en": "Supplementary Features",
+       "attribute_value_name": "Auxiliary Solder Pin"
+      },
+      {
+       "attribute_name_en": "Z-Height of the Board",
+       "attribute_value_name": "5.5mm"
+      },
+      {
+       "attribute_name_en": "Plastic Material",
+       "attribute_value_name": "PA"
+      },
+      {
+       "attribute_name_en": "Number of PINs Per Row",
+       "attribute_value_name": "2"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wire To Board Connector",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>S2B-PH-SM4-TB</span>(LF)(SN)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "S2B-PH-SM4-TB"
+ },
+ "message": null
+}

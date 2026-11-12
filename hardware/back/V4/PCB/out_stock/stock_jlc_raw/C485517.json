@@ -1,0 +1,239 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 493903,
+     "componentLibraryType": "expand",
+     "stockCount": 30044,
+     "componentTypeEn": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "erpComponentName": "3.3V 1A 5.5V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/voltage-regulators-linear-low-drop-out-ldo-regulators_texas-instruments-tlv75733pdbvr_C485517.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2162
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1697
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.147
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1269
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1213
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1179
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.1169
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1417
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.1136
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.1222
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2083
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1635
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "0bc894ef3cfe4df6b5376bcb5a199f74",
+     "canPresaleNumber": 26804,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-TLV75733PDBVR/C485517",
+     "leastPatchNumber": 5,
+     "lossNumber": 1,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.55929,
+     "preMinPurchaseNum": 42,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2162,
+     "componentCode": "C485517",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "TLV75733PDBVR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583408922245386240-C485517/C485517-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b96da7239c9965378355be894c4350b65aab175265cffe5ff723e8a1e2e72ad1",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Texas-Instruments-TLV75733PDBVR_C485517.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588904667091124224-C485517.pdf?response-content-disposition=attachment%3B%20filename%3DC485517.pdf%3B%20filename%2A%3DUTF-8%27%27C485517.pdf&x-oss-date=20261030T114519Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=26091fe7afa7362931afe5cf60f35a7f7deeee37d304ae377ccb1e1dd9e19220",
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/tlv757p",
+     "componentName": "TI TLV75733PDBVR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583408923101024256-C485517/C485517-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114519Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b72911931579676a1bbf6b01459412279020c7849eaeec07e4aaec20c8f1c114",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23-5",
+     "describe": "-40\u2103~+125\u2103@(Tj) 1 1A 3.3V 40uA 46dB@(100kHz) 5.5V 650mV@(1A) 71.5uVrms Fixed Positive Under Voltage Lockout\u3001Over Current Protection\u3001Over Temperature Protection\u3001Soft Start SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Supply Rejection Ratio (PSRR)",
+       "attribute_value_name": "46dB@(100kHz)"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103@(Tj)"
+      },
+      {
+       "attribute_name_en": "standby current",
+       "attribute_value_name": "40uA"
+      },
+      {
+       "attribute_name_en": "Noise",
+       "attribute_value_name": "71.5uVrms"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "5.5V"
+      },
+      {
+       "attribute_name_en": "Output Type",
+       "attribute_value_name": "Fixed"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1A"
+      },
+      {
+       "attribute_name_en": "Output Configuration",
+       "attribute_value_name": "Positive"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over Current Protection\u3001Short Circuit Protection\u3001Thermal shutdown\u3001Enable control\u3001Input under-voltage protection\u3001Output discharge\u3001Built-in soft-start"
+      },
+      {
+       "attribute_name_en": "Voltage Dropout",
+       "attribute_value_name": "650mV@(1A)"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "3.3V"
+      },
+      {
+       "attribute_name_en": "Number of Outputs",
+       "attribute_value_name": "1"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C485517</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C485517"
+ },
+ "message": null
+}

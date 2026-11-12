@@ -1,0 +1,2466 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 15,
+   "list": [
+    {
+     "componentId": 2659,
+     "componentLibraryType": "base",
+     "stockCount": 7297951,
+     "componentTypeEn": "LED Indication - Discrete",
+     "erpComponentName": "0603 \u7ea2\u706f \u9ad8\u4eae",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/led-indication-discrete_hubei-kento-elec-kt-0603r_C2286.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0077
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3999,
+       "productPrice": 0.0059
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 7999,
+       "productPrice": 0.0046
+      },
+      {
+       "startNumber": 8000,
+       "endNumber": 47999,
+       "productPrice": 0.004
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": 99999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0036
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0074
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 7999,
+       "productPrice": 0.0044
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3999,
+       "productPrice": 0.0057
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": 99999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 8000,
+       "endNumber": 47999,
+       "productPrice": 0.0038
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "f28f64fde70b4189a16bd6c99251d5c8",
+     "canPresaleNumber": 6611988,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Hubei_KENTOElec-KT0603R/C2286",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.01797,
+     "preMinPurchaseNum": 1530,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0077,
+     "componentCode": "C2286",
+     "componentBrandEn": "Hubei KENTO Elec",
+     "componentModelEn": "KT-0603R",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762738298827612160-C2286-front.jpg?x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7c172872140d03960da4a60aca80432805a1cb097cb99d12f17d1ee9cda8ec8f",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8763907065041293312-C2286.pdf?response-content-disposition=attachment%3B%20filename%3DC2286.pdf%3B%20filename%2A%3DUTF-8%27%27C2286.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=737477b6b68429265186121d282631ccd1e637ba1a3df3799c533e25c33c212d",
+     "dataManualOfficialLink": "",
+     "componentName": "Hubei KENTO Elec KT-0603R",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762738299985375232-C2286-front.jpg?x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cc4b25be02a5e4a171426d009c104b85c251ade33140343aa510662d1bb40bc3",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0603",
+     "describe": "-40\u2103~+85\u2103 1.6mm x 0.8mm square LED 1.8V~2.4V 120\u00b0 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Mounting Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Wavelength - Dominant",
+       "attribute_value_name": "615nm~630nm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Color Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Test Current",
+       "attribute_value_name": "20mA"
+      },
+      {
+       "attribute_name_en": "Viewing Angle",
+       "attribute_value_name": "120\u00b0"
+      },
+      {
+       "attribute_name_en": "Lamp Holder Type",
+       "attribute_value_name": "1.6mm x 0.8mm square LED"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity",
+       "attribute_value_name": "300mcd"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "40mW"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "Discrete Diode"
+      },
+      {
+       "attribute_name_en": "Illumination Color",
+       "attribute_value_name": "Red"
+      },
+      {
+       "attribute_name_en": "Lens Color",
+       "attribute_value_name": "Water Clear"
+      },
+      {
+       "attribute_name_en": "Peak Wavelength",
+       "attribute_value_name": "645nm"
+      },
+      {
+       "attribute_name_en": "Voltage - Forward(Vf)",
+       "attribute_value_name": "1.8V~2.4V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "LED Indication - Discrete",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C2286</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21025129,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "SN9C2286",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-SN9C2286/C9900076661",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900076661",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "SN9C2286",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT SN9C2286",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN52",
+     "describe": "QFN52 New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SN9<span class='lucene_highlight_class'>C2286</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3497308,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "SN9C2286A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-SN9C2286A/C9900015580",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900015580",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "SN9C2286A",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT SN9C2286A",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN52",
+     "describe": "QFN52 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SN9<span class='lucene_highlight_class'>C2286</span>A",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 49490583,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "SN9C2286AJG",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SONIX-SN9C2286AJG/C47283796",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C47283796",
+     "componentBrandEn": "SONIX",
+     "componentModelEn": "SN9C2286AJG",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "SONIX SN9C2286AJG",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-52_6x6mm",
+     "describe": "QFN-52_6x6mm SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SN9<span class='lucene_highlight_class'>C2286</span>AJG",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 710752,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u53cc\u901a\u9053\u300110 \u4f4d\u300125Msps\u3001\u4f4e\u566a\u58f0 3V ADC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_analog devices_ltc2286cup#pbf_C679844.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3188
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.2979
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.6735
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.1507
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.1507
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.1507
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.9617
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.9617
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.4653
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0503
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.9617
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.0668
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC2286CUPPBF/C679844",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 40,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3188,
+     "componentCode": "C679844",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC2286CUP#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2210190630_Analog-Devices-LTC2286CUP-PBF_C679844.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589858405331599360-C679844.pdf?response-content-disposition=attachment%3B%20filename%3DC679844.pdf%3B%20filename%2A%3DUTF-8%27%27C679844.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=859f1bc67629c8e83e1767a93e84214b2d47e8e511130d7a05ca815d37fd3e7b",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC2286CUP#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-64-EP(9x9)",
+     "describe": "0.6LSB 0\u2103~+70\u2103 10 2 2.7V~3.4V 25MHz QFN-64-EP(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "1MHz~25MHz\u300125MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "DNL (LSB)",
+       "attribute_value_name": "0.05LSB"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "61.8dB"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "0.6LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~3.4V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "25MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C2286</span>CUP#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 710754,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u53cc\u901a\u9053\u300110 \u4f4d\u300125Msps\u3001\u4f4e\u566a\u58f0 3V ADC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_analog devices_ltc2286iup#pbf_C679846.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3696
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.3405
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.7128
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.1868
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.1868
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.1868
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.9964
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.9964
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.5032
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0992
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.9964
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.1078
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC2286IUPPBF/C679846",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 40,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3696,
+     "componentCode": "C679846",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC2286IUP#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2205191116_Analog-Devices-LTC2286IUP-PBF_C679846.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589856318690390017-C679846.pdf?response-content-disposition=attachment%3B%20filename%3DC679846.pdf%3B%20filename%2A%3DUTF-8%27%27C679846.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=35c6b11560d0bce69c1b3bde02542dc9297cb252be73c03089c9d819f0ccc7a9",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC2286IUP#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-64-EP(9x9)",
+     "describe": "-40\u2103~+85\u2103 0.6LSB 10 2 2.7V~3.4V 25MHz QFN-64-EP(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "1MHz~25MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "DNL (LSB)",
+       "attribute_value_name": "0.05LSB"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "61.8dB"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "0.6LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~3.4V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "25MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C2286</span>IUP#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 710753,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u53cc\u901a\u9053\u300110 \u4f4d\u300125Msps\u3001\u4f4e\u566a\u58f0 3V ADC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-to-digital-converters-adc_analog-devices-ltc2286cup-trpbf_C679845.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.1896
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.1896
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 11.1896
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.3313
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.1789
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.1035
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.953
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.1724
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 10.779
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 10.779
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.779
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.0256
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "e569dd32437c42eca43d5a4f58e31976",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC2286CUPTRPBF/C679845",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 11.1896,
+     "componentCode": "C679845",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC2286CUP#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2205191116_Analog-Devices-LTC2286CUP-TRPBF_C679845.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589856202898644992-C679845.pdf?response-content-disposition=attachment%3B%20filename%3DC679845.pdf%3B%20filename%2A%3DUTF-8%27%27C679845.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=65360ce8b2b5c634fcfcae2ea76555d0002df585160ea887a3834a7760d09c28",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC2286CUP#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-64-EP(9x9)",
+     "describe": "0.1LSB 0\u2103~+70\u2103 10 2 2.7V~3.4V 25MHz QFN-64-EP(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "1MHz~25MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "Not supported"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "DNL (LSB)",
+       "attribute_value_name": "0.05LSB"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "61.8dB"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "0.1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~3.4V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "Pipeline"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "25MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C2286</span>CUP#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 710755,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog to Digital Converters (ADC)",
+     "erpComponentName": "\u53cc\u901a\u9053\u300110 \u4f4d\u300125Msps\u3001\u4f4e\u566a\u58f0 3V ADC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog to digital converters (adcs)_analog devices_ltc2286iup#trpbf_C679847.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3696
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.3405
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.7128
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.1868
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.1868
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.1868
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.1078
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.9964
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.9964
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.5032
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0992
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.9964
+      }
+     ],
+     "firstSortAccessId": "604cc6adc6524f07911f84460d7bfedb",
+     "secondSortAccessId": "e05e7e98bca544f99f2d3e27384e6318",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC2286IUPTRPBF/C679847",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3696,
+     "componentCode": "C679847",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC2286IUP#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2210190630_Analog-Devices-LTC2286IUP-TRPBF_C679847.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589856090897739777-C679847.pdf?response-content-disposition=attachment%3B%20filename%3DC679847.pdf%3B%20filename%2A%3DUTF-8%27%27C679847.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=16037e2b036f96f1b91d38c9cbed725d46b197cdb86975e004b6f7d5894f2479",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC2286IUP#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-64-EP(9x9)",
+     "describe": "-40\u2103~+85\u2103 0.1LSB 10 2 2.7V~3.4V 25MHz QFN-64-EP(9x9) Analog to Digital Converters (ADC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "1MHz~25MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Clock/Oscillator",
+       "attribute_value_name": "External"
+      },
+      {
+       "attribute_name_en": "Programmable Gain",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "differential input",
+       "attribute_value_name": "Yes"
+      },
+      {
+       "attribute_name_en": "DNL (LSB)",
+       "attribute_value_name": "0.05LSB"
+      },
+      {
+       "attribute_name_en": "Signal-to-Noise Ratio",
+       "attribute_value_name": "61.8dB"
+      },
+      {
+       "attribute_name_en": "Integral non - linearity",
+       "attribute_value_name": "0.1LSB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~3.4V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "ADC architecture",
+       "attribute_value_name": "Pipeline"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "25MHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Multiplexers"
+      },
+      {
+       "attribute_name_en": "number of channels",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Voltage Reference",
+       "attribute_value_name": "Built-in"
+      },
+      {
+       "attribute_name_en": "Resolution (Bits)",
+       "attribute_value_name": "10"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog to Digital Converters (ADC)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C2286</span>IUP#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795239,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "SAKXC2286M104F80LAA",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-sakxc2286m104f80laa_C3232218.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.7996
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 10.7996
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 10.7996
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.1806
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.0331
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.961
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.8156
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 4.0272
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 10.4033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 10.4033
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.8851
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 10.4033
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795239-SAKXC2286M104F80LAA/C3232218",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 10.7996,
+     "componentCode": "C3232218",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "SAKXC2286M104F80LAA",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404021349_Infineon-Technologies-SAKXC2286M104F80LAA_C3232218.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590421207264108544-C3232218.pdf?response-content-disposition=attachment%3B%20filename%3DC3232218.pdf%3B%20filename%2A%3DUTF-8%27%27C3232218.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f0d0e85571001406014fb78279c3bf607b59c3872d679f0a5687913371f65b99",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon SAKXC2286M104F80LAA",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "-40\u2103~+125\u2103 10bit 118 16/32 Bit 3V~5.5V 50KB 80MHz 832KB Built-in FLASH Others LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "EEPROM",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "80MHz"
+      },
+      {
+       "attribute_name_en": "Program Memory Type",
+       "attribute_value_name": "FLASH"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "832KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "RAM Size",
+       "attribute_value_name": "50KB"
+      },
+      {
+       "attribute_name_en": "Core Size",
+       "attribute_value_name": "16/32 Bit"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "Others"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      },
+      {
+       "attribute_name_en": "Oscillator Type",
+       "attribute_value_name": "Built-in"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SAKX<span class='lucene_highlight_class'>C2286</span>M104F80LAA",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795229,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "XC2286M72F66LABHXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-xc2286m72f66labhxuma1_C3232208.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9489
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9161
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.8997
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.8667
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9141
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.3617
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3617
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.8825
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.3617
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795229-XC2286M72F66LABHXUMA1/C3232208",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4517,
+     "componentCode": "C3232208",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "XC2286M72F66LABHXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404021349_Infineon-Technologies-XC2286M72F66LABHXUMA1_C3232208.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590277442880233472-C3232208.pdf?response-content-disposition=attachment%3B%20filename%3DC3232208.pdf%3B%20filename%2A%3DUTF-8%27%27C3232208.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c9edc1e58bafc1de45296539088aa3d4477410439c664f1d6ab5f26e2fd6bca7",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon XC2286M72F66LABHXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "10bit 118 3V~5.5V 576KB 66MHz LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "66MHz"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "576KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "X<span class='lucene_highlight_class'>C2286</span>M72F66LABHXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795220,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "XC2286M72F80LRABKXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-xc2286m72f80lrabkxuma1_C3232199.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.4517
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9489
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.9161
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.8997
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.8667
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.9141
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 2.3617
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 2.3617
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.3617
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.8825
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795220-XC2286M72F80LRABKXUMA1/C3232199",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 4,
+     "minPurchaseNum": 4,
+     "initialPrice": 2.4517,
+     "componentCode": "C3232199",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "XC2286M72F80LRABKXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon XC2286M72F80LRABKXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "10bit 118 3V~5.5V 576KB 80MHz Others LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "80MHz"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "576KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "Others"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "X<span class='lucene_highlight_class'>C2286</span>M72F80LRABKXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795232,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "XC2286M104F66LABHXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-xc2286m104f66labhxuma1_C3232211.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.8269
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.7286
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.6795
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.5811
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.7232
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.6285
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.0376
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795232-XC2286M104F66LABHXUMA1/C3232211",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3057,
+     "componentCode": "C3232211",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "XC2286M104F66LABHXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404021349_Infineon-Technologies-XC2286M104F66LABHXUMA1_C3232211.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590309217195089920-C3232211.pdf?response-content-disposition=attachment%3B%20filename%3DC3232211.pdf%3B%20filename%2A%3DUTF-8%27%27C3232211.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1287308fc82646a6abf774cb9afb1304cde0c8488202e638a150c35fe98e09c4",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon XC2286M104F66LABHXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "10bit 118 3V~5.5V 66MHz 832KB LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "66MHz"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "832KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "X<span class='lucene_highlight_class'>C2286</span>M104F66LABHXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795234,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "SAH-XC2286M72F66LABHXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-sah-xc2286m72f66labhxuma1_C3232213.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.8269
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.7286
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.6795
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.5811
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.7232
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.6285
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 7.0376
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795234-SAHXC2286M72F66LABHXUMA1/C3232213",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3057,
+     "componentCode": "C3232213",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "SAH-XC2286M72F66LABHXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2404021349_Infineon-Technologies-SAH-XC2286M72F66LABHXUMA1_C3232213.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590299760218169344-C3232213.pdf?response-content-disposition=attachment%3B%20filename%3DC3232213.pdf%3B%20filename%2A%3DUTF-8%27%27C3232213.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4f4bc5df48c55b3bf6bcb7eb5395da6563547a9b0ba3c6f32f43bf3e3b46ddd8",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon SAH-XC2286M72F66LABHXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "-40\u2103~+110\u2103 10bit 118 16/32 Bit 3V~5.5V 50KB 576KB 66MHz Built-in FLASH Others LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+110\u2103"
+      },
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "66MHz"
+      },
+      {
+       "attribute_name_en": "Program Memory Type",
+       "attribute_value_name": "FLASH"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "576KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "RAM Size",
+       "attribute_value_name": "50KB"
+      },
+      {
+       "attribute_name_en": "Core Size",
+       "attribute_value_name": "16/32 Bit"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "Others"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      },
+      {
+       "attribute_name_en": "Oscillator Type",
+       "attribute_value_name": "Built-in"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SAH-X<span class='lucene_highlight_class'>C2286</span>M72F66LABHXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3795238,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "SAHXC2286M104F66LAAHXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-sahxc2286m104f66laahxuma1_C3232217.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 7.3057
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.8269
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.7286
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.6795
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.5811
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 2.7232
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0376
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.6285
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "3795238-SAHXC2286M104F66LAAHXUMA1/C3232217",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 7.3057,
+     "componentCode": "C3232217",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "SAHXC2286M104F66LAAHXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590904599379189760-C3232217.pdf?response-content-disposition=attachment%3B%20filename%3DC3232217.pdf%3B%20filename%2A%3DUTF-8%27%27C3232217.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f823c7448ca7bd5748ba2d620f72f7f41def87910fed3fdc6241f7546a21f017",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon SAHXC2286M104F66LAAHXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LQFP-144-EP(20x20)",
+     "describe": "-40\u2103~+110\u2103 10bit 118 16/32 Bit 3V~5.5V 50KB 66MHz 832KB Built-in FLASH Others LQFP-144-EP(20x20) Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "EEPROM",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+110\u2103"
+      },
+      {
+       "attribute_name_en": "CPU Maximum Speed",
+       "attribute_value_name": "66MHz"
+      },
+      {
+       "attribute_name_en": "Program Memory Type",
+       "attribute_value_name": "FLASH"
+      },
+      {
+       "attribute_name_en": "Program Storage Size",
+       "attribute_value_name": "832KB"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~5.5V"
+      },
+      {
+       "attribute_name_en": "RAM Size",
+       "attribute_value_name": "50KB"
+      },
+      {
+       "attribute_name_en": "Core Size",
+       "attribute_value_name": "16/32 Bit"
+      },
+      {
+       "attribute_name_en": "CPU Core",
+       "attribute_value_name": "Others"
+      },
+      {
+       "attribute_name_en": "Number of I/O",
+       "attribute_value_name": "118"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in general-purpose timer\u3001Hardware CRC\u3001Programmable watchdog\u3001Hardware ECC check"
+      },
+      {
+       "attribute_name_en": "ADC (Bit)",
+       "attribute_value_name": "10bit"
+      },
+      {
+       "attribute_name_en": "Oscillator Type",
+       "attribute_value_name": "Built-in"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SAHX<span class='lucene_highlight_class'>C2286</span>M104F66LAAHXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 8326399,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Microcontrollers (MCU/MPU/SOC)",
+     "erpComponentName": "SAH-XC2286M104F66LABHXUMA1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/microcontrollers-mcu-mpu-soc_infineon-technologies-sah-xc2286m104f66labhxuma1_C7355666.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.863
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.863
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.863
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.1423
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.1046
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0866
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0467
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 1.1004
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 2.7579
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.7579
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0641
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 2.7579
+      }
+     ],
+     "firstSortAccessId": "020f44184a0843cfbab4d2906384b0aa",
+     "secondSortAccessId": "4dce313c6749477f9b4c051cebfc1018",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "8326399-SAHXC2286M104F66LABHXUMA1/C7355666",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 2.863,
+     "componentCode": "C7355666",
+     "componentBrandEn": "Infineon Technologies",
+     "componentModelEn": "SAH-XC2286M104F66LABHXUMA1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556959689323151360-C7355666.pdf?response-content-disposition=attachment%3B%20filename%3DC7355666.pdf%3B%20filename%2A%3DUTF-8%27%27C7355666.pdf&x-oss-date=20261030T114442Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7d4c91894c93ba8de78267fd317e8de88fc370db0dbcd7c9e3d48ec774d47447",
+     "dataManualOfficialLink": "",
+     "componentName": "Infineon SAH-XC2286M104F66LABHXUMA1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Microcontrollers (MCU/MPU/SOC) ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Microcontrollers (MCU/MPU/SOC)",
+     "secondSortName": "Embedded Processors & Controllers",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "SAH-X<span class='lucene_highlight_class'>C2286</span>M104F66LABHXUMA1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C2286"
+ },
+ "message": null
+}

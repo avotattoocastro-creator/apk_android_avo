@@ -467,6 +467,285 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **No se ha tocado:** firmware, protocolo BLE/ESP-NOW/Wi-Fi, formato RAW, base de datos.
 **Validación:** IMPLEMENTADO · COMPILADO / CI 40433800797 · núcleo 25/25 pruebas JVM · **NO VERIFICADO** en teléfono ni con tarjetas. Limitaciones: tarjetas «mágicas» con UID modificable pueden clonar una NTAG21x; el repositorio público permite recompilar sin licencias.
 **Pendiente:** lista de `docs/LICENCIAS_AVO.md` (apartado «Pendiente de verificar en teléfono»).
+## 2026-11-01 — Espalda · Rev E.7.4: alojamiento del conector de muelles pasante (sin membrana)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Petición del usuario:** el soporte tiene que tener un agujero pasante para el pogo. Estaba mirando el STL de la E.7.2 (4,5 mm).
+- **Soporte y base de carga:** se quita la membrana de sacrificio de 0,2 → el alojamiento es pasante de arriba abajo.
+- **Ficheros:** STL y STEP renombrados con la versión (`AVO_RevE7_4_*`) para no confundirlos con los anteriores.
+
+**Validación:** IMPLEMENTADO (CAD):
+- conector STEP / soporte: 0 mm³;
+- STL cerrados de 1 cuerpo.
+- Voladizos: el techo de las orejas es un puente de 5,8 mm con un lado abierto hacia el agujero (el analizador lo marca como
+  voladizo de 2,7). Se imprime como puente en PETG. El resto, 0 fuera de límite.
+
+**NO VERIFICADO** físicamente.
+
+## 2026-10-31 — Espalda · Rev E.7.3: conector de muelles completamente empotrado (soporte de 8,8 mm)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:** el usuario (captura de Shapr3D) pide que el conector de muelles no asome por debajo del soporte, sino que quede
+completamente empotrado.
+- **Soporte y base de carga:** pasan de 4,5 a **8,8 mm** (`MT_E73`). El conector queda dentro: cuerpo hasta −6,2, patas hasta
+  −7,74 y 1,06 libre para el puente. La cara superior y el cierre a la cápsula no cambian.
+- **La espalda queda 4,3 mm más separada del caballo.**
+- **Contraplaca:** vuelve a la original, sin hueco, construida igual y bajada con el soporte. **La tela no se corta.**
+- **Probetas:** las del soporte llegan ahora hasta la cara inferior.
+
+**Validación:** IMPLEMENTADO (CAD, con el STEP colocado):
+- 0 interferencias, salvo la membrana prevista;
+- 0 voladizos fuera de límite en 6 piezas;
+- STL cerrados de 1 cuerpo.
+
+**NO VERIFICADO** físicamente.
+
+## 2026-10-31 — Espalda · Rev E.7.2: conectores con las cotas del STEP del usuario
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:** el usuario envió el STEP de los conectores (`Assembly Pogo 3er`, Onshape) y una captura de Shapr3D con la
+orientación: el plano en la cápsula con los contactos hacia abajo y el de muelles en el soporte con las puntas hacia arriba.
+
+**Cotas del STEP:**
+- **plano:** cara 15,5 × 4,65 × 1,7, reborde 17,1 × 6,25 × 1,8, patas 1,0;
+- **muelles:** cuerpo 15,5 × 4,65 × **6,0**, orejas 25 × 5,5 × 2,0 en medio del grueso, agujeros Ø2,0 a 19,5, puntas y patas
+  de 1,5;
+- contactos a 2,3; imanes Ø3 a ±5,42.
+
+**Base:** el conector plano se mete desde dentro. La cara pasa por un agujero de 15,7 × 4,85 y queda a ras; el reborde apoya en
+un escalón a Z 1,7.
+
+**Soporte:** el conector de muelles va desde abajo, atornillado con 2 × M2 de rosca chapa (pilotos Ø1,6):
+- ventana del cuerpo hasta la cara de apoyo, con la cara 0,2 por debajo;
+- orejas con techo a Z −2,7;
+- membrana de sacrificio de 0,2 que hay que cortar.
+
+**Contraplaca (nueva):** hueco de 26 × 7 × 2,1 para lo que asoma bajo el soporte (cuerpo, cabezas M2, patas y puente). En la
+tela hace falta una ranura de 26 × 7.
+
+**Base de carga:** 9 mm de grueso (`MT_CARGA`).
+
+**Validación:** IMPLEMENTADO (CAD, con el STEP colocado):
+- plano / base: 0 mm³;
+- muelles / soporte: solo la membrana (13,5 mm³, prevista);
+- muelles y cabezas M2 / contraplaca: 0 mm³;
+- puntas a Z +1,3;
+- 0 voladizos fuera de límite en las 7 piezas;
+- STL cerrados de 1 cuerpo.
+
+**NO VERIFICADO** físicamente.
+**Pendiente:**
+- confirmar que el conector real es como el STEP: 6,0 de grueso, orejas en medio y agujeros Ø2,0 (el usuario midió Ø2,5);
+- imprimir las probetas;
+- probar el rebote al galope.
+
+## 2026-10-31 — Espalda · Rev E.7.1: conector de muelles montado desde arriba (corrige la E.7)
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Error de la E.7:** supuse que las orejas del conector de muelles iban a ras de la cara trasera y diseñé el soporte para
+  meterlo desde abajo. La foto de perfil muestra que las orejas están a ras de la cara de los **muelles y los imanes**. Con la
+  E.7, la cara habría quedado 1,4 mm hundida y los muelles apenas habrían asomado.
+- **Soporte y base de carga E.7.1:** conector **desde arriba**, con los muelles hacia arriba:
+  - rebaje de las orejas en la cara de apoyo, óvalo de 25,0 × 5,8 y 1,9 de hondo;
+  - hueco del cuerpo de 14,9 × 5,8, pasante hasta la cara inferior;
+  - taladros ciegos de Ø2,0 bajo los agujeros de las orejas, para que el epoxi haga de remache;
+  - cara de los muelles 0,2 bajo la cara de apoyo;
+  - sin membrana.
+- **Base:** sin cambios. El conector plano va a ras del fondo, con los contactos hacia abajo.
+
+**Validación:** IMPLEMENTADO (CAD):
+- sólidos válidos;
+- STL cerrados de 1 cuerpo;
+- 0 voladizos fuera de límite;
+- 0 interferencias entre los conectores y sus piezas.
+
+**NO VERIFICADO** físicamente.
+**Pendiente:** el mismo que en la E.7.
+
+## 2026-10-31 — Espalda · prototipo Rev E.7: conectores magnéticos de 3 vías en lugar del reed
+**Autor:** Claude · Rama `feature/avo-back-rev-e7-iman` (sale de `feature/avo-back-v4`) · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia:**
+- **Base E.7:** se quitan los 3 contactos de tornillo M2 de la E.6 y el alojamiento del reed. Ahora lleva el conector
+  magnético PLANO, ovalado:
+  - alojamiento de 15,3 × 6,5 en (X 9, Y 0), desde el fondo hasta Z 4,0, con escalón a 45° y paso al interior;
+  - cara enrasada con el fondo y pegada con epoxi.
+- **Soporte del chaleco E.7 / base de carga E.7:** en lugar de los 2 pines sueltos, el conector de MUELLES con orejas:
+  - ventana del cuerpo de 14,9 × 5,8;
+  - orejas de 25,0 × 5,8 desde abajo hasta Z −1,4, con membrana de sacrificio de 0,2 que hay que cortar;
+  - cara del cuerpo 0,2 bajo la cara de apoyo;
+  - la base de carga lleva un canal para el cable.
+- **Orden de los contactos:** BAT (Y−) · SYS · GND (Y+). El soporte une BAT y SYS; la base de carga lleva BAT y GND.
+- **Probetas P3** del cuello para la base, el soporte y la base de carga.
+
+**Por qué:** el usuario ha comprado conectores magnéticos comerciales (fotos con calibre del 31/10/2026). Los planos van en la
+caja y los de muelles en el soporte.
+**Medidas:**
+- **Del usuario:** puntas 1,5, agujeros de las orejas Ø2,5 a 19,5 entre centros, imanes a ras.
+- **Por foto (±0,3):** conector plano 15,0 × 6,2 (otra foto dio 16,5: pendiente de confirmar); cuerpo de muelles 14,6 × 5,5 × 2,9;
+  largo total 24,7; orejas 1,7.
+
+**Archivos:** `hardware/back/V4/PROTOTIPO_IMAN_REV_E7/` (STL, STEP, fuente, VALIDACION, IMAGENES, LEEME).
+**No se ha tocado:** tapa E.5, cuna de la Heltec E.6, junta, contraplaca, firmware (la 3.13.11 ya va sin reed) y `main`.
+**Validación:** IMPLEMENTADO (CAD):
+- sólidos válidos;
+- STL cerrados de 1 cuerpo;
+- 0 voladizos fuera de límite;
+- el conector plano no interfiere con la base;
+- en el soporte, la única interferencia es la membrana de sacrificio (16 mm³, prevista).
+
+**NO VERIFICADO** físicamente.
+**Pendiente:**
+- imprimir las probetas;
+- confirmar el largo del conector plano y los gruesos;
+- probar el rebote del contacto al galope.
+
+## 2026-10-30 — Espalda · prototipo Rev E.6: cuna sin canal −Y y con 4 pinzas sobre el refuerzo
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia** (render anotado del usuario):
+- Quitado el canal del borde −Y y sus labios.
+- 4 pinzas iguales a la del cuello (Y −7,5) sobre el refuerzo, en las posiciones 1–4 marcadas: extremo de la antena (Y 11 y
+  Y −2), entre el Pololu y la Heltec (X 38) y borde −Y junto al cuello (X 14,5).
+- Alojamiento del Pololu: **1,2 mm de profundidad** (medido con calibre por el usuario; antes 2,54 mm, el 0,1″ de la ficha
+  de Pololu). Heltec: la foto del calibre da 1,7–1,9 mm, compatible con el 1,8 del modelo (sin cambio). Rebajado en el refuerzo y enrasado con él; sin marco por encima.
+**No se ha tocado:** base, soportes, tapa E.5, versión V4 con PCB.
+**Validación:** 1 sólido válido, STL estancos, 0 voladizos fuera de límite, 0 interferencias con tapa E.5, Heltec, ZED, Pololu
+y batería. **NO VERIFICADO** físicamente.
+**Pendiente:** comprobar en la impresión que la Heltec no baila (lectura por foto ±0,1 mm).
+
+## 2026-10-30 — Espalda · prototipo Rev E.6: cuna de la Heltec nueva (Pololu, sujetacables, pestañas) y batería 1 mm más baja
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** el de esta entrada · **CI:** no aplica (CAD)
+**Qué cambia** (anotaciones del usuario sobre la cuna en Shapr3D, 30/10/2026):
+- **Cuna `AVO_RevE6_CUNA_HELTEC`:**
+  - un solo pasacables centrado en lugar de las 2 ranuras del reed;
+  - ventana ampliada hacia el conector SH1.25;
+  - alojamiento del Pololu S7V8F3 a 1 mm del borde −Y, en el sitio de la placa Qi;
+  - 3 sujetacables para 5 × AWG30;
+  - Heltec calzada 1 mm, con todas las pestañas 1 mm más altas;
+  - labio en las 4 guías laterales y 2 pestañas nuevas en el borde +Y;
+  - torres con pestaña también en el extremo USB, entre el USB-C y los pulsadores.
+- **Base `AVO_RevE6_BASE_POGO`:** sin bobina Qi; la batería apoya en el suelo (1,4 mm) y baja 1 mm. La bandeja baja con
+  ella, así que la Heltec queda a la misma altura que en la E.5 y la **tapa E.5 se conserva**. El refuerzo de la bandeja
+  pasa de 1,2 a 2,2 mm para que los pisadores de la tapa sigan apoyando igual.
+- **Guía actualizada:** `hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`.
+**Validación:**
+- Software: piezas B-Rep válidas (1 sólido), STL estancos.
+- Voladizos: 0 fuera de límite.
+- Interferencias: 0 con la tapa E.5, la Heltec, el ZED + L, la batería, el Pololu y el canal de cables. Las únicas
+  coincidencias con la clavija USB-C son las esquinas redondeadas de la boca (aproximación de la comprobación).
+- **NO PROBADO** físicamente.
+**Pendiente:** imprimir y comprobar el encaje real de la Heltec (pestañas de 0,5 mm en los bordes) y del Pololu.
+
+## 2026-10-30 — Espalda · AVO BACK V4 REV B (contactos pogo, sin Qi ni Hall) + BACK 4.0.0-dev2 + prototipo Rev E.6 con BACK 3.12.0
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `89ad681`…`c1e0e26` y siguientes de esta entrada ·
+**CI:** PCB run 41048486880 (`c1e0e26`) y 41050496945 (`6e5b54d`, informe con las existencias del TVS: 496 730 uds.): **puerta superada**; firmware V4 4.0.0-dev2 run 41044961345 (`8e38b61`, éxito,
+resultado guardado por el CI en `e151fcc`); BACK 3.12.0 run 41044381974 (`2750d3c`): éxito; existencias run 41042078297
+**Qué cambia:** petición del usuario: quitar todo el Qi y alimentar la espalda por 3 contactos (sistema pogo).
+- **Contactos:** 3 en el fondo de la cápsula, tornillo M2 avellanado inox + junta tórica 2 × 1 + tuerca M2.
+  - **SYS y BAT** en la cola, donde estaba el reed. **GND** aparte, a ~30 mm de BAT.
+  - **Soporte del chaleco:** 2 pines con muelle unidos por un hilo puentean SYS–BAT → encendido. Fuera del soporte, 0 µA.
+  - **Base de carga:** cargador externo entre BAT y GND, con la placa apagada.
+- **PCB REV B:**
+  - Sin BQ51013B, bobina, Hall ni conmutación AD (−24 piezas; 61 montadas).
+  - Celda → F1 → contacto BAT; contacto SYS → Q3 (polaridad) → BAT del BQ24072, que queda solo para el USB-C del taller.
+  - TVS PESD5V0S1BA (C2827694) en SYS y BAT.
+  - KiCad 9 en el CI: DRC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0, ERC 0/0.
+  - La REV A con Qi queda congelada en `hardware/back/V4/PCB_REV_A_QI/`.
+- **Carcasa V4:**
+  - Sin alojamiento de la bobina. Avellanados, pasos y ranuras de junta de los 3 contactos en la base; 2 agujeros de pin
+    y canal del puente en el soporte. Sin imanes del Hall.
+  - 0 interferencias con las envolventes y con el STEP de `c1e0e26`; 0 voladizos fuera de límite.
+  - Medidas sin cambios: 118,2 × 59,0 × 17,1 mm.
+- **BACK 4.0.0-dev2:**
+  - Sin Hall ni sueño por soporte.
+  - Emparejamiento con 3 encendidos de menos de 4 s seguidos (contador en NVS).
+  - microSD vaciada cada 1 s.
+  - Línea `ALIMENTACION` en el monitor.
+- **Prototipo actual (Rev E + Heltec)** — para probar el sistema antes de fabricar:
+  - Base, soporte del chaleco y base de carga **Rev E.6** (`hardware/back/V4/PROTOTIPO_POGO_REV_E6/`): BAT y SYS en
+    (8,8; ∓4), GND en (8,8; 14). Válidas, sin voladizos fuera de límite y sin interferencias con la Heltec ni el ZED.
+  - **BACK 3.12.0** (Heltec): sin reed, emparejamiento con 3 encendidos rápidos.
+  - Guía de adaptación, cableado y pruebas: `hardware/back/V4/DOCS/PROTOTIPO_POGO_REV_E.md`.
+**Por qué:** el usuario prefiere contactos pogo a la carga Qi: menos piezas, carga más rápida, encendido y apagado sin
+sensor.
+**Archivos:**
+- `hardware/back/V4/**` (PCB, PCB_REV_A_QI, CAD, PROTOTIPO_POGO_REV_E6, DOCS).
+- `firmware/back/V4_0_0/**`, `firmware/back/V3_8_0/**`.
+- `.github/workflows/build-back-v4-fw.yml`, `build-back-v380.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, pecho, cincha, Android.
+**Validación:** CAD y PCB comprobados por software; los dos firmwares compilan en el CI. **NO VERIFICADO** físicamente
+(nada fabricado, impreso ni montado).
+**Pendiente:**
+- Probar primero el prototipo E.6: rebote del contacto al galope, estanqueidad de los contactos, carga en la base.
+- Medir con polímetro el pinout de la URTK1.2.
+- Diseñar la base de carga definitiva de la V4.
+
+## 2026-10-30 — Espalda · AVO BACK V4 (PCB propia ESP32-S3 + URTK1.2, carcasa 48 mm más corta) + firmware 4.0.0-dev1
+**Autor:** Claude · Rama `feature/avo-back-v4` (desde `feature/avo-girth-pcb`) · **Commits:** `9573ef3`…`3f81b45` ·
+**CI:** PCB `build-back-v4-pcb.yml` run 40971520610 (`3f81b45`): **puerta superada**; firmware `build-back-v4-fw.yml`
+run 40920249110 (`4059f5f`): compilación correcta; existencias `jlc-stock-back-v4.yml`
+**Qué cambia:** rediseño conjunto de electrónica y carcasa de la espalda (`hardware/back/V4/`).
+- **Carcasa** (FreeCAD 1.0.2, paramétrica, desde la Rev E.4.1/E.5): longitud **166,2 → 118,2 mm (−48,0 mm, −28,9 %)**,
+  mismo grosor (17,1 mm) y misma anchura (59 mm); volumen exterior 157,8 → 110,1 cm³; impresas ≈ 208 → 131 g. La URTK1.2
+  va sobre la batería a la misma cota que la Heltec (Z 9,6) y la PCB nueva en la cola (Z 2,5) con la bobina Qi debajo;
+  8 tornillos M3; Hall soldado en la PCB en lugar del reed. STL sin soportes, STEP por pieza, conjunto montado y
+  explosionado, plano de cotas, comparativa con la Rev E.5, estudio de distribuciones A–D.
+- **PCB REV A** (KiCad 9, 4 capas, ≈ 1785 mm², 85 piezas montadas, 35 referencias LCSC): ESP32-S3-MINI-1U-N8 (un solo
+  ESP32; comparación con S3 + C3/C6 documentada), BQ51013B (Qi) + BQ24072, TLV75733P, **RT9080 propio del ZED con EN**,
+  microSD SDMMC 4 bits con alimentación conmutada, Hall DRV5032FA, USB-C, 8 pads para el mazo de la URTK1.2 (UART1,
+  UART2, PPS, RESET). Ruteado: Freerouting 1.9.0 + `fuente/repair.py`. KiCad 9 en el CI: DRC 0 errores, 0 conexiones
+  incompletas, 0 cortocircuitos, paridad 0; ERC 0/0. Ficheros `PCB/out/FINAL/` (Gerber, BOM y CPL de JLCPCB, STEP).
+- **Firmware 4.0.0-dev1** (`firmware/back/V4_0_0`): port de BACK 3.11.0 a la placa V4 (ZED por UART2 en GPIO7/8, EN del
+  ZED en GPIO10, Hall en GPIO1 con despertar ext0, emparejamiento con 3 apoyos en el soporte, registro UBX en microSD,
+  PPS por interrupción, PGOOD del cargador); 44 pruebas en el ordenador.
+**Por qué:** petición del usuario (brief «AVO BACK V4 — rediseño electrónico y mecánico integrado»): acortar la carcasa
+sin aumentar el grosor, una sola placa propia con el ZED integrado físicamente y corte físico del ZED.
+**Archivos:** `hardware/back/V4/**`, `firmware/back/V4_0_0/**`, `.github/workflows/build-back-v4-pcb.yml`,
+`build-back-v4-fw.yml`, `jlc-stock-back-v4.yml`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, Rev E de la espalda, firmware 3.x, pecho, cincha, Android.
+**Validación:** CAD comprobado por software (piezas B-Rep válidas, 0 interferencias con las envolventes de la electrónica y
+con el STEP de KiCad de `3f81b45` (holguras mín.: tapa 0,19, anillos 0,09, bobina 0,20 mm; la placa apoya en la base);
+STL/STEP releídos; 0 voladizos fuera de límite) · PCB: CI con puerta superada · firmware: CI compila.
+**NO VERIFICADO** físicamente (nada impreso, fabricado ni montado).
+**Pendiente:** comprobar con polímetro el pinout de la URTK1.2 (las fotos muestran serigrafías distintas) antes del mazo;
+imprimir las probetas P1/P2; medir la bobina Qi y ajustar C1–C4; BLE directo con Android, Wi-Fi y OTA firmada en el
+firmware V4; revisar giros en la vista previa de JLCPCB; pruebas de consumo, GNSS (C/N0), alcance y estanqueidad.
+
+## 2026-10-29 — Cincha · PCB REV B (ESP32-C3) + firmware V0.3.0 — rediseño para montaje completo en JLCPCB y coste ~½
+**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `c151a4a`…`6b01cb8` (y siguientes de esta entrada) ·
+**CI:** existencias JLCPCB (`jlc-stock-girth.yml`), PCB `build-girth-pcb.yml` (puerta superada en `6b01cb8`),
+firmware `build-girth-c3.yml` (compilación correcta en `01f8093`)
+**Qué cambia:** JLCPCB no tiene el ESP32-C6-MINI-1U-N4 (0 uds.). REV B con **ESP32-C3-MINI-1U-N4** (C2911374,
+1191 uds. y 3,15 US$ el 2026-10-29 según la consulta del CI); IMU **LSM6DS3TR-C + MMC5983MA** por I²C en lugar del
+BNO085 (19,50 US$, 80 uds.); corte de batería con **enclavamiento de MOSFET** en lugar del relé biestable; R6/R7
+Basic. Mismas funciones (ESP-NOW, IMU de 9 ejes, encendido magnético, apagado remoto, < 1 µA apagada, carga USB y
+Qi, medida de batería, programación por USB y UART0, antena externa). 81 piezas montadas (antes 104), 13 Extended
+(antes 17). Coste de componentes + cargo de Extended: 21,5 US$/placa a 5 uds. (REV A ≥ 39,9) y 16,2 a 10 uds.
+(REV A ≥ 32,9): −46 % a −54 %, con la REV A subestimada porque el C6 no tiene precio real. Firmware V0.3.0 para el
+C3 con IMU, batería, enclavamiento, apagado remoto (bit 1 de `GirthPing.flags`, la espalda aún no lo envía) y
+diagnóstico. La REV A queda congelada en `hardware/girth/PCB_REV_A_C6`.
+**Por qué:** placa montable entera por JLCPCB y coste a la mitad sin perder funciones (petición del usuario).
+**Archivos:** `hardware/girth/PCB/**`, `hardware/girth/PCB_REV_A_C6/**`, `firmware/girth/V0_3_0_C3/**`,
+`firmware/back/V3_8_0/lib/avo_core/src/avo_girth_link.h` (solo constantes y comentarios),
+`.github/workflows/build-girth-pcb.yml`, `build-girth-c3.yml`, `jlc-stock-girth.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, app Android, AVO Update, firmware de pecho y espalda.
+**Validación:** CI (KiCad 9: DRC 0, ERC 0, 0 conexiones incompletas, 0 cortocircuitos, paridad 0; firmware compila
+para ESP32-C3). **NO VERIFICADO** físicamente.
+**Pendiente:** ajustar el Qi con la bobina real; medir los tiempos del enclavamiento; comprobar ejes de la IMU;
+adaptar AVO Update al ESP32-C3 (id 5) y la espalda para enviar el apagado remoto; revisar giros en JLCPCB.
+
+## 2026-10-29 — Cincha · PCB REV A — ruteado completo y puerta de fabricación superada
+**Autor:** Claude · Rama `feature/avo-girth-pcb` · **Commits:** `7f80a18`, `05556bb`, `e9e5166` · **CI:** runs 40881786227 (`05556bb`) y 40882718676 (`e9e5166`): éxito, puerta superada
+**Qué cambia:** placa de la cincha (ESP32-C6-MINI-1U + BNO085 + BQ51013B + BQ24072 + relé biestable de corte) ruteada al
+100 %: Freerouting 1.9.0 + reparación de QI_ADEN, QI_ILIM y SS_G con `fuente/repair.py` → `kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`.
+KiCad 9 en el CI: DRC 0 errores, 0 advertencias, 0 conexiones incompletas, 0 cortocircuitos, 0 diferencias esquema ↔ placa;
+ERC 0 errores y 0 advertencias. Se generan los ficheros FINAL (Gerber JLCPCB, BOM, CPL, STEP, DRC, ERC, informe y fuentes
+KiCad con SHA256). BOM y CPL comprobados contra `piezas.json` y las posiciones de KiCad (104 piezas, LCSC coincidentes).
+Además: modelo 3D del ESP32 con la colocación de Espressif (salía girado en el render/STEP) y descarga en el CI de los
+modelos 3D de la librería de KiCad para el STEP (4 sin descargar: JST SH, USB-C, RHL-20, VQFN-16; solo afecta al STEP); README con GPIO14 = RELÉ ON, capas y ficheros FINAL.
+**Archivos:** `hardware/girth/PCB/kicad/AVO_GIRTH_PCB_ruteado.kicad_pcb`, `…_colocacion.kicad_pcb`, `fuente/fplib.py`,
+`fuente/gate.py`, `README.md`, `.github/workflows/build-girth-pcb.yml`.
+**No se ha tocado:** `main`, `develop/avo-performance-horse`, firmware ni app.
+**Validación:** CI (KiCad 9: DRC/ERC/paridad). **NO VERIFICADO** físicamente: nada fabricado ni medido.
+**Pendiente:** medir la bobina Qi y ajustar C1–C5; BNO085 por Global Sourcing; confirmar existencias del relé G6KU-2F-Y
+(alternativa AGQ210S03); polaridad real del relé (R40/R41); cambios de la carcasa; adaptar el firmware a los nuevos GPIO.
 
 ## 2026-10-24 — Android 2.1-motor — inicio automático en segundo plano
 **Autor:** Claude · Rama `feature/avo-equine-intelligence-engine`
@@ -2265,3 +2544,66 @@ La orden PMREQ se mantiene antes del corte (compatibilidad con el ZED en 3V3).
 arranque (pico de corriente en su 3V3) y con el ZED en 3V3 no se puede apagar. El S7V8F3 (Bricogeek PRO-0170) tiene su
 propio regulador desde la batería y apagado por pin.
 **Validación:** IMPLEMENTADO · **NO VERIFICADO** (módulo aún sin montar).
+
+## 2026-10-31 — BACK 3.13.0 (Heltec) — Pololu en GPIO34 y carga por USB con todo dormido
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `93cb8a9` · **CI:** [41150163565](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41150163565) (éxito)
+**Qué cambia:** SHDN del Pololu S7V8F3 de GPIO6 a **GPIO34** (pin entre los del ZED en 33 y 35, comprobado con la lista
+de pines de la Heltec Wireless Stick Lite V3). Detección del USB por el pin 5V con divisor 10 k / 15 k a **GPIO7** (antes
+reed): con USB la placa entra en sueño profundo con el ZED sin corriente, radio y LEDs apagados (solo carga) y se despierta
+por ext0 al desaparecer los 5 V. USER en 3 s = modo taller. Contador de encendidos rápidos solo con `ESP_RST_POWERON`.
+**Por qué:** el usuario quita el Qi y carga por el USB-C; pide que con el USB conectado solo cargue y que al desconectarlo
+se despierte todo. La Heltec (CP2102 + TP4054) no tiene ningún pin que indique USB: hace falta el divisor.
+**Validación:** IMPLEMENTADO · COMPILADO-CI · **NO VERIFICADO** en la placa.
+
+## 2026-10-31 — BACK 3.13.1 (Heltec) — USB comprobado por temporizador
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `f3b19d5` · **CI:** [41151001126](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41151001126) (éxito)
+**Qué cambia:** el sueño por USB despierta cada 3 s por temporizador y vuelve a dormir al instante si el ADC sigue viendo
+el USB en GPIO7 (umbral 1,5 V con pull-down interno), en vez de despertar por nivel bajo en GPIO7 (ext0). Se imprime el
+motivo de reinicio y de despertar al arrancar.
+**Por qué:** prueba del usuario 31/10 01:34 con la 3.13.0: «al conectar el USB lo duerme un segundo y vuelve a arrancar».
+La placa estaba **sin el divisor**, así que el firmware no podía detectar el USB: lo que se ve es el reinicio del CP2102 al
+conectar. Aun así, con el divisor el nivel de GPIO7 en sueño queda cerca del umbral de entrada RTC: el ADC es más seguro.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.2 (Heltec) — detección del USB también en GPIO20
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `f0d20f7` · **CI:** [41151554311](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41151554311) (éxito)
+**Qué cambia:** `usb_present()` = GPIO7 por ADC (> 1,5 V) **o** GPIO20 digital con pull-down (divisor 10 k / 22 k). Se
+desactivan el pad USB-Serial-JTAG y los pull-up de D+/D− para usar GPIO20 como entrada; GPIO20 fijado con pull-down
+durante el sueño. El monitor muestra `GPIO20 ALTO/bajo`.
+**Por qué:** el usuario prefiere GPIO20 (está junto al pin 5V en la misma fila).
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.3 (Heltec) — corte por batería baja, USB solo en GPIO20
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `69f851c` · **CI:** [41153737708](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41153737708) (éxito)
+**Qué cambia:** antes de arrancar la radio, batería en reposo < 3,30 V sin USB → sueño profundo (ZED sin corriente),
+reintento cada 60 s, vuelve por encima de 3,45 V (estado en RTC). Detección del USB solo por GPIO20 digital; se quita la
+lectura ADC de GPIO7. Línea de arranque con la batería y el nivel de GPIO20.
+**Por qué:** monitor del usuario 31/10 02:05 con la 3.13.2 y el USB del móvil: batería 2954 mV, `E BOD: Brownout detector
+was triggered` justo al encender la radio y reinicio (`rst:0x3`, `esp_reset_reason` 9) en bucle; el USB no se detectó
+(no salió «USB conectado»). analogRead deja GPIO7 sin pull-down: sin divisor flotaba.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.4 (Heltec) — USB en GPIO20 también por ADC (umbral 1,0 V)
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `4a8ca17` (CI 41154849274 falló: variable declarada tarde), `c648d5a` · **CI:** [41155004469](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41155004469) (éxito)
+**Qué cambia:** `usb_present()` = GPIO20 digital alto **o** ADC de GPIO20 > 1000 mV (lecturas a 0 por el árbitro del ADC2
+ignoradas). Antirrebote del bucle: hacen falta 2 fallos seguidos para reiniciar la cuenta. Tensión de GPIO20 en el monitor.
+**Por qué:** monitor del usuario 31/10 02:16 con la 3.13.3: arranca bien con 3351 mV, pero `USB: no (GPIO20 bajo)` con el
+USB conectado. El usuario pide bajar el umbral de tensión para dormir.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.5 (Heltec) — divisor del USB en cualquier pin libre de la fila del 5V
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `0e07869` · **CI:** [41155792294](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41155792294) (éxito)
+**Qué cambia:** la detección del USB acepta nivel alto en GPIO20, 18, 21, 19, 47 o 48 (pull-down interno) y al arrancar
+imprime el nivel de todos y el ADC de 20/18/19.
+**Por qué:** monitor del usuario 31/10 02:29 con la 3.13.4: `USB (GPIO20 171 mV): no detectado` con el USB conectado; con
+5,1 k / 10 k desde 5 V debería medir ≈ 3,3 V → el divisor no está en GPIO20. También: reinicio por caída de tensión tras
+instalar (batería 3454 mV) y `ZED: SIN_RESPUESTA_UBX` en los primeros segundos.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-10-31 — BACK 3.13.6 (Heltec) — RX/TX del ZED cruzados automáticamente
+**Autor:** Claude · Rama `feature/avo-back-v4` · **Commits:** `a1c3ea1` · **CI:** [41156288729](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/41156288729) (éxito)
+**Qué cambia:** pines del UART del ZED variables; sin bytes del ZED durante 10 s tras darle corriente → se intercambian
+GPIO33/GPIO35 (alternando); con más de 64 bytes recibidos se guarda el orden en NVS `zedswap`. Al arrancar se liberan los
+holds de los dos pines.
+**Por qué:** el usuario dice que el GPS no funciona y pide invertir RX/TX por si los soldó al revés.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.

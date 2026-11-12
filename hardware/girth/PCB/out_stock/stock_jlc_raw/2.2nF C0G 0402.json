@@ -1,0 +1,3623 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 677,
+   "list": [
+    {
+     "componentId": 20578054,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "4pF 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c0402c0g1c040b_C19290386.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 599,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 9999,
+       "productPrice": 0.0171
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 24999,
+       "productPrice": 0.0068
+      },
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0065
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0064
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 599,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0063
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 9999,
+       "productPrice": 0.0165
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 24999,
+       "productPrice": 0.0066
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C0402C0G1C040B/C19290386",
+     "leastPatchNumber": 20,
+     "lossNumber": 8,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 528,
+     "minPurchaseNum": 528,
+     "initialPrice": 0.0171,
+     "componentCode": "C19290386",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C0402C0G1C040B",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312191026_TDK-C0402C0G1C040B_C19290386.pdf",
+     "dataManualFileAccessId": "8600456983996874752",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C0402C0G1C040B",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "16V 4pF C0G\u3001NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "4pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "16V 4pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C0402<span class='lucene_highlight_class'>C0G</span>1C040B",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20681086,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "36pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h360j_C19392877.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1142
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1104
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1085
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1045
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.11
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1064
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H360J/C19392877",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 32,
+     "minPurchaseNum": 32,
+     "initialPrice": 0.2861,
+     "componentCode": "C19392877",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H360J",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312201430_TDK-C1005C0G1H360J_C19392877.pdf",
+     "dataManualFileAccessId": "8600755638905413632",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H360J",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "36pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "36pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "36pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H360J",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20766388,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "2.2pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h2r2c_C19478007.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0035
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0087
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0034
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H2R2C/C19478007",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2578,
+     "minPurchaseNum": 2578,
+     "initialPrice": 0.0035,
+     "componentCode": "C19478007",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H2R2C",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312251256_TDK-C1005C0G1H2R2C_C19478007.pdf",
+     "dataManualFileAccessId": "8600734089087225856",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H2R2C",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "2.2pF 50V C0G\u3001NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "2.2pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "2.2pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H2R2C",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20897680,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "5.6pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h5r6c_C19610005.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.2861
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1142
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1104
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1085
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1045
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.11
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2756
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1064
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H5R6C/C19610005",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 32,
+     "minPurchaseNum": 32,
+     "initialPrice": 0.2861,
+     "componentCode": "C19610005",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H5R6C",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271517_TDK-C1005C0G1H5R6C_C19610005.pdf",
+     "dataManualFileAccessId": "8603326803453104128",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H5R6C",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "5.6pF 50V NP0\u3001C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "5.6pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0\u3001C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "5.6pF 50V <span class='lucene_highlight_class'>NP0</span>\u3001C0G <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H5R6C",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21778399,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "20pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h200j_C20439907.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.287
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.287
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.287
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1145
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1108
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1088
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1048
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1103
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.2764
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.2764
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2764
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1067
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H200J/C20439907",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 32,
+     "minPurchaseNum": 32,
+     "initialPrice": 0.287,
+     "componentCode": "C20439907",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H200J",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8604396486775873536",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H200J",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "20pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "20pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "20pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H200J",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21813706,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "20pF \u00b12% 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c0402c0g1c200g_C20475058.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1026
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 59,
+       "productPrice": 0.1026
+      },
+      {
+       "startNumber": 60,
+       "endNumber": 999,
+       "productPrice": 0.1026
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2499,
+       "productPrice": 0.041
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0397
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.039
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 59,
+       "productPrice": 0.0988
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0376
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2499,
+       "productPrice": 0.0395
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0988
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0382
+      },
+      {
+       "startNumber": 60,
+       "endNumber": 999,
+       "productPrice": 0.0988
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C0402C0G1C200G/C20475058",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 88,
+     "minPurchaseNum": 88,
+     "initialPrice": 0.1026,
+     "componentCode": "C20475058",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C0402C0G1C200G",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8603503637142249472",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C0402C0G1C200G",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "16V 20pF C0G\u3001NP0 \u00b12% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b12%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "20pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "16V 20pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b12% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C0402<span class='lucene_highlight_class'>C0G</span>1C200G",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20577138,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "68pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h680j-50_C19289500.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0038
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0015
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0015
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0015
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0015
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0037
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0014
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0037
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H680J50/C19289500",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2375,
+     "minPurchaseNum": 2375,
+     "initialPrice": 0.0038,
+     "componentCode": "C19289500",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H680J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312191020_TDK-C1005C0G1H680J-50_C19289500.pdf",
+     "dataManualFileAccessId": "8600450899697143808",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H680J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "50V 68pF C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "68pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "50V 68pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H680J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20714350,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "100pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h101j-50_C19426035.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0033
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H101J50/C19426035",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2654,
+     "minPurchaseNum": 2654,
+     "initialPrice": 0.0034,
+     "componentCode": "C19426035",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H101J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312201815_TDK-C1005C0G1H101J-50_C19426035.pdf",
+     "dataManualFileAccessId": "8603396879686115328",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H101J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "100pF 50V NP0\u3001C0G \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "100pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0\u3001C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "100pF 50V <span class='lucene_highlight_class'>NP0</span>\u3001C0G \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H101J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20720970,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "47pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h470j-50_C19432651.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0033
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H470J50/C19432651",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2654,
+     "minPurchaseNum": 2654,
+     "initialPrice": 0.0034,
+     "componentCode": "C19432651",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H470J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312252105_TDK-C1005C0G1H470J-50_C19432651.pdf",
+     "dataManualFileAccessId": "8600732721740333056",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H470J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "47pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "47pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "47pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H470J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20744527,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "220pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h221j-50_C19456178.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 239,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 240,
+       "endNumber": 3999,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 9999,
+       "productPrice": 0.0118
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0114
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0112
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.011
+      },
+      {
+       "startNumber": 240,
+       "endNumber": 3999,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0108
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 9999,
+       "productPrice": 0.0114
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 239,
+       "productPrice": 0.0284
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H221J50/C19456178",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 306,
+     "minPurchaseNum": 306,
+     "initialPrice": 0.0295,
+     "componentCode": "C19456178",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H221J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312271131_TDK-C1005C0G1H221J-50_C19456178.pdf",
+     "dataManualFileAccessId": "8600733352417124353",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H221J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "220pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "220pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "220pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H221J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20770738,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "56pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h560j-50_C19482355.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0033
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H560J50/C19482355",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2654,
+     "minPurchaseNum": 2654,
+     "initialPrice": 0.0034,
+     "componentCode": "C19482355",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H560J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312251329_TDK-C1005C0G1H560J-50_C19482355.pdf",
+     "dataManualFileAccessId": "8603397010527969280",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H560J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "50V 56pF C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "56pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "50V 56pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H560J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20775541,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "27pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h270j-50_C19487149.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0086
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H270J50/C19487149",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1014,
+     "minPurchaseNum": 1014,
+     "initialPrice": 0.0089,
+     "componentCode": "C19487149",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H270J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312251413_TDK-C1005C0G1H270J-50_C19487149.pdf",
+     "dataManualFileAccessId": "8603421577556217856",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H270J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "27pF 50V NP0\u3001C0G \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "27pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0\u3001C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "27pF 50V <span class='lucene_highlight_class'>NP0</span>\u3001C0G \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H270J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20808077,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "12pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h120j-50_C19520483.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0033
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H120J50/C19520483",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2654,
+     "minPurchaseNum": 2654,
+     "initialPrice": 0.0034,
+     "componentCode": "C19520483",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H120J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312211236_TDK-C1005C0G1H120J-50_C19520483.pdf",
+     "dataManualFileAccessId": "8603407069693427712",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H120J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "12pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "12pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "12pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H120J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20820682,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "270pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h271j-50_C19533104.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0138
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0133
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0131
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0127
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0133
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0129
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H271J50/C19533104",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 679,
+     "minPurchaseNum": 679,
+     "initialPrice": 0.0133,
+     "componentCode": "C19533104",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H271J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312211425_TDK-C1005C0G1H271J-50_C19533104.pdf",
+     "dataManualFileAccessId": "8603424421168230400",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H271J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "270pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "270pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "270pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H271J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20839718,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "150pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h151j-50_C19552128.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 239,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 240,
+       "endNumber": 3999,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 9999,
+       "productPrice": 0.0111
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0108
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0106
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0104
+      },
+      {
+       "startNumber": 240,
+       "endNumber": 3999,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 9999,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 239,
+       "productPrice": 0.0267
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H151J50/C19552128",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 326,
+     "minPurchaseNum": 326,
+     "initialPrice": 0.0277,
+     "componentCode": "C19552128",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H151J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312211706_TDK-C1005C0G1H151J-50_C19552128.pdf",
+     "dataManualFileAccessId": "8603455726123827200",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H151J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "150pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "150pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "150pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H151J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20854964,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "33pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h330j-50_C19567338.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0086
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H330J50/C19567338",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1014,
+     "minPurchaseNum": 1014,
+     "initialPrice": 0.0089,
+     "componentCode": "C19567338",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H330J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312211901_TDK-C1005C0G1H330J-50_C19567338.pdf",
+     "dataManualFileAccessId": "8600725006041300992",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H330J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "33pF 50V NP0\u3001C0G \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "33pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0\u3001C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "33pF 50V <span class='lucene_highlight_class'>NP0</span>\u3001C0G \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H330J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20883862,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "15pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h150j-50_C19596215.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0089
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0036
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0034
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50000,
+       "endNumber": 99999,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0035
+      },
+      {
+       "startNumber": 1200,
+       "endNumber": 19999,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1199,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 100000,
+       "endNumber": -1,
+       "productPrice": 0.0033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0086
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H150J50/C19596215",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1014,
+     "minPurchaseNum": 1014,
+     "initialPrice": 0.0089,
+     "componentCode": "C19596215",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H150J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271456_TDK-C1005C0G1H150J-50_C19596215.pdf",
+     "dataManualFileAccessId": "8603579473183338496",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H150J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "15pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "15pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "15pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H150J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20898715,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "120pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h121j-50_C19611048.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0277
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0111
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0108
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0106
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0267
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0104
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H121J50/C19611048",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 50000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 836,
+     "minPurchaseNum": 836,
+     "initialPrice": 0.0108,
+     "componentCode": "C19611048",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H121J/50",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271518_TDK-C1005C0G1H121J-50_C19611048.pdf",
+     "dataManualFileAccessId": "8603583305443135488",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H121J/50",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "120pF 50V C0G\u3001NP0 \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "120pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "120pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b15% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H121J/50",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20593225,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "33pF \u00b110% 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c0402c0g1c330k020bc_C19305472.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0446
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0446
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0446
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0179
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0169
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0163
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.043
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.043
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.043
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0166
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C0402C0G1C330K020BC/C19305472",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 525,
+     "minPurchaseNum": 525,
+     "initialPrice": 0.0172,
+     "componentCode": "C19305472",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C0402C0G1C330K020BC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312191245_TDK-C0402C0G1C330K020BC_C19305472.pdf",
+     "dataManualFileAccessId": "8600451654701629440",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C0402C0G1C330K020BC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "16V 33pF C0G\u3001NP0 \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "33pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "16V 33pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b110% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C0402<span class='lucene_highlight_class'>C0G</span>1C330K020BC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20604318,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "8pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h080c050ba_C19316489.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0123
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0049
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0047
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0045
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0119
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0046
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H080C050BA/C19316489",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1920,
+     "minPurchaseNum": 1920,
+     "initialPrice": 0.0047,
+     "componentCode": "C19316489",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H080C050BA",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312191450_TDK-C1005C0G1H080C050BA_C19316489.pdf",
+     "dataManualFileAccessId": "8600446317709971456",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H080C050BA",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "50V 8pF NP0\u3001C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "8pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0\u3001C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "50V 8pF <span class='lucene_highlight_class'>NP0</span>\u3001C0G <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H080C050BA",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20877894,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "33pF \u00b12% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h330g050ba_C19590260.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.0301
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.0301
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.0301
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.4111
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.398
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3914
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3771
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.396
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.9923
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.9923
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9923
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3834
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H330G050BA/C19590260",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 9,
+     "minPurchaseNum": 9,
+     "initialPrice": 1.0301,
+     "componentCode": "C19590260",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H330G050BA",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312252106_TDK-C1005C0G1H330G050BA_C19590260.pdf",
+     "dataManualFileAccessId": "8603335332783792128",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H330G050BA",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "33pF 50V C0G\u3001NP0 \u00b12% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b12%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "33pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "33pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b12% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H330G050BA",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20892996,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "3.3pF 16V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c0402c0g1c3r3c020bc_C19605328.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.6305
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.6305
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.6305
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.2522
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2441
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2391
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2304
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.243
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.6074
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.6074
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.6074
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.2351
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C0402C0G1C3R3C020BC/C19605328",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 20000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 15,
+     "minPurchaseNum": 15,
+     "initialPrice": 0.6305,
+     "componentCode": "C19605328",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C0402C0G1C3R3C020BC",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312271510_TDK-C0402C0G1C3R3C020BC_C19605328.pdf",
+     "dataManualFileAccessId": "8603335876869447680",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C0402C0G1C3R3C020BC",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "16V 3.3pF C0G\u3001NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "3.3pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "16V 3.3pF C0G\u3001<span class='lucene_highlight_class'>NP0</span> <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C0402<span class='lucene_highlight_class'>C0G</span>1C3R3C020BC",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21779810,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "150pF \u00b110% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_tdk-c1005c0g1h151k050ba_C20441308.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0235
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 599,
+       "productPrice": 0.0235
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 9999,
+       "productPrice": 0.0235
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 24999,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0091
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0089
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 25000,
+       "endNumber": 49999,
+       "productPrice": 0.0088
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0226
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 599,
+       "productPrice": 0.0226
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0086
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 9999,
+       "productPrice": 0.0226
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 24999,
+       "productPrice": 0.0091
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TDK-C1005C0G1H151K050BA/C20441308",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 384,
+     "minPurchaseNum": 384,
+     "initialPrice": 0.0235,
+     "componentCode": "C20441308",
+     "componentBrandEn": "TDK",
+     "componentModelEn": "C1005C0G1H151K050BA",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8604391416382566400",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TDK C1005C0G1H151K050BA",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "150pF 50V C0G\u3001NP0 \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "150pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G\u3001NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "150pF 50V C0G\u3001<span class='lucene_highlight_class'>NP0</span> \u00b110% <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": "C1005<span class='lucene_highlight_class'>C0G</span>1H151K050BA",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 52775212,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011C0G(NP0)-0402-50V-106\u00b110%",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "C9900210461",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900210461",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "C0G(NP0)-0402-50V-106\u00b110%",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT C0G(NP0)-0402-50V-106\u00b110%",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0402 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0402</span> SMT ROHS",
+     "componentModelHigh": "<span class='lucene_highlight_class'>C0G</span>(<span class='lucene_highlight_class'>NP0</span>)-0402-50V-106\u00b110%",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 53184187,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011C0G(NP0)-0402-50V-103\u00b110%",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "C9900216131",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900216131",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "C0G(NP0)-0402-50V-103\u00b110%",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT C0G(NP0)-0402-50V-103\u00b110%",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0402 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0402</span> SMT ROHS",
+     "componentModelHigh": "<span class='lucene_highlight_class'>C0G</span>(<span class='lucene_highlight_class'>NP0</span>)-0402-50V-103\u00b110%",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 28,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "2.2nF C0G 0402"
+ },
+ "message": null
+}

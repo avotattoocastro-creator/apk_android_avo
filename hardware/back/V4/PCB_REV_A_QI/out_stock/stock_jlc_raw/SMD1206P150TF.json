@@ -1,0 +1,911 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 21514,
+     "componentLibraryType": "expand",
+     "stockCount": 11710,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 35A 1206 \u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_ruilon-shenzhen-ruilongyuan-elec-smd1206p150tf_C20802.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1188
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0934
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0713
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.058
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0541
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.09
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0521
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0559
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0687
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0778
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1144
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 11607,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21514-SMD1206P150TF/C20802",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.28,
+     "preMinPurchaseNum": 97,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1188,
+     "componentCode": "C20802",
+     "componentBrandEn": "RUILON(Shenzhen Ruilongyuan Elec)",
+     "componentModelEn": "SMD1206P150TF",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553352261674811392",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2403081022_RUILON-Shenzhen-Ruilongyuan-Elec-SMD1206P150TF_C20802.pdf",
+     "dataManualFileAccessId": "8770256253375258624",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "RUILON SMD1206P150TF",
+     "minImage": "",
+     "minImageAccessId": "8553352262312345600",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.9mm 130m\u03a9 1mm 25m\u03a9 3.6mm 300ms 35A 3A 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "35A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SMD1206P150TF</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 157590,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "SMD1206P150TF",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0823
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0665
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0587
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0528
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0528
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0528
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0565
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0508
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0508
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0641
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0508
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0792
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "YenjiElec-SMD1206P150TF/C146258",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.2,
+     "preMinPurchaseNum": 136,
+     "minPurchaseNum": 136,
+     "initialPrice": 0.0665,
+     "componentCode": "C146258",
+     "componentBrandEn": "Yenji Elec",
+     "componentModelEn": "SMD1206P150TF",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583573055293558784",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "8588941212300005376",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Yenji Elec SMD1206P150TF",
+     "minImage": "",
+     "minImageAccessId": "8583573056090476544",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "F1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 130m\u03a9 1s 3A 40m\u03a9 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SMD1206P150TF</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 506514,
+     "componentLibraryType": "expand",
+     "stockCount": 2994,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_pttc-polytronics-tech-smd1206p150tft_C495353.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.097
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0773
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0675
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.06
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.049
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0461
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0472
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": -1,
+       "productPrice": 0.0444
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0578
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.065
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0934
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0745
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 2993,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "506514-SMD1206P150TFT/C495353",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.25102,
+     "preMinPurchaseNum": 117,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.097,
+     "componentCode": "C495353",
+     "componentBrandEn": "PTTC(Polytronics Tech)",
+     "componentModelEn": "SMD1206P150TFT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8761033581009616896",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2003112036_PTTC-Polytronics-Tech-SMD1206P150TFT_C495353.pdf",
+     "dataManualFileAccessId": "8588912268200824832",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "PTTC(Polytronics Tech) SMD1206P150TFT",
+     "minImage": "",
+     "minImageAccessId": "8761033582175498240",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.8mm 100A 120m\u03a9 1mm 3.4mm 300ms 3A 40m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.4mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "120m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SMD1206P150TF</span>T",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 20747699,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "SMD1206P150TFA",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_littelfuse-smd1206p150tfa_C19459341.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9466
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.9466
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.9466
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3783
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3652
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3587
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3455
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3645
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.9119
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.9119
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9119
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3518
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-SMD1206P150TFA/C19459341",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 10,
+     "minPurchaseNum": 10,
+     "initialPrice": 0.9466,
+     "componentCode": "C19459341",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "SMD1206P150TFA",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2312271306_Littelfuse-SMD1206P150TFA_C19459341.pdf",
+     "dataManualFileAccessId": "8600738909718794240",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse SMD1206P150TFA",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Resettable Fuses ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SMD1206P150TF</span>A",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 49148125,
+     "componentLibraryType": "expand",
+     "stockCount": 6769,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "16V 35A 1206 \u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1276
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1009
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0875
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0775
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0695
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0656
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0632
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0972
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0843
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1229
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0669
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0747
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 6768,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "49148125-SMD1206P150TF16/C46970782",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.34,
+     "preMinPurchaseNum": 90,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1276,
+     "componentCode": "C46970782",
+     "componentBrandEn": "RUILON(Shenzhen Ruilongyuan Elec)",
+     "componentModelEn": "SMD1206P150TF/16",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "RUILON SMD1206P150TF/16",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 130m\u03a9 16V 25m\u03a9 35A 35s 3A 600mW 1206 Resettable Fuses ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SMD1206P150TF</span>/16",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "SMD1206P150TF"
+ },
+ "message": null
+}
