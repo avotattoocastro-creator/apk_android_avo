@@ -37,7 +37,9 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Por qué:** petición del usuario de que iPad y PC tengan los mismos datos y análisis, con ideas de presentación tomadas de
 Equimetre. El pulso solo procederá de la cincha propia (no se usará el Polar H10).
 **No se ha tocado:** el motor C++, los contratos binarios, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente de esta rama · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43333938426 (éxito, 8 self-tests nuevos PASS) · iPad run 43333943702 (TestFlight
+build 84 subido; tests fallaron por el nombre del módulo, corregido) · iPad run 43335103721 (éxito: tests + capturas
+`04_Calendar`, `09_KeyData`). **NO VERIFICADO** en iPad ni en PC reales.
 **Pendiente:** tabla de análisis, Comparar, Historia y Track Work en Windows; sesión de referencia; ficha de sesión.
 
 ## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
