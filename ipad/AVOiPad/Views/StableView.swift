@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 /// Cuadra (kind = .horse) and Jinetes (kind = .rider): port of windows/AVO.Windows/Views/StableView.xaml.
 struct StableView: View {
@@ -155,13 +156,18 @@ private struct StableFullList: View {
 
 private struct StableWideRow: View {
     let row: StableIdentityRow
+    @Environment(AppModel.self) private var app
 
     var body: some View {
         HStack(spacing: 16) {
             ZStack {
                 Circle().fill(Avo.surface2).frame(width: 48, height: 48)
+                if let img = IdentityPhotos.load(app.paths.root, row.code) {
+                    Image(uiImage: img).resizable().scaledToFill().frame(width: 48, height: 48).clipShape(Circle())
+                } else {
+                    Text(row.initial).font(.system(size: 20, weight: .semibold)).foregroundStyle(Avo.silver)
+                }
                 Circle().stroke(Avo.line, lineWidth: 1).frame(width: 48, height: 48)
-                Text(row.initial).font(.system(size: 20, weight: .semibold)).foregroundStyle(Avo.silver)
             }
             VStack(alignment: .leading, spacing: 3) {
                 HStack(spacing: 8) {
@@ -266,6 +272,8 @@ private struct StableRowView: View {
 private struct StableDetailPane: View {
     let page: StableIdentityPage
     @Environment(AppModel.self) private var app
+    @State private var trainingsOpen: Bool = false
+    @State private var stretchesOpen: Bool = false
 
     var body: some View {
         if !page.hasSelection {
@@ -287,6 +295,15 @@ private struct StableDetailPane: View {
                     StableEditorCard(page: page)
                     if !page.isNew, let sel = page.selected {
                         StableTotals(row: sel)
+                        // trainings and saved stretches first, each one folding (trainer's sketch 14/11/2026)
+                        StableFold(title: "Entrenamientos de \(sel.name)", count: sel.count, open: $trainingsOpen) {
+                            StableTrainingsCard(page: page, row: sel)
+                        }
+                        if page.isHorse {
+                            StableFold(title: "Tramos guardados de \(sel.name)", count: nil, open: $stretchesOpen) {
+                                StableStretchesCard(row: sel)
+                            }
+                        }
                         if page.isHorse {
                             Button {
                                 app.horseHistory.open(horseKey: sel.code, name: sel.name)
@@ -299,8 +316,6 @@ private struct StableDetailPane: View {
                             StableRacesCard(row: sel)
                             FranceGalopHorseCard(row: sel)
                         }
-                        StableTrainingsCard(page: page, row: sel)
-                        if page.isHorse { StableStretchesCard(row: sel) }
                     }
                 }
             }
@@ -312,9 +327,16 @@ private struct StableEditorCard: View {
     let page: StableIdentityPage
     @Environment(AppModel.self) private var app
 
+    @State private var photoItem: PhotosPickerItem? = nil
+    @State private var photoVersion: Int = 0
+
     var body: some View {
         @Bindable var p = page
         AvoCard(title: page.header) {
+            VStack(alignment: .leading, spacing: 10) {
+            // trainer's sketch 14/11/2026: photo on the left, the data on its right
+            HStack(alignment: .top, spacing: 16) {
+                photoBox
             VStack(alignment: .leading, spacing: 10) {
                 ViewThatFits(in: .horizontal) {
                     HStack(alignment: .top, spacing: 16) {
@@ -366,6 +388,8 @@ private struct StableEditorCard: View {
                 field("NOTAS") {
                     TextField("", text: $p.editNotes, axis: .vertical).lineLimit(2...5).modifier(StableFieldStyle())
                 }
+            }
+            }
                 Toggle("Activo (aparece al asignar entrenamientos)", isOn: $p.editActive).font(.footnote).tint(Avo.red)
 
                 // the three buttons the same size (trainer 14/11/2026)
@@ -396,6 +420,53 @@ private struct StableEditorCard: View {
                 }
             }
         }
+    }
+
+    private var photoCode: String { page.isNew ? "" : (page.selected?.code ?? "") }
+
+    /// Photo of the horse / rider: tap to choose one from Fotos; long press to remove it.
+    private var photoBox: some View {
+        let img: UIImage? = { _ = photoVersion; return IdentityPhotos.load(app.paths.root, photoCode) }()
+        return PhotosPicker(selection: $photoItem, matching: .images) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10).fill(Avo.surface2)
+                if let img = img {
+                    Image(uiImage: img).resizable().scaledToFill()
+                } else {
+                    VStack(spacing: 8) {
+                        Image(systemName: page.isHorse ? "camera" : "person.crop.square").font(.system(size: 30, weight: .light))
+                        Text(photoCode.isEmpty ? "Guarda primero para añadir foto" : "Añadir foto")
+                            .font(.caption).multilineTextAlignment(.center)
+                    }
+                    .foregroundStyle(Avo.textDim)
+                    .padding(8)
+                }
+            }
+            .frame(width: 190, height: 230)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+        }
+        .disabled(photoCode.isEmpty)
+        .contextMenu {
+            if img != nil {
+                Button(role: .destructive) {
+                    IdentityPhotos.remove(app.paths.root, photoCode)
+                    photoVersion += 1
+                } label: { Label("Quitar foto", systemImage: "trash") }
+            }
+        }
+        .onChange(of: photoItem) { (_: PhotosPickerItem?, item: PhotosPickerItem?) in
+            guard let item = item else { return }
+            let code: String = photoCode
+            Task { @MainActor in
+                if let data = try? await item.loadTransferable(type: Data.self) {
+                    IdentityPhotos.save(app.paths.root, code, data)
+                    photoVersion += 1
+                }
+                photoItem = nil
+            }
+        }
+        .accessibilityIdentifier("stable.photo")
     }
 
     private func nameField(_ p: StableIdentityPage) -> some View {
@@ -730,6 +801,36 @@ private struct StableTrainingActions: View {
                 .buttonStyle(.avoSecondary)
                 .disabled(list.isEmpty)
                 .opacity(list.isEmpty ? 0.45 : 1)
+        }
+    }
+}
+
+/// Folding section of the card (trainer's sketch 14/11/2026: «Ocultar / Desplegar»).
+private struct StableFold<Content: View>: View {
+    let title: String
+    let count: Int?
+    @Binding var open: Bool
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { open.toggle() }
+            } label: {
+                HStack {
+                    Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver)
+                    if let n = count { Text("\(n)").font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim) }
+                    Spacer()
+                    Label(open ? "Ocultar" : "Desplegar", systemImage: open ? "chevron.up" : "chevron.down")
+                        .font(.callout.weight(.semibold)).foregroundStyle(Avo.red)
+                }
+                .padding(.horizontal, 14).padding(.vertical, 12)
+                .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            if open { content() }
         }
     }
 }

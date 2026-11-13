@@ -34,6 +34,10 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - sin título de página en la ficha;
   - Guardar, Copiar enlace y Eliminar tienen el mismo ancho;
   - los totales van en una fila de 5.
+- **Ficha de Cuadra y Jinetes (iPad):**
+  - foto a la izquierda con los datos a su derecha; se elige de Fotos, se guarda en `<app>/fotos/<código>.jpg` (máx. 900 px)
+    y también se ve en la fila de la lista;
+  - «Entrenamientos» y «Tramos guardados» van primero, como desplegables (Ocultar / Desplegar).
 - **Configuración (iPad):** incluye «Reloj Wi-Fi» y «Geocercas y líneas» (salen del menú lateral) junto al Servidor AVO.
   La prueba de capturas llega a ellas desde Configuración.
 - **Análisis del tramo (iPad):** la tabla de parciales usa todo el ancho de la tarjeta y los metros («1000–1200») no se parten.
