@@ -1,0 +1,90 @@
+<UserControl x:Class="Avo.Windows.Views.KeyDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls"
+             xmlns:v="clr-namespace:Avo.Windows.Views">
+    <!-- «Datos clave» de un entrenamiento (paridad iPad ↔ PC, docs/PARIDAD_IPAD_PC.md): rejilla de cifras con icono, reparto de
+         aires y calidad de la posición. Todas las cifras salen del motor AVO Equine (Core/Analysis/KeyData.cs), con las mismas
+         reglas que ipad/AVOiPad/Views/KeyDataView.swift. Pulso y recuperaciones quedan vacíos hasta que exista el ECG de la
+         cincha: nunca se inventan. -->
+    <UserControl.Resources>
+        <DataTemplate x:Key="KeyTileTemplate">
+            <Border Margin="0,0,10,10" Padding="14" MinHeight="150" CornerRadius="12" Background="{StaticResource AvoCardBrush}"
+                    BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="{Binding Glyph}" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="{Binding Accent}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="{Binding Value}" FontSize="30" FontWeight="SemiBold" Foreground="{Binding ValueColor}"/>
+                        <TextBlock Text="{Binding Unit}" Style="{StaticResource AvoDim}" VerticalAlignment="Bottom" Margin="5,0,0,6"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Label}" FontWeight="SemiBold" Foreground="{StaticResource AvoText}" Margin="0,2,0,0"/>
+                    <TextBlock Text="{Binding Caption}" FontSize="12" Foreground="{Binding CaptionColor}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="KeyTilesPanel"><UniformGrid Columns="4"/></ItemsPanelTemplate>
+    </UserControl.Resources>
+    <Grid Margin="16,12,16,14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <v:SessionHeader/>
+        <TextBlock Grid.Row="1" Text="{Binding KeyDataEmptyText}" Style="{StaticResource AvoDim}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Visibility="{Binding HasKeyData, Converter={StaticResource NotBoolVis}}"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="{Binding HasKeyData, Converter={StaticResource BoolVis}}">
+            <StackPanel>
+                <TextBlock Text="{Binding KeyDataTitle}" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource AvoText}"/>
+                <TextBlock Text="Cifras del motor AVO Equine · iguales en iPad y PC" Style="{StaticResource AvoDim}" Margin="0,2,0,12"/>
+
+                <TextBlock Text="VELOCIDAD Y TIEMPOS" Style="{StaticResource AvoLabel}" Margin="0,0,0,6"/>
+                <ItemsControl ItemsSource="{Binding KeySpeedTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+                <TextBlock Text="PULSO" Style="{StaticResource AvoLabel}" Margin="0,6,0,6"/>
+                <ItemsControl ItemsSource="{Binding KeyHeartTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+                <TextBlock Text="TRANCO" Style="{StaticResource AvoLabel}" Margin="0,6,0,6"/>
+                <ItemsControl ItemsSource="{Binding KeyStrideTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+
+                <Grid Margin="0,6,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <c:AvoCard Header="Aires · tiempo en cada aire según el motor">
+                        <ItemsControl ItemsSource="{Binding SelectedKeyData.Gaits}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Margin="0,4">
+                                        <TextBlock DockPanel.Dock="Right" Text="{Binding ShareText}" Width="56" TextAlignment="Right" FontWeight="SemiBold" Foreground="{StaticResource AvoText}"/>
+                                        <TextBlock DockPanel.Dock="Right" Text="{Binding TimeText}" Foreground="{StaticResource AvoSilver}" Margin="0,0,10,0"/>
+                                        <TextBlock Text="{Binding Name}" Foreground="{StaticResource AvoText}"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </c:AvoCard>
+                    <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Calidad de la posición · bloque rtk del motor">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding SelectedKeyData.QualityLabel}" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource AvoWarn}"/>
+                                <TextBlock Text="{Binding SelectedKeyData.FixText}" Style="{StaticResource AvoDim}" VerticalAlignment="Bottom" Margin="8,0,0,4"/>
+                            </StackPanel>
+                            <ItemsControl ItemsSource="{Binding SelectedKeyData.Quality}" Margin="0,6,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel Margin="0,3">
+                                            <TextBlock DockPanel.Dock="Right" Text="{Binding ShareText}" Foreground="{StaticResource AvoSilver}"/>
+                                            <TextBlock Text="{Binding Label}" Foreground="{StaticResource AvoText}"/>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Foreground="{StaticResource AvoWarn}" Margin="0,8,0,0"
+                                       Visibility="{Binding SelectedKeyData.ShowQualityWarning, Converter={StaticResource BoolVis}, FallbackValue=Collapsed}"
+                                       Text="Sin RTK FIX la precisión es de decímetros: tiempos y velocidades válidos, cifras centimétricas no."/>
+                        </StackPanel>
+                    </c:AvoCard>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

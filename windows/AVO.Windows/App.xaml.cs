@@ -67,7 +67,7 @@ public partial class App : Application
     }
 
     // ------------------------------------------------------------------ capture mode (CI visual evidence)
-    private static readonly string[] Pages = ["Home", "Sessions", "Stable", "Riders", "Analysis", "Map", "Charts", "Segments", "Biomech", "Compare", "Geofences", "Tides", "Reports", "Server", "Engine"];
+    private static readonly string[] Pages = ["Home", "Sessions", "Calendar", "Stable", "Riders", "Analysis", "KeyData", "Map", "Charts", "Segments", "Biomech", "Compare", "Geofences", "Tides", "Reports", "Server", "Engine"];
 
     private static async Task CaptureAsync(MainWindow window, MainViewModel vm, string dir, string? demoDir, string sizes)
     {

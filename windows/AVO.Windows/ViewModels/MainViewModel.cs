@@ -98,11 +98,13 @@ public sealed partial class MainViewModel : ObservableObject
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
         if (Page == "Reports") RefreshReportPreview();
         if (Page == "Geofences") RefreshGeo();
+        if (Page == "Calendar") RefreshCalendar();   // paridad iPad ↔ PC
+        if (Page == "KeyData") RefreshKeyData();
         Raise(nameof(ShowEmptyState));
     }
 
     /// <summary>Analysis pages without any training: show a clear «import / demo» panel instead of empty widgets.</summary>
-    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine" or "Stable" or "Riders" or "Geofences");
+    public bool ShowEmptyState => Sessions.Count == 0 && Page is not ("Home" or "Sessions" or "Server" or "Engine" or "Stable" or "Riders" or "Geofences" or "Calendar");
 
     public const string DemoUrl = "https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/windows-v2-pro-latest/AVO_Windows_V2_DEMO_SINTETICA.zip";
     private string _demoState = "";

@@ -7,8 +7,8 @@ import XCTest
 final class ScreenshotTests: XCTestCase {
     /// (identifier, is a tab of the training bar). Sidebar = general pages; «Análisis» opens the training and its pages
     /// are in the training bar at the top.
-    static let pages: [(String, Bool)] = [("Home", false), ("Sessions", false), ("List", false), ("Races", false), ("Stable", false),
-                                          ("Riders", false), ("Analysis", false), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
+    static let pages: [(String, Bool)] = [("Home", false), ("Sessions", false), ("List", false), ("Calendar", false), ("Races", false), ("Stable", false),
+                                          ("Riders", false), ("Analysis", false), ("KeyData", true), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
                                           ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),
                                           ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Server", false)]

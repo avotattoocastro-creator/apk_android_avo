@@ -6,14 +6,15 @@ enum Page: String, CaseIterable, Identifiable {
     case home = "Home", sessions = "Sessions", trainingList = "List", races = "Races", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
-         summary = "Summary", trackWork = "TrackWork", assistant = "Assistant"
+         summary = "Summary", trackWork = "TrackWork", assistant = "Assistant",
+         calendar = "Calendar", keyData = "KeyData"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
     /// «Mapa» is now the «Análisis» page itself (map, profile, time bar and zones).
     var isTrainingPage: Bool {
         switch self {
-        case .analysis, .map, .summary, .gps, .charts, .trackWork, .assistant, .segments, .biomech, .compare, .tides, .reports, .engine: return true
+        case .analysis, .map, .summary, .gps, .charts, .trackWork, .assistant, .segments, .biomech, .compare, .tides, .reports, .engine, .keyData: return true
         default: return false
         }
     }

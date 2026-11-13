@@ -189,6 +189,7 @@ public sealed partial class MainViewModel
 
     private void RefreshSessionPanels()
     {
+        RefreshKeyData();   // paridad iPad ↔ PC: «Datos clave» sigue al entrenamiento y al motor
         SessionStats.Clear(); GnssStats.Clear();
         var s = Selected;
         if (s is null) return;

@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-PARITY-1 — iPad y PC: Calendario y Datos clave (paridad)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` · Contrato: `docs/PARIDAD_IPAD_PC.md`
+**Qué cambia:**
+- **iPad:** nuevas páginas **Calendario** (vista de mes y de año, acumulados y filtro por caballo) y **Datos clave**
+  (velocidad, mejores 200/600/1000 m, pulso pendiente del ECG de la cincha, tranco, aires y calidad GNSS).
+  `Core/KeyData.swift`, `Views/CalendarView.swift`, `Views/KeyDataView.swift`, pruebas `KeyDataTests`, y las dos páginas
+  añadidas a las capturas de la UI.
+- **Windows:** las mismas páginas con las mismas reglas: `AVO.Windows.Core/Analysis/KeyData.cs`,
+  `MainViewModel.Parity.cs`, `Views/CalendarView.xaml`, `Views/KeyDataView.xaml`, `SelfTest/KeyDataTests.cs` (mismo JSON y
+  mismos valores que en iPad), y las dos páginas añadidas a las capturas.
+**Por qué:** petición del usuario de que iPad y PC tengan los mismos datos y análisis, con ideas de presentación tomadas de
+Equimetre. El pulso solo procederá de la cincha propia (no se usará el Polar H10).
+**No se ha tocado:** el motor C++, los contratos binarios, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente de esta rama · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** tabla de análisis, Comparar, Historia y Track Work en Windows; sesión de referencia; ficha de sesión.
+
 ## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
 **Autor:** Claude · Rama `claude/asignacion-caballo` · Contrato: `docs/ASIGNACION_CABALLO.md`
 **Qué cambia:**

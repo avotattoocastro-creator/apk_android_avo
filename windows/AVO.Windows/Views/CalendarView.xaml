@@ -1,0 +1,129 @@
+<UserControl x:Class="Avo.Windows.Views.CalendarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls">
+    <!-- «Calendario» (paridad iPad ↔ PC, docs/PARIDAD_IPAD_PC.md): entrenamientos por día en vista de mes o de año, filtro por
+         caballo y acumulados. Mismas reglas que ipad/AVOiPad/Views/CalendarView.swift (Core/Analysis/KeyData.cs ·
+         TrainingCalendar). Pulsar un entrenamiento lo abre en «Datos clave». -->
+    <Grid Margin="16,12,16,14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="260"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- header -->
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12" LastChildFill="False">
+            <Button DockPanel.Dock="Left" Content="‹" Command="{Binding CalendarPrevCommand}" Padding="14,4" FontSize="18" ToolTip="Anterior"/>
+            <TextBlock DockPanel.Dock="Left" Text="{Binding CalendarTitle}" FontSize="26" FontWeight="SemiBold" Foreground="{StaticResource AvoText}"
+                       VerticalAlignment="Center" Margin="12,0" MinWidth="240"/>
+            <Button DockPanel.Dock="Left" Content="›" Command="{Binding CalendarNextCommand}" Padding="14,4" FontSize="18" ToolTip="Siguiente"/>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <RadioButton Style="{StaticResource AvoTabButton}" Content="Mes" Command="{Binding CalendarMonthViewCommand}"
+                             IsChecked="{Binding CalendarYearView, Converter={StaticResource Not}, Mode=OneWay}"/>
+                <RadioButton Style="{StaticResource AvoTabButton}" Content="Año" Command="{Binding CalendarYearViewCommand}"
+                             IsChecked="{Binding CalendarYearView, Mode=OneWay}"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- month -->
+        <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding CalendarYearView, Converter={StaticResource NotBoolVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ItemsControl ItemsSource="{Binding CalendarWeekdays}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="7"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Style="{StaticResource AvoLabel}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding CalendarDays}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="7" Rows="6"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="3" Padding="6" CornerRadius="8" BorderThickness="1" BorderBrush="{StaticResource AvoLine}" Background="{StaticResource AvoSurface}">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding InMonth}" Value="False">
+                                            <Setter Property="Opacity" Value="0.45"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsToday}" Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource AvoRed}"/>
+                                            <Setter Property="BorderThickness" Value="2"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Day}" HorizontalAlignment="Right" FontWeight="SemiBold" Foreground="{StaticResource AvoText}"/>
+                                <ItemsControl ItemsSource="{Binding Shown}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Content="{Binding Label}" Margin="0,3,0,0" Padding="6,2" HorizontalContentAlignment="Left"
+                                                    Background="#293D9BFF" BorderBrush="{StaticResource AvoBlue}" BorderThickness="3,0,0,0"
+                                                    Foreground="{StaticResource AvoText}" FontSize="12" Cursor="Hand"
+                                                    Command="{Binding DataContext.OpenCalendarEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}" ToolTip="Abrir en «Datos clave»"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock Text="{Binding MoreText}" Style="{StaticResource AvoCaption}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+        <!-- year -->
+        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding CalendarYearCells}" Visibility="{Binding CalendarYearView, Converter={StaticResource BoolVis}}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4" Rows="3"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Margin="5" Padding="12" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Cursor="Hand"
+                            Command="{Binding DataContext.OpenCalendarMonthCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding Month}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource AvoLabel}"/>
+                            <TextBlock Text="{Binding CountText}" FontSize="20" FontWeight="SemiBold" Foreground="{StaticResource AvoText}" Margin="0,6,0,2"/>
+                            <TextBlock Text="{Binding Detail}" Style="{StaticResource AvoCaption}"/>
+                        </StackPanel>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- totals -->
+        <UniformGrid Grid.Row="2" Grid.Column="0" Columns="5" Margin="0,12,0,0">
+            <c:AvoMetricTile Label="{Binding CalendarCountLabel}" Value="{Binding CalendarSummary.CountText}" Margin="0,0,6,0"/>
+            <c:AvoMetricTile Label="TIEMPO ACUMULADO" Value="{Binding CalendarSummary.DurationText}" Margin="6,0"/>
+            <c:AvoMetricTile Label="DURACIÓN MEDIA" Value="{Binding CalendarSummary.MeanText}" Margin="6,0"/>
+            <c:AvoMetricTile Label="DISTANCIA ACUMULADA" Value="{Binding CalendarSummary.DistanceText}" Margin="6,0"/>
+            <c:AvoMetricTile Label="CON RTK FIX" Value="{Binding CalendarSummary.RtkText}" Caption="≥ 50 % del tiempo en FIX (motor)" Margin="6,0,0,0"/>
+        </UniformGrid>
+
+        <!-- horses -->
+        <c:AvoCard Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="12,0,0,0" Header="Caballos" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Sin entrenamientos" Style="{StaticResource AvoDim}" Visibility="{Binding CalendarHasHorses, Converter={StaticResource NotBoolVis}}"/>
+                <ItemsControl ItemsSource="{Binding CalendarHorses}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Shown}" Foreground="{StaticResource AvoText}" Margin="0,4"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,10,0,0"
+                           Text="Unifica en la Cuadra los nombres de un mismo caballo para ver juntas sus sesiones."/>
+            </StackPanel>
+        </c:AvoCard>
+    </Grid>
+</UserControl>

@@ -23,6 +23,8 @@ struct RootView: View {
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
+        // paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md): mismo orden y nombre que en Windows
+        RootNavEntry(page: .calendar, title: "Calendario", icon: "calendar"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
         // trainer's sketch 08/11/2026: Informes and Biomecánica in the sidebar under Análisis (out of the training bar)
@@ -40,6 +42,7 @@ struct RootView: View {
     /// Pages of ONE training, in the training bar at the top of «Análisis».
     static let trainingTabs: [RootNavEntry] = [
         RootNavEntry(page: .analysis, title: "Análisis", icon: "map"),
+        RootNavEntry(page: .keyData, title: "Datos clave", icon: "square.grid.3x2"),
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
@@ -275,6 +278,8 @@ struct RootView: View {
         case .watchWifi: WatchWifiView()
         case .server: ServerView()
         case .engine: EngineView()
+        case .calendar: CalendarView()
+        case .keyData: KeyDataView()
         }
     }
 }
