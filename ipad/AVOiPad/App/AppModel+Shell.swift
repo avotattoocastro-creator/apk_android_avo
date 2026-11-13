@@ -50,6 +50,15 @@ struct ShellRow: Identifiable, Hashable {
 extension AppModel {
     // ------------------------------------------------------------------ launch
     static let appVersion: String = "1.0.0"
+    /// TestFlight build number (CFBundleVersion, set by CI) — shown in the sidebar.
+    static var buildNumber: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "—" }
+    /// Build date ≈ modification date of the executable, in Europe/Madrid.
+    static var buildDateText: String {
+        guard let url = Bundle.main.executableURL,
+              let d = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.modificationDate] as? Date else { return "—" }
+        return MadridTime.format(d, "dd/MM/yyyy HH:mm")
+    }
+    static var copyrightYear: String { MadridTime.format(Date(), "yyyy") }
     static let demoNamePattern: String = "^DEMO_[A-Za-z0-9_]{1,60}\\.avr$"
 
     static var isCaptureLaunch: Bool { ProcessInfo.processInfo.arguments.contains("-AVOCapture") }
@@ -86,6 +95,7 @@ extension AppModel {
     // ------------------------------------------------------------------ navigation
     /// Called by `page.didSet`: tells the feature model of the page that it is visible.
     func onPageChanged() {
+        if page.isTrainingPage { trainingOpened = true }
         switch page {
         case .stable, .riders: stable?.pageShown()
         case .map: map?.pageShown()

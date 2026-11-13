@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-5 — iPad: barras, menú lateral, mapa del análisis y tabla de entrenamientos
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad, bocetos del usuario sobre la build 91):**
+- **Entrenamientos:** se corrige el hueco enorme encima de la tabla (un `Color.clear` de la cabecera se estiraba en vertical).
+- **Menú lateral:**
+  - Mapa, Análisis y Biomecánica quedan atenuados y sin acción hasta que se abre un entrenamiento (desde la lista, el
+    calendario o el Dashboard).
+  - El pie muestra los datos de la app: versión, build y fecha de compilación.
+- **Barra inferior:** a la izquierda, la versión del motor de IA; a la derecha, el copyright.
+- **Barra del entrenamiento:** Fecha | Caballo | V. máx. | Tiempo | Km.
+- **Análisis/Mapa:**
+  - el mapa abre encuadrando el recorrido entero y ya no salta al tramo de trabajo cuando llega el resultado del motor;
+  - los paneles y botones sobre el mapa usan siempre los colores oscuros (en modo claro no se veían las cifras ni los iconos);
+  - se quitan la fila de botones «Zonas» y su leyenda.
+**No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-4 — iPad: el menú lateral vuelve a abrirse, imagen entera y gris claro más oscuro
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad, sobre la build 90):**
@@ -33,7 +50,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   imagen se ajusta dentro del recuadro sobre su fondo negro.
 - Modo claro: fondo, superficies secundarias, líneas y cabecera un poco más oscuros.
 **No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+**Validación:** COMPILADO / CI: iPad run 43524630332 (TestFlight build 91). **NO VERIFICADO** en iPad real.
 
 ## 2026-11-13 — AVO-SHELL-3 — Entrenamientos, Calendario (Semana), Cuadra e informe con logotipo
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)

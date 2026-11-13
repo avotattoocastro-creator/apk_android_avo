@@ -231,7 +231,7 @@ private struct TrainingListContent: View {
     private func table(_ rows: [TrainingListRow]) -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
-                Color.clear.frame(width: 48)
+                Color.clear.frame(width: 48, height: 1)
                 sortHeader("Fecha y hora", \TrainingListRow.startKey, flex: 1.3)
                 sortHeader("Caballo", \TrainingListRow.horse, flex: 1.4)
                 sortHeader("Jinete", \TrainingListRow.rider, flex: 1.2)

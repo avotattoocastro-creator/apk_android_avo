@@ -56,6 +56,8 @@ final class AppModel {
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
+    /// A training has been opened (list, calendar, dashboard…): unlocks Mapa / Análisis / Biomecánica in the sidebar.
+    var trainingOpened: Bool = false
     var sessions: [SessionItem] = []
     var importLog: [ImportLogRow] = []
     var status: String = "Listo · importa un entrenamiento .avo o .avr"
