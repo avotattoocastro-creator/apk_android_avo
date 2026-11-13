@@ -39,7 +39,9 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - Windows: `Core/Analysis/KeyData.cs`, `MainViewModel.Parity.cs`, `Views/KeyDataView.xaml` y `SelfTest/KeyDataTests.cs`.
 **Por qué:** ideas del webinar de Equimetre (capítulos Key Data y Graphics) que pidió el usuario.
 **No se ha tocado:** el motor C++ (ya daba `parciales` y `referencia`), los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43387375222 (éxito, 7 self-tests nuevos PASS; el run 43387112395 falló por
+`CultureInfo.GetUnicodeCategory`, corregido) · iPad run 43387116210 (tests unitarios en verde; TestFlight build 86 subido).
+**NO VERIFICADO** en iPad ni en PC reales.
 **Pendiente:** eje de distancia en Gráficas; zonas de pulso cuando llegue el ECG de la cincha.
 
 ## 2026-11-13 — AVO-PARITY-1 — iPad y PC: Calendario y Datos clave (paridad)
