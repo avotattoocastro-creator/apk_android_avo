@@ -132,6 +132,8 @@ struct AvoCard<Content: View>: View {
 }
 
 /// Metric tile: label, big value, unit and optional caption.
+/// Figure box of the whole app in the «Datos clave» style (trainer 14/11/2026: «todos los recuadros de la app de este
+/// estilo»): no box; thin icon, the figure and its unit centred, the name in small capitals and hairlines around.
 struct AvoMetric: View {
     var label: String
     var value: String
@@ -141,22 +143,42 @@ struct AvoMetric: View {
     var icon: String? = nil
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack(spacing: 6) {
-                if let icon = icon { Image(systemName: icon).font(.caption).foregroundStyle(Avo.red) }
-                Text(label.uppercased()).font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
+        VStack(spacing: 5) {
+            if let ic = icon ?? AvoMetric.autoIcon(label) {
+                Image(systemName: ic).font(.system(size: 22, weight: .ultraLight)).foregroundStyle(Avo.silver).frame(height: 26)
             }
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(value).font(.system(size: 26, weight: .semibold, design: .rounded)).foregroundStyle(accent)
+            HStack(alignment: .firstTextBaseline, spacing: 3) {
+                Text(value).font(.system(size: 24, weight: .regular)).foregroundStyle(accent)
                     .lineLimit(1).minimumScaleFactor(0.5)
-                if !unit.isEmpty { Text(unit).font(.footnote).foregroundStyle(Avo.textDim) }
+                if !unit.isEmpty { Text(unit).font(.caption).foregroundStyle(Avo.textDim) }
             }
-            if let caption = caption { Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(2) }
+            Text(label.uppercased()).font(.system(size: 11, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.silver)
+                .multilineTextAlignment(.center).lineLimit(2).minimumScaleFactor(0.8)
+            if let caption = caption {
+                Text(caption).font(.caption2).foregroundStyle(Avo.textDim).multilineTextAlignment(.center).lineLimit(2)
+            }
         }
-        .padding(14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+        .padding(.horizontal, 8).padding(.vertical, 12)
+        // all boxes the same size (trainer 14/11/2026: «todos de la misma medida»)
+        .frame(maxWidth: .infinity, minHeight: 138)
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1).padding(.horizontal, 10) }
+        .overlay(alignment: .trailing) { Rectangle().fill(Avo.line).frame(width: 1).padding(.vertical, 12) }
+    }
+
+    /// Icon from the name of the figure (same families as «Datos clave»).
+    static func autoIcon(_ label: String) -> String? {
+        let l: String = label.lowercased()
+        if l.contains("pulso") || l.contains("lpm") || l.contains("fc ") { return "waveform.path.ecg" }
+        if l.contains("velocidad") || l.contains("v. m") || l.contains("vel.") || l.contains("mejor") { return "figure.equestrian.sports" }
+        if l.contains("distancia") || l.contains("km") { return "point.topleft.down.to.point.bottomright.curvepath" }
+        if l.contains("tiempo") || l.contains("duración") || l.contains("media") && l.contains("min") { return "clock" }
+        if l.contains("tranco") || l.contains("zancada") { return "ruler" }
+        if l.contains("frecuencia") { return "metronome" }
+        if l.contains("entrenamiento") || l.contains("sesion") || l.contains("sesión") { return "list.bullet.rectangle" }
+        if l.contains("último") || l.contains("fecha") || l.contains("semana") { return "calendar" }
+        if l.contains("rtk") || l.contains("fix") || l.contains("gnss") { return "location.circle" }
+        if l.contains("aceleración") || l.contains("carga") { return "bolt" }
+        return nil
     }
 }
 

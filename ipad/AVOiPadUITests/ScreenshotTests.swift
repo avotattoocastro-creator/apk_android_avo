@@ -12,7 +12,7 @@ final class ScreenshotTests: XCTestCase {
                                           ("Riders", false), ("Analysis", false), ("KeyData", true), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
                                           ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),
-                                          ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Settings", false), ("Server", false)]
+                                          ("Engine", true), ("Settings", false), ("Geofences", false), ("WatchWifi", false), ("Server", false)]
 
     override func setUp() { continueAfterFailure = true }
 
@@ -40,6 +40,11 @@ final class ScreenshotTests: XCTestCase {
                     let toggle = app.buttons["ToggleSidebar"]
                     if toggle.exists { toggle.tap() }
                 }
+            }
+            // pages that live inside «Configuración» (Reloj Wi-Fi, Geocercas, Servidor)
+            if !nav.waitForExistence(timeout: 2) {
+                let settings = app.buttons["nav.Settings"]
+                if settings.waitForExistence(timeout: 3) { settings.tap() }
             }
             guard nav.waitForExistence(timeout: 5) else { XCTFail("No existe \(isTab ? "tab" : "nav").\(page)"); continue }
             // narrow screens: the training bar scrolls horizontally

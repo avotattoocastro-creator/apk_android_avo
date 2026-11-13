@@ -19,6 +19,7 @@ struct RootView: View {
 
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
+        // «Geocercas y líneas» and «Reloj Wi-Fi» live in «Configuración» (trainer's sketch 14/11/2026)
         // «Inicio» out of the sidebar (trainer's sketch 13/11/2026): the start screen only shows at launch
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
@@ -33,8 +34,6 @@ struct RootView: View {
         RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
-        RootNavEntry(page: .geofences, title: "Geocercas y líneas", icon: "flag"),
-        RootNavEntry(page: .watchWifi, title: "Reloj Wi-Fi", icon: "wifi"),
     ]
     static let systemEntries: [RootNavEntry] = [
         // trainer's sketch 13/11/2026: «Configuración» (maintenance, server and future settings) in place of «Servidor AVO»

@@ -46,9 +46,12 @@ struct StableView: View {
     private func header(_ page: StableIdentityPage) -> some View {
         // the «El iPad no tiene NFC…» card was removed at the trainer's request (07/11/2026)
         HStack(alignment: .center, spacing: 12) {
-            AvoPageTitle(title: page.title, subtitle: "\(page.allRows.count) registrados · \(page.unknownText)")
+            // no page title (trainer's sketch 14/11/2026); the counts stay visible in the list
+            if !page.hasSelection {
+                Text("\(page.allRows.count) registrados · \(page.unknownText)").font(.footnote).foregroundStyle(Avo.textDim)
+            }
             Spacer(minLength: 8)
-            if page.isHorse {
+            if page.isHorse && !page.hasSelection {
                 // whole stable from France Galop: open the trainer's page, link the horses, refresh them all
                 Button {
                     app.franceGalop.open()
@@ -365,8 +368,9 @@ private struct StableEditorCard: View {
                 }
                 Toggle("Activo (aparece al asignar entrenamientos)", isOn: $p.editActive).font(.footnote).tint(Avo.red)
 
+                // the three buttons the same size (trainer 14/11/2026)
                 HStack(spacing: 8) {
-                    Button("Guardar") { page.save() }
+                    Button { page.save() } label: { Text("Guardar").frame(width: 230) }
                         .buttonStyle(.avoPrimary)
                         .disabled(!page.canSave)
                         .accessibilityIdentifier("stable.save")
@@ -375,10 +379,10 @@ private struct StableEditorCard: View {
                             UIPasteboard.general.string = page.uriText
                             page.message = "Enlace copiado: pégalo en la app Android o en Windows para grabar la etiqueta."
                         } label: {
-                            Label("Copiar enlace avohorse://", systemImage: "link")
+                            Label("Copiar enlace avohorse://", systemImage: "link").frame(width: 230)
                         }
                         .buttonStyle(.avoSecondary)
-                        Button("Eliminar", role: .destructive) { page.askDelete() }
+                        Button(role: .destructive) { page.askDelete() } label: { Text("Eliminar").frame(width: 230) }
                             .buttonStyle(.avoSecondary)
                             .foregroundStyle(Avo.bad)
                     }
@@ -436,7 +440,8 @@ private struct StableTotals: View {
     let row: StableIdentityRow
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 10)], spacing: 10) {
+        // one row of 5, «Datos clave» style (trainer 14/11/2026)
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 5), spacing: 0) {
             AvoMetric(label: "Entrenamientos", value: String(row.count), caption: "Asignados o del archivo")
             AvoMetric(label: "Distancia", value: row.distanceText, caption: "Suma")
             AvoMetric(label: "Tiempo", value: row.totalTimeText, caption: "Suma")

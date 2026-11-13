@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-7 — Todos los recuadros de cifras con el estilo de Datos clave; Cuadra, Configuración y tramo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Recuadros de cifras (iPad `AvoMetric`, Windows `AvoMetricTile`):** pasan al estilo de Datos clave en toda la app: sin caja,
+  icono fino elegido por el nombre de la cifra, cifra y unidad centradas, nombre en versalitas y líneas finas. Todos miden lo
+  mismo (alto mínimo de 138). Afecta a Análisis del tramo, Cuadra, Jinetes, Calendario, Resumen, etc.
+- **Cuadra y Jinetes (iPad):**
+  - sin título de página en la ficha;
+  - Guardar, Copiar enlace y Eliminar tienen el mismo ancho;
+  - los totales van en una fila de 5.
+- **Configuración (iPad):** incluye «Reloj Wi-Fi» y «Geocercas y líneas» (salen del menú lateral) junto al Servidor AVO.
+  La prueba de capturas llega a ellas desde Configuración.
+- **Análisis del tramo (iPad):** la tabla de parciales usa todo el ancho de la tarjeta y los metros («1000–1200») no se parten.
+- Se incluyen también el mapa alineado y encuadrado por defecto y la reproducción a 1× (AVO-SHELL-6).
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** en Windows, la ficha de Cuadra/Jinetes y la página Configuración aún no siguen estos bocetos.
+
 ## 2026-11-14 — AVO-SHELL-6 — Datos clave por recuadros, carga de AVO Horse al arrancar y gráficas al arrastrar
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**

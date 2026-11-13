@@ -185,12 +185,14 @@ struct StretchAnalysisView: View {
     }
 
     private func row(_ cells: [String], header: Bool, best: Bool) -> some View {
-        let widths: [CGFloat] = [34, 96, 80, 62, 62, 64]
+        // the table uses the whole card: «1000–1200» never splits in two lines (trainer 14/11/2026)
+        let widths: [CGFloat] = [40, 150, 100, 90, 90, 90]
         return HStack(spacing: 6) {
             ForEach(Array(cells.enumerated()), id: \.offset) { (i: Int, c: String) in
                 Text(c)
                     .font(header ? .caption2.weight(.semibold) : .callout.monospacedDigit())
                     .foregroundStyle(header ? Avo.textDim : (best ? Avo.ok : Avo.text))
+                    .lineLimit(1).minimumScaleFactor(0.8)
                     .frame(width: widths[min(i, widths.count - 1)], alignment: i == 0 ? .leading : .trailing)
             }
             Spacer(minLength: 0)

@@ -64,9 +64,20 @@ private struct SettingsContent: View {
                         }
                     }
                 }
-                AvoCard(title: "Servidor AVO", subtitle: "Panel web y descarga HTTPS de .avo") {
-                    settingButton("server.rack", "Abrir Servidor AVO", "Conexión y descarga de sesiones") {
-                        app.page = .server
+                AvoCard(title: "Reloj y conexiones", subtitle: "Reloj de pecho, geocercas y servidor") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        settingButton("wifi", "Reloj Wi-Fi", "Descargar los entrenamientos del reloj de pecho (Wi-Fi o Bluetooth)") {
+                            app.page = .watchWifi
+                        }
+                        .accessibilityIdentifier("nav.WatchWifi")
+                        settingButton("flag", "Geocercas y líneas", "Zonas de la pista y líneas de salida y meta") {
+                            app.page = .geofences
+                        }
+                        .accessibilityIdentifier("nav.Geofences")
+                        settingButton("server.rack", "Servidor AVO", "Panel web y descarga HTTPS de .avo") {
+                            app.page = .server
+                        }
+                        .accessibilityIdentifier("nav.Server")
                     }
                 }
             }
