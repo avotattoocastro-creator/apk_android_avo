@@ -82,29 +82,37 @@ public partial class App : Application
         window.Show();
         await Idle();
         perf["arranque_ms"] = sw.ElapsedMilliseconds;
-        // ---- functional check of the five start-screen actions, clicked through UI Automation like a user
+        // ---- functional check of the start screen (trainer's sketch 13/11/2026): one «INICIAR» button that opens the
+        // Dashboard, clicked through UI Automation like a user; then «Abrir entrenamiento» (now in the Dashboard / menu)
         var clicks = new List<object>();
         var dialogs = (SilentDialogs)vm.Dialogs;
         var demoFiles = demoDir is not null && Directory.Exists(demoDir) ? Directory.GetFiles(demoDir, "*.avr").OrderBy(f => f).ToArray() : [];
         var start = FindAll<Avo.Windows.Views.StartView>(window).FirstOrDefault() ?? throw new InvalidOperationException("No se encuentra la pantalla de inicio");
         var buttons = FindAll<System.Windows.Controls.Button>(start).ToList();
-        if (buttons.Count != 5) throw new InvalidOperationException($"La pantalla de inicio tiene {buttons.Count} acciones, se esperaban 5");
-        string[] labels = ["Abrir entrenamiento", "Sesiones recientes", "Servidor AVO", "Comparar entrenamientos", "Informes"];
-        string[] expected = ["Analysis", "Sessions", "Server", "Compare", "Reports"];
-        for (int i = 0; i < 5; i++)
+        if (buttons.Count != 1) throw new InvalidOperationException($"La pantalla de inicio tiene {buttons.Count} botones, se esperaba solo «INICIAR»");
         {
             vm.Page = "Home";
             await Idle();
-            if (i == 0 && demoFiles.Length > 0) dialogs.NextOpen = [demoFiles[^1]];
-            var peer = new System.Windows.Automation.Peers.ButtonAutomationPeer(buttons[i]);
+            var peer = new System.Windows.Automation.Peers.ButtonAutomationPeer(buttons[0]);
             ((System.Windows.Automation.Provider.IInvokeProvider)peer.GetPattern(System.Windows.Automation.Peers.PatternInterface.Invoke)!).Invoke();
             var limit = DateTime.UtcNow.AddSeconds(30);
             while (vm.Page == "Home" && DateTime.UtcNow < limit) await Task.Delay(100);
             await Idle();
-            bool ok = vm.Page == expected[i] && (i != 0 || (dialogs.OpenCalls == 1 && vm.Sessions.Count == 1));
-            clicks.Add(new { accion = labels[i], pagina = vm.Page, esperada = expected[i], correcto = ok });
-            if (!ok) throw new InvalidOperationException($"Acción de inicio «{labels[i]}» llevó a «{vm.Page}» (esperado «{expected[i]}»)");
-            if (i > 0) Render(window.Content is FrameworkElement fe0 ? fe0 : window, Path.Combine(dir, $"inicio_accion_{i + 1}_{expected[i]}.png"), 1);
+            bool ok = vm.Page == "Sessions";
+            clicks.Add(new { accion = "INICIAR", pagina = vm.Page, esperada = "Sessions", correcto = ok });
+            if (!ok) throw new InvalidOperationException($"«INICIAR» llevó a «{vm.Page}» (esperado «Sessions»)");
+            Render(window.Content is FrameworkElement fe0 ? fe0 : window, Path.Combine(dir, "inicio_accion_1_Sessions.png"), 1);
+        }
+        if (demoFiles.Length > 0)
+        {
+            dialogs.NextOpen = [demoFiles[^1]];
+            vm.ImportCommand.Execute(null);
+            var limit = DateTime.UtcNow.AddSeconds(30);
+            while (vm.Sessions.Count == 0 && DateTime.UtcNow < limit) await Task.Delay(100);
+            await Idle();
+            bool ok = dialogs.OpenCalls == 1 && vm.Sessions.Count == 1;
+            clicks.Add(new { accion = "Abrir entrenamiento", pagina = vm.Page, esperada = vm.Page, correcto = ok });
+            if (!ok) throw new InvalidOperationException($"«Abrir entrenamiento» no importó el archivo de demostración ({dialogs.OpenCalls} diálogos, {vm.Sessions.Count} sesiones)");
         }
         perf["acciones_inicio"] = clicks;
         vm.Page = "Home";
