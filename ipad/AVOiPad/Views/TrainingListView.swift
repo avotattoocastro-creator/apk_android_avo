@@ -65,7 +65,7 @@ private struct TrainingListContent: View {
         .sheet(isPresented: Binding(get: { model.report != nil }, set: { if !$0 { model.report = nil } })) {
             if let r = model.report {
                 TrainingRecoverySheet(report: r) { model.report = nil }
-                    .preferredColorScheme(.dark)
+                    .avoColorScheme()
             }
         }
     }

@@ -1,8 +1,8 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// «Configuración» (trainer's sketch 13/11/2026): maintenance of the trainings stored on the iPad (moved here from
-/// «Entrenamientos») and access to the AVO server. Further settings (light / dark mode, …) will be added here.
+/// «Configuración» (trainer's sketch 13/11/2026): appearance (dark / light), maintenance of the trainings stored on the
+/// iPad (moved here from «Entrenamientos») and access to the AVO server.
 struct SettingsView: View {
     @Environment(AppModel.self) private var app
 
@@ -14,11 +14,22 @@ struct SettingsView: View {
 private struct SettingsContent: View {
     @Environment(AppModel.self) private var app
     @Bindable var model: TrainingListModel
+    @AppStorage(AvoAppearance.key) private var appearance: String = AvoAppearance.dark.rawValue
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 AvoPageTitle(title: "Configuración", subtitle: "Mantenimiento de los entrenamientos del iPad y conexiones")
+                AvoCard(title: "Apariencia", subtitle: "Colores de toda la app; se aplica al momento") {
+                    Picker("Modo", selection: $appearance) {
+                        ForEach(AvoAppearance.allCases) { (m: AvoAppearance) in
+                            Label(m.title, systemImage: m == .dark ? "moon.fill" : "sun.max.fill").tag(m.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 360)
+                    .accessibilityIdentifier("settings.appearance")
+                }
                 AvoCard(title: "Entrenamientos en el iPad",
                         subtitle: "Recuperar archivos, buscar en carpetas y copiar a la carpeta AVO Horse de Archivos") {
                     VStack(alignment: .leading, spacing: 10) {
@@ -76,7 +87,7 @@ private struct SettingsContent: View {
         .sheet(isPresented: Binding(get: { model.report != nil }, set: { if !$0 { model.report = nil } })) {
             if let r = model.report {
                 TrainingRecoverySheet(report: r) { model.report = nil }
-                    .preferredColorScheme(.dark)
+                    .avoColorScheme()
             }
         }
     }

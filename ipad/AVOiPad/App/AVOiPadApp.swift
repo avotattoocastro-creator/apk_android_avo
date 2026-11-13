@@ -11,7 +11,7 @@ struct AVOiPadApp: App {
         WindowGroup {
             RootView()
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
                 .tint(Avo.red)
                 .onOpenURL { url in
                     // .avo / .avr opened from Files, AirDrop or the share sheet

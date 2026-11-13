@@ -72,7 +72,7 @@ struct KeyDataView: View {
     private func section(_ title: String, _ tiles: [KeyTile]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 6), spacing: 10) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 6), spacing: 0) {
                 ForEach(tiles) { (t: KeyTile) in
                     if let a = t.t0, let b = t.t1 {
                         Button { app.openInCharts(engineT0: a, engineT1: b) } label: { tile(t) }
@@ -85,30 +85,34 @@ struct KeyDataView: View {
         }
     }
 
+    /// Equimetre «Key parameters» style (trainer's request 13/11/2026): no boxes; thin line icon, the figure and its unit
+    /// centred, the name in small capitals below, cells separated by hairlines.
     private func tile(_ t: KeyTile) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Image(systemName: Self.icon(t.id)).font(.title3)
-                    .foregroundStyle(t.group == 1 ? Avo.redLight : (t.group == 2 ? Avo.silver : Avo.blue))
-                Spacer()
-                if t.t0 != nil {
-                    Image(systemName: "chart.xyaxis.line").font(.caption).foregroundStyle(Avo.textDim)
-                }
-            }
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(t.value).font(.system(size: 28, weight: .semibold, design: .rounded))
+        VStack(spacing: 6) {
+            Image(systemName: Self.icon(t.id)).font(.system(size: 26, weight: .ultraLight))
+                .foregroundStyle(t.group == 1 ? Avo.redLight : Avo.silver)
+                .frame(height: 30)
+            HStack(alignment: .firstTextBaseline, spacing: 3) {
+                Text(t.value).font(.system(size: 26, weight: .regular))
                     .foregroundStyle(t.available ? Avo.text : Avo.unknown)
                     .lineLimit(1).minimumScaleFactor(0.5)
-                if !t.unit.isEmpty { Text(t.unit).font(.footnote).foregroundStyle(Avo.textDim) }
+                if !t.unit.isEmpty { Text(t.unit).font(.caption).foregroundStyle(Avo.textDim) }
             }
-            Text(t.label).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(2).minimumScaleFactor(0.8)
-            Text(t.caption).font(.caption2).foregroundStyle(t.available ? Avo.textDim : Avo.warn).lineLimit(2)
+            Text(t.label.uppercased()).font(.system(size: 11, weight: .semibold)).tracking(0.5).foregroundStyle(Avo.silver)
+                .multilineTextAlignment(.center).lineLimit(2).minimumScaleFactor(0.8)
+            Text(t.caption).font(.caption2).foregroundStyle(t.available ? Avo.textDim : Avo.warn)
+                .multilineTextAlignment(.center).lineLimit(2)
         }
-        .padding(12)
-        .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
-        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 12))
-        .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Avo.line, style: StrokeStyle(lineWidth: 1, dash: t.available ? [] : [5, 4])))
-        .contentShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal, 8).padding(.vertical, 14)
+        .frame(maxWidth: .infinity, minHeight: 150)
+        .overlay(alignment: .topTrailing) {
+            if t.t0 != nil {
+                Image(systemName: "chart.xyaxis.line").font(.caption2).foregroundStyle(Avo.textDim).padding(8)
+            }
+        }
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1).padding(.horizontal, 10) }
+        .overlay(alignment: .trailing) { Rectangle().fill(Avo.line).frame(width: 1).padding(.vertical, 14) }
+        .contentShape(Rectangle())
         .accessibilityIdentifier("keydata.\(t.id)")
     }
 
@@ -260,8 +264,7 @@ struct KeyDataView: View {
 
     static func icon(_ id: String) -> String {
         switch id {
-        case "vmax": return "gauge.with.dots.needle.67percent"
-        case "best200", "best600", "best1000": return "stopwatch"
+        case "vmax", "best200", "best600", "best1000": return "figure.equestrian.sports"
         case "distance": return "point.topleft.down.to.point.bottomright.curvepath"
         case "duration": return "clock"
         case "hrmax", "hrend": return "waveform.path.ecg"

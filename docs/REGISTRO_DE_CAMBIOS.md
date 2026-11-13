@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-SHELL-2 — Modo claro (iPad), Datos clave estilo Equimetre y ajustes del Dashboard
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Paleta doble en iPad (`Views/Theme.swift`):** cada color de `Avo` tiene un valor oscuro (el de siempre) y otro claro.
+  Las tarjetas y la cabecera también. «Configuración › Apariencia» permite elegir Oscuro o Claro; la elección se guarda en
+  `UserDefaults` («avo.appearance») y se aplica al momento en la app y en las hojas (`.avoColorScheme()`).
+  No hay opción «Como el sistema» porque `Info.plist` fija `UIUserInterfaceStyle = Dark` y no se ha tocado.
+- **Datos clave (iPad y Windows), estilo «Key parameters» de Equimetre:** sin cajas; icono fino, cifra y unidad centradas,
+  nombre en mayúsculas pequeñas y líneas finas entre celdas. Las velocidades y los tiempos usan el icono del caballo.
+- **Dashboard:**
+  - el panel de cifras se salía de la pantalla porque la imagen pedía más ancho, y por eso no se veían los números
+    (build 88); corregido;
+  - los 5 huecos de «Últimos entrenamientos» miden lo mismo, con un hueco vacío si hay menos de 5.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** modo claro en Windows (allí la paleta usa `StaticResource` y aún no hay página de Configuración).
+
 ## 2026-11-13 — AVO-SHELL-1 — Dashboard, Entrenamientos, Calendario y Configuración (bocetos del usuario)
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**
@@ -47,7 +64,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - Más adelante tendrá otros ajustes, como el modo claro/oscuro.
 - **Calendario (iPad y Windows):** solo la cuadrícula, a página completa, sin acumulados ni filtro de caballos.
 **No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43515844299 (éxito) · iPad run 43515849775 (tests unitarios en verde; TestFlight build 88).
+**NO VERIFICADO** en iPad ni en PC reales.
 **Pendiente:** página Configuración en Windows (allí no hay recuperación ni copia a AVO Horse); modo claro.
 
 ## 2026-11-13 — AVO-START-2 — Pantalla de inicio con botón «INICIAR» (iPad y Windows)

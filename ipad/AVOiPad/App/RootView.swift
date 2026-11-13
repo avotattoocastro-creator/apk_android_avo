@@ -95,35 +95,35 @@ struct RootView: View {
         .sheet(isPresented: Binding(get: { app.stable.assignVisible }, set: { app.stable.assignVisible = $0 })) {
             AssignSheet()
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.horseHistory.visible },
                                               set: { (v: Bool) in if !v { app.horseHistory.close() } })) {
             HorseHistoryView(model: app.horseHistory)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.stretch.visible },
                                               set: { (v: Bool) in if !v { app.stretch.close() } })) {
             StretchAnalysisView(model: app.stretch)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
             PdfViewerSheet(file: f)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.raceVideo.visible && !app.franceGalop.visible },
                                               set: { (v: Bool) in if !v && !app.franceGalop.visible { app.raceVideo.close() } })) {
             RaceVideoView(model: app.raceVideo)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.franceGalop.visible },
                                               set: { (v: Bool) in if !v { app.franceGalop.close() } })) {
             FranceGalopView(model: app.franceGalop)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
     }
 

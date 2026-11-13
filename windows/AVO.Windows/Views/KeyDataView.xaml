@@ -21,22 +21,24 @@
         <DataTemplate x:Key="KeyTileTemplate">
             <Button Style="{StaticResource KeyPlainButton}" CommandParameter="{Binding}"
                     Command="{Binding DataContext.OpenKeyWindowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-            <Border Margin="0,0,10,10" Padding="12" MinHeight="150" CornerRadius="12" Background="{StaticResource AvoCardBrush}"
-                    BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
-                <StackPanel>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Right" Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="12" Foreground="{StaticResource AvoTextDim}"
-                                   ToolTip="Ver en gráficas" Visibility="{Binding HasWindow, Converter={StaticResource BoolVis}}"/>
-                        <TextBlock Text="{Binding Glyph}" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="{Binding Accent}"/>
-                    </DockPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                        <TextBlock Text="{Binding Value}" FontSize="28" FontWeight="SemiBold" Foreground="{Binding ValueColor}"/>
-                        <TextBlock Text="{Binding Unit}" Style="{StaticResource AvoDim}" VerticalAlignment="Bottom" Margin="5,0,0,6"/>
+            <!-- estilo «Key parameters» de Equimetre (petición del usuario 13/11/2026): sin cajas; icono fino, cifra y unidad
+                 centradas, nombre en versalitas debajo y celdas separadas por líneas finas (igual que el iPad) -->
+            <Grid MinHeight="150" Background="Transparent">
+                <Border BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,0,1" Margin="10,0"/>
+                <Border BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,1,0" Margin="0,14"/>
+                <TextBlock Text="&#xE9D2;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="{StaticResource AvoTextDim}" Margin="8"
+                           HorizontalAlignment="Right" VerticalAlignment="Top" ToolTip="Ver en gráficas"
+                           Visibility="{Binding HasWindow, Converter={StaticResource BoolVis}}"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,14">
+                    <TextBlock Text="{Binding Glyph}" FontFamily="Segoe MDL2 Assets" FontSize="24" Foreground="{Binding Accent}" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8,0,0">
+                        <TextBlock Text="{Binding Value}" FontSize="26" Foreground="{Binding ValueColor}"/>
+                        <TextBlock Text="{Binding Unit}" Style="{StaticResource AvoDim}" VerticalAlignment="Bottom" Margin="4,0,0,5"/>
                     </StackPanel>
-                    <TextBlock Text="{Binding Label}" FontWeight="SemiBold" Foreground="{StaticResource AvoText}" TextWrapping="Wrap" Margin="0,2,0,0"/>
-                    <TextBlock Text="{Binding Caption}" FontSize="12" Foreground="{Binding CaptionColor}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding LabelCaps}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource AvoSilver}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding Caption}" FontSize="11" Foreground="{Binding CaptionColor}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,3,0,0"/>
                 </StackPanel>
-            </Border>
+            </Grid>
             </Button>
         </DataTemplate>
         <!-- 6 por fila (petición del usuario: «6 en línea»), igual que el iPad -->

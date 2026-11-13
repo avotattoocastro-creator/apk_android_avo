@@ -79,7 +79,7 @@
                         <DataTemplate>
                             <Button Style="{StaticResource AvoGhostButton}" Margin="0,0,10,0" Padding="0" HorizontalContentAlignment="Stretch" CommandParameter="{Binding}"
                                     Command="{Binding DataContext.OpenDashCardCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                <Border Padding="12" CornerRadius="8" Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
+                                <Border Padding="12" Height="104" CornerRadius="8" Background="{StaticResource AvoCardBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="1">
                                     <StackPanel>
                                         <DockPanel>
                                             <TextBlock DockPanel.Dock="Right" Text="{Binding Quality}" FontSize="11" FontWeight="SemiBold" Foreground="{Binding QualityColor}"/>

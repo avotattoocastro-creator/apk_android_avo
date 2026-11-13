@@ -43,12 +43,12 @@ struct HomeView: View {
 
     // ------------------------------------------------------------------ banner (image only)
     private var heroBanner: some View {
-        ZStack {
-            Color(hex: 0x030406)
-            Image("avo_brand_hero").resizable().scaledToFill()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped()
-        }
+        // the image fills the box WITHOUT asking for more width (scaledToFill inside an overlay): it used to push the
+        // figures column off the screen (build 88, the numbers were not visible)
+        Color(hex: 0x030406)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .overlay { Image("avo_brand_hero").resizable().scaledToFill() }
+            .clipped()
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
@@ -72,7 +72,7 @@ struct HomeView: View {
     private func counter(_ icon: String, _ value: String, _ title: String, _ caption: String, accent: Color = Avo.text,
                          perform: @escaping () -> Void) -> some View {
         Button(action: perform) {
-            HStack(spacing: 14) {
+            HStack(spacing: 12) {
                 ZStack {
                     Circle().fill(Avo.redSoft).frame(width: 40, height: 40)
                     Image(systemName: icon).font(.system(size: 16)).foregroundStyle(Avo.redLight)
@@ -81,8 +81,10 @@ struct HomeView: View {
                     Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver)
                     Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
                 }
-                Spacer(minLength: 0)
+                .layoutPriority(0)
+                Spacer(minLength: 4)
                 Text(value).font(.system(size: 34, weight: .semibold, design: .rounded)).monospacedDigit().foregroundStyle(accent)
+                    .lineLimit(1).fixedSize().layoutPriority(1)
             }
             .padding(.horizontal, 12).padding(.vertical, 8)
             .frame(maxHeight: .infinity)
@@ -99,12 +101,19 @@ struct HomeView: View {
             if d.latest.isEmpty {
                 AvoNoData(text: "Sin entrenamientos todavía · ábrelos desde «Entrenamientos» o el «Reloj Wi-Fi»")
             } else {
+                // always 5 slots of the same size (trainer's sketch 13/11/2026: «misma medida todos»)
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: columns), spacing: 10) {
                     ForEach(d.latest) { (c: DashCard) in latestCard(c) }
+                    ForEach(0..<max(0, 5 - d.latest.count), id: \.self) { (_: Int) in
+                        RoundedRectangle(cornerRadius: 8).stroke(Avo.line, style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
+                            .frame(height: Self.latestHeight)
+                    }
                 }
             }
         }
     }
+
+    static let latestHeight: CGFloat = 104
 
     private func latestCard(_ c: DashCard) -> some View {
         Button {
@@ -115,17 +124,17 @@ struct HomeView: View {
         } label: {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(c.dayText).font(.caption.weight(.bold)).foregroundStyle(Avo.redLight)
-                    Text(c.timeText).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
+                    Text(c.dayText).font(.caption.weight(.bold)).foregroundStyle(Avo.redLight).lineLimit(1).fixedSize()
+                    Text(c.timeText).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).lineLimit(1)
                     Spacer(minLength: 0)
-                    Text(c.quality).font(.caption2.weight(.semibold))
+                    Text(c.quality).font(.caption2.weight(.semibold)).lineLimit(1).fixedSize()
                         .foregroundStyle(c.quality == "RTK FIX" ? Avo.ok : (c.quality == "Sin FIX" ? Avo.warn : Avo.unknown))
                 }
                 Text(c.horse).font(.headline).foregroundStyle(Avo.text).lineLimit(1)
                 Text(c.distanceText + " · " + c.durationText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver)
             }
             .padding(12)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: Self.latestHeight, maxHeight: Self.latestHeight, alignment: .topLeading)
             .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
             .contentShape(Rectangle())

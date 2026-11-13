@@ -1,27 +1,31 @@
 import SwiftUI
 
 /// AVO corporate palette — 1:1 from app/src/main/kotlin/.../ui/theme/Theme.kt (AvoColors) and windows/.../AvoColors.xaml.
+/// Every colour has a DARK value (the original palette) and a LIGHT value (trainer's request 13/11/2026); the one shown
+/// follows the colour scheme chosen in «Configuración» (AvoAppearance), applied at the root with preferredColorScheme.
 enum Avo {
-    static let bg = Color(hex: 0x030406)
-    static let surface = Color(hex: 0x101014)
-    static let surface2 = Color(hex: 0x1A1B20)
-    static let line = Color(hex: 0x2A2B31)
-    static let red = Color(hex: 0xED122A)
-    static let redDark = Color(hex: 0xB71625)
-    static let redLight = Color(hex: 0xFF495A)
-    static let blue = Color(hex: 0x3D9BFF)
-    static let cyan = Color(hex: 0x35D0E8)
-    static let silver = Color(hex: 0xC9CBD1)
-    static let text = Color(hex: 0xF2F2F4)
-    static let textDim = Color(hex: 0x9C9DA4)
-    static let ok = Color(hex: 0x52DD40)
-    static let warn = Color(hex: 0xFFC42C)
-    static let bad = Color(hex: 0xFF3945)
-    static let unknown = Color(hex: 0x93949B)
-    static let redSoft = Color(hex: 0xED122A, alpha: 0.2)
+    //                                  oscuro      claro
+    static let bg = Color.avo(0x030406, 0xF4F5F7)
+    static let surface = Color.avo(0x101014, 0xFFFFFF)
+    static let surface2 = Color.avo(0x1A1B20, 0xECEDF1)
+    static let line = Color.avo(0x2A2B31, 0xD6D8DE)
+    static let red = Color.avo(0xED122A, 0xD50F27)
+    static let redDark = Color.avo(0xB71625, 0xB71625)
+    static let redLight = Color.avo(0xFF495A, 0xC8102A)
+    static let blue = Color.avo(0x3D9BFF, 0x1F6FD1)
+    static let cyan = Color.avo(0x35D0E8, 0x0A879C)
+    static let silver = Color.avo(0xC9CBD1, 0x45484F)
+    static let text = Color.avo(0xF2F2F4, 0x15161A)
+    static let textDim = Color.avo(0x9C9DA4, 0x666972)
+    static let ok = Color.avo(0x52DD40, 0x2A8F1E)
+    static let warn = Color.avo(0xFFC42C, 0xA86F00)
+    static let bad = Color.avo(0xFF3945, 0xD02331)
+    static let unknown = Color.avo(0x93949B, 0x7A7C84)
+    static let redSoft = Color.avo(0xED122A, 0xED122A, darkAlpha: 0.2, lightAlpha: 0.12)
 
-    static let cardBrush = LinearGradient(colors: [Color(hex: 0x15161B), Color(hex: 0x0D0D11)], startPoint: .top, endPoint: .bottom)
-    static let headerBrush = LinearGradient(colors: [Color(hex: 0x0A0B0E), Color(hex: 0x15161B), Color(hex: 0x0A0B0E)], startPoint: .leading, endPoint: .trailing)
+    static let cardBrush = LinearGradient(colors: [Color.avo(0x15161B, 0xFFFFFF), Color.avo(0x0D0D11, 0xF7F8FA)], startPoint: .top, endPoint: .bottom)
+    static let headerBrush = LinearGradient(colors: [Color.avo(0x0A0B0E, 0xEEF0F3), Color.avo(0x15161B, 0xFFFFFF), Color.avo(0x0A0B0E, 0xEEF0F3)],
+                                            startPoint: .leading, endPoint: .trailing)
     static let speedScale: [Color] = [Color(hex: 0x2F6BFF), Color(hex: 0x35D0E8), Color(hex: 0xFFC42C), Color(hex: 0xED122A)]
     static let accelScale: [Color] = [Color(hex: 0x3D9BFF), Color(hex: 0x93949B), Color(hex: 0xED122A)]
 
@@ -52,7 +56,36 @@ enum Avo {
     }
 }
 
+/// Colour scheme of the app, chosen in «Configuración» (stored in UserDefaults «avo.appearance»). There is no «as the
+/// system» option: Info.plist fixes UIUserInterfaceStyle = Dark, so only an explicit scheme overrides it.
+enum AvoAppearance: String, CaseIterable, Identifiable {
+    case dark, light
+    static let key: String = "avo.appearance"
+    var id: String { rawValue }
+    var title: String { self == .dark ? "Oscuro" : "Claro" }
+    var colorScheme: ColorScheme { self == .dark ? .dark : .light }
+}
+
+/// Applies the chosen colour scheme (root and sheets, which do not always inherit it).
+struct AvoColorScheme: ViewModifier {
+    @AppStorage(AvoAppearance.key) private var raw: String = AvoAppearance.dark.rawValue
+    func body(content: Content) -> some View {
+        content.preferredColorScheme((AvoAppearance(rawValue: raw) ?? .dark).colorScheme)
+    }
+}
+
+extension View {
+    func avoColorScheme() -> some View { modifier(AvoColorScheme()) }
+}
+
 extension Color {
+    /// Dynamic colour: `dark` in dark mode, `light` in light mode.
+    static func avo(_ dark: UInt32, _ light: UInt32, darkAlpha: Double = 1, lightAlpha: Double = 1) -> Color {
+        Color(UIColor { (t: UITraitCollection) -> UIColor in
+            t.userInterfaceStyle == .light ? UIColor(Color(hex: light, alpha: lightAlpha)) : UIColor(Color(hex: dark, alpha: darkAlpha))
+        })
+    }
+
     init(hex: UInt32, alpha: Double = 1) {
         self.init(.sRGB, red: Double((hex >> 16) & 0xFF) / 255, green: Double((hex >> 8) & 0xFF) / 255,
                   blue: Double(hex & 0xFF) / 255, opacity: alpha)

@@ -189,6 +189,7 @@ public sealed record NavGroupView(string Title, IReadOnlyList<NavItemView> Items
 public sealed record KeyTileView(KeyTile Tile)
 {
     public string Label => Tile.Label;
+    public string LabelCaps => Tile.Label.ToUpper(KeyData.Es);
     public string Value => Tile.Value;
     public string Unit => Tile.Unit;
     public string Caption => Tile.Caption;
@@ -200,7 +201,7 @@ public sealed record KeyTileView(KeyTile Tile)
         "hrmax" or "hrend" or "rec2" or "rec15" => "\uEB51", "lmax" or "lref1" or "lref2" => "\uED5E", "fmax" or "fref1" or "fref2" => "\uE895",
         _ => "\uE9D9",
     };
-    public string Accent => Tile.Group switch { 1 => "#FF495A", 2 => "#C9CBD1", _ => "#3D9BFF" };
+    public string Accent => Tile.Group == 1 ? "#FF495A" : "#C9CBD1";
     public string ValueColor => Tile.Available ? "#F2F2F4" : "#93949B";
     public string CaptionColor => Tile.Available ? "#9C9DA4" : "#FFC42C";
 }

@@ -60,7 +60,7 @@ struct FranceGalopView: View {
                                               set: { (v: Bool) in if !v { app.raceVideo.close() } })) {
             RaceVideoView(model: app.raceVideo)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
     }
 
