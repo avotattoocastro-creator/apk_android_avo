@@ -7,11 +7,12 @@ import XCTest
 final class ScreenshotTests: XCTestCase {
     /// (identifier, is a tab of the training bar). Sidebar = general pages; «Análisis» opens the training and its pages
     /// are in the training bar at the top.
-    static let pages: [(String, Bool)] = [("Home", false), ("Sessions", false), ("List", false), ("Calendar", false), ("Races", false), ("Stable", false),
+    // «Inicio» is no longer in the sidebar (trainer's sketch 13/11/2026): it is captured first, right after launch
+    static let pages: [(String, Bool)] = [("Sessions", false), ("List", false), ("Calendar", false), ("Races", false), ("Stable", false),
                                           ("Riders", false), ("Analysis", false), ("KeyData", true), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
                                           ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),
-                                          ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Server", false)]
+                                          ("Engine", true), ("Geofences", false), ("WatchWifi", false), ("Settings", false), ("Server", false)]
 
     override func setUp() { continueAfterFailure = true }
 
@@ -25,6 +26,7 @@ final class ScreenshotTests: XCTestCase {
         XCUIDevice.shared.orientation = orientation
         // the capture mode imports the demo sessions and runs the engine before showing the ready marker
         _ = app.otherElements["capture.ready"].waitForExistence(timeout: 240) || app.staticTexts["capture.ready"].waitForExistence(timeout: 5)
+        save(app, name: "01_Home_" + suffix)
         for (i, entry) in Self.pages.enumerated() {
             let (page, isTab) = entry
             let nav = app.buttons[(isTab ? "tab." : "nav.") + page]
@@ -49,7 +51,7 @@ final class ScreenshotTests: XCTestCase {
             }
             nav.tap()
             Thread.sleep(forTimeInterval: page == "Analysis" || page == "Geofences" ? 6 : 2)
-            save(app, name: String(format: "%02d_%@_%@", i + 1, page, suffix))
+            save(app, name: String(format: "%02d_%@_%@", i + 2, page, suffix))
         }
     }
 

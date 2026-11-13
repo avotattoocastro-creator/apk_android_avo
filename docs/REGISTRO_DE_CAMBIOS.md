@@ -24,6 +24,32 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-SHELL-1 — Dashboard, Entrenamientos, Calendario y Configuración (bocetos del usuario)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Barra superior:** en iPad y Windows solo aparece en las páginas de un entrenamiento; las páginas generales no la tienen.
+  En iPad se mantiene el botón del menú cuando la barra lateral está oculta.
+- **Inicio:** sale del menú lateral; la portada solo se ve al arrancar.
+- **Dashboard (iPad y Windows):**
+  - la imagen va sin texto encima;
+  - a la derecha, cinco contadores pulsables: Caballos, Jockeys, Entrenamientos, Esta semana (de lunes a domingo, hora
+    de Madrid) y Por revisar (sin caballo o sin analizar);
+  - abajo, los 5 últimos entrenamientos en lugar de la fila de totales; al tocar uno se abre en Datos clave.
+  - Las reglas están en `DashboardSummary` (Core `KeyData.swift`/`.cs`), con la misma prueba en las dos apps.
+- **Entrenamientos (iPad):**
+  - sin título ni resumen; barra con «Filtros» (panel plegable) y «Abrir»;
+  - la tabla queda con favorito, fecha, caballo, jinete, distancia, velocidad máxima y abrir, con el botón de abrir más grande;
+  - la selección va en un tono rojo más apagado.
+  - En Windows la tabla del Dashboard tiene las mismas columnas, y «Abrir» / «Importar carpeta» van en su cabecera.
+- **Configuración (iPad, nueva):** en lugar de «Servidor AVO» en el menú. Contiene:
+  - buscar entrenamientos perdidos, buscar en una carpeta, exportar y copiar a AVO Horse;
+  - el acceso al servidor.
+  - Más adelante tendrá otros ajustes, como el modo claro/oscuro.
+- **Calendario (iPad y Windows):** solo la cuadrícula, a página completa, sin acumulados ni filtro de caballos.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** página Configuración en Windows (allí no hay recuperación ni copia a AVO Horse); modo claro.
+
 ## 2026-11-13 — AVO-START-2 — Pantalla de inicio con botón «INICIAR» (iPad y Windows)
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:** boceto del usuario sobre la build 86.
@@ -35,7 +61,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   `ipad/AVOiPadUITests/ScreenshotTests.swift` (las capturas entran por `start.iniciar`); en Windows,
   `Views/StartView.xaml` y `Views/HeroArt.xaml` (el lema pasa de HeroArt a StartView con los mismos contornos Montserrat).
 **No se ha tocado:** los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43514114679 (éxito; el run 43513678310 falló porque la comprobación de captura
+esperaba 5 acciones, corregido) · iPad run 43513683877 (TestFlight build 87 subido). **NO VERIFICADO** en iPad ni en PC reales.
 
 ## 2026-11-13 — AVO-PARITY-2 — Datos clave: 6 por fila, tranco a velocidad de referencia, parciales y navegador
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20) · Contrato: `docs/PARIDAD_IPAD_PC.md`

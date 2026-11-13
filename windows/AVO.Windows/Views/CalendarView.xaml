@@ -8,7 +8,7 @@
     <Grid Margin="16,12,16,14">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -101,29 +101,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <!-- totals -->
-        <UniformGrid Grid.Row="2" Grid.Column="0" Columns="5" Margin="0,12,0,0">
-            <c:AvoMetricTile Label="{Binding CalendarCountLabel}" Value="{Binding CalendarSummary.CountText}" Margin="0,0,6,0"/>
-            <c:AvoMetricTile Label="TIEMPO ACUMULADO" Value="{Binding CalendarSummary.DurationText}" Margin="6,0"/>
-            <c:AvoMetricTile Label="DURACIÓN MEDIA" Value="{Binding CalendarSummary.MeanText}" Margin="6,0"/>
-            <c:AvoMetricTile Label="DISTANCIA ACUMULADA" Value="{Binding CalendarSummary.DistanceText}" Margin="6,0"/>
-            <c:AvoMetricTile Label="CON RTK FIX" Value="{Binding CalendarSummary.RtkText}" Caption="≥ 50 % del tiempo en FIX (motor)" Margin="6,0,0,0"/>
-        </UniformGrid>
-
-        <!-- horses -->
-        <c:AvoCard Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="12,0,0,0" Header="Caballos" VerticalAlignment="Top">
-            <StackPanel>
-                <TextBlock Text="Sin entrenamientos" Style="{StaticResource AvoDim}" Visibility="{Binding CalendarHasHorses, Converter={StaticResource NotBoolVis}}"/>
-                <ItemsControl ItemsSource="{Binding CalendarHorses}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Name}" IsChecked="{Binding Shown}" Foreground="{StaticResource AvoText}" Margin="0,4"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,10,0,0"
-                           Text="Unifica en la Cuadra los nombres de un mismo caballo para ver juntas sus sesiones."/>
-            </StackPanel>
-        </c:AvoCard>
+        <!-- boceto del entrenador 13/11/2026: solo el calendario, a página completa (sin acumulados ni filtro de caballos) -->
     </Grid>
 </UserControl>

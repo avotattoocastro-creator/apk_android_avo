@@ -406,6 +406,7 @@ public sealed partial class MainViewModel
         HorseNames.Clear(); foreach (var n in Stable.Horses.Where(h => h.Active).Select(h => h.Name).Distinct().OrderBy(x => x, StringComparer.CurrentCultureIgnoreCase)) HorseNames.Add(n);
         RiderNames.Clear(); foreach (var n in Stable.Riders.Where(h => h.Active).Select(h => h.Name).Distinct().OrderBy(x => x, StringComparer.CurrentCultureIgnoreCase)) RiderNames.Add(n);
         RaiseMany(nameof(UnknownHorseCount), nameof(UnknownRiderCount));
+        RefreshDashboard();
     }
     public int UnknownHorseCount => Sessions.Count(s => !s.HorseKnown);
     public int UnknownRiderCount => Sessions.Count(s => !s.RiderKnown);

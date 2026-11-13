@@ -412,3 +412,51 @@ enum SessionNavigator {
         return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0) + " · " + e.horse
     }
 }
+
+// MARK: - Dashboard (same rules as DashboardSummary in KeyData.cs)
+
+/// One of the latest trainings shown at the bottom of the Dashboard.
+struct DashCard: Identifiable, Equatable {
+    let id: String
+    let dayText: String
+    let timeText: String
+    let horse: String
+    let distanceText: String
+    let durationText: String
+    /// «RTK FIX» (≥ 50 % of the time in FIX), «Sin FIX» or «Sin analizar».
+    let quality: String
+}
+
+struct DashboardSummary: Equatable {
+    var trainings: Int = 0
+    /// Trainings from Monday to Sunday of the current week (Europe/Madrid).
+    var thisWeek: Int = 0
+    /// Trainings without a horse or not analysed by the engine yet.
+    var pending: Int = 0
+    var latest: [DashCard] = []
+
+    static let noHorse: String = "Sin caballo"
+
+    static func from(_ entries: [CalendarEntry], today: Date, latest n: Int = 5) -> DashboardSummary {
+        let cal = TrainingCalendar.calendar
+        var d = DashboardSummary()
+        d.trainings = entries.count
+        let week = cal.dateInterval(of: .weekOfYear, for: today)
+        d.thisWeek = entries.filter { week?.contains($0.start) ?? false }.count
+        d.pending = entries.filter { $0.fixShare == nil || $0.horse == noHorse }.count
+        d.latest = entries.sorted { $0.start > $1.start }.prefix(n).map { (e: CalendarEntry) -> DashCard in
+            let c = cal.dateComponents([.month, .day, .weekday, .hour, .minute], from: e.start)
+            let wd: String = TrainingCalendar.weekdays[((c.weekday ?? 2) + 5) % 7]
+            let m: Int = Int((max(0, e.durationS) / 60).rounded())
+            let q: String = e.fixShare.map { $0 >= 0.5 ? "RTK FIX" : "Sin FIX" } ?? "Sin analizar"
+            return DashCard(id: e.id,
+                            dayText: "\(wd) \(c.day ?? 0) \(SessionNavigator.monthShort[max(0, min(11, (c.month ?? 1) - 1))])",
+                            timeText: String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0),
+                            horse: e.horse,
+                            distanceText: DotNetFormat.custom(max(0, e.distanceKm), "0.00", spanish: true) + " km",
+                            durationText: m >= 60 ? "\(m / 60) h \(m % 60) min" : "\(m) min",
+                            quality: q)
+        }
+        return d
+    }
+}

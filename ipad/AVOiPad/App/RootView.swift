@@ -19,7 +19,7 @@ struct RootView: View {
 
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
-        RootNavEntry(page: .home, title: "Inicio", icon: "house"),
+        // «Inicio» out of the sidebar (trainer's sketch 13/11/2026): the start screen only shows at launch
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
@@ -37,7 +37,8 @@ struct RootView: View {
         RootNavEntry(page: .watchWifi, title: "Reloj Wi-Fi", icon: "wifi"),
     ]
     static let systemEntries: [RootNavEntry] = [
-        RootNavEntry(page: .server, title: "Servidor AVO", icon: "server.rack"),
+        // trainer's sketch 13/11/2026: «Configuración» (maintenance, server and future settings) in place of «Servidor AVO»
+        RootNavEntry(page: .settings, title: "Configuración", icon: "gearshape"),
     ]
     /// Pages of ONE training, in the training bar at the top of «Análisis».
     static let trainingTabs: [RootNavEntry] = [
@@ -185,7 +186,8 @@ struct RootView: View {
         VStack(spacing: 0) {
             // no navigation title bar (trainer's sketch 08/11/2026): the AVO header / training bar is the top row of
             // every page; with the sidebar hidden, a button at its left brings the menu back
-            if app.page != .home {
+            // trainer's sketch 13/11/2026: the general pages have no top bar (only the menu button when the sidebar is hidden)
+            if app.page != .home && (app.page.isTrainingPage || columns == .detailOnly) {
                 HStack(spacing: 0) {
                     if columns == .detailOnly {
                         Button {
@@ -201,7 +203,7 @@ struct RootView: View {
                     if app.page.isTrainingPage {
                         TrainingBar()
                     } else {
-                        RootHeader()
+                        Spacer(minLength: 0).frame(height: 52)
                     }
                 }
                 .background(Avo.headerBrush)
@@ -260,6 +262,7 @@ struct RootView: View {
         case .reports: ReportsView()
         case .watchWifi: WatchWifiView()
         case .server: ServerView()
+        case .settings: SettingsView()
         case .engine: EngineView()
         case .calendar: CalendarView()
         case .keyData: KeyDataView()

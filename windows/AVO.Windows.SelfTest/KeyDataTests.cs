@@ -70,5 +70,17 @@ public static class KeyDataTests
             && SessionNavigator.ItemText(ng[0].Entries[0]) == "10:20 · Maalwina"
             && string.Join(",", SessionNavigator.Groups(ne, "arabe").SelectMany(g => g.Entries).Select(x => x.Id)) == "c",
             $"Navegador: sesiones por día, hora de Madrid y búsqueda sin acentos ({string.Join("|", ng.Select(g => g.Title))})");
+
+        var de = new List<CalendarEntry>
+        {
+            new("a", d, "Zakina", 2640, 7.84, 0), new("b", d.AddHours(1), "Sin caballo", 3480, 8.60, 0.8),
+            new("c", d.AddDays(-1), "Maalwina", 1800, 6.04, null), new("e", d.AddDays(-8), "Zakina", 600, 1.0, 0.9),
+        };
+        var ds = DashboardSummary.From(de, d.AddHours(2), 3);
+        var dc = ds.Latest[0];
+        assert(ds.Trainings == 4 && ds.ThisWeek == 3 && ds.Pending == 2 && string.Join(",", ds.Latest.Select(x => x.Id)) == "b,a,c"
+            && dc.DayText == "SÁB 8 NOV" && dc.TimeText == "10:20" && dc.DistanceText == "8,60 km" && dc.DurationText == "58 min"
+            && string.Join("|", ds.Latest.Select(x => x.Quality)) == "RTK FIX|Sin FIX|Sin analizar",
+            $"Dashboard: contadores y últimos entrenamientos ({ds.Trainings}/{ds.ThisWeek}/{ds.Pending} · {dc.DayText} {dc.TimeText} · {dc.Quality})");
     }
 }

@@ -1,29 +1,26 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// «Entrenamientos» page = port of windows/AVO.Windows/Views/HomeView.xaml: hero + main actions, headline metrics, the
-/// training list (search, favourites, assignment), the watch card (Wi-Fi instead of USB), horses, sensors, import log and
-/// system status.
+/// «Dashboard» = port of windows/AVO.Windows/Views/HomeView.xaml (top part): banner, figures at a glance and the latest
+/// trainings. The older cards below (list, watch, horses, sensors…) are no longer shown.
 struct HomeView: View {
     @Environment(AppModel.self) private var app
-    @State private var pickingFolder: Bool = false
 
     var body: some View {
+        let d: DashboardSummary = DashboardSummary.from(app.calendarEntries, today: Date())
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 980
-            // «Dashboard» (trainer's sketches 08/11/2026): only the banner, quick actions and the figures; the recent
-            // sessions, watch, horses, sensors, imports and system cards were removed (the trainings are in
-            // «Entrenamientos», the watch in «Reloj Wi-Fi», the horses in «Cuadra»). Landscape: no scroll, so nothing is
-            // ever cut at the top: banner + figures on the left, the actions down the whole right side.
+            // «Dashboard» (trainer's sketch 13/11/2026): the banner is only the image; on the right, figures needed at a
+            // glance (caballos, jockeys, entrenamientos, esta semana, por revisar) instead of buttons; at the bottom the
+            // latest trainings instead of the totals row. Same rules as Windows (Core DashboardSummary).
             if wide {
-                // banner + actions on top (they take the free height), the 5 figures in one row across the whole width
                 VStack(alignment: .leading, spacing: 14) {
                     HStack(alignment: .top, spacing: 14) {
                         heroBanner.frame(maxWidth: .infinity, maxHeight: .infinity)
-                        actionsCard(fill: true).frame(width: 340).frame(maxHeight: .infinity)
+                        counters(d).frame(width: 340).frame(maxHeight: .infinity)
                     }
                     .frame(maxHeight: .infinity)
-                    metrics(columns: 5)
+                    latestRow(d, columns: 5)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.horizontal, 20)
@@ -31,8 +28,9 @@ struct HomeView: View {
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 14) {
-                        hero(wide: false)
-                        metrics(columns: 3)
+                        heroBanner.frame(height: 300)
+                        counters(d)
+                        latestRow(d, columns: 2)
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 16)
@@ -40,109 +38,100 @@ struct HomeView: View {
             }
         }
         .background(Avo.bg)
-        .fileImporter(isPresented: $pickingFolder, allowedContentTypes: [UTType.folder], allowsMultipleSelection: false) { result in
-            switch result {
-            case .success(let urls):
-                if let u = urls.first { Task { @MainActor in await app.importFolder(u) } }
-            case .failure(let error):
-                app.fail(error)
-            }
-        }
+        .accessibilityIdentifier("page.dashboard")
     }
 
-    // ------------------------------------------------------------------ hero + actions
-    @ViewBuilder
-    private func hero(wide: Bool) -> some View {
-        if wide {
-            HStack(alignment: .top, spacing: 14) {
-                heroBanner.frame(maxWidth: .infinity)
-                actionsCard.frame(width: 340)
-            }
-            .frame(height: 330)
-        } else {
-            VStack(spacing: 14) {
-                heroBanner.frame(height: 300)
-                actionsCard
-            }
-        }
-    }
-
+    // ------------------------------------------------------------------ banner (image only)
     private var heroBanner: some View {
-        ZStack(alignment: .leading) {
+        ZStack {
             Color(hex: 0x030406)
             Image("avo_brand_hero").resizable().scaledToFill()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .clipped()
-            LinearGradient(stops: [
-                .init(color: Color(hex: 0x030406, alpha: 0.95), location: 0),
-                .init(color: Color(hex: 0x030406, alpha: 0.70), location: 0.45),
-                .init(color: Color(hex: 0x030406, alpha: 0), location: 0.8),
-            ], startPoint: .leading, endPoint: .trailing)
-            VStack(alignment: .leading, spacing: 0) {
-                Text("AVO").font(.system(size: 64, weight: .light)).foregroundStyle(Avo.text)
-                Text("PERFORMANCE HORSE").font(.system(size: 20, weight: .semibold)).foregroundStyle(Avo.silver).padding(.leading, 2)
-                RoundedRectangle(cornerRadius: 1.5).fill(Avo.red).frame(width: 120, height: 3).padding(.vertical, 14).padding(.leading, 2)
-                Text("Bienvenido a AVO Performance Horse").font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
-                Text("Análisis avanzado del rendimiento ecuestre: velocidad, aires, esfuerzo, cincha, tramos, comparativas, mareas e informes.")
-                    .font(.footnote).foregroundStyle(Avo.textDim).padding(.top, 6).fixedSize(horizontal: false, vertical: true)
-                Text("CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO").font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim).padding(.top, 22)
-            }
-            .frame(maxWidth: 520, alignment: .leading)
-            .padding(.leading, 36)
-            .padding(.trailing, 16)
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
 
-    private var actionsCard: some View { actionsCard(fill: false) }
-
-    /// fill = the card takes the whole height (landscape Dashboard) and the actions spread over it.
-    private func actionsCard(fill: Bool) -> some View {
-        VStack(spacing: fill ? 10 : 2) {
-            homeAction("folder", "Abrir entrenamiento", "Archivos .avo (Android) / .avr (RAW)") { app.showImporter = true }
-            homeAction("clock.arrow.circlepath", "Importar carpeta", "Varias sesiones a la vez, con detección de duplicados") { pickingFolder = true }
-            homeAction("server.rack", "Servidor AVO", "Panel web y descarga HTTPS de .avo") { app.page = .server }
-            homeAction("square.split.2x1", "Comparar entrenamientos", "Recorridos y curvas superpuestas") { app.page = .compare }
-            homeAction("doc.richtext", "Informes", "PDF, HTML, CSV, GPX y JSON") { app.page = .reports }
-            if fill { Spacer(minLength: 0) }
+    // ------------------------------------------------------------------ figures at a glance
+    private func counters(_ d: DashboardSummary) -> some View {
+        VStack(spacing: 8) {
+            counter("figure.equestrian.sports", "\(app.stable.horseNames.count)", "Caballos", "Activos en la cuadra") { app.page = .stable }
+            counter("person", "\(app.stable.riderNames.count)", "Jockeys", "Jinetes activos") { app.page = .riders }
+            counter("list.bullet.rectangle", "\(d.trainings)", "Entrenamientos", "En el iPad") { app.page = .trainingList }
+            counter("calendar", "\(d.thisWeek)", "Esta semana", "De lunes a domingo") { app.page = .calendar }
+            counter("exclamationmark.circle", "\(d.pending)", "Por revisar", "Sin caballo o sin analizar",
+                    accent: d.pending > 0 ? Avo.warn : Avo.ok) { app.page = .trainingList }
         }
         .padding(8)
-        .padding(.top, fill ? 8 : 0)
-        .frame(maxHeight: fill ? .infinity : nil, alignment: .top)
+        .frame(maxHeight: .infinity, alignment: .top)
         .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
     }
 
-    private func homeAction(_ icon: String, _ title: String, _ caption: String, perform: @escaping () -> Void) -> some View {
+    private func counter(_ icon: String, _ value: String, _ title: String, _ caption: String, accent: Color = Avo.text,
+                         perform: @escaping () -> Void) -> some View {
         Button(action: perform) {
             HStack(spacing: 14) {
                 ZStack {
-                    Circle().fill(Avo.redSoft).frame(width: 38, height: 38)
-                    Image(systemName: icon).font(.system(size: 15)).foregroundStyle(Avo.redLight)
+                    Circle().fill(Avo.redSoft).frame(width: 40, height: 40)
+                    Image(systemName: icon).font(.system(size: 16)).foregroundStyle(Avo.redLight)
                 }
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
-                    Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.8)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver)
+                    Text(caption).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
                 }
                 Spacer(minLength: 0)
+                Text(value).font(.system(size: 34, weight: .semibold, design: .rounded)).monospacedDigit().foregroundStyle(accent)
             }
             .padding(.horizontal, 12).padding(.vertical, 8)
+            .frame(maxHeight: .infinity)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("dash.\(title)")
     }
 
-    // ------------------------------------------------------------------ metrics
-    private func metrics(columns: Int) -> some View {
-        let grid: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 10, alignment: .top), count: columns)
-        return LazyVGrid(columns: grid, alignment: .leading, spacing: 10) {
-            AvoMetric(label: "Entrenamientos", value: "\(app.sessionCount)", caption: "Importados y verificados")
-            AvoMetric(label: "Distancia medida", value: app.totalDistanceText, caption: "Solo sesiones reales")
-            AvoMetric(label: "Distancia demostración", value: app.demoDistanceText, caption: "Datos sintéticos, no medidos", accent: Avo.warn)
-            AvoMetric(label: "Velocidad máxima", value: app.bestSpeedText, caption: "Filtrada, todas las sesiones")
-            AvoMetric(label: "Sesión activa", value: app.selected?.dateText ?? "—", caption: app.selected?.horse ?? "Ninguna")
+    // ------------------------------------------------------------------ latest trainings
+    private func latestRow(_ d: DashboardSummary, columns: Int) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("ÚLTIMOS ENTRENAMIENTOS").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+            if d.latest.isEmpty {
+                AvoNoData(text: "Sin entrenamientos todavía · ábrelos desde «Entrenamientos» o el «Reloj Wi-Fi»")
+            } else {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: columns), spacing: 10) {
+                    ForEach(d.latest) { (c: DashCard) in latestCard(c) }
+                }
+            }
         }
+    }
+
+    private func latestCard(_ c: DashCard) -> some View {
+        Button {
+            if let s = app.sessions.first(where: { $0.id == c.id }) {
+                app.select(s)
+                app.page = .keyData
+            }
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(c.dayText).font(.caption.weight(.bold)).foregroundStyle(Avo.redLight)
+                    Text(c.timeText).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
+                    Spacer(minLength: 0)
+                    Text(c.quality).font(.caption2.weight(.semibold))
+                        .foregroundStyle(c.quality == "RTK FIX" ? Avo.ok : (c.quality == "Sin FIX" ? Avo.warn : Avo.unknown))
+                }
+                Text(c.horse).font(.headline).foregroundStyle(Avo.text).lineLimit(1)
+                Text(c.distanceText + " · " + c.durationText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver)
+            }
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("dash.latest.\(c.id)")
     }
 
     // ------------------------------------------------------------------ trainings

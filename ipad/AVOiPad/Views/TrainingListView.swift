@@ -19,12 +19,16 @@ private struct TrainingListContent: View {
     @State private var selection: String? = nil
     /// Training waiting for the «Eliminar» confirmation.
     @State private var pendingDelete: SessionItem? = nil
+    /// Filters folded away by default (trainer's sketch 13/11/2026: «desplegable»).
+    @State private var showFilters: Bool = false
 
     var body: some View {
         let rows: [TrainingListRow] = model.rows.sorted(using: sortOrder)
         VStack(alignment: .leading, spacing: 0) {
-            header(rows)
-            if !app.sessions.isEmpty { filtersBar }
+            if !app.sessions.isEmpty {
+                toolbar(rows)
+                if showFilters { filtersBar }
+            }
             Rectangle().fill(Avo.line).frame(height: 1)
             if app.sessions.isEmpty {
                 emptyState
@@ -66,81 +70,42 @@ private struct TrainingListContent: View {
         }
     }
 
-    // ------------------------------------------------------------------ header
-    private func header(_ rows: [TrainingListRow]) -> some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(alignment: .center, spacing: 12) {
-                titleBlock(rows)
-                Spacer(minLength: 8)
-                recoveryButtons
+    // ------------------------------------------------------------------ toolbar
+    /// Trainer's sketch 13/11/2026: no title or summary; the filters fold into «Filtros» and the maintenance buttons
+    /// (buscar perdidos, carpeta, exportar, copiar) moved to «Configuración».
+    private func toolbar(_ rows: [TrainingListRow]) -> some View {
+        HStack(spacing: 10) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { showFilters.toggle() }
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "line.3.horizontal.decrease.circle")
+                    Text("Filtros")
+                    if !model.filter.isEmpty {
+                        Text("activos").font(.caption.weight(.semibold)).foregroundStyle(Avo.warn)
+                    }
+                    Image(systemName: showFilters ? "chevron.up" : "chevron.down").font(.caption2)
+                }
             }
-            VStack(alignment: .leading, spacing: 10) {
-                titleBlock(rows)
-                HStack(spacing: 10) { recoveryButtons }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("list.filters")
+            if rows.count != app.sessions.count {
+                Text("\(rows.count) de \(app.sessions.count)").font(.footnote.monospacedDigit()).foregroundStyle(Avo.textDim)
             }
+            if model.computing { ProgressView().controlSize(.mini) }
+            Spacer(minLength: 8)
+            Button {
+                app.showImporter = true
+            } label: {
+                Label("Abrir", systemImage: "folder")
+            }
+            .buttonStyle(.avoPrimary)
+            .disabled(app.busy)
+            .accessibilityIdentifier("list.open")
         }
         .padding(.horizontal, 20)
         .padding(.top, 14)
         .padding(.bottom, 10)
-    }
-
-    private func titleBlock(_ rows: [TrainingListRow]) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text("Entrenamientos").font(.title2.weight(.semibold)).foregroundStyle(Avo.text)
-            HStack(spacing: 8) {
-                Text(TrainingListFilter.summary(rows)).font(.footnote.monospacedDigit()).foregroundStyle(Avo.silver)
-                if rows.count != app.sessions.count {
-                    Text("de \(app.sessions.count) en el iPad").font(.footnote).foregroundStyle(Avo.textDim)
-                }
-                if model.computing {
-                    ProgressView().controlSize(.mini)
-                    Text("Calculando geocercas…").font(.caption2).foregroundStyle(Avo.textDim)
-                }
-            }
-            if model.scanning || !model.scanStatus.isEmpty {
-                HStack(spacing: 6) {
-                    if model.scanning { ProgressView().controlSize(.mini) }
-                    Text(model.scanStatus).font(.caption).foregroundStyle(Avo.cyan).lineLimit(2)
-                }
-            }
-        }
-        .fixedSize(horizontal: false, vertical: true)
-    }
-
-    @ViewBuilder
-    private var recoveryButtons: some View {
-        Button {
-            Task { @MainActor in await model.scanDevice() }
-        } label: {
-            Label("Buscar entrenamientos perdidos", systemImage: "arrow.triangle.2.circlepath")
-        }
-        .buttonStyle(.avoPrimary)
-        .disabled(model.scanning || app.busy)
-        .accessibilityIdentifier("list.recover")
-        Button {
-            model.pickingFolder = true
-        } label: {
-            Label("Buscar en una carpeta…", systemImage: "folder.badge.questionmark")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(model.scanning || app.busy)
-        Button {
-            let items: [SessionItem] = model.rows.compactMap { model.item($0.id) }
-            Task { @MainActor in await app.exportTrainingsAndReport(items) }
-        } label: {
-            Label("Exportar \(model.rows.count) a AVO Horse", systemImage: "square.and.arrow.up.on.square")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(model.rows.isEmpty || app.busy)
-        .accessibilityIdentifier("list.export")
-        Button {
-            Task { @MainActor in await app.syncDocumentsAndReport() }
-        } label: {
-            Label("Copiar todo a AVO Horse", systemImage: "externaldrive.badge.checkmark")
-        }
-        .buttonStyle(.avoSecondary)
-        .disabled(app.busy)
-        .accessibilityIdentifier("list.syncDocs")
     }
 
     // ------------------------------------------------------------------ filters
@@ -290,16 +255,8 @@ private struct TrainingListContent: View {
                     Text(r.rider).foregroundStyle(Avo.silver)
                 }
                 .width(min: 80, ideal: 120)
-                TableColumn("Modalidad", value: \TrainingListRow.discipline) { (r: TrainingListRow) in
-                    Text(r.discipline).foregroundStyle(Avo.silver)
-                }
-                .width(min: 70, ideal: 90)
             }
             Group {
-                TableColumn("Duración", value: \TrainingListRow.durationS) { (r: TrainingListRow) in
-                    Text(r.durationText).monospacedDigit().foregroundStyle(Avo.text)
-                }
-                .width(min: 60, ideal: 75)
                 TableColumn("Distancia", value: \TrainingListRow.distanceKm) { (r: TrainingListRow) in
                     Text(r.distanceText).monospacedDigit().foregroundStyle(Avo.text)
                 }
@@ -308,36 +265,22 @@ private struct TrainingListContent: View {
                     Text(r.maxSpeedText).monospacedDigit().foregroundStyle(Avo.text)
                 }
                 .width(min: 70, ideal: 85)
-                TableColumn("Cincha", value: \TrainingListRow.girthText) { (r: TrainingListRow) in
-                    Text(r.girthText).foregroundStyle(r.hasGirth ? Avo.ok : Avo.textDim)
-                }
-                .width(min: 44, ideal: 56)
-                TableColumn("Geocercas visitadas", value: \TrainingListRow.fencesText) { (r: TrainingListRow) in
-                    Text(r.fencesText).foregroundStyle(Avo.silver).lineLimit(2)
-                }
-                .width(min: 90, ideal: 150)
-            }
-            Group {
-                TableColumn("Origen", value: \TrainingListRow.origin) { (r: TrainingListRow) in
-                    Text(r.origin).foregroundStyle(TrainingListContent.originColor(r.origin))
-                }
-                .width(min: 60, ideal: 80)
-                TableColumn("Estado del motor", value: \TrainingListRow.engineState) { (r: TrainingListRow) in
-                    Text(r.engineState).font(.caption).foregroundStyle(Avo.textDim).lineLimit(2)
-                }
-                .width(min: 90, ideal: 140)
                 TableColumn("Abrir", value: \TrainingListRow.id) { (r: TrainingListRow) in
                     Button {
                         model.open(r.id)
                     } label: {
-                        Image(systemName: "chevron.right.circle.fill").foregroundStyle(Avo.red)
+                        Image(systemName: "chevron.right.circle.fill").font(.system(size: 30)).foregroundStyle(Avo.red)
+                            .frame(width: 52, height: 44)
+                            .contentShape(Rectangle())
                     }
                     .buttonStyle(.borderless)
                     .accessibilityLabel("Abrir en Análisis")
                 }
-                .width(44)
+                .width(64)
             }
         }
+        // selected row less red and more muted (trainer's sketch 13/11/2026); the table takes its tint for it
+        .tint(Color(hex: 0x6E2A33))
         .contextMenu(forSelectionType: String.self) { (ids: Set<String>) in
             if let id = ids.first {
                 Button {
@@ -409,17 +352,12 @@ private struct TrainingListContent: View {
                         HStack(spacing: 6) {
                             Text(r.dateTimeText).font(.callout.weight(.semibold)).monospacedDigit().foregroundStyle(Avo.text)
                             if r.isSynthetic { AvoPill(text: "DEMOSTRACIÓN", color: Avo.warn) }
-                            Spacer(minLength: 4)
-                            Text(r.origin).font(.caption).foregroundStyle(TrainingListContent.originColor(r.origin))
                         }
-                        Text("\(r.horse) · \(r.rider) · \(r.discipline)").font(.footnote).foregroundStyle(Avo.silver).lineLimit(1)
-                        Text("\(r.durationText) · \(r.distanceText) · \(r.maxSpeedText) · Cincha \(r.girthText.lowercased())")
+                        Text("\(r.horse) · \(r.rider)").font(.footnote).foregroundStyle(Avo.silver).lineLimit(1)
+                        Text("\(r.distanceText) · \(r.maxSpeedText)")
                             .font(.caption).monospacedDigit().foregroundStyle(Avo.textDim).lineLimit(1)
-                        if r.fencesText != "—" {
-                            Text("Geocercas: \(r.fencesText)").font(.caption).foregroundStyle(Avo.textDim).lineLimit(1)
-                        }
                     }
-                    Image(systemName: "chevron.right").font(.caption).foregroundStyle(Avo.textDim).padding(.top, 4)
+                    Image(systemName: "chevron.right.circle.fill").font(.system(size: 28)).foregroundStyle(Avo.red)
                 }
                 .contentShape(Rectangle())
             }
@@ -509,7 +447,7 @@ private struct TrainingListChip: View {
 }
 
 /// Result of «Buscar entrenamientos perdidos».
-private struct TrainingRecoverySheet: View {
+struct TrainingRecoverySheet: View {
     var report: TrainingRecoveryReport
     var close: () -> Void
 

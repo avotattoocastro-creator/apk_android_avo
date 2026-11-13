@@ -98,4 +98,26 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(s.distanceText, "22,48 km")
         XCTAssertEqual(s.rtkText, "1 de 2")
     }
+
+    func testDashboardSummary() {
+        let d = Date(timeIntervalSince1970: 1_762_590_000)          // sábado 8 nov 2025 09:20 (Madrid)
+        let e: [CalendarEntry] = [
+            CalendarEntry(id: "a", start: d, horse: "Zakina", durationS: 2640, distanceKm: 7.84, fixShare: 0),
+            CalendarEntry(id: "b", start: d.addingTimeInterval(3600), horse: "Sin caballo", durationS: 3480, distanceKm: 8.60, fixShare: 0.8),
+            CalendarEntry(id: "c", start: d.addingTimeInterval(-86400), horse: "Maalwina", durationS: 1800, distanceKm: 6.04, fixShare: nil),
+            CalendarEntry(id: "e", start: d.addingTimeInterval(-8 * 86400), horse: "Zakina", durationS: 600, distanceKm: 1.0, fixShare: 0.9),
+        ]
+        let s: DashboardSummary = DashboardSummary.from(e, today: d.addingTimeInterval(7200), latest: 3)
+        XCTAssertEqual(s.trainings, 4)
+        XCTAssertEqual(s.thisWeek, 3)
+        XCTAssertEqual(s.pending, 2)
+        XCTAssertEqual(s.latest.map { $0.id }, ["b", "a", "c"])
+        let c: DashCard = s.latest[0]
+        XCTAssertEqual(c.dayText, "SÁB 8 NOV")
+        XCTAssertEqual(c.timeText, "10:20")
+        XCTAssertEqual(c.distanceText, "8,60 km")
+        XCTAssertEqual(c.durationText, "58 min")
+        XCTAssertEqual(c.quality, "RTK FIX")
+        XCTAssertEqual(s.latest.map { $0.quality }, ["RTK FIX", "Sin FIX", "Sin analizar"])
+    }
 }

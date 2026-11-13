@@ -15,8 +15,9 @@
         </Grid.RowDefinitions>
 
         <!-- ============================== header -->
+        <!-- boceto del entrenador 13/11/2026: la barra superior solo en las páginas de un entrenamiento (como el iPad) -->
         <Border Height="64" Background="{StaticResource AvoHeaderBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,0,1"
-                Visibility="{Binding Page, Converter={StaticResource NotPageVis}, ConverterParameter=Home}">
+                Visibility="{Binding IsTrainingPage, Converter={StaticResource BoolVis}}">
             <Grid x:Name="HeaderGrid" Margin="16,0,16,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -95,7 +96,7 @@
                     </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
-                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Inicio" Tag="{StaticResource IconHome}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Home}"/>
+                        <!-- «Inicio» fuera del menú (boceto del entrenador 13/11/2026): la portada solo se ve al arrancar -->
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Entrenamientos" Tag="{StaticResource IconHistory}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Sessions}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Calendario" Tag="{StaticResource IconHistory}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Calendar}"/>
                         <RadioButton Style="{StaticResource AvoNavItem}" Content="Cuadra" Tag="{StaticResource IconHorse}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Stable}"/>

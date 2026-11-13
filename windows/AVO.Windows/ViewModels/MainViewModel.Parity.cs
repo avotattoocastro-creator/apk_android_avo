@@ -20,6 +20,24 @@ public sealed class CalendarHorseFilter : ObservableObject
 /// </summary>
 public sealed partial class MainViewModel
 {
+    // ------------------------------------------------------------------ shell (boceto del entrenador 13/11/2026)
+    /// <summary>Pages of ONE training (same list as iPad Page.isTrainingPage): only these show the top bar; the general pages
+    /// (Entrenamientos, Calendario, Cuadra, Jinetes, Geocercas, Servidor…) have none.</summary>
+    public bool IsTrainingPage => Page is "Analysis" or "Map" or "Summary" or "Gps" or "Charts" or "TrackWork" or "Assistant" or "Segments"
+        or "Biomech" or "Compare" or "Tides" or "Reports" or "Engine" or "KeyData";
+
+    // ------------------------------------------------------------------ dashboard (same rules as iPad HomeView)
+    public DashboardSummary Dashboard => DashboardSummary.From(CalendarEntries(), DateTimeOffset.UtcNow);
+    public int HorseCount => HorseNames.Count;
+    public int RiderCount => RiderNames.Count;
+    private ICommand? _openDash;
+    /// <summary>Opens one of the latest trainings in «Datos clave».</summary>
+    public ICommand OpenDashCardCommand => _openDash ??= new RelayCommand(p =>
+    {
+        if (p is DashCard c && Sessions.FirstOrDefault(s => s.Id == c.Id) is SessionItem s) { Selected = s; Page = "KeyData"; }
+    });
+    public void RefreshDashboard() => RaiseMany(nameof(Dashboard), nameof(HorseCount), nameof(RiderCount));
+
     // ------------------------------------------------------------------ calendar
     private int _calYear = MadridTime.ToMadrid(DateTimeOffset.UtcNow).Year;
     private int _calMonth = MadridTime.ToMadrid(DateTimeOffset.UtcNow).Month;

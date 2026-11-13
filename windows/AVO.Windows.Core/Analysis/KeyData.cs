@@ -372,3 +372,38 @@ public static class SessionNavigator
         return sb.ToString();
     }
 }
+
+// ------------------------------------------------------------------ dashboard (same rules as DashboardSummary in KeyData.swift)
+
+/// <summary>One of the latest trainings shown at the bottom of the Dashboard. Quality: «RTK FIX» (≥ 50 % of the time in
+/// FIX), «Sin FIX» or «Sin analizar».</summary>
+public sealed record DashCard(string Id, string DayText, string TimeText, string Horse, string DistanceText, string DurationText, string Quality)
+{
+    public string QualityColor => Quality switch { "RTK FIX" => "#52DD40", "Sin FIX" => "#FFC42C", _ => "#93949B" };
+}
+
+/// <summary>ThisWeek = Monday to Sunday of the current week (Europe/Madrid); Pending = without a horse or not analysed.</summary>
+public sealed record DashboardSummary(int Trainings, int ThisWeek, int Pending, IReadOnlyList<DashCard> Latest)
+{
+    public const string NoHorse = "Sin caballo";
+
+    public static DashboardSummary From(IEnumerable<CalendarEntry> all, DateTimeOffset today, int latest = 5)
+    {
+        var list = all.ToList();
+        var t = MadridTime.ToMadrid(today).Date;
+        var monday = t.AddDays(-(((int)t.DayOfWeek + 6) % 7));
+        var next = monday.AddDays(7);
+        int week = list.Count(e => { var d = MadridTime.ToMadrid(e.Start); return d >= monday && d < next; });
+        int pending = list.Count(e => e.FixShare is null || e.Horse == NoHorse);
+        var cards = list.OrderByDescending(e => e.Start).Take(latest).Select(e =>
+        {
+            var d = MadridTime.ToMadrid(e.Start);
+            int m = (int)Math.Round(Math.Max(0, e.DurationS) / 60, MidpointRounding.AwayFromZero);
+            string q = e.FixShare is double f ? (f >= 0.5 ? "RTK FIX" : "Sin FIX") : "Sin analizar";
+            return new DashCard(e.Id, $"{TrainingCalendar.Weekdays[((int)d.DayOfWeek + 6) % 7]} {d.Day} {SessionNavigator.MonthShort[d.Month - 1]}",
+                d.ToString("HH:mm", KeyData.Es), e.Horse, Math.Max(0, e.DistanceKm).ToString("0.00", KeyData.Es) + " km",
+                m >= 60 ? $"{m / 60} h {m % 60} min" : $"{m} min", q);
+        }).ToList();
+        return new DashboardSummary(list.Count, week, pending, cards);
+    }
+}

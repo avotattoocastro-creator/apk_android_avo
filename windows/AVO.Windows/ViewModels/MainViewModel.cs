@@ -94,11 +94,13 @@ public sealed partial class MainViewModel : ObservableObject
     public string Page { get => _page; set { if (Set(ref _page, value)) OnPageChanged(); } }
     private void OnPageChanged()
     {
+        Raise(nameof(IsTrainingPage));
         if (Page == "Compare") RefreshCompare();
         if (Page == "Tides") _ = LoadEnvironmentAsync(false);
         if (Page == "Reports") RefreshReportPreview();
         if (Page == "Geofences") RefreshGeo();
         if (Page == "Calendar") RefreshCalendar();   // paridad iPad ↔ PC
+        if (Page == "Sessions") RefreshDashboard();
         if (Page == "KeyData") RefreshKeyData();
         Raise(nameof(ShowEmptyState));
     }
@@ -448,6 +450,7 @@ public sealed partial class MainViewModel : ObservableObject
         foreach (var g in Sessions.GroupBy(s => s.Horse).OrderByDescending(g => g.Count()).Take(8))
             Horses.Add(new HorseCard(g.Key, g.Count(), g.Max(s => s.Start) is DateTimeOffset d ? MadridTime.Format(d, "dd/MM/yyyy") : "—", g.Max(s => s.MaxSpeedKmh).ToString("0.0", Es) + " km/h"));
         RaiseMany(nameof(ShowEmptyState), nameof(SessionCount), nameof(TotalDistanceText), nameof(DemoDistanceText), nameof(HasDemo), nameof(BestSpeedText), nameof(RecentSessions));
+        RefreshDashboard();
     }
 
     // ------------------------------------------------------------------ settings

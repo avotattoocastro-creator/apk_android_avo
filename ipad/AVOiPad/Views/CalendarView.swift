@@ -13,17 +13,10 @@ struct CalendarView: View {
 
     var body: some View {
         let all: [CalendarEntry] = entries
-        let visible: [CalendarEntry] = all.filter { !hiddenHorses.contains($0.horse) }
-        let horses: [String] = Array(Set(all.map { $0.horse })).sorted()
-        HStack(alignment: .top, spacing: 16) {
-            VStack(alignment: .leading, spacing: 14) {
-                header
-                if yearView { yearGrid(visible) } else { monthGrid(visible) }
-                totals(TrainingCalendar.summary(TrainingCalendar.entries(in: year, yearView ? nil : month, visible)))
-            }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            horseFilter(horses)
-                .frame(width: 240)
+        // trainer's sketch 13/11/2026: only the calendar, on the whole page (no horse filter, no totals row)
+        VStack(alignment: .leading, spacing: 14) {
+            header
+            if yearView { yearGrid(all) } else { monthGrid(all) }
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -72,13 +65,23 @@ struct CalendarView: View {
     // ------------------------------------------------------------------ month
     private func monthGrid(_ visible: [CalendarEntry]) -> some View {
         let days: [CalendarDay] = TrainingCalendar.monthGrid(year: year, month: month, entries: visible, today: Date())
-        let cols: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 6), count: 7)
-        return LazyVGrid(columns: cols, spacing: 6) {
-            ForEach(TrainingCalendar.weekdays, id: \.self) { (w: String) in
-                Text(w).font(.caption.weight(.semibold)).foregroundStyle(Avo.textDim).frame(maxWidth: .infinity)
+        // 6 weeks × 7 days stretched to the whole height of the page
+        return VStack(spacing: 6) {
+            HStack(spacing: 6) {
+                ForEach(TrainingCalendar.weekdays, id: \.self) { (w: String) in
+                    Text(w).font(.caption.weight(.semibold)).foregroundStyle(Avo.textDim).frame(maxWidth: .infinity)
+                }
             }
-            ForEach(days) { (d: CalendarDay) in dayCell(d) }
+            ForEach(0..<6, id: \.self) { (r: Int) in
+                HStack(spacing: 6) {
+                    ForEach(0..<7, id: \.self) { (c: Int) in
+                        if r * 7 + c < days.count { dayCell(days[r * 7 + c]) }
+                    }
+                }
+                .frame(maxHeight: .infinity)
+            }
         }
+        .frame(maxHeight: .infinity)
     }
 
     private func dayCell(_ d: CalendarDay) -> some View {
@@ -105,7 +108,7 @@ struct CalendarView: View {
             Spacer(minLength: 0)
         }
         .padding(6)
-        .frame(maxWidth: .infinity, minHeight: 92, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 60, maxHeight: .infinity, alignment: .topLeading)
         .background(d.inMonth ? Avo.surface : Avo.bg, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(d.isToday ? Avo.red : Avo.line, lineWidth: d.isToday ? 2 : 1))
     }

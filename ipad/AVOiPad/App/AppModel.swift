@@ -7,7 +7,7 @@ enum Page: String, CaseIterable, Identifiable {
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
          summary = "Summary", trackWork = "TrackWork", assistant = "Assistant",
-         calendar = "Calendar", keyData = "KeyData"
+         calendar = "Calendar", keyData = "KeyData", settings = "Settings"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
