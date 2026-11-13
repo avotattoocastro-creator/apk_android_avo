@@ -1,5 +1,5 @@
 import XCTest
-@testable import AVOiPad
+@testable import AVO_Horse
 
 /// Paridad iPad ↔ PC: el MISMO JSON y los MISMOS valores esperados que windows/AVO.Windows.SelfTest (KeyData).
 final class KeyDataTests: XCTestCase {
