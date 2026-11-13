@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-4 — iPad: el menú lateral vuelve a abrirse, imagen entera y gris claro más oscuro
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad, sobre la build 90):**
+- Al ocultar el menú lateral en el Dashboard no se podía volver a abrir: la barra lateral se pedía con `.all`, que en una vista de
+  dos columnas puede quedarse oculta. Ahora se pide con `.doubleColumn` en el botón y al cambiar de página.
+- El Dashboard muestra el logotipo entero (antes se cortaba «PERFORMANCE» y, sin menú, la página quedaba descompensada): la
+  imagen se ajusta dentro del recuadro sobre su fondo negro.
+- Modo claro: fondo, superficies secundarias, líneas y cabecera un poco más oscuros.
+**No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-13 — AVO-SHELL-3 — Entrenamientos, Calendario (Semana), Cuadra e informe con logotipo
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**
@@ -40,7 +51,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   Performance», recortados de `avo_brand_hero`). Título, fecha y sesión van en tres líneas a la derecha y ya no se montan.
   El PDF de Windows admite imágenes JPEG, como el del iPad, y guarda una sola copia del logotipo para todas las páginas.
 **No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43520776654 (éxito) · iPad run 43520780825 (tests unitarios en verde; TestFlight build 90).
+**NO VERIFICADO** en iPad ni en PC reales.
 
 ## 2026-11-13 — AVO-SHELL-2 — Modo claro (iPad), Datos clave estilo Equimetre y ajustes del Dashboard
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)

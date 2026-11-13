@@ -45,9 +45,11 @@ struct HomeView: View {
     private var heroBanner: some View {
         // the image fills the box WITHOUT asking for more width (scaledToFill inside an overlay): it used to push the
         // figures column off the screen (build 88, the numbers were not visible)
-        Color(hex: 0x030406)
+        Color.black
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-            .overlay { Image("avo_brand_hero").resizable().scaledToFill() }
+            // whole logo always visible (trainer 14/11/2026: «PERFORMANCE» was cut and the page unbalanced without the
+            // sidebar): the image fits inside the box on the logo's own black background
+            .overlay { Image("avo_brand_hero").resizable().scaledToFit() }
             .clipped()
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))

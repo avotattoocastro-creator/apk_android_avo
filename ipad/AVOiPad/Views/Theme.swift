@@ -5,10 +5,10 @@ import SwiftUI
 /// follows the colour scheme chosen in «Configuración» (AvoAppearance), applied at the root with preferredColorScheme.
 enum Avo {
     //                                  oscuro      claro
-    static let bg = Color.avo(0x030406, 0xF4F5F7)
+    static let bg = Color.avo(0x030406, 0xE6E8EC)
     static let surface = Color.avo(0x101014, 0xFFFFFF)
-    static let surface2 = Color.avo(0x1A1B20, 0xECEDF1)
-    static let line = Color.avo(0x2A2B31, 0xD6D8DE)
+    static let surface2 = Color.avo(0x1A1B20, 0xDDE0E5)
+    static let line = Color.avo(0x2A2B31, 0xC6C9D0)
     static let red = Color.avo(0xED122A, 0xD50F27)
     static let redDark = Color.avo(0xB71625, 0xB71625)
     static let redLight = Color.avo(0xFF495A, 0xC8102A)
@@ -23,8 +23,8 @@ enum Avo {
     static let unknown = Color.avo(0x93949B, 0x7A7C84)
     static let redSoft = Color.avo(0xED122A, 0xED122A, darkAlpha: 0.2, lightAlpha: 0.12)
 
-    static let cardBrush = LinearGradient(colors: [Color.avo(0x15161B, 0xFFFFFF), Color.avo(0x0D0D11, 0xF7F8FA)], startPoint: .top, endPoint: .bottom)
-    static let headerBrush = LinearGradient(colors: [Color.avo(0x0A0B0E, 0xEEF0F3), Color.avo(0x15161B, 0xFFFFFF), Color.avo(0x0A0B0E, 0xEEF0F3)],
+    static let cardBrush = LinearGradient(colors: [Color.avo(0x15161B, 0xFFFFFF), Color.avo(0x0D0D11, 0xF4F5F7)], startPoint: .top, endPoint: .bottom)
+    static let headerBrush = LinearGradient(colors: [Color.avo(0x0A0B0E, 0xDDE0E5), Color.avo(0x15161B, 0xEDEFF2), Color.avo(0x0A0B0E, 0xDDE0E5)],
                                             startPoint: .leading, endPoint: .trailing)
     static let speedScale: [Color] = [Color(hex: 0x2F6BFF), Color(hex: 0x35D0E8), Color(hex: 0xFFC42C), Color(hex: 0xED122A)]
     static let accelScale: [Color] = [Color(hex: 0x3D9BFF), Color(hex: 0x93949B), Color(hex: 0xED122A)]

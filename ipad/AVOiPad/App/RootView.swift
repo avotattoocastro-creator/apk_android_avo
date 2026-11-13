@@ -71,10 +71,10 @@ struct RootView: View {
             detail
         }
         .navigationSplitViewStyle(.balanced)
-        .onAppear { columns = app.page == .home ? .detailOnly : .all }
+        .onAppear { columns = app.page == .home ? .detailOnly : .doubleColumn }
         .onChange(of: app.page) { (_: Page, newPage: Page) in
             withAnimation(.easeInOut(duration: 0.25)) {
-                columns = newPage == .home ? .detailOnly : .all
+                columns = newPage == .home ? .detailOnly : .doubleColumn
             }
         }
         .fileImporter(isPresented: Binding(get: { app.showImporter }, set: { app.showImporter = $0 }),
@@ -191,7 +191,7 @@ struct RootView: View {
                 HStack(spacing: 0) {
                     if columns == .detailOnly {
                         Button {
-                            withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
+                            withAnimation(.easeInOut(duration: 0.25)) { columns = .doubleColumn }
                         } label: {
                             Image(systemName: "sidebar.left").font(.system(size: 18, weight: .semibold))
                                 .foregroundStyle(Avo.text).frame(width: 44, height: 44)
