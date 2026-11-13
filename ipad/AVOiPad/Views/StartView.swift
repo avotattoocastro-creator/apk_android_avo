@@ -1,8 +1,9 @@
 import SwiftUI
 
 /// Start screen = port of windows/AVO.Windows/Views/StartView.xaml + HeroArt.xaml: full-bleed hero photo with the AVO
-/// lettering (in the photo's 2004×1098 coordinates, scaled like the Windows Viewbox UniformToFill, anchored top-left) and
-/// the main actions in a translucent navy column on the right. The sidebar is hidden here (RootView shows a «Menú» button).
+/// lettering (in the photo's 2004×1098 coordinates, scaled like the Windows Viewbox UniformToFill, anchored top-left).
+/// Trainer's sketch 13/11/2026: no side panel and no «Menú» button here; the motto centred at the bottom and one
+/// «INICIAR» button above it, which opens the Dashboard (the sidebar comes back on every page other than Inicio).
 struct StartView: View {
     @Environment(AppModel.self) private var app
 
@@ -14,36 +15,27 @@ struct StartView: View {
             let w: CGFloat = geo.size.width
             let h: CGFloat = geo.size.height
             let s: CGFloat = max(w / StartView.artW, h / StartView.artH)
+            // scale of the centred texts: as the artwork, but never wider than the screen (portrait)
+            let t: CGFloat = min(s, w * 0.85 / 900)
             ZStack(alignment: .topLeading) {
                 Color(hex: 0x0B1020)
                 heroArt(scale: s)
                     .frame(width: StartView.artW * s, height: StartView.artH * s, alignment: .topLeading)
                     .frame(width: w, height: h, alignment: .topLeading)
                     .clipped()
-                if h > w {
-                    // portrait: the actions go in a band at the bottom so they never cover the title
-                    VStack(spacing: 0) {
-                        Spacer(minLength: 0)
-                        actions
-                            .frame(width: w, height: max(h * 0.34, 330))
-                            .background(
-                                LinearGradient(colors: [Color(hex: 0x202B3B, alpha: 0.70), Color(hex: 0x12192A, alpha: 0.86)],
-                                               startPoint: .top, endPoint: .bottom)
-                            )
-                    }
-                } else {
-                    HStack(spacing: 0) {
-                        Spacer(minLength: 0)
-                        actions
-                            .frame(width: max(w * 0.271, 300))
-                            .frame(maxHeight: .infinity)
-                            .background(
-                                LinearGradient(colors: [Color(hex: 0x202B3B, alpha: 0.65), Color(hex: 0x172130, alpha: 0.72),
-                                                        Color(hex: 0x12192A, alpha: 0.78)],
-                                               startPoint: .topLeading, endPoint: .bottomTrailing)
-                            )
-                    }
+                VStack(spacing: 34 * t) {
+                    Spacer(minLength: 0)
+                    startButton(scale: t)
+                    Text("CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO")
+                        .font(.system(size: 32 * t, weight: .semibold))
+                        .tracking(4 * t)
+                        .foregroundStyle(Color(hex: 0xF7F7F5))
+                        .fixedSize()
+                        .shadow(color: Color.black.opacity(0.45), radius: 2.5, x: 0, y: 1.2)
+                        .accessibilityIdentifier("start.motto")
                 }
+                .padding(.bottom, max(28, h - 1030 * s))
+                .frame(width: w, height: h)
             }
             .frame(width: w, height: h)
         }
@@ -74,71 +66,40 @@ struct StartView: View {
                     .foregroundStyle(Color(hex: 0xF7F7F5))
                     .fixedSize()
                     .position(x: 342 * s, y: 356 * s)
-                Text("CIENCIA  ·  TECNOLOGÍA  ·  RENDIMIENTO")
-                    .font(.system(size: 32 * s, weight: .semibold))
-                    .tracking(4 * s)
-                    .foregroundStyle(Color(hex: 0xF7F7F5))
-                    .fixedSize()
-                    .position(x: 493 * s, y: 1016 * s)
             }
             .shadow(color: Color.black.opacity(0.45), radius: 2.5, x: 0, y: 1.2)
         }
         .frame(width: StartView.artW * s, height: StartView.artH * s, alignment: .topLeading)
     }
 
-    // ------------------------------------------------------------------ actions
-    private var actions: some View {
-        VStack(spacing: 0) {
-            // actions start at the top, level with the lettering (trainer's sketch 08/11/2026)
-            Spacer(minLength: 0).frame(height: 90)
-            Rectangle().fill(Color(hex: 0x3A4A60)).frame(height: 1).padding(.horizontal, 10)
-            action(icon: "folder", title: "Abrir entrenamiento", subtitle: "Archivos .avo / .avr") { app.showImporter = true }
-            action(icon: "square.grid.2x2", title: "Dashboard", subtitle: "Resumen de entrenamientos y accesos rápidos") { app.page = .sessions }
-            action(icon: "waveform.path.ecg", title: "Análisis", subtitle: "El caballo en el entrenamiento activo") { openAnalysis() }
-            action(icon: "server.rack", title: "Servidor AVO", subtitle: "Descargar sesiones") { app.page = .server }
-            action(icon: "square.split.2x1", title: "Comparar entrenamientos", subtitle: "Análisis avanzado") { app.page = .compare }
-            action(icon: "doc.richtext", title: "Informes", subtitle: "Exportar y compartir") { app.page = .reports }
-            Spacer(minLength: 0).frame(maxHeight: .infinity).layoutPriority(-1)
+    // ------------------------------------------------------------------ «INICIAR»
+    /// Thin white outline over translucent navy, tracked capitals like the lettering of the photo. Opens the Dashboard.
+    private func startButton(scale t: CGFloat) -> some View {
+        Button {
+            app.page = .sessions
+        } label: {
+            Text("INICIAR")
+                .font(.system(size: 26 * t, weight: .semibold))
+                .tracking(9 * t)
+                .foregroundStyle(Color(hex: 0xF7F7F5))
+                .padding(.leading, 9 * t)          // tracking adds space after the last letter: keep the word centred
+                .padding(.horizontal, 64 * t)
+                .padding(.vertical, 18 * t)
+                .background(Color(hex: 0x12192A, alpha: 0.55), in: RoundedRectangle(cornerRadius: 6 * t))
+                .overlay(RoundedRectangle(cornerRadius: 6 * t).stroke(Color(hex: 0xF7F7F5, alpha: 0.85), lineWidth: 1.5))
+                .shadow(color: Color.black.opacity(0.35), radius: 8, x: 0, y: 2)
+                .contentShape(Rectangle())
         }
-        .padding(.leading, 10)
-        .padding(.trailing, 24)
-    }
-
-    /// Opens «Análisis» with the active training (or the most recent one when none is selected yet).
-    private func openAnalysis() {
-        if app.selected == nil, let first = app.sessionsView.first { app.select(first) }
-        app.page = .analysis
-    }
-
-    private func action(icon: String, title: String, subtitle: String, perform: @escaping () -> Void) -> some View {
-        Button(action: perform) {
-            HStack(spacing: 18) {
-                ZStack {
-                    Circle().fill(Color(hex: 0x1F3A5C)).frame(width: 44, height: 44)
-                    Image(systemName: icon).font(.system(size: 18)).foregroundStyle(Color(hex: 0xA9C9F2))
-                }
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(title).font(.system(size: 17, weight: .semibold)).foregroundStyle(Color(hex: 0xF2F4F7))
-                        .lineLimit(1).minimumScaleFactor(0.7)
-                    Text(subtitle).font(.system(size: 13)).foregroundStyle(Color(hex: 0x8F9BAD)).lineLimit(1)
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(.leading, 10)
-            .padding(.trailing, 6)
-            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 120)
-            .contentShape(Rectangle())
-            .overlay(alignment: .bottom) { Rectangle().fill(Color(hex: 0x3A4A60)).frame(height: 1) }
-        }
-        .buttonStyle(StartActionStyle())
-        .accessibilityIdentifier("start.\(title)")
+        .buttonStyle(StartButtonStyle())
+        .accessibilityIdentifier("start.iniciar")
     }
 }
 
-/// Hover/press highlight of the start actions (Windows StartAction style).
-private struct StartActionStyle: ButtonStyle {
+/// Press feedback of «INICIAR».
+private struct StartButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .background(configuration.isPressed ? Color.white.opacity(0.13) : Color.clear)
+            .opacity(configuration.isPressed ? 0.75 : 1)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
     }
 }

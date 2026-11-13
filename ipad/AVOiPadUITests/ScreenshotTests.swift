@@ -29,10 +29,10 @@ final class ScreenshotTests: XCTestCase {
             let (page, isTab) = entry
             let nav = app.buttons[(isTab ? "tab." : "nav.") + page]
             if !isTab && !nav.waitForExistence(timeout: 4) {
-                // the start screen hides the sidebar: its «Menú» button shows it again
-                let menu = app.buttons["start.menu"]
-                if menu.exists {
-                    menu.tap()
+                // the start screen hides the sidebar: «INICIAR» opens the Dashboard, where it is shown again
+                let start = app.buttons["start.iniciar"]
+                if start.exists {
+                    start.tap()
                 } else {
                     // compact width: the sidebar may be hidden behind its toggle
                     let toggle = app.buttons["ToggleSidebar"]

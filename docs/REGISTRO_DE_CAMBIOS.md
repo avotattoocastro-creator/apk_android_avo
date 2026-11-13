@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-START-2 — Pantalla de inicio con botón «INICIAR» (iPad y Windows)
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:** boceto del usuario sobre la build 86.
+- En la pantalla de inicio se quitan el botón «Menú» y el panel lateral de accesos.
+- El lema «CIENCIA · TECNOLOGÍA · RENDIMIENTO» queda centrado abajo.
+- Encima del lema hay un único botón «INICIAR», con borde blanco fino sobre azul marino translúcido, que abre el Dashboard.
+  La barra lateral vuelve en el resto de páginas.
+- Archivos: `ipad/AVOiPad/Views/StartView.swift`, `ipad/AVOiPad/App/RootView.swift` y
+  `ipad/AVOiPadUITests/ScreenshotTests.swift` (las capturas entran por `start.iniciar`); en Windows,
+  `Views/StartView.xaml` y `Views/HeroArt.xaml` (el lema pasa de HeroArt a StartView con los mismos contornos Montserrat).
+**No se ha tocado:** los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-13 — AVO-PARITY-2 — Datos clave: 6 por fila, tranco a velocidad de referencia, parciales y navegador
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20) · Contrato: `docs/PARIDAD_IPAD_PC.md`
 **Qué cambia (iPad y Windows, mismas reglas y mismas pruebas):**

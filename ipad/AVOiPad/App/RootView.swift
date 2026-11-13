@@ -211,24 +211,7 @@ struct RootView: View {
                 pageView(app.page)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if app.showEmptyState { RootEmptyState() }
-                if app.page == .home && columns == .detailOnly {
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
-                    } label: {
-                        Label("Menú", systemImage: "sidebar.left")
-                            .font(.callout.weight(.semibold))
-                            .foregroundStyle(Color(hex: 0xF2F4F7))
-                            .padding(.horizontal, 12).padding(.vertical, 8)
-                            .background(Color(hex: 0x12192A, alpha: 0.72), in: RoundedRectangle(cornerRadius: 8))
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: 0x3A4A60), lineWidth: 1))
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.leading, 16)
-                    .padding(.top, 12)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .accessibilityLabel("Mostrar menú")
-                    .accessibilityIdentifier("start.menu")
-                }
+                // Inicio has no «Menú» button (trainer's sketch 13/11/2026): its «INICIAR» opens the Dashboard and the sidebar
                 if app.captureMode && app.captureReady {
                     Text("capture.ready")
                         .font(.system(size: 2))
