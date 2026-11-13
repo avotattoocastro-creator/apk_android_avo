@@ -77,7 +77,7 @@ final class AppModel {
     var chartXMin: Double = .nan
     var chartXMax: Double = .nan
     var isPlaying: Bool = false
-    var playbackSpeed: Double = 10
+    var playbackSpeed: Double = 1   // 1× by default (trainer 14/11/2026)
     let playbackSpeeds: [Double] = [1, 2, 5, 10, 20, 60]
     /// Alert shown by RootView (Windows IDialogs.Show).
     var alert: AppAlert? = nil

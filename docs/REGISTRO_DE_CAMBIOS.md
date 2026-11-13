@@ -38,6 +38,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - **Arranque (iPad):** tras restaurar la biblioteca, la app revisa «Archivos › En mi iPad › AVO Horse» e importa en silencio los
   entrenamientos guardados que falten, sin duplicados. «INICIAR» espera a que termine y mientras tanto muestra «Cargando datos
   de AVO Horse…».
+- **Mapa (iPad):** al abrirse, el recorrido sale siempre alineado en horizontal y encuadrado entero (vista predeterminada; ya no
+  se recuerda la orientación norte arriba), y la reproducción empieza a 1×.
 - **Gráficas (iPad):** al arrastrar la ventana de la barra de resumen (o desplazar y pellizcar) se redibujan cada 120 ms; antes
   solo se redibujaban al soltar.
 **No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.

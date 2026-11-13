@@ -12,7 +12,8 @@ struct MapPageView: View {
     @State private var command: RouteMapCommand = RouteMapCommand()
     @State private var showLayers: Bool = false
     /// Recorrido en horizontal (por defecto) o norte arriba; se recuerda entre sesiones.
-    @AppStorage("map.alignRoute") private var alignRoute: Bool = true
+    // route aligned (horizontal) and framed whole every time the map opens: the default view the trainer chose (14/11/2026)
+    @State private var alignRoute: Bool = true
     var mapOnly: Bool = false
 
     var body: some View {
