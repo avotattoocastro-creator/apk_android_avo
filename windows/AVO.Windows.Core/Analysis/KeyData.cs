@@ -257,6 +257,7 @@ public sealed class KeyData
 public sealed record CalendarEntry(string Id, DateTimeOffset Start, string Horse, double DurationS, double DistanceKm, double? FixShare)
 {
     public string Label => $"{Horse} · {MadridTime.Format(Start, "HH:mm")}";
+    public string Detail => $"{DistanceKm.ToString("0.00", KeyData.Es)} km · {KeyData.Clock(DurationS)}";
 }
 
 public sealed record CalendarDay(string Id, int Day, bool InMonth, bool IsToday, IReadOnlyList<CalendarEntry> Entries)
@@ -308,6 +309,35 @@ public static class TrainingCalendar
                 byDay.TryGetValue(d, out var list) ? list : []));
         }
         return cells;
+    }
+
+    /// <summary>Monday (Europe/Madrid date) of the week of an instant.</summary>
+    public static DateTime WeekStart(DateTimeOffset utc)
+    {
+        var d = MadridTime.ToMadrid(utc).Date;
+        return d.AddDays(-(((int)d.DayOfWeek + 6) % 7));
+    }
+
+    /// <summary>The 7 days (Monday first) of the week starting at <paramref name="monday"/> (Madrid dates).</summary>
+    public static List<CalendarDay> WeekGrid(DateTime monday, IEnumerable<CalendarEntry> entries, DateTimeOffset today)
+    {
+        var t = MadridTime.ToMadrid(today).Date;
+        var byDay = entries.GroupBy(e => MadridTime.ToMadrid(e.Start).Date).ToDictionary(g => g.Key, g => g.OrderBy(e => e.Start).ToList());
+        return Enumerable.Range(0, 7).Select(i =>
+        {
+            var d = monday.Date.AddDays(i);
+            return new CalendarDay($"{d.Year}-{d.Month}-{d.Day}", d.Day, true, d == t, byDay.TryGetValue(d, out var list) ? list : []);
+        }).ToList();
+    }
+
+    /// <summary>«3 – 9 nov 2025», «27 oct – 2 nov 2025» or «29 dic 2025 – 4 ene 2026».</summary>
+    public static string WeekTitle(DateTime monday)
+    {
+        var a = monday.Date; var b = a.AddDays(6);
+        string M(int m) => SessionNavigator.MonthShort[m - 1].ToLowerInvariant();
+        if (a.Year != b.Year) return $"{a.Day} {M(a.Month)} {a.Year} – {b.Day} {M(b.Month)} {b.Year}";
+        if (a.Month != b.Month) return $"{a.Day} {M(a.Month)} – {b.Day} {M(b.Month)} {b.Year}";
+        return $"{a.Day} – {b.Day} {M(b.Month)} {b.Year}";
     }
 
     public static CalendarSummary Summary(IEnumerable<CalendarEntry> entries)

@@ -30,6 +30,19 @@ public sealed class PdfDocument
     private static string N(double v) => Math.Round(v, 3).ToString("0.###", Inv);
     private static string Rgb((byte r, byte g, byte b) c) => $"{N(c.r / 255.0)} {N(c.g / 255.0)} {N(c.b / 255.0)}";
 
+    /// <summary>JPEG images (DCTDecode XObjects), drawn with <see cref="Image"/> (same as the iPad PdfDocument.image).</summary>
+    private readonly List<(byte[] Data, int W, int H)> _images = [];
+
+    /// <summary>Draws a baseline RGB JPEG in the box (x, y top-left, w × h points). The same picture on every page (report
+    /// logo) is stored once.</summary>
+    public void Image(byte[] jpeg, int pixelWidth, int pixelHeight, double x, double y, double w, double h)
+    {
+        if (pixelWidth <= 0 || pixelHeight <= 0 || jpeg.Length == 0) return;
+        int k = _images.FindIndex(i => ReferenceEquals(i.Data, jpeg) && i.W == pixelWidth && i.H == pixelHeight);
+        if (k < 0) { _images.Add((jpeg, pixelWidth, pixelHeight)); k = _images.Count - 1; }
+        C.Append("q ").Append(N(w)).Append(" 0 0 ").Append(N(h)).Append(' ').Append(N(x)).Append(' ').Append(N(Height - y - h)).Append($" cm /Im{k + 1} Do Q\n");
+    }
+
     public void FillRect(double x, double y, double w, double h, (byte, byte, byte) color) =>
         C.Append(Rgb(color)).Append(" rg ").Append(N(x)).Append(' ').Append(N(Height - y - h)).Append(' ').Append(N(w)).Append(' ').Append(N(h)).Append(" re f\n");
 
@@ -189,11 +202,14 @@ public sealed class PdfDocument
         offsets.Add(pos); W($"2 0 obj\n<< /Type /Pages /Kids [{kids}] /Count {pageCount} >>\nendobj\n");
         offsets.Add(pos); W("3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n");
         offsets.Add(pos); W("4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n");
+        // images go after the pages: objects firstPageObj + 2·pageCount …, then the info object
+        int firstImageObj = firstPageObj + 2 * pageCount;
+        string xobjects = _images.Count == 0 ? "" : " /XObject << " + string.Concat(Enumerable.Range(0, _images.Count).Select(k => $"/Im{k + 1} {firstImageObj + k} 0 R ")) + ">>";
         for (int i = 0; i < pageCount; i++)
         {
             int pageObj = firstPageObj + 2 * i, contentObj = pageObj + 1;
             offsets.Add(pos);
-            W($"{pageObj} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {N(Width)} {N(Height)}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents {contentObj} 0 R >>\nendobj\n");
+            W($"{pageObj} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 {N(Width)} {N(Height)}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>{xobjects} >> /Contents {contentObj} 0 R >>\nendobj\n");
             byte[] raw = latin.GetBytes(_pages[i].ToString());
             byte[] packed;
             using (var ms = new MemoryStream())
@@ -206,7 +222,15 @@ public sealed class PdfDocument
             WB(packed);
             W("\nendstream\nendobj\n");
         }
-        int infoObj = firstPageObj + 2 * pageCount;
+        for (int k = 0; k < _images.Count; k++)
+        {
+            var im = _images[k];
+            offsets.Add(pos);
+            W($"{firstImageObj + k} 0 obj\n<< /Type /XObject /Subtype /Image /Width {im.W} /Height {im.H} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length {im.Data.Length} >>\nstream\n");
+            WB(im.Data);
+            W("\nendstream\nendobj\n");
+        }
+        int infoObj = firstImageObj + _images.Count;
         offsets.Add(pos);
         W($"{infoObj} 0 obj\n<< /Title ({Escape(Title)}) /Producer (AVO Performance Horse Windows) /CreationDate (D:{DateTime.UtcNow:yyyyMMddHHmmss}Z) >>\nendobj\n");
         long xref = pos;

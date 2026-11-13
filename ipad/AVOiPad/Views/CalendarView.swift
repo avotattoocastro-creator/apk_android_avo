@@ -7,7 +7,10 @@ struct CalendarView: View {
     @Environment(AppModel.self) private var app
     @State private var year: Int = TrainingCalendar.yearMonth(Date()).year
     @State private var month: Int = TrainingCalendar.yearMonth(Date()).month
-    @State private var yearView: Bool = false
+    /// 0 = semana, 1 = mes, 2 = año (trainer's sketch 13/11/2026 added «Semana»).
+    @State private var mode: Int = 1
+    @State private var weekStart: Date = TrainingCalendar.weekStart(Date())
+    private var yearView: Bool { mode == 2 }
     @State private var hiddenHorses: Set<String> = []
     @State private var didJump: Bool = false
 
@@ -16,7 +19,11 @@ struct CalendarView: View {
         // trainer's sketch 13/11/2026: only the calendar, on the whole page (no horse filter, no totals row)
         VStack(alignment: .leading, spacing: 14) {
             header
-            if yearView { yearGrid(all) } else { monthGrid(all) }
+            switch mode {
+            case 0: weekGrid(all)
+            case 2: yearGrid(all)
+            default: monthGrid(all)
+            }
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -27,6 +34,7 @@ struct CalendarView: View {
                 let ym = TrainingCalendar.yearMonth(last.start)
                 year = ym.year
                 month = ym.month
+                weekStart = TrainingCalendar.weekStart(last.start)
                 didJump = true
             }
         }
@@ -39,23 +47,29 @@ struct CalendarView: View {
     private var header: some View {
         HStack(spacing: 10) {
             Button { step(-1) } label: { Image(systemName: "chevron.left") }
-                .buttonStyle(.avoSecondary).accessibilityLabel(yearView ? "Año anterior" : "Mes anterior")
-            Text(yearView ? "\(year)" : "\(TrainingCalendar.monthNames[month - 1].capitalized) \(year)")
+                .buttonStyle(.avoSecondary).accessibilityLabel(["Semana anterior", "Mes anterior", "Año anterior"][mode])
+            Text(mode == 0 ? TrainingCalendar.weekTitle(weekStart)
+                 : (yearView ? "\(year)" : "\(TrainingCalendar.monthNames[month - 1].capitalized) \(year)"))
                 .font(.title2.weight(.semibold)).foregroundStyle(Avo.text)
                 .frame(minWidth: 220, alignment: .leading)
             Button { step(1) } label: { Image(systemName: "chevron.right") }
-                .buttonStyle(.avoSecondary).accessibilityLabel(yearView ? "Año siguiente" : "Mes siguiente")
+                .buttonStyle(.avoSecondary).accessibilityLabel(["Semana siguiente", "Mes siguiente", "Año siguiente"][mode])
             Spacer()
-            Picker("Vista", selection: $yearView) {
-                Text("Mes").tag(false)
-                Text("Año").tag(true)
+            Picker("Vista", selection: $mode) {
+                Text("Semana").tag(0)
+                Text("Mes").tag(1)
+                Text("Año").tag(2)
             }
             .pickerStyle(.segmented)
-            .frame(width: 200)
+            .frame(width: 300)
         }
     }
 
     private func step(_ d: Int) {
+        if mode == 0 {
+            weekStart = TrainingCalendar.calendar.date(byAdding: .day, value: 7 * d, to: weekStart) ?? weekStart
+            return
+        }
         if yearView { year += d; return }
         month += d
         if month < 1 { month = 12; year -= 1 }
@@ -113,6 +127,45 @@ struct CalendarView: View {
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(d.isToday ? Avo.red : Avo.line, lineWidth: d.isToday ? 2 : 1))
     }
 
+    // ------------------------------------------------------------------ week
+    /// 7 columns (Monday first) over the whole page, each with the day's trainings: time, horse, distance.
+    private func weekGrid(_ visible: [CalendarEntry]) -> some View {
+        let days: [CalendarDay] = TrainingCalendar.weekGrid(start: weekStart, entries: visible, today: Date())
+        return HStack(alignment: .top, spacing: 6) {
+            ForEach(Array(days.enumerated()), id: \.element.id) { (p: (offset: Int, element: CalendarDay)) in
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Text(TrainingCalendar.weekdays[p.offset]).font(.caption.weight(.semibold)).foregroundStyle(Avo.textDim)
+                        Spacer()
+                        Text("\(p.element.day)").font(.title3.weight(.semibold)).foregroundStyle(Avo.text)
+                    }
+                    ForEach(p.element.entries) { (e: CalendarEntry) in
+                        Button { open(e) } label: {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(MadridTime.format(e.start, "HH:mm")).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
+                                Text(e.horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(2)
+                                Text(DotNetFormat.custom(e.distanceKm, "0.00", spanish: true) + " km · " + TimeText.clock(e.durationS))
+                                    .font(.caption.monospacedDigit()).foregroundStyle(Avo.silver)
+                            }
+                            .padding(8)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Avo.blue.opacity(0.16), in: RoundedRectangle(cornerRadius: 6))
+                            .overlay(alignment: .leading) { Rectangle().fill(Avo.blue).frame(width: 3) }
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("calendar.week.\(e.id)")
+                    }
+                    Spacer(minLength: 0)
+                }
+                .padding(8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .background(Avo.surface, in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(p.element.isToday ? Avo.red : Avo.line, lineWidth: p.element.isToday ? 2 : 1))
+            }
+        }
+        .frame(maxHeight: .infinity)
+    }
+
     // ------------------------------------------------------------------ year
     private func yearGrid(_ visible: [CalendarEntry]) -> some View {
         let cols: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 10), count: 4)
@@ -121,7 +174,7 @@ struct CalendarView: View {
                 let s: CalendarSummary = TrainingCalendar.summary(TrainingCalendar.entries(in: year, m, visible))
                 Button {
                     month = m
-                    yearView = false
+                    mode = 1
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(TrainingCalendar.monthNames[m - 1].uppercased()).font(.caption.weight(.semibold)).foregroundStyle(Avo.silver)

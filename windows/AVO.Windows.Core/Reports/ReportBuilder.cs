@@ -33,6 +33,23 @@ public static class ReportBuilder
     private static readonly (byte, byte, byte) Ink = (0x10, 0x10, 0x14), Dim = (0x5B, 0x5C, 0x63), Red = (0xED, 0x12, 0x2A),
         Line = (0xD8, 0xD9, 0xDE), Panel = (0xF3, 0xF3, 0xF5), Dark = (0x10, 0x10, 0x14), Blue = (0x3D, 0x9B, 0xFF), White = (0xFF, 0xFF, 0xFF);
 
+    /// <summary>Height (points) of the dark header band of the PDF pages (with the logo).</summary>
+    public const double HeaderBand = 84;
+
+    /// <summary>HTML header with the logo (horse head + logotype as data URIs), title, date and session on separate lines
+    /// (same as iPad ReportBuilder.htmlHeader).</summary>
+    public static string HtmlHeader(string dateText, string sessionId, string title = "Informe de entrenamiento")
+    {
+        var h = new StringBuilder("<header>");
+        if (ReportLogo.Head is { } hd) h.Append("<img alt=\"\" style=\"height:78px;width:auto\" src=\"data:image/jpeg;base64,").Append(Convert.ToBase64String(hd.Jpeg)).Append("\">");
+        if (ReportLogo.Text is { } tx) h.Append("<img alt=\"AVO PERFORMANCE HORSE\" style=\"height:58px;width:auto\" src=\"data:image/jpeg;base64,").Append(Convert.ToBase64String(tx.Jpeg)).Append("\">");
+        else h.Append("<b style=\"font-size:26px\">AVO PERFORMANCE HORSE</b>");
+        h.Append("<div style=\"margin-left:auto;text-align:right;line-height:1.5\"><div style=\"font-weight:700;font-size:16px\">").Append(WebUtility.HtmlEncode(title))
+         .Append("</div><div style=\"color:#C9CBD1\">").Append(WebUtility.HtmlEncode(dateText)).Append(" (Europe/Madrid)</div><div style=\"color:#9C9DA4;font-size:12px\">Sesión ")
+         .Append(WebUtility.HtmlEncode(sessionId)).Append("</div></div></header>");
+        return h.ToString();
+    }
+
     public static string Num(double? v, string fmt, string unit = "") => TimeText.Num(v, fmt, unit);
 
     // ------------------------------------------------------------------------------------------------ PDF
@@ -47,20 +64,34 @@ public static class ReportBuilder
         void Header()
         {
             pdf.NewPage(); page++;
-            pdf.FillRect(0, 0, pdf.Width, 64, Dark);
-            pdf.FillRect(0, 64, pdf.Width, 3, Red);
-            pdf.Text(M, 16, "AVO", 26, true, White);
-            pdf.Text(M + 62, 20, "PERFORMANCE HORSE", 11, true, (0xC9, 0xCB, 0xD1));
-            pdf.Text(M + 62, 35, "Informe de entrenamiento", 9, false, (0x9C, 0x9D, 0xA4));
-            pdf.Text(pdf.Width - M, 22, MadridTime.Format(d.Timeline.Utc0 ?? d.Session.StartedAt, "dd/MM/yyyy HH:mm") + " (Europe/Madrid)", 9, false, White, PdfDocument.Align.Right);
-            pdf.Text(pdf.Width - M, 37, "Sesión " + d.Session.SessionId, 8, false, (0x9C, 0x9D, 0xA4), PdfDocument.Align.Right);
+            // cabecera con el logotipo (boceto del entrenador 13/11/2026): cabeza de caballo + logotipo a la izquierda; título,
+            // fecha y sesión en tres líneas a la derecha (antes se montaban). Igual que el iPad ReportBuilder.swift.
+            const double band = HeaderBand;
+            pdf.FillRect(0, 0, pdf.Width, band, Dark);
+            pdf.FillRect(0, band, pdf.Width, 3, Red);
+            double lx = M;
+            if (ReportLogo.Head is { } hd)
+            {
+                double hh = band - 14, hw = hh * hd.Width / hd.Height;
+                pdf.Image(hd.Jpeg, hd.Width, hd.Height, lx, 7, hw, hh);
+                lx += hw + 8;
+            }
+            if (ReportLogo.Text is { } tx)
+            {
+                double th = band - 26, tw = th * tx.Width / tx.Height;
+                pdf.Image(tx.Jpeg, tx.Width, tx.Height, lx, 13, tw, th);
+            }
+            else pdf.Text(lx, 26, "AVO PERFORMANCE HORSE", 16, true, White);
+            pdf.Text(pdf.Width - M, 20, "Informe de entrenamiento", 11, true, White, PdfDocument.Align.Right);
+            pdf.Text(pdf.Width - M, 40, MadridTime.Format(d.Timeline.Utc0 ?? d.Session.StartedAt, "dd/MM/yyyy HH:mm") + " (Europe/Madrid)", 9, false, (0xC9, 0xCB, 0xD1), PdfDocument.Align.Right);
+            pdf.Text(pdf.Width - M, 56, "Sesión " + d.Session.SessionId, 8, false, (0x9C, 0x9D, 0xA4), PdfDocument.Align.Right);
             if (d.Session.IsSynthetic)
             {
-                pdf.FillRect(M, 76, W, 18, (0xFF, 0xF1, 0xC9));
-                pdf.Text(M + 8, 80, "DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.", 9, true, (0x7A, 0x52, 0x00));
-                y = 104;
+                pdf.FillRect(M, band + 12, W, 18, (0xFF, 0xF1, 0xC9));
+                pdf.Text(M + 8, band + 16, "DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.", 9, true, (0x7A, 0x52, 0x00));
+                y = band + 40;
             }
-            else y = 84;
+            else y = band + 20;
             pdf.Line(M, pdf.Height - 34, pdf.Width - M, pdf.Height - 34, Line);
             pdf.Text(M, pdf.Height - 28, "GNSS del chaleco del jinete (no es un punto anatómico del caballo). IMU de cincha sin calibrar: índices exploratorios, no diagnósticos.", 6.8, false, Dim);
             pdf.Text(pdf.Width - M, pdf.Height - 28, $"Página {page}", 7, false, Dim, PdfDocument.Align.Right);
@@ -380,13 +411,12 @@ public static class ReportBuilder
         var whole = tl.Count >= 2 ? SegmentAnalyzer.Compute(tl, new SegmentDefinition { Name = "Sesión", T0 = tl.T[0], T1 = tl.T[^1] }, d.Engine) : null;
         var sb = new StringBuilder();
         sb.Append("<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>AVO Performance Horse · Informe</title><style>")
-          .Append("body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:22px 40px;border-bottom:4px solid #ED122A}")
+          .Append("body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:12px 40px;border-bottom:4px solid #ED122A;display:flex;align-items:center;gap:14px}")
           .Append("header b{font-size:34px;letter-spacing:2px}header span{color:#C9CBD1;margin-left:14px;font-weight:600}main{padding:10px 40px 40px}h2{color:#ED122A;font-size:15px;text-transform:uppercase;border-bottom:1px solid #D8D9DE;padding-bottom:6px;margin-top:28px}")
           .Append(".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tile{background:#F3F3F5;border-left:4px solid #ED122A;padding:10px 14px}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:700;font-size:11px}.tile div{font-size:24px;font-weight:700}")
           .Append("table{border-collapse:collapse;width:100%;font-size:12px}th{background:#101014;color:#fff;text-align:left;padding:6px}td{padding:5px 6px;border-bottom:1px solid #E4E4E8}.kv td:first-child{color:#5B5C63;width:38%}")
           .Append(".note{color:#5B5C63;font-size:12px}.demo{background:#FFF1C9;color:#7A5200;padding:8px 12px;font-weight:700;margin-top:12px}svg{background:#F3F3F5;width:100%;height:auto}@media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>")
-          .Append("<header><b>AVO</b><span>PERFORMANCE HORSE · Informe de entrenamiento</span><div style=\"float:right;text-align:right;color:#C9CBD1\">")
-          .Append(E(MadridTime.Format(tl.Utc0 ?? s.StartedAt))).Append(" (Europe/Madrid)<br>Sesión ").Append(E(s.SessionId)).Append("</div></header><main>");
+          .Append(HtmlHeader(MadridTime.Format(tl.Utc0 ?? s.StartedAt), s.SessionId)).Append("<main>");
         if (s.IsSynthetic) sb.Append("<div class=\"demo\">DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.</div>");
         sb.Append("<h2>Datos generales</h2><table class=\"kv\">")
           .Append(Kv("Caballo", s.Horse)).Append(Kv("Jinete", s.Rider)).Append(Kv("Fecha", MadridTime.Format(tl.Utc0 ?? s.StartedAt, "dddd dd/MM/yyyy HH:mm")))

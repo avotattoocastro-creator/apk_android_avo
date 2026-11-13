@@ -164,6 +164,13 @@ final class StableIdentityPage {
         message = ""
     }
 
+    /// Back to the full-width list (trainer's sketch 13/11/2026).
+    func backToList() {
+        selectedCode = nil
+        isNew = false
+        message = ""
+    }
+
     func startNew() {
         selectedCode = nil
         isNew = true

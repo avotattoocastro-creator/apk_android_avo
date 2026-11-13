@@ -9,16 +9,19 @@ struct StableView: View {
         let page: StableIdentityPage = app.stable.page(kind)
         VStack(alignment: .leading, spacing: 14) {
             header(page)
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .top, spacing: 14) {
-                    StableListCard(page: page).frame(width: 330)
-                    StableDetailPane(page: page)
+            // trainer's sketch 13/11/2026: one full-width row per horse / rider in a scrolling list; tapping one opens its
+            // card on the whole page, with «‹ volver» to the list
+            if page.hasSelection {
+                Button {
+                    page.backToList()
+                } label: {
+                    Label(page.title, systemImage: "chevron.left")
                 }
-                .frame(minWidth: 760)
-                VStack(alignment: .leading, spacing: 14) {
-                    StableListCard(page: page).frame(maxHeight: 360)
-                    StableDetailPane(page: page)
-                }
+                .buttonStyle(.avoSecondary)
+                .accessibilityIdentifier("stable.back")
+                StableDetailPane(page: page)
+            } else {
+                StableFullList(page: page)
             }
         }
         .padding(20)
@@ -97,6 +100,86 @@ private struct StableLinkCard: View {
 }
 
 // MARK: - list
+
+/// Full-width list (trainer's sketch 13/11/2026): toolbar (nuevo, buscar, inactivos) and one wide row per record,
+/// alternating colours like «Entrenamientos».
+private struct StableFullList: View {
+    let page: StableIdentityPage
+
+    var body: some View {
+        @Bindable var p = page
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 12) {
+                Button {
+                    page.startNew()
+                } label: {
+                    Label(page.newLabel, systemImage: "plus")
+                }
+                .buttonStyle(.avoPrimary)
+                .accessibilityIdentifier("stable.new")
+                HStack(spacing: 6) {
+                    Image(systemName: "magnifyingglass").foregroundStyle(Avo.textDim)
+                    TextField("Buscar por nombre, código o raza", text: $p.search)
+                        .textInputAutocapitalization(.never).autocorrectionDisabled()
+                }
+                .padding(8)
+                .frame(maxWidth: 380)
+                .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
+                Spacer(minLength: 8)
+                Toggle("Mostrar inactivos", isOn: $p.showInactive).font(.footnote).tint(Avo.red).fixedSize()
+            }
+            if page.isEmpty {
+                AvoNoData(text: page.emptyText)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 0) {
+                        ForEach(Array(page.items.enumerated()), id: \.element.id) { (q: (offset: Int, element: StableIdentityRow)) in
+                            StableWideRow(row: q.element)
+                                .background(q.offset % 2 == 1 ? Avo.surface : Avo.bg)
+                                .overlay(alignment: .bottom) { Rectangle().fill(Avo.line.opacity(0.6)).frame(height: 1) }
+                                .contentShape(Rectangle())
+                                .onTapGesture { page.choose(q.element) }
+                        }
+                    }
+                }
+                .overlay(Rectangle().stroke(Avo.line, lineWidth: 1))
+            }
+        }
+        .frame(maxHeight: .infinity, alignment: .top)
+    }
+}
+
+private struct StableWideRow: View {
+    let row: StableIdentityRow
+
+    var body: some View {
+        HStack(spacing: 16) {
+            ZStack {
+                Circle().fill(Avo.surface2).frame(width: 48, height: 48)
+                Circle().stroke(Avo.line, lineWidth: 1).frame(width: 48, height: 48)
+                Text(row.initial).font(.system(size: 20, weight: .semibold)).foregroundStyle(Avo.silver)
+            }
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 8) {
+                    Text(row.name).font(.title3.weight(.semibold)).foregroundStyle(row.active ? Avo.text : Avo.textDim).lineLimit(1)
+                    if row.isDemo { AvoPill(text: "DEMO", color: Avo.warn) }
+                    if !row.active { AvoPill(text: "INACTIVO", color: Avo.unknown) }
+                }
+                Text(row.subtitle).font(.footnote).foregroundStyle(Avo.textDim).lineLimit(1)
+            }
+            Spacer(minLength: 8)
+            Text(row.countText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 150, alignment: .trailing)
+            Text(row.distanceText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 90, alignment: .trailing)
+            if row.hasNfc {
+                Image(systemName: "wave.3.right").font(.callout).foregroundStyle(Avo.cyan).accessibilityLabel("Tiene etiqueta NFC")
+            }
+            Image(systemName: "chevron.right").font(.callout).foregroundStyle(Avo.textDim)
+        }
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .accessibilityIdentifier("stable.row.\(row.code)")
+    }
+}
 
 private struct StableListCard: View {
     let page: StableIdentityPage

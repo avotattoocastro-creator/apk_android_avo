@@ -357,6 +357,40 @@ enum TrainingCalendar {
         return out
     }
 
+    /// Monday 00:00 (Europe/Madrid) of the week of `d`.
+    static func weekStart(_ d: Date) -> Date {
+        calendar.dateInterval(of: .weekOfYear, for: d)?.start ?? d
+    }
+
+    /// The 7 days (Monday first) of the week starting at `start` (a Monday from weekStart).
+    static func weekGrid(start: Date, entries: [CalendarEntry], today: Date) -> [CalendarDay] {
+        let cal = calendar
+        let todayKey = cal.dateComponents([.year, .month, .day], from: today)
+        var out: [CalendarDay] = []
+        for i in 0..<7 {
+            guard let d = cal.date(byAdding: .day, value: i, to: start) else { continue }
+            let c = cal.dateComponents([.year, .month, .day], from: d)
+            let list: [CalendarEntry] = entries.filter {
+                let e = cal.dateComponents([.year, .month, .day], from: $0.start)
+                return e.year == c.year && e.month == c.month && e.day == c.day
+            }.sorted { $0.start < $1.start }
+            out.append(CalendarDay(id: "\(c.year ?? 0)-\(c.month ?? 0)-\(c.day ?? 0)", day: c.day ?? 0, inMonth: true,
+                                   isToday: c.year == todayKey.year && c.month == todayKey.month && c.day == todayKey.day, entries: list))
+        }
+        return out
+    }
+
+    /// «3 – 9 nov 2025», «27 oct – 2 nov 2025» or «29 dic 2025 – 4 ene 2026».
+    static func weekTitle(_ start: Date) -> String {
+        let cal = calendar
+        let end: Date = cal.date(byAdding: .day, value: 6, to: start) ?? start
+        let a = cal.dateComponents([.year, .month, .day], from: start), b = cal.dateComponents([.year, .month, .day], from: end)
+        func mon(_ m: Int?) -> String { SessionNavigator.monthShort[max(0, min(11, (m ?? 1) - 1))].lowercased() }
+        if a.year != b.year { return "\(a.day ?? 0) \(mon(a.month)) \(a.year ?? 0) – \(b.day ?? 0) \(mon(b.month)) \(b.year ?? 0)" }
+        if a.month != b.month { return "\(a.day ?? 0) \(mon(a.month)) – \(b.day ?? 0) \(mon(b.month)) \(b.year ?? 0)" }
+        return "\(a.day ?? 0) – \(b.day ?? 0) \(mon(b.month)) \(b.year ?? 0)"
+    }
+
     static func summary(_ entries: [CalendarEntry]) -> CalendarSummary {
         var s = CalendarSummary()
         for e in entries {

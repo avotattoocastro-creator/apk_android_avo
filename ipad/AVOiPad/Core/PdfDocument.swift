@@ -40,8 +40,13 @@ final class PdfDocument {
     func image(_ jpeg: Data, pixelWidth: Int, pixelHeight: Int, _ x: Double, _ y: Double, _ w: Double, _ h: Double) {
         guard pixelWidth > 0, pixelHeight > 0, !jpeg.isEmpty else { return }
         let N = PdfDocument.n
-        images.append((data: jpeg, w: pixelWidth, h: pixelHeight))
-        append("q \(N(w)) 0 0 \(N(h)) \(N(x)) \(N(height - y - h)) cm /Im\(images.count) Do Q\n")
+        // the same picture on every page (report logo) is stored once
+        var k: Int = images.firstIndex { $0.data == jpeg && $0.w == pixelWidth && $0.h == pixelHeight } ?? -1
+        if k < 0 {
+            images.append((data: jpeg, w: pixelWidth, h: pixelHeight))
+            k = images.count - 1
+        }
+        append("q \(N(w)) 0 0 \(N(h)) \(N(x)) \(N(height - y - h)) cm /Im\(k + 1) Do Q\n")
     }
 
     func fillRect(_ x: Double, _ y: Double, _ w: Double, _ h: Double, _ color: AvoRGB) {

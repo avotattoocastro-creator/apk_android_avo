@@ -68,6 +68,25 @@ enum ReportBuilder {
     static let lineColor: AvoRGB = (r: 0xD8, g: 0xD9, b: 0xDE)
     static let panel: AvoRGB = (r: 0xF3, g: 0xF3, b: 0xF5)
     static let dark: AvoRGB = (r: 0x10, g: 0x10, b: 0x14)
+    /// Height (points) of the dark header band of the PDF pages (with the logo).
+    static let headerBand: Double = 84
+
+    /// HTML header with the logo (horse head + logotype as data URIs), title, date and session on separate lines.
+    static func htmlHeader(_ dateText: String, _ sessionId: String, title: String = "Informe de entrenamiento") -> String {
+        var h: String = "<header>"
+        if let p = ReportLogo.head {
+            h += "<img alt=\"\" style=\"height:78px;width:auto\" src=\"data:image/jpeg;base64," + p.jpeg.base64EncodedString() + "\">"
+        }
+        if let p = ReportLogo.text {
+            h += "<img alt=\"AVO PERFORMANCE HORSE\" style=\"height:58px;width:auto\" src=\"data:image/jpeg;base64," + p.jpeg.base64EncodedString() + "\">"
+        } else {
+            h += "<b style=\"font-size:26px\">AVO PERFORMANCE HORSE</b>"
+        }
+        h += "<div style=\"margin-left:auto;text-align:right;line-height:1.5\"><div style=\"font-weight:700;font-size:16px\">"
+            + DotNetText.htmlEncode(title) + "</div><div style=\"color:#C9CBD1\">" + DotNetText.htmlEncode(dateText)
+            + " (Europe/Madrid)</div><div style=\"color:#9C9DA4;font-size:12px\">Sesión " + DotNetText.htmlEncode(sessionId) + "</div></div></header>"
+        return h
+    }
     static let blue: AvoRGB = (r: 0x3D, g: 0x9B, b: 0xFF)
     static let white: AvoRGB = (r: 0xFF, g: 0xFF, b: 0xFF)
 
@@ -293,16 +312,12 @@ enum ReportBuilder {
         let wm0: SegmentMetrics? = whole(d)
         var sb: String = ""
         sb += "<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>AVO Performance Horse · Informe</title><style>"
-        sb += "body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:22px 40px;border-bottom:4px solid #ED122A}"
+        sb += "body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:12px 40px;border-bottom:4px solid #ED122A;display:flex;align-items:center;gap:14px}"
         sb += "header b{font-size:34px;letter-spacing:2px}header span{color:#C9CBD1;margin-left:14px;font-weight:600}main{padding:10px 40px 40px}h2{color:#ED122A;font-size:15px;text-transform:uppercase;border-bottom:1px solid #D8D9DE;padding-bottom:6px;margin-top:28px}"
         sb += ".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tile{background:#F3F3F5;border-left:4px solid #ED122A;padding:10px 14px}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:700;font-size:11px}.tile div{font-size:24px;font-weight:700}"
         sb += "table{border-collapse:collapse;width:100%;font-size:12px}th{background:#101014;color:#fff;text-align:left;padding:6px}td{padding:5px 6px;border-bottom:1px solid #E4E4E8}.kv td:first-child{color:#5B5C63;width:38%}"
         sb += ".note{color:#5B5C63;font-size:12px}.demo{background:#FFF1C9;color:#7A5200;padding:8px 12px;font-weight:700;margin-top:12px}svg{background:#F3F3F5;width:100%;height:auto}@media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>"
-        sb += "<header><b>AVO</b><span>PERFORMANCE HORSE · Informe de entrenamiento</span><div style=\"float:right;text-align:right;color:#C9CBD1\">"
-        sb += e(madrid(tl.utc0 ?? s.startedAt))
-        sb += " (Europe/Madrid)<br>Sesión "
-        sb += e(s.sessionId)
-        sb += "</div></header><main>"
+        sb += htmlHeader(madrid(tl.utc0 ?? s.startedAt), s.sessionId) + "<main>"
         if s.isSynthetic { sb += "<div class=\"demo\">DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.</div>" }
         sb += "<h2>Datos generales</h2><table class=\"kv\">"
         sb += kv("Caballo", s.horse)
@@ -442,20 +457,35 @@ private class PdfReportWriter {
     func header() {
         pdf.newPage()
         page += 1
-        pdf.fillRect(0, 0, pdf.width, 64, ReportBuilder.dark)
-        pdf.fillRect(0, 64, pdf.width, 3, red)
-        pdf.text(m, 16, "AVO", size: 26, bold: true, color: ReportBuilder.white)
-        pdf.text(m + 62, 20, "PERFORMANCE HORSE", size: 11, bold: true, color: (r: 0xC9, g: 0xCB, b: 0xD1))
-        pdf.text(m + 62, 35, subtitle, size: 9, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4))
-        pdf.text(pdf.width - m, 22, ReportBuilder.madrid(d.timeline.utc0 ?? d.session.startedAt, "dd/MM/yyyy HH:mm") + " (Europe/Madrid)",
-                 size: 9, bold: false, color: ReportBuilder.white, align: .right)
-        pdf.text(pdf.width - m, 37, "Sesión " + d.session.sessionId, size: 8, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4), align: .right)
-        if d.session.isSynthetic {
-            pdf.fillRect(m, 76, w, 18, (r: 0xFF, g: 0xF1, b: 0xC9))
-            pdf.text(m + 8, 80, "DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.", size: 9, bold: true, color: (r: 0x7A, g: 0x52, b: 0x00))
-            y = 104
+        // header with the logo (trainer's sketch 13/11/2026): horse head + logotype on the left, title, date and session
+        // on three separate lines on the right (they used to overlap); same layout as Windows ReportBuilder.cs
+        let band: Double = ReportBuilder.headerBand
+        pdf.fillRect(0, 0, pdf.width, band, ReportBuilder.dark)
+        pdf.fillRect(0, band, pdf.width, 3, red)
+        var lx: Double = m
+        if let h = ReportLogo.head {
+            let hh: Double = band - 14
+            let hw: Double = hh * Double(h.width) / Double(h.height)
+            pdf.image(h.jpeg, pixelWidth: h.width, pixelHeight: h.height, lx, 7, hw, hh)
+            lx += hw + 8
+        }
+        if let t = ReportLogo.text {
+            let th: Double = band - 26
+            let tw: Double = th * Double(t.width) / Double(t.height)
+            pdf.image(t.jpeg, pixelWidth: t.width, pixelHeight: t.height, lx, 13, tw, th)
         } else {
-            y = 84
+            pdf.text(lx, 26, "AVO PERFORMANCE HORSE", size: 16, bold: true, color: ReportBuilder.white)
+        }
+        pdf.text(pdf.width - m, 20, subtitle, size: 11, bold: true, color: ReportBuilder.white, align: .right)
+        pdf.text(pdf.width - m, 40, ReportBuilder.madrid(d.timeline.utc0 ?? d.session.startedAt, "dd/MM/yyyy HH:mm") + " (Europe/Madrid)",
+                 size: 9, bold: false, color: (r: 0xC9, g: 0xCB, b: 0xD1), align: .right)
+        pdf.text(pdf.width - m, 56, "Sesión " + d.session.sessionId, size: 8, bold: false, color: (r: 0x9C, g: 0x9D, b: 0xA4), align: .right)
+        if d.session.isSynthetic {
+            pdf.fillRect(m, band + 12, w, 18, (r: 0xFF, g: 0xF1, b: 0xC9))
+            pdf.text(m + 8, band + 16, "DEMOSTRACIÓN — DATOS SINTÉTICOS. No corresponde a un entrenamiento medido.", size: 9, bold: true, color: (r: 0x7A, g: 0x52, b: 0x00))
+            y = band + 40
+        } else {
+            y = band + 20
         }
         pdf.line(m, pdf.height - 34, pdf.width - m, pdf.height - 34, ReportBuilder.lineColor)
         pdf.text(m, pdf.height - 28, "GNSS del chaleco del jinete (no es un punto anatómico del caballo). IMU de cincha sin calibrar: índices exploratorios, no diagnósticos.",

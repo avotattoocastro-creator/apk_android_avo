@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-SHELL-3 — Entrenamientos, Calendario (Semana), Cuadra e informe con logotipo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Entrenamientos (iPad):** la tabla es propia en lugar de `Table`:
+  - filas rectas, sin redondeo, con colores alternos;
+  - la fila seleccionada va en un tono neutro con una barra roja a la izquierda, en lugar del rojo/granate;
+  - las cabeceras ordenan al tocarlas; se mantienen el menú contextual y el botón de abrir grande.
+- **Menú lateral (iPad):** los nombres nunca se cortan (una línea y columna algo más ancha).
+- **Calendario (iPad y Windows):** nueva vista **Semana**: 7 columnas a toda la altura con hora, caballo, distancia y
+  duración. Las reglas `weekStart`/`weekGrid`/`weekTitle` son las mismas en Swift y C#, con la misma prueba.
+- **Cuadra (iPad):** lista a todo el ancho, con una fila por caballo o jinete, colores alternos y desplazamiento; al tocar
+  una se abre su ficha a página completa con «‹ volver».
+- **Informe (iPad y Windows, HTML y PDF):** la cabecera lleva el logotipo (1 · cabeza de caballo, 2 · «AVO Horse Edition
+  Performance», recortados de `avo_brand_hero`). Título, fecha y sesión van en tres líneas a la derecha y ya no se montan.
+  El PDF de Windows admite imágenes JPEG, como el del iPad, y guarda una sola copia del logotipo para todas las páginas.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-13 — AVO-SHELL-2 — Modo claro (iPad), Datos clave estilo Equimetre y ajustes del Dashboard
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**
@@ -38,7 +56,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
     (build 88); corregido;
   - los 5 huecos de «Últimos entrenamientos» miden lo mismo, con un hueco vacío si hay menos de 5.
 **No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Validación:** COMPILADO / CI: Windows run 43518612675 (éxito) · iPad run 43518616953 (TestFlight build 89).
+**NO VERIFICADO** en iPad ni en PC reales.
 **Pendiente:** modo claro en Windows (allí la paleta usa `StaticResource` y aún no hay página de Configuración).
 
 ## 2026-11-13 — AVO-SHELL-1 — Dashboard, Entrenamientos, Calendario y Configuración (bocetos del usuario)

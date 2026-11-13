@@ -71,6 +71,16 @@ public static class KeyDataTests
             && string.Join(",", SessionNavigator.Groups(ne, "arabe").SelectMany(g => g.Entries).Select(x => x.Id)) == "c",
             $"Navegador: sesiones por día, hora de Madrid y búsqueda sin acentos ({string.Join("|", ng.Select(g => g.Title))})");
 
+        var monday = TrainingCalendar.WeekStart(d);
+        var wk = TrainingCalendar.WeekGrid(monday, new List<CalendarEntry>
+        {
+            new("a", d, "Zakina", 0, 0, null), new("b", d.AddHours(-1), "Maalwina", 0, 0, null), new("c", d.AddDays(7), "Otra semana", 0, 0, null),
+        }, d);
+        assert(TrainingCalendar.WeekTitle(monday) == "3 – 9 nov 2025" && string.Join(",", wk.Select(x => x.Day)) == "3,4,5,6,7,8,9"
+            && string.Join(",", wk[5].Entries.Select(x => x.Id)) == "b,a" && wk[5].IsToday && wk.Sum(x => x.Entries.Count) == 2
+            && TrainingCalendar.WeekTitle(TrainingCalendar.WeekStart(DateTimeOffset.FromUnixTimeSeconds(1_761_900_000))) == "27 oct – 2 nov 2025",
+            $"Calendario: semana de lunes a domingo ({TrainingCalendar.WeekTitle(monday)})");
+
         var de = new List<CalendarEntry>
         {
             new("a", d, "Zakina", 2640, 7.84, 0), new("b", d.AddHours(1), "Sin caballo", 3480, 8.60, 0.8),

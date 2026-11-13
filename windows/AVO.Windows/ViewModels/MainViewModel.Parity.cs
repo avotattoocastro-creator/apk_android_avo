@@ -42,12 +42,21 @@ public sealed partial class MainViewModel
     private int _calYear = MadridTime.ToMadrid(DateTimeOffset.UtcNow).Year;
     private int _calMonth = MadridTime.ToMadrid(DateTimeOffset.UtcNow).Month;
     private bool _calYearView;
+    /// <summary>Vista «Semana» (boceto del entrenador 13/11/2026), como el iPad.</summary>
+    private bool _calWeekView;
+    private DateTime _calWeek = TrainingCalendar.WeekStart(DateTimeOffset.UtcNow);
     private bool _calJumped;
     private readonly HashSet<string> _calHidden = new(StringComparer.CurrentCulture);
 
     public string[] CalendarWeekdays => TrainingCalendar.Weekdays;
-    public bool CalendarYearView { get => _calYearView; set { if (Set(ref _calYearView, value)) RefreshCalendar(); } }
-    public string CalendarTitle => _calYearView ? _calYear.ToString(KeyData.Es)
+    public bool CalendarYearView { get => _calYearView; set { if (Set(ref _calYearView, value)) { if (value) _calWeekView = false; RaiseCalendarModes(); RefreshCalendar(); } } }
+    public bool CalendarWeekView => _calWeekView;
+    public bool CalendarMonthView => !_calWeekView && !_calYearView;
+    public List<CalendarDay> CalendarWeekDays { get; private set; } = [];
+    private void RaiseCalendarModes() => RaiseMany(nameof(CalendarWeekView), nameof(CalendarMonthView), nameof(CalendarYearView), nameof(CalendarTitle));
+    private ICommand? _calWeekCmd;
+    public ICommand CalendarWeekViewCommand => _calWeekCmd ??= new RelayCommand(() => { _calWeekView = true; _calYearView = false; RaiseCalendarModes(); RefreshCalendar(); });
+    public string CalendarTitle => _calWeekView ? TrainingCalendar.WeekTitle(_calWeek) : _calYearView ? _calYear.ToString(KeyData.Es)
         : $"{char.ToUpper(TrainingCalendar.MonthNames[_calMonth - 1][0])}{TrainingCalendar.MonthNames[_calMonth - 1][1..]} {_calYear}";
     public string CalendarCountLabel => _calYearView ? "SESIONES DEL AÑO" : "SESIONES DEL MES";
     public List<CalendarDay> CalendarDays { get; private set; } = [];
@@ -59,7 +68,7 @@ public sealed partial class MainViewModel
     private ICommand? _calPrev, _calNext, _calMonthView, _calYearViewCmd, _calOpen, _calOpenMonth;
     public ICommand CalendarPrevCommand => _calPrev ??= new RelayCommand(() => CalendarStep(-1));
     public ICommand CalendarNextCommand => _calNext ??= new RelayCommand(() => CalendarStep(1));
-    public ICommand CalendarMonthViewCommand => _calMonthView ??= new RelayCommand(() => CalendarYearView = false);
+    public ICommand CalendarMonthViewCommand => _calMonthView ??= new RelayCommand(() => { _calWeekView = false; CalendarYearView = false; RaiseCalendarModes(); RefreshCalendar(); });
     public ICommand CalendarYearViewCommand => _calYearViewCmd ??= new RelayCommand(() => CalendarYearView = true);
     public ICommand OpenCalendarEntryCommand => _calOpen ??= new RelayCommand(p =>
     {
@@ -72,7 +81,8 @@ public sealed partial class MainViewModel
 
     private void CalendarStep(int d)
     {
-        if (_calYearView) _calYear += d;
+        if (_calWeekView) _calWeek = _calWeek.AddDays(7 * d);
+        else if (_calYearView) _calYear += d;
         else
         {
             _calMonth += d;
@@ -96,7 +106,7 @@ public sealed partial class MainViewModel
         {
             // first visit: open the month of the most recent training
             var ym = TrainingCalendar.YearMonth(all.Max(e => e.Start));
-            _calYear = ym.Year; _calMonth = ym.Month; _calJumped = true;
+            _calYear = ym.Year; _calMonth = ym.Month; _calWeek = TrainingCalendar.WeekStart(all.Max(e => e.Start)); _calJumped = true;
         }
         var names = all.Select(e => e.Horse).Distinct().OrderBy(n => n, StringComparer.CurrentCulture).ToList();
         if (!names.SequenceEqual(CalendarHorses.Select(h => h.Name)))
@@ -107,8 +117,9 @@ public sealed partial class MainViewModel
         var visible = all.Where(e => !_calHidden.Contains(e.Horse)).ToList();
         CalendarDays = TrainingCalendar.MonthGrid(_calYear, _calMonth, visible, DateTimeOffset.UtcNow);
         CalendarYearCells = TrainingCalendar.YearCells(_calYear, visible);
+        CalendarWeekDays = TrainingCalendar.WeekGrid(_calWeek, visible, DateTimeOffset.UtcNow);
         CalendarSummary = TrainingCalendar.Summary(TrainingCalendar.Entries(_calYear, _calYearView ? null : _calMonth, visible));
-        RaiseMany(nameof(CalendarDays), nameof(CalendarYearCells), nameof(CalendarSummary), nameof(CalendarTitle),
+        RaiseMany(nameof(CalendarDays), nameof(CalendarYearCells), nameof(CalendarWeekDays), nameof(CalendarSummary), nameof(CalendarTitle),
             nameof(CalendarCountLabel), nameof(CalendarHasHorses));
     }
 

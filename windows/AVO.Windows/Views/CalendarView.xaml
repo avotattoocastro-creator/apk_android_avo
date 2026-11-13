@@ -23,15 +23,57 @@
                        VerticalAlignment="Center" Margin="12,0" MinWidth="240"/>
             <Button DockPanel.Dock="Left" Content="›" Command="{Binding CalendarNextCommand}" Padding="14,4" FontSize="18" ToolTip="Siguiente"/>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <RadioButton Style="{StaticResource AvoTabButton}" Content="Semana" Command="{Binding CalendarWeekViewCommand}"
+                             IsChecked="{Binding CalendarWeekView, Mode=OneWay}"/>
                 <RadioButton Style="{StaticResource AvoTabButton}" Content="Mes" Command="{Binding CalendarMonthViewCommand}"
-                             IsChecked="{Binding CalendarYearView, Converter={StaticResource Not}, Mode=OneWay}"/>
+                             IsChecked="{Binding CalendarMonthView, Mode=OneWay}"/>
                 <RadioButton Style="{StaticResource AvoTabButton}" Content="Año" Command="{Binding CalendarYearViewCommand}"
                              IsChecked="{Binding CalendarYearView, Mode=OneWay}"/>
             </StackPanel>
         </DockPanel>
 
         <!-- month -->
-        <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding CalendarYearView, Converter={StaticResource NotBoolVis}}">
+        <!-- semana: 7 columnas a toda la altura, cada una con los entrenamientos del día (hora, caballo, distancia) -->
+        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding CalendarWeekDays}" Visibility="{Binding CalendarWeekView, Converter={StaticResource BoolVis}}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="7" Rows="1"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="3" Padding="8" CornerRadius="8" Background="{StaticResource AvoSurface}" BorderThickness="1">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderBrush" Value="{StaticResource AvoLine}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsToday}" Value="True"><Setter Property="BorderBrush" Value="{StaticResource AvoRed}"/></DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding Day}" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource AvoText}" HorizontalAlignment="Right"/>
+                            <ItemsControl ItemsSource="{Binding Entries}" Margin="0,6,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="0,0,0,6" Padding="0" Cursor="Hand" CommandParameter="{Binding}" HorizontalContentAlignment="Stretch"
+                                                Command="{Binding DataContext.OpenCalendarEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button"><ContentPresenter/></ControlTemplate>
+                                            </Button.Template>
+                                            <Border Background="#293D9BFF" BorderBrush="{StaticResource AvoBlue}" BorderThickness="3,0,0,0" Padding="8,6" CornerRadius="4">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Label}" FontWeight="SemiBold" Foreground="{StaticResource AvoText}" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Detail}" Style="{StaticResource AvoCaption}"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </DockPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Grid Grid.Row="1" Grid.Column="0" Visibility="{Binding CalendarMonthView, Converter={StaticResource BoolVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

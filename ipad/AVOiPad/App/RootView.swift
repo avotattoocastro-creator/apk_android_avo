@@ -66,7 +66,7 @@ struct RootView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columns) {
             sidebar
-                .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 260)
+                .navigationSplitViewColumnWidth(min: 230, ideal: 250, max: 280)
         } detail: {
             detail
         }
@@ -165,7 +165,7 @@ struct RootView: View {
             HStack(spacing: 12) {
                 Image(systemName: e.icon).font(.body).frame(width: 22)
                     .foregroundStyle(active ? Avo.red : Avo.silver)
-                Text(e.title).font(.callout.weight(active ? .semibold : .regular))
+                Text(e.title).font(.callout.weight(active ? .semibold : .regular)).lineLimit(1).minimumScaleFactor(0.75)   // never split a name (sketch 13/11/2026)
                     .foregroundStyle(active ? Avo.text : Avo.silver)
                 Spacer(minLength: 0)
             }
@@ -550,7 +550,7 @@ private struct TrainingBar: View {
         } label: {
             HStack(spacing: 6) {
                 Image(systemName: e.icon).font(.footnote)
-                Text(e.title).font(.callout.weight(active ? .semibold : .regular))
+                Text(e.title).font(.callout.weight(active ? .semibold : .regular)).lineLimit(1).minimumScaleFactor(0.75)   // never split a name (sketch 13/11/2026)
             }
             .foregroundStyle(active ? Avo.text : Avo.silver)
             .padding(.horizontal, 12).padding(.vertical, 8)

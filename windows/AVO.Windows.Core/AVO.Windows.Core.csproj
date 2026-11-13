@@ -9,4 +9,9 @@
   <ItemGroup Condition="Exists('..\native\avo_equine.dll')">
     <None Include="..\native\avo_equine.dll" Link="avo_equine.dll" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+  <!-- logotipo de la cabecera de los informes (boceto del entrenador 13/11/2026), igual que el iPad (Assets report_*.imageset) -->
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\report_head.jpg" LogicalName="report_head.jpg" />
+    <EmbeddedResource Include="Reports\report_text.jpg" LogicalName="report_text.jpg" />
+  </ItemGroup>
 </Project>

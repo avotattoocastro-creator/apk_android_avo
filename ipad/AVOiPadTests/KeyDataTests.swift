@@ -120,4 +120,22 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(c.quality, "RTK FIX")
         XCTAssertEqual(s.latest.map { $0.quality }, ["RTK FIX", "Sin FIX", "Sin analizar"])
     }
+
+    func testCalendarWeek() {
+        let d = Date(timeIntervalSince1970: 1_762_590_000)          // sábado 8 nov 2025 09:20 (Madrid)
+        let monday: Date = TrainingCalendar.weekStart(d)
+        XCTAssertEqual(TrainingCalendar.weekTitle(monday), "3 – 9 nov 2025")
+        let e: [CalendarEntry] = [
+            CalendarEntry(id: "a", start: d, horse: "Zakina", durationS: 0, distanceKm: 0, fixShare: nil),
+            CalendarEntry(id: "b", start: d.addingTimeInterval(-3600), horse: "Maalwina", durationS: 0, distanceKm: 0, fixShare: nil),
+            CalendarEntry(id: "c", start: d.addingTimeInterval(7 * 86400), horse: "Otra semana", durationS: 0, distanceKm: 0, fixShare: nil),
+        ]
+        let w: [CalendarDay] = TrainingCalendar.weekGrid(start: monday, entries: e, today: d)
+        XCTAssertEqual(w.map { $0.day }, [3, 4, 5, 6, 7, 8, 9])
+        XCTAssertEqual(w[5].entries.map { $0.id }, ["b", "a"])
+        XCTAssertTrue(w[5].isToday)
+        XCTAssertEqual(w.flatMap { $0.entries }.count, 2)
+        let late: Date = TrainingCalendar.weekStart(Date(timeIntervalSince1970: 1_761_900_000))   // 31 oct 2025
+        XCTAssertEqual(TrainingCalendar.weekTitle(late), "27 oct – 2 nov 2025")
+    }
 }
