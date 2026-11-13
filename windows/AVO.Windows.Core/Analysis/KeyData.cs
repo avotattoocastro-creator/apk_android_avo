@@ -368,7 +368,7 @@ public static class SessionNavigator
     {
         var n = s.ToLowerInvariant().Normalize(System.Text.NormalizationForm.FormD);
         var sb = new System.Text.StringBuilder(n.Length);
-        foreach (var c in n) if (CultureInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark) sb.Append(c);
+        foreach (var c in n) if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark) sb.Append(c);
         return sb.ToString();
     }
 }
