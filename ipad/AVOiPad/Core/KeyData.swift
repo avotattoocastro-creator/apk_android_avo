@@ -137,14 +137,16 @@ struct KeyData: Equatable {
         t.append(tile("vmax", "Velocidad máxima", vmax.map { $0 * 3.6 }, "0.0", "km/h", "Motor AVO", "Sin datos GNSS", 0))
         t.append(bestTile("best200", 200))
         t.append(bestTile("best600", 600))
-        t.append(bestTile("best1000", 1000))
+        // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
+        // «Mejor 1000 m» (trainer 14/11/2026)
+        t.append(tile("workdist", "Distancia de trabajo", num(trabajos, "distancia_rapida_m").flatMap { $0 > 0 ? $0 / 1000 : nil },
+                      "0.00", "km", "Trabajo rápido del entrenamiento", noFastCaption, 0))
         t.append(tile("distance", "Distancia", metrics["distancia"].map { $0 / 1000 }, "0.00", "km", "Toda la sesión", "Sin datos", 0))
         let dur: Double? = metrics["duracion"]
         t.append(KeyTile(id: "duration", label: "Duración", value: dur.map { TimeText.clock($0) } ?? "—", unit: "",
                          caption: dur == nil ? "Sin datos" : "Toda la sesión", available: dur != nil, group: 0))
         t.append(KeyTile(id: "hrmax", label: "Pulso máximo", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
         t.append(KeyTile(id: "rec2", label: "Recuperación a 2 min", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
-        t.append(KeyTile(id: "rec15", label: "Recuperación a 15 min", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
         t.append(KeyTile(id: "hrend", label: "Pulso al terminar", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
         t.append(tile("lmax", "Tranco máximo", maxOf("l_max_m"), "0.00", "m", "En galope", girthCaption, 2))
         t.append(tile("fmax", "Frecuencia máxima", maxOf("f_max_hz"), "0.00", "tr/s", "En galope", girthCaption, 2))
@@ -155,7 +157,8 @@ struct KeyData: Equatable {
             let at: String = v.map { "a " + DotNetFormat.custom($0 * 3.6, "0", spanish: true) + " km/h" } ?? "a v. ref. \(r + 1)"
             let miss: String = hasStride ? noRefCaption : girthCaption
             t.append(tile("lref\(r + 1)", "Tranco " + at, reference(r, "l_m"), "0.00", "m", "Mediana de los trabajos", miss, 2))
-            t.append(tile("fref\(r + 1)", "Frecuencia " + at, reference(r, "f_hz"), "0.00", "tr/s", "Mediana de los trabajos", miss, 2))
+            // 5 stride boxes (trainer 14/11/2026): no «frecuencia» at the second reference speed
+            if r == 0 { t.append(tile("fref1", "Frecuencia " + at, reference(r, "f_hz"), "0.00", "tr/s", "Mediana de los trabajos", miss, 2)) }
         }
         k.tiles = t
 

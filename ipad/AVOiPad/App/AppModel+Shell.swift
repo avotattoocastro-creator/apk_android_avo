@@ -84,9 +84,13 @@ extension AppModel {
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             if capture {
+                self.startReady = true
                 await self.runCapture()
             } else {
                 await self.restoreLibrary()
+                // look in «AVO Horse» for saved trainings before «INICIAR» is enabled (trainer 14/11/2026)
+                await self.trainingList.loadFromAvoHorse()
+                self.startReady = true
                 self.startDocumentsSync()
             }
         }

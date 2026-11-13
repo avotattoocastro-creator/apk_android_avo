@@ -78,9 +78,12 @@ struct StartView: View {
         Button {
             app.page = .sessions
         } label: {
-            Text("INICIAR")
-                .font(.system(size: 26 * t, weight: .semibold))
-                .tracking(9 * t)
+            HStack(spacing: 12 * t) {
+                if !app.startReady { ProgressView().tint(Color(hex: 0xF7F7F5)) }
+                Text(app.startReady ? "INICIAR" : "CARGANDO DATOS DE AVO HORSE…")
+            }
+                .font(.system(size: (app.startReady ? 26 : 16) * t, weight: .semibold))
+                .tracking((app.startReady ? 9 : 3) * t)
                 .foregroundStyle(Color(hex: 0xF7F7F5))
                 .padding(.leading, 9 * t)          // tracking adds space after the last letter: keep the word centred
                 .padding(.horizontal, 64 * t)
@@ -91,6 +94,7 @@ struct StartView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(StartButtonStyle())
+        .disabled(!app.startReady)
         .accessibilityIdentifier("start.iniciar")
     }
 }

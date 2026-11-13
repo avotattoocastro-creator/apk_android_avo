@@ -58,21 +58,20 @@
                    Visibility="{Binding HasKeyData, Converter={StaticResource NotBoolVis}}"/>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Visibility="{Binding HasKeyData, Converter={StaticResource BoolVis}}">
             <StackPanel>
-                <DockPanel Margin="0,0,0,12">
-                    <Button DockPanel.Dock="Right" Style="{StaticResource AvoGhostButton}" VerticalAlignment="Top" Content="{Binding KeyNavToggleText}"
-                            Command="{Binding ToggleKeyNavCommand}"/>
-                    <StackPanel>
-                        <TextBlock Text="{Binding KeyDataTitle}" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource AvoText}"/>
-                        <TextBlock Text="Cifras del motor AVO Equine · iguales en iPad y PC" Style="{StaticResource AvoDim}" Margin="0,2,0,0"/>
-                    </StackPanel>
-                </DockPanel>
+                <!-- sin título de página: la cabecera ya muestra la sesión (boceto del entrenador 14/11/2026) -->
 
                 <TextBlock Text="VELOCIDAD Y TIEMPOS" Style="{StaticResource AvoLabel}" Margin="0,0,0,6"/>
-                <ItemsControl ItemsSource="{Binding KeySpeedTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+                <ItemsControl ItemsSource="{Binding KeySpeedTiles}" ItemTemplate="{StaticResource KeyTileTemplate}">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Rows="1"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                </ItemsControl>
                 <TextBlock Text="PULSO" Style="{StaticResource AvoLabel}" Margin="0,6,0,6"/>
-                <ItemsControl ItemsSource="{Binding KeyHeartTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+                <ItemsControl ItemsSource="{Binding KeyHeartTiles}" ItemTemplate="{StaticResource KeyTileTemplate}">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Rows="1"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                </ItemsControl>
                 <TextBlock Text="TRANCO" Style="{StaticResource AvoLabel}" Margin="0,6,0,6"/>
-                <ItemsControl ItemsSource="{Binding KeyStrideTiles}" ItemTemplate="{StaticResource KeyTileTemplate}" ItemsPanel="{StaticResource KeyTilesPanel}"/>
+                <ItemsControl ItemsSource="{Binding KeyStrideTiles}" ItemTemplate="{StaticResource KeyTileTemplate}">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Rows="1"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                </ItemsControl>
 
                 <c:AvoCard Margin="0,6,10,10" Header="Parciales cada 200 m · por trabajo · clic en un parcial para verlo en Gráficas">
                     <StackPanel>
@@ -98,10 +97,10 @@
                                                             Command="{Binding DataContext.OpenKeyWindowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
                                                         <Grid Margin="0,2" Background="Transparent">
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="110"/>
                                                                 <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="80"/>
-                                                                <ColumnDefinition Width="90"/>
+                                                                <ColumnDefinition Width="110"/>
+                                                                <ColumnDefinition Width="110"/>
                                                             </Grid.ColumnDefinitions>
                                                             <TextBlock Text="{Binding Label}" Foreground="{StaticResource AvoSilver}" VerticalAlignment="Center"/>
                                                             <Grid Grid.Column="1" Height="10" VerticalAlignment="Center">
@@ -121,7 +120,7 @@
                                                             <TextBlock Grid.Column="2" TextAlignment="Right" Foreground="{StaticResource AvoText}" VerticalAlignment="Center">
                                                                 <Run Text="{Binding TimeText, Mode=OneWay}"/><Run Text=" s"/>
                                                             </TextBlock>
-                                                            <TextBlock Grid.Column="3" TextAlignment="Right" Style="{StaticResource AvoDim}" VerticalAlignment="Center">
+                                                            <TextBlock Grid.Column="3" TextAlignment="Right" Foreground="{StaticResource AvoSilver}" VerticalAlignment="Center">
                                                                 <Run Text="{Binding SpeedText, Mode=OneWay}"/><Run Text=" km/h"/>
                                                             </TextBlock>
                                                         </Grid>
@@ -139,7 +138,6 @@
                 <Grid Margin="0,6,10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <c:AvoCard Header="Aires · tiempo en cada aire según el motor">
                         <ItemsControl ItemsSource="{Binding SelectedKeyData.Gaits}">
@@ -154,85 +152,10 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </c:AvoCard>
-                    <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Calidad de la posición · bloque rtk del motor">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding SelectedKeyData.QualityLabel}" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource AvoWarn}"/>
-                                <TextBlock Text="{Binding SelectedKeyData.FixText}" Style="{StaticResource AvoDim}" VerticalAlignment="Bottom" Margin="8,0,0,4"/>
-                            </StackPanel>
-                            <ItemsControl ItemsSource="{Binding SelectedKeyData.Quality}" Margin="0,6,0,0">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel Margin="0,3">
-                                            <TextBlock DockPanel.Dock="Right" Text="{Binding ShareText}" Foreground="{StaticResource AvoSilver}"/>
-                                            <TextBlock Text="{Binding Label}" Foreground="{StaticResource AvoText}"/>
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Foreground="{StaticResource AvoWarn}" Margin="0,8,0,0"
-                                       Visibility="{Binding SelectedKeyData.ShowQualityWarning, Converter={StaticResource BoolVis}, FallbackValue=Collapsed}"
-                                       Text="Sin RTK FIX la precisión es de decímetros: tiempos y velocidades válidos, cifras centimétricas no."/>
-                        </StackPanel>
-                    </c:AvoCard>
+                    <!-- «Calidad de la posición» fuera (boceto del entrenador 14/11/2026) -->
                 </Grid>
             </StackPanel>
         </ScrollViewer>
 
-        <!-- navegador de sesiones (como el iPad): por día, la más reciente arriba, búsqueda por caballo -->
-        <Border Grid.Row="1" Grid.Column="1" Width="260" Margin="12,0,0,0" Padding="12" CornerRadius="10" Background="{StaticResource AvoSurface}"
-                Visibility="{Binding ShowKeyNav, Converter={StaticResource BoolVis}}">
-            <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="SESIONES" Style="{StaticResource AvoLabel}"/>
-                <TextBox DockPanel.Dock="Top" Margin="0,6,0,8" Padding="6,4" Text="{Binding KeyNavQuery, UpdateSourceTrigger=PropertyChanged}"
-                         Background="{StaticResource AvoSurface2}" Foreground="{StaticResource AvoText}" BorderBrush="{StaticResource AvoLine}"
-                         ToolTip="Buscar caballo"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding KeyNavGroups}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,6">
-                                    <Border CornerRadius="6" Padding="10,5" Background="{StaticResource AvoRedDark}">
-                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="12" Foreground="{StaticResource AvoText}"/>
-                                    </Border>
-                                    <ItemsControl ItemsSource="{Binding Items}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Style="{StaticResource KeyPlainButton}" CommandParameter="{Binding}"
-                                                        Command="{Binding DataContext.OpenNavEntryCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                                    <Border CornerRadius="6" Padding="10,6" Margin="0,2,0,0">
-                                                        <Border.Style>
-                                                            <Style TargetType="Border">
-                                                                <Setter Property="Background" Value="Transparent"/>
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="Background" Value="{StaticResource AvoRedSoft}"/></DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </Border.Style>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <Ellipse Width="8" Height="8" Margin="0,0,8,0">
-                                                                <Ellipse.Style>
-                                                                    <Style TargetType="Ellipse">
-                                                                        <Setter Property="Fill" Value="{StaticResource AvoLine}"/>
-                                                                        <Style.Triggers>
-                                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="Fill" Value="{StaticResource AvoRed}"/></DataTrigger>
-                                                                        </Style.Triggers>
-                                                                    </Style>
-                                                                </Ellipse.Style>
-                                                            </Ellipse>
-                                                            <TextBlock Text="{Binding Text}" Foreground="{StaticResource AvoSilver}" TextTrimming="CharacterEllipsis"/>
-                                                        </StackPanel>
-                                                    </Border>
-                                                </Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </DockPanel>
-        </Border>
     </Grid>
 </UserControl>

@@ -58,6 +58,8 @@ final class AppModel {
     var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
     /// A training has been opened (list, calendar, dashboard…): unlocks Mapa / Análisis / Biomecánica in the sidebar.
     var trainingOpened: Bool = false
+    /// Library restored and «AVO Horse» checked: «INICIAR» of the start screen is enabled.
+    var startReady: Bool = false
     var sessions: [SessionItem] = []
     var importLog: [ImportLogRow] = []
     var status: String = "Listo · importa un entrenamiento .avo o .avr"

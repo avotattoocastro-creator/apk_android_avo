@@ -208,7 +208,7 @@ public sealed record KeyTileView(KeyTile Tile)
     public bool HasWindow => Tile.HasWindow;
     public string Glyph => Tile.Id switch
     {
-        "vmax" => "\uEC4A", "best200" or "best600" or "best1000" => "\uE916", "distance" => "\uE707", "duration" => "\uE121",
+        "vmax" => "\uEC4A", "best200" or "best600" => "\uE916", "distance" or "workdist" => "\uE707", "duration" => "\uE121",
         "hrmax" or "hrend" or "rec2" or "rec15" => "\uEB51", "lmax" or "lref1" or "lref2" => "\uED5E", "fmax" or "fref1" or "fref2" => "\uE895",
         _ => "\uE9D9",
     };

@@ -527,8 +527,8 @@ private struct TrainingBar: View {
                 .disabled(!app.hasRange || app.selected == nil)
                 .accessibilityIdentifier("map.stretchAnalysis")
             } else {
-            RootSessionMenu(maxWidth: 680)
-            RootPairMenu(maxWidth: 260)
+            // like «Mapa» (trainer's sketch 14/11/2026): only the training with its data; no «Entreno 2» here
+            RootSessionMenu(maxWidth: 900)
             Spacer(minLength: 0)
             Button {
                 app.stable.openAssign(app.selected)

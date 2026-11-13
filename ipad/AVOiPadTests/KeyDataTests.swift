@@ -8,7 +8,7 @@ final class KeyDataTests: XCTestCase {
     {"nombre":"velocidad_maxima","valor":18.0555},{"nombre":"tiempo_PASO","valor":2000},{"nombre":"tiempo_TROTE","valor":330},
     {"nombre":"tiempo_GALOPE","valor":322},{"nombre":"tiempo_en_curva","valor":50}],
     "rtk":{"total_s":2652,"fix_s":0,"float_s":0,"dgnss_s":2400,"gnss_s":252},
-    "trabajo_pista":{"perfil":{"v_referencia":[14,16]},"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"lista":[
+    "trabajo_pista":{"perfil":{"v_referencia":[14,16]},"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"distancia_rapida_m":1600,"lista":[
     {"id":1,"tipo":"TRABAJO_RAPIDO","t0":10,"t1":110,"distancia_m":1600,"duracion_s":100,"v_max":18.0555,
     "parciales":[{"desde_m":0,"hasta_m":200,"tiempo_s":12.5,"v":16},{"desde_m":200,"hasta_m":400,"tiempo_s":11.36,"v":17.6056},{"desde_m":400,"hasta_m":600,"tiempo_s":12.0,"v":16.6667}],
     "mejores":[{"distancia_m":200,"tiempo_s":11.36,"t0":40},{"distancia_m":600,"tiempo_s":35.31,"t0":30},{"distancia_m":1000,"tiempo_s":60.42,"t0":20}],"l_max_m":7.3,"f_max_hz":2.36,
@@ -24,7 +24,7 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(v("vmax"), "65,0")
         XCTAssertEqual(v("best200"), "11,36")
         XCTAssertEqual(v("best600"), "35,31")
-        XCTAssertEqual(v("best1000"), "60,42")
+        XCTAssertEqual(v("workdist"), "1,60")
         XCTAssertEqual(v("distance"), "7,84")
         XCTAssertEqual(v("duration"), "44:12")
         XCTAssertEqual(v("hrmax"), "—")
@@ -42,7 +42,8 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(t("best600")?.t1 ?? -1, 65.31, accuracy: 1e-9)
         XCTAssertEqual(t("best600")?.caption, "Trabajo 1 · ver en gráficas")
         XCTAssertEqual(k.tiles.filter { $0.group == 0 }.count, 6)
-        XCTAssertEqual(k.tiles.filter { $0.group == 2 }.map { $0.id }, ["lmax", "fmax", "lref1", "fref1", "lref2", "fref2"])
+        XCTAssertEqual(k.tiles.filter { $0.group == 1 }.map { $0.id }, ["hrmax", "rec2", "hrend"])
+        XCTAssertEqual(k.tiles.filter { $0.group == 2 }.map { $0.id }, ["lmax", "fmax", "lref1", "fref1", "lref2"])
         XCTAssertEqual(t("lref1")?.label, "Tranco a 50 km/h")
         XCTAssertEqual(t("lref1")?.value, "6,60")
         XCTAssertEqual(t("fref1")?.value, "2,10")

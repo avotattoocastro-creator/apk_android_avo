@@ -116,13 +116,15 @@ public sealed class KeyData
             k.Tiles.Add(Tile("vmax", "Velocidad máxima", Metric("velocidad_maxima") * 3.6, "0.0", "km/h", "Motor AVO", "Sin datos GNSS", 0));
             k.Tiles.Add(BestTile("best200", 200));
             k.Tiles.Add(BestTile("best600", 600));
-            k.Tiles.Add(BestTile("best1000", 1000));
+            // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
+            // «Mejor 1000 m» (trainer 14/11/2026)
+            k.Tiles.Add(Tile("workdist", "Distancia de trabajo", Num(trabajos, "distancia_rapida_m") is double wd && wd > 0 ? wd / 1000 : (double?)null,
+                "0.00", "km", "Trabajo rápido del entrenamiento", NoFastCaption, 0));
             k.Tiles.Add(Tile("distance", "Distancia", Metric("distancia") / 1000, "0.00", "km", "Toda la sesión", "Sin datos", 0));
             double? dur = Metric("duracion");
             k.Tiles.Add(new KeyTile("duration", "Duración", dur is double ds ? Clock(ds) : "—", "", dur is null ? "Sin datos" : "Toda la sesión", dur is not null, 0));
             k.Tiles.Add(new KeyTile("hrmax", "Pulso máximo", "—", "lpm", EcgCaption, false, 1));
             k.Tiles.Add(new KeyTile("rec2", "Recuperación a 2 min", "—", "lpm", EcgCaption, false, 1));
-            k.Tiles.Add(new KeyTile("rec15", "Recuperación a 15 min", "—", "lpm", EcgCaption, false, 1));
             k.Tiles.Add(new KeyTile("hrend", "Pulso al terminar", "—", "lpm", EcgCaption, false, 1));
             k.Tiles.Add(Tile("lmax", "Tranco máximo", MaxOf("l_max_m"), "0.00", "m", "En galope", GirthCaption, 2));
             k.Tiles.Add(Tile("fmax", "Frecuencia máxima", MaxOf("f_max_hz"), "0.00", "tr/s", "En galope", GirthCaption, 2));
@@ -134,7 +136,8 @@ public sealed class KeyData
                 string at = v is double vv ? "a " + (vv * 3.6).ToString("0", Es) + " km/h" : $"a v. ref. {q + 1}";
                 string miss = hasStride ? NoRefCaption : GirthCaption;
                 k.Tiles.Add(Tile($"lref{q + 1}", "Tranco " + at, Reference(q, "l_m"), "0.00", "m", "Mediana de los trabajos", miss, 2));
-                k.Tiles.Add(Tile($"fref{q + 1}", "Frecuencia " + at, Reference(q, "f_hz"), "0.00", "tr/s", "Mediana de los trabajos", miss, 2));
+                // 5 stride boxes (trainer 14/11/2026): no «frecuencia» at the second reference speed
+                if (q == 0) k.Tiles.Add(Tile("fref1", "Frecuencia " + at, Reference(q, "f_hz"), "0.00", "tr/s", "Mediana de los trabajos", miss, 2));
             }
 
             // efforts with their 200 m splits

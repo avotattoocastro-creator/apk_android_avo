@@ -10,7 +10,7 @@ public static class KeyDataTests
     {"nombre":"velocidad_maxima","valor":18.0555},{"nombre":"tiempo_PASO","valor":2000},{"nombre":"tiempo_TROTE","valor":330},
     {"nombre":"tiempo_GALOPE","valor":322},{"nombre":"tiempo_en_curva","valor":50}],
     "rtk":{"total_s":2652,"fix_s":0,"float_s":0,"dgnss_s":2400,"gnss_s":252},
-    "trabajo_pista":{"perfil":{"v_referencia":[14,16]},"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"lista":[
+    "trabajo_pista":{"perfil":{"v_referencia":[14,16]},"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"distancia_rapida_m":1600,"lista":[
     {"id":1,"tipo":"TRABAJO_RAPIDO","t0":10,"t1":110,"distancia_m":1600,"duracion_s":100,"v_max":18.0555,
     "parciales":[{"desde_m":0,"hasta_m":200,"tiempo_s":12.5,"v":16},{"desde_m":200,"hasta_m":400,"tiempo_s":11.36,"v":17.6056},{"desde_m":400,"hasta_m":600,"tiempo_s":12.0,"v":16.6667}],
     "mejores":[{"distancia_m":200,"tiempo_s":11.36,"t0":40},{"distancia_m":600,"tiempo_s":35.31,"t0":30},{"distancia_m":1000,"tiempo_s":60.42,"t0":20}],"l_max_m":7.3,"f_max_hz":2.36,
@@ -24,8 +24,8 @@ public static class KeyDataTests
         var k = KeyData.From(Json);
         string V(string id) => k.Tiles.FirstOrDefault(t => t.Id == id)?.Value ?? "?";
         assert(k.HasEngine, "Datos clave: resultado del motor reconocido");
-        assert(V("vmax") == "65,0" && V("best200") == "11,36" && V("best600") == "35,31" && V("best1000") == "60,42",
-            $"Datos clave: velocidad y mejores tramos ({V("vmax")} · {V("best200")} · {V("best600")} · {V("best1000")})");
+        assert(V("vmax") == "65,0" && V("best200") == "11,36" && V("best600") == "35,31" && V("workdist") == "1,60",
+            $"Datos clave: velocidad y mejores tramos ({V("vmax")} · {V("best200")} · {V("best600")} · {V("workdist")})");
         assert(V("distance") == "7,84" && V("duration") == "44:12", $"Datos clave: distancia y duración ({V("distance")} · {V("duration")})");
         assert(V("hrmax") == "—" && V("lmax") == "7,30" && V("fmax") == "2,36", "Datos clave: pulso vacío y tranco del motor");
         assert(string.Join(",", k.Gaits.Select(g => g.Id)) == "PASO,TROTE,GALOPE", "Datos clave: aires en orden y sin tiempo_en_curva");
@@ -34,8 +34,9 @@ public static class KeyDataTests
         KeyTile? T(string id) => k.Tiles.FirstOrDefault(t => t.Id == id);
         assert(T("best600") is { T0: 30 } b6 && Math.Abs(b6.T1!.Value - 65.31) < 1e-9 && b6.Caption == "Trabajo 1 · ver en gráficas",
             "Datos clave: ventana del mejor 600 m para abrir en gráficas");
-        assert(k.SpeedTiles.Count() == 6 && string.Join(",", k.StrideTiles.Select(t => t.Id)) == "lmax,fmax,lref1,fref1,lref2,fref2",
-            "Datos clave: 6 fichas por fila en velocidad y tranco");
+        assert(k.SpeedTiles.Count() == 6 && string.Join(",", k.StrideTiles.Select(t => t.Id)) == "lmax,fmax,lref1,fref1,lref2"
+            && string.Join(",", k.HeartTiles.Select(t => t.Id)) == "hrmax,rec2,hrend",
+            "Datos clave: 6 recuadros en velocidad, 3 en pulso y 5 en tranco");
         assert(T("lref1")?.Label == "Tranco a 50 km/h" && V("lref1") == "6,60" && V("fref1") == "2,10",
             $"Datos clave: tranco a velocidad de referencia ({T("lref1")?.Label} · {V("lref1")} · {V("fref1")})");
         assert(T("lref2") is { Label: "Tranco a 58 km/h", Value: "—", Caption: "Sin galope a esa velocidad" }, "Datos clave: referencia sin datos");

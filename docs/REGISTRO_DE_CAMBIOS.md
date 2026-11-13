@@ -24,6 +24,25 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-6 — Datos clave por recuadros, carga de AVO Horse al arrancar y gráficas al arrastrar
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Datos clave (iPad y Windows, mismas reglas y pruebas):**
+  - «Mejor 1000 m» pasa a ser **Distancia de trabajo**: la distancia del trabajo rápido dentro del entrenamiento
+    (`trabajos.distancia_rapida_m` del motor).
+  - Recuadros por fila: velocidad 6, pulso 3 (sin «Recuperación a 15 min») y tranco 5 (sin «Frecuencia a 58 km/h»), cada
+    fila a todo el ancho.
+  - Se quitan el título de la página, la columna de sesiones y la tarjeta «Calidad de la posición». Aires ocupa todo el ancho.
+  - En los parciales, el tiempo y la velocidad van en dos columnas de la misma medida.
+- **Barra del entrenamiento (iPad):** como en Mapa, solo la sesión con sus datos; sin «Entreno 2».
+- **Arranque (iPad):** tras restaurar la biblioteca, la app revisa «Archivos › En mi iPad › AVO Horse» e importa en silencio los
+  entrenamientos guardados que falten, sin duplicados. «INICIAR» espera a que termine y mientras tanto muestra «Cargando datos
+  de AVO Horse…».
+- **Gráficas (iPad):** al arrastrar la ventana de la barra de resumen (o desplazar y pellizcar) se redibujan cada 120 ms; antes
+  solo se redibujaban al soltar.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-5 — iPad: barras, menú lateral, mapa del análisis y tabla de entrenamientos
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad, bocetos del usuario sobre la build 91):**
@@ -39,7 +58,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - los paneles y botones sobre el mapa usan siempre los colores oscuros (en modo claro no se veían las cifras ni los iconos);
   - se quitan la fila de botones «Zonas» y su leyenda.
 **No se ha tocado:** Windows, el motor, los workflows, las firmas, `Info.plist` ni el número de build.
-**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+**Validación:** COMPILADO / CI: iPad run 43526019186 (TestFlight build 92). **NO VERIFICADO** en iPad real.
 
 ## 2026-11-14 — AVO-SHELL-4 — iPad: el menú lateral vuelve a abrirse, imagen entera y gris claro más oscuro
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)

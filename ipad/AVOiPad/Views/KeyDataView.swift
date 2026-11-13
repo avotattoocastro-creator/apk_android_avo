@@ -12,7 +12,8 @@ struct KeyDataView: View {
 
     var body: some View {
         GeometryReader { (g: GeometryProxy) in
-            let nav: Bool = showNav ?? (g.size.width >= 1100)
+            // trainer's sketch 14/11/2026: no side list of sessions (the training bar already chooses it)
+            let nav: Bool = false
             HStack(alignment: .top, spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -20,7 +21,6 @@ struct KeyDataView: View {
                             if let e = s.engine {
                                 content(s, KeyData.cached(id: s.id, json: e.rawJson), nav)
                             } else {
-                                header(s, nav)
                                 AvoCard(title: "Datos clave") {
                                     AvoNoData(text: "El motor AVO todavía no ha analizado este entrenamiento · \(s.engineState)")
                                 }
@@ -57,22 +57,20 @@ struct KeyDataView: View {
 
     @ViewBuilder
     private func content(_ s: SessionItem, _ k: KeyData, _ nav: Bool) -> some View {
-        header(s, nav)
+        // no page title (the training bar shows the session) and no «Calidad de la posición» (trainer 14/11/2026)
         section("Velocidad y tiempos", k.tiles.filter { $0.group == 0 })
         section("Pulso", k.tiles.filter { $0.group == 1 })
         section("Tranco", k.tiles.filter { $0.group == 2 })
         splitsCard(k)
-        HStack(alignment: .top, spacing: 12) {
-            gaitsCard(k)
-            qualityCard(k)
-        }
+        gaitsCard(k)
     }
 
     /// Always 6 columns (user request: «6 en línea»), so the rows of the three sections line up.
     private func section(_ title: String, _ tiles: [KeyTile]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 6), spacing: 0) {
+            // as many columns as boxes, across the whole width (6 · 3 · 5, trainer 14/11/2026)
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: max(1, tiles.count)), spacing: 0) {
                 ForEach(tiles) { (t: KeyTile) in
                     if let a = t.t0, let b = t.t1 {
                         Button { app.openInCharts(engineT0: a, engineT1: b) } label: { tile(t) }
@@ -148,7 +146,7 @@ struct KeyDataView: View {
 
     private func splitRow(_ p: KeySplit) -> some View {
         HStack(spacing: 10) {
-            Text(p.label).font(.caption.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 96, alignment: .leading)
+            Text(p.label).font(.caption.monospacedDigit()).foregroundStyle(Avo.silver).lineLimit(1).minimumScaleFactor(0.8).frame(width: 110, alignment: .leading)
             GeometryReader { (g: GeometryProxy) in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 3).fill(Avo.surface2)
@@ -157,9 +155,10 @@ struct KeyDataView: View {
                 }
             }
             .frame(height: 10)
+            // time and speed in two columns of the same size and font (trainer 14/11/2026: «igual medida»)
             Text(p.timeText + " s").font(.callout.weight(p.fastest ? .bold : .regular).monospacedDigit())
-                .foregroundStyle(Avo.text).frame(width: 76, alignment: .trailing)
-            Text(p.speedText + " km/h").font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).frame(width: 84, alignment: .trailing)
+                .foregroundStyle(Avo.text).lineLimit(1).frame(width: 110, alignment: .trailing)
+            Text(p.speedText + " km/h").font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).lineLimit(1).frame(width: 110, alignment: .trailing)
         }
         .contentShape(Rectangle())
     }
@@ -266,6 +265,7 @@ struct KeyDataView: View {
         switch id {
         case "vmax", "best200", "best600", "best1000": return "figure.equestrian.sports"
         case "distance": return "point.topleft.down.to.point.bottomright.curvepath"
+        case "workdist": return "arrow.left.and.right"
         case "duration": return "clock"
         case "hrmax", "hrend": return "waveform.path.ecg"
         case "rec2", "rec15": return "heart.text.square"

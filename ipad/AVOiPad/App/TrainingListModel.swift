@@ -717,8 +717,27 @@ final class TrainingListModel {
         await finishScan(found.items, scan: found.scan, folder: url.lastPathComponent)
     }
 
+    /// At launch (trainer's request 14/11/2026): looks in «Archivos › En mi iPad › AVO Horse» (the app's Documents) and
+    /// imports the saved trainings that are not loaded yet, without the report sheet. «INICIAR» waits for it.
     @MainActor
-    private func finishScan(_ found: [TrainingRecoveryItem], scan: TrainingRecoveryScan, folder: String) async {
+    func loadFromAvoHorse() async {
+        guard !scanning, let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        scanning = true
+        scanStatus = "Buscando datos guardados en AVO Horse…"
+        let inputs = knownInputs()
+        let root: String = app.paths.root
+        let packDir: String = AvoFiles.join(root, "reloj", "recuperados")
+        let found: (items: [TrainingRecoveryItem], scan: TrainingRecoveryScan) = await Task.detached(priority: .userInitiated) {
+            () -> (items: [TrainingRecoveryItem], scan: TrainingRecoveryScan) in
+            let known: TrainingRecoveryKnown = TrainingListModel.makeKnown(inputs)
+            let scan: TrainingRecoveryScan = TrainingRecovery.collect([docs.path], maxDepth: 6, maxFiles: 5000, skipDirNames: [])
+            return (TrainingRecovery.evaluate(scan, known: known, packDir: packDir), scan)
+        }.value
+        await finishScan(found.items, scan: found.scan, folder: "AVO Horse", quiet: true)
+    }
+
+    @MainActor
+    private func finishScan(_ found: [TrainingRecoveryItem], scan: TrainingRecoveryScan, folder: String, quiet: Bool = false) async {
         var items: [TrainingRecoveryItem] = found
         let paths: [String] = items.compactMap { $0.status == .pending ? $0.importPath : nil }
         if !paths.isEmpty {
@@ -748,8 +767,13 @@ final class TrainingListModel {
         app.log.info("listado", "Búsqueda de entrenamientos perdidos", ["carpeta": folder, "resumen": rep.summary])
         scanning = false
         scanStatus = rep.summary
+        refreshCaches()
+        if quiet {
+            let n: Int = items.filter { $0.status == .recovered }.count
+            app.status = n > 0 ? "AVO Horse: \(n) entrenamiento(s) cargado(s)" : "AVO Horse revisado: sin entrenamientos nuevos"
+            return
+        }
         app.status = "Búsqueda de entrenamientos perdidos: " + rep.summary
         report = rep
-        refreshCaches()
     }
 }
