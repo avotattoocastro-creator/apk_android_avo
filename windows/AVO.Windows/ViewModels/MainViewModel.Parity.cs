@@ -113,8 +113,59 @@ public sealed partial class MainViewModel
     {
         RaiseMany(nameof(SelectedKeyData), nameof(HasKeyData), nameof(KeyDataTitle), nameof(KeyDataEmptyText));
         RaiseKeyTiles();
+        RefreshKeyNav();
+    }
+
+    // ------------------------------------------------------------------ open a tramo in «Gráficas» (same as iPad openInCharts)
+    private ICommand? _openKeyWindow;
+    /// <summary>Opens «Gráficas» with the tramo of a tile, an effort or a split selected and zoomed.</summary>
+    public ICommand OpenKeyWindowCommand => _openKeyWindow ??= new RelayCommand(p =>
+    {
+        switch (p)
+        {
+            case KeyTileView { Tile: { T0: double a, T1: double b } }: OpenInCharts(a, b); break;
+            case KeySplit sp: OpenInCharts(sp.T0, sp.T1); break;
+            case KeyEffort ef: OpenInCharts(ef.T0, ef.T1); break;
+        }
+    });
+
+    /// <summary>t0/t1 are engine times (timeline = engine − offset).</summary>
+    public void OpenInCharts(double engineT0, double engineT1)
+    {
+        if (Selected is not SessionItem s || !double.IsFinite(engineT0) || !double.IsFinite(engineT1) || engineT1 <= engineT0) return;
+        double off = s.EngineOffsetS, a = engineT0 - off, b = engineT1 - off, pad = Math.Max(5, (b - a) * 0.25);
+        Page = "Charts";
+        RangeStart = a; RangeEnd = b; CursorTime = a;
+        ChartXMin = a - pad; ChartXMax = b + pad;
+    }
+
+    // ------------------------------------------------------------------ session navigator (same as iPad SessionNavigator)
+    private string _navQuery = "";
+    private bool _showKeyNav = true;
+    public string KeyNavQuery { get => _navQuery; set { if (Set(ref _navQuery, value)) RefreshKeyNav(); } }
+    public bool ShowKeyNav { get => _showKeyNav; set { if (Set(ref _showKeyNav, value)) Raise(nameof(KeyNavToggleText)); } }
+    public string KeyNavToggleText => _showKeyNav ? "Ocultar sesiones" : "Sesiones";
+    public List<NavGroupView> KeyNavGroups { get; private set; } = [];
+
+    private ICommand? _toggleKeyNav, _openNav;
+    public ICommand ToggleKeyNavCommand => _toggleKeyNav ??= new RelayCommand(() => ShowKeyNav = !ShowKeyNav);
+    public ICommand OpenNavEntryCommand => _openNav ??= new RelayCommand(p =>
+    {
+        if (p is NavItemView n && Sessions.FirstOrDefault(s => s.Id == n.Id) is SessionItem s) Selected = s;
+    });
+
+    private void RefreshKeyNav()
+    {
+        string? sel = Selected?.Id;
+        KeyNavGroups = SessionNavigator.Groups(CalendarEntries(), _navQuery)
+            .Select(g => new NavGroupView(g.Title, g.Entries.Select(e => new NavItemView(e.Id, SessionNavigator.ItemText(e), e.Id == sel)).ToList()))
+            .ToList();
+        Raise(nameof(KeyNavGroups));
     }
 }
+
+public sealed record NavItemView(string Id, string Text, bool IsSelected);
+public sealed record NavGroupView(string Title, IReadOnlyList<NavItemView> Items);
 
 /// <summary>Tile of «Datos clave» with its icon (Segoe MDL2 Assets) and colour; the figures come from Core KeyData.</summary>
 public sealed record KeyTileView(KeyTile Tile)
@@ -124,10 +175,12 @@ public sealed record KeyTileView(KeyTile Tile)
     public string Unit => Tile.Unit;
     public string Caption => Tile.Caption;
     public bool Available => Tile.Available;
+    public bool HasWindow => Tile.HasWindow;
     public string Glyph => Tile.Id switch
     {
-        "vmax" => "", "best200" or "best600" or "best1000" => "", "distance" => "", "duration" => "",
-        "hrmax" or "hrend" or "rec2" or "rec15" => "", "lmax" => "", "fmax" => "", _ => "",
+        "vmax" => "\uEC4A", "best200" or "best600" or "best1000" => "\uE916", "distance" => "\uE707", "duration" => "\uE121",
+        "hrmax" or "hrend" or "rec2" or "rec15" => "\uEB51", "lmax" or "lref1" or "lref2" => "\uED5E", "fmax" or "fref1" or "fref2" => "\uE895",
+        _ => "\uE9D9",
     };
     public string Accent => Tile.Group switch { 1 => "#FF495A", 2 => "#C9CBD1", _ => "#3D9BFF" };
     public string ValueColor => Tile.Available ? "#F2F2F4" : "#93949B";

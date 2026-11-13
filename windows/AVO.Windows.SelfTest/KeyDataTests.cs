@@ -10,9 +10,13 @@ public static class KeyDataTests
     {"nombre":"velocidad_maxima","valor":18.0555},{"nombre":"tiempo_PASO","valor":2000},{"nombre":"tiempo_TROTE","valor":330},
     {"nombre":"tiempo_GALOPE","valor":322},{"nombre":"tiempo_en_curva","valor":50}],
     "rtk":{"total_s":2652,"fix_s":0,"float_s":0,"dgnss_s":2400,"gnss_s":252},
-    "trabajo_pista":{"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"lista":[
-    {"id":1,"t0":10,"t1":110,"mejores":[{"distancia_m":200,"tiempo_s":11.36},{"distancia_m":600,"tiempo_s":35.31},{"distancia_m":1000,"tiempo_s":60.42}],"l_max_m":7.3,"f_max_hz":2.36},
-    {"id":2,"t0":300,"t1":380,"mejores":[{"distancia_m":200,"tiempo_s":12.1},{"distancia_m":600,"tiempo_s":37.0}],"l_max_m":6.9}]}}}
+    "trabajo_pista":{"perfil":{"v_referencia":[14,16]},"trabajos":{"v_max":18.0555,"mejor_200m_s":11.36,"lista":[
+    {"id":1,"tipo":"TRABAJO_RAPIDO","t0":10,"t1":110,"distancia_m":1600,"duracion_s":100,"v_max":18.0555,
+    "parciales":[{"desde_m":0,"hasta_m":200,"tiempo_s":12.5,"v":16},{"desde_m":200,"hasta_m":400,"tiempo_s":11.36,"v":17.6056},{"desde_m":400,"hasta_m":600,"tiempo_s":12.0,"v":16.6667}],
+    "mejores":[{"distancia_m":200,"tiempo_s":11.36,"t0":40},{"distancia_m":600,"tiempo_s":35.31,"t0":30},{"distancia_m":1000,"tiempo_s":60.42,"t0":20}],"l_max_m":7.3,"f_max_hz":2.36,
+    "referencia":[{"v":14,"f_hz":2.2,"l_m":6.4},{"v":16,"f_hz":null,"l_m":null}]},
+    {"id":2,"tipo":"GALOPE_TRABAJO","t0":300,"t1":380,"mejores":[{"distancia_m":200,"tiempo_s":12.1},{"distancia_m":600,"tiempo_s":37.0}],"l_max_m":6.9,
+    "referencia":[{"v":14,"f_hz":2.0,"l_m":6.8},{"v":16,"f_hz":null,"l_m":null}]}]}}}
     """;
 
     public static void Run(Action<bool, string> assert)
@@ -27,6 +31,24 @@ public static class KeyDataTests
         assert(string.Join(",", k.Gaits.Select(g => g.Id)) == "PASO,TROTE,GALOPE", "Datos clave: aires en orden y sin tiempo_en_curva");
         assert(k.QualityLabel == "DGNSS" && k.FixShare == 0, "Datos clave: calidad DGNSS y 0 % en FIX");
 
+        KeyTile? T(string id) => k.Tiles.FirstOrDefault(t => t.Id == id);
+        assert(T("best600") is { T0: 30 } b6 && Math.Abs(b6.T1!.Value - 65.31) < 1e-9 && b6.Caption == "Trabajo 1 · ver en gráficas",
+            "Datos clave: ventana del mejor 600 m para abrir en gráficas");
+        assert(k.SpeedTiles.Count() == 6 && string.Join(",", k.StrideTiles.Select(t => t.Id)) == "lmax,fmax,lref1,fref1,lref2,fref2",
+            "Datos clave: 6 fichas por fila en velocidad y tranco");
+        assert(T("lref1")?.Label == "Tranco a 50 km/h" && V("lref1") == "6,60" && V("fref1") == "2,10",
+            $"Datos clave: tranco a velocidad de referencia ({T("lref1")?.Label} · {V("lref1")} · {V("fref1")})");
+        assert(T("lref2") is { Label: "Tranco a 58 km/h", Value: "—", Caption: "Sin galope a esa velocidad" }, "Datos clave: referencia sin datos");
+        var ef = k.Efforts.FirstOrDefault();
+        assert(k.Efforts.Count == 1 && ef is not null && ef.Kind == "Trabajo rápido" && ef.Summary == "1600 m · 01:40 · máx. 65,0 km/h",
+            $"Parciales: trabajos con parciales ({ef?.Summary})");
+        assert(ef is not null && string.Join("|", ef.Splits.Select(x => x.Label)) == "0–200 m|200–400 m|400–600 m"
+            && string.Join("|", ef.Splits.Select(x => x.TimeText)) == "12,50|11,36|12,00"
+            && string.Join("|", ef.Splits.Select(x => x.SpeedText)) == "57,6|63,4|60,0"
+            && string.Join("|", ef.Splits.Select(x => x.Fastest)) == "False|True|False"
+            && Math.Abs(ef.Splits[1].T0 - 22.5) < 1e-9 && Math.Abs(ef.Splits[1].T1 - 33.86) < 1e-9,
+            "Parciales: etiquetas, tiempos, velocidades, el más rápido y su ventana");
+
         var days = TrainingCalendar.MonthGrid(2026, 11, [], DateTimeOffset.FromUnixTimeSeconds(0));
         assert(days.Count == 42 && days[0].Day == 26 && !days[0].InMonth && days[6].Day == 1 && days[6].InMonth,
             "Calendario: noviembre 2026 empieza el lunes 26 de octubre");
@@ -38,5 +60,15 @@ public static class KeyDataTests
         ]);
         assert(s.Count == 3 && s.DurationText == "2 h 12 min" && s.DistanceText == "22,48 km" && s.RtkText == "1 de 2",
             $"Calendario: acumulados ({s.DurationText} · {s.DistanceText} · {s.RtkText})");
+
+        var ne = new List<CalendarEntry>
+        {
+            new("a", d, "Zakina", 0, 0, null), new("b", d.AddHours(1), "Maalwina", 0, 0, null), new("c", d.AddDays(-1), "Árabe Test", 0, 0, null),
+        };
+        var ng = SessionNavigator.Groups(ne);
+        assert(string.Join("|", ng.Select(g => g.Title)) == "SÁB 8 NOV 2025|VIE 7 NOV 2025" && string.Join(",", ng[0].Entries.Select(x => x.Id)) == "b,a"
+            && SessionNavigator.ItemText(ng[0].Entries[0]) == "10:20 · Maalwina"
+            && string.Join(",", SessionNavigator.Groups(ne, "arabe").SelectMany(g => g.Entries).Select(x => x.Id)) == "c",
+            $"Navegador: sesiones por día, hora de Madrid y búsqueda sin acentos ({string.Join("|", ng.Select(g => g.Title))})");
     }
 }

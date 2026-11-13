@@ -6,68 +6,203 @@ import SwiftUI
 /// el ECG de la cincha: nunca se inventan.
 struct KeyDataView: View {
     @Environment(AppModel.self) private var app
+    /// nil = automatic (shown when there is room for 6 tiles beside it).
+    @State private var showNav: Bool? = nil
+    @State private var query: String = ""
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                if let s = app.selected {
-                    if let e = s.engine {
-                        content(s, KeyData.cached(id: s.id, json: e.rawJson))
-                    } else {
-                        AvoCard(title: "Datos clave") {
-                            AvoNoData(text: "El motor AVO todavía no ha analizado este entrenamiento · \(s.engineState)")
+        GeometryReader { (g: GeometryProxy) in
+            let nav: Bool = showNav ?? (g.size.width >= 1100)
+            HStack(alignment: .top, spacing: 0) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        if let s = app.selected {
+                            if let e = s.engine {
+                                content(s, KeyData.cached(id: s.id, json: e.rawJson), nav)
+                            } else {
+                                header(s, nav)
+                                AvoCard(title: "Datos clave") {
+                                    AvoNoData(text: "El motor AVO todavía no ha analizado este entrenamiento · \(s.engineState)")
+                                }
+                            }
+                        } else {
+                            AvoNoData(text: "Elige un entrenamiento")
                         }
                     }
-                } else {
-                    AvoNoData(text: "Elige un entrenamiento")
+                    .padding(16)
+                }
+                if nav {
+                    navigator.frame(width: 260)
                 }
             }
-            .padding(16)
         }
         .background(Avo.bg)
         .accessibilityIdentifier("page.keyData")
     }
 
+    private func header(_ s: SessionItem, _ nav: Bool) -> some View {
+        HStack(alignment: .top) {
+            AvoPageTitle(title: "\(s.horse) · \(s.dateTimeText)",
+                         subtitle: "Cifras del motor AVO Equine · iguales en iPad y PC")
+            Spacer()
+            Button {
+                showNav = !nav
+            } label: {
+                Label(nav ? "Ocultar sesiones" : "Sesiones", systemImage: "sidebar.right")
+            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("keydata.toggleNav")
+        }
+    }
+
     @ViewBuilder
-    private func content(_ s: SessionItem, _ k: KeyData) -> some View {
-        AvoPageTitle(title: "\(s.horse) · \(s.dateTimeText)",
-                     subtitle: "Cifras del motor AVO Equine · iguales en iPad y PC")
+    private func content(_ s: SessionItem, _ k: KeyData, _ nav: Bool) -> some View {
+        header(s, nav)
         section("Velocidad y tiempos", k.tiles.filter { $0.group == 0 })
         section("Pulso", k.tiles.filter { $0.group == 1 })
         section("Tranco", k.tiles.filter { $0.group == 2 })
+        splitsCard(k)
         HStack(alignment: .top, spacing: 12) {
             gaitsCard(k)
             qualityCard(k)
         }
     }
 
+    /// Always 6 columns (user request: «6 en línea»), so the rows of the three sections line up.
     private func section(_ title: String, _ tiles: [KeyTile]) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 10)], spacing: 10) {
-                ForEach(tiles) { (t: KeyTile) in tile(t) }
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 6), spacing: 10) {
+                ForEach(tiles) { (t: KeyTile) in
+                    if let a = t.t0, let b = t.t1 {
+                        Button { app.openInCharts(engineT0: a, engineT1: b) } label: { tile(t) }
+                            .buttonStyle(.plain)
+                    } else {
+                        tile(t)
+                    }
+                }
             }
         }
     }
 
     private func tile(_ t: KeyTile) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Image(systemName: Self.icon(t.id)).font(.title3)
-                .foregroundStyle(t.group == 1 ? Avo.redLight : (t.group == 2 ? Avo.silver : Avo.blue))
+            HStack {
+                Image(systemName: Self.icon(t.id)).font(.title3)
+                    .foregroundStyle(t.group == 1 ? Avo.redLight : (t.group == 2 ? Avo.silver : Avo.blue))
+                Spacer()
+                if t.t0 != nil {
+                    Image(systemName: "chart.xyaxis.line").font(.caption).foregroundStyle(Avo.textDim)
+                }
+            }
             HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(t.value).font(.system(size: 30, weight: .semibold, design: .rounded))
+                Text(t.value).font(.system(size: 28, weight: .semibold, design: .rounded))
                     .foregroundStyle(t.available ? Avo.text : Avo.unknown)
                     .lineLimit(1).minimumScaleFactor(0.5)
                 if !t.unit.isEmpty { Text(t.unit).font(.footnote).foregroundStyle(Avo.textDim) }
             }
-            Text(t.label).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+            Text(t.label).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(2).minimumScaleFactor(0.8)
             Text(t.caption).font(.caption2).foregroundStyle(t.available ? Avo.textDim : Avo.warn).lineLimit(2)
         }
-        .padding(14)
+        .padding(12)
         .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
         .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 12))
         .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Avo.line, style: StrokeStyle(lineWidth: 1, dash: t.available ? [] : [5, 4])))
+        .contentShape(RoundedRectangle(cornerRadius: 12))
         .accessibilityIdentifier("keydata.\(t.id)")
+    }
+
+    // ------------------------------------------------------------------ splits (engine parciales)
+    private func splitsCard(_ k: KeyData) -> some View {
+        AvoCard(title: "Parciales cada 200 m", subtitle: "Por trabajo · toca un parcial para verlo en Gráficas") {
+            if k.efforts.isEmpty {
+                AvoNoData(text: "Sin trabajos con parciales en este entrenamiento")
+            } else {
+                ForEach(k.efforts) { (e: KeyEffort) in
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack(alignment: .firstTextBaseline, spacing: 8) {
+                            Text(e.title).font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                            Text(e.kind).font(.caption).foregroundStyle(e.kind == "Trabajo rápido" ? Avo.redLight : Avo.blue)
+                            Text(e.summary).font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim)
+                            Spacer()
+                            Button { app.openInCharts(engineT0: e.t0, engineT1: e.t1) } label: {
+                                Label("Ver en gráficas", systemImage: "chart.xyaxis.line")
+                            }
+                            .buttonStyle(.avoSecondary)
+                        }
+                        ForEach(e.splits) { (p: KeySplit) in
+                            Button { app.openInCharts(engineT0: p.t0, engineT1: p.t1) } label: { splitRow(p) }
+                                .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+        }
+        .accessibilityIdentifier("keydata.splits")
+    }
+
+    private func splitRow(_ p: KeySplit) -> some View {
+        HStack(spacing: 10) {
+            Text(p.label).font(.caption.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 96, alignment: .leading)
+            GeometryReader { (g: GeometryProxy) in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3).fill(Avo.surface2)
+                    RoundedRectangle(cornerRadius: 3).fill(p.fastest ? Avo.red : Avo.blue)
+                        .frame(width: max(2, g.size.width * p.share))
+                }
+            }
+            .frame(height: 10)
+            Text(p.timeText + " s").font(.callout.weight(p.fastest ? .bold : .regular).monospacedDigit())
+                .foregroundStyle(Avo.text).frame(width: 76, alignment: .trailing)
+            Text(p.speedText + " km/h").font(.caption.monospacedDigit()).foregroundStyle(Avo.textDim).frame(width: 84, alignment: .trailing)
+        }
+        .contentShape(Rectangle())
+    }
+
+    // ------------------------------------------------------------------ session navigator (Equimetre-style side list)
+    private var navigator: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("SESIONES").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+            TextField("Buscar caballo", text: $query)
+                .textFieldStyle(.roundedBorder)
+                .accessibilityIdentifier("keydata.navSearch")
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 4, pinnedViews: [.sectionHeaders]) {
+                    ForEach(SessionNavigator.groups(app.calendarEntries, query: query)) { (g: NavGroup) in
+                        Section {
+                            ForEach(g.entries) { (e: CalendarEntry) in navItem(e) }
+                        } header: {
+                            Text(g.title).font(.caption.weight(.bold)).foregroundStyle(Avo.text)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 10).padding(.vertical, 6)
+                                .background(Avo.redDark, in: RoundedRectangle(cornerRadius: 6))
+                        }
+                    }
+                }
+            }
+        }
+        .padding(12)
+        .frame(maxHeight: .infinity, alignment: .top)
+        .background(Avo.surface)
+        .accessibilityIdentifier("keydata.navigator")
+    }
+
+    private func navItem(_ e: CalendarEntry) -> some View {
+        let on: Bool = app.selected?.id == e.id
+        return Button {
+            if let s = app.sessions.first(where: { $0.id == e.id }) { app.select(s) }
+        } label: {
+            HStack(spacing: 8) {
+                Circle().fill(on ? Avo.red : Avo.line).frame(width: 8, height: 8)
+                Text(SessionNavigator.itemText(e)).font(.callout).foregroundStyle(on ? Avo.text : Avo.silver).lineLimit(1)
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, 10).padding(.vertical, 7)
+            .background(on ? Avo.redSoft : Color.clear, in: RoundedRectangle(cornerRadius: 6))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     private func gaitsCard(_ k: KeyData) -> some View {
@@ -131,8 +266,8 @@ struct KeyDataView: View {
         case "duration": return "clock"
         case "hrmax", "hrend": return "waveform.path.ecg"
         case "rec2", "rec15": return "heart.text.square"
-        case "lmax": return "ruler"
-        case "fmax": return "metronome"
+        case "lmax", "lref1", "lref2": return "ruler"
+        case "fmax", "fref1", "fref2": return "metronome"
         default: return "circle"
         }
     }

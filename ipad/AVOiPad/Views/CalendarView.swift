@@ -40,15 +40,7 @@ struct CalendarView: View {
         .accessibilityIdentifier("page.calendar")
     }
 
-    private var entries: [CalendarEntry] {
-        app.sessions.compactMap { (s: SessionItem) -> CalendarEntry? in
-            guard let d = s.start else { return nil }
-            let dur: Double = s.timeline.count > 1 ? s.timeline.durationS : s.session.durationSeconds
-            let fix: Double? = s.engine.map { KeyData.cached(id: s.id, json: $0.rawJson).fixShare } ?? nil
-            return CalendarEntry(id: s.id, start: d, horse: s.horse.isEmpty ? "Sin caballo" : s.horse, durationS: dur,
-                                 distanceKm: s.distanceKmValue, fixShare: fix)
-        }
-    }
+    private var entries: [CalendarEntry] { app.calendarEntries }
 
     // ------------------------------------------------------------------ header
     private var header: some View {

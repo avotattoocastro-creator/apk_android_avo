@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-13 — AVO-PARITY-2 — Datos clave: 6 por fila, tranco a velocidad de referencia, parciales y navegador
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20) · Contrato: `docs/PARIDAD_IPAD_PC.md`
+**Qué cambia (iPad y Windows, mismas reglas y mismas pruebas):**
+- Rejilla de 6 fichas por fila. Tras ver la build 84, el usuario pidió «6 en línea».
+- Cuatro fichas nuevas de tranco y frecuencia a las dos velocidades de referencia de la raza (`referencia[]` del motor;
+  mediana entre trabajos, como `training.cpp`).
+- Al tocar un mejor 200/600/1000 m se abre Gráficas con ese tramo seleccionado y ampliado.
+- Tarjeta «Parciales cada 200 m» por trabajo, con el parcial más rápido en rojo; al tocar un parcial o el trabajo se abre en Gráficas.
+- Navegador lateral de sesiones por día, con búsqueda por caballo, que se puede ocultar.
+- Archivos:
+  - iPad: `Core/KeyData.swift`, `App/AppModel+KeyData.swift`, `Views/KeyDataView.swift`, `Views/CalendarView.swift`
+    y `AVOiPadTests/KeyDataTests.swift`.
+  - Windows: `Core/Analysis/KeyData.cs`, `MainViewModel.Parity.cs`, `Views/KeyDataView.xaml` y `SelfTest/KeyDataTests.cs`.
+**Por qué:** ideas del webinar de Equimetre (capítulos Key Data y Graphics) que pidió el usuario.
+**No se ha tocado:** el motor C++ (ya daba `parciales` y `referencia`), los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+**Pendiente:** eje de distancia en Gráficas; zonas de pulso cuando llegue el ECG de la cincha.
+
 ## 2026-11-13 — AVO-PARITY-1 — iPad y PC: Calendario y Datos clave (paridad)
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` · Contrato: `docs/PARIDAD_IPAD_PC.md`
 **Qué cambia:**

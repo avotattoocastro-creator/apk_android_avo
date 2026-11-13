@@ -15,6 +15,34 @@ struct KeyTile: Identifiable, Equatable {
     let available: Bool
     /// 0 = velocidad y tiempos, 1 = pulso, 2 = tranco.
     let group: Int
+    /// Engine-time window of the figure (best tramos), to open it in «Gráficas»; nil when it has none.
+    var t0: Double? = nil
+    var t1: Double? = nil
+}
+
+/// One 200 m split of an effort (engine `trabajo_pista.trabajos.lista[].parciales`).
+struct KeySplit: Identifiable, Equatable {
+    let id: Int
+    let label: String
+    let timeText: String
+    let speedText: String
+    /// Speed relative to the fastest split of the effort (0…1), for the bar.
+    let share: Double
+    let fastest: Bool
+    /// Engine-time window of the split.
+    let t0: Double
+    let t1: Double
+}
+
+/// One effort with its splits.
+struct KeyEffort: Identifiable, Equatable {
+    let id: Int
+    let title: String
+    let kind: String
+    let summary: String
+    let t0: Double
+    let t1: Double
+    let splits: [KeySplit]
 }
 
 /// Time spent in one gait (engine metric `tiempo_<AIRE>`).
@@ -28,6 +56,7 @@ struct KeyGait: Identifiable, Equatable {
 struct KeyData: Equatable {
     var tiles: [KeyTile] = []
     var gaits: [KeyGait] = []
+    var efforts: [KeyEffort] = []
     /// Fraction (0…1) of the session in RTK FIX, from the engine `rtk` block; nil without data.
     var fixShare: Double? = nil
     /// Dominant position quality: «RTK FIX», «RTK FLOAT», «DGNSS», «GNSS» or «Sin datos».
@@ -39,9 +68,10 @@ struct KeyData: Equatable {
     static let ecgCaption: String = "Llega con el ECG de la cincha"
     static let girthCaption: String = "Necesita la cincha montada"
     static let noFastCaption: String = "Sin trabajo rápido detectado"
+    static let noRefCaption: String = "Sin galope a esa velocidad"
 
     static func == (a: KeyData, b: KeyData) -> Bool {
-        a.tiles == b.tiles && a.gaits == b.gaits && a.fixShare == b.fixShare && a.qualityLabel == b.qualityLabel && a.hasEngine == b.hasEngine
+        a.tiles == b.tiles && a.gaits == b.gaits && a.efforts == b.efforts && a.fixShare == b.fixShare && a.qualityLabel == b.qualityLabel && a.hasEngine == b.hasEngine
     }
 
     // ------------------------------------------------------------------ parsing (same rules as KeyData.cs)
@@ -61,17 +91,40 @@ struct KeyData: Equatable {
         let trabajos = tp?["trabajos"] as? [String: Any]
         let efforts: [[String: Any]] = (trabajos?["lista"] as? [Any] ?? []).compactMap { $0 as? [String: Any] }
 
-        func best(_ meters: Double) -> Double? {
-            var b: Double? = nil
+        /// Best time over `meters` among all efforts: (time, engine t0, effort number).
+        func best(_ meters: Double) -> (time: Double, t0: Double?, effort: Int?)? {
+            var b: (time: Double, t0: Double?, effort: Int?)? = nil
             for e in efforts {
                 for x in (e["mejores"] as? [Any] ?? []) {
                     guard let x = x as? [String: Any], let d = num(x, "distancia_m"), abs(d - meters) < 1,
                           let t = num(x, "tiempo_s"), t > 0 else { continue }
-                    if b == nil || t < b! { b = t }
+                    if b == nil || t < b!.time { b = (t, num(x, "t0"), num(e, "id").map { Int($0) }) }
                 }
             }
-            if b == nil && meters == 200, let t = num(trabajos, "mejor_200m_s"), t > 0 { b = t }
+            if b == nil && meters == 200, let t = num(trabajos, "mejor_200m_s"), t > 0 { b = (t, nil, nil) }
             return b
+        }
+        func bestTile(_ id: String, _ meters: Double) -> KeyTile {
+            let label: String = "Mejor \(Int(meters)) m"
+            guard let b = best(meters) else {
+                return KeyTile(id: id, label: label, value: "—", unit: "s", caption: noFastCaption, available: false, group: 0)
+            }
+            var t = KeyTile(id: id, label: label, value: DotNetFormat.custom(b.time, "0.00", spanish: true), unit: "s",
+                            caption: b.effort.map { "Trabajo \($0) · ver en gráficas" } ?? "Mejor tramo de \(Int(meters)) m",
+                            available: true, group: 0)
+            if let a = b.t0 { t.t0 = a; t.t1 = a + b.time }
+            return t
+        }
+        /// Stride at the breed reference speed k: median over the efforts of `referencia[k]` (same rule as the
+        /// engine training summary, training.cpp).
+        func reference(_ k: Int, _ key: String) -> Double? {
+            var v: [Double] = []
+            for e in efforts {
+                guard let r = (e["referencia"] as? [Any]), r.count > k, let x = r[k] as? [String: Any],
+                      let y = num(x, key), y > 0 else { continue }
+                v.append(y)
+            }
+            return median(v)
         }
         func maxOf(_ key: String) -> Double? {
             var m: Double? = nil
@@ -82,9 +135,9 @@ struct KeyData: Equatable {
         var t: [KeyTile] = []
         let vmax: Double? = metrics["velocidad_maxima"]
         t.append(tile("vmax", "Velocidad máxima", vmax.map { $0 * 3.6 }, "0.0", "km/h", "Motor AVO", "Sin datos GNSS", 0))
-        t.append(tile("best200", "Mejor 200 m", best(200), "0.00", "s", "Mejor tramo de 200 m", noFastCaption, 0))
-        t.append(tile("best600", "Mejor 600 m", best(600), "0.00", "s", "Mejor tramo de 600 m", noFastCaption, 0))
-        t.append(tile("best1000", "Mejor 1000 m", best(1000), "0.00", "s", "Mejor tramo de 1000 m", noFastCaption, 0))
+        t.append(bestTile("best200", 200))
+        t.append(bestTile("best600", 600))
+        t.append(bestTile("best1000", 1000))
         t.append(tile("distance", "Distancia", metrics["distancia"].map { $0 / 1000 }, "0.00", "km", "Toda la sesión", "Sin datos", 0))
         let dur: Double? = metrics["duracion"]
         t.append(KeyTile(id: "duration", label: "Duración", value: dur.map { TimeText.clock($0) } ?? "—", unit: "",
@@ -95,7 +148,45 @@ struct KeyData: Equatable {
         t.append(KeyTile(id: "hrend", label: "Pulso al terminar", value: "—", unit: "lpm", caption: ecgCaption, available: false, group: 1))
         t.append(tile("lmax", "Tranco máximo", maxOf("l_max_m"), "0.00", "m", "En galope", girthCaption, 2))
         t.append(tile("fmax", "Frecuencia máxima", maxOf("f_max_hz"), "0.00", "tr/s", "En galope", girthCaption, 2))
+        let refs: [Any] = ((tp?["perfil"] as? [String: Any])?["v_referencia"] as? [Any]) ?? []
+        let hasStride: Bool = maxOf("l_max_m") != nil || maxOf("f_max_hz") != nil
+        for r in 0..<2 {
+            let v: Double? = refs.count > r ? (refs[r] as? NSNumber)?.doubleValue : nil
+            let at: String = v.map { "a " + DotNetFormat.custom($0 * 3.6, "0", spanish: true) + " km/h" } ?? "a v. ref. \(r + 1)"
+            let miss: String = hasStride ? noRefCaption : girthCaption
+            t.append(tile("lref\(r + 1)", "Tranco " + at, reference(r, "l_m"), "0.00", "m", "Mediana de los trabajos", miss, 2))
+            t.append(tile("fref\(r + 1)", "Frecuencia " + at, reference(r, "f_hz"), "0.00", "tr/s", "Mediana de los trabajos", miss, 2))
+        }
         k.tiles = t
+
+        // efforts with their 200 m splits
+        for e in efforts {
+            guard let id = num(e, "id"), let e0 = num(e, "t0") else { continue }
+            var acc: Double = e0
+            var raw: [(label: String, time: Double, v: Double, t0: Double)] = []
+            for p in (e["parciales"] as? [Any] ?? []) {
+                guard let p = p as? [String: Any], let a = num(p, "desde_m"), let b = num(p, "hasta_m"),
+                      let ts = num(p, "tiempo_s"), ts > 0 else { continue }
+                let v: Double = num(p, "v") ?? (b - a) / ts
+                raw.append(("\(Int(a.rounded()))–\(Int(b.rounded())) m", ts, v, acc))
+                acc += ts
+            }
+            if raw.isEmpty { continue }
+            let vTop: Double = raw.map { $0.v }.max() ?? 0
+            let splits: [KeySplit] = raw.indices.map { (i: Int) -> KeySplit in
+                let r = raw[i]
+                return KeySplit(id: i, label: r.label, timeText: DotNetFormat.custom(r.time, "0.00", spanish: true),
+                         speedText: DotNetFormat.custom(r.v * 3.6, "0.0", spanish: true),
+                         share: vTop > 0 ? r.v / vTop : 0, fastest: r.v == vTop, t0: r.t0, t1: r.t0 + r.time)
+            }
+            let fast: Bool = (e["tipo"] as? String) == "TRABAJO_RAPIDO"
+            var parts: [String] = []
+            if let d = num(e, "distancia_m") { parts.append(DotNetFormat.custom(d, "0", spanish: true) + " m") }
+            if let d = num(e, "duracion_s") { parts.append(TimeText.clock(d)) }
+            if let v = num(e, "v_max") { parts.append("máx. " + DotNetFormat.custom(v * 3.6, "0.0", spanish: true) + " km/h") }
+            k.efforts.append(KeyEffort(id: Int(id), title: "Trabajo \(Int(id))", kind: fast ? "Trabajo rápido" : "Galope de trabajo",
+                                       summary: parts.joined(separator: " · "), t0: e0, t1: num(e, "t1") ?? acc, splits: splits))
+        }
 
         // gaits: engine metrics tiempo_<AIRE> (AIRE in capitals), e.g. tiempo_PASO
         var g: [KeyGait] = []
@@ -124,6 +215,14 @@ struct KeyData: Equatable {
         guard let n = d?[k] as? NSNumber, String(cString: n.objCType) != "c" else { return nil }
         let v: Double = n.doubleValue
         return v.isFinite ? v : nil
+    }
+
+    /// Median (mean of the two central values when the count is even); nil when empty.
+    static func median(_ v: [Double]) -> Double? {
+        if v.isEmpty { return nil }
+        let s: [Double] = v.sorted()
+        let n: Int = s.count
+        return n % 2 == 1 ? s[n / 2] : (s[n / 2 - 1] + s[n / 2]) / 2
     }
 
     private static func tile(_ id: String, _ label: String, _ v: Double?, _ fmt: String, _ unit: String,
@@ -270,5 +369,46 @@ enum TrainingCalendar {
             }
         }
         return s
+    }
+}
+
+// MARK: - Session navigator (same rules as SessionNavigator in KeyData.cs)
+
+struct NavGroup: Identifiable {
+    let id: String
+    let title: String
+    let entries: [CalendarEntry]
+}
+
+enum SessionNavigator {
+    static let monthShort: [String] = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"]
+
+    /// Sessions grouped by day (Europe/Madrid), newest first; `query` filters by horse (case and accents ignored).
+    static func groups(_ all: [CalendarEntry], query: String = "") -> [NavGroup] {
+        let cal = TrainingCalendar.calendar
+        let q: String = query.trimmingCharacters(in: .whitespaces).folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)
+        let list: [CalendarEntry] = all
+            .filter { q.isEmpty || $0.horse.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).contains(q) }
+            .sorted { $0.start > $1.start }
+        var out: [NavGroup] = []
+        for e in list {
+            let c = cal.dateComponents([.year, .month, .day, .weekday], from: e.start)
+            let key: String = "\(c.year ?? 0)-\(c.month ?? 0)-\(c.day ?? 0)"
+            if out.last?.id == key {
+                let g: NavGroup = out.removeLast()
+                out.append(NavGroup(id: key, title: g.title, entries: g.entries + [e]))
+            } else {
+                let wd: String = TrainingCalendar.weekdays[((c.weekday ?? 2) + 5) % 7]
+                let title: String = "\(wd) \(c.day ?? 0) \(monthShort[max(0, min(11, (c.month ?? 1) - 1))]) \(c.year ?? 0)"
+                out.append(NavGroup(id: key, title: title, entries: [e]))
+            }
+        }
+        return out
+    }
+
+    /// «HH:mm · caballo» in Europe/Madrid.
+    static func itemText(_ e: CalendarEntry) -> String {
+        let c = TrainingCalendar.calendar.dateComponents([.hour, .minute], from: e.start)
+        return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0) + " · " + e.horse
     }
 }
