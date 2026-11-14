@@ -136,10 +136,11 @@ L.append("- Apto para solicitar prototipos: %s" % ("**sí, pendiente de validaci
 L.append("- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
-for t in ("Línea de 50 Ω de la antena (J5 → C70 → RF_IN): microcinta de 0,36 mm calculada para el apilado JLC de 1,6 mm (preimpregnado 0,21 mm sobre In1); confirmar con la calculadora de JLC al pedir.",
+for t in ("Línea de 50 Ω de la antena (J5 → R71 0 Ω → RF_IN, ESD D4): microcinta de 0,36 mm calculada para el apilado JLC de 1,6 mm (preimpregnado 0,21 mm sobre In1); confirmar con la calculadora de JLC al pedir.",
           "Antena GNSS plana activa L1/L2 pegada en el centro de la cara B; plano de masa de 51 × 51 (el fabricante afina sobre 70 × 70): medir fix y velocidad.",
-          "Piezas sin código LCSC (ZED-F9P, U.FL, 47 nH, 47 pF C0G): buscarlas con stock_jlc.py o suministrarlas aparte (el ZED-F9P suele ir consignado).",
-          "C70 de bloqueo de continua por si RF_IN no lo lleva dentro: confirmar con el manual de integración del ZED-F9P.",
+          "Piezas sin código LCSC (ZED-F9P, U.FL, 47 nH, 22 Ω 1206, ESD de RF): buscarlas con stock_jlc.py o suministrarlas aparte (el ZED-F9P suele ir consignado).",
+          "Alimentación de la antena: 22 Ω en 1206 (corto del coaxial ≈ 150 mA, ≈ 0,5 W durante el fallo): sin limitador activo ni uso de ANT_SHORT_N.",
+          "Firmware: poner GPIO6, GPIO8 y GPIO9 como entradas antes de bajar ZED_EN (el ZED apagado no debe recibir tensión por sus E/S).",
           "Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",
           "Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):

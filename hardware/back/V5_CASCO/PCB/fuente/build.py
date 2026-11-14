@@ -383,7 +383,7 @@ def main():
         # rev. 2 (V4): sin pre-ruteo del bloque Qi; los pre-ruteos bloqueados encajonaban U1 y Freerouting no
         # podía terminar sus redes. Se dejan solo USB, CC y los pines del cargador.
         PRE_QI = "--pre-qi" in sys.argv
-        pre = ["RF_ZED", "RF_ANT", "VCC_RF_F", "USB_DP_C", "USB_DM_C", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
+        pre = ["RF_ZED", "RF_ANT", "VCC_RF_F", "VCC_RF", "USB_DP_C", "USB_DM_C", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
         pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
         if not PRE_QI:

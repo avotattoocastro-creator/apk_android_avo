@@ -118,6 +118,7 @@ FP = {
     "C0402": load("C_0402_1005Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0402_1005Metric.step", 0.6),
     "C0603": load("C_0603_1608Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0603_1608Metric.step", 0.9),
     "C0805": load("C_0805_2012Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0805_2012Metric.step", 1.35),
+    "R1206": load("C_1206_3216Metric.kicad_mod", M3 + "Resistor_SMD.3dshapes/R_1206_3216Metric.step", 0.6),
     "F1206": load("Fuse_1206_3216Metric.kicad_mod", M3 + "Fuse.3dshapes/Fuse_1206_3216Metric.step", 1.1),
     "SOT23": load("SOT-23.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23.step", 1.1),
     "SOT23-5": load("SOT-23-5.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23-5.step", 1.45),
@@ -218,7 +219,7 @@ C("C19", "10u 25V", VSYS, GND, block="Cargador", fp="C0603")
 C("C20", "10u 25V", VBAT, GND, block="Cargador", fp="C0603")
 C("C35", "47u 6V3", VSYS, GND, block="Cargador", fp="C0805", note="reserva de VSYS para los picos de radio y del ZED")
 R("R6", "1k5", "CHG_ISET", GND, block="Cargador", note="I_carga = 890/1k5 ≈ 590 mA (0,3 C de 2000 mAh; ≈ 4 h)")
-R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = 1525/2k ≈ 760 mA")
+R("R7", "2k", "CHG_ILIM", GND, block="Cargador", note="I_entrada = K_ILIM/R_ILIM ≈ 1600/2k ≈ 800 mA (BQ24072T, SLUS937)")
 part("RT2", "R0402", "NTC 10k B3380", (0, 0), 0, {1: "CHG_TS", 2: GND}, LC["NTC10k"], "NCP15XH103F03RC", "Cargador", sym="R",
      note="NTC junto a la batería (cara F, encima de la celda)")
 R("R8", "100k", "CHG_EN2", VSYS, block="Cargador", note="EN2 = 1, EN1 = 0: límite por ILIM")
@@ -262,14 +263,20 @@ part("U1", "ZED", "ZED-F9P-01B", (0, 0), 0, zed, "", "ZED-F9P-01B-01 (u-blox)", 
      note="ZED-F9P soldado (LGA 17 × 22). V_BCKP desde el 3,3 V principal (siempre encendido): arranque en caliente")
 C("C62", "47u 6V3", VZED, GND, block="ZED", fp="C0805")
 C("C63", "100n", VZED, GND, block="ZED")
+C("C65", "1u", VZED, GND, block="ZED", note="pegado a los pines VCC 33/34")
 C("C64", "100n", V3, GND, block="ZED", note="V_BCKP")
 # antena activa: VCC_RF → 10 Ω → 47 nH → línea de RF (lado de la antena); bloqueo de continua hacia RF_IN
-R("R70", "10R", "VCC_RF", "VCC_RF_F", block="ZED", note="limita la corriente si el cable de antena se cortocircuita")
+R("R70", "22R 1206", "VCC_RF", "VCC_RF_F", block="ZED", fp="R1206",
+  note="revisión independiente: limita un corto del coaxial a ≈ 150 mA (bobina de 300 mA); cae ≈ 0,4 V a 20 mA de LNA")
 C("C71", "10n", "VCC_RF_F", GND, block="ZED")
 part("L70", "L0402", "47 nH", (0, 0), 0, {1: "VCC_RF_F", 2: "RF_ANT"}, "", "LQG15HS47NJ02D (Murata)", "ZED", sym="R",
      note="alimentación de la antena activa por el vivo del coaxial (choque de RF)")
-C("C70", "47p C0G", "RF_ANT", "RF_ZED", block="ZED", lcsc="",
-  note="bloqueo de continua hacia RF_IN (inofensivo si el ZED ya lo lleva dentro); línea de 50 Ω ≈ 0,36 mm")
+R("R71", "0R", "RF_ANT", "RF_ZED", block="ZED",
+  note="puente de 0 Ω en la línea de 50 Ω (≈ 0,36 mm): la referencia de u-blox (UBX-18010802, fig. 42) pone la bobina "
+       "directamente sobre RF_IN; el pad admite un condensador de RF si hiciera falta bloquear la continua")
+part("D4", "C0402", "ESD RF 0,25 pF", (0, 0), 0, {1: "RF_ANT", 2: GND}, "", "PESD0402-140 (TE) o equivalente ≤ 0,3 pF",
+     "ZED", sym=dict(L=[(1, "IO")], R=[(2, "GND")]),
+     note="ESD obligatoria en la entrada de RF según el manual de integración del ZED-F9P")
 part("J5", "UFL", "U.FL GNSS", (0, 0), 0, {1: "RF_ANT", 2: GND}, "", "U.FL-R-SMT-1(10) (Hirose)", "ZED",
      sym=dict(L=[(1, "SIG")], R=[(2, "GND")]), note="cable de la antena plana activa L1/L2 (AHP2258 o similar)")
 R("R50", "1k", "S3_TX1", "ZED_RX1", block="ZED", note="serie: limita la alimentación parásita del ZED apagado")
