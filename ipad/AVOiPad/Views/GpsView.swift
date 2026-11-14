@@ -12,10 +12,7 @@ struct GpsView: View {
             let wide: Bool = geo.size.width >= 900
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    AvoPageTitle(title: "Datos GPS",
-                                 subtitle: app.selected.map { "Receptor GNSS/RTK del chaleco del jinete · \($0.summary)" }
-                                    ?? "Sin entrenamiento seleccionado · importa un archivo .avo o .avr")
-                    GpsAntennaNote()
+                    // no title and no antenna note (trainer's sketch 14/11/2026): the training bar already shows the session
                     if app.selected == nil {
                         AvoCard { AvoNoData(text: "Sin entrenamiento seleccionado") }
                     } else if let sum = app.gps.summary {

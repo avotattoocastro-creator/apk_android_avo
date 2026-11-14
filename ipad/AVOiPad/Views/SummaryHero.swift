@@ -122,6 +122,10 @@ struct SummaryHero: View {
                         Text("Marea \(env.tideHeadline)" + (known ? " · \(env.tideTrend.lowercased())" : ""))
                             .font(.caption.weight(.semibold)).foregroundStyle(Avo.text)
                     }
+                    if known, let pct = env.tidePhasePct {
+                        Text("\(Int(pct.rounded())) % de la \(rising ? "subida" : "bajada")")
+                            .font(.caption).foregroundStyle(rising ? Avo.cyan : Avo.warn)
+                    }
                 }
                 Text("Modelo, no medición").font(.caption2).foregroundStyle(Avo.textDim)
             } else if env.loading {

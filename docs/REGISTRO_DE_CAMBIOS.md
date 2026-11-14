@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-29 — GPS sin cabecera y marea con % de subida o bajada
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia (iPad):**
+- **GPS:** sin el título «Datos GPS» ni el aviso de la antena del chaleco. La barra del entrenamiento ya identifica la sesión.
+- **Resumen · marea:** debajo de «Marea 1,70 m · subiendo» aparece «N % de la subida» (o «de la bajada»). Es la altura a la
+  hora del entrenamiento entre la bajamar y la pleamar anterior y siguiente, según la predicción del IHM
+  (`EnvironmentModel.tidePhasePct`).
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-ENGINE-2.0-F1a — AVO Performance Equine 2.0.0-dev1: una sola velocidad para todo
 **Autor:** Claude · Rama `feature/avo-equine-2-0` (desde `develop/avo-performance-horse` tras integrar el PR #20)
 **Por qué:** el motor 1.1 calculaba todas sus cifras con la velocidad bruta del receptor (gSpeed), mientras que las apps
