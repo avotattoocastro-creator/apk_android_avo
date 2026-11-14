@@ -28,7 +28,8 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**
 - La columna derecha de Informes lleva, de arriba abajo, «Opciones del informe» (desplegable), «Exportar» y «Notas», todas
-  al ancho completo de la columna. La vista previa ocupa la mitad izquierda.
+  al ancho completo de la columna. La vista previa ocupa el 62 % del ancho (antes la mitad; boceto 14/11/2026 10:44)
+  y la columna derecha el resto.
 - En Exportar, los botones van en tres columnas, todos del mismo alto y en una sola línea («Informe PDF» y «Compartir
   último» ya no se cortan).
 - «Último:» muestra solo el nombre del archivo, no la ruta interna.

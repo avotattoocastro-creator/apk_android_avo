@@ -31,7 +31,7 @@ struct ReportsView: View {
                     // trainer 14/11/2026: «Opciones del informe» on top and «Exportar» under it using the whole width of
                     // the right column (no narrow column with cut labels)
                     HStack(alignment: .top, spacing: 14) {
-                        ReportsPreviewCard(model: model).frame(width: max(380, (geo.size.width - 46) * 0.5)).frame(height: 760)
+                        ReportsPreviewCard(model: model).frame(width: max(380, (geo.size.width - 46) * 0.62)).frame(height: 760)
                         VStack(spacing: 12) {
                             ReportsOptionsCard(model: model)
                             ReportsExportCard(model: model)
