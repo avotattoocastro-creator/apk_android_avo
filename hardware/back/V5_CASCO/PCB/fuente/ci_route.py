@@ -17,7 +17,7 @@ elif mode == "import":
     print("SES importado:", ok)
     # GND pours on the outer layers (left out of the DSN so Freerouting does not treat them as planes)
     base = [z for z in board.Zones() if z.GetNetname() == "GND" and z.GetLayer() == pcbnew.In1_Cu][0]
-    for lay in (pcbnew.F_Cu, pcbnew.B_Cu):
+    for lay in (pcbnew.F_Cu,):          # V5: B.Cu ya trae su plano GND (antena GNSS)
         z = base.Duplicate()
         try:
             z = z.Cast()

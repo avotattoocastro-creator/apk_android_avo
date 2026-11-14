@@ -7,7 +7,7 @@ S = Sym
 
 def header(thickness):
     layers = [S("layers"),
-              [0, "F.Cu", S("signal")], [4, "In1.Cu", S("power")], [6, "In2.Cu", S("signal")], [2, "B.Cu", S("signal")],
+              [0, "F.Cu", S("signal")], [4, "In1.Cu", S("power")], [6, "In2.Cu", S("signal")], [2, "B.Cu", S("power")],
               [9, "F.Adhes", S("user"), "F.Adhesive"], [11, "B.Adhes", S("user"), "B.Adhesive"],
               [13, "F.Paste", S("user")], [15, "B.Paste", S("user")],
               [5, "F.SilkS", S("user"), "F.Silkscreen"], [7, "B.SilkS", S("user"), "B.Silkscreen"],
@@ -61,7 +61,7 @@ def header(thickness):
     return [S("kicad_pcb"), [S("version"), 20241229], [S("generator"), "pcbnew"], [S("generator_version"), "9.0"],
             [S("general"), [S("thickness"), thickness], [S("legacy_teardrops"), S("no")]],
             [S("paper"), "A4"],
-            [S("title_block"), [S("title"), "AVO BACK V5 CASCO · placa de la espalda"], [S("date"), "2026-10-29"],
+            [S("title_block"), [S("title"), "AVO BACK V5 CASCO · placa de la espalda"], [S("date"), "2026-11-14"],
              [S("rev"), "A"], [S("company"), "AVO Performance Horse"]],
             layers, setup]
 

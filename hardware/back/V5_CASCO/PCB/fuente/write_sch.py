@@ -7,13 +7,13 @@ import project
 import schematic as SCH
 
 BLOCKS = {   # name: (x0, y0, x1, y1, title)
-    "Contactos": (0, 0, 0, 0, "CONTACTOS DEL FONDO (REV B): SYS y BAT en la cola, GND aparte · chaleco = puente SYS–BAT · base de carga = cargador entre BAT y GND"),
-    "Cargador": (0, 0, 0, 0, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · solo USB-C del taller · batería 1S 2000 mAh (654060)"),
-    "Batería": (0, 0, 0, 0, "BATERÍA: PTC hacia el contacto BAT · protección de polaridad del contacto SYS · medida por ADC"),
+    "Pogo": (0, 0, 0, 0, "POGO MAGNÉTICO DE 5 CONTACTOS (por hilos): VBUS · D− · D+ · GND · AUX — carga y USB con el PC · ESD"),
+    "Cargador": (0, 0, 0, 0, "CARGADOR CON CAMINO DE POTENCIA (BQ24072) · batería 1S ≥ 2000 mAh"),
+    "Batería": (0, 0, 0, 0, "BATERÍA (hilos soldados) · PTC · medida por ADC"),
     "3V3": (0, 0, 0, 0, "3,3 V PRINCIPAL (TLV75733P, 1 A)"),
-    "ZED": (0, 0, 0, 0, "URTK1.2 / ZED-F9P: 3,3 V propio con EN (RT9080) · UART1 · UART2 · PPS · RESET"),
-    "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-MINI-1U-N8 · arranque · LED"),
-    "USB": (0, 0, 0, 0, "USB-C (taller: programación, datos y carga) · ESD"),
+    "ZED": (0, 0, 0, 0, "ZED-F9P SOLDADO: 3,3 V propio con EN (RT9080) · antena activa por VCC_RF · UART1 · UART2 · PPS · RESET"),
+    "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-MINI-1U-N8 (BLE móvil + ESP-NOW pecho/cinchas) · arranque"),
+    "Hall": (0, 0, 0, 0, "SENSOR HALL DRV5032 · encendido al poner la cápsula en la base del casco"),
     "microSD": (0, 0, 0, 0, "microSD (SDMMC 4 bits) · alimentación conmutada"),
     "Pruebas": (0, 0, 0, 0, "PUNTOS DE PRUEBA"),
 }
@@ -131,11 +131,12 @@ def write(path_sch, path_pro, path_parts):
                    # 0,3 mm: entra en los pines de 0,24 mm de las QFN (paso 0,5) sin estrechamientos; ≈ 1 A en cobre exterior
                    dict(name="Potencia", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
                         priority=1),
-                   dict(name="Qi_AC", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
+                   # línea de 50 Ω de la antena GNSS: microcinta de 0,36 mm sobre In1 (preimpregnado de 0,21 mm, JLC 1,6 mm)
+                   dict(name="RF_50", clearance=0.25, track_width=0.36, via_diameter=0.6, via_drill=0.3,
                         priority=0)],
-                  [("QI_AC*", "Qi_AC"), ("QI_COIL*", "Qi_AC"), ("VBUS", "Potencia"), ("VIN5", "Potencia"),
-                   ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_IN", "Potencia"), ("BAT_F", "Potencia"),
-                   ("SYS_IN", "Potencia"), ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia")])
+                  [("RF_*", "RF_50"), ("VBUS", "Potencia"), ("POGO_VBUS", "Potencia"),
+                   ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_IN", "Potencia"),
+                   ("+3V3_ZED", "Potencia"), ("+3V3", "Potencia")])
 
     rows = []
     for p in D.PARTS:

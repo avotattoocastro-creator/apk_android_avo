@@ -20,21 +20,19 @@ from sexpr import Sym                                       # noqa: E402
 S = Sym
 PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
 # In2 es capa de señal (+3V3 se rutea y se rellena con una zona +3V3 después del ruteado)
-ROUTE_LAYERS = ["F.Cu", "In2.Cu", "B.Cu"]
+ROUTE_LAYERS = ["F.Cu", "In2.Cu"]   # V5: B.Cu = plano de masa de la antena GNSS, sin pistas
 CLEAR = 0.15
 VIA = (0.5, 0.3)
 
 # widths per net (mm)
-WIDTH = {"QI_AC1": 0.5, "QI_AC2": 0.5, "QI_COIL1": 0.5, "QI_RECT": 0.4, D.VIN5: 0.4, D.VBUS: 0.4,
-         D.VSYS: 0.5, D.VBAT: 0.5, "AD_SRC": 0.4, "BAT_IN": 0.5, "BAT_F": 0.5, "SYS_IN": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3}
-ORDER = ["QI_COIL1", "QI_AC1", "QI_AC2", "QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1",
-         "QI_COMM2", "QI_RECT", "QI_ILIM", "QI_FOD", "QI_TS", D.VIN5, "AD_SRC", "QI_ADEN", D.VBUS, D.VBAT,
-         "BAT_IN", "BAT_F", "BAT_G", "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS, D.VZED, D.V3, D.VSD,
-         "USB_DP_C", "USB_DM_C", "USB_DP", "USB_DM", "CC1", "CC2",
-         "SD_CLK0", "SD_CLK", "SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3", "SD_CD", "SD_PWR_N",
+WIDTH = {D.VBUS: 0.4, "POGO_VBUS": 0.4, D.VSYS: 0.5, D.VBAT: 0.5, "BAT_IN": 0.5, D.VZED: 0.4, D.V3: 0.4, D.VSD: 0.3,
+         "RF_ANT": 0.36, "RF_ZED": 0.36, "VCC_RF": 0.3, "VCC_RF_F": 0.3}
+ORDER = ["RF_ZED", "RF_ANT", "VCC_RF", "VCC_RF_F", "POGO_VBUS", D.VBUS, D.VBAT, "BAT_IN", "CHG_ISET", "CHG_ILIM", "CHG_TS",
+         "CHG_EN2", D.VSYS, D.VZED, D.V3, D.VSD, "USB_DP_C", "USB_DM_C", "USB_DP", "USB_DM",
+         "SD_CLK0", "SD_CLK", "SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3", "SD_PWR_N",
          "ZED_TX1_C", "ZED_TX1", "S3_TX1", "ZED_RX1", "ZED_TX2_C", "ZED_TX2", "S3_TX2", "ZED_RX2", "ZED_PPS_C", "ZED_PPS",
-         "S3_ZRST", "ZED_RST", "ZED_EN", "EN", "BOOT", "LED", "LED_K", "U0TX", "U0RX", "HALL", "BAT_ADC",
-         "CHG_PG", "CHG_STAT", "QI_CHG", "GPIO41"]
+         "S3_ZRST", "ZED_RST", "ZED_EN", "EN", "BOOT", "U0TX", "U0RX", "HALL", "BAT_ADC", "VBUS_DET", "POGO_AUX_C",
+         "POGO_AUX", "CHG_PG", "CHG_STAT", "GPIO41", "GPIO47", "GPIO48", "ZED_SAFEBOOT"]
 
 
 class Ctx:
@@ -342,19 +340,25 @@ def write_board(r, path, outer_pours=True):
     tree.append(B.zone(D.CODE[D.GND], D.GND, "In1.Cu", poly, key="in1", connect="solid"))
     if outer_pours:
         tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
-    if outer_pours:      # Freerouting would take these as planes: the CI adds them after routing
+    # V5: B.Cu = plano de masa macizo de la antena GNSS (sin pistas): va ya en la placa de colocación, así Freerouting
+    # lo toma como plano y no rutea por él. El relleno GND de F.Cu lo añade el CI después del ruteado.
+    tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b", connect="solid"))
+    if outer_pours:
         tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
-        tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
     for k, band in enumerate(edge_bands()):
         tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # texts
-    tree.append(B.gr_text("AVO BACK V4 · REV " + D.REV + " · ESP32-S3 · " + D.DATE, *D.K(88.0, -9.0), "B.SilkS", 1.0, mirror=True))
-    tree.append(B.gr_text("4 capas 1,0 mm · ENIG", *D.K(88.0, -11.0), "B.SilkS", 0.8, mirror=True, bold=False))
+    tree.append(B.gr_text("AVO BACK V5 CASCO · REV " + D.REV + " · " + D.DATE, *D.K(0.0, 18.0), "B.SilkS", 1.0, mirror=True))
+    tree.append(B.gr_text("4 capas 1,6 mm · ENIG · antena GNSS aquí (cara B)", *D.K(0.0, -16.5), "B.SilkS", 0.8, mirror=True, bold=False))
+    a = D.ANT
+    for (u, v), (w_, z_) in ((((-1, -1), (1, -1))), (((1, -1), (1, 1))), (((1, 1), (-1, 1))), (((-1, 1), (-1, -1)))):
+        tree.append(B.gr_line(D.K(a[0] + u * a[2] / 2, a[1] + v * a[2] / 2), D.K(a[0] + w_ * a[2] / 2, a[1] + z_ * a[2] / 2),
+                              "B.SilkS", 0.15))
     for p_ in D.PARTS:
-        if p_["fp"] == "CONTACT_M2":
+        if p_["fp"] == "WIRE":
             x_, y_ = p_["pos"]
-            tree.append(B.gr_text(p_["nets"]["1"].replace("_IN", "").replace("_F", ""), *D.K(x_, y_ - 3.6), "B.SilkS", 0.8,
-                                  mirror=True, bold=False))
+            tree.append(B.gr_text(p_["value"].replace("POGO ", "").replace("BAT ", "B"), *D.K(x_, y_ + 1.9), "F.SilkS", 0.6,
+                                  mirror=False, bold=False))
     B.write(path, tree)
 
 
@@ -379,11 +383,9 @@ def main():
         # rev. 2 (V4): sin pre-ruteo del bloque Qi; los pre-ruteos bloqueados encajonaban U1 y Freerouting no
         # podía terminar sus redes. Se dejan solo USB, CC y los pines del cargador.
         PRE_QI = "--pre-qi" in sys.argv
-        pre = ["QI_BOOT1", "QI_BOOT2", "QI_CLAMP1", "QI_CLAMP2", "QI_COMM1", "QI_COMM2", "QI_FOD", "QI_TS",
-               "QI_RECT", D.VIN5, "USB_DP_C", "USB_DM_C", "CC1", "CC2", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
+        pre = ["RF_ZED", "RF_ANT", "VCC_RF_F", "USB_DP_C", "USB_DM_C", "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
-        pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("QI_CHG", ["U1.7", "R4.1"]),
-                 ("QI_ADEN", ["U1.8", "Q1.1", "Q2.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
+        pairs = [("CHG_PG", ["U2.7", "R9.1"]), ("CHG_STAT", ["U2.9", "R10.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
         if not PRE_QI:
             pre = [n for n in pre if not n.startswith("QI_") and n != D.VIN5]
             pairs = [pr for pr in pairs if not pr[0].startswith("QI_")]
@@ -397,7 +399,7 @@ def main():
                 by_net.setdefault(rec["net"], []).append(rec)
         for net in pre:
             if net in by_net and len(by_net[net]) > 1:
-                w = 0.3 if (net.startswith("QI_AC") or net in ("QI_COIL1", "QI_RECT", D.VIN5, D.VBUS, "AD_SRC")) else 0.2
+                w = WIDTH.get(net, 0.2)
                 if not route_tree(r, net, netid(net), by_net[net], w) and not route_tree(r, net, netid(net), by_net[net], 0.2):
                     log.append("pre-ruteo fallido: " + net)
         write_board(r, os.path.join(out, "AVO_BACK_V5_PCB_colocacion.kicad_pcb"), outer_pours=False)

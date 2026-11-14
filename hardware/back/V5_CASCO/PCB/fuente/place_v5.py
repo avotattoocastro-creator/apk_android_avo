@@ -16,28 +16,27 @@ sys.path.insert(0, HERE)
 POSF = os.path.join(HERE, "colocacion_v5.json")
 
 FIJAS = {
-    # módulo y conectores
-    "U4": (87.9, 14.0, 0), "J4": (75.2, 12.2, 0), "J2": (73.7, -10.0, 270), "J3": (88.57, -13.85, 90),
-    "J1": (107.0, 0.0, 90),
-    # REV B: contactos del fondo. SYS y BAT en la cola, donde estaban el reed / el Hall (paso 5,8 mm); GND aparte, en el
-    # hueco que deja el Qi, para que BAT y GND no queden juntos (sudor, objetos metálicos)
-    "P1": (101.0, -8.6, 0), "P2": (106.8, -8.6, 0), "P3": (80.0, 0.0, 0),
-    # mecánica
-    "H1": (67.6, -13.8, 0), "H2": (99.0, -12.6, 0), "MP1": (98.0, -3.5, 0), "MP2": (98.4, 13.2, 0),
-    "MR1": (67.8, -20.406, 0), "MR2": (67.8, 18.075, 0),
+    # V5 CASCO (coordenadas de diseño: centro de la placa, vista desde la cara F)
+    "U1": (-8.5, 1.0, 0), "J5": (-21.5, 7.05, 180), "H5": (-22.0, -1.0, 0),
+    "U4": (12.0, 12.0, 0), "J3": (12.0, -10.5, 0),
+    "P1": (-5.08, -23.0, 0), "P2": (-2.54, -23.0, 0), "P3": (0.0, -23.0, 0), "P4": (2.54, -23.0, 0), "P5": (5.08, -23.0, 0),
+    "J2": (-15.0, -23.0, 0), "J6": (-12.2, -23.0, 0),
+    "H1": (22.0, 22.0, 0), "H2": (-22.0, 22.0, 0), "H3": (-22.0, -22.0, 0), "H4": (22.0, -22.0, 0),
 }
-# anclas de los bloques (integrados): objetivo de la búsqueda
 ANCLAS = {
-    "U2": (89.5, -0.5), "U3": (73.4, -15.6), "U7": (68.3, 9.5), "U6": (102.5, 8.6),
-    "Q3": (94.5, -4.5), "F1": (70.6, -4.6), "Q4": (82.0, -4.0), "D1": (97.0, 16.0),
+    "U2": (-1.0, -16.0), "U6": (3.0, -19.5), "F2": (-6.0, -19.5), "U3": (-6.0, -14.5), "U7": (-12.0, -14.0),
+    "U8": (21.5, 2.0), "Q4": (21.0, -5.0), "F1": (-15.0, -18.5),
 }
-ORDEN_IC = ["U2", "U3", "U7", "U6", "Q3", "F1", "Q4", "D1"]
-# condensadores de desacoplo → integrado al que sirven (se colocan junto a su pin, no en el centro de la red)
-DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("U7", "5"), "C62": ("J4", "1"),
-         "C24": ("U4", "3"), "C25": ("U4", "3"), "C26": ("U4", "3"), "C18": ("U2", "13"), "C19": ("U2", "10"),
-         "C20": ("U2", "2"), "C35": ("U2", "11"), "C28": ("J1", "A4"), "C40": ("Q4", "3"),
-         "C41": ("J3", "4"), "TP9": ("J4", "1"), "TP6": ("U3", "5"), "TP8": ("U3", "1"),
-         "TP7": ("Q3", "2"), "R60": ("U7", "3"), "R40": ("Q4", "1"), "D2": ("P1", "1"), "D3": ("P2", "1")}
+ORDEN_IC = ["U2", "U6", "F2", "U3", "U7", "U8", "Q4", "F1"]
+DECAP = {"C21": ("U3", "1"), "C22": ("U3", "5"), "C60": ("U7", "1"), "C61": ("U7", "5"), "C62": ("U1", "33"),
+         "C63": ("U1", "34"), "C64": ("U1", "36"), "C24": ("U4", "3"), "C25": ("U4", "3"), "C26": ("U4", "3"),
+         "C18": ("U2", "13"), "C19": ("U2", "10"), "C20": ("U2", "2"), "C35": ("U2", "11"), "C40": ("Q4", "3"),
+         "C41": ("J3", "4"), "C70": ("J5", "1"), "L70": ("J5", "1"), "R70": ("U1", "7"), "C71": ("U1", "7"),
+         "C80": ("U8", "1"), "TP9": ("U7", "5"), "TP6": ("U3", "5"), "TP8": ("U3", "1"), "TP7": ("F1", "2"),
+         "R60": ("U7", "3"), "R40": ("Q4", "1"), "D2": ("P1", "1"), "D3": ("P5", "1"), "R18": ("U6", "1"),
+         "R19": ("U6", "3"), "R6": ("U2", "16"), "R7": ("U2", "12"), "RT2": ("U2", "1"),
+         "R8": ("U2", "5"), "R9": ("U2", "7"), "R10": ("U2", "9"), "R22": ("U6", "5"), "R23": ("U6", "5"),
+         "R20": ("P5", "1"), "R21": ("P5", "1")}
 GAP = 0.12            # separación mínima entre patios
 STEP = 0.2
 
@@ -56,11 +55,11 @@ def main():
     import numpy as np
     from matplotlib.path import Path
     from scipy import ndimage
-    G = 0.1; X0, X1, Y0, Y1 = 60.0, 120.0, -30.0, 30.0
+    G = 0.1; X0, X1, Y0, Y1 = -27.0, 27.0, -27.0, 27.0
     W, H = int((X1 - X0) / G), int((Y1 - Y0) / G)
     xs = X0 + (np.arange(W) + 0.5) * G; ys = Y0 + (np.arange(H) + 0.5) * G
     XX, YY = np.meshgrid(xs, ys)
-    inside = Path([(x, 100 - y) for x, y in poly]).contains_points(np.c_[XX.ravel(), YY.ravel()]).reshape(H, W)
+    inside = Path([(x - 100, 100 - y) for x, y in poly]).contains_points(np.c_[XX.ravel(), YY.ravel()]).reshape(H, W)
     inside = ndimage.distance_transform_edt(inside) * G >= 0.45
     zmax = np.vectorize(lambda x, y: D.zone_limit(x, y))(XX, YY)
     occ = np.zeros((H, W), bool)
@@ -73,15 +72,15 @@ def main():
 
     def cells(b, grow=0.0):
         """bbox KiCad → índices (casing Y = 100 − y)"""
-        cx0, cx1 = b[0] - grow, b[2] + grow; cy0, cy1 = 100 - b[3] - grow, 100 - b[1] + grow
+        cx0, cx1 = b[0] - 100 - grow, b[2] - 100 + grow; cy0, cy1 = 100 - b[3] - grow, 100 - b[1] + grow
         i0 = max(0, int(math.floor((cy0 - Y0) / G))); i1 = min(H, int(math.ceil((cy1 - Y0) / G)))
         j0 = max(0, int(math.floor((cx0 - X0) / G))); j1 = min(W, int(math.ceil((cx1 - X0) / G)))
         return i0, i1, j0, j1
 
     def mark(p):
         b = bbox(p, p["pos"], p["rot"])
-        if p["fp"] in ("PAD_LID", "RING", "CONTACT_M2"):
-            r = {"PAD_LID": 2.5, "RING": 4.6, "CONTACT_M2": 2.9 + GAP / 2}[p["fp"]]
+        if p["fp"] in ("HOLE", "CABLE"):
+            r = {"HOLE": 3.0, "CABLE": 1.9}[p["fp"]]
             occ[(XX - p["pos"][0]) ** 2 + (YY - p["pos"][1]) ** 2 < r * r] = True
         else:
             i0, i1, j0, j1 = cells(b, GAP / 2)
@@ -142,18 +141,18 @@ def main():
             q = byref[ic]
             pd = next(pd for pd in D.fp_of(q).pads if pd.num == num)
             x, y = pad_center(pd, *D.K(*q["pos"]), q["rot"])
-            return (x, 100 - y)
+            return (x - 100, 100 - y)
         pts = []
         for num, net in p["nets"].items():
             if not net or net.startswith("unconnected"):
                 continue
             for ref, (_, q) in placed.items():
-                if ref == p["ref"] or q["fp"] in ("PIVOT", "PAD_LID", "RING"):
+                if ref == p["ref"] or q["fp"] in ("HOLE", "CABLE"):
                     continue
                 for pd in D.fp_of(q).pads:
                     if q["nets"].get(pd.num) == net and (net not in BIG or ref.startswith("U")):
                         x, y = pad_center(pd, *D.K(*q["pos"]), q["rot"])
-                        pts.append((x, 100 - y, 0.3 if net in BIG else 1.0))
+                        pts.append((x - 100, 100 - y, 0.3 if net in BIG else 1.0))
         if not pts:
             return None
         w = sum(t[2] for t in pts)
@@ -164,7 +163,7 @@ def main():
     rest.sort(key=lambda p: (p["ref"] not in DECAP or p["ref"].startswith("TP"), p["block"] == "Pruebas",
                              -sum(1 for n in p["nets"].values() if n and n not in BIG)))
     for p in rest:
-        t = target_of(p) or (90.0, 0.0)
+        t = target_of(p) or (0.0, 0.0)
         place(p, t)
     out = {p["ref"]: [round(p["pos"][0], 3), round(p["pos"][1], 3), p["rot"]] for p in D.PARTS}
     json.dump(out, open(POSF, "w"), indent=1)

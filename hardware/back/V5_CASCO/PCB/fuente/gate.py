@@ -1,4 +1,4 @@
-"""Blocking checks after KiCad's DRC/ERC (run from hardware/back/V4/PCB, after the KiCad step).
+"""Blocking checks after KiCad's DRC/ERC (run from hardware/back/V5_CASCO/PCB, after the KiCad step).
 # REV B: informe con las existencias del TVS C2827694 (consulta del CI 41050213178)
 
 Pass only if: 0 DRC errors (incl. clearances, shorts, holes, edge, mask, footprints), 0 unconnected items,
@@ -55,13 +55,13 @@ name = "AVO_BACK_V5_PCB_REPORTE.md" if ok else "AVO_BACK_V5_PCB_DIAGNOSTICO_REPO
 state = ("**DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**"
          if ok else "**DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar")
 L = []
-L.append("# AVO BACK V4 · placa de la espalda · REV B (ESP32-S3, contactos pogo) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
+L.append("# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe %s" % ("de fabricación" if ok else "de diagnóstico"))
 L.append("")
 L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
 L.append("- Ruteado: %s" % route_src)
-L.append("- Placa: 4 capas (F.Cu señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu señal + GND), 1,0 mm, ENIG, "
-         "cobre exterior 1 oz; contorno de la cola de la carcasa V4 (CAD/pcb_contorno_v4.json), ≈ 1785 mm²")
+L.append("- Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · "
+         "B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz")
 L.append("- Componentes: %d en total, %d para montar, %d sin montar (DNP: %s), %d a mano (pads de hilo y de prueba)"
          % (len(parts), len(assembled), len(dnp), ", ".join(dnp) or "—",
             len([p for p in parts if p["no_assembly"]])))
@@ -136,11 +136,12 @@ L.append("- Apto para solicitar prototipos: %s" % ("**sí, pendiente de validaci
 L.append("- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)")
 L.append("")
 L.append("## Limitaciones pendientes (ver README)")
-for t in ("REV B: contactos del fondo por tornillo M2 (SYS, BAT, GND); la estanqueidad depende de las juntas tóricas de los tornillos.",
-          "Pinout de la URTK1.2 por verificar con polímetro antes de hacer el mazo (DOCS/INTEGRACION_GNSS.md).",
-          "Pines 9/10 (detección) de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",
-          "Batería 654060 con clavija PH2.0: cambiarla a JST SH 1,0 (J2) y comprobar la polaridad.",
-          "Existencias consultadas en el CI (out_stock/stock_jlc.json): volver a comprobarlas el día del pedido.",
+for t in ("Línea de 50 Ω de la antena (J5 → C70 → RF_IN): microcinta de 0,36 mm calculada para el apilado JLC de 1,6 mm (preimpregnado 0,21 mm sobre In1); confirmar con la calculadora de JLC al pedir.",
+          "Antena GNSS plana activa L1/L2 pegada en el centro de la cara B; plano de masa de 51 × 51 (el fabricante afina sobre 70 × 70): medir fix y velocidad.",
+          "Piezas sin código LCSC (ZED-F9P, U.FL, 47 nH, 47 pF C0G): buscarlas con stock_jlc.py o suministrarlas aparte (el ZED-F9P suele ir consignado).",
+          "C70 de bloqueo de continua por si RF_IN no lo lleva dentro: confirmar con el manual de integración del ZED-F9P.",
+          "Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",
+          "Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):
     L.append("- " + t)
 open(os.path.join(OUT, name), "w", encoding="utf-8").write("\n".join(L) + "\n")

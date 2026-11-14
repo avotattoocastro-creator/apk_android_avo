@@ -37,7 +37,7 @@ def draw(path, tracks=(), vias=(), title="", zoom=None, scale=1.0):
     if zoom:
         ax.set_xlim(zoom[0], zoom[2]); ax.set_ylim(zoom[3], zoom[1])
     else:
-        ax.set_xlim(63, 115); ax.set_ylim(127, 73)
+        ax.set_xlim(72, 128); ax.set_ylim(128, 72)
     ax.set_title(title)
     ax.grid(True, lw=0.2)
     fig.tight_layout()
