@@ -1,0 +1,68 @@
+{
+ "piezas": {
+  "AVO_CASCO_V5_base": {
+   "solidos": 3,
+   "volumen_mm3": 11063.2,
+   "peso_g": 14.1,
+   "caja": [
+    56.4,
+    56.4,
+    14.5
+   ]
+  },
+  "AVO_CASCO_V5_tapa": {
+   "solidos": 1,
+   "volumen_mm3": 8667.4,
+   "peso_g": 11.0,
+   "caja": [
+    56.4,
+    56.4,
+    9.6
+   ]
+  },
+  "AVO_CASCO_V5_junta_TPU": {
+   "solidos": 1,
+   "volumen_mm3": 206.2,
+   "peso_g": 0.2,
+   "caja": [
+    54.9,
+    54.9,
+    1.1
+   ]
+  },
+  "AVO_CASCO_V5_base_casco": {
+   "solidos": 1,
+   "volumen_mm3": 16369.0,
+   "peso_g": 20.8,
+   "caja": [
+    60.4,
+    60.4,
+    12.08
+   ]
+  }
+ },
+ "interferencias": {},
+ "medidas": {
+  "capsula_mm": [
+   56.4,
+   56.4,
+   24.1
+  ],
+  "interior_mm": 51.6,
+  "z_cara_F": 12.9,
+  "z_junta": 14.5,
+  "z_techo": 22.9,
+  "bateria_max_mm": [
+   50.0,
+   37.0,
+   8.5
+  ],
+  "base_casco": "cóncava R110 (sobre el casco)",
+  "altura_total_sobre_casco_mm": 26.4,
+  "tornillos": "4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
+  "hall_xy": [
+   -21.5,
+   2.0
+  ]
+ }
+}
