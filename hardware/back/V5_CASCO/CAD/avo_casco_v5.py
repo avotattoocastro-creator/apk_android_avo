@@ -11,7 +11,8 @@ Apilado (de abajo arriba):
   · 0,3 · techo 1,2.
 Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con junta tórica 2,5 × 1 bajo la cabeza;
   insertos M2,5 (Ø3,5 × 4) en los postes de la tapa; la PCB queda pinzada entre las columnas de la base y los postes.
-  Junta TPU 85A en la ranura de la cara superior de la pared de la base.
+  Anillo de resina translúcida (dos mitades pegadas) entre base y tapa (z 10,4–14,5), iluminado por 4 LED laterales de
+  la PCB; 2 juntas TPU 85A: base ↔ anillo (ranura en la base) y anillo ↔ tapa (ranura en la tapa).
 Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
 Base del casco: anillo de PETG con 4 imanes Ø6 × 2 (frente a los 4 de la cápsula), imán Ø8 × 3 del Hall y alojamiento
   con paredes a 45° de 1,2 mm de alto (se suelta con un golpe lateral); cara inferior cóncava R = 110 (ajustable).
@@ -38,7 +39,8 @@ FLOOR = 1.4
 BAT = dict(x=50.0, y=37.0, t=8.5)          # (E) celda 1S ≥ 2000 mAh: envolvente máxima
 Z_BAT0 = FLOOR
 Z_F = Z_BAT0 + BAT["t"] + 0.4 + MEC["altura_max_cara_F"]   # cara F de la PCB (hacia abajo)
-Z_PCB_TOP = Z_F + PCB["t"]                 # cara B (masa) = junta base/tapa
+Z_PCB_TOP = Z_F + PCB["t"]                 # cara B (masa) = junta anillo/tapa
+Z_RING0 = Z_F - 2.5                        # junta base/anillo: el anillo cubre de 10,4 a 14,5 (LED laterales a z ≈ 11,9)
 ANT = dict(side=25.0, h=8.1)               # (E) Taoglas AHP2258
 Z_CEIL = Z_PCB_TOP + ANT["h"] + 0.3
 TOP_T = 1.2
@@ -74,7 +76,7 @@ def shell_ring(off_out, off_in, h, z0):
 
 # ---------------------------------------------------------------- base
 def base():
-    b = rrect(OUTS, OUTS, R_OUT, Z_PCB_TOP).faces("<Z").edges().chamfer(CHAMF)
+    b = rrect(OUTS, OUTS, R_OUT, Z_RING0).faces("<Z").edges().chamfer(CHAMF)
     b = b.cut(rrect(IN, IN, PCB["r"] + CL, Z_PCB_TOP, z0=FLOOR))
     # columnas de los tornillos (apoyo de la PCB en la cara F)
     for (x, y) in SCREWS:
@@ -105,14 +107,24 @@ def base():
         b = b.cut(cyl(x, y, -1, SCREW["hole"], Z_PCB_TOP + 2)).cut(cyl(x, y, -1, SCREW["cb_d"], SCREW["cb_h"] + 1))
     # ranura de la junta en la cara superior de la pared
     gc, gw = GASKET["c"], GASKET["w_groove"]
-    b = b.cut(shell_ring(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, Z_PCB_TOP - GASKET["depth"]))
+    b = b.cut(shell_ring(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, Z_RING0 - GASKET["depth"]))
     return b
+
+
+# ---------------------------------------------------------------- anillo de luz (resina translúcida, dos mitades pegadas)
+def ring_halves():
+    r = shell_ring(0.0, WALL, Z_PCB_TOP - Z_RING0, Z_RING0)
+    a = r.intersect(box(-50, 0, -10, 100, 200, 100))      # mitad −X
+    b = r.intersect(box(50, 0, -10, 100, 200, 100))       # mitad +X
+    return a, b
 
 
 # ---------------------------------------------------------------- tapa
 def lid():
     t = rrect(OUTS, OUTS, R_OUT, H - Z_PCB_TOP, Z_PCB_TOP).faces(">Z").edges().chamfer(1.0)
     t = t.cut(rrect(IN, IN, PCB["r"] + CL, Z_CEIL - Z_PCB_TOP, Z_PCB_TOP - 0.01))
+    gc, gw = GASKET["c"], GASKET["w_groove"]                 # ranura de la 2.ª junta (tapa ↔ anillo)
+    t = t.cut(shell_ring(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, Z_PCB_TOP - 1))
     for (x, y) in SCREWS:
         t = t.union(cyl(x, y, Z_PCB_TOP, SCREW["post"], Z_CEIL - Z_PCB_TOP + 0.01))
         t = t.cut(cyl(x, y, Z_PCB_TOP - 0.1, SCREW["insert_d"], SCREW["insert_h"] + 0.1))
@@ -124,9 +136,11 @@ def lid():
     return t
 
 
-def gasket():
+def gasket(top=False):
     c, w = GASKET["c"], GASKET["w"]
-    return shell_ring(c - w / 2, c + w / 2, GASKET["h_free"], Z_PCB_TOP - GASKET["depth"])
+    if top:      # en la ranura de la tapa, apoyada en la cara superior del anillo
+        return shell_ring(c - w / 2, c + w / 2, GASKET["h_free"], Z_PCB_TOP + GASKET["depth"] - GASKET["h_free"])
+    return shell_ring(c - w / 2, c + w / 2, GASKET["h_free"], Z_RING0 - GASKET["depth"])
 
 
 # ---------------------------------------------------------------- base del casco
@@ -187,7 +201,10 @@ def refs():
 
 
 def main():
-    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_junta_TPU": gasket()}
+    ra, rb = ring_halves()
+    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_junta_TPU": gasket(),
+             "AVO_CASCO_V5_junta_TPU_tapa": gasket(True), "AVO_CASCO_V5_anillo_resina_A": ra,
+             "AVO_CASCO_V5_anillo_resina_B": rb}
     hb, kind = helmet_base_safe()
     parts["AVO_CASCO_V5_base_casco"] = hb
     rf = refs()
@@ -199,7 +216,7 @@ def main():
             print("AVISO %s: %d sólidos" % (n, nsol), [round(x.Volume(), 2) for x in s.solids().vals()])
         v = s.val().Volume() if nsol == 1 else sum(x.Volume() for x in s.solids().vals())
         bb = s.val().BoundingBox()
-        d = 1.20 if "junta" in n else 1.27
+        d = 1.20 if "junta" in n else (1.15 if "resina" in n else 1.27)
         rep["piezas"][n] = dict(solidos=nsol, volumen_mm3=round(v, 1), peso_g=round(v * d / 1000, 1),
                                 caja=[round(bb.xlen, 2), round(bb.ylen, 2), round(bb.zlen, 2)])
         cq.exporters.export(s, os.path.join(OUT, n + ".step"))
@@ -216,15 +233,16 @@ def main():
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
     rep["medidas"] = dict(capsula_mm=[round(OUTS, 2), round(OUTS, 2), round(H, 2)], interior_mm=round(IN, 2),
-                          z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), z_techo=round(Z_CEIL, 2),
+                          z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), anillo_z=[round(Z_RING0, 2), round(Z_PCB_TOP, 2)], z_techo=round(Z_CEIL, 2),
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
                           altura_total_sobre_casco_mm=round(H + HB["t"], 2),
                           tornillos="4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
                           hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)])
     asm = cq.Assembly(name="AVO_CASCO_V5")
-    col = {"base": (0.12, 0.12, 0.14), "tapa": (0.85, 0.85, 0.88), "junta": (0.2, 0.2, 0.2), "base_casco": (0.8, 0.1, 0.1)}
+    col = {"base": (0.12, 0.12, 0.14), "tapa": (0.85, 0.85, 0.88), "junta": (0.2, 0.2, 0.2), "base_casco": (0.8, 0.1, 0.1),
+           "anillo": (0.75, 0.9, 1.0)}
     for n, s in parts.items():
-        k = next((c for c in ("base_casco", "junta", "tapa", "base") if c in n), "base")
+        k = next((c for c in ("base_casco", "junta", "anillo", "tapa", "base") if c in n), "base")
         asm.add(s, name=n, color=cq.Color(*col[k], 1.0))
     rc = {"pcb": (0.1, 0.45, 0.2), "antena": (0.9, 0.7, 0.1), "bateria": (0.3, 0.5, 0.8)}
     for n, s in rf.items():

@@ -15,7 +15,7 @@ def cut(T,ax,val,keep):
                 s=dd[i]/(dd[i]-dd[j]); p=t[i]+s*(t[j]-t[i]); pts.append(p[keep])
         if len(pts)==2: segs.append(pts)
     return segs
-P=[("AVO_CASCO_V5_base","#222"),("AVO_CASCO_V5_tapa","#888"),("AVO_CASCO_V5_junta_TPU","#c00"),("AVO_CASCO_V5_base_casco","#b03030"),
+P=[("AVO_CASCO_V5_base","#222"),("AVO_CASCO_V5_anillo_resina_A","#2aa0d0"),("AVO_CASCO_V5_anillo_resina_B","#2aa0d0"),("AVO_CASCO_V5_junta_TPU_tapa","#c00"),("AVO_CASCO_V5_tapa","#888"),("AVO_CASCO_V5_junta_TPU","#c00"),("AVO_CASCO_V5_base_casco","#b03030"),
    ("ref_pcb","#1a7a30"),("ref_componentes_cara_F","#5b8bd0"),("ref_bateria","#3c78c8"),("ref_antena","#e0a100"),("ref_pogo_placa","#d4a000"),("ref_imanes_capsula","#9050c0")]
 M={n:load(O+n+".stl") for n,_ in P}
 fig,axs=plt.subplots(2,2,figsize=(16,12))
