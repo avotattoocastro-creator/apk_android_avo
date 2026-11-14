@@ -94,6 +94,14 @@ private struct TrainingListContent: View {
             }
             if model.computing { ProgressView().controlSize(.mini) }
             Spacer(minLength: 8)
+            // «Calendario» leaves the sidebar and becomes a button here (trainer's sketch 14/11/2026)
+            Button {
+                app.page = .calendar
+            } label: {
+                Label("Calendario", systemImage: "calendar")
+            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("list.calendar")
             Button {
                 app.showImporter = true
             } label: {

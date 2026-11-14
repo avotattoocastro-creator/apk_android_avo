@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-22 — Menú lateral reordenado, Calendario como botón y barra de Cuadra en una fila
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Menú lateral:** Dashboard, Entrenamientos, Análisis, Biomecánica, Informes, Cuadra, Jinetes, Carreras, y Configuración.
+  Calendario sale del menú.
+- **Entrenamientos:** botón «Calendario» junto a «Abrir».
+- **Cuadra y Jinetes:**
+  - sin la línea «N registrados · …»;
+  - «Mostrar inactivos» y «France Galop» van en la misma fila que «Nuevo» y la búsqueda.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-21 — Comparar a todo el ancho, nuevo orden de pestañas y páginas sin cabecera
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

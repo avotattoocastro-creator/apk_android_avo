@@ -24,17 +24,14 @@ struct RootView: View {
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
-        // paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md): mismo orden y nombre que en Windows
-        RootNavEntry(page: .calendar, title: "Calendario", icon: "calendar"),
-        // trainer's sketch 14/11/2026: «Mapa» goes into the training bar (in the place of «Análisis»); the sidebar
-        // «Análisis» opens the training at its first tab («Resumen»)
+        // trainer's sketch 14/11/2026: «Calendario» is a button of «Entrenamientos»; «Biomecánica» right after «Análisis»;
+        // «Carreras» after «Jinetes». «Mapa» is a tab of the training; «Análisis» opens it at «Resumen»
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
-        // trainer's sketch 08/11/2026: Informes and Biomecánica in the sidebar under Análisis (out of the training bar)
-        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
-        RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
+        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
+        RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
     ]
     static let systemEntries: [RootNavEntry] = [
         // trainer's sketch 13/11/2026: «Configuración» (maintenance, server and future settings) in place of «Servidor AVO»
