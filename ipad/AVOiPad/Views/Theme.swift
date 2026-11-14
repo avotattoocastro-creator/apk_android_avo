@@ -112,6 +112,8 @@ struct AvoCard<Content: View>: View {
     var title: String? = nil
     var subtitle: String? = nil
     var padding: CGFloat = 16
+    /// Stretch to the height offered by the row (cards side by side with the same height).
+    var fill: Bool = false
     @ViewBuilder var content: () -> Content
 
     var body: some View {
@@ -125,7 +127,7 @@ struct AvoCard<Content: View>: View {
             content()
         }
         .padding(padding)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: fill ? .infinity : nil, alignment: .topLeading)
         .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
     }

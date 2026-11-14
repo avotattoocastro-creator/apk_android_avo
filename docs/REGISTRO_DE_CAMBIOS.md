@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-8 — Arranque sin entrar solo, Biomecánica a medida igual e Informes desplegable
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Arranque (iPad):** la búsqueda silenciosa de «AVO Horse» ya no abre el último entrenamiento importado ni cambia de
+  página; la app se queda en la portada y solo activa INICIAR. `importFiles(_:restoring:navigate:)` con `navigate: false`
+  desde `loadFromAvoHorse()`.
+- **Biomecánica (iPad):**
+  - la tarjeta del caballo tiene la misma altura que el bloque de cifras;
+  - las cuatro cifras miden lo mismo (dos filas iguales de dos);
+  - «Canales de la cincha» va debajo, con el mismo ancho, y la columna termina a ras de «Índices del motor por sensor».
+  - `AvoCard` admite `fill: true` para estirarse a la altura de la fila.
+- **Informes (iPad):**
+  - sin título de página: la vista previa empieza arriba;
+  - «Opciones del informe» es un desplegable (Ocultar / Desplegar), cerrado por defecto, que indica cuántas secciones van marcadas.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-7 — Todos los recuadros de cifras con el estilo de Datos clave; Cuadra, Configuración y tramo
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**

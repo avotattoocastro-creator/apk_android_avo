@@ -14,8 +14,8 @@ struct ReportsView: View {
         @Bindable var m = model
         GeometryReader { geo in
         ScrollView {
+            // no page title: the preview starts at the top (trainer 14/11/2026)
             VStack(alignment: .leading, spacing: 12) {
-                FeatureSessionHeader()
                 if hSize == .compact {
                     ReportsPreviewCard(model: model).frame(height: 620)
                     ReportsExportCard(model: model)
@@ -211,31 +211,53 @@ private struct ReportsNotesCard: View {
 
 private struct ReportsOptionsCard: View {
     var model: ReportsModel
+    /// Folded by default (trainer 14/11/2026: «Desplegable»).
+    @State private var open: Bool = false
 
     var body: some View {
         @Bindable var m = model
-        AvoCard(title: "Opciones del informe") {
-            VStack(alignment: .leading, spacing: 4) {
-                Toggle("Datos generales", isOn: $m.general)
-                Toggle("Caballo y jinete", isOn: $m.horseRider)
-                Toggle("Fecha y duración", isOn: $m.date)
-                Toggle("Mapa del recorrido", isOn: $m.map)
-                Toggle("Datos GPS", isOn: $m.gnss)
-                Toggle("Velocidades y aceleraciones", isOn: $m.speed)
-                Toggle("Gráficas", isOn: $m.charts)
-                Toggle("Tramos", isOn: $m.segments)
-                Toggle("Biomecánica", isOn: $m.biomech)
-                Toggle("Comparativas (sesiones marcadas)", isOn: $m.compare)
-                Toggle("Mareas y entorno", isOn: $m.tides)
-                Toggle("Análisis IA (asistente y tramos)", isOn: $m.aiSection)
-                Toggle("Notas y observaciones", isOn: $m.notesSection)
+        let flags: [Bool] = [m.general, m.horseRider, m.date, m.map, m.gnss, m.speed, m.charts, m.segments, m.biomech,
+                             m.compare, m.tides, m.aiSection, m.notesSection]
+        AvoCard {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { open.toggle() }
+            } label: {
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("OPCIONES DEL INFORME").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                        Text("\(flags.filter { $0 }.count) de \(flags.count) secciones").font(.caption2).foregroundStyle(Avo.textDim)
+                    }
+                    Spacer()
+                    Text(open ? "Ocultar" : "Desplegar").font(.caption.weight(.semibold)).foregroundStyle(Avo.textDim)
+                    Image(systemName: open ? "chevron.up" : "chevron.down").font(.caption.weight(.semibold)).foregroundStyle(Avo.textDim)
+                }
+                .contentShape(Rectangle())
             }
-            .toggleStyle(.switch)
-            .tint(Avo.red)
-            .font(.callout)
-            .foregroundStyle(Avo.text)
-            Text("Mareas y entorno: solo si se han consultado en la página Mareas para esta sesión.")
-                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("reports.options.toggle")
+            if open {
+                VStack(alignment: .leading, spacing: 4) {
+                    Toggle("Datos generales", isOn: $m.general)
+                    Toggle("Caballo y jinete", isOn: $m.horseRider)
+                    Toggle("Fecha y duración", isOn: $m.date)
+                    Toggle("Mapa del recorrido", isOn: $m.map)
+                    Toggle("Datos GPS", isOn: $m.gnss)
+                    Toggle("Velocidades y aceleraciones", isOn: $m.speed)
+                    Toggle("Gráficas", isOn: $m.charts)
+                    Toggle("Tramos", isOn: $m.segments)
+                    Toggle("Biomecánica", isOn: $m.biomech)
+                    Toggle("Comparativas (sesiones marcadas)", isOn: $m.compare)
+                    Toggle("Mareas y entorno", isOn: $m.tides)
+                    Toggle("Análisis IA (asistente y tramos)", isOn: $m.aiSection)
+                    Toggle("Notas y observaciones", isOn: $m.notesSection)
+                }
+                .toggleStyle(.switch)
+                .tint(Avo.red)
+                .font(.callout)
+                .foregroundStyle(Avo.text)
+                Text("Mareas y entorno: solo si se han consultado en la página Mareas para esta sesión.")
+                    .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }

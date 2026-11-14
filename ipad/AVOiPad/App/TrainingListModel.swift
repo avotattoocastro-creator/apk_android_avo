@@ -742,7 +742,7 @@ final class TrainingListModel {
         let paths: [String] = items.compactMap { $0.status == .pending ? $0.importPath : nil }
         if !paths.isEmpty {
             scanStatus = "Importando \(paths.count) entrenamiento(s) recuperado(s)…"
-            await app.importFiles(paths)
+            await app.importFiles(paths, navigate: !quiet)
         }
         let loaded: Set<String> = Set(app.sessions.compactMap { $0.session.sourcePath.map { TrainingRecovery.canonical($0) } })
         for i in items.indices where items[i].status == .pending {

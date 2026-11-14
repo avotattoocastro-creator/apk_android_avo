@@ -335,7 +335,7 @@ extension AppModel {
     }
 
     @MainActor
-    func importFiles(_ paths: [String], restoring: Bool = false) async {
+    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true) async {
         var seen: Set<String> = []
         var list: [String] = []
         for p in paths where !seen.contains(p.lowercased()) {
@@ -402,7 +402,8 @@ extension AppModel {
         if !imported.isEmpty { stable?.registerImported(imported) }
         if !restoring, let last = lastImported {
             select(last)                                   // what the user just opened
-            if page == .home || page == .sessions { page = .analysis }
+            // The silent launch scan of «AVO Horse» must leave the start screen in place: INICIAR is pressed by the user.
+            if navigate && (page == .home || page == .sessions) { page = .analysis }
         }
         if selected == nil, let newest = AppModel.byDateDescending(sessions).first { select(newest) }
         if bad > 0 && !restoring {
