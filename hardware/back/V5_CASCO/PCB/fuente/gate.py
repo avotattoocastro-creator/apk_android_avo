@@ -138,7 +138,7 @@ L.append("")
 L.append("## Limitaciones pendientes (ver README)")
 for t in ("Línea de 50 Ω de la antena (J5 → R71 0 Ω → RF_IN, ESD D4): microcinta de 0,36 mm calculada para el apilado JLC de 1,6 mm (preimpregnado 0,21 mm sobre In1); confirmar con la calculadora de JLC al pedir.",
           "Antena GNSS plana activa L1/L2 pegada en el centro de la cara B; plano de masa de 51 × 51 (el fabricante afina sobre 70 × 70): medir fix y velocidad.",
-          "Piezas sin código LCSC (ZED-F9P, U.FL, 47 nH, 22 Ω 1206, ESD de RF): buscarlas con stock_jlc.py o suministrarlas aparte (el ZED-F9P suele ir consignado).",
+          "ZED-F9P-04B montado por JLCPCB (C5120257, Extended; 895 uds. y 76,27 US$ el 14/11/2026): comprobar existencias el día del pedido.",
           "Alimentación de la antena: 22 Ω en 1206 (corto del coaxial ≈ 150 mA, ≈ 0,5 W durante el fallo): sin limitador activo ni uso de ANT_SHORT_N.",
           "Firmware: poner GPIO6, GPIO8 y GPIO9 como entradas antes de bajar ZED_EN (el ZED apagado no debe recibir tensión por sus E/S).",
           "Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.",

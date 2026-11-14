@@ -153,10 +153,10 @@ def part(ref, fp, value, pos, rot, nets, lcsc="", mpn="", block="", sym=None, dn
                       no_assembly=no_assembly))
 
 
-# códigos LCSC de la V4 (consultados en el CI el 29/10/2026). Los nuevos (ZED-F9P, U.FL, bobina de 47 nH, condensador
-# de 47 pF C0G) quedan SIN código: se buscan con stock_jlc.py antes del pedido (ver el informe).
+# códigos LCSC consultados en el CI (V4 29/10/2026; V5 14/11/2026, out_stock/stock_jlc.json): ZED-F9P-04B C5120257 (895 uds.,
+# 76,27 US$), U.FL C88373, 47 nH C97998, 22 Ω 1206 C17958 (Basic), ESD de RF PESD0402-140 C10662.
 LC = {
-    "0R": "C17168", "10R": "C25077", "22R": "C25092", "330R": "C25104", "1k": "C11702", "1k5": "C25867", "2k": "C4109",
+    "0R": "C17168", "10R": "C25077", "22R": "C25092", "22R 1206": "C17958", "330R": "C25104", "1k": "C11702", "1k5": "C25867", "2k": "C4109",
     "10k": "C25744", "100k": "C25741", "1M": "C26083",
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "4u7": "C19666",
     "10u": "C96446", "22u": "C45783", "47u": "C16780",
@@ -255,7 +255,7 @@ R("R60", "100k", "ZED_EN", GND, block="ZED", note="ZED apagado mientras arranca 
 zed = {n: GND for n in (1, 3, 12, 14, 32, 37, 41, 48, 55)}
 zed.update({2: "RF_ZED", 7: "VCC_RF", 26: "ZED_RX2", 27: "ZED_TX2_C", 33: VZED, 34: VZED, 36: V3, 38: GND,
             42: "ZED_TX1_C", 43: "ZED_RX1", 49: "ZED_RST", 50: "ZED_SAFEBOOT", 53: "ZED_PPS_C"})
-part("U1", "ZED", "ZED-F9P-01B", (0, 0), 0, zed, "", "ZED-F9P-01B-01 (u-blox)", "ZED",
+part("U1", "ZED", "ZED-F9P-04B", (0, 0), 0, zed, "C5120257", "ZED-F9P-04B (u-blox)", "ZED",
      sym=dict(L=[(2, "RF_IN"), (7, "VCC_RF"), (33, "VCC"), (34, "VCC"), (36, "V_BCKP"), (38, "V_USB"),
                  (49, "RESET_N"), (50, "SAFEBOOT_N"), (53, "TIMEPULSE")],
               R=[(42, "TXD"), (43, "RXD"), (27, "TXD2"), (26, "RXD2")] +
@@ -269,15 +269,15 @@ C("C64", "100n", V3, GND, block="ZED", note="V_BCKP")
 R("R70", "22R 1206", "VCC_RF", "VCC_RF_F", block="ZED", fp="R1206",
   note="revisión independiente: limita un corto del coaxial a ≈ 150 mA (bobina de 300 mA); cae ≈ 0,4 V a 20 mA de LNA")
 C("C71", "10n", "VCC_RF_F", GND, block="ZED")
-part("L70", "L0402", "47 nH", (0, 0), 0, {1: "VCC_RF_F", 2: "RF_ANT"}, "", "LQG15HS47NJ02D (Murata)", "ZED", sym="R",
+part("L70", "L0402", "47 nH", (0, 0), 0, {1: "VCC_RF_F", 2: "RF_ANT"}, "C97998", "LQG15HS47NJ02D (Murata)", "ZED", sym="R",
      note="alimentación de la antena activa por el vivo del coaxial (choque de RF)")
 R("R71", "0R", "RF_ANT", "RF_ZED", block="ZED",
   note="puente de 0 Ω en la línea de 50 Ω (≈ 0,36 mm): la referencia de u-blox (UBX-18010802, fig. 42) pone la bobina "
        "directamente sobre RF_IN; el pad admite un condensador de RF si hiciera falta bloquear la continua")
-part("D4", "C0402", "ESD RF 0,25 pF", (0, 0), 0, {1: "RF_ANT", 2: GND}, "", "PESD0402-140 (TE) o equivalente ≤ 0,3 pF",
+part("D4", "C0402", "ESD RF 0,25 pF", (0, 0), 0, {1: "RF_ANT", 2: GND}, "C10662", "PESD0402-140 (Littelfuse/TE)",
      "ZED", sym=dict(L=[(1, "IO")], R=[(2, "GND")]),
      note="ESD obligatoria en la entrada de RF según el manual de integración del ZED-F9P")
-part("J5", "UFL", "U.FL GNSS", (0, 0), 0, {1: "RF_ANT", 2: GND}, "", "U.FL-R-SMT-1(10) (Hirose)", "ZED",
+part("J5", "UFL", "U.FL GNSS", (0, 0), 0, {1: "RF_ANT", 2: GND}, "C88373", "U.FL-R-SMT-1(10) (Hirose)", "ZED",
      sym=dict(L=[(1, "SIG")], R=[(2, "GND")]), note="cable de la antena plana activa L1/L2 (AHP2258 o similar)")
 R("R50", "1k", "S3_TX1", "ZED_RX1", block="ZED", note="serie: limita la alimentación parásita del ZED apagado")
 R("R51", "1k", "S3_TX2", "ZED_RX2", block="ZED")
