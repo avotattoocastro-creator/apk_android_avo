@@ -1,0 +1,297 @@
+Command line invocation:
+    /Applications/Xcode_16.4.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project AVOiPad.xcodeproj -scheme AVOiPad "-only-testing:AVOiPadTests" -destination "platform=iOS Simulator,name=iPad Pro 13-inch (M4)" -derivedDataPath ../dd -resultBundlePath ../unit.xcresult
+
+2026-11-14 21:41:57.655 xcodebuild[15334:45840] warning:  The file reference for "../firmware/back/V3_8_0/lib/avo_core/src" is a member of multiple groups ("avo_core" and "AvoCoreFirmware"); this indicates a malformed project.  Only the membership in one of the groups will be preserved (but membership in targets will be unaffected).  If you want a reference to the same file in more than one group, please add another reference to the same path.
+2026-11-14 21:41:57.656 xcodebuild[15334:45840] warning:  The file reference for "../equine-intelligence/src" is a member of multiple groups ("equine-intelligence" and "EquineEngine"); this indicates a malformed project.  Only the membership in one of the groups will be preserved (but membership in targets will be unaffected).  If you want a reference to the same file in more than one group, please add another reference to the same path.
+Writing result bundle at path:
+	/Users/runner/work/apk_android_avo/apk_android_avo/unit.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:04A9C222-F4D9-4FD4-98BE-4054EEE6F66B, OS:26.2, name:iPad Pro 13-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:04A9C222-F4D9-4FD4-98BE-4054EEE6F66B, OS:26.2, name:iPad Pro 13-inch (M4) }
+2026-11-14 21:46:09.481442+0000 AVO Horse[22315:65569] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-11-14 21:46:09.659408+0000 AVO Horse[22315:65567] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'All tests' started at 2026-11-14 21:46:13.629.
+Test Suite 'AVOiPadTests.xctest' started at 2026-11-14 21:46:13.630.
+Test Suite 'AnalysisAndReportsTests' started at 2026-11-14 21:46:13.630.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testAlignment]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testAlignment]' passed (0.015 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDemoSessions]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDemoSessions]' passed (2.958 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDotNetFormatting]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDotNetFormatting]' passed (0.031 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDownsampling]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testDownsampling]' passed (0.073 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testExports]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testExports]' passed (1.234 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testGeometry]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testGeometry]' passed (0.004 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testImuBno085Units]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testImuBno085Units]' passed (0.004 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testImuNominalScaleAndNames]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testImuNominalScaleAndNames]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testSegmentsAndStore]' started.
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testSegmentsAndStore]' passed (0.067 seconds).
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testTimelineAndFilter]' started.
+2026-11-14 21:46:21.836519+0000 AVO Horse[22315:65616] [Client] XPC connection interrupted
+Test Case '-[AVOiPadTests.AnalysisAndReportsTests testTimelineAndFilter]' passed (5.715 seconds).
+Test Suite 'AnalysisAndReportsTests' passed at 2026-11-14 21:46:23.735.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 10.100 (10.106) seconds
+Test Suite 'AssignmentTests' started at 2026-11-14 21:46:23.736.
+Test Case '-[AVOiPadTests.AssignmentTests testDownloadPackageCarriesTheWatchIdentity]' started.
+Test Case '-[AVOiPadTests.AssignmentTests testDownloadPackageCarriesTheWatchIdentity]' passed (0.035 seconds).
+Test Case '-[AVOiPadTests.AssignmentTests testEngineOption]' started.
+Test Case '-[AVOiPadTests.AssignmentTests testEngineOption]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.AssignmentTests testLibraryKeepsTheOldHashAndStableAdoptsNewerAssignments]' started.
+Test Case '-[AVOiPadTests.AssignmentTests testLibraryKeepsTheOldHashAndStableAdoptsNewerAssignments]' passed (0.537 seconds).
+Test Case '-[AVOiPadTests.AssignmentTests testRewriteKeepsTheRawAndWinsOnImport]' started.
+Test Case '-[AVOiPadTests.AssignmentTests testRewriteKeepsTheRawAndWinsOnImport]' passed (0.603 seconds).
+Test Suite 'AssignmentTests' passed at 2026-11-14 21:46:24.914.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 1.177 (1.178) seconds
+Test Suite 'AssistantTests' started at 2026-11-14 21:46:24.914.
+Test Case '-[AVOiPadTests.AssistantTests testCompactDropsSeriesAndSummarisesLongLists]' started.
+Test Case '-[AVOiPadTests.AssistantTests testCompactDropsSeriesAndSummarisesLongLists]' passed (0.013 seconds).
+Test Case '-[AVOiPadTests.AssistantTests testCostEstimate]' started.
+Test Case '-[AVOiPadTests.AssistantTests testCostEstimate]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.AssistantTests testErrorMessages]' started.
+Test Case '-[AVOiPadTests.AssistantTests testErrorMessages]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.AssistantTests testInvalidJsonGivesEmptyText]' started.
+Test Case '-[AVOiPadTests.AssistantTests testInvalidJsonGivesEmptyText]' passed (0.000 seconds).
+Test Case '-[AVOiPadTests.AssistantTests testKeyShape]' started.
+Test Case '-[AVOiPadTests.AssistantTests testKeyShape]' passed (0.000 seconds).
+Test Case '-[AVOiPadTests.AssistantTests testStreamUsageMerge]' started.
+Test Case '-[AVOiPadTests.AssistantTests testStreamUsageMerge]' passed (0.000 seconds).
+Test Suite 'AssistantTests' passed at 2026-11-14 21:46:25.792.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.015 (0.878) seconds
+Test Suite 'BleDownloadTests' started at 2026-11-14 21:46:25.792.
+Test Case '-[AVOiPadTests.BleDownloadTests testCodecsChunkSizeAndGuardReset]' started.
+2026-11-14 21:46:25.909689+0000 AVO Horse[22315:65567] [WIFI] el reloj se reinició al activar el Wi-Fi (arranque 42 → 43): Wi-Fi desactivado para 3.7.6
+Test Case '-[AVOiPadTests.BleDownloadTests testCodecsChunkSizeAndGuardReset]' passed (0.015 seconds).
+Test Case '-[AVOiPadTests.BleDownloadTests testFullDownloadWithShaMatch]' started.
+Test Case '-[AVOiPadTests.BleDownloadTests testFullDownloadWithShaMatch]' passed (0.109 seconds).
+Test Case '-[AVOiPadTests.BleDownloadTests testPassPackagesAndImportsLikeWifi]' started.
+Test Case '-[AVOiPadTests.BleDownloadTests testPassPackagesAndImportsLikeWifi]' passed (0.039 seconds).
+Test Case '-[AVOiPadTests.BleDownloadTests testRefusedWhileRecording]' started.
+Test Case '-[AVOiPadTests.BleDownloadTests testRefusedWhileRecording]' passed (0.040 seconds).
+Test Case '-[AVOiPadTests.BleDownloadTests testResumeAfterCutMidSegment]' started.
+Test Case '-[AVOiPadTests.BleDownloadTests testResumeAfterCutMidSegment]' passed (0.036 seconds).
+Test Case '-[AVOiPadTests.BleDownloadTests testShaMismatchRejected]' started.
+Test Case '-[AVOiPadTests.BleDownloadTests testShaMismatchRejected]' passed (0.017 seconds).
+Test Suite 'BleDownloadTests' passed at 2026-11-14 21:46:26.156.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.257 (0.364) seconds
+Test Suite 'ImportAndServicesTests' started at 2026-11-14 21:46:32.179.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testDemoSessions]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testDemoSessions]' passed (46.721 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testEquineEngine]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testEquineEngine]' passed (3.342 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testImporterSecurity]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testImporterSecurity]' passed (2.727 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testLibrary]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testLibrary]' passed (0.036 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawAvoExportsAndMarine]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawAvoExportsAndMarine]' passed (0.035 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawImuBno085Units]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawImuBno085Units]' passed (0.003 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawImuDecoding]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testRawImuDecoding]' passed (0.005 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testServerAndNetwork]' started.
+2026-11-14 21:47:25.118862+0000 AVO Horse[22315:65568] [Default] Task <CD0C93DA-1D92-4448-9964-966351F299AB>.<1> finished with error [-1009] Error Domain=NSURLErrorDomain Code=-1009 "(null)" UserInfo={_NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <CD0C93DA-1D92-4448-9964-966351F299AB>.<1>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <CD0C93DA-1D92-4448-9964-966351F299AB>.<1>}
+Test Case '-[AVOiPadTests.ImportAndServicesTests testServerAndNetwork]' passed (0.086 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testTidesWeatherAndTime]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testTidesWeatherAndTime]' passed (0.008 seconds).
+Test Case '-[AVOiPadTests.ImportAndServicesTests testZipReaderCrcAndBounds]' started.
+Test Case '-[AVOiPadTests.ImportAndServicesTests testZipReaderCrcAndBounds]' passed (0.023 seconds).
+Test Suite 'ImportAndServicesTests' passed at 2026-11-14 21:47:25.169.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 52.986 (52.990) seconds
+Test Suite 'KeyDataTests' started at 2026-11-14 21:47:25.170.
+Test Case '-[AVOiPadTests.KeyDataTests testBestWindowsReferenceStrideAndSplits]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testBestWindowsReferenceStrideAndSplits]' passed (0.006 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarGridStartsOnMonday]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarGridStartsOnMonday]' passed (0.003 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarSummary]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarSummary]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarWeek]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testCalendarWeek]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testDashboardSummary]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testDashboardSummary]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testKeyDataFromEngineJson]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testKeyDataFromEngineJson]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.KeyDataTests testSessionNavigator]' started.
+Test Case '-[AVOiPadTests.KeyDataTests testSessionNavigator]' passed (0.002 seconds).
+Test Suite 'KeyDataTests' passed at 2026-11-14 21:47:25.191.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.016 (0.021) seconds
+Test Suite 'RaceParserTests' started at 2026-11-14 21:47:25.191.
+Test Case '-[AVOiPadTests.RaceParserTests testAnalysisWithoutTrainings]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testAnalysisWithoutTrainings]' passed (0.137 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testCodableRoundTrip]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testCodableRoundTrip]' passed (0.091 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testCounterfactualWithTrainingsGainsPositions]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testCounterfactualWithTrainingsGainsPositions]' passed (0.075 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testDumpPdfKitText]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testDumpPdfKitText]' passed (0.055 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testEveryRunnerConsistent]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testEveryRunnerConsistent]' passed (0.073 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testHorseMatching]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testHorseMatching]' passed (0.076 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testParsesHeaderAndRunners]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testParsesHeaderAndRunners]' passed (0.074 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testParsesPdfKitTextOrder]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testParsesPdfKitTextOrder]' passed (0.040 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testParsesZakynaSectors]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testParsesZakynaSectors]' passed (0.067 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testRejectsOtherPdfText]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testRejectsOtherPdfText]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.RaceParserTests testTrainingWorkAnalyzer]' started.
+Test Case '-[AVOiPadTests.RaceParserTests testTrainingWorkAnalyzer]' passed (0.003 seconds).
+Test Suite 'RaceParserTests' passed at 2026-11-14 21:47:25.884.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.690 (0.693) seconds
+Test Suite 'RacingBreedTests' started at 2026-11-14 21:47:25.884.
+Test Case '-[AVOiPadTests.RacingBreedTests testEngineProfiles]' started.
+Test Case '-[AVOiPadTests.RacingBreedTests testEngineProfiles]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.RacingBreedTests testEveryListedBreedHasAProfileText]' started.
+Test Case '-[AVOiPadTests.RacingBreedTests testEveryListedBreedHasAProfileText]' passed (0.002 seconds).
+Test Suite 'RacingBreedTests' passed at 2026-11-14 21:47:25.889.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.004 (0.005) seconds
+Test Suite 'SmokeTests' started at 2026-11-14 21:47:25.890.
+Test Case '-[AVOiPadTests.SmokeTests testDemoBundled]' started.
+Test Case '-[AVOiPadTests.SmokeTests testDemoBundled]' passed (0.009 seconds).
+Test Case '-[AVOiPadTests.SmokeTests testEngineLinked]' started.
+Test Case '-[AVOiPadTests.SmokeTests testEngineLinked]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.SmokeTests testHaversine]' started.
+Test Case '-[AVOiPadTests.SmokeTests testHaversine]' passed (0.001 seconds).
+Test Suite 'SmokeTests' passed at 2026-11-14 21:47:25.901.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.011 (0.012) seconds
+Test Suite 'StableTests' started at 2026-11-14 21:47:25.901.
+Test Case '-[AVOiPadTests.StableTests testIdentityUri]' started.
+Test Case '-[AVOiPadTests.StableTests testIdentityUri]' passed (0.005 seconds).
+Test Case '-[AVOiPadTests.StableTests testNdefCodec]' started.
+Test Case '-[AVOiPadTests.StableTests testNdefCodec]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.StableTests testStore]' started.
+Test Case '-[AVOiPadTests.StableTests testStore]' passed (0.048 seconds).
+Test Case '-[AVOiPadTests.StableTests testWindowsCuadraJsonInterchange]' started.
+Test Case '-[AVOiPadTests.StableTests testWindowsCuadraJsonInterchange]' passed (0.011 seconds).
+Test Suite 'StableTests' passed at 2026-11-14 21:47:25.970.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.067 (0.068) seconds
+Test Suite 'TrackWorkTests' started at 2026-11-14 21:47:25.970.
+Test Case '-[AVOiPadTests.TrackWorkTests testEngineDemoSessionPsi]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testEngineDemoSessionPsi]' passed (25.615 seconds).
+Test Case '-[AVOiPadTests.TrackWorkTests testParseCourseWithLines]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testParseCourseWithLines]' passed (0.015 seconds).
+Test Case '-[AVOiPadTests.TrackWorkTests testParseFullBlockWithGirth]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testParseFullBlockWithGirth]' passed (0.005 seconds).
+Test Case '-[AVOiPadTests.TrackWorkTests testSpeedOverDistance]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testSpeedOverDistance]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.TrackWorkTests testTolerantDecoding]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testTolerantDecoding]' passed (0.005 seconds).
+Test Case '-[AVOiPadTests.TrackWorkTests testTrainingVsRaceSectorAlignment]' started.
+Test Case '-[AVOiPadTests.TrackWorkTests testTrainingVsRaceSectorAlignment]' passed (0.010 seconds).
+Test Suite 'TrackWorkTests' passed at 2026-11-14 21:47:51.626.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 25.651 (25.656) seconds
+Test Suite 'TrainingAnalyticsTests' started at 2026-11-14 21:47:51.626.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testBaselineNeedsFourSessionsAndZFlags]' started.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testBaselineNeedsFourSessionsAndZFlags]' passed (0.025 seconds).
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testRatingStoreRoundTripAndTolerantDecoding]' started.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testRatingStoreRoundTripAndTolerantDecoding]' passed (0.026 seconds).
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testSteadyLoadComputesAcwr]' started.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testSteadyLoadComputesAcwr]' passed (0.044 seconds).
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testSummaryWrapperAndErrors]' started.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testSummaryWrapperAndErrors]' passed (0.006 seconds).
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testTrainerRatingAndSrpe]' started.
+Test Case '-[AVOiPadTests.TrainingAnalyticsTests testTrainerRatingAndSrpe]' passed (0.008 seconds).
+Test Suite 'TrainingAnalyticsTests' passed at 2026-11-14 21:47:51.789.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.109 (0.162) seconds
+Test Suite 'TrainingListTests' started at 2026-11-14 21:47:51.789.
+Test Case '-[AVOiPadTests.TrainingListTests testCircleUsesHaversineRadius]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testCircleUsesHaversineRadius]' passed (0.008 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testCopyToInboxForExternalFolders]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testCopyToInboxForExternalFolders]' passed (0.013 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testDeleteTrainingRemovesItAndRemembersIt]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testDeleteTrainingRemovesItAndRemembersIt]' passed (0.337 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testFilterLogic]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testFilterLogic]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testFilterRoundTripsAsJson]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testFilterRoundTripsAsJson]' passed (0.004 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testPointInPolygon]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testPointInPolygon]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testScanFindsTrainingsAndSkipsDuplicates]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testScanFindsTrainingsAndSkipsDuplicates]' passed (0.023 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testScanLimitsDepthAndFileCount]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testScanLimitsDepthAndFileCount]' passed (0.010 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testSnapshotKeepsOnlyDefinedFences]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testSnapshotKeepsOnlyDefinedFences]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testSummary]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testSummary]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.TrainingListTests testVisitedFencesOfATrack]' started.
+Test Case '-[AVOiPadTests.TrainingListTests testVisitedFencesOfATrack]' passed (0.001 seconds).
+Test Suite 'TrainingListTests' passed at 2026-11-14 21:47:52.190.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.399 (0.401) seconds
+Test Suite 'WatchTests' started at 2026-11-14 21:47:52.190.
+Test Case '-[AVOiPadTests.WatchTests testEndToEnd]' started.
+Test Case '-[AVOiPadTests.WatchTests testEndToEnd]' passed (0.049 seconds).
+Test Case '-[AVOiPadTests.WatchTests testFramingAndReassembly]' started.
+Test Case '-[AVOiPadTests.WatchTests testFramingAndReassembly]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.WatchTests testLines]' started.
+Test Case '-[AVOiPadTests.WatchTests testLines]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WatchTests testPlan]' started.
+Test Case '-[AVOiPadTests.WatchTests testPlan]' passed (0.009 seconds).
+Test Case '-[AVOiPadTests.WatchTests testPlanReadsWindowsJson]' started.
+Test Case '-[AVOiPadTests.WatchTests testPlanReadsWindowsJson]' passed (0.002 seconds).
+Test Case '-[AVOiPadTests.WatchTests testVectors]' started.
+Test Case '-[AVOiPadTests.WatchTests testVectors]' passed (0.021 seconds).
+Test Case '-[AVOiPadTests.WatchTests testWifiSyncOverBle]' started.
+Test Case '-[AVOiPadTests.WatchTests testWifiSyncOverBle]' passed (0.010 seconds).
+Test Suite 'WatchTests' passed at 2026-11-14 21:47:52.286.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.093 (0.095) seconds
+Test Suite 'WifiSyncTests' started at 2026-11-14 21:47:52.286.
+Test Case '-[AVOiPadTests.WifiSyncTests testCancelWhileConnecting]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testCancelWhileConnecting]' passed (0.062 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testCredentialsDecodeAndNoSecretsInDescription]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testCredentialsDecodeAndNoSecretsInDescription]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testDuplicateAlreadyVerifiedNotDownloadedAgain]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testDuplicateAlreadyVerifiedNotDownloadedAgain]' passed (0.050 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testEtagChangeDiscardsAndRepeats]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testEtagChangeDiscardsAndRepeats]' passed (0.303 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testJsonParsing]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testJsonParsing]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testNoMicroSdAndLowBattery]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testNoMicroSdAndLowBattery]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testRebootInvalidatesToken]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testRebootInvalidatesToken]' passed (0.062 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testRecordingDuringDownloadStops]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testRecordingDuringDownloadStops]' passed (0.141 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testRecordingNeverStartsWifi]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testRecordingNeverStartsWifi]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testRestartResumesFromDisk]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testRestartResumesFromDisk]' passed (0.192 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testResumeAfterCut]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testResumeAfterCut]' passed (0.498 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testSeveralSegmentsWithOneActivation]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testSeveralSegmentsWithOneActivation]' passed (0.091 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testShaMismatchRejected]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testShaMismatchRejected]' passed (0.014 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testSmallFile]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testSmallFile]' passed (0.004 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testSyncAvailableListsClosedTrainings]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testSyncAvailableListsClosedTrainings]' passed (0.017 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testUnsupportedOrNotJoinedFallsBack]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testUnsupportedOrNotJoinedFallsBack]' passed (0.001 seconds).
+Test Case '-[AVOiPadTests.WifiSyncTests testUrlWatchHttpRequestsAndStatus]' started.
+Test Case '-[AVOiPadTests.WifiSyncTests testUrlWatchHttpRequestsAndStatus]' passed (0.001 seconds).
+Test Suite 'WifiSyncTests' passed at 2026-11-14 21:47:53.730.
+	 Executed 17 tests, with 0 failures (0 unexpected) in 1.440 (1.444) seconds
+Test Suite 'AVOiPadTests.xctest' passed at 2026-11-14 21:47:53.730.
+	 Executed 109 tests, with 0 failures (0 unexpected) in 93.015 (100.101) seconds
+Test Suite 'All tests' passed at 2026-11-14 21:47:53.730.
+	 Executed 109 tests, with 0 failures (0 unexpected) in 93.015 (100.102) seconds
+2026-11-14 21:47:54.911 xcodebuild[15334:45840] [MT] IDETestOperationsObserverDebug: 356.243 elapsed -- Testing started completed.
+2026-11-14 21:47:54.911 xcodebuild[15334:45840] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-14 21:47:54.911 xcodebuild[15334:45840] [MT] IDETestOperationsObserverDebug: 356.244 sec, +356.244 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/apk_android_avo/apk_android_avo/unit.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
