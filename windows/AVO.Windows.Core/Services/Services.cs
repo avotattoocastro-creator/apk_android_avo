@@ -137,6 +137,8 @@ public sealed class TrainingLibrary
             }
             Directory.CreateDirectory(_paths.Library);
             string stored = Path.Combine(_paths.Library, sha + Path.GetExtension(path).ToLowerInvariant());
+            // a stored copy with this name but other content (half-written copy) is replaced, not blamed on the good file
+            if (File.Exists(stored) && FileSha256(stored) != sha) File.Delete(stored);
             if (!File.Exists(stored)) { File.Copy(path, stored, false); created = stored; }
             if (FileSha256(stored) != sha) throw new IOException("La copia de la biblioteca no coincide con el original");
             var session = TrainingImporter.Import(stored);

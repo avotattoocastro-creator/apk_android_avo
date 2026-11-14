@@ -280,6 +280,11 @@ final class TrainingLibrary {
             try FileManager.default.createDirectory(atPath: paths.library, withIntermediateDirectories: true)
             let ext = (path as NSString).pathExtension.lowercased()
             let stored = AvoFiles.join(paths.library, ext.isEmpty ? sha : sha + "." + ext)
+            // A stored copy with this name but other content (e.g. a copy left half-written) is replaced by a good one
+            // instead of rejecting the good file (trainer 15/11/2026: «La copia de la biblioteca no coincide con el original»).
+            if AvoFiles.exists(stored), (try? TrainingLibrary.fileSha256(stored)) != sha {
+                try? FileManager.default.removeItem(atPath: stored)
+            }
             if !AvoFiles.exists(stored) {
                 try FileManager.default.copyItem(atPath: path, toPath: stored)
                 created = stored

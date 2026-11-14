@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — AVO-SHELL-31 — Biblioteca: una copia mala ya no hace rechazar el archivo bueno
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** si en la biblioteca de la app ya había una copia con el mismo nombre (la huella SHA-256 del archivo) pero con
+otro contenido, por ejemplo una copia que quedó a medias, no se reemplazaba. El archivo bueno se rechazaba con «La copia de la
+biblioteca no coincide con el original» (visto en «MALWINA_BELLA 2.avo» y «BELLA_AL_SHAHANIA 2.avo»).
+**Qué cambia (iPad y Windows, por igual):** la copia mala se borra y se vuelve a copiar el original. Si después la copia sigue
+sin coincidir, se rechaza como antes. El archivo original nunca se toca.
+**No se ha tocado:** el motor, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-30 — El arranque no interrumpe con archivos de AVO Horse que no se pueden leer
 **Autor:** Claude · Rama `feature/avo-equine-2-0`
 **Qué pasaba:** la búsqueda automática de «AVO Horse» al arrancar intentaba importar en cada arranque los mismos archivos
