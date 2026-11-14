@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-10 — Informes: opciones arriba y Exportar a todo el ancho
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- La columna derecha de Informes lleva, de arriba abajo, «Opciones del informe» (desplegable), «Exportar» y «Notas», todas
+  al ancho completo de la columna. La vista previa ocupa la mitad izquierda.
+- En Exportar, los botones van en tres columnas, todos del mismo alto y en una sola línea («Informe PDF» y «Compartir
+  último» ya no se cortan).
+- «Último:» muestra solo el nombre del archivo, no la ruta interna.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-9 — Botones de ficha a igual alto, Biomecánica en 4 bloques iguales e informe con cifras estilo Datos clave
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**

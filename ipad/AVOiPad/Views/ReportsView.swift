@@ -22,27 +22,22 @@ struct ReportsView: View {
                     ReportsNotesCard(model: model)
                     ReportsOptionsCard(model: model)
                 } else if geo.size.width < 1100 {
-                    // iPad in portrait or Split View: preview on top, controls in two columns below
+                    // iPad in portrait or Split View: preview on top, then the controls one under another at full width
                     ReportsPreviewCard(model: model).frame(height: 640)
-                    HStack(alignment: .top, spacing: 12) {
+                    ReportsOptionsCard(model: model)
+                    ReportsExportCard(model: model)
+                    ReportsNotesCard(model: model)
+                } else {
+                    // trainer 14/11/2026: «Opciones del informe» on top and «Exportar» under it using the whole width of
+                    // the right column (no narrow column with cut labels)
+                    HStack(alignment: .top, spacing: 14) {
+                        ReportsPreviewCard(model: model).frame(width: max(380, (geo.size.width - 46) * 0.5)).frame(height: 760)
                         VStack(spacing: 12) {
+                            ReportsOptionsCard(model: model)
                             ReportsExportCard(model: model)
                             ReportsNotesCard(model: model)
                         }
-                        ReportsOptionsCard(model: model).frame(width: 300)
-                    }
-                } else {
-                    HStack(alignment: .top, spacing: 14) {
-                        ReportsPreviewCard(model: model).frame(minWidth: 380, idealWidth: 460).frame(height: 760)
-                        VStack(spacing: 12) {
-                            HStack(alignment: .top, spacing: 12) {
-                                VStack(spacing: 12) {
-                                    ReportsExportCard(model: model)
-                                    ReportsNotesCard(model: model)
-                                }
-                                ReportsOptionsCard(model: model).frame(width: 270)
-                            }
-                        }
+                        .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -124,7 +119,7 @@ private struct ReportsExportCard: View {
     @Environment(AppModel.self) private var app
     var model: ReportsModel
 
-    private let columns: [GridItem] = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+    private let columns: [GridItem] = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
 
     var body: some View {
         AvoCard(title: "Exportar") {
@@ -134,7 +129,8 @@ private struct ReportsExportCard: View {
                 }
                 if let last = model.lastExport {
                     ShareLink(item: last.url) {
-                        Label("Compartir último", systemImage: "square.and.arrow.up").frame(maxWidth: .infinity)
+                        Label("Compartir último", systemImage: "square.and.arrow.up").lineLimit(1).minimumScaleFactor(0.7)
+                            .frame(maxWidth: .infinity).frame(height: 30)
                     }
                     .buttonStyle(.avoSecondary)
                     .accessibilityIdentifier("reports.shareLast")
@@ -145,7 +141,7 @@ private struct ReportsExportCard: View {
                 HStack(spacing: 8) { ProgressView(); Text("Exportando…").font(.caption).foregroundStyle(Avo.textDim) }
             }
             if let last = model.lastExport {
-                Text("Último: \(last.url.path)").font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                Text("Último: \(last.url.lastPathComponent)").lineLimit(1).truncationMode(.middle).font(.caption).foregroundStyle(Avo.textDim)
             }
             Text("CSV y GPX exportan el intervalo seleccionado si hay uno; si no, la sesión completa. El PDF se genera internamente (sin dependencias externas).")
                 .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
@@ -167,7 +163,7 @@ private struct ReportsExportCard: View {
 
     @ViewBuilder
     private func exportButton(_ k: ReportExportKind) -> some View {
-        let label = Label(k.title, systemImage: k.icon).lineLimit(1).minimumScaleFactor(0.7).frame(maxWidth: .infinity)
+        let label = Label(k.title, systemImage: k.icon).lineLimit(1).minimumScaleFactor(0.7).frame(maxWidth: .infinity).frame(height: 30)
         if k == .pdf {
             Button { Task { await model.export(k) } } label: { label }
                 .buttonStyle(.avoPrimary)
