@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-30 — El arranque no interrumpe con archivos de AVO Horse que no se pueden leer
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** la búsqueda automática de «AVO Horse» al arrancar intentaba importar en cada arranque los mismos archivos
+que no se pueden leer, y sacaba en la portada el aviso «2 archivo(s) rechazados».
+**Qué cambia (iPad):**
+- La búsqueda del arranque ya no muestra ese aviso. El resumen queda en la barra de estado, con el número de archivos no
+  legibles, y el motivo de cada uno sigue en «Estado de importaciones».
+- Recuerda los archivos que fallaron (ruta, tamaño y fecha) y no los vuelve a intentar al arrancar. Si el archivo cambia,
+  se reintenta.
+- La importación manual («Abrir», «Buscar entrenamientos») sigue avisando como antes.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-ENGINE-2.0-F2a — Trabajo completo bien detectado; selección movible; % de la espalda
 **Autor:** Claude · Rama `feature/avo-equine-2-0`
 **Por qué (boceto del entrenador):** «No detecta bien el trabajo; es esencial que se detecten bien las zonas». Antes, el

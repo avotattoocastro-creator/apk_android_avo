@@ -341,7 +341,7 @@ extension AppModel {
     }
 
     @MainActor
-    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true) async {
+    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true, alertOnReject: Bool = true) async {
         var seen: Set<String> = []
         var list: [String] = []
         for p in paths where !seen.contains(p.lowercased()) {
@@ -412,7 +412,7 @@ extension AppModel {
             if navigate && (page == .home || page == .sessions) { page = .analysis }
         }
         if selected == nil, let newest = AppModel.byDateDescending(sessions).first { select(newest) }
-        if bad > 0 && !restoring {
+        if bad > 0 && !restoring && alertOnReject {
             show("Importación", "\(bad) archivo(s) rechazados. Consulta «Estado de importaciones» en Entrenamientos.", error: true)
         }
     }
