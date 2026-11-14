@@ -1,0 +1,918 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 6242292,
+     "componentLibraryType": "expand",
+     "stockCount": 110445,
+     "componentTypeEn": "RGB LEDs(Built-in IC)",
+     "erpComponentName": "4.0x2.0x1.6\u6beb\u7c730.2W\u667a\u80fd\u5916\u63a7\u8868\u9762\u8d34\u88c5SMD\u578b\u4fa7\u9762\u53d1\u5149LED",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rgb-leds-built-in-ic_opsco-optoelectronics-sk6812side-a_C5378721.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1123
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0904
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.0794
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.065
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.0583
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.055
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.0626
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.0765
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1082
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.087
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.0562
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.053
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "1361bbe118274c259ecd7c07d0d5dcb2",
+     "canPresaleNumber": 103824,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "OPSCOOptoelectronics-SK6812SIDEA/C5378721",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 0.28,
+     "preMinPurchaseNum": 100,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1123,
+     "componentCode": "C5378721",
+     "componentBrandEn": "OPSCO Optoelectronics",
+     "componentModelEn": "SK6812SIDE-A",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585194486033231872-C5378721/C5378721-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a3ad3a851a1d7741616cb900239459678a060632193811298d47149b3e9f260c",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303300930_OPSCO-Optoelectronics-SK6812SIDE-A_C5378721.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757965806388944896-C5378721.pdf?response-content-disposition=attachment%3B%20filename%3DC5378721.pdf%3B%20filename%2A%3DUTF-8%27%27C5378721.pdf&x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a14ed77723e55f5e3e6184052f7f3f04efc6c4fb30b302ca958a25de1986492c",
+     "dataManualOfficialLink": "",
+     "componentName": "OPSCO Optoelectronics SK6812SIDE-A",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585194486976139264-C5378721/C5378721-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a7ce979f03a830ad2c4d2bd86d03c526332185d978331cb9608198ce8cda7eb3",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD-4P,4x1.6mm",
+     "describe": "-40\u2103~+85\u2103 0.6mA 1.6mm 120\u00b0 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 460nm~470nm 4mm 520nm~535nm 620nm~625nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit Translucent Frosted Lens SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - B",
+       "attribute_value_name": "160mcd~320mcd"
+      },
+      {
+       "attribute_name_en": "ESD Withstand Voltage",
+       "attribute_value_name": "2000V"
+      },
+      {
+       "attribute_name_en": "Viewing Angle",
+       "attribute_value_name": "120\u00b0"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - B",
+       "attribute_value_name": "460nm~470nm"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - G",
+       "attribute_value_name": "697.5mcd~1162.5mcd"
+      },
+      {
+       "attribute_name_en": "Fixed-Frequency Pwm Mode",
+       "attribute_value_name": "1kHz"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - R",
+       "attribute_value_name": "240mcd~450mcd"
+      },
+      {
+       "attribute_name_en": "Data Transmission Rate",
+       "attribute_value_name": "800Kbit/s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "4mm"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - G",
+       "attribute_value_name": "520nm~535nm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.7V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "0.6mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in power-on reset circuit"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - R",
+       "attribute_value_name": "620nm~625nm"
+      },
+      {
+       "attribute_name_en": "Lens Color",
+       "attribute_value_name": "Translucent Frosted Lens"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "RGB LEDs(Built-in IC)",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SK6812SIDE-A</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3467230,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "SK6812SIDE-A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0003
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0002
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-SK6812SIDEA/C9900013558",
+     "leastPatchNumber": 10,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.001,
+     "preMinPurchaseNum": 1000,
+     "minPurchaseNum": 1000,
+     "initialPrice": 0.0003,
+     "componentCode": "C9900013558",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "SK6812SIDE-A",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT SK6812SIDE-A",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LED-SMD",
+     "describe": "LED-SMD SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SK6812SIDE-A</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6242308,
+     "componentLibraryType": "expand",
+     "stockCount": 19956,
+     "componentTypeEn": "RGB LEDs(Built-in IC)",
+     "erpComponentName": "\u667a\u80fd\u5916\u63a7\u8868\u9762\u8d34\u88c5SMD\u578b\u4fa7\u9762\u53d1\u5149LED",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rgb-leds-built-in-ic_opsco-optoelectronics-sk6812side-a-s_C5378737.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.072
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0563
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 1499,
+       "productPrice": 0.0485
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 4499,
+       "productPrice": 0.0447
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": 10499,
+       "productPrice": 0.0401
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0377
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1500,
+       "endNumber": 4499,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0694
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": 10499,
+       "productPrice": 0.0387
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0543
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0363
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 1499,
+       "productPrice": 0.0467
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "1361bbe118274c259ecd7c07d0d5dcb2",
+     "canPresaleNumber": 16661,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "OPSCOOptoelectronics-SK6812SIDE_AS/C5378737",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 0.2,
+     "preMinPurchaseNum": 161,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.072,
+     "componentCode": "C5378737",
+     "componentBrandEn": "OPSCO Optoelectronics",
+     "componentModelEn": "SK6812SIDE-A-S",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585841013802356736-C5378737/C5378737-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bb90c5e0932a4d763e388cf6f4259460d75ed85cea2c1331aef5e8ce1a3f00d6",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303300930_OPSCO-Optoelectronics-SK6812SIDE-A-S_C5378737.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757966073096888320-C5378737.pdf?response-content-disposition=attachment%3B%20filename%3DC5378737.pdf%3B%20filename%2A%3DUTF-8%27%27C5378737.pdf&x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=91b07494ad9a19d98cf6e2dfd19b507496ecf9d0042ef52224398b113a145452",
+     "dataManualOfficialLink": "",
+     "componentName": "OPSCO Optoelectronics SK6812SIDE-A-S",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585841014803714048-C5378737/C5378737-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=87d94b0ce27a87d83fbb550988b9f54f7dc1d8ae080f03a139239c956359d88d",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD-4P,4x1.6mm",
+     "describe": "-40\u2103~+85\u2103 0.35mA 1.6mm 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 465nm~470nm 4mm 525nm~530nm 620nm~625nm 800Kbit/s 815mcd~1275mcd Built-in power-on reset circuit\u3001Built-in power-on reset circuit SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - B",
+       "attribute_value_name": "160mcd~320mcd"
+      },
+      {
+       "attribute_name_en": "ESD Withstand Voltage",
+       "attribute_value_name": "2000V"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - B",
+       "attribute_value_name": "465nm~470nm"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - G",
+       "attribute_value_name": "815mcd~1275mcd"
+      },
+      {
+       "attribute_name_en": "Fixed-Frequency Pwm Mode",
+       "attribute_value_name": "1kHz"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - R",
+       "attribute_value_name": "240mcd~450mcd"
+      },
+      {
+       "attribute_name_en": "Data Transmission Rate",
+       "attribute_value_name": "800Kbit/s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "4mm"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - G",
+       "attribute_value_name": "525nm~530nm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.7V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "0.35mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in power-on reset circuit\u3001Built-in power-on reset circuit"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - R",
+       "attribute_value_name": "620nm~625nm"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "RGB LEDs(Built-in IC)",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SK6812SIDE-A</span>-S",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3113216,
+     "componentLibraryType": "expand",
+     "stockCount": 56212,
+     "componentTypeEn": "RGB LEDs(Built-in IC)",
+     "erpComponentName": "RGB\u4e09\u8272",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rgb-leds-built-in-ic_opsco-optoelectronics-sk6812side-a-rvs_C2890037.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1061
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.084
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.073
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.0706
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.064
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.0606
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 150,
+       "endNumber": 1499,
+       "productPrice": 0.0703
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0809
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1022
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": -1,
+       "productPrice": 0.0584
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 4499,
+       "productPrice": 0.0617
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 2999,
+       "productPrice": 0.068
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "1361bbe118274c259ecd7c07d0d5dcb2",
+     "canPresaleNumber": 55554,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "3113216-SK6812SIDE_ARVS/C2890037",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1500,
+     "shopCostPrice": 0.28,
+     "preMinPurchaseNum": 108,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1061,
+     "componentCode": "C2890037",
+     "componentBrandEn": "OPSCO Optoelectronics",
+     "componentModelEn": "SK6812SIDE-A-RVS",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583598235106103296-C2890037/C2890037-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ee1387d5fd17169ea2ad0e64676c3170dd506d1f87b7891079662184f4b96715",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2108251530_OPSCO-Optoelectronics-SK6812SIDE-A-RVS_C2890037.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757966208249946112-C2890037.pdf?response-content-disposition=attachment%3B%20filename%3DC2890037.pdf%3B%20filename%2A%3DUTF-8%27%27C2890037.pdf&x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5mMH%2F%2BN340TxLCPa06JpTEyTexLmZDS1jz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcY25zo0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqpm09ZVLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkImNyVMaKWD5sagAE6Z%2FMi0NVXYOM%2B1tatoPWgm29UlO%2FCXJd2ThT3gRxQVUDVZrOjP3X1%2B5LtZ1ORRHxVLSTgpFRfoQoiZz3yW6N2QTc9dFN4ifxxKBL2vx%2Bns3sZ0173SRboKeGk7QjkejlCdOKuQXxD6DJ0RPYj3yBRR61J1otVl4BjjCTSYLPokiAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ9TE92R2srdih8A1gAcgvUy4%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9e5fa180010daf6b46ebd1d62f4ee276d54e565dd03876991d59cf56da382a26",
+     "dataManualOfficialLink": "",
+     "componentName": "OPSCO Optoelectronics SK6812SIDE-A-RVS",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583598235939823616-C2890037/C2890037-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T155647Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nYEsPi3K947pSfeHPLrmovXMMbqLTdpzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qc1Svzs0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzUQSgOVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Vd6KyU5ch3ARqAASrV5cWI4u3EnGckJ57%2F5Z5WxvxxBQezzrRcZiM32xI7GCE%2FS7FsYBMN%2BAzkPGJQOgeqdPJvm3LT078LK694kXrpjb7RbE0t1JqUiQwSt%2B%2FtQH4Rtxw%2BUTNJTQvJ4H7kTbXZ5%2Fht4s0n5KRBzf1%2Fh3d3h%2FU%2F%2FrN5rBToXLTHcxMHIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZmYyV1pYYVtzUzJjzPL7GqvE%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7ca350e0dc8df9bdc64fe1711db5fd29550b9c23367968d12567ce8f991e6756",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD-4P,4x2mm",
+     "describe": "-40\u2103~+85\u2103 0.25mA 1.6mm 100ns 120\u00b0 160mcd~320mcd 2000V 200ns 240mcd~450mcd 280ns 2mm 3.7V~5.5V 460nm~475nm 4kHz 4mm 520nm~535nm 620nm~630nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit\u3001Built-in one-way transmission function SMD-4P,4x2mm RGB LEDs(Built-in IC) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - B",
+       "attribute_value_name": "160mcd~320mcd"
+      },
+      {
+       "attribute_name_en": "ESD Withstand Voltage",
+       "attribute_value_name": "2000V"
+      },
+      {
+       "attribute_name_en": "Viewing Angle",
+       "attribute_value_name": "120\u00b0"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - B",
+       "attribute_value_name": "460nm~475nm"
+      },
+      {
+       "attribute_name_en": "Fall Time",
+       "attribute_value_name": "280ns"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - G",
+       "attribute_value_name": "697.5mcd~1162.5mcd"
+      },
+      {
+       "attribute_name_en": "Fixed-Frequency Pwm Mode",
+       "attribute_value_name": "4kHz"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity - R",
+       "attribute_value_name": "240mcd~450mcd"
+      },
+      {
+       "attribute_name_en": "Rise Time",
+       "attribute_value_name": "200ns"
+      },
+      {
+       "attribute_name_en": "Data Transmission Rate",
+       "attribute_value_name": "800Kbit/s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "4mm"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - G",
+       "attribute_value_name": "520nm~535nm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3.7V~5.5V"
+      },
+      {
+       "attribute_name_en": "Quiescent Current",
+       "attribute_value_name": "0.25mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in power-on reset circuit\u3001Built-in one-way transmission function"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Transmission Delay",
+       "attribute_value_name": "100ns"
+      },
+      {
+       "attribute_name_en": "Dominant Wavelength - R",
+       "attribute_value_name": "620nm~630nm"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "RGB LEDs(Built-in IC)",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SK6812SIDE-A</span>-RVS",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 43126036,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "SK6812SIDE-A-012",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-SK6812SIDE_A012/C9900139338",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900139338",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "SK6812SIDE-A-012",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT SK6812SIDE-A-012",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,1.6x4mm",
+     "describe": "SMD,1.6x4mm New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>SK6812SIDE-A</span>-012",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "SK6812SIDE-A"
+ },
+ "message": null
+}

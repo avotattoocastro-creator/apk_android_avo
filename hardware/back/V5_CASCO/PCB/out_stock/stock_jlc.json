@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-14 14:34 UTC",
+ "date_utc": "2026-11-14 15:55 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C114218": {
@@ -7,7 +7,7 @@
    "mpn": "DM3AT-SF-PEJM5",
    "maker": "HRS(Hirose)",
    "package": "SMD",
-   "stock": 14933,
+   "stock": 14931,
    "library": "expand",
    "prices": [
     [
@@ -42,7 +42,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31467702,
+   "stock": 31458906,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "DRV5032FADBZR",
    "maker": "Texas Instruments",
    "package": "SOT-23",
-   "stock": 61550,
+   "stock": 61540,
    "library": "expand",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1530108,
+   "stock": 1526914,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6086198,
+   "stock": 6083074,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38198259,
+   "stock": 38184330,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "CL21A476MQYNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 1267666,
+   "stock": 1268170,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402WGF0000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15639227,
+   "stock": 15625434,
    "library": "base",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 4785280,
+   "stock": 4784854,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1490628,
+   "stock": 1490369,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10435178,
+   "stock": 10404587,
    "library": "base",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21103281,
+   "stock": 21086182,
    "library": "base",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "0402WGF1501TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1274686,
+   "stock": 1274558,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2345057,
+   "stock": 2332165,
    "library": "base",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "PESD5V0S1BA",
    "maker": "TECH PUBLIC",
    "package": "SOD-323",
-   "stock": 330870,
+   "stock": 330840,
    "library": "expand",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "0402WGF2001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10029560,
+   "stock": 10026671,
    "library": "base",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4136504,
+   "stock": 4136701,
    "library": "base",
    "prices": [
     [
@@ -707,7 +707,7 @@
    "mpn": "TLV75733PDBVR",
    "maker": "Texas Instruments",
    "package": "SOT-23-5",
-   "stock": 20225,
+   "stock": 20199,
    "library": "expand",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10291584,
+   "stock": 10250118,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 41494,
+   "stock": 41434,
    "library": "expand",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 27675,
+   "stock": 27658,
    "library": "expand",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6178016,
+   "stock": 6173323,
    "library": "base",
    "prices": [
     [
@@ -1385,7 +1385,7 @@
     "mpn": "U.FL-R-SMT-1(80)",
     "maker": "HRS(Hirose)",
     "package": "SMD",
-    "stock": 293723,
+    "stock": 293699,
     "library": "expand",
     "prices": [
      [
@@ -1739,7 +1739,7 @@
     "mpn": "VHF100505HQ47NJT",
     "maker": "FH (Guangdong Fenghua Advanced Tech)",
     "package": "0402",
-    "stock": 177668,
+    "stock": 177648,
     "library": "expand",
     "prices": [
      [
@@ -1809,7 +1809,7 @@
     "mpn": "LQW15AN47NJ00D",
     "maker": "Murata Electronics",
     "package": "0402",
-    "stock": 46169,
+    "stock": 46162,
     "library": "expand",
     "prices": [
      [
@@ -1873,6 +1873,41 @@
      ]
     ],
     "describe": "1GHz 300mA 47nH 720mΩ 8@100MHz ±5% 0402 Inductors (SMD) ROHS"
+   },
+   {
+    "lcsc": "C280999",
+    "mpn": "MGCI1005T47NJT-LF",
+    "maker": "microgate",
+    "package": "0402",
+    "stock": 10180,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0027
+     ],
+     [
+      1000,
+      0.0026
+     ],
+     [
+      3000,
+      0.0026
+     ],
+     [
+      10000,
+      0.0026
+     ],
+     [
+      10200,
+      0.0026
+     ],
+     [
+      10400,
+      0.0026
+     ]
+    ],
+    "describe": "1.5Ω 200mA 47nH ±5% 0402 Inductors (SMD) ROHS"
    },
    {
     "lcsc": "C219549",
@@ -2048,41 +2083,6 @@
      ]
     ],
     "describe": "1.15Ω 1GHz 250mA 47nH 8@100MHz ±5% 0402 Inductors (SMD) ROHS"
-   },
-   {
-    "lcsc": "C275325",
-    "mpn": "MLK1005S47NJT000",
-    "maker": "TDK",
-    "package": "0402",
-    "stock": 5534,
-    "library": "expand",
-    "prices": [
-     [
-      1,
-      0.0079
-     ],
-     [
-      500,
-      0.0061
-     ],
-     [
-      1500,
-      0.0051
-     ],
-     [
-      10000,
-      0.0045
-     ],
-     [
-      20000,
-      0.004
-     ],
-     [
-      50000,
-      0.0037
-     ]
-    ],
-    "describe": "1.8GHz 200mA 47nH 6@100MHz 740mΩ ±5% 0402 Inductors (SMD) ROHS"
    }
   ],
   "22Ω 1206": [
@@ -2091,7 +2091,7 @@
     "mpn": "1206W4F220JT5E",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "1206",
-    "stock": 546645,
+    "stock": 546660,
     "library": "base",
     "prices": [
      [
@@ -2443,7 +2443,7 @@
     "mpn": "1206W4F220JT5E",
     "maker": "UNI-ROYAL(Uniroyal Elec)",
     "package": "1206",
-    "stock": 546645,
+    "stock": 546660,
     "library": "base",
     "prices": [
      [
@@ -3163,6 +3163,373 @@
     ],
     "describe": "TSSLP-2-4 ESD and Surge Protection (TVS/ESD) ROHS"
    }
-  ]
+  ],
+  "XL-4020RGBC-WS2812B": [],
+  "4020 WS2812B": [],
+  "SK6812 SIDE": [
+   {
+    "lcsc": "C5378721",
+    "mpn": "SK6812SIDE-A",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 110445,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1123
+     ],
+     [
+      50,
+      0.0904
+     ],
+     [
+      150,
+      0.0794
+     ],
+     [
+      1500,
+      0.065
+     ],
+     [
+      3000,
+      0.0583
+     ],
+     [
+      4500,
+      0.055
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.6mA 1.6mm 120° 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 460nm~470nm 4mm 520nm~535nm 620nm~625nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit Translucent Frosted Lens SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C2890037",
+    "mpn": "SK6812SIDE-A-RVS",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x2mm",
+    "stock": 56212,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1061
+     ],
+     [
+      50,
+      0.084
+     ],
+     [
+      150,
+      0.073
+     ],
+     [
+      1500,
+      0.0706
+     ],
+     [
+      3000,
+      0.064
+     ],
+     [
+      4500,
+      0.0606
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.25mA 1.6mm 100ns 120° 160mcd~320mcd 2000V 200ns 240mcd~450mcd 280ns 2mm 3.7V~5.5V 460nm~475nm 4kHz 4mm 520nm~535nm 620nm~630nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit、Built-in one-way transmission function SMD-4P,4x2mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C2890041",
+    "mpn": "SK6812D-EC3210R",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,3.2x1.1mm",
+    "stock": 47148,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1128
+     ],
+     [
+      50,
+      0.09
+     ],
+     [
+      150,
+      0.0786
+     ],
+     [
+      500,
+      0.0701
+     ],
+     [
+      3000,
+      0.059
+     ],
+     [
+      6000,
+      0.0555
+     ]
+    ],
+    "describe": "-40℃~+80℃ 0.25mA 1.08mm 1mm 2000V 3.2mm 3.7V~5.5V 460nm~475nm 4kHz 520nm~535nm 620nm~630nm 800Kbit/s Built-in power-on reset circuit、Built-in power-on reset circuit Side View Mount SMD-4P,3.2x1.1mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C5378737",
+    "mpn": "SK6812SIDE-A-S",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 19956,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.072
+     ],
+     [
+      100,
+      0.0563
+     ],
+     [
+      300,
+      0.0485
+     ],
+     [
+      1500,
+      0.0447
+     ],
+     [
+      4500,
+      0.0401
+     ],
+     [
+      10500,
+      0.0377
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.35mA 1.6mm 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 465nm~470nm 4mm 525nm~530nm 620nm~625nm 800Kbit/s 815mcd~1275mcd Built-in power-on reset circuit、Built-in power-on reset circuit SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C9900013558",
+    "mpn": "SK6812SIDE-A",
+    "maker": "JLCPCB Assembly",
+    "package": "LED-SMD",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0007
+     ],
+     [
+      1000,
+      0.0003
+     ]
+    ],
+    "describe": "LED-SMD SMT ROHS"
+   },
+   {
+    "lcsc": "C9900139338",
+    "mpn": "SK6812SIDE-A-012",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,1.6x4mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,1.6x4mm New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900244006",
+    "mpn": "SK6812-SIDE-X-A.1-A16",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD-4P,4x1.6mm SMT ROHS"
+   },
+   {
+    "lcsc": "C9900023731",
+    "mpn": "3512Side gradient colorSK6812B-3512",
+    "maker": "JLCPCB Assembly",
+    "package": "3512",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "3512 SMT ROHS"
+   }
+  ],
+  "WS2812B side": [],
+  "SK6812SIDE-A": [
+   {
+    "lcsc": "C5378721",
+    "mpn": "SK6812SIDE-A",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 110445,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1123
+     ],
+     [
+      50,
+      0.0904
+     ],
+     [
+      150,
+      0.0794
+     ],
+     [
+      1500,
+      0.065
+     ],
+     [
+      3000,
+      0.0583
+     ],
+     [
+      4500,
+      0.055
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.6mA 1.6mm 120° 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 460nm~470nm 4mm 520nm~535nm 620nm~625nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit Translucent Frosted Lens SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C2890037",
+    "mpn": "SK6812SIDE-A-RVS",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x2mm",
+    "stock": 56212,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1061
+     ],
+     [
+      50,
+      0.084
+     ],
+     [
+      150,
+      0.073
+     ],
+     [
+      1500,
+      0.0706
+     ],
+     [
+      3000,
+      0.064
+     ],
+     [
+      4500,
+      0.0606
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.25mA 1.6mm 100ns 120° 160mcd~320mcd 2000V 200ns 240mcd~450mcd 280ns 2mm 3.7V~5.5V 460nm~475nm 4kHz 4mm 520nm~535nm 620nm~630nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit、Built-in one-way transmission function SMD-4P,4x2mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C5378737",
+    "mpn": "SK6812SIDE-A-S",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 19956,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.072
+     ],
+     [
+      100,
+      0.0563
+     ],
+     [
+      300,
+      0.0485
+     ],
+     [
+      1500,
+      0.0447
+     ],
+     [
+      4500,
+      0.0401
+     ],
+     [
+      10500,
+      0.0377
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.35mA 1.6mm 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 465nm~470nm 4mm 525nm~530nm 620nm~625nm 800Kbit/s 815mcd~1275mcd Built-in power-on reset circuit、Built-in power-on reset circuit SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS"
+   },
+   {
+    "lcsc": "C9900013558",
+    "mpn": "SK6812SIDE-A",
+    "maker": "JLCPCB Assembly",
+    "package": "LED-SMD",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0007
+     ],
+     [
+      1000,
+      0.0003
+     ]
+    ],
+    "describe": "LED-SMD SMT ROHS"
+   },
+   {
+    "lcsc": "C9900139338",
+    "mpn": "SK6812SIDE-A-012",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,1.6x4mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,1.6x4mm New Arrivals ROHS"
+   }
+  ],
+  "XL-3010RGBC-WS2812B": []
  }
 }
