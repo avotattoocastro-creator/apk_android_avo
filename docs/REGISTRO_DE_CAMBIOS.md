@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — Espalda V5 CASCO: propuesta de arquitectura (sin PCB ni firmware)
+**Autor:** Claude · Rama `feature/back-v5-casco` (desde `develop/avo-performance-horse`)
+**Qué cambia:** solo documentación, en `hardware/back/V5_CASCO/DOCS/`:
+- `ARQUITECTURA.md`;
+- plano de concepto `AVO_BACK_V5_CASCO_concepto.png` y su fuente `concepto_plano.py`.
+
+**Propuesta:**
+- cápsula estanca de 55 × 55 × 22,6 mm (E), unos 105 g, y base magnética desprendible de unos 10 g;
+- ZED-F9P y ESP32-S3 en una PCB de 51 × 51, con antena plana activa L1/L2 de 25 × 25 encima;
+- batería de ≥ 2000 mAh;
+- pogo de 5 contactos (VBUS, D−, D+, GND y uno libre) para cargar y para el USB con el PC;
+- encendido por sensor Hall.
+
+**Por qué:** petición del usuario: rediseñar la espalda para el casco del jockey (solo entrenamientos), lo más compacta y ligera posible sin perder prestaciones.
+**Validación:** ninguna. Todo son estimaciones. No hay nada compilado ni verificado en hardware.
+
+---
+
 ## 2026-11-13 — AVO-ASSIGN-1 — asignación de caballo y jinete en todas las apps y en el motor
 **Autor:** Claude · Rama `claude/asignacion-caballo` · Contrato: `docs/ASIGNACION_CABALLO.md`
 **Qué cambia:**
