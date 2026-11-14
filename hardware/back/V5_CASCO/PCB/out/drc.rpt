@@ -1,0 +1,146 @@
+** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
+** Created on 2026-11-14T12:50:32+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 9 DRC violations **
+[clearance]: Clearance violation (netclass 'RF_50' clearance 0.2500 mm; actual 0.2089 mm)
+    Rule: netclass 'RF_50'; error
+    @(84.0000 mm, 91.8500 mm): Pad 1 [GND] of U1 on F.Cu
+    @(83.0750 mm, 92.6250 mm): Track [RF_ZED] on F.Cu, length 1.4849 mm
+[clearance]: Clearance violation (netclass 'RF_50' clearance 0.2500 mm; actual 0.1950 mm)
+    Rule: netclass 'RF_50'; error
+    @(84.0000 mm, 91.8500 mm): Pad 1 [GND] of U1 on F.Cu
+    @(83.2750 mm, 92.6250 mm): Track [RF_ZED] on F.Cu, length 0.2000 mm
+[clearance]: Clearance violation (netclass 'RF_50' clearance 0.2500 mm; actual 0.1750 mm)
+    Rule: netclass 'RF_50'; error
+    @(82.0250 mm, 91.5750 mm): Track [RF_ZED] on F.Cu, length 0.7500 mm
+    @(81.3600 mm, 91.3000 mm): Pad 1 [RF_ANT] of C70 on F.Cu
+[clearance]: Clearance violation (netclass 'RF_50' clearance 0.2500 mm; actual 0.1950 mm)
+    Rule: netclass 'RF_50'; error
+    @(84.0000 mm, 91.8500 mm): Pad 1 [GND] of U1 on F.Cu
+    @(84.0000 mm, 92.9500 mm): Track [RF_ZED] on F.Cu, length 0.7945 mm
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(97.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(100.0000 mm, 121.1000 mm): PCB text 'D+' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.5400 mm, 121.1000 mm): PCB text 'GND' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
+    @(104.3200 mm, 119.8700 mm): Segment of D3 on F.Silkscreen
+
+** Found 1 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.4625 mm, 115.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+    @(98.0800 mm, 118.9100 mm): Track [VSYS] on F.Cu, length 0.1017 mm
+
+** Found 33 Footprint errors **
+[net_conflict]: Pad net (unconnected-(U1-4-Pad4)) doesn't match net given by schematic (unconnected-(U1-Pad4)).
+    Local override; warning
+    @(84.0000 mm, 95.1500 mm): Pad 4 [unconnected-(U1-4-Pad4)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-5-Pad5)) doesn't match net given by schematic (unconnected-(U1-Pad5)).
+    Local override; warning
+    @(84.0000 mm, 96.2500 mm): Pad 5 [unconnected-(U1-5-Pad5)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-6-Pad6)) doesn't match net given by schematic (unconnected-(U1-Pad6)).
+    Local override; warning
+    @(84.0000 mm, 97.3500 mm): Pad 6 [unconnected-(U1-6-Pad6)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-8-Pad8)) doesn't match net given by schematic (unconnected-(U1-Pad8)).
+    Local override; warning
+    @(84.0000 mm, 99.5500 mm): Pad 8 [unconnected-(U1-8-Pad8)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-9-Pad9)) doesn't match net given by schematic (unconnected-(U1-Pad9)).
+    Local override; warning
+    @(84.0000 mm, 100.6500 mm): Pad 9 [unconnected-(U1-9-Pad9)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-10-Pad10)) doesn't match net given by schematic (unconnected-(U1-Pad10)).
+    Local override; warning
+    @(84.0000 mm, 101.7500 mm): Pad 10 [unconnected-(U1-10-Pad10)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-11-Pad11)) doesn't match net given by schematic (unconnected-(U1-Pad11)).
+    Local override; warning
+    @(84.0000 mm, 102.8500 mm): Pad 11 [unconnected-(U1-11-Pad11)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-13-Pad13)) doesn't match net given by schematic (unconnected-(U1-Pad13)).
+    Local override; warning
+    @(84.0000 mm, 105.0500 mm): Pad 13 [unconnected-(U1-13-Pad13)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-15-Pad15)) doesn't match net given by schematic (unconnected-(U1-Pad15)).
+    Local override; warning
+    @(84.9000 mm, 108.9500 mm): Pad 15 [unconnected-(U1-15-Pad15)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-16-Pad16)) doesn't match net given by schematic (unconnected-(U1-Pad16)).
+    Local override; warning
+    @(86.0000 mm, 108.9500 mm): Pad 16 [unconnected-(U1-16-Pad16)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-17-Pad17)) doesn't match net given by schematic (unconnected-(U1-Pad17)).
+    Local override; warning
+    @(87.1000 mm, 108.9500 mm): Pad 17 [unconnected-(U1-17-Pad17)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-18-Pad18)) doesn't match net given by schematic (unconnected-(U1-Pad18)).
+    Local override; warning
+    @(88.2000 mm, 108.9500 mm): Pad 18 [unconnected-(U1-18-Pad18)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-19-Pad19)) doesn't match net given by schematic (unconnected-(U1-Pad19)).
+    Local override; warning
+    @(89.3000 mm, 108.9500 mm): Pad 19 [unconnected-(U1-19-Pad19)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-20-Pad20)) doesn't match net given by schematic (unconnected-(U1-Pad20)).
+    Local override; warning
+    @(90.4000 mm, 108.9500 mm): Pad 20 [unconnected-(U1-20-Pad20)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-21-Pad21)) doesn't match net given by schematic (unconnected-(U1-Pad21)).
+    Local override; warning
+    @(91.5000 mm, 108.9500 mm): Pad 21 [unconnected-(U1-21-Pad21)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-22-Pad22)) doesn't match net given by schematic (unconnected-(U1-Pad22)).
+    Local override; warning
+    @(92.6000 mm, 108.9500 mm): Pad 22 [unconnected-(U1-22-Pad22)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-23-Pad23)) doesn't match net given by schematic (unconnected-(U1-Pad23)).
+    Local override; warning
+    @(93.7000 mm, 108.9500 mm): Pad 23 [unconnected-(U1-23-Pad23)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-24-Pad24)) doesn't match net given by schematic (unconnected-(U1-Pad24)).
+    Local override; warning
+    @(94.8000 mm, 108.9500 mm): Pad 24 [unconnected-(U1-24-Pad24)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-25-Pad25)) doesn't match net given by schematic (unconnected-(U1-Pad25)).
+    Local override; warning
+    @(95.9000 mm, 108.9500 mm): Pad 25 [unconnected-(U1-25-Pad25)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-28-Pad28)) doesn't match net given by schematic (unconnected-(U1-Pad28)).
+    Local override; warning
+    @(99.0000 mm, 106.1500 mm): Pad 28 [unconnected-(U1-28-Pad28)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-29-Pad29)) doesn't match net given by schematic (unconnected-(U1-Pad29)).
+    Local override; warning
+    @(99.0000 mm, 105.0500 mm): Pad 29 [unconnected-(U1-29-Pad29)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-30-Pad30)) doesn't match net given by schematic (unconnected-(U1-Pad30)).
+    Local override; warning
+    @(99.0000 mm, 103.9500 mm): Pad 30 [unconnected-(U1-30-Pad30)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-31-Pad31)) doesn't match net given by schematic (unconnected-(U1-Pad31)).
+    Local override; warning
+    @(99.0000 mm, 102.8500 mm): Pad 31 [unconnected-(U1-31-Pad31)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-35-Pad35)) doesn't match net given by schematic (unconnected-(U1-Pad35)).
+    Local override; warning
+    @(99.0000 mm, 98.4500 mm): Pad 35 [unconnected-(U1-35-Pad35)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-39-Pad39)) doesn't match net given by schematic (unconnected-(U1-Pad39)).
+    Local override; warning
+    @(99.0000 mm, 94.0500 mm): Pad 39 [unconnected-(U1-39-Pad39)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-40-Pad40)) doesn't match net given by schematic (unconnected-(U1-Pad40)).
+    Local override; warning
+    @(99.0000 mm, 92.9500 mm): Pad 40 [unconnected-(U1-40-Pad40)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-44-Pad44)) doesn't match net given by schematic (unconnected-(U1-Pad44)).
+    Local override; warning
+    @(95.9000 mm, 89.0500 mm): Pad 44 [unconnected-(U1-44-Pad44)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-45-Pad45)) doesn't match net given by schematic (unconnected-(U1-Pad45)).
+    Local override; warning
+    @(94.8000 mm, 89.0500 mm): Pad 45 [unconnected-(U1-45-Pad45)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-46-Pad46)) doesn't match net given by schematic (unconnected-(U1-Pad46)).
+    Local override; warning
+    @(93.7000 mm, 89.0500 mm): Pad 46 [unconnected-(U1-46-Pad46)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-47-Pad47)) doesn't match net given by schematic (unconnected-(U1-Pad47)).
+    Local override; warning
+    @(92.6000 mm, 89.0500 mm): Pad 47 [unconnected-(U1-47-Pad47)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-51-Pad51)) doesn't match net given by schematic (unconnected-(U1-Pad51)).
+    Local override; warning
+    @(88.2000 mm, 89.0500 mm): Pad 51 [unconnected-(U1-51-Pad51)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-52-Pad52)) doesn't match net given by schematic (unconnected-(U1-Pad52)).
+    Local override; warning
+    @(87.1000 mm, 89.0500 mm): Pad 52 [unconnected-(U1-52-Pad52)] of U1 on F.Cu
+[net_conflict]: Pad net (unconnected-(U1-54-Pad54)) doesn't match net given by schematic (unconnected-(U1-Pad54)).
+    Local override; warning
+    @(84.9000 mm, 89.0500 mm): Pad 54 [unconnected-(U1-54-Pad54)] of U1 on F.Cu
+
+** End of Report **

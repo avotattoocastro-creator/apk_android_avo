@@ -1,0 +1,86 @@
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de diagnóstico
+
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `7f77d2b5813926486d3f0b1327d5728760baf41f` · ejecución de CI: 43596581295
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
+- Componentes: 86 en total, 66 para montar, 0 sin montar (DNP: —), 20 a mano (pads de hilo y de prueba)
+- Pistas: 773 · vías: 166 · ruteado INCOMPLETO (1 conexiones)
+
+## Comprobaciones bloqueantes
+| Comprobación | Resultado | Cantidad |
+|---|---|---|
+| DRC: errores | **FALLA** | 4 |
+| DRC: conexiones incompletas | **FALLA** | 1 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | **FALLA** | 33 |
+| ERC: errores | correcto | 0 |
+| ERC: advertencias | correcto | 0 |
+
+Errores de DRC por tipo: clearance 4
+
+### Conexiones incompletas
+- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 0.1017 mm
+
+### Paridad esquema ↔ placa
+- net_conflict: Pad net (unconnected-(U1-4-Pad4)) doesn't match net given by schematic (unconnected-(U1-Pad4)).
+- net_conflict: Pad net (unconnected-(U1-5-Pad5)) doesn't match net given by schematic (unconnected-(U1-Pad5)).
+- net_conflict: Pad net (unconnected-(U1-6-Pad6)) doesn't match net given by schematic (unconnected-(U1-Pad6)).
+- net_conflict: Pad net (unconnected-(U1-8-Pad8)) doesn't match net given by schematic (unconnected-(U1-Pad8)).
+- net_conflict: Pad net (unconnected-(U1-9-Pad9)) doesn't match net given by schematic (unconnected-(U1-Pad9)).
+- net_conflict: Pad net (unconnected-(U1-10-Pad10)) doesn't match net given by schematic (unconnected-(U1-Pad10)).
+- net_conflict: Pad net (unconnected-(U1-11-Pad11)) doesn't match net given by schematic (unconnected-(U1-Pad11)).
+- net_conflict: Pad net (unconnected-(U1-13-Pad13)) doesn't match net given by schematic (unconnected-(U1-Pad13)).
+- net_conflict: Pad net (unconnected-(U1-15-Pad15)) doesn't match net given by schematic (unconnected-(U1-Pad15)).
+- net_conflict: Pad net (unconnected-(U1-16-Pad16)) doesn't match net given by schematic (unconnected-(U1-Pad16)).
+- net_conflict: Pad net (unconnected-(U1-17-Pad17)) doesn't match net given by schematic (unconnected-(U1-Pad17)).
+- net_conflict: Pad net (unconnected-(U1-18-Pad18)) doesn't match net given by schematic (unconnected-(U1-Pad18)).
+- net_conflict: Pad net (unconnected-(U1-19-Pad19)) doesn't match net given by schematic (unconnected-(U1-Pad19)).
+- net_conflict: Pad net (unconnected-(U1-20-Pad20)) doesn't match net given by schematic (unconnected-(U1-Pad20)).
+- net_conflict: Pad net (unconnected-(U1-21-Pad21)) doesn't match net given by schematic (unconnected-(U1-Pad21)).
+- net_conflict: Pad net (unconnected-(U1-22-Pad22)) doesn't match net given by schematic (unconnected-(U1-Pad22)).
+- net_conflict: Pad net (unconnected-(U1-23-Pad23)) doesn't match net given by schematic (unconnected-(U1-Pad23)).
+- net_conflict: Pad net (unconnected-(U1-24-Pad24)) doesn't match net given by schematic (unconnected-(U1-Pad24)).
+- net_conflict: Pad net (unconnected-(U1-25-Pad25)) doesn't match net given by schematic (unconnected-(U1-Pad25)).
+- net_conflict: Pad net (unconnected-(U1-28-Pad28)) doesn't match net given by schematic (unconnected-(U1-Pad28)).
+- net_conflict: Pad net (unconnected-(U1-29-Pad29)) doesn't match net given by schematic (unconnected-(U1-Pad29)).
+- net_conflict: Pad net (unconnected-(U1-30-Pad30)) doesn't match net given by schematic (unconnected-(U1-Pad30)).
+- net_conflict: Pad net (unconnected-(U1-31-Pad31)) doesn't match net given by schematic (unconnected-(U1-Pad31)).
+- net_conflict: Pad net (unconnected-(U1-35-Pad35)) doesn't match net given by schematic (unconnected-(U1-Pad35)).
+- net_conflict: Pad net (unconnected-(U1-39-Pad39)) doesn't match net given by schematic (unconnected-(U1-Pad39)).
+- net_conflict: Pad net (unconnected-(U1-40-Pad40)) doesn't match net given by schematic (unconnected-(U1-Pad40)).
+- net_conflict: Pad net (unconnected-(U1-44-Pad44)) doesn't match net given by schematic (unconnected-(U1-Pad44)).
+- net_conflict: Pad net (unconnected-(U1-45-Pad45)) doesn't match net given by schematic (unconnected-(U1-Pad45)).
+- net_conflict: Pad net (unconnected-(U1-46-Pad46)) doesn't match net given by schematic (unconnected-(U1-Pad46)).
+- net_conflict: Pad net (unconnected-(U1-47-Pad47)) doesn't match net given by schematic (unconnected-(U1-Pad47)).
+- net_conflict: Pad net (unconnected-(U1-51-Pad51)) doesn't match net given by schematic (unconnected-(U1-Pad51)).
+- net_conflict: Pad net (unconnected-(U1-52-Pad52)) doesn't match net given by schematic (unconnected-(U1-Pad52)).
+- net_conflict: Pad net (unconnected-(U1-54-Pad54)) doesn't match net given by schematic (unconnected-(U1-Pad54)).
+
+## Advertencias de DRC (no bloqueantes)
+- silk_over_copper: 4
+- silk_overlap: 1
+
+## Lista de materiales y posiciones
+- Piezas montadas sin número LCSC: U1, L70, C70, J5
+- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Modelo 3D (STEP y renders, no afecta a la fabricación)
+- Modelos de la librería de KiCad 9.0.0 descargados: 12; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step, RF_GPS.3dshapes/ublox_ZED.step
+- ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.
+
+## Estado de fabricación
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
+- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
+
+## Limitaciones pendientes (ver README)
+- Línea de 50 Ω de la antena (J5 → C70 → RF_IN): microcinta de 0,36 mm calculada para el apilado JLC de 1,6 mm (preimpregnado 0,21 mm sobre In1); confirmar con la calculadora de JLC al pedir.
+- Antena GNSS plana activa L1/L2 pegada en el centro de la cara B; plano de masa de 51 × 51 (el fabricante afina sobre 70 × 70): medir fix y velocidad.
+- Piezas sin código LCSC (ZED-F9P, U.FL, 47 nH, 47 pF C0G): buscarlas con stock_jlc.py o suministrarlas aparte (el ZED-F9P suele ir consignado).
+- C70 de bloqueo de continua por si RF_IN no lo lleva dentro: confirmar con el manual de integración del ZED-F9P.
+- Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.
+- Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).
+- Nada de esto se ha fabricado ni medido: no es un prototipo validado.
+::notice title=Puerta de fabricación::NO SUPERADA
