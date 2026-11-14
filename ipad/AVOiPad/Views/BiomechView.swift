@@ -24,21 +24,20 @@ struct BiomechView: View {
                     BiomechEngineCard(model: model)
                     BiomechChannelsCard(model: model)
                 } else {
-                    // trainer 14/11/2026: the horse card as high as the figures, all figures the same size and
-                    // «Canales de la cincha» under them with the same width, closing level with the engine card
-                    HStack(alignment: .top, spacing: 12) {
-                        VStack(spacing: 12) {
-                            HStack(alignment: .top, spacing: 12) {
-                                BiomechDiagramCard(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
-                                BiomechHeadlines(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
-                            }
-                            .fixedSize(horizontal: false, vertical: true)
-                            BiomechChannelsCard(model: model, fill: true)
+                    // trainer 14/11/2026 («misma medida»): four blocks of the same size, two equal columns and two
+                    // rows of equal height: horse | figures, then «Canales de la cincha» | «Índices del motor por sensor»
+                    VStack(spacing: 12) {
+                        HStack(alignment: .top, spacing: 12) {
+                            BiomechDiagramCard(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
+                            BiomechHeadlines(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        BiomechEngineCard(model: model).frame(width: 310).frame(maxHeight: .infinity, alignment: .top)
+                        .fixedSize(horizontal: false, vertical: true)
+                        HStack(alignment: .top, spacing: 12) {
+                            BiomechChannelsCard(model: model, fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
+                            BiomechEngineCard(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                        .fixedSize(horizontal: false, vertical: true)
                     }
-                    .fixedSize(horizontal: false, vertical: true)
                 }
                 BiomechWindowCharts(model: model)
                 AvoCard(title: "Simetría exploratoria por sensor y aire (motor AVO)") {

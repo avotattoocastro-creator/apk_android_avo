@@ -392,9 +392,9 @@ private struct StableEditorCard: View {
             }
                 Toggle("Activo (aparece al asignar entrenamientos)", isOn: $p.editActive).font(.footnote).tint(Avo.red)
 
-                // the three buttons the same size (trainer 14/11/2026)
+                // the three buttons the same width AND height, one line each (trainer 14/11/2026: «misma medida alto»)
                 HStack(spacing: 8) {
-                    Button { page.save() } label: { Text("Guardar").frame(width: 230) }
+                    Button { page.save() } label: { Text("Guardar").lineLimit(1).frame(width: 230, height: 30) }
                         .buttonStyle(.avoPrimary)
                         .disabled(!page.canSave)
                         .accessibilityIdentifier("stable.save")
@@ -403,10 +403,10 @@ private struct StableEditorCard: View {
                             UIPasteboard.general.string = page.uriText
                             page.message = "Enlace copiado: pégalo en la app Android o en Windows para grabar la etiqueta."
                         } label: {
-                            Label("Copiar enlace avohorse://", systemImage: "link").frame(width: 230)
+                            Label("Copiar enlace", systemImage: "link").lineLimit(1).frame(width: 230, height: 30)
                         }
                         .buttonStyle(.avoSecondary)
-                        Button(role: .destructive) { page.askDelete() } label: { Text("Eliminar").frame(width: 230) }
+                        Button(role: .destructive) { page.askDelete() } label: { Text("Eliminar").lineLimit(1).frame(width: 230, height: 30) }
                             .buttonStyle(.avoSecondary)
                             .foregroundStyle(Avo.bad)
                     }

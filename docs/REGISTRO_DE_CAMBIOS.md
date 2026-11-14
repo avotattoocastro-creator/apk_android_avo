@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-9 — Botones de ficha a igual alto, Biomecánica en 4 bloques iguales e informe con cifras estilo Datos clave
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Ficha de Cuadra y Jinetes (iPad):** Guardar, Copiar enlace y Eliminar tienen el mismo ancho y alto, en una sola línea
+  (el texto pasa de «Copiar enlace avohorse://» a «Copiar enlace»; copia el mismo enlace).
+- **Biomecánica (iPad):** cuatro bloques del mismo tamaño en dos columnas iguales: caballo | cifras y, debajo,
+  Canales de la cincha | Índices del motor por sensor (sustituye a la disposición de AVO-SHELL-8).
+- **Informes PDF y HTML (iPad y Windows, por igual):** los recuadros de cifras (Tramo, Resumen, etc.) usan el estilo de
+  Datos clave: sin caja ni barra roja, cifra centrada, nombre en versalitas debajo y líneas finas de separación.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-8 — Arranque sin entrar solo, Biomecánica a medida igual e Informes desplegable
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**

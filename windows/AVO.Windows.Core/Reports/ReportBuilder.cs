@@ -291,16 +291,17 @@ public static class ReportBuilder
         void Tiles(IReadOnlyList<(string label, string value)> tiles)
         {
             Ensure(56);
-            double tw = (W - 10 * (tiles.Count - 1)) / tiles.Count;
+            // «Datos clave» style (trainer 14/11/2026): no box, figure centred, name in small capitals under it, hairlines
+            double tw = W / tiles.Count;
             for (int i = 0; i < tiles.Count; i++)
             {
-                double x = M + i * (tw + 10);
-                pdf.FillRect(x, y, tw, 48, Panel);
-                pdf.FillRect(x, y, 3, 48, Red);
-                pdf.Text(x + 10, y + 8, tiles[i].label.ToUpperInvariant(), 7.5, true, Dim);
-                pdf.Text(x + 10, y + 22, tiles[i].value, 15, true, Ink);
+                double x = M + i * tw;
+                pdf.Text(x + tw / 2, y + 8, tiles[i].value, 16, false, Ink, PdfDocument.Align.Center);
+                pdf.Text(x + tw / 2, y + 30, tiles[i].label.ToUpperInvariant(), 6.5, true, Dim, PdfDocument.Align.Center);
+                pdf.Line(x + 6, y + 48, x + tw - 6, y + 48, Line, 0.5);
+                if (i < tiles.Count - 1) pdf.Line(x + tw, y + 6, x + tw, y + 42, Line, 0.5);
             }
-            y += 58;
+            y += 56;
         }
 
         void Table(string[] head, double[] cols, List<string[]> rows)
@@ -413,7 +414,7 @@ public static class ReportBuilder
         sb.Append("<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>AVO Performance Horse · Informe</title><style>")
           .Append("body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:12px 40px;border-bottom:4px solid #ED122A;display:flex;align-items:center;gap:14px}")
           .Append("header b{font-size:34px;letter-spacing:2px}header span{color:#C9CBD1;margin-left:14px;font-weight:600}main{padding:10px 40px 40px}h2{color:#ED122A;font-size:15px;text-transform:uppercase;border-bottom:1px solid #D8D9DE;padding-bottom:6px;margin-top:28px}")
-          .Append(".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tile{background:#F3F3F5;border-left:4px solid #ED122A;padding:10px 14px}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:700;font-size:11px}.tile div{font-size:24px;font-weight:700}")
+          .Append(".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.tile{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;text-align:center;padding:16px 8px 14px;border-bottom:1px solid #D8D9DE;border-right:1px solid #D8D9DE;min-height:64px}.tile:nth-child(4n){border-right:0}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:600;font-size:10px;letter-spacing:.08em;margin-top:6px}.tile div{font-size:26px;font-weight:400}")
           .Append("table{border-collapse:collapse;width:100%;font-size:12px}th{background:#101014;color:#fff;text-align:left;padding:6px}td{padding:5px 6px;border-bottom:1px solid #E4E4E8}.kv td:first-child{color:#5B5C63;width:38%}")
           .Append(".note{color:#5B5C63;font-size:12px}.demo{background:#FFF1C9;color:#7A5200;padding:8px 12px;font-weight:700;margin-top:12px}svg{background:#F3F3F5;width:100%;height:auto}@media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>")
           .Append(HtmlHeader(MadridTime.Format(tl.Utc0 ?? s.StartedAt), s.SessionId)).Append("<main>");

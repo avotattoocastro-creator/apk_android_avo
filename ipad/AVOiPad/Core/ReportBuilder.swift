@@ -314,7 +314,7 @@ enum ReportBuilder {
         sb += "<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><title>AVO Performance Horse · Informe</title><style>"
         sb += "body{font:14px 'Segoe UI',Arial,sans-serif;color:#101014;margin:0}header{background:#101014;color:#fff;padding:12px 40px;border-bottom:4px solid #ED122A;display:flex;align-items:center;gap:14px}"
         sb += "header b{font-size:34px;letter-spacing:2px}header span{color:#C9CBD1;margin-left:14px;font-weight:600}main{padding:10px 40px 40px}h2{color:#ED122A;font-size:15px;text-transform:uppercase;border-bottom:1px solid #D8D9DE;padding-bottom:6px;margin-top:28px}"
-        sb += ".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tile{background:#F3F3F5;border-left:4px solid #ED122A;padding:10px 14px}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:700;font-size:11px}.tile div{font-size:24px;font-weight:700}"
+        sb += ".tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.tile{display:flex;flex-direction:column-reverse;align-items:center;justify-content:center;text-align:center;padding:16px 8px 14px;border-bottom:1px solid #D8D9DE;border-right:1px solid #D8D9DE;min-height:64px}.tile:nth-child(4n){border-right:0}.tile small{color:#5B5C63;text-transform:uppercase;font-weight:600;font-size:10px;letter-spacing:.08em;margin-top:6px}.tile div{font-size:26px;font-weight:400}"
         sb += "table{border-collapse:collapse;width:100%;font-size:12px}th{background:#101014;color:#fff;text-align:left;padding:6px}td{padding:5px 6px;border-bottom:1px solid #E4E4E8}.kv td:first-child{color:#5B5C63;width:38%}"
         sb += ".note{color:#5B5C63;font-size:12px}.demo{background:#FFF1C9;color:#7A5200;padding:8px 12px;font-weight:700;margin-top:12px}svg{background:#F3F3F5;width:100%;height:auto}@media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>"
         sb += htmlHeader(madrid(tl.utc0 ?? s.startedAt), s.sessionId) + "<main>"
@@ -603,15 +603,16 @@ private class PdfReportWriter {
 
     func tiles(_ tiles: [(label: String, value: String)]) {
         ensure(56)
-        let tw: Double = (w - 10 * Double(tiles.count - 1)) / Double(tiles.count)
+        // «Datos clave» style (trainer 14/11/2026): no box, figure centred, name in small capitals under it, hairlines
+        let tw: Double = w / Double(tiles.count)
         for i in 0..<tiles.count {
-            let x: Double = m + Double(i) * (tw + 10)
-            pdf.fillRect(x, y, tw, 48, ReportBuilder.panel)
-            pdf.fillRect(x, y, 3, 48, red)
-            pdf.text(x + 10, y + 8, tiles[i].label.uppercased(), size: 7.5, bold: true, color: dim)
-            pdf.text(x + 10, y + 22, tiles[i].value, size: 15, bold: true, color: ink)
+            let x: Double = m + Double(i) * tw
+            pdf.text(x + tw / 2, y + 8, tiles[i].value, size: 16, bold: false, color: ink, align: .center)
+            pdf.text(x + tw / 2, y + 30, tiles[i].label.uppercased(), size: 6.5, bold: true, color: dim, align: .center)
+            pdf.line(x + 6, y + 48, x + tw - 6, y + 48, ReportBuilder.lineColor, width: 0.5)
+            if i < tiles.count - 1 { pdf.line(x + tw, y + 6, x + tw, y + 42, ReportBuilder.lineColor, width: 0.5) }
         }
-        y += 58
+        y += 56
     }
 
     func table(_ head: [String], _ cols: [Double], _ rows: [[String]]) {
