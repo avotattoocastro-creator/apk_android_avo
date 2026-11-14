@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — Espalda V5 CASCO: CAD REV A de la cápsula estanca y de la base del casco
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- `hardware/back/V5_CASCO/CAD/avo_casco_v5.py` (CadQuery) y workflow **nuevo** `build-back-v5-cad.yml`, solo para esta rama.
+- **Cápsula** de 56,4 × 56,4 × 24,1:
+  - base y tapa de PETG y junta de TPU;
+  - 4 × M2,5 a través de la PCB;
+  - pogo de 5 contactos estimado e imanes de sujeción.
+- **Base del casco:** anillo con alojamiento a 45°, imanes enfrentados, imán del Hall y cara inferior cóncava de R110.
+
+**Por qué:** petición del usuario: «realizar primero los step de la base y la tapa para después ver dónde se colocan led, pogo, etc.».
+**Validación:** CI con 1 sólido por pieza y 0 interferencias con la PCB, los componentes, la batería, la antena, el pogo y los imanes. **No impreso.**
+**Pendiente:** STEP real del pogo de 5 contactos, batería real y posición del LED.
+
+---
+
 ## 2026-11-14 — Espalda V5 CASCO: PCB REV A (un ESP32-S3), puerta de fabricación superada
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**

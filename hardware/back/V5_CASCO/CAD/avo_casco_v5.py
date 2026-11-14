@@ -218,7 +218,7 @@ def main():
     rep["medidas"] = dict(capsula_mm=[round(OUTS, 2), round(OUTS, 2), round(H, 2)], interior_mm=round(IN, 2),
                           z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), z_techo=round(Z_CEIL, 2),
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
-                          altura_total_sobre_casco_mm=round(H + HB["t"] - HB["recess"], 2),
+                          altura_total_sobre_casco_mm=round(H + HB["t"], 2),
                           tornillos="4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
                           hall_xy=[round(HALL_XY[0], 2), round(HALL_XY[1], 2)])
     asm = cq.Assembly(name="AVO_CASCO_V5")
