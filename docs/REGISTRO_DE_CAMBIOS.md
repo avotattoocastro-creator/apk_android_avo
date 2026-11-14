@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-27 — Comparar: tramo sin «Observaciones» y doble toque para quitar la selección
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- «Tramo seleccionado» ya no tiene la columna «Observaciones»; las cifras ocupan el ancho que deja libre.
+- En las gráficas de Comparar, un doble toque quita la selección al momento. Sin selección, el doble toque sigue
+  restableciendo el zoom.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-26 — Recuadros de cifras alineados por arriba
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad y Windows):** los recuadros de cifras (Datos clave / Parámetros clave, `AvoMetric` y `AvoMetricTile`) se

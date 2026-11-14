@@ -314,10 +314,11 @@ struct CompareRangeCard: View {
         AvoCard(title: "Tramo seleccionado",
                 subtitle: subtitle,
                 padding: 12) {
-            FeatureTable(headers: ["Entrenamiento", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "Frenada máx", "Observaciones"],
-                         widths: [190, 80, 70, 80, 80, 85, 90, 300],
+            // no «Observaciones» column (trainer's sketch 14/11/2026); the figures use the freed width
+            FeatureTable(headers: ["Entrenamiento", "Distancia", "Duración", "V. media", "V. máx", "Acel. máx", "Frenada máx"],
+                         widths: [330, 120, 110, 120, 120, 120, 130],
                          rows: model.rangeRows.map { (r: CompareRangeRow) -> [String] in
-                             [r.label, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.maxDecel, r.observations]
+                             [r.label, r.distance, r.duration, r.meanSpeed, r.maxSpeed, r.maxAccel, r.maxDecel]
                          },
                          colors: model.rangeRows.map { (r: CompareRangeRow) -> Color? in r.color },
                          emptyText: "Calculando…")
@@ -535,7 +536,10 @@ private struct CompareTouchLayer: View {
                     .contentShape(Rectangle())
                     .simultaneousGesture(dragGesture(plot))
                     .simultaneousGesture(pinchGesture())
-                    .simultaneousGesture(TapGesture(count: 2).onEnded { model.resetZoom() })
+                    .simultaneousGesture(TapGesture(count: 2).onEnded {
+                        // double tap = quick «Quitar selección» (trainer's sketch 14/11/2026); without a selection it resets the zoom
+                        if model.hasRange { model.clearRange() } else { model.resetZoom() }
+                    })
                 rangeView(plot).allowsHitTesting(false)
             }
         }
