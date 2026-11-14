@@ -1,25 +1,22 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de diagnóstico
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `ccc3c76084e074dd9f1c47521e9d34b3a3ab3526` · ejecución de CI: 43597183634
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `ce624ad872dfbb27cfcb434fbce5c7b0e87ad75f` · ejecución de CI: 43597476741
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 88 en total, 68 para montar, 0 sin montar (DNP: —), 20 a mano (pads de hilo y de prueba)
-- Pistas: 809 · vías: 170 · ruteado INCOMPLETO (1 conexiones)
+- Pistas: 812 · vías: 171 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 1 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-
-### Conexiones incompletas
-- Track [VSYS] on In2.Cu, length 2.6471 mm ↔ Track [VSYS] on F.Cu, length 0.5000 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 4
@@ -35,8 +32,8 @@
 - ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -48,4 +45,4 @@
 - Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.
 - Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA
