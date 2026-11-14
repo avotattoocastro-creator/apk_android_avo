@@ -132,7 +132,7 @@ def write(path_sch, path_pro, path_parts):
                    dict(name="Potencia", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3,
                         priority=1),
                    # línea de 50 Ω de la antena GNSS: microcinta de 0,36 mm sobre In1 (preimpregnado de 0,21 mm, JLC 1,6 mm)
-                   dict(name="RF_50", clearance=0.25, track_width=0.36, via_diameter=0.6, via_drill=0.3,
+                   dict(name="RF_50", clearance=0.15, track_width=0.36, via_diameter=0.6, via_drill=0.3,
                         priority=0)],
                   [("RF_*", "RF_50"), ("VBUS", "Potencia"), ("POGO_VBUS", "Potencia"),
                    ("VSYS", "Potencia"), ("VBAT", "Potencia"), ("BAT_IN", "Potencia"),

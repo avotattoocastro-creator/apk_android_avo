@@ -378,7 +378,12 @@ for p in PARTS:
             nums.append(pd.num)
     for num in nums:
         if p["nets"].get(num) is None:
-            nc = "unconnected-(%s-%s-Pad%s)" % (p["ref"], pin_name(p, num), num)
+            listed = isinstance(p["sym"], dict) and any(str(k) == str(num) for k, _ in
+                                                         list(p["sym"].get("L", [])) + list(p["sym"].get("R", [])))
+            if isinstance(p["sym"], dict) and not listed:
+                nc = "unconnected-(%s-Pad%s)" % (p["ref"], num)        # pin sin nombre en el símbolo (como KiCad)
+            else:
+                nc = "unconnected-(%s-%s-Pad%s)" % (p["ref"], pin_name(p, num), num)
             p["nets"][num] = nc
             p.setdefault("nc", set()).add(num)
             NETS.append(nc)
