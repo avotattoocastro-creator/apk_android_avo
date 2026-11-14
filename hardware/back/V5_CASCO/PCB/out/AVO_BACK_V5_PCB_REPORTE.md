@@ -1,7 +1,7 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `699ad42d64d5a053fc9637f54110a3413f609e61` · ejecución de CI: 43605740139
+- Commit: `3e23362362b6dc98bb4e069a0c835d92d5114713` · ejecución de CI: 43607643234
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 88 en total, 68 para montar, 0 sin montar (DNP: —), 20 a mano (pads de hilo y de prueba)
