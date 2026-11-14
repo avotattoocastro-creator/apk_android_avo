@@ -15,7 +15,7 @@ public class JniChainTest {
     // UTF-8 outside the BMP in the path: would break modified-UTF-8 string passing
     Path p = work.resolve("sesión_🐎.avo");
     Files.copy(src, p, StandardCopyOption.REPLACE_EXISTING);
-    check(s(AvoEquine.nativeVersion()).startsWith("1.1.0"), "versión del motor " + s(AvoEquine.nativeVersion()));
+    check(s(AvoEquine.nativeVersion()).startsWith("2.0.0"), "versión del motor " + s(AvoEquine.nativeVersion()));
     check(AvoEquine.nativeApiVersion() == 2, "API C versión 2");
     byte[][] paths = { u(p.toString()) };
     long tok = AvoEquine.nativeNewToken();
