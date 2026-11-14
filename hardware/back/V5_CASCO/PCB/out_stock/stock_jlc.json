@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-14 15:55 UTC",
+ "date_utc": "2026-11-14 16:12 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C114218": {
@@ -42,7 +42,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31458906,
+   "stock": 31459197,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "AO3401A",
    "maker": "Alpha & Omega Semicon",
    "package": "SOT-23",
-   "stock": 1526914,
+   "stock": 1526899,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "CL05B103KB5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 6083074,
+   "stock": 6083083,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38184330,
+   "stock": 38201076,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "CL21A476MQYNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 1268170,
+   "stock": 1268143,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402WGF0000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15625434,
+   "stock": 15622663,
    "library": "base",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "0402WGF220JTCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 4784854,
+   "stock": 4784819,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "0402WGF3300TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 1490369,
+   "stock": 1490329,
    "library": "base",
    "prices": [
     [
@@ -427,7 +427,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10404587,
+   "stock": 10420493,
    "library": "base",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21086182,
+   "stock": 21104418,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2332165,
+   "stock": 2344650,
    "library": "base",
    "prices": [
     [
@@ -637,7 +637,7 @@
    "mpn": "0402WGF2001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10026671,
+   "stock": 10026753,
    "library": "base",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4136701,
+   "stock": 4136618,
    "library": "base",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10250118,
+   "stock": 10290804,
    "library": "base",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "USBLC6-2SC6",
    "maker": "STMicroelectronics",
    "package": "SOT-23-6L",
-   "stock": 41434,
+   "stock": 41437,
    "library": "expand",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 27658,
+   "stock": 27650,
    "library": "expand",
    "prices": [
     [
@@ -882,7 +882,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6173323,
+   "stock": 6173287,
    "library": "base",
    "prices": [
     [
@@ -1420,7 +1420,7 @@
     "mpn": "U.FL-R-SMT(10)",
     "maker": "HRS(Hirose)",
     "package": "SMD",
-    "stock": 17162,
+    "stock": 17157,
     "library": "expand",
     "prices": [
      [
@@ -1884,27 +1884,27 @@
     "prices": [
      [
       1,
-      0.0027
+      0.0025
      ],
      [
       1000,
-      0.0026
+      0.0024
      ],
      [
       3000,
-      0.0026
+      0.0024
      ],
      [
       10000,
-      0.0026
+      0.0023
      ],
      [
       10200,
-      0.0026
+      0.0023
      ],
      [
       10400,
-      0.0026
+      0.0023
      ]
     ],
     "describe": "1.5Ω 200mA 47nH ±5% 0402 Inductors (SMD) ROHS"
@@ -3530,6 +3530,13 @@
     "describe": "SMD,1.6x4mm New Arrivals ROHS"
    }
   ],
-  "XL-3010RGBC-WS2812B": []
+  "XL-3010RGBC-WS2812B": [],
+  "AHP2258": [],
+  "L1 L2 GNSS antenna": [],
+  "GNSS active antenna L1 L2": [],
+  "RTK antenna": [],
+  "dual band GNSS patch": [],
+  "L1 L5 GNSS antenna": [],
+  "GNSS patch antenna 25x25": []
  }
 }
