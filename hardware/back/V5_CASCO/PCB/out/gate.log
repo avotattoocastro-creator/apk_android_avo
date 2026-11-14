@@ -1,29 +1,33 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `c6b264870152dd1a16a8151b5b8ef59dbb9ccb89` · ejecución de CI: 43612963625
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `b4df471b97716563bbb242a14258727ab47d8c6c` · ejecución de CI: 43613262037
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 88 en total, 68 para montar, 0 sin montar (DNP: —), 20 a mano (pads de hilo y de prueba)
-- Pistas: 812 · vías: 171 · ruteado completo (0 conexiones incompletas)
+- Componentes: 96 en total, 77 para montar, 0 sin montar (DNP: —), 19 a mano (pads de hilo y de prueba)
+- Pistas: 840 · vías: 183 · ruteado INCOMPLETO (2 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 2 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
 
+### Conexiones incompletas
+- Track [VSYS] on In2.Cu, length 1.2596 mm ↔ Track [VSYS] on F.Cu, length 0.5000 mm
+- Pad 1 [LED_D4] of D13 on F.Cu ↔ Pad 3 [LED_D4] of D12 on F.Cu
+
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 4
 - silk_overlap: 1
 
 ## Lista de materiales y posiciones
-- Piezas montadas sin número LCSC: ninguna
+- Piezas montadas sin número LCSC: R24
 - Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
 - Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
 
@@ -52,7 +56,7 @@
 | C52923 | CL05A105KA5NQNC | 4 | 10250118 | Basic | 0.0057 US$ |
 | C15195 | CL05B103KB5NNNC | 1 | 6083074 | Basic | 0.0037 US$ |
 | C25867 | 0402WGF1501TCE | 1 | 1274558 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 6 | 38184330 | Basic | 0.0024 US$ |
+| C1525 | CL05B104KO5NNNC | 10 | 38184330 | Basic | 0.0024 US$ |
 | C4109 | 0402WGF2001TCE | 1 | 10026671 | Basic | 0.0019 US$ |
 | C11702 | 0402WGF1001TCE | 4 | 31458906 | Basic | 0.0013 US$ |
 | C26083 | 0402WGF1004TCE | 2 | 2332165 | Basic | 0.0012 US$ |
@@ -65,12 +69,14 @@
 | C97998 | ? | 1 | sin respuesta | Extended | ? |
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
 | C88373 | ? | 1 | sin respuesta | Extended | ? |
+|  | ? | 1 | sin respuesta | Extended | ? |
+| C5378721 | ? | 4 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373
+- Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, , C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -82,4 +88,4 @@
 - Pines 9/10 de la microSD Hirose DM3AT según la huella de KiCad: comprobar con la hoja.
 - Pogo de 5 contactos y batería por hilos: el modelo real del pogo está pendiente (STEP).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::SUPERADA
+::notice title=Puerta de fabricación::NO SUPERADA
