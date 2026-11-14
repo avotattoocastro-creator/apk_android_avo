@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-20 — Motor legible para el entrenador y Mareas más limpia
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Motor** (entrenador: «algo legible y entendible, que cualquier entrenador pueda sacar provecho»). Se quitan la
+  cabecera del entrenamiento, la barra de ventana del archivo y la tarjeta técnica del motor. En su lugar:
+  - **Lectura del entrenamiento:** frases cortas con el reparto por aires, los tramos a galope (el más largo, con su
+    distancia y su media), las paradas, las frenadas sostenidas y las curvas. Avisa si no hay cincha y recuerda que no es un
+    diagnóstico veterinario.
+  - **Tiempo en cada aire:** barra de colores con tiempo, % y distancia por aire.
+  - **Fases del entrenamiento:** cada fase con su aire, desde → hasta, duración, distancia y media.
+  - **Momentos clave:** los eventos en lenguaje llano («Pasa de paso a galope», «Se para», «Arranca», «Frena de forma
+    sostenida», «Entra en curva a la izquierda»), con su minuto.
+  - **Curvas:** una frase por curva (sentido, giro, radio y fuerza lateral).
+  - **¿Cuánto fiarse de estos datos?:** semáforo por dominio, con nombres y explicación claros (cincha, sincronización,
+    archivo, calibración de sensores y cálculos del motor).
+  - **Detalle técnico** (plegado): las tablas originales del motor y «Reprocesar con el motor».
+  - Todo sale de las filas del motor: no se calcula ninguna cifra nueva.
+- **Mareas:**
+  - sin la cabecera del entrenamiento;
+  - «Marea · fuente y valores», «Meteorología y oleaje» y «Origen de los datos» con la misma altura;
+  - fuera los textos explicativos de «Origen de los datos». El estado solo aparece mientras carga o si hay un problema.
+**No se ha tocado:** el motor C++, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-19 — Gráficas sin la fila de botones
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):** por decisión del entrenador («quitarla entera»), «Gráficas» ya no tiene la fila de botones:
