@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-13 — Resumen: columnas del análisis del caballo a la misma altura
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** en «Análisis del caballo», las tres columnas terminan a la misma altura: Zonas de velocidad, Esfuerzo
+y Aceleraciones + Curvas. La tarjeta de Curvas se estira hasta abajo.
+**No se ha tocado:** el motor, Windows, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-12 — Resumen al estilo Equimetre, Resumen y Mapa primeros, ficha con «X»
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**
