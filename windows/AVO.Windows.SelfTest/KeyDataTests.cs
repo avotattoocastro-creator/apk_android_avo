@@ -26,6 +26,8 @@ public static class KeyDataTests
         assert(k.HasEngine, "Datos clave: resultado del motor reconocido");
         assert(V("vmax") == "65,0" && V("best200") == "11,36" && V("best600") == "35,31" && V("workdist") == "1,60",
             $"Datos clave: velocidad y mejores tramos ({V("vmax")} · {V("best200")} · {V("best600")} · {V("workdist")})");
+        var wdt = k.Tiles.FirstOrDefault(t => t.Id == "workdist");
+        assert(wdt?.T0 is double wa && wdt.T1 is double wb && wb > wa, "Datos clave: la distancia de trabajo abre las gráficas en el trabajo");
         assert(k.Best200S is double b2 && Math.Abs(b2 - 11.36) < 0.006, $"Datos clave: mejor 200 m numérico para Cuadra/Jinetes ({k.Best200S})");
         assert(V("distance") == "7,84" && V("duration") == "44:12", $"Datos clave: distancia y duración ({V("distance")} · {V("duration")})");
         assert(V("hrmax") == "—" && V("lmax") == "7,30" && V("fmax") == "2,36", "Datos clave: pulso vacío y tranco del motor");

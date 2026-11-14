@@ -121,8 +121,18 @@ public sealed class KeyData
             k.Tiles.Add(BestTile("best600", 600));
             // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
             // «Mejor 1000 m» (trainer 14/11/2026)
-            k.Tiles.Add(Tile("workdist", "Distancia de trabajo", Num(trabajos, "distancia_rapida_m") is double wd && wd > 0 ? wd / 1000 : (double?)null,
-                "0.00", "km", "Trabajo rápido del entrenamiento", NoFastCaption, 0));
+            var work = Tile("workdist", "Distancia de trabajo", Num(trabajos, "distancia_rapida_m") is double wd && wd > 0 ? wd / 1000 : (double?)null,
+                "0.00", "km", "Trabajo rápido del entrenamiento", NoFastCaption, 0);
+            // opens the charts on the work (first effort start → last effort end), like «Mejor 200 m» (trainer 14/11/2026)
+            double? w0 = null, w1 = null;
+            foreach (var e in efforts)
+            {
+                if (Num(e, "t0") is double a && (w0 is null || a < w0)) w0 = a;
+                if (Num(e, "t1") is double b && (w1 is null || b > w1)) w1 = b;
+            }
+            if (work.Available && w0 is double x0 && w1 is double x1 && x1 > x0)
+                work = work with { T0 = x0, T1 = x1, Caption = "Trabajo rápido · ver en gráficas" };
+            k.Tiles.Add(work);
             k.Tiles.Add(Tile("distance", "Distancia", Metric("distancia") / 1000, "0.00", "km", "Toda la sesión", "Sin datos", 0));
             double? dur = Metric("duracion");
             k.Tiles.Add(new KeyTile("duration", "Duración", dur is double ds ? Clock(ds) : "—", "", dur is null ? "Sin datos" : "Toda la sesión", dur is not null, 0));

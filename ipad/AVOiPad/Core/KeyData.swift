@@ -142,8 +142,18 @@ struct KeyData: Equatable {
         t.append(bestTile("best600", 600))
         // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
         // «Mejor 1000 m» (trainer 14/11/2026)
-        t.append(tile("workdist", "Distancia de trabajo", num(trabajos, "distancia_rapida_m").flatMap { $0 > 0 ? $0 / 1000 : nil },
-                      "0.00", "km", "Trabajo rápido del entrenamiento", noFastCaption, 0))
+        var work: KeyTile = tile("workdist", "Distancia de trabajo", num(trabajos, "distancia_rapida_m").flatMap { $0 > 0 ? $0 / 1000 : nil },
+                                 "0.00", "km", "Trabajo rápido del entrenamiento", noFastCaption, 0)
+        // opens the charts on the work (first effort start → last effort end), like «Mejor 200 m» (trainer 14/11/2026)
+        let w0: Double? = efforts.compactMap { num($0, "t0") }.min()
+        let w1: Double? = efforts.compactMap { num($0, "t1") }.max()
+        if work.available, let a = w0, let b = w1, b > a {
+            work = KeyTile(id: work.id, label: work.label, value: work.value, unit: work.unit,
+                           caption: "Trabajo rápido · ver en gráficas", available: true, group: work.group)
+            work.t0 = a
+            work.t1 = b
+        }
+        t.append(work)
         t.append(tile("distance", "Distancia", metrics["distancia"].map { $0 / 1000 }, "0.00", "km", "Toda la sesión", "Sin datos", 0))
         let dur: Double? = metrics["duracion"]
         t.append(KeyTile(id: "duration", label: "Duración", value: dur.map { TimeText.clock($0) } ?? "—", unit: "",

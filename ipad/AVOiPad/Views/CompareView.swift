@@ -675,6 +675,8 @@ struct CompareMap: View {
     var model: CompareModel
     @State private var position: MapCameraPosition = .automatic
     @State private var region: MKCoordinateRegion? = nil
+    @State private var camera: MapCamera? = nil
+    @State private var size: CGSize = .zero
 
     /// Explícito: los `@State` privados harían privado el inicializador por miembros (se usa también en Análisis).
     init(model: CompareModel) { self.model = model }
@@ -706,6 +708,7 @@ struct CompareMap: View {
                 .mapStyle(app.settings.map == .vectorOffline ? MapStyle.standard : MapStyle.imagery)
                 .onMapCameraChange(frequency: .onEnd) { (ctx: MapCameraUpdateContext) in
                     region = ctx.region
+                    camera = ctx.camera
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -732,6 +735,11 @@ struct CompareMap: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.line, lineWidth: 1))
+        .background(GeometryReader { (g: GeometryProxy) in
+            Color.clear
+                .onAppear { size = g.size; fit(model.tracks) }
+                .onChange(of: g.size) { _, v in size = v }
+        })
         .onAppear { fit(model.tracks) }
         .onChange(of: model.tracks.map { $0.id }) { fit(model.tracks) }
     }
@@ -749,16 +757,49 @@ struct CompareMap: View {
         .accessibilityLabel(label)
     }
 
+    /// Same start as «Mapa» (trainer's sketch 14/11/2026: «zoom y orientación de inicio»): the routes laid horizontal
+    /// (sea at the top, as in MapKitRoute) and framed with a margin.
     private func fit(_ list: [CompareTrack]) {
-        guard let r = CompareMap.bounds(list) else {
-            position = .automatic
+        var pts: [MKMapPoint] = []
+        for t in list { for run in t.runs { for c in run where c.latitude.isFinite && c.longitude.isFinite { pts.append(MKMapPoint(c)) } } }
+        guard pts.count > 1, size.width > 40, size.height > 40 else {
+            if let r = CompareMap.bounds(list) { region = r; withAnimation { position = .region(r) } } else { position = .automatic }
             return
         }
-        region = r
-        withAnimation { position = .region(r) }
+        let theta: Double? = MapKitRoute.Coordinator.routeAxis(pts)
+        let heading: Double = theta.map { MapKitRoute.Coordinator.horizontalHeading(axis: $0) } ?? 0
+        let hr: Double = heading * .pi / 180
+        let rx: Double = cos(hr), ry: Double = sin(hr), dxv: Double = -sin(hr), dyv: Double = cos(hr)
+        var sx: Double = 0, sy: Double = 0
+        for p in pts { sx += p.x; sy += p.y }
+        let c0 = MKMapPoint(x: sx / Double(pts.count), y: sy / Double(pts.count))
+        var uMin: Double = .infinity, uMax: Double = -.infinity, vMin: Double = .infinity, vMax: Double = -.infinity
+        for p in pts {
+            let ox: Double = p.x - c0.x, oy: Double = p.y - c0.y
+            let u: Double = ox * rx + oy * ry, v: Double = ox * dxv + oy * dyv
+            uMin = min(uMin, u); uMax = max(uMax, u); vMin = min(vMin, v); vMax = max(vMax, v)
+        }
+        let perMetre: Double = MKMapPointsPerMeterAtLatitude(c0.coordinate.latitude)
+        let w: Double = max(uMax - uMin, 150 * perMetre), h: Double = max(vMax - vMin, 150 * perMetre)
+        let availW: Double = max(40, Double(size.width) - 110), availH: Double = max(40, Double(size.height) - 70)
+        let mpp: Double = max(w / availW, h / availH)
+        let um: Double = (uMin + uMax) / 2, vm: Double = (vMin + vMax) / 2
+        let centre = MKMapPoint(x: c0.x + um * rx + vm * dxv, y: c0.y + um * ry + vm * dyv)
+        // visible height in metres → camera distance (MapKit vertical field of view ≈ 30°)
+        let visibleH: Double = mpp * Double(size.height) / perMetre
+        let distance: Double = max(200, visibleH / (2 * tan(15 * Double.pi / 180)))
+        let cam = MapCamera(centerCoordinate: centre.coordinate, distance: distance, heading: heading, pitch: 0)
+        camera = cam
+        withAnimation { position = .camera(cam) }
     }
 
     private func zoomMap(_ factor: Double) {
+        if let c = camera {
+            let z = MapCamera(centerCoordinate: c.centerCoordinate, distance: max(80, c.distance * factor), heading: c.heading, pitch: c.pitch)
+            camera = z
+            withAnimation { position = .camera(z) }
+            return
+        }
         guard let r = region ?? CompareMap.bounds(model.tracks) else { return }
         let lat: Double = min(max(r.span.latitudeDelta * factor, 0.0002), 120)
         let lon: Double = min(max(r.span.longitudeDelta * factor, 0.0002), 240)

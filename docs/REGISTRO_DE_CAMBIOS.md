@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-25 — Distancia de trabajo enlazada a gráficas y mapa de Comparar orientado
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia:**
+- **Datos clave / Parámetros clave (iPad y Windows, por igual):** «Distancia de trabajo» abre las gráficas sobre el trabajo,
+  igual que «Mejor 200 m» y «Mejor 600 m». El tramo va del inicio del primer esfuerzo al final del último, según el motor.
+  Hay una prueba idéntica en iPad y Windows.
+- **Comparar (iPad):** el mapa de recorridos arranca como «Mapa»: recorrido en horizontal (el mar arriba, misma regla que
+  `MapKitRoute`) y encuadrado con margen. «Ajustar recorridos» vuelve a esa vista, y las lupas conservan la orientación.
+**No se ha tocado:** el motor C++, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-24 — Resumen: marea subiendo o bajando
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):** el tiempo del Resumen muestra la marea con su tendencia a la hora del entrenamiento: «Marea 1,70 m ·

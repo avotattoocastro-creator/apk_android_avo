@@ -26,6 +26,8 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(k.best200S ?? 0, 11.36, accuracy: 0.006)   // Cuadra/Jinetes «Mejor 200 m»
         XCTAssertEqual(v("best600"), "35,31")
         XCTAssertEqual(v("workdist"), "1,60")
+        let wd: KeyTile? = k.tiles.first { $0.id == "workdist" }
+        XCTAssertTrue((wd?.t1 ?? 0) > (wd?.t0 ?? 0))   // opens the charts on the work, like Windows
         XCTAssertEqual(v("distance"), "7,84")
         XCTAssertEqual(v("duration"), "44:12")
         XCTAssertEqual(v("hrmax"), "—")
