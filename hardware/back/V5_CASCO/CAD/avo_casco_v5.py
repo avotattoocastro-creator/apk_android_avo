@@ -78,7 +78,8 @@ def base():
     b = b.cut(rrect(IN, IN, PCB["r"] + CL, Z_PCB_TOP, z0=FLOOR))
     # columnas de los tornillos (apoyo de la PCB en la cara F)
     for (x, y) in SCREWS:
-        b = b.union(cyl(x, y, 0, SCREW["boss"], Z_F))
+        b = b.union(cyl(x, y, 0, SCREW["boss"], Z_F - 2.8))
+        b = b.union(cyl(x, y, Z_F - 2.9, 5.6, 2.9))   # bajo la PCB: Ø5,6 (el patio del ESP32 queda a 3,0 del taladro)
     # pogo: zona maciza hasta la base del reborde, alojamiento del reborde, copa de epoxi y paso de la cara
     py, cl = POGO["y"], POGO["clear"]
     fl, fw = POGO["f_l"] + 2 * cl, POGO["f_w"] + 2 * cl
