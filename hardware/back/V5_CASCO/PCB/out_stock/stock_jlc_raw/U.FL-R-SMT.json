@@ -1,0 +1,3007 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 20,
+   "list": [
+    {
+     "componentId": 6047773,
+     "componentLibraryType": "expand",
+     "stockCount": 309970,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "\u5185\u9488 IPEX",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_g-switch-gt-rf1125a-01g_C5299419.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0416
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0336
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4499,
+       "productPrice": 0.0262
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": 8999,
+       "productPrice": 0.0236
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0228
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0324
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.022
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0401
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4499,
+       "productPrice": 0.0253
+      },
+      {
+       "startNumber": 4500,
+       "endNumber": 8999,
+       "productPrice": 0.0227
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 308372,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "GSwitch-GT_RF1125A01G/C5299419",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4500,
+     "shopCostPrice": 0.115,
+     "preMinPurchaseNum": 269,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0416,
+     "componentCode": "C5299419",
+     "componentBrandEn": "G-Switch",
+     "componentModelEn": "GT-RF1125A-01G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585193537956139008-C5299419/C5299419-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3d8df0d8c5ce55e99250d8e1d9b7fa52fcf712060b73f342a3e63f8c06948a11",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304071800_G-Switch-GT-RF1125A-01G_C5299419.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590902576290885632-C5299419.pdf?response-content-disposition=attachment%3B%20filename%3DC5299419.pdf%3B%20filename%2A%3DUTF-8%27%27C5299419.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=526d48e4a611418194b33bd3b47f08cbebc2947a44854aba45845790d1cb30ff",
+     "dataManualOfficialLink": "",
+     "componentName": "G-Switch GT-RF1125A-01G",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585193538929758208-C5299419/C5299419-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=522196ce947b6083e6250f1b5f45f249502fa9baa09cc60582fe4c97a1460d88",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Rated Voltage (Max)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56001913,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011U.FL-R-SMT-1",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-U_FL_R_SMT1/C9900241784",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900241784",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "U.FL-R-SMT-1",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT U.FL-R-SMT-1",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 432319,
+     "componentLibraryType": "expand",
+     "stockCount": 17162,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-10_C434808.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.3566
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2892
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2602
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.2242
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.2082
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1985
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.3435
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1912
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.2785
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.2005
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.2506
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.216
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 13469,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_10/C434808",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 0.81704,
+     "preMinPurchaseNum": 26,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.3566,
+     "componentCode": "C434808",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT(10)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583413653084889088-C434808/C434808-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ff833e6ba38faeec33d03c28797200e0b4596ff1c63502573da6ab486a519a82",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_HRS-Hirose-U-FL-R-SMT-10_C434808.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588905427899715584-C434808.pdf?response-content-disposition=attachment%3B%20filename%3DC434808.pdf%3B%20filename%2A%3DUTF-8%27%27C434808.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e9aa94a624763f5e0a481eab45401f8e5b35a8cd984b49a580203d039269dffc",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT(10)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583413654088273920-C434808/C434808-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8eefefc7a3cf616b1c00e29cdc6a95714a4738a13346a5c3dfdf703e5554b68f",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>(10)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 432323,
+     "componentLibraryType": "expand",
+     "stockCount": 1561,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-01_C434812.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.6902
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.4382
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.2991
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.1421
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0717
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0406
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.6281
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.2515
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0024
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.3854
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.1002
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0324
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 1372,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_01/C434812",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 100,
+     "shopCostPrice": 4.29518,
+     "preMinPurchaseNum": 6,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.6902,
+     "componentCode": "C434812",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT(01)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583457004103221248-C434812/C434812-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5aeb58286d2b6c133801a323e7c153a7a3dc0bd98636383b200096ca414888bd",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_HRS-Hirose-U-FL-R-SMT-01_C434812.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588911875119988736-C434812.pdf?response-content-disposition=attachment%3B%20filename%3DC434812.pdf%3B%20filename%2A%3DUTF-8%27%27C434812.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b1405ce8b10697ea85502b2bf4020cbe1d671bde4c1a7c3a553a8ec90ea69f5b",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT(01)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583457005033951232-C434812/C434812-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d7d0f21f70e29728789dc3bd26a79c17498e3c66e746a0a435284f2e3289245f",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Inner pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>(01)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56105344,
+     "componentLibraryType": "expand",
+     "stockCount": 5383,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "\u5185\u9488 IPEX",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.046
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0365
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.032
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0241
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0246
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0443
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0232
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0308
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0273
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0352
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 5332,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HMTCONN-HMT_U_FL_RSMT/C53122033",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.11962,
+     "preMinPurchaseNum": 248,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.046,
+     "componentCode": "C53122033",
+     "componentBrandEn": "HMTCONN",
+     "componentModelEn": "HMT-U.FL-R-SMT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8764902433375952896-C53122033-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2d99343915277fa712f2a9c450e1fec3bdaabf34de5ad91872ecf8d58199acf7",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8757231351902941184-C53122033.pdf?response-content-disposition=attachment%3B%20filename%3DC53122033.pdf%3B%20filename%2A%3DUTF-8%27%27C53122033.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=04fc8d683d59b5d2d130c97b1f7168b86a1c642bd69cd4afb5edacbe3fd7ea48",
+     "dataManualOfficialLink": "",
+     "componentName": "HMTCONN HMT-U.FL-R-SMT",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8764902434411810816-C53122033-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2083e15e8d2f06ee4dabda6713b4f6b82de9a9ce0b49bbaed4d4022ca7ed9f08",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "HMT-<span class='lucene_highlight_class'>U.FL-R-SMT</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3239015,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "IPEX-U.FL-R-SMT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0003
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0002
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-IPEX_U_FL_RSMT/C9900002135",
+     "leastPatchNumber": 10,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.001,
+     "preMinPurchaseNum": 1000,
+     "minPurchaseNum": 1000,
+     "initialPrice": 0.0003,
+     "componentCode": "C9900002135",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "IPEX-U.FL-R-SMT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT IPEX-U.FL-R-SMT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "U.FL-R-SMT",
+     "describe": "SMD_2.6X2.6 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "IPEX-<span class='lucene_highlight_class'>U.FL-R-SMT</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 89552,
+     "componentLibraryType": "expand",
+     "stockCount": 13757,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-10_C88373.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2289
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1813
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1581
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1373
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1316
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1282
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.2205
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1747
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.1235
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1268
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1523
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1323
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 12595,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_10/C88373",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 0.57996,
+     "preMinPurchaseNum": 40,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2289,
+     "componentCode": "C88373",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(10)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583418674619830272-C88373/C88373-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5ec9a4db934df9a44cb573ecd41d1c85a5d3d18c17b550731a3abe3c9922f7b5",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_HRS-Hirose-U-FL-R-SMT-1-10_C88373.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588906205587132416-C88373.pdf?response-content-disposition=attachment%3B%20filename%3DC88373.pdf%3B%20filename%2A%3DUTF-8%27%27C88373.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=714f629a1cfb8b18ca6b17ae8dbaa09e4b17434d5b8315ae075662b7ca91ae75",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(10)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583418675525529600-C88373/C88373-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cde27e939f9e73b43a38200f7f295533f8bc44c0ce61a3f30cedcaa600e7b70a",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(10)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 89553,
+     "componentLibraryType": "expand",
+     "stockCount": 293723,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-80_C88374.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1092
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0891
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0786
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0701
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0671
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0652
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1052
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0647
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0628
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0858
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0757
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0675
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 289367,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_80/C88374",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.29304,
+     "preMinPurchaseNum": 102,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1092,
+     "componentCode": "C88374",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(80)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8749025542513807360-C88374-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=436541a732634e63eb55bbf5c78afc3bf9f8a219da077e740c1b541373a5304e",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811091710_HRS-Hirose-U-FL-R-SMT-1-80_C88374.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588893499966574592-C88374.pdf?response-content-disposition=attachment%3B%20filename%3DC88374.pdf%3B%20filename%2A%3DUTF-8%27%27C88374.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a0f5d70706534d6a00d4236cb747489d27f8ab4a829333b2a847de408a5b10c8",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(80)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8749025543570771968-C88374-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ce76944e08718a35dacdd35f2d1e34ccc915bbe27617c8b620938f6af5c06f55",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(80)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 139953,
+     "componentLibraryType": "expand",
+     "stockCount": 3556,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-60_C128668.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.2533
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.0472
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9343
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.8067
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7494
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.7249
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7219
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.0087
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.6983
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.2073
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.7771
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 3436,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_60/C128668",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 3.49394,
+     "preMinPurchaseNum": 8,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.2533,
+     "componentCode": "C128668",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(60)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770563449258954752-C128668-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b3ff7ce0f764e5534d65c635507a5469e227aaccab3552985f38c97cb96dc41a",
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(60)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8770563450353127424-C128668-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=245600eacd9a51aad2d44239902220524ae70587fe22c0bc85f5de575710c6a2",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "1 50\u03a9 8GHz Board Side IPEX SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "8GHz"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(60)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 432327,
+     "componentLibraryType": "expand",
+     "stockCount": 1,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "\u5185\u9488 IPEX",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-40_C434816.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 2.0272
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.6983
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.4922
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.2828
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.1879
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.1453
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.636
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.2357
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.1033
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.9528
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.4374
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.1443
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": -21,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_40/C434816",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 6.6653,
+     "preMinPurchaseNum": 5,
+     "minPurchaseNum": 5,
+     "initialPrice": 2.0272,
+     "componentCode": "C434816",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(40)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583491002527330304-C434816/C434816-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fca8c1b7c7115cb3cb2c0a6209dccfc59bae38af0182b310c54af34743fa81be",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_HRS-Hirose-U-FL-R-SMT-1-40_C434816.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588918426177294336-C434816.pdf?response-content-disposition=attachment%3B%20filename%3DC434816.pdf%3B%20filename%2A%3DUTF-8%27%27C434816.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6ba4f0613bd648587391fab84a6635d30a19f5bc650a64a259f127f5b18379ca",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(40)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583491003340754944-C434816/C434816-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b70d17b0b7c8c7f1a36673fd993d958287fb70a228a9108021545fef2e82742d",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(40)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 626815,
+     "componentLibraryType": "expand",
+     "stockCount": 7437,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-01_C598199.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.25
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.057
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9506
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.8279
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7739
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.751
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.2042
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.0182
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.9158
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.7975
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.7455
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.7235
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 7059,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_01/C598199",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 100,
+     "shopCostPrice": 3.28,
+     "preMinPurchaseNum": 8,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.25,
+     "componentCode": "C598199",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(01)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583489807343763456-C598199/C598199-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8866cbb2604bacd0b41623df96430f920d5b0cfe910dffcb2d5d5193231a9c9c",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2006112255_HRS-Hirose-U-FL-R-SMT-1-01_C598199.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588918302734868480-C598199.pdf?response-content-disposition=attachment%3B%20filename%3DC598199.pdf%3B%20filename%2A%3DUTF-8%27%27C598199.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0d5453139f6aec5e35ed6433a2271119c0573389d1fedec8b22844a546462d51",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(01)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583489808249868288-C598199/C598199-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bc38e8fb0fb0d115185a708c0fabe6bb48dd9b874443821c5fe88ac53be493a3",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Male Pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(01)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6742034,
+     "componentLibraryType": "expand",
+     "stockCount": 15,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/coaxial-connectors-rf_hrs-hirose-u-fl-r-smt-1-32_C5812623.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.7033
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.6673
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.6411
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 1.6165
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 1.6165
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 1.6165
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 1.5572
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.6061
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 1.5572
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.5809
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.6407
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 1.5572
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "896d6e82f1914fee94e8dd09ce463d0a",
+     "canPresaleNumber": 15,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_32/C5812623",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2500,
+     "shopCostPrice": 7.892,
+     "preMinPurchaseNum": 6,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.7033,
+     "componentCode": "C5812623",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(32)",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8789894846897512448-C5812623-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b926c6d479ee51cb4a22a37626d0ddb774f7736e62d13a3620060bca0dec0bff",
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8602678741420294144-C5812623.pdf?response-content-disposition=attachment%3B%20filename%3DC5812623.pdf%3B%20filename%2A%3DUTF-8%27%27C5812623.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=31806449660d6214bb579d2358cbfa5f02526e3b4438aa95e3156ff86757c2f9",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(32)",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8789894847937564672-C5812623-front.jpg?x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bf7a16071e73f1f65b318de5c4d25f3f4177a6614363586a3447223e552033dc",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "-40\u2103~+105\u2103 1 50\u03a9 8GHz Board Side IPEX - Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "8GHz"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(32)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 29638666,
+     "componentLibraryType": "expand",
+     "stockCount": 2,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "\u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.4621
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.3868
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.3361
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 3.2854
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 3.2854
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 3.2854
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 3.1648
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 3.1648
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.2137
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.335
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 3.1648
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.2625
+      }
+     ],
+     "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
+     "secondSortAccessId": "cfa9bf2378174788abc09e74d45d5b30",
+     "canPresaleNumber": 2,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_K_895/C27906297",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 16.0252,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.4621,
+     "componentCode": "C27906297",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-K(895)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604436491255107584-C27906297.pdf?response-content-disposition=attachment%3B%20filename%3DC27906297.pdf%3B%20filename%2A%3DUTF-8%27%27C27906297.pdf&x-oss-date=20261114T143529Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=378c971d213dd02ad12e0bcc0fd7bf6cea3dddae4a1afa44fa0e0c0308bd76e7",
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-K(895)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "1 1.25mm 2mm Board Side Inner pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-K(895)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 625355,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Coaxial Connectors (RF)",
+     "erpComponentName": "IPEX \u5185\u9488",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rf connectors / coaxial connectors_hrs(hirose)_u.fl-r-smt-1(01)_C596814.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.4873
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.4873
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.4873
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.576
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5563
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5465
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5265
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.5548
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 1.4327
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.4327
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5359
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 1.4327
+      }
+     ],
+     "firstSortAccessId": "3db4bff6cfd743f6af1575bf175e9774",
+     "secondSortAccessId": "cfa9bf2378174788abc09e74d45d5b30",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "HRS_Hirose-U_FL_R_SMT_1_01/C596814",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 100,
+     "shopCostPrice": 3.03,
+     "preMinPurchaseNum": 7,
+     "minPurchaseNum": 7,
+     "initialPrice": 1.4873,
+     "componentCode": "C596814",
+     "componentBrandEn": "HRS(Hirose)",
+     "componentModelEn": "U.FL-R-SMT-1(01)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2101281833_HRS-Hirose-U-FL-R-SMT-1-01_C596814.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "HRS U.FL-R-SMT-1(01)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+90\u2103 1 1.25mm 2mm 50\u03a9 6GHz Board Side IPEX Inner pin SMD Coaxial Connectors (RF) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Interface Diameter",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Number of Ports",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface Length/Height",
+       "attribute_value_name": "1.25mm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature Range",
+       "attribute_value_name": "-40\u2103~+90\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Board Side"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "6GHz"
+      },
+      {
+       "attribute_name_en": "Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Impedance",
+       "attribute_value_name": "50\u03a9"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "Inner pin"
+      },
+      {
+       "attribute_name_en": "RF Series",
+       "attribute_value_name": "IPEX"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Coaxial Connectors (RF)",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(01)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3569995,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "U.FL-R-SMT-1(80)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-U_FL_R_SMT_1_80/C9900020048",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900020048",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "U.FL-R-SMT-1(80)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT U.FL-R-SMT-1(80)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMA_IPX",
+     "describe": "SMA_IPX SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(80)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23851916,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "U.FL-R-SMT-1_HRS",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-U_FL_R_SMT1_HRS/C9900096664",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900096664",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "U.FL-R-SMT-1_HRS",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT U.FL-R-SMT-1_HRS",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "UFL-R-SMT-1_SMD",
+     "describe": "UFL-R-SMT-1_SMD New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1_HRS",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 60516430,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011U.FL-R-SMT-1(80)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-U_FL_R_SMT_1_80/C9900323906",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900323906",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "U.FL-R-SMT-1(80)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT U.FL-R-SMT-1(80)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(80)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44413307,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "U.FL-R-SMT-1(80)SMD",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "44413307-U_FL_R_SMT_1_80SMD/C9900161415",
+     "leastPatchNumber": 2,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900161415",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "U.FL-R-SMT-1(80)SMD",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT U.FL-R-SMT-1(80)SMD",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(80)SMD",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56612663,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011HRSU.FL-R-SMT-1(10)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "56612663-HRSU_FL_R_SMT_1_10/C9900256847",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900256847",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "HRSU.FL-R-SMT-1(10)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT HRSU.FL-R-SMT-1(10)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "SMD SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "HRS<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(10)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3391676,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "KH-IPEX:IPX-X\u677f\u7aefIPX\u63a5\u5934,\u8d34\u7247:U.FL-R-SMT-1(80)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0003
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0002
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0007
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "C9900008284",
+     "leastPatchNumber": 10,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.001,
+     "preMinPurchaseNum": 1000,
+     "minPurchaseNum": 1000,
+     "initialPrice": 0.0003,
+     "componentCode": "C9900008284",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "KH-IPEX\uff1aIPX-X\u677f\u7aefIPX\u63a5\u5934\uff0c\u8d34\u7247\uff1aU.FL-R-SMT-1(80)",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT KH-IPEX:IPX-X\u677f\u7aefIPX\u63a5\u5934,\u8d34\u7247:U.FL-R-SMT-1(80)",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "ANT-SMD_KH-IPEX-K501-29",
+     "describe": "ANT-SMD_KH-IPEX-K501-29 SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "KH-IPEX\uff1aIPX-X\u677f\u7aefIPX\u63a5\u5934\uff0c\u8d34\u7247\uff1a<span class='lucene_highlight_class'>U.FL-R-SMT</span>-1(80)",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "U.FL-R-SMT"
+ },
+ "message": null
+}

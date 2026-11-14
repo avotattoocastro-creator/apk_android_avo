@@ -1,0 +1,4464 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 260,
+   "list": [
+    {
+     "componentId": 514592,
+     "componentLibraryType": "expand",
+     "stockCount": 1674,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "\u00b10.25pF 0.25pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_fh-guangdong-fenghua-advanced-tech-0402cgr25c500nt_C501833.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0011
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0008
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0007
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0007
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.001
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0008
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 1267,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "514592-0402CGR25C500NT/C501833",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00342,
+     "preMinPurchaseNum": 8203,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0016,
+     "componentCode": "C501833",
+     "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+     "componentModelEn": "0402CGR25C500NT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583554481842110465-C501833/C501833-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c0cd76b4f64a03786da8af9e6a898d378276eaecf1518785956c9c28af85fa1b",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_FH--Guangdong-Fenghua-Advanced-Tech-0402CGR25C500NT_C501833.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770991116017373184-C501833.pdf?response-content-disposition=attachment%3B%20filename%3DC501833.pdf%3B%20filename%2A%3DUTF-8%27%27C501833.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=33fb2c914145526b6dc5df8b33ba9aab7629e59b5cfbeb0ea9431bc542118ed1",
+     "dataManualOfficialLink": "",
+     "componentName": "FH 0402CGR25C500NT",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583554482781229057-C501833/C501833-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1dd48c2608dc7bee33cf5409476ab3256154c957ed41d4f8a0a7494e50bcd9fb",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 50V C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 50V C0G <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2271196,
+     "componentLibraryType": "expand",
+     "stockCount": 106,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "\u00b10.1pF 0.25pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_murata-electronics-gcq1555c1hr25bb01d_C2179129.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0851
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0693
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0612
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0552
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0504
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0482
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0532
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0464
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.082
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0486
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.059
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0667
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 102,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "2271196-GCQ1555C1HR25BB01D/C2179129",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.2025,
+     "preMinPurchaseNum": 131,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0851,
+     "componentCode": "C2179129",
+     "componentBrandEn": "Murata Electronics",
+     "componentModelEn": "GCQ1555C1HR25BB01D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2202041030_Murata-Electronics-GCQ1555C1HR25BB01D_C2179129.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589930036729323520-C2179129.pdf?response-content-disposition=attachment%3B%20filename%3DC2179129.pdf%3B%20filename%2A%3DUTF-8%27%27C2179129.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fc57be3ad629536c7b03f65eaff906b375ad83cbcf9142a5816ab1895198752a",
+     "dataManualOfficialLink": "",
+     "componentName": "muRata GCQ1555C1HR25BB01D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 50V 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 50V <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1941924,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 100V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04021jr25pbstr_C1851111.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2198
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1752
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1561
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1324
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1218
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1154
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1112
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1688
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1276
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1504
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2117
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1173
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04021JR25PBSTR/C1851111",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 58,
+     "minPurchaseNum": 58,
+     "initialPrice": 0.1561,
+     "componentCode": "C1851111",
+     "componentBrandEn": "--",
+     "componentModelEn": "04021JR25PBSTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309150912_Kyocera-AVX-04021JR25PBSTR_C1851111.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589917476932132864-C1851111.pdf?response-content-disposition=attachment%3B%20filename%3DC1851111.pdf%3B%20filename%2A%3DUTF-8%27%27C1851111.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7e884bd53f79419ea26eec5fe65a9d5486a18ac231890c59c5fb822f06b779c",
+     "dataManualOfficialLink": "",
+     "componentName": "04021JR25PBSTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 100V 0402 Film Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 100V <span class='lucene_highlight_class'>0402</span> Film Capacitors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1942001,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 100V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04021jr25pbstr-500_C1851188.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2355
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1877
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1673
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1417
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1304
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1236
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.119
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1808
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1365
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1612
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2268
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1257
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04021JR25PBSTR500/C1851188",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 54,
+     "minPurchaseNum": 54,
+     "initialPrice": 0.1673,
+     "componentCode": "C1851188",
+     "componentBrandEn": "--",
+     "componentModelEn": "04021JR25PBSTR\\500",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309150913_Kyocera-AVX-04021JR25PBSTR-500_C1851188.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589915339787173888-C1851188.pdf?response-content-disposition=attachment%3B%20filename%3DC1851188.pdf%3B%20filename%2A%3DUTF-8%27%27C1851188.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c2316940fbc6f7a034276c0ea6874538538606b0a5dfaf4c1c96117c1d11496d",
+     "dataManualOfficialLink": "",
+     "componentName": "04021JR25PBSTR\\500",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 100V 0402 Film Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 100V <span class='lucene_highlight_class'>0402</span> Film Capacitors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 1942019,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 100V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04021jr25zbwtr-500_C1851206.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2919
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.2329
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.2075
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1758
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1617
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1534
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1477
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.2243
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1694
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1999
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2812
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1558
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04021JR25ZBWTR500/C1851206",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 44,
+     "minPurchaseNum": 44,
+     "initialPrice": 0.2075,
+     "componentCode": "C1851206",
+     "componentBrandEn": "--",
+     "componentModelEn": "04021JR25ZBWTR\\500",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309150913_Kyocera-AVX-04021JR25ZBWTR-500_C1851206.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589944848103858176-C1851206.pdf?response-content-disposition=attachment%3B%20filename%3DC1851206.pdf%3B%20filename%2A%3DUTF-8%27%27C1851206.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=579821d34781a43539a968a20adc781bfe5ae5abb62b8cbf4f60ede81c0fea7b",
+     "dataManualOfficialLink": "",
+     "componentName": "04021JR25ZBWTR\\500",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 100V 0402 Film Capacitors",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 100V <span class='lucene_highlight_class'>0402</span> Film Capacitors",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2246507,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 25V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04023jr25pbstr_C2154458.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2247
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1791
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1596
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1354
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1244
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.118
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1137
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1726
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1304
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1537
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2164
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1198
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04023JR25PBSTR/C2154458",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 57,
+     "minPurchaseNum": 57,
+     "initialPrice": 0.1596,
+     "componentCode": "C2154458",
+     "componentBrandEn": "--",
+     "componentModelEn": "04023JR25PBSTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309150914_Kyocera-AVX-04023JR25PBSTR_C2154458.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589905425383383040-C2154458.pdf?response-content-disposition=attachment%3B%20filename%3DC2154458.pdf%3B%20filename%2A%3DUTF-8%27%27C2154458.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6169c9aaaa27588b333baddc87101c631357cede3335374e0bb8d70de1531616",
+     "dataManualOfficialLink": "",
+     "componentName": "04023JR25PBSTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 25V 0402 Film Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "25V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 25V <span class='lucene_highlight_class'>0402</span> Film Capacitors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2246538,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 25V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04023jr25pbwtr_C2154489.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.1869
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1489
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1327
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1126
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1035
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0981
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0945
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.1435
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.1085
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1279
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.18
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0997
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04023JR25PBWTR/C2154489",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 68,
+     "minPurchaseNum": 68,
+     "initialPrice": 0.1327,
+     "componentCode": "C2154489",
+     "componentBrandEn": "--",
+     "componentModelEn": "04023JR25PBWTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309150914_Kyocera-AVX-04023JR25PBWTR_C2154489.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589838669067546624-C2154489.pdf?response-content-disposition=attachment%3B%20filename%3DC2154489.pdf%3B%20filename%2A%3DUTF-8%27%27C2154489.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5af795fd4cdfd035910557f4ebfa7caab7f825e4b337c13bf2ce91ab53b22fb5",
+     "dataManualOfficialLink": "",
+     "componentName": "04023JR25PBWTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 25V 0402 Film Capacitors",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "25V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 25V <span class='lucene_highlight_class'>0402</span> Film Capacitors",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 0,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2469040,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "\u00b10.25pF 0.25pF 200V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_knowles-c04ulr25c-6sn-x0t_C2376935.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.5171
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.5171
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.5171
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.2013
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1931
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1898
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1829
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.1939
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.4981
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.4981
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.4981
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.186
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "Knowles-C04ULR25C_6SNX0T/C2376935",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 18,
+     "minPurchaseNum": 18,
+     "initialPrice": 0.5171,
+     "componentCode": "C2376935",
+     "componentBrandEn": "Knowles",
+     "componentModelEn": "C04ULR25C-6SN-X0T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Knowles-C04ULR25C-6SN-X0T_C2376935.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589862173955956736-C2376935.pdf?response-content-disposition=attachment%3B%20filename%3DC2376935.pdf%3B%20filename%2A%3DUTF-8%27%27C2376935.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=314c47aa6505f6b2d6d66d31378defab11e8a7389dcecde2c88b871c7a8a5d7a",
+     "dataManualOfficialLink": "",
+     "componentName": "Knowles C04ULR25C-6SN-X0T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 200V NP0 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "200V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "NP0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 200V NP0 <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2741889,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 100V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04021jr25zbstr_C2649980.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2708
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.2159
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1925
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.163
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1501
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.1422
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.137
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.2079
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.157
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.1854
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.2609
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.1446
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "-04021JR25ZBSTR/C2649980",
+     "leastPatchNumber": 5,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 47,
+     "minPurchaseNum": 47,
+     "initialPrice": 0.1925,
+     "componentCode": "C2649980",
+     "componentBrandEn": "--",
+     "componentModelEn": "04021JR25ZBSTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2309151049_Kyocera-AVX-04021JR25ZBSTR_C2649980.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590148382972153856-C2649980.pdf?response-content-disposition=attachment%3B%20filename%3DC2649980.pdf%3B%20filename%2A%3DUTF-8%27%27C2649980.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=645099344d98c20e33b95e54b6a08f96c929ce77adf3af791fdc199756f144d4",
+     "dataManualOfficialLink": "",
+     "componentName": "04021JR25ZBSTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 100V 0402 Film Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Dielectric Material",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 100V <span class='lucene_highlight_class'>0402</span> Film Capacitors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4414288,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "\u00b10.1pF 0.25pF 200V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_knowles-c04ulr25b-6sn-x0t_C3845805.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9719
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.9719
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.9719
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3764
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3633
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3567
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3436
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3625
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.9362
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.9362
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9362
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3499
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Knowles-C04ULR25B_6SNX0T/C3845805",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 10,
+     "minPurchaseNum": 10,
+     "initialPrice": 0.9719,
+     "componentCode": "C3845805",
+     "componentBrandEn": "Knowles",
+     "componentModelEn": "C04ULR25B-6SN-X0T",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401181550_Knowles-C04ULR25B-6SN-X0T_C3845805.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590299437789708288-C3845805.pdf?response-content-disposition=attachment%3B%20filename%3DC3845805.pdf%3B%20filename%2A%3DUTF-8%27%27C3845805.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c26e12d5d4958c892de50ac90f46dc260995ebd50822f48fc272773a40dff120",
+     "dataManualOfficialLink": "",
+     "componentName": "Knowles C04ULR25B-6SN-X0T",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 200V C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "200V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 200V C0G <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4466036,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "0.25pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_murata-electronics-gjm1555c1hr25rb12d_C3897506.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0488
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.0488
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.0488
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0189
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0179
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.0182
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.047
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.047
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.047
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0175
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "4466036-GJM1555C1HR25RB12D/C3897506",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 185,
+     "minPurchaseNum": 185,
+     "initialPrice": 0.0488,
+     "componentCode": "C3897506",
+     "componentBrandEn": "Murata Electronics",
+     "componentModelEn": "GJM1555C1HR25RB12D",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2308111443_Murata-Electronics-GJM1555C1HR25RB12D_C3897506.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590312892886118400-C3897506.pdf?response-content-disposition=attachment%3B%20filename%3DC3897506.pdf%3B%20filename%2A%3DUTF-8%27%27C3897506.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2ffcebfb7931d2a52b6df33de56ee0de46a625bf36f81f7c0551faccff71806a",
+     "dataManualOfficialLink": "",
+     "componentName": "muRata GJM1555C1HR25RB12D",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 50V C0G 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 50V C0G <span class='lucene_highlight_class'>0402</span> Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7591132,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Film Capacitors",
+     "erpComponentName": "0.25pF 100V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/film-capacitors_kyocera-avx-04021jr25zbstr-500_C6636158.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.8165
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.8165
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.8165
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3273
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3158
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.3109
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.2995
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 0.3153
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 0.7865
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 0.7865
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7865
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.3042
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "abdb7141dee34ebf83c317f56a600047",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "-04021JR25ZBSTR500/C6636158",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 12,
+     "minPurchaseNum": 12,
+     "initialPrice": 0.8165,
+     "componentCode": "C6636158",
+     "componentBrandEn": "--",
+     "componentModelEn": "04021JR25ZBSTR\\500",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2401161823_Kyocera-AVX-04021JR25ZBSTR-500_C6636158.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "04021JR25ZBSTR\\500",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 100V 0402 Film Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "100V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Film Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 100V <span class='lucene_highlight_class'>0402</span> Film Capacitors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 11206,
+     "componentLibraryType": "expand",
+     "stockCount": 87181,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u578b\u53f7\u522b\u540d\uff1aRF1600-000 \u53cc\u5411ESD 14V\u622a\u6b62",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_littelfuse-pesd0402-140_C10662.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1372
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1136
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1015
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0915
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0658
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0635
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1321
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0634
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0612
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1094
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0978
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0882
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 85125,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-PESD0402140/C10662",
+     "leastPatchNumber": 5,
+     "lossNumber": 5,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.32901,
+     "preMinPurchaseNum": 80,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1372,
+     "componentCode": "C10662",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "PESD0402-140",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382897696481280-C10662-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9cd4cbb47edb035e39eee348b5d69d7e9c74cb716f5488db8b59390188d13f82",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Littelfuse-PESD0402-140_C10662.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588884586332106752-C10662.pdf?response-content-disposition=attachment%3B%20filename%3DC10662.pdf%3B%20filename%2A%3DUTF-8%27%27C10662.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0912b3ec96ad5472b3e63d6e7e8d78c8903444b464abbec59c833115f1cfcc31",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse PESD0402-140",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8759382898762104832-C10662-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=57d1044f9be42d8905b4a1738c4081d0fe861384ffc185c35b066db46988162c",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 10uA 14V 40V Bidirectional ESD IEC 61000-4-2 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "40V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "10uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 10uA 14V 40V Bidirectional <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> IEC 61000-4-2 <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> and Surge Protection (TVS/<span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 208327,
+     "componentLibraryType": "expand",
+     "stockCount": 4,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u578b\u53f7\u522b\u540d\uff1aPESD0402-140 \u53cc\u5411ESD 14V\u622a\u6b62",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_littelfuse-rf1600-000_C207208.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1239
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0992
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0868
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0774
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0701
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0663
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1194
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0675
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0639
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0956
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0836
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0746
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 4,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-RF1600000/C207208",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.315,
+     "preMinPurchaseNum": 91,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1239,
+     "componentCode": "C207208",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "RF1600-000",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762408502667161600-C207208-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c6340546f004c82e8702684bea1a3929459cf5c7828138f1a3c79d1cae8ebbda",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_Littelfuse-RF1600-000_C207208.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588900358790135808-C207208.pdf?response-content-disposition=attachment%3B%20filename%3DC207208.pdf%3B%20filename%2A%3DUTF-8%27%27C207208.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cb2d3244faaa77b4492fa008d1cc4aaf0d2391094efc270db7f5af665d46e5d1",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse RF1600-000",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8762408503728050176-C207208-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7346affba8487475cc7c617751edf6425131809011a1e424b626eb5b0f9aa564",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 10nA 14V 40V Bidirectional ESD IEC 61000-4-2 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "40V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "10nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 10nA 14V 40V Bidirectional <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> IEC 61000-4-2 <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> and Surge Protection (TVS/<span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2067065,
+     "componentLibraryType": "expand",
+     "stockCount": 3154,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u578b\u53f7\u522b\u540d\uff1aRF1255-000 \u53cc\u5411ESD 24V\u622a\u6b62",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_littelfuse-pesd0402-240_C1975527.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1502
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1326
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.125
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1157
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1115
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.109
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1277
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.1074
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.1115
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1447
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1205
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.105
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 3082,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Littelfuse-PESD0402240/C1975527",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.51212,
+     "preMinPurchaseNum": 69,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1502,
+     "componentCode": "C1975527",
+     "componentBrandEn": "Littelfuse",
+     "componentModelEn": "PESD0402-240",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583569363077648384-C1975527/C1975527-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3d3ea27487477f7d61a8aedd87298ee2371318f4eff6a8987b373991e2a6227c",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2108031230_Littelfuse-PESD0402-240_C1975527.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588939434796994560-C1975527.pdf?response-content-disposition=attachment%3B%20filename%3DC1975527.pdf%3B%20filename%2A%3DUTF-8%27%27C1975527.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=59a75533e334d8922099aa0145c14302fbf3430d565ddaa3bd8fbc40c8e24a92",
+     "dataManualOfficialLink": "",
+     "componentName": "Littelfuse PESD0402-240",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583569363928956928-C1975527/C1975527-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=70744543ee2518b8a57c5b09406e514778e65eace18f412bbe25f805a0e5d3e0",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103 0.25pF 10nA 24V 40V Bidirectional ESD IEC 61000-4-2 Single-channel 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "40V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "24V"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "10nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 10nA 24V 40V Bidirectional <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> IEC 61000-4-2 Single-channel <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> and Surge Protection (TVS/<span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2535493,
+     "componentLibraryType": "expand",
+     "stockCount": 12,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "XBP06V0U25R G",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_torex-semicon-xbp06v0u25r-g_C2443642.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1836
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1808
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.179
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 509,
+       "productPrice": 0.1771
+      },
+      {
+       "startNumber": 510,
+       "endNumber": 519,
+       "productPrice": 0.1771
+      },
+      {
+       "startNumber": 520,
+       "endNumber": -1,
+       "productPrice": 0.1771
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 509,
+       "productPrice": 0.1706
+      },
+      {
+       "startNumber": 520,
+       "endNumber": -1,
+       "productPrice": 0.1706
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1769
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.1724
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.1742
+      },
+      {
+       "startNumber": 510,
+       "endNumber": 519,
+       "productPrice": 0.1706
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TorexSemicon-XBP06V0U25RG/C2443642",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.59646,
+     "preMinPurchaseNum": 50,
+     "minPurchaseNum": 50,
+     "initialPrice": 0.1808,
+     "componentCode": "C2443642",
+     "componentBrandEn": "Torex Semicon",
+     "componentModelEn": "XBP06V0U25R-G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766702400256258048-C2443642-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=74dc58d2fb38333c88893edcdf89708f511809b168605dad524b3f32e03207e7",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2108060730_Torex-Semicon-XBP06V0U25R-G_C2443642.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589815115064107008-C2443642.pdf?response-content-disposition=attachment%3B%20filename%3DC2443642.pdf%3B%20filename%2A%3DUTF-8%27%27C2443642.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=eb1c63770df902e2f033cffa237d90926446003ba5f8208983439b0048e54b9e",
+     "dataManualOfficialLink": "",
+     "componentName": "TOREX XBP06V0U25R-G",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766702401326075904-C2443642-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0292f460f477e9e48f3ce5fe15b8d22ce5ed34976cdacb2d9fa0170ecd772bc5",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-55\u2103~+125\u2103@(Tj) 0.25pF 12V 2A@8/20us 5V 8.4V Bidirectional IEC 61000-4-2 TVS 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "2A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "8.4V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-55\u2103~+125\u2103@(Tj) <span class='lucene_highlight_class'>0.25pF</span> 12V 2A@8/20us 5V 8.4V Bidirectional IEC 61000-4-2 TVS <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3559756,
+     "componentLibraryType": "expand",
+     "stockCount": 98899,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u4e1d\u5370N \u53cc\u5411TVS 5V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a4A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_msksemi-rclamp0521p-tct-ms_C3029033.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0208
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0169
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0107
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0096
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.009
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0103
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0163
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0142
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0092
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0201
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0086
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 97474,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "MSKSEMI-RCLAMP0521P_TCTMS/C3029033",
+     "leastPatchNumber": 20,
+     "lossNumber": 14,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.045,
+     "preMinPurchaseNum": 434,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0208,
+     "componentCode": "C3029033",
+     "componentBrandEn": "MSKSEMI",
+     "componentModelEn": "RCLAMP0521P.TCT-MS",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8584834483824967681-C3029033/C3029033-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ad468e2254641a829c17934ce369f41d66901c018ca6e966e6749081682f133f",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210272130_MSKSEMI-RCLAMP0521P-TCT-MS_C3029033.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590234449553227776-C3029033.pdf?response-content-disposition=attachment%3B%20filename%3DC3029033.pdf%3B%20filename%2A%3DUTF-8%27%27C3029033.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=75500b9cb9a5e57d92934b91a7f0b06942c07132a2b99e5e9cd809c1f74cbd85",
+     "dataManualOfficialLink": "",
+     "componentName": "MSKSEMI RCLAMP0521P.TCT-MS",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8584834484785328128-C3029033/C3029033-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8090acb75c85c51b5fe03e396272fe4ffd826b43b4b001b2a708b2b9cba43386",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF 100W@8/20us 100nA 25V 4A 5V 6V Bidirectional IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "100W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "25V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "4A"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "100nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 100W@8/20us 100nA 25V 4A 5V 6V Bidirectional IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21661895,
+     "componentLibraryType": "expand",
+     "stockCount": 200,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "ESD\u4fdd\u62a4\u5c04\u9891\u63a5\u53e3",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_semtech-rclamp1561pqtct_C20336388.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.0357
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.8377
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7379
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.6398
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5809
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5514
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.6163
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.807
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5312
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7109
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9977
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5596
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 196,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "SEMTECH-RCLAMP1561PQTCT/C20336388",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 2.80266,
+     "preMinPurchaseNum": 9,
+     "minPurchaseNum": 1,
+     "initialPrice": 1.0357,
+     "componentCode": "C20336388",
+     "componentBrandEn": "SEMTECH",
+     "componentModelEn": "RCLAMP1561PQTCT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8769306513099624448-C20336388-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=40251467b00f415e40ff7ff126cb327d40724de1b5cfa469022cf3cd40ef3b12",
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604423796632285184-C20336388.pdf?response-content-disposition=attachment%3B%20filename%3DC20336388.pdf%3B%20filename%2A%3DUTF-8%27%27C20336388.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1eedb444724b0c8982fd59842067008d5d53c5b82276b96e174ec7292f64e66b",
+     "dataManualOfficialLink": "",
+     "componentName": "SEMTECH RCLAMP1561PQTCT",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8769306514169712640-C20336388-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a7fea2d9d0f4fecfadcb8aaab15176508edb10a1cfd8dde2c728b5f40d0c0157",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "-40\u2103~+125\u2103 0.25pF 15V 19V 2A@8/20us 35V 50nA 70W@8/20us IEC 61000-4-2 0402 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "70W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "35V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "2A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "19V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "15V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "50nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-40\u2103~+125\u2103 <span class='lucene_highlight_class'>0.25pF</span> 15V 19V 2A@8/20us 35V 50nA 70W@8/20us IEC 61000-4-2 <span class='lucene_highlight_class'>0402</span> <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 55044704,
+     "componentLibraryType": "expand",
+     "stockCount": 8176,
+     "componentTypeEn": "Varistors",
+     "erpComponentName": "\u591a\u5c42\u7247\u5f0f\u538b\u654f\u7535\u963b\uff0c\u65e0\u5f15\u811a\uff0c\u53cc\u5411\u94b3\u4f4d\uff0c\u9ad8\u6d6a\u6d8c\u6291\u5236\u80fd\u529b\uff0c\u4f4e\u6cc4\u6f0f\u7535\u6d41\uff0c\u4f4e\u7535\u611f\uff0c\u5feb\u901f\u54cd\u5e94",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0347
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0231
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0205
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0184
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0177
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0198
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0223
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0262
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0335
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 8176,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "hongjiacheng-HMLV0402240E0R2/C52204597",
+     "leastPatchNumber": 20,
+     "lossNumber": 8,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.08448,
+     "preMinPurchaseNum": 332,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0347,
+     "componentCode": "C52204597",
+     "componentBrandEn": "hongjiacheng",
+     "componentModelEn": "HMLV0402-240E0R2",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766684331949465600-C52204597-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8e751c4f4dd8d82b5a60e0c2c199cbbbbba041210a784d9c350d1213cfa67b83",
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "R+O HMLV0402-240E0R2",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8766684333023207424-C52204597-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=7f86dedb5321704223b8abff6b6c8454790b74659e0534a47542fa5c6aecd66c",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "0.25pF@1MHz 10mJ 1A 24V 300V 30V 0402 Varistors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Varistor Voltage",
+       "attribute_value_name": "300V"
+      },
+      {
+       "attribute_name_en": "Energy",
+       "attribute_value_name": "10mJ"
+      },
+      {
+       "attribute_name_en": "Diameter (\u03c6D)",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "30V"
+      },
+      {
+       "attribute_name_en": "Maximum AC Volts",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF@1MHz</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF@1MHz"
+      },
+      {
+       "attribute_name_en": "Rated Wattage",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Maximum DC Volts",
+       "attribute_value_name": "24V"
+      },
+      {
+       "attribute_name_en": "Peak Current",
+       "attribute_value_name": "1A"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Varistors",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF@1MHz</span> 10mJ 1A 24V 300V 30V <span class='lucene_highlight_class'>0402</span> Varistors ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": "<span class='lucene_highlight_class'>0402</span>",
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 151688,
+     "componentLibraryType": "expand",
+     "stockCount": 3916,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "\u00b10.25pF 0.25pF 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_fh-guangdong-fenghua-advanced-tech-0805cgr25c500nt_C140362.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0084
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.0066
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.0056
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.005
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0045
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0042
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.0081
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.0064
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.0048
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.0054
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.0041
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.0044
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 3916,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "151688-0805CGR25C500NT/C140362",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.02,
+     "preMinPurchaseNum": 2149,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0084,
+     "componentCode": "C140362",
+     "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+     "componentModelEn": "0805CGR25C500NT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583373765367771136-C140362/C140362-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a08c885aa5bbdf99695a883c47ae6f993fca817fc28ae983ae71bd15b0e74db1",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_FH--Guangdong-Fenghua-Advanced-Tech-0805CGR25C500NT_C140362.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770990335868710912-C140362.pdf?response-content-disposition=attachment%3B%20filename%3DC140362.pdf%3B%20filename%2A%3DUTF-8%27%27C140362.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=db9501088c1bc7c1a801ad81a6694c087e513a0d8fcb710df7d2b5ce8dcbfb82",
+     "dataManualOfficialLink": "",
+     "componentName": "FH 0805CGR25C500NT",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583373766311219200-C140362/C140362-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5e87e0305b09e18b38811cc6bbe82668d6b8f9666c54211ab9b59fd0f42bdb98",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0805",
+     "describe": "0.25pF 50V C0G 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 50V C0G 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 163317,
+     "componentLibraryType": "expand",
+     "stockCount": 4782,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u5355\u5411ESD 5V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a3.5A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_born-bst236a055r_C151977.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0482
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.038
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0328
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.027
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0241
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0225
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0366
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0216
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0464
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0261
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0232
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0316
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 4780,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "BORN-BST236A055R/C151977",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.13,
+     "preMinPurchaseNum": 238,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0482,
+     "componentCode": "C151977",
+     "componentBrandEn": "BORN",
+     "componentModelEn": "BST236A055R",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585223503406903297-C151977/C151977-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=54f84d71d468811e9c85238df1f659334786765f3381139d767c86c7553db9c2",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2311032115_BORN-BST236A055R_C151977.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8756859578237489152-C151977.pdf?response-content-disposition=attachment%3B%20filename%3DC151977.pdf%3B%20filename%2A%3DUTF-8%27%27C151977.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=fda85ec58ac724ed6ca898641dece01041ed0372f8599cdd7efc39a07e2efc5d",
+     "dataManualOfficialLink": "",
+     "componentName": "BORN BST236A055R",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585223504346427392-C151977/C151977-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ff1f843be48d859291d97525c6bb7c595029f332fff344db3a099bea47a3801b",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOT-23-6",
+     "describe": "0.2pF\u30010.35pF 1 18V 3.5A@8/20us 500nA 5V 7.8V ESD IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 Unidirectional SOT-23-6 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "70W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "17V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Unidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "4A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "7.8V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "50nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "0.2pF\u30010.35pF 1 18V 3.5A@8/20us 500nA 5V 7.8V <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 Unidirectional SOT-23-6 <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> and Surge Protection (TVS/<span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 165063,
+     "componentLibraryType": "expand",
+     "stockCount": 638775,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u53cc\u5411TVS 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a4A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_willsemi-will-semicon-esd5311n-2-tr_C153721.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0333
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0256
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0221
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.0197
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0185
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0179
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.032
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 1999,
+       "productPrice": 0.0213
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 9999,
+       "productPrice": 0.019
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": -1,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0246
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0179
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 635454,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "WILLSEMI_Will_Semicon-ESD5311N_2TR/C153721",
+     "leastPatchNumber": 20,
+     "lossNumber": 12,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.08723,
+     "preMinPurchaseNum": 353,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0333,
+     "componentCode": "C153721",
+     "componentBrandEn": "WILLSEMI(Will Semicon)",
+     "componentModelEn": "ESD5311N-2/TR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583052760577691648-C153721/C153721-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=394249b98f5edca0e09baade19b29714664c3d08eb132058e9ab67f7076cc599",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1808311525_WILLSEMI-Will-Semicon-ESD5311N-2-TR_C153721.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588886667483107328-C153721.pdf?response-content-disposition=attachment%3B%20filename%3DC153721.pdf%3B%20filename%2A%3DUTF-8%27%27C153721.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d34cfbc21f7731f97ba90bb873202a8a1e1240f6fc931290412323ffcfc0debe",
+     "dataManualOfficialLink": "",
+     "componentName": "WILLSEMI ESD5311N-2/TR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583052761609355264-C153721/C153721-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a33f92fe30a9486210d507e34c381d2a910dddcd43eead4b077f9deabff70bb1",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN1006-2L",
+     "describe": "0.25pF 1 1nA 21V 4A@8/20us 5V 9V Bidirectional IEC 61000-4-2\u3001IEC 61000-4-5 TVS DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "84W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "21V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "4A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "9V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF</span> 1 1nA 21V 4A@8/20us 5V 9V Bidirectional IEC 61000-4-2\u3001IEC 61000-4-5 TVS DFN1006-2L <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 165064,
+     "componentLibraryType": "expand",
+     "stockCount": 80876,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u5355\u5411TVS 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a4A@8/20us",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_willsemi-will-semicon-esd5304d-10-tr_C153722.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0658
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0526
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.046
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.041
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.037
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0351
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0395
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0357
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0443
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0634
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0338
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0506
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 80642,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "WILLSEMI_Will_Semicon-ESD5304D_10TR/C153722",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.16834,
+     "preMinPurchaseNum": 172,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0658,
+     "componentCode": "C153722",
+     "componentBrandEn": "WILLSEMI(Will Semicon)",
+     "componentModelEn": "ESD5304D-10/TR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583286667931226112-C153722/C153722-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b8f415728e428ea8337626385c748ef7a99b01910883084a54aada861e315b9d",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810202308_WILLSEMI-Will-Semicon-ESD5304D-10-TR_C153722.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588893272664117248-C153722.pdf?response-content-disposition=attachment%3B%20filename%3DC153722.pdf%3B%20filename%2A%3DUTF-8%27%27C153722.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b26ff53476e71c4e960f813f3bbf189be6142858ed582a4d573cdd586e3496b3",
+     "dataManualOfficialLink": "",
+     "componentName": "WILLSEMI ESD5304D-10/TR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583286668762238976-C153722/C153722-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=33524d52d7beb89a8076764f76d3482ad4ba8e8afabed4df0c6ed3cfecd941ed",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN2510-10L",
+     "describe": "-40\u2103~+85\u2103 0.4pF 12V 1nA 48W@8/20us 4A@8/20us 5V 8V Four channels IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS Unidirectional DFN2510-10L ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF\u30010.4pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF\u30010.4pF"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "48W@8/20us"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Four channels"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "14V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Unidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "4A@8/20us"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "-40\u2103~+85\u2103 0.4pF 12V 1nA 48W@8/20us 4A@8/20us 5V 8V Four channels IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS Unidirectional DFN2510-10L <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 180719,
+     "componentLibraryType": "expand",
+     "stockCount": 1,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "\u5355\u5411TVS 5V\u622a\u6b62 \u5cf0\u503c\u8109\u51b2\u7535\u6d41\uff1a5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_shanghai-prisemi-elec-pesdalc10n5vu_C169334.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0735
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.057
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0486
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0426
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0375
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0351
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.041
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0361
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0708
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0549
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0338
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0469
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 1,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Shanghai_PrisemiElec-PESDALC10N5VU/C169334",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.17663,
+     "preMinPurchaseNum": 159,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0735,
+     "componentCode": "C169334",
+     "componentBrandEn": "Shanghai Prisemi Elec",
+     "componentModelEn": "PESDALC10N5VU",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583004596822552576-C169334/C169334-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=da6c1f4204e3ff5035f18e33d1183f806b90a1e1714ef43cd85aa6609614f0a4",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1806121850_Shanghai-Prisemi-Elec-PESDALC10N5VU_C169334.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588881609618051072-C169334.pdf?response-content-disposition=attachment%3B%20filename%3DC169334.pdf%3B%20filename%2A%3DUTF-8%27%27C169334.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=faa9b7022302af03ababb60d991d28e021ab8f3811d0e923b0c804fb7971f048",
+     "dataManualOfficialLink": "",
+     "componentName": "Shanghai Prisemi Elec PESDALC10N5VU",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583004597732716544-C169334/C169334-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=15aea724a678bc9f67e844faa37cdde92ea6fb8960025a0d3fd5dcd2257f054f",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DFN-10(1x2.5)",
+     "describe": "0.25pF\u30010.5pF 100W@8/20us 15V 1uA 5A 5V 6V IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS Unidirectional DFN-10(1x2.5) ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "TVS"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF\u30010.5pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF\u30010.5pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Four channels"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "100W@8/20us"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "15V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Unidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "5A"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "1uA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "<span class='lucene_highlight_class'>0.25pF\u30010.5pF</span> 100W@8/20us 15V 1uA 5A 5V 6V IEC 61000-4-2\u3001IEC 61000-4-5\u3001IEC 61000-4-4 TVS Unidirectional DFN-10(1x2.5) <span class='lucene_highlight_class'>ESD</span> and Surge Protection (TVS/<span class='lucene_highlight_class'>ESD</span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 183808,
+     "componentLibraryType": "expand",
+     "stockCount": 502532,
+     "componentTypeEn": "ESD and Surge Protection (TVS/ESD)",
+     "erpComponentName": "ESD 5V\u622a\u6b62 \u5cf0\u503c\u6d6a\u6d8c\u7535\u6d41\uff1a4A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/esd-and-surge-protection-tvs-esd_lrc-lesd8ll5-0ct5g_C172421.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0185
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0151
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0132
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0098
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0088
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.0083
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0179
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": -1,
+       "productPrice": 0.008
+      },
+      {
+       "startNumber": 20000,
+       "endNumber": 49999,
+       "productPrice": 0.0085
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 9999,
+       "productPrice": 0.0127
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 19999,
+       "productPrice": 0.0094
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0146
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "434702f18e684c28a613a717cb768f2b",
+     "canPresaleNumber": 501533,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "LRC-LESD8LL50CT5G/C172421",
+     "leastPatchNumber": 20,
+     "lossNumber": 12,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.03918,
+     "preMinPurchaseNum": 488,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0185,
+     "componentCode": "C172421",
+     "componentBrandEn": "LRC",
+     "componentModelEn": "LESD8LL5.0CT5G",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8761285024945577984-C172421-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=5e157dba609f010130ac5663a2aee49676916fee4b559a13f75df02a53ca74d5",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2006171913_LRC-LESD8LL5-0CT5G_C172421.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588901180885356544-C172421.pdf?response-content-disposition=attachment%3B%20filename%3DC172421.pdf%3B%20filename%2A%3DUTF-8%27%27C172421.pdf&x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=793cee5732810843e14d25b1295ff0c5f5b700acb656a16f39023287e00dc95f",
+     "dataManualOfficialLink": "",
+     "componentName": "LRC LESD8LL5.0CT5G",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8761285026044350464-C172421-front.jpg?x-oss-date=20261114T143536Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e4be417ca30c3a83d00a8896d8612b8b2814ce648109286f48db968e60b5abd8",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SOD-882",
+     "describe": "0.3pF 20V 4A 500pA 5V 6V 80W ESD IEC 61000-4-2 SOD-882 ESD and Surge Protection (TVS/ESD) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+150\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "ESD"
+      },
+      {
+       "attribute_value_name_high": "<span class='lucene_highlight_class'>0.25pF</span>",
+       "attribute_name_en": "Junction Capacitance",
+       "attribute_value_name": "0.25pF"
+      },
+      {
+       "attribute_name_en": "Number of Channels",
+       "attribute_value_name": "Single-channel"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Power Dissipation (Ppp)",
+       "attribute_value_name": "80W"
+      },
+      {
+       "attribute_name_en": "level of protection",
+       "attribute_value_name": "IEC 61000-4-2"
+      },
+      {
+       "attribute_name_en": "Clamping Voltage",
+       "attribute_value_name": "20V"
+      },
+      {
+       "attribute_name_en": "Polarity",
+       "attribute_value_name": "Bidirectional"
+      },
+      {
+       "attribute_name_en": "Peak Pulse Current (Ipp)",
+       "attribute_value_name": "4A"
+      },
+      {
+       "attribute_name_en": "Voltage - Breakdown",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Reverse Leakage Current (Ir)",
+       "attribute_value_name": "500nA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "ESD and Surge Protection (TVS/ESD)",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": "0.3pF 20V 4A 500pA 5V 6V 80W <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> IEC 61000-4-2 SOD-882 <span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span> and Surge Protection (TVS/<span class='lucene_highlight_class'><span class='lucene_highlight_class'>ESD</span></span>) ROHS",
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 11,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "ESD 0402 0.25pF"
+ },
+ "message": null
+}

@@ -1,0 +1,247 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 5705597,
+     "componentLibraryType": "expand",
+     "stockCount": 895,
+     "componentTypeEn": "GNSS Modules",
+     "erpComponentName": "\u9ad8\u7cbe\u5ea6\u3001\u591a\u6ce2\u6bb5GNSS\u63a5\u6536\u673a\u6a21\u5757",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/gnss-modules_u-blox-zed-f9p-04b_C5120257.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 3999,
+       "productPrice": 76.2695
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 76.2695
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": 3999,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 73.4706
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": -1,
+       "productPrice": 73.4706
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "69288e9b39414023a049d01710b48789",
+     "canPresaleNumber": 877,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "UBLOX-ZED_F9P04B/C5120257",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 423.77936,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 76.2695,
+     "componentCode": "C5120257",
+     "componentBrandEn": "U-BLOX",
+     "componentModelEn": "ZED-F9P-04B",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668502154240000-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143524Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=382d7cf9d8c281670921e327c521c0a23d92a5da5b9c3522c6c012ab729e8756",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410010132_U-BLOX-ZED-F9P-04B_C5120257.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589784769954684929-C5120257.pdf?response-content-disposition=attachment%3B%20filename%3DC5120257.pdf%3B%20filename%2A%3DUTF-8%27%27C5120257.pdf&x-oss-date=20261114T143524Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5qMGNfCo7Zp1KqNV3zwnlUjadd1gaTdmzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qYhGqDU0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWophUshlLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkI5XSa1aKWD5sagAGTIwJ8IN6U2GQCXsn5VONN9R1CO12hl8%2BD8yo3E%2F6rxg7fWs0M7ECnXMuaKTmYT5CmaBXObarZZA1JXtKKhQDQb52paZmwkSj6YAhKBU2Ww%2Ba4ZviBY3pwe8ovnpE9BlWQzgHDVpzJQ18vPNh%2BF0lXARVeADs0OjampKUS99%2B1GSAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NY9SmvNiHchfUZAzUveXYnavy%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=916c5c1505d00402769ed6f0e7ed4d00e8199ccfee9f1bd707772982f5099a3a",
+     "dataManualOfficialLink": "",
+     "componentName": "U-BLOX ZED-F9P-04B",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583668503110541312-C5120257/C5120257-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261114T143524Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nsee3zoYYZ1rW5MGvVtEs%2FQOhIhvLGgTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qbJ5qjQ0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jLUsPqpVeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5WKNpbd5ch3ARqAAXRN%2BQIJl9LwGFmmemG3Bv2xt30k8jqyF5bFw6viT5qswpItifuS%2F0QG%2BvspHXOQUnM4kIytoUxEN1iiEJtvUtZF9hPJpTLYPrsw2tK2Tz8aaKj68sr73aWIbTDJcp2M6X3gtRLnHu6QJPVZWK52AKlmcRDupWcz%2B3gGMCmsoOFaIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZY2WGLY8awR2MdPKjLgdi7mc%2F20261114%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1ab2238a51ffc20cd48d3a8ddaf666894d517b0ed43759c3fbd3fe08b36e078b",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,22x17mm",
+     "describe": "-167dBm -40\u2103~+85\u2103 1.5m 2.7V~3.6V 25s 85mA@3V Dual-band / multi-band positioning\u3001RTC backup power GPS\u3001BDS\u3001QZSS\u3001Galileo\u3001GLONASS UART\u3001I2C\u3001USB\u3001SPI SMD,22x17mm GNSS Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Accuracy",
+       "attribute_value_name": "1.5m"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-167dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~3.6V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Dual-band / multi-band positioning\u3001RTC backup power"
+      },
+      {
+       "attribute_name_en": "Time To First Fix",
+       "attribute_value_name": "25s"
+      },
+      {
+       "attribute_name_en": "GNSS Type",
+       "attribute_value_name": "GPS\u3001BDS\u3001QZSS\u3001Galileo\u3001GLONASS"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "85mA@3V"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "UART\u3001I2C\u3001USB\u3001SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "GNSS Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C5120257</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C5120257"
+ },
+ "message": null
+}
