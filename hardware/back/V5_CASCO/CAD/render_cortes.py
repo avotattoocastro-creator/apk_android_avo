@@ -19,7 +19,7 @@ P=[("AVO_CASCO_V5_base","#222"),("AVO_CASCO_V5_anillo_resina_A","#2aa0d0"),("AVO
    ("ref_pcb","#1a7a30"),("ref_componentes_cara_F","#5b8bd0"),("ref_bateria","#3c78c8"),("ref_antena","#e0a100"),("ref_pogo_placa","#d4a000"),("ref_imanes_capsula","#9050c0")]
 M={n:load(O+n+".stl") for n,_ in P}
 fig,axs=plt.subplots(2,2,figsize=(16,12))
-for ax,(a,v,keep,ttl,xl,yl) in zip(axs.flat,[(1,0.0,[0,2],"Corte Y = 0",(-32,32),(-13,27)),(1,-22.5,[0,2],"Corte Y = −22,5 (pogo e imanes)",(-32,32),(-13,27)),
+for ax,(a,v,keep,ttl,xl,yl) in zip(axs.flat,[(1,23.75,[0,2],"Corte Y = +23,75 (LED D10 y anillo)",(-32,32),(-13,27)),(1,-22.5,[0,2],"Corte Y = −22,5 (pogo e imanes)",(-32,32),(-13,27)),
                               (0,-22.0,[1,2],"Corte X = −22 (tornillos)",(-32,32),(-13,27)),(2,3.0,[0,1],"Planta a Z = 3 (fondo de la base)",(-32,32),(-32,32))]):
     for n,c in P:
         s=cut(M[n],a,v,keep)
