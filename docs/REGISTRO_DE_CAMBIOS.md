@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-15 — LIVE, tiempo automático en Resumen, lista de entrenamientos en línea y sin Datos clave
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **LIVE:** el botón «Equipo conectado» pasa a ser la sección «LIVE» del menú lateral. Hay una fila por equipo conectado
+  por Bluetooth, hasta 4; cada fila abre la ventana de gestión. El Dashboard añade el contador «Live» (conectados en tiempo
+  real, máx. 4).
+  - Se muestra el nombre del equipo y la hora de conexión. Caballo y jockey aún no llegan por el enlace (la telemetría en
+    vivo no está decodificada en el iPad): no se inventan.
+- **Resumen · tiempo:** se consulta solo al entrar, con la hora de inicio y la primera posición GNSS del entrenamiento
+  (`EnvironmentModel.load`, con copia local). Desaparece el botón «Consultar». Si la consulta en línea está desactivada,
+  se dice.
+- **Selector de entrenamiento** de la barra superior: en vez del menú, que partía las líneas, abre una lista ancha con
+  toda la información en una línea: Fecha | Caballo | Jinete | Disciplina | V. máx. | Tiempo | Km.
+- **Pestañas:** «Datos clave» se oculta de la barra; sus cifras están en Resumen → Parámetros clave.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real ni con relojes conectados.
+
 ## 2026-11-14 — AVO-SHELL-14 — Botón «Equipo conectado» por Bluetooth
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

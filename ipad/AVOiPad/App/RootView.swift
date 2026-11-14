@@ -45,7 +45,7 @@ struct RootView: View {
         // trainer's sketches 14/11/2026: «Resumen» first, «Mapa» in the place of «Análisis» (hidden for now)
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
-        RootNavEntry(page: .keyData, title: "Datos clave", icon: "square.grid.3x2"),
+        // «Datos clave» hidden: its figures are in «Resumen» → «Parámetros clave» (trainer's sketch 14/11/2026)
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
         RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
@@ -129,24 +129,35 @@ struct RootView: View {
     }
 
     // ------------------------------------------------------------------ sidebar
-    private var hardwareButton: some View {
-        Button { app.hardwareVisible = true } label: {
-            HStack(spacing: 12) {
-                Image(systemName: "antenna.radiowaves.left.and.right").font(.body).frame(width: 22).foregroundStyle(Avo.ok)
-                VStack(alignment: .leading, spacing: 1) {
-                    Text("Equipo conectado").font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
-                    Text(app.bleLinks.map { $0.name }.joined(separator: " · ")).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
-                }
-                Spacer(minLength: 0)
+    private var liveSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
                 Circle().fill(Avo.ok).frame(width: 8, height: 8)
+                Text("LIVE").font(.caption.weight(.bold)).tracking(1.2).foregroundStyle(Avo.text)
+                Spacer()
+                Text("\(min(4, app.bleLinks.count)) / 4").font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
             }
-            .padding(.horizontal, 12).padding(.vertical, 9)
-            .background(Avo.ok.opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
-            .contentShape(Rectangle())
+            .padding(.horizontal, 12)
+            ForEach(Array(app.bleLinks.prefix(4))) { (l: BleLink) in
+                Button { app.hardwareVisible = true } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "antenna.radiowaves.left.and.right").font(.callout).frame(width: 22).foregroundStyle(Avo.ok)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(l.name).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                            Text("Conectado desde las \(MadridTime.format(l.since, "HH:mm"))").font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .padding(.horizontal, 12).padding(.vertical, 8)
+                    .background(Avo.ok.opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
+                    .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.ok.opacity(0.5), lineWidth: 1))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
         }
-        .buttonStyle(.plain)
-        .padding(.top, 6)
-        .accessibilityIdentifier("nav.hardware")
+        .padding(.top, 10)
+        .accessibilityIdentifier("nav.live")
     }
 
     private var sidebar: some View {
@@ -156,9 +167,9 @@ struct RootView: View {
                     ForEach(RootView.mainEntries) { (e: RootNavEntry) in navButton(e) }
                     Divider().background(Avo.line).padding(.horizontal, 14).padding(.vertical, 8)
                     ForEach(RootView.systemEntries) { (e: RootNavEntry) in navButton(e) }
-                    // trainer's sketch 14/11/2026: hidden until the system connects by Bluetooth; opens the window that
-                    // manages the connected hardware
-                    if !app.bleLinks.isEmpty { hardwareButton }
+                    // trainer's sketches 14/11/2026: hidden until the system connects by Bluetooth; «LIVE» with one row per
+                    // connected equipment (caballo/jockey, máximo 4); each row opens the window that manages the hardware
+                    if !app.bleLinks.isEmpty { liveSection }
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
@@ -439,23 +450,12 @@ private struct RootEmptyState: View {
 struct RootSessionMenu: View {
     @Environment(AppModel.self) private var app
     var maxWidth: CGFloat = 340
+    @State private var open: Bool = false
 
     private var sep: some View { Text("|").foregroundStyle(Avo.line) }
 
     var body: some View {
-        Menu {
-            ForEach(app.sessionsView) { (s: SessionItem) in
-                Button {
-                    app.select(s)
-                } label: {
-                    if s === app.selected {
-                        Label("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)", systemImage: "checkmark")
-                    } else {
-                        Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)")
-                    }
-                }
-            }
-        } label: {
+        Button { open = true } label: {
             HStack(spacing: 6) {
                 if let s = app.selected {
                     // trainer's sketch 14/11/2026: Fecha | Caballo | V. máx. | Tiempo | Km
@@ -480,8 +480,68 @@ struct RootSessionMenu: View {
             .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
             .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
         }
+        .buttonStyle(.plain)
         .disabled(app.sessions.isEmpty)
         .accessibilityLabel("Entrenamiento activo")
+        // trainer's sketch 14/11/2026: «el listado lo quiero alargado con toda la info en línea»
+        .popover(isPresented: $open, arrowEdge: .top) {
+            RootSessionList { (s: SessionItem) in
+                app.select(s)
+                open = false
+            }
+            .environment(app)
+            .avoColorScheme()
+        }
+    }
+}
+
+/// Wide list of the trainings, one line each: Fecha | Caballo | Jinete | Disciplina | V. máx. | Tiempo | Km.
+struct RootSessionList: View {
+    @Environment(AppModel.self) private var app
+    let pick: (SessionItem) -> Void
+
+    private static let widths: [CGFloat] = [150, 200, 170, 90, 110, 80, 90]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            row(["Fecha", "Caballo", "Jinete", "Disciplina", "V. máx.", "Tiempo", "Km"], header: true, selected: false)
+                .background(Avo.surface2)
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(app.sessionsView) { (s: SessionItem) in
+                        Button { pick(s) } label: {
+                            row([s.dateTimeText, s.horse, s.rider, s.discipline, s.maxSpeedText, s.durationText, s.distanceText],
+                                header: false, selected: s === app.selected)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+        .frame(width: RootSessionList.widths.reduce(0, +) + 60)
+        .frame(maxHeight: 520)
+        .background(Avo.surface)
+    }
+
+    private func row(_ cells: [String], header: Bool, selected: Bool) -> some View {
+        HStack(spacing: 0) {
+            Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(Avo.red)
+                .opacity(selected ? 1 : 0).frame(width: 28)
+            ForEach(0..<cells.count, id: \.self) { (i: Int) in
+                Text(cells[i])
+                    .font(header ? .caption.weight(.semibold) : .callout.weight(i < 2 ? .semibold : .regular))
+                    .foregroundStyle(header ? Avo.textDim : (i < 2 ? Avo.text : Avo.silver))
+                    .monospacedDigit()
+                    .lineLimit(1).truncationMode(.tail)
+                    .frame(width: RootSessionList.widths[i], alignment: .leading)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, header ? 8 : 11)
+        .padding(.trailing, 12)
+        .background(selected ? Avo.redSoft : Color.clear)
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+        .contentShape(Rectangle())
     }
 }
 

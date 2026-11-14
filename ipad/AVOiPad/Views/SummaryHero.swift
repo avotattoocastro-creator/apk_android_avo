@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Head of «Resumen» in the Equimetre style the trainer chose (14/11/2026): horse photo and name, big date and time,
 /// discipline · rider, distance and duration, the place, the comment of the training and the weather of the session.
-/// Nothing is invented: weather only shows when «Mareas y tiempo» has been consulted for THIS session.
+/// Nothing is invented: the weather is the model at the start and place of THIS session, loaded on entering.
 struct SummaryHero: View {
     @Environment(AppModel.self) private var app
     @State private var notes: String = ""
@@ -31,6 +31,9 @@ struct SummaryHero: View {
             }
             .onAppear { load() }
             .onChange(of: app.selected?.id ?? "") { _, _ in load() }
+            // trainer's sketch 14/11/2026: the weather updates by itself on entering, with the exact data of the training
+            // (its start time and first GNSS position; the model is cached for use without connection)
+            .task(id: app.selected?.id ?? "") { await app.environment.load(force: false) }
             .onChange(of: notes) { _, v in
                 guard let s = app.selected, s.id == loadedFor, v != s.notes else { return }
                 app.saveSessionNotes(s, v)
@@ -111,9 +114,12 @@ struct SummaryHero: View {
                     Text("Marea \(env.tideHeadline)").font(.caption).foregroundStyle(Avo.textDim)
                 }
                 Text("Modelo, no medición").font(.caption2).foregroundStyle(Avo.textDim)
+            } else if env.loading {
+                ProgressView().controlSize(.small)
+                Text("Consultando el tiempo del entrenamiento…").font(.caption).foregroundStyle(Avo.textDim).multilineTextAlignment(.center)
             } else {
                 Text("Sin datos del tiempo").font(.caption).foregroundStyle(Avo.textDim)
-                Button("Consultar") { app.page = .tides }.buttonStyle(.avoSecondary).font(.caption)
+                Text(env.status).font(.caption2).foregroundStyle(Avo.textDim).multilineTextAlignment(.center).lineLimit(3)
             }
         }
         .frame(maxWidth: .infinity)

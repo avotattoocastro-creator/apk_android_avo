@@ -64,6 +64,9 @@ struct HomeView: View {
             counter("calendar", "\(d.thisWeek)", "Esta semana", "De lunes a domingo") { app.page = .calendar }
             counter("exclamationmark.circle", "\(d.pending)", "Por revisar", "Sin caballo o sin analizar",
                     accent: d.pending > 0 ? Avo.warn : Avo.ok) { app.page = .trainingList }
+            // trainer's sketch 14/11/2026: «LIVE» = equipment connected in real time (caballo/jockey, máximo 4)
+            counter("dot.radiowaves.left.and.right", "\(min(4, app.bleLinks.count))", "Live", "Conectados en tiempo real · máx. 4",
+                    accent: app.bleLinks.isEmpty ? Avo.textDim : Avo.ok) { if !app.bleLinks.isEmpty { app.hardwareVisible = true } }
         }
         .padding(8)
         .frame(maxHeight: .infinity, alignment: .top)
