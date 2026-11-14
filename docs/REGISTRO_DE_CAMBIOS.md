@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-11 — Cuadra y Jinetes: «Mejor 200 m» en los totales
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows, por igual):**
+- Los totales de la ficha pasan de 5 a 6 recuadros: «Mejor 200 m» entre «V. máxima» y «Último». Es el mejor tiempo de
+  200 m entre todos los entrenamientos de la ficha que tienen resultado del motor, con la misma regla que el recuadro
+  «Mejor 200 m» de Datos clave (si no hay, «—»).
+- `KeyData` expone el valor numérico (`best200S` / `Best200S`), con pruebas idénticas en iPad y Windows (11,36 s).
+- Informes: la vista previa ocupa el 62 % del ancho (ajuste de AVO-SHELL-10).
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-10 — Informes: opciones arriba y Exportar a todo el ancho
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

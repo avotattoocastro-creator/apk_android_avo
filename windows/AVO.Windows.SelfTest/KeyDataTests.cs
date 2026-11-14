@@ -26,6 +26,7 @@ public static class KeyDataTests
         assert(k.HasEngine, "Datos clave: resultado del motor reconocido");
         assert(V("vmax") == "65,0" && V("best200") == "11,36" && V("best600") == "35,31" && V("workdist") == "1,60",
             $"Datos clave: velocidad y mejores tramos ({V("vmax")} · {V("best200")} · {V("best600")} · {V("workdist")})");
+        assert(k.Best200S is double b2 && Math.Abs(b2 - 11.36) < 0.006, $"Datos clave: mejor 200 m numérico para Cuadra/Jinetes ({k.Best200S})");
         assert(V("distance") == "7,84" && V("duration") == "44:12", $"Datos clave: distancia y duración ({V("distance")} · {V("duration")})");
         assert(V("hrmax") == "—" && V("lmax") == "7,30" && V("fmax") == "2,36", "Datos clave: pulso vacío y tranco del motor");
         assert(string.Join(",", k.Gaits.Select(g => g.Id)) == "PASO,TROTE,GALOPE", "Datos clave: aires en orden y sin tiempo_en_curva");

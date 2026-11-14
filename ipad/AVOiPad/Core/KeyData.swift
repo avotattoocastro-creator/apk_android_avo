@@ -64,6 +64,8 @@ struct KeyData: Equatable {
     /// Seconds per solution (FIX, FLOAT, DGNSS, GNSS) for the quality bar.
     var qualitySeconds: [(label: String, seconds: Double)] = []
     var hasEngine: Bool = false
+    /// Best 200 m time of the training (s), for the Cuadra/Jinetes totals (same rule as the «Mejor 200 m» tile).
+    var best200S: Double? = nil
 
     static let ecgCaption: String = "Llega con el ECG de la cincha"
     static let girthCaption: String = "Necesita la cincha montada"
@@ -135,6 +137,7 @@ struct KeyData: Equatable {
         var t: [KeyTile] = []
         let vmax: Double? = metrics["velocidad_maxima"]
         t.append(tile("vmax", "Velocidad máxima", vmax.map { $0 * 3.6 }, "0.0", "km/h", "Motor AVO", "Sin datos GNSS", 0))
+        k.best200S = best(200)?.time
         t.append(bestTile("best200", 200))
         t.append(bestTile("best600", 600))
         // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of

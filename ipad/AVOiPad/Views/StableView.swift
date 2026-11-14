@@ -511,12 +511,13 @@ private struct StableTotals: View {
     let row: StableIdentityRow
 
     var body: some View {
-        // one row of 5, «Datos clave» style (trainer 14/11/2026)
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 5), spacing: 0) {
+        // one row of 6, «Datos clave» style (trainer 14/11/2026; «Mejor 200 m» added between V. máxima and Último)
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 6), spacing: 0) {
             AvoMetric(label: "Entrenamientos", value: String(row.count), caption: "Asignados o del archivo")
             AvoMetric(label: "Distancia", value: row.distanceText, caption: "Suma")
             AvoMetric(label: "Tiempo", value: row.totalTimeText, caption: "Suma")
             AvoMetric(label: "V. máxima", value: row.bestSpeedText, caption: "Filtrada")
+            AvoMetric(label: "Mejor 200 m", value: row.best200Text, caption: "Motor AVO")
             AvoMetric(label: "Último", value: row.lastDateText, caption: "Europe/Madrid")
         }
     }

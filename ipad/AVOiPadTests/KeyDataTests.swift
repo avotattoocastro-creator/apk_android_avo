@@ -23,6 +23,7 @@ final class KeyDataTests: XCTestCase {
         func v(_ id: String) -> String { k.tiles.first { $0.id == id }?.value ?? "?" }
         XCTAssertEqual(v("vmax"), "65,0")
         XCTAssertEqual(v("best200"), "11,36")
+        XCTAssertEqual(k.best200S ?? 0, 11.36, accuracy: 0.006)   // Cuadra/Jinetes «Mejor 200 m»
         XCTAssertEqual(v("best600"), "35,31")
         XCTAssertEqual(v("workdist"), "1,60")
         XCTAssertEqual(v("distance"), "7,84")

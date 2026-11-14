@@ -49,6 +49,8 @@ public sealed class KeyData
     public string QualityLabel { get; private set; } = "Sin datos";
     public List<KeyQualityRow> Quality { get; } = [];
     public bool HasEngine { get; private set; }
+    /// <summary>Best 200 m time of the training (s), for the Cuadra/Jinetes totals (same rule as «Mejor 200 m»).</summary>
+    public double? Best200S { get; private set; }
 
     public IEnumerable<KeyTile> SpeedTiles => Tiles.Where(t => t.Group == 0);
     public IEnumerable<KeyTile> HeartTiles => Tiles.Where(t => t.Group == 1);
@@ -114,6 +116,7 @@ public sealed class KeyData
             double? Metric(string n) => metrics.TryGetValue(n, out var v) ? v : null;
 
             k.Tiles.Add(Tile("vmax", "Velocidad máxima", Metric("velocidad_maxima") * 3.6, "0.0", "km/h", "Motor AVO", "Sin datos GNSS", 0));
+            k.Best200S = Best(200)?.Time;
             k.Tiles.Add(BestTile("best200", 200));
             k.Tiles.Add(BestTile("best600", 600));
             // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
