@@ -148,7 +148,10 @@ def _hb_common(curved):
     # alojamiento de la cápsula: su chaflán inferior de 45° (1,2) con 0,2 de holgura; se suelta con un golpe lateral
     pocket = rrect(OUTS + 0.4, OUTS + 0.4, R_OUT + 0.2, 3.0, 0).faces("<Z").edges().chamfer(CHAMF)
     hb = hb.cut(pocket)
-    hb = hb.cut(rrect(OUTS - 2 * HB["ring"], OUTS - 2 * HB["ring"], 3.0, 40, -20))      # ventana central: anillo
+    win = rrect(OUTS - 2 * HB["ring"], OUTS - 2 * HB["ring"], 3.0, 40, -20)          # ventana central: anillo
+    d_h = HB["hall_mag"][0]
+    win = win.cut(cyl(HALL_XY[0], HALL_XY[1], -30, d_h + 3.2, 60))                  # deja macizo alrededor del imán del Hall
+    hb = hb.cut(win)
     if curved:   # la carcasa del casco (esfera de radio helmet_r) no puede quedar dentro de la base
         R = HB["helmet_r"]
         hb = hb.cut(cq.Workplane("XY").sphere(R).translate((0, 0, -HB["t"] - R)))
