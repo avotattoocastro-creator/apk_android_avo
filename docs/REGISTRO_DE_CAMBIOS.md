@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-24 — Resumen: marea subiendo o bajando
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** el tiempo del Resumen muestra la marea con su tendencia a la hora del entrenamiento: «Marea 1,70 m ·
+subiendo», con flecha azul, o «· bajando», con flecha ámbar. Sale de la predicción del IHM (`tideTrend`), igual que en Mareas.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-23 — Comparar con encuadre manual y automático; Resumen con tarjetas a la misma altura
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

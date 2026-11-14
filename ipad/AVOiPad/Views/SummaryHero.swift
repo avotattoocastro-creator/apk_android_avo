@@ -111,7 +111,17 @@ struct SummaryHero: View {
                 Text(env.tempHeadline).font(.title2.weight(.light)).foregroundStyle(Avo.text)
                 Text("Viento \(env.windHeadline)").font(.caption).foregroundStyle(Avo.textDim).multilineTextAlignment(.center)
                 if env.tideHeadline != "Sin datos" {
-                    Text("Marea \(env.tideHeadline)").font(.caption).foregroundStyle(Avo.textDim)
+                    // trainer's sketch 14/11/2026: «subiendo o bajando» matters for training on the beach
+                    let rising: Bool = env.tideTrend == "Subiendo"
+                    let known: Bool = env.tideTrend == "Subiendo" || env.tideTrend == "Bajando"
+                    HStack(spacing: 4) {
+                        if known {
+                            Image(systemName: rising ? "arrow.up.right" : "arrow.down.right").font(.caption.weight(.bold))
+                                .foregroundStyle(rising ? Avo.cyan : Avo.warn)
+                        }
+                        Text("Marea \(env.tideHeadline)" + (known ? " · \(env.tideTrend.lowercased())" : ""))
+                            .font(.caption.weight(.semibold)).foregroundStyle(Avo.text)
+                    }
                 }
                 Text("Modelo, no medición").font(.caption2).foregroundStyle(Avo.textDim)
             } else if env.loading {
