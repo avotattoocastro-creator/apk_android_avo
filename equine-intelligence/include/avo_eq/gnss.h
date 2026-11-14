@@ -2,6 +2,7 @@
 // The GNSS antenna is on the RIDER: these are rider-trunk kinematics, which follow the horse closely for
 // speed and path but NOT for vertical oscillation or short accelerations.
 #pragma once
+#include "avo_eq/smoother.h"
 #include <vector>
 #include "avo_eq/types.h"
 #include "avo_eq/validation.h"
@@ -9,6 +10,10 @@
 namespace avoeq {
 
 struct GnssConfig {
+  // 2.0 (F1): every speed figure comes from the Kalman + RTS smoothed speed (same model as the apps); false = 1.x rule
+  // (raw gSpeed), kept for comparison and for the regression tests of 1.x.
+  bool smooth_speed = true;
+  SpeedSmootherConfig smoother;
   double deriv_half_window_s = 0.5;   // local linear fit of speed over ±0.5 s
   double min_speed_heading_ms = 2.0;  // below this, heading / curvature are not computed
   double straight_radius_m = 500.0;   // radius above this = straight line
@@ -29,8 +34,10 @@ struct RtkStats {
 
 struct GnssResult {
   std::vector<double> t;              // s from first epoch (GNSS time)
-  std::vector<double> speed;          // m/s (receiver gSpeed), NaN where unusable
-  std::vector<double> speed_sigma;    // m/s receiver sAcc (1-sigma estimate)
+  std::vector<double> speed;          // m/s: 2.0 = Kalman + RTS smoothed gSpeed (1.x: raw gSpeed), NaN where unusable
+  std::vector<double> speed_sigma;    // m/s 1-sigma of `speed` (smoother posterior; 1.x: receiver sAcc)
+  std::vector<double> speed_raw;      // m/s receiver gSpeed, unchanged (NaN where unusable)
+  std::vector<double> speed_raw_sigma;// m/s receiver sAcc
   std::vector<double> accel;          // m/s² longitudinal (slope of speed), NaN where not computable
   std::vector<double> accel_sigma;    // m/s² 1-sigma propagated from sAcc
   std::vector<double> heading_rate;   // deg/s (from the velocity vector), NaN at low speed

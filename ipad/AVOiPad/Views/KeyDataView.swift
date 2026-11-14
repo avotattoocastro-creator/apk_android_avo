@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// «Datos clave» de un entrenamiento (paridad iPad ↔ PC, docs/PARIDAD_IPAD_PC.md): rejilla de cifras con icono, reparto
-/// de aires y calidad de la posición. Todas las cifras salen del motor AVO Equine (Core/KeyData.swift), con las mismas
+/// de aires y calidad de la posición. Todas las cifras salen del motor AVO Performance Equine (Core/KeyData.swift), con las mismas
 /// reglas que windows/AVO.Windows/Views/KeyDataView.xaml. Pulso y recuperaciones se muestran vacíos hasta que exista
 /// el ECG de la cincha: nunca se inventan.
 struct KeyDataView: View {
@@ -57,7 +57,7 @@ struct KeyDataView: View {
     private func header(_ s: SessionItem, _ nav: Bool) -> some View {
         HStack(alignment: .top) {
             AvoPageTitle(title: "\(s.horse) · \(s.dateTimeText)",
-                         subtitle: "Cifras del motor AVO Equine · iguales en iPad y PC")
+                         subtitle: "Cifras del motor AVO Performance Equine · iguales en iPad y PC")
             Spacer()
             Button {
                 showNav = !nav

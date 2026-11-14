@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:Avo.Windows.Controls"
              xmlns:v="clr-namespace:Avo.Windows.Views">
-    <!-- Biomechanics (concept 02 screen 5 / concept 01 screen 4). Every index comes from the AVO Equine Intelligence engine and is
+    <!-- Biomechanics (concept 02 screen 5 / concept 01 screen 4). Every index comes from the AVO Performance Equine engine and is
          labelled exploratory: uncalibrated IMU, no clinical diagnosis, no limb load. Without girth data nothing is computed. -->
     <Grid Margin="16,12,16,14">
         <Grid.RowDefinitions>

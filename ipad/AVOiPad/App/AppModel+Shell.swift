@@ -149,7 +149,7 @@ extension AppModel {
 
     // ------------------------------------------------------------------ engine info
     var engineInfo: String {
-        EquineEngine.available ? "Motor AVO Equine \(EquineEngine.version())" : "Motor no disponible: " + (EquineEngine.unavailableReason ?? "")
+        EquineEngine.available ? "Motor AVO Performance Equine \(EquineEngine.version())" : "Motor no disponible: " + (EquineEngine.unavailableReason ?? "")
     }
     var engineAvailable: Bool { EquineEngine.available }
     var engineShort: String { EquineEngine.available ? EquineEngine.version() : "No disponible" }

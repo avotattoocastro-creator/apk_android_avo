@@ -22,7 +22,7 @@ class EquineResultTest {
     @Test fun syntheticSessionWithGirthGoesThroughTheWholeChain() {
         val r = EquineResult.parse(text("equine/synthetic_analysis.json"))
         assertEquals(2, r.formatVersion)
-        assertTrue(r.engine.startsWith("1.1.0"))
+        assertTrue(r.engine.startsWith("2.0.0"))
         assertEquals("SINTETICA_0001", r.sessionId)
         assertTrue(r.hasImu && r.hasGnss)
         assertEquals("OFFLINE_ANALYSIS", r.mode)

@@ -436,7 +436,7 @@ final class ImportAndServicesTests: XCTestCase {
 
     func testEquineEngine() async throws {
         XCTAssertTrue(EquineEngine.available, EquineEngine.unavailableReason ?? "")
-        XCTAssertTrue(EquineEngine.version().hasPrefix("1.1.0"), "Versión del motor " + EquineEngine.version())
+        XCTAssertTrue(EquineEngine.version().hasPrefix("2.0.0"), "Versión del motor " + EquineEngine.version())
         guard let synthetic = syntheticFixture() else { throw XCTSkip("Falta la sesión de referencia synthetic_session.avo") }
         let avo2 = try write("sintetica.avo", Self.zip([
             (name: "manifest.json", data: Self.manifest("SINTETICA_0001", ["P001.avr": Self.sha(synthetic)], extra: ["horseName": "PRUEBA", "riderName": "", "startRtcMs": 1_792_656_000_000])),

@@ -149,7 +149,7 @@ try
     }
     else
     {
-        Assert(EquineEngine.Version().StartsWith("1.1.0", StringComparison.Ordinal), "Versión del motor " + EquineEngine.Version());
+        Assert(EquineEngine.Version().StartsWith("2.0.0", StringComparison.Ordinal), "Versión del motor " + EquineEngine.Version());
         var synthetic = File.ReadAllBytes(fixture);
         string avo2 = Path.Combine(dir, "sintetica.avo");
         using (var zip = ZipFile.Open(avo2, ZipArchiveMode.Create))

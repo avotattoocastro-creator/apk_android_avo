@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-ENGINE-2.0-F1a — AVO Performance Equine 2.0.0-dev1: una sola velocidad para todo
+**Autor:** Claude · Rama `feature/avo-equine-2-0` (desde `develop/avo-performance-horse` tras integrar el PR #20)
+**Por qué:** el motor 1.1 calculaba todas sus cifras con la velocidad bruta del receptor (gSpeed), mientras que las apps
+mostraban una velocidad filtrada propia. Por eso el mismo entrenamiento daba 60,2 km/h en el motor y 58,3 km/h en la barra.
+Plan completo: proyecto, `claude/AVO_PERFORMANCE_EQUINE_2_0_PLAN.md`.
+**Qué cambia:**
+- **Velocidad del motor:** Kalman v-a + suavizado RTS en C++ (`smoother.h/.cpp`), con el mismo modelo y valores por
+  defecto que las apps.
+  - `GnssResult.speed` es ahora la velocidad suavizada, con su σ posterior, y de ella salen todas las cifras de velocidad:
+    máxima, histograma, curvas, Trabajo en pista (distancias de trabajo y rápida, mejores distancias), aires y fusión.
+  - gSpeed se conserva en `speed_raw` y en la nueva serie `velocidad_receptor`.
+  - El modo 1.x sigue disponible (`smooth_speed = false`).
+- **Versión:** `ENGINE_VERSION` 2.0.0-dev1 y versión de algoritmo GNSS 2.0.0. El nombre visible pasa a «AVO Performance
+  Equine» en Android, Windows e iPad. Los identificadores técnicos (`avo_eq`, `avo-equine-*`) no cambian, por compatibilidad.
+- **Pruebas del motor:** dos casos nuevos (`gnss2.*`) y fixtures JSON regenerados. Las pruebas de versión de Kotlin,
+  Android, Windows e iPad esperan ya «2.0.0».
+- **Resultado en simulación:** galope de 14 m/s con ruido σ 0,3 m/s → RMS 0,310 → 0,081 m/s; velocidad máxima 14,91 →
+  14,22 m/s.
+**No se ha tocado:** protocolos, firmware, formato `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** pruebas locales del motor 87 casos / 1520 comprobaciones, 0 fallos (Linux, GCC). CI pendiente.
+**NO VERIFICADO** con sesiones reales: es el paso F5.
+**Siguiente (F1b):** las apps dejan de filtrar por su cuenta y dibujan la serie `velocidad` del motor; aceleración también
+desde el filtro, con su σ.
+
 ## 2026-11-14 — AVO-SHELL-28 — Cifras que coinciden: velocidad máxima y distancia de trabajo
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad y Windows, por igual):**

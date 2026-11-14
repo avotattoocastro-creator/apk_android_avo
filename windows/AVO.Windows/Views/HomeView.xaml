@@ -222,7 +222,7 @@
                     </c:AvoCard>
                     <c:AvoCard Header="Estado del sistema" Margin="0,12,0,0">
                         <StackPanel>
-                            <c:AvoStatusIndicator Text="Motor AVO Equine Intelligence" Detail="{Binding EngineShort}" State="{Binding EngineIndicator}" ToolTip="{Binding EngineInfo}"/>
+                            <c:AvoStatusIndicator Text="Motor AVO Performance Equine" Detail="{Binding EngineShort}" State="{Binding EngineIndicator}" ToolTip="{Binding EngineInfo}"/>
                             <c:AvoStatusIndicator Text="Importación segura (SHA-256 / CRC)" Detail="Activa" State="Ok"/>
                             <c:AvoStatusIndicator Text="Servidor AVO" Detail="Contrato pendiente" State="Warning"/>
                             <c:AvoStatusIndicator Text="Mareas IHM / Open-Meteo" Detail="Bajo demanda" State="Info"/>

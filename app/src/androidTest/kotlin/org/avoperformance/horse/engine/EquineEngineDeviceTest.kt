@@ -27,7 +27,7 @@ class EquineEngineDeviceTest {
 
     @Test fun nativeLibraryLoadsAndAnalysesASessionEndToEnd() {
         assertTrue(AvoEquine.unavailableReason ?: "", AvoEquine.available)
-        assertTrue(AvoEquine.version()!!.startsWith("1.1.0"))
+        assertTrue(AvoEquine.version()!!.startsWith("2.0.0"))
         val f = session()
         val cache = File(f.parentFile, "analisis")
         val opts = "{\"series\":true,\"cache_dir\":\"${cache.absolutePath}\"}"

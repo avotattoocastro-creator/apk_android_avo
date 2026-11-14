@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace Avo.Windows.Core;
 
 // «Datos clave» y «Calendario» — paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md).
-// Reglas IDÉNTICAS a ipad/AVOiPad/Core/KeyData.swift: todas las cifras salen del resultado del motor AVO Equine (el
+// Reglas IDÉNTICAS a ipad/AVOiPad/Core/KeyData.swift: todas las cifras salen del resultado del motor AVO Performance Equine (el
 // mismo para Windows e iPad), nunca de un cálculo propio de la app. Lo que el motor no da (pulso, recuperaciones) se
 // muestra como «—» con el motivo; nunca se inventa.
 

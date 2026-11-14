@@ -2,7 +2,7 @@ import Foundation
 
 // «Datos clave» y «Calendario» — paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md).
 // Las reglas son IDÉNTICAS a windows/AVO.Windows.Core/Analysis/KeyData.cs: todas las cifras salen del resultado del
-// motor AVO Equine (el mismo para iPad y Windows), nunca de un cálculo propio de la app. Lo que el motor no da
+// motor AVO Performance Equine (el mismo para iPad y Windows), nunca de un cálculo propio de la app. Lo que el motor no da
 // (pulso, recuperaciones) se muestra como «—» con el motivo; nunca se inventa.
 
 /// One tile of «Datos clave».

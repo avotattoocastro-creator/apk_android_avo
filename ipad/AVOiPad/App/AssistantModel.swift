@@ -414,7 +414,7 @@ final class AssistantModel {
             let compact: String = await Task.detached(priority: .userInitiated) { () -> String in
                 AssistantJSON.compact(analysis)
             }.value
-            parts.append("# Análisis completo del motor AVO Equine (compactado: sin series temporales; listas largas resumidas)\n" + compact)
+            parts.append("# Análisis completo del motor AVO Performance Equine (compactado: sin series temporales; listas largas resumidas)\n" + compact)
         } else {
             parts.append("# Análisis del motor\nNo hay análisis del motor en memoria para esta sesión.")
         }

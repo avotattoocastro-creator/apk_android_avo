@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace Avo.Windows.Core;
 
 /// <summary>
-/// P/Invoke access to avo_equine.dll — the AVO Equine Intelligence Engine (same C++17 code as Android and Python).
+/// P/Invoke access to avo_equine.dll — the AVO Performance Equine (same C++17 code as Android and Python).
 /// Strings are UTF-8. Calls are blocking: run them with Task.Run. Cancellation sets a native flag polled by the engine.
 /// </summary>
 public static class EquineEngine

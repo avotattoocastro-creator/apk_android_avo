@@ -18,7 +18,7 @@ final class EngineCancelFlag: @unchecked Sendable {
     var isCancelled: Bool { pointer.pointee != 0 }
 }
 
-/// Access to the AVO Equine Intelligence Engine (same C++17 code as Android, Windows and Python), linked statically
+/// Access to the AVO Performance Equine (same C++17 code as Android, Windows and Python), linked statically
 /// into the app and reached through the C API (avo_eq_c.h, bridging header). Strings are UTF-8. The native calls are
 /// blocking: the async functions run them off the caller's thread. Cancellation sets a flag polled by the engine.
 enum EquineEngine {
