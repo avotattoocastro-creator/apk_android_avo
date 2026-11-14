@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "f8ab83dd-32cd-5d25-8d43-304737e649fe")
-	(paper "User" 805 390)
+	(paper "User" 805 421)
 	(title_block
 		(title "AVO BACK V5 CASCO · placa de la espalda · REV A")
 		(date "2026-11-14")
@@ -854,6 +854,67 @@
 			)
 		)
 		(symbol
+			"AVO:SK6812SIDE-A_D_103a5b"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D" (at -7.62 5.08 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+			(property
+				"Value"
+				"SK6812SIDE-A_D_103a5b"
+				(at 7.62 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify right bottom))
+			)
+			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
+			(symbol
+				"SK6812SIDE-A_D_103a5b_0_1"
+				(rectangle
+					(start -7.62 3.81)
+					(end 7.62 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol
+				"SK6812SIDE-A_D_103a5b_1_1"
+				(pin
+					passive
+					line
+					(at -10.16 1.27 0)
+					(length 2.54)
+					(name "DIN" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin
+					passive
+					line
+					(at -10.16 -1.27 0)
+					(length 2.54)
+					(name "VDD" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin
+					passive
+					line
+					(at 10.16 1.27 180)
+					(length 2.54)
+					(name "DOUT" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+				(pin
+					passive
+					line
+					(at 10.16 -1.27 180)
+					(length 2.54)
+					(name "GND" (effects (font (size 1.27 1.27))))
+					(number "4" (effects (font (size 1.27 1.27))))
+				)
+			)
+		)
+		(symbol
 			"AVO:microSD_J_d038d3"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
@@ -1258,36 +1319,36 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-S3-MINI-1U-N8_U_73c31e"
+			"AVO:ESP32-S3-MINI-1U-N8_U_369c11"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U" (at -20.32 55.88 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+			(property "Reference" "U" (at -21.59 55.88 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-S3-MINI-1U-N8_U_73c31e"
-				(at 20.32 55.88 0)
+				"ESP32-S3-MINI-1U-N8_U_369c11"
+				(at 21.59 55.88 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
 			(property "Footprint" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-S3-MINI-1U-N8_U_73c31e_0_1"
+				"ESP32-S3-MINI-1U-N8_U_369c11_0_1"
 				(rectangle
-					(start -20.32 54.61)
-					(end 20.32 -54.61)
+					(start -21.59 54.61)
+					(end 21.59 -54.61)
 					(stroke (width 0.254) (type default))
 					(fill (type background))
 				)
 			)
 			(symbol
-				"ESP32-S3-MINI-1U-N8_U_73c31e_1_1"
+				"ESP32-S3-MINI-1U-N8_U_369c11_1_1"
 				(pin
 					passive
 					line
-					(at -22.86 52.07 0)
+					(at -24.13 52.07 0)
 					(length 2.54)
 					(name "3V3" (effects (font (size 1.27 1.27))))
 					(number "3" (effects (font (size 1.27 1.27))))
@@ -1295,7 +1356,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 49.53 0)
+					(at -24.13 49.53 0)
 					(length 2.54)
 					(name "IO0 BOOT" (effects (font (size 1.27 1.27))))
 					(number "4" (effects (font (size 1.27 1.27))))
@@ -1303,7 +1364,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 46.99 0)
+					(at -24.13 46.99 0)
 					(length 2.54)
 					(name "IO1 HALL" (effects (font (size 1.27 1.27))))
 					(number "5" (effects (font (size 1.27 1.27))))
@@ -1311,7 +1372,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 44.45 0)
+					(at -24.13 44.45 0)
 					(length 2.54)
 					(name "IO2 BAT_ADC" (effects (font (size 1.27 1.27))))
 					(number "6" (effects (font (size 1.27 1.27))))
@@ -1319,7 +1380,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 41.91 0)
+					(at -24.13 41.91 0)
 					(length 2.54)
 					(name "IO3" (effects (font (size 1.27 1.27))))
 					(number "7" (effects (font (size 1.27 1.27))))
@@ -1327,7 +1388,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 39.37 0)
+					(at -24.13 39.37 0)
 					(length 2.54)
 					(name "IO4 ZED_PPS" (effects (font (size 1.27 1.27))))
 					(number "8" (effects (font (size 1.27 1.27))))
@@ -1335,7 +1396,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 36.83 0)
+					(at -24.13 36.83 0)
 					(length 2.54)
 					(name "IO5 ZED_TX1" (effects (font (size 1.27 1.27))))
 					(number "9" (effects (font (size 1.27 1.27))))
@@ -1343,7 +1404,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 34.29 0)
+					(at -24.13 34.29 0)
 					(length 2.54)
 					(name "IO6 S3_TX1" (effects (font (size 1.27 1.27))))
 					(number "10" (effects (font (size 1.27 1.27))))
@@ -1351,7 +1412,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 31.75 0)
+					(at -24.13 31.75 0)
 					(length 2.54)
 					(name "IO7 ZED_TX2" (effects (font (size 1.27 1.27))))
 					(number "11" (effects (font (size 1.27 1.27))))
@@ -1359,7 +1420,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 29.21 0)
+					(at -24.13 29.21 0)
 					(length 2.54)
 					(name "IO8 S3_TX2" (effects (font (size 1.27 1.27))))
 					(number "12" (effects (font (size 1.27 1.27))))
@@ -1367,7 +1428,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 26.67 0)
+					(at -24.13 26.67 0)
 					(length 2.54)
 					(name "IO9 S3_ZRST" (effects (font (size 1.27 1.27))))
 					(number "13" (effects (font (size 1.27 1.27))))
@@ -1375,7 +1436,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 24.13 0)
+					(at -24.13 24.13 0)
 					(length 2.54)
 					(name "IO10 ZED_EN" (effects (font (size 1.27 1.27))))
 					(number "14" (effects (font (size 1.27 1.27))))
@@ -1383,7 +1444,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 21.59 0)
+					(at -24.13 21.59 0)
 					(length 2.54)
 					(name "IO11" (effects (font (size 1.27 1.27))))
 					(number "15" (effects (font (size 1.27 1.27))))
@@ -1391,7 +1452,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 19.05 0)
+					(at -24.13 19.05 0)
 					(length 2.54)
 					(name "IO12 SD_CLK0" (effects (font (size 1.27 1.27))))
 					(number "16" (effects (font (size 1.27 1.27))))
@@ -1399,7 +1460,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 16.51 0)
+					(at -24.13 16.51 0)
 					(length 2.54)
 					(name "IO13 SD_CMD" (effects (font (size 1.27 1.27))))
 					(number "17" (effects (font (size 1.27 1.27))))
@@ -1407,7 +1468,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 13.97 0)
+					(at -24.13 13.97 0)
 					(length 2.54)
 					(name "IO14 SD_D0" (effects (font (size 1.27 1.27))))
 					(number "18" (effects (font (size 1.27 1.27))))
@@ -1415,7 +1476,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 11.43 0)
+					(at -24.13 11.43 0)
 					(length 2.54)
 					(name "IO15 SD_D1" (effects (font (size 1.27 1.27))))
 					(number "19" (effects (font (size 1.27 1.27))))
@@ -1423,7 +1484,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 8.89 0)
+					(at -24.13 8.89 0)
 					(length 2.54)
 					(name "IO16 SD_D2" (effects (font (size 1.27 1.27))))
 					(number "20" (effects (font (size 1.27 1.27))))
@@ -1431,7 +1492,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 6.35 0)
+					(at -24.13 6.35 0)
 					(length 2.54)
 					(name "IO17 SD_D3" (effects (font (size 1.27 1.27))))
 					(number "21" (effects (font (size 1.27 1.27))))
@@ -1439,7 +1500,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 3.81 0)
+					(at -24.13 3.81 0)
 					(length 2.54)
 					(name "IO18 VBUS_DET" (effects (font (size 1.27 1.27))))
 					(number "22" (effects (font (size 1.27 1.27))))
@@ -1447,7 +1508,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 1.27 0)
+					(at -24.13 1.27 0)
 					(length 2.54)
 					(name "IO19 D- USB_DM" (effects (font (size 1.27 1.27))))
 					(number "23" (effects (font (size 1.27 1.27))))
@@ -1455,7 +1516,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 -1.27 0)
+					(at -24.13 -1.27 0)
 					(length 2.54)
 					(name "IO20 D+ USB_DP" (effects (font (size 1.27 1.27))))
 					(number "24" (effects (font (size 1.27 1.27))))
@@ -1463,7 +1524,7 @@
 				(pin
 					passive
 					line
-					(at -22.86 -3.81 0)
+					(at -24.13 -3.81 0)
 					(length 2.54)
 					(name "IO21 SD_PWR_N" (effects (font (size 1.27 1.27))))
 					(number "25" (effects (font (size 1.27 1.27))))
@@ -1471,7 +1532,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 52.07 180)
+					(at 24.13 52.07 180)
 					(length 2.54)
 					(name "IO26" (effects (font (size 1.27 1.27))))
 					(number "26" (effects (font (size 1.27 1.27))))
@@ -1479,15 +1540,15 @@
 				(pin
 					passive
 					line
-					(at 22.86 49.53 180)
+					(at 24.13 49.53 180)
 					(length 2.54)
-					(name "IO47 GPIO47" (effects (font (size 1.27 1.27))))
+					(name "IO47 LED_DIN_S3" (effects (font (size 1.27 1.27))))
 					(number "27" (effects (font (size 1.27 1.27))))
 				)
 				(pin
 					passive
 					line
-					(at 22.86 46.99 180)
+					(at 24.13 46.99 180)
 					(length 2.54)
 					(name "IO33" (effects (font (size 1.27 1.27))))
 					(number "28" (effects (font (size 1.27 1.27))))
@@ -1495,7 +1556,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 44.45 180)
+					(at 24.13 44.45 180)
 					(length 2.54)
 					(name "IO34" (effects (font (size 1.27 1.27))))
 					(number "29" (effects (font (size 1.27 1.27))))
@@ -1503,7 +1564,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 41.91 180)
+					(at 24.13 41.91 180)
 					(length 2.54)
 					(name "IO48 GPIO48" (effects (font (size 1.27 1.27))))
 					(number "30" (effects (font (size 1.27 1.27))))
@@ -1511,7 +1572,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 39.37 180)
+					(at 24.13 39.37 180)
 					(length 2.54)
 					(name "IO35" (effects (font (size 1.27 1.27))))
 					(number "31" (effects (font (size 1.27 1.27))))
@@ -1519,7 +1580,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 36.83 180)
+					(at 24.13 36.83 180)
 					(length 2.54)
 					(name "IO36" (effects (font (size 1.27 1.27))))
 					(number "32" (effects (font (size 1.27 1.27))))
@@ -1527,7 +1588,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 34.29 180)
+					(at 24.13 34.29 180)
 					(length 2.54)
 					(name "IO37" (effects (font (size 1.27 1.27))))
 					(number "33" (effects (font (size 1.27 1.27))))
@@ -1535,7 +1596,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 31.75 180)
+					(at 24.13 31.75 180)
 					(length 2.54)
 					(name "IO38 CHG_PG" (effects (font (size 1.27 1.27))))
 					(number "34" (effects (font (size 1.27 1.27))))
@@ -1543,7 +1604,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 29.21 180)
+					(at 24.13 29.21 180)
 					(length 2.54)
 					(name "IO39 CHG_STAT" (effects (font (size 1.27 1.27))))
 					(number "35" (effects (font (size 1.27 1.27))))
@@ -1551,7 +1612,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 26.67 180)
+					(at 24.13 26.67 180)
 					(length 2.54)
 					(name "IO40 POGO_AUX" (effects (font (size 1.27 1.27))))
 					(number "36" (effects (font (size 1.27 1.27))))
@@ -1559,7 +1620,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 24.13 180)
+					(at 24.13 24.13 180)
 					(length 2.54)
 					(name "IO41 GPIO41" (effects (font (size 1.27 1.27))))
 					(number "37" (effects (font (size 1.27 1.27))))
@@ -1567,7 +1628,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 21.59 180)
+					(at 24.13 21.59 180)
 					(length 2.54)
 					(name "IO42" (effects (font (size 1.27 1.27))))
 					(number "38" (effects (font (size 1.27 1.27))))
@@ -1575,7 +1636,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 19.05 180)
+					(at 24.13 19.05 180)
 					(length 2.54)
 					(name "TXD0 U0TX" (effects (font (size 1.27 1.27))))
 					(number "39" (effects (font (size 1.27 1.27))))
@@ -1583,7 +1644,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 16.51 180)
+					(at 24.13 16.51 180)
 					(length 2.54)
 					(name "RXD0 U0RX" (effects (font (size 1.27 1.27))))
 					(number "40" (effects (font (size 1.27 1.27))))
@@ -1591,7 +1652,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 13.97 180)
+					(at 24.13 13.97 180)
 					(length 2.54)
 					(name "IO45" (effects (font (size 1.27 1.27))))
 					(number "41" (effects (font (size 1.27 1.27))))
@@ -1599,7 +1660,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 11.43 180)
+					(at 24.13 11.43 180)
 					(length 2.54)
 					(name "IO46" (effects (font (size 1.27 1.27))))
 					(number "44" (effects (font (size 1.27 1.27))))
@@ -1607,7 +1668,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 8.89 180)
+					(at 24.13 8.89 180)
 					(length 2.54)
 					(name "EN EN" (effects (font (size 1.27 1.27))))
 					(number "45" (effects (font (size 1.27 1.27))))
@@ -1615,7 +1676,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 6.35 180)
+					(at 24.13 6.35 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "1" (effects (font (size 1.27 1.27))))
@@ -1623,7 +1684,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 3.81 180)
+					(at 24.13 3.81 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "2" (effects (font (size 1.27 1.27))))
@@ -1631,7 +1692,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 1.27 180)
+					(at 24.13 1.27 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "42" (effects (font (size 1.27 1.27))))
@@ -1639,7 +1700,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -1.27 180)
+					(at 24.13 -1.27 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "43" (effects (font (size 1.27 1.27))))
@@ -1647,7 +1708,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -3.81 180)
+					(at 24.13 -3.81 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "46" (effects (font (size 1.27 1.27))))
@@ -1655,7 +1716,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -6.35 180)
+					(at 24.13 -6.35 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "47" (effects (font (size 1.27 1.27))))
@@ -1663,7 +1724,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -8.89 180)
+					(at 24.13 -8.89 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "48" (effects (font (size 1.27 1.27))))
@@ -1671,7 +1732,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -11.43 180)
+					(at 24.13 -11.43 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "49" (effects (font (size 1.27 1.27))))
@@ -1679,7 +1740,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -13.97 180)
+					(at 24.13 -13.97 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "50" (effects (font (size 1.27 1.27))))
@@ -1687,7 +1748,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -16.51 180)
+					(at 24.13 -16.51 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "51" (effects (font (size 1.27 1.27))))
@@ -1695,7 +1756,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -19.05 180)
+					(at 24.13 -19.05 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "52" (effects (font (size 1.27 1.27))))
@@ -1703,7 +1764,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -21.59 180)
+					(at 24.13 -21.59 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "53" (effects (font (size 1.27 1.27))))
@@ -1711,7 +1772,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -24.13 180)
+					(at 24.13 -24.13 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "54" (effects (font (size 1.27 1.27))))
@@ -1719,7 +1780,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -26.67 180)
+					(at 24.13 -26.67 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "55" (effects (font (size 1.27 1.27))))
@@ -1727,7 +1788,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -29.21 180)
+					(at 24.13 -29.21 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "56" (effects (font (size 1.27 1.27))))
@@ -1735,7 +1796,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -31.75 180)
+					(at 24.13 -31.75 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "57" (effects (font (size 1.27 1.27))))
@@ -1743,7 +1804,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -34.29 180)
+					(at 24.13 -34.29 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "58" (effects (font (size 1.27 1.27))))
@@ -1751,7 +1812,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -36.83 180)
+					(at 24.13 -36.83 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "59" (effects (font (size 1.27 1.27))))
@@ -1759,7 +1820,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -39.37 180)
+					(at 24.13 -39.37 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "60" (effects (font (size 1.27 1.27))))
@@ -1767,7 +1828,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -41.91 180)
+					(at 24.13 -41.91 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "61" (effects (font (size 1.27 1.27))))
@@ -1775,7 +1836,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -44.45 180)
+					(at 24.13 -44.45 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "62" (effects (font (size 1.27 1.27))))
@@ -1783,7 +1844,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -46.99 180)
+					(at 24.13 -46.99 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "63" (effects (font (size 1.27 1.27))))
@@ -1791,7 +1852,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -49.53 180)
+					(at 24.13 -49.53 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "64" (effects (font (size 1.27 1.27))))
@@ -1799,7 +1860,7 @@
 				(pin
 					passive
 					line
-					(at 22.86 -52.07 180)
+					(at 24.13 -52.07 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
 					(number "65" (effects (font (size 1.27 1.27))))
@@ -3805,41 +3866,541 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 403.86 313.69 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
-		(start 15.24 215.9)
-		(end 265.43 306.07)
+		(start 15.24 160.02)
+		(end 265.43 246.38)
 		(stroke (width 0.2) (type dash))
 		(fill (type none))
-		(uuid "ce1b0587-7a42-59b0-a5f9-702b3fb03df9")
+		(uuid "b548912e-e1b2-53cd-859f-2788a637f78d")
+	)
+	(text
+		"ANILLO DE LUZ: 4 × SK6812SIDE-A de emisión lateral en los cantos (GPIO47, VSYS)"
+		(exclude_from_sim no)
+		(at 16.51 165.1 0)
+		(effects (font (size 2 2) (bold yes)) (justify left bottom))
+		(uuid "05b0bf6a-9745-50ba-aa28-e1f9bad8a6f0")
+	)
+	(symbol
+		(lib_id "AVO:SK6812SIDE-A_D_103a5b")
+		(at 43.18 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e61ec0f6-77f0-5288-9689-86bccd7c89d8")
+		(property "Reference" "D10" (at 43.18 175.26 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SK6812SIDE-A" (at 43.18 177.8 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:AVO_SK6812SIDE-A_4.0x1.6mm"
+			(at 43.18 176.53 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 43.18 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 43.18 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C5378721" (at 43.18 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "SK6812SIDE-A (OPSCO)" (at 43.18 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "43c4fbab-a576-59a2-8dce-7847219b0267"))
+		(pin "2" (uuid "7be7674c-a351-51ad-8ed7-615f28b13785"))
+		(pin "3" (uuid "952168df-c580-5b0f-bb63-f1d7b95f7e0a"))
+		(pin "4" (uuid "cc0505ff-b6e5-5b81-9a03-1efda997d6c5"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "D10") (unit 1)))
+		)
+	)
+	(global_label
+		"LED_D1"
+		(shape passive)
+		(at 33.02 175.26 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "b862096e-64d6-56ee-a904-caca05c8dd65")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 33.02 177.8 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "a59c79a4-1617-5932-9f5c-118cc7cb0254")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"LED_D2"
+		(shape passive)
+		(at 53.34 175.26 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "2e6c35e8-cfd9-577f-8d6a-70ea1fed1a95")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 53.34 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 53.34 177.8 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "51e134c2-5dd7-5466-a05d-600fe30f7ebf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 53.34 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:SK6812SIDE-A_D_103a5b")
+		(at 90.17 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bf5bd3f2-b63a-5689-a380-40f773ebebc2")
+		(property "Reference" "D11" (at 90.17 175.26 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SK6812SIDE-A" (at 90.17 177.8 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:AVO_SK6812SIDE-A_4.0x1.6mm"
+			(at 90.17 176.53 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 90.17 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 90.17 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C5378721" (at 90.17 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "SK6812SIDE-A (OPSCO)" (at 90.17 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "d65fab72-e7fa-5cb5-ab53-38b14d308247"))
+		(pin "2" (uuid "ed82626e-021d-5ba5-a94b-6683c3d24d2a"))
+		(pin "3" (uuid "522f5215-ec61-56b5-a934-98cb2015cb5b"))
+		(pin "4" (uuid "de7c8c5a-3785-5b09-a8bf-22d20bdf4958"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "D11") (unit 1)))
+		)
+	)
+	(global_label
+		"LED_D2"
+		(shape passive)
+		(at 80.01 175.26 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "b33a1c69-e77d-5c9a-b9f2-102f11204c90")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 80.01 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 80.01 177.8 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "6b13b817-ca8e-5d8b-a1dc-1c7218fa1bc2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 80.01 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"LED_D3"
+		(shape passive)
+		(at 100.33 175.26 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "11ca03f2-1f43-554d-be5f-157ff4f6e629")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 100.33 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 100.33 177.8 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "57d8c92e-739d-5cd4-a766-3d6229f3f20f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 100.33 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:SK6812SIDE-A_D_103a5b")
+		(at 138.43 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "54fc8047-6554-5e92-b66d-78c73c349a7e")
+		(property "Reference" "D12" (at 138.43 175.26 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SK6812SIDE-A" (at 138.43 177.8 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:AVO_SK6812SIDE-A_4.0x1.6mm"
+			(at 138.43 176.53 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 138.43 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 138.43 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C5378721" (at 138.43 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "SK6812SIDE-A (OPSCO)" (at 138.43 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "b875c1f7-fcd0-5184-84af-fdd517003685"))
+		(pin "2" (uuid "15c76acd-7fdd-52ac-bf64-9abde86e8324"))
+		(pin "3" (uuid "17516f72-a021-557a-8004-81e2a86bab8f"))
+		(pin "4" (uuid "a9aa487a-4438-5b9e-8175-de4000ebd063"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "D12") (unit 1)))
+		)
+	)
+	(global_label
+		"LED_D3"
+		(shape passive)
+		(at 128.27 175.26 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "2a412bc3-8ab3-5c00-aba7-0f338e70a5e0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 128.27 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 128.27 177.8 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "36ab9280-ae45-57ff-bf67-972a35a5aa3d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 128.27 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"LED_D4"
+		(shape passive)
+		(at 148.59 175.26 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "f8175092-50cf-5961-850c-83516b8644dd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 148.59 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 148.59 177.8 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "df3162ce-51c7-56f2-b610-c0e63c5bde18")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 148.59 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:SK6812SIDE-A_D_103a5b")
+		(at 185.42 176.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d22e09ce-6fa8-5f89-a45f-f91a6da25ad8")
+		(property "Reference" "D13" (at 185.42 175.26 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "SK6812SIDE-A" (at 185.42 177.8 0) (effects (font (size 1 1))))
+		(property
+			"Footprint"
+			"AVO:AVO_SK6812SIDE-A_4.0x1.6mm"
+			(at 185.42 176.53 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 185.42 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 185.42 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C5378721" (at 185.42 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "SK6812SIDE-A (OPSCO)" (at 185.42 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "7609704b-d6e5-5d1c-914f-b1021b7898de"))
+		(pin "2" (uuid "f3d76c5f-eb50-50e3-95dc-3b6d40398b34"))
+		(pin "3" (uuid "c1f6073b-b5e2-557c-9828-7f427851175d"))
+		(pin "4" (uuid "e3f3f523-4a86-582a-b73a-398de56b770e"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "D13") (unit 1)))
+		)
+	)
+	(global_label
+		"LED_D4"
+		(shape passive)
+		(at 175.26 175.26 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "40516d17-88a5-5415-8e07-8b090eff8e6a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 175.26 175.26 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 175.26 177.8 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "4ffde215-f0ba-56e8-9b82-dea7c086dd83")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 175.26 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(no_connect (at 195.58 175.26) (uuid "9767449f-1d47-5157-b77f-c15e1706ae69"))
+	(global_label
+		"GND"
+		(shape passive)
+		(at 195.58 177.8 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "e2557d09-bf6b-57fc-8e16-e7f07689c0f0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 195.58 177.8 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:C_avo")
+		(at 212.09 186.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8d0489c0-6c4b-5a37-acdd-3f2cd1d13170")
+		(property "Reference" "C90" (at 214.63 185.42 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 214.63 187.96 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:C_0402_1005Metric"
+			(at 212.09 186.69 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 212.09 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 212.09 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 212.09 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 212.09 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "8f38f12f-39b1-503f-b175-78fd30c356e6"))
+		(pin "2" (uuid "8de11395-001e-5f48-9ef0-db8b0dcc549d"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "C90") (unit 1)))
+		)
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 212.09 182.88 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "3c85d95a-62e0-575c-b30f-3789ea4f1f61")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 212.09 182.88 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 212.09 190.5 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "44c06635-98b2-5e47-b376-c3b7123911d5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 212.09 190.5 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:C_avo")
+		(at 234.95 186.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a2d4aee4-c19c-5ec1-a9e7-71664001a320")
+		(property "Reference" "C91" (at 237.49 185.42 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 237.49 187.96 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:C_0402_1005Metric"
+			(at 234.95 186.69 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 234.95 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 234.95 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 234.95 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 234.95 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "06812dda-6997-5aaf-b5e0-3e90c91e9d01"))
+		(pin "2" (uuid "4d08f370-8348-570a-b5b8-ea93a597d32e"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "C91") (unit 1)))
+		)
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 234.95 182.88 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "7eddd50f-7de3-5518-8de8-27ad19b0fa30")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 234.95 182.88 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 234.95 190.5 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "8b2b9157-7ee1-5509-94af-89857c6a113e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 234.95 190.5 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:C_avo")
+		(at 24.13 218.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8ea35501-f201-5523-8d33-0ae7da9bae0d")
+		(property "Reference" "C92" (at 26.67 217.17 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 26.67 219.71 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:C_0402_1005Metric"
+			(at 24.13 218.44 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 24.13 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 24.13 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 24.13 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 24.13 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "eba756c7-a4f8-55d6-bff7-cca17e51550e"))
+		(pin "2" (uuid "39c7418e-f0f6-5b36-8b27-8ad884c4b8fe"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "C92") (unit 1)))
+		)
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 24.13 214.63 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "37ce24ae-0492-586f-b80c-d0a9e6bb5649")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 214.63 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 24.13 222.25 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "2c43eaac-3c1b-5daa-b04f-9b1483c04992")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 222.25 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:C_avo")
+		(at 48.26 218.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0b410692-a134-581f-a9d0-d6c058c81212")
+		(property "Reference" "C93" (at 50.8 217.17 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 50.8 219.71 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:C_0402_1005Metric"
+			(at 48.26 218.44 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 48.26 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 48.26 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 48.26 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 48.26 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "50a0cf0e-44cd-588f-869b-7bac65823e63"))
+		(pin "2" (uuid "92f1f88a-fc7e-585a-b831-5248cf4f9f77"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "C93") (unit 1)))
+		)
+	)
+	(global_label
+		"VSYS"
+		(shape passive)
+		(at 48.26 214.63 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "58782716-e4b3-5eda-ab8f-bd3d0068ddb3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 48.26 214.63 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"GND"
+		(shape passive)
+		(at 48.26 222.25 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "8f5bfa9b-4018-5ee3-8691-0be009deabad")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 48.26 222.25 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(symbol
+		(lib_id "AVO:R_avo")
+		(at 72.39 223.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "85dcf25a-49fe-5e61-b57e-2b4c0ce31daf")
+		(property "Reference" "R24" (at 74.93 222.25 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "33R" (at 74.93 224.79 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:R_0402_1005Metric"
+			(at 72.39 223.52 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(pin "1" (uuid "c64dc6c7-e1cc-5c42-9ccf-021df0524c84"))
+		(pin "2" (uuid "2e646743-6da7-51b0-8f5b-2fd5cc334900"))
+		(instances
+			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R24") (unit 1)))
+		)
+	)
+	(global_label
+		"LED_DIN_S3"
+		(shape passive)
+		(at 72.39 219.71 90)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "5e7e6367-bce5-5803-afa2-793d16c13b29")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 72.39 219.71 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"LED_D1"
+		(shape passive)
+		(at 72.39 227.33 270)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify left))
+		(uuid "bf2d2da3-41c0-5329-9c2b-f2780434065b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 72.39 227.33 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(rectangle
+		(start 534.67 276.86)
+		(end 784.86 365.76)
+		(stroke (width 0.2) (type dash))
+		(fill (type none))
+		(uuid "d8569aef-2366-5cf5-a04c-eed83b41567c")
 	)
 	(text
 		"microSD (SDMMC 4 bits) · alimentación conmutada"
 		(exclude_from_sim no)
-		(at 16.51 222.25 0)
+		(at 537.21 283.21 0)
 		(effects (font (size 2 2) (bold yes)) (justify left bottom))
-		(uuid "e9a1c38b-617f-5e3b-b56e-2b1e268f9dca")
+		(uuid "941a6da5-ad77-5438-8e22-8f0d4e205a23")
 	)
 	(symbol
 		(lib_id "AVO:microSD_J_d038d3")
-		(at 46.99 240.03 0)
+		(at 567.69 299.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f982650b-fb5c-5308-9d1a-c3a91a1f8bb7")
-		(property "Reference" "J3" (at 46.99 238.76 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "microSD DM3AT" (at 46.99 241.3 0) (effects (font (size 1 1))))
+		(property "Reference" "J3" (at 567.69 298.45 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "microSD DM3AT" (at 567.69 300.99 0) (effects (font (size 1 1))))
 		(property
 			"Footprint"
 			"AVO:microSD_HC_Hirose_DM3AT-SF-PEJM5"
-			(at 46.99 240.03 0)
+			(at 567.69 299.72 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 46.99 240.03 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 46.99 240.03 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C114218" (at 46.99 240.03 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "DM3AT-SF-PEJM5" (at 46.99 240.03 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 567.69 299.72 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 567.69 299.72 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C114218" (at 567.69 299.72 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "DM3AT-SF-PEJM5" (at 567.69 299.72 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "4" (uuid "2c0eed16-dc67-53a0-b017-dc56fd108906"))
 		(pin "5" (uuid "b727adf3-0b0c-5b97-be25-c831e6349537"))
 		(pin "3" (uuid "90b3f91d-af43-5833-8c7e-c6a38657a7dc"))
@@ -3858,110 +4419,110 @@
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 33.02 232.41 180)
+		(at 553.72 292.1 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "9bb7846b-ecd1-567f-96a1-fa18df1bd36d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 232.41 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 292.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_CLK"
 		(shape passive)
-		(at 33.02 234.95 180)
+		(at 553.72 294.64 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "1968ea50-8ff2-57d1-b7c7-145fb85ead1c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 234.95 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 294.64 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_CMD"
 		(shape passive)
-		(at 33.02 237.49 180)
+		(at 553.72 297.18 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "6c37e8b5-3654-59aa-82d3-725715a4942e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 237.49 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 297.18 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_D0"
 		(shape passive)
-		(at 33.02 240.03 180)
+		(at 553.72 299.72 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "5abd86f3-a99d-53c6-9d47-ed70e72f2c0f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 240.03 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 299.72 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_D1"
 		(shape passive)
-		(at 33.02 242.57 180)
+		(at 553.72 302.26 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "1f6556dc-98aa-5c0d-b267-30fef5602b2d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 242.57 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 302.26 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_D2"
 		(shape passive)
-		(at 33.02 245.11 180)
+		(at 553.72 304.8 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "b8f7eb0f-0df9-5a07-81c8-a34441f0a82e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 245.11 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 304.8 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_D3"
 		(shape passive)
-		(at 33.02 247.65 180)
+		(at 553.72 307.34 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "ff55ea91-156e-5442-96cf-7547e25a5e71")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 33.02 247.65 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 307.34 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 60.96 232.41 0)
+		(at 581.66 292.1 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "f0328fca-e40a-53aa-8c91-d32067271f74")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 232.41 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 581.66 292.1 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 60.96 234.95) (uuid "9570913a-93e4-508b-afee-afc4ce465919"))
+	(no_connect (at 581.66 294.64) (uuid "9570913a-93e4-508b-afee-afc4ce465919"))
 	(global_label
 		"GND"
 		(shape passive)
-		(at 60.96 237.49 0)
+		(at 581.66 297.18 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "14540a73-dadc-5621-902f-e5294a447cb3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 237.49 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 581.66 297.18 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 60.96 240.03 0)
+		(at 581.66 299.72 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "80dc2416-a710-53c7-8a37-62be268a682a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 240.03 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 581.66 299.72 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:AO3401A_Q_bcf332")
-		(at 97.79 233.68 0)
+		(at 618.49 293.37 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "080f7397-d2f2-5a33-947d-d4382e1cd065")
-		(property "Reference" "Q4" (at 97.79 232.41 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "AO3401A" (at 97.79 234.95 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 97.79 233.68 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 97.79 233.68 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 97.79 233.68 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C15127" (at 97.79 233.68 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 97.79 233.68 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "Q4" (at 618.49 292.1 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "AO3401A" (at 618.49 294.64 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 618.49 293.37 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 618.49 293.37 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 618.49 293.37 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C15127" (at 618.49 293.37 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 618.49 293.37 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "81935a51-1f1a-5088-990a-370e78d9e115"))
 		(pin "2" (uuid "ddfdff60-09d4-5cef-b918-2c6d64b24408"))
 		(pin "3" (uuid "01f31068-3694-5be1-aba1-7cc5d7d51560"))
@@ -3972,46 +4533,52 @@
 	(global_label
 		"SD_PWR_N"
 		(shape passive)
-		(at 87.63 232.41 180)
+		(at 608.33 292.1 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "d6dcaccc-0d8e-5443-a11a-4d618a4bfae7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 87.63 232.41 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 608.33 292.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 107.95 232.41 0)
+		(at 628.65 292.1 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "deebd800-d958-5c03-8c73-c86ea19eb817")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 107.95 232.41 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 628.65 292.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 107.95 234.95 0)
+		(at 628.65 294.64 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "83ff1d0a-75f8-5402-92a3-7ebc77366963")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 107.95 234.95 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 628.65 294.64 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 127 245.11 0)
+		(at 647.7 306.07 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "95e2a2b3-f0ad-5348-8d2b-aaf1c1cd2a46")
-		(property "Reference" "C40" (at 129.54 243.84 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10u 25V" (at 129.54 246.38 0) (effects (font (size 1 1)) (justify left)))
-		(property "Footprint" "AVO:C_0603_1608Metric" (at 127 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 127 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 127 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C96446" (at 127 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 127 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "C40" (at 650.24 304.8 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10u 25V" (at 650.24 307.34 0) (effects (font (size 1 1)) (justify left)))
+		(property
+			"Footprint"
+			"AVO:C_0603_1608Metric"
+			(at 647.7 306.07 0)
+			(hide yes)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Datasheet" "" (at 647.7 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 647.7 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C96446" (at 647.7 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 647.7 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "a72d9103-07b1-5b28-8c33-9c91f59e3d9d"))
 		(pin "2" (uuid "764c0c5b-d399-522b-b79e-fdbb646398f6"))
 		(instances
@@ -4021,43 +4588,43 @@
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 127 241.3 90)
+		(at 647.7 302.26 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "da3941c2-23ba-5ea6-bc33-cd2fe69f95d6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 241.3 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 647.7 302.26 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 127 248.92 270)
+		(at 647.7 309.88 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "027295dd-3ec2-527a-b9c9-401f538e4fc5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 127 248.92 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 647.7 309.88 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 151.13 245.11 0)
+		(at 671.83 306.07 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ae9bee3d-6412-5b69-973c-4fcea417864e")
-		(property "Reference" "C41" (at 153.67 243.84 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100n" (at 153.67 246.38 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C41" (at 674.37 304.8 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 674.37 307.34 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 151.13 245.11 0)
+			(at 671.83 306.07 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 151.13 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 151.13 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1525" (at 151.13 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 151.13 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 671.83 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 671.83 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 671.83 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 671.83 306.07 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "6083f0f1-410a-58c8-a317-4fda5fc7eec8"))
 		(pin "2" (uuid "6c63cee1-6c61-5230-9187-0e6adf805733"))
 		(instances
@@ -4067,43 +4634,43 @@
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 151.13 241.3 90)
+		(at 671.83 302.26 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "29cec894-f51d-5566-b3c4-99ad3d46c9fc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 151.13 241.3 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 671.83 302.26 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 151.13 248.92 270)
+		(at 671.83 309.88 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "6effb50b-a3d2-5d32-a487-552cb1f8c220")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 151.13 248.92 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 671.83 309.88 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 175.26 246.38 0)
+		(at 695.96 307.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ba7fe4d4-bb00-5357-81bf-466497afccf7")
-		(property "Reference" "R40" (at 177.8 245.11 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100k" (at 177.8 247.65 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R40" (at 698.5 306.07 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100k" (at 698.5 308.61 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 175.26 246.38 0)
+			(at 695.96 307.34 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 175.26 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 175.26 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25741" (at 175.26 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 175.26 246.38 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 695.96 307.34 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 695.96 307.34 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25741" (at 695.96 307.34 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 695.96 307.34 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "ea6a8f15-5478-5716-b463-a75e2a95d8fd"))
 		(pin "2" (uuid "9ce393a1-af07-5fb7-b520-653eb9f4d750"))
 		(instances
@@ -4113,43 +4680,43 @@
 	(global_label
 		"SD_PWR_N"
 		(shape passive)
-		(at 175.26 242.57 90)
+		(at 695.96 303.53 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "a23e9582-5a74-5b5a-809a-38e17957a9d6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 175.26 242.57 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 695.96 303.53 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 175.26 250.19 270)
+		(at 695.96 311.15 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "8ef8a1be-9bef-5a33-a10b-9830f4a97738")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 175.26 250.19 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 695.96 311.15 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 199.39 245.11 0)
+		(at 720.09 304.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "81ef18be-b68e-5877-bb63-e10230b060d7")
-		(property "Reference" "R41" (at 201.93 243.84 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 201.93 246.38 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R41" (at 722.63 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 722.63 306.07 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 199.39 245.11 0)
+			(at 720.09 304.8 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 199.39 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 199.39 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 199.39 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 199.39 245.11 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 720.09 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 720.09 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 720.09 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 720.09 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "cb278736-932d-59d1-8431-049a39b28e4b"))
 		(pin "2" (uuid "725f9c29-613b-5f31-b317-a7615753a294"))
 		(instances
@@ -4159,43 +4726,43 @@
 	(global_label
 		"SD_CMD"
 		(shape passive)
-		(at 199.39 241.3 90)
+		(at 720.09 300.99 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "10b77465-dd0e-5b04-89e6-33a55e19f776")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 199.39 241.3 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 720.09 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 199.39 248.92 270)
+		(at 720.09 308.61 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "0dd756b2-bfd3-5020-a7be-8a02729807ba")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 199.39 248.92 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 720.09 308.61 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 223.52 243.84 0)
+		(at 742.95 304.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "a44d4b57-4492-5e34-b24a-6913244f6111")
-		(property "Reference" "R42" (at 226.06 242.57 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 226.06 245.11 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R42" (at 745.49 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 745.49 306.07 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 223.52 243.84 0)
+			(at 742.95 304.8 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 223.52 243.84 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 223.52 243.84 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 223.52 243.84 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 223.52 243.84 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 742.95 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 742.95 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 742.95 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 742.95 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7790002d-77b6-55d5-ac11-850af25c7f08"))
 		(pin "2" (uuid "f93155de-dd7f-5b1b-83da-3247936695d0"))
 		(instances
@@ -4205,43 +4772,43 @@
 	(global_label
 		"SD_D0"
 		(shape passive)
-		(at 223.52 240.03 90)
+		(at 742.95 300.99 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "abb22faf-68f3-563c-a4b7-e90e2ee3535a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 223.52 240.03 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 742.95 300.99 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 223.52 247.65 270)
+		(at 742.95 308.61 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "14db339c-5950-5e37-884e-2c78ed0797e1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 223.52 247.65 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 742.95 308.61 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 24.13 281.94 0)
+		(at 543.56 341.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "e8aed518-82d9-58d5-82ef-32234fd7c034")
-		(property "Reference" "R43" (at 26.67 280.67 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 26.67 283.21 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R43" (at 546.1 340.36 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 546.1 342.9 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 24.13 281.94 0)
+			(at 543.56 341.63 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 24.13 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 24.13 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 24.13 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 24.13 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 543.56 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 543.56 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 543.56 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 543.56 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7affa094-2724-5f65-8521-10610534f69a"))
 		(pin "2" (uuid "ecd364c7-a0ac-5b76-a085-f060931dad4e"))
 		(instances
@@ -4251,43 +4818,43 @@
 	(global_label
 		"SD_D1"
 		(shape passive)
-		(at 24.13 278.13 90)
+		(at 543.56 337.82 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "348533ba-58f1-56a4-bd61-1db2f36e8867")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 278.13 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 543.56 337.82 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 24.13 285.75 270)
+		(at 543.56 345.44 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "43149003-8b4d-552a-acbf-980131e61b9b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 24.13 285.75 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 543.56 345.44 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 48.26 281.94 0)
+		(at 567.69 341.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "424899a0-d485-5fd1-97bb-fcf973b0eb1e")
-		(property "Reference" "R44" (at 50.8 280.67 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 50.8 283.21 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R44" (at 570.23 340.36 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 570.23 342.9 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 48.26 281.94 0)
+			(at 567.69 341.63 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 48.26 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 48.26 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 48.26 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 48.26 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 567.69 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 567.69 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 567.69 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 567.69 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "777fac83-bf66-5176-84e5-49f6101dd082"))
 		(pin "2" (uuid "c2669ecb-7a6b-552a-a20b-43fe7cf503d9"))
 		(instances
@@ -4297,43 +4864,43 @@
 	(global_label
 		"SD_D2"
 		(shape passive)
-		(at 48.26 278.13 90)
+		(at 567.69 337.82 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "fa535cb8-922e-5d59-a8eb-c5df94fcbb6e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 48.26 278.13 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 567.69 337.82 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 48.26 285.75 270)
+		(at 567.69 345.44 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "708ee02c-5509-5cb1-b27b-7c1c4e35dd3d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 48.26 285.75 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 567.69 345.44 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 72.39 281.94 0)
+		(at 591.82 341.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "ba6ad708-2d80-5445-b3d0-f54a4b0c88d3")
-		(property "Reference" "R45" (at 74.93 280.67 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 74.93 283.21 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R45" (at 594.36 340.36 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 594.36 342.9 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 72.39 281.94 0)
+			(at 591.82 341.63 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 72.39 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 72.39 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 72.39 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 72.39 281.94 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 591.82 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 591.82 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 591.82 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 591.82 341.63 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "fb5f333c-1b21-56bd-a6e2-eaf0dd446a72"))
 		(pin "2" (uuid "bd1b6aab-7b64-5f09-bc99-c0d384a57e44"))
 		(instances
@@ -4343,43 +4910,43 @@
 	(global_label
 		"SD_D3"
 		(shape passive)
-		(at 72.39 278.13 90)
+		(at 591.82 337.82 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "38e78e22-1189-5685-895d-93d16f40f3f8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 72.39 278.13 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 591.82 337.82 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3_SD"
 		(shape passive)
-		(at 72.39 285.75 270)
+		(at 591.82 345.44 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "9b106de9-375d-5c52-9e86-7f256cd8043e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 72.39 285.75 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 591.82 345.44 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 96.52 283.21 0)
+		(at 615.95 344.17 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "54d883c2-174e-5bbe-8438-ab79eb298a88")
-		(property "Reference" "R46" (at 99.06 281.94 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "22R" (at 99.06 284.48 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R46" (at 618.49 342.9 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "22R" (at 618.49 345.44 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 96.52 283.21 0)
+			(at 615.95 344.17 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 96.52 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 96.52 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25092" (at 96.52 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 96.52 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 615.95 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 615.95 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25092" (at 615.95 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 615.95 344.17 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "e6eea8d7-9fef-5c2d-8a02-196da8a0f9d4"))
 		(pin "2" (uuid "06aaf6f8-e95a-554e-b271-5bcc28063bb1"))
 		(instances
@@ -4389,20 +4956,20 @@
 	(global_label
 		"SD_CLK0"
 		(shape passive)
-		(at 96.52 279.4 90)
+		(at 615.95 340.36 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "be89d0b2-7778-5956-b987-aa2601eed4ff")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 96.52 279.4 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"SD_CLK"
 		(shape passive)
-		(at 96.52 287.02 270)
+		(at 615.95 347.98 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "ccb4f20c-c887-5a52-b74a-087c63bac84e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 96.52 287.02 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 347.98 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
 		(start 275.59 20.32)
@@ -5249,27 +5816,27 @@
 		(uuid "11696adf-1d41-532b-b948-b7e897fa0839")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-S3-MINI-1U-N8_U_73c31e")
-		(at 576.58 204.47 0)
+		(lib_id "AVO:ESP32-S3-MINI-1U-N8_U_369c11")
+		(at 577.85 204.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "48be37df-33ad-5b1b-9537-e1cb56f7eca4")
-		(property "Reference" "U4" (at 576.58 203.2 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "ESP32-S3-MINI-1U-N8" (at 576.58 205.74 0) (effects (font (size 1 1))))
+		(property "Reference" "U4" (at 577.85 203.2 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "ESP32-S3-MINI-1U-N8" (at 577.85 205.74 0) (effects (font (size 1 1))))
 		(property
 			"Footprint"
 			"AVO:ESP32-S3-MINI-1U"
-			(at 576.58 204.47 0)
+			(at 577.85 204.47 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 576.58 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 576.58 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C2980299" (at 576.58 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "ESP32-S3-MINI-1U-N8" (at 576.58 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 577.85 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 577.85 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C2980299" (at 577.85 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "ESP32-S3-MINI-1U-N8" (at 577.85 204.47 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "3" (uuid "83ef2585-9eb7-5be8-90d6-ad1e12c4816d"))
 		(pin "4" (uuid "4b8500b6-1897-5c15-b82b-945f1195edf5"))
 		(pin "5" (uuid "88b14955-8168-5ae6-8a6c-fcf9aa44ae80"))
@@ -5530,334 +6097,334 @@
 		(uuid "8313b3ff-e4f1-5acb-8181-033579a6c002")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 553.72 208.28 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 599.44 152.4) (uuid "f3965671-0503-592d-a55a-84e7068509f2"))
+	(no_connect (at 601.98 152.4) (uuid "f3965671-0503-592d-a55a-84e7068509f2"))
 	(global_label
-		"GPIO47"
+		"LED_DIN_S3"
 		(shape passive)
-		(at 599.44 154.94 0)
+		(at 601.98 154.94 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "57bce9e5-4bb4-549d-b501-ebae7f4670a6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 154.94 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 154.94 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 599.44 157.48) (uuid "20797e0a-1f96-5e79-8e8c-895eeca843b3"))
-	(no_connect (at 599.44 160.02) (uuid "fe20f2c4-c31e-53a9-8329-514380c6f0ee"))
+	(no_connect (at 601.98 157.48) (uuid "20797e0a-1f96-5e79-8e8c-895eeca843b3"))
+	(no_connect (at 601.98 160.02) (uuid "fe20f2c4-c31e-53a9-8329-514380c6f0ee"))
 	(global_label
 		"GPIO48"
 		(shape passive)
-		(at 599.44 162.56 0)
+		(at 601.98 162.56 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "99e88926-fbe3-5bf6-904b-0fa15ab1ad6f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 162.56 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 162.56 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 599.44 165.1) (uuid "42a9ab78-2296-5e27-86e7-3afa358a8207"))
-	(no_connect (at 599.44 167.64) (uuid "4c6a7c89-f2b4-5e17-a1a1-9a75710e2e6a"))
-	(no_connect (at 599.44 170.18) (uuid "ca8f6925-e0b5-5ad0-be31-7e014adfffa1"))
+	(no_connect (at 601.98 165.1) (uuid "42a9ab78-2296-5e27-86e7-3afa358a8207"))
+	(no_connect (at 601.98 167.64) (uuid "4c6a7c89-f2b4-5e17-a1a1-9a75710e2e6a"))
+	(no_connect (at 601.98 170.18) (uuid "ca8f6925-e0b5-5ad0-be31-7e014adfffa1"))
 	(global_label
 		"CHG_PG"
 		(shape passive)
-		(at 599.44 172.72 0)
+		(at 601.98 172.72 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "d7d3ad96-e0b5-5602-9b19-cb39d829e2bf")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 172.72 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 172.72 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"CHG_STAT"
 		(shape passive)
-		(at 599.44 175.26 0)
+		(at 601.98 175.26 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "fd8e833b-161f-5269-8cf0-b53a2e7a4cfe")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 175.26 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 175.26 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"POGO_AUX"
 		(shape passive)
-		(at 599.44 177.8 0)
+		(at 601.98 177.8 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "37ce7e0d-360b-5876-8528-26f54b37b105")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 177.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 177.8 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GPIO41"
 		(shape passive)
-		(at 599.44 180.34 0)
+		(at 601.98 180.34 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "0812bfe9-c4de-5dec-9ca2-6dee6fbbe699")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 180.34 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 180.34 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 599.44 182.88) (uuid "1316adb1-0216-54fe-be90-3f93a12b4010"))
+	(no_connect (at 601.98 182.88) (uuid "1316adb1-0216-54fe-be90-3f93a12b4010"))
 	(global_label
 		"U0TX"
 		(shape passive)
-		(at 599.44 185.42 0)
+		(at 601.98 185.42 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "8914685c-cb75-59ba-b748-d5490ea7a618")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 185.42 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 185.42 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"U0RX"
 		(shape passive)
-		(at 599.44 187.96 0)
+		(at 601.98 187.96 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "54a50462-c440-5ced-b117-64c2a3d8fd69")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 187.96 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 187.96 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 599.44 190.5) (uuid "c92d3811-896d-52e3-aa9e-7ebd5aa53dc0"))
-	(no_connect (at 599.44 193.04) (uuid "2f19e88c-7917-5b8e-871c-3b89ab008b8a"))
+	(no_connect (at 601.98 190.5) (uuid "c92d3811-896d-52e3-aa9e-7ebd5aa53dc0"))
+	(no_connect (at 601.98 193.04) (uuid "2f19e88c-7917-5b8e-871c-3b89ab008b8a"))
 	(global_label
 		"EN"
 		(shape passive)
-		(at 599.44 195.58 0)
+		(at 601.98 195.58 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "6c577624-477e-5fba-be9f-7a75d0130c9a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 195.58 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 195.58 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 198.12 0)
+		(at 601.98 198.12 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "0bdfb3d2-d811-5df1-99f7-4d72ceb44a1d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 198.12 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 198.12 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 200.66 0)
+		(at 601.98 200.66 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "10f38ddf-1b2f-58f3-a017-be12c45a3c2c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 200.66 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 200.66 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 203.2 0)
+		(at 601.98 203.2 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "65187adf-24ae-5f2f-885d-6feb47d26ead")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 203.2 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 203.2 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 205.74 0)
+		(at 601.98 205.74 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "731f698a-ce79-552d-93ea-2bdf496855b0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 205.74 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 205.74 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 208.28 0)
+		(at 601.98 208.28 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "65c82f35-8a87-5010-abd9-39689efe714b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 208.28 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 208.28 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 210.82 0)
+		(at 601.98 210.82 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "d6f392c9-d862-5e40-8d51-281704eaa0e3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 210.82 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 210.82 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 213.36 0)
+		(at 601.98 213.36 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "47b124bf-b937-5a06-8f1b-584509c567b2")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 213.36 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 213.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 215.9 0)
+		(at 601.98 215.9 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "a6ecb432-fdd1-5ab8-8207-a490c1d07059")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 215.9 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 215.9 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 218.44 0)
+		(at 601.98 218.44 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "8a506590-5447-58f9-804f-097a01226fa7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 218.44 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 218.44 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 220.98 0)
+		(at 601.98 220.98 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "d166b968-1648-51db-9e8a-e09a78a6e201")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 220.98 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 220.98 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 223.52 0)
+		(at 601.98 223.52 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "d32d54f5-edab-538d-927b-012479ef2b0c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 223.52 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 223.52 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 226.06 0)
+		(at 601.98 226.06 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "1d8bd261-fed1-53a7-8163-7265f02775f9")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 226.06 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 226.06 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 228.6 0)
+		(at 601.98 228.6 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "5124573d-1cd1-5f0f-b805-f07e5201adc6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 228.6 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 228.6 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 231.14 0)
+		(at 601.98 231.14 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "43ebc311-2812-5d78-96b8-4210bc8663a9")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 231.14 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 231.14 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 233.68 0)
+		(at 601.98 233.68 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "208dea49-ec8d-5f44-b309-ba6c648e372e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 233.68 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 233.68 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 236.22 0)
+		(at 601.98 236.22 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "10596e10-259d-56bf-b032-e10a5ee55998")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 236.22 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 236.22 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 238.76 0)
+		(at 601.98 238.76 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "60b47b04-fa67-5ede-898d-b13886174b4f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 238.76 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 238.76 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 241.3 0)
+		(at 601.98 241.3 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "94765728-1675-5991-82bc-fdb90bcbaa39")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 241.3 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 241.3 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 243.84 0)
+		(at 601.98 243.84 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "feb98521-6c29-53a1-b374-8b71a8d394ce")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 243.84 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 243.84 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 246.38 0)
+		(at 601.98 246.38 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "5e6890ad-d4fc-5b81-a506-21028067a74f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 246.38 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 246.38 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 248.92 0)
+		(at 601.98 248.92 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "e778d25f-996f-5e54-b5d6-e4cddb6f80b7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 248.92 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 248.92 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 251.46 0)
+		(at 601.98 251.46 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "11ef7810-628b-5cd3-9884-2316ec8377da")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 251.46 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 251.46 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 254 0)
+		(at 601.98 254 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "ef29ffbb-4010-5c22-b546-1521b55ed29f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 254 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 254 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 599.44 256.54 0)
+		(at 601.98 256.54 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "36a13cb0-b20d-5181-a7d9-479d0117b757")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 599.44 256.54 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 601.98 256.54 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 619.76 163.83 0)
+		(at 624.84 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "bac48aff-f966-5074-b357-ea046f462aa2")
-		(property "Reference" "C24" (at 622.3 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "22u 10V" (at 622.3 165.1 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C24" (at 627.38 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "22u 10V" (at 627.38 165.1 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0805_2012Metric"
-			(at 619.76 163.83 0)
+			(at 624.84 163.83 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 619.76 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 619.76 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C45783" (at 619.76 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 619.76 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 624.84 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 624.84 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C45783" (at 624.84 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 624.84 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "874ed2a5-be64-59b7-82e3-36ae987a1d58"))
 		(pin "2" (uuid "ac7e4e7b-b3b7-5030-8562-7ba74083e4fb"))
 		(instances
@@ -5867,43 +6434,43 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 619.76 160.02 90)
+		(at 624.84 160.02 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "0b3e5b1a-af01-5df9-a090-7ce80a0c7f59")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 619.76 160.02 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 624.84 160.02 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 619.76 167.64 270)
+		(at 624.84 167.64 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "a87ef854-fe85-5d56-9a4e-310f404ca111")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 619.76 167.64 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 624.84 167.64 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 643.89 163.83 0)
+		(at 648.97 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "de08290a-a44b-5407-949a-44aefa215cba")
-		(property "Reference" "C25" (at 646.43 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100n" (at 646.43 165.1 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C25" (at 651.51 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 651.51 165.1 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 643.89 163.83 0)
+			(at 648.97 163.83 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 643.89 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 643.89 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1525" (at 643.89 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 643.89 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 648.97 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 648.97 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 648.97 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 648.97 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "bd0530e1-8cb5-564a-95de-e584951254fd"))
 		(pin "2" (uuid "be55a7d1-8702-5d92-b9a9-f52324bcf082"))
 		(instances
@@ -5913,43 +6480,43 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 643.89 160.02 90)
+		(at 648.97 160.02 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "6fd49ba5-3003-521f-bfe6-4fd8c15aab29")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 643.89 160.02 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 648.97 160.02 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 643.89 167.64 270)
+		(at 648.97 167.64 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "cf8e1383-40d7-5a09-9ba1-a10aaee1d795")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 643.89 167.64 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 648.97 167.64 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 668.02 163.83 0)
+		(at 673.1 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f5eb74f0-0fa1-5ec9-9d0a-80a03040451d")
-		(property "Reference" "C26" (at 670.56 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "1u" (at 670.56 165.1 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C26" (at 675.64 162.56 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "1u" (at 675.64 165.1 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 668.02 163.83 0)
+			(at 673.1 163.83 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 668.02 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 668.02 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C52923" (at 668.02 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 668.02 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 673.1 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 673.1 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C52923" (at 673.1 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 673.1 163.83 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "09333119-e065-5724-ba21-277af08fa3a4"))
 		(pin "2" (uuid "0e4c379f-9ca8-5705-9acd-54208df0736c"))
 		(instances
@@ -5959,43 +6526,43 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 668.02 160.02 90)
+		(at 673.1 160.02 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "f3d09194-c55d-5302-86ea-6f7110da4510")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 668.02 160.02 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 673.1 160.02 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 668.02 167.64 270)
+		(at 673.1 167.64 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "4f0ed7fe-decb-53b1-892a-7e02b49454ed")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 668.02 167.64 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 673.1 167.64 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 692.15 161.29 0)
+		(at 695.96 161.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "cd5973cd-b54b-503b-8593-c75cd338ae3c")
-		(property "Reference" "C27" (at 694.69 160.02 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "1u" (at 694.69 162.56 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C27" (at 698.5 160.02 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "1u" (at 698.5 162.56 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 692.15 161.29 0)
+			(at 695.96 161.29 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 692.15 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 692.15 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C52923" (at 692.15 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 692.15 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 695.96 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 695.96 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C52923" (at 695.96 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 695.96 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "db28643a-7230-5e17-9668-22c692024883"))
 		(pin "2" (uuid "e3edaf26-b13e-5ed6-abf0-37629d1b75ba"))
 		(instances
@@ -6005,43 +6572,43 @@
 	(global_label
 		"EN"
 		(shape passive)
-		(at 692.15 157.48 90)
+		(at 695.96 157.48 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "76eb4a8f-d6e4-577f-b5bc-6cbf1402163f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 692.15 157.48 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 695.96 157.48 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 692.15 165.1 270)
+		(at 695.96 165.1 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "2b2d4645-f5b0-5764-9a78-f651bbaf4c3f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 692.15 165.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 695.96 165.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 716.28 161.29 0)
+		(at 720.09 161.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "1e467576-7b60-567c-94f1-0c760cd8e763")
-		(property "Reference" "R11" (at 718.82 160.02 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 718.82 162.56 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R11" (at 722.63 160.02 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 722.63 162.56 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 716.28 161.29 0)
+			(at 720.09 161.29 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 716.28 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 716.28 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 716.28 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 716.28 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 720.09 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 720.09 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 720.09 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 720.09 161.29 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "eff4c0aa-36ad-5c7a-94f9-93e6f9973c26"))
 		(pin "2" (uuid "608b2e27-f848-5ccc-a055-96ae63e2e426"))
 		(instances
@@ -6051,51 +6618,51 @@
 	(global_label
 		"EN"
 		(shape passive)
-		(at 716.28 157.48 90)
+		(at 720.09 157.48 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "395c52aa-54ee-513a-b87d-3065373dc51a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 716.28 157.48 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 720.09 157.48 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 716.28 165.1 270)
+		(at 720.09 165.1 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "b45059e2-6864-5eff-89c2-96fb747febad")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 716.28 165.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 720.09 165.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
-		(start 15.24 160.02)
-		(end 265.43 205.74)
+		(start 15.24 256.54)
+		(end 265.43 303.53)
 		(stroke (width 0.2) (type dash))
 		(fill (type none))
-		(uuid "7c0c699a-7294-5e19-a5f5-0d35648d367c")
+		(uuid "c6baadc2-4096-547d-b4f5-083a7a12f86f")
 	)
 	(text
 		"SENSOR HALL DRV5032 · encendido al poner la cápsula en la base del casco"
 		(exclude_from_sim no)
-		(at 16.51 165.1 0)
+		(at 16.51 262.89 0)
 		(effects (font (size 2 2) (bold yes)) (justify left bottom))
-		(uuid "5d689bfe-f9e2-5c2d-9a3c-f93260aa56d0")
+		(uuid "6233b01e-f621-5205-bd61-6abeaed76d01")
 	)
 	(symbol
 		(lib_id "AVO:DRV5032FA_U_fa678f")
-		(at 40.64 176.53 0)
+		(at 40.64 273.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "a71e1bd5-aa89-5335-8a1d-54f0b7f7a416")
-		(property "Reference" "U8" (at 40.64 175.26 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "DRV5032FA" (at 40.64 177.8 0) (effects (font (size 1 1))))
-		(property "Footprint" "AVO:SOT-23" (at 40.64 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Datasheet" "" (at 40.64 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 40.64 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C140921" (at 40.64 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "DRV5032FADBZR" (at 40.64 176.53 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Reference" "U8" (at 40.64 271.78 0) (effects (font (size 1.27 1.27))))
+		(property "Value" "DRV5032FA" (at 40.64 274.32 0) (effects (font (size 1 1))))
+		(property "Footprint" "AVO:SOT-23" (at 40.64 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 40.64 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 40.64 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C140921" (at 40.64 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "DRV5032FADBZR" (at 40.64 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "11ba039a-d4cb-50ef-b688-1c430c3e141d"))
 		(pin "2" (uuid "1aa39a1a-296f-53ac-9b6f-1e91010ef286"))
 		(pin "3" (uuid "8adfe39e-f79d-5414-83f8-3a98aec9c203"))
@@ -6106,52 +6673,52 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 30.48 175.26 180)
+		(at 30.48 271.78 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "5593bbdc-78d1-58f0-b0cc-3a8821281055")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 175.26 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 271.78 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"HALL"
 		(shape passive)
-		(at 50.8 175.26 0)
+		(at 50.8 271.78 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "e3f90ef8-e421-5671-be54-5cc47bed264f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 175.26 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 271.78 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 50.8 177.8 0)
+		(at 50.8 274.32 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "abb03cab-36b0-54c3-bb62-75f02d2e79db")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 177.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 50.8 274.32 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:C_avo")
-		(at 68.58 186.69 0)
+		(at 68.58 283.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "af2649d6-900c-5bc3-afea-f65f6ee2ed48")
-		(property "Reference" "C80" (at 71.12 185.42 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100n" (at 71.12 187.96 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "C80" (at 71.12 281.94 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100n" (at 71.12 284.48 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:C_0402_1005Metric"
-			(at 68.58 186.69 0)
+			(at 68.58 283.21 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 68.58 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 68.58 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1525" (at 68.58 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 68.58 186.69 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 68.58 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 68.58 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C1525" (at 68.58 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 68.58 283.21 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "bcc73412-e595-5d5e-980b-484e36b30246"))
 		(pin "2" (uuid "e95a0831-166a-5093-b2eb-e64b71b91633"))
 		(instances
@@ -6161,20 +6728,20 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 68.58 182.88 90)
+		(at 68.58 279.4 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "81b6b85f-8eb3-5984-8102-54713c6eda1e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 182.88 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 279.4 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 68.58 190.5 270)
+		(at 68.58 287.02 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "ce0ae0a9-8a44-52e2-8d8a-ad45b22b8053")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 190.5 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.58 287.02 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
 		(start 534.67 20.32)
@@ -6447,41 +7014,41 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 678.18 53.34 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
-		(start 534.67 276.86)
-		(end 784.86 314.96)
+		(start 15.24 312.42)
+		(end 265.43 350.52)
 		(stroke (width 0.2) (type dash))
 		(fill (type none))
-		(uuid "26073425-b316-52fe-870d-9d973f183099")
+		(uuid "cd237184-0a88-5735-8bab-c9b8d8728318")
 	)
 	(text
 		"PUNTOS DE PRUEBA"
 		(exclude_from_sim no)
-		(at 537.21 283.21 0)
+		(at 16.51 318.77 0)
 		(effects (font (size 2 2) (bold yes)) (justify left bottom))
-		(uuid "845e075f-7d74-5c57-8ce6-424dac29ced6")
+		(uuid "f0827afd-eb6e-55b4-8ffa-02d1a484c529")
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 553.72 292.1 0)
+		(at 34.29 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "a89db543-3498-58be-a1b8-7bfae16da488")
-		(property "Reference" "TP1" (at 556.26 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "EN" (at 556.26 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP1" (at 36.83 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "EN" (at 36.83 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 553.72 292.1 0)
+			(at 34.29 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 553.72 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 553.72 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 553.72 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 553.72 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 34.29 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 34.29 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 34.29 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 34.29 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "335a7958-ee47-5b52-8593-33d4909c54fd"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP1") (unit 1)))
@@ -6490,34 +7057,34 @@
 	(global_label
 		"EN"
 		(shape passive)
-		(at 548.64 292.1 180)
+		(at 29.21 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "c599c8c0-278a-5a83-8c56-02cd7a20fc1e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 548.64 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 29.21 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 585.47 292.1 0)
+		(at 64.77 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "5b31ccb5-ea7b-5d6b-84cb-27d24e644e41")
-		(property "Reference" "TP2" (at 588.01 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "BOOT" (at 588.01 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP2" (at 67.31 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "BOOT" (at 67.31 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 585.47 292.1 0)
+			(at 64.77 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 585.47 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 585.47 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 585.47 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 585.47 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 64.77 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 64.77 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 64.77 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 64.77 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "75de3f20-25cd-5881-ac55-39f1139834a6"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP2") (unit 1)))
@@ -6526,34 +7093,34 @@
 	(global_label
 		"BOOT"
 		(shape passive)
-		(at 580.39 292.1 180)
+		(at 59.69 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "88f18102-e299-5862-86e7-7cde30dff1aa")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 580.39 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 59.69 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 614.68 292.1 0)
+		(at 95.25 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "3f1b048f-03de-5319-973e-4290abc3971f")
-		(property "Reference" "TP3" (at 617.22 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "GND" (at 617.22 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP3" (at 97.79 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "GND" (at 97.79 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 614.68 292.1 0)
+			(at 95.25 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 614.68 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 614.68 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 614.68 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 614.68 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 95.25 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 95.25 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 95.25 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 95.25 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "e14fde7b-2969-562f-a1d0-311a6930f3bd"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP3") (unit 1)))
@@ -6562,34 +7129,34 @@
 	(global_label
 		"GND"
 		(shape passive)
-		(at 609.6 292.1 180)
+		(at 90.17 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "e0b7b4fc-4ef7-51a2-884c-90c229e25d9c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 609.6 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 90.17 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 646.43 292.1 0)
+		(at 125.73 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f7864750-a294-5222-8085-8fb6a09a2b72")
-		(property "Reference" "TP4" (at 648.97 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "TXD0" (at 648.97 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP4" (at 128.27 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "TXD0" (at 128.27 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 646.43 292.1 0)
+			(at 125.73 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 646.43 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 646.43 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 646.43 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 646.43 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 125.73 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 125.73 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 125.73 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 125.73 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "8922d754-6ec8-59af-92f2-2c2e1fd3c93a"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP4") (unit 1)))
@@ -6598,34 +7165,34 @@
 	(global_label
 		"U0TX"
 		(shape passive)
-		(at 641.35 292.1 180)
+		(at 120.65 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "57ed575e-e39e-5a42-89bc-09d37941c35a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 641.35 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 120.65 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 676.91 292.1 0)
+		(at 157.48 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f393c97e-11c6-56d4-a3fe-89528c827864")
-		(property "Reference" "TP5" (at 679.45 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "RXD0" (at 679.45 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP5" (at 160.02 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "RXD0" (at 160.02 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 676.91 292.1 0)
+			(at 157.48 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 676.91 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 676.91 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 676.91 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 676.91 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 157.48 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 157.48 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 157.48 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 157.48 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7c18efcf-bc2f-56d8-857b-48189fcaa3fb"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP5") (unit 1)))
@@ -6634,34 +7201,34 @@
 	(global_label
 		"U0RX"
 		(shape passive)
-		(at 671.83 292.1 180)
+		(at 152.4 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "25614ac3-dd0f-5b63-aeee-4f1952bec790")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 671.83 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 152.4 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 707.39 292.1 0)
+		(at 187.96 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "c7eb98f5-882a-5e72-b577-51b34467eb10")
-		(property "Reference" "TP6" (at 709.93 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "3V3" (at 709.93 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP6" (at 190.5 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "3V3" (at 190.5 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 707.39 292.1 0)
+			(at 187.96 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 707.39 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 707.39 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 707.39 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 707.39 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 187.96 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 187.96 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 187.96 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 187.96 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "4547586b-2198-5442-85db-d43479867395"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP6") (unit 1)))
@@ -6670,34 +7237,34 @@
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 702.31 292.1 180)
+		(at 182.88 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "b6c0155f-4622-58ec-b147-3fcb8fafc8a4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 702.31 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 182.88 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 739.14 292.1 0)
+		(at 218.44 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "7ae1dde0-07c9-560e-913a-77d19857096c")
-		(property "Reference" "TP7" (at 741.68 290.83 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "VBAT" (at 741.68 293.37 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP7" (at 220.98 327.66 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "VBAT" (at 220.98 330.2 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 739.14 292.1 0)
+			(at 218.44 328.93 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 739.14 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 739.14 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 739.14 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 739.14 292.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 218.44 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 218.44 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 218.44 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 218.44 328.93 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "16ac10ff-8fbb-5582-be6c-853cf94d6967"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP7") (unit 1)))
@@ -6706,34 +7273,34 @@
 	(global_label
 		"VBAT"
 		(shape passive)
-		(at 734.06 292.1 180)
+		(at 213.36 328.93 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "b3772c77-31ab-5b74-ad24-21cc42e6838a")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 734.06 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 213.36 328.93 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 556.26 304.8 0)
+		(at 35.56 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "43cfbe13-f1a7-5992-884d-8e8520e034e9")
-		(property "Reference" "TP8" (at 558.8 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "VSYS" (at 558.8 306.07 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP8" (at 38.1 339.09 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "VSYS" (at 38.1 341.63 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 556.26 304.8 0)
+			(at 35.56 340.36 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 556.26 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 556.26 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 556.26 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 556.26 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 35.56 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 35.56 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 35.56 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 35.56 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "adc978f4-e852-567c-96d8-3b45676f4e5f"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP8") (unit 1)))
@@ -6742,34 +7309,34 @@
 	(global_label
 		"VSYS"
 		(shape passive)
-		(at 551.18 304.8 180)
+		(at 30.48 340.36 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "ebfb0100-12d5-501e-8336-1311bf729c0e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 551.18 304.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 590.55 304.8 0)
+		(at 69.85 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "d4682614-c774-508e-bdd5-29ea4ae1c741")
-		(property "Reference" "TP9" (at 593.09 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "3V3_ZED" (at 593.09 306.07 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP9" (at 72.39 339.09 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "3V3_ZED" (at 72.39 341.63 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 590.55 304.8 0)
+			(at 69.85 340.36 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 590.55 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 590.55 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 590.55 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 590.55 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 69.85 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 69.85 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 69.85 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 69.85 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "c167e3ce-e01f-5308-838d-a4331d9f5bd8"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP9") (unit 1)))
@@ -6778,34 +7345,34 @@
 	(global_label
 		"+3V3_ZED"
 		(shape passive)
-		(at 585.47 304.8 180)
+		(at 64.77 340.36 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "ac82ead5-3dcc-54db-bf65-b33aa3ebbef4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 585.47 304.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 64.77 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 622.3 304.8 0)
+		(at 102.87 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "f2893c2e-26bc-5188-856b-2ffc34b0a975")
-		(property "Reference" "TP10" (at 624.84 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "GPIO41" (at 624.84 306.07 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP10" (at 105.41 339.09 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "GPIO41" (at 105.41 341.63 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 622.3 304.8 0)
+			(at 102.87 340.36 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 622.3 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 622.3 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 622.3 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 622.3 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 102.87 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 102.87 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 102.87 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 102.87 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "77454c9d-e10f-5c68-83d4-9d54fda7a961"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP10") (unit 1)))
@@ -6814,70 +7381,34 @@
 	(global_label
 		"GPIO41"
 		(shape passive)
-		(at 617.22 304.8 180)
+		(at 97.79 340.36 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "99a347bb-e6ee-564a-97c8-85047db4ef9f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 617.22 304.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 97.79 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 655.32 304.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "809dcae3-9f95-5b93-8800-3a6c4a7a5df1")
-		(property "Reference" "TP11" (at 657.86 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "GPIO47" (at 657.86 306.07 0) (effects (font (size 1 1)) (justify left)))
-		(property
-			"Footprint"
-			"AVO:TestPoint_Pad_D1.0mm"
-			(at 655.32 304.8 0)
-			(hide yes)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" "" (at 655.32 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 655.32 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 655.32 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 655.32 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(pin "1" (uuid "43795279-ad59-5cc4-b577-648f5e88464f"))
-		(instances
-			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP11") (unit 1)))
-		)
-	)
-	(global_label
-		"GPIO47"
-		(shape passive)
-		(at 650.24 304.8 180)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify right))
-		(uuid "42c682b5-c601-53b3-bfc5-9f37a9fc23e4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 650.24 304.8 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(symbol
-		(lib_id "AVO:Pad_avo")
-		(at 688.34 304.8 0)
+		(at 135.89 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "714644ba-653d-5d80-934d-dc363c429491")
-		(property "Reference" "TP12" (at 690.88 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "GPIO48" (at 690.88 306.07 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP12" (at 138.43 339.09 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "GPIO48" (at 138.43 341.63 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 688.34 304.8 0)
+			(at 135.89 340.36 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 688.34 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 688.34 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 688.34 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 688.34 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 135.89 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 135.89 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 135.89 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 135.89 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7731dfd4-940e-56ff-a48c-f0c881f50b72"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP12") (unit 1)))
@@ -6886,34 +7417,34 @@
 	(global_label
 		"GPIO48"
 		(shape passive)
-		(at 683.26 304.8 180)
+		(at 130.81 340.36 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "12a68dda-225d-5473-bbfc-a2ae70e4af16")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 683.26 304.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 130.81 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:Pad_avo")
-		(at 725.17 304.8 0)
+		(at 172.72 340.36 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "be45807e-4633-524c-b969-43a7ded72101")
-		(property "Reference" "TP13" (at 727.71 303.53 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "SAFEBOOT" (at 727.71 306.07 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "TP13" (at 175.26 339.09 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "SAFEBOOT" (at 175.26 341.63 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"
-			(at 725.17 304.8 0)
+			(at 172.72 340.36 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 725.17 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 725.17 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 725.17 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 725.17 304.8 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 172.72 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 172.72 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "" (at 172.72 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 172.72 340.36 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "79a0ab03-6447-50ce-90b9-0de2a87d1698"))
 		(instances
 			(project "AVO_BACK_V5_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "TP13") (unit 1)))
@@ -6922,18 +7453,18 @@
 	(global_label
 		"ZED_SAFEBOOT"
 		(shape passive)
-		(at 720.09 304.8 180)
+		(at 167.64 340.36 180)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify right))
 		(uuid "511f563c-5b07-548e-99aa-b2fb98c8a1d6")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 720.09 304.8 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 167.64 340.36 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(text
 		"Generado por fuente/avo_back_v5_pcb.py (mismo origen de datos que la placa). Las conexiones son etiquetas globales: dos pines con la misma etiqueta están unidos."
 		(exclude_from_sim no)
-		(at 15.24 351.79 0)
+		(at 15.24 383.54 0)
 		(effects (font (size 1.5 1.5)) (justify left top))
-		(uuid "486e9439-724f-59c1-8c21-6b2664fb48f3")
+		(uuid "0298294e-cc9c-5d24-97bc-9631af8f1cd8")
 	)
 	(sheet_instances (path "/" (page "1")))
 	(embedded_fonts no)

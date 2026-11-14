@@ -32,7 +32,8 @@ ORDER = ["RF_ZED", "RF_ANT", "VCC_RF", "VCC_RF_F", "POGO_VBUS", D.VBUS, D.VBAT, 
          "SD_CLK0", "SD_CLK", "SD_CMD", "SD_D0", "SD_D1", "SD_D2", "SD_D3", "SD_PWR_N",
          "ZED_TX1_C", "ZED_TX1", "S3_TX1", "ZED_RX1", "ZED_TX2_C", "ZED_TX2", "S3_TX2", "ZED_RX2", "ZED_PPS_C", "ZED_PPS",
          "S3_ZRST", "ZED_RST", "ZED_EN", "EN", "BOOT", "U0TX", "U0RX", "HALL", "BAT_ADC", "VBUS_DET", "POGO_AUX_C",
-         "POGO_AUX", "CHG_PG", "CHG_STAT", "GPIO41", "GPIO47", "GPIO48", "ZED_SAFEBOOT"]
+         "POGO_AUX", "CHG_PG", "CHG_STAT", "GPIO41", "GPIO48", "ZED_SAFEBOOT",
+         "LED_DIN_S3", "LED_D1", "LED_D2", "LED_D3", "LED_D4"]
 
 
 class Ctx:

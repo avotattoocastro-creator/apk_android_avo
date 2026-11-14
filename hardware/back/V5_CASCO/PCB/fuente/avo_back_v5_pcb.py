@@ -27,6 +27,7 @@ sys.path.insert(0, HERE)
 
 from custom_fp import test_pad, wire_pad   # noqa: E402
 from fplib import Footprint, Pad, circle, load, rect_lines   # noqa: E402
+from sexpr import Sym   # noqa: E402
 
 OUT = os.path.join(HERE, "..", "kicad")
 os.makedirs(OUT, exist_ok=True)
@@ -102,6 +103,18 @@ def outline_pts(step_deg=5):
 M3 = "${KICAD9_3DMODEL_DIR}/"
 
 
+def sk6812_side():
+    """SK6812SIDE-A (OPSCO, LCSC C5378721): RGB direccionable de emisión lateral, 4,0 × 1,6 × 2,0 de alto.
+    Pads según el patrón recomendado de la hoja (pág. 5) y la huella EasyEDA de LCSC: 1 DIN · 2 VDD · 3 DOUT · 4 GND.
+    La lente mira a +y local (lado opuesto a las pistas): se coloca con la lente hacia el canto de la placa."""
+    pads = [Pad("1", "smd", "rect", -1.575, -0.01, 0.55, 1.2), Pad("2", "smd", "rect", -0.45, -0.01, 0.70, 1.2),
+            Pad("3", "smd", "rect", 0.57, -0.01, 0.45, 1.2), Pad("4", "smd", "rect", 1.575, -0.01, 0.55, 1.2)]
+    g = rect_lines(-2.1, -0.75, 2.1, 1.45, "F.CrtYd", 0.05) + rect_lines(-2.0, -0.24, 2.0, 1.36, "F.Fab", 0.1)
+    g += [[Sym("fp_line"), [Sym("start"), -1.0, 1.55], [Sym("end"), 1.0, 1.55],
+           [Sym("stroke"), [Sym("width"), 0.12], [Sym("type"), Sym("solid")]], [Sym("layer"), "F.SilkS"]]]
+    return Footprint("AVO_SK6812SIDE-A_4.0x1.6mm", pads, g, "smd", None, "SK6812SIDE-A emisión lateral (lente hacia +y)", 2.0)
+
+
 def npth_hole(d, keep, label):
     pads = [Pad("", "np_thru_hole", "circle", 0, 0, d, d, drill=d, layers=["*.Cu", "*.Mask"])]
     g = [circle(0, 0, keep, "F.CrtYd", 0.05), circle(0, 0, d / 2 + 0.2, "F.SilkS", 0.12)]
@@ -132,6 +145,7 @@ FP = {
     "UFL": load("U.FL_Hirose_U.FL-R-SMT-1_Vertical.kicad_mod",
                 M3 + "Connector_Coaxial.3dshapes/U.FL_Hirose_U.FL-R-SMT-1_Vertical.step", 1.25),
     "MINI1U": S3,
+    "LEDSIDE": sk6812_side(),
     "TP": test_pad(1.0),
     "WIRE": wire_pad("(hilo)", drill=0.9, d=1.7),
     "HOLE": npth_hole(HOLE_D, HOLE_KEEP, "Taladro del tornillo M2,5 de la caja"),
@@ -162,7 +176,7 @@ LC = {
     "10u": "C96446", "22u": "C45783", "47u": "C16780",
     "NTC10k": "C77131", "AO3401A": "C15127", "USBLC6": "C7519",
     "RT9080": "C841192", "TLV75733P": "C485517", "BQ24072": "C140288", "MINI1U": "C2980299",
-    "MICROSD": "C114218", "PTC": "C20802", "DRV5032FA": "C140921", "TVS": "C2827694",
+    "MICROSD": "C114218", "PTC": "C20802", "SK6812SIDE": "C5378721", "DRV5032FA": "C140921", "TVS": "C2827694",
 }
 
 
@@ -294,7 +308,7 @@ GPIO = {  # pad del módulo: (GPIO, red)
     16: ("IO12", "SD_CLK0"), 17: ("IO13", "SD_CMD"), 18: ("IO14", "SD_D0"), 19: ("IO15", "SD_D1"), 20: ("IO16", "SD_D2"),
     21: ("IO17", "SD_D3"), 22: ("IO18", "VBUS_DET"), 23: ("IO19 D-", "USB_DM"), 24: ("IO20 D+", "USB_DP"),
     25: ("IO21", "SD_PWR_N"),
-    26: ("IO26", None), 27: ("IO47", "GPIO47"), 28: ("IO33", None), 29: ("IO34", None), 30: ("IO48", "GPIO48"),
+    26: ("IO26", None), 27: ("IO47", "LED_DIN_S3"), 28: ("IO33", None), 29: ("IO34", None), 30: ("IO48", "GPIO48"),
     31: ("IO35", None), 32: ("IO36", None), 33: ("IO37", None), 34: ("IO38", "CHG_PG"), 35: ("IO39", "CHG_STAT"),
     36: ("IO40", "POGO_AUX"), 37: ("IO41", "GPIO41"), 38: ("IO42", None), 39: ("TXD0", "U0TX"), 40: ("RXD0", "U0RX"),
     41: ("IO45", None), 44: ("IO46", None), 45: ("EN", "EN"), 3: ("3V3", V3),
@@ -312,6 +326,18 @@ C("C25", "100n", V3, GND, block="ESP32-S3")
 C("C26", "1u", V3, GND, block="ESP32-S3")
 R("R11", "10k", "EN", V3, block="ESP32-S3")
 C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de diseño de Espressif)")
+
+# ---------------------------------------------------------------------------------------- anillo de luz (4 LED laterales)
+# Petición del usuario (14/11/2026): anillo translúcido de resina en la unión base–tapa, iluminado desde dentro. 4 SK6812SIDE-A
+# en los cantos de la placa (cara F), con la lente hacia la pared, en cadena: arriba → derecha → abajo → izquierda.
+# VDD = VSYS (la hoja pide 3,7–5,5 V: con la celda por debajo de ~3,6 V pueden fallar); DIN a 3,3 V (VIH = 0,65 VDD ≤ 2,73 V).
+R("R24", "33R", "LED_DIN_S3", "LED_D1", block="Anillo", note="serie de la línea de datos (GPIO47)")
+for i, ref in enumerate(("D10", "D11", "D12", "D13")):
+    part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
+         {1: "LED_D%d" % (i + 1), 2: VSYS, 3: ("LED_D%d" % (i + 2)) if i < 3 else None, 4: GND},
+         LC["SK6812SIDE"], "SK6812SIDE-A (OPSCO)", "Anillo",
+         sym=dict(L=[(1, "DIN"), (2, "VDD")], R=[(3, "DOUT"), (4, "GND")]), note="RGB direccionable, emisión lateral")
+    C("C%d" % (90 + i), "100n", VSYS, GND, block="Anillo")
 
 # ---------------------------------------------------------------------------------------- Hall (encendido en la base)
 part("U8", "SOT23", "DRV5032FA", (0, 0), 0, {1: V3, 2: "HALL", 3: GND}, LC["DRV5032FA"], "DRV5032FADBZR", "Hall",
@@ -339,7 +365,7 @@ R("R46", "22R", "SD_CLK0", "SD_CLK", block="microSD", note="serie del reloj (amo
 TP("TP1", "EN", "EN"); TP("TP2", "BOOT", "BOOT", "GPIO0 a GND al arrancar = descarga (también por USB nativo)")
 TP("TP3", "GND", GND); TP("TP4", "TXD0", "U0TX"); TP("TP5", "RXD0", "U0RX"); TP("TP6", "3V3", V3)
 TP("TP7", "VBAT", VBAT); TP("TP8", "VSYS", VSYS); TP("TP9", "3V3_ZED", VZED); TP("TP10", "GPIO41", "GPIO41")
-TP("TP11", "GPIO47", "GPIO47", "libre (futuro)"); TP("TP12", "GPIO48", "GPIO48", "libre (futuro)")
+TP("TP12", "GPIO48", "GPIO48", "libre (futuro)")
 TP("TP13", "SAFEBOOT", "ZED_SAFEBOOT", "SAFEBOOT_N del ZED: solo para recuperar su firmware")
 for i, (sx, sy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1)), 1):
     part("H%d" % i, "HOLE", "TALADRO M2,5", (sx * HOLE_XY, sy * HOLE_XY), 0, {}, block="Mecánica", sym=None,
