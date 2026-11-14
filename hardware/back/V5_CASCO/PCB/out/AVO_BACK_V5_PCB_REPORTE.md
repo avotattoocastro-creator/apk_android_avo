@@ -1,27 +1,22 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de diagnóstico
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `a524b0745db1519fe38f73cfbcd4f7b8602605dd` · ejecución de CI: 43615383493
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `2f69dcfbe47bb0bee73ad17fb69dbf14bd49432c` · ejecución de CI: 43615982346
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 104 en total, 85 para montar, 0 sin montar (DNP: —), 19 a mano (pads de hilo y de prueba)
-- Pistas: 901 · vías: 194 · ruteado INCOMPLETO (2 conexiones)
+- Pistas: 925 · vías: 198 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 1 |
-| DRC: conexiones incompletas | **FALLA** | 2 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 1
-
-### Conexiones incompletas
-- Pad 33 [+3V3_ZED] of U1 on F.Cu ↔ Track [+3V3_ZED] on F.Cu, length 0.9999 mm
-- Pad 10 [VSYS] of U2 on F.Cu ↔ Pad 2 [VSYS] of R8 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 4
@@ -76,8 +71,8 @@ Errores de DRC por tipo: copper_edge_clearance 1
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
