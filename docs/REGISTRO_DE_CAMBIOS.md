@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-18 — Gráficas: «Mostrar datos» desplegable y sin «Uso, filtrado y unidades»
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- «Mostrar datos» va plegado por defecto, con Desplegar / Ocultar. Los interruptores y «Ver todo» no cambian.
+- Se quita la tarjeta «Uso, filtrado y unidades» (texto de ayuda). Los filtros siguen igual.
+**No se ha tocado:** el motor, el filtrado, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-17 — Mapa con la fila de pestañas del entrenamiento
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):** la pestaña «Mapa» muestra la misma fila de pestañas que el resto de páginas del entrenamiento
