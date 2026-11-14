@@ -73,6 +73,16 @@ private struct WatchWifiConnectCard: View {
                         .font(.footnote).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("wifi.failure")
                 }
+                if w.connected && w.supportsWifi && w.watchWifiBlocked {
+                    Button {
+                        Task { await w.reenableWatchWifi() }
+                    } label: {
+                        Label("Reactivar Wi-Fi del reloj", systemImage: "wifi")
+                    }
+                    .buttonStyle(.avoSecondary)
+                    .disabled(w.busy)
+                    .accessibilityIdentifier("wifi.reenableWatch")
+                }
                 if w.connected && !w.supportsWifi && !w.unsupportedText.isEmpty {
                     Label(w.unsupportedText, systemImage: "exclamationmark.triangle")
                         .font(.footnote).foregroundStyle(Avo.warn).fixedSize(horizontal: false, vertical: true)

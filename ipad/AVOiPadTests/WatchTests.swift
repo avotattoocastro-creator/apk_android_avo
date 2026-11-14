@@ -266,4 +266,19 @@ final class WatchTests: XCTestCase {
         let ctlOld = BleWifiControl(client: { client }, info: { old }, isRecording: { false }, bootGuard: WifiBootGuard(defaults))
         guard case .unsupported = try await ctlOld.start() else { return XCTFail("sin bit 11 no hay Wi-Fi") }
     }
+
+    /// WIFI_SYNC(start) refusal codes of the chest (wifi_sync.h StartResult): 6 and 7 are no longer «radio del reloj».
+    func testWifiStartRefusalCodes() {
+        func reason(_ c: UInt8?) -> (String, Bool)? {
+            if case .refused(let r, let l) = BleWifiControl.refusal(code: c) { return (r, l) }
+            return nil
+        }
+        XCTAssertEqual(reason(3)?.0, "sin microSD")
+        XCTAssertEqual(reason(3)?.1, true)
+        XCTAssertEqual(reason(6)?.0, BleWifiControl.reasonBlockedAfterReboot)
+        XCTAssertEqual(reason(7)?.0, BleWifiControl.reasonLowRam)
+        XCTAssertEqual(reason(4)?.0, BleWifiControl.reasonApFailed)
+        XCTAssertEqual(reason(9)?.0, "radio del reloj, código 9")
+        XCTAssertEqual(WifiSyncAction.reenable.rawValue, 5)
+    }
 }
