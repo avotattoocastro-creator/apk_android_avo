@@ -2,18 +2,18 @@
  "piezas": {
   "AVO_CASCO_V5_base": {
    "solidos": 1,
-   "volumen_mm3": 11613.9,
-   "peso_g": 14.7,
+   "volumen_mm3": 9564.5,
+   "peso_g": 12.1,
    "caja": [
     56.4,
     56.4,
-    14.5
+    12.9
    ]
   },
   "AVO_CASCO_V5_tapa": {
    "solidos": 1,
-   "volumen_mm3": 8667.4,
-   "peso_g": 11.0,
+   "volumen_mm3": 8500.8,
+   "peso_g": 10.8,
    "caja": [
     56.4,
     56.4,
@@ -28,6 +28,36 @@
     54.9,
     54.9,
     1.1
+   ]
+  },
+  "AVO_CASCO_V5_junta_TPU_tapa": {
+   "solidos": 1,
+   "volumen_mm3": 206.2,
+   "peso_g": 0.2,
+   "caja": [
+    54.9,
+    54.9,
+    1.1
+   ]
+  },
+  "AVO_CASCO_V5_anillo_resina_A": {
+   "solidos": 1,
+   "volumen_mm3": 1024.7,
+   "peso_g": 1.2,
+   "caja": [
+    28.2,
+    56.4,
+    4.1
+   ]
+  },
+  "AVO_CASCO_V5_anillo_resina_B": {
+   "solidos": 1,
+   "volumen_mm3": 1024.7,
+   "peso_g": 1.2,
+   "caja": [
+    28.2,
+    56.4,
+    4.1
    ]
   },
   "AVO_CASCO_V5_base_casco": {
@@ -51,6 +81,10 @@
   "interior_mm": 51.6,
   "z_cara_F": 12.9,
   "z_junta": 14.5,
+  "anillo_z": [
+   10.4,
+   14.5
+  ],
   "z_techo": 22.9,
   "bateria_max_mm": [
    50.0,
