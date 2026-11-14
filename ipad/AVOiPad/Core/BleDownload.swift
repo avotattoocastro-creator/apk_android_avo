@@ -111,6 +111,44 @@ struct WatchStatusLite: Equatable {
     }
 }
 
+/// Full GET_STATUS reply of the chest watch (same layout as Android core Messages.kt WatchStatus.decode):
+/// session u8 · geofence u8 · rec u8 · sdMounted u8 · sdFree u64 · sessionId str24 · manual u8 · inhibited u8 ·
+/// batteryPct i8 (<0 = unknown) · batteryMv u16 · vbus u8 · power u8 · backLink u8 · girth u8 · rtcmFlowing u8 · …
+/// Only the fields the «Equipo conectado» window shows are kept; nothing else is interpreted here.
+struct WatchStatusFull: Equatable {
+    var batteryPct: Int?
+    var batteryMv: Int
+    var charging: Bool
+    var backLink: Bool
+    var girth: Bool
+    var rtcmFlowing: Bool
+    var sdMounted: Bool
+    var recording: Bool
+
+    static func decode(_ p: [UInt8]) -> WatchStatusFull? {
+        var r = BinaryReaderLE(p)
+        do {
+            let session = Int(try r.u8())
+            _ = try r.u8(); _ = try r.u8()
+            let sd = try r.u8() != 0
+            _ = try r.u64()
+            _ = try r.take(24)
+            _ = try r.u8(); _ = try r.u8()
+            let pct = Int(Int8(bitPattern: try r.u8()))
+            let mv = Int(try r.u16())
+            let vbus = try r.u8() != 0
+            _ = try r.u8()
+            let back = try r.u8() != 0
+            let girth = try r.u8() != 0
+            let rtcm = try r.u8() != 0
+            return WatchStatusFull(batteryPct: pct < 0 ? nil : pct, batteryMv: mv, charging: vbus, backLink: back, girth: girth,
+                                   rtcmFlowing: rtcm, sdMounted: sd, recording: session == 2 || session == 3)
+        } catch {
+            return nil
+        }
+    }
+}
+
 enum BleFileRequests {
     static func listSessions(_ page: Int) -> [UInt8] { LeWriter().u16(page).toArray() }
     static func readFile(_ id: String, segment: Int, offset: Int64, length: Int) -> [UInt8] {

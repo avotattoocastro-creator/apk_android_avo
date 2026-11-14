@@ -169,6 +169,13 @@ final class WatchWifiModel {
         self.shared = WatchWifiShared(folder: AvoFiles.join(app.paths.root, "reloj"))
     }
 
+    /// GET_STATUS over the open link («Equipo conectado»: battery and modules). nil when not connected or unreadable.
+    func readStatus() async -> WatchStatusFull? {
+        guard let c = conn else { return nil }
+        guard let p = try? await c.client.requestOk(.getStatus, timeoutMs: 4000) else { return nil }
+        return WatchStatusFull.decode(p)
+    }
+
     // ---------------------------------------------------------------- contract
     func sessionChanged() { refreshDownloaded() }
     func pageShown() { refreshDownloaded() }

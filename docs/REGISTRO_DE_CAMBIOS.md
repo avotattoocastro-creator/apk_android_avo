@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-16 — Equipo conectado: batería y módulos Chaleco · Espalda · Cincha
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Decodificación de GET_STATUS:** `WatchStatusFull` lee la respuesta completa del reloj, con la misma disposición que
+  Android (`core/…/ble/Messages.kt`, `WatchStatus`): batería %, mV, carga (VBUS), enlace de la espalda, cincha, flujo RTCM,
+  SD y grabación. No cambia el protocolo: solo se lee lo que el reloj ya envía.
+- **Consulta:** `WatchWifiModel.readStatus()` pregunta por el enlace abierto; la ventana lo repite cada 5 s mientras está abierta.
+- **Ventana «Equipo conectado»:**
+  - la tarjeta del reloj muestra «Batería N %» con su icono (en rojo por debajo del 15 %), en lugar de la hora y el identificador;
+  - tres recuadros: **Chaleco** (batería, mV, cargando, grabando), **Espalda** (enlazada o no, correcciones RTCM) y
+    **Cincha** (conectada o no).
+  - Sin estado legible se muestra «—» y «Sin estado del reloj».
+**Limitación:** el estado del reloj no informa de la batería de la espalda ni de la de la cincha, solo de si están
+enlazadas; por eso no se muestran.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** con el reloj real.
+
 ## 2026-11-14 — AVO-SHELL-15 — LIVE, tiempo automático en Resumen, lista de entrenamientos en línea y sin Datos clave
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**
