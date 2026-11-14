@@ -24,6 +24,10 @@
 - **Cargador y alimentación:** cargador BQ24072, con unos 590 mA de carga y unos 800 mA de entrada; batería soldada con PTC; 3,3 V TLV75733P de 1 A.
 - **microSD** con alimentación conmutada.
 - **Hall DRV5032:** detecta el imán de la base del casco y despierta la placa.
+- **Anillo de luz:** 8 LED RGB direccionables de emisión lateral **SK6812SIDE-A** (LCSC C5378721), 2 por lado (a ±12 mm del centro; ±10 abajo), con la lente a 0,3 mm del canto frente al anillo de resina.
+  - Van en cadena desde el GPIO47 con 33 Ω en serie y se alimentan de VSYS.
+  - La hoja pide 3,7–5,5 V: con la batería por debajo de unos 3,6 V pueden fallar.
+  - Con los 8 en blanco al máximo consumen unos 290 mA; el firmware limita el brillo.
 
 ## Conexiones del ESP32-S3
 | GPIO | Función | GPIO | Función |
@@ -34,7 +38,7 @@
 | 5/6 | UART1 del ZED (RX/TX) | 21 | alimentación de la microSD (0 = encendida) |
 | 7/8 | UART2 del ZED (RX/TX) | 38/39 | PGOOD / CHG del cargador |
 | 9 | RESET_N del ZED | 40 | POGO_AUX |
-| 10 | ZED_EN | 41/47/48 | libres (puntos de prueba) |
+| 10 | ZED_EN | 47 | datos del anillo de luz (8 × SK6812SIDE-A) |
 
 ## Pendiente antes de pedir
 - Piezas sin código LCSC: ZED-F9P (suministrarlo aparte o por *global sourcing*), U.FL, bobina de 47 nH, 22 Ω en 1206 y ESD de RF.

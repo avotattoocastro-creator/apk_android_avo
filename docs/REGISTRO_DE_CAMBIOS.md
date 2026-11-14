@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — Espalda V5 CASCO: anillo de luz (8 LED laterales) y caja sin juntas
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- **PCB:**
+  - 8 × SK6812SIDE-A (C5378721), 2 por lado, en los cantos de la cara F, en cadena desde el GPIO47 (33 Ω, C25105) y alimentados de VSYS;
+  - pads de la batería movidos a (−17,3 / −14,5; −23);
+  - una vía de LED_D4 alejada del canto.
+  - Puerta superada: DRC 0, 0 conexiones incompletas, paridad 0, ERC 0/0 y todas las piezas con código LCSC.
+- **CAD:**
+  - anillo de resina translúcida de **una pieza**, de 3,0 mm, centrado en los LED (z 10,4–13,4);
+  - **sin juntas TPU**: las uniones del anillo van pegadas;
+  - la tapa baja por fuera del canto de la PCB;
+  - el imán del Hall de la base del casco ya no queda cortado por la ventana central.
+- **Workflows nuevos** (solo en esta rama): `easyeda-fp-back-v5.yml` (huellas y hojas de LCSC) y `jlc-stock-back-v5.yml`.
+
+**Por qué:** peticiones del usuario del 14/11, de 16:53 a 17:22.
+**Validación:** CI de la PCB y del CAD. **Nada impreso ni fabricado.**
+
+---
+
 ## 2026-11-14 — Espalda V5 CASCO: CAD REV A de la cápsula estanca y de la base del casco
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**

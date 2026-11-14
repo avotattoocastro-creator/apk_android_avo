@@ -21,16 +21,16 @@ Generador: `avo_casco_v5.py` (CadQuery 2.4, en el CI con `build-back-v5-cad.yml`
 
 | Pieza | Material | Peso |
 |---|---|---|
-| Base | PETG | 11,9 g |
-| Tapa | PETG | 10,5 g |
-| Anillo de luz (2 mitades) | resina translúcida | 3,2 g |
+| Base | PETG | 12,4 g |
+| Tapa | PETG | 11,7 g |
+| Anillo de luz | resina translúcida | 1,7 g |
 | Base del casco | PETG | 20,8 g |
 
 ## Cierre
 - **4 × M2,5 × 16** de cabeza cilíndrica desde abajo, por los taladros de la PCB (±22, ±22). Llevan una junta tórica de 2,5 × 1 bajo la cabeza, en un avellanado de Ø5 × 2,6.
 - **Insertos M2,5** de Ø3,5 × 4 en los postes de la tapa. La PCB queda pinzada entre las columnas de la base y los postes de la tapa.
-- **Sin juntas TPU** (decisión del usuario): las 2 uniones del anillo (base ↔ anillo y anillo ↔ tapa) y los 2 cortes entre sus mitades se sellan con pegamento tipo B-7000/T-7000. Para volver a abrir la caja hay que calentar y despegar.
-- **Anillo de luz:** resina translúcida en dos mitades (A y B), de z 9,6 a 15,3 (5,7 mm de alto), iluminado desde dentro por los 4 LED laterales de la PCB.
+- **Sin juntas TPU** (decisión del usuario): las 2 uniones del anillo (base ↔ anillo y anillo ↔ tapa) se sellan con pegamento tipo B-7000/T-7000. Para volver a abrir la caja hay que calentar y despegar.
+- **Anillo de luz:** resina translúcida mate, **de una sola pieza**, de 3,0 mm de alto (z 10,4–13,4), centrado en la luz de los 8 LED laterales de la PCB. La tapa baja por fuera del canto de la PCB.
 - **Antena:** 4 topes en el techo, a 0,3 por encima, para que no se levante.
 
 ## Fondo
