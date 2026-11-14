@@ -15,6 +15,8 @@ import CryptoKit
 /// WIFI_SYNC (0x64) actions.
 enum WifiSyncAction: UInt8 {
     case start = 1, stop = 2, status = 3, regeneratePassword = 4
+    /// Clears the watch's own Wi-Fi block (NVS wifi_off, set when it rebooted while starting its AP). CHEST 3.7.4 rc2+.
+    case reenable = 5
 }
 
 /// Credentials that the watch returns to WIFI_SYNC(start) over authenticated BLE. Never stored on disk, never logged.
@@ -927,9 +929,31 @@ final class BleWifiControl: WatchWifiControl {
         case .busy: return .refused(reason: "ocupado", retryLater: true)
         case .unknownType: return .unsupported
         default:
-            if m.payload.first == 3 { return .refused(reason: "sin microSD", retryLater: true) }
-            return .refused(reason: "radio del reloj", retryLater: false)
+            return BleWifiControl.refusal(code: m.payload.first)
         }
+    }
+
+    /// Reason codes of WIFI_SYNC(start) (chest wifi_sync.h StartResult; 6 and 7 since CHEST 3.7.7, before they were 4).
+    static let reasonBlockedAfterReboot = "Wi-Fi bloqueado en el reloj tras un reinicio"
+    static let reasonLowRam = "memoria del reloj baja"
+    static let reasonApFailed = "no arrancó su punto de acceso"
+
+    static func refusal(code: UInt8?) -> WifiStartResult {
+        switch code {
+        case 3: return .refused(reason: "sin microSD", retryLater: true)
+        case 6: return .refused(reason: reasonBlockedAfterReboot, retryLater: false)
+        case 7: return .refused(reason: reasonLowRam, retryLater: false)
+        case 4: return .refused(reason: reasonApFailed, retryLater: false)
+        default: return .refused(reason: "radio del reloj, código \(code.map { String($0) } ?? "?")", retryLater: false)
+        }
+    }
+
+    /// WIFI_SYNC(5): the watch clears its Wi-Fi block. true = accepted. Only after the user confirms (the block protects
+    /// against a reboot loop when the AP crashes the watch).
+    func reenableWatchWifi() async -> Bool {
+        guard let c = client() else { return false }
+        guard let m = try? await c.wifiSync(.reenable, timeoutMs: 6000) else { return false }
+        return m.statusEnum == .ok
     }
 
     func stop() async {
