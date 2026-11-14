@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C5378721
+       Symbol name : SK6812SIDE-A_C5378721
+       Library path : lib_easyeda/C5378721.kicad_sym
+[INFO] Created Kicad footprint for ID: C5378721
+       Footprint name: LED-SMD_4P-L4.0-W1.6-L
+       Footprint path: lib_easyeda/C5378721.pretty/LED-SMD_4P-L4.0-W1.6-L.kicad_mod
+[INFO] Created 3D model for ID: C5378721
+       3D model name: LED-SMD_4P-L4.0-W1.6-L
+       3D model path (wrl): lib_easyeda/C5378721.3dshapes/LED-SMD_4P-L4.0-W1.6-L.wrl
+       3D model path (step): lib_easyeda/C5378721.3dshapes/LED-SMD_4P-L4.0-W1.6-L.step
+-- easyeda2kicad.py v1.0.1 --
