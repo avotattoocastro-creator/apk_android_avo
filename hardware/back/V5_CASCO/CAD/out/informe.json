@@ -2,8 +2,8 @@
  "piezas": {
   "AVO_CASCO_V5_base": {
    "solidos": 1,
-   "volumen_mm3": 9331.2,
-   "peso_g": 11.9,
+   "volumen_mm3": 9731.1,
+   "peso_g": 12.4,
    "caja": [
     56.4,
     56.4,
@@ -12,32 +12,22 @@
   },
   "AVO_CASCO_V5_tapa": {
    "solidos": 1,
-   "volumen_mm3": 8267.5,
-   "peso_g": 10.5,
+   "volumen_mm3": 9217.3,
+   "peso_g": 11.7,
    "caja": [
     56.4,
     56.4,
-    9.6
+    10.7
    ]
   },
-  "AVO_CASCO_V5_anillo_resina_A": {
+  "AVO_CASCO_V5_anillo_resina": {
    "solidos": 1,
-   "volumen_mm3": 1424.6,
-   "peso_g": 1.6,
+   "volumen_mm3": 1449.6,
+   "peso_g": 1.7,
    "caja": [
-    28.2,
     56.4,
-    5.7
-   ]
-  },
-  "AVO_CASCO_V5_anillo_resina_B": {
-   "solidos": 1,
-   "volumen_mm3": 1424.6,
-   "peso_g": 1.6,
-   "caja": [
-    28.2,
     56.4,
-    5.7
+    2.9
    ]
   },
   "AVO_CASCO_V5_base_casco": {
@@ -62,8 +52,8 @@
   "z_cara_F": 12.9,
   "z_junta": 14.5,
   "anillo_z": [
-   9.6,
-   15.3
+   10.4,
+   13.4
   ],
   "sellado": "pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU",
   "z_techo": 22.9,
