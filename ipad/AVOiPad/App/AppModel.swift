@@ -55,7 +55,14 @@ final class AppModel {
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
-    var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
+    /// «Análisis» (map + charts) is hidden for now (trainer's sketch 14/11/2026): asking for it opens «Resumen», the first
+    /// tab of the training.
+    var page: Page = .home {
+        didSet {
+            if page == .analysis { page = .summary; return }
+            if oldValue != page { onPageChanged() }
+        }
+    }
     /// A training has been opened (list, calendar, dashboard…): unlocks Mapa / Análisis / Biomecánica in the sidebar.
     var trainingOpened: Bool = false
     /// Library restored and «AVO Horse» checked: «INICIAR» of the start screen is enabled.

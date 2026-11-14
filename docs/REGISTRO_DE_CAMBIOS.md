@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-12 — Resumen al estilo Equimetre, Resumen y Mapa primeros, ficha con «X»
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Resumen** (boceto Equimetre del entrenador, «Así quiero resumen»):
+  - cabecera con foto y nombre del caballo, «Ver ficha», Editar (asignar) e Informe PDF; fecha y hora grandes;
+  - disciplina · jinete; distancia, duración y lugar; comentario del entrenamiento (las notas de siempre);
+  - tiempo de la sesión, solo si se ha consultado en Mareas para esa sesión (si no, «Sin datos del tiempo · Consultar»);
+  - debajo, «Parámetros clave» (las cifras de Datos clave) y «Análisis del caballo», desplegables;
+  - al final, el motor y la valoración.
+  - La reproducción, el mapa y los recuadros del cursor salen del Resumen.
+- **Barra del entrenamiento:**
+  - el orden es Resumen, Mapa, Datos clave, Gráficas…;
+  - «Mapa» ocupa el sitio de «Análisis», que queda oculto de momento: pedir Análisis abre Resumen;
+  - el menú lateral pierde «Mapa»; «Análisis» abre el entrenamiento por Resumen.
+- **Ficha de Cuadra y Jinetes:** sin el botón «‹ Cuadra / ‹ Jinetes» encima (la ficha sube arriba) y con una «X» de salir en
+  la esquina superior derecha de la tarjeta.
+**No se ha tocado:** el motor, los workflows, las firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+**Pendiente:** Windows aún no tiene el Resumen nuevo ni este orden de pestañas.
+
 ## 2026-11-14 — AVO-SHELL-11 — Cuadra y Jinetes: «Mejor 200 m» en los totales
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad y Windows, por igual):**

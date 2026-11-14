@@ -9,19 +9,13 @@ struct StableView: View {
     var body: some View {
         let page: StableIdentityPage = app.stable.page(kind)
         VStack(alignment: .leading, spacing: 14) {
-            header(page)
             // trainer's sketch 13/11/2026: one full-width row per horse / rider in a scrolling list; tapping one opens its
-            // card on the whole page, with «‹ volver» to the list
+            // card on the whole page. Sketch 14/11/2026: no «‹ Cuadra» button above the card (it goes up to the top) and
+            // an «X» at the top-right corner of the card to go back to the list
             if page.hasSelection {
-                Button {
-                    page.backToList()
-                } label: {
-                    Label(page.title, systemImage: "chevron.left")
-                }
-                .buttonStyle(.avoSecondary)
-                .accessibilityIdentifier("stable.back")
                 StableDetailPane(page: page)
             } else {
+                header(page)
                 StableFullList(page: page)
             }
         }
@@ -419,6 +413,17 @@ private struct StableEditorCard: View {
                         .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
                 }
             }
+        }
+        // «Salir» (trainer's sketch 14/11/2026): X at the top-right corner of the card, back to the list
+        .overlay(alignment: .topTrailing) {
+            Button { page.backToList() } label: {
+                Image(systemName: "xmark.circle.fill").font(.title2).symbolRenderingMode(.hierarchical).foregroundStyle(Avo.red)
+                    .frame(width: 44, height: 44).contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding(4)
+            .accessibilityLabel("Salir")
+            .accessibilityIdentifier("stable.back")
         }
     }
 

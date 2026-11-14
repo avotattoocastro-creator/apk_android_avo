@@ -13,39 +13,25 @@ struct AnalysisView: View {
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 1000
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
-                    ShellSessionHeader(horseOnRight: true)
+                // «Resumen» in the Equimetre style (trainer 14/11/2026: «Así quiero resumen»): head of the training,
+                // then «Parámetros clave» (the «Datos clave» figures) as a folding section, then the horse analysis.
+                // The map with playback is now its own tab («Mapa»).
+                VStack(alignment: .leading, spacing: 14) {
                     if app.selected == nil {
                         AvoCard { AvoNoData(text: "Sin entrenamiento seleccionado") }
-                    } else if wide {
-                        // top: training data | playback + cursor tiles in one row; then the horse analysis at full width
-                        HStack(alignment: .top, spacing: 12) {
-                            AnalysisSessionCard().frame(width: 300)
-                            VStack(spacing: 12) {
-                                AnalysisPlaybackBar()
-                                AnalysisTiles(columns: 2, horse: horse)
-                                AnalysisRouteMap().frame(height: 360)
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        AnalysisHorseSection(summary: horse, wide: true)
-                        HStack(alignment: .top, spacing: 12) {
-                            AnalysisEngineCard().frame(maxWidth: .infinity)
-                            VStack(spacing: 12) {
-                                TrainingRatingCard()
-                                AnalysisNotesCard()
-                            }
-                            .frame(width: 420)
-                        }
                     } else {
-                        AnalysisPlaybackBar()
-                        AnalysisTiles(columns: 2, horse: horse)
-                        AnalysisRouteMap().frame(height: 320)
-                        AnalysisHorseSection(summary: horse, wide: false)
-                        AnalysisSessionCard()
-                        AnalysisEngineCard()
-                        TrainingRatingCard()
-                        AnalysisNotesCard()
+                        SummaryHero()
+                        SummaryFold(title: "Parámetros clave") { KeyDataView(embedded: true) }
+                        SummaryFold(title: "Análisis del caballo") { AnalysisHorseSection(summary: horse, wide: wide) }
+                        if wide {
+                            HStack(alignment: .top, spacing: 12) {
+                                AnalysisEngineCard().frame(maxWidth: .infinity)
+                                TrainingRatingCard().frame(width: 420)
+                            }
+                        } else {
+                            AnalysisEngineCard()
+                            TrainingRatingCard()
+                        }
                     }
                 }
                 .padding(.horizontal, 16)

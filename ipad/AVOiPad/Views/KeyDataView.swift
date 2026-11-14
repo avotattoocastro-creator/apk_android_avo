@@ -9,8 +9,22 @@ struct KeyDataView: View {
     /// nil = automatic (shown when there is room for 6 tiles beside it).
     @State private var showNav: Bool? = nil
     @State private var query: String = ""
+    /// Inside «Resumen» (trainer 14/11/2026, Equimetre «Key parameters»): only the figures, no scroll or page background.
+    var embedded: Bool = false
 
     var body: some View {
+        if embedded {
+            if let s = app.selected, let e = s.engine {
+                VStack(alignment: .leading, spacing: 16) { content(s, KeyData.cached(id: s.id, json: e.rawJson), false) }
+            } else {
+                AvoNoData(text: app.selected.map { "El motor AVO todavía no ha analizado este entrenamiento · \($0.engineState)" } ?? "Elige un entrenamiento")
+            }
+        } else {
+            page
+        }
+    }
+
+    private var page: some View {
         GeometryReader { (g: GeometryProxy) in
             // trainer's sketch 14/11/2026: no side list of sessions (the training bar already chooses it)
             let nav: Bool = false

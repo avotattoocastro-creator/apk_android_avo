@@ -26,7 +26,8 @@ struct RootView: View {
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
         // paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md): mismo orden y nombre que en Windows
         RootNavEntry(page: .calendar, title: "Calendario", icon: "calendar"),
-        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
+        // trainer's sketch 14/11/2026: «Mapa» goes into the training bar (in the place of «Análisis»); the sidebar
+        // «Análisis» opens the training at its first tab («Resumen»)
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
         // trainer's sketch 08/11/2026: Informes and Biomecánica in the sidebar under Análisis (out of the training bar)
         RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
@@ -41,9 +42,10 @@ struct RootView: View {
     ]
     /// Pages of ONE training, in the training bar at the top of «Análisis».
     static let trainingTabs: [RootNavEntry] = [
-        RootNavEntry(page: .analysis, title: "Análisis", icon: "map"),
-        RootNavEntry(page: .keyData, title: "Datos clave", icon: "square.grid.3x2"),
+        // trainer's sketches 14/11/2026: «Resumen» first, «Mapa» in the place of «Análisis» (hidden for now)
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
+        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
+        RootNavEntry(page: .keyData, title: "Datos clave", icon: "square.grid.3x2"),
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
         RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
@@ -157,7 +159,7 @@ struct RootView: View {
         // «Análisis» stays highlighted on every page of the training
         // «Análisis» stays highlighted on every page of the training except the full-screen «Mapa»
         let active: Bool = e.page == .analysis
-            ? (app.page.isTrainingPage && app.page != .map && app.page != .reports && app.page != .biomech)
+            ? (app.page.isTrainingPage && app.page != .reports && app.page != .biomech)
             : app.page == e.page
         // Mapa, Análisis and Biomecánica only work once a training has been opened (trainer's sketch 14/11/2026)
         let locked: Bool = [.map, .analysis, .biomech].contains(e.page) && !(app.trainingOpened && app.selected != nil) && !app.captureMode
