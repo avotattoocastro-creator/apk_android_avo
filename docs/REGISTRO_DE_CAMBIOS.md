@@ -31,7 +31,9 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - `BleWifiControl.refusal(code:)` traduce los códigos de `StartResult` del pecho: 3 sin microSD, 4 no arrancó su punto de acceso, 6 Wi-Fi bloqueado tras un reinicio (CHEST 3.7.7+), 7 memoria del reloj baja (CHEST 3.7.7+), otros «radio del reloj, código N».
 - `WifiSyncAction.reenable = 5` y `BleWifiControl.reenableWatchWifi()`. La orden ya existía en el pecho desde 3.7.4 rc2 (`wifisync::set_enabled(true)`).
 - Botón «Reactivar Wi-Fi del reloj» en «Reloj Wi-Fi», solo cuando el reloj respondió con el código 6, siempre con una confirmación previa. El bloqueo protege del bucle de reinicios: si el reloj vuelve a reiniciarse al encender el punto de acceso, se bloquea de nuevo y la descarga sigue por Bluetooth.
+- La línea de estado sigue la fase de la descarga por Wi-Fi (uniendo, lista, descargando con velocidad, comprobando SHA-256); antes se quedaba en «Pidiendo al reloj que active su Wi-Fi…».
 - Prueba unitaria `testWifiStartRefusalCodes`.
+- Nota: el 14/11/2026 23:30 la build 125 sí descargó por Wi-Fi con el pecho 3.7.10 (captura del usuario, 32 % del entrenamiento 2 de 2): el rechazo anterior fue puntual.
 **Archivos:** `ipad/AVOiPad/Core/WifiSync.swift`, `ipad/AVOiPad/App/WatchWifiModel.swift`, `ipad/AVOiPad/Views/WatchWifiView.swift`, `ipad/AVOiPadTests/WatchTests.swift`.
 **No se ha tocado:** firmware, protocolo BLE, workflows, firmas, `Info.plist`, número de build, Android (Android tiene el mismo mapeo genérico en `AvoWifiSyncManager.kt`, pendiente).
 **Validación:** IMPLEMENTADO. CI pendiente. NO VERIFICADO en iPad ni en el reloj.

@@ -529,6 +529,16 @@ final class WatchWifiModel {
     private func applyProgress(_ p: WifiSyncProgress) {
         overall = p
         phase = p.state == .idle || p.state == .cleanup ? "" : p.label
+        // the line under the phase must follow the pass (it stayed at «Pidiendo al reloj que active su Wi-Fi…» while downloading)
+        if !p.viaBle {
+            switch p.state {
+            case .connecting: status = "Uniendo el iPad a la red Wi-Fi del reloj…"
+            case .discovering: status = "Leyendo la lista del reloj por Wi-Fi…"
+            case .downloading: status = "Descargando por Wi-Fi" + (p.speedText.isEmpty ? "…" : " · " + p.speedText)
+            case .verifying: status = "Comprobando la huella SHA-256…"
+            default: break
+            }
+        }
         guard let id = p.sessionId else { return }
         setRow(id) { (r: inout WatchTrainingRow) in
             switch p.state {
