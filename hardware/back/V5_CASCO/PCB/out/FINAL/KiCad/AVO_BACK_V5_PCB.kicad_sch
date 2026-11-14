@@ -277,7 +277,7 @@
 			)
 		)
 		(symbol
-			"AVO:ZED-F9P-01B_U_7c8d63"
+			"AVO:ZED-F9P-04B_U_7c8d63"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -285,7 +285,7 @@
 			(property "Reference" "U" (at -15.24 60.96 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ZED-F9P-01B_U_7c8d63"
+				"ZED-F9P-04B_U_7c8d63"
 				(at 15.24 60.96 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -293,7 +293,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ZED-F9P-01B_U_7c8d63_0_1"
+				"ZED-F9P-04B_U_7c8d63_0_1"
 				(rectangle
 					(start -15.24 59.69)
 					(end 15.24 -59.69)
@@ -302,7 +302,7 @@
 				)
 			)
 			(symbol
-				"ZED-F9P-01B_U_7c8d63_1_1"
+				"ZED-F9P-04B_U_7c8d63_1_1"
 				(pin
 					passive
 					line
@@ -2570,10 +2570,10 @@
 		)
 		(property "Datasheet" "" (at 302.26 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 302.26 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 302.26 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C10662" (at 302.26 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property
 			"MPN"
-			"PESD0402-140 (TE) o equivalente ≤ 0,3 pF"
+			"PESD0402-140 (Littelfuse/TE)"
 			(at 302.26 133.35 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
@@ -2622,7 +2622,7 @@
 		)
 		(property "Datasheet" "" (at 347.98 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 347.98 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 347.98 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C88373" (at 347.98 133.35 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property
 			"MPN"
 			"U.FL-R-SMT-1(10) (Hirose)"
@@ -2655,7 +2655,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 358.14 133.35 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:ZED-F9P-01B_U_7c8d63")
+		(lib_id "AVO:ZED-F9P-04B_U_7c8d63")
 		(at 405.13 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2664,12 +2664,12 @@
 		(dnp no)
 		(uuid "2a1bf3de-83a6-5e39-b59c-7c322ec4a142")
 		(property "Reference" "U1" (at 405.13 189.23 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "ZED-F9P-01B" (at 405.13 191.77 0) (effects (font (size 1 1))))
+		(property "Value" "ZED-F9P-04B" (at 405.13 191.77 0) (effects (font (size 1 1))))
 		(property "Footprint" "AVO:ublox_ZED" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Datasheet" "" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "ZED-F9P-01B-01 (u-blox)" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C5120257" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "ZED-F9P-04B (u-blox)" (at 405.13 190.5 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "2" (uuid "bb127445-6f9a-5a85-ac36-a6a54e500edc"))
 		(pin "7" (uuid "75ef0576-7b22-5997-a033-cc6c0bb5fa7d"))
 		(pin "33" (uuid "e4d901b4-bbf7-5ce2-9306-c926f594ae9a"))
@@ -3364,7 +3364,7 @@
 		)
 		(property "Datasheet" "" (at 427.99 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 427.99 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 427.99 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C97998" (at 427.99 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "LQG15HS47NJ02D (Murata)" (at 427.99 273.05 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "460ea019-ffb4-50b6-8751-c7f935e3a46a"))
 		(pin "2" (uuid "802a8473-a641-56e2-b598-7bfbf6cfdd52"))
@@ -3732,7 +3732,7 @@
 		)
 		(property "Datasheet" "" (at 379.73 309.88 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 379.73 309.88 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 379.73 309.88 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C17958" (at 379.73 309.88 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 379.73 309.88 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "de7e6570-7a34-5607-8865-c24edd63413b"))
 		(pin "2" (uuid "9d4f5d47-7c96-5829-8d8b-16e51489a0c4"))

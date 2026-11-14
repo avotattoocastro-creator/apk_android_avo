@@ -1448,7 +1448,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C88373"
 			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
@@ -5046,7 +5046,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C10662"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5058,7 +5058,7 @@
 				)
 			)
 		)
-		(property "MPN" "PESD0402-140 (TE) o equivalente ≤ 0,3 pF"
+		(property "MPN" "PESD0402-140 (Littelfuse/TE)"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5875,7 +5875,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C17958"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -10204,7 +10204,7 @@
 				)
 			)
 		)
-		(property "Value" "ZED-F9P-01B"
+		(property "Value" "ZED-F9P-04B"
 			(at 0 11.85 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -10240,7 +10240,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C5120257"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -10252,7 +10252,7 @@
 				)
 			)
 		)
-		(property "MPN" "ZED-F9P-01B-01 (u-blox)"
+		(property "MPN" "ZED-F9P-04B (u-blox)"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -20065,7 +20065,7 @@
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C97998"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
