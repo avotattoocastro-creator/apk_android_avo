@@ -2,6 +2,8 @@
 
 Generador: `avo_casco_v5.py` (CadQuery 2.4, en el CI con `build-back-v5-cad.yml`). Salidas en `out/`: STEP y STL de cada pieza, conjunto STEP e `informe.json`. Cortes: `cortes_v5.png` (`render_cortes.py`).
 
+**Base del casco:** el imán del Hall queda rodeado de material (la ventana central ya no lo corta).
+
 **Estado:** en el CI, 1 sólido por pieza y 0 interferencias con la PCB, los componentes de la cara F, la batería, la antena, el pogo y los imanes. **No impreso ni probado.**
 
 ## Medidas
@@ -19,15 +21,16 @@ Generador: `avo_casco_v5.py` (CadQuery 2.4, en el CI con `build-back-v5-cad.yml`
 
 | Pieza | Material | Peso |
 |---|---|---|
-| Base | PETG | 14,7 g |
-| Tapa | PETG | 11,0 g |
-| Junta | TPU 85A | 0,2 g |
+| Base | PETG | 11,9 g |
+| Tapa | PETG | 10,5 g |
+| Anillo de luz (2 mitades) | resina translúcida | 3,2 g |
 | Base del casco | PETG | 20,8 g |
 
 ## Cierre
 - **4 × M2,5 × 16** de cabeza cilíndrica desde abajo, por los taladros de la PCB (±22, ±22). Llevan una junta tórica de 2,5 × 1 bajo la cabeza, en un avellanado de Ø5 × 2,6.
 - **Insertos M2,5** de Ø3,5 × 4 en los postes de la tapa. La PCB queda pinzada entre las columnas de la base y los postes de la tapa.
-- **Junta TPU** de 0,9 × 1,1 en una ranura de 1,0 × 0,8 en la cara superior de la pared (≈ 27 % de compresión).
+- **Sin juntas TPU** (decisión del usuario): las 2 uniones del anillo (base ↔ anillo y anillo ↔ tapa) y los 2 cortes entre sus mitades se sellan con pegamento tipo B-7000/T-7000. Para volver a abrir la caja hay que calentar y despegar.
+- **Anillo de luz:** resina translúcida en dos mitades (A y B), de z 9,6 a 15,3 (5,7 mm de alto), iluminado desde dentro por los 4 LED laterales de la PCB.
 - **Antena:** 4 topes en el techo, a 0,3 por encima, para que no se levante.
 
 ## Fondo
@@ -45,6 +48,5 @@ Generador: `avo_casco_v5.py` (CadQuery 2.4, en el CI con `build-back-v5-cad.yml`
 
 ## Pendiente
 - STEP del pogo de 5 contactos y medidas de la batería.
-- Dónde va el LED: propuesta de un LED de emisión lateral en el canto de la PCB, con una ventana fina en la pared.
 - Prueba impresa: encaje de la PCB, junta, tornillos, fuerza de los imanes y despegue a 45°.
 - Inmersión.
