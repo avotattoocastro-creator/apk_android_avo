@@ -60,8 +60,16 @@ struct HardwareSheet: View {
                    } ?? (reading ? "Leyendo estado…" : "Sin estado del reloj"))
             module("Espalda", "GNSS RTK", icon: "location.north.circle",
                    ok: status?.backLink == true,
-                   value: status.map { $0.backLink ? "Enlazada" : "Sin enlace" } ?? "—",
-                   detail: status.map { $0.backLink ? ($0.rtcmFlowing ? "Correcciones RTCM llegando" : "Sin correcciones RTCM") : "No responde al reloj" }
+                   // trainer's sketch 14/11/2026: «% espalda» (battery from TELEMETRY v2; «Enlazada» until it arrives)
+                   value: status.map { s in
+                       guard s.backLink else { return "Sin enlace" }
+                       return app.watchWifi.backBatteryMv.map { "\(HardwareSheet.liionPct($0)) %" } ?? "Enlazada"
+                   } ?? "—",
+                   detail: status.map { s in
+                       guard s.backLink else { return "No responde al reloj" }
+                       let mv: String = app.watchWifi.backBatteryMv.map { "\($0) mV · " } ?? ""
+                       return mv + (s.rtcmFlowing ? "Correcciones RTCM llegando" : "Sin correcciones RTCM")
+                   }
                        ?? "Sin estado del reloj")
             module("Cincha", "IMU", icon: "waveform.path.ecg",
                    ok: status?.girth == true,
@@ -124,6 +132,17 @@ struct HardwareSheet: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+    }
+
+    /// Li-ion state of charge from the cell voltage (same table as Android HomeScreen liionPct).
+    static func liionPct(_ mv: Int) -> Int {
+        let v: [Int] = [3300, 3500, 3600, 3700, 3750, 3800, 3850, 3900, 4000, 4100, 4200]
+        let p: [Int] = [0, 5, 10, 20, 30, 40, 50, 60, 75, 90, 100]
+        if mv <= v[0] { return 0 }
+        if mv >= v[v.count - 1] { return 100 }
+        guard let i = v.firstIndex(where: { $0 >= mv }), i > 0 else { return 0 }
+        let f: Double = Double(mv - v[i - 1]) / Double(v[i] - v[i - 1])
+        return Int(Double(p[i - 1]) + f * Double(p[i] - p[i - 1]))
     }
 
     static func batteryIcon(_ pct: Int?, charging: Bool) -> String {

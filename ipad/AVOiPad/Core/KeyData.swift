@@ -69,6 +69,8 @@ struct KeyData: Equatable {
     /// Engine «trabajo rápido» threshold (m/s, trabajo_pista.perfil.v_rapido): «Distancia de trabajo» is the distance
     /// covered at or above it, so tapping that figure selects the time above this speed.
     var fastSpeedMs: Double? = nil
+    /// 2.0 result: «Distancia de trabajo» and its t0–t1 are the engine's full work limits (select them as they are).
+    var workIsFull: Bool = false
 
     static let ecgCaption: String = "Llega con el ECG de la cincha"
     static let girthCaption: String = "Necesita la cincha montada"
@@ -146,14 +148,19 @@ struct KeyData: Equatable {
         t.append(bestTile("best600", 600))
         // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
         // «Mejor 1000 m» (trainer 14/11/2026)
-        var work: KeyTile = tile("workdist", "Distancia de trabajo", num(trabajos, "distancia_rapida_m").flatMap { $0 > 0 ? $0 / 1000 : nil },
+        // 2.0: «Distancia de trabajo» = whole work (run-up + fast efforts + pull-up, engine distancia_trabajo_m) and
+        // tapping it selects exactly t0_trabajo–t1_trabajo (trainer 14/11/2026: «no detecta bien el trabajo»).
+        // 1.x results keep the old figure (distance at fast speed) and the efforts window.
+        let wd2: Double? = num(trabajos, "distancia_trabajo_m").flatMap { $0 > 0 ? $0 : nil }
+        let wd: Double? = wd2 ?? num(trabajos, "distancia_rapida_m").flatMap { $0 > 0 ? $0 : nil }
+        var work: KeyTile = tile("workdist", "Distancia de trabajo", wd.map { $0 / 1000 },
                                  "0.00", "km", "Trabajo rápido del entrenamiento", noFastCaption, 0)
-        // opens the charts on the work (first effort start → last effort end), like «Mejor 200 m» (trainer 14/11/2026)
-        let w0: Double? = efforts.compactMap { num($0, "t0") }.min()
-        let w1: Double? = efforts.compactMap { num($0, "t1") }.max()
+        let w0: Double? = num(trabajos, "t0_trabajo") ?? efforts.compactMap { num($0, "t0") }.min()
+        let w1: Double? = num(trabajos, "t1_trabajo") ?? efforts.compactMap { num($0, "t1") }.max()
+        k.workIsFull = wd2 != nil
         if work.available, let a = w0, let b = w1, b > a {
             work = KeyTile(id: work.id, label: work.label, value: work.value, unit: work.unit,
-                           caption: "Trabajo rápido · ver en gráficas", available: true, group: work.group)
+                           caption: "Trabajo completo · ver en gráficas", available: true, group: work.group)
             work.t0 = a
             work.t1 = b
         }

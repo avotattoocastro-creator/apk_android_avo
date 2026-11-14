@@ -24,6 +24,33 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-ENGINE-2.0-F2a — Trabajo completo bien detectado; selección movible; % de la espalda
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Por qué (boceto del entrenador):** «No detecta bien el trabajo; es esencial que se detecten bien las zonas». Antes, el
+trabajo solo abarcaba lo que iba por encima del umbral de velocidad (11 m/s en PSI) y se dejaba fuera la arrancada y la
+frenada.
+**Qué cambia:**
+- **Motor (EFFORT_V2):**
+  - cada trabajo tiene límites completos, de la arrancada (acelerando) a la frenada (desacelerando);
+  - la fase de trabajo y el calentamiento se miden con esos límites;
+  - nuevo `distancia_trabajo_m` con su ventana `t0_trabajo`–`t1_trabajo`;
+  - las métricas de fatiga siguen en el núcleo;
+  - prueba del entreno de mañana ampliada: calentamiento 240 s (antes 246 s), arrancada y frenada incluidas.
+  - Detalle: `docs/algoritmos/13_TRABAJO_PISTA.md`.
+- **iPad y Windows (Parámetros clave / Datos clave):** «Distancia de trabajo» muestra el trabajo completo y al tocarla
+  selecciona exactamente esa ventana del motor. Con resultados 1.x se mantiene la regla anterior. Pruebas idénticas en las
+  dos apps.
+- **iPad · Gráficas:** la selección tiene dos agarres, «Inicio» y «Fin», en la gráfica de velocidad, para moverla a mano;
+  la tabla de la selección se recalcula.
+- **iPad · Equipo conectado:** el recuadro Espalda muestra el % de batería de la espalda (TELEMETRY v2, `backBatteryMv`,
+  misma tabla Li-ion que Android) y los mV.
+  - El iPad se suscribe a la telemetría solo si el reloj la ofrece; si no, se ve «Enlazada» como antes.
+  - Solo lectura: el protocolo no cambia.
+- **iPad · Cuadra:** «France Galop» se mueve al extremo derecho de la barra.
+**No se ha tocado:** protocolos, firmware, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1524 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales
+ni con el reloj.
+
 ## 2026-11-14 — AVO-ENGINE-2.0-F1b — Aceleración del filtro y apps con la velocidad del motor
 **Autor:** Claude · Rama `feature/avo-equine-2-0`
 **Qué cambia:**

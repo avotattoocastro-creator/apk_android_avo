@@ -91,7 +91,7 @@ struct KeyDataView: View {
                 ForEach(tiles) { (t: KeyTile) in
                     if let a = t.t0, let b = t.t1 {
                         Button {
-                            if t.id == "workdist" {
+                            if t.id == "workdist" && !k.workIsFull {
                                 app.openFastWork(thresholdMs: k.fastSpeedMs, fallbackT0: a, fallbackT1: b)
                             } else {
                                 app.openInCharts(engineT0: a, engineT1: b)

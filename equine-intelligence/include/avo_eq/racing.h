@@ -61,6 +61,11 @@ struct RacingConfig {
   double split_m = 200.0;            // parciales (201.168 = furlong)
   double effort_min_s = 10.0;        // duración mínima de un trabajo
   double effort_gap_s = 3.0;         // bajadas cortas por debajo del umbral dentro del mismo trabajo
+  // 2.0: límites completos del trabajo = arrancada (acelerando) y frenada (desacelerando) alrededor del núcleo sobre el
+  // umbral, hasta que la aceleración se apaga o la velocidad baja del suelo. Las métricas de fatiga siguen en el núcleo.
+  bool effort_full_limits = true;
+  double effort_extend_accel = 0.10; // m/s²: |aceleración| mínima para seguir dentro de la arrancada / frenada
+  double effort_extend_floor = 1.5;  // m/s: por debajo, el caballo ya está al paso
   double gravity_lp_hz = 0.25;       // paso bajo para estimar la vertical
   double turn_min_deg_s = 4.0;       // |giro| por encima: el caballo está girando
   double lead_sign = 0;              // 0 = autocalibrar en curvas; +1/-1 = signo fijado con una sesión etiquetada
@@ -115,6 +120,8 @@ struct Effort {
   double recovery_to_walk_s = NAN;   // desde el final del trabajo hasta volver al paso (NaN: no volvió antes del final)
   double pause_to_next_s = NAN, pause_speed_mean = NAN;   // pausa hasta la siguiente repetición
   bool manual = false;               // límites puestos a mano por el usuario
+  // 2.0: trabajo completo (arrancada + núcleo + frenada); igual al núcleo en trabajos manuales
+  double t0_full = NAN, t1_full = NAN, distance_full_m = NAN;
 };
 
 struct GateCrossing { std::string gate; double t = 0; bool left_to_right = false; bool counts = false; };

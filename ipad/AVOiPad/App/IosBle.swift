@@ -259,6 +259,7 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
     private static let rxUuid = CBUUID(nsuuid: AvoGatt.ctrlRx)
     private static let txUuid = CBUUID(nsuuid: AvoGatt.ctrlTx)
     private static let fileUuid = CBUUID(nsuuid: AvoGatt.fileTx)
+    private static let telemUuid = CBUUID(nsuuid: AvoGatt.telem)
 
     var name: String { peripheral.name ?? "AVO" }
     var identifier: UUID { peripheral.identifier }
@@ -299,7 +300,7 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
         }
         let c = AvoOneShot<Void>()
         locked { charsShot = c }
-        peripheral.discoverCharacteristics([IosBleTransport.rxUuid, IosBleTransport.txUuid, IosBleTransport.fileUuid], for: svc)
+        peripheral.discoverCharacteristics([IosBleTransport.rxUuid, IosBleTransport.txUuid, IosBleTransport.fileUuid, IosBleTransport.telemUuid], for: svc)
         try await c.value(timeoutMs: timeoutMs, onTimeout: { .failure(BleLinkError("El reloj no responde (características)")) })
         let chars = svc.characteristics ?? []
         guard let rxc = chars.first(where: { $0.uuid == IosBleTransport.rxUuid }) else {
@@ -317,6 +318,10 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
             try await n.value(timeoutMs: max(timeoutMs, 60000), onTimeout: {
                 .failure(BleLinkError("No se pudieron activar las notificaciones del reloj (tiempo agotado)"))
             })
+        }
+        // TELEMETRY (2 Hz) is optional: «Equipo conectado» reads the back battery from it. Never blocks the connection.
+        if let tc = chars.first(where: { $0.uuid == IosBleTransport.telemUuid }) {
+            peripheral.setNotifyValue(true, for: tc)
         }
     }
 
@@ -419,6 +424,7 @@ final class IosBleTransport: NSObject, AvoTransport, CBPeripheralDelegate {
         let id: UUID
         if characteristic.uuid == IosBleTransport.txUuid { id = AvoGatt.ctrlTx }
         else if characteristic.uuid == IosBleTransport.fileUuid { id = AvoGatt.fileTx }
+        else if characteristic.uuid == IosBleTransport.telemUuid { id = AvoGatt.telem }
         else { id = UUID(uuidString: characteristic.uuid.uuidString) ?? AvoGatt.telem }
         onNotification?(id, [UInt8](v))
     }
