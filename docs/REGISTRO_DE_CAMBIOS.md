@@ -24,6 +24,19 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — Espalda V5 CASCO: dos ESP32 (decisión del usuario)
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:** `ARQUITECTURA.md` pasa a dos chips (solo documentación):
+- **ESP32-C6**: ESP-NOW con la cincha, el pecho y futuros equipos;
+- **ESP32-S3**: ZED, microSD, NTRIP con el móvil y USB por el pogo.
+
+**Enlace entre los dos:** UART COBS + CRC con RTS/CTS, PPS compartido, EN y BOOT del C6 controlados por el S3 (un solo USB para programar los dos) y línea de coordinación de radio.
+**Consumo:** ≈ 300–320 mA (E). Con 2000 mAh, unas 6 h; para 8 h hacen falta unos 2700 mAh (+2,5 mm, +12 g).
+**Por qué:** petición del usuario.
+**Validación:** ninguna (estimaciones).
+
+---
+
 ## 2026-11-14 — Espalda V5 CASCO: propuesta de arquitectura (sin PCB ni firmware)
 **Autor:** Claude · Rama `feature/back-v5-casco` (desde `develop/avo-performance-horse`)
 **Qué cambia:** solo documentación, en `hardware/back/V5_CASCO/DOCS/`:

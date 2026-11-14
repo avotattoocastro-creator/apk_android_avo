@@ -14,7 +14,7 @@ Medidas y pesos **estimados (E)**; ninguno está medido.
 - Planta de unos 55 × 55 mm, aceptando algo de pérdida de RTK frente al plano de masa de 70 × 70.
 
 ## Qué se conserva de la V4 (prestaciones)
-- ESP32-S3-MINI-1U-N8, que lleva BLE, Wi-Fi, ESP-NOW con el pecho y las cinchas (GirthHub), microSD y PPS.
+- Funciones de la V4: BLE, Wi-Fi, ESP-NOW con el pecho y las cinchas (GirthHub), microSD y PPS. Ahora repartidas entre dos ESP32 (ver más abajo).
 - u-blox ZED-F9P, multibanda L1/L2 con RTK, a 8 Hz.
 - Cargador BQ24072, regulador TLV75733P y RT9080 para el ZED con EN en GPIO10.
 - microSD alimentada por PMOS.
@@ -31,6 +31,36 @@ Medidas y pesos **estimados (E)**; ninguno está medido.
 | Conexión exterior | 3 contactos (SYS, BAT, GND) + USB-C | **pogo magnético de 5 contactos**: VBUS · D− · D+ · GND · libre |
 | Encendido | puente SYS–BAT en el soporte | **sensor Hall (DRV5032) + imán en la base del casco**: se enciende al ponerla. También al conectar el cable (VBUS) |
 | Datos con el PC | USB-C del taller | **USB nativo del ESP32-S3 (GPIO19/20) por el pogo**, con ESD USBLC6-2SC6. Sirve para la carga, la descarga de sesiones y la programación |
+
+## Decisión del usuario (14/11/2026, 13:29): dos ESP32 con funciones separadas
+Esta decisión sustituye a la de un solo ESP32-S3 que se tomó para la V4.
+
+| Chip | Función | Por qué este chip |
+|---|---|---|
+| **ESP32-C6-MINI-1U** («radio de equipos») | ESP-NOW con la cincha (GirthHub) y con el pecho, y **futuros equipos** | Es el mismo chip que la cincha. Tiene Wi-Fi 6, BLE 5 y 802.15.4 (Thread/Zigbee), útil para sensores futuros |
+| **ESP32-S3-MINI-1U-N8** («registro y móvil») | ZED-F9P por UART, PPS, microSD (SDMMC), **BLE/Wi-Fi con el móvil para NTRIP**, USB nativo por el pogo (carga, descarga y programación) | Tiene USB OTG y SDMMC de 4 bits, como en la V4 |
+
+### Enlace entre los dos chips
+- **UART a 2–3 Mbaud con tramas COBS + CRC**, el formato AVO UART v1 que ya usa el proyecto, más RTS/CTS.
+  - El C6 pasa al S3 los lotes de la cincha, tal cual (220 B).
+  - El S3 pasa al C6 lo que hay que enviar al pecho.
+- **PPS del ZED a los dos chips**, para tener la misma marca de tiempo en los dos.
+- **EN y BOOT del C6 controlados por el S3:** el S3 programa el C6 por el UART, así que con un solo USB en el pogo se actualizan los dos.
+- **Línea de coordinación de radio:** 1 GPIO en cada sentido, «voy a transmitir» y «estoy recibiendo».
+  - Las dos radios están en 2,4 GHz a pocos centímetros y sin el árbitro de coexistencia que tiene un solo chip.
+  - El S3 usa sobre todo **BLE** con el móvil y retrasa sus ráfagas mientras el C6 recibe un lote.
+  - Si el S3 usa Wi-Fi, conviene el mismo canal que ESP-NOW.
+- **Antenas de 2,4 GHz:** dos FPC en esquinas opuestas, lo más lejos posible entre ellas y de la antena GNSS. **Hay que medir los paquetes perdidos** con las dos radios activas a la vez.
+
+### Consumo y autonomía con dos ESP32 (estimado)
+- El C6 escuchando ESP-NOW de forma continua añade unos 75–95 mA, así que el total pasa a **≈ 300–320 mA**.
+- **Con 2000 mAh salen unas 5,5–6 h** (antes ~8 h).
+- **Para 8 h hacen falta unos 2700 mAh**, por ejemplo 45 × 50 × ~9,5 mm (E): **+2,5 mm de alto** (cápsula de ≈ 55 × 55 × 25) y **+12 g**, lo que da unos 117 g de cápsula y **≈ 127 g en el casco**.
+- Otra opción es mantener 2000 mAh y aceptar unas 6 h.
+
+### Planta de la PCB de 51 × 51
+Caben en la cara inferior: ZED-F9P (17 × 22), S3 (15,4 × 15,4), C6 (13,2 × 16,6), microSD, cargador y reguladores, unos 1500 de los 2600 mm². Va justo, pero cabe.
+Las dos antenas de 2,4 GHz van en los cantos, por fuera del plano de masa de la antena GNSS.
 
 ## Medidas y peso (estimados)
 - **Cápsula: 55 × 55 × 22,6 mm** (esquinas R5).
