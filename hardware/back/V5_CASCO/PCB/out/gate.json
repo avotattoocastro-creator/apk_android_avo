@@ -3,8 +3,8 @@
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": false,
-   "n": 4
+   "ok": true,
+   "n": 0
   },
   {
    "name": "DRC: conexiones incompletas",
@@ -18,8 +18,8 @@
   },
   {
    "name": "DRC: paridad esquema \u2194 placa",
-   "ok": false,
-   "n": 33
+   "ok": true,
+   "n": 0
   },
   {
    "name": "ERC: errores",
@@ -32,9 +32,7 @@
    "n": 0
   }
  ],
- "drc_errors": {
-  "clearance": 4
- },
+ "drc_errors": {},
  "drc_warnings": {
   "silk_over_copper": 4,
   "silk_overlap": 1

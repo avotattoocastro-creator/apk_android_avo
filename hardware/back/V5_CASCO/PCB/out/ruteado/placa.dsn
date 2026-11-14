@@ -27,7 +27,7 @@
       )
     )
     (layer B.Cu
-      (type signal)
+      (type power)
       (property
         (index 3)
       )
@@ -228,8 +228,8 @@
       (place R32 102660.000000 -97050.000000 front 0.000000 (PN 1M))
       (place R33 101140.000000 -94570.000000 front 90.000000 (PN 1M))
       (place R60 86610.000000 -116330.000000 front 0.000000 (PN 100k))
-      (place R70 82040.000000 -98050.000000 front 90.000000 (PN 10R))
       (place L70 81150.000000 -92950.000000 front 90.000000 (PN "47 nH"))
+      (place R71 81360.000000 -90820.000000 front 90.000000 (PN 0R))
       (place R50 101000.000000 -89380.000000 front 90.000000 (PN 1k))
       (place R51 103400.000000 -100180.000000 front 90.000000 (PN 1k))
       (place R52 100950.000000 -91640.000000 front 90.000000 (PN 1k))
@@ -255,9 +255,10 @@
       (place C18 100970.000000 -112960.000000 front 0.000000 (PN 1u))
       (place C34 102250.000000 -95430.000000 front 90.000000 (PN 100n))
       (place C63 101450.000000 -98190.000000 front 0.000000 (PN 100n))
+      (place C65 101440.000000 -103020.000000 front 0.000000 (PN 1u))
       (place C64 101060.000000 -96570.000000 front 90.000000 (PN 100n))
-      (place C71 82070.000000 -100200.000000 front 90.000000 (PN 10n))
-      (place C70 81360.000000 -90820.000000 front 90.000000 (PN "47p C0G"))
+      (place C71 81400.000000 -101220.000000 front 0.000000 (PN 10n))
+      (place D4 79750.000000 -89760.000000 front 0.000000 (PN "ESD RF 0,25 pF"))
       (place C25 102830.000000 -85520.000000 front 0.000000 (PN 100n))
       (place C26 102970.000000 -80770.000000 front 0.000000 (PN 1u))
       (place C27 103450.000000 -95510.000000 front 90.000000 (PN 1u))
@@ -284,6 +285,9 @@
     )
     (component AVO:ublox_ZED
       (place U1 91500.000000 -99000.000000 front 0.000000 (PN "ZED-F9P-01B"))
+    )
+    (component AVO:C_1206_3216Metric
+      (place R70 81220.000000 -98150.000000 front 90.000000 (PN "22R 1206"))
     )
     (component "AVO:U.FL_Hirose_U.FL-R-SMT-1_Vertical"
       (place J5 78500.000000 -92950.000000 front 180.000000 (PN "U.FL GNSS"))
@@ -624,6 +628,20 @@
       (pin Rect[T]Pad_1100.000000x1100.000000_um 55@45 5250 -7350)
       (pin Rect[T]Pad_1100.000000x1100.000000_um 55@46 -3150 -7350)
       (pin Rect[T]Pad_1100.000000x1100.000000_um 55@47 3150 -7350)
+    )
+    (image AVO:C_1206_3216Metric
+      (outline (path signal 100  -1600 -800  -1600 800))
+      (outline (path signal 100  -1600 800  1600 800))
+      (outline (path signal 100  1600 800  1600 -800))
+      (outline (path signal 100  1600 -800  -1600 -800))
+      (outline (path signal 120  -711.3 910  711.3 910))
+      (outline (path signal 120  -711.3 -910  711.3 -910))
+      (outline (path signal 50  -2300 -1150  -2300 1150))
+      (outline (path signal 50  -2300 1150  2300 1150))
+      (outline (path signal 50  2300 1150  2300 -1150))
+      (outline (path signal 50  2300 -1150  -2300 -1150))
+      (pin RoundRect[T]Pad_1150.000000x1800.000000_250.961000_um_0.000000_0 1 -1475 0)
+      (pin RoundRect[T]Pad_1150.000000x1800.000000_250.961000_um_0.000000_0 2 1475 0)
     )
     (image "AVO:U.FL_Hirose_U.FL-R-SMT-1_Vertical"
       (outline (path signal 50  -2020 -1000  -2020 1000))
@@ -1067,6 +1085,15 @@
             -500.951 475))
       (attach off)
     )
+    (padstack RoundRect[T]Pad_1150.000000x1800.000000_250.961000_um_0.000000_0
+      (shape (polygon F.Cu 0  -575.951 649.99  -556.848 746.029  -502.446 827.446  -421.029 881.848
+            -324.989 900.95  324.99 900.951  421.029 881.848  502.446 827.446
+            556.848 746.029  575.95 649.989  575.951 -649.99  556.848 -746.029
+            502.446 -827.446  421.029 -881.848  324.989 -900.95  -324.99 -900.951
+            -421.029 -881.848  -502.446 -827.446  -556.848 -746.029  -575.95 -649.989
+            -575.951 649.99))
+      (attach off)
+    )
     (padstack Cust[T]Pad_600.000000x600.000000_1200.000000x1200.000000_6_um_E3A61171BE6A6E137BDE23BC2905A592
       (shape (polygon F.Cu 0  -600 0  0 600  600 600  600 -600  -600 -600  -600 0))
       (attach off)
@@ -1177,7 +1204,7 @@
       (pins J3-4 Q4-3 C40-1 C41-1 R41-2 R42-2 R43-2 R44-2 R45-2)
     )
     (net +3V3_ZED
-      (pins U7-5 C61-1 U1-33 U1-34 C62-1 C63-1 TP9-1)
+      (pins U7-5 C61-1 U1-33 U1-34 C62-1 C63-1 C65-1 TP9-1)
     )
     (net GND
       (pins P4-1 D2-2 D3-2 R21-2 U6-2 R23-2 U2-4 U2-6 U2-8 U2-15 U2-17 U2-17@1 U2-17@2
@@ -1188,11 +1215,12 @@
         U1-55@16 U1-55@17 U1-55@18 U1-55@19 U1-55@20 U1-55@21 U1-55@22 U1-55@23 U1-55@24
         U1-55@25 U1-55@26 U1-55@27 U1-55@28 U1-55@29 U1-55@30 U1-55@31 U1-55@32 U1-55@33
         U1-55@34 U1-55@35 U1-55@36 U1-55@37 U1-55@38 U1-55@39 U1-55@40 U1-55@41 U1-55@42
-        U1-55@43 U1-55@44 U1-55@45 U1-55@46 U1-55@47 C62-2 C63-2 C64-2 C71-2 J5-2
-        J5-2@1 U4-1 U4-2 U4-42 U4-43 U4-46 U4-47 U4-48 U4-49 U4-50 U4-51 U4-52 U4-53
-        U4-54 U4-55 U4-56 U4-57 U4-58 U4-59 U4-60 U4-61 U4-61@1 U4-61@2 U4-61@3 U4-61@4
-        U4-61@5 U4-61@6 U4-61@7 U4-61@8 U4-62 U4-63 U4-64 U4-65 C24-2 C25-2 C26-2
-        C27-2 U8-3 C80-2 J3-6 J3-11 J3-11@1 J3-10 J3-11@2 J3-11@3 C40-2 C41-2 TP3-1)
+        U1-55@43 U1-55@44 U1-55@45 U1-55@46 U1-55@47 C62-2 C63-2 C65-2 C64-2 C71-2
+        D4-2 J5-2 J5-2@1 U4-1 U4-2 U4-42 U4-43 U4-46 U4-47 U4-48 U4-49 U4-50 U4-51
+        U4-52 U4-53 U4-54 U4-55 U4-56 U4-57 U4-58 U4-59 U4-60 U4-61 U4-61@1 U4-61@2
+        U4-61@3 U4-61@4 U4-61@5 U4-61@6 U4-61@7 U4-61@8 U4-62 U4-63 U4-64 U4-65 C24-2
+        C25-2 C26-2 C27-2 U8-3 C80-2 J3-6 J3-11 J3-11@1 J3-10 J3-11@2 J3-11@3 C40-2
+        C41-2 TP3-1)
     )
     (net VBAT
       (pins U2-2 U2-3 C20-1 F1-2 R32-1 TP7-1)
@@ -1255,10 +1283,10 @@
       (pins P1-1 F2-1 D2-1)
     )
     (net RF_ANT
-      (pins L70-2 C70-1 J5-1)
+      (pins L70-2 R71-1 D4-1 J5-1)
     )
     (net RF_ZED
-      (pins U1-2 C70-2)
+      (pins U1-2 R71-2)
     )
     (net S3_TX1
       (pins R50-1 U4-10)
@@ -1362,103 +1390,103 @@
     (net "unconnected-(U7-NC-Pad4)"
       (pins U7-4)
     )
-    (net "unconnected-(U1-4-Pad4)"
+    (net "unconnected-(U1-Pad4)"
       (pins U1-4)
     )
-    (net "unconnected-(U1-5-Pad5)"
+    (net "unconnected-(U1-Pad5)"
       (pins U1-5)
     )
-    (net "unconnected-(U1-6-Pad6)"
+    (net "unconnected-(U1-Pad6)"
       (pins U1-6)
     )
-    (net "unconnected-(U1-8-Pad8)"
+    (net "unconnected-(U1-Pad8)"
       (pins U1-8)
     )
-    (net "unconnected-(U1-9-Pad9)"
+    (net "unconnected-(U1-Pad9)"
       (pins U1-9)
     )
-    (net "unconnected-(U1-10-Pad10)"
+    (net "unconnected-(U1-Pad10)"
       (pins U1-10)
     )
-    (net "unconnected-(U1-11-Pad11)"
+    (net "unconnected-(U1-Pad11)"
       (pins U1-11)
     )
-    (net "unconnected-(U1-13-Pad13)"
+    (net "unconnected-(U1-Pad13)"
       (pins U1-13)
     )
-    (net "unconnected-(U1-15-Pad15)"
+    (net "unconnected-(U1-Pad15)"
       (pins U1-15)
     )
-    (net "unconnected-(U1-16-Pad16)"
+    (net "unconnected-(U1-Pad16)"
       (pins U1-16)
     )
-    (net "unconnected-(U1-17-Pad17)"
+    (net "unconnected-(U1-Pad17)"
       (pins U1-17)
     )
-    (net "unconnected-(U1-18-Pad18)"
+    (net "unconnected-(U1-Pad18)"
       (pins U1-18)
     )
-    (net "unconnected-(U1-19-Pad19)"
+    (net "unconnected-(U1-Pad19)"
       (pins U1-19)
     )
-    (net "unconnected-(U1-20-Pad20)"
+    (net "unconnected-(U1-Pad20)"
       (pins U1-20)
     )
-    (net "unconnected-(U1-21-Pad21)"
+    (net "unconnected-(U1-Pad21)"
       (pins U1-21)
     )
-    (net "unconnected-(U1-22-Pad22)"
+    (net "unconnected-(U1-Pad22)"
       (pins U1-22)
     )
-    (net "unconnected-(U1-23-Pad23)"
+    (net "unconnected-(U1-Pad23)"
       (pins U1-23)
     )
-    (net "unconnected-(U1-24-Pad24)"
+    (net "unconnected-(U1-Pad24)"
       (pins U1-24)
     )
-    (net "unconnected-(U1-25-Pad25)"
+    (net "unconnected-(U1-Pad25)"
       (pins U1-25)
     )
-    (net "unconnected-(U1-28-Pad28)"
+    (net "unconnected-(U1-Pad28)"
       (pins U1-28)
     )
-    (net "unconnected-(U1-29-Pad29)"
+    (net "unconnected-(U1-Pad29)"
       (pins U1-29)
     )
-    (net "unconnected-(U1-30-Pad30)"
+    (net "unconnected-(U1-Pad30)"
       (pins U1-30)
     )
-    (net "unconnected-(U1-31-Pad31)"
+    (net "unconnected-(U1-Pad31)"
       (pins U1-31)
     )
-    (net "unconnected-(U1-35-Pad35)"
+    (net "unconnected-(U1-Pad35)"
       (pins U1-35)
     )
-    (net "unconnected-(U1-39-Pad39)"
+    (net "unconnected-(U1-Pad39)"
       (pins U1-39)
     )
-    (net "unconnected-(U1-40-Pad40)"
+    (net "unconnected-(U1-Pad40)"
       (pins U1-40)
     )
-    (net "unconnected-(U1-44-Pad44)"
+    (net "unconnected-(U1-Pad44)"
       (pins U1-44)
     )
-    (net "unconnected-(U1-45-Pad45)"
+    (net "unconnected-(U1-Pad45)"
       (pins U1-45)
     )
-    (net "unconnected-(U1-46-Pad46)"
+    (net "unconnected-(U1-Pad46)"
       (pins U1-46)
     )
-    (net "unconnected-(U1-47-Pad47)"
+    (net "unconnected-(U1-Pad47)"
       (pins U1-47)
     )
-    (net "unconnected-(U1-51-Pad51)"
+    (net "unconnected-(U1-Pad51)"
       (pins U1-51)
     )
-    (net "unconnected-(U1-52-Pad52)"
+    (net "unconnected-(U1-Pad52)"
       (pins U1-52)
     )
-    (net "unconnected-(U1-54-Pad54)"
+    (net "unconnected-(U1-Pad54)"
       (pins U1-54)
     )
     (net "unconnected-(U4-IO3-Pad7)"
@@ -1502,18 +1530,18 @@
       S3_TX1 S3_TX2 S3_ZRST SD_CLK SD_CLK0 SD_CMD SD_D0 SD_D1 SD_D2 SD_D3
       SD_PWR_N U0RX U0TX USB_DM USB_DM_C USB_DP USB_DP_C VBUS_DET VCC_RF VCC_RF_F
       ZED_EN ZED_PPS ZED_PPS_C ZED_RST ZED_RX1 ZED_RX2 ZED_SAFEBOOT ZED_TX1
-      ZED_TX1_C ZED_TX2 ZED_TX2_C "unconnected-(J3-DET-Pad9)" "unconnected-(U1-10-Pad10)"
-      "unconnected-(U1-11-Pad11)" "unconnected-(U1-13-Pad13)" "unconnected-(U1-15-Pad15)"
-      "unconnected-(U1-16-Pad16)" "unconnected-(U1-17-Pad17)" "unconnected-(U1-18-Pad18)"
-      "unconnected-(U1-19-Pad19)" "unconnected-(U1-20-Pad20)" "unconnected-(U1-21-Pad21)"
-      "unconnected-(U1-22-Pad22)" "unconnected-(U1-23-Pad23)" "unconnected-(U1-24-Pad24)"
-      "unconnected-(U1-25-Pad25)" "unconnected-(U1-28-Pad28)" "unconnected-(U1-29-Pad29)"
-      "unconnected-(U1-30-Pad30)" "unconnected-(U1-31-Pad31)" "unconnected-(U1-35-Pad35)"
-      "unconnected-(U1-39-Pad39)" "unconnected-(U1-4-Pad4)" "unconnected-(U1-40-Pad40)"
-      "unconnected-(U1-44-Pad44)" "unconnected-(U1-45-Pad45)" "unconnected-(U1-46-Pad46)"
-      "unconnected-(U1-47-Pad47)" "unconnected-(U1-5-Pad5)" "unconnected-(U1-51-Pad51)"
-      "unconnected-(U1-52-Pad52)" "unconnected-(U1-54-Pad54)" "unconnected-(U1-6-Pad6)"
-      "unconnected-(U1-8-Pad8)" "unconnected-(U1-9-Pad9)" "unconnected-(U2-TMR-Pad14)"
+      ZED_TX1_C ZED_TX2 ZED_TX2_C "unconnected-(J3-DET-Pad9)" "unconnected-(U1-Pad10)"
+      "unconnected-(U1-Pad11)" "unconnected-(U1-Pad13)" "unconnected-(U1-Pad15)"
+      "unconnected-(U1-Pad16)" "unconnected-(U1-Pad17)" "unconnected-(U1-Pad18)"
+      "unconnected-(U1-Pad19)" "unconnected-(U1-Pad20)" "unconnected-(U1-Pad21)"
+      "unconnected-(U1-Pad22)" "unconnected-(U1-Pad23)" "unconnected-(U1-Pad24)"
+      "unconnected-(U1-Pad25)" "unconnected-(U1-Pad28)" "unconnected-(U1-Pad29)"
+      "unconnected-(U1-Pad30)" "unconnected-(U1-Pad31)" "unconnected-(U1-Pad35)"
+      "unconnected-(U1-Pad39)" "unconnected-(U1-Pad4)" "unconnected-(U1-Pad40)"
+      "unconnected-(U1-Pad44)" "unconnected-(U1-Pad45)" "unconnected-(U1-Pad46)"
+      "unconnected-(U1-Pad47)" "unconnected-(U1-Pad5)" "unconnected-(U1-Pad51)"
+      "unconnected-(U1-Pad52)" "unconnected-(U1-Pad54)" "unconnected-(U1-Pad6)"
+      "unconnected-(U1-Pad8)" "unconnected-(U1-Pad9)" "unconnected-(U2-TMR-Pad14)"
       "unconnected-(U3-NC-Pad4)" "unconnected-(U4-IO11-Pad15)" "unconnected-(U4-IO26-Pad26)"
       "unconnected-(U4-IO3-Pad7)" "unconnected-(U4-IO33-Pad28)" "unconnected-(U4-IO34-Pad29)"
       "unconnected-(U4-IO35-Pad31)" "unconnected-(U4-IO36-Pad32)" "unconnected-(U4-IO37-Pad33)"
@@ -1533,7 +1561,7 @@
       )
       (rule
         (width 360)
-        (clearance 250)
+        (clearance 150)
       )
     )
     (class Potencia +3V3 +3V3_ZED BAT_IN POGO_VBUS VBAT VBUS VSYS
@@ -1631,8 +1659,10 @@
     (wire (path F.Cu 300  94650 -106350  94675 -106325)(net GND)(type route))
     (wire (path F.Cu 300  101600 -99700  101575 -99725)(net GND)(type route))
     (wire (path F.Cu 300  101930 -98190  101925 -98175)(net GND)(type route))
+    (wire (path F.Cu 300  101920 -103020  101925 -103025)(net GND)(type route))
     (wire (path F.Cu 300  101060 -96090  101075 -96075)(net GND)(type route))
-    (wire (path F.Cu 300  82070 -99720  82075 -99725)(net GND)(type route))
+    (wire (path F.Cu 300  81880 -101220  81875 -101225)(net GND)(type route))
+    (wire (path F.Cu 300  80230 -89760  80225 -89775)(net GND)(type route))
     (wire (path F.Cu 300  78025 -91475  78025 -91475)(net GND)(type route))
     (wire (path F.Cu 300  105000 -82050  105025 -82025)(net GND)(type route))
     (wire (path F.Cu 300  105000 -82900  105025 -82925)(net GND)(type route))
@@ -1663,13 +1693,15 @@
     (wire (path F.Cu 200  98250 -117462  98125 -117575)(net CHG_EN2)(type route))
     (wire (path In2.Cu 200  98125 -117575  98125 -117875  97325 -118675)(net CHG_EN2)(type route))
     (wire (path F.Cu 200  97325 -118675  97060 -118910)(net CHG_EN2)(type route))
-    (wire (path F.Cu 360  84000 -92950  83275 -92625  83075 -92625  82025 -91575  82025 -90825
-            81625 -90425  81360 -90340)(net RF_ZED)(type route))
-    (wire (path F.Cu 360  81150 -92440  81375 -92175  81375 -91575  81360 -91300)(net RF_ANT)(type route))
+    (wire (path F.Cu 360  84000 -92950  83275 -92625  83075 -92625  82075 -91625  82075 -90875
+            81675 -90475  81360 -90310)(net RF_ZED)(type route))
+    (wire (path F.Cu 360  81150 -92440  81375 -92175  81375 -91575  81360 -91330)(net RF_ANT)(type route))
     (wire (path F.Cu 360  81150 -92440  80875 -92675  80025 -92675  79550 -92950)(net RF_ANT)(type route))
-    (wire (path F.Cu 300  82040 -97540  81725 -97775  81375 -98125  81375 -100125
-            81775 -100525  82070 -100680)(net VCC_RF_F)(type route))
-    (wire (path F.Cu 300  82040 -97540  81725 -97275  81725 -94225  81225 -93725  81150 -93460)(net VCC_RF_F)(type route))
+    (wire (path F.Cu 360  81360 -91330  81075 -91075  80425 -91075  79375 -90025  79270 -89760)(net RF_ANT)(type route))
+    (wire (path F.Cu 300  81220 -96675  81175 -96125  81175 -93725  81150 -93460)(net VCC_RF_F)(type route))
+    (wire (path F.Cu 300  81220 -96675  80325 -97225  80325 -98525  79975 -98875  79975 -100375
+            80675 -101075  80920 -101220)(net VCC_RF_F)(type route))
+    (wire (path F.Cu 300  84000 -98450  83275 -98825  82325 -98825  82075 -99075  81220 -99625)(net VCC_RF)(type route))
     (wire (path F.Cu 200  100000 -123000  99875 -122175  99875 -121475  99825 -121425
             99825 -120425  99375 -119975  99190 -119750  99475 -119525  99775 -119525
             100125 -119175  100772 -119040  101425 -119025  102425 -119025
@@ -1766,8 +1798,10 @@
     (via "Via[0-3]_500:300_um"  94675 -106325 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  101575 -99725 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  101925 -98175 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  101925 -103025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  101075 -96075 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  82075 -99725 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  81875 -101225 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  80225 -89775 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  78025 -91475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  78025 -94425 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  105025 -82025 (net GND)(type route))
