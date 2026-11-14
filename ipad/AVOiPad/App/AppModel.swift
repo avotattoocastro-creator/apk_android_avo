@@ -65,6 +65,9 @@ final class AppModel {
     }
     /// A training has been opened (list, calendar, dashboard…): unlocks Mapa / Análisis / Biomecánica in the sidebar.
     var trainingOpened: Bool = false
+    /// Bluetooth links open now: the sidebar «Equipo conectado» button only shows while there is one (sketch 14/11/2026).
+    var bleLinks: [BleLink] = []
+    var hardwareVisible: Bool = false
     /// Library restored and «AVO Horse» checked: «INICIAR» of the start screen is enabled.
     var startReady: Bool = false
     var sessions: [SessionItem] = []

@@ -77,6 +77,12 @@ extension AppModel {
         initFavorites()
         initWindows()
         captureMode = AppModel.isCaptureLaunch
+        // «Equipo conectado»: follow the Bluetooth links of the app (no scan or Bluetooth prompt is started here)
+        NotificationCenter.default.addObserver(forName: .avoBleLinksChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.bleLinks = IosBleCentral.shared.currentLinks
+            if self.bleLinks.isEmpty { self.hardwareVisible = false }
+        }
         log.info("app", "Inicio", ["version": AppModel.appVersion, "motor": EquineEngine.available ? EquineEngine.version() : "no disponible"])
         if shellState.started { return }
         shellState.started = true

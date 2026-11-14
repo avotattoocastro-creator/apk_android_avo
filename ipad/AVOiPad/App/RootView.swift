@@ -110,6 +110,9 @@ struct RootView: View {
                 .environment(app)
                 .avoColorScheme()
         }
+        .sheet(isPresented: Binding(get: { app.hardwareVisible }, set: { app.hardwareVisible = $0 })) {
+            HardwareSheet().environment(app).avoColorScheme()
+        }
         .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
             PdfViewerSheet(file: f)
                 .avoColorScheme()
@@ -129,6 +132,26 @@ struct RootView: View {
     }
 
     // ------------------------------------------------------------------ sidebar
+    private var hardwareButton: some View {
+        Button { app.hardwareVisible = true } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "antenna.radiowaves.left.and.right").font(.body).frame(width: 22).foregroundStyle(Avo.ok)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Equipo conectado").font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                    Text(app.bleLinks.map { $0.name }.joined(separator: " · ")).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                }
+                Spacer(minLength: 0)
+                Circle().fill(Avo.ok).frame(width: 8, height: 8)
+            }
+            .padding(.horizontal, 12).padding(.vertical, 9)
+            .background(Avo.ok.opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .padding(.top, 6)
+        .accessibilityIdentifier("nav.hardware")
+    }
+
     private var sidebar: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -136,6 +159,9 @@ struct RootView: View {
                     ForEach(RootView.mainEntries) { (e: RootNavEntry) in navButton(e) }
                     Divider().background(Avo.line).padding(.horizontal, 14).padding(.vertical, 8)
                     ForEach(RootView.systemEntries) { (e: RootNavEntry) in navButton(e) }
+                    // trainer's sketch 14/11/2026: hidden until the system connects by Bluetooth; opens the window that
+                    // manages the connected hardware
+                    if !app.bleLinks.isEmpty { hardwareButton }
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)

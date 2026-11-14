@@ -25,6 +25,18 @@ struct BleWatchFound: Equatable {
     var addressText: String { identifier.uuidString }
 }
 
+/// A watch / device currently linked by Bluetooth LE (sidebar «Equipo conectado», trainer's sketch 14/11/2026).
+struct BleLink: Identifiable, Equatable {
+    let id: UUID
+    let name: String
+    let since: Date
+}
+
+extension Notification.Name {
+    /// Posted on the main queue whenever a Bluetooth link of the app opens or closes.
+    static let avoBleLinksChanged = Notification.Name("avo.ble.linksChanged")
+}
+
 /// The single CBCentralManager of the app (CoreBluetooth wants one per app), with async/await wrappers.
 final class IosBleCentral: NSObject, CBCentralManagerDelegate {
     static let shared = IosBleCentral()
@@ -39,6 +51,24 @@ final class IosBleCentral: NSObject, CBCentralManagerDelegate {
     private var known: [UUID: CBPeripheral] = [:]
     private var connectWaiters: [UUID: AvoOneShot<Void>] = [:]
     private var disconnectHandlers: [UUID: (Error?) -> Void] = [:]
+    private var links: [UUID: BleLink] = [:]
+
+    /// Links open right now (oldest first).
+    var currentLinks: [BleLink] { locked { links.values.sorted { $0.since < $1.since } } }
+
+    private func linksChanged() {
+        DispatchQueue.main.async { NotificationCenter.default.post(name: .avoBleLinksChanged, object: nil) }
+    }
+
+    /// Closes the link from the «Equipo conectado» window (the owner of the link sees a normal disconnection).
+    func disconnect(_ id: UUID) {
+        let p: CBPeripheral? = locked { known[id] }
+        if let p = p {
+            manager.cancelPeripheralConnection(p)
+        } else if let p = manager.retrievePeripherals(withIdentifiers: [id]).first {
+            manager.cancelPeripheralConnection(p)
+        }
+    }
 
     /// Sync critical section (NSLock must not be used directly from async functions).
     private func locked<T>(_ f: () throws -> T) rethrows -> T { lock.lock(); defer { lock.unlock() }; return try f() }
@@ -181,7 +211,10 @@ final class IosBleCentral: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         lock.lock()
         let w = connectWaiters.removeValue(forKey: peripheral.identifier)
+        links[peripheral.identifier] = BleLink(id: peripheral.identifier, name: peripheral.name ?? "Equipo AVO", since: Date())
+        known[peripheral.identifier] = peripheral
         lock.unlock()
+        linksChanged()
         w?.succeed(())
     }
 
@@ -197,7 +230,9 @@ final class IosBleCentral: NSObject, CBCentralManagerDelegate {
         lock.lock()
         let w = connectWaiters.removeValue(forKey: peripheral.identifier)
         let h = disconnectHandlers.removeValue(forKey: peripheral.identifier)
+        let had: Bool = links.removeValue(forKey: peripheral.identifier) != nil
         lock.unlock()
+        if had { linksChanged() }
         w?.fail(BleLinkError(IosBleTransport.isPairingLost(error) ? IosBleTransport.pairingLostText : "El reloj se desconectó"))
         h?(error)
     }

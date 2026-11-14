@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-14 — Botón «Equipo conectado» por Bluetooth
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Seguimiento de enlaces:** `IosBleCentral` lleva la lista de enlaces Bluetooth abiertos y avisa cuando uno se abre o se
+  cierra (`BleLink`, `.avoBleLinksChanged`). La app no inicia ningún escaneo ni pide permiso por esto.
+- **Botón en el menú lateral:** bajo Configuración aparece «Equipo conectado» solo mientras hay un equipo enlazado, con su
+  nombre y un punto verde. Abre la ventana de gestión.
+- **Ventana de gestión del hardware:**
+  - por cada equipo, su nombre, la hora de conexión y su identificador en el iPad, con un botón «Desconectar»;
+  - accesos a Reloj Wi-Fi y descargas, Geocercas y líneas, y Configuración;
+  - no muestra batería, GNSS ni firmware, porque el enlace actual no los informa: no se inventan.
+**Limitación:** el iPad solo abre el enlace mientras trabaja con el reloj (descarga, Wi-Fi, geocercas), así que el botón
+aparece durante esas operaciones.
+**No se ha tocado:** protocolos, firmware, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** con un reloj real.
+
 ## 2026-11-14 — AVO-SHELL-13 — Resumen: columnas del análisis del caballo a la misma altura
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):** en «Análisis del caballo», las tres columnas terminan a la misma altura: Zonas de velocidad, Esfuerzo
