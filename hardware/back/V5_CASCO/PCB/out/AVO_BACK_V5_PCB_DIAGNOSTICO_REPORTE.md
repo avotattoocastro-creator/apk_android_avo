@@ -1,22 +1,27 @@
-# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
+# AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de diagnóstico
 
-- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `c07bf3a3b3f08016b2c17de6ebff268dfbb90966` · ejecución de CI: 43613894546
-- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `a524b0745db1519fe38f73cfbcd4f7b8602605dd` · ejecución de CI: 43615383493
+- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
-- Componentes: 96 en total, 77 para montar, 0 sin montar (DNP: —), 19 a mano (pads de hilo y de prueba)
-- Pistas: 859 · vías: 186 · ruteado completo (0 conexiones incompletas)
+- Componentes: 104 en total, 85 para montar, 0 sin montar (DNP: —), 19 a mano (pads de hilo y de prueba)
+- Pistas: 901 · vías: 194 · ruteado INCOMPLETO (2 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | correcto | 0 |
+| DRC: errores | **FALLA** | 1 |
+| DRC: conexiones incompletas | **FALLA** | 2 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 1
+
+### Conexiones incompletas
+- Pad 33 [+3V3_ZED] of U1 on F.Cu ↔ Track [+3V3_ZED] on F.Cu, length 0.9999 mm
+- Pad 10 [VSYS] of U2 on F.Cu ↔ Pad 2 [VSYS] of R8 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 4
@@ -31,7 +36,7 @@
 - Modelos de la librería de KiCad 9.0.0 descargados: 13; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step, RF_GPS.3dshapes/ublox_ZED.step
 - ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.
 
-## Existencias en JLCPCB (consulta del CI: 2026-11-14 15:55 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-11-14 16:12 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C5120257 | ZED-F9P-04B | 1 | 895 | Extended | 76.2695 US$ |
@@ -40,39 +45,39 @@
 | C140288 | BQ24072RGTR | 1 | 1219 | Extended | 1.0488 US$ |
 | C485517 | TLV75733PDBVR | 1 | 20199 | Extended | 0.2078 US$ |
 | C140921 | DRV5032FADBZR | 1 | 61540 | Extended | 0.1707 US$ |
-| C7519 | USBLC6-2SC6 | 1 | 41434 | Extended | 0.1570 US$ |
-| C841192 | RT9080-33GJ5 | 1 | 27658 | Extended | 0.1197 US$ |
+| C7519 | USBLC6-2SC6 | 1 | 41437 | Extended | 0.1570 US$ |
+| C841192 | RT9080-33GJ5 | 1 | 27650 | Extended | 0.1197 US$ |
 | C20802 | SMD1206P150TF | 2 | 11303 | Extended | 0.1187 US$ |
-| C45783 | CL21A226MAQNNNE | 3 | 4136701 | Basic | 0.1084 US$ |
-| C15127 | AO3401A | 1 | 1526914 | Basic | 0.0814 US$ |
-| C16780 | CL21A476MQYNNNE | 2 | 1268170 | Basic | 0.0743 US$ |
+| C45783 | CL21A226MAQNNNE | 3 | 4136618 | Basic | 0.1084 US$ |
+| C15127 | AO3401A | 1 | 1526899 | Basic | 0.0814 US$ |
+| C16780 | CL21A476MQYNNNE | 2 | 1268143 | Basic | 0.0743 US$ |
 | C2827694 | PESD5V0S1BA | 2 | 330840 | Extended | 0.0359 US$ |
-| C96446 | CL10A106MA8NRNC | 5 | 6173323 | Basic | 0.0342 US$ |
+| C96446 | CL10A106MA8NRNC | 5 | 6173287 | Basic | 0.0342 US$ |
 | C77131 | NCP15XH103F03RC | 1 | 297586 | Extended | 0.0164 US$ |
-| C52923 | CL05A105KA5NQNC | 4 | 10250118 | Basic | 0.0057 US$ |
-| C15195 | CL05B103KB5NNNC | 1 | 6083074 | Basic | 0.0037 US$ |
+| C52923 | CL05A105KA5NQNC | 4 | 10290804 | Basic | 0.0057 US$ |
+| C15195 | CL05B103KB5NNNC | 1 | 6083083 | Basic | 0.0037 US$ |
 | C25867 | 0402WGF1501TCE | 1 | 1274558 | Basic | 0.0029 US$ |
-| C1525 | CL05B104KO5NNNC | 10 | 38184330 | Basic | 0.0024 US$ |
-| C4109 | 0402WGF2001TCE | 1 | 10026671 | Basic | 0.0019 US$ |
-| C11702 | 0402WGF1001TCE | 4 | 31458906 | Basic | 0.0013 US$ |
-| C26083 | 0402WGF1004TCE | 2 | 2332165 | Basic | 0.0012 US$ |
-| C17168 | 0402WGF0000TCE | 1 | 15625434 | Basic | 0.0012 US$ |
-| C25104 | 0402WGF3300TCE | 3 | 1490369 | Basic | 0.0011 US$ |
-| C25092 | 0402WGF220JTCE | 3 | 4784854 | Basic | 0.0010 US$ |
-| C25744 | 0402WGF1002TCE | 6 | 21086182 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 8 | 10404587 | Basic | 0.0009 US$ |
+| C1525 | CL05B104KO5NNNC | 14 | 38201076 | Basic | 0.0024 US$ |
+| C4109 | 0402WGF2001TCE | 1 | 10026753 | Basic | 0.0019 US$ |
+| C11702 | 0402WGF1001TCE | 4 | 31459197 | Basic | 0.0013 US$ |
+| C26083 | 0402WGF1004TCE | 2 | 2344650 | Basic | 0.0012 US$ |
+| C17168 | 0402WGF0000TCE | 1 | 15622663 | Basic | 0.0012 US$ |
+| C25104 | 0402WGF3300TCE | 3 | 1490329 | Basic | 0.0011 US$ |
+| C25092 | 0402WGF220JTCE | 3 | 4784819 | Basic | 0.0010 US$ |
+| C25744 | 0402WGF1002TCE | 6 | 21104418 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 8 | 10420493 | Basic | 0.0009 US$ |
 | C17958 | ? | 1 | sin respuesta | Extended | ? |
 | C97998 | ? | 1 | sin respuesta | Extended | ? |
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
 | C88373 | ? | 1 | sin respuesta | Extended | ? |
 | C25105 | ? | 1 | sin respuesta | Extended | ? |
-| C5378721 | ? | 4 | sin respuesta | Extended | ? |
+| C5378721 | ? | 8 | sin respuesta | Extended | ? |
 
 - Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **sí**
-- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)

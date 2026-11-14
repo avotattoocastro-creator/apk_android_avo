@@ -1,8 +1,12 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-14T16:08:42+0000 **
+** Created on 2026-11-14T16:28:49+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 5 DRC violations **
+** Found 6 DRC violations **
+[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2141 mm)
+    Rule: board setup constraints edge; error
+    @(125.5000 mm, 122.5000 mm): Segment on Edge.Cuts
+    @(125.0359 mm, 113.5750 mm): Via [LED_D4] on F.Cu - B.Cu
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(97.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
@@ -20,7 +24,15 @@
     @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
     @(104.3200 mm, 119.8700 mm): Segment of D3 on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 2 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(99.0000 mm, 100.6500 mm): Pad 33 [+3V3_ZED] of U1 on F.Cu
+    @(87.4600 mm, 111.8932 mm): Track [+3V3_ZED] on F.Cu, length 0.9999 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.4625 mm, 115.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+    @(98.0800 mm, 118.9100 mm): Pad 2 [VSYS] of R8 on F.Cu
 
 ** Found 0 Footprint errors **
 
