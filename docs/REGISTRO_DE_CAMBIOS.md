@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-23 — Comparar con encuadre manual y automático; Resumen con tarjetas a la misma altura
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Comparar · Encuadre** (boceto: «posibilidad de mover los entrenamientos para encuadrar y encuadre automático»):
+  - barra «Encuadre» sobre la velocidad comparada, con una fila por entrenamiento y botones −10 / −1 / +1 / +10 s (o
+    −100 / −10 / +10 / +100 m al alinear por distancia), más «Encuadre automático» y «Restablecer»;
+  - el encuadre automático hace coincidir el inicio del trabajo más rápido de cada entrenamiento. Desde la velocidad
+    máxima retrocede mientras la velocidad sigue por encima de la mitad de esa máxima;
+  - los desplazamientos solo afectan a la vista: mueven todas las gráficas comparadas. El tramo seleccionado y
+    «Guardar como tramo» los tienen en cuenta; las sesiones no se modifican;
+  - los desplazamientos se ponen a cero al cambiar los entrenamientos o el modo de alineación.
+- **Resumen:** «Motor AVO Equine Intelligence» y «Valoración del entrenador» con la misma altura.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-22 — Menú lateral reordenado, Calendario como botón y barra de Cuadra en una fila
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

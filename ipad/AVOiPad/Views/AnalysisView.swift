@@ -24,10 +24,12 @@ struct AnalysisView: View {
                         SummaryFold(title: "Parámetros clave") { KeyDataView(embedded: true) }
                         SummaryFold(title: "Análisis del caballo") { AnalysisHorseSection(summary: horse, wide: wide) }
                         if wide {
+                            // same height (trainer's sketch 14/11/2026: «misma altura»)
                             HStack(alignment: .top, spacing: 12) {
-                                AnalysisEngineCard().frame(maxWidth: .infinity)
-                                TrainingRatingCard().frame(width: 420)
+                                AnalysisEngineCard(fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
+                                TrainingRatingCard(fill: true).frame(width: 420).frame(maxHeight: .infinity)
                             }
+                            .fixedSize(horizontal: false, vertical: true)
                         } else {
                             AnalysisEngineCard()
                             TrainingRatingCard()
@@ -207,9 +209,10 @@ private struct AnalysisTiles: View {
 /// Summary of the AVO Equine Intelligence Engine result for the session.
 private struct AnalysisEngineCard: View {
     @Environment(AppModel.self) private var app
+    var fill: Bool = false
 
     var body: some View {
-        AvoCard(title: "Motor AVO Equine Intelligence", subtitle: app.engineInfo) {
+        AvoCard(title: "Motor AVO Equine Intelligence", subtitle: app.engineInfo, fill: fill) {
             if let s = app.selected {
                 ShellKeyValue(key: "Estado", value: s.engineState)
                 if let e = s.engine {

@@ -108,8 +108,9 @@ final class CompareModel {
     var alignment: AlignmentMode = .relativeTime {
         didSet {
             if oldValue != alignment {
-                // the aligned axis changes unit (s ↔ m): zoom and range no longer mean anything
+                // the aligned axis changes unit (s ↔ m): zoom, range and shifts no longer mean anything
                 clearViewState()
+                shifts = [:]
                 refresh()
             }
         }
@@ -150,6 +151,11 @@ final class CompareModel {
     @ObservationIgnored private var rawLateral: [CompareRawSeries] = []
     @ObservationIgnored private var rawTilt: [CompareRawSeries] = []
     @ObservationIgnored private var rawCadence: [CompareRawSeries] = []
+    /// Unshifted series of the last computation (speed, accel, lateral, tilt, cadence).
+    @ObservationIgnored private var base: [[CompareRawSeries]] = [[], [], [], [], []]
+    /// Shift of each compared training on the aligned axis (s or m; ≥ 0): «mover los entrenamientos para encuadrar»
+    /// (trainer's sketch 14/11/2026). Display only: the sessions are never modified.
+    var shifts: [String: Double] = [:]
 
     init(app: AppModel) {
         self.app = app
@@ -290,6 +296,7 @@ final class CompareModel {
             // another set of sessions: the old window / range belong to a different axis length
             comparedIds = ids
             clearViewState()
+            shifts = [:]
         }
         let inputs: [Input] = picked.map { (s: SessionItem) -> Input in
             Input(id: s.id, label: "\(s.horse) · \(s.rider)", summaryLabel: s.summary, color: s.compareColor, dateText: s.dateText,
@@ -317,11 +324,8 @@ final class CompareModel {
                 if model.request != req { return }
                 model.rows = out.rows
                 model.tracks = out.tracks
-                model.rawSpeed = out.speed
-                model.rawAccel = out.accel
-                model.rawLateral = out.lateral
-                model.rawTilt = out.tilt
-                model.rawCadence = out.cadence
+                model.base = [out.speed, out.accel, out.lateral, out.tilt, out.cadence]
+                model.applyShifts()
                 model.imuMissing = out.imuMissing
                 model.imuSources = out.imuSources
                 model.cadenceMissing = out.cadenceMissing
@@ -346,6 +350,72 @@ final class CompareModel {
         rangeRows = []
         rangeTracks = []
         rangeMessage = ""
+    }
+
+    // ------------------------------------------------------------------ shifting («encuadre»)
+    /// Session id of a series («<id>», «<id>.lat», «<id>.cad»…): ids may contain dots, so it is matched against the
+    /// compared sessions.
+    func sessionKey(_ seriesId: String) -> String {
+        comparedIds.first { seriesId == $0 || seriesId.hasPrefix($0 + ".") } ?? seriesId
+    }
+
+    private func shifted(_ list: [CompareRawSeries]) -> [CompareRawSeries] {
+        list.map { (r: CompareRawSeries) -> CompareRawSeries in
+            let d: Double = shifts[sessionKey(r.id)] ?? 0
+            if d == 0 { return r }
+            var c: CompareRawSeries = r
+            c.x = r.x.map { $0 + d }
+            return c
+        }
+    }
+
+    /// Rebuilds the drawn series from the unshifted ones with the current shifts.
+    func applyShifts() {
+        rawSpeed = shifted(base[0])
+        rawAccel = shifted(base[1])
+        rawLateral = shifted(base[2])
+        rawTilt = shifted(base[3])
+        rawCadence = shifted(base[4])
+    }
+
+    /// Keeps every shift ≥ 0 (the axis starts at 0) and redraws.
+    private func normalizeAndRedraw() {
+        let ids: [String] = base[0].map { sessionKey($0.id) }
+        let lo: Double = ids.map { shifts[$0] ?? 0 }.min() ?? 0
+        if lo != 0 { for k in ids { shifts[k] = (shifts[k] ?? 0) - lo } }
+        applyShifts()
+        updateFullRange()
+        rebuildVisible()
+        refreshRangeStats()
+    }
+
+    /// Moves one training along the axis by `delta` (s or m).
+    func nudge(_ id: String, _ delta: Double) {
+        shifts[id] = (shifts[id] ?? 0) + delta
+        normalizeAndRedraw()
+    }
+
+    func resetShifts() {
+        shifts = [:]
+        normalizeAndRedraw()
+    }
+
+    /// «Encuadre automático»: lines up the start of the fastest effort of every training (first point, going back from
+    /// the maximum speed, where the speed was still above half of that maximum).
+    func autoFrame() {
+        var onset: [String: Double] = [:]
+        for r in base[0] where r.x.count > 2 {
+            var iMax: Int = -1
+            var vMax: Double = -Double.infinity
+            for i in 0..<min(r.x.count, r.y.count) where r.y[i].isFinite && r.y[i] > vMax { vMax = r.y[i]; iMax = i }
+            if iMax < 0 || !(vMax > 0) { continue }
+            var i: Int = iMax
+            while i > 0 && (!r.y[i - 1].isFinite || r.y[i - 1] > vMax * 0.5) { i -= 1 }
+            onset[sessionKey(r.id)] = r.x[i]
+        }
+        guard let target = onset.values.max() else { return }
+        for (k, v) in onset { shifts[k] = target - v }
+        normalizeAndRedraw()
     }
 
     private func updateFullRange() {
@@ -521,7 +591,9 @@ final class CompareModel {
 
     /// Maps the aligned interval [a, b] to the session's own timeline times. Time alignment: same relative seconds from
     /// the first epoch; distance alignment: same distance from the start. nil when the session does not reach it.
-    func sessionInterval(_ tl: SessionTimeline, _ a: Double, _ b: Double) -> (t0: Double, t1: Double)? {
+    func sessionInterval(_ tl: SessionTimeline, _ a0: Double, _ b0: Double, shift: Double = 0) -> (t0: Double, t1: Double)? {
+        let a: Double = a0 - shift
+        let b: Double = b0 - shift
         let n: Int = tl.count
         if n < 2 || !(b > a) { return nil }
         if alignment == .relativeTime {
@@ -569,7 +641,7 @@ final class CompareModel {
         for s in comparedSessions {
             let tl: SessionTimeline = s.timeline
             let label: String = "\(s.dateTimeText) · \(s.horse)"
-            guard let iv = sessionInterval(tl, a, b) else {
+            guard let iv = sessionInterval(tl, a, b, shift: shifts[s.id] ?? 0) else {
                 rowsOut.append(CompareRangeRow(id: s.id, label: label, color: s.compareColor, t0: .nan, t1: .nan,
                                                distance: "—", duration: "—", meanSpeed: "—", maxSpeed: "—", maxAccel: "—",
                                                maxDecel: "—", observations: "El entrenamiento no llega a este tramo"))
@@ -609,7 +681,7 @@ final class CompareModel {
         var skipped: Int = 0
         var failed: [String] = []
         for s in comparedSessions {
-            guard let iv = sessionInterval(s.timeline, a, b), iv.t1 - iv.t0 > 0.5 else {
+            guard let iv = sessionInterval(s.timeline, a, b, shift: shifts[s.id] ?? 0), iv.t1 - iv.t0 > 0.5 else {
                 skipped += 1
                 continue
             }

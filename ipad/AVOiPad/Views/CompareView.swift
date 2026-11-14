@@ -84,7 +84,6 @@ private struct CompareSelectorList: View {
                 }
                 .pickerStyle(.segmented)
                 .frame(width: 200)
-                .onChange(of: model.alignment) { _, _ in model.refresh() }
             }
             Toggle(isOn: $m.hideEmpty) {
                 Text("Ocultar entrenamientos sin recorrido (0 km)").font(.caption).foregroundStyle(Avo.text)
@@ -122,6 +121,57 @@ private struct CompareSelectorList: View {
         .frame(width: 960)
         .frame(maxHeight: 560)
         .background(Avo.surface)
+    }
+}
+
+/// «Encuadre» of the compared trainings (trainer's sketch 14/11/2026: «posibilidad de mover los entrenamientos para
+/// encuadrar y encuadre automático»). Display only: the sessions are not modified.
+private struct CompareShiftBar: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    var body: some View {
+        let dist: Bool = model.alignment == .distance
+        let small: Double = dist ? 10 : 1
+        let big: Double = dist ? 100 : 10
+        let marked: [SessionItem] = CompareModel.byDateDescending(app.sessions.filter { s in model.speedSeries.contains { $0.id == s.id } })
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                Text("ENCUADRE").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Text("Mueve cada entrenamiento sobre el eje para superponer los trabajos").font(.caption).foregroundStyle(Avo.textDim)
+                Spacer()
+                Button { model.autoFrame() } label: { Label("Encuadre automático", systemImage: "wand.and.stars") }
+                    .buttonStyle(.avoPrimary)
+                    .accessibilityIdentifier("compare.autoFrame")
+                Button("Restablecer") { model.resetShifts() }
+                    .buttonStyle(.avoSecondary)
+                    .disabled(model.shifts.values.allSatisfy { $0 == 0 })
+            }
+            ForEach(marked) { (s: SessionItem) in
+                let sh: Double = model.shifts[s.id] ?? 0
+                HStack(spacing: 8) {
+                    RoundedRectangle(cornerRadius: 2).fill(s.compareColor).frame(width: 4, height: 22)
+                    Text("\(s.dateTimeText) · \(s.horse)").font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                    Spacer(minLength: 8)
+                    Text(dist ? "\(Int(sh.rounded())) m" : "+\(TimeText.clock(sh))").font(.callout.monospacedDigit()).foregroundStyle(Avo.silver)
+                        .frame(width: 90, alignment: .trailing)
+                    shiftButton("−\(Int(big))", s.id, -big)
+                    shiftButton("−\(Int(small))", s.id, -small)
+                    shiftButton("+\(Int(small))", s.id, small)
+                    shiftButton("+\(Int(big))", s.id, big)
+                    Text(dist ? "m" : "s").font(.caption).foregroundStyle(Avo.textDim)
+                }
+            }
+        }
+        .padding(12)
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
+    }
+
+    private func shiftButton(_ title: String, _ id: String, _ d: Double) -> some View {
+        Button(title) { model.nudge(id, d) }
+            .buttonStyle(.avoSecondary)
+            .font(.callout.monospacedDigit())
     }
 }
 
@@ -305,7 +355,8 @@ struct CompareResults: View {
             CompareMap(model: model)
                 .frame(maxWidth: .infinity)
                 .frame(height: mapHeight)
-            // 2) speed
+            // 2) speed · with «Encuadre» (move the trainings along the axis, or line them up automatically)
+            if model.speedSeries.count > 1 { CompareShiftBar(model: model) }
             FeatureChartPanel(title: "Velocidad comparada (km/h)", minHeight: 240) {
                 CompareChart(model: model, series: model.speedSeries, includeZero: true, emptyText: empty)
             }
