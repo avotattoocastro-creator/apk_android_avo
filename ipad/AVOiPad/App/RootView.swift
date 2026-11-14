@@ -602,7 +602,7 @@ private struct TrainingBar: View {
         VStack(spacing: 0) {
         HStack(spacing: 10) {
             if app.page == .map {
-                // «Mapa»: only the training picker (trainer's sketch); the other pages and «Asignar» are in «Análisis»
+                // «Mapa»: training picker and «Análisis tramo» (the pages of the training are in the row below)
                 RootSessionMenu(maxWidth: 820)
                 Spacer(minLength: 0)
                 // «Análisis tramo»: full-screen analysis of the stretch selected on the chart (trainer's sketch 08/11/2026)
@@ -633,8 +633,9 @@ private struct TrainingBar: View {
         .background(Avo.headerBrush)
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
         // pages of the training in their own row under the bar, all visible (trainer's sketch 08/11/2026);
-        // not on Mapa, Informes and Biomecánica (sidebar pages)
-        if app.page != .map && app.page != .reports && app.page != .biomech {
+        // not on Informes and Biomecánica (sidebar pages). «Mapa» is a tab of the training since 14/11/2026, so the row
+        // shows there too (sketch: «falta el menú que todos llevan en análisis»)
+        if app.page != .reports && app.page != .biomech {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }

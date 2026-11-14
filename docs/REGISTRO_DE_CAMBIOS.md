@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-17 — Mapa con la fila de pestañas del entrenamiento
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** la pestaña «Mapa» muestra la misma fila de pestañas que el resto de páginas del entrenamiento
+(Resumen, Mapa, Gráficas…). Antes la ocultaba, porque era la página de mapa a pantalla completa del menú lateral.
+Se mantiene «Análisis tramo» en la barra superior.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-16 — Equipo conectado: batería y módulos Chaleco · Espalda · Cincha
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**
