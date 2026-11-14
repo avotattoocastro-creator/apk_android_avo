@@ -148,6 +148,8 @@ struct AvoMetric: View {
         VStack(spacing: 5) {
             if let ic = icon ?? AvoMetric.autoIcon(label) {
                 Image(systemName: ic).font(.system(size: 22, weight: .ultraLight)).foregroundStyle(Avo.silver).frame(height: 26)
+            } else {
+                Color.clear.frame(height: 26)   // keeps the figure on the same line as its neighbours
             }
             HStack(alignment: .firstTextBaseline, spacing: 3) {
                 Text(value).font(.system(size: 24, weight: .regular)).foregroundStyle(accent)
@@ -162,7 +164,7 @@ struct AvoMetric: View {
         }
         .padding(.horizontal, 8).padding(.vertical, 12)
         // all boxes the same size (trainer 14/11/2026: «todos de la misma medida»)
-        .frame(maxWidth: .infinity, minHeight: 138)
+        .frame(maxWidth: .infinity, minHeight: 138, alignment: .top)   // icons and figures on the same lines
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1).padding(.horizontal, 10) }
         .overlay(alignment: .trailing) { Rectangle().fill(Avo.line).frame(width: 1).padding(.vertical, 12) }
     }

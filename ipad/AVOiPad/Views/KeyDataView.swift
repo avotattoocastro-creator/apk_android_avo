@@ -116,7 +116,9 @@ struct KeyDataView: View {
                 .multilineTextAlignment(.center).lineLimit(2)
         }
         .padding(.horizontal, 8).padding(.vertical, 14)
-        .frame(maxWidth: .infinity, minHeight: 150)
+        // top-aligned: icons and figures of a row stay on the same lines whatever the caption length
+        // (trainer's sketch 14/11/2026: «línea / línea»)
+        .frame(maxWidth: .infinity, minHeight: 150, alignment: .top)
         .overlay(alignment: .topTrailing) {
             if t.t0 != nil {
                 Image(systemName: "chart.xyaxis.line").font(.caption2).foregroundStyle(Avo.textDim).padding(8)

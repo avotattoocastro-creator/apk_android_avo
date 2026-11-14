@@ -24,6 +24,14 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-26 — Recuadros de cifras alineados por arriba
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows):** los recuadros de cifras (Datos clave / Parámetros clave, `AvoMetric` y `AvoMetricTile`) se
+alinean por arriba en lugar de centrarse, así que los iconos y las cifras de una fila quedan en la misma línea aunque el texto
+de debajo ocupe una o dos líneas (boceto «línea / línea»). En el iPad, un recuadro sin icono reserva su hueco.
+**No se ha tocado:** el motor, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-25 — Distancia de trabajo enlazada a gráficas y mapa de Comparar orientado
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia:**
