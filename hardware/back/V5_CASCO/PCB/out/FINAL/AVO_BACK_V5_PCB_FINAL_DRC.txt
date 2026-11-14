@@ -1,0 +1,27 @@
+** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
+** Created on 2026-11-14T16:05:43+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 5 DRC violations **
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(97.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(100.0000 mm, 121.1000 mm): PCB text 'D+' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.5400 mm, 121.1000 mm): PCB text 'GND' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
+    @(104.3200 mm, 119.8700 mm): Segment of D3 on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **
