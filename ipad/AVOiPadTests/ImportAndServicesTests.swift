@@ -453,6 +453,15 @@ final class ImportAndServicesTests: XCTestCase {
         let t3 = r1.timeOf(tp.gpsWeekMs) ?? .nan
         XCTAssertTrue(abs(r1.gnssAt(r1.speed, t3) - tp.speedMs) < 0.05, "Series del motor sincronizadas con el recorrido")
         XCTAssertTrue(abs(r1.cadenceAt(t3) - 1.45) < 0.05, "Cadencia de la cincha en el instante seleccionado")
+        // AVO Performance Equine 2.0 (F1b): the timeline adopts the engine speed / acceleration (same check as Windows)
+        let tl2 = SessionTimeline.build(s2)
+        let off2: Double = r1.itow0Ms.map { Double(SessionTimeline.weekDiffMs(tl2.itow0Ms, $0)) / 1000.0 } ?? 0
+        let adopted: Int = tl2.adoptEngineKinematics(engineT: r1.t, speed: r1.speed, speedSigma: r1.speedSigma, accel: r1.accel,
+                                                     accelSigma: r1.accelSigma, offsetS: off2)
+        XCTAssertTrue(adopted > tl2.count / 2 && tl2.kinematicsSource == "motor", "Velocidad del motor adoptada (\(adopted)/\(tl2.count))")
+        if let k3 = tl2.t.firstIndex(where: { $0 >= t3 - off2 }) {
+            XCTAssertLessThan(abs(tl2.speedFiltered[k3] - r1.gnssAt(r1.speed, t3)), 0.05, "La línea de tiempo muestra la misma velocidad que el motor")
+        }
         let r2 = try EquineAnalysis.parse(try EquineEngine.analyseJsonSync(s2.rawSegmentPaths, EquineEngine.options(series: true, cacheDir: cache)))
         XCTAssertEqual(r2.cache, "ACIERTO", "Reapertura sin recalcular")
         let r3 = try EquineAnalysis.parse(try await EquineEngine.analyseJson(s2.rawSegmentPaths, EquineEngine.options(series: true, cacheDir: cache, force: true)))

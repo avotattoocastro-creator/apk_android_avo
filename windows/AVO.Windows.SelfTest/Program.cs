@@ -174,6 +174,13 @@ try
         double t3 = r1.TimeOf(tp.GpsWeekMs) ?? double.NaN;
         Assert(Math.Abs(r1.GnssAt(r1.Speed, t3) - tp.SpeedMs) < 0.05, "Series del motor sincronizadas con el recorrido");
         Assert(Math.Abs(r1.CadenceAt(t3) - 1.45) < 0.05, "Cadencia de la cincha en el instante seleccionado");
+        // AVO Performance Equine 2.0 (F1b): the timeline adopts the engine speed / acceleration (single kinematic truth)
+        var tl2 = SessionTimeline.Build(s2);
+        double off2 = r1.Itow0Ms is long e02 ? SessionTimeline.WeekDiffMs(tl2.Itow0Ms, e02) / 1000.0 : 0;
+        int adopted = tl2.AdoptEngineKinematics(r1.T, r1.Speed, r1.SpeedSigma, r1.Accel, r1.AccelSigma, off2);
+        Assert(adopted > tl2.Count / 2 && tl2.KinematicsSource == "motor", $"Velocidad del motor adoptada por la línea de tiempo ({adopted}/{tl2.Count})");
+        int k3 = Array.FindIndex(tl2.T, x => x >= t3 - off2);
+        Assert(k3 >= 0 && Math.Abs(tl2.SpeedFiltered[k3] - r1.GnssAt(r1.Speed, t3)) < 0.05, "La línea de tiempo muestra la misma velocidad que el motor");
         var r2 = EquineAnalysis.Parse(EquineEngine.AnalyseJson(s2.RawSegmentPaths, EquineEngine.Options(true, cache)));
         Assert(r2.Cache == "ACIERTO", "Reapertura sin recalcular");
         var r3 = EquineAnalysis.Parse(EquineEngine.AnalyseJson(s2.RawSegmentPaths, EquineEngine.Options(true, cache, force: true)));

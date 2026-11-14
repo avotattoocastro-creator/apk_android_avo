@@ -24,6 +24,26 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-ENGINE-2.0-F1b — Aceleración del filtro y apps con la velocidad del motor
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia:**
+- **Motor:** la aceleración longitudinal (y su σ) sale del mismo filtro Kalman + RTS que la velocidad, en vez de la
+  pendiente local ±0,5 s sobre gSpeed. Afecta a los máximos de aceleración y frenada, a los eventos de aceleración y frenada
+  sostenida y a los cálculos de Trabajo en pista.
+  - Las pruebas de aceleración conocida (rampa de 2 m/s², sostenida de 1,0 / −1,5 m/s² y ningún falso evento con ruido)
+    siguen pasando.
+  - El modo anterior sigue disponible (`accel_from_smoother = false`).
+- **iPad y Windows:** la línea de tiempo adopta la velocidad y la aceleración del motor, con su σ, al recibir el análisis y
+  al recortar la ventana útil. Así barra, gráficas, Parámetros clave, Cuadra, Comparar e informes salen de la misma serie
+  que el motor.
+  - Se interpola solo entre muestras del motor separadas como mucho 0,5 s; fuera de ellas se mantiene el filtro de la app.
+  - No se adopta si el usuario ha cambiado la sacudida del filtro en Ajustes.
+  - Pruebas nuevas idénticas en iPad (XCTest) y Windows (autoprueba) con la sesión sintética de referencia.
+- **Android:** no tenía filtro propio; sus gráficas del motor ya reciben la serie suavizada.
+- Fixtures JSON del motor regenerados.
+**No se ha tocado:** protocolos, firmware, `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1521 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales.
+
 ## 2026-11-14 — AVO-SHELL-29 — GPS sin cabecera y marea con % de subida o bajada
 **Autor:** Claude · Rama `feature/avo-equine-2-0`
 **Qué cambia (iPad):**

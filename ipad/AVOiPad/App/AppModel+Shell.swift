@@ -579,6 +579,7 @@ extension AppModel {
                 try EquineAnalysis.parse(json)
             }.value
             item.engine = analysis
+            item.adoptEngineKinematics()   // 2.0: the engine speed / acceleration are the ones drawn and counted
             item.engineState = analysis.cache == "ACIERTO" ? "Resultado guardado reutilizado" : "Calculado"
             // AVO Training Analytics: small per-session summary next to the analysis (AppModel+Training.swift)
             await writeTrainingSummary(item, analysisJson: json)

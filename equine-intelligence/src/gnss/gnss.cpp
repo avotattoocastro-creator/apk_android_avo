@@ -83,6 +83,7 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   // ---- 2.0 (F1) single kinematic truth: Kalman + RTS smoothed speed; pieces restart at gaps and unusable epochs
   // (never bridged). `sv` = speed used by every figure below; the raw gSpeed stays in `sp` for the slopes.
   std::vector<double> sv(sp);
+  std::vector<double> kal_a(n, NaN), kal_sa(n, NaN);
   if (c.smooth_speed) {
     std::vector<double> z(n, NaN);
     std::vector<bool> brk(n, false);
@@ -97,6 +98,8 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
       sv[i] = sm.speed[i];
       r.speed[i] = sm.speed[i];
       r.speed_sigma[i] = sm.speed_sigma[i];
+      kal_a[i] = sm.accel[i];
+      kal_sa[i] = sm.accel_sigma[i];
     }
   }
   // local tangent plane (equirectangular around the first usable epoch: < 1 mm error over a few km)
@@ -116,7 +119,10 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   for (size_t i = 0; i < n; i++) {
     if (!ok[i]) continue;
     double a, sa;
-    if (local_slope(r.t, sp, sps, ok, i, c.deriv_half_window_s, &a, &sa)) { r.accel[i] = a; r.accel_sigma[i] = sa; }
+    if (c.smooth_speed && c.accel_from_smoother) {
+      // 2.0 (F1b): longitudinal acceleration = state of the same Kalman + RTS filter as the speed, with its σ
+      if (std::isfinite(kal_a[i])) { r.accel[i] = kal_a[i]; r.accel_sigma[i] = kal_sa[i]; }
+    } else if (local_slope(r.t, sp, sps, ok, i, c.deriv_half_window_s, &a, &sa)) { r.accel[i] = a; r.accel_sigma[i] = sa; }
     if (sp[i] >= c.min_speed_heading_ms) {
       double an, sn, ae, se;
       if (local_slope(r.t, vn, sps, ok, i, c.deriv_half_window_s, &an, &sn) && local_slope(r.t, ve, sps, ok, i, c.deriv_half_window_s, &ae, &se)) {
@@ -216,7 +222,8 @@ GnssResult analyse_gnss(const Session& s, const ValidationReport& v, const GnssC
   }
   if (!std::isnan(amax)) {
     Metric a1 = metric("aceleracion_maxima", "m/s2", amax, samax <= c.accel_good_sigma ? Quality::GOOD : Quality::USABLE,
-                       "pendiente por mínimos cuadrados ponderados (1/sAcc²) en ±0,5 s");
+                       c.smooth_speed && c.accel_from_smoother ? "estado de aceleración del filtro Kalman v-a + RTS (misma velocidad que el resto de cifras)"
+                                                               : "pendiente por mínimos cuadrados ponderados (1/sAcc²) en ±0,5 s");
     a1.uncertainty = samax; a1.warnings.push_back("cinemática del jinete (antena en el chaleco), no del centro de masas del caballo");
     r.metrics.push_back(a1);
     Metric a2 = metric("desaceleracion_maxima", "m/s2", amin, samin <= c.accel_good_sigma ? Quality::GOOD : Quality::USABLE, a1.algorithm.c_str());

@@ -23,3 +23,13 @@
 - **Banco** (`gnss2.*`, simulación): galope constante de 14 m/s con ruido σ 0,3 m/s.
   - RMS: 0,310 m/s con gSpeed y 0,081 m/s con la suavizada.
   - Velocidad máxima: 14,91 m/s con gSpeed (inflada por el ruido) y 14,22 m/s con el motor 2.0.
+
+### F1b
+- **Aceleración longitudinal:** es el estado del mismo filtro Kalman v-a + RTS, con su σ (`GnssConfig.accel_from_smoother`;
+  con `false` vuelve la pendiente ±0,5 s).
+- **Series:** el motor exporta `sigma_velocidad` y `sigma_aceleracion` del filtro.
+- **Apps:** iPad (`SessionTimeline.adoptEngineKinematics`) y Windows (`AdoptEngineKinematics`) adoptan la velocidad y la
+  aceleración del motor, interpoladas entre muestras del motor separadas como mucho 0,5 s.
+  - Solo lo hacen si el motor cubre más de la mitad de la línea de tiempo y la app usa la sacudida por defecto (1 m²/s⁵).
+  - Barra, gráficas, Datos clave, Cuadra e informes muestran así las mismas cifras que el motor.
+  - Android no tenía filtro propio: sus gráficas del motor reciben ya la serie suavizada.

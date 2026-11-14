@@ -14,6 +14,7 @@ struct GnssConfig {
   // (raw gSpeed), kept for comparison and for the regression tests of 1.x.
   bool smooth_speed = true;
   SpeedSmootherConfig smoother;
+  bool accel_from_smoother = true;    // 2.0 (F1b): acceleration and its σ from the same filter (false = local slope ±0.5 s)
   double deriv_half_window_s = 0.5;   // local linear fit of speed over ±0.5 s
   double min_speed_heading_ms = 2.0;  // below this, heading / curvature are not computed
   double straight_radius_m = 500.0;   // radius above this = straight line

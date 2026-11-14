@@ -40,8 +40,50 @@ final class SessionTimeline {
     var totalDistanceM: Double { distance.isEmpty ? 0 : distance[distance.count - 1] }
     var durationS: Double { t.count > 1 ? t[t.count - 1] - t[0] : 0 }
     private(set) var filterParameters: SpeedSmoother.Parameters = SpeedSmoother.Parameters()
+    /// Where speedFiltered / accelLong come from: "app" (own SpeedSmoother) or "motor" (AVO Performance Equine 2.0 series).
+    private(set) var kinematicsSource: String = "app"
 
     init() {}
+
+    /// AVO Performance Equine 2.0 (F1b): the engine is the single kinematic truth. Its smoothed speed and acceleration (with
+    /// their σ) replace the app filter wherever the engine has a sample within 0.5 s on both sides (engine time =
+    /// timeline time + offsetS); elsewhere the app values stay. Only adopted when the engine covers most of the timeline
+    /// and the app filter uses the engine default (jerk density 1 m²/s⁵), so a user-tuned filter is never overridden.
+    /// Same rule as Windows SessionTimeline.AdoptEngineKinematics and Android. Returns the number of samples replaced.
+    @discardableResult
+    func adoptEngineKinematics(engineT et: [Double], speed: [Double], speedSigma: [Double], accel: [Double], accelSigma: [Double],
+                               offsetS: Double) -> Int {
+        let n: Int = t.count
+        let m: Int = min(et.count, speed.count)
+        if n == 0 || m < 2 || abs(filterParameters.jerkDensity - 1.0) > 1e-9 { return 0 }
+        func at(_ a: [Double], _ j: Int) -> Double { j < a.count ? a[j] : .nan }
+        var v: [Double] = speedFiltered, sv: [Double] = speedFilteredSigma, a: [Double] = accelLong, sa: [Double] = accelLongSigma
+        var replaced: Int = 0
+        var j: Int = 0
+        for i in 0..<n {
+            let te: Double = t[i] + offsetS
+            while j + 1 < m && et[j + 1] <= te { j += 1 }
+            if j + 1 >= m || et[j] > te { continue }
+            let t0: Double = et[j], t1: Double = et[j + 1]
+            if !(t1 > t0) || t1 - t0 > 0.5 { continue }
+            let w: Double = (te - t0) / (t1 - t0)
+            func lerp(_ x: [Double]) -> Double {
+                let x0: Double = at(x, j), x1: Double = at(x, j + 1)
+                return x0.isFinite && x1.isFinite ? x0 + w * (x1 - x0) : .nan
+            }
+            let vi: Double = lerp(speed)
+            if !vi.isFinite { continue }
+            v[i] = max(0, vi)
+            let svi: Double = lerp(speedSigma); if svi.isFinite { sv[i] = svi }
+            let ai: Double = lerp(accel); if ai.isFinite { a[i] = ai }
+            let sai: Double = lerp(accelSigma); if sai.isFinite { sa[i] = sai }
+            replaced += 1
+        }
+        if replaced < n / 2 { return 0 }   // the engine does not describe this timeline: keep the app values
+        speedFiltered = v; speedFilteredSigma = sv; accelLong = a; accelLongSigma = sa
+        kinematicsSource = "motor"
+        return replaced
+    }
 
     static func weekDiffMs(_ itow: Int64, _ itow0: Int64) -> Int64 {
         var d: Int64 = itow - itow0
