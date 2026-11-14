@@ -328,13 +328,15 @@ R("R11", "10k", "EN", V3, block="ESP32-S3")
 C("C27", "1u", "EN", GND, block="ESP32-S3", note="EN: RC 10 k / 1 µF (guía de diseño de Espressif)")
 
 # ---------------------------------------------------------------------------------------- anillo de luz (4 LED laterales)
-# Petición del usuario (14/11/2026): anillo translúcido de resina en la unión base–tapa, iluminado desde dentro. 4 SK6812SIDE-A
-# en los cantos de la placa (cara F), con la lente hacia la pared, en cadena: arriba → derecha → abajo → izquierda.
+# Petición del usuario (14/11/2026): anillo translúcido de resina en la unión base–tapa, iluminado desde dentro. 8 SK6812SIDE-A
+# (2 por lado, ≈ 27 mm entre LED a lo largo del anillo) en los cantos de la placa (cara F), con la lente hacia la pared, en
+# cadena: arriba izq. → arriba der. → derecha arriba → derecha abajo → abajo der. → abajo izq. → izquierda abajo → izquierda arriba.
 # VDD = VSYS (la hoja pide 3,7–5,5 V: con la celda por debajo de ~3,6 V pueden fallar); DIN a 3,3 V (VIH = 0,65 VDD ≤ 2,73 V).
 R("R24", "33R", "LED_DIN_S3", "LED_D1", block="Anillo", note="serie de la línea de datos (GPIO47)")
-for i, ref in enumerate(("D10", "D11", "D12", "D13")):
+LEDS = ["D%d" % (10 + k) for k in range(8)]
+for i, ref in enumerate(LEDS):
     part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
-         {1: "LED_D%d" % (i + 1), 2: VSYS, 3: ("LED_D%d" % (i + 2)) if i < 3 else None, 4: GND},
+         {1: "LED_D%d" % (i + 1), 2: VSYS, 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},
          LC["SK6812SIDE"], "SK6812SIDE-A (OPSCO)", "Anillo",
          sym=dict(L=[(1, "DIN"), (2, "VDD")], R=[(3, "DOUT"), (4, "GND")]), note="RGB direccionable, emisión lateral")
     C("C%d" % (90 + i), "100n", VSYS, GND, block="Anillo")

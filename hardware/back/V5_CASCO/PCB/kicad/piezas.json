@@ -100,9 +100,9 @@
   "no_assembly": false,
   "note": "ESD en VBUS del pogo",
   "jlc_rot": 0,
-  "x": -7.43,
-  "y": -22.5,
-  "rot": 90
+  "x": -8.06,
+  "y": -21.82,
+  "rot": 0
  },
  {
   "ref": "D3",
@@ -145,9 +145,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 7.43,
-  "y": -24.53,
-  "rot": 0
+  "x": 8.06,
+  "y": -21.82,
+  "rot": 90
  },
  {
   "ref": "U6",
@@ -400,7 +400,7 @@
   "no_assembly": true,
   "note": "hilo + de la celda (≥ 2000 mAh): soldado, sin conector (más plano y sin holgura al galope)",
   "jlc_rot": 0,
-  "x": -15.0,
+  "x": -17.3,
   "y": -23.0,
   "rot": 0
  },
@@ -415,7 +415,7 @@
   "no_assembly": true,
   "note": "hilo − de la celda",
   "jlc_rot": 0,
-  "x": -12.2,
+  "x": -14.5,
   "y": -23.0,
   "rot": 0
  },
@@ -955,7 +955,7 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": -8.0,
+  "x": -12.0,
   "y": 23.75,
   "rot": 180
  },
@@ -970,7 +970,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -7.8,
+  "x": -11.8,
   "y": 22.36,
   "rot": 0
  },
@@ -985,9 +985,9 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 23.75,
-  "y": -13.0,
-  "rot": 90
+  "x": 12.0,
+  "y": 23.75,
+  "rot": 180
  },
  {
   "ref": "C91",
@@ -1000,9 +1000,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.37,
-  "y": -13.15,
-  "rot": 90
+  "x": 12.2,
+  "y": 22.36,
+  "rot": 0
  },
  {
   "ref": "D12",
@@ -1015,9 +1015,9 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": 14.0,
-  "y": -23.75,
-  "rot": 0
+  "x": 23.75,
+  "y": 12.0,
+  "rot": 90
  },
  {
   "ref": "C92",
@@ -1030,9 +1030,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 13.7,
-  "y": -22.35,
-  "rot": 0
+  "x": 22.37,
+  "y": 11.85,
+  "rot": 90
  },
  {
   "ref": "D13",
@@ -1045,9 +1045,9 @@
   "no_assembly": false,
   "note": "RGB direccionable, emisión lateral",
   "jlc_rot": 0,
-  "x": -23.75,
-  "y": -10.0,
-  "rot": 270
+  "x": 23.75,
+  "y": -12.0,
+  "rot": 90
  },
  {
   "ref": "C93",
@@ -1060,8 +1060,128 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
+  "x": 22.37,
+  "y": -12.15,
+  "rot": 90
+ },
+ {
+  "ref": "D14",
+  "value": "SK6812SIDE-A",
+  "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
+  "lcsc": "C5378721",
+  "mpn": "SK6812SIDE-A (OPSCO)",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "RGB direccionable, emisión lateral",
+  "jlc_rot": 0,
+  "x": 10.0,
+  "y": -23.75,
+  "rot": 0
+ },
+ {
+  "ref": "C94",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
+  "x": 9.7,
+  "y": -22.35,
+  "rot": 0
+ },
+ {
+  "ref": "D15",
+  "value": "SK6812SIDE-A",
+  "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
+  "lcsc": "C5378721",
+  "mpn": "SK6812SIDE-A (OPSCO)",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "RGB direccionable, emisión lateral",
+  "jlc_rot": 0,
+  "x": -10.0,
+  "y": -23.75,
+  "rot": 0
+ },
+ {
+  "ref": "C95",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
+  "x": -10.94,
+  "y": -22.22,
+  "rot": 0
+ },
+ {
+  "ref": "D16",
+  "value": "SK6812SIDE-A",
+  "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
+  "lcsc": "C5378721",
+  "mpn": "SK6812SIDE-A (OPSCO)",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "RGB direccionable, emisión lateral",
+  "jlc_rot": 0,
+  "x": -23.75,
+  "y": -12.0,
+  "rot": 270
+ },
+ {
+  "ref": "C96",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
   "x": -22.34,
-  "y": -9.55,
+  "y": -11.55,
+  "rot": 90
+ },
+ {
+  "ref": "D17",
+  "value": "SK6812SIDE-A",
+  "footprint": "AVO_SK6812SIDE-A_4.0x1.6mm",
+  "lcsc": "C5378721",
+  "mpn": "SK6812SIDE-A (OPSCO)",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "RGB direccionable, emisión lateral",
+  "jlc_rot": 0,
+  "x": -23.75,
+  "y": 12.0,
+  "rot": 270
+ },
+ {
+  "ref": "C97",
+  "value": "100n",
+  "footprint": "C_0402_1005Metric",
+  "lcsc": "C1525",
+  "mpn": "",
+  "block": "Anillo",
+  "dnp": false,
+  "no_assembly": false,
+  "note": "",
+  "jlc_rot": 0,
+  "x": -22.34,
+  "y": 12.45,
   "rot": 90
  },
  {

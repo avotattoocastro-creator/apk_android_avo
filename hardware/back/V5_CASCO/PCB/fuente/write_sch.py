@@ -13,7 +13,7 @@ BLOCKS = {   # name: (x0, y0, x1, y1, title)
     "3V3": (0, 0, 0, 0, "3,3 V PRINCIPAL (TLV75733P, 1 A)"),
     "ZED": (0, 0, 0, 0, "ZED-F9P SOLDADO: 3,3 V propio con EN (RT9080) · antena activa por VCC_RF · UART1 · UART2 · PPS · RESET"),
     "ESP32-S3": (0, 0, 0, 0, "ESP32-S3-MINI-1U-N8 (BLE móvil + ESP-NOW pecho/cinchas) · arranque"),
-    "Anillo": (0, 0, 0, 0, "ANILLO DE LUZ: 4 × SK6812SIDE-A de emisión lateral en los cantos (GPIO47, VSYS)"),
+    "Anillo": (0, 0, 0, 0, "ANILLO DE LUZ: 8 × SK6812SIDE-A (2 por lado) de emisión lateral en los cantos (GPIO47, VSYS)"),
     "Hall": (0, 0, 0, 0, "SENSOR HALL DRV5032 · encendido al poner la cápsula en la base del casco"),
     "microSD": (0, 0, 0, 0, "microSD (SDMMC 4 bits) · alimentación conmutada"),
     "Pruebas": (0, 0, 0, 0, "PUNTOS DE PRUEBA"),

@@ -11,8 +11,8 @@ Apilado (de abajo arriba):
   · 0,3 · techo 1,2.
 Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con junta tórica 2,5 × 1 bajo la cabeza;
   insertos M2,5 (Ø3,5 × 4) en los postes de la tapa; la PCB queda pinzada entre las columnas de la base y los postes.
-  Anillo de resina translúcida (dos mitades pegadas) entre base y tapa (z 9,6–15,3), iluminado por 4 LED laterales de
-  la PCB. SIN juntas TPU (decisión del usuario): las 2 uniones del anillo y sus 2 cortes se sellan con pegamento.
+  Anillo de resina translúcida de UNA pieza, 3,0 mm de alto, centrado en la luz de los 8 LED laterales de la PCB
+  (z 10,4–13,4). SIN juntas TPU: las 2 uniones del anillo se sellan con pegamento (tipo B-7000/T-7000).
 Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
 Base del casco: anillo de PETG con 4 imanes Ø6 × 2 (frente a los 4 de la cápsula), imán Ø8 × 3 del Hall y alojamiento
   con paredes a 45° de 1,2 mm de alto (se suelta con un golpe lateral); cara inferior cóncava R = 110 (ajustable).
@@ -40,8 +40,11 @@ BAT = dict(x=50.0, y=37.0, t=8.5)          # (E) celda 1S ≥ 2000 mAh: envolven
 Z_BAT0 = FLOOR
 Z_F = Z_BAT0 + BAT["t"] + 0.4 + MEC["altura_max_cara_F"]   # cara F de la PCB (hacia abajo)
 Z_PCB_TOP = Z_F + PCB["t"]                 # cara B (masa) = junta anillo/tapa
-Z_RING0 = Z_F - 3.3                        # unión base/anillo (pegada): el anillo cubre de 9,6 a 15,3 (LED laterales a z ≈ 11,9)
-Z_RING1 = Z_PCB_TOP + 0.8                  # unión anillo/tapa (pegada). Sin juntas TPU: su altura pasa al anillo
+Z_LED = Z_F - 1.0                          # centro de la luz de los SK6812SIDE-A (2,0 de alto, colgando de la cara F)
+RING_H = 3.0                               # anillo de luz de 3,0 mm centrado en los LED (petición del usuario: más bajo)
+Z_RING0 = Z_LED - RING_H / 2               # unión base/anillo (pegada)
+Z_RING1 = Z_LED + RING_H / 2               # unión anillo/tapa (pegada); la tapa baja por fuera del canto de la PCB
+GLUE = 0.05                                # holgura para el pegamento en cada unión
 ANT = dict(side=25.0, h=8.1)               # (E) Taoglas AHP2258
 Z_CEIL = Z_PCB_TOP + ANT["h"] + 0.3
 TOP_T = 1.2
@@ -111,11 +114,9 @@ def base():
 
 
 # ---------------------------------------------------------------- anillo de luz (resina translúcida, dos mitades pegadas)
-def ring_halves():
-    r = shell_ring(0.0, WALL, Z_RING1 - Z_RING0, Z_RING0)
-    a = r.intersect(box(-50, 0, -10, 100, 200, 100))      # mitad −X
-    b = r.intersect(box(50, 0, -10, 100, 200, 100))       # mitad +X
-    return a, b
+def ring():
+    """Una sola pieza (petición del usuario); 0,05 más baja por cada lado para el pegamento."""
+    return shell_ring(0.0, WALL, RING_H - 2 * GLUE, Z_RING0 + GLUE)
 
 
 # ---------------------------------------------------------------- tapa
@@ -201,9 +202,7 @@ def refs():
 
 
 def main():
-    ra, rb = ring_halves()
-    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_anillo_resina_A": ra,
-             "AVO_CASCO_V5_anillo_resina_B": rb}
+    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_anillo_resina": ring()}
     hb, kind = helmet_base_safe()
     parts["AVO_CASCO_V5_base_casco"] = hb
     rf = refs()
