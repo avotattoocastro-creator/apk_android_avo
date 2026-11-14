@@ -1,7 +1,7 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV A (ESP32-S3 + ZED-F9P soldado) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `a6127557a3e530b2eb154aef17b18479b7b85c9a` · ejecución de CI: 43613610650
+- Commit: `c07bf3a3b3f08016b2c17de6ebff268dfbb90966` · ejecución de CI: 43613894546
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 96 en total, 77 para montar, 0 sin montar (DNP: —), 19 a mano (pads de hilo y de prueba)
@@ -23,7 +23,7 @@
 - silk_overlap: 1
 
 ## Lista de materiales y posiciones
-- Piezas montadas sin número LCSC: R24
+- Piezas montadas sin número LCSC: ninguna
 - Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
 - Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
 
@@ -65,10 +65,10 @@
 | C97998 | ? | 1 | sin respuesta | Extended | ? |
 | C10662 | ? | 1 | sin respuesta | Extended | ? |
 | C88373 | ? | 1 | sin respuesta | Extended | ? |
-|  | ? | 1 | sin respuesta | Extended | ? |
+| C25105 | ? | 1 | sin respuesta | Extended | ? |
 | C5378721 | ? | 4 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, , C5378721
+- Piezas sin existencias para 5 placas: C17958, C97998, C10662, C88373, C25105, C5378721
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**
