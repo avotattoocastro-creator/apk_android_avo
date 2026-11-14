@@ -53,7 +53,7 @@ private struct TrackWorkContent: View {
 
     var body: some View {
         let model: TrackWorkModel = app.trackWork
-        TrackWorkHeaderCard(tw: tw, item: item)
+        // the profile / phase-basis card is gone (trainer's sketch 14/11/2026)
         TrackWorkStructureCard(tw: tw, offset: item.engineOffsetS)
         TrackWorkSummaryTiles(tw: tw)
         TrackWorkEffortsTable(tw: tw, offset: item.engineOffsetS)
@@ -199,11 +199,13 @@ private struct TrackWorkStructureCard: View {
                 }
                 .frame(height: 90)
             }
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 230), spacing: 10)], spacing: 10) {
-                phaseBox("Calentamiento", CorrectionsModel.warmupColor, tw.warmup)
-                phaseBox("Trabajo", CorrectionsModel.workColor, tw.work)
-                phaseBox("Vuelta a la calma", CorrectionsModel.cooldownColor, tw.cooldown)
+            // the three phase boxes with the same size, centred (trainer's sketch 14/11/2026: «todos iguales de medida y centrados»)
+            HStack(alignment: .top, spacing: 10) {
+                phaseBox("Calentamiento", CorrectionsModel.warmupColor, tw.warmup).frame(maxWidth: .infinity, maxHeight: .infinity)
+                phaseBox("Trabajo", CorrectionsModel.workColor, tw.work).frame(maxWidth: .infinity, maxHeight: .infinity)
+                phaseBox("Vuelta a la calma", CorrectionsModel.cooldownColor, tw.cooldown).frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
 
@@ -225,20 +227,22 @@ private struct TrackWorkStructureCard: View {
     }
 
     private func phaseBox(_ name: String, _ color: Color, _ p: TrackWorkPhase) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .center, spacing: 6) {
             HStack(spacing: 6) {
                 RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 10, height: 10)
-                Text(name).font(.footnote.weight(.semibold)).foregroundStyle(Avo.text)
-                Spacer(minLength: 4)
-                Text(p.present ? TrackWorkText.clock(p.durationS) : "Sin datos").font(.footnote.monospacedDigit()).foregroundStyle(Avo.text)
+                Text(name.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.silver)
             }
+            Text(p.present ? TrackWorkText.clock(p.durationS) : "Sin datos").font(.title2.monospacedDigit()).foregroundStyle(Avo.text)
             if p.present {
-                Text("\(TrackWorkText.metres(p.distanceM)) · paso \(TrackWorkText.minutes(p.walkS)) · trote \(TrackWorkText.minutes(p.trotS)) · galope \(TrackWorkText.minutes(p.canterS))"
+                Text(TrackWorkText.metres(p.distanceM)).font(.callout.monospacedDigit()).foregroundStyle(Avo.text)
+                Text("paso \(TrackWorkText.minutes(p.walkS)) · trote \(TrackWorkText.minutes(p.trotS)) · galope \(TrackWorkText.minutes(p.canterS))"
                      + (p.stoppedS > 0 ? " · parado \(TrackWorkText.minutes(p.stoppedS))" : ""))
-                    .font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+                    .font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim).multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .padding(10)
+        .padding(12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 8))
     }
 }

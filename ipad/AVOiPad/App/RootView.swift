@@ -42,18 +42,18 @@ struct RootView: View {
     ]
     /// Pages of ONE training, in the training bar at the top of «Análisis».
     static let trainingTabs: [RootNavEntry] = [
-        // trainer's sketches 14/11/2026: «Resumen» first, «Mapa» in the place of «Análisis» (hidden for now)
+        // trainer's sketches 14/11/2026: «Resumen» first, «Mapa» in the place of «Análisis» (hidden for now);
+        // «Datos clave» inside Resumen; «Comparar» after «Trabajo en pista»; «Tramos» hidden for now (the stretch
+        // analysis is in «Análisis tramo»); «Asistente IA» last
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
         RootNavEntry(page: .map, title: "Mapa", icon: "map"),
-        // «Datos clave» hidden: its figures are in «Resumen» → «Parámetros clave» (trainer's sketch 14/11/2026)
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
-        RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
-        RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
-        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .compare, title: "Comparar", icon: "square.split.2x1"),
+        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .tides, title: "Mareas", icon: "water.waves"),
         RootNavEntry(page: .engine, title: "Motor", icon: "cpu"),
+        RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
     ]
 
     static var trainingTypes: [UTType] {
@@ -615,8 +615,9 @@ private struct TrainingBar: View {
                 .disabled(!app.hasRange || app.selected == nil)
                 .accessibilityIdentifier("map.stretchAnalysis")
             } else {
-            // like «Mapa» (trainer's sketch 14/11/2026): only the training with its data; no «Entreno 2» here
-            RootSessionMenu(maxWidth: 900)
+            // like «Mapa» (trainer's sketch 14/11/2026): only the training with its data; no «Entreno 2» here.
+            // On «Comparar» the bar holds the selector of the trainings to compare (sketch 14/11/2026)
+            if app.page == .compare { CompareSelector() } else { RootSessionMenu(maxWidth: 900) }
             Spacer(minLength: 0)
             Button {
                 app.stable.openAssign(app.selected)

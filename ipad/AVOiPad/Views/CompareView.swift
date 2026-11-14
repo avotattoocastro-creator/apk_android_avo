@@ -15,40 +15,113 @@ struct CompareView: View {
 
     var body: some View {
         let model: CompareModel = app.compare
-        VStack(alignment: .leading, spacing: 12) {
-            AvoPageTitle(title: "Comparar entrenamientos",
-                         subtitle: "Series alineadas por tiempo relativo o distancia; sin interpolar a través de huecos sin datos")
-            if hSize == .compact {
-                VStack(alignment: .leading, spacing: 10) {
-                    CompareChartToolbar(model: model)
-                    if model.hasRange { CompareRangeCard(model: model) }
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 12) {
-                            CompareSessionPicker(model: model)
-                            CompareResults(model: model)
-                        }
-                    }
-                    // while «Seleccionar rango» is on, a drag on a chart must select, never scroll
-                    .scrollDisabled(model.rangeMode)
-                }
-            } else {
-                HStack(alignment: .top, spacing: 12) {
-                    ScrollView { CompareSessionPicker(model: model) }
-                        .frame(width: 300)
-                    VStack(alignment: .leading, spacing: 10) {
-                        CompareChartToolbar(model: model)
-                        if model.hasRange { CompareRangeCard(model: model) }
-                        ScrollView { CompareResults(model: model).padding(.bottom, 24) }
-                            .scrollDisabled(model.rangeMode)
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
+        // trainer's sketch 14/11/2026: no title, no left panel and no zoom row; the trainings to compare are chosen in the
+        // top bar (CompareSelector) and the routes and charts use the whole width of the page
+        VStack(alignment: .leading, spacing: 10) {
+            if model.hasRange { CompareRangeCard(model: model) }
+            ScrollView { CompareResults(model: model).padding(.bottom, 24) }
+                .scrollDisabled(model.rangeMode)
         }
         .padding(16)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Avo.bg)
         .onAppear { model.pageShown() }
+    }
+}
+
+/// Top-bar selector of the trainings to compare (trainer's sketch 14/11/2026): wide popover, one line per training with
+/// its check box and colour, plus the alignment of the series. Every change refreshes the comparison.
+struct CompareSelector: View {
+    @Environment(AppModel.self) private var app
+    @State private var open: Bool = false
+
+    var body: some View {
+        let model: CompareModel = app.compare
+        let marked: [SessionItem] = app.sessionsView.filter { $0.isCompared }
+        Button { open = true } label: {
+            HStack(spacing: 8) {
+                Image(systemName: "square.split.2x1").foregroundStyle(Avo.red)
+                Text("Comparar").fontWeight(.semibold).foregroundStyle(Avo.text)
+                ForEach(Array(marked.prefix(5))) { (s: SessionItem) in
+                    HStack(spacing: 4) {
+                        RoundedRectangle(cornerRadius: 1.5).fill(s.compareColor).frame(width: 4, height: 16)
+                        Text("\(s.dateTimeText) · \(s.horse)").foregroundStyle(Avo.silver).lineLimit(1)
+                    }
+                }
+                if marked.isEmpty { Text("elige entrenamientos").foregroundStyle(Avo.textDim) }
+                Image(systemName: "chevron.down").font(.caption).foregroundStyle(Avo.textDim)
+            }
+            .font(.callout)
+            .lineLimit(1)
+            .padding(.horizontal, 12).padding(.vertical, 8)
+            .frame(maxWidth: 1000, alignment: .leading)
+            .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
+            .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("compare.selector")
+        .popover(isPresented: $open, arrowEdge: .top) {
+            CompareSelectorList(model: model).environment(app).avoColorScheme()
+        }
+    }
+}
+
+private struct CompareSelectorList: View {
+    @Environment(AppModel.self) private var app
+    var model: CompareModel
+
+    var body: some View {
+        @Bindable var m = model
+        let list: [SessionItem] = model.listed(app.sessionsView)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 14) {
+                Text("ENTRENAMIENTOS A COMPARAR").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Spacer()
+                Text("Alinear por").font(.caption).foregroundStyle(Avo.textDim)
+                Picker("Alinear series por", selection: $m.alignment) {
+                    Text("Tiempo").tag(AlignmentMode.relativeTime)
+                    Text("Distancia").tag(AlignmentMode.distance)
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 200)
+                .onChange(of: model.alignment) { _, _ in model.refresh() }
+            }
+            Toggle(isOn: $m.hideEmpty) {
+                Text("Ocultar entrenamientos sin recorrido (0 km)").font(.caption).foregroundStyle(Avo.text)
+            }
+            .tint(Avo.red)
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(list) { (s: SessionItem) in
+                        Button { model.toggle(s) } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: s.isCompared ? "checkmark.square.fill" : "square")
+                                    .foregroundStyle(s.isCompared ? Avo.red : Avo.textDim)
+                                RoundedRectangle(cornerRadius: 2).fill(s.compareColor).frame(width: 4, height: 22)
+                                Text(s.dateTimeText).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 150, alignment: .leading)
+                                Text(s.horse).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).frame(width: 200, alignment: .leading)
+                                Text(s.rider).font(.callout).foregroundStyle(Avo.silver).frame(width: 170, alignment: .leading)
+                                Text(s.discipline).font(.callout).foregroundStyle(Avo.silver).frame(width: 90, alignment: .leading)
+                                Text(s.maxSpeedText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 100, alignment: .leading)
+                                Text(s.durationText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 80, alignment: .leading)
+                                Text(s.distanceText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 90, alignment: .leading)
+                            }
+                            .lineLimit(1)
+                            .padding(.vertical, 9)
+                            .background(s.isCompared ? Avo.redSoft : Color.clear)
+                            .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("compare.session.\(s.id)")
+                    }
+                }
+            }
+        }
+        .padding(14)
+        .frame(width: 960)
+        .frame(maxHeight: 560)
+        .background(Avo.surface)
     }
 }
 

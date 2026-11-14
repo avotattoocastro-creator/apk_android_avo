@@ -24,6 +24,32 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-21 — Comparar a todo el ancho, nuevo orden de pestañas y páginas sin cabecera
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):**
+- **Comparar:**
+  - sin título y sin panel izquierdo;
+  - sin la fila de zoom y rango;
+  - los entrenamientos a comparar se eligen en la barra superior (`CompareSelector`): lista ancha, una línea por
+    entrenamiento con casilla y color, «Alinear por Tiempo / Distancia» y «Ocultar sin recorrido»; cada cambio actualiza
+    la comparación;
+  - el mapa superpuesto y las gráficas ocupan todo el ancho.
+- **Pestañas:**
+  - nuevo orden: Resumen, Mapa, Gráficas, Trabajo en pista, Comparar, GPS, Mareas, Motor, Asistente IA (Comparar pasa
+    detrás de Trabajo en pista y el Asistente al final);
+  - «Tramos» se oculta de momento: el análisis de tramos está en «Análisis tramo».
+- **Asistente IA:** sin la cabecera del entrenamiento ni la barra «Archivo completo / Inicio = cursor…».
+- **Trabajo en pista:**
+  - sin la tarjeta de perfil de raza y base de las fases;
+  - Calentamiento, Trabajo y Vuelta a la calma con la misma medida y el contenido centrado.
+- **Biomecánica:**
+  - sin la cabecera del entrenamiento;
+  - sin la fila de lupas / Ver ±2 s / Guardar como tramo / Quitar selección;
+  - sin la fila «VER Completo / Calentamiento / Trabajo / Enfriamiento»;
+  - se mantiene la barra de vista general.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-20 — Motor legible para el entrenador y Mareas más limpia
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

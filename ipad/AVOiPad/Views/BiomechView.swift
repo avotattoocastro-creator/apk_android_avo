@@ -10,7 +10,6 @@ struct BiomechView: View {
         let model: BiomechModel = app.biomech
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                FeatureSessionHeader()
                 Text(model.status)
                     .font(.footnote).foregroundStyle(Avo.text)
                     .padding(.horizontal, 12).padding(.vertical, 8)
@@ -167,8 +166,8 @@ private struct BiomechWindowCharts: View {
         let bands: [SyncBand] = app.corrections.bands(app.selected)
         let key: String = "\(d.lowerBound)|\(d.upperBound)|\(model.windowSignal.rawValue)|\(model.windowSensor)|\(app.selected?.id ?? "")|\(app.selected?.engine == nil)"
         VStack(alignment: .leading, spacing: 12) {
-            SyncZoomBar(charts: charts)
-            ChartsNavigator(charts: charts)
+            // trainer's sketch 14/11/2026: no zoom / tramo buttons and no «VER» phase row; the overview bar stays
+            ChartsOverviewBar(charts: charts).frame(height: 34)
             SyncChartBox(title: title, legend: model.legendMain, chartId: "bio.main.\(model.windowSignal.rawValue)") {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
