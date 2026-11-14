@@ -24,6 +24,30 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — Espalda V5 CASCO: PCB REV A (un ESP32-S3), puerta de fabricación superada
+**Autor:** Claude · Rama `feature/back-v5-casco`
+**Qué cambia:**
+- `hardware/back/V5_CASCO/PCB/`: cadena de la V4 adaptada (generador, colocación, Freerouting en el CI y reparación).
+- Workflow **nuevo** `.github/workflows/build-back-v5-pcb.yml`: copia del de la V4 que solo se ejecuta en esta rama; no toca firmas ni TestFlight.
+- **Placa:** 51 × 51, 4 capas, 1,6 mm.
+  - Componentes en la cara F; B.Cu es la masa maciza de la antena GNSS.
+  - ESP32-S3 + ZED-F9P soldado + antena activa por VCC_RF.
+  - Pogo USB de 5 contactos, BQ24072, Hall y microSD.
+- Correcciones de una revisión independiente del esquema:
+  - ESD en la entrada de RF;
+  - 22 Ω en 1206 en la alimentación de la antena (aguanta un corto del coaxial);
+  - 0 Ω en RF_IN;
+  - 1 µF en VCC del ZED;
+  - nota de ILIM corregida.
+
+**Por qué:** petición del usuario («Dale ya a la pcb con 51x51», «Sigue con un solo esp32»).
+**Validación:**
+- CI run 43597476741: DRC 0, 0 conexiones incompletas, paridad 0 y ERC 0/0. Puerta superada; ficheros en `out/FINAL/`.
+- Ruteado: Freerouting 1.9.0 + 1 conexión de VSYS reparada con `repair.py`.
+- **NO fabricada ni verificada en hardware.**
+
+---
+
 ## 2026-11-14 — Espalda V5 CASCO: dos ESP32 (decisión del usuario)
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:** `ARQUITECTURA.md` pasa a dos chips (solo documentación):

@@ -32,7 +32,11 @@ Medidas y pesos **estimados (E)**; ninguno está medido.
 | Encendido | puente SYS–BAT en el soporte | **sensor Hall (DRV5032) + imán en la base del casco**: se enciende al ponerla. También al conectar el cable (VBUS) |
 | Datos con el PC | USB-C del taller | **USB nativo del ESP32-S3 (GPIO19/20) por el pogo**, con ESD USBLC6-2SC6. Sirve para la carga, la descarga de sesiones y la programación |
 
-## Decisión del usuario (14/11/2026, 13:29): dos ESP32 con funciones separadas
+## Decisión final del usuario (14/11/2026, 13:40): UN SOLO ESP32-S3
+Hace BLE con el móvil y ESP-NOW con el pecho y las cinchas a la vez, igual que ya hace el pecho, que en la prueba del 02/11 pasó 1,1 MB de RTCM sin ningún CRC erróneo. Autonomía de unos 8 h con 2000 mAh.
+**La PCB REV A está hecha así:** `hardware/back/V5_CASCO/PCB/`. La propuesta de dos chips que sigue queda **descartada**; se guarda como referencia.
+
+## (Descartada) Propuesta de 13:29: dos ESP32 con funciones separadas
 Esta decisión sustituye a la de un solo ESP32-S3 que se tomó para la V4.
 
 | Chip | Función | Por qué este chip |
