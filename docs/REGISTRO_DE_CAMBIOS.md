@@ -117,6 +117,23 @@ Plan completo: proyecto, `claude/AVO_PERFORMANCE_EQUINE_2_0_PLAN.md`.
 **NO VERIFICADO** con sesiones reales: es el paso F5.
 **Siguiente (F1b):** las apps dejan de filtrar por su cuenta y dibujan la serie `velocidad` del motor; aceleración también
 desde el filtro, con su σ.
+## 2026-11-15 — iPad: el Wi-Fi del reloj fallaba siempre en TestFlight («error interno de iOS»)
+**Autor:** Claude · Rama `fix/ipad-wifi-hotspot-entitlement` (desde `develop/avo-performance-horse`)
+**Síntoma:** en la página «Reloj Wi-Fi» del iPad (build 123), `NEHotspotConfigurationManager.apply` devolvía `.internal` en los 3 intentos y la descarga pasaba a Bluetooth.
+**Causa:**
+- `build-avo-ipad.yml` archivaba la app **sin firmar** (`CODE_SIGNING_ALLOWED=NO`), así que el entitlement `com.apple.developer.networking.HotspotConfiguration` de `AVOiPad.entitlements` no llegaba al binario.
+- La exportación vuelve a firmar con lo que encuentra en el archivo, de modo que la app de TestFlight salía sin el entitlement.
+- Sin ese entitlement, iOS responde con el error interno.
+
+**Cambio (workflow, avisado al usuario):**
+- el archivo se firma **ad hoc** (`CODE_SIGN_IDENTITY=-`, sin certificado: no se acumula nada en la cuenta), solo para incrustar los entitlements;
+- la exportación sigue usando la firma de distribución gestionada en la nube;
+- un paso nuevo comprueba con `codesign` que el archivo lleva HotspotConfiguration y para el job si no.
+
+**Sin cambios:** número de build, `Info.plist`, `ExportOptions` ni firma de distribución.
+**Validación:** pendiente del CI de macOS y de probarlo en el iPad con la nueva build de TestFlight.
+
+---
 
 ## 2026-11-14 — AVO-SHELL-28 — Cifras que coinciden: velocidad máxima y distancia de trabajo
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)

@@ -212,11 +212,21 @@ jobs:
           set -o pipefail
           xcodebuild archive -project AVOiPad.xcodeproj -scheme AVOiPad -configuration Release \
             -destination 'generic/platform=iOS' -archivePath ../build/AVOiPad.xcarchive \
-            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" 2>&1 | tail -40
-          # The archive is NOT signed here: an ephemeral runner has no private key, so automatic signing would create a new
-          # «Apple Development» certificate on every run until the account limit is reached. The export below signs it with
-          # the cloud-managed «Apple Distribution» certificate of App Store Connect (no local key, nothing accumulates).
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY="-" PROVISIONING_PROFILE_SPECIFIER="" \
+            CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=YES AD_HOC_CODE_SIGNING_ALLOWED=YES 2>&1 | tail -40
+          # The archive is signed AD HOC («-», no certificate, nothing accumulates in the account) only so that the
+          # entitlements of AVOiPad.entitlements (HotspotConfiguration) are embedded in the app: the export re-signs with
+          # the cloud-managed «Apple Distribution» certificate and keeps the entitlements it finds in the archive.
+          # Before 15/11/2026 the archive was unsigned (CODE_SIGNING_ALLOWED=NO): the TestFlight app had NO
+          # HotspotConfiguration entitlement and NEHotspotConfigurationManager.apply always failed with «internal error».
           test -d ../build/AVOiPad.xcarchive
+          APP=$(ls -d ../build/AVOiPad.xcarchive/Products/Applications/*.app | head -1)
+          codesign -d --entitlements - --xml "$APP" 2>/dev/null > ../build/entitlements.xml || codesign -d --entitlements :- "$APP" > ../build/entitlements.xml
+          cat ../build/entitlements.xml; echo
+          if ! grep -q "com.apple.developer.networking.HotspotConfiguration" ../build/entitlements.xml; then
+            echo "::error title=Entitlements::el archivo no lleva com.apple.developer.networking.HotspotConfiguration (descarga Wi-Fi del reloj)"
+            exit 1
+          fi
       - name: Upload to TestFlight
         if: steps.check.outputs.ok == 'true'
         run: |
@@ -236,4 +246,7 @@ jobs:
             -exportPath build/export -allowProvisioningUpdates \
             -authenticationKeyPath ~/private_keys/AuthKey_${ASC_KEY_ID}.p8 \
             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" 2>&1 | tail -40
+          # the App ID must have the «Hotspot» capability: automatic signing with -allowProvisioningUpdates enables it; the
+          # export log shows the entitlements of the distribution profile
+          grep -h -i "hotspot" build/export/*.log 2>/dev/null || true
           echo "::notice::Compilación ${AVO_BUILD_NUMBER} enviada a TestFlight (${AVO_BUNDLE_ID}). Aparecerá en la app TestFlight del iPad cuando Apple termine de procesarla."
