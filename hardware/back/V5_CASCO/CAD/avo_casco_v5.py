@@ -44,7 +44,7 @@ Z_CEIL = Z_PCB_TOP + ANT["h"] + 0.3
 TOP_T = 1.2
 H = Z_CEIL + TOP_T
 SCREWS = [(-x, y) for x, y in MEC["taladros"]]
-SCREW = dict(hole=2.8, cb_d=5.0, cb_h=2.6, boss=5.0, post=6.0, insert_d=3.6, insert_h=4.6)
+SCREW = dict(hole=2.8, cb_d=5.0, cb_h=2.6, boss=6.6, post=6.0, insert_d=3.6, insert_h=4.6)
 GASKET = dict(c=WALL / 2, w_groove=1.0, depth=0.8, w=0.9, h_free=1.1)
 POGO = dict(n=5, pitch=2.3, f_l=21.7, f_w=6.25, f_t=3.5, face_l=20.1, face_w=4.65, face_h=1.7, clear=0.2,
             y=-(IN / 2 - 6.25 / 2 - 0.2 + 0.05), cup_wall=0.6, cup_z=5.5)    # (E) hasta tener el STEP real
@@ -194,6 +194,8 @@ def main():
     dens = {"junta": 1.20}
     for n, s in parts.items():
         nsol = len(s.solids().vals())
+        if nsol != 1:
+            print("AVISO %s: %d sólidos" % (n, nsol), [round(x.Volume(), 2) for x in s.solids().vals()])
         v = s.val().Volume() if nsol == 1 else sum(x.Volume() for x in s.solids().vals())
         bb = s.val().BoundingBox()
         d = 1.20 if "junta" in n else 1.27
