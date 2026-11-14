@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-19 — Gráficas sin la fila de botones
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad):** por decisión del entrenador («quitarla entera»), «Gráficas» ya no tiene la fila de botones:
+lupas, flechas, Guardar como tramo, Quitar selección, Exportar CSV ni reproducción.
+- Se mantienen el zoom con los dedos, la barra de vista general y la selección manteniendo pulsado y arrastrando.
+- Guardar tramos sigue disponible en Tramos y en Biomecánica, y la reproducción en Mapa.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-14 — AVO-SHELL-18 — Gráficas: «Mostrar datos» desplegable y sin «Uso, filtrado y unidades»
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

@@ -21,7 +21,8 @@ struct ChartsView: View {
                 AvoCard { AvoNoData(text: "Selecciona un entrenamiento para ver las gráficas") }
                 Spacer(minLength: 0)
             } else {
-                ChartsToolbar(charts: charts)
+                // trainer 14/11/2026: the row of zoom / tramo / export / playback buttons is removed from «Gráficas»
+                // (pinch zoom, the overview bar and hold-and-drag selection stay)
                 if app.hasRange && !charts.rangeStats.isEmpty {
                     ChartsRangeStrip(rows: charts.rangeStats)
                 }
