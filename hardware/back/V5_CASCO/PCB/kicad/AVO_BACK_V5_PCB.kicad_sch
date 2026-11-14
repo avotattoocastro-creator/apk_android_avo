@@ -4339,7 +4339,7 @@
 		)
 		(property "Datasheet" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25105" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 72.39 223.52 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "c64dc6c7-e1cc-5c42-9ccf-021df0524c84"))
 		(pin "2" (uuid "2e646743-6da7-51b0-8f5b-2fd5cc334900"))

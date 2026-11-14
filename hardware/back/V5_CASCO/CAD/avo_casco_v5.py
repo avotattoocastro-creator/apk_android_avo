@@ -11,8 +11,8 @@ Apilado (de abajo arriba):
   · 0,3 · techo 1,2.
 Cierre: 4 × M2,5 × 16 desde abajo por los taladros de la PCB (±22, ±22) con junta tórica 2,5 × 1 bajo la cabeza;
   insertos M2,5 (Ø3,5 × 4) en los postes de la tapa; la PCB queda pinzada entre las columnas de la base y los postes.
-  Anillo de resina translúcida (dos mitades pegadas) entre base y tapa (z 10,4–14,5), iluminado por 4 LED laterales de
-  la PCB; 2 juntas TPU 85A: base ↔ anillo (ranura en la base) y anillo ↔ tapa (ranura en la tapa).
+  Anillo de resina translúcida (dos mitades pegadas) entre base y tapa (z 9,6–15,3), iluminado por 4 LED laterales de
+  la PCB. SIN juntas TPU (decisión del usuario): las 2 uniones del anillo y sus 2 cortes se sellan con pegamento.
 Pogo de 5 contactos (ESTIMADO a partir del STEP del de 3 contactos, paso 2,3): en el fondo, franja −Y, cara a ras.
 Base del casco: anillo de PETG con 4 imanes Ø6 × 2 (frente a los 4 de la cápsula), imán Ø8 × 3 del Hall y alojamiento
   con paredes a 45° de 1,2 mm de alto (se suelta con un golpe lateral); cara inferior cóncava R = 110 (ajustable).
@@ -40,7 +40,8 @@ BAT = dict(x=50.0, y=37.0, t=8.5)          # (E) celda 1S ≥ 2000 mAh: envolven
 Z_BAT0 = FLOOR
 Z_F = Z_BAT0 + BAT["t"] + 0.4 + MEC["altura_max_cara_F"]   # cara F de la PCB (hacia abajo)
 Z_PCB_TOP = Z_F + PCB["t"]                 # cara B (masa) = junta anillo/tapa
-Z_RING0 = Z_F - 2.5                        # junta base/anillo: el anillo cubre de 10,4 a 14,5 (LED laterales a z ≈ 11,9)
+Z_RING0 = Z_F - 3.3                        # unión base/anillo (pegada): el anillo cubre de 9,6 a 15,3 (LED laterales a z ≈ 11,9)
+Z_RING1 = Z_PCB_TOP + 0.8                  # unión anillo/tapa (pegada). Sin juntas TPU: su altura pasa al anillo
 ANT = dict(side=25.0, h=8.1)               # (E) Taoglas AHP2258
 Z_CEIL = Z_PCB_TOP + ANT["h"] + 0.3
 TOP_T = 1.2
@@ -106,14 +107,12 @@ def base():
     for (x, y) in SCREWS:
         b = b.cut(cyl(x, y, -1, SCREW["hole"], Z_PCB_TOP + 2)).cut(cyl(x, y, -1, SCREW["cb_d"], SCREW["cb_h"] + 1))
     # ranura de la junta en la cara superior de la pared
-    gc, gw = GASKET["c"], GASKET["w_groove"]
-    b = b.cut(shell_ring(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, Z_RING0 - GASKET["depth"]))
     return b
 
 
 # ---------------------------------------------------------------- anillo de luz (resina translúcida, dos mitades pegadas)
 def ring_halves():
-    r = shell_ring(0.0, WALL, Z_PCB_TOP - Z_RING0, Z_RING0)
+    r = shell_ring(0.0, WALL, Z_RING1 - Z_RING0, Z_RING0)
     a = r.intersect(box(-50, 0, -10, 100, 200, 100))      # mitad −X
     b = r.intersect(box(50, 0, -10, 100, 200, 100))       # mitad +X
     return a, b
@@ -121,10 +120,8 @@ def ring_halves():
 
 # ---------------------------------------------------------------- tapa
 def lid():
-    t = rrect(OUTS, OUTS, R_OUT, H - Z_PCB_TOP, Z_PCB_TOP).faces(">Z").edges().chamfer(1.0)
-    t = t.cut(rrect(IN, IN, PCB["r"] + CL, Z_CEIL - Z_PCB_TOP, Z_PCB_TOP - 0.01))
-    gc, gw = GASKET["c"], GASKET["w_groove"]                 # ranura de la 2.ª junta (tapa ↔ anillo)
-    t = t.cut(shell_ring(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, Z_PCB_TOP - 1))
+    t = rrect(OUTS, OUTS, R_OUT, H - Z_RING1, Z_RING1).faces(">Z").edges().chamfer(1.0)
+    t = t.cut(rrect(IN, IN, PCB["r"] + CL, Z_CEIL - Z_RING1, Z_RING1 - 0.01))
     for (x, y) in SCREWS:
         t = t.union(cyl(x, y, Z_PCB_TOP, SCREW["post"], Z_CEIL - Z_PCB_TOP + 0.01))
         t = t.cut(cyl(x, y, Z_PCB_TOP - 0.1, SCREW["insert_d"], SCREW["insert_h"] + 0.1))
@@ -202,8 +199,7 @@ def refs():
 
 def main():
     ra, rb = ring_halves()
-    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_junta_TPU": gasket(),
-             "AVO_CASCO_V5_junta_TPU_tapa": gasket(True), "AVO_CASCO_V5_anillo_resina_A": ra,
+    parts = {"AVO_CASCO_V5_base": base(), "AVO_CASCO_V5_tapa": lid(), "AVO_CASCO_V5_anillo_resina_A": ra,
              "AVO_CASCO_V5_anillo_resina_B": rb}
     hb, kind = helmet_base_safe()
     parts["AVO_CASCO_V5_base_casco"] = hb
@@ -233,7 +229,7 @@ def main():
             if v > 0.01:
                 rep["interferencias"]["%s × %s" % (rn, pn)] = round(v, 3)
     rep["medidas"] = dict(capsula_mm=[round(OUTS, 2), round(OUTS, 2), round(H, 2)], interior_mm=round(IN, 2),
-                          z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), anillo_z=[round(Z_RING0, 2), round(Z_PCB_TOP, 2)], z_techo=round(Z_CEIL, 2),
+                          z_cara_F=round(Z_F, 2), z_junta=round(Z_PCB_TOP, 2), anillo_z=[round(Z_RING0, 2), round(Z_RING1, 2)], sellado="pegamento (tipo B-7000/T-7000) en las 2 uniones del anillo y entre sus mitades; sin juntas TPU", z_techo=round(Z_CEIL, 2),
                           bateria_max_mm=[BAT["x"], BAT["y"], BAT["t"]], base_casco=kind,
                           altura_total_sobre_casco_mm=round(H + HB["t"], 2),
                           tornillos="4 × M2,5 × 16 (cabeza cilíndrica) + junta tórica 2,5 × 1 + inserto M2,5 Ø3,5 × 4",
