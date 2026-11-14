@@ -133,7 +133,7 @@ jobs:
           cp out/drc.rpt out/FINAL/AVO_BACK_V5_PCB_FINAL_DRC.txt
           cp out/erc.rpt out/FINAL/AVO_BACK_V5_PCB_FINAL_ERC.txt
           cp out/AVO_BACK_V5_PCB_REPORTE.md out/FINAL/AVO_BACK_V5_PCB_FINAL_REPORTE.md
-          (cd out/gerber && zip -q ../FINAL/AVO_BACK_V5_PCB_FINAL_GERBER_JLCPCB.zip *)
+          (cd out/gerber && zip -q ../FINAL/AVO_BACK_V5_PCB_FINAL_GERBER_JLCPCB.zip * -x '*drl_map*')   # sin mapas de taladros: JLC los toma por contorno (71 × 71)
           mkdir -p out/FINAL/KiCad && cp kicad/AVO_BACK_V5_PCB.kicad_pcb kicad/AVO_BACK_V5_PCB.kicad_sch kicad/AVO_BACK_V5_PCB.kicad_pro out/FINAL/KiCad/
           (cd out/FINAL && sha256sum *.* KiCad/* > SHA256SUMS.txt)
 
