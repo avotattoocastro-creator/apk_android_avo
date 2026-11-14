@@ -1,9 +1,9 @@
 {
  "piezas": {
   "AVO_CASCO_V5_base": {
-   "solidos": 3,
-   "volumen_mm3": 11063.2,
-   "peso_g": 14.1,
+   "solidos": 1,
+   "volumen_mm3": 11721.2,
+   "peso_g": 14.9,
    "caja": [
     56.4,
     56.4,
@@ -41,7 +41,9 @@
    ]
   }
  },
- "interferencias": {},
+ "interferencias": {
+  "componentes_cara_F × AVO_CASCO_V5_base": 0.169
+ },
  "medidas": {
   "capsula_mm": [
    56.4,
