@@ -110,9 +110,6 @@ struct RootView: View {
                 .environment(app)
                 .avoColorScheme()
         }
-        .sheet(isPresented: Binding(get: { app.hardwareVisible }, set: { app.hardwareVisible = $0 })) {
-            HardwareSheet().environment(app).avoColorScheme()
-        }
         .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
             PdfViewerSheet(file: f)
                 .avoColorScheme()
@@ -177,6 +174,10 @@ struct RootView: View {
             .padding(.vertical, 10)
         }
         .background(Avo.surface)
+        // «Equipo conectado» window (kept here: the root modifier chain is already at the type-checker limit)
+        .sheet(isPresented: Binding(get: { app.hardwareVisible }, set: { app.hardwareVisible = $0 })) {
+            HardwareSheet().environment(app).avoColorScheme()
+        }
         .navigationTitle("AVO")
         .navigationBarTitleDisplayMode(.inline)
     }
