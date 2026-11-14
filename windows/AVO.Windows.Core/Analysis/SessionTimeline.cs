@@ -19,10 +19,10 @@ public sealed class SessionTimeline
     public double[] Lon { get; private init; } = [];
     public double[] SpeedReported { get; private init; } = [];
     public double[] SpeedDerived { get; private init; } = [];
-    public double[] SpeedFiltered { get; private init; } = [];
-    public double[] SpeedFilteredSigma { get; private init; } = [];
-    public double[] AccelLong { get; private init; } = [];
-    public double[] AccelLongSigma { get; private init; } = [];
+    public double[] SpeedFiltered { get; private set; } = [];
+    public double[] SpeedFilteredSigma { get; private set; } = [];
+    public double[] AccelLong { get; private set; } = [];
+    public double[] AccelLongSigma { get; private set; } = [];
     public double[] AccelLateral { get; private init; } = [];
     public double[] Distance { get; private init; } = [];
     public double[] AltitudeMsl { get; private init; } = [];
@@ -41,6 +41,43 @@ public sealed class SessionTimeline
     public double TotalDistanceM => Distance.Length > 0 ? Distance[^1] : 0;
     public double DurationS => T.Length > 1 ? T[^1] - T[0] : 0;
     public SpeedSmoother.Parameters FilterParameters { get; private init; } = new();
+    /// <summary>Where SpeedFiltered / AccelLong come from: "app" (own SpeedSmoother) or "motor" (AVO Performance Equine 2.0).</summary>
+    public string KinematicsSource { get; private set; } = "app";
+
+    /// <summary>AVO Performance Equine 2.0 (F1b): the engine is the single kinematic truth. Its smoothed speed and
+    /// acceleration (with their σ) replace the app filter wherever the engine has samples within 0.5 s on both sides
+    /// (engine time = timeline time + offsetS); elsewhere the app values stay. Only adopted when the engine covers most of
+    /// the timeline and the app filter uses the engine default (jerk density 1 m²/s⁵). Same rule as iPad and Android.</summary>
+    public int AdoptEngineKinematics(double[] et, double[] speed, double[] speedSigma, double[] accel, double[] accelSigma, double offsetS)
+    {
+        int n = T.Length, m = Math.Min(et.Length, speed.Length);
+        if (n == 0 || m < 2 || Math.Abs(FilterParameters.JerkDensity - 1.0) > 1e-9) return 0;
+        static double At(double[] a, int j) => j < a.Length ? a[j] : double.NaN;
+        var v = (double[])SpeedFiltered.Clone(); var sv = (double[])SpeedFilteredSigma.Clone();
+        var a = (double[])AccelLong.Clone(); var sa = (double[])AccelLongSigma.Clone();
+        int replaced = 0, j = 0;
+        for (int i = 0; i < n; i++)
+        {
+            double te = T[i] + offsetS;
+            while (j + 1 < m && et[j + 1] <= te) j++;
+            if (j + 1 >= m || et[j] > te) continue;
+            double t0 = et[j], t1 = et[j + 1];
+            if (!(t1 > t0) || t1 - t0 > 0.5) continue;
+            double w = (te - t0) / (t1 - t0);
+            double Lerp(double[] x) { double x0 = At(x, j), x1 = At(x, j + 1); return double.IsFinite(x0) && double.IsFinite(x1) ? x0 + w * (x1 - x0) : double.NaN; }
+            double vi = Lerp(speed);
+            if (!double.IsFinite(vi)) continue;
+            v[i] = Math.Max(0, vi);
+            if (Lerp(speedSigma) is var svi && double.IsFinite(svi)) sv[i] = svi;
+            if (Lerp(accel) is var ai && double.IsFinite(ai)) a[i] = ai;
+            if (Lerp(accelSigma) is var sai && double.IsFinite(sai)) sa[i] = sai;
+            replaced++;
+        }
+        if (replaced < n / 2) return 0;
+        SpeedFiltered = v; SpeedFilteredSigma = sv; AccelLong = a; AccelLongSigma = sa;
+        KinematicsSource = "motor";
+        return replaced;
+    }
 
     public static long WeekDiffMs(long itow, long itow0)
     {

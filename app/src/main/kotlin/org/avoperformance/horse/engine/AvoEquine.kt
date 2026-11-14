@@ -1,7 +1,7 @@
 package org.avoperformance.horse.engine
 
 /**
- * JNI access to the AVO Equine Intelligence Engine (libavo_equine_jni.so, the same C++ code as Windows and Python).
+ * JNI access to the AVO Performance Equine (libavo_equine_jni.so, the same C++ code as Windows and Python).
  * Strings travel as UTF-8 byte arrays. Every call is blocking: callers run it on Dispatchers.Default.
  * The native bridge is equine-intelligence/integrations/android/jni/avo_eq_jni.cpp.
  */

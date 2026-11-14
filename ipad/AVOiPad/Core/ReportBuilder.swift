@@ -775,7 +775,7 @@ private class PdfReportWriter {
                     (k: "Estabilidad espectral", v: num(AnalysisForeignAPI.metric(e, "estabilidad_espectral_imu0"), "0.00", "")),
                     (k: "Simetría", v: symmetry),
                 ])
-                y += pdf.paragraph(m, y, w, "Índices calculados por el motor AVO Equine Intelligence a partir de IMU sin calibrar. Son estimaciones exploratorias: no son diagnóstico clínico, carga de extremidad ni lesión.",
+                y += pdf.paragraph(m, y, w, "Índices calculados por el motor AVO Performance Equine a partir de IMU sin calibrar. Son estimaciones exploratorias: no son diagnóstico clínico, carga de extremidad ni lesión.",
                                    size: 7.5, bold: false, color: dim)
             } else {
                 y += pdf.paragraph(m, y, w, "Sin datos de cincha en esta sesión: no se calculan cadencia, regularidad ni simetría. Ningún valor se estima sin datos.",

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Biomechanics (Windows Views/BiomechView.xaml). Every index comes from the AVO Equine Intelligence engine and is labelled
+/// Biomechanics (Windows Views/BiomechView.xaml). Every index comes from the AVO Performance Equine engine and is labelled
 /// exploratory: uncalibrated IMU, no clinical diagnosis, no limb load. Without girth data nothing is computed.
 struct BiomechView: View {
     @Environment(AppModel.self) private var app

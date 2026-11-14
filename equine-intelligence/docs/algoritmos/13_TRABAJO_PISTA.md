@@ -137,3 +137,14 @@ La historia incluye:
 - **NO VERIFICADO** con caballos reales:
   - falta comprobar el rasgo de la mano con sesiones etiquetadas (vídeo), los rangos de zancada por raza y los umbrales de los eventos;
   - el eje de avance por PCA supone que la oscilación longitudinal del tronco domina la lateral.
+
+## 2.0.0 · EFFORT_V2: trabajo completo
+- Cada trabajo conserva su **núcleo** (velocidad ≥ galope de trabajo, `t0`–`t1`), del que salen parciales, mejores
+  distancias, caída y fatiga.
+- Además tiene **límites completos** (`t0_completo`–`t1_completo`, `distancia_completa_m`): desde la arrancada (aceleración
+  ≥ 0,10 m/s²) hasta la frenada (aceleración ≤ −0,10 m/s²).
+  - El límite se corta al bajar de 1,5 m/s, en un hueco de más de 3 s o al llegar al trabajo anterior.
+- La fase de trabajo y el calentamiento usan los límites completos.
+- **«Distancia de trabajo»** (`distancia_trabajo_m`, `t0_trabajo`–`t1_trabajo`): suma de los trabajos rápidos completos, o
+  de todos los trabajos si no hay ninguno rápido. Es lo que el entrenador llama «el trabajo», y las apps lo seleccionan tal cual.
+- `distancia_rapida_m` (metros por encima del umbral rápido) se mantiene en el JSON.

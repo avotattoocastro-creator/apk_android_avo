@@ -24,6 +24,109 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — AVO-SHELL-31 — Biblioteca: una copia mala ya no hace rechazar el archivo bueno
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** si en la biblioteca de la app ya había una copia con el mismo nombre (la huella SHA-256 del archivo) pero con
+otro contenido, por ejemplo una copia que quedó a medias, no se reemplazaba. El archivo bueno se rechazaba con «La copia de la
+biblioteca no coincide con el original» (visto en «MALWINA_BELLA 2.avo» y «BELLA_AL_SHAHANIA 2.avo»).
+**Qué cambia (iPad y Windows, por igual):** la copia mala se borra y se vuelve a copiar el original. Si después la copia sigue
+sin coincidir, se rechaza como antes. El archivo original nunca se toca.
+**No se ha tocado:** el motor, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
+## 2026-11-14 — AVO-SHELL-30 — El arranque no interrumpe con archivos de AVO Horse que no se pueden leer
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué pasaba:** la búsqueda automática de «AVO Horse» al arrancar intentaba importar en cada arranque los mismos archivos
+que no se pueden leer, y sacaba en la portada el aviso «2 archivo(s) rechazados».
+**Qué cambia (iPad):**
+- La búsqueda del arranque ya no muestra ese aviso. El resumen queda en la barra de estado, con el número de archivos no
+  legibles, y el motivo de cada uno sigue en «Estado de importaciones».
+- Recuerda los archivos que fallaron (ruta, tamaño y fecha) y no los vuelve a intentar al arrancar. Si el archivo cambia,
+  se reintenta.
+- La importación manual («Abrir», «Buscar entrenamientos») sigue avisando como antes.
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F2a — Trabajo completo bien detectado; selección movible; % de la espalda
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Por qué (boceto del entrenador):** «No detecta bien el trabajo; es esencial que se detecten bien las zonas». Antes, el
+trabajo solo abarcaba lo que iba por encima del umbral de velocidad (11 m/s en PSI) y se dejaba fuera la arrancada y la
+frenada.
+**Qué cambia:**
+- **Motor (EFFORT_V2):**
+  - cada trabajo tiene límites completos, de la arrancada (acelerando) a la frenada (desacelerando);
+  - la fase de trabajo y el calentamiento se miden con esos límites;
+  - nuevo `distancia_trabajo_m` con su ventana `t0_trabajo`–`t1_trabajo`;
+  - las métricas de fatiga siguen en el núcleo;
+  - prueba del entreno de mañana ampliada: calentamiento 240 s (antes 246 s), arrancada y frenada incluidas.
+  - Detalle: `docs/algoritmos/13_TRABAJO_PISTA.md`.
+- **iPad y Windows (Parámetros clave / Datos clave):** «Distancia de trabajo» muestra el trabajo completo y al tocarla
+  selecciona exactamente esa ventana del motor. Con resultados 1.x se mantiene la regla anterior. Pruebas idénticas en las
+  dos apps.
+- **iPad · Gráficas:** la selección tiene dos agarres, «Inicio» y «Fin», en la gráfica de velocidad, para moverla a mano;
+  la tabla de la selección se recalcula.
+- **iPad · Equipo conectado:** el recuadro Espalda muestra el % de batería de la espalda (TELEMETRY v2, `backBatteryMv`,
+  misma tabla Li-ion que Android) y los mV.
+  - El iPad se suscribe a la telemetría solo si el reloj la ofrece; si no, se ve «Enlazada» como antes.
+  - Solo lectura: el protocolo no cambia.
+- **iPad · Cuadra:** «France Galop» se mueve al extremo derecho de la barra.
+**No se ha tocado:** protocolos, firmware, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1524 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales
+ni con el reloj.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F1b — Aceleración del filtro y apps con la velocidad del motor
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia:**
+- **Motor:** la aceleración longitudinal (y su σ) sale del mismo filtro Kalman + RTS que la velocidad, en vez de la
+  pendiente local ±0,5 s sobre gSpeed. Afecta a los máximos de aceleración y frenada, a los eventos de aceleración y frenada
+  sostenida y a los cálculos de Trabajo en pista.
+  - Las pruebas de aceleración conocida (rampa de 2 m/s², sostenida de 1,0 / −1,5 m/s² y ningún falso evento con ruido)
+    siguen pasando.
+  - El modo anterior sigue disponible (`accel_from_smoother = false`).
+- **iPad y Windows:** la línea de tiempo adopta la velocidad y la aceleración del motor, con su σ, al recibir el análisis y
+  al recortar la ventana útil. Así barra, gráficas, Parámetros clave, Cuadra, Comparar e informes salen de la misma serie
+  que el motor.
+  - Se interpola solo entre muestras del motor separadas como mucho 0,5 s; fuera de ellas se mantiene el filtro de la app.
+  - No se adopta si el usuario ha cambiado la sacudida del filtro en Ajustes.
+  - Pruebas nuevas idénticas en iPad (XCTest) y Windows (autoprueba) con la sesión sintética de referencia.
+- **Android:** no tenía filtro propio; sus gráficas del motor ya reciben la serie suavizada.
+- Fixtures JSON del motor regenerados.
+**No se ha tocado:** protocolos, firmware, `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** motor local 87 casos / 1521 comprobaciones, 0 fallos. CI pendiente. **NO VERIFICADO** con sesiones reales.
+
+## 2026-11-14 — AVO-SHELL-29 — GPS sin cabecera y marea con % de subida o bajada
+**Autor:** Claude · Rama `feature/avo-equine-2-0`
+**Qué cambia (iPad):**
+- **GPS:** sin el título «Datos GPS» ni el aviso de la antena del chaleco. La barra del entrenamiento ya identifica la sesión.
+- **Resumen · marea:** debajo de «Marea 1,70 m · subiendo» aparece «N % de la subida» (o «de la bajada»). Es la altura a la
+  hora del entrenamiento entre la bajamar y la pleamar anterior y siguiente, según la predicción del IHM
+  (`EnvironmentModel.tidePhasePct`).
+**No se ha tocado:** el motor, Windows, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
+## 2026-11-14 — AVO-ENGINE-2.0-F1a — AVO Performance Equine 2.0.0-dev1: una sola velocidad para todo
+**Autor:** Claude · Rama `feature/avo-equine-2-0` (desde `develop/avo-performance-horse` tras integrar el PR #20)
+**Por qué:** el motor 1.1 calculaba todas sus cifras con la velocidad bruta del receptor (gSpeed), mientras que las apps
+mostraban una velocidad filtrada propia. Por eso el mismo entrenamiento daba 60,2 km/h en el motor y 58,3 km/h en la barra.
+Plan completo: proyecto, `claude/AVO_PERFORMANCE_EQUINE_2_0_PLAN.md`.
+**Qué cambia:**
+- **Velocidad del motor:** Kalman v-a + suavizado RTS en C++ (`smoother.h/.cpp`), con el mismo modelo y valores por
+  defecto que las apps.
+  - `GnssResult.speed` es ahora la velocidad suavizada, con su σ posterior, y de ella salen todas las cifras de velocidad:
+    máxima, histograma, curvas, Trabajo en pista (distancias de trabajo y rápida, mejores distancias), aires y fusión.
+  - gSpeed se conserva en `speed_raw` y en la nueva serie `velocidad_receptor`.
+  - El modo 1.x sigue disponible (`smooth_speed = false`).
+- **Versión:** `ENGINE_VERSION` 2.0.0-dev1 y versión de algoritmo GNSS 2.0.0. El nombre visible pasa a «AVO Performance
+  Equine» en Android, Windows e iPad. Los identificadores técnicos (`avo_eq`, `avo-equine-*`) no cambian, por compatibilidad.
+- **Pruebas del motor:** dos casos nuevos (`gnss2.*`) y fixtures JSON regenerados. Las pruebas de versión de Kotlin,
+  Android, Windows e iPad esperan ya «2.0.0».
+- **Resultado en simulación:** galope de 14 m/s con ruido σ 0,3 m/s → RMS 0,310 → 0,081 m/s; velocidad máxima 14,91 →
+  14,22 m/s.
+**No se ha tocado:** protocolos, firmware, formato `.avr`, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** pruebas locales del motor 87 casos / 1520 comprobaciones, 0 fallos (Linux, GCC). CI pendiente.
+**NO VERIFICADO** con sesiones reales: es el paso F5.
+**Siguiente (F1b):** las apps dejan de filtrar por su cuenta y dibujan la serie `velocidad` del motor; aceleración también
+desde el filtro, con su σ.
 ## 2026-11-15 — iPad: motivo real cuando el reloj rechaza el Wi-Fi y botón «Reactivar Wi-Fi del reloj»
 **Autor:** Claude · Rama `fix/ipad-wifi-motivos-rechazo` (desde `develop/avo-performance-horse`)
 **Síntoma:** en la build 125 (ya sin el error del permiso de iOS) el iPad mostraba «el reloj no pudo activar su Wi-Fi (radio del reloj)» y descargaba por Bluetooth. El iPad reducía todos los rechazos de `WIFI_SYNC(start)` distintos de «sin microSD» a «radio del reloj».

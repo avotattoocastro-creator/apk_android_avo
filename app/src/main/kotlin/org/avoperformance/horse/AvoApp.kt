@@ -45,7 +45,7 @@ class AppContainer(val app: Application) {
     /** Training download over Wi-Fi (CHEST V3.7.4+), BLE as fallback. */
     val wifiSync = org.avoperformance.horse.wifi.AvoWifiSyncManager(app, watch, log, { sync.trainingsDir },
         org.avoperformance.horse.core.wifi.VerifiedSink { id, dir, sha, bytes -> sync.completeFromWifi(id, dir, sha, bytes) }).also { sync.wifi = it }
-    /** AVO Equine Intelligence Engine (C++ via JNI): advanced analysis of downloaded trainings. */
+    /** AVO Performance Equine (C++ via JNI): advanced analysis of downloaded trainings. */
     val equine = org.avoperformance.horse.engine.EquineEngine(app, log, scope)
     /** Sharing between AVO users over Firebase (global, per horse and manual). */
     val share = org.avoperformance.horse.cloud.ShareManager(this).also { s ->

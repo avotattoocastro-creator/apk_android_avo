@@ -411,6 +411,20 @@ struct ChartsStack: View {
     /// Análisis: la velocidad ya está en el perfil de la línea de tiempo, encima.
     var skipSpeed: Bool = false
 
+    /// Grips on the limits of the current selection (trainer's sketch 14/11/2026: «opción de mover»): drag either end to
+    /// adjust it; the statistics of the selection follow.
+    private var selectionHandles: [SyncHandle] {
+        guard app.hasRange else { return [] }
+        let a: Double = min(app.rangeStart, app.rangeEnd), b: Double = max(app.rangeStart, app.rangeEnd)
+        return [SyncHandle(id: 9001, x: a, color: Avo.red, label: "Inicio"),
+                SyncHandle(id: 9002, x: b, color: Avo.red, label: "Fin")]
+    }
+
+    private func moveSelection(_ id: Int, _ t: Double) {
+        let a: Double = min(app.rangeStart, app.rangeEnd), b: Double = max(app.rangeStart, app.rangeEnd)
+        if id == 9001 { app.rangeStart = min(t, b - 1); app.rangeEnd = b } else { app.rangeStart = a; app.rangeEnd = max(t, a + 1) }
+    }
+
     var body: some View {
         let d: ClosedRange<Double> = charts.domain
         let empty: String = charts.building ? "Calculando…" : "Sin datos"
@@ -419,7 +433,8 @@ struct ChartsStack: View {
             if charts.chartSpeed && !skipSpeed {
                 SyncChartBox(title: "Velocidad (km/h)", legend: ChartsLegends.speed,
                              readout: { (a: AppModel) -> String in a.cursorSpeed + " km/h" }, chartId: "speed") {
-                    SyncSignalChart(panel: charts.panel(.speed, chart: "speed", legend: ChartsLegends.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true)
+                    SyncSignalChart(panel: charts.panel(.speed, chart: "speed", legend: ChartsLegends.speed), domain: d, includeZero: true, emptyText: empty, scrollFriendly: true,
+                                    handles: selectionHandles, onHandle: moveSelection)
                 }
                 .frame(height: ChartsHeights.speed)
             }

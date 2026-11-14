@@ -4,7 +4,7 @@
              xmlns:c="clr-namespace:Avo.Windows.Controls"
              xmlns:v="clr-namespace:Avo.Windows.Views">
     <!-- «Datos clave» de un entrenamiento (paridad iPad ↔ PC, docs/PARIDAD_IPAD_PC.md): rejilla de cifras con icono, reparto de
-         aires y calidad de la posición. Todas las cifras salen del motor AVO Equine (Core/Analysis/KeyData.cs), con las mismas
+         aires y calidad de la posición. Todas las cifras salen del motor AVO Performance Equine (Core/Analysis/KeyData.cs), con las mismas
          reglas que ipad/AVOiPad/Views/KeyDataView.swift. Pulso y recuperaciones quedan vacíos hasta que exista el ECG de la
          cincha: nunca se inventan. -->
     <UserControl.Resources>

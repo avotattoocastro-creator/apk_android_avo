@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace Avo.Windows.Core;
 
 // «Datos clave» y «Calendario» — paridad iPad ↔ PC (docs/PARIDAD_IPAD_PC.md).
-// Reglas IDÉNTICAS a ipad/AVOiPad/Core/KeyData.swift: todas las cifras salen del resultado del motor AVO Equine (el
+// Reglas IDÉNTICAS a ipad/AVOiPad/Core/KeyData.swift: todas las cifras salen del resultado del motor AVO Performance Equine (el
 // mismo para Windows e iPad), nunca de un cálculo propio de la app. Lo que el motor no da (pulso, recuperaciones) se
 // muestra como «—» con el motivo; nunca se inventa.
 
@@ -54,6 +54,8 @@ public sealed class KeyData
     /// <summary>Engine «trabajo rápido» threshold (m/s, trabajo_pista.perfil.v_rapido): «Distancia de trabajo» is the
     /// distance covered at or above it, so tapping that figure selects the time above this speed (same as iPad).</summary>
     public double? FastSpeedMs { get; private set; }
+    /// <summary>2.0 result: «Distancia de trabajo» and its T0–T1 are the engine's full work limits.</summary>
+    public bool WorkIsFull { get; private set; }
 
     /// <summary>«Velocidad máxima» with the app's filtered maximum (training bar, «Gráficas», Cuadra), so the same figure
     /// is shown everywhere. Same rule as iPad KeyData.withMaxSpeed.</summary>
@@ -132,17 +134,21 @@ public sealed class KeyData
             k.Tiles.Add(BestTile("best600", 600));
             // «distancia de trabajo»: the hard work inside the whole training (engine distancia_rapida_m), in place of
             // «Mejor 1000 m» (trainer 14/11/2026)
-            var work = Tile("workdist", "Distancia de trabajo", Num(trabajos, "distancia_rapida_m") is double wd && wd > 0 ? wd / 1000 : (double?)null,
-                "0.00", "km", "Trabajo rápido del entrenamiento", NoFastCaption, 0);
-            // opens the charts on the work (first effort start → last effort end), like «Mejor 200 m» (trainer 14/11/2026)
-            double? w0 = null, w1 = null;
-            foreach (var e in efforts)
-            {
-                if (Num(e, "t0") is double a && (w0 is null || a < w0)) w0 = a;
-                if (Num(e, "t1") is double b && (w1 is null || b > w1)) w1 = b;
-            }
+            // 2.0: «Distancia de trabajo» = whole work (run-up + fast efforts + pull-up, engine distancia_trabajo_m);
+            // tapping it selects exactly t0_trabajo–t1_trabajo. 1.x results keep the old figure (same as iPad).
+            double? wd2 = Num(trabajos, "distancia_trabajo_m") is double d2 && d2 > 0 ? d2 : null;
+            double? wdv = wd2 ?? (Num(trabajos, "distancia_rapida_m") is double wd && wd > 0 ? wd : null);
+            var work = Tile("workdist", "Distancia de trabajo", wdv / 1000, "0.00", "km", "Trabajo rápido del entrenamiento", NoFastCaption, 0);
+            double? w0 = Num(trabajos, "t0_trabajo"), w1 = Num(trabajos, "t1_trabajo");
+            if (w0 is null || w1 is null)
+                foreach (var e in efforts)
+                {
+                    if (Num(e, "t0") is double a0 && (w0 is null || a0 < w0)) w0 = a0;
+                    if (Num(e, "t1") is double b0 && (w1 is null || b0 > w1)) w1 = b0;
+                }
+            k.WorkIsFull = wd2 is not null;
             if (work.Available && w0 is double x0 && w1 is double x1 && x1 > x0)
-                work = work with { T0 = x0, T1 = x1, Caption = "Trabajo rápido · ver en gráficas" };
+                work = work with { T0 = x0, T1 = x1, Caption = "Trabajo completo · ver en gráficas" };
             k.Tiles.Add(work);
             k.Tiles.Add(Tile("distance", "Distancia", Metric("distancia") / 1000, "0.00", "km", "Toda la sesión", "Sin datos", 0));
             double? dur = Metric("duracion");

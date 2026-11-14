@@ -279,7 +279,14 @@ EQ_TEST(pista, training_morning_structure) {
     CHECK(std::isnan(r.efforts[1].pause_to_next_s));
   }
   CHECK(r.warmup.present && r.work.present && r.cooldown.present);
-  CHECK_NEAR(r.warmup.duration_s, 240 + 7.5 / 1.25, 1.0);   // until the first effort starts (11 m/s at 246 s)
+  // 2.0: the warm-up ends where the run-up of the first effort starts (acceleration from 240 s), not when the speed
+  // crosses 11 m/s (246 s); the core of the effort (fatigue metrics) still starts at 246 s
+  CHECK_NEAR(r.warmup.duration_s, 240.0, 1.0);
+  if (r.efforts.size() == 2) {
+    CHECK_NEAR(r.efforts[0].t0_full, 240.0, 1.0);
+    CHECK(r.efforts[0].t1_full > r.efforts[0].t1 + 3);                   // includes the pull-up
+    CHECK(r.efforts[0].distance_full_m > r.efforts[0].distance_m);
+  }
   CHECK(r.warmup.walk_s > 90 && r.warmup.trot_s > 90);
   CHECK(r.cooldown.duration_s > 140);
   CHECK(r.warmup_short);                                       // 4 min < 10 min reference

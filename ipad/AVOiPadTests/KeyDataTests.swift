@@ -28,6 +28,12 @@ final class KeyDataTests: XCTestCase {
         XCTAssertEqual(v("workdist"), "1,60")
         let wd: KeyTile? = k.tiles.first { $0.id == "workdist" }
         XCTAssertTrue((wd?.t1 ?? 0) > (wd?.t0 ?? 0))   // opens the charts on the work, like Windows
+        // 2.0 result: whole work (run-up + efforts + pull-up) and its exact window, same as Windows
+        let k2: KeyData = KeyData.from(json: Self.json.replacingOccurrences(of: "\"distancia_rapida_m\":1600",
+            with: "\"distancia_rapida_m\":1600,\"distancia_trabajo_m\":2050,\"t0_trabajo\":90,\"t1_trabajo\":400"))
+        let w2: KeyTile? = k2.tiles.first { $0.id == "workdist" }
+        XCTAssertEqual(w2?.value, "2,05")
+        XCTAssertTrue(k2.workIsFull && w2?.t0 == 90 && w2?.t1 == 400)
         XCTAssertEqual(v("distance"), "7,84")
         XCTAssertEqual(v("duration"), "44:12")
         XCTAssertEqual(v("hrmax"), "—")

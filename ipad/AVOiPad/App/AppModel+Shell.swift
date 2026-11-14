@@ -149,7 +149,7 @@ extension AppModel {
 
     // ------------------------------------------------------------------ engine info
     var engineInfo: String {
-        EquineEngine.available ? "Motor AVO Equine \(EquineEngine.version())" : "Motor no disponible: " + (EquineEngine.unavailableReason ?? "")
+        EquineEngine.available ? "Motor AVO Performance Equine \(EquineEngine.version())" : "Motor no disponible: " + (EquineEngine.unavailableReason ?? "")
     }
     var engineAvailable: Bool { EquineEngine.available }
     var engineShort: String { EquineEngine.available ? EquineEngine.version() : "No disponible" }
@@ -341,7 +341,7 @@ extension AppModel {
     }
 
     @MainActor
-    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true) async {
+    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true, alertOnReject: Bool = true) async {
         var seen: Set<String> = []
         var list: [String] = []
         for p in paths where !seen.contains(p.lowercased()) {
@@ -412,7 +412,7 @@ extension AppModel {
             if navigate && (page == .home || page == .sessions) { page = .analysis }
         }
         if selected == nil, let newest = AppModel.byDateDescending(sessions).first { select(newest) }
-        if bad > 0 && !restoring {
+        if bad > 0 && !restoring && alertOnReject {
             show("Importación", "\(bad) archivo(s) rechazados. Consulta «Estado de importaciones» en Entrenamientos.", error: true)
         }
     }
@@ -579,6 +579,7 @@ extension AppModel {
                 try EquineAnalysis.parse(json)
             }.value
             item.engine = analysis
+            item.adoptEngineKinematics()   // 2.0: the engine speed / acceleration are the ones drawn and counted
             item.engineState = analysis.cache == "ACIERTO" ? "Resultado guardado reutilizado" : "Calculado"
             // AVO Training Analytics: small per-session summary next to the analysis (AppModel+Training.swift)
             await writeTrainingSummary(item, analysisJson: json)

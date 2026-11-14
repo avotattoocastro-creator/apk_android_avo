@@ -15,8 +15,8 @@ struct StableView: View {
             if page.hasSelection {
                 StableDetailPane(page: page)
             } else {
-                // trainer's sketch 14/11/2026: no counts line; «Mostrar inactivos» and «France Galop» go into the
-                // toolbar row of the list, right after the search
+                // trainer's sketch 14/11/2026: no counts line; «Mostrar inactivos» after the search and «France Galop»
+                // at the right end of the toolbar row
                 StableFullList(page: page)
             }
         }
@@ -127,13 +127,13 @@ private struct StableFullList: View {
                 .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
                 Toggle("Mostrar inactivos", isOn: $p.showInactive).font(.footnote).tint(Avo.red).fixedSize()
+                Spacer(minLength: 8)   // «France Galop» at the right end of the row (trainer's sketch 14/11/2026)
                 if page.isHorse {
                     // whole stable from France Galop: open the trainer's page, link the horses, refresh them all
                     Button { app.franceGalop.open() } label: { Label("France Galop", systemImage: "globe.europe.africa") }
                         .buttonStyle(.avoPrimary)
                         .accessibilityIdentifier("stable.franceGalopAll")
                 }
-                Spacer(minLength: 0)
             }
             if page.isEmpty {
                 AvoNoData(text: page.emptyText)

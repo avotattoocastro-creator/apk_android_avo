@@ -152,7 +152,7 @@ public sealed partial class MainViewModel
     {
         switch (p)
         {
-            case KeyTileView { Tile: { Id: "workdist", T0: double wa, T1: double wb } }: OpenFastWork(SelectedKeyData?.FastSpeedMs, wa, wb); break;
+            case KeyTileView { Tile: { Id: "workdist", T0: double wa, T1: double wb } } when SelectedKeyData?.WorkIsFull != true: OpenFastWork(SelectedKeyData?.FastSpeedMs, wa, wb); break;
             case KeyTileView { Tile: { T0: double a, T1: double b } }: OpenInCharts(a, b); break;
             case KeySplit sp: OpenInCharts(sp.T0, sp.T1); break;
             case KeyEffort ef: OpenInCharts(ef.T0, ef.T1); break;

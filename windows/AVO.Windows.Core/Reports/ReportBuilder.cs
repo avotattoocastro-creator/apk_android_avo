@@ -225,7 +225,7 @@ public static class ReportBuilder
                     ("Estabilidad espectral", Num(e.Metric("estabilidad_espectral_imu0"), "0.00")),
                     ("Simetría", (e.SymmetryLabel.Length > 0 ? e.SymmetryLabel : "—") + (e.SymmetryAllowed ? " (exploratoria)" : " (no concluyente)")),
                 ]);
-                y += pdf.Paragraph(M, y, W, "Índices calculados por el motor AVO Equine Intelligence a partir de IMU sin calibrar. Son estimaciones exploratorias: no son diagnóstico clínico, carga de extremidad ni lesión.", 7.5, false, Dim);
+                y += pdf.Paragraph(M, y, W, "Índices calculados por el motor AVO Performance Equine a partir de IMU sin calibrar. Son estimaciones exploratorias: no son diagnóstico clínico, carga de extremidad ni lesión.", 7.5, false, Dim);
             }
         }
 

@@ -206,13 +206,13 @@ private struct AnalysisTiles: View {
     }
 }
 
-/// Summary of the AVO Equine Intelligence Engine result for the session.
+/// Summary of the AVO Performance Equine result for the session.
 private struct AnalysisEngineCard: View {
     @Environment(AppModel.self) private var app
     var fill: Bool = false
 
     var body: some View {
-        AvoCard(title: "Motor AVO Equine Intelligence", subtitle: app.engineInfo, fill: fill) {
+        AvoCard(title: "Motor AVO Performance Equine", subtitle: app.engineInfo, fill: fill) {
             if let s = app.selected {
                 ShellKeyValue(key: "Estado", value: s.engineState)
                 if let e = s.engine {

@@ -375,7 +375,7 @@ private struct RootStatusBar: View {
                     ProgressView().controlSize(.mini)
                 }
             }
-            Text(app.busy ? app.status : "Versión motor IA · AVO Equine " + app.engineShort).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).truncationMode(.tail)
+            Text(app.busy ? app.status : "Versión motor IA · AVO Performance Equine " + app.engineShort).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).truncationMode(.tail)
             Spacer(minLength: 8)
             // trainer's sketch 14/11/2026: engine version on the left, copyright on the right
             Text("© \(AppModel.copyrightYear) AVO Performance Horse · Todos los derechos reservados")

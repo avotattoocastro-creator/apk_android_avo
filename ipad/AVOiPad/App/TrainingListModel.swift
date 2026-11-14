@@ -739,10 +739,26 @@ final class TrainingListModel {
     @MainActor
     private func finishScan(_ found: [TrainingRecoveryItem], scan: TrainingRecoveryScan, folder: String, quiet: Bool = false) async {
         var items: [TrainingRecoveryItem] = found
+        // Launch scan: files of «AVO Horse» that could not be read are remembered (path + size + date) and not retried
+        // on every launch, so the start screen is not interrupted again by the same unreadable files (trainer 14/11/2026).
+        let skipKey: String = "avo.launchScan.rejected"
+        var skip: Set<String> = Set(UserDefaults.standard.stringArray(forKey: skipKey) ?? [])
+        func fingerprint(_ p: String) -> String {
+            let a = try? FileManager.default.attributesOfItem(atPath: p)
+            let size: Int64 = (a?[.size] as? NSNumber)?.int64Value ?? -1
+            let date: Double = (a?[.modificationDate] as? Date)?.timeIntervalSince1970 ?? 0
+            return "\(TrainingRecovery.canonical(p))|\(size)|\(Int(date))"
+        }
+        if quiet {
+            for i in items.indices where items[i].status == .pending {
+                let src: String = items[i].tempCopy == nil ? (items[i].importPath ?? items[i].path) : items[i].path
+                if skip.contains(fingerprint(src)) { items[i].status = .damaged; items[i].reason = "No se pudo leer (ya revisado)" }
+            }
+        }
         let paths: [String] = items.compactMap { $0.status == .pending ? $0.importPath : nil }
         if !paths.isEmpty {
             scanStatus = "Importando \(paths.count) entrenamiento(s) recuperado(s)…"
-            await app.importFiles(paths, navigate: !quiet)
+            await app.importFiles(paths, navigate: !quiet, alertOnReject: !quiet)
         }
         let loaded: Set<String> = Set(app.sessions.compactMap { $0.session.sourcePath.map { TrainingRecovery.canonical($0) } })
         for i in items.indices where items[i].status == .pending {
@@ -754,9 +770,14 @@ final class TrainingListModel {
                 let fname: String = AvoFiles.fileName(p)
                 let why: String = app.importLog.first(where: { $0.file == fname && !$0.ok })?.result ?? "Rechazado al importar"
                 items[i].reason = why
+                if quiet {
+                    let src: String = items[i].tempCopy == nil ? p : items[i].path
+                    skip.insert(fingerprint(src))
+                }
             }
             if let c = items[i].tempCopy { try? FileManager.default.removeItem(atPath: (c as NSString).deletingLastPathComponent) }
         }
+        if quiet { UserDefaults.standard.set(Array(skip), forKey: skipKey) }
         let order: [TrainingRecoveryStatus] = [.recovered, .incomplete, .damaged, .duplicate, .pending]
         items.sort { (a: TrainingRecoveryItem, b: TrainingRecoveryItem) -> Bool in
             let ia: Int = order.firstIndex(of: a.status) ?? 9
@@ -770,7 +791,9 @@ final class TrainingListModel {
         refreshCaches()
         if quiet {
             let n: Int = items.filter { $0.status == .recovered }.count
-            app.status = n > 0 ? "AVO Horse: \(n) entrenamiento(s) cargado(s)" : "AVO Horse revisado: sin entrenamientos nuevos"
+            let bad: Int = items.filter { $0.status == .damaged }.count
+            app.status = (n > 0 ? "AVO Horse: \(n) entrenamiento(s) cargado(s)" : "AVO Horse revisado: sin entrenamientos nuevos")
+                + (bad > 0 ? " · \(bad) archivo(s) no legibles (ver «Estado de importaciones»)" : "")
             return
         }
         app.status = "Búsqueda de entrenamientos perdidos: " + rep.summary

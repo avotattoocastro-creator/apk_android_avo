@@ -158,7 +158,7 @@ public sealed partial class MainViewModel : ObservableObject
     public bool Busy { get => _busy; set => Set(ref _busy, value); }
     private double _progress;
     public double Progress { get => _progress; set => Set(ref _progress, value); }
-    public string EngineInfo => EquineEngine.Available ? $"Motor AVO Equine {EquineEngine.Version()}" : "Motor no disponible: " + (EquineEngine.UnavailableReason ?? "");
+    public string EngineInfo => EquineEngine.Available ? $"Motor AVO Performance Equine {EquineEngine.Version()}" : "Motor no disponible: " + (EquineEngine.UnavailableReason ?? "");
     public bool EngineAvailable => EquineEngine.Available;
     public string EngineShort => EquineEngine.Available ? EquineEngine.Version() : "No disponible";
     public AvoState EngineIndicator => EquineEngine.Available ? AvoState.Ok : AvoState.Error;

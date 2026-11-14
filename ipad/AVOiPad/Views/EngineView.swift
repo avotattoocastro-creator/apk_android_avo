@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// «Motor» page for trainers (trainer 14/11/2026: «algo legible y entendible, que cualquier entrenador pueda sacar
-/// provecho»). Same results of the AVO Equine Intelligence engine (same C++ engine as Android and Windows), told in plain
+/// provecho»). Same results of the AVO Performance Equine engine (same C++ engine as Android and Windows), told in plain
 /// words: a short reading of the training, time per gait, the phases, the key moments, the curves and how reliable the
 /// data are. The original engine tables stay under «Detalle técnico», folded.
 struct EngineView: View {

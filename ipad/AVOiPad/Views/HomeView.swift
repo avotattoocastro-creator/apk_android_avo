@@ -247,7 +247,7 @@ struct HomeView: View {
                 }
             }
             AvoCard(title: "Estado del sistema") {
-                ShellStatusIndicator(text: "Motor AVO Equine Intelligence", detail: app.engineShort, state: app.engineIndicator)
+                ShellStatusIndicator(text: "Motor AVO Performance Equine", detail: app.engineShort, state: app.engineIndicator)
                 ShellStatusIndicator(text: "Importación segura (SHA-256 / CRC)", detail: "Activa", state: .ok)
                 ShellStatusIndicator(text: "Servidor AVO", detail: "Contrato pendiente", state: .warning)
                 ShellStatusIndicator(text: "Mareas IHM / Open-Meteo", detail: "Bajo demanda", state: .info)

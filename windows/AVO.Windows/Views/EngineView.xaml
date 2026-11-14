@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:Avo.Windows.Controls"
              xmlns:v="clr-namespace:Avo.Windows.Views">
-    <!-- Detailed results of the AVO Equine Intelligence Engine (same C++ engine as Android), kept from Windows V1 «Motor AVO» -->
+    <!-- Detailed results of the AVO Performance Equine (same C++ engine as Android), kept from Windows V1 «Motor AVO» -->
     <Grid Margin="16,12,16,14">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

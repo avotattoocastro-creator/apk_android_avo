@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace Avo.Windows.Core;
 
 /// <summary>
-/// P/Invoke access to avo_equine.dll — the AVO Equine Intelligence Engine (same C++17 code as Android and Python).
+/// P/Invoke access to avo_equine.dll — the AVO Performance Equine (same C++17 code as Android and Python).
 /// Strings are UTF-8. Calls are blocking: run them with Task.Run. Cancellation sets a native flag polled by the engine.
 /// </summary>
 public static class EquineEngine
@@ -143,7 +143,9 @@ public sealed class EquineAnalysis
     public string FusionSummary { get; private set; } = "";
     public double[] T { get; private set; } = [];
     public double[] Speed { get; private set; } = [];
+    public double[] SpeedSigma { get; private set; } = [];
     public double[] Accel { get; private set; } = [];
+    public double[] AccelSigma { get; private set; } = [];
     public double[] LatAccel { get; private set; } = [];
     public int[] GaitCode { get; private set; } = [];
     public int[] GirthImu { get; private set; } = [];
@@ -236,7 +238,8 @@ public sealed class EquineAnalysis
         var se = Obj(r, "series");
         if (se.ValueKind == JsonValueKind.Object)
         {
-            a.T = Doubles(se, "t"); a.Speed = Doubles(se, "velocidad"); a.Accel = Doubles(se, "aceleracion"); a.LatAccel = Doubles(se, "aceleracion_lateral");
+            a.T = Doubles(se, "t"); a.Speed = Doubles(se, "velocidad"); a.Accel = Doubles(se, "aceleracion");
+            a.SpeedSigma = Doubles(se, "sigma_velocidad"); a.AccelSigma = Doubles(se, "sigma_aceleracion"); a.LatAccel = Doubles(se, "aceleracion_lateral");
             a.GaitCode = Doubles(se, "aire").Select(x => double.IsFinite(x) ? (int)x : -1).ToArray();
         }
         var gi = Obj(r, "series_cincha");

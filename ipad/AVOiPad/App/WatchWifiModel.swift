@@ -140,6 +140,9 @@ final class WatchWifiModel {
     @ObservationIgnored private var cancelRequested = false
 
     var connected: Bool = false
+    /// Back (GNSS RTK) battery from TELEMETRY v2 (`backBatteryMv` at offset 49, `backStatusValid` at 52; same layout as
+    /// Android core Messages.kt). nil until a valid telemetry arrives.
+    var backBatteryMv: Int? = nil
     var connecting: Bool = false
     var busy: Bool = false
     /// The Bluetooth link dropped during the current download pass (linkLost reconnects on its own).
@@ -251,6 +254,13 @@ final class WatchWifiModel {
             }
             let c = try await IosWatchConnection.open(target: w, clientName: WatchPicker.clientName, progress: report)
             let client = c.client
+            client.unsolicited = { [weak self] (m: BleMessage) in
+                guard m.type == MsgType.telemetry.rawValue, m.payload.count >= 83 else { return }
+                let p = m.payload
+                let mv: Int = Int(p[49]) | Int(p[50]) << 8
+                let valid: Bool = p[52] != 0
+                Task { @MainActor in self?.backBatteryMv = valid && mv > 0 ? mv : nil }
+            }
             c.transport.onDisconnected = { [weak self, weak client] in
                 client?.onDisconnected()
                 Task { @MainActor in self?.linkLost() }
@@ -361,6 +371,7 @@ final class WatchWifiModel {
         ble?.cancel()
         conn?.close()
         conn = nil
+        backBatteryMv = nil
         manager = nil
         ble = nil
         connected = false
