@@ -33,26 +33,35 @@
         </Setter>
     </Style>
 
+    <!-- recuadro de cifra en el estilo de «Datos clave» (petición del usuario 14/11/2026, igual que el iPad AvoMetric): sin caja;
+         icono fino, cifra y unidad centradas, nombre en versalitas debajo, líneas finas y todos de la misma medida -->
+    <c:LabelGlyphConverter x:Key="LabelGlyph"/>
     <Style TargetType="c:AvoMetricTile">
-        <Setter Property="Background" Value="{StaticResource AvoCardBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource AvoLine}"/>
         <Setter Property="Foreground" Value="{StaticResource AvoText}"/>
-        <Setter Property="Padding" Value="14,10,14,10"/>
+        <Setter Property="Padding" Value="8,12,8,12"/>
+        <Setter Property="MinHeight" Value="138"/>
         <Setter Property="ValueBrush" Value="{StaticResource AvoText}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="c:AvoMetricTile">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="{StaticResource AvoRadius}" Padding="{TemplateBinding Padding}">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top" Text="{TemplateBinding Label}" Style="{StaticResource AvoLabel}" TextTrimming="CharacterEllipsis"/>
-                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,2,0,0">
-                                <TextBlock Text="{TemplateBinding Value}" Style="{StaticResource AvoMetricValue}" FontSize="{TemplateBinding ValueSize}" Foreground="{TemplateBinding ValueBrush}"/>
-                                <TextBlock Text="{TemplateBinding Unit}" Margin="5,0,0,4" VerticalAlignment="Bottom" Foreground="{StaticResource AvoTextDim}" FontSize="13"/>
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" Margin="10,0"/>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,0" Margin="0,12"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="{TemplateBinding Padding}">
+                            <TextBlock Text="{Binding Label, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource LabelGlyph}}"
+                                       FontFamily="Segoe MDL2 Assets" FontSize="22" Foreground="{StaticResource AvoSilver}" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,6,0,0">
+                                <TextBlock Text="{TemplateBinding Value}" FontSize="24" Foreground="{TemplateBinding ValueBrush}"/>
+                                <TextBlock Text="{TemplateBinding Unit}" Margin="4,0,0,4" VerticalAlignment="Bottom" Foreground="{StaticResource AvoTextDim}" FontSize="12"/>
                             </StackPanel>
-                            <TextBlock DockPanel.Dock="Bottom" Text="{TemplateBinding Caption}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,4,0,0"/>
-                            <ContentPresenter Margin="0,4,0,0"/>
-                        </DockPanel>
-                    </Border>
+                            <TextBlock Text="{TemplateBinding Label}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource AvoSilver}"
+                                       TextAlignment="Center" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                            <TextBlock Text="{TemplateBinding Caption}" Style="{StaticResource AvoCaption}" TextAlignment="Center" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                            <ContentPresenter Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

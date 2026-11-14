@@ -173,11 +173,12 @@
                             </StackPanel>
                         </c:AvoCard>
 
-                        <UniformGrid Columns="5" Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">
+                        <UniformGrid Columns="6" Margin="0,12,0,0" Visibility="{Binding IsNew, Converter={StaticResource NotBoolVis}}">
                             <c:AvoMetricTile Label="ENTRENAMIENTOS" Value="{Binding Selected.Count, FallbackValue='0'}" ValueSize="22" Caption="Asignados o del archivo" Margin="0,0,10,0"/>
                             <c:AvoMetricTile Label="DISTANCIA" Value="{Binding Selected.DistanceText, FallbackValue='—'}" ValueSize="22" Caption="Suma" Margin="0,0,10,0"/>
                             <c:AvoMetricTile Label="TIEMPO" Value="{Binding Selected.TotalTimeText, FallbackValue='—'}" ValueSize="22" Caption="Suma" Margin="0,0,10,0"/>
                             <c:AvoMetricTile Label="V. MÁXIMA" Value="{Binding Selected.BestSpeedText, FallbackValue='—'}" ValueSize="22" Caption="Filtrada" Margin="0,0,10,0"/>
+                            <c:AvoMetricTile Label="MEJOR 200 M" Value="{Binding Selected.Best200Text, FallbackValue='—'}" ValueSize="22" Caption="Motor AVO" Margin="0,0,10,0"/>
                             <c:AvoMetricTile Label="ÚLTIMO" Value="{Binding Selected.LastDateText, FallbackValue='—'}" ValueSize="22" Caption="Europe/Madrid"/>
                         </UniformGrid>
 

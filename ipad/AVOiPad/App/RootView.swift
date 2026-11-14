@@ -19,36 +19,38 @@ struct RootView: View {
 
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
-        RootNavEntry(page: .home, title: "Inicio", icon: "house"),
+        // «Geocercas y líneas» and «Reloj Wi-Fi» live in «Configuración» (trainer's sketch 14/11/2026)
+        // «Inicio» out of the sidebar (trainer's sketch 13/11/2026): the start screen only shows at launch
         // trainer's sketch 08/11/2026: «Entrenamientos» → «Dashboard», «Listado» → «Entrenamientos», Mapa before Análisis
         RootNavEntry(page: .sessions, title: "Dashboard", icon: "square.grid.2x2"),
         RootNavEntry(page: .trainingList, title: "Entrenamientos", icon: "list.bullet.rectangle"),
-        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
+        // trainer's sketch 14/11/2026: «Calendario» is a button of «Entrenamientos»; «Biomecánica» right after «Análisis»;
+        // «Carreras» after «Jinetes». «Mapa» is a tab of the training; «Análisis» opens it at «Resumen»
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
-        // trainer's sketch 08/11/2026: Informes and Biomecánica in the sidebar under Análisis (out of the training bar)
-        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
-        RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
+        RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
         RootNavEntry(page: .riders, title: "Jinetes", icon: "person"),
-        RootNavEntry(page: .geofences, title: "Geocercas y líneas", icon: "flag"),
-        RootNavEntry(page: .watchWifi, title: "Reloj Wi-Fi", icon: "wifi"),
+        RootNavEntry(page: .races, title: "Carreras", icon: "flag.checkered"),
     ]
     static let systemEntries: [RootNavEntry] = [
-        RootNavEntry(page: .server, title: "Servidor AVO", icon: "server.rack"),
+        // trainer's sketch 13/11/2026: «Configuración» (maintenance, server and future settings) in place of «Servidor AVO»
+        RootNavEntry(page: .settings, title: "Configuración", icon: "gearshape"),
     ]
     /// Pages of ONE training, in the training bar at the top of «Análisis».
     static let trainingTabs: [RootNavEntry] = [
-        RootNavEntry(page: .analysis, title: "Análisis", icon: "map"),
+        // trainer's sketches 14/11/2026: «Resumen» first, «Mapa» in the place of «Análisis» (hidden for now);
+        // «Datos clave» inside Resumen; «Comparar» after «Trabajo en pista»; «Tramos» hidden for now (the stretch
+        // analysis is in «Análisis tramo»); «Asistente IA» last
         RootNavEntry(page: .summary, title: "Resumen", icon: "list.bullet.clipboard"),
+        RootNavEntry(page: .map, title: "Mapa", icon: "map"),
         RootNavEntry(page: .charts, title: "Gráficas", icon: "chart.xyaxis.line"),
         RootNavEntry(page: .trackWork, title: "Trabajo en pista", icon: "stopwatch"),
-        RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
-        RootNavEntry(page: .segments, title: "Tramos", icon: "ruler"),
-        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .compare, title: "Comparar", icon: "square.split.2x1"),
+        RootNavEntry(page: .gps, title: "GPS", icon: "location.circle"),
         RootNavEntry(page: .tides, title: "Mareas", icon: "water.waves"),
         RootNavEntry(page: .engine, title: "Motor", icon: "cpu"),
+        RootNavEntry(page: .assistant, title: "Asistente IA", icon: "sparkles"),
     ]
 
     static var trainingTypes: [UTType] {
@@ -62,15 +64,15 @@ struct RootView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columns) {
             sidebar
-                .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 260)
+                .navigationSplitViewColumnWidth(min: 230, ideal: 250, max: 280)
         } detail: {
             detail
         }
         .navigationSplitViewStyle(.balanced)
-        .onAppear { columns = app.page == .home ? .detailOnly : .all }
+        .onAppear { columns = app.page == .home ? .detailOnly : .doubleColumn }
         .onChange(of: app.page) { (_: Page, newPage: Page) in
             withAnimation(.easeInOut(duration: 0.25)) {
-                columns = newPage == .home ? .detailOnly : .all
+                columns = newPage == .home ? .detailOnly : .doubleColumn
             }
         }
         .fileImporter(isPresented: Binding(get: { app.showImporter }, set: { app.showImporter = $0 }),
@@ -91,39 +93,70 @@ struct RootView: View {
         .sheet(isPresented: Binding(get: { app.stable.assignVisible }, set: { app.stable.assignVisible = $0 })) {
             AssignSheet()
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.horseHistory.visible },
                                               set: { (v: Bool) in if !v { app.horseHistory.close() } })) {
             HorseHistoryView(model: app.horseHistory)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.stretch.visible },
                                               set: { (v: Bool) in if !v { app.stretch.close() } })) {
             StretchAnalysisView(model: app.stretch)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
             PdfViewerSheet(file: f)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.raceVideo.visible && !app.franceGalop.visible },
                                               set: { (v: Bool) in if !v && !app.franceGalop.visible { app.raceVideo.close() } })) {
             RaceVideoView(model: app.raceVideo)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
         .fullScreenCover(isPresented: Binding(get: { app.franceGalop.visible },
                                               set: { (v: Bool) in if !v { app.franceGalop.close() } })) {
             FranceGalopView(model: app.franceGalop)
                 .environment(app)
-                .preferredColorScheme(.dark)
+                .avoColorScheme()
         }
     }
 
     // ------------------------------------------------------------------ sidebar
+    private var liveSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Circle().fill(Avo.ok).frame(width: 8, height: 8)
+                Text("LIVE").font(.caption.weight(.bold)).tracking(1.2).foregroundStyle(Avo.text)
+                Spacer()
+                Text("\(min(4, app.bleLinks.count)) / 4").font(.caption2.monospacedDigit()).foregroundStyle(Avo.textDim)
+            }
+            .padding(.horizontal, 12)
+            ForEach(Array(app.bleLinks.prefix(4))) { (l: BleLink) in
+                Button { app.hardwareVisible = true } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "antenna.radiowaves.left.and.right").font(.callout).frame(width: 22).foregroundStyle(Avo.ok)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(l.name).font(.callout.weight(.semibold)).foregroundStyle(Avo.text).lineLimit(1)
+                            Text("Conectado desde las \(MadridTime.format(l.since, "HH:mm"))").font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .padding(.horizontal, 12).padding(.vertical, 8)
+                    .background(Avo.ok.opacity(0.12), in: RoundedRectangle(cornerRadius: 7))
+                    .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.ok.opacity(0.5), lineWidth: 1))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(.top, 10)
+        .accessibilityIdentifier("nav.live")
+    }
+
     private var sidebar: some View {
         VStack(spacing: 0) {
             ScrollView {
@@ -131,19 +164,28 @@ struct RootView: View {
                     ForEach(RootView.mainEntries) { (e: RootNavEntry) in navButton(e) }
                     Divider().background(Avo.line).padding(.horizontal, 14).padding(.vertical, 8)
                     ForEach(RootView.systemEntries) { (e: RootNavEntry) in navButton(e) }
+                    // trainer's sketches 14/11/2026: hidden until the system connects by Bluetooth; «LIVE» with one row per
+                    // connected equipment (caballo/jockey, máximo 4); each row opens the window that manages the hardware
+                    if !app.bleLinks.isEmpty { liveSection }
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
             }
             VStack(alignment: .leading, spacing: 3) {
-                Text(app.engineInfo).font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-                Text("Formato AVO-TRAINING-1 · AVORAW1").font(.caption2).foregroundStyle(Avo.textDim)
+                // app data (trainer's sketch 14/11/2026: «datos, versión, fecha…»)
+                Text("AVO Performance Horse").font(.caption2.weight(.semibold)).foregroundStyle(Avo.silver)
+                Text("Versión \(AppModel.appVersion) · build \(AppModel.buildNumber)").font(.caption2).foregroundStyle(Avo.textDim)
+                Text("Compilada el \(AppModel.buildDateText)").font(.caption2).foregroundStyle(Avo.textDim)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
         }
         .background(Avo.surface)
+        // «Equipo conectado» window (kept here: the root modifier chain is already at the type-checker limit)
+        .sheet(isPresented: Binding(get: { app.hardwareVisible }, set: { app.hardwareVisible = $0 })) {
+            HardwareSheet().environment(app).avoColorScheme()
+        }
         .navigationTitle("AVO")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -152,8 +194,10 @@ struct RootView: View {
         // «Análisis» stays highlighted on every page of the training
         // «Análisis» stays highlighted on every page of the training except the full-screen «Mapa»
         let active: Bool = e.page == .analysis
-            ? (app.page.isTrainingPage && app.page != .map && app.page != .reports && app.page != .biomech)
+            ? (app.page.isTrainingPage && app.page != .reports && app.page != .biomech)
             : app.page == e.page
+        // Mapa, Análisis and Biomecánica only work once a training has been opened (trainer's sketch 14/11/2026)
+        let locked: Bool = [.map, .analysis, .biomech].contains(e.page) && !(app.trainingOpened && app.selected != nil) && !app.captureMode
         return Button {
             app.page = e.page
             if e.page == .home { columns = .detailOnly }
@@ -161,7 +205,7 @@ struct RootView: View {
             HStack(spacing: 12) {
                 Image(systemName: e.icon).font(.body).frame(width: 22)
                     .foregroundStyle(active ? Avo.red : Avo.silver)
-                Text(e.title).font(.callout.weight(active ? .semibold : .regular))
+                Text(e.title).font(.callout.weight(active ? .semibold : .regular)).lineLimit(1).minimumScaleFactor(0.75)   // never split a name (sketch 13/11/2026)
                     .foregroundStyle(active ? Avo.text : Avo.silver)
                 Spacer(minLength: 0)
             }
@@ -174,6 +218,8 @@ struct RootView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .disabled(locked)
+        .opacity(locked ? 0.4 : 1)
         .accessibilityIdentifier("nav.\(e.page.rawValue)")
     }
 
@@ -182,11 +228,12 @@ struct RootView: View {
         VStack(spacing: 0) {
             // no navigation title bar (trainer's sketch 08/11/2026): the AVO header / training bar is the top row of
             // every page; with the sidebar hidden, a button at its left brings the menu back
-            if app.page != .home {
+            // trainer's sketch 13/11/2026: the general pages have no top bar (only the menu button when the sidebar is hidden)
+            if app.page != .home && (app.page.isTrainingPage || columns == .detailOnly) {
                 HStack(spacing: 0) {
                     if columns == .detailOnly {
                         Button {
-                            withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
+                            withAnimation(.easeInOut(duration: 0.25)) { columns = .doubleColumn }
                         } label: {
                             Image(systemName: "sidebar.left").font(.system(size: 18, weight: .semibold))
                                 .foregroundStyle(Avo.text).frame(width: 44, height: 44)
@@ -198,7 +245,7 @@ struct RootView: View {
                     if app.page.isTrainingPage {
                         TrainingBar()
                     } else {
-                        RootHeader()
+                        Spacer(minLength: 0).frame(height: 52)
                     }
                 }
                 .background(Avo.headerBrush)
@@ -208,24 +255,7 @@ struct RootView: View {
                 pageView(app.page)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if app.showEmptyState { RootEmptyState() }
-                if app.page == .home && columns == .detailOnly {
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.25)) { columns = .all }
-                    } label: {
-                        Label("Menú", systemImage: "sidebar.left")
-                            .font(.callout.weight(.semibold))
-                            .foregroundStyle(Color(hex: 0xF2F4F7))
-                            .padding(.horizontal, 12).padding(.vertical, 8)
-                            .background(Color(hex: 0x12192A, alpha: 0.72), in: RoundedRectangle(cornerRadius: 8))
-                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(hex: 0x3A4A60), lineWidth: 1))
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.leading, 16)
-                    .padding(.top, 12)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .accessibilityLabel("Mostrar menú")
-                    .accessibilityIdentifier("start.menu")
-                }
+                // Inicio has no «Menú» button (trainer's sketch 13/11/2026): its «INICIAR» opens the Dashboard and the sidebar
                 if app.captureMode && app.captureReady {
                     Text("capture.ready")
                         .font(.system(size: 2))
@@ -274,7 +304,10 @@ struct RootView: View {
         case .reports: ReportsView()
         case .watchWifi: WatchWifiView()
         case .server: ServerView()
+        case .settings: SettingsView()
         case .engine: EngineView()
+        case .calendar: CalendarView()
+        case .keyData: KeyDataView()
         }
     }
 }
@@ -342,9 +375,10 @@ private struct RootStatusBar: View {
                     ProgressView().controlSize(.mini)
                 }
             }
-            Text(app.status).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).truncationMode(.tail)
+            Text(app.busy ? app.status : "Versión motor IA · AVO Equine " + app.engineShort).font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).truncationMode(.tail)
             Spacer(minLength: 8)
-            Text("TELEMETRÍA ORIGINAL INTACTA · IMU = CINCHA · Europe/Madrid · v\(AppModel.appVersion)")
+            // trainer's sketch 14/11/2026: engine version on the left, copyright on the right
+            Text("© \(AppModel.copyrightYear) AVO Performance Horse · Todos los derechos reservados")
                 .font(.caption2).foregroundStyle(Avo.textDim).lineLimit(1).minimumScaleFactor(0.6)
         }
         .padding(.horizontal, 14)
@@ -413,25 +447,24 @@ private struct RootEmptyState: View {
 struct RootSessionMenu: View {
     @Environment(AppModel.self) private var app
     var maxWidth: CGFloat = 340
+    @State private var open: Bool = false
+
+    private var sep: some View { Text("|").foregroundStyle(Avo.line) }
 
     var body: some View {
-        Menu {
-            ForEach(app.sessionsView) { (s: SessionItem) in
-                Button {
-                    app.select(s)
-                } label: {
-                    if s === app.selected {
-                        Label("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)", systemImage: "checkmark")
-                    } else {
-                        Text("\(s.dateTimeText) · \(s.horse) · \(s.distanceText)")
-                    }
-                }
-            }
-        } label: {
+        Button { open = true } label: {
             HStack(spacing: 6) {
                 if let s = app.selected {
+                    // trainer's sketch 14/11/2026: Fecha | Caballo | V. máx. | Tiempo | Km
                     Text(s.dateTimeText).fontWeight(.semibold).foregroundStyle(Avo.text)
-                    Text("· \(s.horse) · \(s.distanceText)").foregroundStyle(Avo.textDim)
+                    sep
+                    Text(s.horse).fontWeight(.semibold).foregroundStyle(Avo.text)
+                    sep
+                    Text("V. máx. " + s.maxSpeedText).monospacedDigit().foregroundStyle(Avo.silver)
+                    sep
+                    Text(s.durationText).monospacedDigit().foregroundStyle(Avo.silver)
+                    sep
+                    Text(s.distanceText).monospacedDigit().foregroundStyle(Avo.silver)
                 } else {
                     Text("Sin entrenamiento").foregroundStyle(Avo.textDim)
                 }
@@ -444,8 +477,68 @@ struct RootSessionMenu: View {
             .background(Avo.surface2, in: RoundedRectangle(cornerRadius: 7))
             .overlay(RoundedRectangle(cornerRadius: 7).stroke(Avo.line, lineWidth: 1))
         }
+        .buttonStyle(.plain)
         .disabled(app.sessions.isEmpty)
         .accessibilityLabel("Entrenamiento activo")
+        // trainer's sketch 14/11/2026: «el listado lo quiero alargado con toda la info en línea»
+        .popover(isPresented: $open, arrowEdge: .top) {
+            RootSessionList { (s: SessionItem) in
+                app.select(s)
+                open = false
+            }
+            .environment(app)
+            .avoColorScheme()
+        }
+    }
+}
+
+/// Wide list of the trainings, one line each: Fecha | Caballo | Jinete | Disciplina | V. máx. | Tiempo | Km.
+struct RootSessionList: View {
+    @Environment(AppModel.self) private var app
+    let pick: (SessionItem) -> Void
+
+    private static let widths: [CGFloat] = [150, 200, 170, 90, 110, 80, 90]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            row(["Fecha", "Caballo", "Jinete", "Disciplina", "V. máx.", "Tiempo", "Km"], header: true, selected: false)
+                .background(Avo.surface2)
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(app.sessionsView) { (s: SessionItem) in
+                        Button { pick(s) } label: {
+                            row([s.dateTimeText, s.horse, s.rider, s.discipline, s.maxSpeedText, s.durationText, s.distanceText],
+                                header: false, selected: s === app.selected)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+        .frame(width: RootSessionList.widths.reduce(0, +) + 60)
+        .frame(maxHeight: 520)
+        .background(Avo.surface)
+    }
+
+    private func row(_ cells: [String], header: Bool, selected: Bool) -> some View {
+        HStack(spacing: 0) {
+            Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(Avo.red)
+                .opacity(selected ? 1 : 0).frame(width: 28)
+            ForEach(0..<cells.count, id: \.self) { (i: Int) in
+                Text(cells[i])
+                    .font(header ? .caption.weight(.semibold) : .callout.weight(i < 2 ? .semibold : .regular))
+                    .foregroundStyle(header ? Avo.textDim : (i < 2 ? Avo.text : Avo.silver))
+                    .monospacedDigit()
+                    .lineLimit(1).truncationMode(.tail)
+                    .frame(width: RootSessionList.widths[i], alignment: .leading)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.vertical, header ? 8 : 11)
+        .padding(.trailing, 12)
+        .background(selected ? Avo.redSoft : Color.clear)
+        .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
+        .contentShape(Rectangle())
     }
 }
 
@@ -506,8 +599,8 @@ private struct TrainingBar: View {
         VStack(spacing: 0) {
         HStack(spacing: 10) {
             if app.page == .map {
-                // «Mapa»: only the training picker (trainer's sketch); the other pages and «Asignar» are in «Análisis»
-                RootSessionMenu(maxWidth: 420)
+                // «Mapa»: training picker and «Análisis tramo» (the pages of the training are in the row below)
+                RootSessionMenu(maxWidth: 820)
                 Spacer(minLength: 0)
                 // «Análisis tramo»: full-screen analysis of the stretch selected on the chart (trainer's sketch 08/11/2026)
                 Button {
@@ -519,8 +612,9 @@ private struct TrainingBar: View {
                 .disabled(!app.hasRange || app.selected == nil)
                 .accessibilityIdentifier("map.stretchAnalysis")
             } else {
-            RootSessionMenu(maxWidth: 360)
-            RootPairMenu(maxWidth: 260)
+            // like «Mapa» (trainer's sketch 14/11/2026): only the training with its data; no «Entreno 2» here.
+            // On «Comparar» the bar holds the selector of the trainings to compare (sketch 14/11/2026)
+            if app.page == .compare { CompareSelector() } else { RootSessionMenu(maxWidth: 900) }
             Spacer(minLength: 0)
             Button {
                 app.stable.openAssign(app.selected)
@@ -537,8 +631,9 @@ private struct TrainingBar: View {
         .background(Avo.headerBrush)
         .overlay(alignment: .bottom) { Rectangle().fill(Avo.line).frame(height: 1) }
         // pages of the training in their own row under the bar, all visible (trainer's sketch 08/11/2026);
-        // not on Mapa, Informes and Biomecánica (sidebar pages)
-        if app.page != .map && app.page != .reports && app.page != .biomech {
+        // not on Informes and Biomecánica (sidebar pages). «Mapa» is a tab of the training since 14/11/2026, so the row
+        // shows there too (sketch: «falta el menú que todos llevan en análisis»)
+        if app.page != .reports && app.page != .biomech {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     ForEach(RootView.trainingTabs) { (e: RootNavEntry) in tab(e) }
@@ -559,7 +654,7 @@ private struct TrainingBar: View {
         } label: {
             HStack(spacing: 6) {
                 Image(systemName: e.icon).font(.footnote)
-                Text(e.title).font(.callout.weight(active ? .semibold : .regular))
+                Text(e.title).font(.callout.weight(active ? .semibold : .regular)).lineLimit(1).minimumScaleFactor(0.75)   // never split a name (sketch 13/11/2026)
             }
             .foregroundStyle(active ? Avo.text : Avo.silver)
             .padding(.horizontal, 12).padding(.vertical, 8)

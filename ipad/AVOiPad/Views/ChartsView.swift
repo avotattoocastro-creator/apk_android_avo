@@ -21,7 +21,8 @@ struct ChartsView: View {
                 AvoCard { AvoNoData(text: "Selecciona un entrenamiento para ver las gráficas") }
                 Spacer(minLength: 0)
             } else {
-                ChartsToolbar(charts: charts)
+                // trainer 14/11/2026: the row of zoom / tramo / export / playback buttons is removed from «Gráficas»
+                // (pinch zoom, the overview bar and hold-and-drag selection stay)
                 if app.hasRange && !charts.rangeStats.isEmpty {
                     ChartsRangeStrip(rows: charts.rangeStats)
                 }
@@ -471,7 +472,7 @@ struct ChartsStack: View {
             ChartsMoreCharts(charts: charts, domain: d)
             // data toggles at the end of the scroll
             ChartsDataToggles(charts: charts)
-            ChartsNotes(charts: charts)
+            // «Uso, filtrado y unidades» removed (trainer's sketch 14/11/2026)
         }
     }
 
@@ -593,11 +594,27 @@ private struct ChartsEventList: View {
 
 private struct ChartsDataToggles: View {
     let charts: ChartsModel
+    /// Folded by default (trainer's sketch 14/11/2026: «Oculto · Desplegar»).
+    @State private var open: Bool = false
 
     var body: some View {
         @Bindable var c = charts
         let cols: [GridItem] = [GridItem(.adaptive(minimum: 250, maximum: 420), spacing: 16, alignment: .leading)]
-        AvoCard(title: "Mostrar datos") {
+        AvoCard {
+            Button {
+                withAnimation(.easeInOut(duration: 0.2)) { open.toggle() }
+            } label: {
+                HStack(spacing: 8) {
+                    Text("MOSTRAR DATOS").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                    Spacer()
+                    Text(open ? "Ocultar" : "Desplegar").font(.caption.weight(.semibold)).foregroundStyle(Avo.red)
+                    Image(systemName: open ? "chevron.up" : "chevron.down").font(.caption.weight(.bold)).foregroundStyle(Avo.red)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("charts.toggles.fold")
+            if open {
             VStack(alignment: .leading, spacing: 10) {
                 Text("GRÁFICAS").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
                 LazyVGrid(columns: cols, alignment: .leading, spacing: 8) {
@@ -626,6 +643,7 @@ private struct ChartsDataToggles: View {
             }
             .font(.callout)
             .tint(Avo.red)
+            }
         }
     }
 }

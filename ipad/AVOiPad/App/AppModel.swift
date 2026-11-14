@@ -6,14 +6,15 @@ enum Page: String, CaseIterable, Identifiable {
     case home = "Home", sessions = "Sessions", trainingList = "List", races = "Races", stable = "Stable", riders = "Riders", analysis = "Analysis", map = "Map",
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
-         summary = "Summary", trackWork = "TrackWork", assistant = "Assistant"
+         summary = "Summary", trackWork = "TrackWork", assistant = "Assistant",
+         calendar = "Calendar", keyData = "KeyData", settings = "Settings"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
     /// «Mapa» is now the «Análisis» page itself (map, profile, time bar and zones).
     var isTrainingPage: Bool {
         switch self {
-        case .analysis, .map, .summary, .gps, .charts, .trackWork, .assistant, .segments, .biomech, .compare, .tides, .reports, .engine: return true
+        case .analysis, .map, .summary, .gps, .charts, .trackWork, .assistant, .segments, .biomech, .compare, .tides, .reports, .engine, .keyData: return true
         default: return false
         }
     }
@@ -54,7 +55,21 @@ final class AppModel {
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
-    var page: Page = .home { didSet { if oldValue != page { onPageChanged() } } }
+    /// «Análisis» (map + charts) is hidden for now (trainer's sketch 14/11/2026): asking for it opens «Resumen», the first
+    /// tab of the training.
+    var page: Page = .home {
+        didSet {
+            if page == .analysis { page = .summary; return }
+            if oldValue != page { onPageChanged() }
+        }
+    }
+    /// A training has been opened (list, calendar, dashboard…): unlocks Mapa / Análisis / Biomecánica in the sidebar.
+    var trainingOpened: Bool = false
+    /// Bluetooth links open now: the sidebar «Equipo conectado» button only shows while there is one (sketch 14/11/2026).
+    var bleLinks: [BleLink] = []
+    var hardwareVisible: Bool = false
+    /// Library restored and «AVO Horse» checked: «INICIAR» of the start screen is enabled.
+    var startReady: Bool = false
     var sessions: [SessionItem] = []
     var importLog: [ImportLogRow] = []
     var status: String = "Listo · importa un entrenamiento .avo o .avr"
@@ -72,7 +87,7 @@ final class AppModel {
     var chartXMin: Double = .nan
     var chartXMax: Double = .nan
     var isPlaying: Bool = false
-    var playbackSpeed: Double = 10
+    var playbackSpeed: Double = 1   // 1× by default (trainer 14/11/2026)
     let playbackSpeeds: [Double] = [1, 2, 5, 10, 20, 60]
     /// Alert shown by RootView (Windows IDialogs.Show).
     var alert: AppAlert? = nil

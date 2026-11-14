@@ -13,39 +13,27 @@ struct AnalysisView: View {
         GeometryReader { geo in
             let wide: Bool = geo.size.width >= 1000
             ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
-                    ShellSessionHeader(horseOnRight: true)
+                // «Resumen» in the Equimetre style (trainer 14/11/2026: «Así quiero resumen»): head of the training,
+                // then «Parámetros clave» (the «Datos clave» figures) as a folding section, then the horse analysis.
+                // The map with playback is now its own tab («Mapa»).
+                VStack(alignment: .leading, spacing: 14) {
                     if app.selected == nil {
                         AvoCard { AvoNoData(text: "Sin entrenamiento seleccionado") }
-                    } else if wide {
-                        // top: training data | playback + cursor tiles in one row; then the horse analysis at full width
-                        HStack(alignment: .top, spacing: 12) {
-                            AnalysisSessionCard().frame(width: 300)
-                            VStack(spacing: 12) {
-                                AnalysisPlaybackBar()
-                                AnalysisTiles(columns: 2, horse: horse)
-                                AnalysisRouteMap().frame(height: 360)
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        AnalysisHorseSection(summary: horse, wide: true)
-                        HStack(alignment: .top, spacing: 12) {
-                            AnalysisEngineCard().frame(maxWidth: .infinity)
-                            VStack(spacing: 12) {
-                                TrainingRatingCard()
-                                AnalysisNotesCard()
-                            }
-                            .frame(width: 420)
-                        }
                     } else {
-                        AnalysisPlaybackBar()
-                        AnalysisTiles(columns: 2, horse: horse)
-                        AnalysisRouteMap().frame(height: 320)
-                        AnalysisHorseSection(summary: horse, wide: false)
-                        AnalysisSessionCard()
-                        AnalysisEngineCard()
-                        TrainingRatingCard()
-                        AnalysisNotesCard()
+                        SummaryHero()
+                        SummaryFold(title: "Parámetros clave") { KeyDataView(embedded: true) }
+                        SummaryFold(title: "Análisis del caballo") { AnalysisHorseSection(summary: horse, wide: wide) }
+                        if wide {
+                            // same height (trainer's sketch 14/11/2026: «misma altura»)
+                            HStack(alignment: .top, spacing: 12) {
+                                AnalysisEngineCard(fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
+                                TrainingRatingCard(fill: true).frame(width: 420).frame(maxHeight: .infinity)
+                            }
+                            .fixedSize(horizontal: false, vertical: true)
+                        } else {
+                            AnalysisEngineCard()
+                            TrainingRatingCard()
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -221,9 +209,10 @@ private struct AnalysisTiles: View {
 /// Summary of the AVO Equine Intelligence Engine result for the session.
 private struct AnalysisEngineCard: View {
     @Environment(AppModel.self) private var app
+    var fill: Bool = false
 
     var body: some View {
-        AvoCard(title: "Motor AVO Equine Intelligence", subtitle: app.engineInfo) {
+        AvoCard(title: "Motor AVO Equine Intelligence", subtitle: app.engineInfo, fill: fill) {
             if let s = app.selected {
                 ShellKeyValue(key: "Estado", value: s.engineState)
                 if let e = s.engine {
@@ -533,15 +522,17 @@ private struct AnalysisHorseSection: View {
                 HorseGaitCard(summary: h)
                 if wide {
                     // three equal columns across the whole page
+                    // trainer's sketch 14/11/2026 («misma medida alto»): the three columns end at the same height
                     HStack(alignment: .top, spacing: 12) {
-                        HorseZonesCard(summary: h).frame(maxWidth: .infinity)
-                        HorseEffortCard(summary: h).frame(maxWidth: .infinity)
+                        HorseZonesCard(summary: h, fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
+                        HorseEffortCard(summary: h, fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
                         VStack(spacing: 12) {
                             HorseAccelCard(summary: h)
-                            HorseCurvesCard(summary: h)
+                            HorseCurvesCard(summary: h, fill: true).frame(maxHeight: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
+                    .fixedSize(horizontal: false, vertical: true)
                 } else {
                     HorseZonesCard(summary: h)
                     HorseEffortCard(summary: h)
@@ -656,10 +647,11 @@ private struct HorseGaitCard: View {
 /// Speed zones of the filtered speed (bands, approximate gait labels).
 private struct HorseZonesCard: View {
     let summary: HorseSummary
+    var fill: Bool = false
 
     var body: some View {
         let h: HorseSummary = summary
-        AvoCard(title: "Zonas de velocidad", subtitle: "Velocidad filtrada · tiempo y distancia por banda (aire aproximado)") {
+        AvoCard(title: "Zonas de velocidad", subtitle: "Velocidad filtrada · tiempo y distancia por banda (aire aproximado)", fill: fill) {
             if h.zoneTotalS <= 0 {
                 AvoNoData(text: "Sin datos de velocidad")
             } else {
@@ -711,10 +703,11 @@ private struct HorseZonesCard: View {
 private struct HorseEffortCard: View {
     @Environment(AppModel.self) private var app
     let summary: HorseSummary
+    var fill: Bool = false
 
     var body: some View {
         let h: HorseSummary = summary
-        AvoCard(title: "Esfuerzo", subtitle: "Parado = velocidad < 1 km/h · esfuerzo = más de 25 km/h durante más de 10 s") {
+        AvoCard(title: "Esfuerzo", subtitle: "Parado = velocidad < 1 km/h · esfuerzo = más de 25 km/h durante más de 10 s", fill: fill) {
             LazyVGrid(columns: horseGrid, spacing: 8) {
                 HorseTile(label: "Distancia total", value: HorseFmt.km(h.totalDistanceM))
                 HorseTile(label: "En movimiento", value: TimeText.clock(h.movingS), caption: HorseFmt.pct(h.movingS, h.movingS + h.stoppedS))
@@ -758,10 +751,11 @@ private struct HorseEffortCard: View {
 /// Validated accelerations and braking (SegmentAnalyzer.accelValid).
 private struct HorseAccelCard: View {
     let summary: HorseSummary
+    var fill: Bool = false
 
     var body: some View {
         let h: HorseSummary = summary
-        AvoCard(title: "Aceleraciones y frenadas", subtitle: "Solo aceleración longitudinal validada (incertidumbre ≤ 0,8 m/s², sin cortes)") {
+        AvoCard(title: "Aceleraciones y frenadas", subtitle: "Solo aceleración longitudinal validada (incertidumbre ≤ 0,8 m/s², sin cortes)", fill: fill) {
             LazyVGrid(columns: horseGrid, spacing: 8) {
                 HorseTile(label: "Aceleración máx.", value: HorseFmt.num(h.maxAccel, "0.00", " m/s²"), accent: Avo.ok)
                 HorseTile(label: "Frenada máx.", value: HorseFmt.num(h.maxDecel, "0.00", " m/s²"), accent: Avo.red)
@@ -777,10 +771,11 @@ private struct HorseAccelCard: View {
 /// Curves detected by the engine.
 private struct HorseCurvesCard: View {
     let summary: HorseSummary
+    var fill: Bool = false
 
     var body: some View {
         let h: HorseSummary = summary
-        AvoCard(title: "Curvas", subtitle: "Detectadas por el motor AVO en la parte analizada") {
+        AvoCard(title: "Curvas", subtitle: "Detectadas por el motor AVO en la parte analizada", fill: fill) {
             if !h.hasEngine {
                 AvoNoData(text: "Sin resultado del motor AVO")
             } else {

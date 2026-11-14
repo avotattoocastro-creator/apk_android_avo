@@ -50,6 +50,15 @@ struct ShellRow: Identifiable, Hashable {
 extension AppModel {
     // ------------------------------------------------------------------ launch
     static let appVersion: String = "1.0.0"
+    /// TestFlight build number (CFBundleVersion, set by CI) — shown in the sidebar.
+    static var buildNumber: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "—" }
+    /// Build date ≈ modification date of the executable, in Europe/Madrid.
+    static var buildDateText: String {
+        guard let url = Bundle.main.executableURL,
+              let d = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.modificationDate] as? Date else { return "—" }
+        return MadridTime.format(d, "dd/MM/yyyy HH:mm")
+    }
+    static var copyrightYear: String { MadridTime.format(Date(), "yyyy") }
     static let demoNamePattern: String = "^DEMO_[A-Za-z0-9_]{1,60}\\.avr$"
 
     static var isCaptureLaunch: Bool { ProcessInfo.processInfo.arguments.contains("-AVOCapture") }
@@ -68,6 +77,12 @@ extension AppModel {
         initFavorites()
         initWindows()
         captureMode = AppModel.isCaptureLaunch
+        // «Equipo conectado»: follow the Bluetooth links of the app (no scan or Bluetooth prompt is started here)
+        NotificationCenter.default.addObserver(forName: .avoBleLinksChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.bleLinks = IosBleCentral.shared.currentLinks
+            if self.bleLinks.isEmpty { self.hardwareVisible = false }
+        }
         log.info("app", "Inicio", ["version": AppModel.appVersion, "motor": EquineEngine.available ? EquineEngine.version() : "no disponible"])
         if shellState.started { return }
         shellState.started = true
@@ -75,9 +90,13 @@ extension AppModel {
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             if capture {
+                self.startReady = true
                 await self.runCapture()
             } else {
                 await self.restoreLibrary()
+                // look in «AVO Horse» for saved trainings before «INICIAR» is enabled (trainer 14/11/2026)
+                await self.trainingList.loadFromAvoHorse()
+                self.startReady = true
                 self.startDocumentsSync()
             }
         }
@@ -86,6 +105,7 @@ extension AppModel {
     // ------------------------------------------------------------------ navigation
     /// Called by `page.didSet`: tells the feature model of the page that it is visible.
     func onPageChanged() {
+        if page.isTrainingPage { trainingOpened = true }
         switch page {
         case .stable, .riders: stable?.pageShown()
         case .map: map?.pageShown()
@@ -103,7 +123,7 @@ extension AppModel {
         case .races: races?.pageShown()
         case .trackWork: trackWork?.pageShown()
         case .assistant: assistant?.pageShown()
-        case .home, .sessions, .server, .engine, .summary: break
+        case .home, .sessions, .server, .engine, .summary, .calendar, .keyData, .settings: break
         }
     }
 
@@ -111,7 +131,7 @@ extension AppModel {
     var showEmptyState: Bool {
         if !sessions.isEmpty { return false }
         switch page {
-        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi: return false
+        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi, .calendar, .settings: return false
         default: return true
         }
     }
@@ -321,7 +341,7 @@ extension AppModel {
     }
 
     @MainActor
-    func importFiles(_ paths: [String], restoring: Bool = false) async {
+    func importFiles(_ paths: [String], restoring: Bool = false, navigate: Bool = true) async {
         var seen: Set<String> = []
         var list: [String] = []
         for p in paths where !seen.contains(p.lowercased()) {
@@ -388,7 +408,8 @@ extension AppModel {
         if !imported.isEmpty { stable?.registerImported(imported) }
         if !restoring, let last = lastImported {
             select(last)                                   // what the user just opened
-            if page == .home || page == .sessions { page = .analysis }
+            // The silent launch scan of «AVO Horse» must leave the start screen in place: INICIAR is pressed by the user.
+            if navigate && (page == .home || page == .sessions) { page = .analysis }
         }
         if selected == nil, let newest = AppModel.byDateDescending(sessions).first { select(newest) }
         if bad > 0 && !restoring {

@@ -7,7 +7,6 @@ struct AssistantView: View {
     var body: some View {
         let a: AssistantModel = app.assistant
         VStack(alignment: .leading, spacing: 10) {
-            ShellSessionHeader()
             toolbar(a)
             if !a.hasKey && !a.onDeviceAvailable {
                 setupCard(a)

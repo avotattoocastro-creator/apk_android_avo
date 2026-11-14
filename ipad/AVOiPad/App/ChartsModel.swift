@@ -587,14 +587,20 @@ final class ChartsModel {
     }
 
     /// Recomputes the drawn points for the current window (after zoom/pan), debounced.
-    func scheduleDisplay(delayMs: UInt64 = 120) {
+    /// coalesce = keep the pending refresh instead of restarting it: while dragging the window (overview bar, two-finger
+    /// pan, pinch) the charts redraw every `delayMs` instead of only after the finger stops (trainer 14/11/2026).
+    func scheduleDisplay(delayMs: UInt64 = 120, coalesce: Bool = false) {
+        if coalesce && displayPending { return }
         displayTask?.cancel()
+        displayPending = true
         displayTask = Task { @MainActor [weak self] in
             if delayMs > 0 { try? await Task.sleep(nanoseconds: delayMs * 1_000_000) }
             if Task.isCancelled { return }
+            self?.displayPending = false
             self?.refreshDisplay()
         }
     }
+    @ObservationIgnored private var displayPending: Bool = false
 
     func refreshDisplay() {
         displayGeneration += 1
@@ -629,7 +635,8 @@ final class ChartsModel {
             app.chartXMin = a
             app.chartXMax = a + w
         }
-        if refresh { scheduleDisplay() }
+        scheduleDisplay(coalesce: true)   // always redraw while moving (refresh: false used to wait for the finger to stop)
+        _ = refresh
     }
 
     func zoom(_ factor: Double, at center: Double? = nil) {

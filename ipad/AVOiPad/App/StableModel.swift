@@ -53,6 +53,16 @@ struct StableIdentityRow: Identifiable {
         return AvoFormat.f(best, 1) + " km/h"
     }
 
+    /// Best 200 m among its trainings (engine «Mejor 200 m»; trainer 14/11/2026).
+    var best200Text: String {
+        var b: Double? = nil
+        for s in sessions {
+            guard let e = s.engine, let t = KeyData.cached(id: s.id, json: e.rawJson).best200S else { continue }
+            b = min(b ?? t, t)
+        }
+        return b.map { DotNetFormat.custom($0, "0.00", spanish: true) + " s" } ?? "—"
+    }
+
     var totalTimeText: String {
         var sum: Double = 0
         for s in sessions { sum += s.timeline.count > 1 ? s.timeline.durationS : s.session.durationSeconds }
@@ -161,6 +171,13 @@ final class StableIdentityPage {
         editYear = r.birthYear.map { String($0) } ?? ""
         editNotes = r.notes
         editActive = r.active
+        message = ""
+    }
+
+    /// Back to the full-width list (trainer's sketch 13/11/2026).
+    func backToList() {
+        selectedCode = nil
+        isNew = false
         message = ""
     }
 

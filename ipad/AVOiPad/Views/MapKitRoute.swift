@@ -325,16 +325,12 @@ struct MapKitRoute: UIViewRepresentable {
             let f: ClosedRange<Double>? = (a.isFinite && b.isFinite && b > a) ? a...b : nil
             if f == focus { return }
             focus = f
-            if let map = map, map.didInitialFit, f != nil { fit(animated: true) }
+            // no re-framing on the work span any more: the map keeps the whole-route view it opened with (trainer 14/11/2026)
         }
 
         /// Route points used for framing: those of the focus span when there are enough, otherwise all.
-        private func framePoints(_ d: RouteRenderData) -> [MKMapPoint] {
-            guard let f = focus, d.t.count == d.points.count else { return d.points }
-            var out: [MKMapPoint] = []
-            for i in 0..<d.points.count where f.contains(d.t[i]) { out.append(d.points[i]) }
-            return out.count >= 10 ? out : d.points
-        }
+        /// Route points used for framing: the whole route, the start position and zoom the trainer wants (14/11/2026).
+        private func framePoints(_ d: RouteRenderData) -> [MKMapPoint] { d.points }
 
         func fit(animated: Bool) {
             guard let map = map else { return }

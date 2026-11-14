@@ -9,8 +9,8 @@ struct TidesView: View {
     var body: some View {
         let model: EnvironmentModel = app.environment
         ScrollView {
+            // no session header (trainer's sketch 14/11/2026: the training bar already shows it)
             VStack(alignment: .leading, spacing: 12) {
-                FeatureSessionHeader()
                 if hSize == .compact {
                     TidesConditionsCard(model: model)
                     TidesChartCard(model: model)
@@ -21,10 +21,12 @@ struct TidesView: View {
                         TidesConditionsCard(model: model).frame(width: 440)
                         TidesChartCard(model: model)
                     }
+                    // the three cards with the same height (trainer's sketch 14/11/2026: «misma altura»)
                     HStack(alignment: .top, spacing: 12) {
-                        TidesSourceCards(model: model)
-                        TidesOriginCard(model: model).frame(width: 330)
+                        TidesSourceCards(model: model).frame(maxHeight: .infinity)
+                        TidesOriginCard(model: model).frame(width: 330).frame(maxHeight: .infinity)
                     }
+                    .fixedSize(horizontal: false, vertical: true)
                 }
                 TidesWeatherHours(model: model)
             }
@@ -92,12 +94,15 @@ private struct TidesSourceCards: View {
         if hSize == .compact {
             VStack(spacing: 12) { tideCard; weatherCard }
         } else {
-            HStack(alignment: .top, spacing: 12) { tideCard; weatherCard }
+            HStack(alignment: .top, spacing: 12) {
+                tideCard.frame(maxHeight: .infinity)
+                weatherCard.frame(maxHeight: .infinity)
+            }
         }
     }
 
     private var tideCard: some View {
-        AvoCard(title: "Marea · fuente y valores") {
+        AvoCard(title: "Marea · fuente y valores", fill: hSize != .compact) {
             if model.tideRows.isEmpty {
                 AvoNoData()
             } else {
@@ -113,7 +118,7 @@ private struct TidesSourceCards: View {
     }
 
     private var weatherCard: some View {
-        AvoCard(title: "Meteorología y oleaje · fuente y valores") {
+        AvoCard(title: "Meteorología y oleaje · fuente y valores", fill: hSize != .compact) {
             if model.weatherRows.isEmpty {
                 AvoNoData()
             } else {
@@ -131,7 +136,7 @@ private struct TidesOriginCard: View {
 
     var body: some View {
         @Bindable var m = model
-        AvoCard(title: "Origen de los datos") {
+        AvoCard(title: "Origen de los datos", fill: true) {
             Text("ZONA DE ENTRENAMIENTO").font(.caption2.weight(.semibold)).tracking(0.6).foregroundStyle(Avo.textDim)
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
@@ -183,10 +188,10 @@ private struct TidesOriginCard: View {
             }
             .buttonStyle(.avoPrimary)
             .disabled(model.loading)
-            Text(model.status).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
-            Divider().background(Avo.line)
-            Text("Mareas: predicción oficial del Instituto Hidrográfico de la Marina para un puerto de referencia (no medición en la playa del Regatón). Meteorología y oleaje: modelo numérico de Open-Meteo. Horas en Europe/Madrid con cambio de horario. Cualquier relación con el rendimiento es exploratoria y no implica causalidad.")
-                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            // the explanatory texts are gone (trainer's sketch 14/11/2026); the status only shows while loading or on a problem
+            if model.loading || model.status.hasPrefix("Parcial") || model.status.hasPrefix("Consulta en línea desactivada") {
+                Text(model.status).font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }

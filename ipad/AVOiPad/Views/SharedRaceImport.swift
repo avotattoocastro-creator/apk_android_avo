@@ -19,7 +19,7 @@ struct RaceImportModifier: ViewModifier {
             }
             .sheet(isPresented: Binding(get: { model.pending != nil }, set: { if !$0 { model.cancelPending() } })) {
                 RaceConfirmSheet(model: model)
-                    .preferredColorScheme(.dark)
+                    .avoColorScheme()
             }
     }
 }

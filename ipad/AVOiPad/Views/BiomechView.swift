@@ -10,7 +10,6 @@ struct BiomechView: View {
         let model: BiomechModel = app.biomech
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                FeatureSessionHeader()
                 Text(model.status)
                     .font(.footnote).foregroundStyle(Avo.text)
                     .padding(.horizontal, 12).padding(.vertical, 8)
@@ -22,18 +21,23 @@ struct BiomechView: View {
                     BiomechDiagramCard(model: model)
                     BiomechHeadlines(model: model)
                     BiomechEngineCard(model: model)
+                    BiomechChannelsCard(model: model)
                 } else {
-                    HStack(alignment: .top, spacing: 12) {
-                        VStack(spacing: 12) {
-                            HStack(alignment: .top, spacing: 12) {
-                                BiomechDiagramCard(model: model).frame(maxWidth: .infinity)
-                                BiomechHeadlines(model: model).frame(maxWidth: .infinity)
-                            }
+                    // trainer 14/11/2026 («misma medida»): four blocks of the same size, two equal columns and two
+                    // rows of equal height: horse | figures, then «Canales de la cincha» | «Índices del motor por sensor»
+                    VStack(spacing: 12) {
+                        HStack(alignment: .top, spacing: 12) {
+                            BiomechDiagramCard(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
+                            BiomechHeadlines(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        BiomechEngineCard(model: model).frame(width: 310)
+                        .fixedSize(horizontal: false, vertical: true)
+                        HStack(alignment: .top, spacing: 12) {
+                            BiomechChannelsCard(model: model, fill: true).frame(maxWidth: .infinity, maxHeight: .infinity)
+                            BiomechEngineCard(model: model).frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                        .fixedSize(horizontal: false, vertical: true)
                     }
                 }
-                BiomechChannelsCard(model: model)
                 BiomechWindowCharts(model: model)
                 AvoCard(title: "Simetría exploratoria por sensor y aire (motor AVO)") {
                     FeatureTable(headers: ["IMU", "Aire", "Ventanas", "Trancos", "ln(A1/A2)", "Reproducible", "Asim. temporal", "Reproducible", "Similitud mitades"],
@@ -65,10 +69,10 @@ struct BiomechView: View {
 private struct BiomechDiagramCard: View {
     var model: BiomechModel
     var body: some View {
-        AvoCard(title: "Cincha · posición de los sensores") {
+        AvoCard(title: "Cincha · posición de los sensores", fill: true) {
             HorseDiagramView(activeSensors: model.activeSensors)
-                .frame(minHeight: 240)
                 .aspectRatio(1448.0 / 1086.0, contentMode: .fit)
+                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
                 .accessibilityIdentifier("biomech.horse")
         }
     }
@@ -77,26 +81,32 @@ private struct BiomechDiagramCard: View {
 private struct BiomechHeadlines: View {
     var model: BiomechModel
     var body: some View {
-        Grid(horizontalSpacing: 10, verticalSpacing: 10) {
-            GridRow {
+        // same size for the four figures (two equal rows of two equal columns, «Datos clave» style)
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
                 AvoMetric(label: "Asimetría temporal (exploratoria)", value: model.symmetryHeadline, unit: "%",
-                          caption: "(d1 − d2)/(d1 + d2), grupos reproducibles", accent: Avo.cyan)
+                          caption: "(d1 − d2)/(d1 + d2), grupos reproducibles", accent: Avo.cyan).frame(maxHeight: .infinity)
                 AvoMetric(label: "Cadencia media", value: model.cadenceHeadline, unit: "ciclos/min",
-                          caption: "Sensor central · ventanas válidas")
+                          caption: "Sensor central · ventanas válidas").frame(maxHeight: .infinity)
             }
-            GridRow {
+            HStack(spacing: 0) {
                 AvoMetric(label: "Regularidad", value: model.regularityHeadline, caption: "Correlación entre ciclos (0–1)", accent: Avo.ok)
+                    .frame(maxHeight: .infinity)
                 AvoMetric(label: "Longitud de tranco", value: model.strideHeadline, unit: "m",
-                          caption: "Velocidad / cadencia (estimación)")
+                          caption: "Velocidad / cadencia (estimación)").frame(maxHeight: .infinity)
             }
         }
+        .padding(8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Avo.cardBrush, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Avo.line, lineWidth: 1))
     }
 }
 
 private struct BiomechEngineCard: View {
     var model: BiomechModel
     var body: some View {
-        AvoCard(title: "Índices del motor por sensor") {
+        AvoCard(title: "Índices del motor por sensor", fill: true) {
             if model.metrics.isEmpty {
                 AvoNoData()
             } else {
@@ -120,8 +130,9 @@ private struct BiomechEngineCard: View {
 /// Girth channels, sample rate and scale (decoded data, before the engine).
 private struct BiomechChannelsCard: View {
     var model: BiomechModel
+    var fill: Bool = false
     var body: some View {
-        AvoCard(title: "Canales de la cincha", subtitle: model.scaleNote) {
+        AvoCard(title: "Canales de la cincha", subtitle: model.scaleNote, fill: fill) {
             FeatureKeyValue(key: "Frecuencia de muestreo", value: model.sampleRateText)
             FeatureKeyValue(key: "Alineación con el chaleco", value: model.alignmentText)
             if model.channels.isEmpty {
@@ -155,8 +166,8 @@ private struct BiomechWindowCharts: View {
         let bands: [SyncBand] = app.corrections.bands(app.selected)
         let key: String = "\(d.lowerBound)|\(d.upperBound)|\(model.windowSignal.rawValue)|\(model.windowSensor)|\(app.selected?.id ?? "")|\(app.selected?.engine == nil)"
         VStack(alignment: .leading, spacing: 12) {
-            SyncZoomBar(charts: charts)
-            ChartsNavigator(charts: charts)
+            // trainer's sketch 14/11/2026: no zoom / tramo buttons and no «VER» phase row; the overview bar stays
+            ChartsOverviewBar(charts: charts).frame(height: 34)
             SyncChartBox(title: title, legend: model.legendMain, chartId: "bio.main.\(model.windowSignal.rawValue)") {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
