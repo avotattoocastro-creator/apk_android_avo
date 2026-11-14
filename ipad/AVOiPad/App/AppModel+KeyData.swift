@@ -25,4 +25,31 @@ extension AppModel {
         let pad: Double = max(5, (b - a) * 0.25)
         charts?.setViewport(a - pad, b + pad)
     }
+
+    /// «Distancia de trabajo» (trainer 14/11/2026: the selection must match the figure): selects from the first to the last
+    /// moment at or above the engine «trabajo rápido» speed, on the same filtered speed as «Gráficas». Falls back to the
+    /// engine efforts window when there is no threshold or no sample above it.
+    func openFastWork(thresholdMs: Double?, fallbackT0: Double?, fallbackT1: Double?) {
+        guard let s = selected else { return }
+        let tl: SessionTimeline = s.timeline
+        let v: [Double] = tl.speedFiltered
+        if let thr = thresholdMs, thr > 0, v.count == tl.count, tl.count > 1 {
+            var i0: Int = -1, i1: Int = -1
+            for i in 0..<v.count where v[i].isFinite && v[i] >= thr {
+                if i0 < 0 { i0 = i }
+                i1 = i
+            }
+            if i0 >= 0, i1 > i0 {
+                let a: Double = tl.t[i0], b: Double = tl.t[i1]
+                page = .charts
+                rangeStart = a
+                rangeEnd = b
+                cursorTime = a
+                let pad: Double = max(5, (b - a) * 0.25)
+                charts?.setViewport(a - pad, b + pad)
+                return
+            }
+        }
+        if let a = fallbackT0, let b = fallbackT1 { openInCharts(engineT0: a, engineT1: b) }
+    }
 }

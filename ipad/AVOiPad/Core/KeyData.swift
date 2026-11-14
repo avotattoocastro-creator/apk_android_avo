@@ -66,6 +66,9 @@ struct KeyData: Equatable {
     var hasEngine: Bool = false
     /// Best 200 m time of the training (s), for the Cuadra/Jinetes totals (same rule as the «Mejor 200 m» tile).
     var best200S: Double? = nil
+    /// Engine «trabajo rápido» threshold (m/s, trabajo_pista.perfil.v_rapido): «Distancia de trabajo» is the distance
+    /// covered at or above it, so tapping that figure selects the time above this speed.
+    var fastSpeedMs: Double? = nil
 
     static let ecgCaption: String = "Llega con el ECG de la cincha"
     static let girthCaption: String = "Necesita la cincha montada"
@@ -91,6 +94,7 @@ struct KeyData: Equatable {
         }
         let tp = root["trabajo_pista"] as? [String: Any]
         let trabajos = tp?["trabajos"] as? [String: Any]
+        k.fastSpeedMs = num(tp?["perfil"] as? [String: Any], "v_rapido").flatMap { $0 > 0 ? $0 : nil }
         let efforts: [[String: Any]] = (trabajos?["lista"] as? [Any] ?? []).compactMap { $0 as? [String: Any] }
 
         /// Best time over `meters` among all efforts: (time, engine t0, effort number).
@@ -248,6 +252,19 @@ struct KeyData: Equatable {
                            caption: caption, available: true, group: group)
         }
         return KeyTile(id: id, label: label, value: "—", unit: unit, caption: missing, available: false, group: group)
+    }
+
+    /// The «Velocidad máxima» tile with the app's filtered maximum (the one of the training bar, «Gráficas» and Cuadra),
+    /// so the same figure is shown everywhere. Same rule as KeyData.cs WithMaxSpeed.
+    func withMaxSpeed(kmh: Double) -> KeyData {
+        guard kmh.isFinite, kmh > 0 else { return self }
+        var out: KeyData = self
+        out.tiles = tiles.map { (t: KeyTile) -> KeyTile in
+            guard t.id == "vmax" else { return t }
+            return KeyTile(id: t.id, label: t.label, value: DotNetFormat.custom(kmh, "0.0", spanish: true), unit: t.unit,
+                           caption: "Velocidad filtrada", available: true, group: t.group)
+        }
+        return out
     }
 
     static func gaitName(_ code: String) -> String {

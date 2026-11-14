@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-14 — AVO-SHELL-28 — Cifras que coinciden: velocidad máxima y distancia de trabajo
+**Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
+**Qué cambia (iPad y Windows, por igual):**
+- **Velocidad máxima:** Datos clave / Parámetros clave mostraban la máxima propia del motor (p. ej. 60,2 km/h), mientras
+  que la barra, Gráficas y Cuadra mostraban la filtrada (58,3 km/h). Ahora el recuadro usa la misma velocidad filtrada en
+  todas partes, con el pie «Velocidad filtrada» (`withMaxSpeed` / `WithMaxSpeed`).
+- **Distancia de trabajo:** el motor la calcula como la distancia recorrida a la velocidad de «trabajo rápido» o más
+  (`trabajo_pista.perfil.v_rapido`, PSI 14,5 m/s), y no como un tramo continuo. Antes, al tocarla, se seleccionaba del
+  primer al último esfuerzo, con pausas incluidas (2,11 km frente a 1,11 km).
+  - Ahora selecciona desde el primer hasta el último momento por encima de ese umbral, sobre la misma velocidad filtrada de
+    Gráficas (`openFastWork` / `OpenFastWork`).
+  - Si no hay umbral, abre la ventana de los esfuerzos del motor.
+  - Con un solo trabajo rápido la selección coincide; con varios separados incluye la pausa entre ellos.
+**No se ha tocado:** el motor C++, workflows, firmas, `Info.plist` ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad ni en PC reales.
+
 ## 2026-11-14 — AVO-SHELL-27 — Comparar: tramo sin «Observaciones» y doble toque para quitar la selección
 **Autor:** Claude · Rama `claude/paridad-calendario-datos-clave` (PR #20)
 **Qué cambia (iPad):**

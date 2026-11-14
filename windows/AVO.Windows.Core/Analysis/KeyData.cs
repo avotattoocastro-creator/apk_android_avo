@@ -51,6 +51,16 @@ public sealed class KeyData
     public bool HasEngine { get; private set; }
     /// <summary>Best 200 m time of the training (s), for the Cuadra/Jinetes totals (same rule as «Mejor 200 m»).</summary>
     public double? Best200S { get; private set; }
+    /// <summary>Engine «trabajo rápido» threshold (m/s, trabajo_pista.perfil.v_rapido): «Distancia de trabajo» is the
+    /// distance covered at or above it, so tapping that figure selects the time above this speed (same as iPad).</summary>
+    public double? FastSpeedMs { get; private set; }
+
+    /// <summary>«Velocidad máxima» with the app's filtered maximum (training bar, «Gráficas», Cuadra), so the same figure
+    /// is shown everywhere. Same rule as iPad KeyData.withMaxSpeed.</summary>
+    public static KeyTile WithMaxSpeed(KeyTile t, double kmh) =>
+        t.Id == "vmax" && double.IsFinite(kmh) && kmh > 0
+            ? t with { Value = kmh.ToString("0.0", Es), Caption = "Velocidad filtrada", Available = true }
+            : t;
 
     public IEnumerable<KeyTile> SpeedTiles => Tiles.Where(t => t.Group == 0);
     public IEnumerable<KeyTile> HeartTiles => Tiles.Where(t => t.Group == 1);
@@ -74,6 +84,7 @@ public sealed class KeyData
             foreach (var m in Arr(r, "metricas"))
                 if (Str(m, "nombre") is { Length: > 0 } name && Num(m, "valor") is double v) metrics[name] = v;
             var trabajos = Obj(Obj(r, "trabajo_pista"), "trabajos");
+            k.FastSpeedMs = Num(Obj(Obj(r, "trabajo_pista"), "perfil"), "v_rapido") is double vr && vr > 0 ? vr : null;
             var efforts = Arr(trabajos, "lista").Where(e => e.ValueKind == JsonValueKind.Object).ToList();
 
             // best time over `meters` among all efforts: (time, engine t0, effort number)

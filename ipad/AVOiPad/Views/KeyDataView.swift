@@ -72,22 +72,31 @@ struct KeyDataView: View {
     @ViewBuilder
     private func content(_ s: SessionItem, _ k: KeyData, _ nav: Bool) -> some View {
         // no page title (the training bar shows the session) and no «Calidad de la posición» (trainer 14/11/2026)
-        section("Velocidad y tiempos", k.tiles.filter { $0.group == 0 })
-        section("Pulso", k.tiles.filter { $0.group == 1 })
-        section("Tranco", k.tiles.filter { $0.group == 2 })
+        // same maximum speed as the training bar, «Gráficas» and Cuadra (filtered speed; trainer 14/11/2026: the figures
+        // must coincide), instead of the engine's own maximum
+        let kk: KeyData = k.withMaxSpeed(kmh: s.maxSpeedKmh)
+        section("Velocidad y tiempos", kk.tiles.filter { $0.group == 0 }, kk)
+        section("Pulso", kk.tiles.filter { $0.group == 1 }, kk)
+        section("Tranco", kk.tiles.filter { $0.group == 2 }, kk)
         splitsCard(k)
         gaitsCard(k)
     }
 
     /// Always 6 columns (user request: «6 en línea»), so the rows of the three sections line up.
-    private func section(_ title: String, _ tiles: [KeyTile]) -> some View {
+    private func section(_ title: String, _ tiles: [KeyTile], _ k: KeyData) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
             // as many columns as boxes, across the whole width (6 · 3 · 5, trainer 14/11/2026)
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: max(1, tiles.count)), spacing: 0) {
                 ForEach(tiles) { (t: KeyTile) in
                     if let a = t.t0, let b = t.t1 {
-                        Button { app.openInCharts(engineT0: a, engineT1: b) } label: { tile(t) }
+                        Button {
+                            if t.id == "workdist" {
+                                app.openFastWork(thresholdMs: k.fastSpeedMs, fallbackT0: a, fallbackT1: b)
+                            } else {
+                                app.openInCharts(engineT0: a, engineT1: b)
+                            }
+                        } label: { tile(t) }
                             .buttonStyle(.plain)
                     } else {
                         tile(t)

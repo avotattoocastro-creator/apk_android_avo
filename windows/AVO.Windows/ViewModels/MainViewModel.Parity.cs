@@ -152,11 +152,36 @@ public sealed partial class MainViewModel
     {
         switch (p)
         {
+            case KeyTileView { Tile: { Id: "workdist", T0: double wa, T1: double wb } }: OpenFastWork(SelectedKeyData?.FastSpeedMs, wa, wb); break;
             case KeyTileView { Tile: { T0: double a, T1: double b } }: OpenInCharts(a, b); break;
             case KeySplit sp: OpenInCharts(sp.T0, sp.T1); break;
             case KeyEffort ef: OpenInCharts(ef.T0, ef.T1); break;
         }
     });
+
+    /// <summary>«Distancia de trabajo»: from the first to the last moment at or above the engine «trabajo rápido» speed, on
+    /// the filtered speed of «Gráficas» (same as iPad openFastWork); engine efforts window as fallback.</summary>
+    public void OpenFastWork(double? thresholdMs, double fallbackT0, double fallbackT1)
+    {
+        if (Selected is not SessionItem s) return;
+        var tl = s.Timeline;
+        var v = tl.SpeedFiltered;
+        if (thresholdMs is double thr && thr > 0 && v.Length == tl.T.Length && v.Length > 1)
+        {
+            int i0 = -1, i1 = -1;
+            for (int i = 0; i < v.Length; i++)
+                if (double.IsFinite(v[i]) && v[i] >= thr) { if (i0 < 0) i0 = i; i1 = i; }
+            if (i0 >= 0 && i1 > i0)
+            {
+                double a = tl.T[i0], b = tl.T[i1], pad = Math.Max(5, (b - a) * 0.25);
+                Page = "Charts";
+                RangeStart = a; RangeEnd = b; CursorTime = a;
+                ChartXMin = a - pad; ChartXMax = b + pad;
+                return;
+            }
+        }
+        OpenInCharts(fallbackT0, fallbackT1);
+    }
 
     /// <summary>t0/t1 are engine times (timeline = engine − offset).</summary>
     public void OpenInCharts(double engineT0, double engineT1)
@@ -219,7 +244,8 @@ public sealed record KeyTileView(KeyTile Tile)
 
 public sealed partial class MainViewModel
 {
-    public List<KeyTileView> KeySpeedTiles => SelectedKeyData?.SpeedTiles.Select(t => new KeyTileView(t)).ToList() ?? [];
+    public List<KeyTileView> KeySpeedTiles => SelectedKeyData?.SpeedTiles
+        .Select(t => new KeyTileView(Selected is SessionItem s ? KeyData.WithMaxSpeed(t, s.MaxSpeedKmh) : t)).ToList() ?? [];
     public List<KeyTileView> KeyHeartTiles => SelectedKeyData?.HeartTiles.Select(t => new KeyTileView(t)).ToList() ?? [];
     public List<KeyTileView> KeyStrideTiles => SelectedKeyData?.StrideTiles.Select(t => new KeyTileView(t)).ToList() ?? [];
     private void RaiseKeyTiles() => RaiseMany(nameof(KeySpeedTiles), nameof(KeyHeartTiles), nameof(KeyStrideTiles));
