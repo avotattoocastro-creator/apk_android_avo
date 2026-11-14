@@ -321,6 +321,31 @@ final class WatchWifiModel {
         }
     }
 
+    /// The watch refused WIFI_SYNC(start) with code 6: its own Wi-Fi block is on (it rebooted while starting the AP).
+    var watchWifiBlocked: Bool {
+        guard let f = wifiFailure else { return false }
+        return f.contains(BleWifiControl.reasonBlockedAfterReboot)
+            || f == WatchWifiModel.refusedText(BleWifiControl.reasonBlockedAfterReboot)
+    }
+
+    /// «Reactivar Wi-Fi del reloj»: WIFI_SYNC(5) after confirmation. Does not start the Wi-Fi; the next download tries it.
+    @MainActor
+    func reenableWatchWifi() async {
+        guard let m = manager, conn != nil, !busy else { return }
+        let yes = await ask("Reactivar el Wi-Fi del reloj",
+                            "El reloj bloqueó su Wi-Fi porque se reinició al encenderlo. Si vuelve a reiniciarse, se bloqueará otra vez y la descarga seguirá por Bluetooth. ¿Reactivarlo?",
+                            "Reactivar")
+        if !yes { return }
+        if await m.control.reenableWatchWifi() {
+            wifiFailure = nil
+            setStatus("Wi-Fi del reloj reactivado. Pulsa descargar para probarlo.", ok: true)
+            app.log.info("wifi", "bloqueo de Wi-Fi del reloj borrado (WIFI_SYNC 5)")
+        } else {
+            setStatus("El reloj no aceptó reactivar su Wi-Fi. Se seguirá descargando por Bluetooth.", ok: false)
+            app.log.warn("wifi", "WIFI_SYNC 5 rechazado o sin respuesta")
+        }
+    }
+
     /// «Volver a intentar el Wi-Fi»: clears the WifiBootGuard block (the user says the watch did not reboot).
     func retryWifi() {
         guard let m = manager, conn != nil, !busy else { return }
@@ -362,6 +387,8 @@ final class WatchWifiModel {
         case "batería baja": return "Batería del reloj por debajo del 15 %: ponlo a cargar o cárgalo antes de descargar por Wi-Fi."
         case "sin microSD": return "El reloj no tiene la tarjeta microSD."
         case "ocupado": return "El reloj está ocupado; vuelve a intentarlo en unos segundos."
+        case BleWifiControl.reasonBlockedAfterReboot: return "El reloj bloqueó su Wi-Fi porque se reinició al encenderlo. Puedes reactivarlo con «Reactivar Wi-Fi del reloj»."
+        case BleWifiControl.reasonLowRam: return "El reloj no tiene memoria libre para el Wi-Fi ahora mismo; vuelve a intentarlo en unos segundos o reinicia el reloj."
         case "pendiente": return "Pendiente: se reanuda en la próxima descarga (lo ya recibido se conserva)."
         default: return reason
         }
@@ -502,6 +529,16 @@ final class WatchWifiModel {
     private func applyProgress(_ p: WifiSyncProgress) {
         overall = p
         phase = p.state == .idle || p.state == .cleanup ? "" : p.label
+        // the line under the phase must follow the pass (it stayed at «Pidiendo al reloj que active su Wi-Fi…» while downloading)
+        if !p.viaBle {
+            switch p.state {
+            case .connecting: status = "Uniendo el iPad a la red Wi-Fi del reloj…"
+            case .discovering: status = "Leyendo la lista del reloj por Wi-Fi…"
+            case .downloading: status = "Descargando por Wi-Fi" + (p.speedText.isEmpty ? "…" : " · " + p.speedText)
+            case .verifying: status = "Comprobando la huella SHA-256…"
+            default: break
+            }
+        }
         guard let id = p.sessionId else { return }
         setRow(id) { (r: inout WatchTrainingRow) in
             switch p.state {
