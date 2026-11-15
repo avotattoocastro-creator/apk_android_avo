@@ -5381,7 +5381,7 @@
 		)
 		(property "Datasheet" "" (at 688.34 222.25 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 688.34 222.25 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1546" (at 688.34 222.25 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C53547" (at 688.34 222.25 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 688.34 222.25 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7f1d60de-3689-5e2d-b287-fec21ff0d122"))
 		(pin "2" (uuid "d48a65d3-303c-56e0-8721-a25888fb8b75"))
@@ -5519,7 +5519,7 @@
 		)
 		(property "Datasheet" "" (at 759.46 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 759.46 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1546" (at 759.46 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C53547" (at 759.46 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 759.46 218.44 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "54363ea2-5c81-5b4c-832f-431292640266"))
 		(pin "2" (uuid "765d2b13-5b11-5737-b53b-a043d79077be"))
@@ -5565,7 +5565,7 @@
 		)
 		(property "Datasheet" "" (at 543.56 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 543.56 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1546" (at 543.56 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C53547" (at 543.56 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 543.56 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "92c16ee2-f681-50cc-a2c0-d4028734ac80"))
 		(pin "2" (uuid "51b2e64a-befb-501c-9f03-852a9d4cf904"))
@@ -5611,7 +5611,7 @@
 		)
 		(property "Datasheet" "" (at 567.69 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 567.69 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C1546" (at 567.69 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C53547" (at 567.69 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 567.69 259.08 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "41a15cb2-056e-54d4-9a84-78b8db5d6b30"))
 		(pin "2" (uuid "f6577d8f-02d0-5781-a40a-e81ebe7511bc"))
@@ -5693,7 +5693,7 @@
 		(dnp no)
 		(uuid "ba7fe4d4-bb00-5357-81bf-466497afccf7")
 		(property "Reference" "R40" (at 618.49 260.35 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "49k9" (at 618.49 262.89 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "47k" (at 618.49 262.89 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -5703,7 +5703,7 @@
 		)
 		(property "Datasheet" "" (at 615.95 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 615.95 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C156110" (at 615.95 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25792" (at 615.95 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 615.95 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "ea6a8f15-5478-5716-b463-a75e2a95d8fd"))
 		(pin "2" (uuid "9ce393a1-af07-5fb7-b520-653eb9f4d750"))
@@ -5739,7 +5739,7 @@
 		(dnp no)
 		(uuid "81ef18be-b68e-5877-bb63-e10230b060d7")
 		(property "Reference" "R41" (at 642.62 260.35 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "49k9" (at 642.62 262.89 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "47k" (at 642.62 262.89 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -5749,7 +5749,7 @@
 		)
 		(property "Datasheet" "" (at 640.08 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 640.08 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C156110" (at 640.08 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25792" (at 640.08 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 640.08 261.62 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "cb278736-932d-59d1-8431-049a39b28e4b"))
 		(pin "2" (uuid "725f9c29-613b-5f31-b317-a7615753a294"))
@@ -5785,7 +5785,7 @@
 		(dnp no)
 		(uuid "a44d4b57-4492-5e34-b24a-6913244f6111")
 		(property "Reference" "R42" (at 666.75 261.62 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "49k9" (at 666.75 264.16 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "47k" (at 666.75 264.16 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
@@ -5795,7 +5795,7 @@
 		)
 		(property "Datasheet" "" (at 664.21 262.89 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 664.21 262.89 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C156110" (at 664.21 262.89 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25792" (at 664.21 262.89 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 664.21 262.89 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "7790002d-77b6-55d5-ac11-850af25c7f08"))
 		(pin "2" (uuid "f93155de-dd7f-5b1b-83da-3247936695d0"))
@@ -6065,7 +6065,7 @@
 		(dnp no)
 		(uuid "335202e5-2e2d-582d-9b1f-f5ef38f4e1b6")
 		(property "Reference" "J6" (at 638.81 34.29 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "BAT −" (at 638.81 36.83 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "BAT -" (at 638.81 36.83 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:WirePad_D1.5_Drill0.8"
@@ -6279,7 +6279,7 @@
 		(dnp no)
 		(uuid "f9399d0d-4d95-5917-9987-63d272a36b2f")
 		(property "Reference" "P6" (at 369.57 243.84 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "ECG −" (at 369.57 246.38 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "ECG -" (at 369.57 246.38 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:WirePad_D1.5_Drill0.8"
@@ -6437,7 +6437,7 @@
 		(dnp no)
 		(uuid "f7864750-a294-5222-8085-8fb6a09a2b72")
 		(property "Reference" "TP4" (at 130.81 271.78 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "D−" (at 130.81 274.32 0) (effects (font (size 1 1)) (justify left)))
+		(property "Value" "D-" (at 130.81 274.32 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:TestPoint_Pad_D1.0mm"

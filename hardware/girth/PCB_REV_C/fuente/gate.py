@@ -139,7 +139,7 @@ for t in ("MAX30003CTI+ sin existencias en LCSC el 15/11/2026: pedirlo por Globa
           "MAX30003: rango comercial 0–70 °C (hoja de ADI); suficiente para el entrenamiento, no para frío extremo.",
           "BNO085 por I²C (0x4A) con los mismos GPIO que el XIAO: el firmware 0.5.0 sirve sin cambios; ejes de la placa a comprobar.",
           "Oscilador SiT1533 con la huella de EasyEDA/LCSC: si falta, montar R46 (0 Ω) y el firmware genera el reloj en GPIO4.",
-          "Electrodos: 49,9 kΩ en serie + 1 nF C0G; paso alto analógico ≈ 3,5 Hz (C50 100 nF C0G); C51 1 µF sin montar para 0,35 Hz.",
+          "Electrodos: 47 kΩ en serie + 1 nF C0G; paso alto analógico ≈ 3,5 Hz (C50 100 nF C0G); C51 1 µF sin montar para 0,35 Hz.",
           "Primera programación por los pads TP4/TP5 (USB nativo) con pinza de pogo-pins; después por radio.",
           "Pogos de 3 contactos y batería LP403048 por hilos; cápsula REV 6 (más pequeña) pendiente de CAD.",
           "Nada de esto se ha fabricado ni medido: no es un prototipo validado."):

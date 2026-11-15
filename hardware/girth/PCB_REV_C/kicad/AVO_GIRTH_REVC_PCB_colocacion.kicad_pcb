@@ -3385,7 +3385,7 @@
 		)
 		(property
 			"Value"
-			"BAT −"
+			"BAT -"
 			(at 0 1.6 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -3430,7 +3430,7 @@
 		)
 		(property
 			"MPN"
-			"BAT −"
+			"BAT -"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12487,7 +12487,7 @@
 		)
 		(property
 			"LCSC"
-			"C1546"
+			"C53547"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -12979,7 +12979,7 @@
 		)
 		(property
 			"Value"
-			"49k9"
+			"47k"
 			(at 0 1.07 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -13015,7 +13015,7 @@
 		)
 		(property
 			"LCSC"
-			"C156110"
+			"C25792"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -13024,7 +13024,7 @@
 		)
 		(property
 			"MPN"
-			"49k9"
+			"47k"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -13152,7 +13152,7 @@
 		)
 		(property
 			"Value"
-			"49k9"
+			"47k"
 			(at 0 1.07 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13188,7 +13188,7 @@
 		)
 		(property
 			"LCSC"
-			"C156110"
+			"C25792"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13197,7 +13197,7 @@
 		)
 		(property
 			"MPN"
-			"49k9"
+			"47k"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13325,7 +13325,7 @@
 		)
 		(property
 			"Value"
-			"49k9"
+			"47k"
 			(at 0 1.07 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13361,7 +13361,7 @@
 		)
 		(property
 			"LCSC"
-			"C156110"
+			"C25792"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13370,7 +13370,7 @@
 		)
 		(property
 			"MPN"
-			"49k9"
+			"47k"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -13534,7 +13534,7 @@
 		)
 		(property
 			"LCSC"
-			"C1546"
+			"C53547"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -13707,7 +13707,7 @@
 		)
 		(property
 			"LCSC"
-			"C1546"
+			"C53547"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -13880,7 +13880,7 @@
 		)
 		(property
 			"LCSC"
-			"C1546"
+			"C53547"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -14919,7 +14919,7 @@
 		)
 		(property
 			"Value"
-			"ECG −"
+			"ECG -"
 			(at 0 1.6 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -14964,7 +14964,7 @@
 		)
 		(property
 			"MPN"
-			"ECG −"
+			"ECG -"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -15284,7 +15284,7 @@
 		)
 		(property
 			"Value"
-			"D−"
+			"D-"
 			(at 0 1.3 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -15329,7 +15329,7 @@
 		)
 		(property
 			"MPN"
-			"D−"
+			"D-"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18400,10 +18400,10 @@
 		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 	(gr_text
-		"B−"
+		"B-"
 		(at 104 110)
 		(layer "F.SilkS")
-		(uuid "b4277a3e-b3e0-5117-96b1-b13ef3166f84")
+		(uuid "3e8abc6b-27ee-59bf-80fa-a671513dd449")
 		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 	(gr_text
@@ -18421,10 +18421,10 @@
 		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 	(gr_text
-		"−"
+		"-"
 		(at 83.4 102.54)
 		(layer "F.SilkS")
-		(uuid "480df371-4e95-5618-b4a6-da813ea04925")
+		(uuid "35f7fea0-a017-59ec-9d1b-3e2980ce2f02")
 		(effects (font (size 0.6 0.6) (thickness 0.12)))
 	)
 )

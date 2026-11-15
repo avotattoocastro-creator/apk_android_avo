@@ -154,12 +154,12 @@ def part(ref, fp, value, pos, rot, nets, lcsc="", mpn="", block="", sym=None, dn
 
 
 # códigos LCSC (casco V5 y cincha REV A/B consultados en el CI; nuevos de la REV C: MAX30003CTI+ C1519515,
-# RT9080-18GJ5 C426476, SiT1533AI-H4-DCC C367058, BNO085 C5189642, 49,9 kΩ C156110). El CI vuelve a consultarlos.
+# RT9080-18GJ5 C426476, SiT1533AI-H4-DCC C367058, BNO085 C5189642, 47 kΩ C25792, 1 nF C0G C53547). El CI vuelve a consultarlos.
 LC = {
     "0R": "C17168", "22R": "C25092", "1k": "C11702", "2k2": "C25879", "3k4": "C4940", "3k6": "C25891",
-    "10k": "C25744", "49k9": "C156110", "100k": "C25741", "1M": "C26083",
+    "10k": "C25744", "47k": "C25792", "100k": "C25741", "1M": "C26083",
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "22p": "C1555", "4u7": "C19666", "10u": "C96446", "22u": "C45783",
-    "1n C0G": "C1546", "100n C0G": "C97946",
+    "1n C0G": "C53547", "100n C0G": "C97946",
     "NTC10k": "C77131", "USBLC6": "C7519", "LED": "C2286", "PTC": "C20802", "TVS": "C2827694",
     "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C7558096",
     "BNO085": "C5189642", "XTAL": "C32346", "MAX30003": "C1519515", "SIT1533": "C367058",
@@ -219,7 +219,7 @@ R("R10", "10k", "CHG_STAT", V3, block="Cargador",
 # ---------------------------------------------------------------------------------------- batería (hilos soldados)
 part("J2", "WIRE", "BAT +", (0, 0), 0, {1: "BAT_IN"}, block="Batería", sym="TP", no_assembly=True,
      note="hilo + de la celda LP403048 500 mAh: soldado, sin conector")
-part("J6", "WIRE", "BAT −", (0, 0), 0, {1: GND}, block="Batería", sym="TP", no_assembly=True, note="hilo − de la celda")
+part("J6", "WIRE", "BAT -", (0, 0), 0, {1: GND}, block="Batería", sym="TP", no_assembly=True, note="hilo − de la celda")
 part("F1", "F1206", "PTC 1,5 A", (0, 0), 0, {1: "BAT_IN", 2: VBAT}, LC["PTC"], "SMD1206P150TF", "Batería", sym="R",
      note="fusible rearmable entre la celda y el cargador (la celda lleva además su PCM)")
 R("R32", "1M", VBAT, "BAT_ADC", block="Batería", note="divisor 1:2 → GPIO5 (el firmware usa 2,00 por defecto)")
@@ -299,7 +299,7 @@ R("R31", "10k", "IMU_INT", V3, block="IMU")
 # ---------------------------------------------------------------------------------------- ECG MAX30003 (U6)
 # Hoja del MAX30003 y nota de ADI «How to measure biopotential ECG using a chest strap»: AVDD = DVDD = 1,8 V propios;
 # OVDD = 3,3 V (SPI del ESP32); VREF 10 µF, VCM 10 µF, VBG 1 µF, CPLL 1 nF C0G; pines I.C. a AGND; masa única.
-# Entradas: 49,9 kΩ en serie + 1 nF C0G a masa en cada electrodo (filtro de EMI de 3,2 kHz; con la fuga de 5 nA de la
+# Entradas: 47 kΩ en serie + 1 nF C0G a masa en cada electrodo (filtro de EMI de 3,2 kHz; con la fuga de 5 nA de la
 # detección de electrodo despegado cae solo 0,25 mV). Sin TVS: el MAX30003 ya protege sus entradas y un TVS añadiría
 # fuga. CHPF: 100 nF C0G (paso alto analógico ≈ 3,5 Hz, lo que recomienda ADI para movimiento) + 1 µF sin montar
 # (0,35 Hz si se quiere el ECG clínico completo). Reloj FCLK de 32 768 Hz del oscilador MEMS SiT1533 (cristal de
@@ -331,9 +331,9 @@ C("C48", "1u", "ECG_VBG", GND, block="ECG", note="VBG (X7R)")
 C("C49", "1n C0G", "ECG_CPLL", GND, block="ECG", note="CPLL")
 C("C50", "100n C0G", "ECG_CAPP", "ECG_CAPN", block="ECG", fp="C1206", note="CHPF: paso alto analógico ≈ 3,5 Hz")
 C("C51", "1u", "ECG_CAPP", "ECG_CAPN", block="ECG", dnp=True, note="CHPF opcional (sin montar)")
-R("R40", "49k9", "ECG_E_P", "ECGP", block="ECG", note="serie del electrodo + (EMI, ESD)")
-R("R41", "49k9", "ECG_E_N", "ECGN", block="ECG", note="serie del electrodo −")
-R("R42", "49k9", "ECG_E_REF", "ECG_VCM", block="ECG", note="electrodo de referencia a VCM (mejora el rechazo de modo común)")
+R("R40", "47k", "ECG_E_P", "ECGP", block="ECG", note="serie del electrodo + (EMI, ESD)")
+R("R41", "47k", "ECG_E_N", "ECGN", block="ECG", note="serie del electrodo −")
+R("R42", "47k", "ECG_E_REF", "ECG_VCM", block="ECG", note="electrodo de referencia a VCM (mejora el rechazo de modo común)")
 C("C52", "1n C0G", "ECGP", GND, block="ECG")
 C("C53", "1n C0G", "ECGN", GND, block="ECG")
 C("C54", "1n C0G", "ECGP", "ECGN", block="ECG", dnp=True, note="filtro diferencial opcional (sin montar, como ADI)")
@@ -346,13 +346,13 @@ R("R46", "0R", "ECG_FCLK_MCU", "ECG_FCLK", block="ECG", dnp=True,
 R("R47", "10k", "ECG_INTB", V3, block="ECG")
 for ref, net, lab, nt in (("P4", "ECG_E_P", "ECG +", "pogo ECG contacto 1 (ECGP): placa izquierda"),
                           ("P5", "ECG_E_REF", "ECG REF", "pogo ECG contacto 2 (VCM / referencia)"),
-                          ("P6", "ECG_E_N", "ECG −", "pogo ECG contacto 3 (ECGN): placa derecha")):
+                          ("P6", "ECG_E_N", "ECG -", "pogo ECG contacto 3 (ECGN): placa derecha")):
     part(ref, "WIRE", lab, (0, 0), 0, {1: net}, block="Pogo ECG", sym="TP", no_assembly=True, note=nt)
 
 # ---------------------------------------------------------------------------------------- pruebas y mecánica
 # Primera programación: USB nativo del C6 por los pads TP (pinza de pogo-pins), con la cápsula abierta. Después, por radio.
 TP("TP1", "EN", "EN"); TP("TP2", "BOOT", "BOOT", "GPIO9 a GND al arrancar = descarga")
-TP("TP3", "GND", GND); TP("TP4", "D−", "USB_DM", "USB nativo del C6 (programación)")
+TP("TP3", "GND", GND); TP("TP4", "D-", "USB_DM", "USB nativo del C6 (programación)")
 TP("TP5", "D+", "USB_DP", "USB nativo del C6 (programación)"); TP("TP6", "3V3", V3)
 TP("TP7", "VBAT", VBAT); TP("TP8", "5V", VBUS, "5 V para programar sin batería")
 for i, (sx, sy) in enumerate(((1, 1), (-1, 1), (-1, -1), (1, -1)), 1):
