@@ -1,5 +1,5 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T11:02:50+0000 **
+** Created on 2026-11-15T11:52:00+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 6 DRC violations **
@@ -24,10 +24,10 @@
     @(96.7500 mm, 112.3000 mm): Segment of D3 on F.Silkscreen
     @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 10 unconnected pads **
+** Found 8 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(93.4223 mm, 104.4293 mm): Track [+3V3] on In2.Cu, length 6.7376 mm
+    @(94.8798 mm, 104.4293 mm): Track [+3V3] on In2.Cu, length 8.5092 mm
     @(86.6000 mm, 100.0600 mm): Pad 14 [+3V3] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -40,7 +40,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(110.3000 mm, 96.8000 mm): Pad 14 [GND] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(108.0177 mm, 111.5221 mm): Track [VSYS] on F.Cu, length 2.6680 mm
@@ -55,16 +55,8 @@
     @(110.3000 mm, 95.2000 mm): Pad 12 [ECG_CS] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(88.0600 mm, 97.4000 mm): Pad 22 [ECG_DRDY] of U6 on F.Cu
-    @(115.2000 mm, 94.1000 mm): Pad 6 [ECG_DRDY] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.0600 mm, 97.8000 mm): Pad 21 [ECG_MISO] of U6 on F.Cu
-    @(110.3000 mm, 98.4000 mm): Pad 16 [ECG_MISO] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
     @(93.0000 mm, 113.6000 mm): PTH pad 1 [POGO_5V] of P1
-    @(91.6000 mm, 110.4000 mm): Track [POGO_5V] on F.Cu, length 3.3564 mm
+    @(91.6000 mm, 110.4000 mm): Pad 1 [POGO_5V] of F2 on F.Cu
 
 ** Found 0 Footprint errors **
 
