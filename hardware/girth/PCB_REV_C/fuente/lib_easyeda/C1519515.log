@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C1519515
+       Symbol name : MAX30003CTI+
+       Library path : lib_easyeda/C1519515.kicad_sym
+[INFO] Created Kicad footprint for ID: C1519515
+       Footprint name: QFN-28_L5.0-W5.0-P0.50-TL-EP3.3
+       Footprint path: lib_easyeda/C1519515.pretty/QFN-28_L5.0-W5.0-P0.50-TL-EP3.3.kicad_mod
+[INFO] Created 3D model for ID: C1519515
+       3D model name: QFN-28_L5.0-W5.0-H0.9-P0.50
+       3D model path (wrl): lib_easyeda/C1519515.3dshapes/QFN-28_L5.0-W5.0-H0.9-P0.50.wrl
+       3D model path (step): lib_easyeda/C1519515.3dshapes/QFN-28_L5.0-W5.0-H0.9-P0.50.step
+-- easyeda2kicad.py v1.0.1 --
