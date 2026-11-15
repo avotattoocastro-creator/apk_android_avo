@@ -34,7 +34,9 @@ os.makedirs(os.path.join(OUT, "STL"), exist_ok=True)
 
 # =============================================================================================== colores (RGB 0..1)
 C_PETG = (0.12, 0.13, 0.14)        # PETG negro
-C_PETG_TAPA = (0.80, 0.10, 0.12)   # PETG rojo AVO
+C_PETG_TAPA = (0.80, 0.10, 0.12)   # PETG rojo AVO (opaco)
+C_PETG_TRANS = (0.86, 0.88, 0.84)  # PETG translúcido «natural» (base = aro de luz)
+C_LED = (0.97, 0.97, 0.92)
 C_TPU = (0.15, 0.15, 0.16)
 C_TPU_ROJO = (0.85, 0.15, 0.15)
 C_PCB = (0.05, 0.35, 0.15)
@@ -98,31 +100,49 @@ VF_D = VG + P["holgura_delante"] + P["cuero"]  # canto delantero exterior de la 
 VF_T = VG + P["holgura_detras"] + P["cuero"]   # canto trasero exterior (v = +VF_T)
 UF = P["funda_largo"] / 2
 
-# ---------------------------------------------------------------------------------------------- cápsula REV 6
+# ---------------------------------------------------------------------------------------------- cápsula REV 6.1
+# REV 6.1: base entera de PETG translúcido «natural» (es el aro de luz: rodea la PCB a la altura de los 4 LED) y tapa
+# plana de PETG opaco. La junta sube por encima de la PCB (z = 13,0): una sola junta TPU 85A en ranura, con los 6
+# tornillos FUERA de la línea de estanqueidad (insertos ciegos en orejas macizas).
 CAP = dict(
     I=dict(x0=-25.5, x1=25.5, y0=-26.25, y1=17.5, r=2.5),   # hueco interior (celda 50 × 34 + placas pogo en −Y)
-    pared=2.2,
+    pared=4.0,                     # pared gruesa: ranura de 1,9 + 2 × 1,05 de apoyo; difusor de 4 mm
     suelo=1.7,                     # = altura de la cara de la placa pogo (queda a ras)
     bat=(50.0, 34.0, 6.0),         # LiPo 603450 1000 mAh
     pad=1.2,                       # separador TPU 85A celda–PCB
     pcb=1.0,
-    comp=2.6,                      # altura máx. de componente (REV D)
-    aire=0.4,
-    techo=1.8,
-    z_junta=9.0, junta=0.8,
-    lengueta=1.0,                  # lengüeta de la tapa dentro de la pared de la base
+    comp=2.6,                      # altura máx. de componente (REV D; SK6812SIDE-A = 2,0)
+    aire=0.5,
+    techo=2.5,                     # tapa plana opaca
+    ranura=dict(off0=1.05, off1=2.95, prof=1.2),             # ranura de la junta (desde el hueco I)
+    junta=dict(off0=1.4, off1=2.6, alto=1.6),                # junta TPU 85A 1,2 × 1,6 → 25 % de compresión
+    lengueta=1.0, lengueta_alto=1.2,
     pogo_y=-21.4, pogo_x={"ECG": -13.0, "CARGA": 13.0},
-    tornillos=[(-26.7, 18.7), (26.7, 18.7), (-26.7, -27.45), (26.7, -27.45), (0.0, 19.9), (0.0, -28.65)],
+    tornillo_off=5.2,              # centro de los tornillos a 5,2 mm del hueco (fuera de la ranura)
     boss_r=3.0,
 )
+LEDS = [("D10", -15.0, 13.30, +1), ("D11", 14.0, 13.30, +1), ("D12", 14.0, -13.30, -1), ("D13", -15.0, -13.30, -1)]
+LED_LENTE_Y = 14.66                # cara de la lente (a 0,34 mm del canto de la PCB)
+
+
+def _tornillos():
+    I = CAP["I"]; r = I["r"]; d = CAP["tornillo_off"]
+    k = (r + d) / math.sqrt(2)
+    xs = (I["x0"] + r, I["x1"] - r); ys = (I["y0"] + r, I["y1"] - r)
+    return [(xs[0] - k, ys[1] + k), (xs[1] + k, ys[1] + k), (xs[0] - k, ys[0] - k), (xs[1] + k, ys[0] - k),
+            (0.0, I["y1"] + d), (0.0, I["y0"] - d)]
+
+
+CAP["tornillos"] = _tornillos()
 ZB0 = CAP["suelo"]                             # celda
 ZB1 = ZB0 + CAP["bat"][2]
 ZP0 = ZB1 + CAP["pad"]                          # PCB cara B
 ZP1 = ZP0 + CAP["pcb"]                          # PCB cara F
 ZC1 = ZP1 + CAP["comp"]
-ZT0 = ZC1 + CAP["aire"]                         # techo interior de la tapa
+ZT0 = ZC1 + CAP["aire"]                         # cara inferior de la tapa = canto superior de la base
 ZT1 = ZT0 + CAP["techo"]                        # cara superior de la cápsula
-ZJ0, ZJ1 = CAP["z_junta"], CAP["z_junta"] + CAP["junta"]
+ZJ0, ZJ1 = ZT0 - CAP["ranura"]["prof"], ZT0     # ranura de la junta en el canto de la base
+Z_LED = ZP1 + 1.0                               # centro de la luz de los LED
 H_CAP = ZT1
 
 # soporte
@@ -252,6 +272,10 @@ def cap_contours():
         R.add(A.circle(x, y, CAP["boss_r"], 40))
     C["O"] = R.contour(0.03)
     C["_rasterO"] = R
+    for nm, (o0, o1) in (("g", (CAP["ranura"]["off0"], CAP["ranura"]["off1"])),
+                         ("j", (CAP["junta"]["off0"], CAP["junta"]["off1"]))):
+        C[nm + "I"] = A.rrect(cx, cy, w + 2 * o0, h + 2 * o0, I["r"] + o0, 6)
+        C[nm + "O"] = A.rrect(cx, cy, w + 2 * o1, h + 2 * o1, I["r"] + o1, 6)
     lg = CAP["lengueta"]
     C["I_l0"] = A.rrect(cx, cy, w - 0.4, h - 0.4, I["r"] - 0.2, 6)            # cara exterior de la lengüeta
     C["I_l1"] = A.rrect(cx, cy, w - 0.4 - 2 * lg, h - 0.4 - 2 * lg, max(0.5, I["r"] - 0.2 - lg), 6)
@@ -274,65 +298,50 @@ def pieza_base():
         win.append(A.stadium(x, y, 15.5 + 0.4, 4.65 + 0.4))
         cupi.append(A.stadium(x, y, 17.1 + 0.6, 6.25 + 0.6))
         cupo.append(A.stadium(x, y, 17.1 + 0.6 + 1.6, 6.25 + 0.6 + 1.6))
-    ins = [A.circle(x, y, 1.6, 24) for (x, y) in CAP["tornillos"]]
-    z_ins = ZJ0 - 4.5
+    ins = [A.circle(x, y, 1.6, 24) for (x, y) in CAP["tornillos"]]     # insertos M2 × 4 ciegos (Ø3,2 × 5)
+    z_ins = ZT0 - 5.0
     z_cup = 5.0
+    assert z_cup < z_ins < ZJ0
     L = [(0, ZB0, [O] + win),
-         (ZB0, z_ins, [O, I] + cupo + cupi),
-         (z_ins, z_cup, [O, I] + cupo + cupi + ins),
-         (z_cup, ZJ0, [O, I] + ins)]
-    assert z_ins < z_cup
-    return A.layered(L, "AVO_CINCHA_R6_base", C_PETG)
+         (ZB0, z_cup, [O, I] + cupo + cupi),
+         (z_cup, z_ins, [O, I]),
+         (z_ins, ZJ0, [O, I] + ins),
+         (ZJ0, ZT0, [O, I, C["gO"], C["gI"]] + ins)]
+    return A.layered(L, "AVO_CINCHA_R6_1_base_aro_luz", C_PETG_TRANS)
 
 
-def pieza_junta():
+def pieza_junta(comprimida=True):
+    """junta TPU 85A de 1,2 × 1,6 en la ranura de 1,9 × 1,2: 25 % de compresión, 84 % de llenado.
+    En el conjunto se dibuja comprimida (1,2 de alto); el STL sale libre (1,6)."""
     C = cap_contours()
-    holes = [A.circle(x, y, 1.2, 20) for (x, y) in CAP["tornillos"]]
-    return A.layered([(ZJ0, ZJ1, [C["O"], C["I"]] + holes)], "AVO_CINCHA_R6_junta_TPU85A", C_TPU_ROJO)
+    h = CAP["ranura"]["prof"] if comprimida else CAP["junta"]["alto"]
+    return A.layered([(ZJ0, ZJ0 + h, [C["jO"], C["jI"]])], "AVO_CINCHA_R6_1_junta_TPU85A", C_TPU_ROJO)
 
 
 PCB_HOLES = [(sx * 20.8, sy * 12.8) for sx in (1, -1) for sy in (1, -1)]
-LED_XY = (10.0, 13.3)
 ANT = dict(cx=0.0, cy=-20.2, L=35.0, W=9.0)      # Molex 146153 (35 × 9 × 0,1)
 
 
 def pieza_tapa():
+    """tapa plana de PETG opaco: apoya en el canto de la base (tope duro → compresión fija de la junta), lengüeta de
+    centrado dentro del hueco, 4 columnas que sujetan la PCB, rebaje de la antena y avellanados con arandela"""
     C = cap_contours()
     O = C["O"]
     l0, l1 = C["I_l0"], C["I_l1"]
     sh = [A.circle(x, y, 1.2, 20) for (x, y) in CAP["tornillos"]]      # paso M2
-    cb = [A.circle(x, y, 2.05, 28) for (x, y) in CAP["tornillos"]]     # cabeza ISO 7380 M2 (Ø3,5)
+    cb = [A.circle(x, y, 2.3, 28) for (x, y) in CAP["tornillos"]]      # cabeza ISO 7380 M2 + arandela DIN 433
     boss = [A.circle(x, y, 2.2, 28) for (x, y) in PCB_HOLES]
-    pil = [A.circle(x, y, 0.875, 16) for (x, y) in PCB_HOLES]          # guía para M2 roscado en PETG
+    pil = [A.circle(x, y, 0.875, 16) for (x, y) in PCB_HOLES]          # guía ciega para M2 roscado en PETG
     ant = A.rrect(ANT["cx"], ANT["cy"], ANT["L"] + 0.6, ANT["W"] + 0.4, 0.5, 2)
-    led = A.circle(*LED_XY, 1.6, 20)
-    z_cb = ZT1 - 1.1
-    z_pil = ZT0 + 1.0
-    z_ant = ZT0 + 0.3
-    z_led = ZT1 - 1.2
-    z_l = ZB1 + 0.2                                    # la lengüeta baja hasta 0,2 mm sobre la celda
-    zs = sorted({z_l, ZJ1, ZP1, ZT0, z_ant, z_pil, z_cb, z_led, ZT1})
-    L = []
-    for z0, z1 in zip(zs[:-1], zs[1:]):
-        zm = (z0 + z1) / 2
-        cs = []
-        if zm < ZJ1:
-            cs = [l0, l1]
-        else:
-            cs = [O] + (cb if zm > z_cb else sh)
-            if zm < ZT0:
-                cs.append(l1)
-                if zm > ZP1:
-                    cs += boss + pil
-            else:
-                if zm < z_pil:
-                    cs += pil
-                if zm < z_ant:
-                    cs.append(ant)
-                if zm > z_led:
-                    cs.append(led)
-        L.append((z0, z1, cs))
-    return A.layered(L, "AVO_CINCHA_R6_tapa", C_PETG_TAPA)
+    z_l = ZT0 - CAP["lengueta_alto"]
+    z_ant, z_pil, z_cb = ZT0 + 0.3, ZT0 + 1.0, ZT1 - 1.4
+    L = [(ZP1, z_l, boss + pil),
+         (z_l, ZT0, [l0, l1] + boss + pil),
+         (ZT0, z_ant, [O, ant] + sh + pil),
+         (z_ant, z_pil, [O] + sh + pil),
+         (z_pil, z_cb, [O] + sh),
+         (z_cb, ZT1, [O] + cb)]
+    return A.layered(L, "AVO_CINCHA_R6_1_tapa", C_PETG_TAPA)
 
 
 def pieza_separador():
@@ -340,7 +349,7 @@ def pieza_separador():
     R.add(A.rrect(0, 0, 45.0, 29.0, 2.0, 4))
     for (x, y) in PCB_HOLES:
         R.sub(A.circle(x, y, 2.3, 32))           # paso de las cabezas de los tornillos de la PCB
-    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_separador_TPU85A", C_TPU)
+    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_1_separador_TPU85A", C_TPU)
 
 
 # ---------------------------------------------------------------------------------------------- compra: cápsula
@@ -350,6 +359,7 @@ FP_SIZE = {"R_0402_1005Metric": (1.0, 0.5, 0.35), "C_0402_1005Metric": (1.0, 0.5
            "VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias": (3.0, 3.0, 1.0),
            "ST_LGA-14L_2.5x3mm_P0.5mm": (2.5, 3.0, 0.83), "MEMSIC_MMC5983MA_LGA-16_3x3mm_P0.5mm": (3.0, 3.0, 1.0),
            "AVO_VQFN-32-1EP_4x4mm_P0.4mm_EP2.8mm": (4.0, 4.0, 0.8), "CP_EIA-3528-21_Kemet-B": (3.5, 2.8, 1.9),
+           "AVO_TQFP-32_5x5mm_P0.5mm": (7.0, 7.0, 1.2),
            "LED_0603_1608Metric": (1.6, 0.8, 0.6)}
 
 
@@ -387,6 +397,12 @@ def compra_pcb():
     for m in pas:
         sm.merge(m)
     out += [big, sm]
+    # 4 LED SK6812SIDE-A (4,0 × 1,6 × 2,0), lente al canto (y = ±14,66): luz por los dos lados largos
+    leds = A.Mesh("LED_SK6812SIDE-A_x4", C_LED)
+    for ref, x, y, sg in LEDS:
+        y0, y1 = sorted((y - sg * 0.8, sg * LED_LENTE_Y))
+        leds.merge(A.box(x - 2.0, y0, ZP1, x + 2.0, y1, ZP1 + 2.0, ref, C_LED))
+    out.append(leds)
     # U.FL (Hirose U.FL-R-SMT-1, 3 × 3 × 1,25) junto al canto +X del módulo, con la clavija acodada
     out.append(A.box(19.3, -5.5, ZP1 + 2.4 - 1.25, 22.3, -2.5, ZP1 + 2.4, "UFL_conector", C_ORO))
     return out
@@ -423,17 +439,20 @@ def compra_pogo_placas():
 
 def compra_tornilleria_capsula():
     out = []
-    ins = A.Mesh("Inserto_M2x4_x6", C_ORO)
-    scr = A.Mesh("Tornillo_ISO7380_M2x8_inox_x6", C_METAL)
+    ins = A.Mesh("Inserto_M2x4_ciego_x6", C_ORO)
+    scr = A.Mesh("Tornillo_ISO7380_M2x6_inox_x6", C_METAL)
+    was = A.Mesh("Arandela_DIN433_M2_inox_x6", C_METAL)
     for (x, y) in CAP["tornillos"]:
-        ins.merge(A.cylinder_z(x, y, 1.6, ZJ0 - 4.0, ZJ0, "", C_ORO, 24, hole=1.0))
-        zh = ZT1 - 1.04
-        scr.merge(A.layered([(zh - 8.0, zh, [A.circle(x, y, 0.95, 16)]), (zh, ZT1, [A.circle(x, y, 1.75, 24)])]))
+        ins.merge(A.cylinder_z(x, y, 1.6, ZT0 - 4.0, ZT0, "", C_ORO, 24, hole=1.0))
+        zw = ZT1 - 1.4
+        was.merge(A.cylinder_z(x, y, 2.0, zw, zw + 0.3, "", C_METAL, 24, hole=1.1))
+        zh = zw + 0.3
+        scr.merge(A.layered([(zh - 6.0, zh, [A.circle(x, y, 0.95, 16)]), (zh, zh + 1.04, [A.circle(x, y, 1.75, 24)])]))
     pcbs = A.Mesh("Tornillo_ISO7380_M2x5_inox_x4_PCB", C_METAL)
     for (x, y) in PCB_HOLES:
         pcbs.merge(A.layered([(ZP0 - 1.04, ZP0, [A.circle(x, y, 1.75, 24)]),
                               (ZP0, ZP0 + 5.0, [A.circle(x, y, 0.95, 16)])]))
-    out += [ins, scr, pcbs]
+    out += [ins, scr, was, pcbs]
     return out
 
 
@@ -508,7 +527,7 @@ def pieza_soporte():
          (pest, z_ear, [S["Rout"]] + pc + pil),
          (z_ear, cama, [S["Rout"]] + er),
          (cama, cama + SOP["cerco_h"], [S["Rout"], S["Rin"]])]
-    return A.layered(L, "AVO_CINCHA_R6_soporte", C_PETG)
+    return A.layered(L, "AVO_CINCHA_R6_1_soporte", C_PETG)
 
 
 def compra_pogo_pines():
@@ -771,20 +790,44 @@ def sop_v_off():
     return -(S["fy"][0] + S["fy"][1]) / 2
 
 
-def bolsillo():
-    """bolsillo de piel sobre el soporte: pared (fuelle) cosida al panel exterior y tapa con ventana (en local del
-    soporte; z = 0 en la cara superior del panel exterior)"""
+BOLS_VENT = dict(z0=8.0, z1=12.5, tramos=((-24.0, -4.0), (4.0, 24.0)))   # ventanas del fuelle (z de la cápsula)
+
+
+def bolsillo_geo():
     S = sop_contours()
     fx0, fx1 = S["fx"]; fy0, fy1 = S["fy"]
     e = P["cuero"]
-    Pin = A.rrect((fx0 + fx1) / 2, (fy0 + fy1) / 2, fx1 - fx0 + 1.0, fy1 - fy0 + 1.0, 6.5, 6)
-    Pout = A.rrect((fx0 + fx1) / 2, (fy0 + fy1) / 2, fx1 - fx0 + 1.0 + 2 * e, fy1 - fy0 + 1.0 + 2 * e, 6.5 + e, 6)
-    ztop = SOP["cama"] + H_CAP + 0.3
+    return dict(x0=fx0 - 0.5 - e, x1=fx1 + 0.5 + e, y0=fy0 - 0.5 - e, y1=fy1 + 0.5 + e, e=e,
+                ztop=SOP["cama"] + H_CAP + 0.3)
+
+
+def bolsillo():
+    """bolsillo de piel sobre el soporte (local del soporte; z = 0 en la cara superior del panel exterior):
+    fuelle de 4 paredes cosido al panel exterior, con 2 + 2 ventanas de 20 × 4,5 mm en los lados largos a la altura de
+    la banda de luz (puente de 8 mm en el centro), y tapa con ventana de 40 × 28 sobre la tapa de la cápsula"""
+    G = bolsillo_geo()
+    x0, x1, y0, y1, e, ztop = G["x0"], G["x1"], G["y0"], G["y1"], G["e"], G["ztop"]
+    zc = SOP["cama"]
+    vz0, vz1 = zc + BOLS_VENT["z0"], zc + BOLS_VENT["z1"]
+    tr = BOLS_VENT["tramos"]
+    out = []
+    xs = A.breaks(x0, x1, 200.0, [t for ab in tr for t in ab])
+    zs = sorted({0.0, vz0, vz1, ztop})
+    keep = lambda x, z: not (vz0 < z < vz1 and any(a < x < b for a, b in tr))
+    for nm, (ya, yb) in (("delante", (y0, y0 + e)), ("detras", (y1 - e, y1))):
+        m = A.grid_slab(xs, zs, ya, yb, keep, "Funda_bolsillo_fuelle_%s" % nm, C_CUERO_OSC)
+        m.transform(A.swap_axes(("x", "z", "y"))); fix_orient(m)
+        out.append(m)
+    for nm, (xa, xb) in (("izq", (x0, x0 + e)), ("der", (x1 - e, x1))):
+        m = A.grid_slab([y0 + e, y1 - e], [0.0, ztop], xa, xb, None, "Funda_bolsillo_fuelle_%s" % nm, C_CUERO_OSC)
+        m.transform(A.swap_axes(("y", "z", "x"))); fix_orient(m)
+        out.append(m)
+    top = A.rrect((x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0, 3.0, 4)
     wnd = A.rrect(0, -4.4, 40.0, 28.0, 5.0, 6)
-    m = A.layered([(0, ztop, [Pout, Pin]), (ztop, ztop + e, [Pout, wnd])], "Funda_bolsillo_capsula", C_CUERO_OSC)
-    snap = A.layered([(ztop + e, ztop + e + 2.2, [A.circle(fx1 - 4.0, -4.4, 6.0, 32)])], "Broche_presion_15mm_bolsillo",
-                     C_METAL)
-    return [m, snap]
+    out.append(A.layered([(ztop, ztop + e, [top, wnd])], "Funda_bolsillo_tapa", C_CUERO_OSC))
+    out.append(A.layered([(ztop + e, ztop + e + 2.2, [A.circle(x1 - 6.0, -4.4, 6.0, 32)])], "Broche_presion_15mm_bolsillo",
+                         C_METAL))
+    return out
 
 
 def chicago(S):
@@ -803,7 +846,7 @@ def e_cuero():
 # =============================================================================================== cables de los electrodos
 def cables(curvo):
     """cable moldeado de cada electrodo (Ø 2,5, rojo) recortado: va por el canal cosido del pliegue delantero, sube por
-    encima de la cincha y llega al empalme JST-SH de 3 vías bajo la ranura del soporte. El de REF va trenzado con el de
+    encima de la cincha y llega a un empalme soldado y encapsulado en termorretráctil con adhesivo, bajo la ranura del soporte. El de REF va trenzado con el de
     ECG− en el tramo común. Devuelve también las longitudes (mm)."""
     out, lens = [], {}
     V_OFF = sop_v_off()
@@ -812,7 +855,7 @@ def cables(curvo):
     wc = W_G1 + 1.9                                   # entre la cincha y el panel exterior
     vc = -VF_D + P["cuero"] + 2.3                     # centro del canal (v)
     wks = {"ECG+": W_IN1 + 6.1, "ECG-": W_IN1 + 4.6, "REF": W_IN1 + 7.6}
-    jst = (xe, ys - 9.0)                              # empalme JST-SH (dentro de la funda, bajo el panel exterior)
+    jst = (xe, ys - 9.0)                              # empalme soldado (dentro de la funda, bajo el panel exterior)
     for k, (ue, ve) in P["e_pos"].items():
         sg = 1 if ue > 0 else -1
         ub = e_lado_capsula(k)
@@ -827,14 +870,15 @@ def cables(curvo):
         xyz = (bend_curvo if curvo else bend_recto)(uvw)
         out.append(A.tube(xyz, 1.25, 7, name="Cable_electrodo_%s_%dmm" % (k, round(L)),
                           color=(0.80, 0.08, 0.08) if k != "REF" else (0.85, 0.45, 0.10)))
-    # empalme JST-SH 3 vías (SHR-03V-S + contrapieza de cable): 6 × 4,3 × 3
-    Mj = frame(jst[0], jst[1], wc - 1.5, curvo)
-    j = A.box(-4.0, -2.15, 0, 4.0, 2.15, 3.0, "Empalme_JST-SH_3vias", (0.92, 0.92, 0.88))
+    # empalme soldado de los 3 cables con el rabillo, dentro de termorretráctil con adhesivo 3:1 (Ø ≈ 5 × 30 mm)
+    Mj = frame(jst[0], jst[1], wc, curvo)
+    j = A.tube([(-15.0, 0, 0), (15.0, 0, 0)], 2.5, 12, name="Empalme_soldado_termorretractil_adhesivo",
+               color=(0.05, 0.05, 0.05))
     out.append(fix_orient(j.transform(Mj)))
     # rabillo del empalme a las colas del pogo del ECG (sube por la ranura del panel exterior)
     pts = [(jst[0], jst[1] + 4.0, wc), (jst[0], ys - 2.5, wc + 0.5), (jst[0], ys, W_OUT0 - 0.5), (jst[0], ys, W_OUT1 - 3.5)]
     uvw = A.resample(A.polyline_round(pts, 2.0, 4), 2.0)
-    out.append(A.tube((bend_curvo if curvo else bend_recto)(uvw), 1.0, 8, name="Rabillo_JST_pogo_ECG",
+    out.append(A.tube((bend_curvo if curvo else bend_recto)(uvw), 1.0, 8, name="Rabillo_empalme_pogo_ECG",
                       color=(0.9, 0.8, 0.1)))
     cables.longitudes = lens
     return out
@@ -864,6 +908,11 @@ def soporte_local():
         hs.merge(A.tube([(xe + dx, y, SOP["cama"] - 7.5), (xe + dx, y, SOP["cama"] - 7.75),
                          (xe + 0.6 * (k - 1), y, -0.8), (xe + 0.6 * (k - 1), y, -3.5)], 0.4, 6))
     com.append(hs)
+    # encapsulado de las colas de los dos conectores de pines (silicona neutra / resina de colada, enrasado)
+    pot = A.Mesh("Encapsulado_colas_pogo_silicona", (0.85, 0.85, 0.9))
+    for k, x in CAP["pogo_x"].items():
+        pot.merge(A.layered([(0.0, SOP["cama"] - 6.0, [A.stadium(x, y, 17.0, 6.95)])]))
+    com.append(pot)
     return imp, com
 
 
@@ -944,17 +993,17 @@ def main():
             u, x, z, math.degrees(math.atan2(tz, tx)), TX.radius(u)))
     # ------------------------------------------------------------------ piezas impresas: STL + STEP por pieza
     C = cap_contours()
-    note("cápsula REV 6: %.1f × %.1f × %.1f mm (exterior con orejas de los tornillos)" % (
+    note("cápsula REV 6.1: %.1f × %.1f × %.1f mm (exterior con orejas de los tornillos)" % (
         np.ptp(C["O"].p[:, 0]), np.ptp(C["O"].p[:, 1]), H_CAP))
     S = sop_contours()
     note("soporte: %.1f × %.1f × %.1f mm" % (S["fx"][1] - S["fx"][0], S["fy"][1] - S["fy"][0],
                                              SOP["cama"] + SOP["cerco_h"]))
     impresas = [
-        (pieza_base(), "AVO_CINCHA_R6_base_PETG", False, "PETG"),
-        (pieza_tapa(), "AVO_CINCHA_R6_tapa_PETG", True, "PETG"),
-        (pieza_junta(), "AVO_CINCHA_R6_junta_TPU85A", False, "TPU 85A"),
-        (pieza_separador(), "AVO_CINCHA_R6_separador_TPU85A", False, "TPU 85A"),
-        (pieza_soporte(), "AVO_CINCHA_R6_soporte_PETG", False, "PETG"),
+        (pieza_base(), "AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido", False, "PETG translúcido natural"),
+        (pieza_tapa(), "AVO_CINCHA_R6_1_tapa_PETG_opaco", True, "PETG opaco"),
+        (pieza_junta(False), "AVO_CINCHA_R6_1_junta_TPU85A", False, "TPU 85A"),
+        (pieza_separador(), "AVO_CINCHA_R6_1_separador_TPU85A", False, "TPU 85A"),
+        (pieza_soporte(), "AVO_CINCHA_R6_1_soporte_PETG", False, "PETG opaco"),
     ]
     for m, nm, flip, mat in impresas:
         b = m.check_closed()
@@ -970,10 +1019,10 @@ def main():
     imp, com = capsula_local()
     groups = {"Capsula_impresa": imp, "Capsula_electronica": com}
     check_all(groups)
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_CAPSULA")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_1_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_1_CAPSULA")
     imp2, com2 = soporte_local()
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_SOPORTE_CONJUNTO.step"),
-                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_SOPORTE")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_1_SOPORTE_CONJUNTO.step"),
+                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_1_SOPORTE")
     # compra sueltas (STEP por pieza)
     for m in compra_pcb()[:1] + compra_bateria() + compra_antena()[:1]:
         A.write_step(os.path.join(OUT, "STEP", "piezas", "REF_" + m.name + ".step"), [(m.name, [m])], m.name)

@@ -136,12 +136,23 @@ def piezas():
     b.stitch_rect(MARGEN, MARGEN, pw - MARGEN, ph - MARGEN)
     b.text(0, -8, "B1 · tapa del bolsillo (ventana 40×28,", 5)
     b.text(0, -16, "broche de 15 mm en la lengüeta)", 5)
-    hgt = M.SOP["cama"] + M.H_CAP + 0.3
+    G = M.bolsillo_geo()
+    hgt = G["ztop"]
     per = 2 * (pw + ph)
     fb = Pieza("B2", -L / 2 + pw + 150, oy)
     fb.rect("CORTE", 0, 0, per + 10, hgt + 12)
     fb.line("PLIEGUE", 0, 10, per + 10, 10)
-    fb.text(0, -8, "B2 · fuelle del bolsillo %.0f × %.0f (pestaña de 10 mm cosida al panel exterior)" % (per + 10, hgt + 12), 5)
+    for xf in (pw, pw + ph, 2 * pw + ph):
+        fb.line("PLIEGUE", xf, 10, xf, hgt + 12)
+    # ventanas frente a la banda de luz (2 + 2, 20 × 4,5, puente central de 8 mm), con costura de refuerzo alrededor
+    zc = M.SOP["cama"]
+    vz0, vz1 = 10 + zc + M.BOLS_VENT["z0"], 10 + zc + M.BOLS_VENT["z1"]
+    for (a, bb) in M.BOLS_VENT["tramos"]:
+        for s0, s1 in ((a - G["x0"], bb - G["x0"]), (pw + ph + (G["x1"] - bb), pw + ph + (G["x1"] - a))):
+            fb.rect("CORTE", s0, vz0, s1, vz1)
+            fb.stitch_rect(s0 - 3, vz0 - 3, s1 + 3, vz1 + 3)
+    fb.text(0, -8, "B2 · fuelle del bolsillo %.0f × %.0f (pestaña de 10 mm cosida al panel exterior; "
+            "4 ventanas 20×4,5 frente al aro de luz)" % (per + 10, hgt + 12), 5)
     pts = [(0, 5), (per + 10, 5)]
     fb.poly("COSTURA", pts, False); fb.holes_along(pts, False)
     P += [b, fb]

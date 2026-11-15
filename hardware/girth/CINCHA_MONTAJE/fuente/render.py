@@ -174,24 +174,25 @@ def main():
     for m in soporte:
         m.transform(A.T_translate(0, 0, -M.SOP["cama"]))
     render(caps + soporte, os.path.join(OUTR, "06_capsula_en_soporte.png"), az=-50, el=30,
-           title="Cápsula REV 6 (59,4 × 54,5 × 14,7) en su soporte (80 × 75 × 10,5)")
+           title="Cápsula REV 6.1 (62,9 × 60,1 × 15,5): base translúcida = aro de luz; tapa opaca", notes=["4 LED SK6812SIDE-A a z = 10,9 iluminan los lados largos de la base de PETG natural; soporte 83,5 × 80,7 × 10,5."])
     # explosionado
     ex = []
-    off = {"AVO_CINCHA_R6_tapa": 30, "Tornillo_ISO7380_M2x8_inox_x6": 52, "Antena_Molex_146153-0050": 30,
-           "Coaxial_1.13_50mm": 22, "AVO_CINCHA_R6_junta_TPU85A": 16, "PCB_REV_D_46x30": 20, "PCB_componentes": 20,
-           "PCB_pasivos": 20, "UFL_conector": 20, "Tornillo_ISO7380_M2x5_inox_x4_PCB": 20,
-           "AVO_CINCHA_R6_separador_TPU85A": 10, "Hilos_AWG28_pogo": 8, "Hilos_bateria": 8, "U4_ESP32-C6-MINI-1U": 20,
-           "LiPo_603450_1000mAh": 4}
+    off = {"AVO_CINCHA_R6_1_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
+           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_1_junta_TPU85A": 18,
+           "PCB_REV_D_46x30": 24, "PCB_componentes": 24, "PCB_pasivos": 24, "UFL_conector": 24, "LED_SK6812SIDE-A_x4": 24,
+           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_1_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
+           "Hilos_bateria": 8, "U4_ESP32-C6-MINI-1U": 24, "LiPo_603450_1000mAh": 4}
     for m in caps:
         mm = m.copy()
         mm.transform(A.T_translate(0, 0, off.get(m.name, 0)))
         ex.append(mm)
     for m in soporte:
         mm = m.copy(); mm.transform(A.T_translate(0, 0, -16)); ex.append(mm)
-    render(ex, os.path.join(OUTR, "07_capsula_explosionada.png"), az=-55, el=22, size=(1400, 1500),
-           title="Cápsula REV 6 explosionada",
-           notes=["De arriba abajo: tornillos M2×8, tapa (PETG) con antena Molex 146153 pegada al techo, junta TPU 85A,",
-                  "PCB REV D (46 × 30) colgada de la tapa con 4 M2×5, separador TPU, celda 603450, base con 2 placas pogo,",
+    render(ex, os.path.join(OUTR, "07_capsula_explosionada.png"), az=-55, el=22, size=(1400, 1600),
+           title="Cápsula REV 6.1 explosionada",
+           notes=["De arriba abajo: tornillos M2×6 + arandela, tapa opaca con antena Molex 146153, junta TPU 85A en ranura,",
+                  "PCB REV D (46 × 30) con 4 LED laterales, colgada de la tapa con 4 M2×5, separador TPU, celda 603450,",
+                  "base translúcida (aro de luz) con la ranura de la junta y 2 placas pogo selladas con epoxi,",
                   "y el soporte con los 2 conectores de pines (carga + ECG) y 4 tornillos de Chicago."])
     # corte: solo caras con todos los vértices en y < corte
     cut = M.CAP["pogo_y"]
@@ -208,18 +209,45 @@ def main():
     # piezas impresas
     pz = []
     x = 0
-    for m in [M.pieza_base(), M.pieza_tapa(), M.pieza_junta(), M.pieza_separador(), M.pieza_soporte()]:
+    for m in [M.pieza_base(), M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte()]:
         mm = M.stl_print(m, m.name, m.name.endswith("tapa"))
         lo, hi = mm.bbox()
         mm.transform(A.T_translate(x - lo[0], 0, 0)); x += (hi[0] - lo[0]) + 12
         pz.append(mm)
     render(pz, os.path.join(OUTR, "09_piezas_impresas.png"), az=-70, el=40, size=(1800, 800),
            title="Piezas impresas en posición de impresión (Elegoo Centauri Carbon)",
-           notes=["Base PETG · tapa PETG (boca abajo) · junta TPU 85A · separador TPU 85A · soporte PETG."])
+           notes=["Base PETG translúcido natural (aro de luz) · tapa PETG opaco (boca abajo) · junta TPU 85A 1,2×1,6 · separador TPU 85A · soporte PETG."])
     render(flat({"F": gC["Funda"], "B": gC["Funda_bolsillo"], "E": gC["Electrodos"], "C": gC["Cables"]}) + soporte_world(gC),
            os.path.join(OUTR, "10_funda_detalle.png"), az=75, el=-30, size=(1600, 1000),
            title="Funda de piel con el sistema (sin la cincha)",
            notes=["Canal cosido por dentro del pliegue delantero; trabillas en los extremos; ventana para la anilla D central."])
+    extra(caps, soporte)
+
+
+def extra(caps, soporte):
+    # corte por el plano de los LED D11/D12 (x = 14), visto desde +X
+    sec = []
+    for m in caps + soporte:
+        V = m.np()
+        F = [f for f in m.F if V[f[0]][:, 0].max() <= 14.01]
+        if F:
+            mm = A.Mesh(m.name, m.color); mm.V = m.V; mm.F = F; sec.append(mm)
+    zl = M.Z_LED
+    render(sec, os.path.join(OUTR, "12_corte_por_LED.png"), az=0, el=3, size=(1500, 800),
+           title="Corte por los LED D11/D12 (x = 14): la luz sale por la pared translúcida de 4 mm",
+           notes=["Junta TPU en ranura sobre el canto de la base (z 11,8–13,0); tapa opaca con tope duro; LED con centro a z = %.1f." % zl,
+                  "Vista recortada (se quitan las caras con x > 14)."],
+           labels=[((14.0, 14.66, zl), "lente D11"), ((14.0, -14.66, zl), "lente D12")])
+    G = M.bolsillo()
+    loc = [m.copy() for m in G]
+    capz = []
+    imp, com = M.capsula_local()
+    for m in imp + com:
+        mm = m.copy(); mm.transform(A.T_translate(0, 0, M.SOP["cama"])); capz.append(mm)
+    simp, scom = M.soporte_local()
+    render(loc + capz + simp + scom, os.path.join(OUTR, "13_bolsillo_ventanas_luz.png"), az=-65, el=18, size=(1500, 1000),
+           title="Bolsillo de piel: 2 + 2 ventanas de 20 × 4,5 frente al aro de luz",
+           notes=["Puente central de 8 mm y costura de refuerzo a 3 mm alrededor de cada ventana; ventana superior de 40 × 28."])
 
 
 def soporte_world(g):
