@@ -133,6 +133,8 @@ struct RaceTrainingSplitsCard: View {
                 }
             }
             table(cmp)
+            Text("Flecha verde: en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %). Flecha roja: más lento.")
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
         if cmp.trainingPartialEndSkipped {
             Text("El último parcial del entrenamiento es más corto que \(cmp.trainingIsFurlong ? "un furlong" : "200 m") y no se compara.")
@@ -239,7 +241,7 @@ struct RaceTrainingSplitsCard: View {
                         c(RaceFormat.kmh(r.trainingKmh), 100)
                         c(RaceFormat.seconds(r.raceS), 80)
                         c(RaceFormat.kmh(r.raceKmh), 100)
-                        c(RaceFormat.percent(r.pctOfRace), 80)
+                        pctCell(r.pctOfRace, 80)
                     }
                     .font(.footnote.monospacedDigit()).foregroundStyle(Avo.text)
                     .padding(.vertical, 3)
@@ -250,6 +252,21 @@ struct RaceTrainingSplitsCard: View {
 
     private func h(_ t: String, _ w: CGFloat) -> some View {
         Text(t.uppercased()).font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim).frame(width: w, alignment: .leading)
+    }
+
+    /// «% carrera» with a green ▲ (training as fast or faster than the race in that piece) or a red ▼ (slower)
+    /// (trainer's sketch 15/11/2026).
+    private func pctCell(_ p: Double?, _ w: CGFloat) -> some View {
+        HStack(spacing: 4) {
+            Text(RaceFormat.percent(p)).lineLimit(1)
+            if let v = p, v.isFinite {
+                Image(systemName: v >= 1.0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                    .font(.caption2)
+                    .foregroundStyle(v >= 1.0 ? Avo.ok : Avo.bad)
+                    .accessibilityLabel(v >= 1.0 ? "mejor en el entrenamiento" : "peor en el entrenamiento")
+            }
+        }
+        .frame(width: w, alignment: .leading)
     }
 
     private func c(_ t: String, _ w: CGFloat) -> some View {

@@ -187,7 +187,12 @@ private final class RaceComparisonPdfWriter {
     }
 
     /// Table with a dark header row; `highlight` rows get a light red band (our horse).
-    func table(_ head: [String], _ cols: [Double], _ rows: [[String]], highlight: Set<Int> = [], size: Double = 7.5) {
+    static let green: AvoRGB = (r: 0x1F, g: 0x9D, b: 0x45)
+
+    /// Table with a dark header row; `highlight` rows get a light red band (our horse). `arrows[r]` (true = better,
+    /// false = worse) draws a green ▲ / red ▼ after the text of column `arrowCol`.
+    func table(_ head: [String], _ cols: [Double], _ rows: [[String]], highlight: Set<Int> = [], size: Double = 7.5,
+               arrowCol: Int? = nil, arrows: [Bool?] = []) {
         let total: Double = cols.reduce(0, +)
         let cw: [Double] = cols.map { $0 * w / total }
         func headRow() {
@@ -214,7 +219,12 @@ private final class RaceComparisonPdfWriter {
                 while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), size, false) > cw[i] - 6 {
                     cell.removeLast(2)
                 }
-                pdf.text(x, y + 2, String(decoding: cell, as: UTF16.self), size: size, bold: highlight.contains(r), color: ReportBuilder.ink)
+                let shown: String = String(decoding: cell, as: UTF16.self)
+                pdf.text(x, y + 2, shown, size: size, bold: highlight.contains(r), color: ReportBuilder.ink)
+                if i == arrowCol, r < arrows.count, let up = arrows[r] {
+                    let ax: Double = x + PdfDocument.measureText(shown, size, highlight.contains(r)) + 8
+                    pdf.arrow(ax, y + 2 + size * 0.5, up: up, size: 6.5, up ? RaceComparisonPdfWriter.green : ReportBuilder.red)
+                }
                 x += cw[i]
             }
             y += 14
@@ -501,7 +511,10 @@ private final class RaceComparisonPdfWriter {
                     [x.label, RaceFormat.seconds(x.trainingS), RaceFormat.kmh(x.trainingKmh), RaceFormat.seconds(x.raceS),
                      RaceFormat.kmh(x.raceKmh), RaceFormat.percent(x.pctOfRace)]
                 }
-                table(["Tramo", "Entreno", "Entreno km/h", "Carrera", "Carrera km/h", "% carrera"], [1.2, 1, 1.1, 1, 1.1, 0.9], rows)
+                table(["Tramo", "Entreno", "Entreno km/h", "Carrera", "Carrera km/h", "% carrera"], [1.2, 1, 1.1, 1, 1.1, 0.9], rows,
+                      arrowCol: 5, arrows: cmp.rows.map { $0.pctOfRace.map { $0 >= 1.0 } })
+                paragraph("Flecha verde: en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %). "
+                          + "Flecha roja: más lento que en la carrera.", size: 7.5, color: ReportBuilder.dim)
             }
             if cmp.trainingPartialEndSkipped {
                 paragraph("El último parcial del entrenamiento es más corto que \(cmp.trainingIsFurlong ? "un furlong" : "200 m") y no se compara.",
@@ -531,6 +544,9 @@ private final class RaceComparisonPdfWriter {
             }
             if sec.contains(.raceFacts) {
             sub("Lo que dice la carrera")
+            paragraph("Mediana del campo = el «caballo típico» de esta carrera: el valor del caballo que queda en medio de los otros "
+                      + "\(max(r.fieldSize - 1, 0)) participantes (sin el nuestro); la mitad lo hizo mejor y la otra mitad peor.",
+                      size: 7.5, color: ReportBuilder.dim)
             keyValues([(k: "Caída en el final (conserva)",
                         v: "\(RaceFormat.percent(rep.ourFade)) · \(RaceFormat.kmh(rep.ourBestSpeedKmh)) → \(RaceFormat.kmh(rep.ourLastSpeedKmh))"),
                        (k: "Mediana del campo (conserva)", v: RaceFormat.percent(rep.fieldMedianFade)),

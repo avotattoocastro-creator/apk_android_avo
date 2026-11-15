@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — Flechas en «% carrera», «mediana del campo» explicada, visor PDF a pantalla completa y símbolos del PDF
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia (bocetos del entrenador 15/11/2026, build 151):**
+- **Flechas en «% carrera»** (app y PDF) de «Entrenamiento vs carrera»: ▲ verde si en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %) y ▼ roja si fue más lento.
+- **«Mediana del campo» explicada** (app y PDF), bajo «Lo que dice la carrera»: es el «caballo típico» de la carrera, es decir, el valor del caballo que queda en medio de los demás participantes, sin el nuestro.
+- **Visor de PDF a pantalla completa** (antes era una hoja pequeña centrada).
+- **Símbolos del PDF:** ≈, ≥, ≤ y → salían como «?» porque las fuentes estándar del PDF no los tienen. Ahora se escriben ~, >=, <= y ->.
+
+**Archivos:** `Core/PdfDocument.swift` (`safe`, `fillPolygon`, `arrow`), `Core/RaceComparisonPdf.swift`, `Views/RaceTrainingSplitsView.swift`, `Views/RaceDetailView.swift`, `App/RootView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — iPad — Informe PDF de la carrera: las 8 cifras del resultado en una sola línea
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
 **Qué cambia:** las 8 cifras del resultado van ahora en una sola línea:

@@ -568,6 +568,8 @@ private struct RaceAnalysisSection: View {
             ShellKeyValue(key: "Perdido por terreno de más", value: groundText(rep))
             ShellKeyValue(key: "Salida vs mediana del campo", value: RaceFormat.signedSeconds(rep.startLossS))
             ShellKeyValue(key: "Últimos 600 m vs su mejor tramo", value: RaceFormat.percent(rep.raceSustain))
+            Text("Mediana del campo = el «caballo típico» de esta carrera: el valor del caballo que queda en medio de los otros \(max(race.fieldSize - 1, 0)) participantes (sin el nuestro); la mitad lo hizo mejor y la otra mitad peor.")
+                .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
     }
 

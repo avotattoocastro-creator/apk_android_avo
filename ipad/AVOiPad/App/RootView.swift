@@ -114,7 +114,8 @@ struct RootView: View {
                 .environment(app)
                 .avoColorScheme()
         }
-        .sheet(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
+        // the PDF viewer takes the whole screen (trainer's sketch 15/11/2026: it was a small centred sheet)
+        .fullScreenCover(item: Binding(get: { app.pdfViewer }, set: { app.pdfViewer = $0 })) { (f: ExportedFile) in
             PdfViewerSheet(file: f)
                 .avoColorScheme()
         }
