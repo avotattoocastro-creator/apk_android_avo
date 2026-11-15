@@ -1,6 +1,7 @@
 # AVO GIRTH · PCB de la cincha REV D — informe
 
-**Estado: DISEÑO VERIFICADO POR SOFTWARE (CI 43721512373, commit `b63c741`) · NO VERIFICADO EN HARDWARE REAL.**
+**Estado: DISEÑO VERIFICADO POR SOFTWARE (CI 43723857285, commit `455265c`, con aro de luz) · NO VERIFICADO EN HARDWARE REAL.**
+(La primera puerta superada, sin aro, fue la del CI 43721512373: esos ficheros quedan sustituidos por estos.)
 Apto para pedir prototipos a JLCPCB; nada se ha montado ni medido.
 
 ## Qué cambia respecto a la REV C
@@ -27,7 +28,19 @@ Apto para pedir prototipos a JLCPCB; nada se ha montado ni medido.
   módulo va a masa por el EPAD y el resto de pads GND.
 - **Cosido de GND:** se han añadido 4 vías de cosido en islas del relleno de F.Cu (`fuente/stitch_gnd.py`).
 
-## Comprobaciones (CI 43721512373, KiCad 9)
+## Aro de luz (petición del usuario 15/11/2026)
+- **LED:** 4 × SK6812SIDE-A (C5378721, 110 298 en stock), RGB direccionables de emisión lateral, en lugar del LED verde D1.
+  Van 2 por lado largo, en (−15; ±13,3) y (+14; ±13,3), con la lente a 0,34 mm del canto y en cadena D10 → D11 → D12 → D13.
+- **Datos:** GPIO15 con 22 Ω en serie (R14).
+- **Alimentación conmutada:** Q1 AO3401A (P, C15127) desde VSYS hasta VLED, y Q2 2N7002 (C8545) desde GPIO18 (LED_EN).
+  R15 de 100 k mantiene Q1 cortado y R16 de 100 k mantiene Q2 cortado durante el arranque.
+- **Consumo:** el firmware solo da tensión a los LED mientras se encienden, así que en reposo consumen 0 mA. Sin el
+  interruptor serían unos 4 mA continuos.
+- **Desacoplo:** C60 de 10 µF en VLED y 100 nF por LED (C61–C64).
+- **Tensión:** la hoja pide 3,7–5,5 V. Con la celda por debajo de unos 3,6 V el aro puede fallar; es solo un aviso, y la
+  medida de la cincha sigue funcionando.
+
+## Comprobaciones (CI 43723857285, KiCad 9)
 - DRC: 0 errores · 0 conexiones incompletas · 0 cortocircuitos · paridad esquema ↔ placa 0.
 - ERC: 0 errores · 0 advertencias.
 - Advertencias no bloqueantes: serigrafía sobre cobre y serigrafía solapada.

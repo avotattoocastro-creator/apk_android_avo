@@ -1,10 +1,10 @@
 /home/runner/work/apk_android_avo/apk_android_avo/firmware/girth/V0_6_0/AVO_GIRTH_V0_6_0/AVO_GIRTH_V0_6_0.ino: In function 'void apply_phy()':
-/home/runner/work/apk_android_avo/apk_android_avo/firmware/girth/V0_6_0/AVO_GIRTH_V0_6_0/AVO_GIRTH_V0_6_0.ino:365:44: warning: 'esp_err_t esp_wifi_config_espnow_rate(wifi_interface_t, wifi_phy_rate_t)' is deprecated: This API can be only used when rate is non-HE rate,                                 please use esp_now_set_peer_rate_config if you want full support of the rate. [-Wdeprecated-declarations]
-  365 |   esp_err_t e = esp_wifi_config_espnow_rate(WIFI_IF_STA, s_phy6 ? WIFI_PHY_RATE_6M : WIFI_PHY_RATE_1M_L);
+/home/runner/work/apk_android_avo/apk_android_avo/firmware/girth/V0_6_0/AVO_GIRTH_V0_6_0/AVO_GIRTH_V0_6_0.ino:373:44: warning: 'esp_err_t esp_wifi_config_espnow_rate(wifi_interface_t, wifi_phy_rate_t)' is deprecated: This API can be only used when rate is non-HE rate,                                 please use esp_now_set_peer_rate_config if you want full support of the rate. [-Wdeprecated-declarations]
+  373 |   esp_err_t e = esp_wifi_config_espnow_rate(WIFI_IF_STA, s_phy6 ? WIFI_PHY_RATE_6M : WIFI_PHY_RATE_1M_L);
       |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /home/runner/work/apk_android_avo/apk_android_avo/firmware/girth/V0_6_0/AVO_GIRTH_V0_6_0/AVO_GIRTH_V0_6_0.ino:48:
+In file included from /home/runner/work/apk_android_avo/apk_android_avo/firmware/girth/V0_6_0/AVO_GIRTH_V0_6_0/AVO_GIRTH_V0_6_0.ino:52:
 /home/runner/.arduino15/packages/esp32/tools/esp32c6-libs/3.3.12/include/esp_wifi/include/esp_now.h:284:11: note: declared here
   284 | esp_err_t esp_wifi_config_espnow_rate(wifi_interface_t ifx, wifi_phy_rate_t rate)
       |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sketch uses 1057546 bytes (80%) of program storage space. Maximum is 1310720 bytes.
-Global variables use 45372 bytes (13%) of dynamic memory, leaving 282308 bytes for local variables. Maximum is 327680 bytes.
+Sketch uses 1075786 bytes (82%) of program storage space. Maximum is 1310720 bytes.
+Global variables use 46176 bytes (14%) of dynamic memory, leaving 281504 bytes for local variables. Maximum is 327680 bytes.

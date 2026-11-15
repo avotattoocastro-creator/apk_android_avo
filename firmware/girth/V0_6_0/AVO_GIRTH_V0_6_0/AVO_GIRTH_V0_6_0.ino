@@ -4,6 +4,10 @@
  *     Same girth::Sample and the same fmt 0 / fmt 1 batches and units byte (1) as the BNO085.
  *   - ECG: ADS1292 channel 2, 500 sps, 24 bits, gain 6, RLD to the reference electrode, DC lead-off, girth_ads1292.cpp.
  *     Same fmt 2 batches (int24 in 0,1 µV), 50 samples ≈ 100 ms.
+ *   - Light ring (PCB REV D, 15/11/2026): 4 × SK6812SIDE-A on GPIO15, power switched by GPIO18 (girth_ring.cpp), instead
+ *     of the green LED. Powered only while lit (0 mA between flashes). Blue blink = looking for the back · green flash/2 s =
+ *     all fine · 3 amber = electrodes without contact · 2 red = IMU failing · 1 red = battery < 15 % · on the mount:
+ *     orange = charging, green = charged. Command: aro on|off (saved).
  *   - Commands: ganancia 1|2|3|4|6|8|12 (ECG), phy 1m|6m (ESP-NOW data rate; 6 Mbps saves ≈ 15 mA, see
  *     hardware/girth/PCB_REV_D/DOCS/CONSUMO_BATERIA.md).
  * 0.5.0: ECG of one channel with the MAX30003 (CJMCU-30003, REV 5.10 capsule, electrodes on the girth through the
@@ -58,6 +62,7 @@
 #include "girth_lsm6dsv.h"
 #include "girth_ecg.h"
 #include "girth_ads1292.h"
+#include "girth_ring.h"
 
 using namespace avo;
 
@@ -66,7 +71,10 @@ using namespace avo;
 extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "\0" AVO_GIRTH_VERSION "\0AVO-GIRTH";
 
 // ---------------------------------------------------------------- pins (PCB REV D, ESP32-C6-MINI-1U; same numbers as the XIAO where shared)
-static const int PIN_LED = 15;        // user LED, active low
+static const int PIN_RING_DIN = 15;   // light ring data (4 × SK6812SIDE-A); was the green LED
+static const int PIN_RING_EN = 18;    // light ring power (Q2 → Q1): HIGH = VLED on
+static const int PIN_CHG = 8;         // BQ24072 CHG (open drain, pull-up R10): LOW = charging
+static girth::Ring ring;
 static const int PIN_BOOT = 9;        // BOOT button, active low
 // (no RF switch on the REV D: GPIO3 = ADS1292 DRDY, GPIO14 = ADS1292 DIN)
 static const int PIN_BAT = 5;         // MTDI / A? : battery divider
@@ -374,7 +382,7 @@ static void go_to_sleep() {
   gpio_hold_en((gpio_num_t)ECG_PINS.reset);
   esp_now_deinit();
   esp_wifi_stop();
-  digitalWrite(PIN_LED, HIGH);
+  ring.show({0, 0, 0});
   rtc_gpio_pullup_en((gpio_num_t)PIN_DET);
   rtc_gpio_pulldown_dis((gpio_num_t)PIN_DET);
   esp_deep_sleep_enable_gpio_wakeup(1ULL << PIN_DET, ESP_GPIO_WAKEUP_GPIO_LOW);
@@ -385,7 +393,7 @@ static void print_status();
 
 static void print_help() {
   Serial.println("[AVO CINCHA] ordenes: estado | olvidar | imu (reinicia LSM6DSV16X + MMC5983MA) | ecg (reinicia el ADS1292) | "
-                 "ganancia 1|2|3|4|6|8|12 | phy 1m|6m | reposo on|off | bateria <divisor, p. ej. 2.00>");
+                 "ganancia 1|2|3|4|6|8|12 | phy 1m|6m | aro on|off | reposo on|off | bateria <divisor, p. ej. 2.00>");
 }
 
 static void command(String c) {
@@ -394,6 +402,11 @@ static void command(String c) {
   if (!c.length()) return;
   if (c == "ayuda" || c == "help") print_help();
   else if (c == "estado") print_status();
+  else if (c == "aro on" || c == "aro off") {
+    ring.set_enabled(c == "aro on");
+    prefs.putBool("ring", ring.enabled());
+    Serial.printf("[AVO CINCHA] aro de luz %s\n", ring.enabled() ? "encendido" : "apagado");
+  }
   else if (c == "olvidar") forget_back();
   else if (c == "imu") bno.request_restart();
   else if (c == "ecg") ecg.request_restart();
@@ -480,8 +493,8 @@ void setup() {
   Serial.begin(115200);
   Serial.setTxTimeoutMs(0);   // 0.4.2: the monitor never blocks the loop (0.4.1 lost IMU samples while printing)
   delay(300);
-  pinMode(PIN_LED, OUTPUT);
-  digitalWrite(PIN_LED, HIGH);
+  ring.begin(PIN_RING_DIN, PIN_RING_EN, 4);
+  pinMode(PIN_CHG, INPUT);
   pinMode(PIN_BOOT, INPUT_PULLUP);
   gpio_hold_dis((gpio_num_t)ECG_PINS.reset);         // after deep sleep the ECG power-down was held
   if (rtc_gpio_is_valid_gpio((gpio_num_t)PIN_DET)) rtc_gpio_deinit((gpio_num_t)PIN_DET);
@@ -495,6 +508,7 @@ void setup() {
   s_bat_ratio = prefs.getFloat("bat_ratio", 2.0f);
   s_ecg_gain = prefs.getUChar("ecg_gain6", 0) % 7;
   s_phy6 = prefs.getBool("phy6", false);
+  ring.set_enabled(prefs.getBool("ring", true));
   apply_antenna();
 
   s_rxq = xQueueCreate(16, sizeof(RxPkt));
@@ -563,15 +577,14 @@ void loop() {
     else if (now - off_mount_since > 30000) go_to_sleep();
   } else off_mount_since = 0;
 
-  // LED
-  bool run = imu_running();
-  uint32_t ph = now % 2000;
-  girth::EcgStatus es = ecg.status();
-  bool leads_bad = es.state == girth::EcgState::RUNNING && es.leads_off;
-  bool on = !linked() ? (now % 300) < 150
-          : leads_bad ? (ph < 60 || (ph > 150 && ph < 210) || (ph > 300 && ph < 360))   // 0.5.0: electrodes without contact
-          : (run ? ph < 60 : (ph < 60 || (ph > 200 && ph < 260)));
-  digitalWrite(PIN_LED, on ? LOW : HIGH);
+  // light ring
+  {
+    girth::EcgStatus es = ecg.status();
+    girth::RingState rs{linked(), imu_running(), es.state == girth::EcgState::RUNNING,
+                        es.state == girth::EcgState::RUNNING && es.leads_off, digitalRead(PIN_DET) == LOW,
+                        digitalRead(PIN_CHG) == LOW, s_bat_pct};
+    ring.show(girth::ring_colour(rs, now));
+  }
 
   // serial commands
   static String line;

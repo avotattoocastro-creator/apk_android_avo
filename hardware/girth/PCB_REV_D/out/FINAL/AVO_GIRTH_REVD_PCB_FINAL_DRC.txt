@@ -1,8 +1,14 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T13:55:56+0000 **
+** Created on 2026-11-15T14:21:37+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 10 DRC violations **
+** Found 12 DRC violations **
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (In1.Cu)
+    Rule: board setup constraints; warning
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on In1.Cu, priority 0
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (B.Cu)
+    Rule: board setup constraints; warning
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on B.Cu, priority 0
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(80.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
