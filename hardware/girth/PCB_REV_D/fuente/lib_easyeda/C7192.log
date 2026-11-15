@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C7192
+       Symbol name : TAJB105K035RNJ
+       Library path : lib_easyeda/C7192.kicad_sym
+[INFO] Created Kicad footprint for ID: C7192
+       Footprint name: CAP-SMD_L3.5-W2.8-R-RD
+       Footprint path: lib_easyeda/C7192.pretty/CAP-SMD_L3.5-W2.8-R-RD.kicad_mod
+[INFO] Created 3D model for ID: C7192
+       3D model name: CASE-B_L3.5-W2.8-H1.9
+       3D model path (wrl): lib_easyeda/C7192.3dshapes/CASE-B_L3.5-W2.8-H1.9.wrl
+       3D model path (step): lib_easyeda/C7192.3dshapes/CASE-B_L3.5-W2.8-H1.9.step
+-- easyeda2kicad.py v1.0.1 --

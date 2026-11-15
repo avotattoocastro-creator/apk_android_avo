@@ -2,10 +2,15 @@
 positions exported by KiCad (out/posiciones_kicad.csv). Run from hardware/back/V4/PCB."""
 import csv
 import json
+import math
 import os
 from collections import OrderedDict
 
 parts = json.load(open("kicad/piezas.json", encoding="utf-8"))
+# giro y centro de la huella de JLCPCB (EasyEDA) respecto a la nuestra: fuente/jlc_correcciones.py
+corr = {}
+if os.path.exists("fuente/jlc_correcciones.json"):
+    corr = json.load(open("fuente/jlc_correcciones.json", encoding="utf-8"))
 pos = {}
 with open("out/posiciones_kicad.csv", newline="", encoding="utf-8") as f:
     for r in csv.DictReader(f):
@@ -36,8 +41,16 @@ with open("out/JLCPCB_CPL.csv", "w", newline="", encoding="utf-8") as f:
         r = pos.get(p["ref"])
         if not r:
             continue
-        rot = (float(r["Rot"]) + p.get("jlc_rot", 0)) % 360
-        w.writerow([p["ref"], "%smm" % r["PosX"], "%smm" % r["PosY"],
+        k = corr.get(p["ref"], {})
+        th = float(r["Rot"])
+        rot = (th + p.get("jlc_rot", 0) + k.get("rot", 0)) % 360
+        lx, ly = k.get("off", (0.0, 0.0))
+        t = math.radians(th)
+        dx = lx * math.cos(t) + ly * math.sin(t)            # KiCad: y hacia abajo, giro antihorario en pantalla
+        dyk = -lx * math.sin(t) + ly * math.cos(t)
+        x = float(r["PosX"]) + dx
+        y = float(r["PosY"]) - dyk                          # el fichero de posiciones lleva Y con el signo cambiado
+        w.writerow([p["ref"], "%.4fmm" % x, "%.4fmm" % y,
                     "Top" if r["Side"].lower().startswith("top") else "Bottom", "%g" % rot])
 
 print("BOM: %d líneas, %d piezas" % (len(bom), sum(len(v) for v in bom.values())))

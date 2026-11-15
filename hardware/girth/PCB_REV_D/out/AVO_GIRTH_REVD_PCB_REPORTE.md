@@ -1,7 +1,7 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `455265cf452977f896a1fd43fbff74f50d1c9f02` · ejecución de CI: 43723857285
+- Commit: `17e67e0dec1c564635628484b504bd6f25bf3224` · ejecución de CI: 43738514699
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 89 en total, 72 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
