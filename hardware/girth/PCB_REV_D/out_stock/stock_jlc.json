@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-15 09:10 UTC",
+ "date_utc": "2026-11-15 13:36 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31426879,
+   "stock": 31393743,
    "library": "base",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38113115,
+   "stock": 38020241,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 5778398,
+   "stock": 5773512,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10386367,
+   "stock": 10363619,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21069013,
+   "stock": 21032461,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402WGF4702TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 5707267,
+   "stock": 5705214,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "0402WGF2201TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3053586,
+   "stock": 3051738,
    "library": "base",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2341718,
+   "stock": 2340495,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "PESD5V0S1BA",
    "maker": "TECH PUBLIC",
    "package": "SOD-323",
-   "stock": 330776,
+   "stock": 330666,
    "library": "expand",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "0402WGF2001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10027954,
+   "stock": 10025031,
    "library": "base",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4120506,
+   "stock": 4089351,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "LSM6DSV16XTR",
    "maker": "STMicroelectronics",
    "package": "LGA-14",
-   "stock": 6523,
+   "stock": 6528,
    "library": "expand",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10280744,
+   "stock": 10267547,
    "library": "base",
    "prices": [
     [
@@ -602,7 +602,7 @@
    "mpn": "0402CG102J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 472693,
+   "stock": 472713,
    "library": "expand",
    "prices": [
     [
@@ -672,7 +672,7 @@
    "mpn": "GRM1555C1H152JA01D",
    "maker": "Murata Electronics",
    "package": "0402",
-   "stock": 68649,
+   "stock": 68679,
    "library": "expand",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "NCP15XH103F03RC",
    "maker": "Murata Electronics",
    "package": "0402",
-   "stock": 297342,
+   "stock": 297188,
    "library": "expand",
    "prices": [
     [
@@ -777,7 +777,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 27566,
+   "stock": 27542,
    "library": "expand",
    "prices": [
     [
@@ -812,7 +812,7 @@
    "mpn": "GRM1885C1H472JA01D",
    "maker": "Murata Electronics",
    "package": "0603",
-   "stock": 107669,
+   "stock": 107649,
    "library": "expand",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6146056,
+   "stock": 6145173,
    "library": "base",
    "prices": [
     [
@@ -878,5 +878,262 @@
    "describe": "10uF 25V X5R ±20% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   }
  },
- "search": {}
+ "search": {
+  "ADS1292IPBSR": [
+   {
+    "lcsc": "C2651570",
+    "mpn": "ADS1292IPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 1057,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.5216
+     ],
+     [
+      10,
+      5.5154
+     ],
+     [
+      30,
+      4.9722
+     ],
+     [
+      100,
+      4.5157
+     ],
+     [
+      102,
+      4.5157
+     ],
+     [
+      104,
+      4.5157
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Fault detection SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C9900099794",
+    "mpn": "ADS1292IPBSR",
+    "maker": "JLCPCB Assembly",
+    "package": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL New Arrivals ROHS"
+   }
+  ],
+  "ADS1292IPBS": [
+   {
+    "lcsc": "C2651570",
+    "mpn": "ADS1292IPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 1057,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.5216
+     ],
+     [
+      10,
+      5.5154
+     ],
+     [
+      30,
+      4.9722
+     ],
+     [
+      100,
+      4.5157
+     ],
+     [
+      102,
+      4.5157
+     ],
+     [
+      104,
+      4.5157
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Fault detection SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C1520665",
+    "mpn": "ADS1292IPBS",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 106,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.8374
+     ],
+     [
+      10,
+      5.8197
+     ],
+     [
+      30,
+      5.1996
+     ],
+     [
+      100,
+      4.6794
+     ],
+     [
+      102,
+      4.6794
+     ],
+     [
+      104,
+      4.6794
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2.7V~5.25V 24 2ppm/℃ TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C9900099794",
+    "mpn": "ADS1292IPBSR",
+    "maker": "JLCPCB Assembly",
+    "package": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL New Arrivals ROHS"
+   }
+  ],
+  "ADS1292RIPBSR": [
+   {
+    "lcsc": "C528635",
+    "mpn": "ADS1292RIPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 1855,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.6735
+     ],
+     [
+      10,
+      6.5494
+     ],
+     [
+      30,
+      5.5252
+     ],
+     [
+      100,
+      4.951
+     ],
+     [
+      102,
+      4.951
+     ],
+     [
+      104,
+      4.951
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz 8kHz 8kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C22448165",
+    "mpn": "ADS1292RIPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.6263
+     ],
+     [
+      10,
+      5.8394
+     ],
+     [
+      30,
+      5.36
+     ],
+     [
+      100,
+      4.9575
+     ],
+     [
+      102,
+      4.9575
+     ],
+     [
+      104,
+      4.9575
+     ]
+    ],
+    "describe": "TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "ADS1291IPBSR": [
+   {
+    "lcsc": "C543023",
+    "mpn": "ADS1291IPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.986
+     ],
+     [
+      10,
+      6.8685
+     ],
+     [
+      30,
+      6.1862
+     ],
+     [
+      100,
+      5.6152
+     ],
+     [
+      102,
+      5.6152
+     ],
+     [
+      104,
+      5.6152
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   }
+  ]
+ }
 }
