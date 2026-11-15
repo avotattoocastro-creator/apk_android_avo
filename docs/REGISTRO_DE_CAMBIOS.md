@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — «Cámara» a todo el ancho y panel desplegable
+**Autor:** Claude · Rama `claude/ipad-camara-ancho`
+**Qué cambia (boceto del entrenador 15/11/2026, build 136):**
+- **Imagen a todo el ancho:** la imagen de la cámara ocupa toda la página. Se quitan la barra superior, los márgenes y las
+  bandas negras: la vista previa rellena el recuadro, y el vídeo grabado conserva el encuadre completo del sensor.
+- **Botón de menú:** con el menú oculto, el botón para mostrarlo flota sobre la imagen.
+- **Panel desplegable:** AVO SYNC, Grabación y Vídeos pasan a un panel que se despliega por encima de la imagen, a la derecha.
+  - Se abre con el botón junto a la hora. El botón lleva un punto con el estado de AVO SYNC.
+  - Se cierra con la ✕ o con el mismo botón.
+  - La app recuerda si estaba abierto o cerrado.
+- **REC:** el contador pasa arriba, al centro, y durante la grabación hay un marco rojo.
+**No se ha tocado:** grabación, AVO SYNC, archivos, Info.plist, workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-15 — Cincha PCB REV C — placa propia compacta con ECG (MAX30003)
 **Autor:** Claude · Rama `feature/girth-pcb-rev-c` · **CI:** `build-girth-pcb-revc.yml` run 43672058713 (puerta superada)
 **Qué cambia:** nueva PCB de la cincha en `hardware/girth/PCB_REV_C` (generador Python → KiCad 9, mismas herramientas que el
