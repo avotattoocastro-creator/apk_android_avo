@@ -1,17 +1,17 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `1ee01c8cfe809f7ebc5a7446373e2238388f4368` · ejecución de CI: 43720142328
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `34119ecec78ae7e4c07ae438cb887b0375e90150` · ejecución de CI: 43720606924
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 77 en total, 60 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 720 · vías: 123 · ruteado INCOMPLETO (4 conexiones)
+- Pistas: 725 · vías: 125 · ruteado INCOMPLETO (2 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 4 |
+| DRC: conexiones incompletas | **FALLA** | 2 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,10 +19,8 @@
 
 
 ### Conexiones incompletas
-- Pad 5 [+3V3] of U5 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.8168 mm
 - Pad 14 [GND] of U4 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
 - Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Track [VSYS] on F.Cu, length 3.4398 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6

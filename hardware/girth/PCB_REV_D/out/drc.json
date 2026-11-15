@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-15T13:42:50+0000",
+    "date": "2026-11-15T13:45:45+0000",
     "included_severities": [
         "error",
         "warning",
@@ -11,29 +11,6 @@
     "schematic_parity": [],
     "source": "AVO_GIRTH_REVD_PCB.kicad_pcb",
     "unconnected_items": [
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 97.9125
-                    },
-                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
-                },
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.8168 mm",
-                    "pos": {
-                        "x": 100.3383,
-                        "y": 98.5185
-                    },
-                    "uuid": "36baeaba-200c-4597-92de-6f3952977956"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
         {
             "description": "Missing connection between items",
             "items": [
@@ -51,7 +28,7 @@
                         "x": 123.0,
                         "y": 113.0
                     },
-                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
+                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
                 }
             ],
             "severity": "error",
@@ -66,7 +43,7 @@
                         "x": 123.0,
                         "y": 113.0
                     },
-                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
+                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
                 },
                 {
                     "description": "Zone [GND] on F.Cu, priority 0",
@@ -74,30 +51,7 @@
                         "x": 123.0,
                         "y": 113.0
                     },
-                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [VSYS] on F.Cu, length 3.4398 mm",
-                    "pos": {
-                        "x": 108.0177,
-                        "y": 111.5221
-                    },
-                    "uuid": "09fc3f4e-fe18-4814-861c-062634f8fd95"
-                },
-                {
-                    "description": "Pad 10 [VSYS] of U2 on F.Cu",
-                    "pos": {
-                        "x": 106.4625,
-                        "y": 109.25
-                    },
-                    "uuid": "88e0b31d-b440-577f-92f6-6b92be96c6c3"
+                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
                 }
             ],
             "severity": "error",
