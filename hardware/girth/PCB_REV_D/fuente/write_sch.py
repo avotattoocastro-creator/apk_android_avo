@@ -133,7 +133,7 @@ def write(path_sch, path_pro, path_parts):
                         priority=1),
                    ],
                   [("VBUS", "Potencia"), ("POGO_5V", "Potencia"), ("VSYS", "Potencia"), ("VBAT", "Potencia"),
-                   ("BAT_IN", "Potencia"), ("+3V3", "Potencia"), ("+3V3A", "Potencia")])
+                   ("BAT_IN", "Potencia"), ("+3V3", "Potencia")])   # +3V3A: clase normal (0,2 mm) para entrar en los pines de 0,4 mm del ADS1292
 
     rows = []
     for p in D.PARTS:

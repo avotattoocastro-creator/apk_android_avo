@@ -25,7 +25,7 @@ CLEAR = 0.15
 VIA = (0.5, 0.3)
 
 # widths per net (mm)
-WIDTH = {D.VBUS: 0.4, "POGO_5V": 0.4, D.VSYS: 0.4, D.VBAT: 0.4, "BAT_IN": 0.4, D.V3: 0.35, D.VA: 0.3}
+WIDTH = {D.VBUS: 0.4, "POGO_5V": 0.4, D.VSYS: 0.4, D.VBAT: 0.4, "BAT_IN": 0.4, D.V3: 0.35, D.VA: 0.2}
 ORDER = ["ECGP", "ECGN", "ECG_E_P", "ECG_E_N", "ECG_E_REF", "ECG_PGA2P", "ECG_PGA2N", "ECG_PGA1P", "ECG_PGA1N",
          "ECG_VREFP", "ECG_VCAP1", "ECG_VCAP2", "ECG_RLDOUT", "ECG_RLDINV", "POGO_5V", D.VBUS, D.VBAT, "BAT_IN",
          "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS, D.VA, D.V3, "MAG_CAP", "USB_DP", "USB_DM",
