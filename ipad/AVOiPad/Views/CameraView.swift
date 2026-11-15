@@ -9,32 +9,33 @@ import UIKit
 struct CameraView: View {
     @Environment(AppModel.self) private var app
     @State private var confirmDelete: CameraClip? = nil
+    /// Panel desplegable de la derecha (AVO SYNC, grabación, vídeos). Boceto del entrenador 15/11/2026: la cámara ocupa
+    /// todo el ancho y el panel se despliega desde el botón junto a la hora.
+    @AppStorage("camera.panelOpen") private var panelOpen: Bool = false
 
     var body: some View {
         let m: CameraModel = app.camera
         GeometryReader { geo in
-            let wide: Bool = geo.size.width > geo.size.height
-            Group {
-                if wide {
-                    HStack(alignment: .top, spacing: 16) {
-                        previewArea(m).frame(maxWidth: .infinity, maxHeight: .infinity)
-                        ScrollView { sidePanel(m) }.frame(width: 370)
-                    }
-                } else {
-                    VStack(spacing: 16) {
-                        previewArea(m).frame(height: geo.size.height * 0.52)
-                        ScrollView { sidePanel(m) }
-                    }
+            let panelWidth: CGFloat = min(390, geo.size.width * 0.85)
+            ZStack(alignment: .topTrailing) {
+                previewArea(m, panelInset: panelOpen ? panelWidth : 0)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                if panelOpen {
+                    drawer(m)
+                        .frame(width: panelWidth)
+                        .frame(maxHeight: .infinity)
+                        .transition(.move(edge: .trailing))
                 }
             }
-            .padding(16)
             .onChange(of: geo.size) { (_: CGSize, _: CGSize) in m.updateRotation() }
         }
+        .background(Color.black)
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             // la escena gira un poco después del aviso del dispositivo
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { m.updateRotation() }
         }
-        .sheet(item: Binding(get: { m.playing }, set: { m.playing = $0 })) { (c: CameraClip) in
+        // reproductor a pantalla completa (boceto del entrenador 15/11/2026)
+        .fullScreenCover(item: Binding(get: { m.playing }, set: { m.playing = $0 })) { (c: CameraClip) in
             CameraClipPlayer(clip: c).avoColorScheme()
         }
         .alert("¿Borrar el vídeo?",
@@ -49,9 +50,9 @@ struct CameraView: View {
 
     // ------------------------------------------------------------------ vista previa
     @ViewBuilder
-    private func previewArea(_ m: CameraModel) -> some View {
+    private func previewArea(_ m: CameraModel, panelInset: CGFloat) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10).fill(Color.black)
+            Color.black
             switch m.access {
             case .granted:
                 CameraPreview(session: m.recorder.session, angle: m.rotation)
@@ -73,17 +74,67 @@ struct CameraView: View {
                 ProgressView()
             }
         }
-        .overlay(alignment: .topLeading) {
-            if m.recording { recBadge(m).padding(14) }
+        .overlay(alignment: .top) {
+            if m.recording { recBadge(m).padding(.top, 14) }
         }
         .overlay(alignment: .topTrailing) {
-            clockBadge(m).padding(14)
+            HStack(alignment: .top, spacing: 10) {
+                clockBadge(m)
+                panelButton(m)
+            }
+            .padding(.top, 14)
+            .padding(.trailing, 14 + panelInset)
         }
         .overlay(alignment: .bottom) {
-            recordButton(m).padding(.bottom, 20)
+            recordButton(m).padding(.bottom, 24)
         }
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(m.recording ? Avo.red : Avo.line, lineWidth: m.recording ? 2 : 1))
+        .overlay {
+            if m.recording { Rectangle().stroke(Avo.red, lineWidth: 3).allowsHitTesting(false) }
+        }
+        .clipped()
+    }
+
+    /// Botón junto a la hora que despliega o recoge el panel.
+    private func panelButton(_ m: CameraModel) -> some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.25)) { panelOpen.toggle() }
+        } label: {
+            Image(systemName: panelOpen ? "chevron.right" : "slider.horizontal.3")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
+                .background(Color.black.opacity(0.55), in: RoundedRectangle(cornerRadius: 8))
+                .overlay(alignment: .topTrailing) {
+                    // estado de AVO SYNC también con el panel recogido
+                    Circle().fill(m.gpsTimeOK ? Avo.ok : (m.syncConnected ? Avo.warn : Avo.unknown))
+                        .frame(width: 9, height: 9).padding(5)
+                }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(panelOpen ? "Recoger panel" : "Desplegar panel")
+        .accessibilityIdentifier("camera.panel")
+    }
+
+    /// Panel desplegable sobre la imagen, a la derecha.
+    private func drawer(_ m: CameraModel) -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("CÁMARA").font(.caption.weight(.semibold)).tracking(0.8).foregroundStyle(Avo.silver)
+                Spacer()
+                Button {
+                    withAnimation(.easeInOut(duration: 0.25)) { panelOpen = false }
+                } label: {
+                    Image(systemName: "xmark").font(.callout.weight(.semibold)).foregroundStyle(Avo.text)
+                        .frame(width: 36, height: 36)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Cerrar panel")
+            }
+            .padding(.horizontal, 14).padding(.top, 8)
+            ScrollView { sidePanel(m).padding(14) }
+        }
+        .background(Avo.bg.opacity(0.94))
+        .overlay(alignment: .leading) { Rectangle().fill(Avo.line).frame(width: 1) }
     }
 
     private func recBadge(_ m: CameraModel) -> some View {
@@ -302,7 +353,8 @@ struct CameraPreview: UIViewRepresentable {
         let v = PreviewView()
         v.backgroundColor = .black
         v.previewLayer.session = session
-        v.previewLayer.videoGravity = .resizeAspect
+        // la imagen ocupa todo el recuadro (boceto 15/11/2026); el vídeo grabado conserva el encuadre completo del sensor
+        v.previewLayer.videoGravity = .resizeAspectFill
         return v
     }
 
@@ -329,15 +381,16 @@ struct CameraClipPlayer: View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(clip.name).font(.headline).foregroundStyle(Avo.text)
-                    Text(sourceText).font(.caption).foregroundStyle(Avo.textDim)
+                    Text(clip.name).font(.headline).foregroundStyle(.white).lineLimit(1)
+                    Text(sourceText).font(.caption).foregroundStyle(Color.white.opacity(0.7)).lineLimit(2)
                 }
                 Spacer()
-                Text(clock).font(.system(.title3, design: .monospaced).weight(.semibold)).foregroundStyle(Avo.text)
+                Text(clock).font(.system(.title3, design: .monospaced).weight(.semibold)).foregroundStyle(.white)
                 Button("Cerrar") { player.pause(); dismiss() }.buttonStyle(.avoSecondary)
             }
             VideoPlayer(player: player)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
             if let s = clip.sync, !s.marks.isEmpty {
                 ScrollView(.horizontal) {
                     HStack(spacing: 8) {
@@ -354,8 +407,8 @@ struct CameraClipPlayer: View {
                 }
             }
         }
-        .padding(16)
-        .background(Avo.bg)
+        .padding(.horizontal, 12).padding(.vertical, 8)
+        .background(Color.black.ignoresSafeArea())
         .task {
             while !Task.isCancelled {
                 if let s = clip.sync {

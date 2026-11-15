@@ -231,7 +231,8 @@ struct RootView: View {
             // no navigation title bar (trainer's sketch 08/11/2026): the AVO header / training bar is the top row of
             // every page; with the sidebar hidden, a button at its left brings the menu back
             // trainer's sketch 13/11/2026: the general pages have no top bar (only the menu button when the sidebar is hidden)
-            if app.page != .home && (app.page.isTrainingPage || columns == .detailOnly) {
+            // «Cámara» sin barra superior: la imagen llega arriba (boceto 15/11/2026); su botón de menú flota encima
+            if app.page != .home && app.page != .camera && (app.page.isTrainingPage || columns == .detailOnly) {
                 HStack(spacing: 0) {
                     if columns == .detailOnly {
                         Button {
@@ -257,6 +258,19 @@ struct RootView: View {
                 pageView(app.page)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if app.showEmptyState { RootEmptyState() }
+                if app.page == .camera && columns == .detailOnly {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.25)) { columns = .doubleColumn }
+                    } label: {
+                        Image(systemName: "sidebar.left").font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(.white).frame(width: 44, height: 44)
+                            .background(Color.black.opacity(0.55), in: RoundedRectangle(cornerRadius: 8))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(14)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .accessibilityLabel("Mostrar menú")
+                }
                 // Inicio has no «Menú» button (trainer's sketch 13/11/2026): its «INICIAR» opens the Dashboard and the sidebar
                 if app.captureMode && app.captureReady {
                     Text("capture.ready")
