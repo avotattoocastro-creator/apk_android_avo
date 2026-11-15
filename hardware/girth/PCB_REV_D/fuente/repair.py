@@ -250,6 +250,8 @@ def try_route(r, pads, net, nid, g):
 def main():
     src = os.path.join(D.OUT, "AVO_GIRTH_REVD_PCB_colocacion.kicad_pcb" if "--from-placement" in sys.argv
                        else "AVO_GIRTH_REVD_PCB.kicad_pcb")
+    if "--src" in sys.argv:                       # --src FILE: start from another board (e.g. a previous repair)
+        src = sys.argv[sys.argv.index("--src") + 1]
     segs, vias, fps = read_board(src)
     bad = check_positions(fps)
     if bad:

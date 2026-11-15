@@ -393,7 +393,9 @@ def main():
         # rev. 2 (V4): sin pre-ruteo del bloque Qi; los pre-ruteos bloqueados encajonaban U1 y Freerouting no
         # podía terminar sus redes. Se dejan solo USB, CC y los pines del cargador.
         PRE_QI = "--pre-qi" in sys.argv
-        pre = ["ECG_VCAP1", "ECG_VCAP2", "ECG_PGA2P", "ECG_PGA2N", "MAG_CAP",
+        # REV D: ECGP (entrada del ADS1292) y ECG_CS van pre-ruteadas: Freerouting y la reparación las dejaban
+        # encajonadas entre el abanico de U6 (CI 43710447179)
+        pre = ["ECG_VCAP1", "ECG_VCAP2", "ECG_PGA2P", "ECG_PGA2N", "ECGP", "ECG_CS", "MAG_CAP",
                "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
         pairs = [("CHG_STAT", ["U2.9", "R10.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
