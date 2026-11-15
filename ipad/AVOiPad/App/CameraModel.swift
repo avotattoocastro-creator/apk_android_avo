@@ -2,6 +2,7 @@ import SwiftUI
 import AVFoundation
 import Observation
 import UIKit
+import Photos
 
 /// Formato de grabación ofrecido por la cámara trasera.
 struct CameraFormat: Hashable, Identifiable {
@@ -231,6 +232,15 @@ final class CameraModel {
     var error: String? = nil
     var clips: [CameraClip] = []
     var playing: CameraClip? = nil
+    /// Caballo elegido para las próximas grabaciones (se guarda en el .avosync.json).
+    var recordHorse: String? = UserDefaults.standard.string(forKey: "camera.horse") {
+        didSet { UserDefaults.standard.set(recordHorse, forKey: "camera.horse") }
+    }
+    /// Exportación con los datos impresos: progreso (0…1) de la que está en marcha y aviso final.
+    var exportProgress: Double? = nil
+    var exportingClipId: String? = nil
+    var info: String? = nil
+    @ObservationIgnored private var exporter: VideoOverlayExporter? = nil
 
     // AVO SYNC
     var syncState: AvoSyncLink.State = .off
@@ -470,7 +480,8 @@ final class CameraModel {
             holdover: holdover, fit: fit, samples: samples, marks: marks,
             systemClockStart: systemStart, systemClockEnd: sysEnd,
             gadgetName: useGps ? { if case .connected(let n) = syncState { return n } else { return nil } }() : nil,
-            appVersion: "\(AppModel.appVersion) (\(AppModel.buildNumber))")
+            appVersion: "\(AppModel.appVersion) (\(AppModel.buildNumber))",
+            horse: recordHorse)
         let path = r.url.deletingPathExtension().path + ".avosync.json"
         do {
             try AvoFiles.writeAtomic(try AvoSyncVideoFile.encode(file), to: path)
@@ -495,7 +506,152 @@ final class CameraModel {
     func delete(_ c: CameraClip) {
         try? FileManager.default.removeItem(at: c.videoURL)
         try? FileManager.default.removeItem(at: c.syncURL)
-        if playing == c { playing = nil }
+        try? FileManager.default.removeItem(at: exportURL(c))
+        if playing?.id == c.id { playing = nil }
         loadClips()
+    }
+
+    func clip(id: String) -> CameraClip? { clips.first { $0.id == id } }
+
+    // ------------------------------------------------------------------ caballo y entrenamiento
+    /// Caballos de Cuadra y de los entrenamientos importados.
+    var horseOptions: [String] {
+        var set = Set<String>(app.stable?.horseNames ?? [])
+        for s in app.sessions where !s.horse.trimmed.isEmpty { set.insert(s.horse) }
+        return set.sorted { $0.localizedCompare($1) == .orderedAscending }
+    }
+
+    /// Hora UTC (s) de inicio y fin de un entrenamiento.
+    static func sessionRange(_ s: SessionItem) -> ClosedRange<Double>? {
+        guard let u0 = s.fullTimeline.utc0 else { return nil }
+        let a = u0.timeIntervalSince1970
+        return a...(a + max(s.fullTimeline.durationS, 0))
+    }
+
+    private static func overlap(_ a: ClosedRange<Double>, _ b: ClosedRange<Double>) -> Double {
+        max(0, min(a.upperBound, b.upperBound) - max(a.lowerBound, b.lowerBound))
+    }
+
+    private static func sameHorse(_ a: String?, _ b: String) -> Bool {
+        guard let a = a, !a.trimmed.isEmpty else { return false }
+        return a.trimmed.lowercased() == b.trimmed.lowercased()
+    }
+
+    /// Entrenamientos que se pueden asociar: los que coinciden en hora primero (y del mismo caballo), luego los más cercanos
+    /// del mismo día.
+    func candidates(_ c: CameraClip) -> [SessionItem] {
+        guard let s = c.sync else { return [] }
+        let v = s.utcRangeS
+        let scored: [(SessionItem, Double)] = app.sessions.compactMap { item in
+            guard let r = CameraModel.sessionRange(item) else { return nil }
+            let ov = CameraModel.overlap(v, r)
+            let gap = ov > 0 ? 0 : min(abs(r.lowerBound - v.upperBound), abs(v.lowerBound - r.upperBound))
+            if gap > 18 * 3600 { return nil }
+            let horseBonus = CameraModel.sameHorse(s.horse, item.horse) ? 1e7 : 0
+            return (item, ov > 0 ? 1e9 + horseBonus + ov : horseBonus - gap)
+        }
+        return scored.sorted { $0.1 > $1.1 }.map { $0.0 }
+    }
+
+    /// Entrenamiento asociado: el elegido a mano o, si no, el que coincide en hora (prefiriendo el mismo caballo).
+    func training(_ c: CameraClip) -> SessionItem? {
+        guard let s = c.sync else { return nil }
+        if let id = s.trainingId { return id.isEmpty ? nil : app.sessions.first { $0.id == id } }
+        let v = s.utcRangeS
+        let matches = app.sessions.compactMap { item -> (SessionItem, Double)? in
+            guard let r = CameraModel.sessionRange(item) else { return nil }
+            let ov = CameraModel.overlap(v, r)
+            guard ov > 0 else { return nil }
+            return (item, ov + (CameraModel.sameHorse(s.horse, item.horse) ? 1e7 : 0))
+        }
+        return matches.max { $0.1 < $1.1 }?.0
+    }
+
+    /// true si el entrenamiento asociado coincide en hora con el vídeo.
+    func overlaps(_ c: CameraClip, _ item: SessionItem) -> Bool {
+        guard let s = c.sync, let r = CameraModel.sessionRange(item) else { return false }
+        return CameraModel.overlap(s.utcRangeS, r) > 0
+    }
+
+    /// Cambia el archivo de hora de un vídeo y recarga la lista.
+    private func updateSync(_ c: CameraClip, _ change: (inout AvoSyncVideoFile) -> Void) {
+        guard var s = c.sync else { return }
+        change(&s)
+        do {
+            try AvoFiles.writeAtomic(try AvoSyncVideoFile.encode(s), to: c.syncURL.path)
+        } catch {
+            self.error = "No se pudo guardar el archivo de hora: \(error.localizedDescription)"
+        }
+        loadClips()
+    }
+
+    /// Asocia a mano (nil = ninguno). `auto` vuelve a la búsqueda por la hora.
+    func associate(_ c: CameraClip, _ item: SessionItem?, auto: Bool = false) {
+        updateSync(c) { $0.trainingId = auto ? nil : (item?.id ?? "") }
+    }
+
+    func setHorse(_ c: CameraClip, _ horse: String?) {
+        updateSync(c) { $0.horse = horse }
+    }
+
+    /// Recorte no destructivo: el .mov original no se toca; se aplica al reproducir y al exportar.
+    func setTrim(_ c: CameraClip, start: Double?, end: Double?) {
+        updateSync(c) { s in
+            let d = s.durationS
+            var a = start.map { max(0, min($0, d)) }
+            var b = end.map { max(0, min($0, d)) }
+            if let x = a, x < 0.05 { a = nil }
+            if let y = b, y > d - 0.05 { b = nil }
+            if let x = a, let y = b, y - x < 0.5 { b = min(d, x + 0.5) }
+            s.trimStartS = a
+            s.trimEndS = b
+        }
+    }
+
+    // ------------------------------------------------------------------ exportar con los datos impresos
+    func exportURL(_ c: CameraClip) -> URL {
+        URL(fileURLWithPath: AvoFiles.join(videosDir, "exportados", c.name + "_datos.mov"))
+    }
+
+    func hasExport(_ c: CameraClip) -> Bool { AvoFiles.exists(exportURL(c).path) }
+
+    func export(_ c: CameraClip, gauges: Set<VideoGauge>) {
+        guard exportProgress == nil, let s = c.sync else { return }
+        let tel = training(c).flatMap { VideoTelemetry($0) }
+        let out = exportURL(c)
+        AvoFiles.ensureDir(out.deletingLastPathComponent().path)
+        let ex = VideoOverlayExporter()
+        exporter = ex
+        exportProgress = 0
+        exportingClipId = c.id
+        info = nil
+        ex.run(videoURL: c.videoURL, sync: s, telemetry: tel, gauges: gauges, out: out,
+               progress: { [weak self] p in self?.exportProgress = p }) { [weak self] err in
+            guard let self = self else { return }
+            self.exportProgress = nil
+            self.exportingClipId = nil
+            self.exporter = nil
+            if let e = err { self.error = "No se pudo exportar: \(e)" } else { self.info = "Vídeo con datos listo." }
+            self.loadClips()
+        }
+    }
+
+    func cancelExport() { exporter?.cancel() }
+
+    func saveToPhotos(_ url: URL) {
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { st in
+            guard st == .authorized || st == .limited else {
+                DispatchQueue.main.async { self.error = "Sin permiso para guardar en Fotos (Ajustes › AVO Horse › Fotos)." }
+                return
+            }
+            PHPhotoLibrary.shared().performChanges({
+                _ = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+            }) { ok, err in
+                DispatchQueue.main.async {
+                    if ok { self.info = "Guardado en Fotos." }
+                    else { self.error = "No se pudo guardar en Fotos: \(err?.localizedDescription ?? "error desconocido")" }
+                }
+            }
+        }
     }
 }

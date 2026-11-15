@@ -13,7 +13,8 @@ final class SessionItem: Identifiable {
     private(set) var imu: ImuTimeline
     private(set) var windowStart: Double? = nil
     private(set) var windowEnd: Double? = nil
-    private let fullImu: ImuTimeline
+    /// IMU of the whole file (also read by «Cámara» to put the girth data on the video).
+    let fullImu: ImuTimeline
 
     var segmentDefs: [SegmentDefinition] = []
     var engine: EquineAnalysis? = nil

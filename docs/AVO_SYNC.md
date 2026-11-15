@@ -85,6 +85,28 @@ Carpeta `videos/` de la app (Application Support/AVO Performance Horse/iPad):
   - `NSCameraUsageDescription`;
   - `NSPhotoLibraryAddUsageDescription`, para «Guardar vídeo» desde Compartir.
 
+## 5 bis. Vídeo con los datos del entrenamiento (desde el 15/11/2026)
+- **Caballo:** se elige antes de grabar, en el panel. Se guarda en `horse` del `.avosync.json`.
+- **Asociación al entrenamiento:**
+  - Automática: el entrenamiento importado que coincide en hora con el tramo útil del vídeo, prefiriendo el del mismo caballo.
+  - A mano: desde el reproductor, con «Automático», un entrenamiento de la lista o «Ninguno». Se guarda en `training_id`
+    (`""` = ninguno).
+- **Unión por la hora:** `t = t[0] + (UTC del fotograma − utc0)`. `utc0` es la hora UTC del GNSS de la espalda. Si el
+  entrenamiento no la tiene, se usa la hora de inicio del reloj de pecho, menos exacta.
+- **Indicadores elegibles** (botón «Datos», selección guardada en el iPad):
+  - velocímetro, barra de distancia, recorrido con la posición, rumbo (brújula) y coordenadas;
+  - aire, aceleración, aceleración lateral, tranco (frecuencia y longitud, motor + cincha), IMU de la cincha (vertical
+    fusionada o |a|), altitud, calidad GNSS y hora GPS;
+  - caballo y fecha;
+  - pulso: aparece «sin datos», porque el ECG de la cincha (fmt 2) aún no se decodifica en el iPad.
+- **Mismo dibujo en pantalla y en el exportado:** `VideoOverlayRenderer`, con Core Graphics.
+- **Recorte no destructivo:** `trim_start_s` / `trim_end_s`, con agarres, «Inicio aquí», «Fin aquí» y «Quitar recorte».
+  El `.mov` original no se toca.
+- **Exportar con datos:** `AVAssetExportSession` + `AVVideoComposition` con Core Image.
+  - HEVC, 24–60 fps (los vídeos a 120/240 fps se exportan a 60).
+  - Respeta el recorte.
+  - El resultado va a `videos/exportados/<vídeo>_datos.mov` y se puede «Guardar en Fotos» o compartir.
+
 ## 6. Pendiente
 1. Gadget: prototipo XIAO ESP32-C3 + GPS con PPS (MAX-M10S recomendado) y firmware `firmware/sync/V0_1` con este contrato.
 2. Pruebas del gadget (ninguna hecha):
@@ -92,7 +114,7 @@ Carpeta `videos/` de la app (Application Support/AVO Performance Horse/iPad):
    - LED grabado a 240 fps para medir el error real y calibrar el retardo de la cámara;
    - 1 h de estabilidad;
    - playa a más de 500 m.
-3. Juntar el vídeo con el entrenamiento por la hora y superponer los datos (velocidad, aire, zancada, pulso, minimapa).
-   Exportar el vídeo con los datos.
+3. Pulso sobre el vídeo cuando el iPad decodifique el ECG de la cincha. Lista de vídeos dentro de cada entrenamiento
+   (Análisis).
 4. LED codificado e importación de vídeos externos (GoPro, dron).
 5. Android y Windows (mismo contrato).
