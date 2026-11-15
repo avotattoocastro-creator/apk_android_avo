@@ -1,0 +1,8 @@
++ timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/girth/PCB_REV_C/out/ruteado/placa.dsn -do hardware/girth/PCB_REV_C/out/ruteado/placa.ses -mp 150
+2026-11-15 01:53:56.388 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-15 01:53:57.584 [main] INFO  Opening 'hardware/girth/PCB_REV_C/out/ruteado/placa.dsn'...
+2026-11-15 01:53:57.931 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+
+(java:2571): dbind-WARNING **: 01:53:59.217: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-15 01:53:59.394 [main] WARN  Non-ansi character '−' found at position 15951 just after 'TP4'.
+freerouting código 124
