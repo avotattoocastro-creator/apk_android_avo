@@ -169,9 +169,8 @@ def via_drops(r, pads, log):
 
 # GND pins of the QFNs that sit next to their exposed pad: a short inward stub joins them to it (the EP has its
 # own thermal vias to the planes), so no fan-out via blocks the escape of the neighbouring signal pins.
-EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15")} | \
-    {("U6", n) for n in ("10", "13", "17", "24", "25", "26")}   # REV D: masas del ADS1292 al EP (sin vías junto a las entradas);
-    # 17 = CLK a DGND: libera la salida de ECG_CS (pin 18), que quedaba encajonada entre CLK y MOSI
+EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15")}   # REV D: el ADS1292 en TQFP no tiene EP; sus masas bajan
+# a In1 con vías propias (CLK, pin 17, a DGND con CLK_EN = 0)
 
 
 def ep_stubs(r, pads):

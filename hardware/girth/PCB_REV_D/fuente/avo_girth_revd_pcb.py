@@ -17,7 +17,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-from custom_fp import ads1292_vqfn32, lga14_st, mmc5983ma, test_pad, wire_pad   # noqa: E402
+from custom_fp import ads1292_tqfp32, lga14_st, mmc5983ma, test_pad, wire_pad   # noqa: E402
 from fplib import Footprint, Pad, circle, load, rect_lines   # noqa: E402
 from sexpr import Sym   # noqa: E402
 
@@ -121,7 +121,7 @@ FP = {
     "MINI1U": C6,
     "LGA14": lga14_st(),
     "MMC": mmc5983ma(),
-    "ADS": ads1292_vqfn32(),
+    "ADS": ads1292_tqfp32(),          # REV D: TQFP-32 (PBS); en VQFN 0,4 mm la salida de pistas no cabía
     "TP": test_pad(1.0),
     "WIRE": wire_pad("(hilo)", drill=0.8, d=1.5),
     "HOLE": npth_hole(HOLE_D, HOLE_KEEP, "Taladro del tornillo M2 de la tapa"),
@@ -153,7 +153,7 @@ LC = {
     "1n C0G": "C53547", "100n C0G": "C97946",
     "NTC10k": "C77131", "USBLC6": "C7519", "LED": "C2286", "PTC": "C20802", "TVS": "C2827694",
     "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C20627095",
-    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C544416", "2k": "C4109", "4n7 C0G": "C85980", "1n5 C0G": "C668348", "1u TANT": "C7192",
+    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C2651570", "2k": "C4109", "4n7 C0G": "C85980", "1n5 C0G": "C668348", "1u TANT": "C7192",
 }
 
 
@@ -286,7 +286,7 @@ C("C33", "10u", "MAG_CAP", GND, block="IMU", fp="C0603", note="CAP (SET/RESET): 
 C("C35", "100n", V3, GND, block="IMU", note="VDDIO del MMC5983MA")
 
 # ---------------------------------------------------------------------------------------- ECG ADS1292 (U6)
-# Hoja SBAS502C: VREFN y EP a AVSS; entradas sin usar a AVDD; 4,7 nF en las salidas del PGA; 10 µF + 0,1 µF por
+# Hoja SBAS502C: VREFN a AVSS (el TQFP no tiene EP); entradas sin usar a AVDD; 4,7 nF en las salidas del PGA; 10 µF + 0,1 µF por
 # alimentación; VCAP1 de dieléctrico no ferroeléctrico si hay vibración (C0G); CLKSEL = 1 (reloj interno).
 # Canal 2 = ECG (IN2P/IN2N). Canal 1 apagado (IN1P/IN1N a AVDD). RLD con referencia interna (RLDREF_INT): RLDIN a AVDD,
 # realimentación 1 MΩ ∥ 1,5 nF entre RLDOUT y RLDINV, salida al electrodo de referencia por 100 kΩ.
@@ -295,13 +295,13 @@ part("U6", "ADS", "ADS1292", (0, 0), 0,
      {1: "ECG_PGA1N", 2: "ECG_PGA1P", 3: VA, 4: VA, 5: "ECGN", 6: "ECGP", 7: "ECG_PGA2N", 8: "ECG_PGA2P",
       9: "ECG_VREFP", 10: GND, 11: "ECG_VCAP1", 12: VA, 13: GND, 14: V3, 15: "ECG_RESET", 16: "ECG_START",
       17: GND, 18: "ECG_CS", 19: "ECG_MOSI", 20: "ECG_SCK", 21: "ECG_MISO", 22: "ECG_DRDY", 23: V3, 24: GND,
-      25: GND, 26: GND, 27: "ECG_VCAP2", 28: "ECG_RLDINV", 29: VA, 30: "ECG_RLDOUT", 31: VA, 32: VA, 33: GND},
-     LC["ADS1292"], "ADS1292IRSMR (TI) · alt. ADS1292RIRSMR C456281", "ECG",
+      25: GND, 26: GND, 27: "ECG_VCAP2", 28: "ECG_RLDINV", 29: VA, 30: "ECG_RLDOUT", 31: VA, 32: VA},
+     LC["ADS1292"], "ADS1292IPBSR (TI, TQFP-32) · alt. ADS1292RIPBSR C528635", "ECG",
      sym=dict(L=[(6, "IN2P"), (5, "IN2N"), (4, "IN1P"), (3, "IN1N"), (8, "PGA2P"), (7, "PGA2N"), (2, "PGA1P"), (1, "PGA1N"),
                  (9, "VREFP"), (10, "VREFN"), (11, "VCAP1"), (27, "VCAP2"), (12, "AVDD"), (13, "AVSS"),
                  (28, "RLDINV"), (29, "RLDIN/RLDREF"), (30, "RLDOUT"), (31, "IN3P"), (32, "IN3N")],
               R=[(18, "CS"), (20, "SCLK"), (19, "DIN"), (21, "DOUT"), (22, "DRDY"), (15, "PWDN/RESET"), (16, "START"),
-                 (14, "CLKSEL"), (17, "CLK"), (23, "DVDD"), (24, "DGND"), (25, "GPIO2"), (26, "GPIO1"), (33, "EP")]),
+                 (14, "CLKSEL"), (17, "CLK"), (23, "DVDD"), (24, "DGND"), (25, "GPIO2"), (26, "GPIO1")]),
      note="24 bits, 500 muestras/s, ganancia 6; GPIO1/2 a GND (entradas por defecto)")
 part("U7", "SOT23-5", "RT9080-33GJ5", (0, 0), 0, {1: VSYS, 2: GND, 3: VSYS, 4: None, 5: VA}, LC["RT9080-33"],
      "RT9080-33GJ5", "ECG", sym=dict(L=[(1, "VIN"), (3, "EN"), (2, "GND")], R=[(5, "VOUT"), (4, "NC")]),
@@ -354,7 +354,7 @@ for p in PARTS:
         p["pos"], p["rot"] = (x, y), r
 MECH = [p for p in PARTS if p["fp"] == "HOLE"]
 # anillo libre de 1 mm alrededor del ADS1292 (QFN de paso 0,4): sitio para las salidas y las vías de todos sus pines
-_U6 = (-14.0, 2.0); _r0, _r1 = 2.7, 4.0
+_U6 = (-14.0, 2.0); _r0, _r1 = 4.2, 5.2      # TQFP: patillas hasta ±3,9
 KEEPOUT_RECTS = [("U6_N", _U6[0] - _r1, _U6[1] + _r0, _U6[0] + _r1, _U6[1] + _r1),
                  ("U6_S", _U6[0] - _r1, _U6[1] - _r1, _U6[0] + _r1, _U6[1] - _r0),
                  ("U6_W", _U6[0] - _r1, _U6[1] - _r1, _U6[0] - _r0, _U6[1] + _r1),

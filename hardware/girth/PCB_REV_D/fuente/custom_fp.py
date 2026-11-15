@@ -126,6 +126,28 @@ def sit1533():
                      "SiT1533 32,768 kHz MEMS 2012 (land EasyEDA C367058)", height=0.6, body=(-1.0, -0.6, 1.0, 0.6))
 
 
+def ads1292_tqfp32():
+    """TI ADS1291/ADS1292/ADS1292R TQFP-32 (PBS) cuerpo 5 × 5, patillas 7 × 7, paso 0,5, SIN pad térmico (SBAS502C:
+    la tabla de pines tiene la misma numeración para PBS y RSM; el «Power Pad» solo existe en RSM). Land IPC nominal
+    (como TQFP-32_5x5mm_P0.5mm de KiCad): pads 1,475 × 0,30 centrados a ±3,1625. Pines 1–8 a la izquierda (de arriba
+    abajo), 9–16 abajo, 17–24 a la derecha (de abajo arriba), 25–32 arriba."""
+    pads = []
+    c = 3.1625
+    for k in range(8):
+        o = -1.75 + 0.5 * k
+        pads.append(Pad(1 + k, "smd", "roundrect", -c, o, 1.475, 0.30, rratio=0.25))
+        pads.append(Pad(9 + k, "smd", "roundrect", o, c, 0.30, 1.475, rratio=0.25))
+        pads.append(Pad(17 + k, "smd", "roundrect", c, -o, 1.475, 0.30, rratio=0.25))
+        pads.append(Pad(25 + k, "smd", "roundrect", -o, -c, 0.30, 1.475, rratio=0.25))
+    g = rect_lines(-2.5, -2.5, 2.5, 2.5, "F.Fab", 0.1)
+    g += rect_lines(-4.15, -4.15, 4.15, 4.15, "F.CrtYd", 0.05)
+    g += [line(-2.61, -2.61, -2.61, -2.2, "F.SilkS"), line(2.61, -2.61, 2.2, -2.61, "F.SilkS"),
+          line(2.61, 2.61, 2.61, 2.2, "F.SilkS"), line(-2.61, 2.61, -2.2, 2.61, "F.SilkS"),
+          circle(-3.75, -2.6, 0.12, "F.SilkS", 0.1, True)]
+    return Footprint("AVO_TQFP-32_5x5mm_P0.5mm", pads, g, "smd", None,
+                     "ADS1292 TQFP-32 PBS 5x5 P0,5 (sin pad térmico)", height=1.2, body=(-2.5, -2.5, 2.5, 2.5))
+
+
 def ads1292_vqfn32():
     """TI ADS1291/ADS1292/ADS1292R VQFN-32 (RSM) 4 × 4 × 1,0 mm, paso 0,4, EP 2,8 (land de EasyEDA/LCSC C456281).
     Pines 1–8 a la izquierda (de arriba abajo), 9–16 abajo, 17–24 a la derecha (de abajo arriba), 25–32 arriba."""

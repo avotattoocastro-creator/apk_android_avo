@@ -52,7 +52,7 @@
 			)
 		)
 		(symbol
-			"AVO:ADS1292_U_0af6bc"
+			"AVO:ADS1292_U_eb4593"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -60,7 +60,7 @@
 			(property "Reference" "U" (at -17.78 26.67 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ADS1292_U_0af6bc"
+				"ADS1292_U_eb4593"
 				(at 17.78 26.67 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -68,7 +68,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ADS1292_U_0af6bc_0_1"
+				"ADS1292_U_eb4593_0_1"
 				(rectangle
 					(start -17.78 25.4)
 					(end 17.78 -25.4)
@@ -77,7 +77,7 @@
 				)
 			)
 			(symbol
-				"ADS1292_U_0af6bc_1_1"
+				"ADS1292_U_eb4593_1_1"
 				(pin
 					passive
 					line
@@ -333,14 +333,6 @@
 					(length 2.54)
 					(name "GPIO1" (effects (font (size 1.27 1.27))))
 					(number "26" (effects (font (size 1.27 1.27))))
-				)
-				(pin
-					passive
-					line
-					(at 20.32 -10.16 180)
-					(length 2.54)
-					(name "EP" (effects (font (size 1.27 1.27))))
-					(number "33" (effects (font (size 1.27 1.27))))
 				)
 			)
 		)
@@ -1587,7 +1579,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 575.31 152.4 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
-		(lib_id "AVO:ADS1292_U_0af6bc")
+		(lib_id "AVO:ADS1292_U_eb4593")
 		(at 623.57 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1599,17 +1591,17 @@
 		(property "Value" "ADS1292" (at 623.57 176.53 0) (effects (font (size 1 1))))
 		(property
 			"Footprint"
-			"AVO:AVO_VQFN-32-1EP_4x4mm_P0.4mm_EP2.8mm"
+			"AVO:AVO_TQFP-32_5x5mm_P0.5mm"
 			(at 623.57 175.26 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Datasheet" "" (at 623.57 175.26 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 623.57 175.26 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C544416" (at 623.57 175.26 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C2651570" (at 623.57 175.26 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property
 			"MPN"
-			"ADS1292IRSMR (TI) · alt. ADS1292RIRSMR C456281"
+			"ADS1292IPBSR (TI, TQFP-32) · alt. ADS1292RIPBSR C528635"
 			(at 623.57 175.26 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
@@ -1646,7 +1638,6 @@
 		(pin "24" (uuid "98ce01e7-a142-59de-afd0-637ac704f3f3"))
 		(pin "25" (uuid "270734cf-3925-55f4-ad35-d031f5a7c3d5"))
 		(pin "26" (uuid "51738a3d-6565-5a4a-b041-6ef944453afd"))
-		(pin "33" (uuid "a1a71bd9-9c05-50bd-aeb9-a9a7e232fe50"))
 		(instances
 			(project "AVO_GIRTH_REVD_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "U6") (unit 1)))
 		)
@@ -1938,15 +1929,6 @@
 		(effects (font (size 1 1)) (justify left))
 		(uuid "03e5b478-4ade-5b25-8826-528a48d1e913")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 643.89 182.88 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(global_label
-		"GND"
-		(shape passive)
-		(at 643.89 185.42 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "7e192c15-cc96-53d9-9dd9-fc3234a496f2")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 643.89 185.42 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:RT9080-33GJ5_U_7ca22f")
