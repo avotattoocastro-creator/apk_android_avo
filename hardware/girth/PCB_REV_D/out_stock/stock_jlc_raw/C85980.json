@@ -1,0 +1,214 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 87156,
+     "componentLibraryType": "expand",
+     "stockCount": 107649,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "4.7nF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_murata-electronics-grm1885c1h472ja01d_C85980.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0187
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0149
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 3999,
+       "productPrice": 0.0129
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 23999,
+       "productPrice": 0.0116
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 47999,
+       "productPrice": 0.0106
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": -1,
+       "productPrice": 0.01
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 24000,
+       "endNumber": 47999,
+       "productPrice": 0.0102
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.018
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 1499,
+       "productPrice": 0.0144
+      },
+      {
+       "startNumber": 1500,
+       "endNumber": 3999,
+       "productPrice": 0.0124
+      },
+      {
+       "startNumber": 4000,
+       "endNumber": 23999,
+       "productPrice": 0.0112
+      },
+      {
+       "startNumber": 48000,
+       "endNumber": -1,
+       "productPrice": 0.0096
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 98615,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "MurataElectronics-GRM1885C1H472JA01D/C85980",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 4000,
+     "shopCostPrice": 0.04193,
+     "preMinPurchaseNum": 483,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0187,
+     "componentCode": "C85980",
+     "componentBrandEn": "Murata Electronics",
+     "componentModelEn": "GRM1885C1H472JA01D",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763545030008934400-C85980-front.jpg?x-oss-date=20261115T133710Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nfCOjNl%2BgQ84muNVPy0DU4VMdDiKD50zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfoqxx80557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDQqQpZ9eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VuaGUp5ch3ARqAARxsWQOpWw6PWLn1IsQaYZM1DxnoPNAuqFX%2Bc9TddjjCLQdIfVW0jMSZVpqu8CJko4ml3iay1DzJSj53pozbx799LlSMgujMwh2HYeUm0kOSvyTOvd8gEhhIdSrUn3%2BWX1qRvUla6Q8fkQdkHQRaDJkqx4tyfSyVBMCf0RDd0OElIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZjCRyz71DKE7uC45mXHogeR1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6b3eb24b0839d3f47cebca4ae425039f2dfcfc2eed09758b07ed7bcaa5141481",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Murata-Electronics-GRM1885C1H472JA01D_C85980.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588933331488542720-C85980.pdf?response-content-disposition=attachment%3B%20filename%3DC85980.pdf%3B%20filename%2A%3DUTF-8%27%27C85980.pdf&x-oss-date=20261115T133710Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nXDMn%2BirVx86uZO3SGpkIFbuRBgZDdkTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qZAf3xw0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWgogwNNvLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIwnKoJKKWD5sagAFMuU%2FWfDd7M0If%2BWGqfbZfpl8tM%2BtbVr2JeftpyaTHSHHtm9cH12l5eVKLwptz1p9B7lwwTcHu%2Bv2Z8%2BlqNc4EhV%2FJ5tF5FshY%2Fh%2BUvmSENzsmsEEsExHZa4UHvg%2FyfGQxzqmChVqvPxY%2BadfAe9zWypGrhXxzwLenRhZmawo5myAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZbGsJgjPDir9R7BBPbkmnUvs%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=2c81a767bb6ae873ecd796f8873bdf708dbccca64f8ec4e3dff6ca77ccaa9b23",
+     "dataManualOfficialLink": "",
+     "componentName": "muRata GRM1885C1H472JA01D",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8763545031082946560-C85980-front.jpg?x-oss-date=20261115T133710Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nfCOjNl%2BgQ84muNVPy0DU4VMdDiKD50zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfoqxx80557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDQqQpZ9eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VuaGUp5ch3ARqAARxsWQOpWw6PWLn1IsQaYZM1DxnoPNAuqFX%2Bc9TddjjCLQdIfVW0jMSZVpqu8CJko4ml3iay1DzJSj53pozbx799LlSMgujMwh2HYeUm0kOSvyTOvd8gEhhIdSrUn3%2BWX1qRvUla6Q8fkQdkHQRaDJkqx4tyfSyVBMCf0RDd0OElIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZjCRyz71DKE7uC45mXHogeR1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=16903593af337a3aeb5c0b3237dbdc6780459c8fee313117023c70c707264823",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0603",
+     "describe": "4.7nF 50V C0G \u00b15% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "4.7nF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C85980</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C85980"
+ },
+ "message": null
+}

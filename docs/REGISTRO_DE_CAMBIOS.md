@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha PCB REV D + firmware 0.6.0 + batería 1000 mAh
+**Autor:** Claude · **Commits:** rama `feature/girth-pcb-rev-d` (puerta en `b63c741`) · **CI:** PCB run 43721512373 (éxito: DRC 0, 0 conexiones, paridad 0, ERC 0/0) · firmware run 43706692273 (éxito)
+**Qué cambia:**
+- **PCB REV D (46 × 30 mm, 4 capas):** ESP32-C6-MINI-1U-H4, LSM6DSV16X, MMC5983MA y ECG ADS1292 en TQFP-32 (C2651570), con RT9080 propio para AVDD.
+- **Pines:** el CLK del ADS va a DGND (sin R46), y los pads 14 y 51 del módulo quedan sin conectar.
+- **Reparación del ruteado:** vías GND de cosido (`stitch_gnd.py`) y `repair.py --src`, con costes configurables.
+- **Firmware cincha 0.6.0:** controladores del ADS1292, del LSM6DSV16X (SFLP) y del MMC5983MA, lotes ESP-NOW fmt 0/1/2 y pines de la REV D. Sin conmutador de antena: GPIO3 y GPIO14 son del ADS. 71/71 pruebas de host.
+- **Batería:** análisis en `DOCS/CONSUMO_BATERIA.md`, con la decisión de usar la 603450 de 1000 mAh.
+
+**Workflows:** se añaden `build-girth-pcb-revd.yml` (Freerouting con `-mp 80`), `easyeda-fp-girth-revd.yml`, `jlc-stock-girth-revd.yml` y `build-girth-v060.yml`.
+**Por qué:** el BNO085 y el MAX30003 no tenían existencias en JLCPCB. Con el VQFN del ADS1292 no se completaba el ruteado.
+**Archivos:** `hardware/girth/PCB_REV_D/**`, `firmware/girth/V0_6_0/**`.
+**No se ha tocado:** firmas, `Info.plist`, número de build.
+**Estado:** COMPILADO / CI · **NO VERIFICADO en hardware real**. La PCB no se ha fabricado y el firmware no se ha cargado en ninguna placa.
+
 
 ## 2026-11-15 — iPad 1.0.0 — «Cámara» se abre con el menú lateral oculto
 **Autor:** Claude · **Commits:** ver PR · **CI:** pendiente

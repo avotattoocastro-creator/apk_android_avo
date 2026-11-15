@@ -1,0 +1,330 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 2,
+   "list": [
+    {
+     "componentId": 2743479,
+     "componentLibraryType": "expand",
+     "stockCount": 1057,
+     "componentTypeEn": "Analog Front End (AFE)",
+     "erpComponentName": "\u7528\u4e8e\u751f\u7269\u7535\u52bf\u6d4b\u91cf\u7684\u4f4e\u529f\u8017\u3001\u53cc\u901a\u9053\u300124\u4f4d\u6a21\u62df\u524d\u7aef",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-front-end-afe_texas-instruments-ads1292ipbsr_C2651570.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.5216
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.5154
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.9722
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.5157
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.5157
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.5157
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.35
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.35
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.313
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.2823
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.7898
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.35
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "d329d3b3c33141418f29bbf81f8ab5c1",
+     "canPresaleNumber": 1028,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TexasInstruments-ADS1292IPBSR/C2651570",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 23.65868,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 6.5216,
+     "componentCode": "C2651570",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "ADS1292IPBSR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583669391879770112-C2651570/C2651570-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T133712Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nfCOjNl%2BgQ84muNVPy0DU4VMdDiKD50zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfoqxx80557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDQqQpZ9eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VuaGUp5ch3ARqAARxsWQOpWw6PWLn1IsQaYZM1DxnoPNAuqFX%2Bc9TddjjCLQdIfVW0jMSZVpqu8CJko4ml3iay1DzJSj53pozbx799LlSMgujMwh2HYeUm0kOSvyTOvd8gEhhIdSrUn3%2BWX1qRvUla6Q8fkQdkHQRaDJkqx4tyfSyVBMCf0RDd0OElIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZjCRyz71DKE7uC45mXHogeR1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d4345f1f871feecfcdbfd8cb7ac5d7eac22a4d342654e790f4454193a767e1ec",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303011730_Texas-Instruments-ADS1292IPBSR_C2651570.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589784956425052160-C2651570.pdf?response-content-disposition=attachment%3B%20filename%3DC2651570.pdf%3B%20filename%2A%3DUTF-8%27%27C2651570.pdf&x-oss-date=20261115T133712Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5nXDMn%2BirVx86uZO3SGpkIFbuRBgZDdkTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qZAf3xw0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWgogwNNvLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIwnKoJKKWD5sagAFMuU%2FWfDd7M0If%2BWGqfbZfpl8tM%2BtbVr2JeftpyaTHSHHtm9cH12l5eVKLwptz1p9B7lwwTcHu%2Bv2Z8%2BlqNc4EhV%2FJ5tF5FshY%2Fh%2BUvmSENzsmsEEsExHZa4UHvg%2FyfGQxzqmChVqvPxY%2BadfAe9zWypGrhXxzwLenRhZmawo5myAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZbGsJgjPDir9R7BBPbkmnUvs%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=38ae582f105f85ac7b3872e378a745c7cc99de45302b427ad9f32b7ae7ae0b16",
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/ads1291",
+     "componentName": "TI ADS1292IPBSR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583669392755974144-C2651570/C2651570-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T133712Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5nfCOjNl%2BgQ84muNVPy0DU4VMdDiKD50zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfoqxx80557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDQqQpZ9eDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5VuaGUp5ch3ARqAARxsWQOpWw6PWLn1IsQaYZM1DxnoPNAuqFX%2Bc9TddjjCLQdIfVW0jMSZVpqu8CJko4ml3iay1DzJSj53pozbx799LlSMgujMwh2HYeUm0kOSvyTOvd8gEhhIdSrUn3%2BWX1qRvUla6Q8fkQdkHQRaDJkqx4tyfSyVBMCf0RDd0OElIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZjCRyz71DKE7uC45mXHogeR1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=cc6e6a59573172bfa6eb30f0f8fbd270300aacf55641e24aca46156bf92f7132",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "TQFP-32(5x5)",
+     "describe": "-40\u2103~+85\u2103 107dB 2 2.42V\u30014.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain\u3001Multiplexers\u3001Internal reference source\u3001Fault detection SPI TQFP-32(5x5) Analog Front End (AFE) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "512kHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Value",
+       "attribute_value_name": "2.42V\u30014.033V"
+      },
+      {
+       "attribute_name_en": "S/N Ratio",
+       "attribute_value_name": "107dB"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "2.7V~5.25V"
+      },
+      {
+       "attribute_name_en": "Resolution(Bits)",
+       "attribute_value_name": "24"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "20uA"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Programmable gain\u3001Multiplexers\u3001Internal reference source\u3001Fault detection"
+      },
+      {
+       "attribute_name_en": "Number of channels",
+       "attribute_value_name": "2"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog Front End (AFE)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ADS1292IPBSR</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23880507,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "ADS1292IPBSR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-ADS1292IPBSR/C9900099794",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900099794",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ADS1292IPBSR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ADS1292IPBSR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL",
+     "describe": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ADS1292IPBSR</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "ADS1292IPBSR"
+ },
+ "message": null
+}

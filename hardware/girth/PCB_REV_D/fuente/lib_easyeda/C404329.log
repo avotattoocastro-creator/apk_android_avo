@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C404329
+       Symbol name : MMC5983MA
+       Library path : lib_easyeda/C404329.kicad_sym
+[INFO] Created Kicad footprint for ID: C404329
+       Footprint name: LGA-16_L3.0-W3.0-P0.50-BL_SQ
+       Footprint path: lib_easyeda/C404329.pretty/LGA-16_L3.0-W3.0-P0.50-BL_SQ.kicad_mod
+[INFO] Created 3D model for ID: C404329
+       3D model name: LGA-16_L3.0-W3.0-H0.9-P0.50
+       3D model path (wrl): lib_easyeda/C404329.3dshapes/LGA-16_L3.0-W3.0-H0.9-P0.50.wrl
+       3D model path (step): lib_easyeda/C404329.3dshapes/LGA-16_L3.0-W3.0-H0.9-P0.50.step
+-- easyeda2kicad.py v1.0.1 --
