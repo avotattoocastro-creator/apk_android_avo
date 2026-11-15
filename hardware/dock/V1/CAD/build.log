@@ -1,0 +1,97 @@
+AVISO AVO_DOCK_V1_fondo: 2 sólidos [201216.49, 3557.44]
+{
+ "piezas": {
+  "AVO_DOCK_V1_fondo": {
+   "solidos": 2,
+   "volumen_mm3": 204773.9,
+   "peso_PETG_g": 260.1,
+   "caja": [
+    200.0,
+    190.0,
+    37.99
+   ]
+  },
+  "AVO_DOCK_V1_frente": {
+   "solidos": 1,
+   "volumen_mm3": 256632.3,
+   "peso_PETG_g": 325.9,
+   "caja": [
+    200.0,
+    190.0,
+    20.0
+   ]
+  }
+ },
+ "interferencias": {},
+ "medidas": {
+  "caja_mm": [
+   200.0,
+   190.0,
+   55.0
+  ],
+  "union_z": 35.0,
+  "pared": 3.0,
+  "pcb_centro": [
+   31.0,
+   -48.0
+  ],
+  "pcb_z": [
+   8.0,
+   9.6
+  ],
+  "alojamientos": {
+   "casco_A": {
+    "tipo": "casco",
+    "centro": [
+     -62.0,
+     50.0
+    ],
+    "hondo": 6.0,
+    "hueco": [
+     57.0,
+     57.0
+    ]
+   },
+   "casco_B": {
+    "tipo": "casco",
+    "centro": [
+     62.0,
+     50.0
+    ],
+    "hondo": 6.0,
+    "hueco": [
+     57.0,
+     57.0
+    ]
+   },
+   "cincha_A": {
+    "tipo": "cincha",
+    "centro": [
+     -47.0,
+     -45.0
+    ],
+    "hondo": 5.0,
+    "hueco": [
+     70.6,
+     53.6
+    ]
+   },
+   "cincha_B": {
+    "tipo": "cincha",
+    "centro": [
+     47.0,
+     -45.0
+    ],
+    "hondo": 5.0,
+    "hueco": [
+     70.6,
+     53.6
+    ]
+   }
+  },
+  "tornillos": "5 × M3 × 25 (cabeza cilíndrica) desde el frente + 5 insertos M3 Ø4,2 × 5,7; PCB: 4 × M3 × 6 + 4 insertos",
+  "colgar": "2 ojales de cerradura a 140 mm (tornillo de cabeza ≤ Ø8,5, cuello ≤ Ø4,5)",
+  "red": "prensaestopas M12 × 1,5 (cable 2 × 0,75 mm² de doble aislamiento) + brida M3 interior",
+  "imanes": "casco: 4 × Ø6 × 2 N52 por alojamiento; cincha: 4 × (2 × Ø5 × 1) por alojamiento, polaridad opuesta a la cápsula"
+ }
+}
