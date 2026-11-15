@@ -1,44 +1,8 @@
 ** Drc report for AVO_GIRTH_REVC_PCB.kicad_pcb **
-** Created on 2026-11-15T02:49:04+0000 **
+** Created on 2026-11-15T02:55:28+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 18 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1647 mm)
-    Rule: board setup constraints edge; error
-    @(118.0000 mm, 87.0000 mm): Segment on Edge.Cuts
-    @(111.3606 mm, 87.4647 mm): Via [VBAT] on F.Cu - B.Cu
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(118.0000 mm, 87.0000 mm): Segment on Edge.Cuts
-    @(100.1540 mm, 87.4983 mm): Via [VBUS] on F.Cu - B.Cu
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(108.8020 mm, 112.6517 mm): Track [VSYS] on In2.Cu, length 5.2475 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(103.5545 mm, 112.6517 mm): Track [VSYS] on In2.Cu, length 1.0670 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(112.0952 mm, 109.3585 mm): Track [VSYS] on In2.Cu, length 4.6573 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(101.6000 mm, 111.6000 mm): Track [BAT_IN] on F.Cu, length 1.4873 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(102.6517 mm, 112.6517 mm): Track [BAT_IN] on F.Cu, length 2.4966 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1983 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(105.1483 mm, 112.6517 mm): Track [BAT_IN] on F.Cu, length 2.3359 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2433 mm)
-    Rule: board setup constraints edge; error
-    @(82.0000 mm, 113.0000 mm): Segment on Edge.Cuts
-    @(109.7606 mm, 112.5067 mm): Via [DET] on F.Cu - B.Cu
+** Found 9 DRC violations **
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
@@ -70,47 +34,27 @@
     @(98.2364 mm, 110.2800 mm): Segment of R21 on F.Silkscreen
     @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 15 unconnected pads **
+** Found 9 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(88.8000 mm, 100.5800 mm): Pad 13 [+1V8_ECG] of U6 on F.Cu
-    @(89.5608 mm, 101.3594 mm): Track [+1V8_ECG] on In2.Cu, length 1.2145 mm
+    @(90.7650 mm, 103.6150 mm): Track [+1V8_ECG] on F.Cu, length 0.5162 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(120.0000 mm, 111.0000 mm): Zone [GND] on In1.Cu, priority 0
+    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.3000 mm, 96.8000 mm): Pad 14 [GND] of U4 on F.Cu
+    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
     @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(117.1500 mm, 105.9500 mm): Pad 50 [GND] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(104.9625 mm, 108.0500 mm): Pad 10 [VSYS] of U2 on F.Cu
-    @(108.7850 mm, 107.8500 mm): Track [VSYS] on F.Cu, length 1.0998 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(84.0400 mm, 94.3300 mm): Pad 2 [ECGN] of C54 on F.Cu
-    @(85.4200 mm, 99.7000 mm): Pad 7 [ECGN] of U6 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(85.4200 mm, 99.7000 mm): Pad 7 [ECGN] of U6 on F.Cu
-    @(81.9100 mm, 104.3400 mm): Pad 2 [ECGN] of R41 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(85.4200 mm, 99.7000 mm): Pad 7 [ECGN] of U6 on F.Cu
-    @(91.7100 mm, 98.9900 mm): Pad 1 [ECGN] of C53 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(82.3150 mm, 96.9500 mm): Track [ECGP] on F.Cu, length 0.8850 mm
-    @(85.4200 mm, 99.2000 mm): Pad 6 [ECGP] of U6 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(88.8500 mm, 103.2000 mm): Pad 3 [ECG_FCLK] of X1 on F.Cu
-    @(90.0500 mm, 102.6900 mm): Pad 2 [ECG_FCLK] of R46 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(90.0500 mm, 102.6900 mm): Pad 2 [ECG_FCLK] of R46 on F.Cu
-    @(89.3000 mm, 100.5800 mm): Pad 14 [ECG_FCLK] of U6 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(90.0500 mm, 103.7100 mm): Pad 1 [ECG_FCLK_MCU] of R46 on F.Cu
-    @(109.8000 mm, 94.1000 mm): Pad 9 [ECG_FCLK_MCU] of U4 on F.Cu
+    @(105.1361 mm, 110.0104 mm): Track [VSYS] on F.Cu, length 0.4004 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(90.1800 mm, 98.2000 mm): Pad 18 [ECG_MISO] of U6 on F.Cu
@@ -125,12 +69,8 @@
     @(108.2000 mm, 105.9000 mm): Pad 25 [ECG_SCK] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(103.1056 mm, 100.0000 mm): Track [IMU_SA0] on F.Cu, length 0.8956 mm
-    @(110.6000 mm, 105.9000 mm): Pad 28 [IMU_SA0] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.8525 mm, 95.8875 mm): Track [IMU_SDA] on F.Cu, length 2.1319 mm
-    @(111.4000 mm, 105.9000 mm): Pad 29 [IMU_SDA] of U4 on F.Cu
+    @(93.0000 mm, 111.6000 mm): PTH pad 1 [POGO_5V] of P1
+    @(91.5000 mm, 108.4300 mm): Track [POGO_5V] on F.Cu, length 3.2951 mm
 
 ** Found 0 Footprint errors **
 

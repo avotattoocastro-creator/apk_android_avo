@@ -1,40 +1,33 @@
 # AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `541ffcef9cff4abaa4eb53dcd6f16e5e480197f6` · ejecución de CI: 43669212818
+- Commit: `cda975310b16f28ad64d052b06f7a98b5c6bb18e` · ejecución de CI: 43669722221
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 87 en total, 68 para montar, 3 sin montar (DNP: C51, C54, R46), 16 a mano (pads de hilo y de prueba)
-- Pistas: 700 · vías: 124 · ruteado INCOMPLETO (15 conexiones)
+- Pistas: 770 · vías: 141 · ruteado INCOMPLETO (9 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 9 |
-| DRC: conexiones incompletas | **FALLA** | 15 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 9 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 9
 
 ### Conexiones incompletas
-- Pad 13 [+1V8_ECG] of U6 on F.Cu ↔ Track [+1V8_ECG] on In2.Cu, length 1.2145 mm
-- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 1.0998 mm
-- Pad 2 [ECGN] of C54 on F.Cu ↔ Pad 7 [ECGN] of U6 on F.Cu
-- Pad 7 [ECGN] of U6 on F.Cu ↔ Pad 2 [ECGN] of R41 on F.Cu
-- Pad 7 [ECGN] of U6 on F.Cu ↔ Pad 1 [ECGN] of C53 on F.Cu
-- Track [ECGP] on F.Cu, length 0.8850 mm ↔ Pad 6 [ECGP] of U6 on F.Cu
-- Pad 3 [ECG_FCLK] of X1 on F.Cu ↔ Pad 2 [ECG_FCLK] of R46 on F.Cu
-- Pad 2 [ECG_FCLK] of R46 on F.Cu ↔ Pad 14 [ECG_FCLK] of U6 on F.Cu
-- Pad 1 [ECG_FCLK_MCU] of R46 on F.Cu ↔ Pad 9 [ECG_FCLK_MCU] of U4 on F.Cu
+- Pad 13 [+1V8_ECG] of U6 on F.Cu ↔ Track [+1V8_ECG] on F.Cu, length 0.5162 mm
+- Zone [GND] on In1.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
+- Pad 14 [GND] of U4 on F.Cu ↔ Zone [GND] on F.Cu, priority 0
+- Zone [GND] on F.Cu, priority 0 ↔ Pad 50 [GND] of U4 on F.Cu
+- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 0.4004 mm
 - Pad 18 [ECG_MISO] of U6 on F.Cu ↔ Pad 26 [ECG_MISO] of U4 on F.Cu
 - Pad 17 [ECG_MOSI] of U6 on F.Cu ↔ Pad 24 [ECG_MOSI] of U4 on F.Cu
 - Pad 16 [ECG_SCK] of U6 on F.Cu ↔ Pad 25 [ECG_SCK] of U4 on F.Cu
-- Track [IMU_SA0] on In2.Cu, length 0.8831 mm ↔ Pad 28 [IMU_SA0] of U4 on F.Cu
-- Track [IMU_SDA] on F.Cu, length 2.1319 mm ↔ Pad 29 [IMU_SDA] of U4 on F.Cu
+- PTH pad 1 [POGO_5V] of P1 ↔ Track [POGO_5V] on F.Cu, length 3.2951 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
@@ -49,7 +42,7 @@ Errores de DRC por tipo: copper_edge_clearance 9
 - Modelos de la librería de KiCad 9.0.0 descargados: 10; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
 - ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). MAX30003 y SiT1533: modelos de EasyEDA/LCSC. BNO085 y pads de hilo/prueba: sin modelo 3D.
 
-## Existencias en JLCPCB (consulta del CI: 2026-11-15 01:54 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-11-15 02:45 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C1519515 | MAX30003CTI+ | 1 | 0 | Extended | 20.2258 US$ |
@@ -57,31 +50,31 @@ Errores de DRC por tipo: copper_edge_clearance 9
 | C367058 | SIT1533AI-H4-DCC-32.768E | 1 | 971 | Extended | 1.2860 US$ |
 | C140288 | BQ24072RGTR | 1 | 1221 | Extended | 1.0488 US$ |
 | C97946 | GRM31C5C1H104JA01L | 1 | 56574 | Extended | 0.3075 US$ |
-| C32346 | Q13FC13500004 | 1 | 413986 | Basic | 0.1524 US$ |
-| C841192 | RT9080-33GJ5 | 1 | 27588 | Extended | 0.1197 US$ |
+| C32346 | Q13FC13500004 | 1 | 413571 | Basic | 0.1524 US$ |
+| C841192 | RT9080-33GJ5 | 1 | 27578 | Extended | 0.1197 US$ |
 | C20802 | SMD1206P150TF | 2 | 11303 | Extended | 0.1187 US$ |
 | C426476 | RT9080-18GJ5 | 1 | 24166 | Extended | 0.1085 US$ |
-| C45783 | CL21A226MAQNNNE | 2 | 4133007 | Basic | 0.1084 US$ |
-| C7558096 | ESP32-C6-MINI-1U-N4 | 1 | 0 | Extended | 0.0398 US$ |
-| C2827694 | PESD5V0S1BA | 2 | 330825 | Extended | 0.0359 US$ |
-| C96446 | CL10A106MA8NRNC | 7 | 6170941 | Basic | 0.0342 US$ |
-| C77131 | NCP15XH103F03RC | 1 | 297660 | Extended | 0.0164 US$ |
-| C19666 | CL10A475KO8NNNC | 1 | 3492280 | Basic | 0.0150 US$ |
-| C2286 | KT-0603R | 1 | 5812060 | Basic | 0.0077 US$ |
-| C52923 | CL05A105KA5NQNC | 4 | 10273730 | Basic | 0.0057 US$ |
-| C1525 | CL05B104KO5NNNC | 9 | 38169703 | Basic | 0.0024 US$ |
-| C1555 | 0402CG220J500NT | 2 | 2386332 | Basic | 0.0018 US$ |
-| C11702 | 0402WGF1001TCE | 2 | 31449611 | Basic | 0.0013 US$ |
+| C45783 | CL21A226MAQNNNE | 2 | 4127454 | Basic | 0.1084 US$ |
+| C2827694 | PESD5V0S1BA | 2 | 330845 | Extended | 0.0359 US$ |
+| C96446 | CL10A106MA8NRNC | 7 | 6169187 | Basic | 0.0342 US$ |
+| C77131 | NCP15XH103F03RC | 1 | 297640 | Extended | 0.0164 US$ |
+| C19666 | CL10A475KO8NNNC | 1 | 3491652 | Basic | 0.0150 US$ |
+| C2286 | KT-0603R | 1 | 5811608 | Basic | 0.0077 US$ |
+| C52923 | CL05A105KA5NQNC | 4 | 10297277 | Basic | 0.0057 US$ |
+| C53547 | 0402CG102J500NT | 3 | 472713 | Extended | 0.0050 US$ |
+| C1525 | CL05B104KO5NNNC | 9 | 38159072 | Basic | 0.0024 US$ |
+| C25792 | 0402WGF4702TCE | 3 | 5709489 | Basic | 0.0019 US$ |
+| C1555 | 0402CG220J500NT | 2 | 2386346 | Basic | 0.0018 US$ |
+| C11702 | 0402WGF1001TCE | 2 | 31451687 | Basic | 0.0013 US$ |
 | C25891 | 0402WGF3601TCE | 1 | 487032 | Extended | 0.0012 US$ |
 | C4940 | 0402WGF3401TCE | 1 | 222670 | Extended | 0.0012 US$ |
-| C26083 | 0402WGF1004TCE | 2 | 2334654 | Basic | 0.0012 US$ |
-| C25879 | 0402WGF2201TCE | 2 | 3056265 | Basic | 0.0011 US$ |
-| C25744 | 0402WGF1002TCE | 12 | 21095520 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 2 | 10405261 | Basic | 0.0009 US$ |
-| C53547 | ? | 3 | sin respuesta | Extended | ? |
-| C25792 | ? | 3 | sin respuesta | Extended | ? |
+| C26083 | 0402WGF1004TCE | 2 | 2343781 | Basic | 0.0012 US$ |
+| C25879 | 0402WGF2201TCE | 2 | 3056064 | Basic | 0.0011 US$ |
+| C25744 | 0402WGF1002TCE | 12 | 21096688 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 2 | 10413373 | Basic | 0.0009 US$ |
+| C20627095 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C7558096, C5189642, C1519515, C53547, C25792
+- Piezas sin existencias para 5 placas: C20627095, C5189642, C1519515
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **no**
