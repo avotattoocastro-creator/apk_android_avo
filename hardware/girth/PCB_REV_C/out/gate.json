@@ -1,10 +1,10 @@
 {
- "ok": false,
+ "ok": true,
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": false,
-   "n": 2
+   "ok": true,
+   "n": 0
   },
   {
    "name": "DRC: conexiones incompletas",
@@ -32,14 +32,10 @@
    "n": 0
   }
  ],
- "drc_errors": {
-  "tracks_crossing": 1,
-  "clearance": 1
- },
+ "drc_errors": {},
  "drc_warnings": {
   "track_dangling": 1,
   "via_dangling": 1,
-  "connection_width": 1,
   "silk_over_copper": 6,
   "silk_overlap": 3
  }

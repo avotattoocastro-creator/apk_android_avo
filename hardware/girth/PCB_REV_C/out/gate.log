@@ -1,30 +1,28 @@
-# AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de diagnóstico
+# AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `a1cd9ff0b6e83b5b63cd15680c3b3f6223d10c7a` · ejecución de CI: 43671847138
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `15cc1d8984a571fc43708ab1c40de111c8eb6eb0` · ejecución de CI: 43672058713
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 87 en total, 68 para montar, 3 sin montar (DNP: C51, C54, R46), 16 a mano (pads de hilo y de prueba)
-- Pistas: 863 · vías: 145 · ruteado completo (0 conexiones incompletas)
+- Pistas: 862 · vías: 145 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 2 |
+| DRC: errores | correcto | 0 |
 | DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: tracks_crossing 1, clearance 1
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
 - silk_overlap: 3
 - track_dangling: 1
 - via_dangling: 1
-- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -70,8 +68,8 @@ Errores de DRC por tipo: tracks_crossing 1, clearance 1
 - Piezas sin existencias para 5 placas: C20627095, C5189642, C1519515
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -83,4 +81,4 @@ Errores de DRC por tipo: tracks_crossing 1, clearance 1
 - Primera programación por los pads TP4/TP5 (USB nativo) con pinza de pogo-pins; después por radio.
 - Pogos de 3 contactos y batería LP403048 por hilos; cápsula REV 6 (más pequeña) pendiente de CAD.
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA
