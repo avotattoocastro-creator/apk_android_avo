@@ -1,15 +1,15 @@
 + timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/girth/PCB_REV_C/out/ruteado/placa.dsn -do hardware/girth/PCB_REV_C/out/ruteado/placa.ses -mp 20
-2026-11-15 02:52:30.149 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
-2026-11-15 02:52:31.331 [main] INFO  Opening 'hardware/girth/PCB_REV_C/out/ruteado/placa.dsn'...
-2026-11-15 02:52:32.055 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
+2026-11-15 03:05:01.987 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-15 03:05:03.236 [main] INFO  Opening 'hardware/girth/PCB_REV_C/out/ruteado/placa.dsn'...
+2026-11-15 03:05:03.672 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
 
-(java:2560): dbind-WARNING **: 02:52:36.688: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-2026-11-15 02:52:58.466 [Thread-28] INFO  Starting auto-routing...
-2026-11-15 02:52:58.814 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 02:52:58.828 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 02:52:58.845 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 02:52:58.856 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 02:55:06.713 [Thread-28] INFO  Auto-routing was completed in 2 minute(s) 8.25 seconds.
-2026-11-15 02:55:06.814 [Thread-28] INFO  Starting route optimization on 1 thread...
-2026-11-15 02:55:21.568 [Thread-28] INFO  Route optimization was completed in 14.75 seconds.
-2026-11-15 02:55:21.589 [Thread-28] INFO  Saving 'hardware/girth/PCB_REV_C/out/ruteado/placa.ses'...
+(java:2555): dbind-WARNING **: 03:05:04.830: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-15 03:05:26.201 [Thread-28] INFO  Starting auto-routing...
+2026-11-15 03:05:26.559 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 03:05:26.568 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 03:05:26.576 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 03:05:26.584 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 03:07:07.498 [Thread-28] INFO  Auto-routing was completed in 1 minute(s) 41.30 seconds.
+2026-11-15 03:07:07.599 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-15 03:07:24.077 [Thread-28] INFO  Route optimization was completed in 16.48 seconds.
+2026-11-15 03:07:24.098 [Thread-28] INFO  Saving 'hardware/girth/PCB_REV_C/out/ruteado/placa.ses'...
