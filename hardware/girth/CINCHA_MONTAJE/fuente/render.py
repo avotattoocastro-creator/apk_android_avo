@@ -251,7 +251,7 @@ def extra(caps, soporte):
     xw = G["xw"]
     render(sec, os.path.join(OUTR, "13_corte_por_pestillo.png"), az=-90, el=2, size=(1500, 1000),
            title="Corte por el pestillo +X (y = %.1f): gancho en la ranura exterior de la base, seguro detrás" % yc,
-           notes=["Viga PETG 1,4 × 10, L = 12,9 mm desde la raíz (z 0,8); gancho de 1,2 con cara inferior plana; rampa de entrada arriba.",
+           notes=["Viga PETG 1,2 × 12, L = 12,9 mm desde la raíz (z 0,8); gancho que entra 0,9 en la ranura, cara inferior plana; rampa arriba.",
                   "Seguro TPU 95A en el hueco de 1,6 entre la viga y el contrafuerte; pulsador rebajado; tacos TPU que precargan la cápsula."],
            labels=[((xw + 0.4, yc, M.PEST["z_ranura"][0] - 0.3 + 0.0), "gancho"), ((G["xo"] + 0.8, yc, 2.0), "seguro"),
                    ((xw - 1.0, yc, M.PEST["z_ranura"][1] + 2), "ranura exterior")])

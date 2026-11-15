@@ -151,8 +151,8 @@ SOP = dict(holgura=0.25, cerco=2.0, cerco_h=4.5, cama=8.0, pestana=2.5, ala=8.0,
            precarga=0.7)               # la cápsula apoya en 4 tacos TPU 85A: fondo a 0,7 mm sobre la cama (compresión 0,15)
 # REV 6.2: pestillos elásticos de PETG integrados en el soporte (lados ±X), con gancho en la ranura exterior de la base y
 # seguro deslizante de TPU 95A con retén de clic detrás de cada pestillo.
-PEST = dict(t=1.4, b=10.0, z_raiz=0.8, enganche=1.0, holgura_gancho=0.2, hueco=1.6, z_ranura=(5.0, 6.4),
-            ranura_prof=1.0, chaflan=0.8, tope_alto=19.0)
+PEST = dict(t=1.2, b=12.0, z_raiz=0.8, enganche=0.9, holgura_gancho=0.2, hueco=1.6, z_ranura=(5.0, 6.4),
+            ranura_prof=1.2, chaflan=0.8, tope_alto=19.0)
 TACOS = [(-27.3, 6.0), (27.3, 6.0), (-27.3, -15.0), (27.3, -15.0)]
 REPORT = {"parametros": {}, "piezas": {}, "comprobaciones": []}
 
@@ -526,7 +526,7 @@ def pestillo_geo(sg):
     t, b = PEST["t"], PEST["b"]
     xi = xw + 0.4                                    # cara interior de la viga (0,4 de la cápsula)
     xo = xi + t
-    pr = PEST["enganche"] + PEST["holgura_gancho"]   # el gancho sale 1,2 hacia dentro de la cara de la viga
+    pr = 0.4 + PEST["enganche"]                      # punta del gancho 0,9 mm dentro de la pared (0,3 del fondo de la ranura)
     gap = PEST["hueco"]
 
     def R(x0, x1, y0, y1, r=0.3):
@@ -541,13 +541,13 @@ def pestillo_geo(sg):
     G["H2"] = R(xi - pr * 0.66, xo + 0.2, yc - hb - 0.2, yc + hb + 0.2, 0.4)  # rampa de entrada (arriba)
     G["H1"] = R(xi - pr * 0.33, xo + 0.1, yc - hb - 0.1, yc + hb + 0.1, 0.35)
     G["T"] = R(xi - 0.1, xo + gap - 0.4, yc - hb - 0.6, yc + hb + 0.6, 1.5)   # pulsador, rebajado bajo el contrafuerte
-    G["LP"] = R(xi - 0.7, xo + gap - 0.2, yc - 7.5, yc + 7.5, 1.0)             # hueco de la viga en el cuerpo
-    G["drenaje"] = [A.circle(sg * (xi + 0.6), yc + d, 0.9, 16) for d in (-6.4, 6.4)]
+    G["LP"] = R(xi - 0.7, xo + gap - 0.2, yc - 8.5, yc + 8.5, 1.0)             # hueco de la viga en el cuerpo
+    G["drenaje"] = [A.circle(sg * (xi + 0.6), yc + d, 0.7, 16) for d in (-7.6, 7.6)]   # desagües Ø1,4
     G["ranura_cerco"] = R(xi - 2.0, xo + gap + 0.5, yc - 12.0, yc + 10.6, 0.3)   # paso del pestillo y del seguro
     xb0 = xo + gap                                   # cara del contrafuerte = cara exterior del hueco del seguro
     G["xb0"] = xb0
     Rb = A.Raster(-50, -50, 50, 50, 0.02)
-    Rb.add(R(xb0, xb0 + 2.6, yc - 8.0, yc + 8.0, 1.5))
+    Rb.add(R(xb0, xb0 + 2.6, yc - 9.0, yc + 9.0, 1.5))
     Rb.sub(A.circle(sg * xb0, yc, 0.75, 20))                          # muesca del retén del seguro
     G["tope"] = Rb.contour(0.02)
     G["parada"] = R(xo + 0.05, xb0 - 0.05, yc - 11.6, yc - 10.0, 0.4)  # tope final del seguro
