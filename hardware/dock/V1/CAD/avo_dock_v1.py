@@ -164,7 +164,7 @@ def pogo_cut(cx, cy, z_floor, n):
     """lado de los pines del pogo: cara a ras del fondo del alojamiento; cuerpo y orejas abiertos por detrás."""
     d = pogo_dims(n)
     cl = POGO_PIN["clear"]
-    zb = z_floor - POGO_PIN["body_h"] - POGO_PIN["tail"] - 0.2
+    zb = min(z_floor - POGO_PIN["body_h"] - POGO_PIN["tail"] - 0.2, Z_FRONT - BACKING - 1.0)   # abierto por detrás
     body = rrect(d["body_l"] + 2 * cl, POGO_PIN["body_w"] + 2 * cl, POGO_PIN["body_w"] / 2, z_floor - zb + 0.01, zb,
                  cx, cy)
     ear_top = z_floor - POGO_PIN["ear_z0"] + 0.1
