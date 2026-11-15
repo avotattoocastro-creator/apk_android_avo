@@ -24,7 +24,7 @@ concurrency:
 jobs:
   pcb:
     runs-on: ubuntu-24.04
-    timeout-minutes: 75
+    timeout-minutes: 110
     steps:
       - uses: actions/checkout@v4
       - name: KiCad 9 (imagen oficial)
@@ -45,13 +45,18 @@ jobs:
             cp $P/kicad/AVO_DOCK_V1_PCB_ruteado.kicad_pcb $P/kicad/AVO_DOCK_V1_PCB.kicad_pcb
             echo "placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)" > $R/ORIGEN.txt
           else
-            curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar
-            sha256sum /tmp/freerouting.jar > $R/freerouting.sha256
             docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
               python3 fuente/ci_route.py export kicad/AVO_DOCK_V1_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log
-            if [ -s $R/placa.dsn ]; then
+            sudo chmod -R a+rw $P || true
+            if [ -s $R/placa.dsn ] && [ -s $P/fuente/ruteo/placa.ses ] && diff -q <(grep -v host_version $R/placa.dsn) <(grep -v host_version $P/fuente/ruteo/placa.dsn) >/dev/null; then
+              # sesión de Freerouting 1.9.0 hecha fuera del CI sobre ESTE mismo DSN (igual salvo host_version)
+              cp $P/fuente/ruteo/placa.ses $R/placa.ses
+              echo "sesión de la fuente (fuente/ruteo/placa.ses, Freerouting 1.9.0, mismo DSN)" > $R/ORIGEN_SES.txt
+            elif [ -s $R/placa.dsn ]; then
+              curl -sSL -o /tmp/freerouting.jar https://github.com/freerouting/freerouting/releases/download/v1.9.0/freerouting-1.9.0.jar
+              sha256sum /tmp/freerouting.jar > $R/freerouting.sha256
               sudo apt-get install -y -qq xvfb >/dev/null 2>&1
-              (timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 150) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
+              (timeout 4200 xvfb-run -a java -jar /tmp/freerouting.jar -de $R/placa.dsn -do $R/placa.ses -mp 40) > $R/fr.log 2>&1 || echo "freerouting código $?" >> $R/fr.log
               tail -150 $R/fr.log > $R/freerouting.log; rm -f $R/fr.log
             fi
             if [ -s $R/placa.ses ]; then
