@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C426476
+       Symbol name : RT9080-18GJ5
+       Library path : lib_easyeda/C426476.kicad_sym
+[INFO] Created Kicad footprint for ID: C426476
+       Footprint name: TSOT-23-5_L2.9-W1.6-P0.95-LS2.8-BL
+       Footprint path: lib_easyeda/C426476.pretty/TSOT-23-5_L2.9-W1.6-P0.95-LS2.8-BL.kicad_mod
+[INFO] Created 3D model for ID: C426476
+       3D model name: TSOT-23-5_L2.9-W1.6-H1.00-LS2.8-P0.95
+       3D model path (wrl): lib_easyeda/C426476.3dshapes/TSOT-23-5_L2.9-W1.6-H1.00-LS2.8-P0.95.wrl
+       3D model path (step): lib_easyeda/C426476.3dshapes/TSOT-23-5_L2.9-W1.6-H1.00-LS2.8-P0.95.step
+-- easyeda2kicad.py v1.0.1 --
