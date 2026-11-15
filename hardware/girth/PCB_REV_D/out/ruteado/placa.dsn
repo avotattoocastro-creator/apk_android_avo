@@ -1024,10 +1024,10 @@
       (pins U6-17 R46-1)
     )
     (net ECG_CS
-      (pins U4-30 U6-18)
+      (pins U4-12 U6-18)
     )
     (net ECG_DRDY
-      (pins U4-16 U6-22)
+      (pins U4-6 U6-22)
     )
     (net ECG_E_N
       (pins R41-1 P6-1)
@@ -1039,10 +1039,10 @@
       (pins R43-2 P5-1)
     )
     (net ECG_MISO
-      (pins U4-26 U6-21)
+      (pins U4-16 U6-21)
     )
     (net ECG_MOSI
-      (pins U4-24 U6-19)
+      (pins U4-19 U6-19)
     )
     (net ECG_PGA1N
       (pins U6-1 C50-2)
@@ -1066,7 +1066,7 @@
       (pins U6-30 R42-1 C55-1 R43-1)
     )
     (net ECG_SCK
-      (pins U4-25 U6-20)
+      (pins U4-13 U6-20)
     )
     (net ECG_START
       (pins U4-27 U6-16 R45-1)
@@ -1093,7 +1093,7 @@
       (pins U4-5 U5-4)
     )
     (net IMU_INT2
-      (pins U4-13 U5-9)
+      (pins U4-30 U5-9)
     )
     (net LED_A
       (pins R14-2 D1-2)
@@ -1131,20 +1131,20 @@
     (net "unconnected-(U4-NC-Pad4)"
       (pins U4-4)
     )
-    (net "unconnected-(U4-IO3-Pad6)"
-      (pins U4-6)
-    )
     (net "unconnected-(U4-NC-Pad7)"
       (pins U4-7)
     )
-    (net "unconnected-(U4-IO0-Pad12)"
-      (pins U4-12)
-    )
-    (net "unconnected-(U4-IO14-Pad19)"
-      (pins U4-19)
-    )
     (net "unconnected-(U4-NC-Pad21)"
       (pins U4-21)
+    )
+    (net "unconnected-(U4-IO18-Pad24)"
+      (pins U4-24)
+    )
+    (net "unconnected-(U4-IO19-Pad25)"
+      (pins U4-25)
+    )
+    (net "unconnected-(U4-IO20-Pad26)"
+      (pins U4-26)
     )
     (net "unconnected-(U4-NC-Pad32)"
       (pins U4-32)
@@ -1197,8 +1197,8 @@
       ECG_RLDINV ECG_RLDOUT ECG_SCK ECG_START ECG_VCAP1 ECG_VCAP2 ECG_VREFP
       EN GND I2C_SCL I2C_SDA IMU_INT1 IMU_INT2 LED_A LED_K MAG_CAP MAG_INT
       POGO_DET USB_DM USB_DP "unconnected-(U2-PGOOD-Pad7)" "unconnected-(U2-TMR-Pad14)"
-      "unconnected-(U3-NC-Pad4)" "unconnected-(U4-IO0-Pad12)" "unconnected-(U4-IO14-Pad19)"
-      "unconnected-(U4-IO3-Pad6)" "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)"
+      "unconnected-(U3-NC-Pad4)" "unconnected-(U4-IO18-Pad24)" "unconnected-(U4-IO19-Pad25)"
+      "unconnected-(U4-IO20-Pad26)" "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)"
       "unconnected-(U4-NC-Pad33)" "unconnected-(U4-NC-Pad34)" "unconnected-(U4-NC-Pad35)"
       "unconnected-(U4-NC-Pad4)" "unconnected-(U4-NC-Pad7)" "unconnected-(U4-Pad51)"
       "unconnected-(U5-OCS_Aux-Pad10)" "unconnected-(U5-SDO_Aux-Pad11)" "unconnected-(U7-NC-Pad4)"

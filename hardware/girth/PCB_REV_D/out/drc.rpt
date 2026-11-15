@@ -1,5 +1,5 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T10:33:22+0000 **
+** Created on 2026-11-15T11:02:50+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 6 DRC violations **
@@ -24,19 +24,15 @@
     @(96.7500 mm, 112.3000 mm): Segment of D3 on F.Silkscreen
     @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 8 unconnected pads **
+** Found 10 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(88.0600 mm, 97.0000 mm): Pad 23 [+3V3] of U6 on F.Cu
+    @(93.4223 mm, 104.4293 mm): Track [+3V3] on In2.Cu, length 6.7376 mm
     @(86.6000 mm, 100.0600 mm): Pad 14 [+3V3] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(91.7870 mm, 96.3000 mm): Track [+3V3] on F.Cu, length 0.3270 mm
-    @(88.0600 mm, 97.0000 mm): Pad 23 [+3V3] of U6 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.5713 mm, 98.7515 mm): Track [+3V3] on F.Cu, length 0.3270 mm
     @(100.0000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(101.6625 mm, 97.7500 mm): Track [+3V3] on F.Cu, length 0.6788 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(83.9400 mm, 97.8000 mm): Track [+3V3A] on F.Cu, length 0.2000 mm
@@ -47,12 +43,24 @@
     @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
+    @(108.0177 mm, 111.5221 mm): Track [VSYS] on F.Cu, length 2.6680 mm
     @(106.4625 mm, 108.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
-    @(105.3299 mm, 111.6776 mm): Track [VSYS] on In2.Cu, length 0.5217 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(81.9830 mm, 101.5670 mm): Track [ECGP] on F.Cu, length 0.6403 mm
+    @(81.9830 mm, 100.9267 mm): Track [ECGP] on F.Cu, length 0.7164 mm
     @(83.9400 mm, 98.6000 mm): Pad 6 [ECGP] of U6 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.0600 mm, 99.0000 mm): Pad 18 [ECG_CS] of U6 on F.Cu
+    @(110.3000 mm, 95.2000 mm): Pad 12 [ECG_CS] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.0600 mm, 97.4000 mm): Pad 22 [ECG_DRDY] of U6 on F.Cu
+    @(115.2000 mm, 94.1000 mm): Pad 6 [ECG_DRDY] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.0600 mm, 97.8000 mm): Pad 21 [ECG_MISO] of U6 on F.Cu
+    @(110.3000 mm, 98.4000 mm): Pad 16 [ECG_MISO] of U4 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(93.0000 mm, 113.6000 mm): PTH pad 1 [POGO_5V] of P1
