@@ -64,6 +64,10 @@ struct RootView: View {
         return t
     }
 
+    /// Pages that open with the sidebar hidden: Inicio, and «Cámara» (trainer's sketch 15/11/2026: al entrar en la
+    /// cámara el menú queda oculto y solo se abre con su botón de menú flotante).
+    static func hidesSidebar(_ p: Page) -> Bool { p == .home || p == .camera }
+
     var body: some View {
         NavigationSplitView(columnVisibility: $columns) {
             sidebar
@@ -72,10 +76,10 @@ struct RootView: View {
             detail
         }
         .navigationSplitViewStyle(.balanced)
-        .onAppear { columns = app.page == .home ? .detailOnly : .doubleColumn }
+        .onAppear { columns = RootView.hidesSidebar(app.page) ? .detailOnly : .doubleColumn }
         .onChange(of: app.page) { (_: Page, newPage: Page) in
             withAnimation(.easeInOut(duration: 0.25)) {
-                columns = newPage == .home ? .detailOnly : .doubleColumn
+                columns = RootView.hidesSidebar(newPage) ? .detailOnly : .doubleColumn
             }
         }
         .fileImporter(isPresented: Binding(get: { app.showImporter }, set: { app.showImporter = $0 }),
@@ -227,7 +231,9 @@ struct RootView: View {
         let locked: Bool = [.map, .analysis, .biomech].contains(e.page) && !(app.trainingOpened && app.selected != nil) && !app.captureMode
         return Button {
             app.page = e.page
-            if e.page == .home { columns = .detailOnly }
+            if RootView.hidesSidebar(e.page) {
+                withAnimation(.easeInOut(duration: 0.25)) { columns = .detailOnly }
+            }
         } label: {
             HStack(spacing: 12) {
                 Image(systemName: e.icon).font(.body).frame(width: 22)
