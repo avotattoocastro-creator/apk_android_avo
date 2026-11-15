@@ -24,6 +24,42 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha — cápsula REV 6.1: aro de luz (4 LED SK6812SIDE-A) y todo estanco (objetivo IP67) (CAD)
+**Autor:** Claude · Rama `feature/cincha-cad-montaje` (con develop fusionado) · **CI:** no aplica
+**Qué cambia (petición del usuario 15/11 15:10):**
+- **Aro de luz:**
+  - la **base entera** se imprime en PETG translúcido «natural» y su pared de 4 mm rodea la PCB a la altura de los 4 LED
+    laterales (centro de la luz a z = 10,9; lentes a y = ±14,66; cotas de `feature/girth-pcb-rev-d-aro`);
+  - la tapa pasa a ser plana, de PETG opaco;
+  - no hay costuras ni uniones nuevas.
+- **Estanqueidad:**
+  - una sola junta TPU 85A de 1,2 × 1,6 en ranura de 1,9 × 1,2 (25 % de compresión, tope duro);
+  - 6 tornillos M2 × 6 + arandela DIN 433 **fuera** de la línea de la junta, en insertos ciegos;
+  - guías ciegas en la tapa;
+  - pogos con epoxi de colada;
+  - colas del soporte encapsuladas;
+  - empalme de los electrodos soldado con termorretráctil con adhesivo (se quita el JST);
+  - sin USB ni pasantes.
+- **Bolsillo:** 2 + 2 ventanas de 20 × 4,5 frente a la banda de luz (patrón B2 actualizado).
+- **Medidas:** cápsula de 62,9 × 60,1 × 15,5 mm (antes 59,4 × 54,5 × 14,7); soporte de 83,5 × 80,7 × 10,5.
+- **Documentación:** `DOCS/MONTAJE_CINCHA.md` con la nueva §7 «Estanqueidad»:
+  - tabla de los 13 puntos de entrada de agua;
+  - impresión estanca;
+  - ensayos de vacío, de inmersión a 1 m durante 30 min con papel indicador y de manguera.
+  También se actualizan la BOM (≈ 200 €), los renders 12 (corte por los LED) y 13 (ventanas de luz) y el zip.
+**No se ha tocado:** firmware, apps, PCB (solo se copia `piezas.json` de develop; los LED se modelan con las cotas indicadas),
+workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: todos los STEP cerrados y planos.
+- **NO VERIFICADO:**
+  - IP67 sin ensayar;
+  - luz sin probar;
+  - nada impreso.
+**Pendiente:**
+- ensayos de §7.4 con una base impresa;
+- comprobar la luz a través de la pared y de las ventanas;
+- fusionar las cotas finales de los LED cuando se integre `feature/girth-pcb-rev-d-aro`.
+
 ## 2026-11-15 — Cincha — montaje del sistema en la cincha: cápsula REV 6, soporte, funda de piel y electrodos ECG (CAD)
 **Autor:** Claude · Rama `feature/cincha-cad-montaje` · **CI:** no aplica (no hay workflow para esta carpeta)
 **Qué cambia:** nueva carpeta `hardware/girth/CINCHA_MONTAJE/` (petición del usuario: «todo el sistema montado en una cincha,

@@ -44,7 +44,7 @@
    "radio_u_menos330": 434.62656248882485
   },
   "capsula": {
-   "alto": 14.700000000000001,
+   "alto": 15.5,
    "z": {
     "bateria": [
      1.7,
@@ -55,12 +55,12 @@
      9.9
     ],
     "techo": [
-     12.9,
-     14.700000000000001
+     13.0,
+     15.5
     ],
     "junta": [
-     9.0,
-     9.8
+     11.8,
+     13.0
     ]
    }
   },
@@ -108,40 +108,40 @@
   }
  },
  "piezas": {
-  "AVO_CINCHA_R6_base_PETG": {
-   "material": "PETG",
-   "volumen_cm3": 8.311,
-   "triangulos": 3444,
+  "AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido": {
+   "material": "PETG translúcido natural",
+   "volumen_cm3": 15.043,
+   "triangulos": 4024,
    "caja_mm": [
-    59.4,
-    54.54,
-    9.0
+    62.88,
+    60.14,
+    13.0
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_tapa_PETG": {
-   "material": "PETG",
-   "volumen_cm3": 7.459,
-   "triangulos": 6148,
+  "AVO_CINCHA_R6_1_tapa_PETG_opaco": {
+   "material": "PETG opaco",
+   "volumen_cm3": 7.962,
+   "triangulos": 4726,
    "caja_mm": [
-    59.4,
-    54.54,
-    6.8
+    62.88,
+    60.14,
+    5.6
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_junta_TPU85A": {
+  "AVO_CINCHA_R6_1_junta_TPU85A": {
    "material": "TPU 85A",
-   "volumen_cm3": 0.401,
-   "triangulos": 1096,
+   "volumen_cm3": 0.379,
+   "triangulos": 224,
    "caja_mm": [
-    59.4,
-    54.54,
-    0.8
+    56.2,
+    48.95,
+    1.6
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_separador_TPU85A": {
+  "AVO_CINCHA_R6_1_separador_TPU85A": {
    "material": "TPU 85A",
    "volumen_cm3": 1.498,
    "triangulos": 268,
@@ -152,13 +152,13 @@
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_soporte_PETG": {
-   "material": "PETG",
-   "volumen_cm3": 32.122,
-   "triangulos": 3704,
+  "AVO_CINCHA_R6_1_soporte_PETG": {
+   "material": "PETG opaco",
+   "volumen_cm3": 36.428,
+   "triangulos": 3888,
    "caja_mm": [
-    80.0,
-    75.14,
+    83.48,
+    80.74,
     10.5
    ],
    "estanca": true
@@ -171,18 +171,18 @@
   "tórax u= -170 mm: X=-150.8 Z=  66.5, inclinación -47.2°, radio 244 mm",
   "tórax u= -330 mm: X=-223.7 Z= 207.2, inclinación -75.3°, radio 435 mm",
   "tórax u= +450 mm: X=+239.8 Z= 325.9, inclinación 88.5°, radio 668 mm",
-  "cápsula REV 6: 59.4 × 54.5 × 14.7 mm (exterior con orejas de los tornillos)",
-  "soporte: 80.0 × 75.1 × 10.5 mm",
-  "AVO_CINCHA_R6_base_PETG: 8.31 cm³, 3444 triángulos, caja [59.4 54.5  9. ]",
-  "AVO_CINCHA_R6_tapa_PETG: 7.46 cm³, 6148 triángulos, caja [59.4 54.5  6.8]",
-  "AVO_CINCHA_R6_junta_TPU85A: 0.40 cm³, 1096 triángulos, caja [59.4 54.5  0.8]",
-  "AVO_CINCHA_R6_separador_TPU85A: 1.50 cm³, 268 triángulos, caja [45.  29.   1.2]",
-  "AVO_CINCHA_R6_soporte_PETG: 32.12 cm³, 3704 triángulos, caja [80.  75.1 10.5]",
-  "conjunto CURVADO: 87 sólidos, aristas abiertas: 0",
-  "STEP CURVADO: 453067 entidades",
+  "cápsula REV 6.1: 62.9 × 60.1 × 15.5 mm (exterior con orejas de los tornillos)",
+  "soporte: 83.5 × 80.7 × 10.5 mm",
+  "AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido: 15.04 cm³, 4024 triángulos, caja [62.9 60.1 13. ]",
+  "AVO_CINCHA_R6_1_tapa_PETG_opaco: 7.96 cm³, 4726 triángulos, caja [62.9 60.1  5.6]",
+  "AVO_CINCHA_R6_1_junta_TPU85A: 0.38 cm³, 224 triángulos, caja [56.2 49.   1.6]",
+  "AVO_CINCHA_R6_1_separador_TPU85A: 1.50 cm³, 268 triángulos, caja [45.  29.   1.2]",
+  "AVO_CINCHA_R6_1_soporte_PETG: 36.43 cm³, 3888 triángulos, caja [83.5 80.7 10.5]",
+  "conjunto CURVADO: 94 sólidos, aristas abiertas: 0",
+  "STEP CURVADO: 451243 entidades",
   "longitud de los cables de electrodo (CURVADO): {'ECG+': 210, 'REF': 163, 'ECG-': 282} mm",
-  "conjunto RECTO: 87 sólidos, aristas abiertas: 0",
-  "STEP RECTO: 442300 entidades",
+  "conjunto RECTO: 94 sólidos, aristas abiertas: 0",
+  "STEP RECTO: 440461 entidades",
   "longitud de los cables de electrodo (RECTO): {'ECG+': 210, 'REF': 163, 'ECG-': 282} mm"
  ]
 }
