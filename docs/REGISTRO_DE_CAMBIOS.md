@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — iPad — Informe PDF de la carrera: ningún título queda solo al final de una página
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** cada título y subtítulo del PDF se mantiene en la misma página que su primer bloque. Si no caben juntos, el título pasa a la página siguiente. Antes quedaban sueltos al pie de la página 1 y 2:
+- «Entrenamiento vs carrera»: el título va con sus datos, las cifras y la primera gráfica;
+- «Análisis según los entrenamientos»: el título va con el primer bloque, y «Lo que dice la carrera» con sus 6 filas;
+- lo mismo para entrenamientos, forma, estimación y observaciones.
+
+**Por qué:** bocetos del entrenador sobre la build de TestFlight (15/11/2026 23:58, «siguiente página»).
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — iPad — Flechas en «% carrera», «mediana del campo» explicada, visor PDF a pantalla completa y símbolos del PDF
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
 **Qué cambia (bocetos del entrenador 15/11/2026, build 151):**
