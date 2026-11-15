@@ -24,6 +24,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+
+## 2026-11-15 — iPad 1.0.0 — «Cámara» se abre con el menú lateral oculto
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente
+**Qué cambia:** al entrar en «Cámara» el menú lateral se oculta (como en Inicio); solo se abre con el botón de menú
+flotante de la esquina superior izquierda. Volver a pulsar «Cámara» en el menú también lo cierra. Las demás páginas
+siguen abriendo con el menú visible.
+**Por qué:** boceto del entrenador 15/11/2026 (build 145): «Al entrar a cámara menú oculto, solo lo abrís botón menú».
+**Archivos:** `ipad/AVOiPad/App/RootView.swift` (`RootView.hidesSidebar`).
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
 ## 2026-11-15 — iPad — botón «SALIR» para cerrar la app del todo
 **Autor:** Claude · Rama `feature/ipad-salir`
 **Qué cambia:** al pie de la barra lateral, sobre los datos de versión, un botón rojo «SALIR» con confirmación. Cierra el Wi-Fi y el
