@@ -1,0 +1,47 @@
+** Drc report for AVO_GIRTH_REVC_PCB.kicad_pcb **
+** Created on 2026-11-15T03:23:06+0000 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 11 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(107.6743 mm, 103.0063 mm): Track [VBAT] on In2.Cu, length 0.0923 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(111.1136 mm, 106.7017 mm): Via [IMU_SA0] on F.Cu - B.Cu
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(83.4000 mm, 102.5400 mm): PCB text '-' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(101.6000 mm, 110.0000 mm): PCB text 'B+' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(104.0000 mm, 110.0000 mm): PCB text 'B-' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
+    @(83.5800 mm, 97.6136 mm): Segment of R40 on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(83.6900 mm, 99.6978 mm): Segment of C51 on F.Silkscreen
+    @(83.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
+[silk_overlap]: Silkscreen overlap
+    Rule: board setup constraints silk; warning
+    @(98.2364 mm, 110.2800 mm): Segment of R21 on F.Silkscreen
+    @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

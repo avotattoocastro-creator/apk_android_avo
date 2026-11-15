@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha PCB REV C — placa propia compacta con ECG (MAX30003)
+**Autor:** Claude · Rama `feature/girth-pcb-rev-c` · **CI:** `build-girth-pcb-revc.yml` run 43672058713 (puerta superada)
+**Qué cambia:** nueva PCB de la cincha en `hardware/girth/PCB_REV_C` (generador Python → KiCad 9, mismas herramientas que el
+casco V5). 40 × 26 mm, 4 capas, 1,0 mm, componentes en una cara: ESP32-C6-MINI-1U-H4, BNO085 por I²C, MAX30003 con 1,8 V propio
+y oscilador MEMS SiT1533, cargador BQ24072, 3,3 V RT9080, pogos de carga y de electrodos y batería por hilos, pads de
+programación USB. Mismos GPIO que el XIAO: el firmware 0.5.0 sirve sin cambios. DRC 0, ERC 0/0, paridad 0, 0 conexiones
+pendientes; Gerber, BOM, CPL y STEP en `out/FINAL`. El pad de esquina 51 del módulo (GND de anclaje) queda sin conectar.
+**Workflows NUEVOS** (no se modifica ninguno existente): `build-girth-pcb-revc.yml`, `easyeda-fp-girth-revc.yml`,
+`jlc-stock-girth-revc.yml`.
+**Por qué:** el usuario pide una PCB de cincha lo más compacta posible, como la del casco (arquitectura confirmada: pogo +
+BNO085 + MAX30003, cápsula nueva más pequeña, dos pogos de 3).
+**Validación:** DISEÑO VERIFICADO POR SOFTWARE. **NO VERIFICADO** en hardware (no fabricada).
+**Pendiente:** MAX30003 y BNO085 sin existencias en JLCPCB (Global Sourcing); cápsula REV 6 en FreeCAD; comprobar con la hoja
+de ADI los valores del filtro de entrada y la huella del SiT1533.
+
 ## 2026-11-15 — Cincha v0.5.0 — ECG con MAX30003 (fmt 2) sin tocar espalda ni pecho
 **Autor:** Claude · Rama `feature/girth-ecg-0-5-0` · **CI:** `build-girth-v050.yml` (workflow NUEVO; no se modifica ninguno existente)
 **Qué cambia:** nuevo firmware `firmware/girth/V0_5_0` (copia de 0.4.3 + ECG). Driver MAX30003 por SPI (CSB 17, SCK 19,
