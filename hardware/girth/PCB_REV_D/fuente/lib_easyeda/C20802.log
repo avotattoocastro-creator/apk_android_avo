@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C20802
+       Symbol name : SMD1206P150TF
+       Library path : lib_easyeda/C20802.kicad_sym
+[INFO] Created Kicad footprint for ID: C20802
+       Footprint name: F1206
+       Footprint path: lib_easyeda/C20802.pretty/F1206.kicad_mod
+[INFO] Created 3D model for ID: C20802
+       3D model name: F1206_L3.2-W1.7-H0.6
+       3D model path (wrl): lib_easyeda/C20802.3dshapes/F1206_L3.2-W1.7-H0.6.wrl
+       3D model path (step): lib_easyeda/C20802.3dshapes/F1206_L3.2-W1.7-H0.6.step
+-- easyeda2kicad.py v1.0.1 --

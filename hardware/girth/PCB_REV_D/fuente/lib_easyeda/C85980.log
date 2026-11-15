@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C85980
+       Symbol name : GRM1885C1H472JA01D
+       Library path : lib_easyeda/C85980.kicad_sym
+[INFO] Created Kicad footprint for ID: C85980
+       Footprint name: C0603
+       Footprint path: lib_easyeda/C85980.pretty/C0603.kicad_mod
+[INFO] Created 3D model for ID: C85980
+       3D model name: C0603_L1.6-W0.8-H0.8
+       3D model path (wrl): lib_easyeda/C85980.3dshapes/C0603_L1.6-W0.8-H0.8.wrl
+       3D model path (step): lib_easyeda/C85980.3dshapes/C0603_L1.6-W0.8-H0.8.step
+-- easyeda2kicad.py v1.0.1 --
