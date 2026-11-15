@@ -45,6 +45,25 @@ Apto para pedir prototipos a JLCPCB; nada se ha montado ni medido.
 - ERC: 0 errores · 0 advertencias.
 - Advertencias no bloqueantes: serigrafía sobre cobre y serigrafía solapada.
 
+## Lista de posiciones (CPL) corregida para JLCPCB (15/11/2026)
+JLCPCB monta cada pieza con **su** huella (la de EasyEDA), centrada en Mid X/Y y con el giro del CPL. Por eso,
+si su huella no tiene el mismo origen o el mismo giro que la nuestra, la pieza sale desplazada o girada.
+
+`fuente/jlc_correcciones.py` compara los pads numerados de las dos huellas (`fuente/lib_easyeda/`) y `jlc.py` aplica
+la corrección al CPL:
+
+| Pieza | Corrección |
+|---|---|
+| U4 ESP32-C6-MINI-1U | centro desplazado 2,7 mm (en la vista previa sobresalía del borde y dejaba al aire una fila de pads) |
+| U6 ADS1292 TQFP-32 | +270° |
+| U3 y U7 RT9080 (SOT-23-5) | +270° |
+| Q1 y Q2 (SOT-23) | +180° |
+| U5 LSM6DSV16X y U8 MMC5983MA | +180° |
+| C47 tántalo | +180° (la marca + sobre VCAP1) |
+
+Las resistencias, los condensadores, U2 y los LED del aro no necesitan corrección.
+**Los CPL anteriores a esta corrección no se deben usar.**
+
 ## Pedido a JLCPCB
 1. **PCB:** sube `AVO_GIRTH_REVD_PCB_FINAL_GERBER_JLCPCB.zip` con 4 capas, 1,0 mm, ENIG, cobre exterior de 1 oz y
    la pila de capas por defecto.

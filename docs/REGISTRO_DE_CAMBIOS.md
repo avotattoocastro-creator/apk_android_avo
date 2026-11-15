@@ -24,6 +24,20 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha REV D: CPL corregido para las huellas de JLCPCB
+**Autor:** Claude · **Rama:** `fix/girth-revd-cpl-centros` · **CI:** PCB run 43738514699 (puerta superada)
+**Qué cambia:** el CPL ya aplica el giro y el centro de las huellas de JLCPCB/EasyEDA (`fuente/jlc_correcciones.py`, `jlc_correcciones.json`, `jlc.py`).
+- U4: desplazado 2,7 mm.
+- U6: +270°.
+- U3 y U7: +270°.
+- Q1 y Q2: +180°.
+- U5 y U8: +180°.
+- C47: +180°.
+
+**Por qué:** la vista previa de JLCPCB mostraba el módulo C6 desplazado sobre el borde. La placa (cobre) no cambia.
+**Aviso:** la REV C tiene el mismo problema de CPL. No pedirla con su CPL sin aplicar esta corrección.
+**Estado:** compilado en CI · NO VERIFICADO en hardware.
+
 ## 2026-11-15 — Cincha — cápsula REV 6.1: aro de luz (4 LED SK6812SIDE-A) y todo estanco (objetivo IP67) (CAD)
 **Autor:** Claude · Rama `feature/cincha-cad-montaje` (con develop fusionado) · **CI:** no aplica
 **Qué cambia (petición del usuario 15/11 15:10):**
