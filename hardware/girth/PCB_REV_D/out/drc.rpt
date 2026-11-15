@@ -1,5 +1,5 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T13:45:46+0000 **
+** Created on 2026-11-15T13:48:46+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 10 DRC violations **
@@ -38,11 +38,7 @@
     @(96.7500 mm, 112.3000 mm): Segment of D3 on F.Silkscreen
     @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 2 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(110.3000 mm, 96.8000 mm): Pad 14 [GND] of U4 on F.Cu
-    @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
+** Found 1 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
     @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
