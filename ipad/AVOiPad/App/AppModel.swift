@@ -7,7 +7,7 @@ enum Page: String, CaseIterable, Identifiable {
          gps = "Gps", charts = "Charts", segments = "Segments", biomech = "Biomech", compare = "Compare", geofences = "Geofences",
          tides = "Tides", reports = "Reports", watchWifi = "WatchWifi", server = "Server", engine = "Engine",
          summary = "Summary", trackWork = "TrackWork", assistant = "Assistant",
-         calendar = "Calendar", keyData = "KeyData", settings = "Settings"
+         calendar = "Calendar", keyData = "KeyData", settings = "Settings", camera = "Camera"
     var id: String { rawValue }
 
     /// Pages of ONE training: shown in the top bar of the training (Análisis), not in the sidebar.
@@ -53,12 +53,15 @@ final class AppModel {
     @ObservationIgnored var trackWork: TrackWorkModel!    // «Trabajo en pista» (AVO Track Work): efforts, splits, best distances
     @ObservationIgnored var raceVideo: RaceVideoModel!     // «Analizar vídeo» de una carrera (seguimiento automático)
     @ObservationIgnored var assistant: AssistantModel!    // «Asistente IA»: Claude (API, clave en el Llavero) o modelo de Apple
+    @ObservationIgnored var camera: CameraModel!          // «Cámara»: vídeo con hora GPS (AVO SYNC) para juntarlo con el entrenamiento
 
     // ---------------------------------------------------------------- state (names = MainViewModel, lowerCamel)
     /// «Análisis» (map + charts) is hidden for now (trainer's sketch 14/11/2026): asking for it opens «Resumen», the first
     /// tab of the training.
     var page: Page = .home {
         didSet {
+            // al salir de «Cámara» se guarda la grabación y se apaga la cámara (antes de la redirección de «Análisis»)
+            if oldValue == .camera && page != .camera { camera?.pageHidden() }
             if page == .analysis { page = .summary; return }
             if oldValue != page { onPageChanged() }
         }
@@ -127,6 +130,7 @@ final class AppModel {
         self.raceVideo = RaceVideoModel(app: self)
         self.stretch = StretchModel(app: self)
         self.franceGalop = FranceGalopModel(app: self)
+        self.camera = CameraModel(app: self)
         initShell()
     }
 }

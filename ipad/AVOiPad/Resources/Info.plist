@@ -48,6 +48,10 @@
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Para enviar geocercas y líneas al reloj AVO y para pedirle que active su Wi-Fi de descarga.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Para grabar vídeo del entrenamiento con la hora GPS y juntarlo después con los datos del caballo.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Para guardar en Fotos los vídeos de entrenamiento que compartas.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Para descargar entrenamientos desde la red Wi-Fi propia del reloj AVO.</string>
 	<key>NSAppTransportSecurity</key>

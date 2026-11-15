@@ -39,6 +39,48 @@ BNO085 + MAX30003, cápsula nueva más pequeña, dos pogos de 3).
 **Pendiente:** MAX30003 y BNO085 sin existencias en JLCPCB (Global Sourcing); cápsula REV 6 en FreeCAD; comprobar con la hoja
 de ADI los valores del filtro de entrada y la huella del SiT1533.
 
+## 2026-11-15 — iPad — Página «Cámara»: vídeo con hora GPS (AVO SYNC v1)
+**Autor:** Claude · Rama `claude/ipad-camara-avo-sync` · **Commits:** `7a8ca9e` · **CI:** run 43665157107 (éxito, lanzado a mano sin TestFlight)
+**Qué cambia:**
+- **Menú del iPad:** nueva página «Cámara» (`Page.camera` = `Camera`) debajo de «Análisis», según el boceto del entrenador.
+  Siempre está activa.
+- **Grabación:** cámara trasera, HEVC, 1080p o 4K a 30/60/120/240 fps según el iPad, sin audio.
+  - Se graba con `AVAssetWriter` para conservar el sello del reloj del iPad de cada fotograma.
+  - Cada vídeo se guarda en `videos/` (`.mov`) con su archivo de hora `.avosync.json`.
+- **AVO SYNC v1:** protocolo BLE nuevo e independiente, con UUID fijos, tramas `TIME_REQ`, `TIME_RESP`, `MARK` y `STATUS`,
+  e intercambio tipo NTP cada segundo.
+  - Filtro de menor retardo por ventanas de 10 s y recta de deriva.
+  - Gestor Bluetooth propio, separado del de los relojes.
+  - Sin gadget, se graba con el reloj del iPad y queda indicado.
+- **Página:**
+  - hora en directo sobre la vista previa;
+  - estado del gadget;
+  - marcas «Serie», «Vuelta» y «Fin»;
+  - lista de vídeos con reproductor (hora GPS del fotograma y saltos a las marcas), compartir y borrar.
+- **Prueba de capturas:** se añade `Camera`. En el simulador sale «sin cámara».
+**Por qué:** boceto del entrenador («Cámara» debajo de «Análisis») y propuesta AVO SYNC V0.1: grabar el entrenamiento y
+juntarlo con los datos por la hora GPS, aunque el caballo esté lejos (playa).
+**Archivos:** `ipad/AVOiPad/Core/AvoSync.swift`, `App/AvoSyncLink.swift`, `App/CameraModel.swift`,
+`Views/CameraView.swift`, `App/AppModel.swift`, `App/AppModel+Shell.swift`, `App/RootView.swift`,
+`Resources/Info.plist`, `AVOiPadTests/AvoSyncTests.swift`, `AVOiPadUITests/ScreenshotTests.swift`,
+`docs/AVO_SYNC.md`, `ipad/UI_CONTRACT.md`.
+**Info.plist (avisado al usuario):** se añaden `NSCameraUsageDescription` y `NSPhotoLibraryAddUsageDescription`.
+Sin el primero, la app se cierra al abrir la cámara. El segundo hace falta para «Guardar vídeo» desde Compartir.
+**No se ha tocado:** contratos existentes (TELEMETRY, BackStatus, cincha, AVO1, `.avr`), enlace BLE con el reloj, motor,
+Android, Windows, firmware, workflows, firmas ni el número de build.
+**Validación:** IMPLEMENTADO.
+- COMPILADO / CI: run 43665157107 sobre `7a8ca9e`. Compila para el simulador.
+- `AvoSyncTests`: 4 de 4 pruebas superadas (simuladas).
+- La prueba de capturas no saca la página: ya fallaba en `develop` desde la run 43653284779 (`No existe nav.*` en
+  todas las páginas tras «Listado»), y no la causa este cambio.
+- **NO VERIFICADO** en iPad real ni con gadget, porque el gadget no existe.
+**Pendiente:**
+- gadget y firmware `firmware/sync/V0_1`;
+- medir la precisión real (LED a 240 fps);
+- juntar el vídeo con el entrenamiento y superponer los datos;
+- audio opcional;
+- Android y Windows.
+
 ## 2026-11-15 — Cincha v0.5.0 — ECG con MAX30003 (fmt 2) sin tocar espalda ni pecho
 **Autor:** Claude · Rama `feature/girth-ecg-0-5-0` · **CI:** `build-girth-v050.yml` (workflow NUEVO; no se modifica ninguno existente)
 **Qué cambia:** nuevo firmware `firmware/girth/V0_5_0` (copia de 0.4.3 + ECG). Driver MAX30003 por SPI (CSB 17, SCK 19,
