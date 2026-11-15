@@ -1,9 +1,9 @@
 {
  "piezas": {
   "AVO_DOCK_V1_fondo": {
-   "solidos": 2,
-   "volumen_mm3": 204773.9,
-   "peso_PETG_g": 260.1,
+   "solidos": 1,
+   "volumen_mm3": 204341.2,
+   "peso_PETG_g": 259.5,
    "caja": [
     200.0,
     190.0,
@@ -12,8 +12,8 @@
   },
   "AVO_DOCK_V1_frente": {
    "solidos": 1,
-   "volumen_mm3": 256632.3,
-   "peso_PETG_g": 325.9,
+   "volumen_mm3": 252779.8,
+   "peso_PETG_g": 321.0,
    "caja": [
     200.0,
     190.0,
