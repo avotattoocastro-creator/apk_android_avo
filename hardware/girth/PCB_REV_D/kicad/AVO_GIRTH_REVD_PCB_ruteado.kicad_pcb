@@ -20280,14 +20280,6 @@
 		(uuid "52686f03-7cbf-4fe8-b4af-29ab34136f39")
 	)
 	(via
-		(at 103.7250 114.2250)
-		(size 0.5)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(net 3)
-		(uuid "e26a43d2-00e1-443f-bdfd-9cb8095617d1")
-	)
-	(via
 		(at 103.1750 110.6250)
 		(size 0.5)
 		(drill 0.3)

@@ -12,6 +12,8 @@ segs,vias,fps=repair.read_board(src); pads=build.collect_pads()
 r=repair.make_router(pads,segs,vias)
 nid=D.CODE['GND']
 vm=r.via_mask(nid) & ~build.drill_block(r,pads)
+# fuera de las bandas de borde (keepout BORDE_*): 0,8 mm desde el contorno
+x0,y0,x1,y1=[f(c) for f,c in zip((min,min,max,max),(min(p['c'][0] for p in pads)*0+77.0,85.0,123.0,115.0))]
 cand=np.argwhere(vm)
 xy=np.array([r.xy(i,j) for i,j in cand])
 ang=np.linspace(0,2*np.pi,12,endpoint=False); ring=np.stack([np.cos(ang),np.sin(ang)],1)*0.32
@@ -20,6 +22,7 @@ for k,pl in enumerate(polys):
     P=Path(pl)
     if any(P.contains_point(v) for v in gv): continue
     inside=P.contains_points(xy)
+    inside&=(xy[:,0]>x0+0.8)&(xy[:,0]<x1-0.8)&(xy[:,1]>y0+0.8)&(xy[:,1]<y1-0.8)
     pts=xy[inside]
     pts=[p for p in pts if P.contains_points(p+ring).all()]
     if not pts: print('poly',k,'sin sitio', pl.min(0).round(1), pl.max(0).round(1)); continue
