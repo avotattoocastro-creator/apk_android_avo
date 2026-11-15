@@ -435,14 +435,15 @@ struct CameraClipPlayer: View {
     }
 
     /// 30 veces por segundo: posición del vídeo, límites del recorte y entrenamiento asociado.
+    @MainActor
     private func loop() async {
         while !Task.isCancelled {
             if let p = player, let c = clip, let s = c.sync {
                 let t = p.currentTime().seconds
                 if t.isFinite { videoT = t }
                 let r = s.trimmedRange
-                if p.rate != 0 && t > r.upperBound { p.pause(); p.seek(to: CMTime(seconds: r.lowerBound, preferredTimescale: 600)) }
-                else if p.rate != 0 && t < r.lowerBound - 0.1 { p.seek(to: CMTime(seconds: r.lowerBound, preferredTimescale: 600)) }
+                if p.rate != 0 && t > r.upperBound { p.pause(); p.seek(to: CMTime(seconds: r.lowerBound, preferredTimescale: 600), completionHandler: { _ in }) }
+                else if p.rate != 0 && t < r.lowerBound - 0.1 { p.seek(to: CMTime(seconds: r.lowerBound, preferredTimescale: 600), completionHandler: { _ in }) }
                 if let ps = p.currentItem?.presentationSize, ps.width > 0, ps != videoSize { videoSize = ps }
                 let item = model.training(c)
                 if item?.id != telemetryId {
