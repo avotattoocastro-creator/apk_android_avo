@@ -1,8 +1,14 @@
 ** Drc report for AVO_GIRTH_REVC_PCB.kicad_pcb **
-** Created on 2026-11-15T03:13:54+0000 **
+** Created on 2026-11-15T03:17:14+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 9 DRC violations **
+** Found 11 DRC violations **
+[track_dangling]: Track has unconnected end
+    Local override; warning
+    @(107.6743 mm, 103.0063 mm): Track [VBAT] on In2.Cu, length 0.0923 mm
+[via_dangling]: Via is not connected or connected on only one layer
+    Local override; warning
+    @(111.1136 mm, 106.7017 mm): Via [IMU_SA0] on F.Cu - B.Cu
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
@@ -34,27 +40,11 @@
     @(98.2364 mm, 110.2800 mm): Segment of R21 on F.Silkscreen
     @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 5 unconnected pads **
+** Found 1 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(106.2750 mm, 107.4750 mm): Via [GND] on F.Cu - B.Cu
+    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
     @(107.2500 mm, 105.9500 mm): Pad 51 [GND] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(104.9625 mm, 107.5500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
-    @(104.9611 mm, 109.7325 mm): Track [VSYS] on F.Cu, length 0.5962 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(87.8000 mm, 95.8200 mm): Pad 25 [ECG_VCM] of U6 on F.Cu
-    @(84.9275 mm, 95.8450 mm): Track [ECG_VCM] on F.Cu, length 0.9440 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(100.7500 mm, 99.1125 mm): Pad 15 [IMU_ENV_SCL] of U5 on F.Cu
-    @(101.0500 mm, 101.6000 mm): Pad 1 [IMU_ENV_SCL] of R27 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(93.0000 mm, 111.6000 mm): PTH pad 1 [POGO_5V] of P1
-    @(91.5000 mm, 108.4300 mm): Pad 1 [POGO_5V] of F2 on F.Cu
 
 ** Found 0 Footprint errors **
 

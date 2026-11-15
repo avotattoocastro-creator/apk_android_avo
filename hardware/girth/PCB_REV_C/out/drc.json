@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-15T03:13:53+0000",
+    "date": "2026-11-15T03:17:13+0000",
     "included_severities": [
         "error",
         "warning",
@@ -15,12 +15,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "description": "Zone [GND] on F.Cu, priority 0",
                     "pos": {
-                        "x": 106.275,
-                        "y": 107.475
+                        "x": 120.0,
+                        "y": 111.0
                     },
-                    "uuid": "d4647153-984a-40eb-9c18-953da8273dcf"
+                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
                 },
                 {
                     "description": "Pad 51 [GND] of U4 on F.Cu",
@@ -33,101 +33,39 @@
             ],
             "severity": "error",
             "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [VSYS] on F.Cu, length 0.5000 mm",
-                    "pos": {
-                        "x": 104.9625,
-                        "y": 107.55
-                    },
-                    "uuid": "8856593d-2cde-4074-acda-43eda836e33d"
-                },
-                {
-                    "description": "Track [VSYS] on F.Cu, length 0.5962 mm",
-                    "pos": {
-                        "x": 104.9611,
-                        "y": 109.7325
-                    },
-                    "uuid": "96417feb-32dd-4ed8-9bba-26599f382305"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 25 [ECG_VCM] of U6 on F.Cu",
-                    "pos": {
-                        "x": 87.8,
-                        "y": 95.82
-                    },
-                    "uuid": "3c1ce89d-6f93-5ace-8ea9-7fe9d6e35e1f"
-                },
-                {
-                    "description": "Track [ECG_VCM] on F.Cu, length 0.9440 mm",
-                    "pos": {
-                        "x": 84.9275,
-                        "y": 95.845
-                    },
-                    "uuid": "cd96b9b8-cd21-489d-9c28-e19adbf55e69"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 15 [IMU_ENV_SCL] of U5 on F.Cu",
-                    "pos": {
-                        "x": 100.75,
-                        "y": 99.1125
-                    },
-                    "uuid": "027a043c-5816-5bc3-a5d7-9bafd86eb9a3"
-                },
-                {
-                    "description": "Pad 1 [IMU_ENV_SCL] of R27 on F.Cu",
-                    "pos": {
-                        "x": 101.05,
-                        "y": 101.6
-                    },
-                    "uuid": "09141a70-e350-5a11-bfb4-e70e965b328b"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "PTH pad 1 [POGO_5V] of P1",
-                    "pos": {
-                        "x": 93.0,
-                        "y": 111.6
-                    },
-                    "uuid": "efde89e6-c506-5838-ba54-79f4cc9ce262"
-                },
-                {
-                    "description": "Pad 1 [POGO_5V] of F2 on F.Cu",
-                    "pos": {
-                        "x": 91.5,
-                        "y": 108.43
-                    },
-                    "uuid": "2a5ac03b-9606-5713-b3d6-eebc2f8828ac"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
         }
     ],
     "violations": [
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [VBAT] on In2.Cu, length 0.0923 mm",
+                    "pos": {
+                        "x": 107.6743,
+                        "y": 103.0063
+                    },
+                    "uuid": "5693855d-695f-5b27-8a01-e28aa8207ab7"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [IMU_SA0] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 111.1136,
+                        "y": 106.7017
+                    },
+                    "uuid": "20a7a0ac-8c7b-590a-9a70-f6191c6284c3"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
         {
             "description": "Silkscreen clipped by solder mask",
             "items": [

@@ -9,7 +9,7 @@
   {
    "name": "DRC: conexiones incompletas",
    "ok": false,
-   "n": 5
+   "n": 1
   },
   {
    "name": "DRC: cortocircuitos",
@@ -34,6 +34,8 @@
  ],
  "drc_errors": {},
  "drc_warnings": {
+  "track_dangling": 1,
+  "via_dangling": 1,
   "silk_over_copper": 6,
   "silk_overlap": 3
  }
