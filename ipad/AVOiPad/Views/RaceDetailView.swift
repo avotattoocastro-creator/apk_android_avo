@@ -77,9 +77,19 @@ struct RaceDetailView: View {
                 Text("\(race.horseName ?? "—") · \(race.ourRunnerName ?? "—")").font(.footnote).foregroundStyle(Avo.textDim).lineLimit(1)
             }
             Spacer(minLength: 8)
+            if race.ourRunner != nil {
+                // trainer 15/11/2026: PDF report of the race vs the training to send (the app only showed it)
+                Button {
+                    model.exportComparisonPdf(race)
+                } label: {
+                    Label("Informe PDF", systemImage: "doc.richtext")
+                }
+                .buttonStyle(.avoPrimary)
+                .accessibilityIdentifier("race.reportPdf")
+            }
             if let p = model.pdfPath(race) {
                 ShareLink(item: URL(fileURLWithPath: p)) {
-                    Label("PDF", systemImage: "square.and.arrow.up")
+                    Label("PDF original", systemImage: "square.and.arrow.up")
                 }
                 .buttonStyle(.avoSecondary)
             }

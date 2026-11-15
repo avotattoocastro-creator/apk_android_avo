@@ -41,6 +41,8 @@ final class RacesModel {
 
     /// Analysis of each race (recomputed when the trainings change).
     var reports: [String: RaceReport] = [:]
+    /// Training effort chosen in «Entrenamiento vs carrera» per race (candidate id; nil = default). Also used by the PDF.
+    var splitChoice: [String: String] = [:]
     var computing: Set<String> = []
     @ObservationIgnored private var trainingCache: [String: TrainingWorkSummary] = [:]
 
@@ -297,6 +299,36 @@ final class RacesModel {
         selectedRaceId = r.id
         if app.page != .races { app.page = .races }
         requestReport(r)
+    }
+
+    /// «Informe PDF» of the race card: race, sectors, the chosen training vs the race piece by piece and the analysis
+    /// (Core/RaceComparisonPdf.swift). Saved in paths.root/exportaciones and opened in the PDF viewer (Compartir).
+    func exportComparisonPdf(_ r: Race) {
+        guard let us = r.ourRunner else {
+            app.show("Informe de la carrera", "El caballo no está identificado entre los participantes.")
+            return
+        }
+        let cands: [RaceTrainingCandidate] = splitCandidates(for: r)
+        let chosen: RaceTrainingCandidate? = cands.first { $0.id == splitChoice[r.id] } ?? RaceTrainingSplits.defaultCandidate(cands)
+        let data = RaceComparisonPdfData(race: r, us: us, candidate: chosen,
+                                         comparison: chosen.map { RaceTrainingSplits.compare($0, us) },
+                                         report: reports[r.id], notes: r.notes)
+        let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
+        AvoFiles.ensureDir(dir)
+        var horse: String = ExportNaming.clean(r.horseName ?? us.name)
+        if horse.isEmpty { horse = "Caballo" }
+        let when: String = r.date.map { AvoTime.text($0, "yyyy-MM-dd") } ?? "sin-fecha"
+        let name: String = horse + "_" + when + "_Carrera-vs-entrenamiento_" + ExportNaming.clean(r.title) + ".pdf"
+        let path: String = AvoFiles.join(dir, name)
+        do {
+            try AvoFiles.writeAtomic(ReportBuilder.raceComparisonPdf(data), to: path)
+            app.log.info("carreras", "Informe PDF de la carrera: " + name)
+            app.pdfViewer = ExportedFile(id: path + "|" + String(Date().timeIntervalSince1970), url: URL(fileURLWithPath: path),
+                                         name: name, kind: .pdf, time: MadridTime.format(Date(), "dd/MM/yyyy HH:mm"))
+            app.scheduleDocumentsSync()
+        } catch {
+            app.show("Informe de la carrera", "No se pudo crear el PDF: " + error.localizedDescription)
+        }
     }
 
     func pdfPath(_ r: Race) -> String? {
