@@ -25,13 +25,13 @@ CLEAR = 0.15
 VIA = (0.5, 0.3)
 
 # widths per net (mm)
-WIDTH = {D.VBUS: 0.4, "POGO_5V": 0.4, D.VSYS: 0.4, D.VBAT: 0.4, "BAT_IN": 0.4, D.V3: 0.35, D.VA: 0.2}
+WIDTH = {"VLED": 0.3, D.VBUS: 0.4, "POGO_5V": 0.4, D.VSYS: 0.4, D.VBAT: 0.4, "BAT_IN": 0.4, D.V3: 0.35, D.VA: 0.2}
 ORDER = ["ECGP", "ECGN", "ECG_E_P", "ECG_E_N", "ECG_E_REF", "ECG_PGA2P", "ECG_PGA2N", "ECG_PGA1P", "ECG_PGA1N",
          "ECG_VREFP", "ECG_VCAP1", "ECG_VCAP2", "ECG_RLDOUT", "ECG_RLDINV", "POGO_5V", D.VBUS, D.VBAT, "BAT_IN",
          "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS, D.VA, D.V3, "MAG_CAP", "USB_DP", "USB_DM",
          "ECG_CS", "ECG_SCK", "ECG_MOSI", "ECG_MISO", "ECG_DRDY", "ECG_RESET", "ECG_START",
          "I2C_SDA", "I2C_SCL", "IMU_INT1", "IMU_INT2", "MAG_INT",
-         "EN", "BOOT", "BAT_ADC", "POGO_DET", "DET", "CHG_STAT", "LED_A", "LED_K"]
+         "EN", "BOOT", "BAT_ADC", "POGO_DET", "DET", "CHG_STAT", "LED_EN", "LED_G", "LED_DIN", "LED_D1", "LED_D2", "LED_D3", "LED_D4"]
 
 
 class Ctx:

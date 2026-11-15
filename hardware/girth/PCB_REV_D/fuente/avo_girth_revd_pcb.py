@@ -102,6 +102,18 @@ def npth_hole(d, keep, label):
 
 
 C6 = load("ESP32-C6-MINI-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-C6-MINI-1U.STEP", 2.6)
+def sk6812_side():
+    """SK6812SIDE-A (OPSCO, LCSC C5378721): RGB direccionable de emisión lateral, 4,0 × 1,6 × 2,0 de alto.
+    Pads según el patrón recomendado de la hoja (pág. 5) y la huella EasyEDA de LCSC: 1 DIN · 2 VDD · 3 DOUT · 4 GND.
+    La lente mira a +y local (lado opuesto a las pistas): se coloca con la lente hacia el canto de la placa."""
+    pads = [Pad("1", "smd", "rect", -1.575, -0.01, 0.55, 1.2), Pad("2", "smd", "rect", -0.45, -0.01, 0.70, 1.2),
+            Pad("3", "smd", "rect", 0.57, -0.01, 0.45, 1.2), Pad("4", "smd", "rect", 1.575, -0.01, 0.55, 1.2)]
+    g = rect_lines(-2.1, -0.75, 2.1, 1.45, "F.CrtYd", 0.05) + rect_lines(-2.0, -0.24, 2.0, 1.36, "F.Fab", 0.1)
+    g += [[Sym("fp_line"), [Sym("start"), -1.0, 1.55], [Sym("end"), 1.0, 1.55],
+           [Sym("stroke"), [Sym("width"), 0.12], [Sym("type"), Sym("solid")]], [Sym("layer"), "F.SilkS"]]]
+    return Footprint("AVO_SK6812SIDE-A_4.0x1.6mm", pads, g, "smd", None, "SK6812SIDE-A emisión lateral (lente hacia +y)", 2.0)
+
+
 FP = {
     "R0402": load("R_0402_1005Metric.kicad_mod", M3 + "Resistor_SMD.3dshapes/R_0402_1005Metric.step", 0.4),
     "C0402": load("C_0402_1005Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_0402_1005Metric.step", 0.6),
@@ -110,6 +122,7 @@ FP = {
     "C1206": load("C_1206_3216Metric.kicad_mod", M3 + "Capacitor_SMD.3dshapes/C_1206_3216Metric.step", 1.8),
     "F1206": load("Fuse_1206_3216Metric.kicad_mod", M3 + "Fuse.3dshapes/Fuse_1206_3216Metric.step", 1.1),
     "LED0603": load("LED_0603_1608Metric.kicad_mod", M3 + "LED_SMD.3dshapes/LED_0603_1608Metric.step", 0.8),
+    "LEDSIDE": sk6812_side(),
     "SOT23": load("SOT-23.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23.step", 1.1),
     "SOT23-5": load("SOT-23-5.kicad_mod", M3 + "Package_TO_SOT_SMD.3dshapes/SOT-23-5.step", 1.45),
     "RGT16": load("VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias.kicad_mod",
@@ -153,7 +166,7 @@ LC = {
     "1n C0G": "C53547", "100n C0G": "C97946",
     "NTC10k": "C77131", "USBLC6": "C7519", "LED": "C2286", "PTC": "C20802", "TVS": "C2827694",
     "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C20627095",
-    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C2651570", "2k": "C4109", "4n7 C0G": "C85980", "1n5 C0G": "C668348", "1u TANT": "C7192",
+    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C2651570", "2k": "C4109", "4n7 C0G": "C85980", "1n5 C0G": "C668348", "1u TANT": "C7192", "SK6812SIDE": "C5378721", "AO3401A": "C15127", "2N7002": "C8545",
 }
 
 
@@ -230,8 +243,8 @@ C("C22", "22u", V3, GND, block="3V3", fp="C0805")
 GPIO = {   # REV D: el SPI del ADS1292 va a los pads del módulo que miran al ADS (matriz de GPIO del C6; firmware 0.6.0)
     12: ("IO0", "ECG_CS"), 13: ("IO1", "ECG_SCK"), 5: ("IO2", "IMU_INT1"), 6: ("IO3", "ECG_DRDY"),
     9: ("IO4", "ECG_RESET"), 10: ("IO5", "BAT_ADC"), 15: ("IO6", "DET"), 16: ("IO7", "ECG_MISO"),
-    22: ("IO8", "CHG_STAT"), 23: ("IO9", "BOOT"), 19: ("IO14", "ECG_MOSI"), 20: ("IO15", "LED_K"),
-    17: ("IO12 D-", "USB_DM"), 18: ("IO13 D+", "USB_DP"), 24: ("IO18", None), 25: ("IO19", None),
+    22: ("IO8", "CHG_STAT"), 23: ("IO9", "BOOT"), 19: ("IO14", "ECG_MOSI"), 20: ("IO15", "LED_DIN"),
+    17: ("IO12 D-", "USB_DM"), 18: ("IO13 D+", "USB_DP"), 24: ("IO18", "LED_EN"), 25: ("IO19", None),
     26: ("IO20", None), 27: ("IO21", "ECG_START"), 28: ("IO22", "MAG_INT"), 29: ("IO23", "I2C_SDA"),
     30: ("IO17", "IMU_INT2"), 31: ("IO16", "I2C_SCL"), 8: ("EN", "EN"), 3: ("3V3", V3),
 }
@@ -257,9 +270,28 @@ C("C25", "100n", V3, GND, block="ESP32-C6")
 R("R11", "10k", "EN", V3, block="ESP32-C6")
 C("C27", "1u", "EN", GND, block="ESP32-C6", note="EN: RC 10 k / 1 µF (guía de diseño de Espressif)")
 R("R12", "10k", "BOOT", V3, block="ESP32-C6", note="GPIO9 alto = arranque normal; a GND con TP2 = descarga")
-R("R14", "1k", V3, "LED_A", block="ESP32-C6")
-part("D1", "LED0603", "LED verde", (0, 0), 0, {1: "LED_K", 2: "LED_A"}, LC["LED"], block="ESP32-C6", sym="LED",
-     note="activo a nivel bajo en GPIO15, como el LED del XIAO")
+# ---------------------------------------------------------------------------------------- aro de luz (4 LED laterales)
+# Petición del usuario (15/11/2026): aro de luz como el del casco V5, con 4 LED, en lugar del LED verde. 4 × SK6812SIDE-A
+# (2 por lado largo) en los cantos de la cara F con la lente hacia la pared translúcida de la cápsula, en cadena
+# D10 → D11 → D12 → D13. VDD = VLED (VSYS conmutado: Q1 AO3401A cortado por defecto, Q2 2N7002 desde GPIO18 =
+# LED_EN, R16 100 k a GND → los LED no consumen nada en reposo; cada SK6812 gasta ~1 mA apagado). La hoja pide
+# VDD 3,7–5,5 V: con la celda por debajo de ~3,6 V pueden fallar (solo es un aviso de estado). DIN a 3,3 V
+# (VIH = 0,7 VDD ≤ 2,94 V con 4,2 V). Firmware: DIN a nivel BAJO antes de cortar VLED y mientras esté cortado.
+R("R14", "22R", "LED_DIN", "LED_D1", block="Aro", note="serie de la línea de datos (GPIO15)")
+R("R15", "100k", VSYS, "LED_G", block="Aro", note="puerta de Q1 arriba: aro apagado por defecto")
+R("R16", "100k", "LED_EN", GND, block="Aro", note="Q2 cortado mientras el C6 arranca")
+part("Q1", "SOT23", "AO3401A", (0, 0), 0, {1: "LED_G", 2: VSYS, 3: "VLED"}, LC["AO3401A"], "AO3401A (P, 30 V, 4 A)", "Aro",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="interruptor de alimentación del aro")
+part("Q2", "SOT23", "2N7002", (0, 0), 0, {1: "LED_EN", 2: GND, 3: "LED_G"}, LC["2N7002"], "2N7002 (N)", "Aro",
+     sym=dict(L=[(1, "G")], R=[(2, "S"), (3, "D")]), note="LED_EN alto → Q1 conduce")
+C("C60", "10u", "VLED", GND, block="Aro", fp="C0603")
+LEDS = ["D%d" % (10 + k) for k in range(4)]
+for i, ref in enumerate(LEDS):
+    part(ref, "LEDSIDE", "SK6812SIDE-A", (0, 0), 0,
+         {1: "LED_D%d" % (i + 1), 2: "VLED", 3: ("LED_D%d" % (i + 2)) if i < len(LEDS) - 1 else None, 4: GND},
+         LC["SK6812SIDE"], "SK6812SIDE-A (OPSCO)", "Aro",
+         sym=dict(L=[(1, "DIN"), (2, "VDD")], R=[(3, "DOUT"), (4, "GND")]), note="RGB direccionable, emisión lateral")
+    C("C%d" % (61 + i), "100n", "VLED", GND, block="Aro")
 
 # ---------------------------------------------------------------------------------------- IMU LSM6DSV16X (U5) + MMC5983MA (U8)
 # Bus I²C a 400 kHz (el MMC5983MA no pasa de 400 kHz): LSM6DSV16X en 0x6A (SA0 = 0), MMC5983MA en 0x30. Igual que la REV B

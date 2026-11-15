@@ -25,4 +25,22 @@ apps no necesitan cambios para la REV D.
 | LSM6 INT1 / INT2 · MMC INT | 2 / 17 · 22 |
 | ADS1292 CS / SCLK / DIN / DOUT / DRDY | 0 / 1 / 14 / 7 / 3 |
 | ADS1292 PWDN-RESET / START | 4 / 21 |
-| Batería (divisor 1:2) · DET · CHG · BOOT · LED | 5 · 6 · 8 · 9 · 15 |
+| Batería (divisor 1:2) · DET · CHG · BOOT | 5 · 6 · 8 · 9 |
+| Aro de luz: datos (4 × SK6812SIDE-A) · alimentación (alto = encendido) | 15 · 18 |
+
+## Aro de luz (PCB REV D, 15/11/2026)
+Sustituye al LED verde. Los LED solo reciben alimentación mientras se encienden (GPIO18 → Q2 → Q1), así que entre
+destellos consumen 0 mA. La línea de datos queda a nivel bajo mientras el aro está apagado.
+
+| Aro | Significado |
+|---|---|
+| Destello azul cada 0,6 s | Buscando la espalda |
+| 1 destello verde cada 2 s | Todo bien |
+| 3 destellos ámbar | Electrodos sin contacto (revisar la cincha o el gel) |
+| 2 destellos rojos | IMU sin datos |
+| 1 destello rojo | Batería por debajo del 15 % |
+| Naranja fijo en el soporte | Cargando |
+| Verde fijo en el soporte | Cargada |
+
+Comando serie: `aro on|off` (se guarda). Pruebas de host del patrón: `test/test_girth.cpp`.
+**Compilado en CI · NO VERIFICADO en hardware.**

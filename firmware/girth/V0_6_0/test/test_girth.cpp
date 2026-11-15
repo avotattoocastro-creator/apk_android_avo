@@ -307,7 +307,32 @@ static void test_ecg() {
   }
 }
 
+// light ring pattern (girth_ring.cpp is portable without ARDUINO; included here so the CI command line stays the same)
+#include "../AVO_GIRTH_V0_6_0/girth_ring.cpp"
+static void test_ring() {
+  using girth::RingState; using girth::ring_colour;
+  RingState ok{true, true, true, false, false, false, 80};
+  CHECK(!ring_colour(ok, 10).dark() && ring_colour(ok, 10).g && !ring_colour(ok, 10).r, "linked + all ok: green flash");
+  CHECK(ring_colour(ok, 500).dark(), "dark between flashes (VLED cut)");
+  RingState lo = ok; lo.leads_off = true;
+  int amber = 0; for (uint32_t t = 0; t < 2000; t += 10) amber += !ring_colour(lo, t).dark() && ring_colour(lo, t).r && ring_colour(lo, t).g;
+  CHECK(amber == 24, "electrodes without contact: 3 amber flashes of 80 ms");
+  RingState imu = ok; imu.imu_ok = false;
+  CHECK(ring_colour(imu, 10).r && !ring_colour(imu, 10).g, "IMU failing: red has priority over the electrodes");
+  RingState nl = ok; nl.linked = false;
+  CHECK(ring_colour(nl, 10).b && ring_colour(nl, 300).dark(), "no back: blue blink");
+  RingState ch = nl; ch.on_mount = true; ch.charging = true;
+  CHECK(ring_colour(ch, 500).r && ring_colour(ch, 1500).r, "on the mount charging: steady orange");
+  RingState full = nl; full.on_mount = true;
+  CHECK(ring_colour(full, 500).g && !ring_colour(full, 500).r, "on the mount, charged: steady green");
+  RingState low = ok; low.bat_pct = 10;
+  CHECK(ring_colour(low, 10).r && !ring_colour(low, 10).g, "battery < 15 %: red flash");
+  RingState unk = ok; unk.bat_pct = 0;
+  CHECK(ring_colour(unk, 10).g, "battery not measured is not 'low'");
+}
+
 int main() {
+  test_ring();
   test_commands();
   test_assembler();
   test_hub();

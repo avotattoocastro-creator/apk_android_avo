@@ -1,11 +1,11 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `b63c741dfaf1fd6f83f2ed7d3221e5c8264e9531` · ejecución de CI: 43721512373
+- Commit: `455265cf452977f896a1fd43fbff74f50d1c9f02` · ejecución de CI: 43723857285
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
-- Componentes: 77 en total, 60 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 725 · vías: 129 · ruteado completo (0 conexiones incompletas)
+- Componentes: 89 en total, 72 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
+- Pistas: 920 · vías: 172 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
@@ -21,6 +21,7 @@
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
 - silk_overlap: 4
+- connection_width: 2
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -31,36 +32,39 @@
 - Modelos de la librería de KiCad 9.0.0 descargados: 9; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
 - ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). LSM6DSV16X, MMC5983MA, ADS1292 y pads de hilo/prueba: sin modelo 3D.
 
-## Existencias en JLCPCB (consulta del CI: 2026-11-15 13:36 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-11-15 14:14 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C20627095 | ESP32-C6-MINI-1U-H4 | 1 | 3425 | Extended | 4.1902 US$ |
-| C5267406 | LSM6DSV16XTR | 1 | 6528 | Extended | 2.9369 US$ |
+| C5267406 | LSM6DSV16XTR | 1 | 6520 | Extended | 2.9369 US$ |
 | C404329 | MMC5983MA | 1 | 5716 | Extended | 1.9896 US$ |
-| C140288 | BQ24072RGTR | 1 | 1216 | Extended | 1.0488 US$ |
+| C140288 | BQ24072RGTR | 1 | 1214 | Extended | 1.0488 US$ |
 | C7192 | TAJB105K035RNJ | 1 | 26712 | Extended | 0.2898 US$ |
 | C841192 | RT9080-33GJ5 | 2 | 27542 | Extended | 0.1197 US$ |
 | C20802 | SMD1206P150TF | 2 | 11293 | Extended | 0.1187 US$ |
-| C45783 | CL21A226MAQNNNE | 2 | 4089351 | Basic | 0.1084 US$ |
-| C2827694 | PESD5V0S1BA | 2 | 330666 | Extended | 0.0359 US$ |
-| C96446 | CL10A106MA8NRNC | 7 | 6145173 | Basic | 0.0342 US$ |
+| C45783 | CL21A226MAQNNNE | 2 | 4089399 | Basic | 0.1084 US$ |
+| C2827694 | PESD5V0S1BA | 2 | 330616 | Extended | 0.0359 US$ |
+| C96446 | CL10A106MA8NRNC | 8 | 6142023 | Basic | 0.0342 US$ |
 | C85980 | GRM1885C1H472JA01D | 2 | 107649 | Extended | 0.0187 US$ |
 | C668348 | GRM1555C1H152JA01D | 1 | 68679 | Extended | 0.0179 US$ |
-| C77131 | NCP15XH103F03RC | 1 | 297188 | Extended | 0.0164 US$ |
-| C2286 | KT-0603R | 1 | 5773512 | Basic | 0.0077 US$ |
-| C52923 | CL05A105KA5NQNC | 5 | 10267547 | Basic | 0.0057 US$ |
+| C77131 | NCP15XH103F03RC | 1 | 297208 | Extended | 0.0164 US$ |
+| C52923 | CL05A105KA5NQNC | 5 | 10267149 | Basic | 0.0057 US$ |
 | C53547 | 0402CG102J500NT | 2 | 472713 | Extended | 0.0050 US$ |
-| C1525 | CL05B104KO5NNNC | 8 | 38020241 | Basic | 0.0024 US$ |
-| C4109 | 0402WGF2001TCE | 1 | 10025031 | Basic | 0.0019 US$ |
-| C25792 | 0402WGF4702TCE | 2 | 5705214 | Basic | 0.0019 US$ |
-| C11702 | 0402WGF1001TCE | 2 | 31393743 | Basic | 0.0013 US$ |
-| C26083 | 0402WGF1004TCE | 3 | 2340495 | Basic | 0.0012 US$ |
-| C25879 | 0402WGF2201TCE | 3 | 3051738 | Basic | 0.0011 US$ |
-| C25744 | 0402WGF1002TCE | 5 | 21032461 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 3 | 10363619 | Basic | 0.0009 US$ |
+| C1525 | CL05B104KO5NNNC | 12 | 38015699 | Basic | 0.0024 US$ |
+| C4109 | 0402WGF2001TCE | 1 | 10015101 | Basic | 0.0019 US$ |
+| C25792 | 0402WGF4702TCE | 2 | 5704959 | Basic | 0.0019 US$ |
+| C11702 | 0402WGF1001TCE | 1 | 31382899 | Basic | 0.0013 US$ |
+| C26083 | 0402WGF1004TCE | 3 | 2340411 | Basic | 0.0012 US$ |
+| C25879 | 0402WGF2201TCE | 3 | 3051759 | Basic | 0.0011 US$ |
+| C25744 | 0402WGF1002TCE | 5 | 21033173 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 5 | 10352364 | Basic | 0.0009 US$ |
+| C25092 | ? | 1 | sin respuesta | Extended | ? |
+| C15127 | ? | 1 | sin respuesta | Extended | ? |
+| C8545 | ? | 1 | sin respuesta | Extended | ? |
+| C5378721 | ? | 4 | sin respuesta | Extended | ? |
 | C2651570 | ? | 1 | sin respuesta | Extended | ? |
 
-- Piezas sin existencias para 5 placas: C2651570
+- Piezas sin existencias para 5 placas: C25092, C15127, C8545, C5378721, C2651570
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **sí**
