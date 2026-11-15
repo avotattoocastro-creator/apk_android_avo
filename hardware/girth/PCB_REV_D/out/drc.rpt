@@ -1,8 +1,14 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T13:55:56+0000 **
+** Created on 2026-11-15T14:18:50+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 10 DRC violations **
+** Found 12 DRC violations **
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (In1.Cu)
+    Rule: board setup constraints; warning
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on In1.Cu, priority 0
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0875 mm) (B.Cu)
+    Rule: board setup constraints; warning
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on B.Cu, priority 0
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(80.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
@@ -38,7 +44,23 @@
     @(96.7500 mm, 112.3000 mm): Segment of D3 on F.Silkscreen
     @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 4 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.2796 mm, 96.9326 mm): Via [+3V3] on F.Cu - B.Cu
+    @(100.0000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(106.4625 mm, 108.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+    @(109.2000 mm, 109.4250 mm): Track [VSYS] on F.Cu, length 3.4102 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.5400 mm, 94.8000 mm): Track [I2C_SCL] on F.Cu, length 0.5783 mm
+    @(100.5000 mm, 96.0875 mm): Pad 13 [I2C_SCL] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.0000 mm, 96.0875 mm): Pad 14 [I2C_SDA] of U5 on F.Cu
+    @(98.4700 mm, 94.8500 mm): Track [I2C_SDA] on F.Cu, length 0.1024 mm
 
 ** Found 0 Footprint errors **
 
