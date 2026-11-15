@@ -16,6 +16,7 @@ struct RootView: View {
     @Environment(AppModel.self) private var app
     /// The start screen (Inicio) shows no sidebar; every other page shows it (restored when leaving Inicio).
     @State private var columns: NavigationSplitViewVisibility = .detailOnly
+    @State private var quitAsked = false            // «SALIR»: confirmación antes de cerrar la app
 
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
@@ -172,6 +173,30 @@ struct RootView: View {
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
+            }
+            // «SALIR» (trainer's sketch 15/11/2026: «botón para cerrar completamente app»), con confirmación
+            Button { quitAsked = true } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: "power").font(.callout.weight(.semibold)).frame(width: 22)
+                    Text("SALIR").font(.callout.weight(.bold))
+                    Spacer(minLength: 0)
+                }
+                .foregroundStyle(Avo.red)
+                .padding(.horizontal, 12).padding(.vertical, 10)
+                .background(Avo.red.opacity(0.10), in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.red.opacity(0.55), lineWidth: 1))
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 12).padding(.top, 6)
+            .accessibilityIdentifier("nav.quit")
+            .confirmationDialog("¿Cerrar AVO?", isPresented: $quitAsked, titleVisibility: .visible) {
+                Button("Salir", role: .destructive) { app.quitApp() }
+                Button("Cancelar", role: .cancel) {}
+            } message: {
+                Text(app.camera?.recording == true
+                     ? "Se está grabando vídeo: se detendrá. Se cerrarán el Wi-Fi y el Bluetooth del reloj y la app se cerrará del todo."
+                     : "Se cerrarán el Wi-Fi y el Bluetooth del reloj y la app se cerrará del todo.")
             }
             VStack(alignment: .leading, spacing: 3) {
                 // app data (trainer's sketch 14/11/2026: «datos, versión, fecha…»)

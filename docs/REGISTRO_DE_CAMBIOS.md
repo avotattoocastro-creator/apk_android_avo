@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — botón «SALIR» para cerrar la app del todo
+**Autor:** Claude · Rama `feature/ipad-salir`
+**Qué cambia:** al pie de la barra lateral, sobre los datos de versión, un botón rojo «SALIR» con confirmación. Cierra el Wi-Fi y el
+Bluetooth del reloj, detiene la cámara (si graba, espera 2,5 s a que el vídeo se cierre), guarda y cierra la app del todo
+(`App/AppModel+Quit.swift`). Boceto del entrenador del 15/11/2026.
+**Aviso:** iPadOS no tiene una forma oficial de cerrar una app y Apple lo desaconseja: en TestFlight funciona; en una revisión de la
+App Store podrían pedir quitarlo.
+**Validación:** pendiente del CI del iPad. **NO VERIFICADO** en el iPad.
+
 ## 2026-11-15 — iPad — Vídeo asociado al entrenamiento, datos impresos y recorte
 **Autor:** Claude · Rama `claude/ipad-video-datos` · **CI:** run 43698716776 (compila y pruebas unitarias OK, sin TestFlight)
 **Qué cambia (peticiones del entrenador 15/11/2026, con referencia tipo «telemetry overlay»):**
