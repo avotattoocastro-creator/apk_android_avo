@@ -700,8 +700,8 @@
   "no_assembly": false,
   "note": "AVDD",
   "jlc_rot": 0,
-  "x": -8.06,
-  "y": -5.55,
+  "x": -11.41,
+  "y": -9.11,
   "rot": 0
  },
  {
@@ -760,8 +760,8 @@
   "no_assembly": false,
   "note": "VREFP (referencia interna 2,42 V)",
   "jlc_rot": 0,
-  "x": -13.7,
-  "y": -1.86,
+  "x": -12.45,
+  "y": -2.0,
   "rot": 0
  },
  {
@@ -775,24 +775,24 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -14.3,
-  "y": -3.22,
+  "x": -15.2,
+  "y": -2.68,
   "rot": 0
  },
  {
   "ref": "C47",
-  "value": "1u C0G",
-  "footprint": "C_1206_3216Metric",
-  "lcsc": "",
-  "mpn": "",
+  "value": "1u 35V tántalo",
+  "footprint": "CP_EIA-3528-21_Kemet-B",
+  "lcsc": "C7192",
+  "mpn": "TAJB105K035RNJ (Kyocera AVX)",
   "block": "ECG",
   "dnp": false,
   "no_assembly": false,
-  "note": "VCAP1: C0G (no ferroeléctrico) por la vibración del galope; código LCSC pendiente (ver out_stock)",
+  "note": "VCAP1 de tántalo (no ferroeléctrico, como pide TI si hay vibración); + al pin 11",
   "jlc_rot": 0,
-  "x": -9.71,
-  "y": -2.87,
-  "rot": 0
+  "x": -8.06,
+  "y": -4.0,
+  "rot": 90
  },
  {
   "ref": "C48",
@@ -812,31 +812,31 @@
  {
   "ref": "C49",
   "value": "4n7 C0G",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C53987",
+  "footprint": "C_0603_1608Metric",
+  "lcsc": "C85980",
   "mpn": "",
   "block": "ECG",
   "dnp": false,
   "no_assembly": false,
-  "note": "CFILTER del canal 2 (ECG)",
+  "note": "CFILTER del canal 2 (ECG), GRM1885C1H472JA01D",
   "jlc_rot": 0,
-  "x": -15.77,
-  "y": 0.9,
+  "x": -16.01,
+  "y": 0.8,
   "rot": 90
  },
  {
   "ref": "C50",
   "value": "4n7 C0G",
-  "footprint": "C_0402_1005Metric",
-  "lcsc": "C53987",
+  "footprint": "C_0603_1608Metric",
+  "lcsc": "C85980",
   "mpn": "",
   "block": "ECG",
   "dnp": false,
   "no_assembly": false,
   "note": "CFILTER del canal 1 (apagado)",
   "jlc_rot": 0,
-  "x": -15.77,
-  "y": 3.3,
+  "x": -16.03,
+  "y": 4.34,
   "rot": 90
  },
  {
@@ -850,9 +850,9 @@
   "no_assembly": false,
   "note": "serie del electrodo + (EMI, ESD)",
   "jlc_rot": 0,
-  "x": -16.85,
-  "y": 2.94,
-  "rot": 90
+  "x": -18.01,
+  "y": 4.24,
+  "rot": 0
  },
  {
   "ref": "R41",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.7,
-  "y": 5.21,
+  "x": -13.17,
+  "y": -3.42,
   "rot": 0
  },
  {
@@ -895,8 +895,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -17.74,
-  "y": 4.53,
+  "x": -13.56,
+  "y": 6.31,
   "rot": 0
  },
  {
@@ -910,9 +910,9 @@
   "no_assembly": false,
   "note": "filtro diferencial opcional (sin montar)",
   "jlc_rot": 0,
-  "x": -16.84,
-  "y": 0.9,
-  "rot": 90
+  "x": -15.11,
+  "y": -1.52,
+  "rot": 0
  },
  {
   "ref": "R42",
@@ -933,12 +933,12 @@
   "ref": "C55",
   "value": "1n5 C0G",
   "footprint": "C_0402_1005Metric",
-  "lcsc": "",
+  "lcsc": "C668348",
   "mpn": "",
   "block": "ECG",
   "dnp": false,
   "no_assembly": false,
-  "note": "realimentación del RLD (código LCSC pendiente)",
+  "note": "realimentación del RLD, GRM1555C1H152JA01D",
   "jlc_rot": 0,
   "x": -13.72,
   "y": 5.16,
@@ -955,8 +955,8 @@
   "no_assembly": false,
   "note": "RLD al electrodo de referencia (limita la corriente)",
   "jlc_rot": 0,
-  "x": -16.33,
-  "y": -0.79,
+  "x": -18.5,
+  "y": -4.4,
   "rot": 0
  },
  {
@@ -970,9 +970,9 @@
   "no_assembly": false,
   "note": "PWDN/RESET alto (GPIO4 lo baja para reiniciar o apagar)",
   "jlc_rot": 0,
-  "x": -7.6,
-  "y": -0.26,
-  "rot": 90
+  "x": -11.2,
+  "y": -3.45,
+  "rot": 0
  },
  {
   "ref": "R45",
@@ -986,7 +986,7 @@
   "note": "START bajo: la conversión arranca por orden SPI o por GPIO21",
   "jlc_rot": 0,
   "x": -7.6,
-  "y": 1.84,
+  "y": -0.26,
   "rot": 90
  },
  {
@@ -1000,8 +1000,8 @@
   "no_assembly": false,
   "note": "CLK sin usar (reloj interno)",
   "jlc_rot": 0,
-  "x": -6.34,
-  "y": 0.4,
+  "x": -7.76,
+  "y": 1.93,
   "rot": 90
  },
  {

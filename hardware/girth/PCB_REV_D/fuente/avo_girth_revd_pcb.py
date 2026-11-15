@@ -117,6 +117,7 @@ FP = {
     "SOD323": load("D_SOD-323.kicad_mod", M3 + "Diode_SMD.3dshapes/D_SOD-323.step", 1.1),
     "XTAL3215": load("Crystal_SMD_3215-2Pin_3.2x1.5mm.kicad_mod",
                      M3 + "Crystal.3dshapes/Crystal_SMD_3215-2Pin_3.2x1.5mm.step", 0.9),
+    "TANT_B": load("CP_EIA-3528-21_Kemet-B.kicad_mod", M3 + "Capacitor_Tantalum_SMD.3dshapes/CP_EIA-3528-21_Kemet-B.step", 2.1),
     "MINI1U": C6,
     "LGA14": lga14_st(),
     "MMC": mmc5983ma(),
@@ -152,7 +153,7 @@ LC = {
     "1n C0G": "C53547", "100n C0G": "C97946",
     "NTC10k": "C77131", "USBLC6": "C7519", "LED": "C2286", "PTC": "C20802", "TVS": "C2827694",
     "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C20627095",
-    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C544416", "2k": "C4109", "4n7 C0G": "C53987",
+    "LSM6DSV16X": "C5267406", "MMC5983MA": "C404329", "ADS1292": "C544416", "2k": "C4109", "4n7 C0G": "C85980", "1n5 C0G": "C668348", "1u TANT": "C7192",
 }
 
 
@@ -312,18 +313,19 @@ C("C43", "100n", V3, GND, block="ECG", note="DVDD (pin 23)")
 C("C44", "10u", V3, GND, block="ECG", fp="C0603", note="DVDD")
 C("C45", "10u", "ECG_VREFP", GND, block="ECG", fp="C0603", note="VREFP (referencia interna 2,42 V)")
 C("C46", "100n", "ECG_VREFP", GND, block="ECG")
-C("C47", "1u C0G", "ECG_VCAP1", GND, block="ECG", fp="C1206", lcsc="",
-  note="VCAP1: C0G (no ferroeléctrico) por la vibración del galope; código LCSC pendiente (ver out_stock)")
+part("C47", "TANT_B", "1u 35V tántalo", (0, 0), 0, {1: "ECG_VCAP1", 2: GND}, LC["1u TANT"], "TAJB105K035RNJ (Kyocera AVX)",
+     "ECG", sym=dict(L=[(1, "+")], R=[(2, "−")]),
+     note="VCAP1 de tántalo (no ferroeléctrico, como pide TI si hay vibración); + al pin 11")
 C("C48", "1u", "ECG_VCAP2", GND, block="ECG", note="VCAP2")
-C("C49", "4n7 C0G", "ECG_PGA2P", "ECG_PGA2N", block="ECG", note="CFILTER del canal 2 (ECG)")
-C("C50", "4n7 C0G", "ECG_PGA1P", "ECG_PGA1N", block="ECG", note="CFILTER del canal 1 (apagado)")
+C("C49", "4n7 C0G", "ECG_PGA2P", "ECG_PGA2N", block="ECG", fp="C0603", note="CFILTER del canal 2 (ECG), GRM1885C1H472JA01D")
+C("C50", "4n7 C0G", "ECG_PGA1P", "ECG_PGA1N", block="ECG", fp="C0603", note="CFILTER del canal 1 (apagado)")
 R("R40", "47k", "ECG_E_P", "ECGP", block="ECG", note="serie del electrodo + (EMI, ESD)")
 R("R41", "47k", "ECG_E_N", "ECGN", block="ECG", note="serie del electrodo −")
 C("C52", "1n C0G", "ECGP", GND, block="ECG")
 C("C53", "1n C0G", "ECGN", GND, block="ECG")
 C("C54", "1n C0G", "ECGP", "ECGN", block="ECG", dnp=True, note="filtro diferencial opcional (sin montar)")
 R("R42", "1M", "ECG_RLDOUT", "ECG_RLDINV", block="ECG", note="realimentación del RLD")
-C("C55", "1n5 C0G", "ECG_RLDOUT", "ECG_RLDINV", block="ECG", lcsc="", note="realimentación del RLD (código LCSC pendiente)")
+C("C55", "1n5 C0G", "ECG_RLDOUT", "ECG_RLDINV", block="ECG", note="realimentación del RLD, GRM1555C1H152JA01D")
 R("R43", "100k", "ECG_RLDOUT", "ECG_E_REF", block="ECG", note="RLD al electrodo de referencia (limita la corriente)")
 R("R44", "10k", "ECG_RESET", V3, block="ECG", note="PWDN/RESET alto (GPIO4 lo baja para reiniciar o apagar)")
 R("R45", "10k", "ECG_START", GND, block="ECG", note="START bajo: la conversión arranca por orden SPI o por GPIO21")
