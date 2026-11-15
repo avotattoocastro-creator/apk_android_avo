@@ -1,4 +1,4 @@
-name: Build AVO GIRTH V0.6.x (cincha PCB REV D: ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292 ECG)
+name: "Build AVO GIRTH V0.6.x (cincha PCB REV D, ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292 ECG)"
 
 on:
   workflow_dispatch:
