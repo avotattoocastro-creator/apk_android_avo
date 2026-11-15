@@ -353,7 +353,12 @@ for p in PARTS:
         x, y, r = POS[p["ref"]]
         p["pos"], p["rot"] = (x, y), r
 MECH = [p for p in PARTS if p["fp"] == "HOLE"]
-KEEPOUT_RECTS = [("ESCAPE_U6_SPI", -9.9, -1.4, -8.3, 5.0)]   # salida de los pines SPI del ADS1292 (vías)
+# anillo libre de 1 mm alrededor del ADS1292 (QFN de paso 0,4): sitio para las salidas y las vías de todos sus pines
+_U6 = (-12.4, 1.8); _r0, _r1 = 2.7, 3.7
+KEEPOUT_RECTS = [("U6_N", _U6[0] - _r1, _U6[1] + _r0, _U6[0] + _r1, _U6[1] + _r1),
+                 ("U6_S", _U6[0] - _r1, _U6[1] - _r1, _U6[0] + _r1, _U6[1] - _r0),
+                 ("U6_W", _U6[0] - _r1, _U6[1] - _r1, _U6[0] - _r0, _U6[1] + _r1),
+                 ("U6_E", _U6[0] + _r0, _U6[1] - _r1, _U6[0] + _r1 + 0.8, _U6[1] + _r1)]
 
 # =============================================================================== redes
 NETS = []

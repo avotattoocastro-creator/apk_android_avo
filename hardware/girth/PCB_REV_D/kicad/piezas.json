@@ -686,7 +686,7 @@
   "note": "entrada del AVDD",
   "jlc_rot": 0,
   "x": -14.72,
-  "y": -5.35,
+  "y": -5.75,
   "rot": 90
  },
  {
@@ -715,9 +715,9 @@
   "no_assembly": false,
   "note": "AVDD (pin 12)",
   "jlc_rot": 0,
-  "x": -16.36,
-  "y": -4.13,
-  "rot": 0
+  "x": -16.77,
+  "y": -4.57,
+  "rot": 90
  },
  {
   "ref": "C43",
@@ -730,8 +730,8 @@
   "no_assembly": false,
   "note": "DVDD (pin 23)",
   "jlc_rot": 0,
-  "x": -7.58,
-  "y": 3.97,
+  "x": -7.36,
+  "y": 3.98,
   "rot": 90
  },
  {
@@ -745,9 +745,9 @@
   "no_assembly": false,
   "note": "DVDD",
   "jlc_rot": 0,
-  "x": -8.4,
-  "y": 5.83,
-  "rot": 0
+  "x": -5.74,
+  "y": 3.0,
+  "rot": 90
  },
  {
   "ref": "C45",
@@ -760,8 +760,8 @@
   "no_assembly": false,
   "note": "VREFP (referencia interna 2,42 V)",
   "jlc_rot": 0,
-  "x": -12.45,
-  "y": -2.0,
+  "x": -12.09,
+  "y": -2.96,
   "rot": 0
  },
  {
@@ -775,8 +775,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.2,
-  "y": -2.68,
+  "x": -15.13,
+  "y": -4.03,
   "rot": 0
  },
  {
@@ -790,8 +790,8 @@
   "no_assembly": false,
   "note": "VCAP1 de tántalo (no ferroeléctrico, como pide TI si hay vibración); + al pin 11",
   "jlc_rot": 0,
-  "x": -8.06,
-  "y": -4.0,
+  "x": -8.08,
+  "y": -4.65,
   "rot": 90
  },
  {
@@ -805,8 +805,8 @@
   "no_assembly": false,
   "note": "VCAP2",
   "jlc_rot": 0,
-  "x": -11.45,
-  "y": 6.23,
+  "x": -8.74,
+  "y": 6.11,
   "rot": 0
  },
  {
@@ -820,9 +820,9 @@
   "no_assembly": false,
   "note": "CFILTER del canal 2 (ECG), GRM1885C1H472JA01D",
   "jlc_rot": 0,
-  "x": -16.01,
-  "y": 0.8,
-  "rot": 90
+  "x": -15.26,
+  "y": -2.7,
+  "rot": 0
  },
  {
   "ref": "C50",
@@ -835,9 +835,9 @@
   "no_assembly": false,
   "note": "CFILTER del canal 1 (apagado)",
   "jlc_rot": 0,
-  "x": -16.03,
-  "y": 4.34,
-  "rot": 90
+  "x": -13.62,
+  "y": 6.3,
+  "rot": 0
  },
  {
   "ref": "R40",
@@ -850,9 +850,9 @@
   "no_assembly": false,
   "note": "serie del electrodo + (EMI, ESD)",
   "jlc_rot": 0,
-  "x": -18.01,
-  "y": 4.24,
-  "rot": 0
+  "x": -16.8,
+  "y": 2.54,
+  "rot": 90
  },
  {
   "ref": "R41",
@@ -865,9 +865,9 @@
   "no_assembly": false,
   "note": "serie del electrodo −",
   "jlc_rot": 0,
-  "x": -16.8,
-  "y": -2.54,
-  "rot": 90
+  "x": -18.6,
+  "y": -4.34,
+  "rot": 0
  },
  {
   "ref": "C52",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.17,
-  "y": -3.42,
+  "x": -17.24,
+  "y": 5.35,
   "rot": 0
  },
  {
@@ -895,8 +895,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.56,
-  "y": 6.31,
+  "x": -16.28,
+  "y": 6.47,
   "rot": 0
  },
  {
@@ -910,9 +910,9 @@
   "no_assembly": false,
   "note": "filtro diferencial opcional (sin montar)",
   "jlc_rot": 0,
-  "x": -15.11,
-  "y": -1.52,
-  "rot": 0
+  "x": -16.76,
+  "y": 0.51,
+  "rot": 90
  },
  {
   "ref": "R42",
@@ -925,8 +925,8 @@
   "no_assembly": false,
   "note": "realimentación del RLD",
   "jlc_rot": 0,
-  "x": -11.65,
-  "y": 5.15,
+  "x": -10.81,
+  "y": 6.06,
   "rot": 0
  },
  {
@@ -940,8 +940,8 @@
   "no_assembly": false,
   "note": "realimentación del RLD, GRM1555C1H152JA01D",
   "jlc_rot": 0,
-  "x": -13.72,
-  "y": 5.16,
+  "x": -10.79,
+  "y": 7.17,
   "rot": 0
  },
  {
@@ -955,8 +955,8 @@
   "no_assembly": false,
   "note": "RLD al electrodo de referencia (limita la corriente)",
   "jlc_rot": 0,
-  "x": -18.5,
-  "y": -4.4,
+  "x": -17.51,
+  "y": 4.26,
   "rot": 0
  },
  {
@@ -970,9 +970,9 @@
   "no_assembly": false,
   "note": "PWDN/RESET alto (GPIO4 lo baja para reiniciar o apagar)",
   "jlc_rot": 0,
-  "x": -11.2,
-  "y": -3.45,
-  "rot": 0
+  "x": -7.2,
+  "y": -0.26,
+  "rot": 90
  },
  {
   "ref": "R45",
@@ -985,8 +985,8 @@
   "no_assembly": false,
   "note": "START bajo: la conversión arranca por orden SPI o por GPIO21",
   "jlc_rot": 0,
-  "x": -7.6,
-  "y": -0.26,
+  "x": -7.14,
+  "y": 1.85,
   "rot": 90
  },
  {
@@ -1000,8 +1000,8 @@
   "no_assembly": false,
   "note": "CLK sin usar (reloj interno)",
   "jlc_rot": 0,
-  "x": -7.76,
-  "y": 1.93,
+  "x": -5.94,
+  "y": 0.4,
   "rot": 90
  },
  {
