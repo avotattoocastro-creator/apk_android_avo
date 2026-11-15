@@ -1,0 +1,391 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 2,
+   "list": [
+    {
+     "componentId": 7665,
+     "componentLibraryType": "expand",
+     "stockCount": 26712,
+     "componentTypeEn": "Tantalum Capacitors",
+     "erpComponentName": "1uF \u00b110% 35V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/tantalum-capacitors_kyocera-avx-tajb105k035rnj_C7192.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 19,
+       "productPrice": 0.2898
+      },
+      {
+       "startNumber": 20,
+       "endNumber": 59,
+       "productPrice": 0.2443
+      },
+      {
+       "startNumber": 60,
+       "endNumber": 199,
+       "productPrice": 0.225
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 999,
+       "productPrice": 0.2006
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 0.1898
+      },
+      {
+       "startNumber": 2000,
+       "endNumber": -1,
+       "productPrice": 0.1604
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 2000,
+       "endNumber": -1,
+       "productPrice": 0.1545
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 1999,
+       "productPrice": 0.1829
+      },
+      {
+       "startNumber": 60,
+       "endNumber": 199,
+       "productPrice": 0.2168
+      },
+      {
+       "startNumber": 20,
+       "endNumber": 59,
+       "productPrice": 0.2354
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 19,
+       "productPrice": 0.2792
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 999,
+       "productPrice": 0.1933
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "b5a2231489834fa8bf02058a569b450b",
+     "canPresaleNumber": 25676,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "-TAJB105K035RNJ/C7192",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.55025,
+     "preMinPurchaseNum": 37,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.2898,
+     "componentCode": "C7192",
+     "componentBrandEn": "--",
+     "componentModelEn": "TAJB105K035RNJ",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553231608322158592-C7192-front.jpg?x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d895c1159cb6c3364c15478ce5e2ff6c1a230ec973066680d5da772b9ad53817",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2409302033_Kyocera-AVX-TAJB105K035RNJ_C7192.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8579713921189797888-C7192.pdf?response-content-disposition=attachment%3B%20filename%3DC7192.pdf%3B%20filename%2A%3DUTF-8%27%27C7192.pdf&x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=859eb6212e25db91dbcd4d6218317425f4ba83dd8cb57bcbf6b4b2b28f8aeef8",
+     "dataManualOfficialLink": "",
+     "componentName": "TAJB105K035RNJ",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553231608971735040-C7192-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3b851838f15d6e30acd1d3292fc7cefbe3fad910f83689fd7c3d90071d0e320e",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "CASE-B-3528-21(mm)",
+     "describe": "-55\u2103~+125\u2103 1uF 35V 6.5\u03a9@100kHz \u00b110% CASE-B-3528-21(mm) Tantalum Capacitors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Equivalent Series Resistance(ESR)",
+       "attribute_value_name": "6.5\u03a9@100kHz"
+      },
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "35V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b110%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "1uF"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Tantalum Capacitors",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C7192</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5853544,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SIM Card Connectors",
+     "erpComponentName": "\u81ea\u5f39\u5f0f \u5361\u5ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/sim card connectors_mup_mup-c719-2_C5185261.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.8099
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.661
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.5874
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.5138
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 899,
+       "productPrice": 0.4483
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 0.4254
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.5659
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.7802
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.4949
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 899,
+       "productPrice": 0.4319
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.6368
+      },
+      {
+       "startNumber": 900,
+       "endNumber": -1,
+       "productPrice": 0.4098
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "fdf3ccf2c9444ffbbd395a2d49e3b99f",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "MUP-MUP_C7192/C5185261",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 900,
+     "shopCostPrice": 2.1,
+     "preMinPurchaseNum": 14,
+     "minPurchaseNum": 14,
+     "initialPrice": 0.661,
+     "componentCode": "C5185261",
+     "componentBrandEn": "MUP",
+     "componentModelEn": "MUP-C719-2",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583713586455982080-C5185261/C5185261-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3f86640c2c4d75abcd8eb7a6315906d3ade745aba5250e57c7871b9b16039ef1",
+     "dataManualUrl": "https://datasheet.lcsc.com/lcsc/2210171800_MUP-MUP-C719-2_C5185261.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589838427249143808-C5185261.pdf?response-content-disposition=attachment%3B%20filename%3DC5185261.pdf%3B%20filename%2A%3DUTF-8%27%27C5185261.pdf&x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9c366a12be224182d2b4f66edbb368c6ade28d5b9cad5e3d573e1af82a160fd7",
+     "dataManualOfficialLink": "",
+     "componentName": "MUP MUP-C719-2",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583713587324203008-C5185261/C5185261-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T091120Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0130b0ddce89881abb63482ee748b746eaf6134a64f1fb74491009966962cb09",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD",
+     "describe": "-40\u2103~+85\u2103 Connector and Ejector Push-Push SMD SIM Card Connectors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Connector Type",
+       "attribute_value_name": "Connector and Ejector"
+      },
+      {
+       "attribute_name_en": "Card Connection Mode",
+       "attribute_value_name": "Push-Push"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "SIM Card Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C7192"
+ },
+ "message": null
+}
