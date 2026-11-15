@@ -24,6 +24,42 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha — montaje del sistema en la cincha: cápsula REV 6, soporte, funda de piel y electrodos ECG (CAD)
+**Autor:** Claude · Rama `feature/cincha-cad-montaje` · **CI:** no aplica (no hay workflow para esta carpeta)
+**Qué cambia:** nueva carpeta `hardware/girth/CINCHA_MONTAJE/` (petición del usuario: «todo el sistema montado en una cincha,
+en STEP, con funda de piel»):
+- **STEP del conjunto completo**, curvado sobre un tórax de 188 cm de perímetro y en versión recta (87 sólidos):
+  - cincha tipo Decathlon Fouganza de 110 cm, con elásticos, hebillas de rodillo de 25 mm y anilla D;
+  - funda de piel con bolsillo;
+  - soporte con 2 conectores pogo de pines;
+  - cápsula REV 6, con PCB REV D, celda 603450, antena Molex 146153 y tornillería M2 inox;
+  - 2 electrodos Vialta PG980/51 (60 × 85) + REF opcional, con espuma EVA, y cables.
+- STEP por pieza, incluida una cincha anatómica tipo Horze (recta y curvada).
+- **Piezas impresas** (STL):
+  - base, tapa y soporte de PETG; junta y separador de TPU 85A;
+  - cápsula de 59,4 × 54,5 × 14,7 mm, con la PCB colgada de la tapa sobre la celda;
+  - 6 M2 × 8 en insertos térmicos.
+- **Patrón plano de la funda** (DXF R12 + SVG 1:1, con capas de corte, pliegue, costura cada 4 mm, rebaje y taladros).
+- Renders de comprobación y `DOCS/MONTAJE_CINCHA.md`: fuentes, BOM (≈ 190 €), impresión, montaje paso a paso y notas de la piel.
+- Scripts reproducibles en `fuente/`: núcleo CAD propio `avo_cad.py` (numpy + OpenCV; en el entorno no había CadQuery/OCP ni
+  FreeCAD), `avo_cincha_montaje.py`, `patron_funda.py`, `render.py` y `verificar_step.py`.
+**Por qué:** petición del usuario con fotos de referencia (Decathlon Fouganza 14,50 €, Horze 110 cm 79,95 €). Electrodos
+Vialta PG980/51 elegidos por el usuario. La lámina POTUBI con broche de 4 mm queda documentada como alternativa.
+**No se ha tocado:** firmware, apps, PCB REV D (solo se copió su `piezas.json`), workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: 21/21 STEP con referencias completas, sólidos cerrados (0 aristas mal cosidas) y vértices en su plano.
+- **NO VERIFICADO:**
+  - los STEP no se han abierto en FreeCAD/SolidWorks;
+  - no hay cálculo automático de interferencias;
+  - nada impreso ni cosido;
+  - nada probado en un caballo.
+**Pendiente:**
+- medir la cincha real (ancho y grueso estimados) y el electrodo Vialta (grosor y salida del cable estimados);
+- imprimir una base y un soporte de prueba;
+- prueba de inmersión de la cápsula;
+- RSSI con la antena dentro;
+- ECG en reposo.
+
 ## 2026-11-15 — iPad — botón «SALIR» para cerrar la app del todo
 **Autor:** Claude · Rama `feature/ipad-salir`
 **Qué cambia:** al pie de la barra lateral, sobre los datos de versión, un botón rojo «SALIR» con confirmación. Cierra el Wi-Fi y el
