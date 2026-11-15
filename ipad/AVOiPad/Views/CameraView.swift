@@ -34,7 +34,8 @@ struct CameraView: View {
             // la escena gira un poco después del aviso del dispositivo
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { m.updateRotation() }
         }
-        .sheet(item: Binding(get: { m.playing }, set: { m.playing = $0 })) { (c: CameraClip) in
+        // reproductor a pantalla completa (boceto del entrenador 15/11/2026)
+        .fullScreenCover(item: Binding(get: { m.playing }, set: { m.playing = $0 })) { (c: CameraClip) in
             CameraClipPlayer(clip: c).avoColorScheme()
         }
         .alert("¿Borrar el vídeo?",
@@ -380,15 +381,16 @@ struct CameraClipPlayer: View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(clip.name).font(.headline).foregroundStyle(Avo.text)
-                    Text(sourceText).font(.caption).foregroundStyle(Avo.textDim)
+                    Text(clip.name).font(.headline).foregroundStyle(.white).lineLimit(1)
+                    Text(sourceText).font(.caption).foregroundStyle(Color.white.opacity(0.7)).lineLimit(2)
                 }
                 Spacer()
-                Text(clock).font(.system(.title3, design: .monospaced).weight(.semibold)).foregroundStyle(Avo.text)
+                Text(clock).font(.system(.title3, design: .monospaced).weight(.semibold)).foregroundStyle(.white)
                 Button("Cerrar") { player.pause(); dismiss() }.buttonStyle(.avoSecondary)
             }
             VideoPlayer(player: player)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
             if let s = clip.sync, !s.marks.isEmpty {
                 ScrollView(.horizontal) {
                     HStack(spacing: 8) {
@@ -405,8 +407,8 @@ struct CameraClipPlayer: View {
                 }
             }
         }
-        .padding(16)
-        .background(Avo.bg)
+        .padding(.horizontal, 12).padding(.vertical, 8)
+        .background(Color.black.ignoresSafeArea())
         .task {
             while !Task.isCancelled {
                 if let s = clip.sync {

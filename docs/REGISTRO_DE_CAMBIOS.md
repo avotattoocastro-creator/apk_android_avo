@@ -35,6 +35,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
   - Se cierra con la ✕ o con el mismo botón.
   - La app recuerda si estaba abierto o cerrado.
 - **REC:** el contador pasa arriba, al centro, y durante la grabación hay un marco rojo.
+- **Reproductor:** se abre a pantalla completa, con fondo negro.
 **No se ha tocado:** grabación, AVO SYNC, archivos, Info.plist, workflows ni el número de build.
 **Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
 
