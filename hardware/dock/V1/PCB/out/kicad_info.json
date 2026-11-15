@@ -1,0 +1,48 @@
+{
+ "zones": [
+  {
+   "net": "GND",
+   "layer": "In1.Cu",
+   "filled_area_mm2": 8236.1
+  },
+  {
+   "net": "GND",
+   "layer": "B.Cu",
+   "filled_area_mm2": 8236.1
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  },
+  {
+   "net": "",
+   "layer": "F.Cu",
+   "filled_area_mm2": 0.0
+  }
+ ],
+ "footprints": 161,
+ "tracks": 121,
+ "vias": 111,
+ "unconnected": 254
+}

@@ -1,0 +1,313 @@
+# AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de diagnóstico
+
+- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
+- Commit: `e513b99bf69fe0cddb1362595784840dad404d8e` · ejecución de CI: 43769163241
+- Ruteado: SIN RUTEAR (Freerouting no entregó resultado)
+- Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
+- Componentes: 157 en total, 128 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
+- Pistas: 121 · vías: 111 · ruteado INCOMPLETO (254 conexiones)
+
+## Comprobaciones bloqueantes
+| Comprobación | Resultado | Cantidad |
+|---|---|---|
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 254 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
+| ERC: errores | correcto | 0 |
+| ERC: advertencias | correcto | 0 |
+
+
+### Conexiones incompletas
+- Pad 1 [+3V3] of C44 on F.Cu ↔ Pad 5 [+3V3] of U14 on F.Cu
+- Pad 5 [+3V3] of U14 on F.Cu ↔ Pad 1 [+3V3] of C45 on F.Cu
+- Pad 5 [+3V3] of U15 on F.Cu ↔ Pad 1 [+3V3] of C45 on F.Cu
+- Pad 5 [+3V3] of U15 on F.Cu ↔ Pad 1 [+3V3] of C46 on F.Cu
+- Pad 1 [+3V3] of C7 on F.Cu ↔ Pad 1 [+3V3] of C8 on F.Cu
+- Pad 1 [+3V3] of C7 on F.Cu ↔ Pad 2 [+3V3] of U2 on F.Cu
+- Pad 2 [+3V3] of U2 on F.Cu ↔ Pad 4 [+3V3] of U2 on F.Cu
+- Pad 1 [+3V3] of TP6 on F.Cu ↔ Pad 2 [+3V3] of U2 on F.Cu
+- Pad 1 [+3V3] of TP6 on F.Cu ↔ Pad 1 [+3V3] of C21 on F.Cu
+- Pad 1 [+3V3] of C46 on F.Cu ↔ Pad 5 [+3V3] of U16 on F.Cu
+- Pad 2 [+3V3] of R30 on F.Cu ↔ Pad 5 [+3V3] of U16 on F.Cu
+- Pad 2 [+3V3] of R25 on F.Cu ↔ Pad 1 [+3V3] of C20 on F.Cu
+- Pad 2 [+3V3] of R32 on F.Cu ↔ Pad 2 [+3V3] of R30 on F.Cu
+- Pad 2 [+3V3] of R24 on F.Cu ↔ Pad 1 [+3V3] of C23 on F.Cu
+- Pad 2 [+3V3] of R24 on F.Cu ↔ Pad 2 [+3V3] of R25 on F.Cu
+- Pad 1 [+3V3] of C23 on F.Cu ↔ Pad 36 [+3V3] of U6 on F.Cu
+- Pad 1 [+3V3] of C23 on F.Cu ↔ Pad 2 [+3V3] of R32 on F.Cu
+- Pad 1 [+3V3] of C21 on F.Cu ↔ Pad 10 [+3V3] of U6 on F.Cu
+- Pad 5 [+3V3] of U6 on F.Cu ↔ Pad 1 [+3V3] of C20 on F.Cu
+- Pad 8 [+3V3] of U6 on F.Cu ↔ Pad 5 [+3V3] of U6 on F.Cu
+- Pad 9 [+3V3] of U6 on F.Cu ↔ Pad 8 [+3V3] of U6 on F.Cu
+- Pad 9 [+3V3] of U6 on F.Cu ↔ Pad 10 [+3V3] of U6 on F.Cu
+- Pad 10 [+3V3] of U6 on F.Cu ↔ Pad 15 [+3V3] of U6 on F.Cu
+- Pad 5 [+3V3] of U17 on F.Cu ↔ Pad 1 [+3V3] of C47 on F.Cu
+- Pad 5 [+3V3] of U17 on F.Cu ↔ Pad 2 [+3V3] of R62 on F.Cu
+- Pad 1 [+3V3] of C24 on F.Cu ↔ Pad 15 [+3V3] of U6 on F.Cu
+- Pad 2 [+3V3] of R62 on F.Cu ↔ Pad 2 [+3V3] of R31 on F.Cu
+- Pad 29 [+3V3] of U6 on F.Cu ↔ Pad 23 [+3V3] of U6 on F.Cu
+- Pad 29 [+3V3] of U6 on F.Cu ↔ Pad 36 [+3V3] of U6 on F.Cu
+- Pad 1 [+3V3] of C22 on F.Cu ↔ Pad 29 [+3V3] of U6 on F.Cu
+- Pad 1 [+3V3] of C22 on F.Cu ↔ Pad 2 [+3V3] of R14 on F.Cu
+- Pad 2 [+3V3] of R63 on F.Cu ↔ Pad 2 [+3V3] of R62 on F.Cu
+- Pad 2 [+3V3] of R63 on F.Cu ↔ Pad 2 [+3V3] of R14 on F.Cu
+- Pad 2 [+3V3] of R63 on F.Cu ↔ Pad 1 [+3V3] of C26 on F.Cu
+- Pad 1 [+3V3] of C15 on F.Cu ↔ Pad 1 [+3V3] of C47 on F.Cu
+- Pad 2 [+3V3] of R14 on F.Cu ↔ Pad 2 [+3V3] of R26 on F.Cu
+- Pad 1 [+3V3] of C25 on F.Cu ↔ Pad 23 [+3V3] of U6 on F.Cu
+- Pad 2 [+3V3] of J4 on F.Cu ↔ Pad 1 [+3V3] of C15 on F.Cu
+- Pad 1 [+3V3] of C26 on F.Cu ↔ Pad 10 [+3V3] of U5 on F.Cu
+- Pad 1 [+3V3] of C10 on F.Cu ↔ Pad 1 [+3V3] of C9 on F.Cu
+- Pad 1 [+3V3] of C11 on F.Cu ↔ Pad 1 [+3V3] of C9 on F.Cu
+- Pad 1 [+3V3] of C11 on F.Cu ↔ Pad 2 [+3V3] of J4 on F.Cu
+- Pad 1 [+3V3] of C14 on F.Cu ↔ Pad 10 [+3V3] of U5 on F.Cu
+- Pad 1 [+3V3] of C14 on F.Cu ↔ Pad 10 [+3V3] of U4 on F.Cu
+- Pad 3 [+3V3] of U3 on F.Cu ↔ Pad 1 [+3V3] of C9 on F.Cu
+- Pad 1 [+3V3] of C13 on F.Cu ↔ Pad 10 [+3V3] of U4 on F.Cu
+- PTH pad 4 [+5V_RED] of PS1 ↔ Pad 1 [+5V_RED] of C2 on F.Cu
+- Pad 1 [+5V_RED] of C2 on F.Cu ↔ Pad 1 [+5V_RED] of TP8 on F.Cu
+- Pad 1 [+5V_RED] of C2 on F.Cu ↔ Pad 1 [+5V_RED] of C1 on F.Cu
+- Pad 1 [+5V_RED] of TP8 on F.Cu ↔ Pad 1 [+5V_RED] of R7 on F.Cu
+- Pad 3 [+5V_RED] of Q1 on F.Cu ↔ Pad 1 [+5V_RED] of C1 on F.Cu
+- Pad 3 [+5V_RED] of Q1 on F.Cu ↔ Pad 1 [+5V_RED] of R11 on F.Cu
+- Pad 3 [+5V_RED] of Q1B on F.Cu ↔ Pad 3 [+5V_RED] of Q1 on F.Cu
+- Pad 1 [+5V_RED] of R11 on F.Cu ↔ Pad 1 [+5V_RED] of R1 on F.Cu
+- Pad 1 [+5V_SYS] of C40 on F.Cu ↔ Pad 1 [+5V_SYS] of U10 on F.Cu
+- Pad 1 [+5V_SYS] of C41 on F.Cu ↔ Pad 1 [+5V_SYS] of U11 on F.Cu
+- Pad 1 [+5V_SYS] of C41 on F.Cu ↔ Pad 1 [+5V_SYS] of U10 on F.Cu
+- Pad 1 [+5V_SYS] of C5 on F.Cu ↔ Pad 2 [+5V_SYS] of Q1 on F.Cu
+- Pad 2 [+5V_SYS] of Q1 on F.Cu ↔ Pad 1 [+5V_SYS] of TP7 on F.Cu
+- Pad 2 [+5V_SYS] of Q1B on F.Cu ↔ Pad 1 [+5V_SYS] of C5 on F.Cu
+- Pad 2 [+5V_SYS] of Q1B on F.Cu ↔ Pad 1 [+5V_SYS] of C4 on F.Cu
+- Pad 1 [+5V_SYS] of C4 on F.Cu ↔ Pad 2 [+5V_SYS] of Q2 on F.Cu
+- Pad 1 [+5V_SYS] of TP7 on F.Cu ↔ Pad 2 [+5V_SYS] of R8 on F.Cu
+- Pad 2 [+5V_SYS] of Q2 on F.Cu ↔ Pad 3 [+5V_SYS] of U2 on F.Cu
+- Pad 1 [+5V_SYS] of C6 on F.Cu ↔ Pad 3 [+5V_SYS] of U2 on F.Cu
+- Pad 1 [+5V_SYS] of C42 on F.Cu ↔ Pad 1 [+5V_SYS] of U11 on F.Cu
+- Pad 1 [+5V_SYS] of U12 on F.Cu ↔ Pad 1 [+5V_SYS] of C42 on F.Cu
+- Pad 1 [+5V_SYS] of U12 on F.Cu ↔ Pad 1 [+5V_SYS] of C43 on F.Cu
+- Pad 1 [+5V_SYS] of U12 on F.Cu ↔ Pad 2 [+5V_SYS] of R8 on F.Cu
+- Pad 1 [+5V_SYS] of R12 on F.Cu ↔ Pad 1 [+5V_SYS] of U13 on F.Cu
+- Pad 1 [+5V_SYS] of U13 on F.Cu ↔ Pad 1 [+5V_SYS] of C43 on F.Cu
+- Pad 59 [GND] of U3 on F.Cu ↔ Via [GND] on F.Cu - B.Cu
+- Pad 58 [GND] of U3 on F.Cu ↔ Pad 57 [GND] of U3 on F.Cu
+- Pad 58 [GND] of U3 on F.Cu ↔ Pad 59 [GND] of U3 on F.Cu
+- Pad 56 [GND] of U3 on F.Cu ↔ Pad 57 [GND] of U3 on F.Cu
+- Pad 55 [GND] of U3 on F.Cu ↔ Pad 56 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 54 [GND] of U3 on F.Cu ↔ Pad 55 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Via [GND] on F.Cu - B.Cu ↔ Pad 52 [GND] of U3 on F.Cu
+- Via [GND] on F.Cu - B.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 52 [GND] of U3 on F.Cu ↔ Pad 51 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 61 [GND] of U3 on F.Cu ↔ Pad 61 [GND] of U3 on F.Cu
+- Pad 49 [GND] of U3 on F.Cu ↔ Pad 48 [GND] of U3 on F.Cu
+- Pad 49 [GND] of U3 on F.Cu ↔ Pad 50 [GND] of U3 on F.Cu
+- Pad 48 [GND] of U3 on F.Cu ↔ Pad 47 [GND] of U3 on F.Cu
+- Pad 47 [GND] of U3 on F.Cu ↔ Via [GND] on F.Cu - B.Cu
+- Pad 1 [VBUS_PC] of R27 on F.Cu ↔ Pad 3 [VBUS_PC] of Q2 on F.Cu
+- Pad 1 [VBUS_PC] of R5 on F.Cu ↔ Pad 1 [VBUS_PC] of R27 on F.Cu
+- Pad 2 [VBUS_PC] of F2 on F.Cu ↔ Pad 1 [VBUS_PC] of C3 on F.Cu
+- Pad 2 [VBUS_PC] of F2 on F.Cu ↔ Pad 1 [VBUS_PC] of TP9 on F.Cu
+- Pad 5 [VBUS_PC] of U1 on F.Cu ↔ Pad 1 [VBUS_PC] of TP9 on F.Cu
+- Pad 5 [VBUS_PC] of U1 on F.Cu ↔ Pad 1 [VBUS_PC] of R27 on F.Cu
+- Pad 1 [ACG] of Q1 on F.Cu ↔ Pad 1 [ACG] of Q1B on F.Cu
+- Pad 3 [ACG] of Q3 on F.Cu ↔ Pad 1 [ACG] of Q1 on F.Cu
+- Pad 1 [ACG] of R8 on F.Cu ↔ Pad 3 [ACG] of Q3 on F.Cu
+- Pad 2 [ACOK_SNS] of R1 on F.Cu ↔ Pad 1 [ACOK_SNS] of R2 on F.Cu
+- Pad 14 [ACOK_SNS] of U3 on F.Cu ↔ Pad 2 [ACOK_SNS] of R1 on F.Cu
+- Pad 1 [AUX_A] of R56 on F.Cu ↔ Pad 36 [AUX_A] of U3 on F.Cu
+- Pad 1 [AUX_B] of R57 on F.Cu ↔ Pad 37 [AUX_B] of U3 on F.Cu
+- Pad 1 [AUX_CA_P] of D14 on F.Cu ↔ PTH pad 1 [AUX_CA_P] of P5
+- PTH pad 1 [AUX_CA_P] of P5 ↔ Pad 2 [AUX_CA_P] of R56 on F.Cu
+- Pad 1 [AUX_CB_P] of D15 on F.Cu ↔ PTH pad 1 [AUX_CB_P] of P10
+- PTH pad 1 [AUX_CB_P] of P10 ↔ Pad 2 [AUX_CB_P] of R57 on F.Cu
+- Pad 1 [BOOT] of TP2 on F.Cu ↔ Pad 4 [BOOT] of U3 on F.Cu
+- PTH pad 1 [BTN] of P20 ↔ Pad 1 [BTN] of R32 on F.Cu
+- Pad 1 [BTN] of C16 on F.Cu ↔ Pad 1 [BTN] of R32 on F.Cu
+- Pad 30 [BTN] of U3 on F.Cu ↔ Pad 1 [BTN] of C16 on F.Cu
+- Pad 1 [CA_DM] of R53 on F.Cu ↔ Pad 1 [CA_DM] of U6 on F.Cu
+- PTH pad 1 [CA_DM_P] of P2 ↔ Pad 3 [CA_DM_P] of U18 on F.Cu
+- Pad 3 [CA_DM_P] of U18 on F.Cu ↔ Pad 2 [CA_DM_P] of R53 on F.Cu
+- Pad 4 [CA_DM_P] of U18 on F.Cu ↔ Pad 3 [CA_DM_P] of U18 on F.Cu
+- Pad 1 [CA_DP] of R52 on F.Cu ↔ Pad 2 [CA_DP] of U6 on F.Cu
+- Pad 2 [CA_DP_P] of R52 on F.Cu ↔ Pad 1 [CA_DP_P] of U18 on F.Cu
+- Pad 1 [CA_DP_P] of U18 on F.Cu ↔ Pad 6 [CA_DP_P] of U18 on F.Cu
+- Pad 6 [CA_DP_P] of U18 on F.Cu ↔ PTH pad 1 [CA_DP_P] of P3
+- Pad 1 [CB_DM] of R55 on F.Cu ↔ Pad 3 [CB_DM] of U6 on F.Cu
+- PTH pad 1 [CB_DM_P] of P7 ↔ Pad 3 [CB_DM_P] of U19 on F.Cu
+- Pad 3 [CB_DM_P] of U19 on F.Cu ↔ Pad 2 [CB_DM_P] of R55 on F.Cu
+- Pad 4 [CB_DM_P] of U19 on F.Cu ↔ Pad 3 [CB_DM_P] of U19 on F.Cu
+- Pad 1 [CB_DP] of R54 on F.Cu ↔ Pad 4 [CB_DP] of U6 on F.Cu
+- Pad 2 [CB_DP_P] of R54 on F.Cu ↔ Pad 1 [CB_DP_P] of U19 on F.Cu
+- Pad 1 [CB_DP_P] of U19 on F.Cu ↔ Pad 6 [CB_DP_P] of U19 on F.Cu
+- Pad 6 [CB_DP_P] of U19 on F.Cu ↔ PTH pad 1 [CB_DP_P] of P8
+- Pad 12 [CC1] of U3 on F.Cu ↔ Pad 1 [CC1] of R3 on F.Cu
+- Pad 1 [CC1] of R3 on F.Cu ↔ Pad A5 [CC1] of J3 on F.Cu
+- Pad 13 [CC2] of U3 on F.Cu ↔ Pad 1 [CC2] of R4 on F.Cu
+- Pad 1 [CC2] of R4 on F.Cu ↔ Pad B5 [CC2] of J3 on F.Cu
+- Pad 1 [EN] of C12 on F.Cu ↔ Pad 1 [EN] of R14 on F.Cu
+- Pad 1 [EN] of TP1 on F.Cu ↔ Pad 1 [EN] of C12 on F.Cu
+- Pad 45 [EN] of U3 on F.Cu ↔ Pad 1 [EN] of TP1 on F.Cu
+- Pad 3 [EN_CA] of U10 on F.Cu ↔ Pad 1 [EN_CA] of R44 on F.Cu
+- Pad 1 [EN_CA] of R44 on F.Cu ↔ Pad 21 [EN_CA] of U3 on F.Cu
+- Pad 1 [EN_CB] of R45 on F.Cu ↔ Pad 3 [EN_CB] of U11 on F.Cu
+- Pad 22 [EN_CB] of U3 on F.Cu ↔ Pad 1 [EN_CB] of R45 on F.Cu
+- Pad 1 [EN_GA] of R46 on F.Cu ↔ Pad 3 [EN_GA] of U12 on F.Cu
+- Pad 25 [EN_GA] of U3 on F.Cu ↔ Pad 1 [EN_GA] of R46 on F.Cu
+- Pad 3 [EN_GB] of U13 on F.Cu ↔ Pad 1 [EN_GB] of R47 on F.Cu
+- Pad 1 [EN_GB] of R47 on F.Cu ↔ Pad 27 [EN_GB] of U3 on F.Cu
+- Pad 4 [FLT_C] of U11 on F.Cu ↔ Pad 4 [FLT_C] of U10 on F.Cu
+- Pad 1 [FLT_C] of R30 on F.Cu ↔ Pad 4 [FLT_C] of U11 on F.Cu
+- Pad 1 [FLT_C] of R30 on F.Cu ↔ Pad 28 [FLT_C] of U3 on F.Cu
+- Pad 4 [FLT_G] of U13 on F.Cu ↔ Pad 4 [FLT_G] of U12 on F.Cu
+- Pad 1 [FLT_G] of R31 on F.Cu ↔ Pad 4 [FLT_G] of U13 on F.Cu
+- Pad 1 [FLT_G] of R31 on F.Cu ↔ Pad 29 [FLT_G] of U3 on F.Cu
+- Pad 1 [GA_IO_P] of D16 on F.Cu ↔ PTH pad 1 [GA_IO_P] of P13
+- PTH pad 1 [GA_IO_P] of P13 ↔ Pad 2 [GA_IO_P] of R60 on F.Cu
+- Pad 1 [GB_IO_P] of D17 on F.Cu ↔ PTH pad 1 [GB_IO_P] of P16
+- PTH pad 1 [GB_IO_P] of P16 ↔ Pad 2 [GB_IO_P] of R61 on F.Cu
+- Pad 1 [GIRTH_A_IO] of R60 on F.Cu ↔ Pad 1 [GIRTH_A_IO] of R62 on F.Cu
+- Pad 1 [GIRTH_A_IO] of R62 on F.Cu ↔ Pad 31 [GIRTH_A_IO] of U3 on F.Cu
+- Pad 1 [GIRTH_B_IO] of R61 on F.Cu ↔ Pad 1 [GIRTH_B_IO] of R63 on F.Cu
+- Pad 1 [GIRTH_B_IO] of R63 on F.Cu ↔ Pad 32 [GIRTH_B_IO] of U3 on F.Cu
+- Pad 24 [HUB_CFG0] of U6 on F.Cu ↔ Pad 1 [HUB_CFG0] of R21 on F.Cu
+- Pad 25 [HUB_CFG1] of U6 on F.Cu ↔ Pad 1 [HUB_CFG1] of R22 on F.Cu
+- Pad 1 [HUB_CRFILT] of C27 on F.Cu ↔ Pad 14 [HUB_CRFILT] of U6 on F.Cu
+- Pad 6 [HUB_DN3_DM] of U6 on F.Cu ↔ Pad 2 [HUB_DN3_DM] of U5 on F.Cu
+- Pad 7 [HUB_DN3_DP] of U6 on F.Cu ↔ Pad 1 [HUB_DN3_DP] of U5 on F.Cu
+- Pad 1 [HUB_LOCALPWR] of R24 on F.Cu ↔ Pad 28 [HUB_LOCALPWR] of U6 on F.Cu
+- Pad 22 [HUB_NONREM1] of U6 on F.Cu ↔ Pad 1 [HUB_NONREM1] of R23 on F.Cu
+- Pad 1 [HUB_OCS_N] of R25 on F.Cu ↔ Pad 13 [HUB_OCS_N] of U6 on F.Cu
+- Pad 13 [HUB_OCS_N] of U6 on F.Cu ↔ Pad 17 [HUB_OCS_N] of U6 on F.Cu
+- Pad 17 [HUB_OCS_N] of U6 on F.Cu ↔ Pad 19 [HUB_OCS_N] of U6 on F.Cu
+- Pad 19 [HUB_OCS_N] of U6 on F.Cu ↔ Pad 21 [HUB_OCS_N] of U6 on F.Cu
+- Pad 34 [HUB_PLLFILT] of U6 on F.Cu ↔ Pad 1 [HUB_PLLFILT] of C28 on F.Cu
+- Pad 1 [HUB_RBIAS] of R20 on F.Cu ↔ Pad 35 [HUB_RBIAS] of U6 on F.Cu
+- Pad 1 [HUB_RST_N] of R26 on F.Cu ↔ Pad 26 [HUB_RST_N] of U6 on F.Cu
+- Pad 1 [HUB_RST_N] of C29 on F.Cu ↔ Pad 1 [HUB_RST_N] of R26 on F.Cu
+- Pad 33 [HUB_RST_N] of U3 on F.Cu ↔ Pad 1 [HUB_RST_N] of C29 on F.Cu
+- Pad 30 [HUB_UP_DM] of U6 on F.Cu ↔ Pad 7 [HUB_UP_DM] of U4 on F.Cu
+- Pad 31 [HUB_UP_DP] of U6 on F.Cu ↔ Pad 8 [HUB_UP_DP] of U4 on F.Cu
+- Pad 1 [HUB_VBUS_DET] of R28 on F.Cu ↔ Pad 27 [HUB_VBUS_DET] of U6 on F.Cu
+- Pad 2 [HUB_VBUS_DET] of R27 on F.Cu ↔ Pad 2 [HUB_VBUS_DET] of R29 on F.Cu
+- Pad 2 [HUB_VBUS_DET] of R29 on F.Cu ↔ Pad 1 [HUB_VBUS_DET] of R28 on F.Cu
+- Pad 1 [HUB_VBUS_EN] of R29 on F.Cu ↔ Pad 34 [HUB_VBUS_EN] of U3 on F.Cu
+- Pad 1 [ILIM_CA] of R40 on F.Cu ↔ Pad 5 [ILIM_CA] of U10 on F.Cu
+- Pad 1 [ILIM_CB] of R41 on F.Cu ↔ Pad 5 [ILIM_CB] of U11 on F.Cu
+- Pad 5 [ILIM_GA] of U12 on F.Cu ↔ Pad 1 [ILIM_GA] of R42 on F.Cu
+- Pad 5 [ILIM_GB] of U13 on F.Cu ↔ Pad 1 [ILIM_GB] of R43 on F.Cu
+- Pad 1 [ISNS_CA] of U14 on F.Cu ↔ Pad 5 [ISNS_CA] of U3 on F.Cu
+- Pad 1 [ISNS_CB] of U15 on F.Cu ↔ Pad 6 [ISNS_CB] of U3 on F.Cu
+- Pad 1 [ISNS_GA] of U16 on F.Cu ↔ Pad 8 [ISNS_GA] of U3 on F.Cu
+- Pad 1 [ISNS_GB] of U17 on F.Cu ↔ Pad 9 [ISNS_GB] of U3 on F.Cu
+- Pad 8 [LCD_BL] of J4 on F.Cu ↔ Pad 20 [LCD_BL] of U3 on F.Cu
+- Pad 7 [LCD_CS] of J4 on F.Cu ↔ Pad 17 [LCD_CS] of U3 on F.Cu
+- Pad 6 [LCD_DC] of J4 on F.Cu ↔ Pad 18 [LCD_DC] of U3 on F.Cu
+- Pad 4 [LCD_MOSI] of J4 on F.Cu ↔ Pad 15 [LCD_MOSI] of U3 on F.Cu
+- Pad 5 [LCD_RST] of J4 on F.Cu ↔ Pad 19 [LCD_RST] of U3 on F.Cu
+- Pad 3 [LCD_SCK] of J4 on F.Cu ↔ Pad 16 [LCD_SCK] of U3 on F.Cu
+- Pad 2 [RED_DET] of R7 on F.Cu ↔ Pad 1 [RED_DET] of Q3 on F.Cu
+- Pad 1 [RED_DET] of Q3 on F.Cu ↔ Pad 1 [RED_DET] of R10 on F.Cu
+- Pad 4 [S3H_DM] of U5 on F.Cu ↔ Pad 4 [S3H_DM] of U4 on F.Cu
+- Pad 3 [S3H_DP] of U5 on F.Cu ↔ Pad 3 [S3H_DP] of U4 on F.Cu
+- Pad 1 [S3_DM] of R16 on F.Cu ↔ Pad 23 [S3_DM] of U3 on F.Cu
+- Pad 7 [S3_DM_R] of U5 on F.Cu ↔ Pad 2 [S3_DM_R] of R16 on F.Cu
+- Pad 1 [S3_DP] of R15 on F.Cu ↔ Pad 24 [S3_DP] of U3 on F.Cu
+- Pad 8 [S3_DP_R] of U5 on F.Cu ↔ Pad 2 [S3_DP_R] of R15 on F.Cu
+- Pad 40 [U0RX] of U3 on F.Cu ↔ Pad 1 [U0RX] of TP5 on F.Cu
+- Pad 39 [U0TX] of U3 on F.Cu ↔ Pad 1 [U0TX] of TP4 on F.Cu
+- Pad 2 [USBC_DM_C] of U4 on F.Cu ↔ Pad 3 [USBC_DM_C] of U1 on F.Cu
+- Pad 3 [USBC_DM_C] of U1 on F.Cu ↔ Pad 4 [USBC_DM_C] of U1 on F.Cu
+- Pad 4 [USBC_DM_C] of U1 on F.Cu ↔ Pad B7 [USBC_DM_C] of J3 on F.Cu
+- Pad B7 [USBC_DM_C] of J3 on F.Cu ↔ Pad A7 [USBC_DM_C] of J3 on F.Cu
+- Pad 1 [USBC_DP_C] of U4 on F.Cu ↔ Pad 1 [USBC_DP_C] of U1 on F.Cu
+- Pad 6 [USBC_DP_C] of U1 on F.Cu ↔ Pad 1 [USBC_DP_C] of U1 on F.Cu
+- Pad 6 [USBC_DP_C] of U1 on F.Cu ↔ Pad B6 [USBC_DP_C] of J3 on F.Cu
+- Pad A6 [USBC_DP_C] of J3 on F.Cu ↔ Pad B6 [USBC_DP_C] of J3 on F.Cu
+- Pad 1 [USBG] of Q2 on F.Cu ↔ Pad 2 [USBG] of R11 on F.Cu
+- Pad 2 [USBG] of R11 on F.Cu ↔ Pad 1 [USBG] of R9 on F.Cu
+- Pad 1 [USB_SEL] of R17 on F.Cu ↔ Pad 9 [USB_SEL] of U5 on F.Cu
+- Pad 9 [USB_SEL] of U5 on F.Cu ↔ Pad 35 [USB_SEL] of U3 on F.Cu
+- Pad 9 [USB_SEL] of U4 on F.Cu ↔ Pad 9 [USB_SEL] of U5 on F.Cu
+- Pad 2 [V5_SNS] of R12 on F.Cu ↔ Pad 1 [V5_SNS] of R13 on F.Cu
+- Pad 1 [V5_SNS] of R13 on F.Cu ↔ Pad 10 [V5_SNS] of U3 on F.Cu
+- Pad 11 [VBUSC_SNS] of U3 on F.Cu ↔ Pad 1 [VBUSC_SNS] of R6 on F.Cu
+- Pad 2 [VBUSC_SNS] of R5 on F.Cu ↔ Pad 11 [VBUSC_SNS] of U3 on F.Cu
+- Pad 1 [VBUS_C_RAW] of F2 on F.Cu ↔ Pad 1 [VBUS_C_RAW] of D1 on F.Cu
+- Pad 1 [VBUS_C_RAW] of D1 on F.Cu ↔ Pad B9 [VBUS_C_RAW] of J3 on F.Cu
+- Pad B9 [VBUS_C_RAW] of J3 on F.Cu ↔ Pad B4 [VBUS_C_RAW] of J3 on F.Cu
+- Pad 1 [VPOGO_CA] of D10 on F.Cu ↔ PTH pad 1 [VPOGO_CA] of P1
+- Pad 1 [VPOGO_CA] of D10 on F.Cu ↔ Pad 2 [VPOGO_CA] of R48 on F.Cu
+- PTH pad 1 [VPOGO_CA] of P1 ↔ Pad 1 [VPOGO_CA] of C48 on F.Cu
+- Pad 5 [VPOGO_CA] of U18 on F.Cu ↔ Pad 2 [VPOGO_CA] of R48 on F.Cu
+- Pad 4 [VPOGO_CA] of U14 on F.Cu ↔ Pad 5 [VPOGO_CA] of U18 on F.Cu
+- Pad 1 [VPOGO_CB] of D11 on F.Cu ↔ PTH pad 1 [VPOGO_CB] of P6
+- Pad 1 [VPOGO_CB] of D11 on F.Cu ↔ Pad 2 [VPOGO_CB] of R49 on F.Cu
+- PTH pad 1 [VPOGO_CB] of P6 ↔ Pad 1 [VPOGO_CB] of C49 on F.Cu
+- Pad 5 [VPOGO_CB] of U19 on F.Cu ↔ Pad 2 [VPOGO_CB] of R49 on F.Cu
+- Pad 4 [VPOGO_CB] of U15 on F.Cu ↔ Pad 5 [VPOGO_CB] of U19 on F.Cu
+- Pad 1 [VPOGO_GA] of C50 on F.Cu ↔ PTH pad 1 [VPOGO_GA] of P11
+- PTH pad 1 [VPOGO_GA] of P11 ↔ Pad 1 [VPOGO_GA] of D12 on F.Cu
+- Pad 2 [VPOGO_GA] of R50 on F.Cu ↔ Pad 1 [VPOGO_GA] of D12 on F.Cu
+- Pad 4 [VPOGO_GA] of U16 on F.Cu ↔ Pad 2 [VPOGO_GA] of R50 on F.Cu
+- Pad 1 [VPOGO_GB] of C51 on F.Cu ↔ PTH pad 1 [VPOGO_GB] of P14
+- PTH pad 1 [VPOGO_GB] of P14 ↔ Pad 1 [VPOGO_GB] of D13 on F.Cu
+- Pad 2 [VPOGO_GB] of R51 on F.Cu ↔ Pad 1 [VPOGO_GB] of D13 on F.Cu
+- Pad 4 [VPOGO_GB] of U17 on F.Cu ↔ Pad 2 [VPOGO_GB] of R51 on F.Cu
+- Pad 6 [VSW_CA] of U10 on F.Cu ↔ Pad 1 [VSW_CA] of R48 on F.Cu
+- Pad 3 [VSW_CA] of U14 on F.Cu ↔ Pad 6 [VSW_CA] of U10 on F.Cu
+- Pad 6 [VSW_CB] of U11 on F.Cu ↔ Pad 1 [VSW_CB] of R49 on F.Cu
+- Pad 3 [VSW_CB] of U15 on F.Cu ↔ Pad 6 [VSW_CB] of U11 on F.Cu
+- Pad 6 [VSW_GA] of U12 on F.Cu ↔ Pad 1 [VSW_GA] of R50 on F.Cu
+- Pad 3 [VSW_GA] of U16 on F.Cu ↔ Pad 6 [VSW_GA] of U12 on F.Cu
+- Pad 6 [VSW_GB] of U13 on F.Cu ↔ Pad 1 [VSW_GB] of R51 on F.Cu
+- Pad 3 [VSW_GB] of U17 on F.Cu ↔ Pad 6 [VSW_GB] of U13 on F.Cu
+- Pad 1 [XTAL_I] of C30 on F.Cu ↔ Pad 1 [XTAL_I] of Y1 on F.Cu
+- Pad 1 [XTAL_I] of Y1 on F.Cu ↔ Pad 33 [XTAL_I] of U6 on F.Cu
+- Pad 3 [XTAL_O] of Y1 on F.Cu ↔ Pad 1 [XTAL_O] of C31 on F.Cu
+- Pad 1 [XTAL_O] of C31 on F.Cu ↔ Pad 32 [XTAL_O] of U6 on F.Cu
+
+## Advertencias de DRC (no bloqueantes)
+- silk_edge_clearance: 8
+- silk_overlap: 6
+- silk_over_copper: 5
+
+## Lista de materiales y posiciones
+- Piezas montadas sin número LCSC: F1, RV1, PS1, C4, U4, U5, Y1, U10, R40, R48, U14, U11, R41, R49, U15, U12, R42, R50, U16, U13, R43, R51, U17, J4
+- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Modelo 3D (STEP y renders, no afecta a la fabricación)
+- Modelos de la librería de KiCad 9.0.0 descargados: 18; sin descargar: Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step, Fuse.3dshapes/Fuse_Littelfuse_372_D8.50mm.step
+- ESP32-S3-MINI-1U: modelo de Espressif (`fuente/3d`). Pads de hilo/prueba: sin modelo 3D.
+
+## Diseño de la REV A (texto fijo)
+- Arquitectura, conexiones del ESP32-S3, puertos y seguridad eléctrica: `hardware/dock/V1/DOCS/ARQUITECTURA.md`.
+- **Selector de alimentación:**
+  - con red: Q1 y Q1B (AO3401A en paralelo) conducen y Q2 queda apagado;
+  - sin red: conduce Q2 desde el USB-C;
+  - el diodo interno de cada PMOS impide alimentar el IRM al revés y devolver corriente al PC.
+- **Puertos:** TPS2553 con el EN en el S3 (100 k a GND: apagados al arrancar) → shunt de 50 mΩ → contacto, con INA180A2 (× 50; 1 A = 2,5 V).
+- **Hub USB2514B** configurado por patillas: CFG_SEL = 00, LOCAL_PWR = 1, NON_REM = 00, puerto 4 desactivado. La potencia de los puertos la manda el S3, no PRTPWR.
+
+## Estado de fabricación
+- Diseño verificado por software (KiCad 9 en el CI): **no**
+- Apto para solicitar prototipos: **no**
+- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
+
+## Limitaciones pendientes (ver README)
+- Red 230 V: IRM-20-5, fusible, varistor y bornes de hilo se montan a mano (sin LCSC). Foso de 6,5 mm sin cobre en las 4 capas entre la zona de red y la MBTS: comprobar las distancias en el visor de Gerber antes de pedir.
+- El aislamiento reforzado lo da el IRM-20-5 certificado (3000 VAC); la caja debe ser de clase II (sin partes metálicas accesibles) y el cable de red con brida dentro de la caja.
+- Piezas sin código LCSC en esta revisión (TPS2553, INA180A2, TS3USB221, cristal de 24 MHz, JST-GH, shunts de 50 mΩ): buscarlas con el workflow de existencias antes de pedir.
+- Patillaje del USB2514B-I/M2 (QFN-36 heredado, almohadilla 3,7 mm) según DS00001692: revisar con la hoja de la versión SQFN si se compra esa.
+- USB entre el hub y los cascos a velocidad completa (12 Mbit/s, USB nativo del ESP32-S3): sin control de impedancia.
+- Pogo de 5 contactos del casco: el modelo real sigue pendiente (STEP).
+- Nada de esto se ha fabricado ni medido: no es un prototipo validado.
+::notice title=Puerta de fabricación::NO SUPERADA
