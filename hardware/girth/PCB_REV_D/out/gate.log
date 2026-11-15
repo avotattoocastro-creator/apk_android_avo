@@ -1,17 +1,17 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `6622ecebe198c120794f18ca8ddd1d916a73a1f3` · ejecución de CI: 43697952813
+- Commit: `d1c130dec214e13c185ac6381da3afeb7f6d273d` · ejecución de CI: 43700135628
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 78 en total, 61 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 779 · vías: 126 · ruteado INCOMPLETO (14 conexiones)
+- Pistas: 728 · vías: 121 · ruteado INCOMPLETO (12 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 14 |
+| DRC: conexiones incompletas | **FALLA** | 12 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,24 +19,22 @@
 
 
 ### Conexiones incompletas
-- Pad 14 [+3V3] of U6 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.4094 mm
-- Track [+3V3] on F.Cu, length 0.7724 mm ↔ Pad 23 [+3V3] of U6 on F.Cu
-- Track [+3V3] on F.Cu, length 1.5018 mm ↔ Pad 5 [+3V3] of U5 on F.Cu
-- Track [+3V3A] on F.Cu, length 0.2000 mm ↔ Track [+3V3A] on F.Cu, length 0.4000 mm
-- Pad 29 [+3V3A] of U6 on F.Cu ↔ Pad 31 [+3V3A] of U6 on F.Cu
-- Pad 12 [+3V3A] of U6 on F.Cu ↔ Track [+3V3A] on F.Cu, length 0.4000 mm
-- Pad 12 [+3V3A] of U6 on F.Cu ↔ Track [+3V3A] on F.Cu, length 2.9117 mm
-- Zone [GND] on F.Cu, priority 0 ↔ Pad 14 [GND] of U4 on F.Cu
-- Pad 10 [VSYS] of U2 on F.Cu ↔ Track [VSYS] on In2.Cu, length 0.4559 mm
-- Pad 6 [ECGP] of U6 on F.Cu ↔ Track [ECGP] on F.Cu, length 2.4204 mm
-- Pad 19 [ECG_MOSI] of U6 on F.Cu ↔ Pad 24 [ECG_MOSI] of U4 on F.Cu
-- Track [ECG_RLDINV] on F.Cu, length 0.4195 mm ↔ Pad 2 [ECG_RLDINV] of R42 on F.Cu
-- Pad 1 [ECG_VREFP] of C46 on F.Cu ↔ Track [ECG_VREFP] on F.Cu, length 1.1650 mm
-- PTH pad 1 [POGO_5V] of P1 ↔ Pad 1 [POGO_5V] of F2 on F.Cu
+- Pad 23 [+3V3] of U6 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.3450 mm
+- Pad 23 [+3V3] of U6 on F.Cu ↔ Pad 14 [+3V3] of U6 on F.Cu
+- Pad 5 [+3V3] of U5 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.6788 mm
+- Track [+3V3A] on F.Cu, length 0.3162 mm ↔ Pad 12 [+3V3A] of U6 on F.Cu
+- Track [VSYS] on F.Cu, length 0.4370 mm ↔ Track [VSYS] on F.Cu, length 0.5000 mm
+- Pad 6 [ECGP] of U6 on F.Cu ↔ Track [ECGP] on In2.Cu, length 2.8154 mm
+- Pad 17 [ECG_CLK] of U6 on F.Cu ↔ Pad 1 [ECG_CLK] of R46 on F.Cu
+- Pad 21 [ECG_MISO] of U6 on F.Cu ↔ Pad 26 [ECG_MISO] of U4 on F.Cu
+- Pad 28 [ECG_RLDINV] of U6 on F.Cu ↔ Track [ECG_RLDINV] on F.Cu, length 1.1000 mm
+- Pad 30 [ECG_RLDOUT] of U6 on F.Cu ↔ Track [ECG_RLDOUT] on F.Cu, length 1.0600 mm
+- Pad 9 [IMU_INT2] of U5 on F.Cu ↔ Pad 13 [IMU_INT2] of U4 on F.Cu
+- Track [POGO_5V] on F.Cu, length 3.2951 mm ↔ PTH pad 1 [POGO_5V] of P1
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 4
-- silk_overlap: 2
+- silk_over_copper: 6
+- silk_overlap: 4
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
@@ -47,7 +45,7 @@
 - Modelos de la librería de KiCad 9.0.0 descargados: 9; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
 - ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). LSM6DSV16X, MMC5983MA, ADS1292 y pads de hilo/prueba: sin modelo 3D.
 
-## Existencias en JLCPCB (consulta del CI: 2026-11-15 09:08 UTC)
+## Existencias en JLCPCB (consulta del CI: 2026-11-15 09:10 UTC)
 | LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
 |---|---|---|---|---|---|
 | C544416 | ADS1292IRSMR | 1 | 2953 | Extended | 5.7657 US$ |
@@ -55,28 +53,28 @@
 | C5267406 | LSM6DSV16XTR | 1 | 6523 | Extended | 2.9369 US$ |
 | C404329 | MMC5983MA | 1 | 5716 | Extended | 1.9896 US$ |
 | C140288 | BQ24072RGTR | 1 | 1216 | Extended | 1.0488 US$ |
+| C7192 | TAJB105K035RNJ | 1 | 26712 | Extended | 0.2898 US$ |
 | C841192 | RT9080-33GJ5 | 2 | 27566 | Extended | 0.1197 US$ |
 | C20802 | SMD1206P150TF | 2 | 11293 | Extended | 0.1187 US$ |
-| C45783 | CL21A226MAQNNNE | 2 | 4120384 | Basic | 0.1084 US$ |
+| C45783 | CL21A226MAQNNNE | 2 | 4120506 | Basic | 0.1084 US$ |
 | C2827694 | PESD5V0S1BA | 2 | 330776 | Extended | 0.0359 US$ |
-| C96446 | CL10A106MA8NRNC | 7 | 6146079 | Basic | 0.0342 US$ |
+| C96446 | CL10A106MA8NRNC | 7 | 6146056 | Basic | 0.0342 US$ |
+| C85980 | GRM1885C1H472JA01D | 2 | 107669 | Extended | 0.0187 US$ |
+| C668348 | GRM1555C1H152JA01D | 1 | 68649 | Extended | 0.0179 US$ |
 | C77131 | NCP15XH103F03RC | 1 | 297342 | Extended | 0.0164 US$ |
-| C2286 | KT-0603R | 1 | 5778598 | Basic | 0.0077 US$ |
-| C52923 | CL05A105KA5NQNC | 5 | 10280826 | Basic | 0.0057 US$ |
+| C2286 | KT-0603R | 1 | 5778398 | Basic | 0.0077 US$ |
+| C52923 | CL05A105KA5NQNC | 5 | 10280744 | Basic | 0.0057 US$ |
 | C53547 | 0402CG102J500NT | 2 | 472693 | Extended | 0.0050 US$ |
-| C1525 | CL05B104KO5NNNC | 8 | 38112952 | Basic | 0.0024 US$ |
+| C1525 | CL05B104KO5NNNC | 8 | 38113115 | Basic | 0.0024 US$ |
 | C4109 | 0402WGF2001TCE | 1 | 10027954 | Basic | 0.0019 US$ |
-| C25792 | 0402WGF4702TCE | 2 | 5707188 | Basic | 0.0019 US$ |
-| C11702 | 0402WGF1001TCE | 2 | 31427064 | Basic | 0.0013 US$ |
-| C26083 | 0402WGF1004TCE | 3 | 2341828 | Basic | 0.0012 US$ |
-| C25879 | 0402WGF2201TCE | 3 | 3053588 | Basic | 0.0011 US$ |
-| C25744 | 0402WGF1002TCE | 6 | 21068993 | Basic | 0.0010 US$ |
-| C25741 | 0402WGF1003TCE | 3 | 10386290 | Basic | 0.0009 US$ |
-| C7192 | ? | 1 | sin respuesta | Extended | ? |
-| C85980 | ? | 2 | sin respuesta | Extended | ? |
-| C668348 | ? | 1 | sin respuesta | Extended | ? |
+| C25792 | 0402WGF4702TCE | 2 | 5707267 | Basic | 0.0019 US$ |
+| C11702 | 0402WGF1001TCE | 2 | 31426879 | Basic | 0.0013 US$ |
+| C26083 | 0402WGF1004TCE | 3 | 2341718 | Basic | 0.0012 US$ |
+| C25879 | 0402WGF2201TCE | 3 | 3053586 | Basic | 0.0011 US$ |
+| C25744 | 0402WGF1002TCE | 6 | 21069013 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 3 | 10386367 | Basic | 0.0009 US$ |
 
-- Piezas sin existencias para 5 placas: C7192, C85980, C668348
+- Piezas sin existencias para 5 placas: ninguna
 
 ## Estado de fabricación
 - Diseño verificado por software (KiCad 9 en el CI): **no**
