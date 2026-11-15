@@ -1,4 +1,4 @@
-# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.1 con aro de luz, funda de piel y electrodos ECG)
+# AVO GIRTH · montaje del sistema en la cincha (cápsula REV 6.2: aro de luz, estanca y con pestillos; funda de piel y electrodos ECG)
 
 > **Estado: diseño · NO VERIFICADO en caballo real.** No se ha impreso, cosido ni montado nada. Los STEP no se han
 > abierto en FreeCAD dentro de este entorno (no está instalado). Solo pasaron la comprobación automática de
@@ -13,25 +13,38 @@ contactos (carga y ECG) y dos electrodos de caucho conductor (más un tercero de
 - La base entera es de PETG translúcido «natural» y hace de aro de luz.
 - La tapa es plana, de PETG opaco.
 - Una sola junta TPU 85A en ranura, con los tornillos fuera de la línea de estanqueidad.
-- Bolsillo con 4 ventanas frente a la luz.
+- Bolsillo con 4 ventanas frente a la luz. **Descartado en la REV 6.2.**
 - Empalmes de los electrodos soldados y encapsulados: sin JST.
 
 Ver §3.1 y la sección **«Estanqueidad»** (§7).
+
+**REV 6.2 (15/11/2026 18:34, decisión del usuario):** **sin bolsillo**. La cápsula va **expuesta**, en una zona con
+mucho movimiento y vibración, y queda sujeta al soporte **solo por medios mecánicos**:
+- **2 pestillos elásticos** de PETG, integrados en el soporte (lados cortos ±X). Encajan con clic en una **ranura
+  exterior** de la base, sin atravesar la pared.
+- **Seguro positivo:** detrás de cada pestillo, un seguro deslizante de TPU 95A con **retén de clic**. Con los seguros
+  puestos, los pestillos no pueden abrirse.
+- **Cerco de 4,5 mm**, con 0,25 mm de holgura.
+- **4 tacos TPU 85A** de precarga.
+- **Cordón de seguridad** Dyneema entre una **oreja maciza de la tapa** y el ala del soporte.
+- La cápsula sigue siendo IP67 de diseño: la ranura exterior no atraviesa nada.
+
+Ver §3.2 y la sección **«Retención»** (§8).
 
 ## 1. Qué hay en esta carpeta
 
 | Ruta | Contenido |
 |---|---|
-| `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, bolsillo, soporte, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (94 sólidos en 9 subconjuntos) |
+| `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_CURVADO.step` | **Conjunto completo** curvado sobre el tórax: cincha, funda, soporte con pestillos y seguros, cápsula, PCB, celda, antena, pogos, tornillería, electrodos, espuma y cables (92 sólidos en 8 subconjuntos) |
 | `out/STEP/AVO_CINCHA_MONTAJE_CONJUNTO_RECTO.step` | El mismo conjunto con la cincha recta (tumbada, con la cara interior abajo) |
-| `out/STEP/AVO_CINCHA_R6_1_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
+| `out/STEP/AVO_CINCHA_R6_2_CAPSULA_CONJUNTO.step`, `..._SOPORTE_CONJUNTO.step` | Subconjuntos de la cápsula y del soporte, en coordenadas locales |
 | `out/STEP/REF_torax_caballo_seccion.step` | Sección del tórax de referencia (300 mm de largo) |
 | `out/STEP/piezas/*.step` | Un STEP por pieza: impresas, PCB, celda, antena, electrodo, funda, cincha Decathlon y Horze (recta y curvada) |
 | `out/STL/*.stl` | Piezas impresas, ya colocadas para imprimir |
 | `out/PATRON/AVO_CINCHA_funda_piel_patron.{svg,dxf}` | Patrón plano 1:1 de la funda, en mm, con capas de corte, pliegue, costura, agujeros cada 4 mm, rebaje, taladros y marcas |
 | `out/informe.json` | Medidas, volúmenes, longitudes de cable y comprobaciones |
 | `out/AVO_CINCHA_MONTAJE.zip` | Todo lo anterior junto, para descargar |
-| `renders/*.png` | Renders de comprobación (01–13; 12 = corte por los LED, 13 = bolsillo con las ventanas de luz) |
+| `renders/*.png` | Renders de comprobación (01–14; 12 = corte por los LED, 13 = corte por un pestillo, 14 = pestillo y seguro) |
 | `fuente/` | Scripts que lo generan todo (ver §9) |
 
 **Coordenadas.** En la cincha:
@@ -65,11 +78,19 @@ En el conjunto curvado: X+ = izquierda del caballo, Y+ = hacia la cabeza, Z+ = a
 
 ## 3. Diseño
 
-### 3.1 Cápsula REV 6.1 (`AVO_CINCHA_R6_1_*`)
+### 3.1 Cápsula REV 6.2 (`AVO_CINCHA_R6_2_*`)
 
-**Medidas.** Exterior de 62,9 × 60,1 × 15,5 mm, con las orejas de los 6 tornillos. Interior de 51 × 43,75 mm.
+**Medidas.** Exterior de 62,9 × 60,1 × 15,5 mm, con las orejas de los 6 tornillos, y 64,7 mm de fondo en la tapa con
+la oreja del cordón. Interior de 51 × 43,75 mm.
 
-**Base = aro de luz** (`AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido`): PETG translúcido «natural», de una pieza, 100 % de relleno.
+**REV 6.2 en la cápsula:**
+- **Ranura exterior** de 1,2 mm de hondo, de z = 5,0 a 6,4, en todo el contorno de la base, para los ganchos de los
+  pestillos. Deja 2,8 mm de pared: no la atraviesa.
+- **Chaflán de entrada** de 0,8 mm en el canto inferior.
+- **Oreja maciza** en la tapa (+Y, 12 × 7 mm, R3), con un agujero vertical de Ø3,2 para el cordón de seguridad. Está
+  **fuera** de la junta.
+
+**Base = aro de luz** (`AVO_CINCHA_R6_2_base_aro_luz_PETG_translucido`): PETG translúcido «natural», de una pieza, 100 % de relleno.
 - Paredes de **4,0 mm**, de z = 0 a z = 13,0. Rodean la PCB a la altura de los LED:
   - la luz nace a z = 10,9;
   - la lente queda a 0,34 mm del canto de la PCB (y = ±14,66);
@@ -78,7 +99,7 @@ En el conjunto curvado: X+ = izquierda del caballo, Y+ = hacia la cabeza, Z+ = a
 - **Ranura de la junta** en el canto superior: 1,9 de ancho × 1,2 de hondo, a 1,05–2,95 mm del hueco.
 - 6 orejas macizas por fuera de la ranura con **insertos M2 × 4 ciegos**: agujeros de Ø3,2 × 5 que no llegan al interior; quedan 0,65 mm hasta la ranura.
 
-**Tapa** (`AVO_CINCHA_R6_1_tapa_PETG_opaco`): plana, de 2,5 mm, PETG opaco rojo.
+**Tapa** (`AVO_CINCHA_R6_2_tapa_PETG_opaco`): plana, de 2,5 mm, PETG opaco rojo.
 - Apoya en el canto de la base con **tope duro**, así que la compresión de la junta la fija la geometría.
 - Lleva una lengüeta de centrado de 1,0 × 1,2 dentro del hueco.
 - **4 columnas** de Ø4,4 sujetan la PCB con 4 tornillos M2 × 5 ISO 7380 (guías **ciegas**, con 1,5 mm de piel por encima).
@@ -130,22 +151,67 @@ Carbon tiene una sola extrusora, así que no puede hacer una pieza bicolor con l
 - **Imprimir la base de una sola pieza en translúcido** deja la única unión desmontable donde ya estaba (base–tapa,
   por encima de la PCB). La banda de luz es la propia pared, sin costuras.
 - **Lo que se pierde:**
-  - toda la base brilla, incluido el fondo. El soporte tapa los 2,5 mm de abajo y el bolsillo enseña solo las ventanas;
+  - toda la base brilla, incluido el fondo. En la REV 6.2 el cerco del soporte tapa los 3,8 mm de abajo y el resto queda a la vista;
   - el PETG natural deja ver un poco el interior.
 
 Si se quiere más difusión, se puede lijar la cara interior de la pared o pintarla con barniz mate translúcido.
 
-### 3.2 Soporte (`AVO_CINCHA_R6_1_soporte`, PETG opaco)
-- 83,5 × 80,7 × 10,5 mm: cama de 8 mm y cerco de 2,5 mm que abraza la cápsula con 0,3 mm de holgura.
-- Lleva los **dos conectores de pines** (carga + ECG):
-  - cara a ras de la cama;
-  - orejas sujetas con 2 tornillos M2 × 4 cada uno, en guías de Ø1,6;
-  - hueco abierto por abajo para soldar las colas.
-- En el conector de **carga**, un puente 2–3 (DET): la cápsula sabe que está montada, igual que en la REV 5.9.
-- **REV 6.1:** las colas de los dos conectores se **encapsulan** en su hueco inferior con silicona neutra o resina de colada, enrasada. No queda ningún metal soldado expuesto.
-- Ala de 2,5 mm con **4 tornillos de Chicago de Ø5**, que lo fijan al panel exterior de la funda. Se puede
-  desmontar.
-- La cápsula se saca del soporte para cargarla en una base con otro conector de pines.
+### 3.2 Soporte REV 6.2 (`AVO_CINCHA_R6_2_soporte_pestillos_PETG`, PETG opaco)
+
+**Medidas.** 89,6 × 82,6 mm; ala de 2,5 mm; cama a z = 8; cerco hasta z = 12,5; contrafuertes hasta z = 19. Todo
+queda por debajo de la tapa de la cápsula, que llega a z = 24,2.
+
+**Cerco** de 2 mm de grueso y **4,5 mm de alto**:
+- abraza la cápsula con **0,25 mm de holgura**;
+- el contorno no es redondo (orejas de los tornillos), así que también impide el giro;
+- solo se corta en los ±X, donde pasan los pestillos y los seguros;
+- tapa la cápsula hasta su z = 3,8. La banda de los LED (lados ±Y, centro a z = 10,9) queda **libre**.
+
+**4 tacos de precarga** de TPU 85A (Ø3 × 1,85 libres, en alojamientos de Ø3 × 1,0):
+- la cápsula apoya en ellos a 0,7 mm sobre la cama, comprimiéndolos 0,15 mm;
+- empujan la base contra los ganchos, de modo que no queda ningún juego vertical;
+- los pines del pogo trabajan comprimidos 0,8 mm de su 1,1 de recorrido.
+
+**2 pestillos**, de una pieza con el soporte, en los lados cortos ±X (cálculo en §8):
+- **viga** de 1,2 × 12 mm de sección y 12,9 mm de largo, desde la raíz (z = 0,8), con radio escalonado en la raíz;
+- arranca del fondo de un hueco del cuerpo, que tiene 2 desagües de Ø1,4;
+- **gancho** con la cara inferior plana; entra **0,9 mm** en la ranura exterior de la base y tiene la rampa de
+  entrada arriba;
+- encima, **pulsador** de 4,2 × 13,2 mm (R1,5), rebajado entre la cápsula y el contrafuerte.
+
+**Contrafuerte** de 2,6 mm, que protege el pestillo de golpes y roces. Lleva la **muesca del retén** del seguro.
+
+**2 seguros deslizantes** de TPU 95A (`AVO_CINCHA_R6_2_seguro_izq/der_TPU95A`):
+- barra de 1,3 × 5,2 × 19,7 mm que entra a lo largo de Y en el hueco de 1,6 mm entre la viga y el contrafuerte;
+- 0,15 mm de holgura por lado (arena); el pestillo solo puede abrirse 0,3 mm, frente a 0,9 de enganche;
+- un **resalte de Ø1,2** encaja con **clic** en la muesca: no lo mueve la vibración;
+- un tope final;
+- cabeza redondeada con un agujero de Ø1,5 para sacarlo con un gancho o atarlo con un hilo al cordón.
+
+**Cordón de seguridad** (Dyneema Ø1,5): de la oreja de la tapa al anclaje de Ø3,2 del ala del soporte (en +Y).
+- Si todo falla, la cápsula no se pierde.
+- Se ata con un nudo de pescador doble o con un casquillo de crimpar.
+
+**Conectores de pines** (carga + ECG):
+- cara a ras de la cama;
+- orejas con 2 tornillos M2 × 4 cada uno;
+- colas **encapsuladas** con silicona neutra o resina (REV 6.1);
+- puente 2–3 (DET) en el conector de carga.
+
+**Fijación a la funda:** ala con **4 tornillos de Chicago de Ø5**.
+
+**Por qué este seguro.** El cerrojo deslizante en el hueco detrás de la viga es la forma más sencilla de lograr un
+**bloqueo positivo**:
+- con el seguro dentro, la viga no puede doblarse hacia fuera, y la retención pasa a depender de la resistencia
+  del gancho y de la viga, no de su elasticidad;
+- el retén de clic lo sujeta frente a la vibración;
+- queda dentro del contorno, así que no se engancha;
+- con guantes se saca tirando de la cabeza con la uña o con un gancho.
+
+Alternativas descartadas:
+- **Pieza de TPU encajada a presión:** solo la sujeta la fricción.
+- **Pasador R metálico:** sobresale y se engancha.
+- **Cierre por giro:** necesita más altura y deja rendijas que se llenan de barro.
 
 ### 3.3 Funda de piel
 Funda de 800 mm de largo que envuelve la parte central de la cincha. Se corta de **una sola pieza** (patrón A) que,
@@ -156,7 +222,8 @@ en este orden, forma:
 4. pliegue trasero;
 5. solapa de 30 mm, que cierra sobre el panel exterior con **velcro de coser de 25 mm**.
 
-La solapa se interrumpe donde está el bolsillo.
+La solapa se interrumpe donde está el soporte. **REV 6.2: el bolsillo se ha eliminado.** Ya no hay piezas B1/B2,
+broche ni ventanas de luz: la cápsula queda a la vista, sujeta por los pestillos.
 
 Holguras:
 - 7 mm en el canto delantero: es el canal del cable;
@@ -180,16 +247,6 @@ Elementos:
 
 - **Canal cosido del cable:** tiras de piel de 1,2 mm cosidas por dentro del pliegue delantero, en 3 tramos (C1–C3).
   Dejan huecos donde salen los cables hacia los electrodos.
-- **Bolsillo:**
-  - tapa con ventana de 40 × 28 sobre la tapa roja;
-  - fuelle cosido al panel exterior y lengüeta con broche de presión de 15 mm;
-  - **REV 6.1:** 2 + 2 **ventanas de 20 × 4,5 mm** en los lados largos del fuelle, frente a la banda de luz (z de 8,0 a
-    12,5 sobre el fondo de la cápsula).
-  - Para no debilitarlo:
-    - puente central de 8 mm;
-    - esquinas cortadas con sacabocados de 2 mm (no a escuadra);
-    - costura de refuerzo a 3 mm alrededor de cada ventana (patrón B2).
-  - La piel no tiene que ser estanca: la estanca es la cápsula.
 - **Ventana de 40 mm** en el pliegue delantero para la pestaña de la anilla D central de la cincha.
 - **Trabillas** (pasadores) de 25 mm en los dos extremos.
 
@@ -249,11 +306,14 @@ Las longitudes son las del modelo, todas < 40 cm. Se recomienda añadir 30 mm de
 | 14 | Piel de curtido vegetal 2,0 mm (≈ 0,35 m²) + retal de 1,2 mm para el canal | Tandy / guarnicionería | 1 | ≈ 45 € (≈ 12–15 £/ft²) |
 | 15 | Velcro de coser 25 mm (gancho + rizo) | mercería | 0,7 m | ≈ 3 € |
 | 16 | Tornillos de Chicago Ø5 (juego de 30, 5 × 15 mm) | [ManoMano](https://www.manomano.es/p/30-juegos-de-tornillos-de-encuadernacion-chicago-tornillos-de-encuadernacion-niquelados-5-mm-x-15-mm-tono-plateado-84620168) | 4 | ≈ 8 € |
-| 17 | Broche de presión de 15 mm (latón/inox) | mercería | 1 | ≈ 1 € |
+| 17 | (eliminado en REV 6.2: broche del bolsillo) | — | — | — |
+| 17b | **Cordón Dyneema / UHMWPE Ø1,5 mm** (≥ 100 kg) + 2 casquillos de crimpar de aluminio | pesca / náutica | 0,3 m | ≈ 4 € |
+| 17c | **Filamento TPU 95A** (2 seguros) y TPU 85A (tacos, junta, separador) | — | ≈ 3 g | ≈ 0,2 € |
 | 18 | Hilo encerado de poliéster de 0,8 mm + 2 agujas de guarnicionero | — | 1 | ≈ 7 € |
 | 19 | Espuma EVA o neopreno de 2–3 mm (A4) | — | 1 | ≈ 3 € |
 | 20 | Papel indicador de agua (o pañuelo de papel) y bomba de vacío manual con recipiente (ensayo, §7) | — | 1 | ≈ 15 € (opcional) |
-| — | **Total (con la cincha Decathlon y el electrodo REF, sin el ensayo)** | | | **≈ 200 €** |
+| 21 | Dinamómetro de 25 kg o peso de 10 kg con gancho (ensayo de tirón, §8.4) | — | 1 | ≈ 10 € (opcional) |
+| — | **Total (con la cincha Decathlon y el electrodo REF, sin los ensayos)** | | | **≈ 200 €** |
 | — | Alternativa: lámina POTUBI + broches de 4 mm + arandelas inox | Amazon.es | — | 20,51 € + ≈ 10 € |
 
 Herramientas que no entran en el total:
@@ -270,7 +330,9 @@ Herramientas que no entran en el total:
 |---|---|---|---|
 | **Base (aro de luz)** | **PETG translúcido natural** | Fondo sobre la cama | Ver «Impresión estanca» (§7.3) |
 | Tapa | PETG opaco (rojo) | **Boca abajo** (cara superior sobre la cama) | §7.3. Columnas y lengüeta hacia arriba |
-| Soporte | PETG opaco | Ala sobre la cama | 0,2 mm, 4 perímetros, 40 % (no necesita ser estanco) |
+| Soporte con pestillos | PETG opaco | Ala sobre la cama | **0,15 mm**, 5 perímetros, 100 % en un radio de 6 mm alrededor de los pestillos (modificador). 250–255 °C y ventilador ≤ 30 % para que las capas peguen bien (la viga trabaja a flexión entre capas). Sin soportes: los ganchos salen 1,3 mm en voladizo con rampa |
+| Seguros (×2) | TPU 95A | Planos | 0,15 mm, 100 %, lento. Comprobar que el resalte sale redondo |
+| Tacos (×4) | TPU 85A | De pie | 100 %. Se meten a presión en sus alojamientos |
 | Junta | TPU 85A | Plana | 0,2 mm, 100 %, ≤ 20 mm/s, sin retracciones largas. 3 líneas de 0,4 mm |
 | Separador | TPU 85A | Plano | 0,2 mm, 100 % |
 
@@ -316,23 +378,20 @@ Holguras:
 
 **Funda**
 
-12. Cortar el patrón A, B1, B2, C1–C3 y D1–D2 (`out/PATRON/*.dxf`, 1:1, comprobar la escala con el texto de 7 mm).
+12. Cortar el patrón A, C1–C3 y D1–D2 (`out/PATRON/*.dxf`, 1:1, comprobar la escala con el texto de 7 mm).
 13. Rebajar a 1,0 mm las franjas marcadas en naranja alrededor de las ventanas. Abrir:
     - las ventanas de los electrodos;
-    - las **4 ventanas de luz del fuelle B2** (esquinas con sacabocados de 2 mm);
     - la ranura del cable (14 × 7);
     - la ventana de la anilla D;
     - los 4 taladros de Ø5.
-14. Coser los canales C1–C3 por el lado carne del pliegue delantero (líneas de costura a 4 mm). Coser el refuerzo
-    alrededor de las ventanas de luz del fuelle.
+14. Coser los canales C1–C3 por el lado carne del pliegue delantero (líneas de costura a 4 mm).
 15. Para cada electrodo:
     - presentarlo por el lado carne sobre su ventana;
     - coser el perímetro por el solape de 5 mm;
     - pegar detrás la espuma EVA, solo por los bordes.
 16. Coser el velcro: rizo en el panel exterior, gancho en el lado carne de la solapa.
-17. Coser el bolsillo: el fuelle B2 al panel exterior por la marca verde, y la tapa B1 al fuelle por 3 lados. Las
-    ventanas de luz quedan en los lados largos.
-18. Fijar el soporte al panel exterior con los 4 tornillos de Chicago (con una gota de fijador de roscas suave).
+17. (REV 6.2: ya no hay bolsillo.)
+18. Meter los 4 tacos TPU 85A a presión en sus alojamientos de la cama. Fijar el soporte al panel exterior con los 4 tornillos de Chicago (con una gota de fijador de roscas suave).
 
 **Cables**
 
@@ -350,14 +409,16 @@ Holguras:
 **Colocación**
 
 23. Meter la cincha en la funda, con la anilla D por su ventana. Cerrar el velcro y pasar las trabillas.
-24. Cápsula en el soporte (los imanes de los pogos la centran) y cerrar la tapa del bolsillo.
+24. Atar el **cordón de seguridad**: oreja de la tapa → anclaje del ala del soporte, con un largo libre de unos 40 mm.
+25. **Poner la cápsula** (§8.3): apretar hasta oír los dos clics y meter los dos seguros hasta su clic.
 
 **Comprobaciones antes del caballo** (todas **pendientes**)
 - Continuidad electrodo → contacto del pogo de la cápsula (< 2 kΩ con el caucho húmedo).
 - Aislamiento entre electrodos con la funda seca (> 10 MΩ).
 - DET = 0 con la cápsula en el soporte.
-- Radio: RSSI con la espalda a 1 m, con la cápsula dentro del bolsillo.
-- Aro de luz visible por las 4 ventanas.
+- Radio: RSSI con la espalda a 1 m, con la cápsula montada.
+- Aro de luz visible por los dos lados largos, por encima del cerco.
+- Ensayos de retención de §8.4.
 - ECG en reposo con los electrodos y el pelo mojados, como pide Polar Equine.
 
 ## 7. Estanqueidad (objetivo IP67: sumergida 1 m, 30 min; sudor, lluvia y manguera)
@@ -381,7 +442,7 @@ Holguras:
 
 ### 7.2 Puntos de entrada de agua y cómo se sella cada uno
 
-| # | Punto | Riesgo | Cómo se sella (REV 6.1) | Se comprueba con |
+| # | Punto | Riesgo | Cómo se sella (REV 6.1 / 6.2) | Se comprueba con |
 |---|---|---|---|---|
 | 1 | Unión base–tapa (220 mm de perímetro) | Alto | Junta TPU 85A de 1,2 × 1,6 en ranura de 1,9 × 1,2 (25 % de compresión, 84 % de llenado). Tope duro. Canto y ranura sin costuras de impresión | Ensayo 2 (§7.4); cambiar la junta si se aplasta |
 | 2 | 6 tornillos del cierre | Nulo | Fuera de la junta: los agujeros de la tapa y los insertos de la base no comunican con el interior. Insertos **ciegos** con 0,65 mm de PETG hasta la ranura. Arandela DIN 433 bajo la cabeza para repartir la carga | Inspección y ensayo 2 |
@@ -396,6 +457,9 @@ Holguras:
 | 11 | Pines con muelle del soporte y contactos expuestos | Bajo | Contactos dorados; aclarar con agua dulce y **secar antes de cargar** (5 V expuestos con PTC y TVS en la PCB) | Inspección |
 | 12 | Empalme de los cables de los electrodos | Medio | Soldadura + termorretráctil fino + termorretráctil **con adhesivo** 3:1 común (sin JST) | Aislamiento > 10 MΩ tras 30 min en agua |
 | 13 | Electrodo Vialta (cable moldeado) | Bajo | Sellado de fábrica | — |
+| 14 | **Ranura exterior de los pestillos (REV 6.2)** | Nulo | Es un rebaje **exterior** de 1,2 mm en una pared de 4,0 (quedan 2,8 macizos). No hay agujeros | Inspección; ensayo 2 |
+| 15 | **Oreja del cordón en la tapa (REV 6.2)** | Nulo | Maciza, **fuera** de la junta; su agujero no comunica con el interior | Inspección |
+| 16 | **Mecanismo de los pestillos y seguros** (fuera de la cápsula) | — (no es estanco ni hace falta) | Rendijas ≥ 0,3 mm y desagües de Ø1,4 en el fondo de cada hueco: se lavan con manguera | Lavado y prueba de cierre tras barro |
 
 ### 7.3 Impresión estanca en PETG (base y tapa)
 - **Material:** PETG seco (4 h a 65 °C antes de imprimir). Natural para la base y opaco para la tapa.
@@ -443,16 +507,96 @@ Holguras:
    - no usar disolventes;
    - guardar la cápsula seca.
 
-## 8. Notas sobre la funda de piel
+## 8. Retención de la cápsula (REV 6.2)
+
+> **Cálculo de diseño, NO VERIFICADO.** Hipótesis:
+> - PETG impreso: E ≈ 2,0 GPa; resistencia en el plano de capa ≈ 40 MPa; **entre capas ≈ 25 MPa** (bien impreso);
+>   deformación admisible ≤ 2–2,5 % en el plano y ≤ 1,2 % entre capas.
+> - Cápsula ≈ 65 g con la celda.
+> - Fórmulas de viga en voladizo (Bayer / Covestro, *snap-fit design*).
+
+### 8.1 Requisitos
+- ≥ **100 N** de tirón vertical y ≥ 50 N lateral o de giro.
+- Margen ≥ 3 frente a choques de 30–50 g: 50 g × 0,065 kg × 9,81 = **32 N**, y × 3 = **96 N** ≤ 100 N.
+- Bloqueo positivo, con el seguro sujeto por clic.
+- Nada que se enganche.
+- Holguras de 0,3–0,4 mm.
+- 2000 ciclos de puesta y retirada.
+
+### 8.2 Cálculo del pestillo
+Viga en voladizo vertical: t = 1,2 mm (flexión), b = 12 mm, L = 12,9 mm desde la raíz, con el radio escalonado en la
+raíz.
+
+| Magnitud | Fórmula | Valor |
+|---|---|---|
+| Momento de inercia | I = b·t³/12 | 1,73 mm⁴ |
+| Flecha para pasar el gancho | δ = enganche 0,9 + holgura 0,2 | 1,1 mm |
+| **Deformación en la raíz al poner** | ε = 3·t·δ / (2·L²) | **1,19 %** (≤ 2–2,5 % en el plano; ≤ 1,2 % entre capas) |
+| Fuerza para doblar la viga | F = 3·E·I·δ / L³ | 5,3 N |
+| Fuerza para meter, por pestillo (rampa de 45°, μ = 0,3) | F·(1 + μ)/(1 − μ) | 9,9 N → ≈ 20 N los dos + ≈ 15–20 N de los tacos |
+| Fuerza en el pulsador para soltar (momento en la punta, brazo ≈ 2 mm) | M = 2·E·I·δ/L² ≈ 46 N·mm | ≈ 23 N por pulsador |
+| Deformación al soltar (momento) | ε = t·δ / L² | 0,8 % |
+| **Retención sin seguro** (el tirón abre el gancho por momento; e = t/2 + 0,55 = 1,15 mm) | P = 2·E·I·0,9 / (L²·e) | **≈ 32 N por gancho → ≈ 65 N** (menos la precarga) |
+| Flexión del gancho (en el plano de capa; h = 1,3, brazo 0,75) | σ = 6·P·0,75 / (b·h²) = 0,22·P | 40 MPa con P ≈ 180 N por gancho |
+| **Raíz de la viga con el seguro puesto** (tracción + el 50 % del momento excéntrico; el otro 50 % lo toma el seguro, estimado) | σ = P/(b·t) + 0,5·P·e·6/(b·t²) = 0,27·P | 25 MPa con **P ≈ 93 N por gancho** |
+| **Retención con seguro** | 2 × 93 − precarga (≈ 20 N) | **≈ 165 N** ≥ 100 N (≈ 5 veces el choque de 50 g) |
+| Lateral / giro | Lo toma el cerco de 2 × 4,5 mm: σ = 6·F·h/(L·t²) con F = 50 N, h = 4,5, L = 55 | ≈ 6 MPa (≪ 25) |
+
+**Fatiga (2000 ciclos).**
+- Al poner, la raíz trabaja al 1,19 % de deformación entre capas (≈ 24 MPa, cerca del límite).
+- El ensayo de §8.4 lo tiene que confirmar.
+- Si se agrieta, pasar a t = 1,0 mm (ε = 1,0 %, retención con seguro ≈ 140 N) o imprimir el soporte en PETG-CF.
+- El contrafuerte limita la flecha a 1,6 mm (ε = 1,7 %): el pestillo no se puede doblar de más al soltar.
+
+### 8.3 Uso (con guantes)
+**Poner la cápsula:**
+1. Sacar los dos seguros: tirar de su cabeza a lo largo del lado corto (con la uña o con un gancho).
+2. Presentar la cápsula con la oreja del cordón hacia +Y. Solo entra de una forma.
+3. Apretar con la palma en el centro de la tapa hasta oír **los dos clics**.
+4. Meter los dos seguros hasta su **clic**: su cabeza queda enrasada con el contrafuerte.
+5. Comprobar tirando de la cápsula hacia arriba: no debe moverse nada.
+
+**Quitarla** (para cargar):
+1. Sacar los dos seguros.
+2. Apretar **los dos pulsadores a la vez** hacia la cincha (≈ 2,5 kg cada uno) y levantar la cápsula. Si hay barro,
+   aclarar antes con la manguera.
+
+El cordón de seguridad se puede dejar atado mientras se carga, o soltar el casquillo.
+
+### 8.4 Ensayos (en cada soporte nuevo; **pendientes**)
+1. **Tirón:**
+   - cápsula montada con los seguros;
+   - colgar un **peso de 10 kg** (≈ 98 N) de la oreja de la tapa durante 1 min, o tirar con un dinamómetro hasta
+     ≥ 100 N;
+   - **aceptar** si no se suelta y no quedan marcas blancas en las raíces;
+   - repetirlo **sin seguros** hasta que se suelte y anotar la fuerza (calculado: ≈ 65 N).
+2. **Lateral y giro:** 5 kg colgados de lado y un par de 1,5 N·m. No debe moverse más de 0,1 mm (medir con un
+   comparador o mirar el ECG en reposo: sin picos).
+3. **Vibración:**
+   - **1 h en una lijadora orbital** (sin lija), con el soporte atornillado a una tabla y la cápsula en marcha
+     enviando IMU y ECG;
+   - o **1 h al trote** con la cincha puesta;
+   - **aceptar** si no hay huecos en los lotes, picos de ECG por movimiento, seguros desplazados ni polvo blanco de
+     desgaste.
+4. **Caída:**
+   - **1,5 m sobre suelo duro** (hormigón), 3 veces, con la cápsula montada en el soporte atornillado a un trozo de
+     funda;
+   - **aceptar** si no se suelta, no hay grietas y pasa luego el ensayo de estanqueidad (§7.4).
+5. **Ciclos:** **2000 puestas y retiradas**, revisando las raíces cada 250. Si aparece una marca blanca o una grieta,
+   el soporte se rechaza.
+6. **Barro y arena:** meter el soporte en barro, aclarar con manguera y comprobar que la cápsula entra, encaja y se
+   suelta igual.
+
+## 9. Notas sobre la funda de piel
 
 - **Curtido vegetal frente a cromo.**
-  - El **vegetal** se puede rebajar, moldear y coser con canto limpio. Mantiene la forma (bolsillo, canales) y es
+  - El **vegetal** se puede rebajar, moldear y coser con canto limpio. Mantiene la forma (canales, soporte) y es
     el habitual en guarnicionería. Con el sudor se oscurece y se endurece si no se engrasa.
   - El **cromo** es más blando y aguanta mejor el agua, pero se deforma más. Además puede llevar restos de cromo
     (VI), que es alérgeno de contacto y está limitado en la UE.
   - Recomendado: **vegetal de 2,0 mm (≈ 5 oz)** para el cuerpo, con acabado graso (aceite de pie de buey + cera) por
     las dos caras. Y vegetal de 1,2 mm para los canales.
-- **Grosor.** Con 2,0 mm el bolsillo y el soporte se sujetan bien. Alrededor de los electrodos hay que rebajar a
+- **Grosor.** Con 2,0 mm el soporte se sujeta bien. Alrededor de los electrodos hay que rebajar a
   1,0 mm, porque con 2 mm el electrodo quedaría 2 mm por dentro y perdería contacto.
 - **Costura.** Punto de guarnicionero a mano, hilo de poliéster encerado de 0,8 mm, pinzas de 4 mm, a 4 mm del
   canto. No usar hilo de algodón, que el sudor pudre.
@@ -465,7 +609,7 @@ Holguras:
 - **Limpieza.** Jabón de glicerina y engrase. La funda se quita de la cincha (velcro + trabillas) para lavar la
   cincha de tela.
 
-## 9. Limitaciones (leer antes de fabricar)
+## 10. Limitaciones (leer antes de fabricar)
 
 1. **Nada está verificado físicamente**: ni impresión, ni costura, ni ajuste en una cincha real, ni ECG en un caballo.
 2. **Medidas de la cincha y del tórax ESTIMADAS.** No hay ficha con anchos ni gruesos (§2), y el tórax es una
@@ -492,7 +636,7 @@ Holguras:
 7. **Antena:** ≈ 5 mm por encima del borde de la celda y a ≈ 3 mm del canto de la PCB. La ganancia real será 1–2 dB menor que en la hoja
    de datos (lo dice Molex). Comprobar el RSSI.
 8. **Altura.** Unos 46 mm sobre la piel del caballo en el centro de la cincha, bajo el esternón (≈ 32 mm sobre la
-   cara exterior de la cincha: soporte 8 + cápsula 15,5 + funda y bolsillo). El conector de pines (7,5 mm) es lo que más suma. Valorar si molesta al caballo al plegar los
+   cara exterior de la cincha: soporte 8 + tacos 0,7 + cápsula 15,5 + panel exterior). El conector de pines (7,5 mm) es lo que más suma. Valorar si molesta al caballo al plegar los
    brazos en el salto.
 9. **Cables:**
    - van sin apantallar (los del electrodo Vialta) y solo se trenzan;
@@ -505,13 +649,23 @@ Holguras:
 11. **Aro de luz (REV 6.1):**
     - los LED son del cambio de PCB en curso (`feature/girth-pcb-rev-d-aro`), con las cotas del 15/11;
     - toda la base brilla, y el fondo la deja ver un poco por el soporte;
-    - el reparto de la luz en la pared y lo que se ve por las ventanas del bolsillo **no está simulado**: hay que probarlo
+    - el reparto de la luz en la pared **no está simulado**: hay que probarlo
       con una base impresa;
     - los hilos del pogo del ECG pasan cerca de la lente de D13: llevarlos por debajo de la PCB.
 12. **Soporte encapsulado:** con silicona o resina, los conectores de pines del soporte ya no se pueden desmontar sin
     romperla.
+13. **Pestillos (REV 6.2):**
+    - van impresos de pie, así que la flexión de la viga carga **entre capas**. Por eso la deformación se limita al
+      1,19 % y se dan ajustes de impresión (§5), pero la fatiga a 2000 ciclos **hay que ensayarla** (§8.4);
+    - el reparto del momento entre la raíz y el seguro (50 %) es una estimación;
+    - las fuerzas para meter y para soltar dependen de cómo salga la rampa impresa y de la fricción.
+14. **Cápsula expuesta:** sin bolsillo, la tapa roja y la base translúcida quedan a la vista y pueden recibir golpes
+    directos. El cerco, los contrafuertes y el cordón protegen frente a la pérdida, no frente al impacto. Se ensaya con
+    la caída de §8.4.
+15. **Oreja del cordón:** sobresale 4,6 mm del contorno de la base, en la parte alta del lado +Y. Tiene radio R3, pero
+    hay que vigilar que no se enganche.
 
-## 10. Cómo regenerar
+## 11. Cómo regenerar
 
 ```bash
 cd hardware/girth/CINCHA_MONTAJE/fuente

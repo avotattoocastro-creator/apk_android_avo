@@ -38,6 +38,37 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Aviso:** la REV C tiene el mismo problema de CPL. No pedirla con su CPL sin aplicar esta corrección.
 **Estado:** compilado en CI · NO VERIFICADO en hardware.
 
+## 2026-11-15 — Cincha — REV 6.2: sin bolsillo; cápsula sujeta por pestillos con seguro positivo (CAD)
+**Autor:** Claude · Rama `feature/cincha-rev6-2-cierre` (desde develop, con la 6.1 integrada) · **CI:** no aplica
+**Qué cambia (decisión del usuario 15/11 18:34 y aclaración de 18:35: cápsula expuesta, mucha vibración):**
+- **Bolsillo de piel eliminado:** fuera del STEP, del patrón (B1/B2, broche y ventanas) y de la BOM.
+- **Soporte** (`AVO_CINCHA_R6_2_soporte_pestillos_PETG`):
+  - 2 pestillos elásticos de PETG integrados (viga de 1,2 × 12 × 12,9 mm, ε = 1,19 %), con gancho en una **ranura
+    exterior** de la base (1,2 mm; no atraviesa la pared);
+  - **seguros deslizantes de TPU 95A con retén de clic** (bloqueo positivo);
+  - contrafuertes que protegen los pulsadores, rebajados;
+  - cerco de 4,5 mm con 0,25 de holgura;
+  - 4 tacos TPU 85A de precarga (sin juego vertical);
+  - desagües en los huecos de los pestillos;
+  - anclaje del cordón de seguridad.
+- **Cápsula:**
+  - ranura exterior y chaflán de entrada en la base;
+  - **oreja maciza en la tapa** para un cordón Dyneema Ø1,5, fuera de la junta. La estanqueidad no cambia.
+- **Retención calculada:**
+  - ≈ 165 N con seguros (objetivo ≥ 100 N; choque de 50 g ≈ 32 N);
+  - ≈ 65 N sin seguros;
+  - lateral y giro, por el cerco.
+- `DOCS/MONTAJE_CINCHA.md` §8 «Retención»: cálculo, uso con guantes y ensayos (tirón de 10 kg, vibración 1 h,
+  caída de 1,5 m, 2000 ciclos, barro).
+- Se actualizan la tabla de estanqueidad (filas 14–16), la BOM, los renders (13 = corte por el pestillo, 14 = pestillo
+  y seguro) y el zip.
+**No se ha tocado:** PCB, firmware, apps, workflows, firmas, Info.plist ni números de build.
+**Validación:** IMPLEMENTADO.
+- `verificar_step.py`: 24/24 STEP cerrados y planos.
+- **NO VERIFICADO:** nada impreso; retención, fatiga e IP67 sin ensayar.
+**Pendiente:** imprimir el soporte y una base; hacer los ensayos de §8.4 y §7.4. La fatiga entre capas de la raíz del
+pestillo es el riesgo principal.
+
 ## 2026-11-15 — Cincha — cápsula REV 6.1: aro de luz (4 LED SK6812SIDE-A) y todo estanco (objetivo IP67) (CAD)
 **Autor:** Claude · Rama `feature/cincha-cad-montaje` (con develop fusionado) · **CI:** no aplica
 **Qué cambia (petición del usuario 15/11 15:10):**

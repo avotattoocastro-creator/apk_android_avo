@@ -2,7 +2,7 @@
 
 Capas: CORTE (contorno y ventanas: cuchilla/láser), PLIEGUE (doblar), COSTURA (línea de costura a 4 mm),
 AGUJEROS_COSTURA (Ø1,2 cada 4 mm, para marcar con pinzas de 4 mm o cortar con láser), REBAJE (zona a rebajar a 1,0 mm),
-TALADROS (sacabocados), MARCAS (velcro, bolsillo, canal), TEXTO.
+TALADROS (sacabocados), MARCAS (velcro, soporte, canal), TEXTO.
 Todas las piezas se dibujan vistas por la flor (cara exterior). La u del modelo 3D es la X del patrón
 (+X = lado IZQUIERDO del caballo).
 """
@@ -90,8 +90,8 @@ def piezas():
     c.rect("CORTE", xe - 7.0, y_ext(ys + 3.5), xe + 7.0, y_ext(ys - 3.5))
     c.text(xe + 9, y_ext(ys), "ranura cable ECG 14×7", 4)
     fx0, fx1 = S["fx"]; fy0, fy1 = S["fy"]
-    c.rect("MARCAS", fx0 - 0.5 - e, y_ext(fy1 + V_OFF + 0.5 + e), fx1 + 0.5 + e, y_ext(fy0 + V_OFF - 0.5 - e))
-    c.text(fx0, y_ext(fy0 + V_OFF - 0.5 - e) + 3, "contorno del bolsillo", 4)
+    c.rect("MARCAS", fx0, y_ext(fy1 + V_OFF), fx1, y_ext(fy0 + V_OFF))
+    c.text(fx0, y_ext(fy0 + V_OFF) + 3, "contorno del ala del soporte (REV 6.2, sin bolsillo)", 4)
     # velcro (rizo) sobre el panel exterior, junto al canto libre
     ucut = max(abs(fx0), abs(fx1)) + 8.0
     for (a, b) in ((-L / 2, -ucut), (ucut, L / 2)):
@@ -125,37 +125,8 @@ def piezas():
            "+X = lado izquierdo del caballo", 7)
     c.text(x0 + 10, y_fin + 8, "solapa de cierre (velcro gancho por el lado carne)", 5)
     P.append(c)
-    # B · bolsillo: tapa con ventana + fuelle
     oy = y_fin + 60
-    pw = fx1 - fx0 + 1.0 + 2 * e; ph = fy1 - fy0 + 1.0 + 2 * e
-    b = Pieza("B · bolsillo", -L / 2, oy)
-    b.rect("CORTE", 0, 0, pw + 25, ph)          # + 25 de lengüeta de cierre en +X
-    wx, wy = pw / 2 - 20, ph / 2 - 14 + (-4.4 - (fy0 + fy1) / 2 + 0)
-    b.rect("CORTE", wx, wy, wx + 40, wy + 28)
-    b.circle("TALADROS", pw + 25 - 10, ph / 2, 2.0)
-    b.stitch_rect(MARGEN, MARGEN, pw - MARGEN, ph - MARGEN)
-    b.text(0, -8, "B1 · tapa del bolsillo (ventana 40×28,", 5)
-    b.text(0, -16, "broche de 15 mm en la lengüeta)", 5)
-    G = M.bolsillo_geo()
-    hgt = G["ztop"]
-    per = 2 * (pw + ph)
-    fb = Pieza("B2", -L / 2 + pw + 150, oy)
-    fb.rect("CORTE", 0, 0, per + 10, hgt + 12)
-    fb.line("PLIEGUE", 0, 10, per + 10, 10)
-    for xf in (pw, pw + ph, 2 * pw + ph):
-        fb.line("PLIEGUE", xf, 10, xf, hgt + 12)
-    # ventanas frente a la banda de luz (2 + 2, 20 × 4,5, puente central de 8 mm), con costura de refuerzo alrededor
-    zc = M.SOP["cama"]
-    vz0, vz1 = 10 + zc + M.BOLS_VENT["z0"], 10 + zc + M.BOLS_VENT["z1"]
-    for (a, bb) in M.BOLS_VENT["tramos"]:
-        for s0, s1 in ((a - G["x0"], bb - G["x0"]), (pw + ph + (G["x1"] - bb), pw + ph + (G["x1"] - a))):
-            fb.rect("CORTE", s0, vz0, s1, vz1)
-            fb.stitch_rect(s0 - 3, vz0 - 3, s1 + 3, vz1 + 3)
-    fb.text(0, -8, "B2 · fuelle del bolsillo %.0f × %.0f (pestaña de 10 mm cosida al panel exterior; "
-            "4 ventanas 20×4,5 frente al aro de luz)" % (per + 10, hgt + 12), 5)
-    pts = [(0, 5), (per + 10, 5)]
-    fb.poly("COSTURA", pts, False); fb.holes_along(pts, False)
-    P += [b, fb]
+    ph = 0.0
     # C · canal del cable
     oy2 = oy + ph + 50
     x = -L / 2

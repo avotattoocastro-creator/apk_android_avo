@@ -108,10 +108,10 @@
   }
  },
  "piezas": {
-  "AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido": {
+  "AVO_CINCHA_R6_2_base_aro_luz_PETG_translucido": {
    "material": "PETG translúcido natural",
-   "volumen_cm3": 15.043,
-   "triangulos": 4024,
+   "volumen_cm3": 14.513,
+   "triangulos": 5909,
    "caja_mm": [
     62.88,
     60.14,
@@ -119,18 +119,18 @@
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_1_tapa_PETG_opaco": {
+  "AVO_CINCHA_R6_2_tapa_PETG_opaco": {
    "material": "PETG opaco",
-   "volumen_cm3": 7.962,
-   "triangulos": 4726,
+   "volumen_cm3": 8.105,
+   "triangulos": 5100,
    "caja_mm": [
     62.88,
-    60.14,
+    64.74,
     5.6
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_1_junta_TPU85A": {
+  "AVO_CINCHA_R6_2_junta_TPU85A": {
    "material": "TPU 85A",
    "volumen_cm3": 0.379,
    "triangulos": 224,
@@ -141,7 +141,7 @@
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_1_separador_TPU85A": {
+  "AVO_CINCHA_R6_2_separador_TPU85A": {
    "material": "TPU 85A",
    "volumen_cm3": 1.498,
    "triangulos": 268,
@@ -152,14 +152,47 @@
    ],
    "estanca": true
   },
-  "AVO_CINCHA_R6_1_soporte_PETG": {
+  "AVO_CINCHA_R6_2_soporte_pestillos_PETG": {
    "material": "PETG opaco",
-   "volumen_cm3": 36.428,
-   "triangulos": 3888,
+   "volumen_cm3": 45.769,
+   "triangulos": 9254,
    "caja_mm": [
-    83.48,
-    80.74,
-    10.5
+    89.6,
+    82.62,
+    19.0
+   ],
+   "estanca": true
+  },
+  "AVO_CINCHA_R6_2_seguro_izq_TPU95A": {
+   "material": "TPU 95A",
+   "volumen_cm3": 0.15,
+   "triangulos": 204,
+   "caja_mm": [
+    3.4,
+    19.7,
+    5.2
+   ],
+   "estanca": true
+  },
+  "AVO_CINCHA_R6_2_seguro_der_TPU95A": {
+   "material": "TPU 95A",
+   "volumen_cm3": 0.15,
+   "triangulos": 204,
+   "caja_mm": [
+    3.4,
+    19.7,
+    5.2
+   ],
+   "estanca": true
+  },
+  "AVO_CINCHA_R6_2_tacos_precarga_TPU85A_x4": {
+   "material": "TPU 85A",
+   "volumen_cm3": 0.048,
+   "triangulos": 304,
+   "caja_mm": [
+    57.5,
+    23.9,
+    1.85
    ],
    "estanca": true
   }
@@ -171,18 +204,21 @@
   "tórax u= -170 mm: X=-150.8 Z=  66.5, inclinación -47.2°, radio 244 mm",
   "tórax u= -330 mm: X=-223.7 Z= 207.2, inclinación -75.3°, radio 435 mm",
   "tórax u= +450 mm: X=+239.8 Z= 325.9, inclinación 88.5°, radio 668 mm",
-  "cápsula REV 6.1: 62.9 × 60.1 × 15.5 mm (exterior con orejas de los tornillos)",
-  "soporte: 83.5 × 80.7 × 10.5 mm",
-  "AVO_CINCHA_R6_1_base_aro_luz_PETG_translucido: 15.04 cm³, 4024 triángulos, caja [62.9 60.1 13. ]",
-  "AVO_CINCHA_R6_1_tapa_PETG_opaco: 7.96 cm³, 4726 triángulos, caja [62.9 60.1  5.6]",
-  "AVO_CINCHA_R6_1_junta_TPU85A: 0.38 cm³, 224 triángulos, caja [56.2 49.   1.6]",
-  "AVO_CINCHA_R6_1_separador_TPU85A: 1.50 cm³, 268 triángulos, caja [45.  29.   1.2]",
-  "AVO_CINCHA_R6_1_soporte_PETG: 36.43 cm³, 3888 triángulos, caja [83.5 80.7 10.5]",
-  "conjunto CURVADO: 94 sólidos, aristas abiertas: 0",
-  "STEP CURVADO: 451243 entidades",
+  "cápsula REV 6.2: 62.9 × 60.1 × 15.5 mm (exterior con orejas de los tornillos)",
+  "soporte: 89.6 × 82.6 × 19.0 mm",
+  "AVO_CINCHA_R6_2_base_aro_luz_PETG_translucido: 14.51 cm³, 5909 triángulos, caja [62.9 60.1 13. ]",
+  "AVO_CINCHA_R6_2_tapa_PETG_opaco: 8.11 cm³, 5100 triángulos, caja [62.9 64.7  5.6]",
+  "AVO_CINCHA_R6_2_junta_TPU85A: 0.38 cm³, 224 triángulos, caja [56.2 49.   1.6]",
+  "AVO_CINCHA_R6_2_separador_TPU85A: 1.50 cm³, 268 triángulos, caja [45.  29.   1.2]",
+  "AVO_CINCHA_R6_2_soporte_pestillos_PETG: 45.77 cm³, 9254 triángulos, caja [89.6 82.6 19. ]",
+  "AVO_CINCHA_R6_2_seguro_izq_TPU95A: 0.15 cm³, 204 triángulos, caja [ 3.4 19.7  5.2]",
+  "AVO_CINCHA_R6_2_seguro_der_TPU95A: 0.15 cm³, 204 triángulos, caja [ 3.4 19.7  5.2]",
+  "AVO_CINCHA_R6_2_tacos_precarga_TPU85A_x4: 0.05 cm³, 304 triángulos, caja [57.5 23.9  1.8]",
+  "conjunto CURVADO: 92 sólidos, aristas abiertas: 0",
+  "STEP CURVADO: 512605 entidades",
   "longitud de los cables de electrodo (CURVADO): {'ECG+': 210, 'REF': 163, 'ECG-': 282} mm",
-  "conjunto RECTO: 94 sólidos, aristas abiertas: 0",
-  "STEP RECTO: 440461 entidades",
+  "conjunto RECTO: 92 sólidos, aristas abiertas: 0",
+  "STEP RECTO: 501837 entidades",
   "longitud de los cables de electrodo (RECTO): {'ECG+': 210, 'REF': 163, 'ECG-': 282} mm"
  ]
 }

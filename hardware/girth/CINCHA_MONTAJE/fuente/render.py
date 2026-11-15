@@ -152,7 +152,7 @@ def main():
                   "Cincha tipo Decathlon Fouganza 110 cm; cápsula en el centro (bajo el esternón), soporte cosido-atornillado a la funda."])
     render(allC, os.path.join(OUTR, "02_conjunto_curvado_desde_abajo.png"), az=-70, el=-35,
            title="Conjunto curvado visto desde abajo (lado exterior de la cincha)",
-           notes=["Bolsillo de piel con ventana sobre la tapa roja; cierre de velcro + solapa en el canto trasero."])
+           notes=["REV 6.2: sin bolsillo; la cápsula queda a la vista, sujeta por 2 pestillos con seguro; cierre de velcro + solapa en el canto trasero."])
     render(allC, os.path.join(OUTR, "03_conjunto_curvado_lado_caballo.png"), az=110, el=55,
            title="Lado del caballo: ventanas de los electrodos en la cara interior",
            notes=["ECG+ a la izquierda (u = +190), REF pequeño y ECG− a la derecha (u = −150 y −280). Piel rebajada a 1 mm alrededor."],
@@ -172,15 +172,15 @@ def main():
     caps = imp + com
     soporte = [m.copy() for m in simp + scom]
     for m in soporte:
-        m.transform(A.T_translate(0, 0, -M.SOP["cama"]))
+        m.transform(A.T_translate(0, 0, -M.SOP["cama"] - M.SOP["precarga"]))
     render(caps + soporte, os.path.join(OUTR, "06_capsula_en_soporte.png"), az=-50, el=30,
-           title="Cápsula REV 6.1 (62,9 × 60,1 × 15,5): base translúcida = aro de luz; tapa opaca", notes=["4 LED SK6812SIDE-A a z = 10,9 iluminan los lados largos de la base de PETG natural; soporte 83,5 × 80,7 × 10,5."])
+           title="REV 6.2: cápsula (62,9 × 64,7 × 15,5) en el soporte con 2 pestillos y seguros", notes=["Cerco de 4,5 mm (holgura 0,25); pestillos en ±X con pulsador rebajado tras el contrafuerte; seguro TPU 95A naranja con clic.", "Aro de luz (±Y) libre por encima del cerco; oreja de la tapa con cordón de seguridad al ala del soporte; soporte 90 × 82,6."])
     # explosionado
     ex = []
-    off = {"AVO_CINCHA_R6_1_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
-           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_1_junta_TPU85A": 18,
+    off = {"AVO_CINCHA_R6_2_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
+           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_2_junta_TPU85A": 18,
            "PCB_REV_D_46x30": 24, "PCB_componentes": 24, "PCB_pasivos": 24, "UFL_conector": 24, "LED_SK6812SIDE-A_x4": 24,
-           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_1_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
+           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_2_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
            "Hilos_bateria": 8, "U4_ESP32-C6-MINI-1U": 24, "LiPo_603450_1000mAh": 4}
     for m in caps:
         mm = m.copy()
@@ -189,11 +189,11 @@ def main():
     for m in soporte:
         mm = m.copy(); mm.transform(A.T_translate(0, 0, -16)); ex.append(mm)
     render(ex, os.path.join(OUTR, "07_capsula_explosionada.png"), az=-55, el=22, size=(1400, 1600),
-           title="Cápsula REV 6.1 explosionada",
+           title="Cápsula REV 6.2 explosionada",
            notes=["De arriba abajo: tornillos M2×6 + arandela, tapa opaca con antena Molex 146153, junta TPU 85A en ranura,",
                   "PCB REV D (46 × 30) con 4 LED laterales, colgada de la tapa con 4 M2×5, separador TPU, celda 603450,",
                   "base translúcida (aro de luz) con la ranura de la junta y 2 placas pogo selladas con epoxi,",
-                  "y el soporte con los 2 conectores de pines (carga + ECG) y 4 tornillos de Chicago."])
+                  "y el soporte con los 2 conectores de pines (carga + ECG), los pestillos integrados, los 2 seguros y 4 Chicago."])
     # corte: solo caras con todos los vértices en y < corte
     cut = M.CAP["pogo_y"]
     sec = []
@@ -203,21 +203,21 @@ def main():
         mm.F = [f for f in m.F if V[f[0]][:, 1].max() <= cut + 0.01 or V[f[0]][:, 1].min() >= cut + 0.01 and False]
         if mm.F:
             sec.append(mm)
-    render(sec, os.path.join(OUTR, "08_capsula_recortada_por_pogos.png"), az=90, el=8, size=(1500, 800),
+    render(sec, os.path.join(OUTR, "08_capsula_recortada_por_pogos.png"), az=90, el=8, size=(1500, 900),
            title="Cápsula + soporte recortados por el eje de los pogos (y = −21,4)", edge=True,
            notes=["Vista recortada (se quitan las caras con y > −21,4): placas de contactos a ras del fondo, pines con muelle en el soporte."])
     # piezas impresas
     pz = []
     x = 0
-    for m in [M.pieza_base(), M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte()]:
+    for m in [M.pieza_base(), M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte(), M.pieza_seguro(1), M.pieza_seguro(-1), M.pieza_tacos(True)]:
         mm = M.stl_print(m, m.name, m.name.endswith("tapa"))
         lo, hi = mm.bbox()
         mm.transform(A.T_translate(x - lo[0], 0, 0)); x += (hi[0] - lo[0]) + 12
         pz.append(mm)
     render(pz, os.path.join(OUTR, "09_piezas_impresas.png"), az=-70, el=40, size=(1800, 800),
            title="Piezas impresas en posición de impresión (Elegoo Centauri Carbon)",
-           notes=["Base PETG translúcido natural (aro de luz) · tapa PETG opaco (boca abajo) · junta TPU 85A 1,2×1,6 · separador TPU 85A · soporte PETG."])
-    render(flat({"F": gC["Funda"], "B": gC["Funda_bolsillo"], "E": gC["Electrodos"], "C": gC["Cables"]}) + soporte_world(gC),
+           notes=["Base PETG natural (aro de luz) · tapa PETG opaco (boca abajo) · junta y separador TPU 85A · soporte PETG con pestillos · 2 seguros TPU 95A · 4 tacos TPU 85A."])
+    render(flat({"F": gC["Funda"], "E": gC["Electrodos"], "C": gC["Cables"]}) + soporte_world(gC) + gC["Capsula_impresa"],
            os.path.join(OUTR, "10_funda_detalle.png"), az=75, el=-30, size=(1600, 1000),
            title="Funda de piel con el sistema (sin la cincha)",
            notes=["Canal cosido por dentro del pliegue delantero; trabillas en los extremos; ventana para la anilla D central."])
@@ -238,16 +238,26 @@ def extra(caps, soporte):
            notes=["Junta TPU en ranura sobre el canto de la base (z 11,8–13,0); tapa opaca con tope duro; LED con centro a z = %.1f." % zl,
                   "Vista recortada (se quitan las caras con x > 14)."],
            labels=[((14.0, 14.66, zl), "lente D11"), ((14.0, -14.66, zl), "lente D12")])
-    G = M.bolsillo()
-    loc = [m.copy() for m in G]
-    capz = []
-    imp, com = M.capsula_local()
-    for m in imp + com:
-        mm = m.copy(); mm.transform(A.T_translate(0, 0, M.SOP["cama"])); capz.append(mm)
-    simp, scom = M.soporte_local()
-    render(loc + capz + simp + scom, os.path.join(OUTR, "13_bolsillo_ventanas_luz.png"), az=-65, el=18, size=(1500, 1000),
-           title="Bolsillo de piel: 2 + 2 ventanas de 20 × 4,5 frente al aro de luz",
-           notes=["Puente central de 8 mm y costura de refuerzo a 3 mm alrededor de cada ventana; ventana superior de 40 × 28."])
+    # corte por el pestillo +X (plano y = centro del pestillo), visto desde −Y
+    G = M.pestillo_geo(1)
+    yc = G["yc"]
+    sec = []
+    for m in caps + soporte:
+        V = m.np()
+        F = [f for f in m.F if V[f[0]][:, 1].min() >= yc - 0.01]
+        if F:
+            mm = A.Mesh(m.name, m.color); mm.V = m.V; mm.F = F; sec.append(mm)
+    zc0 = -M.SOP["precarga"]
+    xw = G["xw"]
+    render(sec, os.path.join(OUTR, "13_corte_por_pestillo.png"), az=-90, el=2, size=(1500, 1000),
+           title="Corte por el pestillo +X (y = %.1f): gancho en la ranura exterior de la base, seguro detrás" % yc,
+           notes=["Viga PETG 1,2 × 12, L = 12,9 mm desde la raíz (z 0,8); gancho que entra 0,9 en la ranura, cara inferior plana; rampa arriba.",
+                  "Seguro TPU 95A en el hueco de 1,6 entre la viga y el contrafuerte; pulsador rebajado; tacos TPU que precargan la cápsula."],
+           labels=[((xw + 0.4, yc, M.PEST["z_ranura"][0] - 0.3 + 0.0), "gancho"), ((G["xo"] + 0.8, yc, 2.0), "seguro"),
+                   ((xw - 1.0, yc, M.PEST["z_ranura"][1] + 2), "ranura exterior")])
+    render(caps + soporte, os.path.join(OUTR, "14_capsula_en_soporte_vista_pestillo.png"), az=-20, el=25,
+           size=(1500, 1000), title="Pestillo +X con su seguro (naranja) y el contrafuerte que lo protege",
+           notes=["Todo queda por debajo de la tapa de la cápsula y dentro del contorno del soporte; cantos redondeados."])
 
 
 def soporte_world(g):
