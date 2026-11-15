@@ -363,7 +363,7 @@ enum RaceAnalysis {
             rep.placeLow = place(of: corrected - band, among: race, except: ourIndex)
             rep.placeHigh = place(of: corrected + band, among: race, except: ourIndex)
             let finish: Int = us.finish ?? place(of: official, among: race, except: ourIndex)
-            let what: String = useTraining ? "Con un final como en sus entrenamientos" : "Con un final como la mediana del campo"
+            let what: String = useTraining ? "Con un final como en sus entrenamientos" : "Con un final como el caballo medio"
             if finish == 1 {
                 rep.verdict = "Ganó la carrera: no hay puestos que recuperar."
                 if let second = others.compactMap({ $0.officialTimeS }).min() {
@@ -433,10 +433,10 @@ enum RaceAnalysis {
 
         rep.observations = observations(race: race, ourIndex: ourIndex, report: rep)
         rep.method = [
-            "Caída en el final = \(fadeLabel) (velocidades medias del PDF por tramo). La mediana del campo se calcula con los demás caballos.",
+            "Caída en el final = \(fadeLabel) (velocidades medias del PDF por tramo). El caballo medio es el que queda en medio de los demás participantes sin contar el nuestro (la mitad lo hizo mejor y la otra mitad peor).",
             "Tiempo perdido en el final = tiempo del último tramo − tiempo que habría hecho con la caída de referencia (misma distancia, velocidad × caída de referencia / caída propia). Solo se cuenta si cayó más que la referencia.",
             "Tiempo perdido por terreno = «Parcouru vs. 1er» (metros de más que el ganador) / velocidad media de su último tramo. Solo si es positivo.",
-            "Referencia del final: la caída de sus trabajos rápidos de entrenamiento (> 40 km/h, ≥ 400 m: últimos 200 m / mejor 200 m del trabajo) si es mejor que la de la carrera; si no, la mediana del campo.",
+            "Referencia del final: la caída de sus trabajos rápidos de entrenamiento (> 40 km/h, ≥ 400 m: últimos 200 m / mejor 200 m del trabajo) si es mejor que la de la carrera; si no, el caballo medio.",
             "Los entrenamientos son más lentos que la carrera: se comparan proporciones (caída, velocidad sostenida respecto a su propia punta), nunca velocidades absolutas.",
             "Puesto estimado = tiempo oficial corregido comparado con los tiempos oficiales de los demás. El margen ± es el 25 % de la corrección (mínimo 0,1 s).",
             "Posiciones por tramo = orden de los tiempos acumulados de todos los caballos al final de cada tramo. 1 cuerpo ≈ 0,2 s.",
@@ -472,9 +472,9 @@ enum RaceAnalysis {
         }
         if let f = rep.ourFade, let best = rep.ourBestSpeedKmh, let last = rep.ourLastSpeedKmh {
             var s: String = "Caída en el final: \(RaceFormat.kmh(best)) → \(RaceFormat.kmh(last)) (conserva el \(RaceFormat.percent(f)))"
-            if let m = rep.fieldMedianFade { s += " frente al \(RaceFormat.percent(m)) de la mediana del campo" }
+            if let m = rep.fieldMedianFade { s += " frente al \(RaceFormat.percent(m)) del caballo medio" }
             s += "."
-            if let l = rep.finalLossFieldS, l > 0.005 { s += " Coste: \(RaceFormat.seconds(l)) respecto a la mediana." }
+            if let l = rep.finalLossFieldS, l > 0.005 { s += " Coste: \(RaceFormat.seconds(l)) respecto al caballo medio." }
             out.append(s)
         }
         // stride at the end vs the winner, and its own stride change
@@ -492,7 +492,7 @@ enum RaceAnalysis {
         }
         if let sl = rep.startLossS, let m = rep.fieldMedianFirstS, let mine = us.sectors.first?.sectorS {
             if abs(sl) >= 0.05 {
-                out.append("Salida: \(RaceFormat.seconds(mine)) en el primer tramo, \(RaceFormat.signedSeconds(sl)) respecto a la mediana del campo (\(RaceFormat.seconds(m))).")
+                out.append("Salida: \(RaceFormat.seconds(mine)) en el primer tramo, \(RaceFormat.signedSeconds(sl)) respecto al caballo medio (\(RaceFormat.seconds(m))).")
             }
         }
         if let d = us.distanceVsWinnerM {
@@ -509,7 +509,7 @@ enum RaceAnalysis {
             out.append("En entrenamiento sostiene en 600 m el \(RaceFormat.percent(ts)) de su mejor 200 m; en la carrera, los últimos 600 m fueron al \(RaceFormat.percent(rs)) de su mejor tramo.")
         }
         if let tf = rep.trainingFade, let f = rep.ourFade {
-            out.append("Caída en sus trabajos rápidos (mediana de \(rep.worksWithFade)): conserva el \(RaceFormat.percent(tf)); en la carrera, el \(RaceFormat.percent(f)).")
+            out.append("Caída en sus trabajos rápidos (valor medio de \(rep.worksWithFade)): conserva el \(RaceFormat.percent(tf)); en la carrera, el \(RaceFormat.percent(f)).")
         }
         return out
     }

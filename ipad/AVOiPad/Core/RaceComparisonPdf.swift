@@ -416,8 +416,8 @@ private final class RaceComparisonPdfWriter {
             let med: [Double?] = (0..<labels.count).map { k in
                 RaceAnalysis.median(r.runners.filter { $0.name != u.name }.compactMap { k < $0.sectors.count ? $0.sectors[k].speedKmh : nil })
             }
-            series.append((name: "Mediana del campo", color: RaceComparisonPdfWriter.grey, values: med))
-            lineChart("Velocidad por tramo (km/h) · nuestro caballo, ganador y mediana del campo", labels, series)
+            series.append((name: "Caballo medio", color: RaceComparisonPdfWriter.grey, values: med))
+            lineChart("Velocidad por tramo (km/h) · nuestro caballo, ganador y caballo medio", labels, series)
         }
         if sec.contains(.positionChart) {
             var series: [(name: String, color: AvoRGB, values: [Double?])] = [(name: ourName, color: ReportBuilder.red, values: vals(u) { $0.position.map { Double($0) } })]
@@ -547,21 +547,21 @@ private final class RaceComparisonPdfWriter {
             }
             if sec.contains(.raceFacts) {
             sub("Lo que dice la carrera", keep: 30 + 6 * 14 + 4)
-            paragraph("Mediana del campo = el «caballo típico» de esta carrera: el valor del caballo que queda en medio de los otros "
+            paragraph("Caballo medio = el caballo que queda en medio de los otros "
                       + "\(max(r.fieldSize - 1, 0)) participantes (sin el nuestro); la mitad lo hizo mejor y la otra mitad peor.",
                       size: 7.5, color: ReportBuilder.dim)
             keyValues([(k: "Caída en el final (conserva)",
                         v: "\(RaceFormat.percent(rep.ourFade)) · \(RaceFormat.kmh(rep.ourBestSpeedKmh)) → \(RaceFormat.kmh(rep.ourLastSpeedKmh))"),
-                       (k: "Mediana del campo (conserva)", v: RaceFormat.percent(rep.fieldMedianFade)),
-                       (k: "Perdido en el final vs mediana", v: RaceFormat.seconds(rep.finalLossFieldS)),
+                       (k: "Caballo medio (conserva)", v: RaceFormat.percent(rep.fieldMedianFade)),
+                       (k: "Perdido en el final vs caballo medio", v: RaceFormat.seconds(rep.finalLossFieldS)),
                        (k: "Perdido por terreno de más", v: groundText(rep)),
-                       (k: "Salida vs mediana del campo", v: RaceFormat.signedSeconds(rep.startLossS)),
+                       (k: "Salida vs caballo medio", v: RaceFormat.signedSeconds(rep.startLossS)),
                        (k: "Últimos 600 m vs su mejor tramo", v: RaceFormat.percent(rep.raceSustain))])
             }
             if sec.contains(.trainingFacts) {
             sub("Lo que dicen sus entrenamientos", keep: rep.trainingSessions == 0 ? 30 : 5 * 14 + 4 + 16)
             if rep.trainingSessions == 0 {
-                paragraph("Sin entrenamientos anteriores a la carrera en el iPad: el análisis usa solo la carrera (mediana del campo como referencia).",
+                paragraph("Sin entrenamientos anteriores a la carrera en el iPad: el análisis usa solo la carrera (caballo medio como referencia).",
                           size: 8.5, color: ReportBuilder.dim)
             } else {
                 keyValues([(k: "Entrenamientos",
@@ -588,7 +588,7 @@ private final class RaceComparisonPdfWriter {
             }
             if sec.contains(.estimate) {
             sub(rep.referenceIsTraining ? "Estimación (final con la caída de sus entrenamientos y sin el terreno de más)"
-                                        : "Estimación (final con la caída de la mediana del campo y sin el terreno de más)", keep: 64)
+                                        : "Estimación (final con la caída del caballo medio y sin el terreno de más)", keep: 64)
             let range: String? = {
                 guard let a = rep.placeLow, let b = rep.placeHigh else { return nil }
                 return a == b ? "Margen ±: sin cambio" : "Margen ±: \(a).º–\(b).º"
@@ -600,7 +600,7 @@ private final class RaceComparisonPdfWriter {
                    (label: "Puesto estimado", value: rep.predictedPlace.map { "\($0).º" } ?? "—", caption: range),
                    (label: "Perdido en el final",
                     value: RaceFormat.seconds(rep.referenceIsTraining ? rep.finalLossTrainingS : rep.finalLossFieldS),
-                    caption: rep.referenceIsTraining ? "vs sus entrenamientos" : "vs mediana del campo")], perRow: 5)
+                    caption: rep.referenceIsTraining ? "vs sus entrenamientos" : "vs caballo medio")], perRow: 5)
             }
             if sec.contains(.observations) && !rep.observations.isEmpty {
                 sub("Observaciones", keep: 40)

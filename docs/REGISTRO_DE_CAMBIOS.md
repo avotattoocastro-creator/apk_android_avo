@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — iPad — Carreras: «mediana del campo» pasa a llamarse «caballo medio»
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
+**Qué cambia:** en todo lo que tiene que ver con carreras, «mediana del campo» pasa a ser **«caballo medio»** y «mediana de sus trabajos» pasa a ser «valor medio». Afecta a la ficha de la carrera, las gráficas, el análisis, las observaciones, el método y el Informe PDF. El cálculo no cambia: sigue siendo la mediana de los demás participantes, sin contar el nuestro, y la explicación lo dice con palabras sencillas.
+**Por qué:** petición del entrenador (16/11/2026): «algo que sea entendible por cualquiera», «en todas partes».
+**Archivos:** `Views/RaceDetailView.swift`, `Core/RaceAnalysis.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-16 — iPad — Informe PDF de la carrera: ningún título queda solo al final de una página
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
 **Qué cambia:** cada título y subtítulo del PDF se mantiene en la misma página que su primer bloque. Si no caben juntos, el título pasa a la página siguiente. Antes quedaban sueltos al pie de la página 1 y 2:
