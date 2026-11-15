@@ -43,7 +43,7 @@ inline int gain_vv(uint8_t code) { static const int g[8] = {6, 1, 2, 3, 4, 8, 12
 int gain_code(int vv);
 // register values (500 sps, internal 2,42 V reference, DC lead-off on channel 2, RLD from channel 2, RLDREF internal)
 uint8_t config1();             // 0x02: 500 sps, continuous
-uint8_t config2();             // 0xE0: lead-off comparators + reference buffer on, VREF 2,42 V
+uint8_t config2();             // 0xE0: lead-off comparators + reference buffer on, VREF 2,42 V. CLK_EN (bit 3) MUST stay 0: PCB REV D ties CLK to DGND
 uint8_t loff();                // 0x10: 95 % threshold, 6 nA, DC
 uint8_t ch1set();              // 0x81: channel 1 powered down, input shorted
 uint8_t ch2set(uint8_t gain_code);   // channel 2 normal electrode input

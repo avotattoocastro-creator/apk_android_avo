@@ -29,7 +29,7 @@ WIDTH = {D.VBUS: 0.4, "POGO_5V": 0.4, D.VSYS: 0.4, D.VBAT: 0.4, "BAT_IN": 0.4, D
 ORDER = ["ECGP", "ECGN", "ECG_E_P", "ECG_E_N", "ECG_E_REF", "ECG_PGA2P", "ECG_PGA2N", "ECG_PGA1P", "ECG_PGA1N",
          "ECG_VREFP", "ECG_VCAP1", "ECG_VCAP2", "ECG_RLDOUT", "ECG_RLDINV", "POGO_5V", D.VBUS, D.VBAT, "BAT_IN",
          "CHG_ISET", "CHG_ILIM", "CHG_TS", "CHG_EN2", D.VSYS, D.VA, D.V3, "MAG_CAP", "USB_DP", "USB_DM",
-         "ECG_CS", "ECG_SCK", "ECG_MOSI", "ECG_MISO", "ECG_DRDY", "ECG_RESET", "ECG_START", "ECG_CLK",
+         "ECG_CS", "ECG_SCK", "ECG_MOSI", "ECG_MISO", "ECG_DRDY", "ECG_RESET", "ECG_START",
          "I2C_SDA", "I2C_SCL", "IMU_INT1", "IMU_INT2", "MAG_INT",
          "EN", "BOOT", "BAT_ADC", "POGO_DET", "DET", "CHG_STAT", "LED_A", "LED_K"]
 
@@ -170,7 +170,8 @@ def via_drops(r, pads, log):
 # GND pins of the QFNs that sit next to their exposed pad: a short inward stub joins them to it (the EP has its
 # own thermal vias to the planes), so no fan-out via blocks the escape of the neighbouring signal pins.
 EP_STUB_PINS = {("U2", "4"), ("U2", "6"), ("U2", "8"), ("U2", "15")} | \
-    {("U6", n) for n in ("10", "13", "24", "25", "26")}   # REV D: masas del ADS1292 al EP (sin vías junto a las entradas)
+    {("U6", n) for n in ("10", "13", "17", "24", "25", "26")}   # REV D: masas del ADS1292 al EP (sin vías junto a las entradas);
+    # 17 = CLK a DGND: libera la salida de ECG_CS (pin 18), que quedaba encajonada entre CLK y MOSI
 
 
 def ep_stubs(r, pads):

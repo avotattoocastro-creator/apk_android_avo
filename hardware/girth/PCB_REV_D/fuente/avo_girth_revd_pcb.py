@@ -294,7 +294,7 @@ C("C35", "100n", V3, GND, block="IMU", note="VDDIO del MMC5983MA")
 part("U6", "ADS", "ADS1292", (0, 0), 0,
      {1: "ECG_PGA1N", 2: "ECG_PGA1P", 3: VA, 4: VA, 5: "ECGN", 6: "ECGP", 7: "ECG_PGA2N", 8: "ECG_PGA2P",
       9: "ECG_VREFP", 10: GND, 11: "ECG_VCAP1", 12: VA, 13: GND, 14: V3, 15: "ECG_RESET", 16: "ECG_START",
-      17: "ECG_CLK", 18: "ECG_CS", 19: "ECG_MOSI", 20: "ECG_SCK", 21: "ECG_MISO", 22: "ECG_DRDY", 23: V3, 24: GND,
+      17: GND, 18: "ECG_CS", 19: "ECG_MOSI", 20: "ECG_SCK", 21: "ECG_MISO", 22: "ECG_DRDY", 23: V3, 24: GND,
       25: GND, 26: GND, 27: "ECG_VCAP2", 28: "ECG_RLDINV", 29: VA, 30: "ECG_RLDOUT", 31: VA, 32: VA, 33: GND},
      LC["ADS1292"], "ADS1292IRSMR (TI) · alt. ADS1292RIRSMR C456281", "ECG",
      sym=dict(L=[(6, "IN2P"), (5, "IN2N"), (4, "IN1P"), (3, "IN1N"), (8, "PGA2P"), (7, "PGA2N"), (2, "PGA1P"), (1, "PGA1N"),
@@ -329,7 +329,7 @@ C("C55", "1n5 C0G", "ECG_RLDOUT", "ECG_RLDINV", block="ECG", note="realimentaci�
 R("R43", "100k", "ECG_RLDOUT", "ECG_E_REF", block="ECG", note="RLD al electrodo de referencia (limita la corriente)")
 R("R44", "10k", "ECG_RESET", V3, block="ECG", note="PWDN/RESET alto (GPIO4 lo baja para reiniciar o apagar)")
 R("R45", "10k", "ECG_START", GND, block="ECG", note="START bajo: la conversión arranca por orden SPI o por GPIO21")
-R("R46", "10k", "ECG_CLK", GND, block="ECG", note="CLK sin usar (reloj interno)")
+# REV D: CLK (pin 17) sin usar con reloj interno y CLK_EN = 0 (CONFIG2 0xE0) → a DGND directo por el EP; sin R46
 for ref, net, lab, nt in (("P4", "ECG_E_P", "ECG +", "pogo ECG contacto 1: placa izquierda"),
                           ("P5", "ECG_E_REF", "ECG REF", "pogo ECG contacto 2: referencia (RLD)"),
                           ("P6", "ECG_E_N", "ECG -", "pogo ECG contacto 3: placa derecha")):

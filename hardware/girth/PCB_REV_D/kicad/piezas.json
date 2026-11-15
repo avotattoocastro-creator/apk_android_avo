@@ -746,7 +746,7 @@
   "note": "DVDD",
   "jlc_rot": 0,
   "x": -6.94,
-  "y": 3.2,
+  "y": 3.0,
   "rot": 90
  },
  {
@@ -987,21 +987,6 @@
   "jlc_rot": 0,
   "x": -8.52,
   "y": 2.06,
-  "rot": 90
- },
- {
-  "ref": "R46",
-  "value": "10k",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25744",
-  "mpn": "",
-  "block": "ECG",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "CLK sin usar (reloj interno)",
-  "jlc_rot": 0,
-  "x": -7.34,
-  "y": 0.6,
   "rot": 90
  },
  {

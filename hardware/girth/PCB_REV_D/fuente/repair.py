@@ -230,6 +230,11 @@ def make_router(pads, segs, vias):
     return r
 
 
+# REV D: con el ADS1292 (VQFN 0,4 mm) la salida por F.Cu se encajona; vías más baratas y B.Cu sin penalizar
+VIA_COST = float(os.environ.get("AVO_VIA_COST", "30"))
+LAYER_COST = [float(x) for x in os.environ.get("AVO_LAYER_COST", "1.0,1.3,1.6").split(",")]
+
+
 def try_route(r, pads, net, nid, g):
     for w in (net_width(net), 0.2):
         free = r.free_mask(nid, w)
@@ -239,7 +244,7 @@ def try_route(r, pads, net, nid, g):
         for k in range(1, len(g)):
             b = group_cells(r, g[k], free, w)
             tgt = next(d for kk, d in g[k] if kk == "pad")["c"]
-            path = r.astar(nid, a, b, w, free, vm, tgt, via_cost=30, layer_cost=[1.0, 1.3, 1.6])
+            path = r.astar(nid, a, b, w, free, vm, tgt, via_cost=VIA_COST, layer_cost=LAYER_COST)
             if path and (best is None or len(path) < len(best)):
                 best = path
         if best:

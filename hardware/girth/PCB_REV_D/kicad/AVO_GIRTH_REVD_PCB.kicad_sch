@@ -1895,7 +1895,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 643.89 170.18 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"ECG_CLK"
+		"GND"
 		(shape passive)
 		(at 643.89 172.72 0)
 		(fields_autoplaced yes)
@@ -2929,52 +2929,6 @@
 		(effects (font (size 1 1)) (justify left))
 		(uuid "9b106de9-375d-5c52-9e86-7f256cd8043e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 688.34 270.51 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(symbol
-		(lib_id "AVO:R_avo")
-		(at 712.47 265.43 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "54d883c2-174e-5bbe-8438-ab79eb298a88")
-		(property "Reference" "R46" (at 715.01 264.16 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 715.01 266.7 0) (effects (font (size 1 1)) (justify left)))
-		(property
-			"Footprint"
-			"AVO:R_0402_1005Metric"
-			(at 712.47 265.43 0)
-			(hide yes)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" "" (at 712.47 265.43 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 712.47 265.43 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 712.47 265.43 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 712.47 265.43 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(pin "1" (uuid "e6eea8d7-9fef-5c2d-8a02-196da8a0f9d4"))
-		(pin "2" (uuid "06aaf6f8-e95a-554e-b271-5bcc28063bb1"))
-		(instances
-			(project "AVO_GIRTH_REVD_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R46") (unit 1)))
-		)
-	)
-	(global_label
-		"ECG_CLK"
-		(shape passive)
-		(at 712.47 261.62 90)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "be89d0b2-7778-5956-b987-aa2601eed4ff")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 712.47 261.62 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(global_label
-		"GND"
-		(shape passive)
-		(at 712.47 269.24 270)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "ccb4f20c-c887-5a52-b74a-087c63bac84e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 712.47 269.24 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
 		(start 15.24 20.32)
