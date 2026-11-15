@@ -24,6 +24,12 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/logo-performance-arriba`
+**Qué cambia:** en el logotipo de la cabecera de los informes (`report_text.jpg`) se intercambian las dos bandas: «PERFORMANCE» pasa justo bajo «AVO» y «HORSE EDITION» va debajo. Mismo tamaño (670 × 282 px). Se cambia en el iPad (`Assets.xcassets/report_text.imageset`) y en Windows (`AVO.Windows.Core/Reports`), que comparten el mismo archivo.
+**Por qué:** petición del entrenador (16/11/2026).
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados en el iPad.
+
 ## 2026-11-16 — iPad — Cuadra: número de carreras de cada caballo
 **Autor:** Claude · **Rama:** `feature/ipad-cuadra-carreras`
 **Qué cambia:** en la lista de la Cuadra cada caballo muestra su número de carreras importadas («1 carrera», «0 carreras»), antes del número de entrenamientos.
