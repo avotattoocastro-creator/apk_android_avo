@@ -1,38 +1,36 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `7af3a72da7236dc494d693db7f18951af795e042` · ejecución de CI: 43717453330
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `489a9ede52b8d32e521a3f31bfdaf6cf500cc822` · ejecución de CI: 43719872929
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 77 en total, 60 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 756 · vías: 128 · ruteado INCOMPLETO (11 conexiones)
+- Pistas: 800 · vías: 144 · ruteado INCOMPLETO (6 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 11 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 6 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: items_not_allowed 3
 
 ### Conexiones incompletas
-- Pad 23 [+3V3] of U6 on F.Cu ↔ Pad 14 [+3V3] of U6 on F.Cu
-- Track [+3V3] on F.Cu, length 0.1250 mm ↔ Pad 23 [+3V3] of U6 on F.Cu
-- Pad 5 [+3V3] of U5 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.5445 mm
-- Pad 12 [+3V3A] of U6 on F.Cu ↔ Track [+3V3A] on In2.Cu, length 4.1686 mm
 - Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
 - Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 1.8506 mm
 - Track [ECGN] on F.Cu, length 0.3600 mm ↔ Pad 5 [ECGN] of U6 on F.Cu
+- Pad 22 [ECG_DRDY] of U6 on F.Cu ↔ Track [ECG_DRDY] on In2.Cu, length 0.1128 mm
 - Pad 19 [ECG_MOSI] of U6 on F.Cu ↔ Pad 19 [ECG_MOSI] of U4 on F.Cu
 - Pad 28 [ECG_RLDINV] of U6 on F.Cu ↔ Track [ECG_RLDINV] on F.Cu, length 0.8224 mm
-- PTH pad 1 [POGO_5V] of P1 ↔ Pad 1 [POGO_5V] of F2 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 4
+- track_dangling: 2
+- via_dangling: 2
 - silk_overlap: 2
 
 ## Lista de materiales y posiciones
