@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-15 — iPad — Vídeo asociado al entrenamiento, datos impresos y recorte
-**Autor:** Claude · Rama `claude/ipad-video-datos`
+**Autor:** Claude · Rama `claude/ipad-video-datos` · **CI:** run 43698716776 (compila y pruebas unitarias OK, sin TestFlight)
 **Qué cambia (peticiones del entrenador 15/11/2026, con referencia tipo «telemetry overlay»):**
 - **Caballo al grabar:** se elige en el panel y se guarda en el `.avosync.json`.
 - **Asociación al entrenamiento:** automática por la hora, prefiriendo el mismo caballo, o elegida a mano en el
