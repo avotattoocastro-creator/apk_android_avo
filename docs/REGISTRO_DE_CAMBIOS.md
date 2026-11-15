@@ -24,6 +24,28 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — Vídeo asociado al entrenamiento, datos impresos y recorte
+**Autor:** Claude · Rama `claude/ipad-video-datos`
+**Qué cambia (peticiones del entrenador 15/11/2026, con referencia tipo «telemetry overlay»):**
+- **Caballo al grabar:** se elige en el panel y se guarda en el `.avosync.json`.
+- **Asociación al entrenamiento:** automática por la hora, prefiriendo el mismo caballo, o elegida a mano en el
+  reproductor. En la lista de vídeos se ve a qué entrenamiento está asociado cada uno.
+- **Reproductor con los datos encima:** velocímetro, barra de distancia, recorrido, brújula, coordenadas, aire,
+  aceleraciones, tranco, IMU de la cincha, altitud, calidad GNSS, hora GPS y caballo.
+  - Todo se puede elegir con el botón «Datos».
+  - El pulso aparece «sin datos» hasta que se decodifique el ECG.
+- **Recorte por delante y por detrás:** no destructivo, con agarres y botones.
+- **Exportar con datos:** vídeo HEVC con los indicadores impresos (`videos/exportados/`), «Guardar en Fotos» y compartir.
+- **Nuevos archivos:** `Core/VideoTelemetry.swift` (series del entrenamiento + dibujo), `App/VideoOverlayExporter.swift`.
+  - `SessionItem.fullImu` pasa a ser legible.
+  - `AvoSyncVideoFile` añade `horse`, `training_id`, `trim_start_s` y `trim_end_s`, opcionales, y lee igual los archivos
+    de la build 136.
+**No se ha tocado:** protocolo AVO SYNC, motor, Android, Windows, firmware, Info.plist (los permisos de Cámara y Fotos ya
+estaban), workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+- No está comprobado que el vídeo exportado salga bien orientado con el iPad girado al revés.
+- La sincronía con el reloj del iPad es de decenas de ms (estimada).
+
 ## 2026-11-15 — iPad — «Cámara» a todo el ancho y panel desplegable
 **Autor:** Claude · Rama `claude/ipad-camara-ancho`
 **Qué cambia (boceto del entrenador 15/11/2026, build 136):**

@@ -345,6 +345,13 @@ struct AvoSyncVideoFile: Codable, Equatable {
     var systemClockEnd: ClockPair
     var gadgetName: String?
     var appVersion: String
+    /// Caballo elegido al grabar (nombre de Cuadra). Opcional.
+    var horse: String? = nil
+    /// Entrenamiento asociado a mano (`sessionId`). nil = se busca por la hora.
+    var trainingId: String? = nil
+    /// Recorte no destructivo (s desde el primer fotograma). nil = sin recorte por ese lado.
+    var trimStartS: Double? = nil
+    var trimEndS: Double? = nil
 
     enum CodingKeys: String, CodingKey {
         case format, version, video, width, height, codec, frames, source, holdover, fit, samples, marks
@@ -359,6 +366,23 @@ struct AvoSyncVideoFile: Codable, Equatable {
         case systemClockEnd = "system_clock_end"
         case gadgetName = "gadget_name"
         case appVersion = "app_version"
+        case horse
+        case trainingId = "training_id"
+        case trimStartS = "trim_start_s"
+        case trimEndS = "trim_end_s"
+    }
+
+    /// Tramo útil del vídeo tras el recorte (s desde el primer fotograma).
+    var trimmedRange: ClosedRange<Double> {
+        let a = max(0, min(trimStartS ?? 0, durationS))
+        let b = max(a, min(trimEndS ?? durationS, durationS))
+        return a...b
+    }
+
+    /// Hora UTC (s) del inicio y del fin del tramo útil.
+    var utcRangeS: ClosedRange<Double> {
+        let r = trimmedRange
+        return Double(utcNs(videoTimeS: r.lowerBound)) / 1e9...Double(utcNs(videoTimeS: r.upperBound)) / 1e9
     }
 
     var durationS: Double { Double(lastFrameHostNs - firstFrameHostNs) / 1e9 }

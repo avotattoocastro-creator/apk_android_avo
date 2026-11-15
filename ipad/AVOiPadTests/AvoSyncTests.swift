@@ -1,4 +1,5 @@
 import XCTest
+import UIKit
 @testable import AVO_Horse
 
 /// AVO SYNC v1: tramas, cálculo del desfase y archivo .avosync.json (docs/AVO_SYNC.md). Pruebas simuladas: no sustituyen a
@@ -95,5 +96,37 @@ final class AvoSyncTests: XCTestCase {
         // fotograma a 1 s del primero
         XCTAssertEqual(back.utcNs(videoTimeS: 1), 1_763_200_000_000_000_000 + 3_000_000_000)
         XCTAssertEqual(back.durationS, 9.983333333, accuracy: 1e-6)
+    }
+
+    func testOldFileWithoutNewKeysAndTrim() throws {
+        let fit = AvoSyncFit(refHostNs: 0, offsetAtRefNs: 1_763_200_000_000_000_000, slope: 0)
+        var f = AvoSyncVideoFile(video: "a.mov", width: 1920, height: 1080, fpsNominal: 30, codec: "hevc", frames: 300,
+                                 firstFrameHostNs: 0, lastFrameHostNs: 10_000_000_000, source: .avoSync,
+                                 firstFrameUtcNs: 1_763_200_000_000_000_000, errorBoundMs: nil, minDelayMs: nil, spreadMs: nil,
+                                 holdover: false, fit: fit, samples: [], marks: [],
+                                 systemClockStart: .init(hostNs: 0, unixNs: 0), systemClockEnd: .init(hostNs: 0, unixNs: 0),
+                                 gadgetName: nil, appVersion: "t")
+        // un archivo de la build 136 no tiene horse / training_id / trim_*: se lee igual
+        var json = try JSONSerialization.jsonObject(with: try AvoSyncVideoFile.encode(f)) as! [String: Any]
+        json.removeValue(forKey: "horse"); json.removeValue(forKey: "training_id")
+        let old = try AvoSyncVideoFile.decode(try JSONSerialization.data(withJSONObject: json))
+        XCTAssertNil(old.trainingId)
+        XCTAssertEqual(old.trimmedRange, 0...10)
+        f.trimStartS = 2; f.trimEndS = 7.5
+        XCTAssertEqual(f.trimmedRange, 2...7.5)
+        XCTAssertEqual(f.utcRangeS.lowerBound, 1_763_200_002, accuracy: 1e-6)
+        f.trimEndS = 99
+        XCTAssertEqual(f.trimmedRange.upperBound, 10)
+    }
+
+    func testOverlayDrawsWithoutTraining() {
+        let fmt = UIGraphicsImageRendererFormat(); fmt.scale = 1
+        let img = UIGraphicsImageRenderer(size: CGSize(width: 1920, height: 1080), format: fmt).image { ctx in
+            VideoOverlayRenderer.draw(ctx.cgContext, size: CGSize(width: 1920, height: 1080),
+                                      .init(telemetry: nil, sample: VideoTelemetrySample(inRange: false),
+                                            gauges: Set(VideoGauge.allCases), utcText: "10:00:00.000", timeSource: "RELOJ DEL IPAD"))
+        }
+        XCTAssertEqual(img.size, CGSize(width: 1920, height: 1080))
+        XCTAssertEqual(VideoOverlayRenderer.coordText(43.5, -3.25), "43° 30' 00.0\" N  3° 15' 00.0\" O")
     }
 }
