@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha REV D: aro de luz (4 LED) y firmware 0.6.0 con el aro
+**Autor:** Claude · **Rama:** `feature/girth-pcb-rev-d-aro` · **CI:** PCB run 43723857285 (puerta superada: DRC 0, 0 conexiones, paridad 0, ERC 0/0) · firmware run 43723342562 (éxito, host 80/80)
+**Qué cambia:**
+- **PCB:** 4 × SK6812SIDE-A en los cantos largos en lugar del LED verde, datos por GPIO15 y alimentación conmutada (AO3401A + 2N7002, GPIO18). Ver `hardware/girth/PCB_REV_D/DOCS/INFORME_PCB_REV_D.md`.
+- **Firmware:** `girth_ring.cpp` (RMT a 800 kHz). Los LED solo reciben tensión mientras se encienden.
+- **Colores:**
+  - azul: buscando la espalda;
+  - verde: todo bien;
+  - ámbar ×3: electrodos sin contacto;
+  - rojo ×2: IMU sin datos;
+  - rojo ×1: batería < 15 %;
+  - en el soporte, naranja fijo cargando y verde fijo cargada (CHG por GPIO8).
+- **Comando nuevo:** `aro on|off`.
+
+**Por qué:** petición del usuario, igual que el aro del casco V5. La cápsula estanca con el aro va en `feature/cincha-cad-montaje`.
+**Workflows:** sin cambios. Se lanzaron a mano (`workflow_dispatch`) en la rama nueva.
+**Estado:** COMPILADO / CI · **NO VERIFICADO en hardware real**.
+
 ## 2026-11-15 — Cincha PCB REV D + firmware 0.6.0 + batería 1000 mAh
 **Autor:** Claude · **Commits:** rama `feature/girth-pcb-rev-d` (puerta en `b63c741`) · **CI:** PCB run 43721512373 (éxito: DRC 0, 0 conexiones, paridad 0, ERC 0/0) · firmware run 43706692273 (éxito)
 **Qué cambia:**
