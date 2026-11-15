@@ -1,14 +1,25 @@
 ** Drc report for AVO_GIRTH_REVC_PCB.kicad_pcb **
-** Created on 2026-11-15T03:17:14+0000 **
+** Created on 2026-11-15T03:20:19+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 11 DRC violations **
+** Found 14 DRC violations **
+[tracks_crossing]: Tracks crossing
+    Local override; error
+    @(109.0709 mm, 102.6750 mm): Track [DET] on F.Cu, length 1.1397 mm
+    @(107.2500 mm, 105.9500 mm): Track [GND] on F.Cu, length 4.3709 mm
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0887 mm)
+    Local override; error
+    @(107.2500 mm, 105.9500 mm): Track [GND] on F.Cu, length 4.3709 mm
+    @(107.3000 mm, 104.8000 mm): Pad 24 [ECG_MOSI] of U4 on F.Cu
 [track_dangling]: Track has unconnected end
     Local override; warning
     @(107.6743 mm, 103.0063 mm): Track [VBAT] on In2.Cu, length 0.0923 mm
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; warning
     @(111.1136 mm, 106.7017 mm): Via [IMU_SA0] on F.Cu - B.Cu
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0908 mm) (F.Cu)
+    Rule: board setup constraints; warning
+    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
@@ -40,11 +51,7 @@
     @(98.2364 mm, 110.2800 mm): Segment of R21 on F.Silkscreen
     @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 1 unconnected pads **
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(107.2500 mm, 105.9500 mm): Pad 51 [GND] of U4 on F.Cu
+** Found 0 unconnected pads **
 
 ** Found 0 Footprint errors **
 

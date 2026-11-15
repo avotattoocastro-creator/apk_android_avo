@@ -1,31 +1,30 @@
 # AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `119b5efa67aacbdc7f3accda8412a52c2e5f3cdc` · ejecución de CI: 43671603010
+- Commit: `a1cd9ff0b6e83b5b63cd15680c3b3f6223d10c7a` · ejecución de CI: 43671847138
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 87 en total, 68 para montar, 3 sin montar (DNP: C51, C54, R46), 16 a mano (pads de hilo y de prueba)
-- Pistas: 863 · vías: 145 · ruteado INCOMPLETO (1 conexiones)
+- Pistas: 863 · vías: 145 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 1 |
+| DRC: errores | **FALLA** | 2 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-
-### Conexiones incompletas
-- Zone [GND] on F.Cu, priority 0 ↔ Pad 51 [GND] of U4 on F.Cu
+Errores de DRC por tipo: tracks_crossing 1, clearance 1
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
 - silk_overlap: 3
 - track_dangling: 1
 - via_dangling: 1
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
