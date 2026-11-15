@@ -24,6 +24,23 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — Cincha v0.5.0 — ECG con MAX30003 (fmt 2) sin tocar espalda ni pecho
+**Autor:** Claude · Rama `feature/girth-ecg-0-5-0` · **CI:** `build-girth-v050.yml` (workflow NUEVO; no se modifica ninguno existente)
+**Qué cambia:** nuevo firmware `firmware/girth/V0_5_0` (copia de 0.4.3 + ECG). Driver MAX30003 por SPI (CSB 17, SCK 19,
+MISO 20, MOSI 18, INTB 7, FCLK 4) en tarea propia: 512 sps, 18 bits, ganancia 40 (configurable), HPF 0,5 Hz, LPF 40 Hz,
+detección de electrodo despegado. Reloj FCLK de 32 768 Hz generado automáticamente si el módulo no lleva cristal. Sellos de
+tiempo uniformes con corrección de deriva (`EcgClock`). Envío como lote `IMU_SAMPLE` fmt 2 (`imu_id` 3, unidades 2, int24 en
+0,1 µV, 51 muestras = 177 B, máx. 60 = 204 B). LED de 3 destellos si los electrodos no hacen contacto. Órdenes serie `ecg`,
+`ganancia`, `fclk`; `estado` muestra frecuencia, amplitud pico a pico y contadores.
+**Por qué:** frecuencia cardiaca / ECG en la cincha (arquitectura confirmada por el usuario: pogo + BNO085 + MAX30003, dos placas
+de electrodo separadas).
+**Archivos:** `firmware/girth/V0_5_0/**`, `.github/workflows/build-girth-v050.yml`.
+**No se ha tocado:** firmware de espalda y pecho (reenvían fmt desconocidos tal cual, comprobado en prueba de host con el
+`GirthHub` real), workflows existentes, firmas, `Info.plist`, build de TestFlight.
+**Validación:** pruebas de host 65/65 OK (simulación). Compilación ESP32-C6 en CI. **NO VERIFICADO** en hardware real.
+**Pendiente:** decodificar fmt 2 en Android, Windows, iPad y motor (picos R, FC, recuperación); CAD de las placas de electrodo
+y adaptación de la cápsula REV 5.10; confirmar si el módulo trae cristal de 32 768 Hz y su pinout ECGP/ECGN/VCM.
+
 ## 2026-11-15 — AVO-SHELL-31 — Biblioteca: una copia mala ya no hace rechazar el archivo bueno
 **Autor:** Claude · Rama `feature/avo-equine-2-0`
 **Qué pasaba:** si en la biblioteca de la app ya había una copia con el mismo nombre (la huella SHA-256 del archivo) pero con
