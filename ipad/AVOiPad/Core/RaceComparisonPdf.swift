@@ -159,14 +159,24 @@ private final class RaceComparisonPdfWriter {
             let row = Array(tiles[i..<min(i + perRow, tiles.count)])
             ensure(66)
             let tw: Double = w / Double(perRow)
+            // one size for every figure of the row (the widest one decides), so the line looks even
+            var rowSize: Double = 15
+            while rowSize > 8 && row.contains(where: { PdfDocument.measureText($0.value, rowSize, false) > tw - 6 }) { rowSize -= 0.5 }
             for (k, t) in row.enumerated() {
                 let x: Double = m + Double(k) * tw
-                pdf.text(x + tw / 2, y + 6, t.value, size: 15, bold: false, color: ReportBuilder.ink, align: .center)
-                pdf.text(x + tw / 2, y + 27, t.label.uppercased(), size: 6.5, bold: true, color: ReportBuilder.dim, align: .center)
+                // the figure and its name shrink to fit the tile (8 tiles on one line: trainer 15/11/2026)
+                let vs: Double = rowSize
+                pdf.text(x + tw / 2, y + 6 + (15 - vs) * 0.5, t.value, size: vs, bold: false, color: ReportBuilder.ink, align: .center)
+                var ls: Double = 6.5
+                let lab: String = t.label.uppercased()
+                while ls > 4.8 && PdfDocument.measureText(lab, ls, true) > tw - 4 { ls -= 0.25 }
+                pdf.text(x + tw / 2, y + 27, lab, size: ls, bold: true, color: ReportBuilder.dim, align: .center)
                 if let c = t.caption, !c.isEmpty {
                     var cell: [UInt16] = Array(c.utf16)
-                    while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), 6.5, false) > tw - 8 { cell.removeLast(2) }
-                    pdf.text(x + tw / 2, y + 38, String(decoding: cell, as: UTF16.self), size: 6.5, bold: false, color: ReportBuilder.dim, align: .center)
+                    var cs: Double = 6.5
+                    while cs > 5 && PdfDocument.measureText(c, cs, false) > tw - 4 { cs -= 0.25 }
+                    while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), cs, false) > tw - 4 { cell.removeLast(2) }
+                    pdf.text(x + tw / 2, y + 38, String(decoding: cell, as: UTF16.self), size: cs, bold: false, color: ReportBuilder.dim, align: .center)
                 }
                 pdf.line(x + 6, y + 54, x + tw - 6, y + 54, ReportBuilder.lineColor, width: 0.5)
                 if k < row.count - 1 { pdf.line(x + tw, y + 4, x + tw, y + 48, ReportBuilder.lineColor, width: 0.5) }
@@ -177,7 +187,12 @@ private final class RaceComparisonPdfWriter {
     }
 
     /// Table with a dark header row; `highlight` rows get a light red band (our horse).
-    func table(_ head: [String], _ cols: [Double], _ rows: [[String]], highlight: Set<Int> = [], size: Double = 7.5) {
+    static let green: AvoRGB = (r: 0x1F, g: 0x9D, b: 0x45)
+
+    /// Table with a dark header row; `highlight` rows get a light red band (our horse). `arrows[r]` (true = better,
+    /// false = worse) draws a green ▲ / red ▼ after the text of column `arrowCol`.
+    func table(_ head: [String], _ cols: [Double], _ rows: [[String]], highlight: Set<Int> = [], size: Double = 7.5,
+               arrowCol: Int? = nil, arrows: [Bool?] = []) {
         let total: Double = cols.reduce(0, +)
         let cw: [Double] = cols.map { $0 * w / total }
         func headRow() {
@@ -204,7 +219,12 @@ private final class RaceComparisonPdfWriter {
                 while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), size, false) > cw[i] - 6 {
                     cell.removeLast(2)
                 }
-                pdf.text(x, y + 2, String(decoding: cell, as: UTF16.self), size: size, bold: highlight.contains(r), color: ReportBuilder.ink)
+                let shown: String = String(decoding: cell, as: UTF16.self)
+                pdf.text(x, y + 2, shown, size: size, bold: highlight.contains(r), color: ReportBuilder.ink)
+                if i == arrowCol, r < arrows.count, let up = arrows[r] {
+                    let ax: Double = x + PdfDocument.measureText(shown, size, highlight.contains(r)) + 8
+                    pdf.arrow(ax, y + 2 + size * 0.5, up: up, size: 6.5, up ? RaceComparisonPdfWriter.green : ReportBuilder.red)
+                }
                 x += cw[i]
             }
             y += 14
@@ -439,7 +459,8 @@ private final class RaceComparisonPdfWriter {
                (label: "Mejor 200 m", value: RaceFormat.seconds(u.fastest200S), caption: u.fastestSector.isEmpty ? nil : "Tramo " + u.fastestSector),
                (label: "Últimos 600 m", value: RaceFormat.seconds(u.last600S), caption: nil),
                (label: "V. media", value: RaceFormat.kmh(u.meanSpeedKmh), caption: nil),
-               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")]) }
+               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")],
+                                         perRow: 8) }
 
         // 2. sectors of our horse
         if sec.contains(.sectors) && !u.sectors.isEmpty {
@@ -490,7 +511,10 @@ private final class RaceComparisonPdfWriter {
                     [x.label, RaceFormat.seconds(x.trainingS), RaceFormat.kmh(x.trainingKmh), RaceFormat.seconds(x.raceS),
                      RaceFormat.kmh(x.raceKmh), RaceFormat.percent(x.pctOfRace)]
                 }
-                table(["Tramo", "Entreno", "Entreno km/h", "Carrera", "Carrera km/h", "% carrera"], [1.2, 1, 1.1, 1, 1.1, 0.9], rows)
+                table(["Tramo", "Entreno", "Entreno km/h", "Carrera", "Carrera km/h", "% carrera"], [1.2, 1, 1.1, 1, 1.1, 0.9], rows,
+                      arrowCol: 5, arrows: cmp.rows.map { $0.pctOfRace.map { $0 >= 1.0 } })
+                paragraph("Flecha verde: en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %). "
+                          + "Flecha roja: más lento que en la carrera.", size: 7.5, color: ReportBuilder.dim)
             }
             if cmp.trainingPartialEndSkipped {
                 paragraph("El último parcial del entrenamiento es más corto que \(cmp.trainingIsFurlong ? "un furlong" : "200 m") y no se compara.",
@@ -520,6 +544,9 @@ private final class RaceComparisonPdfWriter {
             }
             if sec.contains(.raceFacts) {
             sub("Lo que dice la carrera")
+            paragraph("Mediana del campo = el «caballo típico» de esta carrera: el valor del caballo que queda en medio de los otros "
+                      + "\(max(r.fieldSize - 1, 0)) participantes (sin el nuestro); la mitad lo hizo mejor y la otra mitad peor.",
+                      size: 7.5, color: ReportBuilder.dim)
             keyValues([(k: "Caída en el final (conserva)",
                         v: "\(RaceFormat.percent(rep.ourFade)) · \(RaceFormat.kmh(rep.ourBestSpeedKmh)) → \(RaceFormat.kmh(rep.ourLastSpeedKmh))"),
                        (k: "Mediana del campo (conserva)", v: RaceFormat.percent(rep.fieldMedianFade)),

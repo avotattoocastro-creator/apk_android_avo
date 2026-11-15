@@ -24,6 +24,29 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — Flechas en «% carrera», «mediana del campo» explicada, visor PDF a pantalla completa y símbolos del PDF
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia (bocetos del entrenador 15/11/2026, build 151):**
+- **Flechas en «% carrera»** (app y PDF) de «Entrenamiento vs carrera»: ▲ verde si en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %) y ▼ roja si fue más lento.
+- **«Mediana del campo» explicada** (app y PDF), bajo «Lo que dice la carrera»: es el «caballo típico» de la carrera, es decir, el valor del caballo que queda en medio de los demás participantes, sin el nuestro.
+- **Visor de PDF a pantalla completa** (antes era una hoja pequeña centrada).
+- **Símbolos del PDF:** ≈, ≥, ≤ y → salían como «?» porque las fuentes estándar del PDF no los tienen. Ahora se escriben ~, >=, <= y ->.
+
+**Archivos:** `Core/PdfDocument.swift` (`safe`, `fillPolygon`, `arrow`), `Core/RaceComparisonPdf.swift`, `Views/RaceTrainingSplitsView.swift`, `Views/RaceDetailView.swift`, `App/RootView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
+## 2026-11-15 — iPad — Informe PDF de la carrera: las 8 cifras del resultado en una sola línea
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia:** las 8 cifras del resultado van ahora en una sola línea:
+- puesto, tiempo oficial y distancia al ganador;
+- velocidad máxima y velocidad media;
+- mejor 200 m, últimos 600 m y recorrido vs 1.º.
+
+Todas las cifras de una línea comparten tamaño, que se reduce para que quepa la más ancha, y los nombres y textos pequeños se ajustan al recuadro.
+**Por qué:** boceto del entrenador sobre el PDF (15/11/2026, build 151): «Todos en misma línea».
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — iPad — Casilla «PDF» en cada grupo de datos de la carrera
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-checks` · **CI:** ver PR
 **Qué cambia:** cada recuadro de la ficha de la carrera tiene arriba a la derecha una casilla **«PDF»** que decide si sale en el «Informe PDF». Son 17 grupos:

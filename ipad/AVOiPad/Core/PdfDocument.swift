@@ -95,8 +95,29 @@ final class PdfDocument {
         append(s)
     }
 
+    /// Filled polygon (top-left origin coordinates).
+    func fillPolygon(_ pts: [(x: Double, y: Double)], _ fill: AvoRGB) {
+        guard pts.count >= 3 else { return }
+        let N = PdfDocument.n
+        var s: String = PdfDocument.rgb(fill) + " rg "
+        for (k, p) in pts.enumerated() { s += "\(N(p.x)) \(N(height - p.y)) " + (k == 0 ? "m " : "l ") }
+        s += "h f\n"
+        append(s)
+    }
+
+    /// Up (better) or down (worse) triangle centred at (cx, cy), `size` points wide.
+    func arrow(_ cx: Double, _ cy: Double, up: Bool, size: Double, _ fill: AvoRGB) {
+        let h: Double = size * 0.9
+        if up {
+            fillPolygon([(x: cx, y: cy - h / 2), (x: cx + size / 2, y: cy + h / 2), (x: cx - size / 2, y: cy + h / 2)], fill)
+        } else {
+            fillPolygon([(x: cx - size / 2, y: cy - h / 2), (x: cx + size / 2, y: cy - h / 2), (x: cx, y: cy + h / 2)], fill)
+        }
+    }
+
     /// Single line of text; y is the TOP of the text box.
     func text(_ x: Double, _ y: Double, _ text: String, size: Double = 10, bold: Bool = false, color: AvoRGB? = nil, align: Align = .left) {
+        let text: String = PdfDocument.safe(text)
         let N = PdfDocument.n
         let w: Double = PdfDocument.measureText(text, size, bold)
         var tx: Double = x
@@ -115,6 +136,7 @@ final class PdfDocument {
     @discardableResult
     func paragraph(_ x: Double, _ y: Double, _ maxWidth: Double, _ text: String, size: Double = 9.5, bold: Bool = false,
                    color: AvoRGB? = nil, leading: Double = 1.3) -> Double {
+        let text: String = PdfDocument.safe(text)
         let lineH: Double = size * leading
         var used: Double = 0
         let paras: [String] = text.replacingOccurrences(of: "\r", with: "").components(separatedBy: "\n")
@@ -143,6 +165,7 @@ final class PdfDocument {
 
     /// Lines that `paragraph` would use for this text (same word wrapping, nothing drawn).
     static func lineCount(_ text: String, _ maxWidth: Double, size: Double, bold: Bool) -> Int {
+        let text: String = PdfDocument.safe(text)
         var n: Int = 0
         for para in text.replacingOccurrences(of: "\r", with: "").components(separatedBy: "\n") {
             let words: [String] = para.components(separatedBy: " ").filter { !$0.isEmpty }
@@ -158,6 +181,7 @@ final class PdfDocument {
     }
 
     static func measureText(_ text: String, _ size: Double, _ bold: Bool) -> Double {
+        let text: String = PdfDocument.safe(text)
         var w: Double = 0
         for ch in text.utf16 { w += glyphWidth(ch, bold) }
         return w * size / 1000.0
@@ -222,6 +246,15 @@ final class PdfDocument {
     }
 
     /// WinAnsiEncoding byte of a UTF-16 code unit, or '?' when it is not representable.
+    /// Characters the standard Type 1 fonts (WinAnsi) do not have, written with ones they have (they printed «?»).
+    static func safe(_ s: String) -> String {
+        if !s.contains(where: { "≈≥≤→←↑↓×".contains($0) }) { return s }
+        return s.replacingOccurrences(of: "≈", with: "~").replacingOccurrences(of: "≥", with: ">=")
+            .replacingOccurrences(of: "≤", with: "<=").replacingOccurrences(of: "→", with: "->")
+            .replacingOccurrences(of: "←", with: "<-").replacingOccurrences(of: "↑", with: "+")
+            .replacingOccurrences(of: "↓", with: "-")
+    }
+
     static func winAnsi(_ c: UInt16) -> UInt8 {
         if c < 0x80 { return UInt8(c) }
         if c >= 0xA0 && c <= 0xFF { return UInt8(c) }
@@ -239,6 +272,7 @@ final class PdfDocument {
         case 0x2014: return 0x97   // —
         case 0x2122: return 0x99   // ™
         case 0x2212: return 0x2D   // − → -
+        case 0x00D7: return 0xD7   // ×
         default: return 0x3F       // ?
         }
     }
