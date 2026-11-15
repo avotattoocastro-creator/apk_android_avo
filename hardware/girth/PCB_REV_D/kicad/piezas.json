@@ -11,7 +11,7 @@
   "note": "contacto 1: 5 V de la base de carga",
   "jlc_rot": 0,
   "x": -7.0,
-  "y": -11.6,
+  "y": -13.6,
   "rot": 0
  },
  {
@@ -26,7 +26,7 @@
   "note": "contacto 2: masa",
   "jlc_rot": 0,
   "x": -4.6,
-  "y": -11.6,
+  "y": -13.6,
   "rot": 0
  },
  {
@@ -41,7 +41,7 @@
   "note": "contacto 3: a GND en el soporte (cápsula montada)",
   "jlc_rot": 0,
   "x": -2.2,
-  "y": -11.6,
+  "y": -13.6,
   "rot": 0
  },
  {
@@ -55,8 +55,8 @@
   "no_assembly": false,
   "note": "fusible rearmable del contacto de 5 V expuesto",
   "jlc_rot": 0,
-  "x": -7.1,
-  "y": -8.43,
+  "x": -7.0,
+  "y": -10.4,
   "rot": 0
  },
  {
@@ -71,7 +71,7 @@
   "note": "ESD en el contacto de 5 V",
   "jlc_rot": 0,
   "x": -9.78,
-  "y": -11.3,
+  "y": -13.3,
   "rot": 0
  },
  {
@@ -85,8 +85,8 @@
   "no_assembly": false,
   "note": "ESD en el contacto DET",
   "jlc_rot": 0,
-  "x": -1.25,
-  "y": -4.66,
+  "x": -1.75,
+  "y": -11.45,
   "rot": 0
  },
  {
@@ -101,7 +101,7 @@
   "note": "serie del contacto DET → GPIO6 (como la REV 5.9.1)",
   "jlc_rot": 0,
   "x": -0.4,
-  "y": -11.6,
+  "y": -13.6,
   "rot": 90
  },
  {
@@ -115,9 +115,9 @@
   "no_assembly": false,
   "note": "DET = 1 suelta, 0 en el soporte",
   "jlc_rot": 0,
-  "x": -1.61,
-  "y": -9.9,
-  "rot": 0
+  "x": 0.8,
+  "y": -13.6,
+  "rot": 90
  },
  {
   "ref": "U2",
@@ -130,8 +130,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.5,
-  "y": -7.8,
+  "x": 5.0,
+  "y": -9.0,
   "rot": 0
  },
  {
@@ -145,8 +145,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 4.2,
-  "y": -3.94,
+  "x": 7.02,
+  "y": -6.26,
   "rot": 0
  },
  {
@@ -160,9 +160,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.56,
-  "y": -7.85,
-  "rot": 0
+  "x": 9.26,
+  "y": -9.25,
+  "rot": 90
  },
  {
   "ref": "C20",
@@ -175,8 +175,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.49,
-  "y": -3.99,
+  "x": 1.86,
+  "y": -10.46,
   "rot": 90
  },
  {
@@ -190,8 +190,8 @@
   "no_assembly": false,
   "note": "I_carga = 890/2k ≈ 445 mA (0,45 C de 1000 mAh; ≈ 2,5 h)",
   "jlc_rot": 0,
-  "x": 3.3,
-  "y": -5.05,
+  "x": 4.8,
+  "y": -6.25,
   "rot": 0
  },
  {
@@ -205,8 +205,8 @@
   "no_assembly": false,
   "note": "I_entrada = 1525/2,2k ≈ 690 mA (carga + placa; base de ≥ 1 A)",
   "jlc_rot": 0,
-  "x": 6.26,
-  "y": -7.99,
+  "x": 7.86,
+  "y": -8.25,
   "rot": 90
  },
  {
@@ -220,8 +220,8 @@
   "no_assembly": false,
   "note": "NTC en la cara F, encima de la celda",
   "jlc_rot": 0,
-  "x": 0.67,
-  "y": -6.75,
+  "x": 2.23,
+  "y": -7.75,
   "rot": 90
  },
  {
@@ -235,9 +235,9 @@
   "no_assembly": false,
   "note": "EN2 = 1, EN1 = 0: límite por ILIM",
   "jlc_rot": 0,
-  "x": 0.76,
-  "y": -9.06,
-  "rot": 90
+  "x": 3.8,
+  "y": -11.79,
+  "rot": 0
  },
  {
   "ref": "R10",
@@ -250,8 +250,8 @@
   "no_assembly": false,
   "note": "CHG → GPIO8 (pin de arranque: 10 k a 3V3 como pide Espressif; cargando = 0, solo importa con BOOT pulsado)",
   "jlc_rot": 0,
-  "x": 7.36,
-  "y": -8.55,
+  "x": 7.73,
+  "y": -10.34,
   "rot": 90
  },
  {
@@ -265,8 +265,8 @@
   "no_assembly": true,
   "note": "hilo + de la celda de 1000 mAh (603450): soldado, sin conector",
   "jlc_rot": 0,
-  "x": 1.6,
-  "y": -11.6,
+  "x": 2.6,
+  "y": -13.6,
   "rot": 0
  },
  {
@@ -280,8 +280,8 @@
   "no_assembly": true,
   "note": "hilo − de la celda",
   "jlc_rot": 0,
-  "x": 4.0,
-  "y": -11.6,
+  "x": 5.0,
+  "y": -13.6,
   "rot": 0
  },
  {
@@ -295,8 +295,8 @@
   "no_assembly": false,
   "note": "fusible rearmable entre la celda y el cargador (la celda lleva además su PCM)",
   "jlc_rot": 0,
-  "x": 8.2,
-  "y": -11.0,
+  "x": 9.5,
+  "y": -12.8,
   "rot": 0
  },
  {
@@ -310,8 +310,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO5 (el firmware usa 2,00 por defecto)",
   "jlc_rot": 0,
-  "x": 11.2,
-  "y": -11.0,
+  "x": 12.5,
+  "y": -12.8,
   "rot": 90
  },
  {
@@ -325,8 +325,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 10.0,
-  "y": -9.25,
+  "x": 11.3,
+  "y": -11.05,
   "rot": 0
  },
  {
@@ -340,7 +340,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 9.49,
+  "x": 12.49,
   "y": 7.42,
   "rot": 0
  },
@@ -355,8 +355,8 @@
   "no_assembly": false,
   "note": "600 mA, Iq 2 µA: ESP32-C6 (picos de radio ≈ 0,35 A) + BNO085 + MAX30003",
   "jlc_rot": 0,
-  "x": -2.5,
-  "y": -7.5,
+  "x": -2.0,
+  "y": -8.5,
   "rot": 0
  },
  {
@@ -370,8 +370,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -4.7,
-  "y": -4.85,
+  "x": -2.54,
+  "y": -5.85,
   "rot": 0
  },
  {
@@ -385,8 +385,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -1.31,
-  "y": -2.55,
+  "x": 0.85,
+  "y": -5.59,
   "rot": 0
  },
  {
@@ -400,7 +400,7 @@
   "no_assembly": false,
   "note": "antena FPC de 2,4 GHz en el U.FL del módulo, pegada a la tapa de la cápsula",
   "jlc_rot": 0,
-  "x": 14.9,
+  "x": 17.9,
   "y": 0.0,
   "rot": 270
  },
@@ -415,9 +415,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 14.35,
-  "y": 8.69,
-  "rot": 90
+  "x": 18.24,
+  "y": 8.0,
+  "rot": 0
  },
  {
   "ref": "C25",
@@ -430,9 +430,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 16.59,
-  "y": 7.57,
-  "rot": 0
+  "x": 20.55,
+  "y": 7.97,
+  "rot": 90
  },
  {
   "ref": "R11",
@@ -445,7 +445,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 11.82,
+  "x": 14.82,
   "y": 7.48,
   "rot": 0
  },
@@ -460,7 +460,7 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": 11.15,
+  "x": 14.15,
   "y": 8.64,
   "rot": 0
  },
@@ -475,7 +475,7 @@
   "no_assembly": false,
   "note": "GPIO9 alto = arranque normal; a GND con TP2 = descarga",
   "jlc_rot": 0,
-  "x": 5.75,
+  "x": 8.75,
   "y": -3.6,
   "rot": 90
  },
@@ -490,8 +490,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 11.19,
-  "y": 11.3,
+  "x": 12.19,
+  "y": 13.3,
   "rot": 90
  },
  {
@@ -505,8 +505,8 @@
   "no_assembly": false,
   "note": "activo a nivel bajo en GPIO15, como el LED del XIAO",
   "jlc_rot": 0,
-  "x": 9.0,
-  "y": 11.3,
+  "x": 10.0,
+  "y": 13.3,
   "rot": 0
  },
  {
@@ -520,8 +520,8 @@
   "no_assembly": false,
   "note": "en el centro de la placa (eje de la cincha)",
   "jlc_rot": 0,
-  "x": -1.5,
-  "y": 2.5,
+  "x": 0.5,
+  "y": 3.0,
   "rot": 0
  },
  {
@@ -535,8 +535,8 @@
   "no_assembly": false,
   "note": "VDD del LSM6",
   "jlc_rot": 0,
-  "x": 1.06,
-  "y": 1.75,
+  "x": 3.06,
+  "y": 2.25,
   "rot": 90
  },
  {
@@ -550,8 +550,8 @@
   "no_assembly": false,
   "note": "VDDIO del LSM6",
   "jlc_rot": 0,
-  "x": -2.64,
-  "y": 0.34,
+  "x": -0.64,
+  "y": 0.84,
   "rot": 0
  },
  {
@@ -565,8 +565,8 @@
   "no_assembly": false,
   "note": "pull-up I²C (400 kHz)",
   "jlc_rot": 0,
-  "x": -0.95,
-  "y": 4.7,
+  "x": 1.05,
+  "y": 5.2,
   "rot": 0
  },
  {
@@ -580,8 +580,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -3.02,
-  "y": 4.65,
+  "x": -1.02,
+  "y": 5.15,
   "rot": 0
  },
  {
@@ -595,8 +595,8 @@
   "no_assembly": false,
   "note": "lejos de la batería, del cargador y de los hilos de corriente (campo magnético)",
   "jlc_rot": 0,
-  "x": -2.0,
-  "y": 7.6,
+  "x": 0.0,
+  "y": 9.2,
   "rot": 0
  },
  {
@@ -610,8 +610,8 @@
   "no_assembly": false,
   "note": "VDD del MMC5983MA",
   "jlc_rot": 0,
-  "x": -1.2,
-  "y": 10.1,
+  "x": 0.8,
+  "y": 11.7,
   "rot": 0
  },
  {
@@ -625,8 +625,8 @@
   "no_assembly": false,
   "note": "CAP (SET/RESET): 10 µF de baja ESR junto al pin 10",
   "jlc_rot": 0,
-  "x": -4.75,
-  "y": 7.08,
+  "x": -2.75,
+  "y": 8.68,
   "rot": 90
  },
  {
@@ -640,8 +640,8 @@
   "no_assembly": false,
   "note": "VDDIO del MMC5983MA",
   "jlc_rot": 0,
-  "x": 0.61,
-  "y": 6.85,
+  "x": 2.61,
+  "y": 8.45,
   "rot": 90
  },
  {
@@ -655,8 +655,8 @@
   "no_assembly": false,
   "note": "24 bits, 500 muestras/s, ganancia 6; GPIO1/2 a GND (entradas por defecto)",
   "jlc_rot": 0,
-  "x": -12.4,
-  "y": 1.8,
+  "x": -14.0,
+  "y": 2.0,
   "rot": 0
  },
  {
@@ -670,8 +670,8 @@
   "no_assembly": false,
   "note": "AVDD analógico propio (PSRR 75 dB a 1 kHz)",
   "jlc_rot": 0,
-  "x": -12.0,
-  "y": -6.5,
+  "x": -14.0,
+  "y": -7.5,
   "rot": 0
  },
  {
@@ -685,9 +685,9 @@
   "no_assembly": false,
   "note": "entrada del AVDD",
   "jlc_rot": 0,
-  "x": -14.72,
-  "y": -5.75,
-  "rot": 90
+  "x": -14.98,
+  "y": -5.16,
+  "rot": 0
  },
  {
   "ref": "C41",
@@ -700,9 +700,9 @@
   "no_assembly": false,
   "note": "AVDD",
   "jlc_rot": 0,
-  "x": -11.41,
-  "y": -9.11,
-  "rot": 0
+  "x": -10.95,
+  "y": -7.15,
+  "rot": 90
  },
  {
   "ref": "C42",
@@ -715,9 +715,9 @@
   "no_assembly": false,
   "note": "AVDD (pin 12)",
   "jlc_rot": 0,
-  "x": -16.77,
-  "y": -4.57,
-  "rot": 90
+  "x": -17.25,
+  "y": -4.27,
+  "rot": 0
  },
  {
   "ref": "C43",
@@ -730,8 +730,8 @@
   "no_assembly": false,
   "note": "DVDD (pin 23)",
   "jlc_rot": 0,
-  "x": -7.36,
-  "y": 3.98,
+  "x": -8.54,
+  "y": 4.18,
   "rot": 90
  },
  {
@@ -745,8 +745,8 @@
   "no_assembly": false,
   "note": "DVDD",
   "jlc_rot": 0,
-  "x": -5.74,
-  "y": 3.0,
+  "x": -6.94,
+  "y": 3.2,
   "rot": 90
  },
  {
@@ -760,8 +760,8 @@
   "no_assembly": false,
   "note": "VREFP (referencia interna 2,42 V)",
   "jlc_rot": 0,
-  "x": -12.09,
-  "y": -2.96,
+  "x": -15.85,
+  "y": -2.82,
   "rot": 0
  },
  {
@@ -775,9 +775,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -15.13,
-  "y": -4.03,
-  "rot": 0
+  "x": -13.76,
+  "y": -3.04,
+  "rot": 90
  },
  {
   "ref": "C47",
@@ -790,9 +790,9 @@
   "no_assembly": false,
   "note": "VCAP1 de tántalo (no ferroeléctrico, como pide TI si hay vibración); + al pin 11",
   "jlc_rot": 0,
-  "x": -8.08,
-  "y": -4.65,
-  "rot": 90
+  "x": -10.63,
+  "y": -3.72,
+  "rot": 0
  },
  {
   "ref": "C48",
@@ -805,8 +805,8 @@
   "no_assembly": false,
   "note": "VCAP2",
   "jlc_rot": 0,
-  "x": -8.74,
-  "y": 6.11,
+  "x": -11.11,
+  "y": 6.57,
   "rot": 0
  },
  {
@@ -820,9 +820,9 @@
   "no_assembly": false,
   "note": "CFILTER del canal 2 (ECG), GRM1885C1H472JA01D",
   "jlc_rot": 0,
-  "x": -15.26,
-  "y": -2.7,
-  "rot": 0
+  "x": -18.81,
+  "y": 1.1,
+  "rot": 90
  },
  {
   "ref": "C50",
@@ -835,9 +835,9 @@
   "no_assembly": false,
   "note": "CFILTER del canal 1 (apagado)",
   "jlc_rot": 0,
-  "x": -13.62,
-  "y": 6.3,
-  "rot": 0
+  "x": -18.86,
+  "y": 4.54,
+  "rot": 90
  },
  {
   "ref": "R40",
@@ -850,9 +850,9 @@
   "no_assembly": false,
   "note": "serie del electrodo + (EMI, ESD)",
   "jlc_rot": 0,
-  "x": -16.8,
-  "y": 2.54,
-  "rot": 90
+  "x": -21.01,
+  "y": 4.24,
+  "rot": 0
  },
  {
   "ref": "R41",
@@ -865,9 +865,9 @@
   "no_assembly": false,
   "note": "serie del electrodo −",
   "jlc_rot": 0,
-  "x": -18.6,
-  "y": -4.34,
-  "rot": 0
+  "x": -19.8,
+  "y": -2.54,
+  "rot": 90
  },
  {
   "ref": "C52",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -17.24,
-  "y": 5.35,
+  "x": -17.4,
+  "y": 6.63,
   "rot": 0
  },
  {
@@ -895,9 +895,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -16.28,
-  "y": 6.47,
-  "rot": 0
+  "x": -20.27,
+  "y": 5.79,
+  "rot": 90
  },
  {
   "ref": "C54",
@@ -910,8 +910,8 @@
   "no_assembly": false,
   "note": "filtro diferencial opcional (sin montar)",
   "jlc_rot": 0,
-  "x": -16.76,
-  "y": 0.51,
+  "x": -18.61,
+  "y": -1.68,
   "rot": 90
  },
  {
@@ -925,8 +925,8 @@
   "no_assembly": false,
   "note": "realimentación del RLD",
   "jlc_rot": 0,
-  "x": -10.81,
-  "y": 6.06,
+  "x": -13.15,
+  "y": 6.58,
   "rot": 0
  },
  {
@@ -940,8 +940,8 @@
   "no_assembly": false,
   "note": "realimentación del RLD, GRM1555C1H152JA01D",
   "jlc_rot": 0,
-  "x": -10.79,
-  "y": 7.17,
+  "x": -15.24,
+  "y": 6.69,
   "rot": 0
  },
  {
@@ -955,8 +955,8 @@
   "no_assembly": false,
   "note": "RLD al electrodo de referencia (limita la corriente)",
   "jlc_rot": 0,
-  "x": -17.51,
-  "y": 4.26,
+  "x": -21.5,
+  "y": -4.4,
   "rot": 0
  },
  {
@@ -970,8 +970,8 @@
   "no_assembly": false,
   "note": "PWDN/RESET alto (GPIO4 lo baja para reiniciar o apagar)",
   "jlc_rot": 0,
-  "x": -7.2,
-  "y": -0.26,
+  "x": -8.6,
+  "y": -0.06,
   "rot": 90
  },
  {
@@ -985,8 +985,8 @@
   "no_assembly": false,
   "note": "START bajo: la conversión arranca por orden SPI o por GPIO21",
   "jlc_rot": 0,
-  "x": -7.14,
-  "y": 1.85,
+  "x": -8.52,
+  "y": 2.06,
   "rot": 90
  },
  {
@@ -1000,8 +1000,8 @@
   "no_assembly": false,
   "note": "CLK sin usar (reloj interno)",
   "jlc_rot": 0,
-  "x": -5.94,
-  "y": 0.4,
+  "x": -7.34,
+  "y": 0.6,
   "rot": 90
  },
  {
@@ -1015,7 +1015,7 @@
   "no_assembly": true,
   "note": "pogo ECG contacto 1: placa izquierda",
   "jlc_rot": 0,
-  "x": -18.6,
+  "x": -21.6,
   "y": 2.54,
   "rot": 0
  },
@@ -1030,7 +1030,7 @@
   "no_assembly": true,
   "note": "pogo ECG contacto 2: referencia (RLD)",
   "jlc_rot": 0,
-  "x": -18.6,
+  "x": -21.6,
   "y": 0.0,
   "rot": 0
  },
@@ -1045,7 +1045,7 @@
   "no_assembly": true,
   "note": "pogo ECG contacto 3: placa derecha",
   "jlc_rot": 0,
-  "x": -18.6,
+  "x": -21.6,
   "y": -2.54,
   "rot": 0
  },
@@ -1061,7 +1061,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -9.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1076,7 +1076,7 @@
   "note": "GPIO9 a GND al arrancar = descarga",
   "jlc_rot": 0,
   "x": -7.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1091,7 +1091,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": -5.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1106,7 +1106,7 @@
   "note": "USB nativo del C6 (programación)",
   "jlc_rot": 0,
   "x": -3.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1121,7 +1121,7 @@
   "note": "USB nativo del C6 (programación)",
   "jlc_rot": 0,
   "x": -1.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1136,7 +1136,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 1.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1151,7 +1151,7 @@
   "note": "",
   "jlc_rot": 0,
   "x": 3.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  },
  {
@@ -1166,7 +1166,7 @@
   "note": "5 V para programar sin batería",
   "jlc_rot": 0,
   "x": 5.0,
-  "y": 11.7,
+  "y": 13.7,
   "rot": 0
  }
 ]

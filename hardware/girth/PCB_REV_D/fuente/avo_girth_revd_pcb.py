@@ -4,7 +4,7 @@ Derivada de la REV C (MAX30003 + BNO085, sin existencias en JLCPCB el 15/11/2026
   - ECG: TI ADS1292 (24 bits, ganancia programable, RLD al electrodo de referencia, reloj interno), AVDD propio de 3,3 V;
   - IMU: ST LSM6DSV16X (acelerómetro + giróscopo con fusión SFLP en el chip) y MEMSIC MMC5983MA (magnetómetro), I²C.
 Batería de 1000 mAh (DOCS/CONSUMO_BATERIA.md): carga a ≈ 445 mA.
-Placa de 40 × 26 mm, 4 capas, 1,0 mm, todos los componentes en F; In1 = GND; F, In2 y B = señales.
+Placa de 46 × 30 mm, 4 capas, 1,0 mm, todos los componentes en F; In1 = GND; F, In2 y B = señales.
 Coordenadas de diseño: origen en el centro, X a la derecha, Y hacia arriba, vista desde F. En KiCad: x = 100 + X, y = 100 − Y.
 Firmware: AVO GIRTH 0.6.0 (firmware/girth/V0_6_0). Mismo formato por radio que la 0.5.0 (lotes fmt 0, 1 y 2).
 Uso:  python avo_girth_revd_pcb.py --place   (comprueba la colocación)
@@ -26,8 +26,8 @@ os.makedirs(OUT, exist_ok=True)
 NAME = "AVO_GIRTH_REVD_PCB"
 REV, DATE = "D", "2026-11-15"
 THICK = 1.0
-W, H, CORNER_R = 40.0, 26.0, 2.0
-HOLE_XY, HOLE_D, HOLE_KEEP = (17.8, 10.8), 2.2, 2.2    # 4 taladros M2 (tornillos a la tapa)
+W, H, CORNER_R = 46.0, 30.0, 2.0          # REV D: cabe sobre la celda de 1000 mAh (34 × 50) sin agrandar la cápsula
+HOLE_XY, HOLE_D, HOLE_KEEP = (20.8, 12.8), 2.2, 2.2    # 4 taladros M2 (tornillos a la tapa)
 Z_MAX_F = 2.6                                         # altura máxima de componente en F (hueco hasta la tapa)
 
 
@@ -354,7 +354,7 @@ for p in PARTS:
         p["pos"], p["rot"] = (x, y), r
 MECH = [p for p in PARTS if p["fp"] == "HOLE"]
 # anillo libre de 1 mm alrededor del ADS1292 (QFN de paso 0,4): sitio para las salidas y las vías de todos sus pines
-_U6 = (-12.4, 1.8); _r0, _r1 = 2.7, 3.7
+_U6 = (-14.0, 2.0); _r0, _r1 = 2.7, 4.0
 KEEPOUT_RECTS = [("U6_N", _U6[0] - _r1, _U6[1] + _r0, _U6[0] + _r1, _U6[1] + _r1),
                  ("U6_S", _U6[0] - _r1, _U6[1] - _r1, _U6[0] + _r1, _U6[1] - _r0),
                  ("U6_W", _U6[0] - _r1, _U6[1] - _r1, _U6[0] - _r0, _U6[1] + _r1),
