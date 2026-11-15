@@ -1178,19 +1178,20 @@
     (net "unconnected-(U7-NC-Pad4)"
       (pins U7-4)
     )
-    (class kicad_default BAT_ADC BOOT CHG_EN2 CHG_ILIM CHG_ISET CHG_STAT CHG_TS
-      DET ECGN ECGP ECG_CLK ECG_CS ECG_DRDY ECG_E_N ECG_E_P ECG_E_REF ECG_MISO
-      ECG_MOSI ECG_PGA1N ECG_PGA1P ECG_PGA2N ECG_PGA2P ECG_RESET ECG_RLDINV
-      ECG_RLDOUT ECG_SCK ECG_START ECG_VCAP1 ECG_VCAP2 ECG_VREFP EN GND I2C_SCL
-      I2C_SDA IMU_INT1 IMU_INT2 LED_A LED_K MAG_CAP MAG_INT POGO_DET USB_DM
-      USB_DP "unconnected-(U2-PGOOD-Pad7)" "unconnected-(U2-TMR-Pad14)" "unconnected-(U3-NC-Pad4)"
-      "unconnected-(U4-IO0-Pad12)" "unconnected-(U4-IO14-Pad19)" "unconnected-(U4-IO3-Pad6)"
-      "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)" "unconnected-(U4-NC-Pad33)"
-      "unconnected-(U4-NC-Pad34)" "unconnected-(U4-NC-Pad35)" "unconnected-(U4-NC-Pad4)"
-      "unconnected-(U4-NC-Pad7)" "unconnected-(U4-Pad51)" "unconnected-(U5-OCS_Aux-Pad10)"
-      "unconnected-(U5-SDO_Aux-Pad11)" "unconnected-(U7-NC-Pad4)" "unconnected-(U8-NC-Pad12)"
-      "unconnected-(U8-NC-Pad14)" "unconnected-(U8-NC-Pad3)" "unconnected-(U8-NC-Pad6)"
-      "unconnected-(U8-NC-Pad7)" "unconnected-(U8-NC-Pad8)" "unconnected-(U8-SPI_SDO-Pad5)"
+    (class kicad_default +3V3A BAT_ADC BOOT CHG_EN2 CHG_ILIM CHG_ISET CHG_STAT
+      CHG_TS DET ECGN ECGP ECG_CLK ECG_CS ECG_DRDY ECG_E_N ECG_E_P ECG_E_REF
+      ECG_MISO ECG_MOSI ECG_PGA1N ECG_PGA1P ECG_PGA2N ECG_PGA2P ECG_RESET
+      ECG_RLDINV ECG_RLDOUT ECG_SCK ECG_START ECG_VCAP1 ECG_VCAP2 ECG_VREFP
+      EN GND I2C_SCL I2C_SDA IMU_INT1 IMU_INT2 LED_A LED_K MAG_CAP MAG_INT
+      POGO_DET USB_DM USB_DP "unconnected-(U2-PGOOD-Pad7)" "unconnected-(U2-TMR-Pad14)"
+      "unconnected-(U3-NC-Pad4)" "unconnected-(U4-IO0-Pad12)" "unconnected-(U4-IO14-Pad19)"
+      "unconnected-(U4-IO3-Pad6)" "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)"
+      "unconnected-(U4-NC-Pad33)" "unconnected-(U4-NC-Pad34)" "unconnected-(U4-NC-Pad35)"
+      "unconnected-(U4-NC-Pad4)" "unconnected-(U4-NC-Pad7)" "unconnected-(U4-Pad51)"
+      "unconnected-(U5-OCS_Aux-Pad10)" "unconnected-(U5-SDO_Aux-Pad11)" "unconnected-(U7-NC-Pad4)"
+      "unconnected-(U8-NC-Pad12)" "unconnected-(U8-NC-Pad14)" "unconnected-(U8-NC-Pad3)"
+      "unconnected-(U8-NC-Pad6)" "unconnected-(U8-NC-Pad7)" "unconnected-(U8-NC-Pad8)"
+      "unconnected-(U8-SPI_SDO-Pad5)"
       (circuit
         (use_via "Via[0-3]_500:300_um")
       )
@@ -1199,7 +1200,7 @@
         (clearance 150)
       )
     )
-    (class Potencia +3V3 +3V3A BAT_IN POGO_5V VBAT VBUS VSYS
+    (class Potencia +3V3 BAT_IN POGO_5V VBAT VBUS VSYS
       (circuit
         (use_via "Via[0-3]_600:300_um")
       )
