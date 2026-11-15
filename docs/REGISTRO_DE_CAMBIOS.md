@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — Casilla «PDF» en cada grupo de datos de la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-checks` · **CI:** ver PR
+**Qué cambia:** cada recuadro de la ficha de la carrera tiene arriba a la derecha una casilla **«PDF»** que decide si sale en el «Informe PDF». Son 17 grupos:
+- datos de la carrera y resultado;
+- clasificación y tramos;
+- las 4 gráficas por tramo: velocidad, posición, foulées/zancada y distancia al primero;
+- entrenamiento vs carrera;
+- conclusión, lo que dice la carrera, lo que dicen sus entrenamientos, forma, estimación, observaciones y método;
+- notas.
+
+La elección se guarda y se aplica a todas las carreras. El PDF incluye ahora también las 4 gráficas de la carrera. Si no hay nada marcado, avisa y no genera el PDF.
+**Por qué:** petición del entrenador (15/11/2026): elegir qué incluir y qué no en el informe.
+**Archivos:** `Core/RaceComparisonPdf.swift` (`RacePdfSection`, gráficas), `Views/RacePdfCheck.swift` (nuevo), `App/RacesModel.swift` (`pdfSections`), `Views/RaceDetailView.swift`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — iPad — «Informe PDF» de la carrera frente al entrenamiento
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-entreno` · **CI:** ver PR
 **Qué cambia:** en la ficha de la carrera aparece el botón **«Informe PDF»**. Genera un PDF para enviar, con el estilo de los informes de entrenamiento, y lo abre en el visor con «Compartir». El PDF incluye:

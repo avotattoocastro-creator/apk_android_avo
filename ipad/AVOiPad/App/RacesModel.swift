@@ -43,6 +43,18 @@ final class RacesModel {
     var reports: [String: RaceReport] = [:]
     /// Training effort chosen in «Entrenamiento vs carrera» per race (candidate id; nil = default). Also used by the PDF.
     var splitChoice: [String: String] = [:]
+    /// Groups of data that go into the «Informe PDF» («PDF» check on each card of the race card; kept in UserDefaults).
+    var pdfSections: Set<RacePdfSection> = RacesModel.loadPdfSections() {
+        didSet { UserDefaults.standard.set(pdfSections.map { $0.rawValue }.sorted(), forKey: RacesModel.pdfSectionsKey) }
+    }
+    static let pdfSectionsKey: String = "races.pdfSections"
+    static func loadPdfSections() -> Set<RacePdfSection> {
+        guard let raw = UserDefaults.standard.array(forKey: pdfSectionsKey) as? [String] else { return Set(RacePdfSection.allCases) }
+        return Set(raw.compactMap { RacePdfSection(rawValue: $0) })
+    }
+    func togglePdf(_ s: RacePdfSection) {
+        if pdfSections.contains(s) { pdfSections.remove(s) } else { pdfSections.insert(s) }
+    }
     var computing: Set<String> = []
     @ObservationIgnored private var trainingCache: [String: TrainingWorkSummary] = [:]
 
@@ -308,11 +320,15 @@ final class RacesModel {
             app.show("Informe de la carrera", "El caballo no está identificado entre los participantes.")
             return
         }
+        if pdfSections.isEmpty {
+            app.show("Informe de la carrera", "No hay ningún grupo de datos marcado para el PDF: marca la casilla «PDF» de los recuadros que quieras incluir.")
+            return
+        }
         let cands: [RaceTrainingCandidate] = splitCandidates(for: r)
         let chosen: RaceTrainingCandidate? = cands.first { $0.id == splitChoice[r.id] } ?? RaceTrainingSplits.defaultCandidate(cands)
         let data = RaceComparisonPdfData(race: r, us: us, candidate: chosen,
                                          comparison: chosen.map { RaceTrainingSplits.compare($0, us) },
-                                         report: reports[r.id], notes: r.notes)
+                                         report: reports[r.id], notes: r.notes, sections: pdfSections)
         let dir: String = AvoFiles.join(app.paths.root, "exportaciones")
         AvoFiles.ensureDir(dir)
         var horse: String = ExportNaming.clean(r.horseName ?? us.name)
