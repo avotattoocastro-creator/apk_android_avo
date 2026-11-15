@@ -1,0 +1,985 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 6,
+   "list": [
+    {
+     "componentId": 1898,
+     "componentLibraryType": "base",
+     "stockCount": 3310228,
+     "componentTypeEn": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "erpComponentName": "100pF \u00b15% 50V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/multilayer-ceramic-capacitors-mlcc-smd-smt_fh-guangdong-fenghua-advanced-tech-0402cg101j500nt_C1546.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0021
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0016
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0013
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0011
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.001
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.001
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 999,
+       "productPrice": 0.0021
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 9999,
+       "productPrice": 0.0012
+      },
+      {
+       "startNumber": 50000,
+       "endNumber": 50199,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": 49999,
+       "productPrice": 0.0011
+      },
+      {
+       "startNumber": 50200,
+       "endNumber": -1,
+       "productPrice": 0.0009
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 2999,
+       "productPrice": 0.0015
+      }
+     ],
+     "firstSortAccessId": "1a513feddccb44f5bf49e1f5b9e5ffdb",
+     "secondSortAccessId": "7e74f1d772c74e3d99bc4868d21962f2",
+     "canPresaleNumber": 2658620,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "1898-0402CG101J500NT/C1546",
+     "leastPatchNumber": 20,
+     "lossNumber": 10,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 0.00521,
+     "preMinPurchaseNum": 6941,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0021,
+     "componentCode": "C1546",
+     "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+     "componentModelEn": "0402CG101J500NT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552476107816521728-C1546-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5mHfcrNoL54wIWyWF79vmovO8hIuoDEjTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcgu0Ag0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzQ6UhsNeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5UufgCV5ch3ARqAAR6KkJhi1fdfZXDa3A3S97ki2Ie%2F1Pqq2WrQuopEP8JHHn1GPQhZoi%2Bpd6vD0hgX7uG6%2FfOtZIfeZwdT4ifDPBiWhny5tm5n8OTdVZUojUNM55bco7zQIG%2BZYuwm9BOJmo%2FP1LUl9gQSDgN2JmOxurwx%2FO06wWj1qj0a9B%2BdbY%2BmIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ26pyMaYwGYZxLZjz7GdUEoo%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a112265b275960f6cf29f6763c56292542d0e46bdc21457756bda8b3bf731a2f",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_FH--Guangdong-Fenghua-Advanced-Tech-0402CG101J500NT_C1546.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770987747089891328-C1546.pdf?response-content-disposition=attachment%3B%20filename%3DC1546.pdf%3B%20filename%2A%3DUTF-8%27%27C1546.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a17252cd486fb75e867634e952bc4b807ec7c2f11bd11cecf1b730f0cab7698c",
+     "dataManualOfficialLink": "",
+     "componentName": "FH 0402CG101J500NT",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8552476108407648256-C1546-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5mHfcrNoL54wIWyWF79vmovO8hIuoDEjTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcgu0Ag0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jzQ6UhsNeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5UufgCV5ch3ARqAAR6KkJhi1fdfZXDa3A3S97ki2Ie%2F1Pqq2WrQuopEP8JHHn1GPQhZoi%2Bpd6vD0hgX7uG6%2FfOtZIfeZwdT4ifDPBiWhny5tm5n8OTdVZUojUNM55bco7zQIG%2BZYuwm9BOJmo%2FP1LUl9gQSDgN2JmOxurwx%2FO06wWj1qj0a9B%2BdbY%2BmIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NZ26pyMaYwGYZxLZjz7GdUEoo%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=e68c191ecbb904af6eaefc9e0abc30425ff45a4e4d1d553c90f8fb10efd82f2d",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0402",
+     "describe": "100pF 50V C0G \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage Rating",
+       "attribute_value_name": "50V"
+      },
+      {
+       "attribute_name_en": "Tolerance",
+       "attribute_value_name": "\u00b15%"
+      },
+      {
+       "attribute_name_en": "Capacitance",
+       "attribute_value_name": "100pF"
+      },
+      {
+       "attribute_name_en": "Temperature Coefficient",
+       "attribute_value_name": "C0G"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+     "secondSortName": "Capacitors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C1546</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 608175,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Interface - Specialized",
+     "erpComponentName": "\u5e26\u7ec8\u7aef\u7684\u8f6f\u4ef6\u53ef\u9009\u62e9\u591a\u534f\u8bae\u6536\u53d1\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rs232-ics_analog-devices-ltc1546ig-pbf_C580398.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 10.3976
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 10.0311
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.8511
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.4896
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 10.016
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 25.8793
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 25.8793
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 9.663
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 25.8793
+      }
+     ],
+     "firstSortAccessId": "2ade39b3eb5f47a0b806a0d0611c9b6c",
+     "secondSortAccessId": "bde013252dad4ff79d7a3d4017c6cffd",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC1546IGPBF/C580398",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 47,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 26.8652,
+     "componentCode": "C580398",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1546IG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210192200_Analog-Devices-LTC1546IG-PBF_C580398.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590145685950795776-C580398.pdf?response-content-disposition=attachment%3B%20filename%3DC580398.pdf%3B%20filename%2A%3DUTF-8%27%27C580398.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=8b48972f7ec8ba3d5de914a67d171707f11c7996a52b5305ff375e8184164abb",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1546IG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-28",
+     "describe": "Low-power mode\u3001Short-Circuit  Protection SSOP-28 Interface - Specialized ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Data Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Supply Current",
+       "attribute_value_name": "170mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Supply Current",
+       "attribute_value_name": "500uA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Interface - Specialized",
+     "secondSortName": "Interface",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1546</span>IG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706789,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Interface - Specialized",
+     "erpComponentName": "\u5e26\u7ec8\u7aef\u7684\u8f6f\u4ef6\u53ef\u9009\u62e9\u591a\u534f\u8bae\u6536\u53d1\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rs232-ics_analog-devices-ltc1546cg-pbf_C675883.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 9.0854
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 8.7664
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 8.6093
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 8.2934
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 8.752
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 22.6152
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.6152
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 8.4447
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 22.6152
+      }
+     ],
+     "firstSortAccessId": "2ade39b3eb5f47a0b806a0d0611c9b6c",
+     "secondSortAccessId": "bde013252dad4ff79d7a3d4017c6cffd",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC1546CGPBF/C675883",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 47,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.4767,
+     "componentCode": "C675883",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1546CG#PBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2205191045_Analog-Devices-LTC1546CG-PBF_C675883.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589853609820528640-C675883.pdf?response-content-disposition=attachment%3B%20filename%3DC675883.pdf%3B%20filename%2A%3DUTF-8%27%27C675883.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a1d788cdda395ab9354dbd0ad2366f8707731e4a818dd17a867e3cd8a15bcea0",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1546CG#PBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-28",
+     "describe": "Low-power mode SSOP-28 Interface - Specialized ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Data Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Supply Current",
+       "attribute_value_name": "170mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Supply Current",
+       "attribute_value_name": "500uA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Interface - Specialized",
+     "secondSortName": "Interface",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1546</span>CG#PBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706790,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Interface - Specialized",
+     "erpComponentName": "\u5e26\u7ec8\u7aef\u7684\u8f6f\u4ef6\u53ef\u9009\u62e9\u591a\u534f\u8bae\u6536\u53d1\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rs232-ics_analog-devices-ltc1546cg-trpbf_C675884.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 23.4767
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 9.0854
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 8.7664
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 8.6093
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 8.2934
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 8.752
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 22.6152
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 22.6152
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 22.6152
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 8.4447
+      }
+     ],
+     "firstSortAccessId": "2ade39b3eb5f47a0b806a0d0611c9b6c",
+     "secondSortAccessId": "bde013252dad4ff79d7a3d4017c6cffd",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC1546CGTRPBF/C675884",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 23.4767,
+     "componentCode": "C675884",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1546CG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210190630_Analog-Devices-LTC1546CG-TRPBF_C675884.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589864128874913792-C675884.pdf?response-content-disposition=attachment%3B%20filename%3DC675884.pdf%3B%20filename%2A%3DUTF-8%27%27C675884.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=f0f11ae3df7a31974d7d7c8c3adda150e8b0192f9556977684187f4698bd23e9",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1546CG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-28",
+     "describe": "Low-power mode SSOP-28 Interface - Specialized ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Data Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Supply Current",
+       "attribute_value_name": "170mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Supply Current",
+       "attribute_value_name": "500uA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Interface - Specialized",
+     "secondSortName": "Interface",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1546</span>CG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 706791,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Interface - Specialized",
+     "erpComponentName": "\u5e26\u7ec8\u7aef\u7684\u8f6f\u4ef6\u53ef\u9009\u62e9\u591a\u534f\u8bae\u6536\u53d1\u5668",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/rs232-ics_analog-devices-ltc1546ig-trpbf_C675885.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 26.8652
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 10.3976
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 10.0311
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.8511
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 9.4896
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 10.016
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 25.8793
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 199,
+       "productPrice": 25.8793
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 25.8793
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 9.663
+      }
+     ],
+     "firstSortAccessId": "2ade39b3eb5f47a0b806a0d0611c9b6c",
+     "secondSortAccessId": "bde013252dad4ff79d7a3d4017c6cffd",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "AnalogDevices-LTC1546IGTRPBF/C675885",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 2000,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 26.8652,
+     "componentCode": "C675885",
+     "componentBrandEn": "Analog Devices",
+     "componentModelEn": "LTC1546IG#TRPBF",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2205191045_Analog-Devices-LTC1546IG-TRPBF_C675885.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589858431718371328-C675885.pdf?response-content-disposition=attachment%3B%20filename%3DC675885.pdf%3B%20filename%2A%3DUTF-8%27%27C675885.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=0084bc025fd34ff0a9ad03fad3b3e18f7b0a33888b34c30c936b1a2a6bfc5f34",
+     "dataManualOfficialLink": "",
+     "componentName": "ADI LTC1546IG#TRPBF",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SSOP-28",
+     "describe": "Low-power mode SSOP-28 Interface - Specialized ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Data Rate",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "5V"
+      },
+      {
+       "attribute_name_en": "Supply Current",
+       "attribute_value_name": "170mA"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Quiescent Supply Current",
+       "attribute_value_name": "500uA"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Interface - Specialized",
+     "secondSortName": "Interface",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "LT<span class='lucene_highlight_class'>C1546</span>IG#TRPBF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21309329,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Optoelectronics Accessories",
+     "erpComponentName": "C15469_FLORENTINA-SHD-WHT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/optoelectronics-accessories_ledil-c15469-florentina-shd-wht_C19980015.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.1901
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 9.1901
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 9.1901
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 3.6666
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.5439
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.4834
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.3555
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 3.532
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 8.8529
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 8.8529
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.4138
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 8.8529
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "364b2ffeb54c4ca29fc726c363bb4ed2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Ledil-C15469_FLORENTINA_SHDWHT/C19980015",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 9.1901,
+     "componentCode": "C19980015",
+     "componentBrandEn": "Ledil",
+     "componentModelEn": "C15469_FLORENTINA-SHD-WHT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401251045_Ledil-C15469-FLORENTINA-SHD-WHT_C19980015.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603679556205633536-C19980015.pdf?response-content-disposition=attachment%3B%20filename%3DC19980015.pdf%3B%20filename%2A%3DUTF-8%27%27C19980015.pdf&x-oss-date=20261115T015409Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rcJIP81LJC2Pe6bGDQpmEydMten%2FHE0zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qd8nnQg0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiqvQsMzLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIJom8A6KWD5sagAGc9nEIY3yvEu8enM3yTu0UT7%2FECOVAOIUBCk8qE%2FK6FP8R1bK7tmQ4Q4tp%2FiNw9e0gXl78kb229WXECrXRWCtRE5WRHF3F0A2sDPIYqfFK2PAPyk32qxPIA0ybcFhi%2F3uJmTDpHIemY%2FhtprI3V1tTrziPalj%2Brug1MizePTS7xyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYio9H9mco5QnFaBagxDrp4o1%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=bad5d2253c46b8f174659c52e5bb7fec3a21d3945c2c1fe0c03a547c589f3ead",
+     "dataManualOfficialLink": "",
+     "componentName": "Ledil C15469_FLORENTINA-SHD-WHT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Optoelectronics Accessories ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Optoelectronics Accessories",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>C1546</span>9_FLORENTINA-SHD-WHT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C1546"
+ },
+ "message": null
+}
