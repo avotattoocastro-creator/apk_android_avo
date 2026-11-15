@@ -27,6 +27,8 @@ struct RootView: View {
         // trainer's sketch 14/11/2026: «Calendario» is a button of «Entrenamientos»; «Biomecánica» right after «Análisis»;
         // «Carreras» after «Jinetes». «Mapa» is a tab of the training; «Análisis» opens it at «Resumen»
         RootNavEntry(page: .analysis, title: "Análisis", icon: "waveform.path.ecg"),
+        // trainer's sketch 14/11/2026: «Cámara» right below «Análisis» (video with GPS time, AVO SYNC); always enabled
+        RootNavEntry(page: .camera, title: "Cámara", icon: "video"),
         RootNavEntry(page: .biomech, title: "Biomecánica", icon: "figure.walk.motion"),
         RootNavEntry(page: .reports, title: "Informes", icon: "doc.richtext"),
         RootNavEntry(page: .stable, title: "Cuadra", icon: "figure.equestrian.sports"),
@@ -308,6 +310,7 @@ struct RootView: View {
         case .engine: EngineView()
         case .calendar: CalendarView()
         case .keyData: KeyDataView()
+        case .camera: CameraView()
         }
     }
 }

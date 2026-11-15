@@ -8,7 +8,7 @@ final class ScreenshotTests: XCTestCase {
     /// (identifier, is a tab of the training bar). Sidebar = general pages; «Análisis» opens the training and its pages
     /// are in the training bar at the top.
     // «Inicio» is no longer in the sidebar (trainer's sketch 13/11/2026): it is captured first, right after launch
-    static let pages: [(String, Bool)] = [("Sessions", false), ("List", false), ("Calendar", false), ("Races", false), ("Stable", false),
+    static let pages: [(String, Bool)] = [("Sessions", false), ("List", false), ("Calendar", false), ("Camera", false), ("Races", false), ("Stable", false),
                                           ("Riders", false), ("Analysis", false), ("KeyData", true), ("Summary", true), ("Charts", true), ("TrackWork", true), ("Assistant", true),
                                           ("Segments", true),
                                           ("Gps", true), ("Biomech", false), ("Compare", true), ("Tides", true), ("Reports", false),

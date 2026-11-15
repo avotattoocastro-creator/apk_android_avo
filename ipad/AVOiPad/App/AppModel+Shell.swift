@@ -123,6 +123,7 @@ extension AppModel {
         case .races: races?.pageShown()
         case .trackWork: trackWork?.pageShown()
         case .assistant: assistant?.pageShown()
+        case .camera: camera?.pageShown()
         case .home, .sessions, .server, .engine, .summary, .calendar, .keyData, .settings: break
         }
     }
@@ -131,7 +132,7 @@ extension AppModel {
     var showEmptyState: Bool {
         if !sessions.isEmpty { return false }
         switch page {
-        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi, .calendar, .settings: return false
+        case .home, .sessions, .trainingList, .races, .server, .engine, .stable, .riders, .geofences, .watchWifi, .calendar, .settings, .camera: return false
         default: return true
         }
     }
