@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-15T13:37:09+0000",
+    "date": "2026-11-15T13:42:50+0000",
     "included_severities": [
         "error",
         "warning",
@@ -15,20 +15,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Pad 5 [+3V3] of U5 on F.Cu",
                     "pos": {
-                        "x": 123.0,
-                        "y": 113.0
+                        "x": 100.0,
+                        "y": 97.9125
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "56d467e8-a2c1-5001-b87b-84685b33d386"
                 },
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "description": "Track [+3V3] on F.Cu, length 0.8168 mm",
                     "pos": {
-                        "x": 123.0,
-                        "y": 113.0
+                        "x": 100.3383,
+                        "y": 98.5185
                     },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
+                    "uuid": "36baeaba-200c-4597-92de-6f3952977956"
                 }
             ],
             "severity": "error",
@@ -38,89 +38,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 123.0,
-                        "y": 113.0
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                },
-                {
-                    "description": "Zone [GND] on F.Cu, priority 0",
-                    "pos": {
-                        "x": 123.0,
-                        "y": 113.0
-                    },
-                    "uuid": "e25e8b4a-f745-54a2-ac66-e0ba02ed58dc"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [ECGN] on F.Cu, length 0.3600 mm",
-                    "pos": {
-                        "x": 81.39,
-                        "y": 101.2
-                    },
-                    "uuid": "dc2b2120-bdf1-55d8-8471-3c09e35b3dd3"
-                },
-                {
-                    "description": "Pad 5 [ECGN] of U6 on F.Cu",
-                    "pos": {
-                        "x": 83.94,
-                        "y": 98.2
-                    },
-                    "uuid": "17253638-7a25-5370-b40b-7440578df544"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 22 [ECG_DRDY] of U6 on F.Cu",
-                    "pos": {
-                        "x": 88.06,
-                        "y": 97.4
-                    },
-                    "uuid": "b5c0d04c-f9be-5356-8cd2-8091f37a1389"
-                },
-                {
-                    "description": "Track [ECG_DRDY] on In2.Cu, length 0.1128 mm",
-                    "pos": {
-                        "x": 111.1252,
-                        "y": 99.0753
-                    },
-                    "uuid": "0c9229bd-e7c5-5736-93c7-6c27e89f5891"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 19 [ECG_MOSI] of U6 on F.Cu",
-                    "pos": {
-                        "x": 88.06,
-                        "y": 98.6
-                    },
-                    "uuid": "e8e549d6-9f81-5c91-998c-4e3f7f360543"
-                },
-                {
-                    "description": "Pad 19 [ECG_MOSI] of U4 on F.Cu",
+                    "description": "Pad 14 [GND] of U4 on F.Cu",
                     "pos": {
                         "x": 110.3,
-                        "y": 100.8
+                        "y": 96.8
                     },
-                    "uuid": "8879daef-b3c4-58d4-8eff-ee99e2262f43"
+                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 123.0,
+                        "y": 113.0
+                    },
+                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
                 }
             ],
             "severity": "error",
@@ -130,20 +61,43 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 28 [ECG_RLDINV] of U6 on F.Cu",
+                    "description": "Zone [GND] on F.Cu, priority 0",
                     "pos": {
-                        "x": 86.2,
-                        "y": 95.94
+                        "x": 123.0,
+                        "y": 113.0
                     },
-                    "uuid": "3c1ce89d-6f93-5ace-8ea9-7fe9d6e35e1f"
+                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
                 },
                 {
-                    "description": "Track [ECG_RLDINV] on F.Cu, length 0.8224 mm",
+                    "description": "Zone [GND] on F.Cu, priority 0",
                     "pos": {
-                        "x": 86.7785,
-                        "y": 92.8385
+                        "x": 123.0,
+                        "y": 113.0
                     },
-                    "uuid": "912a3a42-0760-5b28-a7a3-ba1935a70d6d"
+                    "uuid": "8761557d-d6a8-4cd2-b0f3-9668acb4afab"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VSYS] on F.Cu, length 3.4398 mm",
+                    "pos": {
+                        "x": 108.0177,
+                        "y": 111.5221
+                    },
+                    "uuid": "09fc3f4e-fe18-4814-861c-062634f8fd95"
+                },
+                {
+                    "description": "Pad 10 [VSYS] of U2 on F.Cu",
+                    "pos": {
+                        "x": 106.4625,
+                        "y": 109.25
+                    },
+                    "uuid": "88e0b31d-b440-577f-92f6-6b92be96c6c3"
                 }
             ],
             "severity": "error",
@@ -152,109 +106,19 @@
     ],
     "violations": [
         {
-            "description": "Items not allowed (keepout area 'BORDE_05')",
+            "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Track [USB_DM] on F.Cu, length 3.6000 mm",
+                    "description": "PCB text '+' on F.Silkscreen",
                     "pos": {
-                        "x": 101.375,
-                        "y": 85.525
+                        "x": 80.4,
+                        "y": 97.46
                     },
-                    "uuid": "33e5e66b-0aa2-5e09-ab80-08471e99d359"
-                }
-            ],
-            "severity": "error",
-            "type": "items_not_allowed"
-        },
-        {
-            "description": "Items not allowed (keepout area 'BORDE_05')",
-            "items": [
-                {
-                    "description": "Track [USB_DM] on F.Cu, length 0.6364 mm",
-                    "pos": {
-                        "x": 97.775,
-                        "y": 85.525
-                    },
-                    "uuid": "9f029a86-89fd-5ff2-a073-121069b41adc"
-                }
-            ],
-            "severity": "error",
-            "type": "items_not_allowed"
-        },
-        {
-            "description": "Items not allowed (keepout area 'BORDE_05')",
-            "items": [
-                {
-                    "description": "Track [USB_DM] on F.Cu, length 0.5657 mm",
-                    "pos": {
-                        "x": 101.775,
-                        "y": 85.925
-                    },
-                    "uuid": "a1805ad9-85a4-5c73-b899-d71a2f118f07"
-                }
-            ],
-            "severity": "error",
-            "type": "items_not_allowed"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.2283 mm",
-                    "pos": {
-                        "x": 98.8605,
-                        "y": 94.2205
-                    },
-                    "uuid": "1c254d9c-cd32-5156-9546-9b64a24c651f"
+                    "uuid": "9ac2b138-3665-5681-b7d2-bfcd5dc23e7c"
                 }
             ],
             "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [ECG_MISO] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 111.1049,
-                        "y": 98.4
-                    },
-                    "uuid": "3d7fe257-a799-516e-8fff-de66b83f4747"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Track has unconnected end",
-            "items": [
-                {
-                    "description": "Track [ECG_SCK] on F.Cu, length 0.2000 mm",
-                    "pos": {
-                        "x": 103.625,
-                        "y": 98.475
-                    },
-                    "uuid": "5174622e-1195-539f-9ebc-4cf2d66e7160"
-                }
-            ],
-            "severity": "warning",
-            "type": "track_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "Via [ECG_SCK] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 88.4116,
-                        "y": 102.0478
-                    },
-                    "uuid": "fd51a985-afe3-560c-8392-5004ae2d62e6"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
+            "type": "silk_over_copper"
         },
         {
             "description": "Silkscreen clipped by solder mask",
@@ -266,6 +130,21 @@
                         "y": 100.0
                     },
                     "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '-' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 102.54
+                    },
+                    "uuid": "d4f2abfc-9728-5a98-8753-f122cc395c6d"
                 }
             ],
             "severity": "warning",
@@ -320,20 +199,66 @@
             "description": "Silkscreen overlap",
             "items": [
                 {
-                    "description": "Segment of R41 on F.Silkscreen",
+                    "description": "Segment of R40 on F.Silkscreen",
                     "pos": {
                         "x": 80.58,
-                        "y": 102.6936
+                        "y": 97.6136
                     },
-                    "uuid": "d0309970-ec2e-5908-8a20-9fa666679514"
+                    "uuid": "4ac34a20-83ca-50d0-a58f-020ff76f81ba"
                 },
                 {
-                    "description": "PCB text '-' on F.Silkscreen",
+                    "description": "PCB text '+' on F.Silkscreen",
                     "pos": {
                         "x": 80.4,
-                        "y": 102.54
+                        "y": 97.46
                     },
-                    "uuid": "d4f2abfc-9728-5a98-8753-f122cc395c6d"
+                    "uuid": "9ac2b138-3665-5681-b7d2-bfcd5dc23e7c"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of C54 on F.Silkscreen",
+                    "pos": {
+                        "x": 80.54,
+                        "y": 99.7478
+                    },
+                    "uuid": "7d14f394-c1db-5509-9404-3d68f9f124c7"
+                },
+                {
+                    "description": "PCB text 'REF' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 100.0
+                    },
+                    "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen overlap",
+            "items": [
+                {
+                    "description": "Segment of C54 on F.Silkscreen",
+                    "pos": {
+                        "x": 79.82,
+                        "y": 99.7478
+                    },
+                    "uuid": "b65a9ae3-fa60-51f5-9bed-c2aba3e54566"
+                },
+                {
+                    "description": "PCB text 'REF' on F.Silkscreen",
+                    "pos": {
+                        "x": 80.4,
+                        "y": 100.0
+                    },
+                    "uuid": "d585d3c7-08f3-5209-ab4d-5b2c5e9493dc"
                 }
             ],
             "severity": "warning",
