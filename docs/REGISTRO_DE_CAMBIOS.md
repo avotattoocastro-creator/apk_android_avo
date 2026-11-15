@@ -24,6 +24,13 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — iPad — Cuadra: número de carreras de cada caballo
+**Autor:** Claude · **Rama:** `feature/ipad-cuadra-carreras`
+**Qué cambia:** en la lista de la Cuadra cada caballo muestra su número de carreras importadas («1 carrera», «0 carreras»), antes del número de entrenamientos.
+**Por qué:** boceto del entrenador sobre la build 155 (16/11/2026 00:17).
+**Archivos:** `Views/StableView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-16 — iPad — Carreras: «mediana del campo» pasa a llamarse «caballo medio»
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-saltos`
 **Qué cambia:** en todo lo que tiene que ver con carreras, «mediana del campo» pasa a ser **«caballo medio»** y «mediana de sus trabajos» pasa a ser «valor medio». Afecta a la ficha de la carrera, las gráficas, el análisis, las observaciones, el método y el Informe PDF. El cálculo no cambia: sigue siendo la mediana de los demás participantes, sin contar el nuestro, y la explicación lo dice con palabras sencillas.
