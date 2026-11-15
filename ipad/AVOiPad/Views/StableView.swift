@@ -180,6 +180,14 @@ private struct StableWideRow: View {
                 Text(row.subtitle).font(.footnote).foregroundStyle(Avo.textDim).lineLimit(1)
             }
             Spacer(minLength: 8)
+            if row.kind == .horse {
+                // races of the horse (trainer's sketch 16/11/2026: «1 carrera», «0 carreras»), from «Carreras»
+                let n: Int = app.races.racesOf(horse: row.code).count
+                Text(n == 1 ? "1 carrera" : "\(n) carreras")
+                    .font(.callout.monospacedDigit()).foregroundStyle(n > 0 ? Avo.silver : Avo.textDim)
+                    .frame(width: 110, alignment: .trailing)
+                    .accessibilityIdentifier("stable.row.\(row.code).races")
+            }
             Text(row.countText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 150, alignment: .trailing)
             Text(row.distanceText).font(.callout.monospacedDigit()).foregroundStyle(Avo.silver).frame(width: 90, alignment: .trailing)
             if row.hasNfc {
