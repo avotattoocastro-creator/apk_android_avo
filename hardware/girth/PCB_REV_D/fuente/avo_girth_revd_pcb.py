@@ -243,6 +243,9 @@ u4nets.update({k: v[1] for k, v in GPIO.items()})
 # pad de esquina 51 (GND de anclaje, el módulo ya va a masa por el EPAD 49 y los pads 1, 2, 11, 14, 36–48, 50, 52, 53):
 # queda sin conectar porque las salidas de los pads 24/25 lo encierran (sin pista ni vía posible sin vía en pad)
 u4nets[51] = None
+# REV D (CI 43720606924): el pad 14 (GND del borde izquierdo) queda encerrado entre las salidas de IO7/IO14 y el relleno
+# de F.Cu no le llega; sin conectar, como el 51 (el módulo ya va a masa por el EPAD y el resto de pads GND)
+u4nets[14] = None
 part("U4", "MINI1U", "ESP32-C6-MINI-1U-H4", (0, 0), 0, u4nets, LC["MINI1U"], "ESP32-C6-MINI-1U-H4 (alt. -N4)", "ESP32-C6",
      sym=dict(L=[(k, v[0] + (" " + v[1] if v[1] and v[1] != V3 else "")) for k, v in sorted(GPIO.items()) if k <= 23] +
                 [(n, "NC") for n in NC_PADS],

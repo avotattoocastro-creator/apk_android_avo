@@ -4301,15 +4301,7 @@
 		(uuid "720d1e9d-6ec8-5586-beaa-35ad98d56eda")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 153.67 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(global_label
-		"GND"
-		(shape passive)
-		(at 81.28 156.21 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "8bdc2fd5-f33b-56aa-a06b-fce2fa09db17")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 156.21 0) (hide yes) (effects (font (size 1 1))))
-	)
+	(no_connect (at 81.28 156.21) (uuid "9a309850-35fe-593a-a622-9f7fa54884cc"))
 	(global_label
 		"GND"
 		(shape passive)
