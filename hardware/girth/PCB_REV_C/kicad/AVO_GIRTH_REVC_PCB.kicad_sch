@@ -393,7 +393,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-C6-MINI-1U-N4_U_810664"
+			"AVO:ESP32-C6-MINI-1U-H4_U_810664"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -401,7 +401,7 @@
 			(property "Reference" "U" (at -22.86 40.64 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-C6-MINI-1U-N4_U_810664"
+				"ESP32-C6-MINI-1U-H4_U_810664"
 				(at 22.86 40.64 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -409,7 +409,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-C6-MINI-1U-N4_U_810664_0_1"
+				"ESP32-C6-MINI-1U-H4_U_810664_0_1"
 				(rectangle
 					(start -22.86 39.37)
 					(end 22.86 -39.37)
@@ -418,7 +418,7 @@
 				)
 			)
 			(symbol
-				"ESP32-C6-MINI-1U-N4_U_810664_1_1"
+				"ESP32-C6-MINI-1U-H4_U_810664_1_1"
 				(pin
 					passive
 					line
@@ -2658,7 +2658,7 @@
 		(uuid "bd36e26e-f671-54e6-a239-8c91fbfafc49")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-C6-MINI-1U-N4_U_810664")
+		(lib_id "AVO:ESP32-C6-MINI-1U-H4_U_810664")
 		(at 63.5 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2667,14 +2667,14 @@
 		(dnp no)
 		(uuid "48be37df-33ad-5b1b-9537-e1cb56f7eca4")
 		(property "Reference" "U4" (at 63.5 163.83 0) (effects (font (size 1.27 1.27))))
-		(property "Value" "ESP32-C6-MINI-1U-N4" (at 63.5 166.37 0) (effects (font (size 1 1))))
+		(property "Value" "ESP32-C6-MINI-1U-H4" (at 63.5 166.37 0) (effects (font (size 1 1))))
 		(property "Footprint" "AVO:ESP32-C6-MINI-1U" (at 63.5 165.1 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Datasheet" "" (at 63.5 165.1 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "Description" "" (at 63.5 165.1 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C7558096" (at 63.5 165.1 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C20627095" (at 63.5 165.1 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property
 			"MPN"
-			"ESP32-C6-MINI-1U-N4 (alt. -H4)"
+			"ESP32-C6-MINI-1U-H4 (alt. -N4)"
 			(at 63.5 165.1 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))

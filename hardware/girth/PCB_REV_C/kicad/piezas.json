@@ -391,10 +391,10 @@
  },
  {
   "ref": "U4",
-  "value": "ESP32-C6-MINI-1U-N4",
+  "value": "ESP32-C6-MINI-1U-H4",
   "footprint": "ESP32-C6-MINI-1U",
-  "lcsc": "C7558096",
-  "mpn": "ESP32-C6-MINI-1U-N4 (alt. -H4)",
+  "lcsc": "C20627095",
+  "mpn": "ESP32-C6-MINI-1U-H4 (alt. -N4)",
   "block": "ESP32-C6",
   "dnp": false,
   "no_assembly": false,

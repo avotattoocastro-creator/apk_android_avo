@@ -161,7 +161,7 @@ LC = {
     "100n": "C1525", "1u": "C52923", "10n": "C15195", "22p": "C1555", "4u7": "C19666", "10u": "C96446", "22u": "C45783",
     "1n C0G": "C53547", "100n C0G": "C97946",
     "NTC10k": "C77131", "USBLC6": "C7519", "LED": "C2286", "PTC": "C20802", "TVS": "C2827694",
-    "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C7558096",
+    "RT9080-33": "C841192", "RT9080-18": "C426476", "BQ24072": "C140288", "MINI1U": "C20627095",
     "BNO085": "C5189642", "XTAL": "C32346", "MAX30003": "C1519515", "SIT1533": "C367058",
 }
 
@@ -248,7 +248,7 @@ GND_PADS = (1, 2, 11, 14) + tuple(range(36, 54))
 u4nets = {n: GND for n in GND_PADS}
 u4nets.update({n: None for n in NC_PADS})
 u4nets.update({k: v[1] for k, v in GPIO.items()})
-part("U4", "MINI1U", "ESP32-C6-MINI-1U-N4", (0, 0), 0, u4nets, LC["MINI1U"], "ESP32-C6-MINI-1U-N4 (alt. -H4)", "ESP32-C6",
+part("U4", "MINI1U", "ESP32-C6-MINI-1U-H4", (0, 0), 0, u4nets, LC["MINI1U"], "ESP32-C6-MINI-1U-H4 (alt. -N4)", "ESP32-C6",
      sym=dict(L=[(k, v[0] + (" " + v[1] if v[1] and v[1] != V3 else "")) for k, v in sorted(GPIO.items()) if k <= 23] +
                 [(n, "NC") for n in NC_PADS],
               R=[(k, v[0] + (" " + v[1] if v[1] else "")) for k, v in sorted(GPIO.items()) if k > 23] +

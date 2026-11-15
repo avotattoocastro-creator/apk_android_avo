@@ -279,7 +279,7 @@ def point_in(p, poly):
 
 
 # ======================================================================================= writers
-def edge_bands(w=0.45):
+def edge_bands(w=0.55):
     """Thin keepout polygons (tracks/vias only) inside each arc of the outline, so the router keeps
     0.3 mm from the real arcs although the DSN boundary approximates them with straight segments."""
     bands = []
@@ -299,6 +299,19 @@ def edge_bands(w=0.45):
         inner = [(c[0] + (rr + sgn * w) * (x - c[0]) / rr, c[1] + (rr + sgn * w) * (y - c[1]) / rr) for x, y in pts]
         outer = [(c[0] + (rr - sgn * 0.05) * (x - c[0]) / rr, c[1] + (rr - sgn * 0.05) * (y - c[1]) / rr) for x, y in pts]
         bands.append(outer + inner[::-1])
+    # REV C: bandas también en los lados rectos (Freerouting dejaba 0,2 mm al canto en In2 y en las vías)
+    for pr in D.outline_prims():
+        if pr[0] != "line":
+            continue
+        (ax, ay), (bx, by) = pr[1], pr[2]
+        L = math.hypot(bx - ax, by - ay)
+        ux, uy = (bx - ax) / L, (by - ay) / L
+        nx, ny = -uy, ux                                     # normal hacia dentro (contorno antihorario)
+        if not D.point_in_poly((ax + bx) / 2 + nx * 0.5, (ay + by) / 2 + ny * 0.5, D.outline_pts(3)):
+            nx, ny = -nx, -ny
+        o = 0.05
+        bands.append([(ax - nx * o, ay - ny * o), (bx - nx * o, by - ny * o),
+                      (bx + nx * (w + 0.05), by + ny * (w + 0.05)), (ax + nx * (w + 0.05), ay + ny * (w + 0.05))])
     return bands
 
 
@@ -344,7 +357,7 @@ def write_board(r, path, outer_pours=True):
         tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
         tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
     for k, band in enumerate(edge_bands()):
-        tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
+        tree.append(B.keepout(["F.Cu", "In2.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # texts (cara B: apoya en la batería)
     tree.append(B.gr_text("AVO GIRTH REV " + D.REV + " · " + D.DATE, *D.K(0.0, 4.0), "B.SilkS", 1.0, mirror=True))
     tree.append(B.gr_text("ECG MAX30003 · BNO085 · ESP32-C6", *D.K(0.0, 1.5), "B.SilkS", 0.8, mirror=True, bold=False))
@@ -379,7 +392,7 @@ def main():
         # rev. 2 (V4): sin pre-ruteo del bloque Qi; los pre-ruteos bloqueados encajonaban U1 y Freerouting no
         # podía terminar sus redes. Se dejan solo USB, CC y los pines del cargador.
         PRE_QI = "--pre-qi" in sys.argv
-        pre = ["ECG_CPLL", "ECG_VBG", "ECG_VREF", "ECG_VCM", "ECG_CAPP", "ECG_CAPN", "IMU_XIN", "IMU_XOUT", "IMU_CAP",
+        pre = ["ECG_CPLL", "ECG_VBG", "IMU_XIN", "IMU_XOUT", "IMU_CAP",
                "CHG_ILIM", "CHG_ISET", "CHG_TS"]
         # local pieces of long nets: the pin and its pull-up/neighbour (Freerouting finishes the long run)
         pairs = [("CHG_STAT", ["U2.9", "R10.1"]), ("CHG_EN2", ["U2.5", "R8.1"])]
