@@ -24,6 +24,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — «Informe PDF» de la carrera frente al entrenamiento
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-entreno` · **CI:** ver PR
+**Qué cambia:** en la ficha de la carrera aparece el botón **«Informe PDF»**. Genera un PDF para enviar, con el estilo de los informes de entrenamiento, y lo abre en el visor con «Compartir». El PDF incluye:
+- la carrera y el resultado;
+- los tramos de nuestro caballo;
+- la clasificación con nuestro caballo resaltado;
+- «Entrenamiento vs carrera, tramo a tramo» con el trabajo elegido en la ficha: cifras, gráfica de velocidad por tramo, perfil de caída y tabla;
+- el «Análisis según los entrenamientos» completo: conclusión, carrera, entrenamientos, forma, estimación, observaciones y método;
+- las notas.
+
+El botón del PDF del tracker pasa a llamarse «PDF original».
+**Por qué:** petición del entrenador (15/11/2026): la comparación solo se veía en la app.
+**Archivos:** `Core/RaceComparisonPdf.swift` (nuevo), `App/RacesModel.swift` (`exportComparisonPdf`, `splitChoice`), `Views/RaceDetailView.swift`, `Views/RaceTrainingSplitsView.swift`.
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — Cincha REV D: CPL corregido para las huellas de JLCPCB
 **Autor:** Claude · **Rama:** `fix/girth-revd-cpl-centros` · **CI:** PCB run 43738514699 (puerta superada)
 **Qué cambia:** el CPL ya aplica el giro y el centro de las huellas de JLCPCB/EasyEDA (`fuente/jlc_correcciones.py`, `jlc_correcciones.json`, `jlc.py`).

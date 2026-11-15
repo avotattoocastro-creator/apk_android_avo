@@ -17,7 +17,7 @@ struct RaceTrainingSplitsCard: View {
     @Bindable var model: RacesModel
     let race: Race
     let us: RaceRunner
-    @State private var chosenId: String? = nil
+    private var chosenId: String? { model.splitChoice[race.id] }
 
     static let trainingSeries: String = "Entrenamiento (playa)"
     static let raceSeries: String = "Carrera (pista)"
@@ -69,7 +69,7 @@ struct RaceTrainingSplitsCard: View {
             Menu {
                 ForEach(cands) { (c: RaceTrainingCandidate) in
                     Button {
-                        chosenId = c.id
+                        model.splitChoice[race.id] = c.id
                     } label: {
                         if c.id == chosen.id {
                             Label(c.label, systemImage: "checkmark")
