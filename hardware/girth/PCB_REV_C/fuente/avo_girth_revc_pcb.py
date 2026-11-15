@@ -244,10 +244,13 @@ GPIO = {
     30: ("IO17", "ECG_CS"), 31: ("IO16", "IMU_SCL"), 8: ("EN", "EN"), 3: ("3V3", V3),
 }
 NC_PADS = (4, 7, 21, 32, 33, 34, 35)
-GND_PADS = (1, 2, 11, 14) + tuple(range(36, 54))
+GND_PADS = (1, 2, 11, 14) + tuple(n for n in range(36, 54) if n != 51)
 u4nets = {n: GND for n in GND_PADS}
 u4nets.update({n: None for n in NC_PADS})
 u4nets.update({k: v[1] for k, v in GPIO.items()})
+# pad de esquina 51 (GND de anclaje, el módulo ya va a masa por el EPAD 49 y los pads 1, 2, 11, 14, 36–48, 50, 52, 53):
+# queda sin conectar porque las salidas de los pads 24/25 lo encierran (sin pista ni vía posible sin vía en pad)
+u4nets[51] = None
 part("U4", "MINI1U", "ESP32-C6-MINI-1U-H4", (0, 0), 0, u4nets, LC["MINI1U"], "ESP32-C6-MINI-1U-H4 (alt. -N4)", "ESP32-C6",
      sym=dict(L=[(k, v[0] + (" " + v[1] if v[1] and v[1] != V3 else "")) for k, v in sorted(GPIO.items()) if k <= 23] +
                 [(n, "NC") for n in NC_PADS],

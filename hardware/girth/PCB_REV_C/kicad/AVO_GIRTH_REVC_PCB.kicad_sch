@@ -393,7 +393,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-C6-MINI-1U-H4_U_810664"
+			"AVO:ESP32-C6-MINI-1U-H4_U_3f11c5"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -401,7 +401,7 @@
 			(property "Reference" "U" (at -22.86 40.64 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-C6-MINI-1U-H4_U_810664"
+				"ESP32-C6-MINI-1U-H4_U_3f11c5"
 				(at 22.86 40.64 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -409,7 +409,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-C6-MINI-1U-H4_U_810664_0_1"
+				"ESP32-C6-MINI-1U-H4_U_3f11c5_0_1"
 				(rectangle
 					(start -22.86 39.37)
 					(end 22.86 -39.37)
@@ -418,7 +418,7 @@
 				)
 			)
 			(symbol
-				"ESP32-C6-MINI-1U-H4_U_810664_1_1"
+				"ESP32-C6-MINI-1U-H4_U_3f11c5_1_1"
 				(pin
 					passive
 					line
@@ -825,7 +825,7 @@
 					(at 25.4 -31.75 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
-					(number "51" (effects (font (size 1.27 1.27))))
+					(number "52" (effects (font (size 1.27 1.27))))
 				)
 				(pin
 					passive
@@ -833,15 +833,15 @@
 					(at 25.4 -34.29 180)
 					(length 2.54)
 					(name "GND" (effects (font (size 1.27 1.27))))
-					(number "52" (effects (font (size 1.27 1.27))))
+					(number "53" (effects (font (size 1.27 1.27))))
 				)
 				(pin
 					passive
 					line
 					(at 25.4 -36.83 180)
 					(length 2.54)
-					(name "GND" (effects (font (size 1.27 1.27))))
-					(number "53" (effects (font (size 1.27 1.27))))
+					(name "51" (effects (font (size 1.27 1.27))))
+					(number "51" (effects (font (size 1.27 1.27))))
 				)
 			)
 		)
@@ -2658,7 +2658,7 @@
 		(uuid "bd36e26e-f671-54e6-a239-8c91fbfafc49")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-C6-MINI-1U-H4_U_810664")
+		(lib_id "AVO:ESP32-C6-MINI-1U-H4_U_3f11c5")
 		(at 63.5 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2729,9 +2729,9 @@
 		(pin "48" (uuid "d72ee802-c2aa-523f-8cf3-d74db23b4320"))
 		(pin "49" (uuid "179bcd17-8e4c-5130-b32f-c0acaec470be"))
 		(pin "50" (uuid "19c98c87-1fdc-5773-b980-74542c3c18a8"))
-		(pin "51" (uuid "4eaf48ea-57d7-556b-b07f-74915be77680"))
 		(pin "52" (uuid "efe01ce1-1e76-58a4-b98b-8829ac393e64"))
 		(pin "53" (uuid "c1ef87f8-244d-5b9f-a534-6f3ca82f81f4"))
+		(pin "51" (uuid "4eaf48ea-57d7-556b-b07f-74915be77680"))
 		(instances
 			(project "AVO_GIRTH_REVC_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "U4") (unit 1)))
 		)
@@ -3120,7 +3120,7 @@
 		(at 88.9 196.85 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
-		(uuid "d166b968-1648-51db-9e8a-e09a78a6e201")
+		(uuid "d32d54f5-edab-538d-927b-012479ef2b0c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 88.9 196.85 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
@@ -3129,18 +3129,10 @@
 		(at 88.9 199.39 0)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
-		(uuid "d32d54f5-edab-538d-927b-012479ef2b0c")
+		(uuid "1d8bd261-fed1-53a7-8163-7265f02775f9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 88.9 199.39 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(global_label
-		"GND"
-		(shape passive)
-		(at 88.9 201.93 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "1d8bd261-fed1-53a7-8163-7265f02775f9")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 88.9 201.93 0) (hide yes) (effects (font (size 1 1))))
-	)
+	(no_connect (at 88.9 201.93) (uuid "d15a6cd0-e254-5303-a061-bd0d62a07002"))
 	(symbol
 		(lib_id "AVO:C_avo")
 		(at 109.22 139.7 0)

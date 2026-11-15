@@ -374,16 +374,6 @@ def main():
     print("Tramos colgantes eliminados: %d" % removed)
     print("Reparadas: %s" % (", ".join(fixed) or "ninguna"))
     print("Sin reparar: %s" % (", ".join(failed) or "ninguna"))
-    # REV C: la esquina 51 (GND) del C6-MINI-1U queda encerrada por las salidas de los pads 24/25: tramo interior
-    # en F hasta el EPAD (pad 49), por debajo del módulo y lejos de los pads de señal (≥ 0,2 mm)
-    from fplib import rot as _rot
-    u4 = next(p_ for p_ in D.PARTS if p_["ref"] == "U4")
-    cx_, cy_ = D.kpos(u4)
-    a_ = _rot(5.95, 7.65, u4["rot"]); b_ = _rot(2.4, 5.1, u4["rot"])
-    gseg = dict(net=D.GND, layer="F.Cu", a=(cx_ + a_[0], cy_ + a_[1]), b=(cx_ + b_[0], cy_ + b_[1]), w=0.2)
-    if not any(s_["net"] == D.GND and s_["layer"] == "F.Cu" and math.hypot(s_["a"][0] - gseg["a"][0], s_["a"][1] - gseg["a"][1]) < 0.01
-               for s_ in segs):
-        segs.append(gseg)
     # rebuild router track list for the writer (imported + new)
     r.tracks = [(D.CODE.get(s["net"], 0), s["layer"], s["a"], s["b"], s["w"]) for s in segs if s["net"]]
     r.vias = [(D.CODE.get(v["net"], 0), v["p"]) for v in vias if v["net"]]
