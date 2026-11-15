@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-15 02:45 UTC",
+ "date_utc": "2026-11-15 03:25 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31451687,
+   "stock": 31450979,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38159072,
+   "stock": 38168027,
    "library": "base",
    "prices": [
     [
@@ -147,7 +147,7 @@
    "mpn": "0402CG220J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 2386346,
+   "stock": 2386125,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "0402WGF0000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15634182,
+   "stock": 15631442,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "CL10A475KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 3491652,
+   "stock": 3491149,
    "library": "base",
    "prices": [
     [
@@ -247,12 +247,47 @@
    ],
    "describe": "16V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
+  "C20627095": {
+   "lcsc": "C20627095",
+   "mpn": "ESP32-C6-MINI-1U-H4",
+   "maker": "Espressif Systems",
+   "package": "SMD,13.2x12.5mm",
+   "stock": 3425,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     4.1902
+    ],
+    [
+     10,
+     3.7484
+    ],
+    [
+     30,
+     3.4866
+    ],
+    [
+     100,
+     3.2674
+    ],
+    [
+     650,
+     3.1201
+    ],
+    [
+     1300,
+     3.0547
+    ]
+   ],
+   "describe": "-105.5dBm -40℃~+105℃ 2.4GHz 20.5dBm 382mA 3V~3.6V 73mA ESP32-C6FH4 Integrated Bluetooth function、Integrated Zigbee function、Support USB interface UART、SDIO、SPI、I2C、GPIO、USB SMD,13.2x12.5mm WiFi Modules ROHS"
+  },
   "C20802": {
    "lcsc": "C20802",
    "mpn": "SMD1206P150TF",
    "maker": "RUILON(Shenzhen Ruilongyuan Elec)",
    "package": "1206",
-   "stock": 11303,
+   "stock": 11293,
    "library": "expand",
    "prices": [
     [
@@ -287,7 +322,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 5811608,
+   "stock": 5810222,
    "library": "base",
    "prices": [
     [
@@ -322,7 +357,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10413373,
+   "stock": 10412898,
    "library": "base",
    "prices": [
     [
@@ -357,7 +392,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21096688,
+   "stock": 21094217,
    "library": "base",
    "prices": [
     [
@@ -392,7 +427,7 @@
    "mpn": "0402WGF4702TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 5709489,
+   "stock": 5709341,
    "library": "base",
    "prices": [
     [
@@ -427,7 +462,7 @@
    "mpn": "0402WGF2201TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3056064,
+   "stock": 3055966,
    "library": "base",
    "prices": [
     [
@@ -497,7 +532,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2343781,
+   "stock": 2343411,
    "library": "base",
    "prices": [
     [
@@ -567,7 +602,7 @@
    "mpn": "Q13FC13500004",
    "maker": "Seiko Epson",
    "package": "SMD3215-2P",
-   "stock": 413571,
+   "stock": 413561,
    "library": "base",
    "prices": [
     [
@@ -672,7 +707,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4127454,
+   "stock": 4126863,
    "library": "base",
    "prices": [
     [
@@ -777,7 +812,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10297277,
+   "stock": 10294892,
    "library": "base",
    "prices": [
     [
@@ -842,25 +877,6 @@
    ],
    "describe": "1nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
-  "C7558096": {
-   "lcsc": "C7558096",
-   "mpn": "ESP32-C6-MINI-1U-N4",
-   "maker": "Espressif Systems",
-   "package": "SMD,13.2X12.5mm",
-   "stock": 0,
-   "library": "expand",
-   "prices": [
-    [
-     1,
-     0.0398
-    ],
-    [
-     100,
-     0.0205
-    ]
-   ],
-   "describe": "SMD,13.2x12.5mm New Arrivals ROHS"
-  },
   "C77131": {
    "lcsc": "C77131",
    "mpn": "NCP15XH103F03RC",
@@ -901,7 +917,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 27578,
+   "stock": 27571,
    "library": "expand",
    "prices": [
     [
@@ -936,7 +952,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6169187,
+   "stock": 6166031,
    "library": "base",
    "prices": [
     [
