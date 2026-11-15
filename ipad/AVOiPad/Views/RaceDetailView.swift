@@ -29,20 +29,20 @@ struct RaceDetailView: View {
                         .background(Avo.cyan.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Avo.cyan, lineWidth: 1))
                 }
-                RaceHeaderCard(race: race)
+                RaceHeaderCard(race: race).racePdfCheck(.header)
                 if let us = race.ourRunner {
-                    RaceResultCard(race: race, us: us)
+                    RaceResultCard(race: race, us: us).racePdfCheck(.result)
                 } else {
                     AvoCard { AvoNoData(text: "El caballo no está identificado entre los participantes") }
                 }
-                RaceRunnersTable(race: race)
-                RaceSectorsTable(race: race, runnerName: $sectorRunner)
+                RaceRunnersTable(race: race).racePdfCheck(.classification)
+                RaceSectorsTable(race: race, runnerName: $sectorRunner).racePdfCheck(.sectors)
                 RaceChartsSection(race: race)
                 if let us = race.ourRunner {
-                    RaceTrainingSplitsCard(model: model, race: race, us: us)
+                    RaceTrainingSplitsCard(model: model, race: race, us: us).racePdfCheck(.training)
                 }
                 analysis
-                notesCard
+                notesCard.racePdfCheck(.notes)
             }
             .padding(20)
         }
@@ -370,6 +370,7 @@ private struct RaceChartsSection: View {
         return AvoCard(title: "Velocidad por tramo", subtitle: "km/h · nuestro caballo, ganador y mediana del campo") {
             RaceLineChart(points: pts, names: names, colors: colors, reversed: false, unit: "km/h")
         }
+        .racePdfCheck(.speedChart)
     }
 
     private func positionCard(_ u: RaceRunner, _ w: RaceRunner?, _ showW: Bool, _ ourName: String, _ winName: String) -> some View {
@@ -384,6 +385,7 @@ private struct RaceChartsSection: View {
         return AvoCard(title: "Posición en carrera", subtitle: "Al final de cada tramo (1 = en cabeza)") {
             RaceLineChart(points: pts, names: names, colors: colors, reversed: true, unit: ".º")
         }
+        .racePdfCheck(.positionChart)
     }
 
     private func strideCard(_ u: RaceRunner, _ w: RaceRunner?, _ showW: Bool, _ ourName: String, _ winName: String) -> some View {
@@ -411,6 +413,7 @@ private struct RaceChartsSection: View {
             Text("La zancada del primer tramo incluye la salida (tramo de \(Int(u.sectors.first?.lengthM ?? 0)) m): compárala con cautela.")
                 .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
+        .racePdfCheck(.strideChart)
     }
 
     private func gapCard(_ u: RaceRunner) -> some View {
@@ -430,6 +433,7 @@ private struct RaceChartsSection: View {
             .chartLegend(.hidden)
             .frame(height: 190)
         }
+        .racePdfCheck(.gapChart)
     }
 }
 
@@ -507,19 +511,20 @@ private struct RaceAnalysisSection: View {
                 Text("Confianza \(rep.confidence.rawValue): \(rep.confidenceReason).")
                     .font(.caption).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
             }
+            .racePdfCheck(.verdict)
             ViewThatFits(in: .horizontal) {
                 HStack(alignment: .top, spacing: 14) {
-                    raceCard(rep)
-                    trainingCard(rep)
+                    raceCard(rep).racePdfCheck(.raceFacts)
+                    trainingCard(rep).racePdfCheck(.trainingFacts)
                 }
                 .frame(minWidth: 860)
                 VStack(alignment: .leading, spacing: 14) {
-                    raceCard(rep)
-                    trainingCard(rep)
+                    raceCard(rep).racePdfCheck(.raceFacts)
+                    trainingCard(rep).racePdfCheck(.trainingFacts)
                 }
             }
-            RaceFormCard(report: rep, horseName: race.horseName ?? "—", raceDate: race.dateText)
-            estimateCard(rep)
+            RaceFormCard(report: rep, horseName: race.horseName ?? "—", raceDate: race.dateText).racePdfCheck(.form)
+            estimateCard(rep).racePdfCheck(.estimate)
             AvoCard(title: "Observaciones") {
                 if rep.observations.isEmpty {
                     AvoNoData()
@@ -534,6 +539,7 @@ private struct RaceAnalysisSection: View {
                     }
                 }
             }
+            .racePdfCheck(.observations)
             AvoCard(title: "Método") {
                 VStack(alignment: .leading, spacing: 4) {
                     ForEach(Array(rep.method.enumerated()), id: \.offset) { (item: (offset: Int, element: String)) in
@@ -542,6 +548,7 @@ private struct RaceAnalysisSection: View {
                     }
                 }
             }
+            .racePdfCheck(.method)
         }
     }
 

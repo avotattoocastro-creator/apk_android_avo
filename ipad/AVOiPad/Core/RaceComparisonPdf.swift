@@ -1,5 +1,35 @@
 import Foundation
 
+/// Groups of data of the race card that can go into the «Informe PDF» (each card of the race card has a «PDF» check;
+/// trainer 15/11/2026: «cada grupo de datos tiene que tener un check para que salga o no salga en el informe PDF»).
+enum RacePdfSection: String, CaseIterable, Identifiable {
+    case header, result, classification, sectors, speedChart, positionChart, strideChart, gapChart, training,
+         verdict, raceFacts, trainingFacts, form, estimate, observations, method, notes
+
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .header: return "Datos de la carrera"
+        case .result: return "Resultado"
+        case .classification: return "Clasificación"
+        case .sectors: return "Tramos"
+        case .speedChart: return "Velocidad por tramo"
+        case .positionChart: return "Posición en carrera"
+        case .strideChart: return "Foulées y zancada"
+        case .gapChart: return "Distancia al primero"
+        case .training: return "Entrenamiento vs carrera"
+        case .verdict: return "Conclusión"
+        case .raceFacts: return "Lo que dice la carrera"
+        case .trainingFacts: return "Lo que dicen sus entrenamientos"
+        case .form: return "Forma antes de la carrera"
+        case .estimate: return "Estimación"
+        case .observations: return "Observaciones"
+        case .method: return "Método"
+        case .notes: return "Notas"
+        }
+    }
+}
+
 /// Data of the «Informe carrera vs entrenamiento» PDF (race card → «Informe PDF»): the race of our horse, its 200 m
 /// sectors, the chosen training effort with splits side by side (RaceTrainingSplits) and «Análisis según los
 /// entrenamientos» (RaceReport). Everything optional except the race: the report says what is missing.
@@ -10,6 +40,7 @@ struct RaceComparisonPdfData {
     var comparison: RaceSectorComparison?
     var report: RaceReport?
     var notes: String
+    var sections: Set<RacePdfSection> = Set(RacePdfSection.allCases)
     var createdAt: Date = Date()
 }
 
@@ -268,21 +299,139 @@ private final class RaceComparisonPdfWriter {
         legend([("Entrenamiento (playa)", RaceComparisonPdfWriter.cyan), ("Carrera (pista)", ReportBuilder.red)])
     }
 
+    /// Line chart over the race sectors (categorical x): one polyline per series; `reversed` puts 1 at the top (positions).
+    func lineChart(_ caption: String, _ labels: [String], _ series: [(name: String, color: AvoRGB, values: [Double?])],
+                   reversed: Bool = false, unit: String = "", decimals: Int = 1, step: Double? = nil) {
+        let h: Double = 150
+        ensure(h + 40)
+        sub(caption)
+        let x0: Double = m + 30
+        let cw: Double = w - 34
+        pdf.fillRect(m, y, w, h, ReportBuilder.panel)
+        let all: [Double] = series.flatMap { $0.values.compactMap { $0 } }.filter { $0.isFinite }
+        guard var lo = all.min(), var hi = all.max() else {
+            pdf.text(m + 8, y + 8, "Sin datos", size: 8, bold: false, color: ReportBuilder.dim)
+            y += h + 6
+            return
+        }
+        if hi - lo < 1e-6 { lo -= 1; hi += 1 }
+        let st: Double = step ?? max(((hi - lo) / 4 * 10).rounded(.up) / 10, 0.1)
+        lo = (lo / st).rounded(.down) * st
+        hi = (hi / st).rounded(.up) * st
+        func py(_ v: Double) -> Double {
+            let t: Double = (v - lo) / (hi - lo)
+            return reversed ? y + 10 + t * (h - 26) : y + h - 16 - t * (h - 26)
+        }
+        var v: Double = lo
+        while v <= hi + st * 0.01 {
+            pdf.line(x0, py(v), x0 + cw, py(v), ReportBuilder.lineColor, width: 0.4)
+            pdf.text(m + 2, py(v) - 4, DotNetFormat.custom(v, decimals == 0 ? "0" : "0.0", spanish: true) + unit, size: 6.3, bold: false,
+                     color: ReportBuilder.dim)
+            v += st
+        }
+        let n: Int = max(labels.count, 1)
+        let slot: Double = cw / Double(n)
+        for (k, l) in labels.enumerated() {
+            pdf.text(x0 + slot * (Double(k) + 0.5), y + h - 12, l, size: 6.3, bold: false, color: ReportBuilder.dim, align: .center)
+        }
+        for s in series {
+            var pts: [(x: Double, y: Double)] = []
+            for k in 0..<labels.count {
+                let cx: Double = x0 + slot * (Double(k) + 0.5)
+                if k < s.values.count, let val = s.values[k], val.isFinite { pts.append((x: cx, y: py(val))) } else { pts.append((x: .nan, y: .nan)) }
+            }
+            pdf.polyline(pts, s.color, width: 1.3)
+            for p in pts where p.x.isFinite { pdf.circle(p.x, p.y, 2, s.color) }
+        }
+        y += h + 4
+        legend(series.map { ($0.name, $0.color) })
+    }
+
+    /// Bars per sector (one series), with the value on top.
+    func bars(_ caption: String, _ labels: [String], _ values: [Double?], color: AvoRGB, decimals: Int = 2) {
+        let h: Double = 130
+        ensure(h + 30)
+        sub(caption)
+        let x0: Double = m + 6
+        let cw: Double = w - 12
+        pdf.fillRect(m, y, w, h, ReportBuilder.panel)
+        let top: Double = max(values.compactMap { $0 }.max() ?? 1, 0.01) * 1.15
+        let n: Int = max(labels.count, 1)
+        let slot: Double = cw / Double(n)
+        let bw: Double = min(26, slot * 0.55)
+        for (k, l) in labels.enumerated() {
+            let cx: Double = x0 + slot * (Double(k) + 0.5)
+            if k < values.count, let v = values[k], v.isFinite {
+                let bh: Double = max(0, v / top * (h - 34))
+                pdf.fillRect(cx - bw / 2, y + h - 16 - bh, bw, bh, color)
+                pdf.text(cx, y + h - 26 - bh, AvoFormat.f(v, decimals), size: 6.5, bold: false, color: ReportBuilder.ink, align: .center)
+            }
+            pdf.text(cx, y + h - 12, l, size: 6.3, bold: false, color: ReportBuilder.dim, align: .center)
+        }
+        y += h + 8
+    }
+
+    static let blue: AvoRGB = (r: 0x2F, g: 0x6F, b: 0xD0)
+    static let grey: AvoRGB = (r: 0x55, g: 0x57, b: 0x5E)
+
+    func raceCharts() {
+        let r: Race = d.race
+        let u: RaceRunner = d.us
+        let sec: Set<RacePdfSection> = d.sections
+        let want: Bool = sec.contains(.speedChart) || sec.contains(.positionChart) || sec.contains(.strideChart) || sec.contains(.gapChart)
+        guard want, !u.sectors.isEmpty else { return }
+        title("Gráficas por tramo")
+        let labels: [String] = u.sectors.map { $0.shortLabel }
+        let win: RaceRunner? = r.winner.flatMap { $0.name == u.name ? nil : $0 }
+        let ourName: String = u.name
+        let winName: String = "Ganador (\(win?.name ?? "—"))"
+        func vals(_ x: RaceRunner, _ f: (RaceSector) -> Double?) -> [Double?] {
+            (0..<labels.count).map { k in k < x.sectors.count ? f(x.sectors[k]) : nil }
+        }
+        if sec.contains(.speedChart) {
+            var series: [(name: String, color: AvoRGB, values: [Double?])] = [(name: ourName, color: ReportBuilder.red, values: vals(u) { $0.speedKmh })]
+            if let w0 = win { series.append((name: winName, color: RaceComparisonPdfWriter.blue, values: vals(w0) { $0.speedKmh })) }
+            let med: [Double?] = (0..<labels.count).map { k in
+                RaceAnalysis.median(r.runners.filter { $0.name != u.name }.compactMap { k < $0.sectors.count ? $0.sectors[k].speedKmh : nil })
+            }
+            series.append((name: "Mediana del campo", color: RaceComparisonPdfWriter.grey, values: med))
+            lineChart("Velocidad por tramo (km/h) · nuestro caballo, ganador y mediana del campo", labels, series)
+        }
+        if sec.contains(.positionChart) {
+            var series: [(name: String, color: AvoRGB, values: [Double?])] = [(name: ourName, color: ReportBuilder.red, values: vals(u) { $0.position.map { Double($0) } })]
+            if let w0 = win { series.append((name: winName, color: RaceComparisonPdfWriter.blue, values: vals(w0) { $0.position.map { Double($0) } })) }
+            lineChart("Posición en carrera al final de cada tramo (1 = en cabeza)", labels, series, reversed: true, unit: ".º", decimals: 0, step: 1)
+        }
+        if sec.contains(.strideChart) {
+            var series: [(name: String, color: AvoRGB, values: [Double?])] = [(name: ourName, color: ReportBuilder.red, values: vals(u) { $0.strideLengthM })]
+            if let w0 = win { series.append((name: winName, color: RaceComparisonPdfWriter.blue, values: vals(w0) { $0.strideLengthM })) }
+            lineChart("Longitud de zancada (m) = longitud del tramo / foulées", labels, series, unit: " m", decimals: 1)
+        }
+        if sec.contains(.gapChart) {
+            let gaps: [Double?] = (0..<labels.count).map { k in
+                guard k < u.sectors.count, let lead = r.runners.compactMap({ k < $0.sectors.count ? $0.sectors[k].cumulativeS : nil }).min() else { return nil }
+                return u.sectors[k].cumulativeS - lead
+            }
+            bars("Distancia al primero (s detrás del caballo en cabeza; 1 cuerpo ≈ 0,2 s)", labels, gaps, color: ReportBuilder.red)
+        }
+    }
+
     // ------------------------------------------------------------------ content
     func build() -> Data {
         let r: Race = d.race
         let u: RaceRunner = d.us
         header()
 
+        let sec: Set<RacePdfSection> = d.sections
         // 1. race
-        title("Carrera")
-        keyValues([(k: "Carrera", v: "\(r.title)\(r.category.isEmpty ? "" : " · " + r.category)"),
+        if sec.contains(.header) || sec.contains(.result) { title("Carrera") }
+        if sec.contains(.header) { keyValues([(k: "Carrera", v: "\(r.title)\(r.category.isEmpty ? "" : " · " + r.category)"),
                    (k: "Hipódromo · fecha", v: "\(r.hippodrome.isEmpty ? "—" : r.hippodrome) · \(r.dateText)"),
                    (k: "Distancia · participantes", v: "\(r.distanceText) · \(r.fieldSize)"),
                    (k: "Caballo", v: "\(r.horseName ?? "—") (\(u.name))"),
-                   (k: "Jockey", v: u.jockey.isEmpty ? "—" : u.jockey)])
+                   (k: "Jockey", v: u.jockey.isEmpty ? "—" : u.jockey)]) }
         let gap: Double? = r.ourGapToWinnerS
-        tiles([(label: "Puesto", value: r.finishText, caption: u.number.map { "N.º \($0)" + (u.draw.map { " · cuerda \($0)" } ?? "") }),
+        if sec.contains(.result) { tiles([(label: "Puesto", value: r.finishText, caption: u.number.map { "N.º \($0)" + (u.draw.map { " · cuerda \($0)" } ?? "") }),
                (label: "Tiempo oficial", value: RaceFormat.official(u.officialTimeS), caption: RaceFormat.seconds(u.officialTimeS)),
                (label: "Al ganador", value: u.finish == 1 ? "Ganador" : RaceFormat.signedSeconds(gap),
                 caption: u.finish == 1 ? nil : RaceFormat.lengths(gap)),
@@ -290,10 +439,10 @@ private final class RaceComparisonPdfWriter {
                (label: "Mejor 200 m", value: RaceFormat.seconds(u.fastest200S), caption: u.fastestSector.isEmpty ? nil : "Tramo " + u.fastestSector),
                (label: "Últimos 600 m", value: RaceFormat.seconds(u.last600S), caption: nil),
                (label: "V. media", value: RaceFormat.kmh(u.meanSpeedKmh), caption: nil),
-               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")])
+               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")]) }
 
         // 2. sectors of our horse
-        if !u.sectors.isEmpty {
+        if sec.contains(.sectors) && !u.sectors.isEmpty {
             title("Tramos de \(u.name)")
             let rows: [[String]] = u.sectors.map { (s: RaceSector) -> [String] in
                 [s.label, RaceFormat.official(s.cumulativeS), RaceFormat.seconds(s.sectorS), RaceFormat.kmh(s.meanSpeedKmh),
@@ -303,7 +452,7 @@ private final class RaceComparisonPdfWriter {
         }
 
         // 3. result table of the field (compact)
-        if r.runners.count > 1 {
+        if sec.contains(.classification) && r.runners.count > 1 {
             title("Clasificación")
             let ours: Set<Int> = Set(r.runners.indices.filter { r.runners[$0].name == u.name })
             let rows: [[String]] = r.runners.map { (x: RaceRunner) -> [String] in
@@ -319,9 +468,13 @@ private final class RaceComparisonPdfWriter {
                   rows, highlight: ours, size: 7)
         }
 
+        // charts of the race
+        raceCharts()
+
         // 4. training vs race
-        title("Entrenamiento vs carrera, tramo a tramo")
-        if let c = d.candidate, let cmp = d.comparison {
+        if !sec.contains(.training) {
+        } else if let c = d.candidate, let cmp = d.comparison {
+            title("Entrenamiento vs carrera, tramo a tramo")
             keyValues([(k: "Entrenamiento comparado", v: c.label),
                        (k: "Parciales del entrenamiento", v: "\(c.fullSplits) · " + (cmp.trainingIsFurlong ? "cada furlong (201 m)" : "cada 200 m"))])
             tiles([(label: "% de la velocidad de carrera", value: RaceFormat.percent(cmp.meanPctOfRace), caption: "Media de los tramos comparados"),
@@ -348,18 +501,24 @@ private final class RaceComparisonPdfWriter {
                       + "Los tramos se alinean desde la meta: el último parcial completo del trabajo con el tramo 200–ARR.",
                       size: 7.5, color: ReportBuilder.dim)
         } else {
+            title("Entrenamiento vs carrera, tramo a tramo")
             paragraph("Sin trabajos con parciales completos en los \(RaceTrainingSplits.windowDays) días anteriores a la carrera: no hay comparación tramo a tramo.",
                       size: 9, color: ReportBuilder.dim)
         }
 
         // 5. analysis
-        if let rep = d.report {
+        let anySec: Bool = !sec.isDisjoint(with: [.verdict, .raceFacts, .trainingFacts, .form, .estimate, .observations, .method])
+        if !anySec {
+        } else if let rep = d.report {
             title("Análisis según los entrenamientos · confianza \(rep.confidence.rawValue)")
-            if !rep.verdict.isEmpty { paragraph(rep.verdict, size: 10, bold: true) }
-            if !rep.optimizedText.isEmpty { paragraph(rep.optimizedText, size: 9) }
-            if !rep.confidenceReason.isEmpty {
-                paragraph("Confianza \(rep.confidence.rawValue): \(rep.confidenceReason).", size: 8, color: ReportBuilder.dim)
+            if sec.contains(.verdict) {
+                if !rep.verdict.isEmpty { paragraph(rep.verdict, size: 10, bold: true) }
+                if !rep.optimizedText.isEmpty { paragraph(rep.optimizedText, size: 9) }
+                if !rep.confidenceReason.isEmpty {
+                    paragraph("Confianza \(rep.confidence.rawValue): \(rep.confidenceReason).", size: 8, color: ReportBuilder.dim)
+                }
             }
+            if sec.contains(.raceFacts) {
             sub("Lo que dice la carrera")
             keyValues([(k: "Caída en el final (conserva)",
                         v: "\(RaceFormat.percent(rep.ourFade)) · \(RaceFormat.kmh(rep.ourBestSpeedKmh)) → \(RaceFormat.kmh(rep.ourLastSpeedKmh))"),
@@ -368,6 +527,8 @@ private final class RaceComparisonPdfWriter {
                        (k: "Perdido por terreno de más", v: groundText(rep)),
                        (k: "Salida vs mediana del campo", v: RaceFormat.signedSeconds(rep.startLossS)),
                        (k: "Últimos 600 m vs su mejor tramo", v: RaceFormat.percent(rep.raceSustain))])
+            }
+            if sec.contains(.trainingFacts) {
             sub("Lo que dicen sus entrenamientos")
             if rep.trainingSessions == 0 {
                 paragraph("Sin entrenamientos anteriores a la carrera en el iPad: el análisis usa solo la carrera (mediana del campo como referencia).",
@@ -383,7 +544,8 @@ private final class RaceComparisonPdfWriter {
                             v: rep.worksWithFade > 0 ? "\(RaceFormat.percent(rep.trainingFade)) en \(rep.worksWithFade) trabajo(s) ≥ 400 m" : "Sin trabajos ≥ 400 m")])
                 if !rep.trendText.isEmpty { paragraph(rep.trendText, size: 8.5) }
             }
-            if let f = rep.form {
+            }
+            if sec.contains(.form), let f = rep.form {
                 sub("Forma antes de la carrera (orientativo, no es un diagnóstico veterinario)")
                 keyValues([(k: "Estado", v: "\(f.level) · \(f.sessionsUsed) sesiones · referencia \(f.reference)"),
                            (k: "ACWR (aguda / crónica)",
@@ -394,6 +556,7 @@ private final class RaceComparisonPdfWriter {
                            (k: "Días desde el último entrenamiento", v: f.daysSinceLast.map { String($0) } ?? "—")])
                 if !f.reasons.isEmpty { bullets(f.reasons, size: 8) }
             }
+            if sec.contains(.estimate) {
             sub(rep.referenceIsTraining ? "Estimación (final con la caída de sus entrenamientos y sin el terreno de más)"
                                         : "Estimación (final con la caída de la mediana del campo y sin el terreno de más)")
             let range: String? = {
@@ -408,11 +571,12 @@ private final class RaceComparisonPdfWriter {
                    (label: "Perdido en el final",
                     value: RaceFormat.seconds(rep.referenceIsTraining ? rep.finalLossTrainingS : rep.finalLossFieldS),
                     caption: rep.referenceIsTraining ? "vs sus entrenamientos" : "vs mediana del campo")], perRow: 5)
-            if !rep.observations.isEmpty {
+            }
+            if sec.contains(.observations) && !rep.observations.isEmpty {
                 sub("Observaciones")
                 bullets(rep.observations)
             }
-            if !rep.method.isEmpty {
+            if sec.contains(.method) && !rep.method.isEmpty {
                 sub("Método")
                 for (k, t) in rep.method.enumerated() { paragraph("\(k + 1). \(t)", size: 7.2, color: ReportBuilder.dim) }
             }
@@ -423,7 +587,7 @@ private final class RaceComparisonPdfWriter {
 
         // 6. notes
         let notes: String = d.notes.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !notes.isEmpty {
+        if sec.contains(.notes) && !notes.isEmpty {
             title("Notas")
             paragraph(notes)
         }
