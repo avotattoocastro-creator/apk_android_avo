@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — iPad — Flechas de «% carrera» vistas desde la carrera
+**Autor:** Claude · **Rama:** `feature/ipad-flechas-carrera`
+**Qué cambia:** las flechas de «Entrenamiento vs carrera» (app y PDF) se leen ahora desde la carrera:
+- ▲ verde si en ese tramo la carrera fue **más rápida** que el entrenamiento (% carrera < 100 %);
+- ▼ roja si la carrera fue igual o más lenta.
+
+Antes era al revés.
+**Por qué:** boceto del entrenador sobre la build 159 (16/11/2026 00:47): «está al revés».
+**Archivos:** `Views/RaceTrainingSplitsView.swift`, `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» arriba y «HORSE EDITION» debajo
 **Autor:** Claude · **Rama:** `feature/logo-performance-arriba`
 **Qué cambia:** en el logotipo de la cabecera de los informes (`report_text.jpg`) se intercambian las dos bandas: «PERFORMANCE» pasa justo bajo «AVO» y «HORSE EDITION» va debajo. Mismo tamaño (670 × 282 px). Se cambia en el iPad (`Assets.xcassets/report_text.imageset`) y en Windows (`AVO.Windows.Core/Reports`), que comparten el mismo archivo.

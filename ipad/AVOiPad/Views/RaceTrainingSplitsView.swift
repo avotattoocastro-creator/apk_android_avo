@@ -133,7 +133,7 @@ struct RaceTrainingSplitsCard: View {
                 }
             }
             table(cmp)
-            Text("Flecha verde: en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %). Flecha roja: más lento.")
+            Text("Flecha verde ▲: en ese tramo la carrera fue más rápida que el entrenamiento (% carrera < 100 %). Flecha roja ▼: la carrera fue igual o más lenta.")
                 .font(.caption2).foregroundStyle(Avo.textDim).fixedSize(horizontal: false, vertical: true)
         }
         if cmp.trainingPartialEndSkipped {
@@ -254,16 +254,17 @@ struct RaceTrainingSplitsCard: View {
         Text(t.uppercased()).font(.caption2.weight(.semibold)).foregroundStyle(Avo.textDim).frame(width: w, alignment: .leading)
     }
 
-    /// «% carrera» with a green ▲ (training as fast or faster than the race in that piece) or a red ▼ (slower)
-    /// (trainer's sketch 15/11/2026).
+    /// «% carrera» with a green ▲ when the RACE was faster than the training in that piece and a red ▼ when it was
+    /// slower (trainer's sketches 15/11 and 16/11/2026: the arrow reads from the race).
     private func pctCell(_ p: Double?, _ w: CGFloat) -> some View {
         HStack(spacing: 4) {
             Text(RaceFormat.percent(p)).lineLimit(1)
             if let v = p, v.isFinite {
-                Image(systemName: v >= 1.0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                let raceFaster: Bool = v < 1.0
+                Image(systemName: raceFaster ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
                     .font(.caption2)
-                    .foregroundStyle(v >= 1.0 ? Avo.ok : Avo.bad)
-                    .accessibilityLabel(v >= 1.0 ? "mejor en el entrenamiento" : "peor en el entrenamiento")
+                    .foregroundStyle(raceFaster ? Avo.ok : Avo.bad)
+                    .accessibilityLabel(raceFaster ? "más rápido en la carrera" : "más lento en la carrera")
             }
         }
         .frame(width: w, alignment: .leading)
