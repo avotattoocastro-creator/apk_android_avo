@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-15 01:54 UTC",
+ "date_utc": "2026-11-15 02:45 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31449611,
+   "stock": 31451687,
    "library": "base",
    "prices": [
     [
@@ -112,7 +112,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38169703,
+   "stock": 38159072,
    "library": "base",
    "prices": [
     [
@@ -142,47 +142,12 @@
    ],
    "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
-  "C1546": {
-   "lcsc": "C1546",
-   "mpn": "0402CG101J500NT",
-   "maker": "FH (Guangdong Fenghua Advanced Tech)",
-   "package": "0402",
-   "stock": 3310228,
-   "library": "base",
-   "prices": [
-    [
-     1,
-     0.0021
-    ],
-    [
-     1000,
-     0.0016
-    ],
-    [
-     3000,
-     0.0013
-    ],
-    [
-     10000,
-     0.0011
-    ],
-    [
-     50000,
-     0.001
-    ],
-    [
-     50200,
-     0.001
-    ]
-   ],
-   "describe": "100pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
-  },
   "C1555": {
    "lcsc": "C1555",
    "mpn": "0402CG220J500NT",
    "maker": "FH (Guangdong Fenghua Advanced Tech)",
    "package": "0402",
-   "stock": 2386332,
+   "stock": 2386346,
    "library": "base",
    "prices": [
     [
@@ -212,47 +177,12 @@
    ],
    "describe": "22pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
-  "C156110": {
-   "lcsc": "C156110",
-   "mpn": "RM04FTN4992",
-   "maker": "TA-I Tech",
-   "package": "0402",
-   "stock": 0,
-   "library": "expand",
-   "prices": [
-    [
-     1,
-     0.0018
-    ],
-    [
-     1000,
-     0.0014
-    ],
-    [
-     3000,
-     0.0012
-    ],
-    [
-     10000,
-     0.0009
-    ],
-    [
-     50000,
-     0.0008
-    ],
-    [
-     50200,
-     0.0008
-    ]
-   ],
-   "describe": "-55℃~+155℃ 49.9kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
-  },
   "C17168": {
    "lcsc": "C17168",
    "mpn": "0402WGF0000TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 15619449,
+   "stock": 15634182,
    "library": "base",
    "prices": [
     [
@@ -287,7 +217,7 @@
    "mpn": "CL10A475KO8NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 3492280,
+   "stock": 3491652,
    "library": "base",
    "prices": [
     [
@@ -357,7 +287,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 5812060,
+   "stock": 5811608,
    "library": "base",
    "prices": [
     [
@@ -392,7 +322,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10405261,
+   "stock": 10413373,
    "library": "base",
    "prices": [
     [
@@ -427,7 +357,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21095520,
+   "stock": 21096688,
    "library": "base",
    "prices": [
     [
@@ -457,12 +387,47 @@
    ],
    "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
   },
+  "C25792": {
+   "lcsc": "C25792",
+   "mpn": "0402WGF4702TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 5709489,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0019
+    ],
+    [
+     1000,
+     0.0015
+    ],
+    [
+     3000,
+     0.0012
+    ],
+    [
+     10000,
+     0.0011
+    ],
+    [
+     50000,
+     0.001
+    ],
+    [
+     50200,
+     0.001
+    ]
+   ],
+   "describe": "-55℃~+155℃ 47kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
   "C25879": {
    "lcsc": "C25879",
    "mpn": "0402WGF2201TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3056265,
+   "stock": 3056064,
    "library": "base",
    "prices": [
     [
@@ -532,7 +497,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2334654,
+   "stock": 2343781,
    "library": "base",
    "prices": [
     [
@@ -567,7 +532,7 @@
    "mpn": "PESD5V0S1BA",
    "maker": "TECH PUBLIC",
    "package": "SOD-323",
-   "stock": 330825,
+   "stock": 330845,
    "library": "expand",
    "prices": [
     [
@@ -602,7 +567,7 @@
    "mpn": "Q13FC13500004",
    "maker": "Seiko Epson",
    "package": "SMD3215-2P",
-   "stock": 413986,
+   "stock": 413571,
    "library": "base",
    "prices": [
     [
@@ -707,7 +672,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4133007,
+   "stock": 4127454,
    "library": "base",
    "prices": [
     [
@@ -812,7 +777,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10273730,
+   "stock": 10297277,
    "library": "base",
    "prices": [
     [
@@ -842,6 +807,41 @@
    ],
    "describe": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   },
+  "C53547": {
+   "lcsc": "C53547",
+   "mpn": "0402CG102J500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0402",
+   "stock": 472713,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.005
+    ],
+    [
+     1000,
+     0.0039
+    ],
+    [
+     3000,
+     0.0034
+    ],
+    [
+     10000,
+     0.0027
+    ],
+    [
+     50000,
+     0.0025
+    ],
+    [
+     100000,
+     0.0024
+    ]
+   ],
+   "describe": "1nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
   "C7558096": {
    "lcsc": "C7558096",
    "mpn": "ESP32-C6-MINI-1U-N4",
@@ -866,7 +866,7 @@
    "mpn": "NCP15XH103F03RC",
    "maker": "Murata Electronics",
    "package": "0402",
-   "stock": 297660,
+   "stock": 297640,
    "library": "expand",
    "prices": [
     [
@@ -901,7 +901,7 @@
    "mpn": "RT9080-33GJ5",
    "maker": "Richtek Tech",
    "package": "TSOT-23-5",
-   "stock": 27588,
+   "stock": 27578,
    "library": "expand",
    "prices": [
     [
@@ -936,7 +936,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6170941,
+   "stock": 6169187,
    "library": "base",
    "prices": [
     [
@@ -1002,5 +1002,282 @@
    "describe": "100nF 50V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
   }
  },
- "search": {}
+ "search": {
+  "ESP32-C6-MINI-1U": [
+   {
+    "lcsc": "C20627095",
+    "mpn": "ESP32-C6-MINI-1U-H4",
+    "maker": "Espressif Systems",
+    "package": "SMD,13.2x12.5mm",
+    "stock": 3425,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.1902
+     ],
+     [
+      10,
+      3.7484
+     ],
+     [
+      30,
+      3.4866
+     ],
+     [
+      100,
+      3.2674
+     ],
+     [
+      650,
+      3.1201
+     ],
+     [
+      1300,
+      3.0547
+     ]
+    ],
+    "describe": "-105.5dBm -40℃~+105℃ 2.4GHz 20.5dBm 382mA 3V~3.6V 73mA ESP32-C6FH4 Integrated Bluetooth function、Integrated Zigbee function、Support USB interface UART、SDIO、SPI、I2C、GPIO、USB SMD,13.2x12.5mm WiFi Modules ROHS"
+   },
+   {
+    "lcsc": "C9900231236",
+    "mpn": "ESP32-C6-MINI-1U",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2x12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2x12.5mm SMT ROHS"
+   },
+   {
+    "lcsc": "C7558096",
+    "mpn": "ESP32-C6-MINI-1U-N4",
+    "maker": "Espressif Systems",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2x12.5mm New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900163889",
+    "mpn": "ESP32-C6-MINI-1U-H8",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2X12.5mm SMT ROHS"
+   },
+   {
+    "lcsc": "C9900166278",
+    "mpn": "ESP32-C6-MINI-1U-N4",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2X12.5mm SMT ROHS"
+   }
+  ],
+  "MAX30003": [
+   {
+    "lcsc": "C1519515",
+    "mpn": "MAX30003CTI+",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "QFN-28-EP_5x5",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      20.2258
+     ],
+     [
+      3,
+      20.2258
+     ],
+     [
+      5,
+      20.2258
+     ],
+     [
+      30,
+      19.1492
+     ],
+     [
+      32,
+      19.1492
+     ],
+     [
+      34,
+      19.1492
+     ]
+    ],
+    "describe": "0.51uA 0℃~+70℃ 1 1.1V~2V 18 1V 32.768kHz、12MHz 512Hz 512Hz 96.5dB Programmable gain、Fault detection、ESD protection SPI QFN-28-EP(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C5354728",
+    "mpn": "MAX30003CTI+T",
+    "maker": "Analog Devices",
+    "package": "TQFN-EP-28",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      22.6914
+     ],
+     [
+      10,
+      22.6914
+     ],
+     [
+      30,
+      22.6914
+     ],
+     [
+      200,
+      9.0543
+     ],
+     [
+      500,
+      8.7517
+     ],
+     [
+      1000,
+      8.6028
+     ]
+    ],
+    "describe": "Programmable gain、Fault detection、ESD protection TQFN-EP-28 Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C7435290",
+    "mpn": "MAX30003CWV+T",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "WLP-30(2.7x2.9)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      12.5638
+     ],
+     [
+      10,
+      12.1728
+     ],
+     [
+      12,
+      12.1728
+     ],
+     [
+      14,
+      12.1728
+     ],
+     [
+      16,
+      12.1728
+     ],
+     [
+      18,
+      12.1728
+     ]
+    ],
+    "describe": "0.51uA 0℃~+70℃ 1 1.1V~2V、1.65V~3.6V 18 1V 32.768kHz、12MHz 96.5dB Programmable gain、Fault detection、ESD protection SPI WLP-30(2.7x2.9) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "BNO085": [
+   {
+    "lcsc": "C9900000640",
+    "mpn": "BNO085",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-28_3.8X5.2X0.50P",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0007
+     ],
+     [
+      1000,
+      0.0002
+     ]
+    ],
+    "describe": "LGA-28_3.8X5.2X0.50P SMT ROHS"
+   },
+   {
+    "lcsc": "C5189642",
+    "mpn": "BNO085",
+    "maker": "CEVA",
+    "package": "LGA-28(3.8x5.2)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      19.4862
+     ],
+     [
+      10,
+      18.5782
+     ],
+     [
+      30,
+      17.001
+     ],
+     [
+      100,
+      15.6266
+     ],
+     [
+      102,
+      15.6266
+     ],
+     [
+      104,
+      15.6266
+     ]
+    ],
+    "describe": "1.65V~3.6V 12bit、16bit IMU (accelerometer + gyroscope) SPI、I2C、UART X,Y,Z X,Y,Z ±2000dps ±8g LGA-28(3.8x5.2) Accelerometers ROHS"
+   }
+  ]
+ }
 }
