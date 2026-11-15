@@ -1,34 +1,18 @@
 + timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/girth/PCB_REV_D/out/ruteado/placa.dsn -do hardware/girth/PCB_REV_D/out/ruteado/placa.ses -mp 80
-2026-11-15 12:23:43.866 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
-2026-11-15 12:23:44.989 [main] INFO  Opening 'hardware/girth/PCB_REV_D/out/ruteado/placa.dsn'...
-java.util.concurrent.CompletionException: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonElement.getAsString()" because the return value of "com.google.gson.JsonObject.get(String)" is null
-	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
-	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:722)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:614)
-	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:844)
-	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
-Caused by: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonElement.getAsString()" because the return value of "com.google.gson.JsonObject.get(String)" is null
-	at app.freerouting.management.VersionChecker.processResponse(VersionChecker.java:39)
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718)
-	... 9 more
+2026-11-15 13:09:32.883 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-15 13:09:34.061 [main] INFO  Opening 'hardware/girth/PCB_REV_D/out/ruteado/placa.dsn'...
+2026-11-15 13:09:34.503 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
 
-(java:2395): dbind-WARNING **: 12:23:50.077: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-2026-11-15 12:24:11.024 [Thread-28] INFO  Starting auto-routing...
-2026-11-15 12:24:11.467 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 12:24:11.481 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 12:24:11.495 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 12:24:11.508 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-15 12:26:54.154 [Thread-28] WARN  There were only 17.10 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
-2026-11-15 12:28:41.941 [Thread-28] WARN  There were only 16.45 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
-2026-11-15 12:30:30.895 [Thread-28] WARN  There were only 16.55 changes in the last 60 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
-2026-11-15 12:31:17.470 [Thread-28] INFO  Auto-routing was completed in 7 minute(s) 6.44 seconds.
-2026-11-15 12:31:17.571 [Thread-28] INFO  Starting route optimization on 1 thread...
-2026-11-15 12:31:29.873 [Thread-28] INFO  Route optimization was completed in 12.30 seconds.
-2026-11-15 12:31:29.891 [Thread-28] INFO  Saving 'hardware/girth/PCB_REV_D/out/ruteado/placa.ses'...
+(java:2440): dbind-WARNING **: 13:09:35.668: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-15 13:09:56.627 [Thread-28] INFO  Starting auto-routing...
+2026-11-15 13:09:56.951 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 13:09:56.955 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 13:09:56.958 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 13:09:56.961 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-15 13:12:03.174 [Thread-28] WARN  There were only 19.40 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-15 13:13:24.511 [Thread-28] WARN  There were only 11.10 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-15 13:14:43.488 [Thread-28] WARN  There were only 7.67 changes in the last 60 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-15 13:15:02.472 [Thread-28] INFO  Auto-routing was completed in 5 minute(s) 5.84 seconds.
+2026-11-15 13:15:02.573 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-15 13:15:13.800 [Thread-28] INFO  Route optimization was completed in 11.23 seconds.
+2026-11-15 13:15:13.816 [Thread-28] INFO  Saving 'hardware/girth/PCB_REV_D/out/ruteado/placa.ses'...

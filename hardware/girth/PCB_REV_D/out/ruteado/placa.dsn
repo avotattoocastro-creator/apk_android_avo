@@ -259,7 +259,6 @@
       (place R43 78500.000000 -104400.000000 front 0.000000 (PN 100k))
       (place R44 91400.000000 -100060.000000 front 90.000000 (PN 10k))
       (place R45 91480.000000 -97940.000000 front 90.000000 (PN 10k))
-      (place R46 92660.000000 -99400.000000 front 90.000000 (PN 10k))
     )
     (component "AVO:VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm_ThermalVias"
       (place U2 105000.000000 -109000.000000 front 0.000000 (PN BQ24072RGTR))
@@ -289,7 +288,7 @@
       (place C21 97460.000000 -105850.000000 front 0.000000 (PN 10u))
       (place C33 97250.000000 -91320.000000 front 90.000000 (PN 10u))
       (place C41 89050.000000 -107150.000000 front 90.000000 (PN 10u))
-      (place C44 93060.000000 -96800.000000 front 90.000000 (PN 10u))
+      (place C44 93060.000000 -97000.000000 front 90.000000 (PN 10u))
       (place C45 84150.000000 -102820.000000 front 0.000000 (PN 10u))
       (place C49 81190.000000 -98900.000000 front 90.000000 (PN "4n7 C0G"))
       (place C50 81140.000000 -95460.000000 front 90.000000 (PN "4n7 C0G"))
@@ -974,9 +973,9 @@
         U4-1 U4-2 U4-11 U4-14 U4-36 U4-37 U4-38 U4-39 U4-40 U4-41 U4-42 U4-43 U4-44
         U4-45 U4-46 U4-47 U4-48 U4-49 U4-49@1 U4-49@2 U4-49@3 U4-49@4 U4-49@5 U4-49@6
         U4-49@7 U4-49@8 U4-50 U4-52 U4-53 C24-2 C25-2 C27-2 U5-1 U5-2 U5-3 U5-6 U5-7
-        C30-2 C31-2 U8-9 U8-11 C32-2 C33-2 C35-2 U6-25 U6-10 U6-26 U6-13 U6-24 U6-33
-        U7-2 C40-2 C41-2 C42-2 C43-2 C44-2 C45-2 C46-2 C47-2 C48-2 C52-2 C53-2 R45-2
-        R46-2 TP3-1)
+        C30-2 C31-2 U8-9 U8-11 C32-2 C33-2 C35-2 U6-17 U6-25 U6-10 U6-26 U6-13 U6-24
+        U6-33 U7-2 C40-2 C41-2 C42-2 C43-2 C44-2 C45-2 C46-2 C47-2 C48-2 C52-2 C53-2
+        R45-2 TP3-1)
     )
     (net VBAT
       (pins U2-2 U2-3 C20-1 F1-2 R32-1 TP7-1)
@@ -1019,9 +1018,6 @@
     )
     (net ECGP
       (pins U6-6 R40-2 C52-1 C54-1)
-    )
-    (net ECG_CLK
-      (pins U6-17 R46-1)
     )
     (net ECG_CS
       (pins U4-12 U6-18)
@@ -1192,19 +1188,18 @@
       (pins U7-4)
     )
     (class kicad_default +3V3A BAT_ADC BOOT CHG_EN2 CHG_ILIM CHG_ISET CHG_STAT
-      CHG_TS DET ECGN ECGP ECG_CLK ECG_CS ECG_DRDY ECG_E_N ECG_E_P ECG_E_REF
-      ECG_MISO ECG_MOSI ECG_PGA1N ECG_PGA1P ECG_PGA2N ECG_PGA2P ECG_RESET
-      ECG_RLDINV ECG_RLDOUT ECG_SCK ECG_START ECG_VCAP1 ECG_VCAP2 ECG_VREFP
-      EN GND I2C_SCL I2C_SDA IMU_INT1 IMU_INT2 LED_A LED_K MAG_CAP MAG_INT
-      POGO_DET USB_DM USB_DP "unconnected-(U2-PGOOD-Pad7)" "unconnected-(U2-TMR-Pad14)"
-      "unconnected-(U3-NC-Pad4)" "unconnected-(U4-IO18-Pad24)" "unconnected-(U4-IO19-Pad25)"
-      "unconnected-(U4-IO20-Pad26)" "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)"
-      "unconnected-(U4-NC-Pad33)" "unconnected-(U4-NC-Pad34)" "unconnected-(U4-NC-Pad35)"
-      "unconnected-(U4-NC-Pad4)" "unconnected-(U4-NC-Pad7)" "unconnected-(U4-Pad51)"
-      "unconnected-(U5-OCS_Aux-Pad10)" "unconnected-(U5-SDO_Aux-Pad11)" "unconnected-(U7-NC-Pad4)"
-      "unconnected-(U8-NC-Pad12)" "unconnected-(U8-NC-Pad14)" "unconnected-(U8-NC-Pad3)"
-      "unconnected-(U8-NC-Pad6)" "unconnected-(U8-NC-Pad7)" "unconnected-(U8-NC-Pad8)"
-      "unconnected-(U8-SPI_SDO-Pad5)"
+      CHG_TS DET ECGN ECGP ECG_CS ECG_DRDY ECG_E_N ECG_E_P ECG_E_REF ECG_MISO
+      ECG_MOSI ECG_PGA1N ECG_PGA1P ECG_PGA2N ECG_PGA2P ECG_RESET ECG_RLDINV
+      ECG_RLDOUT ECG_SCK ECG_START ECG_VCAP1 ECG_VCAP2 ECG_VREFP EN GND I2C_SCL
+      I2C_SDA IMU_INT1 IMU_INT2 LED_A LED_K MAG_CAP MAG_INT POGO_DET USB_DM
+      USB_DP "unconnected-(U2-PGOOD-Pad7)" "unconnected-(U2-TMR-Pad14)" "unconnected-(U3-NC-Pad4)"
+      "unconnected-(U4-IO18-Pad24)" "unconnected-(U4-IO19-Pad25)" "unconnected-(U4-IO20-Pad26)"
+      "unconnected-(U4-NC-Pad21)" "unconnected-(U4-NC-Pad32)" "unconnected-(U4-NC-Pad33)"
+      "unconnected-(U4-NC-Pad34)" "unconnected-(U4-NC-Pad35)" "unconnected-(U4-NC-Pad4)"
+      "unconnected-(U4-NC-Pad7)" "unconnected-(U4-Pad51)" "unconnected-(U5-OCS_Aux-Pad10)"
+      "unconnected-(U5-SDO_Aux-Pad11)" "unconnected-(U7-NC-Pad4)" "unconnected-(U8-NC-Pad12)"
+      "unconnected-(U8-NC-Pad14)" "unconnected-(U8-NC-Pad3)" "unconnected-(U8-NC-Pad6)"
+      "unconnected-(U8-NC-Pad7)" "unconnected-(U8-NC-Pad8)" "unconnected-(U8-SPI_SDO-Pad5)"
       (circuit
         (use_via "Via[0-3]_500:300_um")
       )
@@ -1228,6 +1223,7 @@
     (wire (path F.Cu 200  104750 -110462  104750 -109712)(net GND)(type route))
     (wire (path F.Cu 200  105750 -110462  105750 -109712)(net GND)(type route))
     (wire (path F.Cu 200  104750 -107538  104750 -108288)(net GND)(type route))
+    (wire (path F.Cu 200  88060 -99400  87310 -99400)(net GND)(type route))
     (wire (path F.Cu 200  87400 -95940  87400 -96690)(net GND)(type route))
     (wire (path F.Cu 200  85000 -100060  85000 -99310)(net GND)(type route))
     (wire (path F.Cu 200  87000 -95940  87000 -96690)(net GND)(type route))
@@ -1273,7 +1269,7 @@
     (wire (path F.Cu 300  89050 -106375  89025 -106375)(net GND)(type route))
     (wire (path F.Cu 300  83230 -104270  83225 -104275)(net GND)(type route))
     (wire (path F.Cu 300  91460 -95340  91475 -95325)(net GND)(type route))
-    (wire (path F.Cu 300  93060 -96025  93075 -96025)(net GND)(type route))
+    (wire (path F.Cu 300  93060 -96225  93075 -96225)(net GND)(type route))
     (wire (path F.Cu 300  84925 -102820  84925 -102825)(net GND)(type route))
     (wire (path F.Cu 300  86240 -102560  86225 -102575)(net GND)(type route))
     (wire (path F.Cu 300  90907.5 -103720  90925 -103725)(net GND)(type route))
@@ -1281,7 +1277,6 @@
     (wire (path F.Cu 300  83080 -93370  83075 -93375)(net GND)(type route))
     (wire (path F.Cu 300  79730 -93730  79725 -93725)(net GND)(type route))
     (wire (path F.Cu 300  91480 -97430  91475 -97425)(net GND)(type route))
-    (wire (path F.Cu 300  92660 -98890  92675 -98875)(net GND)(type route))
     (wire (path F.Cu 300  95000 -86300  95025 -86275)(net GND)(type route))
     (wire (path F.Cu 200  106462 -109750  106825 -109825  107125 -110125  107125 -110275
             107475 -110625  107730 -110850)(net CHG_STAT)(type route))
@@ -1298,8 +1293,7 @@
     (wire (path F.Cu 200  83175 -98425  81725 -96975  80475 -96975  79575 -96075  79500 -95760)(net ECGP)(type route))
     (wire (path F.Cu 200  81775 -97025  81875 -96925  81875 -93675  82120 -93370)(net ECGP)(type route))
     (wire (path F.Cu 200  110300 -95200  109925 -95375  99975 -95375  99775 -95575
-            94875 -95575  93625 -96825  91975 -96825  91925 -96875  90675 -96875
-            88575 -98975  88375 -98975  88060 -99000)(net ECG_CS)(type route))
+            96675 -95575  93275 -98975  88375 -98975  88060 -99000)(net ECG_CS)(type route))
     (wire (path F.Cu 200  99750 -92012.5  99675 -92225  99675 -92375  99475 -92575
             97775 -92575  97675 -92475  97250 -92095)(net MAG_CAP)(type route))
     (wire (path F.Cu 200  106462 -108250  106825 -108325  107375 -108325  107575 -108525
@@ -1350,7 +1344,7 @@
     (via "Via[0-3]_500:300_um"  89025 -106375 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  83225 -104275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  91475 -95325 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  93075 -96025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  93075 -96225 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  84925 -102825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  86225 -102575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  90925 -103725 (net GND)(type route))
@@ -1358,7 +1352,6 @@
     (via "Via[0-3]_500:300_um"  83075 -93375 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  79725 -93725 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  91475 -97425 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  92675 -98875 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  95025 -86275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  83175 -98425 (net ECGP)(type route))
     (via "Via[0-3]_500:300_um"  83175 -99975 (net ECGP)(type route))
