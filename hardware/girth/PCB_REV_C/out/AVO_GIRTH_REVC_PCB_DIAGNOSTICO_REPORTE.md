@@ -1,17 +1,17 @@
 # AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `170e954da9860dd50f10a9ff53c1e5728daec86c` · ejecución de CI: 43670643907
+- Commit: `3c21267e2056092142a020cf9404ea723150c239` · ejecución de CI: 43671188373
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 87 en total, 68 para montar, 3 sin montar (DNP: C51, C54, R46), 16 a mano (pads de hilo y de prueba)
-- Pistas: 834 · vías: 150 · ruteado INCOMPLETO (9 conexiones)
+- Pistas: 837 · vías: 134 · ruteado INCOMPLETO (5 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 9 |
+| DRC: conexiones incompletas | **FALLA** | 5 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,14 +19,10 @@
 
 
 ### Conexiones incompletas
-- Pad 22 [+1V8_ECG] of U6 on F.Cu ↔ Track [+1V8_ECG] on F.Cu, length 1.1225 mm
-- Pad 4 [+3V3] of X1 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.8518 mm
-- Track [+3V3] on F.Cu, length 0.4313 mm ↔ Pad 1 [+3V3] of C45 on F.Cu
-- Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Track [VSYS] on In2.Cu, length 5.4625 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
-- Pad 6 [ECGP] of U6 on F.Cu ↔ Track [ECGP] on In2.Cu, length 2.4438 mm
-- Pad 25 [ECG_VCM] of U6 on F.Cu ↔ Track [ECG_VCM] on F.Cu, length 1.7276 mm
-- Pad 23 [ECG_VREF] of U6 on F.Cu ↔ Pad 1 [ECG_VREF] of C46 on F.Cu
+- Via [GND] on F.Cu - B.Cu ↔ Pad 51 [GND] of U4 on F.Cu
+- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 0.5962 mm
+- Pad 25 [ECG_VCM] of U6 on F.Cu ↔ Track [ECG_VCM] on F.Cu, length 0.9440 mm
+- Pad 15 [IMU_ENV_SCL] of U5 on F.Cu ↔ Pad 1 [IMU_ENV_SCL] of R27 on F.Cu
 - PTH pad 1 [POGO_5V] of P1 ↔ Pad 1 [POGO_5V] of F2 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
