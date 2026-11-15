@@ -1,17 +1,17 @@
 # AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `81bdb574c763d78ca62f4c8d0072d2177c1e64f1` · ejecución de CI: 43702869883
+- Commit: `1334a3cd1cec821f951d05b26576cad437030b29` · ejecución de CI: 43704390868
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
-- Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
+- Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 78 en total, 61 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 718 · vías: 122 · ruteado INCOMPLETO (11 conexiones)
+- Pistas: 719 · vías: 125 · ruteado INCOMPLETO (8 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 11 |
+| DRC: conexiones incompletas | **FALLA** | 8 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,22 +19,18 @@
 
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.6014 mm ↔ Pad 14 [+3V3] of U6 on F.Cu
-- Track [+3V3] on F.Cu, length 0.6788 mm ↔ Pad 5 [+3V3] of U5 on F.Cu
-- Track [+3V3A] on In2.Cu, length 5.5587 mm ↔ Pad 12 [+3V3A] of U6 on F.Cu
-- Track [+3V3A] on F.Cu, length 0.4381 mm ↔ Pad 29 [+3V3A] of U6 on F.Cu
+- Pad 23 [+3V3] of U6 on F.Cu ↔ Pad 14 [+3V3] of U6 on F.Cu
+- Track [+3V3] on F.Cu, length 0.3270 mm ↔ Pad 23 [+3V3] of U6 on F.Cu
+- Track [+3V3] on F.Cu, length 0.3270 mm ↔ Pad 5 [+3V3] of U5 on F.Cu
+- Track [+3V3A] on F.Cu, length 0.2000 mm ↔ Pad 12 [+3V3A] of U6 on F.Cu
 - Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Track [VSYS] on F.Cu, length 1.1000 mm ↔ Track [VSYS] on F.Cu, length 0.5000 mm
-- Track [ECGP] on In2.Cu, length 0.4405 mm ↔ Pad 6 [ECGP] of U6 on F.Cu
-- Pad 18 [ECG_CS] of U6 on F.Cu ↔ Pad 30 [ECG_CS] of U4 on F.Cu
-- Pad 19 [ECG_MOSI] of U6 on F.Cu ↔ Pad 24 [ECG_MOSI] of U4 on F.Cu
-- Pad 28 [ECG_RLDINV] of U6 on F.Cu ↔ Track [ECG_RLDINV] on F.Cu, length 1.1000 mm
-- Pad 20 [ECG_SCK] of U6 on F.Cu ↔ Pad 25 [ECG_SCK] of U4 on F.Cu
+- Pad 10 [VSYS] of U2 on F.Cu ↔ Track [VSYS] on In2.Cu, length 0.5217 mm
+- Track [ECGP] on F.Cu, length 0.6403 mm ↔ Pad 6 [ECGP] of U6 on F.Cu
+- PTH pad 1 [POGO_5V] of P1 ↔ Track [POGO_5V] on F.Cu, length 3.3564 mm
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 6
-- silk_overlap: 4
-- connection_width: 1
+- silk_over_copper: 4
+- silk_overlap: 2
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna

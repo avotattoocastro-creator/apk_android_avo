@@ -1,91 +1,62 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T10:14:32+0000 **
+** Created on 2026-11-15T10:33:22+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 11 DRC violations **
-[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.1075 mm) (In2.Cu)
-    Rule: board setup constraints; warning
-    @(120.0000 mm, 111.0000 mm): Zone [+3V3] on In2.Cu, priority 0
+** Found 6 DRC violations **
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
+    @(80.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(83.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
+    @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(83.4000 mm, 102.5400 mm): PCB text '-' on F.Silkscreen
+    @(102.6000 mm, 112.0000 mm): PCB text 'B+' on F.Silkscreen
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
-    @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(101.6000 mm, 110.0000 mm): PCB text 'B+' on F.Silkscreen
-[silk_over_copper]: Silkscreen clipped by solder mask
-    Local override; warning
-    @(104.0000 mm, 110.0000 mm): PCB text 'B-' on F.Silkscreen
+    @(105.0000 mm, 112.0000 mm): PCB text 'B-' on F.Silkscreen
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(83.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
-    @(82.8800 mm, 99.5978 mm): Segment of C54 on F.Silkscreen
+    @(80.5800 mm, 102.6936 mm): Segment of R41 on F.Silkscreen
+    @(80.4000 mm, 102.5400 mm): PCB text '-' on F.Silkscreen
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
-    @(83.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
-    @(83.5800 mm, 97.6136 mm): Segment of R40 on F.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(83.4000 mm, 100.0000 mm): PCB text 'REF' on F.Silkscreen
-    @(83.6000 mm, 99.5978 mm): Segment of C54 on F.Silkscreen
-[silk_overlap]: Silkscreen overlap
-    Rule: board setup constraints silk; warning
-    @(98.2364 mm, 110.2800 mm): Segment of R21 on F.Silkscreen
-    @(97.8000 mm, 110.0000 mm): PCB text 'DET' on F.Silkscreen
+    @(96.7500 mm, 112.3000 mm): Segment of D3 on F.Silkscreen
+    @(97.8000 mm, 112.0000 mm): PCB text 'DET' on F.Silkscreen
 
-** Found 11 unconnected pads **
+** Found 8 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(90.2614 mm, 97.2000 mm): Track [+3V3] on F.Cu, length 0.6014 mm
-    @(88.2000 mm, 100.2600 mm): Pad 14 [+3V3] of U6 on F.Cu
+    @(88.0600 mm, 97.0000 mm): Pad 23 [+3V3] of U6 on F.Cu
+    @(86.6000 mm, 100.0600 mm): Pad 14 [+3V3] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(99.6625 mm, 98.2500 mm): Track [+3V3] on F.Cu, length 0.6788 mm
-    @(98.0000 mm, 98.4125 mm): Pad 5 [+3V3] of U5 on F.Cu
+    @(91.7870 mm, 96.3000 mm): Track [+3V3] on F.Cu, length 0.3270 mm
+    @(88.0600 mm, 97.0000 mm): Pad 23 [+3V3] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(86.3125 mm, 104.7066 mm): Track [+3V3A] on In2.Cu, length 5.5587 mm
-    @(87.4000 mm, 100.2600 mm): Pad 12 [+3V3A] of U6 on F.Cu
+    @(100.5713 mm, 98.7515 mm): Track [+3V3] on F.Cu, length 0.3270 mm
+    @(100.0000 mm, 97.9125 mm): Pad 5 [+3V3] of U5 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(86.6000 mm, 96.1400 mm): Track [+3V3A] on F.Cu, length 0.4381 mm
-    @(87.4000 mm, 96.1400 mm): Pad 29 [+3V3A] of U6 on F.Cu
+    @(83.9400 mm, 97.8000 mm): Track [+3V3A] on F.Cu, length 0.2000 mm
+    @(85.8000 mm, 100.0600 mm): Pad 12 [+3V3A] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
-    @(120.0000 mm, 111.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
+    @(123.0000 mm, 113.0000 mm): Zone [GND] on F.Cu, priority 0
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(109.5628 mm, 108.6278 mm): Track [VSYS] on F.Cu, length 1.1000 mm
-    @(104.9625 mm, 107.5500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+    @(106.4625 mm, 108.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+    @(105.3299 mm, 111.6776 mm): Track [VSYS] on In2.Cu, length 0.5217 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(84.3744 mm, 97.0256 mm): Track [ECGP] on In2.Cu, length 1.6232 mm
-    @(85.5400 mm, 98.8000 mm): Pad 6 [ECGP] of U6 on F.Cu
+    @(81.9830 mm, 101.5670 mm): Track [ECGP] on F.Cu, length 0.6403 mm
+    @(83.9400 mm, 98.6000 mm): Pad 6 [ECGP] of U6 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(89.6600 mm, 99.2000 mm): Pad 18 [ECG_CS] of U6 on F.Cu
-    @(112.2000 mm, 105.9000 mm): Pad 30 [ECG_CS] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(89.6600 mm, 98.8000 mm): Pad 19 [ECG_MOSI] of U6 on F.Cu
-    @(107.3000 mm, 104.8000 mm): Pad 24 [ECG_MOSI] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(87.8000 mm, 96.1400 mm): Pad 28 [ECG_RLDINV] of U6 on F.Cu
-    @(89.7000 mm, 92.8400 mm): Track [ECG_RLDINV] on F.Cu, length 1.1000 mm
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(89.6600 mm, 98.4000 mm): Pad 20 [ECG_SCK] of U6 on F.Cu
-    @(108.2000 mm, 105.9000 mm): Pad 25 [ECG_SCK] of U4 on F.Cu
+    @(93.0000 mm, 113.6000 mm): PTH pad 1 [POGO_5V] of P1
+    @(91.6000 mm, 110.4000 mm): Track [POGO_5V] on F.Cu, length 3.3564 mm
 
 ** Found 0 Footprint errors **
 
