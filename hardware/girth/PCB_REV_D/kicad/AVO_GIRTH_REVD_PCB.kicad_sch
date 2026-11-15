@@ -726,7 +726,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-C6-MINI-1U-H4_U_ee35bc"
+			"AVO:ESP32-C6-MINI-1U-H4_U_6869c3"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -734,7 +734,7 @@
 			(property "Reference" "U" (at -20.32 40.64 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-C6-MINI-1U-H4_U_ee35bc"
+				"ESP32-C6-MINI-1U-H4_U_6869c3"
 				(at 20.32 40.64 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -742,7 +742,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-C6-MINI-1U-H4_U_ee35bc_0_1"
+				"ESP32-C6-MINI-1U-H4_U_6869c3_0_1"
 				(rectangle
 					(start -20.32 39.37)
 					(end 20.32 -39.37)
@@ -751,7 +751,7 @@
 				)
 			)
 			(symbol
-				"ESP32-C6-MINI-1U-H4_U_ee35bc_1_1"
+				"ESP32-C6-MINI-1U-H4_U_6869c3_1_1"
 				(pin
 					passive
 					line
@@ -773,7 +773,7 @@
 					line
 					(at -22.86 31.75 0)
 					(length 2.54)
-					(name "IO3" (effects (font (size 1.27 1.27))))
+					(name "IO3 ECG_DRDY" (effects (font (size 1.27 1.27))))
 					(number "6" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -805,7 +805,7 @@
 					line
 					(at -22.86 21.59 0)
 					(length 2.54)
-					(name "IO0" (effects (font (size 1.27 1.27))))
+					(name "IO0 ECG_CS" (effects (font (size 1.27 1.27))))
 					(number "12" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -813,7 +813,7 @@
 					line
 					(at -22.86 19.05 0)
 					(length 2.54)
-					(name "IO1 IMU_INT2" (effects (font (size 1.27 1.27))))
+					(name "IO1 ECG_SCK" (effects (font (size 1.27 1.27))))
 					(number "13" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -829,7 +829,7 @@
 					line
 					(at -22.86 13.97 0)
 					(length 2.54)
-					(name "IO7 ECG_DRDY" (effects (font (size 1.27 1.27))))
+					(name "IO7 ECG_MISO" (effects (font (size 1.27 1.27))))
 					(number "16" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -853,7 +853,7 @@
 					line
 					(at -22.86 6.35 0)
 					(length 2.54)
-					(name "IO14" (effects (font (size 1.27 1.27))))
+					(name "IO14 ECG_MOSI" (effects (font (size 1.27 1.27))))
 					(number "19" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -941,7 +941,7 @@
 					line
 					(at 22.86 36.83 180)
 					(length 2.54)
-					(name "IO18 ECG_MOSI" (effects (font (size 1.27 1.27))))
+					(name "IO18" (effects (font (size 1.27 1.27))))
 					(number "24" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -949,7 +949,7 @@
 					line
 					(at 22.86 34.29 180)
 					(length 2.54)
-					(name "IO19 ECG_SCK" (effects (font (size 1.27 1.27))))
+					(name "IO19" (effects (font (size 1.27 1.27))))
 					(number "25" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -957,7 +957,7 @@
 					line
 					(at 22.86 31.75 180)
 					(length 2.54)
-					(name "IO20 ECG_MISO" (effects (font (size 1.27 1.27))))
+					(name "IO20" (effects (font (size 1.27 1.27))))
 					(number "26" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -989,7 +989,7 @@
 					line
 					(at 22.86 21.59 180)
 					(length 2.54)
-					(name "IO17 ECG_CS" (effects (font (size 1.27 1.27))))
+					(name "IO17 IMU_INT2" (effects (font (size 1.27 1.27))))
 					(number "30" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -4061,7 +4061,7 @@
 		(uuid "bd36e26e-f671-54e6-a239-8c91fbfafc49")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-C6-MINI-1U-H4_U_ee35bc")
+		(lib_id "AVO:ESP32-C6-MINI-1U-H4_U_6869c3")
 		(at 58.42 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4157,7 +4157,15 @@
 		(uuid "dfc5f831-f836-505a-98cf-0a6edd0a9423")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 130.81 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 35.56 133.35) (uuid "07cf7277-bf30-5196-a951-e72f0c0b2a87"))
+	(global_label
+		"ECG_DRDY"
+		(shape passive)
+		(at 35.56 133.35 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "3abcec5d-b0ad-5636-8856-d563e38f41ba")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 133.35 0) (hide yes) (effects (font (size 1 1))))
+	)
 	(global_label
 		"EN"
 		(shape passive)
@@ -4185,9 +4193,17 @@
 		(uuid "46aa1a46-4e0b-5f7f-a1db-558360fc25c9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 140.97 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 35.56 143.51) (uuid "c01fb653-9210-5aaa-89f8-42485e388e3c"))
 	(global_label
-		"IMU_INT2"
+		"ECG_CS"
+		(shape passive)
+		(at 35.56 143.51 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "76ef0d66-92d3-5c1e-b3bd-6007896eb180")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 143.51 0) (hide yes) (effects (font (size 1 1))))
+	)
+	(global_label
+		"ECG_SCK"
 		(shape passive)
 		(at 35.56 146.05 180)
 		(fields_autoplaced yes)
@@ -4205,7 +4221,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 148.59 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"ECG_DRDY"
+		"ECG_MISO"
 		(shape passive)
 		(at 35.56 151.13 180)
 		(fields_autoplaced yes)
@@ -4231,7 +4247,15 @@
 		(uuid "5d0e176d-399d-5dda-bef7-2c5b9f70a906")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 156.21 0) (hide yes) (effects (font (size 1 1))))
 	)
-	(no_connect (at 35.56 158.75) (uuid "3c5682f6-e7f6-5e19-8884-c73ff1d83b91"))
+	(global_label
+		"ECG_MOSI"
+		(shape passive)
+		(at 35.56 158.75 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1 1)) (justify right))
+		(uuid "a84561c2-1b8e-5141-be78-f12a48c43e61")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 35.56 158.75 0) (hide yes) (effects (font (size 1 1))))
+	)
 	(global_label
 		"LED_K"
 		(shape passive)
@@ -4266,33 +4290,9 @@
 	(no_connect (at 35.56 179.07) (uuid "ca8f6925-e0b5-5ad0-be31-7e014adfffa1"))
 	(no_connect (at 35.56 181.61) (uuid "e1ec7099-86a6-5e56-9bc9-5f03fcab36ee"))
 	(no_connect (at 35.56 184.15) (uuid "c4270abc-a004-549a-bf2c-557c3789f11f"))
-	(global_label
-		"ECG_MOSI"
-		(shape passive)
-		(at 81.28 128.27 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "143f8ad1-19ae-5979-a06e-8fcdc1f3b928")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 128.27 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(global_label
-		"ECG_SCK"
-		(shape passive)
-		(at 81.28 130.81 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "8313b3ff-e4f1-5acb-8181-033579a6c002")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 130.81 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(global_label
-		"ECG_MISO"
-		(shape passive)
-		(at 81.28 133.35 0)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "00455a36-ba4a-51b6-a339-d9034effcfff")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 133.35 0) (hide yes) (effects (font (size 1 1))))
-	)
+	(no_connect (at 81.28 128.27) (uuid "8adb596c-33a2-5926-a0d5-fab05cec6951"))
+	(no_connect (at 81.28 130.81) (uuid "44bb731d-0b1c-5786-ae9a-186e4c961767"))
+	(no_connect (at 81.28 133.35) (uuid "f3965671-0503-592d-a55a-84e7068509f2"))
 	(global_label
 		"ECG_START"
 		(shape passive)
@@ -4321,7 +4321,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 81.28 140.97 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"ECG_CS"
+		"IMU_INT2"
 		(shape passive)
 		(at 81.28 143.51 0)
 		(fields_autoplaced yes)

@@ -22,7 +22,7 @@ apps no necesitan cambios para la REV D.
 | Función | GPIO |
 |---|---|
 | I²C SDA / SCL (LSM6DSV16X 0x6A, MMC5983MA 0x30) | 23 / 16 |
-| LSM6 INT1 / INT2 · MMC INT | 2 / 1 · 22 |
-| ADS1292 CS / SCLK / DIN / DOUT / DRDY | 17 / 19 / 18 / 20 / 7 |
+| LSM6 INT1 / INT2 · MMC INT | 2 / 17 · 22 |
+| ADS1292 CS / SCLK / DIN / DOUT / DRDY | 0 / 1 / 14 / 7 / 3 |
 | ADS1292 PWDN-RESET / START | 4 / 21 |
 | Batería (divisor 1:2) · DET · CHG · BOOT · LED | 5 · 6 · 8 · 9 · 15 |

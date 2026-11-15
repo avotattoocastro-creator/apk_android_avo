@@ -227,13 +227,13 @@ C("C22", "22u", V3, GND, block="3V3", fp="C0805")
 
 # ---------------------------------------------------------------------------------------- ESP32-C6 (U4)
 # pad del módulo: (GPIO, red). Mismos GPIO que el XIAO ESP32-C6 (firmware 0.5.0 sin cambios).
-GPIO = {
-    12: ("IO0", None), 13: ("IO1", "IMU_INT2"), 5: ("IO2", "IMU_INT1"), 6: ("IO3", None),
-    9: ("IO4", "ECG_RESET"), 10: ("IO5", "BAT_ADC"), 15: ("IO6", "DET"), 16: ("IO7", "ECG_DRDY"),
-    22: ("IO8", "CHG_STAT"), 23: ("IO9", "BOOT"), 19: ("IO14", None), 20: ("IO15", "LED_K"),
-    17: ("IO12 D-", "USB_DM"), 18: ("IO13 D+", "USB_DP"), 24: ("IO18", "ECG_MOSI"), 25: ("IO19", "ECG_SCK"),
-    26: ("IO20", "ECG_MISO"), 27: ("IO21", "ECG_START"), 28: ("IO22", "MAG_INT"), 29: ("IO23", "I2C_SDA"),
-    30: ("IO17", "ECG_CS"), 31: ("IO16", "I2C_SCL"), 8: ("EN", "EN"), 3: ("3V3", V3),
+GPIO = {   # REV D: el SPI del ADS1292 va a los pads del módulo que miran al ADS (matriz de GPIO del C6; firmware 0.6.0)
+    12: ("IO0", "ECG_CS"), 13: ("IO1", "ECG_SCK"), 5: ("IO2", "IMU_INT1"), 6: ("IO3", "ECG_DRDY"),
+    9: ("IO4", "ECG_RESET"), 10: ("IO5", "BAT_ADC"), 15: ("IO6", "DET"), 16: ("IO7", "ECG_MISO"),
+    22: ("IO8", "CHG_STAT"), 23: ("IO9", "BOOT"), 19: ("IO14", "ECG_MOSI"), 20: ("IO15", "LED_K"),
+    17: ("IO12 D-", "USB_DM"), 18: ("IO13 D+", "USB_DP"), 24: ("IO18", None), 25: ("IO19", None),
+    26: ("IO20", None), 27: ("IO21", "ECG_START"), 28: ("IO22", "MAG_INT"), 29: ("IO23", "I2C_SDA"),
+    30: ("IO17", "IMU_INT2"), 31: ("IO16", "I2C_SCL"), 8: ("EN", "EN"), 3: ("3V3", V3),
 }
 NC_PADS = (4, 7, 21, 32, 33, 34, 35)
 GND_PADS = (1, 2, 11, 14) + tuple(n for n in range(36, 54) if n != 51)

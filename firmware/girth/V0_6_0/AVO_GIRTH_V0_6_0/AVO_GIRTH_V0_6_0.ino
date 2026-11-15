@@ -68,12 +68,11 @@ extern "C" const char AVO_GIRTH_IMAGE_ID[] __attribute__((used, aligned(4))) = "
 // ---------------------------------------------------------------- pins (PCB REV D, ESP32-C6-MINI-1U; same numbers as the XIAO where shared)
 static const int PIN_LED = 15;        // user LED, active low
 static const int PIN_BOOT = 9;        // BOOT button, active low
-static const int PIN_RF_SW = 3;       // RF switch power: LOW = on
-static const int PIN_ANT_SEL = 14;    // LOW = internal ceramic antenna, HIGH = external U.FL
+// (no RF switch on the REV D: GPIO3 = ADS1292 DRDY, GPIO14 = ADS1292 DIN)
 static const int PIN_BAT = 5;         // MTDI / A? : battery divider
 static const int PIN_DET = 6;         // MTCK (LP GPIO): mount detection (pogo contact 3, bridged to GND on the mount)
-static const girth::ImuPins IMU_PINS = {23, 16, 2, 1, 22};          // sda, scl, int1, int2, mag_int
-static const girth::EcgPins ECG_PINS = {17, 19, 20, 18, 7, 4, 21};   // cs, sck, miso (DOUT), mosi (DIN), drdy, pwdn/reset, start
+static const girth::ImuPins IMU_PINS = {23, 16, 2, 17, 22};         // sda, scl, int1, int2, mag_int
+static const girth::EcgPins ECG_PINS = {0, 1, 7, 14, 3, 4, 21};     // cs, sck, miso (DOUT), mosi (DIN), drdy, pwdn/reset, start
 
 static const uint32_t IMU_INTERVAL_US = 10000;   // 100 Hz
 static const uint8_t kBroadcast[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -357,10 +356,8 @@ static void pump_ecg() {
 
 // ---------------------------------------------------------------- settings, antenna, sleep
 static void apply_antenna() {
-  pinMode(PIN_RF_SW, OUTPUT);
-  digitalWrite(PIN_RF_SW, LOW);                     // RF switch on
-  pinMode(PIN_ANT_SEL, OUTPUT);
-  digitalWrite(PIN_ANT_SEL, s_ant_ext ? HIGH : LOW);
+  // PCB REV D: the C6-MINI-1U has its antenna on the U.FL (no RF switch). GPIO3 / GPIO14 are the ADS1292 DRDY / DIN:
+  // they must NOT be driven here (the XIAO's RF-switch pins in 0.5.0).
 }
 
 static void apply_phy() {

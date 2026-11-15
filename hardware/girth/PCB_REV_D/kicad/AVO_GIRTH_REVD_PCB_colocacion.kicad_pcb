@@ -166,11 +166,11 @@
 	(net 52 "unconnected-(U2-TMR-Pad14)")
 	(net 53 "unconnected-(U3-NC-Pad4)")
 	(net 54 "unconnected-(U4-NC-Pad4)")
-	(net 55 "unconnected-(U4-IO3-Pad6)")
-	(net 56 "unconnected-(U4-NC-Pad7)")
-	(net 57 "unconnected-(U4-IO0-Pad12)")
-	(net 58 "unconnected-(U4-IO14-Pad19)")
-	(net 59 "unconnected-(U4-NC-Pad21)")
+	(net 55 "unconnected-(U4-NC-Pad7)")
+	(net 56 "unconnected-(U4-NC-Pad21)")
+	(net 57 "unconnected-(U4-IO18-Pad24)")
+	(net 58 "unconnected-(U4-IO19-Pad25)")
+	(net 59 "unconnected-(U4-IO20-Pad26)")
 	(net 60 "unconnected-(U4-NC-Pad32)")
 	(net 61 "unconnected-(U4-NC-Pad33)")
 	(net 62 "unconnected-(U4-NC-Pad34)")
@@ -4994,7 +4994,7 @@
 			(at -5.9 2.7)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 55 "unconnected-(U4-IO3-Pad6)")
+			(net 20 "ECG_DRDY")
 			(uuid "aac93d7e-2a1d-5272-a4e7-f4156c32c843")
 		)
 		(pad
@@ -5004,7 +5004,7 @@
 			(at -5.9 3.5)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 56 "unconnected-(U4-NC-Pad7)")
+			(net 55 "unconnected-(U4-NC-Pad7)")
 			(uuid "5b2af7e8-b295-59b7-9bfb-cb18f90f2ba4")
 		)
 		(pad
@@ -5054,7 +5054,7 @@
 			(at -4.8 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 57 "unconnected-(U4-IO0-Pad12)")
+			(net 19 "ECG_CS")
 			(uuid "a5759f27-3984-546c-80c4-1ac4cebb2b73")
 		)
 		(pad
@@ -5064,7 +5064,7 @@
 			(at -4 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 42 "IMU_INT2")
+			(net 33 "ECG_SCK")
 			(uuid "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34")
 		)
 		(pad
@@ -5094,7 +5094,7 @@
 			(at -1.6 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 20 "ECG_DRDY")
+			(net 24 "ECG_MISO")
 			(uuid "b30c58ec-01f5-5f26-a560-bbb07ad98591")
 		)
 		(pad
@@ -5124,7 +5124,7 @@
 			(at 0.8 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 58 "unconnected-(U4-IO14-Pad19)")
+			(net 25 "ECG_MOSI")
 			(uuid "8879daef-b3c4-58d4-8eff-ee99e2262f43")
 		)
 		(pad
@@ -5144,7 +5144,7 @@
 			(at 2.4 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 59 "unconnected-(U4-NC-Pad21)")
+			(net 56 "unconnected-(U4-NC-Pad21)")
 			(uuid "9f3dc5bd-b66f-531f-b0bc-fd99f925583e")
 		)
 		(pad
@@ -5174,7 +5174,7 @@
 			(at 4.8 7.6 270)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 25 "ECG_MOSI")
+			(net 57 "unconnected-(U4-IO18-Pad24)")
 			(uuid "c41690ce-ff48-5ee4-8772-f4d1e9b018d1")
 		)
 		(pad
@@ -5184,7 +5184,7 @@
 			(at 5.9 6.7)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 33 "ECG_SCK")
+			(net 58 "unconnected-(U4-IO19-Pad25)")
 			(uuid "a4a4b2f3-567a-5a2b-b51c-e8f827e61faf")
 		)
 		(pad
@@ -5194,7 +5194,7 @@
 			(at 5.9 5.9)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 24 "ECG_MISO")
+			(net 59 "unconnected-(U4-IO20-Pad26)")
 			(uuid "6bd90e52-cdf3-5db8-94ca-2c45755f2ea3")
 		)
 		(pad
@@ -5234,7 +5234,7 @@
 			(at 5.9 2.7)
 			(size 0.4 0.8)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 19 "ECG_CS")
+			(net 42 "IMU_INT2")
 			(uuid "400a7648-9f42-50ea-8497-e2b52aa8a59b")
 		)
 		(pad
