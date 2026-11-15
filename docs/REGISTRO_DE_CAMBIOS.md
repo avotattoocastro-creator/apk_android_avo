@@ -25,7 +25,7 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 ## 2026-11-15 — iPad — Página «Cámara»: vídeo con hora GPS (AVO SYNC v1)
-**Autor:** Claude · Rama `claude/ipad-camara-avo-sync` · **CI:** pendiente (lanzado a mano sin TestFlight)
+**Autor:** Claude · Rama `claude/ipad-camara-avo-sync` · **Commits:** `7a8ca9e` · **CI:** run 43665157107 (éxito, lanzado a mano sin TestFlight)
 **Qué cambia:**
 - **Menú del iPad:** nueva página «Cámara» (`Page.camera` = `Camera`) debajo de «Análisis», según el boceto del entrenador.
   Siempre está activa.
@@ -53,8 +53,12 @@ juntarlo con los datos por la hora GPS, aunque el caballo esté lejos (playa).
 Sin el primero, la app se cierra al abrir la cámara. El segundo hace falta para «Guardar vídeo» desde Compartir.
 **No se ha tocado:** contratos existentes (TELEMETRY, BackStatus, cincha, AVO1, `.avr`), enlace BLE con el reloj, motor,
 Android, Windows, firmware, workflows, firmas ni el número de build.
-**Validación:** IMPLEMENTADO. Pruebas de host `AvoSyncTests` (simuladas). **NO VERIFICADO** en iPad real ni con gadget,
-porque el gadget no existe.
+**Validación:** IMPLEMENTADO.
+- COMPILADO / CI: run 43665157107 sobre `7a8ca9e`. Compila para el simulador.
+- `AvoSyncTests`: 4 de 4 pruebas superadas (simuladas).
+- La prueba de capturas no saca la página: ya fallaba en `develop` desde la run 43653284779 (`No existe nav.*` en
+  todas las páginas tras «Listado»), y no la causa este cambio.
+- **NO VERIFICADO** en iPad real ni con gadget, porque el gadget no existe.
 **Pendiente:**
 - gadget y firmware `firmware/sync/V0_1`;
 - medir la precisión real (LED a 240 fps);
