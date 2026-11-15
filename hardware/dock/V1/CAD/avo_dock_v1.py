@@ -32,7 +32,8 @@ W, H, D = 200.0, 190.0, 55.0             # caja exterior
 R_OUT = 8.0
 WALL = 3.0
 SPLIT = 35.0                              # unión fondo / frente
-LIP = dict(off0=3.2, off1=4.8, h=3.0)     # labio del fondo (el frente encaja por fuera con 0,2 de holgura)
+LIP = dict(off0=1.6, off1=WALL, h=3.0)   # labio del fondo sobre la mitad interior de su pared; el frente lleva
+#                                           un rebaje (pared de 1,4) con 0,2 de holgura
 Z_FRONT = D                               # cara frontal
 Z_FIN = D - WALL                          # cara interior de la pared frontal
 G = 0.3                                   # holgura de las cápsulas en sus alojamientos
@@ -121,7 +122,7 @@ def inner(z0, h, off=WALL):
 def fondo():
     f = shell(0, SPLIT).cut(inner(WALL, SPLIT))
     # labio de centrado
-    lip = inner(SPLIT - 0.01, LIP["h"], LIP["off0"]).cut(inner(SPLIT - 1, LIP["h"] + 2, LIP["off1"]))
+    lip = inner(SPLIT - 0.01, LIP["h"], LIP["off0"]).cut(inner(SPLIT - 1, LIP["h"] + 2, LIP["off1"] - 0.01))
     f = f.union(lip)
     # pilares de la PCB (insertos M3)
     for (x, y) in PCB_POSTS:
@@ -187,6 +188,8 @@ def bay_geom(b):
 def frente():
     f = shell(SPLIT, D - SPLIT).cut(inner(SPLIT - 0.01, D - SPLIT - WALL + 0.01))
     f = f.faces(">Z").edges().chamfer(1.5)
+    # rebaje del labio: la pared del frente queda en 1,4 mm en sus 3,2 mm inferiores
+    f = f.cut(inner(SPLIT - 1, LIP["h"] + 0.2 + 1, LIP["off0"] - 0.2))
     # bloques de los alojamientos (por dentro)
     for b in BAYS.values():
         c, lx, ly, r = bay_geom(b)
