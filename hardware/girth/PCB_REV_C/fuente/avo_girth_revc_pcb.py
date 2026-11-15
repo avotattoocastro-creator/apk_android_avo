@@ -367,7 +367,7 @@ for p in PARTS:
         x, y, r = POS[p["ref"]]
         p["pos"], p["rot"] = (x, y), r
 MECH = [p for p in PARTS if p["fp"] == "HOLE"]
-KEEPOUT_RECTS = []
+KEEPOUT_RECTS = [("ESCAPE_U6_SPI", -9.3, -1.4, -7.6, 5.0)]   # salida de los pines SPI del MAX30003 (vías)
 
 # =============================================================================== redes
 NETS = []
