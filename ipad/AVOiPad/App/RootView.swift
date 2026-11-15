@@ -16,6 +16,7 @@ struct RootView: View {
     @Environment(AppModel.self) private var app
     /// The start screen (Inicio) shows no sidebar; every other page shows it (restored when leaving Inicio).
     @State private var columns: NavigationSplitViewVisibility = .detailOnly
+    @State private var quitAsked = false            // «SALIR»: confirmación antes de cerrar la app
 
     /// Sidebar: GENERAL pages only. «Análisis» opens the selected training (its pages are in the training bar).
     static let mainEntries: [RootNavEntry] = [
@@ -63,6 +64,10 @@ struct RootView: View {
         return t
     }
 
+    /// Pages that open with the sidebar hidden: Inicio, and «Cámara» (trainer's sketch 15/11/2026: al entrar en la
+    /// cámara el menú queda oculto y solo se abre con su botón de menú flotante).
+    static func hidesSidebar(_ p: Page) -> Bool { p == .home || p == .camera }
+
     var body: some View {
         NavigationSplitView(columnVisibility: $columns) {
             sidebar
@@ -71,10 +76,10 @@ struct RootView: View {
             detail
         }
         .navigationSplitViewStyle(.balanced)
-        .onAppear { columns = app.page == .home ? .detailOnly : .doubleColumn }
+        .onAppear { columns = RootView.hidesSidebar(app.page) ? .detailOnly : .doubleColumn }
         .onChange(of: app.page) { (_: Page, newPage: Page) in
             withAnimation(.easeInOut(duration: 0.25)) {
-                columns = newPage == .home ? .detailOnly : .doubleColumn
+                columns = RootView.hidesSidebar(newPage) ? .detailOnly : .doubleColumn
             }
         }
         .fileImporter(isPresented: Binding(get: { app.showImporter }, set: { app.showImporter = $0 }),
@@ -173,6 +178,30 @@ struct RootView: View {
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
             }
+            // «SALIR» (trainer's sketch 15/11/2026: «botón para cerrar completamente app»), con confirmación
+            Button { quitAsked = true } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: "power").font(.callout.weight(.semibold)).frame(width: 22)
+                    Text("SALIR").font(.callout.weight(.bold))
+                    Spacer(minLength: 0)
+                }
+                .foregroundStyle(Avo.red)
+                .padding(.horizontal, 12).padding(.vertical, 10)
+                .background(Avo.red.opacity(0.10), in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(Avo.red.opacity(0.55), lineWidth: 1))
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 12).padding(.top, 6)
+            .accessibilityIdentifier("nav.quit")
+            .confirmationDialog("¿Cerrar AVO?", isPresented: $quitAsked, titleVisibility: .visible) {
+                Button("Salir", role: .destructive) { app.quitApp() }
+                Button("Cancelar", role: .cancel) {}
+            } message: {
+                Text(app.camera?.recording == true
+                     ? "Se está grabando vídeo: se detendrá. Se cerrarán el Wi-Fi y el Bluetooth del reloj y la app se cerrará del todo."
+                     : "Se cerrarán el Wi-Fi y el Bluetooth del reloj y la app se cerrará del todo.")
+            }
             VStack(alignment: .leading, spacing: 3) {
                 // app data (trainer's sketch 14/11/2026: «datos, versión, fecha…»)
                 Text("AVO Performance Horse").font(.caption2.weight(.semibold)).foregroundStyle(Avo.silver)
@@ -202,7 +231,9 @@ struct RootView: View {
         let locked: Bool = [.map, .analysis, .biomech].contains(e.page) && !(app.trainingOpened && app.selected != nil) && !app.captureMode
         return Button {
             app.page = e.page
-            if e.page == .home { columns = .detailOnly }
+            if RootView.hidesSidebar(e.page) {
+                withAnimation(.easeInOut(duration: 0.25)) { columns = .detailOnly }
+            }
         } label: {
             HStack(spacing: 12) {
                 Image(systemName: e.icon).font(.body).frame(width: 22)
@@ -231,7 +262,8 @@ struct RootView: View {
             // no navigation title bar (trainer's sketch 08/11/2026): the AVO header / training bar is the top row of
             // every page; with the sidebar hidden, a button at its left brings the menu back
             // trainer's sketch 13/11/2026: the general pages have no top bar (only the menu button when the sidebar is hidden)
-            if app.page != .home && (app.page.isTrainingPage || columns == .detailOnly) {
+            // «Cámara» sin barra superior: la imagen llega arriba (boceto 15/11/2026); su botón de menú flota encima
+            if app.page != .home && app.page != .camera && (app.page.isTrainingPage || columns == .detailOnly) {
                 HStack(spacing: 0) {
                     if columns == .detailOnly {
                         Button {
@@ -257,6 +289,19 @@ struct RootView: View {
                 pageView(app.page)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if app.showEmptyState { RootEmptyState() }
+                if app.page == .camera && columns == .detailOnly {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.25)) { columns = .doubleColumn }
+                    } label: {
+                        Image(systemName: "sidebar.left").font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(.white).frame(width: 44, height: 44)
+                            .background(Color.black.opacity(0.55), in: RoundedRectangle(cornerRadius: 8))
+                    }
+                    .buttonStyle(.plain)
+                    .padding(14)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .accessibilityLabel("Mostrar menú")
+                }
                 // Inicio has no «Menú» button (trainer's sketch 13/11/2026): its «INICIAR» opens the Dashboard and the sidebar
                 if app.captureMode && app.captureReady {
                     Text("capture.ready")

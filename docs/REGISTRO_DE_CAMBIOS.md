@@ -39,6 +39,62 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **No se ha tocado:** firmas, `Info.plist`, número de build.
 **Estado:** COMPILADO / CI · **NO VERIFICADO en hardware real**. La PCB no se ha fabricado y el firmware no se ha cargado en ninguna placa.
 
+
+## 2026-11-15 — iPad 1.0.0 — «Cámara» se abre con el menú lateral oculto
+**Autor:** Claude · **Commits:** ver PR · **CI:** pendiente
+**Qué cambia:** al entrar en «Cámara» el menú lateral se oculta (como en Inicio); solo se abre con el botón de menú
+flotante de la esquina superior izquierda. Volver a pulsar «Cámara» en el menú también lo cierra. Las demás páginas
+siguen abriendo con el menú visible.
+**Por qué:** boceto del entrenador 15/11/2026 (build 145): «Al entrar a cámara menú oculto, solo lo abrís botón menú».
+**Archivos:** `ipad/AVOiPad/App/RootView.swift` (`RootView.hidesSidebar`).
+**No se ha tocado:** workflows, firmas, `Info.plist`, número de build.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+## 2026-11-15 — iPad — botón «SALIR» para cerrar la app del todo
+**Autor:** Claude · Rama `feature/ipad-salir`
+**Qué cambia:** al pie de la barra lateral, sobre los datos de versión, un botón rojo «SALIR» con confirmación. Cierra el Wi-Fi y el
+Bluetooth del reloj, detiene la cámara (si graba, espera 2,5 s a que el vídeo se cierre), guarda y cierra la app del todo
+(`App/AppModel+Quit.swift`). Boceto del entrenador del 15/11/2026.
+**Aviso:** iPadOS no tiene una forma oficial de cerrar una app y Apple lo desaconseja: en TestFlight funciona; en una revisión de la
+App Store podrían pedir quitarlo.
+**Validación:** pendiente del CI del iPad. **NO VERIFICADO** en el iPad.
+
+## 2026-11-15 — iPad — Vídeo asociado al entrenamiento, datos impresos y recorte
+**Autor:** Claude · Rama `claude/ipad-video-datos` · **CI:** run 43698716776 (compila y pruebas unitarias OK, sin TestFlight)
+**Qué cambia (peticiones del entrenador 15/11/2026, con referencia tipo «telemetry overlay»):**
+- **Caballo al grabar:** se elige en el panel y se guarda en el `.avosync.json`.
+- **Asociación al entrenamiento:** automática por la hora, prefiriendo el mismo caballo, o elegida a mano en el
+  reproductor. En la lista de vídeos se ve a qué entrenamiento está asociado cada uno.
+- **Reproductor con los datos encima:** velocímetro, barra de distancia, recorrido, brújula, coordenadas, aire,
+  aceleraciones, tranco, IMU de la cincha, altitud, calidad GNSS, hora GPS y caballo.
+  - Todo se puede elegir con el botón «Datos».
+  - El pulso aparece «sin datos» hasta que se decodifique el ECG.
+- **Recorte por delante y por detrás:** no destructivo, con agarres y botones.
+- **Exportar con datos:** vídeo HEVC con los indicadores impresos (`videos/exportados/`), «Guardar en Fotos» y compartir.
+- **Nuevos archivos:** `Core/VideoTelemetry.swift` (series del entrenamiento + dibujo), `App/VideoOverlayExporter.swift`.
+  - `SessionItem.fullImu` pasa a ser legible.
+  - `AvoSyncVideoFile` añade `horse`, `training_id`, `trim_start_s` y `trim_end_s`, opcionales, y lee igual los archivos
+    de la build 136.
+**No se ha tocado:** protocolo AVO SYNC, motor, Android, Windows, firmware, Info.plist (los permisos de Cámara y Fotos ya
+estaban), workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+- No está comprobado que el vídeo exportado salga bien orientado con el iPad girado al revés.
+- La sincronía con el reloj del iPad es de decenas de ms (estimada).
+
+## 2026-11-15 — iPad — «Cámara» a todo el ancho y panel desplegable
+**Autor:** Claude · Rama `claude/ipad-camara-ancho`
+**Qué cambia (boceto del entrenador 15/11/2026, build 136):**
+- **Imagen a todo el ancho:** la imagen de la cámara ocupa toda la página. Se quitan la barra superior, los márgenes y las
+  bandas negras: la vista previa rellena el recuadro, y el vídeo grabado conserva el encuadre completo del sensor.
+- **Botón de menú:** con el menú oculto, el botón para mostrarlo flota sobre la imagen.
+- **Panel desplegable:** AVO SYNC, Grabación y Vídeos pasan a un panel que se despliega por encima de la imagen, a la derecha.
+  - Se abre con el botón junto a la hora. El botón lleva un punto con el estado de AVO SYNC.
+  - Se cierra con la ✕ o con el mismo botón.
+  - La app recuerda si estaba abierto o cerrado.
+- **REC:** el contador pasa arriba, al centro, y durante la grabación hay un marco rojo.
+- **Reproductor:** se abre a pantalla completa, con fondo negro.
+**No se ha tocado:** grabación, AVO SYNC, archivos, Info.plist, workflows ni el número de build.
+**Validación:** IMPLEMENTADO · CI pendiente · **NO VERIFICADO** en iPad real.
+
 ## 2026-11-15 — Cincha PCB REV C — placa propia compacta con ECG (MAX30003)
 **Autor:** Claude · Rama `feature/girth-pcb-rev-c` · **CI:** `build-girth-pcb-revc.yml` run 43672058713 (puerta superada)
 **Qué cambia:** nueva PCB de la cincha en `hardware/girth/PCB_REV_C` (generador Python → KiCad 9, mismas herramientas que el
