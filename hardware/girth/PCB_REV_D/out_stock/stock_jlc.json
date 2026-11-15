@@ -1,5 +1,5 @@
 {
- "date_utc": "2026-11-15 13:36 UTC",
+ "date_utc": "2026-11-15 14:14 UTC",
  "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
  "parts": {
   "C11702": {
@@ -7,7 +7,7 @@
    "mpn": "0402WGF1001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 31393743,
+   "stock": 31382899,
    "library": "base",
    "prices": [
     [
@@ -42,7 +42,7 @@
    "mpn": "BQ24072RGTR",
    "maker": "Texas Instruments",
    "package": "QFN-16-EP(3x3)",
-   "stock": 1216,
+   "stock": 1214,
    "library": "expand",
    "prices": [
     [
@@ -77,7 +77,7 @@
    "mpn": "CL05B104KO5NNNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 38020241,
+   "stock": 38015699,
    "library": "base",
    "prices": [
     [
@@ -182,7 +182,7 @@
    "mpn": "KT-0603R",
    "maker": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 5773512,
+   "stock": 5773620,
    "library": "base",
    "prices": [
     [
@@ -217,7 +217,7 @@
    "mpn": "0402WGF1003TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10363619,
+   "stock": 10352364,
    "library": "base",
    "prices": [
     [
@@ -252,7 +252,7 @@
    "mpn": "0402WGF1002TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 21032461,
+   "stock": 21033173,
    "library": "base",
    "prices": [
     [
@@ -287,7 +287,7 @@
    "mpn": "0402WGF4702TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 5705214,
+   "stock": 5704959,
    "library": "base",
    "prices": [
     [
@@ -322,7 +322,7 @@
    "mpn": "0402WGF2201TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 3051738,
+   "stock": 3051759,
    "library": "base",
    "prices": [
     [
@@ -357,7 +357,7 @@
    "mpn": "0402WGF1004TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 2340495,
+   "stock": 2340411,
    "library": "base",
    "prices": [
     [
@@ -392,7 +392,7 @@
    "mpn": "PESD5V0S1BA",
    "maker": "TECH PUBLIC",
    "package": "SOD-323",
-   "stock": 330666,
+   "stock": 330616,
    "library": "expand",
    "prices": [
     [
@@ -462,7 +462,7 @@
    "mpn": "0402WGF2001TCE",
    "maker": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 10025031,
+   "stock": 10015101,
    "library": "base",
    "prices": [
     [
@@ -497,7 +497,7 @@
    "mpn": "CL21A226MAQNNNE",
    "maker": "Samsung Electro-Mechanics",
    "package": "0805",
-   "stock": 4089351,
+   "stock": 4089399,
    "library": "base",
    "prices": [
     [
@@ -532,7 +532,7 @@
    "mpn": "LSM6DSV16XTR",
    "maker": "STMicroelectronics",
    "package": "LGA-14",
-   "stock": 6528,
+   "stock": 6520,
    "library": "expand",
    "prices": [
     [
@@ -567,7 +567,7 @@
    "mpn": "CL05A105KA5NQNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 10267547,
+   "stock": 10267149,
    "library": "base",
    "prices": [
     [
@@ -742,7 +742,7 @@
    "mpn": "NCP15XH103F03RC",
    "maker": "Murata Electronics",
    "package": "0402",
-   "stock": 297188,
+   "stock": 297208,
    "library": "expand",
    "prices": [
     [
@@ -847,7 +847,7 @@
    "mpn": "CL10A106MA8NRNC",
    "maker": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 6145173,
+   "stock": 6142023,
    "library": "base",
    "prices": [
     [
@@ -1133,6 +1133,397 @@
      ]
     ],
     "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "C5378721": [
+   {
+    "lcsc": "C5378721",
+    "mpn": "SK6812SIDE-A",
+    "maker": "OPSCO Optoelectronics",
+    "package": "SMD-4P,4x1.6mm",
+    "stock": 110298,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1123
+     ],
+     [
+      50,
+      0.0904
+     ],
+     [
+      150,
+      0.0794
+     ],
+     [
+      1500,
+      0.065
+     ],
+     [
+      3000,
+      0.0583
+     ],
+     [
+      4500,
+      0.055
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.6mA 1.6mm 120° 160mcd~320mcd 1kHz 2000V 240mcd~450mcd 2mm 3.7V~5.5V 460nm~470nm 4mm 520nm~535nm 620nm~625nm 697.5mcd~1162.5mcd 800Kbit/s Built-in power-on reset circuit Translucent Frosted Lens SMD-4P,4x1.6mm RGB LEDs(Built-in IC) ROHS"
+   }
+  ],
+  "C15127": [
+   {
+    "lcsc": "C15127",
+    "mpn": "AO3401A",
+    "maker": "Alpha & Omega Semicon",
+    "package": "SOT-23",
+    "stock": 1533759,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0814
+     ],
+     [
+      50,
+      0.064
+     ],
+     [
+      150,
+      0.0552
+     ],
+     [
+      500,
+      0.0478
+     ],
+     [
+      3000,
+      0.0454
+     ],
+     [
+      6000,
+      0.0436
+     ]
+    ],
+    "describe": "1 P-Channel 14nC@10V 30V 47mΩ@10V、60mΩ@4.5V、85mΩ@2.5V 4A 55pF 645pF 80pF 900mV SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C2955059",
+    "mpn": "CY7C1512-70ZI",
+    "maker": "Infineon/Cypress Semicon",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.5105
+     ],
+     [
+      10,
+      0.5105
+     ],
+     [
+      30,
+      0.5105
+     ],
+     [
+      200,
+      0.198
+     ],
+     [
+      500,
+      0.1915
+     ],
+     [
+      1000,
+      0.1882
+     ]
+    ],
+    "describe": "-40℃~+85℃ 110mA 4.5V~5.5V 512Kbit 5mA 70ns Parallel Port (Parallel) - SRAM ROHS"
+   },
+   {
+    "lcsc": "C17466995",
+    "mpn": "MHP-TAC15-12-72",
+    "maker": "Littelfuse",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.353
+     ],
+     [
+      10,
+      0.353
+     ],
+     [
+      12,
+      0.353
+     ],
+     [
+      200,
+      0.1409
+     ],
+     [
+      500,
+      0.1362
+     ],
+     [
+      1000,
+      0.1339
+     ]
+    ],
+    "describe": "25A 72℃ - Thermal Fuses (TCO) ROHS"
+   },
+   {
+    "lcsc": "C17684618",
+    "mpn": "MHP-TAC15-12-77",
+    "maker": "Littelfuse",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.313
+     ],
+     [
+      10,
+      0.313
+     ],
+     [
+      12,
+      0.313
+     ],
+     [
+      200,
+      0.1249
+     ],
+     [
+      500,
+      0.1208
+     ],
+     [
+      1000,
+      0.1187
+     ]
+    ],
+    "describe": "25A 77℃ - Thermal Fuses (TCO) ROHS"
+   },
+   {
+    "lcsc": "C17337122",
+    "mpn": "MHP-TAC15-12-77N",
+    "maker": "Littelfuse",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3194
+     ],
+     [
+      10,
+      0.3194
+     ],
+     [
+      12,
+      0.3194
+     ],
+     [
+      200,
+      0.1275
+     ],
+     [
+      500,
+      0.1232
+     ],
+     [
+      1000,
+      0.1211
+     ]
+    ],
+    "describe": "25A 77℃ - Thermal Fuses (TCO) ROHS"
+   },
+   {
+    "lcsc": "C17646581",
+    "mpn": "MHP-TAC15-12-72N",
+    "maker": "Littelfuse",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3323
+     ],
+     [
+      10,
+      0.3323
+     ],
+     [
+      12,
+      0.3323
+     ],
+     [
+      200,
+      0.1326
+     ],
+     [
+      500,
+      0.1282
+     ],
+     [
+      1000,
+      0.126
+     ]
+    ],
+    "describe": "25A 72℃ - Thermal Fuses (TCO) ROHS"
+   }
+  ],
+  "C8545": [
+   {
+    "lcsc": "C8545",
+    "mpn": "2N7002",
+    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "package": "SOT-23",
+    "stock": 6246233,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0158
+     ],
+     [
+      500,
+      0.0122
+     ],
+     [
+      3000,
+      0.0105
+     ],
+     [
+      6000,
+      0.0093
+     ],
+     [
+      24000,
+      0.0088
+     ],
+     [
+      51000,
+      0.0085
+     ]
+    ],
+    "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5Ω@10V 60V N-Channel ±20V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "lcsc": "C1556059",
+    "mpn": "MPC8545VJATGD",
+    "maker": "NXP Semicon",
+    "package": "FCPBGA-783",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      71.8323
+     ],
+     [
+      3,
+      71.8323
+     ],
+     [
+      5,
+      71.8323
+     ],
+     [
+      30,
+      68.223
+     ],
+     [
+      34,
+      68.223
+     ],
+     [
+      36,
+      68.223
+     ]
+    ],
+    "describe": "1.2GHz Freescale Series FCPBGA-783 Microcontrollers (MCU/MPU/SOC) ROHS"
+   },
+   {
+    "lcsc": "C6675234",
+    "mpn": "MPC8545PXATGD557",
+    "maker": "NXP Semicon",
+    "package": "FCPBGA-783(29x29)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.8584
+     ],
+     [
+      10,
+      2.8584
+     ],
+     [
+      30,
+      2.8584
+     ],
+     [
+      200,
+      1.1404
+     ],
+     [
+      500,
+      1.1028
+     ],
+     [
+      1000,
+      1.0848
+     ]
+    ],
+    "describe": "FCPBGA-783(29x29) Microcontrollers (MCU/MPU/SOC) ROHS"
+   },
+   {
+    "lcsc": "C7231804",
+    "mpn": "MPC8545VTAQGD557",
+    "maker": "NXP Semicon",
+    "package": "FCPBGA-783(29x29)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.8584
+     ],
+     [
+      10,
+      2.8584
+     ],
+     [
+      30,
+      2.8584
+     ],
+     [
+      200,
+      1.1404
+     ],
+     [
+      500,
+      1.1028
+     ],
+     [
+      1000,
+      1.0848
+     ]
+    ],
+    "describe": "FCPBGA-783(29x29) Microcontrollers (MCU/MPU/SOC) ROHS"
    }
   ]
  }
