@@ -1,23 +1,22 @@
-# AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de diagnóstico
+# AVO GIRTH · placa de la cincha · REV D (ESP32-C6 + LSM6DSV16X + MMC5983MA + ADS1292, ECG) — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `6fa2869fe96dc9d497ec0fc6d1ea9a9407c9ed25` · ejecución de CI: 43721234911
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `b63c741dfaf1fd6f83f2ed7d3221e5c8264e9531` · ejecución de CI: 43721512373
 - Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 46 × 30 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
 - Componentes: 77 en total, 60 para montar, 1 sin montar (DNP: C54), 16 a mano (pads de hilo y de prueba)
-- Pistas: 725 · vías: 130 · ruteado completo (0 conexiones incompletas)
+- Pistas: 725 · vías: 129 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 1 |
+| DRC: errores | correcto | 0 |
 | DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: items_not_allowed 1
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
@@ -64,8 +63,8 @@ Errores de DRC por tipo: items_not_allowed 1
 - Piezas sin existencias para 5 placas: C2651570
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -77,4 +76,4 @@ Errores de DRC por tipo: items_not_allowed 1
 - Primera programación por los pads TP4/TP5 (USB nativo) con pinza de pogo-pins; después por radio.
 - Pad de esquina 51 del C6-MINI-1U sin conectar (GND de anclaje encerrado por las salidas de los pads 24/25).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA

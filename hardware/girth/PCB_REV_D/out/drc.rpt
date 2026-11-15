@@ -1,11 +1,8 @@
 ** Drc report for AVO_GIRTH_REVD_PCB.kicad_pcb **
-** Created on 2026-11-15T13:52:49+0000 **
+** Created on 2026-11-15T13:55:56+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 11 DRC violations **
-[items_not_allowed]: Items not allowed (keepout area 'BORDE_07')
-    Rule: keepout area 'BORDE_07'; error
-    @(103.7250 mm, 114.2250 mm): Via [GND] on F.Cu - B.Cu
+** Found 10 DRC violations **
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(80.4000 mm, 97.4600 mm): PCB text '+' on F.Silkscreen
