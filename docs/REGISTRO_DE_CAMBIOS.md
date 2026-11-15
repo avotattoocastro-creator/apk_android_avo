@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-15 — iPad — Informe PDF de la carrera: las 8 cifras del resultado en una sola línea
+**Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-fila`
+**Qué cambia:** las 8 cifras del resultado van ahora en una sola línea:
+- puesto, tiempo oficial y distancia al ganador;
+- velocidad máxima y velocidad media;
+- mejor 200 m, últimos 600 m y recorrido vs 1.º.
+
+Todas las cifras de una línea comparten tamaño, que se reduce para que quepa la más ancha, y los nombres y textos pequeños se ajustan al recuadro.
+**Por qué:** boceto del entrenador sobre el PDF (15/11/2026, build 151): «Todos en misma línea».
+**Archivos:** `Core/RaceComparisonPdf.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-15 — iPad — Casilla «PDF» en cada grupo de datos de la carrera
 **Autor:** Claude · **Rama:** `feature/ipad-pdf-carrera-checks` · **CI:** ver PR
 **Qué cambia:** cada recuadro de la ficha de la carrera tiene arriba a la derecha una casilla **«PDF»** que decide si sale en el «Informe PDF». Son 17 grupos:

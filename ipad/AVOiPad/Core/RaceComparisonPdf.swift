@@ -159,14 +159,24 @@ private final class RaceComparisonPdfWriter {
             let row = Array(tiles[i..<min(i + perRow, tiles.count)])
             ensure(66)
             let tw: Double = w / Double(perRow)
+            // one size for every figure of the row (the widest one decides), so the line looks even
+            var rowSize: Double = 15
+            while rowSize > 8 && row.contains(where: { PdfDocument.measureText($0.value, rowSize, false) > tw - 6 }) { rowSize -= 0.5 }
             for (k, t) in row.enumerated() {
                 let x: Double = m + Double(k) * tw
-                pdf.text(x + tw / 2, y + 6, t.value, size: 15, bold: false, color: ReportBuilder.ink, align: .center)
-                pdf.text(x + tw / 2, y + 27, t.label.uppercased(), size: 6.5, bold: true, color: ReportBuilder.dim, align: .center)
+                // the figure and its name shrink to fit the tile (8 tiles on one line: trainer 15/11/2026)
+                let vs: Double = rowSize
+                pdf.text(x + tw / 2, y + 6 + (15 - vs) * 0.5, t.value, size: vs, bold: false, color: ReportBuilder.ink, align: .center)
+                var ls: Double = 6.5
+                let lab: String = t.label.uppercased()
+                while ls > 4.8 && PdfDocument.measureText(lab, ls, true) > tw - 4 { ls -= 0.25 }
+                pdf.text(x + tw / 2, y + 27, lab, size: ls, bold: true, color: ReportBuilder.dim, align: .center)
                 if let c = t.caption, !c.isEmpty {
                     var cell: [UInt16] = Array(c.utf16)
-                    while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), 6.5, false) > tw - 8 { cell.removeLast(2) }
-                    pdf.text(x + tw / 2, y + 38, String(decoding: cell, as: UTF16.self), size: 6.5, bold: false, color: ReportBuilder.dim, align: .center)
+                    var cs: Double = 6.5
+                    while cs > 5 && PdfDocument.measureText(c, cs, false) > tw - 4 { cs -= 0.25 }
+                    while cell.count > 3 && PdfDocument.measureText(String(decoding: cell, as: UTF16.self), cs, false) > tw - 4 { cell.removeLast(2) }
+                    pdf.text(x + tw / 2, y + 38, String(decoding: cell, as: UTF16.self), size: cs, bold: false, color: ReportBuilder.dim, align: .center)
                 }
                 pdf.line(x + 6, y + 54, x + tw - 6, y + 54, ReportBuilder.lineColor, width: 0.5)
                 if k < row.count - 1 { pdf.line(x + tw, y + 4, x + tw, y + 48, ReportBuilder.lineColor, width: 0.5) }
@@ -439,7 +449,8 @@ private final class RaceComparisonPdfWriter {
                (label: "Mejor 200 m", value: RaceFormat.seconds(u.fastest200S), caption: u.fastestSector.isEmpty ? nil : "Tramo " + u.fastestSector),
                (label: "Últimos 600 m", value: RaceFormat.seconds(u.last600S), caption: nil),
                (label: "V. media", value: RaceFormat.kmh(u.meanSpeedKmh), caption: nil),
-               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")]) }
+               (label: "Recorrido vs 1.º", value: u.finish == 1 ? "—" : RaceFormat.signedMetres(u.distanceVsWinnerM), caption: "«Parcouru vs. 1er»")],
+                                         perRow: 8) }
 
         // 2. sectors of our horse
         if sec.contains(.sectors) && !u.sectors.isEmpty {
