@@ -595,9 +595,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 24.34,
-  "y": 8.78,
-  "rot": 90
+  "x": 24.44,
+  "y": 8.61,
+  "rot": 0
  },
  {
   "ref": "C12",
@@ -610,8 +610,8 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": 34.5,
-  "y": 17.6,
+  "x": 34.48,
+  "y": 17.62,
   "rot": 0
  },
  {
@@ -775,9 +775,9 @@
   "no_assembly": false,
   "note": "desacoplo del pin 29",
   "jlc_rot": 0,
-  "x": 24.54,
-  "y": 0.5,
-  "rot": 90
+  "x": 25.2,
+  "y": -0.7,
+  "rot": 0
  },
  {
   "ref": "C23",
@@ -865,9 +865,9 @@
   "no_assembly": false,
   "note": "PLLFILT (pin 34)",
   "jlc_rot": 0,
-  "x": 24.54,
-  "y": 3.0,
-  "rot": 90
+  "x": 25.0,
+  "y": 3.25,
+  "rot": 0
  },
  {
   "ref": "R20",
@@ -880,8 +880,8 @@
   "no_assembly": false,
   "note": "RBIAS 12,0 k 1 %",
   "jlc_rot": 0,
-  "x": 24.94,
-  "y": 4.83,
+  "x": 25.0,
+  "y": 4.75,
   "rot": 0
  },
  {
@@ -970,9 +970,9 @@
   "no_assembly": false,
   "note": "hub en marcha por defecto (GPIO37 puede reiniciarlo)",
   "jlc_rot": 0,
-  "x": 25.37,
-  "y": 6.23,
-  "rot": 0
+  "x": 24.96,
+  "y": 6.58,
+  "rot": 90
  },
  {
   "ref": "C29",
@@ -985,7 +985,7 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 36.45,
+  "x": 36.46,
   "y": 15.46,
   "rot": 90
  },
@@ -1045,9 +1045,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 28.5,
-  "y": 9.0,
-  "rot": 0
+  "x": 31.0,
+  "y": 4.5,
+  "rot": 270
  },
  {
   "ref": "C30",
@@ -1060,9 +1060,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 25.61,
-  "y": 8.35,
-  "rot": 90
+  "x": 30.35,
+  "y": 7.39,
+  "rot": 0
  },
  {
   "ref": "C31",
@@ -1075,8 +1075,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 31.4,
-  "y": 9.85,
+  "x": 33.65,
+  "y": 3.4,
   "rot": 90
  },
  {
@@ -1390,8 +1390,8 @@
   "no_assembly": false,
   "note": "puerto apagado mientras arranca el S3",
   "jlc_rot": 0,
-  "x": 34.48,
-  "y": 18.8,
+  "x": 34.61,
+  "y": 18.95,
   "rot": 0
  },
  {
@@ -2020,8 +2020,8 @@
   "no_assembly": false,
   "note": "reposo alto (≠ puente a GND del soporte)",
   "jlc_rot": 0,
-  "x": 22.76,
-  "y": 10.3,
+  "x": 22.9,
+  "y": 10.5,
   "rot": 90
  },
  {
@@ -2110,9 +2110,9 @@
   "no_assembly": false,
   "note": "reposo alto (≠ puente a GND del soporte)",
   "jlc_rot": 0,
-  "x": 24.67,
-  "y": 10.62,
-  "rot": 0
+  "x": 24.11,
+  "y": 10.42,
+  "rot": 90
  },
  {
   "ref": "D17",
@@ -2230,8 +2230,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 38.45,
-  "y": 17.94,
+  "x": 38.31,
+  "y": 18.06,
   "rot": 0
  },
  {
@@ -2260,8 +2260,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 34.89,
-  "y": 20.23,
+  "x": 33.91,
+  "y": 20.44,
   "rot": 0
  },
  {
