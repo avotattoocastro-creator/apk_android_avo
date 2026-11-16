@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
+**Autor:** Claude · **Rama:** `feature/logo-ajuste`
+**Qué cambia:** en `report_text.jpg` (iPad y Windows):
+- «PERFORMANCE» baja 7 px respecto a la línea roja de «AVO»;
+- se borra la cola roja que quedaba bajo «PE», un resto de la línea roja de «AVO» que se había movido con la banda de «HORSE EDITION»;
+- se añade un margen inferior a «HORSE EDITION».
+
+El tamaño queda en 670 × 293 px.
+**Por qué:** boceto del entrenador sobre un PDF de tramo (16/11/2026 01:05): «un pelín más bajo».
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados.
+
 ## 2026-11-16 — iPad — Flechas de «% carrera» vistas desde la carrera
 **Autor:** Claude · **Rama:** `feature/ipad-flechas-carrera`
 **Qué cambia:** las flechas de «Entrenamiento vs carrera» (app y PDF) se leen ahora desde la carrera:
