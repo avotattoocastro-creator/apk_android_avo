@@ -127,7 +127,7 @@ ZC = 0.10
 
 # ------------------------------------------------------------------ soporte
 CL = 0.25     # REV 5.11: 0,12 → 0,25 por lado (regla de impresión 0,2–0,3; con 0,12 la cápsula podía atascarse)
-RW = 2.6
+RW = 3.0      # REV 5.11: 2,6 → 3,0: el imán del cierre (2,0 + 0,1) cabe con 0,45 de pared a cada lado
 RH = GROOVE["z1"] - 0.15
 MT = 8.5      # REV 5.9.2: placa de 8,5 (antes 6,0): el lado de los pines (6,0) y sus colas (1,5) quedan empotrados
               # por completo, con 1,0 de hueco bajo las colas para el puente soldado; nada sobresale por debajo
@@ -147,8 +147,9 @@ LV_W = {1: 14.0, -1: 12.0}                 # ancho del balancín en +X y en −X
 FIN = dict(t=2.75, clear=0.25, hole=1.95, gap_lid=0.15)   # aletas de la base; pasador a presión (Ø1,95 impreso)
 PIN_LEN = {1: 20.0, -1: 18.0}              # pasadores de acero ISO 2338 Ø2 × 20 (+X) y Ø2 × 18 (−X)
 TOOTH = dict(e=1.0, zb=0.2, z_tip_b=1.1, z_top=1.6, alpha=17.0, y0=3.2, y_end=0.6, vclear=0.3, wclear=0.3, deep=0.5)
-LMAG = dict(d=4.0, t=2.0, z=2.3, skin=0.3, clear=0.1)      # imanes del cierre Ø4 × 2 N52 (atracción)
-LPOCK = dict(depth=0.6, x_out=44.3)        # rebaje en la placa bajo el balancín (lo deja girar hacia fuera)
+LMAG = dict(d=4.0, t=2.0, z=2.3, skin=0.4, skin_rim=0.45, clear=0.1)   # imanes del cierre Ø4 × 2 N52 (atracción);
+#   paredes: 0,4 en el balancín (2 capas, se imprime en horizontal) y 0,45 en el cerco (un perímetro)
+LPOCK = dict(depth=0.6, out=3.6)           # rebaje en la placa bajo el balancín (lo deja girar hacia fuera)
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
@@ -470,10 +471,11 @@ def _mount_latch_cuts(sx):
     y0, y1 = y0 - TOOTH["wclear"], y1 + TOOTH["wclear"]
     for (ya, yb) in ((y0, y1), (-y1, -y0)):                            # ventanas de los dientes
         cut = cut.union(cq.Workplane("XZ", origin=(0, yb, 0)).polyline(pts).close().extrude(yb - ya))
-    mx1 = x_rim - LMAG["skin"]                                         # imán del cerco: cara a 0,3 de la cara exterior
+    mx1 = x_rim - LMAG["skin_rim"]                                     # imán del cerco: cara a 0,45 de la cara exterior
     mx0 = mx1 - LMAG["t"] - LMAG["clear"]
     cut = cut.union(box((mx0 + mx1) / 2, 0, LMAG["z"] - LMAG["d"] / 2 - 0.05, mx1 - mx0, LMAG["d"] + 0.15, RH + 1))
-    cut = cut.union(box((xi - 0.1 + LPOCK["x_out"]) / 2, 0, -LPOCK["depth"], LPOCK["x_out"] - xi + 0.1,
+    x_out = xo + LPOCK["out"]
+    cut = cut.union(box((xi - 0.1 + x_out) / 2, 0, -LPOCK["depth"], x_out - xi + 0.1,
                         w + 0.4, LPOCK["depth"] + 0.01))                # rebaje de la placa bajo el balancín
     return cut
 
@@ -561,7 +563,7 @@ def components():
     # REV 5.11: imanes Ø4 × 2 del cierre (balancín y cerco) y pasadores de acero Ø2 (sin imanes en las esquinas)
     x_rim, xi, xo = _lv_x()
     lm = cq.Workplane("YZ", origin=(xi + LMAG["skin"] + 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
-    rm = cq.Workplane("YZ", origin=(x_rim - LMAG["skin"] - LMAG["t"] - 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
+    rm = cq.Workplane("YZ", origin=(x_rim - LMAG["skin_rim"] - LMAG["t"] - 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
     lmags = lm.union(lm.rotate((0, 0, 0), (0, 0, 1), 180))
     rmags = rm.union(rm.rotate((0, 0, 0), (0, 0, 1), 180))
     pins = None
@@ -779,6 +781,7 @@ def main():
         "masa_g_PETG": round(lv.val().Volume() * 1.27e-3, 2),
         "contrasalida_grados": TOOTH["alpha"],
         "angulo_neutro_grados": round(_m.degrees(_m.atan2(xi - (xi - TOOTH["e"]), LV["pz"] - TOOTH["z_top"])), 1),
+        "separacion_entre_imanes_mm": round(LMAG["skin"] + LV["gap"] + LMAG["skin_rim"], 2),
         "pasadores": {"+X": f"ISO 2338 Ø2 × {PIN_LEN[1]:.0f}", "-X": f"ISO 2338 Ø2 × {PIN_LEN[-1]:.0f}"},
         "imanes": "4 × Ø4 × 2 N52 (2 en los balancines, 2 en el cerco), en atracción"}
     g = _mount_geom()
