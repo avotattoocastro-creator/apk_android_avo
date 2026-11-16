@@ -1,9 +1,14 @@
 # AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas)
 
-**Estado (15/11/2026):**
-- Diseño **IMPLEMENTADO**. La PCB y la caja se generan en el CI.
-- Nada fabricado: **NO VERIFICADO** en hardware.
-- Sin firmware todavía. Esta revisión solo cubre la PCB y la caja.
+**Estado (16/11/2026):**
+- **PCB REV A verificada por software** en el CI con KiCad 9 (ejecución 43789462892):
+  - DRC: 0 errores y 0 conexiones incompletas;
+  - paridad esquema ↔ placa: 0;
+  - ERC: 0/0;
+  - puerta de fabricación superada.
+  - Ficheros de JLCPCB en `PCB/out/FINAL/`.
+- **Caja generada en el CI** (CadQuery): 1 sólido por pieza y 0 interferencias con las referencias.
+- Nada fabricado: **NO VERIFICADO** en hardware. Sin firmware todavía.
 
 ## Decisiones del usuario (15/11/2026)
 | Tema | Decisión |

@@ -1,6 +1,14 @@
 # AVO DOCK V1 · PCB REV A (15/11/2026)
 
-**Estado:** generada por `fuente/` y comprobada en el CI con KiCad 9 (`.github/workflows/build-dock-v1-pcb.yml`). Ver el informe en `out/`. **No fabricada. No verificada en hardware.**
+**Estado:** diseño verificado por software en el CI con KiCad 9 (ejecución 43789462892):
+- DRC: 0 errores y 0 conexiones incompletas;
+- paridad esquema ↔ placa: 0;
+- ERC: 0/0;
+- puerta superada.
+
+Los ficheros de fabricación están en `out/FINAL/`. **No fabricada. No verificada en hardware.**
+
+**Ruteado:** Freerouting 1.9.0 de la ejecución 43788505774. Se guarda tal cual en `kicad/AVO_DOCK_V1_PCB_ruteado.kicad_pcb` y el CI lo reutiliza sin volver a rutear. Si cambia la colocación, hay que borrar ese fichero.
 
 ## Cómo se genera
 ```

@@ -41,7 +41,22 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 **Por qué:** petición del usuario (15/11/2026). Decisiones tomadas: pogo de 3 de la REV 5.9.1, hub USB + ESP32-S3, módulo AC-DC certificado y rama desde develop.
 **Archivos:** `hardware/dock/V1/**`, `.github/workflows/build-dock-v1-pcb.yml`, `.github/workflows/build-dock-v1-cad.yml`.
 **No se ha tocado:** firmware, apps, contratos binarios, workflows existentes, firmas, `Info.plist`, número de build.
-**Validación:** IMPLEMENTADO · colocación comprobada en local (161 piezas, 0 errores, aislamiento de red incluido) · CI: ver ejecuciones · **NO VERIFICADO** (nada fabricado).
+**Iteraciones del ruteado (16/11/2026):**
+- se gira el hub 270° y se fijan el cristal y los desacoplos;
+- 0,25 mm entre patios;
+- In2 pasa a plano +3V3 con vía desde cada pad;
+- F.Cu y B.Cu quedan como capas de señal;
+- OCS_N del hub a +3V3 (sin R25);
+- se unen los pads VBUS superpuestos del USB-C;
+- se quita la zona +3V3 duplicada al importar la sesión;
+- `jlc.py` ordena referencias como Q1B.
+
+**Validación:**
+- IMPLEMENTADO.
+- **COMPILADO / CI:**
+  - PCB: [43789462892](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/43789462892). DRC 0 errores, 0 conexiones incompletas, paridad 0, ERC 0/0, puerta superada. Ficheros en `out/FINAL/`. Ruteado de la ejecución 43788505774.
+  - Caja: CI 43785237645. 1 sólido por pieza, 0 interferencias.
+- **NO VERIFICADO** en hardware: nada fabricado.
 **Pendiente:**
 - códigos LCSC de 6 piezas;
 - STEP real del pogo de 5 contactos;
