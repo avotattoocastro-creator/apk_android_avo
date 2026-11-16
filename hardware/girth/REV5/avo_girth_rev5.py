@@ -142,22 +142,24 @@ STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=7.0, chan=0.4)   # REV 5.11: ledge
 #    inclinado (contrasalida) más que la trayectoria del diente: con carga, apretar el balancín no lo abre.
 #  - Para abrir: empujar la cápsula 0,3 mm hasta que apoya (los dientes quedan libres) y apretar los dos balancines
 #    por arriba hacia dentro con una mano. Para cerrar: bajar la cápsula; el bisel del diente resbala y el imán lo mete.
-LV = dict(t=3.0, gap=0.25, pz=7.5, bot=-1.0, boss_r=2.6, hole=2.4)   # REV 5.11.1: t 2,6 → 3,0 (imanes ocultos)
+LV = dict(t=3.1, gap=0.25, pz=7.5, bot=-2.0, boss_r=2.6, hole=2.4, pin_in=3.0)   # REV 5.11.1: t 2,6 → 3,0 (imanes ocultos)
 PAD = dict(x_in=2.0, z0=9.8)               # REV 5.11.1: refuerzo interior arriba (imán de repulsión y tope contra la tapa)
 LV_W = {1: 14.0, -1: 12.0}                 # ancho del balancín en +X y en −X (llave de posición)
 FIN = dict(t=2.75, clear=0.25, hole=1.95, gap_lid=0.15)   # aletas de la base; pasador a presión (Ø1,95 impreso)
-PIN_LEN = {1: 20.0, -1: 18.0}              # pasadores de acero ISO 2338 Ø2 × 20 (+X) y Ø2 × 18 (−X)
-TOOTH = dict(e=1.0, zb=0.2, z_tip_b=1.1, z_top=1.6, alpha=0.0, y0=3.2, y_end=0.6, vclear=0.3, wclear=0.3, deep=0.5)
-LMAG = dict(d=4.0, t=2.0, z=1.5, skin=0.45, skin_rim=0.45, clear=0.1)  # imanes ABAJO Ø4 × 2 N52 (ATRACCIÓN)
+PIN_LEN = 6.0   # REV 5.11.2: 2 pasadores CORTOS de acero ISO 2338 Ø2 × 6 por balancín (2,75 en la aleta + 3,0 en el
+                #   balancín): dejan libre el centro del balancín para el imán de arriba
+TOOTH = dict(e=1.0, zb=0.2, z_tip_b=1.1, z_top=1.6, alpha=0.0, y0=3.5, y_end=0.6, vclear=0.3, wclear=0.3, deep=0.5)
+# REV 5.11.2 (petición del usuario): los MISMOS imanes que la espalda y la cincha anterior, Ø5 × 1, apilados de 2 en 2.
+LMAG = dict(d=5.0, t=2.0, z=1.3, skin=0.45, skin_rim=0.45, clear=0.1)  # ABAJO: 2 × Ø5 × 1 apilados (ATRACCIÓN)
 # REV 5.11.1 (marcado del usuario): imanes OCULTOS SIN pausa de impresión: cada uno entra por un orificio que luego se
 # cierra con una tapa impresa (pegada, a ras); el de la tapa de la cápsula entra por dentro y queda oculto al cerrarla.
 # Se añade un par ARRIBA que se REPELE (tapa ↔ balancín): empuja la parte alta del balancín hacia fuera, es decir, a
 # cerrar, y la fuerza crece al apretar (hace de muelle).
 # Diente RECTO (alpha 0, petición del usuario): con carga se bloquea por rozamiento (hace falta μ ≥ 0,17; PETG–PETG
 # ≈ 0,25–0,35) y los imanes; ya no por la geometría.
-TMAG = dict(ly=10.0, hz=3.0, tx=2.0, clear=0.1, z_lid=10.45, z_lv=11.8, lid_skin=1.1)   # ARRIBA 10 × 3 × 2 N52 (REPULSIÓN)
-CAP = dict(cb=0.55, t=0.5, lip=0.3, clear=0.05)   # tapas de los orificios: rebaje de 0,55, tapa de 0,5, 0,3 de apoyo
-LPOCK = dict(depth=1.3, out=2.6)           # rebaje en la placa bajo el balancín (lo deja girar hacia fuera)
+TMAG = dict(d=5.0, tx=2.0, clear=0.1, z_lid=10.6, z_lv=10.6, lid_skin=1.5)   # ARRIBA: 2 × Ø5 × 1 apilados (REPULSIÓN)
+CAP = dict(cb=0.55, t=0.5, lip=0.25, clear=0.05)   # tapas de los orificios: rebaje de 0,55, tapa de 0,5, 0,3 de apoyo
+LPOCK = dict(depth=2.3, out=3.0)           # rebaje en la placa bajo el balancín (lo deja girar hacia fuera)
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
@@ -328,8 +330,8 @@ def pod_lid():
     for sx in (1, -1):
         x1 = L / 2 - TMAG["lid_skin"]
         x0 = L / 2 - (LIP_OUT + LIP_T) - 0.5
-        pk = box((x0 + x1) / 2, 0, TMAG["z_lid"] - (TMAG["hz"] + TMAG["clear"]) / 2, x1 - x0,
-                 TMAG["ly"] + TMAG["clear"], TMAG["hz"] + TMAG["clear"])
+        pk = (cq.Workplane("YZ", origin=(x0, 0, 0)).center(0, TMAG["z_lid"])
+              .circle(TMAG["d"] / 2 + TMAG["clear"] / 2).extrude(x1 - x0))
         lid = lid.cut(pk if sx > 0 else pk.rotate((0, 0, 0), (0, 0, 1), 180))
     # cara superior lisa, sin panel ni letras: una sola pieza, se imprime boca abajo sin soportes
     return lid
@@ -443,7 +445,8 @@ def balancin(sx=1):
     px, pz = xi, LV["pz"]
     c = box((xi + xo) / 2, 0, LV["bot"], LV["t"], w, H - LV["bot"])
     c = c.union(cq.Workplane("XZ", origin=(0, w / 2, 0)).center(px, pz).circle(LV["boss_r"]).extrude(w))
-    c = c.cut(_teardrop(px, pz, LV["hole"], -1, w / 2 + 1, w + 2))
+    for ya in (w / 2 + 1, -(w / 2 - LV["pin_in"])):                 # REV 5.11.2: solo en los extremos (pasadores cortos)
+        c = c.cut(_teardrop(px, pz, LV["hole"], -1, ya, LV["pin_in"] + 1))
     e, ta = TOOTH["e"], math.tan(math.radians(TOOTH["alpha"]))
     pts = [(xi + 0.01, TOOTH["zb"]), (xi - e, TOOTH["z_tip_b"]), (xi - e, TOOTH["z_top"] + e * ta), (xi + 0.01, TOOTH["z_top"])]
     y0, y1 = _tooth_ys(w)
@@ -461,10 +464,9 @@ def balancin(sx=1):
               .circle(LMAG["d"] / 2 + LMAG["clear"] / 2 + CAP["lip"]).extrude(cb + 1))
     # arriba: 10 × 3 × 2 (repulsión con la tapa); entra por la cara interior del refuerzo y se tapa con una placa
     xp = xi - PAD["x_in"]
-    ly, hz = TMAG["ly"] + TMAG["clear"], TMAG["hz"] + TMAG["clear"]
-    c = c.cut(box(xp - 1 + (1 + cb + TMAG["tx"] + cl) / 2, 0, TMAG["z_lv"] - hz / 2, 1 + cb + TMAG["tx"] + cl, ly, hz))
-    c = c.cut(box(xp - 1 + (1 + cb) / 2, 0, TMAG["z_lv"] - hz / 2 - CAP["lip"], 1 + cb, ly + 2 * CAP["lip"],
-                  hz + 2 * CAP["lip"]))
+    rt = TMAG["d"] / 2 + TMAG["clear"] / 2
+    c = c.cut(cq.Workplane("YZ", origin=(xp - 1, 0, 0)).center(0, TMAG["z_lv"]).circle(rt).extrude(1 + cb + TMAG["tx"] + cl))
+    c = c.cut(cq.Workplane("YZ", origin=(xp - 1, 0, 0)).center(0, TMAG["z_lv"]).circle(rt + CAP["lip"]).extrude(1 + cb))
     return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
 
 
@@ -595,18 +597,20 @@ def components():
     lm = cq.Workplane("YZ", origin=(xo - CAP["cb"] - LMAG["t"] - 0.03, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
     rm = cq.Workplane("YZ", origin=(x_rim - LMAG["skin_rim"] - LMAG["t"] - 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
     xt = xi - PAD["x_in"] + CAP["cb"] + 0.02
-    tl = box(xt + TMAG["tx"] / 2, 0, TMAG["z_lv"] - TMAG["hz"] / 2, TMAG["tx"], TMAG["ly"], TMAG["hz"])
-    tc = box(L / 2 - TMAG["lid_skin"] - 0.02 - TMAG["tx"] / 2, 0, TMAG["z_lid"] - TMAG["hz"] / 2, TMAG["tx"], TMAG["ly"], TMAG["hz"])
+    tl = cq.Workplane("YZ", origin=(xt, 0, 0)).center(0, TMAG["z_lv"]).circle(TMAG["d"] / 2).extrude(TMAG["tx"])
+    tc = (cq.Workplane("YZ", origin=(L / 2 - TMAG["lid_skin"] - 0.02 - TMAG["tx"], 0, 0)).center(0, TMAG["z_lid"])
+          .circle(TMAG["d"] / 2).extrude(TMAG["tx"]))
     tmags = tl.union(tc)
     tmags = tmags.union(tmags.rotate((0, 0, 0), (0, 0, 1), 180))
     lmags = lm.union(lm.rotate((0, 0, 0), (0, 0, 1), 180))
     rmags = rm.union(rm.rotate((0, 0, 0), (0, 0, 1), 180))
     pins = None
     for sx in (1, -1):
-        pl_ = PIN_LEN[sx]
-        p_ = cq.Workplane("XZ", origin=(0, pl_ / 2, 0)).center(xi, LV["pz"]).circle(1.0).extrude(pl_)
-        p_ = p_ if sx > 0 else p_.rotate((0, 0, 0), (0, 0, 1), 180)
-        pins = p_ if pins is None else pins.union(p_)
+        y_out = LV_W[sx] / 2 + FIN["clear"] + FIN["t"]                # cara exterior de la aleta
+        for ya in (y_out, -(y_out - PIN_LEN)):
+            p_ = cq.Workplane("XZ", origin=(0, ya, 0)).center(xi, LV["pz"]).circle(1.0).extrude(PIN_LEN)
+            p_ = p_ if sx > 0 else p_.rotate((0, 0, 0), (0, 0, 1), 180)
+            pins = p_ if pins is None else pins.union(p_)
     return {
         "bateria_LP403048": box(0, BAT_Y, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
@@ -617,9 +621,9 @@ def components():
         "pogo_pulso_placa": _pogo_step()[0].mirror("XZ"),
         "pogo_pulso_pines": _pogo_step()[1].mirror("XZ"),
         "modulo_pulso_MAX30003": box(ECG["center"][0], ECG["center"][1], TRAY_TOP + 0.02, ECG["lx"], ECG["wy"], ECG["h"]),
-        "imanes_cierre_balancin_4x2": lmags,
-        "imanes_cierre_cerco_4x2": rmags,
-        "imanes_repulsion_10x3x2": tmags,
+        "imanes_cierre_balancin_5x1": lmags,
+        "imanes_cierre_cerco_5x1": rmags,
+        "imanes_repulsion_5x1": tmags,
         "pasadores_acero_2mm": pins,
     }
 
@@ -738,17 +742,17 @@ def main():
     cq.exporters.export(gasket(free=True), f"{OUT}/{P}junta_TPU.step")
     # REV 5.11.1: tapas de los orificios de los imanes (juego para una cápsula), planas en la cama, PETG
     d_cap = LMAG["d"] + LMAG["clear"] + 2 * CAP["lip"] - 0.1
-    pl_l, pl_h = TMAG["ly"] + TMAG["clear"] + 2 * CAP["lip"] - 0.1, TMAG["hz"] + TMAG["clear"] + 2 * CAP["lip"] - 0.1
+    d_top = TMAG["d"] + TMAG["clear"] + 2 * CAP["lip"] - 0.1
     plug_h = RH - (LMAG["z"] + LMAG["d"] / 2 + 0.05) - 0.05
     caps = None
     for k in range(2):
         for piece in (cyl(0, 0, 0, d_cap, CAP["t"]).translate((k * 7.0, 0, 0)),
-                      box(0, 0, 0, pl_l, pl_h, CAP["t"]).translate((20.0 + k * 13.0, 0, 0)),
-                      box(0, 0, 0, LMAG["t"] + LMAG["clear"] - 0.05, LMAG["d"] + 0.1, plug_h).translate((46.0 + k * 5.0, 0, 0))):
+                      cyl(0, 0, 0, d_top, CAP["t"]).translate((16.0 + k * 7.0, 0, 0)),
+                      box(0, 0, 0, LMAG["t"] + LMAG["clear"] - 0.05, LMAG["d"] + 0.1, plug_h).translate((32.0 + k * 5.0, 0, 0))):
             caps = piece if caps is None else caps.add(piece)
     cq.exporters.export(caps, f"{OUT}/{P}tapas_imanes.stl", tolerance=0.02, angularTolerance=0.1)
     report["tapas_imanes_mm"] = {"disco_balancin_abajo": [round(d_cap, 2), CAP["t"]],
-                                 "placa_balancin_arriba": [round(pl_l, 2), round(pl_h, 2), CAP["t"]],
+                                 "disco_balancin_arriba": [round(d_top, 2), CAP["t"]],
                                  "tapon_cerco": [round(LMAG["t"] + LMAG["clear"] - 0.05, 2), round(LMAG["d"] + 0.1, 2), round(plug_h, 2)]}
     for n, s in comps.items():
         cq.exporters.export(s, f"{OUT}/ref_{n}.stl", tolerance=0.05)
@@ -832,13 +836,13 @@ def main():
         "angulo_neutro_grados": round(_m.degrees(_m.atan2(xi - (xi - TOOTH["e"]), LV["pz"] - TOOTH["z_top"])), 1),
         "separacion_imanes_atraccion_mm": round((xo - CAP["cb"] - LMAG["t"] - CAP["clear"]) - (x_rim - LMAG["skin_rim"]), 2),
         "separacion_imanes_repulsion_mm": round((xi - PAD["x_in"] + CAP["cb"]) - (L / 2 - TMAG["lid_skin"]), 2),
-        "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 2 discos, 2 placas, 2 tapones)",
+        "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 4 discos y 2 tapones)",
         "diente": "recto (sin contrasalida); bloqueo con carga por rozamiento + imanes",
         "rozamiento_minimo_para_bloquear": {
             "contacto_en_la_punta": round(TOOTH["e"] / (LV["pz"] - TOOTH["z_top"]), 3),
             "contacto_repartido": round((TOOTH["e"] + LV["gap"]) / 2 / (LV["pz"] - TOOTH["z_top"]), 3)},
-        "pasadores": {"+X": f"ISO 2338 Ø2 × {PIN_LEN[1]:.0f}", "-X": f"ISO 2338 Ø2 × {PIN_LEN[-1]:.0f}"},
-        "imanes": "abajo 4 × Ø4 × 2 N52 en atracción (balancín ↔ cerco); arriba 4 × 10 × 3 × 2 N52 en repulsión (tapa ↔ balancín); todos ocultos"}
+        "pasadores": f"4 × ISO 2338 Ø2 × {PIN_LEN:.0f} (2 por balancín, a presión en las aletas)",
+        "imanes": "16 × Ø5 × 1 (los de la espalda y la cincha anterior), apilados de 2: abajo en atracción (balancín ↔ cerco), arriba en repulsión (tapa ↔ balancín); todos con orificio y tapa"}
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
                          "aberturas_al_exterior": 0, "tornillos_M3": len(SCREWS), "imanes_esquinas": 0, "junta_compresion_pct": round(100 * (GASKET["h_free"] - GASKET["depth"]) / GASKET["h_free"]),
