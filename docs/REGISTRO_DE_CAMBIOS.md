@@ -24,6 +24,24 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Cincha CAD REV 5.11.2 — imanes Ø5 × 1, repulsión arriba, diente recto, tapas
+**Autor:** Claude · **Rama:** `cad/girth-rev5-11-cierre-magnetico` · **CI:** `build-girth-cad.yml`, runs 43973990958, 43974497684 y 43975009549 (éxito)
+**Qué cambia (marcado y peticiones del usuario):**
+- imanes Ø5 × 1 de siempre, apilados de 2 en 2: atracción abajo (balancín ↔ cerco) y repulsión arriba (tapa ↔ balancín);
+- todos entran por un orificio con tapa impresa (sin pausa de impresión); el de la tapa de la cápsula entra por dentro;
+- diente recto;
+- 4 pasadores cortos Ø2 × 6;
+- balancín de 3,1 mm con refuerzo que hace de tope contra la tapa.
+**Comprobado en el CI:**
+- 8 piezas válidas, cada una de 1 sólido, y 0 interferencias;
+- dientes libres a −8° y tope contra la tapa a −18°; en ese recorrido no hay choques con el soporte;
+- rozamiento mínimo para bloquear con carga: 0,17 con el contacto en la punta.
+**Validación:** COMPILADO / CI · **NO VERIFICADO**.
+**Pendiente:**
+- fuerza neta de los pogo;
+- fuerza real de los imanes apilados;
+- probeta del cierre.
+
 ## 2026-11-16 — Cincha CAD REV 5.11 — cierre magnético de balancín
 **Autor:** Claude · **Rama:** `cad/girth-rev5-11-cierre-magnetico` · **CI:** `build-girth-cad.yml`, runs 43825126386 y 43825422719 (éxito)
 **Qué cambia:** `hardware/girth/REV5/avo_girth_rev5.py`:

@@ -1,5 +1,16 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
+**REV 5.11.2 (16/11/2026, peticiones del usuario sobre la 5.11):**
+- **Imanes:** los mismos **Ø5 × 1** de la espalda y la cincha anterior, **apilados de 2 en 2**. Son 16 en total.
+  - **Abajo, en atracción** (balancín ↔ cerco), a 1,2 mm: mantienen el diente dentro.
+  - **Arriba, en repulsión** (tapa ↔ balancín), a 3,55 mm: empujan la parte alta del balancín hacia fuera (cerrar) y hacen de muelle.
+- **Sin pausa de impresión:** cada imán entra por un orificio que se cierra con una tapa impresa pegada a ras (`AVO_GIRTH_R5_tapas_imanes.stl`: 4 discos Ø5,5 × 0,5 y 2 tapones de 2,05 × 5,1 × 0,55).
+  - El de la tapa de la cápsula entra por dentro de la pared y queda oculto al cerrarla.
+- **Diente recto** (sin contrasalida). Con carga lo bloquean el rozamiento (hace falta μ ≥ 0,17; PETG–PETG ≈ 0,25–0,35) y los imanes.
+- **Pasadores cortos:** 4 × **ISO 2338 Ø2 × 6** (2 por balancín, a presión en las aletas), para dejar libre el centro del balancín.
+- **Balancín de 3,1 mm** con un refuerzo interior arriba que hace de tope contra la tapa (unos −18°). Los dientes quedan libres a −8° (0,88 mm de pulsador).
+
+
 **REV 5.11 (propuesta, 16/11/2026): cierre magnético de balancín** (sustituye a los cierres de palanca de la REV 5.8–5.10), a petición del usuario.
 - **Cómo funciona:**
   - en cada extremo ±X hay un balancín por fuera del cerco, con la cara superior **a ras de la tapa** (no sobresale: protección contra golpes);
