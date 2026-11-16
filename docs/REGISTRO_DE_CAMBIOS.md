@@ -30,6 +30,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias por QR en la base de carga
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §16 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la app muestra un QR con la licencia de cuadra (una firma
+para todos los cascos) y la elección de caballos; la base de carga lo lee con un lector UART y lo instala en todos los
+cascos que cargan.
+**Por qué:** idea del usuario (16/11/2026 21:56).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, PCB del DOCK, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1 — plazas de caballo compartidas por todos los cascos de la cuadra
 **Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
 **Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las plazas son de la cuadra; cualquier casco alquilado por la
