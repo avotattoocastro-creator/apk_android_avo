@@ -35,6 +35,16 @@ Antes era al revés.
 **Archivos:** `Views/RaceTrainingSplitsView.swift`, `Core/RaceComparisonPdf.swift`.
 **Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
 
+## 2026-11-16 — Imagen de marca (`avo_brand_hero`): «PERFORMANCE» arriba y «HORSE EDITION» debajo
+**Autor:** Claude · **Rama:** `feature/hero-performance-arriba`
+**Qué cambia:** igual que en el logotipo de los informes, en la imagen grande de marca se intercambian las bandas «HORSE EDITION» y «PERFORMANCE». Se hace solo en la zona del texto y con los bordes fundidos, para no cortar las rayas rojas del fondo. Misma resolución (941 × 869). Cambia en todas las apps que usan la imagen:
+- iPad: Dashboard e Inicio;
+- Windows: `Assets/avo_brand_hero.jpg`;
+- Android: `app`, `cards` y `usb-updater` (`drawable-nodpi/avo_brand_hero.webp`).
+
+**Por qué:** boceto del entrenador sobre el Dashboard del iPad (16/11/2026 01:02).
+**Estado:** imagen cambiada · NO VERIFICADO en los dispositivos.
+
 ## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» arriba y «HORSE EDITION» debajo
 **Autor:** Claude · **Rama:** `feature/logo-performance-arriba`
 **Qué cambia:** en el logotipo de la cabecera de los informes (`report_text.jpg`) se intercambian las dos bandas: «PERFORMANCE» pasa justo bajo «AVO» y «HORSE EDITION» va debajo. Mismo tamaño (670 × 282 px). Se cambia en el iPad (`Assets.xcassets/report_text.imageset`) y en Windows (`AVO.Windows.Core/Reports`), que comparten el mismo archivo.
