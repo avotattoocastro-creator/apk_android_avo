@@ -157,6 +157,7 @@ BLOQUES (hasta el final del archivo)
 ## 11. Decisiones pendientes del usuario
 - ¿Se permite grabar **sin cifrar** si el casco no tiene llave? (propuesta: sí, marcado y con aviso)
 - ¿El veterinario de un caballo recibe copia automática al asignar, o solo cuando se le envía?
+- ¿Con la cuadra caducada se pueden consultar en solo lectura los entrenamientos ya descargados? (§14; propuesta: sí)
 - ~~¿Se cifra también lo que guardan el pecho y la espalda actuales?~~ **Resuelto (16/11/2026):** no. Son el banco de
   pruebas; solo cifra el casco.
 - ~~¿El casco de serie lleva un elemento seguro (ATECC608B)?~~ **Resuelto (16/11/2026):** sí, por AVO-LOCK-1 (§12).
@@ -223,3 +224,39 @@ AVO Tarjetas, porque hace falta firmar una licencia nueva. Una cuadra no puede p
 
 **Lo que no cambia:** la identidad del casco (certificado del ATECC608B). En AVO Tarjetas cada casco tiene su historial:
 cuadras, periodos, licencias y devoluciones.
+
+## 14. Jerarquía de licencias: la de la cuadra manda (16/11/2026 21:35)
+**Regla del usuario:** con la licencia de la cuadra caducada no funciona ninguna licencia que cuelgue de ella: ni la del
+entrenador, ni las de los jockeys, ni los caballos.
+
+```
+Licencia de CUADRA (raíz, fecha de fin)
+ ├─ Licencias de PERSONA en esa cuadra (entrenador, jockey, veterinario, propietario)
+ ├─ CABALLOS de la cuadra y sus asignaciones
+ └─ Licencias de CASCO de la cuadra (§12, §13)
+```
+
+**Cómo se aplica:**
+- **Ninguna licencia hija dura más que su cuadra.** AVO Tarjetas no emite una licencia de persona ni de casco con fecha de
+  fin posterior a la de la cuadra. Si se emitiera mal, la app y el casco usan la fecha más temprana de las dos.
+- **Cada licencia hija lleva el id de su cuadra** y la app comprueba siempre las dos: la de la cuadra y la de la persona
+  (o el casco). Si la de la cuadra está caducada, la hija se trata como caducada.
+- **Personas con varias cuadras** (veterinario, propietario): solo se corta su acceso a la cuadra caducada. Con las demás
+  cuadras sigue funcionando igual.
+- **Renovar la cuadra reactiva todo** lo que cuelga de ella. No hace falta reemitir las licencias de las personas.
+- **Fecha fiable:** la app usa la fecha más reciente entre el reloj del dispositivo, la última fecha vista (que solo avanza)
+  y la fecha GNSS que le da el casco al conectar. Atrasar el reloj del móvil no sirve.
+- **Aviso:** desde 7 días antes del fin de la cuadra, todas las apps de la cuadra lo muestran, igual que con el casco.
+
+**Con la cuadra caducada:**
+- no se graba, no hay streaming, no se asignan caballos ni se crean entrenamientos o carreras nuevas, y no se envían datos;
+- las tarjetas de entrenador y jockeys de esa cuadra no abren nada nuevo;
+- **excepción (decisión de §12, punto 2):** se pueden **descargar** del casco las sesiones ya grabadas, porque los datos son
+  del cliente.
+- *Decisión pendiente:* ¿se pueden **consultar en solo lectura** los entrenamientos ya descargados mientras la cuadra está
+  caducada? (propuesta: sí, sin exportar ni enviar).
+
+**Cambios por componente:**
+- **AVO Tarjetas:** fecha de fin de la cuadra; las licencias hijas la heredan como tope.
+- **Apps (Android, Windows, iPad):** comprobar la cuadra antes que la persona; avisos y bloqueos.
+- **Casco:** la fecha de fin de su licencia ya es, como máximo, la de la cuadra.
