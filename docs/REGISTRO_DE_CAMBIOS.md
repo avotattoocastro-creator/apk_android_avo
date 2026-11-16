@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Diseño AVO-LOCK-1: el casco solo funciona dentro del sistema y de su licencia
+**Autor:** Claude · **Rama:** `docs/avo-lock-1` · solo documento.
+**Qué cambia:** nueva §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- **Identidad:** ATECC608B con certificado de casco firmado por AVO Tarjetas.
+- **Licencia:** licencia propia del casco, comprobada con la hora GNSS.
+- **Conexión:** reto y respuesta mutuos entre la app (llave de cuadra) y el casco, con el canal cifrado.
+- **Firmware:** arranque seguro y cifrado de flash en serie.
+- **Estados:** licencia válida, aviso, caducada (sin grabar, pero se puede descargar) y sin licencia.
+
+**Estado:** DISEÑO · decisiones pendientes en §12.
+
 ## 2026-11-16 — AVO-ENC-1: solo el casco cifra; pecho y espalda siguen como banco de pruebas
 **Autor:** Claude · **Rama:** `docs/avo-enc-1-casco` · solo documento.
 **Qué cambia:** decisión del usuario en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
