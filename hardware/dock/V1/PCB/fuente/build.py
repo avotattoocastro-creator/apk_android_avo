@@ -25,7 +25,7 @@ CLEAR = 0.15
 VIA = (0.5, 0.3)
 
 # widths per net (mm)
-WIDTH = {D.V5: 0.6, D.V5AC: 0.6, D.VBUS: 0.6, "VBUS_C_RAW": 0.6, D.V3: 0.3}
+WIDTH = {D.V5: 0.6, D.V5AC: 0.6, D.VBUS: 0.6, "VBUS_C_RAW": 0.3, D.V3: 0.3}
 for _p in ("CA", "CB", "GA", "GB"):
     WIDTH["VSW_" + _p] = 0.6
     WIDTH["VPOGO_" + _p] = 0.6

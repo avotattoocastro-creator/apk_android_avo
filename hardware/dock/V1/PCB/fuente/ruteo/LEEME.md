@@ -1,6 +1,9 @@
-# Sesión de ruteado (Freerouting 1.9.0)
+# Sesión de ruteado de la fuente (opcional)
 
-- `placa.dsn`: el DSN que exportó el CI (ejecución 43769163241) desde `kicad/AVO_DOCK_V1_PCB_colocacion.kicad_pcb`.
-- `placa.ses`: resultado de `java -jar freerouting-1.9.0.jar -de placa.dsn -do placa.ses -mp 40`, ejecutado fuera del CI (18 min de ruteado y 2 min de optimización). En el CI, Freerouting con `-mp 150` no terminó en los 40 min del límite.
+Si aquí hay un `placa.dsn` y un `placa.ses` de Freerouting 1.9.0, el workflow `build-dock-v1-pcb.yml` importa la sesión **solo si** el DSN que exporta el CI es igual a este (sin contar la línea `host_version`). Si no coinciden, rutea en el CI con `-mp 40`.
 
-El workflow `build-dock-v1-pcb.yml` importa esta sesión **solo si** el DSN que exporta en ese momento es igual a este (sin contar la línea `host_version`). Si se cambia la colocación, el DSN cambia y el CI vuelve a rutear con Freerouting.
+Sirve para rutear fuera del CI cuando Freerouting tarda más que el límite del job:
+```
+java -jar freerouting-1.9.0.jar -de placa.dsn -do placa.ses -mp 40
+```
+Se usa el DSN que exportó el CI (artefacto `out/ruteado/placa.dsn`).

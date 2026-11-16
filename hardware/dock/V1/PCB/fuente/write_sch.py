@@ -130,17 +130,18 @@ def write(path_sch, path_pro, path_parts):
             "etiquetas globales: dos pines con la misma etiqueta están unidos.", 15, Hp - 38, 1.5)
     sh.write(path_sch, D.DATE, D.REV)
 
-    pot = ["+5V_SYS", "+5V_RED", "VBUS_PC", "VBUS_C_RAW"] + ["VSW_" + k for k in ("CA", "CB", "GA", "GB")] + \
+    pot = ["+5V_SYS", "+5V_RED", "VBUS_PC"] + ["VSW_" + k for k in ("CA", "CB", "GA", "GB")] + \
         ["VPOGO_" + k for k in ("CA", "CB", "GA", "GB")]
     project.write(path_pro,
                   [dict(name="Default", clearance=0.15, track_width=0.2, via_diameter=0.5, via_drill=0.3),
                    # 0,3 mm: entra en los pines de 0,25 mm del QFN-36 (paso 0,5)
+                   # 0,3 mm también para el VBUS del USB-C: entra entre los pads de 0,3 del conector (paso 0,5)
                    dict(name="P3V3", clearance=0.15, track_width=0.3, via_diameter=0.6, via_drill=0.3, priority=2),
                    # 0,6 mm ≈ 1,5 A en cobre exterior de 35 µm (+10 °C); los 5 V principales se refuerzan con varias vías
                    dict(name="Potencia", clearance=0.2, track_width=0.6, via_diameter=0.8, via_drill=0.4, priority=1),
                    # red 230 V: 2,5 mm entre L y N (aislamiento funcional); el aislamiento reforzado con la MBTS lo da el foso
                    dict(name="Red_230V", clearance=2.5, track_width=1.0, via_diameter=2.0, via_drill=1.0, priority=0)],
-                  [("+3V3", "P3V3")] + [(n, "Potencia") for n in pot] + [("AC_*", "Red_230V")])
+                  [("+3V3", "P3V3"), ("VBUS_C_RAW", "P3V3")] + [(n, "Potencia") for n in pot] + [("AC_*", "Red_230V")])
 
     rows = []
     for p in D.PARTS:

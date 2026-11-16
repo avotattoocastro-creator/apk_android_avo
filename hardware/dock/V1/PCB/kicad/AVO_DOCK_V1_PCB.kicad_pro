@@ -486,6 +486,10 @@
         "pattern": "+3V3"
       },
       {
+        "netclass": "P3V3",
+        "pattern": "VBUS_C_RAW"
+      },
+      {
         "netclass": "Potencia",
         "pattern": "+5V_SYS"
       },
@@ -496,10 +500,6 @@
       {
         "netclass": "Potencia",
         "pattern": "VBUS_PC"
-      },
-      {
-        "netclass": "Potencia",
-        "pattern": "VBUS_C_RAW"
       },
       {
         "netclass": "Potencia",
