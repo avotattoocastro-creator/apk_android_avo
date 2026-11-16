@@ -126,12 +126,29 @@ HOOK_Y = (0.0, 10.0)
 ZC = 0.10
 
 # ------------------------------------------------------------------ soporte
-CL = 0.12
+CL = 0.25     # REV 5.11: 0,12 → 0,25 por lado (regla de impresión 0,2–0,3; con 0,12 la cápsula podía atascarse)
 RW = 2.6
 RH = GROOVE["z1"] - 0.15
 MT = 8.5      # REV 5.9.2: placa de 8,5 (antes 6,0): el lado de los pines (6,0) y sus colas (1,5) quedan empotrados
               # por completo, con 1,0 de hueco bajo las colas para el puente soldado; nada sobresale por debajo
-STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=5.6, chan=0.4)   # REV 5.8: ledge 5,6 (antes 1,5) para las bisagras de los cierres
+STRAP = dict(w=50.0, slot=3.6, bar=4.4, ledge=7.0, chan=0.4)   # REV 5.11: ledge 7,0 (5.8: 5,6) para el rebaje del balancín
+# REV 5.11: CIERRE MAGNÉTICO DE BALANCÍN en cada extremo ±X (sustituye a los cierres de palanca de la REV 5.8–5.10).
+#  - El balancín va por fuera del cerco, con la cara superior A RAS DE LA TAPA (protección contra golpes), y gira sobre
+#    un pasador de ACERO Ø2 (ISO 2338) que atraviesa dos aletas de la base. Las aletas pasan por ranuras del cerco y
+#    hacen de llave de posición (anchos distintos en +X y −X: la cápsula solo entra en una orientación).
+#  - Por debajo del eje, dos dientes entran en ventanas de la cara exterior del cerco. Un imán Ø4 × 2 del balancín y
+#    otro del cerco se atraen: mantienen los dientes dentro (no hay muelle).
+#  - ANTIAPERTURA: los pines pogo empujan la cápsula hacia arriba contra el techo de las ventanas. El techo está
+#    inclinado (contrasalida) más que la trayectoria del diente: con carga, apretar el balancín no lo abre.
+#  - Para abrir: empujar la cápsula 0,3 mm hasta que apoya (los dientes quedan libres) y apretar los dos balancines
+#    por arriba hacia dentro con una mano. Para cerrar: bajar la cápsula; el bisel del diente resbala y el imán lo mete.
+LV = dict(t=2.6, gap=0.25, pz=7.5, bot=-0.35, boss_r=2.6, hole=2.4)
+LV_W = {1: 14.0, -1: 12.0}                 # ancho del balancín en +X y en −X (llave de posición)
+FIN = dict(t=2.75, clear=0.25, hole=1.95, gap_lid=0.15)   # aletas de la base; pasador a presión (Ø1,95 impreso)
+PIN_LEN = {1: 20.0, -1: 18.0}              # pasadores de acero ISO 2338 Ø2 × 20 (+X) y Ø2 × 18 (−X)
+TOOTH = dict(e=1.0, zb=0.2, z_tip_b=1.1, z_top=1.6, alpha=17.0, y0=3.2, y_end=0.6, vclear=0.3, wclear=0.3, deep=0.5)
+LMAG = dict(d=4.0, t=2.0, z=2.3, skin=0.3, clear=0.1)      # imanes del cierre Ø4 × 2 N52 (atracción)
+LPOCK = dict(depth=0.6, x_out=44.3)        # rebaje en la placa bajo el balancín (lo deja girar hacia fuera)
 # REV 5.8: cierres de palanca en los dos extremos (±X), con bisagra y pasador impreso (sustituyen al labio y a la pestaña).
 #  - El cierre gira sobre un eje Y en (LATCH_AX, LATCH_AZ); cerrado queda vertical por fuera del cerco y su gancho entra
 #    en una ranura del extremo de la base por encima del cerco. Si la cápsula intenta subir, empuja el gancho hacia
@@ -216,19 +233,54 @@ def pod_base():
     for (x, y) in SCREWS:
         # REV 5.9.2: agujero pasante (antes, capa de sacrificio de 0,3 mm sobre el avellanado, que se perforaba con el tornillo)
         b = b.cut(cyl(x, y, -1, M3["hole"], HB + 2)).cut(cyl(x, y, -1, M3["cb_d"], M3["cb_h"] + 1))
-    # imanes de sujeción: alojamiento desde dentro, 0,3 mm de piel abajo
-    for (x, y) in MAGS:
-        # REV 5.7.5: alojamiento para hasta 3 imanes apilados (3,1 mm de fondo); un recrecido Ø7,6 lo rodea hasta su boca
-        top = HMAG["skin"] + HMAG["n_base"] * HMAG["t"] + 0.1
-        rec = cyl(x, y, FLOOR - 0.1, HMAG["d"] + 0.15 + 2.4, top - FLOOR + 0.1)
-        b = b.union(rec.cut(box(0, BAT_Y, FLOOR - 1, BAT["l"] + 2 * G, BAT["w"] + 2 * G, 10)))   # REV 5.9: el recrecido no pisa la batería
-        b = b.cut(cyl(x, y, HMAG["skin"], HMAG["d"] + 0.15, TRAY_Z0 - HMAG["skin"]))   # boca libre hasta arriba (corta la esquina de la cuna)
+    # REV 5.11: sin imanes en las esquinas (decisión del usuario, 16/11/2026): la cápsula la centran el cerco y las
+    # aletas del cierre; así los pogo cargan los dientes (antiapertura) y hay menos campo cerca del BNO.
     gc, gw = GASKET["c"], GASKET["w_groove"]
     b = b.cut(rshell(gc - gw / 2, gc + gw / 2, GASKET["depth"] + 1, HB - GASKET["depth"]))
-    # REV 5.8: sin ranuras en los extremos (el clic del cierre va en la tapa); tacos de posición de distinto ancho
-    for sx, kw in KEYS.items():
-        b = b.union(box(sx * (L / 2 - 0.1 + (KEY["out"] + 0.1) / 2), 0, 0, KEY["out"] + 0.1, kw, KEY["z1"]))
+    # REV 5.11: aletas del cierre magnético (sustituyen a los tacos de posición de la REV 5.8)
+    for sx in (1, -1):
+        b = b.union(_fins(sx))
     return b
+
+
+def _lv_x():
+    """Cotas en X del cierre en el extremo +X: cara exterior del cerco, cara interior del balancín (= eje) y exterior."""
+    x_rim = L / 2 + CL + RW
+    xi = x_rim + LV["gap"]
+    return x_rim, xi, xi + LV["t"]
+
+
+def _teardrop(cx, cz, d, up, plane_y0, length):
+    """Agujero en gota con eje Y (se imprime en horizontal): círculo Ø d más una punta a 45° hacia `up`
+    (+1 = +Z global, −1 = −X global). Va de y = plane_y0 a y = plane_y0 − length."""
+    r = d / 2
+    k = r * 0.7071
+    if up > 0:
+        pts = [(cx, cz + r * 1.4142), (cx + k, cz + k), (cx, cz), (cx - k, cz + k)]
+    else:
+        pts = [(cx - r * 1.4142, cz), (cx - k, cz + k), (cx, cz), (cx - k, cz - k)]
+    c = cq.Workplane("XZ", origin=(0, plane_y0, 0)).center(cx, cz).circle(r).extrude(length)
+    return c.union(cq.Workplane("XZ", origin=(0, plane_y0, 0)).polyline(pts).close().extrude(length))
+
+
+def _fins(sx):
+    """REV 5.11: dos aletas en el extremo sx de la base, a cada lado del balancín. Llevan el pasador de acero
+    (a presión, agujero en gota hacia arriba) y pasan por ranuras del cerco: hacen de llave de posición."""
+    _, xi, _ = _lv_x()
+    px, pz, r = xi, LV["pz"], LV["boss_r"]
+    w = LV_W[sx]
+    out = None
+    y_in = w / 2 + FIN["clear"]
+    x0, bx0, t = L / 2 - 0.5, L / 2 + FIN["gap_lid"], FIN["t"]
+    for sy in (-1, 1):
+        y1 = y_in + t if sy > 0 else -y_in                       # cara de +Y de la aleta (se extruye hacia −Y)
+        yc = y1 - t / 2
+        prof = (cq.Workplane("XZ", origin=(0, y1, 0)).center(px, pz).circle(r).extrude(t)
+                .union(box((x0 + px + r) / 2, yc, 0, px + r - x0, t, pz))                 # de la cama al eje
+                .union(box((bx0 + px) / 2, yc, pz - 0.01, px - bx0, t, r + 0.01)))        # junto al aro y la tapa
+        prof = prof.cut(_teardrop(px, pz, FIN["hole"], 1, y1 + 1, t + 2))
+        out = prof if out is None else out.union(prof)
+    return out if sx > 0 else out.rotate((0, 0, 0), (0, 0, 1), 180)
 
 
 # ------------------------------------------------------------------ tapa
@@ -261,9 +313,7 @@ def pod_lid():
     usb_top = TRAY_TOP + C6["pcb"] + C6["usb_h"]
     lid = lid.union(box(C6_C[0], USB_FRONT - 4.0, usb_top + 0.05, 6.0, 4.0, CEIL - usb_top - 0.05 + 0.3))
     lid = lid.cut(box(-7, -4.5, CEIL - 0.4, 29, 7, 0.45))               # antena FPC opcional (interior)
-    # REV 5.8: nervios del clic de los cierres en los dos extremos
-    rib = _rib_profile()
-    lid = lid.union(rib).union(rib.rotate((0, 0, 0), (0, 0, 1), 180))
+    # REV 5.11: sin los nervios del clic de la REV 5.8 (el cierre ya no agarra la tapa)
     # cara superior lisa, sin panel ni letras: una sola pieza, se imprime boca abajo sin soportes
     return lid
 
@@ -354,9 +404,38 @@ def _mount_geom():
     return il, iw, ir, ol, ow, orr, xs0, xs1, pl, pw
 
 
-def _latch_ax():
-    ol = L + 2 * CL + 2 * RW
-    return ol / 2 + LATCH["barrel"] / 2 + 0.3               # eje de la bisagra (en +X): el barril libra el cerco 0,3
+def _roof_z(x):
+    """Techo de la ventana del cerco (extremo +X): 0,3 por encima del diente con la cápsula apoyada, inclinado
+    TOOTH['alpha'] (más alto hacia dentro: contrasalida)."""
+    import math
+    _, xi, _ = _lv_x()
+    return TOOTH["z_top"] + TOOTH["vclear"] + (xi - x) * math.tan(math.radians(TOOTH["alpha"]))
+
+
+def _tooth_ys(w):
+    return TOOTH["y0"], w / 2 - TOOTH["y_end"]
+
+
+def balancin(sx=1):
+    """REV 5.11: balancín del cierre magnético en el extremo sx, cerrado y con la cápsula apoyada.
+    Placa vertical de LV['t'] con la cara superior a ras de la tapa, ojo del eje (Ø2,4 en gota hacia −X: se imprime
+    con la cara exterior en la cama), dos dientes hacia dentro por debajo del eje y alojamiento del imán (desde fuera)."""
+    import math
+    x_rim, xi, xo = _lv_x()
+    w = LV_W[sx]
+    px, pz = xi, LV["pz"]
+    c = box((xi + xo) / 2, 0, LV["bot"], LV["t"], w, H - LV["bot"])
+    c = c.union(cq.Workplane("XZ", origin=(0, w / 2, 0)).center(px, pz).circle(LV["boss_r"]).extrude(w))
+    c = c.cut(_teardrop(px, pz, LV["hole"], -1, w / 2 + 1, w + 2))
+    e, ta = TOOTH["e"], math.tan(math.radians(TOOTH["alpha"]))
+    pts = [(xi + 0.01, TOOTH["zb"]), (xi - e, TOOTH["z_tip_b"]), (xi - e, TOOTH["z_top"] + e * ta), (xi + 0.01, TOOTH["z_top"])]
+    y0, y1 = _tooth_ys(w)
+    for (ya, yb) in ((y0, y1), (-y1, -y0)):
+        c = c.union(cq.Workplane("XZ", origin=(0, yb, 0)).polyline(pts).close().extrude(yb - ya))
+    xs = xi + LMAG["skin"]
+    c = c.cut(cq.Workplane("YZ", origin=(xs, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2 + LMAG["clear"] / 2)
+              .extrude(xo + 1 - xs))
+    return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
 
 
 def _rib_profile(grow=0.0):
@@ -372,40 +451,31 @@ def _rib_profile(grow=0.0):
     return r
 
 
-def latch(sx=1):
-    """Cierre de palanca (REV 5.8) en el extremo sx (+1 = +X), cerrado: muesca que abraza el nervio de la tapa, con el
-    labio debajo (clic) y la tapa del gancho por encima (sujeta la cápsula)."""
-    ax, az, w, t = _latch_ax(), LATCH["az"], LATCH["w"], LATCH["t"]
-    xo = ax + t / 2
-    cl = LATCH["clear"]
-    lip_x = L / 2 + RIB["out"] - LATCH["engage"]
-    z_low = RIB["z_front"] - cl - LATCH["lip_t"]
-    top = H + cl + LATCH["cap"]
-    c = (cq.Workplane("XZ", origin=(0, w / 2, 0)).center(ax, az).circle(LATCH["barrel"] / 2).extrude(w))
-    c = c.union(box(ax, 0, az, t, w, top - az))
-    c = c.union(box((lip_x + xo) / 2, 0, z_low, xo - lip_x, w, top - z_low))
-    # tirador para soltar: saliente de 3 mm hacia fuera en la parte de arriba, con los cantos redondeados
-    c = c.union(box(xo + LATCH["grip"] / 2 - 0.01, 0, top - LATCH["grip_h"], LATCH["grip"] + 0.02, w, LATCH["grip_h"])
-                .edges("|Y and >X").fillet(1.35))
-    c = c.cut(_rib_profile(grow=cl))                                   # muesca que abraza el nervio
-    # REV 5.8.1: curvas (estética y resistencia): esquina de arriba sobre la tapa, rincones del gancho y del tirador, labio
-    xi = ax - t / 2
-    NP = cq.selectors.NearestToPointSelector
-    for (pt, r) in (((lip_x, 0, top), 1.0), ((xi, 0, z_low), 1.0), ((xo, 0, top - LATCH["grip_h"]), 0.8),
-                    ((lip_x, 0, z_low), 0.4)):
-        c = c.edges(NP(pt)).fillet(r)
-    c = c.cut(cq.Workplane("XZ", origin=(0, w / 2 + 1, 0)).center(ax, az).circle(LATCH["hole"] / 2).extrude(w + 2))
-    return c if sx > 0 else c.rotate((0, 0, 0), (0, 0, 1), 180)
-
-
-def pin(sx=1):
-    """Pasador impreso (REV 5.8): Ø2,1 con un plano de 0,2 abajo (se imprime tumbado) y cabeza Ø3,8."""
-    ax, az = _latch_ax(), LATCH["az"]
-    span = LATCH["w"] + 2 * (LATCH["gap"] + LATCH["lug_w"])
-    p = cq.Workplane("XZ", origin=(0, span / 2, 0)).center(ax, az).circle(PIN["d"] / 2).extrude(span)
-    p = p.union(cq.Workplane("XZ", origin=(0, span / 2 + PIN["head_t"], 0)).center(ax, az).circle(PIN["head_d"] / 2).extrude(PIN["head_t"]))
-    p = p.cut(box(ax, 0, az - PIN["head_d"] / 2 - 1, 5, span + 4, 1 + PIN["head_d"] / 2 - PIN["d"] / 2 + PIN["flat"]))
-    return p if sx > 0 else p.rotate((0, 0, 0), (0, 0, 1), 180)
+def _mount_latch_cuts(sx):
+    """REV 5.11: vaciados del soporte para el cierre del extremo sx, dibujados en +X: ranuras de las aletas a través del
+    cerco, ventanas de los dientes (techo inclinado), alojamiento del imán (abierto por arriba, se pega) y rebaje de
+    la placa bajo el balancín."""
+    x_rim, xi, xo = _lv_x()
+    w = LV_W[sx]
+    xin = L / 2 + CL                                                   # cara interior del cerco
+    y_a, y_b = w / 2 + FIN["clear"] - FIN["clear"], w / 2 + FIN["clear"] + FIN["t"] + FIN["clear"]
+    cut = None
+    for (ya, yb) in ((y_a, y_b), (-y_b, -y_a)):                        # ranuras de las aletas
+        s_ = box((xin - 0.5 + x_rim + 0.5) / 2, (ya + yb) / 2, -0.05, x_rim - xin + 1.0, yb - ya, RH + 1)
+        cut = s_ if cut is None else cut.union(s_)
+    e, d = TOOTH["e"], TOOTH["deep"]
+    xa, xb = xi - e - d, x_rim + 0.8
+    pts = [(xb, -0.05), (xa, -0.05), (xa, _roof_z(xa)), (xb, _roof_z(xb))]
+    y0, y1 = _tooth_ys(w)
+    y0, y1 = y0 - TOOTH["wclear"], y1 + TOOTH["wclear"]
+    for (ya, yb) in ((y0, y1), (-y1, -y0)):                            # ventanas de los dientes
+        cut = cut.union(cq.Workplane("XZ", origin=(0, yb, 0)).polyline(pts).close().extrude(yb - ya))
+    mx1 = x_rim - LMAG["skin"]                                         # imán del cerco: cara a 0,3 de la cara exterior
+    mx0 = mx1 - LMAG["t"] - LMAG["clear"]
+    cut = cut.union(box((mx0 + mx1) / 2, 0, LMAG["z"] - LMAG["d"] / 2 - 0.05, mx1 - mx0, LMAG["d"] + 0.15, RH + 1))
+    cut = cut.union(box((xi - 0.1 + LPOCK["x_out"]) / 2, 0, -LPOCK["depth"], LPOCK["x_out"] - xi + 0.1,
+                        w + 0.4, LPOCK["depth"] + 0.01))                # rebaje de la placa bajo el balancín
+    return cut
 
 
 def mount():
@@ -418,25 +488,11 @@ def mount():
     # cerco
     rim = rrect(ol, ow, orr, RH).cut(rrect(il, iw, ir, RH + 2, z0=-1))
     rim = rim.faces(">Z").edges().fillet(0.8)
-    for sx, kw in KEYS.items():                                       # REV 5.8: muescas de las llaves de posición
-        rim = rim.cut(box(sx * (L / 2 + 2.0), 0, -1, 6.0, kw + 2 * KEY["clear"], RH + 2))
     p = p.union(rim)
-    # REV 5.8: bisagras de los cierres en ±X (dos orejas por cierre, taladro Ø2,3 para el pasador impreso)
-    ax, az = _latch_ax(), LATCH["az"]
-    r_l = LATCH["barrel"] / 2 + 0.2
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            yc = sy * (LATCH["w"] / 2 + LATCH["gap"] + LATCH["lug_w"] / 2)
-            lug = box(ax - 0.25, yc, -0.1, 2 * r_l + 0.5, LATCH["lug_w"], az + 0.1)   # la mitad baja del ojo queda apoyada
-            lug = lug.union(cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2, 0)).center(ax, az).circle(r_l).extrude(LATCH["lug_w"]))
-            # REV 5.8.1: agujero en «D», con la misma forma que el pasador (plano abajo): el pasador no gira en la oreja
-            dh = PIN["d"] + 0.15
-            zflat = az - PIN["d"] / 2 + PIN["flat"] - 0.075
-            hole = (cq.Workplane("XZ", origin=(0, yc + LATCH["lug_w"] / 2 + 1, 0)).center(ax, az)
-                    .circle(dh / 2).extrude(LATCH["lug_w"] + 2)
-                    .intersect(box(ax, yc, zflat, dh + 1, LATCH["lug_w"] + 4, dh + 1)))
-            lug = lug.cut(hole)
-            p = p.union(lug if sx > 0 else lug.rotate((0, 0, 0), (0, 0, 1), 180))
+    # REV 5.11: cierre magnético en cada extremo (las piezas se definen en +X y se giran 180° para −X)
+    for sx in (1, -1):
+        f = _mount_latch_cuts(sx)
+        p = p.cut(f if sx > 0 else f.rotate((0, 0, 0), (0, 0, 1), 180))
     # REV 5.9: macho pogo en la placa (sustituye a los imanes del reed): cara a ras de la placa, cuerpo hacia abajo,
     # orejas en un rebaje por debajo con 2 tornillos M1,6 (piloto Ø1,3) y canal para el cable.
     cl = POGO["clear"]
@@ -453,8 +509,7 @@ def mount():
     pw = _mount_geom()[9]
     p = p.cut(box(0, (-POGO["y"] + pw / 2 + 2) / 2, zb - 1, 4.0, pw / 2 + 2 + POGO["y"], 3.0))
     # sin canal de cable: en el soporte el macho solo lleva un puente GND–DET soldado por detrás (interruptor)
-    for (x, y) in MAGS:                                              # imanes de sujeción Ø5 × 1 (enfrentados a los de la cápsula)
-        p = p.cut(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.05, HMAG["d"] + 0.15, 3))   # REV 5.7.6: 2 imanes apilados
+    # REV 5.11: sin imanes en las esquinas del soporte (decisión del usuario, 16/11/2026)
     return p
 
 
@@ -503,12 +558,18 @@ def components():
     for (hx, hy) in BNO_HOLES:
         bno = bno.cut(cyl(hx, hy, bz - 1, 3.0, 4))
     bno = bno.union(box(bx + 0.5, by + 2.0, bz + BNO["t"], 5.2, 5.2, 1.0))
-    mags = cyl(*MAGS[0], HMAG["skin"] + 0.02, HMAG["d"], HMAG["t"])
-    for (x, y) in MAGS[1:]:
-        mags = mags.union(cyl(x, y, HMAG["skin"] + 0.02, HMAG["d"], HMAG["t"]))
-    mmags = cyl(*MAGS[0], -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"])
-    for (x, y) in MAGS[1:]:
-        mmags = mmags.union(cyl(x, y, -HMAG["n_mount"] * HMAG["t"] - 0.02, HMAG["d"], HMAG["n_mount"] * HMAG["t"]))
+    # REV 5.11: imanes Ø4 × 2 del cierre (balancín y cerco) y pasadores de acero Ø2 (sin imanes en las esquinas)
+    x_rim, xi, xo = _lv_x()
+    lm = cq.Workplane("YZ", origin=(xi + LMAG["skin"] + 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
+    rm = cq.Workplane("YZ", origin=(x_rim - LMAG["skin"] - LMAG["t"] - 0.02, 0, 0)).center(0, LMAG["z"]).circle(LMAG["d"] / 2).extrude(LMAG["t"])
+    lmags = lm.union(lm.rotate((0, 0, 0), (0, 0, 1), 180))
+    rmags = rm.union(rm.rotate((0, 0, 0), (0, 0, 1), 180))
+    pins = None
+    for sx in (1, -1):
+        pl_ = PIN_LEN[sx]
+        p_ = cq.Workplane("XZ", origin=(0, pl_ / 2, 0)).center(xi, LV["pz"]).circle(1.0).extrude(pl_)
+        p_ = p_ if sx > 0 else p_.rotate((0, 0, 0), (0, 0, 1), 180)
+        pins = p_ if pins is None else pins.union(p_)
     return {
         "bateria_LP403048": box(0, BAT_Y, FLOOR + 0.05, BAT["l"], BAT["w"], BAT["t"]),
         "ESP32_C6": c6,
@@ -519,8 +580,9 @@ def components():
         "pogo_pulso_placa": _pogo_step()[0].mirror("XZ"),
         "pogo_pulso_pines": _pogo_step()[1].mirror("XZ"),
         "modulo_pulso_MAX30003": box(ECG["center"][0], ECG["center"][1], TRAY_TOP + 0.02, ECG["lx"], ECG["wy"], ECG["h"]),
-        "imanes_capsula_5x1": mags,
-        "imanes_soporte_5x1": mmags,
+        "imanes_cierre_balancin_4x2": lmags,
+        "imanes_cierre_cerco_4x2": rmags,
+        "pasadores_acero_2mm": pins,
     }
 
 
@@ -604,11 +666,9 @@ def main():
         P + "tapa": pod_lid(),
         P + "bandeja": tray(),
         P + "junta_TPU": gasket(free=False),
-        P + "soporte": mount(),                   # REV 5.8: sin labio ni pestaña; con las bisagras de los cierres
-        P + "cierre_x2": latch(1),                # REV 5.8: imprimir 2 (el de −X es el mismo girado 180°)
-        P + "cierre_-X": latch(-1),
-        P + "pasador_x2": pin(1),                 # REV 5.8: imprimir 2
-        P + "pasador_-X": pin(-1),
+        P + "soporte": mount(),                   # REV 5.11: ranuras, ventanas e imanes del cierre magnético
+        P + "balancin_Xpos": balancin(1),         # REV 5.11: imprimir 1 (14 mm de ancho)
+        P + "balancin_Xneg": balancin(-1),        # REV 5.11: imprimir 1 (12 mm de ancho)
     }
     comps = components()
     report = {"piezas": {}, "interferencias": {}, "medidas": {}}
@@ -619,8 +679,9 @@ def main():
             os.makedirs(f"{OUT}/montaje", exist_ok=True)
             cq.exporters.export(s, f"{OUT}/montaje/{n}.stl", tolerance=0.05)
             continue
-        if n.endswith("cierre_x2"):
-            sp = s.rotate((0, 0, 0), (1, 0, 0), 90)       # de canto: el perfil en la cama, el agujero vertical
+        if "balancin_X" in n:
+            # cara exterior en la cama: +X → −Z en el de +X, −X → −Z en el de −X (agujero del eje en gota hacia arriba)
+            sp = s.rotate((0, 0, 0), (0, 1, 0), 90 if n.endswith("Xpos") else -90)
         else:
             sp = s.rotate((0, 0, 0), (1, 0, 0), 180) if (n.endswith("tapa") or n.endswith("tirador_rojo")) else s
         sp = sp.translate((0, 0, -sp.val().BoundingBox().zmin))
@@ -645,7 +706,9 @@ def main():
                 v = c.intersect(p).val().Volume()
             except Exception:
                 v = 0.0
-            if v > 0.01 and not (cn.startswith("bateria") and pn.endswith("base") and v < 4):
+            # el pasador de acero entra a presión en las aletas de la base (Ø2 en Ø1,95): interferencia buscada
+            if v > 0.01 and not (cn.startswith("bateria") and pn.endswith("base") and v < 4) \
+                    and not (cn.startswith("pasadores") and pn.endswith("base") and v < 3):
                 report["interferencias"][f"{cn} × {pn}"] = round(v, 3)
     names = list(comps)
     for i in range(len(names)):
@@ -668,36 +731,63 @@ def main():
                 v, where = 0.0, None
             if v > 0.01:
                 report["interferencias"][f"{names[i]} × {names[j]}"] = [round(v, 3), where]
-    # REV 5.8: barrido de apertura del cierre (+X): no debe tocar la base ni el soporte en ningún ángulo
-    ax = _latch_ax()
-    fixed = parts[P + "base"].union(parts[P + "soporte"]).union(parts[P + "tapa"]).union(parts[P + "aro_rojo"])
+    # REV 5.11: comprobaciones del cierre magnético (extremo +X; el de −X es igual con otro ancho)
+    import math
+    x_rim, xi, xo = _lv_x()
+    ax_p = (xi, 0, LV["pz"])
+    ax_q = (xi, 1, LV["pz"])
+    lv = parts[P + "balancin_Xpos"]
+    sop = parts[P + "soporte"]
+    caps = parts[P + "base"].union(parts[P + "aro_rojo"]).union(parts[P + "tapa"])
+    rim_zone = box((L / 2 + CL + x_rim) / 2, 0, 0, x_rim - (L / 2 + CL), 40, RH)   # el cerco en el extremo +X
+
+    def vol(a_, b_):
+        try:
+            return round(a_.intersect(b_).val().Volume(), 3)
+        except Exception:
+            return 0.0
+    # 1) apertura con la cápsula APOYADA (empujada 0,3 mm): ángulo negativo = parte de arriba hacia dentro
     sweep = {}
-    for ang in (0, 12, 15, 20, 30, 45, 60):   # 1–11°: zona del clic (flexa a propósito); a ~75° el tirador apoya en la placa (tope)
-        lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
-        try:
-            v = lt.intersect(fixed).val().Volume()
-        except Exception:
-            v = 0.0
-        sweep[ang] = round(v, 3)
-        if v > 0.01:
-            report["interferencias"][f"cierre abierto {ang}° × cápsula/soporte"] = round(v, 3)
-    # interferencia máxima en la zona del clic (informativa): cuánto tiene que flexar el gancho
-    clic = {}
-    for ang in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11):
-        lt = latch(1).rotate((ax, 0, LATCH["az"]), (ax, 1, LATCH["az"]), ang)
-        try:
-            clic[ang] = round(lt.intersect(fixed).val().Volume(), 2)
-        except Exception:
-            clic[ang] = 0.0
-    report["clic_interferencia_grados_mm3"] = clic
-    report["barrido_cierre_grados_mm3"] = sweep
+    for ang in (0, -2, -4, -6, -8, -10, -12, -14, -16, -18, -20, -25, -30):
+        r_ = lv.rotate(ax_p, ax_q, ang)
+        sweep[ang] = {"soporte": vol(r_, sop), "capsula": vol(r_, caps), "diente_en_el_cerco": vol(r_, rim_zone)}
+    report["apertura_capsula_apoyada_mm3"] = sweep
+    free = [a_ for a_ in sorted(sweep, reverse=True) if sweep[a_]["diente_en_el_cerco"] < 0.01 and sweep[a_]["soporte"] < 0.01]
+    report["angulo_suelto_grados"] = free[0] if free else None
+    stop = [a_ for a_ in sorted(sweep, reverse=True) if sweep[a_]["capsula"] > 0.01]
+    report["angulo_tope_tapa_grados"] = stop[0] if stop else None
+    for a_, v in sweep.items():
+        if v["soporte"] > 0.01:
+            report["interferencias"][f"balancín abierto {a_}° (cápsula apoyada) × soporte"] = v["soporte"]
+    # 2) ANTIAPERTURA: cápsula levantada 0,3 por los pogo (dientes contra el techo): apretar NO debe poder abrir
+    lift = {}
+    for ang in (-1, -2, -4, -6):
+        r_ = lv.translate((0, 0, TOOTH["vclear"])).rotate((xi, 0, LV["pz"] + TOOTH["vclear"]),
+                                                          (xi, 1, LV["pz"] + TOOTH["vclear"]), ang)
+        lift[ang] = vol(r_, sop)
+    report["antiapertura_cargado_mm3"] = lift
+    report["antiapertura_ok"] = all(v > 0.01 for v in lift.values())
+    # 3) palanca, recorrido del pulsador y centro de masas del balancín
+    import math as _m
+    ang_free = report["angulo_suelto_grados"] or 0
+    lv_c = lv.val().Center()
+    report["balancin"] = {
+        "eje_xz": [round(xi, 2), LV["pz"]],
+        "brazo_pulsador_mm": round(H - LV["pz"], 2), "brazo_iman_mm": round(LV["pz"] - LMAG["z"], 2),
+        "recorrido_pulsador_para_soltar_mm": round((H - LV["pz"]) * _m.sin(_m.radians(-ang_free)), 2),
+        "centro_de_masas_respecto_al_eje_mm": [round(lv_c.x - xi, 2), round(lv_c.z - LV["pz"], 2)],
+        "masa_g_PETG": round(lv.val().Volume() * 1.27e-3, 2),
+        "contrasalida_grados": TOOTH["alpha"],
+        "angulo_neutro_grados": round(_m.degrees(_m.atan2(xi - (xi - TOOTH["e"]), LV["pz"] - TOOTH["z_top"])), 1),
+        "pasadores": {"+X": f"ISO 2338 Ø2 × {PIN_LEN[1]:.0f}", "-X": f"ISO 2338 Ø2 × {PIN_LEN[-1]:.0f}"},
+        "imanes": "4 × Ø4 × 2 N52 (2 en los balancines, 2 en el cerco), en atracción"}
     g = _mount_geom()
     report["medidas"] = {"soporte_mm": [round(g[8], 2), round(g[9], 2), MT + RH], "capsula_mm": [L, W, H],
-                         "aberturas_al_exterior": 0, "tornillos_M3": len(SCREWS), "imanes_5x1": 2 * len(MAGS), "junta_compresion_pct": round(100 * (GASKET["h_free"] - GASKET["depth"]) / GASKET["h_free"]),
+                         "aberturas_al_exterior": 0, "tornillos_M3": len(SCREWS), "imanes_esquinas": 0, "junta_compresion_pct": round(100 * (GASKET["h_free"] - GASKET["depth"]) / GASKET["h_free"]),
                          "bno_taladros": BNO_HOLES, "bno_pines_y": dict(zip(BNO_PINS, [round(v, 2) for v in BNO_PINS_Y])),
                          "c6_pads_D0_D6_y": [round(v, 2) for v in C6_PADS_Y], "c6_centro": C6_C, "led": LED}
     asm = cq.Assembly(name="AVO_GIRTH_R5")
-    colors = {"aro": (0.93, 0.07, 0.16), "panel": (0.85, 0.06, 0.14), "tirador": (0.93, 0.07, 0.16),
+    colors = {"balancin": (0.93, 0.07, 0.16), "aro": (0.93, 0.07, 0.16), "panel": (0.85, 0.06, 0.14), "tirador": (0.93, 0.07, 0.16),
               "base": (0.09, 0.09, 0.11), "tapa": (0.09, 0.09, 0.11), "bandeja": (0.18, 0.19, 0.22),
               "junta": (0.2, 0.2, 0.22), "soporte": (0.12, 0.13, 0.15)}
     for n, s in parts.items():
