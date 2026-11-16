@@ -1,17 +1,17 @@
 # AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `8efaa7c3acd649d1ee041c3d6a1463457712c1dd` · ejecución de CI: 43782134084
+- Commit: `1d0dbe814e4223e42eed8b02fb751a3882990266` · ejecución de CI: 43785237560
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu señal + relleno GND), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
 - Componentes: 157 en total, 128 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
-- Pistas: 1404 · vías: 260 · ruteado INCOMPLETO (2 conexiones)
+- Pistas: 1391 · vías: 254 · ruteado INCOMPLETO (5 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 2 |
+| DRC: conexiones incompletas | **FALLA** | 5 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,8 +19,11 @@
 
 
 ### Conexiones incompletas
-- Pad 9 [USB_SEL] of U4 on F.Cu ↔ Track [USB_SEL] on In2.Cu, length 0.1114 mm
-- Track [XTAL_O] on F.Cu, length 0.9517 mm ↔ Pad 32 [XTAL_O] of U6 on F.Cu
+- Pad 23 [+3V3] of U6 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.6760 mm
+- Pad 1 [CB_DM] of R55 on F.Cu ↔ Pad 3 [CB_DM] of U6 on F.Cu
+- PTH pad 1 [CB_DM_P] of P7 ↔ Track [CB_DM_P] on F.Cu, length 1.0041 mm
+- Pad 19 [HUB_OCS_N] of U6 on F.Cu ↔ Pad 21 [HUB_OCS_N] of U6 on F.Cu
+- Pad 19 [HUB_OCS_N] of U6 on F.Cu ↔ Track [HUB_OCS_N] on F.Cu, length 0.3622 mm
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_edge_clearance: 8
