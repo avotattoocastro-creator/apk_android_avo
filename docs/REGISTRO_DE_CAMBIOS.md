@@ -25,6 +25,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 ---
 
 
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — licencias hijas sin caducidad propia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las licencias de entrenador, jockeys y caballos no tienen
+fecha de fin; dependen solo de la de la cuadra. Con la cuadra caducada las apps permiten ver en solo lectura todo lo
+generado durante la licencia activa; nada nuevo. Resuelta la decisión pendiente de §11.
+**Por qué:** aclaración del usuario (16/11/2026 21:39).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1 — jerarquía de licencias (la cuadra manda)
 **Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
 **Qué cambia:** §14 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: con la licencia de cuadra caducada no funcionan las licencias
