@@ -1,11 +1,11 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 11055.7,
+   "volumen_mm3": 11100.1,
    "valido": true,
    "solidos": 1,
    "caja": [
-    81.4,
+    82.2,
     53.02,
     10.11
    ]
@@ -51,17 +51,17 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 53614.4,
+   "volumen_mm3": 55183.2,
    "valido": true,
    "solidos": 1,
    "caja": [
-    105.72,
-    63.72,
+    106.52,
+    64.52,
     12.96
    ]
   },
   "AVO_GIRTH_R5_balancin_Xpos": {
-   "volumen_mm3": 572.7,
+   "volumen_mm3": 574.1,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -71,7 +71,7 @@
    ]
   },
   "AVO_GIRTH_R5_balancin_Xneg": {
-   "volumen_mm3": 485.4,
+   "volumen_mm3": 486.7,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -84,8 +84,8 @@
  "interferencias": {},
  "medidas": {
   "soporte_mm": [
-   105.7,
-   63.7,
+   106.5,
+   64.5,
    12.95
   ],
   "capsula_mm": [
@@ -215,7 +215,7 @@
  "antiapertura_ok": true,
  "balancin": {
   "eje_xz": [
-   38.1,
+   38.5,
    7.5
   ],
   "brazo_pulsador_mm": 6.3,
@@ -223,11 +223,12 @@
   "recorrido_pulsador_para_soltar_mm": 0.88,
   "centro_de_masas_respecto_al_eje_mm": [
    0.81,
-   -0.5
+   -0.51
   ],
   "masa_g_PETG": 0.73,
   "contrasalida_grados": 17.0,
   "angulo_neutro_grados": 9.6,
+  "separacion_entre_imanes_mm": 1.1,
   "pasadores": {
    "+X": "ISO 2338 Ø2 × 20",
    "-X": "ISO 2338 Ø2 × 18"
