@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 10731.7,
+   "volumen_mm3": 10622.1,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 55087.5,
+   "volumen_mm3": 55076.4,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -61,7 +61,7 @@
    ]
   },
   "AVO_GIRTH_R5_balancin_Xpos": {
-   "volumen_mm3": 724.7,
+   "volumen_mm3": 694.6,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -71,7 +71,7 @@
    ]
   },
   "AVO_GIRTH_R5_balancin_Xneg": {
-   "volumen_mm3": 606.6,
+   "volumen_mm3": 576.9,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -137,26 +137,42 @@
    -8.5
   ]
  },
+ "tapas_imanes_mm": {
+  "disco_balancin_abajo": [
+   4.6,
+   0.5
+  ],
+  "placa_balancin_arriba": [
+   10.6,
+   3.6,
+   0.5
+  ],
+  "tapon_cerco": [
+   2.05,
+   4.1,
+   0.85
+  ]
+ },
  "apertura_capsula_apoyada_mm3": {
   "0": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 4.927
+   "diente_en_el_cerco": 4.004
   },
   "-2": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 3.258
+   "diente_en_el_cerco": 2.478
   },
   "-4": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 1.825
+   "diente_en_el_cerco": 1.266
   },
   "-6": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 0.601
+   "diente_en_el_cerco": 0.342
   },
   "-8": {
    "soporte": 0.0,
@@ -185,34 +201,33 @@
   },
   "-18": {
    "soporte": 0.0,
-   "capsula": 0.843,
+   "capsula": 0.199,
    "diente_en_el_cerco": 0.0
   },
   "-20": {
    "soporte": 0.0,
-   "capsula": 4.174,
+   "capsula": 1.163,
    "diente_en_el_cerco": 0.0
   },
   "-25": {
    "soporte": 0.0,
-   "capsula": 11.308,
+   "capsula": 5.785,
    "diente_en_el_cerco": 0.0
   },
   "-30": {
    "soporte": 0.0,
-   "capsula": 14.321,
+   "capsula": 11.674,
    "diente_en_el_cerco": 0.0
   }
  },
  "angulo_suelto_grados": -8,
  "angulo_tope_tapa_grados": -18,
- "antiapertura_cargado_mm3": {
-  "-1": 0.085,
-  "-2": 0.141,
-  "-4": 0.177,
-  "-6": 0.114
+ "contacto_cargado_al_apretar_mm3": {
+  "-1": 0.0,
+  "-2": 0.0,
+  "-4": 0.0,
+  "-6": 0.0
  },
- "antiapertura_ok": true,
  "balancin": {
   "eje_xz": [
    38.5,
@@ -222,21 +237,19 @@
   "brazo_iman_mm": 6.0,
   "recorrido_pulsador_para_soltar_mm": 0.88,
   "centro_de_masas_respecto_al_eje_mm": [
-   0.9,
-   -0.51
+   0.95,
+   -0.57
   ],
-  "masa_g_PETG": 0.92,
-  "contrasalida_grados": 17.0,
+  "masa_g_PETG": 0.88,
+  "contrasalida_grados": 0.0,
   "angulo_neutro_grados": 9.6,
-  "separacion_imanes_atraccion_mm": 1.15,
-  "separacion_imanes_repulsion_mm": 2.4,
-  "pausas_de_impresion_Z_mm": {
-   "balancin (cara exterior en la cama)": [
-    2.55,
-    4.55
-   ],
-   "tapa (boca abajo)": 4.55,
-   "soporte": 12.05
+  "separacion_imanes_atraccion_mm": 1.1,
+  "separacion_imanes_repulsion_mm": 3.15,
+  "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 2 discos, 2 placas, 2 tapones)",
+  "diente": "recto (sin contrasalida); bloqueo con carga por rozamiento + imanes",
+  "rozamiento_minimo_para_bloquear": {
+   "contacto_en_la_punta": 0.169,
+   "contacto_repartido": 0.106
   },
   "pasadores": {
    "+X": "ISO 2338 Ø2 × 20",
