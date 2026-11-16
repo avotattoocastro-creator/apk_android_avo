@@ -299,8 +299,9 @@ propia**. Todas van asociadas a la cuadra y a su caducidad, y no funcionan más 
 - **El casco solo graba con un caballo activado.** Antes de grabar, la app elige uno de los caballos activados y el casco lo
   comprueba; si no está, rechaza la sesión. El `caballoId` va en la cabecera del `.avoe` (dentro de la parte autenticada) y la
   app no deja reasignar (AVO-ASSIGN-1) una sesión a un caballo sin plaza en la fecha de la sesión.
-- **Al renovar:** llega la licencia nueva (enlace `avo://` o QR) y la app vuelve a pedir la selección. Se pueden mantener los
-  mismos caballos o elegir otros.
+- **Al renovar** (confirmado por el usuario el 16/11/2026 21:49): llega la licencia nueva (enlace `avo://` o QR) y la app
+  muestra la selección con **los caballos que ya tenían plaza marcados de inicio**. El cliente confirma para seguir con
+  ellos o cambia alguno por otro. Si no cambia nada, sus caballos siguen activados sin interrupción.
 - **Caballo que deja la plaza:** desde la activación del nuevo queda **bloqueado para el casco** (no se puede grabar con
   él). Igual que en §14, **sus datos de cuando tenía plaza se pueden ver** en las apps.
 - **Ampliar plazas a mitad de periodo:** AVO emite una licencia con más plazas y nuevo número; la app pide elegir solo los
