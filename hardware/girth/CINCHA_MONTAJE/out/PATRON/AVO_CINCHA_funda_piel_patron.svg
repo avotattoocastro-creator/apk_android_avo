@@ -7,18 +7,18 @@
 <polyline points="-400.000,-136.900 400.000,-136.900" style="stroke:#06c;stroke-width:0.3;fill:none;stroke-dasharray:6,3"/>
 <polyline points="-400.000,-256.900 400.000,-256.900" style="stroke:#06c;stroke-width:0.3;fill:none;stroke-dasharray:6,3"/>
 <polyline points="-400.000,-279.800 400.000,-279.800" style="stroke:#06c;stroke-width:0.3;fill:none;stroke-dasharray:6,3"/>
-<circle cx="-40.290" cy="-92.810" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
-<circle cx="40.310" cy="-92.810" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
-<circle cx="-40.290" cy="-19.190" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
-<circle cx="40.310" cy="-19.190" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
+<circle cx="-45.300" cy="-93.810" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
+<circle cx="45.300" cy="-93.810" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
+<circle cx="-45.300" cy="-18.190" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
+<circle cx="45.300" cy="-18.190" r="2.500" style="stroke:#000;stroke-width:0.3;fill:none"/>
 <polygon points="-20.000,-69.540 -6.000,-69.540 -6.000,-76.540 -20.000,-76.540" style="stroke:#000;stroke-width:0.35;fill:none"/>
 <text x="-4.00" y="-73.04" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">ranura cable ECG 14×7</text>
-<polygon points="-44.790,-14.690 44.810,-14.690 44.810,-97.310 -44.790,-97.310" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
-<text x="-44.79" y="-100.31" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">contorno del ala del soporte (REV 6.2, sin bolsillo)</text>
-<polygon points="-395.000,-3.000 -57.810,-3.000 -57.810,-28.000 -395.000,-28.000" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
-<text x="-256.40" y="-15.00" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">velcro rizo 25 mm (coser)</text>
-<polygon points="57.810,-3.000 395.000,-3.000 395.000,-28.000 57.810,-28.000" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
-<text x="196.41" y="-15.00" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">velcro rizo 25 mm (coser)</text>
+<polygon points="-49.800,-13.690 49.800,-13.690 49.800,-98.310 -49.800,-98.310" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
+<text x="-49.80" y="-101.31" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">contorno del ala del soporte (REV 6.2, sin bolsillo)</text>
+<polygon points="-395.000,-3.000 -62.800,-3.000 -62.800,-28.000 -395.000,-28.000" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
+<text x="-258.90" y="-15.00" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">velcro rizo 25 mm (coser)</text>
+<polygon points="62.800,-3.000 395.000,-3.000 395.000,-28.000 62.800,-28.000" style="stroke:#080;stroke-width:0.25;fill:none;stroke-dasharray:2,2"/>
+<text x="198.90" y="-15.00" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">velcro rizo 25 mm (coser)</text>
 <polygon points="-20.000,-130.900 20.000,-130.900 20.000,-134.900 -20.000,-134.900" style="stroke:#000;stroke-width:0.35;fill:none"/>
 <text x="22.00" y="-130.90" font-family="DejaVu Sans, Arial" font-size="4.0" fill="#333">paso anilla D</text>
 <polygon points="152.500,-155.900 227.500,-155.900 227.500,-205.900 152.500,-205.900" style="stroke:#000;stroke-width:0.35;fill:none"/>
