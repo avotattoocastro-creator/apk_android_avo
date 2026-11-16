@@ -24,6 +24,21 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — iPad — «Análisis visual» de la carrera a pantalla completa
+**Autor:** Claude · **Rama:** `feature/ipad-carrera-analisis-profundo`
+**Qué cambia:** en la ficha de la carrera hay un botón nuevo, **«Análisis visual»** (icono de gráficas, a la izquierda de «Informe PDF»). Abre una ventana a pantalla completa.
+- **Panel izquierdo:** se elige qué se muestra:
+  - cualquier caballo de la carrera, con atajos «Mío + ganador», «Top 3», «Todos» y «Ninguno»;
+  - los entrenamientos con parciales de los 60 días anteriores, en línea discontinua y alineados desde la meta;
+  - las otras carreras del mismo caballo, en línea punteada y alineadas por la distancia a la meta.
+- **8 medidas:** velocidad, % de su mejor tramo, tiempo del tramo, posición, distancia al primero, diferencia con mi caballo, zancada y foulées.
+- **Gráfica grande:** al tocar o arrastrar se elige un tramo y aparece un ranking de ese tramo de mejor a peor. Debajo, una tabla con todos los tramos en la que el mejor de cada tramo sale en verde y el peor en rojo.
+- **Por defecto** se muestran mi caballo, el ganador y el entrenamiento elegido en la ficha.
+
+**Por qué:** boceto del entrenador sobre la build 165 (16/11/2026 11:25): «ventana a pantalla completa donde hacer un análisis visual profundo de la carrera, poder seleccionar qué caballos mostrar, comparar con mi carrera y mis entrenos».
+**Archivos:** `Views/RaceDeepAnalysisView.swift` (nuevo), `Views/RaceDetailView.swift`.
+**Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+
 ## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
 **Autor:** Claude · **Rama:** `feature/logo-ajuste`
 **Qué cambia:** en `report_text.jpg` (iPad y Windows):
