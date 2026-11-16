@@ -294,8 +294,16 @@ propia**. Todas van asociadas a la cuadra y a su caducidad, y no funcionan más 
      con el certificado del casco y bloquean esos caballos igual.
   Si dos móviles de la cuadra eligen caballos distintos, vale la primera elección que llega al casco; la otra app recibe el
   comprobante y se corrige sola.
-- **Varios cascos en la cuadra:** el comprobante del primer casco se instala en los demás desde la app; cada casco lo
-  verifica con el certificado del que lo firmó y adopta la misma elección.
+- **Varios cascos en la cuadra** (confirmado por el usuario el 16/11/2026 21:52): **las plazas son de la cuadra, no de cada
+  casco.** Con 6 caballos y 2 cascos contratados, **cualquiera de los dos cascos puede grabar con cualquiera de los 6**.
+  - La licencia de cuadra lleva `plazas: N` y la lista de cascos alquilados (nº de serie de su ATECC608B). Cada licencia de
+    casco apunta al nº de licencia de su cuadra.
+  - La elección se hace una vez para toda la cuadra. El primer casco que la recibe la guarda y firma el comprobante; la app
+    lo instala en los demás cascos de la lista al conectarse, y cada uno lo verifica con el certificado del casco que lo firmó.
+  - Un casco que aún no tiene el comprobante y recibe una elección distinta para el mismo nº de licencia: vale la del
+    comprobante **más antiguo** (fecha GNSS firmada). Los cascos y las apps adoptan ese y descartan el otro, así que todos
+    acaban con la misma lista. Las sesiones ya grabadas no se pierden.
+  - Un casco nuevo que se añade a mitad de periodo recibe el comprobante vigente y queda con los mismos caballos.
 - **El casco solo graba con un caballo activado.** Antes de grabar, la app elige uno de los caballos activados y el casco lo
   comprueba; si no está, rechaza la sesión. El `caballoId` va en la cabecera del `.avoe` (dentro de la parte autenticada) y la
   app no deja reasignar (AVO-ASSIGN-1) una sesión a un caballo sin plaza en la fecha de la sesión.

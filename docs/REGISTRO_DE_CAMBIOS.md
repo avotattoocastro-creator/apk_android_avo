@@ -29,6 +29,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — plazas de caballo compartidas por todos los cascos de la cuadra
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: las plazas son de la cuadra; cualquier casco alquilado por la
+cuadra graba con cualquiera de sus caballos activados; el comprobante de activación se reparte entre cascos y, si hay dos,
+gana el más antiguo.
+**Por qué:** indicación del usuario (16/11/2026 21:52).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1 — renovación con los caballos anteriores marcados
 **Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
 **Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: al renovar, la selección aparece con los caballos que ya
