@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
+**Autor:** Claude · **Rama:** `feature/logo-ajuste`
+**Qué cambia:** en `report_text.jpg` (iPad y Windows):
+- «PERFORMANCE» baja 7 px respecto a la línea roja de «AVO»;
+- se borra la cola roja que quedaba bajo «PE», un resto de la línea roja de «AVO» que se había movido con la banda de «HORSE EDITION»;
+- se añade un margen inferior a «HORSE EDITION».
+
+El tamaño queda en 670 × 293 px.
+**Por qué:** boceto del entrenador sobre un PDF de tramo (16/11/2026 01:05): «un pelín más bajo».
+**Estado:** imagen cambiada · NO VERIFICADO en los PDF generados.
+
 ## 2026-11-16 — Imagen de marca (`avo_brand_hero`): «PERFORMANCE» arriba y «HORSE EDITION» debajo
 **Autor:** Claude · **Rama:** `feature/hero-performance-arriba`
 **Qué cambia:** igual que en el logotipo de los informes, en la imagen grande de marca se intercambian las bandas «HORSE EDITION» y «PERFORMANCE». Se hace solo en la zona del texto y con los bordes fundidos, para no cortar las rayas rojas del fondo. Misma resolución (941 × 869). Cambia en todas las apps que usan la imagen:
