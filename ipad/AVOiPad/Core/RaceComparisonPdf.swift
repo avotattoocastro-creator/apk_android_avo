@@ -514,9 +514,9 @@ private final class RaceComparisonPdfWriter {
                      RaceFormat.kmh(x.raceKmh), RaceFormat.percent(x.pctOfRace)]
                 }
                 table(["Tramo", "Entreno", "Entreno km/h", "Carrera", "Carrera km/h", "% carrera"], [1.2, 1, 1.1, 1, 1.1, 0.9], rows,
-                      arrowCol: 5, arrows: cmp.rows.map { $0.pctOfRace.map { $0 >= 1.0 } })
-                paragraph("Flecha verde: en ese tramo el entrenamiento fue igual o más rápido que la carrera (≥ 100 %). "
-                          + "Flecha roja: más lento que en la carrera.", size: 7.5, color: ReportBuilder.dim)
+                      arrowCol: 5, arrows: cmp.rows.map { $0.pctOfRace.map { $0 < 1.0 } })
+                paragraph("Flecha verde hacia arriba: en ese tramo la carrera fue más rápida que el entrenamiento (% carrera < 100 %). "
+                          + "Flecha roja hacia abajo: la carrera fue igual o más lenta.", size: 7.5, color: ReportBuilder.dim)
             }
             if cmp.trainingPartialEndSkipped {
                 paragraph("El último parcial del entrenamiento es más corto que \(cmp.trainingIsFurlong ? "un furlong" : "200 m") y no se compara.",
