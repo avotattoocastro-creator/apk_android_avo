@@ -21,7 +21,7 @@
       )
     )
     (layer In2.Cu
-      (type signal)
+      (type power)
       (property
         (index 2)
       )
@@ -83,6 +83,38 @@
             164741 -136220  164801 -136075  164853 -135927  164898 -135776
             164934 -135624  164963 -135469  164984 -135314  164996 -135157
             165000 -135000))
+    (plane +3V3 (polygon In2.Cu 0  165000 -135000  165000 -65000  164996 -64843  164984 -64686.4
+            164963 -64530.7  164934 -64376.3  164898 -64223.5  164853 -64072.9
+            164801 -63924.9  164741 -63779.8  164673 -63638  164598 -63500
+            164516 -63366.1  164427 -63236.6  164331 -63112  164229 -62992.6
+            164121 -62878.7  164007 -62770.6  163888 -62668.6  163763 -62572.9
+            163634 -62484  163500 -62401.9  163362 -62327  163220 -62259.4
+            163075 -62199.3  162927 -62146.8  162776 -62102.2  162624 -62065.6
+            162469 -62036.9  162314 -62016.4  162157 -62004.1  162000 -62000
+            38000 -62000  37843 -62004.1  37686.4 -62016.4  37530.7 -62036.9
+            37376.3 -62065.6  37223.5 -62102.2  37072.9 -62146.8  36924.9 -62199.3
+            36779.8 -62259.4  36638 -62327  36500 -62401.9  36366.1 -62484
+            36236.6 -62572.9  36112 -62668.6  35992.6 -62770.6  35878.7 -62878.7
+            35770.6 -62992.6  35668.6 -63112  35572.9 -63236.6  35484 -63366.1
+            35401.9 -63500  35327 -63638  35259.4 -63779.8  35199.3 -63924.9
+            35146.8 -64072.9  35102.2 -64223.5  35065.6 -64376.3  35036.9 -64530.7
+            35016.4 -64686.4  35004.1 -64843  35000 -65000  35000 -135000
+            35004.1 -135157  35016.4 -135314  35036.9 -135469  35065.6 -135624
+            35102.2 -135776  35146.8 -135927  35199.3 -136075  35259.4 -136220
+            35327 -136362  35401.9 -136500  35484 -136634  35572.9 -136763
+            35668.6 -136888  35770.6 -137007  35878.7 -137121  35992.6 -137229
+            36112 -137331  36236.6 -137427  36366.1 -137516  36500 -137598
+            36638 -137673  36779.8 -137741  36924.9 -137801  37072.9 -137853
+            37223.5 -137898  37376.3 -137934  37530.7 -137963  37686.4 -137984
+            37843 -137996  38000 -138000  162000 -138000  162157 -137996
+            162314 -137984  162469 -137963  162624 -137934  162776 -137898
+            162927 -137853  163075 -137801  163220 -137741  163362 -137673
+            163500 -137598  163634 -137516  163763 -137427  163888 -137331
+            164007 -137229  164121 -137121  164229 -137007  164331 -136888
+            164427 -136763  164516 -136634  164598 -136500  164673 -136362
+            164741 -136220  164801 -136075  164853 -135927  164898 -135776
+            164934 -135624  164963 -135469  164984 -135314  164996 -135157
+            165000 -135000))
     (keepout "" (polygon F.Cu 0  165050 -65000  165033 -64681.2  164983 -64365.9  164901 -64057.5
             164786 -63759.5  164641 -63475  164468 -63207.3  164267 -62959.2
             164041 -62733.4  163793 -62532.5  163525 -62358.6  163240 -62213.7
@@ -93,15 +125,6 @@
             164425 -64212  164494 -64469.8  164536 -64733.5  164550 -65000
             165050 -65000))
     (keepout "" (polygon B.Cu 0  165050 -65000  165033 -64681.2  164983 -64365.9  164901 -64057.5
-            164786 -63759.5  164641 -63475  164468 -63207.3  164267 -62959.2
-            164041 -62733.4  163793 -62532.5  163525 -62358.6  163240 -62213.7
-            162942 -62099.3  162634 -62016.6  162319 -61966.7  162000 -61950
-            162000 -62450  162266 -62464  162530 -62505.7  162788 -62574.8
-            163037 -62670.5  163275 -62791.6  163499 -62937  163706 -63105
-            163895 -63293.7  164063 -63501.1  164208 -63725  164330 -63962.8
-            164425 -64212  164494 -64469.8  164536 -64733.5  164550 -65000
-            165050 -65000))
-    (keepout "" (polygon In2.Cu 0  165050 -65000  165033 -64681.2  164983 -64365.9  164901 -64057.5
             164786 -63759.5  164641 -63475  164468 -63207.3  164267 -62959.2
             164041 -62733.4  163793 -62532.5  163525 -62358.6  163240 -62213.7
             162942 -62099.3  162634 -62016.6  162319 -61966.7  162000 -61950
@@ -128,15 +151,6 @@
             36293.7 -63105  36501.1 -62937  36725 -62791.6  36962.8 -62670.5
             37212 -62574.8  37469.8 -62505.7  37733.5 -62464  38000 -62450
             38000 -61950))
-    (keepout "" (polygon In2.Cu 0  38000 -61950  37681.2 -61966.7  37365.9 -62016.6  37057.5 -62099.3
-            36759.5 -62213.7  36475 -62358.6  36207.3 -62532.5  35959.2 -62733.4
-            35733.4 -62959.2  35532.5 -63207.3  35358.6 -63475  35213.7 -63759.5
-            35099.3 -64057.5  35016.6 -64365.9  34966.7 -64681.2  34950 -65000
-            35450 -65000  35464 -64733.5  35505.7 -64469.8  35574.8 -64212
-            35670.5 -63962.8  35791.6 -63725  35937 -63501.1  36105 -63293.7
-            36293.7 -63105  36501.1 -62937  36725 -62791.6  36962.8 -62670.5
-            37212 -62574.8  37469.8 -62505.7  37733.5 -62464  38000 -62450
-            38000 -61950))
     (keepout "" (polygon F.Cu 0  34950 -135000  34966.7 -135319  35016.6 -135634  35099.3 -135942
             35213.7 -136240  35358.6 -136525  35532.5 -136793  35733.4 -137041
             35959.2 -137267  36207.3 -137468  36475 -137641  36759.5 -137786
@@ -147,15 +161,6 @@
             35574.8 -135788  35505.7 -135530  35464 -135266  35450 -135000
             34950 -135000))
     (keepout "" (polygon B.Cu 0  34950 -135000  34966.7 -135319  35016.6 -135634  35099.3 -135942
-            35213.7 -136240  35358.6 -136525  35532.5 -136793  35733.4 -137041
-            35959.2 -137267  36207.3 -137468  36475 -137641  36759.5 -137786
-            37057.5 -137901  37365.9 -137983  37681.2 -138033  38000 -138050
-            38000 -137550  37733.5 -137536  37469.8 -137494  37212 -137425
-            36962.8 -137330  36725 -137208  36501.1 -137063  36293.7 -136895
-            36105 -136706  35937 -136499  35791.6 -136275  35670.5 -136037
-            35574.8 -135788  35505.7 -135530  35464 -135266  35450 -135000
-            34950 -135000))
-    (keepout "" (polygon In2.Cu 0  34950 -135000  34966.7 -135319  35016.6 -135634  35099.3 -135942
             35213.7 -136240  35358.6 -136525  35532.5 -136793  35733.4 -137041
             35959.2 -137267  36207.3 -137468  36475 -137641  36759.5 -137786
             37057.5 -137901  37365.9 -137983  37681.2 -138033  38000 -138050
@@ -182,38 +187,21 @@
             163706 -136895  163499 -137063  163275 -137208  163037 -137330
             162788 -137425  162530 -137494  162266 -137536  162000 -137550
             162000 -138050))
-    (keepout "" (polygon In2.Cu 0  162000 -138050  162319 -138033  162634 -137983  162942 -137901
-            163240 -137786  163525 -137641  163793 -137468  164041 -137267
-            164267 -137041  164468 -136793  164641 -136525  164786 -136240
-            164901 -135942  164983 -135634  165033 -135319  165050 -135000
-            164550 -135000  164536 -135266  164494 -135530  164425 -135788
-            164330 -136037  164208 -136275  164063 -136499  163895 -136706
-            163706 -136895  163499 -137063  163275 -137208  163037 -137330
-            162788 -137425  162530 -137494  162266 -137536  162000 -137550
-            162000 -138050))
     (keepout "" (polygon F.Cu 0  165000 -135000  165000 -65000  164550 -65000  164550 -135000
             165000 -135000))
     (keepout "" (polygon B.Cu 0  165000 -135000  165000 -65000  164550 -65000  164550 -135000
-            165000 -135000))
-    (keepout "" (polygon In2.Cu 0  165000 -135000  165000 -65000  164550 -65000  164550 -135000
             165000 -135000))
     (keepout "" (polygon F.Cu 0  162000 -62000  38000 -62000  38000 -62450  162000 -62450
             162000 -62000))
     (keepout "" (polygon B.Cu 0  162000 -62000  38000 -62000  38000 -62450  162000 -62450
             162000 -62000))
-    (keepout "" (polygon In2.Cu 0  162000 -62000  38000 -62000  38000 -62450  162000 -62450
-            162000 -62000))
     (keepout "" (polygon F.Cu 0  35000 -65000  35000 -135000  35450 -135000  35450 -65000
             35000 -65000))
     (keepout "" (polygon B.Cu 0  35000 -65000  35000 -135000  35450 -135000  35450 -65000
             35000 -65000))
-    (keepout "" (polygon In2.Cu 0  35000 -65000  35000 -135000  35450 -135000  35450 -65000
-            35000 -65000))
     (keepout "" (polygon F.Cu 0  38000 -138000  162000 -138000  162000 -137550  38000 -137550
             38000 -138000))
     (keepout "" (polygon B.Cu 0  38000 -138000  162000 -138000  162000 -137550  38000 -137550
-            38000 -138000))
-    (keepout "" (polygon In2.Cu 0  38000 -138000  162000 -138000  162000 -137550  38000 -137550
             38000 -138000))
     (keepout "" (polygon F.Cu 0  35000 -112000  54000 -112000  54000 -62000  35000 -62000
             35000 -112000))
@@ -311,7 +299,6 @@
       (place R22 131380.000000 -82780.000000 front 90.000000 (PN 10k))
       (place R23 131270.000000 -86940.000000 front 0.000000 (PN 10k))
       (place R24 118500.000000 -93390.000000 front 0.000000 (PN 10k))
-      (place R25 114290.000000 -96090.000000 front 90.000000 (PN 10k))
       (place R26 124960.000000 -93420.000000 front 90.000000 (PN 10k))
       (place R27 133890.000000 -99700.000000 front 0.000000 (PN 68k))
       (place R28 134910.000000 -87710.000000 front 0.000000 (PN 100k))
@@ -1357,9 +1344,9 @@
   (network
     (net +3V3
       (pins U2-4 U2-2 C7-1 C8-1 U3-3 C9-1 C10-1 C11-1 R14-2 U4-10 U5-10 C13-1 C14-1
-        U6-5 U6-8 U6-9 U6-10 U6-15 U6-23 U6-29 U6-36 C20-1 C21-1 C22-1 C23-1 C24-1
-        C25-1 C26-1 R24-2 R25-2 R26-2 U14-5 C44-1 U15-5 C45-1 U16-5 C46-1 U17-5 C47-1
-        R30-2 R31-2 R62-2 R63-2 J4-2 C15-1 R32-2 TP6-1)
+        U6-5 U6-8 U6-9 U6-10 U6-13 U6-15 U6-17 U6-19 U6-21 U6-23 U6-29 U6-36 C20-1
+        C21-1 C22-1 C23-1 C24-1 C25-1 C26-1 R24-2 R26-2 U14-5 C44-1 U15-5 C45-1 U16-5
+        C46-1 U17-5 C47-1 R30-2 R31-2 R62-2 R63-2 J4-2 C15-1 R32-2 TP6-1)
     )
     (net +5V_RED
       (pins PS1-4 C1-1 C2-1 R1-1 Q1-3 Q1B-3 R7-1 R11-1 TP8-1)
@@ -1502,9 +1489,6 @@
     )
     (net HUB_NONREM1
       (pins U6-22 R23-1)
-    )
-    (net HUB_OCS_N
-      (pins U6-13 U6-17 U6-19 U6-21 R25-1)
     )
     (net HUB_PLLFILT
       (pins U6-34 C28-1)
@@ -1684,11 +1668,11 @@
       CA_DM CA_DM_P CA_DP CA_DP_P CB_DM CB_DM_P CB_DP CB_DP_P CC1 CC2 EN EN_CA
       EN_CB EN_GA EN_GB FLT_C FLT_G GA_IO_P GB_IO_P GIRTH_A_IO GIRTH_B_IO
       GND HUB_CFG0 HUB_CFG1 HUB_CRFILT HUB_DN3_DM HUB_DN3_DP HUB_LOCALPWR
-      HUB_NONREM1 HUB_OCS_N HUB_PLLFILT HUB_RBIAS HUB_RST_N HUB_UP_DM HUB_UP_DP
-      HUB_VBUS_DET HUB_VBUS_EN ILIM_CA ILIM_CB ILIM_GA ILIM_GB ISNS_CA ISNS_CB
-      ISNS_GA ISNS_GB LCD_BL LCD_CS LCD_DC LCD_MOSI LCD_RST LCD_SCK RED_DET
-      S3H_DM S3H_DP S3_DM S3_DM_R S3_DP S3_DP_R U0RX U0TX USBC_DM_C USBC_DP_C
-      USBG USB_SEL V5_SNS VBUSC_SNS XTAL_I XTAL_O "unconnected-(J3-SBU1-PadA8)"
+      HUB_NONREM1 HUB_PLLFILT HUB_RBIAS HUB_RST_N HUB_UP_DM HUB_UP_DP HUB_VBUS_DET
+      HUB_VBUS_EN ILIM_CA ILIM_CB ILIM_GA ILIM_GB ISNS_CA ISNS_CB ISNS_GA
+      ISNS_GB LCD_BL LCD_CS LCD_DC LCD_MOSI LCD_RST LCD_SCK RED_DET S3H_DM
+      S3H_DP S3_DM S3_DM_R S3_DP S3_DP_R U0RX U0TX USBC_DM_C USBC_DP_C USBG
+      USB_SEL V5_SNS VBUSC_SNS XTAL_I XTAL_O "unconnected-(J3-SBU1-PadA8)"
       "unconnected-(J3-SBU2-PadB8)" "unconnected-(U3-IO26-Pad26)" "unconnected-(U3-IO3-Pad7)"
       "unconnected-(U3-IO42-Pad38)" "unconnected-(U3-IO45-Pad41)" "unconnected-(U3-IO46-Pad44)"
       "unconnected-(U6-PRTPWR1-Pad12)" "unconnected-(U6-PRTPWR2-Pad16)" "unconnected-(U6-PRTPWR3-Pad18)"
@@ -1750,12 +1734,17 @@
     (wire (path F.Cu 300  99537.5 -110000  99525 -110025)(net GND)(type route))
     (wire (path F.Cu 300  92940 -103590  92925 -103575)(net GND)(type route))
     (wire (path F.Cu 300  132640 -82420  132625 -82425)(net GND)(type route))
+    (wire (path F.Cu 300  111150 -124000  111175 -124025)(net +3V3)(type route))
+    (wire (path F.Cu 300  104850 -124000  104825 -124025)(net +3V3)(type route))
     (wire (path F.Cu 300  104850 -121700  104825 -121725)(net GND)(type route))
     (wire (path F.Cu 300  102270 -125050  102275 -125025)(net GND)(type route))
+    (wire (path F.Cu 300  102260 -123070  102275 -123075)(net +3V3)(type route))
     (wire (path F.Cu 300  102260 -121170  102275 -121175)(net GND)(type route))
+    (wire (path F.Cu 300  104670 -119610  104675 -119625)(net +3V3)(type route))
     (wire (path F.Cu 300  105630 -119610  105625 -119625)(net GND)(type route))
     (wire (path F.Cu 300  143000 -72050  143025 -72025)(net GND)(type route))
     (wire (path F.Cu 300  143000 -72900  143025 -72925)(net GND)(type route))
+    (wire (path F.Cu 300  143000 -73750  143025 -73775)(net +3V3)(type route))
     (wire (path F.Cu 300  157000 -74600  157025 -74575)(net GND)(type route))
     (wire (path F.Cu 300  157000 -73750  157025 -73775)(net GND)(type route))
     (wire (path F.Cu 300  155950 -71000  155925 -71025)(net GND)(type route))
@@ -1765,26 +1754,53 @@
     (wire (path F.Cu 300  143000 -85000  143025 -85025)(net GND)(type route))
     (wire (path F.Cu 300  157000 -85000  157025 -85025)(net GND)(type route))
     (wire (path F.Cu 300  157000 -71000  157025 -71025)(net GND)(type route))
+    (wire (path F.Cu 300  140860 -74200  140875 -74225)(net +3V3)(type route))
     (wire (path F.Cu 300  140860 -72300  140875 -72275)(net GND)(type route))
+    (wire (path F.Cu 300  140300 -75760  140325 -75775)(net +3V3)(type route))
     (wire (path F.Cu 300  141260 -75760  141275 -75775)(net GND)(type route))
+    (wire (path F.Cu 300  141400 -70780  141425 -70775)(net +3V3)(type route))
     (wire (path F.Cu 300  141400 -69820  141425 -69825)(net GND)(type route))
+    (wire (path F.Cu 300  124950 -91390  124975 -91375)(net +3V3)(type route))
     (wire (path F.Cu 300  134960 -82380  134975 -82375)(net GND)(type route))
     (wire (path F.Cu 300  140550 -117000  140575 -117025)(net GND)(type route))
     (wire (path F.Cu 300  143450 -117000  143425 -117025)(net GND)(type route))
+    (wire (path F.Cu 300  143450 -115000  143425 -114925)(net +3V3)(type route))
     (wire (path F.Cu 300  142000 -116000  142025 -116025)(net GND)(type route))
     (wire (path F.Cu 300  138550 -95000  138575 -95025)(net GND)(type route))
     (wire (path F.Cu 300  141450 -95000  141425 -95025)(net GND)(type route))
+    (wire (path F.Cu 300  141450 -93000  141425 -92925)(net +3V3)(type route))
     (wire (path F.Cu 300  140000 -94000  140025 -94025)(net GND)(type route))
+    (wire (path F.Cu 300  145050 -115480  145075 -115475)(net +3V3)(type route))
     (wire (path F.Cu 300  145050 -114520  145075 -114525)(net GND)(type route))
+    (wire (path F.Cu 300  143050 -93480  143075 -93475)(net +3V3)(type route))
     (wire (path F.Cu 300  143050 -92520  143075 -92525)(net GND)(type route))
     (wire (path F.Cu 300  135630 -86250  135625 -86275)(net GND)(type route))
+    (wire (path F.Cu 300  120000 -95062.5  119975 -95425  119975 -95625)(net +3V3)(type route))
+    (wire (path F.Cu 300  118500 -95062.5  118425 -95075)(net +3V3)(type route))
+    (wire (path F.Cu 300  118000 -95062.5  117875 -94875  117825 -94875)(net +3V3)(type route))
+    (wire (path F.Cu 300  117062 -96000  117075 -95925)(net +3V3)(type route))
     (wire (path F.Cu 300  117062 -96500  117425 -96475  117625 -96475)(net GND)(type route))
+    (wire (path F.Cu 300  117062 -97500  117425 -97475  117625 -97475)(net +3V3)(type route))
+    (wire (path F.Cu 300  117062 -98500  117425 -98475  117625 -98475)(net +3V3)(type route))
+    (wire (path F.Cu 300  117062 -99500  117425 -99475  117625 -99475)(net +3V3)(type route))
+    (wire (path F.Cu 300  118000 -100938  117925 -100925)(net +3V3)(type route))
+    (wire (path F.Cu 300  119000 -100938  118975 -100525  118975 -100325)(net +3V3)(type route))
+    (wire (path F.Cu 300  120000 -100938  119975 -100525  119975 -100325)(net +3V3)(type route))
+    (wire (path F.Cu 300  122938 -99500  122525 -99475  122325 -99475)(net +3V3)(type route))
+    (wire (path F.Cu 300  122938 -96000  122925 -95925)(net +3V3)(type route))
+    (wire (path F.Cu 300  120200 -93610  120225 -93625)(net +3V3)(type route))
     (wire (path F.Cu 300  121160 -93610  121175 -93625)(net GND)(type route))
+    (wire (path F.Cu 300  115540 -95520  115525 -95525)(net +3V3)(type route))
     (wire (path F.Cu 300  115540 -94560  115525 -94575)(net GND)(type route))
+    (wire (path F.Cu 300  124720 -100700  124725 -100725)(net +3V3)(type route))
     (wire (path F.Cu 300  125680 -100700  125675 -100725)(net GND)(type route))
+    (wire (path F.Cu 300  122610 -93600  122625 -93575)(net +3V3)(type route))
     (wire (path F.Cu 300  123570 -93600  123575 -93575)(net GND)(type route))
+    (wire (path F.Cu 300  114670 -99100  114675 -99075)(net +3V3)(type route))
     (wire (path F.Cu 300  115630 -99100  115625 -99075)(net GND)(type route))
+    (wire (path F.Cu 300  118840 -102390  118825 -102375)(net +3V3)(type route))
     (wire (path F.Cu 300  119800 -102390  119775 -102375)(net GND)(type route))
+    (wire (path F.Cu 300  129110 -87845  129125 -87825)(net +3V3)(type route))
     (wire (path F.Cu 300  129110 -86295  129125 -86275)(net GND)(type route))
     (wire (path F.Cu 300  115570 -96930  115575 -96925)(net GND)(type route))
     (wire (path F.Cu 300  125480 -96750  125475 -96775)(net GND)(type route))
@@ -1792,6 +1808,8 @@
     (wire (path F.Cu 300  133140 -86300  133125 -86275)(net GND)(type route))
     (wire (path F.Cu 300  131380 -82270  131375 -82275)(net GND)(type route))
     (wire (path F.Cu 300  131780 -86940  131775 -86925)(net GND)(type route))
+    (wire (path F.Cu 300  119010 -93390  119025 -93375)(net +3V3)(type route))
+    (wire (path F.Cu 300  124960 -92910  124975 -92925)(net +3V3)(type route))
     (wire (path F.Cu 300  136460 -84060  136475 -84075)(net GND)(type route))
     (wire (path F.Cu 300  135420 -87710  135425 -87725)(net GND)(type route))
     (wire (path F.Cu 300  130150 -96600  130175 -96575)(net GND)(type route))
@@ -1803,6 +1821,8 @@
     (wire (path F.Cu 300  130100 -82290  130075 -82275)(net GND)(type route))
     (wire (path F.Cu 300  71160 -73980  71175 -73975)(net GND)(type route))
     (wire (path F.Cu 300  77862.5 -76000  77875 -76025)(net GND)(type route))
+    (wire (path F.Cu 300  80137.5 -75050  80125 -75025)(net +3V3)(type route))
+    (wire (path F.Cu 300  79960 -73480  79975 -73475)(net +3V3)(type route))
     (wire (path F.Cu 300  80920 -73480  80925 -73475)(net GND)(type route))
     (wire (path F.Cu 300  72025 -64810  72025 -64825)(net GND)(type route))
     (wire (path F.Cu 300  71800 -69390  71775 -69375)(net GND)(type route))
@@ -1811,6 +1831,8 @@
     (wire (path F.Cu 300  132750 -81090  132775 -81075)(net GND)(type route))
     (wire (path F.Cu 300  86160 -73980  86175 -73975)(net GND)(type route))
     (wire (path F.Cu 300  92862.5 -76000  92875 -76025)(net GND)(type route))
+    (wire (path F.Cu 300  95137.5 -75050  95125 -75025)(net +3V3)(type route))
+    (wire (path F.Cu 300  94960 -73480  94975 -73475)(net +3V3)(type route))
     (wire (path F.Cu 300  95920 -73480  95925 -73475)(net GND)(type route))
     (wire (path F.Cu 300  87025 -64810  87025 -64825)(net GND)(type route))
     (wire (path F.Cu 300  86800 -69390  86775 -69375)(net GND)(type route))
@@ -1819,6 +1841,8 @@
     (wire (path F.Cu 300  135120 -81050  135125 -81025)(net GND)(type route))
     (wire (path F.Cu 300  104640 -75480  104625 -75475)(net GND)(type route))
     (wire (path F.Cu 300  107862 -82000  107875 -82025)(net GND)(type route))
+    (wire (path F.Cu 300  110138 -81050  110125 -81025)(net +3V3)(type route))
+    (wire (path F.Cu 300  109960 -79480  109975 -79475)(net +3V3)(type route))
     (wire (path F.Cu 300  110920 -79480  110925 -79475)(net GND)(type route))
     (wire (path F.Cu 300  105025 -64810  105025 -64825)(net GND)(type route))
     (wire (path F.Cu 300  104800 -69390  104775 -69375)(net GND)(type route))
@@ -1827,21 +1851,31 @@
     (wire (path F.Cu 300  136370 -81900  136375 -81875)(net GND)(type route))
     (wire (path F.Cu 300  115640 -75480  115625 -75475)(net GND)(type route))
     (wire (path F.Cu 300  118862 -82000  118875 -82025)(net GND)(type route))
+    (wire (path F.Cu 300  121138 -81050  121125 -81025)(net +3V3)(type route))
+    (wire (path F.Cu 300  120960 -79480  120975 -79475)(net +3V3)(type route))
     (wire (path F.Cu 300  121920 -79480  121925 -79475)(net GND)(type route))
     (wire (path F.Cu 300  116025 -64810  116025 -64825)(net GND)(type route))
     (wire (path F.Cu 300  115800 -69390  115775 -69375)(net GND)(type route))
+    (wire (path F.Cu 300  114290 -89420  114275 -89425)(net +3V3)(type route))
+    (wire (path F.Cu 300  121550 -89920  121575 -89925)(net +3V3)(type route))
     (wire (path F.Cu 300  74862.5 -71000  74875 -71025)(net GND)(type route))
     (wire (path F.Cu 300  82360 -64600  82375 -64575)(net GND)(type route))
     (wire (path F.Cu 300  89862.5 -71000  89875 -71025)(net GND)(type route))
     (wire (path F.Cu 300  97360 -64600  97375 -64575)(net GND)(type route))
+    (wire (path F.Cu 300  122900 -88990  122925 -88975)(net +3V3)(type route))
     (wire (path F.Cu 300  110280 -64600  110275 -64575)(net GND)(type route))
+    (wire (path F.Cu 300  124110 -89070  124125 -89075)(net +3V3)(type route))
     (wire (path F.Cu 300  121280 -64600  121275 -64575)(net GND)(type route))
     (wire (path F.Cu 300  128625 -64150  128625 -64175)(net GND)(type route))
+    (wire (path F.Cu 300  129875 -64150  129875 -64175)(net +3V3)(type route))
     (wire (path F.Cu 300  126775 -67350  126775 -67325)(net GND)(type route))
     (wire (path F.Cu 300  139225 -67350  139225 -67325)(net GND)(type route))
+    (wire (path F.Cu 300  124680 -64825  124675 -64825)(net +3V3)(type route))
     (wire (path F.Cu 300  124680 -63275  124675 -63275)(net GND)(type route))
+    (wire (path F.Cu 300  116570 -91330  116575 -91325)(net +3V3)(type route))
     (wire (path F.Cu 300  128880 -82440  128875 -82425)(net GND)(type route))
     (wire (path F.Cu 300  133910 -79560  133925 -79575)(net GND)(type route))
+    (wire (path F.Cu 300  100270 -123600  100275 -123575)(net +3V3)(type route))
     (wire (path F.Cu 1000  37500 -66000  37500 -73000)(net AC_L_IN)(type route))
     (wire (path F.Cu 1000  42580 -73000  42500 -73000  42500 -79500  42000 -79500
             42000 -88000)(net AC_L)(type route))
@@ -1866,12 +1900,17 @@
     (via "Via[0-3]_500:300_um"  99525 -110025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  92925 -103575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  132625 -82425 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  111175 -124025 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  104825 -124025 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  104825 -121725 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  102275 -125025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  102275 -123075 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  102275 -121175 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  104675 -119625 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  105625 -119625 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  143025 -72025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  143025 -72925 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  143025 -73775 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  157025 -74575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  157025 -73775 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  155925 -71025 (net GND)(type route))
@@ -1881,26 +1920,53 @@
     (via "Via[0-3]_500:300_um"  143025 -85025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  157025 -85025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  157025 -71025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  140875 -74225 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  140875 -72275 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  140325 -75775 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  141275 -75775 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  141425 -70775 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  141425 -69825 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  124975 -91375 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  134975 -82375 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  140575 -117025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  143425 -117025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  143425 -114925 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  142025 -116025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  138575 -95025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  141425 -95025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  141425 -92925 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  140025 -94025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  145075 -115475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  145075 -114525 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  143075 -93475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  143075 -92525 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  135625 -86275 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  119975 -95625 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  118425 -95075 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  117825 -94875 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  117075 -95925 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  117625 -96475 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  117625 -97475 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  117625 -98475 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  117625 -99475 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  117925 -100925 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  118975 -100325 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  119975 -100325 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  122325 -99475 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  122925 -95925 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  120225 -93625 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  121175 -93625 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  115525 -95525 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  115525 -94575 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  124725 -100725 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  125675 -100725 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  122625 -93575 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  123575 -93575 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  114675 -99075 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  115625 -99075 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  118825 -102375 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  119775 -102375 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  129125 -87825 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  129125 -86275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  115575 -96925 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  125475 -96775 (net GND)(type route))
@@ -1908,6 +1974,8 @@
     (via "Via[0-3]_500:300_um"  133125 -86275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  131375 -82275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  131775 -86925 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  119025 -93375 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  124975 -92925 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  136475 -84075 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  135425 -87725 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  130175 -96575 (net GND)(type route))
@@ -1919,6 +1987,8 @@
     (via "Via[0-3]_500:300_um"  130075 -82275 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  71175 -73975 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  77875 -76025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  80125 -75025 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  79975 -73475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  80925 -73475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  72025 -64825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  71775 -69375 (net GND)(type route))
@@ -1927,6 +1997,8 @@
     (via "Via[0-3]_500:300_um"  132775 -81075 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  86175 -73975 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  92875 -76025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  95125 -75025 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  94975 -73475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  95925 -73475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  87025 -64825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  86775 -69375 (net GND)(type route))
@@ -1935,6 +2007,8 @@
     (via "Via[0-3]_500:300_um"  135125 -81025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  104625 -75475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  107875 -82025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  110125 -81025 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  109975 -79475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  110925 -79475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  105025 -64825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  104775 -69375 (net GND)(type route))
@@ -1943,20 +2017,30 @@
     (via "Via[0-3]_500:300_um"  136375 -81875 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  115625 -75475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  118875 -82025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  121125 -81025 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  120975 -79475 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  121925 -79475 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  116025 -64825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  115775 -69375 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  114275 -89425 (net +3V3)(type route))
+    (via "Via[0-3]_500:300_um"  121575 -89925 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  74875 -71025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  82375 -64575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  89875 -71025 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  97375 -64575 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  122925 -88975 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  110275 -64575 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  124125 -89075 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  121275 -64575 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  128625 -64175 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  129875 -64175 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  126775 -67325 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  139225 -67325 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  124675 -64825 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  124675 -63275 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  116575 -91325 (net +3V3)(type route))
     (via "Via[0-3]_500:300_um"  128875 -82425 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  133925 -79575 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  100275 -123575 (net +3V3)(type route))
   )
 )
