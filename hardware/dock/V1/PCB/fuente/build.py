@@ -418,6 +418,14 @@ def main():
                 w = WIDTH.get(net, 0.2)
                 if not route_tree(r, net, netid(net), by_net[net], w) and not route_tree(r, net, netid(net), by_net[net], 0.2):
                     log.append("pre-ruteo fallido: " + net)
+        # USB-C: los pads VBUS superpuestos (A4/B9 y B4/A9) se unen con un tramo corto para que KiCad los vea conectados
+        j3 = next(p for p in D.PARTS if p["ref"] == "J3")
+        for a_, b_ in (("A4", "B9"), ("B4", "A9")):
+            pa = next(rec for rec in pads if rec["part"] is j3 and rec["pad"].num == a_)["c"]
+            pb = next(rec for rec in pads if rec["part"] is j3 and rec["pad"].num == b_)["c"]
+            if math.hypot(pa[0] - pb[0], pa[1] - pb[1]) < 0.05:
+                pb = (pa[0] - 0.4, pa[1])          # a lo largo del pad (1,45 mm en X tras el giro de 90°)
+            r.add_track(D.CODE["VBUS_C_RAW"], "F.Cu", pa, pb, 0.3)
         write_board(r, os.path.join(out, "AVO_DOCK_V1_PCB_colocacion.kicad_pcb"), outer_pours=False)
         stale = os.path.join(out, "AVO_DOCK_V1_PCB_ruteado.kicad_pcb")
         if os.path.exists(stale):

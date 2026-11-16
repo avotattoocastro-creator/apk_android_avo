@@ -30199,6 +30199,22 @@
 		(net 1)
 		(uuid "e7a98023-3e98-56b1-bf25-d729e14eb931")
 	)
+	(segment
+		(start 157.455 126.45)
+		(end 157.055 126.45)
+		(width 0.3)
+		(layer "F.Cu")
+		(net 81)
+		(uuid "5c700d4e-25ac-5d06-80d1-9941b6370c1c")
+	)
+	(segment
+		(start 157.455 121.55)
+		(end 157.055 121.55)
+		(width 0.3)
+		(layer "F.Cu")
+		(net 81)
+		(uuid "42534ac4-c07a-56fb-97e4-9a19acc2fd4c")
+	)
 	(via
 		(at 92.575 99.825)
 		(size 0.5)
