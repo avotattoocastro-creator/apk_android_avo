@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — jerarquía de licencias (la cuadra manda)
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §14 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: con la licencia de cuadra caducada no funcionan las licencias
+de entrenador, jockeys, caballos ni cascos de esa cuadra; las licencias hijas nunca duran más que la cuadra; personas con
+varias cuadras solo pierden la caducada; se mantiene la descarga de lo grabado (§12). Nueva decisión pendiente: consulta en
+solo lectura con la cuadra caducada.
+**Por qué:** regla del usuario (16/11/2026 21:35).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
 ## 2026-11-16 — AVO-LOCK-1: alquiler mensual y cambio de cuadra del casco
 **Autor:** Claude · **Rama:** `docs/avo-lock-1-alquiler` · solo documento.
 **Qué cambia:** nueva §13 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
