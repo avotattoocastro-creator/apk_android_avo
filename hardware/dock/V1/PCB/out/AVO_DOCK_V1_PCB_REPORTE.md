@@ -1,8 +1,8 @@
 # AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de fabricación
 
 - Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
-- Commit: `38e5e11e164988888148d4923ddf24d8a75056d3` · ejecución de CI: 43788505774
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `9987bbc033e48db4c2a66e9767ef5a4d27fb8341` · ejecución de CI: 43789462892
+- Ruteado: placa ruteada de la fuente: Freerouting 1.9.0 de la ejecución 43788505774, sin reparar
 - Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu plano GND · In2.Cu plano +3V3 · B.Cu señal + relleno GND), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
 - Componentes: 156 en total, 127 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
 - Pistas: 1449 · vías: 304 · ruteado completo (0 conexiones incompletas)
