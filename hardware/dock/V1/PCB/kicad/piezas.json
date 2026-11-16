@@ -945,21 +945,6 @@
   "rot": 0
  },
  {
-  "ref": "R25",
-  "value": "10k",
-  "footprint": "R_0402_1005Metric",
-  "lcsc": "C25744",
-  "mpn": "",
-  "block": "Hub",
-  "dnp": false,
-  "no_assembly": false,
-  "note": "sin sobrecorriente hacia el hub (la vigila el S3 con FLT_C/FLT_G)",
-  "jlc_rot": 0,
-  "x": 14.29,
-  "y": 3.91,
-  "rot": 90
- },
- {
   "ref": "R26",
   "value": "10k",
   "footprint": "R_0402_1005Metric",

@@ -9330,7 +9330,7 @@
 	(no_connect (at 613.41 198.12) (uuid "c467fd0c-fa8f-5a9c-8152-be1b433ee0b4"))
 	(no_connect (at 613.41 200.66) (uuid "4ed296c7-f380-52a8-b79e-271c7a8b7cdc"))
 	(global_label
-		"HUB_OCS_N"
+		"+3V3"
 		(shape passive)
 		(at 613.41 203.2 0)
 		(fields_autoplaced yes)
@@ -9339,7 +9339,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 613.41 203.2 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"HUB_OCS_N"
+		"+3V3"
 		(shape passive)
 		(at 613.41 205.74 0)
 		(fields_autoplaced yes)
@@ -9348,7 +9348,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 613.41 205.74 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"HUB_OCS_N"
+		"+3V3"
 		(shape passive)
 		(at 613.41 208.28 0)
 		(fields_autoplaced yes)
@@ -9357,7 +9357,7 @@
 		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 613.41 208.28 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
-		"HUB_OCS_N"
+		"+3V3"
 		(shape passive)
 		(at 613.41 210.82 0)
 		(fields_autoplaced yes)
@@ -10236,8 +10236,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "169a7c1c-5b14-5ba8-be86-4b3bb219f610")
-		(property "Reference" "R25" (at 618.49 284.48 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(uuid "7147d462-2cdd-5907-99e2-b987c6c2b6c8")
+		(property "Reference" "R26" (at 618.49 284.48 0) (effects (font (size 1.27 1.27)) (justify left)))
 		(property "Value" "10k" (at 618.49 287.02 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
@@ -10250,52 +10250,6 @@
 		(property "Description" "" (at 615.95 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "LCSC" "C25744" (at 615.95 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(property "MPN" "" (at 615.95 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(pin "1" (uuid "1e69694f-4896-5815-867e-1cb52f455d96"))
-		(pin "2" (uuid "af9299bd-4072-5a89-bebc-4e2394998e01"))
-		(instances
-			(project "AVO_DOCK_V1_PCB" (path "/f8ab83dd-32cd-5d25-8d43-304737e649fe" (reference "R25") (unit 1)))
-		)
-	)
-	(global_label
-		"HUB_OCS_N"
-		(shape passive)
-		(at 615.95 281.94 90)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "72558029-fafb-59b6-b4cb-182fdabb1fc0")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 281.94 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(global_label
-		"+3V3"
-		(shape passive)
-		(at 615.95 289.56 270)
-		(fields_autoplaced yes)
-		(effects (font (size 1 1)) (justify left))
-		(uuid "0b1b0f67-412e-55f0-aa27-7cb31f51e166")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 289.56 0) (hide yes) (effects (font (size 1 1))))
-	)
-	(symbol
-		(lib_id "AVO:R_avo")
-		(at 640.08 285.75 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7147d462-2cdd-5907-99e2-b987c6c2b6c8")
-		(property "Reference" "R26" (at 642.62 284.48 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 642.62 287.02 0) (effects (font (size 1 1)) (justify left)))
-		(property
-			"Footprint"
-			"AVO:R_0402_1005Metric"
-			(at 640.08 285.75 0)
-			(hide yes)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Datasheet" "" (at 640.08 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 640.08 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 640.08 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 640.08 285.75 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "0fa71090-df51-536c-8a54-383aa343ad3b"))
 		(pin "2" (uuid "0f89d073-7824-5ef0-bf87-0971a8fd3174"))
 		(instances
@@ -10305,43 +10259,43 @@
 	(global_label
 		"HUB_RST_N"
 		(shape passive)
-		(at 640.08 281.94 90)
+		(at 615.95 281.94 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "c823688c-2de6-51b4-b5d4-2bae19f2f462")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 640.08 281.94 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 281.94 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"+3V3"
 		(shape passive)
-		(at 640.08 289.56 270)
+		(at 615.95 289.56 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "c1343807-cf33-5161-b1ff-b78fb1780c40")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 640.08 289.56 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 615.95 289.56 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 664.21 284.48 0)
+		(at 640.08 284.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "958fcef1-e6f6-532d-be08-d226fb3c5dc9")
-		(property "Reference" "R27" (at 666.75 283.21 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "68k" (at 666.75 285.75 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R27" (at 642.62 283.21 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "68k" (at 642.62 285.75 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 664.21 284.48 0)
+			(at 640.08 284.48 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 664.21 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 664.21 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C36871" (at 664.21 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 664.21 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 640.08 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 640.08 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C36871" (at 640.08 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 640.08 284.48 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "17bef13a-f151-5ebc-8c85-9db2950b43c4"))
 		(pin "2" (uuid "bda17ec9-82b9-5ff3-ba6c-49bb9955dbc1"))
 		(instances
@@ -10351,43 +10305,43 @@
 	(global_label
 		"VBUS_PC"
 		(shape passive)
-		(at 664.21 280.67 90)
+		(at 640.08 280.67 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "a2f9c6f2-4ce5-5ad9-96d7-580f35dab9eb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 664.21 280.67 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 640.08 280.67 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"HUB_VBUS_DET"
 		(shape passive)
-		(at 664.21 288.29 270)
+		(at 640.08 288.29 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "08b4166d-4fa5-5744-a747-67ea0a7f8246")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 664.21 288.29 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 640.08 288.29 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 688.34 288.29 0)
+		(at 664.21 288.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "9950e05b-6a70-518c-8e96-02464b4ae6b0")
-		(property "Reference" "R28" (at 690.88 287.02 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "100k" (at 690.88 289.56 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R28" (at 666.75 287.02 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "100k" (at 666.75 289.56 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 688.34 288.29 0)
+			(at 664.21 288.29 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 688.34 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 688.34 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25741" (at 688.34 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 688.34 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 664.21 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 664.21 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25741" (at 664.21 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 664.21 288.29 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "abda82a2-49ae-5da1-89f8-4f5a6a38b0df"))
 		(pin "2" (uuid "b9d47077-272d-55fe-8246-6ec6ef85e899"))
 		(instances
@@ -10397,43 +10351,43 @@
 	(global_label
 		"HUB_VBUS_DET"
 		(shape passive)
-		(at 688.34 284.48 90)
+		(at 664.21 284.48 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "63bb0bb8-99e5-51b8-b204-bd547d062518")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 688.34 284.48 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 664.21 284.48 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"GND"
 		(shape passive)
-		(at 688.34 292.1 270)
+		(at 664.21 292.1 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "624f9dc8-cd06-5b91-819f-23236c8e475d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 688.34 292.1 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 664.21 292.1 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(symbol
 		(lib_id "AVO:R_avo")
-		(at 712.47 287.02 0)
+		(at 688.34 287.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "6f82c54d-d436-5238-93b3-a3a0c0123051")
-		(property "Reference" "R29" (at 715.01 285.75 0) (effects (font (size 1.27 1.27)) (justify left)))
-		(property "Value" "10k" (at 715.01 288.29 0) (effects (font (size 1 1)) (justify left)))
+		(property "Reference" "R29" (at 690.88 285.75 0) (effects (font (size 1.27 1.27)) (justify left)))
+		(property "Value" "10k" (at 690.88 288.29 0) (effects (font (size 1 1)) (justify left)))
 		(property
 			"Footprint"
 			"AVO:R_0402_1005Metric"
-			(at 712.47 287.02 0)
+			(at 688.34 287.02 0)
 			(hide yes)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Datasheet" "" (at 712.47 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "Description" "" (at 712.47 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "LCSC" "C25744" (at 712.47 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
-		(property "MPN" "" (at 712.47 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Datasheet" "" (at 688.34 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "Description" "" (at 688.34 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "LCSC" "C25744" (at 688.34 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
+		(property "MPN" "" (at 688.34 287.02 0) (hide yes) (effects (font (size 1.27 1.27))))
 		(pin "1" (uuid "66502d12-65a0-5b0f-9fbc-8669711722fd"))
 		(pin "2" (uuid "c922f271-0859-545b-9192-34c24cd7c563"))
 		(instances
@@ -10443,20 +10397,20 @@
 	(global_label
 		"HUB_VBUS_EN"
 		(shape passive)
-		(at 712.47 283.21 90)
+		(at 688.34 283.21 90)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "bf0142c4-b3a2-58fa-ae92-8c3c8726405c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 712.47 283.21 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 688.34 283.21 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(global_label
 		"HUB_VBUS_DET"
 		(shape passive)
-		(at 712.47 290.83 270)
+		(at 688.34 290.83 270)
 		(fields_autoplaced yes)
 		(effects (font (size 1 1)) (justify left))
 		(uuid "6430f4ff-065c-58ec-8ae7-d799c440ac56")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 712.47 290.83 0) (hide yes) (effects (font (size 1 1))))
+		(property "Intersheetrefs" "${INTERSHEET_REFS}" (at 688.34 290.83 0) (hide yes) (effects (font (size 1 1))))
 	)
 	(rectangle
 		(start 534.67 425.45)

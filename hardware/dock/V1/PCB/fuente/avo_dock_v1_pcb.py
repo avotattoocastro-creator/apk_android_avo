@@ -9,7 +9,7 @@ Decisiones del usuario (15/11/2026):
   - 220 V con módulo AC-DC certificado encapsulado (Mean Well IRM-20-5, 5 V 4 A, clase II) + USB-C de 5 V.
 
 Placa de 130 × 76 mm, 4 capas, 1,6 mm. Todos los componentes en F.
-  - F.Cu, In2 y B.Cu = señales (relleno +3V3 en In2 y GND en F.Cu y B.Cu); In1 = GND macizo.
+  - F.Cu y B.Cu = señales (con relleno GND tras el ruteado); In1 = plano GND; In2 = plano +3V3 (vías desde cada pad).
   - ZONA DE RED (220 V): esquina −X/+Y, rodeada por un FOSO de 6,5 mm sin cobre en ninguna capa (distancia de fuga
     reforzada entre red y MBTS ≥ 6,4 mm, EN 62368-1, 250 V, grado de contaminación 2, CTI ≥ 175). Las pistas de red
     se trazan aquí (MAINS_TRACKS), a 1,0 mm, solo en F.Cu; ningún plano entra en la zona de red ni en el foso.
@@ -335,10 +335,11 @@ R("R17", "100k", "USB_SEL", GND, block="USB", note="modo PC por defecto (arranqu
 # 25 HS_IND/CFG_SEL1 · 26 RESET_N · 27 VBUS_DET · 28 SUSP_IND/LOCAL_PWR · 30/31 UP −/+ · 32 XTALOUT · 33 XTALIN ·
 # 34 PLLFILT · 35 RBIAS · 37 almohadilla = VSS.
 # Configuración por patillas: CFG_SEL1:0 = 00 (configuración interna), LOCAL_PWR = 1 (autoalimentado), NON_REM = 00,
-# puerto 4 desactivado (PRT_DIS_P4 y PRT_DIS_M4 a VDD33). La potencia de los puertos la manda el S3 (no PRTPWR).
+# puerto 4 desactivado (PRT_DIS_P4 y PRT_DIS_M4 a VDD33). La potencia de los puertos la manda el S3 (no PRTPWR) y
+# OCS_N1-4 van a VDD33 (sin sobrecorriente hacia el hub: la vigila el S3 con FLT_C/FLT_G).
 hub = {1: "CA_DM", 2: "CA_DP", 3: "CB_DM", 4: "CB_DP", 5: V3, 6: "HUB_DN3_DM", 7: "HUB_DN3_DP", 8: V3, 9: V3,
-       10: V3, 11: GND, 12: None, 13: "HUB_OCS_N", 14: "HUB_CRFILT", 15: V3, 16: None, 17: "HUB_OCS_N", 18: None,
-       19: "HUB_OCS_N", 20: None, 21: "HUB_OCS_N", 22: "HUB_NONREM1", 23: V3, 24: "HUB_CFG0", 25: "HUB_CFG1",
+       10: V3, 11: GND, 12: None, 13: V3, 14: "HUB_CRFILT", 15: V3, 16: None, 17: V3, 18: None,
+       19: V3, 20: None, 21: V3, 22: "HUB_NONREM1", 23: V3, 24: "HUB_CFG0", 25: "HUB_CFG1",
        26: "HUB_RST_N", 27: "HUB_VBUS_DET", 28: "HUB_LOCALPWR", 29: V3, 30: "HUB_UP_DM", 31: "HUB_UP_DP",
        32: "XTAL_O", 33: "XTAL_I", 34: "HUB_PLLFILT", 35: "HUB_RBIAS", 36: V3, 37: GND}
 part("U6", "QFN36", "USB2514B-I/M2", (0, 0), 0, hub, LC["USB2514B"], "USB2514B-I/M2 (Microchip)", "Hub",
@@ -361,7 +362,6 @@ R("R21", "10k", "HUB_CFG0", GND, block="Hub", note="CFG_SEL0 = 0")
 R("R22", "10k", "HUB_CFG1", GND, block="Hub", note="CFG_SEL1 = 0")
 R("R23", "10k", "HUB_NONREM1", GND, block="Hub", note="NON_REM1 = 0: todos los puertos extraíbles")
 R("R24", "10k", "HUB_LOCALPWR", V3, block="Hub", note="LOCAL_PWR = 1: hub autoalimentado")
-R("R25", "10k", "HUB_OCS_N", V3, block="Hub", note="sin sobrecorriente hacia el hub (la vigila el S3 con FLT_C/FLT_G)")
 R("R26", "10k", "HUB_RST_N", V3, block="Hub", note="hub en marcha por defecto (GPIO37 puede reiniciarlo)")
 C("C29", "100n", "HUB_RST_N", GND, block="Hub")
 # VBUS_DET: alto con el PC conectado (divisor 68 k / 100 k desde el VBUS del USB-C ≈ 3,0 V) o cuando el S3 lo fuerza

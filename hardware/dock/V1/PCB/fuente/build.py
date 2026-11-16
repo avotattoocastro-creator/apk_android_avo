@@ -18,9 +18,8 @@ from router import Router, GRID, seg_mask, poly_mask         # noqa: E402
 from sexpr import Sym                                       # noqa: E402
 
 S = Sym
-PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
-# In2 es capa de señal (+3V3 se rutea y se rellena con una zona +3V3 después del ruteado)
-ROUTE_LAYERS = ["F.Cu", "In2.Cu", "B.Cu"]   # 3 capas de señal; In1 = GND macizo (F.Cu y B.Cu llevan relleno GND)
+PLANES = {D.GND: "In1.Cu", D.V3: "In2.Cu"}  # In1 = plano GND, In2 = plano +3V3 (vía desde cada pad)
+ROUTE_LAYERS = ["F.Cu", "B.Cu"]   # 2 capas de señal; In1 = GND e In2 = +3V3 (planos)
 CLEAR = 0.15
 VIA = (0.5, 0.3)
 
@@ -130,7 +129,7 @@ def via_drops(r, pads, log):
             continue                                   # exposed pad with its own thermal vias
         if (rec["part"]["ref"], rec["pad"].num) in EP_STUB_PINS:
             continue                                   # joined to the exposed pad by a short stub (ep_stubs)
-        if rec["part"]["ref"] == "U3" and rec["pad"].num not in ("1", "2", "42", "43", "46", "53", "60", "62", "63", "64", "65"):
+        if rec["part"]["ref"] == "U3" and net == D.GND and rec["pad"].num not in ("1", "2", "42", "43", "46", "53", "60", "62", "63", "64", "65"):
             continue                                   # módulo: el resto se une por el relleno de F.Cu y las vías del EPAD
         nid = netid(net)
         layer = rec["layers"][0]
@@ -343,13 +342,12 @@ def write_board(r, path, outer_pours=True):
     # zones
     poly = kpoly(D.outline_pts(3))
     tree.append(B.zone(D.CODE[D.GND], D.GND, "In1.Cu", poly, key="in1", connect="solid"))
-    if outer_pours:
-        tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
+    tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
     if outer_pours:
         tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
         tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
     for k, band in enumerate(edge_bands()):
-        tree.append(B.keepout(["F.Cu", "In2.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
+        tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
     # bandas de 0,45 mm en los tramos rectos del contorno: el DSN no lleva el margen de 0,3 al canto
     for k, pr in enumerate(D.outline_prims()):
         if pr[0] != "line":
@@ -360,7 +358,7 @@ def write_board(r, path, outer_pours=True):
         if nx_ * (-(ax_ + bx_) / 2) + ny_ * (-(ay_ + by_) / 2) < 0:
             nx_, ny_ = -nx_, -ny_
         band = [(ax_, ay_), (bx_, by_), (bx_ + 0.45 * nx_, by_ + 0.45 * ny_), (ax_ + 0.45 * nx_, ay_ + 0.45 * ny_)]
-        tree.append(B.keepout(["F.Cu", "In2.Cu", "B.Cu"], kpoly(band), "BORDE_R%02d" % k, copperpour=False))
+        tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_R%02d" % k, copperpour=False))
     ALL = ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"]
     # aislamiento de red: ningún relleno en la zona de red; el foso sin pistas, vías ni rellenos en ninguna capa
     tree.append(B.keepout(ALL, kpoly(D.MAINS_POLY), "ZONA_RED_220V", tracks=False, vias=False, copperpour=True))

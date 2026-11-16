@@ -12,7 +12,7 @@ En el CI se hace el ruteado (Freerouting 1.9.0), el relleno de zonas, el DRC con
 
 ## Placa
 - 130 × 76 mm, esquinas R3, 4 capas, 1,6 mm, ENIG. Todos los componentes en la cara F.
-- Capas: F.Cu, In2 y B.Cu de señal (In2 con relleno +3V3; F.Cu y B.Cu con relleno GND tras el ruteado); In1 de GND macizo.
+- Capas: F.Cu y B.Cu de señal (con relleno GND tras el ruteado); In1 = plano GND; In2 = plano +3V3 (vía desde cada pad).
 - **Zona de red** en (−65…−46, −12…38) con un **foso de 6,5 mm** sin cobre en ninguna capa. Las pistas de red (1,0 mm, F.Cu) las traza el generador.
 - 4 taladros NPTH Ø3,2 para M3 de nailon.
 
