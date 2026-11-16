@@ -323,3 +323,41 @@ propia**. Todas van asociadas a la cuadra y a su caducidad, y no funcionan más 
   selector de caballo limitado a los activados, aviso «sin plaza».
 - **Casco:** guardar la elección por nº de licencia, emitir el comprobante con el ATECC608B, comprobar el caballo antes de
   grabar, `caballoId` en la cabecera del `.avoe`.
+
+## 16. Actualizar licencias en la base de carga con un QR de la app (16/11/2026 21:56)
+**Idea del usuario:** mientras los cascos cargan en la base (AVO DOCK), se actualiza la licencia de **todos** a la vez
+enseñando a la base un **QR que muestra la app**.
+
+**Flujo:**
+1. La licencia nueva llega a la app directamente (enlace `avo://` o QR de AVO, §13), sin email ni servidor.
+2. Si hay que elegir caballos (§15), se eligen en la app. Con la renovación sin cambios salen los mismos ya marcados.
+3. La app muestra **«QR para la base de carga»**.
+4. La base lo lee con su lector y muestra en pantalla la cuadra, la fecha de fin y el número de cascos y caballos.
+5. La base lo instala por USB (pogo) en **todos los cascos que están cargando**, y lo guarda para instalarlo en los que se
+   pongan después. La pantalla indica casco por casco: «actualizado», «pendiente» o «rechazado».
+
+**Contenido del QR** (binario, ≈ 250–350 B para 2 cascos y 6 caballos, QR versión 10–13):
+- **Licencia de cuadra firmada por AVO:** nº de licencia, cuadra, fecha de fin, `plazas: N` y los nº de serie de los cascos
+  alquilados. **Una sola firma vale para todos los cascos:** cada casco comprueba que su nº de serie está en la lista.
+- **Elección de caballos** (si la hay): nº de licencia y `caballoId` de cada plaza, firmada por la app con la llave de la
+  cuadra (§15). El primer casco que la acepta firma el comprobante con su ATECC608B y la base lo pasa a los demás.
+- Si no cabe en un QR, la app lo parte en varios que la base lee seguidos.
+
+**Seguridad:**
+- **La base no guarda ni necesita llaves:** solo transporta datos firmados. Quien sea el dueño de la base no puede alargar
+  una licencia ni cambiar los caballos.
+- **Cada casco comprueba** la firma de AVO, su nº de serie y que el nº de licencia es más nuevo que el que tiene. Un QR
+  viejo o de otra cuadra se rechaza.
+- **Instalar una licencia firmada** está permitido sin la conexión autenticada de la app (§12); la elección de caballos va
+  firmada con la llave de la cuadra, así que el casco la acepta igual que si viniera de la app.
+
+**Hardware del DOCK:** módulo lector de QR por UART (tipo GM805/GM861: luz y enfoque propios, lee pantallas de móvil) en un
+conector JST (5 V, GND, TX, RX) y una ventana en el frente de la caja. Pendiente de comprobar si la PCB REV A tiene una UART
+libre o hace falta una REV B.
+
+**Cambios por componente:**
+- **Apps (Android, Windows, iPad):** pantalla «QR para la base de carga» y troceado en varios QR si hace falta.
+- **AVO Tarjetas:** licencia de cuadra con la lista de cascos y una sola firma.
+- **Firmware DOCK:** leer el QR, verificar la firma para mostrarla, instalar en los cascos por USB, guardar lo pendiente y
+  repartir el comprobante de caballos.
+- **Casco:** aceptar la licencia de cuadra con su nº de serie en la lista.
