@@ -9,7 +9,7 @@ Decisiones del usuario (15/11/2026):
   - 220 V con módulo AC-DC certificado encapsulado (Mean Well IRM-20-5, 5 V 4 A, clase II) + USB-C de 5 V.
 
 Placa de 130 × 76 mm, 4 capas, 1,6 mm. Todos los componentes en F.
-  - F.Cu e In2 = señales (+ relleno +3V3 en In2); In1 = GND macizo; B.Cu = GND macizo.
+  - F.Cu, In2 y B.Cu = señales (relleno +3V3 en In2 y GND en F.Cu y B.Cu); In1 = GND macizo.
   - ZONA DE RED (220 V): esquina −X/+Y, rodeada por un FOSO de 6,5 mm sin cobre en ninguna capa (distancia de fuga
     reforzada entre red y MBTS ≥ 6,4 mm, EN 62368-1, 250 V, grado de contaminación 2, CTI ≥ 175). Las pistas de red
     se trazan aquí (MAINS_TRACKS), a 1,0 mm, solo en F.Cu; ningún plano entra en la zona de red ni en el foso.

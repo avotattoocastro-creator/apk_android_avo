@@ -20,7 +20,7 @@ from sexpr import Sym                                       # noqa: E402
 S = Sym
 PLANES = {D.GND: "In1.Cu"}                 # In1 = plano GND macizo
 # In2 es capa de señal (+3V3 se rutea y se rellena con una zona +3V3 después del ruteado)
-ROUTE_LAYERS = ["F.Cu", "In2.Cu"]   # B.Cu = plano GND macizo (sin pistas), como en la V5
+ROUTE_LAYERS = ["F.Cu", "In2.Cu", "B.Cu"]   # 3 capas de señal; In1 = GND macizo (F.Cu y B.Cu llevan relleno GND)
 CLEAR = 0.15
 VIA = (0.5, 0.3)
 
@@ -345,11 +345,22 @@ def write_board(r, path, outer_pours=True):
     tree.append(B.zone(D.CODE[D.GND], D.GND, "In1.Cu", poly, key="in1", connect="solid"))
     if outer_pours:
         tree.append(B.zone(D.CODE[D.V3], D.V3, "In2.Cu", poly, key="in2", connect="solid"))
-    tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b", connect="solid"))
     if outer_pours:
+        tree.append(B.zone(D.CODE[D.GND], D.GND, "B.Cu", poly, key="b"))
         tree.append(B.zone(D.CODE[D.GND], D.GND, "F.Cu", poly, key="f"))
     for k, band in enumerate(edge_bands()):
-        tree.append(B.keepout(["F.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
+        tree.append(B.keepout(["F.Cu", "In2.Cu", "B.Cu"], kpoly(band), "BORDE_%02d" % k, copperpour=False))
+    # bandas de 0,45 mm en los tramos rectos del contorno: el DSN no lleva el margen de 0,3 al canto
+    for k, pr in enumerate(D.outline_prims()):
+        if pr[0] != "line":
+            continue
+        (ax_, ay_), (bx_, by_) = pr[1], pr[2]
+        L_ = math.hypot(bx_ - ax_, by_ - ay_)
+        nx_, ny_ = -(by_ - ay_) / L_, (bx_ - ax_) / L_
+        if nx_ * (-(ax_ + bx_) / 2) + ny_ * (-(ay_ + by_) / 2) < 0:
+            nx_, ny_ = -nx_, -ny_
+        band = [(ax_, ay_), (bx_, by_), (bx_ + 0.45 * nx_, by_ + 0.45 * ny_), (ax_ + 0.45 * nx_, ay_ + 0.45 * ny_)]
+        tree.append(B.keepout(["F.Cu", "In2.Cu", "B.Cu"], kpoly(band), "BORDE_R%02d" % k, copperpour=False))
     ALL = ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"]
     # aislamiento de red: ningún relleno en la zona de red; el foso sin pistas, vías ni rellenos en ninguna capa
     tree.append(B.keepout(ALL, kpoly(D.MAINS_POLY), "ZONA_RED_220V", tracks=False, vias=False, copperpour=True))

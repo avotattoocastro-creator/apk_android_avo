@@ -61,7 +61,7 @@ L.append("- Estado: %s" % state)
 L.append("- Commit: `%s` · ejecución de CI: %s" % (sha, run))
 L.append("- Ruteado: %s" % route_src)
 L.append("- Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · "
-         "B.Cu plano GND, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm")
+         "B.Cu señal + relleno GND), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm")
 L.append("- Componentes: %d en total, %d para montar, %d sin montar (DNP: %s), %d a mano (pads de hilo y de prueba)"
          % (len(parts), len(assembled), len(dnp), ", ".join(dnp) or "—",
             len([p for p in parts if p["no_assembly"]])))
