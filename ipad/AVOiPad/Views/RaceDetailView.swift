@@ -9,6 +9,7 @@ struct RaceDetailView: View {
     let race: Race
     @State private var notes: String = ""
     @State private var askDelete: Bool = false
+    @State private var showDeep: Bool = false
     @State private var sectorRunner: String = ""
 
     var body: some View {
@@ -49,6 +50,11 @@ struct RaceDetailView: View {
         .background(Avo.bg)
         .onAppear { load() }
         .onChange(of: race.id) { (_: String, _: String) in load() }
+        .fullScreenCover(isPresented: $showDeep) {
+            RaceDeepAnalysisView(race: race)
+                .environment(app)
+                .avoColorScheme()
+        }
         .alert("Eliminar carrera", isPresented: $askDelete) {
             Button("Cancelar", role: .cancel) {}
             Button("Eliminar", role: .destructive) { model.delete(race.id) }
@@ -77,6 +83,14 @@ struct RaceDetailView: View {
                 Text("\(race.horseName ?? "—") · \(race.ourRunnerName ?? "—")").font(.footnote).foregroundStyle(Avo.textDim).lineLimit(1)
             }
             Spacer(minLength: 8)
+            // trainer's sketch 16/11/2026: «Análisis profundo» (full-screen visual analysis), charts icon, left of «Informe PDF»
+            Button {
+                showDeep = true
+            } label: {
+                Label("Análisis visual", systemImage: "chart.xyaxis.line")
+            }
+            .buttonStyle(.avoSecondary)
+            .accessibilityIdentifier("race.deepAnalysis")
             if race.ourRunner != nil {
                 // trainer 15/11/2026: PDF report of the race vs the training to send (the app only showed it)
                 Button {
