@@ -27,6 +27,16 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 
+
+## 2026-11-16 — Diseño AVO-LOCK-1 — activación de caballos al recibir la licencia
+**Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
+**Qué cambia:** §15 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: caballos ilimitados en la app; al recibir la licencia se
+eligen los de las plazas contratadas y quedan bloqueados (nombre e id); el casco ata la elección por nº de licencia y emite un
+comprobante firmado por su ATECC608B. Resuelta la decisión pendiente de §11.
+**Por qué:** flujo definido por el usuario (16/11/2026 21:48).
+**Archivos:** `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, `docs/REGISTRO_DE_CAMBIOS.md`.
+**No se ha tocado:** código, firmware, workflows, firmas, `Info.plist`. Estado: solo diseño, **NO VERIFICADO**.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1 — cupo de caballos por licencia de cuadra
 **Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
 **Qué cambia:** §15 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la licencia de cuadra lleva plazas de caballo firmadas; no se

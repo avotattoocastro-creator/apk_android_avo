@@ -159,7 +159,8 @@ BLOQUES (hasta el final del archivo)
 - ¿El veterinario de un caballo recibe copia automática al asignar, o solo cuando se le envía?
 - ~~¿Con la cuadra caducada se pueden consultar en solo lectura los entrenamientos ya descargados?~~ **Resuelto
   (16/11/2026 21:39):** sí, todo lo generado durante la licencia activa (§14).
-- ¿Plaza vacía: la rellena AVO al emitir la licencia o se ata al primer caballo grabado? (§15; propuesta: AVO)
+- ~~¿Quién rellena las plazas?~~ **Resuelto (16/11/2026 21:48):** el cliente las elige en la app al recibir la licencia y
+  el casco ata la elección (§15).
 - ~~¿Se cifra también lo que guardan el pecho y la espalda actuales?~~ **Resuelto (16/11/2026):** no. Son el banco de
   pruebas; solo cifra el casco.
 - ~~¿El casco de serie lleva un elemento seguro (ATECC608B)?~~ **Resuelto (16/11/2026):** sí, por AVO-LOCK-1 (§12).
@@ -270,28 +271,46 @@ propia**. Todas van asociadas a la cuadra y a su caducidad, y no funcionan más 
   licencia de 1 caballo y 1 mes: hasta renovar no se puede asignar otro caballo);
 - **desde que se asigna un caballo nuevo a una plaza, el anterior queda bloqueado** para usarse con el casco.
 
+**Flujo confirmado por el usuario (16/11/2026 21:48):**
+1. El cliente puede **crear en la app todos los caballos que quiera** (fichas, datos, fotos). Crear un caballo no gasta
+   plaza.
+2. **Al recibir la licencia** (nueva o renovada), la app pide **seleccionar el caballo o los caballos** de las plazas
+   contratadas, ni más ni menos.
+3. Con eso la app **se activa para esos caballos**, que quedan **bloqueados: no se puede cambiar su nombre ni su id**
+   mientras ocupen plaza (y tampoco después, para que su historial siga siendo suyo).
+4. Hasta la siguiente renovación, o hasta contratar otra plaza, no se puede elegir otro caballo.
+
 **Diseño:**
-- **Plazas firmadas.** La licencia de cuadra lleva `plazas: [{n, caballoId, desde}]`, firmada por AVO Tarjetas. El número
-  de plazas es el contratado. La app y el casco **no pueden** añadir ni cambiar plazas: no tienen la clave privada.
-- **Identidad del caballo:** `caballoId` es el registro del caballo en AVO Tarjetas (con su microchip o UELN cuando exista).
-  Cambiar el nombre o crear otra ficha del mismo caballo no da una plaza nueva.
-- **El casco solo graba con un caballo de una plaza.** Antes de grabar, la app elige el caballo y el casco lo comprueba con
-  la licencia instalada; si no está, rechaza la sesión. El caballo va en la cabecera del `.avoe` (dentro de la parte
-  autenticada) y la app no deja reasignar (AVO-ASSIGN-1) una sesión a un caballo fuera de plaza.
-- **Cambiar de caballo:**
-  - **durante el periodo:** imposible, salvo que se contrate otra plaza (nueva licencia con más plazas);
-  - **al renovar:** AVO emite la licencia del periodo nuevo con los caballos elegidos por la cuadra.
-  La licencia nueva llega directa a la app (enlace `avo://` o QR, sin email ni servidor).
-- **Caballo sustituido:** desde la fecha `desde` de la plaza nueva, el anterior queda **bloqueado para el casco** (no se
-  puede grabar con él). Igual que en §14, **sus datos de cuando tenía plaza se pueden ver** en las apps.
-- **Ampliar plazas a mitad de periodo:** la plaza nueva vence con la cuadra (no tiene caducidad propia).
-- **Registro en AVO Tarjetas:** historial de plazas por cuadra (qué caballo ocupó cada plaza y en qué fechas).
+- **La licencia firmada lleva el número de plazas,** no los caballos: `plazas: N` y un número de licencia. AVO no necesita
+  saber de antemano qué caballos elegirá el cliente.
+- **Identidad del caballo:** cada ficha creada en la app recibe un `caballoId` aleatorio (UUID) que nunca se reutiliza. Al
+  activarse, el nombre y el `caballoId` quedan bloqueados. Duplicar la ficha crea otro caballo, que no tiene plaza.
+- **La elección se ata en el casco,** que es la pieza de confianza (arranque seguro, flash cifrada, ATECC608B):
+  1. la app firma la elección `{nº de licencia, [caballoId, nombre]…}` con la llave de la cuadra y la envía al casco en la
+     conexión autenticada de §12;
+  2. el casco la acepta **solo si las plazas de ese nº de licencia están vacías** y si el número de caballos coincide con
+     las plazas. Una vez guardada, **no la cambia** hasta que llegue una licencia con otro número (renovación o ampliación);
+  3. el casco devuelve un **comprobante de activación** firmado por su ATECC608B. Las demás apps de la cuadra lo verifican
+     con el certificado del casco y bloquean esos caballos igual.
+  Si dos móviles de la cuadra eligen caballos distintos, vale la primera elección que llega al casco; la otra app recibe el
+  comprobante y se corrige sola.
+- **Varios cascos en la cuadra:** el comprobante del primer casco se instala en los demás desde la app; cada casco lo
+  verifica con el certificado del que lo firmó y adopta la misma elección.
+- **El casco solo graba con un caballo activado.** Antes de grabar, la app elige uno de los caballos activados y el casco lo
+  comprueba; si no está, rechaza la sesión. El `caballoId` va en la cabecera del `.avoe` (dentro de la parte autenticada) y la
+  app no deja reasignar (AVO-ASSIGN-1) una sesión a un caballo sin plaza en la fecha de la sesión.
+- **Al renovar:** llega la licencia nueva (enlace `avo://` o QR) y la app vuelve a pedir la selección. Se pueden mantener los
+  mismos caballos o elegir otros.
+- **Caballo que deja la plaza:** desde la activación del nuevo queda **bloqueado para el casco** (no se puede grabar con
+  él). Igual que en §14, **sus datos de cuando tenía plaza se pueden ver** en las apps.
+- **Ampliar plazas a mitad de periodo:** AVO emite una licencia con más plazas y nuevo número; la app pide elegir solo los
+  caballos de las plazas nuevas y mantiene los ya activados. La plaza nueva vence con la cuadra.
+- **Historial en AVO Tarjetas:** al pedir la renovación, la cuadra envía el comprobante de activación del periodo y AVO
+  guarda qué caballo ocupó cada plaza y cuándo.
 
 **Cambios por componente:**
-- **AVO Tarjetas:** plazas en la licencia de cuadra, ficha única por caballo, historial.
-- **Apps (Android, Windows, iPad):** selector de caballo limitado a las plazas; aviso «sin plaza»; asignación posterior
-  limitada a caballos con plaza en la fecha de la sesión.
-- **Casco:** comprobar el caballo contra las plazas antes de grabar; `caballoId` en la cabecera del `.avoe`.
-
-*Decisión pendiente:* ¿la plaza vacía de una licencia nueva la rellena AVO al emitirla (propuesta), o el casco la «ata»
-al primer caballo con el que se graba?
+- **AVO Tarjetas:** número de plazas en la licencia de cuadra, verificación de comprobantes, historial.
+- **Apps (Android, Windows, iPad):** pantalla «Selecciona los caballos de tu licencia» al recibirla, bloqueo de nombre e id,
+  selector de caballo limitado a los activados, aviso «sin plaza».
+- **Casco:** guardar la elección por nº de licencia, emitir el comprobante con el ATECC608B, comprobar el caballo antes de
+  grabar, `caballoId` en la cabecera del `.avoe`.
