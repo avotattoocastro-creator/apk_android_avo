@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 10863.2,
+   "volumen_mm3": 10731.7,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 55183.2,
+   "volumen_mm3": 55087.5,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -61,23 +61,23 @@
    ]
   },
   "AVO_GIRTH_R5_balancin_Xpos": {
-   "volumen_mm3": 574.1,
+   "volumen_mm3": 724.7,
    "valido": true,
    "solidos": 1,
    "caja": [
-    5.2,
+    5.6,
     14.0,
-    14.15
+    14.8
    ]
   },
   "AVO_GIRTH_R5_balancin_Xneg": {
-   "volumen_mm3": 486.7,
+   "volumen_mm3": 606.6,
    "valido": true,
    "solidos": 1,
    "caja": [
-    5.2,
+    5.6,
     12.0,
-    14.15
+    14.8
    ]
   }
  },
@@ -185,27 +185,27 @@
   },
   "-18": {
    "soporte": 0.0,
-   "capsula": 0.0,
+   "capsula": 0.843,
    "diente_en_el_cerco": 0.0
   },
   "-20": {
    "soporte": 0.0,
-   "capsula": 0.0,
+   "capsula": 4.174,
    "diente_en_el_cerco": 0.0
   },
   "-25": {
    "soporte": 0.0,
-   "capsula": 0.0,
+   "capsula": 11.308,
    "diente_en_el_cerco": 0.0
   },
   "-30": {
    "soporte": 0.0,
-   "capsula": 0.0,
+   "capsula": 14.321,
    "diente_en_el_cerco": 0.0
   }
  },
  "angulo_suelto_grados": -8,
- "angulo_tope_tapa_grados": null,
+ "angulo_tope_tapa_grados": -18,
  "antiapertura_cargado_mm3": {
   "-1": 0.085,
   "-2": 0.141,
@@ -219,20 +219,29 @@
    7.5
   ],
   "brazo_pulsador_mm": 6.3,
-  "brazo_iman_mm": 5.2,
+  "brazo_iman_mm": 6.0,
   "recorrido_pulsador_para_soltar_mm": 0.88,
   "centro_de_masas_respecto_al_eje_mm": [
-   0.81,
+   0.9,
    -0.51
   ],
-  "masa_g_PETG": 0.73,
+  "masa_g_PETG": 0.92,
   "contrasalida_grados": 17.0,
   "angulo_neutro_grados": 9.6,
-  "separacion_entre_imanes_mm": 1.1,
+  "separacion_imanes_atraccion_mm": 1.15,
+  "separacion_imanes_repulsion_mm": 2.4,
+  "pausas_de_impresion_Z_mm": {
+   "balancin (cara exterior en la cama)": [
+    2.55,
+    4.55
+   ],
+   "tapa (boca abajo)": 4.55,
+   "soporte": 12.05
+  },
   "pasadores": {
    "+X": "ISO 2338 Ø2 × 20",
    "-X": "ISO 2338 Ø2 × 18"
   },
-  "imanes": "4 × Ø4 × 2 N52 (2 en los balancines, 2 en el cerco), en atracción"
+  "imanes": "abajo 4 × Ø4 × 2 N52 en atracción (balancín ↔ cerco); arriba 4 × 10 × 3 × 2 N52 en repulsión (tapa ↔ balancín); todos ocultos"
  }
 }
