@@ -1,41 +1,37 @@
 # AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `ca07540d165b3b0749d615a79011c045c52de24a` · ejecución de CI: 43775448748
+- Commit: `865bddc9aaf2173031922099f4d6170f005db410` · ejecución de CI: 43777903687
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
 - Componentes: 157 en total, 128 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
-- Pistas: 1564 · vías: 261 · ruteado INCOMPLETO (12 conexiones)
+- Pistas: 1551 · vías: 270 · ruteado INCOMPLETO (6 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 12 |
+| DRC: errores | **FALLA** | 3 |
+| DRC: conexiones incompletas | **FALLA** | 6 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
+Errores de DRC por tipo: copper_edge_clearance 3
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.0612 mm ↔ Track [+3V3] on F.Cu, length 0.3000 mm
-- Pad 36 [+3V3] of U6 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.0849 mm
-- Pad 1 [VBUS_PC] of TP9 on F.Cu ↔ Pad 5 [VBUS_PC] of U1 on F.Cu
+- Pad 1 [CB_DP] of R54 on F.Cu ↔ Pad 4 [CB_DP] of U6 on F.Cu
 - Pad 6 [HUB_DN3_DM] of U6 on F.Cu ↔ Pad 2 [HUB_DN3_DM] of U5 on F.Cu
-- Pad 1 [HUB_LOCALPWR] of R24 on F.Cu ↔ Pad 28 [HUB_LOCALPWR] of U6 on F.Cu
-- Pad 34 [HUB_PLLFILT] of U6 on F.Cu ↔ Pad 1 [HUB_PLLFILT] of C28 on F.Cu
-- Pad 31 [HUB_UP_DP] of U6 on F.Cu ↔ Pad 8 [HUB_UP_DP] of U4 on F.Cu
-- Pad 8 [S3_DP_R] of U5 on F.Cu ↔ Pad 2 [S3_DP_R] of R15 on F.Cu
-- Pad A4 [VBUS_C_RAW] of J3 on F.Cu ↔ Track [VBUS_C_RAW] on F.Cu, length 1.8968 mm
-- Pad A4 [VBUS_C_RAW] of J3 on F.Cu ↔ Pad A9 [VBUS_C_RAW] of J3 on F.Cu
-- Track [XTAL_I] on F.Cu, length 0.3375 mm ↔ Pad 33 [XTAL_I] of U6 on F.Cu
-- Track [XTAL_O] on F.Cu, length 0.6583 mm ↔ Pad 32 [XTAL_O] of U6 on F.Cu
+- Pad 7 [HUB_DN3_DP] of U6 on F.Cu ↔ Pad 1 [HUB_DN3_DP] of U5 on F.Cu
+- Pad 30 [HUB_UP_DM] of U6 on F.Cu ↔ Pad 7 [HUB_UP_DM] of U4 on F.Cu
+- Pad 4 [S3H_DM] of U5 on F.Cu ↔ Pad 4 [S3H_DM] of U4 on F.Cu
+- Track [VBUS_C_RAW] on F.Cu, length 1.9287 mm ↔ Pad A9 [VBUS_C_RAW] of J3 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_edge_clearance: 8
+- silk_over_copper: 7
 - silk_overlap: 6
-- silk_over_copper: 5
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: F1, RV1, PS1, C4, U4, U5, Y1, U10, R40, R48, U14, U11, R41, R49, U15, U12, R42, R50, U16, U13, R43, R51, U17, J4

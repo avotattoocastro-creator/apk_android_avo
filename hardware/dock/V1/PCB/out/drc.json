@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-15T23:34:27+0000",
+    "date": "2026-11-16T00:16:33+0000",
     "included_severities": [
         "error",
         "warning",
@@ -15,66 +15,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+3V3] on F.Cu, length 0.0612 mm",
+                    "description": "Pad 1 [CB_DP] of R54 on F.Cu",
                     "pos": {
-                        "x": 119.0625,
-                        "y": 98.0
+                        "x": 88.16,
+                        "y": 69.97
                     },
-                    "uuid": "d50193f0-ede5-431a-b87e-a899d10bb56b"
+                    "uuid": "5e2f2dc8-51fc-5b3d-be83-d2dc4ab88741"
                 },
                 {
-                    "description": "Track [+3V3] on F.Cu, length 0.3000 mm",
+                    "description": "Pad 4 [CB_DP] of U6 on F.Cu",
                     "pos": {
-                        "x": 117.75,
-                        "y": 97.98
-                    },
-                    "uuid": "661ae007-837c-4484-a06c-bd08e4d9ce0f"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 36 [+3V3] of U6 on F.Cu",
-                    "pos": {
-                        "x": 120.0,
+                        "x": 120.5,
                         "y": 95.0625
                     },
-                    "uuid": "04650e76-0527-56f5-9730-d61cc4d18abc"
-                },
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.0849 mm",
-                    "pos": {
-                        "x": 117.77,
-                        "y": 95.0582
-                    },
-                    "uuid": "9d3b68d3-8dca-4e02-a87a-371e6519d9dd"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [VBUS_PC] of TP9 on F.Cu",
-                    "pos": {
-                        "x": 151.5,
-                        "y": 128.0
-                    },
-                    "uuid": "7e0cc811-9f4c-5c70-ba7e-51f5c630aae2"
-                },
-                {
-                    "description": "Pad 5 [VBUS_PC] of U1 on F.Cu",
-                    "pos": {
-                        "x": 153.1375,
-                        "y": 124.0
-                    },
-                    "uuid": "33c0b435-1060-594c-93d4-99079208c31c"
+                    "uuid": "4f27b5a6-3c07-5b5d-87af-185bf9690560"
                 }
             ],
             "severity": "error",
@@ -86,8 +40,8 @@
                 {
                     "description": "Pad 6 [HUB_DN3_DM] of U6 on F.Cu",
                     "pos": {
-                        "x": 119.0625,
-                        "y": 98.5
+                        "x": 119.5,
+                        "y": 95.0625
                     },
                     "uuid": "eafcff9c-8eb1-583a-ac2e-2ded145ed509"
                 },
@@ -107,20 +61,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 1 [HUB_LOCALPWR] of R24 on F.Cu",
+                    "description": "Pad 7 [HUB_DN3_DP] of U6 on F.Cu",
                     "pos": {
-                        "x": 116.69,
-                        "y": 95.82
-                    },
-                    "uuid": "7a86be8a-43aa-58de-ae87-3ee243698993"
-                },
-                {
-                    "description": "Pad 28 [HUB_LOCALPWR] of U6 on F.Cu",
-                    "pos": {
-                        "x": 124.0,
+                        "x": 119.0,
                         "y": 95.0625
                     },
-                    "uuid": "f3728810-6768-532d-9593-cda1c7613209"
+                    "uuid": "fcff3117-664f-5dc0-8241-eee917dbc609"
+                },
+                {
+                    "description": "Pad 1 [HUB_DN3_DP] of U5 on F.Cu",
+                    "pos": {
+                        "x": 138.55,
+                        "y": 93.0
+                    },
+                    "uuid": "27abae08-757a-5e43-be1d-15e549e5de41"
                 }
             ],
             "severity": "error",
@@ -130,43 +84,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 34 [HUB_PLLFILT] of U6 on F.Cu",
+                    "description": "Pad 30 [HUB_UP_DM] of U6 on F.Cu",
                     "pos": {
-                        "x": 121.0,
-                        "y": 95.0625
+                        "x": 122.9375,
+                        "y": 99.0
                     },
-                    "uuid": "ab75e9f6-e27a-59c8-83cf-7415523e5dae"
+                    "uuid": "d6cc9de7-a306-57f6-a910-f37a91c2d48c"
                 },
                 {
-                    "description": "Pad 1 [HUB_PLLFILT] of C28 on F.Cu",
-                    "pos": {
-                        "x": 121.07,
-                        "y": 93.77
-                    },
-                    "uuid": "677b3df9-e4f6-5701-a268-95c4daaa1c19"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 31 [HUB_UP_DP] of U6 on F.Cu",
-                    "pos": {
-                        "x": 122.5,
-                        "y": 95.0625
-                    },
-                    "uuid": "8d7e9233-13a1-5497-9953-4fcfac680657"
-                },
-                {
-                    "description": "Pad 8 [HUB_UP_DP] of U4 on F.Cu",
+                    "description": "Pad 7 [HUB_UP_DM] of U4 on F.Cu",
                     "pos": {
                         "x": 143.45,
-                        "y": 116.0
+                        "y": 116.5
                     },
-                    "uuid": "20feed9f-10ee-5ad7-a72d-2e8a88ee534a"
+                    "uuid": "5b2af7e8-b295-59b7-9bfb-cb18f90f2ba4"
                 }
             ],
             "severity": "error",
@@ -176,20 +107,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 8 [S3_DP_R] of U5 on F.Cu",
+                    "description": "Pad 4 [S3H_DM] of U5 on F.Cu",
                     "pos": {
-                        "x": 141.45,
-                        "y": 94.0
+                        "x": 138.55,
+                        "y": 94.5
                     },
-                    "uuid": "5d80cce1-e549-5634-a084-f6187125a62e"
+                    "uuid": "99bfd416-e2ea-5c1c-b72d-ab7826d92a50"
                 },
                 {
-                    "description": "Pad 2 [S3_DP_R] of R15 on F.Cu",
+                    "description": "Pad 4 [S3H_DM] of U4 on F.Cu",
                     "pos": {
-                        "x": 151.06,
-                        "y": 86.57
+                        "x": 140.55,
+                        "y": 116.5
                     },
-                    "uuid": "198e6779-ecc4-5c5b-b719-9b85a932f2a0"
+                    "uuid": "4c7f5ef4-0ac9-5109-a73a-c5ac3ffc67be"
                 }
             ],
             "severity": "error",
@@ -199,35 +130,12 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad A4 [VBUS_C_RAW] of J3 on F.Cu",
+                    "description": "Track [VBUS_C_RAW] on F.Cu, length 1.9287 mm",
                     "pos": {
-                        "x": 157.455,
+                        "x": 155.5263,
                         "y": 126.45
                     },
-                    "uuid": "97d23c39-6574-5a7d-af68-5ba3e76a7e03"
-                },
-                {
-                    "description": "Track [VBUS_C_RAW] on F.Cu, length 1.8968 mm",
-                    "pos": {
-                        "x": 155.09,
-                        "y": 130.4768
-                    },
-                    "uuid": "b21f22f1-1a79-4d1e-82ba-442327e8728a"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad A4 [VBUS_C_RAW] of J3 on F.Cu",
-                    "pos": {
-                        "x": 157.455,
-                        "y": 126.45
-                    },
-                    "uuid": "97d23c39-6574-5a7d-af68-5ba3e76a7e03"
+                    "uuid": "9dd77707-2a85-43cc-b642-b41dec5769bd"
                 },
                 {
                     "description": "Pad A9 [VBUS_C_RAW] of J3 on F.Cu",
@@ -240,55 +148,93 @@
             ],
             "severity": "error",
             "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [XTAL_I] on F.Cu, length 0.3375 mm",
-                    "pos": {
-                        "x": 120.9,
-                        "y": 107.1875
-                    },
-                    "uuid": "737fa257-b962-4df3-a650-920f237fc91b"
-                },
-                {
-                    "description": "Pad 33 [XTAL_I] of U6 on F.Cu",
-                    "pos": {
-                        "x": 121.5,
-                        "y": 95.0625
-                    },
-                    "uuid": "c358b861-3f30-5de5-bd67-e90e6b7b5dbc"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [XTAL_O] on F.Cu, length 0.6583 mm",
-                    "pos": {
-                        "x": 123.11,
-                        "y": 103.63
-                    },
-                    "uuid": "d059fd97-c71d-4920-a425-d5cbc1d4b2cd"
-                },
-                {
-                    "description": "Pad 32 [XTAL_O] of U6 on F.Cu",
-                    "pos": {
-                        "x": 122.0,
-                        "y": 95.0625
-                    },
-                    "uuid": "b7dd7248-ca58-564e-8596-5fc5d3f76ff5"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
         }
     ],
     "violations": [
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Track [AUX_A] on F.Cu, length 3.1207 mm",
+                    "pos": {
+                        "x": 86.7105,
+                        "y": 62.3305
+                    },
+                    "uuid": "14bb907f-fe22-4101-9d55-9c79276d5768"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Track [AUX_A] on F.Cu, length 63.2823 mm",
+                    "pos": {
+                        "x": 149.9928,
+                        "y": 62.3305
+                    },
+                    "uuid": "377f855a-ea9c-4d7e-867e-769e090ef3f2"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 162.0,
+                        "y": 62.0
+                    },
+                    "uuid": "83c14db4-17e5-55ee-9632-d1c51e83285c"
+                },
+                {
+                    "description": "Track [AUX_A] on F.Cu, length 14.3169 mm",
+                    "pos": {
+                        "x": 160.1164,
+                        "y": 72.4541
+                    },
+                    "uuid": "53c376c2-1570-4c03-972e-eaedf2f8ec11"
+                }
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+        },
+        {
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.1038 mm) (F.Cu)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu, priority 0",
+                    "pos": {
+                        "x": 165.0,
+                        "y": 135.0
+                    },
+                    "uuid": "70761a7d-0a94-4b9d-a8ff-357aefb3cf54"
+                }
+            ],
+            "severity": "warning",
+            "type": "connection_width"
+        },
         {
             "description": "Silkscreen clipped by board edge",
             "items": [
@@ -543,6 +489,36 @@
                         "y": 69.0
                     },
                     "uuid": "8044b2b6-1c44-5038-acd4-6c94756e4a96"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+5V' on F.Silkscreen",
+                    "pos": {
+                        "x": 104.0,
+                        "y": 69.0
+                    },
+                    "uuid": "4d97a74b-a0d4-5b09-aee2-9858771da8ff"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+5V' on F.Silkscreen",
+                    "pos": {
+                        "x": 115.0,
+                        "y": 69.0
+                    },
+                    "uuid": "52bf4d3a-82ad-5a02-96ef-27362cf58a72"
                 }
             ],
             "severity": "warning",
