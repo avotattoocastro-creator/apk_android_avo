@@ -1,27 +1,22 @@
-# AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de diagnóstico
+# AVO DOCK V1 · soporte de pared cargador (2 cascos + 2 cinchas) · REV A — informe de fabricación
 
-- Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `43750f3657d7a9629b3937fd99820f9c49bff495` · ejecución de CI: 43786768507
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `38e5e11e164988888148d4923ddf24d8a75056d3` · ejecución de CI: 43788505774
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 130 × 76 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu plano GND · In2.Cu plano +3V3 · B.Cu señal + relleno GND), 1,6 mm, ENIG, cobre exterior 1 oz · zona de red 230 V con foso de 6,5 mm
 - Componentes: 156 en total, 127 para montar, 0 sin montar (DNP: —), 29 a mano (pads de hilo y de prueba)
-- Pistas: 1463 · vías: 302 · ruteado INCOMPLETO (2 conexiones)
+- Pistas: 1449 · vías: 304 · ruteado completo (0 conexiones incompletas)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 1 |
-| DRC: conexiones incompletas | **FALLA** | 2 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: zones_intersect 1
-
-### Conexiones incompletas
-- Pad 7 [S3_DM_R] of U5 on F.Cu ↔ Pad 2 [S3_DM_R] of R16 on F.Cu
-- Track [VBUS_C_RAW] on F.Cu, length 1.4233 mm ↔ Pad A9 [VBUS_C_RAW] of J3 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_edge_clearance: 8
@@ -47,8 +42,8 @@ Errores de DRC por tipo: zones_intersect 1
 - **Hub USB2514B** configurado por patillas: CFG_SEL = 00, LOCAL_PWR = 1, NON_REM = 00, puerto 4 desactivado. La potencia de los puertos la manda el S3, no PRTPWR.
 
 ## Estado de fabricación
-- Diseño verificado por software (KiCad 9 en el CI): **no**
-- Apto para solicitar prototipos: **no**
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
 - Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
 
 ## Limitaciones pendientes (ver README)
@@ -59,4 +54,4 @@ Errores de DRC por tipo: zones_intersect 1
 - USB entre el hub y los cascos a velocidad completa (12 Mbit/s, USB nativo del ESP32-S3): sin control de impedancia.
 - Pogo de 5 contactos del casco: el modelo real sigue pendiente (STEP).
 - Nada de esto se ha fabricado ni medido: no es un prototipo validado.
-::notice title=Puerta de fabricación::NO SUPERADA
+::notice title=Puerta de fabricación::SUPERADA

@@ -1876,6 +1876,8 @@
     (wire (path F.Cu 300  128880 -82440  128875 -82425)(net GND)(type route))
     (wire (path F.Cu 300  133910 -79560  133925 -79575)(net GND)(type route))
     (wire (path F.Cu 300  100270 -123600  100275 -123575)(net +3V3)(type route))
+    (wire (path F.Cu 300  157455 -126450  157055 -126450)(net VBUS_C_RAW)(type route))
+    (wire (path F.Cu 300  157455 -121550  157055 -121550)(net VBUS_C_RAW)(type route))
     (wire (path F.Cu 1000  37500 -66000  37500 -73000)(net AC_L_IN)(type route))
     (wire (path F.Cu 1000  42580 -73000  42500 -73000  42500 -79500  42000 -79500
             42000 -88000)(net AC_L)(type route))
