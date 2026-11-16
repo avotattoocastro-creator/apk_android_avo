@@ -24,6 +24,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — Diseño AVO-ENC-1: RAW comprimido y cifrado en el casco + llavero de cuadras
+**Autor:** Claude · **Rama:** `docs/avo-enc-1` · solo documento.
+**Qué cambia:** nuevo `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, con el diseño aprobado por el usuario:
+- **Formato en la SD:** el casco escribe `.avoe` por bloques (deflate + AES-256-GCM, ECDH P-256 para envolver la llave de sesión).
+- **Llaves:** una llave por cuadra y una llave personal por persona.
+- **Llavero `.avokeys`:** cifrado con la clave secreta de la tarjeta NFC; un propietario o veterinario con varias cuadras usa una sola tarjeta.
+- **Copias por destinatario:** al asignar el caballo se añade una para su propietario.
+- **Casco:** solo acepta llaves públicas de cuadra firmadas por AVO Tarjetas.
+
+**No se ha tocado:** firmware, apps, workflows ni firmas.
+**Estado:** DISEÑO · sin implementar.
+
 ## 2026-11-16 — iPad — «Análisis visual» de la carrera a pantalla completa
 **Autor:** Claude · **Rama:** `feature/ipad-carrera-analisis-profundo`
 **Qué cambia:** en la ficha de la carrera hay un botón nuevo, **«Análisis visual»** (icono de gráficas, a la izquierda de «Informe PDF»). Abre una ventana a pantalla completa.
