@@ -174,7 +174,7 @@ Con esto se resuelve la decisión del elemento seguro: **el casco de serie lleva
 | **Firmware intocable** | Arranque seguro v2 y cifrado de flash del ESP32-S3 en la placa de serie. Las OTA van firmadas (mantienen el formato `X.Y.Z`). | Quitar las comprobaciones cambiando el firmware o leer la flash |
 | **Datos** | AVO-ENC-1 (§1–§9): cifrados para la cuadra | Leer la SD fuera del sistema |
 
-**Qué hace el casco según su estado** (propuesta, pendiente de confirmar):
+**Qué hace el casco según su estado** (confirmado el 16/11/2026):
 - **Licencia válida:** funciona todo.
 - **Faltan 7 días o menos:** funciona todo, y la app avisa.
 - **Caducada:**
@@ -192,8 +192,7 @@ Con esto se resuelve la decisión del elemento seguro: **el casco de serie lleva
 - **Llaves de producción:** la pública de licencias y el certificado de fábrica se graban al producir el casco; ninguna
   llave privada va en el firmware ni en el repositorio.
 
-**Decisiones pendientes:**
-1. ¿Margen al caducar? (propuesta: aviso a 7 días y bloqueo de grabación el día de fin)
-2. Con la licencia caducada, ¿se pueden **descargar** los datos ya grabados? (propuesta: sí)
-3. ¿El casco tiene **licencia propia** (de la cuadra), o vale con la licencia de la persona que conecta? (propuesta: las dos;
-   el casco con licencia de cuadra y la app con la de la persona)
+**Decisiones (confirmadas por el usuario el 16/11/2026 21:18):**
+1. **Margen al caducar:** aviso desde 7 días antes y bloqueo de la grabación el día de fin.
+2. **Con la licencia caducada,** los datos ya grabados **sí** se pueden descargar a una app autorizada de su cuadra.
+3. **Dos licencias:** el casco lleva su licencia (de la cuadra) y la app la de la persona que conecta. Hacen falta las dos.

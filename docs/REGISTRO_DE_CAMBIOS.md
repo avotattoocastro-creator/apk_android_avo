@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — AVO-LOCK-1: decisiones confirmadas
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-decisiones` · solo documento.
+**Qué cambia:** en la §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md` el usuario confirma:
+- aviso desde 7 días antes y bloqueo de la grabación el día de fin;
+- con la licencia caducada se pueden descargar los datos ya grabados;
+- hacen falta dos licencias, la del casco (cuadra) y la de la persona.
+
+**Estado:** DISEÑO.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1: el casco solo funciona dentro del sistema y de su licencia
 **Autor:** Claude · **Rama:** `docs/avo-lock-1` · solo documento.
 **Qué cambia:** nueva §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
