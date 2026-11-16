@@ -159,5 +159,41 @@ BLOQUES (hasta el final del archivo)
 - ¿El veterinario de un caballo recibe copia automática al asignar, o solo cuando se le envía?
 - ~~¿Se cifra también lo que guardan el pecho y la espalda actuales?~~ **Resuelto (16/11/2026):** no. Son el banco de
   pruebas; solo cifra el casco.
-- ¿El casco de serie lleva un elemento seguro (ATECC608B) para una identidad no clonable, o basta con el número de serie
-  en flash cifrada?
+- ~~¿El casco de serie lleva un elemento seguro (ATECC608B)?~~ **Resuelto (16/11/2026):** sí, por AVO-LOCK-1 (§12).
+
+## 12. AVO-LOCK-1 — el casco solo funciona dentro del sistema y de su licencia (16/11/2026 21:14)
+**Requisito del usuario:** el casco no se puede usar más allá del sistema y de la licencia que tenga. Ni con apps de
+terceros, ni copiado, ni en otra cuadra sin licencia, ni con un firmware modificado.
+Con esto se resuelve la decisión del elemento seguro: **el casco de serie lleva un ATECC608B**.
+
+| Capa | Cómo | Qué impide |
+|---|---|---|
+| **Identidad no clonable** | ATECC608B con su par de llaves P-256 generado dentro del chip, que nunca sale. En fábrica, AVO Tarjetas firma su **certificado de casco** (nº de serie y pública). | Fabricar un «casco» falso que nuestras apps acepten, o clonar uno |
+| **Licencia del casco** | Token firmado por AVO Tarjetas (nº de serie, cuadra, keyId de la cuadra, fecha de fin, funciones), con el mismo esquema que `.avolic`. El casco lo comprueba con la pública de licencias y guarda la última fecha vista, para que no sirva retrasar el reloj. La fecha la da el **GNSS** (ZED-F9P). | Usar el casco sin licencia, caducado o en otra cuadra |
+| **Solo apps autorizadas** | Al conectar (BLE, Wi-Fi o USB), el casco envía un reto aleatorio. La app lo firma con la **llave de la cuadra** de su llavero, y el casco lo verifica con la pública de cuadra instalada (firmada, §7). A la vez, la app comprueba el certificado del casco con un reto que firma el ATECC. Después se crea una llave de sesión ECDH para cifrar todo el canal. | Que una app de terceros o un móvil sin licencia de esa cuadra configure, grabe, haga streaming o descargue |
+| **Firmware intocable** | Arranque seguro v2 y cifrado de flash del ESP32-S3 en la placa de serie. Las OTA van firmadas (mantienen el formato `X.Y.Z`). | Quitar las comprobaciones cambiando el firmware o leer la flash |
+| **Datos** | AVO-ENC-1 (§1–§9): cifrados para la cuadra | Leer la SD fuera del sistema |
+
+**Qué hace el casco según su estado** (propuesta, pendiente de confirmar):
+- **Licencia válida:** funciona todo.
+- **Faltan 7 días o menos:** funciona todo, y la app avisa.
+- **Caducada:**
+  - **no graba** sesiones nuevas ni hace streaming;
+  - **sí deja descargar** lo ya grabado a una app autorizada de su cuadra, porque los datos son del cliente;
+  - se reactiva con una licencia nueva que se instala desde la app, como hoy el `.avolic`.
+- **Sin licencia o de otra cuadra:** solo deja instalar una licencia firmada; nada más.
+- **Sin conexión:** la licencia se comprueba en el propio casco y no necesita internet.
+
+**Límites honestos:**
+- **Atacante con laboratorio:** con medios caros (glitching, microscopio) un chip puede llegar a atacarse. Esto sube el
+  listón muy por encima de lo que compensa copiar el sistema.
+- **Fecha antes del primer fix GNSS:** se usa la última fecha guardada, que solo avanza, y la licencia se comprueba en
+  cuanto hay fix.
+- **Llaves de producción:** la pública de licencias y el certificado de fábrica se graban al producir el casco; ninguna
+  llave privada va en el firmware ni en el repositorio.
+
+**Decisiones pendientes:**
+1. ¿Margen al caducar? (propuesta: aviso a 7 días y bloqueo de grabación el día de fin)
+2. Con la licencia caducada, ¿se pueden **descargar** los datos ya grabados? (propuesta: sí)
+3. ¿El casco tiene **licencia propia** (de la cuadra), o vale con la licencia de la persona que conecta? (propuesta: las dos;
+   el casco con licencia de cuadra y la app con la de la persona)
