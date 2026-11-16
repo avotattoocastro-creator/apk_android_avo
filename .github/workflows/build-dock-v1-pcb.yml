@@ -41,9 +41,9 @@ jobs:
           R=$P/out/ruteado
           rm -rf $P/out && mkdir -p $P/out/render $R
           if [ -f $P/kicad/AVO_DOCK_V1_PCB_ruteado.kicad_pcb ]; then
-            # placa ya completa en la fuente (Freerouting + reparación con fuente/repair.py)
+            # placa ya ruteada en la fuente (resultado del CI guardado tal cual, o reparado con fuente/repair.py)
             cp $P/kicad/AVO_DOCK_V1_PCB_ruteado.kicad_pcb $P/kicad/AVO_DOCK_V1_PCB.kicad_pcb
-            echo "placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)" > $R/ORIGEN.txt
+            echo "placa ruteada de la fuente: Freerouting 1.9.0 de la ejecución 43788505774, sin reparar" > $R/ORIGEN.txt
           else
             docker run --rm -u 0 -e HOME=/tmp -v "$PWD":/w -w /w/$P kicad/kicad:9.0 \
               python3 fuente/ci_route.py export kicad/AVO_DOCK_V1_PCB_colocacion.kicad_pcb out/ruteado/placa.dsn > $R/export.log 2>&1 || echo "export falló" >> $R/export.log

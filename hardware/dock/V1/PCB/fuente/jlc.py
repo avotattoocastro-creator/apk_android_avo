@@ -25,7 +25,7 @@ with open("out/JLCPCB_BOM.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
     w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #"])
     for (val, fp, lcsc), refs in bom.items():
-        w.writerow([val, ",".join(sorted(refs, key=lambda r: (r.rstrip("0123456789"), int("0" + r.lstrip("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))), fp, lcsc])
+        w.writerow([val, ",".join(sorted(refs, key=lambda r: (r.rstrip("0123456789"), int("0" + "".join(c for c in r if c.isdigit())), r))), fp, lcsc])
 
 with open("out/JLCPCB_CPL.csv", "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
