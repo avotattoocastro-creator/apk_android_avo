@@ -24,6 +24,15 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — AVO-ENC-1: solo el casco cifra; pecho y espalda siguen como banco de pruebas
+**Autor:** Claude · **Rama:** `docs/avo-enc-1-casco` · solo documento.
+**Qué cambia:** decisión del usuario en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- el cifrado es solo para el casco (PCB propia);
+- el pecho y la espalda actuales son el banco de pruebas y siguen grabando `.avr` sin cifrar;
+- en la placa de serie del casco se recomienda arranque seguro y cifrado de flash, y el elemento seguro opcional queda como decisión pendiente.
+
+**Estado:** DISEÑO.
+
 ## 2026-11-16 — Diseño AVO-ENC-1: RAW comprimido y cifrado en el casco + llavero de cuadras
 **Autor:** Claude · **Rama:** `docs/avo-enc-1` · solo documento.
 **Qué cambia:** nuevo `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`, con el diseño aprobado por el usuario:

@@ -6,6 +6,18 @@ Las cifras marcadas **(E)** son estimaciones.
 **Antes de escribir código:** integrar en `develop/avo-performance-horse` las ramas pendientes, por la regla del proyecto
 (casco V5 incluido: `feature/back-v5-casco`).
 
+## 0. Alcance (decisión del usuario, 16/11/2026 21:11)
+- **AVO-ENC-1 es solo para el casco**, el producto con PCB propia dedicada al sistema.
+- **El pecho y la espalda actuales no se cifran.** Son el **banco de pruebas** y siguen grabando `.avr` sin cifrar, lo que
+  facilita depurar.
+- Las apps siguen leyendo los `.avr` y `.avo` sin cifrar del banco de pruebas y, además, los `.avoe` del casco.
+- **El casco es hardware nuevo, sin la herencia del banco de pruebas.** Desde la primera versión de producción puede llevar:
+  - el **arranque seguro** y el **cifrado de flash** del ESP32-S3: protegen el firmware y la configuración (la pública de
+    cuadra, el número de serie). Queman eFuses de forma irreversible, así que se activan en la placa de serie, no en los
+    prototipos;
+  - opcionalmente, un **elemento seguro** (p. ej. ATECC608B), si se quiere identidad del casco no clonable. No hace falta
+    para AVO-ENC-1, porque el casco solo guarda llaves públicas.
+
 ## 1. Objetivo
 - **Casco:** el casco (espalda V5) guarda en la microSD el RAW **completo**, **comprimido** y **cifrado**. Sacando la SD y
   abriéndola en un ordenador no se puede leer nada; solo nuestras apps (Android, Windows, iPad), con la tarjeta de una
@@ -145,4 +157,7 @@ BLOQUES (hasta el final del archivo)
 ## 11. Decisiones pendientes del usuario
 - ¿Se permite grabar **sin cifrar** si el casco no tiene llave? (propuesta: sí, marcado y con aviso)
 - ¿El veterinario de un caballo recibe copia automática al asignar, o solo cuando se le envía?
-- ¿Se cifra también lo que guardan el **pecho** y la espalda actual, o solo el casco V5?
+- ~~¿Se cifra también lo que guardan el pecho y la espalda actuales?~~ **Resuelto (16/11/2026):** no. Son el banco de
+  pruebas; solo cifra el casco.
+- ¿El casco de serie lleva un elemento seguro (ATECC608B) para una identidad no clonable, o basta con el número de serie
+  en flash cifrada?
