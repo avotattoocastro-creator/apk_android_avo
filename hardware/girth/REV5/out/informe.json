@@ -21,7 +21,7 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 10622.1,
+   "volumen_mm3": 10718.8,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -51,7 +51,7 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 55076.4,
+   "volumen_mm3": 54859.6,
    "valido": true,
    "solidos": 1,
    "caja": [
@@ -61,23 +61,23 @@
    ]
   },
   "AVO_GIRTH_R5_balancin_Xpos": {
-   "volumen_mm3": 694.6,
+   "volumen_mm3": 808.2,
    "valido": true,
    "solidos": 1,
    "caja": [
-    5.6,
+    5.7,
     14.0,
-    14.8
+    15.8
    ]
   },
   "AVO_GIRTH_R5_balancin_Xneg": {
-   "volumen_mm3": 576.9,
+   "volumen_mm3": 671.6,
    "valido": true,
    "solidos": 1,
    "caja": [
-    5.6,
+    5.7,
     12.0,
-    14.8
+    15.8
    ]
   }
  },
@@ -139,40 +139,39 @@
  },
  "tapas_imanes_mm": {
   "disco_balancin_abajo": [
-   4.6,
+   5.5,
    0.5
   ],
-  "placa_balancin_arriba": [
-   10.6,
-   3.6,
+  "disco_balancin_arriba": [
+   5.5,
    0.5
   ],
   "tapon_cerco": [
    2.05,
-   4.1,
-   0.85
+   5.1,
+   0.55
   ]
  },
  "apertura_capsula_apoyada_mm3": {
   "0": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 4.004
+   "diente_en_el_cerco": 3.629
   },
   "-2": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 2.478
+   "diente_en_el_cerco": 2.246
   },
   "-4": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 1.266
+   "diente_en_el_cerco": 1.148
   },
   "-6": {
    "soporte": 0.0,
    "capsula": 0.0,
-   "diente_en_el_cerco": 0.342
+   "diente_en_el_cerco": 0.31
   },
   "-8": {
    "soporte": 0.0,
@@ -201,22 +200,22 @@
   },
   "-18": {
    "soporte": 0.0,
-   "capsula": 0.199,
+   "capsula": 0.696,
    "diente_en_el_cerco": 0.0
   },
   "-20": {
-   "soporte": 0.0,
-   "capsula": 1.163,
+   "soporte": 0.084,
+   "capsula": 3.553,
    "diente_en_el_cerco": 0.0
   },
   "-25": {
-   "soporte": 0.0,
-   "capsula": 5.785,
+   "soporte": 0.284,
+   "capsula": 13.532,
    "diente_en_el_cerco": 0.0
   },
   "-30": {
    "soporte": 0.0,
-   "capsula": 11.674,
+   "capsula": 24.975,
    "diente_en_el_cerco": 0.0
   }
  },
@@ -234,27 +233,24 @@
    7.5
   ],
   "brazo_pulsador_mm": 6.3,
-  "brazo_iman_mm": 6.0,
+  "brazo_iman_mm": 6.2,
   "recorrido_pulsador_para_soltar_mm": 0.88,
   "centro_de_masas_respecto_al_eje_mm": [
-   0.95,
-   -0.57
+   0.9,
+   -0.6
   ],
-  "masa_g_PETG": 0.88,
+  "masa_g_PETG": 1.03,
   "contrasalida_grados": 0.0,
   "angulo_neutro_grados": 9.6,
-  "separacion_imanes_atraccion_mm": 1.1,
-  "separacion_imanes_repulsion_mm": 3.15,
-  "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 2 discos, 2 placas, 2 tapones)",
+  "separacion_imanes_atraccion_mm": 1.2,
+  "separacion_imanes_repulsion_mm": 3.55,
+  "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 4 discos y 2 tapones)",
   "diente": "recto (sin contrasalida); bloqueo con carga por rozamiento + imanes",
   "rozamiento_minimo_para_bloquear": {
    "contacto_en_la_punta": 0.169,
    "contacto_repartido": 0.106
   },
-  "pasadores": {
-   "+X": "ISO 2338 Ø2 × 20",
-   "-X": "ISO 2338 Ø2 × 18"
-  },
-  "imanes": "abajo 4 × Ø4 × 2 N52 en atracción (balancín ↔ cerco); arriba 4 × 10 × 3 × 2 N52 en repulsión (tapa ↔ balancín); todos ocultos"
+  "pasadores": "4 × ISO 2338 Ø2 × 6 (2 por balancín, a presión en las aletas)",
+  "imanes": "16 × Ø5 × 1 (los de la espalda y la cincha anterior), apilados de 2: abajo en atracción (balancín ↔ cerco), arriba en repulsión (tapa ↔ balancín); todos con orificio y tapa"
  }
 }
