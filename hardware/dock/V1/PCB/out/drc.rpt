@@ -1,21 +1,9 @@
 ** Drc report for AVO_DOCK_V1_PCB.kicad_pcb **
-** Created on 2026-11-16T00:16:34+0000 **
+** Created on 2026-11-16T00:51:25+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 25 DRC violations **
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)
-    Rule: board setup constraints edge; error
-    @(162.0000 mm, 62.0000 mm): Segment on Edge.Cuts
-    @(86.7105 mm, 62.3305 mm): Track [AUX_A] on F.Cu, length 3.1207 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)
-    Rule: board setup constraints edge; error
-    @(162.0000 mm, 62.0000 mm): Segment on Edge.Cuts
-    @(149.9928 mm, 62.3305 mm): Track [AUX_A] on F.Cu, length 63.2823 mm
-[copper_edge_clearance]: Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2305 mm)
-    Rule: board setup constraints edge; error
-    @(162.0000 mm, 62.0000 mm): Segment on Edge.Cuts
-    @(160.1164 mm, 72.4541 mm): Track [AUX_A] on F.Cu, length 14.3169 mm
-[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.1038 mm) (F.Cu)
+** Found 22 DRC violations **
+[connection_width]: Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0694 mm) (F.Cu)
     Rule: board setup constraints; warning
     @(165.0000 mm, 135.0000 mm): Zone [GND] on F.Cu, priority 0
 [silk_edge_clearance]: Silkscreen clipped by board edge
@@ -96,31 +84,15 @@
     @(60.5000 mm, 62.0000 mm): Segment on F.Silkscreen
     @(38.4800 mm, 112.1200 mm): Segment of PS1 on F.Silkscreen
 
-** Found 6 unconnected pads **
+** Found 2 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(88.1600 mm, 69.9700 mm): Pad 1 [CB_DP] of R54 on F.Cu
-    @(120.5000 mm, 95.0625 mm): Pad 4 [CB_DP] of U6 on F.Cu
+    @(143.4500 mm, 115.5000 mm): Pad 9 [USB_SEL] of U4 on F.Cu
+    @(141.4500 mm, 93.5000 mm): Track [USB_SEL] on F.Cu, length 0.8278 mm
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(119.5000 mm, 95.0625 mm): Pad 6 [HUB_DN3_DM] of U6 on F.Cu
-    @(138.5500 mm, 93.5000 mm): Pad 2 [HUB_DN3_DM] of U5 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(119.0000 mm, 95.0625 mm): Pad 7 [HUB_DN3_DP] of U6 on F.Cu
-    @(138.5500 mm, 93.0000 mm): Pad 1 [HUB_DN3_DP] of U5 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(122.9375 mm, 99.0000 mm): Pad 30 [HUB_UP_DM] of U6 on F.Cu
-    @(143.4500 mm, 116.5000 mm): Pad 7 [HUB_UP_DM] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(138.5500 mm, 94.5000 mm): Pad 4 [S3H_DM] of U5 on F.Cu
-    @(140.5500 mm, 116.5000 mm): Pad 4 [S3H_DM] of U4 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
-    @(155.5263 mm, 126.4500 mm): Track [VBUS_C_RAW] on F.Cu, length 1.9287 mm
-    @(157.4550 mm, 121.5500 mm): Pad A9 [VBUS_C_RAW] of J3 on F.Cu
+    @(129.6000 mm, 90.1500 mm): Track [XTAL_O] on F.Cu, length 0.9517 mm
+    @(122.9375 mm, 98.0000 mm): Pad 32 [XTAL_O] of U6 on F.Cu
 
 ** Found 0 Footprint errors **
 
