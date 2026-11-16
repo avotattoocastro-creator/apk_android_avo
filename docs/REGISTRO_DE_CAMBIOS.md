@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-16 — AVO-LOCK-1: alquiler mensual y cambio de cuadra del casco
+**Autor:** Claude · **Rama:** `docs/avo-lock-1-alquiler` · solo documento.
+**Qué cambia:** nueva §13 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`:
+- licencia mensual del casco;
+- en la devolución, la app comprueba que todo esté descargado;
+- solo AVO lo pasa a otra cuadra, con una licencia y una llave pública nuevas firmadas;
+- el casco borra la SD y la configuración, y rechaza el cambio si hay sesiones sin descargar, salvo con la marca `BORRAR_PENDIENTES`;
+- el casco y AVO Tarjetas guardan el historial del casco.
+
+**Estado:** DISEÑO.
+
 ## 2026-11-16 — AVO-LOCK-1: decisiones confirmadas
 **Autor:** Claude · **Rama:** `docs/avo-lock-1-decisiones` · solo documento.
 **Qué cambia:** en la §12 de `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md` el usuario confirma:

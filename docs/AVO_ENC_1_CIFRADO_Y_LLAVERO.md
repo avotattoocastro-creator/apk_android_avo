@@ -196,3 +196,30 @@ Con esto se resuelve la decisión del elemento seguro: **el casco de serie lleva
 1. **Margen al caducar:** aviso desde 7 días antes y bloqueo de la grabación el día de fin.
 2. **Con la licencia caducada,** los datos ya grabados **sí** se pueden descargar a una app autorizada de su cuadra.
 3. **Dos licencias:** el casco lleva su licencia (de la cuadra) y la app la de la persona que conecta. Hacen falta las dos.
+
+## 13. Alquiler mensual: cambiar el casco de cuadra (16/11/2026 21:19)
+El casco se alquila por meses. Cuando un cliente lo devuelve, se puede entregar a otra cuadra. Lo hace **solo AVO**, con
+AVO Tarjetas, porque hace falta firmar una licencia nueva. Una cuadra no puede pasárselo a otra por su cuenta.
+
+**Mes a mes:**
+- la licencia del casco vale hasta el fin del periodo pagado;
+- al renovar, AVO emite una licencia nueva, que la cuadra instala desde la app con un archivo, igual que el `.avolic`;
+- si no se renueva, rigen las reglas de §12: aviso 7 días antes, el día de fin deja de grabar y lo grabado se puede descargar.
+
+**Devolución y entrega a otra cuadra:**
+1. **Antes de devolverlo**, la app de la cuadra muestra «Devolver casco». Comprueba que todas las sesiones están descargadas
+   y, si falta alguna, avisa y ofrece descargarla. El casco marca cada sesión descargada.
+2. **AVO emite para el casco** (identificado por el nº de serie de su ATECC608B):
+   - una **licencia de la cuadra nueva**;
+   - la **llave pública de esa cuadra**, firmada.
+3. **Al instalarla**, el casco:
+   - **borra la SD**. Los `.avoe` de la cuadra anterior ya eran ilegibles para la nueva, porque iban cifrados para la anterior,
+     pero se borran igualmente;
+   - olvida la llave pública anterior, los emparejamientos y la configuración (geocercas, ajustes de la cuadra);
+   - guarda un registro interno del cambio: fecha, cuadra anterior y nueva, nº de licencia.
+4. **Sesiones sin descargar:** el casco **rechaza** el cambio de cuadra salvo que la licencia nueva lleve la marca
+   `BORRAR_PENDIENTES`, que AVO solo pone si la cuadra anterior lo confirma o si hay que forzarlo.
+5. **Las apps de la cuadra anterior** ya no pueden conectarse: el reto de §12 exige la llave de la cuadra nueva.
+
+**Lo que no cambia:** la identidad del casco (certificado del ATECC608B). En AVO Tarjetas cada casco tiene su historial:
+cuadras, periodos, licencias y devoluciones.
