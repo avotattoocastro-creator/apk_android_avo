@@ -490,8 +490,8 @@
   "no_assembly": false,
   "note": "divisor 1:2 → GPIO2 (ADC1_CH1)",
   "jlc_rot": 0,
-  "x": 2.06,
-  "y": 7.58,
+  "x": -3.54,
+  "y": 13.46,
   "rot": 90
  },
  {
@@ -505,9 +505,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.45,
-  "y": -5.42,
-  "rot": 0
+  "x": -12.87,
+  "y": 13.62,
+  "rot": 90
  },
  {
   "ref": "C34",
@@ -520,9 +520,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -2.86,
-  "y": 12.96,
-  "rot": 0
+  "x": -14.1,
+  "y": 13.63,
+  "rot": 90
  },
  {
   "ref": "U3",
@@ -850,8 +850,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.6,
-  "y": -0.65,
+  "x": 1.56,
+  "y": -3.18,
   "rot": 90
  },
  {
@@ -865,8 +865,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.16,
-  "y": 2.18,
+  "x": 1.0,
+  "y": 0.45,
   "rot": 90
  },
  {
@@ -880,9 +880,9 @@
   "no_assembly": false,
   "note": "pegado a los pines VCC 33/34",
   "jlc_rot": 0,
-  "x": 1.44,
-  "y": -3.02,
-  "rot": 0
+  "x": 3.25,
+  "y": -2.41,
+  "rot": 90
  },
  {
   "ref": "C64",
@@ -1000,8 +1000,8 @@
   "no_assembly": false,
   "note": "serie: limita la alimentación parásita del ZED apagado",
   "jlc_rot": 0,
-  "x": 1.08,
-  "y": 11.08,
+  "x": 0.97,
+  "y": 10.0,
   "rot": 90
  },
  {
@@ -1015,8 +1015,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.45,
-  "y": -4.13,
+  "x": 1.89,
+  "y": -5.56,
   "rot": 0
  },
  {
@@ -1045,9 +1045,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.47,
-  "y": 9.26,
-  "rot": 0
+  "x": -2.38,
+  "y": 13.7,
+  "rot": 90
  },
  {
   "ref": "R54",
@@ -1060,8 +1060,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.15,
-  "y": 4.41,
+  "x": 1.38,
+  "y": 7.45,
   "rot": 90
  },
  {
@@ -1120,8 +1120,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -0.08,
-  "y": 14.29,
+  "x": 1.03,
+  "y": 12.21,
   "rot": 90
  },
  {
@@ -1135,8 +1135,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.73,
-  "y": 12.77,
+  "x": 6.65,
+  "y": 19.58,
   "rot": 0
  },
  {
@@ -1150,8 +1150,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 2.16,
-  "y": 14.35,
+  "x": 1.31,
+  "y": 14.23,
   "rot": 90
  },
  {
@@ -1165,8 +1165,8 @@
   "no_assembly": false,
   "note": "EN: RC 10 k / 1 µF (guía de diseño de Espressif)",
   "jlc_rot": 0,
-  "x": 1.06,
-  "y": 14.33,
+  "x": 0.01,
+  "y": 14.42,
   "rot": 90
  },
  {
@@ -1180,8 +1180,8 @@
   "no_assembly": false,
   "note": "serie de la línea de datos (GPIO47)",
   "jlc_rot": 0,
-  "x": 21.73,
-  "y": 1.95,
+  "x": 22.34,
+  "y": -0.2,
   "rot": 90
  },
  {
@@ -1540,8 +1540,8 @@
   "no_assembly": false,
   "note": "imán de la base del casco: OUT = 0 en la base → GPIO1 (RTC, despierta del sueño profundo)",
   "jlc_rot": 0,
-  "x": 22.9,
-  "y": -1.0,
+  "x": 21.95,
+  "y": -3.15,
   "rot": 0
  },
  {
@@ -1555,9 +1555,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 23.4,
-  "y": 1.56,
-  "rot": 0
+  "x": 23.54,
+  "y": -0.32,
+  "rot": 90
  },
  {
   "ref": "J3",
@@ -1585,9 +1585,9 @@
   "no_assembly": false,
   "note": "alimentación de la tarjeta: GPIO21 = 0 la enciende",
   "jlc_rot": 0,
-  "x": 21.8,
-  "y": -5.0,
-  "rot": 0
+  "x": 21.88,
+  "y": -6.8,
+  "rot": 90
  },
  {
   "ref": "R40",
@@ -1600,9 +1600,9 @@
   "no_assembly": false,
   "note": "tarjeta apagada mientras arranca el ESP32",
   "jlc_rot": 0,
-  "x": 24.2,
-  "y": -4.05,
-  "rot": 90
+  "x": 21.08,
+  "y": -9.19,
+  "rot": 0
  },
  {
   "ref": "C40",
@@ -1615,9 +1615,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.15,
-  "y": -7.72,
-  "rot": 0
+  "x": 20.79,
+  "y": -11.5,
+  "rot": 90
  },
  {
   "ref": "C41",
@@ -1630,8 +1630,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 3.55,
-  "y": -1.68,
+  "x": 3.45,
+  "y": -4.47,
   "rot": 90
  },
  {
@@ -1645,8 +1645,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 20.53,
-  "y": -2.09,
+  "x": 23.45,
+  "y": 1.86,
   "rot": 90
  },
  {
@@ -1660,9 +1660,9 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.1,
-  "y": 3.56,
-  "rot": 0
+  "x": 22.36,
+  "y": 3.94,
+  "rot": 90
  },
  {
   "ref": "R43",
@@ -1675,8 +1675,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": -3.07,
-  "y": 14.06,
+  "x": -1.93,
+  "y": -10.97,
   "rot": 0
  },
  {
@@ -1690,8 +1690,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 21.87,
-  "y": 5.1,
+  "x": 22.45,
+  "y": 6.07,
   "rot": 90
  },
  {
@@ -1705,8 +1705,8 @@
   "no_assembly": false,
   "note": "",
   "jlc_rot": 0,
-  "x": 0.94,
-  "y": 7.7,
+  "x": 23.63,
+  "y": 4.07,
   "rot": 90
  },
  {
@@ -1720,8 +1720,8 @@
   "no_assembly": false,
   "note": "serie del reloj (amortigua el flanco)",
   "jlc_rot": 0,
-  "x": 3.36,
-  "y": -3.75,
+  "x": 22.34,
+  "y": 1.88,
   "rot": 90
  },
  {
@@ -1840,8 +1840,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 1.08,
-  "y": 20.75,
+  "x": 1.14,
+  "y": 20.62,
   "rot": 0
  },
  {
@@ -1855,8 +1855,8 @@
   "no_assembly": true,
   "note": "GPIO0 a GND al arrancar = descarga (también por USB nativo)",
   "jlc_rot": 0,
-  "x": 23.93,
-  "y": 2.96,
+  "x": 23.78,
+  "y": 5.93,
   "rot": 0
  },
  {
@@ -1870,8 +1870,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -18.3,
-  "y": 5.07,
+  "x": -18.27,
+  "y": 5.24,
   "rot": 0
  },
  {
@@ -1885,8 +1885,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 22.05,
-  "y": 13.75,
+  "x": 22.65,
+  "y": 15.08,
   "rot": 0
  },
  {
@@ -1900,8 +1900,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": 21.96,
-  "y": 10.01,
+  "x": 22.62,
+  "y": 9.0,
   "rot": 0
  },
  {
@@ -1975,8 +1975,8 @@
   "no_assembly": true,
   "note": "",
   "jlc_rot": 0,
-  "x": -13.91,
-  "y": 14.37,
+  "x": -16.18,
+  "y": 13.42,
   "rot": 0
  },
  {
@@ -2005,8 +2005,8 @@
   "no_assembly": true,
   "note": "SAFEBOOT_N del ZED: solo para recuperar su firmware",
   "jlc_rot": 0,
-  "x": -15.53,
-  "y": 13.37,
+  "x": -17.86,
+  "y": 13.51,
   "rot": 0
  }
 ]

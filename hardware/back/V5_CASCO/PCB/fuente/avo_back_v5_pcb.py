@@ -141,9 +141,10 @@ def _sin_patio(fp):
 
 
 # REV B: ESP32-S3-WROOM-1U (Espressif kicad-libraries): cuerpo 18,0 × 19,2 × 3,2, de y −9,45 a +9,75 (U.FL junto al
-# borde de y −9,45). Patio ajustado al cuerpo + 0,1 (el de la librería añade 0,8 por arriba).
+# borde de y −9,45). Los pads asoman fuera del cuerpo (x ±9,5; fila inferior hasta y +10,25): patio = pads + 0,25
+# por los lados y abajo, cuerpo + 0,1 arriba (el de la librería añade 0,8 por arriba).
 S3 = _sin_patio(load("ESP32-S3-WROOM-1U.kicad_mod", "${KIPRJMOD}/../fuente/3d/ESP32-S3-WROOM-1U.STEP", 3.2))
-S3.graphics += rect_lines(-9.1, -9.55, 9.1, 9.85, "F.CrtYd", 0.05)
+S3.graphics += rect_lines(-9.75, -9.55, 9.75, 10.5, "F.CrtYd", 0.05)
 
 
 def easyeda(code, height, prov):
@@ -411,8 +412,8 @@ GPIO = {  # pad del módulo: (GPIO, red)
     13: ("IO19 D-", "USB_DM"), 14: ("IO20 D+", "USB_DP"), 15: ("IO3", "IMU_INT1"), 16: ("IO46", "PWR_HOLD"),
     17: ("IO9", "S3_ZRST"), 18: ("IO10", "ZED_EN"), 19: ("IO11", "TOUCH_SENSE"), 20: ("IO12", "SD_CLK0"),
     21: ("IO13", "SD_CMD"), 22: ("IO14", "SD_D0"), 23: ("IO21", "SD_PWR_N"), 24: ("IO47", "LED_DIN_S3"),
-    25: ("IO48", "LED_PWR"), 26: ("IO45", None), 27: ("IO0", "BOOT"), 28: ("IO35 (PSRAM)", None),
-    29: ("IO36 (PSRAM)", None), 30: ("IO37 (PSRAM)", None), 31: ("IO38", "CHG_PG"), 32: ("IO39", "CHG_STAT"),
+    25: ("IO48", "LED_PWR"), 26: ("IO45", None), 27: ("IO0", "BOOT"), 28: ("IO35_PSRAM", None),
+    29: ("IO36_PSRAM", None), 30: ("IO37_PSRAM", None), 31: ("IO38", "CHG_PG"), 32: ("IO39", "CHG_STAT"),
     33: ("IO40", "POGO_AUX"), 34: ("IO41", "I2C_SCL"), 35: ("IO42", "I2C_SDA"), 36: ("RXD0", "U0RX"),
     37: ("TXD0", "U0TX"), 38: ("IO2", "BAT_ADC"), 39: ("IO1", "HALL"),
 }

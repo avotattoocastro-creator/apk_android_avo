@@ -1449,7 +1449,7 @@
 			)
 		)
 		(symbol
-			"AVO:ESP32-S3-WROOM-1U-N16R8_U_d7734a"
+			"AVO:ESP32-S3-WROOM-1U-N16R8_U_a22ad2"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1457,7 +1457,7 @@
 			(property "Reference" "U" (at -22.86 30.48 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
 			(property
 				"Value"
-				"ESP32-S3-WROOM-1U-N16R8_U_d7734a"
+				"ESP32-S3-WROOM-1U-N16R8_U_a22ad2"
 				(at 22.86 30.48 0)
 				(effects (font (size 1.27 1.27)) (justify right bottom))
 			)
@@ -1465,7 +1465,7 @@
 			(property "Datasheet" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(property "Description" "" (at 0 0 0) (hide yes) (effects (font (size 1.27 1.27))))
 			(symbol
-				"ESP32-S3-WROOM-1U-N16R8_U_d7734a_0_1"
+				"ESP32-S3-WROOM-1U-N16R8_U_a22ad2_0_1"
 				(rectangle
 					(start -22.86 29.21)
 					(end 22.86 -29.21)
@@ -1474,7 +1474,7 @@
 				)
 			)
 			(symbol
-				"ESP32-S3-WROOM-1U-N16R8_U_d7734a_1_1"
+				"ESP32-S3-WROOM-1U-N16R8_U_a22ad2_1_1"
 				(pin
 					passive
 					line
@@ -1688,7 +1688,7 @@
 					line
 					(at 25.4 8.89 180)
 					(length 2.54)
-					(name "IO35 (PSRAM)" (effects (font (size 1.27 1.27))))
+					(name "IO35_PSRAM" (effects (font (size 1.27 1.27))))
 					(number "28" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -1696,7 +1696,7 @@
 					line
 					(at 25.4 6.35 180)
 					(length 2.54)
-					(name "IO36 (PSRAM)" (effects (font (size 1.27 1.27))))
+					(name "IO36_PSRAM" (effects (font (size 1.27 1.27))))
 					(number "29" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -1704,7 +1704,7 @@
 					line
 					(at 25.4 3.81 180)
 					(length 2.54)
-					(name "IO37 (PSRAM)" (effects (font (size 1.27 1.27))))
+					(name "IO37_PSRAM" (effects (font (size 1.27 1.27))))
 					(number "30" (effects (font (size 1.27 1.27))))
 				)
 				(pin
@@ -7554,7 +7554,7 @@
 		(uuid "77fe01bd-1072-57e9-bf37-39461d9a183a")
 	)
 	(symbol
-		(lib_id "AVO:ESP32-S3-WROOM-1U-N16R8_U_d7734a")
+		(lib_id "AVO:ESP32-S3-WROOM-1U-N16R8_U_a22ad2")
 		(at 581.66 238.76 0)
 		(unit 1)
 		(exclude_from_sim no)
