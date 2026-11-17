@@ -1,0 +1,417 @@
+package org.avoperformance.horse.sync
+
+import android.content.Context
+import androidx.work.Constraints
+import androidx.work.CoroutineWorker
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
+import org.avoperformance.horse.AppLog
+import org.avoperformance.horse.AvoApp
+import org.avoperformance.horse.ble.WatchConnection
+import org.avoperformance.horse.core.ble.BleStatus
+import org.avoperformance.horse.core.ble.WatchFileState
+import org.avoperformance.horse.core.ble.WatchSessionState
+import org.avoperformance.horse.core.bytes.hexToBytes
+import org.avoperformance.horse.core.bytes.toHex
+import org.avoperformance.horse.core.raw.RawFileHeader
+import org.avoperformance.horse.core.raw.TrainingAnalyzer
+import org.avoperformance.horse.core.server.ServerApi
+import org.avoperformance.horse.core.server.UploadResult
+import org.avoperformance.horse.core.sync.LocalTraining
+import org.avoperformance.horse.core.sync.SessionDownload
+import org.avoperformance.horse.core.sync.SyncRules
+import org.avoperformance.horse.core.sync.SyncState
+import org.avoperformance.horse.data.AvoDatabase
+import org.avoperformance.horse.data.Settings
+import org.avoperformance.horse.data.TrainingEntity
+import java.io.File
+import java.util.concurrent.TimeUnit
+
+data class SyncProgress(val sessionId: String? = null, val bytes: Long = 0, val total: Long = 0, val message: String? = null, val busy: Boolean = false)
+
+/**
+ * Watch trainings: list, resumable download, SHA-256 verification against the watch,
+ * analysis, and (when a server exists) upload + MARK_UPLOADED.
+ * Rules: never deletes anything on the watch automatically; "verificado" on the server
+ * only with a real server confirmation; no download while the watch is recording.
+ */
+private const val MAX_CHUNK_FAILURES = 8
+
+class WatchSyncManager(
+    private val ctx: Context,
+    private val db: AvoDatabase,
+    private val settings: Settings,
+    private val watch: WatchConnection,
+    private val server: ServerApi,
+    private val log: AppLog,
+    private val scope: CoroutineScope,
+) {
+    private val _progress = MutableStateFlow(SyncProgress())
+    val progress: StateFlow<SyncProgress> = _progress
+    private val lock = Mutex()
+    val trainingsDir: File get() = File(ctx.filesDir, "trainings").also { it.mkdirs() }
+    val serverConfigured get() = server.configured
+
+    private fun TrainingEntity.toLocal() = LocalTraining(sessionId, segments, totalBytes, downloadedBytes, localSha256, watchSha256, serverSha256,
+        runCatching { SyncState.valueOf(state) }.getOrDefault(SyncState.EN_RELOJ), runCatching { WatchFileState.valueOf(watchState) }.getOrDefault(WatchFileState.UNKNOWN), startRtcMs, activeMs)
+
+    private fun logEventMarine(sessionId: String, message: String?) {
+        android.util.Log.w("AVO_MARINE", "Sin contexto marino para $sessionId: ${message ?: "sin datos"}")
+    }
+
+    private fun watchRecording() = watch.telemetry.value?.t?.session.let { it == WatchSessionState.RECORDING || it == WatchSessionState.PAUSED }
+
+    /** Reads the session list from the watch and merges it (no duplicates: key = session id). */
+    suspend fun refresh(): String? = lock.withLock {
+        val c = watch.client ?: return "Sin conexión con el reloj"
+        if (!watch.isReady) return "El reloj no está autorizado"
+        _progress.value = SyncProgress(busy = true, message = "Leyendo lista del reloj…")
+        try {
+            val list = c.listSessions()
+            val local = db.trainings().snapshot().associateBy { it.sessionId }
+            val merged = SyncRules.merge(list, local.mapValues { it.value.toLocal() })
+            val onWatch = list.map { it.sessionId }.toSet()
+            for (m in merged) {
+                val old = local[m.sessionId]
+                // a training no longer on the watch keeps its own watchState ("IMPORTADO", "BORRADO_RELOJ"…)
+                val ws = if (m.sessionId in onWatch || old == null) m.watchState.name else old.watchState
+                db.trainings().upsert((old ?: TrainingEntity(m.sessionId, watch.authorizedAddress ?: "", m.segments, m.totalBytes, state = m.state.name,
+                    watchState = m.watchState.name, startRtcMs = m.startRtcMs, activeMs = m.activeMs))
+                    .copy(segments = m.segments, totalBytes = m.totalBytes, state = m.state.name, watchState = ws,
+                        startRtcMs = m.startRtcMs, activeMs = m.activeMs, updatedMs = System.currentTimeMillis()))
+            }
+            // Automatically enrich newly discovered recent trainings; never fabricate historical forecasts.
+            val nowMs = System.currentTimeMillis()
+            val recent = merged.filter { m -> m.startRtcMs > 0 &&
+                kotlin.math.abs(nowMs - m.startRtcMs) < 2L * 60 * 60 * 1000 }
+            if (recent.isNotEmpty()) scope.launch {
+                for (m in recent) {
+                    if (db.marine().byId(m.sessionId) != null) continue
+                    runCatching {
+                        val snapshot = org.avoperformance.horse.ui.screens.marineSnapshotForTraining(org.avoperformance.horse.tide.TideRepository(ctx), settings, m.sessionId, m.startRtcMs)
+                        db.marine().upsert(snapshot)
+                    }.onFailure { logEventMarine(m.sessionId, it.message) }
+                }
+            }
+            _progress.value = SyncProgress(message = "${list.size} entrenamientos en el reloj")
+            null
+        } catch (e: Exception) {
+            _progress.value = SyncProgress(message = "Error: ${e.message}")
+            e.message ?: "error"
+        }
+    }
+
+    /** Downloads (resumable) and verifies one session. */
+    /** Called after each download verified against the watch (used by the automatic internet sending). */
+    @Volatile var onVerified: ((String) -> Unit)? = null
+
+    @Volatile var isBusy: Boolean = false
+        private set
+
+    /**
+     * Download of one training (training buttons, Compartir, WhatsApp): first Wi-Fi if the watch supports it,
+     * and BLE if Wi-Fi is not possible. Field 2.3-wifi-dev2: "Reanudar descarga" went straight to BLE.
+     */
+    suspend fun download(sessionId: String): String? {
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return org.avoperformance.horse.license.LicenseGate.BLOCKED
+        val w = wifi
+        if (w != null && !watchRecording()) {
+            val rep = w.sync(listOf(sessionId to null))
+            if (sessionId in rep.verified) return null
+            if (rep.skipped) return "Descarga en curso"
+            if (sessionId !in rep.fallbackBle) return rep.failed[sessionId]?.let { "Pendiente: $it" } ?: "Pendiente de conexión"
+        }
+        return downloadBle(sessionId)
+    }
+
+    private suspend fun downloadBle(sessionId: String): String? = lock.withLock {
+        if (isBusy) return@withLock "Descarga ocupada"
+        isBusy = true
+        try { downloadLocked(sessionId) } finally { isBusy = false }
+    }
+
+    private suspend fun downloadLocked(sessionId: String): String? = withContext(Dispatchers.IO) {
+        val c = watch.client ?: return@withContext "Sin conexión con el reloj"
+        if (watchRecording()) return@withContext "El reloj está grabando: la descarga se hará al terminar"
+        var t = db.trainings().byId(sessionId) ?: return@withContext "Entrenamiento desconocido"
+        if (t.watchState == WatchFileState.OPEN.name) return@withContext "La sesión sigue abierta en el reloj"
+        val dir = File(trainingsDir, sessionId)
+        val dl = SessionDownload(dir, sessionId, maxOf(1, t.segments))
+        t = t.copy(state = SyncState.DESCARGANDO.name, localDir = dir.absolutePath, lastError = null)
+        db.trainings().upsert(t)
+        watch.downloadMode.value = true          // modo descarga: NTRIP hacia el reloj en pausa
+        log.i("SYNC", "modo descarga activado (NTRIP en pausa)")
+        try {
+            var pos: Pair<Int, Long>? = dl.position()
+            var lastSave = 0L
+            while (pos != null) {
+                if (watchRecording()) throw IllegalStateException("El reloj empezó a grabar: descarga en pausa")
+                val chunk = readChunkResilient(sessionId, pos.first, pos.second, dl.downloadedBytes(), t.totalBytes) ?: break   // no more segments
+                pos = dl.append(pos.first, pos.second, chunk.data, chunk.fileSize)
+                val got = dl.downloadedBytes()
+                _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Modo descarga · NTRIP en pausa", true)
+                if (System.currentTimeMillis() - lastSave > 2000) { db.trainings().upsert(t.copy(downloadedBytes = got)); lastSave = System.currentTimeMillis() }
+            }
+            val got = dl.downloadedBytes()
+            t = t.copy(downloadedBytes = got, state = SyncState.DESCARGADO.name)
+            db.trainings().upsert(t)
+            // Integrity: SHA-256 computed by the watch over the same segments
+            _progress.value = SyncProgress(sessionId, got, t.totalBytes, "Verificando huella SHA-256 con el reloj…", true)
+            val local = dl.sha256().toHex()
+            val remote = (watch.client ?: c).fileSha256(sessionId).toHex()
+            val ok = local == remote
+            t = t.copy(localSha256 = local, watchSha256 = remote, state = (if (ok) SyncState.VERIFICADO_LOCAL else SyncState.ERROR_INTEGRIDAD).name,
+                lastError = if (ok) null else "La huella local no coincide con la del reloj")
+            db.trainings().upsert(t)
+            log.i("SYNC", "$sessionId descargado ($got B) sha ${if (ok) "OK" else "DIFERENTE"}")
+            if (ok) analyze(sessionId)
+            if (ok) onVerified?.invoke(sessionId)
+            _progress.value = SyncProgress(sessionId, got, t.totalBytes, if (ok) "Descargado y verificado" else "Error de integridad")
+            if (ok) null else "Error de integridad"
+        } catch (e: Exception) {
+            if (e is kotlinx.coroutines.CancellationException) throw e
+            db.trainings().upsert(t.copy(downloadedBytes = dl.downloadedBytes(), lastError = e.message))
+            _progress.value = SyncProgress(sessionId, dl.downloadedBytes(), t.totalBytes, "Interrumpido: ${e.message} (se reanudará)")
+            e.message ?: "error"
+        } finally {
+            watch.downloadMode.value = false
+            log.i("SYNC", "modo descarga desactivado")
+        }
+    }
+
+    /** Computes the metrics from the downloaded file (never from assumptions). */
+    suspend fun analyze(sessionId: String) = withContext(Dispatchers.IO) {
+        val t = db.trainings().byId(sessionId) ?: return@withContext
+        val dir = File(t.localDir ?: return@withContext)
+        val segs = SessionDownload(dir, sessionId, t.segments).segments()
+        if (segs.isEmpty()) return@withContext
+        val header = segs.first().inputStream().use { ins ->
+            val b = ByteArray(RawFileHeader.SIZE); var n = 0
+            while (n < b.size) { val k = ins.read(b, n, b.size - n); if (k < 0) break; n += k }
+            RawFileHeader.decode(b)
+        }
+        val a = TrainingAnalyzer.analyze(segs.map { f -> { f.inputStream().buffered(256 * 1024) } })
+        // AVO-ASSIGN-1: the RAW header only fills an empty horse/rider; a manual assignment is never overwritten
+        db.trainings().upsert(t.copy(horseCode = t.horseCode ?: header?.horseName?.ifBlank { null }, riderCode = t.riderCode ?: header?.riderName?.ifBlank { null }
+            ?: org.avoperformance.horse.license.LicenseGate.defaultRiderCode.takeIf { t.watchState != "IMPORTADO" },
+            distanceM = a.distanceM, maxSpeedMs = a.maxSpeedMs, durationS = a.durationS, fixTimeS = a.fixTimeS, floatTimeS = a.floatTimeS,
+            imuSamples = a.imuSamples, gnssUsable = a.gnssUsable))
+    }
+
+    /**
+     * One chunk with recovery: a lost BLE notification makes the whole READ_FILE answer time out, so the same
+     * offset is retried with growing pauses (and over a new connection if the link was re-established) before
+     * giving up. Requests 2048 bytes, the maximum the watch answers per READ_FILE (larger requests gain nothing).
+     */
+    private suspend fun readChunkResilient(sessionId: String, segment: Int, offset: Long, got: Long, total: Long): org.avoperformance.horse.core.ble.FileChunk? {
+        var failures = 0
+        while (true) {
+            if (watchRecording()) throw IllegalStateException("El reloj empezó a grabar: descarga en pausa")
+            val c = watch.client
+            if (c == null) {
+                // link lost: wait for the automatic reconnection instead of aborting at once
+                if (++failures > MAX_CHUNK_FAILURES) throw IllegalStateException("Conexión con el reloj perdida en ${got / 1024} kB")
+                _progress.value = SyncProgress(sessionId, got, total, "Esperando reconexión con el reloj…", true)
+                kotlinx.coroutines.delay(3000); continue
+            }
+            try {
+                return c.readChunk(sessionId, segment, offset, 2048)
+            } catch (e: Exception) {
+                if (e is kotlinx.coroutines.CancellationException) throw e
+                // transient link errors are retried: no answer, busy, bad CRC, and GATT write errors (e.g. status 133)
+                val transient = (e is org.avoperformance.horse.core.ble.BleRequestException && (e.status == BleStatus.TIMEOUT || e.status == BleStatus.BUSY || e.status == BleStatus.BAD_CRC)) ||
+                    e is java.io.IOException
+                if (!transient) throw e
+                failures++
+                val st = c.stats
+                log.w("SYNC", "$sessionId seg $segment off $offset: ${e.message} (intento $failures, timeouts ${st.timeouts}, huecos ${st.gaps}, CRC ${st.crcErrors})")
+                if (failures > MAX_CHUNK_FAILURES)
+                    throw IllegalStateException("${e.message} en ${got / 1024} kB tras $failures intentos (timeouts ${st.timeouts}, fragmentos perdidos ${st.gaps}, CRC ${st.crcErrors})")
+                _progress.value = SyncProgress(sessionId, got, total, "Reintentando bloque (${failures}/$MAX_CHUNK_FAILURES)…", true)
+                kotlinx.coroutines.delay(minOf(8000L, 1000L shl (failures - 1)))
+            }
+        }
+    }
+
+    /**
+     * Deletes the training ONLY from the phone (RAW copy, engine results, shared package). The watch copy is not touched;
+     * the entry goes back to "Solo en el reloj" so it can be downloaded again while it remains on the watch.
+     */
+    suspend fun deleteLocal(sessionId: String): String? = withContext(Dispatchers.IO) {
+        if (isBusy && _progress.value.sessionId == sessionId) return@withContext "Se está descargando: espera a que termine"
+        val t = db.trainings().byId(sessionId) ?: return@withContext "Entrenamiento desconocido"
+        t.localDir?.let { File(it).deleteRecursively() }
+        File(trainingsDir, sessionId).deleteRecursively()
+        File(ctx.filesDir, "equine/$sessionId").deleteRecursively()
+        File(ctx.cacheDir, "share").listFiles()?.filter { it.name.contains(sessionId.replace(Regex("[^A-Za-z0-9_-]"), "_")) }?.forEach { it.delete() }
+        db.trainings().upsert(t.copy(state = SyncState.EN_RELOJ.name, localDir = null, downloadedBytes = 0, localSha256 = null, watchSha256 = null,
+            lastError = null, distanceM = null, maxSpeedMs = null, durationS = null, fixTimeS = null, floatTimeS = null, imuSamples = null, gnssUsable = null))
+        log.i("SYNC", "$sessionId borrado del teléfono (se conserva en el reloj)")
+        null
+    }
+
+    fun analysisFor(t: TrainingEntity) = t.localDir?.let { d ->
+        val segs = SessionDownload(File(d), t.sessionId, t.segments).segments()
+        if (segs.isEmpty()) null else TrainingAnalyzer.analyze(segs.map { f -> { f.inputStream().buffered(256 * 1024) } })
+    }
+
+    /** Auto mode: download every closed session not yet on the phone. */
+    /** Wi-Fi download (CHEST V3.7.4+); null = BLE only. */
+    @Volatile var wifi: org.avoperformance.horse.wifi.AvoWifiSyncManager? = null
+
+    /** Trainings that are on the watch and not on the phone (closed sessions only). */
+    suspend fun pendingOnWatch(): List<TrainingEntity> = db.trainings().snapshot().filter { t ->
+        val st = runCatching { SyncState.valueOf(t.state) }.getOrNull()
+        (st == SyncState.EN_RELOJ || st == SyncState.DESCARGANDO || st == SyncState.DESCARGADO) && t.watchState != WatchFileState.OPEN.name
+    }.sortedBy { it.startRtcMs }
+
+    /**
+     * Automatic download of the pending ones: first over Wi-Fi (a single watch activation for all of them);
+     * what Wi-Fi cannot do because of firmware/Android goes over BLE. [force] = "Descargar todo" button
+     * (ignores the automatic-download setting).
+     */
+    fun autoSync(force: Boolean = false) {
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return
+        if (!force && !settings.autoDownload) return
+        scope.launch(Dispatchers.IO) {
+            if (refresh() != null) return@launch
+            val pending = pendingOnWatch()
+            var ble = pending.map { it.sessionId }
+            val w = wifi
+            if (w != null && pending.isNotEmpty() && !watchRecording()) {
+                val rep = w.sync(pending.map { it.sessionId to null })
+                if (rep.skipped) return@launch
+                ble = rep.fallbackBle
+                if (rep.verified.isNotEmpty()) log.i("SYNC", "Wi-Fi: ${rep.verified.size} entrenamientos verificados")
+                rep.failed.forEach { (id, why) -> log.w("SYNC", "Wi-Fi $id: $why") }
+            }
+            for (id in ble) if (downloadBle(id) != null) break
+            uploadPending()
+        }
+    }
+
+    /** Training downloaded over Wi-Fi and verified against the SHA-256 computed by the watch: same as with BLE. */
+    suspend fun completeFromWifi(sessionId: String, dir: File, sha256: String, bytes: Long) = withContext(Dispatchers.IO) {
+        val t = db.trainings().byId(sessionId) ?: return@withContext
+        db.trainings().upsert(t.copy(localDir = dir.absolutePath, downloadedBytes = bytes, localSha256 = sha256, watchSha256 = sha256,
+            state = SyncState.VERIFICADO_LOCAL.name, lastError = null, updatedMs = System.currentTimeMillis()))
+        log.i("SYNC", "$sessionId descargado por Wi-Fi ($bytes B) sha OK")
+        analyze(sessionId)
+        onVerified?.invoke(sessionId)
+        _progress.value = SyncProgress(sessionId, bytes, t.totalBytes, "Entrenamiento guardado ✓")
+    }
+
+    /** Server step. While the server is on hold this only marks files as pending. */
+    suspend fun uploadPending() = withContext(Dispatchers.IO) {
+        for (t in db.trainings().snapshot()) {
+            if (t.state != SyncState.VERIFICADO_LOCAL.name && t.state != SyncState.PENDIENTE_SERVIDOR.name && t.state != SyncState.VERIFICADO_SERVIDOR.name) continue
+            if (t.state != SyncState.VERIFICADO_SERVIDOR.name) {
+                val segs = SessionDownload(File(t.localDir ?: continue), t.sessionId, t.segments).segments()
+                when (val r = server.uploadSession(t.sessionId, segs, t.localSha256 ?: continue, t.horseCode, t.riderCode)) {
+                    is UploadResult.Confirmed -> {
+                        val ok = r.serverSha256Hex.equals(t.localSha256, ignoreCase = true)
+                        db.trainings().upsert(t.copy(serverSha256 = r.serverSha256Hex, state = (if (ok) SyncState.VERIFICADO_SERVIDOR else SyncState.ERROR_INTEGRIDAD).name))
+                    }
+                    UploadResult.NotConfigured -> db.trainings().upsert(t.copy(state = SyncState.PENDIENTE_SERVIDOR.name))
+                    is UploadResult.Rejected -> db.trainings().upsert(t.copy(lastError = "Servidor: ${r.reason}"))
+                    is UploadResult.NetworkError -> db.trainings().upsert(t.copy(lastError = "Red: ${r.reason}"))
+                }
+            }
+            val now = db.trainings().byId(t.sessionId) ?: continue
+            if (SyncRules.canMarkUploaded(now.toLocal()) && watch.isReady) {
+                val st = watch.client?.markUploaded(now.sessionId, now.localSha256!!.hexToBytes())
+                if (st == BleStatus.OK) db.trainings().upsert(now.copy(state = SyncState.MARCADO_EN_RELOJ.name, watchState = WatchFileState.UPLOADED.name))
+                else log.w("SYNC", "MARK_UPLOADED ${now.sessionId}: ${st?.texto}")
+            }
+        }
+    }
+
+    /** Manual, confirmed by the user, only for sessions verified by the server and marked on the watch. */
+    suspend fun deleteFromWatch(sessionId: String): String? {
+        val t = db.trainings().byId(sessionId) ?: return "Entrenamiento desconocido"
+        if (!SyncRules.canOfferDelete(t.toLocal())) return "Solo se pueden borrar del reloj entrenamientos verificados por el servidor"
+        val st = watch.client?.deleteSession(sessionId) ?: return "Sin conexión con el reloj"
+        if (st != BleStatus.OK) return "El reloj respondió: ${st.texto}"
+        log.i("SYNC", "$sessionId borrado del reloj a petición del usuario")
+        refresh()
+        return null
+    }
+
+    /**
+     * Deletion from the watch protected with the password "AVO" (WatchDelete). The phone copy, if verified, is kept and
+     * marked as deleted on the watch; a training with no copy on the phone disappears from the list too.
+     */
+    suspend fun deleteFromWatchProtected(sessionId: String, password: String): String? = withContext(Dispatchers.IO) {
+        if (!org.avoperformance.horse.core.sync.WatchDelete.passwordOk(password)) return@withContext "Contraseña incorrecta"
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return@withContext org.avoperformance.horse.license.LicenseGate.BLOCKED
+        if (watchRecording()) return@withContext "El reloj está grabando: termina el entrenamiento antes de borrar"
+        if (isBusy && _progress.value.sessionId == sessionId) return@withContext "Se está descargando: espera a que termine"
+        val t = db.trainings().byId(sessionId) ?: return@withContext "Entrenamiento desconocido"
+        val local = t.toLocal()
+        if (!org.avoperformance.horse.core.sync.WatchDelete.canDelete(local, t.watchState)) return@withContext "Este entrenamiento no se puede borrar del reloj"
+        val c = watch.client ?: return@withContext "Sin conexión con el reloj"
+        if (!watch.isReady) return@withContext "El reloj no está autorizado"
+        val st = lock.withLock { c.deleteSession(sessionId, force = true) }
+        when (st) {
+            BleStatus.OK, BleStatus.NOT_FOUND -> Unit   // NOT_FOUND: it was no longer on the watch
+            BleStatus.STATE_CONFLICT -> return@withContext "El reloj está grabando este entrenamiento"
+            else -> return@withContext "El reloj respondió: ${st.texto}"
+        }
+        if (org.avoperformance.horse.core.sync.WatchDelete.safety(local) == org.avoperformance.horse.core.sync.WatchDelete.Safety.COPIA_EN_MOVIL) {
+            db.trainings().upsert(t.copy(watchState = org.avoperformance.horse.core.sync.WatchDelete.DELETED_ON_WATCH, updatedMs = System.currentTimeMillis()))
+            log.i("SYNC", "$sessionId borrado del reloj con contraseña (copia verificada en el móvil)")
+        } else {
+            t.localDir?.let { File(it).deleteRecursively() }
+            File(trainingsDir, sessionId).deleteRecursively()
+            File(ctx.filesDir, "equine/$sessionId").deleteRecursively()
+            db.trainings().delete(sessionId)
+            log.w("SYNC", "$sessionId borrado del reloj con contraseña SIN copia en el móvil")
+        }
+        refresh()
+        null
+    }
+
+    /** "Liberar el reloj": deletes from the watch every training already verified on the phone. Returns a summary. */
+    suspend fun freeWatch(password: String): String = withContext(Dispatchers.IO) {
+        if (!org.avoperformance.horse.core.sync.WatchDelete.passwordOk(password)) return@withContext "Contraseña incorrecta"
+        refresh()?.let { return@withContext it }
+        val all = db.trainings().snapshot().map { it.toLocal() to it.watchState }
+        val ids = org.avoperformance.horse.core.sync.WatchDelete.freeable(all).map { it.sessionId }
+        if (ids.isEmpty()) return@withContext "No hay entrenamientos guardados en el móvil que estén todavía en el reloj"
+        var ok = 0; var firstError: String? = null
+        for (id in ids) {
+            val err = deleteFromWatchProtected(id, password)
+            if (err == null) ok++ else if (firstError == null) firstError = "$id: $err"
+        }
+        "Borrados del reloj: $ok de ${ids.size}" + (firstError?.let { ". Primer error: $it" } ?: "")
+    }
+
+    fun scheduleWorker() {
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return
+        val req = PeriodicWorkRequestBuilder<SyncWorker>(1, TimeUnit.HOURS)
+            .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()).build()
+        WorkManager.getInstance(ctx).enqueueUniquePeriodicWork("avo_sync", ExistingPeriodicWorkPolicy.KEEP, req)
+    }
+}
+
+/** Background server sync of already verified files (no-op while the server is not configured). */
+class SyncWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
+    override suspend fun doWork(): Result {
+        val c = (applicationContext as AvoApp).container
+        if (!org.avoperformance.horse.license.LicenseGate.canRecord) return Result.success()
+        // periodic safety net: restores the link service if the system stopped it
+        org.avoperformance.horse.service.AvoLinkService.startIfAutomatic(applicationContext, "comprobación periódica")
+        return runCatching { c.sync.uploadPending(); Result.success() }.getOrElse { Result.retry() }
+    }
+}

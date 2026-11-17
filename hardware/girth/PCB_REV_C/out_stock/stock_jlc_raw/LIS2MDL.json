@@ -1,0 +1,314 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 2,
+   "list": [
+    {
+     "componentId": 58310569,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011LIS2MDL",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0398
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0383
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "JLCPCBAssembly-LIS2MDL/C9900275408",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900275408",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "LIS2MDL",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT LIS2MDL",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-12(2x2)",
+     "describe": "LGA-12(2x2) SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LIS2MDL</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 998419,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "3D Magnetic Sensors",
+     "erpComponentName": "\u970d\u5c14\u6548\u5e94\u5f00\u5173",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/3d-magnetic-sensors_stmicroelectronics-lis2mdltr_C919695.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.2968
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.2167
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.1627
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 3.1087
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 3.1087
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 3.1087
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.1759
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.0986
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.0466
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 2.9946
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 2.9946
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 2.9946
+      }
+     ],
+     "firstSortAccessId": "f4c1b96cbcc04909855d98d4cea7c8d5",
+     "secondSortAccessId": "e63448351b364243b24b0e6120b76476",
+     "canPresaleNumber": -245,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "STMicroelectronics-LIS2MDLTR/C919695",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10000,
+     "shopCostPrice": 17.0,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 3,
+     "initialPrice": 3.2968,
+     "componentCode": "C919695",
+     "componentBrandEn": "STMicroelectronics",
+     "componentModelEn": "LIS2MDLTR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583053865160097792-C919695/C919695-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085710Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ca5d79d81f6e6546f55e4ee38a67dce280204773a2433eab850216a88dc12b20",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2111191730_STMicroelectronics-LIS2MDLTR_C919695.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588886895829405696-C919695.pdf?response-content-disposition=attachment%3B%20filename%3DC919695.pdf%3B%20filename%2A%3DUTF-8%27%27C919695.pdf&x-oss-date=20261115T085710Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=76f210dbb9fa3e909db259e87c0e45e60ff7b4a74d45bd768a2d8319499a009a",
+     "dataManualOfficialLink": "",
+     "componentName": "ST LIS2MDLTR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583053866091098112-C919695/C919695-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085710Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=470dfd6ff80fd3048c1318c550fe552040a7a9cc44422e1c80e492ba2dd5f328",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-12(2x2)",
+     "describe": "-40\u2103~+85\u2103 1.71V~3.6V 16bit 200uA I2C\u3001SPI \u00b15mT \u00b15mT LGA-12(2x2) 3D Magnetic Sensors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Magnetic Sensing Range(Z)",
+       "attribute_value_name": "\u00b15mT"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Output bit",
+       "attribute_value_name": "16bit"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.71V~3.6V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in temperature sensor\u3001Multi-function INT pin\u3001Built-in self-test (BIST)"
+      },
+      {
+       "attribute_name_en": "Current - Supply",
+       "attribute_value_name": "200uA"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "I2C\u3001SPI"
+      },
+      {
+       "attribute_name_en": "Magnetic Sensing Range(X,Y)",
+       "attribute_value_name": "\u00b15mT"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "3D Magnetic Sensors",
+     "secondSortName": "Magnetic Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LIS2MDL</span>TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "LIS2MDL"
+ },
+ "message": null
+}

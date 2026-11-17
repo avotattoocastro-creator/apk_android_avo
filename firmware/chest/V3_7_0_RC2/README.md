@@ -1,0 +1,1 @@
+AVO CHEST V3.7.0 RC2: UI redesign work in progress. Source ZIP is not yet committed; no validated OTA binary exists. Seven rounded cards, no LVGL, no full framebuffer. Physical screen and RAM verification required. Do not label stable.

@@ -1,0 +1,419 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 2,
+   "list": [
+    {
+     "componentId": 1954976,
+     "componentLibraryType": "expand",
+     "stockCount": 32,
+     "componentTypeEn": "Accelerometers",
+     "erpComponentName": "3D\u52a0\u901f\u5ea6\u8ba1\u548c3D\u9640\u87ba\u4eea",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/accelerometers_stmicroelectronics-lsm6dso32tr_C1864162.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.4709
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.6038
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.5877
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 4.1443
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 4.1443
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 4.1443
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 3.9923
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.4194
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 3.9923
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.2334
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.3981
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 3.9923
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "7127ae9b6b6c4ae0ae8f8f53ff827b21",
+     "canPresaleNumber": 13,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "STMicroelectronics-LSM6DSO32TR/C1864162",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 22.97579,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 6.4709,
+     "componentCode": "C1864162",
+     "componentBrandEn": "STMicroelectronics",
+     "componentModelEn": "LSM6DSO32TR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583505849969496064-C1864162/C1864162-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085706Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6061a2090743869ff63e3be038161488061a7a7896da57455c7fee258e6a7ffe",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2108030330_STMicroelectronics-LSM6DSO32TR_C1864162.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8588926227125555200-C1864162.pdf?response-content-disposition=attachment%3B%20filename%3DC1864162.pdf%3B%20filename%2A%3DUTF-8%27%27C1864162.pdf&x-oss-date=20261115T085706Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=ef2e577b1b9626288e96f97bf8d0183ee215de1aed75f84e043fbd3293fa6667",
+     "dataManualOfficialLink": "",
+     "componentName": "ST LSM6DSO32TR",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8583505850886967296-C1864162/C1864162-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261115T085706Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a8cfc3e9328867c2bf36e040cd7ba488a7da9b3d38f526b6f5920822751382f7",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-14(2.5x3)",
+     "describe": "-40\u2103~+85\u2103 1.71V~3.6V 9KB Accelerometer Gyroscope SPI\u3001I2C\u3001MIPI I3C X,Y,Z X,Y,Z \u00b12000dps \u00b132g LGA-14(2.5x3) Accelerometers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Gyroscope Measurement Range (MAX)",
+       "attribute_value_name": "\u00b12000dps"
+      },
+      {
+       "attribute_name_en": "Output Bits",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Standby Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Sensor Type",
+       "attribute_value_name": "IMU (accelerometer + gyroscope)"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.71V~3.6V"
+      },
+      {
+       "attribute_name_en": "Acceleration Measurement Range (MAX)",
+       "attribute_value_name": "\u00b132g"
+      },
+      {
+       "attribute_name_en": "Cache Size",
+       "attribute_value_name": "9KB"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Motion event detection\u3001Synchronization and timestamp"
+      },
+      {
+       "attribute_name_en": "Gyroscope Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Accelerometer Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI\u3001I2C\u3001I3C"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Accelerometers",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LSM6DSO32</span>TR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 4231537,
+     "componentLibraryType": "expand",
+     "stockCount": 402,
+     "componentTypeEn": "Accelerometers",
+     "erpComponentName": "6 DoF\u60ef\u6027\u6a21\u5757\uff0c\u5e2632 g\u52a0\u901f\u5ea6\u8ba1\u548c\u5d4c\u5165\u5f0f\u673a\u5668\u5b66\u4e60\u6838\u5fc3",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/accelerometers_stmicroelectronics-lsm6dso32xtr_C3663738.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.124
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.2667
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.7579
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 4.2425
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.0053
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.8973
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 5.0735
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 4.0868
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 3.7543
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.5833
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.8993
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 3.8583
+      }
+     ],
+     "firstSortAccessId": "caefd6d6f2bc4507bdc2837246857fba",
+     "secondSortAccessId": "7127ae9b6b6c4ae0ae8f8f53ff827b21",
+     "canPresaleNumber": 349,
+     "componentProductType": 2,
+     "mergedComponentCode": "",
+     "urlSuffix": "STMicroelectronics-LSM6DSO32XTR/C3663738",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 19.54299,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 6.124,
+     "componentCode": "C3663738",
+     "componentBrandEn": "STMicroelectronics",
+     "componentModelEn": "LSM6DSO32XTR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2211080600_STMicroelectronics-LSM6DSO32XTR_C3663738.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589838954946977792-C3663738.pdf?response-content-disposition=attachment%3B%20filename%3DC3663738.pdf%3B%20filename%2A%3DUTF-8%27%27C3663738.pdf&x-oss-date=20261115T085706Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3c4126e22a48d919320e7539e73501fbf6730e1d0c35d2f1205b9691801c299d",
+     "dataManualOfficialLink": "",
+     "componentName": "ST LSM6DSO32XTR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-14(2.5x3)",
+     "describe": "-40\u2103~+85\u2103 1.71V~3.6V 16bit 3uA 9KB IMU SPI\u3001I2C X,Y,Z X,Y,Z \u00b12000dps \u00b132g LGA-14(2.5x3) Accelerometers ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Gyroscope Measurement Range (MAX)",
+       "attribute_value_name": "\u00b12000dps"
+      },
+      {
+       "attribute_name_en": "Output Bits",
+       "attribute_value_name": "16bit"
+      },
+      {
+       "attribute_name_en": "Standby Current",
+       "attribute_value_name": "3uA"
+      },
+      {
+       "attribute_name_en": "Sensor Type",
+       "attribute_value_name": "IMU (accelerometer + gyroscope)"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.71V~3.6V"
+      },
+      {
+       "attribute_name_en": "Acceleration Measurement Range (MAX)",
+       "attribute_value_name": "\u00b132g"
+      },
+      {
+       "attribute_name_en": "Cache Size",
+       "attribute_value_name": "9KB"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Motion event detection\u3001Synchronization and timestamp"
+      },
+      {
+       "attribute_name_en": "Gyroscope Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Accelerometer Sensing Axis",
+       "attribute_value_name": "X,Y,Z"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI\u3001I2C"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Accelerometers",
+     "secondSortName": "Sensors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>LSM6DSO32</span>XTR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "LSM6DSO32"
+ },
+ "message": null
+}

@@ -1,0 +1,28 @@
+  paso: {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":1.35,"pico_dps":32,"pico_G":0.53,"err_max_g":0.00012,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0}
+ok    cadena.paso
+  trote: {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":3.19,"pico_dps":76,"pico_G":0.54,"err_max_g":0.00012,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0}
+ok    cadena.trote
+  galope: {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":5.19,"pico_dps":178,"pico_G":0.57,"err_max_g":0.00012,"err_max_dps":0.034,"err_max_G":0.00012,"saturadas_acel":0,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0}
+ok    cadena.galope
+  salto: {"muestras":2080,"paquetes":208,"bytes_por_s":2288,"pico_g":12.94,"pico_dps":229,"pico_G":0.59,"err_max_g":4.94215,"err_max_dps":0.035,"err_max_G":0.00012,"saturadas_acel":5,"saturadas_giro":0,"saturadas_mag":0,"perdidas_espalda":0}
+ok    cadena.salto_con_saturacion
+ok    enlace.perdida_aleatoria_se_cuenta_exacta
+  duplicados: 50 + 10 repetidos → reenviados al pecho 60
+ok    enlace.duplicados_no_cuentan_perdida_pero_se_reenvian
+  desorden: 40 paquetes en pares invertidos → reenviados 40, pérdidas contadas 19
+ok    enlace.desorden
+ok    enlace.reinicio_de_la_cincha_no_falsea_perdidas
+ok    enlace.reconexion_tras_corte
+ok    enlace.corrupcion_rechazada
+ok    enlace.otra_cincha_rechazada_fuera_de_emparejamiento
+  carga: {"bytes_paquete_imu":220,"paquetes_por_s":11.4,"bytes_por_s":2329}
+ok    enlace.tamano_y_carga
+ok    enlace.ping_con_bit_de_apagado
+ok    alimentacion.fuera_del_soporte_apaga_a_los_3s
+ok    alimentacion.volver_al_soporte_cancela
+ok    alimentacion.bateria_baja_10s_y_no_con_carga
+ok    alimentacion.base_qi_fuera_del_soporte_duerme_usb_no
+ok    alimentacion.apagado_remoto
+ok    alimentacion.despertar_por_reed_solo_si_abierto
+
+19 pruebas, 4313 comprobaciones, 0 fallidas

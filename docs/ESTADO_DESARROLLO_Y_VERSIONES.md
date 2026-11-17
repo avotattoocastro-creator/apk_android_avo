@@ -1,0 +1,80 @@
+# Estado del desarrollo unificado — 22/10/2026
+
+**Rama:** `develop/avo-performance-horse`  
+**Repositorio:** `avotattoocastro-creator/apk_android_avo`
+
+## Matriz de versiones
+
+| Módulo | Versión fuente | Listo para probar | Validación pendiente |
+|---|---|---|---|
+| Licencias y roles de la app (09/11/2026) | Android 2.5-roles-dev2 (vc 37) + AVO Tarjetas 1.4-nfc-movil-dev1 (vc 5), rama `feature/avo-license-nfc` (activar móvil por NFC con HCE) | APK de CI (`build-android.yml`); núcleo con 34 pruebas JVM; reglas Firebase con campo `lic` | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
+| Borrado del reloj con contraseña (03/11/2026) | Android 2.7-borrado-reloj-dev1 (vc 40), rama `feature/avo-ntrip-auto` | APK de CI; reglas con 4 pruebas JVM | Borrar uno guardado, uno sin descargar (aviso rojo), «liberar el reloj» y negativa del reloj mientras graba |
+| Arreglos GNSS/NTRIP de la prueba del 02/11/2026 | Android 2.6-ntrip-auto-dev3 (vc 39; contadores de la espalda 3.13.12) · dev2 (vc 38), rama `feature/avo-ntrip-auto` | APK de CI; 3 pruebas JVM nuevas | Pocas reconexiones con la app abierta sin chaleco; «Edad de la corrección» con valor; aviso de señal reflejada en el balcón; RTK FLOAT/FIX al aire libre |
+| NTRIP automático por posición (01/11/2026) | Android 2.6-ntrip-auto-dev1 (vc 37), rama `feature/avo-ntrip-auto` (sobre 2.5 de `feature/avo-license-nfc`) | APK de CI; selector con 8 pruebas JVM | Caster real: lista de mountpoints, elección y cambio de base fuera de grabación, red/VRS lejos de las bases |
+| Licencias y roles de la app (27/10/2026) | Android 2.5-roles-dev1 (vc 36) + AVO Tarjetas 1.3-registro-dev1 (vc 4), rama `feature/avo-license-nfc` | APK de CI (`build-android.yml`); núcleo con 34 pruebas JVM; reglas Firebase con campo `lic` | Clave generada en Tarjetas, variable `AVO_LICENSE_PUBLIC_KEYS`, tarjeta NTAG215/216 real, archivo por WhatsApp, caducidad y reloj atrasado en teléfono real |
+| Android | **V2.0 / versionCode 12** | APK debug CI [39998714393](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39998714393) | Prueba en teléfono y reloj |
+| Motor de análisis AVO + app Android 2.1-motor + Windows | 1.1.0-dev1 (rama `feature/avo-equine-intelligence-engine`) | APK y paquete Windows de CI (40041494960 / 40041494972) | Teléfono, PC y cincha reales |
+| Mareas | V2.0 | IHM oficial, coeficiente, sol/luna, Open-Meteo | Comparar con Tu Marea / tabla del puerto en el móvil |
+| Contexto marítimo de sesiones | V1.9 | Entidad y captura para sesiones recientes | Prueba real y sincronización servidor |
+| CHEST | V3.5.6 | Fuentes base y parches disponibles | Hardware, persistencia, firma |
+| CHEST OTA firmado | V3.5.7 propuesto | **No** | Receptor ES256, OTA_AUTH, anti-rollback, recuperación |
+| AVO Signer | V0.1 | Código y vector de firma | Respaldo/recuperación de clave y pruebas Android reales |
+| ESPALDA | BACK 3.13.12 vigilancia del resumen de señales y de reinicios del receptor (rama `fix/back-3-13-12-nav-sig-watchdog`, sin probar); 3.13.11 apagado del GPS con USB (rama `fix/back-3-13-11-usb-pololu-off`); 3.13.10 diagnóstico USB (rama `fix/back-3-13-10-usb-umbral`); 3.13.9 (rama `fix/back-3-13-9-usb-gps-off`) | **Parcial** (usuario: GNSS recuperado con 3.13.8 a 460800) | Apagado del GPS por USB: falta señal física en GPIO20 y medir VOUT |
+| CINCHA | Sin versión integrada | **No** | Importar fuentes y validar tres IMU |
+| CHEST pantalla (23/10/2026) | V3.7.2-rc1 | Binario de CI [39965639870](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39965639870) | Orientación, legibilidad, memoria y estabilidad BLE/espalda en el reloj |
+| CHEST descarga al PC por USB (30/10/2026) | 3.7.5-usb1 + AVO Windows V1.1 (rama `feature/chest-usb-pc-sync`) | BIN y paquete Windows de CI | Instalación, detección sin reinicio del reloj, descarga, reanudación y velocidad en PC real |
+| Programador USB (23/10/2026) | 1.8.0-beta2 / versionCode 11 | APK debug de CI [39963751136](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39963751136) | «LEER RELOJ», instalación y recuperación con el reloj real |
+
+## OTA: contrato que falta implementar en receptor
+
+El paquete firmado consta de `firmware.bin`, `manifest.json` y `manifest.sig`. El algoritmo es ES256 (SHA256withECDSA, firma DER), con `schema=avo-ota-manifest-v1`, `target=AVO_CHEST_WAVESHARE_ESP32S3` y clave pública previamente fijada. El reloj **debe** comprobar la firma sobre los bytes originales del manifiesto, SHA-256 y tamaño del firmware, hardware de destino, versión/anti-rollback y persistencia tras reinicio antes de permitir una actualización. Un hash por sí solo no autentica al fabricante. No utilizar la verificación del móvil como sustituto de la del reloj.
+
+**Estado de seguridad:** la transferencia OTA en la app permanece deshabilitada hasta demostrar estas condiciones en hardware. La compilación correcta de Android no certifica la OTA firmada.
+
+## Reglas de desarrollo entre conversaciones
+
+1. Utilizar siempre `develop/avo-performance-horse` como rama de integración.
+2. Trabajar con cambios pequeños, indicando SHA, módulo y pruebas realizadas.
+3. Mantener las versiones del firmware y de Android **independientes**: Android 1.9 no implica CHEST 3.5.7.
+4. No mezclar en una sola afirmación código incorporado, CI correcto y validación física: son estados distintos.
+5. Conservar las ramas históricas como respaldo hasta validar una versión conjunta.
+6. Actualizar README y este documento al introducir una nueva versión o cambiar el contrato OTA.
+7. **Registrar cada cambio en `docs/REGISTRO_DE_CAMBIOS.md`** (añadido el 23/10/2026 a petición del usuario para centralizar el trabajo de Claude y ChatGPT en GitHub). Reglas para asistentes en `AGENTS.md`.
+
+## Evidencias verificables y niveles de validación (22/10/2026)
+
+**Definiciones obligatorias para README, versiones y entregas:**
+
+- **IMPLEMENTADO:** existen fuentes o cambios en el repositorio. No implica que compile ni que funcione en un dispositivo.
+- **COMPILADO / CI:** GitHub Actions ha terminado correctamente para un SHA concreto. Una ejecución de otra rama no valida la rama actual.
+- **PROBADO FÍSICAMENTE:** hay una prueba documentada con dispositivo real, versión, resultado y evidencia. Sin ella, consignar **NO VERIFICADO**.
+
+| Subsistema | Implementado en rama unificada | Compilado / CI | Probado físicamente |
+| --- | --- | --- | --- |
+| Android V1.9 | Sí | **Sí, solo SHA previo a fusión `3b05022b`** (run `39749862683`); **sin CI confirmada de rama unificada** | **No verificado** con APK integrada |
+| Pantalla mareas y Open-Meteo | Sí | Incluido en compilación Android previa | **No verificado** en móvil; tabla oficial y exactitud pendientes |
+| Instantáneas marítimas de entrenos | Sí | Incluido en compilación Android previa | **No verificado** con entrenamiento real |
+| Verificador de ZIP firmado ES256 Android | Sí | Incluido en compilación Android previa | **No verificado** en dispositivo ni integrado en OTA segura de extremo a extremo |
+| Firmware CHEST V3.5.4–V3.5.6 | Fuentes y parches integrados | **No consta CI de la rama unificada** | **No verificado** para esta integración; no confundir con pruebas de versiones históricas |
+| CHEST V3.5.7 y `OTA_AUTH` | **No** | **No** | **No** |
+| AVO Signer V0.1 | Sí | CI de rama Signer previa a fusión; no de rama unificada | **No verificado** en teléfono para flujo completo y restauración de clave |
+| ESPALDA y CINCHA | **No integrados** | **No** | **No** |
+| CHEST V3.7.2-rc1 (pantalla sin LVGL, carga, apagado por fases) | Sí (`firmware/chest/V3_7_2_UI`) | **Sí**, SHA `3e85c41`, run `39965639870` | **Parcial (23/10/2026, fotos):** orientación, legibilidad, BLE, espalda, GPS y SD correctos con `3e85c41`; correcciones de brillo, transición y esquinas pendientes de ver en el reloj |
+| AVO BACK V4: PCB REV B ESP32-S3 + URTK1.2, contactos pogo (sin Qi), carcasa de 118,2 mm (rama `feature/avo-back-v4`) | Sí (`hardware/back/V4`) | **Sí**, PCB SHA `6e5b54d`, run `41050496945` (DRC/ERC 0, 0 conexiones incompletas, puerta superada; placa ruteada en `c1e0e26`); REV A con Qi congelada (`3f81b45`, run `40971520610`) | **No verificado** (sin fabricar ni imprimir) |
+| BACK 4.0.0-dev2 (placa V4 REV B) | Sí (`firmware/back/V4_0_0`) | **Sí**, SHA `8e38b61`, run `41044961345` (44 pruebas en el ordenador) | **No verificado** |
+| BACK 3.12.0 (Heltec, prototipo con contactos pogo Rev E.6) | Sí (`firmware/back/V3_8_0`) | **Sí**, SHA `2750d3c`, run `41044381974` | **No verificado** |
+| Programador USB 1.8.0-beta2 | Sí (`usb-updater/`) | **Sí**, SHA `f60c125`, run `39963751136` (59 pruebas en simulación) | **No verificado** |
+
+**Fuente de evidencia CI Android previa:** [run 39749862683](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39749862683). **Integraciones:** [PR #4](https://github.com/avotattoocastro-creator/apk_android_avo/pull/4) y [PR #5](https://github.com/avotattoocastro-creator/apk_android_avo/pull/5). La rama actual incorpora además cambios de documentación; no atribuirle el CI de la rama original.
+
+**Política de publicación:** ningún README debe usar «definitiva», «probada» o «OTA segura» solo por existir código o por una compilación correcta. Una APK debug es un artefacto de pruebas, no una release firmada de producción. Registrar SHA exacto y evidencias antes de cambiar cualquiera de estas celdas.
+
+## Ensayo físico comunicado — CHEST V3.5.7 (22/10/2026)
+
+**Dispositivo observado:** AVO_1E8C (Waveshare CHEST). El usuario realizó apagado mediante pulsación POWER prolongada y encendido mediante POWER durante aproximadamente 3 segundos. La aplicación Android volvió a conectar/autorizó por BLE y mostró **firmware 3.5.7**, batería **80 %** y **microSD montada**. Se dispone de fotografía de la pantalla aportada en la conversación.
+
+**Resultado comprobado:** persistencia de la versión anunciada **3.5.7** tras **un ciclo de apagado y encendido**, y reconexión BLE con lectura de información. No se ha comprobado la partición de arranque internamente ni repetido múltiples ciclos.
+
+**No comprobado:** rechazo de OTA sin firma, `OTA_AUTH` positivo/negativo, firma manipulada, anti-rollback, recuperación ante interrupción, instalación firmada posterior, enlace espalda o cincha. La fotografía indica **espalda sin enlace** y **cincha sin datos**. No declarar el flujo OTA firmado validado.
+
+**Android OTA:** `OTA_AUTH (0x54)`, preservación de bytes firmados y envío de autorización antes de `OTA_BEGIN` implementados en commits `006a1935`, `8c4e467c`, `41445e7d` y `38f51fc7`; CI Android del último commit [39761875218](https://github.com/avotattoocastro-creator/apk_android_avo/actions/runs/39761875218) finalizó correctamente. **Sin ensayo físico de OTA_AUTH.** La instalación sigue bloqueada por `safeInstallationAvailable=false` hasta prueba de seguridad.

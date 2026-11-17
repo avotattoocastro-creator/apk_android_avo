@@ -1,0 +1,99 @@
+ref,x_mm,y_mm,giro,capa,atributos
+C1,74.8,108.4,0,F.Cu,smd
+C10,81.1,96.7,90,F.Cu,smd
+C11,82.4,97,90,F.Cu,smd
+C12,77,99.1,90,F.Cu,smd
+C13,75.5,99.1,90,F.Cu,smd
+C14,78.4,98.8,90,F.Cu,smd
+C15,78.7,111.9,0,F.Cu,smd
+C16,81.1,111.9,0,F.Cu,smd
+C17,83.4,107.3,-90,F.Cu,smd
+C18,91.7,99.6,90,F.Cu,smd
+C19,93.2,104.3,90,F.Cu,smd
+C2,74.8,110.8,0,F.Cu,smd
+C20,86.7,103.3,90,F.Cu,smd
+C21,100.2,110,90,F.Cu,smd
+C22,106,110,90,F.Cu,smd
+C23,111,115.6,0,F.Cu,smd
+C24,113.8,115.4,0,F.Cu,smd
+C25,116.8,115.4,90,F.Cu,smd
+C26,124.8,111.4,0,F.Cu,smd
+C27,97.4,97,90,F.Cu,smd
+C28,102.6,97,90,F.Cu,smd
+C29,92.6,90.4,90,F.Cu,smd
+C3,74.8,113.2,0,F.Cu,smd
+C30,95,93,0,F.Cu,smd
+C31,95,88,0,F.Cu,smd
+C33,99.6,113.2,90,F.Cu,smd
+C34,105,113.2,90,F.Cu,smd
+C4,74.8,103,90,F.Cu,smd
+C40,92.4,85.4,90,F.Cu,smd
+C41,84.4,85.8,0,F.Cu,smd
+C5,76.6,103,90,F.Cu,smd dnp
+C6,77.6,109.4,-90,F.Cu,smd
+C7,79.4,109.6,-90,F.Cu,smd
+C8,80.6,109.4,-90,F.Cu,smd
+C9,79.8,97,90,F.Cu,smd
+D1,121.9,112,0,F.Cu,smd
+D10,87.8,89,0,F.Cu,smd
+D11,89.4,85.4,0,F.Cu,smd
+D12,85,93,0,F.Cu,smd
+D13,90,93,0,F.Cu,smd
+J1,126.15,100,90,F.Cu,smd
+J2,75.8,93.7,-90,F.Cu,smd
+L1,71.4,105.2,0,F.Cu,through_hole exclude_from_pos_files exclude_from_bom dnp
+L2,71.4,102,0,F.Cu,through_hole exclude_from_pos_files exclude_from_bom dnp
+Q1,84.4,111,0,F.Cu,smd
+Q10,81,89,0,F.Cu,smd
+Q11,84.4,89,0,F.Cu,smd
+Q16,96.2,110.4,0,F.Cu,smd
+Q2,89,111,0,F.Cu,smd
+R1,83.7,98.4,90,F.Cu,smd
+R10,91.6,106.9,90,F.Cu,smd
+R11,115.6,115.4,90,F.Cu,smd
+R12,117,98.8,90,F.Cu,smd
+R13,118.2,98.8,90,F.Cu,smd
+R15,121.7,110.6,0,F.Cu,smd
+R16,122,93.6,90,F.Cu,smd
+R17,123.2,93.6,90,F.Cu,smd
+R18,121.7,106.6,0,F.Cu,smd
+R19,121.7,107.8,0,F.Cu,smd
+R2,84.8,98.4,90,F.Cu,smd
+R20,104,99,90,F.Cu,smd
+R21,105.1,99,90,F.Cu,smd
+R3,85.9,98.4,90,F.Cu,smd
+R31,98.4,113.2,90,F.Cu,smd
+R32,102.6,113.2,90,F.Cu,smd
+R33,103.8,113.2,90,F.Cu,smd
+R4,87.2,107.3,90,F.Cu,smd
+R40,81,86.2,0,F.Cu,smd
+R41,92.4,82.8,0,F.Cu,smd
+R42,86.8,85.8,90,F.Cu,smd
+R43,87.4,82.4,0,F.Cu,smd
+R44,82.4,92.4,90,F.Cu,smd
+R45,87.4,92.4,90,F.Cu,smd
+R49,91.9,116.9,0,F.Cu,smd
+R50,93.8,116.9,0,F.Cu,smd
+R6,89.2,99.6,90,F.Cu,smd
+R7,93.2,101.8,90,F.Cu,smd
+R8,89.4,106.9,90,F.Cu,smd
+R9,90.5,106.9,90,F.Cu,smd
+RT1,84,101.6,90,F.Cu,smd
+RT2,86.8,100.9,0,F.Cu,smd
+SW1,98.73,117.8,0,F.Cu,through_hole exclude_from_pos_files exclude_from_bom dnp
+SW2,101.27,117.8,0,F.Cu,through_hole exclude_from_pos_files exclude_from_bom dnp
+TP1,104,117.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP2,106,117.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP3,108,117.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP4,104,115.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP5,106,115.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP6,108,115.2,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP7,110,117.6,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+TP8,112,117.6,0,F.Cu,smd exclude_from_pos_files exclude_from_bom dnp
+U1,80.5,103,90,F.Cu,smd
+U2,90.1,103,0,F.Cu,smd
+U3,103,110,0,F.Cu,smd
+U4,113.6,107,90,F.Cu,smd
+U5,100,97,0,F.Cu,smd
+U6,124.9,108,0,F.Cu,smd
+U7,95,90.4,0,F.Cu,smd

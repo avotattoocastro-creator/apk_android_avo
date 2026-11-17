@@ -1,0 +1,7768 @@
+{
+ "date_utc": "2026-10-30 11:44 UTC",
+ "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
+ "parts": {
+  "C2980299": {
+   "lcsc": "C2980299",
+   "mpn": "ESP32-S3-MINI-1U-N8",
+   "maker": "Espressif Systems",
+   "package": "VFQFN-56-EP",
+   "stock": 2476,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     4.7689
+    ],
+    [
+     10,
+     4.2707
+    ],
+    [
+     30,
+     3.9757
+    ],
+    [
+     100,
+     3.5988
+    ],
+    [
+     650,
+     3.4333
+    ],
+    [
+     1300,
+     3.3579
+    ]
+   ],
+   "describe": "-40℃~+105℃ -98.4dBm 1.8V~3.6V、3V~3.6V 2.4GHz 21dBm 340mA 88mA Bluetooth5.0 ESP32-S3 UART、SDIO、SPI、I2C、I2S、JTAG、USB VFQFN-56-EP WiFi Modules ROHS"
+  },
+  "C841192": {
+   "lcsc": "C841192",
+   "mpn": "RT9080-33GJ5",
+   "maker": "Richtek Tech",
+   "package": "TSOT-23-5",
+   "stock": 36389,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1198
+    ],
+    [
+     50,
+     0.0976
+    ],
+    [
+     150,
+     0.0864
+    ],
+    [
+     500,
+     0.0779
+    ],
+    [
+     3000,
+     0.0608
+    ],
+    [
+     6000,
+     0.0576
+    ]
+   ],
+   "describe": "-40℃~+125℃@(Tj) 1 2uA 3.3V 360mV@(600mA) 42uVrms 5.5V 600mA 75dB@(1kHz) Fixed Over Current Protection、Over Temperature Protection、Enable Positive TSOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+  },
+  "C140288": {
+   "lcsc": "C140288",
+   "mpn": "BQ24072RGTR",
+   "maker": "Texas Instruments",
+   "package": "QFN-16-EP(3x3)",
+   "stock": 2861,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.9964
+    ],
+    [
+     10,
+     0.8194
+    ],
+    [
+     30,
+     0.7228
+    ],
+    [
+     100,
+     0.613
+    ],
+    [
+     500,
+     0.5638
+    ],
+    [
+     1000,
+     0.5425
+    ]
+   ],
+   "describe": "-40℃~+125℃ 1 1.5A 1.5mA 4.2V 4.35V~6.6V Charging IC Lithium Battery Support QFN-16-EP(3x3) Battery Management ROHS"
+  },
+  "C55663": {
+   "lcsc": "C55663",
+   "mpn": "BQ51013BRHLR",
+   "maker": "Texas Instruments",
+   "package": "VQFN-20(4.5x3.5)",
+   "stock": 469,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     3.607
+    ],
+    [
+     10,
+     3.1252
+    ],
+    [
+     30,
+     2.8237
+    ],
+    [
+     100,
+     2.3304
+    ],
+    [
+     500,
+     2.1911
+    ],
+    [
+     1000,
+     2.1305
+    ]
+   ],
+   "describe": "0℃~+125℃ 1.5A 4V~10V 5V Qi v1.1 Receiver Side (with Charging Management) VQFN-20(4.5x3.5) Wireless Charge-Discharge ICs ROHS"
+  },
+  "C165948": {
+   "lcsc": "C165948",
+   "mpn": "TYPE-C-31-M-12",
+   "maker": "Korean Hroparts Elec",
+   "package": "SMD",
+   "stock": 284301,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1872
+    ],
+    [
+     50,
+     0.1479
+    ],
+    [
+     150,
+     0.1285
+    ],
+    [
+     1000,
+     0.1043
+    ],
+    [
+     2000,
+     0.0995
+    ],
+    [
+     5000,
+     0.0967
+    ]
+   ],
+   "describe": "-30℃~+80℃ 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS"
+  },
+  "C7519": {
+   "lcsc": "C7519",
+   "mpn": "USBLC6-2SC6",
+   "maker": "STMicroelectronics",
+   "package": "SOT-23-6L",
+   "stock": 34098,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1799
+    ],
+    [
+     50,
+     0.1385
+    ],
+    [
+     150,
+     0.1182
+    ],
+    [
+     500,
+     0.1002
+    ],
+    [
+     3000,
+     0.0953
+    ],
+    [
+     6000,
+     0.0923
+    ]
+   ],
+   "describe": "-40℃~+125℃ 150nA 17V 2 3.5pF 5.25V 5A 6V ESD IEC 61000-4-2 Unidirectional SOT-23-6L ESD and Surge Protection (TVS/ESD) ROHS"
+  },
+  "C15127": {
+   "lcsc": "C15127",
+   "mpn": "AO3401A",
+   "maker": "Alpha & Omega Semicon",
+   "package": "SOT-23",
+   "stock": 1021120,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0961
+    ],
+    [
+     50,
+     0.0784
+    ],
+    [
+     150,
+     0.0692
+    ],
+    [
+     500,
+     0.0618
+    ],
+    [
+     3000,
+     0.0592
+    ],
+    [
+     6000,
+     0.0574
+    ]
+   ],
+   "describe": "1 P-Channel 14nC@10V 30V 47mΩ@10V、60mΩ@4.5V、85mΩ@2.5V 4A 55pF 645pF 80pF 900mV SOT-23 MOSFETs ROHS"
+  },
+  "C20917": {
+   "lcsc": "C20917",
+   "mpn": "AO3400A",
+   "maker": "Alpha & Omega Semicon",
+   "package": "SOT-23",
+   "stock": 1068437,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.089
+    ],
+    [
+     50,
+     0.0718
+    ],
+    [
+     150,
+     0.063
+    ],
+    [
+     500,
+     0.0556
+    ],
+    [
+     3000,
+     0.0531
+    ],
+    [
+     6000,
+     0.0513
+    ]
+   ],
+   "describe": "-55℃~+150℃ 1 N-channel 1.45V 1.4W 30V 48mΩ@2.5V 5.7A 50pF 630pF 75pF 7nC@10V N-Channel SOT-23 MOSFETs ROHS"
+  },
+  "C8545": {
+   "lcsc": "C8545",
+   "mpn": "2N7002",
+   "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+   "package": "SOT-23",
+   "stock": 3421350,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0161
+    ],
+    [
+     500,
+     0.0125
+    ],
+    [
+     3000,
+     0.0109
+    ],
+    [
+     6000,
+     0.0098
+    ],
+    [
+     24000,
+     0.0093
+    ],
+    [
+     51000,
+     0.009
+    ]
+   ],
+   "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5Ω@10V 60V N-Channel ±20V SOT-23 MOSFETs ROHS"
+  },
+  "C77131": {
+   "lcsc": "C77131",
+   "mpn": "NCP15XH103F03RC",
+   "maker": "Murata Electronics",
+   "package": "0402",
+   "stock": 300534,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0187
+    ],
+    [
+     500,
+     0.0148
+    ],
+    [
+     1500,
+     0.0131
+    ],
+    [
+     10000,
+     0.011
+    ],
+    [
+     20000,
+     0.0105
+    ],
+    [
+     50000,
+     0.0101
+    ]
+   ],
+   "describe": "-40℃~+125℃ 0.5mm 100mW 10kΩ 1mW/℃ 1mm 310uA 3380K 3434K 3455K ±1% ±1% 0402 NTC Thermistors ROHS"
+  },
+  "C2286": {
+   "lcsc": "C2286",
+   "mpn": "KT-0603R",
+   "maker": "Hubei KENTO Elec",
+   "package": "0603",
+   "stock": 7297951,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0077
+    ],
+    [
+     1000,
+     0.0059
+    ],
+    [
+     4000,
+     0.0046
+    ],
+    [
+     8000,
+     0.004
+    ],
+    [
+     48000,
+     0.0038
+    ],
+    [
+     100000,
+     0.0036
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.6mm x 0.8mm square LED 1.8V~2.4V 120° 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS"
+  },
+  "C160402": {
+   "lcsc": "C160402",
+   "mpn": "SM02B-SRSS-TB(LF)(SN)",
+   "maker": "JST",
+   "package": "SMD,P=1mm,Surface Mount，Right Angle",
+   "stock": 75012,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1325
+    ],
+    [
+     50,
+     0.109
+    ],
+    [
+     150,
+     0.0971
+    ],
+    [
+     500,
+     0.0871
+    ],
+    [
+     3000,
+     0.0836
+    ],
+    [
+     6000,
+     0.0813
+    ]
+   ],
+   "describe": "-25℃~+85℃ 1 1A 1mm 1x2P 2 2.9mm 2P 4.32mm 4mm 50V Auxiliary Solder Pin Copper alloy PA SH Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1mm,卧贴 Wire To Board Connector ROHS"
+  },
+  "C68978": {
+   "lcsc": "C68978",
+   "mpn": "BAV70",
+   "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+   "package": "SOT-23",
+   "stock": 631313,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0153
+    ],
+    [
+     500,
+     0.0117
+    ],
+    [
+     3000,
+     0.0101
+    ],
+    [
+     6000,
+     0.0089
+    ],
+    [
+     24000,
+     0.0085
+    ],
+    [
+     51000,
+     0.0081
+    ]
+   ],
+   "describe": "-55℃~+150℃ 1 Pair Common Cathode 1.25V@150mA 2.5uA@70V 200mA 225mW 2A 6ns 70V SOT-23 Switching Diodes ROHS"
+  },
+  "C97946": {
+   "lcsc": "C97946",
+   "mpn": "GRM31C5C1H104JA01L",
+   "maker": "Murata Electronics",
+   "package": "1206",
+   "stock": 63129,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.2775
+    ],
+    [
+     50,
+     0.2221
+    ],
+    [
+     150,
+     0.1951
+    ],
+    [
+     500,
+     0.171
+    ],
+    [
+     2000,
+     0.1587
+    ],
+    [
+     4000,
+     0.1548
+    ]
+   ],
+   "describe": "100nF 50V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C21812": {
+   "lcsc": "C21812",
+   "mpn": "GRM31M5C1H473JA01L",
+   "maker": "Murata Electronics",
+   "package": "1206",
+   "stock": 65516,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.169
+    ],
+    [
+     50,
+     0.139
+    ],
+    [
+     150,
+     0.1239
+    ],
+    [
+     500,
+     0.1126
+    ],
+    [
+     3000,
+     0.0984
+    ],
+    [
+     6000,
+     0.094
+    ]
+   ],
+   "describe": "47nF 50V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C51795": {
+   "lcsc": "C51795",
+   "mpn": "0805CG222J500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0805",
+   "stock": 3029,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0425
+    ],
+    [
+     200,
+     0.0341
+    ],
+    [
+     600,
+     0.0295
+    ],
+    [
+     4000,
+     0.0256
+    ],
+    [
+     8000,
+     0.0232
+    ],
+    [
+     20000,
+     0.0218
+    ]
+   ],
+   "describe": "2.2nF 50V C0G ±5% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C96446": {
+   "lcsc": "C96446",
+   "mpn": "CL10A106MA8NRNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 8152201,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0377
+    ],
+    [
+     200,
+     0.0305
+    ],
+    [
+     600,
+     0.0268
+    ],
+    [
+     4000,
+     0.0236
+    ],
+    [
+     8000,
+     0.0227
+    ],
+    [
+     20000,
+     0.0218
+    ]
+   ],
+   "describe": "10uF 25V X5R ±20% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C45783": {
+   "lcsc": "C45783",
+   "mpn": "CL21A226MAQNNNE",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0805",
+   "stock": 3512279,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.192
+    ],
+    [
+     200,
+     0.151
+    ],
+    [
+     600,
+     0.1312
+    ],
+    [
+     2000,
+     0.1133
+    ],
+    [
+     10000,
+     0.1084
+    ],
+    [
+     20000,
+     0.1056
+    ]
+   ],
+   "describe": "22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C19702": {
+   "lcsc": "C19702",
+   "mpn": "CL10A106KP8NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 11879012,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0212
+    ],
+    [
+     200,
+     0.0164
+    ],
+    [
+     600,
+     0.0142
+    ],
+    [
+     4000,
+     0.0126
+    ],
+    [
+     8000,
+     0.012
+    ],
+    [
+     20000,
+     0.0115
+    ]
+   ],
+   "describe": "10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C52923": {
+   "lcsc": "C52923",
+   "mpn": "CL05A105KA5NQNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 10342612,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0064
+    ],
+    [
+     1000,
+     0.0049
+    ],
+    [
+     3000,
+     0.0042
+    ],
+    [
+     10000,
+     0.0037
+    ],
+    [
+     50000,
+     0.0035
+    ],
+    [
+     100000,
+     0.0034
+    ]
+   ],
+   "describe": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C1525": {
+   "lcsc": "C1525",
+   "mpn": "CL05B104KO5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 36047759,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0031
+    ],
+    [
+     1000,
+     0.0023
+    ],
+    [
+     3000,
+     0.002
+    ],
+    [
+     10000,
+     0.0017
+    ],
+    [
+     50000,
+     0.0016
+    ],
+    [
+     50200,
+     0.0016
+    ]
+   ],
+   "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C15195": {
+   "lcsc": "C15195",
+   "mpn": "CL05B103KB5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 6134916,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0039
+    ],
+    [
+     1000,
+     0.003
+    ],
+    [
+     3000,
+     0.0025
+    ],
+    [
+     10000,
+     0.0022
+    ],
+    [
+     50000,
+     0.002
+    ],
+    [
+     50200,
+     0.002
+    ]
+   ],
+   "describe": "10nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C1532": {
+   "lcsc": "C1532",
+   "mpn": "0402B223K500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0402",
+   "stock": 601207,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0049
+    ],
+    [
+     1000,
+     0.0038
+    ],
+    [
+     3000,
+     0.0032
+    ],
+    [
+     10000,
+     0.0028
+    ],
+    [
+     50000,
+     0.0025
+    ],
+    [
+     100000,
+     0.0024
+    ]
+   ],
+   "describe": "22nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C1623": {
+   "lcsc": "C1623",
+   "mpn": "CL10B474KA8NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 681659,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.013
+    ],
+    [
+     500,
+     0.0101
+    ],
+    [
+     1500,
+     0.0088
+    ],
+    [
+     4000,
+     0.0064
+    ],
+    [
+     24000,
+     0.006
+    ],
+    [
+     48000,
+     0.0057
+    ]
+   ],
+   "describe": "25V 470nF X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C16772": {
+   "lcsc": "C16772",
+   "mpn": "CL05B224KO5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 1316302,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0049
+    ],
+    [
+     500,
+     0.0038
+    ],
+    [
+     1500,
+     0.0033
+    ],
+    [
+     10000,
+     0.003
+    ],
+    [
+     20000,
+     0.0028
+    ],
+    [
+     50000,
+     0.0027
+    ]
+   ],
+   "describe": "16V 220nF X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C19666": {
+   "lcsc": "C19666",
+   "mpn": "CL10A475KO8NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 4249330,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0169
+    ],
+    [
+     100,
+     0.0128
+    ],
+    [
+     300,
+     0.0109
+    ],
+    [
+     1000,
+     0.0095
+    ],
+    [
+     4000,
+     0.0089
+    ],
+    [
+     8000,
+     0.0086
+    ]
+   ],
+   "describe": "16V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C23630": {
+   "lcsc": "C23630",
+   "mpn": "CL10A225KO8NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 2850798,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0119
+    ],
+    [
+     500,
+     0.0089
+    ],
+    [
+     1500,
+     0.0076
+    ],
+    [
+     4000,
+     0.0066
+    ],
+    [
+     24000,
+     0.0062
+    ],
+    [
+     48000,
+     0.0059
+    ]
+   ],
+   "describe": "16V 2.2uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C25744": {
+   "lcsc": "C25744",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 16828819,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0024
+    ],
+    [
+     1000,
+     0.0018
+    ],
+    [
+     3000,
+     0.0016
+    ],
+    [
+     10000,
+     0.0014
+    ],
+    [
+     50000,
+     0.0013
+    ],
+    [
+     50200,
+     0.0013
+    ]
+   ],
+   "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25741": {
+   "lcsc": "C25741",
+   "mpn": "0402WGF1003TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 8395967,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0012
+    ],
+    [
+     1000,
+     0.001
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0008
+    ],
+    [
+     50000,
+     0.0007
+    ],
+    [
+     50200,
+     0.0007
+    ]
+   ],
+   "describe": "-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C26083": {
+   "lcsc": "C26083",
+   "mpn": "0402WGF1004TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 2929984,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0015
+    ],
+    [
+     1000,
+     0.0012
+    ],
+    [
+     3000,
+     0.001
+    ],
+    [
+     10000,
+     0.0009
+    ],
+    [
+     50000,
+     0.0007
+    ],
+    [
+     50200,
+     0.0007
+    ]
+   ],
+   "describe": "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25905": {
+   "lcsc": "C25905",
+   "mpn": "0402WGF5101TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 3786243,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0023
+    ],
+    [
+     1000,
+     0.0017
+    ],
+    [
+     3000,
+     0.0015
+    ],
+    [
+     10000,
+     0.0013
+    ],
+    [
+     50000,
+     0.0012
+    ],
+    [
+     50200,
+     0.0012
+    ]
+   ],
+   "describe": "-55℃~+155℃ 5.1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25092": {
+   "lcsc": "C25092",
+   "mpn": "0402WGF220JTCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 2891069,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0014
+    ],
+    [
+     1000,
+     0.0011
+    ],
+    [
+     3000,
+     0.001
+    ],
+    [
+     10000,
+     0.0009
+    ],
+    [
+     50000,
+     0.0008
+    ],
+    [
+     50200,
+     0.0008
+    ]
+   ],
+   "describe": "-55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25104": {
+   "lcsc": "C25104",
+   "mpn": "0402WGF3300TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 2181265,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0011
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0005
+    ],
+    [
+     50200,
+     0.0005
+    ]
+   ],
+   "describe": "-55℃~+155℃ 330Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25087": {
+   "lcsc": "C25087",
+   "mpn": "0402WGF2000TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 1906365,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0029
+    ],
+    [
+     1000,
+     0.0022
+    ],
+    [
+     3000,
+     0.0019
+    ],
+    [
+     10000,
+     0.0017
+    ],
+    [
+     50000,
+     0.0014
+    ],
+    [
+     50200,
+     0.0014
+    ]
+   ],
+   "describe": "-55℃~+155℃ 200Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C11702": {
+   "lcsc": "C11702",
+   "mpn": "0402WGF1001TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 21629223,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0013
+    ],
+    [
+     1000,
+     0.0011
+    ],
+    [
+     3000,
+     0.001
+    ],
+    [
+     10000,
+     0.0009
+    ],
+    [
+     50000,
+     0.0008
+    ],
+    [
+     50200,
+     0.0008
+    ]
+   ],
+   "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25890": {
+   "lcsc": "C25890",
+   "mpn": "0402WGF3301TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 1571396,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0036
+    ],
+    [
+     1000,
+     0.0027
+    ],
+    [
+     3000,
+     0.0022
+    ],
+    [
+     10000,
+     0.002
+    ],
+    [
+     50000,
+     0.0018
+    ],
+    [
+     50200,
+     0.0018
+    ]
+   ],
+   "describe": "-55℃~+155℃ 3.3kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25900": {
+   "lcsc": "C25900",
+   "mpn": "0402WGF4701TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 14846148,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.002
+    ],
+    [
+     1000,
+     0.0015
+    ],
+    [
+     3000,
+     0.0013
+    ],
+    [
+     10000,
+     0.0012
+    ],
+    [
+     50000,
+     0.001
+    ],
+    [
+     50200,
+     0.001
+    ]
+   ],
+   "describe": "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25765": {
+   "lcsc": "C25765",
+   "mpn": "0402WGF2002TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 2870362,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0011
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0007
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 20kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C17168": {
+   "lcsc": "C17168",
+   "mpn": "0402WGF0000TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 11245390,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.001
+    ],
+    [
+     1000,
+     0.0008
+    ],
+    [
+     3000,
+     0.0007
+    ],
+    [
+     10000,
+     0.0006
+    ],
+    [
+     50000,
+     0.0005
+    ],
+    [
+     50200,
+     0.0005
+    ]
+   ],
+   "describe": "-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% ±800ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C1636": {
+   "lcsc": "C1636",
+   "mpn": "0603CG102J500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0603",
+   "stock": 99046,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0097
+    ],
+    [
+     500,
+     0.0078
+    ],
+    [
+     1500,
+     0.0068
+    ],
+    [
+     4000,
+     0.0056
+    ],
+    [
+     24000,
+     0.0051
+    ],
+    [
+     48000,
+     0.0048
+    ]
+   ],
+   "describe": "1nF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C114218": {
+   "lcsc": "C114218",
+   "mpn": "DM3AT-SF-PEJM5",
+   "maker": "HRS(Hirose)",
+   "package": "SMD",
+   "stock": 19353,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     1.393
+    ],
+    [
+     10,
+     1.1669
+    ],
+    [
+     30,
+     1.0423
+    ],
+    [
+     100,
+     0.9014
+    ],
+    [
+     500,
+     0.7949
+    ],
+    [
+     1500,
+     0.767
+    ]
+   ],
+   "describe": "-25℃~+85℃ 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS"
+  },
+  "C140921": {
+   "lcsc": "C140921",
+   "mpn": "DRV5032FADBZR",
+   "maker": "Texas Instruments",
+   "package": "SOT-23",
+   "stock": 44642,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1751
+    ],
+    [
+     50,
+     0.1366
+    ],
+    [
+     150,
+     0.12
+    ],
+    [
+     500,
+     0.0994
+    ],
+    [
+     3000,
+     0.0902
+    ],
+    [
+     6000,
+     0.0846
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.65V~5.5V 1.6uA 20Hz Omnipolar Push-pull ±4.8mT ±5Gs SOT-23 Hall Switches ROHS"
+  },
+  "C16780": {
+   "lcsc": "C16780",
+   "mpn": "CL21A476MQYNNNE",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0805",
+   "stock": 1042064,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.102
+    ],
+    [
+     100,
+     0.0799
+    ],
+    [
+     300,
+     0.0686
+    ],
+    [
+     2000,
+     0.0592
+    ],
+    [
+     4000,
+     0.0559
+    ],
+    [
+     10000,
+     0.0538
+    ]
+   ],
+   "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C20802": {
+   "lcsc": "C20802",
+   "mpn": "SMD1206P150TF",
+   "maker": "RUILON(Shenzhen Ruilongyuan Elec)",
+   "package": "1206",
+   "stock": 11691,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1189
+    ],
+    [
+     50,
+     0.0935
+    ],
+    [
+     150,
+     0.0808
+    ],
+    [
+     500,
+     0.0713
+    ],
+    [
+     3500,
+     0.0581
+    ],
+    [
+     7000,
+     0.0541
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.5A 1.9mm 130mΩ 1mm 25mΩ 3.6mm 300ms 35A 3A 6V 800mW 1206 Resettable Fuses ROHS"
+  },
+  "C4109": {
+   "lcsc": "C4109",
+   "mpn": "0402WGF2001TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 10000179,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0026
+    ],
+    [
+     1000,
+     0.002
+    ],
+    [
+     3000,
+     0.0016
+    ],
+    [
+     10000,
+     0.0015
+    ],
+    [
+     50000,
+     0.0012
+    ],
+    [
+     50200,
+     0.0012
+    ]
+   ],
+   "describe": "-55℃~+155℃ 2kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C485517": {
+   "lcsc": "C485517",
+   "mpn": "TLV75733PDBVR",
+   "maker": "Texas Instruments",
+   "package": "SOT-23-5",
+   "stock": 30044,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.2162
+    ],
+    [
+     50,
+     0.1697
+    ],
+    [
+     150,
+     0.147
+    ],
+    [
+     500,
+     0.1269
+    ],
+    [
+     3000,
+     0.1213
+    ],
+    [
+     6000,
+     0.1179
+    ]
+   ],
+   "describe": "-40℃~+125℃@(Tj) 1 1A 3.3V 40uA 46dB@(100kHz) 5.5V 650mV@(1A) 71.5uVrms Fixed Positive Under Voltage Lockout、Over Current Protection、Over Temperature Protection、Soft Start SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+  },
+  "C2827694": {
+   "lcsc": "C2827694",
+   "mpn": "PESD5V0S1BA",
+   "maker": "TECH PUBLIC",
+   "package": "SOD-323",
+   "stock": 496730,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0359
+    ],
+    [
+     200,
+     0.0269
+    ],
+    [
+     600,
+     0.023
+    ],
+    [
+     3000,
+     0.0204
+    ],
+    [
+     9000,
+     0.0191
+    ],
+    [
+     21000,
+     0.0182
+    ]
+   ],
+   "describe": "-55℃~+125℃ 1 100nA 20A 300W 5V 7V 9V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+  }
+ },
+ "search": {
+  "ESP32-S3-MINI-1U": [
+   {
+    "lcsc": "C2980299",
+    "mpn": "ESP32-S3-MINI-1U-N8",
+    "maker": "Espressif Systems",
+    "package": "VFQFN-56-EP",
+    "stock": 2476,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.7689
+     ],
+     [
+      10,
+      4.2707
+     ],
+     [
+      30,
+      3.9757
+     ],
+     [
+      100,
+      3.5988
+     ],
+     [
+      650,
+      3.4333
+     ],
+     [
+      1300,
+      3.3579
+     ]
+    ],
+    "describe": "-40℃~+105℃ -98.4dBm 1.8V~3.6V、3V~3.6V 2.4GHz 21dBm 340mA 88mA Bluetooth5.0 ESP32-S3 UART、SDIO、SPI、I2C、I2S、JTAG、USB VFQFN-56-EP WiFi Modules ROHS"
+   },
+   {
+    "lcsc": "C22356044",
+    "mpn": "ESP32-S3-MINI-1U-N4R2",
+    "maker": "Espressif Systems",
+    "package": "SMD,15.4x15.4mm",
+    "stock": 288,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.8689
+     ],
+     [
+      10,
+      4.3592
+     ],
+     [
+      30,
+      4.056
+     ],
+     [
+      100,
+      3.8053
+     ],
+     [
+      650,
+      3.6349
+     ],
+     [
+      1300,
+      3.5578
+     ]
+    ],
+    "describe": "-40℃~+85℃ -98.2dBm 2.4GHz 20.5dBm 355mA 3V~3.6V 95mA ESP32-S3FH4R2 Integrated Bluetooth function、Support USB interface UART、SPI、I2C、I2S、USB SMD,15.4x15.4mm WiFi Modules ROHS"
+   },
+   {
+    "lcsc": "C9900091526",
+    "mpn": "ESP32-S3-MINI-1U-N4R2",
+    "maker": "JLCPCB Assembly",
+    "package": "module",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "module New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900113988",
+    "mpn": "ESP32-S3-MINI-1U-4NR2",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-73",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-73 New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900277493",
+    "mpn": "ESP32-S3-MINI-1U-N8||-1-N8",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,15.4x15.4mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,15.4x15.4mm SMT ROHS"
+   }
+  ],
+  "ESP32-S3-MINI-1U-N4R2": [
+   {
+    "lcsc": "C22356044",
+    "mpn": "ESP32-S3-MINI-1U-N4R2",
+    "maker": "Espressif Systems",
+    "package": "SMD,15.4x15.4mm",
+    "stock": 288,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.8689
+     ],
+     [
+      10,
+      4.3592
+     ],
+     [
+      30,
+      4.056
+     ],
+     [
+      100,
+      3.8053
+     ],
+     [
+      650,
+      3.6349
+     ],
+     [
+      1300,
+      3.5578
+     ]
+    ],
+    "describe": "-40℃~+85℃ -98.2dBm 2.4GHz 20.5dBm 355mA 3V~3.6V 95mA ESP32-S3FH4R2 Integrated Bluetooth function、Support USB interface UART、SPI、I2C、I2S、USB SMD,15.4x15.4mm WiFi Modules ROHS"
+   },
+   {
+    "lcsc": "C9900091526",
+    "mpn": "ESP32-S3-MINI-1U-N4R2",
+    "maker": "JLCPCB Assembly",
+    "package": "module",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "module New Arrivals ROHS"
+   }
+  ],
+  "TLV75733PDBVR": [
+   {
+    "lcsc": "C485517",
+    "mpn": "TLV75733PDBVR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23-5",
+    "stock": 30044,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2162
+     ],
+     [
+      50,
+      0.1697
+     ],
+     [
+      150,
+      0.147
+     ],
+     [
+      500,
+      0.1269
+     ],
+     [
+      3000,
+      0.1213
+     ],
+     [
+      6000,
+      0.1179
+     ]
+    ],
+    "describe": "-40℃~+125℃@(Tj) 1 1A 3.3V 40uA 46dB@(100kHz) 5.5V 650mV@(1A) 71.5uVrms Fixed Positive Under Voltage Lockout、Over Current Protection、Over Temperature Protection、Soft Start SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C55114420",
+    "mpn": "TPTLV75733PDBVR",
+    "maker": "TECH PUBLIC",
+    "package": "SOT-23-5",
+    "stock": 2990,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2501
+     ],
+     [
+      50,
+      0.1956
+     ],
+     [
+      150,
+      0.1722
+     ],
+     [
+      500,
+      0.1431
+     ],
+     [
+      3000,
+      0.13
+     ],
+     [
+      6000,
+      0.1223
+     ]
+    ],
+    "describe": "SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C54539933",
+    "mpn": "TLV75733PDBVR-MS",
+    "maker": "MSKSEMI",
+    "package": "SOT-23-5",
+    "stock": 2863,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1187
+     ],
+     [
+      50,
+      0.0943
+     ],
+     [
+      150,
+      0.0822
+     ],
+     [
+      500,
+      0.073
+     ],
+     [
+      3000,
+      0.0656
+     ],
+     [
+      6000,
+      0.062
+     ]
+    ],
+    "describe": "SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C189779",
+    "mpn": "PTLV75733PDBVR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23-5",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4406
+     ],
+     [
+      10,
+      0.3609
+     ],
+     [
+      30,
+      0.3267
+     ],
+     [
+      100,
+      0.2841
+     ],
+     [
+      500,
+      0.265
+     ],
+     [
+      1000,
+      0.2537
+     ],
+     [
+      3000,
+      0.2513
+     ],
+     [
+      6000,
+      0.2498
+     ]
+    ],
+    "describe": "1 1A 3.3V 46dB@(100kHz)、52dB@(1MHz) 475mV@(1A) 5.5V Fixed Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   }
+  ],
+  "XC6220B331MR-G": [
+   {
+    "lcsc": "C86534",
+    "mpn": "XC6220B331MR-G",
+    "maker": "Torex Semicon",
+    "package": "SOT-25",
+    "stock": 18904,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4769
+     ],
+     [
+      10,
+      0.3737
+     ],
+     [
+      30,
+      0.3311
+     ],
+     [
+      100,
+      0.277
+     ],
+     [
+      500,
+      0.2377
+     ],
+     [
+      1000,
+      0.2229
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1 1A 3.3V 50dB@(1kHz) 655mV@(1A) 6V 8uA Fixed Over Current Protection、Over Temperature Protection、Enable、Short Circuit Protection Positive SOT-25 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   }
+  ],
+  "SGM2212-3.3": [
+   {
+    "lcsc": "C3294699",
+    "mpn": "SGM2212-3.3XKC3G/TR",
+    "maker": "SGMICRO",
+    "package": "SOT-223-3",
+    "stock": 8594,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.5736
+     ],
+     [
+      10,
+      0.4917
+     ],
+     [
+      30,
+      0.4097
+     ],
+     [
+      100,
+      0.3606
+     ],
+     [
+      500,
+      0.3278
+     ],
+     [
+      1000,
+      0.3278
+     ]
+    ],
+    "describe": "-40℃~+125℃ 0.002%Vout 20V 3.3V 450mV@(800mA) 800mA 80dB@(120Hz) 80uA Fixed Short Circuit Protection、Thermal Shutdown SOT-223-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C5152863",
+    "mpn": "SGM2212-3.3XOB2G/TR",
+    "maker": "SGMICRO",
+    "package": "TO-252-2",
+    "stock": 2376,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.7932
+     ],
+     [
+      10,
+      0.6097
+     ],
+     [
+      30,
+      0.5179
+     ],
+     [
+      100,
+      0.4261
+     ],
+     [
+      500,
+      0.4261
+     ],
+     [
+      1000,
+      0.4261
+     ]
+    ],
+    "describe": "-40℃~+125℃ 0.002%Vout 1 116uA 20V 3.3V 450mV@(800mA) 800mA 80dB@(120Hz) Fixed Over Current Protection、Short Circuit Protection、Thermal shutdown Positive TO-252-2 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C9900018517",
+    "mpn": "SGM2212-3.3XKC3G/TR",
+    "maker": "JLCPCB Assembly",
+    "package": "SOT223-4",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SOT-223-4 SMT ROHS"
+   },
+   {
+    "lcsc": "C5152868",
+    "mpn": "SGM2212-3.3XOA3G/TR",
+    "maker": "SGMICRO",
+    "package": "TO-263-3",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.139
+     ],
+     [
+      10,
+      0.9079
+     ],
+     [
+      30,
+      0.7817
+     ],
+     [
+      100,
+      0.6392
+     ],
+     [
+      500,
+      0.6392
+     ],
+     [
+      800,
+      0.6392
+     ]
+    ],
+    "describe": "-40℃~+125℃@(Tj) 0.002%Vout 1 116uA 20V 3.3V 610mV@(800mA) 800mA 80dB@(120Hz) Fixed Over Current Protection、Short Circuit Protection、Thermal shutdown Positive TO-263-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C9900160545",
+    "mpn": "LDO/SGM2212-3.3XKC3G/SOT223",
+    "maker": "JLCPCB Assembly",
+    "package": "SOT-223-3",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SOT-223-3 New Arrivals ROHS"
+   }
+  ],
+  "TPS7A2033PDBVR": [
+   {
+    "lcsc": "C2862740",
+    "mpn": "TPS7A2033PDBVR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23-5",
+    "stock": 141025,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2093
+     ],
+     [
+      50,
+      0.1598
+     ],
+     [
+      150,
+      0.1356
+     ],
+     [
+      500,
+      0.1141
+     ],
+     [
+      3000,
+      0.1082
+     ],
+     [
+      6000,
+      0.1046
+     ]
+    ],
+    "describe": "-40℃~+125℃@(Tj) 1 10uVrms 140mV@(300mA) 3.3V 300mA 65dB@(100kHz) 6V 8.5uA Fixed Over Current Protection、Short Circuit Protection、Thermal shutdown、Enable control、Input under-voltage protection、Output discharge、Built-in soft-start Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C45367201",
+    "mpn": "MSTPS7A2033PDBVR",
+    "maker": "MSKSEMI",
+    "package": "SOT-23-5",
+    "stock": 3176,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1136
+     ],
+     [
+      50,
+      0.09
+     ],
+     [
+      150,
+      0.0782
+     ],
+     [
+      500,
+      0.0694
+     ],
+     [
+      3000,
+      0.0623
+     ],
+     [
+      6000,
+      0.0587
+     ]
+    ],
+    "describe": "SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C49452001",
+    "mpn": "TPS7A2033PDBVR-TP",
+    "maker": "TECH PUBLIC",
+    "package": "SOT-23-5",
+    "stock": 2447,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1035
+     ],
+     [
+      50,
+      0.0818
+     ],
+     [
+      150,
+      0.071
+     ],
+     [
+      500,
+      0.0628
+     ],
+     [
+      3000,
+      0.0564
+     ],
+     [
+      6000,
+      0.0531
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1 180uV@(300mA) 2uA 3.3V 300mA 5.5V 75dB@(1kHz) Fixed Over Current Protection、Enable、Thermal Shutdown Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C2922540",
+    "mpn": "PTPS7A2033PDBVR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23-5",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.0653
+     ],
+     [
+      10,
+      1.0653
+     ],
+     [
+      12,
+      1.0653
+     ],
+     [
+      200,
+      0.413
+     ],
+     [
+      500,
+      0.3983
+     ],
+     [
+      1000,
+      0.3917
+     ]
+    ],
+    "describe": "SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   }
+  ],
+  "AP2112K-3.3TRG1": [
+   {
+    "lcsc": "C22365427",
+    "mpn": "AP2112K-3.3TRG1(MS)",
+    "maker": "MSKSEMI",
+    "package": "SOT-23-5",
+    "stock": 39455,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0797
+     ],
+     [
+      50,
+      0.0633
+     ],
+     [
+      150,
+      0.0549
+     ],
+     [
+      500,
+      0.0487
+     ],
+     [
+      3000,
+      0.0422
+     ],
+     [
+      6000,
+      0.0397
+     ]
+    ],
+    "describe": "-40℃~+125℃@(Tj) 1 2uA 3.3V 320mV@(600mA) 600mA 6V 75dB@(1kHz) Fixed Over Current Protection、Over Temperature Protection、Enable Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C23380830",
+    "mpn": "AP2112K-3.3TRG1",
+    "maker": "TECH PUBLIC",
+    "package": "SOT-23-5",
+    "stock": 27308,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1115
+     ],
+     [
+      50,
+      0.0899
+     ],
+     [
+      150,
+      0.079
+     ],
+     [
+      500,
+      0.0708
+     ],
+     [
+      3000,
+      0.0592
+     ],
+     [
+      6000,
+      0.0559
+     ]
+    ],
+    "describe": "-40℃~+85℃@(Ta) 1 10uA 3.3V 320mV@(600mA) 5.5V 600mA 75dB@(1kHz) Fixed Over Temperature Protection Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C51118",
+    "mpn": "AP2112K-3.3TRG1",
+    "maker": "Diodes Incorporated",
+    "package": "SOT-25-5",
+    "stock": 8780,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1816
+     ],
+     [
+      50,
+      0.1439
+     ],
+     [
+      150,
+      0.1256
+     ],
+     [
+      500,
+      0.1092
+     ],
+     [
+      3000,
+      0.1
+     ],
+     [
+      6000,
+      0.0972
+     ]
+    ],
+    "describe": "-40℃~+85℃@(Ta) 1 250mV@(600mA) 3.3V 50uVrms 55uA 600mA 65dB@(1kHz) 6V Fixed Over Current Protection、Thermal Shutdown、Enable control Positive SOT-25-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C3021085",
+    "mpn": "TPAP2112K-3.3TRG1",
+    "maker": "TECH PUBLIC",
+    "package": "SOT-23-5",
+    "stock": 6093,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0953
+     ],
+     [
+      50,
+      0.0835
+     ],
+     [
+      150,
+      0.0776
+     ],
+     [
+      500,
+      0.0731
+     ],
+     [
+      3000,
+      0.0641
+     ],
+     [
+      6000,
+      0.0623
+     ]
+    ],
+    "describe": "-40℃~+85℃@(Ta) 1 10uA 3.3V 320mV@(600mA) 5.5V 600mA 80dB@(100Hz) Fixed Over Current Protection、Over Temperature Protection Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "lcsc": "C9900157973",
+    "mpn": "AP2112K-3.3TRG1(MS)",
+    "maker": "JLCPCB Assembly",
+    "package": "SOT-23-5",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SOT-23-5 New Arrivals ROHS"
+   }
+  ],
+  "SM10B-GHS-TB": [
+   {
+    "lcsc": "C2683602",
+    "mpn": "SM10B-GHS-TB",
+    "maker": "JST",
+    "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
+    "stock": 34326,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3902
+     ],
+     [
+      50,
+      0.3188
+     ],
+     [
+      150,
+      0.2881
+     ],
+     [
+      500,
+      0.25
+     ],
+     [
+      2500,
+      0.2069
+     ],
+     [
+      5000,
+      0.1967
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1 1.25mm 10 10P 15.75mm 1A 1x10P 4.13mm 4.25mm 50V Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1.25mm,卧贴 Wire To Board Connector ROHS"
+   },
+   {
+    "lcsc": "C265339",
+    "mpn": "SM10B-GHS-TB(LF)(SN)",
+    "maker": "JST",
+    "package": "SMD,P=1.25mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.003
+     ],
+     [
+      10,
+      1.003
+     ],
+     [
+      12,
+      1.003
+     ],
+     [
+      200,
+      0.4016
+     ],
+     [
+      500,
+      0.3884
+     ],
+     [
+      1000,
+      0.3802
+     ]
+    ],
+    "describe": "1 1.25mm 1A 25℃~+85℃ Phosphor bronze Surface Mount, Right Angle Tin 插件 Wire To Board Connector ROHS"
+   }
+  ],
+  "SM08B-GHS-TB": [
+   {
+    "lcsc": "C42376901",
+    "mpn": "SH-SM08B-GHS-TB(LF)(SN)",
+    "maker": "SHOU HAN",
+    "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
+    "stock": 35502,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0844
+     ],
+     [
+      50,
+      0.0667
+     ],
+     [
+      150,
+      0.0579
+     ],
+     [
+      1500,
+      0.0512
+     ],
+     [
+      3000,
+      0.0458
+     ],
+     [
+      4500,
+      0.0431
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1 1.25mm 125V 1A 1x8P 8 8P Beige GH LCP Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 SMD,P=1.25mm,Surface Mount，Right Angle Wire To Board Connector ROHS"
+   },
+   {
+    "lcsc": "C265111",
+    "mpn": "SM08B-GHS-TB(LF)(SN)",
+    "maker": "JST",
+    "package": "SMD,P=1.25mm,Surface Mount，Right Angle",
+    "stock": 18469,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2954
+     ],
+     [
+      50,
+      0.2334
+     ],
+     [
+      150,
+      0.2067
+     ],
+     [
+      500,
+      0.1736
+     ],
+     [
+      2500,
+      0.1588
+     ],
+     [
+      5000,
+      0.15
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1 1.25mm 13.25mm 1A 1x8P 4.13mm 4.25mm 50V 8 8P Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1.25mm,卧贴 Wire To Board Connector ROHS"
+   },
+   {
+    "lcsc": "C22391766",
+    "mpn": "SM08B-GHS-TB",
+    "maker": "JST",
+    "package": "SMD-8P",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD-8P New Arrivals ROHS"
+   }
+  ],
+  "S2B-PH-SM4-TB": [
+   {
+    "lcsc": "C54582899",
+    "mpn": "XY-S2B-PH-SM4-TB",
+    "maker": "XYECONN",
+    "package": "SMD,P=2mm,Surface Mount，Right Angle",
+    "stock": 5125,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0469
+     ],
+     [
+      100,
+      0.0374
+     ],
+     [
+      300,
+      0.0325
+     ],
+     [
+      1000,
+      0.0289
+     ],
+     [
+      5000,
+      0.0261
+     ],
+     [
+      10000,
+      0.0246
+     ]
+    ],
+    "describe": "SMD,P=2mm,卧贴 Wire To Board Connector ROHS"
+   },
+   {
+    "lcsc": "C295747",
+    "mpn": "S2B-PH-SM4-TB(LF)(SN)",
+    "maker": "JST",
+    "package": "SMD,P=2mm,Surface Mount，Right Angle",
+    "stock": 10,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2233
+     ],
+     [
+      50,
+      0.1779
+     ],
+     [
+      150,
+      0.1557
+     ],
+     [
+      1000,
+      0.1361
+     ],
+     [
+      2000,
+      0.1307
+     ],
+     [
+      5000,
+      0.1274
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1 100V 1x2P 2 2A 2P 2mm 5.5mm 7.9mm 8.6mm Auxiliary Solder Pin Beige Copper alloy PA PH Surface Mount, Right Angle Tin UL94V-0 SMD,P=2mm,卧贴 Wire To Board Connector ROHS"
+   },
+   {
+    "lcsc": "C9900150953",
+    "mpn": "S2B-PH-SM4-TB",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,P=2mm,2P",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,P=2mm,2P New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900258397",
+    "mpn": "S2B-PH-SM4-TB",
+    "maker": "JLCPCB Assembly",
+    "package": "Through hole",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "Through hole SMT ROHS"
+   },
+   {
+    "lcsc": "C9900322031",
+    "mpn": "S2B-PH-SM4-TB",
+    "maker": "JLCPCB Assembly",
+    "package": "Through hole",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "Through hole SMT ROHS"
+   }
+  ],
+  "TF-015": [
+   {
+    "lcsc": "C381082",
+    "mpn": "XKTF-015-N",
+    "maker": "XKB Connection",
+    "package": "SMD",
+    "stock": 35734,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1459
+     ],
+     [
+      50,
+      0.12
+     ],
+     [
+      150,
+      0.1072
+     ],
+     [
+      1000,
+      0.0785
+     ],
+     [
+      2000,
+      0.0707
+     ],
+     [
+      5000,
+      0.0669
+     ]
+    ],
+    "describe": "-25℃~+90℃ 2mm Connector and Ejector MicroSD Card (TF Card) Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C113206",
+    "mpn": "TF-015",
+    "maker": "SOFNG",
+    "package": "SMD",
+    "stock": 14765,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1318
+     ],
+     [
+      50,
+      0.1051
+     ],
+     [
+      150,
+      0.0918
+     ],
+     [
+      1000,
+      0.0807
+     ],
+     [
+      2000,
+      0.0728
+     ],
+     [
+      5000,
+      0.0687
+     ]
+    ],
+    "describe": "-35℃~+85℃ 2mm Connector and Ejector MicroSD Card (TF Card) Push-Push Yes SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C41426932",
+    "mpn": "TF-015-N",
+    "maker": "JXTCONN",
+    "package": "SMD",
+    "stock": 12745,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0695
+     ],
+     [
+      50,
+      0.0613
+     ],
+     [
+      150,
+      0.0572
+     ],
+     [
+      1000,
+      0.0541
+     ],
+     [
+      2000,
+      0.0517
+     ],
+     [
+      5000,
+      0.0505
+     ]
+    ],
+    "describe": "2mm Connector and Ejector MicroSD Card (TF Card) Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C1121874",
+    "mpn": "XKTF-015-G",
+    "maker": "XKB Connection",
+    "package": "SMD",
+    "stock": 12606,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1897
+     ],
+     [
+      50,
+      0.1541
+     ],
+     [
+      150,
+      0.1389
+     ],
+     [
+      1000,
+      0.1025
+     ],
+     [
+      2000,
+      0.094
+     ],
+     [
+      5000,
+      0.0889
+     ]
+    ],
+    "describe": "-25℃~+90℃ 2mm Connector and Ejector MicroSD Card (TF Card) Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C50380685",
+    "mpn": "LCK-TF-015H1809-YLG",
+    "maker": "LCKELEC",
+    "package": "SMD",
+    "stock": 6615,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0659
+     ],
+     [
+      100,
+      0.0527
+     ],
+     [
+      300,
+      0.0459
+     ],
+     [
+      1000,
+      0.0409
+     ],
+     [
+      5000,
+      0.033
+     ],
+     [
+      10000,
+      0.031
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.8mm Connector and Ejector MicroSD Card (TF Card) Push-Push With Locating Pins Yes SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C20613194",
+    "mpn": "TF-015-ZYD9AH1.85",
+    "maker": "XYECONN",
+    "package": "SMD",
+    "stock": 1668,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0658
+     ],
+     [
+      100,
+      0.0523
+     ],
+     [
+      300,
+      0.0456
+     ],
+     [
+      1000,
+      0.0405
+     ],
+     [
+      5000,
+      0.0364
+     ],
+     [
+      10000,
+      0.0345
+     ]
+    ],
+    "describe": "-20℃~+90℃ 1.85mm MicroSD Card (TF Card) No SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C53200613",
+    "mpn": "XY-TF-015-N",
+    "maker": "XYECONN",
+    "package": "SMD",
+    "stock": 915,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0635
+     ],
+     [
+      100,
+      0.0505
+     ],
+     [
+      300,
+      0.044
+     ],
+     [
+      1000,
+      0.0392
+     ],
+     [
+      5000,
+      0.0353
+     ],
+     [
+      10000,
+      0.0333
+     ]
+    ],
+    "describe": "-45℃~+85℃ 1.8mm Connector and Ejector MicroSD Card (TF Card) Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C50380686",
+    "mpn": "LCK-TF-015BH1809-YLG",
+    "maker": "LCKELEC",
+    "package": "SMD",
+    "stock": 915,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0958
+     ],
+     [
+      50,
+      0.0761
+     ],
+     [
+      150,
+      0.0663
+     ],
+     [
+      1000,
+      0.0545
+     ],
+     [
+      2000,
+      0.0486
+     ],
+     [
+      5000,
+      0.0456
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.8mm Connector and Ejector MicroSD Card (TF Card) Push-Push With Locating Pins Yes SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C53144701",
+    "mpn": "TF-015-9P",
+    "maker": "BXCONN",
+    "package": "SMD",
+    "stock": 892,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0592
+     ],
+     [
+      100,
+      0.0472
+     ],
+     [
+      300,
+      0.0412
+     ],
+     [
+      1000,
+      0.0366
+     ],
+     [
+      5000,
+      0.033
+     ],
+     [
+      10000,
+      0.0312
+     ]
+    ],
+    "describe": "2mm Connector and Ejector MicroSD Card (TF Card) Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C5362196",
+    "mpn": "TF-015-N",
+    "maker": "HanElectricity",
+    "package": "SMD",
+    "stock": 748,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0792
+     ],
+     [
+      50,
+      0.063
+     ],
+     [
+      150,
+      0.0549
+     ],
+     [
+      1000,
+      0.0489
+     ],
+     [
+      2000,
+      0.044
+     ],
+     [
+      5000,
+      0.0415
+     ]
+    ],
+    "describe": "-25℃~+90℃ 14.5mm 14.75mm 2mm Connector and Ejector MicroSD Card (TF Card) Push-Push With Locating Pins Yes SMD SD Card / Memory Card Connector ROHS"
+   }
+  ],
+  "MicroSD card holder push-push": [],
+  "DM3AT-SF-PEJM5": [
+   {
+    "lcsc": "C114218",
+    "mpn": "DM3AT-SF-PEJM5",
+    "maker": "HRS(Hirose)",
+    "package": "SMD",
+    "stock": 19353,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.393
+     ],
+     [
+      10,
+      1.1669
+     ],
+     [
+      30,
+      1.0423
+     ],
+     [
+      100,
+      0.9014
+     ],
+     [
+      500,
+      0.7949
+     ],
+     [
+      1500,
+      0.767
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C49260564",
+    "mpn": "DM3AT-SF-PEJM5(21)",
+    "maker": "HRS(Hirose)",
+    "package": "-",
+    "stock": 2900,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.8883
+     ],
+     [
+      10,
+      0.708
+     ],
+     [
+      30,
+      0.6179
+     ],
+     [
+      100,
+      0.5294
+     ],
+     [
+      500,
+      0.4753
+     ],
+     [
+      1500,
+      0.4474
+     ]
+    ],
+    "describe": "- SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C597971",
+    "mpn": "DM3AT-SF-PEJM5(40)",
+    "maker": "HRS(Hirose)",
+    "package": "SMD",
+    "stock": 94,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.8581
+     ],
+     [
+      10,
+      2.4254
+     ],
+     [
+      30,
+      2.155
+     ],
+     [
+      100,
+      1.8781
+     ],
+     [
+      400,
+      1.7519
+     ],
+     [
+      800,
+      1.6978
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C3195425",
+    "mpn": "DM3AT-SF-PEJM5(11)",
+    "maker": "HRS(Hirose)",
+    "package": "SMD",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.9666
+     ],
+     [
+      10,
+      1.9666
+     ],
+     [
+      12,
+      1.9666
+     ],
+     [
+      200,
+      0.7621
+     ],
+     [
+      500,
+      0.7359
+     ],
+     [
+      1500,
+      0.7211
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push SMD SD Card / Memory Card Connector ROHS"
+   },
+   {
+    "lcsc": "C22002019",
+    "mpn": "DM3AT-SF-PEJM5(42)",
+    "maker": "HRS(Hirose)",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.9009
+     ],
+     [
+      10,
+      6.9009
+     ],
+     [
+      12,
+      6.9009
+     ],
+     [
+      200,
+      2.7532
+     ],
+     [
+      400,
+      2.6614
+     ],
+     [
+      800,
+      2.6155
+     ]
+    ],
+    "describe": "-25℃~+85℃ 1.68mm Connector and Ejector MicroSD Card (TF Card) No Push-Push - SD Card / Memory Card Connector ROHS"
+   }
+  ],
+  "TF PUSH": [],
+  "SMD1206P150TF": [
+   {
+    "lcsc": "C20802",
+    "mpn": "SMD1206P150TF",
+    "maker": "RUILON(Shenzhen Ruilongyuan Elec)",
+    "package": "1206",
+    "stock": 11691,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1189
+     ],
+     [
+      50,
+      0.0935
+     ],
+     [
+      150,
+      0.0808
+     ],
+     [
+      500,
+      0.0713
+     ],
+     [
+      3500,
+      0.0581
+     ],
+     [
+      7000,
+      0.0541
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.9mm 130mΩ 1mm 25mΩ 3.6mm 300ms 35A 3A 6V 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C46970782",
+    "mpn": "SMD1206P150TF/16",
+    "maker": "RUILON(Shenzhen Ruilongyuan Elec)",
+    "package": "1206",
+    "stock": 6769,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1277
+     ],
+     [
+      50,
+      0.101
+     ],
+     [
+      150,
+      0.0876
+     ],
+     [
+      500,
+      0.0776
+     ],
+     [
+      3500,
+      0.0695
+     ],
+     [
+      7000,
+      0.0656
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 130mΩ 16V 25mΩ 35A 35s 3A 600mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C495353",
+    "mpn": "SMD1206P150TFT",
+    "maker": "PTTC(Polytronics Tech)",
+    "package": "1206",
+    "stock": 2994,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0971
+     ],
+     [
+      50,
+      0.0774
+     ],
+     [
+      150,
+      0.0676
+     ],
+     [
+      500,
+      0.06
+     ],
+     [
+      3000,
+      0.049
+     ],
+     [
+      6000,
+      0.0461
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.8mm 100A 120mΩ 1mm 3.4mm 300ms 3A 40mΩ 800mW 8V 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C146258",
+    "mpn": "SMD1206P150TF",
+    "maker": "Yenji Elec",
+    "package": "F1206",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0823
+     ],
+     [
+      100,
+      0.0666
+     ],
+     [
+      300,
+      0.0587
+     ],
+     [
+      1000,
+      0.0528
+     ],
+     [
+      3500,
+      0.0528
+     ],
+     [
+      10500,
+      0.0528
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 100A 130mΩ 1s 3A 40mΩ 8V 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C19459341",
+    "mpn": "SMD1206P150TFA",
+    "maker": "Littelfuse",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.9473
+     ],
+     [
+      10,
+      0.9473
+     ],
+     [
+      12,
+      0.9473
+     ],
+     [
+      200,
+      0.3786
+     ],
+     [
+      500,
+      0.3655
+     ],
+     [
+      1000,
+      0.3589
+     ]
+    ],
+    "describe": "- Resettable Fuses ROHS"
+   }
+  ],
+  "1206L150": [
+   {
+    "lcsc": "C22379952",
+    "mpn": "1206L150/16NR",
+    "maker": "LUTE",
+    "package": "1206",
+    "stock": 28585,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.044
+     ],
+     [
+      100,
+      0.0374
+     ],
+     [
+      300,
+      0.034
+     ],
+     [
+      1000,
+      0.0315
+     ],
+     [
+      3500,
+      0.0276
+     ],
+     [
+      10500,
+      0.0266
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.2W 1.5A 1.6mm 1.9mm 130mΩ 16V 25mΩ 3.6mm 300ms 3A 40A 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C53280174",
+    "mpn": "1206L150/30NR",
+    "maker": "LUTE",
+    "package": "1206",
+    "stock": 21265,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.122
+     ],
+     [
+      50,
+      0.0994
+     ],
+     [
+      150,
+      0.0881
+     ],
+     [
+      500,
+      0.0795
+     ],
+     [
+      3500,
+      0.069
+     ],
+     [
+      7000,
+      0.0656
+     ]
+    ],
+    "describe": "1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C56273358",
+    "mpn": "RI1206L150JT",
+    "maker": "Guangdong Hottech",
+    "package": "1206",
+    "stock": 20000,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0035
+     ],
+     [
+      1000,
+      0.0026
+     ],
+     [
+      5000,
+      0.0021
+     ],
+     [
+      10000,
+      0.0019
+     ],
+     [
+      50000,
+      0.0016
+     ],
+     [
+      50200,
+      0.0016
+     ]
+    ],
+    "describe": "1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C56273147",
+    "mpn": "RI1206L1504FT",
+    "maker": "Guangdong Hottech",
+    "package": "1206",
+    "stock": 20000,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0059
+     ],
+     [
+      1000,
+      0.0046
+     ],
+     [
+      5000,
+      0.0038
+     ],
+     [
+      10000,
+      0.0034
+     ],
+     [
+      50000,
+      0.003
+     ],
+     [
+      100000,
+      0.0028
+     ]
+    ],
+    "describe": "1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C56273273",
+    "mpn": "RI1206L1500FT",
+    "maker": "Guangdong Hottech",
+    "package": "1206",
+    "stock": 20000,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0048
+     ],
+     [
+      1000,
+      0.0037
+     ],
+     [
+      5000,
+      0.0031
+     ],
+     [
+      10000,
+      0.0028
+     ],
+     [
+      50000,
+      0.0025
+     ],
+     [
+      100000,
+      0.0023
+     ]
+    ],
+    "describe": "1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C56273636",
+    "mpn": "RI1206L1501FT",
+    "maker": "Guangdong Hottech",
+    "package": "1206",
+    "stock": 20000,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0048
+     ],
+     [
+      1000,
+      0.0037
+     ],
+     [
+      5000,
+      0.0031
+     ],
+     [
+      10000,
+      0.0028
+     ],
+     [
+      50000,
+      0.0025
+     ],
+     [
+      100000,
+      0.0023
+     ]
+    ],
+    "describe": "1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C20627120",
+    "mpn": "1206L150/24NR",
+    "maker": "LUTE",
+    "package": "1206",
+    "stock": 18890,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0733
+     ],
+     [
+      50,
+      0.0608
+     ],
+     [
+      150,
+      0.0546
+     ],
+     [
+      500,
+      0.0499
+     ],
+     [
+      3500,
+      0.0463
+     ],
+     [
+      7000,
+      0.0443
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.2W 1.5A 1.6mm 1.9mm 130mΩ 24V 25mΩ 3.6mm 300ms 3A 40A 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C118413",
+    "mpn": "1206L150THWR",
+    "maker": "Littelfuse",
+    "package": "1206",
+    "stock": 7667,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0777
+     ],
+     [
+      100,
+      0.0623
+     ],
+     [
+      300,
+      0.0545
+     ],
+     [
+      3000,
+      0.0413
+     ],
+     [
+      6000,
+      0.0366
+     ],
+     [
+      9000,
+      0.0343
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 100A 120mΩ 300ms 3A 40mΩ 800mW 8V 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C19078714",
+    "mpn": "1206L150/12NR",
+    "maker": "LUTE",
+    "package": "1206",
+    "stock": 7423,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0502
+     ],
+     [
+      100,
+      0.04
+     ],
+     [
+      300,
+      0.035
+     ],
+     [
+      1000,
+      0.031
+     ],
+     [
+      3500,
+      0.0281
+     ],
+     [
+      10500,
+      0.0264
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.6mm 1.9mm 12V 130mΩ 130mΩ 3.6mm 300ms 3A 40A 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C19078712",
+    "mpn": "1206L150/6NR",
+    "maker": "LUTE",
+    "package": "1206",
+    "stock": 6972,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0341
+     ],
+     [
+      200,
+      0.0282
+     ],
+     [
+      600,
+      0.0248
+     ],
+     [
+      3500,
+      0.0214
+     ],
+     [
+      10500,
+      0.0196
+     ],
+     [
+      21000,
+      0.0187
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.6mm 1.9mm 100A 130mΩ 25mΩ 3.6mm 300ms 3A 6V 800mW 1206 Resettable Fuses ROHS"
+   }
+  ],
+  "nSMD150": [
+   {
+    "lcsc": "C2830250",
+    "mpn": "JK-nSMD150/12V",
+    "maker": "Jinrui Electronic Materials Co.",
+    "package": "1206",
+    "stock": 16457,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0431
+     ],
+     [
+      100,
+      0.0412
+     ],
+     [
+      300,
+      0.0402
+     ],
+     [
+      1000,
+      0.0394
+     ],
+     [
+      3500,
+      0.0302
+     ],
+     [
+      10500,
+      0.0299
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.8mm 1.8mm 12V 130mΩ 1s 3.5mm 3A 40A 40mΩ 600mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C70084",
+    "mpn": "nSMD150-13.2V",
+    "maker": "TECHFUSE",
+    "package": "1206",
+    "stock": 13070,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0564
+     ],
+     [
+      100,
+      0.0459
+     ],
+     [
+      300,
+      0.0409
+     ],
+     [
+      3000,
+      0.0328
+     ],
+     [
+      6000,
+      0.0297
+     ],
+     [
+      9000,
+      0.0282
+     ]
+    ],
+    "describe": "1.5A 100A 13.2V 130mΩ 300ms 30mΩ 3A 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C2937115",
+    "mpn": "nSMD150-16V",
+    "maker": "TECHFUSE",
+    "package": "1206",
+    "stock": 10976,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0599
+     ],
+     [
+      100,
+      0.0481
+     ],
+     [
+      300,
+      0.0422
+     ],
+     [
+      3000,
+      0.0359
+     ],
+     [
+      6000,
+      0.0323
+     ],
+     [
+      9000,
+      0.0305
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.2mm 1.5A 1.8mm 100A 130mΩ 16V 3.5mm 30mΩ 3A 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C5224393",
+    "mpn": "JK-nSMD150L-6",
+    "maker": "Jinrui Electronic Materials Co.",
+    "package": "1206",
+    "stock": 7754,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0507
+     ],
+     [
+      100,
+      0.0445
+     ],
+     [
+      300,
+      0.0413
+     ],
+     [
+      1000,
+      0.0391
+     ],
+     [
+      5000,
+      0.0391
+     ],
+     [
+      10000,
+      0.0391
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.6mm 10mΩ 3.2mm 65mΩ 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C692149",
+    "mpn": "JK-NSMD150L-12V",
+    "maker": "Jinrui Electronic Materials Co.",
+    "package": "1206",
+    "stock": 5060,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0759
+     ],
+     [
+      50,
+      0.0697
+     ],
+     [
+      150,
+      0.0666
+     ],
+     [
+      500,
+      0.0643
+     ],
+     [
+      2500,
+      0.0643
+     ],
+     [
+      5000,
+      0.0643
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.7mm 1.5A 1.8mm 10mΩ 12V 3.5mm 3A 50A 5s 65mΩ 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C70083",
+    "mpn": "nSMD150",
+    "maker": "TECHFUSE",
+    "package": "1206",
+    "stock": 4722,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.069
+     ],
+     [
+      100,
+      0.0581
+     ],
+     [
+      300,
+      0.0525
+     ],
+     [
+      3000,
+      0.0335
+     ],
+     [
+      6000,
+      0.0302
+     ],
+     [
+      9000,
+      0.0286
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 100A 130mΩ 1s 30mΩ 3A 6V 800mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C5338320",
+    "mpn": "NSMD150/16",
+    "maker": "KUU",
+    "package": "1206",
+    "stock": 2681,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0835
+     ],
+     [
+      100,
+      0.0677
+     ],
+     [
+      300,
+      0.0599
+     ],
+     [
+      3000,
+      0.0456
+     ],
+     [
+      6000,
+      0.041
+     ],
+     [
+      9000,
+      0.0386
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 100A 16V 210mΩ 300ms 30mΩ 3A 600mW 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C2830249",
+    "mpn": "JK-nSMD150/6V",
+    "maker": "Jinrui Electronic Materials Co.",
+    "package": "1206",
+    "stock": 2172,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0433
+     ],
+     [
+      200,
+      0.0338
+     ],
+     [
+      600,
+      0.0286
+     ],
+     [
+      3500,
+      0.0253
+     ],
+     [
+      10500,
+      0.0253
+     ],
+     [
+      21000,
+      0.0253
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 100A 130mΩ 1s 3A 40mΩ 6V 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C261956",
+    "mpn": "TLC-NSMD150",
+    "maker": "TLC Electronic",
+    "package": "1206",
+    "stock": 1665,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0776
+     ],
+     [
+      100,
+      0.0623
+     ],
+     [
+      300,
+      0.0548
+     ],
+     [
+      1000,
+      0.0492
+     ],
+     [
+      3500,
+      0.0433
+     ],
+     [
+      10500,
+      0.041
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5A 1.8mm 100A 170mΩ 1mm 3.4mm 300ms 30mΩ 3A 600mW 6V 1206 Resettable Fuses ROHS"
+   },
+   {
+    "lcsc": "C369553",
+    "mpn": "JK-nSMD150SF",
+    "maker": "Shenzhen Jinkaisheng Elec",
+    "package": "1206",
+    "stock": 844,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0451
+     ],
+     [
+      100,
+      0.0358
+     ],
+     [
+      300,
+      0.031
+     ],
+     [
+      1000,
+      0.0274
+     ],
+     [
+      3500,
+      0.0246
+     ],
+     [
+      10500,
+      0.0232
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.2mm 1.5A 1.8mm 100A 130mΩ 3.5mm 300ms 3A 40mΩ 800mW 8V 1206 Resettable Fuses ROHS"
+   }
+  ],
+  "DRV5032FB": [
+   {
+    "lcsc": "C2862715",
+    "mpn": "DRV5032FBLPGM",
+    "maker": "Texas Instruments",
+    "package": "TO-92",
+    "stock": 10113,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2791
+     ],
+     [
+      50,
+      0.2205
+     ],
+     [
+      150,
+      0.1918
+     ],
+     [
+      500,
+      0.1661
+     ],
+     [
+      3000,
+      0.1592
+     ],
+     [
+      6000,
+      0.1549
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 5Hz 5mA 690nA Built-in oscillator Omnipolar Push-pull ±4.8mT ±5Gs TO-92 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C5220599",
+    "mpn": "DRV5032FBLPG",
+    "maker": "Texas Instruments",
+    "package": "TO-92-3",
+    "stock": 45,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4229
+     ],
+     [
+      10,
+      0.3294
+     ],
+     [
+      30,
+      0.2901
+     ],
+     [
+      100,
+      0.2393
+     ],
+     [
+      500,
+      0.218
+     ],
+     [
+      1000,
+      0.2049
+     ]
+    ],
+    "describe": "TO-92-3 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2655033",
+    "mpn": "DRV5032FBDBZR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23",
+    "stock": 4,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.6061
+     ],
+     [
+      10,
+      1.3406
+     ],
+     [
+      30,
+      1.1947
+     ],
+     [
+      100,
+      1.0292
+     ],
+     [
+      500,
+      0.9571
+     ],
+     [
+      1000,
+      0.9243
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 5Hz 690nA Omnipolar Push-pull ±4.8mT ±5Gs SOT-23 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2655021",
+    "mpn": "DRV5032FBDBZT",
+    "maker": "Texas Instruments",
+    "package": "SOT-23",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.1357
+     ],
+     [
+      10,
+      1.0046
+     ],
+     [
+      30,
+      0.8834
+     ],
+     [
+      250,
+      0.7916
+     ],
+     [
+      500,
+      0.7539
+     ],
+     [
+      1000,
+      0.7359
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 5Hz 5mA 690nA Built-in oscillator Omnipolar Push-pull ±4.8mT ±5Gs SOT-23 Hall Switches ROHS"
+   }
+  ],
+  "DRV5032FA": [
+   {
+    "lcsc": "C140921",
+    "mpn": "DRV5032FADBZR",
+    "maker": "Texas Instruments",
+    "package": "SOT-23",
+    "stock": 44642,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1751
+     ],
+     [
+      50,
+      0.1366
+     ],
+     [
+      150,
+      0.12
+     ],
+     [
+      500,
+      0.0994
+     ],
+     [
+      3000,
+      0.0902
+     ],
+     [
+      6000,
+      0.0846
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 1.6uA 20Hz Omnipolar Push-pull ±4.8mT ±5Gs SOT-23 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2152496",
+    "mpn": "DRV5032FADMRR",
+    "maker": "Texas Instruments",
+    "package": "SON-4-EP(1.1x1.4)",
+    "stock": 2547,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2832
+     ],
+     [
+      50,
+      0.2244
+     ],
+     [
+      150,
+      0.1992
+     ],
+     [
+      500,
+      0.1676
+     ],
+     [
+      3000,
+      0.1536
+     ],
+     [
+      6000,
+      0.1452
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5mT 1.65V~5.5V 1.6uA 20Hz 3mT Omnipolar Push-pull SON-4-EP(1.1x1.4) Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2862716",
+    "mpn": "DRV5032FALPGM",
+    "maker": "Texas Instruments",
+    "package": "TO-92",
+    "stock": 975,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2798
+     ],
+     [
+      50,
+      0.221
+     ],
+     [
+      150,
+      0.1921
+     ],
+     [
+      500,
+      0.1665
+     ],
+     [
+      3000,
+      0.1595
+     ],
+     [
+      6000,
+      0.1552
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 1.6uA 20Hz Omnipolar Push-pull ±4.8mT ±5Gs TO-92 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C3716252",
+    "mpn": "DRV5032FALPG",
+    "maker": "Texas Instruments",
+    "package": "TO-92",
+    "stock": 963,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.249
+     ],
+     [
+      50,
+      0.1954
+     ],
+     [
+      150,
+      0.1693
+     ],
+     [
+      1000,
+      0.1461
+     ],
+     [
+      2000,
+      0.1397
+     ],
+     [
+      5000,
+      0.1357
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.65V~5.5V 1.6uA 20Hz Built-in oscillator Omnipolar Push-pull ±4.8mT ±5Gs TO-92 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2152538",
+    "mpn": "DRV5032FADBZT",
+    "maker": "Texas Instruments",
+    "package": "SOT-23",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.1128
+     ],
+     [
+      10,
+      1.0866
+     ],
+     [
+      30,
+      1.0702
+     ],
+     [
+      100,
+      1.0521
+     ],
+     [
+      102,
+      1.0521
+     ],
+     [
+      104,
+      1.0521
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.3uA 1.65V~5.5V 20Hz Built-in oscillator Omnipolar Push-pull ±1.5mT ±3mT SOT-23 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C2655032",
+    "mpn": "DRV5032FADMRT",
+    "maker": "Texas Instruments",
+    "package": "SON-4-EP(1.1x1.4)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4999
+     ],
+     [
+      10,
+      0.3884
+     ],
+     [
+      30,
+      0.3393
+     ],
+     [
+      250,
+      0.2803
+     ],
+     [
+      500,
+      0.2541
+     ],
+     [
+      1000,
+      0.2377
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5mT 1.65V~5.5V 1.6uA 20Hz 3mT Built-in oscillator Omnipolar Push-pull SON-4-EP(1.1x1.4) Hall Switches ROHS"
+   }
+  ],
+  "AH1806": [
+   {
+    "lcsc": "C126663",
+    "mpn": "AH1806-W-7",
+    "maker": "Diodes Incorporated",
+    "package": "SC-59-3",
+    "stock": 22887,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2785
+     ],
+     [
+      50,
+      0.219
+     ],
+     [
+      150,
+      0.1936
+     ],
+     [
+      500,
+      0.1618
+     ],
+     [
+      3000,
+      0.1475
+     ],
+     [
+      6000,
+      0.1392
+     ]
+    ],
+    "describe": "-40℃~+85℃ 2.5V~5.5V 8uA Omnipolar Open-drain ±4.5mT ±4mT SC-59-3 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C842170",
+    "mpn": "AH1806-Z-7",
+    "maker": "Diodes Incorporated",
+    "package": "SOT-553-5",
+    "stock": 200,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.216
+     ],
+     [
+      10,
+      0.9964
+     ],
+     [
+      30,
+      0.8752
+     ],
+     [
+      100,
+      0.7375
+     ],
+     [
+      500,
+      0.6769
+     ],
+     [
+      1000,
+      0.6506
+     ]
+    ],
+    "describe": "-40℃~+85℃ 2.5V~5.5V 8uA Omnipolar Open-drain ±4.5mT ±4mT SOT-553-5 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C842162",
+    "mpn": "AH1806-P-A",
+    "maker": "Diodes Incorporated",
+    "package": "SIP-3",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.8043
+     ],
+     [
+      10,
+      1.5274
+     ],
+     [
+      30,
+      1.352
+     ],
+     [
+      100,
+      1.1193
+     ],
+     [
+      500,
+      1.039
+     ],
+     [
+      1000,
+      1.003
+     ]
+    ],
+    "describe": "-40℃~+85℃ 2.5V~5.5V 8uA SIP-3 Hall Switches ROHS"
+   },
+   {
+    "lcsc": "C842167",
+    "mpn": "AH1806-P-B",
+    "maker": "Diodes Incorporated",
+    "package": "SIP-3",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4245
+     ],
+     [
+      10,
+      0.3393
+     ],
+     [
+      30,
+      0.3032
+     ],
+     [
+      100,
+      0.2573
+     ],
+     [
+      500,
+      0.2262
+     ],
+     [
+      1000,
+      0.2147
+     ]
+    ],
+    "describe": "-40℃~+85℃ 2.5V~5.5V 8uA SIP-3 Hall Switches ROHS"
+   }
+  ],
+  "CL21A476MQYNNNE": [
+   {
+    "lcsc": "C16780",
+    "mpn": "CL21A476MQYNNNE",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "0805",
+    "stock": 1042064,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.102
+     ],
+     [
+      100,
+      0.0799
+     ],
+     [
+      300,
+      0.0686
+     ],
+     [
+      2000,
+      0.0592
+     ],
+     [
+      4000,
+      0.0559
+     ],
+     [
+      10000,
+      0.0538
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "47uF 0805": [
+   {
+    "lcsc": "C16780",
+    "mpn": "CL21A476MQYNNNE",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "0805",
+    "stock": 1042064,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.102
+     ],
+     [
+      100,
+      0.0799
+     ],
+     [
+      300,
+      0.0686
+     ],
+     [
+      2000,
+      0.0592
+     ],
+     [
+      4000,
+      0.0559
+     ],
+     [
+      10000,
+      0.0538
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C87159",
+    "mpn": "JMK212BJ476MG-T",
+    "maker": "Taiyo Yuden",
+    "package": "0805",
+    "stock": 110172,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1266
+     ],
+     [
+      50,
+      0.0959
+     ],
+     [
+      150,
+      0.0807
+     ],
+     [
+      500,
+      0.0692
+     ],
+     [
+      3000,
+      0.0581
+     ],
+     [
+      6000,
+      0.0535
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C697611",
+    "mpn": "MSASJ21GBC6476MTNA01",
+    "maker": "Taiyo Yuden",
+    "package": "0805",
+    "stock": 102687,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3752
+     ],
+     [
+      50,
+      0.295
+     ],
+     [
+      150,
+      0.2608
+     ],
+     [
+      500,
+      0.218
+     ],
+     [
+      3000,
+      0.199
+     ],
+     [
+      6000,
+      0.1875
+     ]
+    ],
+    "describe": "47uF 6.3V X6S ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C124129",
+    "mpn": "GRM21BR61A476ME15L",
+    "maker": "Murata Electronics",
+    "package": "0805",
+    "stock": 101539,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2829
+     ],
+     [
+      50,
+      0.2319
+     ],
+     [
+      150,
+      0.207
+     ],
+     [
+      500,
+      0.1849
+     ],
+     [
+      3000,
+      0.1737
+     ],
+     [
+      6000,
+      0.17
+     ]
+    ],
+    "describe": "10V 47uF X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C77072",
+    "mpn": "GRM21BR60J476ME15L",
+    "maker": "Murata Electronics",
+    "package": "0805",
+    "stock": 77801,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.246
+     ],
+     [
+      50,
+      0.2011
+     ],
+     [
+      150,
+      0.182
+     ],
+     [
+      500,
+      0.158
+     ],
+     [
+      3000,
+      0.1131
+     ],
+     [
+      6000,
+      0.1067
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C380345",
+    "mpn": "TCC0805X5R476M6R3FT",
+    "maker": "CCTC",
+    "package": "0805",
+    "stock": 68633,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1634
+     ],
+     [
+      50,
+      0.1272
+     ],
+     [
+      150,
+      0.1117
+     ],
+     [
+      500,
+      0.0921
+     ],
+     [
+      3000,
+      0.0835
+     ],
+     [
+      6000,
+      0.0782
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C109461",
+    "mpn": "CC0805MKX5R5BB476",
+    "maker": "YAGEO",
+    "package": "0805",
+    "stock": 51014,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.454
+     ],
+     [
+      10,
+      0.354
+     ],
+     [
+      30,
+      0.3114
+     ],
+     [
+      100,
+      0.2573
+     ],
+     [
+      500,
+      0.2344
+     ],
+     [
+      1000,
+      0.2196
+     ]
+    ],
+    "describe": "47uF 6.3V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C178332",
+    "mpn": "0805X476M100NT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "0805",
+    "stock": 42917,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2603
+     ],
+     [
+      10,
+      0.2067
+     ],
+     [
+      30,
+      0.1806
+     ],
+     [
+      100,
+      0.1574
+     ],
+     [
+      500,
+      0.151
+     ],
+     [
+      1000,
+      0.1472
+     ]
+    ],
+    "describe": "10V 47uF X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C76636",
+    "mpn": "C2012X5R1A476MTJ00E",
+    "maker": "TDK",
+    "package": "0805",
+    "stock": 40020,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2724
+     ],
+     [
+      10,
+      0.2147
+     ],
+     [
+      30,
+      0.1901
+     ],
+     [
+      100,
+      0.1592
+     ],
+     [
+      500,
+      0.1456
+     ],
+     [
+      1000,
+      0.1318
+     ]
+    ],
+    "describe": "10V 47uF X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C386058",
+    "mpn": "MSASL21GBB5476MTNA01",
+    "maker": "Taiyo Yuden",
+    "package": "0805",
+    "stock": 24697,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2708
+     ],
+     [
+      50,
+      0.2129
+     ],
+     [
+      150,
+      0.1882
+     ],
+     [
+      500,
+      0.1574
+     ],
+     [
+      3000,
+      0.1361
+     ],
+     [
+      6000,
+      0.1279
+     ]
+    ],
+    "describe": "10V 47uF X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "100uF 1206": [
+   {
+    "lcsc": "C15008",
+    "mpn": "CL31A107MQHNNNE",
+    "maker": "Samsung Electro-Mechanics",
+    "package": "1206",
+    "stock": 1785092,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.1092
+     ],
+     [
+      100,
+      0.0861
+     ],
+     [
+      300,
+      0.0743
+     ],
+     [
+      2000,
+      0.0645
+     ],
+     [
+      4000,
+      0.061
+     ],
+     [
+      10000,
+      0.0587
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C380356",
+    "mpn": "TCC1206X5R107M6R3HT",
+    "maker": "CCTC",
+    "package": "1206",
+    "stock": 201762,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1087
+     ],
+     [
+      50,
+      0.0859
+     ],
+     [
+      150,
+      0.0743
+     ],
+     [
+      500,
+      0.0646
+     ],
+     [
+      2000,
+      0.0612
+     ],
+     [
+      4000,
+      0.0589
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C87164",
+    "mpn": "JMK316BJ107ML-T",
+    "maker": "Taiyo Yuden",
+    "package": "1206",
+    "stock": 104589,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1779
+     ],
+     [
+      50,
+      0.1411
+     ],
+     [
+      150,
+      0.1254
+     ],
+     [
+      500,
+      0.1058
+     ],
+     [
+      2000,
+      0.0971
+     ],
+     [
+      4000,
+      0.0918
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C883598",
+    "mpn": "GRM31CR61A107MEA8L",
+    "maker": "Murata Electronics",
+    "package": "1206",
+    "stock": 63783,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3039
+     ],
+     [
+      50,
+      0.2346
+     ],
+     [
+      150,
+      0.2008
+     ],
+     [
+      500,
+      0.1705
+     ],
+     [
+      2000,
+      0.1623
+     ],
+     [
+      4000,
+      0.1572
+     ]
+    ],
+    "describe": "100uF 10V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C1954161",
+    "mpn": "TMCMA0J107MTRF",
+    "maker": "Vishay Intertech",
+    "package": "1206",
+    "stock": 36438,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.6256
+     ],
+     [
+      50,
+      0.5597
+     ],
+     [
+      150,
+      0.5315
+     ],
+     [
+      500,
+      0.4963
+     ],
+     [
+      2000,
+      0.452
+     ],
+     [
+      4000,
+      0.4427
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1.8Ω@100kHz 100uF 6.3V ±20% 1206 Tantalum Capacitors ROHS"
+   },
+   {
+    "lcsc": "C312983",
+    "mpn": "GRM31CR61A107ME05L",
+    "maker": "Murata Electronics",
+    "package": "1206",
+    "stock": 32988,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.549
+     ],
+     [
+      10,
+      0.4589
+     ],
+     [
+      30,
+      0.4147
+     ],
+     [
+      100,
+      0.377
+     ],
+     [
+      500,
+      0.3655
+     ],
+     [
+      1000,
+      0.3589
+     ]
+    ],
+    "describe": "100uF 10V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C178304",
+    "mpn": "1206X107M6R3NT",
+    "maker": "FH (Guangdong Fenghua Advanced Tech)",
+    "package": "1206",
+    "stock": 21929,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.241
+     ],
+     [
+      50,
+      0.196
+     ],
+     [
+      150,
+      0.1769
+     ],
+     [
+      500,
+      0.1529
+     ],
+     [
+      2000,
+      0.1292
+     ],
+     [
+      4000,
+      0.1228
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C268006",
+    "mpn": "JMK316ABJ107ML-T",
+    "maker": "Taiyo Yuden",
+    "package": "1206",
+    "stock": 13344,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.3788
+     ],
+     [
+      50,
+      0.3114
+     ],
+     [
+      150,
+      0.2827
+     ],
+     [
+      500,
+      0.2467
+     ],
+     [
+      2000,
+      0.1665
+     ],
+     [
+      4000,
+      0.1569
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C77085",
+    "mpn": "GRM31CR60J107ME39L",
+    "maker": "Murata Electronics",
+    "package": "1206",
+    "stock": 8111,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.119
+     ],
+     [
+      50,
+      0.0969
+     ],
+     [
+      150,
+      0.0856
+     ],
+     [
+      500,
+      0.0763
+     ],
+     [
+      2000,
+      0.0708
+     ],
+     [
+      4000,
+      0.0686
+     ]
+    ],
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "lcsc": "C76656",
+    "mpn": "C3216X5R1A107MT0A0E",
+    "maker": "TDK",
+    "package": "1206",
+    "stock": 4199,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.7375
+     ],
+     [
+      10,
+      0.6179
+     ],
+     [
+      30,
+      0.5671
+     ],
+     [
+      100,
+      0.5048
+     ],
+     [
+      500,
+      0.4278
+     ],
+     [
+      1000,
+      0.4097
+     ]
+    ],
+    "describe": "100uF 10V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ],
+  "0402WGF2001TCE": [
+   {
+    "lcsc": "C4109",
+    "mpn": "0402WGF2001TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 10000179,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0026
+     ],
+     [
+      1000,
+      0.002
+     ],
+     [
+      3000,
+      0.0016
+     ],
+     [
+      10000,
+      0.0015
+     ],
+     [
+      50000,
+      0.0012
+     ],
+     [
+      50200,
+      0.0012
+     ]
+    ],
+    "describe": "-55℃~+155℃ 2kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "lcsc": "C9900140363",
+    "mpn": "0402WGF2001TCE",
+    "maker": "JLCPCB Assembly",
+    "package": "0402",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0399
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "0402 New Arrivals ROHS"
+   }
+  ],
+  "0402WGF1801TCE": [
+   {
+    "lcsc": "C25871",
+    "mpn": "0402WGF1801TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 586417,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.001
+     ],
+     [
+      1000,
+      0.0008
+     ],
+     [
+      3000,
+      0.0007
+     ],
+     [
+      10000,
+      0.0006
+     ],
+     [
+      50000,
+      0.0005
+     ],
+     [
+      50200,
+      0.0005
+     ]
+    ],
+    "describe": "-55℃~+155℃ 1.8kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "0402WGF1501TCE": [
+   {
+    "lcsc": "C25867",
+    "mpn": "0402WGF1501TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 1542852,
+    "library": "base",
+    "prices": [
+     [
+      1,
+      0.0029
+     ],
+     [
+      1000,
+      0.0023
+     ],
+     [
+      3000,
+      0.0019
+     ],
+     [
+      10000,
+      0.0018
+     ],
+     [
+      50000,
+      0.0013
+     ],
+     [
+      50200,
+      0.0013
+     ]
+    ],
+    "describe": "-55℃~+155℃ 1.5kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "0402WGF3900TCE": [
+   {
+    "lcsc": "C25109",
+    "mpn": "0402WGF3900TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 201739,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0018
+     ],
+     [
+      1000,
+      0.0014
+     ],
+     [
+      3000,
+      0.0012
+     ],
+     [
+      10000,
+      0.0011
+     ],
+     [
+      50000,
+      0.001
+     ],
+     [
+      50200,
+      0.001
+     ]
+    ],
+    "describe": "-55℃~+155℃ 390Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "0402WGF6202TCE": [
+   {
+    "lcsc": "C37825",
+    "mpn": "0402WGF6202TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 440623,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0011
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0007
+     ],
+     [
+      10000,
+      0.0006
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 50V 62.5mW 62kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "0402WGF4703TCE": [
+   {
+    "lcsc": "C25790",
+    "mpn": "0402WGF4703TCE",
+    "maker": "UNI-ROYAL(Uniroyal Elec)",
+    "package": "0402",
+    "stock": 183028,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0012
+     ],
+     [
+      1000,
+      0.0009
+     ],
+     [
+      3000,
+      0.0008
+     ],
+     [
+      10000,
+      0.0007
+     ],
+     [
+      50000,
+      0.0006
+     ],
+     [
+      50200,
+      0.0006
+     ]
+    ],
+    "describe": "-55℃~+155℃ 470kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ],
+  "CR1220 holder": [],
+  "PESD5V0S1BL": [
+   {
+    "lcsc": "C314269",
+    "mpn": "PESD5V0S1BLN",
+    "maker": "BORN",
+    "package": "DFN1006-2",
+    "stock": 149613,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0228
+     ],
+     [
+      200,
+      0.0181
+     ],
+     [
+      600,
+      0.0155
+     ],
+     [
+      2000,
+      0.0139
+     ],
+     [
+      10000,
+      0.0105
+     ],
+     [
+      20000,
+      0.0098
+     ]
+    ],
+    "describe": "100W@8/20us 100nA 13V 18pF 5V 6.5V 8A@8/20us Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Single-channel DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2912556",
+    "mpn": "PESD5V0S1BL",
+    "maker": "TECH PUBLIC",
+    "package": "DFN1006-2(0402)",
+    "stock": 77167,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0166
+     ],
+     [
+      500,
+      0.0132
+     ],
+     [
+      1500,
+      0.0113
+     ],
+     [
+      10000,
+      0.0097
+     ],
+     [
+      20000,
+      0.0087
+     ],
+     [
+      50000,
+      0.0082
+     ]
+    ],
+    "describe": "-55℃~+125℃ 10V 15pF 5V 8.4V 80W@8/20us 80nA 8A@8/20us ESD IEC 61000-4-2、IEC 61000-4-5 DFN1006-2(0402) ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C84374",
+    "mpn": "PESD5V0S1BL,315",
+    "maker": "Nexperia",
+    "package": "DFN1006-2",
+    "stock": 69953,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0336
+     ],
+     [
+      200,
+      0.0259
+     ],
+     [
+      600,
+      0.0218
+     ],
+     [
+      2000,
+      0.0192
+     ],
+     [
+      10000,
+      0.0162
+     ],
+     [
+      20000,
+      0.015
+     ]
+    ],
+    "describe": "-65℃~+150℃ 1 12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C970020",
+    "mpn": "PESD5V0S1BL-TP",
+    "maker": "TECH PUBLIC",
+    "package": "DFN1006-2",
+    "stock": 24866,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0117
+     ],
+     [
+      500,
+      0.0093
+     ],
+     [
+      1500,
+      0.0079
+     ],
+     [
+      10000,
+      0.0071
+     ],
+     [
+      20000,
+      0.0064
+     ],
+     [
+      50000,
+      0.006
+     ]
+    ],
+    "describe": "10V 15pF 5V 8.4V 80W@8/20us 80nA 8A@8/20us ESD IEC 61000-4-2、IEC 61000-4-5 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2931142",
+    "mpn": "PESD5V0S1BL",
+    "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
+    "package": "SOD-882",
+    "stock": 21021,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0105
+     ],
+     [
+      500,
+      0.0082
+     ],
+     [
+      1500,
+      0.0069
+     ],
+     [
+      10000,
+      0.0057
+     ],
+     [
+      20000,
+      0.005
+     ],
+     [
+      50000,
+      0.0046
+     ]
+    ],
+    "describe": "12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2 SOD-882 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C53113914",
+    "mpn": "PESD5V0S1BL,315-JSM",
+    "maker": "JSMSEMI",
+    "package": "DFN1006-2",
+    "stock": 13017,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.016
+     ],
+     [
+      500,
+      0.0125
+     ],
+     [
+      1500,
+      0.0106
+     ],
+     [
+      10000,
+      0.0092
+     ],
+     [
+      20000,
+      0.0082
+     ],
+     [
+      50000,
+      0.0076
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 100nA 17V 5A@8/20us 5V 68W@8/20us 8.9pF 9V ESD IEC 61000-4-2 DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C53477863",
+    "mpn": "PESD5V0S1BL-GK",
+    "maker": "GOODWORK",
+    "package": "DFN1006-2L",
+    "stock": 9867,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0169
+     ],
+     [
+      500,
+      0.0133
+     ],
+     [
+      1500,
+      0.0113
+     ],
+     [
+      10000,
+      0.0102
+     ],
+     [
+      20000,
+      0.0091
+     ],
+     [
+      50000,
+      0.0086
+     ]
+    ],
+    "describe": "-55℃~+150℃ 100nA 16V 320W 48pF 5V 8V Bidirectional ESD IEC 61000-4-2 DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C7508791",
+    "mpn": "PESD5V0S1BLD-QYL",
+    "maker": "Nexperia",
+    "package": "SOD882D",
+    "stock": 9841,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0595
+     ],
+     [
+      100,
+      0.0469
+     ],
+     [
+      300,
+      0.0405
+     ],
+     [
+      1000,
+      0.0359
+     ],
+     [
+      5000,
+      0.0322
+     ],
+     [
+      10000,
+      0.0302
+     ]
+    ],
+    "describe": "5nA@5V SOD882D ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C56161249",
+    "mpn": "PESD5V0S1BL",
+    "maker": "FUXINSEMI",
+    "package": "DFN1006-2L",
+    "stock": 9780,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0066
+     ],
+     [
+      1000,
+      0.0052
+     ],
+     [
+      3000,
+      0.0044
+     ],
+     [
+      10000,
+      0.0039
+     ],
+     [
+      50000,
+      0.0035
+     ],
+     [
+      100000,
+      0.0033
+     ]
+    ],
+    "describe": "DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C29779755",
+    "mpn": "PESD5V0S1BL",
+    "maker": "DOWO",
+    "package": "DFN1006-2L",
+    "stock": 7951,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0171
+     ],
+     [
+      500,
+      0.0131
+     ],
+     [
+      1500,
+      0.0109
+     ],
+     [
+      10000,
+      0.0101
+     ],
+     [
+      20000,
+      0.0089
+     ],
+     [
+      50000,
+      0.0083
+     ]
+    ],
+    "describe": "-55℃~+125℃ 12V 18A@8/20us 200W@8/20us 35pF 500nA 5V 6.4V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 Single-channel DFN1006-2L ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ],
+  "ESD9B5.0ST5G": [
+   {
+    "lcsc": "C111566",
+    "mpn": "ESD9B5.0ST5G",
+    "maker": "onsemi",
+    "package": "SOD-923",
+    "stock": 225710,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0415
+     ],
+     [
+      200,
+      0.0323
+     ],
+     [
+      600,
+      0.0282
+     ],
+     [
+      2000,
+      0.0251
+     ],
+     [
+      8000,
+      0.0182
+     ],
+     [
+      16000,
+      0.0174
+     ]
+    ],
+    "describe": "-55℃~+150℃@(Tj) 1 100nA 15V 15pF 5V 7.8V Bidirectional IEC 61000-4-2 TVS SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2682268",
+    "mpn": "TPESD9B5.0ST5G",
+    "maker": "TECH PUBLIC",
+    "package": "SOD-923(0402)",
+    "stock": 57998,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0323
+     ],
+     [
+      200,
+      0.0256
+     ],
+     [
+      600,
+      0.0218
+     ],
+     [
+      2000,
+      0.0196
+     ],
+     [
+      8000,
+      0.0176
+     ],
+     [
+      16000,
+      0.0164
+     ]
+    ],
+    "describe": "1 10V 15pF 5V 60W@8/20us 6A@8/20us 7V 80nA ESD IEC 61000-4-2、IEC 61000-4-5 SOD-923(0402) ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C316040",
+    "mpn": "ESD9B5.0ST5G-N",
+    "maker": "BORN",
+    "package": "DFN1006-2",
+    "stock": 40171,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0228
+     ],
+     [
+      200,
+      0.0179
+     ],
+     [
+      600,
+      0.0152
+     ],
+     [
+      2000,
+      0.0136
+     ],
+     [
+      10000,
+      0.0105
+     ],
+     [
+      20000,
+      0.0097
+     ]
+    ],
+    "describe": "13V 1uA 5A@8/20us 5V 65W@8/20us 6V 8pF Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Single-channel DFN1006-2 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C22390026",
+    "mpn": "ESD9B5.0ST5G",
+    "maker": "DOWO",
+    "package": "SOD-923",
+    "stock": 39793,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0207
+     ],
+     [
+      500,
+      0.0166
+     ],
+     [
+      1500,
+      0.0142
+     ],
+     [
+      8000,
+      0.0119
+     ],
+     [
+      24000,
+      0.0106
+     ],
+     [
+      48000,
+      0.01
+     ]
+    ],
+    "describe": "15pF 500nA 5V 6V 70W@8/20us 8A@8/20us 8V Bidirectional IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Single-channel TVS SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C3008065",
+    "mpn": "ESD9B5.0ST5G",
+    "maker": "MSKSEMI",
+    "package": "SOD-923",
+    "stock": 11865,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0307
+     ],
+     [
+      200,
+      0.0255
+     ],
+     [
+      600,
+      0.0225
+     ],
+     [
+      2000,
+      0.0207
+     ],
+     [
+      8000,
+      0.0129
+     ],
+     [
+      16000,
+      0.012
+     ]
+    ],
+    "describe": "12pF 15V 1uA 5A 5V 7.8V 80W Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C3021104",
+    "mpn": "ESD9B5.0ST5G",
+    "maker": "TECH PUBLIC",
+    "package": "SOD-923(0402)",
+    "stock": 7600,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0336
+     ],
+     [
+      200,
+      0.0263
+     ],
+     [
+      600,
+      0.0223
+     ],
+     [
+      2000,
+      0.0199
+     ],
+     [
+      8000,
+      0.0157
+     ],
+     [
+      16000,
+      0.0146
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1 10V 15pF 5V 8.4V 80W@8/20us 80nA 8A@8/20us Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 SOD-923(0402) ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C41364471",
+    "mpn": "ESD9B5.0ST5G",
+    "maker": "GOODWORK",
+    "package": "SOD-923",
+    "stock": 7230,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0214
+     ],
+     [
+      500,
+      0.0169
+     ],
+     [
+      1500,
+      0.0145
+     ],
+     [
+      8000,
+      0.013
+     ],
+     [
+      24000,
+      0.0117
+     ],
+     [
+      48000,
+      0.011
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 100nA 17V 5.5A 5V 68W 8.9pF 9V Bidirectional ESD IEC 61000-4-2 SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5180229",
+    "mpn": "ESD9B5.0ST5G-ES",
+    "maker": "ElecSuper",
+    "package": "SOD-923",
+    "stock": 6870,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0154
+     ],
+     [
+      200,
+      0.0126
+     ],
+     [
+      600,
+      0.0111
+     ],
+     [
+      2000,
+      0.0101
+     ],
+     [
+      8000,
+      0.0093
+     ],
+     [
+      16000,
+      0.0088
+     ]
+    ],
+    "describe": "-40℃~+125℃ 1 10V 15pF 1uA 5V 60W 6A 6V Bidirectional ESD IEC 61000-4-2 SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C328101",
+    "mpn": "SZESD9B5.0ST5G",
+    "maker": "onsemi",
+    "package": "SOD-923",
+    "stock": 6370,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1017
+     ],
+     [
+      100,
+      0.0874
+     ],
+     [
+      300,
+      0.0802
+     ],
+     [
+      1000,
+      0.0748
+     ],
+     [
+      5000,
+      0.0705
+     ],
+     [
+      8000,
+      0.0684
+     ]
+    ],
+    "describe": "1 100nA 12.5V 15pF 1A@8/20us 5.8V 5V ESD IEC 61000-4-2 SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C50087596",
+    "mpn": "ESD9B5.0ST5G-SL",
+    "maker": "Slkor(SLKORMICRO Elec.)",
+    "package": "SOD-923",
+    "stock": 3180,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0168
+     ],
+     [
+      500,
+      0.0135
+     ],
+     [
+      1500,
+      0.0117
+     ],
+     [
+      8000,
+      0.0091
+     ],
+     [
+      24000,
+      0.0081
+     ],
+     [
+      48000,
+      0.0076
+     ]
+    ],
+    "describe": "-40℃~+125℃ 100nA 10V 15pF 5.6V 5V 80W@8/20us 8A@8/20us ESD IEC 61000-4-2 SOD-923 ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ],
+  "LESD5D5.0CT1G": [
+   {
+    "lcsc": "C5199850",
+    "mpn": "LESD5D5.0CT1G(UMW)",
+    "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
+    "package": "SOD-523",
+    "stock": 120571,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0166
+     ],
+     [
+      500,
+      0.0129
+     ],
+     [
+      3000,
+      0.0098
+     ],
+     [
+      6000,
+      0.0086
+     ],
+     [
+      24000,
+      0.0076
+     ],
+     [
+      51000,
+      0.007
+     ]
+    ],
+    "describe": "-40℃~+125℃ 15pF 18.6V 1uA 5V 7.8V 9.4A@8/20us IEC 61000-4-2、IEC 61000-4-4 TVS SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C41399463",
+    "mpn": "LESD5D5.0CT1G",
+    "maker": "GOODWORK",
+    "package": "SOD-523",
+    "stock": 94266,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0153
+     ],
+     [
+      500,
+      0.0122
+     ],
+     [
+      3000,
+      0.0099
+     ],
+     [
+      6000,
+      0.0088
+     ],
+     [
+      24000,
+      0.0079
+     ],
+     [
+      51000,
+      0.0074
+     ]
+    ],
+    "describe": "-55℃~+150℃ 100W 12pF 16V 1uA 5V 7A 7V Bidirectional ESD IEC 61000-4-2 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5274290",
+    "mpn": "LESD5D5.0CT1G",
+    "maker": "LRC",
+    "package": "SOD-523",
+    "stock": 90109,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0153
+     ],
+     [
+      500,
+      0.0123
+     ],
+     [
+      1500,
+      0.0107
+     ],
+     [
+      5000,
+      0.0097
+     ],
+     [
+      25000,
+      0.0076
+     ],
+     [
+      50000,
+      0.0071
+     ]
+    ],
+    "describe": "-40℃~+125℃ 1 150W@8/20us 15pF 18.6V 1uA 5V 7.8V 9.4A Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5199159",
+    "mpn": "LESD5D5.0CT1G-ES",
+    "maker": "ElecSuper",
+    "package": "SOD-523",
+    "stock": 43598,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0144
+     ],
+     [
+      200,
+      0.0113
+     ],
+     [
+      600,
+      0.0096
+     ],
+     [
+      3000,
+      0.0086
+     ],
+     [
+      9000,
+      0.0077
+     ],
+     [
+      21000,
+      0.0072
+     ]
+    ],
+    "describe": "-40℃~+125℃ 10V 15pF 1uA 5.8V 5V 80W 8A Bidirectional ESD IEC 61000-4-2 Single-channel SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C7433850",
+    "mpn": "LESD5D5.0CT1G",
+    "maker": "KUU",
+    "package": "SOD-523",
+    "stock": 40925,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0152
+     ],
+     [
+      500,
+      0.0121
+     ],
+     [
+      3000,
+      0.0096
+     ],
+     [
+      6000,
+      0.0086
+     ],
+     [
+      24000,
+      0.0077
+     ],
+     [
+      51000,
+      0.0072
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1 120W 15V 200nA 20pF 5V 8A 8V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C20416613",
+    "mpn": "BNLESD5D5.0CT1G",
+    "maker": "BORN",
+    "package": "SOD-523",
+    "stock": 36620,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0207
+     ],
+     [
+      500,
+      0.0162
+     ],
+     [
+      1500,
+      0.0137
+     ],
+     [
+      5000,
+      0.0123
+     ],
+     [
+      25000,
+      0.011
+     ],
+     [
+      50000,
+      0.0103
+     ]
+    ],
+    "describe": "1 120W@8/20us 15V 18pF 500nA 5V 8A@8/20us 9.5V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5246195",
+    "mpn": "LESD5D5.0CT1G",
+    "maker": "Leiditech",
+    "package": "SOD-523",
+    "stock": 35739,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0431
+     ],
+     [
+      100,
+      0.035
+     ],
+     [
+      300,
+      0.0309
+     ],
+     [
+      3000,
+      0.0266
+     ],
+     [
+      6000,
+      0.0241
+     ],
+     [
+      9000,
+      0.0228
+     ]
+    ],
+    "describe": "100W@8/20us 12V 15pF 1uA 5.5V 5V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C46956322",
+    "mpn": "LESD5D5.0CT1G",
+    "maker": "TDSEMIC",
+    "package": "SOD-523",
+    "stock": 22091,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.016
+     ],
+     [
+      500,
+      0.0124
+     ],
+     [
+      3000,
+      0.0104
+     ],
+     [
+      6000,
+      0.0092
+     ],
+     [
+      24000,
+      0.0082
+     ],
+     [
+      51000,
+      0.0076
+     ]
+    ],
+    "describe": "-55℃~+150℃ 100nA 13V 13pF 55W@8/20us 5A 5V 9V Bidirectional ESD IEC 61000-4-2 Single-channel SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5449097",
+    "mpn": "LESD5D5.0CT1G-MS",
+    "maker": "MSKSEMI",
+    "package": "SOD-523",
+    "stock": 11664,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0196
+     ],
+     [
+      500,
+      0.016
+     ],
+     [
+      3000,
+      0.0108
+     ],
+     [
+      6000,
+      0.0096
+     ],
+     [
+      24000,
+      0.0086
+     ],
+     [
+      51000,
+      0.008
+     ]
+    ],
+    "describe": "-40℃~+125℃ 18.6V 1uA 200W@8/20us 25pF 5.6V 5V 8A Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 Single-channel SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C55259722",
+    "mpn": "FSLESD5D5.0CT1G",
+    "maker": "FUXINSEMI",
+    "package": "SOD-523",
+    "stock": 5000,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0186
+     ],
+     [
+      500,
+      0.0145
+     ],
+     [
+      1500,
+      0.0123
+     ],
+     [
+      5000,
+      0.011
+     ],
+     [
+      25000,
+      0.0098
+     ],
+     [
+      50000,
+      0.0092
+     ]
+    ],
+    "describe": "SOD-523 ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ],
+  "SMF5.0A": [
+   {
+    "lcsc": "C193402",
+    "mpn": "SMF5.0A",
+    "maker": "MDD(Microdiode Semiconductor)",
+    "package": "SOD-123FL",
+    "stock": 492585,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0284
+     ],
+     [
+      200,
+      0.0218
+     ],
+     [
+      600,
+      0.0191
+     ],
+     [
+      3000,
+      0.0159
+     ],
+     [
+      9000,
+      0.0151
+     ],
+     [
+      21000,
+      0.0145
+     ]
+    ],
+    "describe": "-55℃~+150℃ 200W@10/1000us 21.7A@10/1000us 400uA 5V 7V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2857263",
+    "mpn": "SMF5.0A",
+    "maker": "JSMSEMI",
+    "package": "SOD-123FL",
+    "stock": 293432,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0181
+     ],
+     [
+      500,
+      0.0143
+     ],
+     [
+      3000,
+      0.0112
+     ],
+     [
+      6000,
+      0.01
+     ],
+     [
+      24000,
+      0.0089
+     ],
+     [
+      45000,
+      0.0083
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 200W@10/1000us 200uA 21.7A 5V 6.4V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C284108",
+    "mpn": "SMF5.0A",
+    "maker": "DOWO",
+    "package": "SOD-123",
+    "stock": 227191,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0194
+     ],
+     [
+      200,
+      0.0168
+     ],
+     [
+      600,
+      0.0154
+     ],
+     [
+      3000,
+      0.0146
+     ],
+     [
+      9000,
+      0.0139
+     ],
+     [
+      21000,
+      0.0135
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1kW@8/20us 21.74A 400uA 5V 6.4V 9.2V TVS Unidirectional SOD-123 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C908213",
+    "mpn": "SMF5.0A",
+    "maker": "FUXINSEMI",
+    "package": "SOD-123",
+    "stock": 146483,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0269
+     ],
+     [
+      200,
+      0.022
+     ],
+     [
+      600,
+      0.0194
+     ],
+     [
+      3000,
+      0.0144
+     ],
+     [
+      9000,
+      0.013
+     ],
+     [
+      21000,
+      0.0122
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 200W@10/1000us 21.7A 5V 6.4V 800uA 9.2V IEC 61000-4-2 TVS Unidirectional SOD-123 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2980403",
+    "mpn": "SMF5.0A",
+    "maker": "GOODWORK",
+    "package": "SOD-123FL",
+    "stock": 52420,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0279
+     ],
+     [
+      200,
+      0.0227
+     ],
+     [
+      600,
+      0.0197
+     ],
+     [
+      3000,
+      0.0156
+     ],
+     [
+      9000,
+      0.0141
+     ],
+     [
+      30000,
+      0.0132
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 200W 21.7A 400uA 5V 6.4V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C169426",
+    "mpn": "SMF5.0A",
+    "maker": "Shandong Jingdao Microelectronics",
+    "package": "SOD-123FL",
+    "stock": 49096,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.023
+     ],
+     [
+      200,
+      0.0182
+     ],
+     [
+      600,
+      0.0155
+     ],
+     [
+      3000,
+      0.0135
+     ],
+     [
+      9000,
+      0.0121
+     ],
+     [
+      21000,
+      0.0113
+     ]
+    ],
+    "describe": "-55℃~+150℃ 200W@10/1000us 21.7A@10/1000us 450uA 5V 7V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C1509112",
+    "mpn": "SMF5.0A",
+    "maker": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "package": "SOD-123FL",
+    "stock": 43792,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.05
+     ],
+     [
+      100,
+      0.0407
+     ],
+     [
+      300,
+      0.0361
+     ],
+     [
+      3000,
+      0.0307
+     ],
+     [
+      6000,
+      0.0277
+     ],
+     [
+      9000,
+      0.0264
+     ]
+    ],
+    "describe": "-55℃~+150℃ 200W@10/1000us 21.7A@10/1000us 5V 7V 800uA 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C151296",
+    "mpn": "SMF5.0A",
+    "maker": "Littelfuse",
+    "package": "SOD-123FL",
+    "stock": 13455,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1305
+     ],
+     [
+      50,
+      0.1071
+     ],
+     [
+      150,
+      0.0953
+     ],
+     [
+      500,
+      0.0864
+     ],
+     [
+      3000,
+      0.074
+     ],
+     [
+      6000,
+      0.0705
+     ]
+    ],
+    "describe": "-65℃~+150℃ 200W@10/1000us 21.7A 400uA 5V 7V 9.2V IEC 61000-4-2 TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2905637",
+    "mpn": "SMF5.0A",
+    "maker": "TECH PUBLIC",
+    "package": "SOD-123FL",
+    "stock": 9434,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0484
+     ],
+     [
+      100,
+      0.0386
+     ],
+     [
+      300,
+      0.0335
+     ],
+     [
+      3000,
+      0.0277
+     ],
+     [
+      6000,
+      0.0248
+     ],
+     [
+      9000,
+      0.0233
+     ]
+    ],
+    "describe": "-55℃~+150℃ 200W@10/1000us 21.7A 400uA 5V 7V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C399280",
+    "mpn": "SMF5.0A",
+    "maker": "SUNMATE Elec",
+    "package": "SOD-123FL",
+    "stock": 8652,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0327
+     ],
+     [
+      200,
+      0.0261
+     ],
+     [
+      600,
+      0.0223
+     ],
+     [
+      3000,
+      0.0192
+     ],
+     [
+      9000,
+      0.0173
+     ],
+     [
+      21000,
+      0.0162
+     ]
+    ],
+    "describe": "-55℃~+150℃ 200W@10/1000us 400uA 7V 8V 9.2V TVS Unidirectional SOD-123FL ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ],
+  "PESD5V0S1BA": [
+   {
+    "lcsc": "C2827694",
+    "mpn": "PESD5V0S1BA",
+    "maker": "TECH PUBLIC",
+    "package": "SOD-323",
+    "stock": 496730,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0359
+     ],
+     [
+      200,
+      0.0269
+     ],
+     [
+      600,
+      0.023
+     ],
+     [
+      3000,
+      0.0204
+     ],
+     [
+      9000,
+      0.0191
+     ],
+     [
+      21000,
+      0.0182
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1 100nA 20A 300W 5V 7V 9V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C21713982",
+    "mpn": "PESD5V0S1BA",
+    "maker": "GOODWORK",
+    "package": "SOD-323",
+    "stock": 244823,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0173
+     ],
+     [
+      500,
+      0.0137
+     ],
+     [
+      3000,
+      0.0113
+     ],
+     [
+      6000,
+      0.0101
+     ],
+     [
+      30000,
+      0.0091
+     ],
+     [
+      45000,
+      0.0085
+     ]
+    ],
+    "describe": "-55℃~+125℃ 100W 10V 1uA 20pF 5.6V 5V 9A Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 Single-channel SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5180216",
+    "mpn": "PESD5V0S1BA-ES",
+    "maker": "ElecSuper",
+    "package": "SOD-323",
+    "stock": 174817,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0148
+     ],
+     [
+      200,
+      0.012
+     ],
+     [
+      600,
+      0.0104
+     ],
+     [
+      3000,
+      0.0095
+     ],
+     [
+      9000,
+      0.0087
+     ],
+     [
+      21000,
+      0.0082
+     ]
+    ],
+    "describe": "1 12V 15pF 1uA 5V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5158048",
+    "mpn": "PESD5V0S1BA",
+    "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
+    "package": "SOD-323",
+    "stock": 129279,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0187
+     ],
+     [
+      500,
+      0.0144
+     ],
+     [
+      3000,
+      0.0117
+     ],
+     [
+      6000,
+      0.0103
+     ],
+     [
+      24000,
+      0.009
+     ],
+     [
+      51000,
+      0.0084
+     ]
+    ],
+    "describe": "1 12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C5261083",
+    "mpn": "PESD5V0S1BA",
+    "maker": "HXY MOSFET",
+    "package": "SOD-323",
+    "stock": 116364,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.016
+     ],
+     [
+      500,
+      0.0129
+     ],
+     [
+      3000,
+      0.0105
+     ],
+     [
+      6000,
+      0.0094
+     ],
+     [
+      24000,
+      0.0085
+     ],
+     [
+      51000,
+      0.008
+     ]
+    ],
+    "describe": "-40℃~+125℃ 1 11A 1uA 20pF 5.6V 5V 8V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C314260",
+    "mpn": "PESD5V0S1BA-N",
+    "maker": "BORN",
+    "package": "SOD-323",
+    "stock": 62777,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0649
+     ],
+     [
+      100,
+      0.0531
+     ],
+     [
+      300,
+      0.0472
+     ],
+     [
+      3000,
+      0.0353
+     ],
+     [
+      6000,
+      0.0318
+     ],
+     [
+      9000,
+      0.03
+     ]
+    ],
+    "describe": "17A 1uA 21V 350W@8/20us 5V 60pF 6V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Single-channel SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C46956327",
+    "mpn": "PESD5V0S1BA",
+    "maker": "TDSEMIC",
+    "package": "SOD-323",
+    "stock": 42188,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0169
+     ],
+     [
+      500,
+      0.0132
+     ],
+     [
+      3000,
+      0.0112
+     ],
+     [
+      6000,
+      0.0099
+     ],
+     [
+      24000,
+      0.0089
+     ],
+     [
+      51000,
+      0.0083
+     ]
+    ],
+    "describe": "-55℃~+125℃ 13.5pF 18.6V 2.5uA 5V 7A@8/20us 7V Bidirectional IEC 61000-4-2 Single-channel TVS SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C19224",
+    "mpn": "PESD5V0S1BA,115",
+    "maker": "Nexperia",
+    "package": "SOD-323",
+    "stock": 14415,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0736
+     ],
+     [
+      50,
+      0.0582
+     ],
+     [
+      150,
+      0.0504
+     ],
+     [
+      500,
+      0.044
+     ],
+     [
+      3000,
+      0.0417
+     ],
+     [
+      6000,
+      0.0402
+     ]
+    ],
+    "describe": "-55℃~+150℃ 1 12A@8/20us 130W@8/20us 14V 35pF 5V 5nA 9.5V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2985486",
+    "mpn": "PESD5V0S1BA",
+    "maker": "DOWO",
+    "package": "SOD-323",
+    "stock": 8912,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0277
+     ],
+     [
+      200,
+      0.0223
+     ],
+     [
+      600,
+      0.0194
+     ],
+     [
+      3000,
+      0.0148
+     ],
+     [
+      9000,
+      0.0133
+     ],
+     [
+      21000,
+      0.0124
+     ]
+    ],
+    "describe": "1 12V 250W@8/20us 30A 30pF 500nA 5V 6V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-5 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C587144",
+    "mpn": "TPPESD5V0S1BA",
+    "maker": "TECH PUBLIC",
+    "package": "SOD-323",
+    "stock": 5632,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0233
+     ],
+     [
+      200,
+      0.0181
+     ],
+     [
+      600,
+      0.0151
+     ],
+     [
+      3000,
+      0.0134
+     ],
+     [
+      9000,
+      0.0118
+     ],
+     [
+      21000,
+      0.011
+     ]
+    ],
+    "describe": "-55℃~+125℃ 10A@8/20us 11V、20V 150W@8/20us 21pF 500nA 5V 6V ESD IEC 61000-4-2、IEC 61000-4-4 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ],
+  "SD05": [
+   {
+    "lcsc": "C502527",
+    "mpn": "SD05",
+    "maker": "MDD(Microdiode Semiconductor)",
+    "package": "SOD-323",
+    "stock": 952253,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.032
+     ],
+     [
+      200,
+      0.0274
+     ],
+     [
+      600,
+      0.0248
+     ],
+     [
+      3000,
+      0.015
+     ],
+     [
+      9000,
+      0.0136
+     ],
+     [
+      21000,
+      0.0129
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1 10pF 17A 18V 1uA 350W 5V 6V IEC 61000-4-2、IEC 61000-4-4 TVS Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C1884584",
+    "mpn": "SD05C",
+    "maker": "DOWO",
+    "package": "SOD-323",
+    "stock": 86087,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0284
+     ],
+     [
+      200,
+      0.0222
+     ],
+     [
+      600,
+      0.0187
+     ],
+     [
+      3000,
+      0.0174
+     ],
+     [
+      9000,
+      0.0156
+     ],
+     [
+      21000,
+      0.0147
+     ]
+    ],
+    "describe": "-55℃~+125℃ 1 15V 30A 450W@8/20us 500nA 5V 60pF 7V ESD IEC 61000-4-2、IEC 61000-4-4 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C502533",
+    "mpn": "SD05C",
+    "maker": "MDD(Microdiode Semiconductor)",
+    "package": "SOD-323",
+    "stock": 75217,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.044
+     ],
+     [
+      200,
+      0.0359
+     ],
+     [
+      600,
+      0.0315
+     ],
+     [
+      3000,
+      0.021
+     ],
+     [
+      9000,
+      0.0187
+     ],
+     [
+      21000,
+      0.0174
+     ]
+    ],
+    "describe": "-55℃~+150℃ 10pF 10uA 17A 18V 350W 5V 6V Bidirectional ESD IEC 61000-4-2、IEC 61000-4-4 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C233423",
+    "mpn": "SD05T1G",
+    "maker": "onsemi",
+    "package": "SOD-323",
+    "stock": 59192,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1474
+     ],
+     [
+      50,
+      0.1169
+     ],
+     [
+      150,
+      0.1018
+     ],
+     [
+      500,
+      0.0903
+     ],
+     [
+      3000,
+      0.0702
+     ],
+     [
+      6000,
+      0.0656
+     ]
+    ],
+    "describe": "1 10uA 14.5V 24A@8/20us 350W@8/20us 350pF 5V 7.3V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C118264",
+    "mpn": "SD05C-01FTG",
+    "maker": "Littelfuse",
+    "package": "SOD-323",
+    "stock": 21714,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.1696
+     ],
+     [
+      50,
+      0.1354
+     ],
+     [
+      150,
+      0.1184
+     ],
+     [
+      500,
+      0.1056
+     ],
+     [
+      3000,
+      0.0812
+     ],
+     [
+      6000,
+      0.0761
+     ]
+    ],
+    "describe": "18V 1uA 200pF 30A@8/20us 450W 5V 6V Bidirectional IEC 61000-4-2、IEC 61000-4-5 TVS SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2831522",
+    "mpn": "SD05.TCT",
+    "maker": "UMW(Youtai Semiconductor Co., Ltd.)",
+    "package": "SOD-323",
+    "stock": 15290,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0282
+     ],
+     [
+      200,
+      0.0223
+     ],
+     [
+      600,
+      0.0191
+     ],
+     [
+      3000,
+      0.015
+     ],
+     [
+      9000,
+      0.0133
+     ],
+     [
+      21000,
+      0.0124
+     ]
+    ],
+    "describe": "120pF 19V 1uA 20A@8/20us 360W@8/20us 5V 6V IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 TVS Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C151235",
+    "mpn": "SD05-01FTG",
+    "maker": "Littelfuse",
+    "package": "SOD-323",
+    "stock": 9590,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.2003
+     ],
+     [
+      50,
+      0.1574
+     ],
+     [
+      150,
+      0.1359
+     ],
+     [
+      500,
+      0.1198
+     ],
+     [
+      3000,
+      0.1025
+     ],
+     [
+      6000,
+      0.0959
+     ]
+    ],
+    "describe": "13V 1uA 30A@8/20us 350pF 450W@8/20us 5V IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 TVS Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C2688122",
+    "mpn": "SD05C",
+    "maker": "WPMtek(Wei Pan Microelectronics)",
+    "package": "SOD-323",
+    "stock": 9295,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0409
+     ],
+     [
+      100,
+      0.0328
+     ],
+     [
+      300,
+      0.0287
+     ],
+     [
+      3000,
+      0.0218
+     ],
+     [
+      6000,
+      0.0194
+     ],
+     [
+      9000,
+      0.0181
+     ]
+    ],
+    "describe": "1 10pF 17A 17uA 350W@8/20us 5V 6V 9.8V IEC 61000-4-2、IEC 61000-4-4 TVS Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C344002",
+    "mpn": "SD05",
+    "maker": "BORN",
+    "package": "SOD-323",
+    "stock": 9257,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0454
+     ],
+     [
+      100,
+      0.0368
+     ],
+     [
+      300,
+      0.0325
+     ],
+     [
+      3000,
+      0.0264
+     ],
+     [
+      6000,
+      0.024
+     ],
+     [
+      9000,
+      0.0227
+     ]
+    ],
+    "describe": "120pF 19V 1uA 20A 350W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 Single-channel Unidirectional SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   },
+   {
+    "lcsc": "C85200",
+    "mpn": "SD05C.TCT",
+    "maker": "SEMTECH",
+    "package": "SOD-323",
+    "stock": 8534,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.4048
+     ],
+     [
+      50,
+      0.3229
+     ],
+     [
+      150,
+      0.2868
+     ],
+     [
+      500,
+      0.2147
+     ],
+     [
+      3000,
+      0.1951
+     ],
+     [
+      6000,
+      0.182
+     ]
+    ],
+    "describe": "1 10uA 14.5V 200pF 24A@8/20us 350W 5V 6V Bidirectional IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 TVS SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+   }
+  ]
+ }
+}

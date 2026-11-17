@@ -1,0 +1,278 @@
+
+====================================================================================================
+0. ENTRADAS
+====================================================================================================
+Repositorio: /home/claude/apk_android_avo  (rama audit/avo-girth-pcb-revb, HEAD 6f1a045)
+CAD de la cápsula: hardware/girth/REV5 — README marca como actual: REV 5.8.1
+PCB: diseño REV B (2026-10-29), espesor THICK = 1.00 mm
+
+====================================================================================================
+1. CONTORNO DE LA PLACA (KiCad Edge.Cuts y Gerber Edge_Cuts, independientes del .py)
+====================================================================================================
+KiCad: 2 lazos en Edge.Cuts; exterior 1069 puntos, área 2582.3 mm²; huecos internos: 1
+KiCad: caja del contorno X -32.750…32.750, Y -21.750…21.750 → 65.500 × 43.500 mm (eje); espesor en <general>: 1.00 mm
+KiCad: hueco interno (ranura) X -29.80…-28.20, Y 2.90…6.30 → centro (-29.00; 4.60), 1.60 × 3.40
+KiCad: 8 arcos de muesca R [3.6]; 4 esquinas R [6.25]
+Gerber: 2 lazos; exterior X -32.750…32.750, Y -21.750…21.750 → 65.500 × 43.500 mm; área 2582.3 mm²
+Gerber job: Size 65.60 × 43.60 (incluye el ancho de línea 0,1), capas 4, espesor 1.00, acabado ENIG, Revision «A»
+Desviación máxima KiCad↔Gerber: 0.0000 / 0.0000 mm; .py (outline_pts) → KiCad: 0.0010 mm
+Nominal del .py: 65.50 × 43.50, R6.25, muescas R3.60, ranura {'c': (-29.0, 4.6), 'w': 1.6, 'h': 3.4}
+Huellas en KiCad: 98 (todas en la cara F.Cu); diferencias de posición/giro KiCad↔.py: ninguna
+
+====================================================================================================
+2. CAD DE LA CÁPSULA (STL de out/montaje y out/ref_*)
+====================================================================================================
+  base                      19866 triángulos  X  -38.90… 38.90  Y  -25.50… 25.50  Z  -0.00…  9.00
+  tapa                      15004 triángulos  X  -38.10… 38.10  Y  -25.50… 25.50  Z   8.25… 15.50
+  junta_TPU                  1056 triángulos  X  -35.10… 35.10  Y  -24.10… 24.10  Z   8.00…  9.00
+  bandeja                    3992 triángulos  X  -32.75… 32.75  Y  -21.75… 21.75  Z   7.20… 10.40
+  aro_rojo                   1056 triángulos  X  -36.50… 36.50  Y  -25.50… 25.50  Z   9.00… 10.00
+  ref_bateria_LP403048         12 triángulos  X  -25.40… 25.40  Y  -15.25… 15.25  Z   2.65…  6.95
+  ref_bobina_Qi               500 triángulos  X  -12.50… 12.50  Y  -12.50… 12.50  Z   1.30…  2.30
+  ref_antena_FPC               12 triángulos  X  -21.00…  7.00  Y   -7.50… -1.50  Z  12.85… 13.15
+  ref_reed                     12 triángulos  X   -7.00…  7.00  Y  -20.90…-17.70  Z   1.10…  4.30
+  ref_imanes_capsula_5x1     2000 triángulos  X  -31.40… 31.40  Y  -20.80… 20.80  Z   0.32…  1.32
+  ref_imanes_soporte_5x1     2000 triángulos  X  -31.40… 31.40  Y  -20.80… 20.80  Z  -2.02… -0.02
+  ref_imanes                 1500 triángulos  X   -7.60…  7.60  Y  -21.80…-16.80  Z  -1.17… -0.02
+  ref_placa_Qi                 28 triángulos  X  -28.00…-10.00  Y   -7.50…  7.50  Z   8.22… 10.40
+  ref_ESP32_C6                608 triángulos  X    8.70… 26.50  Y  -10.50… 12.00  Z   8.22… 12.46
+  ref_BNO085                 1044 triángulos  X   -6.95…  8.55  Y  -13.87… 11.33  Z   7.62… 10.22
+
+Medidas en las STL:
+  techo interior de la tapa (rayo en [(5.0, 5.0), (-10.0, 8.0), (10.0, -5.0)]): z = 13.200   [.py de la PCB: Z_CEIL = 13.20]
+  cara superior de la cuna de la batería (rayos en [(0.0, 15.95), (0.0, -15.95), (-26.1, -10.0), (26.1, 5.0)]): z = 7.150
+  batería de referencia: z 2.650…6.950 (4.30 mm); X -25.40…25.40, Y -15.25…15.25
+  labio de la tapa (Y = 21.15): cara inferior z = 8.250
+  pared de la base (Y = 24,5): cara superior z = 9.000; tapa sobre la junta (Y = 22,5): cara inferior z = 9.000
+  bandeja (pieza que la PCB sustituye): z 7.20…10.40
+
+====================================================================================================
+3. HOLGURA LATERAL PLACA ↔ CAVIDAD DE LA BASE, COLUMNAS DE LOS TORNILLOS Y TAPA
+====================================================================================================
+A · como pide la PCB (cuna +0,6 → placa en z 7.80)
+  corte de la base a z 7.85: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+  corte de la base a z 8.30: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+  corte de la base a z 8.75: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+B · CAD 5.8.1 sin cambios (placa apoyada en la cuna, z 7.15)
+  corte de la base a z 7.20: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+  corte de la base a z 7.65: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+  corte de la base a z 8.10: holgura mínima contorno↔base 0.148 mm en (-32.73; -15.95); puntos del contorno dentro de material: 0
+  [A] lado +X (x = 32,75): holgura a la pared interior 0.149…0.150 mm
+  [A] lado −X: holgura a la pared interior 0.149…0.150 mm
+  [A] lado +Y (y = 21,75): holgura a la pared interior 0.149…0.150 mm
+  [A] lado −Y: holgura a la pared interior 0.149…0.150 mm
+
+Muescas de la placa (KiCad) frente a las columnas M3 de la base (corte a z 8.30) y de la tapa (corte a z 11,0):
+  muesca (-31.50; -10.00) R3.60 | columna base (-31.50; -10.00) Ø5.60 → holgura radial 0.80 | columna tapa (-31.50; -10.00) Ø7.00 → 0.10
+  muesca (-31.50;  10.00) R3.60 | columna base (-31.50;  10.00) Ø5.60 → holgura radial 0.80 | columna tapa (-31.50;  10.00) Ø7.00 → 0.10
+  muesca (-21.00; -20.50) R3.60 | columna base (-21.00; -20.50) Ø5.60 → holgura radial 0.80 | columna tapa (-21.00; -20.50) Ø7.00 → 0.10
+  muesca (-21.00;  20.50) R3.60 | columna base (-21.00;  20.50) Ø5.60 → holgura radial 0.80 | columna tapa (-21.00;  20.50) Ø7.00 → 0.10
+  muesca ( 21.00; -20.50) R3.60 | columna base ( 21.00; -20.50) Ø5.60 → holgura radial 0.80 | columna tapa ( 21.00; -20.50) Ø7.00 → 0.10
+  muesca ( 21.00;  20.50) R3.60 | columna base ( 21.00;  20.50) Ø5.60 → holgura radial 0.80 | columna tapa ( 21.00;  20.50) Ø7.00 → 0.10
+  muesca ( 31.50; -10.00) R3.60 | columna base ( 31.50; -10.00) Ø5.60 → holgura radial 0.80 | columna tapa ( 31.50; -10.00) Ø7.00 → 0.10
+  muesca ( 31.50;  10.00) R3.60 | columna base ( 31.50;  10.00) Ø5.60 → holgura radial 0.80 | columna tapa ( 31.50;  10.00) Ø7.00 → 0.10
+  cara inferior de las columnas Ø7 de la tapa (rayo a 3,2 del eje, hacia el interior): z = 9.000
+
+====================================================================================================
+4. APILADO VERTICAL Y COMPONENTES BAJO LA TAPA
+====================================================================================================
+Alturas de huella usadas (FP[*].height del .py): USB-C 3.30, ESP32-C3-MINI-1U 2.60, JST SH 2.95, C1206 1.80, SOT-23-5/6 1.45
+
+A · como pide la PCB (cuna +0,6 → placa en z 7.80)
+  suelo z 2.60 · batería 2.65…6.95 · cuna (CAD) 7.15 · placa 7.80…8.80 · techo 13.20 → libre sobre la placa 4.40 mm (H_MAX del .py 4.10)
+  hueco batería ↔ cara inferior de la placa: 0.85 mm
+  base bajo la placa: z máx. 7.150 → apoyo / holgura 0.65 mm
+  tapa sobre la placa (sin componentes): hueco mínimo -0.550 mm; superficie con la tapa DENTRO de la placa: 177.6 mm²
+     zona: X -32.60…32.60, Y -21.60…21.60 (labio de la tapa, z 8.25)
+  componentes cuyo patio (courtyard) choca con la tapa: 5
+     J2    JST_SH2                h 2.95  cima z 11.75  tapa z 9.25  → INTERFERENCIA 2.50 mm (patio); con el cuerpo (F.Fab 4.2 × 4.0): INTERFERENCIA 2.50
+     U4    MINI1U                 h 2.60  cima z 11.40  tapa z 9.25  → INTERFERENCIA 2.15 mm (patio); con el cuerpo (F.Fab 12.5 × 13.2): INTERFERENCIA 2.15
+     U6    SOT23-6                h 1.45  cima z 10.25  tapa z 9.25  → INTERFERENCIA 1.00 mm (patio); con el cuerpo (F.Fab 1.6 × 2.9): INTERFERENCIA 1.00
+     D13   SOT23                  h 1.10  cima z 9.90  tapa z 9.25  → INTERFERENCIA 0.65 mm (patio); con el cuerpo (F.Fab 1.4 × 3.0): INTERFERENCIA 0.65
+     C25   C0402                  h 0.60  cima z 9.40  tapa z 9.25  → INTERFERENCIA 0.15 mm (patio); con el cuerpo (F.Fab 0.5 × 1.0): INTERFERENCIA 0.15
+  los 6 márgenes positivos más pequeños:
+     R11   R0402                  h 0.40  cima z 9.20  tapa z 9.25  → margen 0.05 mm
+     R45   R0402                  h 0.40  cima z 9.20  tapa z 9.25  → margen 0.05 mm
+     J1    USBC                   h 3.30  cima z 12.10  tapa z 13.20  → margen 1.10 mm
+     C1    C1206                  h 1.80  cima z 10.60  tapa z 13.20  → margen 2.60 mm
+     C2    C1206                  h 1.80  cima z 10.60  tapa z 13.20  → margen 2.60 mm
+     C3    C1206                  h 1.80  cima z 10.60  tapa z 13.20  → margen 2.60 mm
+  los más altos: J1 3.30 (cima z 12.10, techo 13.20 → 1.10), J2 2.95 (cima z 11.75, techo 13.20 → 1.45), U4 2.60 (cima z 11.40, techo 13.20 → 1.80), C3 1.80 (cima z 10.60, techo 13.20 → 2.60)
+
+B · CAD 5.8.1 sin cambios (placa apoyada en la cuna, z 7.15)
+  suelo z 2.60 · batería 2.65…6.95 · cuna (CAD) 7.15 · placa 7.15…8.15 · techo 13.20 → libre sobre la placa 5.05 mm (H_MAX del .py 4.10)
+  hueco batería ↔ cara inferior de la placa: 0.20 mm
+  base bajo la placa: z máx. 7.150 → apoyo / holgura -0.00 mm
+  tapa sobre la placa (sin componentes): hueco mínimo 0.100 mm; superficie con la tapa DENTRO de la placa: 0.0 mm²
+  componentes cuyo patio (courtyard) choca con la tapa: 4
+     J2    JST_SH2                h 2.95  cima z 11.10  tapa z 9.25  → INTERFERENCIA 1.85 mm (patio); con el cuerpo (F.Fab 4.2 × 4.0): INTERFERENCIA 1.85
+     U4    MINI1U                 h 2.60  cima z 10.75  tapa z 9.25  → INTERFERENCIA 1.50 mm (patio); con el cuerpo (F.Fab 12.5 × 13.2): INTERFERENCIA 1.50
+     U6    SOT23-6                h 1.45  cima z 9.60  tapa z 9.25  → INTERFERENCIA 0.35 mm (patio); con el cuerpo (F.Fab 1.6 × 2.9): INTERFERENCIA 0.35
+     D13   SOT23                  h 1.10  cima z 9.25  tapa z 9.25  → INTERFERENCIA 0.00 mm (patio); con el cuerpo (F.Fab 1.4 × 3.0): INTERFERENCIA 0.00
+  los 6 márgenes positivos más pequeños:
+     C25   C0402                  h 0.60  cima z 8.75  tapa z 9.25  → margen 0.50 mm
+     R11   R0402                  h 0.40  cima z 8.55  tapa z 9.25  → margen 0.70 mm
+     R45   R0402                  h 0.40  cima z 8.55  tapa z 9.25  → margen 0.70 mm
+     J1    USBC                   h 3.30  cima z 11.45  tapa z 13.20  → margen 1.75 mm
+     C1    C1206                  h 1.80  cima z 9.95  tapa z 13.20  → margen 3.25 mm
+     C2    C1206                  h 1.80  cima z 9.95  tapa z 13.20  → margen 3.25 mm
+  los más altos: J1 3.30 (cima z 11.45, techo 13.20 → 1.75), J2 2.95 (cima z 11.10, techo 13.20 → 2.10), U4 2.60 (cima z 10.75, techo 13.20 → 2.45), C3 1.80 (cima z 9.95, techo 13.20 → 3.25)
+
+Elementos interiores de la tapa que bajan del techo (rejilla 0,2 mm, z inferior < techo − 0,5, dentro de la placa):
+  labio       centro (  0.00; -21.10)  X -17.40… 17.40  Y -21.60…-20.60  área   42.0 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  labio       centro (-29.71; -18.71)  X -32.60…-24.60  Y -21.60…-13.60  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  poste       centro ( -3.00; -18.90)  X  -4.00… -2.00  Y -20.00…-17.80  área    4.3 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: nada
+  labio       centro ( 29.71; -18.71)  X  24.60… 32.60  Y -21.60…-13.60  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  poste       centro (-17.01; -16.00)  X -18.20…-16.00  Y -17.00…-15.00  área    4.4 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: nada
+  poste       centro ( 17.01; -15.00)  X  16.00… 18.20  Y -16.00…-14.00  área    4.4 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: A:C25
+  poste       centro (  9.86;  -9.70)  X   9.00… 10.80  Y -10.60… -8.80  área    3.2 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: A:U4, B:U4
+  poste       centro ( 25.70;  -9.70)  X  24.80… 26.60  Y -10.60… -8.80  área    3.2 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: A:U6, B:U6
+  labio       centro (-32.10;  -0.00)  X -32.60…-31.60  Y  -6.40…  6.40  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  labio       centro ( 32.10;  -0.00)  X  31.60… 32.60  Y  -6.40…  6.40  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  poste       centro (-26.50;   6.70)  X -27.40…-25.60  Y   5.80…  7.60  área    3.2 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: A:J2, B:J2
+  poste       centro (-11.50;   6.70)  X -12.40…-10.60  Y   5.80…  7.60  área    3.2 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: A:D13
+  tope USB C6 centro ( 17.70;   8.10)  X  14.80… 20.60  Y   6.20… 10.00  área   24.0 mm²  z inf. 12.51  hueco a la placa A 3.71 / B 4.36  choca con: nada
+  poste       centro ( 14.00;  15.50)  X  13.00… 15.00  Y  14.40… 16.60  área    4.3 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: nada
+  poste       centro (-17.01;  16.00)  X -18.20…-16.00  Y  15.00… 17.00  área    4.4 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: nada
+  poste       centro ( -3.00;  16.50)  X  -4.00… -2.00  Y  15.40… 17.60  área    4.3 mm²  z inf. 9.25  hueco a la placa A 0.45 / B 1.10  choca con: nada
+  labio       centro (-29.71;  18.71)  X -32.60…-24.60  Y  13.60… 21.60  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  labio       centro ( 29.71;  18.71)  X  24.60… 32.60  Y  13.60… 21.60  área   15.6 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+  labio       centro (  0.00;  21.10)  X -17.40… 17.40  Y  20.60… 21.60  área   42.0 mm²  z inf. 8.25  hueco a la placa A -0.55 / B 0.10  choca con: nada
+
+Bandeja 5.8.1 dentro de la huella de la placa: z 7.20…10.40, 1890 mm² de solape en planta → con la PCB hay que quitarla del conjunto
+
+====================================================================================================
+5. USB-C (J1): POSICIÓN, PATAS BAJO LA PLACA Y ACCESO
+====================================================================================================
+J1 en KiCad: (26.15; 0.00), giro 90°
+Boca del receptáculo (línea F.Fab local y = 3.65): X = 29.80 → 2.95 mm del borde de la placa (X 32.75)
+A · como pide la PCB (cuna +0,6 → placa en z 7.80)
+  pata NPTH np_thru_hole ( 23.55;  -2.89): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.85 mm
+  pata NPTH np_thru_hole ( 23.55;   2.89): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.85 mm
+  pata S1  thru_hole    ( 23.02;  -4.32): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.85 mm
+  pata S1  thru_hole    ( 27.20;  -4.32): lo más alto debajo (r 1 mm) z 7.15 (base) → profundidad libre bajo la placa 0.65 mm
+  pata S1  thru_hole    ( 23.02;   4.32): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.85 mm
+  pata S1  thru_hole    ( 27.20;   4.32): lo más alto debajo (r 1 mm) z 7.15 (base) → profundidad libre bajo la placa 0.65 mm
+B · CAD 5.8.1 sin cambios (placa apoyada en la cuna, z 7.15)
+  pata NPTH np_thru_hole ( 23.55;  -2.89): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.20 mm
+  pata NPTH np_thru_hole ( 23.55;   2.89): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.20 mm
+  pata S1  thru_hole    ( 23.02;  -4.32): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.20 mm
+  pata S1  thru_hole    ( 27.20;  -4.32): lo más alto debajo (r 1 mm) z 7.15 (base) → profundidad libre bajo la placa 0.00 mm
+  pata S1  thru_hole    ( 23.02;   4.32): lo más alto debajo (r 1 mm) z 6.95 (batería) → profundidad libre bajo la placa 0.20 mm
+  pata S1  thru_hole    ( 27.20;   4.32): lo más alto debajo (r 1 mm) z 7.15 (base) → profundidad libre bajo la placa 0.00 mm
+  Longitud de las patas bajo la placa: NO VERIFICADO (no hay modelo 3D del TYPE-C-31-M-12 en el repositorio ni en el STEP de la placa).
+  A: eje del USB z ≈ 10.45; rayo +X desde la boca: primer material tapa a 1.75 mm (X 31.55); total de caras atravesadas 2 → SIN ABERTURA en la cápsula
+  B: eje del USB z ≈ 9.80; rayo +X desde la boca: primer material tapa a 1.75 mm (X 31.55); total de caras atravesadas 2 → SIN ABERTURA en la cápsula
+  A (tapa quitada): pared de la base z 9.00; eje del USB z 10.45 → 1.45 mm por encima de la pared; boca a 3.10 mm de la cara interior (X 32.90) y a 6.70 de la exterior (X 36,50)
+  B (tapa quitada): pared de la base z 9.00; eje del USB z 9.80 → 0.80 mm por encima de la pared; boca a 3.10 mm de la cara interior (X 32.90) y a 6.70 de la exterior (X 36,50)
+  Tope de la tapa para el USB del C6 (REV 5.8.1): ver «tope USB C6» de la sección 4 (ya no hay conector ahí).
+
+====================================================================================================
+6. CABLE DE LA BATERÍA (RANURA), HILOS DE LA BOBINA (L1/L2) Y DEL REED (SW1/SW2)
+====================================================================================================
+Huecos de la pared de la cuna (corte de la base a z 5,0):
+  pared −X (x = −26,1)     huecos: Y -6.50…-0.55, Y 7.95…14.90
+  pared +X (x = +26,1)     huecos: ninguno
+  pared +Y (y = +15,95)    huecos: ninguno
+  pared −Y (y = −15,95)    huecos: ninguno
+Ranura de la placa: centro (-29.00; 4.60), 1.60 × 3.40 mm. Debajo (base) z máx. 2.60; batería X ≥ -25.40
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y  2.90 (z 5): libre hasta X -32.91 → 6.31 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y  4.60 (z 5): libre hasta X -32.91 → 6.31 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y  6.30 (z 5): libre hasta X -32.91 → 6.31 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y  8.00 (z 5): libre hasta X -29.55 → 2.95 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y 10.00 (z 5): libre hasta X -28.71 → 2.11 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y 11.50 (z 5): libre hasta X -29.15 → 2.55 mm
+  pasillo junto a la cara exterior de la cuna (X −26,6) a Y 14.50 (z 5): libre hasta X -32.91 → 6.31 mm
+  distancia ranura ↔ borde de la placa: 0.75 mm; J2 en KiCad (-24.20; 6.30) a 5.09 mm del centro de la ranura
+Bobina Qi (ref): centro (0.00; 0.00), Ø25.00, z 1.30…2.30
+  canal de los hilos en el suelo (corte z 2,0 en X −20): Y -6.00…-4.05
+  canal a lo largo de X (Y −5, z 2,0): X -30.95…-10.00
+  L1 (-28.60; -5.20): 16.57 mm del borde de la bobina; base debajo z máx. 1.60 (camino libre hasta la placa)
+  L2 (-28.60; -2.00): 16.17 mm del borde de la bobina; base debajo z máx. 2.60 (camino libre hasta la placa)
+  piezas de la placa sobre la bobina (centro a < 12.5 mm del eje): C18, C19, C21, C22, C27, C28, C29, C30, D13, Q16, R10, R20, R21, R6, R7, R9, U2, U3, U5, U7
+  entre la bobina y la placa: batería (z 2.65…6.95, 0.35 mm por encima de la bobina)
+Reed (ref): X -7.00…7.00, Y -20.90…-17.70, z 1.10…4.30 (centro (0.00; -19.30))
+  SW1 (-1.27; -17.80): sobre el cuerpo del reed (Y -20.90…-17.70): sí; base debajo z máx. 1.00; extremo del reed (X -7.00) → pad: 7.8 mm en línea recta (A)
+  SW2 (1.27; -17.80): sobre el cuerpo del reed (Y -20.90…-17.70): sí; base debajo z máx. 1.00; extremo del reed (X 7.00) → pad: 7.8 mm en línea recta (A)
+  alojamiento del reed en el suelo (corte z 2,0, Y -19.30): hueco X -8.15…8.15
+  entre la cuna y la pared −Y (corte z 5, X 0): hueco Y -21.85…-16.50
+
+====================================================================================================
+7. ANTENA FPC Y BANDA SIN COBRE
+====================================================================================================
+Banda sin cobre (zona de KiCad ANTENA_SIN_COBRE): X -3.30…25.50, Y 12.60…22.75 [.py ANT_KEEPOUT (-3.3, 12.6, 25.5, 22.75)]
+  reglas de la zona en KiCad: pistas/vías/rellenos prohibidos; pads y huellas PERMITIDOS
+Antena FPC en el CAD 5.8.1 (ref): X -21.00…7.00, Y -7.50…-1.50, z 12.85…13.15 (28.0 × 6.0 × 0.30) → solape con la banda: 0.0 mm²
+  piezas de la placa bajo la antena en su sitio actual: C17, C19, C20, R10, R4, R7, R8, R9, RT1, U1, U2
+  Gerber F_Cu   (11094 trazos, 159 destellos leídos): trazos que cruzan la banda (reducida 0,05) 0; destellos dentro 0 
+  Gerber In1_Cu (5777 trazos, 144 destellos leídos): trazos que cruzan la banda (reducida 0,05) 0; destellos dentro 0 
+  Gerber In2_Cu (8108 trazos, 144 destellos leídos): trazos que cruzan la banda (reducida 0,05) 0; destellos dentro 0 
+  Gerber B_Cu   (5635 trazos, 145 destellos leídos): trazos que cruzan la banda (reducida 0,05) 0; destellos dentro 0 
+  pads de huellas dentro de la banda (KiCad): ninguno
+  FPC de 28.0 × 6.0 pegada al techo dentro de la banda: mejor posición X0 -2.50, Y0 12.60 con 12.1 mm² de techo NO plano (postes/columnas/pared)
+     invade: poste en (14.00; 15.50) — 4.3 mm²
+     invade: poste en (-3.00; 16.50) — 1.0 mm²
+     invade: columna Ø7.0 del inserto M3 de la tapa en (21.00; 20.50) — 6.8 mm²
+  sin quitar postes ni columnas: no hay ninguna posición con Y ≥ 12.60 donde la FPC de 28.0 × 6.0 quede en techo plano
+  pared interior de la tapa en X 10 (z 12,5): Y 20.56 → la banda (hasta Y 22.75) llega 2.19 mm más allá de la pared
+  hueco antena ↔ cara superior de la placa (A): 4.10 mm (techo 13.20 − FPC 0.30 − placa 8.80)
+  Conector W.FL/MHF III del módulo: posición NO VERIFICADA (no hay dato de posición en la huella; el STEP del módulo es un ensamblaje sin resolver).
+
+====================================================================================================
+8. IMANES ↔ MAGNETÓMETRO U7 (MMC5983MA) Y ↔ REED
+====================================================================================================
+U7 en KiCad (-5.00; 9.60) [diseño (-5,0; 9,6)]; centro del sensor z ≈ 9.30 (A: placa + 1/2 de 1.00)
+  imán cápsula  (-28.90; -18.30) Ø5.00 z 0.32…1.32 → distancia a U7 37.70 mm; al reed (centro) 28.98 mm
+  imán cápsula  (-28.90;  18.30) Ø5.00 z 0.32…1.32 → distancia a U7 26.81 mm; al reed (centro) 47.46 mm
+  imán cápsula  ( 28.90; -18.30) Ø5.00 z 0.32…1.32 → distancia a U7 44.72 mm; al reed (centro) 28.98 mm
+  imán cápsula  ( 28.90;  18.30) Ø5.00 z 0.32…1.32 → distancia a U7 36.01 mm; al reed (centro) 47.46 mm
+  imán soporte  (-28.90; -18.30) Ø5.00 z -2.02…-0.02 → distancia a U7 38.16 mm; al reed (centro) 29.16 mm
+  imán soporte  (-28.90;  18.30) Ø5.00 z -2.02…-0.02 → distancia a U7 27.45 mm; al reed (centro) 47.57 mm
+  imán soporte  ( 28.90; -18.30) Ø5.00 z -2.02…-0.02 → distancia a U7 45.10 mm; al reed (centro) 29.16 mm
+  imán soporte  ( 28.90;  18.30) Ø5.00 z -2.02…-0.02 → distancia a U7 36.49 mm; al reed (centro) 47.57 mm
+  imán reed     ( -5.10; -19.30) Ø5.00 z -1.17…-0.17 → distancia a U7 30.57 mm; al reed (centro) 6.11 mm
+  imán reed     (  0.00; -19.30) Ø5.00 z -1.02…-0.02 → distancia a U7 30.93 mm; al reed (centro) 3.22 mm
+  imán reed     (  5.10; -19.30) Ø5.00 z -1.17…-0.17 → distancia a U7 32.20 mm; al reed (centro) 6.11 mm
+Estimación con dipolos (hipótesis: N35, Br = 1.20 T como el README de REV 5; imanes axiales ±Z; no es una medida):
+  diagonales opuestas (README), reed +   · 1 imán(es) por esquina en la cápsula: |B| en U7 =    406 µT (4.06 G)
+  diagonales opuestas (README), reed +   · 3 imán(es) por esquina en la cápsula: |B| en U7 =    555 µT (5.55 G)
+  diagonales opuestas, reed −            · 1 imán(es) por esquina en la cápsula: |B| en U7 =    308 µT (3.08 G)
+  diagonales opuestas, reed −            · 3 imán(es) por esquina en la cápsula: |B| en U7 =    465 µT (4.65 G)
+  todos iguales                          · 1 imán(es) por esquina en la cápsula: |B| en U7 =    569 µT (5.69 G)
+  todos iguales                          · 3 imán(es) por esquina en la cápsula: |B| en U7 =    918 µT (9.18 G)
+  peor caso calculado: 918 µT = 9.18 G; rango del MMC5983MA ±8 G = ±800 µT (hoja de datos, no del repositorio)
+  imán de la cápsula más cercano al reed: 28.98 mm
+
+====================================================================================================
+9. SUJECIÓN / VIBRACIÓN (lo que muestra el CAD)
+====================================================================================================
+A · como pide la PCB (cuna +0,6 → placa en z 7.80)
+  apoyo inferior (base a ±0,05 de la cara inferior): 0.0 mm² (0.0 % de la placa)
+  la placa NO apoya en la base con este CAD (la cuna está a 7.15, 0.65 mm por debajo)
+  tapa a ≤ 0,1 mm de la cara superior: 177.6 mm²; hueco del labio a la placa: -0.55 mm; postes de la tapa (z 9.25): 0.45 mm
+B · CAD 5.8.1 sin cambios (placa apoyada en la cuna, z 7.15)
+  apoyo inferior (base a ±0,05 de la cara inferior): 155.8 mm² (6.1 % de la placa)
+  distancia máxima de un punto de la placa al apoyo más cercano: 15.60 mm en (-10.20; -0.00)
+     voladizo en la esquina (30.95; 19.95): 5.69 mm
+     voladizo en la esquina (-30.95; 19.95): 5.69 mm
+  tapa a ≤ 0,1 mm de la cara superior: 177.6 mm²; hueco del labio a la placa: 0.10 mm; postes de la tapa (z 9.25): 1.10 mm
+Vano sin apoyo dentro de la cuna (cara interior, corte z 5): 51.24 × 30.92 mm, sobre la batería (con la cuna +0,6 del escenario A el anillo de apoyo sería el mismo)
+Zonas del anillo de la cuna libres de piezas (±1,5 mm) y fuera de la banda de la antena — candidatas para postes que aprieten la placa contra la cuna:
+  centro (-17.79; -16.04)  X -26.60…-10.60  Y -16.40…-15.60  (14.1 mm²)
+  centro (  2.07; -16.09)  X  -3.60…  7.60  Y -16.40…-15.60  (9.3 mm²)
+  centro ( 23.45; -15.65)  X  18.80… 26.60  Y -16.40…-13.40  (10.2 mm²)
+  centro ( 26.20;   9.00)  X  25.80… 26.60  Y   7.00… 11.00  (4.2 mm²)
+  centro (-22.10;  16.02)  X -26.60…-15.20  Y  15.00… 16.40  (9.7 mm²)
+Apoyo superior: no hay ningún elemento de la tapa que apriete la placa en el CAD 5.8.1 (labio y postes con hueco, ver arriba).
+
+====================================================================================================
+10. JUNTA TPU Y CIERRE
+====================================================================================================
+Junta (STL de montaje, altura comprimida): z 8.00…9.00; ancho en X 0: Y 22.90…24.10
+Ranura de la base a z 8,5 (X 0): huecos Y 20.00…21.89, 22.80…24.20, 25.50…25.60
+Cara superior de la pared de la base 9.00; cara inferior de la tapa sobre la junta 9.00 → tope rígido plástico-plástico: sí
+Compresión fija (README REV 5: libre 1,4, ranura 1,0): 29 % — solo si la tapa asienta en la base
+  A: la tapa quedaría levantada 2.50 mm por interferencias → junta comprimida 0.00 de 0,40 mm (SIN SELLADO)
+  B: la tapa quedaría levantada 1.85 mm por interferencias → junta comprimida 0.00 de 0,40 mm (SIN SELLADO)
+
+Figuras: plano_planta.png, corte_vertical.png

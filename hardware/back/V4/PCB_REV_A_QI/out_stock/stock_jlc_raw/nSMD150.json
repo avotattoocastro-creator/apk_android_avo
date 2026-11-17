@@ -1,0 +1,2966 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 14,
+   "list": [
+    {
+     "componentId": 71178,
+     "componentLibraryType": "expand",
+     "stockCount": 4742,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_techfuse-nsmd150_C70083.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.069
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.058
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0525
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0335
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0302
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0285
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0322
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0291
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0559
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0665
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0275
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0505
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 4714,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TECHFUSE-nSMD150/C70083",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.14,
+     "preMinPurchaseNum": 156,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.069,
+     "componentCode": "C70083",
+     "componentBrandEn": "TECHFUSE",
+     "componentModelEn": "nSMD150",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553693646239899648",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_TECHFUSE-nSMD150_C70083.pdf",
+     "dataManualFileAccessId": "8586176184371175424",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TECHFUSE nSMD150",
+     "minImage": "",
+     "minImageAccessId": "8553693646928441344",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 130m\u03a9 1s 30m\u03a9 3A 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>nSMD150</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 44488456,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "PPTC\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_kuu-knsmd150_C42441120.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0602
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0475
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0412
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0366
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0328
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0308
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0579
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0352
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0396
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0316
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0458
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "KUU-KNSMD150/C42441120",
+     "leastPatchNumber": 2,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.16,
+     "preMinPurchaseNum": 190,
+     "minPurchaseNum": 190,
+     "initialPrice": 0.0475,
+     "componentCode": "C42441120",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "KNSMD150",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8616702155411496960",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2501131900_KUU-KNSMD150_C42441120.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "KUU KNSMD150",
+     "minImage": "",
+     "minImageAccessId": "8616702156267810816",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 170m\u03a9 300ms 30m\u03a9 3A 600mW 6V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "600mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "170m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "K<span class='lucene_highlight_class'>NSMD150</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 724581,
+     "componentLibraryType": "expand",
+     "stockCount": 518,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150_C692148.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0362
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0326
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0308
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0295
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0295
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0349
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0314
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0284
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0284
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 507,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "724581-JKNSMD150/C692148",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 277,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0362,
+     "componentCode": "C692148",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-NSMD150",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583486263911858176",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jinrui-Electronic-Materials-Co--JK-NSMD150_C692148.pdf",
+     "dataManualFileAccessId": "8588917757869477888",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-NSMD150",
+     "minImage": "",
+     "minImageAccessId": "8583486264842858496",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.6mm 10m\u03a9 3.2mm 50A 65m\u03a9 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "5s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "10m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "0.7mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "50A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "65m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>NSMD150</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6105919,
+     "componentLibraryType": "expand",
+     "stockCount": 2681,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "16V 1.5A",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_kuu-nsmd150-16_C5338320.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0834
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0677
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0598
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0456
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.041
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0385
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0576
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0803
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0439
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0371
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0652
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0395
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 2674,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "KUU-NSMD15016/C5338320",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.2,
+     "preMinPurchaseNum": 134,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0834,
+     "componentCode": "C5338320",
+     "componentBrandEn": "KUU",
+     "componentModelEn": "NSMD150/16",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585210787367964672",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2301040930_KUU-NSMD150-16_C5338320.pdf",
+     "dataManualFileAccessId": "8590905464639479808",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "KUU NSMD150/16",
+     "minImage": "",
+     "minImageAccessId": "8585210788252016640",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 16V 210m\u03a9 300ms 30m\u03a9 3A 600mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "600mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "210m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>NSMD150</span>/16",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 253431,
+     "componentLibraryType": "expand",
+     "stockCount": 1665,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_tlc-electronic-tlc-nsmd150_C261956.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0775
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0623
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0547
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0492
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0433
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.041
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0747
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0474
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0527
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0417
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.06
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0395
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 1661,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TLCElectronic-TLCNSMD150/C261956",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.192,
+     "preMinPurchaseNum": 145,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0775,
+     "componentCode": "C261956",
+     "componentBrandEn": "TLC Electronic",
+     "componentModelEn": "TLC-NSMD150",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583393552680697856",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_TLC-Electronic-TLC-NSMD150_C261956.pdf",
+     "dataManualFileAccessId": "8588902640843698176",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TLC Electronic TLC-NSMD150",
+     "minImage": "",
+     "minImageAccessId": "8583393553553248256",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.8mm 100A 170m\u03a9 1mm 3.4mm 300ms 30m\u03a9 3A 600mW 6V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "600mW"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.4mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "170m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "TLC-<span class='lucene_highlight_class'>NSMD150</span>",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3290739,
+     "componentLibraryType": "expand",
+     "stockCount": 10976,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "16V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_techfuse-nsmd150-16v_C2937115.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0598
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.048
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0421
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0359
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0323
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0305
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0463
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0294
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0346
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0576
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0406
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0311
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 10969,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TECHFUSE-nSMD15016V/C2937115",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.15,
+     "preMinPurchaseNum": 188,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0598,
+     "componentCode": "C2937115",
+     "componentBrandEn": "TECHFUSE",
+     "componentModelEn": "nSMD150-16V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583641106366009344",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304041600_TECHFUSE-nSMD150-16V_C2937115.pdf",
+     "dataManualFileAccessId": "8588954678029111296",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TECHFUSE nSMD150-16V",
+     "minImage": "",
+     "minImageAccessId": "8583641107339358208",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.2mm 1.5A 1.8mm 100A 130m\u03a9 16V 3.5mm 30m\u03a9 3A 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "16V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.2mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>nSMD150</span>-16V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 343301,
+     "componentLibraryType": "expand",
+     "stockCount": 844,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "8V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_shenzhen-jinkaisheng-elec-jk-nsmd150sf_C369553.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0451
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0358
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.031
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0274
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0246
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0231
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0434
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0299
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0264
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0237
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0223
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 840,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "343301-JKnSMD150SF/C369553",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.12,
+     "preMinPurchaseNum": 253,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0451,
+     "componentCode": "C369553",
+     "componentBrandEn": "Shenzhen Jinkaisheng Elec",
+     "componentModelEn": "JK-nSMD150SF",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583402365743874048",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1912111437_Shenzhen-Jinkaisheng-Elec-JK-nSMD150SF_C369553.pdf",
+     "dataManualFileAccessId": "8588903781476012032",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JKSEMI JK-nSMD150SF",
+     "minImage": "",
+     "minImageAccessId": "8583402366502907904",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.2mm 1.5A 1.8mm 100A 130m\u03a9 3.5mm 300ms 3A 40m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.2mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>SF",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 71179,
+     "componentLibraryType": "expand",
+     "stockCount": 13120,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "13.2V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_techfuse-nsmd150-13-2v_C70084.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0564
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0459
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0408
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0328
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0297
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0282
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0316
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 8999,
+       "productPrice": 0.0286
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0543
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0442
+      },
+      {
+       "startNumber": 9000,
+       "endNumber": -1,
+       "productPrice": 0.0272
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 2999,
+       "productPrice": 0.0393
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 12997,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TECHFUSE-nSMD150_132V/C70084",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.132,
+     "preMinPurchaseNum": 197,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0564,
+     "componentCode": "C70084",
+     "componentBrandEn": "TECHFUSE",
+     "componentModelEn": "nSMD150-13.2V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553693676845735936",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "8756593450592542720",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TECHFUSE nSMD150-13.2V",
+     "minImage": "",
+     "minImageAccessId": "8553693677467168768",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1.5A 100A 13.2V 130m\u03a9 300ms 30m\u03a9 3A 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "13.2V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "30m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>nSMD150</span>-13.2V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2981878,
+     "componentLibraryType": "expand",
+     "stockCount": 2172,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "1.5A 6V",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150-6v_C2830249.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0433
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0338
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0285
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0253
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0253
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0253
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10500,
+       "endNumber": 20999,
+       "productPrice": 0.0243
+      },
+      {
+       "startNumber": 600,
+       "endNumber": 3499,
+       "productPrice": 0.0275
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 199,
+       "productPrice": 0.0417
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0243
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 599,
+       "productPrice": 0.0325
+      },
+      {
+       "startNumber": 21000,
+       "endNumber": -1,
+       "productPrice": 0.0243
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 2141,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "2981878-JK_nSMD1506V/C2830249",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.08986,
+     "preMinPurchaseNum": 267,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0433,
+     "componentCode": "C2830249",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-nSMD150/6V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583494431731695616",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2105241640_Jinrui-Electronic-Materials-Co--JK-nSMD150-6V_C2830249.pdf",
+     "dataManualFileAccessId": "8588918956145192960",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-nSMD150/6V",
+     "minImage": "",
+     "minImageAccessId": "8583494432578945024",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 100A 130m\u03a9 1s 3A 40m\u03a9 6V 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.5mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "100A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>/6V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5926212,
+     "componentLibraryType": "expand",
+     "stockCount": 7754,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "\u8d34\u7247\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150l-6_C5224393.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0507
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0444
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0413
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.039
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.039
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.039
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0428
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0488
+      },
+      {
+       "startNumber": 10000,
+       "endNumber": -1,
+       "productPrice": 0.0376
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": 9999,
+       "productPrice": 0.0376
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 4999,
+       "productPrice": 0.0376
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0398
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 7739,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "5926212-JK_nSMD150L6/C5224393",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.19003,
+     "preMinPurchaseNum": 204,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0507,
+     "componentCode": "C5224393",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-nSMD150L-6",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585147625457139712",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210311700_Jinrui-Electronic-Materials-Co--JK-nSMD150L-6_C5224393.pdf",
+     "dataManualFileAccessId": "8590454678220529664",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-nSMD150L-6",
+     "minImage": "",
+     "minImageAccessId": "8585147626366492672",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.6mm 10m\u03a9 3.2mm 65m\u03a9 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "5s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.2mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "10m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "50A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "65m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>L-6",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 6235664,
+     "componentLibraryType": "expand",
+     "stockCount": 557,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "\u8d34\u7247\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150-12_C5375703.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0654
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0489
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0407
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0344
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0344
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0471
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0332
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0332
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0392
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0332
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.063
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 557,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "6235664-JK_nSMD15012/C5375703",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.15,
+     "preMinPurchaseNum": 185,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0654,
+     "componentCode": "C5375703",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-nSMD150-12",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585841013596835840",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-nSMD150-12",
+     "minImage": "",
+     "minImageAccessId": "8585841014553137152",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "1206 Resettable Fuses ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>-12",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2981879,
+     "componentLibraryType": "expand",
+     "stockCount": 16527,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "12V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150-12v_C2830250.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0431
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0412
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0402
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0394
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0302
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0299
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0415
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": 3499,
+       "productPrice": 0.0379
+      },
+      {
+       "startNumber": 300,
+       "endNumber": 999,
+       "productPrice": 0.0387
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 10499,
+       "productPrice": 0.0291
+      },
+      {
+       "startNumber": 10500,
+       "endNumber": -1,
+       "productPrice": 0.0288
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 299,
+       "productPrice": 0.0396
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 16237,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "2981879-JK_nSMD15012V/C2830250",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.12037,
+     "preMinPurchaseNum": 219,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0431,
+     "componentCode": "C2830250",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-nSMD150/12V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583496907875864576",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2305081717_Jinrui-Electronic-Materials-Co--JK-nSMD150-12V_C2830250.pdf",
+     "dataManualFileAccessId": "8588919405413601280",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-nSMD150/12V",
+     "minImage": "",
+     "minImageAccessId": "8583496908841500672",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.8mm 1.8mm 12V 130m\u03a9 1s 3.5mm 3A 40A 40m\u03a9 600mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "600mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "1s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "40m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "40A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>/12V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5926213,
+     "componentLibraryType": "expand",
+     "stockCount": 1,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "\u8d34\u7247\u81ea\u6062\u590d\u4fdd\u9669\u4e1d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150l-12_C5224394.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0929
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0693
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0577
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0577
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0577
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0577
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0668
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0556
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0895
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0556
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0556
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0556
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 1,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "5926213-JK_nSMD150L12/C5224394",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.29912,
+     "preMinPurchaseNum": 131,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0929,
+     "componentCode": "C5224394",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-nSMD150L-12",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585149295745622016",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2210311700_Jinrui-Electronic-Materials-Co--JK-nSMD150L-12_C5224394.pdf",
+     "dataManualFileAccessId": "8590454919368519680",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-nSMD150L-12",
+     "minImage": "",
+     "minImageAccessId": "8585149296647802880",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 10m\u03a9 12V 3A 50A 5s 65m\u03a9 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "5s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "10m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "50A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "65m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>nSMD150</span>L-12",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 724582,
+     "componentLibraryType": "expand",
+     "stockCount": 5060,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "12V 1.5A 1206\u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_jinrui-electronic-materials-co-jk-nsmd150l-12v_C692149.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0759
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0696
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0665
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0642
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0642
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0642
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.0731
+      },
+      {
+       "startNumber": 5000,
+       "endNumber": -1,
+       "productPrice": 0.0619
+      },
+      {
+       "startNumber": 2500,
+       "endNumber": 4999,
+       "productPrice": 0.0619
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0671
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2499,
+       "productPrice": 0.0619
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0641
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 5030,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "724582-JK_NSMD150L12V/C692149",
+     "leastPatchNumber": 5,
+     "lossNumber": 4,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5000,
+     "shopCostPrice": 0.21,
+     "preMinPurchaseNum": 130,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.0759,
+     "componentCode": "C692149",
+     "componentBrandEn": "Jinrui Electronic Materials Co.",
+     "componentModelEn": "JK-NSMD150L-12V",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8761904268691550208",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2006240022_Jinrui-Electronic-Materials-Co--JK-NSMD150L-12V_C692149.pdf",
+     "dataManualFileAccessId": "8588918224947306496",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "Jinrui JK-NSMD150L-12V",
+     "minImage": "",
+     "minImageAccessId": "8761904269693718528",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 0.7mm 1.5A 1.8mm 10m\u03a9 12V 3.5mm 3A 50A 5s 65m\u03a9 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "12V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "5s"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.5mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "10m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "0.7mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "50A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.8mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "65m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "JK-<span class='lucene_highlight_class'>NSMD150</span>L-12V",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "nSMD150"
+ },
+ "message": null
+}

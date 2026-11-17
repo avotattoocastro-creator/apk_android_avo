@@ -1,0 +1,235 @@
+<Window x:Class="Avo.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:Avo.Windows.Views"
+        xmlns:vm="clr-namespace:Avo.Windows.ViewModels"
+        Title="AVO Performance Horse — Windows Advanced Analysis V2 PRO"
+        Width="1600" Height="960" MinWidth="1280" MinHeight="720" WindowStartupLocation="CenterScreen"
+        Icon="Assets/AVO.ico" Style="{StaticResource AvoWindow}" Language="es-ES"
+        Background="{StaticResource AvoBg}" Foreground="{StaticResource AvoText}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============================== header -->
+        <!-- boceto del entrenador 13/11/2026: la barra superior solo en las páginas de un entrenamiento (como el iPad) -->
+        <Border Height="64" Background="{StaticResource AvoHeaderBrush}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,0,1"
+                Visibility="{Binding IsTrainingPage, Converter={StaticResource BoolVis}}">
+            <Grid x:Name="HeaderGrid" Margin="16,0,16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="Assets/avo_logo_128.png" Width="44" Height="44" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <TextBlock Text="AVO" FontFamily="{StaticResource AvoDisplayFont}" FontSize="32" FontWeight="Light" Foreground="{StaticResource AvoSilver}" Margin="10,0,0,2" VerticalAlignment="Center"/>
+                    <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="PERFORMANCE HORSE" FontWeight="SemiBold" FontSize="12.5" Foreground="{StaticResource AvoText}"/>
+                        <TextBlock FontSize="11" Foreground="{StaticResource AvoTextDim}">
+                            <Run Text="Windows · Advanced Analysis"/><Run Text=" V2 PRO" Foreground="{StaticResource AvoRed}" FontWeight="SemiBold"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <Border Width="1" Background="{StaticResource AvoLine}" Margin="22,14"/>
+                </StackPanel>
+                <!-- session sub-navigation (analysis area) -->
+                <StackPanel x:Name="HeaderTabs" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="4,0,0,0">
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Análisis" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Analysis}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Datos clave" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=KeyData}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Mapa" Tag="{StaticResource IconMap}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Map}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Gráficas" Tag="{StaticResource IconCharts}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Charts}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Biomecánica" Tag="{StaticResource IconBiomech}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Biomech}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Tramos" Tag="{StaticResource IconSegments}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Segments}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Comparar" Tag="{StaticResource IconCompare}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Compare}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Mareas" Tag="{StaticResource IconTides}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Tides}"/>
+                    <RadioButton Style="{StaticResource AvoTabButton}" Content="Informes" Tag="{StaticResource IconReports}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Reports}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ComboBox Width="300" ItemsSource="{Binding SessionsView}" SelectedItem="{Binding Selected}" ToolTip="Entrenamiento activo">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding DateTimeText}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Horse, StringFormat=' · {0}'}" Foreground="{StaticResource AvoTextDim}"/>
+                                    <TextBlock Text="{Binding DistanceText, StringFormat=' · {0}'}" Foreground="{StaticResource AvoTextDim}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Margin="10,0,0,0" Command="{Binding OpenAssignCommand}" ToolTip="Asignar caballo y jinete al entrenamiento activo">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconHorse}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                            <TextBlock Text="Asignar" Margin="7,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="10,0,0,0" Command="{Binding UsbSyncCommand}" ToolTip="{Binding UsbStatus}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconDownload}" Stroke="{StaticResource AvoText}" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                            <TextBlock Text="Reloj USB" Margin="7,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource AvoPrimaryButton}" Margin="10,0,0,0" Command="{Binding ImportCommand}" ToolTip="Abrir entrenamiento .avo / .avr">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                            <TextBlock Text="Abrir" Margin="7,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ============================== body -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Width="196" Background="{StaticResource AvoSurface}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,0,1,0"
+                    Visibility="{Binding Page, Converter={StaticResource NotPageVis}, ConverterParameter=Home}">
+                <DockPanel Margin="0,12,0,10">
+                    <StackPanel DockPanel.Dock="Bottom" Margin="16,0">
+                        <TextBlock Text="{Binding EngineInfo}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                        <TextBlock Text="Formato AVO-TRAINING-1 · AVORAW1" Style="{StaticResource AvoCaption}" Margin="0,3,0,0"/>
+                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <!-- «Inicio» fuera del menú (boceto del entrenador 13/11/2026): la portada solo se ve al arrancar -->
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Entrenamientos" Tag="{StaticResource IconHistory}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Sessions}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Calendario" Tag="{StaticResource IconHistory}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Calendar}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Cuadra" Tag="{StaticResource IconHorse}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Stable}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Jinetes" Tag="{StaticResource IconRider}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Riders}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Análisis" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Analysis}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Datos clave" Tag="{StaticResource IconAnalysis}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=KeyData}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Mapa" Tag="{StaticResource IconMap}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Map}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Gráficas" Tag="{StaticResource IconCharts}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Charts}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Tramos" Tag="{StaticResource IconSegments}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Segments}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Biomecánica" Tag="{StaticResource IconBiomech}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Biomech}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Comparar" Tag="{StaticResource IconCompare}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Compare}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Geocercas y líneas" Tag="{StaticResource IconFlag}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Geofences}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Mareas y entorno" Tag="{StaticResource IconTides}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Tides}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Informes" Tag="{StaticResource IconReports}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Reports}"/>
+                        <Separator Margin="18,8"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Servidor AVO" Tag="{StaticResource IconServer}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Server}"/>
+                        <RadioButton Style="{StaticResource AvoNavItem}" Content="Motor AVO" Tag="{StaticResource IconEngine}" IsChecked="{Binding Page, Converter={StaticResource Eq}, ConverterParameter=Engine}"/>
+                    </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+            <Grid Grid.Column="1">
+                <v:StartView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Home}"/>
+                <v:HomeView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Sessions}"/>
+                <v:StableView DataContext="{Binding HorsesPage}" Visibility="{Binding DataContext.Page, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PageVis}, ConverterParameter=Stable}"/>
+                <v:StableView DataContext="{Binding RidersPage}" Visibility="{Binding DataContext.Page, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PageVis}, ConverterParameter=Riders}"/>
+                <v:AnalysisView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Analysis}"/>
+                <v:MapView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Map}"/>
+                <v:ChartsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Charts}"/>
+                <v:SegmentsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Segments}"/>
+                <v:BiomechView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Biomech}"/>
+                <v:CompareView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Compare}"/>
+                <v:GeofencesView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Geofences}"/>
+                <v:TidesView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Tides}"/>
+                <v:ReportsView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Reports}"/>
+                <v:ServerView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Server}"/>
+                <v:EngineView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Engine}"/>
+                <v:CalendarView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=Calendar}"/>
+                <v:KeyDataView Visibility="{Binding Page, Converter={StaticResource PageVis}, ConverterParameter=KeyData}"/>
+                <!-- empty state: no training imported yet -->
+                <Border Background="#E6030406" Visibility="{Binding ShowEmptyState, Converter={StaticResource BoolVis}}">
+                    <Border Width="640" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource AvoCardBrush}"
+                            BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="10" Padding="32,28">
+                        <StackPanel>
+                            <Path Data="{StaticResource IconOpen}" Stroke="{StaticResource AvoRed}" Style="{StaticResource AvoIcon}" Width="40" Height="40" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Todavía no hay entrenamientos" Style="{StaticResource AvoTitle}" Margin="0,14,0,6"/>
+                            <TextBlock Style="{StaticResource AvoDim}" FontSize="13"
+                                       Text="Abre un archivo .avo exportado desde la app Android (Compartir entrenamiento) o un .avr de la tarjeta SD del pecho. También puedes arrastrarlo a esta ventana. Para ver la aplicación con datos, carga las sesiones de demostración (datos sintéticos, marcados como tales)."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Button Style="{StaticResource AvoPrimaryButton}" Command="{Binding ImportCommand}" Padding="18,9">
+                                    <StackPanel Orientation="Horizontal"><Path Data="{StaticResource IconOpen}" Stroke="White" Style="{StaticResource AvoIcon}" Width="15" Height="15"/><TextBlock Text="Abrir entrenamiento" Margin="8,0,0,0"/></StackPanel>
+                                </Button>
+                                <Button Command="{Binding UsbSyncCommand}" Padding="18,9" Margin="10,0,0,0" Content="Descargar del reloj (USB)"/>
+                                <Button Command="{Binding LoadDemoCommand}" Padding="18,9" Margin="10,0,0,0" Content="Cargar demostración"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding UsbStatus}" Style="{StaticResource AvoCaption}" Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{StaticResource AvoCyan}"/>
+                            <TextBlock Text="{Binding DemoState}" Style="{StaticResource AvoCaption}" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+                <!-- assign horse and rider to a training (metadata on this PC only) -->
+                <Border Background="#D9030406" Visibility="{Binding AssignVisible, Converter={StaticResource BoolVis}}">
+                    <Border Width="640" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource AvoCardBrush}"
+                            BorderBrush="{StaticResource AvoLine}" BorderThickness="1" CornerRadius="10" Padding="28,24">
+                        <StackPanel>
+                            <TextBlock Text="Caballo y jinete del entrenamiento" Style="{StaticResource AvoTitle}"/>
+                            <TextBlock Style="{StaticResource AvoDim}" Margin="0,4,0,0">
+                                <Run Text="{Binding AssignTarget.DateTimeText, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding AssignTarget.DistanceText, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding AssignTarget.Kind, Mode=OneWay}"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding AssignFileText}" Style="{StaticResource AvoCaption}" Margin="0,2,0,0" TextWrapping="Wrap"/>
+                            <Grid Margin="0,18,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconHorse}" Stroke="{StaticResource AvoSilver}" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                                        <TextBlock Text="CABALLO" Style="{StaticResource AvoLabel}" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBox Text="{Binding AssignHorseText, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,6" MaxLength="120" ToolTip="Nombre o código. Si no existe, se crea en la Cuadra."/>
+                                    <ComboBox ItemsSource="{Binding HorseNames}" SelectedItem="{Binding PickHorse, Mode=OneWayToSource}" ToolTip="Elegir de la Cuadra"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Data="{StaticResource IconRider}" Stroke="{StaticResource AvoSilver}" Style="{StaticResource AvoIcon}" Width="15" Height="15"/>
+                                        <TextBlock Text="JINETE" Style="{StaticResource AvoLabel}" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBox Text="{Binding AssignRiderText, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,6" MaxLength="120" ToolTip="Nombre o código. Si no existe, se crea en Jinetes."/>
+                                    <ComboBox ItemsSource="{Binding RiderNames}" SelectedItem="{Binding PickRider, Mode=OneWayToSource}" ToolTip="Elegir de Jinetes"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Background="{StaticResource AvoSurface2}" CornerRadius="6" Padding="12,8" Margin="0,14,0,0">
+                                <DockPanel>
+                                    <Path DockPanel.Dock="Left" Data="{StaticResource IconNfc}" Stroke="{StaticResource AvoCyan}" Style="{StaticResource AvoIcon}" Width="18" Height="18" VerticalAlignment="Top"/>
+                                    <StackPanel Margin="10,0,0,0">
+                                        <TextBlock Text="{Binding NfcStatus}" FontSize="12"/>
+                                        <TextBlock Text="{Binding NfcLast}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                            <CheckBox Content="{Binding AssignOthersText}" IsChecked="{Binding AssignAlsoUnknown}" Margin="0,12,0,0"
+                                      Visibility="{Binding HasAssignOthers, Converter={StaticResource BoolVis}}"/>
+                            <TextBlock Text="{Binding AssignMessage}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,12,0,0"/>
+                            <DockPanel Margin="0,18,0,0">
+                                <Button DockPanel.Dock="Left" Style="{StaticResource AvoGhostButton}" Content="Vaciar (volver a lo del archivo)" Command="{Binding ClearAssignCommand}" Padding="10,6"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="Cancelar" Command="{Binding CancelAssignCommand}" Padding="16,7" Margin="0,0,8,0"/>
+                                    <Button Style="{StaticResource AvoPrimaryButton}" Content="Guardar" Command="{Binding ConfirmAssignCommand}" Padding="18,7"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- ============================== status bar -->
+        <Border Grid.Row="2" Height="28" Background="{StaticResource AvoSurface}" BorderBrush="{StaticResource AvoLine}" BorderThickness="0,1,0,0"
+                Visibility="{Binding Page, Converter={StaticResource NotPageVis}, ConverterParameter=Home}">
+            <Grid Margin="14,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar Width="80" Height="4" IsIndeterminate="True" Margin="0,0,10,0" Visibility="{Binding Busy, Converter={StaticResource BoolVis}}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Status}" Style="{StaticResource AvoCaption}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Column="2" Style="{StaticResource AvoCaption}" VerticalAlignment="Center">
+                    <Run Text="TELEMETRÍA ORIGINAL INTACTA · GNSS = CHALECO DEL JINETE · IMU = CINCHA · Europe/Madrid · v"/><Run Text="{Binding Source={x:Static vm:MainViewModel.Version}, Mode=OneWay}"/>
+                </TextBlock>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

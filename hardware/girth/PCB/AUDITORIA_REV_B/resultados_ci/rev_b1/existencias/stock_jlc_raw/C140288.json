@@ -1,0 +1,243 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 151614,
+     "componentLibraryType": "expand",
+     "stockCount": 2868,
+     "componentTypeEn": "Battery Management",
+     "erpComponentName": "1.5-A USB\u53cb\u597d\u578b\u9502\u79bb\u5b50\u7535\u6c60\u5145\u7535\u5668\u548c\u7535\u6e90\u8def\u5f84\u7ba1\u7406IC",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/battery-management_texas-instruments-bq24072rgtr_C140288.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9957
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.8189
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.7223
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.6125
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5634
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5421
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 0.9592
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 0.7888
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 0.6957
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 0.5901
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 0.5427
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 0.5222
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "cca499faefe0487cab22251edb29c551",
+     "canPresaleNumber": 2803,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ24072RGTR/C140288",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 3.00181,
+     "preMinPurchaseNum": 12,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.9957,
+     "componentCode": "C140288",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ24072RGTR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583004967125340160",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1806131014_Texas-Instruments-BQ24072RGTR_C140288.pdf",
+     "dataManualFileAccessId": "8588881677375950848",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq24079",
+     "componentName": "TI BQ24072RGTR",
+     "minImage": "",
+     "minImageAccessId": "8583004968038752256",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-16-EP(3x3)",
+     "describe": "-40\u2103~+125\u2103 1 1.5A 1.5mA 4.2V 4.35V~6.6V Charging IC Lithium Battery Support QFN-16-EP(3x3) Battery Management ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Charging Saturation Voltage",
+       "attribute_value_name": "4.2V"
+      },
+      {
+       "attribute_name_en": "Supply Current (Iq)",
+       "attribute_value_name": "1.5mA"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "The Chip Type",
+       "attribute_value_name": "Charging IC"
+      },
+      {
+       "attribute_name_en": "Balance Current",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Type of Battery",
+       "attribute_value_name": "Lithium Battery"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4.35V~6.6V"
+      },
+      {
+       "attribute_name_en": "Charge Current - Max",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Number of Cells",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Battery Temperature Detection",
+       "attribute_value_name": "Support"
+      },
+      {
+       "attribute_name_en": "End-Off Voltage",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "0V Battery Charge",
+       "attribute_value_name": "-"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Battery Management",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C140288</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C140288"
+ },
+ "message": null
+}

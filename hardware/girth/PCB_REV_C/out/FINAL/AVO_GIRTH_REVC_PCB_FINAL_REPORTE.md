@@ -1,0 +1,83 @@
+# AVO GIRTH · placa de la cincha · REV C (ESP32-C6 + BNO085 + MAX30003, ECG) — informe de fabricación
+
+- Estado: **DISEÑO VERIFICADO POR SOFTWARE — APTO PARA SOLICITAR PROTOTIPOS — PENDIENTE DE VALIDACIÓN FÍSICA**
+- Commit: `15cc1d8984a571fc43708ab1c40de111c8eb6eb0` · ejecución de CI: 43672058713
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
+- Placa: 40 × 26 mm (R2), 4 capas (F.Cu componentes, señal y relleno GND · In1.Cu GND macizo · In2.Cu señal + relleno +3V3 · B.Cu señal y relleno GND), 1,0 mm, ENIG, cobre exterior 1 oz
+- Componentes: 87 en total, 68 para montar, 3 sin montar (DNP: C51, C54, R46), 16 a mano (pads de hilo y de prueba)
+- Pistas: 862 · vías: 145 · ruteado completo (0 conexiones incompletas)
+
+## Comprobaciones bloqueantes
+| Comprobación | Resultado | Cantidad |
+|---|---|---|
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | correcto | 0 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
+| ERC: errores | correcto | 0 |
+| ERC: advertencias | correcto | 0 |
+
+
+## Advertencias de DRC (no bloqueantes)
+- silk_over_copper: 6
+- silk_overlap: 3
+- track_dangling: 1
+- via_dangling: 1
+
+## Lista de materiales y posiciones
+- Piezas montadas sin número LCSC: ninguna
+- Los ficheros BOM y CPL se generan desde la misma lista que el esquema y la placa (`kicad/piezas.json`).
+- Revisar el giro de cada pieza en la vista previa de JLCPCB: el CPL sale de KiCad sin correcciones.
+
+## Modelo 3D (STEP y renders, no afecta a la fabricación)
+- Modelos de la librería de KiCad 9.0.0 descargados: 10; sin descargar: Package_DFN_QFN.3dshapes/VQFN-16-1EP_3x3mm_P0.5mm_EP1.68x1.68mm.step
+- ESP32-C6-MINI-1U: modelo de Espressif (`fuente/3d`). MAX30003 y SiT1533: modelos de EasyEDA/LCSC. BNO085 y pads de hilo/prueba: sin modelo 3D.
+
+## Existencias en JLCPCB (consulta del CI: 2026-11-15 02:45 UTC)
+| LCSC | Pieza | Por placa | Existencias | Tipo | Precio (1 ud.) |
+|---|---|---|---|---|---|
+| C1519515 | MAX30003CTI+ | 1 | 0 | Extended | 20.2258 US$ |
+| C5189642 | BNO085 | 1 | 0 | Extended | 19.4862 US$ |
+| C367058 | SIT1533AI-H4-DCC-32.768E | 1 | 971 | Extended | 1.2860 US$ |
+| C140288 | BQ24072RGTR | 1 | 1221 | Extended | 1.0488 US$ |
+| C97946 | GRM31C5C1H104JA01L | 1 | 56574 | Extended | 0.3075 US$ |
+| C32346 | Q13FC13500004 | 1 | 413571 | Basic | 0.1524 US$ |
+| C841192 | RT9080-33GJ5 | 1 | 27578 | Extended | 0.1197 US$ |
+| C20802 | SMD1206P150TF | 2 | 11303 | Extended | 0.1187 US$ |
+| C426476 | RT9080-18GJ5 | 1 | 24166 | Extended | 0.1085 US$ |
+| C45783 | CL21A226MAQNNNE | 2 | 4127454 | Basic | 0.1084 US$ |
+| C2827694 | PESD5V0S1BA | 2 | 330845 | Extended | 0.0359 US$ |
+| C96446 | CL10A106MA8NRNC | 7 | 6169187 | Basic | 0.0342 US$ |
+| C77131 | NCP15XH103F03RC | 1 | 297640 | Extended | 0.0164 US$ |
+| C19666 | CL10A475KO8NNNC | 1 | 3491652 | Basic | 0.0150 US$ |
+| C2286 | KT-0603R | 1 | 5811608 | Basic | 0.0077 US$ |
+| C52923 | CL05A105KA5NQNC | 4 | 10297277 | Basic | 0.0057 US$ |
+| C53547 | 0402CG102J500NT | 3 | 472713 | Extended | 0.0050 US$ |
+| C1525 | CL05B104KO5NNNC | 9 | 38159072 | Basic | 0.0024 US$ |
+| C25792 | 0402WGF4702TCE | 3 | 5709489 | Basic | 0.0019 US$ |
+| C1555 | 0402CG220J500NT | 2 | 2386346 | Basic | 0.0018 US$ |
+| C11702 | 0402WGF1001TCE | 2 | 31451687 | Basic | 0.0013 US$ |
+| C25891 | 0402WGF3601TCE | 1 | 487032 | Extended | 0.0012 US$ |
+| C4940 | 0402WGF3401TCE | 1 | 222670 | Extended | 0.0012 US$ |
+| C26083 | 0402WGF1004TCE | 2 | 2343781 | Basic | 0.0012 US$ |
+| C25879 | 0402WGF2201TCE | 2 | 3056064 | Basic | 0.0011 US$ |
+| C25744 | 0402WGF1002TCE | 12 | 21096688 | Basic | 0.0010 US$ |
+| C25741 | 0402WGF1003TCE | 2 | 10413373 | Basic | 0.0009 US$ |
+| C20627095 | ? | 1 | sin respuesta | Extended | ? |
+
+- Piezas sin existencias para 5 placas: C20627095, C5189642, C1519515
+
+## Estado de fabricación
+- Diseño verificado por software (KiCad 9 en el CI): **sí**
+- Apto para solicitar prototipos: **sí, pendiente de validación física**
+- Validado físicamente: **no** (no se ha fabricado ni medido ninguna placa)
+
+## Limitaciones pendientes (ver README)
+- MAX30003CTI+ sin existencias en LCSC el 15/11/2026: pedirlo por Global Sourcing de JLCPCB o enviarlo (Mouser/DigiKey).
+- MAX30003: rango comercial 0–70 °C (hoja de ADI); suficiente para el entrenamiento, no para frío extremo.
+- BNO085 por I²C (0x4A) con los mismos GPIO que el XIAO: el firmware 0.5.0 sirve sin cambios; ejes de la placa a comprobar.
+- Oscilador SiT1533 con la huella de EasyEDA/LCSC: si falta, montar R46 (0 Ω) y el firmware genera el reloj en GPIO4.
+- Electrodos: 47 kΩ en serie + 1 nF C0G; paso alto analógico ≈ 3,5 Hz (C50 100 nF C0G); C51 1 µF sin montar para 0,35 Hz.
+- Primera programación por los pads TP4/TP5 (USB nativo) con pinza de pogo-pins; después por radio.
+- Pogos de 3 contactos y batería LP403048 por hilos; cápsula REV 6 (más pequeña) pendiente de CAD.
+- Nada de esto se ha fabricado ni medido: no es un prototipo validado.

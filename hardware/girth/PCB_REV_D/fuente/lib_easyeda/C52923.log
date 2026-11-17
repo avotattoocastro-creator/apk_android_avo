@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C52923
+       Symbol name : CL05A105KA5NQNC
+       Library path : lib_easyeda/C52923.kicad_sym
+[INFO] Created Kicad footprint for ID: C52923
+       Footprint name: C0402
+       Footprint path: lib_easyeda/C52923.pretty/C0402.kicad_mod
+[INFO] Created 3D model for ID: C52923
+       3D model name: C0402_L1.0-W0.5-H0.5
+       3D model path (wrl): lib_easyeda/C52923.3dshapes/C0402_L1.0-W0.5-H0.5.wrl
+       3D model path (step): lib_easyeda/C52923.3dshapes/C0402_L1.0-W0.5-H0.5.step
+-- easyeda2kicad.py v1.0.1 --

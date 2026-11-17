@@ -1,0 +1,11 @@
+# Contraste ODB++ ↔ Gerber/Excellon de la misma placa
+
+- Taladros: ODB++ 186 · Excellon 186 · sin pareja en el Excellon: 0 · diámetro distinto: 0
+- Diámetros en el Excellon: {0.65: 2, 0.3: 176, 0.8: 4, 0.6: 4}
+- Diámetros en el ODB++: {0.65: 2, 0.3: 176, 0.8: 4, 0.6: 4}
+- Capa F.CU: pads ODB++ 517 + pads «custom» de la placa (superficies en ODB++) 2 = 519 · flashes (D03) en AVO_GIRTH_PCB-F_Cu.gtl: 519 → IGUAL
+- Capa IN1.CU: pads ODB++ 184 + pads «custom» de la placa (superficies en ODB++) 0 = 184 · flashes (D03) en AVO_GIRTH_PCB-In1_Cu.g1: 184 → IGUAL
+- Capa IN2.CU: pads ODB++ 184 + pads «custom» de la placa (superficies en ODB++) 0 = 184 · flashes (D03) en AVO_GIRTH_PCB-In2_Cu.g2: 184 → IGUAL
+- Capa B.CU: pads ODB++ 185 + pads «custom» de la placa (superficies en ODB++) 0 = 185 · flashes (D03) en AVO_GIRTH_PCB-B_Cu.gbl: 185 → IGUAL
+
+RESULTADO: COINCIDEN

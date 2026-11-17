@@ -1,0 +1,215 @@
+{
+ "rejilla_mm": [
+  0.05,
+  0.05,
+  0.25
+ ],
+ "+X": {
+  "cerrado_mm3": {
+   "soporte": 0.0,
+   "base": 0.0,
+   "tapa": 0.0
+  },
+  "apertura": {
+   "0": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 5736
+   },
+   "-2": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 4200
+   },
+   "-4": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 2664
+   },
+   "-6": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 1464
+   },
+   "-8": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 432
+   },
+   "-9": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 72
+   },
+   "-9.5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-10": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-11": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-12": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-13": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-14": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-14.5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.045,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-15": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.176,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-16": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.835,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-18": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 4.51,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-20": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 9.1,
+    "puntos_del_diente_en_el_cerco": 0
+   }
+  },
+  "angulo_diente_fuera_grados": -9.5,
+  "angulo_tope_contra_la_capsula_grados": -14.5,
+  "recorrido_pulsador_al_soltar_mm": 1.4
+ },
+ "-X": {
+  "cerrado_mm3": {
+   "soporte": 0.0,
+   "base": 0.0,
+   "tapa": 0.0
+  },
+  "apertura": {
+   "0": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 3824
+   },
+   "-2": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 2800
+   },
+   "-4": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 1776
+   },
+   "-6": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 976
+   },
+   "-8": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 288
+   },
+   "-9": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 48
+   },
+   "-9.5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-10": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-11": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-12": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-13": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-14": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.0,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-14.5": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.03,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-15": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.126,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-16": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 0.64,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-18": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 3.456,
+    "puntos_del_diente_en_el_cerco": 0
+   },
+   "-20": {
+    "soporte_mm3": 0.0,
+    "capsula_mm3": 7.456,
+    "puntos_del_diente_en_el_cerco": 0
+   }
+  },
+  "angulo_diente_fuera_grados": -9.5,
+  "angulo_tope_contra_la_capsula_grados": -14.5,
+  "recorrido_pulsador_al_soltar_mm": 1.4
+ },
+ "balancin": {
+  "eje_capsula_xz_mm": [
+   33.0,
+   7.0
+  ],
+  "brazo_pulsador_mm": 8.5,
+  "brazo_iman_mm": 6.3,
+  "brazo_diente_mm": 4.5,
+  "separacion_imanes_mm": 1.15,
+  "diente": "recto, entra 1.0 mm; bisel de entrada abajo",
+  "rozamiento_minimo_para_bloquear_con_carga": 0.222,
+  "imanes": "2 + 2 Ø5 × 1 apilados por lado (balancín y cerco), en atracción: 8 en total",
+  "pasadores": "4 × ISO 2338 Ø2 × 6 (2 por balancín, a presión en las aletas)"
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 1610313,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Analog Front End (AFE)",
+     "erpComponentName": "MAX30003 \u8d85\u4f4e\u529f\u8017\u5355\u901a\u9053\u96c6\u6210\u751f\u7269\u7535bit \uff08ECG\uff0cR-to-R\u68c0\u6d4b\uff09AFE",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/analog-front-end-afe_analog-devices-inc-maxim-integrated-max30003cti_C1519515.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 20.2258
+      },
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 20.2258
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 20.2258
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 19.1492
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 19.1492
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 19.1492
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 3,
+       "endNumber": 4,
+       "productPrice": 19.4835
+      },
+      {
+       "startNumber": 5,
+       "endNumber": 29,
+       "productPrice": 19.4835
+      },
+      {
+       "startNumber": 32,
+       "endNumber": 33,
+       "productPrice": 18.4465
+      },
+      {
+       "startNumber": 34,
+       "endNumber": -1,
+       "productPrice": 18.4465
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 31,
+       "productPrice": 18.4465
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 2,
+       "productPrice": 19.4835
+      }
+     ],
+     "firstSortAccessId": "c877ed3d2ecc437e878596dcd3a1f69a",
+     "secondSortAccessId": "d329d3b3c33141418f29bbf81f8ab5c1",
+     "canPresaleNumber": -9,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "1610313-MAX30003CTI/C1519515",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 490,
+     "shopCostPrice": 109.73,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 20.2258,
+     "componentCode": "C1519515",
+     "componentBrandEn": "Analog Devices Inc./Maxim Integrated",
+     "componentModelEn": "MAX30003CTI+",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767059135261360128-C1519515-front.jpg?x-oss-date=20261115T085623Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b5a76b8b9d2b6167ebc551fdf1f17267487aa9df515db73532b00e71f7607b0e",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2201180500_Analog-Devices-Inc--Maxim-Integrated-MAX30003CTI-_C1519515.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589032899178352640-C1519515.pdf?response-content-disposition=attachment%3B%20filename%3DC1519515.pdf%3B%20filename%2A%3DUTF-8%27%27C1519515.pdf&x-oss-date=20261115T085623Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rjH8z1vqVZ%2F7CFW2TUnFVnQbx6nI382zz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qcEm7xQ0557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWqqo0tBnLJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIVMzgKqKWD5sagAF19n9HO4brk7A0GiLpZMubsdkoTQipDST2QS%2Flnf6cU3Le6ds4y1i77z2PpOEeeEjN%2FsWY9jn8hrwJdu0qoXOFiPH0gEA9LZy%2Ft8Mgy8Z%2B2Kc6Mtq6Uafp0HMFRoTIQiJN7qookwloPwGIJVExlXiXNb7dugxNZLARtvKwPLhsnCAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYVTvASzxHrnYBexU2M3VsHW9%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d393f61824b9c61d6848fcad2a6c01bb6ecffa8414c000c3c8c078a5ff4b370a",
+     "dataManualOfficialLink": "",
+     "componentName": "MAXIM MAX30003CTI+",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8767059136305741824-C1519515-front.jpg?x-oss-date=20261115T085623Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5rnetvSvJxK1IG6WE%2FXr3IMf751iqTjlzz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qfce1hc0557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jDYGVlpdeDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5X9K1B75ch3ARqAATdzlQJDr%2FpL%2B5m%2FAly2W5mkW%2F975aAon%2FE1Y90EVg9efuXoPkLSZnyhz%2B8xEDcRCE9tIUr2BA2Hyx1jbOwwsySj%2BnZA9Rk8XIjdQNi0sNDj5Hvg09RJfV2%2Fiu0Pqv8V5o4QaaQLQLT%2FkRX0%2BjNDCrCMYZy9zssDCdLxTKHNyHapIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYR1afQCkcCQZifKrYs1YeaHu%2F20261115%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=9ccd526f3f1ccb7fa4b78e5b2b27ef874b7326414b3ba3b96e0033ecbc344060",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-28-EP_5x5",
+     "describe": "0.51uA 0\u2103~+70\u2103 1 1.1V~2V 18 1V 32.768kHz\u300112MHz 512Hz 512Hz 96.5dB Programmable gain\u3001Fault detection\u3001ESD protection SPI QFN-28-EP(5x5) Analog Front End (AFE) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Clock Frequency",
+       "attribute_value_name": "32.768kHz\u300112MHz"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+70\u2103"
+      },
+      {
+       "attribute_name_en": "Voltage Reference Value",
+       "attribute_value_name": "1V"
+      },
+      {
+       "attribute_name_en": "S/N Ratio",
+       "attribute_value_name": "96.5dB"
+      },
+      {
+       "attribute_name_en": "Data rate",
+       "attribute_value_name": "512Hz"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.1V~2V"
+      },
+      {
+       "attribute_name_en": "Resolution(Bits)",
+       "attribute_value_name": "18"
+      },
+      {
+       "attribute_name_en": "Quiescent Current (Iq)",
+       "attribute_value_name": "0.51uA"
+      },
+      {
+       "attribute_name_en": "Sampling Rate",
+       "attribute_value_name": "512Hz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Programmable gain\u3001Fault detection\u3001ESD Protection"
+      },
+      {
+       "attribute_name_en": "Number of channels",
+       "attribute_value_name": "1"
+      },
+      {
+       "attribute_name_en": "Interface",
+       "attribute_value_name": "SPI"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Analog Front End (AFE)",
+     "secondSortName": "Data Acquisition",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C1519515</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C1519515"
+ },
+ "message": null
+}

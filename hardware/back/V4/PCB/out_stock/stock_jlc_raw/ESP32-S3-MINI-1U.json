@@ -1,0 +1,698 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 3401551,
+     "componentLibraryType": "expand",
+     "stockCount": 2476,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u4e0d\u5e26\u56fa\u4ef6 \u5c0f\u5c3a\u5bf8\u6a21\u7ec4\uff0c\u96c6\u62102.4GHz Wi-Fi(802.11b/g/n)+Bluetooth 5(LE)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-s3-mini-1u-n8_C2980299.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.7689
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.2707
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.9757
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.5988
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.4333
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.3579
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.4667
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.3073
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.8298
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.5939
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.2347
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.114
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 1765,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "3401551-ESP32_S3_MINI_1UN8/C2980299",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 16.2951,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 4.7689,
+     "componentCode": "C2980299",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-S3-MINI-1U-N8",
+     "componentImageUrl": "https://assets.lcsc.com/images/lcsc/900x900/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_front.jpg",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411121055_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589039847813599232-C2980299.pdf?response-content-disposition=attachment%3B%20filename%3DC2980299.pdf%3B%20filename%2A%3DUTF-8%27%27C2980299.pdf&x-oss-date=20261030T114521Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d7f3d33e31d4aeb668c0e993fd120726cd028ff69db9d0057ab579b155ae5a06",
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-S3-MINI-1U-N8",
+     "minImage": "https://assets.lcsc.com/images/lcsc/96x96/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_front.jpg",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_front.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_front.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_back.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_back.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": "https://assets.lcsc.com/images/lcsc/96x96/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_blank.jpg",
+       "productImageAccessId": null,
+       "productBigImage": "https://assets.lcsc.com/images/lcsc/900x900/20230123_Espressif-Systems-ESP32-S3-MINI-1U-N8_C2980299_blank.jpg",
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "VFQFN-56-EP",
+     "describe": "-40\u2103~+105\u2103 -98.4dBm 1.8V~3.6V\u30013V~3.6V 2.4GHz 21dBm 340mA 88mA Bluetooth5.0 ESP32-S3 UART\u3001SDIO\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB VFQFN-56-EP WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+105\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-98.4dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "21dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "1.8V~3.6V\u30013V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-S3"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SDIO\u3001SPI\u3001I2C\u3001I2S\u3001JTAG\u3001USB"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "88mA"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "340mA"
+      },
+      {
+       "attribute_name_en": "Wireless Standard",
+       "attribute_value_name": "Bluetooth5.0"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-S3-MINI-1U</span>-N8",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23788626,
+     "componentLibraryType": "expand",
+     "stockCount": 288,
+     "componentTypeEn": "WiFi Modules",
+     "erpComponentName": "\u4e0d\u5e26\u56fa\u4ef6 \u4e0d\u5e26\u56fa\u4ef6 \u5c0f\u5c3a\u5bf8\u6a21\u7ec4\uff0c\u96c6\u62102.4GHz Wi-Fi(802.11b/g/n)+Bluetooth 5(LE)",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wifi-modules_espressif-systems-esp32-s3-mini-1u-n4r2_C22356044.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.8689
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.3592
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 4.056
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.8053
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.6349
+      },
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.5578
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1300,
+       "endNumber": -1,
+       "productPrice": 3.4273
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 4.1992
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.9072
+      },
+      {
+       "startNumber": 650,
+       "endNumber": 1299,
+       "productPrice": 3.5015
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.6902
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 649,
+       "productPrice": 3.6656
+      }
+     ],
+     "firstSortAccessId": "3f47180447344e189d9b9aa7555c0cb3",
+     "secondSortAccessId": "c5a9b644133240c89506f8439edd2b11",
+     "canPresaleNumber": 272,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "23788626-ESP32_S3_MINI_1UN4R2/C22356044",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 650,
+     "shopCostPrice": 16.7,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 4.8689,
+     "componentCode": "C22356044",
+     "componentBrandEn": "Espressif Systems",
+     "componentModelEn": "ESP32-S3-MINI-1U-N4R2",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585226190555004928-C22356044/C22356044-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114521Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6823b308748db6f493f279879f2e1966702319b8d73c40c6815e559775aa62b4",
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2403111352_Espressif-Systems-ESP32-S3-MINI-1U-N4R2_C22356044.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590908581506473984-C22356044.pdf?response-content-disposition=attachment%3B%20filename%3DC22356044.pdf%3B%20filename%2A%3DUTF-8%27%27C22356044.pdf&x-oss-date=20261030T114521Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=264552bd33a96947fb96ad3e1112d62f81932e37a7e814998b809f4ce27cfb73",
+     "dataManualOfficialLink": "",
+     "componentName": "ESPRESSIF ESP32-S3-MINI-1U-N4R2",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8585226191493718016-C22356044/C22356044-%E6%AD%A3%E9%9D%A2.jpg?x-oss-date=20261030T114521Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=a0d967938350579f4ee4fcc005461efa3b72a2df62b47b9734b5e6f74f931094",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,15.4x15.4mm",
+     "describe": "-40\u2103~+85\u2103 -98.2dBm 2.4GHz 20.5dBm 355mA 3V~3.6V 95mA ESP32-S3FH4R2 Integrated Bluetooth function\u3001Support USB interface UART\u3001SPI\u3001I2C\u3001I2S\u3001USB SMD,15.4x15.4mm WiFi Modules ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Sensitivity",
+       "attribute_value_name": "-98.2dBm"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "20.5dBm"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "3V~3.6V"
+      },
+      {
+       "attribute_name_en": "Frequency",
+       "attribute_value_name": "2.4GHz"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Integrated Bluetooth function\u3001Support USB interface"
+      },
+      {
+       "attribute_name_en": "Utilized IC / Part",
+       "attribute_value_name": "ESP32-S3FH4R2"
+      },
+      {
+       "attribute_name_en": "Interface Type",
+       "attribute_value_name": "UART\u3001SPI\u3001I2C\u3001I2S\u3001USB"
+      },
+      {
+       "attribute_name_en": "Send  Current",
+       "attribute_value_name": "355mA"
+      },
+      {
+       "attribute_name_en": "Receive  Current",
+       "attribute_value_name": "95mA"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "WiFi Modules",
+     "secondSortName": "IoT/Communication Modules",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-S3-MINI-1U</span>-N4R2",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 23311907,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "ESP32-S3-MINI-1U-N4R2",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "23311907-ESP32_S3_MINI_1UN4R2/C9900091526",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 10,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 10,
+     "minPurchaseNum": 10,
+     "initialPrice": 0.0399,
+     "componentCode": "C9900091526",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-S3-MINI-1U-N4R2",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-S3-MINI-1U-N4R2",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "module",
+     "describe": "module New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-S3-MINI-1U</span>-N4R2",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 24105947,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "New Arrivals",
+     "erpComponentName": "ESP32-S3-MINI-1U-4NR2",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": "b1a62a896e084350a4358222151368b0",
+     "secondSortAccessId": "0d8193397208416a9e2a837f72446a55",
+     "canPresaleNumber": 0,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "24105947-ESP32_S3_MINI_1U4NR2/C9900113988",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900113988",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-S3-MINI-1U-4NR2",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-S3-MINI-1U-4NR2",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "LGA-73",
+     "describe": "LGA-73 New Arrivals ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "New Arrivals",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-S3-MINI-1U</span>-4NR2",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 58401812,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011ESP32-S3-MINI-1U-N8||-1-N8",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "C9900277493",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900277493",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "ESP32-S3-MINI-1U-N8||-1-N8",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT ESP32-S3-MINI-1U-N8||-1-N8",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,15.4x15.4mm",
+     "describe": "SMD,15.4x15.4mm SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>ESP32-S3-MINI-1U</span>-N8||-1-N8",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "ESP32-S3-MINI-1U"
+ },
+ "message": null
+}

@@ -1,0 +1,254 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 1,
+   "list": [
+    {
+     "componentId": 73152,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "LED Indication - Discrete",
+     "erpComponentName": "\u7fe0\u7eff \u505c\u4ea7",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/led-indication-discrete_everlight-elec-19-217-ghc-yr1s2-3t_C72043.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.024
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.0197
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0172
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0159
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0147
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.014
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 500,
+       "endNumber": 2999,
+       "productPrice": 0.019
+      },
+      {
+       "startNumber": 24000,
+       "endNumber": 50999,
+       "productPrice": 0.0141
+      },
+      {
+       "startNumber": 6000,
+       "endNumber": 23999,
+       "productPrice": 0.0153
+      },
+      {
+       "startNumber": 3000,
+       "endNumber": 5999,
+       "productPrice": 0.0166
+      },
+      {
+       "startNumber": 51000,
+       "endNumber": -1,
+       "productPrice": 0.0135
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 499,
+       "productPrice": 0.0231
+      }
+     ],
+     "firstSortAccessId": "2a1317eec5064bbb856a96033019985f",
+     "secondSortAccessId": "f28f64fde70b4189a16bd6c99251d5c8",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "EverlightElec-19_217_GHC_YR1S23T/C72043",
+     "leastPatchNumber": 20,
+     "lossNumber": 6,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 0.0482,
+     "preMinPurchaseNum": 376,
+     "minPurchaseNum": 376,
+     "initialPrice": 0.024,
+     "componentCode": "C72043",
+     "componentBrandEn": "Everlight Elec",
+     "componentModelEn": "19-217/GHC-YR1S2/3T",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8762382764974977024",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "EVERLIGHT 19-217/GHC-YR1S2/3T",
+     "minImage": "",
+     "minImageAccessId": "8762382766203637760",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "0603",
+     "describe": "-40\u2103~+85\u2103 110mW 120\u00b0 199mcd 20mA 3.3V 518nm 520nm~535nm Discrete Diode Emerald Green Water Clear 0603 LED Indication - Discrete ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Mounting Style",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Wavelength - Dominant",
+       "attribute_value_name": "520nm~535nm"
+      },
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Color Temperature",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Test Current",
+       "attribute_value_name": "20mA"
+      },
+      {
+       "attribute_name_en": "Viewing Angle",
+       "attribute_value_name": "120\u00b0"
+      },
+      {
+       "attribute_name_en": "Lamp Holder Type",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Luminous Intensity",
+       "attribute_value_name": "199mcd"
+      },
+      {
+       "attribute_name_en": "Power(Watts)",
+       "attribute_value_name": "110mW"
+      },
+      {
+       "attribute_name_en": "Diode Configuration",
+       "attribute_value_name": "Discrete Diode"
+      },
+      {
+       "attribute_name_en": "Illumination Color",
+       "attribute_value_name": "Emerald Green"
+      },
+      {
+       "attribute_name_en": "Lens Color",
+       "attribute_value_name": "Water Clear"
+      },
+      {
+       "attribute_name_en": "Peak Wavelength",
+       "attribute_value_name": "518nm"
+      },
+      {
+       "attribute_name_en": "Voltage - Forward(Vf)",
+       "attribute_value_name": "3.3V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "LED Indication - Discrete",
+     "secondSortName": "Optoelectronics",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C72043</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C72043"
+ },
+ "message": null
+}

@@ -1,0 +1,63 @@
+name: Build AVO CHEST V3.7.1 RC2 OTA version fix
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - '.github/workflows/build-chest-v371-rc2.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 3.3.12
+        run: |
+          set -euo pipefail
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Prepare 3.7.1 RC2 from uploaded 3.7.0 RC2 sources
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/avo-rc2"
+          unzip -q firmware/chest/V3_7_0_RC2/AVO_CHEST_V3_7_0_RC2_UI_CORRECTED_UNVERIFIED.zip -d "$RUNNER_TEMP/avo-rc2"
+          cd "$RUNNER_TEMP/avo-rc2"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('lib/avo_core/src/avo_version.h')
+          s=p.read_text()
+          assert '#define AVO_FW_VERSION "3.7.0-rc2"' in s
+          assert '#define AVO_FW_VERSION_NUM 0x030700' in s
+          s=s.replace('#define AVO_FW_VERSION "3.7.0-rc2"', '#define AVO_FW_VERSION "3.7.1-rc2"')
+          s=s.replace('#define AVO_FW_VERSION_NUM 0x030700', '#define AVO_FW_VERSION_NUM 0x030701')
+          p.write_text(s)
+          assert '3.7.1-rc2' in p.read_text()
+          PY
+      - name: Verify source and compile
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/avo-rc2"
+          python3 verify_source.py
+          python3 verify_ota_interlock.py
+          for t in tests/test_*.py; do python3 "$t"; done
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Check image and label unverified
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('firmware_out/AVO_CHEST_V3_5_0.ino.bin')
+          assert p.is_file() and 100000 < p.stat().st_size < 6291456
+          assert p.read_bytes()[0]==0xe9
+          p.rename('firmware_out/AVO_CHEST_V3_7_1_RC2_OTA_UNVERIFIED.bin')
+          PY
+          sha256sum firmware_out/AVO_CHEST_V3_7_1_RC2_OTA_UNVERIFIED.bin > firmware_out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-CHEST-V3-7-1-RC2-UNVERIFIED
+          path: firmware_out/
+          if-no-files-found: warn

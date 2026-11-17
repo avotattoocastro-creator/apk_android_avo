@@ -1,0 +1,137 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-30T11:47:19+0000",
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "9.0.9",
+    "schematic_parity": [],
+    "source": "AVO_BACK_V4_PCB.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [CHG_ILIM] on F.Cu, length 0.1414 mm",
+                    "pos": {
+                        "x": 85.775,
+                        "y": 95.275
+                    },
+                    "uuid": "321f1ae8-db90-5664-a385-b5ad25716b1e"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [CHG_ILIM] on F.Cu, length 0.1414 mm",
+                    "pos": {
+                        "x": 88.575,
+                        "y": 95.175
+                    },
+                    "uuid": "7754d9e7-bcd9-5d05-9db4-2641790fc1b7"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [SD_CLK] on F.Cu, length 0.1414 mm",
+                    "pos": {
+                        "x": 80.075,
+                        "y": 114.975
+                    },
+                    "uuid": "e0fdd169-d420-5d63-bb75-378f293f8942"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 68.983,
+                        "y": 123.7
+                    },
+                    "uuid": "566e1beb-cc8b-54ec-8bcf-14d3cf919998"
+                },
+                {
+                    "description": "Circle of MR1 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 120.406
+                    },
+                    "uuid": "4be55da0-8c3f-5fc4-ae89-10410ead0ed7"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by board edge",
+            "items": [
+                {
+                    "description": "Segment on Edge.Cuts",
+                    "pos": {
+                        "x": 65.7,
+                        "y": 76.3
+                    },
+                    "uuid": "3cbc5cf2-4584-5b9c-a32d-7e6318dd59b8"
+                },
+                {
+                    "description": "Circle of MR2 on F.Silkscreen",
+                    "pos": {
+                        "x": 67.8,
+                        "y": 81.925
+                    },
+                    "uuid": "bb3b1144-d689-5842-92ae-6ddc04b69cd2"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_edge_clearance"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'SYS' on B.Silkscreen",
+                    "pos": {
+                        "x": 101.0,
+                        "y": 112.2
+                    },
+                    "uuid": "15d942dd-90ad-5a80-9517-292a8b66b272"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'AVO BACK V4 · REV B · ESP32-S3 · 2026-10-30' on B.Silkscreen",
+                    "pos": {
+                        "x": 88.0,
+                        "y": 109.0
+                    },
+                    "uuid": "630d763a-157c-55f5-bb08-cb3758df51d6"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        }
+    ]
+}

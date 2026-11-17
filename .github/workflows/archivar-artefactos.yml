@@ -1,0 +1,50 @@
+name: Archivo · etiquetas de respaldo y binarios permanentes
+
+# Solo se dispara al subir la rama de archivo. No compila nada ni toca firmas ni TestFlight.
+on:
+  push:
+    branches:
+      - 'archivo/todo-2026-11-17'
+    paths:
+      - '.github/workflows/archivar-artefactos.yml'
+      - 'archivo/herramientas/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: archivo-todo
+  cancel-in-progress: false
+
+jobs:
+  archivar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Identidad git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+      - name: Etiquetas backup/2026-11-12/* (las 53 ramas auditadas el 12/11)
+        run: |
+          bash docs/crear_tags_backup.sh
+          git push origin 'refs/tags/backup/2026-11-12/*:refs/tags/backup/2026-11-12/*'
+      - name: Etiquetas backup/2026-11-17/* (todas las ramas tal como están hoy)
+        run: |
+          n=0
+          for r in $(git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin); do
+            [ "$r" = HEAD ] && continue
+            git tag -a "backup/2026-11-17/$r" "origin/$r" -m "Respaldo de $r (auditoría GitHub 17/11/2026)" 2>/dev/null && n=$((n+1)) || echo "ya existe: $r"
+          done
+          echo "Etiquetas nuevas: $n"
+          git push origin 'refs/tags/backup/2026-11-17/*:refs/tags/backup/2026-11-17/*'
+          echo "Total etiquetas backup en origin:"; git ls-remote --tags origin 'backup/*' | grep -vc '\^{}'
+      - name: Binarios (última versión de cada artefacto) al repositorio
+        run: python3 archivo/herramientas/archivar_artefactos.py

@@ -1,0 +1,54 @@
+name: Build AVO CHEST V3.6.1 R8 (UNVERIFIED)
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/avo-performance-horse]
+    paths:
+      - 'firmware/chest/V3_6_1_R8/**'
+      - '.github/workflows/build-chest-r8.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact R8 source archive
+        run: test -s firmware/chest/V3_6_1_R8/AVO_CHEST_V3_6_1_R8_STRICT_SD_SHUTDOWN_UNVERIFIED.zip
+      - uses: arduino/setup-arduino-cli@v2
+      - name: Install ESP32 3.3.12
+        run: |
+          arduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core install esp32:esp32@3.3.12 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+      - name: Test and compile exact R8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/avo-r8"
+          unzip -q firmware/chest/V3_6_1_R8/AVO_CHEST_V3_6_1_R8_STRICT_SD_SHUTDOWN_UNVERIFIED.zip -d "$RUNNER_TEMP/avo-r8"
+          cd "$RUNNER_TEMP/avo-r8"
+          python3 verify_source.py
+          python3 verify_ota_interlock.py
+          for t in tests/test_*.py; do python3 "$t"; done
+          FQBN_VENDOR=esp32 bash build_chest.sh "$GITHUB_WORKSPACE/firmware_out"
+      - name: Validate unsigned image
+        shell: bash
+        run: |
+          set -euo pipefail
+          image=firmware_out/AVO_CHEST_V3_5_0.ino.bin
+          test -s "$image"
+          python3 - "$image" <<'PY'
+          import pathlib,sys
+          b=pathlib.Path(sys.argv[1]).read_bytes()
+          assert b[0]==0xE9, 'Invalid ESP image header'
+          assert len(b)<6291456, 'Image exceeds expected OTA slot'
+          PY
+          cp "$image" firmware_out/AVO_CHEST_V3_6_1_R8_UNSIGNED_UNVERIFIED.bin
+          sha256sum firmware_out/AVO_CHEST_V3_6_1_R8_UNSIGNED_UNVERIFIED.bin > firmware_out/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AVO-CHEST-V3-6-1-R8-UNVERIFIED
+          path: firmware_out/
+          if-no-files-found: warn

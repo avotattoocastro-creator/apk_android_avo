@@ -1,0 +1,925 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 5,
+   "list": [
+    {
+     "componentId": 56690,
+     "componentLibraryType": "expand",
+     "stockCount": 476,
+     "componentTypeEn": "Wireless Charge-Discharge ICs",
+     "erpComponentName": "\u9ad8\u5ea6\u96c6\u6210\u7684\u65e0\u7ebf\u63a5\u6536\u5668Qi\uff08WPC V1.1\uff09\u517c\u5bb9\u7535\u6e90",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wireless-charge-discharge-ics_texas-instruments-bq51013brhlr_C55663.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.6045
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.123
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.8217
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.3288
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.1896
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.129
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 3.4722
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.0084
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 2.7182
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.1092
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.0509
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.2433
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "a4e0cb210a864d7c8e22b35a329dbfc6",
+     "canPresaleNumber": 390,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ51013BRHLR/C55663",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 9.76433,
+     "preMinPurchaseNum": 3,
+     "minPurchaseNum": 1,
+     "initialPrice": 3.6045,
+     "componentCode": "C55663",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ51013BRHLR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8553684633905475584",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_1809192124_Texas-Instruments-BQ51013BRHLR_C55663.pdf",
+     "dataManualFileAccessId": "8586176774812143616",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq51013b",
+     "componentName": "TI BQ51013BRHLR",
+     "minImage": "",
+     "minImageAccessId": "8553684634530562048",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "VQFN-20(4.5x3.5)",
+     "describe": "0\u2103~+125\u2103 1.5A 4V~10V 5V Qi v1.1 Receiver Side (with Charging Management) VQFN-20(4.5x3.5) Wireless Charge-Discharge ICs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Receiver Side (with Charging Management)"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4V~10V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over temperature protection\u3001Overcurrent Protection\u3001Foreign object detection\u3001Under-voltage lockout\u3001Status display function"
+      },
+      {
+       "attribute_name_en": "Protocol",
+       "attribute_value_name": "Qi v1.1"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wireless Charge-Discharge ICs",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BQ51013B</span>RHLR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2742063,
+     "componentLibraryType": "expand",
+     "stockCount": 36,
+     "componentTypeEn": "Power Management - Specialized",
+     "erpComponentName": "\u7b26\u5408Qi(WPC v1.2)\u6807\u51c6\u7684bq51013B\u9ad8\u5ea6\u96c6\u6210\u5f0f\u65e0\u7ebf\u63a5\u6536\u5668\u7535\u6e90",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/power-management-specialized_texas-instruments-bq51013brhlt_C2650154.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 7.0075
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.2493
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.7646
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.2946
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.2946
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.2946
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 5.553
+      },
+      {
+       "startNumber": 104,
+       "endNumber": -1,
+       "productPrice": 5.1003
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 101,
+       "productPrice": 5.1003
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 6.7504
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 6.02
+      },
+      {
+       "startNumber": 102,
+       "endNumber": 103,
+       "productPrice": 5.1003
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "c50e17ec270b4930bd991019bd146013",
+     "canPresaleNumber": 36,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ51013BRHLT/C2650154",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 25.63859,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 7.0075,
+     "componentCode": "C2650154",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ51013BRHLT",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8583665233923608576",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2303011730_Texas-Instruments-BQ51013BRHLT_C2650154.pdf",
+     "dataManualFileAccessId": "8589041950272339968",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq51013b",
+     "componentName": "TI BQ51013BRHLT",
+     "minImage": "",
+     "minImageAccessId": "8583665234787905536",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "VQFN-20-EP(3.5x4.5)",
+     "describe": "VQFN-20-EP(3.5x4.5) Power Management - Specialized ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Input Voltage",
+       "attribute_value_name": "4V~10V"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Built-in LDO regulator\u3001Overcurrent Protection\u3001Adjustable current limiting\u3001Protection latch\u3001Light load efficient mode"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Power Management - Specialized",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BQ51013B</span>RHLT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2248008,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wireless Charge-Discharge ICs",
+     "erpComponentName": "\u7b26\u5408Qi\uff08WPC v1.2\uff09\u6807\u51c6\u7684\u9ad8\u5ea6\u96c6\u6210\u5f0f\u65e0\u7ebf\u63a5\u6536\u5668\u7535\u6e90",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wireless-charge-discharge-ics_texas-instruments-bq51013byfpt_C2155959.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.9087
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.9087
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 5.9087
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 2.2878
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.2076
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.1667
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 5.6918
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.0871
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.6918
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 2.2039
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.6918
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.1266
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "a4e0cb210a864d7c8e22b35a329dbfc6",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": "",
+     "urlSuffix": "TexasInstruments-BQ51013BYFPT/C2155959",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": "",
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.9087,
+     "componentCode": "C2155959",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ51013BYFPT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302221201_Texas-Instruments-BQ51013BYFPT_C2155959.pdf",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "TI BQ51013BYFPT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DSBGA-28",
+     "describe": "0\u2103~+125\u2103 4V~10V 5W Receiver DSBGA-28 Wireless Charge-Discharge ICs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Receiver"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "5W"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4V~10V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over temperature protection\u3001Foreign object detection\u3001Undervoltage lockout\u3001Status display function"
+      },
+      {
+       "attribute_name_en": "Protocol",
+       "attribute_value_name": "Qi v1.2"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wireless Charge-Discharge ICs",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BQ51013B</span>YFPT",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 2248019,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Wireless Charge-Discharge ICs",
+     "erpComponentName": "\u7b26\u5408Qi\uff08WPC v1.2\uff09\u6807\u51c6\u7684\u9ad8\u5ea6\u96c6\u6210\u5f0f\u65e0\u7ebf\u63a5\u6536\u5668\u7535\u6e90",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wireless-charge-discharge-ics_texas-instruments-bq51013byfpr_C2155970.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.7933
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.5231
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.3527
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.1792
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.1005
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.0662
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 1.7275
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 1.3031
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 1.1359
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 1.4672
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 1.0602
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 1.027
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "a4e0cb210a864d7c8e22b35a329dbfc6",
+     "canPresaleNumber": -2,
+     "componentProductType": 2,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ51013BYFPR/C2155970",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 5.5,
+     "preMinPurchaseNum": 6,
+     "minPurchaseNum": 6,
+     "initialPrice": 1.7933,
+     "componentCode": "C2155970",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ51013BYFPR",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8576889696490094592",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2410121753_Texas-Instruments-BQ51013BYFPR_C2155970.pdf",
+     "dataManualFileAccessId": "8576889705461846016",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq51013b",
+     "componentName": "TI BQ51013BYFPR",
+     "minImage": "",
+     "minImageAccessId": "8576889697635409920",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "DSBGA-28",
+     "describe": "0\u2103~+125\u2103 1.5A 4V~10V 5V 5W Qi v1.2 Receiver DSBGA-28 Wireless Charge-Discharge ICs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "0\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Receiver"
+      },
+      {
+       "attribute_name_en": "Output Power",
+       "attribute_value_name": "5W"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4V~10V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over temperature protection\u3001Foreign object detection\u3001Under-voltage lockout\u3001Status display function"
+      },
+      {
+       "attribute_name_en": "Protocol",
+       "attribute_value_name": "Qi v1.2"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wireless Charge-Discharge ICs",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BQ51013B</span>YFPR",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 3750619,
+     "componentLibraryType": "expand",
+     "stockCount": 2,
+     "componentTypeEn": "Wireless Charge-Discharge ICs",
+     "erpComponentName": "\u7b26\u5408Qi(WPCv1.2)\u6807\u51c6\u7684\u6c7d\u8f66\u7c7b\u9ad8\u5ea6\u96c6\u6210\u5f0f\u65e0\u7ebf\u63a5\u6536\u5668\u7535\u6e90",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/wireless-charge-discharge-ics_texas-instruments-bq51013bqwrhlrq1_C3188677.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.5707
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.9042
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.5079
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 3.1067
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.9216
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.8381
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 3.7609
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.8144
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.7339
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 99,
+       "productPrice": 3.3792
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 4.403
+      },
+      {
+       "startNumber": 100,
+       "endNumber": 499,
+       "productPrice": 2.9927
+      }
+     ],
+     "firstSortAccessId": "a7ca7be1124b46818df6480f00698e25",
+     "secondSortAccessId": "a4e0cb210a864d7c8e22b35a329dbfc6",
+     "canPresaleNumber": 2,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "TexasInstruments-BQ51013BQWRHLRQ1/C3188677",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3000,
+     "shopCostPrice": 15.2,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 1,
+     "initialPrice": 4.5707,
+     "componentCode": "C3188677",
+     "componentBrandEn": "Texas Instruments",
+     "componentModelEn": "BQ51013BQWRHLRQ1",
+     "componentImageUrl": "",
+     "productBigImageAccessId": "8585225431922446336",
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.ti.com/cn/lit/gpn/bq51013b-q1",
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "https://www.ti.com/cn/lit/gpn/bq51013b-q1",
+     "componentName": "TI BQ51013BQWRHLRQ1",
+     "minImage": "",
+     "minImageAccessId": "8585225432978870272",
+     "minImageAccessIdUrl": null,
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "VQFN-20(3.5x4.5)",
+     "describe": "-40\u2103~+125\u2103 1.5A 4V~7V 5V Qi v1.2 Receiver VQFN-20(3.5x4.5) Wireless Charge-Discharge ICs ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Type",
+       "attribute_value_name": "Receiver"
+      },
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "4V~7V"
+      },
+      {
+       "attribute_name_en": "Output Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Features",
+       "attribute_value_name": "Over temperature protection\u3001Overcurrent Protection\u3001Foreign object detection\u3001Undervoltage lockout\u3001Status display function"
+      },
+      {
+       "attribute_name_en": "Protocol",
+       "attribute_value_name": "Qi v1.2"
+      },
+      {
+       "attribute_name_en": "Output Voltage",
+       "attribute_value_name": "5V"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Wireless Charge-Discharge ICs",
+     "secondSortName": "Power Management (PMIC)",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": "<span class='lucene_highlight_class'>BQ51013B</span>QWRHLRQ1",
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "BQ51013B"
+ },
+ "message": null
+}

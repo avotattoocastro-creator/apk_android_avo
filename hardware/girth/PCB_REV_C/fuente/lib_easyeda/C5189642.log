@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C5189642
+       Symbol name : BNO085_C5189642
+       Library path : lib_easyeda/C5189642.kicad_sym
+[INFO] Created Kicad footprint for ID: C5189642
+       Footprint name: LGA-28_L5.2-W3.8-P0.50-BL
+       Footprint path: lib_easyeda/C5189642.pretty/LGA-28_L5.2-W3.8-P0.50-BL.kicad_mod
+[INFO] Created 3D model for ID: C5189642
+       3D model name: LGA-28_L5.2-W3.8-H1.2-P0.50-BL
+       3D model path (wrl): lib_easyeda/C5189642.3dshapes/LGA-28_L5.2-W3.8-H1.2-P0.50-BL.wrl
+       3D model path (step): lib_easyeda/C5189642.3dshapes/LGA-28_L5.2-W3.8-H1.2-P0.50-BL.step
+-- easyeda2kicad.py v1.0.1 --

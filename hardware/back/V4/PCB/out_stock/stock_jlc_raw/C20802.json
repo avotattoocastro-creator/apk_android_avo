@@ -1,0 +1,1554 @@
+{
+ "code": 200,
+ "data": {
+  "componentPageInfo": {
+   "total": 11,
+   "list": [
+    {
+     "componentId": 21514,
+     "componentLibraryType": "expand",
+     "stockCount": 11691,
+     "componentTypeEn": "Resettable Fuses",
+     "erpComponentName": "6V 35A 1206 \u81ea\u6062\u590d",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/resettable-fuses_ruilon-shenzhen-ruilongyuan-elec-smd1206p150tf_C20802.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1189
+      },
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.0935
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0808
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0713
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0581
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0541
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 50,
+       "endNumber": 149,
+       "productPrice": 0.09
+      },
+      {
+       "startNumber": 7000,
+       "endNumber": -1,
+       "productPrice": 0.0521
+      },
+      {
+       "startNumber": 3500,
+       "endNumber": 6999,
+       "productPrice": 0.0559
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 3499,
+       "productPrice": 0.0687
+      },
+      {
+       "startNumber": 150,
+       "endNumber": 499,
+       "productPrice": 0.0779
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 49,
+       "productPrice": 0.1145
+      }
+     ],
+     "firstSortAccessId": "68f218c9a74e4148a83415d14e926c64",
+     "secondSortAccessId": "5ed5e0b2523d43c896f9b1250e4a9958",
+     "canPresaleNumber": 11589,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "21514-SMD1206P150TF/C20802",
+     "leastPatchNumber": 5,
+     "lossNumber": 2,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 3500,
+     "shopCostPrice": 0.28,
+     "preMinPurchaseNum": 97,
+     "minPurchaseNum": 1,
+     "initialPrice": 0.1189,
+     "componentCode": "C20802",
+     "componentBrandEn": "RUILON(Shenzhen Ruilongyuan Elec)",
+     "componentModelEn": "SMD1206P150TF",
+     "componentImageUrl": "",
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352261670617088-C20802-front.jpg?x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=c19d513d79bdfd30cd6a3a597862b22b8e16436740ceb34d79abd37747a4d7b1",
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2403081022_RUILON-Shenzhen-Ruilongyuan-Elec-SMD1206P150TF_C20802.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8770256253350092800-C20802.pdf?response-content-disposition=attachment%3B%20filename%3DC20802.pdf%3B%20filename%2A%3DUTF-8%27%27C20802.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=b7ae52fd12c21bee905bea34de8ce5a5fbe24410b58bf960b44e8bcc1ee5c344",
+     "dataManualOfficialLink": "",
+     "componentName": "RUILON SMD1206P150TF",
+     "minImage": "",
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtComponentImageFile/8553352262308151296-C20802-%25E6%25AD%25A3%25E9%259D%25A2.jpg?x-oss-date=20261030T114517Z&x-oss-expires=1799&x-oss-security-token=CAIShQN1q6Ft5B2yfSjIr5vPMcLeq%2BxF87GST1zioTEedNVP1pP4oTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qaV5mwUx557b16cNrbH4M4b6aXeirie7AYjQSNfaZY3iCTTtnTNyxr3XbCirW0ffX7SClZ9gaKZwPGy%2FdiEUK9pKAQFgpcQGT12zU8ygKRn3mGHdIVN1sw5n8wNF5L%2B439eX52iE7gXzwfRHoJ%2FqcNr2LZtuOJw6S82y0Kltc7aGyytMwB9P7KBwgapY2DLOsdyzAl1cpFekS7OOq4UycVAiNvBjSvEY86jG%2BKcm6rCJpePe0A1QOOxZaSPbSb27zdHMcOHTbY5hJe2nYi6WionfaMGu7Vx6exQBPQZNYMEmLHthExElRiFUukYafacxCO3KaN9msMleufIdpz1jrUUPidP%2BDZ%2FNEOvKm14tIm7JZsz45xaVVoUsXWIy3X2pqXh7g3s9Iv5wp90W32nwEhkE5BUxG5Uy6LPZ5ch3ARqAAahL%2BZrL3IDoi6mCFnYLOkGMvmv6yXH5Q7QCcD5djThAr%2BfWCMOicghFaZHUkqPKKBOtsHjEcg9fMAY8bFB4t%2Fq2aT4Kry7DaylNNO1wY%2F7MA0SelThOHchz5GYLYsJ7gpefIfwLbEwaNN9I0unaA52U7twyF636IJdBAjykfUuyIAA%3D&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXzzxjF3dDsyMzSE1KxZc9VSC%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=3a7567c3d312b119cce1e926dda65c0c6114d4f76ba10b18406997c912c221ec",
+     "imageList": [
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      },
+      {
+       "productImage": null,
+       "productImageAccessId": null,
+       "productBigImage": null,
+       "productBigImageAccessId": null,
+       "fileType": null
+      }
+     ],
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "1206",
+     "describe": "-40\u2103~+85\u2103 1.5A 1.9mm 130m\u03a9 1mm 25m\u03a9 3.6mm 300ms 35A 3A 6V 800mW 1206 Resettable Fuses ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      },
+      {
+       "attribute_name_en": "Power Dissipation",
+       "attribute_value_name": "800mW"
+      },
+      {
+       "attribute_name_en": "Voltage - Max",
+       "attribute_value_name": "6V"
+      },
+      {
+       "attribute_name_en": "Time to Trip(Max)",
+       "attribute_value_name": "300ms"
+      },
+      {
+       "attribute_name_en": "Length",
+       "attribute_value_name": "3.6mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+       "attribute_value_name": "25m\u03a9"
+      },
+      {
+       "attribute_name_en": "Trip Current",
+       "attribute_value_name": "3A"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "-"
+      },
+      {
+       "attribute_name_en": "Hold Current",
+       "attribute_value_name": "1.5A"
+      },
+      {
+       "attribute_name_en": "Height",
+       "attribute_value_name": "1mm"
+      },
+      {
+       "attribute_name_en": "Current - Max",
+       "attribute_value_name": "35A"
+      },
+      {
+       "attribute_name_en": "Width",
+       "attribute_value_name": "1.9mm"
+      },
+      {
+       "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+       "attribute_value_name": "130m\u03a9"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Resettable Fuses",
+     "secondSortName": "Circuit Protection",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": "<span class='lucene_highlight_class'>C20802</span>",
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 7545812,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-DV-WT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-wt_C6590947.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.9982
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.9982
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 9.9982
+      },
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 3.9888
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 3.8561
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 3.7905
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 3.8425
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 9.6313
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 3.6514
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 9.6313
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 3.7146
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 9.6313
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DVWT/C6590947",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 24,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 9.9982,
+     "componentCode": "C6590947",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-WT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8555064653335932928-C6590947.pdf?response-content-disposition=attachment%3B%20filename%3DC6590947.pdf%3B%20filename%2A%3DUTF-8%27%27C6590947.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=885ceca5a1447b54203f64ff140852f3bedaa0cdacd906d39d5c2c05811dcb5e",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-WT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699553,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-TH1-WT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-th1-wt_C20373999.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 6.0897
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 5.8865
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 5.7866
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 5.5742
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 5.8663
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 5.6705
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 14.7035
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_TH1WT/C20373999",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 1,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.2636,
+     "componentCode": "C20373999",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-TH1-WT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-TH1-WT_C20373999.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603543160761577472-C20373999.pdf?response-content-disposition=attachment%3B%20filename%3DC20373999.pdf%3B%20filename%2A%3DUTF-8%27%27C20373999.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=af31a43b558a138bcd22d80621e61d9fa53a9575bd655888897755e5eaf9b121",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-TH1-WT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699548,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-DV-NP-WT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-np-wt_C20373994.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 6.0897
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 5.8865
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 5.7866
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 5.8663
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 5.5742
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 5.6705
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.7035
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DV_NPWT/C20373994",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 24,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.2636,
+     "componentCode": "C20373994",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-NP-WT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-NP-WT_C20373994.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8604292570659115008-C20373994.pdf?response-content-disposition=attachment%3B%20filename%3DC20373994.pdf%3B%20filename%2A%3DUTF-8%27%27C20373994.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6a7b8e15c83eccedda6a3be369b61bf1cc110be745edbce672a1506ce80fb2f9",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-NP-WT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699551,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-DV-WT-TR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-wt-tr_C20373997.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.9705
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.8049
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.723
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.5497
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.7881
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.6286
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DV_WTTR/C20373997",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.4564,
+     "componentCode": "C20373997",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-WT-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-DV-WT-TR_C20373997.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603545098781548544-C20373997.pdf?response-content-disposition=attachment%3B%20filename%3DC20373997.pdf%3B%20filename%2A%3DUTF-8%27%27C20373997.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d0aa51f9e5b7b5f4ae571a22baaae8639b7fa8042455e621f7f668406c026b9f",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-WT-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 18568034,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Voltage Controlled Oscillators (VCOs)",
+     "erpComponentName": "CVCO55CC-2080-2080",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/voltage-controlled-oscillators-vcos_crystek-corporation-cvco55cc-2080-2080_C17438841.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 90.1049
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 90.1049
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 90.1049
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 35.9532
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 34.752
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 34.1571
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 32.9036
+      },
+      {
+       "startNumber": 200,
+       "endNumber": 499,
+       "productPrice": 34.6338
+      },
+      {
+       "startNumber": 30,
+       "endNumber": 199,
+       "productPrice": 86.7983
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 86.7983
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 33.4767
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 29,
+       "productPrice": 86.7983
+      }
+     ],
+     "firstSortAccessId": "fef7fb84489e4849acf8e6b9cb97ff9f",
+     "secondSortAccessId": "f14b8d81461a44a1b09f05a1d2f071a2",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "18568034-CVCO55CC_20802080/C17438841",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 5,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 90.1049,
+     "componentCode": "C17438841",
+     "componentBrandEn": "Crystek Corporation",
+     "componentModelEn": "CVCO55CC-2080-2080",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8590935694078521344-C17438841.pdf?response-content-disposition=attachment%3B%20filename%3DC17438841.pdf%3B%20filename%2A%3DUTF-8%27%27C17438841.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=aa0219d65586ec263ebd796e2ce732b579a5741d3b70be04d3d3f51d4bb7c266",
+     "dataManualOfficialLink": "",
+     "componentName": "Crystek Corporation CVCO55CC-2080-2080",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "QFN-16",
+     "describe": "-40\u2103~+85\u2103 8V QFN-16 Voltage Controlled Oscillators (VCOs) ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Voltage - Supply",
+       "attribute_value_name": "8V"
+      },
+      {
+       "attribute_name_en": "operating temperature",
+       "attribute_value_name": "-40\u2103~+85\u2103"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Voltage Controlled Oscillators (VCOs)",
+     "secondSortName": "Crystals, Oscillators, Resonators",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699550,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-DV-WT-K-TR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-wt-k-tr_C20373996.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.8284
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.8284
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.8284
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 5.1196
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.9492
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.8639
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.3576
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.6854
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.3576
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.9317
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.3576
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.7675
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DV_WT_KTR/C20373996",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.8284,
+     "componentCode": "C20373996",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-WT-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-WT-K-TR_C20373996.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603695577532690432-C20373996.pdf?response-content-disposition=attachment%3B%20filename%3DC20373996.pdf%3B%20filename%2A%3DUTF-8%27%27C20373996.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=6856d87d9b631c75c63d8be46cd90fb6e5bde0b2b88cfb51280f976083fe3459",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-WT-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699552,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-TH1-NP-WT",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-th1-np-wt_C20373998.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 15.2636
+      },
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 6.0897
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 5.8865
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 5.7866
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 192,
+       "endNumber": 503,
+       "productPrice": 5.8663
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 191,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 1008,
+       "endNumber": -1,
+       "productPrice": 5.5742
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 14.7035
+      },
+      {
+       "startNumber": 504,
+       "endNumber": 1007,
+       "productPrice": 5.6705
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 14.7035
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_TH1_NPWT/C20373998",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 24,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 15.2636,
+     "componentCode": "C20373998",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-TH1-NP-WT",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401241004_Samtec-MEC2-08-02-L-TH1-NP-WT_C20373998.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603694394528976896-C20373998.pdf?response-content-disposition=attachment%3B%20filename%3DC20373998.pdf%3B%20filename%2A%3DUTF-8%27%27C20373998.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=d48a22fa165f5bac30bbcb9681fedb35f5d144ff140b46cf91de32b94e40af9b",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-TH1-NP-WT",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 21699549,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "MEC2-08-02-L-DV-NP-WT-TR",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-np-wt-tr_C20373995.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 12.4564
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.9705
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.8049
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.723
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 4.5497
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 4.7881
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 11.9993
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 4.6286
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DV_NP_WTTR/C20373995",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 1,
+     "minPurchaseNum": 1,
+     "initialPrice": 12.4564,
+     "componentCode": "C20373995",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-NP-WT-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "https://www.lcsc.com/datasheet/lcsc_datasheet_2401171339_Samtec-MEC2-08-02-L-DV-NP-WT-TR_C20373995.pdf",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8603683745123606528-C20373995.pdf?response-content-disposition=attachment%3B%20filename%3DC20373995.pdf%3B%20filename%2A%3DUTF-8%27%27C20373995.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=1547ddf4967cbbca39c8cf41c5a1a7fa9989f6f44428bfff059c85cbcbe1d6be",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-NP-WT-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "-",
+     "describe": "- Edgeboard Connectors ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 5457649,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "Edgeboard Connectors",
+     "erpComponentName": "2mm P\u6570:16P",
+     "componentSource": "shop",
+     "lcscGoodsUrl": "https://www.lcsc.com/product-detail/edgeboard-connectors_samtec-mec2-08-02-l-dv-np-wt-k-tr_C4884524.html",
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.7177
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.7177
+      },
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 5.7177
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 2.214
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.1354
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.0977
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 12,
+       "endNumber": 249,
+       "productPrice": 5.5079
+      },
+      {
+       "startNumber": 1000,
+       "endNumber": -1,
+       "productPrice": 2.0207
+      },
+      {
+       "startNumber": 10,
+       "endNumber": 11,
+       "productPrice": 5.5079
+      },
+      {
+       "startNumber": 250,
+       "endNumber": 499,
+       "productPrice": 2.1328
+      },
+      {
+       "startNumber": 1,
+       "endNumber": 9,
+       "productPrice": 5.5079
+      },
+      {
+       "startNumber": 500,
+       "endNumber": 999,
+       "productPrice": 2.057
+      }
+     ],
+     "firstSortAccessId": "248c42d1f2d246498d91d5c9cad9dd16",
+     "secondSortAccessId": "5393fb1746f643408dbed79e305c61f1",
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "Samtec-MEC2_08_02_L_DV_NP_WT_KTR/C4884524",
+     "leastPatchNumber": 0,
+     "lossNumber": 0,
+     "isBuyComponent": "1",
+     "noBuyReason": null,
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 250,
+     "shopCostPrice": 0.0,
+     "preMinPurchaseNum": 2,
+     "minPurchaseNum": 2,
+     "initialPrice": 5.7177,
+     "componentCode": "C4884524",
+     "componentBrandEn": "Samtec",
+     "componentModelEn": "MEC2-08-02-L-DV-NP-WT-K-TR",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": "",
+     "dataManualFileAccessId": null,
+     "dataManualFileAccessIdUrl": "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8556951800176795648-C4884524.pdf?response-content-disposition=attachment%3B%20filename%3DC4884524.pdf%3B%20filename%2A%3DUTF-8%27%27C4884524.pdf&x-oss-date=20261030T114517Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5rmPsiAq6YZ9JK%2Bd2TC01g7PdV5v63vqjz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qa4Z1gUx557b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWsonyuQTjJSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIxieFk6KWD5sagAFqXnfPccszmKm2r1oWw4GCMZFZTliB%2Fzwjw94YEnLWffdsk%2BSPqtOd1rU5AhDqBmF0IoEkr4eFInkdpcprYxF81AdV%2B1M6ILfsdazZRFEsTl83INnvFPpCw7r3jf2OI5H9WFEz02eq5rTRQ7micWwZypqMRDr3%2Fj3DgpFG44W8byAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NYSur4Fy8CPUuBs7Xn1ZUPhDH%2F20261030%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=4c66f30d438f861ab7813928e1a5527f398e629bc75e8774ee097d2208e1628b",
+     "dataManualOfficialLink": "",
+     "componentName": "Samtec MEC2-08-02-L-DV-NP-WT-K-TR",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=2mm",
+     "describe": "-55\u2103~+125\u2103 16P 2mm Beryllium copper Gold Surface Mount,Vertical SMD,P=2mm Edgeboard Connectors ROHS",
+     "attributes": [
+      {
+       "attribute_name_en": "Operating Temperature",
+       "attribute_value_name": "-55\u2103~+125\u2103"
+      },
+      {
+       "attribute_name_en": "Contact Plating",
+       "attribute_value_name": "Gold"
+      },
+      {
+       "attribute_name_en": "Number of Pins",
+       "attribute_value_name": "16P"
+      },
+      {
+       "attribute_name_en": "Contact Material",
+       "attribute_value_name": "Beryllium copper"
+      },
+      {
+       "attribute_name_en": "Pitch",
+       "attribute_value_name": "2mm"
+      },
+      {
+       "attribute_name_en": "Mounting Type",
+       "attribute_value_name": "Surface Mount,Vertical"
+      }
+     ],
+     "rankScore": null,
+     "firstSortName": "Edgeboard Connectors",
+     "secondSortName": "Connectors",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    },
+    {
+     "componentId": 56398551,
+     "componentLibraryType": "expand",
+     "stockCount": 0,
+     "componentTypeEn": "SMT",
+     "erpComponentName": "\u3010\u90ae\u5bc4\u4e13\u7528\u3011CSFC208-0202A001C1AH",
+     "componentSource": "shop",
+     "lcscGoodsUrl": null,
+     "componentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0399
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0205
+      }
+     ],
+     "buyComponentPrices": [
+      {
+       "startNumber": 1,
+       "endNumber": 99,
+       "productPrice": 0.0384
+      },
+      {
+       "startNumber": 100,
+       "endNumber": -1,
+       "productPrice": 0.0198
+      }
+     ],
+     "firstSortAccessId": null,
+     "secondSortAccessId": null,
+     "canPresaleNumber": 0,
+     "componentProductType": 0,
+     "mergedComponentCode": null,
+     "urlSuffix": "56398551-CSFC2080202A001C1AH/C9900251425",
+     "leastPatchNumber": 5,
+     "lossNumber": 1,
+     "isBuyComponent": "0",
+     "noBuyReason": "This product is no longer manufactured.",
+     "componentAlternativesCode": null,
+     "replaceUrlSuffix": null,
+     "preferredComponentFlag": false,
+     "allowPostFlag": true,
+     "score": null,
+     "idleFlag": null,
+     "estimateDate": null,
+     "fullReelPrice": null,
+     "encapsulationNumber": 500,
+     "shopCostPrice": 0.1,
+     "preMinPurchaseNum": 441,
+     "minPurchaseNum": 441,
+     "initialPrice": 0.0205,
+     "componentCode": "C9900251425",
+     "componentBrandEn": "JLCPCB Assembly",
+     "componentModelEn": "CSFC208-0202A001C1AH",
+     "componentImageUrl": null,
+     "productBigImageAccessId": null,
+     "productBigImageAccessIdUrl": null,
+     "dataManualUrl": null,
+     "dataManualFileAccessId": "",
+     "dataManualFileAccessIdUrl": null,
+     "dataManualOfficialLink": "",
+     "componentName": "JIALICHUANG SMT CSFC208-0202A001C1AH",
+     "minImage": null,
+     "minImageAccessId": null,
+     "minImageAccessIdUrl": null,
+     "imageList": null,
+     "manufacturerBlackFlag": null,
+     "componentNameEn": null,
+     "componentSpecificationEn": "SMD,P=2mm",
+     "describe": "SMD,P=2mm SMT ROHS",
+     "attributes": null,
+     "rankScore": null,
+     "firstSortName": "SMT",
+     "secondSortName": "Others",
+     "componentBrandHigh": null,
+     "remarkHigh": null,
+     "componentModelHigh": null,
+     "componentCodeHigh": null,
+     "componentSpecificationHigh": null,
+     "rohsFlag": 1,
+     "shopShowPriceFlag": true,
+     "shopShowForeignPriceFlag": true,
+     "shopRealPriceFlag": true,
+     "assemblyComponentFlag": false,
+     "rohsFileId": null,
+     "rohsUrl": null
+    }
+   ],
+   "pageNum": 1,
+   "pageSize": 25,
+   "size": 0,
+   "startRow": 0,
+   "endRow": 0,
+   "pages": 1,
+   "prePage": 0,
+   "nextPage": 0,
+   "isFirstPage": false,
+   "isLastPage": false,
+   "hasPreviousPage": false,
+   "hasNextPage": false,
+   "navigatePages": 0,
+   "navigatepageNums": null,
+   "navigateFirstPage": 0,
+   "navigateLastPage": 0
+  },
+  "sortAndCountVoList": null,
+  "presaleTypeList": [],
+  "brandList": [],
+  "basePart": null,
+  "preferredPart": null,
+  "economicPart": null,
+  "standardPart": null,
+  "dataSheetPart": null,
+  "photo": null,
+  "queryString": "C20802"
+ },
+ "message": null
+}

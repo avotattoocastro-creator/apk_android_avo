@@ -1,0 +1,3173 @@
+{
+ "date_utc": "2026-11-15 08:56 UTC",
+ "api": "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList",
+ "parts": {
+  "C11702": {
+   "lcsc": "C11702",
+   "mpn": "0402WGF1001TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 31427502,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0013
+    ],
+    [
+     1000,
+     0.0011
+    ],
+    [
+     3000,
+     0.001
+    ],
+    [
+     10000,
+     0.0009
+    ],
+    [
+     50000,
+     0.0009
+    ],
+    [
+     50200,
+     0.0009
+    ]
+   ],
+   "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C140288": {
+   "lcsc": "C140288",
+   "mpn": "BQ24072RGTR",
+   "maker": "Texas Instruments",
+   "package": "QFN-16-EP(3x3)",
+   "stock": 1216,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     1.0488
+    ],
+    [
+     10,
+     0.8623
+    ],
+    [
+     30,
+     0.7608
+    ],
+    [
+     100,
+     0.6447
+    ],
+    [
+     500,
+     0.594
+    ],
+    [
+     1000,
+     0.5694
+    ]
+   ],
+   "describe": "-40℃~+125℃ 1 1.5A 1.5mA 4.2V 4.35V~6.6V Charging IC Lithium Battery Support QFN-16-EP(3x3) Battery Management ROHS"
+  },
+  "C1519515": {
+   "lcsc": "C1519515",
+   "mpn": "MAX30003CTI+",
+   "maker": "Analog Devices Inc./Maxim Integrated",
+   "package": "QFN-28-EP_5x5",
+   "stock": 0,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     20.2258
+    ],
+    [
+     3,
+     20.2258
+    ],
+    [
+     5,
+     20.2258
+    ],
+    [
+     30,
+     19.1492
+    ],
+    [
+     32,
+     19.1492
+    ],
+    [
+     34,
+     19.1492
+    ]
+   ],
+   "describe": "0.51uA 0℃~+70℃ 1 1.1V~2V 18 1V 32.768kHz、12MHz 512Hz 512Hz 96.5dB Programmable gain、Fault detection、ESD protection SPI QFN-28-EP(5x5) Analog Front End (AFE) ROHS"
+  },
+  "C1525": {
+   "lcsc": "C1525",
+   "mpn": "CL05B104KO5NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 38113931,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0024
+    ],
+    [
+     1000,
+     0.0018
+    ],
+    [
+     3000,
+     0.0015
+    ],
+    [
+     10000,
+     0.0013
+    ],
+    [
+     50000,
+     0.0012
+    ],
+    [
+     50200,
+     0.0012
+    ]
+   ],
+   "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C1555": {
+   "lcsc": "C1555",
+   "mpn": "0402CG220J500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0402",
+   "stock": 2383116,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0018
+    ],
+    [
+     1000,
+     0.0014
+    ],
+    [
+     3000,
+     0.0011
+    ],
+    [
+     10000,
+     0.001
+    ],
+    [
+     50000,
+     0.0008
+    ],
+    [
+     50200,
+     0.0008
+    ]
+   ],
+   "describe": "22pF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C17168": {
+   "lcsc": "C17168",
+   "mpn": "0402WGF0000TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 15617394,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0012
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% ±800ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C19666": {
+   "lcsc": "C19666",
+   "mpn": "CL10A475KO8NNNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 3482633,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.015
+    ],
+    [
+     100,
+     0.0112
+    ],
+    [
+     300,
+     0.0095
+    ],
+    [
+     1000,
+     0.0083
+    ],
+    [
+     4000,
+     0.0078
+    ],
+    [
+     8000,
+     0.0074
+    ]
+   ],
+   "describe": "16V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C20627095": {
+   "lcsc": "C20627095",
+   "mpn": "ESP32-C6-MINI-1U-H4",
+   "maker": "Espressif Systems",
+   "package": "SMD,13.2x12.5mm",
+   "stock": 3425,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     4.1902
+    ],
+    [
+     10,
+     3.7484
+    ],
+    [
+     30,
+     3.4866
+    ],
+    [
+     100,
+     3.2674
+    ],
+    [
+     650,
+     3.1201
+    ],
+    [
+     1300,
+     3.0547
+    ]
+   ],
+   "describe": "-105.5dBm -40℃~+105℃ 2.4GHz 20.5dBm 382mA 3V~3.6V 73mA ESP32-C6FH4 Integrated Bluetooth function、Integrated Zigbee function、Support USB interface UART、SDIO、SPI、I2C、GPIO、USB SMD,13.2x12.5mm WiFi Modules ROHS"
+  },
+  "C20802": {
+   "lcsc": "C20802",
+   "mpn": "SMD1206P150TF",
+   "maker": "RUILON(Shenzhen Ruilongyuan Elec)",
+   "package": "1206",
+   "stock": 11293,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1187
+    ],
+    [
+     50,
+     0.0933
+    ],
+    [
+     150,
+     0.0807
+    ],
+    [
+     500,
+     0.0712
+    ],
+    [
+     3500,
+     0.058
+    ],
+    [
+     7000,
+     0.054
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.5A 1.9mm 130mΩ 1mm 25mΩ 3.6mm 300ms 35A 3A 6V 800mW 1206 Resettable Fuses ROHS"
+  },
+  "C2286": {
+   "lcsc": "C2286",
+   "mpn": "KT-0603R",
+   "maker": "Hubei KENTO Elec",
+   "package": "0603",
+   "stock": 5778608,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0077
+    ],
+    [
+     1000,
+     0.0059
+    ],
+    [
+     4000,
+     0.0046
+    ],
+    [
+     8000,
+     0.004
+    ],
+    [
+     48000,
+     0.0037
+    ],
+    [
+     100000,
+     0.0036
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.6mm x 0.8mm square LED 1.8V~2.4V 120° 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS"
+  },
+  "C25741": {
+   "lcsc": "C25741",
+   "mpn": "0402WGF1003TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 10386390,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0009
+    ],
+    [
+     1000,
+     0.0007
+    ],
+    [
+     3000,
+     0.0006
+    ],
+    [
+     10000,
+     0.0005
+    ],
+    [
+     50000,
+     0.0005
+    ],
+    [
+     50200,
+     0.0005
+    ]
+   ],
+   "describe": "-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25744": {
+   "lcsc": "C25744",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 21068915,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.001
+    ],
+    [
+     1000,
+     0.0008
+    ],
+    [
+     3000,
+     0.0007
+    ],
+    [
+     10000,
+     0.0006
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25792": {
+   "lcsc": "C25792",
+   "mpn": "0402WGF4702TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 5707288,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0019
+    ],
+    [
+     1000,
+     0.0015
+    ],
+    [
+     3000,
+     0.0012
+    ],
+    [
+     10000,
+     0.0011
+    ],
+    [
+     50000,
+     0.001
+    ],
+    [
+     50200,
+     0.001
+    ]
+   ],
+   "describe": "-55℃~+155℃ 47kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25879": {
+   "lcsc": "C25879",
+   "mpn": "0402WGF2201TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 3053593,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0011
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 2.2kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C25891": {
+   "lcsc": "C25891",
+   "mpn": "0402WGF3601TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 486832,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0012
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 3.6kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C26083": {
+   "lcsc": "C26083",
+   "mpn": "0402WGF1004TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 2342011,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0012
+    ],
+    [
+     1000,
+     0.0009
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0007
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C2827694": {
+   "lcsc": "C2827694",
+   "mpn": "PESD5V0S1BA",
+   "maker": "TECH PUBLIC",
+   "package": "SOD-323",
+   "stock": 330776,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0359
+    ],
+    [
+     200,
+     0.0269
+    ],
+    [
+     600,
+     0.023
+    ],
+    [
+     3000,
+     0.0207
+    ],
+    [
+     9000,
+     0.0195
+    ],
+    [
+     21000,
+     0.0187
+    ]
+   ],
+   "describe": "-55℃~+125℃ 1 100nA 20A 300W 5V 7V 9V Bidirectional ESD IEC 61000-4-2 SOD-323 ESD and Surge Protection (TVS/ESD) ROHS"
+  },
+  "C32346": {
+   "lcsc": "C32346",
+   "mpn": "Q13FC13500004",
+   "maker": "Seiko Epson",
+   "package": "SMD3215-2P",
+   "stock": 413560,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.1524
+    ],
+    [
+     50,
+     0.1165
+    ],
+    [
+     150,
+     0.099
+    ],
+    [
+     500,
+     0.0835
+    ],
+    [
+     3000,
+     0.0792
+    ],
+    [
+     6000,
+     0.0766
+    ]
+   ],
+   "describe": "-40℃~+85℃ 12.5pF 32.768kHz 70kΩ SMD crystal oscillator ±20ppm SMD3215-2P Crystals ROHS"
+  },
+  "C367058": {
+   "lcsc": "C367058",
+   "mpn": "SIT1533AI-H4-DCC-32.768E",
+   "maker": "SiTime",
+   "package": "SMD2012-4P",
+   "stock": 971,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     1.286
+    ],
+    [
+     10,
+     1.0619
+    ],
+    [
+     30,
+     0.9392
+    ],
+    [
+     100,
+     0.8001
+    ],
+    [
+     500,
+     0.7379
+    ],
+    [
+     1000,
+     0.7101
+    ]
+   ],
+   "describe": "-40℃~+85℃ 1.5V~3.63V 32.768kHz LVCMOS ±100ppm SMD2012-4P Programmable Oscillators ROHS"
+  },
+  "C426476": {
+   "lcsc": "C426476",
+   "mpn": "RT9080-18GJ5",
+   "maker": "Richtek Tech",
+   "package": "TSOT-23-5",
+   "stock": 24171,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1085
+    ],
+    [
+     50,
+     0.0864
+    ],
+    [
+     150,
+     0.0753
+    ],
+    [
+     500,
+     0.067
+    ],
+    [
+     3000,
+     0.059
+    ],
+    [
+     6000,
+     0.0557
+    ]
+   ],
+   "describe": "-40℃~+85℃@(Ta) 1 1.8V 2uA 39uVrms 5.5V 600mA 75dB@(1kHz) 830mV@(600mA) Fixed Over Current Protection、Over Temperature Protection Positive TSOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+  },
+  "C45783": {
+   "lcsc": "C45783",
+   "mpn": "CL21A226MAQNNNE",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0805",
+   "stock": 4120685,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.1084
+    ],
+    [
+     200,
+     0.0873
+    ],
+    [
+     600,
+     0.0765
+    ],
+    [
+     2000,
+     0.0675
+    ],
+    [
+     10000,
+     0.0643
+    ],
+    [
+     20000,
+     0.0622
+    ]
+   ],
+   "describe": "22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C4940": {
+   "lcsc": "C4940",
+   "mpn": "0402WGF3401TCE",
+   "maker": "UNI-ROYAL(Uniroyal Elec)",
+   "package": "0402",
+   "stock": 222670,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0012
+    ],
+    [
+     1000,
+     0.001
+    ],
+    [
+     3000,
+     0.0008
+    ],
+    [
+     10000,
+     0.0008
+    ],
+    [
+     50000,
+     0.0006
+    ],
+    [
+     50200,
+     0.0006
+    ]
+   ],
+   "describe": "-55℃~+155℃ 3.4kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+  },
+  "C5189642": {
+   "lcsc": "C5189642",
+   "mpn": "BNO085",
+   "maker": "CEVA",
+   "package": "LGA-28(3.8x5.2)",
+   "stock": 0,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     19.4862
+    ],
+    [
+     10,
+     18.5782
+    ],
+    [
+     30,
+     17.001
+    ],
+    [
+     100,
+     15.6266
+    ],
+    [
+     102,
+     15.6266
+    ],
+    [
+     104,
+     15.6266
+    ]
+   ],
+   "describe": "1.65V~3.6V 12bit、16bit IMU (accelerometer + gyroscope) SPI、I2C、UART X,Y,Z X,Y,Z ±2000dps ±8g LGA-28(3.8x5.2) Accelerometers ROHS"
+  },
+  "C52923": {
+   "lcsc": "C52923",
+   "mpn": "CL05A105KA5NQNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0402",
+   "stock": 10281159,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0057
+    ],
+    [
+     1000,
+     0.0043
+    ],
+    [
+     3000,
+     0.0037
+    ],
+    [
+     10000,
+     0.0032
+    ],
+    [
+     50000,
+     0.003
+    ],
+    [
+     100000,
+     0.0029
+    ]
+   ],
+   "describe": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C53547": {
+   "lcsc": "C53547",
+   "mpn": "0402CG102J500NT",
+   "maker": "FH (Guangdong Fenghua Advanced Tech)",
+   "package": "0402",
+   "stock": 472693,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.005
+    ],
+    [
+     1000,
+     0.0039
+    ],
+    [
+     3000,
+     0.0034
+    ],
+    [
+     10000,
+     0.0027
+    ],
+    [
+     50000,
+     0.0025
+    ],
+    [
+     100000,
+     0.0024
+    ]
+   ],
+   "describe": "1nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C77131": {
+   "lcsc": "C77131",
+   "mpn": "NCP15XH103F03RC",
+   "maker": "Murata Electronics",
+   "package": "0402",
+   "stock": 297342,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.0164
+    ],
+    [
+     500,
+     0.0126
+    ],
+    [
+     1500,
+     0.0109
+    ],
+    [
+     10000,
+     0.0088
+    ],
+    [
+     20000,
+     0.0083
+    ],
+    [
+     50000,
+     0.0079
+    ]
+   ],
+   "describe": "-40℃~+125℃ 0.5mm 100mW 10kΩ 1mW/℃ 1mm 310uA 3380K 3434K 3455K ±1% ±1% 0402 NTC Thermistors ROHS"
+  },
+  "C841192": {
+   "lcsc": "C841192",
+   "mpn": "RT9080-33GJ5",
+   "maker": "Richtek Tech",
+   "package": "TSOT-23-5",
+   "stock": 27566,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.1197
+    ],
+    [
+     50,
+     0.0974
+    ],
+    [
+     150,
+     0.0863
+    ],
+    [
+     500,
+     0.0778
+    ],
+    [
+     3000,
+     0.0608
+    ],
+    [
+     6000,
+     0.0575
+    ]
+   ],
+   "describe": "-40℃~+125℃@(Tj) 1 2uA 3.3V 360mV@(600mA) 42uVrms 5.5V 600mA 75dB@(1kHz) Fixed Over Current Protection、Over Temperature Protection、Enable Positive TSOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+  },
+  "C96446": {
+   "lcsc": "C96446",
+   "mpn": "CL10A106MA8NRNC",
+   "maker": "Samsung Electro-Mechanics",
+   "package": "0603",
+   "stock": 6145886,
+   "library": "base",
+   "prices": [
+    [
+     1,
+     0.0342
+    ],
+    [
+     200,
+     0.0272
+    ],
+    [
+     600,
+     0.0236
+    ],
+    [
+     4000,
+     0.0207
+    ],
+    [
+     8000,
+     0.0195
+    ],
+    [
+     20000,
+     0.0189
+    ]
+   ],
+   "describe": "10uF 25V X5R ±20% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  },
+  "C97946": {
+   "lcsc": "C97946",
+   "mpn": "GRM31C5C1H104JA01L",
+   "maker": "Murata Electronics",
+   "package": "1206",
+   "stock": 56452,
+   "library": "expand",
+   "prices": [
+    [
+     1,
+     0.3075
+    ],
+    [
+     50,
+     0.2559
+    ],
+    [
+     150,
+     0.2307
+    ],
+    [
+     500,
+     0.2082
+    ],
+    [
+     2000,
+     0.1967
+    ],
+    [
+     4000,
+     0.1931
+    ]
+   ],
+   "describe": "100nF 50V C0G ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+  }
+ },
+ "search": {
+  "ESP32-C6-MINI-1U": [
+   {
+    "lcsc": "C20627095",
+    "mpn": "ESP32-C6-MINI-1U-H4",
+    "maker": "Espressif Systems",
+    "package": "SMD,13.2x12.5mm",
+    "stock": 3425,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      4.1902
+     ],
+     [
+      10,
+      3.7484
+     ],
+     [
+      30,
+      3.4866
+     ],
+     [
+      100,
+      3.2674
+     ],
+     [
+      650,
+      3.1201
+     ],
+     [
+      1300,
+      3.0547
+     ]
+    ],
+    "describe": "-105.5dBm -40℃~+105℃ 2.4GHz 20.5dBm 382mA 3V~3.6V 73mA ESP32-C6FH4 Integrated Bluetooth function、Integrated Zigbee function、Support USB interface UART、SDIO、SPI、I2C、GPIO、USB SMD,13.2x12.5mm WiFi Modules ROHS"
+   },
+   {
+    "lcsc": "C9900231236",
+    "mpn": "ESP32-C6-MINI-1U",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2x12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2x12.5mm SMT ROHS"
+   },
+   {
+    "lcsc": "C7558096",
+    "mpn": "ESP32-C6-MINI-1U-N4",
+    "maker": "Espressif Systems",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2x12.5mm New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900163889",
+    "mpn": "ESP32-C6-MINI-1U-H8",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2X12.5mm SMT ROHS"
+   },
+   {
+    "lcsc": "C9900166278",
+    "mpn": "ESP32-C6-MINI-1U-N4",
+    "maker": "JLCPCB Assembly",
+    "package": "SMD,13.2X12.5mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "SMD,13.2X12.5mm SMT ROHS"
+   }
+  ],
+  "MAX30003": [
+   {
+    "lcsc": "C1519515",
+    "mpn": "MAX30003CTI+",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "QFN-28-EP_5x5",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      20.2258
+     ],
+     [
+      3,
+      20.2258
+     ],
+     [
+      5,
+      20.2258
+     ],
+     [
+      30,
+      19.1492
+     ],
+     [
+      32,
+      19.1492
+     ],
+     [
+      34,
+      19.1492
+     ]
+    ],
+    "describe": "0.51uA 0℃~+70℃ 1 1.1V~2V 18 1V 32.768kHz、12MHz 512Hz 512Hz 96.5dB Programmable gain、Fault detection、ESD protection SPI QFN-28-EP(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C5354728",
+    "mpn": "MAX30003CTI+T",
+    "maker": "Analog Devices",
+    "package": "TQFN-EP-28",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      22.6914
+     ],
+     [
+      10,
+      22.6914
+     ],
+     [
+      30,
+      22.6914
+     ],
+     [
+      200,
+      9.0543
+     ],
+     [
+      500,
+      8.7517
+     ],
+     [
+      1000,
+      8.6028
+     ]
+    ],
+    "describe": "Programmable gain、Fault detection、ESD protection TQFN-EP-28 Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C7435290",
+    "mpn": "MAX30003CWV+T",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "WLP-30(2.7x2.9)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      12.5638
+     ],
+     [
+      10,
+      12.1728
+     ],
+     [
+      12,
+      12.1728
+     ],
+     [
+      14,
+      12.1728
+     ],
+     [
+      16,
+      12.1728
+     ],
+     [
+      18,
+      12.1728
+     ]
+    ],
+    "describe": "0.51uA 0℃~+70℃ 1 1.1V~2V、1.65V~3.6V 18 1V 32.768kHz、12MHz 96.5dB Programmable gain、Fault detection、ESD protection SPI WLP-30(2.7x2.9) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "BNO085": [
+   {
+    "lcsc": "C9900000640",
+    "mpn": "BNO085",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-28_3.8X5.2X0.50P",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0007
+     ],
+     [
+      1000,
+      0.0002
+     ]
+    ],
+    "describe": "LGA-28_3.8X5.2X0.50P SMT ROHS"
+   },
+   {
+    "lcsc": "C5189642",
+    "mpn": "BNO085",
+    "maker": "CEVA",
+    "package": "LGA-28(3.8x5.2)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      19.4862
+     ],
+     [
+      10,
+      18.5782
+     ],
+     [
+      30,
+      17.001
+     ],
+     [
+      100,
+      15.6266
+     ],
+     [
+      102,
+      15.6266
+     ],
+     [
+      104,
+      15.6266
+     ]
+    ],
+    "describe": "1.65V~3.6V 12bit、16bit IMU (accelerometer + gyroscope) SPI、I2C、UART X,Y,Z X,Y,Z ±2000dps ±8g LGA-28(3.8x5.2) Accelerometers ROHS"
+   }
+  ],
+  "ADS1292R": [
+   {
+    "lcsc": "C528635",
+    "mpn": "ADS1292RIPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 855,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.8387
+     ],
+     [
+      10,
+      6.6901
+     ],
+     [
+      30,
+      5.6447
+     ],
+     [
+      100,
+      5.0573
+     ],
+     [
+      102,
+      5.0573
+     ],
+     [
+      104,
+      5.0573
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz 8kHz 8kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C456281",
+    "mpn": "ADS1292RIRSMR",
+    "maker": "Texas Instruments",
+    "package": "QFN-32-EP(4x4)",
+    "stock": 489,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      10.5858
+     ],
+     [
+      10,
+      9.2261
+     ],
+     [
+      30,
+      8.3983
+     ],
+     [
+      100,
+      7.7045
+     ],
+     [
+      102,
+      7.7045
+     ],
+     [
+      104,
+      7.7045
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.485MHz~0.5625MHz、0.512MHz、1.94MHz~2.25MHz 107dB 2.42V 2.7V~5.25V 24 2ppm/℃ 45ppm/℃ 8000Hz 8000Hz SPI QFN-32-EP(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C882777",
+    "mpn": "ADS1292RIRSMT",
+    "maker": "Texas Instruments",
+    "package": "VQFN-32(4x4)",
+    "stock": 8,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.7238
+     ],
+     [
+      10,
+      7.4575
+     ],
+     [
+      30,
+      6.6852
+     ],
+     [
+      100,
+      6.039
+     ],
+     [
+      102,
+      6.039
+     ],
+     [
+      104,
+      6.039
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI VQFN-32(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C1520681",
+    "mpn": "ADS1292RIPBS",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 5,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.624
+     ],
+     [
+      10,
+      8.4212
+     ],
+     [
+      30,
+      8.2854
+     ],
+     [
+      100,
+      8.1512
+     ],
+     [
+      102,
+      8.1512
+     ],
+     [
+      104,
+      8.1512
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C9900287301",
+    "mpn": "ADS1292R",
+    "maker": "JLCPCB Assembly",
+    "package": "QFN-32(4x4)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "QFN-32(4x4) SMT ROHS"
+   },
+   {
+    "lcsc": "C22448165",
+    "mpn": "ADS1292RIPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.6263
+     ],
+     [
+      10,
+      5.8394
+     ],
+     [
+      30,
+      5.36
+     ],
+     [
+      100,
+      4.9575
+     ],
+     [
+      102,
+      4.9575
+     ],
+     [
+      104,
+      4.9575
+     ]
+    ],
+    "describe": "TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "ADS1292": [
+   {
+    "lcsc": "C544416",
+    "mpn": "ADS1292IRSMR",
+    "maker": "Texas Instruments",
+    "package": "VQFN-32(4x4)",
+    "stock": 2953,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      5.7657
+     ],
+     [
+      10,
+      4.9133
+     ],
+     [
+      30,
+      4.393
+     ],
+     [
+      100,
+      3.9578
+     ],
+     [
+      102,
+      3.9578
+     ],
+     [
+      104,
+      3.9578
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI VQFN-32(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C2651570",
+    "mpn": "ADS1292IPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 1057,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.5216
+     ],
+     [
+      10,
+      5.5154
+     ],
+     [
+      30,
+      4.9722
+     ],
+     [
+      100,
+      4.5157
+     ],
+     [
+      102,
+      4.5157
+     ],
+     [
+      104,
+      4.5157
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Fault detection SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C528635",
+    "mpn": "ADS1292RIPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 855,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.8387
+     ],
+     [
+      10,
+      6.6901
+     ],
+     [
+      30,
+      5.6447
+     ],
+     [
+      100,
+      5.0573
+     ],
+     [
+      102,
+      5.0573
+     ],
+     [
+      104,
+      5.0573
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz 8kHz 8kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C456281",
+    "mpn": "ADS1292RIRSMR",
+    "maker": "Texas Instruments",
+    "package": "QFN-32-EP(4x4)",
+    "stock": 489,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      10.5858
+     ],
+     [
+      10,
+      9.2261
+     ],
+     [
+      30,
+      8.3983
+     ],
+     [
+      100,
+      7.7045
+     ],
+     [
+      102,
+      7.7045
+     ],
+     [
+      104,
+      7.7045
+     ]
+    ],
+    "describe": "-40℃~+85℃ 0.485MHz~0.5625MHz、0.512MHz、1.94MHz~2.25MHz 107dB 2.42V 2.7V~5.25V 24 2ppm/℃ 45ppm/℃ 8000Hz 8000Hz SPI QFN-32-EP(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C1520665",
+    "mpn": "ADS1292IPBS",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 106,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.8374
+     ],
+     [
+      10,
+      5.8197
+     ],
+     [
+      30,
+      5.1996
+     ],
+     [
+      100,
+      4.6794
+     ],
+     [
+      102,
+      4.6794
+     ],
+     [
+      104,
+      4.6794
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2.7V~5.25V 24 2ppm/℃ TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C89288",
+    "mpn": "ADS1292IRSMT",
+    "maker": "Texas Instruments",
+    "package": "VQFN-32-EP(4x4)",
+    "stock": 9,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      9.074
+     ],
+     [
+      10,
+      8.1316
+     ],
+     [
+      30,
+      7.5573
+     ],
+     [
+      100,
+      7.0746
+     ],
+     [
+      102,
+      7.0746
+     ],
+     [
+      104,
+      7.0746
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V 2.7V~5.25V 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz 8kHz 8kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI VQFN-32-EP(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C882777",
+    "mpn": "ADS1292RIRSMT",
+    "maker": "Texas Instruments",
+    "package": "VQFN-32(4x4)",
+    "stock": 8,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.7238
+     ],
+     [
+      10,
+      7.4575
+     ],
+     [
+      30,
+      6.6852
+     ],
+     [
+      100,
+      6.039
+     ],
+     [
+      102,
+      6.039
+     ],
+     [
+      104,
+      6.039
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI VQFN-32(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C1520681",
+    "mpn": "ADS1292RIPBS",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 5,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.624
+     ],
+     [
+      10,
+      8.4212
+     ],
+     [
+      30,
+      8.2854
+     ],
+     [
+      100,
+      8.1512
+     ],
+     [
+      102,
+      8.1512
+     ],
+     [
+      104,
+      8.1512
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C9900287301",
+    "mpn": "ADS1292R",
+    "maker": "JLCPCB Assembly",
+    "package": "QFN-32(4x4)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "QFN-32(4x4) SMT ROHS"
+   },
+   {
+    "lcsc": "C9900099794",
+    "mpn": "ADS1292IPBSR",
+    "maker": "JLCPCB Assembly",
+    "package": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "TQFP-32_L5.0-W5.0-P0.50-LS7.0-BL New Arrivals ROHS"
+   }
+  ],
+  "ADS1291": [
+   {
+    "lcsc": "C139059",
+    "mpn": "ADS1291IRSMR",
+    "maker": "Texas Instruments",
+    "package": "QFN-32-EP(4x4)",
+    "stock": 248,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      5.2046
+     ],
+     [
+      10,
+      4.4503
+     ],
+     [
+      30,
+      3.786
+     ],
+     [
+      100,
+      3.3328
+     ],
+     [
+      500,
+      3.1234
+     ],
+     [
+      1000,
+      3.0285
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V 2.7V~5.25V 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz 8000Hz 8000Hz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI QFN-32-EP(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C528643",
+    "mpn": "ADS1291IPBS",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 35,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.4375
+     ],
+     [
+      10,
+      8.2494
+     ],
+     [
+      30,
+      8.1234
+     ],
+     [
+      100,
+      7.9974
+     ],
+     [
+      102,
+      7.9974
+     ],
+     [
+      104,
+      7.9974
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.7V~5.25V 24 Programmable gain、Multiplexers、Internal reference source、Fault detection、Built-in temperature sensor TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C2651548",
+    "mpn": "ADS1291IRSMT",
+    "maker": "Texas Instruments",
+    "package": "VQFN-32(4x4)",
+    "stock": 1,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      12.3855
+     ],
+     [
+      10,
+      11.9814
+     ],
+     [
+      12,
+      11.9814
+     ],
+     [
+      14,
+      11.9814
+     ],
+     [
+      16,
+      11.9814
+     ],
+     [
+      18,
+      11.9814
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 512kHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI VQFN-32(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C543023",
+    "mpn": "ADS1291IPBSR",
+    "maker": "Texas Instruments",
+    "package": "TQFP-32(5x5)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.986
+     ],
+     [
+      10,
+      6.8685
+     ],
+     [
+      30,
+      6.1862
+     ],
+     [
+      100,
+      5.6152
+     ],
+     [
+      102,
+      5.6152
+     ],
+     [
+      104,
+      5.6152
+     ]
+    ],
+    "describe": "-40℃~+85℃ 107dB 2 2.42V、4.033V 2.7V~5.25V 20uA 24 485kHz~562.5kHz、512kHz、1.94MHz~2.25MHz Programmable gain、Multiplexers、Internal reference source、Built-in temperature sensor SPI TQFP-32(5x5) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "ADS1293": [
+   {
+    "lcsc": "C181260",
+    "mpn": "ADS1293CISQ/NOPB",
+    "maker": "Texas Instruments",
+    "package": "QFN-28-EP(5x5)",
+    "stock": 17,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      18.3262
+     ],
+     [
+      10,
+      17.4346
+     ],
+     [
+      30,
+      15.8917
+     ],
+     [
+      100,
+      14.5452
+     ],
+     [
+      102,
+      14.5452
+     ],
+     [
+      104,
+      14.5452
+     ]
+    ],
+    "describe": "-20℃~+85℃ 106dB 2.4V 2.7V~5.5V 24 25.6kHz 25.6kHz 3 370kHz~450kHz、409.6kHz 80uA Internal reference source、Fault detection、Simultaneous sampling control SPI QFN-28-EP(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C2651571",
+    "mpn": "ADS1293CISQE/NOPB",
+    "maker": "Texas Instruments",
+    "package": "WQFN-28(5x5)",
+    "stock": 2,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      17.9761
+     ],
+     [
+      10,
+      17.0812
+     ],
+     [
+      30,
+      15.5317
+     ],
+     [
+      100,
+      14.1803
+     ],
+     [
+      102,
+      14.1803
+     ],
+     [
+      104,
+      14.1803
+     ]
+    ],
+    "describe": "-20℃~+85℃ 107dB 11ppm/℃ 11ppm/℃ 175uA 2.4V 2.7V~5.5V 24 25600Hz 25600Hz 370kHz~450kHz、409.6kHz SPI WQFN-28(5x5) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C2651598",
+    "mpn": "ADS1293CISQX/NOPB",
+    "maker": "Texas Instruments",
+    "package": "WQFN-28(5x5)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      14.2049
+     ],
+     [
+      10,
+      13.5373
+     ],
+     [
+      30,
+      12.3806
+     ],
+     [
+      100,
+      11.3727
+     ],
+     [
+      102,
+      11.3727
+     ],
+     [
+      104,
+      11.3727
+     ]
+    ],
+    "describe": "-20℃~+85℃ 107dB 11ppm/℃ 11ppm/℃ 2.4V 2.7V~5.5V 24 25600Hz 25600Hz 370kHz~450kHz、409.6kHz 80uA SPI WQFN-28(5x5) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "MAX30001": [
+   {
+    "lcsc": "C2650384",
+    "mpn": "MAX30001CWV+T",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "WLP-30(2.7x2.9)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.0959
+     ],
+     [
+      10,
+      6.2631
+     ],
+     [
+      30,
+      6.1682
+     ],
+     [
+      100,
+      6.0733
+     ],
+     [
+      102,
+      6.0733
+     ],
+     [
+      104,
+      6.0733
+     ]
+    ],
+    "describe": "0Hz~12MHz、32.768kHz 0℃~+70℃ 1.1V~2V 18 1V 2 512Hz 512Hz 97.7dB Programmable gain、ESD protection SPI WLP-30(2.7x2.9) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C7503029",
+    "mpn": "MAX30001GCWV+",
+    "maker": "Analog Devices Inc./Maxim Integrated",
+    "package": "WLP-30",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      21.3531
+     ],
+     [
+      10,
+      21.3531
+     ],
+     [
+      30,
+      21.3531
+     ],
+     [
+      200,
+      8.521
+     ],
+     [
+      500,
+      8.2363
+     ],
+     [
+      1000,
+      8.0956
+     ]
+    ],
+    "describe": "2 Programmable gain、ESD protection WLP-30 Analog Front End (AFE) ROHS"
+   }
+  ],
+  "AD8232": [
+   {
+    "lcsc": "C43216",
+    "mpn": "AD8232ACPZ-R7",
+    "maker": "Analog Devices",
+    "package": "LFCSP-20(4x4)",
+    "stock": 1759,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.7131
+     ],
+     [
+      10,
+      5.877
+     ],
+     [
+      30,
+      5.3665
+     ],
+     [
+      100,
+      4.5828
+     ],
+     [
+      102,
+      4.5828
+     ],
+     [
+      104,
+      4.5828
+     ]
+    ],
+    "describe": "-40℃~+85℃ 12ppm/℃ 170uA 2V~3.5V LFCSP-20(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C652575",
+    "mpn": "AD8232ACPZ-RL",
+    "maker": "Analog Devices",
+    "package": "LFCSP-20(4x4)",
+    "stock": 9,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.4218
+     ],
+     [
+      10,
+      6.2762
+     ],
+     [
+      30,
+      6.178
+     ],
+     [
+      100,
+      5.7821
+     ],
+     [
+      102,
+      5.7821
+     ],
+     [
+      104,
+      5.7821
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5V 170uA 2V~3.5V 86dB Programmable gain、Output buffer、Internal reference source、Fault detection、ESD protection LFCSP-20(4x4) Analog Front End (AFE) ROHS"
+   },
+   {
+    "lcsc": "C1519519",
+    "mpn": "AD8232ACPZ-WP",
+    "maker": "Analog Devices",
+    "package": "LFCSP-20(4x4)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.1437
+     ],
+     [
+      10,
+      5.3125
+     ],
+     [
+      64,
+      4.5076
+     ],
+     [
+      128,
+      4.0069
+     ],
+     [
+      512,
+      3.7762
+     ],
+     [
+      1024,
+      3.6715
+     ]
+    ],
+    "describe": "-40℃~+85℃ 2V~3.5V 86dB Programmable gain、Internal reference source、Fault detection、ESD Protection LFCSP-20(4x4) Analog Front End (AFE) ROHS"
+   }
+  ],
+  "BNO086": [
+   {
+    "lcsc": "C5264422",
+    "mpn": "BNO086",
+    "maker": "CEVA",
+    "package": "TFLGA-28",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      12.0959
+     ],
+     [
+      10,
+      11.7114
+     ],
+     [
+      30,
+      11.7114
+     ],
+     [
+      100,
+      11.7114
+     ],
+     [
+      500,
+      11.7114
+     ],
+     [
+      1000,
+      11.7114
+     ]
+    ],
+    "describe": "TFLGA-28 Accelerometers ROHS"
+   }
+  ],
+  "BNO080": [
+   {
+    "lcsc": "C717991",
+    "mpn": "BNO080",
+    "maker": "CEVA",
+    "package": "LGA-28(5.2x3.8)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.5835
+     ],
+     [
+      10,
+      2.5835
+     ],
+     [
+      12,
+      2.5835
+     ],
+     [
+      200,
+      0.9997
+     ],
+     [
+      500,
+      0.9654
+     ],
+     [
+      1000,
+      0.9474
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5uA、1.9uA 1.65V~3.6V、2.4V~3.6V 12bit、16bit IMU (accelerometer + gyroscope) Motion event detection、Synchronization and timestamp SPI、I2C、UART X,Y,Z X,Y,Z ±2000dps ±8g LGA-28(5.2x3.8) Accelerometers ROHS"
+   }
+  ],
+  "BHI260AP": [
+   {
+    "lcsc": "C3288651",
+    "mpn": "BHI260AP",
+    "maker": "Bosch Sensortec",
+    "package": "LGA-44",
+    "stock": 330,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      8.3704
+     ],
+     [
+      10,
+      7.9941
+     ],
+     [
+      30,
+      7.7634
+     ],
+     [
+      100,
+      7.5704
+     ],
+     [
+      102,
+      7.5704
+     ],
+     [
+      104,
+      7.5704
+     ]
+    ],
+    "describe": "1.8V 16bit 8uA IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z LGA-44 Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C17361100",
+    "mpn": "SHUTTLE BOARD 3.0 BHI260AP",
+    "maker": "Bosch Sensortec",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      31.1322
+     ],
+     [
+      10,
+      31.1322
+     ],
+     [
+      30,
+      31.1322
+     ],
+     [
+      200,
+      12.4231
+     ],
+     [
+      500,
+      12.0075
+     ],
+     [
+      1000,
+      11.803
+     ]
+    ],
+    "describe": "1.8V Interrupt output SPI、I2C - Specialized Sensors ROHS"
+   }
+  ],
+  "LSM6DSV16X": [
+   {
+    "lcsc": "C5267406",
+    "mpn": "LSM6DSV16XTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14",
+    "stock": 6533,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.9369
+     ],
+     [
+      10,
+      2.5606
+     ],
+     [
+      30,
+      2.3675
+     ],
+     [
+      100,
+      2.1106
+     ],
+     [
+      500,
+      2.0174
+     ],
+     [
+      1000,
+      1.9781
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 2.6uA 4.5KB IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z ±16g ±4000dps 运动事件检测、同步与时间戳 LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C42388605",
+    "mpn": "LSM6DSV16X",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14_2.5x3mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14_2.5x3mm New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900037528",
+    "mpn": "LSM6DSV16XTR",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-14L",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      7.3642
+     ],
+     [
+      100,
+      4.6728
+     ]
+    ],
+    "describe": "LGA-14L New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C9900297454",
+    "mpn": "LSM6DSV16X-YX",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) SMT ROHS"
+   }
+  ],
+  "ISM330DHCX": [
+   {
+    "lcsc": "C2655101",
+    "mpn": "ISM330DHCXTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14(2.5x3)",
+    "stock": 3187,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      5.5678
+     ],
+     [
+      10,
+      4.7726
+     ],
+     [
+      30,
+      4.1231
+     ],
+     [
+      100,
+      3.6453
+     ],
+     [
+      500,
+      3.4245
+     ],
+     [
+      1000,
+      3.3246
+     ]
+    ],
+    "describe": "-40℃~+105℃ 1.71V~3.6V 16bit 3uA 9KB IMU (accelerometer + gyroscope) Motion event detection SPI、I2C X,Y,Z X,Y,Z ±16g ±4000dps LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C717698",
+    "mpn": "ISM330DHCXTR",
+    "maker": "Texas Instruments",
+    "package": "LGA-14L",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14L New Arrivals ROHS"
+   },
+   {
+    "lcsc": "C48586482",
+    "mpn": "ISM330DHCXTR-C",
+    "maker": "Tokmas",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.718
+     ],
+     [
+      10,
+      1.4464
+     ],
+     [
+      30,
+      1.2762
+     ],
+     [
+      100,
+      1.1208
+     ],
+     [
+      500,
+      1.0423
+     ],
+     [
+      1000,
+      1.0079
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 1536Byte 16bit IMU SPI、I2C、I3C X,Y,Z X,Y,Z ±16g ±2048dps LGA-14(2.5x3) Accelerometers ROHS"
+   }
+  ],
+  "ICM-42688-P": [
+   {
+    "lcsc": "C54308212",
+    "mpn": "ICM-42688-P(TOKMAS)",
+    "maker": "Tokmas",
+    "package": "LGA-14(2.5x3)",
+    "stock": 6212,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.7896
+     ],
+     [
+      10,
+      2.4379
+     ],
+     [
+      30,
+      2.1875
+     ],
+     [
+      100,
+      1.9601
+     ],
+     [
+      500,
+      1.8554
+     ],
+     [
+      1000,
+      1.8145
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C1850418",
+    "mpn": "ICM-42688-P",
+    "maker": "TDK InvenSense",
+    "package": "LGA-14(2.5x3)",
+    "stock": 2,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      21.6263
+     ],
+     [
+      3,
+      21.6263
+     ],
+     [
+      5,
+      21.6263
+     ],
+     [
+      30,
+      20.6152
+     ],
+     [
+      32,
+      20.6152
+     ],
+     [
+      34,
+      20.6152
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 2KB 7.5uA IMU (accelerometer + gyroscope) SPI、I2C X,Y,Z X,Y,Z ±16g ±2000dps Motion Event Detection, Synchronization, Timestamp Support LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C9900270262",
+    "mpn": "ICM-42688-P",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) SMT ROHS"
+   },
+   {
+    "lcsc": "C48586483",
+    "mpn": "ICM-42688-PC",
+    "maker": "Tokmas",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.6195
+     ],
+     [
+      10,
+      2.2039
+     ],
+     [
+      30,
+      1.9438
+     ],
+     [
+      100,
+      1.6771
+     ],
+     [
+      500,
+      1.556
+     ],
+     [
+      1000,
+      1.5036
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.5KB 1.71V~3.6V 16bit IMU (accelerometer + gyroscope) SPI、I2C、I3C X,Y,Z X,Y,Z ±16g ±2048dps LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C21534496",
+    "mpn": "EV_ICM-42688-P",
+    "maker": "TDK InvenSense",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      40.3157
+     ],
+     [
+      10,
+      40.3157
+     ],
+     [
+      30,
+      40.3157
+     ],
+     [
+      200,
+      16.0864
+     ],
+     [
+      500,
+      15.5497
+     ],
+     [
+      1000,
+      15.2831
+     ]
+    ],
+    "describe": "- Sensor Modules ROHS"
+   }
+  ],
+  "LSM6DSO32": [
+   {
+    "lcsc": "C3663738",
+    "mpn": "LSM6DSO32XTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14(2.5x3)",
+    "stock": 402,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.124
+     ],
+     [
+      10,
+      5.2667
+     ],
+     [
+      30,
+      4.7579
+     ],
+     [
+      100,
+      4.2425
+     ],
+     [
+      500,
+      4.0053
+     ],
+     [
+      1000,
+      3.8973
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 3uA 9KB IMU SPI、I2C X,Y,Z X,Y,Z ±2000dps ±32g LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C1864162",
+    "mpn": "LSM6DSO32TR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-14(2.5x3)",
+    "stock": 32,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.4709
+     ],
+     [
+      10,
+      5.6038
+     ],
+     [
+      30,
+      4.5877
+     ],
+     [
+      100,
+      4.1443
+     ],
+     [
+      102,
+      4.1443
+     ],
+     [
+      104,
+      4.1443
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 9KB Accelerometer Gyroscope SPI、I2C、MIPI I3C X,Y,Z X,Y,Z ±2000dps ±32g LGA-14(2.5x3) Accelerometers ROHS"
+   }
+  ],
+  "BMI088": [
+   {
+    "lcsc": "C194919",
+    "mpn": "BMI088",
+    "maker": "Bosch Sensortec",
+    "package": "LGA-16(3x4.5)",
+    "stock": 1855,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      6.3335
+     ],
+     [
+      10,
+      5.5972
+     ],
+     [
+      30,
+      5.126
+     ],
+     [
+      100,
+      4.2867
+     ],
+     [
+      102,
+      4.2867
+     ],
+     [
+      104,
+      4.2867
+     ]
+    ],
+    "describe": "-40℃~+85℃ Accelerometer Gyroscope LGA-16(3x4.5) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C55510153",
+    "mpn": "BMI088-HXY",
+    "maker": "HXY MOSFET",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      14.0183
+     ],
+     [
+      10,
+      14.0183
+     ],
+     [
+      12,
+      14.0183
+     ],
+     [
+      200,
+      5.5939
+     ],
+     [
+      500,
+      5.4074
+     ],
+     [
+      1000,
+      5.3142
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C17245473",
+    "mpn": "SHUTTLE BOARD 3.0 BMI088",
+    "maker": "Bosch Sensortec",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      16.8177
+     ],
+     [
+      10,
+      16.8177
+     ],
+     [
+      30,
+      16.8177
+     ],
+     [
+      200,
+      6.7114
+     ],
+     [
+      500,
+      6.4873
+     ],
+     [
+      1000,
+      6.376
+     ]
+    ],
+    "describe": "- Specialized Sensors ROHS"
+   }
+  ],
+  "ICM-45686": [
+   {
+    "lcsc": "C22459454",
+    "mpn": "ICM-45686",
+    "maker": "TDK InvenSense",
+    "package": "LGA-14(3x2.5)",
+    "stock": 1221,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      10.216
+     ],
+     [
+      10,
+      8.7157
+     ],
+     [
+      30,
+      7.8027
+     ],
+     [
+      100,
+      7.0354
+     ],
+     [
+      102,
+      7.0354
+     ],
+     [
+      104,
+      7.0354
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 2.2uA 8KB IMU (accelerometer + gyroscope) Motion event detection SPI、I2C X,Y,Z X,Y,Z ±32g ±4000dps LGA-14(3x2.5) Accelerometers ROHS"
+   },
+   {
+    "lcsc": "C9900251359",
+    "mpn": "ICM-45686-P",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-14(2.5x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-14(2.5x3) SMT ROHS"
+   }
+  ],
+  "MMC5983MA": [
+   {
+    "lcsc": "C404329",
+    "mpn": "MMC5983MA",
+    "maker": "MEMSIC",
+    "package": "LGA-16(3x3)",
+    "stock": 5716,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      1.9896
+     ],
+     [
+      10,
+      1.7491
+     ],
+     [
+      30,
+      1.5805
+     ],
+     [
+      100,
+      1.4251
+     ],
+     [
+      500,
+      1.3319
+     ],
+     [
+      1000,
+      1.3024
+     ]
+    ],
+    "describe": "-40℃~+105℃ 18bit 2.8V~3.6V 450uA I2C、SPI ±8Gs ±8Gs LGA-16(3x3) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C17241892",
+    "mpn": "MMC5983MA-B",
+    "maker": "MEMSIC",
+    "package": "-",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      25.3566
+     ],
+     [
+      10,
+      25.3566
+     ],
+     [
+      12,
+      25.3566
+     ],
+     [
+      200,
+      10.1178
+     ],
+     [
+      500,
+      9.7791
+     ],
+     [
+      1000,
+      9.6123
+     ]
+    ],
+    "describe": "- Specialized Sensors ROHS"
+   },
+   {
+    "lcsc": "C9900294696",
+    "mpn": "MMC5983MA-E",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-16(3x3)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-16(3x3) SMT ROHS"
+   }
+  ],
+  "LIS2MDL": [
+   {
+    "lcsc": "C9900275408",
+    "mpn": "LIS2MDL",
+    "maker": "JLCPCB Assembly",
+    "package": "LGA-12(2x2)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      0.0398
+     ],
+     [
+      100,
+      0.0205
+     ]
+    ],
+    "describe": "LGA-12(2x2) SMT ROHS"
+   },
+   {
+    "lcsc": "C919695",
+    "mpn": "LIS2MDLTR",
+    "maker": "STMicroelectronics",
+    "package": "LGA-12(2x2)",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      3.2968
+     ],
+     [
+      10,
+      3.2167
+     ],
+     [
+      30,
+      3.1627
+     ],
+     [
+      100,
+      3.1087
+     ],
+     [
+      102,
+      3.1087
+     ],
+     [
+      104,
+      3.1087
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.71V~3.6V 16bit 200uA I2C、SPI ±5mT ±5mT LGA-12(2x2) 3D Magnetic Sensors ROHS"
+   }
+  ],
+  "BMM350": [
+   {
+    "lcsc": "C17225907",
+    "mpn": "BMM350",
+    "maker": "Bosch Sensortec",
+    "package": "WLCSP-9(1.3x1.3)",
+    "stock": 5353,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      3.1774
+     ],
+     [
+      10,
+      2.7389
+     ],
+     [
+      30,
+      2.4788
+     ],
+     [
+      100,
+      2.2154
+     ],
+     [
+      500,
+      2.0926
+     ],
+     [
+      1000,
+      2.0387
+     ]
+    ],
+    "describe": "-40℃~+85℃ 1.72V~1.98V 200uA I2C、SPI ±2mT ±2mT、- WLCSP-9(1.3x1.3) 3D Magnetic Sensors ROHS"
+   },
+   {
+    "lcsc": "C7496950",
+    "mpn": "BMM350",
+    "maker": "Bosch Sensortec",
+    "package": "BGA-9_1.28X1.28mm",
+    "stock": 0,
+    "library": "expand",
+    "prices": [
+     [
+      1,
+      2.4542
+     ],
+     [
+      100,
+      2.2906
+     ]
+    ],
+    "describe": "BGA-9_1.28X1.28mm New Arrivals ROHS"
+   }
+  ]
+ }
+}

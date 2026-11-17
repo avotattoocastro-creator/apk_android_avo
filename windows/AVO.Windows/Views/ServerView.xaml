@@ -1,0 +1,52 @@
+<UserControl x:Class="Avo.Windows.Views.ServerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Avo.Windows.Controls">
+    <!-- AVO server (concept 01, screen 8). The real API contract is not validated: the view shows it as NOT CONNECTED and offers the
+         verified manual routes (web panel, HTTPS download of a .avo with full integrity checks). -->
+    <Grid Margin="16,12,16,14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <c:AvoCard Header="Servidor AVO" Accent="{StaticResource AvoWarn}">
+                <StackPanel>
+                    <c:AvoStatusIndicator Text="Estado" Detail="{Binding ServerStateText}" State="Warning"/>
+                    <TextBlock Text="{Binding ServerStatus}" Style="{StaticResource AvoDim}" Margin="0,8,0,0"/>
+                    <TextBlock Text="Panel web" Style="{StaticResource AvoLabel}" Margin="0,14,0,4"/>
+                    <TextBox Text="{Binding PanelUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Abrir panel en el navegador" Command="{Binding OpenPanelCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                </StackPanel>
+            </c:AvoCard>
+            <c:AvoCard Header="Descargar entrenamiento (.avo por HTTPS)" Margin="0,12,0,0">
+                <StackPanel>
+                    <TextBox Text="{Binding DownloadUrl, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Descargar, verificar e importar" Style="{StaticResource AvoPrimaryButton}" Command="{Binding DownloadCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <TextBlock Text="{Binding DownloadState}" Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                    <TextBlock Text="Solo HTTPS, máximo 100 MB. Tras descargar se validan manifiesto, SHA-256 por segmento y CRC de bloques; los duplicados se detectan por SHA-256 y por ID de sesión. Funciona sin conexión con la biblioteca local." Style="{StaticResource AvoCaption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                </StackPanel>
+            </c:AvoCard>
+            <c:AvoCard Header="Pendiente para sincronización automática" Margin="0,12,0,0">
+                <TextBlock Style="{StaticResource AvoCaption}" TextWrapping="Wrap"
+                           Text="Contrato documentado en windows/docs/SERVIDOR_CONTRATO_PENDIENTE.md: listado de sesiones del usuario autenticado, descarga por ID con hash, autenticación y gestión de errores. La interfaz IAvoServerClient ya está preparada; no se inventan endpoints ni se guardan credenciales."/>
+            </c:AvoCard>
+        </StackPanel>
+        <c:AvoCard Grid.Column="1" Margin="12,0,0,0" Header="Mis entrenamientos (biblioteca local verificada)">
+            <c:AvoCard.HeaderTools>
+                <Button Content="Actualizar" Command="{Binding RefreshLibraryCommand}" Padding="10,4"/>
+            </c:AvoCard.HeaderTools>
+            <DataGrid Style="{StaticResource AvoDataTable}" ItemsSource="{Binding LibraryRows}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Date}" Width="100"/>
+                    <DataGridTextColumn Header="Caballo" Binding="{Binding Horse}" Width="*"/>
+                    <DataGridTextColumn Header="Jinete" Binding="{Binding Rider}" Width="*"/>
+                    <DataGridTextColumn Header="Lugar" Binding="{Binding Place}" Width="90"/>
+                    <DataGridTextColumn Header="Origen" Binding="{Binding Kind}" Width="110"/>
+                    <DataGridTextColumn Header="Estado" Binding="{Binding State}" Width="140"/>
+                    <DataGridTextColumn Header="SHA-256" Binding="{Binding Sha}" Width="110"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </c:AvoCard>
+    </Grid>
+</UserControl>

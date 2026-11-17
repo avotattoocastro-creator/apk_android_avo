@@ -1,0 +1,39 @@
+name: Existencias JLCPCB (espalda V4)
+
+# Consulta existencias, precio y tipo (Basic/Extended) de las piezas candidatas de la placa AVO BACK V4.
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/avo-back-v4]
+    paths:
+      - 'hardware/back/V4/PCB/fuente/stock_jlc.py'
+      - 'hardware/back/V4/PCB/fuente/stock_lista.txt'
+      - '.github/workflows/jlc-stock-back-v4.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: back-v4-stock-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  stock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consulta
+        working-directory: hardware/back/V4/PCB
+        run: |
+          mkdir -p out_stock
+          python3 fuente/stock_jlc.py out_stock --list fuente/stock_lista.txt | tee out_stock/stock.log
+      - name: Guardar en la rama
+        run: |
+          git config user.name "avo-cad-bot"; git config user.email "avo-cad-bot@users.noreply.github.com"
+          T=$(mktemp -d); cp -r hardware/back/V4/PCB/out_stock $T/
+          git fetch origin ${{ github.ref_name }}; git reset -q --hard origin/${{ github.ref_name }}
+          rm -rf hardware/back/V4/PCB/out_stock; cp -r $T/out_stock hardware/back/V4/PCB/
+          git add -A hardware/back/V4/PCB/out_stock
+          git commit -m "Espalda V4: existencias JLCPCB consultadas en el CI [skip ci]" || echo "sin cambios"
+          git push origin HEAD:${{ github.ref_name }}
