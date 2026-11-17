@@ -9,18 +9,24 @@ https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/des
 A diferencia de los artefactos de Actions, no caducan y se descargan sin iniciar sesión (mientras el repositorio sea
 público; si se privatiza, GitHub pedirá iniciar sesión).
 
+**PROTOTIPO** = placas de desarrollo sin PCB propia (Waveshare, Heltec, XIAO). **BETA** = PCB propia. Las apps no
+llevan etiqueta (regla del usuario, 17/11/2026).
+
 | Archivo | Qué es | De dónde sale |
 |---|---|---|
-| `AVO_PECHO_FW.zip` | Firmware del pecho | Artefacto `AVO-CHEST-VX-Y-Z…` de mayor versión en `develop` (sin PREVIEW, RC, USB ni NOT-FOR-OTA) |
-| `AVO_ESPALDA_FW.zip` | Firmware de la espalda Heltec | `AVO-BACK-V3-…-HELTEC` (nunca la V4 4.0.0-dev) |
-| `AVO_CINCHA_FW.zip` | Firmware de la cincha (BNO085) | `AVO-GIRTH-V0-4-x-ESP32C6` |
-| `AVO_CINCHA_ECG_FW.zip` | Firmware de la cincha con ECG | `AVO-GIRTH-V0-5-x-ESP32C6` |
-| `AVO_CASCO_FW.zip`, `AVO_DOCK_FW.zip` | Firmware del casco y del soporte | Pendiente: aún no hay workflow que los compile |
-| `AVO_ANDROID.apk` · `AVO_TARJETAS.apk` | Apps Android | Artefacto `AVO-Performance-Horse-V…-APK` de `develop` |
+| `AVO_PECHO_PROTOTIPO_FW.zip` | Firmware del pecho | `AVO-CHEST-VX-Y-Z…` de mayor versión en `develop` (sin PREVIEW, RC, USB ni NOT-FOR-OTA) |
+| `AVO_ESPALDA_PROTOTIPO_FW.zip` | Firmware de la espalda Heltec | `AVO-BACK-V3-…-HELTEC` (nunca la V4) |
+| `AVO_CINCHA_PROTOTIPO_FW.zip` | Cincha XIAO + BNO085 | `AVO-GIRTH-V0-4-x-ESP32C6` |
+| `AVO_CINCHA_PROTOTIPO_ECG_FW.zip` | Cincha XIAO + ECG MAX30003 | `AVO-GIRTH-V0-5-x-ESP32C6` |
+| `AVO_CINCHA_BETA_FW.zip` | Cincha PCB REV D | `AVO-GIRTH-V0-6-x-ESP32C6` |
+| `AVO_ESPALDA_BETA_V4_FW.zip`, `AVO_CASCO_BETA_FW.zip`, `AVO_DOCK_BETA_FW.zip` | Firmware de las BETA | Cuando haya artefacto vigente |
+| `AVO_ANDROID.apk` · `AVO_TARJETAS.apk` | Apps Android | `AVO-Performance-Horse-V…-APK` de `develop` |
 | `AVO_UPDATE.apk` | AVO Update | `AVO-Update-APK` |
 | `AVO_WINDOWS.zip` | Windows V2 PRO x64 | `AVO-Windows-V2-PRO-x64` |
-| `CAD_*.zip` | STEP, STL, 3MF, DXF y PDF de cada pieza | Carpeta del repositorio (ver `descargas.json`) |
-| `VERSIONES.txt` · `manifiesto.json` | Qué versión, rama, commit y SHA-256 tiene cada archivo | Generados |
+| `CAD_<PIEZA>_PROTOTIPO_*.zip` · `CAD_<PIEZA>_BETA_*.zip` | STEP, STL, 3MF, DXF y PDF de cada pieza | Carpeta del repositorio (ver `descargas.json`) |
+| `VERSIONES.txt` · `manifiesto.json` | Versión, rama, commit y SHA-256 de cada archivo | Generados |
+
+Los nombres antiguos sin etiqueta (`AVO_PECHO_FW.zip`, `CAD_CINCHA_REV5.zip`…) se retiran de la release (`retirar`).
 
 **iOS / iPad:** solo por TestFlight. El `.ipa` no se publica nunca; el enlace público se pega en `ios.testflight_publico`.
 

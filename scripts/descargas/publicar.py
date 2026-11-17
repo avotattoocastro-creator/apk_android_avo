@@ -244,7 +244,7 @@ def main() -> int:
                 items[s] = anterior
             resultados.append({"salida": s, "estado": estado, "detalle": "no hay artefacto que cumpla el filtro"})
             continue
-        base = {"grupo": ent["grupo"], "titulo": ent["titulo"], "origen": "artefacto", "artefacto": art["name"],
+        base = {"grupo": ent["grupo"], "linea": ent.get("linea", ""), "titulo": ent["titulo"], "origen": "artefacto", "artefacto": art["name"],
                 "artefacto_id": art["id"], "rama": art["workflow_run"]["head_branch"],
                 "commit": art["workflow_run"].get("head_sha", ""), "ejecucion": art["workflow_run"]["id"],
                 "fecha": art["created_at"],
@@ -285,7 +285,7 @@ def main() -> int:
                        "vacia": f"{pieza['carpeta']} no tiene CAD"}[estado]
             resultados.append({"salida": s, "estado": "conservado" if anterior else "pendiente", "detalle": detalle})
             continue
-        items[s] = {"grupo": "CAD", "titulo": pieza["titulo"], "origen": "carpeta", **info,
+        items[s] = {"grupo": "CAD", "linea": pieza.get("linea", ""), "titulo": pieza["titulo"], "origen": "carpeta", **info,
                     "fecha": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                     "tamano": p.stat().st_size, "sha256": sha256(p)}
         subir.append(p)
@@ -298,12 +298,16 @@ def main() -> int:
     (out / "manifiesto.json").write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
     base_url = f"https://github.com/{REPO}/releases/download/{tag}"
     lineas = [f"AVO Performance Horse · descargas directas · {manifiesto['generado']}", "",
-              "Todo lo de aquí está COMPILADO EN CI. Que esté aquí NO significa VERIFICADO en hardware real.", ""]
+              "Todo lo de aquí está COMPILADO EN CI. Que esté aquí NO significa VERIFICADO en hardware real.",
+              "PROTOTIPO = sobre placas de desarrollo (sin PCB propia). BETA = con PCB propia.", ""]
     notas = [f"# {cfg['titulo']}", "",
              f"Actualizado: **{manifiesto['generado']}** · Enlaces fijos: `{base_url}/<ARCHIVO>`", "",
-             "> Todo está **compilado en CI**. Estar aquí **no** significa verificado en hardware real.", ""]
+             "> Todo está **compilado en CI**. Estar aquí **no** significa verificado en hardware real.",
+             "> **PROTOTIPO** = sobre placas de desarrollo (Waveshare, Heltec, XIAO), sin PCB propia. "
+             "**BETA** = con PCB propia.", ""]
     for grupo in ("Firmware", "Apps", "CAD"):
-        notas += [f"## {grupo}", "", "| Archivo | Qué es | Versión / origen | Rama | Fecha |", "|---|---|---|---|---|"]
+        notas += [f"## {grupo}", "", "| Archivo | Línea | Qué es | Versión / origen | Rama | Fecha |",
+                  "|---|---|---|---|---|---|"]
         lineas.append(f"== {grupo} ==")
         for s, it in items.items():
             if it.get("grupo") != grupo:
@@ -312,7 +316,7 @@ def main() -> int:
             origen = it.get("artefacto") or it.get("carpeta")
             ver = it.get("version") if it.get("origen") == "artefacto" else (it.get("commit") or "")[:7]
             ver = f" ({ver})" if ver else ""
-            notas.append(f"| [{s}]({base_url}/{s}) | {it['titulo']} | {origen}{ver} | `{it['rama']}`{fuera} "
+            notas.append(f"| [{s}]({base_url}/{s}) | {it.get('linea') or '—'} | {it['titulo']} | {origen}{ver} | `{it['rama']}`{fuera} "
                          f"| {it['fecha'][:10]} |")
             lineas.append(f"{s}: {origen} · rama {it['rama']}{fuera} · commit {(it.get('commit') or '')[:7]} · "
                           f"{it['fecha'][:10]} · sha256 {it.get('sha256', '')}")
@@ -359,6 +363,11 @@ def main() -> int:
         except RuntimeError as e:
             aviso(f"No se pudo subir {p.name}: {e}")
     gh("release", "edit", tag, "--repo", REPO, "--title", cfg["titulo"], "--notes-file", str(out / "NOTAS.md"))
+    # Nombres antiguos que ya no se usan (p. ej. antes de la regla PROTOTIPO/BETA): se quitan para no confundir.
+    for viejo in cfg.get("retirar", []):
+        if viejo not in items and gh("release", "delete-asset", tag, viejo, "--yes", "--repo", REPO,
+                                     comprobar=False).returncode == 0:
+            log(f"Retirado {viejo}")
     return 0
 
 

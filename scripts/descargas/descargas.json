@@ -5,67 +5,160 @@
   "rama_integracion": "develop/avo-performance-horse",
   "paginas_artefactos": 10,
   "esperar_compilaciones_min": 80,
-  "extensiones_prohibidas": [".jks", ".keystore", ".p12", ".pfx", ".p8", ".pem", ".key", ".mobileprovision", ".env", ".ipa"],
-
+  "extensiones_prohibidas": [
+    ".jks",
+    ".keystore",
+    ".p12",
+    ".pfx",
+    ".p8",
+    ".pem",
+    ".key",
+    ".mobileprovision",
+    ".env",
+    ".ipa"
+  ],
   "artefactos": [
     {
-      "salida": "AVO_PECHO_FW.zip",
+      "salida": "AVO_PECHO_PROTOTIPO_FW.zip",
       "grupo": "Firmware",
-      "titulo": "Pecho (reloj) · Waveshare ESP32-S3 AMOLED 2.06\"",
+      "titulo": "Pecho PROTOTIPO · Waveshare ESP32-S3 AMOLED 2.06\"",
       "nombre": "^AVO-CHEST-V\\d+-\\d+-\\d+",
       "excluir": "PREVIEW|NOT-FOR-OTA|AUDIT|HISTORICAL|-RC\\d|USB\\d",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["*.bin", "*.txt", "*.json", "*.sig", "*.md"],
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.json",
+        "*.sig",
+        "*.md"
+      ],
       "rechazar_archivo": "(?i)[-_.](rc|usb)[0-9]",
       "motivo_rechazo": "la OTA firmada del pecho solo acepta versiones X.Y.Z sin sufijos (-rc, -usb)",
-      "tipo": "zip"
+      "tipo": "zip",
+      "linea": "PROTOTIPO"
     },
     {
-      "salida": "AVO_ESPALDA_FW.zip",
+      "salida": "AVO_ESPALDA_PROTOTIPO_FW.zip",
       "grupo": "Firmware",
-      "titulo": "Espalda RTK · Heltec Wireless Stick Lite V3 + ZED-F9P (línea 3.x)",
+      "titulo": "Espalda PROTOTIPO · Heltec Wireless Stick Lite V3 + ZED-F9P (3.x)",
       "nombre": "^AVO-BACK-V3-\\d+-\\d+-HELTEC$",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["*.bin", "*.txt", "*.log"],
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
       "rechazar_archivo": "(?i)V4[-_]0|4[-_.]0[-_.]0",
       "motivo_rechazo": "la espalda V4 (4.0.0-dev) no se instala nunca en el hardware Heltec actual",
-      "tipo": "zip"
+      "tipo": "zip",
+      "linea": "PROTOTIPO"
     },
     {
-      "salida": "AVO_CINCHA_FW.zip",
+      "salida": "AVO_CINCHA_PROTOTIPO_FW.zip",
       "grupo": "Firmware",
-      "titulo": "Cincha IMU · XIAO ESP32-C6 + BNO085 (REV 5.9.1, línea 0.4.x)",
+      "titulo": "Cincha PROTOTIPO · XIAO ESP32-C6 + BNO085 (REV 5.9.1, línea 0.4.x)",
       "nombre": "^AVO-GIRTH-V0-4-\\d+-ESP32C6$",
-      "ramas": ["develop/avo-performance-horse", "feature/avo-wifi-sync"],
-      "archivos": ["*.bin", "*.txt", "*.log"],
-      "tipo": "zip"
+      "ramas": [
+        "develop/avo-performance-horse",
+        "feature/avo-wifi-sync"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
+      "tipo": "zip",
+      "linea": "PROTOTIPO"
     },
     {
-      "salida": "AVO_CINCHA_ECG_FW.zip",
+      "salida": "AVO_CINCHA_PROTOTIPO_ECG_FW.zip",
       "grupo": "Firmware",
-      "titulo": "Cincha con ECG · XIAO ESP32-C6 + BNO085 + MAX30003 (REV 5.10)",
+      "titulo": "Cincha PROTOTIPO con ECG · XIAO ESP32-C6 + BNO085 + MAX30003 (REV 5.10)",
       "nombre": "^AVO-GIRTH-V0-5-\\d+-ESP32C6$",
-      "ramas": ["develop/avo-performance-horse", "feature/girth-ecg-0-5-0"],
-      "archivos": ["*.bin", "*.txt", "*.log"],
+      "ramas": [
+        "develop/avo-performance-horse",
+        "feature/girth-ecg-0-5-0"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
+      "tipo": "zip",
+      "linea": "PROTOTIPO"
+    },
+    {
+      "salida": "AVO_CINCHA_BETA_FW.zip",
+      "linea": "BETA",
+      "grupo": "Firmware",
+      "titulo": "Cincha BETA · PCB REV D (ESP32-C6-MINI + LSM6DSV16X + MMC5983MA + ADS1292)",
+      "nombre": "^AVO-GIRTH-V0-6-\\d+-ESP32C6$",
+      "ramas": [
+        "develop/avo-performance-horse",
+        "feature/girth-pcb-rev-d",
+        "feature/girth-pcb-rev-d-aro"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
       "tipo": "zip"
     },
     {
-      "salida": "AVO_CASCO_FW.zip",
+      "salida": "AVO_ESPALDA_BETA_V4_FW.zip",
+      "linea": "BETA",
       "grupo": "Firmware",
-      "titulo": "Casco BACK V5",
+      "titulo": "Espalda BETA · placa V4 ESP32-S3 (4.0.0-dev; NO para la Heltec)",
+      "nombre": "^AVO-BACK-V4-\\d+-\\d+-\\d+-DEV\\d+$",
+      "ramas": [
+        "develop/avo-performance-horse",
+        "feature/avo-back-v4"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
+      "tipo": "zip"
+    },
+    {
+      "salida": "AVO_CASCO_BETA_FW.zip",
+      "grupo": "Firmware",
+      "titulo": "Casco BETA · BACK V5 (PCB propia)",
       "nombre": "^AVO-BACK-V5-.*(FW|FIRMWARE)",
-      "ramas": ["develop/avo-performance-horse", "feature/back-v5-casco"],
-      "archivos": ["*.bin", "*.txt", "*.log"],
-      "tipo": "zip"
+      "ramas": [
+        "develop/avo-performance-horse",
+        "feature/back-v5-casco"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
+      "tipo": "zip",
+      "linea": "BETA"
     },
     {
-      "salida": "AVO_DOCK_FW.zip",
+      "salida": "AVO_DOCK_BETA_FW.zip",
       "grupo": "Firmware",
-      "titulo": "Soporte de pared DOCK",
+      "titulo": "Soporte de pared BETA · DOCK V1 (PCB REV A)",
       "nombre": "^AVO-DOCK-V\\d+-(FW|FIRMWARE)",
-      "ramas": ["develop/avo-performance-horse", "claude/dock-cargador-v1"],
-      "archivos": ["*.bin", "*.txt", "*.log"],
-      "tipo": "zip"
+      "ramas": [
+        "develop/avo-performance-horse",
+        "claude/dock-cargador-v1"
+      ],
+      "archivos": [
+        "*.bin",
+        "*.txt",
+        "*.log"
+      ],
+      "tipo": "zip",
+      "linea": "BETA"
     },
     {
       "salida": "AVO_ANDROID.apk",
@@ -73,9 +166,14 @@
       "titulo": "Android · AVO Performance Horse",
       "nombre": "^AVO-Performance-Horse-V\\d+[-_]\\d+.*-APK$",
       "excluir": "Update|Source|Audit",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["AVO_Performance_Horse_V*.apk"],
-      "tipo": "archivo"
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "AVO_Performance_Horse_V*.apk"
+      ],
+      "tipo": "archivo",
+      "linea": ""
     },
     {
       "salida": "AVO_TARJETAS.apk",
@@ -83,45 +181,127 @@
       "titulo": "Android · AVO Tarjetas (licencias NFC)",
       "nombre": "^AVO-Performance-Horse-V\\d+[-_]\\d+.*-APK$",
       "excluir": "Update|Source|Audit",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["AVO_Tarjetas_V*.apk"],
-      "tipo": "archivo"
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "AVO_Tarjetas_V*.apk"
+      ],
+      "tipo": "archivo",
+      "linea": ""
     },
     {
       "salida": "AVO_UPDATE.apk",
       "grupo": "Apps",
       "titulo": "Android · AVO Update (firmware por USB)",
       "nombre": "^AVO-Update-APK$",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["*.apk"],
-      "tipo": "archivo"
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "*.apk"
+      ],
+      "tipo": "archivo",
+      "linea": ""
     },
     {
       "salida": "AVO_WINDOWS.zip",
       "grupo": "Apps",
       "titulo": "Windows · AVO V2 PRO (x64)",
       "nombre": "^AVO-Windows-V2-PRO-x64$",
-      "ramas": ["develop/avo-performance-horse"],
-      "archivos": ["AVO_Windows_V2_PRO_x64.zip"],
-      "tipo": "archivo"
+      "ramas": [
+        "develop/avo-performance-horse"
+      ],
+      "archivos": [
+        "AVO_Windows_V2_PRO_x64.zip"
+      ],
+      "tipo": "archivo",
+      "linea": ""
     }
   ],
-
   "cad": {
-    "extensiones": [".step", ".stp", ".stl", ".3mf", ".dxf", ".pdf", ".fcstd", ".json", ".txt", ".md"],
+    "extensiones": [
+      ".step",
+      ".stp",
+      ".stl",
+      ".3mf",
+      ".dxf",
+      ".pdf",
+      ".fcstd",
+      ".json",
+      ".txt",
+      ".md"
+    ],
     "piezas": [
-      {"salida": "CAD_PECHO_REV_D.zip",        "titulo": "Caja del pecho REV D",                         "rama": "develop/avo-performance-horse", "carpeta": "hardware/chest/REV_D"},
-      {"salida": "CAD_ESPALDA_V22H_E5.zip",    "titulo": "Carcasa de la espalda V2.2H Rev E.5",          "rama": "develop/avo-performance-horse", "carpeta": "hardware/back/V2_2H_REV_E5"},
-      {"salida": "CAD_CINCHA_REV5.zip",        "titulo": "Cápsula de la cincha REV 5.x (vigente en develop)", "rama": "develop/avo-performance-horse", "carpeta": "hardware/girth/REV5/out"},
-      {"salida": "CAD_CINCHA_MONTAJE.zip",     "titulo": "Montaje de la cincha (conjuntos R6.2)",       "rama": "develop/avo-performance-horse", "carpeta": "hardware/girth/CINCHA_MONTAJE/out"},
-      {"salida": "CAD_CASCO_V5.zip",           "titulo": "Casco BACK V5",                                "rama": "feature/back-v5-casco",         "carpeta": "hardware/back/V5_CASCO/CAD/out"},
-      {"salida": "CAD_DOCK_V1.zip",            "titulo": "Soporte de pared DOCK V1",                     "rama": "claude/dock-cargador-v1",       "carpeta": "hardware/dock/V1/CAD/out"},
-      {"salida": "CAD_ESPALDA_V4.zip",         "titulo": "Espalda V4 (placa propia; NO es el hardware actual)", "rama": "develop/avo-performance-horse", "carpeta": "hardware/back/V4/CAD"}
+      {
+        "salida": "CAD_PECHO_PROTOTIPO_REV_D.zip",
+        "titulo": "Caja del pecho PROTOTIPO REV D",
+        "rama": "develop/avo-performance-horse",
+        "carpeta": "hardware/chest/REV_D",
+        "linea": "PROTOTIPO"
+      },
+      {
+        "salida": "CAD_ESPALDA_PROTOTIPO_V22H_E5.zip",
+        "titulo": "Carcasa de la espalda PROTOTIPO V2.2H Rev E.5",
+        "rama": "develop/avo-performance-horse",
+        "carpeta": "hardware/back/V2_2H_REV_E5",
+        "linea": "PROTOTIPO"
+      },
+      {
+        "salida": "CAD_CINCHA_PROTOTIPO_REV5.zip",
+        "titulo": "Cápsula de la cincha PROTOTIPO REV 5.x (XIAO + BNO085)",
+        "rama": "develop/avo-performance-horse",
+        "carpeta": "hardware/girth/REV5/out",
+        "linea": "PROTOTIPO"
+      },
+      {
+        "salida": "CAD_CINCHA_BETA_REV6_MONTAJE.zip",
+        "titulo": "Cincha BETA REV 6.2: cápsula, soporte y montaje (PCB REV D)",
+        "rama": "develop/avo-performance-horse",
+        "carpeta": "hardware/girth/CINCHA_MONTAJE/out",
+        "linea": "BETA"
+      },
+      {
+        "salida": "CAD_CASCO_BETA_V5.zip",
+        "titulo": "Casco BETA · BACK V5",
+        "rama": "feature/back-v5-casco",
+        "carpeta": "hardware/back/V5_CASCO/CAD/out",
+        "linea": "BETA"
+      },
+      {
+        "salida": "CAD_DOCK_BETA_V1.zip",
+        "titulo": "Soporte de pared BETA · DOCK V1",
+        "rama": "claude/dock-cargador-v1",
+        "carpeta": "hardware/dock/V1/CAD/out",
+        "linea": "BETA"
+      },
+      {
+        "salida": "CAD_ESPALDA_BETA_V4.zip",
+        "titulo": "Espalda BETA V4 (placa propia; NO es la Heltec)",
+        "rama": "develop/avo-performance-horse",
+        "carpeta": "hardware/back/V4/CAD",
+        "linea": "BETA"
+      }
     ]
   },
-
   "ios": {
     "testflight_publico": "",
     "_leeme": "Enlace público de TestFlight (https://testflight.apple.com/join/XXXX). El .ipa no se publica nunca."
-  }
+  },
+  "_nombres": "Regla del usuario (17/11/2026): lo que va sin PCB propia (placas de desarrollo: Waveshare, Heltec, XIAO) se llama PROTOTIPO; lo que lleva PCB propia, BETA. Las apps no llevan etiqueta.",
+  "retirar": [
+    "AVO_PECHO_FW.zip",
+    "AVO_ESPALDA_FW.zip",
+    "AVO_CINCHA_FW.zip",
+    "AVO_CINCHA_ECG_FW.zip",
+    "AVO_CASCO_FW.zip",
+    "AVO_DOCK_FW.zip",
+    "CAD_PECHO_REV_D.zip",
+    "CAD_ESPALDA_V22H_E5.zip",
+    "CAD_CINCHA_REV5.zip",
+    "CAD_CINCHA_MONTAJE.zip",
+    "CAD_CASCO_V5.zip",
+    "CAD_DOCK_V1.zip",
+    "CAD_ESPALDA_V4.zip"
+  ]
 }

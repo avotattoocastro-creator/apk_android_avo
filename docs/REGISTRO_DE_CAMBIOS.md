@@ -31,6 +31,18 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 
+## 2026-11-17 — Docs/CI — Nombres PROTOTIPO / BETA y estado vigente único
+**Autor:** Claude · Rama `claude/nombres-prototipo-beta`
+**Qué cambia:** regla del usuario: sin PCB propia = **PROTOTIPO** (Waveshare, Heltec, XIAO); con PCB propia = **BETA**
+(cincha PCB REV D, casco V5, DOCK V1, espalda V4). Descargas renombradas (`AVO_PECHO_PROTOTIPO_FW.zip`,
+`CAD_CINCHA_BETA_REV6_MONTAJE.zip`…), nueva `AVO_CINCHA_BETA_FW.zip` (0.6.x) y entrada para la espalda BETA V4; los
+nombres antiguos se retiran de la release. `AGENTS.md`: bloque «Empieza aquí», regla de nombres, hardware por líneas,
+etiquetas de respaldo ya creadas y descargas. `ESTADO_DESARROLLO_Y_VERSIONES.md`: tabla única vigente arriba; lo del
+22/10 queda como histórico.
+**No se ha tocado:** carpetas, workflows de compilación ni nombres de artefactos existentes (renombrarlos rompería CI e
+historial; la etiqueta se aplica en docs, descargas y carpetas nuevas).
+**Validación:** publicación simulada en local con los artefactos reales · se publica al fusionar.
+
 ## 2026-11-17 — CI — Descargas directas (release fija `descargas`)
 **Autor:** Claude · Rama `claude/descargas-directas` · **CI:** se ejecuta por primera vez al integrar en `develop`
 **Qué cambia:** workflow nuevo `publicar-descargas.yml` + `scripts/descargas/publicar.py` + `descargas.json`. Publica en
