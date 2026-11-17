@@ -24,6 +24,38 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.3.1 — eje en las columnas y labio sobre la tapa
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
+**Qué cambia (marcado del usuario, «integrado»):**
+- las aletas del eje pasan junto a las columnas de las esquinas (±20,5 en +X, ±19,5 en −X: llave de posición);
+- el balancín (14 / 12 mm) lleva una barra de columna a columna con los pasadores Ø2 × 6 en sus extremos;
+- labio superior que tapa el hueco y entra en un rebaje del borde de la tapa (fondo a 0,5 mm del interior).
+**Comprobado (script local):**
+- piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas; `verificar_step.py` 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado y sin choques con el soporte al abrir;
+- diente libre a unos 9,5° (1,4 mm de pulsador); tope del labio a unos 14,5°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO**.
+
+## 2026-11-17 — Cincha CAD REV 6.3 (con funda) — cierre magnético de balancín
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico`
+**Qué cambia:** en `hardware/girth/CINCHA_MONTAJE` los pestillos elásticos y los seguros TPU de la REV 6.2 se sustituyen por un **balancín magnético en cada lado corto**:
+- balancín a ras de la tapa, con 2 pasadores de acero Ø2 × 6 en aletas de la base;
+- dientes rectos en ventanas del cerco;
+- 2 + 2 imanes Ø5 × 1 en atracción (balancín ↔ cerco), con orificio y tapón;
+- cerco de 3,0;
+- soporte de 99,6 × 84,6;
+- piezas renombradas a `R6_3`;
+- `fuente/verificar_cierre.py` nuevo (comprobación por vóxeles);
+- renders 13, 13b y 14 nuevos;
+- patrón de la funda regenerado (los tornillos de Chicago cambian de sitio).
+**Por qué:** decisión del usuario, que aplica a la cincha vigente (con funda) el diseño que se había acordado sobre la REV5 (PR #46, que se cierra sin fusionar). Sin imanes de repulsión arriba: no caben por la ranura de la junta y la tapa de 2,5 mm.
+**Comprobado (script local, no hay workflow para esta carpeta):**
+- `avo_cincha_montaje.py`: todas las piezas cerradas; conjuntos de 96 sólidos con 0 aristas abiertas;
+- `verificar_step.py`: 25/25 OK;
+- `verificar_cierre.py`: 0 mm³ de interferencia cerrado, sin choques al abrir, dientes libres a unos 10° (1,5 mm de pulsador), tope a unos 26°.
+**Validación:** IMPLEMENTADO · **NO VERIFICADO** (ni impreso ni probado).
+**Pendiente:** fuerza real de los imanes apilados y del rozamiento, probeta del cierre, ensayo de tirón (§8.4).
+
 
 
 

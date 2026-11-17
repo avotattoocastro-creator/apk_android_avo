@@ -152,7 +152,7 @@ def main():
                   "Cincha tipo Decathlon Fouganza 110 cm; cápsula en el centro (bajo el esternón), soporte cosido-atornillado a la funda."])
     render(allC, os.path.join(OUTR, "02_conjunto_curvado_desde_abajo.png"), az=-70, el=-35,
            title="Conjunto curvado visto desde abajo (lado exterior de la cincha)",
-           notes=["REV 6.2: sin bolsillo; la cápsula queda a la vista, sujeta por 2 pestillos con seguro; cierre de velcro + solapa en el canto trasero."])
+           notes=["REV 6.3: sin bolsillo; la cápsula queda a la vista, sujeta por 2 balancines magnéticos; cierre de velcro + solapa en el canto trasero."])
     render(allC, os.path.join(OUTR, "03_conjunto_curvado_lado_caballo.png"), az=110, el=55,
            title="Lado del caballo: ventanas de los electrodos en la cara interior",
            notes=["ECG+ a la izquierda (u = +190), REF pequeño y ECG− a la derecha (u = −150 y −280). Piel rebajada a 1 mm alrededor."],
@@ -174,13 +174,15 @@ def main():
     for m in soporte:
         m.transform(A.T_translate(0, 0, -M.SOP["cama"] - M.SOP["precarga"]))
     render(caps + soporte, os.path.join(OUTR, "06_capsula_en_soporte.png"), az=-50, el=30,
-           title="REV 6.2: cápsula (62,9 × 64,7 × 15,5) en el soporte con 2 pestillos y seguros", notes=["Cerco de 4,5 mm (holgura 0,25); pestillos en ±X con pulsador rebajado tras el contrafuerte; seguro TPU 95A naranja con clic.", "Aro de luz (±Y) libre por encima del cerco; oreja de la tapa con cordón de seguridad al ala del soporte; soporte 90 × 82,6."])
+           title="REV 6.3: cápsula en el soporte con 2 balancines magnéticos (rojo) a ras de la tapa",
+           notes=["Cerco de 3,0 × 4,5 mm (holgura 0,25); balancines en ±X sobre 2 aletas de la base; dientes rectos en ventanas del cerco.",
+                  "Imanes Ø5 × 1 (2 + 2 por lado) en atracción; oreja de la tapa con cordón de seguridad al ala del soporte."])
     # explosionado
     ex = []
-    off = {"AVO_CINCHA_R6_2_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
-           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_2_junta_TPU85A": 18,
+    off = {"AVO_CINCHA_R6_3_tapa": 34, "Tornillo_ISO7380_M2x6_inox_x6": 56, "Arandela_DIN433_M2_inox_x6": 50,
+           "Antena_Molex_146153-0050": 34, "Coaxial_1.13_50mm": 26, "AVO_CINCHA_R6_3_junta_TPU85A": 18,
            "PCB_REV_D_46x30": 24, "PCB_componentes": 24, "PCB_pasivos": 24, "UFL_conector": 24, "LED_SK6812SIDE-A_x4": 24,
-           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_2_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
+           "Tornillo_ISO7380_M2x5_inox_x4_PCB": 24, "AVO_CINCHA_R6_3_separador_TPU85A": 12, "Hilos_AWG28_pogo": 8,
            "Hilos_bateria": 8, "U4_ESP32-C6-MINI-1U": 24, "LiPo_603450_1000mAh": 4}
     for m in caps:
         mm = m.copy()
@@ -189,11 +191,11 @@ def main():
     for m in soporte:
         mm = m.copy(); mm.transform(A.T_translate(0, 0, -16)); ex.append(mm)
     render(ex, os.path.join(OUTR, "07_capsula_explosionada.png"), az=-55, el=22, size=(1400, 1600),
-           title="Cápsula REV 6.2 explosionada",
+           title="Cápsula REV 6.3 explosionada",
            notes=["De arriba abajo: tornillos M2×6 + arandela, tapa opaca con antena Molex 146153, junta TPU 85A en ranura,",
                   "PCB REV D (46 × 30) con 4 LED laterales, colgada de la tapa con 4 M2×5, separador TPU, celda 603450,",
                   "base translúcida (aro de luz) con la ranura de la junta y 2 placas pogo selladas con epoxi,",
-                  "y el soporte con los 2 conectores de pines (carga + ECG), los pestillos integrados, los 2 seguros y 4 Chicago."])
+                  "2 balancines con sus pasadores Ø2 × 6 e imanes, y el soporte con los 2 conectores de pines y 4 Chicago."])
     # corte: solo caras con todos los vértices en y < corte
     cut = M.CAP["pogo_y"]
     sec = []
@@ -209,14 +211,18 @@ def main():
     # piezas impresas
     pz = []
     x = 0
-    for m in [M.pieza_base(), M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte(), M.pieza_seguro(1), M.pieza_seguro(-1), M.pieza_tacos(True)]:
+    bse = M.pieza_base()
+    for e_ in (M.pieza_aletas(1), M.pieza_aletas(-1)):
+        bse.merge(e_)
+    for m in [bse, M.pieza_tapa(), M.pieza_junta(False), M.pieza_separador(), M.pieza_soporte(),
+              M.pieza_balancin(1, True), M.pieza_balancin(-1, True), M.pieza_tapas_imanes(), M.pieza_tacos(True)]:
         mm = M.stl_print(m, m.name, m.name.endswith("tapa"))
         lo, hi = mm.bbox()
         mm.transform(A.T_translate(x - lo[0], 0, 0)); x += (hi[0] - lo[0]) + 12
         pz.append(mm)
     render(pz, os.path.join(OUTR, "09_piezas_impresas.png"), az=-70, el=40, size=(1800, 800),
            title="Piezas impresas en posición de impresión (Elegoo Centauri Carbon)",
-           notes=["Base PETG natural (aro de luz) · tapa PETG opaco (boca abajo) · junta y separador TPU 85A · soporte PETG con pestillos · 2 seguros TPU 95A · 4 tacos TPU 85A."])
+           notes=["Base PETG natural con aletas (aro de luz) · tapa PETG opaco (boca abajo) · junta y separador TPU 85A · soporte PETG · 2 balancines PETG (cara exterior abajo) · 4 tapones · 4 tacos TPU 85A."])
     render(flat({"F": gC["Funda"], "E": gC["Electrodos"], "C": gC["Cables"]}) + soporte_world(gC) + gC["Capsula_impresa"],
            os.path.join(OUTR, "10_funda_detalle.png"), az=75, el=-30, size=(1600, 1000),
            title="Funda de piel con el sistema (sin la cincha)",
@@ -238,26 +244,27 @@ def extra(caps, soporte):
            notes=["Junta TPU en ranura sobre el canto de la base (z 11,8–13,0); tapa opaca con tope duro; LED con centro a z = %.1f." % zl,
                   "Vista recortada (se quitan las caras con x > 14)."],
            labels=[((14.0, 14.66, zl), "lente D11"), ((14.0, -14.66, zl), "lente D12")])
-    # corte por el pestillo +X (plano y = centro del pestillo), visto desde −Y
-    G = M.pestillo_geo(1)
-    yc = G["yc"]
-    sec = []
-    for m in caps + soporte:
-        V = m.np()
-        F = [f for f in m.F if V[f[0]][:, 1].min() >= yc - 0.01]
-        if F:
-            mm = A.Mesh(m.name, m.color); mm.V = m.V; mm.F = F; sec.append(mm)
+    # corte por un diente del balancín +X y por el imán, vistos desde −Y
+    xw, x_rim, xi, xo, yc = M.bal_x()
     zc0 = -M.SOP["precarga"]
-    xw = G["xw"]
-    render(sec, os.path.join(OUTR, "13_corte_por_pestillo.png"), az=-90, el=2, size=(1500, 1000),
-           title="Corte por el pestillo +X (y = %.1f): gancho en la ranura exterior de la base, seguro detrás" % yc,
-           notes=["Viga PETG 1,2 × 12, L = 12,9 mm desde la raíz (z 0,8); gancho que entra 0,9 en la ranura, cara inferior plana; rampa arriba.",
-                  "Seguro TPU 95A en el hueco de 1,6 entre la viga y el contrafuerte; pulsador rebajado; tacos TPU que precargan la cápsula."],
-           labels=[((xw + 0.4, yc, M.PEST["z_ranura"][0] - 0.3 + 0.0), "gancho"), ((G["xo"] + 0.8, yc, 2.0), "seguro"),
-                   ((xw - 1.0, yc, M.PEST["z_ranura"][1] + 2), "ranura exterior")])
-    render(caps + soporte, os.path.join(OUTR, "14_capsula_en_soporte_vista_pestillo.png"), az=-20, el=25,
-           size=(1500, 1000), title="Pestillo +X con su seguro (naranja) y el contrafuerte que lo protege",
-           notes=["Todo queda por debajo de la tapa de la cápsula y dentro del contorno del soporte; cantos redondeados."])
+    for (yy, fn, tt) in ((yc + (M.BAL["ty0"] + M.BAL["w"][1] / 2 - M.BAL["tyend"]) / 2, "13_corte_por_diente.png",
+                          "Corte por un diente del balancín +X (REV 6.3.1)"),
+                         (yc, "13b_corte_por_imanes.png", "Corte por los imanes del balancín +X (atracción)")):
+        sec = []
+        for m in caps + soporte:
+            V = m.np()
+            F = [f for f in m.F if V[f[0]][:, 1].min() >= yy - 0.01]
+            if F:
+                mm = A.Mesh(m.name, m.color); mm.V = m.V; mm.F = F; sec.append(mm)
+        render(sec, os.path.join(OUTR, fn), az=-90, el=2, size=(1500, 1000), title=tt,
+               notes=["Balancín a ras de la tapa, eje Ø2 en (%.1f; %.1f) de la cápsula; diente recto de 1,0 mm; 2 + 2 imanes Ø5 × 1." % (
+                   xi, M.BAL["pz_c"]),
+                      "Abrir: empujar la cápsula hacia abajo y apretar los 2 balancines por arriba (sueltan a ~9,5°; tope a ~14,5°)."],
+               labels=[((xi - 0.5, yy, M.BAL["top_c"]), "diente"), ((xi, yy, M.BAL["pz_c"]), "eje"),
+                       ((xi + 1.5, yy, M.BAL["mag_c"]), "imán")])
+    render(caps + soporte, os.path.join(OUTR, "14_capsula_en_soporte_vista_balancin.png"), az=-20, el=25,
+           size=(1500, 1000), title="REV 6.3.1: balancín +X a ras de la tapa, labio en su rebaje",
+           notes=["Nada sobresale por encima de la tapa; el eje apoya en 2 aletas pegadas a las columnas de las esquinas."])
 
 
 def soporte_world(g):

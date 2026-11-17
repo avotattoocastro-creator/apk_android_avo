@@ -147,12 +147,31 @@ Z_LED = ZP1 + 1.0                               # centro de la luz de los LED
 H_CAP = ZT1
 
 # soporte
-SOP = dict(holgura=0.25, cerco=2.0, cerco_h=4.5, cama=8.0, pestana=2.5, ala=8.0,
+SOP = dict(holgura=0.25, cerco=3.0, cerco_h=4.5, cama=8.0, pestana=2.5, ala=8.0,
            precarga=0.7)               # la cápsula apoya en 4 tacos TPU 85A: fondo a 0,7 mm sobre la cama (compresión 0,15)
-# REV 6.2: pestillos elásticos de PETG integrados en el soporte (lados ±X), con gancho en la ranura exterior de la base y
-# seguro deslizante de TPU 95A con retén de clic detrás de cada pestillo.
-PEST = dict(t=1.2, b=12.0, z_raiz=0.8, enganche=0.9, holgura_gancho=0.2, hueco=1.6, z_ranura=(5.0, 6.4),
-            ranura_prof=1.2, chaflan=0.8, tope_alto=19.0)
+# REV 6.3 (16/11/2026, decisión del usuario): CIERRE MAGNÉTICO DE BALANCÍN en cada lado corto ±X. Sustituye a los
+# pestillos elásticos y a los seguros TPU de la REV 6.2. Cerco de 2,0 → 3,0 (aloja los imanes).
+#  - El balancín va en la cápsula, por fuera del cerco, con la cara superior A RAS DE LA TAPA (protección contra golpes).
+#    Gira sobre 2 pasadores CORTOS de acero ISO 2338 Ø2 × 6 metidos a presión en 2 aletas de la base (las aletas pasan
+#    por ranuras del cerco: llave de posición, balancín de 14 mm en +X y de 12 mm en −X).
+#  - Por debajo del eje, 2 dientes RECTOS entran 1,0 mm en ventanas de la cara exterior del cerco. 2 + 2 imanes Ø5 × 1
+#    (los de siempre, apilados de 2) en el balancín y en el cerco se ATRAEN y mantienen los dientes dentro (sin muelle).
+#  - Los 4 tacos TPU y los pogo empujan la cápsula hacia arriba: el diente queda cargado contra el techo de la ventana
+#    (sin juego) y, cargado, el rozamiento y los imanes impiden abrirlo. Para abrir: empujar la cápsula hacia abajo y
+#    apretar los dos balancines por arriba hacia dentro (una mano). Para cerrar: bajarla; el bisel del diente resbala.
+#  - Imanes con orificio y tapa impresa (sin pausa de impresión). Sin imanes de repulsión arriba: en la REV 6 la
+#    pared de la base lleva la ranura de la junta a z 11,8–13,0 y la tapa solo tiene 2,5 mm (no caben a una altura útil).
+BAL = dict(gap=0.25, t=3.1, pz_c=7.0, boss_r=2.6, hole=2.4, pin_hole=1.95, pin_len=6.0, pin_in=3.0,
+           w={1: 14.0, -1: 12.0}, fin_t=2.75, fin_clear=0.25, fin_emb=0.5,
+           e=1.0, top_c=2.5, root_b_c=1.1, tip_b_c=2.0, ty0=3.5, tyend=0.6, roof_gap=0.05, win_deep=0.5, win_w=0.3,
+           mag=5.1, mag_t=2.1, mag_c=0.7, skin=0.45, cb=0.55, cap_lip=0.25, cap_t=0.5,
+           bot_c=-2.5, pock_out=4.2, pock_clear=0.25,
+           # REV 6.3.1 (marcado del usuario, «integrado»): el eje se apoya junto a las COLUMNAS de las esquinas (aletas
+           # pegadas a ellas, no junto al balancín) y el balancín lleva una BARRA de columna a columna a la altura del
+           # eje. Las aletas de +X y −X van a distinta distancia (llave de posición).
+           col_off={1: 20.5, -1: 19.5},
+           # labio superior que tapa el hueco entre el balancín y la tapa; al apretar entra en un rebaje de la tapa
+           lip_x=29.0, lip_t=0.8, rec_floor=13.5, rec_x=26.8, rec_cy=0.2)   # fondo a 0,5 del interior   # el fondo del rebaje hace de tope al empujar (pogo a 1,05 de 1,1)
 TACOS = [(-27.3, 6.0), (27.3, 6.0), (-27.3, -15.0), (27.3, -15.0)]
 REPORT = {"parametros": {}, "piezas": {}, "comprobaciones": []}
 
@@ -279,14 +298,14 @@ def cap_contours():
         R.add(A.circle(x, y, CAP["boss_r"], 40))
     C["O"] = R.contour(0.03)
     C["_rasterO"] = R
-    C["O_ranura"] = R.offset(-PEST["ranura_prof"]).contour(0.03)       # ranura exterior de los pestillos
-    C["O_chaflan"] = R.offset(-PEST["chaflan"]).contour(0.03)          # chaflán del fondo (entrada)
+    C["O_chaflan"] = R.offset(-0.8).contour(0.03)                      # chaflán del fondo (entrada)
     Rl = A.Raster(-45, -48, 45, 40, 0.02)
     Rl.add(C["O0"])
     for (x, y) in CAP["tornillos"]:
         Rl.add(A.circle(x, y, CAP["boss_r"], 40))
     Rl.add(A.rrect(0.0, OREJA["y"] - 0.5, 12.0, 7.0, 3.0, 6))            # oreja del cordón de seguridad
     C["O_tapa"] = Rl.contour(0.03)
+    C["_rasterL"] = Rl
     for nm, (o0, o1) in (("g", (CAP["ranura"]["off0"], CAP["ranura"]["off1"])),
                          ("j", (CAP["junta"]["off0"], CAP["junta"]["off1"]))):
         C[nm + "I"] = A.rrect(cx, cy, w + 2 * o0, h + 2 * o0, I["r"] + o0, 6)
@@ -304,7 +323,53 @@ def pogo_plate_contours(cx, cy):
 
 
 # =============================================================================================== piezas de la cápsula
+def bal_x():
+    """REV 6.3: cotas en X del cierre en el lado +X (el de −X es simétrico): cara de la base, cara exterior del cerco,
+    cara interior del balancín (= eje) y cara exterior del balancín; y centro del lado corto en Y"""
+    I = CAP["I"]
+    xw = I["x1"] + CAP["pared"]
+    x_rim = xw + SOP["holgura"] + SOP["cerco"]
+    xi = x_rim + BAL["gap"]
+    yc = (I["y0"] + I["y1"]) / 2
+    return xw, x_rim, xi, xi + BAL["t"], yc
+
+
+def _chord(r, dz, tear_up=False):
+    """semiancho de un agujero de radio r a la distancia dz del centro (en gota hacia +dz si tear_up)"""
+    h = math.sqrt(max(r * r - dz * dz, 0.0)) if abs(dz) < r else 0.0
+    if tear_up and 0 <= dz < r * math.sqrt(2):
+        h = max(h, r * math.sqrt(2) - dz)
+    return h
+
+
+def pieza_aletas(sg):
+    """REV 6.3: las 2 aletas del lado sg, que llevan el pasador del balancín. Se imprimen CON LA BASE (mismo STL; entran
+    0,5 mm en su pared). Perfil en XZ con el agujero del pasador (Ø1,95 a presión, en gota hacia arriba)."""
+    xw, x_rim, xi, xo, yc = bal_x()
+    r, pz = BAL["boss_r"], BAL["pz_c"]
+    x0 = xw - BAL["fin_emb"]
+    Rr = A.Raster(x0 - 1, -1, xi + r + 1, pz + r + 1, 0.02)
+    Rr.add(A.rrect((x0 + xi + r) / 2, pz / 2, xi + r - x0, pz, 0, 1))
+    Rr.add(A.rrect((x0 + xi) / 2, pz + r / 2, xi - x0, r, 0, 1))
+    Rr.add(A.circle(xi, pz, r, 48))
+    outl = Rr.contour(0.02)
+    rh = BAL["pin_hole"] / 2
+    k = rh * 0.7071
+    hole = A.polygon([(xi + rh * math.cos(t), pz + rh * math.sin(t)) for t in np.linspace(-math.pi * 0.75, math.pi * 0.25,
+                                                                                            19)] + [(xi, pz + rh * 1.4142)])
+    co = BAL["col_off"][sg]
+    out = A.Mesh("AVO_CINCHA_R6_3_aletas_%s" % ("Xpos" if sg > 0 else "Xneg"), C_PETG_TRANS)
+    for sy in (1, -1):
+        ya, yb = sorted((yc + sy * (co - BAL["fin_t"] / 2), yc + sy * (co + BAL["fin_t"] / 2)))
+        m = A.layered([(ya, yb, [outl, hole])])
+        m.transform(np.array([[sg, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1.0]]))   # (x, z, y) → (±x, y, z)
+        out.merge(fix_orient(m))
+    return out
+
+
 def pieza_base():
+    """REV 6.3: base sin la ranura exterior de los pestillos de la REV 6.2 (las aletas del cierre van aparte, en el
+    mismo STL)"""
     C = cap_contours()
     O, I = C["O"], C["I"]
     win, cupi, cupo = [], [], []
@@ -317,18 +382,13 @@ def pieza_base():
     z_ins = ZT0 - 5.0
     z_cup = 5.0
     assert z_cup < z_ins < ZJ0
-    zr0, zr1 = PEST["z_ranura"]
-    assert z_cup <= zr0 and zr1 < z_ins
-    L = [(0, PEST["chaflan"], [C["O_chaflan"]] + win),
-         (PEST["chaflan"], ZB0, [O] + win),
+    L = [(0, 0.8, [C["O_chaflan"]] + win),
+         (0.8, ZB0, [O] + win),
          (ZB0, z_cup, [O, I] + cupo + cupi),
-         (z_cup, zr0, [O, I]) if zr0 > z_cup else None,
-         (zr0, zr1, [C["O_ranura"], I]),
-         (zr1, z_ins, [O, I]),
+         (z_cup, z_ins, [O, I]),
          (z_ins, ZJ0, [O, I] + ins),
          (ZJ0, ZT0, [O, I, C["gO"], C["gI"]] + ins)]
-    L = [x for x in L if x]
-    return A.layered(L, "AVO_CINCHA_R6_2_base_aro_luz", C_PETG_TRANS)
+    return A.layered(L, "AVO_CINCHA_R6_3_base_aro_luz", C_PETG_TRANS)
 
 
 def pieza_junta(comprimida=True):
@@ -336,7 +396,7 @@ def pieza_junta(comprimida=True):
     En el conjunto se dibuja comprimida (1,2 de alto); el STL sale libre (1,6)."""
     C = cap_contours()
     h = CAP["ranura"]["prof"] if comprimida else CAP["junta"]["alto"]
-    return A.layered([(ZJ0, ZJ0 + h, [C["jO"], C["jI"]])], "AVO_CINCHA_R6_2_junta_TPU85A", C_TPU_ROJO)
+    return A.layered([(ZJ0, ZJ0 + h, [C["jO"], C["jI"]])], "AVO_CINCHA_R6_3_junta_TPU85A", C_TPU_ROJO)
 
 
 PCB_HOLES = [(sx * 20.8, sy * 12.8) for sx in (1, -1) for sy in (1, -1)]
@@ -357,13 +417,25 @@ def pieza_tapa():
     ant = A.rrect(ANT["cx"], ANT["cy"], ANT["L"] + 0.6, ANT["W"] + 0.4, 0.5, 2)
     z_l = ZT0 - CAP["lengueta_alto"]
     z_ant, z_pil, z_cb = ZT0 + 0.3, ZT0 + 1.0, ZT1 - 1.4
+    # REV 6.3.1: rebaje en el borde ±X para el labio del balancín (al apretar entra en él). Por encima de su fondo, el
+    # contorno va 0,05 mm más adentro (el núcleo exige contornos anidados en cada cambio de capa)
+    zr = BAL["rec_floor"]
+    assert z_ant < zr < z_pil
+    Rr = C["_rasterL"].offset(-0.05)
+    xw, x_rim, xi, xo, yc = bal_x()
+    for sg in (1, -1):
+        hw = BAL["w"][sg] / 2 + BAL["rec_cy"]
+        xa, xb = sorted((sg * BAL["rec_x"], sg * (xw + 2.0)))
+        Rr.sub(A.rrect((xa + xb) / 2, yc, xb - xa, 2 * hw, 0, 1))
+    Orec = Rr.contour(0.03)
     L = [(ZP1, z_l, boss + pil),
          (z_l, ZT0, [l0, l1] + boss + pil),
          (ZT0, z_ant, [O, ant] + sh + pil),
-         (z_ant, z_pil, [O] + sh + pil),
-         (z_pil, z_cb, [O] + sh),
-         (z_cb, ZT1, [O] + cb + [sh[-1]])]
-    return A.layered(L, "AVO_CINCHA_R6_2_tapa", C_PETG_TAPA)
+         (z_ant, zr, [O] + sh + pil),
+         (zr, z_pil, [Orec] + sh + pil),
+         (z_pil, z_cb, [Orec] + sh),
+         (z_cb, ZT1, [Orec] + cb + [sh[-1]])]
+    return A.layered(L, "AVO_CINCHA_R6_3_tapa", C_PETG_TAPA)
 
 
 def pieza_separador():
@@ -371,7 +443,7 @@ def pieza_separador():
     R.add(A.rrect(0, 0, 45.0, 29.0, 2.0, 4))
     for (x, y) in PCB_HOLES:
         R.sub(A.circle(x, y, 2.3, 32))           # paso de las cabezas de los tornillos de la PCB
-    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_2_separador_TPU85A", C_TPU)
+    return A.layered([(ZB1, ZP0, [R.contour(0.03)])], "AVO_CINCHA_R6_3_separador_TPU85A", C_TPU)
 
 
 # ---------------------------------------------------------------------------------------------- compra: cápsula
@@ -518,57 +590,75 @@ def compra_hilos_capsula():
 
 
 # =============================================================================================== soporte (en la funda)
-def pestillo_geo(sg):
-    """contornos (en planta) del pestillo del lado sg = ±1 (lados cortos ±X del soporte)"""
-    I = CAP["I"]
-    xw = I["x1"] + CAP["pared"]                     # cara exterior de la pared plana de la base (29,5)
-    yc = (I["y0"] + I["y1"]) / 2
-    t, b = PEST["t"], PEST["b"]
-    xi = xw + 0.4                                    # cara interior de la viga (0,4 de la cápsula)
-    xo = xi + t
-    pr = 0.4 + PEST["enganche"]                      # punta del gancho 0,9 mm dentro de la pared (0,3 del fondo de la ranura)
-    gap = PEST["hueco"]
+Z0_CAP = SOP["cama"] + SOP["precarga"]          # fondo de la cápsula en el soporte (z del soporte)
 
-    def R(x0, x1, y0, y1, r=0.3):
-        x0, x1 = sorted((sg * x0, sg * x1))
-        return A.rrect((x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0, r, 3)
-    hb = b / 2
-    G = dict(xi=xi, xo=xo, yc=yc, xw=xw)
-    G["B"] = R(xi, xo, yc - hb, yc + hb, 0.3)
-    G["Bf1"] = R(xi - 0.4, xo + 0.4, yc - hb - 0.4, yc + hb + 0.4, 0.5)       # radio en la raíz (escalonado)
-    G["Bf2"] = R(xi - 0.2, xo + 0.2, yc - hb - 0.2, yc + hb + 0.2, 0.4)
-    G["H"] = R(xi - pr, xo + 0.3, yc - hb - 0.3, yc + hb + 0.3, 0.4)          # gancho: cara inferior plana
-    G["H2"] = R(xi - pr * 0.66, xo + 0.2, yc - hb - 0.2, yc + hb + 0.2, 0.4)  # rampa de entrada (arriba)
-    G["H1"] = R(xi - pr * 0.33, xo + 0.1, yc - hb - 0.1, yc + hb + 0.1, 0.35)
-    G["T"] = R(xi - 0.1, xo + gap - 0.4, yc - hb - 0.6, yc + hb + 0.6, 1.5)   # pulsador, rebajado bajo el contrafuerte
-    G["LP"] = R(xi - 0.7, xo + gap - 0.2, yc - 8.5, yc + 8.5, 1.0)             # hueco de la viga en el cuerpo
-    G["drenaje"] = [A.circle(sg * (xi + 0.6), yc + d, 0.7, 16) for d in (-7.6, 7.6)]   # desagües Ø1,4
-    G["ranura_cerco"] = R(xi - 2.0, xo + gap + 0.5, yc - 12.0, yc + 10.6, 0.3)   # paso del pestillo y del seguro
-    xb0 = xo + gap                                   # cara del contrafuerte = cara exterior del hueco del seguro
-    G["xb0"] = xb0
-    Rb = A.Raster(-50, -50, 50, 50, 0.02)
-    Rb.add(R(xb0, xb0 + 2.6, yc - 9.0, yc + 9.0, 1.5))
-    Rb.sub(A.circle(sg * xb0, yc, 0.75, 20))                          # muesca del retén del seguro
-    G["tope"] = Rb.contour(0.02)
-    G["parada"] = R(xo + 0.05, xb0 - 0.05, yc - 11.6, yc - 10.0, 0.4)  # tope final del seguro
-    return G
+
+def bal_sop_cuts(sg):
+    """REV 6.3: vaciados del soporte para el cierre del lado sg, como cajas (x0, x1, y0, y1, z0, z1) en el soporte:
+    ranuras de las aletas en el cerco, ventanas de los dientes, alojamiento del imán (abierto arriba, con tapón),
+    rebaje de la cama bajo el balancín y su desagüe"""
+    xw, x_rim, xi, xo, yc = bal_x()
+    w = BAL["w"][sg]
+    cer = SOP["cama"] + SOP["cerco_h"]
+    roof = Z0_CAP + BAL["top_c"] + BAL["roof_gap"]
+    out = dict(slots=[], wins=[], mag=None, pocket=None, roof=roof)
+
+    def bx(x0, x1, y0, y1, z0, z1):
+        xa, xb = sorted((sg * x0, sg * x1))
+        return (xa, xb, y0, y1, z0, z1)
+    co = BAL["col_off"][sg]
+    f0, f1 = co - BAL["fin_t"] / 2 - BAL["fin_clear"], co + BAL["fin_t"] / 2 + BAL["fin_clear"]
+    for sy in (1, -1):
+        ya, yb = sorted((yc + sy * f0, yc + sy * f1))
+        out["slots"].append(bx(xw - 0.1, x_rim + 0.1, ya, yb, SOP["cama"], cer + 0.1))
+        ta, tb = sorted((yc + sy * (BAL["ty0"] - BAL["win_w"]), yc + sy * (w / 2 - BAL["tyend"] + BAL["win_w"])))
+        out["wins"].append(bx(xi - BAL["e"] - BAL["win_deep"], x_rim + 0.1, ta, tb, SOP["cama"], roof))
+    m1 = x_rim - BAL["skin"]
+    hm = BAL["mag"] / 2 + 0.025
+    out["mag"] = bx(m1 - BAL["mag_t"], m1, yc - hm, yc + hm, Z0_CAP + BAL["mag_c"] - BAL["mag"] / 2 - 0.05, cer + 0.1)
+    out["pocket"] = bx(xi - 0.1, xo + BAL["pock_out"], yc - w / 2 - 0.2, yc + w / 2 + 0.2,
+                       Z0_CAP + BAL["bot_c"] - BAL["pock_clear"], SOP["cama"] + 0.01)
+    out["drain"] = (sg * (xo + 1.5), yc)
+    out["pocket_c"] = _rect(out["pocket"])
+    out["drain_c"] = A.circle(sg * (xo + 1.5), yc, 0.7, 16)
+    return out
+
+
+def _rect(b):
+    return A.rrect((b[0] + b[1]) / 2, (b[2] + b[3]) / 2, b[1] - b[0], b[3] - b[2], 0, 1)
 
 
 def sop_contours():
     C = cap_contours()
     R = C["_rasterO"]
     Rin = R.offset(SOP["holgura"]).contour(0.03)
-    Rcer = R.offset(SOP["holgura"] + SOP["cerco"])
-    for sg in (1, -1):
-        Rcer.sub(pestillo_geo(sg)["ranura_cerco"])
-    Rcer.sub(Rin)
-    cerco = Rcer.contours(0.03)
+    Rc = R.offset(SOP["holgura"] + SOP["cerco"])
+    cuts = [bal_sop_cuts(1), bal_sop_cuts(-1)]
+    for K in cuts:
+        for b in K["slots"] + [K["mag"]]:
+            Rc.sub(_rect(b))
+    Rc.sub(Rin)
+    cerco = Rc.contours(0.03)
+    # por debajo del techo de las ventanas: el mismo cerco con las ventanas y 0,05 más fino por cada lado (las capas
+    # del núcleo poliédrico necesitan contornos anidados sin tocarse en cada cambio de capa)
+    Rw = A.Raster(Rc.x0, Rc.y0, Rc.x0 + Rc.W * Rc.res, Rc.y0 + Rc.H * Rc.res, Rc.res)
+    Rw.m = Rc.m.copy()
+    for K in cuts:
+        for b in K["wins"]:
+            Rw.sub(_rect(b))
+    cerco_win = Rw.offset(-0.05).contours(0.03)
+    # alojamientos de los imanes (agujeros del cerco con ventanas): el mismo contorno sigue por la cama
+    mag_holes = []
+    for K in cuts:
+        mx, my = (K["mag"][0] + K["mag"][1]) / 2, (K["mag"][2] + K["mag"][3]) / 2
+        cand = [c for c in cerco_win if abs(c.p[:, 0].mean() - mx) < 0.5 and abs(c.p[:, 1].mean() - my) < 0.5 and c.area < 20]
+        assert len(cand) == 1, ("alojamiento del imán", len(cand))
+        mag_holes.append(cand[0])
     Rout = R.offset(SOP["holgura"] + SOP["cerco"]).contour(0.03)
     xs = list(Rout.p[:, 0]); ys = list(Rout.p[:, 1])
-    for sg in (1, -1):
-        G = pestillo_geo(sg)
-        xs += list(G["tope"].p[:, 0]); ys += list(G["tope"].p[:, 1])
-        xs += list(G["parada"].p[:, 0]); ys += list(G["parada"].p[:, 1])
+    for K in cuts:
+        p = K["pocket"]
+        xs += [p[0], p[1]]; ys += [p[2], p[3]]
     bx0, bx1, by0, by1 = min(xs) - 1.5, max(xs) + 1.5, min(ys) - 1.0, max(ys) + 1.0
     BODY = A.rrect((bx0 + bx1) / 2, (by0 + by1) / 2, bx1 - bx0, by1 - by0, 4.0, 6)
     fx0, fx1 = bx0 - SOP["ala"], bx1 + SOP["ala"]
@@ -576,16 +666,15 @@ def sop_contours():
     F = A.rrect((fx0 + fx1) / 2, (fy0 + fy1) / 2, fx1 - fx0, fy1 - fy0, 6.0, 6)
     chic = [(fx0 + 4.5, fy0 + 4.5), (fx1 - 4.5, fy0 + 4.5), (fx0 + 4.5, fy1 - 4.5), (fx1 - 4.5, fy1 - 4.5)]
     cordon = (0.0, by1 + 4.0)
-    return dict(Rin=Rin, Rout=Rout, cerco=cerco, BODY=BODY, F=F, chic=chic, fx=(fx0, fx1), fy=(fy0, fy1),
-                body=(bx0, bx1, by0, by1), cordon=cordon)
+    return dict(Rin=Rin, Rout=Rout, cerco=cerco, cerco_win=cerco_win, mag_holes=mag_holes, BODY=BODY, F=F, chic=chic,
+                fx=(fx0, fx1), fy=(fy0, fy1), body=(bx0, bx1, by0, by1), cordon=cordon, cuts=cuts)
 
 
 def z_soporte():
     cama = SOP["cama"]
-    zr0 = cama + SOP["precarga"] + PEST["z_ranura"][0]   # cara inferior del gancho = flanco inferior de la ranura
-    return dict(r=PEST["z_raiz"], f1=PEST["z_raiz"] + 0.4, f2=PEST["z_raiz"] + 0.8, body=cama - 6.0, pest=SOP["pestana"],
-                ear=cama - 4.5, tac=cama - 1.0, cama=cama, cer=cama + SOP["cerco_h"], h0=zr0, h1=zr0 + 0.6,
-                h2=zr0 + 1.0, h3=zr0 + 1.3, b2=zr0 + 2.3, top=zr0 + 3.9, tope=PEST["tope_alto"], par=zr0 - 0.3)
+    K = bal_sop_cuts(1)
+    return dict(body=cama - 6.0, pest=SOP["pestana"], ear=cama - 4.5, tac=cama - 1.0, cama=cama,
+                cer=cama + SOP["cerco_h"], roof=K["roof"], pock=K["pocket"][4], mag=K["mag"][4])
 
 
 def pieza_soporte():
@@ -600,7 +689,6 @@ def pieza_soporte():
     ch = [A.circle(cx, cy, 2.6, 24) for cx, cy in S["chic"]]       # tornillo de Chicago Ø5
     cord = A.circle(*S["cordon"], 1.6, 24)                          # anclaje del cordón de seguridad
     tac = [A.circle(x, yy, 1.5, 20) for x, yy in TACOS]            # alojamientos de los tacos TPU (Ø3,0 × 1,0)
-    Gs = [pestillo_geo(1), pestillo_geo(-1)]
     z = z_soporte()
     pest, cama = z["pest"], z["cama"]
     zs = sorted(set([0.0] + list(z.values())))
@@ -618,64 +706,125 @@ def pieza_soporte():
                 cs += pil
             if zm > z["tac"]:
                 cs += tac
-            for G in Gs:
-                cs += G["drenaje"] if zm < z["r"] else [G["LP"]]
-        else:
-            if zm < z["cer"]:
-                cs += S["cerco"]
-            for G in Gs:
-                if zm < z["tope"]:
-                    cs.append(G["tope"])
-                if zm < z["par"]:
-                    cs.append(G["parada"])
-        for G in Gs:
-            if zm < z["r"]:
-                continue
-            if zm < z["f1"]:
-                cs.append(G["Bf1"])
-            elif zm < z["f2"]:
-                cs.append(G["Bf2"])
-            elif zm < z["h0"]:
-                cs.append(G["B"])
-            elif zm < z["h1"]:
-                cs.append(G["H"])
-            elif zm < z["h2"]:
-                cs.append(G["H2"])
-            elif zm < z["h3"]:
-                cs.append(G["H1"])
-            elif zm < z["b2"]:
-                cs.append(G["B"])
-            elif zm < z["top"]:
-                cs.append(G["T"])
+            for K, mh in zip(S["cuts"], S["mag_holes"]):
+                if zm > K["pocket"][4]:
+                    cs.append(K["pocket_c"])                         # rebaje bajo el balancín (lo deja girar)
+                else:
+                    cs.append(K["drain_c"])                          # desagüe Ø1,4 del rebaje
+                if zm > K["mag"][4]:
+                    cs.append(mh)                                    # alojamiento del imán (baja a la cama)
+        elif zm < z["cer"]:
+            cs += S["cerco_win"] if zm < z["roof"] else S["cerco"]
         if cs:
             L.append((z0, z1, cs))
-    return A.layered(L, "AVO_CINCHA_R6_2_soporte_pestillos", C_PETG)
+    return A.layered(L, "AVO_CINCHA_R6_3_soporte_PETG", C_PETG)
 
 
-def pieza_seguro(sg=1):
-    """seguro deslizante (TPU 95A): barra de 1,5 × 5,2 que entra a lo largo de y en el hueco detrás del pestillo; un
-    resalte de Ø1,2 encaja con clic en la muesca del contrafuerte. Cabeza redondeada con agujero Ø1,5 para sacarlo con un
-    gancho o atarlo al cordón."""
-    G = pestillo_geo(sg)
-    xo, xb0, yc = G["xo"], G["xb0"], G["yc"]
-    x0, x1 = xo + 0.15, xb0 - 0.15           # 0,15 por lado (arena): el pestillo puede abrirse 0,3 como máximo
-    y0, y1 = yc - 9.7, yc + 10.0
-    Rr = A.Raster(-50, -50, 50, 50, 0.02)
-    xa, xb = sorted((sg * x0, sg * x1))
-    Rr.add(A.rrect((xa + xb) / 2, (y0 + y1) / 2, xb - xa, y1 - y0, 0.6, 3))
-    Rr.add(A.circle(sg * (x1 - 0.1), yc, 0.6, 16))                        # resalte del retén (entra 0,35 en la muesca)
-    Rr.add(A.rrect(sg * ((x0 + x1) / 2), y1 - 1.6, 3.4, 3.2, 1.5, 4))    # cabeza
-    out = Rr.contour(0.02)
-    hole = A.circle(sg * ((x0 + x1) / 2), y1 - 1.6, 0.75, 12)
-    zb = SOP["cama"] + 0.2
-    return A.layered([(zb, zb + 5.2, [out, hole])], "AVO_CINCHA_R6_2_seguro_TPU95A_%s" % ("izq" if sg > 0 else "der"),
-                     (0.95, 0.55, 0.05))
+def balancin_capas(sg):
+    """REV 6.3.1: capas del balancín (lado +X; el de −X se refleja). Perfil en el plano XZ (z de la cápsula, 0 = fondo),
+    capas a lo largo de Y. Zonas (en |y − yc|): centro con el alojamiento del imán (entra por abajo, con tapón), dientes
+    en los lados, placa con el labio superior hasta w/2 y, de ahí a las aletas de las columnas, la barra del eje con los
+    agujeros de los pasadores en sus extremos. Los perfiles de zonas vecinas van anidados con 0,05 mm de diferencia
+    (lo exige el núcleo poliédrico: contornos que no se tocan en cada cambio de capa)."""
+    xw, x_rim, xi, xo, yc = bal_x()
+    w = BAL["w"][sg]
+    r, pz = BAL["boss_r"], BAL["pz_c"]
+    zb, zt = BAL["bot_c"], H_CAP
+    e = BAL["e"]
+
+    def raster():
+        return A.Raster(BAL["lip_x"] - 1.5, zb - 1, xo + 1, zt + 1, 0.02)
+    Rp = raster()
+    Rp.add(A.rrect((xi + xo) / 2, (zb + zt) / 2, xo - xi, zt - zb, 0, 1))             # placa
+    Rp.add(A.circle(xi, pz, r, 64))                                                    # ojo del eje
+    Rp.add(A.rrect((BAL["lip_x"] + xi + 0.05) / 2, zt - BAL["lip_t"] / 2, xi + 0.05 - BAL["lip_x"], BAL["lip_t"], 0, 1))
+    Rb = raster()                                                                      # barra del eje
+    Rb.add(A.circle(xi, pz, r, 64))
+    Rb.add(A.rrect((xi + xo) / 2, pz, xo - xi, 2 * r, 0, 1))
+    P_t = raster()
+    P_t.m = Rp.m.copy()
+    P_t.add(A.polygon([(xi + 0.05, BAL["root_b_c"]), (xi - e, BAL["tip_b_c"]), (xi - e, BAL["top_c"]),
+                       (xi + 0.05, BAL["top_c"])]))                                    # diente recto, bisel abajo
+    c_t = P_t.contour(0.02)
+    c_a = Rp.offset(-0.05).contour(0.02)
+    c_b = Rb.offset(-0.10).contour(0.02)
+    Rm = Rp.offset(-0.10)
+    xm0 = xi + BAL["skin"]
+    Rm.sub(A.rrect(xm0 + BAL["mag_t"] / 2, (zb - 1 + BAL["mag_c"] + BAL["mag"] / 2) / 2, BAL["mag_t"],
+                   BAL["mag_c"] + BAL["mag"] / 2 - (zb - 1), 0, 1))                    # alojamiento del imán
+    c_m = Rm.contour(0.02)
+    rh = BAL["hole"] / 2
+    hole = A.polygon([(xi + rh * math.cos(t), pz + rh * math.sin(t)) for t in np.linspace(-0.75 * math.pi,
+                                                                                         0.75 * math.pi, 25)]
+                     + [(xi - rh * 1.4142, pz)])                                       # en gota hacia −X (arriba al imprimir)
+    hm = BAL["mag"] / 2
+    ty0, ty1 = BAL["ty0"], w / 2 - BAL["tyend"]
+    yend = BAL["col_off"][sg] - BAL["fin_t"] / 2 - BAL["fin_clear"]                     # extremo de la barra
+    yh = yend - BAL["pin_in"] - 0.2
+    br = sorted({0.0, hm, ty0, ty1, w / 2, yh, yend})
+    edges = sorted({-b_ for b_ in br} | set(br))
+    L = []
+    for ya, yb in zip(edges[:-1], edges[1:]):
+        d = abs((ya + yb) / 2)
+        if d < hm:
+            cs = [c_m]
+        elif ty0 < d < ty1:
+            cs = [c_t]
+        elif d < w / 2:
+            cs = [c_a]
+        else:
+            cs = [c_b]
+        if d > yh:
+            cs = cs + [hole]
+        L.append((yc + ya, yc + yb, cs))
+    return L
+
+
+def pieza_balancin(sg, impresion=False):
+    """balancín en su sitio (cápsula, z = 0 fondo) o, con impresion=True, con la cara exterior en la cama"""
+    m = A.layered(balancin_capas(sg), "AVO_CINCHA_R6_3_balancin_%s" % ("Xpos" if sg > 0 else "Xneg"), C_TPU_ROJO)
+    m.transform(np.array([[sg, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1.0]]))   # (x, z, y) → (±x, y, z)
+    fix_orient(m)
+    if impresion:
+        m.transform(np.array([[0, 0, sg, 0], [0, 1, 0, 0], [-sg, 0, 0, 0], [0, 0, 0, 1.0]]))   # cara exterior abajo
+        fix_orient(m)
+    return m
+
+
+def compra_cierre():
+    """REV 6.3: pasadores de acero, imanes Ø5 × 1 (2 apilados en cada alojamiento) y tapas, en la cápsula (z = 0 fondo)"""
+    xw, x_rim, xi, xo, yc = bal_x()
+    pz = BAL["pz_c"]
+    pins = A.Mesh("Pasador_ISO2338_2x6_acero_x4", C_METAL)
+    mags = A.Mesh("Imanes_5x1_x8_cierre", C_IMAN)
+    for sg in (1, -1):
+        for sy in (1, -1):
+            y_out = yc + sy * (BAL["col_off"][sg] + BAL["fin_t"] / 2)
+            y_in = y_out - sy * BAL["pin_len"]
+            pts = np.array([[sg * xi, min(y_in, y_out), pz], [sg * xi, max(y_in, y_out), pz]])
+            pins.merge(A.tube([tuple(p) for p in pts], 1.0, 16))
+        xl = xi + BAL["skin"] + 0.02                                           # en el balancín (cara hacia el cerco)
+        mags.merge(A.tube([(sg * xl, yc, BAL["mag_c"]), (sg * (xl + 2.0), yc, BAL["mag_c"])], 2.5, 20))
+        xr = x_rim - BAL["skin"] - 0.02                                        # en el cerco (z de la cápsula)
+        mags.merge(A.tube([(sg * (xr - 2.0), yc, BAL["mag_c"]), (sg * xr, yc, BAL["mag_c"])], 2.5, 20))
+    for m in (pins, mags):
+        fix_orient(m)
+    return [pins, mags]
+
+
+def pieza_tapas_imanes():
+    """REV 6.3: 4 tapones de los alojamientos de los imanes (2 en los balancines, por abajo; 2 en el cerco, por arriba),
+    de 2,05 × 5,05 × 0,5, planos en la cama (PETG). Se pegan a ras."""
+    m = A.Mesh("AVO_CINCHA_R6_3_tapones_imanes_x4_PETG", C_PETG)
+    for k in range(4):
+        m.merge(A.box(k * 4.0, 0, 0, k * 4.0 + BAL["mag_t"] - 0.05, BAL["mag"] - 0.05, BAL["cap_t"]))
+    return m
 
 
 def pieza_tacos(libre=False):
     zb = SOP["cama"] - 1.0
     h = 1.85 if libre else 1.0 + SOP["precarga"]
-    m = A.Mesh("AVO_CINCHA_R6_2_tacos_precarga_TPU85A_x4", C_TPU)
+    m = A.Mesh("AVO_CINCHA_R6_3_tacos_precarga_TPU85A_x4", C_TPU)
     for x, y in TACOS:
         m.merge(A.cylinder_z(x, y, 1.45, zb, zb + h, "", C_TPU, 20))
     return m
@@ -998,15 +1147,16 @@ def cables(curvo):
 # =============================================================================================== ensamblaje
 def capsula_local():
     """todas las piezas de la cápsula en coordenadas de la cápsula (z = 0 en la cara inferior)"""
-    imp = [pieza_base(), pieza_junta(), pieza_tapa(), pieza_separador()]
+    imp = [pieza_base(), pieza_aletas(1), pieza_aletas(-1), pieza_junta(), pieza_tapa(), pieza_separador(),
+           pieza_balancin(1), pieza_balancin(-1)]
     com = (compra_pcb() + compra_bateria() + compra_pogo_placas() + compra_tornilleria_capsula() + compra_antena() +
-           compra_hilos_capsula())
+           compra_hilos_capsula() + compra_cierre())
     return imp, com
 
 
 def soporte_local():
     S = sop_contours()
-    imp = [pieza_soporte(), pieza_seguro(1), pieza_seguro(-1), pieza_tacos()]
+    imp = [pieza_soporte(), pieza_tacos()]
     com = compra_pogo_pines()
     com.append(chicago(S))
     # puente DET (contactos 2–3 del pogo de carga) y hilos ECG en el hueco inferior
@@ -1110,27 +1260,35 @@ def main():
             u, x, z, math.degrees(math.atan2(tz, tx)), TX.radius(u)))
     # ------------------------------------------------------------------ piezas impresas: STL + STEP por pieza
     C = cap_contours()
-    note("cápsula REV 6.2: %.1f × %.1f × %.1f mm (exterior con orejas de los tornillos)" % (
+    note("cápsula REV 6.3: %.1f × %.1f × %.1f mm (exterior con orejas de los tornillos, sin aletas)" % (
         np.ptp(C["O"].p[:, 0]), np.ptp(C["O"].p[:, 1]), H_CAP))
     S = sop_contours()
     note("soporte: %.1f × %.1f × %.1f mm" % (S["fx"][1] - S["fx"][0], S["fy"][1] - S["fy"][0],
-                                             PEST["tope_alto"]))
+                                             SOP["cama"] + SOP["cerco_h"]))
     impresas = [
-        (pieza_base(), "AVO_CINCHA_R6_2_base_aro_luz_PETG_translucido", False, "PETG translúcido natural"),
-        (pieza_tapa(), "AVO_CINCHA_R6_2_tapa_PETG_opaco", True, "PETG opaco"),
-        (pieza_junta(False), "AVO_CINCHA_R6_2_junta_TPU85A", False, "TPU 85A"),
-        (pieza_separador(), "AVO_CINCHA_R6_2_separador_TPU85A", False, "TPU 85A"),
-        (pieza_soporte(), "AVO_CINCHA_R6_2_soporte_pestillos_PETG", False, "PETG opaco"),
-        (pieza_seguro(1), "AVO_CINCHA_R6_2_seguro_izq_TPU95A", False, "TPU 95A"),
-        (pieza_seguro(-1), "AVO_CINCHA_R6_2_seguro_der_TPU95A", False, "TPU 95A"),
-        (pieza_tacos(True), "AVO_CINCHA_R6_2_tacos_precarga_TPU85A_x4", False, "TPU 85A"),
+        (pieza_base(), "AVO_CINCHA_R6_3_base_aro_luz_PETG_translucido", False, "PETG translúcido natural"),
+        (pieza_tapa(), "AVO_CINCHA_R6_3_tapa_PETG_opaco", True, "PETG opaco"),
+        (pieza_junta(False), "AVO_CINCHA_R6_3_junta_TPU85A", False, "TPU 85A"),
+        (pieza_separador(), "AVO_CINCHA_R6_3_separador_TPU85A", False, "TPU 85A"),
+        (pieza_soporte(), "AVO_CINCHA_R6_3_soporte_PETG", False, "PETG opaco"),
+        (pieza_balancin(1, True), "AVO_CINCHA_R6_3_balancin_Xpos_PETG", False, "PETG (cara exterior en la cama)"),
+        (pieza_balancin(-1, True), "AVO_CINCHA_R6_3_balancin_Xneg_PETG", False, "PETG (cara exterior en la cama)"),
+        (pieza_tapas_imanes(), "AVO_CINCHA_R6_3_tapones_imanes_x4_PETG", False, "PETG"),
+        (pieza_tacos(True), "AVO_CINCHA_R6_3_tacos_precarga_TPU85A_x4", False, "TPU 85A"),
     ]
+    extras = {"AVO_CINCHA_R6_3_base_aro_luz_PETG_translucido": [pieza_aletas(1), pieza_aletas(-1)]}
     for m, nm, flip, mat in impresas:
         b = m.check_closed()
         assert b == 0, (nm, b)
-        pm = stl_print(m, nm, flip)
+        ex = extras.get(nm, [])
+        for e_ in ex:
+            assert e_.check_closed() == 0, (e_.name, e_.check_closed())
+        mm = m.copy()
+        for e_ in ex:                       # REV 6.3: las aletas van en el mismo STL que la base (se imprimen juntas)
+            mm.merge(e_.copy())
+        pm = stl_print(mm, nm, flip)
         nt = A.write_stl(os.path.join(OUT, "STL", nm + ".stl"), [pm])
-        A.write_step(os.path.join(OUT, "STEP", "piezas", nm + ".step"), [(nm, [m])], nm)
+        A.write_step(os.path.join(OUT, "STEP", "piezas", nm + ".step"), [(nm, [m] + ex)], nm)
         lo, hi = m.bbox()
         REPORT["piezas"][nm] = dict(material=mat, volumen_cm3=round(m.volume() / 1000, 3), triangulos=nt,
                                     caja_mm=[round(x, 2) for x in (hi - lo)], estanca=True)
@@ -1139,10 +1297,10 @@ def main():
     imp, com = capsula_local()
     groups = {"Capsula_impresa": imp, "Capsula_electronica": com}
     check_all(groups)
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_2_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_2_CAPSULA")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_3_CAPSULA_CONJUNTO.step"), groups, "AVO_CINCHA_R6_3_CAPSULA")
     imp2, com2 = soporte_local()
-    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_2_SOPORTE_CONJUNTO.step"),
-                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_2_SOPORTE")
+    export_step(os.path.join(OUT, "STEP", "AVO_CINCHA_R6_3_SOPORTE_CONJUNTO.step"),
+                {"Soporte_impreso": imp2, "Soporte_compra": com2}, "AVO_CINCHA_R6_3_SOPORTE")
     # compra sueltas (STEP por pieza)
     for m in compra_pcb()[:1] + compra_bateria() + compra_antena()[:1]:
         A.write_step(os.path.join(OUT, "STEP", "piezas", "REF_" + m.name + ".step"), [(m.name, [m])], m.name)
