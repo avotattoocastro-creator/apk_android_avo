@@ -1,17 +1,17 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `e3eb097e8d74052193c7e00e3a338ca303b53d9a` · ejecución de CI: 44199252729
-- Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
+- Commit: `687be491f7974b974c6d27236d954566d55b5224` · ejecución de CI: 44203162291
+- Ruteado: placa ruteada de la fuente (Freerouting + reparación con fuente/repair.py)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1151 · vías: 249 · ruteado INCOMPLETO (8 conexiones)
+- Pistas: 1249 · vías: 269 · ruteado INCOMPLETO (1 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
 | DRC: errores | correcto | 0 |
-| DRC: conexiones incompletas | **FALLA** | 8 |
+| DRC: conexiones incompletas | **FALLA** | 1 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
@@ -19,18 +19,12 @@
 
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.0127 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3_ZED] on F.Cu, length 1.3574 mm ↔ Pad 33 [+3V3_ZED] of U1 on F.Cu
-- Pad 2 [GND] of C25 on F.Cu ↔ Pad 41 [GND] of U4 on F.Cu
-- Track [VBUS] on F.Cu, length 0.7972 mm ↔ Pad 1 [VBUS] of C18 on F.Cu
-- Track [VSYS] on F.Cu, length 0.5000 mm ↔ Track [VSYS] on F.Cu, length 1.1720 mm
-- Track [+3V3_AON] on F.Cu, length 1.2869 mm ↔ Track [+3V3_AON] on F.Cu, length 1.5200 mm
-- Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
-- Pad 2 [USB_DP] of R18 on F.Cu ↔ Pad 14 [USB_DP] of U4 on F.Cu
+- Track [GND] on F.Cu, length 0.0158 mm ↔ Pad 41 [GND] of U4 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
 - silk_overlap: 2
+- connection_width: 1
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
