@@ -131,8 +131,8 @@ def via_drops(r, pads, log):
             continue                                   # exposed pad with its own thermal vias
         if (rec["part"]["ref"], rec["pad"].num) in EP_STUB_PINS:
             continue                                   # joined to the exposed pad by a short stub (ep_stubs)
-        if rec["part"]["ref"] == "U4" and rec["pad"].num not in ("1", "2", "42", "43", "46", "53", "60", "62", "63", "64", "65"):
-            continue                                   # módulo: el resto se une por el relleno de F.Cu y las vías del EPAD
+        if rec["part"]["ref"] == "U4" and rec["pad"].num not in ("1", "40"):
+            continue                                   # REV B (WROOM-1U): GND = 1, 40 y el EPAD 41 (vías propias)
         nid = netid(net)
         layer = rec["layers"][0]
         if layer not in r.layers:
@@ -441,7 +441,7 @@ def add_epad_vias(r):
     u4 = next(p for p in D.PARTS if p["ref"] == "U4")
     from fplib import rot
     cx, cy = D.kpos(u4)
-    ep = [pd for pd in D.fp_of(u4).pads if pd.num == "61" and pd.shape == "rect"]
+    ep = [pd for pd in D.fp_of(u4).pads if pd.num == "41" and pd.shape == "rect"]   # REV B: EPAD del WROOM-1U (3 × 3)
     xs = sorted({round(pd.x, 4) for pd in ep}); ys = sorted({round(pd.y, 4) for pd in ep})
     for vx in [(a + b) / 2 for a, b in zip(xs, xs[1:])]:          # gaps between the 3 × 3 EPAD squares
         for vy in [(a + b) / 2 for a, b in zip(ys, ys[1:])]:
