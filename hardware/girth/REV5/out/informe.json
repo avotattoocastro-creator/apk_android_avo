@@ -1,13 +1,13 @@
 {
  "piezas": {
   "AVO_GIRTH_R5_base": {
-   "volumen_mm3": 10676.8,
+   "volumen_mm3": 11100.1,
    "valido": true,
    "solidos": 1,
    "caja": [
-    74.8,
+    82.2,
     53.02,
-    7.82
+    10.11
    ]
   },
   "AVO_GIRTH_R5_aro_rojo": {
@@ -21,11 +21,11 @@
    ]
   },
   "AVO_GIRTH_R5_tapa": {
-   "volumen_mm3": 11008.2,
+   "volumen_mm3": 10718.8,
    "valido": true,
    "solidos": 1,
    "caja": [
-    73.2,
+    70.05,
     53.05,
     6.78
    ]
@@ -51,41 +51,41 @@
    ]
   },
   "AVO_GIRTH_R5_soporte": {
-   "volumen_mm3": 51954.3,
+   "volumen_mm3": 54859.6,
    "valido": true,
    "solidos": 1,
    "caja": [
-    102.66,
-    63.46,
-    13.51
+    106.52,
+    64.52,
+    12.96
    ]
   },
-  "AVO_GIRTH_R5_cierre_x2": {
-   "volumen_mm3": 938.6,
+  "AVO_GIRTH_R5_balancin_Xpos": {
+   "volumen_mm3": 808.2,
    "valido": true,
    "solidos": 1,
    "caja": [
-    8.72,
-    16.0,
-    14.92
+    5.7,
+    14.0,
+    15.8
    ]
   },
-  "AVO_GIRTH_R5_pasador_x2": {
-   "volumen_mm3": 82.6,
+  "AVO_GIRTH_R5_balancin_Xneg": {
+   "volumen_mm3": 671.6,
    "valido": true,
    "solidos": 1,
    "caja": [
-    3.8,
-    23.4,
-    2.75
+    5.7,
+    12.0,
+    15.8
    ]
   }
  },
  "interferencias": {},
  "medidas": {
   "soporte_mm": [
-   102.64,
-   63.44,
+   106.5,
+   64.5,
    12.95
   ],
   "capsula_mm": [
@@ -95,7 +95,7 @@
   ],
   "aberturas_al_exterior": 0,
   "tornillos_M3": 8,
-  "imanes_5x1": 8,
+  "imanes_esquinas": 0,
   "junta_compresion_pct": 29,
   "bno_taladros": [
    [
@@ -137,26 +137,120 @@
    -8.5
   ]
  },
- "clic_interferencia_grados_mm3": {
-  "1": 0.25,
-  "2": 1.15,
-  "3": 1.7,
-  "4": 1.86,
-  "5": 1.5,
-  "6": 0.76,
-  "7": 0.0,
-  "8": 0.0,
-  "9": 0.0,
-  "10": 0.0,
-  "11": 0.0
+ "tapas_imanes_mm": {
+  "disco_balancin_abajo": [
+   5.5,
+   0.5
+  ],
+  "disco_balancin_arriba": [
+   5.5,
+   0.5
+  ],
+  "tapon_cerco": [
+   2.05,
+   5.1,
+   0.55
+  ]
  },
- "barrido_cierre_grados_mm3": {
-  "0": 0.0,
-  "12": 0.0,
-  "15": 0.0,
-  "20": 0.0,
-  "30": 0.0,
-  "45": 0.0,
-  "60": 0.0
+ "apertura_capsula_apoyada_mm3": {
+  "0": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 3.629
+  },
+  "-2": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 2.246
+  },
+  "-4": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 1.148
+  },
+  "-6": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.31
+  },
+  "-8": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.0
+  },
+  "-10": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.0
+  },
+  "-12": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.0
+  },
+  "-14": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.0
+  },
+  "-16": {
+   "soporte": 0.0,
+   "capsula": 0.0,
+   "diente_en_el_cerco": 0.0
+  },
+  "-18": {
+   "soporte": 0.0,
+   "capsula": 0.696,
+   "diente_en_el_cerco": 0.0
+  },
+  "-20": {
+   "soporte": 0.084,
+   "capsula": 3.553,
+   "diente_en_el_cerco": 0.0
+  },
+  "-25": {
+   "soporte": 0.284,
+   "capsula": 13.532,
+   "diente_en_el_cerco": 0.0
+  },
+  "-30": {
+   "soporte": 0.0,
+   "capsula": 24.975,
+   "diente_en_el_cerco": 0.0
+  }
+ },
+ "angulo_suelto_grados": -8,
+ "angulo_tope_tapa_grados": -18,
+ "contacto_cargado_al_apretar_mm3": {
+  "-1": 0.0,
+  "-2": 0.0,
+  "-4": 0.0,
+  "-6": 0.0
+ },
+ "balancin": {
+  "eje_xz": [
+   38.5,
+   7.5
+  ],
+  "brazo_pulsador_mm": 6.3,
+  "brazo_iman_mm": 6.2,
+  "recorrido_pulsador_para_soltar_mm": 0.88,
+  "centro_de_masas_respecto_al_eje_mm": [
+   0.9,
+   -0.6
+  ],
+  "masa_g_PETG": 1.03,
+  "contrasalida_grados": 0.0,
+  "angulo_neutro_grados": 9.6,
+  "separacion_imanes_atraccion_mm": 1.2,
+  "separacion_imanes_repulsion_mm": 3.55,
+  "tapas_de_los_orificios": "AVO_GIRTH_R5_tapas_imanes.stl (juego para una cápsula: 4 discos y 2 tapones)",
+  "diente": "recto (sin contrasalida); bloqueo con carga por rozamiento + imanes",
+  "rozamiento_minimo_para_bloquear": {
+   "contacto_en_la_punta": 0.169,
+   "contacto_repartido": 0.106
+  },
+  "pasadores": "4 × ISO 2338 Ø2 × 6 (2 por balancín, a presión en las aletas)",
+  "imanes": "16 × Ø5 × 1 (los de la espalda y la cincha anterior), apilados de 2: abajo en atracción (balancín ↔ cerco), arriba en repulsión (tapa ↔ balancín); todos con orificio y tapa"
  }
 }

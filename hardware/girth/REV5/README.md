@@ -1,5 +1,42 @@
 # AVO GIRTH REV 5: cápsula estanca de 70 × 51 × 13,8 mm, 8 tornillos M3, 4 + 4 imanes y conector pogo
 
+**REV 5.11.2 (16/11/2026, peticiones del usuario sobre la 5.11):**
+- **Imanes:** los mismos **Ø5 × 1** de la espalda y la cincha anterior, **apilados de 2 en 2**. Son 16 en total.
+  - **Abajo, en atracción** (balancín ↔ cerco), a 1,2 mm: mantienen el diente dentro.
+  - **Arriba, en repulsión** (tapa ↔ balancín), a 3,55 mm: empujan la parte alta del balancín hacia fuera (cerrar) y hacen de muelle.
+- **Sin pausa de impresión:** cada imán entra por un orificio que se cierra con una tapa impresa pegada a ras (`AVO_GIRTH_R5_tapas_imanes.stl`: 4 discos Ø5,5 × 0,5 y 2 tapones de 2,05 × 5,1 × 0,55).
+  - El de la tapa de la cápsula entra por dentro de la pared y queda oculto al cerrarla.
+- **Diente recto** (sin contrasalida). Con carga lo bloquean el rozamiento (hace falta μ ≥ 0,17; PETG–PETG ≈ 0,25–0,35) y los imanes.
+- **Pasadores cortos:** 4 × **ISO 2338 Ø2 × 6** (2 por balancín, a presión en las aletas), para dejar libre el centro del balancín.
+- **Balancín de 3,1 mm** con un refuerzo interior arriba que hace de tope contra la tapa (unos −18°). Los dientes quedan libres a −8° (0,88 mm de pulsador).
+
+
+**REV 5.11 (propuesta, 16/11/2026): cierre magnético de balancín** (sustituye a los cierres de palanca de la REV 5.8–5.10), a petición del usuario.
+- **Cómo funciona:**
+  - en cada extremo ±X hay un balancín por fuera del cerco, con la cara superior **a ras de la tapa** (no sobresale: protección contra golpes);
+  - gira sobre un **pasador de acero Ø2** (ISO 2338: Ø2 × 20 en +X, Ø2 × 18 en −X) que entra a presión en dos aletas de la base;
+  - por debajo del eje, dos dientes entran en ventanas de la cara exterior del cerco, y un par de imanes **Ø4 × 2 N52** que se atraen (uno en el balancín y otro en el cerco) los mantiene dentro. No hay muelle.
+- **Antiapertura:** los pines pogo empujan la cápsula 0,3 mm hacia arriba contra el techo de las ventanas. El techo tiene una contrasalida de 17° (la trayectoria del diente es de 9,6°), así que con carga apretar el balancín no lo abre. El CI lo comprueba: `antiapertura_ok`.
+- **Para abrir:** empujar la cápsula hacia abajo (0,3 mm, hasta que apoya) y apretar a la vez los dos balancines por arriba hacia dentro, con una mano. En el CAD los dientes quedan libres a unos 8°, con menos de 1 mm de recorrido del pulsador.
+- **Para cerrar:** bajar la cápsula; el bisel del diente resbala por el cerco y el imán lo mete.
+- **Llave de posición:** las aletas de la base pasan por ranuras del cerco. El balancín de +X mide 14 mm y el de −X 12 mm, así que la cápsula solo entra en una orientación (sustituye a los tacos de la REV 5.8).
+- **Otros cambios:**
+  - **sin imanes en las esquinas** (decisión del usuario);
+  - holgura cápsula–cerco **0,12 → 0,25**;
+  - cerco de **2,6 → 3,0** de grueso (imán con 0,45 de pared a cada lado);
+  - la tapa pierde los nervios del clic;
+  - el soporte crece (paso de cinta 7,0 desde el cerco).
+- **Imprimir:** `balancin_Xpos` y `balancin_Xneg` (1 de cada, con la cara exterior en la cama, sin soportes). Ya no hay `cierre_x2` ni `pasador_x2`.
+- **Montaje:**
+  - pegar los imanes con cianoacrilato respetando la polaridad (se atraen) y tapar el del balancín con una gota de epoxi;
+  - meter el balancín entre las aletas e introducir el pasador a presión.
+- **Pendiente (NO VERIFICADO):**
+  - fuerza neta de los pogo: muelles de los pines menos los imanes del propio conector. Si tira hacia abajo, el antiapertura no queda cargado;
+  - fuerza real del imán a través de las paredes;
+  - probeta del cierre;
+  - prueba con la cápsula real.
+
+
 **REV 5.10 (propuesta): módulo de pulso CJMCU-30003 (MAX30003, ECG de un canal) dentro de la cápsula**, a petición del usuario.
 - **Cápsula de 70 × 53 × 13,8** (antes 70 × 51). Soporte de 102,7 × 63,4 × 12,95.
 - **Módulo:** medidas del usuario, 21 × 16 × 8 con el jack de 3,5 mm.

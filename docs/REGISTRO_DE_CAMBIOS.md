@@ -192,6 +192,56 @@ solo lectura con la cuadra caducada.
 **Por qué:** boceto del entrenador sobre la build 165 (16/11/2026 11:25): «ventana a pantalla completa donde hacer un análisis visual profundo de la carrera, poder seleccionar qué caballos mostrar, comparar con mi carrera y mis entrenos».
 **Archivos:** `Views/RaceDeepAnalysisView.swift` (nuevo), `Views/RaceDetailView.swift`.
 **Estado:** IMPLEMENTADO · NO VERIFICADO en iPad real.
+## 2026-11-16 — Cincha CAD REV 5.11.2 — imanes Ø5 × 1, repulsión arriba, diente recto, tapas
+**Autor:** Claude · **Rama:** `cad/girth-rev5-11-cierre-magnetico` · **CI:** `build-girth-cad.yml`, runs 43973990958, 43974497684 y 43975009549 (éxito)
+**Qué cambia (marcado y peticiones del usuario):**
+- imanes Ø5 × 1 de siempre, apilados de 2 en 2: atracción abajo (balancín ↔ cerco) y repulsión arriba (tapa ↔ balancín);
+- todos entran por un orificio con tapa impresa (sin pausa de impresión); el de la tapa de la cápsula entra por dentro;
+- diente recto;
+- 4 pasadores cortos Ø2 × 6;
+- balancín de 3,1 mm con refuerzo que hace de tope contra la tapa.
+**Comprobado en el CI:**
+- 8 piezas válidas, cada una de 1 sólido, y 0 interferencias;
+- dientes libres a −8° y tope contra la tapa a −18°; en ese recorrido no hay choques con el soporte;
+- rozamiento mínimo para bloquear con carga: 0,17 con el contacto en la punta.
+**Validación:** COMPILADO / CI · **NO VERIFICADO**.
+**Pendiente:**
+- fuerza neta de los pogo;
+- fuerza real de los imanes apilados;
+- probeta del cierre.
+
+## 2026-11-16 — Cincha CAD REV 5.11 — cierre magnético de balancín
+**Autor:** Claude · **Rama:** `cad/girth-rev5-11-cierre-magnetico` · **CI:** `build-girth-cad.yml`, runs 43825126386 y 43825422719 (éxito)
+**Qué cambia:** `hardware/girth/REV5/avo_girth_rev5.py`:
+- los cierres de palanca con pasador impreso de la REV 5.8–5.10 se sustituyen por un **balancín en cada extremo**:
+  - cara superior a ras de la tapa;
+  - pasador de **acero** Ø2 (ISO 2338) a presión en dos aletas de la base;
+  - dos dientes en ventanas del cerco, con techo en contrasalida de 17°;
+  - imanes Ø4 × 2 N52 en atracción (balancín + cerco) en lugar de muelle;
+- **antiapertura:** los pogo cargan los dientes y apretar no abre. Para abrir, se empuja la cápsula 0,3 mm y se aprietan los dos balancines con una mano;
+- llave de posición por las aletas: balancín de 14 mm en +X y de 12 mm en −X;
+- sin imanes en las esquinas;
+- CL 0,12 → 0,25 y cerco 2,6 → 3,0;
+- la tapa pierde los nervios del clic;
+- se borran `cierre_x2`, `pasador_x2` y `ref_imanes*`.
+**Por qué:** revisión del 16/11/2026:
+- el pasador impreso no tenía retención axial;
+- holguras de 0,05 y 0,12, por debajo de la regla de 0,2–0,3;
+- una carga hacia arriba tendía a abrir el cierre.
+
+Diseño pedido por el usuario con bocetos: sujeción fuerte, apertura con una mano por alguien sin experiencia, doble acción, sin nada que sobresalga e imanes en lugar de muelle.
+**Comprobado en el CI:**
+- 8 piezas válidas, cada una de 1 sólido;
+- 0 interferencias;
+- barrido de apertura de 0 a −30° sin choques (dientes libres a −8°, 0,88 mm de pulsador);
+- `antiapertura_ok` = true con la cápsula levantada 0,3;
+- centro de masas del balancín a (0,81; −0,51) mm del eje.
+**Validación:** COMPILADO / CI · **NO VERIFICADO** (ni impreso ni probado).
+**Pendiente:**
+- medir la fuerza neta de los pogo: muelles menos los imanes del propio conector. Si es hacia abajo, el antiapertura no queda cargado;
+- medir la fuerza real del par de imanes a 1,1 mm;
+- probeta del cierre;
+- prueba con la cápsula real.
 
 ## 2026-11-16 — Logotipo de los informes: «PERFORMANCE» un poco más abajo y sin el trazo rojo bajo «PE»
 **Autor:** Claude · **Rama:** `feature/logo-ajuste`
