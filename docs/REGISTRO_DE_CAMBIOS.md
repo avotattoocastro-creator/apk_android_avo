@@ -24,6 +24,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-17 — Cincha CAD REV 6.10 — sin cordón de seguridad
+**Autor:** Claude · **Rama:** `cad/cincha-rev6-10-sin-cordon` (sobre el PR #71)
+**Qué cambia (decisión del usuario):** fuera la oreja de la tapa, su agujero, el anclaje del ala del soporte y el
+cordón Dyneema; la tapa queda rectangular. La retención depende solo de los balancines y el cerco. Archivos `R6_9` →
+`R6_10`. También se guarda en el proyecto la propuesta de arquitectura con 3 IMU y PCB de sensores en el soporte
+(`AVO_CINCHA_BETA_3IMU_ARQUITECTURA_PROPUESTA_2026-11-17.md`).
+**Validación:** IMPLEMENTADO · `verificar_step.py` 26/26 · vóxeles: cierre y portaimanes sin cambios ·
+**NO VERIFICADO** (nada impreso). **Pendiente:** ensayo de tirón y caída (§8.4) sin cordón.
+
+---
+
 ## 2026-11-17 — Cincha CAD REV 6.9 — soporte continuo (cuerpo a ras y cerco sin corte)
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-9-soporte-continuo` (sobre el PR #70)
 **Qué cambia (captura del usuario):** cuerpo del soporte a ras del cerco; el cerco no se corta en ±X (rebaje interior
