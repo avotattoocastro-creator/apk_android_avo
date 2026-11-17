@@ -193,7 +193,7 @@ def preparar_cad(pieza: dict, exts: list[str], out: Path, previo: dict | None) -
     arbol = r.stdout.strip()
     commit = git("rev-parse", ref).stdout.strip()
     info = {"rama": rama, "carpeta": carpeta, "arbol": arbol, "commit": commit}
-    if previo and previo.get("arbol") == arbol and not FORZAR:
+    if previo and previo.get("arbol") == arbol and previo.get("rama") == rama and not FORZAR:
         return ("igual", None, info)
     nombres = [n for n in git("ls-tree", "-r", "--name-only", ref, "--", carpeta).stdout.splitlines()
                if Path(n).suffix.lower() in exts]
