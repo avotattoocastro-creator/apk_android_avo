@@ -1,47 +1,40 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `687869781dff432153c2cd1cb4e0cb716176a156` · ejecución de CI: 44171321366
+- Commit: `abddcc28231f7350581cfa7c33b5cea905ecedfb` · ejecución de CI: 44177067166
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1182 · vías: 246 · ruteado INCOMPLETO (14 conexiones)
+- Pistas: 1182 · vías: 246 · ruteado INCOMPLETO (11 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 43 |
-| DRC: conexiones incompletas | **FALLA** | 14 |
-| DRC: cortocircuitos | **FALLA** | 9 |
-| DRC: paridad esquema ↔ placa | **FALLA** | 3 |
+| DRC: errores | **FALLA** | 4 |
+| DRC: conexiones incompletas | **FALLA** | 11 |
+| DRC: cortocircuitos | correcto | 0 |
+| DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: solder_mask_bridge 23, clearance 10, shorting_items 9, hole_clearance 1
+Errores de DRC por tipo: copper_edge_clearance 4
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.0566 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3] on F.Cu, length 1.6890 mm ↔ Pad 2 [+3V3] of R11 on F.Cu
-- Track [+3V3_ZED] on F.Cu, length 0.8817 mm ↔ Track [+3V3_ZED] on F.Cu, length 0.4419 mm
-- Track [+3V3_ZED] on F.Cu, length 1.0524 mm ↔ Pad 1 [+3V3_ZED] of C63 on F.Cu
-- Track [VBAT] on In2.Cu, length 1.5863 mm ↔ Pad 1 [VBAT] of R32 on F.Cu
-- Track [VSYS] on F.Cu, length 1.3634 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
-- Pad 1 [+3V3_AON] of TP10 on F.Cu ↔ Track [+3V3_AON] on F.Cu, length 1.5200 mm
-- Pad 2 [BAT_ADC] of R32 on F.Cu ↔ Pad 1 [BAT_ADC] of C34 on F.Cu
-- Pad 1 [EN] of R11 on F.Cu ↔ Pad 1 [EN] of C27 on F.Cu
-- Track [I2C_SCL] on F.Cu, length 0.5351 mm ↔ Pad 7 [I2C_SCL] of U12 on F.Cu
+- Pad 5 [+3V3] of U13 on F.Cu ↔ Track [+3V3] on F.Cu, length 0.2086 mm
+- Pad 1 [+3V3_ZED] of C62 on F.Cu ↔ Track [+3V3_ZED] on F.Cu, length 0.4348 mm
+- Pad 2 [GND] of C25 on F.Cu ↔ Pad 41 [GND] of U4 on F.Cu
+- Pad 1 [VBUS] of D6 on F.Cu ↔ Track [VBUS] on F.Cu, length 1.1174 mm
+- Pad 10 [VSYS] of U2 on F.Cu ↔ Pad 2 [VSYS] of R8 on F.Cu
+- Track [+3V3_AON] on F.Cu, length 1.5200 mm ↔ Track [+3V3_AON] on F.Cu, length 0.1131 mm
+- Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 15 [IMU_INT1] of U4 on F.Cu
 - Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
-- Pad 1 [SD_D0] of R42 on F.Cu ↔ Track [SD_D0] on F.Cu, length 0.9133 mm
-- Pad 2 [ZED_TX2] of R54 on F.Cu ↔ Pad 7 [ZED_TX2] of U4 on F.Cu
-- Pad 27 [ZED_TX2_C] of U1 on F.Cu ↔ Pad 1 [ZED_TX2_C] of R54 on F.Cu
-
-### Paridad esquema ↔ placa
-- net_conflict: Pad net (unconnected-(U4-IO35 (PSRAM)-Pad28)) doesn't match net given by schematic (unconnected-(U4-IO35_(PSRAM)-Pad28)).
-- net_conflict: Pad net (unconnected-(U4-IO36 (PSRAM)-Pad29)) doesn't match net given by schematic (unconnected-(U4-IO36_(PSRAM)-Pad29)).
-- net_conflict: Pad net (unconnected-(U4-IO37 (PSRAM)-Pad30)) doesn't match net given by schematic (unconnected-(U4-IO37_(PSRAM)-Pad30)).
+- Pad 5 [SD_CLK] of J3 on F.Cu ↔ Pad 2 [SD_CLK] of R46 on F.Cu
+- Track [VLED] on F.Cu, length 0.6788 mm ↔ Track [VLED] on F.Cu, length 0.6788 mm
+- Track [ZED_EN] on F.Cu, length 0.7212 mm ↔ Pad 18 [ZED_EN] of U4 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
-- silk_over_copper: 13
+- silk_over_copper: 6
+- connection_width: 1
 - silk_overlap: 1
 
 ## Lista de materiales y posiciones

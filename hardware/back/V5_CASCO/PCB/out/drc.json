@@ -1,73 +1,19 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-17T21:06:48+0000",
+    "date": "2026-11-17T21:22:13+0000",
     "included_severities": [
         "error",
         "warning",
         "exclusion"
     ],
     "kicad_version": "9.0.9",
-    "schematic_parity": [
-        {
-            "description": "Pad net (unconnected-(U4-IO35 (PSRAM)-Pad28)) doesn't match net given by schematic (unconnected-(U4-IO35_(PSRAM)-Pad28)).",
-            "items": [
-                {
-                    "description": "Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 97.68
-                    },
-                    "uuid": "bab3dd21-3927-5056-959c-feabe7cf522e"
-                }
-            ],
-            "severity": "warning",
-            "type": "net_conflict"
-        },
-        {
-            "description": "Pad net (unconnected-(U4-IO36 (PSRAM)-Pad29)) doesn't match net given by schematic (unconnected-(U4-IO36_(PSRAM)-Pad29)).",
-            "items": [
-                {
-                    "description": "Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 96.41
-                    },
-                    "uuid": "f415b125-132e-5db1-bdc2-1ea06275f7ff"
-                }
-            ],
-            "severity": "warning",
-            "type": "net_conflict"
-        },
-        {
-            "description": "Pad net (unconnected-(U4-IO37 (PSRAM)-Pad30)) doesn't match net given by schematic (unconnected-(U4-IO37_(PSRAM)-Pad30)).",
-            "items": [
-                {
-                    "description": "Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 95.14
-                    },
-                    "uuid": "400a7648-9f42-50ea-8497-e2b52aa8a59b"
-                }
-            ],
-            "severity": "warning",
-            "type": "net_conflict"
-        }
-    ],
+    "schematic_parity": [],
     "source": "AVO_BACK_V5_PCB.kicad_pcb",
     "unconnected_items": [
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Track [+3V3] on F.Cu, length 0.0566 mm",
-                    "pos": {
-                        "x": 101.2025,
-                        "y": 83.71
-                    },
-                    "uuid": "25207e61-1ad6-482e-96cb-b4632d852ded"
-                },
                 {
                     "description": "Pad 5 [+3V3] of U13 on F.Cu",
                     "pos": {
@@ -75,6 +21,14 @@
                         "y": 83.9125
                     },
                     "uuid": "2bc2cfe8-dce5-5594-960a-feab13086669"
+                },
+                {
+                    "description": "Track [+3V3] on F.Cu, length 0.2086 mm",
+                    "pos": {
+                        "x": 101.1625,
+                        "y": 83.75
+                    },
+                    "uuid": "7acc7dc6-c460-4b8d-b7e1-9147a2accb83"
                 }
             ],
             "severity": "error",
@@ -84,20 +38,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+3V3] on F.Cu, length 1.6890 mm",
+                    "description": "Pad 1 [+3V3_ZED] of C62 on F.Cu",
                     "pos": {
-                        "x": 101.7294,
-                        "y": 82.021
+                        "x": 101.56,
+                        "y": 104.13
                     },
-                    "uuid": "490e329c-8163-4346-b13d-2fe24479a28d"
+                    "uuid": "c8c77d44-e062-59e5-ae9d-46d7a39a4a5c"
                 },
                 {
-                    "description": "Pad 2 [+3V3] of R11 on F.Cu",
+                    "description": "Track [+3V3_ZED] on F.Cu, length 0.4348 mm",
                     "pos": {
-                        "x": 102.16,
-                        "y": 85.14
+                        "x": 89.1375,
+                        "y": 113.05
                     },
-                    "uuid": "7c18ecc1-5563-5564-83d4-6b4f741bf4e3"
+                    "uuid": "831de670-5204-42df-8a8b-58b5d9df166d"
                 }
             ],
             "severity": "error",
@@ -107,20 +61,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+3V3_ZED] on F.Cu, length 0.8817 mm",
+                    "description": "Pad 2 [GND] of C25 on F.Cu",
                     "pos": {
-                        "x": 99.0,
-                        "y": 100.65
+                        "x": 101.03,
+                        "y": 87.31
                     },
-                    "uuid": "cebb0739-991e-4f86-84d1-c9498fa044f2"
+                    "uuid": "6f449431-552b-5fe5-8dc4-ef004ede1304"
                 },
                 {
-                    "description": "Track [+3V3_ZED] on F.Cu, length 0.4419 mm",
+                    "description": "Pad 41 [GND] of U4 on F.Cu",
                     "pos": {
-                        "x": 87.46,
-                        "y": 110.8788
+                        "x": 109.0,
+                        "y": 88.76
                     },
-                    "uuid": "501ac8aa-3df2-4444-b556-da66939f7cd2"
+                    "uuid": "38b39c7d-41e6-53a8-9b0d-0aba8d39b93b"
                 }
             ],
             "severity": "error",
@@ -130,20 +84,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Track [+3V3_ZED] on F.Cu, length 1.0524 mm",
+                    "description": "Pad 1 [VBUS] of D6 on F.Cu",
                     "pos": {
-                        "x": 100.0517,
-                        "y": 100.6024
+                        "x": 79.81,
+                        "y": 108.15
                     },
-                    "uuid": "74e9b76d-39a9-4993-a312-3f6d8352dfe7"
+                    "uuid": "e6187486-ef1e-5673-82b0-6e02764a32ad"
                 },
                 {
-                    "description": "Pad 1 [+3V3_ZED] of C63 on F.Cu",
+                    "description": "Track [VBUS] on F.Cu, length 1.1174 mm",
                     "pos": {
-                        "x": 102.16,
-                        "y": 98.3
+                        "x": 96.1901,
+                        "y": 120.2901
                     },
-                    "uuid": "b7ff5bcb-a339-51ca-b0f4-e195a68bc331"
+                    "uuid": "49e29089-1fd0-4807-95f8-e9aed09b476a"
                 }
             ],
             "severity": "error",
@@ -152,37 +106,6 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Track [VBAT] on In2.Cu, length 1.5863 mm",
-                    "pos": {
-                        "x": 92.3035,
-                        "y": 87.3494
-                    },
-                    "uuid": "fb3c64b3-17bf-4025-847f-3f9ef7cb3dd5"
-                },
-                {
-                    "description": "Pad 1 [VBAT] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 92.93
-                    },
-                    "uuid": "873f5d5e-1183-5c40-a592-d69f00776c58"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [VSYS] on F.Cu, length 1.3634 mm",
-                    "pos": {
-                        "x": 98.08,
-                        "y": 118.91
-                    },
-                    "uuid": "ffd6164f-79c4-487b-a1e0-ef1c2373cf56"
-                },
                 {
                     "description": "Pad 10 [VSYS] of U2 on F.Cu",
                     "pos": {
@@ -190,6 +113,14 @@
                         "y": 116.25
                     },
                     "uuid": "88e0b31d-b440-577f-92f6-6b92be96c6c3"
+                },
+                {
+                    "description": "Pad 2 [VSYS] of R8 on F.Cu",
+                    "pos": {
+                        "x": 98.08,
+                        "y": 118.91
+                    },
+                    "uuid": "8538f735-eb63-585c-afbb-b984bf5f32d1"
                 }
             ],
             "severity": "error",
@@ -198,21 +129,21 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "Pad 1 [+3V3_AON] of TP10 on F.Cu",
-                    "pos": {
-                        "x": 86.09,
-                        "y": 85.63
-                    },
-                    "uuid": "55fe1650-1b6e-55c6-a823-be3a0804515d"
-                },
                 {
                     "description": "Track [+3V3_AON] on F.Cu, length 1.5200 mm",
                     "pos": {
                         "x": 100.52,
                         "y": 97.35
                     },
-                    "uuid": "ec7dfe11-08dd-4bef-ba91-ea785eef0795"
+                    "uuid": "4b48a5fc-ed79-4e72-b6a4-2d1e92423e76"
+                },
+                {
+                    "description": "Track [+3V3_AON] on F.Cu, length 0.1131 mm",
+                    "pos": {
+                        "x": 83.74,
+                        "y": 86.5
+                    },
+                    "uuid": "5d42a81f-186d-4c5b-896c-3d210dedea37"
                 }
             ],
             "severity": "error",
@@ -222,66 +153,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 2 [BAT_ADC] of R32 on F.Cu",
+                    "description": "Pad 4 [IMU_INT1] of U13 on F.Cu",
                     "pos": {
-                        "x": 102.06,
-                        "y": 91.91
+                        "x": 98.8375,
+                        "y": 83.75
                     },
-                    "uuid": "5ef860e5-5aa8-5852-a8f2-ed7499c13a68"
+                    "uuid": "a436f69b-0937-5ee1-a25d-c13a99b8cde5"
                 },
                 {
-                    "description": "Pad 1 [BAT_ADC] of C34 on F.Cu",
+                    "description": "Pad 15 [IMU_INT1] of U4 on F.Cu",
                     "pos": {
-                        "x": 96.66,
-                        "y": 87.04
+                        "x": 104.915,
+                        "y": 100.2
                     },
-                    "uuid": "51af8eb6-034c-5643-971f-b309adc69ad5"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 1 [EN] of R11 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 86.16
-                    },
-                    "uuid": "64516534-5516-56df-a136-3e9fc4f58793"
-                },
-                {
-                    "description": "Pad 1 [EN] of C27 on F.Cu",
-                    "pos": {
-                        "x": 101.06,
-                        "y": 86.15
-                    },
-                    "uuid": "02007ee8-dbcc-5257-8fce-082cfbe3450b"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Track [I2C_SCL] on F.Cu, length 0.5351 mm",
-                    "pos": {
-                        "x": 100.0,
-                        "y": 82.0875
-                    },
-                    "uuid": "a36a1c48-13ad-4e31-9979-65074dee5a98"
-                },
-                {
-                    "description": "Pad 7 [I2C_SCL] of U12 on F.Cu",
-                    "pos": {
-                        "x": 88.75,
-                        "y": 84.56
-                    },
-                    "uuid": "fc295734-d168-564a-9828-a4921ca31ac5"
+                    "uuid": "655ec153-6b53-54a8-ae2e-5475dd3bfa0d"
                 }
             ],
             "severity": "error",
@@ -314,66 +199,66 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "Pad 1 [SD_D0] of R42 on F.Cu",
+                    "description": "Pad 5 [SD_CLK] of J3 on F.Cu",
                     "pos": {
-                        "x": 121.59,
-                        "y": 96.44
+                        "x": 110.375,
+                        "y": 102.775
                     },
-                    "uuid": "597bc2cc-1de9-52ca-9340-00ce31163767"
+                    "uuid": "4405c939-f7be-5e24-b84f-3879d849a204"
                 },
                 {
-                    "description": "Track [SD_D0] on F.Cu, length 0.9133 mm",
+                    "description": "Pad 2 [SD_CLK] of R46 on F.Cu",
                     "pos": {
-                        "x": 113.805,
+                        "x": 122.34,
+                        "y": 97.61
+                    },
+                    "uuid": "cf3f3fb7-9bf7-589d-aaa4-5c9073bfbf15"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VLED] on F.Cu, length 0.6788 mm",
+                    "pos": {
+                        "x": 77.1617,
+                        "y": 111.55
+                    },
+                    "uuid": "03071067-c163-4fa8-80d0-a93138294150"
+                },
+                {
+                    "description": "Track [VLED] on F.Cu, length 0.6788 mm",
+                    "pos": {
+                        "x": 77.1617,
+                        "y": 87.55
+                    },
+                    "uuid": "a6c251b2-6498-453c-90cb-a0e1b9e1aaeb"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [ZED_EN] on F.Cu, length 0.7212 mm",
+                    "pos": {
+                        "x": 86.3525,
+                        "y": 115.46
+                    },
+                    "uuid": "d9469beb-0991-442e-bc94-6de31a12fa25"
+                },
+                {
+                    "description": "Pad 18 [ZED_EN] of U4 on F.Cu",
+                    "pos": {
+                        "x": 108.725,
                         "y": 100.2
                     },
-                    "uuid": "6759c1b3-6e78-483c-bd8e-289f8103834a"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 2 [ZED_TX2] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 95.08
-                    },
-                    "uuid": "5a20c071-9497-5b03-9943-a5f376585099"
-                },
-                {
-                    "description": "Pad 7 [ZED_TX2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 90.06
-                    },
-                    "uuid": "5b2af7e8-b295-59b7-9bfb-cb18f90f2ba4"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "Pad 27 [ZED_TX2_C] of U1 on F.Cu",
-                    "pos": {
-                        "x": 98.1,
-                        "y": 108.95
-                    },
-                    "uuid": "a13544de-0098-5f48-bcc0-7a26c9078065"
-                },
-                {
-                    "description": "Pad 1 [ZED_TX2_C] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 96.1
-                    },
-                    "uuid": "5e2f2dc8-51fc-5b3d-be83-d2dc4ab88741"
+                    "uuid": "d9608f1a-31b0-5878-aa09-191b4b90f1a0"
                 }
             ],
             "severity": "error",
@@ -382,993 +267,111 @@
     ],
     "violations": [
         {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1250 mm)",
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.2103 mm)",
             "items": [
                 {
-                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "description": "Segment on Edge.Cuts",
                     "pos": {
-                        "x": 102.025,
-                        "y": 97.325
+                        "x": 125.5,
+                        "y": 122.5
                     },
-                    "uuid": "76e19458-6ad5-410e-a053-648f8acb2f03"
+                    "uuid": "10147b1e-7638-5711-be76-bbc000e11fe2"
                 },
                 {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
+                    "description": "Via [LED_D4] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 103.15,
-                        "y": 97.68
+                        "x": 125.0397,
+                        "y": 113.575
                     },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
+                    "uuid": "23cf0f39-893b-417b-9ae9-d1a8cf60f0a3"
                 }
             ],
             "severity": "error",
-            "type": "clearance"
+            "type": "copper_edge_clearance"
         },
         {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0400 mm)",
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1684 mm)",
             "items": [
                 {
-                    "description": "Track [GND] on F.Cu, length 0.2351 mm",
+                    "description": "Segment on Edge.Cuts",
                     "pos": {
-                        "x": 102.21,
-                        "y": 87.23
+                        "x": 125.5,
+                        "y": 122.5
                     },
-                    "uuid": "b538cc86-bada-47a7-9fe6-c48a80800b5f"
+                    "uuid": "10147b1e-7638-5711-be76-bbc000e11fe2"
                 },
                 {
-                    "description": "Pad 5 [ZED_TX1] of U4 on F.Cu",
+                    "description": "Track [LED_D4] on In2.Cu, length 3.5297 mm",
                     "pos": {
-                        "x": 103.15,
-                        "y": 87.52
+                        "x": 125.2316,
+                        "y": 89.1852
                     },
-                    "uuid": "e293a104-3e68-592a-8aee-1b53a605e778"
+                    "uuid": "bbc7917e-43bc-46bd-87ae-ffced954fad3"
                 }
             ],
             "severity": "error",
-            "type": "clearance"
+            "type": "copper_edge_clearance"
         },
         {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0900 mm)",
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1684 mm)",
             "items": [
                 {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
+                    "description": "Segment on Edge.Cuts",
                     "pos": {
-                        "x": 103.15,
-                        "y": 97.68
+                        "x": 125.5,
+                        "y": 122.5
                     },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
+                    "uuid": "10147b1e-7638-5711-be76-bbc000e11fe2"
                 },
                 {
-                    "description": "Track [GND] on F.Cu, length 0.1358 mm",
+                    "description": "Track [LED_D4] on In2.Cu, length 24.1979 mm",
                     "pos": {
-                        "x": 102.16,
-                        "y": 97.34
+                        "x": 125.2316,
+                        "y": 113.3831
                     },
-                    "uuid": "f6a7dc14-86fb-48c8-81d6-e4bcc6895236"
+                    "uuid": "cfc78a26-b5fc-4906-a56f-79fd5295332e"
                 }
             ],
             "severity": "error",
-            "type": "clearance"
+            "type": "copper_edge_clearance"
         },
         {
-            "description": "Items shorting two nets (nets +3V3_ZED and USB_DM)",
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.3000 mm; actual 0.1684 mm)",
             "items": [
                 {
-                    "description": "Pad 1 [+3V3_ZED] of C63 on F.Cu",
+                    "description": "Segment on Edge.Cuts",
                     "pos": {
-                        "x": 102.16,
-                        "y": 98.3
+                        "x": 125.5,
+                        "y": 122.5
                     },
-                    "uuid": "b7ff5bcb-a339-51ca-b0f4-e195a68bc331"
+                    "uuid": "10147b1e-7638-5711-be76-bbc000e11fe2"
                 },
                 {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
+                    "description": "Track [LED_D4] on In2.Cu, length 0.2714 mm",
                     "pos": {
-                        "x": 103.15,
-                        "y": 97.68
+                        "x": 125.0397,
+                        "y": 113.575
                     },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
+                    "uuid": "e7e2a6e3-8e50-40a1-89ea-92e3948007fe"
                 }
             ],
             "severity": "error",
-            "type": "shorting_items"
+            "type": "copper_edge_clearance"
         },
         {
-            "description": "Items shorting two nets (nets +3V3_ZED and USB_DP)",
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1200 mm; actual 0.0951 mm) (F.Cu)",
             "items": [
                 {
-                    "description": "Pad 1 [+3V3_ZED] of C63 on F.Cu",
+                    "description": "Zone [GND] on F.Cu, priority 0",
                     "pos": {
-                        "x": 102.16,
-                        "y": 98.3
+                        "x": 125.5,
+                        "y": 122.5
                     },
-                    "uuid": "b7ff5bcb-a339-51ca-b0f4-e195a68bc331"
-                },
-                {
-                    "description": "Pad 14 [USB_DP] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 98.95
-                    },
-                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
+                    "uuid": "1d6b9a38-8a8d-4b29-911b-879271353eaf"
                 }
             ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets GND and USB_DM)",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C63 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 97.34
-                    },
-                    "uuid": "0e325e7d-ea98-59c6-82f4-8dff0edaa3cc"
-                },
-                {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 97.68
-                    },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets GND and ZED_TX1)",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C26 on F.Cu",
-                    "pos": {
-                        "x": 102.21,
-                        "y": 87.23
-                    },
-                    "uuid": "2053366f-5eae-520f-a22d-db9283ca93ea"
-                },
-                {
-                    "description": "Pad 5 [ZED_TX1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 87.52
-                    },
-                    "uuid": "e293a104-3e68-592a-8aee-1b53a605e778"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets SD_D0 and unconnected-(U4-IO36 (PSRAM)-Pad29))",
-            "items": [
-                {
-                    "description": "Pad 1 [SD_D0] of R42 on F.Cu",
-                    "pos": {
-                        "x": 121.59,
-                        "y": 96.44
-                    },
-                    "uuid": "597bc2cc-1de9-52ca-9340-00ce31163767"
-                },
-                {
-                    "description": "Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 96.41
-                    },
-                    "uuid": "f415b125-132e-5db1-bdc2-1ea06275f7ff"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets ZED_TX2_C and S3_TX2)",
-            "items": [
-                {
-                    "description": "Pad 1 [ZED_TX2_C] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 96.1
-                    },
-                    "uuid": "5e2f2dc8-51fc-5b3d-be83-d2dc4ab88741"
-                },
-                {
-                    "description": "Pad 12 [S3_TX2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 96.41
-                    },
-                    "uuid": "a5759f27-3984-546c-80c4-1ac4cebb2b73"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets ZED_TX2 and VBUS_DET)",
-            "items": [
-                {
-                    "description": "Pad 2 [ZED_TX2] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 95.08
-                    },
-                    "uuid": "5a20c071-9497-5b03-9943-a5f376585099"
-                },
-                {
-                    "description": "Pad 11 [VBUS_DET] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 95.14
-                    },
-                    "uuid": "67d513f8-b134-58cd-b61d-e39e0611792d"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets EN and ZED_PPS)",
-            "items": [
-                {
-                    "description": "Pad 1 [EN] of R11 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 86.16
-                    },
-                    "uuid": "64516534-5516-56df-a136-3e9fc4f58793"
-                },
-                {
-                    "description": "Pad 4 [ZED_PPS] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 86.25
-                    },
-                    "uuid": "4c7f5ef4-0ac9-5109-a73a-c5ac3ffc67be"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Items shorting two nets (nets +3V3 and EN)",
-            "items": [
-                {
-                    "description": "Pad 2 [+3V3] of R11 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 85.14
-                    },
-                    "uuid": "7c18ecc1-5563-5564-83d4-6b4f741bf4e3"
-                },
-                {
-                    "description": "Pad 3 [EN] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 84.98
-                    },
-                    "uuid": "6190f464-da32-5fea-af0d-5ac7dd3d4b17"
-                }
-            ],
-            "severity": "error",
-            "type": "shorting_items"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0100 mm)",
-            "items": [
-                {
-                    "description": "Pad 1 [LED_DIN_S3] of R24 on F.Cu",
-                    "pos": {
-                        "x": 121.73,
-                        "y": 98.56
-                    },
-                    "uuid": "7a86be8a-43aa-58de-ae87-3ee243698993"
-                },
-                {
-                    "description": "Pad 27 [BOOT] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 98.95
-                    },
-                    "uuid": "a1063de8-fb28-57a7-8965-5d64daf82a07"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0100 mm)",
-            "items": [
-                {
-                    "description": "Pad 2 [LED_D1] of R24 on F.Cu",
-                    "pos": {
-                        "x": 121.73,
-                        "y": 97.54
-                    },
-                    "uuid": "fe693c3f-0238-5187-95a7-5d6a232692bd"
-                },
-                {
-                    "description": "Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 97.68
-                    },
-                    "uuid": "bab3dd21-3927-5056-959c-feabe7cf522e"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0600 mm)",
-            "items": [
-                {
-                    "description": "Pad 1 [U0RX] of TP5 on F.Cu",
-                    "pos": {
-                        "x": 121.96,
-                        "y": 89.99
-                    },
-                    "uuid": "08ffff0c-8199-5b2c-9442-02097c904ca2"
-                },
-                {
-                    "description": "Pad 34 [I2C_SCL] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 90.06
-                    },
-                    "uuid": "e0be564f-f62c-568b-a9b7-247679adf341"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0788 mm)",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C62 on F.Cu",
-                    "pos": {
-                        "x": 101.6,
-                        "y": 99.7
-                    },
-                    "uuid": "8e30de0c-1ac0-5f4d-940f-79d7e5865662"
-                },
-                {
-                    "description": "Pad 14 [USB_DP] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 98.95
-                    },
-                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0200 mm)",
-            "items": [
-                {
-                    "description": "Pad 1 [VBAT] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 92.93
-                    },
-                    "uuid": "873f5d5e-1183-5c40-a592-d69f00776c58"
-                },
-                {
-                    "description": "Pad 9 [SD_D2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 92.6
-                    },
-                    "uuid": "9930b4e0-06ef-5d7c-87a5-82afa46e0ffe"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0200 mm)",
-            "items": [
-                {
-                    "description": "Pad 2 [BAT_ADC] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 91.91
-                    },
-                    "uuid": "5ef860e5-5aa8-5852-a8f2-ed7499c13a68"
-                },
-                {
-                    "description": "Pad 8 [SD_D1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 91.33
-                    },
-                    "uuid": "20feed9f-10ee-5ad7-a72d-2e8a88ee534a"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.0522 mm)",
-            "items": [
-                {
-                    "description": "Pad 2 [BAT_ADC] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 91.91
-                    },
-                    "uuid": "5ef860e5-5aa8-5852-a8f2-ed7499c13a68"
-                },
-                {
-                    "description": "Pad 9 [SD_D2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 92.6
-                    },
-                    "uuid": "9930b4e0-06ef-5d7c-87a5-82afa46e0ffe"
-                }
-            ],
-            "severity": "error",
-            "type": "clearance"
-        },
-        {
-            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2250 mm)",
-            "items": [
-                {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 97.68
-                    },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
-                },
-                {
-                    "description": "Via [GND] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 102.025,
-                        "y": 97.325
-                    },
-                    "uuid": "76e19458-6ad5-410e-a053-648f8acb2f03"
-                }
-            ],
-            "severity": "error",
-            "type": "hole_clearance"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Track [GND] on F.Cu, length 0.2351 mm",
-                    "pos": {
-                        "x": 102.21,
-                        "y": 87.23
-                    },
-                    "uuid": "b538cc86-bada-47a7-9fe6-c48a80800b5f"
-                },
-                {
-                    "description": "Pad 5 [ZED_TX1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 87.52
-                    },
-                    "uuid": "e293a104-3e68-592a-8aee-1b53a605e778"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [+3V3_ZED] of C63 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 98.3
-                    },
-                    "uuid": "b7ff5bcb-a339-51ca-b0f4-e195a68bc331"
-                },
-                {
-                    "description": "Pad 14 [USB_DP] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 98.95
-                    },
-                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [+3V3_ZED] of C63 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 98.3
-                    },
-                    "uuid": "b7ff5bcb-a339-51ca-b0f4-e195a68bc331"
-                },
-                {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 97.68
-                    },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C63 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 97.34
-                    },
-                    "uuid": "0e325e7d-ea98-59c6-82f4-8dff0edaa3cc"
-                },
-                {
-                    "description": "Pad 13 [USB_DM] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 97.68
-                    },
-                    "uuid": "7fb6d26e-acd3-55cb-9f2c-65e4ab782b34"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C26 on F.Cu",
-                    "pos": {
-                        "x": 102.21,
-                        "y": 87.23
-                    },
-                    "uuid": "2053366f-5eae-520f-a22d-db9283ca93ea"
-                },
-                {
-                    "description": "Pad 5 [ZED_TX1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 87.52
-                    },
-                    "uuid": "e293a104-3e68-592a-8aee-1b53a605e778"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [SD_D0] of R42 on F.Cu",
-                    "pos": {
-                        "x": 121.59,
-                        "y": 96.44
-                    },
-                    "uuid": "597bc2cc-1de9-52ca-9340-00ce31163767"
-                },
-                {
-                    "description": "Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 96.41
-                    },
-                    "uuid": "f415b125-132e-5db1-bdc2-1ea06275f7ff"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [ZED_TX2_C] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 96.1
-                    },
-                    "uuid": "5e2f2dc8-51fc-5b3d-be83-d2dc4ab88741"
-                },
-                {
-                    "description": "Pad 12 [S3_TX2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 96.41
-                    },
-                    "uuid": "a5759f27-3984-546c-80c4-1ac4cebb2b73"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [ZED_TX2] of R54 on F.Cu",
-                    "pos": {
-                        "x": 102.15,
-                        "y": 95.08
-                    },
-                    "uuid": "5a20c071-9497-5b03-9943-a5f376585099"
-                },
-                {
-                    "description": "Pad 11 [VBUS_DET] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 95.14
-                    },
-                    "uuid": "67d513f8-b134-58cd-b61d-e39e0611792d"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [SD_D2] of R44 on F.Cu",
-                    "pos": {
-                        "x": 121.87,
-                        "y": 95.41
-                    },
-                    "uuid": "ad73a24a-f89d-523b-870e-84280c61c3a1"
-                },
-                {
-                    "description": "Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 95.14
-                    },
-                    "uuid": "400a7648-9f42-50ea-8497-e2b52aa8a59b"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [+3V3_SD] of R44 on F.Cu",
-                    "pos": {
-                        "x": 121.87,
-                        "y": 94.39
-                    },
-                    "uuid": "fbe77d23-035b-536f-87de-4be60ee10519"
-                },
-                {
-                    "description": "Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 95.14
-                    },
-                    "uuid": "400a7648-9f42-50ea-8497-e2b52aa8a59b"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [+3V3_SD] of R44 on F.Cu",
-                    "pos": {
-                        "x": 121.87,
-                        "y": 94.39
-                    },
-                    "uuid": "fbe77d23-035b-536f-87de-4be60ee10519"
-                },
-                {
-                    "description": "Pad 31 [CHG_PG] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 93.87
-                    },
-                    "uuid": "42841b35-2b6e-573f-beb3-f4cb7d2e182e"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [EN] of R11 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 86.16
-                    },
-                    "uuid": "64516534-5516-56df-a136-3e9fc4f58793"
-                },
-                {
-                    "description": "Pad 4 [ZED_PPS] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 86.25
-                    },
-                    "uuid": "4c7f5ef4-0ac9-5109-a73a-c5ac3ffc67be"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [+3V3] of R11 on F.Cu",
-                    "pos": {
-                        "x": 102.16,
-                        "y": 85.14
-                    },
-                    "uuid": "7c18ecc1-5563-5564-83d4-6b4f741bf4e3"
-                },
-                {
-                    "description": "Pad 3 [EN] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 84.98
-                    },
-                    "uuid": "6190f464-da32-5fea-af0d-5ac7dd3d4b17"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [LED_DIN_S3] of R24 on F.Cu",
-                    "pos": {
-                        "x": 121.73,
-                        "y": 98.56
-                    },
-                    "uuid": "7a86be8a-43aa-58de-ae87-3ee243698993"
-                },
-                {
-                    "description": "Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 97.68
-                    },
-                    "uuid": "bab3dd21-3927-5056-959c-feabe7cf522e"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [LED_DIN_S3] of R24 on F.Cu",
-                    "pos": {
-                        "x": 121.73,
-                        "y": 98.56
-                    },
-                    "uuid": "7a86be8a-43aa-58de-ae87-3ee243698993"
-                },
-                {
-                    "description": "Pad 27 [BOOT] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 98.95
-                    },
-                    "uuid": "a1063de8-fb28-57a7-8965-5d64daf82a07"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [LED_D1] of R24 on F.Cu",
-                    "pos": {
-                        "x": 121.73,
-                        "y": 97.54
-                    },
-                    "uuid": "fe693c3f-0238-5187-95a7-5d6a232692bd"
-                },
-                {
-                    "description": "Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 97.68
-                    },
-                    "uuid": "bab3dd21-3927-5056-959c-feabe7cf522e"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [ZED_TX1] of R53 on F.Cu",
-                    "pos": {
-                        "x": 101.98,
-                        "y": 90.74
-                    },
-                    "uuid": "96cf40d7-47b2-57e9-9b1b-30c6267874b5"
-                },
-                {
-                    "description": "Pad 7 [ZED_TX2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 90.06
-                    },
-                    "uuid": "5b2af7e8-b295-59b7-9bfb-cb18f90f2ba4"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [ZED_TX1] of R53 on F.Cu",
-                    "pos": {
-                        "x": 101.98,
-                        "y": 90.74
-                    },
-                    "uuid": "96cf40d7-47b2-57e9-9b1b-30c6267874b5"
-                },
-                {
-                    "description": "Pad 8 [SD_D1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 91.33
-                    },
-                    "uuid": "20feed9f-10ee-5ad7-a72d-2e8a88ee534a"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [U0RX] of TP5 on F.Cu",
-                    "pos": {
-                        "x": 121.96,
-                        "y": 89.99
-                    },
-                    "uuid": "08ffff0c-8199-5b2c-9442-02097c904ca2"
-                },
-                {
-                    "description": "Pad 34 [I2C_SCL] of U4 on F.Cu",
-                    "pos": {
-                        "x": 120.65,
-                        "y": 90.06
-                    },
-                    "uuid": "e0be564f-f62c-568b-a9b7-247679adf341"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [GND] of C62 on F.Cu",
-                    "pos": {
-                        "x": 101.6,
-                        "y": 99.7
-                    },
-                    "uuid": "8e30de0c-1ac0-5f4d-940f-79d7e5865662"
-                },
-                {
-                    "description": "Pad 14 [USB_DP] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 98.95
-                    },
-                    "uuid": "30c012f7-cd5e-5054-97b2-81458e4478e2"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 1 [VBAT] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 92.93
-                    },
-                    "uuid": "873f5d5e-1183-5c40-a592-d69f00776c58"
-                },
-                {
-                    "description": "Pad 9 [SD_D2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 92.6
-                    },
-                    "uuid": "9930b4e0-06ef-5d7c-87a5-82afa46e0ffe"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [BAT_ADC] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 91.91
-                    },
-                    "uuid": "5ef860e5-5aa8-5852-a8f2-ed7499c13a68"
-                },
-                {
-                    "description": "Pad 8 [SD_D1] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 91.33
-                    },
-                    "uuid": "20feed9f-10ee-5ad7-a72d-2e8a88ee534a"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
-        },
-        {
-            "description": "Front solder mask aperture bridges items with different nets",
-            "items": [
-                {
-                    "description": "Pad 2 [BAT_ADC] of R32 on F.Cu",
-                    "pos": {
-                        "x": 102.06,
-                        "y": 91.91
-                    },
-                    "uuid": "5ef860e5-5aa8-5852-a8f2-ed7499c13a68"
-                },
-                {
-                    "description": "Pad 9 [SD_D2] of U4 on F.Cu",
-                    "pos": {
-                        "x": 103.15,
-                        "y": 92.6
-                    },
-                    "uuid": "9930b4e0-06ef-5d7c-87a5-82afa46e0ffe"
-                }
-            ],
-            "severity": "error",
-            "type": "solder_mask_bridge"
+            "severity": "warning",
+            "type": "connection_width"
         },
         {
             "description": "Silkscreen clipped by solder mask",
@@ -1434,117 +437,12 @@
             "description": "Silkscreen clipped by solder mask",
             "items": [
                 {
-                    "description": "Segment of C63 on F.Silkscreen",
-                    "pos": {
-                        "x": 102.52,
-                        "y": 97.9278
-                    },
-                    "uuid": "49ee2bf8-1bf9-572d-bfb5-9e340d1342c6"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of R54 on F.Silkscreen",
-                    "pos": {
-                        "x": 102.53,
-                        "y": 95.7436
-                    },
-                    "uuid": "0412b149-91f8-5037-aafc-2f6e143665e5"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of R44 on F.Silkscreen",
-                    "pos": {
-                        "x": 121.49,
-                        "y": 95.0536
-                    },
-                    "uuid": "88d169e1-96f5-5da3-991c-b20bfcb39591"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of R11 on F.Silkscreen",
-                    "pos": {
-                        "x": 102.54,
-                        "y": 85.8036
-                    },
-                    "uuid": "862af360-beb6-5452-9b37-da97b9ed9982"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of R24 on F.Silkscreen",
-                    "pos": {
-                        "x": 121.35,
-                        "y": 98.2036
-                    },
-                    "uuid": "afb1bd51-24ad-580d-af54-13dd9d34533a"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
                     "description": "Circle of U12 on F.Silkscreen",
                     "pos": {
                         "x": 88.0,
                         "y": 86.5
                     },
                     "uuid": "fa30cce5-a375-5837-a52b-4c48ce062887"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of R32 on F.Silkscreen",
-                    "pos": {
-                        "x": 102.44,
-                        "y": 92.5736
-                    },
-                    "uuid": "5ae5b403-d562-5fa6-83f0-e9764ed09836"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_over_copper"
-        },
-        {
-            "description": "Silkscreen clipped by solder mask",
-            "items": [
-                {
-                    "description": "Segment of U8 on F.Silkscreen",
-                    "pos": {
-                        "x": 123.66,
-                        "y": 99.42
-                    },
-                    "uuid": "93b89aa3-fb36-5bf6-a3d4-e38440b3d30c"
                 }
             ],
             "severity": "warning",
