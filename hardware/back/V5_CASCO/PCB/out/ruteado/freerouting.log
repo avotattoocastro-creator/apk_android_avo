@@ -1,6 +1,6 @@
 + timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn -do hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses -mp 150
-2026-11-17 21:55:35.741 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
-2026-11-17 21:55:36.964 [main] INFO  Opening 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn'...
+2026-11-17 22:35:49.774 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-17 22:35:50.998 [main] INFO  Opening 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn'...
 java.util.concurrent.CompletionException: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonElement.getAsString()" because the return value of "com.google.gson.JsonObject.get(String)" is null
 	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
 	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
@@ -19,12 +19,12 @@ Caused by: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonEl
 	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718)
 	... 9 more
 
-(java:2429): dbind-WARNING **: 21:55:45.810: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-2026-11-17 21:56:06.849 [Thread-28] INFO  Starting auto-routing...
-2026-11-17 21:56:07.186 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 21:56:07.194 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 21:56:07.200 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 22:01:37.444 [Thread-28] INFO  Auto-routing was completed in 5 minute(s) 30.59 seconds.
-2026-11-17 22:01:37.548 [Thread-28] INFO  Starting route optimization on 1 thread...
-2026-11-17 22:02:33.163 [Thread-28] INFO  Route optimization was completed in 55.61 seconds.
-2026-11-17 22:02:33.219 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses'...
+(java:2388): dbind-WARNING **: 22:35:56.319: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-17 22:36:17.441 [Thread-28] INFO  Starting auto-routing...
+2026-11-17 22:36:17.905 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 22:36:17.913 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 22:36:17.920 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 22:44:19.863 [Thread-28] INFO  Auto-routing was completed in 8 minute(s) 2.42 seconds.
+2026-11-17 22:44:19.964 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-17 22:45:10.678 [Thread-28] INFO  Route optimization was completed in 50.71 seconds.
+2026-11-17 22:45:10.717 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses'...

@@ -1,37 +1,37 @@
 # AVO BACK V5 CASCO · placa de la espalda para el casco · REV B (ESP32-S3-WROOM-1U-N16R8 + ZED-F9P soldado) — informe de diagnóstico
 
 - Estado: **DISEÑO INCOMPLETO** — no fabricar: hay comprobaciones bloqueantes sin superar
-- Commit: `9a931128a517db8bc3029b792d719e72ca32a9f9` · ejecución de CI: 44184593068
+- Commit: `e6a68deb71dc0d79c2c23e73921a9eea9265b3f4` · ejecución de CI: 44191363959
 - Ruteado: Freerouting 1.9.0 sobre la placa de colocación (sin reparar)
 - Placa: 51 × 51 mm (R3), 4 capas (F.Cu componentes y señal · In1.Cu GND · In2.Cu señal + relleno +3V3 · B.Cu plano GND macizo de la antena GNSS, sin pistas), 1,6 mm, ENIG, cobre exterior 1 oz
 - Componentes: 134 en total, 113 para montar, 1 sin montar (DNP: C69), 20 a mano (pads de hilo y de prueba)
-- Pistas: 1283 · vías: 256 · ruteado INCOMPLETO (8 conexiones)
+- Pistas: 1224 · vías: 249 · ruteado INCOMPLETO (9 conexiones)
 
 ## Comprobaciones bloqueantes
 | Comprobación | Resultado | Cantidad |
 |---|---|---|
-| DRC: errores | **FALLA** | 6 |
-| DRC: conexiones incompletas | **FALLA** | 8 |
+| DRC: errores | correcto | 0 |
+| DRC: conexiones incompletas | **FALLA** | 9 |
 | DRC: cortocircuitos | correcto | 0 |
 | DRC: paridad esquema ↔ placa | correcto | 0 |
 | ERC: errores | correcto | 0 |
 | ERC: advertencias | correcto | 0 |
 
-Errores de DRC por tipo: copper_edge_clearance 6
 
 ### Conexiones incompletas
-- Track [+3V3] on F.Cu, length 0.6177 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
-- Track [+3V3] on F.Cu, length 0.2086 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [+3V3] on F.Cu, length 0.8986 mm ↔ Track [+3V3] on F.Cu, length 3.5088 mm
+- Track [+3V3] on F.Cu, length 0.0127 mm ↔ Pad 5 [+3V3] of U13 on F.Cu
+- Track [+3V3_ZED] on F.Cu, length 1.7817 mm ↔ Track [+3V3_ZED] on F.Cu, length 1.1250 mm
 - Zone [GND] on F.Cu, priority 0 ↔ Zone [GND] on F.Cu, priority 0
-- Zone [GND] on F.Cu, priority 0 ↔ Pad 40 [GND] of U4 on F.Cu
-- Track [VSYS] on F.Cu, length 2.5624 mm ↔ Pad 10 [VSYS] of U2 on F.Cu
-- Track [+3V3_AON] on F.Cu, length 1.5200 mm ↔ Pad 1 [+3V3_AON] of TP10 on F.Cu
+- Track [VSYS] on F.Cu, length 1.1476 mm ↔ Track [VSYS] on F.Cu, length 0.5000 mm
+- Track [+3V3_AON] on F.Cu, length 1.5200 mm ↔ Track [+3V3_AON] on F.Cu, length 1.2869 mm
+- Pad 4 [IMU_INT1] of U13 on F.Cu ↔ Pad 7 [IMU_INT1] of U4 on F.Cu
 - Pad 1 [LED_D6] of D15 on F.Cu ↔ Pad 3 [LED_D6] of D14 on F.Cu
-- Track [SD_D0] on F.Cu, length 0.3840 mm ↔ Pad 1 [SD_D0] of R42 on F.Cu
+- Track [VBUS_DET] on F.Cu, length 0.6504 mm ↔ Pad 2 [VBUS_DET] of R22 on F.Cu
 
 ## Advertencias de DRC (no bloqueantes)
 - silk_over_copper: 6
-- silk_overlap: 1
+- silk_overlap: 2
 
 ## Lista de materiales y posiciones
 - Piezas montadas sin número LCSC: ninguna
