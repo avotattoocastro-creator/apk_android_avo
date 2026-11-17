@@ -1,8 +1,180 @@
 ** Drc report for AVO_BACK_V5_PCB.kicad_pcb **
-** Created on 2026-11-14T16:31:28+0000 **
+** Created on 2026-11-17T21:06:49+0000 **
 ** Report includes: Errors, Warnings, Exclusions **
 
-** Found 5 DRC violations **
+** Found 57 DRC violations **
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.1250 mm)
+    Local override; error
+    @(102.0250 mm, 97.3250 mm): Via [GND] on F.Cu - B.Cu
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0400 mm)
+    Local override; error
+    @(102.2100 mm, 87.2300 mm): Track [GND] on F.Cu, length 0.2351 mm
+    @(103.1500 mm, 87.5200 mm): Pad 5 [ZED_TX1] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0900 mm)
+    Local override; error
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+    @(102.1600 mm, 97.3400 mm): Track [GND] on F.Cu, length 0.1358 mm
+[shorting_items]: Items shorting two nets (nets +3V3_ZED and USB_DM)
+    Local override; error
+    @(102.1600 mm, 98.3000 mm): Pad 1 [+3V3_ZED] of C63 on F.Cu
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets +3V3_ZED and USB_DP)
+    Local override; error
+    @(102.1600 mm, 98.3000 mm): Pad 1 [+3V3_ZED] of C63 on F.Cu
+    @(103.1500 mm, 98.9500 mm): Pad 14 [USB_DP] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets GND and USB_DM)
+    Local override; error
+    @(102.1600 mm, 97.3400 mm): Pad 2 [GND] of C63 on F.Cu
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets GND and ZED_TX1)
+    Local override; error
+    @(102.2100 mm, 87.2300 mm): Pad 2 [GND] of C26 on F.Cu
+    @(103.1500 mm, 87.5200 mm): Pad 5 [ZED_TX1] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets SD_D0 and unconnected-(U4-IO36 (PSRAM)-Pad29))
+    Local override; error
+    @(121.5900 mm, 96.4400 mm): Pad 1 [SD_D0] of R42 on F.Cu
+    @(120.6500 mm, 96.4100 mm): Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets ZED_TX2_C and S3_TX2)
+    Local override; error
+    @(102.1500 mm, 96.1000 mm): Pad 1 [ZED_TX2_C] of R54 on F.Cu
+    @(103.1500 mm, 96.4100 mm): Pad 12 [S3_TX2] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets ZED_TX2 and VBUS_DET)
+    Local override; error
+    @(102.1500 mm, 95.0800 mm): Pad 2 [ZED_TX2] of R54 on F.Cu
+    @(103.1500 mm, 95.1400 mm): Pad 11 [VBUS_DET] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets EN and ZED_PPS)
+    Local override; error
+    @(102.1600 mm, 86.1600 mm): Pad 1 [EN] of R11 on F.Cu
+    @(103.1500 mm, 86.2500 mm): Pad 4 [ZED_PPS] of U4 on F.Cu
+[shorting_items]: Items shorting two nets (nets +3V3 and EN)
+    Local override; error
+    @(102.1600 mm, 85.1400 mm): Pad 2 [+3V3] of R11 on F.Cu
+    @(103.1500 mm, 84.9800 mm): Pad 3 [EN] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0100 mm)
+    Local override; error
+    @(121.7300 mm, 98.5600 mm): Pad 1 [LED_DIN_S3] of R24 on F.Cu
+    @(120.6500 mm, 98.9500 mm): Pad 27 [BOOT] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0100 mm)
+    Local override; error
+    @(121.7300 mm, 97.5400 mm): Pad 2 [LED_D1] of R24 on F.Cu
+    @(120.6500 mm, 97.6800 mm): Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0600 mm)
+    Local override; error
+    @(121.9600 mm, 89.9900 mm): Pad 1 [U0RX] of TP5 on F.Cu
+    @(120.6500 mm, 90.0600 mm): Pad 34 [I2C_SCL] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0788 mm)
+    Local override; error
+    @(101.6000 mm, 99.7000 mm): Pad 2 [GND] of C62 on F.Cu
+    @(103.1500 mm, 98.9500 mm): Pad 14 [USB_DP] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0200 mm)
+    Local override; error
+    @(102.0600 mm, 92.9300 mm): Pad 1 [VBAT] of R32 on F.Cu
+    @(103.1500 mm, 92.6000 mm): Pad 9 [SD_D2] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0200 mm)
+    Local override; error
+    @(102.0600 mm, 91.9100 mm): Pad 2 [BAT_ADC] of R32 on F.Cu
+    @(103.1500 mm, 91.3300 mm): Pad 8 [SD_D1] of U4 on F.Cu
+[clearance]: Clearance violation ( clearance 0.1500 mm; actual 0.0522 mm)
+    Local override; error
+    @(102.0600 mm, 91.9100 mm): Pad 2 [BAT_ADC] of R32 on F.Cu
+    @(103.1500 mm, 92.6000 mm): Pad 9 [SD_D2] of U4 on F.Cu
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.2250 mm)
+    Rule: board setup constraints hole; error
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+    @(102.0250 mm, 97.3250 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.2100 mm, 87.2300 mm): Track [GND] on F.Cu, length 0.2351 mm
+    @(103.1500 mm, 87.5200 mm): Pad 5 [ZED_TX1] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1600 mm, 98.3000 mm): Pad 1 [+3V3_ZED] of C63 on F.Cu
+    @(103.1500 mm, 98.9500 mm): Pad 14 [USB_DP] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1600 mm, 98.3000 mm): Pad 1 [+3V3_ZED] of C63 on F.Cu
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1600 mm, 97.3400 mm): Pad 2 [GND] of C63 on F.Cu
+    @(103.1500 mm, 97.6800 mm): Pad 13 [USB_DM] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.2100 mm, 87.2300 mm): Pad 2 [GND] of C26 on F.Cu
+    @(103.1500 mm, 87.5200 mm): Pad 5 [ZED_TX1] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.5900 mm, 96.4400 mm): Pad 1 [SD_D0] of R42 on F.Cu
+    @(120.6500 mm, 96.4100 mm): Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1500 mm, 96.1000 mm): Pad 1 [ZED_TX2_C] of R54 on F.Cu
+    @(103.1500 mm, 96.4100 mm): Pad 12 [S3_TX2] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1500 mm, 95.0800 mm): Pad 2 [ZED_TX2] of R54 on F.Cu
+    @(103.1500 mm, 95.1400 mm): Pad 11 [VBUS_DET] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.8700 mm, 95.4100 mm): Pad 1 [SD_D2] of R44 on F.Cu
+    @(120.6500 mm, 95.1400 mm): Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.8700 mm, 94.3900 mm): Pad 2 [+3V3_SD] of R44 on F.Cu
+    @(120.6500 mm, 95.1400 mm): Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.8700 mm, 94.3900 mm): Pad 2 [+3V3_SD] of R44 on F.Cu
+    @(120.6500 mm, 93.8700 mm): Pad 31 [CHG_PG] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1600 mm, 86.1600 mm): Pad 1 [EN] of R11 on F.Cu
+    @(103.1500 mm, 86.2500 mm): Pad 4 [ZED_PPS] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.1600 mm, 85.1400 mm): Pad 2 [+3V3] of R11 on F.Cu
+    @(103.1500 mm, 84.9800 mm): Pad 3 [EN] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.7300 mm, 98.5600 mm): Pad 1 [LED_DIN_S3] of R24 on F.Cu
+    @(120.6500 mm, 97.6800 mm): Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.7300 mm, 98.5600 mm): Pad 1 [LED_DIN_S3] of R24 on F.Cu
+    @(120.6500 mm, 98.9500 mm): Pad 27 [BOOT] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.7300 mm, 97.5400 mm): Pad 2 [LED_D1] of R24 on F.Cu
+    @(120.6500 mm, 97.6800 mm): Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.9800 mm, 90.7400 mm): Pad 2 [ZED_TX1] of R53 on F.Cu
+    @(103.1500 mm, 90.0600 mm): Pad 7 [ZED_TX2] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.9800 mm, 90.7400 mm): Pad 2 [ZED_TX1] of R53 on F.Cu
+    @(103.1500 mm, 91.3300 mm): Pad 8 [SD_D1] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(121.9600 mm, 89.9900 mm): Pad 1 [U0RX] of TP5 on F.Cu
+    @(120.6500 mm, 90.0600 mm): Pad 34 [I2C_SCL] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(101.6000 mm, 99.7000 mm): Pad 2 [GND] of C62 on F.Cu
+    @(103.1500 mm, 98.9500 mm): Pad 14 [USB_DP] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.0600 mm, 92.9300 mm): Pad 1 [VBAT] of R32 on F.Cu
+    @(103.1500 mm, 92.6000 mm): Pad 9 [SD_D2] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.0600 mm, 91.9100 mm): Pad 2 [BAT_ADC] of R32 on F.Cu
+    @(103.1500 mm, 91.3300 mm): Pad 8 [SD_D1] of U4 on F.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; error
+    @(102.0600 mm, 91.9100 mm): Pad 2 [BAT_ADC] of R32 on F.Cu
+    @(103.1500 mm, 92.6000 mm): Pad 9 [SD_D2] of U4 on F.Cu
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(97.4600 mm, 121.1000 mm): PCB text 'D−' on F.Silkscreen
@@ -15,13 +187,105 @@
 [silk_over_copper]: Silkscreen clipped by solder mask
     Local override; warning
     @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.5200 mm, 97.9278 mm): Segment of C63 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.5300 mm, 95.7436 mm): Segment of R54 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.4900 mm, 95.0536 mm): Segment of R44 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.5400 mm, 85.8036 mm): Segment of R11 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(121.3500 mm, 98.2036 mm): Segment of R24 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(88.0000 mm, 86.5000 mm): Circle of U12 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(102.4400 mm, 92.5736 mm): Segment of R32 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(123.6600 mm, 99.4200 mm): Segment of U8 on F.Silkscreen
+[silk_over_copper]: Silkscreen clipped by solder mask
+    Local override; warning
+    @(90.6100 mm, 82.7100 mm): Circle of L71 on F.Silkscreen
 [silk_overlap]: Silkscreen overlap
     Rule: board setup constraints silk; warning
     @(105.0800 mm, 121.1000 mm): PCB text 'AUX' on F.Silkscreen
     @(104.3200 mm, 119.8700 mm): Segment of D3 on F.Silkscreen
 
-** Found 0 unconnected pads **
+** Found 14 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(101.2025 mm, 83.7100 mm): Track [+3V3] on F.Cu, length 0.0566 mm
+    @(99.5000 mm, 83.9125 mm): Pad 5 [+3V3] of U13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(101.7294 mm, 82.0210 mm): Track [+3V3] on F.Cu, length 1.6890 mm
+    @(102.1600 mm, 85.1400 mm): Pad 2 [+3V3] of R11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(99.0000 mm, 100.6500 mm): Track [+3V3_ZED] on F.Cu, length 0.8817 mm
+    @(87.4600 mm, 110.8788 mm): Track [+3V3_ZED] on F.Cu, length 0.4419 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.0517 mm, 100.6024 mm): Track [+3V3_ZED] on F.Cu, length 1.0524 mm
+    @(102.1600 mm, 98.3000 mm): Pad 1 [+3V3_ZED] of C63 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(93.4252 mm, 88.4711 mm): Track [VBAT] on In2.Cu, length 22.6067 mm
+    @(102.0600 mm, 92.9300 mm): Pad 1 [VBAT] of R32 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(98.0800 mm, 118.9100 mm): Track [VSYS] on F.Cu, length 1.3634 mm
+    @(100.4625 mm, 115.7500 mm): Track [VSYS] on F.Cu, length 0.5000 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(86.0900 mm, 85.6300 mm): Track [+3V3_AON] on F.Cu, length 0.2444 mm
+    @(100.5200 mm, 97.3500 mm): Track [+3V3_AON] on F.Cu, length 1.5200 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(102.0600 mm, 91.9100 mm): Pad 2 [BAT_ADC] of R32 on F.Cu
+    @(96.6600 mm, 87.0400 mm): Track [BAT_ADC] on F.Cu, length 0.4200 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(102.1600 mm, 86.1600 mm): Pad 1 [EN] of R11 on F.Cu
+    @(101.0600 mm, 86.1500 mm): Pad 1 [EN] of C27 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(100.0000 mm, 82.0875 mm): Track [I2C_SCL] on F.Cu, length 0.5351 mm
+    @(88.7500 mm, 84.5600 mm): Pad 7 [I2C_SCL] of U12 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(88.4250 mm, 123.7400 mm): Pad 1 [LED_D6] of D15 on F.Cu
+    @(110.5700 mm, 123.7400 mm): Pad 3 [LED_D6] of D14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.5900 mm, 96.4400 mm): Pad 1 [SD_D0] of R42 on F.Cu
+    @(113.8050 mm, 100.2000 mm): Track [SD_D0] on F.Cu, length 0.9133 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(102.1500 mm, 95.0800 mm): Pad 2 [ZED_TX2] of R54 on F.Cu
+    @(103.1500 mm, 90.0600 mm): Pad 7 [ZED_TX2] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(98.1000 mm, 108.9500 mm): Pad 27 [ZED_TX2_C] of U1 on F.Cu
+    @(102.1500 mm, 96.1000 mm): Pad 1 [ZED_TX2_C] of R54 on F.Cu
 
-** Found 0 Footprint errors **
+** Found 3 Footprint errors **
+[net_conflict]: Pad net (unconnected-(U4-IO35 (PSRAM)-Pad28)) doesn't match net given by schematic (unconnected-(U4-IO35_(PSRAM)-Pad28)).
+    Local override; warning
+    @(120.6500 mm, 97.6800 mm): Pad 28 [unconnected-(U4-IO35 (PSRAM)-Pad28)] of U4 on F.Cu
+[net_conflict]: Pad net (unconnected-(U4-IO36 (PSRAM)-Pad29)) doesn't match net given by schematic (unconnected-(U4-IO36_(PSRAM)-Pad29)).
+    Local override; warning
+    @(120.6500 mm, 96.4100 mm): Pad 29 [unconnected-(U4-IO36 (PSRAM)-Pad29)] of U4 on F.Cu
+[net_conflict]: Pad net (unconnected-(U4-IO37 (PSRAM)-Pad30)) doesn't match net given by schematic (unconnected-(U4-IO37_(PSRAM)-Pad30)).
+    Local override; warning
+    @(120.6500 mm, 95.1400 mm): Pad 30 [unconnected-(U4-IO37 (PSRAM)-Pad30)] of U4 on F.Cu
 
 ** End of Report **

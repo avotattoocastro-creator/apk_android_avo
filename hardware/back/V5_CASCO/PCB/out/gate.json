@@ -1,25 +1,25 @@
 {
- "ok": true,
+ "ok": false,
  "checks": [
   {
    "name": "DRC: errores",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 43
   },
   {
    "name": "DRC: conexiones incompletas",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 14
   },
   {
    "name": "DRC: cortocircuitos",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 9
   },
   {
    "name": "DRC: paridad esquema \u2194 placa",
-   "ok": true,
-   "n": 0
+   "ok": false,
+   "n": 3
   },
   {
    "name": "ERC: errores",
@@ -32,9 +32,14 @@
    "n": 0
   }
  ],
- "drc_errors": {},
+ "drc_errors": {
+  "clearance": 10,
+  "shorting_items": 9,
+  "hole_clearance": 1,
+  "solder_mask_bridge": 23
+ },
  "drc_warnings": {
-  "silk_over_copper": 4,
+  "silk_over_copper": 13,
   "silk_overlap": 1
  }
 }
