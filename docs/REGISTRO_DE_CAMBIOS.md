@@ -31,6 +31,17 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 
 
+## 2026-11-17 — CI — Descargas directas (release fija `descargas`)
+**Autor:** Claude · Rama `claude/descargas-directas` · **CI:** se ejecuta por primera vez al integrar en `develop`
+**Qué cambia:** workflow nuevo `publicar-descargas.yml` + `scripts/descargas/publicar.py` + `descargas.json`. Publica en
+la release `descargas`, con nombres fijos, la última versión de firmware (pecho, espalda, cincha, cincha ECG), apps
+(Android, Tarjetas, AVO Update, Windows) y ZIP de CAD (cincha REV5, montaje, casco V5, DOCK V1, espalda V4), más
+`VERSIONES.txt` y `manifiesto.json`. Espera a que terminen las compilaciones del commit y solo sube lo que cambia.
+**Por qué:** el usuario pide descarga directa de lo último de todo; los artefactos caducan y piden iniciar sesión.
+**No se ha tocado:** ningún workflow de compilación, firmas, `Info.plist` ni TestFlight. iOS sigue solo por TestFlight.
+**Validación:** IMPLEMENTADO · simulado en local con `gh` falso y los 988 artefactos reales de la API (17 entradas:
+12 publicables, 5 pendientes) · **sin ejecutar aún en Actions**. Detalle: `docs/DESCARGAS_DIRECTAS.md`.
+
 ## 2026-11-16 — Diseño AVO-LOCK-1 — licencias por QR en la base de carga
 **Autor:** Claude · **Commits:** este PR · **CI:** no aplica (solo documentación)
 **Qué cambia:** §16 en `docs/AVO_ENC_1_CIFRADO_Y_LLAVERO.md`: la app muestra un QR con la licencia de cuadra (una firma
