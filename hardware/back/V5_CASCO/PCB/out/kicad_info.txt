@@ -3,7 +3,7 @@
   {
    "net": "GND",
    "layer": "F.Cu",
-   "filled_area_mm2": 1062.6
+   "filled_area_mm2": 1102.6
   },
   {
    "net": "",
@@ -38,11 +38,11 @@
   {
    "net": "+3V3",
    "layer": "In2.Cu",
-   "filled_area_mm2": 1277.0
+   "filled_area_mm2": 1548.3
   }
  ],
  "footprints": 139,
- "tracks": 1224,
+ "tracks": 1151,
  "vias": 249,
- "unconnected": 9
+ "unconnected": 8
 }

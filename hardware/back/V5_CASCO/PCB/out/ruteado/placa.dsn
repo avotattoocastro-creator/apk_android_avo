@@ -242,7 +242,7 @@
       (place R52 101270.000000 -93100.000000 front 90.000000 (PN 1k))
       (place R53 94690.000000 -86500.000000 front 0.000000 (PN 330R))
       (place R54 99870.000000 -110970.000000 front 0.000000 (PN 330R))
-      (place R55 89610.000000 -83000.000000 front 90.000000 (PN 330R))
+      (place R55 87170.000000 -86530.000000 front 90.000000 (PN 330R))
       (place R11 101310.000000 -85770.000000 front 90.000000 (PN 10k))
       (place R24 118090.000000 -101840.000000 front 0.000000 (PN 33R))
       (place R25 95950.000000 -83000.000000 front 90.000000 (PN 620k))
@@ -267,7 +267,7 @@
     )
     (component AVO:C_0402_1005Metric
       (place C18 100100.000000 -112160.000000 front 0.000000 (PN 1u))
-      (place C34 87170.000000 -86520.000000 front 90.000000 (PN 100n))
+      (place C34 81630.000000 -94970.000000 front 0.000000 (PN 100n))
       (place C66 88300.000000 -82830.000000 front 90.000000 (PN 1u))
       (place C67 84220.000000 -85230.000000 front 0.000000 (PN 1u))
       (place C68 81590.000000 -85030.000000 front 0.000000 (PN 100n))
@@ -1460,7 +1460,7 @@
       (pins U4-35 R29-1 U12-8 U13-14)
     )
     (net IMU_INT1
-      (pins U4-7 U13-4)
+      (pins U4-4 U13-4)
     )
     (net LED_D1
       (pins R24-2 D10-1)
@@ -1596,7 +1596,7 @@
       (pins U7-3 R60-1 U4-18)
     )
     (net ZED_PPS
-      (pins R55-2 U4-4)
+      (pins R55-2 U4-7)
     )
     (net ZED_PPS_C
       (pins U1-53 R55-1)
@@ -1834,7 +1834,7 @@
     (wire (path F.Cu 300  101530 -113230  101525 -113225)(net GND)(type route))
     (wire (path F.Cu 300  78630 -112240  78625 -112225)(net GND)(type route))
     (wire (path F.Cu 300  98140 -111020  98125 -111025)(net GND)(type route))
-    (wire (path F.Cu 300  87170 -86040  87175 -86025)(net GND)(type route))
+    (wire (path F.Cu 300  82110 -94970  82125 -94975)(net GND)(type route))
     (wire (path F.Cu 300  92862.5 -114500  92875 -114525)(net GND)(type route))
     (wire (path F.Cu 300  93120 -116830  93125 -116825)(net GND)(type route))
     (wire (path F.Cu 300  88960 -120170  88975 -120175)(net GND)(type route))
@@ -1973,7 +1973,7 @@
     (wire (path F.Cu 360  81150 -92440  81375 -92175  81375 -91575  81360 -91330)(net RF_ANT)(type route))
     (wire (path F.Cu 360  81150 -92440  80875 -92675  80025 -92675  79550 -92950)(net RF_ANT)(type route))
     (wire (path F.Cu 360  81360 -91330  81075 -91075  80425 -91075  79375 -90025  79270 -89760)(net RF_ANT)(type route))
-    (wire (path F.Cu 300  81220 -96675  81175 -96125  81175 -93725  81150 -93460)(net VCC_RF_F)(type route))
+    (wire (path F.Cu 300  81220 -96675  80525 -96125  80525 -94125  80925 -93725  81150 -93460)(net VCC_RF_F)(type route))
     (wire (path F.Cu 300  81220 -96675  80325 -97225  80325 -98525  79975 -98875  79975 -100375
             80675 -101075  80920 -101220)(net VCC_RF_F)(type route))
     (wire (path F.Cu 300  84000 -98450  83275 -98825  82325 -98825  82075 -99075  81220 -99625)(net VCC_RF)(type route))
@@ -2002,7 +2002,7 @@
     (via "Via[0-3]_500:300_um"  101525 -113225 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  78625 -112225 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  98125 -111025 (net GND)(type route))
-    (via "Via[0-3]_500:300_um"  87175 -86025 (net GND)(type route))
+    (via "Via[0-3]_500:300_um"  82125 -94975 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  92875 -114525 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  93125 -116825 (net GND)(type route))
     (via "Via[0-3]_500:300_um"  88975 -120175 (net GND)(type route))

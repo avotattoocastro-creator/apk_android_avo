@@ -1,30 +1,20 @@
 + timeout 2400 xvfb-run -a java -jar /tmp/freerouting.jar -de hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn -do hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses -mp 150
-2026-11-17 22:35:49.774 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
-2026-11-17 22:35:50.998 [main] INFO  Opening 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn'...
-java.util.concurrent.CompletionException: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonElement.getAsString()" because the return value of "com.google.gson.JsonObject.get(String)" is null
-	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
-	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:722)
-	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510)
-	at java.base/java.util.concurrent.CompletableFuture.postFire(CompletableFuture.java:614)
-	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:844)
-	at java.base/java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
-Caused by: java.lang.NullPointerException: Cannot invoke "com.google.gson.JsonElement.getAsString()" because the return value of "com.google.gson.JsonObject.get(String)" is null
-	at app.freerouting.management.VersionChecker.processResponse(VersionChecker.java:39)
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718)
-	... 9 more
+2026-11-17 23:26:55.360 [main] INFO  Freerouting v1.9.0 (build-date: 2023-10-30)
+2026-11-17 23:26:56.483 [main] INFO  Opening 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.dsn'...
+2026-11-17 23:26:56.956 [ForkJoinPool.commonPool-worker-1] INFO  New version available: v2.5.0
 
-(java:2388): dbind-WARNING **: 22:35:56.319: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
-2026-11-17 22:36:17.441 [Thread-28] INFO  Starting auto-routing...
-2026-11-17 22:36:17.905 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 22:36:17.913 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 22:36:17.920 [Thread-28] WARN  FloatLine: Parameter is null
-2026-11-17 22:44:19.863 [Thread-28] INFO  Auto-routing was completed in 8 minute(s) 2.42 seconds.
-2026-11-17 22:44:19.964 [Thread-28] INFO  Starting route optimization on 1 thread...
-2026-11-17 22:45:10.678 [Thread-28] INFO  Route optimization was completed in 50.71 seconds.
-2026-11-17 22:45:10.717 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses'...
+(java:2390): dbind-WARNING **: 23:27:01.589: AT-SPI: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+2026-11-17 23:27:22.644 [Thread-28] INFO  Starting auto-routing...
+2026-11-17 23:27:22.995 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 23:27:23.002 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 23:27:23.007 [Thread-28] WARN  FloatLine: Parameter is null
+2026-11-17 23:30:00.813 [Thread-28] WARN  There were only 17.80 changes in the last 20 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:31:56.471 [Thread-28] WARN  There were only 17.20 changes in the last 40 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:33:51.871 [Thread-28] WARN  There were only 17.00 changes in the last 60 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:35:45.063 [Thread-28] WARN  There were only 17.00 changes in the last 80 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:37:39.476 [Thread-28] WARN  There were only 17.00 changes in the last 100 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:39:31.726 [Thread-28] WARN  There were only 17.00 changes in the last 120 passes, so it's very likely that autorouter can't improve the result much further. It is recommended to stop it and finish the board manually.
+2026-11-17 23:41:07.676 [Thread-28] INFO  Auto-routing was completed in 13 minute(s) 45.03 seconds.
+2026-11-17 23:41:07.777 [Thread-28] INFO  Starting route optimization on 1 thread...
+2026-11-17 23:41:56.749 [Thread-28] INFO  Route optimization was completed in 48.97 seconds.
+2026-11-17 23:41:56.790 [Thread-28] INFO  Saving 'hardware/back/V5_CASCO/PCB/out/ruteado/placa.ses'...
