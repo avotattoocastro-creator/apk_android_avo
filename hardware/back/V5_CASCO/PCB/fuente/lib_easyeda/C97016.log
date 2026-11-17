@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C97016
+       Symbol name : WPN201610U1R0MT
+       Library path : lib_easyeda/C97016.kicad_sym
+[INFO] Created Kicad footprint for ID: C97016
+       Footprint name: IND-SMD_L2.0-W1.6_FNR2016XXS
+       Footprint path: lib_easyeda/C97016.pretty/IND-SMD_L2.0-W1.6_FNR2016XXS.kicad_mod
+[INFO] Created 3D model for ID: C97016
+       3D model name: IND-SMD_L2.0-W1.6-H1.0_FNR2016XXS
+       3D model path (wrl): lib_easyeda/C97016.3dshapes/IND-SMD_L2.0-W1.6-H1.0_FNR2016XXS.wrl
+       3D model path (step): lib_easyeda/C97016.3dshapes/IND-SMD_L2.0-W1.6-H1.0_FNR2016XXS.step
+-- easyeda2kicad.py v1.0.1 --

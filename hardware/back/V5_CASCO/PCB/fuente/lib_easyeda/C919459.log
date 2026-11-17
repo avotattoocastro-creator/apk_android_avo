@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C919459
+       Symbol name : TPS61023DRLR
+       Library path : lib_easyeda/C919459.kicad_sym
+[INFO] Created Kicad footprint for ID: C919459
+       Footprint name: SOT-563_L1.6-W1.2-P0.50-LS1.6-BR
+       Footprint path: lib_easyeda/C919459.pretty/SOT-563_L1.6-W1.2-P0.50-LS1.6-BR.kicad_mod
+[INFO] Created 3D model for ID: C919459
+       3D model name: SOT-563-6P_L1.6-W1.2-H0.6-LS1.6-P0.50
+       3D model path (wrl): lib_easyeda/C919459.3dshapes/SOT-563-6P_L1.6-W1.2-H0.6-LS1.6-P0.50.wrl
+       3D model path (step): lib_easyeda/C919459.3dshapes/SOT-563-6P_L1.6-W1.2-H0.6-LS1.6-P0.50.step
+-- easyeda2kicad.py v1.0.1 --

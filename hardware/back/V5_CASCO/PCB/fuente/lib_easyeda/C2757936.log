@@ -1,0 +1,11 @@
+[INFO] Created Kicad symbol for ID : C2757936
+       Symbol name : TTP223-BA6_C2757936
+       Library path : lib_easyeda/C2757936.kicad_sym
+[INFO] Created Kicad footprint for ID: C2757936
+       Footprint name: SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR
+       Footprint path: lib_easyeda/C2757936.pretty/SOT-23-6_L2.9-W1.6-P0.95-LS2.8-BR.kicad_mod
+[INFO] Created 3D model for ID: C2757936
+       3D model name: SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95
+       3D model path (wrl): lib_easyeda/C2757936.3dshapes/SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95.wrl
+       3D model path (step): lib_easyeda/C2757936.3dshapes/SOT-23-6_L2.9-W1.6-H1.5-LS2.8-P0.95.step
+-- easyeda2kicad.py v1.0.1 --
