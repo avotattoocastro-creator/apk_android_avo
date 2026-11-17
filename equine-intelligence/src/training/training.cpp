@@ -297,6 +297,14 @@ bool training_summary_from_analysis(const json::Value& a, const TrainingConfig& 
         if (!std::isnan(d) && (std::isnan(R.best_pass_s) || d < R.best_pass_s)) { R.best_pass_s = d; R.best_pass_speed = nnum(p["v_media"]); R.best_pass_fatigue_pct = nnum(p["indice_caida_pct"]); }
       }
     }
+    const json::Value& kb = rc["base_cientifica"];
+    if (kb.type == json::Value::OBJ) {
+      R.kb_race_pace = nnum(kb["v_carrera_m_s"]);
+      for (int k = 0; k < KB_BANDS; k++) R.kb_band_m[k] = nnum(kb["bandas"][k]["distancia_m"]);
+      R.kb_canter_m = nnum(kb["verheyen"]["canter_m"]); R.kb_gallop_m = nnum(kb["verheyen"]["galope_rapido_m"]);
+      R.kb_bone_pct = nnum(kb["fatiga_osea"]["pct"]); R.kb_bone_low_pct = nnum(kb["fatiga_osea"]["pct_extrapolado_lento"]);
+      R.kb_strides = nnum(kb["fatiga_osea"]["zancadas_estimadas"]);
+    }
     for (const auto& e : rc["eventos"].a) {
       std::string t = e["tipo"].str();
       if (t == "IMPACTO_ATIPICO") R.impacts++; else if (t == "MOVIMIENTO_LATERAL_BRUSCO") R.lateral_jolts++; else if (t == "SATURACION") R.saturations++;
@@ -341,7 +349,12 @@ std::string training_summary_to_json(const SessionSummary& s) {
       << ",\"rapidas\":" << R.fast_reps << ",\"caida_v_max_pct\":" << num(R.vmax_drop_pct) << ",\"caida_zancada_pct\":" << num(R.stride_drop_pct)
       << ",\"recuperacion_media_s\":" << num(R.recovery_mean_s) << ",\"calentamiento_corto\":" << (R.warmup_short ? "true" : "false") << "}"
       << ",\"recorrido\":{\"nombre\":" << q(R.course_name) << ",\"pasadas\":" << R.passes << ",\"mejor_pasada_s\":" << num(R.best_pass_s)
-      << ",\"v_media_mejor\":" << num(R.best_pass_speed) << ",\"indice_caida_mejor_pct\":" << num(R.best_pass_fatigue_pct) << "}}";
+      << ",\"v_media_mejor\":" << num(R.best_pass_speed) << ",\"indice_caida_mejor_pct\":" << num(R.best_pass_fatigue_pct) << "}";
+    if (!std::isnan(R.kb_bone_pct))
+      o << ",\"base_cientifica\":{\"v_carrera_m_s\":" << num(R.kb_race_pace) << ",\"bandas_m\":[" << num(R.kb_band_m[0]) << "," << num(R.kb_band_m[1]) << ","
+        << num(R.kb_band_m[2]) << "],\"canter_m\":" << num(R.kb_canter_m) << ",\"galope_rapido_m\":" << num(R.kb_gallop_m)
+        << ",\"fatiga_osea_pct\":" << num(R.kb_bone_pct) << ",\"fatiga_osea_lenta_pct\":" << num(R.kb_bone_low_pct) << ",\"zancadas_estimadas\":" << num(R.kb_strides) << "}";
+    o << "}";
   }
   o << ",\"avisos\":[";
   for (size_t i = 0; i < s.warnings.size(); i++) o << (i ? "," : "") << q(s.warnings[i]);
@@ -392,6 +405,13 @@ bool training_summary_from_json(const json::Value& v, SessionSummary* out, std::
     const json::Value& co = rc["recorrido"];
     R.course_name = co["nombre"].str(); R.passes = (int)co["pasadas"].num(0); R.best_pass_s = nnum(co["mejor_pasada_s"]);
     R.best_pass_speed = nnum(co["v_media_mejor"]); R.best_pass_fatigue_pct = nnum(co["indice_caida_mejor_pct"]);
+    const json::Value& kb = rc["base_cientifica"];
+    if (kb.type == json::Value::OBJ) {
+      R.kb_race_pace = nnum(kb["v_carrera_m_s"]);
+      for (int k = 0; k < KB_BANDS; k++) R.kb_band_m[k] = nnum(kb["bandas_m"][k]);
+      R.kb_canter_m = nnum(kb["canter_m"]); R.kb_gallop_m = nnum(kb["galope_rapido_m"]);
+      R.kb_bone_pct = nnum(kb["fatiga_osea_pct"]); R.kb_bone_low_pct = nnum(kb["fatiga_osea_lenta_pct"]); R.kb_strides = nnum(kb["zancadas_estimadas"]);
+    }
   }
   for (const auto& w : v["avisos"].a) s.warnings.push_back(w.str());
   *out = s;
@@ -422,6 +442,33 @@ bool training_config_from_json(const json::Value& v, TrainingConfig* c, std::str
     const json::Value& x = v[d.k];
     if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: ") + d.k; return false; }
     *d.p = (int)x.n;
+  }
+  // Base científica KB-1
+  if (v.has("base_cientifica")) {
+    const json::Value& k = v["base_cientifica"];
+    if (k.type == json::Value::BOOL) c->kb.enabled = k.b;
+    else if (k.type == json::Value::OBJ) {
+      c->kb.enabled = k["activa"].boolean(true);
+      const D kd[] = {{"canter_30d_aviso_km", &c->kb.canter_30d_watch_km, 1, 500}, {"canter_30d_limite_km", &c->kb.canter_30d_limit_km, 1, 500},
+                      {"galope_30d_limite_km", &c->kb.gallop_30d_limit_km, 0.1, 100}, {"rampa_ratio", &c->kb.ramp_ratio, 1, 10},
+                      {"rampa_min_m", &c->kb.ramp_min_m, 0, 100000}, {"galope_sesion_min_m", &c->kb.gallop_session_min_m, 0, 10000},
+                      {"fatiga_osea_ratio", &c->kb.bone_week_ratio, 1, 10}};
+      for (const auto& d : kd) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || !(x.n >= d.lo && x.n <= d.hi)) { if (err) *err = std::string("opción fuera de rango: base_cientifica.") + d.k; return false; }
+        *d.p = x.n;
+      }
+      const I ki[] = {{"dias_descanso_vuelta", &c->kb.return_rest_days, 7, 365}, {"dias_ventana_vuelta", &c->kb.return_window_days, 1, 90},
+                      {"dias_descanso_tendon", &c->kb.tendon_rest_days, 7, 730}, {"semanas_min_fatiga_osea", &c->kb.bone_min_weeks, 1, 8}};
+      for (const auto& d : ki) {
+        if (!k.has(d.k)) continue;
+        const json::Value& x = k[d.k];
+        if (x.type != json::Value::NUM || x.n != std::floor(x.n) || x.n < d.lo || x.n > d.hi) { if (err) *err = std::string("opción fuera de rango: base_cientifica.") + d.k; return false; }
+        *d.p = (int)x.n;
+      }
+      if (c->kb.canter_30d_watch_km > c->kb.canter_30d_limit_km) { if (err) *err = "base_cientifica: el aviso de canter debe ser ≤ el límite"; return false; }
+    } else { if (err) *err = "«base_cientifica» debe ser true/false o un objeto"; return false; }
   }
   if (c->acute_days >= c->chronic_days) { if (err) *err = "dias_aguda debe ser menor que dias_cronica"; return false; }
   if (c->z_watch >= c->z_review) { if (err) *err = "z_vigilar debe ser menor que z_revisar"; return false; }
@@ -557,6 +604,21 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   }
   const std::vector<MetricSpec> specs = metric_specs();
   long first_day = ok.front().day;
+  std::vector<KbDay> kbdays;   // base científica KB-1: una entrada por sesión (NaN si no trae el bloque)
+  for (const auto& s : ok) {
+    KbDay d; d.day = s.day;
+    if (s.race.present && !std::isnan(s.race.kb_bone_pct)) {
+      for (int k = 0; k < KB_BANDS; k++) d.band_m[k] = s.race.kb_band_m[k];
+      d.canter_m = s.race.kb_canter_m; d.gallop_m = s.race.kb_gallop_m; d.bone_pct = s.race.kb_bone_pct;
+    }
+    kbdays.push_back(d);
+  }
+  auto kb_apply = [&](const KbStatus& st, std::string* level, std::vector<std::string>* reasons) {
+    for (const auto& f : st.flags) {
+      if (f.level == "VIGILAR") raise(level, "VIGILAR");
+      reasons->push_back("base científica (" + f.rule + ", " + f.action + "): " + f.text);
+    }
+  };
 
   for (size_t i = 0; i < ok.size(); i++) {
     SessionResult R; R.s = ok[i];
@@ -608,6 +670,8 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
     if (st == "COJERA" || st == "COJO" || st == "DOLOR") { raise(&R.level, "REVISAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
     else if (st == "CANSADO" || st == "RARO" || st == "MAL") { raise(&R.level, "VIGILAR"); R.reasons.push_back("el entrenador anotó: " + s.state); }
     if (!std::isnan(s.rpe) && s.rpe >= 9) R.reasons.push_back("esfuerzo percibido muy alto (RPE " + num(s.rpe) + ")");
+    R.kb = kb_evaluate(kbdays, s.day, first_day, c.kb);
+    kb_apply(R.kb, &R.level, &R.reasons);
     r.sessions.push_back(R);
   }
 
@@ -625,9 +689,13 @@ TrainingResult analyse_training(std::vector<SessionSummary> sessions, const std:
   load_flags(r.current, c, &r.level, &r.reasons);
   const SessionResult& last = r.sessions.back();
   if (r.days_since_last <= c.acute_days) {
-    for (const auto& reason : last.reasons) r.reasons.push_back("última sesión (" + training_day_text(last.s.day) + "): " + reason);
+    for (const auto& reason : last.reasons)
+      if (reason.compare(0, 18, "base científica (") != 0) r.reasons.push_back("última sesión (" + training_day_text(last.s.day) + "): " + reason);
     raise(&r.level, last.level);
   }
+  // base científica a la fecha de referencia (las ventanas avanzan aunque no haya sesión ese día)
+  r.kb = kb_evaluate(kbdays, r.reference_day, first_day, c.kb);
+  kb_apply(r.kb, &r.level, &r.reasons);
   if (!std::isnan(r.current.acwr) && r.current.acwr < c.acwr_low)
     r.reasons.push_back("carga reciente baja respecto a la habitual (ACWR " + num(r.current.acwr) + "): descarga o parada");
   if (r.days_since_last > c.rest_watch_days)
@@ -709,6 +777,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     << ",\"min_sesiones_tendencia\":" << c.trend_min_sessions << ",\"dias_descanso_aviso\":" << c.rest_watch_days << "}";
   o << ",\"estado\":{\"nivel\":" << q(r.level) << ",\"motivos\":"; strs(o, r.reasons);
   o << ",\"dias_desde_ultima\":" << (r.days_since_last < 0 ? std::string("null") : std::to_string(r.days_since_last)) << ",\"carga\":"; load_json(o, r.current);
+  o << ",\"base_cientifica\":" << kb_status_json(r.kb);
   o << ",\"nota\":\"orientativo; no es un diagnóstico veterinario\"}";
   o << ",\"carga_diaria\":[";
   for (size_t i = 0; i < r.daily_load.size(); i++) o << (i ? "," : "") << "{\"fecha\":" << q(training_day_text(r.daily_load[i].first)) << ",\"carga\":" << num(r.daily_load[i].second) << "}";
@@ -724,6 +793,7 @@ std::string training_to_json(const TrainingResult& r, const TrainingConfig& c) {
     const SessionResult& R = r.sessions[i];
     o << (i ? "," : "") << "{\"id\":" << q(R.s.id) << ",\"fecha\":" << q(training_day_text(R.s.day)) << ",\"nivel\":" << q(R.level) << ",\"motivos\":"; strs(o, R.reasons);
     o << ",\"carga\":"; load_json(o, R.load);
+    o << ",\"base_cientifica\":" << kb_status_json(R.kb);
     o << ",\"desvios\":["; for (size_t k = 0; k < R.deviations.size(); k++) { if (k) o << ","; dev_json(o, R.deviations[k]); } o << "]";
     o << ",\"resumen\":" << training_summary_to_json(R.s) << "}";
   }

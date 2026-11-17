@@ -480,3 +480,41 @@ EQ_TEST(pista, manual_corrections) {
   json::Value v; std::string err;
   CHECK(json::parse(js, &v, &err) && v["trabajo_pista"]["correcciones_manuales"].boolean() && v["trabajo_pista"]["trabajos"]["lista"][0]["manual"].boolean());
 }
+
+EQ_TEST(pista, base_cientifica_kb1) {
+  Session s = race_session(140, 1);
+  EngineConfig c = psi();
+  Analysis a = analyse(s, c);
+  const RacingResult& r = a.racing;
+  // verdad analítica del perfil de velocidad: bandas y fatiga ósea integradas a 1 ms
+  SpeedBandConfig b; b.work_speed = c.racing.breed.work_speed; b.race_pace = 16.7;
+  KbSessionLoad ref;
+  for (double t = 0; t < 140; t += 0.001) { double v = race_v(t); ref.add(0.001, v * 0.001, v, b, c.racing.bone); }
+  REPORT("B3 %.0f m (verdad %.0f), galope > 14 %.0f m (verdad %.0f), fatiga ósea %.3f %% (verdad %.3f %%)\n", r.kb.band_m[2], ref.band_m[2],
+         r.kb.gallop_m, ref.gallop_m, 100 * r.kb.bone_fl, 100 * ref.bone_fl);
+  CHECK_NEAR(r.race_pace_used, 16.7, 1e-9);
+  CHECK_NEAR(r.kb.band_m[2], ref.band_m[2], 0.05 * ref.band_m[2]);
+  CHECK_NEAR(r.kb.gallop_m, ref.gallop_m, 0.05 * ref.gallop_m);
+  CHECK_NEAR(r.kb.bone_fl, ref.bone_fl, 0.08 * ref.bone_fl);
+  // la cadena llega al resumen de entrenamiento
+  std::string js = to_json(a, s, c, true);
+  json::Value v; std::string err;
+  CHECK(json::parse(js, &v, &err));
+  const json::Value& kb = v["trabajo_pista"]["base_cientifica"];
+  CHECK(kb["base"].str() == "AVO_KB_1");
+  CHECK(kb["fatiga_osea"]["calibrado"].boolean(false));
+  CHECK(kb["bandas"].a.size() == 3);
+  char* out = nullptr;
+  CHECK(avo_eq_training_summary(js.c_str(), "{\"fecha_utc\":\"2026-11-17\"}", &out) == 0);
+  json::Value sv; CHECK(out && json::parse(out, &sv, &err));
+  CHECK_NEAR(sv["trabajo_pista"]["base_cientifica"]["fatiga_osea_pct"].num(), 100 * r.kb.bone_fl, 1e-4);
+  avo_eq_free(out);
+  // ritmo de carrera propio del caballo por opciones
+  EngineConfig ca; breed_profile("ARABE", &ca.racing.breed); ca.racing.race_pace_override = 15.0;
+  Analysis aa = analyse(s, ca);
+  CHECK_NEAR(aa.racing.race_pace_used, 15.0, 1e-9);
+  json::Value va; CHECK(json::parse(to_json(aa, s, ca, true), &va, &err));
+  CHECK(va["trabajo_pista"]["base_cientifica"]["v_carrera_origen"].str() == "CABALLO");
+  CHECK(!va["trabajo_pista"]["base_cientifica"]["fatiga_osea"]["calibrado"].boolean(true));
+  CHECK_NEAR(va["trabajo_pista"]["perfil"]["v_referencia"][1].num(), 14.0, 1e-9);
+}

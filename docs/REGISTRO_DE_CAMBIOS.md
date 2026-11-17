@@ -24,6 +24,34 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 
 ---
 
+## 2026-11-18 — Motor 2.0.0-dev2 — Base científica de la cuadra KB-1 1.0.0 (PSI y árabe de carreras)
+**Autor:** Claude · **Rama:** `claude/base-cientifica-cuadra` · **CI:** pendiente del push a `develop`
+**Qué cambia:**
+- **Módulo nuevo** `equine-intelligence/src/knowledge` (`knowledge.h`, ficha `docs/algoritmos/14_BASE_CIENTIFICA.md`):
+  - fatiga del hueso subcondral por zancada (Morrice-West 2022), con σ_max y σ0 configurables, rango validado
+    12,57–21 m/s y el trabajo lento aparte como «extrapolado»;
+  - distancias por banda relativas al ritmo de carrera (PSI 16,7 m/s, árabe 14,5 m/s, o el del caballo con
+    `v_carrera_m_s`) y contadores de Verheyen (canter ≤ 14 m/s y galope > 14 m/s en PSI);
+  - reglas sobre la historia con su evidencia: A1 canter en 30 d, A2 galope rápido en 30 d, A3 rampa, A5 vuelta tras
+    ≥ 60 d sin trabajo rápido, A6 vuelta tras ≥ 90 d (tendón) y fatiga ósea de 7 d frente a la semana habitual.
+- **Track Work:** bloque `trabajo_pista.base_cientifica`; `perfil.v_carrera`; la zancada del árabe se compara a
+  **13 y 14 m/s** (antes 13 y 15).
+- **Training Analytics:** el resumen guarda el bloque; la historia añade `estado.base_cientifica` y
+  `sesiones[].base_cientifica`, y las reglas VIGILAR suben el estado. Opción `base_cientifica` (`true`/`false` u objeto).
+- **Base de conocimiento versionada:** `equine-intelligence/knowledge/base_cientifica.json` (fuentes, parámetros,
+  reglas, pendientes y cola de investigación) y los dos estudios en `equine-intelligence/knowledge/estudios/`.
+- `ENGINE_VERSION` 2.0.0-dev2; `algorithm_versions` incluye `base_cientifica`.
+**Por qué:** el usuario pide integrar el análisis de la literatura como base del modelo de la cuadra y ampliarlo cada
+semana durante las pruebas de campo del PROTOTIPO, hasta la primera versión oficial.
+**No se ha tocado:** contratos binarios (`BackStatus`, ESP-NOW, `TELEMETRY`, `AVO1`, `.avr`), firmware, workflows,
+firmas ni `Info.plist`. La API C no cambia: los campos nuevos van dentro del JSON.
+**Validación:** IMPLEMENTADO · pruebas locales con ASan/UBSan: 94 casos y 1607 comprobaciones sin fallos (incluye los
+valores de referencia del modelo óseo: 1.200 m a 16,7 m/s = 8,64 %). CI: pendiente. **NO VERIFICADO** con caballos
+reales.
+**Pendiente:** pantallas en Android, Windows e iPad; frecuencia de zancada medida por la cincha; modelo óseo con
+reparación (Pan/Anwar); V200 y ECG; CUSUM y shrinkage; últimos 600 m; IDF de carreras; planificador semanal
+(lista completa en `base_cientifica.json`).
+
 ## 2026-11-14 — Espalda V5 CASCO: anillo de luz (8 LED laterales) y caja sin juntas
 **Autor:** Claude · Rama `feature/back-v5-casco`
 **Qué cambia:**

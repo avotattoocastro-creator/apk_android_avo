@@ -1,0 +1,190 @@
+// AVO Base científica de la cuadra (KB-1). Ver include/avo_eq/knowledge.h y docs/algoritmos/14_BASE_CIENTIFICA.md.
+#include "avo_eq/knowledge.h"
+#include <algorithm>
+#include <cstdio>
+#include <sstream>
+#include "avo_eq/json.h"
+
+namespace avoeq {
+
+namespace {
+const double kNaN = std::nan("");
+std::string num(double v) {
+  if (std::isnan(v) || std::isinf(v)) return "null";
+  char b[40]; snprintf(b, sizeof(b), "%.6g", v); return b;
+}
+std::string q(const std::string& s) { return "\"" + json::escape(s) + "\""; }
+double median_of(std::vector<double> v) {
+  if (v.empty()) return kNaN;
+  std::sort(v.begin(), v.end());
+  size_t n = v.size();
+  return n % 2 ? v[n / 2] : 0.5 * (v[n / 2 - 1] + v[n / 2]);
+}
+bool has_kb(const KbDay& s) { return !std::isnan(s.bone_pct) && !std::isnan(s.band_m[0]); }
+}  // namespace
+
+double bone_vertical_force_n_kg(double v) {
+  const double v_peak = 2.1376 / (2 * 0.0535);   // 19,98 m/s
+  if (v > v_peak) v = v_peak;
+  return 2.778 + 2.1376 * v - 0.0535 * v * v;
+}
+
+double bone_stride_damage(double v, const BoneModelConfig& c) {
+  if (std::isnan(v) || v <= 0 || v > c.max_speed || c.f_max_n_kg <= 0 || c.sn_b_mpa <= 0) return 0;
+  double sigma = c.sigma_max_mpa * std::min(bone_vertical_force_n_kg(v), c.f_max_n_kg) / c.f_max_n_kg;
+  return std::pow(10.0, (sigma - c.sn_a_mpa) / c.sn_b_mpa);   // 1 / Nf
+}
+
+double model_stride_frequency_hz(double v) { return 1.7052 + 0.0305 * v + 0.0004 * v * v; }
+
+const char* kb_band_name(int b) {
+  static const char* n[] = {"B1_TRABAJO", "B2_INTERMEDIA", "B3_ALTA"};
+  return b >= 0 && b < KB_BANDS ? n[b] : "BAJO_TRABAJO";
+}
+
+int kb_speed_band(double v, const SpeedBandConfig& c) {
+  if (std::isnan(v) || v < c.work_speed) return -1;
+  if (std::isnan(c.race_pace)) return 0;
+  if (v >= c.b3_lo()) return 2;
+  if (v >= c.b2_lo()) return 1;
+  return 0;
+}
+
+void KbSessionLoad::add(double dt_s, double dd_m, double v, const SpeedBandConfig& b, const BoneModelConfig& m) {
+  if (std::isnan(v) || std::isnan(dt_s) || !(dt_s > 0)) return;
+  double dd = std::isnan(dd_m) ? 0 : std::max(0.0, dd_m);
+  int k = kb_speed_band(v, b);
+  if (k >= 0) { band_m[k] += dd; band_s[k] += dt_s; }
+  if (!std::isnan(b.race_pace)) {
+    if (v > b.gallop_lo()) gallop_m += dd;
+    else if (v >= b.canter_lo()) canter_m += dd;
+  }
+  if (v < m.low_min_speed || v > m.max_speed) return;
+  double n = model_stride_frequency_hz(v) * dt_s, dmg = n * bone_stride_damage(v, m);
+  if (v >= m.valid_min_speed) { strides += n; bone_fl += dmg; }
+  else { strides_low += n; bone_fl_low += dmg; }
+}
+
+// ------------------------------------------------------------------ historia
+KbStatus kb_evaluate(const std::vector<KbDay>& sessions, long at_day, long first_day, const KbRuleConfig& c) {
+  KbStatus st;
+  auto in = [](long d, long from, long to) { return d >= from && d <= to; };
+  auto add = [](KbWindow* w, const KbDay& s) {
+    if (!has_kb(s)) { w->missing++; return; }
+    w->sessions++;
+    for (int k = 0; k < KB_BANDS; k++) if (!std::isnan(s.band_m[k])) w->band_m[k] += s.band_m[k];
+    if (!std::isnan(s.canter_m)) w->canter_m += s.canter_m;
+    if (!std::isnan(s.gallop_m)) w->gallop_m += s.gallop_m;
+    w->bone_pct += s.bone_pct;
+  };
+  long last_gallop = -1, first_kb = -1, return_start = -1;
+  bool verheyen = false;   // alguna sesión trae contadores de Verheyen (raza con v_carrera)
+  for (const auto& s : sessions) {
+    if (s.day > at_day) break;
+    bool has = has_kb(s);
+    if (has) { st.available = true; if (first_kb < 0) first_kb = s.day; if (!std::isnan(s.gallop_m)) verheyen = true; }
+    if (in(s.day, at_day - 6, at_day)) add(&st.w7, s);
+    if (in(s.day, at_day - 29, at_day)) add(&st.w30, s);
+    if (in(s.day, at_day - 59, at_day - 30)) add(&st.prev30, s);
+    if (in(s.day, at_day - 59, at_day)) add(&st.w60, s);
+    if (has && !std::isnan(s.gallop_m) && s.gallop_m >= c.gallop_session_min_m && s.day != last_gallop) {
+      long ref = last_gallop >= 0 ? last_gallop : first_kb;
+      long gap = s.day - ref;
+      if (gap >= c.return_rest_days) { return_start = s.day; st.return_rest = (int)gap; }
+      last_gallop = s.day;
+    }
+  }
+  if (!st.available || !c.enabled) return st;
+  st.days_since_gallop = last_gallop < 0 ? -1 : (int)(at_day - last_gallop);
+  char b[300];
+
+  if (verheyen) {
+    // A1 canter acumulado en 30 días
+    double canter_km = st.w30.canter_m / 1000.0;
+    if (canter_km > c.canter_30d_watch_km) {
+      bool lim = canter_km > c.canter_30d_limit_km;
+      snprintf(b, sizeof(b), "%.1f km de canter en 30 días (umbral de aviso %.0f km, de límite %.0f km)", canter_km, c.canter_30d_watch_km, c.canter_30d_limit_km);
+      st.flags.push_back({"A1_CANTER_30D", "VIGILAR", lim ? "LIMITAR" : "AVISO", b,
+                          "Verheyen 2006 (Bone, 1178 caballos): > 44 km de canter (≤ 14 m/s) en 30 días, más fracturas [E]; aviso al 90 % [I]"});
+    }
+    // A2 galope rápido acumulado en 30 días
+    double gallop_km = st.w30.gallop_m / 1000.0;
+    if (gallop_km > c.gallop_30d_limit_km) {
+      snprintf(b, sizeof(b), "%.1f km de galope rápido en 30 días (más de %.0f km)", gallop_km, c.gallop_30d_limit_km);
+      st.flags.push_back({"A2_GALOPE_30D", "VIGILAR", "LIMITAR", b, "Verheyen 2006: > 6 km de galope (> 14 m/s) en 30 días, más fracturas [E]"});
+    }
+    // A3 aumento brusco: 30 días frente a los 30 anteriores (solo con 60 días de historia)
+    if (first_day <= at_day - 59 && st.w30.gallop_m >= c.ramp_min_m && st.prev30.gallop_m > 0) {
+      double ratio = st.w30.gallop_m / st.prev30.gallop_m;
+      if (ratio > c.ramp_ratio) {
+        snprintf(b, sizeof(b), "galope rápido de los últimos 30 días %.2f veces el de los 30 anteriores (%.0f m frente a %.0f m)",
+                 ratio, st.w30.gallop_m, st.prev30.gallop_m);
+        st.flags.push_back({"A3_RAMPA", "VIGILAR", "LIMITAR", b,
+                            "Estberg 1996 (California): +40 % de trabajo rápido en 2 meses, OR 3,9 de fractura catastrófica [E]; ventanas de 30 días [I]"});
+      }
+    }
+    // A5/A6 vuelta tras un descanso largo sin trabajo rápido
+    if (return_start >= 0 && at_day - return_start < c.return_window_days) {
+      st.return_day = (int)(at_day - return_start);
+      bool tendon = st.return_rest >= c.tendon_rest_days;
+      snprintf(b, sizeof(b), "día %d de la vuelta al trabajo rápido tras %d días sin él: subir la distancia rápida poco a poco%s",
+               st.return_day, st.return_rest, tendon ? "; considerar ecografía de los tendones flexores (TFDS)" : "");
+      st.flags.push_back({tendon ? "A6_VUELTA_TENDON" : "A5_VUELTA_DESCANSO", "VIGILAR", "LIMITAR", b,
+                          tendon ? "Choi & Parkin 2025: ≥ 90 días sin trabajo rápido, OR 3,10 de lesión del TFDS [E]; Carrier 1998 [E]"
+                                 : "Carrier 1998: tras ≥ 60 días sin trabajo rápido, RR 71 de fractura de húmero en 10 días y 45 en 21 [E]"});
+    }
+    // Informativo: ningún trabajo rápido en 30 días con canter
+    if (first_day <= at_day - 29 && st.w30.gallop_m < c.gallop_session_min_m && st.w30.canter_m > 0)
+      st.flags.push_back({"KB_SIN_RAPIDO_30D", "INFO", "AVISO", "sin trabajo rápido en 30 días: el hueso pierde estímulo; al volver, subirlo poco a poco",
+                          "Morrice-West 2025: carga muy baja antes de correr, OR 2,89 frente a carga media [E]; aplicación al entrenamiento [I]"});
+  }
+  // KB-B fatiga ósea de 7 días frente a la mediana semanal propia
+  std::vector<double> weeks;
+  for (int w = 1; w <= 8; w++) {
+    long to = at_day - 7 * w, from = to - 6;
+    if (from < first_day) break;
+    double sum = 0;
+    for (const auto& s : sessions) if (in(s.day, from, to) && !std::isnan(s.bone_pct)) sum += s.bone_pct;
+    weeks.push_back(sum);
+  }
+  if ((int)weeks.size() >= c.bone_min_weeks) {
+    st.bone_weekly_median = median_of(weeks);
+    if (st.bone_weekly_median > 0) {
+      st.bone_ratio = st.w7.bone_pct / st.bone_weekly_median;
+      if (st.bone_ratio > c.bone_week_ratio) {
+        snprintf(b, sizeof(b), "fatiga ósea de los últimos 7 días %.2f veces la semana habitual del caballo (%.2f %% frente a %.2f %%)",
+                 st.bone_ratio, st.w7.bone_pct, st.bone_weekly_median);
+        st.flags.push_back({"KB_FATIGA_OSEA_7D", "VIGILAR", "AVISO", b,
+                            "Morrice-West 2025 e ICRAV 2026: el riesgo sube con la acumulación rápida de fatiga ósea [E]; umbral 1,5 [I]"});
+      }
+    }
+  }
+  return st;
+}
+
+std::string kb_status_json(const KbStatus& s) {
+  std::ostringstream o;
+  auto win = [&](const KbWindow& w) {
+    o << "{\"bandas_m\":[" << num(w.band_m[0]) << "," << num(w.band_m[1]) << "," << num(w.band_m[2]) << "],\"canter_m\":" << num(w.canter_m)
+      << ",\"galope_rapido_m\":" << num(w.gallop_m) << ",\"fatiga_osea_pct\":" << num(w.bone_pct)
+      << ",\"sesiones\":" << w.sessions << ",\"sesiones_sin_datos\":" << w.missing << "}";
+  };
+  o << "{\"base\":\"" << KNOWLEDGE_ID << "\",\"version\":\"" << KNOWLEDGE_VERSION << "\",\"disponible\":" << (s.available ? "true" : "false");
+  if (s.available) {
+    o << ",\"d7\":"; win(s.w7); o << ",\"d30\":"; win(s.w30); o << ",\"d30_anteriores\":"; win(s.prev30); o << ",\"d60\":"; win(s.w60);
+    o << ",\"fatiga_osea_mediana_semanal_pct\":" << num(s.bone_weekly_median) << ",\"fatiga_osea_ratio_7d\":" << num(s.bone_ratio)
+      << ",\"dias_sin_trabajo_rapido\":" << (s.days_since_gallop < 0 ? std::string("null") : std::to_string(s.days_since_gallop))
+      << ",\"vuelta_descanso\":";
+    if (s.return_day < 0) o << "null";
+    else o << "{\"dia\":" << s.return_day << ",\"dias_sin_rapido_antes\":" << s.return_rest << "}";
+    o << ",\"reglas\":[";
+    for (size_t i = 0; i < s.flags.size(); i++)
+      o << (i ? "," : "") << "{\"regla\":" << q(s.flags[i].rule) << ",\"nivel\":" << q(s.flags[i].level) << ",\"accion\":" << q(s.flags[i].action)
+        << ",\"texto\":" << q(s.flags[i].text) << ",\"evidencia\":" << q(s.flags[i].evidence) << "}";
+    o << "]";
+  }
+  o << ",\"nota\":\"orientativo: reglas de la literatura con umbrales de partida, sin validar con la cuadra; la fatiga ósea es un índice relativo, no una probabilidad de lesión\"}";
+  return o.str();
+}
+
+}  // namespace avoeq

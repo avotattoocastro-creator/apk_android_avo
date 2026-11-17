@@ -157,6 +157,22 @@ bool parse_opts(const char* text, Opts* o, std::string* err) {
     if (!(d >= 50 && d <= 1000)) { *err = "parcial_m fuera de rango (50–1000)"; return false; }
     o->cfg.racing.split_m = d;
   }
+  // Base científica KB-1: ritmo de carrera propio del caballo y parámetros del modelo óseo
+  if (v.has("v_carrera_m_s")) {
+    double vc = v["v_carrera_m_s"].num(-1);
+    if (!(vc >= 8 && vc <= 20)) { *err = "v_carrera_m_s fuera de rango (8–20)"; return false; }
+    o->cfg.racing.race_pace_override = vc;
+  }
+  if (v.has("sigma_max_mpa")) {
+    double sm = v["sigma_max_mpa"].num(-1);
+    if (!(sm >= 30 && sm <= 120)) { *err = "sigma_max_mpa fuera de rango (30–120)"; return false; }
+    o->cfg.racing.bone.sigma_max_mpa = sm;
+  }
+  if (v.has("sigma0_mpa")) {
+    double s0 = v["sigma0_mpa"].num(-1);
+    if (!(s0 >= 100 && s0 <= 180)) { *err = "sigma0_mpa fuera de rango (100–180)"; return false; }
+    o->cfg.racing.bone.sn_a_mpa = s0;
+  }
   if (v.has("signo_mano")) {
     double sm = v["signo_mano"].num(0);
     if (sm != 1 && sm != -1 && sm != 0) { *err = "signo_mano debe ser 1, -1 o 0"; return false; }

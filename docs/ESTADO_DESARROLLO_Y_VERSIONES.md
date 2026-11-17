@@ -1,6 +1,6 @@
 # Estado del desarrollo — tabla vigente
 
-**Actualizado:** 17/11/2026 · **Rama:** `develop/avo-performance-horse` (`daeb489`) · Repositorio
+**Actualizado:** 18/11/2026 · **Rama:** `develop/avo-performance-horse` (`daeb489`) · Repositorio
 `avotattoocastro-creator/apk_android_avo`.
 
 **Regla:** quien cambie una versión actualiza su fila en el mismo PR. **PROTOTIPO** = placas de desarrollo, sin PCB
@@ -34,7 +34,7 @@ registrada: **NO VERIFICADO**.
 | AVO Update | **2.3.1 (vc 28)** | `usb-updater/` | `build-usb-updater.yml` | [`AVO_UPDATE.apk`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_UPDATE.apk) | CI ✅ |
 | Windows | **V2 PRO 2.0.0** | `windows/` | `build-avo-windows.yml` | [`AVO_WINDOWS.zip`](https://github.com/avotattoocastro-creator/apk_android_avo/releases/download/descargas/AVO_WINDOWS.zip) | CI ✅ |
 | iPad | **1.0.0** (build automático) | `ipad/` | `build-avo-ipad.yml` | solo TestFlight | CI ✅ |
-| Motor C++17 Equine | **2.0.0-dev1** | `equine-intelligence/` | `build-equine-engine.yml` | — | CI ✅ |
+| Motor C++17 Equine | **2.0.0-dev2** (base científica KB-1 1.0.0) | `equine-intelligence/` | `build-equine-engine.yml` | — | pruebas locales ✅ · CI pendiente · NO VERIFICADO |
 
 **Plan de pruebas (decisión del usuario, 17/11/2026):** hasta construir todas las PCB, las pruebas de campo se hacen
 solo con PROTOTIPOS; lo validado se porta a las BETA, y las pruebas de campo BETA empiezan con todas las PCB

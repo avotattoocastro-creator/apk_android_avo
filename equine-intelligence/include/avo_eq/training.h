@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "avo_eq/json.h"
+#include "avo_eq/knowledge.h"
 
 namespace avoeq {
 
@@ -37,6 +38,7 @@ struct TrainingConfig {
   int trend_days = 56;                 // 8 semanas
   int trend_min_sessions = 5;
   int rest_watch_days = 10;            // más días sin entrenar: aviso de vuelta al trabajo
+  KbRuleConfig kb;                     // base científica KB-1 (knowledge.h)
 };
 
 // Métricas de un aire dentro de una sesión. NaN = no disponible.
@@ -70,6 +72,9 @@ struct RaceSummary {
   std::string course_name;
   int passes = 0;
   double best_pass_s = NAN, best_pass_speed = NAN, best_pass_fatigue_pct = NAN;
+  // base científica KB-1 (bloque "base_cientifica" de trabajo_pista; NaN en análisis anteriores)
+  double kb_race_pace = NAN, kb_band_m[KB_BANDS] = {NAN, NAN, NAN}, kb_canter_m = NAN, kb_gallop_m = NAN;
+  double kb_bone_pct = NAN, kb_bone_low_pct = NAN, kb_strides = NAN;
 };
 
 struct SessionSummary {
@@ -118,6 +123,7 @@ struct SessionResult {
   std::vector<Deviation> deviations;
   std::string level = "NORMAL";
   std::vector<std::string> reasons;
+  KbStatus kb;                 // base científica a la fecha de la sesión
 };
 
 struct Trend {
@@ -137,6 +143,7 @@ struct TrainingResult {
   int days_since_last = -1;
   std::vector<Deviation> baselines;                 // línea base actual por métrica (value = NaN)
   std::vector<Trend> trends;
+  KbStatus kb;                                      // base científica a la fecha de referencia
   std::string level = "NORMAL";
   std::vector<std::string> reasons, warnings;
 };
