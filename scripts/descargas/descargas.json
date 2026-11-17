@@ -256,7 +256,7 @@
       },
       {
         "salida": "CAD_CINCHA_BETA_REV6_MONTAJE.zip",
-        "titulo": "Cincha BETA REV 6.2: cápsula, soporte y montaje (PCB REV D)",
+        "titulo": "Cincha BETA REV 6.4: cápsula, soporte, cierre de balancín y montaje (PCB REV D)",
         "rama": "develop/avo-performance-horse",
         "carpeta": "hardware/girth/CINCHA_MONTAJE/out",
         "linea": "BETA"
@@ -264,14 +264,14 @@
       {
         "salida": "CAD_CASCO_BETA_V5.zip",
         "titulo": "Casco BETA · BACK V5",
-        "rama": "feature/back-v5-casco",
+        "rama": "develop/avo-performance-horse",
         "carpeta": "hardware/back/V5_CASCO/CAD/out",
         "linea": "BETA"
       },
       {
         "salida": "CAD_DOCK_BETA_V1.zip",
         "titulo": "Soporte de pared BETA · DOCK V1",
-        "rama": "claude/dock-cargador-v1",
+        "rama": "develop/avo-performance-horse",
         "carpeta": "hardware/dock/V1/CAD/out",
         "linea": "BETA"
       },

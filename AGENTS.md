@@ -45,10 +45,13 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
 - Se integra **siempre por PR** con *merge commit* (no *squash* ni *rebase*, para no perder historial) y con el CI
   en verde en `develop` antes de abrir el siguiente.
 - **Etiquetas de respaldo creadas (17/11/2026):** 52 `backup/2026-11-12/*` y 108 `backup/2026-11-17/*` (una por
-  rama). Una rama ya contenida en `develop` se puede borrar: se recupera desde su etiqueta. Antes de borrar una rama
-  creada después del 17/11, crear su etiqueta.
-- Fuera de `develop` a propósito: `main` (histórica), `feature/avo-measurement-engine-v4`, `fix/chest-v373-readfile`,
-  `fix/back-3-13-8-gps-uart` y las ramas de evidencias `ci/*` (las escriben los workflows; no se fusionan).
+  rama). Las ramas respaldadas se borran con `docs/borrar_ramas_2026-11-17.sh` (desde un ordenador: las sesiones de
+  Claude en la nube no pueden borrar ramas, crear etiquetas ni cambiar ajustes del repositorio). Antes de borrar una
+  rama creada después del 17/11, crear su etiqueta.
+- Rama por defecto del repositorio: debe ser `develop/avo-performance-horse` (se cambia en GitHub → Settings).
+- Fuera de `develop` a propósito: `main` (archivo completo: PR #62, con `archivo/binarios/`) y las ramas de evidencias
+  `ci/*` (las escriben los workflows; no se fusionan). Archivadas (solo en su etiqueta): `feature/avo-measurement-engine-v4`,
+  `fix/chest-v373-readfile`, `fix/back-3-13-8-gps-uart`, `feature/girth-pcb-rev-c`, `cad/girth-rev5-11-cierre-magnetico`.
 
 ## Secretos (repositorio público)
 - **Prohibido subir:** `*.jks`, `*.keystore`, `*.p12`, `*.pfx`, `*.p8`, `*.mobileprovision`, `*.pem` con clave
@@ -72,9 +75,9 @@ compartida**: lo que no esté en la rama no existe para el siguiente asistente. 
 
 ### BETA (PCB propia; diseñada, **no fabricada** salvo que el registro diga lo contrario)
 - **Cincha BETA:** PCB REV D (ESP32-C6-MINI-1U + LSM6DSV16X + MMC5983MA + ADS1292), arquitectura confirmada por el
-  usuario el 15/11/2026. Cápsula REV 6.x (`hardware/girth/CINCHA_MONTAJE`). Firmware 0.6.x.
-- **Casco BETA (BACK V5):** PCB + CAD en `feature/back-v5-casco` (sin integrar). Sin firmware todavía.
-- **DOCK BETA V1** (soporte de pared cargador): PCB REV A + caja, PR #45.
+  usuario el 15/11/2026. Cápsula REV 6.4 con funda y cierre de balancín (`hardware/girth/CINCHA_MONTAJE`). Firmware 0.6.x.
+- **Casco BETA (BACK V5):** PCB + CAD en `hardware/back/V5_CASCO`. Sin firmware todavía.
+- **DOCK BETA V1** (soporte de pared cargador): PCB REV A + caja en `hardware/dock/V1`. Sin firmware todavía.
 - **Espalda BETA V4** (`firmware/back/V4_0_0`, 4.0.0-dev2; `hardware/back/V4`). **Nunca** instalar la 4.0.0-dev en la
   Heltec (no tiene batería, modo carga, calidad GNSS ni `GirthHub`).
 - Las PCB REV B (ESP32-C3) y REV C de la cincha quedan como historia. Antes de pedir placas, confirmar con el usuario.

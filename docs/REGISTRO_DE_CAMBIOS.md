@@ -155,6 +155,33 @@ proyecto. Rama de integración: **`develop/avo-performance-horse`**.
 - firmware DOCK 0.1.0 y el contrato `DockStatus v1` en todas las apps a la vez;
 - % de batería por USB en la BACK 5.x;
 - protocolo por MTCK y divisor de batería en la GIRTH.
+## 2026-11-17 — Repositorio — Integración de pendientes, archivo en `main`, limpieza y escaneo de secretos
+**Autor:** Claude · Rama `claude/integracion-17-11` · Petición del usuario: «Realiza todo tú».
+**Qué se ha hecho:**
+- **PR #62 fusionado en `main`** (archivo completo con `archivo/binarios/`). Único conflicto: `README.md` de `main`; se
+  conserva el que el usuario editó en `main` (17/11 12:38, «AVO Performance —Horse Edition—»).
+- **PR #60 fusionado** (cincha BETA, cápsula REV 6.4 con cierre de balancín). **PR #45 fusionado** (DOCK BETA V1) y
+  **PR #64 fusionado** (casco BETA BACK V5, 229 commits por detrás): ambos puestos al día con `develop` por *merge
+  commit*; único conflicto, el registro (se conservan ambas entradas). Sus workflows nuevos (`build-dock-v1-*`,
+  `build-back-v5-*`, `easyeda-fp-back-v5`, `jlc-stock-back-v5`) solo se disparan en su rama o a mano: no corren en
+  `develop`.
+- **REV 5.11 no se integra:** el cierre magnético se hizo por error sobre la REV 5 (PR #46 cerrado); el vigente es la
+  REV 6.4. La rama queda archivada en su etiqueta.
+- **PR #3 cerrado** (signer antiguo contra `main`; AVO Signer ya está en `develop`, PR #5).
+- Descargas: CAD del casco V5 y del DOCK V1 salen ya de `develop`.
+- **No se pudo (lo bloquea la política de la sesión en la nube):** cambiar la rama por defecto a `develop`, proteger
+  `develop`, borrar ramas y crear etiquetas. Para borrar las 99 ramas respaldadas: `docs/borrar_ramas_2026-11-17.sh`
+  (comprueba que cada etiqueta apunta al mismo commit antes de borrar). Se conservan `develop`, `main`, `ci/*`,
+  `archivo/todo-2026-11-17` y 4 ramas recién fusionadas sin etiqueta (`cad/cincha-rev6-3-balancin-magnetico`,
+  `claude/dock-cargador-v1`, `claude/nombres-prototipo-beta`, `feature/back-v5-casco`).
+- **Escaneo de secretos** (gitleaks 8.21.2, historial completo de `develop`, 1191 commits): 2919 avisos, de ellos 2913
+  en JSON de existencias de JLCPCB/EasyEDA (identificadores de producto, falsos positivos). Los 6 restantes no son
+  secretos: plantilla `BEGIN PRIVATE KEY` en `build-avo-ipad.yml` e `ipad/README.md` (instrucciones, sin clave),
+  contraseñas de prueba en tests del iPad, vector de prueba `vectors_auth.txt` y la clave web de Firebase
+  (`FirebaseConfig.kt`; es pública por diseño, la protección son las reglas). **Sin claves reales.** No se escanearon
+  los binarios de `main`/`archivo` ni las ramas `ci/*`.
+**Validación:** fusiones con CI de `develop` · nada nuevo verificado en hardware.
+
 ## 2026-11-17 — Cincha CAD REV 6.4 — balancín magnético empotrado a ras en la pared
 **Autor:** Claude · **Rama:** `cad/cincha-rev6-3-balancin-magnetico` (PR #60)
 **Qué cambia (captura del usuario):**
